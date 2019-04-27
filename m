@@ -2,60 +2,44 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7D7AB32A
-	for <lists+spice-devel@lfdr.de>; Sat, 27 Apr 2019 12:08:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D01E8B32E
+	for <lists+spice-devel@lfdr.de>; Sat, 27 Apr 2019 12:35:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4E652892B2;
-	Sat, 27 Apr 2019 10:08:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D1AF58925D;
+	Sat, 27 Apr 2019 10:35:33 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com
- [IPv6:2a00:1450:4864:20::244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 177F1892B2
- for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2019 10:08:23 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id q10so5139805ljc.6
- for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2019 03:08:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=XzFoda/bBl1Q2VWBw+vU9uywKsFN22qAqdbuiDnHT4c=;
- b=Mzxr9X558wTM9M/hpQWG/Pq78NN8sOt1RfV6FgkT4+yowNZU97lHalLH86siKhQqjR
- 1TAJ42L1+frqMZDNMA27DLby64kpWnINmc4c0AEpSB32B4q8/L8G8zDLU8xg1/du2Bc2
- /1m8HscnMu13RMD02tg+A4K6Bb5FBr/4bb0bSXDR6HRToxDVgwe6Qg6aM2mruvujsOBi
- lpR/qMJolcWZSAoPgVXAfJLqrMR8ulWQkUKVwVEGlR4hDVa31hdn3YNIzjyBZpvW5uyZ
- WqrFbovlw8p/hHE+jVWWLit/6AwTKe6b6Jld7lXk36tQ8Z+WaOb6Jds94Vsc7r60ablH
- ZWhw==
-X-Gm-Message-State: APjAAAWgGRmXIzuHRpw6YvgRnP3tjH0VPp+Z9mhJUzUCUKJc1pimDvtj
- wFRNEAYF6wc8OY0KMGBCbu4=
-X-Google-Smtp-Source: APXvYqwRFgIRR/lJtGCgoVN+X6U07TqX/8CFr9NT8uZjh7AHhoFZUiQC1K+vrrIDLo1je8+CoPz/+A==
-X-Received: by 2002:a2e:9196:: with SMTP id f22mr27548837ljg.82.1556359701590; 
- Sat, 27 Apr 2019 03:08:21 -0700 (PDT)
-Received: from kloomba ([213.147.222.203])
- by smtp.gmail.com with ESMTPSA id w19sm6240434lfe.23.2019.04.27.03.08.20
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Sat, 27 Apr 2019 03:08:20 -0700 (PDT)
-Date: Sat, 27 Apr 2019 14:08:14 +0400
-From: Roman Bogorodskiy <bogorodskiy@gmail.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190427100812.GA2924@kloomba>
-References: <20190426151022.48666-1-bogorodskiy@gmail.com>
- <50108563.15231819.1556348126465.JavaMail.zimbra@redhat.com>
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D06A8925D
+ for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2019 10:35:33 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 8EFAE314E260;
+ Sat, 27 Apr 2019 10:35:32 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 842A327BBF;
+ Sat, 27 Apr 2019 10:35:32 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 7B0454A460;
+ Sat, 27 Apr 2019 10:35:32 +0000 (UTC)
+Date: Sat, 27 Apr 2019 06:35:30 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Roman Bogorodskiy <bogorodskiy@gmail.com>
+Message-ID: <1431872367.15234224.1556361330820.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20190427100701.23957-1-bogorodskiy@gmail.com>
+References: <20190427100701.23957-1-bogorodskiy@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <50108563.15231819.1556348126465.JavaMail.zimbra@redhat.com>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=XzFoda/bBl1Q2VWBw+vU9uywKsFN22qAqdbuiDnHT4c=;
- b=Lk7xVmvowRXNFRdKWjXcJonzQvL+YNi/YbhApIAxih8SKETv8bINMOt8bVWREhc4Hj
- zmPJfNje9UDMqgwXKL7iDPit+1a5Ky8By+k44ZHLLHj6C/VZo6QpcDcWlwkwdyFUPybv
- ROQpOcb7e8uW4s4VAImsQyGAGC9qGh7EVYTrlaehn4sjkNfuVkSbFoC7Ulh+e4eJhJ8c
- srIkoGRtvGxDdhFNqxVTVXTl8dQilXpiyPG5NZLDnplXtez0NMpZujvK+kxZTC2d4fH5
- tsAFBYgYcv6+8CFGwPd+ufW6MAFlBRd0+frLqNizZcnF+cP9R2ceaC/AK0XrVQUxEEkS
- pZfA==
-Subject: Re: [Spice-devel] [PATCH] Unify openssl checks
+X-Originating-IP: [10.40.204.83, 10.4.195.8]
+Thread-Topic: Unify openssl checks
+Thread-Index: PvhQxvb59ubQUwpn85P1oIaB9Gf0yg==
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.49]); Sat, 27 Apr 2019 10:35:32 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk v2] Unify openssl checks
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,76 +52,54 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0374522813=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============0374522813==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rwEMma7ioTxnRzrJ"
-Content-Disposition: inline
-
-
---rwEMma7ioTxnRzrJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-  Frediano Ziglio wrote:
-
-> >=20
-> > Currently, spice-gtk uses PKG_CHECK_MODULES(SSL, openssl) to detect
-> > openssl CFLAGS and LIBS. And spice-common defines and uses
-> > SPICE_CHECK_OPENSSL macro which calls
-> > PKG_CHECK_MODULES(OPENSSL, openssl).
-> >=20
-> > This means that in order to override openssl CFLAGS or LIBS a user will
-> > have to set both OPENSSL_(CFLAGS|LIBS) and SSL_(CFLAGS|LIBS).
-> >=20
-> > To make this more consistent, make spice-gtk use the
-> > SPICE_CHECK_OPENSSL macro from spice-common.
-> >=20
-> > Signed-off-by: Roman Bogorodskiy <bogorodskiy@gmail.com>
->=20
-> In configure.ac there's an usage of SSL_CFLAGS:
->=20
-> SPICE_GLIB_CFLAGS=3D"$PIXMAN_CFLAGS $PULSE_CFLAGS $GSTAUDIO_CFLAGS $GSTVI=
-DEO_CFLAGS $GLIB2_CFLAGS $GIO_CFLAGS $GOBJECT2_CFLAGS $SSL_CFLAGS $SASL_CFL=
-AGS"
->=20
-> should be replaced
->=20
-> Frediano
-
-Indeed, thanks, fixed in v2.
-
-Roman Bogorodskiy
-
---rwEMma7ioTxnRzrJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEcBAEBAgAGBQJcxCoMAAoJEMltX/4IwiJqPZAIAKRN88P+lcJCeCFXFH0gKxPB
-oMjlm8kXb84qcJf+TWUdNNAmBjhHERk77jMoYs/ppIAk9m8a8v6T4IkfmYEKaDvo
-466AtpsCO9zIIZEgtD23gG2j2fF5TldV2CpeG6Y15Q73c+95n5Fwt5CujN+cUFKm
-zPkKOV5qvq495HrBxfrKcBSt9j2Nck6cFzgpiAMpo3LTyZUeg1TLYtJwGzSNE6uS
-iBD4GQ4Qed3RQ1hu4czXQlSDyRn78zSsC0KU9VYgrvfTqfIIC59Of/Y/Ycexf9Fx
-iGQqAV+zGs9Sw5dWvQ4bloe1L7DOk/I+OGANnJVDIFDKvnpE5Se2rm/59WaMf3g=
-=bfLo
------END PGP SIGNATURE-----
-
---rwEMma7ioTxnRzrJ--
-
---===============0374522813==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0374522813==--
+PiBDdXJyZW50bHksIHNwaWNlLWd0ayB1c2VzIFBLR19DSEVDS19NT0RVTEVTKFNTTCwgb3BlbnNz
+bCkgdG8gZGV0ZWN0Cj4gb3BlbnNzbCBDRkxBR1MgYW5kIExJQlMuIEFuZCBzcGljZS1jb21tb24g
+ZGVmaW5lcyBhbmQgdXNlcwo+IFNQSUNFX0NIRUNLX09QRU5TU0wgbWFjcm8gd2hpY2ggY2FsbHMK
+PiBQS0dfQ0hFQ0tfTU9EVUxFUyhPUEVOU1NMLCBvcGVuc3NsKS4KPiAKPiBUaGlzIG1lYW5zIHRo
+YXQgaW4gb3JkZXIgdG8gb3ZlcnJpZGUgb3BlbnNzbCBDRkxBR1Mgb3IgTElCUyBhIHVzZXIgd2ls
+bAo+IGhhdmUgdG8gc2V0IGJvdGggT1BFTlNTTF8oQ0ZMQUdTfExJQlMpIGFuZCBTU0xfKENGTEFH
+U3xMSUJTKS4KPiAKPiBUbyBtYWtlIHRoaXMgbW9yZSBjb25zaXN0ZW50LCBtYWtlIHNwaWNlLWd0
+ayB1c2UgdGhlCj4gU1BJQ0VfQ0hFQ0tfT1BFTlNTTCBtYWNybyBmcm9tIHNwaWNlLWNvbW1vbi4K
+PiAKPiBTaWduZWQtb2ZmLWJ5OiBSb21hbiBCb2dvcm9kc2tpeSA8Ym9nb3JvZHNraXlAZ21haWwu
+Y29tPgoKQWNrZWQtYnk6IEZyZWRpYW5vIFppZ2xpbyA8ZnppZ2xpb0ByZWRoYXQuY29tPgoKPiAt
+LS0KPiAgY29uZmlndXJlLmFjICAgIHwgNiArKystLS0KPiAgc3JjL01ha2VmaWxlLmFtIHwgNCAr
+Ky0tCj4gIDIgZmlsZXMgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQo+
+IAo+IGRpZmYgLS1naXQgYS9jb25maWd1cmUuYWMgYi9jb25maWd1cmUuYWMKPiBpbmRleCBkMjM0
+ODIyLi4wNjY2ZTJhIDEwMDY0NAo+IC0tLSBhL2NvbmZpZ3VyZS5hYwo+ICsrKyBiL2NvbmZpZ3Vy
+ZS5hYwo+IEBAIC0xMTQsMTEgKzExNCwxMSBAQCBQS0dfQ0hFQ0tfTU9EVUxFUyhQSVhNQU4sIHBp
+eG1hbi0xID49IDAuMTcuNykKPiAgCj4gIFNQSUNFX0dMSUJfUkVRVUlSRVM9IiR7U1BJQ0VfR0xJ
+Ql9SRVFVSVJFU30gcGl4bWFuLTEgPj0gMC4xNy43Igo+ICAKPiAtUEtHX0NIRUNLX01PRFVMRVMo
+U1NMLCBvcGVuc3NsKQo+ICtTUElDRV9DSEVDS19PUEVOU1NMCj4gIAo+ICBQS0dfQ0hFQ0tfRVhJ
+U1RTKG9wZW5zc2wsCj4gICAgW1NQSUNFX0dMSUJfUkVRVUlSRVM9IiR7U1BJQ0VfR0xJQl9SRVFV
+SVJFU30gb3BlbnNzbCJdLAo+IC0gIFtTUElDRV9HTElCX0xJQlM9IiR7U1BJQ0VfR0xJQl9MSUJT
+fSAke1NTTF9MSUJTfSJdKQo+ICsgIFtTUElDRV9HTElCX0xJQlM9IiR7U1BJQ0VfR0xJQl9MSUJT
+fSAke09QRU5TU0xfTElCU30iXSkKPiAgCj4gIFNQSUNFX0NIRUNLX1JFQ09SREVSCj4gIFNQSUNF
+X0NIRUNLX1NBU0wKPiBAQCAtNDg5LDcgKzQ4OSw3IEBAIFNQSUNFX0NGTEFHUz0iJFNQSUNFX0NG
+TEFHUyAkV0FSTl9DRkxBR1MiCj4gIAo+ICBBQ19TVUJTVChTUElDRV9DRkxBR1MpCj4gIAo+IC1T
+UElDRV9HTElCX0NGTEFHUz0iJFBJWE1BTl9DRkxBR1MgJFBVTFNFX0NGTEFHUyAkR1NUQVVESU9f
+Q0ZMQUdTCj4gJEdTVFZJREVPX0NGTEFHUyAkR0xJQjJfQ0ZMQUdTICRHSU9fQ0ZMQUdTICRHT0JK
+RUNUMl9DRkxBR1MgJFNTTF9DRkxBR1MKPiAkU0FTTF9DRkxBR1MiCj4gK1NQSUNFX0dMSUJfQ0ZM
+QUdTPSIkUElYTUFOX0NGTEFHUyAkUFVMU0VfQ0ZMQUdTICRHU1RBVURJT19DRkxBR1MKPiAkR1NU
+VklERU9fQ0ZMQUdTICRHTElCMl9DRkxBR1MgJEdJT19DRkxBR1MgJEdPQkpFQ1QyX0NGTEFHUyAk
+T1BFTlNTTF9DRkxBR1MKPiAkU0FTTF9DRkxBR1MiCj4gIFNQSUNFX0dUS19DRkxBR1M9IiRTUElD
+RV9HTElCX0NGTEFHUyAkR1RLX0NGTEFHUyAiCj4gIAo+ICBBQ19TVUJTVChTUElDRV9HTElCX0NG
+TEFHUykKPiBkaWZmIC0tZ2l0IGEvc3JjL01ha2VmaWxlLmFtIGIvc3JjL01ha2VmaWxlLmFtCj4g
+aW5kZXggY2RjNGQyOC4uN2I5ODE4MCAxMDA2NDQKPiAtLS0gYS9zcmMvTWFrZWZpbGUuYW0KPiAr
+KysgYi9zcmMvTWFrZWZpbGUuYW0KPiBAQCAtODAsNyArODAsNyBAQCBTUElDRV9DT01NT05fQ1BQ
+RkxBR1MgPQkJCQkJCVwKPiAgCSQoR0lPX0NGTEFHUykJCQkJCQlcCj4gIAkkKEdPQkpFQ1QyX0NG
+TEFHUykJCQkJCVwKPiAgCSQoSlNPTl9DRkxBR1MpCQkJCQkJXAo+IC0JJChTU0xfQ0ZMQUdTKQkJ
+CQkJCVwKPiArCSQoT1BFTlNTTF9DRkxBR1MpCQkJCQlcCj4gIAkkKFNBU0xfQ0ZMQUdTKQkJCQkJ
+CVwKPiAgCSQoR1NUQVVESU9fQ0ZMQUdTKQkJCQkJXAo+ICAJJChHU1RWSURFT19DRkxBR1MpCQkJ
+CQlcCj4gQEAgLTE5Miw3ICsxOTIsNyBAQCBsaWJzcGljZV9jbGllbnRfZ2xpYl9pbXBsX2xhX0xJ
+QkFERCA9CQkJCQlcCj4gIAkkKFpfTElCUykJCQkJCQkJXAo+ICAJJChMWjRfTElCUykJCQkJCQkJ
+XAo+ICAJJChQSVhNQU5fTElCUykJCQkJCQkJXAo+IC0JJChTU0xfTElCUykJCQkJCQkJXAo+ICsJ
+JChPUEVOU1NMX0xJQlMpCQkJCQkJCVwKPiAgCSQoUFVMU0VfTElCUykJCQkJCQkJXAo+ICAJJChH
+U1RBVURJT19MSUJTKQkJCQkJCVwKPiAgCSQoR1NUVklERU9fTElCUykJCQkJCQlcCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWls
+aW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
