@@ -1,59 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18DA9B329
-	for <lists+spice-devel@lfdr.de>; Sat, 27 Apr 2019 12:07:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C7D7AB32A
+	for <lists+spice-devel@lfdr.de>; Sat, 27 Apr 2019 12:08:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 575908926C;
-	Sat, 27 Apr 2019 10:07:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4E652892B2;
+	Sat, 27 Apr 2019 10:08:24 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AB8438926C
- for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2019 10:07:17 +0000 (UTC)
-Received: by mail-lj1-x22a.google.com with SMTP id q10so5138314ljc.6
- for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2019 03:07:17 -0700 (PDT)
+Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com
+ [IPv6:2a00:1450:4864:20::244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 177F1892B2
+ for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2019 10:08:23 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id q10so5139805ljc.6
+ for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2019 03:08:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=De6BUTn8AYc/Z3ttFDh9y0rzkU5M+44ywZ0ONrBQaVQ=;
- b=OQirF5/OjpEUrDPcHVv/XyAfZtJWQw/DeVQJMhtdTXMmBMdN5SI7M0v0C7PlkV4eND
- EPUa7YGvv0QZhAgwyuzKndxegFbvQVJNDoThh0PRzVSPqkW+QfjpgOtEeFirApNUHTHU
- G+W0TO/WWRcd52sm8AIEDEdch97K3Oyy7K6FrKJmPVwaiDJQpOcWGxiW/jR9L7kGW/hK
- 3ECsi8p/GgjpZ5Tfw0wGGMqiBu1LIhG4zFfAa/Jp4f8oGGhko68/SkIM0W5imNDLiIM2
- KJQFUY+cR9IM0x/WHbMtsFFQCa7a4I23FubN1ladIgZhExyLPXE3r9MnkoAGA6yLqpTk
- XoDg==
-X-Gm-Message-State: APjAAAUdTL7SdsGRIw2m4stYu631wuMV9P+Ia7Qa9H8r9oJirfQOMrqp
- Rc3ZlAG8ZRavOk4AIMT2XkRNIgqZ
-X-Google-Smtp-Source: APXvYqwIHk7Voad04QpO5m72gxNwY61owZtk2hKiVluhMRWf7Qee62IsVG/qxGTAQbJAvKAB0ZvlYg==
-X-Received: by 2002:a05:651c:14b:: with SMTP id
- c11mr27283500ljd.185.1556359635874; 
- Sat, 27 Apr 2019 03:07:15 -0700 (PDT)
-Received: from kloomba.my.domain ([213.147.222.203])
- by smtp.gmail.com with ESMTPSA id d5sm537183lfn.36.2019.04.27.03.07.14
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 27 Apr 2019 03:07:14 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=XzFoda/bBl1Q2VWBw+vU9uywKsFN22qAqdbuiDnHT4c=;
+ b=Mzxr9X558wTM9M/hpQWG/Pq78NN8sOt1RfV6FgkT4+yowNZU97lHalLH86siKhQqjR
+ 1TAJ42L1+frqMZDNMA27DLby64kpWnINmc4c0AEpSB32B4q8/L8G8zDLU8xg1/du2Bc2
+ /1m8HscnMu13RMD02tg+A4K6Bb5FBr/4bb0bSXDR6HRToxDVgwe6Qg6aM2mruvujsOBi
+ lpR/qMJolcWZSAoPgVXAfJLqrMR8ulWQkUKVwVEGlR4hDVa31hdn3YNIzjyBZpvW5uyZ
+ WqrFbovlw8p/hHE+jVWWLit/6AwTKe6b6Jld7lXk36tQ8Z+WaOb6Jds94Vsc7r60ablH
+ ZWhw==
+X-Gm-Message-State: APjAAAWgGRmXIzuHRpw6YvgRnP3tjH0VPp+Z9mhJUzUCUKJc1pimDvtj
+ wFRNEAYF6wc8OY0KMGBCbu4=
+X-Google-Smtp-Source: APXvYqwRFgIRR/lJtGCgoVN+X6U07TqX/8CFr9NT8uZjh7AHhoFZUiQC1K+vrrIDLo1je8+CoPz/+A==
+X-Received: by 2002:a2e:9196:: with SMTP id f22mr27548837ljg.82.1556359701590; 
+ Sat, 27 Apr 2019 03:08:21 -0700 (PDT)
+Received: from kloomba ([213.147.222.203])
+ by smtp.gmail.com with ESMTPSA id w19sm6240434lfe.23.2019.04.27.03.08.20
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Sat, 27 Apr 2019 03:08:20 -0700 (PDT)
+Date: Sat, 27 Apr 2019 14:08:14 +0400
 From: Roman Bogorodskiy <bogorodskiy@gmail.com>
-To: spice-devel@lists.freedesktop.org
-Date: Sat, 27 Apr 2019 14:07:01 +0400
-Message-Id: <20190427100701.23957-1-bogorodskiy@gmail.com>
-X-Mailer: git-send-email 2.21.0
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190427100812.GA2924@kloomba>
+References: <20190426151022.48666-1-bogorodskiy@gmail.com>
+ <50108563.15231819.1556348126465.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <50108563.15231819.1556348126465.JavaMail.zimbra@redhat.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=De6BUTn8AYc/Z3ttFDh9y0rzkU5M+44ywZ0ONrBQaVQ=;
- b=V9kg3X5VEwouC448qWNXqvcjDsnTrJlTS/0G0f41WdoN0Yg0ryiu9exdLBTs+AYE1v
- JQz6PNJ2zrFDGDQdPuhyRTHQyz0/DNeIxTIZFfuT/sNKO8s4H1AsMeFQhNPApJ5Lwlos
- bLH7H9WiKyU+0wZKpQNCE5/VgpCHjCs0lU41IWU/DaZlxb9Tm/sq1I0lcb8+dXsNCvyl
- /07qp34T/PoCi28s5dSIET4phoBzHLNVLYEnrVM7ETfQZR9+DOJJJICqKpNIgnmUOjay
- FE6qpHlNfUBc1Prh/9cVeW1BZd5f5jcqsHY4LGJOYqwsvsneHPEUQO859HiiqLKCqobf
- dKfg==
-Subject: [Spice-devel] [PATCH spice-gtk v2] Unify openssl checks
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=XzFoda/bBl1Q2VWBw+vU9uywKsFN22qAqdbuiDnHT4c=;
+ b=Lk7xVmvowRXNFRdKWjXcJonzQvL+YNi/YbhApIAxih8SKETv8bINMOt8bVWREhc4Hj
+ zmPJfNje9UDMqgwXKL7iDPit+1a5Ky8By+k44ZHLLHj6C/VZo6QpcDcWlwkwdyFUPybv
+ ROQpOcb7e8uW4s4VAImsQyGAGC9qGh7EVYTrlaehn4sjkNfuVkSbFoC7Ulh+e4eJhJ8c
+ srIkoGRtvGxDdhFNqxVTVXTl8dQilXpiyPG5NZLDnplXtez0NMpZujvK+kxZTC2d4fH5
+ tsAFBYgYcv6+8CFGwPd+ufW6MAFlBRd0+frLqNizZcnF+cP9R2ceaC/AK0XrVQUxEEkS
+ pZfA==
+Subject: Re: [Spice-devel] [PATCH] Unify openssl checks
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,51 +67,77 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0374522813=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Q3VycmVudGx5LCBzcGljZS1ndGsgdXNlcyBQS0dfQ0hFQ0tfTU9EVUxFUyhTU0wsIG9wZW5zc2wp
-IHRvIGRldGVjdApvcGVuc3NsIENGTEFHUyBhbmQgTElCUy4gQW5kIHNwaWNlLWNvbW1vbiBkZWZp
-bmVzIGFuZCB1c2VzClNQSUNFX0NIRUNLX09QRU5TU0wgbWFjcm8gd2hpY2ggY2FsbHMKUEtHX0NI
-RUNLX01PRFVMRVMoT1BFTlNTTCwgb3BlbnNzbCkuCgpUaGlzIG1lYW5zIHRoYXQgaW4gb3JkZXIg
-dG8gb3ZlcnJpZGUgb3BlbnNzbCBDRkxBR1Mgb3IgTElCUyBhIHVzZXIgd2lsbApoYXZlIHRvIHNl
-dCBib3RoIE9QRU5TU0xfKENGTEFHU3xMSUJTKSBhbmQgU1NMXyhDRkxBR1N8TElCUykuCgpUbyBt
-YWtlIHRoaXMgbW9yZSBjb25zaXN0ZW50LCBtYWtlIHNwaWNlLWd0ayB1c2UgdGhlClNQSUNFX0NI
-RUNLX09QRU5TU0wgbWFjcm8gZnJvbSBzcGljZS1jb21tb24uCgpTaWduZWQtb2ZmLWJ5OiBSb21h
-biBCb2dvcm9kc2tpeSA8Ym9nb3JvZHNraXlAZ21haWwuY29tPgotLS0KIGNvbmZpZ3VyZS5hYyAg
-ICB8IDYgKysrLS0tCiBzcmMvTWFrZWZpbGUuYW0gfCA0ICsrLS0KIDIgZmlsZXMgY2hhbmdlZCwg
-NSBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2NvbmZpZ3VyZS5h
-YyBiL2NvbmZpZ3VyZS5hYwppbmRleCBkMjM0ODIyLi4wNjY2ZTJhIDEwMDY0NAotLS0gYS9jb25m
-aWd1cmUuYWMKKysrIGIvY29uZmlndXJlLmFjCkBAIC0xMTQsMTEgKzExNCwxMSBAQCBQS0dfQ0hF
-Q0tfTU9EVUxFUyhQSVhNQU4sIHBpeG1hbi0xID49IDAuMTcuNykKIAogU1BJQ0VfR0xJQl9SRVFV
-SVJFUz0iJHtTUElDRV9HTElCX1JFUVVJUkVTfSBwaXhtYW4tMSA+PSAwLjE3LjciCiAKLVBLR19D
-SEVDS19NT0RVTEVTKFNTTCwgb3BlbnNzbCkKK1NQSUNFX0NIRUNLX09QRU5TU0wKIAogUEtHX0NI
-RUNLX0VYSVNUUyhvcGVuc3NsLAogICBbU1BJQ0VfR0xJQl9SRVFVSVJFUz0iJHtTUElDRV9HTElC
-X1JFUVVJUkVTfSBvcGVuc3NsIl0sCi0gIFtTUElDRV9HTElCX0xJQlM9IiR7U1BJQ0VfR0xJQl9M
-SUJTfSAke1NTTF9MSUJTfSJdKQorICBbU1BJQ0VfR0xJQl9MSUJTPSIke1NQSUNFX0dMSUJfTElC
-U30gJHtPUEVOU1NMX0xJQlN9Il0pCiAKIFNQSUNFX0NIRUNLX1JFQ09SREVSCiBTUElDRV9DSEVD
-S19TQVNMCkBAIC00ODksNyArNDg5LDcgQEAgU1BJQ0VfQ0ZMQUdTPSIkU1BJQ0VfQ0ZMQUdTICRX
-QVJOX0NGTEFHUyIKIAogQUNfU1VCU1QoU1BJQ0VfQ0ZMQUdTKQogCi1TUElDRV9HTElCX0NGTEFH
-Uz0iJFBJWE1BTl9DRkxBR1MgJFBVTFNFX0NGTEFHUyAkR1NUQVVESU9fQ0ZMQUdTICRHU1RWSURF
-T19DRkxBR1MgJEdMSUIyX0NGTEFHUyAkR0lPX0NGTEFHUyAkR09CSkVDVDJfQ0ZMQUdTICRTU0xf
-Q0ZMQUdTICRTQVNMX0NGTEFHUyIKK1NQSUNFX0dMSUJfQ0ZMQUdTPSIkUElYTUFOX0NGTEFHUyAk
-UFVMU0VfQ0ZMQUdTICRHU1RBVURJT19DRkxBR1MgJEdTVFZJREVPX0NGTEFHUyAkR0xJQjJfQ0ZM
-QUdTICRHSU9fQ0ZMQUdTICRHT0JKRUNUMl9DRkxBR1MgJE9QRU5TU0xfQ0ZMQUdTICRTQVNMX0NG
-TEFHUyIKIFNQSUNFX0dUS19DRkxBR1M9IiRTUElDRV9HTElCX0NGTEFHUyAkR1RLX0NGTEFHUyAi
-CiAKIEFDX1NVQlNUKFNQSUNFX0dMSUJfQ0ZMQUdTKQpkaWZmIC0tZ2l0IGEvc3JjL01ha2VmaWxl
-LmFtIGIvc3JjL01ha2VmaWxlLmFtCmluZGV4IGNkYzRkMjguLjdiOTgxODAgMTAwNjQ0Ci0tLSBh
-L3NyYy9NYWtlZmlsZS5hbQorKysgYi9zcmMvTWFrZWZpbGUuYW0KQEAgLTgwLDcgKzgwLDcgQEAg
-U1BJQ0VfQ09NTU9OX0NQUEZMQUdTID0JCQkJCQlcCiAJJChHSU9fQ0ZMQUdTKQkJCQkJCVwKIAkk
-KEdPQkpFQ1QyX0NGTEFHUykJCQkJCVwKIAkkKEpTT05fQ0ZMQUdTKQkJCQkJCVwKLQkkKFNTTF9D
-RkxBR1MpCQkJCQkJXAorCSQoT1BFTlNTTF9DRkxBR1MpCQkJCQlcCiAJJChTQVNMX0NGTEFHUykJ
-CQkJCQlcCiAJJChHU1RBVURJT19DRkxBR1MpCQkJCQlcCiAJJChHU1RWSURFT19DRkxBR1MpCQkJ
-CQlcCkBAIC0xOTIsNyArMTkyLDcgQEAgbGlic3BpY2VfY2xpZW50X2dsaWJfaW1wbF9sYV9MSUJB
-REQgPQkJCQkJXAogCSQoWl9MSUJTKQkJCQkJCQlcCiAJJChMWjRfTElCUykJCQkJCQkJXAogCSQo
-UElYTUFOX0xJQlMpCQkJCQkJCVwKLQkkKFNTTF9MSUJTKQkJCQkJCQlcCisJJChPUEVOU1NMX0xJ
-QlMpCQkJCQkJCVwKIAkkKFBVTFNFX0xJQlMpCQkJCQkJCVwKIAkkKEdTVEFVRElPX0xJQlMpCQkJ
-CQkJXAogCSQoR1NUVklERU9fTElCUykJCQkJCQlcCi0tIAoyLjIxLjAKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlz
-dApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVz
-a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+
+--===============0374522813==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="rwEMma7ioTxnRzrJ"
+Content-Disposition: inline
+
+
+--rwEMma7ioTxnRzrJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+  Frediano Ziglio wrote:
+
+> >=20
+> > Currently, spice-gtk uses PKG_CHECK_MODULES(SSL, openssl) to detect
+> > openssl CFLAGS and LIBS. And spice-common defines and uses
+> > SPICE_CHECK_OPENSSL macro which calls
+> > PKG_CHECK_MODULES(OPENSSL, openssl).
+> >=20
+> > This means that in order to override openssl CFLAGS or LIBS a user will
+> > have to set both OPENSSL_(CFLAGS|LIBS) and SSL_(CFLAGS|LIBS).
+> >=20
+> > To make this more consistent, make spice-gtk use the
+> > SPICE_CHECK_OPENSSL macro from spice-common.
+> >=20
+> > Signed-off-by: Roman Bogorodskiy <bogorodskiy@gmail.com>
+>=20
+> In configure.ac there's an usage of SSL_CFLAGS:
+>=20
+> SPICE_GLIB_CFLAGS=3D"$PIXMAN_CFLAGS $PULSE_CFLAGS $GSTAUDIO_CFLAGS $GSTVI=
+DEO_CFLAGS $GLIB2_CFLAGS $GIO_CFLAGS $GOBJECT2_CFLAGS $SSL_CFLAGS $SASL_CFL=
+AGS"
+>=20
+> should be replaced
+>=20
+> Frediano
+
+Indeed, thanks, fixed in v2.
+
+Roman Bogorodskiy
+
+--rwEMma7ioTxnRzrJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEcBAEBAgAGBQJcxCoMAAoJEMltX/4IwiJqPZAIAKRN88P+lcJCeCFXFH0gKxPB
+oMjlm8kXb84qcJf+TWUdNNAmBjhHERk77jMoYs/ppIAk9m8a8v6T4IkfmYEKaDvo
+466AtpsCO9zIIZEgtD23gG2j2fF5TldV2CpeG6Y15Q73c+95n5Fwt5CujN+cUFKm
+zPkKOV5qvq495HrBxfrKcBSt9j2Nck6cFzgpiAMpo3LTyZUeg1TLYtJwGzSNE6uS
+iBD4GQ4Qed3RQ1hu4czXQlSDyRn78zSsC0KU9VYgrvfTqfIIC59Of/Y/Ycexf9Fx
+iGQqAV+zGs9Sw5dWvQ4bloe1L7DOk/I+OGANnJVDIFDKvnpE5Se2rm/59WaMf3g=
+=bfLo
+-----END PGP SIGNATURE-----
+
+--rwEMma7ioTxnRzrJ--
+
+--===============0374522813==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0374522813==--
