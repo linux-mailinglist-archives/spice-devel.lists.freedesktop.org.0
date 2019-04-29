@@ -2,43 +2,54 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA97AE4D9
-	for <lists+spice-devel@lfdr.de>; Mon, 29 Apr 2019 16:38:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CCFEE513
+	for <lists+spice-devel@lfdr.de>; Mon, 29 Apr 2019 16:44:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 87E638921B;
-	Mon, 29 Apr 2019 14:38:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C98B889259;
+	Mon, 29 Apr 2019 14:44:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B54D3891D4;
- Mon, 29 Apr 2019 14:38:00 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 1630D3082B69;
- Mon, 29 Apr 2019 14:37:59 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-45.ams2.redhat.com
- [10.36.116.45])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B51B2608C2;
- Mon, 29 Apr 2019 14:37:58 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id A6D1811AAA; Mon, 29 Apr 2019 16:37:57 +0200 (CEST)
-Date: Mon, 29 Apr 2019 16:37:57 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20190429143757.yljjfsgobhi23xnb@sirius.home.kraxel.org>
+Received: from mail-it1-x143.google.com (mail-it1-x143.google.com
+ [IPv6:2607:f8b0:4864:20::143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6EE1389259
+ for <spice-devel@lists.freedesktop.org>; Mon, 29 Apr 2019 14:44:53 +0000 (UTC)
+Received: by mail-it1-x143.google.com with SMTP id a190so16534051ite.4
+ for <spice-devel@lists.freedesktop.org>; Mon, 29 Apr 2019 07:44:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1XMGdoAytJZYLIEjS5YuwMYRgJWQI6ikHtyLu0eBdrg=;
+ b=TmJID3CewaHxyZDIQpaumCWRSuR8DMzbrT26NSBTKSXeDdOeinwiYn3sfB8wcy6aPE
+ HkOZ++suf/23EpF6ohR8fnNm6DHyrE6vNGY/0igZTHkxqjypHvjG7RghrPFk45RJ2bEc
+ 7CBe5SGE9t6/mWoh+5B2IvinOQHnQKR+Fx4cQbPKXDL4OJ+7Lhx3f47xXyU5sh2ixKKd
+ S982dVj2tuFBlbxr5YwWBJ4ZRjBaX+cIm4SY22OZZsFOb4/bTOp+DHj36wyFK1+nVNKd
+ 6aptsov+tlpSpwscMiKFJKut3xrFAmxbazpHBay6ng+gOaLcsgT4Ae/ZQcis9vLtE3bL
+ EVYQ==
+X-Gm-Message-State: APjAAAXEEPhhMP6S9JBo8/FBf/agl+2VaEptx7vzWsWD2l8vrDQ5iv8o
+ wIDjGxptSLiKdH4/nhG23DEkebuJcydrl95mewSmyhU8
+X-Google-Smtp-Source: APXvYqyC+k0ZQbGHt6LZUZL+iV+YTOgPi+kmdEsi7UKxu3MuNzurrBR7OzXmdy7mQ47RnHA3m349CFEdQv66aJzM/2c=
+X-Received: by 2002:a24:6f48:: with SMTP id x69mr5454748itb.117.1556549092746; 
+ Mon, 29 Apr 2019 07:44:52 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190426053324.26443-1-kraxel@redhat.com>
  <CAKMK7uG+vMU0hqqiKAswu=LqpkcXtLPqbYLRWgoAPpsQQV4qzA@mail.gmail.com>
  <20190429075413.smcocftjd2viznhv@sirius.home.kraxel.org>
  <CAKMK7uFB8deXDMP9cT634p_dK5LsM37R1v_vGhAEY1ZLZ+WBVA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKMK7uFB8deXDMP9cT634p_dK5LsM37R1v_vGhAEY1ZLZ+WBVA@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.45]); Mon, 29 Apr 2019 14:38:00 +0000 (UTC)
+ <20190429143757.yljjfsgobhi23xnb@sirius.home.kraxel.org>
+In-Reply-To: <20190429143757.yljjfsgobhi23xnb@sirius.home.kraxel.org>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Mon, 29 Apr 2019 16:44:40 +0200
+Message-ID: <CAKMK7uE_+-pFuVrqznj9ZbRxwyNM9mRhoY-y4xCBjjY9Z-sNDg@mail.gmail.com>
+To: Gerd Hoffmann <kraxel@redhat.com>
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=1XMGdoAytJZYLIEjS5YuwMYRgJWQI6ikHtyLu0eBdrg=;
+ b=ebLoXPCvsVtjVKlYnuDaoE/vTcZEjFgtCNZy/GJ9RM7CqdGpbdNpyJ/MGlHiTn8mwU
+ cNsqm35xFbA0XbkywCTWXXW+87WMdZDdAr99EbknWBCCfipowQkXrsgbO/O6/TKeHRKm
+ YCZ4hxNICRW4XSQ9d5gCdAf72YEQsAM9IZEJc=
 Subject: Re: [Spice-devel] [PATCH] Revert "drm/qxl: drop prime import/export
  callbacks"
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -63,23 +74,27 @@ Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-ICBIaSwKCj4gPiBNb3JlIHVzZWZ1bCB3b3VsZCBiZSBzb21lIHdheSB0byBzaWduYWwgdGhpcyBz
-ZWxmLXJlaW1wb3J0IGNhcGFiaWxpdHkKPiA+IHRvIHVzZXJzcGFjZSBzb21laG93LiAgU2VlIERS
-TV9QUklNRV9DQVBfTE9DQUwgcGF0Y2guCj4gCj4gVXNlcnNwYWNlIGlzIHN1cHBvc2VkIHRvIHRl
-c3Qgd2hldGhlciBpbXBvcnQvZXhwb3J0IHdvcmtzIGZvciBhCj4gc3BlY2lmaWMgY29tYm8sIG5v
-dCBibGluZGx5IGFzc3VtZSBpdCBkb2VzIGFuZCB0aGVuIGtlZWwgb3Zlci4gSSB0aGluawo+IHdl
-IG5lZWQgdG8gZml4IHRoYXQsIG5vdCBhZGQgbW9yZSBmbGFncyAtIHRoZXJlJ3MgbG90cyBvZiBy
-ZWFzb25zIHdoeQo+IGEgZ2l2ZW4gcGFpciBvZiBkZXZpY2VzIGNhbid0IHNoYXJlIGJ1ZmZlcnMg
-KGUuZy4gYWxsIHRoZSBjb250aWd1b3VzCj4gYWxsb2NhdGlvbnMgc3R1ZmYgb24gc29jcykuCgpP
-ay4gIExldHMgc2NyYXRjaCB0aGUgRFJNX1BSSU1FX0NBUF9MT0NBTCBpZGVhIHRoZW4gYW5kIGJs
-YW1lIHVzZXJzcGFjZQppbnN0ZWFkLgoKPiA+IFJpZ2h0IG5vdyBJIGhhdmUgdGhlIGNob2ljZSB0
-byBzZXQgRFJNX1BSSU1FX0NBUF97SU1QT1JULEVYUE9SVH0sIGluCj4gPiB3aGljaCBjYXNlIHNv
-bWUgdXNlcnNwYWNlIGFzc3VtZXMgaXQgY2FuIGRvIGNyb3NzLWRyaXZlciBleHBvcnQvaW1wb3J0
-Cj4gPiBhbmQgdHJpcHMgb3ZlciB0aGF0IG5vdCB3b3JraW5nLiAgT3IgSSBkbyBub3Qgc2V0Cj4g
-PiBEUk1fUFJJTUVfQ0FQX3tJTVBPUlQsRVhQT1JUfSwgd2hpY2ggYnJlYWtzIERSSTMgLi4uCj4g
-Cj4gWWVhaCB0aGF0J3Mgbm90IGFuIG9wdGlvbi4KCkdvb2QuICBDYW4gSSBnZXQgYW4gYWNrIGZv
-ciB0aGlzIHBhdGNoIHRoZW4sIGFzIGl0IHVuYnJlYWtzIERSSTMgd2l0aCBxeGw/Cgp0aGFua3Ms
-CiAgR2VyZAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-U3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9y
-ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRl
-dmVs
+T24gTW9uLCBBcHIgMjksIDIwMTkgYXQgNDozOCBQTSBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVk
+aGF0LmNvbT4gd3JvdGU6Cj4KPiAgIEhpLAo+Cj4gPiA+IE1vcmUgdXNlZnVsIHdvdWxkIGJlIHNv
+bWUgd2F5IHRvIHNpZ25hbCB0aGlzIHNlbGYtcmVpbXBvcnQgY2FwYWJpbGl0eQo+ID4gPiB0byB1
+c2Vyc3BhY2Ugc29tZWhvdy4gIFNlZSBEUk1fUFJJTUVfQ0FQX0xPQ0FMIHBhdGNoLgo+ID4KPiA+
+IFVzZXJzcGFjZSBpcyBzdXBwb3NlZCB0byB0ZXN0IHdoZXRoZXIgaW1wb3J0L2V4cG9ydCB3b3Jr
+cyBmb3IgYQo+ID4gc3BlY2lmaWMgY29tYm8sIG5vdCBibGluZGx5IGFzc3VtZSBpdCBkb2VzIGFu
+ZCB0aGVuIGtlZWwgb3Zlci4gSSB0aGluawo+ID4gd2UgbmVlZCB0byBmaXggdGhhdCwgbm90IGFk
+ZCBtb3JlIGZsYWdzIC0gdGhlcmUncyBsb3RzIG9mIHJlYXNvbnMgd2h5Cj4gPiBhIGdpdmVuIHBh
+aXIgb2YgZGV2aWNlcyBjYW4ndCBzaGFyZSBidWZmZXJzIChlLmcuIGFsbCB0aGUgY29udGlndW91
+cwo+ID4gYWxsb2NhdGlvbnMgc3R1ZmYgb24gc29jcykuCj4KPiBPay4gIExldHMgc2NyYXRjaCB0
+aGUgRFJNX1BSSU1FX0NBUF9MT0NBTCBpZGVhIHRoZW4gYW5kIGJsYW1lIHVzZXJzcGFjZQo+IGlu
+c3RlYWQuCj4KPiA+ID4gUmlnaHQgbm93IEkgaGF2ZSB0aGUgY2hvaWNlIHRvIHNldCBEUk1fUFJJ
+TUVfQ0FQX3tJTVBPUlQsRVhQT1JUfSwgaW4KPiA+ID4gd2hpY2ggY2FzZSBzb21lIHVzZXJzcGFj
+ZSBhc3N1bWVzIGl0IGNhbiBkbyBjcm9zcy1kcml2ZXIgZXhwb3J0L2ltcG9ydAo+ID4gPiBhbmQg
+dHJpcHMgb3ZlciB0aGF0IG5vdCB3b3JraW5nLiAgT3IgSSBkbyBub3Qgc2V0Cj4gPiA+IERSTV9Q
+UklNRV9DQVBfe0lNUE9SVCxFWFBPUlR9LCB3aGljaCBicmVha3MgRFJJMyAuLi4KPiA+Cj4gPiBZ
+ZWFoIHRoYXQncyBub3QgYW4gb3B0aW9uLgo+Cj4gR29vZC4gIENhbiBJIGdldCBhbiBhY2sgZm9y
+IHRoaXMgcGF0Y2ggdGhlbiwgYXMgaXQgdW5icmVha3MgRFJJMyB3aXRoIHF4bD8KCk9oIHN1cmUs
+IGFja2VkLWJ5OiBtZS4gU29ycnkgZm9yZ290IHRvIHN1cHBseSB0aGF0IC4uLgotRGFuaWVsCi0t
+IApEYW5pZWwgVmV0dGVyClNvZnR3YXJlIEVuZ2luZWVyLCBJbnRlbCBDb3Jwb3JhdGlvbgorNDEg
+KDApIDc5IDM2NSA1NyA0OCAtIGh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApT
+cGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
+cC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
