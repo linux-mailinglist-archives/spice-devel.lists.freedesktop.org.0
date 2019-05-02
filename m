@@ -2,38 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FC9A1155A
-	for <lists+spice-devel@lfdr.de>; Thu,  2 May 2019 10:26:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2428115A9
+	for <lists+spice-devel@lfdr.de>; Thu,  2 May 2019 10:44:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 40D08892C5;
-	Thu,  2 May 2019 08:26:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CACA989220;
+	Thu,  2 May 2019 08:44:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3C543892C5
- for <spice-devel@lists.freedesktop.org>; Thu,  2 May 2019 08:26:26 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B932389220
+ for <spice-devel@lists.freedesktop.org>; Thu,  2 May 2019 08:44:26 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
  [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id AE6803087940
- for <spice-devel@lists.freedesktop.org>; Thu,  2 May 2019 08:26:25 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.168])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 296971001E6F;
- Thu,  2 May 2019 08:26:25 +0000 (UTC)
-Date: Thu, 2 May 2019 08:26:24 +0000
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190502082624.sd42mifuh63ahpoh@toolbox>
-References: <20190501100856.6196-1-fziglio@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 5496C37E7B
+ for <spice-devel@lists.freedesktop.org>; Thu,  2 May 2019 08:44:26 +0000 (UTC)
+Received: from lub.tlv (dhcp-4-231.tlv.redhat.com [10.35.4.231])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 884EC1001E61;
+ Thu,  2 May 2019 08:44:25 +0000 (UTC)
+To: Frediano Ziglio <fziglio@redhat.com>, spice-devel@lists.freedesktop.org
+References: <20190501135311.21109-1-fziglio@redhat.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <9174c0e9-24a7-4718-b01b-36ecbc354e27@redhat.com>
+Date: Thu, 2 May 2019 11:44:22 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <20190501100856.6196-1-fziglio@redhat.com>
-User-Agent: NeoMutt/20180716
+In-Reply-To: <20190501135311.21109-1-fziglio@redhat.com>
+Content-Language: en-US
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.45]); Thu, 02 May 2019 08:26:25 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-common] Do not check for
- HAVE_CONFIG_H
+ (mx1.redhat.com [10.5.110.29]); Thu, 02 May 2019 08:44:26 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-streaming-agent v2 1/2] Build agent
+ object not statically
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -45,477 +48,95 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0599961717=="
+Reply-To: uril@redhat.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============0599961717==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="77nv6s5mpbzsrptb"
-Content-Disposition: inline
-
-
---77nv6s5mpbzsrptb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Wed, May 01, 2019 at 11:08:56AM +0100, Frediano Ziglio wrote:
-> This should always be defined and including config.h is a requirement.
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-I got confused that I acked this before. This is actually v2 with
-proposed changes included.
-
-> ---
->  common/backtrace.c          | 2 --
->  common/canvas_base.c        | 2 --
->  common/canvas_utils.c       | 2 --
->  common/lines.c              | 2 --
->  common/log.c                | 2 --
->  common/lz.c                 | 2 --
->  common/lz_compress_tmpl.c   | 2 --
->  common/lz_decompress_tmpl.c | 2 --
->  common/marshaller.c         | 2 --
->  common/mem.c                | 2 --
->  common/pixman_utils.c       | 2 --
->  common/quic.c               | 2 --
->  common/quic_family_tmpl.c   | 2 --
->  common/quic_tmpl.c          | 2 --
->  common/region.c             | 2 --
->  common/rop3.c               | 2 --
->  common/ssl_verify.c         | 2 --
->  common/sw_canvas.c          | 2 --
->  common/utils.c              | 2 --
->  meson.build                 | 3 +--
->  spice_codegen.py            | 2 --
->  tests/test-logging.c        | 2 --
->  tests/test-marshallers.c    | 2 --
->  tests/test-quic.c           | 2 --
->  tests/test-region.c         | 2 --
->  25 files changed, 1 insertion(+), 50 deletions(-)
->=20
-> diff --git a/common/backtrace.c b/common/backtrace.c
-> index ff72d1b..2136191 100644
-> --- a/common/backtrace.c
-> +++ b/common/backtrace.c
-> @@ -21,9 +21,7 @@
->   * Copyright (C) 2008 Red Hat, Inc.
->   */
-> =20
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "backtrace.h"
-> =20
-> diff --git a/common/canvas_base.c b/common/canvas_base.c
-> index 00a8801..3a1c83f 100644
-> --- a/common/canvas_base.c
-> +++ b/common/canvas_base.c
-> @@ -16,9 +16,7 @@
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> =20
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <stdarg.h>
->  #include <stdlib.h>
-> diff --git a/common/canvas_utils.c b/common/canvas_utils.c
-> index e5f4efb..ae53cf7 100644
-> --- a/common/canvas_utils.c
-> +++ b/common/canvas_utils.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "canvas_utils.h"
->  #include "mem.h"
-> diff --git a/common/lines.c b/common/lines.c
-> index dadaf86..76c17b1 100644
-> --- a/common/lines.c
-> +++ b/common/lines.c
-> @@ -45,9 +45,7 @@ ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORM=
-ANCE OF THIS
->  SOFTWARE.
-> =20
->  ******************************************************************/
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <stdio.h>
->  #include <spice/macros.h>
-> diff --git a/common/log.c b/common/log.c
-> index ce162a1..655bbe8 100644
-> --- a/common/log.c
-> +++ b/common/log.c
-> @@ -15,9 +15,7 @@
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> =20
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <glib.h>
->  #include <stdlib.h>
-> diff --git a/common/lz.c b/common/lz.c
-> index f92c638..c9fe60d 100644
-> --- a/common/lz.c
-> +++ b/common/lz.c
-> @@ -43,9 +43,7 @@
->     SOFTWARE.
-> =20
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "lz.h"
-> =20
-> diff --git a/common/lz_compress_tmpl.c b/common/lz_compress_tmpl.c
-> index 4f4f6c6..1d4eb81 100644
-> --- a/common/lz_compress_tmpl.c
-> +++ b/common/lz_compress_tmpl.c
-> @@ -40,9 +40,7 @@
->     SOFTWARE.
-> =20
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #define DJB2_START 5381
->  #define DJB2_HASH(hash, c) (hash =3D ((hash << 5) + hash) ^ (c)) //|{has=
-h =3D ((hash << 5) + hash) + c;}
-> diff --git a/common/lz_decompress_tmpl.c b/common/lz_decompress_tmpl.c
-> index d445c70..462513f 100644
-> --- a/common/lz_decompress_tmpl.c
-> +++ b/common/lz_decompress_tmpl.c
-> @@ -59,9 +59,7 @@
->      COPY_COMP_PIXEL(encoder, out) - copies pixel from the compressed buf=
-fer to the decompressed
->                                      buffer. Increases out.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #if !defined(LZ_RGB_ALPHA)
->  #define COPY_PIXEL(p, out) (*out++ =3D p)
-> diff --git a/common/marshaller.c b/common/marshaller.c
-> index c77129b..a2c27b7 100644
-> --- a/common/marshaller.c
-> +++ b/common/marshaller.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "log.h"
->  #include "marshaller.h"
-> diff --git a/common/mem.c b/common/mem.c
-> index ff11e5e..8d7ed1e 100644
-> --- a/common/mem.c
-> +++ b/common/mem.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "mem.h"
-> =20
-> diff --git a/common/pixman_utils.c b/common/pixman_utils.c
-> index c573574..a3aba0a 100644
-> --- a/common/pixman_utils.c
-> +++ b/common/pixman_utils.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "pixman_utils.h"
-> =20
-> diff --git a/common/quic.c b/common/quic.c
-> index f91b23f..e1c439f 100644
-> --- a/common/quic.c
-> +++ b/common/quic.c
-> @@ -19,9 +19,7 @@
->  // Red Hat image compression based on SFALIC by Roman Starosolski
->  // http://sun.iinf.polsl.gliwice.pl/~rstaros/sfalic/index.html
-> =20
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <glib.h>
-> =20
-> diff --git a/common/quic_family_tmpl.c b/common/quic_family_tmpl.c
-> index 70fe758..9b29560 100644
-> --- a/common/quic_family_tmpl.c
-> +++ b/common/quic_family_tmpl.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #ifdef QUIC_FAMILY_8BPC
->  #undef QUIC_FAMILY_8BPC
-> diff --git a/common/quic_tmpl.c b/common/quic_tmpl.c
-> index c2a1b66..f0a4927 100644
-> --- a/common/quic_tmpl.c
-> +++ b/common/quic_tmpl.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #define COMPRESS_IMP
-> =20
-> diff --git a/common/region.c b/common/region.c
-> index c950a9b..0149191 100644
-> --- a/common/region.c
-> +++ b/common/region.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <stdio.h>
->  #include <string.h>
-> diff --git a/common/rop3.c b/common/rop3.c
-> index 75fec12..33eccd6 100644
-> --- a/common/rop3.c
-> +++ b/common/rop3.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "rop3.h"
-> =20
-> diff --git a/common/ssl_verify.c b/common/ssl_verify.c
-> index 74f95bb..dee719f 100644
-> --- a/common/ssl_verify.c
-> +++ b/common/ssl_verify.c
-> @@ -16,9 +16,7 @@
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> =20
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "mem.h"
->  #include "ssl_verify.h"
-> diff --git a/common/sw_canvas.c b/common/sw_canvas.c
-> index c5528c2..44f7299 100644
-> --- a/common/sw_canvas.c
-> +++ b/common/sw_canvas.c
-> @@ -15,12 +15,10 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #ifdef __MINGW32__
->  #undef HAVE_STDLIB_H
->  #endif
->  #include <config.h>
-> -#endif
-> =20
->  #include <math.h>
->  #include "sw_canvas.h"
-> diff --git a/common/utils.c b/common/utils.c
-> index 460098c..85cea31 100644
-> --- a/common/utils.c
-> +++ b/common/utils.c
-> @@ -16,9 +16,7 @@
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> =20
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include "utils.h"
-> =20
-> diff --git a/meson.build b/meson.build
-> index 0faf703..8a16b76 100644
-> --- a/meson.build
-> +++ b/meson.build
-> @@ -10,8 +10,7 @@ if not meson.is_subproject()
->  endif
-> =20
->  # some global vars
-> -spice_common_global_cflags =3D ['-DHAVE_CONFIG_H',
-> -                              '-DG_LOG_DOMAIN=3D"Spice"',
-> +spice_common_global_cflags =3D ['-DG_LOG_DOMAIN=3D"Spice"',
->                                '-Wall',
->                                '-Wextra',
->                                '-Werror',
-> diff --git a/spice_codegen.py b/spice_codegen.py
-> index 5846337..0532d6f 100755
-> --- a/spice_codegen.py
-> +++ b/spice_codegen.py
-> @@ -311,9 +311,7 @@ writer.write(license)
->  writer.header.writeln("/* this is a file autogenerated by spice_codegen.=
-py */")
->  writer.header.write(license)
->  if not options.generate_enums:
-> -    writer.writeln("#ifdef HAVE_CONFIG_H")
->      writer.writeln("#include <config.h>")
-> -    writer.writeln("#endif")
-
-Still fine to me,
-Acked-by: Victor Toso <victortoso@redhat.com>
-
-> =20
->  if options.assert_on_error:
->      writer.set_option("assert_on_error")
-> diff --git a/tests/test-logging.c b/tests/test-logging.c
-> index 32b0c33..22afe1f 100644
-> --- a/tests/test-logging.c
-> +++ b/tests/test-logging.c
-> @@ -14,9 +14,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #define G_LOG_DOMAIN "Spice"
-> =20
-> diff --git a/tests/test-marshallers.c b/tests/test-marshallers.c
-> index 83c8956..afa681d 100644
-> --- a/tests/test-marshallers.c
-> +++ b/tests/test-marshallers.c
-> @@ -14,9 +14,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <glib.h>
->  #include <string.h>
-> diff --git a/tests/test-quic.c b/tests/test-quic.c
-> index 01a3ef3..c838545 100644
-> --- a/tests/test-quic.c
-> +++ b/tests/test-quic.c
-> @@ -14,9 +14,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <glib.h>
->  #include <gdk-pixbuf/gdk-pixbuf.h>
-> diff --git a/tests/test-region.c b/tests/test-region.c
-> index 378ea60..e5478dc 100644
-> --- a/tests/test-region.c
-> +++ b/tests/test-region.c
-> @@ -15,9 +15,7 @@
->     You should have received a copy of the GNU Lesser General Public
->     License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->  */
-> -#ifdef HAVE_CONFIG_H
->  #include <config.h>
-> -#endif
-> =20
->  #include <stdio.h>
->  #include <string.h>
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---77nv6s5mpbzsrptb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAlzKqbAACgkQl9kSPeN6
-SE8+yA/8Cy3RjdMfR60dKsehOWyr+iSDwlZINnJmsBfmhq7yu9QO50hWhIF6UINt
-doxFwPW2hm1Wph8d80/asUuHDq/o/g4cjSHRr6IS99b9WtHVeeiQD2CtiEZdVWCQ
-b/dpddeDnCX21iaayBkgzaMLdu1KQ7PqnnCleQ0mri5w9/YKTNrFZ4RxiweJW09i
-Inazce8Ax8FM8ERjOdievC/OIrPrv+UfUpEthiUGeRbC+yINpC/H4IdErruNAky1
-5Ev5TCkVyGrjxgIYm+O15wDS1T6ljhhVNo6VSYSkklr962xP/N3jyNkZkiU1Xhoe
-pF0EzMiP7aNYHCOd5r5D/8ZPbA/EIyqAof38HrhZNgj6TuSmHcZzXPT+lOagaiOZ
-6nuxVBYPRlANwGIhiILobPsCS2C1TG9zHA3gdYRxQeI0jtDt1jBuj7aEr2kaK6jQ
-c2OmWrfVoUij+YfTsi472iI7VHwuKqQu3hAQns4DhmChn2U7d0+CFA3Tk0hahRxS
-oMAAKk1vrUSFqt0TVzqO4CY5ojph8lIu8DEeRNfXC2C1kiTgXhITd2kiIvX/C00F
-Te7y9uZxEN3hZBU52QrBtcIs/GTIRw50Dtp/L2T7GM/eOt5jpbcPQ6aXW6B53aNJ
-a6ASA0fP6ZUz1WWxsEblx/BMnANyYdjTUrOPlN0K7eKKQuf1Tmc=
-=xAil
------END PGP SIGNATURE-----
-
---77nv6s5mpbzsrptb--
-
---===============0599961717==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0599961717==--
+T24gNS8xLzE5IDQ6NTMgUE0sIEZyZWRpYW5vIFppZ2xpbyB3cm90ZToKPiBBbGxvd3MgdG8gY2F0
+Y2ggcG9zc2libGUgZXhjZXB0aW9uIGJ1aWxkaW5nIHRoZSBvYmplY3QuCj4gQWxzbyB3aWxsIGFs
+bG93IHRvIG1vcmUgc2FmZWx5IGhhbmRsZSBsb2dnZXIgZGVwZW5kZW5jeS4KClRoZSBzdWJqZWN0
+IGNvbmZ1c2VkIG1lIGEgYml0LCBhcyBJIHRob3VnaHQgYWJvdXQgTWFrZWZpbGUvTGlua2luZy4K
+UGVyaGFwcyBjaGFuZ2UgdG8gc29tZXRoaW5nIGxpa2UgLSBtYWtlIGFnZW50IG9iamVjdCBub3Qg
+c3RhdGljCgpBbHNvIHNlZSBiZWxvdyBmb3Igc29tZSBjb21tZW50cy4KCj4gCj4gU2lnbmVkLW9m
+Zi1ieTogRnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+CgpBY2suCgo+IC0tLQo+
+ICAgc3JjL2NvbmNyZXRlLWFnZW50LmNwcCAgICAgICAgfCAxMSArKystLS0tLS0tLQo+ICAgc3Jj
+L2NvbmNyZXRlLWFnZW50LmhwcCAgICAgICAgfCAgNCArLS0tCj4gICBzcmMvc3BpY2Utc3RyZWFt
+aW5nLWFnZW50LmNwcCB8IDEyICsrKysrKystLS0tLQo+ICAgMyBmaWxlcyBjaGFuZ2VkLCAxMSBp
+bnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEvc3JjL2NvbmNy
+ZXRlLWFnZW50LmNwcCBiL3NyYy9jb25jcmV0ZS1hZ2VudC5jcHAKPiBpbmRleCBmOTRhZWFkLi5m
+YjE0MTJiIDEwMDY0NAo+IC0tLSBhL3NyYy9jb25jcmV0ZS1hZ2VudC5jcHAKPiArKysgYi9zcmMv
+Y29uY3JldGUtYWdlbnQuY3BwCj4gQEAgLTI1LDkgKzI1LDEwIEBAIHN0YXRpYyBpbmxpbmUgdW5z
+aWduZWQgTWlub3JWZXJzaW9uKHVuc2lnbmVkIHZlcnNpb24pCj4gICAgICAgcmV0dXJuIHZlcnNp
+b24gJiAweGZmdTsKPiAgIH0KPiAgIAo+IC1Db25jcmV0ZUFnZW50OjpDb25jcmV0ZUFnZW50KCkK
+PiArQ29uY3JldGVBZ2VudDo6Q29uY3JldGVBZ2VudChjb25zdCBzdGQ6OnZlY3RvcjxDb25jcmV0
+ZUNvbmZpZ3VyZU9wdGlvbj4gJm9wdGlvbnMpOgo+ICsgICAgb3B0aW9ucyhvcHRpb25zKQoKSXNu
+J3QgaXQgY29tbW9uIHRvIHVzZSBkaWZmZXJlbnQgbmFtZXMgKGUuZy4gb3B0cyBmb3IgdGhlIHBh
+cmFtZXRlcikgPwoKPiAgIHsKPiAtICAgIG9wdGlvbnMucHVzaF9iYWNrKENvbmNyZXRlQ29uZmln
+dXJlT3B0aW9uKG51bGxwdHIsIG51bGxwdHIpKTsKPiArICAgIHRoaXMtPm9wdGlvbnMucHVzaF9i
+YWNrKENvbmNyZXRlQ29uZmlndXJlT3B0aW9uKG51bGxwdHIsIG51bGxwdHIpKTsKCk5pdCAtIFRo
+aXMgdG9vIGNhbiBhbHNvIGJlIGRvbmUgaW4gbWFpbiB3aGVuIGNyZWF0aW5nIG9wdGlvbnMuCgpV
+cmkuCgo+ICAgfQo+ICAgCj4gICBib29sIENvbmNyZXRlQWdlbnQ6OlBsdWdpblZlcnNpb25Jc0Nv
+bXBhdGlibGUodW5zaWduZWQgcGx1Z2luVmVyc2lvbikgY29uc3QKPiBAQCAtNDksMTIgKzUwLDYg
+QEAgY29uc3QgQ29uZmlndXJlT3B0aW9uKiBDb25jcmV0ZUFnZW50OjpPcHRpb25zKCkgY29uc3QK
+PiAgICAgICByZXR1cm4gc3RhdGljX2Nhc3Q8Y29uc3QgQ29uZmlndXJlT3B0aW9uKj4oJm9wdGlv
+bnNbMF0pOwo+ICAgfQo+ICAgCj4gLXZvaWQgQ29uY3JldGVBZ2VudDo6QWRkT3B0aW9uKGNvbnN0
+IGNoYXIgKm5hbWUsIGNvbnN0IGNoYXIgKnZhbHVlKQo+IC17Cj4gLSAgICAvLyBpbnNlcnQgYmVm
+b3JlIHRoZSBsYXN0IHtudWxscHRyLCBudWxscHRyfSB2YWx1ZQo+IC0gICAgb3B0aW9ucy5pbnNl
+cnQoLS1vcHRpb25zLmVuZCgpLCBDb25jcmV0ZUNvbmZpZ3VyZU9wdGlvbihuYW1lLCB2YWx1ZSkp
+Owo+IC19Cj4gLQo+ICAgdm9pZCBDb25jcmV0ZUFnZW50OjpMb2FkUGx1Z2lucyhjb25zdCBzdGQ6
+OnN0cmluZyAmZGlyZWN0b3J5KQo+ICAgewo+ICAgICAgIHN0ZDo6c3RyaW5nIHBhdHRlcm4gPSBk
+aXJlY3RvcnkgKyAiLyouc28iOwo+IGRpZmYgLS1naXQgYS9zcmMvY29uY3JldGUtYWdlbnQuaHBw
+IGIvc3JjL2NvbmNyZXRlLWFnZW50LmhwcAo+IGluZGV4IDk5ZGNmNTQuLjJjMmViYzggMTAwNjQ0
+Cj4gLS0tIGEvc3JjL2NvbmNyZXRlLWFnZW50LmhwcAo+ICsrKyBiL3NyYy9jb25jcmV0ZS1hZ2Vu
+dC5ocHAKPiBAQCAtMjYsMTIgKzI2LDEwIEBAIHN0cnVjdCBDb25jcmV0ZUNvbmZpZ3VyZU9wdGlv
+bjogQ29uZmlndXJlT3B0aW9uCj4gICBjbGFzcyBDb25jcmV0ZUFnZW50IGZpbmFsIDogcHVibGlj
+IEFnZW50Cj4gICB7Cj4gICBwdWJsaWM6Cj4gLSAgICBDb25jcmV0ZUFnZW50KCk7Cj4gKyAgICBD
+b25jcmV0ZUFnZW50KGNvbnN0IHN0ZDo6dmVjdG9yPENvbmNyZXRlQ29uZmlndXJlT3B0aW9uPiAm
+b3B0aW9ucyk7Cj4gICAgICAgdm9pZCBSZWdpc3Rlcihjb25zdCBzdGQ6OnNoYXJlZF9wdHI8UGx1
+Z2luPiYgcGx1Z2luKSBvdmVycmlkZTsKPiAgICAgICBjb25zdCBDb25maWd1cmVPcHRpb24qIE9w
+dGlvbnMoKSBjb25zdCBvdmVycmlkZTsKPiAgICAgICB2b2lkIExvYWRQbHVnaW5zKGNvbnN0IHN0
+ZDo6c3RyaW5nICZkaXJlY3RvcnkpOwo+IC0gICAgLy8gcG9pbnRlciBtdXN0IHJlbWFpbiB2YWxp
+ZAo+IC0gICAgdm9pZCBBZGRPcHRpb24oY29uc3QgY2hhciAqbmFtZSwgY29uc3QgY2hhciAqdmFs
+dWUpOwo+ICAgICAgIEZyYW1lQ2FwdHVyZSAqR2V0QmVzdEZyYW1lQ2FwdHVyZShjb25zdCBzdGQ6
+OnNldDxTcGljZVZpZGVvQ29kZWNUeXBlPiYgY29kZWNzKTsKPiAgIHByaXZhdGU6Cj4gICAgICAg
+Ym9vbCBQbHVnaW5WZXJzaW9uSXNDb21wYXRpYmxlKHVuc2lnbmVkIHBsdWdpblZlcnNpb24pIGNv
+bnN0Owo+IGRpZmYgLS1naXQgYS9zcmMvc3BpY2Utc3RyZWFtaW5nLWFnZW50LmNwcCBiL3NyYy9z
+cGljZS1zdHJlYW1pbmctYWdlbnQuY3BwCj4gaW5kZXggOTUwN2E1NC4uMDM5ZDYyOCAxMDA2NDQK
+PiAtLS0gYS9zcmMvc3BpY2Utc3RyZWFtaW5nLWFnZW50LmNwcAo+ICsrKyBiL3NyYy9zcGljZS1z
+dHJlYW1pbmctYWdlbnQuY3BwCj4gQEAgLTQxLDggKzQxLDYgQEAKPiAgIAo+ICAgdXNpbmcgbmFt
+ZXNwYWNlIHNwaWNlOjpzdHJlYW1pbmdfYWdlbnQ7Cj4gICAKPiAtc3RhdGljIENvbmNyZXRlQWdl
+bnQgYWdlbnQ7Cj4gLQo+ICAgY2xhc3MgRm9ybWF0TWVzc2FnZSA6IHB1YmxpYyBPdXRib3VuZE1l
+c3NhZ2U8U3RyZWFtTXNnRm9ybWF0LCBGb3JtYXRNZXNzYWdlLCBTVFJFQU1fVFlQRV9GT1JNQVQ+
+Cj4gICB7Cj4gICBwdWJsaWM6Cj4gQEAgLTIzMSw3ICsyMjksNyBAQCBzdGF0aWMgdm9pZCB1c2Fn
+ZShjb25zdCBjaGFyICpwcm9nbmFtZSkKPiAgIH0KPiAgIAo+ICAgc3RhdGljIHZvaWQKPiAtZG9f
+Y2FwdHVyZShTdHJlYW1Qb3J0ICZzdHJlYW1fcG9ydCwgRnJhbWVMb2cgJmZyYW1lX2xvZykKPiAr
+ZG9fY2FwdHVyZShTdHJlYW1Qb3J0ICZzdHJlYW1fcG9ydCwgRnJhbWVMb2cgJmZyYW1lX2xvZywg
+Q29uY3JldGVBZ2VudCAmYWdlbnQpCj4gICB7Cj4gICAgICAgdW5zaWduZWQgaW50IGZyYW1lX2Nv
+dW50ID0gMDsKPiAgICAgICB3aGlsZSAoIXF1aXRfcmVxdWVzdGVkKSB7Cj4gQEAgLTM1Myw2ICsz
+NTEsOCBAQCBpbnQgbWFpbihpbnQgYXJnYywgY2hhciogYXJndltdKQo+ICAgCj4gICAgICAgc2V0
+bG9nbWFzayhMT0dfVVBUTyhMT0dfTk9USUNFKSk7Cj4gICAKPiArICAgIHN0ZDo6dmVjdG9yPENv
+bmNyZXRlQ29uZmlndXJlT3B0aW9uPiBvcHRpb25zOwo+ICsKPiAgICAgICB3aGlsZSAoKG9wdCA9
+IGdldG9wdF9sb25nKGFyZ2MsIGFyZ3YsICJocDpjOmw6ZCIsIGxvbmdfb3B0aW9ucywgTlVMTCkp
+ICE9IC0xKSB7Cj4gICAgICAgICAgIHN3aXRjaCAob3B0KSB7Cj4gICAgICAgICAgIGNhc2UgMDoK
+PiBAQCAtMzcxLDcgKzM3MSw3IEBAIGludCBtYWluKGludCBhcmdjLCBjaGFyKiBhcmd2W10pCj4g
+ICAgICAgICAgICAgICAgICAgdXNhZ2UoYXJndlswXSk7Cj4gICAgICAgICAgICAgICB9Cj4gICAg
+ICAgICAgICAgICAqcCsrID0gJ1wwJzsKPiAtICAgICAgICAgICAgYWdlbnQuQWRkT3B0aW9uKG9w
+dGFyZywgcCk7Cj4gKyAgICAgICAgICAgIG9wdGlvbnMucHVzaF9iYWNrKENvbmNyZXRlQ29uZmln
+dXJlT3B0aW9uKG9wdGFyZywgcCkpOwo+ICAgICAgICAgICAgICAgYnJlYWs7Cj4gICAgICAgICAg
+IH0KPiAgICAgICAgICAgY2FzZSBPUFRfTE9HX0JJTkFSWToKPiBAQCAtNDAxLDYgKzQwMSw4IEBA
+IGludCBtYWluKGludCBhcmdjLCBjaGFyKiBhcmd2W10pCj4gICAgICAgcmVnaXN0ZXJfaW50ZXJy
+dXB0cygpOwo+ICAgCj4gICAgICAgdHJ5IHsKPiArICAgICAgICBDb25jcmV0ZUFnZW50IGFnZW50
+KG9wdGlvbnMpOwo+ICsKPiAgICAgICAgICAgLy8gcmVnaXN0ZXIgYnVpbHQtaW4gcGx1Z2lucwo+
+ICAgICAgICAgICBNanBlZ1BsdWdpbjo6UmVnaXN0ZXIoJmFnZW50KTsKPiAgIAo+IEBAIC00MTgs
+NyArNDIwLDcgQEAgaW50IG1haW4oaW50IGFyZ2MsIGNoYXIqIGFyZ3ZbXSkKPiAgICAgICAgICAg
+c3RkOjp0aHJlYWQgY3Vyc29yX3VwZGF0ZXJ7Q3Vyc29yVXBkYXRlcigmc3RyZWFtX3BvcnQpfTsK
+PiAgICAgICAgICAgY3Vyc29yX3VwZGF0ZXIuZGV0YWNoKCk7Cj4gICAKPiAtICAgICAgICBkb19j
+YXB0dXJlKHN0cmVhbV9wb3J0LCBmcmFtZV9sb2cpOwo+ICsgICAgICAgIGRvX2NhcHR1cmUoc3Ry
+ZWFtX3BvcnQsIGZyYW1lX2xvZywgYWdlbnQpOwo+ICAgICAgIH0KPiAgICAgICBjYXRjaCAoc3Rk
+OjpleGNlcHRpb24gJmVycikgewo+ICAgICAgICAgICBzeXNsb2coTE9HX0VSUiwgIiVzIiwgZXJy
+LndoYXQoKSk7Cj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0
+b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3Bp
+Y2UtZGV2ZWw=
