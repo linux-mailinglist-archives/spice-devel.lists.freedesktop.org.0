@@ -2,30 +2,35 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11FCD13362
-	for <lists+spice-devel@lfdr.de>; Fri,  3 May 2019 19:53:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1E6D13A95
+	for <lists+spice-devel@lfdr.de>; Sat,  4 May 2019 16:32:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3BF5E6E83C;
-	Fri,  3 May 2019 17:53:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9C89388FD2;
+	Sat,  4 May 2019 14:32:44 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 3603 seconds by postgrey-1.36 at gabe;
- Fri, 03 May 2019 17:53:47 UTC
-Received: from nologin.es (mail.nologin.es [217.75.227.232])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8C6496E83C
- for <spice-devel@lists.freedesktop.org>; Fri,  3 May 2019 17:53:46 +0000 (UTC)
-Received: from [62.81.190.66] (account javier.celaya@flexvdi.com HELO
- flexdevel.jca.flexvdi.com)
- by nologin.es (CommuniGate Pro SMTP 6.2.12)
- with ESMTPSA id 33668129; Fri, 03 May 2019 18:53:42 +0200
-From: Javier Celaya <javier.celaya@flexvdi.com>
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 40CC288FD2
+ for <spice-devel@lists.freedesktop.org>; Sat,  4 May 2019 14:32:43 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id C2BAE8665A
+ for <spice-devel@lists.freedesktop.org>; Sat,  4 May 2019 14:32:42 +0000 (UTC)
+Received: from toolbox.mxp.redhat.com (unknown [10.32.181.168])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4A4C580D8
+ for <spice-devel@lists.freedesktop.org>; Sat,  4 May 2019 14:32:42 +0000 (UTC)
+From: Victor Toso <victortoso@redhat.com>
 To: spice-devel@lists.freedesktop.org
-Date: Fri,  3 May 2019 18:52:00 +0200
-Message-Id: <20190503165200.24328-1-javier.celaya@flexvdi.com>
-X-Mailer: git-send-email 2.20.1
+Date: Sat,  4 May 2019 14:32:39 +0000
+Message-Id: <20190504143241.28352-1-victortoso@redhat.com>
 MIME-Version: 1.0
-Subject: [Spice-devel] [Spice-Gtk] SpiceSession: Create webdav even with
- NULL shared_dir
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.26]); Sat, 04 May 2019 14:32:42 +0000 (UTC)
+Subject: [Spice-devel] [spice-gtk 0/2] channel-usbredir ifdef USE_USBREDIR
+ fixes
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -37,30 +42,22 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: devel@flexvdi.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-QSBwaG9kYXYgc2VydmVyIGNyZWF0ZWQgd2l0aCBhIE5VTEwgc2hhcmVkIGRpciBpcyB2YWxpZCBh
-bmQKcmVzdWx0cyBpbiBhbiBlcnJvciBhbnN3ZXIgdG8gYWxsIHJlcXVlc3RzIG9mIHRoZSB3ZWJk
-YXYgY2hhbm5lbCwKaW5zdGVhZCBvZiBzaWxlbnRseSBpZ25vcmluZyB0aGVtLgoKVGhpcyBpcyBi
-ZXR0ZXIgdGhhbiBqdXN0IHJldHVybmluZyBOVUxMIGZyb20Kc3BpY2Vfc2Vzc2lvbl9nZXRfd2Vi
-ZGF2X3NlcnZlciBiZWNhdXNlOgphKSBpdCBjcmFzaGVzIGNoYW5uZWxfd2ViZGF2LmM6c3RhcnRf
-Y2xpZW50LgpiKSBldmVuIGlmIGl0IGRpZCBub3QgY3Jhc2gsIGFjY2VzcyB0byB0aGUgc2hhcmVk
-IGRpciBmcm9tIHRoZSBndWVzdAogICB3b3VsZCBmYWlsIGJ5IHRpbWVvdXQgaW5zdGVhZCBvZiBp
-bW1lZGlhdGVseSBub3RpZnlpbmcgb2YgYW4gZXJyb3IuCi0tLQogc3JjL3NwaWNlLXNlc3Npb24u
-YyB8IDQgLS0tLQogMSBmaWxlIGNoYW5nZWQsIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEv
-c3JjL3NwaWNlLXNlc3Npb24uYyBiL3NyYy9zcGljZS1zZXNzaW9uLmMKaW5kZXggMDRiYTEyNC4u
-Y2JjZDhjNCAxMDA2NDQKLS0tIGEvc3JjL3NwaWNlLXNlc3Npb24uYworKysgYi9zcmMvc3BpY2Ut
-c2Vzc2lvbi5jCkBAIC0yODEzLDEwICsyODEzLDYgQEAgUGhvZGF2U2VydmVyKiBzcGljZV9zZXNz
-aW9uX2dldF93ZWJkYXZfc2VydmVyKFNwaWNlU2Vzc2lvbiAqc2Vzc2lvbikKICAgICBzdGF0aWMg
-R011dGV4IG11dGV4OwogCiAgICAgY29uc3QgZ2NoYXIgKnNoYXJlZF9kaXIgPSBzcGljZV9zZXNz
-aW9uX2dldF9zaGFyZWRfZGlyKHNlc3Npb24pOwotICAgIGlmIChzaGFyZWRfZGlyID09IE5VTEwp
-IHsKLSAgICAgICAgU1BJQ0VfREVCVUcoIk5vIHNoYXJlZCBkaXIgc2V0LCBub3QgY3JlYXRpbmcg
-d2ViZGF2IHNlcnZlciIpOwotICAgICAgICByZXR1cm4gTlVMTDsKLSAgICB9CiAKICAgICBnX211
-dGV4X2xvY2soJm11dGV4KTsKIAotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2
-ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21h
-aWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+RnJvbTogVmljdG9yIFRvc28gPG1lQHZpY3RvcnRvc28uY29tPgoKSGksCgpBIGNvbXBpbGVyIHdh
+cm5pbmcgZml4IG9uIGZpcnN0IHBhdGNoLiBJIGNhbiB0cmlnZ2VyIHRoYXQgd2FybmluZyB3aGVu
+IEkKZGlzYWJsZSB1c2JyZWRpci4gSSdtIHVzaW5nIGdjYyA4LjMuMSBidXQgSSB0aGluayBJIHNh
+dyBpdCBsb25nIHRpbWUKYWdvIHRvby4KClNlY29uZCBwYXRjaCBpcyBzZWxmIGV4cGxhbmF0b3J5
+LCBJIGhvcGUgaXQgc291bmRzIHJlYXNvbmFibGUuCgpnaXRsYWItY2k6IGh0dHBzOi8vZ2l0bGFi
+LmZyZWVkZXNrdG9wLm9yZy92aWN0b3J0b3NvL3NwaWNlLWd0ay9waXBlbGluZXMvMzUwNzcKCkNo
+ZWVycywKClZpY3RvciBUb3NvICgyKToKICBjaGFubmVsLXVzYnJlZGlyOiBpZiBkaXNhYmxlZCwg
+ZGVmaW5lIHR5cGUgd2l0aG91dCBwcml2YXRlCiAgY2hhbm5lbC11c2JyZWRpcjogcmVkdWNlIGFt
+b3VudCBvZiAjaWZkZWYgVVNFX1VTQlJFRElSCgogc3JjL2NoYW5uZWwtdXNicmVkaXIuYyB8IDMy
+ICsrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMTQgaW5z
+ZXJ0aW9ucygrKSwgMTggZGVsZXRpb25zKC0pCgotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QK
+U3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0
+b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
