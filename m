@@ -2,38 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4A531B771
-	for <lists+spice-devel@lfdr.de>; Mon, 13 May 2019 15:53:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4827D1B796
+	for <lists+spice-devel@lfdr.de>; Mon, 13 May 2019 16:00:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E65989D84;
-	Mon, 13 May 2019 13:53:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC17F89D8E;
+	Mon, 13 May 2019 14:00:21 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EB4DF89D84
- for <spice-devel@lists.freedesktop.org>; Mon, 13 May 2019 13:53:44 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3449B89D8E
+ for <spice-devel@lists.freedesktop.org>; Mon, 13 May 2019 14:00:21 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 9590A368A5
- for <spice-devel@lists.freedesktop.org>; Mon, 13 May 2019 13:53:44 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id C4E4D7DCCA
+ for <spice-devel@lists.freedesktop.org>; Mon, 13 May 2019 14:00:20 +0000 (UTC)
 Received: from localhost (unknown [10.36.118.53])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3B5D963F71;
- Mon, 13 May 2019 13:53:44 +0000 (UTC)
-Date: Mon, 13 May 2019 13:53:43 +0000
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6804263BBA;
+ Mon, 13 May 2019 14:00:20 +0000 (UTC)
+Date: Mon, 13 May 2019 14:00:19 +0000
 From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190513135343.4nk2qe77pxjxtkke@toolbox>
-References: <20190513094556.14035-1-fziglio@redhat.com>
+To: Snir Sheriber <ssheribe@redhat.com>
+Message-ID: <20190513140019.e4g7pillkd2cvt55@toolbox>
+References: <20190513135246.14849-1-ssheribe@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190513094556.14035-1-fziglio@redhat.com>
+In-Reply-To: <20190513135246.14849-1-ssheribe@redhat.com>
 User-Agent: NeoMutt/20180716
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.30]); Mon, 13 May 2019 13:53:44 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-protocol 1/3] build-sys:
- post-release version bump 0.14.1
+ (mx1.redhat.com [10.5.110.27]); Mon, 13 May 2019 14:00:20 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-streaming-agent] Remove -Wchkp
+ warning, deprecated in GCC 9
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,93 +46,76 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0877582941=="
+Content-Type: multipart/mixed; boundary="===============1821392862=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0877582941==
+--===============1821392862==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ijehxyax3f5fshyx"
+	protocol="application/pgp-signature"; boundary="l2hugcprbngdjl3d"
 Content-Disposition: inline
 
 
---ijehxyax3f5fshyx
+--l2hugcprbngdjl3d
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Mon, May 13, 2019 at 10:45:54AM +0100, Frediano Ziglio wrote:
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+On Mon, May 13, 2019 at 04:52:46PM +0300, Snir Sheriber wrote:
+> Signed-off-by: Snir Sheriber <ssheribe@redhat.com>
 
-Yep,
 Acked-by: Victor Toso <victortoso@redhat.com>
 
 > ---
->  configure.ac | 2 +-
->  meson.build  | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>  m4/manywarnings.m4 | 1 -
+>  1 file changed, 1 deletion(-)
 >=20
-> diff --git a/configure.ac b/configure.ac
-> index b56f414..bc3e33f 100644
-> --- a/configure.ac
-> +++ b/configure.ac
-> @@ -2,7 +2,7 @@ AC_PREREQ([2.57])
-> =20
->  m4_define([SPICE_MAJOR], 0)
->  m4_define([SPICE_MINOR], 14)
-> -m4_define([SPICE_MICRO], 0)
-> +m4_define([SPICE_MICRO], 1)
-> =20
->  AC_INIT(spice-protocol, [SPICE_MAJOR.SPICE_MINOR.SPICE_MICRO], [], spice=
--protocol)
-> =20
-> diff --git a/meson.build b/meson.build
-> index f9da4ac..75e64c4 100644
-> --- a/meson.build
-> +++ b/meson.build
-> @@ -2,7 +2,7 @@
->  # project definition
->  #
->  project('spice-protocol', 'c',
-> -        version : '0.14.0',
-> +        version : '0.14.1',
->          license : 'BSD',
->          meson_version : '>=3D 0.41.0')
-> =20
+> diff --git a/m4/manywarnings.m4 b/m4/manywarnings.m4
+> index 4f701f4..3864100 100644
+> --- a/m4/manywarnings.m4
+> +++ b/m4/manywarnings.m4
+> @@ -116,7 +116,6 @@ AC_DEFUN([gl_MANYWARN_ALL_GCC],
+>      -Wbuiltin-macro-redefined \
+>      -Wcast-align \
+>      -Wchar-subscripts \
+> -    -Wchkp \
+>      -Wclobbered \
+>      -Wcomment \
+>      -Wcomments \
 > --=20
-> 2.20.1
+> 2.21.0
 >=20
 > _______________________________________________
 > Spice-devel mailing list
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---ijehxyax3f5fshyx
+--l2hugcprbngdjl3d
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAlzZducACgkQl9kSPeN6
-SE+aJg/8DByL1fryONJSM9Mt1awtazSWP0kHyQb8tw7v5u8s6w8Z4tplKHZZsyMR
-+AmowXjXBA5YdNyg1w0fslxjA6Wao7W/8karBZS5pEoGaQl6IKlkaN5SUcsq37/c
-WLyT8mYK2BdnCgTpw1g+zkUEmirZnYbFem4gB0OYqO8cgOeiCZIjrkCSaVxNZYnX
-Nn6x1FWWyswwzUu8Xl2G1LZeyqFoFW2BKN6KnSqb2Fpjna+EgAuPob+5CsNpySRP
-3pcN1yflrKtK0uIdScu/4qRIX59rNfAaSOVDF7Oe0GrQHuHIzpla7Ndwe4DWR+lh
-yAAHqXrI+PPFORWr1Z8LVb7wEzLaimeo66ZQ0rlbri+wcMOlAGwpFTY7XvbJeeaA
-Z7MTodQZagntRm45ihd6WzQWssRzYePvyRhltkkirkQWAFbpU2/zKoeOh7CUEZRQ
-FYqWDHBm9kYesBApNQrxoRZdEwVuzvpImriBVjvls4z6o9AyecD7u/LrD7OTx5e3
-8I8JQx5ruwxwdx23E4uEppxuxUsFD1JGWkqnQ7drsLPB1jlsyv4MW+Qv8pF05KF4
-KF+ahjl2XkszxxvlJy5mszo0CfQC9DH/5l6D2vlBQeN61PMRv/Liu5nT6RXdruh7
-PolYVibtm+/eO1DijpsiJ8+g4x4b92C56vXS8x8H8/T2RDL9sww=
-=0NgJ
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAlzZeHMACgkQl9kSPeN6
+SE9w7hAAhxA8WsxIxSIc4yXJHAi2CjHhcw5i7NZq/dwyxEEclBUPXyFwoCXfRSx6
+D30UmA6JInpWmklQhAZVddmU8mHUrit6j6q/NsWfIBFu23zZFA0DYLpzWqp4aVn8
+9LHzZaxVFszXgbVFbGMZIJBpP0pxzuzxsrrbggdXceEGRV9vsJVvr0AJJTwri2rl
+JUtC9b103d8T7BmbDPlBuQUNxDwNzLroZXPrhDla6sQtXHL+E8XDp5Xuo3khTcav
+px55fhvl4APwqohWNM1QGs6kcHm0bY8s6e01chSiFlTOLY14VPxdKITowbA9PuTs
+dnX59dlwQsnsRUXGirL71pOtr12OWOPi48Z1OGhGwOglNZUZQA5Wz47t3Z1hK+D8
+Z4LnIugnwVvCa1ora/A7dGds5uH1Wr7rJM7cvUY9mO6gSjhpo1WtRg62tAKQRFpF
+9vNAPeQ9r0GTeZOiJJrf5CmlHAE/e2vnmDFR94KcO3dYU/qnWkPQXEGMwbMN53gs
+iFyW3mnzG1qlf/xJYOuZ+KiobMMckY4qDzXvxz26isqe06cVcFG9Tu9CgOrESfXF
+xsHiAe01sIHkWq0HwnOiDQQAeg2a6EehRVDUPZgcmYAtwuzM2cJRjp2cO81ZP7Iy
+anAtpu8Rzm93t2dNIV8p9yp0YFSXzckmfL10zuMu/adD0M67nGE=
+=DhF3
 -----END PGP SIGNATURE-----
 
---ijehxyax3f5fshyx--
+--l2hugcprbngdjl3d--
 
---===============0877582941==
+--===============1821392862==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -142,4 +125,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0877582941==--
+--===============1821392862==--
