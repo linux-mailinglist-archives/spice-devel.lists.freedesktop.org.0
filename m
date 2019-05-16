@@ -1,47 +1,39 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1C8C2058C
-	for <lists+spice-devel@lfdr.de>; Thu, 16 May 2019 13:45:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F19120709
+	for <lists+spice-devel@lfdr.de>; Thu, 16 May 2019 14:34:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 40BD389100;
-	Thu, 16 May 2019 11:45:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0C3998945B;
+	Thu, 16 May 2019 12:34:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 33E96890F7
- for <spice-devel@lists.freedesktop.org>; Thu, 16 May 2019 11:45:31 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D9CD88945B
+ for <spice-devel@lists.freedesktop.org>; Thu, 16 May 2019 12:34:35 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id C24006439B
- for <spice-devel@lists.freedesktop.org>; Thu, 16 May 2019 11:45:30 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id B922010021B2
- for <spice-devel@lists.freedesktop.org>; Thu, 16 May 2019 11:45:30 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id A9B8C206D1;
- Thu, 16 May 2019 11:45:30 +0000 (UTC)
-Date: Thu, 16 May 2019 07:45:29 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Victor Toso <victortoso@redhat.com>
-Message-ID: <429982799.18700582.1558007129285.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20190516114413.32185-1-victortoso@redhat.com>
-References: <20190516113000.31578-1-victortoso@redhat.com>
- <20190516114413.32185-1-victortoso@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 737363179165
+ for <spice-devel@lists.freedesktop.org>; Thu, 16 May 2019 12:34:35 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.168])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1B0016012D
+ for <spice-devel@lists.freedesktop.org>; Thu, 16 May 2019 12:34:34 +0000 (UTC)
+Date: Thu, 16 May 2019 12:34:34 +0000
+From: Victor Toso <victortoso@redhat.com>
+To: spice-devel@lists.freedesktop.org
+Message-ID: <20190516123434.bdeor6dfxus2lhyp@toolbox>
+References: <20190507085605.10054-1-victortoso@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.9, 10.4.195.11]
-Thread-Topic: build-sys: Ship keycodemapdb's meson.build on release
-Thread-Index: F7qZmO/bEjsfGCYkcVmhMUZ3bQ3Pow==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+In-Reply-To: <20190507085605.10054-1-victortoso@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.39]); Thu, 16 May 2019 11:45:30 +0000 (UTC)
-Subject: Re: [Spice-devel] [spice-gtk v2 5/6] build-sys: Ship keycodemapdb's
- meson.build on release
+ (mx1.redhat.com [10.5.110.41]); Thu, 16 May 2019 12:34:35 +0000 (UTC)
+Subject: Re: [Spice-devel] [spice-gtk v1 0/4] polkit code to be on
+ usb-acl-helper
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,29 +45,99 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0515202772=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiAKPiBGcm9tOiBWaWN0b3IgVG9zbyA8bWVAdmljdG9ydG9zby5jb20+Cj4gCj4gT3RoZXJ3aXNl
-IHdlIGJyZWFrIG1lc29uIGJ1aWxkcyB3aXRoICJtZXNvbi5idWlsZDo0NDowOiBFUlJPUjoKPiBT
-dWJwcm9qZWN0IGV4aXN0cyBidXQgaGFzIG5vIG1lc29uLmJ1aWxkIGZpbGUiCj4gCj4gU2lnbmVk
-LW9mZi1ieTogVmljdG9yIFRvc28gPHZpY3RvcnRvc29AcmVkaGF0LmNvbT4KCkFja2VkCgo+IC0t
-LQo+ICBzcmMvTWFrZWZpbGUuYW0gfCAyICsrCj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
-bnMoKykKPiAKPiBkaWZmIC0tZ2l0IGEvc3JjL01ha2VmaWxlLmFtIGIvc3JjL01ha2VmaWxlLmFt
-Cj4gaW5kZXggN2I5ODE4MC4uN2E3ZWNiNCAxMDA2NDQKPiAtLS0gYS9zcmMvTWFrZWZpbGUuYW0K
-PiArKysgYi9zcmMvTWFrZWZpbGUuYW0KPiBAQCAtMzAsNiArMzAsNyBAQCBFWFRSQV9ESVNUID0J
-CQkJCVwKPiAgCSQoS0VZTUFQUykJCQkJXAo+ICAJJChLRVlNQVBfQ1NWKQkJCQlcCj4gIAkkKEtF
-WU1BUF9HRU4pCQkJCVwKPiArCSQoS0VZTUFQX0RJU1QpCQkJCVwKPiAgCW1hcC1maWxlCQkJCVwK
-PiAgCXNwaWNlLWdsaWItc3ltLWZpbGUJCQlcCj4gIAlzcGljZS1ndGstc3ltLWZpbGUJCQlcCj4g
-QEAgLTY1LDYgKzY2LDcgQEAgZW5kaWYKPiAgCj4gIEtFWU1BUF9HRU4gPSAkKHRvcF9zcmNkaXIp
-L3N1YnByb2plY3RzL2tleWNvZGVtYXBkYi90b29scy9rZXltYXAtZ2VuCj4gIEtFWU1BUF9DU1Yg
-PSAkKHRvcF9zcmNkaXIpL3N1YnByb2plY3RzL2tleWNvZGVtYXBkYi9kYXRhL2tleW1hcHMuY3N2
-Cj4gK0tFWU1BUF9ESVNUID0gJCh0b3Bfc3JjZGlyKS9zdWJwcm9qZWN0cy9rZXljb2RlbWFwZGIv
-bWVzb24uYnVpbGQKPiAgCj4gIFNQSUNFX0NPTU1PTl9DUFBGTEFHUyA9CQkJCQkJXAo+ICAJLURT
-UElDRV9DT01QSUxBVElPTgkJCQkJXApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
-dGluZm8vc3BpY2UtZGV2ZWw=
+
+--===============0515202772==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="qq65szhbgaco3jem"
+Content-Disposition: inline
+
+
+--qq65szhbgaco3jem
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+
+On Tue, May 07, 2019 at 08:56:01AM +0000, Victor Toso wrote:
+
+Ping :)
+
+> From: Victor Toso <me@victortoso.com>
+>=20
+> Hi,
+>=20
+> While looking at channel-usbredir code, seems weird that we are
+> ifdef USE_POLKIT on usb-acl-helper function that itself does not link
+> with polkit but runs the binary spice-client-glib-usb-acl-helper that
+> links to polkit library.
+>=20
+> This patchset suggestion is to keep the access control helper to work
+> without polkit in order to remove the polkit build logic from
+> channel-usbredir. That means always building usb-acl-helper and I don't
+> see a strong reason not to.
+>=20
+> Tested on Fedora 29 with polkit and without.
+>=20
+> Cheers,
+> Victor
+>=20
+> Gitlab-ci: https://gitlab.freedesktop.org/victortoso/spice-gtk/pipelines/=
+35468
+>=20
+> Victor Toso (4):
+>   usb-acl-helper: move exec of binary to its own function
+>   usb-acl-helper: always build access control helper
+>   channel-usbredir: use mutex on polkit code path
+>   channel-usbredir: move polkit related checks to usb-acl-helper
+>=20
+>  src/Makefile.am        |  13 +----
+>  src/channel-usbredir.c |  54 ++----------------
+>  src/meson.build        |   7 +--
+>  src/usb-acl-helper.c   | 124 +++++++++++++++++++++++++++--------------
+>  4 files changed, 90 insertions(+), 108 deletions(-)
+>=20
+> --=20
+> 2.20.1
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--qq65szhbgaco3jem
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAlzdWNoACgkQl9kSPeN6
+SE8eLQ/8CuLOht2bFOH7nzWm2tA6oIEWCAb6OKBDCjkEeXHqn/Wjl2fIrmZAnRzN
+03e476hkRzdW9ZEIGNGfKExsIvkFSPK8mY190TH6nAQ2WIMZjl4FPwHbQ2ceTm5J
+pdFUeF0wk05lNDMnQQ9WKeUB6Fb/JO6txj9UJzR09qqQGgz3Hn8RNiY0ACXOX/AQ
+YYIMzdkDcUjIKpo9l5EJiw3NlzBj6HNb8FAmEe6R2WGIlpcTWn+hqdPdx6N07We4
+OzSbpr7XzEo9tueMqsijexm3HzXiKYDVg7zbZMreEwoi9Vy3tckvzPnPN4huWA56
+WJec+KHAD6NdRX0hj6+qSlQyJREWNlRShKMw1avYNvQsAG0axCgqmK35942Kgtg3
+s8Jbal9S+rTZCJ1EuVeJEYtWOBzts7b0Xkw4ivHK30AymSNZ2Suz1/R76R1uQDWg
+AsWP3dKqKtslIpgoeqwsjbhIE7HuzcJLpyFzRfb1TsveyNrrXnuZ4pSd5lKB57wq
+N3aigcehU3Yg4ABKbLqwqHkgUVOwy5rZWO6N8KaHmxrCL0e03bF3WI91uS/p6x4P
+wxRRqlRfuMP8F0kBrhp7TsVZ8QvzOgEd17gIuFEXsd64G489v/OaTqGqmXLLQJqz
+7nypelVcTIJZ9ub91uqxC+CeWBTWcf3e8h1H4XdNXdtUwbT6AgQ=
+=UFlO
+-----END PGP SIGNATURE-----
+
+--qq65szhbgaco3jem--
+
+--===============0515202772==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0515202772==--
