@@ -2,46 +2,69 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30E6922F88
-	for <lists+spice-devel@lfdr.de>; Mon, 20 May 2019 10:57:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 765FD238A9
+	for <lists+spice-devel@lfdr.de>; Mon, 20 May 2019 15:47:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BD50289286;
-	Mon, 20 May 2019 08:57:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA0658928B;
+	Mon, 20 May 2019 13:47:21 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC84389286
- for <spice-devel@lists.freedesktop.org>; Mon, 20 May 2019 08:57:29 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 94508C066811
- for <spice-devel@lists.freedesktop.org>; Mon, 20 May 2019 08:57:29 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 8BBFA17D29
- for <spice-devel@lists.freedesktop.org>; Mon, 20 May 2019 08:57:29 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 8594B1833001
- for <spice-devel@lists.freedesktop.org>; Mon, 20 May 2019 08:57:29 +0000 (UTC)
-Date: Mon, 20 May 2019 04:57:29 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Message-ID: <1704233502.18993369.1558342649507.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20190513094556.14035-3-fziglio@redhat.com>
-References: <20190513094556.14035-1-fziglio@redhat.com>
- <20190513094556.14035-3-fziglio@redhat.com>
+Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 53ECC8928B
+ for <spice-devel@lists.freedesktop.org>; Mon, 20 May 2019 13:47:21 +0000 (UTC)
+Received: from 82-64-54-218.subs.proxad.net ([82.64.54.218] helo=amboise)
+ by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.89) (envelope-from <fgouget@free.fr>)
+ id 1hSie3-00021g-BB; Mon, 20 May 2019 08:48:05 -0500
+Received: from fgouget by amboise with local (Exim 4.92)
+ (envelope-from <fgouget@amboise.dolphin>)
+ id 1hSidI-0006H2-QG; Mon, 20 May 2019 15:47:16 +0200
+Date: Mon, 20 May 2019 15:47:16 +0200 (CEST)
+From: Francois Gouget <fgouget@codeweavers.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+In-Reply-To: <1940036155.18668461.1557991240154.JavaMail.zimbra@redhat.com>
+Message-ID: <alpine.DEB.2.21.1905201545120.10407@amboise.dolphin>
+References: <E1hR33N-0008KB-NL@amboise>
+ <1940036155.18668461.1557991240154.JavaMail.zimbra@redhat.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.10, 10.4.195.25]
-Thread-Topic: qxl_dev: Move QXLReleaseInfoExt out of start/end-packed.h
-Thread-Index: gALPBO8iB8Q2mCOMed+sUMVh+5f5zQ==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.32]); Mon, 20 May 2019 08:57:29 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-protocol 3/3] qxl_dev: Move
- QXLReleaseInfoExt out of start/end-packed.h
+X-Spam-Score: -102.4
+X-Spam-Report: Spam detection software,
+ running on the system "mail.codeweavers.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  On Thu, 16 May 2019, Frediano Ziglio wrote: > > > > It makes
+ no sense to expect average frame sizes anywhere close to 2GB. > > > >
+ Signed-off-by:
+ Francois Gouget <fgouget@codeweavers.com> > > Sure but 256 kb are possible.
+ Content analysis details:   (-102.4 points, 5.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -100 USER_IN_WHITELIST      From: address is in the user's white-list
+ -6.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+ 0.0 TVD_RCVD_IP            Message was received from an IP address
+ 1.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 1.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider (fgouget[at]free.fr)
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+ 1.3 MALFORMED_FREEMAIL     Bad headers on message from free email
+ service
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
+ c=relaxed/relaxed; 
+ d=codeweavers.com; s=6377696661; h=Content-Type:MIME-Version:References:
+ Message-ID:In-Reply-To:Subject:cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=VhZ8WhK7Fz05Ow34KuVfAvwSXCtIXkXEjTYHLlRpUrI=; b=MHZaXEEYxByHo2xP3Bh5i6KSW
+ qHV5eKgWCuX9rwsP2TIEyBTsAfsJ5DGQmq7zDpPhtuKYCFpyijiKS5kkSRylzMrDRTPwzE7yi/X+N
+ nIuQk3jCBN0HNhDYwK9Vu1JcJxtlJJocipdrLxTyrH+YA88Fh90YiLll+RuipWI0CW7Oc=;
+Subject: Re: [Spice-devel] [spice] gstreamer-encoder: Return the average
+ frame size as a 32 bit int
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,43 +76,18 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: Spice devel <spice-devel@lists.freedesktop.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-cGluZwoKPiAKPiBUaGlzIHN0cnVjdHVyZSBpcyBub3QgZGVjbGFyZXMgYXMgU1BJQ0VfQVRUUl9Q
-QUNLRUQgcmVzdWx0aW5nIGl0Cj4gYXMgYWxpZ25lZCBhbmQgbm8gcGFja2VkIHVzaW5nIEdDQyAo
-bm8gTWluZ1cpLgo+IFRoaXMgc3RydWN0dXJlIGlzIG9ubHkgcGFja2VkIHVuZGVyIE1pbmdXIG9y
-IE1pY3Jvc29mdCBjb21waWxlcnMuCj4gVGhpcyBzdHJ1Y3R1cmUgaXMgbm90IHRlY2huaWNhbGx5
-IGEgZGVmaW5pdGlvbiBmb3IgUVhMIGRldmljZSBidXQKPiBpcyB1c2VkIG9ubHkgZm9yIHNwaWNl
-LXNlcnZlciBRWEwgaW50ZXJmYWNlLgo+IEFzIHNhaWQgYWJvdmUgdGhpcyBjaGFuZ2UgY291bGQg
-YWZmZWN0IG9ubHkgTWluZ1cvTWljcm9zb2Z0IHRoYXQgaXMKPiBvbmx5IFdpbmRvd3MgQUJJIG9m
-IHNwaWNlLXNlcnZlciAodmVyeSByZWNlbnRseSBhZGRlZCkgc28KPiBmb2xsb3dpbmcgbGluZXMg
-YXJlIHJlYWxseSBub3QgbXVjaCBpbXBvcnRhbnQuCj4gTm90ZSB0aGF0IFdpbmRvd3MgZG9lcyBu
-b3Qgc3VwcG9ydCBhcmNoaXRlY3R1cmVzIHdpdGggQ1BVcyBub3QKPiBzdXBwb3J0aW5nIHVuYWxp
-Z25lZCBhY2Nlc3MuCj4gVW5kZXIgV2luMzIgdGhpcyBjaGFuZ2UgZG9uJ3QgYWZmZWN0IHNpemUg
-c28gbm90aGluZyBtdWNoIGNhbiBjaGFuZ2UuCj4gVGhpcyBzdHJ1Y3R1cmUgaXMgY3VycmVudGx5
-IHBhc3NlZCBhcyB2YWx1ZSB0byByZWxlYXNlX3Jlc291cmNlCj4gY2FsbGJhY2suIFVuZGVyIFdp
-bjY0IHRoaXMgc3RydWN0dXJlIGlzIHBhc3NlZCBsaWtlIGEKPiAiY29uc3QgUVhMUmVsZWFzZUlu
-Zm9FeHQgKiIgc28gZXZlbiBpZiB0aGUgc3RydWN0dXJlIGlzIDE2IGJ5dGVzIGluc3RlYWQKPiBv
-ZiAxMiB0aGlzIGlzIHJlYWQgdGhlIHNhbWUgd2F5Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEZyZWRp
-YW5vIFppZ2xpbyA8ZnppZ2xpb0ByZWRoYXQuY29tPgo+IC0tLQo+ICBzcGljZS9xeGxfZGV2Lmgg
-fCAxMCArKysrKy0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDUgZGVs
-ZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3NwaWNlL3F4bF9kZXYuaCBiL3NwaWNlL3F4bF9k
-ZXYuaAo+IGluZGV4IDY1OWY5MzAuLmM4NDRkN2IgMTAwNjQ0Cj4gLS0tIGEvc3BpY2UvcXhsX2Rl
-di5oCj4gKysrIGIvc3BpY2UvcXhsX2Rldi5oCj4gQEAgLTI4MCwxMSArMjgwLDYgQEAgdHlwZWRl
-ZiB1bmlvbiBTUElDRV9BVFRSX1BBQ0tFRCBRWExSZWxlYXNlSW5mbyB7Cj4gICAgICB1aW50NjRf
-dCBuZXh0OyAgICAvLyBvdXQKPiAgfSBRWExSZWxlYXNlSW5mbzsKPiAgCj4gLXR5cGVkZWYgc3Ry
-dWN0IFFYTFJlbGVhc2VJbmZvRXh0IHsKPiAtICAgIFFYTFJlbGVhc2VJbmZvICppbmZvOwo+IC0g
-ICAgdWludDMyX3QgZ3JvdXBfaWQ7Cj4gLX0gUVhMUmVsZWFzZUluZm9FeHQ7Cj4gLQo+ICB0eXBl
-ZGVmIHN0cnVjdCAgU1BJQ0VfQVRUUl9QQUNLRUQgUVhMRGF0YUNodW5rIHsKPiAgICAgIHVpbnQz
-Ml90IGRhdGFfc2l6ZTsKPiAgICAgIFFYTFBIWVNJQ0FMIHByZXZfY2h1bms7Cj4gQEAgLTc3OSw0
-ICs3NzQsOSBAQCB0eXBlZGVmIHN0cnVjdCBTUElDRV9BVFRSX1BBQ0tFRCBRWExNb25pdG9yc0Nv
-bmZpZyB7Cj4gIAo+ICAjaW5jbHVkZSA8c3BpY2UvZW5kLXBhY2tlZC5oPgo+ICAKPiArdHlwZWRl
-ZiBzdHJ1Y3QgUVhMUmVsZWFzZUluZm9FeHQgewo+ICsgICAgUVhMUmVsZWFzZUluZm8gKmluZm87
-Cj4gKyAgICB1aW50MzJfdCBncm91cF9pZDsKPiArfSBRWExSZWxlYXNlSW5mb0V4dDsKPiArCj4g
-ICNlbmRpZiAvKiBfSF9RWExfREVWICovCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9zcGljZS1kZXZlbA==
+T24gVGh1LCAxNiBNYXkgMjAxOSwgRnJlZGlhbm8gWmlnbGlvIHdyb3RlOgoKPiA+IAo+ID4gSXQg
+bWFrZXMgbm8gc2Vuc2UgdG8gZXhwZWN0IGF2ZXJhZ2UgZnJhbWUgc2l6ZXMgYW55d2hlcmUgY2xv
+c2UgdG8gMkdCLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBGcmFuY29pcyBHb3VnZXQgPGZnb3Vn
+ZXRAY29kZXdlYXZlcnMuY29tPgo+IAo+IFN1cmUgYnV0IDI1NiBrYiBhcmUgcG9zc2libGUuCgpF
+dmVuIG11bHRpcGxpZWQgYnkgdHdvIHRoYXQgZml0cyBwcmV0dHkgd2VsbCBpbiBhIDMyIHNpZ25l
+ZCBpbnRlZ2VyLgoKCi0tIApGcmFuY29pcyBHb3VnZXQgPGZnb3VnZXRAY29kZXdlYXZlcnMuY29t
+PgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1k
+ZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBz
+Oi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
