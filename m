@@ -1,30 +1,30 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D9C824513
-	for <lists+spice-devel@lfdr.de>; Tue, 21 May 2019 02:30:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DC7024514
+	for <lists+spice-devel@lfdr.de>; Tue, 21 May 2019 02:31:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 38A4F88FA4;
-	Tue, 21 May 2019 00:30:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 133A389269;
+	Tue, 21 May 2019 00:31:08 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3571088635
- for <spice-devel@lists.freedesktop.org>; Tue, 21 May 2019 00:30:31 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 53C1089269
+ for <spice-devel@lists.freedesktop.org>; Tue, 21 May 2019 00:31:06 +0000 (UTC)
 Received: from 82-64-54-218.subs.proxad.net ([82.64.54.218] helo=amboise)
  by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.89) (envelope-from <fgouget@free.fr>) id 1hSsgL-0007MF-QE
- for spice-devel@lists.freedesktop.org; Mon, 20 May 2019 19:31:15 -0500
+ (Exim 4.89) (envelope-from <fgouget@free.fr>) id 1hSsh3-0007Ml-Ib
+ for spice-devel@lists.freedesktop.org; Mon, 20 May 2019 19:31:50 -0500
 Received: from fgouget by amboise with local (Exim 4.92)
- (envelope-from <fgouget@amboise.dolphin>) id 1hSsfb-0001ku-LD
- for spice-devel@lists.freedesktop.org; Tue, 21 May 2019 02:30:19 +0200
-Date: Tue, 21 May 2019 02:30:19 +0200 (CEST)
+ (envelope-from <fgouget@amboise.dolphin>) id 1hSsgJ-0001wA-Ec
+ for spice-devel@lists.freedesktop.org; Tue, 21 May 2019 02:31:03 +0200
+Date: Tue, 21 May 2019 02:31:03 +0200 (CEST)
 From: Francois Gouget <fgouget@codeweavers.com>
 To: Spice devel <spice-devel@lists.freedesktop.org>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Message-Id: <E1hSsfb-0001ku-LD@amboise>
+Message-Id: <E1hSsgJ-0001wA-Ec@amboise>
 X-Spam-Score: -103.7
 X-Spam-Report: Spam detection software,
  running on the system "mail.codeweavers.com", 
@@ -32,12 +32,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: It makes no sense to expect average frame sizes anywhere
- close
- to 2GB. But then make sure to avoid arithmetic overflows. Signed-off-by:
- Francois Gouget <fgouget@codeweavers.com> --- In get_min_playback_delay()
- I opted for the cast approach as this makes what happens clearer. I deemed
- the assignment (uint32_t) unnecessary though. 
+ Content preview: Signed-off-by: Francois Gouget <fgouget@codeweavers.com> ---
+ server/gstreamer-encoder.c | 7 +++++++ 1 file changed, 7 insertions(+) diff
+ --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c index
+ bccbe0660..110d12981
+ 100644 --- a/server/gstreamer-encoder.c +++ b/server/gstreamer-encoder.c
+ @@ -404,6 +404,13 @@ static uin [...] 
  Content analysis details:   (-103.7 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -57,11 +57,11 @@ X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FnkGDZuWVMOBP4RgutaE7m4jCm5Dp5dlJUIche/llxk=; b=bhddeNFiLIeIQM6nloDd5lpGPv
- oNx0LuD4h5Lv0zHns0QKA7u9D/++0wEL93ZFXhMglclqotZvxa138Ngl7ujq+JCHl5iq5AE3NtK8I
- hb3FvDeXNGwW5zfouH4R3vxnRpyFB5kGX2yVsqzxbAZXYEpGK74gLdsMlLptxWeRoceA=;
-Subject: [Spice-devel] [spice v2] gstreamer-encoder: Return the average
- frame size as a 32 bit int
+ bh=rqhg5/MxkVb3tdhZA1+LfDYJPNV0GquTmnVx5y3/Gn4=; b=vcLtoH8gnR+H27lYWS/GxtDe02
+ uLGdHruIgM4yejIMDL7vo76POMi3UoZOtCAa/n0jceNcbIk8Wb97tKaRsdOm35E5GndOENhoMO2x9
+ 3e5+KrrPgeonzTgkvt71VHFk9fshKzfUkha/02vAm8D7KN/g85GBTHYRM0vT/8+aN5TM=;
+Subject: [Spice-devel] [spice] gstreamer-encoder: Document
+ get_maximum_frame_size()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,37 +78,22 @@ Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SXQgbWFrZXMgbm8gc2Vuc2UgdG8gZXhwZWN0IGF2ZXJhZ2UgZnJhbWUgc2l6ZXMgYW55d2hlcmUg
-Y2xvc2UgdG8gMkdCLgpCdXQgdGhlbiBtYWtlIHN1cmUgdG8gYXZvaWQgYXJpdGhtZXRpYyBvdmVy
-Zmxvd3MuCgpTaWduZWQtb2ZmLWJ5OiBGcmFuY29pcyBHb3VnZXQgPGZnb3VnZXRAY29kZXdlYXZl
-cnMuY29tPgotLS0KCkluIGdldF9taW5fcGxheWJhY2tfZGVsYXkoKSBJIG9wdGVkIGZvciB0aGUg
-Y2FzdCBhcHByb2FjaCBhcyB0aGlzIG1ha2VzIAp3aGF0IGhhcHBlbnMgY2xlYXJlci4gSSBkZWVt
-ZWQgdGhlIGFzc2lnbm1lbnQgKHVpbnQzMl90KSB1bm5lY2Vzc2FyeSAKdGhvdWdoLgoKIHNlcnZl
-ci9nc3RyZWFtZXItZW5jb2Rlci5jIHwgNiArKystLS0KIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2Vy
-dGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvc2VydmVyL2dzdHJlYW1lci1l
-bmNvZGVyLmMgYi9zZXJ2ZXIvZ3N0cmVhbWVyLWVuY29kZXIuYwppbmRleCAwZmYxMjAxYTkuLjAx
-MDFiMzZmYSAxMDA2NDQKLS0tIGEvc2VydmVyL2dzdHJlYW1lci1lbmNvZGVyLmMKKysrIGIvc2Vy
-dmVyL2dzdHJlYW1lci1lbmNvZGVyLmMKQEAgLTM5Niw3ICszOTYsNyBAQCBzdGF0aWMgdWludDY0
-X3QgZ2V0X2F2ZXJhZ2VfZW5jb2RpbmdfdGltZShTcGljZUdzdEVuY29kZXIgKmVuY29kZXIpCiAg
-ICAgcmV0dXJuIGVuY29kZXItPnN0YXRfZHVyYXRpb25fc3VtIC8gY291bnQ7CiB9CiAKLXN0YXRp
-YyB1aW50NjRfdCBnZXRfYXZlcmFnZV9mcmFtZV9zaXplKFNwaWNlR3N0RW5jb2RlciAqZW5jb2Rl
-cikKK3N0YXRpYyB1aW50MzJfdCBnZXRfYXZlcmFnZV9mcmFtZV9zaXplKFNwaWNlR3N0RW5jb2Rl
-ciAqZW5jb2RlcikKIHsKICAgICB1aW50MzJfdCBjb3VudCA9IGVuY29kZXItPmhpc3RvcnlfbGFz
-dCArCiAgICAgICAgIChlbmNvZGVyLT5oaXN0b3J5X2xhc3QgPCBlbmNvZGVyLT5zdGF0X2ZpcnN0
-ID8gU1BJQ0VfR1NUX0hJU1RPUllfU0laRSA6IDApIC0KQEAgLTUyMCw4ICs1MjAsOCBAQCBzdGF0
-aWMgdWludDMyX3QgZ2V0X21pbl9wbGF5YmFja19kZWxheShTcGljZUdzdEVuY29kZXIgKmVuY29k
-ZXIpCiAgICAgICogYW4gSSBmcmFtZSkgYW5kIGFuIGF2ZXJhZ2UgZnJhbWUuIFRoaXMgYWxzbyB0
-YWtlcyBpbnRvIGFjY291bnQgdGhlCiAgICAgICogZnJhbWVzIGRyb3BwZWQgYnkgdGhlIGVuY29k
-ZXIgYml0IHJhdGUgY29udHJvbC4KICAgICAgKi8KLSAgICB1aW50NjRfdCBzaXplID0gZ2V0X21h
-eGltdW1fZnJhbWVfc2l6ZShlbmNvZGVyKSArIGdldF9hdmVyYWdlX2ZyYW1lX3NpemUoZW5jb2Rl
-cik7Ci0gICAgdWludDMyX3Qgc2VuZF90aW1lID0gTVNFQ19QRVJfU0VDICogc2l6ZSAqIDggLyBl
-bmNvZGVyLT5iaXRfcmF0ZTsKKyAgICB1aW50MzJfdCBzaXplID0gZ2V0X21heGltdW1fZnJhbWVf
-c2l6ZShlbmNvZGVyKSArIGdldF9hdmVyYWdlX2ZyYW1lX3NpemUoZW5jb2Rlcik7CisgICAgdWlu
-dDMyX3Qgc2VuZF90aW1lID0gKCh1aW50NjRfdClNU0VDX1BFUl9TRUMgKiA4KSAqIHNpemUgLyBl
-bmNvZGVyLT5iaXRfcmF0ZTsKIAogICAgIC8qIEFsc28gZmFjdG9yIGluIHRoZSBuZXR3b3JrIGxh
-dGVuY3kgd2l0aCBhIG1hcmdpbiBmb3Igaml0dGVyLiAqLwogICAgIHVpbnQzMl90IG5ldF9sYXRl
-bmN5ID0gZ2V0X25ldHdvcmtfbGF0ZW5jeShlbmNvZGVyKSAqICgxLjAgKyBTUElDRV9HU1RfTEFU
-RU5DWV9NQVJHSU4pOwotLSAKMi4yMC4xCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9zcGljZS1kZXZlbA==
+U2lnbmVkLW9mZi1ieTogRnJhbmNvaXMgR291Z2V0IDxmZ291Z2V0QGNvZGV3ZWF2ZXJzLmNvbT4K
+LS0tCiBzZXJ2ZXIvZ3N0cmVhbWVyLWVuY29kZXIuYyB8IDcgKysrKysrKwogMSBmaWxlIGNoYW5n
+ZWQsIDcgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL3NlcnZlci9nc3RyZWFtZXItZW5jb2Rl
+ci5jIGIvc2VydmVyL2dzdHJlYW1lci1lbmNvZGVyLmMKaW5kZXggYmNjYmUwNjYwLi4xMTBkMTI5
+ODEgMTAwNjQ0Ci0tLSBhL3NlcnZlci9nc3RyZWFtZXItZW5jb2Rlci5jCisrKyBiL3NlcnZlci9n
+c3RyZWFtZXItZW5jb2Rlci5jCkBAIC00MDQsNiArNDA0LDEzIEBAIHN0YXRpYyB1aW50MzJfdCBn
+ZXRfYXZlcmFnZV9mcmFtZV9zaXplKFNwaWNlR3N0RW5jb2RlciAqZW5jb2RlcikKICAgICByZXR1
+cm4gZW5jb2Rlci0+c3RhdF9zaXplX3N1bSAvIGNvdW50OwogfQogCisvKiBMb29rIGZvciB0aGUg
+bGFyZ2VzdCBmcmFtZSBhbmQgc3RvcmUgaXQgaW4gc3RhdF9zaXplX21heCB0byByZWR1Y2UgaG93
+CisgKiBvZnRlbiB3ZSBoYXZlIHRvIHNjYW4gdGhlIGhpc3RvcnkgZm9yIHRoZSBsYXJnZXN0IGZy
+YW1lLgorICogVGhlbiBhbGwgd2UgbmVlZCB0byBrZWVwIHRoaW5ncyBjb25zaXN0ZW50IGlzIHRv
+OgorICogLSBVcGRhdGUgc3RhdF9zaXplX21heCB3aGVuIGFkZGluZyBhIGxhcmdlciBmcmFtZSB0
+byB0aGUgaGlzdG9yeS4KKyAqIC0gUmVzZXQgc3RhdF9zaXplX21heCB0byB6ZXJvIHdoZW4gdGhl
+IGxhcmdlc3QgZnJhbWUgZmFsbHMgb3V0IG9mCisgKiAgIHRoZSBoaXN0b3J5LgorICovCiBzdGF0
+aWMgdWludDMyX3QgZ2V0X21heGltdW1fZnJhbWVfc2l6ZShTcGljZUdzdEVuY29kZXIgKmVuY29k
+ZXIpCiB7CiAgICAgaWYgKGVuY29kZXItPnN0YXRfc2l6ZV9tYXggPT0gMCkgewotLSAKMi4yMC4x
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRl
+dmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6
+Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
