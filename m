@@ -2,52 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEA8F279F1
-	for <lists+spice-devel@lfdr.de>; Thu, 23 May 2019 12:01:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73B2327B40
+	for <lists+spice-devel@lfdr.de>; Thu, 23 May 2019 13:00:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 57A5989D7B;
-	Thu, 23 May 2019 10:01:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A2C8289D9B;
+	Thu, 23 May 2019 11:00:17 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
- [209.85.221.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BC71189D7B
- for <spice-devel@lists.freedesktop.org>; Thu, 23 May 2019 10:01:16 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id r7so5535289wrr.13
- for <spice-devel@lists.freedesktop.org>; Thu, 23 May 2019 03:01:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=mMD1zGZfCsgpgdH1GnoMocTMUPggjV3mpEo2xKsPCJo=;
- b=pEaKgpfG6e+pY5y8OYJVelbtaRrpcrOEOF+YZjxNlcg60XXWf3FyDnwNikRLuwFBOl
- V7nUnCgQnHARg+2rRMRrQ4JlIxczfgsc4K9umcZ8s5wlNtxHMI4+Tqdok3jTk+4VKWQF
- 3a+vpfD8YLgXe8N26lZcEk5t7978rdZdXvhRm91TvyG+kyVvUxgCWDyKuGtWoQCswEJO
- YAF244N3GdLMzaYNvDmA4AbIC9fupxmVK99jebFklZ0+njTOQe/6OcKX1g65CnDcsfWw
- aukwqdb4t+Yj/AyBva/sU4SLI9jFtptiLLckNatRuWtFBsL1gcxUNfS+OWBIKoe8TbNR
- RkMQ==
-X-Gm-Message-State: APjAAAVyW0kMEY4IQE5PtNuwbdaWaWw63+Zct1j+AKZBcD3ACgh2o+ON
- wmXU8Z/dc8Q50Kwwh9mqL3G0aqZVV2w=
-X-Google-Smtp-Source: APXvYqxfCO8A03NHmp1LtRXYSvat5X+364G44qppI4sImviSqOeiP1XqS3DjVntV0YEkawd19Dgf2w==
-X-Received: by 2002:a5d:4e50:: with SMTP id r16mr20546236wrt.197.1558605675035; 
- Thu, 23 May 2019 03:01:15 -0700 (PDT)
-Received: from dhcp-4-103.tlv.redhat.com (bzq-82-81-161-50.red.bezeqint.net.
- [82.81.161.50])
- by smtp.gmail.com with ESMTPSA id j190sm9625537wmb.19.2019.05.23.03.01.13
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Thu, 23 May 2019 03:01:14 -0700 (PDT)
-To: =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@gmail.com>
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E5C0D89D9B
+ for <spice-devel@lists.freedesktop.org>; Thu, 23 May 2019 11:00:16 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 5D0D5307D9CE;
+ Thu, 23 May 2019 11:00:16 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.168])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 05B617D672;
+ Thu, 23 May 2019 11:00:15 +0000 (UTC)
+Date: Thu, 23 May 2019 11:00:15 +0000
+From: Victor Toso <victortoso@redhat.com>
+To: Snir Sheriber <ssheribe@redhat.com>
+Message-ID: <20190523110015.wxmeokphdufp6c25@toolbox>
 References: <20190317152830.5012-1-ssheribe@redhat.com>
  <CAJ+F1CL0zGYtr2wHab=YP-a_FBChZvsMqiseNwmCXjoiCHLgEw@mail.gmail.com>
-From: Snir Sheriber <ssheribe@redhat.com>
-Message-ID: <e6ae8724-50ea-f580-745b-5a15160a6ab5@redhat.com>
-Date: Thu, 23 May 2019 13:01:12 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+ <e6ae8724-50ea-f580-745b-5a15160a6ab5@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAJ+F1CL0zGYtr2wHab=YP-a_FBChZvsMqiseNwmCXjoiCHLgEw@mail.gmail.com>
-Content-Language: en-US
+In-Reply-To: <e6ae8724-50ea-f580-745b-5a15160a6ab5@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.48]); Thu, 23 May 2019 11:00:16 +0000 (UTC)
 Subject: Re: [Spice-devel] [PATCH v2 spice-gtk] Adjust to window scaling
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -61,75 +47,182 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1713890917=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGksCgpPbiA1LzIyLzE5IDY6MDIgUE0sIE1hcmMtQW5kcsOpIEx1cmVhdSB3cm90ZToKPiBIaQo+
-Cj4gT24gU3VuLCBNYXIgMTcsIDIwMTkgYXQgNDoyOCBQTSBTbmlyIFNoZXJpYmVyIDxzc2hlcmli
-ZUByZWRoYXQuY29tPiB3cm90ZToKPj4gV2hlbiBHREtfU0NBTEUgaXMgIT0gMSBhbmQgZWdsIGlz
-IHVzZWQsIHRoZSBpbWFnZSBwcmVzZW50ZWQgZG9lcyBub3QKPj4gZml0IHRvIHRoZSB3aW5kb3cg
-KHNjYWxlIG9mIDIgaXMgb2Z0ZW4gdXNlZCB3aXRoIGhpZHBpIG1vbml0b3JzKS4KPj4gVXN1YWxs
-eSB0aGlzIGlzIG5vdCBhIHByb2JsZW0gc2luY2UgYWxsIGNvbXBvbmVudHMgYXJlIGFkanVzdGVk
-IGJ5Cj4+IGdkay9ndGsgYnV0IHdpdGggZWdsLCBwaXhlbC1iYXNlZCBkYXRhIGlzIG5vdCBiZWlu
-ZyBzY2FsZWQuIEluIHRoaXMKPj4gY2FzZSB3aW5kb3cncyBzY2FsZSB2YWx1ZSBjYW4gYmUgdXNl
-ZCBpbiBvcmRlciB0byBkZXRlcm1pbmUgd2hldGhlcgo+PiB0byB1c2UgYSBwaXhlbCByZXNvdXJj
-ZSB3aXRoIGhpZ2hlciByZXNvbHV0aW9uIGRhdGEuCj4+Cj4+IEluIG9yZGVyIHRvIHJlcHJvZHVj
-ZSB0aGUgcHJvYmxlbSBzZXQgc3BpY2Ugd2l0aCB2aXJnbC9JbnRlbC12R1BVCj4+IGFuZCBydW4g
-c3BpY2UtZ3RrIHdpdGggR0RLX1NDQUxFPTIKPj4gLS0tCj4+IENoYW5nZXMgZnJvbSB2MToKPj4g
-LWNvbW1pdCBtc2cKPj4gLXJlcGxhY2UgdmFyIG5hbWluZyAod3Mgd2l0aCB3aW5fc2NhbGUpCj4+
-Cj4+Cj4+IFRoaXMgcGF0Y2ggaXMga2luZCBvZiBSRkMsIGl0IGZpeGVzIHRoZSBpc3N1ZSwgYnV0
-IGl0J3MgYSBiaXQgaGFja3kKPj4gYW5kIHNwZWNpZmljLiBJIGRpZG4ndCBjb21lIGFjcm9zcyBv
-dGhlciBzY2FsZSBpc3N1ZXMgYnV0IGl0IGlzIGxpa2VseQo+PiB0aGF0IG1vcmUgb2YgdGhlc2Ug
-ZXhpc3QgYW5kIGJldHRlciBhbmQgZ2VuZXJpYyBmaXggaXMgbmVlZGVkLgo+Pgo+PiAtLS0KPj4g
-ICBzcmMvc3BpY2Utd2lkZ2V0LWVnbC5jICB8IDE1ICsrKysrKysrKysrKystLQo+PiAgIHNyYy9z
-cGljZS13aWRnZXQtcHJpdi5oIHwgIDEgKwo+PiAgIDIgZmlsZXMgY2hhbmdlZCwgMTQgaW5zZXJ0
-aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBhL3NyYy9zcGljZS13aWRn
-ZXQtZWdsLmMgYi9zcmMvc3BpY2Utd2lkZ2V0LWVnbC5jCj4+IGluZGV4IDQzZmNjZDcuLjYwMGM4
-N2EgMTAwNjQ0Cj4+IC0tLSBhL3NyYy9zcGljZS13aWRnZXQtZWdsLmMKPj4gKysrIGIvc3JjL3Nw
-aWNlLXdpZGdldC1lZ2wuYwo+PiBAQCAtMzI2LDYgKzMyNiw4IEBAIHN0YXRpYyBnYm9vbGVhbiBz
-cGljZV93aWRnZXRfaW5pdF9lZ2xfd2luKFNwaWNlRGlzcGxheSAqZGlzcGxheSwgR2RrV2luZG93
-ICp3aW4sCj4+ICAgICAgIGlmIChkLT5lZ2wuc3VyZmFjZSkKPj4gICAgICAgICAgIHJldHVybiBU
-UlVFOwo+Pgo+PiArICAgIGQtPmVnbC5zY2FsZSA9IGdka193aW5kb3dfZ2V0X3NjYWxlX2ZhY3Rv
-cih3aW4pOwo+IFdoeSBub3QgdXNlIGd0a193aWRnZXRfZ2V0X3NjYWxlX2ZhY3RvcigpIGRpcmVj
-dGx5IGZyb20KPiBzcGljZV9lZ2xfcmVzaXplX2Rpc3BsYXk/CgoKVGhlcmUgaXMgbm8gc3BlY2lh
-bCBvYmplY3Rpb24gZm9yIHRoYXQsIGp1c3QgYmVjYXVzZSBpIGFkanVzdCBzY2FsaW5nIAphbHNv
-IGluIHNwaWNlX2VnbF91cGRhdGVfZGlzcGxheQphbmQgaSBhc3N1bWVkIHNjYWxpbmcgaXMgbm90
-IGJlaW5nIGNoYW5nZWQgZnJlcXVlbnRseS4KCgpTbmlyLgoKPj4gKwo+PiAgICNpZmRlZiBHREtf
-V0lORE9XSU5HX1gxMQo+PiAgICAgICBpZiAoR0RLX0lTX1gxMV9XSU5ET1cod2luKSkgewo+PiAg
-ICAgICAgICAgbmF0aXZlID0gKEVHTE5hdGl2ZVdpbmRvd1R5cGUpR0RLX1dJTkRPV19YSUQod2lu
-KTsKPj4gQEAgLTQzMSwxNSArNDMzLDE3IEBAIHZvaWQgc3BpY2VfZWdsX3Jlc2l6ZV9kaXNwbGF5
-KFNwaWNlRGlzcGxheSAqZGlzcGxheSwgaW50IHcsIGludCBoKQo+PiAgIHsKPj4gICAgICAgU3Bp
-Y2VEaXNwbGF5UHJpdmF0ZSAqZCA9IGRpc3BsYXktPnByaXY7Cj4+ICAgICAgIGludCBwcm9nOwo+
-PiArICAgIGdpbnQgd2luX3NjYWxlOwo+Pgo+PiAgICAgICBpZiAoIWdsX21ha2VfY3VycmVudChk
-aXNwbGF5LCBOVUxMKSkKPj4gICAgICAgICAgIHJldHVybjsKPj4KPj4gKyAgICB3aW5fc2NhbGUg
-PSBkLT5lZ2wuc2NhbGU7Cj4+ICAgICAgIGdsR2V0SW50ZWdlcnYoR0xfQ1VSUkVOVF9QUk9HUkFN
-LCAmcHJvZyk7Cj4+Cj4+ICAgICAgIGdsVXNlUHJvZ3JhbShkLT5lZ2wucHJvZyk7Cj4+IC0gICAg
-YXBwbHlfb3J0aG8oZC0+ZWdsLm1wcm9qLCAwLCB3LCAwLCBoLCAtMSwgMSk7Cj4+IC0gICAgZ2xW
-aWV3cG9ydCgwLCAwLCB3LCBoKTsKPj4gKyAgICBhcHBseV9vcnRobyhkLT5lZ2wubXByb2osIDAs
-IHcgKiB3aW5fc2NhbGUgLCAwLCBoICogd2luX3NjYWxlLCAtMSwgMSk7Cj4+ICsgICAgZ2xWaWV3
-cG9ydCgwLCAwLCB3ICogd2luX3NjYWxlLCBoICogd2luX3NjYWxlKTsKPj4KPj4gICAgICAgaWYg
-KGQtPnJlYWR5KQo+PiAgICAgICAgICAgc3BpY2VfZWdsX3VwZGF0ZV9kaXNwbGF5KGRpc3BsYXkp
-Owo+PiBAQCAtNTU5LDYgKzU2MywxMyBAQCB2b2lkIHNwaWNlX2VnbF91cGRhdGVfZGlzcGxheShT
-cGljZURpc3BsYXkgKmRpc3BsYXkpCj4+Cj4+ICAgICAgIHNwaWNlX2Rpc3BsYXlfZ2V0X3NjYWxp
-bmcoZGlzcGxheSwgJnMsICZ4LCAmeSwgJncsICZoKTsKPj4KPj4gKyAgICAvLyBBZGp1c3QgdG8g
-Z2RrIHNjYWxlCj4+ICsgICAgcyAqPSBkLT5lZ2wuc2NhbGU7Cj4+ICsgICAgeCAqPSBkLT5lZ2wu
-c2NhbGU7Cj4+ICsgICAgeSAqPSBkLT5lZ2wuc2NhbGU7Cj4+ICsgICAgdyAqPSBkLT5lZ2wuc2Nh
-bGU7Cj4+ICsgICAgaCAqPSBkLT5lZ2wuc2NhbGU7Cj4+ICsKPj4gICAgICAgZ2xDbGVhckNvbG9y
-KDAuMGYsIDAuMGYsIDAuMGYsIDAuMGYpOwo+PiAgICAgICBnbENsZWFyKEdMX0NPTE9SX0JVRkZF
-Ul9CSVQpOwo+Pgo+PiBkaWZmIC0tZ2l0IGEvc3JjL3NwaWNlLXdpZGdldC1wcml2LmggYi9zcmMv
-c3BpY2Utd2lkZ2V0LXByaXYuaAo+PiBpbmRleCA2NWViNDA0Li44ZjExMGFjIDEwMDY0NAo+PiAt
-LS0gYS9zcmMvc3BpY2Utd2lkZ2V0LXByaXYuaAo+PiArKysgYi9zcmMvc3BpY2Utd2lkZ2V0LXBy
-aXYuaAo+PiBAQCAtMTQ5LDYgKzE0OSw3IEBAIHN0cnVjdCBfU3BpY2VEaXNwbGF5UHJpdmF0ZSB7
-Cj4+ICAgICAgICAgICBFR0xJbWFnZUtIUiAgICAgICAgIGltYWdlOwo+PiAgICAgICAgICAgZ2Jv
-b2xlYW4gICAgICAgICAgICBjYWxsX2RyYXdfZG9uZTsKPj4gICAgICAgICAgIFNwaWNlR2xTY2Fu
-b3V0ICAgICAgc2Nhbm91dDsKPj4gKyAgICAgICAgZ2ludCAgICAgICAgICAgICAgICBzY2FsZTsK
-Pj4gICAgICAgfSBlZ2w7Cj4+ICAgI2VuZGlmIC8vIEhBVkVfRUdMCj4+ICAgICAgIGRvdWJsZSBz
-Y3JvbGxfZGVsdGFfeTsKPj4gLS0KPj4gMi4xOS4xCj4+Cj4+IF9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCj4+IFNwaWNlLWRldmVsIG1haWxpbmcgbGlzdAo+
-PiBTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPj4gaHR0cHM6Ly9saXN0cy5mcmVl
-ZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo+Cj4KX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBs
-aXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
-ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1713890917==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="lrrc62fbgdyldcwk"
+Content-Disposition: inline
+
+
+--lrrc62fbgdyldcwk
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Thu, May 23, 2019 at 01:01:12PM +0300, Snir Sheriber wrote:
+> Hi,
+>=20
+> On 5/22/19 6:02 PM, Marc-Andr=E9 Lureau wrote:
+> > Hi
+> >=20
+> > On Sun, Mar 17, 2019 at 4:28 PM Snir Sheriber <ssheribe@redhat.com> wro=
+te:
+> > > When GDK_SCALE is !=3D 1 and egl is used, the image presented does not
+> > > fit to the window (scale of 2 is often used with hidpi monitors).
+> > > Usually this is not a problem since all components are adjusted by
+> > > gdk/gtk but with egl, pixel-based data is not being scaled. In this
+> > > case window's scale value can be used in order to determine whether
+> > > to use a pixel resource with higher resolution data.
+> > >=20
+> > > In order to reproduce the problem set spice with virgl/Intel-vGPU
+> > > and run spice-gtk with GDK_SCALE=3D2
+> > > ---
+> > > Changes from v1:
+> > > -commit msg
+> > > -replace var naming (ws with win_scale)
+> > >=20
+> > >=20
+> > > This patch is kind of RFC, it fixes the issue, but it's a bit hacky
+> > > and specific. I didn't come across other scale issues but it is likely
+> > > that more of these exist and better and generic fix is needed.
+> > >=20
+> > > ---
+> > >   src/spice-widget-egl.c  | 15 +++++++++++++--
+> > >   src/spice-widget-priv.h |  1 +
+> > >   2 files changed, 14 insertions(+), 2 deletions(-)
+> > >=20
+> > > diff --git a/src/spice-widget-egl.c b/src/spice-widget-egl.c
+> > > index 43fccd7..600c87a 100644
+> > > --- a/src/spice-widget-egl.c
+> > > +++ b/src/spice-widget-egl.c
+> > > @@ -326,6 +326,8 @@ static gboolean spice_widget_init_egl_win(SpiceDi=
+splay *display, GdkWindow *win,
+> > >       if (d->egl.surface)
+> > >           return TRUE;
+> > >=20
+> > > +    d->egl.scale =3D gdk_window_get_scale_factor(win);
+> > Why not use gtk_widget_get_scale_factor() directly from
+> > spice_egl_resize_display?
+>=20
+> There is no special objection for that, just because i adjust
+> scaling also in spice_egl_update_display and i assumed scaling
+> is not being changed frequently.
+
+But it can be changed, right? In that case, d->egl.scale would
+not have the right value in spice_egl_resize_display()
+
+Note that user tested that this patches fixes so I'd add that to
+commit log:
+
+    https://gitlab.freedesktop.org/spice/spice-gtk/issues/99
+
+Cheers,
+
+> Snir.
+>=20
+> > > +
+> > >   #ifdef GDK_WINDOWING_X11
+> > >       if (GDK_IS_X11_WINDOW(win)) {
+> > >           native =3D (EGLNativeWindowType)GDK_WINDOW_XID(win);
+> > > @@ -431,15 +433,17 @@ void spice_egl_resize_display(SpiceDisplay *dis=
+play, int w, int h)
+> > >   {
+> > >       SpiceDisplayPrivate *d =3D display->priv;
+> > >       int prog;
+> > > +    gint win_scale;
+> > >=20
+> > >       if (!gl_make_current(display, NULL))
+> > >           return;
+> > >=20
+> > > +    win_scale =3D d->egl.scale;
+> > >       glGetIntegerv(GL_CURRENT_PROGRAM, &prog);
+> > >=20
+> > >       glUseProgram(d->egl.prog);
+> > > -    apply_ortho(d->egl.mproj, 0, w, 0, h, -1, 1);
+> > > -    glViewport(0, 0, w, h);
+> > > +    apply_ortho(d->egl.mproj, 0, w * win_scale , 0, h * win_scale, -=
+1, 1);
+> > > +    glViewport(0, 0, w * win_scale, h * win_scale);
+> > >=20
+> > >       if (d->ready)
+> > >           spice_egl_update_display(display);
+> > > @@ -559,6 +563,13 @@ void spice_egl_update_display(SpiceDisplay *disp=
+lay)
+> > >=20
+> > >       spice_display_get_scaling(display, &s, &x, &y, &w, &h);
+> > >=20
+> > > +    // Adjust to gdk scale
+> > > +    s *=3D d->egl.scale;
+> > > +    x *=3D d->egl.scale;
+> > > +    y *=3D d->egl.scale;
+> > > +    w *=3D d->egl.scale;
+> > > +    h *=3D d->egl.scale;
+> > > +
+> > >       glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+> > >       glClear(GL_COLOR_BUFFER_BIT);
+> > >=20
+> > > diff --git a/src/spice-widget-priv.h b/src/spice-widget-priv.h
+> > > index 65eb404..8f110ac 100644
+> > > --- a/src/spice-widget-priv.h
+> > > +++ b/src/spice-widget-priv.h
+> > > @@ -149,6 +149,7 @@ struct _SpiceDisplayPrivate {
+> > >           EGLImageKHR         image;
+> > >           gboolean            call_draw_done;
+> > >           SpiceGlScanout      scanout;
+> > > +        gint                scale;
+> > >       } egl;
+> > >   #endif // HAVE_EGL
+> > >       double scroll_delta_y;
+> > > --
+> > > 2.19.1
+> > >=20
+> > > _______________________________________________
+> > > Spice-devel mailing list
+> > > Spice-devel@lists.freedesktop.org
+> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> >=20
+> >=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--lrrc62fbgdyldcwk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAlzmfT8ACgkQl9kSPeN6
+SE9IsQ/+M2BYAX+fo/xDnggGZ7T3x/YxuMOAwOwI61mFNiKLyI3UsT4iwTb4T8WC
+75dmVXa4L06LbaTrXJOLXcr90EaRmxIzfBNm1dnlW+0PFgQAnvjBZrHhzFensKww
+S0hIk4rjx1PMmOFF1BH8mlaZERxEM8f1FnEOCKNfzzui88NB9u+RHNo6NoJy3Zog
+9TJvbHTN6iud7KGTi8StdEci1sLzPkhpxrQ7IzjIXbTrLLf7jiw+cvzPLvnz9PVR
+H44KT4bDyRuWK44ESfeFfpALl9Uf/H5k1slsXesh2qTLVl+52z05fDlOi4OljrcL
+7u359xeEpiYpHV02spJ9amqvUZ5IHkfZm1VndxhasdPFR8/1AJaHKggaNLwq7MYQ
+XE1Ho3qBOGSypcj2q8OebJGp2rr2AViBod36opKUJTQByjwmHP9COyZcybSKktXF
+ABnt7Tmom07USf1bIfxd+zbmNtR1hYsKPTrK9fTX1JBkQcf6RXEF6y0nq2jMhc2q
+fP5QcRFbg8wYX4qVANMwYVPQCvaW8F6yeneK4fb69frlp+VPiMv07wxM7Udf9zIh
+J3PPC7hIbmW2hxA3Y50AJE0UMkBzNwAlWl9hII449DV0a71cbMFbfGJKMHkaFuxE
+dM+LnKA5/NL79f8fNlKIlNtFt/bnWn4OtkwipJvt41D/oo0qCFM=
+=WpQV
+-----END PGP SIGNATURE-----
+
+--lrrc62fbgdyldcwk--
+
+--===============1713890917==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1713890917==--
