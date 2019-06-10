@@ -2,40 +2,36 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15A833B463
-	for <lists+spice-devel@lfdr.de>; Mon, 10 Jun 2019 14:13:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1AB43B466
+	for <lists+spice-devel@lfdr.de>; Mon, 10 Jun 2019 14:15:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A594989134;
-	Mon, 10 Jun 2019 12:13:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B30FC89134;
+	Mon, 10 Jun 2019 12:15:30 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BFA8189134
- for <spice-devel@lists.freedesktop.org>; Mon, 10 Jun 2019 12:13:03 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8987189134
+ for <spice-devel@lists.freedesktop.org>; Mon, 10 Jun 2019 12:15:29 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 671B931628E4;
- Mon, 10 Jun 2019 12:13:03 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.168])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0E12D60141;
- Mon, 10 Jun 2019 12:13:02 +0000 (UTC)
-Date: Mon, 10 Jun 2019 12:13:02 +0000
+ by mx1.redhat.com (Postfix) with ESMTPS id 35541B0ABB
+ for <spice-devel@lists.freedesktop.org>; Mon, 10 Jun 2019 12:15:29 +0000 (UTC)
+Received: from toolbox.mxp.redhat.com (unknown [10.32.181.168])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B1C045C219
+ for <spice-devel@lists.freedesktop.org>; Mon, 10 Jun 2019 12:15:28 +0000 (UTC)
 From: Victor Toso <victortoso@redhat.com>
-To: Snir Sheriber <ssheribe@redhat.com>
-Message-ID: <20190610121302.akvwbwwch6bkby7p@toolbox>
-References: <8f0d6136-c5a4-b541-46bf-6c2280eb302d@redhat.com>
- <20190527080409.3430-1-ssheribe@redhat.com>
- <CAJ+F1CKvO3T+VjG7D3=0EQ827zhBRBY4R+fK+gGQQb98BwiR2Q@mail.gmail.com>
- <53edc2b2-9233-bfd4-f5f7-d304204a6888@redhat.com>
+To: spice-devel@lists.freedesktop.org
+Date: Mon, 10 Jun 2019 12:15:27 +0000
+Message-Id: <20190610121527.24095-1-victortoso@redhat.com>
+In-Reply-To: <20190527080409.3430-1-ssheribe@redhat.com>
+References: <20190527080409.3430-1-ssheribe@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <53edc2b2-9233-bfd4-f5f7-d304204a6888@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.41]); Mon, 10 Jun 2019 12:13:03 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH v3 spice-gtk] Adjust to window scaling
+ (mx1.redhat.com [10.5.110.38]); Mon, 10 Jun 2019 12:15:29 +0000 (UTC)
+Subject: [Spice-devel] [spice-gtk v4] Adjust to window scaling
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,246 +43,102 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1700136299=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1700136299==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ni3kowa23w3ftfvs"
-Content-Disposition: inline
-
-
---ni3kowa23w3ftfvs
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Sun, Jun 02, 2019 at 03:55:28PM +0300, Snir Sheriber wrote:
-> Hi,
->=20
->=20
-> On 5/27/19 8:29 PM, Marc-Andr=E9 Lureau wrote:
-> > Hi
-> >=20
-> > On Mon, May 27, 2019 at 10:04 AM Snir Sheriber <ssheribe@redhat.com> wr=
-ote:
-> > > When GDK_SCALE is !=3D 1 and egl is used, the image presented does not
-> > > fit to the window (scale of 2 is often used with hidpi monitors).
-> > > Usually this is not a problem since all components are adjusted by
-> > > gdk/gtk but with egl, pixel-based data is not being scaled. In this
-> > > case window's scale value can be used in order to determine whether
-> > > to use a pixel resource with higher resolution data.
-> > >=20
-> > > In order to reproduce the problem set spice with virgl/Intel-vGPU
-> > > and run spice-gtk with GDK_SCALE=3D2
-> > >=20
-> > > This issue was also reported at freedesktop gitlab repo:
-> > > https://gitlab.freedesktop.org/spice/spice-gtk/issues/99
-> > > ---
-> > >   src/spice-widget-egl.c |  8 ++++----
-> > >   src/spice-widget.c     | 31 +++++++++++++++++++++++--------
-> > >   2 files changed, 27 insertions(+), 12 deletions(-)
-> > >=20
-> > > diff --git a/src/spice-widget-egl.c b/src/spice-widget-egl.c
-> > > index 43fccd7..f688fd2 100644
-> > > --- a/src/spice-widget-egl.c
-> > > +++ b/src/spice-widget-egl.c
-> > > @@ -360,9 +360,9 @@ gboolean spice_egl_realize_display(SpiceDisplay *=
-display, GdkWindow *win, GError
-> > >       DISPLAY_DEBUG(display, "egl realize");
-> > >       if (!spice_widget_init_egl_win(display, win, err))
-> > >           return FALSE;
-> > > -
-> > > -    spice_egl_resize_display(display, gdk_window_get_width(win),
-> > > -                             gdk_window_get_height(win));
-> > > +    gint gdk_scale =3D gdk_window_get_scale_factor(win);
-> > Here too, I suppose gtk_widget_get_scale_factor() would be better.
->=20
->=20
-> I used this for consistency although I'm still not sure which one is more
-> consistent :P .
-> If I'm using gtk_* would make sense to get also the sizes with gtk_*
-> function but then
-> passing the GdkWindow also seems a bit unnecessary..
->=20
-> Another version is attached
-
-It is hard to comment on attached files so I'll resend.
->=20
->=20
-> >=20
-> > > +    spice_egl_resize_display(display, gdk_window_get_width(win) * gd=
-k_scale,
-> > > +                             gdk_window_get_height(win) * gdk_scale);
-> > >=20
-> > >       return TRUE;
-> > >   }
-> > > @@ -427,7 +427,7 @@ void spice_egl_unrealize_display(SpiceDisplay *di=
-splay)
-> > >   }
-> > >=20
-> > >   G_GNUC_INTERNAL
-> > > -void spice_egl_resize_display(SpiceDisplay *display, int w, int h)
-> > > +void spice_egl_resize_display(SpiceDisplay *display, int w, int h) /=
-/ w and h should be adjusted to gdk scaling
-> > >   {
-> > >       SpiceDisplayPrivate *d =3D display->priv;
-> > >       int prog;
-> > > diff --git a/src/spice-widget.c b/src/spice-widget.c
-> > > index 1f2a154..c475c39 100644
-> > > --- a/src/spice-widget.c
-> > > +++ b/src/spice-widget.c
-> > > @@ -1382,7 +1382,8 @@ static void set_egl_enabled(SpiceDisplay *displ=
-ay, bool enabled)
-> > >       }
-> > >=20
-> > >       if (enabled && d->egl.context_ready) {
-> > > -        spice_egl_resize_display(display, d->ww, d->wh);
-> > > +        gint gdk_scale =3D gtk_widget_get_scale_factor(GTK_WIDGET(di=
-splay));
-> > > +        spice_egl_resize_display(display, d->ww * gdk_scale, d->wh *=
- gdk_scale);
-> > >       }
-> > >=20
-> > >       d->egl.enabled =3D enabled;
-> > > @@ -1978,11 +1979,16 @@ static void transform_input(SpiceDisplay *dis=
-play,
-> > >       SpiceDisplayPrivate *d =3D display->priv;
-> > >       int display_x, display_y, display_w, display_h;
-> > >       double is;
-> > > +    gint gdk_scale =3D 1;
-> > >=20
-> > >       spice_display_get_scaling(display, NULL,
-> > >                                 &display_x, &display_y,
-> > >                                 &display_w, &display_h);
-> > > -
-> > > +#if HAVE_EGL
-> > > +        if (egl_enabled(d)) {
-> > > +            gdk_scale =3D gtk_widget_get_scale_factor(GTK_WIDGET(dis=
-play));
-> > > +        }
-> > > +#endif
-> > >       /* For input we need a different scaling factor in order to
-> > >          be able to reach the full width of a display. For instance, =
-consider
-> > >          a display of 100 pixels showing in a window 10 pixels wide. =
-The normal
-> > > @@ -1998,7 +2004,7 @@ static void transform_input(SpiceDisplay *displ=
-ay,
-> > >          coordinates in the inverse direction (window -> display) as =
-the fb size
-> > >          (display -> window).
-> > >       */
-> > > -    is =3D (double)(d->area.width-1) / (double)(display_w-1);
-> > > +    is =3D ((double)(d->area.width-1) / (double)(display_w-1)) * gdk=
-_scale;
-> > >=20
-> > >       window_x -=3D display_x;
-> > >       window_y -=3D display_y;
-> > > @@ -2183,8 +2189,10 @@ static void size_allocate(GtkWidget *widget, G=
-tkAllocation *conf, gpointer data)
-> > >           d->wh =3D conf->height;
-> > >           recalc_geometry(widget);
-> > >   #if HAVE_EGL
-> > > -        if (egl_enabled(d))
-> > > -            spice_egl_resize_display(display, conf->width, conf->hei=
-ght);
-> > > +        if (egl_enabled(d)) {
-> > > +            gint gdk_scale =3D gtk_widget_get_scale_factor(widget);
-> > > +            spice_egl_resize_display(display, conf->width * gdk_scal=
-e, conf->height * gdk_scale);
-> > > +        }
-> > >   #endif
-> > >       }
-> > >=20
-> > > @@ -2942,10 +2950,16 @@ void spice_display_get_scaling(SpiceDisplay *=
-display,
-> > >       int ww, wh;
-> > >       int x, y, w, h;
-> > >       double s;
-> > > +    gint gdk_scale =3D 1;
-> > >=20
-> > >       if (gtk_widget_get_realized (GTK_WIDGET(display))) {
-> > > -        ww =3D gtk_widget_get_allocated_width(GTK_WIDGET(display));
-> > > -        wh =3D gtk_widget_get_allocated_height(GTK_WIDGET(display));
-> > > +#if HAVE_EGL
-> > > +        if (egl_enabled(d)) {
-> > > +            gdk_scale =3D gtk_widget_get_scale_factor(GTK_WIDGET(dis=
-play));
-> > > +        }
-> > > +#endif
-> > > +        ww =3D gtk_widget_get_allocated_width(GTK_WIDGET(display)) *=
- gdk_scale;
-> > > +        wh =3D gtk_widget_get_allocated_height(GTK_WIDGET(display)) =
-* gdk_scale;
-> > >       } else {
-> > >           ww =3D fbw;
-> > >           wh =3D fbh;
-> > > @@ -3091,7 +3105,8 @@ void spice_display_widget_gl_scanout(SpiceDispl=
-ay *display)
-> > >               g_clear_error(&err);
-> > >           }
-> > >=20
-> > > -        spice_egl_resize_display(display, d->ww, d->wh);
-> > > +        gint gdk_scale =3D gtk_widget_get_scale_factor(GTK_WIDGET(di=
-splay));
-> > > +        spice_egl_resize_display(display, d->ww * gdk_scale, d->wh *=
- gdk_scale);
-> > >       }
-> > >   #endif
-> > >=20
-> > > --
-> > > 2.21.0
-> > >=20
-> > > _______________________________________________
-> > > Spice-devel mailing list
-> > > Spice-devel@lists.freedesktop.org
-> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
-> >=20
-> >=20
-
-
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
-
---ni3kowa23w3ftfvs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAlz+SU4ACgkQl9kSPeN6
-SE+qQBAAqc0vcm94NepBEtI55O23FvFCZMZZ5Ftov1hCqa31RY0mLZvamomXqhBu
-qvO2oF8fbVLem3XyAsVlHhTBqTtWyCh/tjKDgofd+JckQoP5EzR1Yl2hq1Esec7E
-WZ0kLAhnUOZvcqjWZOzlolH9Au6LHDgUmxJHYe/VWKjR84F90SLdL+C2vNAAai8A
-2HE5kVYG5TW1yqlu87bLc16Oy+09rutsmdz3sReXkeRvQMFCQEoikSMca2JsKK+3
-n1qbNlVjsEiEPxbBLbCquFRxnNNqPJD5Rc+DXR1Iag2nxeDdnnfJhJBxGDyag6/2
-sOVuwFtT8zGEnQM0mwbuRS1XF6KTGqKQj2W7xGeIGNrfmcPHGohkGJk2/bepSjaD
-BjCwUT7CXyRFU79dPed3tjEaDSbkqNz/3uTCky9KVwwJ5mb7/IamZMb67uctN2Ii
-1r65EU/O0o4MsuTzjtYQo1HuoFaXhu7hafBfrYin5Nwj3WjIp5YdRQyhtvl3n3pl
-iz8649U96Op2P65nZAtZdebeUvxICHtlacwN61hjmTi0MTOnrjATtwm+758Put9T
-grc2DAq2gPhl01F1bRD0ern/MFpORZJN966wU45zqJqDv/9/sTxj4cShzlSVqvwG
-fvrgHuXWzJwiDVcOHk7AD40UfMdkNTVnwd1ph4HZRwTPrjHbCx0=
-=Ni1l
------END PGP SIGNATURE-----
-
---ni3kowa23w3ftfvs--
-
---===============1700136299==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1700136299==--
+RnJvbTogU25pciBTaGVyaWJlciA8c3NoZXJpYmVAcmVkaGF0LmNvbT4KCldoZW4gR0RLX1NDQUxF
+IGlzICE9IDEgYW5kIGVnbCBpcyB1c2VkLCB0aGUgaW1hZ2UgcHJlc2VudGVkIGRvZXMgbm90CmZp
+dCB0byB0aGUgd2luZG93IChzY2FsZSBvZiAyIGlzIG9mdGVuIHVzZWQgd2l0aCBoaWRwaSBtb25p
+dG9ycykuClVzdWFsbHkgdGhpcyBpcyBub3QgYSBwcm9ibGVtIHNpbmNlIGFsbCBjb21wb25lbnRz
+IGFyZSBhZGp1c3RlZCBieQpnZGsvZ3RrIGJ1dCB3aXRoIGVnbCwgcGl4ZWwtYmFzZWQgZGF0YSBp
+cyBub3QgYmVpbmcgc2NhbGVkLiBJbiB0aGlzCmNhc2Ugd2luZG93J3Mgc2NhbGUgdmFsdWUgY2Fu
+IGJlIHVzZWQgaW4gb3JkZXIgdG8gZGV0ZXJtaW5lIHdoZXRoZXIKdG8gdXNlIGEgcGl4ZWwgcmVz
+b3VyY2Ugd2l0aCBoaWdoZXIgcmVzb2x1dGlvbiBkYXRhLgoKSW4gb3JkZXIgdG8gcmVwcm9kdWNl
+IHRoZSBwcm9ibGVtIHNldCBzcGljZSB3aXRoIHZpcmdsL0ludGVsLXZHUFUKYW5kIHJ1biBzcGlj
+ZS1ndGsgd2l0aCBHREtfU0NBTEU9MgoKVGhpcyBpc3N1ZSB3YXMgYWxzbyByZXBvcnRlZCBhdCBm
+cmVlZGVza3RvcCBnaXRsYWIgcmVwbzoKaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL3Nw
+aWNlL3NwaWNlLWd0ay9pc3N1ZXMvOTkKLS0tCiBzcmMvc3BpY2Utd2lkZ2V0LWVnbC5jIHwgIDgg
+KysrKy0tLS0KIHNyYy9zcGljZS13aWRnZXQuYyAgICAgfCAzMSArKysrKysrKysrKysrKysrKysr
+KysrKy0tLS0tLS0tCiAyIGZpbGVzIGNoYW5nZWQsIDI3IGluc2VydGlvbnMoKyksIDEyIGRlbGV0
+aW9ucygtKQoKZGlmZiAtLWdpdCBhL3NyYy9zcGljZS13aWRnZXQtZWdsLmMgYi9zcmMvc3BpY2Ut
+d2lkZ2V0LWVnbC5jCmluZGV4IDQzZmNjZDcuLjRjMmE1OGUgMTAwNjQ0Ci0tLSBhL3NyYy9zcGlj
+ZS13aWRnZXQtZWdsLmMKKysrIGIvc3JjL3NwaWNlLXdpZGdldC1lZ2wuYwpAQCAtMzYwLDkgKzM2
+MCw5IEBAIGdib29sZWFuIHNwaWNlX2VnbF9yZWFsaXplX2Rpc3BsYXkoU3BpY2VEaXNwbGF5ICpk
+aXNwbGF5LCBHZGtXaW5kb3cgKndpbiwgR0Vycm9yCiAgICAgRElTUExBWV9ERUJVRyhkaXNwbGF5
+LCAiZWdsIHJlYWxpemUiKTsKICAgICBpZiAoIXNwaWNlX3dpZGdldF9pbml0X2VnbF93aW4oZGlz
+cGxheSwgd2luLCBlcnIpKQogICAgICAgICByZXR1cm4gRkFMU0U7Ci0KLSAgICBzcGljZV9lZ2xf
+cmVzaXplX2Rpc3BsYXkoZGlzcGxheSwgZ2RrX3dpbmRvd19nZXRfd2lkdGgod2luKSwKLSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgZ2RrX3dpbmRvd19nZXRfaGVpZ2h0KHdpbikpOworICAg
+IGdpbnQgc2NhbGVfZmFjdG9yID0gZ3RrX3dpZGdldF9nZXRfc2NhbGVfZmFjdG9yKEdUS19XSURH
+RVQoZGlzcGxheSkpOworICAgIHNwaWNlX2VnbF9yZXNpemVfZGlzcGxheShkaXNwbGF5LCBnZGtf
+d2luZG93X2dldF93aWR0aCh3aW4pICogc2NhbGVfZmFjdG9yLAorICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBnZGtfd2luZG93X2dldF9oZWlnaHQod2luKSAqIHNjYWxlX2ZhY3Rvcik7CiAK
+ICAgICByZXR1cm4gVFJVRTsKIH0KQEAgLTQyNyw3ICs0MjcsNyBAQCB2b2lkIHNwaWNlX2VnbF91
+bnJlYWxpemVfZGlzcGxheShTcGljZURpc3BsYXkgKmRpc3BsYXkpCiB9CiAKIEdfR05VQ19JTlRF
+Uk5BTAotdm9pZCBzcGljZV9lZ2xfcmVzaXplX2Rpc3BsYXkoU3BpY2VEaXNwbGF5ICpkaXNwbGF5
+LCBpbnQgdywgaW50IGgpCit2b2lkIHNwaWNlX2VnbF9yZXNpemVfZGlzcGxheShTcGljZURpc3Bs
+YXkgKmRpc3BsYXksIGludCB3LCBpbnQgaCkgLy8gdyBhbmQgaCBzaG91bGQgYmUgYWRqdXN0ZWQg
+dG8gZ2RrIHNjYWxpbmcKIHsKICAgICBTcGljZURpc3BsYXlQcml2YXRlICpkID0gZGlzcGxheS0+
+cHJpdjsKICAgICBpbnQgcHJvZzsKZGlmZiAtLWdpdCBhL3NyYy9zcGljZS13aWRnZXQuYyBiL3Ny
+Yy9zcGljZS13aWRnZXQuYwppbmRleCAxZjJhMTU0Li5hMjY1MWZmIDEwMDY0NAotLS0gYS9zcmMv
+c3BpY2Utd2lkZ2V0LmMKKysrIGIvc3JjL3NwaWNlLXdpZGdldC5jCkBAIC0xMzgyLDcgKzEzODIs
+OCBAQCBzdGF0aWMgdm9pZCBzZXRfZWdsX2VuYWJsZWQoU3BpY2VEaXNwbGF5ICpkaXNwbGF5LCBi
+b29sIGVuYWJsZWQpCiAgICAgfQogCiAgICAgaWYgKGVuYWJsZWQgJiYgZC0+ZWdsLmNvbnRleHRf
+cmVhZHkpIHsKLSAgICAgICAgc3BpY2VfZWdsX3Jlc2l6ZV9kaXNwbGF5KGRpc3BsYXksIGQtPnd3
+LCBkLT53aCk7CisgICAgICAgIGdpbnQgc2NhbGVfZmFjdG9yID0gZ3RrX3dpZGdldF9nZXRfc2Nh
+bGVfZmFjdG9yKEdUS19XSURHRVQoZGlzcGxheSkpOworICAgICAgICBzcGljZV9lZ2xfcmVzaXpl
+X2Rpc3BsYXkoZGlzcGxheSwgZC0+d3cgKiBzY2FsZV9mYWN0b3IsIGQtPndoICogc2NhbGVfZmFj
+dG9yKTsKICAgICB9CiAKICAgICBkLT5lZ2wuZW5hYmxlZCA9IGVuYWJsZWQ7CkBAIC0xOTc4LDEx
+ICsxOTc5LDE2IEBAIHN0YXRpYyB2b2lkIHRyYW5zZm9ybV9pbnB1dChTcGljZURpc3BsYXkgKmRp
+c3BsYXksCiAgICAgU3BpY2VEaXNwbGF5UHJpdmF0ZSAqZCA9IGRpc3BsYXktPnByaXY7CiAgICAg
+aW50IGRpc3BsYXlfeCwgZGlzcGxheV95LCBkaXNwbGF5X3csIGRpc3BsYXlfaDsKICAgICBkb3Vi
+bGUgaXM7CisgICAgZ2ludCBzY2FsZV9mYWN0b3IgPSAxOwogCiAgICAgc3BpY2VfZGlzcGxheV9n
+ZXRfc2NhbGluZyhkaXNwbGF5LCBOVUxMLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+JmRpc3BsYXlfeCwgJmRpc3BsYXlfeSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZk
+aXNwbGF5X3csICZkaXNwbGF5X2gpOwotCisjaWYgSEFWRV9FR0wKKyAgICAgICAgaWYgKGVnbF9l
+bmFibGVkKGQpKSB7CisgICAgICAgICAgICBzY2FsZV9mYWN0b3IgPSBndGtfd2lkZ2V0X2dldF9z
+Y2FsZV9mYWN0b3IoR1RLX1dJREdFVChkaXNwbGF5KSk7CisgICAgICAgIH0KKyNlbmRpZgogICAg
+IC8qIEZvciBpbnB1dCB3ZSBuZWVkIGEgZGlmZmVyZW50IHNjYWxpbmcgZmFjdG9yIGluIG9yZGVy
+IHRvCiAgICAgICAgYmUgYWJsZSB0byByZWFjaCB0aGUgZnVsbCB3aWR0aCBvZiBhIGRpc3BsYXku
+IEZvciBpbnN0YW5jZSwgY29uc2lkZXIKICAgICAgICBhIGRpc3BsYXkgb2YgMTAwIHBpeGVscyBz
+aG93aW5nIGluIGEgd2luZG93IDEwIHBpeGVscyB3aWRlLiBUaGUgbm9ybWFsCkBAIC0xOTk4LDcg
+KzIwMDQsNyBAQCBzdGF0aWMgdm9pZCB0cmFuc2Zvcm1faW5wdXQoU3BpY2VEaXNwbGF5ICpkaXNw
+bGF5LAogICAgICAgIGNvb3JkaW5hdGVzIGluIHRoZSBpbnZlcnNlIGRpcmVjdGlvbiAod2luZG93
+IC0+IGRpc3BsYXkpIGFzIHRoZSBmYiBzaXplCiAgICAgICAgKGRpc3BsYXkgLT4gd2luZG93KS4K
+ICAgICAqLwotICAgIGlzID0gKGRvdWJsZSkoZC0+YXJlYS53aWR0aC0xKSAvIChkb3VibGUpKGRp
+c3BsYXlfdy0xKTsKKyAgICBpcyA9ICgoZG91YmxlKShkLT5hcmVhLndpZHRoLTEpIC8gKGRvdWJs
+ZSkoZGlzcGxheV93LTEpKSAqIHNjYWxlX2ZhY3RvcjsKIAogICAgIHdpbmRvd194IC09IGRpc3Bs
+YXlfeDsKICAgICB3aW5kb3dfeSAtPSBkaXNwbGF5X3k7CkBAIC0yMTgzLDggKzIxODksMTAgQEAg
+c3RhdGljIHZvaWQgc2l6ZV9hbGxvY2F0ZShHdGtXaWRnZXQgKndpZGdldCwgR3RrQWxsb2NhdGlv
+biAqY29uZiwgZ3BvaW50ZXIgZGF0YSkKICAgICAgICAgZC0+d2ggPSBjb25mLT5oZWlnaHQ7CiAg
+ICAgICAgIHJlY2FsY19nZW9tZXRyeSh3aWRnZXQpOwogI2lmIEhBVkVfRUdMCi0gICAgICAgIGlm
+IChlZ2xfZW5hYmxlZChkKSkKLSAgICAgICAgICAgIHNwaWNlX2VnbF9yZXNpemVfZGlzcGxheShk
+aXNwbGF5LCBjb25mLT53aWR0aCwgY29uZi0+aGVpZ2h0KTsKKyAgICAgICAgaWYgKGVnbF9lbmFi
+bGVkKGQpKSB7CisgICAgICAgICAgICBnaW50IHNjYWxlX2ZhY3RvciA9IGd0a193aWRnZXRfZ2V0
+X3NjYWxlX2ZhY3Rvcih3aWRnZXQpOworICAgICAgICAgICAgc3BpY2VfZWdsX3Jlc2l6ZV9kaXNw
+bGF5KGRpc3BsYXksIGNvbmYtPndpZHRoICogc2NhbGVfZmFjdG9yLCBjb25mLT5oZWlnaHQgKiBz
+Y2FsZV9mYWN0b3IpOworICAgICAgICB9CiAjZW5kaWYKICAgICB9CiAKQEAgLTI5NDIsMTAgKzI5
+NTAsMTYgQEAgdm9pZCBzcGljZV9kaXNwbGF5X2dldF9zY2FsaW5nKFNwaWNlRGlzcGxheSAqZGlz
+cGxheSwKICAgICBpbnQgd3csIHdoOwogICAgIGludCB4LCB5LCB3LCBoOwogICAgIGRvdWJsZSBz
+OworICAgIGdpbnQgc2NhbGVfZmFjdG9yID0gMTsKIAogICAgIGlmIChndGtfd2lkZ2V0X2dldF9y
+ZWFsaXplZCAoR1RLX1dJREdFVChkaXNwbGF5KSkpIHsKLSAgICAgICAgd3cgPSBndGtfd2lkZ2V0
+X2dldF9hbGxvY2F0ZWRfd2lkdGgoR1RLX1dJREdFVChkaXNwbGF5KSk7Ci0gICAgICAgIHdoID0g
+Z3RrX3dpZGdldF9nZXRfYWxsb2NhdGVkX2hlaWdodChHVEtfV0lER0VUKGRpc3BsYXkpKTsKKyNp
+ZiBIQVZFX0VHTAorICAgICAgICBpZiAoZWdsX2VuYWJsZWQoZCkpIHsKKyAgICAgICAgICAgIHNj
+YWxlX2ZhY3RvciA9IGd0a193aWRnZXRfZ2V0X3NjYWxlX2ZhY3RvcihHVEtfV0lER0VUKGRpc3Bs
+YXkpKTsKKyAgICAgICAgfQorI2VuZGlmCisgICAgICAgIHd3ID0gZ3RrX3dpZGdldF9nZXRfYWxs
+b2NhdGVkX3dpZHRoKEdUS19XSURHRVQoZGlzcGxheSkpICogc2NhbGVfZmFjdG9yOworICAgICAg
+ICB3aCA9IGd0a193aWRnZXRfZ2V0X2FsbG9jYXRlZF9oZWlnaHQoR1RLX1dJREdFVChkaXNwbGF5
+KSkgKiBzY2FsZV9mYWN0b3I7CiAgICAgfSBlbHNlIHsKICAgICAgICAgd3cgPSBmYnc7CiAgICAg
+ICAgIHdoID0gZmJoOwpAQCAtMzA5MSw3ICszMTA1LDggQEAgdm9pZCBzcGljZV9kaXNwbGF5X3dp
+ZGdldF9nbF9zY2Fub3V0KFNwaWNlRGlzcGxheSAqZGlzcGxheSkKICAgICAgICAgICAgIGdfY2xl
+YXJfZXJyb3IoJmVycik7CiAgICAgICAgIH0KIAotICAgICAgICBzcGljZV9lZ2xfcmVzaXplX2Rp
+c3BsYXkoZGlzcGxheSwgZC0+d3csIGQtPndoKTsKKyAgICAgICAgZ2ludCBzY2FsZV9mYWN0b3Ig
+PSBndGtfd2lkZ2V0X2dldF9zY2FsZV9mYWN0b3IoR1RLX1dJREdFVChkaXNwbGF5KSk7CisgICAg
+ICAgIHNwaWNlX2VnbF9yZXNpemVfZGlzcGxheShkaXNwbGF5LCBkLT53dyAqIHNjYWxlX2ZhY3Rv
+ciwgZC0+d2ggKiBzY2FsZV9mYWN0b3IpOwogICAgIH0KICNlbmRpZgogCi0tIAoyLjIwLjEKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVs
+IG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
+aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
