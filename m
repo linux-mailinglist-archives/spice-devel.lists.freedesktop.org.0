@@ -1,43 +1,43 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08DAA433EB
-	for <lists+spice-devel@lfdr.de>; Thu, 13 Jun 2019 09:58:46 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4707D43431
+	for <lists+spice-devel@lfdr.de>; Thu, 13 Jun 2019 10:38:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 669A38901E;
-	Thu, 13 Jun 2019 07:58:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 34B24897E0;
+	Thu, 13 Jun 2019 08:38:32 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C79D8901E
- for <spice-devel@lists.freedesktop.org>; Thu, 13 Jun 2019 07:58:43 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5FA478919F
+ for <spice-devel@lists.freedesktop.org>; Thu, 13 Jun 2019 08:38:30 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 393AFC1EB20B
- for <spice-devel@lists.freedesktop.org>; Thu, 13 Jun 2019 07:58:43 +0000 (UTC)
-Received: from lub.tlv (dhcp-4-88.tlv.redhat.com [10.35.4.88])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9AA5D17C41;
- Thu, 13 Jun 2019 07:58:42 +0000 (UTC)
-To: Frediano Ziglio <fziglio@redhat.com>, spice-devel@lists.freedesktop.org
-References: <20190611184341.16697-1-fziglio@redhat.com>
- <20190611184341.16697-2-fziglio@redhat.com>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <50c72f23-f25c-106b-0211-14d109ee4f18@redhat.com>
-Date: Thu, 13 Jun 2019 10:58:40 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ by mx1.redhat.com (Postfix) with ESMTPS id BCAD630860BD
+ for <spice-devel@lists.freedesktop.org>; Thu, 13 Jun 2019 08:38:29 +0000 (UTC)
+Received: from natto.ory.fergeau.eu (unknown [10.48.0.104])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 907EA1801F;
+ Thu, 13 Jun 2019 08:38:29 +0000 (UTC)
+Received: by natto.ory.fergeau.eu (Postfix, from userid 1000)
+ id 8386E602265; Thu, 13 Jun 2019 10:38:28 +0200 (CEST)
+Date: Thu, 13 Jun 2019 10:38:28 +0200
+From: Christophe Fergeau <cfergeau@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190613083828.GA2752@natto.ory.fergeau.eu>
+References: <20190612120659.10083-1-fziglio@redhat.com>
+ <a306c8ca-a3e5-4385-6d27-14c9978b4809@redhat.com>
+ <1608797395.22540794.1560411617210.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190611184341.16697-2-fziglio@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+In-Reply-To: <1608797395.22540794.1560411617210.JavaMail.zimbra@redhat.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.32]); Thu, 13 Jun 2019 07:58:43 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server 2/2] ci: Add test for 32 bit
- CentOS 7
+ (mx1.redhat.com [10.5.110.44]); Thu, 13 Jun 2019 08:38:29 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-common] build: Disable Celt support
+ by default
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -49,40 +49,135 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============2115731549=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gNi8xMS8xOSA5OjQzIFBNLCBGcmVkaWFubyBaaWdsaW8gd3JvdGU6Cj4gTWFrZSBzdXJlIHRo
-ZSBwcm9qZWN0IGNvbXBpbGUgYW5kIHBhc3MgdGVzdHMgd2l0aG91dCBwcm9ibGVtcwo+IG9uIGEg
-MzIgYml0IGFyY2hpdGVjdHVyZS4KCj4gCj4gU2lnbmVkLW9mZi1ieTogRnJlZGlhbm8gWmlnbGlv
-IDxmemlnbGlvQHJlZGhhdC5jb20+CgpBY2suCgpVcmkKCj4gLS0tCj4gICAuZ2l0bGFiLWNpLnlt
-bCB8IDIyICsrKysrKysrKysrKysrKysrKysrKysKPiAgIDEgZmlsZSBjaGFuZ2VkLCAyMiBpbnNl
-cnRpb25zKCspCj4gCj4gZGlmZiAtLWdpdCBhLy5naXRsYWItY2kueW1sIGIvLmdpdGxhYi1jaS55
-bWwKPiBpbmRleCA5MWVlNDdlZGMuLjdlYzVjZTBmMCAxMDA2NDQKPiAtLS0gYS8uZ2l0bGFiLWNp
-LnltbAo+ICsrKyBiLy5naXRsYWItY2kueW1sCj4gQEAgLTk0LDYgKzk0LDI4IEBAIG1ha2VjaGVj
-ay1jZW50b3M6Cj4gICAgIC0gbWFrZQo+ICAgICAtIG1ha2UgLUMgc2VydmVyIGNoZWNrIHx8IChj
-YXQgc2VydmVyL3Rlc3RzL3Rlc3Qtc3VpdGUubG9nICYmIGV4aXQgMSkKPiAgIAo+ICsjIFNhbWUg
-YXMgbWFrZWNoZWNrIGpvYiBidXQgdXNlIGEgQ2VudG9zIGltYWdlCj4gK21ha2VjaGVjay1jZW50
-b3MzMjoKPiArICBiZWZvcmVfc2NyaXB0Ogo+ICsgICAgLSA+Cj4gKyAgICAgIHl1bSBpbnN0YWxs
-IGdpdCBsaWJ0b29sIG1ha2UgbGliYXNhbiBvcmMtZGV2ZWwgZ2xpYi1uZXR3b3JraW5nCj4gKyAg
-ICAgIHl1bS11dGlscyBnY2MgZ2xpYjItZGV2ZWwgc3BpY2UtcHJvdG9jb2wgY2VsdDA1MS1kZXZl
-bAo+ICsgICAgICBvcHVzLWRldmVsIHBpeG1hbi1kZXZlbCBvcGVuc3NsLWRldmVsIGxpYmpwZWct
-ZGV2ZWwKPiArICAgICAgbGliY2FjYXJkLWRldmVsIGN5cnVzLXNhc2wtZGV2ZWwgbHo0LWRldmVs
-Cj4gKyAgICAgIGdzdHJlYW1lcjEtZGV2ZWwgZ3N0cmVhbWVyMS1wbHVnaW5zLWJhc2UtZGV2ZWwK
-PiArICAgICAgZ2l0LWNvcmUgcHlwYXJzaW5nIHB5dGhvbi1zaXgKPiArICAgICAgLXkKPiArICAg
-IC0gZ2l0IGNsb25lICR7Q0lfUkVQT1NJVE9SWV9VUkwvc3BpY2UuZ2l0L3NwaWNlLXByb3RvY29s
-LmdpdH0KPiArICAgIC0gKGNkIHNwaWNlLXByb3RvY29sICYmIC4vYXV0b2dlbi5zaCAtLXByZWZp
-eD0vdXNyICYmIG1ha2UgaW5zdGFsbCkKPiArICBpbWFnZTogaTM4Ni9jZW50b3M6bGF0ZXN0Cj4g
-KyAgc2NyaXB0Ogo+ICsgIC0gPgo+ICsgICAgQ0ZMQUdTPSctTzIgLXBpcGUgLWcgLWZzYW5pdGl6
-ZT1hZGRyZXNzIC1mbm8tb21pdC1mcmFtZS1wb2ludGVyIC1XZnJhbWUtbGFyZ2VyLXRoYW49NDA5
-MjAnCj4gKyAgICBMREZMQUdTPSctZnNhbml0aXplPWFkZHJlc3MgLWxhc2FuJwo+ICsgICAgLi9h
-dXRvZ2VuLnNoIC0tZW5hYmxlLWNlbHQwNTEKPiArICAtIG1ha2UKPiArICAtIG1ha2UgLUMgc2Vy
-dmVyIGNoZWNrIHx8IChjYXQgc2VydmVyL3Rlc3RzL3Rlc3Qtc3VpdGUubG9nICYmIGV4aXQgMSkK
-PiArCj4gICAjIFNhbWUgYXMgbWFrZWNoZWNrIGpvYiBidXQgdXNlIFdpbmRvd3MgYnVpbGQKPiAg
-IG1ha2VjaGVjay13aW5kb3dzOgo+ICAgICBzY3JpcHQ6Cj4gCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3Bp
-Y2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+
+--===============2115731549==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="PEIAKu/WMn1b1Hv9"
+Content-Disposition: inline
+
+
+--PEIAKu/WMn1b1Hv9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hey,
+yup fine with me too.
+
+Christophe
+
+On Thu, Jun 13, 2019 at 03:40:17AM -0400, Frediano Ziglio wrote:
+> >=20
+> > Hi,
+> >=20
+> > Fine with me.
+> >
+>=20
+> This is also related to https://gitlab.freedesktop.org/spice/spice/merge_=
+requests/2,
+> I talked with Christophe and he agreed would be sensible to disable by de=
+fault.
+> =20
+> > On 6/12/19 3:06 PM, Frediano Ziglio wrote:
+> > > We started disabling Celt support making the option required.
+> > > After 2 releases start making it disabled unless explicitly
+> > > enabled.
+> > >
+> > > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+> > > ---
+> > >   m4/spice-deps.m4  | 14 ++------------
+> > >   meson_options.txt |  1 +
+> > >   2 files changed, 3 insertions(+), 12 deletions(-)
+> > >
+> > > diff --git a/m4/spice-deps.m4 b/m4/spice-deps.m4
+> > > index 02230dd..1214341 100644
+> > > --- a/m4/spice-deps.m4
+> > > +++ b/m4/spice-deps.m4
+> > > @@ -101,21 +101,11 @@ AC_DEFUN([SPICE_CHECK_SMARTCARD], [
+> > >   AC_DEFUN([SPICE_CHECK_CELT051], [
+> > >       AC_ARG_ENABLE([celt051],
+> > >           AS_HELP_STRING([--enable-celt051],
+> > > -                       [Enable celt051 audio codec
+> > > @<:@default=3Dauto@:>@]),,
+> > > -        [enable_celt051=3D"auto"])
+> > > +                       [Enable celt051 audio codec @<:@default=3Dno@=
+:>@]),,
+> > > +        [enable_celt051=3D"no"])
+> > >  =20
+> > >       if test "x$enable_celt051" !=3D "xno"; then
+> > >           PKG_CHECK_MODULES([CELT051], [celt051 >=3D 0.5.1.1],
+> > >           [have_celt051=3Dyes], [have_celt051=3Dno])
+> > > -        if test "x$enable_celt051" =3D "xauto"; then
+> > > -            if test "x$have_celt051" =3D "xyes"; then
+> > > -                AC_MSG_ERROR(m4_normalize([
+> > > -                                CELT 0.5.1.x has been detected, \
+> > > -                                but CELT support is no longer
+> > > automatically enabled by default. \
+> > > -                                Please explicitly use --enable-celt0=
+51 or
+> > > --disable-celt051
+> > > -                             ]))
+> > > -            fi
+> > > -            # have_celt051 is "no" here, so celt is disabled by defa=
+ult
+> > > -        fi
+> > >           if test "x$enable_celt051" =3D "xyes" && test "x$have_celt0=
+51" !=3D
+> > >           "xyes"; then
+> > >               AC_MSG_ERROR(["--enable-celt051 has been specified, but=
+ CELT
+> > >               0.5.1 is missing"])
+> > >           fi
+> > > diff --git a/meson_options.txt b/meson_options.txt
+> > > index 7e9e704..c982736 100644
+> > > --- a/meson_options.txt
+> > > +++ b/meson_options.txt
+> > > @@ -12,6 +12,7 @@ option('extra-checks',
+> > >  =20
+> > >   option('celt051',
+> > >       type : 'feature',
+> > > +    value : 'disabled',
+> > >       yield : true,
+> > >       description: 'Enable celt051 audio codec')
+> > >  =20
+>=20
+> Frediano
+
+--PEIAKu/WMn1b1Hv9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEElKn3VmH3emFoZJsjqdjCFCmsbIIFAl0CC4AACgkQqdjCFCms
+bIIfkw//foJHBFOml4NtQ34PUwLbJnG3hnUD+InE1ood09UTrAhNB/fo2oNDV0BB
+IFOx7/Sff8Vvj/Zmn1bVz5rhoRP4QRsKNg+yxsd+J2I6LLTMa8psknfZe3wtUD7k
+ruPhMwnCmeQSQCITeuGzse0iEd/HzveMl0lOW17P8bv0wfrVgJW5UxSUbJhUxMpw
+sj8iNWtbMnGinjwf0TqNd1S0geE+eMC7FE2oDhTp7KXxZWeg/Vn0tvHr06T0F6h9
+MxjDkketygduaWVLJu5xTi7hrP+N7EMn9pLAFKr+b7EiUAVr/mY9Rcrmdx/2FHkd
+miCU6EbI3+gms+fdWJj+fyL94n0DAFt8+8y/Ewwzsoxd6MgScwMTf+TDBRXSb/sM
+Hf+8WMlyW5gzbLehcLQFpTmH0e3S/WhqjlYK2iQkqByCqQ7qK1ZkTdi/dOzRAFM9
+HZDfNxQRLFvDEfF7M/y5SS8FNmSUDnl3A0sJnQWclYgbwwjd3t7ShaT7Sf2gHJ8F
+F1spb0tAwiPf2o+G69nmSJQIoXmxcmxTnoz+AiqYKdz2Xts7fa2mhPaa3YeWgeGG
+Hk8G6Eo2ESeAX7pesTSAF5nosHycEZLlvpvPxwQDAUOCtOaa2FXPvcFGCke35NE7
+EDhVdZBvP5rjxgn6Mb8oxzWlLFmq0I49QkKXAjxr79ojlLTB7Zg=
+=x1/x
+-----END PGP SIGNATURE-----
+
+--PEIAKu/WMn1b1Hv9--
+
+--===============2115731549==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============2115731549==--
