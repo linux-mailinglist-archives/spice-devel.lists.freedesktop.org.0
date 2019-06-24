@@ -2,68 +2,45 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6CE150904
-	for <lists+spice-devel@lfdr.de>; Mon, 24 Jun 2019 12:36:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1B2A50B40
+	for <lists+spice-devel@lfdr.de>; Mon, 24 Jun 2019 14:58:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1052A89AB9;
-	Mon, 24 Jun 2019 10:36:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A994288810;
+	Mon, 24 Jun 2019 12:58:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 701EA89AB9
- for <spice-devel@lists.freedesktop.org>; Mon, 24 Jun 2019 10:36:17 +0000 (UTC)
-Received: from 82-64-54-218.subs.proxad.net ([82.64.54.218] helo=amboise)
- by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.89) (envelope-from <fgouget@free.fr>) id 1hfMLA-0002GY-5x
- for spice-devel@lists.freedesktop.org; Mon, 24 Jun 2019 05:36:49 -0500
-Received: from fgouget by amboise with local (Exim 4.92)
- (envelope-from <fgouget@amboise.dolphin>) id 1hfMKb-0003GP-Ge
- for spice-devel@lists.freedesktop.org; Mon, 24 Jun 2019 12:36:13 +0200
-Date: Mon, 24 Jun 2019 12:36:13 +0200 (CEST)
-From: Francois Gouget <fgouget@codeweavers.com>
-To: Spice devel <spice-devel@lists.freedesktop.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A0ADE88810
+ for <spice-devel@lists.freedesktop.org>; Mon, 24 Jun 2019 12:58:50 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 2FC6F882FB;
+ Mon, 24 Jun 2019 12:58:50 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2384E19C6A;
+ Mon, 24 Jun 2019 12:58:50 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 196B5206D1;
+ Mon, 24 Jun 2019 12:58:50 +0000 (UTC)
+Date: Mon, 24 Jun 2019 08:58:48 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Francois Gouget <fgouget@codeweavers.com>
+Message-ID: <1628204435.24064251.1561381128534.JavaMail.zimbra@redhat.com>
+In-Reply-To: <E1hfMKb-0003GP-Ge@amboise>
+References: <E1hfMKb-0003GP-Ge@amboise>
 MIME-Version: 1.0
-Message-Id: <E1hfMKb-0003GP-Ge@amboise>
-X-Spam-Score: -103.7
-X-Spam-Report: Spam detection software,
- running on the system "mail.codeweavers.com", 
- has NOT identified this incoming email as spam.  The original
- message has been attached to this so you can view it or label
- similar future email.  If you have any questions, see
- the administrator of that system for details.
- Content preview: We don't want to maintain more macros than necessary and
- these
- have been unused for over two years. Signed-off-by: Francois Gouget
- <fgouget@codeweavers.com>
- --- v2: Remove unused macros altogether rather than marking them as deprecated
- (no use of them has been found in spice, spice-gtk, spice-common,
- spice-protocol, 
- vd_agent and xf86-video-qxl in the past two [...] 
- Content analysis details:   (-103.7 points, 5.0 required)
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- -100 USER_IN_WHITELIST      From: address is in the user's white-list
- -6.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
- 0.0 TVD_RCVD_IP            Message was received from an IP address
- 1.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
- mail domains are different
- 1.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
- provider (fgouget[at]free.fr)
- 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
- EnvelopeFrom freemail headers are different
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; 
- d=codeweavers.com; s=6377696661; h=Message-Id:Content-Type:MIME-Version:
- Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QS6dc/9/xwi0oeLGdljjRrVr0Pp4WvrORvMh39VY2us=; b=Zc2vNDG0Acloj1Xiy95SWMe1ZC
- BO/TA98La+Ko9v64RtBqmOg9NAjxEMybjpTGtVL2L5oj4y3oiTzK+Z/83obkzuFl95ke8qZmPLzMi
- ckIyETTGhKJlRGBqaixqFNVgSvhAPiTPk9oh9+EL83KbtdD0Cz8e2LqVLdBqSH2e4wUc=;
-Subject: [Spice-devel] [protocol v2] macros: Remove unused SPICE_GNUC_XXX
- macros
+X-Originating-IP: [10.33.32.19, 10.4.195.14]
+Thread-Topic: macros: Remove unused SPICE_GNUC_XXX macros
+Thread-Index: wKnwNtQK93zYHHvipY2x4G4iltnWjw==
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.28]); Mon, 24 Jun 2019 12:58:50 +0000 (UTC)
+Subject: Re: [Spice-devel] [protocol v2] macros: Remove unused
+ SPICE_GNUC_XXX macros
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,48 +52,52 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: Spice devel <spice-devel@lists.freedesktop.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-V2UgZG9uJ3Qgd2FudCB0byBtYWludGFpbiBtb3JlIG1hY3JvcyB0aGFuIG5lY2Vzc2FyeSBhbmQg
-dGhlc2UgaGF2ZQpiZWVuIHVudXNlZCBmb3Igb3ZlciB0d28geWVhcnMuCgpTaWduZWQtb2ZmLWJ5
-OiBGcmFuY29pcyBHb3VnZXQgPGZnb3VnZXRAY29kZXdlYXZlcnMuY29tPgotLS0KCnYyOiBSZW1v
-dmUgdW51c2VkIG1hY3JvcyBhbHRvZ2V0aGVyIHJhdGhlciB0aGFuIG1hcmtpbmcgdGhlbSBhcyAK
-ICAgIGRlcHJlY2F0ZWQgKG5vIHVzZSBvZiB0aGVtIGhhcyBiZWVuIGZvdW5kIGluIHNwaWNlLCBz
-cGljZS1ndGssIAogICAgc3BpY2UtY29tbW9uLCBzcGljZS1wcm90b2NvbCwgdmRfYWdlbnQgYW5k
-IHhmODYtdmlkZW8tcXhsIGluIHRoZSAKICAgIHBhc3QgdHdvIHllYXJzKS4KCiBzcGljZS9tYWNy
-b3MuaCB8IDE2IC0tLS0tLS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxNiBkZWxldGlvbnMo
-LSkKCmRpZmYgLS1naXQgYS9zcGljZS9tYWNyb3MuaCBiL3NwaWNlL21hY3Jvcy5oCmluZGV4IGFi
-MWQwNTYuLmEyM2U4NjYgMTAwNjQ0Ci0tLSBhL3NwaWNlL21hY3Jvcy5oCisrKyBiL3NwaWNlL21h
-Y3Jvcy5oCkBAIC0zNCwxOSArMzQsMTEgQEAKICNpbmNsdWRlIDxzcGljZS90eXBlcy5oPgogCiAj
-aWYgICAgX19HTlVDX18gPiAyIHx8IChfX0dOVUNfXyA9PSAyICYmIF9fR05VQ19NSU5PUl9fID49
-IDk2KQotI2RlZmluZSBTUElDRV9HTlVDX1BVUkUgX19hdHRyaWJ1dGVfXygoX19wdXJlX18pKQog
-I2RlZmluZSBTUElDRV9HTlVDX01BTExPQyBfX2F0dHJpYnV0ZV9fKChfX21hbGxvY19fKSkKICNl
-bHNlCi0jZGVmaW5lIFNQSUNFX0dOVUNfUFVSRQogI2RlZmluZSBTUElDRV9HTlVDX01BTExPQwog
-I2VuZGlmCiAKLSNpZiAgICAgX19HTlVDX18gPj0gNAotI2RlZmluZSBTUElDRV9HTlVDX05VTExf
-VEVSTUlOQVRFRCBfX2F0dHJpYnV0ZV9fKChfX3NlbnRpbmVsX18pKQotI2Vsc2UKLSNkZWZpbmUg
-U1BJQ0VfR05VQ19OVUxMX1RFUk1JTkFURUQKLSNlbmRpZgotCiAjaWZuZGVmIF9faGFzX2ZlYXR1
-cmUKICNkZWZpbmUgX19oYXNfZmVhdHVyZSh4KSAwICAvKiBDb21wYXRpYmlsaXR5IHdpdGggbm9u
-LWNsYW5nIGNvbXBpbGVycy4gKi8KICNlbmRpZgpAQCAtNjIsMjAgKzU0LDEyIEBACiAKICNpZiAg
-ICAgX19HTlVDX18gPiAyIHx8IChfX0dOVUNfXyA9PSAyICYmIF9fR05VQ19NSU5PUl9fID4gNCkK
-ICNkZWZpbmUgU1BJQ0VfR05VQ19QUklOVEYoIGZvcm1hdF9pZHgsIGFyZ19pZHggKSBfX2F0dHJp
-YnV0ZV9fKChfX2Zvcm1hdF9fIChfX3ByaW50Zl9fLCBmb3JtYXRfaWR4LCBhcmdfaWR4KSkpCi0j
-ZGVmaW5lIFNQSUNFX0dOVUNfU0NBTkYoIGZvcm1hdF9pZHgsIGFyZ19pZHggKSBfX2F0dHJpYnV0
-ZV9fKChfX2Zvcm1hdF9fIChfX3NjYW5mX18sIGZvcm1hdF9pZHgsIGFyZ19pZHgpKSkKLSNkZWZp
-bmUgU1BJQ0VfR05VQ19GT1JNQVQoIGFyZ19pZHggKSBfX2F0dHJpYnV0ZV9fKChfX2Zvcm1hdF9h
-cmdfXyAoYXJnX2lkeCkpKQogI2RlZmluZSBTUElDRV9HTlVDX05PUkVUVVJOIF9fYXR0cmlidXRl
-X18oKF9fbm9yZXR1cm5fXykpCi0jZGVmaW5lIFNQSUNFX0dOVUNfQ09OU1QgX19hdHRyaWJ1dGVf
-XygoX19jb25zdF9fKSkKICNkZWZpbmUgU1BJQ0VfR05VQ19VTlVTRUQgX19hdHRyaWJ1dGVfXygo
-X191bnVzZWRfXykpCi0jZGVmaW5lIFNQSUNFX0dOVUNfTk9fSU5TVFJVTUVOVCBfX2F0dHJpYnV0
-ZV9fKChfX25vX2luc3RydW1lbnRfZnVuY3Rpb25fXykpCiAjZWxzZSAgIC8qICFfX0dOVUNfXyAq
-LwogI2RlZmluZSBTUElDRV9HTlVDX1BSSU5URiggZm9ybWF0X2lkeCwgYXJnX2lkeCApCi0jZGVm
-aW5lIFNQSUNFX0dOVUNfU0NBTkYoIGZvcm1hdF9pZHgsIGFyZ19pZHggKQotI2RlZmluZSBTUElD
-RV9HTlVDX0ZPUk1BVCggYXJnX2lkeCApCiAjZGVmaW5lIFNQSUNFX0dOVUNfTk9SRVRVUk4KLSNk
-ZWZpbmUgU1BJQ0VfR05VQ19DT05TVAogI2RlZmluZSBTUElDRV9HTlVDX1VOVVNFRAotI2RlZmlu
-ZSBTUElDRV9HTlVDX05PX0lOU1RSVU1FTlQKICNlbmRpZiAgLyogIV9fR05VQ19fICovCiAKICNp
-ZmRlZiBHX0RFUFJFQ0FURUQKLS0gCjIuMjAuMQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxA
-bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
-YW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+PiAKPiBXZSBkb24ndCB3YW50IHRvIG1haW50YWluIG1vcmUgbWFjcm9zIHRoYW4gbmVjZXNzYXJ5
+IGFuZCB0aGVzZSBoYXZlCj4gYmVlbiB1bnVzZWQgZm9yIG92ZXIgdHdvIHllYXJzLgo+IAo+IFNp
+Z25lZC1vZmYtYnk6IEZyYW5jb2lzIEdvdWdldCA8ZmdvdWdldEBjb2Rld2VhdmVycy5jb20+CgpB
+Y2tlZCBmb3IgbWUgKEknbGwgd2FpdCkKCj4gLS0tCj4gCj4gdjI6IFJlbW92ZSB1bnVzZWQgbWFj
+cm9zIGFsdG9nZXRoZXIgcmF0aGVyIHRoYW4gbWFya2luZyB0aGVtIGFzCj4gICAgIGRlcHJlY2F0
+ZWQgKG5vIHVzZSBvZiB0aGVtIGhhcyBiZWVuIGZvdW5kIGluIHNwaWNlLCBzcGljZS1ndGssCj4g
+ICAgIHNwaWNlLWNvbW1vbiwgc3BpY2UtcHJvdG9jb2wsIHZkX2FnZW50IGFuZCB4Zjg2LXZpZGVv
+LXF4bCBpbiB0aGUKPiAgICAgcGFzdCB0d28geWVhcnMpLgo+IAo+ICBzcGljZS9tYWNyb3MuaCB8
+IDE2IC0tLS0tLS0tLS0tLS0tLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDE2IGRlbGV0aW9ucygtKQo+
+IAo+IGRpZmYgLS1naXQgYS9zcGljZS9tYWNyb3MuaCBiL3NwaWNlL21hY3Jvcy5oCj4gaW5kZXgg
+YWIxZDA1Ni4uYTIzZTg2NiAxMDA2NDQKPiAtLS0gYS9zcGljZS9tYWNyb3MuaAo+ICsrKyBiL3Nw
+aWNlL21hY3Jvcy5oCj4gQEAgLTM0LDE5ICszNCwxMSBAQAo+ICAjaW5jbHVkZSA8c3BpY2UvdHlw
+ZXMuaD4KPiAgCj4gICNpZiAgICBfX0dOVUNfXyA+IDIgfHwgKF9fR05VQ19fID09IDIgJiYgX19H
+TlVDX01JTk9SX18gPj0gOTYpCj4gLSNkZWZpbmUgU1BJQ0VfR05VQ19QVVJFIF9fYXR0cmlidXRl
+X18oKF9fcHVyZV9fKSkKPiAgI2RlZmluZSBTUElDRV9HTlVDX01BTExPQyBfX2F0dHJpYnV0ZV9f
+KChfX21hbGxvY19fKSkKPiAgI2Vsc2UKPiAtI2RlZmluZSBTUElDRV9HTlVDX1BVUkUKPiAgI2Rl
+ZmluZSBTUElDRV9HTlVDX01BTExPQwo+ICAjZW5kaWYKPiAgCj4gLSNpZiAgICAgX19HTlVDX18g
+Pj0gNAo+IC0jZGVmaW5lIFNQSUNFX0dOVUNfTlVMTF9URVJNSU5BVEVEIF9fYXR0cmlidXRlX18o
+KF9fc2VudGluZWxfXykpCj4gLSNlbHNlCj4gLSNkZWZpbmUgU1BJQ0VfR05VQ19OVUxMX1RFUk1J
+TkFURUQKPiAtI2VuZGlmCj4gLQo+ICAjaWZuZGVmIF9faGFzX2ZlYXR1cmUKPiAgI2RlZmluZSBf
+X2hhc19mZWF0dXJlKHgpIDAgIC8qIENvbXBhdGliaWxpdHkgd2l0aCBub24tY2xhbmcgY29tcGls
+ZXJzLiAqLwo+ICAjZW5kaWYKPiBAQCAtNjIsMjAgKzU0LDEyIEBACj4gIAo+ICAjaWYgICAgIF9f
+R05VQ19fID4gMiB8fCAoX19HTlVDX18gPT0gMiAmJiBfX0dOVUNfTUlOT1JfXyA+IDQpCj4gICNk
+ZWZpbmUgU1BJQ0VfR05VQ19QUklOVEYoIGZvcm1hdF9pZHgsIGFyZ19pZHggKSBfX2F0dHJpYnV0
+ZV9fKChfX2Zvcm1hdF9fCj4gIChfX3ByaW50Zl9fLCBmb3JtYXRfaWR4LCBhcmdfaWR4KSkpCj4g
+LSNkZWZpbmUgU1BJQ0VfR05VQ19TQ0FORiggZm9ybWF0X2lkeCwgYXJnX2lkeCApIF9fYXR0cmli
+dXRlX18oKF9fZm9ybWF0X18KPiAoX19zY2FuZl9fLCBmb3JtYXRfaWR4LCBhcmdfaWR4KSkpCj4g
+LSNkZWZpbmUgU1BJQ0VfR05VQ19GT1JNQVQoIGFyZ19pZHggKSBfX2F0dHJpYnV0ZV9fKChfX2Zv
+cm1hdF9hcmdfXwo+IChhcmdfaWR4KSkpCj4gICNkZWZpbmUgU1BJQ0VfR05VQ19OT1JFVFVSTiBf
+X2F0dHJpYnV0ZV9fKChfX25vcmV0dXJuX18pKQo+IC0jZGVmaW5lIFNQSUNFX0dOVUNfQ09OU1Qg
+X19hdHRyaWJ1dGVfXygoX19jb25zdF9fKSkKPiAgI2RlZmluZSBTUElDRV9HTlVDX1VOVVNFRCBf
+X2F0dHJpYnV0ZV9fKChfX3VudXNlZF9fKSkKPiAtI2RlZmluZSBTUElDRV9HTlVDX05PX0lOU1RS
+VU1FTlQgX19hdHRyaWJ1dGVfXygoX19ub19pbnN0cnVtZW50X2Z1bmN0aW9uX18pKQo+ICAjZWxz
+ZSAgIC8qICFfX0dOVUNfXyAqLwo+ICAjZGVmaW5lIFNQSUNFX0dOVUNfUFJJTlRGKCBmb3JtYXRf
+aWR4LCBhcmdfaWR4ICkKPiAtI2RlZmluZSBTUElDRV9HTlVDX1NDQU5GKCBmb3JtYXRfaWR4LCBh
+cmdfaWR4ICkKPiAtI2RlZmluZSBTUElDRV9HTlVDX0ZPUk1BVCggYXJnX2lkeCApCj4gICNkZWZp
+bmUgU1BJQ0VfR05VQ19OT1JFVFVSTgo+IC0jZGVmaW5lIFNQSUNFX0dOVUNfQ09OU1QKPiAgI2Rl
+ZmluZSBTUElDRV9HTlVDX1VOVVNFRAo+IC0jZGVmaW5lIFNQSUNFX0dOVUNfTk9fSU5TVFJVTUVO
+VAo+ICAjZW5kaWYgIC8qICFfX0dOVUNfXyAqLwo+ICAKPiAgI2lmZGVmIEdfREVQUkVDQVRFRAoK
+RnJlZGlhbm8KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+U3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9y
+ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRl
+dmVs
