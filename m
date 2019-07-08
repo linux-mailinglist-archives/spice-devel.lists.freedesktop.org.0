@@ -2,53 +2,35 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8876A61A4D
-	for <lists+spice-devel@lfdr.de>; Mon,  8 Jul 2019 07:21:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2347B61B38
+	for <lists+spice-devel@lfdr.de>; Mon,  8 Jul 2019 09:26:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7269D8996F;
-	Mon,  8 Jul 2019 05:21:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2FB0089B0B;
+	Mon,  8 Jul 2019 07:26:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
- [209.85.221.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6E0DA8996F
- for <spice-devel@lists.freedesktop.org>; Mon,  8 Jul 2019 05:21:50 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id r1so9157052wrl.7
- for <spice-devel@lists.freedesktop.org>; Sun, 07 Jul 2019 22:21:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=vSNhBFSphTK/HrzNAzIZ6HFCAo0y41ySKgDC5VtgSaA=;
- b=QZ3Zt+CIX2X0+8wTZBMkm0FDSlvJbdCsby/TMKvjYLmwGDMVPU7RgVbs/p7o6o3GIo
- rUE8+QcGSd3Bbz7jJSFteCBTRgPQ3XANZeojz5BuW9hkMk1BhKSe6sqpAEcMX/oAvpM1
- 63jF0Cb3GEfEVhTLC8Vz5sW5qqWgT9iSbWAoxX/b0jqBHaReB+zv9+m/wl7B4Uzc1v2b
- PzlYlvczfXH9m6G6d7mD6de84YSlVHhcYluxNefBONBwBSZgrABFnwWKENG4mGM2i0cC
- k+dW59fxfZLSdOOi5zPvrnnRjcZ4Uw9Z9HwmaoxNrksF7VT5hfct6RmYj7X7JeAMhd6P
- S49Q==
-X-Gm-Message-State: APjAAAV2b9LzytmPsmHvLPhM9RlB8Y7Vvfg4oxD7w+6z73VTUmwbZrEU
- rsJwHi0xkF4Pmr66aoiZQIruwFPjtAI=
-X-Google-Smtp-Source: APXvYqzNfAaiGM/80oVDZPvf6hEfbphic+4d8IdwE1BrrjT0KvMHKchf0hZxISMVPuedTQILhXWkNg==
-X-Received: by 2002:a5d:514f:: with SMTP id u15mr7434930wrt.183.1562563308725; 
- Sun, 07 Jul 2019 22:21:48 -0700 (PDT)
-Received: from localhost.localdomain ([31.210.177.32])
- by smtp.gmail.com with ESMTPSA id i66sm1846381wmi.11.2019.07.07.22.21.47
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Sun, 07 Jul 2019 22:21:48 -0700 (PDT)
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5B58989B0B
+ for <spice-devel@lists.freedesktop.org>; Mon,  8 Jul 2019 07:26:55 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id DB6FD3002607
+ for <spice-devel@lists.freedesktop.org>; Mon,  8 Jul 2019 07:26:54 +0000 (UTC)
+Received: from fziglio.remote.csb (unknown [10.33.32.10])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BDBB35C21E;
+ Mon,  8 Jul 2019 07:26:53 +0000 (UTC)
+From: Frediano Ziglio <fziglio@redhat.com>
 To: spice-devel@lists.freedesktop.org
-References: <20190707162624.12059-1-fziglio@redhat.com>
-From: Snir Sheriber <ssheribe@redhat.com>
-Message-ID: <056d5b73-010e-38fb-e6a4-df45121c95fe@redhat.com>
-Date: Mon, 8 Jul 2019 08:21:44 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+Date: Mon,  8 Jul 2019 08:26:49 +0100
+Message-Id: <20190708072649.22114-1-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190707162624.12059-1-fziglio@redhat.com>
-Content-Language: en-US
-Subject: Re: [Spice-devel] [PATCH spice-server v2] test-codecs-parsing: On
- bad codec string spice_server_set_video_codecs can fail
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.40]); Mon, 08 Jul 2019 07:26:54 +0000 (UTC)
+Subject: [Spice-devel] [PATCH spice-server] red-replay-qxl: Fix some issue
+ of alignment
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,35 +42,65 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-QWNrZWQtYnk6IFNuaXIgU2hlcmliZXIgPHNzaGVyaWJlQHJlZGhhdC5jb20KCgpPbiA3LzcvMTkg
-NzoyNiBQTSwgRnJlZGlhbm8gWmlnbGlvIHdyb3RlOgo+IFRoZSAwIHJlc3VsdCBtZWFucyBzdWNj
-ZXNzIGhvd2V2ZXIgdGhlIGZ1bmN0aW9uIChjb3JyZWN0bHkpIGNvdWxkCj4gcmVwb3J0IGEgZmFp
-bHVyZSBpZiB0aGUgc3RyaW5nIGlzIGluY29ycmVjdC4KPiBUaGlzIGZpeGVzIHRoZSB0ZXN0IGFm
-dGVyIGNvbW1pdCBiNDE1MGRlM2NkMGU1NmQ0Y2U0M2E5OWVmNWMzYzVmNWNiZGZjNGEzCj4gKCJz
-cGljZV9zZXJ2ZXJfc2V0X3ZpZGVvX2NvZGVjczogZmFpbCB3aGVuIG5vIGNvZGVjIGNhbiBiZSBp
-bnN0YWxsZWQiKS4KPgo+IFNpZ25lZC1vZmYtYnk6IEZyZWRpYW5vIFppZ2xpbyA8ZnppZ2xpb0By
-ZWRoYXQuY29tPgo+IC0tLQo+ICAgc2VydmVyL3Rlc3RzL3Rlc3QtY29kZWNzLXBhcnNpbmcuYyB8
-IDIgKy0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+
-Cj4gQ2hhbmdlcyBzaW5jZSB2MToKPiAtIGNoZWNrIGFsd2F5cyBlcnJvciBzZXR0aW5nIGNvZGVj
-cy4KPgo+IGRpZmYgLS1naXQgYS9zZXJ2ZXIvdGVzdHMvdGVzdC1jb2RlY3MtcGFyc2luZy5jIGIv
-c2VydmVyL3Rlc3RzL3Rlc3QtY29kZWNzLXBhcnNpbmcuYwo+IGluZGV4IDc5OTg1MDFjOS4uMDAz
-N2MwNThmIDEwMDY0NAo+IC0tLSBhL3NlcnZlci90ZXN0cy90ZXN0LWNvZGVjcy1wYXJzaW5nLmMK
-PiArKysgYi9zZXJ2ZXIvdGVzdHMvdGVzdC1jb2RlY3MtcGFyc2luZy5jCj4gQEAgLTE0MCw3ICsx
-NDAsNyBAQCBzdGF0aWMgdm9pZCBjb2RlY3NfYmFkKHZvaWQpCj4gICAgICAgICAgIGdfdGVzdF9l
-eHBlY3RfbWVzc2FnZShHX0xPR19ET01BSU4sIHRlc3RfY2FzZXNbaV0ubG9nX2xldmVsLCB0ZXN0
-X2Nhc2VzW2ldLmVycm9yX21lc3NhZ2UpOwo+ICAgICAgICAgICBpZiAodGVzdF9jYXNlc1tpXS5k
-ZWZhdWx0X2Vycl9tZXNzYWdlKQo+ICAgICAgICAgICAgICAgZ190ZXN0X2V4cGVjdF9tZXNzYWdl
-KEdfTE9HX0RPTUFJTiwgR19MT0dfTEVWRUxfV0FSTklORywgIipGYWlsZWQgdG8gc2V0IHZpZGVv
-IGNvZGVjcyoiKTsKPiAtICAgICAgICBnX2Fzc2VydF9jbXBpbnQoc3BpY2Vfc2VydmVyX3NldF92
-aWRlb19jb2RlY3Moc2VydmVyLCB0ZXN0X2Nhc2VzW2ldLmNvZGVjcyksID09LCAwKTsKPiArICAg
-ICAgICBnX2Fzc2VydF9jbXBpbnQoc3BpY2Vfc2VydmVyX3NldF92aWRlb19jb2RlY3Moc2VydmVy
-LCB0ZXN0X2Nhc2VzW2ldLmNvZGVjcyksICE9LCAwKTsKPiAgICAgICAgICAgZ190ZXN0X2Fzc2Vy
-dF9leHBlY3RlZF9tZXNzYWdlcygpOwo+ICAgICAgIH0KPiAgIApfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3Bp
-Y2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+RG8gbm90IHBhc3MgdW5hbGlnbmVkIFFYTFBIWVNJQ0FMIGJ1dCBwYXNzIGEgdmFsaWQgcG9pbnRl
+ciBhbmQKdGhlbiBjYXN0LgoKU2lnbmVkLW9mZi1ieTogRnJlZGlhbm8gWmlnbGlvIDxmemlnbGlv
+QHJlZGhhdC5jb20+Ci0tLQogc2VydmVyL3JlZC1yZXBsYXktcXhsLmMgfCAxNiArKysrKysrKysr
+KystLS0tCiAxIGZpbGUgY2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkK
+CmRpZmYgLS1naXQgYS9zZXJ2ZXIvcmVkLXJlcGxheS1xeGwuYyBiL3NlcnZlci9yZWQtcmVwbGF5
+LXF4bC5jCmluZGV4IGZhNDRmYTdjNC4uMGM3ZTA4YzE0IDEwMDY0NAotLS0gYS9zZXJ2ZXIvcmVk
+LXJlcGxheS1xeGwuYworKysgYi9zZXJ2ZXIvcmVkLXJlcGxheS1xeGwuYwpAQCAtMzExLDEwICsz
+MTEsMTIgQEAgc3RhdGljIHNzaXplX3QgcmVkX3JlcGxheV9kYXRhX2NodW5rcyhTcGljZVJlcGxh
+eSAqcmVwbGF5LCBjb25zdCBjaGFyICpwcmVmaXgsCiAgICAgZGF0YV9zaXplID0gY3VyLT5kYXRh
+X3NpemU7CiAgICAgY3VyLT5uZXh0X2NodW5rID0gY3VyLT5wcmV2X2NodW5rID0gMDsKICAgICB3
+aGlsZSAoY291bnRfY2h1bmtzLS0gPiAwKSB7Ci0gICAgICAgIGlmIChyZWFkX2JpbmFyeShyZXBs
+YXksIHByZWZpeCwgJm5leHRfZGF0YV9zaXplLCAodWludDhfdCoqKSZjdXItPm5leHRfY2h1bmss
+CisgICAgICAgIHVpbnQ4X3QgKmRhdGEgPSBOVUxMOworICAgICAgICBpZiAocmVhZF9iaW5hcnko
+cmVwbGF5LCBwcmVmaXgsICZuZXh0X2RhdGFfc2l6ZSwgKHVpbnQ4X3QqKikmZGF0YSwKICAgICAg
+ICAgICAgIHNpemVvZihRWExEYXRhQ2h1bmspKSA9PSBSRVBMQVlfRVJST1IpIHsKICAgICAgICAg
+ICAgIHJldHVybiAtMTsKICAgICAgICAgfQorICAgICAgICBjdXItPm5leHRfY2h1bmsgPSBRWExQ
+SFlTSUNBTF9GUk9NX1BUUihkYXRhKTsKICAgICAgICAgZGF0YV9zaXplICs9IG5leHRfZGF0YV9z
+aXplOwogICAgICAgICBuZXh0ID0gUVhMUEhZU0lDQUxfVE9fUFRSKGN1ci0+bmV4dF9jaHVuayk7
+CiAgICAgICAgIG5leHQtPnByZXZfY2h1bmsgPSBRWExQSFlTSUNBTF9GUk9NX1BUUihjdXIpOwpA
+QCAtNDcyLDcgKzQ3NCw5IEBAIHN0YXRpYyBRWExJbWFnZSAqcmVkX3JlcGxheV9pbWFnZShTcGlj
+ZVJlcGxheSAqcmVwbGF5LCB1aW50MzJfdCBmbGFncykKICAgICAgICAgaWYgKHF4bF9mbGFncyAm
+IFFYTF9CSVRNQVBfRElSRUNUKSB7CiAgICAgICAgICAgICBxeGwtPmJpdG1hcC5kYXRhID0gUVhM
+UEhZU0lDQUxfRlJPTV9QVFIocmVkX3JlcGxheV9pbWFnZV9kYXRhX2ZsYXQocmVwbGF5LCAmYml0
+bWFwX3NpemUpKTsKICAgICAgICAgfSBlbHNlIHsKLSAgICAgICAgICAgIHNpemUgPSByZWRfcmVw
+bGF5X2RhdGFfY2h1bmtzKHJlcGxheSwgImJpdG1hcC5kYXRhIiwgKHVpbnQ4X3QqKikmcXhsLT5i
+aXRtYXAuZGF0YSwgMCk7CisgICAgICAgICAgICB1aW50OF90ICpkYXRhID0gTlVMTDsKKyAgICAg
+ICAgICAgIHNpemUgPSByZWRfcmVwbGF5X2RhdGFfY2h1bmtzKHJlcGxheSwgImJpdG1hcC5kYXRh
+IiwgKHVpbnQ4X3QqKikmZGF0YSwgMCk7CisgICAgICAgICAgICBxeGwtPmJpdG1hcC5kYXRhID0g
+UVhMUEhZU0lDQUxfRlJPTV9QVFIoZGF0YSk7CiAgICAgICAgICAgICBpZiAoc2l6ZSAhPSBiaXRt
+YXBfc2l6ZSkgewogICAgICAgICAgICAgICAgIGdfd2FybmluZygiYmFkIGltYWdlLCAlIiBHX0dT
+SVpFX0ZPUk1BVCAiICE9ICUiIEdfR1NJWkVfRk9STUFULCBzaXplLCBiaXRtYXBfc2l6ZSk7CiAg
+ICAgICAgICAgICAgICAgcmV0dXJuIE5VTEw7CkBAIC03MTAsNyArNzE0LDkgQEAgc3RhdGljIHZv
+aWQgcmVkX3JlcGxheV9zdHJva2VfcHRyKFNwaWNlUmVwbGF5ICpyZXBsYXksIFFYTFN0cm9rZSAq
+cXhsLCB1aW50MzJfdAogICAgICAgICBzaXplX3Qgc2l6ZTsKIAogICAgICAgICByZXBsYXlfZnNj
+YW5mKHJlcGxheSwgImF0dHIuc3R5bGVfbnNlZyAlZFxuIiwgJnRlbXApOyBxeGwtPmF0dHIuc3R5
+bGVfbnNlZyA9IHRlbXA7Ci0gICAgICAgIHJlYWRfYmluYXJ5KHJlcGxheSwgInN0eWxlIiwgJnNp
+emUsICh1aW50OF90KiopJnF4bC0+YXR0ci5zdHlsZSwgMCk7CisgICAgICAgIHVpbnQ4X3QgKmRh
+dGEgPSBOVUxMOworICAgICAgICByZWFkX2JpbmFyeShyZXBsYXksICJzdHlsZSIsICZzaXplLCAo
+dWludDhfdCoqKSZkYXRhLCAwKTsKKyAgICAgICAgcXhsLT5hdHRyLnN0eWxlID0gUVhMUEhZU0lD
+QUxfRlJPTV9QVFIoZGF0YSk7CiAgICAgfQogICAgIHJlZF9yZXBsYXlfYnJ1c2hfcHRyKHJlcGxh
+eSwgJnF4bC0+YnJ1c2gsIGZsYWdzKTsKICAgICByZXBsYXlfZnNjYW5mKHJlcGxheSwgImZvcmVf
+bW9kZSAlZFxuIiwgJnRlbXApOyBxeGwtPmZvcmVfbW9kZSA9IHRlbXA7CkBAIC0xMTM0LDcgKzEx
+NDAsOSBAQCBzdGF0aWMgUVhMU3VyZmFjZUNtZCAqcmVkX3JlcGxheV9zdXJmYWNlX2NtZChTcGlj
+ZVJlcGxheSAqcmVwbGF5KQogICAgICAgICB9CiAgICAgICAgIHNpemUgPSBxeGwtPnUuc3VyZmFj
+ZV9jcmVhdGUuaGVpZ2h0ICogYWJzKHF4bC0+dS5zdXJmYWNlX2NyZWF0ZS5zdHJpZGUpOwogICAg
+ICAgICBpZiAoKHF4bC0+ZmxhZ3MgJiBRWExfU1VSRl9GTEFHX0tFRVBfREFUQSkgIT0gMCkgewot
+ICAgICAgICAgICAgcmVhZF9iaW5hcnkocmVwbGF5LCAiZGF0YSIsICZyZWFkX3NpemUsICh1aW50
+OF90KiopJnF4bC0+dS5zdXJmYWNlX2NyZWF0ZS5kYXRhLCAwKTsKKyAgICAgICAgICAgIHVpbnQ4
+X3QgKmRhdGEgPSBOVUxMOworICAgICAgICAgICAgcmVhZF9iaW5hcnkocmVwbGF5LCAiZGF0YSIs
+ICZyZWFkX3NpemUsICh1aW50OF90KiopJmRhdGEsIDApOworICAgICAgICAgICAgcXhsLT51LnN1
+cmZhY2VfY3JlYXRlLmRhdGEgPSBRWExQSFlTSUNBTF9GUk9NX1BUUihkYXRhKTsKICAgICAgICAg
+ICAgIGlmIChyZWFkX3NpemUgIT0gc2l6ZSkgewogICAgICAgICAgICAgICAgIGdfd2FybmluZygi
+bWlzbWF0Y2ggJSIgR19HU0laRV9GT1JNQVQgIiAhPSAlIiBHX0dTSVpFX0ZPUk1BVCwgc2l6ZSwg
+cmVhZF9zaXplKTsKICAgICAgICAgICAgIH0KLS0gCjIuMjAuMQoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNw
+aWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
