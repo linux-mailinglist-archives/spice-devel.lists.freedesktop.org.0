@@ -1,40 +1,45 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4348E634FD
-	for <lists+spice-devel@lfdr.de>; Tue,  9 Jul 2019 13:35:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 94DF663526
+	for <lists+spice-devel@lfdr.de>; Tue,  9 Jul 2019 13:47:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D44828932E;
-	Tue,  9 Jul 2019 11:35:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 20EC289FD4;
+	Tue,  9 Jul 2019 11:47:22 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3F2F38932E
- for <spice-devel@lists.freedesktop.org>; Tue,  9 Jul 2019 11:35:31 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 48E1089FD4
+ for <spice-devel@lists.freedesktop.org>; Tue,  9 Jul 2019 11:47:20 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id D2101307D852
- for <spice-devel@lists.freedesktop.org>; Tue,  9 Jul 2019 11:35:30 +0000 (UTC)
-Received: from lub.tlv (dhcp-4-218.tlv.redhat.com [10.35.4.218])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 3C14D379C;
- Tue,  9 Jul 2019 11:35:30 +0000 (UTC)
-To: Frediano Ziglio <fziglio@redhat.com>, spice-devel@lists.freedesktop.org
+ by mx1.redhat.com (Postfix) with ESMTPS id B2E743082B6D
+ for <spice-devel@lists.freedesktop.org>; Tue,  9 Jul 2019 11:47:19 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AB4FD79582
+ for <spice-devel@lists.freedesktop.org>; Tue,  9 Jul 2019 11:47:19 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id A27B2206D1;
+ Tue,  9 Jul 2019 11:47:19 +0000 (UTC)
+Date: Tue, 9 Jul 2019 07:47:18 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: uril@redhat.com
+Message-ID: <1438838942.26817085.1562672838194.JavaMail.zimbra@redhat.com>
+In-Reply-To: <a29c56ec-11b8-247a-1ec1-6feb0bb8033f@redhat.com>
 References: <20190708120016.27270-1-fziglio@redhat.com>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <a29c56ec-11b8-247a-1ec1-6feb0bb8033f@redhat.com>
-Date: Tue, 9 Jul 2019 14:35:27 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ <a29c56ec-11b8-247a-1ec1-6feb0bb8033f@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190708120016.27270-1-fziglio@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Originating-IP: [10.33.32.13, 10.4.195.4]
+Thread-Topic: Drop autotools
+Thread-Index: IAYrf8gv6bAurlSUH2Fw36ZoE3mO0Q==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.48]); Tue, 09 Jul 2019 11:35:30 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.45]); Tue, 09 Jul 2019 11:47:19 +0000 (UTC)
 Subject: Re: [Spice-devel] [PATCH spice-gtk 0/2] Drop autotools
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -47,18 +52,24 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gNy84LzE5IDM6MDAgUE0sIEZyZWRpYW5vIFppZ2xpbyB3cm90ZToKPiBUaGlzIHNlcmllcyBp
-cyBmcm9tIE1hcmMtQW5kcsOpLCBJIGp1c3QgcmViYXNlZCBpdCBvbiBjdXJyZW50IG1hc3Rlci4K
-PiBOb3QgbXVjaCBsZWZ0IG9mIHRoZSBvcmlnaW5hbCBzZXJpZXMuCj4gSSB0aGluayBpdCdzIHRp
-bWUgdG8gZ2V0IGJhY2sgdG8gaXQuCgoKRG9lcyBtZXNvbiB3b3JrIHdlbGwgZm9yIG1pbmd3LXNw
-aWNlLWd0ayA/CgpJIHRoaW5rIGEgc2FmZXIgcGF0aCBpcyB0byBtYWtlIGEgcmVsZWFzZSB3aXRo
-IE1lc29uCmJlZm9yZSByZW1vdmluZyBhdXRvdG9vbHMuCgpVcmkuCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApT
-cGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
-cC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+PiAKPiBPbiA3LzgvMTkgMzowMCBQTSwgRnJlZGlhbm8gWmlnbGlvIHdyb3RlOgo+ID4gVGhpcyBz
+ZXJpZXMgaXMgZnJvbSBNYXJjLUFuZHLDqSwgSSBqdXN0IHJlYmFzZWQgaXQgb24gY3VycmVudCBt
+YXN0ZXIuCj4gPiBOb3QgbXVjaCBsZWZ0IG9mIHRoZSBvcmlnaW5hbCBzZXJpZXMuCj4gPiBJIHRo
+aW5rIGl0J3MgdGltZSB0byBnZXQgYmFjayB0byBpdC4KPiAKPiAKPiBEb2VzIG1lc29uIHdvcmsg
+d2VsbCBmb3IgbWluZ3ctc3BpY2UtZ3RrID8KPiAKPiBJIHRoaW5rIGEgc2FmZXIgcGF0aCBpcyB0
+byBtYWtlIGEgcmVsZWFzZSB3aXRoIE1lc29uCj4gYmVmb3JlIHJlbW92aW5nIGF1dG90b29scy4K
+PiAKPiBVcmkuCj4gCgpXZSBoYWQgd2luZG93cyBpbiBDSSBhbmQgTWFyYy1hbmRyZSBpcyB1c2lu
+ZyBNZXNvbiBmb3IgRmVkb3JhLgpWaWN0b3IsIGFzIGZhciBhcyBJIGtub3csIG1hbmFnZWQgdG8g
+ZG8gYSBwYWNrYWdlIHVzaW5nIE1lc29uLgpXZSBjb3VsZCByb2xsYmFjayBpZiBuZWVkZWQgYnV0
+IHdlIHRlc3RlZCBpdCBpbiBkaWZmZXJlbnQgd2F5cy4KUkhFTCA3IGhhcyBNZXNvbiBwYWNrYWdl
+cyBuZWVkZWQgKGFsdGhvdWdoIEkgZG9uJ3QgcmVtZW1iZXIgaWYKdGhpcyB3YXMgdGVzdGVkKS4K
+CkZyZWRpYW5vCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+ClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5v
+cmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1k
+ZXZlbA==
