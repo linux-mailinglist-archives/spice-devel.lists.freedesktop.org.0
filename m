@@ -2,42 +2,40 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07F61645A1
-	for <lists+spice-devel@lfdr.de>; Wed, 10 Jul 2019 13:11:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3573645B5
+	for <lists+spice-devel@lfdr.de>; Wed, 10 Jul 2019 13:27:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D423989EEB;
-	Wed, 10 Jul 2019 11:11:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D6B0F89812;
+	Wed, 10 Jul 2019 11:27:20 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C612789EEB
- for <spice-devel@lists.freedesktop.org>; Wed, 10 Jul 2019 11:11:53 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6BE9389812
+ for <spice-devel@lists.freedesktop.org>; Wed, 10 Jul 2019 11:27:19 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 67CE13082A49
- for <spice-devel@lists.freedesktop.org>; Wed, 10 Jul 2019 11:11:53 +0000 (UTC)
-Received: from lub.tlv (dhcp-4-218.tlv.redhat.com [10.35.4.218])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 02D115D9CD;
- Wed, 10 Jul 2019 11:11:49 +0000 (UTC)
-To: Victor Toso <victortoso@redhat.com>, Frediano Ziglio <fziglio@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 05B1330C34C0
+ for <spice-devel@lists.freedesktop.org>; Wed, 10 Jul 2019 11:27:19 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.70])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A587C5B0BD;
+ Wed, 10 Jul 2019 11:27:16 +0000 (UTC)
+Date: Wed, 10 Jul 2019 13:27:15 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Uri Lublin <uril@redhat.com>
+Message-ID: <20190710112715.ieaizhvlcemirfnu@wingsuit>
 References: <20190708120016.27270-1-fziglio@redhat.com>
  <a29c56ec-11b8-247a-1ec1-6feb0bb8033f@redhat.com>
  <1438838942.26817085.1562672838194.JavaMail.zimbra@redhat.com>
  <20190709141619.im3227v46n2s2u52@wingsuit>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <ebbe6125-75a6-5773-c5c3-77f14ff74e45@redhat.com>
-Date: Wed, 10 Jul 2019 14:11:48 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ <ebbe6125-75a6-5773-c5c3-77f14ff74e45@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190709141619.im3227v46n2s2u52@wingsuit>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+In-Reply-To: <ebbe6125-75a6-5773-c5c3-77f14ff74e45@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.45]); Wed, 10 Jul 2019 11:11:53 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.40]); Wed, 10 Jul 2019 11:27:19 +0000 (UTC)
 Subject: Re: [Spice-devel] [PATCH spice-gtk 0/2] Drop autotools
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -50,34 +48,99 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
 Cc: spice-devel@lists.freedesktop.org
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1957017980=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gNy85LzE5IDU6MTYgUE0sIFZpY3RvciBUb3NvIHdyb3RlOgo+IEhpLAo+IAo+IE9uIFR1ZSwg
-SnVsIDA5LCAyMDE5IGF0IDA3OjQ3OjE4QU0gLTA0MDAsIEZyZWRpYW5vIFppZ2xpbyB3cm90ZToK
-Pj4+Cj4+PiBPbiA3LzgvMTkgMzowMCBQTSwgRnJlZGlhbm8gWmlnbGlvIHdyb3RlOgo+Pj4+IFRo
-aXMgc2VyaWVzIGlzIGZyb20gTWFyYy1BbmRyw6ksIEkganVzdCByZWJhc2VkIGl0IG9uIGN1cnJl
-bnQgbWFzdGVyLgo+Pj4+IE5vdCBtdWNoIGxlZnQgb2YgdGhlIG9yaWdpbmFsIHNlcmllcy4KPj4+
-PiBJIHRoaW5rIGl0J3MgdGltZSB0byBnZXQgYmFjayB0byBpdC4KPj4+Cj4+Pgo+Pj4gRG9lcyBt
-ZXNvbiB3b3JrIHdlbGwgZm9yIG1pbmd3LXNwaWNlLWd0ayA/Cj4gCj4gSXQgc2hvdWxkLCBub3Rl
-IHRoYSBtaW5ndzY0LWZpbGVzeXN0ZW0tMTA2IHByb3ZpZGVzIG1pbmd3NjQtbWVzb24KPiAKPiAg
-ICAgICh3aW5nc3VpdCkgc3BpY2UtZ3RrIChtYXN0ZXIgOWE2ZmZiYWMpICQgZG5mIHdoYXRwcm92
-aWRlcyBtaW5ndzY0LW1lc29uCj4gICAgICBMYXN0IG1ldGFkYXRhIGV4cGlyYXRpb24gY2hlY2s6
-IDY6MzY6NTQgYWdvIG9uIE1vbiAwOCBKdWwgMjAxOSAxMzozNjoxNyBDRVNULgo+ICAgICAgbWlu
-Z3c2NC1maWxlc3lzdGVtLTEwNi0xLmZjMzAubm9hcmNoIDogTWluR1cgY3Jvc3MgY29tcGlsZXIg
-YmFzZSBmaWxlc3lzdGVtIGFuZCBlbnZpcm9ubWVudCBmb3IgdGhlIHdpbjY0IHRhcmdldAo+ICAg
-ICAgUmVwbyAgICAgICAgOiBmZWRvcmEKPiAgICAgIE1hdGNoZWQgZnJvbToKPiAgICAgIEZpbGVu
-YW1lICAgIDogL3Vzci9iaW4vbWluZ3c2NC1tZXNvbgo+IAo+IAo+Pj4KPj4+IEkgdGhpbmsgYSBz
-YWZlciBwYXRoIGlzIHRvIG1ha2UgYSByZWxlYXNlIHdpdGggTWVzb24KPj4+IGJlZm9yZSByZW1v
-dmluZyBhdXRvdG9vbHMuCj4gCj4gSSBoYWQgdGhhdCBpbiBtaW5kIHdpdGggMC4zNyByZWxlYXNl
-IG8vCj4gCj4gaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL3NwaWNlL3NwaWNlLWd0ay8t
-L3RhZ3MvdjAuMzcKCk5vdGUgdGhhdCB0aGlzIHJlbGVhc2Ugd2FzIGRvbmUgd2l0aCBhdXRvdG9v
-bHMgYW5kIG5vdCBtZXNvbi4KCmh0dHBzOi8vd3d3LnNwaWNlLXNwYWNlLm9yZy9kb3dubG9hZC9n
-dGsvc3BpY2UtZ3RrLTAuMzcudGFyLmJ6MgoKVXJpCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZl
-bEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFp
-bG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+
+--===============1957017980==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="qs4rw6uslw6nyrcd"
+Content-Disposition: inline
+
+
+--qs4rw6uslw6nyrcd
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jul 10, 2019 at 02:11:48PM +0300, Uri Lublin wrote:
+> On 7/9/19 5:16 PM, Victor Toso wrote:
+> > Hi,
+> >=20
+> > On Tue, Jul 09, 2019 at 07:47:18AM -0400, Frediano Ziglio wrote:
+> > > >=20
+> > > > On 7/8/19 3:00 PM, Frediano Ziglio wrote:
+> > > > > This series is from Marc-Andr=E9, I just rebased it on current ma=
+ster.
+> > > > > Not much left of the original series.
+> > > > > I think it's time to get back to it.
+> > > >=20
+> > > >=20
+> > > > Does meson work well for mingw-spice-gtk ?
+> >=20
+> > It should, note tha mingw64-filesystem-106 provides mingw64-meson
+> >=20
+> >      (wingsuit) spice-gtk (master 9a6ffbac) $ dnf whatprovides mingw64-=
+meson
+> >      Last metadata expiration check: 6:36:54 ago on Mon 08 Jul 2019 13:=
+36:17 CEST.
+> >      mingw64-filesystem-106-1.fc30.noarch : MinGW cross compiler base f=
+ilesystem and environment for the win64 target
+> >      Repo        : fedora
+> >      Matched from:
+> >      Filename    : /usr/bin/mingw64-meson
+> >=20
+> >=20
+> > > >=20
+> > > > I think a safer path is to make a release with Meson
+> > > > before removing autotools.
+> >=20
+> > I had that in mind with 0.37 release o/
+> >=20
+> > https://gitlab.freedesktop.org/spice/spice-gtk/-/tags/v0.37
+>=20
+> Note that this release was done with autotools and not meson.
+>=20
+> https://www.spice-space.org/download/gtk/spice-gtk-0.37.tar.bz2
+>=20
+> Uri
+
+Yes, but my reply was to "make a release with Meson", meson.build
+is included.
+
+
+--qs4rw6uslw6nyrcd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0ly5MACgkQl9kSPeN6
+SE9q4Q//c/f6O3CEKtWOFBkiIlK01stcfq1HOdIMSttUJ1AMntDPY6HkACUP4OtE
+aLjKwER7WJJlbQlv20u87BK6U88O+CZD2cM7q9uwBLPvei2N08aoz0gEAMlJHi0M
+Taf88SmPHW35oaJTxty9r4EK4jmYOTFv842JusRyH95m+YVHXxfhKdLDGz6Pt8En
+6JoqCTlJivXfAG76I7rI6DIxbr2U1rs3fr+PZLtMB72rYmwUVvZUQVw8/ybhu+ZX
+BqCJAnmqndT4USffbcRlrnLd1TWxfz/95dAkRt/AHV1eeAw4piSs6OemgROICCph
+Fzp0SfjLV//kXv/g5oJznDPYW6RFFC5tj2B3WSX308V+kpaNRDdKaKwuUWB1lPVw
+Ypd6+PDM6zuJ9W3m169fZqrYNGjEPBsAWXGGyhNZcvzb/ijH4ovf2SicS15o5SyW
+shpTgr7Dx5rYLYmWoTWGBa7v1iAMT3pPeyZgyaphF+MpuArHmp+7Ojuu7B5OSFAW
+WPT1limegAJ9m7aOgcPi3MiKXs+7g2K8IgvBGroyeD8XZZ8rEnxok0XW/Mu+krEK
+gDedOw7Xh0iMGhNag40rBwlu/BvMVAMIHgvrVsqXFHJY3r5wlbaKtfuFB/2j1EgL
+LCF3ZD8y67dCWugkg8P2kTKRo8rB8PDZdedQMWbpNlX4bDVDmKc=
+=/f8I
+-----END PGP SIGNATURE-----
+
+--qs4rw6uslw6nyrcd--
+
+--===============1957017980==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1957017980==--
