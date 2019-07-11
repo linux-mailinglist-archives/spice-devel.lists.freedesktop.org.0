@@ -1,39 +1,67 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4199657A9
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 15:09:35 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 36F6D657B1
+	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 15:10:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 49AC66E218;
-	Thu, 11 Jul 2019 13:09:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8F3996E22E;
+	Thu, 11 Jul 2019 13:10:18 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E6E246E218
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:09:32 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 8664F308A98D
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:09:32 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.70])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 319B01802E;
- Thu, 11 Jul 2019 13:09:31 +0000 (UTC)
-Date: Thu, 11 Jul 2019 15:09:31 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190711130931.kivl4yk37hpirovw@wingsuit>
-References: <20190711125857.17701-1-fziglio@redhat.com>
+Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 939316E22E
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:10:17 +0000 (UTC)
+Received: from 82-64-54-218.subs.proxad.net ([82.64.54.218] helo=amboise)
+ by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.89) (envelope-from <fgouget@free.fr>) id 1hlYqQ-0002eZ-8Z
+ for spice-devel@lists.freedesktop.org; Thu, 11 Jul 2019 08:10:43 -0500
+Received: from fgouget by amboise with local (Exim 4.92)
+ (envelope-from <fgouget@amboise.dolphin>) id 1hlYpy-0004W0-2Q
+ for spice-devel@lists.freedesktop.org; Thu, 11 Jul 2019 15:10:14 +0200
+Date: Thu, 11 Jul 2019 15:10:14 +0200 (CEST)
+From: Francois Gouget <fgouget@codeweavers.com>
+To: Spice devel <spice-devel@lists.freedesktop.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-In-Reply-To: <20190711125857.17701-1-fziglio@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.41]); Thu, 11 Jul 2019 13:09:32 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk] channel-usbredir: Remove leak
- of decompressed buffer
+Message-Id: <E1hlYpy-0004W0-2Q@amboise>
+X-Spam-Score: -103.7
+X-Spam-Report: Spam detection software,
+ running on the system "mail.codeweavers.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview: Signed-off-by: Francois Gouget <fgouget@codeweavers.com> ---
+ Just a minor patch partly inspired by a patch from Frediano Ziglio.
+ 5975a98a94e0
+ at git://people.freedesktop.org/~fziglio/spice-protocol The "client|server"
+ comments bear verification: they're based on a comment in do_client_monitors()
+ in vdagentd.c that implies VD_AGENT_MONITORS_CONFIG can be sent by either
+ the client or server which [...] 
+ Content analysis details:   (-103.7 points, 5.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -100 USER_IN_WHITELIST      From: address is in the user's white-list
+ -6.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+ 0.0 TVD_RCVD_IP            Message was received from an IP address
+ 1.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 1.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider (fgouget[at]free.fr)
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
+ c=relaxed/relaxed; 
+ d=codeweavers.com; s=6377696661; h=Message-Id:Content-Type:MIME-Version:
+ Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=2eqQkcpLM336n0X9fQNJpTTPx+3Lhd8GFY4sf97aVpk=; b=pvcFybg7FhplOomOalRBCQkfjM
+ 9QzsoyUG6ccou/aOR3NKTch/NfyKkfuVruq9FwkRCYW8pUCvTp5rlzshPBc0ptLrHRa627GF6Dau4
+ m/cWD2ZpBhoEjs0/sFuSHrmQ8TNb/WhF9mRfgqpjDBa46JsLoORBDsm6GwGtNhBlG3UQ=;
+Subject: [Spice-devel] [protocol] protocol: Add some comments to vd_agentd.h
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -45,119 +73,46 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1676581252=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1676581252==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="bd37u4lyd3rsslje"
-Content-Disposition: inline
-
-
---bd37u4lyd3rsslje
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Thu, Jul 11, 2019 at 01:58:57PM +0100, Frediano Ziglio wrote:
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-Nice,
-Acked-by: Victor Toso <victortoso@redhat.com>
-
-> ---
->  src/channel-usbredir.c | 11 +++++------
->  1 file changed, 5 insertions(+), 6 deletions(-)
->=20
-> diff --git a/src/channel-usbredir.c b/src/channel-usbredir.c
-> index 76534180..04acf0bd 100644
-> --- a/src/channel-usbredir.c
-> +++ b/src/channel-usbredir.c
-> @@ -724,6 +724,7 @@ static void usbredir_handle_msg(SpiceChannel *c, Spic=
-eMsgIn *in)
->          if (try_handle_compressed_msg(compressed_data_msg, &buf, &size))=
- {
->              /* uncompressed ok*/
->          } else {
-> +            buf =3D NULL;
->              r =3D USB_REDIR_ERROR_READ_PARSE;
->          }
->      } else { /* Regular SPICE_MSG_SPICEVMC_DATA msg */
-> @@ -733,17 +734,12 @@ static void usbredir_handle_msg(SpiceChannel *c, Sp=
-iceMsgIn *in)
->      spice_usbredir_channel_lock(channel);
->      if (r =3D=3D 0)
->          r =3D spice_usb_backend_read_guest_data(priv->host, buf, size);
-> -    if (r !=3D 0) {
-> +    if (r !=3D 0 && priv->spice_device !=3D NULL) {
->          SpiceUsbDevice *spice_device =3D priv->spice_device;
->          device_error_data err_data;
->          gchar *desc;
->          GError *err;
-> =20
-> -        if (spice_device =3D=3D NULL) {
-> -            spice_usbredir_channel_unlock(channel);
-> -            return;
-> -        }
-> -
->          desc =3D spice_usb_device_get_description(spice_device, NULL);
->          err =3D spice_usb_backend_get_error_details(r, desc);
->          g_free(desc);
-> @@ -764,6 +760,9 @@ static void usbredir_handle_msg(SpiceChannel *c, Spic=
-eMsgIn *in)
->      } else {
->          spice_usbredir_channel_unlock(channel);
->      }
-> +    if (spice_msg_in_type(in) =3D=3D SPICE_MSG_SPICEVMC_COMPRESSED_DATA)=
- {
-> +        g_free(buf);
-> +    }
->  }
-> =20
->  #else
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---bd37u4lyd3rsslje
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0nNQoACgkQl9kSPeN6
-SE8pQBAAuLffvukuR7FkwwraQjeubwTZnZBeT2Unkz0Mpjq656YT/EmKfc9lsZFr
-xkNUaPwE7cigX5gnutPEQtMjPtg+7xHuHDUVfel02UQn9fASbskMk/tOaWRJOhd4
-VvNl53HiHeeHnKCFa8IN+RTDunoHV8svk1uVSlIALLDhzn70XsIDXpTUsjw2ALbk
-5ZtP2QWctjKg1M5Rvx1xm3PWkq+UdFN90VfCAHUowiC10IxS23DaLjQMljQG4Nap
-kSVElikWg7RsPMyz7wXg3NeCP5vFrguVBytKnaMlo2j1MGS0rjijbjgWGH6zK3ZZ
-t3lkZgKtqlSqSaHuXQhhoeRlnkg+b9z1zcx1BAg6rGls0Hfs0entyklW0OVv3ah/
-wKADXcqbH0J53IpIicP2gAF5vBU5Vn6YXFgIW7YwRn6qK0YI1G2RKBj/Ji9G0Cf2
-U/elRP9pmTzNnrXUWhwpE9K4J/lUltF2pMzkdTte3RakDvTwT/yCiE2VI1gGEq2G
-jnzDxWSm3h9QmnxdDBBlPufU3yoz5k21LWamQaYYR0IXRbdzYHRLvr8NrYFtaD7m
-g+n1MPb39biGavRjjUh2dPsEChljG+A6WMwp+IyCa5fXcRCibKfrE/r7wG2wtpul
-LH8WM6rZ8Qv4/O+fKBog3dggENbtk5PsuGapyyrihmtaYEn6CmI=
-=AsMT
------END PGP SIGNATURE-----
-
---bd37u4lyd3rsslje--
-
---===============1676581252==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1676581252==--
+U2lnbmVkLW9mZi1ieTogRnJhbmNvaXMgR291Z2V0IDxmZ291Z2V0QGNvZGV3ZWF2ZXJzLmNvbT4K
+LS0tCgpKdXN0IGEgbWlub3IgcGF0Y2ggcGFydGx5IGluc3BpcmVkIGJ5IGEgcGF0Y2ggZnJvbSBG
+cmVkaWFubyBaaWdsaW8uCjU5NzVhOThhOTRlMCBhdCBnaXQ6Ly9wZW9wbGUuZnJlZWRlc2t0b3Au
+b3JnL35memlnbGlvL3NwaWNlLXByb3RvY29sCgpUaGUgImNsaWVudHxzZXJ2ZXIiIGNvbW1lbnRz
+IGJlYXIgdmVyaWZpY2F0aW9uOiB0aGV5J3JlIGJhc2VkIG9uIGEgCmNvbW1lbnQgaW4gZG9fY2xp
+ZW50X21vbml0b3JzKCkgaW4gdmRhZ2VudGQuYyB0aGF0IGltcGxpZXMgClZEX0FHRU5UX01PTklU
+T1JTX0NPTkZJRyBjYW4gYmUgc2VudCBieSBlaXRoZXIgdGhlIGNsaWVudCBvciBzZXJ2ZXIgCndo
+aWNoIEknbSBub3Qgc3VyZSBpcyB0cnVlLgoKCiBzcGljZS92ZF9hZ2VudC5oIHwgMTIgKysrKysr
+KysrKystCiAxIGZpbGUgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoK
+ZGlmZiAtLWdpdCBhL3NwaWNlL3ZkX2FnZW50LmggYi9zcGljZS92ZF9hZ2VudC5oCmluZGV4IDQy
+ZWM3N2EuLjA2NjJlNDQgMTAwNjQ0Ci0tLSBhL3NwaWNlL3ZkX2FnZW50LmgKKysrIGIvc3BpY2Uv
+dmRfYWdlbnQuaApAQCAtNjIsMTUgKzYyLDIyIEBAIHR5cGVkZWYgc3RydWN0IFNQSUNFX0FUVFJf
+UEFDS0VEIFZEQWdlbnRNZXNzYWdlIHsKICNkZWZpbmUgVkRfQUdFTlRfQ0xJUEJPQVJEX01BWF9T
+SVpFX0VOViAiU1BJQ0VfQ0xJUEJPQVJEX01BWF9TSVpFIgogI2VuZGlmCiAKKworLyogdmRhZ2Vu
+dGQgc29ja2V0IG1lc3NhZ2VzIGFuZCB0eXBlcyAqLworCiBlbnVtIHsKKyAgICAvKiBzZXJ2ZXIg
+LT4gYWdlbnQgKi8KICAgICBWRF9BR0VOVF9NT1VTRV9TVEFURSA9IDEsCisgICAgLyogY2xpZW50
+fHNlcnZlciAtPiBhZ2VudCAoYWNrbm93bGVkZ2VkIHVzaW5nIFZEX0FHRU5UX1JFUExZKSAqLwog
+ICAgIFZEX0FHRU5UX01PTklUT1JTX0NPTkZJRywKKyAgICAvKiBhZ2VudCAtPiBjbGllbnR8c2Vy
+dmVyICovCiAgICAgVkRfQUdFTlRfUkVQTFksCiAgICAgLyogU2V0IGNsaXBib2FyZCBkYXRhIChi
+b3RoIGRpcmVjdGlvbnMpLgogICAgICAqIE1lc3NhZ2UgY29tZXMgd2l0aCB0eXBlIGFuZCBkYXRh
+LgogICAgICAqIFNlZSBWREFnZW50Q2xpcGJvYXJkIHN0cnVjdHVyZS4KICAgICAgKi8KICAgICBW
+RF9BR0VOVF9DTElQQk9BUkQsCisgICAgLyogY2xpZW50IC0+IGFnZW50ICovCiAgICAgVkRfQUdF
+TlRfRElTUExBWV9DT05GSUcsCiAgICAgVkRfQUdFTlRfQU5OT1VOQ0VfQ0FQQUJJTElUSUVTLAog
+ICAgIC8qIEFza3MgdG8gbGlzdGVuIGZvciBjbGlwYm9hcmQgY2hhbmdlcyAoYm90aCBkaXJlY3Rp
+b25zKS4KQEAgLTI1NCw3ICsyNjEsNyBAQCB0eXBlZGVmIHN0cnVjdCBTUElDRV9BVFRSX1BBQ0tF
+RCBWREFnZW50RGV2aWNlRGlzcGxheUluZm8gewogICAgIHVpbnQzMl90IG1vbml0b3JfaWQ7CiAg
+ICAgdWludDMyX3QgZGV2aWNlX2Rpc3BsYXlfaWQ7CiAgICAgdWludDMyX3QgZGV2aWNlX2FkZHJl
+c3NfbGVuOwotICAgIHVpbnQ4X3QgZGV2aWNlX2FkZHJlc3NbMF07ICAvLyBhIHplcm8tdGVybWlu
+YXRlZCBzdHJpbmcKKyAgICB1aW50OF90IGRldmljZV9hZGRyZXNzWzBdOyAgLyogYSB6ZXJvLXRl
+cm1pbmF0ZWQgc3RyaW5nICovCiB9IFZEQWdlbnREZXZpY2VEaXNwbGF5SW5mbzsKIAogCkBAIC0y
+NzAsNiArMjc3LDkgQEAgdHlwZWRlZiBzdHJ1Y3QgU1BJQ0VfQVRUUl9QQUNLRUQgVkRBZ2VudEdy
+YXBoaWNzRGV2aWNlSW5mbyB7CiAgICAgVkRBZ2VudERldmljZURpc3BsYXlJbmZvIGRpc3BsYXlf
+aW5mb1swXTsKIH0gVkRBZ2VudEdyYXBoaWNzRGV2aWNlSW5mbzsKIAorCisvKiBDYXBhYmlsaXRp
+ZXMgZGVmaW5pdGlvbnMgKi8KKwogZW51bSB7CiAgICAgVkRfQUdFTlRfQ0FQX01PVVNFX1NUQVRF
+ID0gMCwKICAgICBWRF9BR0VOVF9DQVBfTU9OSVRPUlNfQ09ORklHLAotLSAKMi4yMC4xCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1h
+aWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
+cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
