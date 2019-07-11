@@ -2,43 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B9E965210
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 08:52:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A1CB6525B
+	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 09:22:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DD7DD89E2B;
-	Thu, 11 Jul 2019 06:52:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C7B726E0A6;
+	Thu, 11 Jul 2019 07:22:02 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
- [209.85.210.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 765BE89E2B
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 06:52:56 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id x21so4748052otq.12
- for <spice-devel@lists.freedesktop.org>; Wed, 10 Jul 2019 23:52:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EQ07ekI+mFwwNZnKCDRCCx7fpmA2vGh41X+ShhzSFOA=;
- b=nVsI/IB+6FM5Q5RnEGkcQ8RSW7Lmh0F6wqylzFnEBUyZoMe5o00+UUBD+r+T4nH7nP
- uQUX9M+e9BMWi4jdKImpWBTfCetV2kBMBeTU49mkGxJj0RtUvFNiE4JB26VJ72saBSyX
- 3K8vXhU69VtrIpqaQa14lF6yoLTev23fiFVR2/J79j1/3BOlA3LYWtCRyVjou244CjBY
- /E8RATp61v2cz3PQmtjmakumsGJKLpLPtkmem+r3ad4Ed1omdTg6njY1drIPxajk1rbD
- Z05t9SftWluGhCftbOLTyq6YRigxVWyxsGzZKnoHA+Tg/ZCesfVxCV2CxqD//ggJDWr/
- jPFg==
-X-Gm-Message-State: APjAAAWvp7kE4v2CROyp0uFPCPobGbHkq7713bUdErMdTwKWno70cyqR
- b2gZLL7Sc/q3Zd+EFVlLPK+pR2C6jlvN+jcpdX1xoQ==
-X-Google-Smtp-Source: APXvYqwLZTWbTXpvZMcbLvyKRNPvKNLBFM3tf6ILWY5u0nG7dBM282rcvLJ7O9zwcD24X8xXFr5pYCwIfsaY3OXcVBQ=
-X-Received: by 2002:a9d:6c54:: with SMTP id g20mr2204672otq.66.1562827975751; 
- Wed, 10 Jul 2019 23:52:55 -0700 (PDT)
-MIME-Version: 1.0
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA2EF6E0A6
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 07:22:01 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 77376307F5FF
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 07:22:01 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.70])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F2F915D71D;
+ Thu, 11 Jul 2019 07:22:00 +0000 (UTC)
+Date: Thu, 11 Jul 2019 09:22:00 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Kevin Pouget <kpouget@redhat.com>
+Message-ID: <20190711072200.emoa3sfn4ymppgxf@wingsuit>
 References: <20190704102922.17433-1-kpouget@redhat.com>
  <20190711061636.7atf6kg7oo43f4cs@wingsuit>
-In-Reply-To: <20190711061636.7atf6kg7oo43f4cs@wingsuit>
-From: Kevin Pouget <kpouget@redhat.com>
-Date: Thu, 11 Jul 2019 08:52:44 +0200
-Message-ID: <CADJ1XR2aKM-WwP_54-Ou33b9XbQErbGht_Az7_GEJfCqyG3g-A@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>
+ <CADJ1XR2aKM-WwP_54-Ou33b9XbQErbGht_Az7_GEJfCqyG3g-A@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CADJ1XR2aKM-WwP_54-Ou33b9XbQErbGht_Az7_GEJfCqyG3g-A@mail.gmail.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.41]); Thu, 11 Jul 2019 07:22:01 +0000 (UTC)
 Subject: Re: [Spice-devel] [PATCH spice-gtk 1/2] spice-client-gtk-module:
  allow sending multiple preferred video codecs
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -53,176 +48,329 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: Spice devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1954794696=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGVsbG8sCgpPbiBUaHUsIEp1bCAxMSwgMjAxOSBhdCA4OjE2IEFNIFZpY3RvciBUb3NvIDx2aWN0
-b3J0b3NvQHJlZGhhdC5jb20+IHdyb3RlOgo+Cj4gSGksCj4KPiBPbiBUaHUsIEp1bCAwNCwgMjAx
-OSBhdCAxMjoyOToyMVBNICswMjAwLCBLZXZpbiBQb3VnZXQgd3JvdGU6Cj4gPiBzcGljZV9kaXNw
-bGF5X2NoYW5uZWxfY2hhbmdlX3ByZWZlcnJlZF92aWRlb19jb2RlY190eXBlczogbmV3IGZ1bmN0
-aW9uCj4gPiBmb3Igc2VuZGluZyBhbiBhcnJheSBvZiB2aWRlbyBjb2RlY3MgaW5zdGVhZCBvZiBv
-bmx5IG9uZS4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBLZXZpbiBQb3VnZXQgPGtwb3VnZXRAcmVk
-aGF0LmNvbT4KPgo+IExvb2tzIGZpbmUsCj4KPiA+IC0tLQo+ID4gIGRvYy9yZWZlcmVuY2Uvc3Bp
-Y2UtZ3RrLXNlY3Rpb25zLnR4dCB8ICAxICsKPiA+ICBzcmMvY2hhbm5lbC1kaXNwbGF5LmMgICAg
-ICAgICAgICAgICAgfCA3NiArKysrKysrKysrKysrKysrKysrKysrKy0tLS0tCj4gPiAgc3JjL2No
-YW5uZWwtZGlzcGxheS5oICAgICAgICAgICAgICAgIHwgIDIgKwo+ID4gIHNyYy9tYXAtZmlsZSAg
-ICAgICAgICAgICAgICAgICAgICAgICB8ICAxICsKPiA+ICBzcmMvc3BpY2UtZ2xpYi1zeW0tZmls
-ZSAgICAgICAgICAgICAgfCAgMSArCj4gPiAgNSBmaWxlcyBjaGFuZ2VkLCA2OCBpbnNlcnRpb25z
-KCspLCAxMyBkZWxldGlvbnMoLSkKPiA+Cj4gPiBkaWZmIC0tZ2l0IGEvZG9jL3JlZmVyZW5jZS9z
-cGljZS1ndGstc2VjdGlvbnMudHh0IGIvZG9jL3JlZmVyZW5jZS9zcGljZS1ndGstc2VjdGlvbnMu
-dHh0Cj4gPiBpbmRleCBhMDMzNmFhLi4zM2Y0MDM4IDEwMDY0NAo+ID4gLS0tIGEvZG9jL3JlZmVy
-ZW5jZS9zcGljZS1ndGstc2VjdGlvbnMudHh0Cj4gPiArKysgYi9kb2MvcmVmZXJlbmNlL3NwaWNl
-LWd0ay1zZWN0aW9ucy50eHQKPiA+IEBAIC0xODUsNiArMTg1LDcgQEAgc3BpY2VfZGlzcGxheV9j
-aGFuZ2VfcHJlZmVycmVkX2NvbXByZXNzaW9uCj4gPiAgc3BpY2VfZGlzcGxheV9jaGFubmVsX2No
-YW5nZV9wcmVmZXJyZWRfY29tcHJlc3Npb24KPiA+ICBzcGljZV9kaXNwbGF5X2NoYW5nZV9wcmVm
-ZXJyZWRfdmlkZW9fY29kZWNfdHlwZQo+ID4gIHNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFuZ2Vf
-cHJlZmVycmVkX3ZpZGVvX2NvZGVjX3R5cGUKPiA+ICtzcGljZV9kaXNwbGF5X2NoYW5uZWxfY2hh
-bmdlX3ByZWZlcnJlZF92aWRlb19jb2RlY190eXBlcwo+Cj4gU291bmRzIGxpa2Ugd2UgY291bGQg
-ZGVwcmVjYXRlIHRoZSBwcmV2aW91cyBvbmUgYnV0IElNSE8sCgp5ZXMsIHRoZSBwcmV2aW91cyBv
-bmUgc2hvdWxkIGJlIGRlcHJlY2F0ZWQsIG5vIGdvb2QgcmVhc29uIHRvIGtlZXAgYm90aC4KU2hv
-dWxkIEkgdXBkYXRlIHRoZSBwYXRjaCA/Cgo+IGV2ZW50dWFsbHkgdGhpcyBwcmVmZXJyZWQtdmlk
-ZW8tY29kZWMgcHJvdG9jb2wgbWVzc2FnZSBtaWdodCBiZQo+IHJlcGxhY2VkIGJ5IHNvbWV0aGlu
-ZyB3aXRoIG1vcmUgcmVsZXZhbnQgaW5mbyBvZiBkZWNvZGluZwo+IGNhcGFiaWxpdGllcyBmb3Ig
-YmV0dGVyIGRlY2lzaW9uIG9uIGVuY29kaW5nIHNpZGUuLi4gdmlkZW8tY29kZWMKPiB0eXBlIGFs
-b25lIGRvZXNuJ3Qgc2F5IG11Y2ggYnV0IGZvciB0aGUgdGltZSBiZWluZywgaXQgd2FzIHdoYXQK
-PiB3ZSBjb3VsZCBnZXQuLi4KCmluZGVlZCwgd2UnbGwgc2VlIHdpdGggdGhlIHJlc3Qgb2YgdGhl
-IHNtYXJ0IHN0cmVhbWluZyB3b3JrIHdoYXQKcmVsZXZhbnQgaW5mb3JtYXRpb24gdGhlIGNsaWVu
-dCBjYW4gdGVsbAoKPiA+ICBzcGljZV9nbF9zY2Fub3V0X2ZyZWUKPiA+ICA8U1VCU0VDVElPTiBT
-dGFuZGFyZD4KPiA+ICBTUElDRV9ESVNQTEFZX0NIQU5ORUwKPiA+IGRpZmYgLS1naXQgYS9zcmMv
-Y2hhbm5lbC1kaXNwbGF5LmMgYi9zcmMvY2hhbm5lbC1kaXNwbGF5LmMKPiA+IGluZGV4IDlhODNj
-NTMuLjQ1NThhNTYgMTAwNjQ0Cj4gPiAtLS0gYS9zcmMvY2hhbm5lbC1kaXNwbGF5LmMKPiA+ICsr
-KyBiL3NyYy9jaGFubmVsLWRpc3BsYXkuYwo+ID4gQEAgLTIwLDYgKzIwLDcgQEAKPiA+ICAjaWZk
-ZWYgSEFWRV9TWVNfVFlQRVNfSAo+ID4gICNpbmNsdWRlIDxzeXMvdHlwZXMuaD4KPiA+ICAjZW5k
-aWYKPiA+ICsjaW5jbHVkZSA8Z2xpYi9naTE4bi1saWIuaD4KPiA+Cj4gPiAgI2luY2x1ZGUgInNw
-aWNlLWNsaWVudC5oIgo+ID4gICNpbmNsdWRlICJzcGljZS1jb21tb24uaCIKPiA+IEBAIC02MTAs
-MTggKzYxMSwxNSBAQCB2b2lkIHNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFuZ2VfcHJlZmVycmVk
-X2NvbXByZXNzaW9uKFNwaWNlQ2hhbm5lbCAqY2hhbm5lbCwgZwo+ID4gIH0KPiA+Cj4gPiAgc3Rh
-dGljIHZvaWQgc3BpY2VfZGlzcGxheV9zZW5kX2NsaWVudF9wcmVmZXJyZWRfdmlkZW9fY29kZWNz
-KFNwaWNlQ2hhbm5lbCAqY2hhbm5lbCwKPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3QgR0FycmF5ICpjb2RlY3MpCj4g
-PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGNvbnN0IGdpbnQgKmNvZGVjcywgZ3NpemUgbmNvZGVjcykKPiA+ICB7Cj4gPiAtICAg
-IGd1aW50IGk7Cj4gPiAgICAgIFNwaWNlTXNnT3V0ICpvdXQ7Cj4gPiAgICAgIFNwaWNlTXNnY0Rp
-c3BsYXlQcmVmZXJyZWRWaWRlb0NvZGVjVHlwZSAqbXNnOwo+ID4KPiA+ICAgICAgbXNnID0gZ19t
-YWxsb2MwKHNpemVvZihTcGljZU1zZ2NEaXNwbGF5UHJlZmVycmVkVmlkZW9Db2RlY1R5cGUpICsK
-PiA+IC0gICAgICAgICAgICAgICAgICAgIChzaXplb2YoU3BpY2VWaWRlb0NvZGVjVHlwZSkgKiBj
-b2RlY3MtPmxlbikpOwo+ID4gLSAgICBtc2ctPm51bV9vZl9jb2RlY3MgPSBjb2RlY3MtPmxlbjsK
-PiA+IC0gICAgZm9yIChpID0gMDsgaSA8IGNvZGVjcy0+bGVuOyBpKyspIHsKPiA+IC0gICAgICAg
-IG1zZy0+Y29kZWNzW2ldID0gZ19hcnJheV9pbmRleChjb2RlY3MsIGdpbnQsIGkpOwo+ID4gLSAg
-ICB9Cj4gPiArICAgICAgICAgICAgICAgICAgICAoc2l6ZW9mKFNwaWNlVmlkZW9Db2RlY1R5cGUp
-ICogbmNvZGVjcykpOwo+ID4gKyAgICBtc2ctPm51bV9vZl9jb2RlY3MgPSBuY29kZWNzOwo+ID4g
-KyAgICBtZW1jcHkobXNnLT5jb2RlY3MsIGNvZGVjcywgc2l6ZW9mKCpjb2RlY3MpICogbmNvZGVj
-cyk7Cj4gPgo+ID4gICAgICBvdXQgPSBzcGljZV9tc2dfb3V0X25ldyhjaGFubmVsLCBTUElDRV9N
-U0dDX0RJU1BMQVlfUFJFRkVSUkVEX1ZJREVPX0NPREVDX1RZUEUpOwo+ID4gICAgICBvdXQtPm1h
-cnNoYWxsZXJzLT5tc2djX2Rpc3BsYXlfcHJlZmVycmVkX3ZpZGVvX2NvZGVjX3R5cGUob3V0LT5t
-YXJzaGFsbGVyLCBtc2cpOwo+ID4gQEAgLTY1OSw4ICs2NTcsNiBAQCB2b2lkIHNwaWNlX2Rpc3Bs
-YXlfY2hhbmdlX3ByZWZlcnJlZF92aWRlb19jb2RlY190eXBlKFNwaWNlQ2hhbm5lbCAqY2hhbm5l
-bCwgZ2ludAo+ID4gICAqLwo+ID4gIHZvaWQgc3BpY2VfZGlzcGxheV9jaGFubmVsX2NoYW5nZV9w
-cmVmZXJyZWRfdmlkZW9fY29kZWNfdHlwZShTcGljZUNoYW5uZWwgKmNoYW5uZWwsIGdpbnQgY29k
-ZWNfdHlwZSkKPiA+ICB7Cj4gPiAtICAgIEdBcnJheSAqY29kZWNzOwo+ID4gLQo+ID4gICAgICBn
-X3JldHVybl9pZl9mYWlsKFNQSUNFX0lTX0RJU1BMQVlfQ0hBTk5FTChjaGFubmVsKSk7Cj4gPiAg
-ICAgIGdfcmV0dXJuX2lmX2ZhaWwoY29kZWNfdHlwZSA+PSBTUElDRV9WSURFT19DT0RFQ19UWVBF
-X01KUEVHICYmCj4gPiAgICAgICAgICAgICAgICAgICAgICAgY29kZWNfdHlwZSA8IFNQSUNFX1ZJ
-REVPX0NPREVDX1RZUEVfRU5VTV9FTkQpOwo+ID4gQEAgLTY3NSwxMCArNjcxLDY0IEBAIHZvaWQg
-c3BpY2VfZGlzcGxheV9jaGFubmVsX2NoYW5nZV9wcmVmZXJyZWRfdmlkZW9fY29kZWNfdHlwZShT
-cGljZUNoYW5uZWwgKmNoYW5uCj4gPiAgICAgICAqIFRoaXMgYXJyYXkgY2FuIGJlIHJlYXJyYW5n
-ZWQgdG8gaGF2ZSBAY29kZWNfdHlwZSBpbiB0aGUgZnJvbnQgKHdoaWNoIGlzCj4gPiAgICAgICAq
-IHRoZSBwcmVmZXJyZWQgZm9yIHRoZSBjbGllbnQgc2lkZSkgKi8KPiA+ICAgICAgQ0hBTk5FTF9E
-RUJVRyhjaGFubmVsLCAiY2hhbmdpbmcgcHJlZmVycmVkIHZpZGVvIGNvZGVjIHR5cGUgdG8gJXMi
-LCBnc3Rfb3B0c1tjb2RlY190eXBlXS5uYW1lKTsKPiA+IC0gICAgY29kZWNzID0gZ19hcnJheV9u
-ZXcoRkFMU0UsIEZBTFNFLCBzaXplb2YoZ2ludCkpOwo+ID4gLSAgICBnX2FycmF5X2FwcGVuZF92
-YWwoY29kZWNzLCBjb2RlY190eXBlKTsKPiA+IC0gICAgc3BpY2VfZGlzcGxheV9zZW5kX2NsaWVu
-dF9wcmVmZXJyZWRfdmlkZW9fY29kZWNzKGNoYW5uZWwsIGNvZGVjcyk7Cj4gPiAtICAgIGdfYXJy
-YXlfdW5yZWYoY29kZWNzKTsKPiA+ICsgICAgc3BpY2VfZGlzcGxheV9zZW5kX2NsaWVudF9wcmVm
-ZXJyZWRfdmlkZW9fY29kZWNzKGNoYW5uZWwsICZjb2RlY190eXBlLCAxKTsKPiA+ICt9Cj4gPiAr
-Cj4gPiArLyoqCj4gPiArICogc3BpY2VfZGlzcGxheV9jaGFubmVsX2NoYW5nZV9wcmVmZXJyZWRf
-dmlkZW9fY29kZWNzX3R5cGVzOgo+ID4gKyAqIEBjaGFubmVsOiBhICNTcGljZURpc3BsYXlDaGFu
-bmVsCj4gPiArICogQGNvZGVjczogYW4gYXJyYXkgb2YgQG5jb2RlY3MgI1NwaWNlVmlkZW9Db2Rl
-Y1R5cGUgdHlwZXMKPiA+ICsgKiBAbmNvZGVjczogdGhlIG51bWJlciBvZiBjb2RlYyB0eXBlcyBp
-biB0aGUgQGNvZGVjcyBhcnJheQo+ID4gKyAqIEBlcnI6ICNHRXJyb3IgZGVzY3JpYmluZyB0aGUg
-cmVhc29uIHdoeSB0aGUgY2hhbmdlIGZhaWxlZAo+ID4gKyAqCj4gPiArICogVGVsbHMgdGhlIHNw
-aWNlIHNlcnZlciB0aGUgb3JkZXJlZCBwcmVmZXJyZWQgdmlkZW8gY29kZWMgdHlwZXMgdG8KPiA+
-ICsgKiB1c2UgZm9yIHN0cmVhbWluZyBpbiBAY2hhbm5lbC4KPiA+ICsgKgo+ID4gKyAqIFJldHVy
-bnM6ICVUUlVFIGlmIHRoZSBwcmVmZXJyZWQgY29kZWMgbGlzdCB3YXMgc3VjY2Vzc2Z1bGx5IGNo
-YW5nZWQsIGFuZCAlRkFMU0UKPiA+ICsgKiBvdGhlcndpc2UuCj4gPiArICoKPiA+ICsgKiBTaW5j
-ZTogMC4zOAo+ID4gKyAqLwo+ID4gK2dib29sZWFuIHNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFu
-Z2VfcHJlZmVycmVkX3ZpZGVvX2NvZGVjX3R5cGVzKFNwaWNlQ2hhbm5lbCAqY2hhbm5lbCwKPiA+
-ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBjb25zdCBnaW50ICpjb2RlY3MsIGdzaXplIG5jb2RlY3MsCj4gPiArICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgR0Vycm9yICoqZXJyKQo+ID4gK3sKPiA+ICsgICAgZ3NpemUgaTsKPiA+ICsgICAgR1N0cmlu
-ZyAqbXNnOwo+ID4gKwo+ID4gKyAgICBnX3JldHVybl92YWxfaWZfZmFpbChTUElDRV9JU19ESVNQ
-TEFZX0NIQU5ORUwoY2hhbm5lbCksIEZBTFNFKTsKPgo+IElzIGl0IGV4cGVjdGVkIHRvIHdvcmsg
-d2l0aCBuY29kZWNzID0gMD8gKERpZG4ndCBmb2xsb3cgcHJldmlvdXMKPiBkaXNjdXNzaW9uKQoK
-SSB3aWxsIGFkZCB0aGlzIGd1YXJkOgoKPiBnX3JldHVybl92YWxfaWZfZmFpbChuY29kZWNzICE9
-IDAsIEZBTFNFKTsKCmFzIHRoZSBzZXJ2ZXIgc2lkZSBkb2VzbnQndCB3YW50IHRvIHJlY2VpdmUg
-MCBjb2RlY3M6Cgo+IGluIGRjYy5jOmRjY19oYW5kbGVfcHJlZmVycmVkX3ZpZGVvX2NvZGVjX3R5
-cGUoKSA6Cj4+IGdfcmV0dXJuX3ZhbF9pZl9mYWlsKG1zZy0+bnVtX29mX2NvZGVjcyA+IDAsIFRS
-VUUpOwoKPiBEaWRuJ3QgdGVzdCB5ZXQgYnV0IGxvb2tzIGZpbmUuCgoKdGhhbmtzLAoKS2V2aW4K
-Cj4gPiArCj4gPiArICAgIGlmICghc3BpY2VfY2hhbm5lbF90ZXN0X2NhcGFiaWxpdHkoY2hhbm5l
-bCwgU1BJQ0VfRElTUExBWV9DQVBfUFJFRl9WSURFT19DT0RFQ19UWVBFKSkgewo+ID4gKyAgICAg
-ICAgQ0hBTk5FTF9ERUJVRyhjaGFubmVsLCAiZG9lcyBub3QgaGF2ZSBjYXBhYmlsaXR5IHRvIGNo
-YW5nZSB0aGUgcHJlZmVycmVkIHZpZGVvIGNvZGVjIHR5cGUiKTsKPiA+ICsgICAgICAgIGdfc2V0
-X2Vycm9yX2xpdGVyYWwoZXJyLCBTUElDRV9DTElFTlRfRVJST1IsIFNQSUNFX0NMSUVOVF9FUlJP
-Ul9GQUlMRUQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIF8oIkNoYW5uZWwgZG9l
-cyBub3QgaGF2ZSBjYXBhYmlsaXR5IHRvIGNoYW5nZSB0aGUgcHJlZmVycmVkIHZpZGVvIGNvZGVj
-IHR5cGUiKSk7Cj4gPiArCj4gPiArICAgICAgICByZXR1cm4gRkFMU0U7Cj4gPiArICAgIH0KPiA+
-ICsKPiA+ICsgICAgbXNnID0gZ19zdHJpbmdfbmV3KCJjaGFuZ2luZyBwcmVmZXJyZWQgdmlkZW8g
-Y29kZWMgdHlwZSB0bzogIik7Cj4gPiArICAgIGZvciAoaSA9IDA7IGkgPCBuY29kZWNzOyBpKysp
-IHsKPiA+ICsgICAgICAgIGdpbnQgY29kZWNfdHlwZSA9IGNvZGVjc1tpXTsKPiA+ICsKPiA+ICsg
-ICAgICAgIGlmIChjb2RlY190eXBlIDwgU1BJQ0VfVklERU9fQ09ERUNfVFlQRV9NSlBFRyB8fAo+
-ID4gKyAgICAgICAgICAgIGNvZGVjX3R5cGUgPj0gU1BJQ0VfVklERU9fQ09ERUNfVFlQRV9FTlVN
-X0VORCkKPiA+ICsgICAgICAgIHsKPiA+ICsgICAgICAgICAgICBnX3N0cmluZ19mcmVlKG1zZywg
-VFJVRSk7Cj4gPiArICAgICAgICAgICAgZ19zZXRfZXJyb3IoZXJyLCBTUElDRV9DTElFTlRfRVJS
-T1IsIFNQSUNFX0NMSUVOVF9FUlJPUl9GQUlMRUQsCj4gPiArICAgICAgICAgICAgICAgICAgICAg
-ICAgXygiSW52YWxpZCBjb2RlYy10eXBlIGZvdW5kICglZCkgLi4uICIpLCBjb2RlY190eXBlKTsK
-PiA+ICsKPiA+ICsgICAgICAgICAgICByZXR1cm4gRkFMU0U7Cj4gPiArICAgICAgICB9Cj4gPiAr
-Cj4gPiArICAgICAgICBnX3N0cmluZ19hcHBlbmRfcHJpbnRmKG1zZywgIiVzICIsIGdzdF9vcHRz
-W2NvZGVjX3R5cGVdLm5hbWUpOwo+ID4gKwo+ID4gKyAgICB9Cj4gPiArICAgIENIQU5ORUxfREVC
-VUcoY2hhbm5lbCwgIiVzIiwgbXNnLT5zdHIpOwo+ID4gKyAgICBnX3N0cmluZ19mcmVlKG1zZywg
-VFJVRSk7Cj4gPiArCj4gPiArICAgIHNwaWNlX2Rpc3BsYXlfc2VuZF9jbGllbnRfcHJlZmVycmVk
-X3ZpZGVvX2NvZGVjcyhjaGFubmVsLCBjb2RlY3MsIG5jb2RlY3MpOwo+ID4gKwo+ID4gKyAgICBy
-ZXR1cm4gVFJVRTsKPiA+ICB9Cj4gPgo+ID4gIC8qKgo+ID4gZGlmZiAtLWdpdCBhL3NyYy9jaGFu
-bmVsLWRpc3BsYXkuaCBiL3NyYy9jaGFubmVsLWRpc3BsYXkuaAo+ID4gaW5kZXggNWI0OGQyZi4u
-Y2YxODUzOCAxMDA2NDQKPiA+IC0tLSBhL3NyYy9jaGFubmVsLWRpc3BsYXkuaAo+ID4gKysrIGIv
-c3JjL2NoYW5uZWwtZGlzcGxheS5oCj4gPiBAQCAtMTUwLDYgKzE1MCw4IEBAIGdib29sZWFuICAg
-ICAgICBzcGljZV9kaXNwbGF5X2NoYW5uZWxfZ2V0X3ByaW1hcnkoU3BpY2VDaGFubmVsICpjaGFu
-bmVsLCBndWludDMyCj4gPgo+ID4gIHZvaWQgc3BpY2VfZGlzcGxheV9jaGFubmVsX2NoYW5nZV9w
-cmVmZXJyZWRfY29tcHJlc3Npb24oU3BpY2VDaGFubmVsICpjaGFubmVsLCBnaW50IGNvbXByZXNz
-aW9uKTsKPiA+ICB2b2lkIHNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFuZ2VfcHJlZmVycmVkX3Zp
-ZGVvX2NvZGVjX3R5cGUoU3BpY2VDaGFubmVsICpjaGFubmVsLCBnaW50IGNvZGVjX3R5cGUpOwo+
-ID4gK2dib29sZWFuIHNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFuZ2VfcHJlZmVycmVkX3ZpZGVv
-X2NvZGVjX3R5cGVzKFNwaWNlQ2hhbm5lbCAqY2hhbm5lbCwgY29uc3QgZ2ludCAqY29kZWNzLAo+
-ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGdzaXplIG5jb2RlY3MsIEdFcnJvciAqKmVycik7Cj4gPgo+ID4gIEdUeXBl
-ICAgICAgICAgICBzcGljZV9nbF9zY2Fub3V0X2dldF90eXBlICAgICAodm9pZCkgR19HTlVDX0NP
-TlNUOwo+ID4gIHZvaWQgICAgICAgICAgICBzcGljZV9nbF9zY2Fub3V0X2ZyZWUgICAgICAgICAo
-U3BpY2VHbFNjYW5vdXQgKnNjYW5vdXQpOwo+ID4gZGlmZiAtLWdpdCBhL3NyYy9tYXAtZmlsZSBi
-L3NyYy9tYXAtZmlsZQo+ID4gaW5kZXggNTAwNjgzYy4uM2NiOTg3MyAxMDA2NDQKPiA+IC0tLSBh
-L3NyYy9tYXAtZmlsZQo+ID4gKysrIGIvc3JjL21hcC1maWxlCj4gPiBAQCAtMjUsNiArMjUsNyBA
-QCBzcGljZV9kaXNwbGF5X2NoYW5nZV9wcmVmZXJyZWRfY29tcHJlc3Npb247Cj4gPiAgc3BpY2Vf
-ZGlzcGxheV9jaGFuZ2VfcHJlZmVycmVkX3ZpZGVvX2NvZGVjX3R5cGU7Cj4gPiAgc3BpY2VfZGlz
-cGxheV9jaGFubmVsX2NoYW5nZV9wcmVmZXJyZWRfY29tcHJlc3Npb247Cj4gPiAgc3BpY2VfZGlz
-cGxheV9jaGFubmVsX2NoYW5nZV9wcmVmZXJyZWRfdmlkZW9fY29kZWNfdHlwZTsKPiA+ICtzcGlj
-ZV9kaXNwbGF5X2NoYW5uZWxfY2hhbmdlX3ByZWZlcnJlZF92aWRlb19jb2RlY190eXBlczsKPiA+
-ICBzcGljZV9kaXNwbGF5X2NoYW5uZWxfZ2V0X2dsX3NjYW5vdXQ7Cj4gPiAgc3BpY2VfZGlzcGxh
-eV9jaGFubmVsX2dldF9wcmltYXJ5Owo+ID4gIHNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9nZXRfdHlw
-ZTsKPiA+IGRpZmYgLS1naXQgYS9zcmMvc3BpY2UtZ2xpYi1zeW0tZmlsZSBiL3NyYy9zcGljZS1n
-bGliLXN5bS1maWxlCj4gPiBpbmRleCAyZGYxY2MwLi5jM2IyNTYxIDEwMDY0NAo+ID4gLS0tIGEv
-c3JjL3NwaWNlLWdsaWItc3ltLWZpbGUKPiA+ICsrKyBiL3NyYy9zcGljZS1nbGliLXN5bS1maWxl
-Cj4gPiBAQCAtMjMsNiArMjMsNyBAQCBzcGljZV9kaXNwbGF5X2NoYW5nZV9wcmVmZXJyZWRfY29t
-cHJlc3Npb24KPiA+ICBzcGljZV9kaXNwbGF5X2NoYW5nZV9wcmVmZXJyZWRfdmlkZW9fY29kZWNf
-dHlwZQo+ID4gIHNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFuZ2VfcHJlZmVycmVkX2NvbXByZXNz
-aW9uCj4gPiAgc3BpY2VfZGlzcGxheV9jaGFubmVsX2NoYW5nZV9wcmVmZXJyZWRfdmlkZW9fY29k
-ZWNfdHlwZQo+ID4gK3NwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFuZ2VfcHJlZmVycmVkX3ZpZGVv
-X2NvZGVjX3R5cGVzCj4gPiAgc3BpY2VfZGlzcGxheV9jaGFubmVsX2dldF9nbF9zY2Fub3V0Cj4g
-PiAgc3BpY2VfZGlzcGxheV9jaGFubmVsX2dldF9wcmltYXJ5Cj4gPiAgc3BpY2VfZGlzcGxheV9j
-aGFubmVsX2dldF90eXBlCj4gPiAtLQo+ID4gMi4yMS4wCj4gPgo+ID4gX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiA+IFNwaWNlLWRldmVsIG1haWxpbmcg
-bGlzdAo+ID4gU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gPiBodHRwczovL2xp
-c3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxp
-bmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+
+--===============1954794696==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="6wootumv4hmesinb"
+Content-Disposition: inline
+
+
+--6wootumv4hmesinb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jul 11, 2019 at 08:52:44AM +0200, Kevin Pouget wrote:
+> Hello,
+>=20
+> On Thu, Jul 11, 2019 at 8:16 AM Victor Toso <victortoso@redhat.com> wrote:
+> >
+> > Hi,
+> >
+> > On Thu, Jul 04, 2019 at 12:29:21PM +0200, Kevin Pouget wrote:
+> > > spice_display_channel_change_preferred_video_codec_types: new function
+> > > for sending an array of video codecs instead of only one.
+> > >
+> > > Signed-off-by: Kevin Pouget <kpouget@redhat.com>
+> >
+> > Looks fine,
+> >
+> > > ---
+> > >  doc/reference/spice-gtk-sections.txt |  1 +
+> > >  src/channel-display.c                | 76 +++++++++++++++++++++++---=
+--
+> > >  src/channel-display.h                |  2 +
+> > >  src/map-file                         |  1 +
+> > >  src/spice-glib-sym-file              |  1 +
+> > >  5 files changed, 68 insertions(+), 13 deletions(-)
+> > >
+> > > diff --git a/doc/reference/spice-gtk-sections.txt b/doc/reference/spi=
+ce-gtk-sections.txt
+> > > index a0336aa..33f4038 100644
+> > > --- a/doc/reference/spice-gtk-sections.txt
+> > > +++ b/doc/reference/spice-gtk-sections.txt
+> > > @@ -185,6 +185,7 @@ spice_display_change_preferred_compression
+> > >  spice_display_channel_change_preferred_compression
+> > >  spice_display_change_preferred_video_codec_type
+> > >  spice_display_channel_change_preferred_video_codec_type
+> > > +spice_display_channel_change_preferred_video_codec_types
+> >
+> > Sounds like we could deprecate the previous one but IMHO,
+>=20
+> yes, the previous one should be deprecated, no good reason to keep both.
+> Should I update the patch ?
+
+My point was that we might keep it and deprecate both later on
+when we define a better protocol message but I don't really mind.
+Yep, you can do it in this patch as it introduces the
+replacement.
+=20
+> > eventually this preferred-video-codec protocol message might be
+> > replaced by something with more relevant info of decoding
+> > capabilities for better decision on encoding side... video-codec
+> > type alone doesn't say much but for the time being, it was what
+> > we could get...
+>=20
+> indeed, we'll see with the rest of the smart streaming work what
+> relevant information the client can tell
+
+Yeah! Not trivial to get this info reliably but it would be
+smart.
+
+> > >  spice_gl_scanout_free
+> > >  <SUBSECTION Standard>
+> > >  SPICE_DISPLAY_CHANNEL
+> > > diff --git a/src/channel-display.c b/src/channel-display.c
+> > > index 9a83c53..4558a56 100644
+> > > --- a/src/channel-display.c
+> > > +++ b/src/channel-display.c
+> > > @@ -20,6 +20,7 @@
+> > >  #ifdef HAVE_SYS_TYPES_H
+> > >  #include <sys/types.h>
+> > >  #endif
+> > > +#include <glib/gi18n-lib.h>
+> > >
+> > >  #include "spice-client.h"
+> > >  #include "spice-common.h"
+> > > @@ -610,18 +611,15 @@ void spice_display_channel_change_preferred_com=
+pression(SpiceChannel *channel, g
+> > >  }
+> > >
+> > >  static void spice_display_send_client_preferred_video_codecs(SpiceCh=
+annel *channel,
+> > > -                                                             const G=
+Array *codecs)
+> > > +                                                             const g=
+int *codecs, gsize ncodecs)
+> > >  {
+> > > -    guint i;
+> > >      SpiceMsgOut *out;
+> > >      SpiceMsgcDisplayPreferredVideoCodecType *msg;
+> > >
+> > >      msg =3D g_malloc0(sizeof(SpiceMsgcDisplayPreferredVideoCodecType=
+) +
+> > > -                    (sizeof(SpiceVideoCodecType) * codecs->len));
+> > > -    msg->num_of_codecs =3D codecs->len;
+> > > -    for (i =3D 0; i < codecs->len; i++) {
+> > > -        msg->codecs[i] =3D g_array_index(codecs, gint, i);
+> > > -    }
+> > > +                    (sizeof(SpiceVideoCodecType) * ncodecs));
+> > > +    msg->num_of_codecs =3D ncodecs;
+> > > +    memcpy(msg->codecs, codecs, sizeof(*codecs) * ncodecs);
+> > >
+> > >      out =3D spice_msg_out_new(channel, SPICE_MSGC_DISPLAY_PREFERRED_=
+VIDEO_CODEC_TYPE);
+> > >      out->marshallers->msgc_display_preferred_video_codec_type(out->m=
+arshaller, msg);
+> > > @@ -659,8 +657,6 @@ void spice_display_change_preferred_video_codec_t=
+ype(SpiceChannel *channel, gint
+> > >   */
+> > >  void spice_display_channel_change_preferred_video_codec_type(SpiceCh=
+annel *channel, gint codec_type)
+> > >  {
+> > > -    GArray *codecs;
+> > > -
+> > >      g_return_if_fail(SPICE_IS_DISPLAY_CHANNEL(channel));
+> > >      g_return_if_fail(codec_type >=3D SPICE_VIDEO_CODEC_TYPE_MJPEG &&
+> > >                       codec_type < SPICE_VIDEO_CODEC_TYPE_ENUM_END);
+> > > @@ -675,10 +671,64 @@ void spice_display_channel_change_preferred_vid=
+eo_codec_type(SpiceChannel *chann
+> > >       * This array can be rearranged to have @codec_type in the front=
+ (which is
+> > >       * the preferred for the client side) */
+> > >      CHANNEL_DEBUG(channel, "changing preferred video codec type to %=
+s", gst_opts[codec_type].name);
+> > > -    codecs =3D g_array_new(FALSE, FALSE, sizeof(gint));
+> > > -    g_array_append_val(codecs, codec_type);
+> > > -    spice_display_send_client_preferred_video_codecs(channel, codecs=
+);
+> > > -    g_array_unref(codecs);
+> > > +    spice_display_send_client_preferred_video_codecs(channel, &codec=
+_type, 1);
+> > > +}
+> > > +
+> > > +/**
+> > > + * spice_display_channel_change_preferred_video_codecs_types:
+> > > + * @channel: a #SpiceDisplayChannel
+> > > + * @codecs: an array of @ncodecs #SpiceVideoCodecType types
+> > > + * @ncodecs: the number of codec types in the @codecs array
+> > > + * @err: #GError describing the reason why the change failed
+> > > + *
+> > > + * Tells the spice server the ordered preferred video codec types to
+> > > + * use for streaming in @channel.
+> > > + *
+> > > + * Returns: %TRUE if the preferred codec list was successfully chang=
+ed, and %FALSE
+> > > + * otherwise.
+> > > + *
+> > > + * Since: 0.38
+> > > + */
+> > > +gboolean spice_display_channel_change_preferred_video_codec_types(Sp=
+iceChannel *channel,
+> > > +                                                                  co=
+nst gint *codecs, gsize ncodecs,
+> > > +                                                                  GE=
+rror **err)
+> > > +{
+> > > +    gsize i;
+> > > +    GString *msg;
+> > > +
+> > > +    g_return_val_if_fail(SPICE_IS_DISPLAY_CHANNEL(channel), FALSE);
+> >
+> > Is it expected to work with ncodecs =3D 0? (Didn't follow previous
+> > discussion)
+>=20
+> I will add this guard:
+>=20
+> > g_return_val_if_fail(ncodecs !=3D 0, FALSE);
+>=20
+> as the server side doesnt't want to receive 0 codecs:
+
+Ok
+
+> > in dcc.c:dcc_handle_preferred_video_codec_type() :
+> >> g_return_val_if_fail(msg->num_of_codecs > 0, TRUE);
+>=20
+> > Didn't test yet but looks fine.
+>=20
+> thanks,
+>
+> Kevin
+>=20
+> > > +
+> > > +    if (!spice_channel_test_capability(channel, SPICE_DISPLAY_CAP_PR=
+EF_VIDEO_CODEC_TYPE)) {
+> > > +        CHANNEL_DEBUG(channel, "does not have capability to change t=
+he preferred video codec type");
+> > > +        g_set_error_literal(err, SPICE_CLIENT_ERROR, SPICE_CLIENT_ER=
+ROR_FAILED,
+> > > +                            _("Channel does not have capability to c=
+hange the preferred video codec type"));
+> > > +
+> > > +        return FALSE;
+> > > +    }
+> > > +
+> > > +    msg =3D g_string_new("changing preferred video codec type to: ");
+> > > +    for (i =3D 0; i < ncodecs; i++) {
+> > > +        gint codec_type =3D codecs[i];
+> > > +
+> > > +        if (codec_type < SPICE_VIDEO_CODEC_TYPE_MJPEG ||
+> > > +            codec_type >=3D SPICE_VIDEO_CODEC_TYPE_ENUM_END)
+> > > +        {
+
+Open braces should be in the above line
+
+With this and the guard above,
+Acked-by: Victor Toso <victortoso@redhat.com>
+
+> > > +            g_string_free(msg, TRUE);
+> > > +            g_set_error(err, SPICE_CLIENT_ERROR, SPICE_CLIENT_ERROR_=
+FAILED,
+> > > +                        _("Invalid codec-type found (%d) ... "), cod=
+ec_type);
+> > > +
+> > > +            return FALSE;
+> > > +        }
+> > > +
+> > > +        g_string_append_printf(msg, "%s ", gst_opts[codec_type].name=
+);
+> > > +
+> > > +    }
+> > > +    CHANNEL_DEBUG(channel, "%s", msg->str);
+> > > +    g_string_free(msg, TRUE);
+> > > +
+> > > +    spice_display_send_client_preferred_video_codecs(channel, codecs=
+, ncodecs);
+> > > +
+> > > +    return TRUE;
+> > >  }
+> > >
+> > >  /**
+> > > diff --git a/src/channel-display.h b/src/channel-display.h
+> > > index 5b48d2f..cf18538 100644
+> > > --- a/src/channel-display.h
+> > > +++ b/src/channel-display.h
+> > > @@ -150,6 +150,8 @@ gboolean        spice_display_channel_get_primary=
+(SpiceChannel *channel, guint32
+> > >
+> > >  void spice_display_channel_change_preferred_compression(SpiceChannel=
+ *channel, gint compression);
+> > >  void spice_display_channel_change_preferred_video_codec_type(SpiceCh=
+annel *channel, gint codec_type);
+> > > +gboolean spice_display_channel_change_preferred_video_codec_types(Sp=
+iceChannel *channel, const gint *codecs,
+> > > +                                                                  gs=
+ize ncodecs, GError **err);
+> > >
+> > >  GType           spice_gl_scanout_get_type     (void) G_GNUC_CONST;
+> > >  void            spice_gl_scanout_free         (SpiceGlScanout *scano=
+ut);
+> > > diff --git a/src/map-file b/src/map-file
+> > > index 500683c..3cb9873 100644
+> > > --- a/src/map-file
+> > > +++ b/src/map-file
+> > > @@ -25,6 +25,7 @@ spice_display_change_preferred_compression;
+> > >  spice_display_change_preferred_video_codec_type;
+> > >  spice_display_channel_change_preferred_compression;
+> > >  spice_display_channel_change_preferred_video_codec_type;
+> > > +spice_display_channel_change_preferred_video_codec_types;
+> > >  spice_display_channel_get_gl_scanout;
+> > >  spice_display_channel_get_primary;
+> > >  spice_display_channel_get_type;
+> > > diff --git a/src/spice-glib-sym-file b/src/spice-glib-sym-file
+> > > index 2df1cc0..c3b2561 100644
+> > > --- a/src/spice-glib-sym-file
+> > > +++ b/src/spice-glib-sym-file
+> > > @@ -23,6 +23,7 @@ spice_display_change_preferred_compression
+> > >  spice_display_change_preferred_video_codec_type
+> > >  spice_display_channel_change_preferred_compression
+> > >  spice_display_channel_change_preferred_video_codec_type
+> > > +spice_display_channel_change_preferred_video_codec_types
+> > >  spice_display_channel_get_gl_scanout
+> > >  spice_display_channel_get_primary
+> > >  spice_display_channel_get_type
+> > > --
+> > > 2.21.0
+> > >
+> > > _______________________________________________
+> > > Spice-devel mailing list
+> > > Spice-devel@lists.freedesktop.org
+> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--6wootumv4hmesinb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0m45gACgkQl9kSPeN6
+SE+QiA//fNY7MHxvpdRT3/dhUw4vIeVeFXxwvPTT9fOd4QHSD42PThBHWcPbisXh
+gZKtX+eMlya8UETHjSBtokEcQPjBQkrjOY2eWA44/Tfwj49Iq2QDBy+t9YVs6llZ
+YBEaXlnKqX4iLU6X9Zgn3A19c0cRRKl6+Ec5gGn8iF5Ammfl83AwPn+jEPWyPLPh
+maln9lZ3eBGgwoVh9D7xLgabezqOrsT/vTxdUMS/4Mrjh011CknPryaAvomAsz3G
+dXgC9Smq0QvH0ziC/fxG/S2jJ9uh9o0cePcWna9F1xSQqGxBrU9TCzJN6Yxv1m2q
+apzrX+oJqmNzyx3IgWZ09IbPH5Yh13r4qWf75DU7nMk3T/kJTdIMX3+tzMtw6B4n
+dZTPQ+Jr186IPLG6lnwjrcWvzQETvvssroXZ3ocJfK1d5OiD0s7q0cyrTZEntTJS
+Wh4B1jY7csxJxEnCVBwOSiV5P5Ij30moiIm9eTow/oPJyAZYOv/Yk0b+vU95Ois9
+dCoNGakYVel5PQiQuSb0TEoUZXQlMGmmXDnD4HaEIN/h4IJBSWyjvLSnJF8MKQha
+9SuBX9UImIVPJhyT40DCazEckkdWq3SrF1LYtE5QY448L90TAK/KdcZ+ea4N1wqN
+Eq6tUaTqCaKBEwxcH2GnAXe7PSKCPRcODSE2AbvEWBfX4HPK0BQ=
+=JdYO
+-----END PGP SIGNATURE-----
+
+--6wootumv4hmesinb--
+
+--===============1954794696==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1954794696==--
