@@ -1,38 +1,41 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D67B65784
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 15:01:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9751765788
+	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 15:01:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CAD9B6E228;
-	Thu, 11 Jul 2019 13:01:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 146476E227;
+	Thu, 11 Jul 2019 13:01:41 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5DE8F6E22A
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:01:05 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C9A946E227
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:01:39 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 06BF2308FBB1
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:01:05 +0000 (UTC)
-Received: from fziglio.remote.csb (unknown [10.33.32.17])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3F7E11800D;
- Thu, 11 Jul 2019 13:01:04 +0000 (UTC)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Date: Thu, 11 Jul 2019 14:00:54 +0100
-Message-Id: <20190711130054.17867-7-fziglio@redhat.com>
-In-Reply-To: <20190711130054.17867-1-fziglio@redhat.com>
-References: <20190711130054.17867-1-fziglio@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 74E03C047B7A
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:01:39 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.70])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 200D560BFC;
+ Thu, 11 Jul 2019 13:01:38 +0000 (UTC)
+Date: Thu, 11 Jul 2019 15:01:38 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Jakub Janku <jjanku@redhat.com>
+Message-ID: <20190711130138.7flguzaue455unr3@wingsuit>
+References: <20190626080222.8434-1-jjanku@redhat.com>
+ <36729848.24945003.1561623044903.JavaMail.zimbra@redhat.com>
+ <CAH=CeiDWC9p0RVA2TKLwn_zxhHmzJ3KOg1yMihdjhbP4wnVapA@mail.gmail.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+In-Reply-To: <CAH=CeiDWC9p0RVA2TKLwn_zxhHmzJ3KOg1yMihdjhbP4wnVapA@mail.gmail.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.43]); Thu, 11 Jul 2019 13:01:05 +0000 (UTC)
-Subject: [Spice-devel] [PATCH spice-gtk 7/7] usb-device-manager: Last chance
- to avoid deadlock handling libusb events
+ (mx1.redhat.com [10.5.110.31]); Thu, 11 Jul 2019 13:01:39 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk] spice-channel: return if
+ has_error is TRUE in spice_channel_write_msg
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -44,59 +47,160 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============1594949295=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-QXR0ZW1wdCB0byBiZXR0ZXIgaW50ZXJydXB0IGV2ZW50IGhhbmRsaW5nIGxvb3AuCklmIHRoZSB0
-aHJlYWQgaGFuZGxpbmcgZXZlbnRzIGlzIHN0dWNrIHdhaXRpbmcgZXZlbnRzIG9yIGhhbmRsaW5n
-IGFuCmV2ZW50IHRyeSB0byBpbnRlcnJ1cHQgYmVmb3JlIGpvaW5pbmcgdGhlIHRocmVhZC4KClNp
-Z25lZC1vZmYtYnk6IEZyZWRpYW5vIFppZ2xpbyA8ZnppZ2xpb0ByZWRoYXQuY29tPgotLS0KIHNy
-Yy91c2ItYmFja2VuZC5jICAgICAgICB8IDcgKysrKysrKwogc3JjL3VzYi1iYWNrZW5kLmggICAg
-ICAgIHwgMSArCiBzcmMvdXNiLWRldmljZS1tYW5hZ2VyLmMgfCA0ICsrKysKIDMgZmlsZXMgY2hh
-bmdlZCwgMTIgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL3NyYy91c2ItYmFja2VuZC5jIGIv
-c3JjL3VzYi1iYWNrZW5kLmMKaW5kZXggNDhhNjJjZDEuLmEyYzUwMmRhIDEwMDY0NAotLS0gYS9z
-cmMvdXNiLWJhY2tlbmQuYworKysgYi9zcmMvdXNiLWJhY2tlbmQuYwpAQCAtMjMwLDYgKzIzMCwx
-MyBAQCBnYm9vbGVhbiBzcGljZV91c2JfYmFja2VuZF9oYW5kbGVfZXZlbnRzKFNwaWNlVXNiQmFj
-a2VuZCAqYmUpCiAgICAgcmV0dXJuIG9rOwogfQogCit2b2lkIHNwaWNlX3VzYl9iYWNrZW5kX2lu
-dGVycnVwdF9ldmVudF9oYW5kbGVyKFNwaWNlVXNiQmFja2VuZCAqYmUpCit7CisgICAgaWYgKGJl
-LT5saWJ1c2JfY29udGV4dCkgeworICAgICAgICBsaWJ1c2JfaW50ZXJydXB0X2V2ZW50X2hhbmRs
-ZXIoYmUtPmxpYnVzYl9jb250ZXh0KTsKKyAgICB9Cit9CisKIHN0YXRpYyBpbnQgTElCVVNCX0NB
-TEwgaG90cGx1Z19jYWxsYmFjayhsaWJ1c2JfY29udGV4dCAqY3R4LAogICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGxpYnVzYl9kZXZpY2UgKmRldmljZSwKICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsaWJ1c2JfaG90cGx1Z19ldmVudCBldmVu
-dCwKZGlmZiAtLWdpdCBhL3NyYy91c2ItYmFja2VuZC5oIGIvc3JjL3VzYi1iYWNrZW5kLmgKaW5k
-ZXggOWYyYTk3YTYuLmNiYjczYzIyIDEwMDY0NAotLS0gYS9zcmMvdXNiLWJhY2tlbmQuaAorKysg
-Yi9zcmMvdXNiLWJhY2tlbmQuaApAQCAtNjUsNiArNjUsNyBAQCBhZnRlciBpdCBmaW5pc2hlcyBs
-aXN0IHByb2Nlc3NpbmcKIFNwaWNlVXNiQmFja2VuZERldmljZSAqKnNwaWNlX3VzYl9iYWNrZW5k
-X2dldF9kZXZpY2VfbGlzdChTcGljZVVzYkJhY2tlbmQgKmJhY2tlbmQpOwogdm9pZCBzcGljZV91
-c2JfYmFja2VuZF9mcmVlX2RldmljZV9saXN0KFNwaWNlVXNiQmFja2VuZERldmljZSAqKmRldmxp
-c3QpOwogZ2Jvb2xlYW4gc3BpY2VfdXNiX2JhY2tlbmRfaGFuZGxlX2V2ZW50cyhTcGljZVVzYkJh
-Y2tlbmQgKmJlKTsKK3ZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfaW50ZXJydXB0X2V2ZW50X2hhbmRs
-ZXIoU3BpY2VVc2JCYWNrZW5kICpiZSk7CiBnYm9vbGVhbiBzcGljZV91c2JfYmFja2VuZF9yZWdp
-c3Rlcl9ob3RwbHVnKFNwaWNlVXNiQmFja2VuZCAqYmUsCiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKnVzZXJfZGF0YSwKICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgdXNiX2hvdF9wbHVnX2NhbGxiYWNrIHByb2MpOwpk
-aWZmIC0tZ2l0IGEvc3JjL3VzYi1kZXZpY2UtbWFuYWdlci5jIGIvc3JjL3VzYi1kZXZpY2UtbWFu
-YWdlci5jCmluZGV4IDQ5NjA2NjdlLi4wZDEyNDMyZiAxMDA2NDQKLS0tIGEvc3JjL3VzYi1kZXZp
-Y2UtbWFuYWdlci5jCisrKyBiL3NyYy91c2ItZGV2aWNlLW1hbmFnZXIuYwpAQCAtMzI4LDYgKzMy
-OCw4IEBAIHN0YXRpYyB2b2lkIHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9kaXNwb3NlKEdPYmpl
-Y3QgKmdvYmplY3QpCiAjZW5kaWYKICAgICBpZiAocHJpdi0+ZXZlbnRfdGhyZWFkKSB7CiAgICAg
-ICAgIGdfd2Fybl9pZl9mYWlsKGdfYXRvbWljX2ludF9nZXQoJnByaXYtPmV2ZW50X3RocmVhZF9y
-dW4pID09IEZBTFNFKTsKKyAgICAgICAgZ19hdG9taWNfaW50X3NldCgmcHJpdi0+ZXZlbnRfdGhy
-ZWFkX3J1biwgRkFMU0UpOworICAgICAgICBzcGljZV91c2JfYmFja2VuZF9pbnRlcnJ1cHRfZXZl
-bnRfaGFuZGxlcihwcml2LT5jb250ZXh0KTsKICAgICAgICAgZ190aHJlYWRfam9pbihwcml2LT5l
-dmVudF90aHJlYWQpOwogICAgICAgICBwcml2LT5ldmVudF90aHJlYWQgPSBOVUxMOwogICAgIH0K
-QEAgLTk4OCw2ICs5OTAsOCBAQCBnYm9vbGVhbiBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfc3Rh
-cnRfZXZlbnRfbGlzdGVuaW5nKAogICAgICAgIGxpYnVzYl9oYW5kbGVfZXZlbnRzIGNhbGwgaW4g
-dGhlIHRocmVhZCB3b24ndCBleGl0IHVudGlsIHRoZQogICAgICAgIGxpYnVzYl9jbG9zZSBjYWxs
-IGZvciB0aGUgZGV2aWNlIGlzIG1hZGUgZnJvbSB1c2JyZWRpcmhvc3RfY2xvc2UuICovCiAgICAg
-aWYgKHByaXYtPmV2ZW50X3RocmVhZCkgeworICAgICAgICBnX2F0b21pY19pbnRfc2V0KCZwcml2
-LT5ldmVudF90aHJlYWRfcnVuLCBGQUxTRSk7CisgICAgICAgIHNwaWNlX3VzYl9iYWNrZW5kX2lu
-dGVycnVwdF9ldmVudF9oYW5kbGVyKHByaXYtPmNvbnRleHQpOwogICAgICAgICAgZ190aHJlYWRf
-am9pbihwcml2LT5ldmVudF90aHJlYWQpOwogICAgICAgICAgcHJpdi0+ZXZlbnRfdGhyZWFkID0g
-TlVMTDsKICAgICB9Ci0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9zcGljZS1kZXZlbA==
+
+--===============1594949295==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="txwv6yigzhk3coyu"
+Content-Disposition: inline
+
+
+--txwv6yigzhk3coyu
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Thu, Jun 27, 2019 at 02:27:57PM +0200, Jakub Janku wrote:
+> Hi,
+>=20
+> On Thu, Jun 27, 2019 at 10:10 AM Frediano Ziglio <fziglio@redhat.com> wro=
+te:
+> >
+> > >
+> > > Avoid linearizing if the message isn't written out anyway
+> >
+> > "linearizing" ? What do you mean about that?
+> > Looking at definitions it seems not correct to me.
+>=20
+> I was simply referring to the spice_marshaller_linearize() call.
+> >
+> > > (spice_channel_flush_wire checks() this condition as well).
+> > >
+> > > This also silences the following error:
+> > >
+> > >     (spicy:32087): GSpice-CRITICAL **: 16:22:03.147:
+> > >     spice_session_get_read_only: assertion 'SPICE_IS_SESSION(self)' f=
+ailed
+> > >
+> > > that can be seen if the channel gets disconnected
+> > > by the session while having non-empty write queue.
+> > >
+> > > spice_session_channel_destroy() sets channel->priv->session to NULL,
+> > > but spice_channel_write_msg() subsequently attempts to call
+> > > spice_session_get_read_only() with NULL pointer.
+
+Right, after spice_channel_disconnect() we shouldn't try to
+read/write anymore indeed. As spice_session_channel_destroy()
+sets c->has_error =3D TRUE, I think this match is almost fine.
+
+> > Minor: this is the explanation why the error on the previous
+> > paragraph should not be treated like an error, I think it should
+> > be the same paragraphs.
+>=20
+> Makes sense.
+> >
+> > OT: maybe channel session should never be NULL?
+>=20
+> It indeed does seem weird that
+> g_clear_object(&channel->priv->session); is called when the
+> "spice-session" property of the channel is G_PARAM_CONSTRUCT_ONLY --
+> with this flag, I would expect the property to not change after the
+> construction.
+
+If I'm not reading it wrong, this only happens on
+spice_channel_dispose() which means we shouldn't be relying on
+this object at this point.
+=20
+> Spice session waits for the channel destruction anyway
+> (channel_finally_destroyed callback), so it should be imho fine that
+> the channel holds a reference to the session while it is being
+> destroyed. So I think we could remove that
+> g_clear_object(&channel->priv->session); call in
+> spice_session_channel_destroy().
+
+Maybe moving to spice_channel_finalize() would already be enough
+if you really need to postpone this but I don't see why allow
+using priv->session while we are disposing the resources of the
+channel already.
+
+> >
+> > > Signed-off-by: Jakub Jank=C5=AF <jjanku@redhat.com>
+> > > ---
+> > >  src/spice-channel.c | 5 +++++
+> > >  1 file changed, 5 insertions(+)
+> > >
+> > > diff --git a/src/spice-channel.c b/src/spice-channel.c
+> > > index 61de177..aa80edf 100644
+> > > --- a/src/spice-channel.c
+> > > +++ b/src/spice-channel.c
+> > > @@ -897,6 +897,11 @@ static void spice_channel_write_msg(SpiceChannel
+> > > *channel, SpiceMsgOut *out)
+> > >      g_return_if_fail(out !=3D NULL);
+> > >      g_return_if_fail(channel =3D=3D out->channel);
+> > >
+> > > +    if (channel->priv->has_error) {
+> > > +        spice_msg_out_unref(out);
+> > > +        return;
+> > > +    }
+
+I'm thinking that it might actually be a programming error that
+we are calling _write_msg() after channel_disconnect is called,
+so a warning might be welcomed?=20
+
+Not sure of a different fix; how easy is to reproduce this?
+
+Cheers,
+Victor
+
+> > > +
+> > >      if (out->ro_check &&
+> > >          spice_channel_get_read_only(channel)) {
+> > >          g_warning("Try to send message while read-only. Please repor=
+t a
+> > >          bug.");
+> >
+> > Frediano
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--txwv6yigzhk3coyu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0nMzIACgkQl9kSPeN6
+SE84gw//RPsVMUY93GvgQUOtMPGcdj3XrqD7dBn01cf3RtP2NzUWDOR03MnROUP9
+1we5OyqWIcx6YC6KaYfBIlSdu4FBjMHl5JejAW9OiLrL2dWECNF2H9kPjUbU3lkv
+B7BHBjpDRQoA8PAlQ5QHQ95R0oVO4IPubUL5AMX0uwxqHxkw5r1KiohJ71VNE6lf
+Yog43WBdNx/fULCxxJVImD5UNy2gPIT3gBOm1u1xatU3P9bx8XI5uyvR07KRP6B1
+mP0NpKBVKJRnJOpOSauQhDk/vaTAbNq7ACFfLM8qCM4QSSKt949bvXmWe0g864yR
+hVl6FqIBk7cF3JD7LQqwnRrU1ZPm43TkmoKPPy2cbGjlwpX1bmUY3GkJq4/JnfRl
+S/sNLN+hRaQjR90RM8wxISYUnQ6bnE27L3A4fOywMt+QSXdk/rwB8q4A2V+4GfSj
+uJ1P4kK4lxliktosoDT7R+2lE2HypUMqNHQ6NmWYRxE7cfJkhok1YquHMU+JgdXH
+Nx7oZ7eqT0D+fQeQTVbY9NM+VaEhZZsBXvZmidLGyjPJ6/NIRTP6VFLFNW38FE24
+3p2BEIRXSUuS11CjsFrOX4UA8FB3n0r1sMT6cFnhYaiIzH0FGmf9tm7awiqjZqtc
+UZ9i92p99wagln/kl7nCybUKfvpiXGdxKVa5WBVpIbnezeLbktg=
+=Z/NT
+-----END PGP SIGNATURE-----
+
+--txwv6yigzhk3coyu--
+
+--===============1594949295==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1594949295==--
