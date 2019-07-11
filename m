@@ -2,46 +2,40 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0388F6531F
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 10:28:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81FE66533B
+	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 10:32:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E8E66E15B;
-	Thu, 11 Jul 2019 08:28:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0B8936E15A;
+	Thu, 11 Jul 2019 08:32:58 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
- [209.85.210.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 785BC6E15B
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 08:28:05 +0000 (UTC)
-Received: by mail-ot1-f68.google.com with SMTP id q20so5023489otl.0
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 01:28:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EOMEPz79omaNW24OP/LCMy9rE24czkx0Jb0Jk4qS+y4=;
- b=tm8HTWYG1WW/TkovOflhCk0OXewgslgbSeE1eq/rU4j+/WsWBFQjAE1EuwOlPAzOn9
- ReZ9dkTRDjgzI7cS2lWkFSEvTwlVE2s7a5pypovWk4jP/gROK5LR+mOpm5s4kthipLuj
- 4krFmPCFDXDfpmboHRqt3gDScPm2I+B6//iPnDhyqT83Bjz5nvm69Q/2uFbre211JKAN
- mFhyNtzzZFA/2aG/LRGFDmWV0/juMWUtKI5UdX/5UCI3heqDD5fvCe8vqjhxyLtUhfQz
- Ba76w0u807pDT3ED2tgRA31A47D8JzKbJCSa6/Ey1hS4d9MBzmf+/5zc6VghTFRLv+wE
- EH2g==
-X-Gm-Message-State: APjAAAUPDmGJNDacAFk0e3ARIWc8LVQXB3FCeP33pPwdnzKFwfg5rPBP
- 86PS+pk3ukNnvYHkhxyxNIb3LotVSWnwY3CaEzJlrnep
-X-Google-Smtp-Source: APXvYqySU326eqXEzKFznkFrIxz4NOQ9QqoRU2ZELCQPh1duKPMY3PKHd0za+t3zOyLDmdB0Q73wyMz8x/eLU36x79U=
-X-Received: by 2002:a9d:6c54:: with SMTP id g20mr2484322otq.66.1562833684587; 
- Thu, 11 Jul 2019 01:28:04 -0700 (PDT)
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6ADC26E15A
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 08:32:57 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 164FFC057E9F
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 08:32:57 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.70])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7AC441001B35;
+ Thu, 11 Jul 2019 08:32:54 +0000 (UTC)
+Date: Thu, 11 Jul 2019 10:32:53 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190711083253.ezpsy2vdnofsahyu@wingsuit>
+References: <20190710174435.15833-1-uril@redhat.com>
+ <20190710174435.15833-3-uril@redhat.com>
+ <559172568.27119885.1562833647412.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
-References: <20190704102922.17433-1-kpouget@redhat.com>
- <20190704102922.17433-2-kpouget@redhat.com>
- <20190711080845.xgjzy2lfqwc5xeuz@wingsuit>
-In-Reply-To: <20190711080845.xgjzy2lfqwc5xeuz@wingsuit>
-From: Kevin Pouget <kpouget@redhat.com>
-Date: Thu, 11 Jul 2019 10:27:53 +0200
-Message-ID: <CADJ1XR1LSeC0k6DzKJurirXcF__xczXdVDmtkWa+ufG2yfX+iA@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>
-Subject: Re: [Spice-devel] [PATCH spice-gtk 2/2] spicy: send ordered list of
- preferred video codecs
+In-Reply-To: <559172568.27119885.1562833647412.JavaMail.zimbra@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.32]); Thu, 11 Jul 2019 08:32:57 +0000 (UTC)
+Subject: Re: [Spice-devel] [spice-server PATCH v2 2/3] dcc-send: remove
+ unused variable 'image'
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,69 +47,114 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Spice devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0624542054=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gVGh1LCBKdWwgMTEsIDIwMTkgYXQgMTA6MDggQU0gVmljdG9yIFRvc28gPHZpY3RvcnRvc29A
-cmVkaGF0LmNvbT4gd3JvdGU6Cj4KPiBPbiBUaHUsIEp1bCAwNCwgMjAxOSBhdCAxMjoyOToyMlBN
-ICswMjAwLCBLZXZpbiBQb3VnZXQgd3JvdGU6Cj4gPiBJbnN0ZWFkIG9mIHNlbmRpbmcgb25seSB0
-aGUgcHJlZmVycmVkIHZpZGVvIGNvZGVjIChzZWxlY3RlZCksIHNwaWN5Cj4gPiBub3cgc2VuZHMg
-YW4gb3JkZXJlZCBsaXN0LiBXaGVuIGEgdmlkZW8gY29kZWMgaXMgc2VsZWN0ZWQgaW4gdGhlIHJh
-ZGlvCj4gPiBib3gsIHRoaXMgY29kZWMgaXMgbW92ZWQgdG8gYmVnaW5uaW5nIG9mIHRoZSBsaXN0
-Lgo+ID4KPiA+IFNpZ25lZC1vZmYtYnk6IEtldmluIFBvdWdldCA8a3BvdWdldEByZWRoYXQuY29t
-Pgo+ID4gLS0tCj4gPiAgdG9vbHMvc3BpY3kuYyB8IDMxICsrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrLS0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgMjkgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlv
-bnMoLSkKPiA+Cj4gPiBkaWZmIC0tZ2l0IGEvdG9vbHMvc3BpY3kuYyBiL3Rvb2xzL3NwaWN5LmMK
-PiA+IGluZGV4IDhhNmQwNzcuLjQwM2E2NmQgMTAwNjQ0Cj4gPiAtLS0gYS90b29scy9zcGljeS5j
-Cj4gPiArKysgYi90b29scy9zcGljeS5jCj4gPiBAQCAtMTAxNCw4ICsxMDE0LDM1IEBAIHN0YXRp
-YyB2b2lkIHZpZGVvX2NvZGVjX3R5cGVfY2IoR3RrUmFkaW9BY3Rpb24gKmFjdGlvbiBHX0dOVUNf
-VU5VU0VELAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgR3RrUmFkaW9BY3Rp
-b24gKmN1cnJlbnQsCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBncG9pbnRl
-ciB1c2VyX2RhdGEpCj4gPiAgewo+ID4gLSAgICBzcGljZV9kaXNwbGF5X2NoYW5uZWxfY2hhbmdl
-X3ByZWZlcnJlZF92aWRlb19jb2RlY190eXBlKFNQSUNFX0NIQU5ORUwodXNlcl9kYXRhKSwKPiA+
-IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBndGtfcmFkaW9fYWN0aW9uX2dldF9jdXJyZW50X3ZhbHVlKGN1cnJlbnQpKTsKPiA+ICsg
-ICAgc3RhdGljIEdBcnJheSAqcHJlZmVycmVkX2NvZGVjcyA9IE5VTEw7Cj4gPiArICAgIGdpbnQg
-c2VsZWN0ZWRfY29kZWMgPSBndGtfcmFkaW9fYWN0aW9uX2dldF9jdXJyZW50X3ZhbHVlKGN1cnJl
-bnQpOwo+ID4gKyAgICBndWludCBpOwo+ID4gKyAgICBHRXJyb3IgKmVyciA9IE5VTEw7Cj4gPiAr
-Cj4gPiArICAgIGlmICghcHJlZmVycmVkX2NvZGVjcykgewo+ID4gKyAgICAgICAgcHJlZmVycmVk
-X2NvZGVjcyA9IGdfYXJyYXlfc2l6ZWRfbmV3KEZBTFNFLCBGQUxTRSwKPiA+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaXplb2YoZ2ludCksCj4gPiArICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgR19OX0VMRU1FTlRTKHZp
-ZGVvX2NvZGVjX3R5cGVfZW50cmllcykpOwo+Cj4gVGhpcyB3aWxsIGxlYWssIG5vPyBNYXliZSBt
-b3ZlIHRoZSBzdGF0aWMgdmFyIHRvIGdsb2JhbCBzY29wZSBhbmQKPiBjbGVhbnVwIGluIHRoZSBl
-bmQgb2YgbWFpbigpID8KCm15IHJ1bGUvdW5kZXJzdGFuZGluZyBpcyB0aGF0IG1lbW9yeSBhbGxv
-Y2F0ZWQgb25jZSwgYW5kIGFjY2Vzc2libGUKYWxsIGFsb25nIHRoZSBleGVjdXRpb24sIGlzIG5v
-dCBjb25zaWRlcmVkIGFzIGEgbGVhaywKc28gSSB3b3VsZG4ndCBjaGFuZ2UgaXQsIGV2ZW4gaWYg
-aXQgd2VyZSBub3QgYSB0ZXN0aW5nIHRvb2wKCihsZXQgbWUga25vdyBpZiBJJ20gd3JvbmchKQoK
-PiBOb3QgYSBiaWcgaXNzdWUsIHRoaXMgaXMganVzdCB0ZXN0aW5nIHRvb2wuIEVpdGhlciB3YXks
-Cj4KPiBBY2tlZC1ieTogVmljdG9yIFRvc28gPHZpY3RvcnRvc29AcmVkaGF0LmNvbT4KCnRoYW5r
-cywKCktldmluCgoKPiA+ICsgICAgICAgIC8qIGluaXRpYWxpemUgd2l0aCB0aGUgbWVudSBvcmRl
-cmluZyAqLwo+ID4gKyAgICAgICAgZm9yIChpID0gMDsgaSA8IEdfTl9FTEVNRU5UUyh2aWRlb19j
-b2RlY190eXBlX2VudHJpZXMpOyBpKyspIHsKPiA+ICsgICAgICAgICAgICBnX2FycmF5X2FwcGVu
-ZF92YWwocHJlZmVycmVkX2NvZGVjcywgdmlkZW9fY29kZWNfdHlwZV9lbnRyaWVzW2ldLnZhbHVl
-KTsKPiA+ICsgICAgICAgIH0KPiA+ICsgICAgfQo+ID4gKwo+ID4gKyAgICAvKiByZW1vdmUgY29k
-ZWMgZnJvbSBhcnJheSBhbmQgaW5zZXJ0IGF0IHRoZSBiZWdpbm5pbmcgKi8KPiA+ICsgICAgZm9y
-IChpID0gMDsgaSA8IHByZWZlcnJlZF9jb2RlY3MtPmxlbiAmJgo+ID4gKyAgICAgICAgICAgICAg
-ICBnX2FycmF5X2luZGV4KHByZWZlcnJlZF9jb2RlY3MsIGdpbnQsIGkpICE9IHNlbGVjdGVkX2Nv
-ZGVjOyBpKyspOwo+ID4gKwo+ID4gKyAgICBnX2Fzc2VydChpIDwgcHJlZmVycmVkX2NvZGVjcy0+
-bGVuKTsKPiA+ICsgICAgZ19hcnJheV9yZW1vdmVfaW5kZXgocHJlZmVycmVkX2NvZGVjcywgaSk7
-Cj4gPiArICAgIGdfYXJyYXlfcHJlcGVuZF92YWwocHJlZmVycmVkX2NvZGVjcywgc2VsZWN0ZWRf
-Y29kZWMpOwo+ID4gKwo+ID4gKyAgICBpZiAoIXNwaWNlX2Rpc3BsYXlfY2hhbm5lbF9jaGFuZ2Vf
-cHJlZmVycmVkX3ZpZGVvX2NvZGVjX3R5cGVzKFNQSUNFX0NIQU5ORUwodXNlcl9kYXRhKSwKPiA+
-ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAoZ2ludCAqKSBwcmVmZXJyZWRfY29kZWNzLT5kYXRhLAo+ID4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHByZWZlcnJlZF9jb2RlY3MtPmxlbiwgJmVycikpIHsKPiA+ICsgICAgICAgIGdfd2FybmluZygi
-c2V0dGluZyBwcmVmZXJyZWQgdmlkZW8gY29kZWNzIGZhaWxlZDogJXMiLCBlcnItPm1lc3NhZ2Up
-Owo+ID4gKyAgICAgICAgZ19lcnJvcl9mcmVlKGVycik7Cj4gPiArICAgIH0KPiA+ICB9Cj4gPgo+
-ID4gIHN0YXRpYyB2b2lkCj4gPiAtLQo+ID4gMi4yMS4wCj4gPgo+ID4gX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiA+IFNwaWNlLWRldmVsIG1haWxpbmcg
-bGlzdAo+ID4gU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gPiBodHRwczovL2xp
-c3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxp
-bmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+
+--===============0624542054==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="qf2zvkamgz26qpyw"
+Content-Disposition: inline
+
+
+--qf2zvkamgz26qpyw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jul 11, 2019 at 04:27:27AM -0400, Frediano Ziglio wrote:
+> >=20
+> > From: Frediano Ziglio <fziglio@redhat.com>
+> >=20
+> > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+>=20
+> I supposed someone else should ack it
+
+Two maintainers agreeing should be enough, but hey
+Acked-by: Victor Toso <victortoso@redhat.com>
+
+>=20
+> > ---
+> >  server/dcc-send.c | 6 ++----
+> >  1 file changed, 2 insertions(+), 4 deletions(-)
+> >=20
+> > diff --git a/server/dcc-send.c b/server/dcc-send.c
+> > index 565a79f33..e0f3b8183 100644
+> > --- a/server/dcc-send.c
+> > +++ b/server/dcc-send.c
+> > @@ -725,7 +725,6 @@ static void
+> > red_pipe_replace_rendered_drawables_with_images(DisplayChannelClient
+> >          RedPipeItem *pipe_item =3D l->data;
+> >          Drawable *drawable;
+> >          RedDrawablePipeItem *dpi;
+> > -        RedImageItem *image;
+> > =20
+> >          if (pipe_item->type !=3D RED_PIPE_ITEM_TYPE_DRAW)
+> >              continue;
+> > @@ -745,13 +744,12 @@ static void
+> > red_pipe_replace_rendered_drawables_with_images(DisplayChannelClient
+> >              continue;
+> >          }
+> > =20
+> > -        image =3D dcc_add_surface_area_image(dcc,
+> > drawable->red_drawable->surface_id,
+> > -                                           &drawable->red_drawable->bb=
+ox, l,
+> > TRUE);
+> > +        dcc_add_surface_area_image(dcc, drawable->red_drawable->surfac=
+e_id,
+> > +                                   &drawable->red_drawable->bbox, l, T=
+RUE);
+> >          resent_surface_ids[num_resent] =3D drawable->red_drawable->sur=
+face_id;
+> >          resent_areas[num_resent] =3D drawable->red_drawable->bbox;
+> >          num_resent++;
+> > =20
+> > -        spice_assert(image);
+> >          red_channel_client_pipe_remove_and_release_pos(RED_CHANNEL_CLI=
+ENT(dcc),
+> >          l);
+> >      }
+> >  }
+>=20
+> Frediano
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--qf2zvkamgz26qpyw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0m9DUACgkQl9kSPeN6
+SE9HYw/7B5Vj6kq5Kcbu01SN+uYNSsSQf5k2f+q7KP9x634cxlrE6hN/1t0AwXuB
+Y75yLd6HdAui7532ZD5wOEEizC2WanavdQKSr9io1dLvpvbHx4868DZb8s1Vduus
+bJsnZq4eBDwpca81+l2Q7pQYPO+wnJbWbcW0kJXuOQR0OH0WUUqpde9XmE93cKjB
+KgEPsAIRkOZnv46YM199ULzS5KYEjoeo0hlPKltJP+p0jgl603zCyxrrulpYZLXk
+FRD/NTGTnlm6eUQP00w0fHx5SwpOfTc2vO7wWBXpq0ExYGOIVrjOvqmIBQS5fjEf
+XUSixSF+H+nA4elRbKQRJkO52klrR1kbb8VAK7M+SlTF3FmfbeXT6kiOtiMIPyM0
+nMIRk4X8NKR+2/+Zc9XkYMYC+UPtnnfvgrOwprM0vxYRdcrhPcySP7Mx6+QYPZYe
+DpL0CXyRAsB7KrfxO9GpR4xSMuZSHfRSvXDzzfogbgIT0dtwayg7s6ah43d/aN9B
+Gn7u+PYuRTiHQRKaC6h9qQg7WZ20HQZbEYLiP8Ksow30xb0r1haKPKY5zQUmRGpl
+pIWavvuRMKJEibFj3PaCfuLnLSR4JXV/FLCSa8oW8DKrVf3TpfkUgm5sUe5neHWt
+RT9YQt8oWmI+zkN/V0N4abP5DP/wCTCQPuvJU7sWS/Qkx1N94E0=
+=r40t
+-----END PGP SIGNATURE-----
+
+--qf2zvkamgz26qpyw--
+
+--===============0624542054==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0624542054==--
