@@ -1,41 +1,39 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9751765788
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 15:01:42 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4199657A9
+	for <lists+spice-devel@lfdr.de>; Thu, 11 Jul 2019 15:09:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 146476E227;
-	Thu, 11 Jul 2019 13:01:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 49AC66E218;
+	Thu, 11 Jul 2019 13:09:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C9A946E227
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:01:39 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E6E246E218
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:09:32 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 74E03C047B7A
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:01:39 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 8664F308A98D
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Jul 2019 13:09:32 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.70])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 200D560BFC;
- Thu, 11 Jul 2019 13:01:38 +0000 (UTC)
-Date: Thu, 11 Jul 2019 15:01:38 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 319B01802E;
+ Thu, 11 Jul 2019 13:09:31 +0000 (UTC)
+Date: Thu, 11 Jul 2019 15:09:31 +0200
 From: Victor Toso <victortoso@redhat.com>
-To: Jakub Janku <jjanku@redhat.com>
-Message-ID: <20190711130138.7flguzaue455unr3@wingsuit>
-References: <20190626080222.8434-1-jjanku@redhat.com>
- <36729848.24945003.1561623044903.JavaMail.zimbra@redhat.com>
- <CAH=CeiDWC9p0RVA2TKLwn_zxhHmzJ3KOg1yMihdjhbP4wnVapA@mail.gmail.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190711130931.kivl4yk37hpirovw@wingsuit>
+References: <20190711125857.17701-1-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAH=CeiDWC9p0RVA2TKLwn_zxhHmzJ3KOg1yMihdjhbP4wnVapA@mail.gmail.com>
+In-Reply-To: <20190711125857.17701-1-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Thu, 11 Jul 2019 13:01:39 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk] spice-channel: return if
- has_error is TRUE in spice_channel_write_msg
+ (mx1.redhat.com [10.5.110.41]); Thu, 11 Jul 2019 13:09:32 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk] channel-usbredir: Remove leak
+ of decompressed buffer
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,153 +45,112 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1594949295=="
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1676581252=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============1594949295==
+--===============1676581252==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="txwv6yigzhk3coyu"
+	protocol="application/pgp-signature"; boundary="bd37u4lyd3rsslje"
 Content-Disposition: inline
 
 
---txwv6yigzhk3coyu
-Content-Type: text/plain; charset=utf-8
+--bd37u4lyd3rsslje
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Thu, Jun 27, 2019 at 02:27:57PM +0200, Jakub Janku wrote:
-> Hi,
+On Thu, Jul 11, 2019 at 01:58:57PM +0100, Frediano Ziglio wrote:
+> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+Nice,
+Acked-by: Victor Toso <victortoso@redhat.com>
+
+> ---
+>  src/channel-usbredir.c | 11 +++++------
+>  1 file changed, 5 insertions(+), 6 deletions(-)
 >=20
-> On Thu, Jun 27, 2019 at 10:10 AM Frediano Ziglio <fziglio@redhat.com> wro=
-te:
-> >
-> > >
-> > > Avoid linearizing if the message isn't written out anyway
-> >
-> > "linearizing" ? What do you mean about that?
-> > Looking at definitions it seems not correct to me.
+> diff --git a/src/channel-usbredir.c b/src/channel-usbredir.c
+> index 76534180..04acf0bd 100644
+> --- a/src/channel-usbredir.c
+> +++ b/src/channel-usbredir.c
+> @@ -724,6 +724,7 @@ static void usbredir_handle_msg(SpiceChannel *c, Spic=
+eMsgIn *in)
+>          if (try_handle_compressed_msg(compressed_data_msg, &buf, &size))=
+ {
+>              /* uncompressed ok*/
+>          } else {
+> +            buf =3D NULL;
+>              r =3D USB_REDIR_ERROR_READ_PARSE;
+>          }
+>      } else { /* Regular SPICE_MSG_SPICEVMC_DATA msg */
+> @@ -733,17 +734,12 @@ static void usbredir_handle_msg(SpiceChannel *c, Sp=
+iceMsgIn *in)
+>      spice_usbredir_channel_lock(channel);
+>      if (r =3D=3D 0)
+>          r =3D spice_usb_backend_read_guest_data(priv->host, buf, size);
+> -    if (r !=3D 0) {
+> +    if (r !=3D 0 && priv->spice_device !=3D NULL) {
+>          SpiceUsbDevice *spice_device =3D priv->spice_device;
+>          device_error_data err_data;
+>          gchar *desc;
+>          GError *err;
+> =20
+> -        if (spice_device =3D=3D NULL) {
+> -            spice_usbredir_channel_unlock(channel);
+> -            return;
+> -        }
+> -
+>          desc =3D spice_usb_device_get_description(spice_device, NULL);
+>          err =3D spice_usb_backend_get_error_details(r, desc);
+>          g_free(desc);
+> @@ -764,6 +760,9 @@ static void usbredir_handle_msg(SpiceChannel *c, Spic=
+eMsgIn *in)
+>      } else {
+>          spice_usbredir_channel_unlock(channel);
+>      }
+> +    if (spice_msg_in_type(in) =3D=3D SPICE_MSG_SPICEVMC_COMPRESSED_DATA)=
+ {
+> +        g_free(buf);
+> +    }
+>  }
+> =20
+>  #else
+> --=20
+> 2.20.1
 >=20
-> I was simply referring to the spice_marshaller_linearize() call.
-> >
-> > > (spice_channel_flush_wire checks() this condition as well).
-> > >
-> > > This also silences the following error:
-> > >
-> > >     (spicy:32087): GSpice-CRITICAL **: 16:22:03.147:
-> > >     spice_session_get_read_only: assertion 'SPICE_IS_SESSION(self)' f=
-ailed
-> > >
-> > > that can be seen if the channel gets disconnected
-> > > by the session while having non-empty write queue.
-> > >
-> > > spice_session_channel_destroy() sets channel->priv->session to NULL,
-> > > but spice_channel_write_msg() subsequently attempts to call
-> > > spice_session_get_read_only() with NULL pointer.
-
-Right, after spice_channel_disconnect() we shouldn't try to
-read/write anymore indeed. As spice_session_channel_destroy()
-sets c->has_error =3D TRUE, I think this match is almost fine.
-
-> > Minor: this is the explanation why the error on the previous
-> > paragraph should not be treated like an error, I think it should
-> > be the same paragraphs.
->=20
-> Makes sense.
-> >
-> > OT: maybe channel session should never be NULL?
->=20
-> It indeed does seem weird that
-> g_clear_object(&channel->priv->session); is called when the
-> "spice-session" property of the channel is G_PARAM_CONSTRUCT_ONLY --
-> with this flag, I would expect the property to not change after the
-> construction.
-
-If I'm not reading it wrong, this only happens on
-spice_channel_dispose() which means we shouldn't be relying on
-this object at this point.
-=20
-> Spice session waits for the channel destruction anyway
-> (channel_finally_destroyed callback), so it should be imho fine that
-> the channel holds a reference to the session while it is being
-> destroyed. So I think we could remove that
-> g_clear_object(&channel->priv->session); call in
-> spice_session_channel_destroy().
-
-Maybe moving to spice_channel_finalize() would already be enough
-if you really need to postpone this but I don't see why allow
-using priv->session while we are disposing the resources of the
-channel already.
-
-> >
-> > > Signed-off-by: Jakub Jank=C5=AF <jjanku@redhat.com>
-> > > ---
-> > >  src/spice-channel.c | 5 +++++
-> > >  1 file changed, 5 insertions(+)
-> > >
-> > > diff --git a/src/spice-channel.c b/src/spice-channel.c
-> > > index 61de177..aa80edf 100644
-> > > --- a/src/spice-channel.c
-> > > +++ b/src/spice-channel.c
-> > > @@ -897,6 +897,11 @@ static void spice_channel_write_msg(SpiceChannel
-> > > *channel, SpiceMsgOut *out)
-> > >      g_return_if_fail(out !=3D NULL);
-> > >      g_return_if_fail(channel =3D=3D out->channel);
-> > >
-> > > +    if (channel->priv->has_error) {
-> > > +        spice_msg_out_unref(out);
-> > > +        return;
-> > > +    }
-
-I'm thinking that it might actually be a programming error that
-we are calling _write_msg() after channel_disconnect is called,
-so a warning might be welcomed?=20
-
-Not sure of a different fix; how easy is to reproduce this?
-
-Cheers,
-Victor
-
-> > > +
-> > >      if (out->ro_check &&
-> > >          spice_channel_get_read_only(channel)) {
-> > >          g_warning("Try to send message while read-only. Please repor=
-t a
-> > >          bug.");
-> >
-> > Frediano
 > _______________________________________________
 > Spice-devel mailing list
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---txwv6yigzhk3coyu
+--bd37u4lyd3rsslje
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0nMzIACgkQl9kSPeN6
-SE84gw//RPsVMUY93GvgQUOtMPGcdj3XrqD7dBn01cf3RtP2NzUWDOR03MnROUP9
-1we5OyqWIcx6YC6KaYfBIlSdu4FBjMHl5JejAW9OiLrL2dWECNF2H9kPjUbU3lkv
-B7BHBjpDRQoA8PAlQ5QHQ95R0oVO4IPubUL5AMX0uwxqHxkw5r1KiohJ71VNE6lf
-Yog43WBdNx/fULCxxJVImD5UNy2gPIT3gBOm1u1xatU3P9bx8XI5uyvR07KRP6B1
-mP0NpKBVKJRnJOpOSauQhDk/vaTAbNq7ACFfLM8qCM4QSSKt949bvXmWe0g864yR
-hVl6FqIBk7cF3JD7LQqwnRrU1ZPm43TkmoKPPy2cbGjlwpX1bmUY3GkJq4/JnfRl
-S/sNLN+hRaQjR90RM8wxISYUnQ6bnE27L3A4fOywMt+QSXdk/rwB8q4A2V+4GfSj
-uJ1P4kK4lxliktosoDT7R+2lE2HypUMqNHQ6NmWYRxE7cfJkhok1YquHMU+JgdXH
-Nx7oZ7eqT0D+fQeQTVbY9NM+VaEhZZsBXvZmidLGyjPJ6/NIRTP6VFLFNW38FE24
-3p2BEIRXSUuS11CjsFrOX4UA8FB3n0r1sMT6cFnhYaiIzH0FGmf9tm7awiqjZqtc
-UZ9i92p99wagln/kl7nCybUKfvpiXGdxKVa5WBVpIbnezeLbktg=
-=Z/NT
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0nNQoACgkQl9kSPeN6
+SE8pQBAAuLffvukuR7FkwwraQjeubwTZnZBeT2Unkz0Mpjq656YT/EmKfc9lsZFr
+xkNUaPwE7cigX5gnutPEQtMjPtg+7xHuHDUVfel02UQn9fASbskMk/tOaWRJOhd4
+VvNl53HiHeeHnKCFa8IN+RTDunoHV8svk1uVSlIALLDhzn70XsIDXpTUsjw2ALbk
+5ZtP2QWctjKg1M5Rvx1xm3PWkq+UdFN90VfCAHUowiC10IxS23DaLjQMljQG4Nap
+kSVElikWg7RsPMyz7wXg3NeCP5vFrguVBytKnaMlo2j1MGS0rjijbjgWGH6zK3ZZ
+t3lkZgKtqlSqSaHuXQhhoeRlnkg+b9z1zcx1BAg6rGls0Hfs0entyklW0OVv3ah/
+wKADXcqbH0J53IpIicP2gAF5vBU5Vn6YXFgIW7YwRn6qK0YI1G2RKBj/Ji9G0Cf2
+U/elRP9pmTzNnrXUWhwpE9K4J/lUltF2pMzkdTte3RakDvTwT/yCiE2VI1gGEq2G
+jnzDxWSm3h9QmnxdDBBlPufU3yoz5k21LWamQaYYR0IXRbdzYHRLvr8NrYFtaD7m
+g+n1MPb39biGavRjjUh2dPsEChljG+A6WMwp+IyCa5fXcRCibKfrE/r7wG2wtpul
+LH8WM6rZ8Qv4/O+fKBog3dggENbtk5PsuGapyyrihmtaYEn6CmI=
+=AsMT
 -----END PGP SIGNATURE-----
 
---txwv6yigzhk3coyu--
+--bd37u4lyd3rsslje--
 
---===============1594949295==
+--===============1676581252==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -203,4 +160,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============1594949295==--
+--===============1676581252==--
