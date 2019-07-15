@@ -2,38 +2,46 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBF7568695
-	for <lists+spice-devel@lfdr.de>; Mon, 15 Jul 2019 11:46:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D1C168707
+	for <lists+spice-devel@lfdr.de>; Mon, 15 Jul 2019 12:27:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 17F27898BE;
-	Mon, 15 Jul 2019 09:46:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BF708896E9;
+	Mon, 15 Jul 2019 10:27:32 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E0408898BE
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jul 2019 09:46:06 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8446B896E9
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jul 2019 10:27:31 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 87E183082132
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jul 2019 09:46:06 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.70])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 31C4960C4D;
- Mon, 15 Jul 2019 09:46:06 +0000 (UTC)
-Date: Mon, 15 Jul 2019 11:46:05 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190715094605.bw2dbvlimydt5ueg@wingsuit>
+ by mx1.redhat.com (Postfix) with ESMTPS id DFDC359442
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jul 2019 10:27:30 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id D849A60C4C
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jul 2019 10:27:30 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id CE8451802120;
+ Mon, 15 Jul 2019 10:27:30 +0000 (UTC)
+Date: Mon, 15 Jul 2019 06:27:30 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Victor Toso <victortoso@redhat.com>
+Message-ID: <1328652875.79571.1563186450685.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20190715094605.bw2dbvlimydt5ueg@wingsuit>
 References: <20190712091242.13214-1-victortoso@redhat.com>
  <20190712091242.13214-7-victortoso@redhat.com>
  <1870637329.68793.1563182297027.JavaMail.zimbra@redhat.com>
+ <20190715094605.bw2dbvlimydt5ueg@wingsuit>
 MIME-Version: 1.0
-In-Reply-To: <1870637329.68793.1563182297027.JavaMail.zimbra@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Originating-IP: [10.33.32.11, 10.4.195.27]
+Thread-Topic: x11-randr: simplest fix for address-of-packed-member
+Thread-Index: jsJGE6d8Fxi+T92Niet6MMvxlCzEoA==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.42]); Mon, 15 Jul 2019 09:46:06 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.39]); Mon, 15 Jul 2019 10:27:30 +0000 (UTC)
 Subject: Re: [Spice-devel] [linux/vd-agent v1 6/7] x11-randr: simplest fix
  for address-of-packed-member
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -48,151 +56,100 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0000206269=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============0000206269==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="tr7k4gtbzo5k5554"
-Content-Disposition: inline
-
-
---tr7k4gtbzo5k5554
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Mon, Jul 15, 2019 at 05:18:17AM -0400, Frediano Ziglio wrote:
-> >=20
-> > From: Victor Toso <me@victortoso.com>
-> >=20
-> > The struct type for width/height is uint32_t while we are trying to
-> > access and change it with int* - code can be improved a bit in following
-> > patches but this one fixes the warning by copying the value from the
-> > struct and copying back new value afterwards.
-> >=20
-> > Also:
-> > - Moved variables to internal scope;
-> > - Added braces to inner if;
-> >=20
-> >  > src/vdagent/x11-randr.c: In function =E2=80=98zero_base_monitors=E2=
-=80=99:
-> >  >     src/vdagent/x11-randr.c:621:28: error: taking address of packed =
-member
-> >  >     of
-> >  >     =E2=80=98struct VDAgentMonConfig=E2=80=99 may result in an unali=
-gned pointer value
-> >  > [-Werror=3Daddress-of-packed-member]
-> >  >   621 |         mon_width =3D (int *)&mon_config->monitors[i].width;
-> >  >       |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> >  > src/vdagent/x11-randr.c:622:29: error: taking address of packed memb=
-er of
-> >  >     =E2=80=98struct VDAgentMonConfig=E2=80=99 may result in an unali=
-gned pointer value
-> >  >     [-Werror=3Daddress-of-packed-member]
-> >  >   622 |         mon_height =3D (int *)&mon_config->monitors[i].heigh=
-t;
-> >  >       |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> >=20
-> > Signed-off-by: Victor Toso <victortoso@redhat.com>
-> > ---
-> >  src/vdagent/x11-randr.c | 18 +++++++++++-------
-> >  1 file changed, 11 insertions(+), 7 deletions(-)
-> >=20
-> > diff --git a/src/vdagent/x11-randr.c b/src/vdagent/x11-randr.c
-> > index 924f5ec..7585031 100644
-> > --- a/src/vdagent/x11-randr.c
-> > +++ b/src/vdagent/x11-randr.c
-> > @@ -611,20 +611,24 @@ static void zero_base_monitors(struct vdagent_x11=
- *x11,
-> >                                 int *width, int *height)
-> >  {
-> >      int i, min_x =3D INT_MAX, min_y =3D INT_MAX, max_x =3D INT_MIN, ma=
-x_y =3D
-> >      INT_MIN;
-> > -    int *mon_height, *mon_width;
-> > =20
-> >      for (i =3D 0; i < mon_config->num_of_monitors; i++) {
-> > -        if (!monitor_enabled(&mon_config->monitors[i]))
-> > +        int mon_height, mon_width;
-> > +
-> > +        if (!monitor_enabled(&mon_config->monitors[i])) {
-> >              continue;
-> > +        }
-> >          mon_config->monitors[i].x &=3D ~7;
-> >          mon_config->monitors[i].width &=3D ~7;
-> > -        mon_width =3D (int *)&mon_config->monitors[i].width;
-> > -        mon_height =3D (int *)&mon_config->monitors[i].height;
-> > -        constrain_to_screen(x11, mon_width, mon_height);
-> > +        mon_width =3D mon_config->monitors[i].width;
-> > +        mon_height =3D mon_config->monitors[i].height;
->=20
-> Why not following C99 and define and initialize in the same
-> line?
-
-I'm fine with that but as general rule I try to follow the
-surrounding coding style. Would you prefer we stick with C99 for
-new codebase even if surrounding code is not following that? We
-discussed a few times irc/email but no rule was made, so I get a
-bit confused sometimes with this.
-
-> > +        constrain_to_screen(x11, &mon_width, &mon_height);
-> >          min_x =3D MIN(mon_config->monitors[i].x, min_x);
-> >          min_y =3D MIN(mon_config->monitors[i].y, min_y);
-> > -        max_x =3D MAX(mon_config->monitors[i].x + *mon_width, max_x);
-> > -        max_y =3D MAX(mon_config->monitors[i].y + *mon_height, max_y);
-> > +        max_x =3D MAX(mon_config->monitors[i].x + mon_width, max_x);
-> > +        max_y =3D MAX(mon_config->monitors[i].y + mon_height, max_y);
-> > +        mon_config->monitors[i].width =3D mon_width;
-> > +        mon_config->monitors[i].height =3D mon_height;
-> >      }
-> >      if (min_x !=3D 0 || min_y !=3D 0) {
-> >          syslog(LOG_ERR, "%s: agent config %d,%d rooted, adjusting to 0=
-,0.",
->=20
-> Otherwise patch looks good, I think the code generated could also
-> be better than before.
->=20
-> Frediano
-
-Thanks, I'll wait your reply before pushing.
-
-Cheers,
-
---tr7k4gtbzo5k5554
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl0sS10ACgkQl9kSPeN6
-SE9sjA//Uf4BK8NdprycrzMy57uaw2uj352d/dwfqOhq6WdUCEk/7dGdUEB53XVn
-hhDMBR1NpHDRY/hoJDEz92uoVcKZG3qDxum+Fq3I17S2ix4ieudjX+b+h2I6Hazs
-W46OeqEfI4QUEs5Vv/gQ2nMtLq/NGBrt2walW+1hNysyAbuzVK+YaC4JYjOxRanj
-TszSWnzm4dJR+KSbKM97wcI2Em6uBWVvAzDsmlZXLiUoC8Md3MjINLvl9v+l9/Hu
-u98x8tBCAum+/ZwE/H6iFYZM8cuccxxMozK7yOEYn/Y7O9cExQ3a4wvuu6XaSEu/
-z+vtpUxmQsgv84EuaV2OZmzF02gM4cgJXfbEO7KgOs+LVzgXpY83hTUBvwrBz5/k
-z8mJiMkgepEeb/A7G6/bXG3/EvEutetxFY+9Zx3+aEk3wVTJHfp4vePa/0HnFRDL
-yg09R8uzReV6QDhGYnTJtQQ1WaqBkJa4qdq4CnhVynP+fSOomH352HS6cZgKKPAt
-oCVJ7Uz3YeuXEK4hmUvEOQCkb7cm0AR1kz8Oa4zcpt4fsl77U2/GQ73bAOexzUqN
-cH58ZT1vCzwBHVMjZ52lBauhAV1DPMvHLt/0YCyteYO9/jE2715jtjTvxOV7L6rR
-6LwEK2x7kGGd8jo8rI/Sl/g0bMmrbbRiVRlXLCfLpVTTyiWi6kA=
-=1WPE
------END PGP SIGNATURE-----
-
---tr7k4gtbzo5k5554--
-
---===============0000206269==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0000206269==--
+PiAKPiBIaSwKPiAKPiBPbiBNb24sIEp1bCAxNSwgMjAxOSBhdCAwNToxODoxN0FNIC0wNDAwLCBG
+cmVkaWFubyBaaWdsaW8gd3JvdGU6Cj4gPiA+IAo+ID4gPiBGcm9tOiBWaWN0b3IgVG9zbyA8bWVA
+dmljdG9ydG9zby5jb20+Cj4gPiA+IAo+ID4gPiBUaGUgc3RydWN0IHR5cGUgZm9yIHdpZHRoL2hl
+aWdodCBpcyB1aW50MzJfdCB3aGlsZSB3ZSBhcmUgdHJ5aW5nIHRvCj4gPiA+IGFjY2VzcyBhbmQg
+Y2hhbmdlIGl0IHdpdGggaW50KiAtIGNvZGUgY2FuIGJlIGltcHJvdmVkIGEgYml0IGluIGZvbGxv
+d2luZwo+ID4gPiBwYXRjaGVzIGJ1dCB0aGlzIG9uZSBmaXhlcyB0aGUgd2FybmluZyBieSBjb3B5
+aW5nIHRoZSB2YWx1ZSBmcm9tIHRoZQo+ID4gPiBzdHJ1Y3QgYW5kIGNvcHlpbmcgYmFjayBuZXcg
+dmFsdWUgYWZ0ZXJ3YXJkcy4KPiA+ID4gCj4gPiA+IEFsc286Cj4gPiA+IC0gTW92ZWQgdmFyaWFi
+bGVzIHRvIGludGVybmFsIHNjb3BlOwo+ID4gPiAtIEFkZGVkIGJyYWNlcyB0byBpbm5lciBpZjsK
+PiA+ID4gCj4gPiA+ICA+IHNyYy92ZGFnZW50L3gxMS1yYW5kci5jOiBJbiBmdW5jdGlvbiDigJh6
+ZXJvX2Jhc2VfbW9uaXRvcnPigJk6Cj4gPiA+ICA+ICAgICBzcmMvdmRhZ2VudC94MTEtcmFuZHIu
+Yzo2MjE6Mjg6IGVycm9yOiB0YWtpbmcgYWRkcmVzcyBvZiBwYWNrZWQKPiA+ID4gID4gICAgIG1l
+bWJlcgo+ID4gPiAgPiAgICAgb2YKPiA+ID4gID4gICAgIOKAmHN0cnVjdCBWREFnZW50TW9uQ29u
+Zmln4oCZIG1heSByZXN1bHQgaW4gYW4gdW5hbGlnbmVkIHBvaW50ZXIgdmFsdWUKPiA+ID4gID4g
+Wy1XZXJyb3I9YWRkcmVzcy1vZi1wYWNrZWQtbWVtYmVyXQo+ID4gPiAgPiAgIDYyMSB8ICAgICAg
+ICAgbW9uX3dpZHRoID0gKGludCAqKSZtb25fY29uZmlnLT5tb25pdG9yc1tpXS53aWR0aDsKPiA+
+ID4gID4gICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+
+fn5+fn5+fn5+fn5+fn4KPiA+ID4gID4gc3JjL3ZkYWdlbnQveDExLXJhbmRyLmM6NjIyOjI5OiBl
+cnJvcjogdGFraW5nIGFkZHJlc3Mgb2YgcGFja2VkIG1lbWJlcgo+ID4gPiAgPiBvZgo+ID4gPiAg
+PiAgICAg4oCYc3RydWN0IFZEQWdlbnRNb25Db25maWfigJkgbWF5IHJlc3VsdCBpbiBhbiB1bmFs
+aWduZWQgcG9pbnRlciB2YWx1ZQo+ID4gPiAgPiAgICAgWy1XZXJyb3I9YWRkcmVzcy1vZi1wYWNr
+ZWQtbWVtYmVyXQo+ID4gPiAgPiAgIDYyMiB8ICAgICAgICAgbW9uX2hlaWdodCA9IChpbnQgKikm
+bW9uX2NvbmZpZy0+bW9uaXRvcnNbaV0uaGVpZ2h0Owo+ID4gPiAgPiAgICAgICB8ICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+Cj4gPiA+
+IAo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBWaWN0b3IgVG9zbyA8dmljdG9ydG9zb0ByZWRoYXQuY29t
+Pgo+ID4gPiAtLS0KPiA+ID4gIHNyYy92ZGFnZW50L3gxMS1yYW5kci5jIHwgMTggKysrKysrKysr
+KystLS0tLS0tCj4gPiA+ICAxIGZpbGUgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgNyBkZWxl
+dGlvbnMoLSkKPiA+ID4gCj4gPiA+IGRpZmYgLS1naXQgYS9zcmMvdmRhZ2VudC94MTEtcmFuZHIu
+YyBiL3NyYy92ZGFnZW50L3gxMS1yYW5kci5jCj4gPiA+IGluZGV4IDkyNGY1ZWMuLjc1ODUwMzEg
+MTAwNjQ0Cj4gPiA+IC0tLSBhL3NyYy92ZGFnZW50L3gxMS1yYW5kci5jCj4gPiA+ICsrKyBiL3Ny
+Yy92ZGFnZW50L3gxMS1yYW5kci5jCj4gPiA+IEBAIC02MTEsMjAgKzYxMSwyNCBAQCBzdGF0aWMg
+dm9pZCB6ZXJvX2Jhc2VfbW9uaXRvcnMoc3RydWN0IHZkYWdlbnRfeDExCj4gPiA+ICp4MTEsCj4g
+PiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaW50ICp3aWR0aCwgaW50ICpoZWln
+aHQpCj4gPiA+ICB7Cj4gPiA+ICAgICAgaW50IGksIG1pbl94ID0gSU5UX01BWCwgbWluX3kgPSBJ
+TlRfTUFYLCBtYXhfeCA9IElOVF9NSU4sIG1heF95ID0KPiA+ID4gICAgICBJTlRfTUlOOwo+ID4g
+PiAtICAgIGludCAqbW9uX2hlaWdodCwgKm1vbl93aWR0aDsKPiA+ID4gIAo+ID4gPiAgICAgIGZv
+ciAoaSA9IDA7IGkgPCBtb25fY29uZmlnLT5udW1fb2ZfbW9uaXRvcnM7IGkrKykgewo+ID4gPiAt
+ICAgICAgICBpZiAoIW1vbml0b3JfZW5hYmxlZCgmbW9uX2NvbmZpZy0+bW9uaXRvcnNbaV0pKQo+
+ID4gPiArICAgICAgICBpbnQgbW9uX2hlaWdodCwgbW9uX3dpZHRoOwo+ID4gPiArCj4gPiA+ICsg
+ICAgICAgIGlmICghbW9uaXRvcl9lbmFibGVkKCZtb25fY29uZmlnLT5tb25pdG9yc1tpXSkpIHsK
+PiA+ID4gICAgICAgICAgICAgIGNvbnRpbnVlOwo+ID4gPiArICAgICAgICB9Cj4gPiA+ICAgICAg
+ICAgIG1vbl9jb25maWctPm1vbml0b3JzW2ldLnggJj0gfjc7Cj4gPiA+ICAgICAgICAgIG1vbl9j
+b25maWctPm1vbml0b3JzW2ldLndpZHRoICY9IH43Owo+ID4gPiAtICAgICAgICBtb25fd2lkdGgg
+PSAoaW50ICopJm1vbl9jb25maWctPm1vbml0b3JzW2ldLndpZHRoOwo+ID4gPiAtICAgICAgICBt
+b25faGVpZ2h0ID0gKGludCAqKSZtb25fY29uZmlnLT5tb25pdG9yc1tpXS5oZWlnaHQ7Cj4gPiA+
+IC0gICAgICAgIGNvbnN0cmFpbl90b19zY3JlZW4oeDExLCBtb25fd2lkdGgsIG1vbl9oZWlnaHQp
+Owo+ID4gPiArICAgICAgICBtb25fd2lkdGggPSBtb25fY29uZmlnLT5tb25pdG9yc1tpXS53aWR0
+aDsKPiA+ID4gKyAgICAgICAgbW9uX2hlaWdodCA9IG1vbl9jb25maWctPm1vbml0b3JzW2ldLmhl
+aWdodDsKPiA+IAo+ID4gV2h5IG5vdCBmb2xsb3dpbmcgQzk5IGFuZCBkZWZpbmUgYW5kIGluaXRp
+YWxpemUgaW4gdGhlIHNhbWUKPiA+IGxpbmU/Cj4gCj4gSSdtIGZpbmUgd2l0aCB0aGF0IGJ1dCBh
+cyBnZW5lcmFsIHJ1bGUgSSB0cnkgdG8gZm9sbG93IHRoZQo+IHN1cnJvdW5kaW5nIGNvZGluZyBz
+dHlsZS4gV291bGQgeW91IHByZWZlciB3ZSBzdGljayB3aXRoIEM5OSBmb3IKPiBuZXcgY29kZWJh
+c2UgZXZlbiBpZiBzdXJyb3VuZGluZyBjb2RlIGlzIG5vdCBmb2xsb3dpbmcgdGhhdD8gV2UKPiBk
+aXNjdXNzZWQgYSBmZXcgdGltZXMgaXJjL2VtYWlsIGJ1dCBubyBydWxlIHdhcyBtYWRlLCBzbyBJ
+IGdldCBhCj4gYml0IGNvbmZ1c2VkIHNvbWV0aW1lcyB3aXRoIHRoaXMuCj4gCgpJIHRoaW5rIGl0
+J3MgcXVpdGUgaGFyZCAoYW5kIElNTyB3cm9uZykgdG8gZGVmaW5lIGEgZ2VuZXJpYyBydWxlLgpJ
+biBDODkgd2FzIGVhc3kuLi4gaXQgd2FzIGEgY29tcGlsZXIgZXJyb3IhCkJ1dCBtYW55IGNvbXBp
+bGVycyBzdGFydGVkIHRvIGFkZCBleGNlcHRpb25zIGFjY2VwdGluZyBtb3JlICJDKysiCnN0eWxl
+cyAod2FzIHNpbWlsYXIgdG8gdGhlICIvLyIgY29tbWVudCkuClJlYXNvbnMgYXJlIGRpZmZlcmVu
+dDoKLSBjb21waWxlcnMgZG9uJ3QgZ2V0IGZvb2wgd2l0aCB0aGF0IHN5bnRheDsKLSB5b3UgY2Fu
+IGF2b2lkIHVuaW5pdGlhbGl6ZWQgZGF0YTsKLSBjaGFuZ2VzIChzbyBnaXQgZGlmZikgYXJlIG1v
+cmUgbG9jYWxpemVkOwotIGNhbiBiZSBzaG9ydCAoZG9uJ3QgbmVlZCAyIGxpbmVzIGZvciBkZWNs
+YXJhdGlvbiBhbmQKICBpbml0aWFsaXNhdGlvbikuClRoZXJlIGFyZSBzaXR1YXRpb24gd2hlcmUg
+dGhlICJvbGQiIHN0eWxlIGNvdWxkIGJlIGJldHRlcjoKLSBnb3RvLXMgKGluIHRoaXMgY2FzZSBj
+YW4gYmUgbWFuZGF0b3J5LCB5b3UgY2Fubm90IHNraXAKICB2YXJpYWJsZSBkZWNsYXJhdGlvbik7
+Ci0gdmFyaWFibGUgcmV1c2VkIChsaWtlIHRoZSBjbGFzc2ljICJpbnQgaSIpLgpTbyBkZWZpbmlu
+ZyBhIHNpbmdsZSBydWxlIGxvb2tzIHdyb25nIHRvIG1lLgoKSW4gdGhpcyBzcGVjaWZpYyBjYXNl
+IEkgZm91bmQgaXQgbW9yZSByZWFkYWJsZSwgeW91IGF2b2lkIG9uZSBsaW5lCmFuZCBpZiB5b3Ug
+YXJlIGp1c3QgcmVhZGluZyBxdWlja2x5IHRoZSBjb2RlIHlvdSBkb24ndCBoYXZlIHRvIHN3aXRj
+aAp0byBzb21lIHZhcmlhYmxlIHdoaWNoIGFyZSBub3QgdXNlZCB0byBzb21lIGNoZWNrcyBhbmQg
+YmFjayB0byB0aGVzZQp2YXJpYWJsZSB1c2FnZS4KCj4gPiA+ICsgICAgICAgIGNvbnN0cmFpbl90
+b19zY3JlZW4oeDExLCAmbW9uX3dpZHRoLCAmbW9uX2hlaWdodCk7Cj4gPiA+ICAgICAgICAgIG1p
+bl94ID0gTUlOKG1vbl9jb25maWctPm1vbml0b3JzW2ldLngsIG1pbl94KTsKPiA+ID4gICAgICAg
+ICAgbWluX3kgPSBNSU4obW9uX2NvbmZpZy0+bW9uaXRvcnNbaV0ueSwgbWluX3kpOwo+ID4gPiAt
+ICAgICAgICBtYXhfeCA9IE1BWChtb25fY29uZmlnLT5tb25pdG9yc1tpXS54ICsgKm1vbl93aWR0
+aCwgbWF4X3gpOwo+ID4gPiAtICAgICAgICBtYXhfeSA9IE1BWChtb25fY29uZmlnLT5tb25pdG9y
+c1tpXS55ICsgKm1vbl9oZWlnaHQsIG1heF95KTsKPiA+ID4gKyAgICAgICAgbWF4X3ggPSBNQVgo
+bW9uX2NvbmZpZy0+bW9uaXRvcnNbaV0ueCArIG1vbl93aWR0aCwgbWF4X3gpOwo+ID4gPiArICAg
+ICAgICBtYXhfeSA9IE1BWChtb25fY29uZmlnLT5tb25pdG9yc1tpXS55ICsgbW9uX2hlaWdodCwg
+bWF4X3kpOwo+ID4gPiArICAgICAgICBtb25fY29uZmlnLT5tb25pdG9yc1tpXS53aWR0aCA9IG1v
+bl93aWR0aDsKPiA+ID4gKyAgICAgICAgbW9uX2NvbmZpZy0+bW9uaXRvcnNbaV0uaGVpZ2h0ID0g
+bW9uX2hlaWdodDsKPiA+ID4gICAgICB9Cj4gPiA+ICAgICAgaWYgKG1pbl94ICE9IDAgfHwgbWlu
+X3kgIT0gMCkgewo+ID4gPiAgICAgICAgICBzeXNsb2coTE9HX0VSUiwgIiVzOiBhZ2VudCBjb25m
+aWcgJWQsJWQgcm9vdGVkLCBhZGp1c3RpbmcgdG8KPiA+ID4gICAgICAgICAgMCwwLiIsCj4gPiAK
+PiA+IE90aGVyd2lzZSBwYXRjaCBsb29rcyBnb29kLCBJIHRoaW5rIHRoZSBjb2RlIGdlbmVyYXRl
+ZCBjb3VsZCBhbHNvCj4gPiBiZSBiZXR0ZXIgdGhhbiBiZWZvcmUuCj4gPiAKPiAKPiBUaGFua3Ms
+IEknbGwgd2FpdCB5b3VyIHJlcGx5IGJlZm9yZSBwdXNoaW5nLgo+IAo+IENoZWVycywKPiAKCkNv
+ZGUgaXMgZml4aW5nIGFuIGlzc3VlIChldmVuIGlmIGl0J3MgbWlub3IpIHNvIEkgd291bGQgc2F5
+IGFjayBlaXRoZXIgd2F5CgpGcmVkaWFubwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlz
+dHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4v
+bGlzdGluZm8vc3BpY2UtZGV2ZWw=
