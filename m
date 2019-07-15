@@ -2,48 +2,40 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03C6E69153
-	for <lists+spice-devel@lfdr.de>; Mon, 15 Jul 2019 16:28:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4BF969902
+	for <lists+spice-devel@lfdr.de>; Mon, 15 Jul 2019 18:29:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 181258952F;
-	Mon, 15 Jul 2019 14:28:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EB9C589A5C;
+	Mon, 15 Jul 2019 16:29:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 83D418952F
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jul 2019 14:28:26 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7EAE289A5C;
+ Mon, 15 Jul 2019 16:29:03 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 285A8BB9C1;
- Mon, 15 Jul 2019 14:28:26 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 19CB41001DC5;
- Mon, 15 Jul 2019 14:28:26 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 0F458410AD;
- Mon, 15 Jul 2019 14:28:26 +0000 (UTC)
-Date: Mon, 15 Jul 2019 10:28:26 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Yuri Benditovich <yuri.benditovich@daynix.com>
-Message-ID: <924676003.191096.1563200906023.JavaMail.zimbra@redhat.com>
-In-Reply-To: <CAOEp5Oc6=WgcAeuNcHDHaXoxcuArnzk3bRgxYXtH5ifGS1t0uA@mail.gmail.com>
-References: <20190714140741.3274-1-yuri.benditovich@daynix.com>
- <20190714140741.3274-5-yuri.benditovich@daynix.com>
- <582622360.127784.1563199477825.JavaMail.zimbra@redhat.com>
- <CAOEp5Oc6=WgcAeuNcHDHaXoxcuArnzk3bRgxYXtH5ifGS1t0uA@mail.gmail.com>
+ by asavdk3.altibox.net (Postfix) with ESMTPS id 69E4320020;
+ Mon, 15 Jul 2019 18:29:01 +0200 (CEST)
+Date: Mon, 15 Jul 2019 18:29:00 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Message-ID: <20190715162900.GE27038@ravnborg.org>
+References: <20190630061922.7254-1-sam@ravnborg.org>
+ <20190630061922.7254-10-sam@ravnborg.org>
+ <20190701063843.qhkzyxuyfdv2wyw4@sirius.home.kraxel.org>
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.11, 10.4.195.4]
-Thread-Topic: usb-redir: delete usb-backend context on initialization error
-Thread-Index: BdW+dAROqaA3AUiDKxYeJMND36F+jw==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.26]); Mon, 15 Jul 2019 14:28:26 +0000 (UTC)
-Subject: Re: [Spice-devel] [spice-gtk 4/5] usb-redir: delete usb-backend
- context on initialization error
+Content-Disposition: inline
+In-Reply-To: <20190701063843.qhkzyxuyfdv2wyw4@sirius.home.kraxel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=dqr19Wo4 c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8
+ a=20KFwNOVAAAA:8 a=Z4Rwk6OoAAAA:8 a=e5mUnYsNAAAA:8 a=EaiQTAcAH70VUJLKOxkA:9
+ a=CjuIK1q_8ugA:10 a=E9Po1WZjFZOl8hwRPBS3:22 a=HkZW87K1Qel5hWWM3VKY:22
+ a=Vxmtnl_E_bksehYqCbjh:22
+Subject: Re: [Spice-devel] [PATCH v1 09/33] drm/qxl: drop use of drmP.h
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -55,38 +47,24 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yan Vugenfirer <yan@daynix.com>,
- Spice List <spice-devel@lists.freedesktop.org>
+Cc: Dave Airlie <airlied@redhat.com>, virtualization@lists.linux-foundation.org,
+ dri-devel@lists.freedesktop.org, spice-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiAKPiBPbiBNb24sIEp1bCAxNSwgMjAxOSBhdCA1OjA0IFBNIEZyZWRpYW5vIFppZ2xpbyA8Znpp
-Z2xpb0ByZWRoYXQuY29tPiB3cm90ZToKPiA+Cj4gPiA+Cj4gPiA+IFRoZSBkZWxldGUgaW4gZXJy
-b3IgZmxvdyB3YXMgbWlzc2luZy4KPiA+ID4KPiA+ID4gU2lnbmVkLW9mZi1ieTogWXVyaSBCZW5k
-aXRvdmljaCA8eXVyaS5iZW5kaXRvdmljaEBkYXluaXguY29tPgo+ID4gPiAtLS0KPiA+ID4gIHNy
-Yy91c2ItZGV2aWNlLW1hbmFnZXIuYyB8IDEgKwo+ID4gPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5z
-ZXJ0aW9uKCspCj4gPiA+Cj4gPiA+IGRpZmYgLS1naXQgYS9zcmMvdXNiLWRldmljZS1tYW5hZ2Vy
-LmMgYi9zcmMvdXNiLWRldmljZS1tYW5hZ2VyLmMKPiA+ID4gaW5kZXggODU3ZDA1Ny4uNzEwNWZm
-MSAxMDA2NDQKPiA+ID4gLS0tIGEvc3JjL3VzYi1kZXZpY2UtbWFuYWdlci5jCj4gPiA+ICsrKyBi
-L3NyYy91c2ItZGV2aWNlLW1hbmFnZXIuYwo+ID4gPiBAQCAtMjU5LDYgKzI1OSw3IEBAIHN0YXRp
-YyBnYm9vbGVhbgo+ID4gPiBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfaW5pdGFibGVfaW5pdChH
-SW5pdGFibGUgICppbml0YWJsZSwKPiA+ID4gICAgICBpZiAoIXNwaWNlX3VzYl9iYWNrZW5kX3Jl
-Z2lzdGVyX2hvdHBsdWcocHJpdi0+Y29udGV4dCwgc2VsZiwKPiA+ID4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3BpY2VfdXNiX2RldmljZV9tYW5hZ2VyX2hv
-dHBsdWdfY2IsCj4gPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGVycikpIHsKPiA+ID4gKyAgICAgICAgc3BpY2VfdXNiX2JhY2tlbmRfZGVsZXRlKHByaXYt
-PmNvbnRleHQpOwo+ID4KPiA+IFNob3VsZCBub3QgaGF2ZSBhIGZvbGxvd2luZyAicHJpdi0+Y29u
-dGV4dCA9IE5VTEwiID8KPiAKPiBUaGlzIGlzIGEgY29uc3RydWN0b3I7IGlmIGl0IGZhaWxzIHRo
-ZSBkZXN0cnVjdG9yIGlzIG5vdCBjYWxsZWQuCj4gQnV0IG5vIHByb2JsZW0gdG8gYWRkIHRoaXMg
-Zm9yIGJlYXV0eS4KPiAKCk5vLCB0aGlzIGlzIHRoZSBJbml0aWFibGU6OmluaXQuIElmIHRoaXMg
-cmV0dXJucyBGQUxTRSB0aGUgb2JqZWN0IGRlc3RydWN0aW9uCihzbyBzcGljZV91c2JfZGV2aWNl
-X21hbmFnZXJfZmluYWxpemUgZm9yIGluc3RhbmNlKSB3aWxsIGJlIGV4ZWN1dGVkLgpDdXJyZW50
-bHkgc3BpY2VfdXNiX2RldmljZV9tYW5hZ2VyX2ZpbmFsaXplIGlzIGNhbGxpbmcgc3BpY2VfdXNi
-X2JhY2tlbmRfZGVsZXRlCmFsc28gc28gaW4gdGhlb3J5IHRoaXMgY2FsbCBzaG91bGQgbm90IGJl
-IG5lY2Vzc2FyeSAobm90IHRlc3RlZCkuCgo+ID4KPiA+ID4gICAgICAgICAgcmV0dXJuIEZBTFNF
-Owo+ID4gPiAgICAgIH0KPiA+ID4gICNpZm5kZWYgR19PU19XSU4zMgo+ID4KCkZyZWRpYW5vCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVs
-IG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
-aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+T24gTW9uLCBKdWwgMDEsIDIwMTkgYXQgMDg6Mzg6NDNBTSArMDIwMCwgR2VyZCBIb2ZmbWFubiB3
+cm90ZToKPiBPbiBTdW4sIEp1biAzMCwgMjAxOSBhdCAwODoxODo1OEFNICswMjAwLCBTYW0gUmF2
+bmJvcmcgd3JvdGU6Cj4gPiBEcm9wIHVzZSBvZiB0aGUgZGVwcmVjYXRlZCBkcm1QLmggaGVhZGVy
+IGZpbGUuCj4gPiBXaGlsZSB0b3VjaGluZyB0aGUgZmlsZXMgZGl2aWRlZCBpbmNsdWRlcyBpbiBi
+bG9ja3MsCj4gPiBhbmQgd2hlbiBuZWVkZWQgc29ydCB0aGUgYmxvY2tzLgo+ID4gRml4IGZhbGxv
+dXQuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IFNhbSBSYXZuYm9yZyA8c2FtQHJhdm5ib3JnLm9y
+Zz4KPiA+IENjOiBEYXZlIEFpcmxpZSA8YWlybGllZEByZWRoYXQuY29tPgo+ID4gQ2M6IEdlcmQg
+SG9mZm1hbm4gPGtyYXhlbEByZWRoYXQuY29tPgo+ID4gQ2M6IHZpcnR1YWxpemF0aW9uQGxpc3Rz
+LmxpbnV4LWZvdW5kYXRpb24ub3JnCj4gPiBDYzogc3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0
+b3Aub3JnCj4gCj4gQWNrZWQtYnk6IEdlcmQgSG9mZm1hbm4gPGtyYXhlbEByZWRoYXQuY29tPgoK
+VGhhbmtzLCBhcHBsaWVkLgoKCVNhbQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
+dGluZm8vc3BpY2UtZGV2ZWw=
