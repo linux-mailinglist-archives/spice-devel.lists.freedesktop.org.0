@@ -1,46 +1,52 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FAD26BE8C
-	for <lists+spice-devel@lfdr.de>; Wed, 17 Jul 2019 16:52:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5816E6C200
+	for <lists+spice-devel@lfdr.de>; Wed, 17 Jul 2019 22:14:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 415A36E095;
-	Wed, 17 Jul 2019 14:52:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E2A896E2A2;
+	Wed, 17 Jul 2019 20:14:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE6A86E095
- for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 14:52:20 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 4A8E7307FBCB
- for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 14:52:20 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 40BF260BE2
- for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 14:52:20 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 376B418089C8;
- Wed, 17 Jul 2019 14:52:20 +0000 (UTC)
-Date: Wed, 17 Jul 2019 10:52:20 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Snir Sheriber <ssheribe@redhat.com>
-Message-ID: <466094510.601436.1563375140052.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20190717143943.8126-1-ssheribe@redhat.com>
-References: <20190717143943.8126-1-ssheribe@redhat.com>
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C8A786E296
+ for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 18:28:24 +0000 (UTC)
+Received: by mail-io1-xd35.google.com with SMTP id q22so47320410iog.4
+ for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 11:28:24 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=g4M8tM3kpoSLRZT8GeaBnmW8fbXsoOtzCY1sKDpU6yI=;
+ b=Pb0avZ7+VKecwL4Bqma4wwmhIShnLogFWFMFksYDP5cvAmRlU5FEY5XGm+o2yx0A+K
+ CFJr+jcG9EzwWmIqvu9IYRiFy2db+VLPOQrOVIY3BE26RhBY0m+QqcnjcbdjjLDMZIzX
+ J/wRPMy0GMyn5zrJQ2xt19oCL0X6WWt97VdaHhS0FGWJp59SIUKka/snFH7RqMpjiBN8
+ a5J+xKQqphDgaP2hOHVvKWn8aEG4l56GAjvC5yC+gaGd1LXQIIKWcx1GtL7HnoPzhs9e
+ VY0ZutnyqztoWZmIdUBcPdIYQlkL1pq5Lt7vUIDEIfSLgA3BV5hMD14rYRkePDjrVugN
+ 31Tg==
+X-Gm-Message-State: APjAAAW+PVrUmjIHLnOZRMFQpAFtR5lbi3xKxWcyh0DNhk5yL9Yg+qlJ
+ 2q6qvVPKDbYowpR2VSNPSKm948nOdJuzhS2kCoQNLA==
+X-Google-Smtp-Source: APXvYqwi4oeAWVsR5zE8om7QZtldnpeUrXxt6Vah/GhqkYnChUYAkTiAMG2FLVVOPWWvZwkxmC+GczR1vnEYockkh14=
+X-Received: by 2002:a02:c615:: with SMTP id i21mr42137496jan.135.1563388103844; 
+ Wed, 17 Jul 2019 11:28:23 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.17, 10.4.195.28]
-Thread-Topic: gst-plugin: receive encoder properties as command parameters
-Thread-Index: mriz5gxTyL6HB7HyNs4iB0Rzr3klLw==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.41]); Wed, 17 Jul 2019 14:52:20 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH v2 spice-streaming-agent] gst-plugin:
- receive encoder properties as command parameters
+From: Sagar cholakala <sagarcv.27@gmail.com>
+Date: Wed, 17 Jul 2019 23:58:12 +0530
+Message-ID: <CAFFEbjv4aBOqa4TptBC5S7u2RWexHfPLRHqvgwyXmV-3+UujUA@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Wed, 17 Jul 2019 20:14:55 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=g4M8tM3kpoSLRZT8GeaBnmW8fbXsoOtzCY1sKDpU6yI=;
+ b=D0swSunFhGUoUsJ02pzg/xdBraJVbjBRfcu3HhThZOW7PD+8kxQZe9fJnP4O+j/X0c
+ kiRSY75UfFXEYto6fytYNF6YG+FLy1aYE7OtI8STgCr+R1OUzoY7hvKbebLDyUF/0H6L
+ aFfehVSN5FFWKJkE7j9/T0TDF5msfnOyk09UUxNqZFaEKS6tLgFB6+V+fujHMlwCx4ng
+ w286xcBFh770lTObr1TyjbKOUQ+l8Hrm1b16uISS8lg4oYm2GwXIj8qBU/sCGRrV8ADQ
+ w7YxM1UlPQi6hjyifj3YDUppZkZKl5Y54PyxXJqhqM3NGUOZTZZZlSbWnZL7Xuqc4KDF
+ j5Nw==
+Subject: [Spice-devel] Help needed with installing Spice Gtk and widget
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,85 +58,90 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1229925751=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiAKPiBGcm9tOiB0ZXN0IDx0ZXN0QGxvY2FsaG9zdC5sb2NhbGRvbWFpbj4KPiAKPiBUaGlzIGFs
-bG93cyB0byBzZXQgcGx1Z2luIGtleT12YWx1ZSBwcm9wZXJ0aWVzIG9uIHJ1biB0aW1lLgo+IFRv
-IGFkZCBlbmNvZGVyIHBsdWdpbiBwcm9wZXJ0eSB1c2UgdGhlIGZvbGxvd2luZyBzeW50YXg6Cj4g
-LWMgZ3N0LnByb3A9InByb3BlcnR5PXZhbHVlIiAtYyBnc3QucHJvcD0icHJvcGVydHkyPXZhbHVl
-MiIuLi4KPiBNYWtlIHN1cmUgc3ludGF4IGlzIGFjY3VyYXRlIGFuZCB0aGF0IHRoZSBwcm9wZXJ0
-eSBpcyBzdXBwb3J0ZWQgYnkKPiB0aGUgY2hvc2VuIHBsdWdpbiwgd3JvbmcgcHJvcGVydGllcyBt
-YXkgaWdub3JlZCBzaWxlbnRseS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBTbmlyIFNoZXJpYmVyIDxz
-c2hlcmliZUByZWRoYXQuY29tPgo+IC0tLQo+IAo+IERpZmZlcmVuY2UgZnJvbSB2MToKPiAtVmFy
-aWFibGVzIG5hbWluZwo+IC1Vc2luZyB2ZWN0b3Igb2YgcGFpcnMKPiAtQWRkIHdhcm5pbmdzIGZv
-ciB3cm9uZyBpbnB1dAo+IC1TZXQgcHJvcGV0aWVzIGFmdGVyIGxvZyBtc2cKPiAtRml4IGNvbW1p
-dCBtc2cKPiAKPiAqVGhlcmUgaXMgb25seSBiYXNpYyBpbnB1dCB2YWxpZGF0aW9uLCBhc3N1bWlu
-ZyB0aGUgdXNlciBpcwo+ICBhY2N1cmF0ZSB3aXRoIHRoZSBwcm9wZXJ0aWVzIGhlIHNldHMuCj4g
-IEN1cnJlbnRseSB0aGUgY29kZSBjaGVja3MgcHJvcGVydHkgbmFtZSBleGlzdHMgZm9yIHRoZSBl
-bmNvZGVyCj4gIG9iamVjdCwgaSBoYWQgYSB2ZXJzaW9uIHRoYXQgY2hlY2tzIGFsc28gdGhlIHZh
-bHVlIG1hdGNoZXMgdGhlCj4gIHByb3BlcnR5IHR5cGUgYnV0IGl0IHNlZW1zIHRvIGJlIG92ZXIt
-Y29kaW5nIGZvciB0aGlzIHB1cnBvc2UuCj4gIAo+IC0tLQo+ICBzcmMvZ3N0LXBsdWdpbi5jcHAg
-fCAyOCArKysrKysrKysrKysrKysrKysrKysrKy0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAyMyBp
-bnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9zcmMvZ3N0LXBs
-dWdpbi5jcHAgYi9zcmMvZ3N0LXBsdWdpbi5jcHAKPiBpbmRleCA0ZTgwMmYxLi4zMjcwY2NlIDEw
-MDY0NAo+IC0tLSBhL3NyYy9nc3QtcGx1Z2luLmNwcAo+ICsrKyBiL3NyYy9nc3QtcGx1Z2luLmNw
-cAo+IEBAIC0zNSw2ICszNSw3IEBAIHN0cnVjdCBHc3RyZWFtZXJFbmNvZGVyU2V0dGluZ3MKPiAg
-ICAgIGludCBmcHMgPSAyNTsKPiAgICAgIFNwaWNlVmlkZW9Db2RlY1R5cGUgY29kZWMgPSBTUElD
-RV9WSURFT19DT0RFQ19UWVBFX0gyNjQ7Cj4gICAgICBzdGQ6OnN0cmluZyBlbmNvZGVyOwo+ICsg
-ICAgc3RkOjp2ZWN0b3I8c3RkOjpwYWlyPHN0ZDo6c3RyaW5nLCBzdGQ6OnN0cmluZz4+IHByb3Bf
-cGFpcnM7Cj4gIH07Cj4gIAo+ICB0ZW1wbGF0ZSA8dHlwZW5hbWUgVD4KPiBAQCAtMTc5LDExICsx
-ODAsMTggQEAgR3N0RWxlbWVudAo+ICpHc3RyZWFtZXJGcmFtZUNhcHR1cmU6OmdldF9lbmNvZGVy
-X3BsdWdpbihjb25zdCBHc3RyZWFtZXJFbmNvZGVyU2V0dAo+ICAgICAgfQo+ICAKPiAgICAgIGVu
-Y29kZXIgPSBmYWN0b3J5ID8gZ3N0X2VsZW1lbnRfZmFjdG9yeV9jcmVhdGUoZmFjdG9yeSwgImVu
-Y29kZXIiKSA6Cj4gICAgICBudWxscHRyOwo+IC0gICAgaWYgKGVuY29kZXIpIHsgLy8gSW52YWxp
-ZCBwcm9wZXJ0aWVzIHdpbGwgYmUgaWdub3JlZCBzaWxlbnRseQo+IC0gICAgICAgIC8qIHgyNjRl
-bmMgcHJvcGVydGllcyAqLwo+IC0gICAgICAgIGdzdF91dGlsX3NldF9vYmplY3RfYXJnKEdfT0JK
-RUNUKGVuY29kZXIpLCAidHVuZSIsICJ6ZXJvbGF0ZW5jeSIpOy8vCj4gc3RpbGxpbWFnZSwgZmFz
-dGRlY29kZSwgemVyb2xhdGVuY3kKPiAtICAgICAgICBnc3RfdXRpbF9zZXRfb2JqZWN0X2FyZyhH
-X09CSkVDVChlbmNvZGVyKSwgImJmcmFtZXMiLCAiMCIpOwo+IC0gICAgICAgIGdzdF91dGlsX3Nl
-dF9vYmplY3RfYXJnKEdfT0JKRUNUKGVuY29kZXIpLCAic3BlZWQtcHJlc2V0IiwgIjEiKTsvLwo+
-IDEtdWx0cmFmYXN0LCA2LW1lZCwgOS12ZXJ5c2xvdwo+ICsgICAgaWYgKGVuY29kZXIpIHsgLy8g
-U2V0IGVuY29kZXIgcHJvcGVydGllcwo+ICsgICAgICAgIGZvciAoaW50IGkgPSAwOyBpIDwgc2V0
-dGluZ3MucHJvcF9wYWlycy5zaXplKCk7IGkrKykgewoKSSB3b3VsZCB1c2UgYSBzaW1wbGUKCiAg
-IGZvciAoY29uc3QgYXV0byAmcHJvcDogc2V0dGluZ3MucHJvcF9wYWlycykgewoKPiArICAgICAg
-ICAgICAgY29uc3QgY2hhciAqcHJvcF9uYW1lID0gc2V0dGluZ3MucHJvcF9wYWlyc1tpXS5maXJz
-dC5jX3N0cigpOwoKSSB3b3VsZCBwZXJzb25hbGx5IGF2b2lkIHRoZSB0ZW1wIGFuZCB1c2UgInBy
-b3AuZmlyc3QuY19zdHIoKSIgYmVsb3cKb3IgdXNlIGFuIGFsaWFzIGxpa2UKCiAgICAgICAgICAg
-ICAgIGNvbnN0IGF1dG8gJm5hbWUgPSBwcm9wLmZpcnN0OwogICAgICAgICAgICAgICBjb25zdCBh
-dXRvICZ2YWx1ZSA9IHByb3Auc2Vjb25kOwoKPiArICAgICAgICAgICAgaWYgKCFnX29iamVjdF9j
-bGFzc19maW5kX3Byb3BlcnR5KEdfT0JKRUNUX0dFVF9DTEFTUyhlbmNvZGVyKSwKPiBwcm9wX25h
-bWUpKSB7Cj4gKyAgICAgICAgICAgICAgICBnc3Rfc3lzbG9nKExPR19XQVJOSU5HLCAiJyVzJyBw
-cm9wZXJ0eSB3YXMgbm90IGZvdW5kIGZvcgo+IHRoaXMgZW5jb2RlciIsIHByb3BfbmFtZSk7Cj4g
-KyAgICAgICAgICAgICAgICBjb250aW51ZTsKPiArICAgICAgICAgICAgfQo+ICsgICAgICAgICAg
-ICBjb25zdCBjaGFyICpwcm9wX3ZhbCA9IHNldHRpbmdzLnByb3BfcGFpcnNbaV0uc2Vjb25kLmNf
-c3RyKCk7Cj4gKyAgICAgICAgICAgIGdzdF9zeXNsb2coTE9HX05PVElDRSwgIlRyeWluZyB0byBz
-ZXQgZW5jb2RlciBwcm9wZXJ0eTogJyVzID0KPiAlcyciLCBwcm9wX25hbWUsIHByb3BfdmFsKTsK
-PiArICAgICAgICAgICAgLyogSW52YWxpZCBwcm9wZXJ0aWVzIHdpbGwgYmUgaWdub3JlZCBzaWxl
-bnRseSAqLwo+ICsgICAgICAgICAgICBnc3RfdXRpbF9zZXRfb2JqZWN0X2FyZyhHX09CSkVDVChl
-bmNvZGVyKSwgcHJvcF9uYW1lLCBwcm9wX3ZhbCk7Cj4gKyAgICAgICAgfQo+ICAgICAgfQo+ICAg
-ICAgZ3N0X3BsdWdpbl9mZWF0dXJlX2xpc3RfZnJlZShmaWx0ZXJlZCk7Cj4gICAgICBnc3RfcGx1
-Z2luX2ZlYXR1cmVfbGlzdF9mcmVlKGVuY29kZXJzKTsKPiBAQCAtNDQ5LDYgKzQ1NywxNiBAQCB2
-b2lkIEdzdHJlYW1lclBsdWdpbjo6UGFyc2VPcHRpb25zKGNvbnN0IENvbmZpZ3VyZU9wdGlvbgo+
-ICpvcHRpb25zKQo+ICAgICAgICAgICAgICB9Cj4gICAgICAgICAgfSBlbHNlIGlmIChuYW1lID09
-ICJnc3QuZW5jb2RlciIpIHsKPiAgICAgICAgICAgICAgc2V0dGluZ3MuZW5jb2RlciA9IHZhbHVl
-Owo+ICsgICAgICAgIH0gZWxzZSBpZiAobmFtZSA9PSAiZ3N0LnByb3AiKSB7Cj4gKyAgICAgICAg
-ICAgIHN0ZDo6c3RyaW5nIHByb3BfbmFtZSwgcHJvcF92YWw7Cj4gKyAgICAgICAgICAgIHNpemVf
-dCBwb3MgPSB2YWx1ZS5maW5kKCc9Jyk7Cj4gKyAgICAgICAgICAgIGlmICghcG9zIHx8IHBvcyA+
-PSB2YWx1ZS5zaXplKCkgLSAxKSB7CgpJIHdvdWxkIHVzZSBhCgogICBpZiAocG9zID09IHN0ZDo6
-c3RyaW5nOjpucG9zIHx8IHBvcyA9PSAwKSB7Cgo+ICsgICAgICAgICAgICAgICAgZ3N0X3N5c2xv
-ZyhMT0dfV0FSTklORywgIlByb3BlcnR5IGlucHV0IGlzIGludmFsaWQgKCclcycKPiBJZ25vcmVk
-KSIsIHZhbHVlLmNfc3RyKCkpOwo+ICsgICAgICAgICAgICAgICAgY29udGludWU7Cj4gKyAgICAg
-ICAgICAgIH0KPiArICAgICAgICAgICAgcHJvcF9uYW1lID0gdmFsdWUuc3Vic3RyKDAsIHBvcyk7
-Cj4gKyAgICAgICAgICAgIHByb3BfdmFsID0gdmFsdWUuc3Vic3RyKHBvcyArIDEpOwoKV2h5IG5v
-dCB1c2UgYXV0byBhbmQgYXZvaWQgc2VwYXJhdGVkIGRlY2xhcmF0aW9uPyBQb3RlbnRpYWxseSB0
-aGlzIHdpbGwgYXZvaWQKY29uc3RydWN0aW5nIGVtcHR5IHN0cmluZyBhbmQgdGhlbiBjaGFuZ2lu
-ZyB0aGVtLgoKPiArICAgICAgICAgICAgc2V0dGluZ3MucHJvcF9wYWlycy5wdXNoX2JhY2sobWFr
-ZV9wYWlyKHByb3BfbmFtZSwgcHJvcF92YWwpKTsKPiAgICAgICAgICB9Cj4gICAgICB9Cj4gIH0K
-CkZyZWRpYW5vCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-ClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1k
-ZXZlbA==
+--===============1229925751==
+Content-Type: multipart/alternative; boundary="00000000000093690d058de4a80f"
+
+--00000000000093690d058de4a80f
+Content-Type: text/plain; charset="UTF-8"
+
+Hello there,
+                       I have been going at it non stop to no avail, for
+days now. I cant seem to get the spice-gtk installed and I don't know how
+either. I am fairly new to Linux and to add to that, I am trying all of
+this on Raspberry pi 4 to make it a thin client (where the raspbian boots
+up to spice widget instead of GNOME or Raspbian GUI), asking for login
+credentials for spice server. I have looked around for days now and I
+desperately need help.
+
+If I can get some guidance on how to ./configure ( like whats my PWD when I
+am executing the command ./configure --prefix= ?? ) and what should my make
+and make install point to.
+
+Besides that, Should I like, put the code of the widget in the raspbian's
+OS's  rclocal or superscript or in launcher.sh for what I am trying to
+achieve?
+
+I am already a big fan of spice.
+
+Would like to accelerate its performance without any video lag on youtube
+or other videos.
+
+
+
+  Sagar Vishwanath
+
+  M.Eng
+
+  UBC
+
+--00000000000093690d058de4a80f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello there,=C2=A0<div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0I have been going at it non=
+ stop to no avail, for days now. I cant seem to get the spice-gtk installed=
+ and I don&#39;t know how either. I am fairly new to Linux and to add to th=
+at, I am trying all of this on Raspberry pi 4 to make it a thin client (whe=
+re the raspbian boots up to spice widget instead of GNOME or Raspbian GUI),=
+ asking for login credentials for spice server. I have looked around for da=
+ys now and I desperately need help.=C2=A0</div><div><br></div><div>If I can=
+ get some guidance on how to ./configure ( like whats my PWD when I am exec=
+uting the command ./configure --prefix=3D ?? ) and what should my make and =
+make install point to.=C2=A0</div><div><br></div><div>Besides that, Should =
+I like, put the code of the widget in the raspbian&#39;s OS&#39;s=C2=A0 rcl=
+ocal or superscript or in launcher.sh for what I am trying to achieve?=C2=
+=A0</div><div><br></div><div>I am already a big fan of spice.=C2=A0</div><d=
+iv><br></div><div>Would like to accelerate its performance without any vide=
+o lag on youtube or other videos.</div><div><br></div><div><br></div><div>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Sagar Vishwanath</div>=
+<div>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 M.Eng</div><div>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 UBC</div><div><br></div></=
+div>
+
+--00000000000093690d058de4a80f--
+
+--===============1229925751==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1229925751==--
