@@ -1,36 +1,36 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 261356B98A
-	for <lists+spice-devel@lfdr.de>; Wed, 17 Jul 2019 11:46:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35F216B98F
+	for <lists+spice-devel@lfdr.de>; Wed, 17 Jul 2019 11:48:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 599666E0D7;
-	Wed, 17 Jul 2019 09:46:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 78DE86E0E5;
+	Wed, 17 Jul 2019 09:48:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 17F4A6E0D7
- for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 09:46:09 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3B4216E0E5
+ for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 09:48:55 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id AB87E5AFE9
- for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 09:46:08 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id DA3068666A
+ for <spice-devel@lists.freedesktop.org>; Wed, 17 Jul 2019 09:48:54 +0000 (UTC)
 Received: from fziglio.remote.csb (unknown [10.33.32.17])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A55CA60A9F;
- Wed, 17 Jul 2019 09:46:07 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BEAAE600D1;
+ Wed, 17 Jul 2019 09:48:53 +0000 (UTC)
 From: Frediano Ziglio <fziglio@redhat.com>
 To: spice-devel@lists.freedesktop.org
-Date: Wed, 17 Jul 2019 10:46:03 +0100
-Message-Id: <20190717094603.12234-1-fziglio@redhat.com>
+Date: Wed, 17 Jul 2019 10:48:50 +0100
+Message-Id: <20190717094851.14923-1-fziglio@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.39]); Wed, 17 Jul 2019 09:46:08 +0000 (UTC)
-Subject: [Spice-devel] [PATCH spice-server] ci: Workaround an issue with
- GLib on Fedora 30
+ (mx1.redhat.com [10.5.110.26]); Wed, 17 Jul 2019 09:48:54 +0000 (UTC)
+Subject: [Spice-devel] [PATCH spice-server 1/2] test-websocket: Some Windows
+ compatibility
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,28 +47,20 @@ Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-VGhpcyByZW1vdmUgdGhpcyBlcnJvciBydW5uaW5nIHRlc3QtbGlzdGVuIHRlc3Qgb24gYSBGZWRv
-cmEgMzAgZG9ja2VyCmltYWdlOgoKKC9idWlsZHMvc3BpY2Uvc3BpY2UvYnVpbGQvc2VydmVyL3Rl
-c3RzL3Rlc3QtbGlzdGVuOjIyMzMpOiBHTGliLUdJTy1DUklUSUNBTCAqKjogMTU6Mjk6MDMuMTIz
-OiBnX2ZpbGVfbmV3X2Zvcl9wYXRoOiBhc3NlcnRpb24gJ3BhdGggIT0gTlVMTCcgZmFpbGVkCgpU
-aGlzIGVycm9yIGlzIGR1ZSB0byBzb21lIG1pc3NpbmcgY29uZmlndXJhdGlvbiBvbiB0aGUgaW1h
-Z2UuCk9uIGEgZnVsbHkgaW5zdGFsbGVkIERlc2t0b3AvU2VydmVyIG1hY2hpbmUgdGhlc2UgY29u
-ZmlndXJhdGlvbgphcmUgdXN1YWxseSBpbiBwbGFjZSBzbyB5b3Ugd29uJ3Qgbm90ZSB0aGUgaXNz
-dWUgYnV0IG9uIHJlY2VudApkb2NrZXIgaW1hZ2VzIHRoZXNlIGNvbmZpZ3VyYXRpb24gYXJlIG1p
-c3NpbmcuCgpSdW5uaW5nIHRoZSBkY29uZiBjb21tYW5kIGFkZCByZXF1aXJlZCBjb25maWd1cmF0
-aW9uLgoKU2lnbmVkLW9mZi1ieTogRnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+
-Ci0tLQogLmdpdGxhYi1jaS55bWwgfCAyICsrCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25z
-KCspCgpkaWZmIC0tZ2l0IGEvLmdpdGxhYi1jaS55bWwgYi8uZ2l0bGFiLWNpLnltbAppbmRleCBi
-MzAzZDQ2NTYuLjNjNTI5OGY4NCAxMDA2NDQKLS0tIGEvLmdpdGxhYi1jaS55bWwKKysrIGIvLmdp
-dGxhYi1jaS55bWwKQEAgLTgsOSArOCwxMSBAQCBiZWZvcmVfc2NyaXB0OgogICAgIGdsaWIyLWRl
-dmVsIGNlbHQwNTEtZGV2ZWwgcGl4bWFuLWRldmVsIGFsc2EtbGliLWRldmVsIG9wZW5zc2wtZGV2
-ZWwgbGlianBlZy10dXJiby1kZXZlbAogICAgIGxpYmNhY2FyZC1kZXZlbCBjeXJ1cy1zYXNsLWRl
-dmVsIGx6NC1kZXZlbCBvcHVzLWRldmVsCiAgICAgZ3N0cmVhbWVyMS1kZXZlbCBnc3RyZWFtZXIx
-LXBsdWdpbnMtYmFzZS1kZXZlbAorICAgIGRjb25mCiAgICAgLXkKICAgLSBnaXQgY2xvbmUgJHtD
-SV9SRVBPU0lUT1JZX1VSTC9zcGljZS5naXQvc3BpY2UtcHJvdG9jb2wuZ2l0fQogICAtIChjZCBz
-cGljZS1wcm90b2NvbCAmJiAuL2F1dG9nZW4uc2ggLS1wcmVmaXg9L3VzciAmJiBtYWtlIGluc3Rh
-bGwpCisgIC0gZGNvbmYgcmVzZXQgL29yZy9nbm9tZS9zeXN0ZW0vbG9jYXRpb24vZW5hYmxlZCB8
-fCB0cnVlCiAKIG1ha2VjaGVjazoKICAgc2NyaXB0OgotLSAKMi4yMC4xCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxp
-c3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+RG9uJ3QgY2FsbCBjbG9zZSBidXQgc29ja2V0X2Nsb3NlLgoKU2lnbmVkLW9mZi1ieTogRnJlZGlh
+bm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+Ci0tLQogc2VydmVyL3Rlc3RzL3Rlc3Qtd2Vi
+c29ja2V0LmMgfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVs
+ZXRpb25zKC0pCgpDdXJyZW50bHkgdGhlIGV4ZWN1dGFibGUgY2Fubm90IHJ1biBvbiBXaW5kb3dz
+IGJ1dCBpdCBkb2VzIG5vdCBodXJ0CnRvIG1ha2UgdGhlIHNvdXJjZSBtb3JlIGNvbXBhdGlibGUg
+d2l0aCB0aGF0IHN5c3RlbS4KCmRpZmYgLS1naXQgYS9zZXJ2ZXIvdGVzdHMvdGVzdC13ZWJzb2Nr
+ZXQuYyBiL3NlcnZlci90ZXN0cy90ZXN0LXdlYnNvY2tldC5jCmluZGV4IGRjN2I3ZDM0Mi4uZTc0
+Y2I1NDk3IDEwMDY0NAotLS0gYS9zZXJ2ZXIvdGVzdHMvdGVzdC13ZWJzb2NrZXQuYworKysgYi9z
+ZXJ2ZXIvdGVzdHMvdGVzdC13ZWJzb2NrZXQuYwpAQCAtMTkzLDEwICsxOTMsMTAgQEAgbWFpbihp
+bnQgYXJnYywgY2hhciAqKmFyZ3YpCiAgICAgICAgICsrbnVtX2Nvbm5lY3Rpb25zOwogICAgICAg
+ICBoYW5kbGVfY2xpZW50KG5ld19zb2NrKTsKIAotICAgICAgICBjbG9zZShuZXdfc29jayk7Cisg
+ICAgICAgIHNvY2tldF9jbG9zZShuZXdfc29jayk7CiAgICAgfQogCi0gICAgY2xvc2Uoc29jayk7
+CisgICAgc29ja2V0X2Nsb3NlKHNvY2spOwogICAgIHByaW50ZigiaGFuZGxlZCAldSBjb25uZWN0
+aW9uc1xuIiwgbnVtX2Nvbm5lY3Rpb25zKTsKICAgICByZXR1cm4gMDsKIH0KLS0gCjIuMjAuMQoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
