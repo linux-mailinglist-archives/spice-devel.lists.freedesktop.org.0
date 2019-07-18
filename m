@@ -1,41 +1,43 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD1CE6CFB8
-	for <lists+spice-devel@lfdr.de>; Thu, 18 Jul 2019 16:32:07 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D7626CFF8
+	for <lists+spice-devel@lfdr.de>; Thu, 18 Jul 2019 16:39:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 444186E3E3;
-	Thu, 18 Jul 2019 14:32:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 30D046E3E1;
+	Thu, 18 Jul 2019 14:39:14 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6C5436E3D8
- for <spice-devel@lists.freedesktop.org>; Thu, 18 Jul 2019 14:32:03 +0000 (UTC)
-Received: from jwhite.mn.codeweavers.com ([10.69.137.101])
- by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.89) (envelope-from <jwhite@codeweavers.com>)
- id 1ho7SM-0007R5-F1
- for spice-devel@lists.freedesktop.org; Thu, 18 Jul 2019 09:32:26 -0500
-From: Jeremy White <jwhite@codeweavers.com>
-To: spice-devel@lists.freedesktop.org
-Date: Thu, 18 Jul 2019 09:32:00 -0500
-Message-Id: <20190718143200.16380-2-jwhite@codeweavers.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190718143200.16380-1-jwhite@codeweavers.com>
-References: <20190718143200.16380-1-jwhite@codeweavers.com>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; 
- d=codeweavers.com; s=6377696661; h=References:In-Reply-To:Message-Id:Date:
- Subject:To:From:Sender:Reply-To:Cc:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=w8u2Cy+MZOErjlD+RfUCbI24OVllR7eqq0dEDIrG63I=; b=H42XtJUpQYR6HoX9BAZFdw53Y
- CtbuKKyg4HnowMcyUZOpbrKFpLiu3vZUiNjPoCbQKPtDsJvHN8PAZCOx2f0DQr6sTZYULlMLH26AH
- R9IA3zbxqzDLEmnP1+ArK8a87WY4/4yc6FYV5A4zZP3fGp68wGC8BerCVbAZyagsJklJc=;
-Subject: [Spice-devel] [PATCH x11spice 2/2] Bug fix: a listen specification
- from the config file was ignored
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A91296E3E1
+ for <spice-devel@lists.freedesktop.org>; Thu, 18 Jul 2019 14:39:12 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 4285130655E3
+ for <spice-devel@lists.freedesktop.org>; Thu, 18 Jul 2019 14:39:12 +0000 (UTC)
+Received: from lub.tlv (dhcp-4-204.tlv.redhat.com [10.35.4.204])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id A01D019C5B;
+ Thu, 18 Jul 2019 14:39:11 +0000 (UTC)
+To: Frediano Ziglio <fziglio@redhat.com>, spice-devel@lists.freedesktop.org
+References: <20190718073225.13190-1-fziglio@redhat.com>
+ <20190718073225.13190-4-fziglio@redhat.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <ae84cbe4-3162-59d4-2746-c81516e92539@redhat.com>
+Date: Thu, 18 Jul 2019 17:39:09 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <20190718073225.13190-4-fziglio@redhat.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.47]); Thu, 18 Jul 2019 14:39:12 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 3/3] ci: Add some Valgrind
+ suppressions for Fedora 30
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,25 +49,34 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Reply-To: uril@redhat.com
 Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-U2lnbmVkLW9mZi1ieTogSmVyZW15IFdoaXRlIDxqd2hpdGVAY29kZXdlYXZlcnMuY29tPgotLS0K
-IHNyYy9vcHRpb25zLmMgfCA0ICsrKy0KIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyks
-IDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9zcmMvb3B0aW9ucy5jIGIvc3JjL29wdGlvbnMu
-YwppbmRleCAwZDMxMzhkMC4uY2Y3NWU1NGUgMTAwNjQ0Ci0tLSBhL3NyYy9vcHRpb25zLmMKKysr
-IGIvc3JjL29wdGlvbnMuYwpAQCAtMzU1LDcgKzM1NSw5IEBAIGludCBvcHRpb25zX3BhcnNlX2Fy
-Z3VtZW50cyhpbnQgYXJnYywgY2hhciAqYXJndltdLCBvcHRpb25zX3QgKm9wdGlvbnMpCiAgICAg
-aWYgKHJjID09IDApIHsKICAgICAgICAgaWYgKG9wdGluZCA+PSBhcmdjKSB7CiAgICAgICAgICAg
-ICAvKiBEZWZhdWx0ICovCi0gICAgICAgICAgICBvcHRpb25zLT5saXN0ZW4gPSBzdHJkdXAoIjU5
-MDAiKTsKKyAgICAgICAgICAgIGlmICghb3B0aW9ucy0+bGlzdGVuKSB7CisgICAgICAgICAgICAg
-ICAgb3B0aW9ucy0+bGlzdGVuID0gc3RyZHVwKCI1OTAwIik7CisgICAgICAgICAgICB9CiAgICAg
-ICAgIH0gZWxzZSBpZiAob3B0aW5kIDwgKGFyZ2MgLSAxKSkgewogICAgICAgICAgICAgZnByaW50
-ZihzdGRlcnIsICJFcnJvcjogdG9vIG1hbnkgYXJndW1lbnRzXG4iKTsKICAgICAgICAgICAgIHJj
-ID0gWDExU1BJQ0VfRVJSX0JBREFSR1M7Ci0tIAoyLjExLjAKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGlj
-ZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5v
-cmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+T24gNy8xOC8xOSAxMDozMiBBTSwgRnJlZGlhbm8gWmlnbGlvIHdyb3RlOgo+IFNpZ25lZC1vZmYt
+Ynk6IEZyZWRpYW5vIFppZ2xpbyA8ZnppZ2xpb0ByZWRoYXQuY29tPgoKSGkgRnJlZGlhbm8sCgpJ
+J3ZlIGJlZW4gcGxheWluZyB3aXRoIGl0IHRvby4KSGFkIHNpbWlsYXIgcnVsZXMgYnV0IGRpZmZl
+cmVudC4KCllvdXIgdmVyc2lvbiB3b3JrcyBmb3IgbWUuClNvbWUgbWlub3IgY29tbWVudHMgYmVs
+b3cuCgo+IC0tLQo+ICAgc2VydmVyL3Rlc3RzL3ZhbGdyaW5kL3NwaWNlLnN1cHAgfCAyNSArKysr
+KysrKysrKysrKysrKysrKysrKysrCj4gICAxIGZpbGUgY2hhbmdlZCwgMjUgaW5zZXJ0aW9ucygr
+KQo+IAo+IGRpZmYgLS1naXQgYS9zZXJ2ZXIvdGVzdHMvdmFsZ3JpbmQvc3BpY2Uuc3VwcCBiL3Nl
+cnZlci90ZXN0cy92YWxncmluZC9zcGljZS5zdXBwCj4gaW5kZXggMWJmZTgxMDA2Li5kZDM2NjNj
+NjggMTAwNjQ0Cj4gLS0tIGEvc2VydmVyL3Rlc3RzL3ZhbGdyaW5kL3NwaWNlLnN1cHAKPiArKysg
+Yi9zZXJ2ZXIvdGVzdHMvdmFsZ3JpbmQvc3BpY2Uuc3VwcAo+IEBAIC0zNiwzICszNiwyOCBAQAo+
+ICAgCS4uLgo+ICAgCWZ1bjpwMTFfa2l0X21vZHVsZXNfbG9hZAo+ICAgfQo+ICsKPiArewo+ICsJ
+Z251dGxzX3g1MDlfZXh0X2ltcG9ydF9zdWJqZWN0X2FsdF9uYW1lcwo+ICsJTWVtY2hlY2s6Q29u
+ZAo+ICsJLi4uCj4gKwlmdW46Z251dGxzX3g1MDlfZXh0X2ltcG9ydF9zdWJqZWN0X2FsdF9uYW1l
+cwo+ICsJZnVuOmdudXRsc194NTA5X2NydF9pbXBvcnQKPiArCWZ1bjpnbnV0bHNfeDUwOV90cnVz
+dF9saXN0X2l0ZXJfZ2V0X2NhCj4gKwkuLi4KPiArCWZ1bjpnX2luaXRhYmxlX25ld192YWxpc3QK
+PiArCWZ1bjpnX2luaXRhYmxlX25ldwo+ICsJLi4uCgpwb3NzaWJseSB5b3UgY2FuIHJlbW92ZSB0
+aGUgbGFzdCA0IGxpbmVzIChub3QgaW1wb3J0YW50KQoKPiArfQo+ICsKPiArewo+ICsJZ2xpYl9n
+X3NvY2tldF9jbGllbnRfY2xhc3NfaW5pdAoKQXJlIGFsbCBnbGliIHNvY2tldHMgbGVha2luZyB3
+aGVuIGluaXRpYWxpemVkID8KCj4gKwlNZW1jaGVjazpMZWFrCj4gKwlmdW46Y2FsbG9jCj4gKwku
+Li4KPiArCWZ1bjp0eXBlX2NsYXNzX2luaXRfV20KPiArCS4uLgo+ICsJZnVuOmdfc29ja2V0X2Ns
+aWVudF9jbGFzc19pbml0Cj4gKwkuLi4KPiArCWZ1bjp0eXBlX2NsYXNzX2luaXRfV20KCllvdSBj
+YW4gcHJvYmFibHkgcmVtb3ZlIHRoZSB0eXBlX2NsYXNzX2luaXRfV20gYW5kIC4uLgoKVXJpLgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZl
+bCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8v
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
