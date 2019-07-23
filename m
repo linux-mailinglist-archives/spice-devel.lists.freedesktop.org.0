@@ -2,38 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72988715CA
-	for <lists+spice-devel@lfdr.de>; Tue, 23 Jul 2019 12:13:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 179A1715DE
+	for <lists+spice-devel@lfdr.de>; Tue, 23 Jul 2019 12:17:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 76552890BE;
-	Tue, 23 Jul 2019 10:13:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 368826E0CC;
+	Tue, 23 Jul 2019 10:17:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 25CFD890BE
- for <spice-devel@lists.freedesktop.org>; Tue, 23 Jul 2019 10:13:30 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6FA196E0CC
+ for <spice-devel@lists.freedesktop.org>; Tue, 23 Jul 2019 10:17:38 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id AAB0830860C5
- for <spice-devel@lists.freedesktop.org>; Tue, 23 Jul 2019 10:13:29 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 1A0F7C065128
+ for <spice-devel@lists.freedesktop.org>; Tue, 23 Jul 2019 10:17:38 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 59526600CD;
- Tue, 23 Jul 2019 10:13:29 +0000 (UTC)
-Date: Tue, 23 Jul 2019 12:13:28 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BB25A1001DC2;
+ Tue, 23 Jul 2019 10:17:37 +0000 (UTC)
+Date: Tue, 23 Jul 2019 12:17:36 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190723101328.yxqqz4iwdpjcguxn@wingsuit>
-References: <20190619155641.30143-1-fziglio@redhat.com>
+Message-ID: <20190723101736.hgpddj3dj3tjz3dn@wingsuit>
+References: <20190722112600.1338-1-fziglio@redhat.com>
+ <20190722112600.1338-2-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190619155641.30143-1-fziglio@redhat.com>
+In-Reply-To: <20190722112600.1338-2-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.44]); Tue, 23 Jul 2019 10:13:29 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server] event loop: improve
- implementation of watches
+ (mx1.redhat.com [10.5.110.31]); Tue, 23 Jul 2019 10:17:38 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk 2/2] spice-widget-egl: Declare
+ and initialise "tex" and "verts" shortly
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,197 +47,88 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0342267685=="
+Content-Type: multipart/mixed; boundary="===============1302181324=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0342267685==
+--===============1302181324==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="fg2z4ho3lpeyckve"
+	protocol="application/pgp-signature"; boundary="vaycnkcvzshhmty3"
 Content-Disposition: inline
 
 
---fg2z4ho3lpeyckve
+--vaycnkcvzshhmty3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Wed, Jun 19, 2019 at 04:56:41PM +0100, Frediano Ziglio wrote:
-> Avoid having to destroy and create a new GSource every time
-> we change event mask.
-> Interfaces required for this patch are available since GLib 2.36.
-> on Windows GPollFD::fd can be an HANDLE but not a socket.
+On Mon, Jul 22, 2019 at 12:26:00PM +0100, Frediano Ziglio wrote:
+> Just syntax change.
+> Reduce code to initialise these matrices.
+
+Yes, looks nicer.
+Acked-by: Victor Toso <victortoso@redhat.com>
+
 >=20
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 > ---
->  server/event-loop.c | 97 +++++++++++++++++++++++++++++++++++++++------
->  1 file changed, 85 insertions(+), 12 deletions(-)
+>  src/spice-widget-egl.c | 40 +++++++++++++---------------------------
+>  1 file changed, 13 insertions(+), 27 deletions(-)
 >=20
-> diff --git a/server/event-loop.c b/server/event-loop.c
-> index 80af2954f..33db4ffb0 100644
-> --- a/server/event-loop.c
-> +++ b/server/event-loop.c
-> @@ -85,14 +85,6 @@ static void timer_remove(const SpiceCoreInterfaceInter=
-nal *iface,
->      g_free(timer);
->  }
-> =20
-> -struct SpiceWatch {
-> -    GMainContext *context;
-> -    void *opaque;
-> -    GSource *source;
-> -    GIOChannel *channel;
-> -    SpiceWatchFunc func;
-> -};
+> diff --git a/src/spice-widget-egl.c b/src/spice-widget-egl.c
+> index 7db66082..f5e24a01 100644
+> --- a/src/spice-widget-egl.c
+> +++ b/src/spice-widget-egl.c
+> @@ -489,33 +489,19 @@ client_draw_rect_tex(SpiceDisplay *display,
+>                       float x, float y, float w, float h,
+>                       float tx, float ty, float tw, float th)
+>  {
+> -    float verts[4][4];
+> -    float tex[4][2];
 > -
->  static GIOCondition spice_event_to_giocondition(int event_mask)
->  {
->      GIOCondition condition =3D 0;
-> @@ -117,6 +109,15 @@ static int giocondition_to_spice_event(GIOCondition =
-condition)
->      return event;
+> -    verts[0][0] =3D x;
+> -    verts[0][1] =3D y;
+> -    verts[0][2] =3D 0.0;
+> -    verts[0][3] =3D 1.0;
+> -    tex[0][0] =3D tx;
+> -    tex[0][1] =3D ty;
+> -    verts[1][0] =3D x + w;
+> -    verts[1][1] =3D y;
+> -    verts[1][2] =3D 0.0;
+> -    verts[1][3] =3D 1.0;
+> -    tex[1][0] =3D tx + tw;
+> -    tex[1][1] =3D ty;
+> -    verts[2][0] =3D x;
+> -    verts[2][1] =3D y + h;
+> -    verts[2][2] =3D 0.0;
+> -    verts[2][3] =3D 1.0;
+> -    tex[2][0] =3D tx;
+> -    tex[2][1] =3D ty + th;
+> -    verts[3][0] =3D x + w;
+> -    verts[3][1] =3D y + h;
+> -    verts[3][2] =3D 0.0;
+> -    verts[3][3] =3D 1.0;
+> -    tex[3][0] =3D tx + tw;
+> -    tex[3][1] =3D ty + th;
+> +    GLfloat tex[4][2] =3D {
+> +        { tx, ty },
+> +        { tx + tw, ty },
+> +        { tx, ty + th },
+> +        { tx + tw, ty + th },
+> +    };
+> +
+> +    GLfloat verts[4][4] =3D {
+> +        { x, y, 0.0, 1.0 },
+> +        { x + w, y, 0.0, 1.0 },
+> +        { x, y + h, 0.0, 1.0 },
+> +        { x + w, y + h, 0.0, 1.0 },
+> +    };
+> =20
+>      draw_rect_from_arrays(display, verts, tex);
 >  }
-> =20
-> +#ifdef _WIN32
-> +struct SpiceWatch {
-> +    GMainContext *context;
-> +    void *opaque;
-> +    GSource *source;
-> +    GIOChannel *channel;
-> +    SpiceWatchFunc func;
-> +};
-> +
->  static gboolean watch_func(GIOChannel *source, GIOCondition condition,
->                             gpointer data)
->  {
-> @@ -161,11 +162,7 @@ static SpiceWatch *watch_add(const SpiceCoreInterfac=
-eInternal *iface,
-> =20
->      watch =3D g_new0(SpiceWatch, 1);
->      watch->context =3D iface->main_context;
-> -#ifndef _WIN32
-> -    watch->channel =3D g_io_channel_unix_new(fd);
-> -#else
->      watch->channel =3D g_io_channel_win32_new_socket(fd);
-> -#endif
->      watch->func =3D func;
->      watch->opaque =3D opaque;
-> =20
-> @@ -184,6 +181,82 @@ static void watch_remove(const SpiceCoreInterfaceInt=
-ernal *iface,
->      g_free(watch);
->  }
-> =20
-> +#else
-> +
-> +struct SpiceWatch {
-> +    GSource source;
-> +    GPollFD pollfd;
-> +};
-> +
-> +static gboolean
-> +spice_watch_check(GSource *source)
-> +{
-> +    SpiceWatch *watch =3D SPICE_CONTAINEROF(source, SpiceWatch, source);
-> +
-> +    return watch->pollfd.events & watch->pollfd.revents;
-> +}
-> +
-> +static gboolean
-> +spice_watch_dispatch(GSource     *source,
-> +                     GSourceFunc  callback,
-> +                     gpointer     user_data)
-> +{
-> +    SpiceWatch *watch =3D SPICE_CONTAINEROF(source, SpiceWatch, source);
-> +    SpiceWatchFunc func =3D (SpiceWatchFunc)(void*) callback;
-> +
-> +    func(watch->pollfd.fd, giocondition_to_spice_event(watch->pollfd.rev=
-ents), user_data);
-> +    /* timer might be free after func(), don't touch */
-> +
-> +    return G_SOURCE_CONTINUE;
-> +}
-> +
-> +static GSourceFuncs spice_watch_funcs =3D {
-> +    .check =3D spice_watch_check,
-> +    .dispatch =3D spice_watch_dispatch,
-> +};
-> +
-> +static void watch_update_mask(const SpiceCoreInterfaceInternal *iface,
-> +                              SpiceWatch *watch, int event_mask)
-> +{
-> +    GIOCondition old_condition =3D watch->pollfd.events;
-> +    GIOCondition new_condition =3D spice_event_to_giocondition(event_mas=
-k);
-> +
-> +    watch->pollfd.events =3D new_condition;
-> +    if (old_condition && !new_condition) {
-> +        g_source_remove_poll(&watch->source, &watch->pollfd);
-> +    } else if (!old_condition && new_condition) {
-> +        g_source_add_poll(&watch->source, &watch->pollfd);
-
-There is a note in the manual "Newly-written event sources should
-try to use g_source_add_unix_fd() instead of this API." which is
-present since 2.36.
-
-> +    }
-> +}
-> +
-> +static SpiceWatch *watch_add(const SpiceCoreInterfaceInternal *iface,
-> +                             int fd, int event_mask, SpiceWatchFunc func=
-, void *opaque)
-> +{
-> +    SpiceWatch *watch =3D (SpiceWatch *) g_source_new(&spice_watch_funcs=
-, sizeof(SpiceWatch));
-> +
-> +    spice_return_val_if_fail(fd !=3D -1, NULL);
-> +    spice_return_val_if_fail(func !=3D NULL, NULL);
-
-If an issue in the guards, you would be leaking the GSource
-
-> +
-> +    watch->pollfd.fd =3D fd;
-> +    watch->pollfd.events =3D 0;
-> +
-> +    g_source_set_callback(&watch->source, (GSourceFunc)(void*)(SpiceWatc=
-hFunc) func, opaque, NULL);
-
-I guess G_SOURCE_FUNC should work for casting *but* that is in
-2.58 only :(
-
-Potential addition to glib-compat.h ?
-
-> +
-> +    g_source_attach(&watch->source, iface->main_context);
-> +
-> +    watch_update_mask(iface, watch, event_mask);
-> +
-> +    return watch;
-> +}
-> +
-> +static void watch_remove(const SpiceCoreInterfaceInternal *iface,
-> +                         SpiceWatch *watch)
-> +{
-
-Not sure on situations that watch_remove() can be called actually
-but you might considering add a conditional with
-g_source_is_destroyed() to avoid unref multiple times. Perhaps
-not important.
-
-Cheers,
-Victor
-
-> +    g_source_destroy(&watch->source);
-> +    g_source_unref(&watch->source);
-> +}
-> +#endif
-> +
->  const SpiceCoreInterfaceInternal event_loop_core =3D {
->      .timer_add =3D timer_add,
->      .timer_start =3D timer_start,
 > --=20
 > 2.20.1
 >=20
@@ -245,29 +137,29 @@ Victor
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---fg2z4ho3lpeyckve
+--vaycnkcvzshhmty3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl023cgACgkQl9kSPeN6
-SE8cfBAApep52H5M+LVU3wKhqMZdbdSk1UuJjSnpWA4rg1iNemksAbLrTp6poG7C
-htojOCv8BmawbEaRH9rH7snW3FefkjZavGIa3bN2S9CnACeLOuBgtI1E6jX08vxW
-IwfxFMmHCrc2t484J6z0Vset0Smb3xDyxkUEAG6w8wN0yv95+wPKWweHKZtOx7Sm
-BvkVX3hgvVjVxEIQZr2DC7iOZp5WO7A5j5dyBJVqeafABCHpllvpP34N0zRqi0MT
-CX0zRV7u3x8oSVgWnwiXq/y3su0VtorqwLVxN4mbCEIJRX0UTuJ+WDxt9xMuc1E2
-rDKg8B4hbORoWRuXiIlm7nNNUo+A5yJa3iSDzDXOjEk48GC3Dkh9UGBvCq5nR+yo
-UgMiycmiW7x8VkHl0hLBsf8k7NYiwVIax3+GwigmdwnVQ+POdkK6+zG2s6g2KR0e
-gSiqhFVqNRUNN4/efWFqNGsxjYUYakZyDRjeL9e+U8negWhslmyUTRbJu4r+wUpe
-kDiwz3ypy3WoknVtmUuJeOMez2506y0TLFDDMjclJtI20Z751fzVJqYfWGsWxPV+
-siCoVeoKaWPSZ3jGSunPn60rTlbNuH14BZYHjkx9gdHW5iB153zE3D2M/cLSEk/8
-uUr8Hl7thm4H9rRkJJC8z7DYnGpHYKx3hwAR6UhJ1HjVrArfjHA=
-=KigM
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl023sAACgkQl9kSPeN6
+SE8hNw//dBpyBnR9qbAJDkuSz22tpoTqESVKCCiYFf5raUpc6n9BD0z5Y0s521SL
+JhqIYH0vor3ZV3AI4K7GrW6nR7P2JW8wSYH4P+TJzGlpXZ8uEF1Csj3iUGSsdNXp
+kZICDwJL7jSHZM4uH+plCDjPjLdpD+g7o7wmiwI8IUuchtXdtcBUXv2jb07FOUtN
+lRgbQBMn7kzVepGysz0BOaRAp+dDOIf7tAGJFhXFvtSQd5wnHo+sVyURSbyzZ1rF
+jGA44XADsqZeIH7+IBwCQ5oR10nmZwCl4nMQiMJRncVLfpoD1fnwGmvMLQ6CY9VQ
+pU8BuJiUr2ecu55eZfjROb9eVKrPfj/1mpKkQ37jLHhoZLdCWj4G23NQW/3sY5xL
+NPaP9K9BzMgMgg8bFQpq2WiezWFOPSx0ZU73jqnZiF31Bmlh1YW7lHz3iWSNJgP4
+X68dzbwJRsXVotfUVyzNRatbdY+CYZizfVR+3QMjfj+xrMNM/h6SOAe0zGcjHHrM
+BxG8aFByoIaPbWB1gOdF218PP2D5TPWRNioLoM8eLbFF8QMna92Ca4CFhLEdtsX6
+e3CtkH6xSPPFxQnW0wSqpuJIuVcnDbDjj/2FuVn3x55jz34lnbuFO1HpwaNYM+Ap
+GPuQ54SsSoToqaSHf56WryxFWG3acVe9J22wXt80HBF59ELrvTU=
+=OMqP
 -----END PGP SIGNATURE-----
 
---fg2z4ho3lpeyckve--
+--vaycnkcvzshhmty3--
 
---===============0342267685==
+--===============1302181324==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -277,4 +169,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0342267685==--
+--===============1302181324==--
