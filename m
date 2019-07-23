@@ -2,56 +2,40 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E42FA703CE
-	for <lists+spice-devel@lfdr.de>; Mon, 22 Jul 2019 17:31:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A12A711CF
+	for <lists+spice-devel@lfdr.de>; Tue, 23 Jul 2019 08:24:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EEC4C89CA4;
-	Mon, 22 Jul 2019 15:31:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9B5FB89DC7;
+	Tue, 23 Jul 2019 06:24:40 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
- [IPv6:2607:f8b0:4864:20::d43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7403F89CA4
- for <spice-devel@lists.freedesktop.org>; Mon, 22 Jul 2019 15:31:39 +0000 (UTC)
-Received: by mail-io1-xd43.google.com with SMTP id k20so74798190ios.10
- for <spice-devel@lists.freedesktop.org>; Mon, 22 Jul 2019 08:31:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=m9yrDv7uoQy3N3t3Cud6vxvhDD/CCHAUQjhe5VU+MdE=;
- b=iqWklpSTRkze3lZR6xbfG0tGoUQjgizwE/hAPMuifeAoi/G6v0TVpQkfap7TxbH0XX
- O6LrKFqq+THxeP6oxwRnTNIzFSW1GrNFClBh01VWJyIuVm/UM8VISGdpgcfqrFoHaG0c
- iU0IUQWNIMAslfXfR2IXSGOji6P6kPSg0wnMVfn3paw7l1yMDOxOO0iawx+zY3gNAm0m
- YBJj2Y+KZ19X3cRkcME3xdXkp6EZpQaBJMejBM+L6qKgOumwscmJE7uJVRo8c+O+k3zV
- lQvJydM1t4U2JnhgU1e/Gs+ymxy/tDNtZ8zwJAI++AwZn3g9I8fblbOrt8rtQhiKkEfb
- +u3w==
-X-Gm-Message-State: APjAAAUE1L7r3tGAOrDk+KaAN17smIj2eChv3VbFt+JKmpOuFgsNkrLx
- 8vVJCYntgTTVAfTqD7yCXbsTGmjFbxOo9wpnzOLpSXoNoew=
-X-Google-Smtp-Source: APXvYqxCkmyl26975rzlDJjh3zS97LvsGQtbnWexAcYZq7wrZ7hzpcurtfWCKl6KQR6r8un7YV/jN7PGWEWDkRuvnk4=
-X-Received: by 2002:a5d:8252:: with SMTP id n18mr66422742ioo.230.1563809498757; 
- Mon, 22 Jul 2019 08:31:38 -0700 (PDT)
-MIME-Version: 1.0
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3B59989DC7
+ for <spice-devel@lists.freedesktop.org>; Tue, 23 Jul 2019 06:24:39 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id B5FE64E919;
+ Tue, 23 Jul 2019 06:24:38 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.155])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 348DD5C230;
+ Tue, 23 Jul 2019 06:24:38 +0000 (UTC)
+Date: Tue, 23 Jul 2019 08:24:37 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Yuri Benditovich <yuri.benditovich@daynix.com>
+Message-ID: <20190723062437.wm2jhdna5vpmbfpr@wingsuit>
 References: <20190714140741.3274-1-yuri.benditovich@daynix.com>
  <20190714140741.3274-6-yuri.benditovich@daynix.com>
  <CAOEp5Oeb6BDHYx7J+QrjxnidtMHbq4R=X6oPM-E_Bs9P5QWgzg@mail.gmail.com>
  <20190722150026.ptsqn6ubuljmlxcq@wingsuit>
-In-Reply-To: <20190722150026.ptsqn6ubuljmlxcq@wingsuit>
-From: Yuri Benditovich <yuri.benditovich@daynix.com>
-Date: Mon, 22 Jul 2019 18:31:24 +0300
-Message-ID: <CAOEp5OduGLYmT4uqhgsjPgf+P+cJgHkTrGb+ybt+dYvXGn43sA@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=m9yrDv7uoQy3N3t3Cud6vxvhDD/CCHAUQjhe5VU+MdE=;
- b=RpReYJpRh7viI5luay3Z1S/d3oiAM3Nf/lHV+JQQt1olSCLW9IYhWSI5rLzXqHunRv
- kI5GX/m6ojNQsNZfvcaI8TfJfKqgl/AyywcF22quruM60Skxdhw8LIxkSlewrEMHjZUo
- ywVIuW1i3QS5dAjXqhvS9P+BLJP+lp+vU1/S74DRLP8eTm07bf6VP8J2jsRmc3vKLxoY
- ogM5nVlFAh2iMnEdN3VkTmnXtuvS4/0BpOgQbesTe4z2mAOpylE0hZPwSC/X2nBq0zpl
- dZi6u2L5WyHN7M8HWb9O6EUzDweeHwsv/RyfSkZ9BkdbkBnPW0wBPTcCiFeqRpZWCYl9
- LZqw==
+ <CAOEp5OduGLYmT4uqhgsjPgf+P+cJgHkTrGb+ybt+dYvXGn43sA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAOEp5OduGLYmT4uqhgsjPgf+P+cJgHkTrGb+ybt+dYvXGn43sA@mail.gmail.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.38]); Tue, 23 Jul 2019 06:24:38 +0000 (UTC)
 Subject: Re: [Spice-devel] [spice-gtk 5/5] usb-redir: move USB events
  handling to USB backend
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -67,299 +51,490 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: Yan Vugenfirer <yan@daynix.com>,
  Spice List <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0176606477=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBKdWwgMjIsIDIwMTkgYXQgNjowMCBQTSBWaWN0b3IgVG9zbyA8dmljdG9ydG9zb0By
-ZWRoYXQuY29tPiB3cm90ZToKPgo+IEhpLAo+Cj4gT24gTW9uLCBKdWwgMjIsIDIwMTkgYXQgMDQ6
-MzQ6NDhQTSArMDMwMCwgWXVyaSBCZW5kaXRvdmljaCB3cm90ZToKPiA+IFBpbmcKPgo+IFNvcnJ5
-LCBtaXNzZWQgaXQuCj4KPiBQYXRjaCBzZWVtcyBmaW5lIGFuZCBhZ2FpbiwgY29kZSBpcyBnZXR0
-aW5nIG5pY2VyIHRoYW5rcyB0bwo+IHVzYi1iYWNrZW5kLltjaF0uIFRoYW5rcy4gT25seSBjb3Nt
-ZXRpYyBjaGFuZ2VzIGZvciB2Mi4KPgo+ID4gT24gU3VuLCBKdWwgMTQsIDIwMTkgYXQgNTowNyBQ
-TSBZdXJpIEJlbmRpdG92aWNoCj4gPiA8eXVyaS5iZW5kaXRvdmljaEBkYXluaXguY29tPiB3cm90
-ZToKPiA+ID4KPiA+ID4gQmVmb3JlIHRoaXMgY29tbWl0Ogo+ID4gPiB1c2ItZGV2aWNlLW1hbmFn
-ZXIgc3RhcnRzIHRocmVhZCBmb3IgaGFuZGxpbmcgbGlidXNiIGV2ZW50cy4KPiA+ID4gICBPbiBM
-aW51eCAtIGZyb20gdGhlIGJlZ2lubmluZyAoYXMgaXQgaXMgbmVlZGVkIGZvciBob3RwbHVnCj4g
-PiA+ICAgY2FsbGJhY2tzKQo+ID4gPiAgIE9uIFdpbmRvd3MgLSBzdGFydHMgaXQgb24gZmlyc3Qg
-cmVkaXJlY3Rpb24gYW5kIHN0b3BzIHdoZW4KPiA+ID4gICB0aGVyZSBhcmUgbm8gcmVkaXJlY3Rp
-b25zIChpdCBjYW4ndCBrZWVwIHRoZSB0aHJlYWQgd2hlbgo+ID4gPiAgIHRoZXJlIGFyZSBubyBy
-ZWRpcmVjdGlvbnMgYXMgd2l0aCBsaWJ1c2IgPCAxLjAuMjEgaXQgd2lsbAo+ID4gPiAgIG5vdCBi
-ZSBhYmxlIHRvIGZvcmNlIHRoZSB0aHJlYWQgdG8gZXhpdCBhcyB0aGVyZSBhcmUgbm8gZXZlbnRz
-KQo+ID4gPiBDdXJyZW50IGNvbW1pdCBtb3ZlcyB0aGUgZXZlbnQgdGhyZWFkIGFuZCBoYW5kbGlu
-ZyBldmVudHMKPiA+ID4gICBjb21wbGV0ZWx5IHRvIHVzYiBiYWNrZW5kOyB1c2ItZGV2aWNlLW1h
-bmFnZXIgYW5kIG90aGVyCj4gPiA+ICAgYXJlIG5vdCBhd2FyZSBvZiBsaWJ1c2IgYW5kIHNob3Vs
-ZCBub3QgYXNzdW1lIHdoYXQgaXQKPiA+ID4gICBuZWVkcyB0byB3b3JrLiBXZSBzdGFydCB0aGUg
-ZXZlbnQgdGhyZWFkIGZyb20gdGhlIGJlZ2lubmluZwo+ID4gPiAgIG9uIGJvdGggTGludXggYW5k
-IFdpbmRvd3MgYW5kIG9uIExpbnV4IGl0IHdvcmtzIG9ubHkgZm9yCj4gPiA+ICAgaG90cGx1ZyBj
-YWxsYmFja3MsIG9uIFdpbmRvd3MgLSBqdXN0IHdhaXRzIHVudGlsIGRldmljZQo+ID4gPiAgIHJl
-ZGlyZWN0aW9uIHN0YXJ0cy4gT24gZGlzcG9zZSBvZiB1c2ItZGV2aWNlLW1hbmFnZXIKPiA+ID4g
-ICAod2hlbiBob3RwbHVnIGNhbGxiYWNrcyBhcmUgZGVyZWdpc3RlcmVkKSwgd2UgaW50ZXJydXB0
-Cj4gPiA+ICAgdGhlIHRocmVhZCBvbmNlIHRvIHN0b3AgaXQuCj4gPiA+IFRoaXMgcmVtb3ZlcyBt
-YW55IGxpbmVzIG9mIGNvZGUgYW5kIGFsc28gcmVtb3ZlcyBhbGwgdGhlCj4gPiA+IGRpZmZlcmVu
-Y2VzIGJldHdlZW4gTGludXggYW5kIFdpbmRvd3MgaW4gdXNiLWRldmljZS1tYW5hZ2VyLgo+Cj4g
-TG9nIGlzIGZpbmUsIEknZCByZW1vdmUgdGhlIGluZGVudGF0aW9uIHNwYWNlIGFuZCBhZGQgZW1w
-dHkgbGluZQo+IGJlZm9yZSAnQ3VycmVudCBjb21taXQnLCBub3QgaW1wb3J0YW50Lgo+Cj4gPiA+
-IFNpZ25lZC1vZmYtYnk6IFl1cmkgQmVuZGl0b3ZpY2ggPHl1cmkuYmVuZGl0b3ZpY2hAZGF5bml4
-LmNvbT4KPiA+ID4gLS0tCj4gPiA+ICBzcmMvY2hhbm5lbC11c2JyZWRpci5jICAgICAgICB8IDI4
-IC0tLS0tLS0tLS0tLS0KPiA+ID4gIHNyYy91c2ItYmFja2VuZC5jICAgICAgICAgICAgIHwgNDgg
-KysrKysrKysrKysrKystLS0tLS0tCj4gPiA+ICBzcmMvdXNiLWJhY2tlbmQuaCAgICAgICAgICAg
-ICB8ICAyIC0KPiA+ID4gIHNyYy91c2ItZGV2aWNlLW1hbmFnZXItcHJpdi5oIHwgIDYgLS0tCj4g
-PiA+ICBzcmMvdXNiLWRldmljZS1tYW5hZ2VyLmMgICAgICB8IDc5IC0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCj4gPiA+ICA1IGZpbGVzIGNoYW5nZWQsIDMzIGluc2VydGlvbnMo
-KyksIDEzMCBkZWxldGlvbnMoLSkKPiA+ID4KPiA+ID4gZGlmZiAtLWdpdCBhL3NyYy9jaGFubmVs
-LXVzYnJlZGlyLmMgYi9zcmMvY2hhbm5lbC11c2JyZWRpci5jCj4gPiA+IGluZGV4IDA0YWNmMGIu
-LjhkNGNkNjYgMTAwNjQ0Cj4gPiA+IC0tLSBhL3NyYy9jaGFubmVsLXVzYnJlZGlyLmMKPiA+ID4g
-KysrIGIvc3JjL2NoYW5uZWwtdXNicmVkaXIuYwo+ID4gPiBAQCAtNzIsNyArNzIsNiBAQCBzdHJ1
-Y3QgX1NwaWNlVXNicmVkaXJDaGFubmVsUHJpdmF0ZSB7Cj4gPiA+ICAgICAgU3BpY2VVc2JBY2xI
-ZWxwZXIgKmFjbF9oZWxwZXI7Cj4gPiA+ICAjZW5kaWYKPiA+ID4gICAgICBHTXV0ZXggZGV2aWNl
-X2Nvbm5lY3RfbXV0ZXg7Cj4gPiA+IC0gICAgU3BpY2VVc2JEZXZpY2VNYW5hZ2VyICp1c2JfZGV2
-aWNlX21hbmFnZXI7Cj4gPiA+ICB9Owo+ID4gPgo+ID4gPiAgc3RhdGljIHZvaWQgY2hhbm5lbF9z
-ZXRfaGFuZGxlcnMoU3BpY2VDaGFubmVsQ2xhc3MgKmtsYXNzKTsKPiA+ID4gQEAgLTE2OSwxMSAr
-MTY4LDYgQEAgc3RhdGljIHZvaWQgc3BpY2VfdXNicmVkaXJfY2hhbm5lbF9kaXNwb3NlKEdPYmpl
-Y3QgKm9iaikKPiA+ID4gICAgICBTcGljZVVzYnJlZGlyQ2hhbm5lbCAqY2hhbm5lbCA9IFNQSUNF
-X1VTQlJFRElSX0NIQU5ORUwob2JqKTsKPiA+ID4KPiA+ID4gICAgICBzcGljZV91c2JyZWRpcl9j
-aGFubmVsX2Rpc2Nvbm5lY3RfZGV2aWNlKGNoYW5uZWwpOwo+ID4gPiAtICAgIC8qIFRoaXMgc2hv
-dWxkIGhhdmUgYmVlbiBzZXQgdG8gTlVMTCBkdXJpbmcgZGV2aWNlIGRpc2Nvbm5lY3Rpb24sCj4g
-PiA+IC0gICAgICogYnV0IGJldHRlciBub3QgdG8gbGVhayBpdCBpZiB0aGlzIGRvZXMgbm90IGhh
-cHBlbiBmb3Igc29tZSByZWFzb24KPiA+ID4gLSAgICAgKi8KPiA+ID4gLSAgICBnX3dhcm5faWZf
-ZmFpbChjaGFubmVsLT5wcml2LT51c2JfZGV2aWNlX21hbmFnZXIgPT0gTlVMTCk7Cj4gPiA+IC0g
-ICAgZ19jbGVhcl9vYmplY3QoJmNoYW5uZWwtPnByaXYtPnVzYl9kZXZpY2VfbWFuYWdlcik7Cj4g
-PiA+Cj4gPiA+ICAgICAgLyogQ2hhaW4gdXAgdG8gdGhlIHBhcmVudCBjbGFzcyAqLwo+ID4gPiAg
-ICAgIGlmIChHX09CSkVDVF9DTEFTUyhzcGljZV91c2JyZWRpcl9jaGFubmVsX3BhcmVudF9jbGFz
-cyktPmRpc3Bvc2UpCj4gPiA+IEBAIC0yNDgsOCArMjQyLDYgQEAgc3RhdGljIGdib29sZWFuIHNw
-aWNlX3VzYnJlZGlyX2NoYW5uZWxfb3Blbl9kZXZpY2UoCj4gPiA+ICAgICAgU3BpY2VVc2JyZWRp
-ckNoYW5uZWwgKmNoYW5uZWwsIEdFcnJvciAqKmVycikKPiA+ID4gIHsKPiA+ID4gICAgICBTcGlj
-ZVVzYnJlZGlyQ2hhbm5lbFByaXZhdGUgKnByaXYgPSBjaGFubmVsLT5wcml2Owo+ID4gPiAtICAg
-IFNwaWNlU2Vzc2lvbiAqc2Vzc2lvbjsKPiA+ID4gLSAgICBTcGljZVVzYkRldmljZU1hbmFnZXIg
-Km1hbmFnZXI7Cj4gPiA+Cj4gPiA+ICAgICAgZ19yZXR1cm5fdmFsX2lmX2ZhaWwocHJpdi0+c3Rh
-dGUgPT0gU1RBVEVfRElTQ09OTkVDVEVECj4gPiA+ICAjaWZkZWYgVVNFX1BPTEtJVAo+ID4gPiBA
-QCAtMjY1LDE2ICsyNTcsNiBAQCBzdGF0aWMgZ2Jvb2xlYW4gc3BpY2VfdXNicmVkaXJfY2hhbm5l
-bF9vcGVuX2RldmljZSgKPiA+ID4gICAgICAgICAgcmV0dXJuIEZBTFNFOwo+ID4gPiAgICAgIH0K
-PiA+ID4KPiA+ID4gLSAgICBzZXNzaW9uID0gc3BpY2VfY2hhbm5lbF9nZXRfc2Vzc2lvbihTUElD
-RV9DSEFOTkVMKGNoYW5uZWwpKTsKPiA+ID4gLSAgICBtYW5hZ2VyID0gc3BpY2VfdXNiX2Rldmlj
-ZV9tYW5hZ2VyX2dldChzZXNzaW9uLCBOVUxMKTsKPiA+ID4gLSAgICBnX3JldHVybl92YWxfaWZf
-ZmFpbChtYW5hZ2VyICE9IE5VTEwsIEZBTFNFKTsKPiA+ID4gLQo+ID4gPiAtICAgIHByaXYtPnVz
-Yl9kZXZpY2VfbWFuYWdlciA9IGdfb2JqZWN0X3JlZihtYW5hZ2VyKTsKPiA+ID4gLSAgICBpZiAo
-IXNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9zdGFydF9ldmVudF9saXN0ZW5pbmcocHJpdi0+dXNi
-X2RldmljZV9tYW5hZ2VyLCBlcnIpKSB7Cj4gPiA+IC0gICAgICAgIHNwaWNlX3VzYl9iYWNrZW5k
-X2NoYW5uZWxfZGV0YWNoKHByaXYtPmhvc3QpOwo+ID4gPiAtICAgICAgICByZXR1cm4gRkFMU0U7
-Cj4gPiA+IC0gICAgfQo+ID4gPiAtCj4gPiA+ICAgICAgcHJpdi0+c3RhdGUgPSBTVEFURV9DT05O
-RUNURUQ7Cj4gPiA+Cj4gPiA+ICAgICAgcmV0dXJuIFRSVUU7Cj4gPiA+IEBAIC00NDUsMTYgKzQy
-Nyw2IEBAIHZvaWQgc3BpY2VfdXNicmVkaXJfY2hhbm5lbF9kaXNjb25uZWN0X2RldmljZShTcGlj
-ZVVzYnJlZGlyQ2hhbm5lbCAqY2hhbm5lbCkKPiA+ID4gICAgICAgICAgYnJlYWs7Cj4gPiA+ICAj
-ZW5kaWYKPiA+ID4gICAgICBjYXNlIFNUQVRFX0NPTk5FQ1RFRDoKPiA+ID4gLSAgICAgICAgLyoK
-PiA+ID4gLSAgICAgICAgICogVGhpcyBzZXRzIHRoZSB1c2IgZXZlbnQgdGhyZWFkIHJ1biBjb25k
-aXRpb24gdG8gRkFMU0UsIHRoZXJlZm9yCj4gPiA+IC0gICAgICAgICAqIGl0IG11c3QgYmUgZG9u
-ZSBiZWZvcmUgdXNicmVkaXJob3N0X3NldF9kZXZpY2UgTlVMTCwgYXMKPiA+ID4gLSAgICAgICAg
-ICogdXNicmVkaXJob3N0X3NldF9kZXZpY2UgTlVMTCB3aWxsIGludGVycnVwdCB0aGUKPiA+ID4g
-LSAgICAgICAgICogbGlidXNiX2hhbmRsZV9ldmVudHMgY2FsbCBpbiB0aGUgdGhyZWFkLgo+ID4g
-PiAtICAgICAgICAgKi8KPiA+ID4gLSAgICAgICAgZ193YXJuX2lmX2ZhaWwocHJpdi0+dXNiX2Rl
-dmljZV9tYW5hZ2VyICE9IE5VTEwpOwo+ID4gPiAtICAgICAgICBzcGljZV91c2JfZGV2aWNlX21h
-bmFnZXJfc3RvcF9ldmVudF9saXN0ZW5pbmcocHJpdi0+dXNiX2RldmljZV9tYW5hZ2VyKTsKPiA+
-ID4gLSAgICAgICAgZ19jbGVhcl9vYmplY3QoJnByaXYtPnVzYl9kZXZpY2VfbWFuYWdlcik7Cj4g
-PiA+IC0KPiA+ID4gICAgICAgICAgLyogVGhpcyBhbHNvIGNsb3NlcyB0aGUgbGlidXNiIGhhbmRs
-ZSB3ZSBwYXNzZWQgZnJvbSBvcGVuX2RldmljZSAqLwo+ID4gPiAgICAgICAgICBzcGljZV91c2Jf
-YmFja2VuZF9jaGFubmVsX2RldGFjaChwcml2LT5ob3N0KTsKPiA+ID4gICAgICAgICAgZ19jbGVh
-cl9wb2ludGVyKCZwcml2LT5kZXZpY2UsIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV91bnJlZik7
-Cj4gPiA+IGRpZmYgLS1naXQgYS9zcmMvdXNiLWJhY2tlbmQuYyBiL3NyYy91c2ItYmFja2VuZC5j
-Cj4gPiA+IGluZGV4IDgyOWQ4MWQuLjM3ZGI5NTEgMTAwNjQ0Cj4gPiA+IC0tLSBhL3NyYy91c2It
-YmFja2VuZC5jCj4gPiA+ICsrKyBiL3NyYy91c2ItYmFja2VuZC5jCj4gPiA+IEBAIC01OCw2ICs1
-OCw5IEBAIHN0cnVjdCBfU3BpY2VVc2JCYWNrZW5kCj4gPiA+ICAgICAgdXNiX2hvdF9wbHVnX2Nh
-bGxiYWNrIGhvdHBsdWdfY2FsbGJhY2s7Cj4gPiA+ICAgICAgdm9pZCAqaG90cGx1Z191c2VyX2Rh
-dGE7Cj4gPiA+ICAgICAgbGlidXNiX2hvdHBsdWdfY2FsbGJhY2tfaGFuZGxlIGhvdHBsdWdfaGFu
-ZGxlOwo+ID4gPiArICAgIEdUaHJlYWQgKmV2ZW50X3RocmVhZDsKPiA+ID4gKyAgICBnaW50IGV2
-ZW50X3RocmVhZF9ydW47Cj4gPiA+ICsKPiA+ID4gICNpZmRlZiBHX09TX1dJTjMyCj4gPiA+ICAg
-ICAgSEFORExFIGhXbmQ7Cj4gPiA+ICAgICAgbGlidXNiX2RldmljZSAqKmxpYnVzYl9kZXZpY2Vf
-bGlzdDsKPiA+ID4gQEAgLTQwNiwyOCArNDA5LDI1IEBAIFNwaWNlVXNiQmFja2VuZCAqc3BpY2Vf
-dXNiX2JhY2tlbmRfbmV3KEdFcnJvciAqKmVycm9yKQo+ID4gPiAgICAgIHJldHVybiBiZTsKPiA+
-ID4gIH0KPiA+ID4KPiA+ID4gLWdib29sZWFuIHNwaWNlX3VzYl9iYWNrZW5kX2hhbmRsZV9ldmVu
-dHMoU3BpY2VVc2JCYWNrZW5kICpiZSkKPiA+ID4gK3N0YXRpYyBncG9pbnRlciBoYW5kbGVfbGli
-dXNiX2V2ZW50cyhncG9pbnRlciB1c2VyX2RhdGEpCj4gPiA+ICB7Cj4gPiA+ICsgICAgU3BpY2VV
-c2JCYWNrZW5kICpiZSA9IChTcGljZVVzYkJhY2tlbmQgKil1c2VyX2RhdGE7Cj4KPiBJIGRvbid0
-IHRoaW5rIHlvdSBuZWVkIHRvIGNhc3QgZnJvbSBncG9pbnRlci4KPgo+ID4gPiAgICAgIFNQSUNF
-X0RFQlVHKCIlcyA+PiIsIF9fRlVOQ1RJT05fXyk7Cj4gPiA+IC0gICAgZ2Jvb2xlYW4gb2sgPSBG
-QUxTRTsKPiA+ID4gLSAgICBpZiAoYmUtPmxpYnVzYl9jb250ZXh0KSB7Cj4gPiA+IC0gICAgICAg
-IGludCByZXMgPSBsaWJ1c2JfaGFuZGxlX2V2ZW50cyhiZS0+bGlidXNiX2NvbnRleHQpOwo+ID4g
-PiAtICAgICAgICBvayA9IHJlcyA9PSAwOwo+ID4gPiArICAgIGludCByZXMgPSAwOwo+ID4gPiAr
-ICAgIGNvbnN0IGNoYXIgKmRlc2MgPSAiIjsKPiA+ID4gKyAgICB3aGlsZSAoZ19hdG9taWNfaW50
-X2dldCgmYmUtPmV2ZW50X3RocmVhZF9ydW4pKSB7Cj4gPiA+ICsgICAgICAgIHJlcyA9IGxpYnVz
-Yl9oYW5kbGVfZXZlbnRzKGJlLT5saWJ1c2JfY29udGV4dCk7Cj4gPiA+ICAgICAgICAgIGlmIChy
-ZXMgJiYgcmVzICE9IExJQlVTQl9FUlJPUl9JTlRFUlJVUFRFRCkgewo+ID4gPiAtICAgICAgICAg
-ICAgY29uc3QgY2hhciAqZGVzYyA9IGxpYnVzYl9zdHJlcnJvcihyZXMpOwo+ID4gPiArICAgICAg
-ICAgICAgZGVzYyA9IGxpYnVzYl9zdHJlcnJvcihyZXMpOwo+ID4gPiAgICAgICAgICAgICAgZ193
-YXJuaW5nKCJFcnJvciBoYW5kbGluZyBVU0IgZXZlbnRzOiAlcyBbJWldIiwgZGVzYywgcmVzKTsK
-PiA+ID4gLSAgICAgICAgICAgIG9rID0gRkFMU0U7Cj4gPiA+ICsgICAgICAgICAgICBicmVhazsK
-PiA+ID4gICAgICAgICAgfQo+ID4gPiAgICAgIH0KPiA+ID4gLSAgICBTUElDRV9ERUJVRygiJXMg
-PDwgJWQiLCBfX0ZVTkNUSU9OX18sIG9rKTsKPiA+ID4gLSAgICByZXR1cm4gb2s7Cj4gPiA+IC19
-Cj4gPiA+IC0KPiA+ID4gLXZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfaW50ZXJydXB0X2V2ZW50X2hh
-bmRsZXIoU3BpY2VVc2JCYWNrZW5kICpiZSkKPiA+ID4gLXsKPiA+ID4gLSAgICBpZiAoYmUtPmxp
-YnVzYl9jb250ZXh0KSB7Cj4gPiA+IC0gICAgICAgIGxpYnVzYl9pbnRlcnJ1cHRfZXZlbnRfaGFu
-ZGxlcihiZS0+bGlidXNiX2NvbnRleHQpOwo+ID4gPiArICAgIGlmIChiZS0+ZXZlbnRfdGhyZWFk
-X3J1bikgewo+ID4gPiArICAgICAgICBTUElDRV9ERUJVRygiJXM6IHRoZSB0aHJlYWQgYWJvcnRl
-ZCwgJXMoJWQpIiwgX19GVU5DVElPTl9fLCBkZXNjLCByZXMpOwo+ID4gPiAgICAgIH0KPiA+ID4g
-KyAgICBTUElDRV9ERUJVRygiJXMgPDwiLCBfX0ZVTkNUSU9OX18pOwo+ID4gPiArICAgIHJldHVy
-biBOVUxMOwo+ID4gPiAgfQo+ID4gPgo+ID4gPiAgdm9pZCBzcGljZV91c2JfYmFja2VuZF9kZXJl
-Z2lzdGVyX2hvdHBsdWcoU3BpY2VVc2JCYWNrZW5kICpiZSkKPiA+ID4gQEAgLTQzOCw2ICs0Mzgs
-MTIgQEAgdm9pZCBzcGljZV91c2JfYmFja2VuZF9kZXJlZ2lzdGVyX2hvdHBsdWcoU3BpY2VVc2JC
-YWNrZW5kICpiZSkKPiA+ID4gICAgICAgICAgYmUtPmhvdHBsdWdfaGFuZGxlID0gMDsKPiA+ID4g
-ICAgICB9Cj4gPiA+ICAgICAgYmUtPmhvdHBsdWdfY2FsbGJhY2sgPSBOVUxMOwo+ID4gPiArICAg
-IGdfYXRvbWljX2ludF9zZXQoJmJlLT5ldmVudF90aHJlYWRfcnVuLCBGQUxTRSk7Cj4gPiA+ICsg
-ICAgaWYgKGJlLT5ldmVudF90aHJlYWQpIHsKPiA+ID4gKyAgICAgICAgbGlidXNiX2ludGVycnVw
-dF9ldmVudF9oYW5kbGVyKGJlLT5saWJ1c2JfY29udGV4dCk7Cj4gPiA+ICsgICAgICAgIGdfdGhy
-ZWFkX2pvaW4oYmUtPmV2ZW50X3RocmVhZCk7Cj4gPiA+ICsgICAgICAgIGJlLT5ldmVudF90aHJl
-YWQgPSBOVUxMOwo+ID4gPiArICAgIH0KPiA+ID4gIH0KPiA+ID4KPiA+ID4gIGdib29sZWFuIHNw
-aWNlX3VzYl9iYWNrZW5kX3JlZ2lzdGVyX2hvdHBsdWcoU3BpY2VVc2JCYWNrZW5kICpiZSwKPiA+
-ID4gQEAgLTQ2MSw2ICs0NjcsMTYgQEAgZ2Jvb2xlYW4gc3BpY2VfdXNiX2JhY2tlbmRfcmVnaXN0
-ZXJfaG90cGx1ZyhTcGljZVVzYkJhY2tlbmQgKmJlLAo+ID4gPiAgICAgICAgICAgICAiRXJyb3Ig
-b24gVVNCIGhvdHBsdWcgZGV0ZWN0aW9uOiAlcyBbJWldIiwgZGVzYywgcmMpOwo+ID4gPiAgICAg
-ICAgICByZXR1cm4gRkFMU0U7Cj4gPiA+ICAgICAgfQo+ID4gPiArCj4gPiA+ICsgICAgZ19hdG9t
-aWNfaW50X3NldCgmYmUtPmV2ZW50X3RocmVhZF9ydW4sIFRSVUUpOwo+ID4gPiArICAgIGJlLT5l
-dmVudF90aHJlYWQgPSBnX3RocmVhZF90cnlfbmV3KCJ1c2JfZXZfdGhyZWFkIiwKPiA+ID4gKyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGhhbmRsZV9saWJ1c2JfZXZlbnRzLAo+
-ID4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmUsIGVycm9yKTsKPgo+
-IEl0IHdhcyBnX3RocmVhZF9uZXcoKSBiZWZvcmUsIHRoaXMgY2hhbmdlZCBpdCwgd2h5IGRvIHlv
-dSB0aGluawo+IGl0IGlzIGltcG9ydGFudD8gSSdkIGRvIHRoYXQgaW4gYSBzZXBhcmF0ZSBwYXRj
-aCB3aXRoIGEgcHJvcGVyCj4gcmF0aW9uYWxlIGZvciBpdC4KCkZyb20gdGhlIGJlZ2lubmluZyBp
-dCBzaG91bGQgYmUgZ190aHJlYWRfdHJ5X25ldyBidXQgdGhpcyB3YXMgbm90CmF2YWlsYWJsZSBp
-biBvbGQgZ2xpYi4KZ190aHJlYWRfdHJ5X25ldyBkb2VzIG5vdCBhYm9ydCB0aGUgYXBwbGljYXRp
-b24gb24gZXJyb3Igd2hlbiBnX3RocmVhZF9uZXcgZG9lcy4KCj4KPiA+ID4gKyAgICBpZiAoIWJl
-LT5ldmVudF90aHJlYWQpIHsKPiA+ID4gKyAgICAgICAgZ193YXJuaW5nKCJFcnJvciBzdGFydGlu
-ZyBldmVudCB0aHJlYWQiKTsKPiA+ID4gKyAgICAgICAgc3BpY2VfdXNiX2JhY2tlbmRfZGVyZWdp
-c3Rlcl9ob3RwbHVnKGJlKTsKPiA+ID4gKyAgICAgICAgcmV0dXJuIEZBTFNFOwo+ID4gPiArICAg
-IH0KPiA+ID4gICAgICByZXR1cm4gVFJVRTsKPiA+ID4gIH0KPiA+ID4KPiA+ID4gQEAgLTQ2OCw2
-ICs0ODQsOCBAQCB2b2lkIHNwaWNlX3VzYl9iYWNrZW5kX2RlbGV0ZShTcGljZVVzYkJhY2tlbmQg
-KmJlKQo+ID4gPiAgewo+ID4gPiAgICAgIGdfcmV0dXJuX2lmX2ZhaWwoYmUgIT0gTlVMTCk7Cj4g
-PiA+ICAgICAgU1BJQ0VfREVCVUcoIiVzID4+IiwgX19GVU5DVElPTl9fKTsKPiA+ID4gKyAgICAv
-KiBqdXN0IHRvIGJlIG9uIHRoZSBzYWZlIHNpZGUgaWYgbm90IGRlcmVnaXN0ZXJlZCAqLwo+ID4g
-PiArICAgIHNwaWNlX3VzYl9iYWNrZW5kX2RlcmVnaXN0ZXJfaG90cGx1ZyhiZSk7Cj4KPiBOb3Qg
-c3VyZSBpZiBJIGZvbGxvdyB0aGUgY29tbWVudCwgc2hvdWxkIGEgd2FybiBiZSBhZGRlZCBpbiBj
-YXNlCj4gc3BpY2VfdXNiX2JhY2tlbmRfZGVsZXRlKCkgaXMgY2FsbGVkIGluIHNvbWUgdW5leHBl
-Y3RlZCBzaXR1YXRpb24/Cj4KPiBDaGVlcnMsCj4gVmljdG9yCj4KPiA+ID4gICAgICBpZiAoYmUt
-PmxpYnVzYl9jb250ZXh0KSB7Cj4gPiA+ICAgICAgICAgIGxpYnVzYl9leGl0KGJlLT5saWJ1c2Jf
-Y29udGV4dCk7Cj4gPiA+ICAgICAgfQo+ID4gPiBkaWZmIC0tZ2l0IGEvc3JjL3VzYi1iYWNrZW5k
-LmggYi9zcmMvdXNiLWJhY2tlbmQuaAo+ID4gPiBpbmRleCA4MTRkYTQ2Li42OWE0OTBiIDEwMDY0
-NAo+ID4gPiAtLS0gYS9zcmMvdXNiLWJhY2tlbmQuaAo+ID4gPiArKysgYi9zcmMvdXNiLWJhY2tl
-bmQuaAo+ID4gPiBAQCAtNTYsOCArNTYsNiBAQCBlbnVtIHsKPiA+ID4gIFNwaWNlVXNiQmFja2Vu
-ZCAqc3BpY2VfdXNiX2JhY2tlbmRfbmV3KEdFcnJvciAqKmVycm9yKTsKPiA+ID4gIHZvaWQgc3Bp
-Y2VfdXNiX2JhY2tlbmRfZGVsZXRlKFNwaWNlVXNiQmFja2VuZCAqY29udGV4dCk7Cj4gPiA+Cj4g
-PiA+IC1nYm9vbGVhbiBzcGljZV91c2JfYmFja2VuZF9oYW5kbGVfZXZlbnRzKFNwaWNlVXNiQmFj
-a2VuZCAqYmUpOwo+ID4gPiAtdm9pZCBzcGljZV91c2JfYmFja2VuZF9pbnRlcnJ1cHRfZXZlbnRf
-aGFuZGxlcihTcGljZVVzYkJhY2tlbmQgKmJlKTsKPiA+ID4gIGdib29sZWFuIHNwaWNlX3VzYl9i
-YWNrZW5kX3JlZ2lzdGVyX2hvdHBsdWcoU3BpY2VVc2JCYWNrZW5kICpiZSwKPiA+ID4gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdm9pZCAqdXNlcl9kYXRhLAo+
-ID4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1c2JfaG90
-X3BsdWdfY2FsbGJhY2sgcHJvYywKPiA+ID4gZGlmZiAtLWdpdCBhL3NyYy91c2ItZGV2aWNlLW1h
-bmFnZXItcHJpdi5oIGIvc3JjL3VzYi1kZXZpY2UtbWFuYWdlci1wcml2LmgKPiA+ID4gaW5kZXgg
-MzlhYWYyZi4uNjZhY2Y2ZCAxMDA2NDQKPiA+ID4gLS0tIGEvc3JjL3VzYi1kZXZpY2UtbWFuYWdl
-ci1wcml2LmgKPiA+ID4gKysrIGIvc3JjL3VzYi1kZXZpY2UtbWFuYWdlci1wcml2LmgKPiA+ID4g
-QEAgLTI1LDEyICsyNSw2IEBACj4gPiA+Cj4gPiA+ICBHX0JFR0lOX0RFQ0xTCj4gPiA+Cj4gPiA+
-IC1nYm9vbGVhbiBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfc3RhcnRfZXZlbnRfbGlzdGVuaW5n
-KAo+ID4gPiAtICAgIFNwaWNlVXNiRGV2aWNlTWFuYWdlciAqbWFuYWdlciwgR0Vycm9yICoqZXJy
-KTsKPiA+ID4gLQo+ID4gPiAtdm9pZCBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfc3RvcF9ldmVu
-dF9saXN0ZW5pbmcoCj4gPiA+IC0gICAgU3BpY2VVc2JEZXZpY2VNYW5hZ2VyICptYW5hZ2VyKTsK
-PiA+ID4gLQo+ID4gPiAgI2lmZGVmIFVTRV9VU0JSRURJUgo+ID4gPiAgdm9pZCBzcGljZV91c2Jf
-ZGV2aWNlX21hbmFnZXJfZGV2aWNlX2Vycm9yKAo+ID4gPiAgICAgIFNwaWNlVXNiRGV2aWNlTWFu
-YWdlciAqbWFuYWdlciwgU3BpY2VVc2JEZXZpY2UgKmRldmljZSwgR0Vycm9yICplcnIpOwo+ID4g
-PiBkaWZmIC0tZ2l0IGEvc3JjL3VzYi1kZXZpY2UtbWFuYWdlci5jIGIvc3JjL3VzYi1kZXZpY2Ut
-bWFuYWdlci5jCj4gPiA+IGluZGV4IDcxMDVmZjEuLjI1ZmFjMDQgMTAwNjQ0Cj4gPiA+IC0tLSBh
-L3NyYy91c2ItZGV2aWNlLW1hbmFnZXIuYwo+ID4gPiArKysgYi9zcmMvdXNiLWRldmljZS1tYW5h
-Z2VyLmMKPiA+ID4gQEAgLTkzLDkgKzkzLDYgQEAgc3RydWN0IF9TcGljZVVzYkRldmljZU1hbmFn
-ZXJQcml2YXRlIHsKPiA+ID4gICAgICBnY2hhciAqcmVkaXJlY3Rfb25fY29ubmVjdDsKPiA+ID4g
-ICNpZmRlZiBVU0VfVVNCUkVESVIKPiA+ID4gICAgICBTcGljZVVzYkJhY2tlbmQgKmNvbnRleHQ7
-Cj4gPiA+IC0gICAgaW50IGV2ZW50X2xpc3RlbmVyczsKPiA+ID4gLSAgICBHVGhyZWFkICpldmVu
-dF90aHJlYWQ7Cj4gPiA+IC0gICAgZ2ludCBldmVudF90aHJlYWRfcnVuOwo+ID4gPiAgICAgIHN0
-cnVjdCB1c2JyZWRpcmZpbHRlcl9ydWxlICphdXRvX2Nvbm5fZmlsdGVyX3J1bGVzOwo+ID4gPiAg
-ICAgIHN0cnVjdCB1c2JyZWRpcmZpbHRlcl9ydWxlICpyZWRpcmVjdF9vbl9jb25uZWN0X3J1bGVz
-Owo+ID4gPiAgICAgIGludCBhdXRvX2Nvbm5fZmlsdGVyX3J1bGVzX2NvdW50Owo+ID4gPiBAQCAt
-MjYyLDkgKzI1OSw2IEBAIHN0YXRpYyBnYm9vbGVhbiBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJf
-aW5pdGFibGVfaW5pdChHSW5pdGFibGUgICppbml0YWJsZSwKPiA+ID4gICAgICAgICAgc3BpY2Vf
-dXNiX2JhY2tlbmRfZGVsZXRlKHByaXYtPmNvbnRleHQpOwo+ID4gPiAgICAgICAgICByZXR1cm4g
-RkFMU0U7Cj4gPiA+ICAgICAgfQo+ID4gPiAtI2lmbmRlZiBHX09TX1dJTjMyCj4gPiA+IC0gICAg
-c3BpY2VfdXNiX2RldmljZV9tYW5hZ2VyX3N0YXJ0X2V2ZW50X2xpc3RlbmluZyhzZWxmLCBOVUxM
-KTsKPiA+ID4gLSNlbmRpZgo+ID4gPgo+ID4gPiAgICAgIC8qIFN0YXJ0IGxpc3RlbmluZyBmb3Ig
-dXNiIGNoYW5uZWxzIGNvbm5lY3QvZGlzY29ubmVjdCAqLwo+ID4gPiAgICAgIHNwaWNlX2dfc2ln
-bmFsX2Nvbm5lY3Rfb2JqZWN0KHByaXYtPnNlc3Npb24sICJjaGFubmVsLW5ldyIsIEdfQ0FMTEJB
-Q0soY2hhbm5lbF9uZXcpLCBzZWxmLCBHX0NPTk5FQ1RfQUZURVIpOwo+ID4gPiBAQCAtMjg2LDI3
-ICsyODAsOCBAQCBzdGF0aWMgdm9pZCBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfZGlzcG9zZShH
-T2JqZWN0ICpnb2JqZWN0KQo+ID4gPiAgICAgIFNwaWNlVXNiRGV2aWNlTWFuYWdlciAqc2VsZiA9
-IFNQSUNFX1VTQl9ERVZJQ0VfTUFOQUdFUihnb2JqZWN0KTsKPiA+ID4gICAgICBTcGljZVVzYkRl
-dmljZU1hbmFnZXJQcml2YXRlICpwcml2ID0gc2VsZi0+cHJpdjsKPiA+ID4KPiA+ID4gLSNpZm5k
-ZWYgR19PU19XSU4zMgo+ID4gPiAtICAgIHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9zdG9wX2V2
-ZW50X2xpc3RlbmluZyhzZWxmKTsKPiA+ID4gLSAgICBpZiAoZ19hdG9taWNfaW50X2dldCgmcHJp
-di0+ZXZlbnRfdGhyZWFkX3J1bikpIHsKPiA+ID4gLSAgICAgICAgLyogRm9yY2UgdGVybWluYXRp
-b24gb2YgdGhlIGV2ZW50IHRocmVhZCBldmVuIGlmIHRoZXJlIHdlcmUgc29tZQo+ID4gPiAtICAg
-ICAgICAgKiBtaXNtYXRjaGVkIHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl97c3RhcnQsc3RvcH1f
-ZXZlbnRfbGlzdGVuaW5nCj4gPiA+IC0gICAgICAgICAqIGNhbGxzLiBPdGhlcndpc2UsIHRoZSB1
-c2IgZXZlbnQgdGhyZWFkIHdpbGwgYmUgbGVha2VkLCBhbmQgd2lsbAo+ID4gPiAtICAgICAgICAg
-KiB0cnkgdG8gdXNlIHRoZSBsaWJ1c2IgY29udGV4dCB3ZSBkZXN0cm95IGluIGZpbmFsaXplKCks
-IHdoaWNoIHdvdWxkCj4gPiA+IC0gICAgICAgICAqIGNhdXNlIGEgY3Jhc2ggKi8KPiA+ID4gLSAg
-ICAgICAgZ193YXJuX2lmX3JlYWNoZWQoKTsKPiA+ID4gLSAgICAgICAgZ19hdG9taWNfaW50X3Nl
-dCgmcHJpdi0+ZXZlbnRfdGhyZWFkX3J1biwgRkFMU0UpOwo+ID4gPiAtICAgIH0KPiA+ID4gLSNl
-bmRpZgo+ID4gPiAgICAgIHNwaWNlX3VzYl9iYWNrZW5kX2RlcmVnaXN0ZXJfaG90cGx1Zyhwcml2
-LT5jb250ZXh0KTsKPiA+ID4KPiA+ID4gLSAgICBpZiAocHJpdi0+ZXZlbnRfdGhyZWFkKSB7Cj4g
-PiA+IC0gICAgICAgIGdfd2Fybl9pZl9mYWlsKGdfYXRvbWljX2ludF9nZXQoJnByaXYtPmV2ZW50
-X3RocmVhZF9ydW4pID09IEZBTFNFKTsKPiA+ID4gLSAgICAgICAgZ19hdG9taWNfaW50X3NldCgm
-cHJpdi0+ZXZlbnRfdGhyZWFkX3J1biwgRkFMU0UpOwo+ID4gPiAtICAgICAgICBzcGljZV91c2Jf
-YmFja2VuZF9pbnRlcnJ1cHRfZXZlbnRfaGFuZGxlcihwcml2LT5jb250ZXh0KTsKPiA+ID4gLSAg
-ICAgICAgZ190aHJlYWRfam9pbihwcml2LT5ldmVudF90aHJlYWQpOwo+ID4gPiAtICAgICAgICBw
-cml2LT5ldmVudF90aHJlYWQgPSBOVUxMOwo+ID4gPiAtICAgIH0KPiA+ID4gICNlbmRpZgo+ID4g
-Pgo+ID4gPiAgICAgIC8qIENoYWluIHVwIHRvIHRoZSBwYXJlbnQgY2xhc3MgKi8KPiA+ID4gQEAg
-LTMyNCw3ICsyOTksNiBAQCBzdGF0aWMgdm9pZCBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfZmlu
-YWxpemUoR09iamVjdCAqZ29iamVjdCkKPiA+ID4gICAgICBpZiAocHJpdi0+ZGV2aWNlcykgewo+
-ID4gPiAgICAgICAgICBnX3B0cl9hcnJheV91bnJlZihwcml2LT5kZXZpY2VzKTsKPiA+ID4gICAg
-ICB9Cj4gPiA+IC0gICAgZ19yZXR1cm5faWZfZmFpbChwcml2LT5ldmVudF90aHJlYWQgPT0gTlVM
-TCk7Cj4gPiA+ICAgICAgaWYgKHByaXYtPmNvbnRleHQpIHsKPiA+ID4gICAgICAgICAgc3BpY2Vf
-dXNiX2JhY2tlbmRfZGVsZXRlKHByaXYtPmNvbnRleHQpOwo+ID4gPiAgICAgIH0KPiA+ID4gQEAg
-LTkxNiw1OSArODkwLDYgQEAgc3RhdGljIHZvaWQgc3BpY2VfdXNiX2RldmljZV9tYW5hZ2VyX2No
-YW5uZWxfY29ubmVjdF9jYigKPiA+ID4gIC8qIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAqLwo+ID4gPiAgLyogcHJpdmF0
-ZSBhcGkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICovCj4gPiA+Cj4gPiA+IC1zdGF0aWMgZ3BvaW50ZXIgc3BpY2VfdXNiX2RldmljZV9tYW5h
-Z2VyX3VzYl9ldl90aHJlYWQoZ3BvaW50ZXIgdXNlcl9kYXRhKQo+ID4gPiAtewo+ID4gPiAtICAg
-IFNwaWNlVXNiRGV2aWNlTWFuYWdlciAqc2VsZiA9IFNQSUNFX1VTQl9ERVZJQ0VfTUFOQUdFUih1
-c2VyX2RhdGEpOwo+ID4gPiAtICAgIFNwaWNlVXNiRGV2aWNlTWFuYWdlclByaXZhdGUgKnByaXYg
-PSBzZWxmLT5wcml2Owo+ID4gPiAtCj4gPiA+IC0gICAgd2hpbGUgKGdfYXRvbWljX2ludF9nZXQo
-JnByaXYtPmV2ZW50X3RocmVhZF9ydW4pKSB7Cj4gPiA+IC0gICAgICAgIGlmICghc3BpY2VfdXNi
-X2JhY2tlbmRfaGFuZGxlX2V2ZW50cyhwcml2LT5jb250ZXh0KSkgewo+ID4gPiAtICAgICAgICAg
-ICAgYnJlYWs7Cj4gPiA+IC0gICAgICAgIH0KPiA+ID4gLSAgICB9Cj4gPiA+IC0KPiA+ID4gLSAg
-ICByZXR1cm4gTlVMTDsKPiA+ID4gLX0KPiA+ID4gLQo+ID4gPiAtZ2Jvb2xlYW4gc3BpY2VfdXNi
-X2RldmljZV9tYW5hZ2VyX3N0YXJ0X2V2ZW50X2xpc3RlbmluZygKPiA+ID4gLSAgICBTcGljZVVz
-YkRldmljZU1hbmFnZXIgKnNlbGYsIEdFcnJvciAqKmVycikKPiA+ID4gLXsKPiA+ID4gLSAgICBT
-cGljZVVzYkRldmljZU1hbmFnZXJQcml2YXRlICpwcml2ID0gc2VsZi0+cHJpdjsKPiA+ID4gLQo+
-ID4gPiAtICAgIGdfcmV0dXJuX3ZhbF9pZl9mYWlsKGVyciA9PSBOVUxMIHx8ICplcnIgPT0gTlVM
-TCwgRkFMU0UpOwo+ID4gPiAtCj4gPiA+IC0gICAgcHJpdi0+ZXZlbnRfbGlzdGVuZXJzKys7Cj4g
-PiA+IC0gICAgaWYgKHByaXYtPmV2ZW50X2xpc3RlbmVycyA+IDEpCj4gPiA+IC0gICAgICAgIHJl
-dHVybiBUUlVFOwo+ID4gPiAtCj4gPiA+IC0gICAgLyogV2UgZG9uJ3Qgam9pbiB0aGUgdGhyZWFk
-IHdoZW4gd2Ugc3RvcCBldmVudCBsaXN0ZW5pbmcsIGFzIHRoZQo+ID4gPiAtICAgICAgIGxpYnVz
-Yl9oYW5kbGVfZXZlbnRzIGNhbGwgaW4gdGhlIHRocmVhZCB3b24ndCBleGl0IHVudGlsIHRoZQo+
-ID4gPiAtICAgICAgIGxpYnVzYl9jbG9zZSBjYWxsIGZvciB0aGUgZGV2aWNlIGlzIG1hZGUgZnJv
-bSB1c2JyZWRpcmhvc3RfY2xvc2UuICovCj4gPiA+IC0gICAgaWYgKHByaXYtPmV2ZW50X3RocmVh
-ZCkgewo+ID4gPiAtICAgICAgICBnX2F0b21pY19pbnRfc2V0KCZwcml2LT5ldmVudF90aHJlYWRf
-cnVuLCBGQUxTRSk7Cj4gPiA+IC0gICAgICAgIHNwaWNlX3VzYl9iYWNrZW5kX2ludGVycnVwdF9l
-dmVudF9oYW5kbGVyKHByaXYtPmNvbnRleHQpOwo+ID4gPiAtICAgICAgICAgZ190aHJlYWRfam9p
-bihwcml2LT5ldmVudF90aHJlYWQpOwo+ID4gPiAtICAgICAgICAgcHJpdi0+ZXZlbnRfdGhyZWFk
-ID0gTlVMTDsKPiA+ID4gLSAgICB9Cj4gPiA+IC0gICAgZ19hdG9taWNfaW50X3NldCgmcHJpdi0+
-ZXZlbnRfdGhyZWFkX3J1biwgVFJVRSk7Cj4gPiA+IC0gICAgcHJpdi0+ZXZlbnRfdGhyZWFkID0g
-Z190aHJlYWRfbmV3KCJ1c2JfZXZfdGhyZWFkIiwKPiA+ID4gLSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgc3BpY2VfdXNiX2RldmljZV9tYW5hZ2VyX3VzYl9ldl90aHJlYWQs
-Cj4gPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNlbGYpOwo+ID4g
-PiAtICAgIHJldHVybiBwcml2LT5ldmVudF90aHJlYWQgIT0gTlVMTDsKPiA+ID4gLX0KPiA+ID4g
-LQo+ID4gPiAtdm9pZCBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfc3RvcF9ldmVudF9saXN0ZW5p
-bmcoCj4gPiA+IC0gICAgU3BpY2VVc2JEZXZpY2VNYW5hZ2VyICpzZWxmKQo+ID4gPiAtewo+ID4g
-PiAtICAgIFNwaWNlVXNiRGV2aWNlTWFuYWdlclByaXZhdGUgKnByaXYgPSBzZWxmLT5wcml2Owo+
-ID4gPiAtCj4gPiA+IC0gICAgZ19yZXR1cm5faWZfZmFpbChwcml2LT5ldmVudF9saXN0ZW5lcnMg
-PiAwKTsKPiA+ID4gLQo+ID4gPiAtICAgIHByaXYtPmV2ZW50X2xpc3RlbmVycy0tOwo+ID4gPiAt
-ICAgIGlmIChwcml2LT5ldmVudF9saXN0ZW5lcnMgPT0gMCkKPiA+ID4gLSAgICAgICAgZ19hdG9t
-aWNfaW50X3NldCgmcHJpdi0+ZXZlbnRfdGhyZWFkX3J1biwgRkFMU0UpOwo+ID4gPiAtfQo+ID4g
-PiAtCj4gPiA+ICBzdGF0aWMgdm9pZCBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJfY2hlY2tfcmVk
-aXJfb25fY29ubmVjdCgKPiA+ID4gICAgICBTcGljZVVzYkRldmljZU1hbmFnZXIgKnNlbGYsIFNw
-aWNlQ2hhbm5lbCAqY2hhbm5lbCkKPiA+ID4gIHsKPiA+ID4gLS0KPiA+ID4gMi4xNy4xCj4gPiA+
-Cj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+ID4g
-U3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gPiBTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmcKPiA+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
-c3BpY2UtZGV2ZWwKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9w
-Lm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNl
-LWRldmVs
+
+--===============0176606477==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="tu2eggoiovwfagfs"
+Content-Disposition: inline
+
+
+--tu2eggoiovwfagfs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Mon, Jul 22, 2019 at 06:31:24PM +0300, Yuri Benditovich wrote:
+> On Mon, Jul 22, 2019 at 6:00 PM Victor Toso <victortoso@redhat.com> wrote:
+> >
+> > Hi,
+> >
+> > On Mon, Jul 22, 2019 at 04:34:48PM +0300, Yuri Benditovich wrote:
+> > > Ping
+> >
+> > Sorry, missed it.
+> >
+> > Patch seems fine and again, code is getting nicer thanks to
+> > usb-backend.[ch]. Thanks. Only cosmetic changes for v2.
+> >
+> > > On Sun, Jul 14, 2019 at 5:07 PM Yuri Benditovich
+> > > <yuri.benditovich@daynix.com> wrote:
+> > > >
+> > > > Before this commit:
+> > > > usb-device-manager starts thread for handling libusb events.
+> > > >   On Linux - from the beginning (as it is needed for hotplug
+> > > >   callbacks)
+> > > >   On Windows - starts it on first redirection and stops when
+> > > >   there are no redirections (it can't keep the thread when
+> > > >   there are no redirections as with libusb < 1.0.21 it will
+> > > >   not be able to force the thread to exit as there are no events)
+> > > > Current commit moves the event thread and handling events
+> > > >   completely to usb backend; usb-device-manager and other
+> > > >   are not aware of libusb and should not assume what it
+> > > >   needs to work. We start the event thread from the beginning
+> > > >   on both Linux and Windows and on Linux it works only for
+> > > >   hotplug callbacks, on Windows - just waits until device
+> > > >   redirection starts. On dispose of usb-device-manager
+> > > >   (when hotplug callbacks are deregistered), we interrupt
+> > > >   the thread once to stop it.
+> > > > This removes many lines of code and also removes all the
+> > > > differences between Linux and Windows in usb-device-manager.
+> >
+> > Log is fine, I'd remove the indentation space and add empty line
+> > before 'Current commit', not important.
+> >
+> > > > Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
+> > > > ---
+> > > >  src/channel-usbredir.c        | 28 -------------
+> > > >  src/usb-backend.c             | 48 ++++++++++++++-------
+> > > >  src/usb-backend.h             |  2 -
+> > > >  src/usb-device-manager-priv.h |  6 ---
+> > > >  src/usb-device-manager.c      | 79 -------------------------------=
+----
+> > > >  5 files changed, 33 insertions(+), 130 deletions(-)
+> > > >
+> > > > diff --git a/src/channel-usbredir.c b/src/channel-usbredir.c
+> > > > index 04acf0b..8d4cd66 100644
+> > > > --- a/src/channel-usbredir.c
+> > > > +++ b/src/channel-usbredir.c
+> > > > @@ -72,7 +72,6 @@ struct _SpiceUsbredirChannelPrivate {
+> > > >      SpiceUsbAclHelper *acl_helper;
+> > > >  #endif
+> > > >      GMutex device_connect_mutex;
+> > > > -    SpiceUsbDeviceManager *usb_device_manager;
+> > > >  };
+> > > >
+> > > >  static void channel_set_handlers(SpiceChannelClass *klass);
+> > > > @@ -169,11 +168,6 @@ static void spice_usbredir_channel_dispose(GOb=
+ject *obj)
+> > > >      SpiceUsbredirChannel *channel =3D SPICE_USBREDIR_CHANNEL(obj);
+> > > >
+> > > >      spice_usbredir_channel_disconnect_device(channel);
+> > > > -    /* This should have been set to NULL during device disconnecti=
+on,
+> > > > -     * but better not to leak it if this does not happen for some =
+reason
+> > > > -     */
+> > > > -    g_warn_if_fail(channel->priv->usb_device_manager =3D=3D NULL);
+> > > > -    g_clear_object(&channel->priv->usb_device_manager);
+> > > >
+> > > >      /* Chain up to the parent class */
+> > > >      if (G_OBJECT_CLASS(spice_usbredir_channel_parent_class)->dispo=
+se)
+> > > > @@ -248,8 +242,6 @@ static gboolean spice_usbredir_channel_open_dev=
+ice(
+> > > >      SpiceUsbredirChannel *channel, GError **err)
+> > > >  {
+> > > >      SpiceUsbredirChannelPrivate *priv =3D channel->priv;
+> > > > -    SpiceSession *session;
+> > > > -    SpiceUsbDeviceManager *manager;
+> > > >
+> > > >      g_return_val_if_fail(priv->state =3D=3D STATE_DISCONNECTED
+> > > >  #ifdef USE_POLKIT
+> > > > @@ -265,16 +257,6 @@ static gboolean spice_usbredir_channel_open_de=
+vice(
+> > > >          return FALSE;
+> > > >      }
+> > > >
+> > > > -    session =3D spice_channel_get_session(SPICE_CHANNEL(channel));
+> > > > -    manager =3D spice_usb_device_manager_get(session, NULL);
+> > > > -    g_return_val_if_fail(manager !=3D NULL, FALSE);
+> > > > -
+> > > > -    priv->usb_device_manager =3D g_object_ref(manager);
+> > > > -    if (!spice_usb_device_manager_start_event_listening(priv->usb_=
+device_manager, err)) {
+> > > > -        spice_usb_backend_channel_detach(priv->host);
+> > > > -        return FALSE;
+> > > > -    }
+> > > > -
+> > > >      priv->state =3D STATE_CONNECTED;
+> > > >
+> > > >      return TRUE;
+> > > > @@ -445,16 +427,6 @@ void spice_usbredir_channel_disconnect_device(=
+SpiceUsbredirChannel *channel)
+> > > >          break;
+> > > >  #endif
+> > > >      case STATE_CONNECTED:
+> > > > -        /*
+> > > > -         * This sets the usb event thread run condition to FALSE, =
+therefor
+> > > > -         * it must be done before usbredirhost_set_device NULL, as
+> > > > -         * usbredirhost_set_device NULL will interrupt the
+> > > > -         * libusb_handle_events call in the thread.
+> > > > -         */
+> > > > -        g_warn_if_fail(priv->usb_device_manager !=3D NULL);
+> > > > -        spice_usb_device_manager_stop_event_listening(priv->usb_de=
+vice_manager);
+> > > > -        g_clear_object(&priv->usb_device_manager);
+> > > > -
+> > > >          /* This also closes the libusb handle we passed from open_=
+device */
+> > > >          spice_usb_backend_channel_detach(priv->host);
+> > > >          g_clear_pointer(&priv->device, spice_usb_backend_device_un=
+ref);
+> > > > diff --git a/src/usb-backend.c b/src/usb-backend.c
+> > > > index 829d81d..37db951 100644
+> > > > --- a/src/usb-backend.c
+> > > > +++ b/src/usb-backend.c
+> > > > @@ -58,6 +58,9 @@ struct _SpiceUsbBackend
+> > > >      usb_hot_plug_callback hotplug_callback;
+> > > >      void *hotplug_user_data;
+> > > >      libusb_hotplug_callback_handle hotplug_handle;
+> > > > +    GThread *event_thread;
+> > > > +    gint event_thread_run;
+> > > > +
+> > > >  #ifdef G_OS_WIN32
+> > > >      HANDLE hWnd;
+> > > >      libusb_device **libusb_device_list;
+> > > > @@ -406,28 +409,25 @@ SpiceUsbBackend *spice_usb_backend_new(GError=
+ **error)
+> > > >      return be;
+> > > >  }
+> > > >
+> > > > -gboolean spice_usb_backend_handle_events(SpiceUsbBackend *be)
+> > > > +static gpointer handle_libusb_events(gpointer user_data)
+> > > >  {
+> > > > +    SpiceUsbBackend *be =3D (SpiceUsbBackend *)user_data;
+> >
+> > I don't think you need to cast from gpointer.
+> >
+> > > >      SPICE_DEBUG("%s >>", __FUNCTION__);
+> > > > -    gboolean ok =3D FALSE;
+> > > > -    if (be->libusb_context) {
+> > > > -        int res =3D libusb_handle_events(be->libusb_context);
+> > > > -        ok =3D res =3D=3D 0;
+> > > > +    int res =3D 0;
+> > > > +    const char *desc =3D "";
+> > > > +    while (g_atomic_int_get(&be->event_thread_run)) {
+> > > > +        res =3D libusb_handle_events(be->libusb_context);
+> > > >          if (res && res !=3D LIBUSB_ERROR_INTERRUPTED) {
+> > > > -            const char *desc =3D libusb_strerror(res);
+> > > > +            desc =3D libusb_strerror(res);
+> > > >              g_warning("Error handling USB events: %s [%i]", desc, =
+res);
+> > > > -            ok =3D FALSE;
+> > > > +            break;
+> > > >          }
+> > > >      }
+> > > > -    SPICE_DEBUG("%s << %d", __FUNCTION__, ok);
+> > > > -    return ok;
+> > > > -}
+> > > > -
+> > > > -void spice_usb_backend_interrupt_event_handler(SpiceUsbBackend *be)
+> > > > -{
+> > > > -    if (be->libusb_context) {
+> > > > -        libusb_interrupt_event_handler(be->libusb_context);
+> > > > +    if (be->event_thread_run) {
+> > > > +        SPICE_DEBUG("%s: the thread aborted, %s(%d)", __FUNCTION__=
+, desc, res);
+> > > >      }
+> > > > +    SPICE_DEBUG("%s <<", __FUNCTION__);
+> > > > +    return NULL;
+> > > >  }
+> > > >
+> > > >  void spice_usb_backend_deregister_hotplug(SpiceUsbBackend *be)
+> > > > @@ -438,6 +438,12 @@ void spice_usb_backend_deregister_hotplug(Spic=
+eUsbBackend *be)
+> > > >          be->hotplug_handle =3D 0;
+> > > >      }
+> > > >      be->hotplug_callback =3D NULL;
+> > > > +    g_atomic_int_set(&be->event_thread_run, FALSE);
+> > > > +    if (be->event_thread) {
+> > > > +        libusb_interrupt_event_handler(be->libusb_context);
+> > > > +        g_thread_join(be->event_thread);
+> > > > +        be->event_thread =3D NULL;
+> > > > +    }
+> > > >  }
+> > > >
+> > > >  gboolean spice_usb_backend_register_hotplug(SpiceUsbBackend *be,
+> > > > @@ -461,6 +467,16 @@ gboolean spice_usb_backend_register_hotplug(Sp=
+iceUsbBackend *be,
+> > > >             "Error on USB hotplug detection: %s [%i]", desc, rc);
+> > > >          return FALSE;
+> > > >      }
+> > > > +
+> > > > +    g_atomic_int_set(&be->event_thread_run, TRUE);
+> > > > +    be->event_thread =3D g_thread_try_new("usb_ev_thread",
+> > > > +                                    handle_libusb_events,
+> > > > +                                    be, error);
+> >
+> > It was g_thread_new() before, this changed it, why do you think
+> > it is important? I'd do that in a separate patch with a proper
+> > rationale for it.
+>=20
+> From the beginning it should be g_thread_try_new but this was
+> not available in old glib.
+> g_thread_try_new does not abort the application on error when
+> g_thread_new does.
+
+Yeah, I'm fine with the change but I'd still do it in a separate
+patch titled something along the line "do not abort if can't
+create a thread" instead of "move USB events handling to USB
+backend"
+
+> > > > +    if (!be->event_thread) {
+> > > > +        g_warning("Error starting event thread");
+> > > > +        spice_usb_backend_deregister_hotplug(be);
+> > > > +        return FALSE;
+> > > > +    }
+> > > >      return TRUE;
+> > > >  }
+> > > >
+> > > > @@ -468,6 +484,8 @@ void spice_usb_backend_delete(SpiceUsbBackend *=
+be)
+> > > >  {
+> > > >      g_return_if_fail(be !=3D NULL);
+> > > >      SPICE_DEBUG("%s >>", __FUNCTION__);
+> > > > +    /* just to be on the safe side if not deregistered */
+> > > > +    spice_usb_backend_deregister_hotplug(be);
+> >
+> > Not sure if I follow the comment, should a warn be added in case
+> > spice_usb_backend_delete() is called in some unexpected situation?
+
+Thanks,
+
+
+
+> >
+> > > >      if (be->libusb_context) {
+> > > >          libusb_exit(be->libusb_context);
+> > > >      }
+> > > > diff --git a/src/usb-backend.h b/src/usb-backend.h
+> > > > index 814da46..69a490b 100644
+> > > > --- a/src/usb-backend.h
+> > > > +++ b/src/usb-backend.h
+> > > > @@ -56,8 +56,6 @@ enum {
+> > > >  SpiceUsbBackend *spice_usb_backend_new(GError **error);
+> > > >  void spice_usb_backend_delete(SpiceUsbBackend *context);
+> > > >
+> > > > -gboolean spice_usb_backend_handle_events(SpiceUsbBackend *be);
+> > > > -void spice_usb_backend_interrupt_event_handler(SpiceUsbBackend *be=
+);
+> > > >  gboolean spice_usb_backend_register_hotplug(SpiceUsbBackend *be,
+> > > >                                              void *user_data,
+> > > >                                              usb_hot_plug_callback =
+proc,
+> > > > diff --git a/src/usb-device-manager-priv.h b/src/usb-device-manager=
+-priv.h
+> > > > index 39aaf2f..66acf6d 100644
+> > > > --- a/src/usb-device-manager-priv.h
+> > > > +++ b/src/usb-device-manager-priv.h
+> > > > @@ -25,12 +25,6 @@
+> > > >
+> > > >  G_BEGIN_DECLS
+> > > >
+> > > > -gboolean spice_usb_device_manager_start_event_listening(
+> > > > -    SpiceUsbDeviceManager *manager, GError **err);
+> > > > -
+> > > > -void spice_usb_device_manager_stop_event_listening(
+> > > > -    SpiceUsbDeviceManager *manager);
+> > > > -
+> > > >  #ifdef USE_USBREDIR
+> > > >  void spice_usb_device_manager_device_error(
+> > > >      SpiceUsbDeviceManager *manager, SpiceUsbDevice *device, GError=
+ *err);
+> > > > diff --git a/src/usb-device-manager.c b/src/usb-device-manager.c
+> > > > index 7105ff1..25fac04 100644
+> > > > --- a/src/usb-device-manager.c
+> > > > +++ b/src/usb-device-manager.c
+> > > > @@ -93,9 +93,6 @@ struct _SpiceUsbDeviceManagerPrivate {
+> > > >      gchar *redirect_on_connect;
+> > > >  #ifdef USE_USBREDIR
+> > > >      SpiceUsbBackend *context;
+> > > > -    int event_listeners;
+> > > > -    GThread *event_thread;
+> > > > -    gint event_thread_run;
+> > > >      struct usbredirfilter_rule *auto_conn_filter_rules;
+> > > >      struct usbredirfilter_rule *redirect_on_connect_rules;
+> > > >      int auto_conn_filter_rules_count;
+> > > > @@ -262,9 +259,6 @@ static gboolean spice_usb_device_manager_initab=
+le_init(GInitable  *initable,
+> > > >          spice_usb_backend_delete(priv->context);
+> > > >          return FALSE;
+> > > >      }
+> > > > -#ifndef G_OS_WIN32
+> > > > -    spice_usb_device_manager_start_event_listening(self, NULL);
+> > > > -#endif
+> > > >
+> > > >      /* Start listening for usb channels connect/disconnect */
+> > > >      spice_g_signal_connect_object(priv->session, "channel-new", G_=
+CALLBACK(channel_new), self, G_CONNECT_AFTER);
+> > > > @@ -286,27 +280,8 @@ static void spice_usb_device_manager_dispose(G=
+Object *gobject)
+> > > >      SpiceUsbDeviceManager *self =3D SPICE_USB_DEVICE_MANAGER(gobje=
+ct);
+> > > >      SpiceUsbDeviceManagerPrivate *priv =3D self->priv;
+> > > >
+> > > > -#ifndef G_OS_WIN32
+> > > > -    spice_usb_device_manager_stop_event_listening(self);
+> > > > -    if (g_atomic_int_get(&priv->event_thread_run)) {
+> > > > -        /* Force termination of the event thread even if there wer=
+e some
+> > > > -         * mismatched spice_usb_device_manager_{start,stop}_event_=
+listening
+> > > > -         * calls. Otherwise, the usb event thread will be leaked, =
+and will
+> > > > -         * try to use the libusb context we destroy in finalize(),=
+ which would
+> > > > -         * cause a crash */
+> > > > -        g_warn_if_reached();
+> > > > -        g_atomic_int_set(&priv->event_thread_run, FALSE);
+> > > > -    }
+> > > > -#endif
+> > > >      spice_usb_backend_deregister_hotplug(priv->context);
+> > > >
+> > > > -    if (priv->event_thread) {
+> > > > -        g_warn_if_fail(g_atomic_int_get(&priv->event_thread_run) =
+=3D=3D FALSE);
+> > > > -        g_atomic_int_set(&priv->event_thread_run, FALSE);
+> > > > -        spice_usb_backend_interrupt_event_handler(priv->context);
+> > > > -        g_thread_join(priv->event_thread);
+> > > > -        priv->event_thread =3D NULL;
+> > > > -    }
+> > > >  #endif
+> > > >
+> > > >      /* Chain up to the parent class */
+> > > > @@ -324,7 +299,6 @@ static void spice_usb_device_manager_finalize(G=
+Object *gobject)
+> > > >      if (priv->devices) {
+> > > >          g_ptr_array_unref(priv->devices);
+> > > >      }
+> > > > -    g_return_if_fail(priv->event_thread =3D=3D NULL);
+> > > >      if (priv->context) {
+> > > >          spice_usb_backend_delete(priv->context);
+> > > >      }
+> > > > @@ -916,59 +890,6 @@ static void spice_usb_device_manager_channel_c=
+onnect_cb(
+> > > >  /* ---------------------------------------------------------------=
+--- */
+> > > >  /* private api                                                    =
+    */
+> > > >
+> > > > -static gpointer spice_usb_device_manager_usb_ev_thread(gpointer us=
+er_data)
+> > > > -{
+> > > > -    SpiceUsbDeviceManager *self =3D SPICE_USB_DEVICE_MANAGER(user_=
+data);
+> > > > -    SpiceUsbDeviceManagerPrivate *priv =3D self->priv;
+> > > > -
+> > > > -    while (g_atomic_int_get(&priv->event_thread_run)) {
+> > > > -        if (!spice_usb_backend_handle_events(priv->context)) {
+> > > > -            break;
+> > > > -        }
+> > > > -    }
+> > > > -
+> > > > -    return NULL;
+> > > > -}
+> > > > -
+> > > > -gboolean spice_usb_device_manager_start_event_listening(
+> > > > -    SpiceUsbDeviceManager *self, GError **err)
+> > > > -{
+> > > > -    SpiceUsbDeviceManagerPrivate *priv =3D self->priv;
+> > > > -
+> > > > -    g_return_val_if_fail(err =3D=3D NULL || *err =3D=3D NULL, FALS=
+E);
+> > > > -
+> > > > -    priv->event_listeners++;
+> > > > -    if (priv->event_listeners > 1)
+> > > > -        return TRUE;
+> > > > -
+> > > > -    /* We don't join the thread when we stop event listening, as t=
+he
+> > > > -       libusb_handle_events call in the thread won't exit until the
+> > > > -       libusb_close call for the device is made from usbredirhost_=
+close. */
+> > > > -    if (priv->event_thread) {
+> > > > -        g_atomic_int_set(&priv->event_thread_run, FALSE);
+> > > > -        spice_usb_backend_interrupt_event_handler(priv->context);
+> > > > -         g_thread_join(priv->event_thread);
+> > > > -         priv->event_thread =3D NULL;
+> > > > -    }
+> > > > -    g_atomic_int_set(&priv->event_thread_run, TRUE);
+> > > > -    priv->event_thread =3D g_thread_new("usb_ev_thread",
+> > > > -                                      spice_usb_device_manager_usb=
+_ev_thread,
+> > > > -                                      self);
+> > > > -    return priv->event_thread !=3D NULL;
+> > > > -}
+> > > > -
+> > > > -void spice_usb_device_manager_stop_event_listening(
+> > > > -    SpiceUsbDeviceManager *self)
+> > > > -{
+> > > > -    SpiceUsbDeviceManagerPrivate *priv =3D self->priv;
+> > > > -
+> > > > -    g_return_if_fail(priv->event_listeners > 0);
+> > > > -
+> > > > -    priv->event_listeners--;
+> > > > -    if (priv->event_listeners =3D=3D 0)
+> > > > -        g_atomic_int_set(&priv->event_thread_run, FALSE);
+> > > > -}
+> > > > -
+> > > >  static void spice_usb_device_manager_check_redir_on_connect(
+> > > >      SpiceUsbDeviceManager *self, SpiceChannel *channel)
+> > > >  {
+> > > > --
+> > > > 2.17.1
+> > > >
+> > > _______________________________________________
+> > > Spice-devel mailing list
+> > > Spice-devel@lists.freedesktop.org
+> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--tu2eggoiovwfagfs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl02qCUACgkQl9kSPeN6
+SE+x3g/6AtVlj7Yr3gc42NU2+EA6seayyVR3M4pHXWxqTs5L2H9RFT/9urbC3r/s
+R5IpA3EpBvVmu+MGJbWQrxCQOR+eDSV1t8wFDcukEoujcTZK5OOFZFMDsN9u0u1w
+v+WTF2VWwTYK8s9k7VJPYOLCwPGfA3+8VFYdn5SjmKTKt720YN2A4BLaHsd62+y0
+zhRk2tW5BkHpgo5r9DffrBwVUpUaORCt1Ys8hnvofrTcefGlcLvRe+uVr5T8aaTS
+hd5PG89804TEOWMbb1jfIAU03N+7znuMwS0yjFy5cOfwJo5E8aCcwGHH5AvBYf/e
+/XH4DEeb1XC/CvEYbgypcYx8lYf5C8Gdx2PkHKU96fS+CoA4yxbWcXradp8YKiaF
+U8tj/y+rHKyWAezk5VGJ17AK9bmm8XCNYsc0vpnhETJXSxV6wWVGFr8BNTb5l/2i
+oI1StVGfJOjerLpBERdzFxQQ18guZkrivP2FhEuT5nZopKsaeIlUpyS4EDrPpImG
+veK8cqQmR2Loh1dpWJmBPpmw/LCT2JsfbEf7DF+BVtVdIPCYsdnlx8zfR6i/L5M4
+mOz2P1z/WIXMKirZ7B6bdbztILWzq46k9ZD+TIEnsZEXtfSPrjMWYipDbx1e+s7F
+htdjfcoXi0JGGLUcytTjkSrX0IsnDY1F2ry5DCIqwwUPsLlbvVI=
+=nw0y
+-----END PGP SIGNATURE-----
+
+--tu2eggoiovwfagfs--
+
+--===============0176606477==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0176606477==--
