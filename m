@@ -1,40 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179A1715DE
-	for <lists+spice-devel@lfdr.de>; Tue, 23 Jul 2019 12:17:41 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCDF0716D1
+	for <lists+spice-devel@lfdr.de>; Tue, 23 Jul 2019 13:18:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 368826E0CC;
-	Tue, 23 Jul 2019 10:17:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A45A6E193;
+	Tue, 23 Jul 2019 11:18:49 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6FA196E0CC
- for <spice-devel@lists.freedesktop.org>; Tue, 23 Jul 2019 10:17:38 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 1A0F7C065128
- for <spice-devel@lists.freedesktop.org>; Tue, 23 Jul 2019 10:17:38 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BB25A1001DC2;
- Tue, 23 Jul 2019 10:17:37 +0000 (UTC)
-Date: Tue, 23 Jul 2019 12:17:36 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190723101736.hgpddj3dj3tjz3dn@wingsuit>
-References: <20190722112600.1338-1-fziglio@redhat.com>
- <20190722112600.1338-2-fziglio@redhat.com>
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com
+ [IPv6:2607:f8b0:4864:20::442])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F09D5898F3;
+ Tue, 23 Jul 2019 10:40:22 +0000 (UTC)
+Received: by mail-pf1-x442.google.com with SMTP id m30so18948374pff.8;
+ Tue, 23 Jul 2019 03:40:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=PK0IBZUbQHnyOZDtUqj2prrcS6SHRWpLkmBXJgDEKWo=;
+ b=X/s8MPEuMbUfcUdoeeLxqsKbz20yXtMogzU8XfIlm4aybhKnpEmhJMTKGq+LRor/sJ
+ T1ibqNkkH4d7WLjt2j2SYmqDkkyeoWapSNGt3ok2cKUI//TrYqFcvYGxg31DPbX7m1ID
+ 71Q7G1Bsn3oXVGH8u5IiYQdT51mF2OI0QbdorJsRzz3zBcObMmOi1CRTp9UHR5j20NZ5
+ j3VVZH13HzmAXR92XLH6gVpfDObDqg+ClYdQvSWrmcLmkQN1YrGsxigR22x7Td2vs/Vn
+ h3lux6PvBxG5Cj6rDU25ZRtjYzHE+2md/Rl1s14cl7ihsEsaecTW5t8g6HZ/Vtv82do+
+ jT0w==
+X-Gm-Message-State: APjAAAWp/x5Uenb3CwUfDJQUGEvyPhSq1fXnbWWx7nM6mImASnjmKpcg
+ Ve4IlNCH5h1k3st36qdUiC0=
+X-Google-Smtp-Source: APXvYqxNi+SizBMl+BpgOlGEa4wEMzr8MJSUWRsgRL/2x6RHFUOsxCW0h9hrMpeXnwK8haoe2AWQXQ==
+X-Received: by 2002:a17:90a:1a45:: with SMTP id
+ 5mr83413685pjl.43.1563878422662; 
+ Tue, 23 Jul 2019 03:40:22 -0700 (PDT)
+Received: from suzukaze.ipads-lab.se.sjtu.edu.cn ([89.31.126.54])
+ by smtp.gmail.com with ESMTPSA id c8sm47990214pjq.2.2019.07.23.03.40.19
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 23 Jul 2019 03:40:22 -0700 (PDT)
+From: Chuhong Yuan <hslester96@gmail.com>
+To: 
+Date: Tue, 23 Jul 2019 18:40:00 +0800
+Message-Id: <20190723103959.4078-1-hslester96@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20190722112600.1338-2-fziglio@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Tue, 23 Jul 2019 10:17:38 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk 2/2] spice-widget-egl: Declare
- and initialise "tex" and "verts" shortly
+X-Mailman-Approved-At: Tue, 23 Jul 2019 11:18:48 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=PK0IBZUbQHnyOZDtUqj2prrcS6SHRWpLkmBXJgDEKWo=;
+ b=JJEGgQaULMIyBtsF9Zmew5QKL6iwU5DJsa+yzl56UpjBCSjzgnjbTm1D8sUg4zA1fo
+ Rqvm5clXYIpVWuG3UvJ9Guhup1h3dWDqi38rpeBx/FQY9fMC+0kHJ/8HCq7soKQOzCxx
+ nwgn3YjizCPCQ+Qi1XLpVkmwNITnKWINbFnzbGrSoayK4iQeWX6AjULlyQGLwmHCQtVV
+ amlHgx7MOvg5GCeXx3OWz4VxnjAET5qyqL22PCCiUT9Jg/TO7ESxfPptPJhKRwX6ycIF
+ GmOZ/RysLc2ZGHYfZv3DeeT+V/3DXyPwVvAGE2FKJKioGkfe9H/X7N7azeOk2u9XISBs
+ q4Kg==
+Subject: [Spice-devel] [PATCH] drm/qxl: Use dev_get_drvdata where possible
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,127 +66,34 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1302181324=="
+Cc: David Airlie <airlied@linux.ie>, Chuhong Yuan <hslester96@gmail.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1302181324==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="vaycnkcvzshhmty3"
-Content-Disposition: inline
-
-
---vaycnkcvzshhmty3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Mon, Jul 22, 2019 at 12:26:00PM +0100, Frediano Ziglio wrote:
-> Just syntax change.
-> Reduce code to initialise these matrices.
-
-Yes, looks nicer.
-Acked-by: Victor Toso <victortoso@redhat.com>
-
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-> ---
->  src/spice-widget-egl.c | 40 +++++++++++++---------------------------
->  1 file changed, 13 insertions(+), 27 deletions(-)
->=20
-> diff --git a/src/spice-widget-egl.c b/src/spice-widget-egl.c
-> index 7db66082..f5e24a01 100644
-> --- a/src/spice-widget-egl.c
-> +++ b/src/spice-widget-egl.c
-> @@ -489,33 +489,19 @@ client_draw_rect_tex(SpiceDisplay *display,
->                       float x, float y, float w, float h,
->                       float tx, float ty, float tw, float th)
->  {
-> -    float verts[4][4];
-> -    float tex[4][2];
-> -
-> -    verts[0][0] =3D x;
-> -    verts[0][1] =3D y;
-> -    verts[0][2] =3D 0.0;
-> -    verts[0][3] =3D 1.0;
-> -    tex[0][0] =3D tx;
-> -    tex[0][1] =3D ty;
-> -    verts[1][0] =3D x + w;
-> -    verts[1][1] =3D y;
-> -    verts[1][2] =3D 0.0;
-> -    verts[1][3] =3D 1.0;
-> -    tex[1][0] =3D tx + tw;
-> -    tex[1][1] =3D ty;
-> -    verts[2][0] =3D x;
-> -    verts[2][1] =3D y + h;
-> -    verts[2][2] =3D 0.0;
-> -    verts[2][3] =3D 1.0;
-> -    tex[2][0] =3D tx;
-> -    tex[2][1] =3D ty + th;
-> -    verts[3][0] =3D x + w;
-> -    verts[3][1] =3D y + h;
-> -    verts[3][2] =3D 0.0;
-> -    verts[3][3] =3D 1.0;
-> -    tex[3][0] =3D tx + tw;
-> -    tex[3][1] =3D ty + th;
-> +    GLfloat tex[4][2] =3D {
-> +        { tx, ty },
-> +        { tx + tw, ty },
-> +        { tx, ty + th },
-> +        { tx + tw, ty + th },
-> +    };
-> +
-> +    GLfloat verts[4][4] =3D {
-> +        { x, y, 0.0, 1.0 },
-> +        { x + w, y, 0.0, 1.0 },
-> +        { x, y + h, 0.0, 1.0 },
-> +        { x + w, y + h, 0.0, 1.0 },
-> +    };
-> =20
->      draw_rect_from_arrays(display, verts, tex);
->  }
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---vaycnkcvzshhmty3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl023sAACgkQl9kSPeN6
-SE8hNw//dBpyBnR9qbAJDkuSz22tpoTqESVKCCiYFf5raUpc6n9BD0z5Y0s521SL
-JhqIYH0vor3ZV3AI4K7GrW6nR7P2JW8wSYH4P+TJzGlpXZ8uEF1Csj3iUGSsdNXp
-kZICDwJL7jSHZM4uH+plCDjPjLdpD+g7o7wmiwI8IUuchtXdtcBUXv2jb07FOUtN
-lRgbQBMn7kzVepGysz0BOaRAp+dDOIf7tAGJFhXFvtSQd5wnHo+sVyURSbyzZ1rF
-jGA44XADsqZeIH7+IBwCQ5oR10nmZwCl4nMQiMJRncVLfpoD1fnwGmvMLQ6CY9VQ
-pU8BuJiUr2ecu55eZfjROb9eVKrPfj/1mpKkQ37jLHhoZLdCWj4G23NQW/3sY5xL
-NPaP9K9BzMgMgg8bFQpq2WiezWFOPSx0ZU73jqnZiF31Bmlh1YW7lHz3iWSNJgP4
-X68dzbwJRsXVotfUVyzNRatbdY+CYZizfVR+3QMjfj+xrMNM/h6SOAe0zGcjHHrM
-BxG8aFByoIaPbWB1gOdF218PP2D5TPWRNioLoM8eLbFF8QMna92Ca4CFhLEdtsX6
-e3CtkH6xSPPFxQnW0wSqpuJIuVcnDbDjj/2FuVn3x55jz34lnbuFO1HpwaNYM+Ap
-GPuQ54SsSoToqaSHf56WryxFWG3acVe9J22wXt80HBF59ELrvTU=
-=OMqP
------END PGP SIGNATURE-----
-
---vaycnkcvzshhmty3--
-
---===============1302181324==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1302181324==--
+SW5zdGVhZCBvZiB1c2luZyB0b19wY2lfZGV2ICsgcGNpX2dldF9kcnZkYXRhLAp1c2UgZGV2X2dl
+dF9kcnZkYXRhIHRvIG1ha2UgY29kZSBzaW1wbGVyLgoKU2lnbmVkLW9mZi1ieTogQ2h1aG9uZyBZ
+dWFuIDxoc2xlc3Rlcjk2QGdtYWlsLmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9k
+cnYuYyB8IDYgKystLS0tCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCA0IGRlbGV0
+aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX2Rydi5jIGIvZHJp
+dmVycy9ncHUvZHJtL3F4bC9xeGxfZHJ2LmMKaW5kZXggZjMzZTM0OWM0ZWM1Li5hZjFlMmIzNzc5
+NDUgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX2Rydi5jCisrKyBiL2RyaXZl
+cnMvZ3B1L2RybS9xeGwvcXhsX2Rydi5jCkBAIC0yMDYsMTYgKzIwNiwxNCBAQCBzdGF0aWMgaW50
+IHF4bF9wbV9yZXN1bWUoc3RydWN0IGRldmljZSAqZGV2KQogCiBzdGF0aWMgaW50IHF4bF9wbV90
+aGF3KHN0cnVjdCBkZXZpY2UgKmRldikKIHsKLQlzdHJ1Y3QgcGNpX2RldiAqcGRldiA9IHRvX3Bj
+aV9kZXYoZGV2KTsKLQlzdHJ1Y3QgZHJtX2RldmljZSAqZHJtX2RldiA9IHBjaV9nZXRfZHJ2ZGF0
+YShwZGV2KTsKKwlzdHJ1Y3QgZHJtX2RldmljZSAqZHJtX2RldiA9IGRldl9nZXRfZHJ2ZGF0YShk
+ZXYpOwogCiAJcmV0dXJuIHF4bF9kcm1fcmVzdW1lKGRybV9kZXYsIHRydWUpOwogfQogCiBzdGF0
+aWMgaW50IHF4bF9wbV9mcmVlemUoc3RydWN0IGRldmljZSAqZGV2KQogewotCXN0cnVjdCBwY2lf
+ZGV2ICpwZGV2ID0gdG9fcGNpX2RldihkZXYpOwotCXN0cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2
+ID0gcGNpX2dldF9kcnZkYXRhKHBkZXYpOworCXN0cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2ID0g
+ZGV2X2dldF9kcnZkYXRhKGRldik7CiAKIAlyZXR1cm4gcXhsX2RybV9mcmVlemUoZHJtX2Rldik7
+CiB9Ci0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVz
+a3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9z
+cGljZS1kZXZlbA==
