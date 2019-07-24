@@ -2,38 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9170D72A36
-	for <lists+spice-devel@lfdr.de>; Wed, 24 Jul 2019 10:34:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F4C272B57
+	for <lists+spice-devel@lfdr.de>; Wed, 24 Jul 2019 11:27:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 28CC26E49C;
-	Wed, 24 Jul 2019 08:34:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A59EB6E4CE;
+	Wed, 24 Jul 2019 09:27:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A53C6E49C
- for <spice-devel@lists.freedesktop.org>; Wed, 24 Jul 2019 08:34:54 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 47FEB6E4CE
+ for <spice-devel@lists.freedesktop.org>; Wed, 24 Jul 2019 09:27:55 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 96F8730832C8;
- Wed, 24 Jul 2019 08:34:53 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id BD1E430833C1
+ for <spice-devel@lists.freedesktop.org>; Wed, 24 Jul 2019 09:27:54 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 42E5D5D9DE;
- Wed, 24 Jul 2019 08:34:53 +0000 (UTC)
-Date: Wed, 24 Jul 2019 10:34:52 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6B87F60BEC;
+ Wed, 24 Jul 2019 09:27:54 +0000 (UTC)
+Date: Wed, 24 Jul 2019 11:27:53 +0200
 From: Victor Toso <victortoso@redhat.com>
-To: Yuri Benditovich <yuri.benditovich@daynix.com>
-Message-ID: <20190724083452.474n5z55hnpdxfkx@wingsuit>
-References: <20190723151349.6490-1-yuri.benditovich@daynix.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190724092753.k7riphljeskpi2f2@wingsuit>
+References: <20190724082132.6163-1-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190723151349.6490-1-yuri.benditovich@daynix.com>
+In-Reply-To: <20190724082132.6163-1-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.44]); Wed, 24 Jul 2019 08:34:53 +0000 (UTC)
-Subject: Re: [Spice-devel] [spice-gtk v3 0/4] usb-redir: unification of
- Linux and Windows code
+ (mx1.redhat.com [10.5.110.44]); Wed, 24 Jul 2019 09:27:54 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH vd_agent_linux 0/5] Minor patches for
+ analyzers tools
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -45,88 +45,81 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: yan@daynix.com, spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1484326039=="
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0671209024=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============1484326039==
+--===============0671209024==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="5xoc6x25iyqgm7gv"
+	protocol="application/pgp-signature"; boundary="hznks6y4awvaaryn"
 Content-Disposition: inline
 
 
---5xoc6x25iyqgm7gv
+--hznks6y4awvaaryn
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Tue, Jul 23, 2019 at 06:13:45PM +0300, Yuri Benditovich wrote:
-> This series is dedicated to unification of Linux Windows flows
-> in usb-device-manager. It moves differences related to libusb
-> to USB backend module and simplifies implementation of procedures
-> related to USB redirection.
->=20
-> Changes from v2: cosmetic changes
->=20
-> Yuri Benditovich (4):
->   usb-redir: unify device hotplug/unplug for Windows and Linux
->   usb-redir: pass GError to hotplug registration procedure
->   usb-redir: move USB events handling to USB backend
->   usb-redir: use g_thread_try_new instead of g_thread_new
+On Wed, Jul 24, 2019 at 09:21:27AM +0100, Frediano Ziglio wrote:
+> These patches mainly remove some warnings detected by Coverity
+> and clang code analyzer.
+> It's a collection of different patches on the same topic, one
+> initially written by Victor.
 
+Thanks for amending the fix, series looks fine, thanks!
 Acked-by: Victor Toso <victortoso@redhat.com>
-and pushed,
 
-Thanks.
 >=20
->  meson.build                   |   2 +-
->  src/channel-usbredir.c        |  28 ---
->  src/meson.build               |   4 +-
->  src/usb-backend.c             | 309 ++++++++++++++++++------
->  src/usb-backend.h             |  13 +-
->  src/usb-device-manager-priv.h |   6 -
->  src/usb-device-manager.c      | 139 +----------
->  src/win-usb-dev.c             | 436 ----------------------------------
->  src/win-usb-dev.h             |  84 -------
->  9 files changed, 245 insertions(+), 776 deletions(-)
->  delete mode 100644 src/win-usb-dev.c
->  delete mode 100644 src/win-usb-dev.h
+> Frediano Ziglio (4):
+>   x11-randr: Avoid passing XEvent as value
+>   x11: Avoid passing XEvent as value
+>   x11: Constify XEvent argument
+>   x11: Change check to make code scanners not giving warning
+>=20
+> Victor Toso (1):
+>   device-info: remove g_list_length() on compare_addresses()
+>=20
+>  src/vdagent/device-info.c | 12 ++++---
+>  src/vdagent/x11-priv.h    |  2 +-
+>  src/vdagent/x11-randr.c   |  8 ++---
+>  src/vdagent/x11.c         | 67 +++++++++++++++++++--------------------
+>  4 files changed, 45 insertions(+), 44 deletions(-)
 >=20
 > --=20
-> 2.17.1
+> 2.20.1
 >=20
 > _______________________________________________
 > Spice-devel mailing list
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---5xoc6x25iyqgm7gv
+--hznks6y4awvaaryn
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl04GCwACgkQl9kSPeN6
-SE/5yg//Uq+XmkzMdW4hDWerXaqcbI69xujGlWfJlJnBgzu3I16wQzf29ZCWko+y
-BHBbUIjR4AKjXiPGcEH/GuWdsDIyNN8zZZI3lqzZerdE0w5MhqU/xSs6dye5NRc/
-RijNoTUSQOXZzKCu37NlYUguIzu2PtWt7afrh4hDOK1xeesTlz4SQ694PY0cpzVq
-72RZtqML/5eFsxhCGIg7uLSOsWpFCxFsY6hz13f2qlMyt2KboORJ3nkIw4dirj02
-2fnthkop4Ym9RJL0POhMGoKxwS+mDDQ4KbMRbU6tbMlZhOTg1trgMm5pPDD+oam+
-CgTxb2QcwHb+vOiMdPKL98lWSK2DTyz6FYPLggUCWlsviQD1ysyuwepXuB3M0jZ9
-O7kHWMAZzNatCXdhuP4nIiy1OAAjPg7lLCfnTvtcBC8V0zrb+n7c57CePaMaFVoQ
-8Kz1icc/ZMZMvpaFB/EHFjjoWAbm1KrOt0NlebCcFW9+ESr5F713QlaEKUt61nIk
-llYOZWT/oLFIDDFn1lG+RlZb6yJiTStCs4mNGdMuPG4GbMVOsSlzsyTFXvv1+mSJ
-3h8spLV8xUlUkII8mmXg+iyjIIu/0JPzNk0IrI0f8QcGD0XZlfxqD8j6OCAwBfx6
-4HeaHbJ1mze2sppbB3yzvaF9/yT6+hMLBiqH9mshwF5srnrLuaY=
-=zE5F
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl04JJkACgkQl9kSPeN6
+SE+GWRAAmxbXTYbbTR56FCETGL6vZwTsK75pTmBhcdrIJKaBWzh2PPiVVAZGG+/V
+vr/o27IgAC//pWJZOeULO3Pyv5zY7Ki/jgQ7zqLnYE+vu3aUxpF+20L38RblVFLH
+OVdrtbn2OKRTKILDm/wEBDJibv8Z4IgFO/cF0S0H+8EirsTTLh7Zc7IYy/LIP16h
+Z0Aicm0v6HvYokOqoDOn+IAiLcWBOmeAQH7x0GVE0VvTQWG1Nb+3+CZUGgnN1aRX
+g6hYXj2gYmTjQ/AnlfcpVXIeEupfmc2k8odZK9F0xggQ/S74snABIxpnTTQ1iO+j
+SdGHLQTmPmU5xxi2WtVJFzXTt88mF9zCd8/64/Bi36lN+fG4hHuKJE+4QiP1cv1e
+kXymdtNoQ2XDEWUDY4h54iiRUb2b7YvkYmhGaLd0+Ul6+yC05+AuwpAQBGTrSQUa
+WH577RjqaKhYzbV9Ajviz56hHPvGhIZnfRh0VkHOkmxPQfG1PupLigl8LsQS6JKQ
++JCjs4BSCmVLyA+mkXG+NqI6x+ZXcqnEbIYK7ttN2injIzEPCPktvMXm4+3C9z3y
+Yr/qYEhF4whV/eMeOB4X/PxXYX41JkoR3+LKyXp2KBgcA5LGPWZQ1sqVhPpeWmOE
+gzc6Ans4cDDhRsfXqrqwu19qBFQNtOnoCvXdp0xQmsxg8iZj1nw=
+=zE5X
 -----END PGP SIGNATURE-----
 
---5xoc6x25iyqgm7gv--
+--hznks6y4awvaaryn--
 
---===============1484326039==
+--===============0671209024==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -136,4 +129,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============1484326039==--
+--===============0671209024==--
