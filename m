@@ -2,38 +2,55 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF25772C25
-	for <lists+spice-devel@lfdr.de>; Wed, 24 Jul 2019 12:10:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55B3C72CA6
+	for <lists+spice-devel@lfdr.de>; Wed, 24 Jul 2019 12:54:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 73EFF6E4F0;
-	Wed, 24 Jul 2019 10:10:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 39A006E506;
+	Wed, 24 Jul 2019 10:54:01 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0E0756E4E6
- for <spice-devel@lists.freedesktop.org>; Wed, 24 Jul 2019 10:10:52 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 9E9D830BD1C6
- for <spice-devel@lists.freedesktop.org>; Wed, 24 Jul 2019 10:10:51 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4488F60BEC;
- Wed, 24 Jul 2019 10:10:51 +0000 (UTC)
-Date: Wed, 24 Jul 2019 12:10:50 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190724101050.bytjvg5dxhk5zyvd@wingsuit>
-References: <20190724092823.12551-1-fziglio@redhat.com>
-MIME-Version: 1.0
-In-Reply-To: <20190724092823.12551-1-fziglio@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.49]); Wed, 24 Jul 2019 10:10:51 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server v2] event loop: improve
- implementation of watches for Unix systems
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CAB6F6E501
+ for <spice-devel@lists.freedesktop.org>; Wed, 24 Jul 2019 10:53:59 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id r1so46445176wrl.7
+ for <spice-devel@lists.freedesktop.org>; Wed, 24 Jul 2019 03:53:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=JFJadIeC1w6mveFaUxtQWmxroZ4JljEw/jIEPIfSXT8=;
+ b=lyyqxygstrpt1IJwtASugjPFPctixo9MaaCXaIh0g5C8ZGKQ+foqRdklufenuu6nb4
+ 3Cn4xRbVLTNfnZd12U10cO8yMc7Z+pm5QQa0nxtwAGM1MQzirbEF2e6Mxv6Jbs6maBHK
+ 7VL/+lvJky8zOvZZ/T1AH70NGqa6yr7XWPhZgJM3qRYK8c8VeJuBlFlrMIeHrGT+oXcO
+ H/xFynFPrvGIEqBcuSgoCQVaNdvlN3H1bIhBK2/UO2VsDNWuaRr8pkMHjYZXOGzByH0c
+ yzjG0UX33yPz+bQdX45vH64SH/veeBvAh/d6H9CkyjgeiXbP6P1O87cLmIvnmjsSUNkG
+ Ti0A==
+X-Gm-Message-State: APjAAAXY413ynKi2XbASaFT8eG52QHWQqYeyrt6JiO1gTFGLv8OjYjJv
+ j6/tA8u7/H8aYCzDywX7xxZHjM9j
+X-Google-Smtp-Source: APXvYqyx5TDVHsdspbor+4AxV2elLiG83no69yN/j4WFqoq9+83WJFbRM/AOShbl7NXoNQGBYyl9+A==
+X-Received: by 2002:a5d:4206:: with SMTP id n6mr20528421wrq.110.1563965638260; 
+ Wed, 24 Jul 2019 03:53:58 -0700 (PDT)
+Received: from f2.redhat.com (bzq-79-182-115-245.red.bezeqint.net.
+ [79.182.115.245])
+ by smtp.gmail.com with ESMTPSA id r12sm53542137wrt.95.2019.07.24.03.53.56
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 24 Jul 2019 03:53:57 -0700 (PDT)
+From: Yuri Benditovich <yuri.benditovich@daynix.com>
+To: spice-devel@lists.freedesktop.org
+Date: Wed, 24 Jul 2019 13:53:42 +0300
+Message-Id: <20190724105351.13753-1-yuri.benditovich@daynix.com>
+X-Mailer: git-send-email 2.17.1
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=from:to:cc:subject:date:message-id;
+ bh=JFJadIeC1w6mveFaUxtQWmxroZ4JljEw/jIEPIfSXT8=;
+ b=Z0GGhF2wWZ4dm3oANQ/j+ReHf5hPLqD0VM4OFLidjQtNN7F32y/Kl1VNFvMCRz9gmU
+ gHEeb/3yPNPWb063kxs6DeT6gE7HLalQPlJI48L9EC5+iteZlaskkIQuvG9L4SjRzlcr
+ ok3mMIwfJsdgaO8aKDjlXumKYZFiMTjD5CIIW56To/v3AIjPoU0miMoBciC7hQkegZEu
+ UMQQC0MKbMO5Dlah9oUVVbtiqh0KEUqPhyPBq3Wz8K7dM6XIRTs8LTW4WCpcjMmpTtBO
+ bPLbiwXVONbfP9XOMVPzeoAz5Ow7+6mIQY6t0/WWothYpGuud0JxlHBC9srW/bHWGFWh
+ n03g==
+Subject: [Spice-devel] [spice-gtk 0/9] added feature of sharing CD image
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -45,219 +62,43 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1386595025=="
+Cc: yan@daynix.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1386595025==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="irsq6jtmzvcs6thn"
-Content-Disposition: inline
-
-
---irsq6jtmzvcs6thn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Wed, Jul 24, 2019 at 10:28:23AM +0100, Frediano Ziglio wrote:
-> Avoid having to destroy and create a new GSource every time
-> we change event mask.
-> Interfaces required for this patch are available since GLib 2.36
-> and are specific to Unix.
-> On use old implementation.
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-Acked-by: Victor Toso <victortoso@redhat.com>
-
-> ---
-> Changes since v1:
-> - Use g_source_add_unix_fd and family instead of g_source_add_poll
->=20
-> CI at https://gitlab.freedesktop.org/fziglio/spice/pipelines/50855
-> ---
->  server/event-loop.c | 94 +++++++++++++++++++++++++++++++++++++++------
->  1 file changed, 82 insertions(+), 12 deletions(-)
->=20
-> diff --git a/server/event-loop.c b/server/event-loop.c
-> index 80af2954f..812c3a53b 100644
-> --- a/server/event-loop.c
-> +++ b/server/event-loop.c
-> @@ -85,14 +85,6 @@ static void timer_remove(const SpiceCoreInterfaceInter=
-nal *iface,
->      g_free(timer);
->  }
-> =20
-> -struct SpiceWatch {
-> -    GMainContext *context;
-> -    void *opaque;
-> -    GSource *source;
-> -    GIOChannel *channel;
-> -    SpiceWatchFunc func;
-> -};
-> -
->  static GIOCondition spice_event_to_giocondition(int event_mask)
->  {
->      GIOCondition condition =3D 0;
-> @@ -117,6 +109,15 @@ static int giocondition_to_spice_event(GIOCondition =
-condition)
->      return event;
->  }
-> =20
-> +#ifdef _WIN32
-> +struct SpiceWatch {
-> +    GMainContext *context;
-> +    void *opaque;
-> +    GSource *source;
-> +    GIOChannel *channel;
-> +    SpiceWatchFunc func;
-> +};
-> +
->  static gboolean watch_func(GIOChannel *source, GIOCondition condition,
->                             gpointer data)
->  {
-> @@ -161,11 +162,7 @@ static SpiceWatch *watch_add(const SpiceCoreInterfac=
-eInternal *iface,
-> =20
->      watch =3D g_new0(SpiceWatch, 1);
->      watch->context =3D iface->main_context;
-> -#ifndef _WIN32
-> -    watch->channel =3D g_io_channel_unix_new(fd);
-> -#else
->      watch->channel =3D g_io_channel_win32_new_socket(fd);
-> -#endif
->      watch->func =3D func;
->      watch->opaque =3D opaque;
-> =20
-> @@ -184,6 +181,79 @@ static void watch_remove(const SpiceCoreInterfaceInt=
-ernal *iface,
->      g_free(watch);
->  }
-> =20
-> +#else
-> +
-> +struct SpiceWatch {
-> +    GSource source;
-> +    gpointer unix_fd;
-> +    int fd;
-> +};
-> +
-> +static gboolean
-> +spice_watch_check(GSource *source)
-> +{
-> +    SpiceWatch *watch =3D SPICE_CONTAINEROF(source, SpiceWatch, source);
-> +
-> +    return g_source_query_unix_fd(&watch->source, watch->unix_fd) !=3D 0;
-> +}
-> +
-> +static gboolean
-> +spice_watch_dispatch(GSource     *source,
-> +                     GSourceFunc  callback,
-> +                     gpointer     user_data)
-> +{
-> +    SpiceWatch *watch =3D SPICE_CONTAINEROF(source, SpiceWatch, source);
-> +    SpiceWatchFunc func =3D (SpiceWatchFunc)(void*) callback;
-> +    GIOCondition condition =3D g_source_query_unix_fd(&watch->source, wa=
-tch->unix_fd);
-> +
-> +    func(watch->fd, giocondition_to_spice_event(condition), user_data);
-> +    /* timer might be free after func(), don't touch */
-> +
-> +    return G_SOURCE_CONTINUE;
-> +}
-> +
-> +static GSourceFuncs spice_watch_funcs =3D {
-> +    .check =3D spice_watch_check,
-> +    .dispatch =3D spice_watch_dispatch,
-> +};
-> +
-> +static void watch_update_mask(const SpiceCoreInterfaceInternal *iface,
-> +                              SpiceWatch *watch, int event_mask)
-> +{
-> +    GIOCondition condition =3D spice_event_to_giocondition(event_mask);
-> +
-> +    g_source_modify_unix_fd(&watch->source, watch->unix_fd, condition);
-> +}
-> +
-> +static SpiceWatch *watch_add(const SpiceCoreInterfaceInternal *iface,
-> +                             int fd, int event_mask, SpiceWatchFunc func=
-, void *opaque)
-> +{
-> +    SpiceWatch *watch =3D (SpiceWatch *) g_source_new(&spice_watch_funcs=
-, sizeof(SpiceWatch));
-> +
-> +    spice_return_val_if_fail(fd !=3D -1, NULL);
-> +    spice_return_val_if_fail(func !=3D NULL, NULL);
-> +
-> +    watch->fd =3D fd;
-> +
-> +    g_source_set_callback(&watch->source, (GSourceFunc)(void*)(SpiceWatc=
-hFunc) func, opaque, NULL);
-> +
-> +    g_source_attach(&watch->source, iface->main_context);
-> +
-> +    GIOCondition condition =3D spice_event_to_giocondition(event_mask);
-> +    watch->unix_fd =3D g_source_add_unix_fd(&watch->source, watch->fd, c=
-ondition);
-> +
-> +    return watch;
-> +}
-> +
-> +static void watch_remove(const SpiceCoreInterfaceInternal *iface,
-> +                         SpiceWatch *watch)
-> +{
-> +    g_source_remove_unix_fd(&watch->source, watch->unix_fd);
-> +    g_source_destroy(&watch->source);
-> +    g_source_unref(&watch->source);
-> +}
-> +#endif
-> +
->  const SpiceCoreInterfaceInternal event_loop_core =3D {
->      .timer_add =3D timer_add,
->      .timer_start =3D timer_start,
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---irsq6jtmzvcs6thn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl04LqoACgkQl9kSPeN6
-SE8/9hAAgoHkv0jkS+AieePJQG8YclqGE+CNRLwk7ozvS0wjrr13NBFJ6fv2lLeZ
-iGFg4KV1GKqikOUnc2am9M8Rv6fX6Pu2sSQB2nFRv/ASiz5Tnfqc6u0gsc3Qj8Gz
-1BJNO451cIITDnVNAExArXEB3dhQw0ugXQM8KDYVxCK0j1V4F3SQ5XHaDRE03ooy
-6yI1tLO4LVm3fly3jxZ/HKvZ2u6rvJPadyCxRNbFLZf6JJ4u1FAZtVjJOYByvS0n
-LNSg1Dmd6Y/g7ooUPtEn/W/JVKAF5fIn/ZjySHATm7cnzhQ8imLfqEQzilXK7Px0
-Kv7XfZRBYZMQxWuYaYepoGbQwA6h2DLX1XFFSMkrqJoVn2Toiqx/ZjNUaNe5KCtc
-yom3SZyTV/z0XThK8obNqamcxbGOFRn2AnCuwY5KZywUptpwz+IolBcnKV5z3N0q
-eocNLA19m8rbRZyXBFvvRel+iOGxtouvxFr0wt5vmuRu8wdfrAruR3an/lHtEBmE
-xsziXVUMXt/pqc3u7wzhuCOFX95Yn4heawu3g9FW3jqLwYyr1c4C5tVNFWw9eC6/
-DMqpGKDUgfH8XCSF6uhmpXCujH1ykFjX41R9DCM9RKZ/9/hjd/rk8qOQyEqYzaGd
-LIfwH2qNRk3X3shqBMKILzE4j0DMKL3GwQGGba0fNhaHHc/AvS8=
-=pUZ1
------END PGP SIGNATURE-----
-
---irsq6jtmzvcs6thn--
-
---===============1386595025==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1386595025==--
+VGhpcyBzZXJpZXMgb2YgcGF0Y2hlcyBhZGRzIGZlYXR1cmUgb2Ygc2hhcmluZyBDRCBpbWFnZSB2
+aWEKcmVkaXJlY3Rpb24gb2YgZW11bGF0ZWQgQ0QgZGV2aWNlLiBDdXJyZW50bHkgdGhlIHRyaWdn
+ZXIgdG8KY3JlYXRlIHRoZSBkZXZpY2UgaXMgY29tbWFuZC1saW5lIG9wdGlvbjoKJy0tc3BpY2Ut
+c2hhcmUtY2QgPElTTyBmaWxlIG5hbWU+CgpZdXJpIEJlbmRpdG92aWNoICg5KToKICB1c2ItcmVk
+aXI6IGRlZmluZSBpbnRlcmZhY2VzIHRvIHN1cHBvcnQgZW11bGF0ZWQgZGV2aWNlcwogIHVzYi1y
+ZWRpcjogZGV2aWNlIGVycm9yIHNpZ25hbCB3aXRob3V0IGRldmljZSBvYmplY3QKICB1c2ItcmVk
+aXI6IFByZXBhcmUgZm9yIGNyZWF0aW9uIG9mIGVtdWxhdGVkIENEIGRyaXZlCiAgdXNiLXJlZGly
+OiBkZXZpY2UgZGVzY3JpcHRpb24gZm9yIGVtdWxhdGVkIGRldmljZXMKICB1c2ItcmVkaXI6IGRv
+IG5vdCB1c2Ugc3BpY2VfdXNiX2FjbF9oZWxwZXIgZm9yIGVtdWxhdGVkIGRldmljZXMKICB1c2It
+cmVkaXI6IGV4dGVuZCBVU0IgYmFja2VuZCB0byBzdXBwb3J0IGVtdWxhdGVkIGRldmljZXMKICB1
+c2ItcmVkaXI6IGFkZCBmaWxlcyBmb3IgU0NTSSBhbmQgVVNCIE1TQyBpbXBsZW1lbnRhdGlvbgog
+IHVzYi1yZWRpcjogYWRkIGltcGxlbWVudGF0aW9uIG9mIGVtdWxhdGVkIENEIGRldmljZQogIHVz
+Yi1yZWRpcjogZW5hYmxlIHJlZGlyZWN0aW9uIG9mIGVtdWxhdGVkIENEIGRyaXZlCgogc3JjL2Nk
+LXNjc2ktZGV2LXBhcmFtcy5oIHwgICA1MiArCiBzcmMvY2Qtc2NzaS5jICAgICAgICAgICAgfCAy
+NzcwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCiBzcmMvY2Qtc2NzaS5o
+ICAgICAgICAgICAgfCAgMTIyICsrCiBzcmMvY2QtdXNiLWJ1bGstbXNkLmMgICAgfCAgNTU1ICsr
+KysrKysrCiBzcmMvY2QtdXNiLWJ1bGstbXNkLmggICAgfCAgMTM0ICsrCiBzcmMvY2hhbm5lbC11
+c2JyZWRpci5jICAgfCAgIDI5ICstCiBzcmMvbWVzb24uYnVpbGQgICAgICAgICAgfCAgICA3ICsK
+IHNyYy9zY3NpLWNvbnN0YW50cy5oICAgICB8ICAzMjQgKysrKysKIHNyYy9zcGljZS1vcHRpb24u
+YyAgICAgICB8ICAgMTUgKwogc3JjL3VzYi1iYWNrZW5kLmMgICAgICAgIHwgIDcxNSArKysrKysr
+KystCiBzcmMvdXNiLWJhY2tlbmQuaCAgICAgICAgfCAgIDM2ICstCiBzcmMvdXNiLWRldmljZS1j
+ZC5jICAgICAgfCAgNzk0ICsrKysrKysrKysrCiBzcmMvdXNiLWRldmljZS1tYW5hZ2VyLmMgfCAg
+IDU3ICstCiBzcmMvdXNiLWVtdWxhdGlvbi5oICAgICAgfCAgIDg4ICsrCiAxNCBmaWxlcyBjaGFu
+Z2VkLCA1NjU4IGluc2VydGlvbnMoKyksIDQwIGRlbGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAw
+NjQ0IHNyYy9jZC1zY3NpLWRldi1wYXJhbXMuaAogY3JlYXRlIG1vZGUgMTAwNjQ0IHNyYy9jZC1z
+Y3NpLmMKIGNyZWF0ZSBtb2RlIDEwMDY0NCBzcmMvY2Qtc2NzaS5oCiBjcmVhdGUgbW9kZSAxMDA2
+NDQgc3JjL2NkLXVzYi1idWxrLW1zZC5jCiBjcmVhdGUgbW9kZSAxMDA2NDQgc3JjL2NkLXVzYi1i
+dWxrLW1zZC5oCiBjcmVhdGUgbW9kZSAxMDA2NDQgc3JjL3Njc2ktY29uc3RhbnRzLmgKIGNyZWF0
+ZSBtb2RlIDEwMDY0NCBzcmMvdXNiLWRldmljZS1jZC5jCiBjcmVhdGUgbW9kZSAxMDA2NDQgc3Jj
+L3VzYi1lbXVsYXRpb24uaAoKLS0gCjIuMTcuMQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVs
+QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
