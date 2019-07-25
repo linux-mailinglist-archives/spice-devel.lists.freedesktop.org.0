@@ -1,39 +1,37 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7372374BAF
-	for <lists+spice-devel@lfdr.de>; Thu, 25 Jul 2019 12:36:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC8D774BF2
+	for <lists+spice-devel@lfdr.de>; Thu, 25 Jul 2019 12:42:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C40DC8955D;
-	Thu, 25 Jul 2019 10:36:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A1C956E6E0;
+	Thu, 25 Jul 2019 10:42:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 608378955D
- for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 10:36:01 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 05F636E6E0
+ for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 10:42:54 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id EF9CCA3B5F
- for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 10:36:00 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9E1695D71A;
- Thu, 25 Jul 2019 10:36:00 +0000 (UTC)
-Date: Thu, 25 Jul 2019 12:35:59 +0200
+ by mx1.redhat.com (Postfix) with ESMTPS id 2B3B130A7C67
+ for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 10:42:53 +0000 (UTC)
+Received: from wingsuit.mxp.redhat.com (unknown [10.32.181.155])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id ABCFF620CE
+ for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 10:42:52 +0000 (UTC)
 From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190725103559.4a4cmp62uidnj3bx@wingsuit>
+To: spice-devel@lists.freedesktop.org
+Date: Thu, 25 Jul 2019 12:42:51 +0200
+Message-Id: <20190725104251.18425-1-victortoso@redhat.com>
+In-Reply-To: <20190725101947.17341-1-victortoso@redhat.com>
 References: <20190725101947.17341-1-victortoso@redhat.com>
- <494627912.2966701.1564050748556.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <494627912.2966701.1564050748556.JavaMail.zimbra@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.30]); Thu, 25 Jul 2019 10:36:00 +0000 (UTC)
-Subject: Re: [Spice-devel] [spice-gtk] spice-option: warn on command line
+ (mx1.redhat.com [10.5.110.42]); Thu, 25 Jul 2019 10:42:53 +0000 (UTC)
+Subject: [Spice-devel] [spice-gtk v2] spice-option: warn on command line
  failures of usbredir
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -46,147 +44,48 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1758435044=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1758435044==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ghsu6s3is5imhono"
-Content-Disposition: inline
-
-
---ghsu6s3is5imhono
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Thu, Jul 25, 2019 at 06:32:28AM -0400, Frediano Ziglio wrote:
-> >=20
-> > From: Victor Toso <me@victortoso.com>
-> >=20
-> > As spice_usb_device_manager_get() can fail for different reasons, we
-> > should silently ignore it and its error.
-
-Sorry, this was a typo. I meant we should not silently ignore the
-error.
-
-> >=20
-> > Signed-off-by: Victor Toso <victortoso@redhat.com>
-> > ---
-> >  src/spice-option.c | 18 ++++++++++++++----
-> >  1 file changed, 14 insertions(+), 4 deletions(-)
-> >=20
-> > diff --git a/src/spice-option.c b/src/spice-option.c
-> > index c2b059e..c6c51a9 100644
-> > --- a/src/spice-option.c
-> > +++ b/src/spice-option.c
-> > @@ -261,16 +261,26 @@ void spice_set_session_option(SpiceSession *sessi=
-on)
-> >              g_object_set(session, "smartcard-db", smartcard_db, NULL);
-> >      }
-> >      if (usbredir_auto_redirect_filter) {
-> > -        SpiceUsbDeviceManager *m =3D spice_usb_device_manager_get(sess=
-ion,
-> > NULL);
-> > -        if (m)
-> > +        GError *err =3D NULL;
-> > +        SpiceUsbDeviceManager *m =3D spice_usb_device_manager_get(sess=
-ion,
-> > &err);
-> > +        if (m) {
-> >              g_object_set(m, "auto-connect-filter",
-> >                           usbredir_auto_redirect_filter, NULL);
-> > +        } else {
-> > +            g_warning("Option --spice-usbredir-auto-redirect-filter is=
- set
-> > but failed: %s", err->message);
-> > +            g_error_free(err);
-> > +        }
-> >      }
-> >      if (usbredir_redirect_on_connect) {
-> > -        SpiceUsbDeviceManager *m =3D spice_usb_device_manager_get(sess=
-ion,
-> > NULL);
-> > -        if (m)
-> > +        GError *err =3D NULL;
-> > +        SpiceUsbDeviceManager *m =3D spice_usb_device_manager_get(sess=
-ion,
-> > &err);
-> > +        if (m) {
-> >              g_object_set(m, "redirect-on-connect",
-> >                           usbredir_redirect_on_connect, NULL);
-> > +        } else {
-> > +            g_warning("Option --spice-usbredir-redirect-on-connect is =
-set
-> > but failed: %s", err->message);
-> > +            g_error_free(err);
-> > +        }
-> >      }
-> >      if (disable_usbredir)
-> >          g_object_set(session, "enable-usbredir", FALSE, NULL);
->=20
-> g_warning to me does not mean "silently", it was more silent before.
->=20
-> Code looks a bit a copy&paste, maybe add a function
-
-It is but the caller of below function still needs to check if m
-is NULL or not. I don't mind, I'll change it.
-
-Thanks,
-
-> SpiceUsbDeviceManager *
-> spice_usb_device_manager_get_for_option(SpiceSession *session, const char=
- *option)
-> {
->    GError *err =3D NULL;
->    SpiceUsbDeviceManager *m =3D spice_usb_device_manager_get(session, &er=
-r);
->    if (!m) {
->        g_warning("Option %s is set but failed: %s", option, err->message);
->        g_error_free(err);
->    }
->    return m;
-> }
->=20
-> (I didn't check it)
->=20
-> Frediano
-
---ghsu6s3is5imhono
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl05hg8ACgkQl9kSPeN6
-SE8HNQ//f3eJFEH2eB1iNdJLUkWIyU5QkfTjN8aQDzk54jTtver6CTIC7b7VVZtz
-0tvubnaNJsjae9ZR/f8zRDHq2H6nk2yeSzdT0tpPNt7So7wh8OLdvthjApZKaVmj
-lpOntdHvg5ubsdNPgeEx6nmzcuw53PJ9D0ALWuJaBeZkWwA/BSa+RmjyflFYIbm1
-jlTysxgaGR5RHZ7HXpR6kIRishikW+tqBnyy5/P8BcP7/zyfkVcHU6VyReomGfl+
-U0D6ETSC9QURqYO44lEfK8awlIC08mXxS6ZAYaPxhRPMIaJCjYaBzPLnnH93gxci
-KqqPEmeaqZgqnYSin5HP7CVBNj4jvvWQp+CLbPS8glOIT7ctGWnkCydlQWTcqWUw
-klPU/VIfqfH/foBtUDKbb7l7n9O9epafF2qG9KCM7J191XOnxZbwADBe9jPYsWec
-ZpzisDY2hW8hLj7Rk9LY3aiusMlx55hO/qYinkk/vyUnDCINbrBJxWAXHZky4hpA
-h4xBF9sMoGvP9tePbLjOLiORnZk7Vtx7x0tRUX99rTnHWVCN9PhZhiFVMNCWmcVD
-Lc502dS5QZU4r39etxvN/xBnVyFC21YrAJktY2w34N2FRTNyv0Ycxr+z/mhFV2ey
-AXvZ7OfDcqFbWol0kUoCzzsZxGf+Byejis8bkwi0hVyr5wC8Cp4=
-=6ouG
------END PGP SIGNATURE-----
-
---ghsu6s3is5imhono--
-
---===============1758435044==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1758435044==--
+RnJvbTogVmljdG9yIFRvc28gPG1lQHZpY3RvcnRvc28uY29tPgoKQXMgc3BpY2VfdXNiX2Rldmlj
+ZV9tYW5hZ2VyX2dldCgpIGNhbiBmYWlsIGZvciBkaWZmZXJlbnQgcmVhc29ucywgd2UKc2hvdWxk
+IHNpbGVudGx5IGlnbm9yZSBpdCBhbmQgaXRzIGVycm9yLgoKU2lnbmVkLW9mZi1ieTogVmljdG9y
+IFRvc28gPHZpY3RvcnRvc29AcmVkaGF0LmNvbT4KLS0tCiBzcmMvc3BpY2Utb3B0aW9uLmMgfCAy
+NCArKysrKysrKysrKysrKysrKysrKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAyMCBpbnNlcnRpb25z
+KCspLCA0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3NyYy9zcGljZS1vcHRpb24uYyBiL3Ny
+Yy9zcGljZS1vcHRpb24uYwppbmRleCBjMmIwNTllLi4wOGQ0NDllIDEwMDY0NAotLS0gYS9zcmMv
+c3BpY2Utb3B0aW9uLmMKKysrIGIvc3JjL3NwaWNlLW9wdGlvbi5jCkBAIC0yMTIsNiArMjEyLDE4
+IEBAIEdPcHRpb25Hcm91cCogc3BpY2VfZ2V0X29wdGlvbl9ncm91cCh2b2lkKQogICAgIHJldHVy
+biBncnA7CiB9CiAKK1NwaWNlVXNiRGV2aWNlTWFuYWdlciAqCitnZXRfdXNiX2RldmljZV9tYW5h
+Z2VyX2Zvcl9vcHRpb24oU3BpY2VTZXNzaW9uICpzZXNzaW9uLCBjb25zdCBjaGFyICpvcHRpb24p
+Cit7CisgICAgR0Vycm9yICplcnIgPSBOVUxMOworICAgIFNwaWNlVXNiRGV2aWNlTWFuYWdlciAq
+bSA9IHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9nZXQoc2Vzc2lvbiwgJmVycik7CisgICAgaWYg
+KCFtKSB7CisgICAgICAgIGdfd2FybmluZygiT3B0aW9uICVzIGlzIHNldCBidXQgZmFpbGVkOiAl
+cyIsIG9wdGlvbiwgZXJyLT5tZXNzYWdlKTsKKyAgICAgICAgZ19lcnJvcl9mcmVlKGVycik7Cisg
+ICAgfQorICAgIHJldHVybiBtOworfQorCiAvKioKICAqIHNwaWNlX3NldF9zZXNzaW9uX29wdGlv
+bjoKICAqIEBzZXNzaW9uOiBhICNTcGljZVNlc3Npb24gdG8gc2V0IG9wdGlvbiB1cG9uCkBAIC0y
+NjEsMTYgKzI3MywyMCBAQCB2b2lkIHNwaWNlX3NldF9zZXNzaW9uX29wdGlvbihTcGljZVNlc3Np
+b24gKnNlc3Npb24pCiAgICAgICAgICAgICBnX29iamVjdF9zZXQoc2Vzc2lvbiwgInNtYXJ0Y2Fy
+ZC1kYiIsIHNtYXJ0Y2FyZF9kYiwgTlVMTCk7CiAgICAgfQogICAgIGlmICh1c2JyZWRpcl9hdXRv
+X3JlZGlyZWN0X2ZpbHRlcikgewotICAgICAgICBTcGljZVVzYkRldmljZU1hbmFnZXIgKm0gPSBz
+cGljZV91c2JfZGV2aWNlX21hbmFnZXJfZ2V0KHNlc3Npb24sIE5VTEwpOwotICAgICAgICBpZiAo
+bSkKKyAgICAgICAgU3BpY2VVc2JEZXZpY2VNYW5hZ2VyICptID0KKyAgICAgICAgICAgICAgICBn
+ZXRfdXNiX2RldmljZV9tYW5hZ2VyX2Zvcl9vcHRpb24oc2Vzc2lvbiwgIi0tc3BpY2UtdXNicmVk
+aXItYXV0by1yZWRpcmVjdC1maWx0ZXIiKTsKKyAgICAgICAgaWYgKG0pIHsKICAgICAgICAgICAg
+IGdfb2JqZWN0X3NldChtLCAiYXV0by1jb25uZWN0LWZpbHRlciIsCiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgdXNicmVkaXJfYXV0b19yZWRpcmVjdF9maWx0ZXIsIE5VTEwpOworICAgICAgICB9
+CiAgICAgfQogICAgIGlmICh1c2JyZWRpcl9yZWRpcmVjdF9vbl9jb25uZWN0KSB7Ci0gICAgICAg
+IFNwaWNlVXNiRGV2aWNlTWFuYWdlciAqbSA9IHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9nZXQo
+c2Vzc2lvbiwgTlVMTCk7Ci0gICAgICAgIGlmIChtKQorICAgICAgICBTcGljZVVzYkRldmljZU1h
+bmFnZXIgKm0gPQorICAgICAgICAgICAgICAgIGdldF91c2JfZGV2aWNlX21hbmFnZXJfZm9yX29w
+dGlvbihzZXNzaW9uLCAiLS1zcGljZS11c2JyZWRpci1yZWRpcmVjdC1vbi1jb25uZWN0Iik7Cisg
+ICAgICAgIGlmIChtKSB7CiAgICAgICAgICAgICBnX29iamVjdF9zZXQobSwgInJlZGlyZWN0LW9u
+LWNvbm5lY3QiLAogICAgICAgICAgICAgICAgICAgICAgICAgIHVzYnJlZGlyX3JlZGlyZWN0X29u
+X2Nvbm5lY3QsIE5VTEwpOworICAgICAgICB9CiAgICAgfQogICAgIGlmIChkaXNhYmxlX3VzYnJl
+ZGlyKQogICAgICAgICBnX29iamVjdF9zZXQoc2Vzc2lvbiwgImVuYWJsZS11c2JyZWRpciIsIEZB
+TFNFLCBOVUxMKTsKLS0gCjIuMjEuMAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3Rz
+LmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3NwaWNlLWRldmVs
