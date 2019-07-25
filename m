@@ -1,38 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00525748CA
-	for <lists+spice-devel@lfdr.de>; Thu, 25 Jul 2019 10:08:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 501AE74936
+	for <lists+spice-devel@lfdr.de>; Thu, 25 Jul 2019 10:36:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5A6276E68B;
-	Thu, 25 Jul 2019 08:08:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D1A556E69B;
+	Thu, 25 Jul 2019 08:36:09 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EAB896E68B
- for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 08:08:52 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 49886C03D478;
- Thu, 25 Jul 2019 08:08:52 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C4C6660605;
- Thu, 25 Jul 2019 08:08:51 +0000 (UTC)
-Date: Thu, 25 Jul 2019 10:08:51 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Yuri Benditovich <yuri.benditovich@daynix.com>
-Message-ID: <20190725080851.e432vmkxpghf5j6q@wingsuit>
+Received: from mail-io1-xd44.google.com (mail-io1-xd44.google.com
+ [IPv6:2607:f8b0:4864:20::d44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3558A6E69B
+ for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 08:36:09 +0000 (UTC)
+Received: by mail-io1-xd44.google.com with SMTP id z3so95597432iog.0
+ for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 01:36:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=9Co+FVujaIi6NcnyhHNRdkbNc5yGvdjqwheqGDWVNJc=;
+ b=RS2IIvFGBfBIlM9ve/AK6N7uPQcqm7CL0zjE82yb1oZME5bV0i8rqsyUJgUw4el7in
+ GE/Ps3owd+4HiNZezKVqDzNALs+R7/hceJNrXsMmNu52yQL7oPxyLMl1+zPF0cEh+YVx
+ s52ujCCmyNamPHcIdeqUXeQ1a56sFoNjdv5Jmfe4OaFN9PdnctsH6VNH1i3XgU3cEUDA
+ lrrloHfdljwu8NUNni/sDq3LDtt86gw9QypQfTUyVpZDZ401uFcN4tqwTMX0sLAriWuY
+ 5bgY2gBDIrv0a8OSJE5uaKwB7r+naWkfVHQEGsC0k/te5OQEpCWaUpEJqgpDFKc9WrhU
+ 8ISA==
+X-Gm-Message-State: APjAAAXCsEXS16E72xNowmomlqsPBBrB2JH0csMwO0BjjJH2yrR1ZhuH
+ M15Rpka4dMNwlu4ZcQ++dvONMHiyNKbxpk51AlgPL1Rw
+X-Google-Smtp-Source: APXvYqwND05JhzcwO5HPdA8qcQDXsPCiTT7vOgByOI4aZhLlTx1moqziiEn6yOg7/1f5ciA++lFoOxe5o5icqf1zpNQ=
+X-Received: by 2002:a6b:6611:: with SMTP id a17mr56906413ioc.179.1564043768447; 
+ Thu, 25 Jul 2019 01:36:08 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190724105351.13753-1-yuri.benditovich@daynix.com>
  <20190724105351.13753-2-yuri.benditovich@daynix.com>
-MIME-Version: 1.0
-In-Reply-To: <20190724105351.13753-2-yuri.benditovich@daynix.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Thu, 25 Jul 2019 08:08:52 +0000 (UTC)
+ <20190725080851.e432vmkxpghf5j6q@wingsuit>
+In-Reply-To: <20190725080851.e432vmkxpghf5j6q@wingsuit>
+From: Yuri Benditovich <yuri.benditovich@daynix.com>
+Date: Thu, 25 Jul 2019 11:35:55 +0300
+Message-ID: <CAOEp5OcBAWqAD8+UbKcDUqBFkpLo9_SjzOPZv5k2BG_mzP8a+A@mail.gmail.com>
+To: Victor Toso <victortoso@redhat.com>
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=9Co+FVujaIi6NcnyhHNRdkbNc5yGvdjqwheqGDWVNJc=;
+ b=IdAUuzWHIeiIpGLKnFninFTyrIjdcf98bVhhfZ0I37ZEvY4bxIzDIspnLmk5uDV8iJ
+ VMgRJBIOJRWz8MMW+rD976sLdhfBGlDiVjYDACrgvaL2gyuyepNMeUjw9hPRezLQmNLB
+ c2s/S9TnJYEeQ1RZ+1Ow1vGBNVtO8lXs6a3CHZ6bwaCzMnEoNqgWZLJ5k2kT4gNTcQqM
+ 4T0Lo5EIIbdvrA6NvuWlhKUJypIfoD3yCwEOF7jRy3OAnf28VsuwpemwET1nIYHEU67i
+ Y32k9ot6Xx3+MiyV66hqs/ps2pCigThKd7l9zFK9cWIjiuTejCGBuRzEzCKRPAJyDUh3
+ hd0A==
 Subject: Re: [Spice-devel] [spice-gtk 1/9] usb-redir: define interfaces to
  support emulated devices
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -46,501 +64,301 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: yan@daynix.com, spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1661564545=="
+Cc: Yan Vugenfirer <yan@daynix.com>,
+ Spice List <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1661564545==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="zsorvnc6ckezb7b6"
-Content-Disposition: inline
-
-
---zsorvnc6ckezb7b6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Wed, Jul 24, 2019 at 01:53:43PM +0300, Yuri Benditovich wrote:
-> SpiceUsbBackendDevice structure is extended to support
-> additional kind of device that is emulated by Spice-GTK
-> and not present locally (and does not have libusb_device),
-> such device has instead pointer to SpiceUsbEmulatedDevice
-> abstract structure. Specific implementation of such device
-> depends on its device type (currently only 'CD device'
-> defined). Implementation module registers constructor for
-> this device type. Device structure is abstract but always
-> starts from table of virtual functions required to redirect
-> such virtual device.
->=20
-> Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
-> ---
->  src/meson.build     |   1 +
->  src/usb-backend.c   | 128 +++++++++++++++++++++++++++++++++++++++++++-
->  src/usb-backend.h   |  36 ++++++++++++-
->  src/usb-emulation.h |  88 ++++++++++++++++++++++++++++++
->  4 files changed, 250 insertions(+), 3 deletions(-)
->  create mode 100644 src/usb-emulation.h
->=20
-> diff --git a/src/meson.build b/src/meson.build
-> index adcfaec..49fec52 100644
-> --- a/src/meson.build
-> +++ b/src/meson.build
-> @@ -122,6 +122,7 @@ spice_client_glib_sources =3D [
->    'usbutil.c',
->    'usbutil.h',
->    'usb-backend.c',
-> +  'usb-emulation.h',
->    'usb-backend.h',
->    'vmcstream.c',
->    'vmcstream.h',
-> diff --git a/src/usb-backend.c b/src/usb-backend.c
-> index 9ac8595..0bf2ecc 100644
-> --- a/src/usb-backend.c
-> +++ b/src/usb-backend.c
-> @@ -39,6 +39,7 @@
->  #include "usbredirparser.h"
->  #include "spice-util.h"
->  #include "usb-backend.h"
-> +#include "usb-emulation.h"
->  #include "channel-usbredir-priv.h"
->  #include "spice-channel-priv.h"
-> =20
-> @@ -47,6 +48,7 @@
->  struct _SpiceUsbBackendDevice
->  {
->      libusb_device *libusb_device;
-> +    SpiceUsbEmulatedDevice *edev;
->      gint ref_count;
->      SpiceUsbBackendChannel *attached_to;
->      UsbDeviceInformation device_info;
-> @@ -66,6 +68,9 @@ struct _SpiceUsbBackend
->      libusb_device **libusb_device_list;
->      gint redirecting;
->  #endif
-> +
-> +    SpiceUsbEmulatedDeviceCreate dev_init[USB_DEV_TYPE_MAX];
-> +    uint32_t own_devices_mask;
->  };
-> =20
->  struct _SpiceUsbBackendChannel
-> @@ -408,6 +413,7 @@ SpiceUsbBackend *spice_usb_backend_new(GError **error)
->          libusb_set_option(be->libusb_context, LIBUSB_OPTION_USE_USBDK);
->  #endif
->  #endif
-> +        be->own_devices_mask =3D 3; /* exclude addresses 0 and 1 */
->      }
->      SPICE_DEBUG("%s <<", __FUNCTION__);
->      return be;
-> @@ -524,8 +530,12 @@ void spice_usb_backend_device_unref(SpiceUsbBackendD=
-evice *dev)
->  {
->      LOUD_DEBUG("%s >> %p(%d)", __FUNCTION__, dev, dev->ref_count);
->      if (g_atomic_int_dec_and_test(&dev->ref_count)) {
-> -        libusb_unref_device(dev->libusb_device);
-> -        LOUD_DEBUG("%s freeing %p (libusb %p)", __FUNCTION__, dev, dev->=
-libusb_device);
-> +        if (dev->libusb_device) {
-> +            libusb_unref_device(dev->libusb_device);
-> +            LOUD_DEBUG("%s freeing %p (libusb %p)", __FUNCTION__, dev, d=
-ev->libusb_device);
-> +        } else if (dev->edev) {
-> +            device_ops(dev->edev)->delete(dev->edev);
-> +        }
->          g_free(dev);
->      }
->  }
-> @@ -824,4 +834,118 @@ spice_usb_backend_channel_get_guest_filter(SpiceUsb=
-BackendChannel *ch,
->      }
->  }
-> =20
-> +gchar * spice_usb_backend_device_description(SpiceUsbBackendDevice *dev,
-> +                                             const gchar *format)
-
-Style: extra space after asterisk
-
-> +{
-> +    if (!dev->edev) {
-> +        return g_strdup("Not available for libusb devices");
-> +    }
-> +    gchar *description, *descriptor, *product;
-> +    descriptor =3D g_strdup_printf("[%04x:%04x]", dev->device_info.vid, =
-dev->device_info.pid);
-> +    product =3D device_ops(dev->edev)->get_product_description(dev->edev=
-);
-> +    description =3D g_strdup_printf(format, "", product, descriptor,
-> +                                  dev->device_info.bus, dev->device_info=
-=2Eaddress);
-> +    g_free(descriptor);
-> +    g_free(product);
-> +    return description;
-> +}
-> +
-> +void spice_usb_backend_register_device_type(SpiceUsbBackend *be,
-> +                                            UsbEmulatedDeviceType dev_ty=
-pe,
-> +                                            SpiceUsbEmulatedDeviceCreate=
- init_proc)
-> +{
-> +    if (dev_type >=3D USB_DEV_TYPE_MAX) {
-> +        g_return_if_reached();
-> +    }
-
-g_return_if_fail(dev_type < USB_DEV_TYPE_MAX); ?
-
-> +    be->dev_init[dev_type] =3D init_proc;
-> +}
-> +
-> +void spice_usb_backend_device_report_change(SpiceUsbBackend *be,
-> +                                            SpiceUsbBackendDevice *dev)
-> +{
-> +    gchar *desc;
-> +    g_return_if_fail(dev && dev->edev);
-> +
-> +    desc =3D device_ops(dev->edev)->get_product_description(dev->edev);
-> +    SPICE_DEBUG("%s: %s", __FUNCTION__, desc);
-> +    g_free(desc);
-
-Curious about this function, looking at the whole set this is
-called on cd_usb_bulk_msd_lun_changed() which has the comment
-"called when a change happens on SCSI layer"
-
-What kind of change can it happen on the emulated device?
-
-> +}
-> +
-> +void spice_usb_backend_device_eject(SpiceUsbBackend *be, SpiceUsbBackend=
-Device *dev)
-> +{
-> +    g_return_if_fail(dev && dev->edev);
-> +
-> +    if (be->hotplug_callback) {
-
-Wondering if this should not be a
-g_return_if_fail(be->hotplug_callback !=3D NULL);
-
-This callback is unset only on
-spice_usb_backend_deregister_hotplug() so it should be somewhat
-programming error having spice_usb_backend_device_eject() being
-called after that, no? That could also make not wanted unref to
-dev
-
-> +        be->hotplug_callback(be->hotplug_user_data, dev, FALSE);
-> +    }
-> +    spice_usb_backend_device_unref(dev);
-> +}
-> +
-> +gboolean spice_usb_backend_create_device(SpiceUsbBackend *be,
-> +                                         UsbEmulatedDeviceType dev_type,
-> +                                         UsbCreateDeviceParameters *para=
-m)
-> +{
-> +    SpiceUsbEmulatedDevice *edev =3D NULL;
-> +    SpiceUsbBackendDevice  *dev;
-> +    struct libusb_device_descriptor *desc;
-> +    uint16_t device_desc_size;
-> +    uint8_t address =3D 0;
-> +
-> +    if (dev_type >=3D USB_DEV_TYPE_MAX || !be->dev_init[dev_type]) {
-> +        param->error =3D g_error_new(SPICE_CLIENT_ERROR, SPICE_CLIENT_ER=
-ROR_FAILED,
-> +                                   _("can't create device - not supporte=
-d"));
-> +        return FALSE;
-> +    }
-> +
-> +    if (be->own_devices_mask =3D=3D 0xffffffff) {
-> +        param->error =3D g_error_new(SPICE_CLIENT_ERROR, SPICE_CLIENT_ER=
-ROR_FAILED,
-> +                                   _("can't create device - limit reache=
-d"));
-> +        return FALSE;
-> +    }
-> +    for (address =3D 0; address < 32; ++address) {
-> +        if (~be->own_devices_mask & (1 << address)) {
-> +            break;
-> +        }
-> +    }
-> +
-> +    dev =3D g_new0(SpiceUsbBackendDevice, 1);
-> +
-> +    param->address =3D address;
-> +    if (be->dev_init[dev_type](be, dev, param, &edev)) {
-> +        g_free(dev);
-> +        return FALSE;
-> +    }
-> +
-> +    if (!device_ops(edev)->get_descriptor(edev, LIBUSB_DT_DEVICE, 0,
-> +                                          (void **)&desc, &device_desc_s=
-ize)
-> +        || device_desc_size !=3D sizeof(*desc)) {
-> +
-> +        device_ops(edev)->delete(edev);
-> +        g_free(dev);
-> +        param->error =3D g_error_new(SPICE_CLIENT_ERROR, SPICE_CLIENT_ER=
-ROR_FAILED,
-> +                                   _("can't create device - internal err=
-or"));
-> +        return FALSE;
-> +    }
-> +
-> +    be->own_devices_mask |=3D 1 << address;
-
-I see the bit is set to 1 but shouldn't it be there a place where
-the bit is set to 0, let's say, when device is disconnected?
-
-> +
-> +    dev->device_info.bus =3D BUS_NUMBER_FOR_EMULATED_USB;
-> +    dev->device_info.address =3D address;
-> +    dev->device_info.vid =3D desc->idVendor;
-> +    dev->device_info.pid =3D desc->idProduct;
-> +    dev->device_info.bcdUSB =3D desc->bcdUSB;
-> +    dev->device_info.class =3D desc->bDeviceClass;
-> +    dev->device_info.subclass =3D desc->bDeviceSubClass;
-> +    dev->device_info.protocol =3D desc->bDeviceProtocol;
-> +    dev->device_info.device_type =3D dev_type;
-> +    dev->ref_count =3D 1;
-> +    dev->edev =3D edev;
-> +
-> +    if (be->hotplug_callback) {
-> +        be->hotplug_callback(be->hotplug_user_data, dev, TRUE);
-> +    }
-> +
-> +    return TRUE;
-> +}
-> +
->  #endif /* USB_REDIR */
-> diff --git a/src/usb-backend.h b/src/usb-backend.h
-> index 69a490b..8a04ed0 100644
-> --- a/src/usb-backend.h
-> +++ b/src/usb-backend.h
-> @@ -31,15 +31,24 @@ typedef struct _SpiceUsbBackend SpiceUsbBackend;
->  typedef struct _SpiceUsbBackendDevice SpiceUsbBackendDevice;
->  typedef struct _SpiceUsbBackendChannel SpiceUsbBackendChannel;
-> =20
-> +typedef enum
-> +{
-> +    USB_DEV_TYPE_NONE,
-> +    USB_DEV_TYPE_CD,
-> +    USB_DEV_TYPE_MAX
-> +} UsbEmulatedDeviceType;
-> +
->  typedef struct UsbDeviceInformation
->  {
->      uint16_t bus;
->      uint16_t address;
->      uint16_t vid;
->      uint16_t pid;
-> +    uint16_t bcdUSB;
->      uint8_t class;
->      uint8_t subclass;
->      uint8_t protocol;
-> +    uint8_t device_type; /* UsbEmulatedDeviceType */
->  } UsbDeviceInformation;
-> =20
->  typedef void(*usb_hot_plug_callback)(void *user_data, SpiceUsbBackendDev=
-ice *dev, gboolean added);
-> @@ -71,7 +80,6 @@ gboolean spice_usb_backend_device_isoch(SpiceUsbBackend=
-Device *dev);
->  /* returns 0 if the device passes the filter */
->  int spice_usb_backend_device_check_filter(SpiceUsbBackendDevice *dev,
->                                            const struct usbredirfilter_ru=
-le *rules, int count);
-> -
->  /* Spice USB backend channel API */
->  SpiceUsbBackendChannel *spice_usb_backend_channel_new(SpiceUsbBackend *c=
-ontext,
->                                                        void            *u=
-ser_data);
-> @@ -89,6 +97,32 @@ void spice_usb_backend_channel_get_guest_filter(SpiceU=
-sbBackendChannel *ch,
->                                                  int *count);
->  void spice_usb_backend_return_write_data(SpiceUsbBackendChannel *ch, voi=
-d *data);
-> =20
-> +#define BUS_NUMBER_FOR_EMULATED_USB         255
-
-Is there a specific reason for it to be 255 (like standard)? If
-yes, I'd add a small comment above it.
-
-> +
-> +typedef struct UsbCreateDeviceParameters
-> +{
-> +    GError *error;
-> +    uint32_t    address;
-> +    uint32_t    reserved;
-> +    union
-> +    {
-> +        struct
-> +        {
-> +            const char *filename;
-> +            uint32_t   delete_on_eject  : 1;
-> +        } create_cd;
-> +    } device_param;
-> +
-> +} UsbCreateDeviceParameters;
-> +
-> +/* API related to emulated devices */
-> +gboolean spice_usb_backend_create_device(SpiceUsbBackend *be,
-> +                                         UsbEmulatedDeviceType dev_type,
-> +                                         UsbCreateDeviceParameters *para=
-m);
-> +gchar *spice_usb_backend_device_description(SpiceUsbBackendDevice *dev, =
-const gchar *format);
-> +void spice_usb_backend_device_eject(SpiceUsbBackend *be, SpiceUsbBackend=
-Device *device);
-> +void spice_usb_backend_device_report_change(SpiceUsbBackend *be, SpiceUs=
-bBackendDevice *device);
-> +
->  G_END_DECLS
-> =20
->  #endif
-> diff --git a/src/usb-emulation.h b/src/usb-emulation.h
-> new file mode 100644
-> index 0000000..4473361
-> --- /dev/null
-> +++ b/src/usb-emulation.h
-> @@ -0,0 +1,88 @@
-> +/* -*- Mode: C; c-basic-offset: 4; indent-tabs-mode: nil -*- */
-> +/*
-> +    Copyright (C) 2019 Red Hat, Inc.
-> +
-> +    Red Hat Authors:
-> +    Yuri Benditovich<ybendito@redhat.com>
-> +
-> +    This library is free software; you can redistribute it and/or
-> +    modify it under the terms of the GNU Lesser General Public
-> +    License as published by the Free Software Foundation; either
-> +    version 2.1 of the License, or (at your option) any later version.
-> +
-> +    This library is distributed in the hope that it will be useful,
-> +    but WITHOUT ANY WARRANTY; without even the implied warranty of
-> +    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-> +    Lesser General Public License for more details.
-> +
-> +    You should have received a copy of the GNU Lesser General Public
-> +    License along with this library; if not, see <http://www.gnu.org/lic=
-enses/>.
-> +*/
-> +
-> +#ifndef __SPICE_USB_EMULATION_H__
-> +#define __SPICE_USB_EMULATION_H__
-> +
-> +#include "usbredirparser.h"
-> +#include "usb-backend.h"
-> +
-> +typedef struct _SpiceUsbEmulatedDevice SpiceUsbEmulatedDevice;
-> +typedef int (*SpiceUsbEmulatedDeviceCreate)(SpiceUsbBackend *be,
-> +                                            SpiceUsbBackendDevice *paren=
-t,
-> +                                            UsbCreateDeviceParameters *p=
-aram,
-> +                                            SpiceUsbEmulatedDevice **dev=
-ice);
-> +
-> +/*
-> +    function table for emulated USB device
-> +    must be first member of device structure
-> +    all functions are mandatory for implementation
-> +*/
-> +typedef struct UsbDeviceOps
-> +{
-> +    gboolean (*get_descriptor)(SpiceUsbEmulatedDevice *device,
-> +                               uint8_t type, uint8_t index,
-> +                               void **buffer, uint16_t *size);
-> +    gchar * (*get_product_description)(SpiceUsbEmulatedDevice *device);
-> +    void (*attach)(SpiceUsbEmulatedDevice *device, struct usbredirparser=
- *parser);
-> +    void (*reset)(SpiceUsbEmulatedDevice *device);
-> +    /*
-> +        processing is synchronous, default =3D stall:
-> +        - return success without data: set status to 0
-> +        - return error - set status to error
-> +        - return success with data - set status to 0,
-> +                                    set buffer to some buffer
-> +                                    set length to out len
-> +                                    truncation is automatic
-> +    */
-> +    void (*control_request)(SpiceUsbEmulatedDevice *device,
-> +                            uint8_t *data, int data_len,
-> +                            struct usb_redir_control_packet_header *h,
-> +                            void **buffer);
-> +    /*
-> +        processing is synchronous:
-> +        - set h->status to resulting status, default =3D stall
-> +    */
-> +    void (*bulk_out_request)(SpiceUsbEmulatedDevice *device,
-> +                             uint8_t ep, uint8_t *data, int data_len,
-> +                             uint8_t *status);
-> +    /*
-> +        if returns true, processing is asynchronous
-> +        otherwise header contains error status
-> +    */
-> +    gboolean (*bulk_in_request)(SpiceUsbEmulatedDevice *device, uint64_t=
- id,
-> +                            struct usb_redir_bulk_packet_header *bulk_he=
-ader);
-> +    void (*cancel_request)(SpiceUsbEmulatedDevice *device, uint64_t id);
-> +    void (*detach)(SpiceUsbEmulatedDevice *device);
-> +    void (*delete)(SpiceUsbEmulatedDevice *device);
-> +} UsbDeviceOps;
-
-Ok,
-
-> +
-> +static inline const UsbDeviceOps *device_ops(SpiceUsbEmulatedDevice *dev=
-) {
-> +    return (const UsbDeviceOps *)dev;
-> +}
-> +
-> +void spice_usb_backend_register_device_type(SpiceUsbBackend *be,
-> +                                            UsbEmulatedDeviceType dev_ty=
-pe,
-> +                                            SpiceUsbEmulatedDeviceCreate=
- init_proc);
-> +/* supported device types */
-> +void spice_usb_device_register_cd(SpiceUsbBackend *be);
-
-Should be added in later patches.
-
-Cheers,
-Victor
-
---zsorvnc6ckezb7b6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl05Y5IACgkQl9kSPeN6
-SE8Xgw/9EnYMMF7fHjv51AWwbuuTksBMAJkcR2XacE5fel1MGyCd88ct82PeYtG5
-iu98NToMSF7MomXrfoDJl0B4gjBPcWJMcqYC1JqInW6Tw68D9qp0ySwcomoHNSWT
-FHe9HhIsFEnxR+J9n3jBtZqNz98aYFWik3Ps/CEl9OhP3bol3LF0fYbzZEfG+zbz
-5CO5qNC2+3KOCBBG8z+XLpl8NrTBb36kGajgGku70bZ0kDw8E+QNbzPgjdtl+00X
-t+Cw11DRMiUziFAZuEHg3YuV5xbCo+wI70aRecAXoKqU4pgzKeMjU4qmkxazRwej
-MY6atFKNNViYzeN+qKAVgbekJnfCT2cIKTVL02uA1ktfqPDJCgEHvTujlMSiCwtM
-nov8l+uEtUKhUwNx7sY9xK/xgVrSwNZTHVeR2iioC3apY656OrM67PyB4H/OwPz3
-H8tufy28e63ePWMJtaUx9J+GPJWyLuHEF7A6xqtRoqK9tnQWghuWJ61ZGz7VF38w
-MfOhzmDNX60cfEDt2jIpSUNlp4BZRA6U/AmzhnfUYiMQnhkzrIGloqL2xloyZh9Q
-Dj8l6korpv7jMVnuX4KY32x8b/4TODpJqBcs/d+EjSTpR/eDeK2aOFEP2SjqfG02
-zFL2fZ4/nzZhz7M8v0TyHoDoSkd2nScwFI0liyjs236TA0la0ts=
-=wamo
------END PGP SIGNATURE-----
-
---zsorvnc6ckezb7b6--
-
---===============1661564545==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1661564545==--
+T24gVGh1LCBKdWwgMjUsIDIwMTkgYXQgMTE6MDggQU0gVmljdG9yIFRvc28gPHZpY3RvcnRvc29A
+cmVkaGF0LmNvbT4gd3JvdGU6Cj4KPiBIaSwKPgo+IE9uIFdlZCwgSnVsIDI0LCAyMDE5IGF0IDAx
+OjUzOjQzUE0gKzAzMDAsIFl1cmkgQmVuZGl0b3ZpY2ggd3JvdGU6Cj4gPiBTcGljZVVzYkJhY2tl
+bmREZXZpY2Ugc3RydWN0dXJlIGlzIGV4dGVuZGVkIHRvIHN1cHBvcnQKPiA+IGFkZGl0aW9uYWwg
+a2luZCBvZiBkZXZpY2UgdGhhdCBpcyBlbXVsYXRlZCBieSBTcGljZS1HVEsKPiA+IGFuZCBub3Qg
+cHJlc2VudCBsb2NhbGx5IChhbmQgZG9lcyBub3QgaGF2ZSBsaWJ1c2JfZGV2aWNlKSwKPiA+IHN1
+Y2ggZGV2aWNlIGhhcyBpbnN0ZWFkIHBvaW50ZXIgdG8gU3BpY2VVc2JFbXVsYXRlZERldmljZQo+
+ID4gYWJzdHJhY3Qgc3RydWN0dXJlLiBTcGVjaWZpYyBpbXBsZW1lbnRhdGlvbiBvZiBzdWNoIGRl
+dmljZQo+ID4gZGVwZW5kcyBvbiBpdHMgZGV2aWNlIHR5cGUgKGN1cnJlbnRseSBvbmx5ICdDRCBk
+ZXZpY2UnCj4gPiBkZWZpbmVkKS4gSW1wbGVtZW50YXRpb24gbW9kdWxlIHJlZ2lzdGVycyBjb25z
+dHJ1Y3RvciBmb3IKPiA+IHRoaXMgZGV2aWNlIHR5cGUuIERldmljZSBzdHJ1Y3R1cmUgaXMgYWJz
+dHJhY3QgYnV0IGFsd2F5cwo+ID4gc3RhcnRzIGZyb20gdGFibGUgb2YgdmlydHVhbCBmdW5jdGlv
+bnMgcmVxdWlyZWQgdG8gcmVkaXJlY3QKPiA+IHN1Y2ggdmlydHVhbCBkZXZpY2UuCj4gPgo+ID4g
+U2lnbmVkLW9mZi1ieTogWXVyaSBCZW5kaXRvdmljaCA8eXVyaS5iZW5kaXRvdmljaEBkYXluaXgu
+Y29tPgo+ID4gLS0tCj4gPiAgc3JjL21lc29uLmJ1aWxkICAgICB8ICAgMSArCj4gPiAgc3JjL3Vz
+Yi1iYWNrZW5kLmMgICB8IDEyOCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrLQo+ID4gIHNyYy91c2ItYmFja2VuZC5oICAgfCAgMzYgKysrKysrKysrKysrLQo+ID4g
+IHNyYy91c2ItZW11bGF0aW9uLmggfCAgODggKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+Cj4gPiAgNCBmaWxlcyBjaGFuZ2VkLCAyNTAgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkK
+PiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgc3JjL3VzYi1lbXVsYXRpb24uaAo+ID4KPiA+IGRpZmYg
+LS1naXQgYS9zcmMvbWVzb24uYnVpbGQgYi9zcmMvbWVzb24uYnVpbGQKPiA+IGluZGV4IGFkY2Zh
+ZWMuLjQ5ZmVjNTIgMTAwNjQ0Cj4gPiAtLS0gYS9zcmMvbWVzb24uYnVpbGQKPiA+ICsrKyBiL3Ny
+Yy9tZXNvbi5idWlsZAo+ID4gQEAgLTEyMiw2ICsxMjIsNyBAQCBzcGljZV9jbGllbnRfZ2xpYl9z
+b3VyY2VzID0gWwo+ID4gICAgJ3VzYnV0aWwuYycsCj4gPiAgICAndXNidXRpbC5oJywKPiA+ICAg
+ICd1c2ItYmFja2VuZC5jJywKPiA+ICsgICd1c2ItZW11bGF0aW9uLmgnLAo+ID4gICAgJ3VzYi1i
+YWNrZW5kLmgnLAo+ID4gICAgJ3ZtY3N0cmVhbS5jJywKPiA+ICAgICd2bWNzdHJlYW0uaCcsCj4g
+PiBkaWZmIC0tZ2l0IGEvc3JjL3VzYi1iYWNrZW5kLmMgYi9zcmMvdXNiLWJhY2tlbmQuYwo+ID4g
+aW5kZXggOWFjODU5NS4uMGJmMmVjYyAxMDA2NDQKPiA+IC0tLSBhL3NyYy91c2ItYmFja2VuZC5j
+Cj4gPiArKysgYi9zcmMvdXNiLWJhY2tlbmQuYwo+ID4gQEAgLTM5LDYgKzM5LDcgQEAKPiA+ICAj
+aW5jbHVkZSAidXNicmVkaXJwYXJzZXIuaCIKPiA+ICAjaW5jbHVkZSAic3BpY2UtdXRpbC5oIgo+
+ID4gICNpbmNsdWRlICJ1c2ItYmFja2VuZC5oIgo+ID4gKyNpbmNsdWRlICJ1c2ItZW11bGF0aW9u
+LmgiCj4gPiAgI2luY2x1ZGUgImNoYW5uZWwtdXNicmVkaXItcHJpdi5oIgo+ID4gICNpbmNsdWRl
+ICJzcGljZS1jaGFubmVsLXByaXYuaCIKPiA+Cj4gPiBAQCAtNDcsNiArNDgsNyBAQAo+ID4gIHN0
+cnVjdCBfU3BpY2VVc2JCYWNrZW5kRGV2aWNlCj4gPiAgewo+ID4gICAgICBsaWJ1c2JfZGV2aWNl
+ICpsaWJ1c2JfZGV2aWNlOwo+ID4gKyAgICBTcGljZVVzYkVtdWxhdGVkRGV2aWNlICplZGV2Owo+
+ID4gICAgICBnaW50IHJlZl9jb3VudDsKPiA+ICAgICAgU3BpY2VVc2JCYWNrZW5kQ2hhbm5lbCAq
+YXR0YWNoZWRfdG87Cj4gPiAgICAgIFVzYkRldmljZUluZm9ybWF0aW9uIGRldmljZV9pbmZvOwo+
+ID4gQEAgLTY2LDYgKzY4LDkgQEAgc3RydWN0IF9TcGljZVVzYkJhY2tlbmQKPiA+ICAgICAgbGli
+dXNiX2RldmljZSAqKmxpYnVzYl9kZXZpY2VfbGlzdDsKPiA+ICAgICAgZ2ludCByZWRpcmVjdGlu
+ZzsKPiA+ICAjZW5kaWYKPiA+ICsKPiA+ICsgICAgU3BpY2VVc2JFbXVsYXRlZERldmljZUNyZWF0
+ZSBkZXZfaW5pdFtVU0JfREVWX1RZUEVfTUFYXTsKPiA+ICsgICAgdWludDMyX3Qgb3duX2Rldmlj
+ZXNfbWFzazsKPiA+ICB9Owo+ID4KPiA+ICBzdHJ1Y3QgX1NwaWNlVXNiQmFja2VuZENoYW5uZWwK
+PiA+IEBAIC00MDgsNiArNDEzLDcgQEAgU3BpY2VVc2JCYWNrZW5kICpzcGljZV91c2JfYmFja2Vu
+ZF9uZXcoR0Vycm9yICoqZXJyb3IpCj4gPiAgICAgICAgICBsaWJ1c2Jfc2V0X29wdGlvbihiZS0+
+bGlidXNiX2NvbnRleHQsIExJQlVTQl9PUFRJT05fVVNFX1VTQkRLKTsKPiA+ICAjZW5kaWYKPiA+
+ICAjZW5kaWYKPiA+ICsgICAgICAgIGJlLT5vd25fZGV2aWNlc19tYXNrID0gMzsgLyogZXhjbHVk
+ZSBhZGRyZXNzZXMgMCBhbmQgMSAqLwo+ID4gICAgICB9Cj4gPiAgICAgIFNQSUNFX0RFQlVHKCIl
+cyA8PCIsIF9fRlVOQ1RJT05fXyk7Cj4gPiAgICAgIHJldHVybiBiZTsKPiA+IEBAIC01MjQsOCAr
+NTMwLDEyIEBAIHZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX3VucmVmKFNwaWNlVXNiQmFj
+a2VuZERldmljZSAqZGV2KQo+ID4gIHsKPiA+ICAgICAgTE9VRF9ERUJVRygiJXMgPj4gJXAoJWQp
+IiwgX19GVU5DVElPTl9fLCBkZXYsIGRldi0+cmVmX2NvdW50KTsKPiA+ICAgICAgaWYgKGdfYXRv
+bWljX2ludF9kZWNfYW5kX3Rlc3QoJmRldi0+cmVmX2NvdW50KSkgewo+ID4gLSAgICAgICAgbGli
+dXNiX3VucmVmX2RldmljZShkZXYtPmxpYnVzYl9kZXZpY2UpOwo+ID4gLSAgICAgICAgTE9VRF9E
+RUJVRygiJXMgZnJlZWluZyAlcCAobGlidXNiICVwKSIsIF9fRlVOQ1RJT05fXywgZGV2LCBkZXYt
+PmxpYnVzYl9kZXZpY2UpOwo+ID4gKyAgICAgICAgaWYgKGRldi0+bGlidXNiX2RldmljZSkgewo+
+ID4gKyAgICAgICAgICAgIGxpYnVzYl91bnJlZl9kZXZpY2UoZGV2LT5saWJ1c2JfZGV2aWNlKTsK
+PiA+ICsgICAgICAgICAgICBMT1VEX0RFQlVHKCIlcyBmcmVlaW5nICVwIChsaWJ1c2IgJXApIiwg
+X19GVU5DVElPTl9fLCBkZXYsIGRldi0+bGlidXNiX2RldmljZSk7Cj4gPiArICAgICAgICB9IGVs
+c2UgaWYgKGRldi0+ZWRldikgewo+ID4gKyAgICAgICAgICAgIGRldmljZV9vcHMoZGV2LT5lZGV2
+KS0+ZGVsZXRlKGRldi0+ZWRldik7Cj4gPiArICAgICAgICB9Cj4gPiAgICAgICAgICBnX2ZyZWUo
+ZGV2KTsKPiA+ICAgICAgfQo+ID4gIH0KPiA+IEBAIC04MjQsNCArODM0LDExOCBAQCBzcGljZV91
+c2JfYmFja2VuZF9jaGFubmVsX2dldF9ndWVzdF9maWx0ZXIoU3BpY2VVc2JCYWNrZW5kQ2hhbm5l
+bCAqY2gsCj4gPiAgICAgIH0KPiA+ICB9Cj4gPgo+ID4gK2djaGFyICogc3BpY2VfdXNiX2JhY2tl
+bmRfZGV2aWNlX2Rlc2NyaXB0aW9uKFNwaWNlVXNiQmFja2VuZERldmljZSAqZGV2LAo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGdjaGFyICpm
+b3JtYXQpCj4KPiBTdHlsZTogZXh0cmEgc3BhY2UgYWZ0ZXIgYXN0ZXJpc2sKPgo+ID4gK3sKPiA+
+ICsgICAgaWYgKCFkZXYtPmVkZXYpIHsKPiA+ICsgICAgICAgIHJldHVybiBnX3N0cmR1cCgiTm90
+IGF2YWlsYWJsZSBmb3IgbGlidXNiIGRldmljZXMiKTsKPiA+ICsgICAgfQo+ID4gKyAgICBnY2hh
+ciAqZGVzY3JpcHRpb24sICpkZXNjcmlwdG9yLCAqcHJvZHVjdDsKPiA+ICsgICAgZGVzY3JpcHRv
+ciA9IGdfc3RyZHVwX3ByaW50ZigiWyUwNHg6JTA0eF0iLCBkZXYtPmRldmljZV9pbmZvLnZpZCwg
+ZGV2LT5kZXZpY2VfaW5mby5waWQpOwo+ID4gKyAgICBwcm9kdWN0ID0gZGV2aWNlX29wcyhkZXYt
+PmVkZXYpLT5nZXRfcHJvZHVjdF9kZXNjcmlwdGlvbihkZXYtPmVkZXYpOwo+ID4gKyAgICBkZXNj
+cmlwdGlvbiA9IGdfc3RyZHVwX3ByaW50Zihmb3JtYXQsICIiLCBwcm9kdWN0LCBkZXNjcmlwdG9y
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkZXYtPmRldmljZV9pbmZv
+LmJ1cywgZGV2LT5kZXZpY2VfaW5mby5hZGRyZXNzKTsKPiA+ICsgICAgZ19mcmVlKGRlc2NyaXB0
+b3IpOwo+ID4gKyAgICBnX2ZyZWUocHJvZHVjdCk7Cj4gPiArICAgIHJldHVybiBkZXNjcmlwdGlv
+bjsKPiA+ICt9Cj4gPiArCj4gPiArdm9pZCBzcGljZV91c2JfYmFja2VuZF9yZWdpc3Rlcl9kZXZp
+Y2VfdHlwZShTcGljZVVzYkJhY2tlbmQgKmJlLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgVXNiRW11bGF0ZWREZXZpY2VUeXBlIGRldl90eXBlLAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU3BpY2VVc2JFbXVs
+YXRlZERldmljZUNyZWF0ZSBpbml0X3Byb2MpCj4gPiArewo+ID4gKyAgICBpZiAoZGV2X3R5cGUg
+Pj0gVVNCX0RFVl9UWVBFX01BWCkgewo+ID4gKyAgICAgICAgZ19yZXR1cm5faWZfcmVhY2hlZCgp
+Owo+ID4gKyAgICB9Cj4KPiBnX3JldHVybl9pZl9mYWlsKGRldl90eXBlIDwgVVNCX0RFVl9UWVBF
+X01BWCk7ID8KPgo+ID4gKyAgICBiZS0+ZGV2X2luaXRbZGV2X3R5cGVdID0gaW5pdF9wcm9jOwo+
+ID4gK30KPiA+ICsKPiA+ICt2b2lkIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9yZXBvcnRfY2hh
+bmdlKFNwaWNlVXNiQmFja2VuZCAqYmUsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBTcGljZVVzYkJhY2tlbmREZXZpY2UgKmRldikKPiA+ICt7Cj4gPiAr
+ICAgIGdjaGFyICpkZXNjOwo+ID4gKyAgICBnX3JldHVybl9pZl9mYWlsKGRldiAmJiBkZXYtPmVk
+ZXYpOwo+ID4gKwo+ID4gKyAgICBkZXNjID0gZGV2aWNlX29wcyhkZXYtPmVkZXYpLT5nZXRfcHJv
+ZHVjdF9kZXNjcmlwdGlvbihkZXYtPmVkZXYpOwo+ID4gKyAgICBTUElDRV9ERUJVRygiJXM6ICVz
+IiwgX19GVU5DVElPTl9fLCBkZXNjKTsKPiA+ICsgICAgZ19mcmVlKGRlc2MpOwo+Cj4gQ3VyaW91
+cyBhYm91dCB0aGlzIGZ1bmN0aW9uLCBsb29raW5nIGF0IHRoZSB3aG9sZSBzZXQgdGhpcyBpcwo+
+IGNhbGxlZCBvbiBjZF91c2JfYnVsa19tc2RfbHVuX2NoYW5nZWQoKSB3aGljaCBoYXMgdGhlIGNv
+bW1lbnQKPiAiY2FsbGVkIHdoZW4gYSBjaGFuZ2UgaGFwcGVucyBvbiBTQ1NJIGxheWVyIgo+Cj4g
+V2hhdCBraW5kIG9mIGNoYW5nZSBjYW4gaXQgaGFwcGVuIG9uIHRoZSBlbXVsYXRlZCBkZXZpY2U/
+CgpBbnl0aGluZyBjYXVzZWQgYnkgaW50ZXJhY3Rpb24gd2l0aCBWTSBhbmQgbmVlZGVkIHJlZmxl
+Y3Rpb24gaW4gY2xpZW50IFVJLgpGb3IgY2FzZSBvZiBDRCwgZm9yIGV4YW1wbGUgdGhpcyBpcyB1
+bmxvYWQuCgo+Cj4gPiArfQo+ID4gKwo+ID4gK3ZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNl
+X2VqZWN0KFNwaWNlVXNiQmFja2VuZCAqYmUsIFNwaWNlVXNiQmFja2VuZERldmljZSAqZGV2KQo+
+ID4gK3sKPiA+ICsgICAgZ19yZXR1cm5faWZfZmFpbChkZXYgJiYgZGV2LT5lZGV2KTsKPiA+ICsK
+PiA+ICsgICAgaWYgKGJlLT5ob3RwbHVnX2NhbGxiYWNrKSB7Cj4KPiBXb25kZXJpbmcgaWYgdGhp
+cyBzaG91bGQgbm90IGJlIGEKPiBnX3JldHVybl9pZl9mYWlsKGJlLT5ob3RwbHVnX2NhbGxiYWNr
+ICE9IE5VTEwpOwo+Cj4gVGhpcyBjYWxsYmFjayBpcyB1bnNldCBvbmx5IG9uCj4gc3BpY2VfdXNi
+X2JhY2tlbmRfZGVyZWdpc3Rlcl9ob3RwbHVnKCkgc28gaXQgc2hvdWxkIGJlIHNvbWV3aGF0Cj4g
+cHJvZ3JhbW1pbmcgZXJyb3IgaGF2aW5nIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9lamVjdCgp
+IGJlaW5nCj4gY2FsbGVkIGFmdGVyIHRoYXQsIG5vPyBUaGF0IGNvdWxkIGFsc28gbWFrZSBub3Qg
+d2FudGVkIHVucmVmIHRvCj4gZGV2Cgpvay4gYnV0IHVuZGVyIGluIGFueSBjYXNlLCB0aGUgZGV2
+aWNlIHdhcyBjcmVhdGVkIHdpdGggcmVmID0gMQoKPgo+ID4gKyAgICAgICAgYmUtPmhvdHBsdWdf
+Y2FsbGJhY2soYmUtPmhvdHBsdWdfdXNlcl9kYXRhLCBkZXYsIEZBTFNFKTsKPiA+ICsgICAgfQo+
+ID4gKyAgICBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfdW5yZWYoZGV2KTsKPiA+ICt9Cj4gPiAr
+Cj4gPiArZ2Jvb2xlYW4gc3BpY2VfdXNiX2JhY2tlbmRfY3JlYXRlX2RldmljZShTcGljZVVzYkJh
+Y2tlbmQgKmJlLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+VXNiRW11bGF0ZWREZXZpY2VUeXBlIGRldl90eXBlLAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgVXNiQ3JlYXRlRGV2aWNlUGFyYW1ldGVycyAqcGFyYW0pCj4g
+PiArewo+ID4gKyAgICBTcGljZVVzYkVtdWxhdGVkRGV2aWNlICplZGV2ID0gTlVMTDsKPiA+ICsg
+ICAgU3BpY2VVc2JCYWNrZW5kRGV2aWNlICAqZGV2Owo+ID4gKyAgICBzdHJ1Y3QgbGlidXNiX2Rl
+dmljZV9kZXNjcmlwdG9yICpkZXNjOwo+ID4gKyAgICB1aW50MTZfdCBkZXZpY2VfZGVzY19zaXpl
+Owo+ID4gKyAgICB1aW50OF90IGFkZHJlc3MgPSAwOwo+ID4gKwo+ID4gKyAgICBpZiAoZGV2X3R5
+cGUgPj0gVVNCX0RFVl9UWVBFX01BWCB8fCAhYmUtPmRldl9pbml0W2Rldl90eXBlXSkgewo+ID4g
+KyAgICAgICAgcGFyYW0tPmVycm9yID0gZ19lcnJvcl9uZXcoU1BJQ0VfQ0xJRU5UX0VSUk9SLCBT
+UElDRV9DTElFTlRfRVJST1JfRkFJTEVELAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgXygiY2FuJ3QgY3JlYXRlIGRldmljZSAtIG5vdCBzdXBwb3J0ZWQiKSk7Cj4gPiAr
+ICAgICAgICByZXR1cm4gRkFMU0U7Cj4gPiArICAgIH0KPiA+ICsKPiA+ICsgICAgaWYgKGJlLT5v
+d25fZGV2aWNlc19tYXNrID09IDB4ZmZmZmZmZmYpIHsKPiA+ICsgICAgICAgIHBhcmFtLT5lcnJv
+ciA9IGdfZXJyb3JfbmV3KFNQSUNFX0NMSUVOVF9FUlJPUiwgU1BJQ0VfQ0xJRU5UX0VSUk9SX0ZB
+SUxFRCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF8oImNhbid0IGNy
+ZWF0ZSBkZXZpY2UgLSBsaW1pdCByZWFjaGVkIikpOwo+ID4gKyAgICAgICAgcmV0dXJuIEZBTFNF
+Owo+ID4gKyAgICB9Cj4gPiArICAgIGZvciAoYWRkcmVzcyA9IDA7IGFkZHJlc3MgPCAzMjsgKyth
+ZGRyZXNzKSB7Cj4gPiArICAgICAgICBpZiAofmJlLT5vd25fZGV2aWNlc19tYXNrICYgKDEgPDwg
+YWRkcmVzcykpIHsKPiA+ICsgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgIH0KPiA+ICsg
+ICAgfQo+ID4gKwo+ID4gKyAgICBkZXYgPSBnX25ldzAoU3BpY2VVc2JCYWNrZW5kRGV2aWNlLCAx
+KTsKPiA+ICsKPiA+ICsgICAgcGFyYW0tPmFkZHJlc3MgPSBhZGRyZXNzOwo+ID4gKyAgICBpZiAo
+YmUtPmRldl9pbml0W2Rldl90eXBlXShiZSwgZGV2LCBwYXJhbSwgJmVkZXYpKSB7Cj4gPiArICAg
+ICAgICBnX2ZyZWUoZGV2KTsKPiA+ICsgICAgICAgIHJldHVybiBGQUxTRTsKPiA+ICsgICAgfQo+
+ID4gKwo+ID4gKyAgICBpZiAoIWRldmljZV9vcHMoZWRldiktPmdldF9kZXNjcmlwdG9yKGVkZXYs
+IExJQlVTQl9EVF9ERVZJQ0UsIDAsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgKHZvaWQgKiopJmRlc2MsICZkZXZpY2VfZGVzY19zaXplKQo+ID4gKyAgICAg
+ICAgfHwgZGV2aWNlX2Rlc2Nfc2l6ZSAhPSBzaXplb2YoKmRlc2MpKSB7Cj4gPiArCj4gPiArICAg
+ICAgICBkZXZpY2Vfb3BzKGVkZXYpLT5kZWxldGUoZWRldik7Cj4gPiArICAgICAgICBnX2ZyZWUo
+ZGV2KTsKPiA+ICsgICAgICAgIHBhcmFtLT5lcnJvciA9IGdfZXJyb3JfbmV3KFNQSUNFX0NMSUVO
+VF9FUlJPUiwgU1BJQ0VfQ0xJRU5UX0VSUk9SX0ZBSUxFRCwKPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIF8oImNhbid0IGNyZWF0ZSBkZXZpY2UgLSBpbnRlcm5hbCBlcnJv
+ciIpKTsKPiA+ICsgICAgICAgIHJldHVybiBGQUxTRTsKPiA+ICsgICAgfQo+ID4gKwo+ID4gKyAg
+ICBiZS0+b3duX2RldmljZXNfbWFzayB8PSAxIDw8IGFkZHJlc3M7Cj4KPiBJIHNlZSB0aGUgYml0
+IGlzIHNldCB0byAxIGJ1dCBzaG91bGRuJ3QgaXQgYmUgdGhlcmUgYSBwbGFjZSB3aGVyZQo+IHRo
+ZSBiaXQgaXMgc2V0IHRvIDAsIGxldCdzIHNheSwgd2hlbiBkZXZpY2UgaXMgZGlzY29ubmVjdGVk
+PwoKTUlzc2VkLCB0aGFua3MuIFdhcyBlYXN5IHRvIG1pc3MgYXMgdGhlcmUgaXMgbm8gZHluYW1p
+YyBjcmVhdGlvbiB5ZXQuCgo+Cj4gPiArCj4gPiArICAgIGRldi0+ZGV2aWNlX2luZm8uYnVzID0g
+QlVTX05VTUJFUl9GT1JfRU1VTEFURURfVVNCOwo+ID4gKyAgICBkZXYtPmRldmljZV9pbmZvLmFk
+ZHJlc3MgPSBhZGRyZXNzOwo+ID4gKyAgICBkZXYtPmRldmljZV9pbmZvLnZpZCA9IGRlc2MtPmlk
+VmVuZG9yOwo+ID4gKyAgICBkZXYtPmRldmljZV9pbmZvLnBpZCA9IGRlc2MtPmlkUHJvZHVjdDsK
+PiA+ICsgICAgZGV2LT5kZXZpY2VfaW5mby5iY2RVU0IgPSBkZXNjLT5iY2RVU0I7Cj4gPiArICAg
+IGRldi0+ZGV2aWNlX2luZm8uY2xhc3MgPSBkZXNjLT5iRGV2aWNlQ2xhc3M7Cj4gPiArICAgIGRl
+di0+ZGV2aWNlX2luZm8uc3ViY2xhc3MgPSBkZXNjLT5iRGV2aWNlU3ViQ2xhc3M7Cj4gPiArICAg
+IGRldi0+ZGV2aWNlX2luZm8ucHJvdG9jb2wgPSBkZXNjLT5iRGV2aWNlUHJvdG9jb2w7Cj4gPiAr
+ICAgIGRldi0+ZGV2aWNlX2luZm8uZGV2aWNlX3R5cGUgPSBkZXZfdHlwZTsKPiA+ICsgICAgZGV2
+LT5yZWZfY291bnQgPSAxOwo+ID4gKyAgICBkZXYtPmVkZXYgPSBlZGV2Owo+ID4gKwo+ID4gKyAg
+ICBpZiAoYmUtPmhvdHBsdWdfY2FsbGJhY2spIHsKPiA+ICsgICAgICAgIGJlLT5ob3RwbHVnX2Nh
+bGxiYWNrKGJlLT5ob3RwbHVnX3VzZXJfZGF0YSwgZGV2LCBUUlVFKTsKPiA+ICsgICAgfQo+ID4g
+Kwo+ID4gKyAgICByZXR1cm4gVFJVRTsKPiA+ICt9Cj4gPiArCj4gPiAgI2VuZGlmIC8qIFVTQl9S
+RURJUiAqLwo+ID4gZGlmZiAtLWdpdCBhL3NyYy91c2ItYmFja2VuZC5oIGIvc3JjL3VzYi1iYWNr
+ZW5kLmgKPiA+IGluZGV4IDY5YTQ5MGIuLjhhMDRlZDAgMTAwNjQ0Cj4gPiAtLS0gYS9zcmMvdXNi
+LWJhY2tlbmQuaAo+ID4gKysrIGIvc3JjL3VzYi1iYWNrZW5kLmgKPiA+IEBAIC0zMSwxNSArMzEs
+MjQgQEAgdHlwZWRlZiBzdHJ1Y3QgX1NwaWNlVXNiQmFja2VuZCBTcGljZVVzYkJhY2tlbmQ7Cj4g
+PiAgdHlwZWRlZiBzdHJ1Y3QgX1NwaWNlVXNiQmFja2VuZERldmljZSBTcGljZVVzYkJhY2tlbmRE
+ZXZpY2U7Cj4gPiAgdHlwZWRlZiBzdHJ1Y3QgX1NwaWNlVXNiQmFja2VuZENoYW5uZWwgU3BpY2VV
+c2JCYWNrZW5kQ2hhbm5lbDsKPiA+Cj4gPiArdHlwZWRlZiBlbnVtCj4gPiArewo+ID4gKyAgICBV
+U0JfREVWX1RZUEVfTk9ORSwKPiA+ICsgICAgVVNCX0RFVl9UWVBFX0NELAo+ID4gKyAgICBVU0Jf
+REVWX1RZUEVfTUFYCj4gPiArfSBVc2JFbXVsYXRlZERldmljZVR5cGU7Cj4gPiArCj4gPiAgdHlw
+ZWRlZiBzdHJ1Y3QgVXNiRGV2aWNlSW5mb3JtYXRpb24KPiA+ICB7Cj4gPiAgICAgIHVpbnQxNl90
+IGJ1czsKPiA+ICAgICAgdWludDE2X3QgYWRkcmVzczsKPiA+ICAgICAgdWludDE2X3QgdmlkOwo+
+ID4gICAgICB1aW50MTZfdCBwaWQ7Cj4gPiArICAgIHVpbnQxNl90IGJjZFVTQjsKPiA+ICAgICAg
+dWludDhfdCBjbGFzczsKPiA+ICAgICAgdWludDhfdCBzdWJjbGFzczsKPiA+ICAgICAgdWludDhf
+dCBwcm90b2NvbDsKPiA+ICsgICAgdWludDhfdCBkZXZpY2VfdHlwZTsgLyogVXNiRW11bGF0ZWRE
+ZXZpY2VUeXBlICovCj4gPiAgfSBVc2JEZXZpY2VJbmZvcm1hdGlvbjsKPiA+Cj4gPiAgdHlwZWRl
+ZiB2b2lkKCp1c2JfaG90X3BsdWdfY2FsbGJhY2spKHZvaWQgKnVzZXJfZGF0YSwgU3BpY2VVc2JC
+YWNrZW5kRGV2aWNlICpkZXYsIGdib29sZWFuIGFkZGVkKTsKPiA+IEBAIC03MSw3ICs4MCw2IEBA
+IGdib29sZWFuIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9pc29jaChTcGljZVVzYkJhY2tlbmRE
+ZXZpY2UgKmRldik7Cj4gPiAgLyogcmV0dXJucyAwIGlmIHRoZSBkZXZpY2UgcGFzc2VzIHRoZSBm
+aWx0ZXIgKi8KPiA+ICBpbnQgc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX2NoZWNrX2ZpbHRlcihT
+cGljZVVzYkJhY2tlbmREZXZpY2UgKmRldiwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgdXNicmVkaXJmaWx0ZXJfcnVsZSAqcnVsZXMs
+IGludCBjb3VudCk7Cj4gPiAtCj4gPiAgLyogU3BpY2UgVVNCIGJhY2tlbmQgY2hhbm5lbCBBUEkg
+Ki8KPiA+ICBTcGljZVVzYkJhY2tlbmRDaGFubmVsICpzcGljZV91c2JfYmFja2VuZF9jaGFubmVs
+X25ldyhTcGljZVVzYkJhY2tlbmQgKmNvbnRleHQsCj4gPiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdm9pZCAgICAgICAgICAgICp1c2VyX2Rh
+dGEpOwo+ID4gQEAgLTg5LDYgKzk3LDMyIEBAIHZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfY2hhbm5l
+bF9nZXRfZ3Vlc3RfZmlsdGVyKFNwaWNlVXNiQmFja2VuZENoYW5uZWwgKmNoLAo+ID4gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludCAqY291bnQpOwo+
+ID4gIHZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfcmV0dXJuX3dyaXRlX2RhdGEoU3BpY2VVc2JCYWNr
+ZW5kQ2hhbm5lbCAqY2gsIHZvaWQgKmRhdGEpOwo+ID4KPiA+ICsjZGVmaW5lIEJVU19OVU1CRVJf
+Rk9SX0VNVUxBVEVEX1VTQiAgICAgICAgIDI1NQo+Cj4gSXMgdGhlcmUgYSBzcGVjaWZpYyByZWFz
+b24gZm9yIGl0IHRvIGJlIDI1NSAobGlrZSBzdGFuZGFyZCk/IElmCj4geWVzLCBJJ2QgYWRkIGEg
+c21hbGwgY29tbWVudCBhYm92ZSBpdC4KPgo+ID4gKwo+ID4gK3R5cGVkZWYgc3RydWN0IFVzYkNy
+ZWF0ZURldmljZVBhcmFtZXRlcnMKPiA+ICt7Cj4gPiArICAgIEdFcnJvciAqZXJyb3I7Cj4gPiAr
+ICAgIHVpbnQzMl90ICAgIGFkZHJlc3M7Cj4gPiArICAgIHVpbnQzMl90ICAgIHJlc2VydmVkOwo+
+ID4gKyAgICB1bmlvbgo+ID4gKyAgICB7Cj4gPiArICAgICAgICBzdHJ1Y3QKPiA+ICsgICAgICAg
+IHsKPiA+ICsgICAgICAgICAgICBjb25zdCBjaGFyICpmaWxlbmFtZTsKPiA+ICsgICAgICAgICAg
+ICB1aW50MzJfdCAgIGRlbGV0ZV9vbl9lamVjdCAgOiAxOwo+ID4gKyAgICAgICAgfSBjcmVhdGVf
+Y2Q7Cj4gPiArICAgIH0gZGV2aWNlX3BhcmFtOwo+ID4gKwo+ID4gK30gVXNiQ3JlYXRlRGV2aWNl
+UGFyYW1ldGVyczsKPiA+ICsKPiA+ICsvKiBBUEkgcmVsYXRlZCB0byBlbXVsYXRlZCBkZXZpY2Vz
+ICovCj4gPiArZ2Jvb2xlYW4gc3BpY2VfdXNiX2JhY2tlbmRfY3JlYXRlX2RldmljZShTcGljZVVz
+YkJhY2tlbmQgKmJlLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgVXNiRW11bGF0ZWREZXZpY2VUeXBlIGRldl90eXBlLAo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgVXNiQ3JlYXRlRGV2aWNlUGFyYW1ldGVycyAqcGFyYW0p
+Owo+ID4gK2djaGFyICpzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfZGVzY3JpcHRpb24oU3BpY2VV
+c2JCYWNrZW5kRGV2aWNlICpkZXYsIGNvbnN0IGdjaGFyICpmb3JtYXQpOwo+ID4gK3ZvaWQgc3Bp
+Y2VfdXNiX2JhY2tlbmRfZGV2aWNlX2VqZWN0KFNwaWNlVXNiQmFja2VuZCAqYmUsIFNwaWNlVXNi
+QmFja2VuZERldmljZSAqZGV2aWNlKTsKPiA+ICt2b2lkIHNwaWNlX3VzYl9iYWNrZW5kX2Rldmlj
+ZV9yZXBvcnRfY2hhbmdlKFNwaWNlVXNiQmFja2VuZCAqYmUsIFNwaWNlVXNiQmFja2VuZERldmlj
+ZSAqZGV2aWNlKTsKPiA+ICsKPiA+ICBHX0VORF9ERUNMUwo+ID4KPiA+ICAjZW5kaWYKPiA+IGRp
+ZmYgLS1naXQgYS9zcmMvdXNiLWVtdWxhdGlvbi5oIGIvc3JjL3VzYi1lbXVsYXRpb24uaAo+ID4g
+bmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAuLjQ0NzMzNjEKPiA+IC0tLSAv
+ZGV2L251bGwKPiA+ICsrKyBiL3NyYy91c2ItZW11bGF0aW9uLmgKPiA+IEBAIC0wLDAgKzEsODgg
+QEAKPiA+ICsvKiAtKi0gTW9kZTogQzsgYy1iYXNpYy1vZmZzZXQ6IDQ7IGluZGVudC10YWJzLW1v
+ZGU6IG5pbCAtKi0gKi8KPiA+ICsvKgo+ID4gKyAgICBDb3B5cmlnaHQgKEMpIDIwMTkgUmVkIEhh
+dCwgSW5jLgo+ID4gKwo+ID4gKyAgICBSZWQgSGF0IEF1dGhvcnM6Cj4gPiArICAgIFl1cmkgQmVu
+ZGl0b3ZpY2g8eWJlbmRpdG9AcmVkaGF0LmNvbT4KPiA+ICsKPiA+ICsgICAgVGhpcyBsaWJyYXJ5
+IGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vcgo+ID4gKyAg
+ICBtb2RpZnkgaXQgdW5kZXIgdGhlIHRlcm1zIG9mIHRoZSBHTlUgTGVzc2VyIEdlbmVyYWwgUHVi
+bGljCj4gPiArICAgIExpY2Vuc2UgYXMgcHVibGlzaGVkIGJ5IHRoZSBGcmVlIFNvZnR3YXJlIEZv
+dW5kYXRpb247IGVpdGhlcgo+ID4gKyAgICB2ZXJzaW9uIDIuMSBvZiB0aGUgTGljZW5zZSwgb3Ig
+KGF0IHlvdXIgb3B0aW9uKSBhbnkgbGF0ZXIgdmVyc2lvbi4KPiA+ICsKPiA+ICsgICAgVGhpcyBs
+aWJyYXJ5IGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWws
+Cj4gPiArICAgIGJ1dCBXSVRIT1VUIEFOWSBXQVJSQU5UWTsgd2l0aG91dCBldmVuIHRoZSBpbXBs
+aWVkIHdhcnJhbnR5IG9mCj4gPiArICAgIE1FUkNIQU5UQUJJTElUWSBvciBGSVRORVNTIEZPUiBB
+IFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUgR05VCj4gPiArICAgIExlc3NlciBHZW5lcmFs
+IFB1YmxpYyBMaWNlbnNlIGZvciBtb3JlIGRldGFpbHMuCj4gPiArCj4gPiArICAgIFlvdSBzaG91
+bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBMZXNzZXIgR2VuZXJhbCBQdWJsaWMK
+PiA+ICsgICAgTGljZW5zZSBhbG9uZyB3aXRoIHRoaXMgbGlicmFyeTsgaWYgbm90LCBzZWUgPGh0
+dHA6Ly93d3cuZ251Lm9yZy9saWNlbnNlcy8+Lgo+ID4gKyovCj4gPiArCj4gPiArI2lmbmRlZiBf
+X1NQSUNFX1VTQl9FTVVMQVRJT05fSF9fCj4gPiArI2RlZmluZSBfX1NQSUNFX1VTQl9FTVVMQVRJ
+T05fSF9fCj4gPiArCj4gPiArI2luY2x1ZGUgInVzYnJlZGlycGFyc2VyLmgiCj4gPiArI2luY2x1
+ZGUgInVzYi1iYWNrZW5kLmgiCj4gPiArCj4gPiArdHlwZWRlZiBzdHJ1Y3QgX1NwaWNlVXNiRW11
+bGF0ZWREZXZpY2UgU3BpY2VVc2JFbXVsYXRlZERldmljZTsKPiA+ICt0eXBlZGVmIGludCAoKlNw
+aWNlVXNiRW11bGF0ZWREZXZpY2VDcmVhdGUpKFNwaWNlVXNiQmFja2VuZCAqYmUsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTcGljZVVzYkJhY2tlbmRE
+ZXZpY2UgKnBhcmVudCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIFVzYkNyZWF0ZURldmljZVBhcmFtZXRlcnMgKnBhcmFtLAo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU3BpY2VVc2JFbXVsYXRlZERldmljZSAq
+KmRldmljZSk7Cj4gPiArCj4gPiArLyoKPiA+ICsgICAgZnVuY3Rpb24gdGFibGUgZm9yIGVtdWxh
+dGVkIFVTQiBkZXZpY2UKPiA+ICsgICAgbXVzdCBiZSBmaXJzdCBtZW1iZXIgb2YgZGV2aWNlIHN0
+cnVjdHVyZQo+ID4gKyAgICBhbGwgZnVuY3Rpb25zIGFyZSBtYW5kYXRvcnkgZm9yIGltcGxlbWVu
+dGF0aW9uCj4gPiArKi8KPiA+ICt0eXBlZGVmIHN0cnVjdCBVc2JEZXZpY2VPcHMKPiA+ICt7Cj4g
+PiArICAgIGdib29sZWFuICgqZ2V0X2Rlc2NyaXB0b3IpKFNwaWNlVXNiRW11bGF0ZWREZXZpY2Ug
+KmRldmljZSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDhfdCB0eXBl
+LCB1aW50OF90IGluZGV4LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2b2lk
+ICoqYnVmZmVyLCB1aW50MTZfdCAqc2l6ZSk7Cj4gPiArICAgIGdjaGFyICogKCpnZXRfcHJvZHVj
+dF9kZXNjcmlwdGlvbikoU3BpY2VVc2JFbXVsYXRlZERldmljZSAqZGV2aWNlKTsKPiA+ICsgICAg
+dm9pZCAoKmF0dGFjaCkoU3BpY2VVc2JFbXVsYXRlZERldmljZSAqZGV2aWNlLCBzdHJ1Y3QgdXNi
+cmVkaXJwYXJzZXIgKnBhcnNlcik7Cj4gPiArICAgIHZvaWQgKCpyZXNldCkoU3BpY2VVc2JFbXVs
+YXRlZERldmljZSAqZGV2aWNlKTsKPiA+ICsgICAgLyoKPiA+ICsgICAgICAgIHByb2Nlc3Npbmcg
+aXMgc3luY2hyb25vdXMsIGRlZmF1bHQgPSBzdGFsbDoKPiA+ICsgICAgICAgIC0gcmV0dXJuIHN1
+Y2Nlc3Mgd2l0aG91dCBkYXRhOiBzZXQgc3RhdHVzIHRvIDAKPiA+ICsgICAgICAgIC0gcmV0dXJu
+IGVycm9yIC0gc2V0IHN0YXR1cyB0byBlcnJvcgo+ID4gKyAgICAgICAgLSByZXR1cm4gc3VjY2Vz
+cyB3aXRoIGRhdGEgLSBzZXQgc3RhdHVzIHRvIDAsCj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgc2V0IGJ1ZmZlciB0byBzb21lIGJ1ZmZlcgo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHNldCBsZW5ndGggdG8gb3V0IGxlbgo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRydW5jYXRpb24gaXMgYXV0b21hdGljCj4g
+PiArICAgICovCj4gPiArICAgIHZvaWQgKCpjb250cm9sX3JlcXVlc3QpKFNwaWNlVXNiRW11bGF0
+ZWREZXZpY2UgKmRldmljZSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDhf
+dCAqZGF0YSwgaW50IGRhdGFfbGVuLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+dHJ1Y3QgdXNiX3JlZGlyX2NvbnRyb2xfcGFja2V0X2hlYWRlciAqaCwKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgdm9pZCAqKmJ1ZmZlcik7Cj4gPiArICAgIC8qCj4gPiArICAgICAg
+ICBwcm9jZXNzaW5nIGlzIHN5bmNocm9ub3VzOgo+ID4gKyAgICAgICAgLSBzZXQgaC0+c3RhdHVz
+IHRvIHJlc3VsdGluZyBzdGF0dXMsIGRlZmF1bHQgPSBzdGFsbAo+ID4gKyAgICAqLwo+ID4gKyAg
+ICB2b2lkICgqYnVsa19vdXRfcmVxdWVzdCkoU3BpY2VVc2JFbXVsYXRlZERldmljZSAqZGV2aWNl
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDhfdCBlcCwgdWludDhfdCAq
+ZGF0YSwgaW50IGRhdGFfbGVuLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWlu
+dDhfdCAqc3RhdHVzKTsKPiA+ICsgICAgLyoKPiA+ICsgICAgICAgIGlmIHJldHVybnMgdHJ1ZSwg
+cHJvY2Vzc2luZyBpcyBhc3luY2hyb25vdXMKPiA+ICsgICAgICAgIG90aGVyd2lzZSBoZWFkZXIg
+Y29udGFpbnMgZXJyb3Igc3RhdHVzCj4gPiArICAgICovCj4gPiArICAgIGdib29sZWFuICgqYnVs
+a19pbl9yZXF1ZXN0KShTcGljZVVzYkVtdWxhdGVkRGV2aWNlICpkZXZpY2UsIHVpbnQ2NF90IGlk
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdXNiX3JlZGlyX2J1bGtf
+cGFja2V0X2hlYWRlciAqYnVsa19oZWFkZXIpOwo+ID4gKyAgICB2b2lkICgqY2FuY2VsX3JlcXVl
+c3QpKFNwaWNlVXNiRW11bGF0ZWREZXZpY2UgKmRldmljZSwgdWludDY0X3QgaWQpOwo+ID4gKyAg
+ICB2b2lkICgqZGV0YWNoKShTcGljZVVzYkVtdWxhdGVkRGV2aWNlICpkZXZpY2UpOwo+ID4gKyAg
+ICB2b2lkICgqZGVsZXRlKShTcGljZVVzYkVtdWxhdGVkRGV2aWNlICpkZXZpY2UpOwo+ID4gK30g
+VXNiRGV2aWNlT3BzOwo+Cj4gT2ssCj4KPiA+ICsKPiA+ICtzdGF0aWMgaW5saW5lIGNvbnN0IFVz
+YkRldmljZU9wcyAqZGV2aWNlX29wcyhTcGljZVVzYkVtdWxhdGVkRGV2aWNlICpkZXYpIHsKPiA+
+ICsgICAgcmV0dXJuIChjb25zdCBVc2JEZXZpY2VPcHMgKilkZXY7Cj4gPiArfQo+ID4gKwo+ID4g
+K3ZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfcmVnaXN0ZXJfZGV2aWNlX3R5cGUoU3BpY2VVc2JCYWNr
+ZW5kICpiZSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IFVzYkVtdWxhdGVkRGV2aWNlVHlwZSBkZXZfdHlwZSwKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIFNwaWNlVXNiRW11bGF0ZWREZXZpY2VDcmVhdGUgaW5p
+dF9wcm9jKTsKPiA+ICsvKiBzdXBwb3J0ZWQgZGV2aWNlIHR5cGVzICovCj4gPiArdm9pZCBzcGlj
+ZV91c2JfZGV2aWNlX3JlZ2lzdGVyX2NkKFNwaWNlVXNiQmFja2VuZCAqYmUpOwo+Cj4gU2hvdWxk
+IGJlIGFkZGVkIGluIGxhdGVyIHBhdGNoZXMuCj4KPiBDaGVlcnMsCj4gVmljdG9yCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxp
+bmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
