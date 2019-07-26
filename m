@@ -1,61 +1,42 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92CD175E25
-	for <lists+spice-devel@lfdr.de>; Fri, 26 Jul 2019 07:08:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0339275E8E
+	for <lists+spice-devel@lfdr.de>; Fri, 26 Jul 2019 07:42:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 75D9D6E881;
-	Fri, 26 Jul 2019 05:08:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E90F66E883;
+	Fri, 26 Jul 2019 05:42:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-io1-xd41.google.com (mail-io1-xd41.google.com
- [IPv6:2607:f8b0:4864:20::d41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A07B36E881
- for <spice-devel@lists.freedesktop.org>; Fri, 26 Jul 2019 05:08:20 +0000 (UTC)
-Received: by mail-io1-xd41.google.com with SMTP id q22so102180210iog.4
- for <spice-devel@lists.freedesktop.org>; Thu, 25 Jul 2019 22:08:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5tXBxbf2QtQPR8QOTcnWFNXjj1/UTfIdmc5I20564Dw=;
- b=JSgSU3h9lnXUmtKIuE0Y9l+mZMnVnudFmiL50qJ7bQZJmyXgHpjMaOE99TqRab5/ES
- 1Bp2HyHXisZSXHvsilMQhDjj0uDJ3t9sW+BxRHTeKQFgiqF4tNF+1HIv9OJhbXi3OkXz
- 56DAtl9mEzwdCay5QxLn724l9e+b6ZBftPKefx9cC301b53yIZWMIEvpaUjJDiv32mfY
- vOjv41m+h5CXKtupzzUEGTcutsJrlsdbCBkBLWDz/4a3qRr8rBG6x6g1xCnb8OFgT3ZQ
- 1YfHK8nc06cPudYpMifzsrN6P4NGqYri/Ce1mR5i/FzlHJtawVGsD+8OKRXxl5BQy3iM
- 3XAw==
-X-Gm-Message-State: APjAAAWpMeuiCEw/y4ctWFYi7BsxVMELqjADr8Aybi7DAMdzF/w6c4Ak
- RhiH4ehnDq4lAjC/a27X5agFeHErjPEcL40zjU2Yep/M
-X-Google-Smtp-Source: APXvYqxnxcer/GU9nk6hM2YEyrBEk3eezwHh8hJSj6H3SHBa3k+B8SP00o+mz9yvAtBJ6dcyJrQtfiJ0OqwmO5k8IiA=
-X-Received: by 2002:a6b:6611:: with SMTP id a17mr61504719ioc.179.1564117699957; 
- Thu, 25 Jul 2019 22:08:19 -0700 (PDT)
-MIME-Version: 1.0
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 30AD96E883
+ for <spice-devel@lists.freedesktop.org>; Fri, 26 Jul 2019 05:42:33 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 93844C18B2D2;
+ Fri, 26 Jul 2019 05:42:32 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.155])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3BE2867143;
+ Fri, 26 Jul 2019 05:42:32 +0000 (UTC)
+Date: Fri, 26 Jul 2019 07:42:31 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Yuri Benditovich <yuri.benditovich@daynix.com>
+Message-ID: <20190726054231.4szjec3karcuw6e3@wingsuit>
 References: <20190724105351.13753-1-yuri.benditovich@daynix.com>
- <20190724105351.13753-3-yuri.benditovich@daynix.com>
- <1528197574.2953680.1564045298943.JavaMail.zimbra@redhat.com>
- <CAOEp5OdB0hg4u=+Nk+2T8P=cdjdQ1n0m0GwkuhPxgLxk6rWiQg@mail.gmail.com>
- <1392106279.2977164.1564054045587.JavaMail.zimbra@redhat.com>
- <615004152.3040546.1564076765218.JavaMail.zimbra@redhat.com>
-In-Reply-To: <615004152.3040546.1564076765218.JavaMail.zimbra@redhat.com>
-From: Yuri Benditovich <yuri.benditovich@daynix.com>
-Date: Fri, 26 Jul 2019 08:08:07 +0300
-Message-ID: <CAOEp5Od0O_GGhnF9q_Ne1rt0-uJUX4LQyFM9Xap+6POqE8=f_Q@mail.gmail.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=5tXBxbf2QtQPR8QOTcnWFNXjj1/UTfIdmc5I20564Dw=;
- b=C8q20gSiEz9noHS2IAaNCDf0inaMYHlg8UrsF3rNYakf232MYlf9Pfr77I3oUfy7Xe
- KzkB7hfdBY/0j3E1ZkoaLH8TiRPWfTVSnX/ENF5/IegK1xBmHfcfhYd73gsqpzZN6Wc6
- 6RfxZ4ZBSdzua7NPPA/+GmPTeulvCHUfaWs8CJb8DuTz+lz0nOy+GZQB6I3KNERzYUYJ
- qPWsaNrZ5WNGg/HI8x9XSUIPLfe2vTHdgFtIqSNTw7ovnt+SFogpbDS3msz4cuTCpDU9
- YTtYJUG78U3c4UTYU60lbt26JqjwbaZ09lMv0PiK1mbFpy5B4ryZjxhe39Lw76IyZjqI
- YO4w==
-Subject: Re: [Spice-devel] [spice-gtk 2/9] usb-redir: device error signal
- without device object
+ <20190724105351.13753-4-yuri.benditovich@daynix.com>
+ <20190725103313.e2fsqkbyfzeeklfr@wingsuit>
+ <CAOEp5Od1NTSkHnYmVfibu01VzQ9uK9=tnODJocY3RnASPXkNtA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAOEp5Od1NTSkHnYmVfibu01VzQ9uK9=tnODJocY3RnASPXkNtA@mail.gmail.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.31]); Fri, 26 Jul 2019 05:42:32 +0000 (UTC)
+Subject: Re: [Spice-devel] [spice-gtk 3/9] usb-redir: Prepare for creation
+ of emulated CD drive
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,100 +50,209 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: Yan Vugenfirer <yan@daynix.com>,
  Spice List <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1133329563=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gVGh1LCBKdWwgMjUsIDIwMTkgYXQgODo0NiBQTSBGcmVkaWFubyBaaWdsaW8gPGZ6aWdsaW9A
-cmVkaGF0LmNvbT4gd3JvdGU6Cj4KPiA+ID4KPiA+ID4gT24gVGh1LCBKdWwgMjUsIDIwMTkgYXQg
-MTI6MDEgUE0gRnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+Cj4gPiA+IHdyb3Rl
-Ogo+ID4gPiA+Cj4gPiA+ID4gPgo+ID4gPiA+ID4gQWRkIGFiaWxpdHkgdG8gaW5kaWNhdGUgZXJy
-b3IgdG8gZXh0ZXJuYWwgbW9kdWxlcyB2aWEKPiA+ID4gPiA+ICdkZXZpY2UgZXJyb3InIHNpZ25h
-bCB3aGVuIHJlYWwgU3BpY2VVc2JEZXZpY2UgaXMgbm90IHBhc3NlZC4KPiA+ID4gPiA+IFRoaXMg
-aXMgbmVlZGVkIHRvIGluZGljYXRlIGVycm9yIGR1cmluZyBjcmVhdGlvbiBvZiBlbXVsYXRlZAo+
-ID4gPiA+ID4gZGV2aWNlLCB3aGVuIHRoZSBkZXZpY2UgaXMgbm90IGNyZWF0ZWQgeWV0LiBGb3Ig
-dGhhdCB3ZQo+ID4gPiA+ID4gYWxsb2NhdGUgdGVtcG9yYXJ5IFNwaWNlVXNiRGV2aWNlIHN0cnVj
-dHVyZSB3aXRoIGJhY2tlbmQKPiA+ID4gPiA+IGRldmljZSBmaWVsZHMgc2V0IHRvIE5VTEwgYW5k
-IHVzZSBpdCBmb3IgaW5kaWNhdGlvbi4gRGV2aWNlCj4gPiA+ID4gPiBkZXNjcmlwdGlvbiBmb3Ig
-c3VjaCBkZXZpY2Ugd2lsbCBiZSAnVVNCIFJlZGlyZWN0aW9uJy4KPiA+ID4gPiA+IFVucmVmZXJl
-bmNpbmcgb2Ygc3VjaCBkZXZpY2Ugd2lsbCBiZSAnbm8gb3BlcmF0aW9uJy4KPiA+ID4gPiA+Cj4g
-PiA+ID4gPiBTaWduZWQtb2ZmLWJ5OiBZdXJpIEJlbmRpdG92aWNoIDx5dXJpLmJlbmRpdG92aWNo
-QGRheW5peC5jb20+Cj4gPiA+ID4gPiAtLS0KPiA+ID4gPiA+ICBzcmMvdXNiLWJhY2tlbmQuYyAg
-ICAgICAgfCAgMyArKysKPiA+ID4gPiA+ICBzcmMvdXNiLWRldmljZS1tYW5hZ2VyLmMgfCAxNCAr
-KysrKysrKysrKystLQo+ID4gPiA+ID4gIDIgZmlsZXMgY2hhbmdlZCwgMTUgaW5zZXJ0aW9ucygr
-KSwgMiBkZWxldGlvbnMoLSkKPiA+ID4gPiA+Cj4gPiA+ID4gPiBkaWZmIC0tZ2l0IGEvc3JjL3Vz
-Yi1iYWNrZW5kLmMgYi9zcmMvdXNiLWJhY2tlbmQuYwo+ID4gPiA+ID4gaW5kZXggMGJmMmVjYy4u
-YzE3OTE4OCAxMDA2NDQKPiA+ID4gPiA+IC0tLSBhL3NyYy91c2ItYmFja2VuZC5jCj4gPiA+ID4g
-PiArKysgYi9zcmMvdXNiLWJhY2tlbmQuYwo+ID4gPiA+ID4gQEAgLTUyOCw2ICs1MjgsOSBAQCBT
-cGljZVVzYkJhY2tlbmREZXZpY2UKPiA+ID4gPiA+ICpzcGljZV91c2JfYmFja2VuZF9kZXZpY2Vf
-cmVmKFNwaWNlVXNiQmFja2VuZERldmljZSAqZGV2KQo+ID4gPiA+ID4KPiA+ID4gPiA+ICB2b2lk
-IHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV91bnJlZihTcGljZVVzYkJhY2tlbmREZXZpY2UgKmRl
-dikKPiA+ID4gPiA+ICB7Cj4gPiA+ID4gPiArICAgIGlmICghZGV2KSB7Cj4gPiA+ID4gPiArICAg
-ICAgICByZXR1cm47Cj4gPiA+ID4gPiArICAgIH0KPiA+ID4gPiA+ICAgICAgTE9VRF9ERUJVRygi
-JXMgPj4gJXAoJWQpIiwgX19GVU5DVElPTl9fLCBkZXYsIGRldi0+cmVmX2NvdW50KTsKPiA+ID4g
-PiA+ICAgICAgaWYgKGdfYXRvbWljX2ludF9kZWNfYW5kX3Rlc3QoJmRldi0+cmVmX2NvdW50KSkg
-ewo+ID4gPiA+ID4gICAgICAgICAgaWYgKGRldi0+bGlidXNiX2RldmljZSkgewo+ID4gPiA+ID4g
-ZGlmZiAtLWdpdCBhL3NyYy91c2ItZGV2aWNlLW1hbmFnZXIuYyBiL3NyYy91c2ItZGV2aWNlLW1h
-bmFnZXIuYwo+ID4gPiA+ID4gaW5kZXggYTUzMGJlOS4uMDk2MWQxNiAxMDA2NDQKPiA+ID4gPiA+
-IC0tLSBhL3NyYy91c2ItZGV2aWNlLW1hbmFnZXIuYwo+ID4gPiA+ID4gKysrIGIvc3JjL3VzYi1k
-ZXZpY2UtbWFuYWdlci5jCj4gPiA+ID4gPiBAQCAtOTM1LDEwICs5MzUsMTYgQEAgc3RhdGljIHZv
-aWQKPiA+ID4gPiA+IHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9jaGVja19yZWRpcl9vbl9jb25u
-ZWN0KAo+ID4gPiA+ID4gIHZvaWQgc3BpY2VfdXNiX2RldmljZV9tYW5hZ2VyX2RldmljZV9lcnJv
-cigKPiA+ID4gPiA+ICAgICAgU3BpY2VVc2JEZXZpY2VNYW5hZ2VyICpzZWxmLCBTcGljZVVzYkRl
-dmljZSAqZGV2aWNlLCBHRXJyb3IgKmVycikKPiA+ID4gPiA+ICB7Cj4gPiA+ID4gPiArICAgIFNw
-aWNlVXNiRGV2aWNlICpkZXYgPSBkZXZpY2U7Cj4gPiA+ID4KPiA+ID4gPiAiZGV2IiBhbmQgImRl
-dmljZSIgZG8gbm90IHNvdW5kIGdyZWF0LiBNYXliZSAidGVtcF9kZXYiIG9yICJmYWtlX2RldiIg
-Pwo+ID4gPiA+Cj4gPiA+ID4gPiAgICAgIGdfcmV0dXJuX2lmX2ZhaWwoU1BJQ0VfSVNfVVNCX0RF
-VklDRV9NQU5BR0VSKHNlbGYpKTsKPiA+ID4gPiA+IC0gICAgZ19yZXR1cm5faWZfZmFpbChkZXZp
-Y2UgIT0gTlVMTCk7Cj4gPiA+ID4gPiAtCj4gPiA+ID4gPiArICAgIGlmIChkZXZpY2UgPT0gTlVM
-TCkgewo+ID4gPiA+ID4gKyAgICAgICAgZGV2ID0gZ19uZXcwKFNwaWNlVXNiRGV2aWNlLCAxKTsK
-PiA+ID4gPiA+ICsgICAgICAgIGRldi0+cmVmID0gMTsKPiA+ID4gPiA+ICsgICAgfQo+ID4gPiA+
-ID4gICAgICBnX3NpZ25hbF9lbWl0KHNlbGYsIHNpZ25hbHNbREVWSUNFX0VSUk9SXSwgMCwgZGV2
-aWNlLCBlcnIpOwo+ID4gPiA+Cj4gPiA+ID4gSWYgZGV2aWNlIHdhcyBpbml0aWFsbHkgTlVMTCBh
-dCBmdW5jdGlvbiBjYWxsIHRoaXMgaXMgc3RpbGwgTlVMTC4KPiA+ID4KPiA+ID4gU29ycnksIHR5
-cG8uCj4gPiA+Cj4gPiA+ID4KPiA+ID4gPiA+ICsgICAgaWYgKGRldmljZSA9PSBOVUxMKSB7Cj4g
-PiA+ID4gPiArICAgICAgICBzcGljZV91c2JfZGV2aWNlX3VucmVmKGRldik7Cj4gPiA+ID4KPiA+
-ID4gPiBJZiBkZXZpY2Ugd2FzIE5VTEwgeW91IGFsbG9jYXRlIGEgbmV3IGVtcHR5IFNwaWNlVXNi
-RGV2aWNlIGFuZAo+ID4gPiA+IHRoZW4gZnJlZSBpdC4gTm90IHN1cmUgaXMgd2hhdCB5b3Ugd2Fu
-dCB0byBkby4KPiA+ID4gPgo+ID4gPiA+ID4gKyAgICB9Cj4gPgo+ID4gSSB3b3VsZCB0aGVuIHJl
-d3JpdGUgYXMKPiA+Cj4gPiB7Cj4gPiAgICAgU3BpY2VVc2JEZXZpY2UgKmR1bW15X2RldmljZSA9
-IE5VTEw7Cj4gPiAgICAgZ19yZXR1cm5faWZfZmFpbChTUElDRV9JU19VU0JfREVWSUNFX01BTkFH
-RVIoc2VsZikpOwo+ID4KPiA+ICAgICBpZiAoZGV2aWNlID09IE5VTEwpIHsKPiA+ICAgICAgICAg
-ZHVtbXlfZGV2aWNlID0gZ19uZXcwKFNwaWNlVXNiRGV2aWNlLCAxKTsKPiA+ICAgICAgICAgZHVt
-bXlfZGV2aWNlLT5yZWYgPSAxOwo+ID4gICAgICAgICBkZXZpY2UgPSBkdW1teV9kZXZpY2U7Cj4g
-PiAgICAgfQo+ID4gICAgIGdfc2lnbmFsX2VtaXQoc2VsZiwgc2lnbmFsc1tERVZJQ0VfRVJST1Jd
-LCAwLCBkZXZpY2UsIGVycik7Cj4gPiAgICAgaWYgKGR1bW15X2RldmljZSAhPSBOVUxMKSB7Cj4g
-PiAgICAgICAgIHNwaWNlX3VzYl9kZXZpY2VfdW5yZWYoZHVtbXlfZGV2aWNlKTsKPiA+ICAgICB9
-Cj4gPiB9Cj4gPgo+ID4gPiA+ID4gIH0KPiA+ID4gPiA+ICAjZW5kaWYKPiA+ID4gPiA+Cj4gPiA+
-ID4gPiBAQCAtMTQ0MCw2ICsxNDQ2LDEwIEBAIGdjaGFyCj4gPiA+ID4gPiAqc3BpY2VfdXNiX2Rl
-dmljZV9nZXRfZGVzY3JpcHRpb24oU3BpY2VVc2JEZXZpY2UKPiA+ID4gPiA+ICpkZXZpY2UsIGNv
-bnN0IGdjaGFyICpmb3IKPiA+ID4gPiA+Cj4gPiA+ID4gPiAgICAgIGdfcmV0dXJuX3ZhbF9pZl9m
-YWlsKGRldmljZSAhPSBOVUxMLCBOVUxMKTsKPiA+ID4gPiA+Cj4gPiA+ID4gPiArICAgIGlmICgh
-ZGV2aWNlLT5iZGV2KSB7Cj4gPiA+ID4gPiArICAgICAgICByZXR1cm4gZ19zdHJkdXAoXygiVVNC
-IHJlZGlyZWN0aW9uIikpOwo+ID4gPiA+ID4gKyAgICB9Cj4gPiA+ID4gPiArCj4gPiA+ID4gPiAg
-ICAgIGJ1cyAgICAgPSBzcGljZV91c2JfZGV2aWNlX2dldF9idXNudW0oZGV2aWNlKTsKPiA+ID4g
-PiA+ICAgICAgYWRkcmVzcyA9IHNwaWNlX3VzYl9kZXZpY2VfZ2V0X2RldmFkZHIoZGV2aWNlKTsK
-PiA+ID4gPiA+ICAgICAgdmlkICAgICA9IHNwaWNlX3VzYl9kZXZpY2VfZ2V0X3ZpZChkZXZpY2Up
-Owo+ID4gPiA+Cj4KPiBPaywgbm93IEkgaGFkIHVuZGVyc3RhbmQgdGhpcyBwYXRjaC4gVGhpcyBp
-cyByZW1vdmluZyB0aGUKPiBhc3N1bXB0aW9uIHRoYXQgYmRldiBpcyBuZXZlciBOVUxMLgo+IE9u
-bHkgdG8gc3VwcG9ydCBjYWxsaW5nIHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9kZXZpY2VfZXJy
-b3IKPiB3aXRoIGEgTlVMTCBkZXZpY2UuCj4gSSB3b3VsZCBzYXkgbmFjayB0byB0aGlzIHBhdGNo
-IGFuZCBmaW5kIGFub3RoZXIgc29sdXRpb24uCj4gTWF5YmUgYWRkaW5nIGEgImRldmljZV9jcmVh
-dGlvbl9lcnJvciIgc2lnbmFsIHdpdGggImVycm9yIgo+IGJ1dCBubyBkZXZpY2UuCgpJTU8sIGNy
-ZWF0aW5nIHNwZWNpYWwgZW50aXR5IGZvciBlYWNoIGNhc2UgdGhhdCBpcyBsaXR0bGUgZGlmZmVy
-ZW50CmZyb20gZXhpc3Rpbmcgb25lcwppcyBkaXNyZXNwZWN0IHRvIE9jY2FtJ3MgcHJpbmNpcGxl
-IChhbmQgc2V2ZXJhbCBzaW1pbGFyIG9uZXMpLiBJbiBjb250ZXh0IG9mCidkZXZpY2UgZXJyb3Ig
-c2lnbmFsJyB0aGUgJ2RldmljZScgaXMgc29tZXRoaW5nIHRoYXQgY2FuCnJlZmVyZW5jZWQvZGVy
-ZWZlcmVuY2VkIGFuZAp3aGljaCBuYW1lIGNhbiBiZSByZXRyaWV2ZWQuCgo+IFRoaXMgaXMgbm90
-IGEgZGV2aWNlIGVycm9yLCBpdCdzIGEgZGV2aWNlIG1hbmFnZXIgZXJyb3IuCgpXZSBjYW4gdmll
-dyBkZXZpY2UgbWFuYWdlciBhcyBraW5kIG9mIGRldmljZSwgdGhlbiB0aGVyZSBpcyBjb25mbGlj
-dC4KCj4gVGhpcyBpcyBjYXVzZWQgYnkgd2FudGluZyB0byB1c2UgYW4gaW50ZXJmYWNlIChwcm9w
-ZXJ0aWVzKQo+IHRoYXQgZG9lcyBub3QgYWxsb3cgdG8gcmV0dXJuIGFuIGVycm9yIGluc3RlYWQu
-CgpBcyBhbnkgc29sdXRpb24sIHRoaXMgb25lIGhhcyBwcm9zIGFuZCBjb25zLiBGcm9tIG15IHBl
-cnNvbmFsIHBvaW50IG9mIHZpZXcsCml0IGhhcyBzaWduaWZpY2FudCBwcm8gKGxvdyBjb3N0IG9m
-IGltcGxlbWVudGF0aW9uKSBhbmQgZG9lcyBub3QgaGF2ZQphbnkgc2lnbmlmaWNhbnQgY29uLgoK
-PiBGcmVkaWFubwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2Ut
-ZGV2ZWw=
+
+--===============1133329563==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="jwqffrqulnfiinrh"
+Content-Disposition: inline
+
+
+--jwqffrqulnfiinrh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jul 25, 2019 at 06:59:39PM +0300, Yuri Benditovich wrote:
+> On Thu, Jul 25, 2019 at 1:33 PM Victor Toso <victortoso@redhat.com> wrote:
+> >
+> > On Wed, Jul 24, 2019 at 01:53:45PM +0300, Yuri Benditovich wrote:
+> > > Added command-line option for shared CD devices and respective
+> > > property in usb-device-manager.
+> > >
+> > > Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
+> > > ---
+> > >  src/spice-option.c       | 15 +++++++++++++++
+> > >  src/usb-device-manager.c | 33 +++++++++++++++++++++++++++++++++
+> > >  2 files changed, 48 insertions(+)
+> > >
+> > > diff --git a/src/spice-option.c b/src/spice-option.c
+> > > index c2b059e..4fbca9f 100644
+> > > --- a/src/spice-option.c
+> > > +++ b/src/spice-option.c
+> > > @@ -32,6 +32,7 @@ static char *smartcard_db =3D NULL;
+> > >  static char *smartcard_certificates =3D NULL;
+> > >  static char *usbredir_auto_redirect_filter =3D NULL;
+> > >  static char *usbredir_redirect_on_connect =3D NULL;
+> > > +static gchar **cd_share_files =3D NULL;
+> > >  static gboolean smartcard =3D FALSE;
+> > >  static gboolean disable_audio =3D FALSE;
+> > >  static gboolean disable_usbredir =3D FALSE;
+> > > @@ -183,6 +184,8 @@ GOptionGroup* spice_get_option_group(void)
+> > >            N_("Filter selecting USB devices to be auto-redirected whe=
+n plugged in"), N_("<filter-string>") },
+> > >          { "spice-usbredir-redirect-on-connect", '\0', 0, G_OPTION_AR=
+G_STRING, &usbredir_redirect_on_connect,
+> > >            N_("Filter selecting USB devices to redirect on connect"),=
+ N_("<filter-string>") },
+> > > +        { "spice-share-cd", '\0', 0, G_OPTION_ARG_STRING_ARRAY, &cd_=
+share_files,
+> > > +          N_("Name of ISO file or CD/DVD device to share"), N_("<fil=
+ename> (repeat allowed)") },
+> > >          { "spice-cache-size", '\0', 0, G_OPTION_ARG_INT, &cache_size,
+> > >            N_("Image cache size (deprecated)"), N_("<bytes>") },
+> > >          { "spice-glz-window-size", '\0', 0, G_OPTION_ARG_INT, &glz_w=
+indow_size,
+> > > @@ -272,6 +275,18 @@ void spice_set_session_option(SpiceSession *sess=
+ion)
+> > >              g_object_set(m, "redirect-on-connect",
+> > >                           usbredir_redirect_on_connect, NULL);
+> > >      }
+> > > +    if (cd_share_files) {
+> > > +        SpiceUsbDeviceManager *m =3D spice_usb_device_manager_get(se=
+ssion, NULL);
+> >
+> > Please check for errors as well, I patched the other two calls
+> > for this
+>=20
+> I do not exactly understand the comment. Can you explain?
+
+spice_usb_device_manager_get() can fail, for instance if usbredir
+is not enabled at compile time. You can pass a GError** instead
+of NULL to warn user about the fact that its cd-rom will not
+show up in the guest for whatever reason it might be.
+
+
+Just switch to the local get_usb_device_manager_for_option()
+added in the last commit
+
+https://gitlab.freedesktop.org/spice/spice-gtk/commit/1ab015b369f34169747e0=
+cbfb1e0b6a8c99e9141
+
+Cheers,
+
+>=20
+> >
+> > > +        if (m) {
+> > > +            gchar **name =3D cd_share_files;
+> > > +            while (name && *name) {
+> > > +                g_object_set(m, "share-cd", *name, NULL);
+> > > +                name++;
+> > > +            }
+> > > +        }
+> > > +        g_strfreev(cd_share_files);
+> > > +        cd_share_files =3D NULL;
+> > > +    }
+> > >      if (disable_usbredir)
+> > >          g_object_set(session, "enable-usbredir", FALSE, NULL);
+> > >      if (disable_audio)
+> > > diff --git a/src/usb-device-manager.c b/src/usb-device-manager.c
+> > > index 0961d16..b11bb15 100644
+> > > --- a/src/usb-device-manager.c
+> > > +++ b/src/usb-device-manager.c
+> > > @@ -75,6 +75,7 @@ enum {
+> > >      PROP_AUTO_CONNECT_FILTER,
+> > >      PROP_REDIRECT_ON_CONNECT,
+> > >      PROP_FREE_CHANNELS,
+> > > +    PROP_SHARE_CD
+> > >  };
+> > >
+> > >  enum
+> > > @@ -433,6 +434,26 @@ static void spice_usb_device_manager_set_propert=
+y(GObject       *gobject,
+> > >          priv->redirect_on_connect =3D g_strdup(filter);
+> > >          break;
+> > >      }
+> > > +    case PROP_SHARE_CD:
+> > > +    {
+> > > +#ifdef USE_USBREDIR
+> > > +        UsbCreateDeviceParameters param =3D { 0 };
+> > > +        const gchar *name =3D g_value_get_string(value);
+> > > +        /* the string is temporary, no need to keep it */
+> > > +        SPICE_DEBUG("share_cd set to %s", name);
+> > > +        if (name[0] =3D=3D '!') {
+> > > +            name++;
+> > > +            param.device_param.create_cd.delete_on_eject =3D 1;
+> > > +        }
+> > > +        param.device_param.create_cd.filename =3D name;
+> > > +        if (!spice_usb_backend_create_device(priv->context, USB_DEV_=
+TYPE_CD, &param)) {
+> > > +            g_warning(param.error->message);
+> > > +            spice_usb_device_manager_device_error(self, NULL, param.=
+error);
+> > > +            g_error_free(param.error);
+> > > +        }
+> > > +#endif
+> > > +        break;
+> > > +    }
+> > >      default:
+> > >          G_OBJECT_WARN_INVALID_PROPERTY_ID(gobject, prop_id, pspec);
+> > >          break;
+> > > @@ -523,6 +544,18 @@ static void spice_usb_device_manager_class_init(=
+SpiceUsbDeviceManagerClass *klas
+> > >      g_object_class_install_property(gobject_class, PROP_REDIRECT_ON_=
+CONNECT,
+> > >                                      pspec);
+> > >
+> > > +    /**
+> > > +    * SpiceUsbDeviceManager:share-cd:
+> > > +    *
+> > > +    * Set a string specifying a filename (ISO) or physical CD/DVD de=
+vice
+> > > +    * to share via USB after a Spice connection has been established.
+> > > +    *
+> > > +    */
+> > > +    pspec =3D g_param_spec_string("share-cd", "Share ISO file or dev=
+ice as CD",
+> > > +        "File or device name to share", NULL,
+> > > +        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+> > > +    g_object_class_install_property(gobject_class, PROP_SHARE_CD, ps=
+pec);
+> > > +
+> > >      /**
+> > >       * SpiceUsbDeviceManager:free-channels:
+> > >       *
+> > > --
+> > > 2.17.1
+> > >
+> > > _______________________________________________
+> > > Spice-devel mailing list
+> > > Spice-devel@lists.freedesktop.org
+> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--jwqffrqulnfiinrh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl06kscACgkQl9kSPeN6
+SE8UkhAAmfybxKOLSbpIjMxfHhmqIjzaqJJMTzgEgb9whgWWZySgm6pmFTy+/iBr
+HkkwzfZIkE0R84t8eZchgqmwjQAlIhfAliaJnatcN5Ci9sGVK1t3PWL7vH9edkpO
+v7/VFoSwOY+DywJp2IljGI6XAxpC5mLNMU6oKl8qm+rg6VJAqLFz4jJA0JXlP6L0
+uK+ptbVppiKzCX4iB5k5NIVejYr4MeUXPgtwEOxmcKJofXEj5zcmzkYDbU1bNERM
+UdYHdmtnxp5egVU3y3NLwMpzhU0iuSFzXZesvWnUdAH9+t6WPh2ul1LaG/5AZudC
+nHC9iDt7VOgXnRDZqyikXRNlgUutXmrqsXtYJbtzWCjPOdDNjxdaVuY1Uyipeo4t
+NgiEMq/PAdHIg4+VpqqROd5VGyupo4ZFfH0529lZZx4ac3RWI/uiTi+33GlzUO/H
+E85rGlUXbWm2yQnCPqLqr2FYluIYuRGwqXp4BRzZ4D4IfN7ufDKHaXKV3X0hPGBv
+UthYNXbrVywche735H+MbBTcyAsMOYvCLD5UkAt/ICSSEgZSigxgwn1e/pjexexJ
+VQjm7IYDT9EiVyA+Wga9OrljY+gsND8W4fBfky8EIL1man+kUqXDKU+7SL6qk6Lk
+q5ISNsg+Uy8A/lZZc1xmKXzUqFAj4SiZaTjoBltsJNOh98371VQ=
+=+h6Y
+-----END PGP SIGNATURE-----
+
+--jwqffrqulnfiinrh--
+
+--===============1133329563==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1133329563==--
