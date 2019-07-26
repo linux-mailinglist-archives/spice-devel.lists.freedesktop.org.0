@@ -2,47 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B1A976EAF
-	for <lists+spice-devel@lfdr.de>; Fri, 26 Jul 2019 18:14:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E26176F00
+	for <lists+spice-devel@lfdr.de>; Fri, 26 Jul 2019 18:26:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D33D76EDC5;
-	Fri, 26 Jul 2019 16:14:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B485B6EDC7;
+	Fri, 26 Jul 2019 16:26:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 130916EDC5
- for <spice-devel@lists.freedesktop.org>; Fri, 26 Jul 2019 16:14:37 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id A0B9D81F13;
- Fri, 26 Jul 2019 16:14:36 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4DDB360C69;
- Fri, 26 Jul 2019 16:14:36 +0000 (UTC)
-Date: Fri, 26 Jul 2019 18:14:35 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Yuri Benditovich <yuri.benditovich@daynix.com>
-Message-ID: <20190726161435.hasfx5qynsujclfq@wingsuit>
-References: <20190724105351.13753-1-yuri.benditovich@daynix.com>
- <1528197574.2953680.1564045298943.JavaMail.zimbra@redhat.com>
- <CAOEp5OdB0hg4u=+Nk+2T8P=cdjdQ1n0m0GwkuhPxgLxk6rWiQg@mail.gmail.com>
- <1392106279.2977164.1564054045587.JavaMail.zimbra@redhat.com>
- <615004152.3040546.1564076765218.JavaMail.zimbra@redhat.com>
- <CAOEp5Od0O_GGhnF9q_Ne1rt0-uJUX4LQyFM9Xap+6POqE8=f_Q@mail.gmail.com>
- <20190726070933.wrer35srddo7z2cg@wingsuit>
- <CAOEp5OdY1vOTM0dwJOdVh+f7ijg++siw6i30XJVh_B0O6p7SrQ@mail.gmail.com>
- <1977790209.3105030.1564139347711.JavaMail.zimbra@redhat.com>
- <CAOEp5OcNY7+OcAponSgd+p6OCoyxCWBGXF=JH71ADAgQ2y4v-A@mail.gmail.com>
+Received: from mail-io1-xd44.google.com (mail-io1-xd44.google.com
+ [IPv6:2607:f8b0:4864:20::d44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 462906EDC7
+ for <spice-devel@lists.freedesktop.org>; Fri, 26 Jul 2019 16:26:16 +0000 (UTC)
+Received: by mail-io1-xd44.google.com with SMTP id z3so106050660iog.0
+ for <spice-devel@lists.freedesktop.org>; Fri, 26 Jul 2019 09:26:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zjhwBMCwb/HTqhABuxvHNTqJ6yJcVp/uoLVyu8dStZg=;
+ b=VEtOx/sI7kZXPHuEtJ4vzckl9qo6fqOKEWEMm/qBX0mtwqpjceggSh7BdUXOwgelba
+ f/UiLBLGcU//DpnHR8Zwdf44zx/lOw20rttYvZ0ceS5RNkwGFJRoAPPL0chu4XIOUfrr
+ xhwVX2h1hqoXaMeGL/ViyDLkLJSK00e+BQd8AwBKZ8HHkyWb51WvZpNqnRiwUoYuaPIp
+ HQ7kHHkdb9sRIqnSimDeGU6ffVDiX1U/IuSfQkHNP+Xiyk6NRO+8Lu3ELDgqte5/bLXv
+ Pa0Xqj4PRfP+1jfziXYyRjOMe9x7oLQG5cHmIXUPUNZzwW2WB++lZQ0fcvmbJSmpiPFF
+ 8vPQ==
+X-Gm-Message-State: APjAAAWedM6lxgqP1abdKxPMGa0qFkT42fTCrS+C7g4sEZU/Mp9wpL30
+ ZmT9f1Xjtp5cJRXaKKI4k0ij6P7N5xhEaopFBdI=
+X-Google-Smtp-Source: APXvYqxuv2iSSXQzX6kBAFkYL1CZ8NiNB/C8kcjwIrLhuBQE/U25JBL2+UU+/exNvQ7ihmk7+ACHx3ubI6uKcNBb3gw=
+X-Received: by 2002:a02:c550:: with SMTP id g16mr96213199jaj.49.1564158375521; 
+ Fri, 26 Jul 2019 09:26:15 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAOEp5OcNY7+OcAponSgd+p6OCoyxCWBGXF=JH71ADAgQ2y4v-A@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.25]); Fri, 26 Jul 2019 16:14:36 +0000 (UTC)
-Subject: Re: [Spice-devel] [spice-gtk 2/9] usb-redir: device error signal
- without device object
+References: <20190724105351.13753-1-yuri.benditovich@daynix.com>
+ <20190724105351.13753-10-yuri.benditovich@daynix.com>
+ <1289830693.3135464.1564147025076.JavaMail.zimbra@redhat.com>
+ <CAOEp5OeNhuh7rEVGwD5FdYvtg8QFia8MBMi_uMyDUQeQ65eGJQ@mail.gmail.com>
+ <492201422.3164441.1564156300927.JavaMail.zimbra@redhat.com>
+In-Reply-To: <492201422.3164441.1564156300927.JavaMail.zimbra@redhat.com>
+From: Yuri Benditovich <yuri.benditovich@daynix.com>
+Date: Fri, 26 Jul 2019 19:26:01 +0300
+Message-ID: <CAOEp5Oe7Zf0wmfuC9i-5F_eHMmuG4w_XXyEusiLRguhvubktHQ@mail.gmail.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=zjhwBMCwb/HTqhABuxvHNTqJ6yJcVp/uoLVyu8dStZg=;
+ b=jfhUQ+5IgJMo0/uO3mwv8J1odtRrtodKZIHPzdDmSAatBTsWa5hhF3KRiiwXxmJ1Fp
+ ad1wT6Z/IHvogR6CQZmLWA8Y8eplHyPduynvswVM2OOXg3PQqSTXkZtDAsn/K1Q7be8n
+ t1IK+aD/OXqqR003r0NJJO9RVKLYdzIsRc5adylbq3750L9pYCRCZIORzomGiA5rGqkc
+ VmR8OP2YPUr+kShb87zTQ+MIrHE9xCyhz+lCS4H66xBp35+zeuA2dOsUGxtUPcks0F5i
+ ygWyZyUJ8YpO4A7S4G87NkgZ4i51d+Xf4Ww7rdHFzgENWABWWJSEYQ073i2AXiVFuKr+
+ Z98w==
+Subject: Re: [Spice-devel] [spice-gtk 9/9] usb-redir: enable redirection of
+ emulated CD drive
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,193 +68,59 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: Yan Vugenfirer <yan@daynix.com>,
  Spice List <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1991638556=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1991638556==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="4rgs6i3fd2qffdvv"
-Content-Disposition: inline
-
-
---4rgs6i3fd2qffdvv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Fri, Jul 26, 2019 at 06:30:51PM +0300, Yuri Benditovich wrote:
-> On Fri, Jul 26, 2019 at 2:09 PM Frediano Ziglio <fziglio@redhat.com> wrot=
-e:
-> >
-> > >
-> > > On Fri, Jul 26, 2019 at 10:09 AM Victor Toso <victortoso@redhat.com> =
-wrote:
-> > > >
-> > > > Hi,
-> > > >
-> > > > On Fri, Jul 26, 2019 at 08:08:07AM +0300, Yuri Benditovich wrote:
-> > > > > On Thu, Jul 25, 2019 at 8:46 PM Frediano Ziglio <fziglio@redhat.c=
-om>
-> > > > > wrote:
-> > > > > > > > > > @@ -1440,6 +1446,10 @@ gchar
-> > > > > > > > > > *spice_usb_device_get_description(SpiceUsbDevice
-> > > > > > > > > > *device, const gchar *for
-> > > > > > > > > >
-> > > > > > > > > >      g_return_val_if_fail(device !=3D NULL, NULL);
-> > > > > > > > > >
-> > > > > > > > > > +    if (!device->bdev) {
-> > > > > > > > > > +        return g_strdup(_("USB redirection"));
-> > > > > > > > > > +    }
-> > > > > > > > > > +
-> > > > > > > > > >      bus     =3D spice_usb_device_get_busnum(device);
-> > > > > > > > > >      address =3D spice_usb_device_get_devaddr(device);
-> > > > > > > > > >      vid     =3D spice_usb_device_get_vid(device);
-> > > > > > > > >
-> > > > > >
-> > > > > > Ok, now I had understand this patch. This is removing the
-> > > > > > assumption that bdev is never NULL.
-> > > > > > Only to support calling spice_usb_device_manager_device_error
-> > > > > > with a NULL device.
-> > > > > > I would say nack to this patch and find another solution.
-> > > > > > Maybe adding a "device_creation_error" signal with "error"
-> > > > > > but no device.
-> > > > >
-> > > > > IMO, creating special entity for each case that is little
-> > > > > different from existing ones is disrespect to Occam's principle
-> > > > > (and several similar ones).
-> > > >
-> > > > Heh, nice try. The difference here, IMO, would be that you have a
-> > > > clear objective: give an error when device creation fails. You
-> > > > want to do it by emit an error signal in a fake, empty device
-> > > > which is quite the workaround and I wouldn't call it a simpler
-> > > > alternative.
-> > > >
-> > > > > In context of 'device error signal' the 'device' is something
-> > > > > that can referenced/dereferenced and which name can be
-> > > > > retrieved.
-> > > > > > This is not a device error, it's a device manager error.
-> > > > >
-> > > > > We can view device manager as kind of device, then there is confl=
-ict.
-> > > >
-> > > > That upsets me a little. When I started learning the usb stack in
-> > > > spice-gtk to give some though on the design proposals, I saw lots
-> > > > of potential to the usb-backend work. What you proposes here goes
-> > > > in opposite direction of a clear definition of what each
-> > > > component of this does.
-> > > >
-> > > > So, I'd say also in reply to your previous argument around not
-> > > > defining an API. We can define an API an still change it before
-> > > > the next release, that's ok. It is also ok to deprecate it in the
-> > > > next release if we feel we did it wrong. But let's do it in the
-> > > > right way, trying to achieve something easy to understand and
-> > > > maintain.
-> > >
-> > > The point is that even we define the API (in old preview version of
-> > > cd-sharing it was)
-> > > the error that can happen during creation of device can not be propag=
-ated up.
-> > > The spice-session does not have such ability (if I'm not mistaken).
-> > > So it can only issue debug warning. But this is always possible also
-> > > without current patch.
-> > > usb-device-manager is able to send the error up to the application,
-> > > this is a reason why I wanted to use this method.
-> > >
-> >
-> > Why an API like:
-> >
-> > gboolean
-> > spice_usb_device_manager_create_shared_cd(SpiceUsbDeviceManager *manage=
-r,
-> >                                           const char *share_cd, GError =
-**err);
-> >
-> > cannot work and propagate the error?
->=20
-> Tell me if I am mistaken.
-> Propagate (for me) means report the error to the application
-> where it can be processed, as it is done with device_error.
-
-Yes, let's say, remote-viewer's UI has somewhere "Redirect CD"
-which opens a file chooser so you can browse and find that ISO
-you want. If, for some reason redirect cd fails, an error should
-pop up somewhere. Ok.
-
-> If spice-session-something calls
-> spice_usb_device_manager_create_shared_cd and receive error, it
-> does not have a way to raise this indication to the viever,
-> need to invent it.
-
-Yes..
-
-> So, IMO, even with API it is preferred way to use device_error
-> with fake device.  BTW, the remote-viewer ignore the device
-> parameter and uses only error->message
-
-=2E. and yes. I understand what you mean but for a second, let's
-focus on the documentation of "device-error"
-
-    "The #SpiceUsbDeviceManager::device-error signal is emitted
-     whenever an error happens which causes a device to no longer
-     be available to the guest."
-
-It was redirect but then, not anymore. Not the case here, thus a
-workaround.
-
-So, doing what you propose is easier but gets a bit confusing
-with existing code and its purposes. I'd either have a new way to
-cover both cases (likely deprecating device-error for instance)
-or something specific to this emulation code, e.g:
-emulation-error, and yes, add that to all spice clients that are
-interested in cd-room.
-
-That's how I see this at the moment.
-
-> > > > > > This is caused by wanting to use an interface (properties)
-> > > > > > that does not allow to return an error instead.
-> > > > >
-> > > > > As any solution, this one has pros and cons. From my personal
-> > > > > point of view, it has significant pro (low cost of
-> > > > > implementation) and does not have any significant con.
-> > > >
-> > > > Cheers,
-> > > > Victor
-> > >
-
---4rgs6i3fd2qffdvv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl07JusACgkQl9kSPeN6
-SE/u8BAAr5NM8cZIKgbBiqaboMyYfCt6vrdSIAEjqzAg6jYkJucR+i6jPxwX92HZ
-mguxEeranJkusCGUQGd/6R2XJTGiBT+akujaXja3duVd5Ss/iaORkGX38Ot3kPkj
-EaByeeJx06simzTy5QOv3NoWZ+MfiQmIpUN/aygd10l8vdRC3Nia1oAKq3ZCa1/m
-/b1HBhhYRVdOKBmk2MKJA7myIOhB/Kgd77sczfH/1H8FnSBAJ2ppTwaJdW1vF0M1
-a75hMmCpz27X+TKmICpb3Lg9hSXPHSXIyK8wuchgQU11IuM5XrOIRbsL4zWC8KZU
-GaHLN0ztjAqfwMg/Z641vyJNd6Dgz9zKKko1VF2i3lhA+wweZ81zsg7bT1Ocm2im
-dgumKkwhpwrElIOc87ihr8zgmFZRxLam9ya8GKpSFdEedZXDwUKcxCNyLuIhfo9E
-fNUfsHQJltyP9E4ZFBiI/Qwdg9DADMQ1amUI445qxpu1LuffV39Cxm7wGj+X/HzV
-SAHM7ZiNqTnwZU7RLGrIIb4AQFgmTPlqK57zBN3vOeJ0mezSrCi6kjobMjxY4lJn
-baB0tjPAbYy6kkCCDrpSa7aYgPTRkvyeTxBS0Sl8nZscH+riWhBL6X5xCAijRFiC
-KqBW1iFMtQEPtsq5kAftMNks+GGauZ8MUv05/1V0jJKetJCzUhk=
-=1gzz
------END PGP SIGNATURE-----
-
---4rgs6i3fd2qffdvv--
-
---===============1991638556==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1991638556==--
+T24gRnJpLCBKdWwgMjYsIDIwMTkgYXQgNjo1MSBQTSBGcmVkaWFubyBaaWdsaW8gPGZ6aWdsaW9A
+cmVkaGF0LmNvbT4gd3JvdGU6Cj4KPiA+IE9uIEZyaSwgSnVsIDI2LCAyMDE5IGF0IDQ6MTcgUE0g
+RnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+IHdyb3RlOgo+ID4gPgo+ID4gPiA+
+Cj4gPiA+ID4gUmVnaXN0ZXIgY29uc3RydWN0b3IgZm9yIGVtdWxhdGVkIENEIGRldmljZS4gTm93
+IGNyZWF0aW9uCj4gPiA+ID4gb2YgQ0QgZGV2aWNlcyBhdCBzdGFydHVwIGlzIHBvc3NpYmxlLgo+
+ID4gPiA+Cj4gPiA+ID4gU2lnbmVkLW9mZi1ieTogWXVyaSBCZW5kaXRvdmljaCA8eXVyaS5iZW5k
+aXRvdmljaEBkYXluaXguY29tPgo+ID4gPiA+IC0tLQo+ID4gPiA+ICBzcmMvbWVzb24uYnVpbGQg
+ICB8IDYgKysrKysrCj4gPiA+ID4gIHNyYy91c2ItYmFja2VuZC5jIHwgMSArCj4gPiA+ID4gIDIg
+ZmlsZXMgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspCj4gPiA+ID4KPiA+ID4gPiBkaWZmIC0tZ2l0
+IGEvc3JjL21lc29uLmJ1aWxkIGIvc3JjL21lc29uLmJ1aWxkCj4gPiA+ID4gaW5kZXggNDlmZWM1
+Mi4uOTQ0YjA4MyAxMDA2NDQKPiA+ID4gPiAtLS0gYS9zcmMvbWVzb24uYnVpbGQKPiA+ID4gPiAr
+KysgYi9zcmMvbWVzb24uYnVpbGQKPiA+ID4gPiBAQCAtMTI0LDYgKzEyNCwxMiBAQCBzcGljZV9j
+bGllbnRfZ2xpYl9zb3VyY2VzID0gWwo+ID4gPiA+ICAgICd1c2ItYmFja2VuZC5jJywKPiA+ID4g
+PiAgICAndXNiLWVtdWxhdGlvbi5oJywKPiA+ID4gPiAgICAndXNiLWJhY2tlbmQuaCcsCj4gPiA+
+ID4gKyAgJ3VzYi1kZXZpY2UtY2QuYycsCj4gPiA+ID4gKyAgJ2NkLXNjc2kuYycsCj4gPiA+ID4g
+KyAgJ2NkLXNjc2kuaCcsCj4gPiA+ID4gKyAgJ2NkLXNjc2ktZGV2LXBhcmFtcy5oJywKPiA+ID4g
+PiArICAnY2QtdXNiLWJ1bGstbXNkLmMnLAo+ID4gPiA+ICsgICdjZC11c2ItYnVsay1tc2QuaCcs
+Cj4gPiA+ID4gICAgJ3ZtY3N0cmVhbS5jJywKPiA+ID4gPiAgICAndm1jc3RyZWFtLmgnLAo+ID4g
+PiA+ICBdCj4gPiA+Cj4gPiA+IEkgd291bGQgc3BsaXQgdGhpcyBwYXJ0IG9mIHRoZSBwYXRjaCBh
+bmQgYWRkIHRoZSBmaWxlcyB0byB0aGUKPiA+ID4gYnVpbGQgYXMgc29vbiBhcyB0aGV5IGFyZSBh
+ZGRlZCBzbyB0byBjaGVjayB0aGF0IGF0IGxlYXN0IHRoZXkKPiA+ID4gY29tcGlsZXIsIGV2ZW4g
+aWYgdGhleSBhcmUgbm90IHVzZWQuCj4gPgo+ID4gTm8gcHJvYmxlbQo+ID4KPiA+ID4KPiA+ID4g
+PiBkaWZmIC0tZ2l0IGEvc3JjL3VzYi1iYWNrZW5kLmMgYi9zcmMvdXNiLWJhY2tlbmQuYwo+ID4g
+PiA+IGluZGV4IDAyMzY5ZDIuLjc2MGRjMTYgMTAwNjQ0Cj4gPiA+ID4gLS0tIGEvc3JjL3VzYi1i
+YWNrZW5kLmMKPiA+ID4gPiArKysgYi9zcmMvdXNiLWJhY2tlbmQuYwo+ID4gPiA+IEBAIC00MzIs
+NiArNDMyLDcgQEAgU3BpY2VVc2JCYWNrZW5kICpzcGljZV91c2JfYmFja2VuZF9uZXcoR0Vycm9y
+Cj4gPiA+ID4gKiplcnJvcikKPiA+ID4gPiAgI2VuZGlmCj4gPiA+ID4gICNlbmRpZgo+ID4gPiA+
+ICAgICAgICAgIGJlLT5vd25fZGV2aWNlc19tYXNrID0gMzsgLyogZXhjbHVkZSBhZGRyZXNzZXMg
+MCBhbmQgMSAqLwo+ID4gPiA+ICsgICAgICAgIHNwaWNlX3VzYl9kZXZpY2VfcmVnaXN0ZXJfY2Qo
+YmUpOwo+ID4gPiA+ICAgICAgfQo+ID4gPiA+ICAgICAgU1BJQ0VfREVCVUcoIiVzIDw8IiwgX19G
+VU5DVElPTl9fKTsKPiA+ID4gPiAgICAgIHJldHVybiBiZTsKPiA+ID4KPiA+ID4gVGhpcyBpcyBh
+ZGRpbmcgYSBjaXJjdWxhciBkZXBlbmRlbmN5Lgo+ID4gPiB1c2ItYmFja2VuZCB3aWxsIGRlcGVu
+ZCBvbiB1c2ItZGV2aWNlLWNkIHdoaWNoIGRlcGVuZHMgb24gdXNiLWJhY2tlbmQuCj4gPgo+ID4g
+SSBhbSBub3QgYXdhcmUgb2YgZGVwcmVjYXRpb24gb2YgY2lyY3VsYXIgZGVwZW5kZW5jeSBiZXR3
+ZWVuIEMgZmlsZXMuCj4gPiBGb3IgZXhhbXBsZSwgbGFzdCB0aW1lIEkgd2FzIHJlcXVlc3RlZCBi
+eSBWaWN0b3IgdG8gY3JlYXRlIHN1Y2gKPiA+IGRlcGVuZGVuY3kgYmV0d2VlbiB1c2ItcmVkaXIt
+Y2hhbm5lbCBhbmQgdXNiLWJhY2tlbmQuCj4gPgo+Cj4gTm90IHNwZWNpZmljYWxseSByZWZlcnJp
+bmcgdG8gbGluayBpc3N1ZSwgSSdtIHRhbGtpbmcgYWJvdXQgRGVzaWduIFBhdHRlcm5zLAo+IERl
+cGVuZGVuY3kgSW52ZXJzaW9uIFByaW5jaXBsZSBhbmQgc3VjaCBzdHVmZi4KPiBJZiB5b3UgbGlr
+ZSBzcGFnaGV0dGkgY29kZSBjaXJjdWxhciBkZXBlbmRlbmN5IGlzIHBlcmZlY3RseSBmaW5lLgoK
+dXNiLWRldmljZS1tYW5hZ2VyIGFuZCB1c2ItcmVkaXItY2hhbm5lbCBoYXZlIHN1Y2ggZGVwZW5k
+ZW5jeSAtIHRoaXMgaXMgZmluZS4KdXNiLWJhY2tlbmQgYW5kIGNkLWVtdWxhdGlvbiBoYXZlIHN1
+Y2ggZGVvZW5kZW5jeSAtIHRoaXMgZmFpbHMgdGhlIGRlc2lnbi4KSU1PLCBzb21lYm9keSBuZWVk
+IHRvIGNvbmNlbnRyYXRlIGEgbWluaW1hbCBrbm93bGVkZ2UgYWJvdXQgZW11bGF0ZWQKZGV2aWNl
+cyBhbmQgdGhlIGJlc3QgY2FuZGlkYXRlIGlzIHRoZSBiYWNrZW5kLgpBbmQgSU1PLCBhbGwgb3Ro
+ZXIgZG8gbm90IG5lZWQgdGhpcyBrbm93bGVkZ2UuCkFuZCBJTU8sIHN1Y2ggbGltaXRhdGlvbiBv
+ZiBrbm93bGVkZ2UgaXMgdGhlIHdheSB0byBwcmV2ZW50IGNyZWF0aW9uCm9mIHNwYWdoZXR0aSBj
+b2RlLgoKCj4gRnJlZGlhbm8KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVk
+ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3NwaWNlLWRldmVs
