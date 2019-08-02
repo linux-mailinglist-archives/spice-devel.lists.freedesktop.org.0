@@ -1,40 +1,40 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BD657F1DD
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 11:43:00 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BF6AA7F205
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 11:44:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA1556ED86;
-	Fri,  2 Aug 2019 09:42:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 365F16ED8F;
+	Fri,  2 Aug 2019 09:44:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A12966ED86
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 09:42:57 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3A35C6ED8F
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 09:44:25 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 4E23BC049E10
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 09:42:57 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 08C0630FB8CE
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 09:44:24 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.128])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EED5819C79;
- Fri,  2 Aug 2019 09:42:56 +0000 (UTC)
-Date: Fri, 2 Aug 2019 11:42:56 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AA1805C207;
+ Fri,  2 Aug 2019 09:44:23 +0000 (UTC)
+Date: Fri, 2 Aug 2019 11:44:22 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190802094256.falxsbop7ffi64pn@wingsuit>
+Message-ID: <20190802094422.mjo6xj3erhx7vyij@wingsuit>
 References: <20190530142254.28937-1-fziglio@redhat.com>
- <20190530142254.28937-5-fziglio@redhat.com>
+ <20190530142254.28937-6-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190530142254.28937-5-fziglio@redhat.com>
+In-Reply-To: <20190530142254.28937-6-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Fri, 02 Aug 2019 09:42:57 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server 05/13] red-worker: Remove
- warning
+ (mx1.redhat.com [10.5.110.47]); Fri, 02 Aug 2019 09:44:24 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 06/13] red-channel: Inline
+ red_channel_pipes_create_batch
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,55 +47,90 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1855301819=="
+Content-Type: multipart/mixed; boundary="===============0074674259=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============1855301819==
+--===============0074674259==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="oq6dmfddp7egqtwz"
+	protocol="application/pgp-signature"; boundary="xqr5wa6bztnqrjbk"
 Content-Disposition: inline
 
 
---oq6dmfddp7egqtwz
+--xqr5wa6bztnqrjbk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Thu, May 30, 2019 at 03:22:46PM +0100, Frediano Ziglio wrote:
-> In some configuration _GNU_SOURCE is defined by the compiler
-> and defining again cause a warning.
-> Do not define again to avoid the warning.
-
-Not a problem with the patch but we is it the case we should fix
-some troubling configurations too?
-
-For the patch,
-Acked-by: Victor Toso <victortoso@redhat.com>
-
+On Thu, May 30, 2019 at 03:22:47PM +0100, Frediano Ziglio wrote:
+> The function is called only by red_channel_pipes_new_add.
 >=20
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+Acked-by: Victor Toso <victortoso@redhat.com>
 > ---
->  server/red-worker.c | 2 ++
->  1 file changed, 2 insertions(+)
+>  server/red-channel.c | 20 ++++----------------
+>  1 file changed, 4 insertions(+), 16 deletions(-)
 >=20
-> diff --git a/server/red-worker.c b/server/red-worker.c
-> index d64c26e83..b3335a53a 100644
-> --- a/server/red-worker.c
-> +++ b/server/red-worker.c
-> @@ -17,7 +17,9 @@
->  */
->  #include <config.h>
+> diff --git a/server/red-channel.c b/server/red-channel.c
+> index 82e522395..4872d2807 100644
+> --- a/server/red-channel.c
+> +++ b/server/red-channel.c
+> @@ -598,32 +598,27 @@ static bool red_channel_no_item_being_sent(RedChann=
+el *channel)
+>   * TODO - inline? macro? right now this is the simplest from code amount
+>   */
 > =20
-> +#ifndef _GNU_SOURCE
->  #define _GNU_SOURCE
-> +#endif
->  #include <stdio.h>
->  #include <stdarg.h>
->  #include <stdlib.h>
+> -typedef void (*rcc_item_t)(RedChannelClient *rcc, RedPipeItem *item);
+> -
+>  /**
+> - * red_channel_pipes_create_batch:
+> + * red_channel_pipes_new_add:
+>   * @channel: a channel
+>   * @creator: a callback to create pipe item (not null)
+>   * @data: the data to pass to the creator
+> - * @pipe_add: a callback to add non-null pipe items (not null)
+>   *
+>   * Returns: the number of added items
+>   **/
+> -static int red_channel_pipes_create_batch(RedChannel *channel,
+> -                                new_pipe_item_t creator, void *data,
+> -                                rcc_item_t pipe_add)
+> +int red_channel_pipes_new_add(RedChannel *channel,
+> +                              new_pipe_item_t creator, void *data)
+>  {
+>      RedChannelClient *rcc;
+>      RedPipeItem *item;
+>      int num =3D 0, n =3D 0;
+> =20
+>      spice_assert(creator !=3D NULL);
+> -    spice_assert(pipe_add !=3D NULL);
+> =20
+>      FOREACH_CLIENT(channel, rcc) {
+>          item =3D (*creator)(rcc, data, num++);
+>          if (item) {
+> -            (*pipe_add)(rcc, item);
+> +            red_channel_client_pipe_add(rcc, item);
+>              n++;
+>          }
+>      }
+> @@ -631,13 +626,6 @@ static int red_channel_pipes_create_batch(RedChannel=
+ *channel,
+>      return n;
+>  }
+> =20
+> -int red_channel_pipes_new_add(RedChannel *channel,
+> -                              new_pipe_item_t creator, void *data)
+> -{
+> -    return red_channel_pipes_create_batch(channel, creator, data,
+> -                                          red_channel_client_pipe_add);
+> -}
+> -
+>  uint32_t red_channel_max_pipe_size(RedChannel *channel)
+>  {
+>      RedChannelClient *rcc;
 > --=20
 > 2.20.1
 >=20
@@ -104,29 +139,29 @@ Acked-by: Victor Toso <victortoso@redhat.com>
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---oq6dmfddp7egqtwz
+--xqr5wa6bztnqrjbk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EBaAACgkQl9kSPeN6
-SE/0Mw/6AxkvYBfJZu6C9agoNcVsj+yWqUi6jDTfsTVHZLgpFWPrE/ZBoMqzwVQc
-FAAyGa1GZ9SjjTrViTBwuZsd7DnGJsrHTubf7JS7FdJo+bkpsxzBcnaOLA1WWpiq
-LISXq8l2Pk2nvXoe09hsdP5N2fqzoUpRNIX7RkSqbXdBDw82g48MACGUvy4F03SL
-rAmRH7Ob3hHzaz4iJtig+f9ye3K/J7OeE3yK2OrKi2mrdFaB+mYdwprEpxtjAtOR
-7lVkk6V5yVuMcMlnQcsOczBpcK7e7K+DyXIbFsrdSb/8K0XAoXiwv/XcL5UIaC3m
-pgTHfELCcW4r9UTXxsoNWaYrHLRmmdTXbeWcklqIVtvwQs3E7gqMs1HHL4Zup76z
-BHQ6aLrKWNv8mZYVXbkgC/vAnJ7Dgk/qUJYYr0+FEpqRctEg8p9ElgjYuvajnU0Y
-9AwGS4G5nBUxFbrO5QftsUibVd0iGlWN7k37LphgSUDp8C9WeGL0S0uH2TTkKZtT
-5n/lRZphZ9edtW9UHROvfqRh33YC7qcbmMiDLn9o379Fv7PXBa25YyanGm1AneWB
-z9YolxKwlPWRBlRRDt+3Xz16cSbAhwoHyYnYb/9aL0EqqJ3Qt1AIt/0WUY2utoLw
-AyB4eOcXiAYRyDNoVQap8RphNY0m0RI2iWzLmCmKQ7j1hNeA+DM=
-=TvKh
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EBfYACgkQl9kSPeN6
+SE9TQxAAq669yiSWaD0f8kJshyWzQNviaT83rpQBEvjWMXCcf0SV22XNuDHB4F3m
+e/K4zrwjn+BKZfMqrXvdF2gz48t24GKNdltHVtdS11sJtz7FPAaW3La36pMP/ARz
+rwGcRQxGYyasincSB5II3FacXkCH8foLNJuF0JO0n31U2R6EDmCCcXK5osp1p/oc
+GrWNGQn1+CA2KDeHuMLW3sBXrWCJJjXPhsITXOVzEPaQKeAxzHckkmg+HNXFl92y
+dbkYYtbgyn6N2dYzxVLNZ66T6H+tvFlFJ2yVCPfRtnm0ssWeFvSJi8eV4guSntUd
+XiaHxQN5F1Odn8gqikU8oEoo81Oaj6k2EBDJOAhaMz94NN/HVwKbcDktvd9r52Se
+mNomP/QnRLe9ncAf1cD/wyWS4p70FxPyfYpd66hFMEHn/5ipJIt0j5aWf+2g8pfU
+sr3CbJcXDQ+iaMRKTuvHNoNPba4VWeBizD2MYlUbJzvu5P8gOQvBBwCX7gsxm48x
+ev4m5R3Z0Z1hOdKUobTyVSsbGh7+Xe/SnTfykjp9dyn5eJ39PQKbSuXKgjVe3w0g
+iH1OFq3A9MoNDtCEtA0mdZ9Awh4t7UO3JDx1SCqJas6m4Z9ibtS9aZbz/HepFZvK
+UEwQUh1PHB95oBfknalR7CvpiKC55NstLJzRDZNMTvt7GFWVT1c=
+=YaKl
 -----END PGP SIGNATURE-----
 
---oq6dmfddp7egqtwz--
+--xqr5wa6bztnqrjbk--
 
---===============1855301819==
+--===============0074674259==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -136,4 +171,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============1855301819==--
+--===============0074674259==--
