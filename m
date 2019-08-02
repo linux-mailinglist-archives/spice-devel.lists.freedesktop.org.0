@@ -2,39 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98E687F4DE
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:19:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99CA47F4ED
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:21:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E5A266EDA8;
-	Fri,  2 Aug 2019 10:19:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1FD736EDC5;
+	Fri,  2 Aug 2019 10:21:23 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3FEAC6EDA8
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:19:02 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7560C6EDA8
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:21:22 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id DE3515AFD9
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:19:01 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 0E92F4ACDF
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:21:22 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.128])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 883B71001959;
- Fri,  2 Aug 2019 10:19:01 +0000 (UTC)
-Date: Fri, 2 Aug 2019 12:19:00 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AD79119722;
+ Fri,  2 Aug 2019 10:21:21 +0000 (UTC)
+Date: Fri, 2 Aug 2019 12:21:20 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190802101900.ueewh4bhe5lxqrmn@wingsuit>
+Message-ID: <20190802102120.wbvwlnqgrruru7wq@wingsuit>
 References: <20190530142254.28937-1-fziglio@redhat.com>
- <20190530142254.28937-12-fziglio@redhat.com>
+ <20190530142254.28937-13-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190530142254.28937-12-fziglio@redhat.com>
+In-Reply-To: <20190530142254.28937-13-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.39]); Fri, 02 Aug 2019 10:19:01 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server 12/13] red-channel-client:
- Reduce indentation of some code
+ (mx1.redhat.com [10.5.110.38]); Fri, 02 Aug 2019 10:21:22 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 13/13] red-channel-client:
+ Add some comment on the flush code
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,111 +47,63 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0157760652=="
+Content-Type: multipart/mixed; boundary="===============0286474026=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0157760652==
+--===============0286474026==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="yr73orioe7qq4ysj"
+	protocol="application/pgp-signature"; boundary="wzkqdmoxybocdnyz"
 Content-Disposition: inline
 
 
---yr73orioe7qq4ysj
+--wzkqdmoxybocdnyz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Thu, May 30, 2019 at 03:22:53PM +0100, Frediano Ziglio wrote:
-> Just a style change, return earlier to avoid some indentation.
->=20
+On Thu, May 30, 2019 at 03:22:54PM +0100, Frediano Ziglio wrote:
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-Looks fine,
-Acked-by: Victor Toso <victortoso@redhat.com>
-
 > ---
->  server/red-channel-client.c | 37 +++++++++++++++----------------------
->  1 file changed, 15 insertions(+), 22 deletions(-)
+>  server/red-channel-client.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >=20
 > diff --git a/server/red-channel-client.c b/server/red-channel-client.c
-> index 4978f3567..3fd51d78b 100644
+> index 3fd51d78b..337733d5d 100644
 > --- a/server/red-channel-client.c
 > +++ b/server/red-channel-client.c
-> @@ -690,25 +690,21 @@ static void red_channel_client_ping_timer(void *opa=
-que)
->      red_channel_client_cancel_ping_timer(rcc);
-> =20
->  #ifdef HAVE_LINUX_SOCKIOS_H /* SIOCOUTQ is a Linux only ioctl on sockets=
-=2E */
-> -    {
-> -        int so_unsent_size =3D 0;
-> +    int so_unsent_size =3D 0;
-> =20
-> -        /* retrieving the occupied size of the socket's tcp snd buffer (=
-unacked + unsent) */
-> -        if (ioctl(rcc->priv->stream->socket, SIOCOUTQ, &so_unsent_size) =
-=3D=3D -1) {
-> -            red_channel_warning(red_channel_client_get_channel(rcc),
-> -                                "ioctl(SIOCOUTQ) failed, %s", strerror(e=
-rrno));
-> -        }
-> -        if (so_unsent_size > 0) {
-> -            /* tcp snd buffer is still occupied. rescheduling ping */
-> -            red_channel_client_start_ping_timer(rcc, PING_TEST_IDLE_NET_=
-TIMEOUT_MS);
-> -        } else {
-> -            red_channel_client_push_ping(rcc);
-> -        }
-> +    /* retrieving the occupied size of the socket's tcp snd buffer (unac=
-ked + unsent) */
-> +    if (ioctl(rcc->priv->stream->socket, SIOCOUTQ, &so_unsent_size) =3D=
-=3D -1) {
-> +        red_channel_warning(red_channel_client_get_channel(rcc),
-> +                            "ioctl(SIOCOUTQ) failed, %s", strerror(errno=
-));
+> @@ -1319,6 +1319,9 @@ void red_channel_client_push(RedChannelClient *rcc)
+>      /* prepare_pipe_add() will reenable WRITE events when the rcc->priv-=
+>pipe is empty
+>       * red_channel_client_ack_zero_messages_window() will reenable WRITE=
+ events
+>       * if we were waiting for acks to be received
+> +     * If we don't remove WRITE if we are waiting for ack we will be keep
+> +     * notified that we can write and we then exit (see pipe_item_get) a=
+s we
+> +     * are waiting for the ack consuming CPU in a tight loop
+>       */
+>      if ((red_channel_client_no_item_being_sent(rcc) && g_queue_is_empty(=
+&rcc->priv->pipe)) ||
+>          red_channel_client_waiting_for_ack(rcc)) {
+> @@ -1326,6 +1329,9 @@ void red_channel_client_push(RedChannelClient *rcc)
+>          /* channel has no pending data to send so now we can flush data =
+in
+>           * order to avoid data stall into buffers in case of manual
+>           * flushing
+> +         * We need to flush also in case of ack as it is possible
+> +         * that for a long train of small messages the message that would
+> +         * cause the client to send the ack is still in the queue
+
+Acked-by: Victor Toso <victortoso@redhat.com>,
+let me know if something is missing in this series
+
+>           */
+>          red_stream_flush(rcc->priv->stream);
 >      }
-> -#else /* ifdef HAVE_LINUX_SOCKIOS_H */
-> +    if (so_unsent_size > 0) {
-> +        /* tcp snd buffer is still occupied. rescheduling ping */
-> +        red_channel_client_start_ping_timer(rcc, PING_TEST_IDLE_NET_TIME=
-OUT_MS);
-> +        return;
-> +    }
-> +#endif /* ifdef HAVE_LINUX_SOCKIOS_H */
->      /* More portable alternative code path (less accurate but avoids bog=
-us ioctls)*/
->      red_channel_client_push_ping(rcc);
-> -#endif /* ifdef HAVE_LINUX_SOCKIOS_H */
->  }
-> =20
->  static inline int red_channel_client_waiting_for_ack(RedChannelClient *r=
-cc)
-> @@ -1140,16 +1136,13 @@ static int red_peer_receive(RedStream *stream, ui=
-nt8_t *buf, uint32_t size)
->                  break;
->              } else if (errno =3D=3D EINTR) {
->                  continue;
-> -            } else if (errno =3D=3D EPIPE) {
-> -                return -1;
-> -            } else {
-> +            } else if (errno !=3D EPIPE) {
->                  g_warning("%s", strerror(errno));
-> -                return -1;
->              }
-> -        } else {
-> -            size -=3D now;
-> -            pos +=3D now;
-> +            return -1;
->          }
-> +        size -=3D now;
-> +        pos +=3D now;
->      }
->      return pos - buf;
->  }
 > --=20
 > 2.20.1
 >=20
@@ -160,29 +112,29 @@ nt8_t *buf, uint32_t size)
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---yr73orioe7qq4ysj
+--wzkqdmoxybocdnyz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EDhQACgkQl9kSPeN6
-SE+z0BAAjYdvi7sliYjVLm5mk2OYAsuyJNwbkUWE/dDPXJ81U33tUHfGbG3T1ZDK
-OPJxL3bIEWChZsoickNiQvd+b5SjwCjL4f/fg8yUohXrsU73n1Gqza0ATOZ8LpmY
-SK9JmVxiA5+cOujyYPDW6Pj2O/kzrpqsvZDRWfRCwGO4sOEApLDqM5Q7btRY8+ex
-pIx1BT3xnQBNZ1qPFRl1/ZIoy4mEqchAjXOjPaRiUbJXm23gfB7bFh9dyLdjCc8y
-e6DONT0HpVJXeEfLr5KiqgbtPrjSRXGQbpNiVvPAJQ0V3SySHRNgS0Aew6ukw23u
-VtST6pXjmHhM+CMYe0ysOFBDd0rL1NDizpSouYrztrcvcziamgONQt8FH7186T3s
-6/IwEZxgfyjvUXypMIybBE2+SynGq4GQeDN6TihwidoaIhfI9nwTL9eJseuk018r
-pzOe68O/1+aa1CiNgTzo82uuYo8xuCiAMwu8hV/oBc6zf1z2yC49NbqTTyvvFkkR
-6zvHvdxWSW0gJR6LwL0VQvUiGf0D4i5QPPQ7IQNxNiqnTlQktK5qbpFY48ORC4Rq
-BEjouOOuisFNKlhTB/JqWWfuReCo/qw7UAJy8Lbt7BBQ1PsEfXq6eSI0cjChHf3U
-ywmZhfy9QALkQu1J46/PUN2v+BNlaeyiyBl5/O7Fe7g9F9Yvu0U=
-=xWqi
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EDqAACgkQl9kSPeN6
+SE/Iag//Ux3NX9rEWP4OwJS5I8WYFknIIWl1fVqn5vT5XsVY3fFrJ4DgYfD3OvOM
+o6q3uC6jldxYUl5Rcahk/iZrYk1fb/SHkbaqzFMGHjvQuBKMwhSKujcGo4slkIw9
+fqfY/603vunTMGMUvQslJXXywHQ3abyiJuyv3rbW9/u+zkfo/2P4JVDh+fEIh+m1
+VDBwyYuu+HWzC1/ePP05VHvYVQR0cqaZgrRzTrPBOPnpaQvHgD2LKdKLwHDQGSMT
+VlvTS45txsogMBQMBiJ092uocD3rF1raCioSSf/8tjKPo6hv4ihemVbhxMd3fZ0+
+G+G1bjsv5CsoXBn99WMTRYzm/5kTTMPGEBKh0uU/bPNyHJ8xEP5HWH/ojFPUtdJZ
+Lh12kttnd9F0SP8otEQnEdCWo5Xj5Y2fEARZWuYC8OzO9LxafhJqBEP6+cemNNv9
+rluOGSRgoja/n/ZLk6GjLlLfTOZODzYepxYdul6EAWynSxhEYRY7kQ2CQNJjGErf
+lFIO6DfcJ7PVPl6myDbqqp9waEZX9U0obAoXP23+zFjS3LTr7qJYFwC5knjttpEd
+IoMCd6o3RPmqz0WoidQMpAnmO0ww5HXI3gFTZzd6e/9jXcwRj9hLW8mKimSAvqs/
+QTxogxLHtIefUMcObRrZTLqNOwcf2umzjogkwZ2tUvp+3s3ubcA=
+=2AXT
 -----END PGP SIGNATURE-----
 
---yr73orioe7qq4ysj--
+--wzkqdmoxybocdnyz--
 
---===============0157760652==
+--===============0286474026==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -192,4 +144,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0157760652==--
+--===============0286474026==--
