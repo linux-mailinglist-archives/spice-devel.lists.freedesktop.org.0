@@ -2,39 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99CA47F4ED
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:21:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51A187F575
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:49:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1FD736EDC5;
-	Fri,  2 Aug 2019 10:21:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7055D6EDC0;
+	Fri,  2 Aug 2019 10:49:23 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7560C6EDA8
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:21:22 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1EB126EDC0
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:49:22 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 0E92F4ACDF
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:21:22 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 92BCF81F19
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:49:21 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.128])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AD79119722;
- Fri,  2 Aug 2019 10:21:21 +0000 (UTC)
-Date: Fri, 2 Aug 2019 12:21:20 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 40AFA5D712;
+ Fri,  2 Aug 2019 10:49:21 +0000 (UTC)
+Date: Fri, 2 Aug 2019 12:49:20 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190802102120.wbvwlnqgrruru7wq@wingsuit>
-References: <20190530142254.28937-1-fziglio@redhat.com>
- <20190530142254.28937-13-fziglio@redhat.com>
+Message-ID: <20190802104920.elrzlc4cenu7fr6q@wingsuit>
+References: <20190801095222.17475-1-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190530142254.28937-13-fziglio@redhat.com>
+In-Reply-To: <20190801095222.17475-1-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.38]); Fri, 02 Aug 2019 10:21:22 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server 13/13] red-channel-client:
- Add some comment on the flush code
+ (mx1.redhat.com [10.5.110.27]); Fri, 02 Aug 2019 10:49:21 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk 1/2] usb-device-manager: Fix
+ number truncation by spice_usb_device_get_busnum
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,63 +46,62 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0286474026=="
+Content-Type: multipart/mixed; boundary="===============0311940820=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0286474026==
+--===============0311940820==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="wzkqdmoxybocdnyz"
+	protocol="application/pgp-signature"; boundary="haqtsehb6sevuhey"
 Content-Disposition: inline
 
 
---wzkqdmoxybocdnyz
+--haqtsehb6sevuhey
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+For both patches,
+Acked-by: Victor Toso <victortoso@redhat.com>
 
-On Thu, May 30, 2019 at 03:22:54PM +0100, Frediano Ziglio wrote:
+On Thu, Aug 01, 2019 at 10:52:21AM +0100, Frediano Ziglio wrote:
+> "bus" field is 16 bit so returning using a guint8 type potentially
+> truncate the value.
+>=20
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 > ---
->  server/red-channel-client.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  src/usb-device-manager-priv.h | 2 +-
+>  src/usb-device-manager.c      | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/server/red-channel-client.c b/server/red-channel-client.c
-> index 3fd51d78b..337733d5d 100644
-> --- a/server/red-channel-client.c
-> +++ b/server/red-channel-client.c
-> @@ -1319,6 +1319,9 @@ void red_channel_client_push(RedChannelClient *rcc)
->      /* prepare_pipe_add() will reenable WRITE events when the rcc->priv-=
->pipe is empty
->       * red_channel_client_ack_zero_messages_window() will reenable WRITE=
- events
->       * if we were waiting for acks to be received
-> +     * If we don't remove WRITE if we are waiting for ack we will be keep
-> +     * notified that we can write and we then exit (see pipe_item_get) a=
-s we
-> +     * are waiting for the ack consuming CPU in a tight loop
->       */
->      if ((red_channel_client_no_item_being_sent(rcc) && g_queue_is_empty(=
-&rcc->priv->pipe)) ||
->          red_channel_client_waiting_for_ack(rcc)) {
-> @@ -1326,6 +1329,9 @@ void red_channel_client_push(RedChannelClient *rcc)
->          /* channel has no pending data to send so now we can flush data =
-in
->           * order to avoid data stall into buffers in case of manual
->           * flushing
-> +         * We need to flush also in case of ack as it is possible
-> +         * that for a long train of small messages the message that would
-> +         * cause the client to send the ack is still in the queue
-
-Acked-by: Victor Toso <victortoso@redhat.com>,
-let me know if something is missing in this series
-
->           */
->          red_stream_flush(rcc->priv->stream);
->      }
+> diff --git a/src/usb-device-manager-priv.h b/src/usb-device-manager-priv.h
+> index 66acf6d5..2530d294 100644
+> --- a/src/usb-device-manager-priv.h
+> +++ b/src/usb-device-manager-priv.h
+> @@ -29,7 +29,7 @@ G_BEGIN_DECLS
+>  void spice_usb_device_manager_device_error(
+>      SpiceUsbDeviceManager *manager, SpiceUsbDevice *device, GError *err);
+> =20
+> -guint8 spice_usb_device_get_busnum(const SpiceUsbDevice *device);
+> +guint16 spice_usb_device_get_busnum(const SpiceUsbDevice *device);
+>  guint8 spice_usb_device_get_devaddr(const SpiceUsbDevice *device);
+>  guint16 spice_usb_device_get_vid(const SpiceUsbDevice *device);
+>  guint16 spice_usb_device_get_pid(const SpiceUsbDevice *device);
+> diff --git a/src/usb-device-manager.c b/src/usb-device-manager.c
+> index 544e5687..a035683d 100644
+> --- a/src/usb-device-manager.c
+> +++ b/src/usb-device-manager.c
+> @@ -1490,7 +1490,7 @@ static SpiceUsbDevice *spice_usb_device_new(SpiceUs=
+bBackendDevice *bdev)
+>      return info;
+>  }
+> =20
+> -guint8 spice_usb_device_get_busnum(const SpiceUsbDevice *info)
+> +guint16 spice_usb_device_get_busnum(const SpiceUsbDevice *info)
+>  {
+>      const UsbDeviceInformation *b_info;
+> =20
 > --=20
 > 2.20.1
 >=20
@@ -112,29 +110,29 @@ let me know if something is missing in this series
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---wzkqdmoxybocdnyz
+--haqtsehb6sevuhey
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EDqAACgkQl9kSPeN6
-SE/Iag//Ux3NX9rEWP4OwJS5I8WYFknIIWl1fVqn5vT5XsVY3fFrJ4DgYfD3OvOM
-o6q3uC6jldxYUl5Rcahk/iZrYk1fb/SHkbaqzFMGHjvQuBKMwhSKujcGo4slkIw9
-fqfY/603vunTMGMUvQslJXXywHQ3abyiJuyv3rbW9/u+zkfo/2P4JVDh+fEIh+m1
-VDBwyYuu+HWzC1/ePP05VHvYVQR0cqaZgrRzTrPBOPnpaQvHgD2LKdKLwHDQGSMT
-VlvTS45txsogMBQMBiJ092uocD3rF1raCioSSf/8tjKPo6hv4ihemVbhxMd3fZ0+
-G+G1bjsv5CsoXBn99WMTRYzm/5kTTMPGEBKh0uU/bPNyHJ8xEP5HWH/ojFPUtdJZ
-Lh12kttnd9F0SP8otEQnEdCWo5Xj5Y2fEARZWuYC8OzO9LxafhJqBEP6+cemNNv9
-rluOGSRgoja/n/ZLk6GjLlLfTOZODzYepxYdul6EAWynSxhEYRY7kQ2CQNJjGErf
-lFIO6DfcJ7PVPl6myDbqqp9waEZX9U0obAoXP23+zFjS3LTr7qJYFwC5knjttpEd
-IoMCd6o3RPmqz0WoidQMpAnmO0ww5HXI3gFTZzd6e/9jXcwRj9hLW8mKimSAvqs/
-QTxogxLHtIefUMcObRrZTLqNOwcf2umzjogkwZ2tUvp+3s3ubcA=
-=2AXT
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EFTAACgkQl9kSPeN6
+SE+b+RAAwijzVGzEY5fvBoC33bORm2IKF1IuaArulNsE0QBRLHVXMMF9hAiMePFt
+7TmuZoU5E/Jn+UurKy8oQPcrhiWAB4LedSQCSArSUnDAZLVyoja+WnLSGCyRIMxI
+IYBugTj9dDH2Ypph5Pb3szGuJouDWTRgzQe2F3bQriSXRZtJiHlRbRz6ZfycOc6b
+Gy18VN7kvsxQJwFWOJy8ek61o/TbpanJOWu8z1zi3Xjt/65SbBBc8Fk2HuM4n7A4
+A7QY044DJ4+p34p9BjSd6K17erBPBgZSfA6SvKhKVtaYsTfchjmgxwkaBh0c8VDS
+1m7qRSuRyoQFu/Q7dgTJ/u3mdb/hdwpq4aHI/ef1km/YlEnI6xfVEUvm4D6F3dsH
+Me52PazZzvF1A1+DCjtonwVAzZaLhfBbFV2E+IzDoOS+BUr1EjP5iBrVKSFjfFaO
+Q+eCXTgY7jTumqvNBD33zfWITHbLcefXgNAuWSZwAaukK79aSm09adXRsaGW1gIw
+1ghS3J2M1Q+IgXG1wNWkO+7yzOsHf1L2o3PjZwJSfJ2CK7tOPBAmkujl6ukaODJX
+uBj6NJz1E4ID0PQweEV6tjRAmjJp46D9Va7x49qh0nF+29KhUEqPTEv8czExiKJh
+44csWdCcu3xHCscaXUNKq/u91EYnHqINAL0/AqDGJGqvtUftDc8=
+=VfRD
 -----END PGP SIGNATURE-----
 
---wzkqdmoxybocdnyz--
+--haqtsehb6sevuhey--
 
---===============0286474026==
+--===============0311940820==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -144,4 +142,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0286474026==--
+--===============0311940820==--
