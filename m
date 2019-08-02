@@ -2,39 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA3037F4CA
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:11:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 818D57F4CC
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:11:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2A2E76EDA8;
-	Fri,  2 Aug 2019 10:11:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 109ED6EDA6;
+	Fri,  2 Aug 2019 10:11:58 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 94BAA6EDA8
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:11:24 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1B3BB6EDA6
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:11:57 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 3EC8E796ED
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:11:24 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id B978930832DC
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:11:56 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.128])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DE7AD60623;
- Fri,  2 Aug 2019 10:11:23 +0000 (UTC)
-Date: Fri, 2 Aug 2019 12:11:23 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6738F5D712;
+ Fri,  2 Aug 2019 10:11:55 +0000 (UTC)
+Date: Fri, 2 Aug 2019 12:11:55 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190802101123.dzltkjzkfkpi424e@wingsuit>
+Message-ID: <20190802101155.kcuewlpjwbijv3xr@wingsuit>
 References: <20190530142254.28937-1-fziglio@redhat.com>
- <20190530142254.28937-10-fziglio@redhat.com>
+ <20190530142254.28937-11-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190530142254.28937-10-fziglio@redhat.com>
+In-Reply-To: <20190530142254.28937-11-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.25]); Fri, 02 Aug 2019 10:11:24 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server 10/13] inputs-channel-client:
- Remove unused declarations
+ (mx1.redhat.com [10.5.110.44]); Fri, 02 Aug 2019 10:11:56 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 11/13] red-channel: Remove
+ unused declaration
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,54 +47,45 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0322074791=="
+Content-Type: multipart/mixed; boundary="===============1566160644=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0322074791==
+--===============1566160644==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="grt7k2jpfl7n3jyo"
+	protocol="application/pgp-signature"; boundary="pwdjbhyzflybs5nx"
 Content-Disposition: inline
 
 
---grt7k2jpfl7n3jyo
+--pwdjbhyzflybs5nx
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Pushed already but fine!
 
-On Thu, May 30, 2019 at 03:22:51PM +0100, Frediano Ziglio wrote:
+On Thu, May 30, 2019 at 03:22:52PM +0100, Frediano Ziglio wrote:
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 > ---
->  server/inputs-channel-client.h | 3 ---
->  1 file changed, 3 deletions(-)
+>  server/red-channel.h | 1 -
+>  1 file changed, 1 deletion(-)
 >=20
-> diff --git a/server/inputs-channel-client.h b/server/inputs-channel-clien=
-t.h
-> index c22288980..1afc22bd4 100644
-> --- a/server/inputs-channel-client.h
-> +++ b/server/inputs-channel-client.h
-> @@ -61,9 +61,6 @@ RedChannelClient* inputs_channel_client_create(RedChann=
-el *channel,
->                                                 RedStream *stream,
->                                                 RedChannelCapabilities *c=
-aps);
+> diff --git a/server/red-channel.h b/server/red-channel.h
+> index 4bfd81ee1..eb16bd4b8 100644
+> --- a/server/red-channel.h
+> +++ b/server/red-channel.h
+> @@ -47,7 +47,6 @@ typedef struct MainChannelClient MainChannelClient;
 > =20
-> -uint16_t inputs_channel_client_get_motion_count(InputsChannelClient* sel=
-f);
-> -/* only for migration */
-> -void inputs_channel_client_set_motion_count(InputsChannelClient* self, u=
-int16_t count);
-
-My grep tells me this was pushed already, hehe
-very late ack ;)
-
->  void inputs_channel_client_on_mouse_motion(InputsChannelClient* self);
->  void inputs_channel_client_send_migrate_data(RedChannelClient *rcc,
->                                               SpiceMarshaller *m, RedPipe=
-Item *item);
+>  typedef bool (*channel_handle_message_proc)(RedChannelClient *rcc, uint1=
+6_t type,
+>                                              uint32_t size, void *msg);
+> -typedef bool (*channel_configure_socket_proc)(RedChannelClient *rcc);
+>  typedef void (*channel_send_pipe_item_proc)(RedChannelClient *rcc, RedPi=
+peItem *item);
+> =20
+>  typedef bool (*channel_handle_migrate_flush_mark_proc)(RedChannelClient =
+*base);
 > --=20
 > 2.20.1
 >=20
@@ -103,29 +94,29 @@ Item *item);
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---grt7k2jpfl7n3jyo
+--pwdjbhyzflybs5nx
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EDEsACgkQl9kSPeN6
-SE/gDRAAvlm64LeaRa7AvL88YdH96SkcL/eIPwBmstg4RbtWarmdjxUzZBlN0QJz
-cY+yTdgMKYtLxcchdJlPb+owTd+na/lj2k1DMR6sezae4zBygIguciv8pNsxkJSG
-1tyefp62nDBD04X04nnf9OBjMFINI8X7Pwgy98Gs8v8UVmuP4vprA0pc/cFU0Hqh
-n7v31ScYja3r5bn+cLX4pErO8BnYjPYd7pIASpjBt0mbKPLBUnw/qOfBHLhXT5D7
-h4Ugf4iVMRQxhkMm3tfUwFKlb1D0Du4ILM1k9T3fFRo1eRSyYyxU/tBhPAzurQJo
-c+ldLM5esRSheUimsZ821KtGKPKCPzGeSvKaJrwrAbEjG464X/aCuBcjEAbbYuoW
-lWV98QheEHeoUPhWRt+1zlxBKsrdd7AgDeTxqBHi+CrAffErgKwBAM7m9qjCf9WM
-mbrHf8Buu8xw9ZJ9qLS5q7XdHVMRy067gvbgYc99Yn4SrrxYLu09UAEEJFQ/zOd8
-nlkcVYxQkieat1hzPA0MxmVwk9BZaucO6Qa+o3tCAc93Mm07vfC5OHZ5zrli1lrl
-AyVtLPeu96l63BSAPYvX1boXxBY2pD+33I6az2RY/0lOBFMIfjnsSopkMwYEeaYP
-gdgMYDjlnaCJVlLf/IGhvt6J9OknQKD422zO1W2U7R+354b7tJE=
-=QYUF
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EDGsACgkQl9kSPeN6
+SE+feg//ZnYk1UP4whc3Khd9HKuMJZftK4KhrwQom5hKB96TdFnN9NT183LJZclH
+Nlxqzxq1nIZTBymRzWddF0T8Fqftp9+hcYegyYZoDYvGNJZzCjyvpF9OCMV/dIVU
+mfkE+VuBShY7UormVDriHuj9c3c9o+lNcv6rBjGk3TbO6EQE93c3toIZPQeFnupU
+UFmpn3YuCWKsH0LJZ1ECSzoH75BaTx2Ns9UGt8y46aSyc7FXmdomWEC9VQueMg+d
+wtj6Dxa/PJaYa4swqq0iu0YhXjGJMsD1js+nFEqWU+wyH7oxB0ErYJhF/YaZNxZy
+rX5LVfC61lfpsV57i2MDYyZbYfZ0jIpehf0eGEYHaYt0mv5vvOBJ8KSamYUwfZIf
+suVz/69JuR8mB0+R4T/AYdDdAxZgBJJKZw+J7icBiHFezAKkr6qINZ88AVZ4JQOz
+br+/CbpTMIZYfMl5x9gJZ/LaKKaHXZqywjLTWKtLV1qpF4BuPzJl2p9I999NctjL
+oAxuHYIcwSsQzlwxNHfEGFzIZMzCVaM82CNXXNGKUdPhQiYGIvW5RvLh9uOTNTh+
+jxwYiGMrunYkyqpj40Au4Km4a/F+7ImsEKFgjc+aZ0eTMGi21EMXnura42g/Y5UT
+4rt9SNnlkSDHGxpm6rN7ambaV+EPL/gxrMZEaATTB6YgMVD3aEM=
+=366I
 -----END PGP SIGNATURE-----
 
---grt7k2jpfl7n3jyo--
+--pwdjbhyzflybs5nx--
 
---===============0322074791==
+--===============1566160644==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -135,4 +126,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0322074791==--
+--===============1566160644==--
