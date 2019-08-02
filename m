@@ -1,42 +1,39 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8289F7EC88
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 08:18:39 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 278CA7F035
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 11:19:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 02BA56ECC5;
-	Fri,  2 Aug 2019 06:18:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8AFD26ED74;
+	Fri,  2 Aug 2019 09:19:28 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D3C466E8AE;
- Fri,  2 Aug 2019 05:22:55 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 83DEB89803
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 09:19:27 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 47EF2B59A0;
- Fri,  2 Aug 2019 05:22:55 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-81.ams2.redhat.com
- [10.36.116.81])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D470B19C68;
- Fri,  2 Aug 2019 05:22:54 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id CF7879D1F; Fri,  2 Aug 2019 07:22:51 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Date: Fri,  2 Aug 2019 07:22:45 +0200
-Message-Id: <20190802052247.18427-16-kraxel@redhat.com>
-In-Reply-To: <20190802052247.18427-1-kraxel@redhat.com>
-References: <20190802052247.18427-1-kraxel@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id F18065AFD9
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 09:19:26 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.128])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9AB675C205;
+ Fri,  2 Aug 2019 09:19:26 +0000 (UTC)
+Date: Fri, 2 Aug 2019 11:19:25 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190802091925.hoief3u2pckeminw@wingsuit>
+References: <20190722110841.31711-1-fziglio@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+In-Reply-To: <20190722110841.31711-1-fziglio@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.26]); Fri, 02 Aug 2019 05:22:55 +0000 (UTC)
-X-Mailman-Approved-At: Fri, 02 Aug 2019 06:18:34 +0000
-Subject: [Spice-devel] [PATCH v4 15/17] drm/qxl: switch driver from bo->resv
- to bo->base.resv
+ (mx1.redhat.com [10.5.110.39]); Fri, 02 Aug 2019 09:19:27 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 1/3] glz-encoder-dict: Remove
+ useless __packed__ attribute
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,48 +45,90 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: thomas@shipmail.org, tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
- ckoenig.leichtzumerken@gmail.com, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- daniel@ffwll.ch,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>, bskeggs@redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0955442537=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-U2lnbmVkLW9mZi1ieTogR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+CkFja2VkLWJ5
-OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Ci0tLQogZHJpdmVy
-cy9ncHUvZHJtL3F4bC9xeGxfZGVidWdmcy5jIHwgMiArLQogZHJpdmVycy9ncHUvZHJtL3F4bC9x
-eGxfcmVsZWFzZS5jIHwgNiArKystLS0KIDIgZmlsZXMgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCsp
-LCA0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX2Rl
-YnVnZnMuYyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX2RlYnVnZnMuYwppbmRleCBiZGI1YWMw
-OTg3YWIuLjk0NDM5MjEyYTVjNSAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxf
-ZGVidWdmcy5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX2RlYnVnZnMuYwpAQCAtNjEs
-NyArNjEsNyBAQCBxeGxfZGVidWdmc19idWZmZXJzX2luZm8oc3RydWN0IHNlcV9maWxlICptLCB2
-b2lkICpkYXRhKQogCQlpbnQgcmVsOwogCiAJCXJjdV9yZWFkX2xvY2soKTsKLQkJZm9iaiA9IHJj
-dV9kZXJlZmVyZW5jZShiby0+dGJvLnJlc3YtPmZlbmNlKTsKKwkJZm9iaiA9IHJjdV9kZXJlZmVy
-ZW5jZShiby0+dGJvLmJhc2UucmVzdi0+ZmVuY2UpOwogCQlyZWwgPSBmb2JqID8gZm9iai0+c2hh
-cmVkX2NvdW50IDogMDsKIAkJcmN1X3JlYWRfdW5sb2NrKCk7CiAKZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvZ3B1L2RybS9xeGwvcXhsX3JlbGVhc2UuYyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX3Jl
-bGVhc2UuYwppbmRleCAwMDIyZTMxYmE5MTAuLmRmNTViODNlMGE1NSAxMDA2NDQKLS0tIGEvZHJp
-dmVycy9ncHUvZHJtL3F4bC9xeGxfcmVsZWFzZS5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwv
-cXhsX3JlbGVhc2UuYwpAQCAtMjM4LDcgKzIzOCw3IEBAIHN0YXRpYyBpbnQgcXhsX3JlbGVhc2Vf
-dmFsaWRhdGVfYm8oc3RydWN0IHF4bF9ibyAqYm8pCiAJCQlyZXR1cm4gcmV0OwogCX0KIAotCXJl
-dCA9IHJlc2VydmF0aW9uX29iamVjdF9yZXNlcnZlX3NoYXJlZChiby0+dGJvLnJlc3YsIDEpOwor
-CXJldCA9IHJlc2VydmF0aW9uX29iamVjdF9yZXNlcnZlX3NoYXJlZChiby0+dGJvLmJhc2UucmVz
-diwgMSk7CiAJaWYgKHJldCkKIAkJcmV0dXJuIHJldDsKIApAQCAtNDU4LDkgKzQ1OCw5IEBAIHZv
-aWQgcXhsX3JlbGVhc2VfZmVuY2VfYnVmZmVyX29iamVjdHMoc3RydWN0IHF4bF9yZWxlYXNlICpy
-ZWxlYXNlKQogCWxpc3RfZm9yX2VhY2hfZW50cnkoZW50cnksICZyZWxlYXNlLT5ib3MsIGhlYWQp
-IHsKIAkJYm8gPSBlbnRyeS0+Ym87CiAKLQkJcmVzZXJ2YXRpb25fb2JqZWN0X2FkZF9zaGFyZWRf
-ZmVuY2UoYm8tPnJlc3YsICZyZWxlYXNlLT5iYXNlKTsKKwkJcmVzZXJ2YXRpb25fb2JqZWN0X2Fk
-ZF9zaGFyZWRfZmVuY2UoYm8tPmJhc2UucmVzdiwgJnJlbGVhc2UtPmJhc2UpOwogCQl0dG1fYm9f
-YWRkX3RvX2xydShibyk7Ci0JCXJlc2VydmF0aW9uX29iamVjdF91bmxvY2soYm8tPnJlc3YpOwor
-CQlyZXNlcnZhdGlvbl9vYmplY3RfdW5sb2NrKGJvLT5iYXNlLnJlc3YpOwogCX0KIAlzcGluX3Vu
-bG9jaygmZ2xvYi0+bHJ1X2xvY2spOwogCXd3X2FjcXVpcmVfZmluaSgmcmVsZWFzZS0+dGlja2V0
-KTsKLS0gCjIuMTguMQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNr
-dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3Nw
-aWNlLWRldmVs
+
+--===============0955442537==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="fo4jbjdhrbihrtok"
+Content-Disposition: inline
+
+
+--fo4jbjdhrbihrtok
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Mon, Jul 22, 2019 at 12:08:39PM +0100, Frediano Ziglio wrote:
+> The structure has no holes, adding this attribute could only
+> decrease efficiency.
+
+Why does it decrease efficiency?
+
+> Note that HashEntry structure is used for a large (8MB) array so
+> this won't affect much possible container size.
+>=20
+> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+> ---
+>  server/glz-encoder-priv.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/server/glz-encoder-priv.h b/server/glz-encoder-priv.h
+> index 08dc007ce..7757f232c 100644
+> --- a/server/glz-encoder-priv.h
+> +++ b/server/glz-encoder-priv.h
+> @@ -76,7 +76,7 @@ struct WindowImageSegment {
+>  };
+> =20
+> =20
+> -struct  __attribute__ ((__packed__)) HashEntry {
+> +struct HashEntry {
+>      uint32_t image_seg_idx;
+>      uint32_t ref_pix_idx;
+>  };
+> --=20
+> 2.20.1
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--fo4jbjdhrbihrtok
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EAB0ACgkQl9kSPeN6
+SE9kDA//ZL3ksmYVlUYVDL/0KkC9hEj9e8E1h8k8I20ysflKTWr0wKzt8mL+D9Cl
+Jdi0cjsmNxrxQ4a/g28+O9lYrDO03XCwOhRxtbcIdROzV5XCKjOMXiYlCaanI6s+
+q7EZccw75PDq4odl81zrMtZV4adx4CJ8JWetyAzkXbnfjEQ+hXiKS5TwIv3CU+w/
+H7Fv/0dwOpnvYtVdZF4nP61TmjWe44RD7CEHwWZ9fR5RzX9CvFpNWY1XNsrx+ggG
+Qj5RgKPme3LyX+ZRDsnloDOVmv91+IyDny9+mROiiCXfgoNVN7xIzaFN55D1yLl1
+q+AiuFy1xhsmPRA0tl6i7XZfJermyZDYs5HHbaR/3s2slKDQPuvl2GM3GhLUHfHW
+VwTenFIL0FsDQ7mAOg9JXt/4D4IISckNc4LsdZ+2hIEE/BE32q+PPH5JpmcTxXCp
+b3KDkZJ19TwNcEIspqpk1uF8i7puTy6phDsB8K+88Lj0GJsnPpiwaiXTF4akKFLh
+5iqJJBBV/ccZ724GF6uND56VOSL1c+DNADbv9ypCGAcIgzSFjqrrXxgSsY3BywSa
+Sl7KSm9z0mJwCT+9MkaoLTDJtbEXfeVpHFpY9uZGSLRmtCb8VLkv29TfWdf9Nx/A
+V5uIYvYuLC6SjLe7+0QLCjFQcJeNeZIeR1iPJtYx+oM50S1x53w=
+=dshS
+-----END PGP SIGNATURE-----
+
+--fo4jbjdhrbihrtok--
+
+--===============0955442537==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0955442537==--
