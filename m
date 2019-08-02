@@ -1,39 +1,47 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51A187F575
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:49:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C32517F578
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2019 12:50:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7055D6EDC0;
-	Fri,  2 Aug 2019 10:49:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4FA3C6EDC2;
+	Fri,  2 Aug 2019 10:50:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1EB126EDC0
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:49:22 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2AD396EDC2
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:50:35 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 92BCF81F19
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:49:21 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.128])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 40AFA5D712;
- Fri,  2 Aug 2019 10:49:21 +0000 (UTC)
-Date: Fri, 2 Aug 2019 12:49:20 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190802104920.elrzlc4cenu7fr6q@wingsuit>
-References: <20190801095222.17475-1-fziglio@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id CA62185542
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:50:34 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C02EA60605
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2019 10:50:34 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id B434941F40;
+ Fri,  2 Aug 2019 10:50:34 +0000 (UTC)
+Date: Fri, 2 Aug 2019 06:50:34 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Victor Toso <victortoso@redhat.com>
+Message-ID: <313564703.4392444.1564743034477.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20190802091925.hoief3u2pckeminw@wingsuit>
+References: <20190722110841.31711-1-fziglio@redhat.com>
+ <20190802091925.hoief3u2pckeminw@wingsuit>
 MIME-Version: 1.0
-In-Reply-To: <20190801095222.17475-1-fziglio@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Originating-IP: [10.33.32.11, 10.4.195.6]
+Thread-Topic: glz-encoder-dict: Remove useless __packed__ attribute
+Thread-Index: KdCu6hxEaWjknq+GcKQg3VeXx1Y9zQ==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.27]); Fri, 02 Aug 2019 10:49:21 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk 1/2] usb-device-manager: Fix
- number truncation by spice_usb_device_get_busnum
+ (mx1.redhat.com [10.5.110.28]); Fri, 02 Aug 2019 10:50:34 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 1/3] glz-encoder-dict: Remove
+ useless __packed__ attribute
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,100 +54,38 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0311940820=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============0311940820==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="haqtsehb6sevuhey"
-Content-Disposition: inline
-
-
---haqtsehb6sevuhey
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-For both patches,
-Acked-by: Victor Toso <victortoso@redhat.com>
-
-On Thu, Aug 01, 2019 at 10:52:21AM +0100, Frediano Ziglio wrote:
-> "bus" field is 16 bit so returning using a guint8 type potentially
-> truncate the value.
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-> ---
->  src/usb-device-manager-priv.h | 2 +-
->  src/usb-device-manager.c      | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/src/usb-device-manager-priv.h b/src/usb-device-manager-priv.h
-> index 66acf6d5..2530d294 100644
-> --- a/src/usb-device-manager-priv.h
-> +++ b/src/usb-device-manager-priv.h
-> @@ -29,7 +29,7 @@ G_BEGIN_DECLS
->  void spice_usb_device_manager_device_error(
->      SpiceUsbDeviceManager *manager, SpiceUsbDevice *device, GError *err);
-> =20
-> -guint8 spice_usb_device_get_busnum(const SpiceUsbDevice *device);
-> +guint16 spice_usb_device_get_busnum(const SpiceUsbDevice *device);
->  guint8 spice_usb_device_get_devaddr(const SpiceUsbDevice *device);
->  guint16 spice_usb_device_get_vid(const SpiceUsbDevice *device);
->  guint16 spice_usb_device_get_pid(const SpiceUsbDevice *device);
-> diff --git a/src/usb-device-manager.c b/src/usb-device-manager.c
-> index 544e5687..a035683d 100644
-> --- a/src/usb-device-manager.c
-> +++ b/src/usb-device-manager.c
-> @@ -1490,7 +1490,7 @@ static SpiceUsbDevice *spice_usb_device_new(SpiceUs=
-bBackendDevice *bdev)
->      return info;
->  }
-> =20
-> -guint8 spice_usb_device_get_busnum(const SpiceUsbDevice *info)
-> +guint16 spice_usb_device_get_busnum(const SpiceUsbDevice *info)
->  {
->      const UsbDeviceInformation *b_info;
-> =20
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---haqtsehb6sevuhey
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1EFTAACgkQl9kSPeN6
-SE+b+RAAwijzVGzEY5fvBoC33bORm2IKF1IuaArulNsE0QBRLHVXMMF9hAiMePFt
-7TmuZoU5E/Jn+UurKy8oQPcrhiWAB4LedSQCSArSUnDAZLVyoja+WnLSGCyRIMxI
-IYBugTj9dDH2Ypph5Pb3szGuJouDWTRgzQe2F3bQriSXRZtJiHlRbRz6ZfycOc6b
-Gy18VN7kvsxQJwFWOJy8ek61o/TbpanJOWu8z1zi3Xjt/65SbBBc8Fk2HuM4n7A4
-A7QY044DJ4+p34p9BjSd6K17erBPBgZSfA6SvKhKVtaYsTfchjmgxwkaBh0c8VDS
-1m7qRSuRyoQFu/Q7dgTJ/u3mdb/hdwpq4aHI/ef1km/YlEnI6xfVEUvm4D6F3dsH
-Me52PazZzvF1A1+DCjtonwVAzZaLhfBbFV2E+IzDoOS+BUr1EjP5iBrVKSFjfFaO
-Q+eCXTgY7jTumqvNBD33zfWITHbLcefXgNAuWSZwAaukK79aSm09adXRsaGW1gIw
-1ghS3J2M1Q+IgXG1wNWkO+7yzOsHf1L2o3PjZwJSfJ2CK7tOPBAmkujl6ukaODJX
-uBj6NJz1E4ID0PQweEV6tjRAmjJp46D9Va7x49qh0nF+29KhUEqPTEv8czExiKJh
-44csWdCcu3xHCscaXUNKq/u91EYnHqINAL0/AqDGJGqvtUftDc8=
-=VfRD
------END PGP SIGNATURE-----
-
---haqtsehb6sevuhey--
-
---===============0311940820==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+PiAKPiBIaSwKPiAKPiBPbiBNb24sIEp1bCAyMiwgMjAxOSBhdCAxMjowODozOVBNICswMTAwLCBG
+cmVkaWFubyBaaWdsaW8gd3JvdGU6Cj4gPiBUaGUgc3RydWN0dXJlIGhhcyBubyBob2xlcywgYWRk
+aW5nIHRoaXMgYXR0cmlidXRlIGNvdWxkIG9ubHkKPiA+IGRlY3JlYXNlIGVmZmljaWVuY3kuCj4g
+Cj4gV2h5IGRvZXMgaXQgZGVjcmVhc2UgZWZmaWNpZW5jeT8KPiAKCklmIHRoZSBnaWFudCBhcnJh
+eSB0aGF0IGNvbnRhaW5zIHRoZXNlIHN0cnVjdHVyZSBnZXQgdW5hbGlnbmVkIGFzIHRoZQpwcmV2
+aW91cyBmaWVsZHMgYXJlIG5vdCA0LzggYnl0ZXMgYWxpZ25lZCB0aGUgYWRkcmVzc2VzIHdvbid0
+IGJlIGFsaWduZWQuCkFuZCB1bmFsaWduZWQgYWNjZXNzZXMgYXJlIGxlc3MgZWZmaWNpZW50IChl
+dmVuIG1vcmUgZm9yIGEgaGFzaCB0YWJsZQphcyB0aGUgcmVhZC93cml0ZSBhcmUgbm90IHNlcXVl
+bnRpYWwpLgpBY3R1YWxseSBiZWluZyBhIGNhY2hlIG1heWJlIHdvdWxkIGJlIHdvcnRoIGZvcmNp
+bmcgOCBieXRlcyBvZiBhbGlnbm1lbnQKaW5zdGVhZCBvZiA0LCB0b2RheSBtYW55IGFyY2hpdGVj
+dHVyZSBoYXZlIDY0IGJpdCBidXNlcyAod2l0aCBzb21lCkdQVSBoYXZpbmcgMTI4IG9yIGV2ZW4g
+MjU2IGJpdHMgYnVzZXMhKS4KCj4gPiBOb3RlIHRoYXQgSGFzaEVudHJ5IHN0cnVjdHVyZSBpcyB1
+c2VkIGZvciBhIGxhcmdlICg4TUIpIGFycmF5IHNvCj4gPiB0aGlzIHdvbid0IGFmZmVjdCBtdWNo
+IHBvc3NpYmxlIGNvbnRhaW5lciBzaXplLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBGcmVkaWFu
+byBaaWdsaW8gPGZ6aWdsaW9AcmVkaGF0LmNvbT4KPiA+IC0tLQo+ID4gIHNlcnZlci9nbHotZW5j
+b2Rlci1wcml2LmggfCAyICstCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAx
+IGRlbGV0aW9uKC0pCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9zZXJ2ZXIvZ2x6LWVuY29kZXItcHJp
+di5oIGIvc2VydmVyL2dsei1lbmNvZGVyLXByaXYuaAo+ID4gaW5kZXggMDhkYzAwN2NlLi43NzU3
+ZjIzMmMgMTAwNjQ0Cj4gPiAtLS0gYS9zZXJ2ZXIvZ2x6LWVuY29kZXItcHJpdi5oCj4gPiArKysg
+Yi9zZXJ2ZXIvZ2x6LWVuY29kZXItcHJpdi5oCj4gPiBAQCAtNzYsNyArNzYsNyBAQCBzdHJ1Y3Qg
+V2luZG93SW1hZ2VTZWdtZW50IHsKPiA+ICB9Owo+ID4gIAo+ID4gIAo+ID4gLXN0cnVjdCAgX19h
+dHRyaWJ1dGVfXyAoKF9fcGFja2VkX18pKSBIYXNoRW50cnkgewo+ID4gK3N0cnVjdCBIYXNoRW50
+cnkgewo+ID4gICAgICB1aW50MzJfdCBpbWFnZV9zZWdfaWR4Owo+ID4gICAgICB1aW50MzJfdCBy
+ZWZfcGl4X2lkeDsKPiA+ICB9Owo+ID4gLS0KPiA+IDIuMjAuMQo+ID4gCj4gPiBfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+ID4gU3BpY2UtZGV2ZWwgbWFp
+bGluZyBsaXN0Cj4gPiBTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiA+IGh0dHBz
+Oi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwKPiAK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0311940820==--
