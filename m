@@ -2,55 +2,55 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C7E78920E
-	for <lists+spice-devel@lfdr.de>; Sun, 11 Aug 2019 16:41:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC71E89241
+	for <lists+spice-devel@lfdr.de>; Sun, 11 Aug 2019 17:12:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CD5A66E34D;
-	Sun, 11 Aug 2019 14:41:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 14F556E357;
+	Sun, 11 Aug 2019 15:12:35 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
- [209.85.221.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F23806E34D
- for <spice-devel@lists.freedesktop.org>; Sun, 11 Aug 2019 14:41:54 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id p17so102421436wrf.11
- for <spice-devel@lists.freedesktop.org>; Sun, 11 Aug 2019 07:41:54 -0700 (PDT)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+ [209.85.221.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 786F86E357
+ for <spice-devel@lists.freedesktop.org>; Sun, 11 Aug 2019 15:12:33 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id p17so102485495wrf.11
+ for <spice-devel@lists.freedesktop.org>; Sun, 11 Aug 2019 08:12:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=0cE/NdFnWQLH9D4SVCDa4yJcgFeaABnLx9HP5XqxRho=;
- b=HRk1VeY6EGiTJFu6wViW+e/62Ei5wNQNi6HIR8DraloC4eXLcznWwOd4oZN6G6xKXV
- DhHlghbdUTnpJ9e2oRTgvuTUJVL5Y3PoKv8zmqkbtICzk6Bz1zbyW2MJTlq+AMxWzonr
- ic1QqTYW1FK8cZqDfwj3M4kXfd8AO2GxJ6i0/SNVSFcjHimWDB1CXyEv39mGli1Svg2/
- 3k6hsjSIcBHq4ZGPXfAihfAogf3iCU6vy6pZE4GL8MLEXA63CAqlwBtnq6wij/ZLb6aJ
- lhCuwNg/AROBM39tWbhl2GkkV1Bod7zKBL23mPQgVkYccTPf2eD3ArJAt4oxGM0IhPJX
- KsfQ==
-X-Gm-Message-State: APjAAAWqCIMMUnGAQRNZLgHl8yH93qC81guAu16GPAZXGmhG4eVfrZYa
- WcyFdqQw1NIa/6scesStt9NVkOlOysw=
-X-Google-Smtp-Source: APXvYqxeyErV0OCDljeWoE0Se4ZAO+CwAW1bsqh7UD9DyJ33vCWJYJtMtBped40OfoWAH3Z4ruUnhw==
-X-Received: by 2002:a1c:a9ce:: with SMTP id s197mr2964873wme.35.1565534513257; 
- Sun, 11 Aug 2019 07:41:53 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language;
+ bh=IdfzSbaoV8lAmSzKZgoZTXxEMoM5XppEsUP/YbnGcXc=;
+ b=IEvLu0jjKHtHXUnBKawCNrWje7r8rdGUrayhGJtILZYsun6WxqhkylVzdqAToC7+Uw
+ fp7qNoGOXm06XFxA4b4OHRMulLyvgCgped6iuWiFi6HRPLRuR0ZlZJJNoMqh9gsVDj4X
+ uxKvPF50xD4q+8uziUYh3dM5jpBdQHryHKbcT3bIaynXuhXfeNhi0FbFmVi/gJi4mHdn
+ 8huWx9hfEU4Z02DZvwe22nx0WxDHuUejgjFeulvPxngZqSIHNhtYyXZ5eBy8T38GIDk0
+ QH+XkMKsO/+MAgqIWL3ZnviquVccnjRTqvmcXyagmHgJADe5SkVXkuNSgxAq/g0V+ADV
+ w+6g==
+X-Gm-Message-State: APjAAAUx8R1YfS6ZdTrCXVY0EqOojhN+KC9k3CY3aM9wJ4M/bxUvjHdk
+ KCAsKO3sKRaRPJqXIEWOO9jaLM75CEw=
+X-Google-Smtp-Source: APXvYqzvRhu9L/7rhdxts0OLdn+ehtddeMQa1Xs3TdXMx1+NzMLMkGMfdHr/nNvBcVTG2VIkVADKVg==
+X-Received: by 2002:a5d:570e:: with SMTP id a14mr21438988wrv.258.1565536351727; 
+ Sun, 11 Aug 2019 08:12:31 -0700 (PDT)
 Received: from dhcp-4-70.tlv.redhat.com (bzq-82-81-161-50.red.bezeqint.net.
  [82.81.161.50])
- by smtp.gmail.com with ESMTPSA id x6sm16428145wmf.6.2019.08.11.07.41.52
- for <spice-devel@lists.freedesktop.org>
+ by smtp.gmail.com with ESMTPSA id t13sm121825609wrr.0.2019.08.11.08.12.30
  (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
- Sun, 11 Aug 2019 07:41:52 -0700 (PDT)
-To: spice-devel@lists.freedesktop.org
-References: <20190806153453.20616-1-kpouget@redhat.com>
- <20190806153453.20616-6-kpouget@redhat.com>
+ Sun, 11 Aug 2019 08:12:31 -0700 (PDT)
+To: Frediano Ziglio <fziglio@redhat.com>
+References: <20190723082230.10381-1-fziglio@redhat.com>
+ <20190723082230.10381-3-fziglio@redhat.com>
+ <97647106-04d4-662c-5b8d-baacafab2ed6@redhat.com>
+ <1029345715.5453659.1565525540653.JavaMail.zimbra@redhat.com>
 From: Snir Sheriber <ssheribe@redhat.com>
-Message-ID: <650d1bdc-0fb7-5ac6-67cf-3138faf874c5@redhat.com>
-Date: Sun, 11 Aug 2019 17:41:51 +0300
+Message-ID: <b5369913-240c-2220-9d44-ade89026ddf6@redhat.com>
+Date: Sun, 11 Aug 2019 18:12:28 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190806153453.20616-6-kpouget@redhat.com>
+In-Reply-To: <1029345715.5453659.1565525540653.JavaMail.zimbra@redhat.com>
 Content-Language: en-US
-Subject: Re: [Spice-devel] [RFC spice-streaming-agent 2/4]
- spice-streaming-agent: fully reset the capture loop on start/stop requests
+Subject: Re: [Spice-devel] [PATCH spice-server] Use (u)intptr_t for virtual
+ addresses
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,71 +62,525 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1910436277=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGksCgoKT24gOC82LzE5IDY6MzQgUE0sIEtldmluIFBvdWdldCB3cm90ZToKPiBXaXRoIHRoaXMg
-cGF0Y2gsIHNwaWNlLXN0cmVhbWluZy1hZ2VudCBleGl0cyB0aGUgZnJhbWUtc2VuZGluZyBsb29w
-Cj4gd2hlbiBTVEFSVC9TVE9QIHJlcXVlc3RzIGFyZSByZWNlaXZlZC4gVGhpcyBhbGxvd3MgdGhl
-IHJlY29tcHV0YXRpb24KPiBvZiB0aGUgbW9zdCBzdWl0YWJsZSBjYXB0dXJlL2VuY29kaW5nIHBs
-dWdpbiwgdGhhdCBtYXkgaGF2ZSBiZWVuCj4gdXBkYXRlZCB3aXRoIFNUQVJUL1NUT1AgbWVzc2Fn
-ZS4KPgo+IFNpZ25lZC1vZmYtYnk6IEtldmluIFBvdWdldCA8a3BvdWdldEByZWRoYXQuY29tPgo+
-IC0tLQo+ICAgc3JjL3NwaWNlLXN0cmVhbWluZy1hZ2VudC5jcHAgfCAxOSArKysrKysrKysrKysr
-LS0tLS0tCj4gICAxIGZpbGUgY2hhbmdlZCwgMTMgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMo
-LSkKPgo+IGRpZmYgLS1naXQgYS9zcmMvc3BpY2Utc3RyZWFtaW5nLWFnZW50LmNwcCBiL3NyYy9z
-cGljZS1zdHJlYW1pbmctYWdlbnQuY3BwCj4gaW5kZXggNDlmNWRjNC4uZDI3NGI1ZiAxMDA2NDQK
-PiAtLS0gYS9zcmMvc3BpY2Utc3RyZWFtaW5nLWFnZW50LmNwcAo+ICsrKyBiL3NyYy9zcGljZS1z
-dHJlYW1pbmctYWdlbnQuY3BwCj4gQEAgLTEyNSw3ICsxMjUsOCBAQCBwcml2YXRlOgo+ICAgICAg
-IHN0YXRpYyBjb25zdGV4cHIgdWludDMyX3QgbWF4X2RldmljZV9hZGRyZXNzX2xlbiA9IDI1NTsK
-PiAgIH07Cj4gICAKPiAtc3RhdGljIGJvb2wgc3RyZWFtaW5nX3JlcXVlc3RlZCA9IGZhbHNlOwo+
-ICtzdGF0aWMgYm9vbCBjYXB0dXJlX2luX3Byb2dyZXNzID0gZmFsc2U7Cj4gK3N0YXRpYyBib29s
-IHJlc2V0X3JlcXVlc3RlZCA9IGZhbHNlOwo+ICAgc3RhdGljIGJvb2wgcXVpdF9yZXF1ZXN0ZWQg
-PSBmYWxzZTsKPiAgIHN0YXRpYyBzdGQ6OnNldDxTcGljZVZpZGVvQ29kZWNUeXBlPiBjbGllbnRf
-Y29kZWNzOwo+ICAgCj4gQEAgLTE2NywxMSArMTY4LDEyIEBAIHN0YXRpYyB2b2lkIHJlYWRfY29t
-bWFuZF9mcm9tX2RldmljZShTdHJlYW1Qb3J0ICZzdHJlYW1fcG9ydCkKPiAgICAgICB9Cj4gICAg
-ICAgY2FzZSBTVFJFQU1fVFlQRV9TVEFSVF9TVE9QOiB7Cj4gICAgICAgICAgIFN0YXJ0U3RvcE1l
-c3NhZ2UgbXNnID0gaW5fbWVzc2FnZS5nZXRfcGF5bG9hZDxTdGFydFN0b3BNZXNzYWdlPigpOwo+
-IC0gICAgICAgIHN0cmVhbWluZ19yZXF1ZXN0ZWQgPSBtc2cuc3RhcnRfc3RyZWFtaW5nOwo+ICsg
-ICAgICAgIGNhcHR1cmVfaW5fcHJvZ3Jlc3MgPSBtc2cuc3RhcnRfc3RyZWFtaW5nOwo+ICAgICAg
-ICAgICBjbGllbnRfY29kZWNzID0gbXNnLmNsaWVudF9jb2RlY3M7Cj4gKyAgICAgICAgcmVzZXRf
-cmVxdWVzdGVkID0gdHJ1ZTsKPiAgIAo+ICAgICAgICAgICBzeXNsb2coTE9HX0lORk8sICJHT1Qg
-U1RBUlRfU1RPUCBtZXNzYWdlIC0tIHJlcXVlc3QgdG8gJXMgc3RyZWFtaW5nIiwKPiAtICAgICAg
-ICAgICAgICAgc3RyZWFtaW5nX3JlcXVlc3RlZCA/ICJTVEFSVCIgOiAiU1RPUCIpOwo+ICsgICAg
-ICAgICAgICAgICBjYXB0dXJlX2luX3Byb2dyZXNzID8gIlNUQVJUIiA6ICJTVE9QIik7Cj4gICAg
-ICAgICAgIHJldHVybjsKPiAgICAgICB9fQo+ICAgCj4gQEAgLTIzMywyMCArMjM1LDI1IEBAIGRv
-X2NhcHR1cmUoU3RyZWFtUG9ydCAmc3RyZWFtX3BvcnQsIEZyYW1lTG9nICZmcmFtZV9sb2csIENv
-bmNyZXRlQWdlbnQgJmFnZW50KQo+ICAgewo+ICAgICAgIHVuc2lnbmVkIGludCBmcmFtZV9jb3Vu
-dCA9IDA7Cj4gICAgICAgd2hpbGUgKCFxdWl0X3JlcXVlc3RlZCkgewo+IC0gICAgICAgIHdoaWxl
-ICghcXVpdF9yZXF1ZXN0ZWQgJiYgIXN0cmVhbWluZ19yZXF1ZXN0ZWQpIHsKPiArICAgICAgICB3
-aGlsZSAoIXF1aXRfcmVxdWVzdGVkICYmICFjYXB0dXJlX2luX3Byb2dyZXNzKSB7Cj4gICAgICAg
-ICAgICAgICByZWFkX2NvbW1hbmQoc3RyZWFtX3BvcnQsIHRydWUpOwo+ICAgICAgICAgICB9Cj4g
-ICAKPiAgICAgICAgICAgaWYgKHF1aXRfcmVxdWVzdGVkKSB7Cj4gICAgICAgICAgICAgICByZXR1
-cm47Cj4gICAgICAgICAgIH0KPiArICAgICAgICByZXNldF9yZXF1ZXN0ZWQgPSBmYWxzZTsKPiAg
-IAo+ICAgICAgICAgICBzeXNsb2coTE9HX0lORk8sICJzdHJlYW1pbmcgc3RhcnRzIG5vdyIpOwo+
-ICAgICAgICAgICB1aW50NjRfdCB0aW1lX2xhc3QgPSAwOwo+ICAgCj4gICAgICAgICAgIHN0ZDo6
-dW5pcXVlX3B0cjxGcmFtZUNhcHR1cmU+IGNhcHR1cmUoYWdlbnQuR2V0QmVzdEZyYW1lQ2FwdHVy
-ZShjbGllbnRfY29kZWNzKSk7Cj4gICAgICAgICAgIGlmICghY2FwdHVyZSkgewo+IC0gICAgICAg
-ICAgICB0aHJvdyBzdGQ6OnJ1bnRpbWVfZXJyb3IoImNhbm5vdCBmaW5kIGEgc3VpdGFibGUgY2Fw
-dHVyZSBzeXN0ZW0iKTsKPiArICAgICAgICAgICAgc3lzbG9nKExPR19FUlIsICJFcnJvciBjYW5u
-b3QgZmluZCBhIHN1aXRhYmxlIGNhcHR1cmUgc3lzdGVtIik7Cj4gKwo+ICsgICAgICAgICAgICAv
-LyB3YWl0IHVudGlsIGEgbmV3IHN0YXJ0L3N0b3AgcmVxdWVzdCBhcnJpdmVzIHdpdGggYSBuZXcg
-bGlzdCBvZiBjb2RlY3MKCgpDYW4geW91IGV4cGxhaW4gd2h5IHlvdSBjaGFuZ2UgaXQgdG8gYSBs
-b2cgbWVzc2FnZT8gaW4gY2FzZSBvZiBmYWlsdXJlCmhvdyB5b3UnbGwgZ2V0IG91dCBvZiB0aGlz
-IGxvb3A/IGNsaWVudCBjb2RlYyB0eXBlcyBhdmFpbGFiaWxpdHkgY2FuIGNoYW5nZQppbiBydW4g
-dGltZT8gb3IgaXQgY2FuIGNoYW5nZSBvbmx5IHRoZWlyIHByZWZlcmVuY2U/CgpTbmlyLgoKPiAr
-ICAgICAgICAgICAgY2FwdHVyZV9pbl9wcm9ncmVzcyA9IGZhbHNlOwo+ICsgICAgICAgICAgICBj
-b250aW51ZTsKPiAgICAgICAgICAgfQo+ICAgCj4gICAgICAgICAgIHN0ZDo6dmVjdG9yPERldmlj
-ZURpc3BsYXlJbmZvPiBkaXNwbGF5X2luZm87Cj4gQEAgLTI3NSw3ICsyODIsNyBAQCBkb19jYXB0
-dXJlKFN0cmVhbVBvcnQgJnN0cmVhbV9wb3J0LCBGcmFtZUxvZyAmZnJhbWVfbG9nLCBDb25jcmV0
-ZUFnZW50ICZhZ2VudCkKPiAgICAgICAgICAgICAgIHN5c2xvZyhMT0dfRVJSLCAiRW1wdHkgZGV2
-aWNlIGRpc3BsYXkgaW5mbyBmcm9tIHRoZSBwbHVnaW4iKTsKPiAgICAgICAgICAgfQo+ICAgCj4g
-LSAgICAgICAgd2hpbGUgKCFxdWl0X3JlcXVlc3RlZCAmJiBzdHJlYW1pbmdfcmVxdWVzdGVkKSB7
-Cj4gKyAgICAgICAgd2hpbGUgKCFxdWl0X3JlcXVlc3RlZCAmJiAhcmVzZXRfcmVxdWVzdGVkICYm
-IGNhcHR1cmVfaW5fcHJvZ3Jlc3MpIHsKPiAgICAgICAgICAgICAgIGlmICgrK2ZyYW1lX2NvdW50
-ICUgMTAwID09IDApIHsKPiAgICAgICAgICAgICAgICAgICBzeXNsb2coTE9HX0RFQlVHLCAiU0VO
-VCAlZCBmcmFtZXMiLCBmcmFtZV9jb3VudCk7Cj4gICAgICAgICAgICAgICB9Cl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcg
-bGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVl
-ZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+This is a multi-part message in MIME format.
+--===============1910436277==
+Content-Type: multipart/alternative;
+ boundary="------------861CD13FE27EE71844E3B778"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------861CD13FE27EE71844E3B778
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+
+On 8/11/19 3:12 PM, Frediano Ziglio wrote:
+>
+>
+>     Hi
+>
+>     On 7/23/19 11:22 AM, Frediano Ziglio wrote:
+>
+>
+>               When to Say "a" or "an" | Pronunciation | EnglishClub
+>
+>         https://www.englishclub.com/pronunciation/a-an.htm
+>         On LLP64 platforms (like Windows) a virtual address cannot
+>         be represented by a "unsigned long" type, so use uintptr_t
+>         which is defined as a integral type large like a pointer.
+>
+>
+>     This sentence sounds a bit odd to me
+>
+>     should be integer?
+>
+> C/C++ documentation classify these types as integral, not integer.
+>
+>     also s/a/an
+>
+> fixed, thanks
+>
+>
+>
+>         "address_delta" is a difference of pointers so use same
+>         type size.
+>
+>
+>     Not a big deal but wouldn't be preferable to be consistent with
+>     addr_delta?
+>
+> It sounds reasonable, although the value came from "addr_delta" field 
+> of QXLDevMemSlot
+> which is part of SPICE ABI (so cannot be changed).
+
+
+Actually I thought to change address_delta to match everywhere to 
+uint64_t of addr_delta
+can this delta be actually negative? seems not since it's coming from 
+addr_delta,wouldn't be
+better to keep it unsigned
+
+Snir.
+
+
+>     Snir.
+>
+>         Signed-off-by: Frediano Ziglio<fziglio@redhat.com>
+>         ---
+>           server/memslot.c       | 22 ++++++++++++----------
+>           server/memslot.h       | 20 ++++++++++----------
+>           server/red-parse-qxl.c |  2 +-
+>           server/spice-qxl.h     |  4 ++--
+>           4 files changed, 25 insertions(+), 23 deletions(-)
+>
+>         diff --git a/server/memslot.c b/server/memslot.c
+>         index 2a1771b02..182d2b7e9 100644
+>         --- a/server/memslot.c
+>         +++ b/server/memslot.c
+>         @@ -21,7 +21,7 @@
+>           
+>           #include "memslot.h"
+>           
+>         -static unsigned long __get_clean_virt(RedMemSlotInfo *info, QXLPHYSICAL addr)
+>         +static uintptr_t __get_clean_virt(RedMemSlotInfo *info, QXLPHYSICAL addr)
+>           {
+>               return addr & info->memslot_clean_virt_mask;
+>           }
+>         @@ -37,7 +37,8 @@ static void print_memslots(RedMemSlotInfo *info)
+>                           !info->mem_slots[i][x].virt_end_addr) {
+>                           continue;
+>                       }
+>         -            printf("id %d, group %d, virt start %lx, virt end %lx, generation %u, delta %lx\n",
+>         +            printf("id %d, group %d, virt start %" PRIxPTR ", virt end %" PRIxPTR ", generation %u,"
+>         +                   " delta %" PRIxPTR "\n",
+>                              x, i, info->mem_slots[i][x].virt_start_addr,
+>                              info->mem_slots[i][x].virt_end_addr, info->mem_slots[i][x].generation,
+>                              info->mem_slots[i][x].address_delta);
+>         @@ -46,7 +47,7 @@ static void print_memslots(RedMemSlotInfo *info)
+>           }
+>           
+>           /* return 1 if validation successfull, 0 otherwise */
+>         -int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
+>         +int memslot_validate_virt(RedMemSlotInfo *info, uintptr_t virt, int slot_id,
+>                                     uint32_t add_size, uint32_t group_id)
+>           {
+>               MemSlot *slot;
+>         @@ -60,8 +61,9 @@ int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
+>               if (virt < slot->virt_start_addr || (virt + add_size) > slot->virt_end_addr) {
+>                   print_memslots(info);
+>                   spice_warning("virtual address out of range"
+>         -              "    virt=0x%lx+0x%x slot_id=%d group_id=%d\n"
+>         -              "    slot=0x%lx-0x%lx delta=0x%lx",
+>         +              "    virt=0x%" G_GINTPTR_MODIFIER "x+0x%x slot_id=%d group_id=%d\n"
+>         +              "    slot=0x%" G_GINTPTR_MODIFIER "x-0x%" G_GINTPTR_MODIFIER "x"
+>         +              " delta=0x%" G_GINTPTR_MODIFIER "x",
+>                         virt, add_size, slot_id, group_id,
+>                         slot->virt_start_addr, slot->virt_end_addr, slot->address_delta);
+>                   return 0;
+>         @@ -69,9 +71,9 @@ int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
+>               return 1;
+>           }
+>           
+>         -unsigned long memslot_max_size_virt(RedMemSlotInfo *info,
+>         -                                    unsigned long virt, int slot_id,
+>         -                                    uint32_t group_id)
+>         +uintptr_t memslot_max_size_virt(RedMemSlotInfo *info,
+>         +                                uintptr_t virt, int slot_id,
+>         +                                uint32_t group_id)
+>           {
+>               MemSlot *slot;
+>           
+>         @@ -91,7 +93,7 @@ void *memslot_get_virt(RedMemSlotInfo *info, QXLPHYSICAL addr, uint32_t add_size
+>           {
+>               int slot_id;
+>               int generation;
+>         -    unsigned long h_virt;
+>         +    uintptr_t h_virt;
+>           
+>               MemSlot *slot;
+>           
+>         @@ -171,7 +173,7 @@ void memslot_info_destroy(RedMemSlotInfo *info)
+>           }
+>           
+>           void memslot_info_add_slot(RedMemSlotInfo *info, uint32_t slot_group_id, uint32_t slot_id,
+>         -                           uint64_t addr_delta, unsigned long virt_start, unsigned long virt_end,
+>         +                           uint64_t addr_delta, uintptr_t virt_start, uintptr_t virt_end,
+>                                      uint32_t generation)
+>           {
+>               spice_assert(info->num_memslots_groups > slot_group_id);
+>         diff --git a/server/memslot.h b/server/memslot.h
+>         index 00728c4b6..45381feb9 100644
+>         --- a/server/memslot.h
+>         +++ b/server/memslot.h
+>         @@ -25,9 +25,9 @@
+>           
+>           typedef struct MemSlot {
+>               int generation;
+>         -    unsigned long virt_start_addr;
+>         -    unsigned long virt_end_addr;
+>         -    long address_delta;
+>         +    uintptr_t virt_start_addr;
+>         +    uintptr_t virt_end_addr;
+>         +    intptr_t address_delta;
+>           } MemSlot;
+>           
+>           typedef struct RedMemSlotInfo {
+>         @@ -39,8 +39,8 @@ typedef struct RedMemSlotInfo {
+>               uint8_t memslot_id_shift;
+>               uint8_t memslot_gen_shift;
+>               uint8_t internal_groupslot_id;
+>         -    unsigned long memslot_gen_mask;
+>         -    unsigned long memslot_clean_virt_mask;
+>         +    uintptr_t memslot_gen_mask;
+>         +    uintptr_t memslot_clean_virt_mask;
+>           } RedMemSlotInfo;
+>           
+>           static inline int memslot_get_id(RedMemSlotInfo *info, uint64_t addr)
+>         @@ -53,11 +53,11 @@ static inline int memslot_get_generation(RedMemSlotInfo *info, uint64_t addr)
+>               return (addr >> info->memslot_gen_shift) & info->memslot_gen_mask;
+>           }
+>           
+>         -int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
+>         +int memslot_validate_virt(RedMemSlotInfo *info, uintptr_t virt, int slot_id,
+>                                     uint32_t add_size, uint32_t group_id);
+>         -unsigned long memslot_max_size_virt(RedMemSlotInfo *info,
+>         -                                    unsigned long virt, int slot_id,
+>         -                                    uint32_t group_id);
+>         +uintptr_t memslot_max_size_virt(RedMemSlotInfo *info,
+>         +                                uintptr_t virt, int slot_id,
+>         +                                uint32_t group_id);
+>           void *memslot_get_virt(RedMemSlotInfo *info, QXLPHYSICAL addr, uint32_t add_size,
+>                                  int group_id);
+>           
+>         @@ -68,7 +68,7 @@ void memslot_info_init(RedMemSlotInfo *info,
+>                                  uint8_t internal_groupslot_id);
+>           void memslot_info_destroy(RedMemSlotInfo *info);
+>           void memslot_info_add_slot(RedMemSlotInfo *info, uint32_t slot_group_id, uint32_t slot_id,
+>         -                           uint64_t addr_delta, unsigned long virt_start, unsigned long virt_end,
+>         +                           uint64_t addr_delta, uintptr_t virt_start, uintptr_t virt_end,
+>                                      uint32_t generation);
+>           void memslot_info_del_slot(RedMemSlotInfo *info, uint32_t slot_group_id, uint32_t slot_id);
+>           void memslot_info_reset(RedMemSlotInfo *info);
+>         diff --git a/server/red-parse-qxl.c b/server/red-parse-qxl.c
+>         index eb2c0b538..01fd60580 100644
+>         --- a/server/red-parse-qxl.c
+>         +++ b/server/red-parse-qxl.c
+>         @@ -1335,7 +1335,7 @@ static bool red_get_message(QXLInstance *qxl_instance, RedMemSlotInfo *slots, in
+>           {
+>               QXLMessage *qxl;
+>               int memslot_id;
+>         -    unsigned long len;
+>         +    uintptr_t len;
+>               uint8_t *end;
+>           
+>               /*
+>         diff --git a/server/spice-qxl.h b/server/spice-qxl.h
+>         index 2f47910b9..5349d9275 100644
+>         --- a/server/spice-qxl.h
+>         +++ b/server/spice-qxl.h
+>         @@ -187,8 +187,8 @@ struct QXLDevMemSlot {
+>               uint32_t slot_group_id;
+>               uint32_t slot_id;
+>               uint32_t generation;
+>         -    unsigned long virt_start;
+>         -    unsigned long virt_end;
+>         +    uintptr_t virt_start;
+>         +    uintptr_t virt_end;
+>               uint64_t addr_delta;
+>               uint32_t qxl_ram_size;
+>           };
+>
+> Frediano
+>
+
+--------------861CD13FE27EE71844E3B778
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 8/11/19 3:12 PM, Frediano Ziglio
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:1029345715.5453659.1565525540653.JavaMail.zimbra@redhat.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div style="font-family: times new roman, new york, times, serif;
+        font-size: 12pt; color: #000000">
+        <div><br>
+        </div>
+        <blockquote style="border-left:2px solid
+#1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:normal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:12pt;">
+          <div><br>
+          </div>
+          <p>Hi<br>
+          </p>
+          <div class="moz-cite-prefix">On 7/23/19 11:22 AM, Frediano
+            Ziglio wrote:<br>
+          </div>
+          <blockquote
+            cite="mid:20190723082230.10381-3-fziglio@redhat.com">
+            <pre class="moz-quote-pre"><a href="https://www.englishclub.com/pronunciation/a-an.htm" target="_blank" moz-do-not-send="true"><h3 class="LC20lb"><span dir="ltr">When to Say "a" or "an" | Pronunciation | EnglishClub</span></h3>
+<div class="TbwUpd"><cite class="iUh30"><span dir="ltr">https://www.englishclub.com/pronunciation/a-an.htm</span></cite></div></a>On LLP64 platforms (like Windows) a virtual address cannot
+be represented by a "unsigned long" type, so use uintptr_t
+which is defined as a integral type large like a pointer.</pre>
+          </blockquote>
+          <p><br>
+          </p>
+          <p>This sentence sounds a bit odd to me<br>
+          </p>
+          <p>should be integer?</p>
+        </blockquote>
+        <div>C/C++ documentation classify these types as integral, not
+          integer.<br>
+        </div>
+        <blockquote style="border-left:2px solid
+#1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:normal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:12pt;">
+          <p>also s/a/an</p>
+        </blockquote>
+        <div>fixed, thanks<br>
+        </div>
+        <blockquote style="border-left:2px solid
+#1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:normal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:12pt;">
+          <p><br>
+          </p>
+          <p><br>
+          </p>
+          <blockquote
+            cite="mid:20190723082230.10381-3-fziglio@redhat.com">
+            <pre class="moz-quote-pre">"address_delta" is a difference of pointers so use same
+type size.
+</pre>
+          </blockquote>
+          <p><br>
+          </p>
+          <p>Not a big deal but wouldn't be preferable to be consistent
+            with addr_delta?</p>
+        </blockquote>
+        <div>It sounds reasonable, although the value came from
+          "addr_delta" field of QXLDevMemSlot<br>
+        </div>
+        <div>which is part of SPICE ABI (so cannot be changed).<br>
+        </div>
+      </div>
+    </blockquote>
+    <p><br>
+    </p>
+    <p>Actually I thought to change address_delta to match everywhere to
+      uint64_t of addr_delta<br>
+      can this delta be actually negative? seems not since it's coming
+      from addr_delta,wouldn't be<br>
+      better to keep it unsigned<br>
+    </p>
+    <p>Snir.<br>
+    </p>
+    <p><br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:1029345715.5453659.1565525540653.JavaMail.zimbra@redhat.com">
+      <div style="font-family: times new roman, new york, times, serif;
+        font-size: 12pt; color: #000000">
+        <blockquote style="border-left:2px solid
+#1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:normal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:12pt;">
+          <p>Snir.<br>
+          </p>
+          <blockquote
+            cite="mid:20190723082230.10381-3-fziglio@redhat.com">
+            <pre class="moz-quote-pre">Signed-off-by: Frediano Ziglio <a class="moz-txt-link-rfc2396E" href="mailto:fziglio@redhat.com" target="_blank" moz-do-not-send="true">&lt;fziglio@redhat.com&gt;</a>
+---
+ server/memslot.c       | 22 ++++++++++++----------
+ server/memslot.h       | 20 ++++++++++----------
+ server/red-parse-qxl.c |  2 +-
+ server/spice-qxl.h     |  4 ++--
+ 4 files changed, 25 insertions(+), 23 deletions(-)
+
+diff --git a/server/memslot.c b/server/memslot.c
+index 2a1771b02..182d2b7e9 100644
+--- a/server/memslot.c
++++ b/server/memslot.c
+@@ -21,7 +21,7 @@
+ 
+ #include "memslot.h"
+ 
+-static unsigned long __get_clean_virt(RedMemSlotInfo *info, QXLPHYSICAL addr)
++static uintptr_t __get_clean_virt(RedMemSlotInfo *info, QXLPHYSICAL addr)
+ {
+     return addr &amp; info-&gt;memslot_clean_virt_mask;
+ }
+@@ -37,7 +37,8 @@ static void print_memslots(RedMemSlotInfo *info)
+                 !info-&gt;mem_slots[i][x].virt_end_addr) {
+                 continue;
+             }
+-            printf("id %d, group %d, virt start %lx, virt end %lx, generation %u, delta %lx\n",
++            printf("id %d, group %d, virt start %" PRIxPTR ", virt end %" PRIxPTR ", generation %u,"
++                   " delta %" PRIxPTR "\n",
+                    x, i, info-&gt;mem_slots[i][x].virt_start_addr,
+                    info-&gt;mem_slots[i][x].virt_end_addr, info-&gt;mem_slots[i][x].generation,
+                    info-&gt;mem_slots[i][x].address_delta);
+@@ -46,7 +47,7 @@ static void print_memslots(RedMemSlotInfo *info)
+ }
+ 
+ /* return 1 if validation successfull, 0 otherwise */
+-int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
++int memslot_validate_virt(RedMemSlotInfo *info, uintptr_t virt, int slot_id,
+                           uint32_t add_size, uint32_t group_id)
+ {
+     MemSlot *slot;
+@@ -60,8 +61,9 @@ int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
+     if (virt &lt; slot-&gt;virt_start_addr || (virt + add_size) &gt; slot-&gt;virt_end_addr) {
+         print_memslots(info);
+         spice_warning("virtual address out of range"
+-              "    virt=0x%lx+0x%x slot_id=%d group_id=%d\n"
+-              "    slot=0x%lx-0x%lx delta=0x%lx",
++              "    virt=0x%" G_GINTPTR_MODIFIER "x+0x%x slot_id=%d group_id=%d\n"
++              "    slot=0x%" G_GINTPTR_MODIFIER "x-0x%" G_GINTPTR_MODIFIER "x"
++              " delta=0x%" G_GINTPTR_MODIFIER "x",
+               virt, add_size, slot_id, group_id,
+               slot-&gt;virt_start_addr, slot-&gt;virt_end_addr, slot-&gt;address_delta);
+         return 0;
+@@ -69,9 +71,9 @@ int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
+     return 1;
+ }
+ 
+-unsigned long memslot_max_size_virt(RedMemSlotInfo *info,
+-                                    unsigned long virt, int slot_id,
+-                                    uint32_t group_id)
++uintptr_t memslot_max_size_virt(RedMemSlotInfo *info,
++                                uintptr_t virt, int slot_id,
++                                uint32_t group_id)
+ {
+     MemSlot *slot;
+ 
+@@ -91,7 +93,7 @@ void *memslot_get_virt(RedMemSlotInfo *info, QXLPHYSICAL addr, uint32_t add_size
+ {
+     int slot_id;
+     int generation;
+-    unsigned long h_virt;
++    uintptr_t h_virt;
+ 
+     MemSlot *slot;
+ 
+@@ -171,7 +173,7 @@ void memslot_info_destroy(RedMemSlotInfo *info)
+ }
+ 
+ void memslot_info_add_slot(RedMemSlotInfo *info, uint32_t slot_group_id, uint32_t slot_id,
+-                           uint64_t addr_delta, unsigned long virt_start, unsigned long virt_end,
++                           uint64_t addr_delta, uintptr_t virt_start, uintptr_t virt_end,
+                            uint32_t generation)
+ {
+     spice_assert(info-&gt;num_memslots_groups &gt; slot_group_id);
+diff --git a/server/memslot.h b/server/memslot.h
+index 00728c4b6..45381feb9 100644
+--- a/server/memslot.h
++++ b/server/memslot.h
+@@ -25,9 +25,9 @@
+ 
+ typedef struct MemSlot {
+     int generation;
+-    unsigned long virt_start_addr;
+-    unsigned long virt_end_addr;
+-    long address_delta;
++    uintptr_t virt_start_addr;
++    uintptr_t virt_end_addr;
++    intptr_t address_delta;
+ } MemSlot;
+ 
+ typedef struct RedMemSlotInfo {
+@@ -39,8 +39,8 @@ typedef struct RedMemSlotInfo {
+     uint8_t memslot_id_shift;
+     uint8_t memslot_gen_shift;
+     uint8_t internal_groupslot_id;
+-    unsigned long memslot_gen_mask;
+-    unsigned long memslot_clean_virt_mask;
++    uintptr_t memslot_gen_mask;
++    uintptr_t memslot_clean_virt_mask;
+ } RedMemSlotInfo;
+ 
+ static inline int memslot_get_id(RedMemSlotInfo *info, uint64_t addr)
+@@ -53,11 +53,11 @@ static inline int memslot_get_generation(RedMemSlotInfo *info, uint64_t addr)
+     return (addr &gt;&gt; info-&gt;memslot_gen_shift) &amp; info-&gt;memslot_gen_mask;
+ }
+ 
+-int memslot_validate_virt(RedMemSlotInfo *info, unsigned long virt, int slot_id,
++int memslot_validate_virt(RedMemSlotInfo *info, uintptr_t virt, int slot_id,
+                           uint32_t add_size, uint32_t group_id);
+-unsigned long memslot_max_size_virt(RedMemSlotInfo *info,
+-                                    unsigned long virt, int slot_id,
+-                                    uint32_t group_id);
++uintptr_t memslot_max_size_virt(RedMemSlotInfo *info,
++                                uintptr_t virt, int slot_id,
++                                uint32_t group_id);
+ void *memslot_get_virt(RedMemSlotInfo *info, QXLPHYSICAL addr, uint32_t add_size,
+                        int group_id);
+ 
+@@ -68,7 +68,7 @@ void memslot_info_init(RedMemSlotInfo *info,
+                        uint8_t internal_groupslot_id);
+ void memslot_info_destroy(RedMemSlotInfo *info);
+ void memslot_info_add_slot(RedMemSlotInfo *info, uint32_t slot_group_id, uint32_t slot_id,
+-                           uint64_t addr_delta, unsigned long virt_start, unsigned long virt_end,
++                           uint64_t addr_delta, uintptr_t virt_start, uintptr_t virt_end,
+                            uint32_t generation);
+ void memslot_info_del_slot(RedMemSlotInfo *info, uint32_t slot_group_id, uint32_t slot_id);
+ void memslot_info_reset(RedMemSlotInfo *info);
+diff --git a/server/red-parse-qxl.c b/server/red-parse-qxl.c
+index eb2c0b538..01fd60580 100644
+--- a/server/red-parse-qxl.c
++++ b/server/red-parse-qxl.c
+@@ -1335,7 +1335,7 @@ static bool red_get_message(QXLInstance *qxl_instance, RedMemSlotInfo *slots, in
+ {
+     QXLMessage *qxl;
+     int memslot_id;
+-    unsigned long len;
++    uintptr_t len;
+     uint8_t *end;
+ 
+     /*
+diff --git a/server/spice-qxl.h b/server/spice-qxl.h
+index 2f47910b9..5349d9275 100644
+--- a/server/spice-qxl.h
++++ b/server/spice-qxl.h
+@@ -187,8 +187,8 @@ struct QXLDevMemSlot {
+     uint32_t slot_group_id;
+     uint32_t slot_id;
+     uint32_t generation;
+-    unsigned long virt_start;
+-    unsigned long virt_end;
++    uintptr_t virt_start;
++    uintptr_t virt_end;
+     uint64_t addr_delta;
+     uint32_t qxl_ram_size;
+ };
+</pre>
+          </blockquote>
+        </blockquote>
+        <div>Frediano</div>
+        <div><br>
+        </div>
+      </div>
+    </blockquote>
+  </body>
+</html>
+
+--------------861CD13FE27EE71844E3B778--
+
+--===============1910436277==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1910436277==--
