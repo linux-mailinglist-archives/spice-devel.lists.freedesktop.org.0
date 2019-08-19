@@ -1,52 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A702291E9B
-	for <lists+spice-devel@lfdr.de>; Mon, 19 Aug 2019 10:11:59 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id F234692321
+	for <lists+spice-devel@lfdr.de>; Mon, 19 Aug 2019 14:10:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BD4296E0CB;
-	Mon, 19 Aug 2019 08:11:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 53B4D6E109;
+	Mon, 19 Aug 2019 12:10:30 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CD9466E09E
- for <spice-devel@lists.freedesktop.org>; Mon, 19 Aug 2019 07:16:47 +0000 (UTC)
-Received: by mail-ed1-x534.google.com with SMTP id w20so703461edd.2
- for <spice-devel@lists.freedesktop.org>; Mon, 19 Aug 2019 00:16:47 -0700 (PDT)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C77DE6E109
+ for <spice-devel@lists.freedesktop.org>; Mon, 19 Aug 2019 12:10:28 +0000 (UTC)
+Received: by mail-io1-xd34.google.com with SMTP id j5so3659234ioj.8
+ for <spice-devel@lists.freedesktop.org>; Mon, 19 Aug 2019 05:10:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=Cd1eqR71dTIxTOZcSEUekgi+XzB7WWsaUb0MVePvXac=;
- b=Trhmo/sfspgnYtL8cK6walm2IkSIax5cbR1fmMLVlFGdFhPVgE1t3ZNj15bU8bvLG6
- keIrcvPyY7wX6pfxw0PHpFSQMsVfYjhSNEiUF6csLrEiJbDgbQnBG5eElt2iWrRTiD9/
- 3uHfrucK6WmoqV6xhudwP96eez03IGZSlHj3XLGhYZVVdKir1G26oQXWCFbLX9IjlEiN
- t+iCJ2VupjmjlahprAR7nX4VHkMlLNJHvZunRdoIjA22yhJjD2yG3Vr4fwMr6QCLQwCE
- n5lwijW2lEhIYmw9qsaAR1Vf7hGmgQy/AXvFO5FB4Q3uQikYvj5Geg7Uq3ft5fOLLSff
- 5bgg==
-X-Gm-Message-State: APjAAAWpRZvWEqhI8yVqLMoigqjh0WemXP+waIG7PELpJUd76GXE/vkJ
- /LvqfFr3licERnOUABH8Nib+DDoU9h59VfLWx7O8g59B
-X-Google-Smtp-Source: APXvYqwDt0rz9ko9etAxkPDm76aWIFRexcXXO8FkEyMSvtKw5cK2bMOdybLoIUyLc68kKjSmxf8xT7oPMBEkRykH65w=
-X-Received: by 2002:a50:9ac3:: with SMTP id p61mr23836810edb.2.1566199005812; 
- Mon, 19 Aug 2019 00:16:45 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Gzsf49P65MuxIyJVVy5FnaPz+XD2AXZ/WbQJfN7QKyk=;
+ b=KsgyyGyR+lG81FzXqwunWnKJ3JU6NIr6MQj3PTY5xE1DPLM8n/xQnjee0WzOXrIkfu
+ fbra0aaSlXYIgFdAwWlDuqdPVJFXlJ0/aDy+OTZoby5a74akTaqcOeLNHpD7hSM8tauC
+ 3EC0YNkgmRuqhrolAtgXrVRqjTusCom66XayLpuZiEDg+HK/7hYVWENwYtobyoJdwAvq
+ c4WNqEq5GKnn/5o2WccxWvSUNBTjdIGmXx65GwM90LAGJRm5BZ6hlMIWpSZ1NY7vQXMN
+ O/Pcg38KYgd/Gi9AHi1y4rjFqjfeHHwTx47swxS+E3WpGf3JhrmvOJLTJ/GeY7qZ6/0/
+ mSqg==
+X-Gm-Message-State: APjAAAVuMBD4BHhO2ZEXIwqQOOGDD+JZO0Dirfd9rEdUKci/0OQzJsTI
+ EX+uMnuxGwaEBCNPYrD6FcXOZiZa6R/sWQMEETHoJWS7fV8=
+X-Google-Smtp-Source: APXvYqwX2iMXyJ1o2GpxiEcJ7B4oAIDplKq2ZmswZDZga0NH9kB2AnJLBAfb1PC8UuPdLcFgE3DgcOTUq7AFXcrIwf8=
+X-Received: by 2002:a6b:b9c2:: with SMTP id
+ j185mr22539510iof.148.1566216627525; 
+ Mon, 19 Aug 2019 05:10:27 -0700 (PDT)
 MIME-Version: 1.0
-From: Brian Wengel <m40636067@gmail.com>
-Date: Mon, 19 Aug 2019 09:16:34 +0200
-Message-ID: <CADcL3SD4iJSNspP6BuDd4A-+2m49TuqdQfeE_QTNzQe+fWXDOg@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
-X-Mailman-Approved-At: Mon, 19 Aug 2019 08:11:57 +0000
+References: <CADcL3SD4iJSNspP6BuDd4A-+2m49TuqdQfeE_QTNzQe+fWXDOg@mail.gmail.com>
+In-Reply-To: <CADcL3SD4iJSNspP6BuDd4A-+2m49TuqdQfeE_QTNzQe+fWXDOg@mail.gmail.com>
+From: Yuri Benditovich <yuri.benditovich@daynix.com>
+Date: Mon, 19 Aug 2019 15:10:13 +0300
+Message-ID: <CAOEp5OdNoEJBJ7=n+VVvJLzXhO-LG8AwP=SpC8_VOu_wq1jMyw@mail.gmail.com>
+To: Brian Wengel <m40636067@gmail.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=Cd1eqR71dTIxTOZcSEUekgi+XzB7WWsaUb0MVePvXac=;
- b=FyH5mimZA8EHKvEO9MWJc0vRcvlf0BnOVReNLGMVK7G8Ii+R3rdBi56vQD6YQTXsIo
- th0+7RXzT7wW0LQvLOShsE+11dAlN2yCfFjtsMC9PJwB6hNf5R7dwhDwfyvPDLn989jM
- ehpZygYh0nhmuJzPF5rOL9tAvP09D10M+gaRL/gEJVr9uIFMkt4UZ0UbI48o/UicoSxb
- I2cRdjew0FKmxZKGZ7RQg2QcaW2J7gTKP4BuWG7U0d9GBe7c8hvaWy3kdK9QYWz2GWQU
- 3zd2EIwGqqM3ceQYcFDNWD+StZrBtxgJETZDF7Zuk//gkU7Bz5RO7uS3heLrCVdK53l2
- tyEg==
-Subject: [Spice-devel] USB redirection: "LIBUSB_ERROR_NOT_SUPPORTED"
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=Gzsf49P65MuxIyJVVy5FnaPz+XD2AXZ/WbQJfN7QKyk=;
+ b=IV8vabeYvQ6+QC+DdEHpAd1tTOO/AEADlVetqJHnwGSqkFtE0ibX8tnGKNXWrixD2A
+ +J4gH5n/foBEGxRuc7J0wcEBgSeYnFxUdJcg1TFG/yXdwW3oRa6S0ffBlILOHYz1iyba
+ agCWRQpuAvdswkFG7ghokK3KCIJ2yn5+CvBJ8+EarOYugODj1b7pnah26xjuA+kKqDwO
+ /c49jpqPwHN6TK+EzxrvGJ7nQmUukt2NoIQtxb9R2DnhYdPeXn0SGvRFAxQdJ3QbIy/q
+ PND9F2MYgSxMZf9EyoEODdtgp0UNbufBw3v+jB50dDveKH7/64YDIhtQce1Qs7f6epfo
+ J0zA==
+Subject: Re: [Spice-devel] USB redirection: "LIBUSB_ERROR_NOT_SUPPORTED"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,89 +62,125 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0376291067=="
+Cc: Spice List <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============0259114799=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0376291067==
-Content-Type: multipart/related; boundary="000000000000640ad40590731f34"
+--===============0259114799==
+Content-Type: multipart/related; boundary="000000000000b9f47f0590773974"
 
---000000000000640ad40590731f34
-Content-Type: multipart/alternative; boundary="000000000000640ad30590731f33"
+--000000000000b9f47f0590773974
+Content-Type: multipart/alternative; boundary="000000000000b9f47e0590773973"
 
---000000000000640ad30590731f33
+--000000000000b9f47e0590773973
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Spice-devs
+Hi Brian,
 
-I'm trying to get some USB headsets to work on a VM (Win10 x64) using spice
-USB redirection, but I get the error "*LIBUSB_ERROR_NOT_SUPPORTED*".
-Is it a misconfiguration or is the device really not supported?
+Which backend you use on your Spice Client machine, UsbDk or WinUsb?
+What is the version of remote-viewer and the version of libusb-1.0.dll (it
+should be in the same directory when remote-viewer.exe)
+I'd also suggest to make a debug log (usually "remote-viewer ...
+--spice-debug > log.txt 2>&1") and provide the log.
 
-I've added a ich9 USB controller on the VM:
+Thanks,
+Yuri
 
-<controller type='usb' index='0' model='ich9-ehci1'/>
+On Mon, Aug 19, 2019 at 11:11 AM Brian Wengel <m40636067@gmail.com> wrote:
 
-<controller type='usb' index='0' model='ich9-uhci1'>
-  <master startport='0'/>
-</controller>
+> Hi Spice-devs
+>
+> I'm trying to get some USB headsets to work on a VM (Win10 x64) using
+> spice USB redirection, but I get the error "*LIBUSB_ERROR_NOT_SUPPORTED*".
+> Is it a misconfiguration or is the device really not supported?
+>
+> I've added a ich9 USB controller on the VM:
+>
+> <controller type='usb' index='0' model='ich9-ehci1'/>
+>
+> <controller type='usb' index='0' model='ich9-uhci1'>
+>   <master startport='0'/>
+> </controller>
+>
+> <controller type='usb' index='0' model='ich9-uhci2'>
+>   <master startport='2'/>
+> </controller>
+>
+> On my VM:
+> [image: image.png]
+>
+> On my W7 box I have these controller:
+> [image: image.png]
+>
+> This is my options in spice:
+> [image: image.png]
+> And the error:
+> [image: image.png]
+>
+> Can I do further action to track down the problem?
+>
+> Best regards
+> Brian W.
+> Denmark
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
-<controller type='usb' index='0' model='ich9-uhci2'>
-  <master startport='2'/>
-</controller>
-
-On my VM:
-[image: image.png]
-
-On my W7 box I have these controller:
-[image: image.png]
-
-This is my options in spice:
-[image: image.png]
-And the error:
-[image: image.png]
-
-Can I do further action to track down the problem?
-
-Best regards
-Brian W.
-Denmark
-
---000000000000640ad30590731f33
+--000000000000b9f47e0590773973
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Hi Spice-devs</div><div><br></div><div>I&#39;m trying=
- to get some USB headsets to work on a VM (Win10 x64) using spice USB redir=
-ection, but I get the error=C2=A0&quot;<b>LIBUSB_ERROR_NOT_SUPPORTED</b>&qu=
-ot;.</div><div>Is it a misconfiguration or is the device really not support=
-ed?</div><div><br></div><div><div>I&#39;ve added a ich9 USB controller on t=
-he VM:</div><div><p style=3D"margin-top:1px;margin-bottom:1px"></p><table c=
-lass=3D"gmail-TblTextbox" style=3D"border-collapse:collapse"><tbody><tr><td=
- style=3D"font-family:Consolas,Verdana;border:1px solid rgb(180,180,180);pa=
-dding:3px;vertical-align:top;font-size:10pt"><p style=3D"margin-top:1px;mar=
-gin-bottom:1px">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; mod=
-el=3D&#39;ich9-ehci1&#39;/&gt;<br></p><p style=3D"margin-top:1px;margin-bot=
-tom:1px">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#=
-39;ich9-uhci1&#39;&gt;<br>=C2=A0 &lt;master startport=3D&#39;0&#39;/&gt;<br=
->&lt;/controller&gt;<br></p><p style=3D"margin-top:1px;margin-bottom:1px">&=
-lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#39;ich9-uh=
-ci2&#39;&gt;<br>=C2=A0 &lt;master startport=3D&#39;2&#39;/&gt;<br>&lt;/cont=
-roller&gt;</p></td></tr></tbody></table></div><div><br></div><div>On my VM:=
-<br></div></div><div><div><img src=3D"cid:ii_jzi25vmz4" alt=3D"image.png" w=
-idth=3D"380" height=3D"138"><br></div></div><div><br></div><div><div><div>O=
-n my W7 box I have these controller:</div></div><div><img src=3D"cid:ii_jzi=
-23wjj3" alt=3D"image.png" width=3D"466" height=3D"298"><br><br></div></div>=
-<div>This is my options in spice:</div><div><img src=3D"cid:ii_jzi1li1w0" a=
-lt=3D"image.png" width=3D"475" height=3D"309"><br></div><div>And the error:=
-</div><div><div><img src=3D"cid:ii_jzi1lrm21" alt=3D"image.png" width=3D"41=
-5" height=3D"137"><br></div></div><div><br></div><div>Can I do further acti=
-on to track down the problem?<br><br>Best regards<br>Brian W.<br>Denmark</d=
-iv></div>
+<div dir=3D"ltr">Hi Brian,<div><br></div><div>Which backend you use on your=
+ Spice Client machine, UsbDk or WinUsb?</div><div>What is the version of re=
+mote-viewer and the version of libusb-1.0.dll (it should be in the same dir=
+ectory when remote-viewer.exe)</div><div>I&#39;d also suggest to make a deb=
+ug log (usually &quot;remote-viewer ... --spice-debug &gt; log.txt 2&gt;&am=
+p;1&quot;) and provide the log.</div><div><br></div><div>Thanks,</div><div>=
+Yuri</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gm=
+ail_attr">On Mon, Aug 19, 2019 at 11:11 AM Brian Wengel &lt;<a href=3D"mail=
+to:m40636067@gmail.com">m40636067@gmail.com</a>&gt; wrote:<br></div><blockq=
+uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
+x solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>Hi Spice-d=
+evs</div><div><br></div><div>I&#39;m trying to get some USB headsets to wor=
+k on a VM (Win10 x64) using spice USB redirection, but I get the error=C2=
+=A0&quot;<b>LIBUSB_ERROR_NOT_SUPPORTED</b>&quot;.</div><div>Is it a misconf=
+iguration or is the device really not supported?</div><div><br></div><div><=
+div>I&#39;ve added a ich9 USB controller on the VM:</div><div><p style=3D"m=
+argin-top:1px;margin-bottom:1px"></p><table class=3D"gmail-m_-1628301627093=
+95943gmail-TblTextbox" style=3D"border-collapse:collapse"><tbody><tr><td st=
+yle=3D"font-family:Consolas,Verdana;border:1px solid rgb(180,180,180);paddi=
+ng:3px;vertical-align:top;font-size:10pt"><p style=3D"margin-top:1px;margin=
+-bottom:1px">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=
+=3D&#39;ich9-ehci1&#39;/&gt;<br></p><p style=3D"margin-top:1px;margin-botto=
+m:1px">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#39=
+;ich9-uhci1&#39;&gt;<br>=C2=A0 &lt;master startport=3D&#39;0&#39;/&gt;<br>&=
+lt;/controller&gt;<br></p><p style=3D"margin-top:1px;margin-bottom:1px">&lt=
+;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#39;ich9-uhci=
+2&#39;&gt;<br>=C2=A0 &lt;master startport=3D&#39;2&#39;/&gt;<br>&lt;/contro=
+ller&gt;</p></td></tr></tbody></table></div><div><br></div><div>On my VM:<b=
+r></div></div><div><div><img src=3D"cid:ii_jzi25vmz4" alt=3D"image.png" wid=
+th=3D"380" height=3D"138"><br></div></div><div><br></div><div><div><div>On =
+my W7 box I have these controller:</div></div><div><img src=3D"cid:ii_jzi23=
+wjj3" alt=3D"image.png" width=3D"466" height=3D"298"><br><br></div></div><d=
+iv>This is my options in spice:</div><div><img src=3D"cid:ii_jzi1li1w0" alt=
+=3D"image.png" width=3D"475" height=3D"309"><br></div><div>And the error:</=
+div><div><div><img src=3D"cid:ii_jzi1lrm21" alt=3D"image.png" width=3D"415"=
+ height=3D"137"><br></div></div><div><br></div><div>Can I do further action=
+ to track down the problem?<br><br>Best regards<br>Brian W.<br>Denmark</div=
+></div>
+_______________________________________________<br>
+Spice-devel mailing list<br>
+<a href=3D"mailto:Spice-devel@lists.freedesktop.org" target=3D"_blank">Spic=
+e-devel@lists.freedesktop.org</a><br>
+<a href=3D"https://lists.freedesktop.org/mailman/listinfo/spice-devel" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.freedesktop.org/mailman/lis=
+tinfo/spice-devel</a></blockquote></div>
 
---000000000000640ad30590731f33--
+--000000000000b9f47e0590773973--
 
---000000000000640ad40590731f34
+--000000000000b9f47f0590773974
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -577,7 +617,7 @@ IBkB+1d/hkRS/ecs8vJ1/iixkwi3SIAESIAESCCRgFccvR55SwlyZJvIi3tIgARIgARIIK0EGGzT
 ipPKSIAESIAESCCRAINtIhPuIQESIAESIIG0EmCwTStOKiMBEiABEiCBRAIMtolMuIcESIAESIAE
 0kpAPY0cfakrrUqpjARIgARIgARIIE4g4v3CT1yAayRAAiRAAiRAAiMj8H8BTKjZrx+lAnEAAAAA
 SUVORK5CYII=
---000000000000640ad40590731f34
+--000000000000b9f47f0590773974
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -753,7 +793,7 @@ l2JfNIxPf/R3CMk+WNIfV990DhMHWtDWdhoTJ05BUdEImm0SIAESIAESGBIBWSu0s7MDpaXT0Rku
 x3cHi/DW/DHOtd1KS0vR2XkOTU2HIc0lHiRAAiRAAiQwFAIjR47CrFmfg7Iv52KSHGM+x84VAFMr
 MXOqsXh8LBpdJEACJEACJJAZAVms7ZhpeDpCnykhyvhUNHpv9pNZNkxFAiRAAiRAAokJqDGfxFEY
 SgIkQAIkQALZJfD/AY7SG2LCNjp2AAAAAElFTkSuQmCC
---000000000000640ad40590731f34
+--000000000000b9f47f0590773974
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -895,7 +935,7 @@ bA8JkAAJnBYBGvzTIs1ySIAESOCMCVDx6ow7gMWTAAmQwGkQoA//NCizDBIgARKYEgJ06UxJR7Aa
 JEACJDBpAjT4kybM/EmABEhgSgjQ4E9JR7AaJEACJDBpAjT4kybM/EmABEhgSgjQ4E9JR7AaJEAC
 JDBpAjT4kybM/EmABEhgSgjQ4E9JR7AaJEACJDBpAuoPryZdCPMnARIgARI4ewL/D5gdsj89Ro6H
 AAAAAElFTkSuQmCC
---000000000000640ad40590731f34
+--000000000000b9f47f0590773974
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -1416,9 +1456,9 @@ IAESCEZgpFO7wYbIWiRAAiRAAiQwHALnJiIdDh5aJQESIAESIIGTCYzs6y8nD401SIAESIAESGD4
 BOhIh8+YLZAACZAACZxjAnSk5/jmcmgkQAIkQALDJ0BHOnzGbIEESIAESOAcE6AjPcc3l0MjARIg
 ARIYPgE60uEzZgskQAIkQALnmAAd6Tm+uRwaCZAACZDA8AnQkQ6fMVsgARIgARI4xwTUykbneHwc
 GgmQAAmQAAkMlcD/ARS9qo18i27xAAAAAElFTkSuQmCC
---000000000000640ad40590731f34--
+--000000000000b9f47f0590773974--
 
---===============0376291067==
+--===============0259114799==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -1428,4 +1468,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0376291067==--
+--===============0259114799==--
