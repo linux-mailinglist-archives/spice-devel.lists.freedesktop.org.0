@@ -1,56 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDD8F95B70
-	for <lists+spice-devel@lfdr.de>; Tue, 20 Aug 2019 11:46:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E08895C0A
+	for <lists+spice-devel@lfdr.de>; Tue, 20 Aug 2019 12:12:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A0576E62C;
-	Tue, 20 Aug 2019 09:46:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CC0236E614;
+	Tue, 20 Aug 2019 10:12:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-io1-xd41.google.com (mail-io1-xd41.google.com
- [IPv6:2607:f8b0:4864:20::d41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 140866E2BF
- for <spice-devel@lists.freedesktop.org>; Tue, 20 Aug 2019 09:46:50 +0000 (UTC)
-Received: by mail-io1-xd41.google.com with SMTP id s21so10894415ioa.1
- for <spice-devel@lists.freedesktop.org>; Tue, 20 Aug 2019 02:46:50 -0700 (PDT)
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
+ [IPv6:2607:f8b0:4864:20::d43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E3BEB6E614
+ for <spice-devel@lists.freedesktop.org>; Tue, 20 Aug 2019 10:12:24 +0000 (UTC)
+Received: by mail-io1-xd43.google.com with SMTP id 18so10952561ioe.10
+ for <spice-devel@lists.freedesktop.org>; Tue, 20 Aug 2019 03:12:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to;
- bh=y4yGOjpNRVtrKSiay59R7WSEJiCCq+tFST8xrUDjAWM=;
- b=gRgNPsAnrmEag3IEp4AyAebK+sIaUB1ChgmSSMIN4AUaTICusOuvDBlLp2KwP7XFBJ
- 3zpCw4hKjqJG8/bP1x47PTZJdrwBnohIcK6BMZf6rXXp6qBbVEAL94A6e+LL2NdBWGxD
- qAgPhN5N6UlA4WdRsxj1PKltpx0jJx3op4S6q2PVkMDUn1dWjcnQGUxHj9jO6nBJhHfV
- XaOqG/9Vxm1DFc/kziKOPeI5WjV3WzBAXJKybRo4/yhEmIPkgNdHfXhnPqkiMrM4Kv/7
- yOwTzBp7aUd1wqjoy06ktoEpcGxFaTTp/VmmQhRobm7c60wm2BYLaTOfKiK2vFMqPmD0
- /+ZQ==
-X-Gm-Message-State: APjAAAXIhhpvHLWTQ0dskbTU7kUgA8B6+h6Aq8JQg6e5gZYSQhlko6EU
- /m1g6UjoTYtGIQoVkj+1vAZcuzPYU8y/s1yCvxDKneJn3q5eTw==
-X-Google-Smtp-Source: APXvYqw85Me/PId9IFxUj7MWBsaImct9BEQbng/5G/7ODjePd2LTx+4pEaYlojxYhZ8jVLFGNA3O7wHghtFUxWLgDgI=
-X-Received: by 2002:a6b:c9c2:: with SMTP id z185mr5191807iof.17.1566294409361; 
- Tue, 20 Aug 2019 02:46:49 -0700 (PDT)
+ bh=V6wPocHr/lXlrPXDzdr9X/LImGnt8G0JpPVsbnTKW4E=;
+ b=G9cQt+OyZ+yRrAumYBy8cFv3hpbQdXnNQ/v+N0eYy1B/66UM1GzbPKBHw1uy8xA3A6
+ OnaVGytgON5ia7gTgw8xig2fDbEifNFvgCBaN+crmPBApf0mtIYcQpEMDAi43CERi1gM
+ Lu5jWQKua417j00QI8MLjOm0P29lQbfd9ZyHPNZlUjyNiW6ZFVd1xreqjafQEJ9F7jNs
+ moZzUr+ppwfk3h3z2a/XwNoT8GgJNqVJLwPzhDR/lnnVcFPJB/aM057q9NiiAGSjfzCr
+ 6O03JIxwyswa/o1Zhc/xyaspxCMyW+94y5iccdVvuZ68qbHTTNqeeLXG6+U8QW4JmkUI
+ DsfQ==
+X-Gm-Message-State: APjAAAUCSkvgCJFaXFqJE0y/cd2fQvT5Q6+hBhtnF2+spA0PVWVyvYpv
+ +QAKaH1ULjblZ7jXr6BZ+JbuRq4CxSpaAnbJB/PrGio1ukg=
+X-Google-Smtp-Source: APXvYqweQsjAniYCp6/2k2JU/8rBMcXyAZNND2ZlnFlC9ZZkCE0+sZZDwgg07Jx7X46wlQgZYoXwjVbQCptnRuermOU=
+X-Received: by 2002:a02:2243:: with SMTP id o64mr2897282jao.100.1566295944081; 
+ Tue, 20 Aug 2019 03:12:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <CADcL3SD4iJSNspP6BuDd4A-+2m49TuqdQfeE_QTNzQe+fWXDOg@mail.gmail.com>
  <CAOEp5OdNoEJBJ7=n+VVvJLzXhO-LG8AwP=SpC8_VOu_wq1jMyw@mail.gmail.com>
  <CADcL3SDVSYxSpBu5tnoJFzdEzuvR5nzQKag53PHthp+awPwiJA@mail.gmail.com>
-In-Reply-To: <CADcL3SDVSYxSpBu5tnoJFzdEzuvR5nzQKag53PHthp+awPwiJA@mail.gmail.com>
+ <CAOEp5OcrbnVAOQrJTbC0Hsz5+1dqMBuoHi-oyUF1LHv2Woh0Bg@mail.gmail.com>
+In-Reply-To: <CAOEp5OcrbnVAOQrJTbC0Hsz5+1dqMBuoHi-oyUF1LHv2Woh0Bg@mail.gmail.com>
 From: Yuri Benditovich <yuri.benditovich@daynix.com>
-Date: Tue, 20 Aug 2019 12:46:36 +0300
-Message-ID: <CAOEp5OcrbnVAOQrJTbC0Hsz5+1dqMBuoHi-oyUF1LHv2Woh0Bg@mail.gmail.com>
-To: Brian Wengel <m40636067@gmail.com>,
- Spice List <spice-devel@lists.freedesktop.org>
+Date: Tue, 20 Aug 2019 13:12:10 +0300
+Message-ID: <CAOEp5OdeDxAxjo9n-tsetPfMNGOnqY4jz1uv-yHHwPXkz5uT0w@mail.gmail.com>
+To: Spice List <spice-devel@lists.freedesktop.org>, ulublin@redhat.com, 
+ Victor Toso <victortoso@redhat.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=daynix-com.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=y4yGOjpNRVtrKSiay59R7WSEJiCCq+tFST8xrUDjAWM=;
- b=bH9yGw45PgJsVxuEjdHYAEqY2zr2WnQGjIKeDFyfFIl7YitBYeFih5CK8Rig0aMb6V
- jfFep4feJGSDiLOdxsNT7xZuEmHcaosYywK7TY1ynZnCjOPYExBsiH6RmgMv9b5SxfnC
- nXWarqIYhjJ8z99OHBO3HvWg8xXiEhfTiDLAWNYh8a6qbIY/vXWww6m/WQduJ+k5WXnc
- EQRt1H/Mo/e4NlNb5Hzo5fwxpe6Z3bBmd+JlCZ+rYYZkTrE1aQilkbAnNmsekHrmxwuy
- bIe9gZYoW7wQEnXn3hFGfnXuH9+CO3Ny8WmFy5o1IQDF+B6uWHWcSJhyMlmv+miRsLkw
- zDDw==
+ bh=V6wPocHr/lXlrPXDzdr9X/LImGnt8G0JpPVsbnTKW4E=;
+ b=oyYZ1ppoYcL3nnW8zg/Hg2ZQhkub7Q4d/T9KkLkWP0P4WGI5ezFnAml/fjxjEQ4v3G
+ r4jUIV1fDZAfJIhM9HgXdtojHEE3ghcOUUvFmWqYew5b9IX/OhCYLly8FVtG/V7Q95h3
+ f5bLUF8DOYwNsj0EvsuZn2nEvEOqn20Jdyr/PHeDgtMiE55MSxomyBteu0NB7tMafBEC
+ lQg1yN2wk85KOePeUflO4rwe61i+O+v5neqo14RfW4WMyGpoW/SLZYDM4rBmZANhLxTY
+ 89KF1yx7qY+Xcix/CI/E865cp1iqq/cwE3FFIhrZiVa+L09M5RWBy7iQXNrkbJ6yXS+z
+ Wvbw==
 Subject: Re: [Spice-devel] USB redirection: "LIBUSB_ERROR_NOT_SUPPORTED"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -63,157 +64,173 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0661930462=="
+Content-Type: multipart/mixed; boundary="===============2085605525=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0661930462==
-Content-Type: multipart/related; boundary="000000000000e2e704059089552c"
+--===============2085605525==
+Content-Type: multipart/related; boundary="0000000000005c9c1a059089b11d"
 
---000000000000e2e704059089552c
-Content-Type: multipart/alternative; boundary="000000000000e2e702059089552b"
+--0000000000005c9c1a059089b11d
+Content-Type: multipart/alternative; boundary="0000000000005c9c18059089b11c"
 
---000000000000e2e702059089552b
+--0000000000005c9c18059089b11c
 Content-Type: text/plain; charset="UTF-8"
 
-I see the virt-viewer 8.0 uses only WinUSB as it includes libusb 1.0.22
-(which uses dynamic configuration of backend with WinUSB as default) and
-spice-gtk 0.35 (which does not configure libusb to use UsbDk).
-I suggest to try virt-viewer 7.0 instead, then libusb will work with UsbDk.
-
-Best regards,
-Yuri
+BTW, I see that Windows' libspice*.dll released with mingw do not have any
+version information (that usually for Windows binaries comes during build
+from resource file).
 
 
-On Mon, Aug 19, 2019 at 7:21 PM Brian Wengel <m40636067@gmail.com> wrote:
+On Tue, Aug 20, 2019 at 12:46 PM Yuri Benditovich <
+yuri.benditovich@daynix.com> wrote:
 
-> Hi Yuri
+> I see the virt-viewer 8.0 uses only WinUSB as it includes libusb 1.0.22
+> (which uses dynamic configuration of backend with WinUSB as default) and
+> spice-gtk 0.35 (which does not configure libusb to use UsbDk).
+> I suggest to try virt-viewer 7.0 instead, then libusb will work with UsbDk.
 >
-> Oh, it can see i left that out, but here it is:
-> - I installed UsbDk on my Win7 x64 client PC (where remote viewer is
-> running)
-> - Remote viewer version: 8.0-256
-> - libusb-1.0.dll version: 1.0.22.11312 (07-08-18)
-> - Log-file attached
+> Best regards,
+> Yuri
 >
-> :-)
 >
-> On Mon, Aug 19, 2019 at 2:10 PM Yuri Benditovich <
-> yuri.benditovich@daynix.com> wrote:
+> On Mon, Aug 19, 2019 at 7:21 PM Brian Wengel <m40636067@gmail.com> wrote:
 >
->> Hi Brian,
+>> Hi Yuri
 >>
->> Which backend you use on your Spice Client machine, UsbDk or WinUsb?
->> What is the version of remote-viewer and the version of libusb-1.0.dll
->> (it should be in the same directory when remote-viewer.exe)
->> I'd also suggest to make a debug log (usually "remote-viewer ...
->> --spice-debug > log.txt 2>&1") and provide the log.
+>> Oh, it can see i left that out, but here it is:
+>> - I installed UsbDk on my Win7 x64 client PC (where remote viewer is
+>> running)
+>> - Remote viewer version: 8.0-256
+>> - libusb-1.0.dll version: 1.0.22.11312 (07-08-18)
+>> - Log-file attached
 >>
->> Thanks,
->> Yuri
+>> :-)
 >>
->> On Mon, Aug 19, 2019 at 11:11 AM Brian Wengel <m40636067@gmail.com>
->> wrote:
+>> On Mon, Aug 19, 2019 at 2:10 PM Yuri Benditovich <
+>> yuri.benditovich@daynix.com> wrote:
 >>
->>> Hi Spice-devs
+>>> Hi Brian,
 >>>
->>> I'm trying to get some USB headsets to work on a VM (Win10 x64) using
->>> spice USB redirection, but I get the error "*LIBUSB_ERROR_NOT_SUPPORTED*
->>> ".
->>> Is it a misconfiguration or is the device really not supported?
+>>> Which backend you use on your Spice Client machine, UsbDk or WinUsb?
+>>> What is the version of remote-viewer and the version of libusb-1.0.dll
+>>> (it should be in the same directory when remote-viewer.exe)
+>>> I'd also suggest to make a debug log (usually "remote-viewer ...
+>>> --spice-debug > log.txt 2>&1") and provide the log.
 >>>
->>> I've added a ich9 USB controller on the VM:
+>>> Thanks,
+>>> Yuri
 >>>
->>> <controller type='usb' index='0' model='ich9-ehci1'/>
+>>> On Mon, Aug 19, 2019 at 11:11 AM Brian Wengel <m40636067@gmail.com>
+>>> wrote:
 >>>
->>> <controller type='usb' index='0' model='ich9-uhci1'>
->>>   <master startport='0'/>
->>> </controller>
+>>>> Hi Spice-devs
+>>>>
+>>>> I'm trying to get some USB headsets to work on a VM (Win10 x64) using
+>>>> spice USB redirection, but I get the error "
+>>>> *LIBUSB_ERROR_NOT_SUPPORTED*".
+>>>> Is it a misconfiguration or is the device really not supported?
+>>>>
+>>>> I've added a ich9 USB controller on the VM:
+>>>>
+>>>> <controller type='usb' index='0' model='ich9-ehci1'/>
+>>>>
+>>>> <controller type='usb' index='0' model='ich9-uhci1'>
+>>>>   <master startport='0'/>
+>>>> </controller>
+>>>>
+>>>> <controller type='usb' index='0' model='ich9-uhci2'>
+>>>>   <master startport='2'/>
+>>>> </controller>
+>>>>
+>>>> On my VM:
+>>>> [image: image.png]
+>>>>
+>>>> On my W7 box I have these controller:
+>>>> [image: image.png]
+>>>>
+>>>> This is my options in spice:
+>>>> [image: image.png]
+>>>> And the error:
+>>>> [image: image.png]
+>>>>
+>>>> Can I do further action to track down the problem?
+>>>>
+>>>> Best regards
+>>>> Brian W.
+>>>> Denmark
+>>>> _______________________________________________
+>>>> Spice-devel mailing list
+>>>> Spice-devel@lists.freedesktop.org
+>>>> https://lists.freedesktop.org/mailman/listinfo/spice-devel
 >>>
->>> <controller type='usb' index='0' model='ich9-uhci2'>
->>>   <master startport='2'/>
->>> </controller>
 >>>
->>> On my VM:
->>> [image: image.png]
->>>
->>> On my W7 box I have these controller:
->>> [image: image.png]
->>>
->>> This is my options in spice:
->>> [image: image.png]
->>> And the error:
->>> [image: image.png]
->>>
->>> Can I do further action to track down the problem?
->>>
->>> Best regards
->>> Brian W.
->>> Denmark
->>> _______________________________________________
->>> Spice-devel mailing list
->>> Spice-devel@lists.freedesktop.org
->>> https://lists.freedesktop.org/mailman/listinfo/spice-devel
->>
->>
 
---000000000000e2e702059089552b
+--0000000000005c9c18059089b11c
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">I see the virt-viewer 8.0 uses only WinUSB as it includes =
-libusb 1.0.22 (which uses dynamic configuration of backend with WinUSB as d=
-efault) and spice-gtk 0.35 (which does not configure libusb to use UsbDk).<=
-div>I suggest to try virt-viewer 7.0 instead, then libusb will work with Us=
-bDk.</div><div><br></div><div>Best regards,</div><div>Yuri</div><div><br></=
-div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_at=
-tr">On Mon, Aug 19, 2019 at 7:21 PM Brian Wengel &lt;<a href=3D"mailto:m406=
-36067@gmail.com">m40636067@gmail.com</a>&gt; wrote:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Hi Yuri<div><br></div>=
-<div>Oh, it can see i left that out, but here it is:<br>- I installed UsbDk=
- on my Win7 x64 client PC (where remote viewer is running)</div><div>- Remo=
-te viewer version: 8.0-256</div><div>- libusb-1.0.dll version: 1.0.22.11312=
- (07-08-18)<br></div><div>- Log-file attached</div><div><br></div><div>:-)<=
-/div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_a=
-ttr">On Mon, Aug 19, 2019 at 2:10 PM Yuri Benditovich &lt;<a href=3D"mailto=
-:yuri.benditovich@daynix.com" target=3D"_blank">yuri.benditovich@daynix.com=
-</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-<div dir=3D"ltr">Hi Brian,<div><br></div><div>Which backend you use on your=
- Spice Client machine, UsbDk or WinUsb?</div><div>What is the version of re=
-mote-viewer and the version of libusb-1.0.dll (it should be in the same dir=
-ectory when remote-viewer.exe)</div><div>I&#39;d also suggest to make a deb=
-ug log (usually &quot;remote-viewer ... --spice-debug &gt; log.txt 2&gt;&am=
-p;1&quot;) and provide the log.</div><div><br></div><div>Thanks,</div><div>=
-Yuri</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gm=
-ail_attr">On Mon, Aug 19, 2019 at 11:11 AM Brian Wengel &lt;<a href=3D"mail=
-to:m40636067@gmail.com" target=3D"_blank">m40636067@gmail.com</a>&gt; wrote=
-:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
-8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"lt=
-r"><div>Hi Spice-devs</div><div><br></div><div>I&#39;m trying to get some U=
-SB headsets to work on a VM (Win10 x64) using spice USB redirection, but I =
-get the error=C2=A0&quot;<b>LIBUSB_ERROR_NOT_SUPPORTED</b>&quot;.</div><div=
->Is it a misconfiguration or is the device really not supported?</div><div>=
-<br></div><div><div>I&#39;ve added a ich9 USB controller on the VM:</div><d=
-iv><p style=3D"margin-top:1px;margin-bottom:1px"></p><table class=3D"gmail-=
-m_-6060475845500851051gmail-m_-5781731202885201639gmail-m_-1628301627093959=
-43gmail-TblTextbox" style=3D"border-collapse:collapse"><tbody><tr><td style=
-=3D"font-family:Consolas,Verdana;border:1px solid rgb(180,180,180);padding:=
-3px;vertical-align:top;font-size:10pt"><p style=3D"margin-top:1px;margin-bo=
-ttom:1px">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&=
-#39;ich9-ehci1&#39;/&gt;<br></p><p style=3D"margin-top:1px;margin-bottom:1p=
-x">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#39;ich=
-9-uhci1&#39;&gt;<br>=C2=A0 &lt;master startport=3D&#39;0&#39;/&gt;<br>&lt;/=
-controller&gt;<br></p><p style=3D"margin-top:1px;margin-bottom:1px">&lt;con=
-troller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#39;ich9-uhci2&#3=
-9;&gt;<br>=C2=A0 &lt;master startport=3D&#39;2&#39;/&gt;<br>&lt;/controller=
-&gt;</p></td></tr></tbody></table></div><div><br></div><div>On my VM:<br></=
-div></div><div><div><img src=3D"cid:ii_jzi25vmz4" alt=3D"image.png" width=
-=3D"380" height=3D"138"><br></div></div><div><br></div><div><div><div>On my=
- W7 box I have these controller:</div></div><div><img src=3D"cid:ii_jzi23wj=
-j3" alt=3D"image.png" width=3D"466" height=3D"298"><br><br></div></div><div=
->This is my options in spice:</div><div><img src=3D"cid:ii_jzi1li1w0" alt=
+<div dir=3D"ltr">BTW, I see that Windows&#39; libspice*.dll released with m=
+ingw do not have any version information (that usually for Windows binaries=
+ comes during build from resource file).<div><br></div></div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Aug 20, 2019=
+ at 12:46 PM Yuri Benditovich &lt;<a href=3D"mailto:yuri.benditovich@daynix=
+.com">yuri.benditovich@daynix.com</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex"><div dir=3D"ltr">I see the virt-viewer 8.0=
+ uses only WinUSB as it includes libusb 1.0.22 (which uses dynamic configur=
+ation of backend with WinUSB as default) and spice-gtk 0.35 (which does not=
+ configure libusb to use UsbDk).<div>I suggest to try virt-viewer 7.0 inste=
+ad, then libusb will work with UsbDk.</div><div><br></div><div>Best regards=
+,</div><div>Yuri</div><div><br></div></div><br><div class=3D"gmail_quote"><=
+div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 19, 2019 at 7:21 PM Brian =
+Wengel &lt;<a href=3D"mailto:m40636067@gmail.com" target=3D"_blank">m406360=
+67@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex"><div dir=3D"ltr">Hi Yuri<div><br></div><div>Oh, it can see i le=
+ft that out, but here it is:<br>- I installed UsbDk on my Win7 x64 client P=
+C (where remote viewer is running)</div><div>- Remote viewer version: 8.0-2=
+56</div><div>- libusb-1.0.dll version: 1.0.22.11312 (07-08-18)<br></div><di=
+v>- Log-file attached</div><div><br></div><div>:-)</div></div><br><div clas=
+s=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 19, 201=
+9 at 2:10 PM Yuri Benditovich &lt;<a href=3D"mailto:yuri.benditovich@daynix=
+.com" target=3D"_blank">yuri.benditovich@daynix.com</a>&gt; wrote:<br></div=
+><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
+-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">Hi Bria=
+n,<div><br></div><div>Which backend you use on your Spice Client machine, U=
+sbDk or WinUsb?</div><div>What is the version of remote-viewer and the vers=
+ion of libusb-1.0.dll (it should be in the same directory when remote-viewe=
+r.exe)</div><div>I&#39;d also suggest to make a debug log (usually &quot;re=
+mote-viewer ... --spice-debug &gt; log.txt 2&gt;&amp;1&quot;) and provide t=
+he log.</div><div><br></div><div>Thanks,</div><div>Yuri</div></div><br><div=
+ class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 19=
+, 2019 at 11:11 AM Brian Wengel &lt;<a href=3D"mailto:m40636067@gmail.com" =
+target=3D"_blank">m40636067@gmail.com</a>&gt; wrote:<br></div><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
+d rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>Hi Spice-devs</d=
+iv><div><br></div><div>I&#39;m trying to get some USB headsets to work on a=
+ VM (Win10 x64) using spice USB redirection, but I get the error=C2=A0&quot=
+;<b>LIBUSB_ERROR_NOT_SUPPORTED</b>&quot;.</div><div>Is it a misconfiguratio=
+n or is the device really not supported?</div><div><br></div><div><div>I&#3=
+9;ve added a ich9 USB controller on the VM:</div><div><p style=3D"margin-to=
+p:1px;margin-bottom:1px"></p><table class=3D"gmail-m_678085603395991866gmai=
+l-m_-6060475845500851051gmail-m_-5781731202885201639gmail-m_-16283016270939=
+5943gmail-TblTextbox" style=3D"border-collapse:collapse"><tbody><tr><td sty=
+le=3D"font-family:Consolas,Verdana;border:1px solid rgb(180,180,180);paddin=
+g:3px;vertical-align:top;font-size:10pt"><p style=3D"margin-top:1px;margin-=
+bottom:1px">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=
+=3D&#39;ich9-ehci1&#39;/&gt;<br></p><p style=3D"margin-top:1px;margin-botto=
+m:1px">&lt;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#39=
+;ich9-uhci1&#39;&gt;<br>=C2=A0 &lt;master startport=3D&#39;0&#39;/&gt;<br>&=
+lt;/controller&gt;<br></p><p style=3D"margin-top:1px;margin-bottom:1px">&lt=
+;controller type=3D&#39;usb&#39; index=3D&#39;0&#39; model=3D&#39;ich9-uhci=
+2&#39;&gt;<br>=C2=A0 &lt;master startport=3D&#39;2&#39;/&gt;<br>&lt;/contro=
+ller&gt;</p></td></tr></tbody></table></div><div><br></div><div>On my VM:<b=
+r></div></div><div><div><img src=3D"cid:ii_jzi25vmz4" alt=3D"image.png" wid=
+th=3D"380" height=3D"138"><br></div></div><div><br></div><div><div><div>On =
+my W7 box I have these controller:</div></div><div><img src=3D"cid:ii_jzi23=
+wjj3" alt=3D"image.png" width=3D"466" height=3D"298"><br><br></div></div><d=
+iv>This is my options in spice:</div><div><img src=3D"cid:ii_jzi1li1w0" alt=
 =3D"image.png" width=3D"475" height=3D"309"><br></div><div>And the error:</=
 div><div><div><img src=3D"cid:ii_jzi1lrm21" alt=3D"image.png" width=3D"415"=
  height=3D"137"><br></div></div><div><br></div><div>Can I do further action=
@@ -228,10 +245,11 @@ e-devel@lists.freedesktop.org</a><br>
 tinfo/spice-devel</a></blockquote></div>
 </blockquote></div>
 </blockquote></div>
+</blockquote></div>
 
---000000000000e2e702059089552b--
+--0000000000005c9c18059089b11c--
 
---000000000000e2e704059089552c
+--0000000000005c9c1a059089b11d
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -668,7 +686,7 @@ IBkB+1d/hkRS/ecs8vJ1/iixkwi3SIAESIAESCCRgFccvR55SwlyZJvIi3tIgARIgARIIK0EGGzT
 ipPKSIAESIAESCCRAINtIhPuIQESIAESIIG0EmCwTStOKiMBEiABEiCBRAIMtolMuIcESIAESIAE
 0kpAPY0cfakrrUqpjARIgARIgARIIE4g4v3CT1yAayRAAiRAAiRAAiMj8H8BTKjZrx+lAnEAAAAA
 SUVORK5CYII=
---000000000000e2e704059089552c
+--0000000000005c9c1a059089b11d
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -844,7 +862,7 @@ l2JfNIxPf/R3CMk+WNIfV990DhMHWtDWdhoTJ05BUdEImm0SIAESIAESGBIBWSu0s7MDpaXT0Rku
 x3cHi/DW/DHOtd1KS0vR2XkOTU2HIc0lHiRAAiRAAiQwFAIjR47CrFmfg7Iv52KSHGM+x84VAFMr
 MXOqsXh8LBpdJEACJEACJJAZAVms7ZhpeDpCnykhyvhUNHpv9pNZNkxFAiRAAiRAAokJqDGfxFEY
 SgIkQAIkQALZJfD/AY7SG2LCNjp2AAAAAElFTkSuQmCC
---000000000000e2e704059089552c
+--0000000000005c9c1a059089b11d
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -986,7 +1004,7 @@ bA8JkAAJnBYBGvzTIs1ySIAESOCMCVDx6ow7gMWTAAmQwGkQoA//NCizDBIgARKYEgJ06UxJR7Aa
 JEACJDBpAjT4kybM/EmABEhgSgjQ4E9JR7AaJEACJDBpAjT4kybM/EmABEhgSgjQ4E9JR7AaJEAC
 JDBpAjT4kybM/EmABEhgSgjQ4E9JR7AaJEACJDBpAuoPryZdCPMnARIgARI4ewL/D5gdsj89Ro6H
 AAAAAElFTkSuQmCC
---000000000000e2e704059089552c
+--0000000000005c9c1a059089b11d
 Content-Type: image/png; name="image.png"
 Content-Disposition: inline; filename="image.png"
 Content-Transfer-Encoding: base64
@@ -1507,9 +1525,9 @@ IAESCEZgpFO7wYbIWiRAAiRAAiQwHALnJiIdDh5aJQESIAESIIGTCYzs6y8nD401SIAESIAESGD4
 BOhIh8+YLZAACZAACZxjAnSk5/jmcmgkQAIkQALDJ0BHOnzGbIEESIAESOAcE6AjPcc3l0MjARIg
 ARIYPgE60uEzZgskQAIkQALnmAAd6Tm+uRwaCZAACZDA8AnQkQ6fMVsgARIgARI4xwTUykbneHwc
 GgmQAAmQAAkMlcD/ARS9qo18i27xAAAAAElFTkSuQmCC
---000000000000e2e704059089552c--
+--0000000000005c9c1a059089b11d--
 
---===============0661930462==
+--===============2085605525==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -1519,4 +1537,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0661930462==--
+--===============2085605525==--
