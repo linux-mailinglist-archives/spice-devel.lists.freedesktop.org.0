@@ -2,61 +2,44 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F19439726E
-	for <lists+spice-devel@lfdr.de>; Wed, 21 Aug 2019 08:41:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E24BA9779C
+	for <lists+spice-devel@lfdr.de>; Wed, 21 Aug 2019 12:57:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 812BD6E918;
-	Wed, 21 Aug 2019 06:41:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0274D6E27A;
+	Wed, 21 Aug 2019 10:57:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 15CA56E904;
- Wed, 21 Aug 2019 06:34:11 +0000 (UTC)
-Received: by mail-ua1-x92c.google.com with SMTP id s25so449125uap.7;
- Tue, 20 Aug 2019 23:34:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cldCocYqDJhDAW6mUCiaKahQrJ4+bnhSa/eeLTEHE20=;
- b=mMVTw4QGe6g9cArKZqyFyA3RZnx62mLzDRchwoKuYbyRi5+VPjaa9S/l9VG/tacA56
- CS9ZCIFePp66cmyV9felP8/X4m6n23+iw1UpR7izJXjqd1FtQaUH92H8Z130ZRmTcAgk
- DAioTJlEVYz/uExLeDYqTXX90FB1HvyWx89yck40rpCj65IvNRlUieFARbQ/QzRfv5Oq
- I0xDRe/xaAlerdaYX7N/PcwPpBkLJNOGnRGnl6ozXFyyW2++j6iw3VmdlUBQaRhJD+uU
- TsxXP1XQUbnpMveQS9pCH+RxY+72jVEN8y9wOqWjwvCbsnUJg9AGwdl0WWjj7zXXXZol
- HyMQ==
-X-Gm-Message-State: APjAAAXMZv9Q12Xm51CPBUG60SrO48JECH8l2lkgWNx8fA6k/uYZ+iS3
- urxqfUiUZISR35idkeeyKoHaM4+aKOjnWHrXGgs=
-X-Google-Smtp-Source: APXvYqwV9IXC4VAQSFpeJVeWe8GCDuXR5CxR2jhJJ5ME0hbNNdFy/JCuN0h4tWjJOe7dtaWWt4EHjhL2ip8PbkMN74E=
-X-Received: by 2002:ab0:70c8:: with SMTP id r8mr1298852ual.89.1566369250021;
- Tue, 20 Aug 2019 23:34:10 -0700 (PDT)
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2CE376E27A
+ for <spice-devel@lists.freedesktop.org>; Wed, 21 Aug 2019 10:57:38 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id BF16F7F752;
+ Wed, 21 Aug 2019 10:57:37 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B5FD660C57;
+ Wed, 21 Aug 2019 10:57:37 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id ACFEB180B536;
+ Wed, 21 Aug 2019 10:57:37 +0000 (UTC)
+Date: Wed, 21 Aug 2019 06:57:37 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: zhou qi <atmgnd@outlook.com>
+Message-ID: <746254856.8073421.1566385057576.JavaMail.zimbra@redhat.com>
+In-Reply-To: <HK0PR06MB242009302E3419E214904AE2C9AA0@HK0PR06MB2420.apcprd06.prod.outlook.com>
+References: <HK0PR06MB242009302E3419E214904AE2C9AA0@HK0PR06MB2420.apcprd06.prod.outlook.com>
 MIME-Version: 1.0
-References: <20190805140119.7337-1-kraxel@redhat.com>
- <20190805140119.7337-9-kraxel@redhat.com>
- <20190813151115.GA29955@ulmo>
- <20190814055827.6hrxj6daovxxnnvw@sirius.home.kraxel.org>
- <20190814093524.GA31345@ulmo>
- <20190814101411.lj3p6zjzbjvnnjf4@sirius.home.kraxel.org>
-In-Reply-To: <20190814101411.lj3p6zjzbjvnnjf4@sirius.home.kraxel.org>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Wed, 21 Aug 2019 16:33:58 +1000
-Message-ID: <CACAvsv5Rar9F=Wf-9HBpndY4QaQZcGCx05j0esvV9pitM=JoGg@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Mailman-Approved-At: Wed, 21 Aug 2019 06:41:51 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=cldCocYqDJhDAW6mUCiaKahQrJ4+bnhSa/eeLTEHE20=;
- b=b9E4nxzDDgDhTa72QcuCf0+Ri0ENZZAcmmRDzScGsGvbITS9f4GrFF553zte4BaIWy
- OE/PKMbCOv0G9cVrDaB6WW02z+M+WSYHQIFOxjb2xBCqPBMZ0BRVJrylWhDMGzJScBsc
- mlpo7sFmpTzA98YeuPn9PENW/5F3rTb2WYE6E8m19fnOQn0NY3DLmEsvt7XB9Oy0hXz8
- ACsStPZ/Yz2cBZEpwsBqbL41GAGwUHWtxhcJpymaZh8ClSeFDiSehXvSLsop2TCNicK4
- 7K1XTJCjrkh3JfsDsuOW4locPmvjKygw+v6voagM6ieXmvA2w1iYdwrFNPbWHSZVd++y
- vlxA==
-Subject: Re: [Spice-devel] [Nouveau] [Intel-gfx] [PATCH v6 08/17] drm/ttm:
- use gem vma_node
+X-Originating-IP: [10.40.204.46, 10.4.195.2]
+Thread-Topic: windows spice-client-glib hotplug not working
+Thread-Index: AQHVV7av4rPep7KYoUuWo1TrP1/OrijGFgcQ
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.71]); Wed, 21 Aug 2019 10:57:37 +0000 (UTC)
+Subject: Re: [Spice-devel] windows spice-client-glib hotplug not working
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,32 +51,131 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>,
- intel-gfx <intel-gfx@lists.freedesktop.org>, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, Thierry Reding <thierry.reding@gmail.com>,
- linux-graphics-maintainer@vmware.com,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- spice-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1394112377=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gV2VkLCAxNCBBdWcgMjAxOSBhdCAyMDoxNCwgR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhh
-dC5jb20+IHdyb3RlOgo+Cj4gICBIaSwKPgo+ID4gPiBDaGFuZ2luZyB0aGUgb3JkZXIgZG9lc24n
-dCBsb29rIGhhcmQuICBQYXRjaCBhdHRhY2hlZCAodW50ZXN0ZWQsIGhhdmUgbm8KPiA+ID4gdGVz
-dCBoYXJkd2FyZSkuICBCdXQgbWF5YmUgSSBtaXNzZWQgc29tZSBkZXRhaWwgLi4uCj4gPgo+ID4g
-SSBjYW1lIHVwIHdpdGggc29tZXRoaW5nIHZlcnkgc2ltaWxhciBieSBzcGxpdHRpbmcgdXAgbm91
-dmVhdV9ib19uZXcoKQo+ID4gaW50byBhbGxvY2F0aW9uIGFuZCBpbml0aWFsaXphdGlvbiBzdGVw
-cywgc28gdGhhdCB3aGVuIG5lY2Vzc2FyeSB0aGUgR0VNCj4gPiBvYmplY3QgY2FuIGJlIGluaXRp
-YWxpemVkIGluIGJldHdlZW4uIEkgdGhpbmsgdGhhdCdzIHNsaWdodGx5IG1vcmUKPiA+IGZsZXhp
-YmxlIGFuZCBlYXNpZXIgdG8gdW5kZXJzdGFuZCB0aGFuIGEgYm9vbGVhbiBmbGFnLgo+Cj4gWWVz
-LCB0aGF0IHNob3VsZCB3b3JrIHRvby4KPgo+IEFja2VkLWJ5OiBHZXJkIEhvZmZtYW5uIDxrcmF4
-ZWxAcmVkaGF0LmNvbT4KQWNrZWQtYnk6IEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4K
-Cj4KPiBjaGVlcnMsCj4gICBHZXJkCj4KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwo+IE5vdXZlYXUgbWFpbGluZyBsaXN0Cj4gTm91dmVhdUBsaXN0cy5m
-cmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL25vdXZlYXUKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNr
-dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3Nw
-aWNlLWRldmVs
+--===============1394112377==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_8073420_1555810504.1566385057575"
+
+------=_Part_8073420_1555810504.1566385057575
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+> Hello, I write a demo under windows unsing spice-client-glib only , I can=
+ get
+> usb devices from UsbManager. but hotplug is not working. no device change
+> event recieved.
+
+> I found the function g_udev_client_initable_init in win-usb-dev.c create =
+a
+> hidden window to monitor WM_DEVICECHANGE message. but I could not found t=
+he
+> corresponding message loop =EF=BC=88 GetMessage/DispatchMessage...). Wher=
+e is the
+> message loop(gtk)? Does it depends on some higher library(gtk) =EF=BC=9F =
+How can I
+> get usb hotplug working?
+
+> I resent this message because I found that I am not a subscriber to the
+> mailing list. Thanks.
+
+> best regards
+
+Normally the main thread should have an event message loop. Either GTK or o=
+ther. In Windows messages are queued to threads so the thread that call g_u=
+dev_client_initable_init should handle messages.=20
+
+Frediano=20
+
+------=_Part_8073420_1555810504.1566385057575
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><body><div style=3D"font-family: times new roman, new york, times, se=
+rif; font-size: 12pt; color: #000000"><blockquote style=3D"border-left:2px =
+solid #1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:norma=
+l;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sans-s=
+erif;font-size:12pt;"><div><br></div><style><!--
+
+@font-face
+=09{font-family:SimSun;
+=09panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+=09{font-family:"Cambria Math";
+=09panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+=09{font-family:DengXian;
+=09panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+=09{font-family:HelveticaNeue;}
+@font-face
+=09{font-family:DengXian;
+=09panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+=09{font-family:SimSun;
+=09panose-1:2 1 6 0 3 1 1 1 1 1;}
+
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+=09{margin:0cm;
+=09margin-bottom:.0001pt;
+=09text-align:justify;
+=09text-justify:inter-ideograph;
+=09font-size:10.5pt;
+=09font-family:DengXian;}
+.MsoChpDefault
+=09{mso-style-type:export-only;}
+
+@page WordSection1
+=09{size:612.0pt 792.0pt;
+=09margin:72.0pt 90.0pt 72.0pt 90.0pt;}
+div.WordSection1
+=09{page:WordSection1;}
+--></style><div class=3D"WordSection1"><p class=3D"MsoNormal" style=3D"text=
+-align:left;line-height:150%" align=3D"left"><span style=3D"font-family:&qu=
+ot;HelveticaNeue&quot;,serif;color:#333333" lang=3D"EN-US">Hello, I write a=
+ demo under windows unsing
+<b>spice-client-glib only</b>, I can get usb devices from UsbManager. but h=
+otplug is not working. no device change event recieved.</span></p><p class=
+=3D"MsoNormal" style=3D"line-height:150%"><span style=3D"font-family:&quot;=
+HelveticaNeue&quot;,serif;color:#333333" lang=3D"EN-US">I found the functio=
+n g_udev_client_initable_init in win-usb-dev.c create a hidden window to mo=
+nitor WM_DEVICECHANGE message. but I could
+ not found the corresponding message loop</span><span style=3D"color:#33333=
+3">=EF=BC=88</span><span style=3D"font-family:&quot;HelveticaNeue&quot;,ser=
+if;color:#333333" lang=3D"EN-US">GetMessage/DispatchMessage...). Where is t=
+he message loop(gtk)? Does it depends on some higher library(gtk)</span><sp=
+an style=3D"color:#333333">=EF=BC=9F</span><span style=3D"font-family:&quot=
+;HelveticaNeue&quot;,serif;color:#333333" lang=3D"EN-US">How
+ can I get usb hotplug working?</span></p><p class=3D"MsoNormal" style=3D"l=
+ine-height:150%"><span style=3D"font-family:&quot;HelveticaNeue&quot;,serif=
+;color:#333333" lang=3D"EN-US">&nbsp;</span></p><p class=3D"MsoNormal" styl=
+e=3D"line-height:150%"><span style=3D"font-family:&quot;HelveticaNeue&quot;=
+,serif;color:#333333" lang=3D"EN-US">I resent this message because I found =
+that I am not a subscriber to the mailing list. Thanks.</span></p><p class=
+=3D"MsoNormal" style=3D"line-height:150%"><span style=3D"font-family:&quot;=
+HelveticaNeue&quot;,serif;color:#333333" lang=3D"EN-US">&nbsp;</span></p><p=
+ class=3D"MsoNormal" style=3D"line-height:150%"><span style=3D"font-family:=
+&quot;HelveticaNeue&quot;,serif;color:#333333" lang=3D"EN-US">best regards<=
+/span></p></div></blockquote><div>Normally the main thread should have an e=
+vent message loop. Either GTK or other. In Windows messages are queued to t=
+hreads so the thread that call <span style=3D"font-family: 'HelveticaNeue',=
+serif; color: #333333;" data-mce-style=3D"font-family: 'HelveticaNeue',seri=
+f; color: #333333;" lang=3D"EN-US">g_udev_client_initable_init</span> shoul=
+d handle messages.<br></div><div><br></div><div>Frediano</div><div><br></di=
+v></div></body></html>
+------=_Part_8073420_1555810504.1566385057575--
+
+--===============1394112377==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1394112377==--
