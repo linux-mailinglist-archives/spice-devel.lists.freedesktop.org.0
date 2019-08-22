@@ -1,43 +1,43 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F44199294
-	for <lists+spice-devel@lfdr.de>; Thu, 22 Aug 2019 13:50:40 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D3AB3992E7
+	for <lists+spice-devel@lfdr.de>; Thu, 22 Aug 2019 14:10:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 95A346E44D;
-	Thu, 22 Aug 2019 11:50:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 76C756E4B1;
+	Thu, 22 Aug 2019 12:10:17 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 250386E44D
- for <spice-devel@lists.freedesktop.org>; Thu, 22 Aug 2019 11:50:38 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1BA696E4B1
+ for <spice-devel@lists.freedesktop.org>; Thu, 22 Aug 2019 12:10:16 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id BFBA358569;
- Thu, 22 Aug 2019 11:50:37 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 94B7781DE1;
+ Thu, 22 Aug 2019 12:10:15 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6A2A46012A;
- Thu, 22 Aug 2019 11:50:35 +0000 (UTC)
-Date: Thu, 22 Aug 2019 13:50:35 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 3EA2210016EA;
+ Thu, 22 Aug 2019 12:10:15 +0000 (UTC)
+Date: Thu, 22 Aug 2019 14:10:14 +0200
 From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190822115035.aa6hhpnamvimvbip@wingsuit>
+To: Yuri Benditovich <yuri.benditovich@daynix.com>
+Message-ID: <20190822121014.o3aygycmlhqlvexy@wingsuit>
 References: <20190812095729.32692-1-yuri.benditovich@daynix.com>
- <20190812095729.32692-2-yuri.benditovich@daynix.com>
- <20190822101844.eamrljoozhujwofp@wingsuit>
- <CAOEp5OdMbM+HYVsvz9aBGPP_sZyzNtjD5791ChSG3-sBo8V9SQ@mail.gmail.com>
- <339397030.8221775.1566470737892.JavaMail.zimbra@redhat.com>
+ <20190822102010.t6gj2lziakbdysme@wingsuit>
+ <CAOEp5Oesz8nW3KtXXbBUH0PHYjATnOL6G+p-MhLGKCLxXbgqog@mail.gmail.com>
+ <2040683497.8221474.1566470443901.JavaMail.zimbra@redhat.com>
+ <CAOEp5OehcAata_psv_Y7FBTdik8gUPnEk2XZftfM4b1hpiHQVA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <339397030.8221775.1566470737892.JavaMail.zimbra@redhat.com>
+In-Reply-To: <CAOEp5OehcAata_psv_Y7FBTdik8gUPnEk2XZftfM4b1hpiHQVA@mail.gmail.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.39]); Thu, 22 Aug 2019 11:50:37 +0000 (UTC)
-Subject: Re: [Spice-devel] [spice-gtk v3 1/9] usb-redir: define interfaces
- to support emulated devices
+ (mx1.redhat.com [10.5.110.25]); Thu, 22 Aug 2019 12:10:15 +0000 (UTC)
+Subject: Re: [Spice-devel] [spice-gtk v3 0/9] added feature of sharing CD
+ image
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,71 +51,91 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: Yan Vugenfirer <yan@daynix.com>,
  Spice List <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============0923784521=="
+Content-Type: multipart/mixed; boundary="===============0492835480=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0923784521==
+--===============0492835480==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="2wrmcnjeyspayou7"
+	protocol="application/pgp-signature"; boundary="imtqmk7ows2fula4"
 Content-Disposition: inline
 
 
---2wrmcnjeyspayou7
+--imtqmk7ows2fula4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Thu, Aug 22, 2019 at 06:45:37AM -0400, Frediano Ziglio wrote:
-> > On Thu, Aug 22, 2019 at 1:18 PM Victor Toso <victortoso@redhat.com> wro=
-te:
-> > > I take creating emulated devices can take some time, isn't
-> > > it worth to do async?
-> >=20
-> > I do not see any point where it can take perceptible time.
-> > Creation of the device is 'go - no go' and fails only in case
-> > the file name is wrong.
+On Thu, Aug 22, 2019 at 02:09:35PM +0300, Yuri Benditovich wrote:
+> On Thu, Aug 22, 2019 at 1:40 PM Frediano Ziglio <fziglio@redhat.com> wrot=
+e:
+> > > > It is a shame that no unit tests were added. Do you plan
+> > > > to do it in future patchsets?
+> > >
+> > > How many features in spice-gtk do have unit tests and how
+> > > many do not?
+> > >
+> >
+> > This is not answering what Victor asked.
+> > He asked if you plan to add some new tests.
+>=20
+> First of all, there is a claim: "it is a shame..."
+> So I've tried to evaluate the measure of the problem.
 
-Well, it is a bit generic thing this emulated usb device
-creation. That's why I thought it could make sense. Not a problem
-anyway, more like a question than a suggestion.
+Sorry if this offended you in any way. I use the "it is a shame"
+the same way I'd use "It is unfortunate".
 
-> I agree with Yuri. Also if the device is really complicated and
-> needs some long initialization probably would better to return
-> a valid device and fail later at the USB layer.
+As you mentioned, our code is not well unit tested and a new
+feature that changes the code and introduces something *emulated*
+does sound to me as a good case for improving tests thus I asked.
 
-Ok
+> My plans are derived from priorities and the priorities at the
+> moment are: to deliver the feature and its GUI.
+> After that I can reevaluate the plans
 
-> For instance in this specific case you can return an emulated
-> CD device with no emulated disc in it and later send to the
-> guest OS that a disc was inserted.
+So, you'll evaluate writing tests once this feature is merged and
+GUI is integrated.
 
---2wrmcnjeyspayou7
+Note that in my ~15 words question, I didn't require the tests.
+This'll likely change in near future.
+
+> > As I said in a previous reply the company is asking us to
+> > improve testing in the code.
+>=20
+> IMO, unit tests are mainly indended to help us preventing
+> regression when the code is changed.
+
+Imho, to avoid regressions, unit tests are the important, yes.
+But also to prove that a bug in the codebase is fixed.
+
+> So, development of tests should be planned and prioritized.
+
+--imtqmk7ows2fula4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1egYoACgkQl9kSPeN6
-SE9QPA/+LFz3myH7cubWeD2Ui5IZx2kpGCrrWBPLLcaCr5PhW8dkGztStbYJPc3i
-m/Z3aJYidCO1xq4rPl92rnj46zstdhF6oRbhsJne9lucxO2mmGe630pNZ1sYo66k
-pm1bsNZpdUhJDKh21JVDJXVS7VIotl9VzXb/uXhZoXjhTuCNgtMCNIAz9SiV8Jjt
-QbQoacKnHV/P2bI5Ne6hlT9zsWZBL84EyEnD/EpVAdGu956nhLGSX+Xgb3bjMZpj
-hixu1RLxwHo2KWJ8u/eLJqLonD1yh7Qg852iB+ulyzOV/HmDbb/gmywXo5eX35tg
-eDoqwp0DqHr+TUY1OkFAPqXfAWLB6yexqfqylqL5CJOkbwgwAgPDQq+9kKluGDzV
-8jdDNdHwh9zMDc6q4tCFJss2CsimbwXn2rogPXRS9FeBM+nAZm0qfueYWNg+QgUk
-UIUFFJnvqLE3g+n/riCHGvYgIl3rPjW1snY7Uv6vrwEf6PDUdHy8AP/kT4Mpzy7M
-HcEv9q37D00LocRgZKEAvY+fpwTcZH/tGHJ9emrmMfUUyi+HlufPOLV4Q2D+ibM4
-uHQ0d4Ckr4oDo7+PSNgNFz9ac0tvjj7abq7bqvmq6ZEMZjJdzXYBeHHDdhq+9zsr
-2vxpEZI/VPDy1iCoHGVQizgZF/p2goBJn3OeXsBigd4dg9xb6OU=
-=dJ0M
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1ehiYACgkQl9kSPeN6
+SE+k7RAAjckVdbwfILNDU/GEZq1WTJWGpfrYbVjrSfQuslzuOccUpRcSNP44nGmv
+O3G7+B4YitjDMkPE/SeisuR0qeuj/cGneGgr8LIYsitPQRUlML+TnaAALJLYtEum
+UGNhBj6y6iwLpmYaiA5mQL623iUPZlBoMWl07opkC2A+8/+XILstdXL5HPoexc2E
+tftdB9FeKmpsa69mTmpg0m1FIBGFXQnUeWy3t86qU4SNONFUU7p/FybRnW/itL47
+7UaCcitwOinvPmTHLpDuFIvp/A4rwJoLdpuvpik4tuT0FaIfizFA57cGwhgxECtx
+tE0wUUjnvykNorcEkoIMOLuZvrJNdpi9w6ZJ/m3A2D4zQeczZhRaF5kVH+cqnFFM
+n5vhaUswQnSR5f9ux6+cU0c5eoGXHXwAPpERk+Lo3aooT+xxxjkWWP+Fssj8gQR9
+Scacb3zAU29nDJx4Qdi9ZjyiRO0Q2OWmjo1yReuOp+kvCSXT9ryaZeRGGNtgWbvG
+4Ch0ZB46ycE8/Hu4dGKkaRU6yVV9DEg52x9cNw4DDqjN990Ppha7BzGS557Xz7VK
+JJAhvFMzmjcS4ET/NzjHXnwweCZOlfa2iV6zjzQ0FGlpZpvrwveF7pbaxGs4Bjj4
+vi0UFgZ3+e3pppQYzTH70nYCDtY8DLdQz6w1OtIed6DRCJBbgBQ=
+=oFNB
 -----END PGP SIGNATURE-----
 
---2wrmcnjeyspayou7--
+--imtqmk7ows2fula4--
 
---===============0923784521==
+--===============0492835480==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -125,4 +145,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0923784521==--
+--===============0492835480==--
