@@ -2,40 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DE739AB61
-	for <lists+spice-devel@lfdr.de>; Fri, 23 Aug 2019 11:32:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3C759AC45
+	for <lists+spice-devel@lfdr.de>; Fri, 23 Aug 2019 11:58:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1F77C6E04E;
-	Fri, 23 Aug 2019 09:32:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 47E386EC73;
+	Fri, 23 Aug 2019 09:58:08 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 316946E04E
- for <spice-devel@lists.freedesktop.org>; Fri, 23 Aug 2019 09:32:37 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1E0216EC7D
+ for <spice-devel@lists.freedesktop.org>; Fri, 23 Aug 2019 09:58:07 +0000 (UTC)
+Received: from mail-io1-f71.google.com (mail-io1-f71.google.com
+ [209.85.166.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id CEB6C4E93D
- for <spice-devel@lists.freedesktop.org>; Fri, 23 Aug 2019 09:32:36 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7BCA75D6D0;
- Fri, 23 Aug 2019 09:32:36 +0000 (UTC)
-Date: Fri, 23 Aug 2019 11:32:35 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190823093235.csb7wntefeh7ltwx@wingsuit>
-References: <20190806153453.20616-1-kpouget@redhat.com>
- <20190806153453.20616-2-kpouget@redhat.com>
- <829772421.5808891.1565788131423.JavaMail.zimbra@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id B2BE885536
+ for <spice-devel@lists.freedesktop.org>; Fri, 23 Aug 2019 09:58:06 +0000 (UTC)
+Received: by mail-io1-f71.google.com with SMTP id e20so10285301ioe.12
+ for <spice-devel@lists.freedesktop.org>; Fri, 23 Aug 2019 02:58:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:content-transfer-encoding;
+ bh=LSg102JC5LUSKXpOJXFN7lsQOV6gRFJYDjTY3UzFzLY=;
+ b=QGv2sWBmkoAi0ICt1YnA0vOc+MmOSVbMrLvPuzPCDihya9mcatFAMlZNm6U11SMkFc
+ TuIu4YkWMpc0Obl+rrtQamu7K9vUJon1D8veX+ZhcuoFxb8Zt180hSNlplm59V4UqcXd
+ F8KW6+opzqAA9kuvm5pCofhKv6caL0k0ElRyMTsYVogPv7lqgtEh353Uf+DASlXKrxvH
+ SM6M1bZ6la3KM8CpanyM/EiJPnW0D3IPfxhIsJDD5fK5qQGtqrRJmUhKro+gynSNYXF/
+ b6krcgph7qtxKIBPZoBvZWXK/tcasG/3syL2Xn9n8eC5HRRc3xT1Uy+KLPrN7gVKXL1l
+ l4KA==
+X-Gm-Message-State: APjAAAXQDOndRLH+G83V0Hh5wTSwh+Uq0ckskyueoavJT0LisZFtlzT5
+ gLyV0ENX8Vf7q0WKWCsZWeBdeioR/Nnb88YbL3Z2v7+jlVcbSyELZeapcoIgaoeBuxmgGEGq/Kx
+ LlbziebyvKkcsNdQprdmB1fQAcGeStf5qiTzSLhbf+2PATmE=
+X-Received: by 2002:a5d:9945:: with SMTP id v5mr5474059ios.143.1566554286090; 
+ Fri, 23 Aug 2019 02:58:06 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqxVmSaxjUiGV/GlN0rumT89exDTvncy+FbGHzo9ba07tUNtrXwOUaE1rlyoQJojy0j7RS++S2g4O0YVs6nGJng=
+X-Received: by 2002:a5d:9945:: with SMTP id v5mr5474035ios.143.1566554285824; 
+ Fri, 23 Aug 2019 02:58:05 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <829772421.5808891.1565788131423.JavaMail.zimbra@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.38]); Fri, 23 Aug 2019 09:32:36 +0000 (UTC)
-Subject: Re: [Spice-devel] [RFC spice-server 1/3] stream-channel: Add
- preferred video codec capability
+References: <20190808090314.28167-1-jjanku@redhat.com>
+In-Reply-To: <20190808090314.28167-1-jjanku@redhat.com>
+From: Jakub Janku <jjanku@redhat.com>
+Date: Fri, 23 Aug 2019 11:57:55 +0200
+Message-ID: <CAH=CeiDFnMYX7BFUycejr575LWnw8A-puWoqBrq7_QLEd1f=kQ@mail.gmail.com>
+To: spice-devel <spice-devel@lists.freedesktop.org>
+Subject: Re: [Spice-devel] [PATCH spice-gtk] webdav: fix usecase with
+ multiple concurrent connections
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,81 +59,54 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1919182836=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1919182836==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="zfounq572lem42tv"
-Content-Disposition: inline
-
-
---zfounq572lem42tv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Wed, Aug 14, 2019 at 09:08:51AM -0400, Frediano Ziglio wrote:
-> > +/* Returns an array with SPICE_VIDEO_CODEC_TYPE_ENUM_END elements,
-> > + * with the client preference order (index) as value */
-> > +GArray
-> > *video_stream_parse_preferred_codecs(SpiceMsgcDisplayPreferredVideoCode=
-cType
-> > *msg)
-> > +{
-> > +    gint i, len;
->=20
-> gnot ga gbig gfun gof gall gthese gg gstrings
-
-Haha, you brought something like that in the past too. What can
-we do about it? I don't even think much, if I'm working on code
-with glib/gobject I g-prefix types too. I would say it makes
-sense when interacting with the its libraries, random e.g:
-
-    glong g_utf8_strlen (const gchar *p, gssize max);
-
-I'm raising this question/email so we can improve this somehow
-(checkpatch.pl git-hooks and/or coding style standards) and make
-it clear for contributors/reviewers without much time loss in
-discussion.
-
-Cheers,
-
---zfounq572lem42tv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1fsrMACgkQl9kSPeN6
-SE/SOA/+JBd/w/1IGW6nYKyxX3BRLtTzIB6CrVerlkJ60H1xp1xlWHPpC7ua03Bn
-v/pLeUXJxqob8W6ek3XrTf4CdEQchdBvb2CVviIX2YDoA0blKmIUXWZbzm75A+S/
-mZjqyXwOqiY88QXLoTvq6R7L0X4+jP9UxFPhVAdXkjNwBQVXlvPywI6W/UTRtgcH
-G5qF12y+h3L/ea+ov4E+mBCOWRhHUFyDe+eq98GQ4pENXrRgCMFUJlwrJ7xU+fPV
-SW50XmQKd83/hZJIzdsQPyQrUPjO7ip8DCZsBEhh11l7LChSPSYLNHljQiLi2gM/
-esjDV+FMVMq/5TU8ksTLRhc/NlvB6PuyIEBTDTXWxhZCiiItmf8RTOPI9g4Qt7r2
-kramE/jshynrYiwaz/V92Ft3LEvxBhcWT5hyaCx1sjJp9unKwgEpaTK8hund7UWu
-wkkre1z8TkgxQKLrM3gRMg5VcQWonNOAchbvWfPNQ9kRT5XHBjemf+7dShdWqK1f
-o9+iYGmHXzTAhSgZqzhQdg425NV/D/pmyRomdJCcjo3SoXi5+fysvtdIm2op3ZoJ
-wqinFXMpThqYIwvDxDbfQ4kQiVFYRRZD7D0nNwnQxF7xfRmkP4ZJDLFf/B3JkcVf
-eXBpPy6eIneQPNtk6NN2BsBp51rXsmc+YxgpMkJK6uu98hJyBpw=
-=6TBX
------END PGP SIGNATURE-----
-
---zfounq572lem42tv--
-
---===============1919182836==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1919182836==--
+cGluZwoKQWxzbyBmb3Jnb3QgdG8gbWVudGlvbiB0aGF0IHRoaXMgZml4ZXMgYSByZWdyZXNzaW9u
+IGludHJvZHVjZWQgYnkgbWUKaW4gOWY1YWVlMDUuCgpPbiBUaHUsIEF1ZyA4LCAyMDE5IGF0IDEx
+OjAzIEFNIEpha3ViIEphbmvFryA8amphbmt1QHJlZGhhdC5jb20+IHdyb3RlOgo+Cj4gR091dHB1
+dFN0cmVhbSBkb2VzIG5vdCBhbGxvdyBzaW11bHRhbmVvdXMgdGFza3Mgb24gYSBzaW5nbGUKPiBz
+dHJlYW0uIEFuIGF0dGVtcHQgdG8gdHJhbnNmZXIgdHdvIGZpbGVzIHRoZXJlZm9yZQo+IHJlc3Vs
+dHMgaW50byBvbmUgb2YgdGhlIGNsaWVudHMgYmVpbmcgcmVtb3ZlZCBpbgo+IG11eF9tc2dfZmx1
+c2hlZF9jYigpIHdpdGggdGhlIGVycm9yCj4gIlN0cmVhbSBoYXMgb3V0c3RhbmRpbmcgb3BlcmF0
+aW9uIi4KPgo+IFRvIGZpeCB0aGlzLCB1c2Ugc3BpY2Vfdm1jX3dyaXRlX2FzeW5jKCkgZGlyZWN0
+bHkuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYWt1YiBKYW5rxa8gPGpqYW5rdUByZWRoYXQuY29tPgo+
+IC0tLQo+ICBzcmMvY2hhbm5lbC13ZWJkYXYuYyB8IDE3ICsrKysrKystLS0tLS0tLS0tCj4gIDEg
+ZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQo+Cj4gZGlmZiAt
+LWdpdCBhL3NyYy9jaGFubmVsLXdlYmRhdi5jIGIvc3JjL2NoYW5uZWwtd2ViZGF2LmMKPiBpbmRl
+eCAxNGQ0ZTA1Li4wOWVmOWY3IDEwMDY0NAo+IC0tLSBhL3NyYy9jaGFubmVsLXdlYmRhdi5jCj4g
+KysrIGIvc3JjL2NoYW5uZWwtd2ViZGF2LmMKPiBAQCAtMjM1LDcgKzIzNSw3IEBAIG11eF9tc2df
+Zmx1c2hlZF9jYihHT2JqZWN0ICpzb3VyY2Vfb2JqZWN0LAo+ICB7Cj4gICAgICBDbGllbnQgKmNs
+aWVudCA9IHVzZXJfZGF0YTsKPgo+IC0gICAgaWYgKCFnX291dHB1dF9zdHJlYW1fd3JpdGVfYWxs
+X2ZpbmlzaChHX09VVFBVVF9TVFJFQU0oc291cmNlX29iamVjdCksIHJlc3VsdCwgTlVMTCwgTlVM
+TCkgfHwKPiArICAgIGlmIChzcGljZV92bWNfd3JpdGVfZmluaXNoKFNQSUNFX0NIQU5ORUwoc291
+cmNlX29iamVjdCksIHJlc3VsdCwgTlVMTCkgPT0gLTEgfHwKPiAgICAgICAgICBjbGllbnQtPm11
+eC5zaXplID09IDAgfHwKPiAgICAgICAgICAhY2xpZW50X3N0YXJ0X3JlYWQoY2xpZW50KSkgewo+
+ICAgICAgICAgIHJlbW92ZV9jbGllbnQoY2xpZW50KTsKPiBAQCAtMjQ5LDggKzI0OSw2IEBAIHN0
+YXRpYyB2b2lkIHNlcnZlcl9yZXBseV9jYihHT2JqZWN0ICpzb3VyY2Vfb2JqZWN0LAo+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgZ3BvaW50ZXIgdXNlcl9kYXRhKQo+ICB7Cj4gICAgICBD
+bGllbnQgKmNsaWVudCA9IHVzZXJfZGF0YTsKPiAtICAgIFNwaWNlV2ViZGF2Q2hhbm5lbFByaXZh
+dGUgKmMgPSBjbGllbnQtPnNlbGYtPnByaXY7Cj4gLSAgICBHT3V0cHV0U3RyZWFtICptdXhfb3V0
+Owo+ICAgICAgR0Vycm9yICplcnIgPSBOVUxMOwo+ICAgICAgZ3NzaXplIHNpemU7Cj4KPiBAQCAt
+MjYyLDEzICsyNjAsMTIgQEAgc3RhdGljIHZvaWQgc2VydmVyX3JlcGx5X2NiKEdPYmplY3QgKnNv
+dXJjZV9vYmplY3QsCj4gICAgICBnX3JldHVybl9pZl9mYWlsKHNpemUgPj0gMCk7Cj4gICAgICBj
+bGllbnQtPm11eC5zaXplID0gR1VJTlQxNl9UT19MRShzaXplKTsKPgo+IC0gICAgbXV4X291dCA9
+IGdfaW9fc3RyZWFtX2dldF9vdXRwdXRfc3RyZWFtKEdfSU9fU1RSRUFNKGMtPnN0cmVhbSkpOwo+
+IC0KPiAtICAgIC8qIHRoaXMgaW50ZXJuYWxseSB1c2VzIHNwaWNlX3ZtY193cml0ZV9hc3luYygp
+LCBwcmlvcml0eSBpcyBpZ25vcmVkOwo+IC0gICAgICogdGhlIGNhbGxiYWNrIGlzIGludm9rZWQg
+b25jZSB0aGUgbXNnIGlzIHdyaXR0ZW4gb3V0IHRvIHRoZSBzb2NrZXQgKi8KPiAtICAgIGdfb3V0
+cHV0X3N0cmVhbV93cml0ZV9hbGxfYXN5bmMobXV4X291dCwgKGd1aW50OCAqKSZjbGllbnQtPm11
+eCwgc2l6ZW9mKGdpbnQ2NCkgKyBzaXplb2YoZ3VpbnQxNikgKyBzaXplLAo+IC0gICAgICAgIEdf
+UFJJT1JJVFlfREVGQVVMVCwgY2xpZW50LT5jYW5jZWxsYWJsZSwgbXV4X21zZ19mbHVzaGVkX2Ni
+LCBjbGllbnQpOwo+IC0KPiArICAgIHNwaWNlX3ZtY193cml0ZV9hc3luYyhTUElDRV9DSEFOTkVM
+KGNsaWVudC0+c2VsZiksCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgJmNsaWVudC0+bXV4
+LAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVvZihnaW50NjQpICsgc2l6ZW9mKGd1
+aW50MTYpICsgc2l6ZSwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICBjbGllbnQtPmNhbmNl
+bGxhYmxlLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgIG11eF9tc2dfZmx1c2hlZF9jYiwK
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICBjbGllbnQpOwo+ICAgICAgcmV0dXJuOwo+Cj4g
+IGVuZDoKPiAtLQo+IDIuMjEuMAo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5m
+cmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
+aW5mby9zcGljZS1kZXZlbA==
