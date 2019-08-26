@@ -1,42 +1,36 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B4D99CB37
-	for <lists+spice-devel@lfdr.de>; Mon, 26 Aug 2019 10:03:41 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8921F9CBC4
+	for <lists+spice-devel@lfdr.de>; Mon, 26 Aug 2019 10:39:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA2216E06F;
-	Mon, 26 Aug 2019 08:03:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C248A89ADC;
+	Mon, 26 Aug 2019 08:39:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 708386E06F
- for <spice-devel@lists.freedesktop.org>; Mon, 26 Aug 2019 08:03:38 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0CBB089AB6
+ for <spice-devel@lists.freedesktop.org>; Mon, 26 Aug 2019 08:39:53 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 1549285540
- for <spice-devel@lists.freedesktop.org>; Mon, 26 Aug 2019 08:03:38 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B5E8A60920;
- Mon, 26 Aug 2019 08:03:37 +0000 (UTC)
-Date: Mon, 26 Aug 2019 10:03:37 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Jakub Janku <jjanku@redhat.com>
-Message-ID: <20190826080337.otm5arrlbazyo7dv@wingsuit>
-References: <20190808090314.28167-1-jjanku@redhat.com>
- <CAH=CeiDFnMYX7BFUycejr575LWnw8A-puWoqBrq7_QLEd1f=kQ@mail.gmail.com>
- <20190823133636.7gutbuaciykwqzbh@wingsuit>
- <CAH=CeiCZ7GJTEYgJy7DX1GPSursFrnU8ACp0jFGQMiLjORHcBQ@mail.gmail.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 80DB210C6975
+ for <spice-devel@lists.freedesktop.org>; Mon, 26 Aug 2019 08:39:52 +0000 (UTC)
+Received: from localhost.localdomain.com (unknown [10.35.4.83])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E2A0019C70
+ for <spice-devel@lists.freedesktop.org>; Mon, 26 Aug 2019 08:39:51 +0000 (UTC)
+From: Snir Sheriber <ssheribe@redhat.com>
+To: spice-devel@lists.freedesktop.org
+Date: Mon, 26 Aug 2019 11:39:46 +0300
+Message-Id: <20190826083948.29309-1-ssheribe@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAH=CeiCZ7GJTEYgJy7DX1GPSursFrnU8ACp0jFGQMiLjORHcBQ@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.28]); Mon, 26 Aug 2019 08:03:38 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk] webdav: fix usecase with
- multiple concurrent connections
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.65]); Mon, 26 Aug 2019 08:39:52 +0000 (UTC)
+Subject: [Spice-devel] [RFC spice-streaming-agent 1/3] Add Xlib capture
+ helper files
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,205 +42,152 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1865637429=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1865637429==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="neyjgsx6pt5ltldg"
-Content-Disposition: inline
-
-
---neyjgsx6pt5ltldg
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Sat, Aug 24, 2019 at 10:39:03AM +0200, Jakub Janku wrote:
-> Hi,
->=20
-> On Fri, Aug 23, 2019 at 3:36 PM Victor Toso <victortoso@redhat.com> wrote:
-> >
-> > Hi,
-> >
-> > On Fri, Aug 23, 2019 at 11:57:55AM +0200, Jakub Janku wrote:
-> > > ping
-> >
-> > Yep, sorry
-> >
-> > >
-> > > Also forgot to mention that this fixes a regression introduced by me
-> > > in 9f5aee05.
-> >
-> > Ok. I just went over it before coming back here.
-> >
-> > > On Thu, Aug 8, 2019 at 11:03 AM Jakub Jank=C5=AF <jjanku@redhat.com> =
-wrote:
-> > > >
-> > > > GOutputStream does not allow simultaneous tasks on a single
-> > > > stream. An attempt to transfer two files therefore
-> > > > results into one of the clients being removed in
-> > > > mux_msg_flushed_cb() with the error
-> > > > "Stream has outstanding operation".
-> > > >
-> > > > To fix this, use spice_vmc_write_async() directly.
-> >
-> > The major difference in implementation that this patch proposes
-> > is to avoid a GTask creation and being handled by vmcstream.c on
-> > spice_vmc_output_stream_write_async(), correct?
->=20
-> That's correct.
-> Before this patch: g_output_stream_write_all_async() ->
-> spice_vmc_output_stream_write_async() -> spice_vmc_write_async()
-> With this patch, spice_vmc_write_async() is called directly, without
-> the first 2 steps.
-> >
-> > I'm a bit confused about that, maybe because it was working
-> > before? I mean, the fact that we changed the way to deal with
-> > the buffers made our implementation on GOutputStream not
-> > support simultaneous tasks or that should never actually work in
-> > the first place?
->=20
-> Previously, webdav channel had its own OutputQueue that was scheduling
-> the messages and calling g_output_stream_write_all() for each message.
-> With 9f5aee05, the OutputQueue was dropped and webdav now relies on
-> the internal queue in SpiceChannel.
-> Maybe it's the naming that might confuse you. "spice_vmc_write_async"
-> might suggest that the message is simply written to the stream, but
-> the message is in reality queued for write and the async operation
-> finishes once the msg is flushed. Therefore you can call
-> spice_vmc_write_async() multiple times in a row, unlike
-> g_output_stream_write_async() that permits only a single operation at
-> a time.
-
-Right. I think vmcstream's implementation was not just targeting
-spice+webdav use case but trying to be a bit more generic.
-
-I don't see our code changes as a problem, as long as webdav
-keeps moving on. Thanks for the patches!
-
-I'll be pushing shortly.
-
-Cheers,
-
-> > I have to refresh my memory on the implementation details on this
-> > but the concept of pipe per 'client' could work with multiple
-> > files because of the inner protocol that mux/demux things on
-> > client/server, but perhaps I'm misremembering.
-> >
-> > So, again, my question would be: Did the overall behavior
-> > changed? e.g: This client still works with old spice-webdavd for
-> > instance.
->=20
-> Yes, it works with old spice-webdavd versions.
-
-Acked-by: Victor Toso <victortoso@redhat.com>
-
->=20
-> Cheers,
-> Jakub
-> >
-> > Thanks,
-> >
-> > > > Signed-off-by: Jakub Jank=C5=AF <jjanku@redhat.com>
-> > > > ---
-> > > >  src/channel-webdav.c | 17 +++++++----------
-> > > >  1 file changed, 7 insertions(+), 10 deletions(-)
-> > > >
-> > > > diff --git a/src/channel-webdav.c b/src/channel-webdav.c
-> > > > index 14d4e05..09ef9f7 100644
-> > > > --- a/src/channel-webdav.c
-> > > > +++ b/src/channel-webdav.c
-> > > > @@ -235,7 +235,7 @@ mux_msg_flushed_cb(GObject *source_object,
-> > > >  {
-> > > >      Client *client =3D user_data;
-> > > >
-> > > > -    if (!g_output_stream_write_all_finish(G_OUTPUT_STREAM(source_o=
-bject), result, NULL, NULL) ||
-> > > > +    if (spice_vmc_write_finish(SPICE_CHANNEL(source_object), resul=
-t, NULL) =3D=3D -1 ||
-> > > >          client->mux.size =3D=3D 0 ||
-> > > >          !client_start_read(client)) {
-> > > >          remove_client(client);
-> > > > @@ -249,8 +249,6 @@ static void server_reply_cb(GObject *source_obj=
-ect,
-> > > >                              gpointer user_data)
-> > > >  {
-> > > >      Client *client =3D user_data;
-> > > > -    SpiceWebdavChannelPrivate *c =3D client->self->priv;
-> > > > -    GOutputStream *mux_out;
-> > > >      GError *err =3D NULL;
-> > > >      gssize size;
-> > > >
-> > > > @@ -262,13 +260,12 @@ static void server_reply_cb(GObject *source_o=
-bject,
-> > > >      g_return_if_fail(size >=3D 0);
-> > > >      client->mux.size =3D GUINT16_TO_LE(size);
-> > > >
-> > > > -    mux_out =3D g_io_stream_get_output_stream(G_IO_STREAM(c->strea=
-m));
-> > > > -
-> > > > -    /* this internally uses spice_vmc_write_async(), priority is i=
-gnored;
-> > > > -     * the callback is invoked once the msg is written out to the =
-socket */
-> > > > -    g_output_stream_write_all_async(mux_out, (guint8 *)&client->mu=
-x, sizeof(gint64) + sizeof(guint16) + size,
-> > > > -        G_PRIORITY_DEFAULT, client->cancellable, mux_msg_flushed_c=
-b, client);
-> > > > -
-> > > > +    spice_vmc_write_async(SPICE_CHANNEL(client->self),
-> > > > +                          &client->mux,
-> > > > +                          sizeof(gint64) + sizeof(guint16) + size,
-> > > > +                          client->cancellable,
-> > > > +                          mux_msg_flushed_cb,
-> > > > +                          client);
-> > > >      return;
-> > > >
-> > > >  end:
-> > > > --
-> > > > 2.21.0
-> > > >
-> > > _______________________________________________
-> > > Spice-devel mailing list
-> > > Spice-devel@lists.freedesktop.org
-> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---neyjgsx6pt5ltldg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1jklgACgkQl9kSPeN6
-SE+7GA/+NdRudj9mG5arpF+4A5CzBScnjxvAmgCPcuH8lQtLiBg3mPsVxClMcz/L
-zHNrU8icCo2iL7wYa2767euE+6KYD/m8a7OrUKLrcG9xVfc6qytVyPjGRUtKkOMq
-EW1Mx64dhkUIymVtI1b5cELIcqCDjDxZYHE48cbnb99lmDeLpTjXe9+XjmoTIULO
-YnkfvgziiYx5PllDkqzIwxS+dWIegbYET4SS3U1J2UIrqe/dyMTAn2vlWMR2i4Vy
-Bm1lTbu23HN7zcaPJ4mhp3S0oyBbJUrIiA78pf9KbtetD6T2cQg8TgV+n6v7zzZh
-Ti9TItSF9aimED2vaM/bjgCOFkrnA4JiNPfXZ/9EqUluV+bsmzimmBaIK9XxaxlG
-JPIHUP2XnNpyv3ZhxuNDXSK6OXOQ94AZg2yqufZdZx+Rp9kttZtkF5xO/H0c7ibB
-WFTh3MF2iCxZaVZDaiwMhXevXLq05XJb/wEuyZx7w1jvAIyyWM3Wdj1fQCGT2o9m
-LhHqfnAL9vCHOEWtM4GPCxlnkd/9PoCx8ixxfWHyjKWZUTmo1bV24US1IN/7+W6X
-svoIq8CYEMHrHKeYqwdHpLWZs+/mposrGgDLkL7GXdZtjQgD66crHRPdFONqfBhS
-QAKGpjEgSKvUBGVDCGRTEdDUSPbC8iVgXxY/smEV3UD9TUywjQ4=
-=LauO
------END PGP SIGNATURE-----
-
---neyjgsx6pt5ltldg--
-
---===============1865637429==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1865637429==--
+VGhlIFhsaWIgY2FwdHVyZSBoZWxwZXIgcHJvdmlkZXMgYSB3cmFwcGluZyBjbGFzcyBmb3IgWElt
+YWdlLCBEaXNwbGF5CmluZm9ybWF0aW9uIGFuZCBvdGhlciBjYXB0dXJpbmcgcmVsYXRlZCBmdW5j
+dGlvbmFsaXRpZXMgd2hpY2ggYWxsb3dzCnRvIHVzZSB1bmlmaWVkIGFuZCBzaW1wbGUgQVBJIGZv
+ciBzY3JlZW4gY2FwdHVyaW5nIHVzaW5nIFguClRoaXMgYWxzbyB1dGlsaXplIHRoZSBYIE1JVC1T
+SE0gZXh0ZW5zaW9uIHdoaWNoIGltcHJvdmVzIGNhcHR1cmluZwpzcGVlZCwgaGVuY2UsIHhleHQg
+aXMgcmVxdWlyZWQuCi0tLQoKVGhlIG9yaWdpbmFsIGlkZWEgd2FzIGp1c3QgdG8gdXNlIHRoZSBY
+IGFuY2llbnQgTUlULVNITSBleHRlbnNpb24gd2hpY2gKcmVkdWNlIENQVSB1dGlsaXphdGlvbiBz
+aWduaWZpY2FudGx5IHdoZW4gdXNpbmcgWGxpYiBjYXB0dXJpbmcuClNpbmNlIHRoaXMgY2FwdHVy
+aW5nIG1ldGhvZCBpcyBjdXJyZW50bHkgdXNlZCBieSB0d28gZGlmZmVyZW50IHBsdWdpbnMKaXQg
+d2FzIHN1Z2dlc3RlZCB0byB1c2Ugb25lIGNvbW1vbiBjbGFzcyBmb3IgdGhhdCwgdGhpcyBjbGFz
+cyBpcyBhZGRlZApieSB0aGlzIHBhdGNoIGFuZCB0aGUgMiBmb2xsb3dpbmcgcGF0Y2hlcyBtYWtl
+cyB0aGUgZXhpc3RpbmcgcGx1Z2lucwp0byB1c2UgdGhpcyBjbGFzcy4KCklmIHlvdSBoYXZlIGFu
+eSBvdGhlciBzdWdnZXN0aW9ucyBvciBjb21tZW50cyBwbGVhc2UgZG8gOykKCi0tLQogY29uZmln
+dXJlLmFjICAgICAgICAgfCAgIDEgKwogc3JjL3hsaWItY2FwdHVyZS5jcHAgfCAxNjkgKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwogc3JjL3hsaWItY2FwdHVyZS5o
+cHAgfCAgNTMgKysrKysrKysrKysrKysKIDMgZmlsZXMgY2hhbmdlZCwgMjIzIGluc2VydGlvbnMo
+KykKIGNyZWF0ZSBtb2RlIDEwMDY0NCBzcmMveGxpYi1jYXB0dXJlLmNwcAogY3JlYXRlIG1vZGUg
+MTAwNjQ0IHNyYy94bGliLWNhcHR1cmUuaHBwCgpkaWZmIC0tZ2l0IGEvY29uZmlndXJlLmFjIGIv
+Y29uZmlndXJlLmFjCmluZGV4IDFjNzc4OGIuLjMyMjBlMjcgMTAwNjQ0Ci0tLSBhL2NvbmZpZ3Vy
+ZS5hYworKysgYi9jb25maWd1cmUuYWMKQEAgLTM4LDYgKzM4LDcgQEAgUEtHX0NIRUNLX01PRFVM
+RVMoRFJNLCBsaWJkcm0pCiBQS0dfQ0hFQ0tfTU9EVUxFUyhYMTEsIHgxMSkKIFBLR19DSEVDS19N
+T0RVTEVTKFhGSVhFUywgeGZpeGVzKQogUEtHX0NIRUNLX01PRFVMRVMoWFJBTkRSLCB4cmFuZHIp
+CitQS0dfQ0hFQ0tfTU9EVUxFUyhYRVhULCB4ZXh0KQogCiBQS0dfQ0hFQ0tfTU9EVUxFUyhKUEVH
+LCBsaWJqcGVnLCAsIFsKICAgICBBQ19DSEVDS19MSUIoanBlZywganBlZ19kZXN0cm95X2RlY29t
+cHJlc3MsCmRpZmYgLS1naXQgYS9zcmMveGxpYi1jYXB0dXJlLmNwcCBiL3NyYy94bGliLWNhcHR1
+cmUuY3BwCm5ldyBmaWxlIG1vZGUgMTAwNjQ0CmluZGV4IDAwMDAwMDAuLjc4MzdlZTIKLS0tIC9k
+ZXYvbnVsbAorKysgYi9zcmMveGxpYi1jYXB0dXJlLmNwcApAQCAtMCwwICsxLDE2OSBAQAorLyog
+QSBoZWxwZXIgY2xhc3NlcyB0aGF0IHdyYXBzIFggZGlzcGxheSBpbmZvcm1hdGlvbiBYSW1hZ2Ug
+Y2FwdHVyaW5nIGZ1bmN0aW9ucworICoKKyAqIFxjb3B5cmlnaHQKKyAqIENvcHlyaWdodCAyMDE5
+IFJlZCBIYXQgSW5jLiBBbGwgcmlnaHRzIHJlc2VydmVkLgorICovCisKKyNpbmNsdWRlIDxzeXMv
+aXBjLmg+CisjaW5jbHVkZSA8c3lzL3NobS5oPgorI2luY2x1ZGUgInhsaWItY2FwdHVyZS5ocHAi
+CisKK25hbWVzcGFjZSBzcGljZSB7CituYW1lc3BhY2Ugc3RyZWFtaW5nX2FnZW50IHsKKworLyoq
+KioqKioqKioqKioqKioqKioqIFhJbWcgQ2xhc3MgSW1wbCAqKioqKioqKioqKioqKioqKioqKioq
+Ki8KKworWEltZzo6WEltZyhYSW1hZ2UgKnhfaW1hZ2UsIGJvb2wgaXNfc2htLCBib29sIG5ld19y
+ZXMpIHsKKyAgICAgdGhpcy0+eF9pbWFnZSA9IHhfaW1hZ2U7CisgICAgIHRoaXMtPnhfc2htID0g
+aXNfc2htOworICAgICB0aGlzLT5uZXdfcmVzID0gbmV3X3JlczsKK30KKworWEltZzo6flhJbWco
+KSB7CisgICAgaWYgKCF4X3NobSkgeworICAgICAgICBYRGVzdHJveUltYWdlKHhfaW1hZ2UpOwor
+ICAgIH0gLy8gZWxzZSB0aGUgWGxpYkNhcHR1cmUgd2lsbCBkZXN0cm95IGl0Cit9CisKK2NoYXIg
+KlhJbWc6OmdldF9kYXRhKCkgeworICAgIHJldHVybiB4X2ltYWdlLT5kYXRhOworfQorCitpbnQg
+WEltZzo6aGVpZ2h0KCkgeworICAgIHJldHVybiB4X2ltYWdlLT5oZWlnaHQ7Cit9CisKK2ludCBY
+SW1nOjp3aWR0aCgpIHsKKyAgICByZXR1cm4geF9pbWFnZS0+d2lkdGg7Cit9CisKK2ludCBYSW1n
+OjpkYXRhX3NpemUoKSB7CisgICAgcmV0dXJuIHhfaW1hZ2UtPmhlaWdodCAqIHhfaW1hZ2UtPmJ5
+dGVzX3Blcl9saW5lOworfQorCitib29sIFhJbWc6Om5ld19yZXNvbHV0aW9uKCkgeworICAgcmV0
+dXJuIG5ld19yZXM7Cit9CisKKy8qKioqKioqKioqKioqKioqKiogWGxpYkNhcHR1cmUgQ2xhc3Mg
+SW1wbCAqKioqKioqKioqKioqKioqKioqLworCitzdGF0aWMgaW50ICgqcHJldmlvdXNfeF9lcnJf
+aGFuZGxlcikoRGlzcGxheSAqZGlzcGxheSwgWEVycm9yRXZlbnQgKmV2ZW50KSA9IDA7CitzdGF0
+aWMgYm9vbCB4ZXJyb3IgPSBmYWxzZTsKKworLyogVGhpcyBpcyB1c2VkIG1haW5seSB0byBzaWxl
+bmNlIHggZXJyb3IgaW4gY2FzZSBvZiByZXNvbHV0aW9uIGNoYW5nZSAqLworc3RhdGljIGludCB4
+X2Vycl9oYW5kbGVyKERpc3BsYXkgKmRpc3BsYXksIFhFcnJvckV2ZW50ICpldmVudCkgeworICAg
+IC8vVE9ETzogcHJpbnQgc29tZSBlcnJvciBpbmZvcm1hdGlvbiA/CisgICAgc3dpdGNoIChldmVu
+dC0+ZXJyb3JfY29kZSkgeworICAgICAgICBjYXNlIEJhZEFjY2VzczoKKyAgICAgICAgY2FzZSBC
+YWRNYXRjaDoKKyAgICAgICAgICAgIHhlcnJvciA9IHRydWU7CisgICAgICAgICAgICByZXR1cm4g
+MDsKKyAgICAgICAgZGVmYXVsdDoKKyAgICAgICAgICAgIHJldHVybiBwcmV2aW91c194X2Vycl9o
+YW5kbGVyKGRpc3BsYXksIGV2ZW50KTsKKyAgICB9Cit9CisKK3ZvaWQgWGxpYkNhcHR1cmU6Omlu
+aXRfeHNobSgpIHsKKyAgICBWaXN1YWwgKnZpc3VhbCA9IERlZmF1bHRWaXN1YWwoZGlzcGxheSwg
+c2NyZWVuKTsKKyAgICB1bnNpZ25lZCBpbnQgZGVwdGggPSBEZWZhdWx0RGVwdGgoZGlzcGxheSwg
+c2NyZWVuKTsKKyAgICBYV2luZG93QXR0cmlidXRlcyB3aW5faW5mbzsKKworICAgIHhzaG1fZW5h
+YmxlZCA9IGZhbHNlOworICAgIHhlcnJvciA9IGZhbHNlOworICAgIC8vIENyZWF0ZSBTaGFyZWQg
+TWVtb3J5IFhJbWFnZQorICAgIFhHZXRXaW5kb3dBdHRyaWJ1dGVzKGRpc3BsYXksIHdpbiwgJndp
+bl9pbmZvKTsgLy8gdXBkYXRlIGF0dHJpYnV0ZXMKKyAgICB4c2htX2ltYWdlID0gWFNobUNyZWF0
+ZUltYWdlKGRpc3BsYXksIHZpc3VhbCwgZGVwdGgsIFpQaXhtYXAsIG51bGxwdHIsCisgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAmc2htX2luZm8sIHdpbl9pbmZvLndpZHRoLCB3aW5f
+aW5mby5oZWlnaHQpOworICAgIGlmICgheHNobV9pbWFnZSkgeworICAgICAgICByZXR1cm47Cisg
+ICAgfQorICAgIC8vIEFsbG9jYXRlIHNobSBidWZmZXIKKyAgICBpbnQgc2htX2lkID0gc2htZ2V0
+KElQQ19QUklWQVRFLCB4c2htX2ltYWdlLT5ieXRlc19wZXJfbGluZSAqIHhzaG1faW1hZ2UtPmhl
+aWdodCwgSVBDX0NSRUFUfDA3NzcpOworICAgIGlmIChzaG1faWQgPT0gLTEpIHsKKyAgICAgICAg
+WERlc3Ryb3lJbWFnZSh4c2htX2ltYWdlKTsKKyAgICAgICAgcmV0dXJuOworICAgIH0KKworICAg
+IC8vIEF0dGFjaCBzaGFyZSBtZW1vcnkgYnVmZXIKKyAgICB2b2lkICpzaG1fYWRkciA9IHNobWF0
+KHNobV9pZCwgbnVsbHB0ciwgMCk7CisgICAgaWYgKHNobV9hZGRyID09ICh2b2lkKiktMSkgewor
+ICAgICAgICBYRGVzdHJveUltYWdlKHhzaG1faW1hZ2UpOworICAgICAgICBzaG1jdGwoc2htX2lk
+LCBJUENfUk1JRCwgbnVsbHB0cik7CisgICAgICAgIHJldHVybjsKKyAgICB9CisgICAgc2htX2lu
+Zm8uc2htaWQgPSBzaG1faWQ7CisgICAgc2htX2luZm8uc2htYWRkciA9IHhzaG1faW1hZ2UtPmRh
+dGEgPSAoY2hhciopc2htX2FkZHI7CisgICAgc2htX2luZm8ucmVhZE9ubHkgPSBmYWxzZTsKKyAg
+ICBYU2htQXR0YWNoKGRpc3BsYXksICZzaG1faW5mbyk7CisgICAgWFN5bmMoZGlzcGxheSwgZmFs
+c2UpOworCisgICAgaWYgKCF4ZXJyb3IpIHsKKyAgICAgICAgeHNobV9lbmFibGVkID0gdHJ1ZTsK
+KyAgICAgICAgcmV0dXJuOyAvLyBYU2htIGluaXRpYWxpemF0aW9uIHN1Y2NlZWRlZAorICAgIH0K
+K30KKworWEltZyAqWGxpYkNhcHR1cmU6OmNhcHR1cmUoKSB7CisgICAgWFdpbmRvd0F0dHJpYnV0
+ZXMgd2luX2luZm87CisgICAgYm9vbCBjaGFuZ2VkID0gZmFsc2U7CisgICAgaW50IHRyaWVzID0g
+MDsKKworICAgIC8qIFRoaXMgY29kZSBmbG93IGFsbG93cyB0byBvdmVyY29tZSByZXNvbHV0aW9u
+IGNoYW5nZSB0aGF0IG9jY3VycyBqdXN0CisgICAgICogYWZ0ZXIgZ2V0dGluZyB0aGUgYXR0cmli
+dXRlcyBhbmQgYmVmb3JlIGFza2luZyBmb3IgdGhlIFhJbWFnZQorICAgICAqLworICAgIGRvIHsK
+KyAgICAgICAgWEdldFdpbmRvd0F0dHJpYnV0ZXMoZGlzcGxheSwgd2luLCAmd2luX2luZm8pOyAv
+LyB1cGRhdGUgYXR0cmlidXRlcworCisgICAgICAgIGlmIChsYXN0X3dpZHRoICE9IHdpbl9pbmZv
+LndpZHRoIHx8IGxhc3RfaGVpZ2h0ICE9IHdpbl9pbmZvLmhlaWdodCkgeworICAgICAgICAgICAg
+aWYgKHhzaG1fZW5hYmxlZCAmJiB4c2htX2ltYWdlKSB7IC8vIHJlaW5pdCB4c2htIGV4dGVudGlv
+bgorICAgICAgICAgICAgICAgIGRlaW5pdF94c2htKCk7CisgICAgICAgICAgICAgICAgaW5pdF94
+c2htKCk7CisgICAgICAgICAgICB9CisgICAgICAgICAgICBjaGFuZ2VkID0gdHJ1ZTsgLy8gcmVz
+b2x1dGlvbiBjaGFuZ2VkCisgICAgICAgICAgICBsYXN0X3dpZHRoID0gd2luX2luZm8ud2lkdGg7
+CisgICAgICAgICAgICBsYXN0X2hlaWdodCA9IHdpbl9pbmZvLmhlaWdodDsKKyAgICAgICAgfQor
+ICAgICAgICAvLyBUT0RPOiByb3VuZCBkb3duIHRoZSByZXNvdWx0aW9uIC8gdXNlIGN1c3RvbSBy
+ZXNvdWx0aW9uCisgICAgICAgIGlmICh4c2htX2VuYWJsZWQgJiYgeHNobV9pbWFnZSkgeworICAg
+ICAgICAgICAgaWYgKFhTaG1HZXRJbWFnZShkaXNwbGF5LCB3aW4sIHhzaG1faW1hZ2UsIHdpbl9p
+bmZvLngsIHdpbl9pbmZvLnksIEFsbFBsYW5lcykpIHsKKyAgICAgICAgICAgICAgICByZXR1cm4g
+bmV3IFhJbWcoeHNobV9pbWFnZSwgdHJ1ZSwgY2hhbmdlZCk7CisgICAgICAgICAgICB9CisgICAg
+ICAgIH0KKyAgICAgICAgWEltYWdlICppbWFnZSA9IFhHZXRJbWFnZShkaXNwbGF5LCB3aW4sIHdp
+bl9pbmZvLngsIHdpbl9pbmZvLnksIHdpbl9pbmZvLndpZHRoLAorICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHdpbl9pbmZvLmhlaWdodCwgQWxsUGxhbmVzLCBaUGl4bWFwKTsKKyAg
+ICAgICAgaWYgKGltYWdlKSB7CisgICAgICAgICAgICByZXR1cm4gbmV3IFhJbWcoaW1hZ2UsIGZh
+bHNlLCBjaGFuZ2VkKTsKKyAgICAgICAgfQorICAgIH0gd2hpbGUgKCsrdHJpZXMgPCAyKTsgLy8g
+dGhlcmUgd2FzIGFuIGVycm9yIHRvIGdldCB0aGUgaW1hZ2UsIHRyeSBvbmNlIG1vcmUgKG1pZ2h0
+IGJlIGEgcmVzb3VsdGlvbiBjaGFuZ2UpCisgICAgcmV0dXJuIG51bGxwdHI7IC8vIGZhaWwKK30K
+Kwordm9pZCBYbGliQ2FwdHVyZTo6ZGVpbml0X3hzaG0oKSB7CisgICAgaWYgKHhzaG1fZW5hYmxl
+ZCAmJiB4c2htX2ltYWdlKSB7CisgICAgICAgIFhTaG1EZXRhY2ggKGRpc3BsYXksICZzaG1faW5m
+byk7CisgICAgICAgIHhzaG1faW1hZ2UtPmYuZGVzdHJveV9pbWFnZSh4c2htX2ltYWdlKTsKKyAg
+ICAgICAgc2htZHQoc2htX2luZm8uc2htYWRkcik7CisgICAgICAgIHNobWN0bChzaG1faW5mby5z
+aG1pZCwgSVBDX1JNSUQsIDApOworICAgICAgICB4c2htX2ltYWdlID0gbnVsbHB0cjsKKyAgICAg
+ICAgeHNobV9lbmFibGVkID0gZmFsc2U7CisgICAgfQorfQorCitYbGliQ2FwdHVyZTo6WGxpYkNh
+cHR1cmUoRGlzcGxheSAqZGlzcGxheSk6CisgICAgZGlzcGxheShkaXNwbGF5KQoreworICAgIFhX
+aW5kb3dBdHRyaWJ1dGVzIHdpbl9pbmZvOworICAgIHRoaXMtPnNjcmVlbiA9IFhEZWZhdWx0U2Ny
+ZWVuKGRpc3BsYXkpOworICAgIHRoaXMtPndpbiA9IFJvb3RXaW5kb3coZGlzcGxheSwgc2NyZWVu
+KTsKKyAgICBYR2V0V2luZG93QXR0cmlidXRlcyhkaXNwbGF5LCB3aW4sICZ3aW5faW5mbyk7IC8v
+IHVwZGF0ZSBhdHRyaWJ1dGVzCisgICAgbGFzdF93aWR0aCA9IC0xOworICAgIGxhc3RfaGVpZ2h0
+ID0gLTE7CisgICAgcHJldmlvdXNfeF9lcnJfaGFuZGxlciA9IFhTZXRFcnJvckhhbmRsZXIoeF9l
+cnJfaGFuZGxlcik7CisgICAgaW5pdF94c2htKCk7Cit9CisKK1hsaWJDYXB0dXJlOjp+WGxpYkNh
+cHR1cmUoKSB7CisgICAgZGVpbml0X3hzaG0oKTsKK30KKworfX0gLy8gbmFtZXNwYWNlIHNwaWNl
+OjpzdHJlYW1pbmdfYWdlbnQKZGlmZiAtLWdpdCBhL3NyYy94bGliLWNhcHR1cmUuaHBwIGIvc3Jj
+L3hsaWItY2FwdHVyZS5ocHAKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uOTMy
+MDBkYwotLS0gL2Rldi9udWxsCisrKyBiL3NyYy94bGliLWNhcHR1cmUuaHBwCkBAIC0wLDAgKzEs
+NTMgQEAKKy8qICBBIGhlbHBlciBjbGFzc2VzIHRoYXQgd3JhcHMgWCBkaXNwbGF5IGluZm9ybWF0
+aW9uIFhJbWFnZSBjYXB0dXJpbmcgZnVuY3Rpb25zCisgKgorICogXGNvcHlyaWdodAorICogQ29w
+eXJpZ2h0IDIwMTkgUmVkIEhhdCBJbmMuIEFsbCByaWdodHMgcmVzZXJ2ZWQuCisgKi8KKworI2lm
+bmRlZiBTUElDRV9TVFJFQU1JTkdfQUdFTlRfWExJQl9DQVBUVVJFX0hQUCAvLyBuZWVkIGhlYWRl
+ciBmaWxlPworI2RlZmluZSBTUElDRV9TVFJFQU1JTkdfQUdFTlRfWExJQl9DQVBUVVJFX0hQUAor
+CisjaW5jbHVkZSA8WDExL1hsaWIuaD4KKyNpbmNsdWRlIDxYMTEvWHV0aWwuaD4KKyNpbmNsdWRl
+IDxYMTEvZXh0ZW5zaW9ucy9YU2htLmg+CisKK25hbWVzcGFjZSBzcGljZSB7CituYW1lc3BhY2Ug
+c3RyZWFtaW5nX2FnZW50IHsKKworY2xhc3MgWEltZworeworcHVibGljOgorICAgIFhJbWcoWElt
+YWdlICp4X2lhbWdlLCBib29sIGlzX3NobSwgYm9vbCBuZXdfcmVzb2x1dGlvbik7CisgICAgflhJ
+bWcoKTsKKyAgICBjaGFyICpnZXRfZGF0YSgpOworICAgIGludCBkYXRhX3NpemUoKTsgLy8gd2l0
+aCBjb25zaWRlcmluZyBzdHJpZGUKKyAgICBpbnQgaGVpZ2h0KCk7CisgICAgaW50IHdpZHRoKCk7
+CisgICAgYm9vbCBuZXdfcmVzb2x1dGlvbigpOworcHJpdmF0ZToKKyAgICBYSW1hZ2UgKnhfaW1h
+Z2U7CisgICAgYm9vbCB4X3NobTsKKyAgICBib29sIG5ld19yZXM7Cit9OworCitjbGFzcyBYbGli
+Q2FwdHVyZQoreworcHVibGljOgorICAgIFhsaWJDYXB0dXJlKERpc3BsYXkgKmRpc3BsYXkpOyAv
+LyBhZGQgZW1wdHkgY29uc3RydWN0b3I/CisgICAgflhsaWJDYXB0dXJlKCk7CisgICAgWEltZyAq
+Y2FwdHVyZSgpOyAvLyBjYWxsZXIgc2hvdWxkIGRlbGV0ZSB0aGUgcmV0dXJuIGltYWdlCitwcml2
+YXRlOgorICAgIGludCBsYXN0X3dpZHRoLCBsYXN0X2hlaWdodDsKKyAgICBEaXNwbGF5ICpjb25z
+dCBkaXNwbGF5OworICAgIGludCBzY3JlZW47CisgICAgV2luZG93IHdpbjsKKyAgICBYSW1hZ2Ug
+KnhzaG1faW1hZ2UgPSBudWxscHRyOworICAgIFhTaG1TZWdtZW50SW5mbyBzaG1faW5mbzsKKyAg
+ICBib29sIHhzaG1fZW5hYmxlZCA9IGZhbHNlOworICAgIHZvaWQgaW5pdF94c2htKCk7CisgICAg
+dm9pZCBkZWluaXRfeHNobSgpOworfTsKKworfX0gLy8gbmFtZXNwYWNlIHNwaWNlOjpzdHJlYW1p
+bmdfYWdlbnQKKworI2VuZGlmIC8vIFNQSUNFX1NUUkVBTUlOR19BR0VOVF9YTElCX0NBUFRVUkVf
+SFBQCi0tIAoyLjIxLjAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVz
+a3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9z
+cGljZS1kZXZlbA==
