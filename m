@@ -1,40 +1,40 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F123C9E7DA
-	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:27:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C58E59E7E2
+	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:28:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A5E889862;
-	Tue, 27 Aug 2019 12:27:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 46C8E898FD;
+	Tue, 27 Aug 2019 12:28:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A246489862
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:27:21 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A750D898FD
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:28:35 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 42C67308FC22
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:27:21 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 1315A3082131
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:28:35 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DEC7B19D7A;
- Tue, 27 Aug 2019 12:27:20 +0000 (UTC)
-Date: Tue, 27 Aug 2019 14:27:20 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AB72860BEC;
+ Tue, 27 Aug 2019 12:28:33 +0000 (UTC)
+Date: Tue, 27 Aug 2019 14:28:32 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190827122720.irrvxbhcjd5ixlao@wingsuit>
+Message-ID: <20190827122832.geyx2fdligptg7mh@wingsuit>
 References: <20190827092246.10276-1-fziglio@redhat.com>
- <20190827092246.10276-15-fziglio@redhat.com>
+ <20190827092246.10276-17-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190827092246.10276-15-fziglio@redhat.com>
+In-Reply-To: <20190827092246.10276-17-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.43]); Tue, 27 Aug 2019 12:27:21 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk v4 14/29] fixup! usb-redir: add
- implementation of emulated CD device
+ (mx1.redhat.com [10.5.110.42]); Tue, 27 Aug 2019 12:28:35 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk v4 16/29] fixup! usb-redir:
+ enable redirection of emulated CD drive
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,45 +47,68 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1064298965=="
+Content-Type: multipart/mixed; boundary="===============1707834746=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============1064298965==
+--===============1707834746==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="yuzgvdoxlppfwcno"
+	protocol="application/pgp-signature"; boundary="cb3j4fzfyvrvm5tu"
 Content-Disposition: inline
 
 
---yuzgvdoxlppfwcno
+--cb3j4fzfyvrvm5tu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Tue, Aug 27, 2019 at 10:22:31AM +0100, Frediano Ziglio wrote:
-> Add comment on constant
+On Tue, Aug 27, 2019 at 10:22:33AM +0100, Frediano Ziglio wrote:
+> Do not build usb emulation files if usb is disabled
 > ---
->  src/usb-device-cd.c | 1 +
->  1 file changed, 1 insertion(+)
+>  src/meson.build | 19 ++++++++++++-------
+>  1 file changed, 12 insertions(+), 7 deletions(-)
 >=20
-> diff --git a/src/usb-device-cd.c b/src/usb-device-cd.c
-> index c33bb290..2234289c 100644
-> --- a/src/usb-device-cd.c
-> +++ b/src/usb-device-cd.c
-> @@ -57,6 +57,7 @@ typedef struct SpiceCdLU {
+> diff --git a/src/meson.build b/src/meson.build
+> index 8bfc923b..00eb2778 100644
+> --- a/src/meson.build
+> +++ b/src/meson.build
+> @@ -124,13 +124,6 @@ spice_client_glib_sources =3D [
+>    'usb-backend.c',
+>    'usb-emulation.h',
+>    'usb-backend.h',
+> -  'usb-device-cd.c',
+> -  'usb-device-cd.h',
+> -  'cd-scsi.c',
+> -  'cd-scsi.h',
+> -  'cd-scsi-dev-params.h',
+> -  'cd-usb-bulk-msd.c',
+> -  'cd-usb-bulk-msd.h',
+>    'vmcstream.c',
+>    'vmcstream.h',
+>  ]
+> @@ -164,6 +157,18 @@ elif spice_gtk_coroutine =3D=3D 'winfiber'
+>    spice_client_glib_sources +=3D 'coroutine_winfibers.c'
+>  endif
 > =20
->  #define MAX_LUN_PER_DEVICE              1
->  #define USB2_BCD                        0x200
-> +/* Red Hat USB VID */
-
-I don't mind adding a comment but perhaps SPICE USB VID instead?
-
->  #define CD_DEV_VID                      0x2b23
->  #define CD_DEV_PID                      0xCDCD
->  #define CD_DEV_CLASS                    8
+> +if spice_gtk_has_usbredir
+> +  spice_client_glib_sources +=3D [
+> +    'usb-device-cd.c',
+> +    'usb-device-cd.h',
+> +    'cd-scsi.c',
+> +    'cd-scsi.h',
+> +    'cd-scsi-dev-params.h',
+> +    'cd-usb-bulk-msd.c',
+> +    'cd-usb-bulk-msd.h',
+> +  ]
+> +endif
+> +
+Acked-by: Victor Toso <victortoso@redhat.com>
+>  if spice_gtk_has_usbredir and host_machine.system() =3D=3D 'windows'
+>    spice_client_glib_sources +=3D ['usbdk_api.c',
+>                                  'usbdk_api.h']
 > --=20
 > 2.20.1
 >=20
@@ -94,29 +117,29 @@ I don't mind adding a comment but perhaps SPICE USB VID instead?
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---yuzgvdoxlppfwcno
+--cb3j4fzfyvrvm5tu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lIagACgkQl9kSPeN6
-SE8NXw/+JjGDEM+sQD2OxZXTPimQ4w+IAZjzmvbNYoY/h8kRaGr24ILL7b5EdrPC
-VLbGi/5QtAwD0SVqdLwGotso4Z7iU8xRDb0p6OZw1hIbS1ueFxtsAN18JQ49U7td
-Wj9vRgAs2Pcyd2gMjpRNIYFqOcmpPZLZaTzpoxaLBbCo75XASg0HOVT87EYpArRf
-U10/qHGP1orwNXU0rGr2e7qwwDhZPO2tk7ue9V+TnKsY7NKoztTnOpxpLHS3lz6I
-N8EbdF44VVdwcioRkutsDVgu/f/HFp/ao9E4HzjpDoTJr2hPPrl19jK/dEj2n/f3
-tSutJn1n3EI6rJLgclPt5CljWYTO8slQX/6PDxzXZYjLZLbKFejPIz5HaSVyn5J4
-AoSYss3sxyy8FECSr7Qu8Larn72Eti0JXyzKkvC+KtqITC7nwvdez3Hd6Bl8UP28
-GQFKSQbJ54k1OcC8FVkdJo1f405KwFV91paXReH/tvJnMUHoJa9OJ9GJtBvNkmPB
-tn2qQU5WsHCZuqCYIWLPVQL/McwwCBb+okXItP4ib/u+lUfve6ZC5DF+RAwqNgdJ
-oY/wiCE+FaaC1LdL6KvScYBHT5fur13L1v35Zr5rUG0Vsl0Ht0Ja8Xgcz7GlNpsz
-TadVsE+fmrxpgQZJIyJ0HGMtwcw5YYg0rEsf8U640ZSEh4UP29s=
-=wvKd
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lIfAACgkQl9kSPeN6
+SE+YvA//RjbMnHz8OlalBspCHopmHqRd4EseoblsL790h0wD2JeJMrGQva3yOVtv
+axNHAJrwEbbSyrvgbhnzo7+Vxmr2HybspRPDjJwlFhhzLMk596l9aKdLPquSLeuO
+XW+PhyDVGPxd1vo1HM4yn5x2b2iiygOdyutaup8yEzhj1TlzYL4YoGqWs/l1wTb2
+Pt8jO4oiTMokr1JaxCEnBgUo1D7j38QdDAsXmxAb2apqeVRXZa8AWhlK9iFr8Kl5
+pF+h5PVuXhD8S0RKRzg6m8mLSyxaOxZc6cXkYaSjeRVYPx6+6G2AoRK8Tk0byDro
+sLEInL/wh8520TTGHhiQ9fhs72aRTsa1qI5U9M2sR8CgEeuSfx0QZgSaykNZoKfR
+1+bZAqvwnhPKcC+vA4zeQo4ol2nbx8pMU3Mx0cAJ9yRXXzsHzrC4HlZ9J5JsvrKU
+PmLyKo8UgxRi4iJG9fCkdFgY6fQgaEuaqtqh45TO0dEPQGxFb+xbfZyasuetPp1o
+r1zLDe1iMwBnp2Y6qoI+hT2WfJqUWY7dlAGm4E8pO6YbKb9vslgryjYzl66tB7IW
+N4X8+Pwdyp99ztY5L4QAYL5LtjXtBzQ29zYTmD3SohudTt/4U2ySru8vBrKWiXlh
+bjyuaHQtAQ8WuwwDJc8Yuk6n/bQQLJYQTGfY135dtkUbI19NHBU=
+=Bdxs
 -----END PGP SIGNATURE-----
 
---yuzgvdoxlppfwcno--
+--cb3j4fzfyvrvm5tu--
 
---===============1064298965==
+--===============1707834746==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -126,4 +149,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============1064298965==--
+--===============1707834746==--
