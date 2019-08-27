@@ -1,40 +1,41 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7303C9E806
-	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:34:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3370C9E81C
+	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:39:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F08F4899F0;
-	Tue, 27 Aug 2019 12:34:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1890989762;
+	Tue, 27 Aug 2019 12:38:59 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 60472899F0
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:34:32 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 350A189762
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:38:58 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 101483084037
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:34:32 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id B75E1308339B
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:38:57 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AD1EE194B9;
- Tue, 27 Aug 2019 12:34:31 +0000 (UTC)
-Date: Tue, 27 Aug 2019 14:34:30 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5B95F6060D;
+ Tue, 27 Aug 2019 12:38:57 +0000 (UTC)
+Date: Tue, 27 Aug 2019 14:38:56 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190827123430.ghm4vdslptgmeacl@wingsuit>
-References: <20190827092246.10276-1-fziglio@redhat.com>
- <20190827092246.10276-20-fziglio@redhat.com>
+Message-ID: <20190827123856.yz3hg4pp32b2wz4a@wingsuit>
+References: <20190827101358.18435-1-victortoso@redhat.com>
+ <20190827101358.18435-2-victortoso@redhat.com>
+ <1446986129.9359924.1566901763265.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190827092246.10276-20-fziglio@redhat.com>
+In-Reply-To: <1446986129.9359924.1566901763265.JavaMail.zimbra@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.40]); Tue, 27 Aug 2019 12:34:32 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk v4 19/29] usb-redir:
- command-line option to create emulated CD drive
+ (mx1.redhat.com [10.5.110.44]); Tue, 27 Aug 2019 12:38:57 +0000 (UTC)
+Subject: Re: [Spice-devel] [linux/vd_agent v1 2/2] covscan: avoid false
+ positive on g_clear_pointer()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,194 +48,252 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1724459208=="
+Content-Type: multipart/mixed; boundary="===============1408175289=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============1724459208==
+--===============1408175289==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="xxwroaaybxvpft4m"
+	protocol="application/pgp-signature"; boundary="ek4vrow3qnzvbq7k"
 Content-Disposition: inline
 
 
---xxwroaaybxvpft4m
+--ek4vrow3qnzvbq7k
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-On Tue, Aug 27, 2019 at 10:22:36AM +0100, Frediano Ziglio wrote:
-> From: Yuri Benditovich <yuri.benditovich@daynix.com>
+On Tue, Aug 27, 2019 at 06:29:23AM -0400, Frediano Ziglio wrote:
+> >=20
+> > From: Victor Toso <me@victortoso.com>
+> >=20
+> > This is a CLANG_WARNING found by covscan. It is a false positive as
+> > g_clear_pointer() does set vportp to NULL, meaning that the situation
+> > described by covscan below should not be reached. Moving away from
+> > g_clear_pointer() in this specific case just to make our tool happy.
+> >=20
+> > Covscan report:
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:458:9: warning: Use =
+of
+> >  > memory after it is freed
+> >  > #    if (wbuf->write_pos !=3D wbuf->size) {
+> >  > #        ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:268:12: note: Assumi=
+ng the
+> >  > condition is true
+> >  > #    while (*vportp && (*vportp)->write_buf)
+> >  > #           ^~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:268:12: note: Left s=
+ide of
+> >  > '&&' is true
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:268:5: note: Loop
+> >  > condition is true.  Entering loop body
+> >  > #    while (*vportp && (*vportp)->write_buf)
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:269:9: note: Calling
+> >  > 'vdagent_virtio_port_do_write'
+> >  > #        vdagent_virtio_port_do_write(vportp);
+> >  > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:453:5: note: Taking =
+false
+> >  > branch
+> >  > #    if (!wbuf) {
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:458:9: note: Assumin=
+g the
+> >  > condition is false
+> >  > #    if (wbuf->write_pos !=3D wbuf->size) {
+> >  > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:458:5: note: Taking =
+false
+> >  > branch
+> >  > #    if (wbuf->write_pos !=3D wbuf->size) {
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:465:9: note: Assumin=
+g 'n'
+> >  > is < 0
+> >  > #    if (n < 0) {
+> >  > #        ^~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:465:5: note: Taking =
+true
+> >  > branch
+> >  > #    if (n < 0) {
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:466:13: note: Assumi=
+ng the
+> >  > condition is false
+> >  > #        if (errno =3D=3D EINTR)
+> >  > #            ^~~~~~~~~~~~~~
+> >  > /usr/include/errno.h:38:16: note: expanded from macro 'errno'
+> >  > ## define errno (*__errno_location ())
+> >  > #               ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:466:9: note: Taking =
+false
+> >  > branch
+> >  > #        if (errno =3D=3D EINTR)
+> >  > #        ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:469:9: note: Calling
+> >  > 'vdagent_virtio_port_destroy'
+> >  > #        vdagent_virtio_port_destroy(vportp);
+> >  > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:130:5: note: Taking =
+false
+> >  > branch
+> >  > #    if (!vport)
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:133:9: note: Assumin=
+g the
+> >  > condition is false
+> >  > #    if (vport->disconnect_callback)
+> >  > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:133:5: note: Taking =
+false
+> >  > branch
+> >  > #    if (vport->disconnect_callback)
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:137:5: note: Loop
+> >  > condition is true.  Entering loop body
+> >  > #    while (wbuf) {
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:140:9: note: Memory =
+is
+> >  > released
+> >  > #        g_free(wbuf);
+> >  > #        ^~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:137:5: note: Loop
+> >  > condition is false. Execution continues on line 144
+> >  > #    while (wbuf) {
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:144:5: note: Loop
+> >  > condition is true.  Entering loop body
+> >  > #    for (i =3D 0; i < VDP_END_PORT; i++) {
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:144:5: note: Loop
+> >  > condition is true.  Entering loop body
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:144:5: note: Loop
+> >  > condition is true.  Entering loop body
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:144:5: note: Loop
+> >  > condition is false. Execution continues on line 148
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:149:5: note: Assumin=
+g '_p'
+> >  > is null
+> >  > #    g_clear_pointer(vportp, g_free);
+> >  > #    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > /usr/include/glib-2.0/glib/gmem.h:124:9: note: expanded from macro
+> >  > 'g_clear_pointer'
+> >  > #    if (_p)
+> >  > \
+> >  > #        ^~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:149:5: note: Taking =
+false
+> >  > branch
+> >  > /usr/include/glib-2.0/glib/gmem.h:124:5: note: expanded from macro
+> >  > 'g_clear_pointer'
+> >  > #    if (_p)
+> >  > \
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:149:5: note: Loop
+> >  > condition is false.  Exiting loop
+> >  > /usr/include/glib-2.0/glib/gmem.h:114:3: note: expanded from macro
+> >  > 'g_clear_pointer'
+> >  > #  G_STMT_START {
+> >  > \
+> >  > #  ^
+> >  > /usr/include/glib-2.0/glib/gmacros.h:346:23: note: expanded from mac=
+ro
+> >  > 'G_STMT_START'
+> >  > ##define G_STMT_START  do
+> >  > #                      ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:469:9: note: Returni=
+ng;
+> >  > memory was released
+> >  > #        vdagent_virtio_port_destroy(vportp);
+> >  > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:269:9: note: Returni=
+ng;
+> >  > memory was released
+> >  > #        vdagent_virtio_port_do_write(vportp);
+> >  > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:268:12: note: Left s=
+ide of
+> >  > '&&' is true
+> >  > #    while (*vportp && (*vportp)->write_buf)
+> >  > #           ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:268:5: note: Loop
+> >  > condition is true.  Entering loop body
+> >  > #    while (*vportp && (*vportp)->write_buf)
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:269:9: note: Calling
+> >  > 'vdagent_virtio_port_do_write'
+> >  > #        vdagent_virtio_port_do_write(vportp);
+> >  > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:453:5: note: Taking =
+false
+> >  > branch
+> >  > #    if (!wbuf) {
+> >  > #    ^
+> >  > spice-vdagent-0.19.0/src/vdagentd/virtio-port.c:458:9: note: Use of =
+memory
+> >  > after it is freed
+> >  > #    if (wbuf->write_pos !=3D wbuf->size) {
+> >  > #        ^~~~~~~~~~~~~~~
+> >  > #  456|       }
+> >  > #  457|
+> >  > #  458|->     if (wbuf->write_pos !=3D wbuf->size) {
+> >  > #  459|           syslog(LOG_ERR, "do_write: buffer is incomplete!!"=
+);
+> >  > #  460|           return;
+> >=20
+> > Signed-off-by: Victor Toso <victortoso@redhat.com>
+> > ---
+> >  src/vdagentd/virtio-port.c | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/src/vdagentd/virtio-port.c b/src/vdagentd/virtio-port.c
+> > index b0556ce..3ae7f22 100644
+> > --- a/src/vdagentd/virtio-port.c
+> > +++ b/src/vdagentd/virtio-port.c
+> > @@ -146,7 +146,8 @@ void vdagent_virtio_port_destroy(struct
+> > vdagent_virtio_port **vportp)
+> >      }
+> > =20
+> >      close(vport->fd);
+> > -    g_clear_pointer(vportp, g_free);
+> > +    g_free(vport);
+> > +    *vportp =3D NULL;
+> >  }
+> > =20
+> >  int vdagent_virtio_port_fill_fds(struct vdagent_virtio_port *vport,
 >=20
-> Added command-line option for sharing emulated CD devices.
-> It uses property interface of usb-device-manager to
-> create CD, this is a temporary solution until public API of
-> usb-device-manager defined for shared CD management from both
-> GUI and command line.
->=20
-> Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
-> ---
->  src/spice-option.c       | 17 +++++++++++++++++
->  src/usb-device-manager.c | 34 ++++++++++++++++++++++++++++++++++
->  2 files changed, 51 insertions(+)
->=20
-> diff --git a/src/spice-option.c b/src/spice-option.c
-> index 8c4e707c..f0b3b5d6 100644
-> --- a/src/spice-option.c
-> +++ b/src/spice-option.c
-> @@ -32,6 +32,7 @@ static char *smartcard_db =3D NULL;
->  static char *smartcard_certificates =3D NULL;
->  static char *usbredir_auto_redirect_filter =3D NULL;
->  static char *usbredir_redirect_on_connect =3D NULL;
-> +static gchar **cd_share_files =3D NULL;
->  static gboolean smartcard =3D FALSE;
->  static gboolean disable_audio =3D FALSE;
->  static gboolean disable_usbredir =3D FALSE;
-> @@ -183,6 +184,9 @@ GOptionGroup* spice_get_option_group(void)
->            N_("Filter selecting USB devices to be auto-redirected when pl=
-ugged in"), N_("<filter-string>") },
->          { "spice-usbredir-redirect-on-connect", '\0', 0, G_OPTION_ARG_ST=
-RING, &usbredir_redirect_on_connect,
->            N_("Filter selecting USB devices to redirect on connect"), N_(=
-"<filter-string>") },
-> +        { "spice-share-cd", '\0', 0, G_OPTION_ARG_STRING_ARRAY, &cd_shar=
-e_files,
-> +          N_("Name of ISO file or CD/DVD device to share; prefix '!' to =
-delete on eject"),
-> +          N_("<filename> (repeat allowed)") },
->          { "spice-cache-size", '\0', 0, G_OPTION_ARG_INT, &cache_size,
->            N_("Image cache size (deprecated)"), N_("<bytes>") },
->          { "spice-glz-window-size", '\0', 0, G_OPTION_ARG_INT, &glz_windo=
-w_size,
-> @@ -288,6 +292,19 @@ void spice_set_session_option(SpiceSession *session)
->                           usbredir_redirect_on_connect, NULL);
->          }
->      }
-> +    if (cd_share_files) {
-> +        SpiceUsbDeviceManager *m =3D
-> +                get_usb_device_manager_for_option(session, "--spice-shar=
-e-cd");
-> +        if (m) {
-> +            gchar **name =3D cd_share_files;
-> +            while (name && *name) {
-> +                g_object_set(m, "share-cd", *name, NULL);
-> +                name++;
-> +            }
-> +        }
-> +        g_strfreev(cd_share_files);
-> +        cd_share_files =3D NULL;
-> +    }
->      if (disable_usbredir)
->          g_object_set(session, "enable-usbredir", FALSE, NULL);
->      if (disable_audio)
-> diff --git a/src/usb-device-manager.c b/src/usb-device-manager.c
-> index 5834e032..187ccfa2 100644
-> --- a/src/usb-device-manager.c
-> +++ b/src/usb-device-manager.c
-> @@ -32,6 +32,7 @@
->  #endif
-> =20
->  #include "channel-usbredir-priv.h"
-> +#include "usb-device-cd.h"
->  #endif
-> =20
->  #include "spice-session-priv.h"
-> @@ -74,6 +75,7 @@ enum {
->      PROP_AUTO_CONNECT_FILTER,
->      PROP_REDIRECT_ON_CONNECT,
->      PROP_FREE_CHANNELS,
-> +    PROP_SHARE_CD
->  };
-> =20
->  enum
-> @@ -432,6 +434,26 @@ static void spice_usb_device_manager_set_property(GO=
-bject       *gobject,
->          priv->redirect_on_connect =3D g_strdup(filter);
->          break;
->      }
-> +    case PROP_SHARE_CD:
-> +    {
-> +#ifdef USE_USBREDIR
-> +        CdEmulationParams param =3D { 0 };
-> +        const gchar *name =3D g_value_get_string(value);
-> +        /* the string is temporary, no need to keep it */
-> +        SPICE_DEBUG("share_cd set to %s", name);
-> +        if (name[0] =3D=3D '!') {
-> +            name++;
-> +            param.delete_on_eject =3D 1;
-> +        }
-> +        param.filename =3D name;
-> +        GError *error =3D NULL;
-> +        if (!create_emulated_cd(priv->context, &param, &error)) {
-> +            g_warning(error->message);
-> +            g_error_free(error);
-> +        }
-> +#endif
+> Acked.
+> Probably clang is not able to understand the alias.
 
-This was acked before, I think I just asked for an #else
-g_warning("usbredir is not set, can't set share-cd") or something
-like that
+Thanks,
 
-> +        break;
-> +    }
->      default:
->          G_OBJECT_WARN_INVALID_PROPERTY_ID(gobject, prop_id, pspec);
->          break;
-> @@ -522,6 +544,18 @@ static void spice_usb_device_manager_class_init(Spic=
-eUsbDeviceManagerClass *klas
->      g_object_class_install_property(gobject_class, PROP_REDIRECT_ON_CONN=
-ECT,
->                                      pspec);
-> =20
-> +    /**
-> +    * SpiceUsbDeviceManager:share-cd:
-> +    *
-> +    * Set a string specifying a filename (ISO) or physical CD/DVD device
-> +    * to share via USB after a Spice connection has been established.
-> +    *
-> +    */
-> +    pspec =3D g_param_spec_string("share-cd", "Share ISO file or device =
-as CD",
-> +        "File or device name to share", NULL,
-> +        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-> +    g_object_class_install_property(gobject_class, PROP_SHARE_CD, pspec);
-> +
->      /**
->       * SpiceUsbDeviceManager:free-channels:
->       *
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---xxwroaaybxvpft4m
+--ek4vrow3qnzvbq7k
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lI1YACgkQl9kSPeN6
-SE9f0w/8DqU15NcQrohabuTPvfXhbNO6d7NLNNSinvVAjNvgzBXruO1G/NKGmNns
-J+RSuVWKfw/hwmcyis7Enm53J6GBbiJPpkSbxNI4vGLmAPmTXPyUS05jqKBDmy+U
-fn5fJUvKGshdVVw9VFP9eHTWjHylNR35iAdRqnptSpoZXDtvEa2xuN3ssN3zKy60
-UbLGH+tPHaEVRanI6VwfFybQMRIt54sQ0Pwr2uok48qdcJzvtpBsTlZivD5WN6GK
-TWD35B0++9Vp5Mvt/Q6wV6SCOz0GCZqWtxj4EC9N4gYaOjn2zM+LqUdP7bNXq6l7
-GLKqolEvdQRv2KommWAE9sXR7nFv1lryjJyoBjGkb0EQc9J8BAiya0Frs2XYED5c
-1MbfmncWdVPkB/ShgUt3xVQEhD+stLbaa4d4CuVSW7nnvSdFa2vYp8E2aI5ZNmAk
-iPnjCveQ6l76RYlndiRhh1cozy/dD5uuN8HLT4UqCi6x+uhqylBSVB70zoj7Rxqo
-QU6BgFgBNMqtdwKIqXnfqPnkJIqrBs419RWG4Q8OGC+0HGErZ0aIABwvnZjYCBu2
-vi3V2IfhTYII7qDZWGiiUjN7142K/wFIvnVZQMU4aeav9GEDj3GvfLj4Ay+JSaRD
-jOInU2ku8viOJmMvhQBsiYDPbegv0hO2X6t9/Wj3Xj/XIrtH8hw=
-=ppoQ
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lJGAACgkQl9kSPeN6
+SE8k+BAAmi0hdik0psHj6buso7BqCGqEI6e2XAfX3NRV2520K9lZe3gRTBTY44R8
+0gcxCPfPn/vI3fDEjjLtMOcScvWoGs7zH4e7q0fzLEGOn1RdJ5YOYlxeHzVB8nvJ
+g+3zD87KU2MJLh2riya0xnQw6HMDxnN1BuPFUSlvFydWRunGy6iOJS6eJBJciZob
+MJY4/sq90eRx6naisJa4IDYLPoKklToqtH1FBPubFjcfgH/FgWi8iYdvEi/c4IUE
+SwVgUXL0sPCHPh/v/iuGTDD4mpRoq6/c6+b2AXSmF+x+CHWc8mT2RijHuqSSqNWH
+DHyNeJDZARRP4cp6x//2wAbg1UW/V1ayGOdzeseVKxUNTLlcyvSHX/4CX1SBiGbe
+nhzoyHvKR1uKWcYkZ0flA8kZsNwM3LaeC/L8niUOpl4rPgj1LEec4AupPKckTNwk
+rXU2QIJbXFr+8sdLdhNLMlWlf3r28p5y2AATeXGfkgFzfxsOLQvAMqQZIkB4m3g8
+mxW/7RTaQeEToqleDi48W1fQRyxxdAuilBMONlv6FK7z/d1OapKxodU1hRSUk4/5
+VW5IpXHGDFCyzksmfiobKwzYZzkC4Pg8h5gIZwwG17ki2cR3AqSRtD/jp1t4jbED
+v5grSkCJ2qIuzC9EsjYDGraZpKofDk/AB6gPNoERI4H//1xpLUs=
+=5/5+
 -----END PGP SIGNATURE-----
 
---xxwroaaybxvpft4m--
+--ek4vrow3qnzvbq7k--
 
---===============1724459208==
+--===============1408175289==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -244,4 +303,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============1724459208==--
+--===============1408175289==--
