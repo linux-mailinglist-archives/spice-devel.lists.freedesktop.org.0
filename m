@@ -2,39 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6155F9E7C1
-	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:21:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F123C9E7DA
+	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:27:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DC48B8910B;
-	Tue, 27 Aug 2019 12:21:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0A5E889862;
+	Tue, 27 Aug 2019 12:27:23 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9A3608910B
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:21:02 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A246489862
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:27:21 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 40EC8693C8
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:21:02 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 42C67308FC22
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:27:21 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DEDC960BF7;
- Tue, 27 Aug 2019 12:21:01 +0000 (UTC)
-Date: Tue, 27 Aug 2019 14:21:01 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DEC7B19D7A;
+ Tue, 27 Aug 2019 12:27:20 +0000 (UTC)
+Date: Tue, 27 Aug 2019 14:27:20 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190827122101.56ymfwtecv5mzpxl@wingsuit>
+Message-ID: <20190827122720.irrvxbhcjd5ixlao@wingsuit>
 References: <20190827092246.10276-1-fziglio@redhat.com>
- <20190827092246.10276-13-fziglio@redhat.com>
+ <20190827092246.10276-15-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190827092246.10276-13-fziglio@redhat.com>
+In-Reply-To: <20190827092246.10276-15-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.25]); Tue, 27 Aug 2019 12:21:02 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk v4 12/29] fixup! usb-redir: add
- files for SCSI and USB MSC implementation
+ (mx1.redhat.com [10.5.110.43]); Tue, 27 Aug 2019 12:27:21 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk v4 14/29] fixup! usb-redir: add
+ implementation of emulated CD device
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,241 +47,45 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1531372116=="
+Content-Type: multipart/mixed; boundary="===============1064298965=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============1531372116==
+--===============1064298965==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="tatsmh5wpdqetztv"
+	protocol="application/pgp-signature"; boundary="yuzgvdoxlppfwcno"
 Content-Disposition: inline
 
 
---tatsmh5wpdqetztv
+--yuzgvdoxlppfwcno
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 27, 2019 at 10:22:29AM +0100, Frediano Ziglio wrote:
-> Do not use G_GUINT32_FORMAT.
-> We support a minimum of 32 bit architectures.
-Acked-by: Victor Toso <victortoso@redhat.com>
+Hi,
+
+On Tue, Aug 27, 2019 at 10:22:31AM +0100, Frediano Ziglio wrote:
+> Add comment on constant
 > ---
->  src/cd-usb-bulk-msd.c | 53 +++++++++++++++++++++----------------------
->  1 file changed, 26 insertions(+), 27 deletions(-)
+>  src/usb-device-cd.c | 1 +
+>  1 file changed, 1 insertion(+)
 >=20
-> diff --git a/src/cd-usb-bulk-msd.c b/src/cd-usb-bulk-msd.c
-> index 49e01eb6..5d95dac7 100644
-> --- a/src/cd-usb-bulk-msd.c
-> +++ b/src/cd-usb-bulk-msd.c
-> @@ -138,7 +138,7 @@ UsbCdBulkMsdDevice *cd_usb_bulk_msd_alloc(void *usb_u=
-ser_data, uint32_t max_luns
->      cd_usb_bulk_msd_set_state(cd, USB_CD_STATE_INIT);
->      cd->usb_user_data =3D usb_user_data;
+> diff --git a/src/usb-device-cd.c b/src/usb-device-cd.c
+> index c33bb290..2234289c 100644
+> --- a/src/usb-device-cd.c
+> +++ b/src/usb-device-cd.c
+> @@ -57,6 +57,7 @@ typedef struct SpiceCdLU {
 > =20
-> -    SPICE_DEBUG("Alloc, max_luns:%" G_GUINT32_FORMAT, max_luns);
-> +    SPICE_DEBUG("Alloc, max_luns:%u", max_luns);
->      return cd;
->  }
-> =20
-> @@ -155,7 +155,7 @@ int cd_usb_bulk_msd_realize(UsbCdBulkMsdDevice *cd, u=
-int32_t lun,
-> =20
->      rc =3D cd_scsi_dev_realize(cd->scsi_target, lun, &scsi_dev_params);
->      if (rc !=3D 0) {
-> -        SPICE_ERROR("Failed to realize lun:%" G_GUINT32_FORMAT, lun);
-> +        SPICE_ERROR("Failed to realize lun:%u", lun);
->          return rc;
->      }
-> =20
-> @@ -165,7 +165,7 @@ int cd_usb_bulk_msd_realize(UsbCdBulkMsdDevice *cd, u=
-int32_t lun,
->          cd_scsi_dev_request_release(cd->scsi_target, &cd->usb_req.scsi_r=
-eq);
->      }
-> =20
-> -    SPICE_DEBUG("Realize OK lun:%" G_GUINT32_FORMAT, lun);
-> +    SPICE_DEBUG("Realize OK lun:%u", lun);
->      return 0;
->  }
-> =20
-> @@ -175,11 +175,11 @@ int cd_usb_bulk_msd_lock(UsbCdBulkMsdDevice *cd, ui=
-nt32_t lun, gboolean lock)
-> =20
->      rc =3D cd_scsi_dev_lock(cd->scsi_target, lun, lock);
->      if (rc !=3D 0) {
-> -        SPICE_ERROR("Failed to lock lun:%" G_GUINT32_FORMAT, lun);
-> +        SPICE_ERROR("Failed to lock lun:%u", lun);
->          return rc;
->      }
-> =20
-> -    SPICE_DEBUG("Lock OK lun:%" G_GUINT32_FORMAT, lun);
-> +    SPICE_DEBUG("Lock OK lun:%u", lun);
->      return 0;
->  }
-> =20
-> @@ -190,11 +190,11 @@ int cd_usb_bulk_msd_load(UsbCdBulkMsdDevice *cd, ui=
-nt32_t lun,
-> =20
->      rc =3D cd_scsi_dev_load(cd->scsi_target, lun, media_params);
->      if (rc !=3D 0) {
-> -        SPICE_ERROR("Failed to load lun:%" G_GUINT32_FORMAT, lun);
-> +        SPICE_ERROR("Failed to load lun:%u", lun);
->          return rc;
->      }
-> =20
-> -    SPICE_DEBUG("Load OK lun:%" G_GUINT32_FORMAT, lun);
-> +    SPICE_DEBUG("Load OK lun:%u", lun);
->      return 0;
->  }
-> =20
-> @@ -204,7 +204,7 @@ int cd_usb_bulk_msd_get_info(UsbCdBulkMsdDevice *cd, =
-uint32_t lun, CdScsiDeviceI
-> =20
->      rc =3D cd_scsi_dev_get_info(cd->scsi_target, lun, lun_info);
->      if (rc !=3D 0) {
-> -        SPICE_ERROR("Failed to get info lun:%" G_GUINT32_FORMAT, lun);
-> +        SPICE_ERROR("Failed to get info lun:%u", lun);
->          return rc;
->      }
-> =20
-> @@ -217,11 +217,11 @@ int cd_usb_bulk_msd_unload(UsbCdBulkMsdDevice *cd, =
-uint32_t lun)
-> =20
->      rc =3D cd_scsi_dev_unload(cd->scsi_target, lun);
->      if (rc !=3D 0) {
-> -        SPICE_ERROR("Failed to unload lun:%" G_GUINT32_FORMAT, lun);
-> +        SPICE_ERROR("Failed to unload lun:%u", lun);
->          return rc;
->      }
-> =20
-> -    SPICE_DEBUG("Unload OK lun:%" G_GUINT32_FORMAT, lun);
-> +    SPICE_DEBUG("Unload OK lun:%u", lun);
->      return 0;
->  }
-> =20
-> @@ -231,11 +231,11 @@ int cd_usb_bulk_msd_unrealize(UsbCdBulkMsdDevice *c=
-d, uint32_t lun)
-> =20
->      rc =3D cd_scsi_dev_unrealize(cd->scsi_target, lun);
->      if (rc !=3D 0) {
-> -        SPICE_ERROR("Unrealize lun:%" G_GUINT32_FORMAT, lun);
-> +        SPICE_ERROR("Unrealize lun:%u", lun);
->          return rc;
->      }
-> =20
-> -    SPICE_DEBUG("Unrealize lun:%" G_GUINT32_FORMAT, lun);
-> +    SPICE_DEBUG("Unrealize lun:%u", lun);
->      return 0;
->  }
-> =20
-> @@ -264,7 +264,7 @@ static int parse_usb_msd_cmd(UsbCdBulkMsdDevice *cd, =
-uint8_t *buf, uint32_t cbw_
->      CdScsiRequest *scsi_req =3D &usb_req->scsi_req;
-> =20
->      if (cbw_len !=3D sizeof(*cbw)) {
-> -        SPICE_ERROR("CMD: Bad CBW size:%" G_GUINT32_FORMAT, cbw_len);
-> +        SPICE_ERROR("CMD: Bad CBW size:%u", cbw_len);
->          return -1;
->      }
->      if (le32toh(cbw->sig) !=3D 0x43425355) { /* MSD command signature */
-> @@ -304,10 +304,10 @@ static int parse_usb_msd_cmd(UsbCdBulkMsdDevice *cd=
-, uint8_t *buf, uint32_t cbw_
-> =20
->      scsi_req->lun =3D usb_req->lun;
-> =20
-> -    SPICE_DEBUG("CMD lun:%" G_GUINT32_FORMAT " tag:%#x flags:%08x "
-> -        "cdb_len:%" G_GUINT32_FORMAT " req_len:%" G_GUINT32_FORMAT,
-> -        usb_req->lun, le32toh(cbw->tag), cbw->flags,
-> -        scsi_req->cdb_len, usb_req->usb_req_len);
-> +    SPICE_DEBUG("CMD lun:%u tag:%#x flags:%08x "
-> +                "cdb_len:%u req_len:%u",
-> +                usb_req->lun, le32toh(cbw->tag), cbw->flags,
-> +                scsi_req->cdb_len, usb_req->usb_req_len);
-> =20
->      /* prepare status - CSW */
->      usb_req->csw.sig =3D htole32(0x53425355);
-> @@ -364,8 +364,8 @@ static void usb_cd_send_data_in(UsbCdBulkMsdDevice *c=
-d, uint32_t max_len)
->      uint32_t avail_len =3D usb_req->scsi_in_len - usb_req->xfer_len;
->      uint32_t send_len =3D MIN(avail_len, max_len);
-> =20
-> -    SPICE_DEBUG("Data-in cmd tag 0x%x, remains %" G_GUINT32_FORMAT
-> -                ", requested %" G_GUINT32_FORMAT ", send %" G_GUINT32_FO=
-RMAT,
-> +    SPICE_DEBUG("Data-in cmd tag 0x%x, remains %u"
-> +                ", requested %u, send %u",
->                  usb_req->csw.tag, avail_len, max_len, send_len);
-> =20
->      g_assert(max_len <=3D usb_req->usb_req_len);
-> @@ -396,7 +396,7 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
-32_t max_len)
->      UsbCdBulkMsdRequest *usb_req =3D &cd->usb_req;
->      CdScsiRequest *scsi_req =3D &usb_req->scsi_req;
-> =20
-> -    SPICE_DEBUG("msd_read, state: %s, len %" G_GUINT32_FORMAT,
-> +    SPICE_DEBUG("msd_read, state: %s, len %u",
->                  usb_cd_state_str(cd->state), max_len);
-> =20
->      switch (cd->state) {
-> @@ -408,8 +408,8 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
-32_t max_len)
->              usb_cd_send_status(cd);
->          } else {
->              usb_req->bulk_in_len +=3D max_len;
-> -            SPICE_DEBUG("msd_read CSW, req incomplete, added len %" G_GU=
-INT32_FORMAT
-> -                        " saved len %" G_GUINT32_FORMAT,
-> +            SPICE_DEBUG("msd_read CSW, req incomplete, added len %u"
-> +                        " saved len %u",
->                          max_len, usb_req->bulk_in_len);
->          }
->          break;
-> @@ -419,8 +419,7 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
-32_t max_len)
->              usb_cd_send_data_in(cd, max_len);
->          } else {
->              usb_req->bulk_in_len +=3D max_len;
-> -            SPICE_DEBUG("msd_read DATAIN, req incomplete, added len %" G=
-_GUINT32_FORMAT
-> -                        " saved len %" G_GUINT32_FORMAT,
-> +            SPICE_DEBUG("msd_read DATAIN, req incomplete, added len %u s=
-aved len %u",
->                          max_len, usb_req->bulk_in_len);
->          }
->          break;
-> @@ -433,7 +432,7 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
-32_t max_len)
->          break;
-> =20
->      default:
-> -        SPICE_ERROR("Unexpected read state: %s, len %" G_GUINT32_FORMAT,
-> +        SPICE_ERROR("Unexpected read state: %s, len %u",
->                      usb_cd_state_str(cd->state), max_len);
->          goto fail;
->      }
-> @@ -507,7 +506,7 @@ int cd_usb_bulk_msd_write(UsbCdBulkMsdDevice *cd, uin=
-t8_t *buf_out, uint32_t buf
->          cd_usb_bulk_msd_set_state(cd, USB_CD_STATE_CSW); /* Status next =
-*/
->          break;
->      default:
-> -        SPICE_DEBUG("Unexpected write state: %s, len %" G_GUINT32_FORMAT,
-> +        SPICE_DEBUG("Unexpected write state: %s, len %u",
->                      usb_cd_state_str(cd->state), buf_out_len);
->          goto fail;
->      }
-> @@ -536,7 +535,7 @@ void cd_scsi_target_reset_complete(void *target_user_=
-data)
->  void cd_scsi_dev_changed(void *target_user_data, uint32_t lun)
->  {
->      UsbCdBulkMsdDevice *cd =3D (UsbCdBulkMsdDevice *)target_user_data;
-> -    SPICE_DEBUG("Device changed, state: %s lun: %" G_GUINT32_FORMAT,
-> +    SPICE_DEBUG("Device changed, state: %s lun: %u",
->                  usb_cd_state_str(cd->state), lun);
->      cd_usb_bulk_msd_lun_changed(cd->usb_user_data, lun);
->  }
+>  #define MAX_LUN_PER_DEVICE              1
+>  #define USB2_BCD                        0x200
+> +/* Red Hat USB VID */
+
+I don't mind adding a comment but perhaps SPICE USB VID instead?
+
+>  #define CD_DEV_VID                      0x2b23
+>  #define CD_DEV_PID                      0xCDCD
+>  #define CD_DEV_CLASS                    8
 > --=20
 > 2.20.1
 >=20
@@ -290,29 +94,29 @@ data)
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---tatsmh5wpdqetztv
+--yuzgvdoxlppfwcno
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lIC0ACgkQl9kSPeN6
-SE/75RAAmrC+VE8SxT9Ny85WhQS3h9YjXSLyYJtO02x501hI61Pl8D622vnXzO/I
-44xelgzjH+AOsa2gsOMceLXb+VSpCerDTe3JLt2p+3SyXagJuLacmkYXKI2jETlH
-1DwbhDPaePRZMpft7DkFyS0I/5h3YqBHUkKN7Hrdx5D2YYN9uVcmaeJhRST6UPIf
-wQWXL2fHMOCQVX7rsBDQQ/dHRw4t1ngmjqDFNRky7KHChsNYTZBGuPRGuy5qYvS8
-daEHhdrN88Wrb6zdTuhXTLW37eaHhiIpYva20FuEqJr7IO0fbFAAdlebMM4eN9ok
-fYg/uNlvQPOlBbmuNpVFWBNqoa582PK4GwiQpyhlJZgoPPLYy6yrmv8wG0ssMlz4
-JViT9VXGRdBYVO77SU7jPFbYeL8a7W1qEQa2PMO9sHXn6XqUqHuOOIbE0rRPAosA
-8aWP7cGKPLhvnozFt99p+S/H7G3gqg6O8SKuUXElmoBGmSMzKOgPEG9+f3pU9bLX
-smOLnc8nfJrz21k5VIO4fRwTW2pZGWzQD9X3dcr25QHVvPIY8eyPYU6byS/105R9
-sbwVnBKnhd2AAP9bRv4glcrIZh+6kntAdGfqQEBxHeoUHArUO8dIugh2U541h4y7
-bb44YA5V8tXjm/iZUcfm0WBtmJDMp4GhBxNiExUcQFwsHF5lP+s=
-=n9gM
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lIagACgkQl9kSPeN6
+SE8NXw/+JjGDEM+sQD2OxZXTPimQ4w+IAZjzmvbNYoY/h8kRaGr24ILL7b5EdrPC
+VLbGi/5QtAwD0SVqdLwGotso4Z7iU8xRDb0p6OZw1hIbS1ueFxtsAN18JQ49U7td
+Wj9vRgAs2Pcyd2gMjpRNIYFqOcmpPZLZaTzpoxaLBbCo75XASg0HOVT87EYpArRf
+U10/qHGP1orwNXU0rGr2e7qwwDhZPO2tk7ue9V+TnKsY7NKoztTnOpxpLHS3lz6I
+N8EbdF44VVdwcioRkutsDVgu/f/HFp/ao9E4HzjpDoTJr2hPPrl19jK/dEj2n/f3
+tSutJn1n3EI6rJLgclPt5CljWYTO8slQX/6PDxzXZYjLZLbKFejPIz5HaSVyn5J4
+AoSYss3sxyy8FECSr7Qu8Larn72Eti0JXyzKkvC+KtqITC7nwvdez3Hd6Bl8UP28
+GQFKSQbJ54k1OcC8FVkdJo1f405KwFV91paXReH/tvJnMUHoJa9OJ9GJtBvNkmPB
+tn2qQU5WsHCZuqCYIWLPVQL/McwwCBb+okXItP4ib/u+lUfve6ZC5DF+RAwqNgdJ
+oY/wiCE+FaaC1LdL6KvScYBHT5fur13L1v35Zr5rUG0Vsl0Ht0Ja8Xgcz7GlNpsz
+TadVsE+fmrxpgQZJIyJ0HGMtwcw5YYg0rEsf8U640ZSEh4UP29s=
+=wvKd
 -----END PGP SIGNATURE-----
 
---tatsmh5wpdqetztv--
+--yuzgvdoxlppfwcno--
 
---===============1531372116==
+--===============1064298965==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -322,4 +126,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============1531372116==--
+--===============1064298965==--
