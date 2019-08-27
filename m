@@ -1,40 +1,40 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8178C9E9C4
-	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 15:44:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 974839EA4E
+	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 16:02:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A87A889B0D;
-	Tue, 27 Aug 2019 13:44:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 201EF89B7D;
+	Tue, 27 Aug 2019 14:02:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 36CB589B0D
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 13:44:21 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A556789B7D
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 14:02:53 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id D236210F23E7
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 13:44:20 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 155223082B43
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 14:02:53 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7BB2F5D9C3;
- Tue, 27 Aug 2019 13:44:14 +0000 (UTC)
-Date: Tue, 27 Aug 2019 15:44:13 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B00EB60BFB;
+ Tue, 27 Aug 2019 14:02:48 +0000 (UTC)
+Date: Tue, 27 Aug 2019 16:02:47 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190827134413.cd4mir65nxp3q5s4@wingsuit>
+Message-ID: <20190827140247.gm5f2j4lnptjojr4@wingsuit>
 References: <20190827092246.10276-1-fziglio@redhat.com>
- <20190827092246.10276-24-fziglio@redhat.com>
+ <20190827092246.10276-27-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190827092246.10276-24-fziglio@redhat.com>
+In-Reply-To: <20190827092246.10276-27-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.66]); Tue, 27 Aug 2019 13:44:20 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk v4 23/29] cd-scsi: Do not export
- sense code constants
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.45]); Tue, 27 Aug 2019 14:02:53 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk v4 26/29] test-cd-emu: Test
+ attach/detach emulated device
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,203 +47,253 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0853658320=="
+Content-Type: multipart/mixed; boundary="===============0451462896=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0853658320==
+--===============0451462896==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="xe6ynyruufjdcbsg"
+	protocol="application/pgp-signature"; boundary="ao6tiynz7krokbum"
 Content-Disposition: inline
 
 
---xe6ynyruufjdcbsg
+--ao6tiynz7krokbum
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Tue, Aug 27, 2019 at 10:22:40AM +0100, Frediano Ziglio wrote:
-> They are used only inside the module.
-> Use a macro to simplify declaration which is pretty long.
+On Tue, Aug 27, 2019 at 10:22:43AM +0100, Frediano Ziglio wrote:
+> Mock some usb-backend functions to be able to simulate device
+> attachment and detachment.
+> Create session and channel to pass some valid pointer anyway.
+> Emulate channel state correctly.
+> Make sure HELLO packets are sent correctly at the beginning and
+> no more afterwards.
+> Test auto-connect enabled or disabled.
 >=20
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-Improves a bit yes,
-Acked-by: Victor Toso <victortoso@redhat.com>
 > ---
->  src/cd-scsi.c | 54 ++++++++++++++++++++++++++-------------------------
->  1 file changed, 28 insertions(+), 26 deletions(-)
+>  tests/cd-emu.c | 153 ++++++++++++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 151 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/src/cd-scsi.c b/src/cd-scsi.c
-> index 25842b3b..9689f91b 100644
-> --- a/src/cd-scsi.c
-> +++ b/src/cd-scsi.c
-> @@ -114,133 +114,135 @@ struct CdScsiTarget {
->  static const char* scsi_cmd_name[256];
+> diff --git a/tests/cd-emu.c b/tests/cd-emu.c
+> index 7bf1fa3c..f0966662 100644
+> --- a/tests/cd-emu.c
+> +++ b/tests/cd-emu.c
+> @@ -14,10 +14,13 @@
+>     You should have received a copy of the GNU Lesser General Public
+>     License along with this library; if not, see <http://www.gnu.org/lice=
+nses/>.
+>  */
+> -#include <gio/gio.h>
+> +
+> +// Mock some code in usb-backend.c
+> +#define spice_usbredir_write_callback mock_spice_usbredir_write_callback
+> +#define spice_channel_get_state mock_spice_channel_get_state
+
+I wonder if isn't better to create a -private header for this
+instead?
+
+> +#include "../src/usb-backend.c"
 > =20
->  /* Predefined sense codes */
-> +#define SENSE_CODE(name) \
-> +    static const ScsiShortSense name G_GNUC_UNUSED
+>  #include "usb-device-cd.h"
+> -#include "usb-emulation.h"
 > =20
-> -const ScsiShortSense sense_code_NO_SENSE =3D {
-> +SENSE_CODE(sense_code_NO_SENSE) =3D {
->      .key =3D NO_SENSE , .asc =3D 0x00 , .ascq =3D 0x00,
->      .descr =3D ""
->  };
+>  static SpiceUsbBackendDevice *device =3D NULL;
 > =20
-> -const ScsiShortSense sense_code_NOT_READY_CAUSE_NOT_REPORTABLE =3D {
-> +SENSE_CODE(sense_code_NOT_READY_CAUSE_NOT_REPORTABLE) =3D {
->      .key =3D NOT_READY, .asc =3D 0x04, .ascq =3D 0x00,
->      .descr =3D "CAUSE NOT REPORTABLE"
->  };
+> @@ -67,6 +70,150 @@ static void multiple(const void *param)
+>      spice_usb_backend_delete(be);
+>  }
 > =20
-> -const ScsiShortSense sense_code_BECOMING_READY =3D {
-> +SENSE_CODE(sense_code_BECOMING_READY) =3D {
->      .key =3D NOT_READY, .asc =3D 0x04, .ascq =3D 0x01,
->      .descr =3D "IN PROCESS OF BECOMING READY"
->  };
+> +static unsigned int messages_sent =3D 0;
+> +static unsigned int hellos_sent =3D 0;
+> +static SpiceUsbBackendChannel *usb_ch;
+> +
+> +int
+> +mock_spice_usbredir_write_callback(SpiceUsbredirChannel *channel, uint8_=
+t *data, int count)
+> +{
+> +    ++messages_sent;
+> +    g_assert_cmpint(count, >=3D, 4);
+> +    const uint32_t type =3D data[0] + data[1] * 0x100u + data[2] * 0x100=
+00u + data[3] * 0x1000000u;
+> +    if (type =3D=3D usb_redir_hello) {
+> +        ++hellos_sent;
+> +    }
+> +
+> +    // return we handled the data
+> +    spice_usb_backend_return_write_data(usb_ch, data);
+> +    return count;
+> +}
+> +
+> +// channel state to return from Mock function
+> +static enum spice_channel_state ch_state =3D SPICE_CHANNEL_STATE_UNCONNE=
+CTED;
+> +
+> +enum spice_channel_state
+> +mock_spice_channel_get_state(SpiceChannel *channel)
+> +{
+> +    return ch_state;
+> +}
+> +
+> +// number of GObjects allocated we expect will be freed
+> +static unsigned gobjects_allocated =3D 0;
+> +static void decrement_allocated(gpointer data G_GNUC_UNUSED, GObject *ol=
+d_gobject G_GNUC_UNUSED)
+> +{
+> +    g_assert_cmpint(gobjects_allocated, !=3D, 0);
+> +    --gobjects_allocated;
+> +}
+> +
+> +#define DATA_START \
+> +    do { static const uint8_t data[] =3D {
+> +#define DATA_SEND \
+> +        }; \
+> +        spice_usb_backend_read_guest_data(usb_ch, (uint8_t*)data, G_N_EL=
+EMENTS(data)); \
+> +    } while(0)
+> +
+> +static void attach(const void *param)
+> +{
+> +    const bool attach_on_connect =3D !!GPOINTER_TO_UINT(param);
+> +
+> +    hellos_sent =3D 0;
+> +    messages_sent =3D 0;
+> +    ch_state =3D SPICE_CHANNEL_STATE_UNCONNECTED;
+> +
+> +    SpiceSession *session =3D spice_session_new();
+> +    g_assert_nonnull(session);
+> +    g_object_weak_ref(G_OBJECT(session), decrement_allocated, NULL);
+> +    SpiceChannel *ch =3D spice_channel_new(session, SPICE_CHANNEL_USBRED=
+IR, 0);
+> +    g_assert_nonnull(ch);
+> +    g_object_weak_ref(G_OBJECT(ch), decrement_allocated, NULL);
+> +    gobjects_allocated =3D 2;
+> +
+> +    /*
+> +     * real test, allocate a channel usbredir, emulate device
+> +     * initialization.
+> +     * Filter some call.
+> +     * Start sequence:
+> +     * - spice_usb_backend_new
+> +     * - spice_usb_backend_register_hotplug
+> +     * - spice_usb_backend_create_emulated_device
+> +     * - spice_usb_backend_channel_new
+> +     * - spice_usb_backend_channel_attach (if redir on connect)
+> +     * - spice_usb_backend_channel_flush_writes
+> +     * - spice_usbredir_write_callback
+> +     * - spice_usb_backend_return_write_data
+> +     * - spice_usb_backend_read_guest_data
+> +     * - spice_usb_backend_channel_attach (if not redir on connect)
+> +     */
+> +    GError *err =3D NULL;
+> +    SpiceUsbBackend * be =3D spice_usb_backend_new(&err);
+> +    g_assert_nonnull(be);
+> +    g_assert_null(err);
+> +    spice_usb_backend_register_hotplug(be, NULL, test_hotplug_callback, =
+&err);
+> +    g_assert_null(err);
+> +
+> +    CdEmulationParams params =3D { "test-cd-emu.iso", 1 };
+> +    g_assert_true(create_emulated_cd(be, &params, &err));
+> +    g_assert_null(err);
+> +    g_assert_nonnull(device);
+> +
+> +    usb_ch =3D spice_usb_backend_channel_new(be, SPICE_USBREDIR_CHANNEL(=
+ch));
+> +    g_assert_nonnull(usb_ch);
+> +
+> +    // attach on connect
+> +    ch_state =3D SPICE_CHANNEL_STATE_CONNECTING;
+> +    if (attach_on_connect) {
+> +        g_assert_true(spice_usb_backend_channel_attach(usb_ch, device, &=
+err));
+> +        g_assert_null(err);
+> +    }
+> +    g_assert_cmpint(hellos_sent, =3D=3D, 0);
+> +    g_assert_cmpint(messages_sent, =3D=3D, 0);
+> +
+> +    // try to get initial data
+> +    ch_state =3D SPICE_CHANNEL_STATE_READY;
+> +    spice_usb_backend_channel_flush_writes(usb_ch);
+> +
+> +    // we should get an hello (only one!)
+> +    g_assert_cmpint(hellos_sent, =3D=3D, 1);
+> +    g_assert_cmpint(messages_sent, =3D=3D, 1);
+> +
+> +    // send hello reply
+> +    DATA_START
+> +        0x00,0x00,0x00,0x00,0x44,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //0=
+00 ....D.......
+> +        0x71,0x65,0x6d,0x75,0x20,0x75,0x73,0x62,0x2d,0x72,0x65,0x64, //0=
+0c qemu usb-red
+> +        0x69,0x72,0x20,0x67,0x75,0x65,0x73,0x74,0x20,0x33,0x2e,0x30, //0=
+18 ir guest 3.0
+> +        0x2e,0x31,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //0=
+24 .1..........
+> +        0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //0=
+30 ............
+> +        0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, //0=
+3c ............
+> +        0x00,0x00,0x00,0x00,0xff,0x00,0x00,0x00,                     //0=
+48 ........
+> +    DATA_SEND;
+
+Should we have different 'hellos' in the future? Let's say we
+support 3.0 but not 3.1, etc.
+
+> +
+> +    if (!attach_on_connect) {
+> +        g_assert_true(spice_usb_backend_channel_attach(usb_ch, device, &=
+err));
+> +        g_assert_null(err);
+> +    }
+> +    g_assert_cmpint(hellos_sent, =3D=3D, 1);
+> +    g_assert_cmpint(messages_sent, >, 1);
+> +
+> +    // cleanup
+> +    spice_usb_backend_device_unref(device);
+> +    device =3D NULL;
+> +    spice_usb_backend_channel_delete(usb_ch);
+> +    usb_ch =3D NULL;
+> +    spice_usb_backend_deregister_hotplug(be);
+> +    spice_usb_backend_delete(be);
+> +
+> +    // this it's the correct sequence to free session!
+> +    // g_object_unref is not enough, causing wrong reference countings
+> +    spice_session_disconnect(session);
+> +    g_object_unref(session);
+> +    while (g_main_context_iteration(NULL, FALSE)) {
+> +        continue;
+> +    }
+> +
+> +    g_assert_cmpint(gobjects_allocated, =3D=3D, 0);
+> +}
+> +
+>  static void
+>  write_test_iso(void)
+>  {
+> @@ -87,6 +234,8 @@ int main(int argc, char* argv[])
 > =20
-> -const ScsiShortSense sense_code_INIT_CMD_REQUIRED =3D {
-> +SENSE_CODE(sense_code_INIT_CMD_REQUIRED) =3D {
->      .key =3D NOT_READY, .asc =3D 0x04, .ascq =3D 0x02,
->      .descr =3D "INITIALIZING COMMAND REQUIRED"
->  };
+>      g_test_add_data_func("/cd-emu/simple", GUINT_TO_POINTER(1), multiple=
+);
+>      g_test_add_data_func("/cd-emu/multiple", GUINT_TO_POINTER(128), mult=
+iple);
+> +    g_test_add_data_func("/cd-emu/attach_no_auto", GUINT_TO_POINTER(0), =
+attach);
+> +    g_test_add_data_func("/cd-emu/attach_auto", GUINT_TO_POINTER(1), att=
+ach);
+
+Not much to complain actually, happy again that we have this
+tested. Lots of pre increment/decrement. I don't care much but
+that's not that common in the client, I think.
+
 > =20
-> -const ScsiShortSense sense_code_INTERVENTION_REQUIRED =3D {
-> +SENSE_CODE(sense_code_INTERVENTION_REQUIRED) =3D {
->      .key =3D NOT_READY, .asc =3D 0x04, .ascq =3D 0x03,
->      .descr =3D "MANUAL INTERVENTION REQUIRED"
->  };
-> =20
-> -const ScsiShortSense sense_code_NOT_READY_NO_MEDIUM =3D {
-> +SENSE_CODE(sense_code_NOT_READY_NO_MEDIUM) =3D {
->      .key =3D NOT_READY, .asc =3D 0x3a, .ascq =3D 0x00,
->      .descr =3D "MEDIUM NOT PRESENT"
->  };
-> =20
-> -const ScsiShortSense sense_code_NOT_READY_NO_MEDIUM_TRAY_CLOSED =3D {
-> +SENSE_CODE(sense_code_NOT_READY_NO_MEDIUM_TRAY_CLOSED) =3D {
->      .key =3D NOT_READY, .asc =3D 0x3a, .ascq =3D 0x01,
->      .descr =3D "MEDIUM NOT PRESENT - TRAY CLOSED"
->  };
-> =20
-> -const ScsiShortSense sense_code_NOT_READY_NO_MEDIUM_TRAY_OPEN =3D {
-> +SENSE_CODE(sense_code_NOT_READY_NO_MEDIUM_TRAY_OPEN) =3D {
->      .key =3D NOT_READY, .asc =3D 0x3a, .ascq =3D 0x02,
->      .descr =3D "MEDIUM NOT PRESENT - TRAY OPEN"
->  };
-> =20
-> -const ScsiShortSense sense_code_TARGET_FAILURE =3D {
-> +SENSE_CODE(sense_code_TARGET_FAILURE) =3D {
->      .key =3D HARDWARE_ERROR, .asc =3D 0x44, .ascq =3D 0x00,
->      .descr =3D "INTERNAL TARGET FAILURE"
->  };
-> =20
-> -const ScsiShortSense sense_code_INVALID_OPCODE =3D {
-> +SENSE_CODE(sense_code_INVALID_OPCODE) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x20, .ascq =3D 0x00,
->      .descr =3D "INVALID COMMAND OPERATION CODE"
->  };
-> =20
-> -const ScsiShortSense sense_code_LBA_OUT_OF_RANGE =3D {
-> +SENSE_CODE(sense_code_LBA_OUT_OF_RANGE) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x21, .ascq =3D 0x00,
->      .descr =3D "LOGICAL BLOCK ADDRESS OUT OF RANGE"
->  };
-> =20
-> -const ScsiShortSense sense_code_INVALID_CDB_FIELD =3D {
-> +SENSE_CODE(sense_code_INVALID_CDB_FIELD) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x24, .ascq =3D 0x00,
->      .descr =3D "INVALID FIELD IN CDB"
->  };
-> =20
-> -const ScsiShortSense sense_code_INVALID_PARAM_FIELD =3D {
-> +SENSE_CODE(sense_code_INVALID_PARAM_FIELD) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x26, .ascq =3D 0x00,
->      .descr =3D "INVALID FIELD IN PARAMETER LIST"
->  };
-> =20
-> -const ScsiShortSense sense_code_INVALID_PARAM_LEN =3D {
-> +SENSE_CODE(sense_code_INVALID_PARAM_LEN) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x1a, .ascq =3D 0x00,
->      .descr =3D "PARAMETER LIST LENGTH ERROR"
->  };
-> =20
-> -const ScsiShortSense sense_code_LUN_NOT_SUPPORTED =3D {
-> +SENSE_CODE(sense_code_LUN_NOT_SUPPORTED) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x25, .ascq =3D 0x00,
->      .descr =3D "LOGICAL UNIT NOT SUPPORTED"
->  };
-> =20
-> -const ScsiShortSense sense_code_SAVING_PARAMS_NOT_SUPPORTED =3D {
-> +SENSE_CODE(sense_code_SAVING_PARAMS_NOT_SUPPORTED) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x39, .ascq =3D 0x00,
->      .descr =3D "SAVING PARAMETERS NOT SUPPORTED"
->  };
-> =20
-> -const ScsiShortSense sense_code_INCOMPATIBLE_MEDIUM =3D {
-> +SENSE_CODE(sense_code_INCOMPATIBLE_MEDIUM) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x30, .ascq =3D 0x00,
->      .descr =3D "INCOMPATIBLE MEDIUM INSTALLED"
->  };
-> =20
-> -const ScsiShortSense sense_code_MEDIUM_REMOVAL_PREVENTED =3D {
-> +SENSE_CODE(sense_code_MEDIUM_REMOVAL_PREVENTED) =3D {
->      .key =3D ILLEGAL_REQUEST, .asc =3D 0x53, .ascq =3D 0x02,
->      .descr =3D "MEDIUM REMOVAL PREVENTED"
->  };
-> =20
-> -const ScsiShortSense sense_code_PARAMETERS_CHANGED =3D {
-> +SENSE_CODE(sense_code_PARAMETERS_CHANGED) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x2a, .ascq =3D 0x00,
->      .descr =3D "PARAMETERS CHANGED"
->  };
-> =20
-> -const ScsiShortSense sense_code_POWER_ON_RESET =3D {
-> +SENSE_CODE(sense_code_POWER_ON_RESET) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x29, .ascq =3D 0x00,
->      .descr =3D "POWER ON, RESET, OR BUS DEVICE RESET"
->  };
-> =20
-> -const ScsiShortSense sense_code_SCSI_BUS_RESET =3D {
-> +SENSE_CODE(sense_code_SCSI_BUS_RESET) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x29, .ascq =3D 0x02,
->      .descr =3D "SCSI BUS RESET"
->  };
-> =20
-> -const ScsiShortSense sense_code_UA_NO_MEDIUM =3D {
-> +SENSE_CODE(sense_code_UA_NO_MEDIUM) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x3a, .ascq =3D 0x00,
->      .descr =3D "MEDIUM NOT PRESENT"
->  };
-> =20
-> -const ScsiShortSense sense_code_MEDIUM_CHANGED =3D {
-> +SENSE_CODE(sense_code_MEDIUM_CHANGED) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x28, .ascq =3D 0x00,
->      .descr =3D "MEDIUM CHANGED"
->  };
-> =20
-> -const ScsiShortSense sense_code_REPORTED_LUNS_CHANGED =3D {
-> +SENSE_CODE(sense_code_REPORTED_LUNS_CHANGED) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x3f, .ascq =3D 0x0e,
->      .descr =3D "REPORTED LUNS CHANGED"
->  };
-> =20
-> -const ScsiShortSense sense_code_DEVICE_INTERNAL_RESET =3D {
-> +SENSE_CODE(sense_code_DEVICE_INTERNAL_RESET) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x29, .ascq =3D 0x04,
->      .descr =3D "DEVICE INTERNAL RESET"
->  };
-> =20
-> -const ScsiShortSense sense_code_UNIT_ATTENTION_MEDIUM_REMOVAL_REQUEST =
-=3D {
-> +SENSE_CODE(sense_code_UNIT_ATTENTION_MEDIUM_REMOVAL_REQUEST) =3D {
->      .key =3D UNIT_ATTENTION, .asc =3D 0x5a, .ascq =3D 0x01,
->      .descr =3D "OPERATOR MEDIUM REMOVAL REQUEST"
->  };
+>      return g_test_run();
+>  }
 > --=20
 > 2.20.1
 >=20
@@ -252,29 +302,29 @@ Acked-by: Victor Toso <victortoso@redhat.com>
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---xe6ynyruufjdcbsg
+--ao6tiynz7krokbum
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lM60ACgkQl9kSPeN6
-SE8qmBAAlcKxkGr1MJFGNeZQIFzBWZDWu6yRhshaEimuWsiHb955CAUryD3PK5jB
-RL23k8PQ1SDnJY6k52KoT8o1v07jJL7G2RNO3YcSGSM0XqL8bvD7ZsUZ+Suamo+l
-fsQibMTjod5rZkmq+qYrjjLdCfu5lZod3SoasPBAjFhpmPwRwCF0gpP1S8WqYQ2c
-Qx5Q7cmcKqJK99NfT1JM31r/J6ahUCdtmV6gISfsQQ85Z2RJNfdAcR3zO5qf4jjK
-zlqRMbU8+x+OpXt7jVqbsTwiV5fphbuYRul9Ienx4S206g9SU1ja0s2lyZZrfP2f
-AMAvagqawjwt7s0izN+3hCJQFhJw65pYVV2GaPAz6OGxjPxFfxBDZBfWZ/oZ2SOS
-nhQJWHhIRh4/yI5uEj5/LtjDLyAVsd4fCGdoskfiUAFO1UvnnnH5JwSWnT8psVIi
-ZUwJJb1oQCaQlsRZeVb6bUf0sVOgdLR2XZhfGok54h0HNrwih++D44al024MEGYb
-P06pw7HBBh3neLOA8Fj3Xk71u0vW6cxSavCDS1FbESpcdQO4n6hhbQezyHcslgge
-robX2AZmOFJcVZkzuAweqo6LzGsixDvPFiXxp3VdH2lbeYtHDEyCv5Qaf6AmP6NS
-Vss2F0izZTzRVPeD/77jM2pNxsdMltHkIKSz2PfTsDFYlcjmitc=
-=QEjt
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lOAcACgkQl9kSPeN6
+SE9y1xAAliAEOoBt0D4mvIFcqFUE1HyJk4Grai+yCIQAxI95Jy89qfkj+khNkKY7
+bBvBwnbBq180QCLuocJsQ7SyUhKBgFsA8N8wgS6E5Km6L/kTbTSQbjIVBGYtu/4x
+Zo9KcwBLpvX2/jxlvqb53YMk/+qbWdlONDS5C05qns6/WzNZhbqbfcCmMIJC1prh
+X/uCYQCNmLuBYht/t6o7m+MituNSmn/p5wAD4G/L+7LXeMfq/AvR7L690Pzg0Nrf
+yCyw76RXNjYCqNk+I/nZFDrXqoQxPST27BxjQHTGCSsRWAWzlpZCn2O2ks5AIEwo
+Vdg/QOoJMNFFyQ4YzSHn13Zr8p5dQPXcrY7lvWEc/DdmQFlPv4aaIAKHksPWn6dk
+rNcKJnw3Pjxi62tZdKUpzulpjVesXH3iXc6X0Nxmlc/RO0egrVita7noR1kWgF/d
+VcUQ67Ljre8jyB7mcAE4U5TtbpViTpUng5pv71dpSFiuW7ZoZEo2phxboprff4fx
+mLKfNEKZE0OJ6ZRwySUqqye5LHc5Mg5DHpsMxenrf/9jCWI44XMJF/hVgUW8CzTp
+Q4loD52RBY3epFmtQ6Zh4sscmpDk/CPRYi1wEKkwyKvmxA35yGI4RJPDKi+wZzMW
+/PytswPCxoypbcZ9Kl2klwnfkBsl+IjKXdwR0GRABuBJuSowHwg=
+=Czhf
 -----END PGP SIGNATURE-----
 
---xe6ynyruufjdcbsg--
+--ao6tiynz7krokbum--
 
---===============0853658320==
+--===============0451462896==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -284,4 +334,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0853658320==--
+--===============0451462896==--
