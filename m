@@ -1,40 +1,41 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94C839E94F
-	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 15:28:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EAEA9E984
+	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 15:35:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2AED789343;
-	Tue, 27 Aug 2019 13:28:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB5CF89AE6;
+	Tue, 27 Aug 2019 13:35:24 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DB32589343
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 13:28:12 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D25089AE6
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 13:35:23 +0000 (UTC)
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 7B1567F75F
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 13:28:12 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 423FD308302F
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 13:35:23 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2610D5D712;
- Tue, 27 Aug 2019 13:28:11 +0000 (UTC)
-Date: Tue, 27 Aug 2019 15:28:11 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DFB1B5EE1D;
+ Tue, 27 Aug 2019 13:35:17 +0000 (UTC)
+Date: Tue, 27 Aug 2019 15:35:17 +0200
 From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190827132811.dimsl4fsy4fhmxwy@wingsuit>
-References: <20190827092246.10276-1-fziglio@redhat.com>
- <20190827092246.10276-21-fziglio@redhat.com>
+To: Uri Lublin <uril@redhat.com>
+Message-ID: <20190827133517.tbqckiqwessioppg@wingsuit>
+References: <20190827101358.18435-1-victortoso@redhat.com>
+ <1853629394.9359739.1566901647088.JavaMail.zimbra@redhat.com>
+ <498b04a9-dc3a-4d53-cfc3-f65505421213@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190827092246.10276-21-fziglio@redhat.com>
+In-Reply-To: <498b04a9-dc3a-4d53-cfc3-f65505421213@redhat.com>
 User-Agent: NeoMutt/20180716
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.71]); Tue, 27 Aug 2019 13:28:12 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk v4 20/29] test-cd-emu: Add base
- test for cd-emulation
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.46]); Tue, 27 Aug 2019 13:35:23 +0000 (UTC)
+Subject: Re: [Spice-devel] [linux/vd_agent v1 1/2] covscan: check and
+ initialize argv's copy
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,200 +48,211 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============2021010600=="
+Content-Type: multipart/mixed; boundary="===============1166167572=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============2021010600==
+--===============1166167572==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="lj5frqiz4as3hall"
+	protocol="application/pgp-signature"; boundary="i6rweoj6qxx5xqsj"
 Content-Disposition: inline
 
 
---lj5frqiz4as3hall
+--i6rweoj6qxx5xqsj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Tue, Aug 27, 2019 at 10:22:37AM +0100, Frediano Ziglio wrote:
-> Just allocate and free to test for base leaks and reference
-> counting.
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+Sorry, forgot to reply earlier.
 
-Valgrind says ok here as well.
-
-> ---
->  tests/cd-emu.c    | 92 +++++++++++++++++++++++++++++++++++++++++++++++
->  tests/meson.build |  4 +++
->  2 files changed, 96 insertions(+)
->  create mode 100644 tests/cd-emu.c
->=20
-> diff --git a/tests/cd-emu.c b/tests/cd-emu.c
-> new file mode 100644
-> index 00000000..7bf1fa3c
-> --- /dev/null
-> +++ b/tests/cd-emu.c
-> @@ -0,0 +1,92 @@
-> +/*
-> +   Copyright (C) 2019 Red Hat, Inc.
-> +
-> +   This library is free software; you can redistribute it and/or
-> +   modify it under the terms of the GNU Lesser General Public
-> +   License as published by the Free Software Foundation; either
-> +   version 2.1 of the License, or (at your option) any later version.
-> +
-> +   This library is distributed in the hope that it will be useful,
-> +   but WITHOUT ANY WARRANTY; without even the implied warranty of
-> +   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-> +   Lesser General Public License for more details.
-> +
-> +   You should have received a copy of the GNU Lesser General Public
-> +   License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
-> +*/
-> +#include <gio/gio.h>
-> +
-> +#include "usb-device-cd.h"
-> +#include "usb-emulation.h"
-> +
-> +static SpiceUsbBackendDevice *device =3D NULL;
-> +
-> +/* simple usb manager hotplug callback emulation. */
-> +static void
-> +test_hotplug_callback(void *user_data, SpiceUsbBackendDevice *dev, gbool=
-ean added)
-> +{
-> +    // ignore not emulated devices
-> +    const UsbDeviceInformation *info =3D spice_usb_backend_device_get_in=
-fo(dev);
-> +    if (info->bus !=3D BUS_NUMBER_FOR_EMULATED_USB) {
-> +        return;
-> +    }
-> +
-> +    if (added) {
-> +        g_assert_null(device);
-> +        device =3D spice_usb_backend_device_ref(dev);
-> +    } else {
-> +        g_assert_nonnull(device);
-> +        g_assert(device =3D=3D dev);
-> +        spice_usb_backend_device_unref(dev);
-> +        device =3D NULL;
-> +    }
-> +}
-> +
-> +static void multiple(const void *param)
-> +{
-> +    guint limit =3D GPOINTER_TO_UINT(param);
-> +    CdEmulationParams params =3D { "test-cd-emu.iso", 1 };
-> +    GError *err =3D NULL;
-> +    SpiceUsbBackend * be =3D spice_usb_backend_new(&err);
-> +    g_assert_nonnull(be);
-> +    g_assert_null(err);
-> +    spice_usb_backend_register_hotplug(be, NULL, test_hotplug_callback, =
-&err);
-> +    g_assert_null(err);
-> +    for (int i =3D 0; i < limit; ++i) {
-> +        // allocate a CD emulation device
-> +        g_assert_true(create_emulated_cd(be, &params, &err));
-> +        g_assert_null(err);
-> +        g_assert_nonnull(device);
-> +
-> +        // emulate automatic CD ejection, this should release the
-> +        // object
-> +        spice_usb_backend_device_eject(be, device);
-> +        g_assert_null(device);
-> +    }
-> +    spice_usb_backend_deregister_hotplug(be);
-> +    spice_usb_backend_delete(be);
-> +}
-> +
-> +static void
-> +write_test_iso(void)
-> +{
-> +    uint8_t sector[2048];
-> +    FILE *f =3D fopen("test-cd-emu.iso", "wb");
-> +    g_assert_nonnull(f);
-> +    memset(sector, 0, sizeof(sector));
-> +    strcpy((char*) sector, "sector 0");
-> +    fwrite(sector, sizeof(sector), 1, f);
-> +    fclose(f);
-> +}
-> +
-> +int main(int argc, char* argv[])
-> +{
-> +    write_test_iso();
-
-We create the iso for testing but we don't remove it. There are a
-few things that comes to mind in regards to creating this file
-and removing it later that could be a problem. Ideally, we should
-have some sort of SPICE_CD_ROM_MOCKING in the source code that
-helps with unit test but honestly, i'm happy that we have a test
-and it works fine enough form now ;)
-
-Another way around this create but not removing is to use the
-g_test_add with _set_up() and _tear_down() functions. That's more
-verbose and slower than your approach but if I'm not mistaken,
-_tear_down() should be called even if test fails.
-
-> +    g_test_init(&argc, &argv, NULL);
-> +
-> +    g_test_add_data_func("/cd-emu/simple", GUINT_TO_POINTER(1), multiple=
+On Tue, Aug 27, 2019 at 03:12:24PM +0300, Uri Lublin wrote:
+> On 8/27/19 1:27 PM, Frediano Ziglio wrote:
+> > >=20
+> > > From: Victor Toso <me@victortoso.com>
+> > >=20
+> > > Otherwise we get a CLANG_WARNING due accessing garbage.
+> > >=20
+> > > Covscan report:
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:471:9: warning: 1st fu=
+nction
+> > >   > call argument is an uninitialized value
+> > >   > #        execvp(orig_argv[0], orig_argv);
+> > >   > #        ^      ~~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:421:24: note: Storing
+> > >   > uninitialized value
+> > >   > #    char **orig_argv =3D g_memdup(argv, sizeof(char*) * (argc+1)=
 );
-> +    g_test_add_data_func("/cd-emu/multiple", GUINT_TO_POINTER(128), mult=
-iple);
-> +
-> +    return g_test_run();
-> +}
-> diff --git a/tests/meson.build b/tests/meson.build
-> index 6c807762..39eac9c9 100644
-> --- a/tests/meson.build
-> +++ b/tests/meson.build
-> @@ -10,6 +10,10 @@ if spice_gtk_has_phodav
->    tests_sources +=3D 'pipe.c'
->  endif
-> =20
-> +if spice_gtk_has_usbredir
-> +  tests_sources +=3D 'cd-emu.c'
-> +endif
-> +
->  if spice_gtk_has_polkit
->    tests_sources +=3D [
->      'usb-acl-helper.c',
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> > >   > #                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
---lj5frqiz4as3hall
+Here it doesn't say anything about g_memdup() itself (like, if it
+took the branch where argv is NULL which means it returns NULL or
+if it took the branch wehre argv is not NULL which it does
+g_malloc + memcpy, same you suggested.
+
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:434:9: note: Assuming =
+'error'
+> > >   > is equal to NULL
+> > >   > #    if (error !=3D NULL) {
+> > >   > #        ^~~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:434:5: note: Taking fa=
+lse
+> > >   > branch
+> > >   > #    if (error !=3D NULL) {
+> > >   > #    ^
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:442:9: note: Assuming =
+'portdev'
+> > >   > is not equal to NULL
+> > >   > #    if (portdev =3D=3D NULL)
+> > >   > #        ^~~~~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:442:5: note: Taking fa=
+lse
+> > >   > branch
+> > >   > #    if (portdev =3D=3D NULL)
+> > >   > #    ^
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:445:9: note: Assuming
+> > >   > 'vdagentd_socket' is not equal to NULL
+> > >   > #    if (vdagentd_socket =3D=3D NULL)
+> > >   > #        ^~~~~~~~~~~~~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:445:5: note: Taking fa=
+lse
+> > >   > branch
+> > >   > #    if (vdagentd_socket =3D=3D NULL)
+> > >   > #    ^
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:448:30: note: Assuming
+> > >   > 'do_daemonize' is 0
+> > >   > #    openlog("spice-vdagent", do_daemonize ? LOG_PID : (LOG_PID |
+> > >   > LOG_PERROR),
+> > >   > #                             ^~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:448:30: note: '?' cond=
+ition is
+> > >   > false
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:451:9: note: Assuming =
+the
+> > >   > condition is false
+> > >   > #    if (!g_file_test(portdev, G_FILE_TEST_EXISTS)) {
+> > >   > #        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:451:5: note: Taking fa=
+lse
+> > >   > branch
+> > >   > #    if (!g_file_test(portdev, G_FILE_TEST_EXISTS)) {
+> > >   > #    ^
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:457:9: note: Assuming
+> > >   > 'do_daemonize' is 0
+> > >   > #    if (do_daemonize)
+> > >   > #        ^~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:457:5: note: Taking fa=
+lse
+> > >   > branch
+> > >   > #    if (do_daemonize)
+> > >   > #    ^
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:468:9: note: Assuming
+> > >   > 'version_mismatch' is not equal to 0
+> > >   > #    if (version_mismatch) {
+> > >   > #        ^~~~~~~~~~~~~~~~
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:468:5: note: Taking tr=
+ue branch
+> > >   > #    if (version_mismatch) {
+> > >   > #    ^
+> > >   > spice-vdagent-0.19.0/src/vdagent/vdagent.c:471:9: note: 1st funct=
+ion call
+> > >   > argument is an uninitialized value
+> > >   > #        execvp(orig_argv[0], orig_argv);
+> > >   > #        ^      ~~~~~~~~~~~~
+> > >   > #  469|           syslog(LOG_INFO, "Version mismatch, restarting"=
+);
+> > >   > #  470|           sleep(1);
+> > >   > #  471|->         execvp(orig_argv[0], orig_argv);
+> > >   > #  472|       }
+> > >   > #  473|
+> > >=20
+> > > Signed-off-by: Victor Toso <victortoso@redhat.com>
+> > > ---
+> > >   src/vdagent/vdagent.c | 6 +++++-
+> > >   1 file changed, 5 insertions(+), 1 deletion(-)
+> > >=20
+> > > diff --git a/src/vdagent/vdagent.c b/src/vdagent/vdagent.c
+> > > index 0e2e73e..982fc72 100644
+> > > --- a/src/vdagent/vdagent.c
+> > > +++ b/src/vdagent/vdagent.c
+> > > @@ -418,7 +418,11 @@ int main(int argc, char *argv[])
+> > >       GOptionContext *context;
+> > >       GError *error =3D NULL;
+> > >       VDAgent *agent;
+> > > -    char **orig_argv =3D g_memdup(argv, sizeof(char*) * (argc+1));
+> > > +    char **orig_argv;
+> > > +
+> > > +    g_return_val_if_fail(argc > 0 && argv !=3D NULL, -1);
+> > > +    orig_argv =3D g_memdup(argv, sizeof(char*) * (argc+1));
+>=20
+> Hi,
+>=20
+> I was able to "fix" it by replacing g_memdup with g_malloc + memcpy
+> -    char **orig_argv =3D g_memdup(argv, sizeof(char*) * (argc+1));
+> +    char **orig_argv =3D g_malloc(sizeof(char*) * (argc+1) );
+> +    memcpy(orig_argv, argv, sizeof(char*) * (argc+1) );
+>=20
+> So clang seems to be confused by "side effects" of g_memdup.
+
+I didn't test it but I trust you that it works. Weird that if
+this complain was with the fact that orig_argv is NULL, it should
+be more explicit. Doesn't matter much the possible fix as this
+still is a false positive, argc is > 0 and argv is not null and
+either g_memdup() is going to return valid memory or abort if
+ENOMEM.
+
+My 'fix' is just because we really have an extra char* which
+seems to be uninitialized.
+
+> Uri.
+>=20
+> > > +    orig_argv[argc] =3D NULL;
+> > >       context =3D g_option_context_new(NULL);
+> > >       g_option_context_add_main_entries(context, entries, NULL);
+> >=20
+> > I would say better to disable Clang test instead. The code is perfectly
+> > fine. argc is at least 1 (the executable name!) and argv is always term=
+inated
+> > with NULL (that's the standard!).
+> > See https://clang-analyzer.llvm.org/faq.html.
+> >=20
+> > I don't know where this -1 come, but EXIT_FAILURE (which is usually 1) =
+is the standard
+> > return for main function.
+> >=20
+> > Frediano
+> > _______________________________________________
+> > Spice-devel mailing list
+> > Spice-devel@lists.freedesktop.org
+> > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> >=20
+>=20
+
+--i6rweoj6qxx5xqsj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lL+sACgkQl9kSPeN6
-SE+MjQ//dj34AOWtS386te/RI4ldJsQ1hZjuQ01k6AFwBucC2SSqIeZ5drRH2oax
-rtPBzIzPBp50jB+QJjDJSyxwDiqyy3A9pGgmZbkwslB1SYgjM7pEFUbYr4fxT6jM
-yuJXF6q55JqGKhtySU222QZ4egD0LhMOL1lcAULew7MkuQ0lZF3lf0tdgFBbXX0U
-Z5SzWqtGTzz9ilkRxpD68RIThgwzjRiQwugxQDCoANTHBDchx1GPevHxb6pDBP2X
-JgP++f4EdhFSOqQMhp+lQK/RyLzQQMoApkPcXY5bVqr0lRKVpm4NtKdpuh5/Svt3
-XqyxC2ePA+bHDPX3Titm0YYkh0wW9pM4rtayQiCTSCGlPA7gUXNEPpejXW4yGbqD
-UJEKb0xDhqwGwUmEY3qYfn+LdFtmBNhpS2DnVIMvA75kuYCHbihJWJPWv5hcxGEC
-1aEhttApLj/OSjAjvB3VnN0HH3Z8MWRCoySTSjJY95BEprIwUlU3Z4GitH/NxomV
-lpdEzw0oSKxii+FMr3XC/5q8a3G1LRZrT3dNhFih268L//t8lBogHR0EZSWsonkw
-N1VHOHy9i/A3h0EIKYxS+IJoGdp+ev62d1FmJzlxAu1A4p4Qq6zXBXZKln9YffRX
-AJstfUqAXSm9RvBRBzEloPonSxZT2VzczyQTlSIBuODSYyZd8oU=
-=ojkp
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lMZQACgkQl9kSPeN6
+SE9Pdw//X0ziBzSK1NmyLxee8DSF157B6QzAivWe/2KUJVxYu7arYkIcH9gLxDbM
+FmMTJN58fPJZY4aotjYlvJ2w0Z/PVoHpEAsxWmt4wqr5gr68hVO0abgd5uY1Aaq8
+8fJtooSFbYmxlSpnz9yD9Rdkw5XVl7E+U33Qa6inug36UVGanvzDhR35zy19TZfa
+AxrjngwwKvncAeQM4VAlJ90yGyPpPbgnmaDV3s87bm1FWD615HC8LxnD1hCzA2Kx
+jrTR05OuHodORg7mEDLquaom4D5PNWtA0VBVQdIA9+X5gQbi3VlqdpOAkoI0LuE2
+6dpgbPgQniJDSNB2TjoB4kQvmGHnZvvbn1w+FFoPKGXUQ8cx/zD8aet4Tm0ZmEO7
+rpQZafow+8jQHljGcRboYvKdDr3i5UP4QA2TxNt2HpjZ0SePSAvOM7tPFDQOgW0O
+Zk1RdrqgnwdqbG9LSY95CCCIYcG80zd7CPfrY27V2Of5PKCL6cNorKJy0bSRwt0g
+p0neI859jpgMPOqf+CFxW/y45goidqPgYV7jDztR9Ap8u+R5pSqH3PcPmL9wf8SY
+1TPnb2uAW8lQZFUFCKvJ9uJQJXaajPbjnFQSuDVPcIWBzt+RcQG4hk1TkudVvi5I
+j8iZOlWZiPoVTnZvg7cuLu7nphVK98RR3Wx8z2wewFKXN6ay82k=
+=Hi6y
 -----END PGP SIGNATURE-----
 
---lj5frqiz4as3hall--
+--i6rweoj6qxx5xqsj--
 
---===============2021010600==
+--===============1166167572==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -250,4 +262,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============2021010600==--
+--===============1166167572==--
