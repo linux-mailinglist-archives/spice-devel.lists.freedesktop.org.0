@@ -1,43 +1,40 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B45539E768
-	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:12:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6155F9E7C1
+	for <lists+spice-devel@lfdr.de>; Tue, 27 Aug 2019 14:21:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9F1D688EEB;
-	Tue, 27 Aug 2019 12:12:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC48B8910B;
+	Tue, 27 Aug 2019 12:21:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9EB6788EEB
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:12:30 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9A3608910B
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:21:02 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 3E0C58BA2D8
- for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:12:30 +0000 (UTC)
-Received: from lub.tlv (dhcp-4-176.tlv.redhat.com [10.35.4.176])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id D5CE35C1B2;
- Tue, 27 Aug 2019 12:12:26 +0000 (UTC)
-To: Frediano Ziglio <fziglio@redhat.com>, Victor Toso <victortoso@redhat.com>
-References: <20190827101358.18435-1-victortoso@redhat.com>
- <1853629394.9359739.1566901647088.JavaMail.zimbra@redhat.com>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <498b04a9-dc3a-4d53-cfc3-f65505421213@redhat.com>
-Date: Tue, 27 Aug 2019 15:12:24 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ by mx1.redhat.com (Postfix) with ESMTPS id 40EC8693C8
+ for <spice-devel@lists.freedesktop.org>; Tue, 27 Aug 2019 12:21:02 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.212])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DEDC960BF7;
+ Tue, 27 Aug 2019 12:21:01 +0000 (UTC)
+Date: Tue, 27 Aug 2019 14:21:01 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190827122101.56ymfwtecv5mzpxl@wingsuit>
+References: <20190827092246.10276-1-fziglio@redhat.com>
+ <20190827092246.10276-13-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <1853629394.9359739.1566901647088.JavaMail.zimbra@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.68]); Tue, 27 Aug 2019 12:12:30 +0000 (UTC)
-Subject: Re: [Spice-devel] [linux/vd_agent v1 1/2] covscan: check and
- initialize argv's copy
+In-Reply-To: <20190827092246.10276-13-fziglio@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.25]); Tue, 27 Aug 2019 12:21:02 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk v4 12/29] fixup! usb-redir: add
+ files for SCSI and USB MSC implementation
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -49,102 +46,280 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
 Cc: spice-devel@lists.freedesktop.org
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1531372116=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gOC8yNy8xOSAxOjI3IFBNLCBGcmVkaWFubyBaaWdsaW8gd3JvdGU6Cj4+Cj4+IEZyb206IFZp
-Y3RvciBUb3NvIDxtZUB2aWN0b3J0b3NvLmNvbT4KPj4KPj4gT3RoZXJ3aXNlIHdlIGdldCBhIENM
-QU5HX1dBUk5JTkcgZHVlIGFjY2Vzc2luZyBnYXJiYWdlLgo+Pgo+PiBDb3ZzY2FuIHJlcG9ydDoK
-Pj4gICA+IHNwaWNlLXZkYWdlbnQtMC4xOS4wL3NyYy92ZGFnZW50L3ZkYWdlbnQuYzo0NzE6OTog
-d2FybmluZzogMXN0IGZ1bmN0aW9uCj4+ICAgPiBjYWxsIGFyZ3VtZW50IGlzIGFuIHVuaW5pdGlh
-bGl6ZWQgdmFsdWUKPj4gICA+ICMgICAgICAgIGV4ZWN2cChvcmlnX2FyZ3ZbMF0sIG9yaWdfYXJn
-dik7Cj4+ICAgPiAjICAgICAgICBeICAgICAgfn5+fn5+fn5+fn5+Cj4+ICAgPiBzcGljZS12ZGFn
-ZW50LTAuMTkuMC9zcmMvdmRhZ2VudC92ZGFnZW50LmM6NDIxOjI0OiBub3RlOiBTdG9yaW5nCj4+
-ICAgPiB1bmluaXRpYWxpemVkIHZhbHVlCj4+ICAgPiAjICAgIGNoYXIgKipvcmlnX2FyZ3YgPSBn
-X21lbWR1cChhcmd2LCBzaXplb2YoY2hhciopICogKGFyZ2MrMSkpOwo+PiAgID4gIyAgICAgICAg
-ICAgICAgICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+
-PiAgID4gc3BpY2UtdmRhZ2VudC0wLjE5LjAvc3JjL3ZkYWdlbnQvdmRhZ2VudC5jOjQzNDo5OiBu
-b3RlOiBBc3N1bWluZyAnZXJyb3InCj4+ICAgPiBpcyBlcXVhbCB0byBOVUxMCj4+ICAgPiAjICAg
-IGlmIChlcnJvciAhPSBOVUxMKSB7Cj4+ICAgPiAjICAgICAgICBefn5+fn5+fn5+fn5+Cj4+ICAg
-PiBzcGljZS12ZGFnZW50LTAuMTkuMC9zcmMvdmRhZ2VudC92ZGFnZW50LmM6NDM0OjU6IG5vdGU6
-IFRha2luZyBmYWxzZQo+PiAgID4gYnJhbmNoCj4+ICAgPiAjICAgIGlmIChlcnJvciAhPSBOVUxM
-KSB7Cj4+ICAgPiAjICAgIF4KPj4gICA+IHNwaWNlLXZkYWdlbnQtMC4xOS4wL3NyYy92ZGFnZW50
-L3ZkYWdlbnQuYzo0NDI6OTogbm90ZTogQXNzdW1pbmcgJ3BvcnRkZXYnCj4+ICAgPiBpcyBub3Qg
-ZXF1YWwgdG8gTlVMTAo+PiAgID4gIyAgICBpZiAocG9ydGRldiA9PSBOVUxMKQo+PiAgID4gIyAg
-ICAgICAgXn5+fn5+fn5+fn5+fn5+Cj4+ICAgPiBzcGljZS12ZGFnZW50LTAuMTkuMC9zcmMvdmRh
-Z2VudC92ZGFnZW50LmM6NDQyOjU6IG5vdGU6IFRha2luZyBmYWxzZQo+PiAgID4gYnJhbmNoCj4+
-ICAgPiAjICAgIGlmIChwb3J0ZGV2ID09IE5VTEwpCj4+ICAgPiAjICAgIF4KPj4gICA+IHNwaWNl
-LXZkYWdlbnQtMC4xOS4wL3NyYy92ZGFnZW50L3ZkYWdlbnQuYzo0NDU6OTogbm90ZTogQXNzdW1p
-bmcKPj4gICA+ICd2ZGFnZW50ZF9zb2NrZXQnIGlzIG5vdCBlcXVhbCB0byBOVUxMCj4+ICAgPiAj
-ICAgIGlmICh2ZGFnZW50ZF9zb2NrZXQgPT0gTlVMTCkKPj4gICA+ICMgICAgICAgIF5+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+Cj4+ICAgPiBzcGljZS12ZGFnZW50LTAuMTkuMC9zcmMvdmRhZ2VudC92
-ZGFnZW50LmM6NDQ1OjU6IG5vdGU6IFRha2luZyBmYWxzZQo+PiAgID4gYnJhbmNoCj4+ICAgPiAj
-ICAgIGlmICh2ZGFnZW50ZF9zb2NrZXQgPT0gTlVMTCkKPj4gICA+ICMgICAgXgo+PiAgID4gc3Bp
-Y2UtdmRhZ2VudC0wLjE5LjAvc3JjL3ZkYWdlbnQvdmRhZ2VudC5jOjQ0ODozMDogbm90ZTogQXNz
-dW1pbmcKPj4gICA+ICdkb19kYWVtb25pemUnIGlzIDAKPj4gICA+ICMgICAgb3BlbmxvZygic3Bp
-Y2UtdmRhZ2VudCIsIGRvX2RhZW1vbml6ZSA/IExPR19QSUQgOiAoTE9HX1BJRCB8Cj4+ICAgPiBM
-T0dfUEVSUk9SKSwKPj4gICA+ICMgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF5+fn5+fn5+
-fn5+fgo+PiAgID4gc3BpY2UtdmRhZ2VudC0wLjE5LjAvc3JjL3ZkYWdlbnQvdmRhZ2VudC5jOjQ0
-ODozMDogbm90ZTogJz8nIGNvbmRpdGlvbiBpcwo+PiAgID4gZmFsc2UKPj4gICA+IHNwaWNlLXZk
-YWdlbnQtMC4xOS4wL3NyYy92ZGFnZW50L3ZkYWdlbnQuYzo0NTE6OTogbm90ZTogQXNzdW1pbmcg
-dGhlCj4+ICAgPiBjb25kaXRpb24gaXMgZmFsc2UKPj4gICA+ICMgICAgaWYgKCFnX2ZpbGVfdGVz
-dChwb3J0ZGV2LCBHX0ZJTEVfVEVTVF9FWElTVFMpKSB7Cj4+ICAgPiAjICAgICAgICBefn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+PiAgID4gc3BpY2UtdmRhZ2VudC0w
-LjE5LjAvc3JjL3ZkYWdlbnQvdmRhZ2VudC5jOjQ1MTo1OiBub3RlOiBUYWtpbmcgZmFsc2UKPj4g
-ICA+IGJyYW5jaAo+PiAgID4gIyAgICBpZiAoIWdfZmlsZV90ZXN0KHBvcnRkZXYsIEdfRklMRV9U
-RVNUX0VYSVNUUykpIHsKPj4gICA+ICMgICAgXgo+PiAgID4gc3BpY2UtdmRhZ2VudC0wLjE5LjAv
-c3JjL3ZkYWdlbnQvdmRhZ2VudC5jOjQ1Nzo5OiBub3RlOiBBc3N1bWluZwo+PiAgID4gJ2RvX2Rh
-ZW1vbml6ZScgaXMgMAo+PiAgID4gIyAgICBpZiAoZG9fZGFlbW9uaXplKQo+PiAgID4gIyAgICAg
-ICAgXn5+fn5+fn5+fn5+Cj4+ICAgPiBzcGljZS12ZGFnZW50LTAuMTkuMC9zcmMvdmRhZ2VudC92
-ZGFnZW50LmM6NDU3OjU6IG5vdGU6IFRha2luZyBmYWxzZQo+PiAgID4gYnJhbmNoCj4+ICAgPiAj
-ICAgIGlmIChkb19kYWVtb25pemUpCj4+ICAgPiAjICAgIF4KPj4gICA+IHNwaWNlLXZkYWdlbnQt
-MC4xOS4wL3NyYy92ZGFnZW50L3ZkYWdlbnQuYzo0Njg6OTogbm90ZTogQXNzdW1pbmcKPj4gICA+
-ICd2ZXJzaW9uX21pc21hdGNoJyBpcyBub3QgZXF1YWwgdG8gMAo+PiAgID4gIyAgICBpZiAodmVy
-c2lvbl9taXNtYXRjaCkgewo+PiAgID4gIyAgICAgICAgXn5+fn5+fn5+fn5+fn5+fgo+PiAgID4g
-c3BpY2UtdmRhZ2VudC0wLjE5LjAvc3JjL3ZkYWdlbnQvdmRhZ2VudC5jOjQ2ODo1OiBub3RlOiBU
-YWtpbmcgdHJ1ZSBicmFuY2gKPj4gICA+ICMgICAgaWYgKHZlcnNpb25fbWlzbWF0Y2gpIHsKPj4g
-ICA+ICMgICAgXgo+PiAgID4gc3BpY2UtdmRhZ2VudC0wLjE5LjAvc3JjL3ZkYWdlbnQvdmRhZ2Vu
-dC5jOjQ3MTo5OiBub3RlOiAxc3QgZnVuY3Rpb24gY2FsbAo+PiAgID4gYXJndW1lbnQgaXMgYW4g
-dW5pbml0aWFsaXplZCB2YWx1ZQo+PiAgID4gIyAgICAgICAgZXhlY3ZwKG9yaWdfYXJndlswXSwg
-b3JpZ19hcmd2KTsKPj4gICA+ICMgICAgICAgIF4gICAgICB+fn5+fn5+fn5+fn4KPj4gICA+ICMg
-IDQ2OXwgICAgICAgICAgIHN5c2xvZyhMT0dfSU5GTywgIlZlcnNpb24gbWlzbWF0Y2gsIHJlc3Rh
-cnRpbmciKTsKPj4gICA+ICMgIDQ3MHwgICAgICAgICAgIHNsZWVwKDEpOwo+PiAgID4gIyAgNDcx
-fC0+ICAgICAgICAgZXhlY3ZwKG9yaWdfYXJndlswXSwgb3JpZ19hcmd2KTsKPj4gICA+ICMgIDQ3
-MnwgICAgICAgfQo+PiAgID4gIyAgNDczfAo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBWaWN0b3IgVG9z
-byA8dmljdG9ydG9zb0ByZWRoYXQuY29tPgo+PiAtLS0KPj4gICBzcmMvdmRhZ2VudC92ZGFnZW50
-LmMgfCA2ICsrKysrLQo+PiAgIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDEgZGVs
-ZXRpb24oLSkKPj4KPj4gZGlmZiAtLWdpdCBhL3NyYy92ZGFnZW50L3ZkYWdlbnQuYyBiL3NyYy92
-ZGFnZW50L3ZkYWdlbnQuYwo+PiBpbmRleCAwZTJlNzNlLi45ODJmYzcyIDEwMDY0NAo+PiAtLS0g
-YS9zcmMvdmRhZ2VudC92ZGFnZW50LmMKPj4gKysrIGIvc3JjL3ZkYWdlbnQvdmRhZ2VudC5jCj4+
-IEBAIC00MTgsNyArNDE4LDExIEBAIGludCBtYWluKGludCBhcmdjLCBjaGFyICphcmd2W10pCj4+
-ICAgICAgIEdPcHRpb25Db250ZXh0ICpjb250ZXh0Owo+PiAgICAgICBHRXJyb3IgKmVycm9yID0g
-TlVMTDsKPj4gICAgICAgVkRBZ2VudCAqYWdlbnQ7Cj4+IC0gICAgY2hhciAqKm9yaWdfYXJndiA9
-IGdfbWVtZHVwKGFyZ3YsIHNpemVvZihjaGFyKikgKiAoYXJnYysxKSk7Cj4+ICsgICAgY2hhciAq
-Km9yaWdfYXJndjsKPj4gKwo+PiArICAgIGdfcmV0dXJuX3ZhbF9pZl9mYWlsKGFyZ2MgPiAwICYm
-IGFyZ3YgIT0gTlVMTCwgLTEpOwo+PiArICAgIG9yaWdfYXJndiA9IGdfbWVtZHVwKGFyZ3YsIHNp
-emVvZihjaGFyKikgKiAoYXJnYysxKSk7CgpIaSwKCkkgd2FzIGFibGUgdG8gImZpeCIgaXQgYnkg
-cmVwbGFjaW5nIGdfbWVtZHVwIHdpdGggZ19tYWxsb2MgKyBtZW1jcHkKLSAgICBjaGFyICoqb3Jp
-Z19hcmd2ID0gZ19tZW1kdXAoYXJndiwgc2l6ZW9mKGNoYXIqKSAqIChhcmdjKzEpKTsKKyAgICBj
-aGFyICoqb3JpZ19hcmd2ID0gZ19tYWxsb2Moc2l6ZW9mKGNoYXIqKSAqIChhcmdjKzEpICk7Cisg
-ICAgbWVtY3B5KG9yaWdfYXJndiwgYXJndiwgc2l6ZW9mKGNoYXIqKSAqIChhcmdjKzEpICk7CgpT
-byBjbGFuZyBzZWVtcyB0byBiZSBjb25mdXNlZCBieSAic2lkZSBlZmZlY3RzIiBvZiBnX21lbWR1
-cC4KClVyaS4KCj4+ICsgICAgb3JpZ19hcmd2W2FyZ2NdID0gTlVMTDsKPj4gICAKPj4gICAgICAg
-Y29udGV4dCA9IGdfb3B0aW9uX2NvbnRleHRfbmV3KE5VTEwpOwo+PiAgICAgICBnX29wdGlvbl9j
-b250ZXh0X2FkZF9tYWluX2VudHJpZXMoY29udGV4dCwgZW50cmllcywgTlVMTCk7Cj4gCj4gSSB3
-b3VsZCBzYXkgYmV0dGVyIHRvIGRpc2FibGUgQ2xhbmcgdGVzdCBpbnN0ZWFkLiBUaGUgY29kZSBp
-cyBwZXJmZWN0bHkKPiBmaW5lLiBhcmdjIGlzIGF0IGxlYXN0IDEgKHRoZSBleGVjdXRhYmxlIG5h
-bWUhKSBhbmQgYXJndiBpcyBhbHdheXMgdGVybWluYXRlZAo+IHdpdGggTlVMTCAodGhhdCdzIHRo
-ZSBzdGFuZGFyZCEpLgo+IFNlZSBodHRwczovL2NsYW5nLWFuYWx5emVyLmxsdm0ub3JnL2ZhcS5o
-dG1sLgo+IAo+IEkgZG9uJ3Qga25vdyB3aGVyZSB0aGlzIC0xIGNvbWUsIGJ1dCBFWElUX0ZBSUxV
-UkUgKHdoaWNoIGlzIHVzdWFsbHkgMSkgaXMgdGhlIHN0YW5kYXJkCj4gcmV0dXJuIGZvciBtYWlu
-IGZ1bmN0aW9uLgo+IAo+IEZyZWRpYW5vCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KPiBTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKPiBTcGljZS1kZXZl
-bEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2
-ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21h
-aWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+
+--===============1531372116==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="tatsmh5wpdqetztv"
+Content-Disposition: inline
+
+
+--tatsmh5wpdqetztv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Aug 27, 2019 at 10:22:29AM +0100, Frediano Ziglio wrote:
+> Do not use G_GUINT32_FORMAT.
+> We support a minimum of 32 bit architectures.
+Acked-by: Victor Toso <victortoso@redhat.com>
+> ---
+>  src/cd-usb-bulk-msd.c | 53 +++++++++++++++++++++----------------------
+>  1 file changed, 26 insertions(+), 27 deletions(-)
+>=20
+> diff --git a/src/cd-usb-bulk-msd.c b/src/cd-usb-bulk-msd.c
+> index 49e01eb6..5d95dac7 100644
+> --- a/src/cd-usb-bulk-msd.c
+> +++ b/src/cd-usb-bulk-msd.c
+> @@ -138,7 +138,7 @@ UsbCdBulkMsdDevice *cd_usb_bulk_msd_alloc(void *usb_u=
+ser_data, uint32_t max_luns
+>      cd_usb_bulk_msd_set_state(cd, USB_CD_STATE_INIT);
+>      cd->usb_user_data =3D usb_user_data;
+> =20
+> -    SPICE_DEBUG("Alloc, max_luns:%" G_GUINT32_FORMAT, max_luns);
+> +    SPICE_DEBUG("Alloc, max_luns:%u", max_luns);
+>      return cd;
+>  }
+> =20
+> @@ -155,7 +155,7 @@ int cd_usb_bulk_msd_realize(UsbCdBulkMsdDevice *cd, u=
+int32_t lun,
+> =20
+>      rc =3D cd_scsi_dev_realize(cd->scsi_target, lun, &scsi_dev_params);
+>      if (rc !=3D 0) {
+> -        SPICE_ERROR("Failed to realize lun:%" G_GUINT32_FORMAT, lun);
+> +        SPICE_ERROR("Failed to realize lun:%u", lun);
+>          return rc;
+>      }
+> =20
+> @@ -165,7 +165,7 @@ int cd_usb_bulk_msd_realize(UsbCdBulkMsdDevice *cd, u=
+int32_t lun,
+>          cd_scsi_dev_request_release(cd->scsi_target, &cd->usb_req.scsi_r=
+eq);
+>      }
+> =20
+> -    SPICE_DEBUG("Realize OK lun:%" G_GUINT32_FORMAT, lun);
+> +    SPICE_DEBUG("Realize OK lun:%u", lun);
+>      return 0;
+>  }
+> =20
+> @@ -175,11 +175,11 @@ int cd_usb_bulk_msd_lock(UsbCdBulkMsdDevice *cd, ui=
+nt32_t lun, gboolean lock)
+> =20
+>      rc =3D cd_scsi_dev_lock(cd->scsi_target, lun, lock);
+>      if (rc !=3D 0) {
+> -        SPICE_ERROR("Failed to lock lun:%" G_GUINT32_FORMAT, lun);
+> +        SPICE_ERROR("Failed to lock lun:%u", lun);
+>          return rc;
+>      }
+> =20
+> -    SPICE_DEBUG("Lock OK lun:%" G_GUINT32_FORMAT, lun);
+> +    SPICE_DEBUG("Lock OK lun:%u", lun);
+>      return 0;
+>  }
+> =20
+> @@ -190,11 +190,11 @@ int cd_usb_bulk_msd_load(UsbCdBulkMsdDevice *cd, ui=
+nt32_t lun,
+> =20
+>      rc =3D cd_scsi_dev_load(cd->scsi_target, lun, media_params);
+>      if (rc !=3D 0) {
+> -        SPICE_ERROR("Failed to load lun:%" G_GUINT32_FORMAT, lun);
+> +        SPICE_ERROR("Failed to load lun:%u", lun);
+>          return rc;
+>      }
+> =20
+> -    SPICE_DEBUG("Load OK lun:%" G_GUINT32_FORMAT, lun);
+> +    SPICE_DEBUG("Load OK lun:%u", lun);
+>      return 0;
+>  }
+> =20
+> @@ -204,7 +204,7 @@ int cd_usb_bulk_msd_get_info(UsbCdBulkMsdDevice *cd, =
+uint32_t lun, CdScsiDeviceI
+> =20
+>      rc =3D cd_scsi_dev_get_info(cd->scsi_target, lun, lun_info);
+>      if (rc !=3D 0) {
+> -        SPICE_ERROR("Failed to get info lun:%" G_GUINT32_FORMAT, lun);
+> +        SPICE_ERROR("Failed to get info lun:%u", lun);
+>          return rc;
+>      }
+> =20
+> @@ -217,11 +217,11 @@ int cd_usb_bulk_msd_unload(UsbCdBulkMsdDevice *cd, =
+uint32_t lun)
+> =20
+>      rc =3D cd_scsi_dev_unload(cd->scsi_target, lun);
+>      if (rc !=3D 0) {
+> -        SPICE_ERROR("Failed to unload lun:%" G_GUINT32_FORMAT, lun);
+> +        SPICE_ERROR("Failed to unload lun:%u", lun);
+>          return rc;
+>      }
+> =20
+> -    SPICE_DEBUG("Unload OK lun:%" G_GUINT32_FORMAT, lun);
+> +    SPICE_DEBUG("Unload OK lun:%u", lun);
+>      return 0;
+>  }
+> =20
+> @@ -231,11 +231,11 @@ int cd_usb_bulk_msd_unrealize(UsbCdBulkMsdDevice *c=
+d, uint32_t lun)
+> =20
+>      rc =3D cd_scsi_dev_unrealize(cd->scsi_target, lun);
+>      if (rc !=3D 0) {
+> -        SPICE_ERROR("Unrealize lun:%" G_GUINT32_FORMAT, lun);
+> +        SPICE_ERROR("Unrealize lun:%u", lun);
+>          return rc;
+>      }
+> =20
+> -    SPICE_DEBUG("Unrealize lun:%" G_GUINT32_FORMAT, lun);
+> +    SPICE_DEBUG("Unrealize lun:%u", lun);
+>      return 0;
+>  }
+> =20
+> @@ -264,7 +264,7 @@ static int parse_usb_msd_cmd(UsbCdBulkMsdDevice *cd, =
+uint8_t *buf, uint32_t cbw_
+>      CdScsiRequest *scsi_req =3D &usb_req->scsi_req;
+> =20
+>      if (cbw_len !=3D sizeof(*cbw)) {
+> -        SPICE_ERROR("CMD: Bad CBW size:%" G_GUINT32_FORMAT, cbw_len);
+> +        SPICE_ERROR("CMD: Bad CBW size:%u", cbw_len);
+>          return -1;
+>      }
+>      if (le32toh(cbw->sig) !=3D 0x43425355) { /* MSD command signature */
+> @@ -304,10 +304,10 @@ static int parse_usb_msd_cmd(UsbCdBulkMsdDevice *cd=
+, uint8_t *buf, uint32_t cbw_
+> =20
+>      scsi_req->lun =3D usb_req->lun;
+> =20
+> -    SPICE_DEBUG("CMD lun:%" G_GUINT32_FORMAT " tag:%#x flags:%08x "
+> -        "cdb_len:%" G_GUINT32_FORMAT " req_len:%" G_GUINT32_FORMAT,
+> -        usb_req->lun, le32toh(cbw->tag), cbw->flags,
+> -        scsi_req->cdb_len, usb_req->usb_req_len);
+> +    SPICE_DEBUG("CMD lun:%u tag:%#x flags:%08x "
+> +                "cdb_len:%u req_len:%u",
+> +                usb_req->lun, le32toh(cbw->tag), cbw->flags,
+> +                scsi_req->cdb_len, usb_req->usb_req_len);
+> =20
+>      /* prepare status - CSW */
+>      usb_req->csw.sig =3D htole32(0x53425355);
+> @@ -364,8 +364,8 @@ static void usb_cd_send_data_in(UsbCdBulkMsdDevice *c=
+d, uint32_t max_len)
+>      uint32_t avail_len =3D usb_req->scsi_in_len - usb_req->xfer_len;
+>      uint32_t send_len =3D MIN(avail_len, max_len);
+> =20
+> -    SPICE_DEBUG("Data-in cmd tag 0x%x, remains %" G_GUINT32_FORMAT
+> -                ", requested %" G_GUINT32_FORMAT ", send %" G_GUINT32_FO=
+RMAT,
+> +    SPICE_DEBUG("Data-in cmd tag 0x%x, remains %u"
+> +                ", requested %u, send %u",
+>                  usb_req->csw.tag, avail_len, max_len, send_len);
+> =20
+>      g_assert(max_len <=3D usb_req->usb_req_len);
+> @@ -396,7 +396,7 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
+32_t max_len)
+>      UsbCdBulkMsdRequest *usb_req =3D &cd->usb_req;
+>      CdScsiRequest *scsi_req =3D &usb_req->scsi_req;
+> =20
+> -    SPICE_DEBUG("msd_read, state: %s, len %" G_GUINT32_FORMAT,
+> +    SPICE_DEBUG("msd_read, state: %s, len %u",
+>                  usb_cd_state_str(cd->state), max_len);
+> =20
+>      switch (cd->state) {
+> @@ -408,8 +408,8 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
+32_t max_len)
+>              usb_cd_send_status(cd);
+>          } else {
+>              usb_req->bulk_in_len +=3D max_len;
+> -            SPICE_DEBUG("msd_read CSW, req incomplete, added len %" G_GU=
+INT32_FORMAT
+> -                        " saved len %" G_GUINT32_FORMAT,
+> +            SPICE_DEBUG("msd_read CSW, req incomplete, added len %u"
+> +                        " saved len %u",
+>                          max_len, usb_req->bulk_in_len);
+>          }
+>          break;
+> @@ -419,8 +419,7 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
+32_t max_len)
+>              usb_cd_send_data_in(cd, max_len);
+>          } else {
+>              usb_req->bulk_in_len +=3D max_len;
+> -            SPICE_DEBUG("msd_read DATAIN, req incomplete, added len %" G=
+_GUINT32_FORMAT
+> -                        " saved len %" G_GUINT32_FORMAT,
+> +            SPICE_DEBUG("msd_read DATAIN, req incomplete, added len %u s=
+aved len %u",
+>                          max_len, usb_req->bulk_in_len);
+>          }
+>          break;
+> @@ -433,7 +432,7 @@ int cd_usb_bulk_msd_read(UsbCdBulkMsdDevice *cd, uint=
+32_t max_len)
+>          break;
+> =20
+>      default:
+> -        SPICE_ERROR("Unexpected read state: %s, len %" G_GUINT32_FORMAT,
+> +        SPICE_ERROR("Unexpected read state: %s, len %u",
+>                      usb_cd_state_str(cd->state), max_len);
+>          goto fail;
+>      }
+> @@ -507,7 +506,7 @@ int cd_usb_bulk_msd_write(UsbCdBulkMsdDevice *cd, uin=
+t8_t *buf_out, uint32_t buf
+>          cd_usb_bulk_msd_set_state(cd, USB_CD_STATE_CSW); /* Status next =
+*/
+>          break;
+>      default:
+> -        SPICE_DEBUG("Unexpected write state: %s, len %" G_GUINT32_FORMAT,
+> +        SPICE_DEBUG("Unexpected write state: %s, len %u",
+>                      usb_cd_state_str(cd->state), buf_out_len);
+>          goto fail;
+>      }
+> @@ -536,7 +535,7 @@ void cd_scsi_target_reset_complete(void *target_user_=
+data)
+>  void cd_scsi_dev_changed(void *target_user_data, uint32_t lun)
+>  {
+>      UsbCdBulkMsdDevice *cd =3D (UsbCdBulkMsdDevice *)target_user_data;
+> -    SPICE_DEBUG("Device changed, state: %s lun: %" G_GUINT32_FORMAT,
+> +    SPICE_DEBUG("Device changed, state: %s lun: %u",
+>                  usb_cd_state_str(cd->state), lun);
+>      cd_usb_bulk_msd_lun_changed(cd->usb_user_data, lun);
+>  }
+> --=20
+> 2.20.1
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--tatsmh5wpdqetztv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1lIC0ACgkQl9kSPeN6
+SE/75RAAmrC+VE8SxT9Ny85WhQS3h9YjXSLyYJtO02x501hI61Pl8D622vnXzO/I
+44xelgzjH+AOsa2gsOMceLXb+VSpCerDTe3JLt2p+3SyXagJuLacmkYXKI2jETlH
+1DwbhDPaePRZMpft7DkFyS0I/5h3YqBHUkKN7Hrdx5D2YYN9uVcmaeJhRST6UPIf
+wQWXL2fHMOCQVX7rsBDQQ/dHRw4t1ngmjqDFNRky7KHChsNYTZBGuPRGuy5qYvS8
+daEHhdrN88Wrb6zdTuhXTLW37eaHhiIpYva20FuEqJr7IO0fbFAAdlebMM4eN9ok
+fYg/uNlvQPOlBbmuNpVFWBNqoa582PK4GwiQpyhlJZgoPPLYy6yrmv8wG0ssMlz4
+JViT9VXGRdBYVO77SU7jPFbYeL8a7W1qEQa2PMO9sHXn6XqUqHuOOIbE0rRPAosA
+8aWP7cGKPLhvnozFt99p+S/H7G3gqg6O8SKuUXElmoBGmSMzKOgPEG9+f3pU9bLX
+smOLnc8nfJrz21k5VIO4fRwTW2pZGWzQD9X3dcr25QHVvPIY8eyPYU6byS/105R9
+sbwVnBKnhd2AAP9bRv4glcrIZh+6kntAdGfqQEBxHeoUHArUO8dIugh2U541h4y7
+bb44YA5V8tXjm/iZUcfm0WBtmJDMp4GhBxNiExUcQFwsHF5lP+s=
+=n9gM
+-----END PGP SIGNATURE-----
+
+--tatsmh5wpdqetztv--
+
+--===============1531372116==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1531372116==--
