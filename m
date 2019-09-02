@@ -1,40 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12C0AA545F
-	for <lists+spice-devel@lfdr.de>; Mon,  2 Sep 2019 12:50:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CD12A560E
+	for <lists+spice-devel@lfdr.de>; Mon,  2 Sep 2019 14:31:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 92D7B899BC;
-	Mon,  2 Sep 2019 10:50:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C690B898BE;
+	Mon,  2 Sep 2019 12:31:41 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 767D9899BC
- for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 10:50:52 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C25F7898BE
+ for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 12:31:40 +0000 (UTC)
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 0A8DD3082E10
- for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 10:50:52 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AA37F61341;
- Mon,  2 Sep 2019 10:50:51 +0000 (UTC)
-Date: Mon, 2 Sep 2019 12:50:50 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190902105050.fo6xzijupono4owq@wingsuit>
-References: <20190902103520.29210-1-fziglio@redhat.com>
- <20190902103520.29210-3-fziglio@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 1DFCB356C5
+ for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 12:31:40 +0000 (UTC)
+Received: by mail-wm1-f70.google.com with SMTP id r187so3292556wme.0
+ for <spice-devel@lists.freedesktop.org>; Mon, 02 Sep 2019 05:31:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=GFfOInpJzaGrDyPIa7vn6gvY5EW4p2uLNWi2tGfn44Y=;
+ b=A7xXA+GdkvTHoc2wDhyE6jtk1vXSepH3tx5JN4u8ym3n51oE+fHXrBf7kTcqkgVyB1
+ gYdCw5sMLWIGs+lZrA7/jwxS/murU9K3hfncUMPaX4YBjk4Bwzwih5GoAjIjBoddQc53
+ gy49ipsgFHzT7Im0ddTzlmlk1Y6rFNiQB/TWzeRNQM3H6JqNpy7GxSdM/niKIofs6CPl
+ qsi3BSzyYmRt/A0dnP72OnTUD9Q8JjzsKXGtsNlILBqOcA/AH5qd1f+PlHCt5/Jfg2Xe
+ bBhkv0Y9FI+UEIXZjdKjnfhYgtbahT6eYahbLe/IMeF/QyNIRsB8HWm4GJJYlU/BTu3k
+ /xJw==
+X-Gm-Message-State: APjAAAXlqIV2cIVBufSeY7P991ystpp26PD8EQJQE3/7R39Hq3XLwshb
+ WuwpV8Dlu2T/qjPheFLIrjIsiufK9bgkYirRTBoQP2yTlZl0tJ0AAeO58Hi8d7XM1U13RkrDflg
+ My2YqjfRLji3z9irUlNt1Rae6X7/t6ZA=
+X-Received: by 2002:adf:c594:: with SMTP id m20mr38123859wrg.126.1567427498518; 
+ Mon, 02 Sep 2019 05:31:38 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqw6waleWj0hVI+/9vjKekDb08MFRlodCCF/EbIuCRYtH5mY+lWcnv0dlsDHEF/im5kSPJBCNw==
+X-Received: by 2002:adf:c594:: with SMTP id m20mr38123817wrg.126.1567427498138; 
+ Mon, 02 Sep 2019 05:31:38 -0700 (PDT)
+Received: from dhcp-4-148.tlv.redhat.com (bzq-82-81-161-50.red.bezeqint.net.
+ [82.81.161.50])
+ by smtp.gmail.com with ESMTPSA id t19sm15788505wmi.29.2019.09.02.05.31.36
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Sep 2019 05:31:36 -0700 (PDT)
+To: spice-devel@lists.freedesktop.org
+References: <782333838.10040153.1567072456525.JavaMail.zimbra@redhat.com>
+ <20190829121602.16695-1-kpouget@redhat.com>
+ <401101174.10116584.1567095463808.JavaMail.zimbra@redhat.com>
+From: Snir Sheriber <ssheribe@redhat.com>
+Message-ID: <683621ff-a450-c516-f619-a32bf46ad9fb@redhat.com>
+Date: Mon, 2 Sep 2019 15:31:34 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190902103520.29210-3-fziglio@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.46]); Mon, 02 Sep 2019 10:50:52 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk v2 3/3] usb-device-manager: Use
- SpiceUsbBackendDevice directly instead of SpiceUsbDevice
+In-Reply-To: <401101174.10116584.1567095463808.JavaMail.zimbra@redhat.com>
+Content-Language: en-US
+Subject: Re: [Spice-devel] [PATCH] streaming: make draw-area visible on
+ MJPEG encoder creation
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,279 +71,62 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0830425327=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============0830425327==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="lsp5lariovkz74p6"
-Content-Disposition: inline
-
-
---lsp5lariovkz74p6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Sep 02, 2019 at 11:35:20AM +0100, Frediano Ziglio wrote:
-> They were the same structure.
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-> ---
->  src/usb-backend.c        |  6 +++---
->  src/usb-backend.h        |  6 +++---
->  src/usb-device-manager.c | 42 +++++++++++-----------------------------
->  3 files changed, 17 insertions(+), 37 deletions(-)
->=20
-> diff --git a/src/usb-backend.c b/src/usb-backend.c
-> index e61ec01f..cfd14e2c 100644
-> --- a/src/usb-backend.c
-> +++ b/src/usb-backend.c
-> @@ -44,7 +44,7 @@
-> =20
->  #define LOUD_DEBUG(x, ...)
-> =20
-> -struct _SpiceUsbBackendDevice
-> +struct _SpiceUsbDevice
->  {
->      libusb_device *libusb_device;
->      gint ref_count;
-> @@ -517,12 +517,12 @@ void spice_usb_backend_delete(SpiceUsbBackend *be)
->      SPICE_DEBUG("%s <<", __FUNCTION__);
->  }
-> =20
-> -const UsbDeviceInformation* spice_usb_backend_device_get_info(SpiceUsbBa=
-ckendDevice *dev)
-> +const UsbDeviceInformation* spice_usb_backend_device_get_info(const Spic=
-eUsbBackendDevice *dev)
->  {
->      return &dev->device_info;
->  }
-> =20
-> -gconstpointer spice_usb_backend_device_get_libdev(SpiceUsbBackendDevice =
-*dev)
-> +gconstpointer spice_usb_backend_device_get_libdev(const SpiceUsbBackendD=
-evice *dev)
->  {
->      return dev->libusb_device;
->  }
-> diff --git a/src/usb-backend.h b/src/usb-backend.h
-> index 66e13f54..5830312b 100644
-> --- a/src/usb-backend.h
-> +++ b/src/usb-backend.h
-> @@ -27,7 +27,7 @@
->  G_BEGIN_DECLS
-> =20
->  typedef struct _SpiceUsbBackend SpiceUsbBackend;
-> -typedef struct _SpiceUsbBackendDevice SpiceUsbBackendDevice;
-> +typedef struct _SpiceUsbDevice SpiceUsbBackendDevice;
->  typedef struct _SpiceUsbBackendChannel SpiceUsbBackendChannel;
-> =20
->  typedef struct UsbDeviceInformation
-> @@ -64,8 +64,8 @@ void spice_usb_backend_deregister_hotplug(SpiceUsbBacke=
-nd *be);
->  /* Spice USB backend device API */
->  SpiceUsbBackendDevice *spice_usb_backend_device_ref(SpiceUsbBackendDevic=
-e *dev);
->  void spice_usb_backend_device_unref(SpiceUsbBackendDevice *dev);
-> -gconstpointer spice_usb_backend_device_get_libdev(SpiceUsbBackendDevice =
-*dev);
-> -const UsbDeviceInformation* spice_usb_backend_device_get_info(SpiceUsbBa=
-ckendDevice *dev);
-> +gconstpointer spice_usb_backend_device_get_libdev(const SpiceUsbBackendD=
-evice *dev);
-> +const UsbDeviceInformation* spice_usb_backend_device_get_info(const Spic=
-eUsbBackendDevice *dev);
->  gboolean spice_usb_backend_device_isoch(SpiceUsbBackendDevice *dev);
->  /* returns 0 if the device passes the filter */
->  int spice_usb_backend_device_check_filter(SpiceUsbBackendDevice *dev,
-> diff --git a/src/usb-device-manager.c b/src/usb-device-manager.c
-> index b85b20de..17bca099 100644
-> --- a/src/usb-device-manager.c
-> +++ b/src/usb-device-manager.c
-> @@ -120,12 +120,6 @@ enum {
-> =20
->  #ifdef USE_USBREDIR
-> =20
-> -struct _SpiceUsbDevice {
-> -    SpiceUsbBackendDevice *bdev;
-> -    gint    ref;
-> -};
-> -
-> -
->  static void channel_new(SpiceSession *session, SpiceChannel *channel,
->                          gpointer user_data);
->  static void channel_destroy(SpiceSession *session, SpiceChannel *channel,
-> @@ -637,7 +631,7 @@ spice_usb_device_get_libusb_device(const SpiceUsbDevi=
-ce *info G_GNUC_UNUSED)
->  #ifdef USE_USBREDIR
->      g_return_val_if_fail(info !=3D NULL, FALSE);
-> =20
-> -    return spice_usb_backend_device_get_libdev(info->bdev);
-> +    return spice_usb_backend_device_get_libdev(info);
->  #endif
->      return NULL;
->  }
-> @@ -1480,16 +1474,9 @@ gchar *spice_usb_device_get_description(SpiceUsbDe=
-vice *device, const gchar *for
->   */
->  static SpiceUsbDevice *spice_usb_device_new(SpiceUsbBackendDevice *bdev)
->  {
-> -    SpiceUsbDevice *info;
-> -
->      g_return_val_if_fail(bdev !=3D NULL, NULL);
-> =20
-> -    info =3D g_new0(SpiceUsbDevice, 1);
-> -
-> -    info->ref =3D 1;
-> -    info->bdev =3D spice_usb_backend_device_ref(bdev);
-> -
-> -    return info;
-> +    return spice_usb_backend_device_ref(bdev);
->  }
-> =20
->  guint16 spice_usb_device_get_busnum(const SpiceUsbDevice *info)
-> @@ -1498,7 +1485,7 @@ guint16 spice_usb_device_get_busnum(const SpiceUsbD=
-evice *info)
-> =20
->      g_return_val_if_fail(info !=3D NULL, 0);
-> =20
-> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
-> +    b_info =3D spice_usb_backend_device_get_info(info);
->      return b_info->bus;
->  }
-> =20
-> @@ -1508,7 +1495,7 @@ guint8 spice_usb_device_get_devaddr(const SpiceUsbD=
-evice *info)
-> =20
->      g_return_val_if_fail(info !=3D NULL, 0);
-> =20
-> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
-> +    b_info =3D spice_usb_backend_device_get_info(info);
->      return b_info->address;
->  }
-> =20
-> @@ -1518,7 +1505,7 @@ guint16 spice_usb_device_get_vid(const SpiceUsbDevi=
-ce *info)
-> =20
->      g_return_val_if_fail(info !=3D NULL, 0);
-> =20
-> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
-> +    b_info =3D spice_usb_backend_device_get_info(info);
->      return b_info->vid;
->  }
-> =20
-> @@ -1528,7 +1515,7 @@ guint16 spice_usb_device_get_pid(const SpiceUsbDevi=
-ce *info)
-> =20
->      g_return_val_if_fail(info !=3D NULL, 0);
-> =20
-> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
-> +    b_info =3D spice_usb_backend_device_get_info(info);
->      return b_info->pid;
->  }
-> =20
-> @@ -1536,7 +1523,7 @@ gboolean spice_usb_device_is_isochronous(const Spic=
-eUsbDevice *info)
->  {
->      g_return_val_if_fail(info !=3D NULL, 0);
-> =20
-> -    return spice_usb_backend_device_isoch(info->bdev);
-> +    return spice_usb_backend_device_isoch((SpiceUsbBackendDevice*) info);
->  }
-> =20
->  #ifdef G_OS_WIN32
-> @@ -1615,21 +1602,14 @@ void _usbdk_hider_update(SpiceUsbDeviceManager *m=
-anager)
->  static SpiceUsbDevice *spice_usb_device_ref(SpiceUsbDevice *info)
->  {
->      g_return_val_if_fail(info !=3D NULL, NULL);
-> -    g_atomic_int_inc(&info->ref);
-> -    return info;
-> +    return spice_usb_backend_device_ref(info);
->  }
-> =20
->  static void spice_usb_device_unref(SpiceUsbDevice *info)
->  {
-> -    gboolean ref_count_is_0;
-> -
->      g_return_if_fail(info !=3D NULL);
-> =20
-> -    ref_count_is_0 =3D g_atomic_int_dec_and_test(&info->ref);
-> -    if (ref_count_is_0) {
-> -        spice_usb_backend_device_unref(info->bdev);
-> -        g_free(info);
-> -    }
-> +    spice_usb_backend_device_unref(info);
->  }
-> =20
->  static gboolean
-> @@ -1640,7 +1620,7 @@ spice_usb_manager_device_equal_bdev(SpiceUsbDeviceM=
-anager *manager,
->      if ((info =3D=3D NULL) || (bdev =3D=3D NULL))
->          return FALSE;
-> =20
-> -    return info->bdev =3D=3D bdev;
-> +    return info =3D=3D bdev;
->  }
-> =20
->  /*
-> @@ -1652,6 +1632,6 @@ spice_usb_device_manager_device_to_bdev(SpiceUsbDev=
-iceManager *self,
->                                          SpiceUsbDevice *info)
->  {
->      /* Simply return a ref to the cached libdev */
-> -    return spice_usb_backend_device_ref(info->bdev);
-> +    return spice_usb_backend_device_ref(info);
-
-Some more cleanup can be done now, I think, but series looks
-fine.
-
-Acked-by: Victor Toso <victortoso@redhat.com>
-
->  }
->  #endif /* USE_USBREDIR */
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---lsp5lariovkz74p6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1s9AoACgkQl9kSPeN6
-SE9zUw//ZcpXI0dkjxnl6HqFIEYIzYEoXCc2v2E+CFsEqCCQ09KBP9CXISq8b8Mm
-DwR+0tbgr8i5ngaHEX+3jP3xhkM9wtEnnn+mv7/wfnJMjiD0Ec9/7sAUJUKHjCAd
-ALLDdkxWjxUyhC+CkOv91U+KFOzfI53g1UuNpKziwnrPczLbbpARDD/Zp1WnjY3r
-N0c6DZcvtEXfn6uDxHofqLxQ5iKtXwnGQEU4tLA6WtubfL2tI98KJB6ivZy5IESi
-XrRu+BbywsfwMPtE3NuIJ6MEG231jtu+qhWd0fTmg1VamlMfLEDmLv7qPBhcjXnv
-69ByrWrTHWI9H7fifa0VC9zL4FqLLhk18u2JSjSmBlqBmG/z/wTCSMYjoQakGiQI
-0L4C2U4W6HMANKXyzMzv4okGrV+fC61PNGpIgLjdEEwRrASCEJYQjo7n+EhN2/HE
-R5eL3TptmNQpxLOi9mQQQjBgSVA6BOWZVgYOCUp+/vG7mY6CY38x6/3/llqYdc+p
-bROJw2pU1bpyjIqvBExRmA9RtM+Bz+kjA/p0iyou4kQbuWqxA3ShwWEqribUFu1X
-vhpj4c41h9/nPF9Xp4voKVALvKO7JjhH8Bh1m9fMmLEzeZG+B0xICaBcUSszNu0O
-FT3DEk6MYSEab+Kk1/Er5gQLt6nv4aVv4VYwVWDgY1ekedTJNHs=
-=doFN
------END PGP SIGNATURE-----
-
---lsp5lariovkz74p6--
-
---===============0830425327==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0830425327==--
+SGksCgpPbiA4LzI5LzE5IDc6MTcgUE0sIEZyZWRpYW5vIFppZ2xpbyB3cm90ZToKPj4gVGhpcyBw
+YXRjaCBhbGxvd3MgdGhlIE1KUEVHIGVuY29kZXIgdG8gaW5mb3JtIHRoZSBzcGljZS13aWRnZXQg
+dGhhdAo+PiBpdHMgdmlkZW8gZHJhd2luZyBhcmVhIChkcmF3LWFyZWEpIHNob3VsZCBiZSBtYWRl
+IHZpc2libGUgb24gc2NyZWVuLgo+Pgo+PiBUaGlzIGlzIHJlcXVpcmVkIHRvIHN3aXRjaCBmcm9t
+IEdTVCB2aWRlbyBkZWNvZGluZyB0byBuYXRpdmUgTUpQRUcKPj4gZGVjb2RpbmcsIG90aGVyd2lz
+ZSB0aGUgZ3N0LWFyZWEgcmVtYWluZWQgb24gdG9wIGFuZCB0aGUgTUpQRUcgdmlkZW8KPj4gc3Ry
+ZWFtIHdhcyBuZXZlciBzaG93bi4KPj4KPj4gU2lnbmVkLW9mZi1ieTogS2V2aW4gUG91Z2V0IDxr
+cG91Z2V0QHJlZGhhdC5jb20+Cj4gRmluZSBmb3IgbWUuIFNuaXIgaGFkIHRoZSBtb3N0IGNvbW1l
+bnRzIG9uIGVhcmxpZXIgdmVyc2lvbnMuCj4KPj4gLS0tCj4+ICAgc3JjL2NoYW5uZWwtZGlzcGxh
+eS1tanBlZy5jIHwgMyArKysKPj4gICBzcmMvc3BpY2Utd2lkZ2V0LmMgICAgICAgICAgfCA5ICsr
+KysrKysrLQo+PiAgIDIgZmlsZXMgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlv
+bigtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvc3JjL2NoYW5uZWwtZGlzcGxheS1tanBlZy5jIGIvc3Jj
+L2NoYW5uZWwtZGlzcGxheS1tanBlZy5jCj4+IGluZGV4IDY0N2QzMWIuLjYzNmE5OGIgMTAwNjQ0
+Cj4+IC0tLSBhL3NyYy9jaGFubmVsLWRpc3BsYXktbWpwZWcuYwo+PiArKysgYi9zcmMvY2hhbm5l
+bC1kaXNwbGF5LW1qcGVnLmMKPj4gQEAgLTMwMCw1ICszMDAsOCBAQCBWaWRlb0RlY29kZXIqIGNy
+ZWF0ZV9tanBlZ19kZWNvZGVyKGludCBjb2RlY190eXBlLAo+PiBkaXNwbGF5X3N0cmVhbSAqc3Ry
+ZWFtKQo+PiAgIAo+PiAgICAgICAvKiBBbGwgdGhlIG90aGVyIGZpZWxkcyBhcmUgaW5pdGlhbGl6
+ZWQgdG8gemVybyBieSBnX25ldzAoKS4gKi8KPj4gICAKPj4gKyAgICAvKiBtYWtlcyB0aGUgZHJh
+dy1hcmVhIHZpc2libGUgKi8KPj4gKyAgICBoYW5kX3BpcGVsaW5lX3RvX3dpZGdldChzdHJlYW0s
+IE5VTEwpOwo+PiArCj4+ICAgICAgIHJldHVybiAoVmlkZW9EZWNvZGVyKilkZWNvZGVyOwo+PiAg
+IH0KPj4gZGlmZiAtLWdpdCBhL3NyYy9zcGljZS13aWRnZXQuYyBiL3NyYy9zcGljZS13aWRnZXQu
+Ywo+PiBpbmRleCBhOWJhMWYxLi43YzI1N2ZmIDEwMDY0NAo+PiAtLS0gYS9zcmMvc3BpY2Utd2lk
+Z2V0LmMKPj4gKysrIGIvc3JjL3NwaWNlLXdpZGdldC5jCj4+IEBAIC0yNzgwLDEzICsyNzgwLDIw
+IEBAIHN0YXRpYyB2b2lkIGdzdF9zaXplX2FsbG9jYXRlKEd0a1dpZGdldCAqd2lkZ2V0LAo+PiBH
+ZGtSZWN0YW5nbGUgKmEsIGdwb2ludGVyIGRhdGEpCj4+ICAgfQo+PiAgIAo+PiAgIC8qIFRoaXMg
+Y2FsbGJhY2sgc2hvdWxkIHBhc3MgdG8gdGhlIHdpZGdldCBhIHBvaW50ZXIgb2YgdGhlIHBpcGVs
+aW5lCj4+IC0gKiBzbyB0aGF0IHdlIGNhbiBzZXQgcGlwZWxpbmUgYW5kIG92ZXJsYXkgcmVsYXRl
+ZCBjYWxscyBmcm9tIGhlcmUuCj4+ICsgKiBzbyB0aGF0IHdlIGNhbiB0aGUgc2V0IEdTVCBwaXBl
+bGluZSBhbmQgb3ZlcmxheSByZWxhdGVkIGNhbGxzIGZyb20KPj4gKyAqIGhlcmUuICBJZiB0aGUg
+cGlwZWxpbmUgcG9pbnRlciBpcyBOVUxMLCB0aGUgZHJhd2luZyBhcmVhIG9mIHRoZQo+PiArICog
+bmF0aXZlIHJlbmRlcmVyIGlzIHNldCB2aXNpYmxlLgo+PiAgICAqLwoKSSB0aGluayB5b3Ugc2hv
+dWxkIHVwZGF0ZSBhbHNvIHRoZSBzaWduYWwgY29tbWVudCAoZ3N0LXZpZGVvLW92ZXJsYXkpLCB0
+aGF0CnRoZSBwaXBlbGluZSBtYXkgYmUgTlVMTAoKPj4gICBzdGF0aWMgZ2Jvb2xlYW4gc2V0X292
+ZXJsYXkoU3BpY2VDaGFubmVsICpjaGFubmVsLCB2b2lkKiBwaXBlbGluZV9wdHIsCj4+ICAgU3Bp
+Y2VEaXNwbGF5ICpkaXNwbGF5KQo+PiAgIHsKPj4gICAjaWYgZGVmaW5lZChHREtfV0lORE9XSU5H
+X1gxMSkKPj4gICAgICAgU3BpY2VEaXNwbGF5UHJpdmF0ZSAqZCA9IGRpc3BsYXktPnByaXY7Cj4+
+ICAgCj4+ICsgICAgaWYgKHBpcGVsaW5lX3B0ciA9PSBOVUxMKSB7Cj4+ICsgICAgICAgIGd0a19z
+dGFja19zZXRfdmlzaWJsZV9jaGlsZF9uYW1lKGQtPnN0YWNrLCAiZHJhdy1hcmVhIik7Cj4+ICsg
+ICAgICAgIHJldHVybiB0cnVlOwo+PiArICAgIH0KPj4gKwoKQWx0aG91Z2ggdGhpcyB3b3VsZCBw
+cm9iYWJseSBhbHdheXMgd29yayBmaW5lIGFuZCByZXR1cm5lZCB2YWx1ZSBpcwphbHNvIG5vdCBj
+aGVja2VkIGJ1dCB0aGUgZHJhdy1hcmVhIGlzIG5vdCBuZWNlc3NhcmlseSByZWxhdGVkIHRvIFgx
+MQpzbyBpdCBzaG91bGQgYmUgb3V0c2lkZSB0aGUgZGVmaW5lLgoKQ29uc2lkZXIgdGhlc2UsIGJ1
+dCBvdGhlciB0aGFuIHRoYXQgZmluZSB3aXRoIG1lCgooT2gsIGFub3RoZXIgbm90IHJlYWxseSBu
+ZWNlc3NhcnkgdGhpbmcgd291bGQgYmUgdG8gbWFrZSBzdXJlIGVnbCBpcyBub3QKZW5hYmxlZCwg
+YnV0IHByb2JhYmx5IHNob3VsZCBuZXZlciBoYXBwZW4gOnApCgpTbmlyLgoKCj4+ICAgICAgIC8q
+IEdzdFZpZGVvT3ZlcmxheSBpcyBjdXJyZW50bHkgdXNlZCBvbmx5IHVuZGVyIHggKi8KPj4gICAg
+ICAgaWYgKCFnX2dldGVudigiRElTQUJMRV9HU1RWSURFT09WRVJMQVkiKSAmJgo+PiAgICAgICAg
+ICAgR0RLX0lTX1gxMV9ESVNQTEFZKGdka19kaXNwbGF5X2dldF9kZWZhdWx0KCkpKSB7Cj4gX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBTcGljZS1kZXZl
+bCBtYWlsaW5nIGxpc3QKPiBTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBodHRw
+czovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVs
+IG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
+aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
