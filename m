@@ -2,36 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94D11A541B
-	for <lists+spice-devel@lfdr.de>; Mon,  2 Sep 2019 12:35:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12C0AA545F
+	for <lists+spice-devel@lfdr.de>; Mon,  2 Sep 2019 12:50:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 99964899E7;
-	Mon,  2 Sep 2019 10:35:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 92D7B899BC;
+	Mon,  2 Sep 2019 10:50:53 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 858C3899E7
- for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 10:35:29 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 767D9899BC
+ for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 10:50:52 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 320033084212
- for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 10:35:29 +0000 (UTC)
-Received: from fziglio.remote.csb (unknown [10.33.32.16])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 182125C207;
- Mon,  2 Sep 2019 10:35:27 +0000 (UTC)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Date: Mon,  2 Sep 2019 11:35:20 +0100
-Message-Id: <20190902103520.29210-3-fziglio@redhat.com>
-In-Reply-To: <20190902103520.29210-1-fziglio@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 0A8DD3082E10
+ for <spice-devel@lists.freedesktop.org>; Mon,  2 Sep 2019 10:50:52 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.155])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AA37F61341;
+ Mon,  2 Sep 2019 10:50:51 +0000 (UTC)
+Date: Mon, 2 Sep 2019 12:50:50 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190902105050.fo6xzijupono4owq@wingsuit>
 References: <20190902103520.29210-1-fziglio@redhat.com>
+ <20190902103520.29210-3-fziglio@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+In-Reply-To: <20190902103520.29210-3-fziglio@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.40]); Mon, 02 Sep 2019 10:35:29 +0000 (UTC)
-Subject: [Spice-devel] [PATCH spice-gtk v2 3/3] usb-device-manager: Use
+ (mx1.redhat.com [10.5.110.46]); Mon, 02 Sep 2019 10:50:52 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk v2 3/3] usb-device-manager: Use
  SpiceUsbBackendDevice directly instead of SpiceUsbDevice
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -44,123 +46,279 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0830425327=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-VGhleSB3ZXJlIHRoZSBzYW1lIHN0cnVjdHVyZS4KClNpZ25lZC1vZmYtYnk6IEZyZWRpYW5vIFpp
-Z2xpbyA8ZnppZ2xpb0ByZWRoYXQuY29tPgotLS0KIHNyYy91c2ItYmFja2VuZC5jICAgICAgICB8
-ICA2ICsrKy0tLQogc3JjL3VzYi1iYWNrZW5kLmggICAgICAgIHwgIDYgKysrLS0tCiBzcmMvdXNi
-LWRldmljZS1tYW5hZ2VyLmMgfCA0MiArKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tCiAzIGZpbGVzIGNoYW5nZWQsIDE3IGluc2VydGlvbnMoKyksIDM3IGRlbGV0aW9ucygt
-KQoKZGlmZiAtLWdpdCBhL3NyYy91c2ItYmFja2VuZC5jIGIvc3JjL3VzYi1iYWNrZW5kLmMKaW5k
-ZXggZTYxZWMwMWYuLmNmZDE0ZTJjIDEwMDY0NAotLS0gYS9zcmMvdXNiLWJhY2tlbmQuYworKysg
-Yi9zcmMvdXNiLWJhY2tlbmQuYwpAQCAtNDQsNyArNDQsNyBAQAogCiAjZGVmaW5lIExPVURfREVC
-VUcoeCwgLi4uKQogCi1zdHJ1Y3QgX1NwaWNlVXNiQmFja2VuZERldmljZQorc3RydWN0IF9TcGlj
-ZVVzYkRldmljZQogewogICAgIGxpYnVzYl9kZXZpY2UgKmxpYnVzYl9kZXZpY2U7CiAgICAgZ2lu
-dCByZWZfY291bnQ7CkBAIC01MTcsMTIgKzUxNywxMiBAQCB2b2lkIHNwaWNlX3VzYl9iYWNrZW5k
-X2RlbGV0ZShTcGljZVVzYkJhY2tlbmQgKmJlKQogICAgIFNQSUNFX0RFQlVHKCIlcyA8PCIsIF9f
-RlVOQ1RJT05fXyk7CiB9CiAKLWNvbnN0IFVzYkRldmljZUluZm9ybWF0aW9uKiBzcGljZV91c2Jf
-YmFja2VuZF9kZXZpY2VfZ2V0X2luZm8oU3BpY2VVc2JCYWNrZW5kRGV2aWNlICpkZXYpCitjb25z
-dCBVc2JEZXZpY2VJbmZvcm1hdGlvbiogc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX2dldF9pbmZv
-KGNvbnN0IFNwaWNlVXNiQmFja2VuZERldmljZSAqZGV2KQogewogICAgIHJldHVybiAmZGV2LT5k
-ZXZpY2VfaW5mbzsKIH0KIAotZ2NvbnN0cG9pbnRlciBzcGljZV91c2JfYmFja2VuZF9kZXZpY2Vf
-Z2V0X2xpYmRldihTcGljZVVzYkJhY2tlbmREZXZpY2UgKmRldikKK2djb25zdHBvaW50ZXIgc3Bp
-Y2VfdXNiX2JhY2tlbmRfZGV2aWNlX2dldF9saWJkZXYoY29uc3QgU3BpY2VVc2JCYWNrZW5kRGV2
-aWNlICpkZXYpCiB7CiAgICAgcmV0dXJuIGRldi0+bGlidXNiX2RldmljZTsKIH0KZGlmZiAtLWdp
-dCBhL3NyYy91c2ItYmFja2VuZC5oIGIvc3JjL3VzYi1iYWNrZW5kLmgKaW5kZXggNjZlMTNmNTQu
-LjU4MzAzMTJiIDEwMDY0NAotLS0gYS9zcmMvdXNiLWJhY2tlbmQuaAorKysgYi9zcmMvdXNiLWJh
-Y2tlbmQuaApAQCAtMjcsNyArMjcsNyBAQAogR19CRUdJTl9ERUNMUwogCiB0eXBlZGVmIHN0cnVj
-dCBfU3BpY2VVc2JCYWNrZW5kIFNwaWNlVXNiQmFja2VuZDsKLXR5cGVkZWYgc3RydWN0IF9TcGlj
-ZVVzYkJhY2tlbmREZXZpY2UgU3BpY2VVc2JCYWNrZW5kRGV2aWNlOwordHlwZWRlZiBzdHJ1Y3Qg
-X1NwaWNlVXNiRGV2aWNlIFNwaWNlVXNiQmFja2VuZERldmljZTsKIHR5cGVkZWYgc3RydWN0IF9T
-cGljZVVzYkJhY2tlbmRDaGFubmVsIFNwaWNlVXNiQmFja2VuZENoYW5uZWw7CiAKIHR5cGVkZWYg
-c3RydWN0IFVzYkRldmljZUluZm9ybWF0aW9uCkBAIC02NCw4ICs2NCw4IEBAIHZvaWQgc3BpY2Vf
-dXNiX2JhY2tlbmRfZGVyZWdpc3Rlcl9ob3RwbHVnKFNwaWNlVXNiQmFja2VuZCAqYmUpOwogLyog
-U3BpY2UgVVNCIGJhY2tlbmQgZGV2aWNlIEFQSSAqLwogU3BpY2VVc2JCYWNrZW5kRGV2aWNlICpz
-cGljZV91c2JfYmFja2VuZF9kZXZpY2VfcmVmKFNwaWNlVXNiQmFja2VuZERldmljZSAqZGV2KTsK
-IHZvaWQgc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX3VucmVmKFNwaWNlVXNiQmFja2VuZERldmlj
-ZSAqZGV2KTsKLWdjb25zdHBvaW50ZXIgc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX2dldF9saWJk
-ZXYoU3BpY2VVc2JCYWNrZW5kRGV2aWNlICpkZXYpOwotY29uc3QgVXNiRGV2aWNlSW5mb3JtYXRp
-b24qIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9nZXRfaW5mbyhTcGljZVVzYkJhY2tlbmREZXZp
-Y2UgKmRldik7CitnY29uc3Rwb2ludGVyIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9nZXRfbGli
-ZGV2KGNvbnN0IFNwaWNlVXNiQmFja2VuZERldmljZSAqZGV2KTsKK2NvbnN0IFVzYkRldmljZUlu
-Zm9ybWF0aW9uKiBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfZ2V0X2luZm8oY29uc3QgU3BpY2VV
-c2JCYWNrZW5kRGV2aWNlICpkZXYpOwogZ2Jvb2xlYW4gc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNl
-X2lzb2NoKFNwaWNlVXNiQmFja2VuZERldmljZSAqZGV2KTsKIC8qIHJldHVybnMgMCBpZiB0aGUg
-ZGV2aWNlIHBhc3NlcyB0aGUgZmlsdGVyICovCiBpbnQgc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNl
-X2NoZWNrX2ZpbHRlcihTcGljZVVzYkJhY2tlbmREZXZpY2UgKmRldiwKZGlmZiAtLWdpdCBhL3Ny
-Yy91c2ItZGV2aWNlLW1hbmFnZXIuYyBiL3NyYy91c2ItZGV2aWNlLW1hbmFnZXIuYwppbmRleCBi
-ODViMjBkZS4uMTdiY2EwOTkgMTAwNjQ0Ci0tLSBhL3NyYy91c2ItZGV2aWNlLW1hbmFnZXIuYwor
-KysgYi9zcmMvdXNiLWRldmljZS1tYW5hZ2VyLmMKQEAgLTEyMCwxMiArMTIwLDYgQEAgZW51bSB7
-CiAKICNpZmRlZiBVU0VfVVNCUkVESVIKIAotc3RydWN0IF9TcGljZVVzYkRldmljZSB7Ci0gICAg
-U3BpY2VVc2JCYWNrZW5kRGV2aWNlICpiZGV2OwotICAgIGdpbnQgICAgcmVmOwotfTsKLQotCiBz
-dGF0aWMgdm9pZCBjaGFubmVsX25ldyhTcGljZVNlc3Npb24gKnNlc3Npb24sIFNwaWNlQ2hhbm5l
-bCAqY2hhbm5lbCwKICAgICAgICAgICAgICAgICAgICAgICAgIGdwb2ludGVyIHVzZXJfZGF0YSk7
-CiBzdGF0aWMgdm9pZCBjaGFubmVsX2Rlc3Ryb3koU3BpY2VTZXNzaW9uICpzZXNzaW9uLCBTcGlj
-ZUNoYW5uZWwgKmNoYW5uZWwsCkBAIC02MzcsNyArNjMxLDcgQEAgc3BpY2VfdXNiX2RldmljZV9n
-ZXRfbGlidXNiX2RldmljZShjb25zdCBTcGljZVVzYkRldmljZSAqaW5mbyBHX0dOVUNfVU5VU0VE
-KQogI2lmZGVmIFVTRV9VU0JSRURJUgogICAgIGdfcmV0dXJuX3ZhbF9pZl9mYWlsKGluZm8gIT0g
-TlVMTCwgRkFMU0UpOwogCi0gICAgcmV0dXJuIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9nZXRf
-bGliZGV2KGluZm8tPmJkZXYpOworICAgIHJldHVybiBzcGljZV91c2JfYmFja2VuZF9kZXZpY2Vf
-Z2V0X2xpYmRldihpbmZvKTsKICNlbmRpZgogICAgIHJldHVybiBOVUxMOwogfQpAQCAtMTQ4MCwx
-NiArMTQ3NCw5IEBAIGdjaGFyICpzcGljZV91c2JfZGV2aWNlX2dldF9kZXNjcmlwdGlvbihTcGlj
-ZVVzYkRldmljZSAqZGV2aWNlLCBjb25zdCBnY2hhciAqZm9yCiAgKi8KIHN0YXRpYyBTcGljZVVz
-YkRldmljZSAqc3BpY2VfdXNiX2RldmljZV9uZXcoU3BpY2VVc2JCYWNrZW5kRGV2aWNlICpiZGV2
-KQogewotICAgIFNwaWNlVXNiRGV2aWNlICppbmZvOwotCiAgICAgZ19yZXR1cm5fdmFsX2lmX2Zh
-aWwoYmRldiAhPSBOVUxMLCBOVUxMKTsKIAotICAgIGluZm8gPSBnX25ldzAoU3BpY2VVc2JEZXZp
-Y2UsIDEpOwotCi0gICAgaW5mby0+cmVmID0gMTsKLSAgICBpbmZvLT5iZGV2ID0gc3BpY2VfdXNi
-X2JhY2tlbmRfZGV2aWNlX3JlZihiZGV2KTsKLQotICAgIHJldHVybiBpbmZvOworICAgIHJldHVy
-biBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfcmVmKGJkZXYpOwogfQogCiBndWludDE2IHNwaWNl
-X3VzYl9kZXZpY2VfZ2V0X2J1c251bShjb25zdCBTcGljZVVzYkRldmljZSAqaW5mbykKQEAgLTE0
-OTgsNyArMTQ4NSw3IEBAIGd1aW50MTYgc3BpY2VfdXNiX2RldmljZV9nZXRfYnVzbnVtKGNvbnN0
-IFNwaWNlVXNiRGV2aWNlICppbmZvKQogCiAgICAgZ19yZXR1cm5fdmFsX2lmX2ZhaWwoaW5mbyAh
-PSBOVUxMLCAwKTsKIAotICAgIGJfaW5mbyA9IHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9nZXRf
-aW5mbyhpbmZvLT5iZGV2KTsKKyAgICBiX2luZm8gPSBzcGljZV91c2JfYmFja2VuZF9kZXZpY2Vf
-Z2V0X2luZm8oaW5mbyk7CiAgICAgcmV0dXJuIGJfaW5mby0+YnVzOwogfQogCkBAIC0xNTA4LDcg
-KzE0OTUsNyBAQCBndWludDggc3BpY2VfdXNiX2RldmljZV9nZXRfZGV2YWRkcihjb25zdCBTcGlj
-ZVVzYkRldmljZSAqaW5mbykKIAogICAgIGdfcmV0dXJuX3ZhbF9pZl9mYWlsKGluZm8gIT0gTlVM
-TCwgMCk7CiAKLSAgICBiX2luZm8gPSBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfZ2V0X2luZm8o
-aW5mby0+YmRldik7CisgICAgYl9pbmZvID0gc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX2dldF9p
-bmZvKGluZm8pOwogICAgIHJldHVybiBiX2luZm8tPmFkZHJlc3M7CiB9CiAKQEAgLTE1MTgsNyAr
-MTUwNSw3IEBAIGd1aW50MTYgc3BpY2VfdXNiX2RldmljZV9nZXRfdmlkKGNvbnN0IFNwaWNlVXNi
-RGV2aWNlICppbmZvKQogCiAgICAgZ19yZXR1cm5fdmFsX2lmX2ZhaWwoaW5mbyAhPSBOVUxMLCAw
-KTsKIAotICAgIGJfaW5mbyA9IHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9nZXRfaW5mbyhpbmZv
-LT5iZGV2KTsKKyAgICBiX2luZm8gPSBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfZ2V0X2luZm8o
-aW5mbyk7CiAgICAgcmV0dXJuIGJfaW5mby0+dmlkOwogfQogCkBAIC0xNTI4LDcgKzE1MTUsNyBA
-QCBndWludDE2IHNwaWNlX3VzYl9kZXZpY2VfZ2V0X3BpZChjb25zdCBTcGljZVVzYkRldmljZSAq
-aW5mbykKIAogICAgIGdfcmV0dXJuX3ZhbF9pZl9mYWlsKGluZm8gIT0gTlVMTCwgMCk7CiAKLSAg
-ICBiX2luZm8gPSBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfZ2V0X2luZm8oaW5mby0+YmRldik7
-CisgICAgYl9pbmZvID0gc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX2dldF9pbmZvKGluZm8pOwog
-ICAgIHJldHVybiBiX2luZm8tPnBpZDsKIH0KIApAQCAtMTUzNiw3ICsxNTIzLDcgQEAgZ2Jvb2xl
-YW4gc3BpY2VfdXNiX2RldmljZV9pc19pc29jaHJvbm91cyhjb25zdCBTcGljZVVzYkRldmljZSAq
-aW5mbykKIHsKICAgICBnX3JldHVybl92YWxfaWZfZmFpbChpbmZvICE9IE5VTEwsIDApOwogCi0g
-ICAgcmV0dXJuIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9pc29jaChpbmZvLT5iZGV2KTsKKyAg
-ICByZXR1cm4gc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX2lzb2NoKChTcGljZVVzYkJhY2tlbmRE
-ZXZpY2UqKSBpbmZvKTsKIH0KIAogI2lmZGVmIEdfT1NfV0lOMzIKQEAgLTE2MTUsMjEgKzE2MDIs
-MTQgQEAgdm9pZCBfdXNiZGtfaGlkZXJfdXBkYXRlKFNwaWNlVXNiRGV2aWNlTWFuYWdlciAqbWFu
-YWdlcikKIHN0YXRpYyBTcGljZVVzYkRldmljZSAqc3BpY2VfdXNiX2RldmljZV9yZWYoU3BpY2VV
-c2JEZXZpY2UgKmluZm8pCiB7CiAgICAgZ19yZXR1cm5fdmFsX2lmX2ZhaWwoaW5mbyAhPSBOVUxM
-LCBOVUxMKTsKLSAgICBnX2F0b21pY19pbnRfaW5jKCZpbmZvLT5yZWYpOwotICAgIHJldHVybiBp
-bmZvOworICAgIHJldHVybiBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfcmVmKGluZm8pOwogfQog
-CiBzdGF0aWMgdm9pZCBzcGljZV91c2JfZGV2aWNlX3VucmVmKFNwaWNlVXNiRGV2aWNlICppbmZv
-KQogewotICAgIGdib29sZWFuIHJlZl9jb3VudF9pc18wOwotCiAgICAgZ19yZXR1cm5faWZfZmFp
-bChpbmZvICE9IE5VTEwpOwogCi0gICAgcmVmX2NvdW50X2lzXzAgPSBnX2F0b21pY19pbnRfZGVj
-X2FuZF90ZXN0KCZpbmZvLT5yZWYpOwotICAgIGlmIChyZWZfY291bnRfaXNfMCkgewotICAgICAg
-ICBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfdW5yZWYoaW5mby0+YmRldik7Ci0gICAgICAgIGdf
-ZnJlZShpbmZvKTsKLSAgICB9CisgICAgc3BpY2VfdXNiX2JhY2tlbmRfZGV2aWNlX3VucmVmKGlu
-Zm8pOwogfQogCiBzdGF0aWMgZ2Jvb2xlYW4KQEAgLTE2NDAsNyArMTYyMCw3IEBAIHNwaWNlX3Vz
-Yl9tYW5hZ2VyX2RldmljZV9lcXVhbF9iZGV2KFNwaWNlVXNiRGV2aWNlTWFuYWdlciAqbWFuYWdl
-ciwKICAgICBpZiAoKGluZm8gPT0gTlVMTCkgfHwgKGJkZXYgPT0gTlVMTCkpCiAgICAgICAgIHJl
-dHVybiBGQUxTRTsKIAotICAgIHJldHVybiBpbmZvLT5iZGV2ID09IGJkZXY7CisgICAgcmV0dXJu
-IGluZm8gPT0gYmRldjsKIH0KIAogLyoKQEAgLTE2NTIsNiArMTYzMiw2IEBAIHNwaWNlX3VzYl9k
-ZXZpY2VfbWFuYWdlcl9kZXZpY2VfdG9fYmRldihTcGljZVVzYkRldmljZU1hbmFnZXIgKnNlbGYs
-CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU3BpY2VVc2JEZXZpY2Ug
-KmluZm8pCiB7CiAgICAgLyogU2ltcGx5IHJldHVybiBhIHJlZiB0byB0aGUgY2FjaGVkIGxpYmRl
-diAqLwotICAgIHJldHVybiBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfcmVmKGluZm8tPmJkZXYp
-OworICAgIHJldHVybiBzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfcmVmKGluZm8pOwogfQogI2Vu
-ZGlmIC8qIFVTRV9VU0JSRURJUiAqLwotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2Ut
-ZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-L21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+
+--===============0830425327==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="lsp5lariovkz74p6"
+Content-Disposition: inline
+
+
+--lsp5lariovkz74p6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Sep 02, 2019 at 11:35:20AM +0100, Frediano Ziglio wrote:
+> They were the same structure.
+>=20
+> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+> ---
+>  src/usb-backend.c        |  6 +++---
+>  src/usb-backend.h        |  6 +++---
+>  src/usb-device-manager.c | 42 +++++++++++-----------------------------
+>  3 files changed, 17 insertions(+), 37 deletions(-)
+>=20
+> diff --git a/src/usb-backend.c b/src/usb-backend.c
+> index e61ec01f..cfd14e2c 100644
+> --- a/src/usb-backend.c
+> +++ b/src/usb-backend.c
+> @@ -44,7 +44,7 @@
+> =20
+>  #define LOUD_DEBUG(x, ...)
+> =20
+> -struct _SpiceUsbBackendDevice
+> +struct _SpiceUsbDevice
+>  {
+>      libusb_device *libusb_device;
+>      gint ref_count;
+> @@ -517,12 +517,12 @@ void spice_usb_backend_delete(SpiceUsbBackend *be)
+>      SPICE_DEBUG("%s <<", __FUNCTION__);
+>  }
+> =20
+> -const UsbDeviceInformation* spice_usb_backend_device_get_info(SpiceUsbBa=
+ckendDevice *dev)
+> +const UsbDeviceInformation* spice_usb_backend_device_get_info(const Spic=
+eUsbBackendDevice *dev)
+>  {
+>      return &dev->device_info;
+>  }
+> =20
+> -gconstpointer spice_usb_backend_device_get_libdev(SpiceUsbBackendDevice =
+*dev)
+> +gconstpointer spice_usb_backend_device_get_libdev(const SpiceUsbBackendD=
+evice *dev)
+>  {
+>      return dev->libusb_device;
+>  }
+> diff --git a/src/usb-backend.h b/src/usb-backend.h
+> index 66e13f54..5830312b 100644
+> --- a/src/usb-backend.h
+> +++ b/src/usb-backend.h
+> @@ -27,7 +27,7 @@
+>  G_BEGIN_DECLS
+> =20
+>  typedef struct _SpiceUsbBackend SpiceUsbBackend;
+> -typedef struct _SpiceUsbBackendDevice SpiceUsbBackendDevice;
+> +typedef struct _SpiceUsbDevice SpiceUsbBackendDevice;
+>  typedef struct _SpiceUsbBackendChannel SpiceUsbBackendChannel;
+> =20
+>  typedef struct UsbDeviceInformation
+> @@ -64,8 +64,8 @@ void spice_usb_backend_deregister_hotplug(SpiceUsbBacke=
+nd *be);
+>  /* Spice USB backend device API */
+>  SpiceUsbBackendDevice *spice_usb_backend_device_ref(SpiceUsbBackendDevic=
+e *dev);
+>  void spice_usb_backend_device_unref(SpiceUsbBackendDevice *dev);
+> -gconstpointer spice_usb_backend_device_get_libdev(SpiceUsbBackendDevice =
+*dev);
+> -const UsbDeviceInformation* spice_usb_backend_device_get_info(SpiceUsbBa=
+ckendDevice *dev);
+> +gconstpointer spice_usb_backend_device_get_libdev(const SpiceUsbBackendD=
+evice *dev);
+> +const UsbDeviceInformation* spice_usb_backend_device_get_info(const Spic=
+eUsbBackendDevice *dev);
+>  gboolean spice_usb_backend_device_isoch(SpiceUsbBackendDevice *dev);
+>  /* returns 0 if the device passes the filter */
+>  int spice_usb_backend_device_check_filter(SpiceUsbBackendDevice *dev,
+> diff --git a/src/usb-device-manager.c b/src/usb-device-manager.c
+> index b85b20de..17bca099 100644
+> --- a/src/usb-device-manager.c
+> +++ b/src/usb-device-manager.c
+> @@ -120,12 +120,6 @@ enum {
+> =20
+>  #ifdef USE_USBREDIR
+> =20
+> -struct _SpiceUsbDevice {
+> -    SpiceUsbBackendDevice *bdev;
+> -    gint    ref;
+> -};
+> -
+> -
+>  static void channel_new(SpiceSession *session, SpiceChannel *channel,
+>                          gpointer user_data);
+>  static void channel_destroy(SpiceSession *session, SpiceChannel *channel,
+> @@ -637,7 +631,7 @@ spice_usb_device_get_libusb_device(const SpiceUsbDevi=
+ce *info G_GNUC_UNUSED)
+>  #ifdef USE_USBREDIR
+>      g_return_val_if_fail(info !=3D NULL, FALSE);
+> =20
+> -    return spice_usb_backend_device_get_libdev(info->bdev);
+> +    return spice_usb_backend_device_get_libdev(info);
+>  #endif
+>      return NULL;
+>  }
+> @@ -1480,16 +1474,9 @@ gchar *spice_usb_device_get_description(SpiceUsbDe=
+vice *device, const gchar *for
+>   */
+>  static SpiceUsbDevice *spice_usb_device_new(SpiceUsbBackendDevice *bdev)
+>  {
+> -    SpiceUsbDevice *info;
+> -
+>      g_return_val_if_fail(bdev !=3D NULL, NULL);
+> =20
+> -    info =3D g_new0(SpiceUsbDevice, 1);
+> -
+> -    info->ref =3D 1;
+> -    info->bdev =3D spice_usb_backend_device_ref(bdev);
+> -
+> -    return info;
+> +    return spice_usb_backend_device_ref(bdev);
+>  }
+> =20
+>  guint16 spice_usb_device_get_busnum(const SpiceUsbDevice *info)
+> @@ -1498,7 +1485,7 @@ guint16 spice_usb_device_get_busnum(const SpiceUsbD=
+evice *info)
+> =20
+>      g_return_val_if_fail(info !=3D NULL, 0);
+> =20
+> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
+> +    b_info =3D spice_usb_backend_device_get_info(info);
+>      return b_info->bus;
+>  }
+> =20
+> @@ -1508,7 +1495,7 @@ guint8 spice_usb_device_get_devaddr(const SpiceUsbD=
+evice *info)
+> =20
+>      g_return_val_if_fail(info !=3D NULL, 0);
+> =20
+> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
+> +    b_info =3D spice_usb_backend_device_get_info(info);
+>      return b_info->address;
+>  }
+> =20
+> @@ -1518,7 +1505,7 @@ guint16 spice_usb_device_get_vid(const SpiceUsbDevi=
+ce *info)
+> =20
+>      g_return_val_if_fail(info !=3D NULL, 0);
+> =20
+> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
+> +    b_info =3D spice_usb_backend_device_get_info(info);
+>      return b_info->vid;
+>  }
+> =20
+> @@ -1528,7 +1515,7 @@ guint16 spice_usb_device_get_pid(const SpiceUsbDevi=
+ce *info)
+> =20
+>      g_return_val_if_fail(info !=3D NULL, 0);
+> =20
+> -    b_info =3D spice_usb_backend_device_get_info(info->bdev);
+> +    b_info =3D spice_usb_backend_device_get_info(info);
+>      return b_info->pid;
+>  }
+> =20
+> @@ -1536,7 +1523,7 @@ gboolean spice_usb_device_is_isochronous(const Spic=
+eUsbDevice *info)
+>  {
+>      g_return_val_if_fail(info !=3D NULL, 0);
+> =20
+> -    return spice_usb_backend_device_isoch(info->bdev);
+> +    return spice_usb_backend_device_isoch((SpiceUsbBackendDevice*) info);
+>  }
+> =20
+>  #ifdef G_OS_WIN32
+> @@ -1615,21 +1602,14 @@ void _usbdk_hider_update(SpiceUsbDeviceManager *m=
+anager)
+>  static SpiceUsbDevice *spice_usb_device_ref(SpiceUsbDevice *info)
+>  {
+>      g_return_val_if_fail(info !=3D NULL, NULL);
+> -    g_atomic_int_inc(&info->ref);
+> -    return info;
+> +    return spice_usb_backend_device_ref(info);
+>  }
+> =20
+>  static void spice_usb_device_unref(SpiceUsbDevice *info)
+>  {
+> -    gboolean ref_count_is_0;
+> -
+>      g_return_if_fail(info !=3D NULL);
+> =20
+> -    ref_count_is_0 =3D g_atomic_int_dec_and_test(&info->ref);
+> -    if (ref_count_is_0) {
+> -        spice_usb_backend_device_unref(info->bdev);
+> -        g_free(info);
+> -    }
+> +    spice_usb_backend_device_unref(info);
+>  }
+> =20
+>  static gboolean
+> @@ -1640,7 +1620,7 @@ spice_usb_manager_device_equal_bdev(SpiceUsbDeviceM=
+anager *manager,
+>      if ((info =3D=3D NULL) || (bdev =3D=3D NULL))
+>          return FALSE;
+> =20
+> -    return info->bdev =3D=3D bdev;
+> +    return info =3D=3D bdev;
+>  }
+> =20
+>  /*
+> @@ -1652,6 +1632,6 @@ spice_usb_device_manager_device_to_bdev(SpiceUsbDev=
+iceManager *self,
+>                                          SpiceUsbDevice *info)
+>  {
+>      /* Simply return a ref to the cached libdev */
+> -    return spice_usb_backend_device_ref(info->bdev);
+> +    return spice_usb_backend_device_ref(info);
+
+Some more cleanup can be done now, I think, but series looks
+fine.
+
+Acked-by: Victor Toso <victortoso@redhat.com>
+
+>  }
+>  #endif /* USE_USBREDIR */
+> --=20
+> 2.20.1
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--lsp5lariovkz74p6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl1s9AoACgkQl9kSPeN6
+SE9zUw//ZcpXI0dkjxnl6HqFIEYIzYEoXCc2v2E+CFsEqCCQ09KBP9CXISq8b8Mm
+DwR+0tbgr8i5ngaHEX+3jP3xhkM9wtEnnn+mv7/wfnJMjiD0Ec9/7sAUJUKHjCAd
+ALLDdkxWjxUyhC+CkOv91U+KFOzfI53g1UuNpKziwnrPczLbbpARDD/Zp1WnjY3r
+N0c6DZcvtEXfn6uDxHofqLxQ5iKtXwnGQEU4tLA6WtubfL2tI98KJB6ivZy5IESi
+XrRu+BbywsfwMPtE3NuIJ6MEG231jtu+qhWd0fTmg1VamlMfLEDmLv7qPBhcjXnv
+69ByrWrTHWI9H7fifa0VC9zL4FqLLhk18u2JSjSmBlqBmG/z/wTCSMYjoQakGiQI
+0L4C2U4W6HMANKXyzMzv4okGrV+fC61PNGpIgLjdEEwRrASCEJYQjo7n+EhN2/HE
+R5eL3TptmNQpxLOi9mQQQjBgSVA6BOWZVgYOCUp+/vG7mY6CY38x6/3/llqYdc+p
+bROJw2pU1bpyjIqvBExRmA9RtM+Bz+kjA/p0iyou4kQbuWqxA3ShwWEqribUFu1X
+vhpj4c41h9/nPF9Xp4voKVALvKO7JjhH8Bh1m9fMmLEzeZG+B0xICaBcUSszNu0O
+FT3DEk6MYSEab+Kk1/Er5gQLt6nv4aVv4VYwVWDgY1ekedTJNHs=
+=doFN
+-----END PGP SIGNATURE-----
+
+--lsp5lariovkz74p6--
+
+--===============0830425327==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0830425327==--
