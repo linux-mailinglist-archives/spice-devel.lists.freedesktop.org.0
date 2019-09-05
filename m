@@ -2,38 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B77AA9B18
-	for <lists+spice-devel@lfdr.de>; Thu,  5 Sep 2019 09:05:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE97DA9B70
+	for <lists+spice-devel@lfdr.de>; Thu,  5 Sep 2019 09:14:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DDFFD89D99;
-	Thu,  5 Sep 2019 07:05:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 26BCC89EA3;
+	Thu,  5 Sep 2019 07:14:12 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7DD1B89D8A;
- Thu,  5 Sep 2019 07:05:17 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A550F89E65;
+ Thu,  5 Sep 2019 07:14:09 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 1BFEFC05E740;
- Thu,  5 Sep 2019 07:05:17 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id D698A10567;
+ Thu,  5 Sep 2019 07:14:08 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-117-72.ams2.redhat.com
  [10.36.117.72])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6197D5C207;
- Thu,  5 Sep 2019 07:05:14 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2D87B60606;
+ Thu,  5 Sep 2019 07:14:08 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id B0CC231F00; Thu,  5 Sep 2019 09:05:10 +0200 (CEST)
+ id 4BA8531E76; Thu,  5 Sep 2019 09:14:07 +0200 (CEST)
+Date: Thu, 5 Sep 2019 09:14:07 +0200
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Date: Thu,  5 Sep 2019 09:05:07 +0200
-Message-Id: <20190905070509.22407-7-kraxel@redhat.com>
-In-Reply-To: <20190905070509.22407-1-kraxel@redhat.com>
-References: <20190905070509.22407-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+To: Jaak Ristioja <jaak@ristioja.ee>
+Message-ID: <20190905071407.47iywqcqomizs3yr@sirius.home.kraxel.org>
+References: <92785039-0941-4626-610b-f4e3d9613069@ristioja.ee>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <92785039-0941-4626-610b-f4e3d9613069@ristioja.ee>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Thu, 05 Sep 2019 07:05:17 +0000 (UTC)
-Subject: [Spice-devel] [PATCH 6/8] drm/qxl: switch to gem vma offset manager
+ (mx1.redhat.com [10.5.110.25]); Thu, 05 Sep 2019 07:14:09 +0000 (UTC)
+Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -45,34 +48,21 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
  Dave Airlie <airlied@redhat.com>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-UGFzcyBnZW0gdm1hX29mZnNldF9tYW5hZ2VyIHRvIHR0bV9ib19kZXZpY2VfaW5pdCgpLCBzbyB0
-dG0gdXNlcyBpdAppbnN0ZWFkIG9mIGl0cyBvd24gZW1iZWRkZWQgc3RydWN0LiAgVGhpcyBtYWtl
-cyBzb21lIGdlbSBmdW5jdGlvbnMKKHNwZWNpZmljYWxseSBkcm1fZ2VtX29iamVjdF9sb29rdXAp
-IHdvcmsgb24gdHRtIG9iamVjdHMuCgpTaWduZWQtb2ZmLWJ5OiBHZXJkIEhvZmZtYW5uIDxrcmF4
-ZWxAcmVkaGF0LmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF90dG0uYyB8IDIgKy0K
-IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdp
-dCBhL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX3R0bS5jIGIvZHJpdmVycy9ncHUvZHJtL3F4bC9x
-eGxfdHRtLmMKaW5kZXggNjlkYTBlZWE2ZTRjLi5jYmM2YzJiYTg2MzAgMTAwNjQ0Ci0tLSBhL2Ry
-aXZlcnMvZ3B1L2RybS9xeGwvcXhsX3R0bS5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhs
-X3R0bS5jCkBAIC0zMjUsNyArMzI1LDcgQEAgaW50IHF4bF90dG1faW5pdChzdHJ1Y3QgcXhsX2Rl
-dmljZSAqcWRldikKIAlyID0gdHRtX2JvX2RldmljZV9pbml0KCZxZGV2LT5tbWFuLmJkZXYsCiAJ
-CQkgICAgICAgJnF4bF9ib19kcml2ZXIsCiAJCQkgICAgICAgcWRldi0+ZGRldi5hbm9uX2lub2Rl
-LT5pX21hcHBpbmcsCi0JCQkgICAgICAgTlVMTCwKKwkJCSAgICAgICBxZGV2LT5kZGV2LnZtYV9v
-ZmZzZXRfbWFuYWdlciwKIAkJCSAgICAgICBmYWxzZSk7CiAJaWYgKHIpIHsKIAkJRFJNX0VSUk9S
-KCJmYWlsZWQgaW5pdGlhbGl6aW5nIGJ1ZmZlciBvYmplY3QgZHJpdmVyKCVkKS5cbiIsIHIpOwot
-LSAKMi4xOC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2Ut
-ZGV2ZWw=
+T24gVHVlLCBBdWcgMDYsIDIwMTkgYXQgMDk6MDA6MTBQTSArMDMwMCwgSmFhayBSaXN0aW9qYSB3
+cm90ZToKPiBIZWxsbyEKPiAKPiBJJ20gd3JpdGluZyB0byByZXBvcnQgYSBjcmFzaCBpbiB0aGUg
+UVhMIC8gRFJNIGNvZGUgaW4gdGhlIExpbnV4IGtlcm5lbC4KPiBJIG9yaWdpbmFsbHkgZmlsZWQg
+dGhlIGlzc3VlIG9uIExhdW5jaFBhZCBhbmQgbW9yZSBkZXRhaWxzIGNhbiBiZSBmb3VuZAo+IHRo
+ZXJlLCBhbHRob3VnaCBJIGRvdWJ0IHdoZXRoZXIgdGhlc2UgZGV0YWlscyBhcmUgdXNlZnVsLgoK
+QW55IGNoYW5nZSB3aXRoIGtlcm5lbCA1LjMtcmM3ID8KCmNoZWVycywKICBHZXJkCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWls
+aW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
