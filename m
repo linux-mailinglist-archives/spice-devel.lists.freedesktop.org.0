@@ -1,41 +1,34 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF9D1AD7AA
-	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2019 13:11:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9589BAD949
+	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2019 14:42:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CCE0F89236;
-	Mon,  9 Sep 2019 11:11:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2831589A1F;
+	Mon,  9 Sep 2019 12:42:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF3B989236
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 11:11:13 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 3F3E39B2D3
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 11:11:13 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.222])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DF0A35D9DC;
- Mon,  9 Sep 2019 11:11:12 +0000 (UTC)
-Date: Mon, 9 Sep 2019 13:11:12 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190909111112.z2sqlubnpwbjxitq@wingsuit>
-References: <20190909102949.17504-1-victortoso@redhat.com>
- <20190909102949.17504-2-victortoso@redhat.com>
- <1994863068.11125669.1568025957763.JavaMail.zimbra@redhat.com>
+X-Greylist: delayed 324 seconds by postgrey-1.36 at gabe;
+ Mon, 09 Sep 2019 12:28:04 UTC
+Received: from mail3-165.sinamail.sina.com.cn (mail3-165.sinamail.sina.com.cn
+ [202.108.3.165])
+ by gabe.freedesktop.org (Postfix) with SMTP id E5ADB8991A
+ for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 12:28:03 +0000 (UTC)
+Received: from unknown (HELO localhost.localdomain)([61.148.244.178])
+ by sina.com with ESMTP
+ id 5D7641CB0002754D; Mon, 9 Sep 2019 20:13:02 +0800 (CST)
+X-Sender: hdanton@sina.com
+X-Auth-ID: hdanton@sina.com
+X-SMAIL-MID: 314662630154
+From: Hillf Danton <hdanton@sina.com>
+To: Gerd Hoffmann <kraxel@redhat.com>,
+	Jaak Ristioja <jaak@ristioja.ee>
+Date: Mon,  9 Sep 2019 20:12:50 +0800
+Message-Id: <20190909121250.11176-1-hdanton@sina.com>
 MIME-Version: 1.0
-In-Reply-To: <1994863068.11125669.1568025957763.JavaMail.zimbra@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.39]); Mon, 09 Sep 2019 11:11:13 +0000 (UTC)
-Subject: Re: [Spice-devel] [spice-gtk v2 1/3] session: initialize gstreamer
- once
+X-Mailman-Approved-At: Mon, 09 Sep 2019 12:42:44 +0000
+Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,185 +40,40 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============2099343195=="
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============2099343195==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="q2tbwvgpbp4zvyut"
-Content-Disposition: inline
-
-
---q2tbwvgpbp4zvyut
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Mon, Sep 09, 2019 at 06:45:57AM -0400, Frediano Ziglio wrote:
-> >=20
-> > From: Victor Toso <me@victortoso.com>
-> >=20
-> > GStreamer is required since v0.36 with 83ab7ca "build-sys: drop
-> > gstvideo option, make it required" in 2019-01-15 by Marc-Andr=E9 Lureau
-> > <marcandre.lureau@redhat.com>
-> >=20
-> > Both channel-display-gst.c and spice-gstaudio.c have to double check
-> > that GStreamer was initialized with gst_init_check() but this can be
-> > done once per SpiceSession and make those code path a little bit
-> > lighter with simpler check gst_is_initialized()
-> >=20
->=20
-> Calling gstvideo_init or gst_is_initialized is not much difference,
-> potentially calling gstvideo_init is faster as the function is in
-> the same module (you can cache initialization done).
-> This series seems to reuse code to initialize GStreamer but this
-> can simply be achieved calling gstvideo_init from the audio side
-> (or write a better initialization function).
-> This patch increase SpiceSession code for not great reasons,
-> SpiceSession does nothing direct with Gstreamer.
-
-Well, the initial idea really was to init + deinit so it might be
-lacking purpose now. So we can drop to avoid not important
-discussions.
-
-> > This first patch does initialize a SpiceSession on it's init. As the
-> > current code path does not call gst_deinit(), we are not doing it so
-> > here as well but it can be later optimized to be sure resources are
-> > cleaned correctly on GStreamer side.
-> >=20
-> This sentence is wrong. We can't do it.
-
-Leftover from v1, thanks.
-
-> > Signed-off-by: Victor Toso <victortoso@redhat.com>
-> > ---
-> >  src/spice-session.c | 22 ++++++++++++++++++++++
-> >  1 file changed, 22 insertions(+)
-> >=20
-> > diff --git a/src/spice-session.c b/src/spice-session.c
-> > index d0d9e54..2f44816 100644
-> > --- a/src/spice-session.c
-> > +++ b/src/spice-session.c
-> > @@ -21,6 +21,7 @@
-> >  #include <gio/gnetworking.h>
-> >  #include <gio/gio.h>
-> >  #include <glib.h>
-> > +#include <gst/gst.h>
-> >  #ifdef G_OS_UNIX
-> >  #include <gio/gunixsocketaddress.h>
-> >  #endif
-> > @@ -234,6 +235,7 @@
-> > G_STATIC_ASSERT(G_N_ELEMENTS(_spice_image_compress_values) =3D=3D
-> > SPICE_IMAGE_COMPRE
-> > =20
-> >  static const gchar* spice_session_get_shared_dir(SpiceSession *session=
-);
-> >  static void spice_session_set_shared_dir(SpiceSession *session, const =
-gchar
-> >  *dir);
-> > +static void spice_session_enable_gstreamer(SpiceSession *session);
-> > =20
-> >  GType
-> >  spice_image_compress_get_type (void)
-> > @@ -295,6 +297,7 @@ static void spice_session_init(SpiceSession *sessio=
-n)
-> >      s->images =3D cache_image_new((GDestroyNotify)pixman_image_unref);
-> >      s->glz_window =3D glz_decoder_window_new();
-> >      update_proxy(session, NULL);
-> > +    spice_session_enable_gstreamer(session);
-> >  }
-> > =20
-> >  static void
-> > @@ -2865,3 +2868,22 @@ gboolean
-> > spice_session_set_migration_session(SpiceSession *session, SpiceSession
-> > =20
-> >      return TRUE;
-> >  }
-> > +
-> > +static void
-> > +spice_session_enable_gstreamer(SpiceSession *session)
-> > +{
-> > +    g_return_if_fail(SPICE_IS_SESSION(session));
->=20
-> session argument is used only here,
-
-Leftover from v1, thanks.
-
-> to me it seems this utility function is more gstreamer related
-> then SpiceSession related. The fact that you have to include
-> gstreamer header just for that utility confirms to me that this
-> utility should be in another, more gstreamer related, source
-> file.
-
-Not sure what would be the issue with initializing GStreamer on
-Session init and everywhere else, that is, channel-display-gst
-and spice-gstaudio, we only check that gst functions can be used.
-Having multiple/different channels to potentially init gstreamer
-seems weirder than initialize in the session object. Another way
-to put it, gst_init_check() should have argc/argv arguments for
-command line parsing and giving that to spice-display-gst and
-spice-gstaudio  (...)
-
-Maybe a spice_client_init() would make sense but I don't feel
-this changes are really a requirement for a new API so, again,
-just dropping it.
-
-> > +    if (gst_is_initialized()) {
-> > +        /* Either called by spice client or in previous SpiceSession */
-> > +        return;
-> > +    }
-> > +
-> > +    /* TODO: Provide argc and argv to GStreamer for command line filte=
-ring
-> > on
-> > +     * spice-gtk level, otherwise only applications that run gst_init()
-> > first
-> > +     * would filter command line options */
-> > +    GError *err =3D NULL;
-> > +    if (!gst_init_check(NULL, NULL, &err)) {
-> > +        spice_warning("Disabling GStreamer video support: %s",
-> > err->message);
-> > +        g_clear_error(&err);
-> > +    }
-> > +}
->=20
-> Frediano
-
---q2tbwvgpbp4zvyut
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl12M1AACgkQl9kSPeN6
-SE/n6A//cMsPcOHfIYXO1AxWNarUvnHRLYXTn1SFhuEYnENCux8WcWbTRNrF3Zw0
-i5cZpAWNk1ix5OgURYxpijcVakMwBsTZYaIM/fgrTXA3EY/kFPLgHOvGgF1pZ9Y9
-2L4ka+TR42VGsGnggZ6SUK2prglIj2FK93km312tjaJcj8mzBWmrdvqzJ9+xbp8d
-0gzeRQYEF7DxPxVlerl/mCSngdD+L4jYDaAl1HM++O2yffE9Av9rnjHDieUzCqvZ
-WeZNLJz3fSvGC7Y7wceV27CsF6odKfjJbCXQmB6AQAMXbJBRO4+xUo79O8tBj26p
-cWnbLN5gN64QIP3Y4sNEmrNp9VkHxb4wmBquI+ZJfF2DBL3myer2ZlWoGsCyG87V
-9jLgZuVZNuqtIfIn2SA2ZXHsm3tLNWHN1YD/RKYsLF4B9H1C4FwUpv0iiiMK96Cx
-QKhNcrqlSTNgBh9uCfFIONtc/qU2GHOdQOQHPEpq3gJIQ7sPkZLUiGGvTA7NZ6Gh
-DaHqle5t1dWD3N82pNtuD7B8FkvwaoZSwOprDa/zSTXmCebMPRB37vITc+XHSppn
-MoXBv89Ag3pOjKRUm+9SYcmb9IIIO4yIoqLqamtgQQX2b7U4DaL9/XTU+bIV8ZIX
-W7fcvrKvVBs+LGp06RgbusG7zxaq7vYdZPPhpqZiRVD31q3fOWI=
-=F8+U
------END PGP SIGNATURE-----
-
---q2tbwvgpbp4zvyut--
-
---===============2099343195==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============2099343195==--
+Ck9uIE1vbiwgOSBTZXAgMjAxOSBmcm9tIEdlcmQgSG9mZm1hbm4gPGtyYXhlbEByZWRoYXQuY29t
+Pgo+Cj4gSG1tLCBJIHRoaW5rIHRoZSBwYXRjaCBpcyB3cm9uZy4KCkhtbS4uLml0IHNob3VsZCBo
+YXZlIGFkZGVkIGNoYW5nZSBvbmx5IGluIHRoZSBlcnJvciBwYXRoLCBsZWF2aW5nIGxvY2tzCmZv
+ciBkcml2ZXJzIHRvIHJlbGVhc2UgaWYgam9iIGlzIGRvbmUgd2l0aCBubyBlcnJvciByZXR1cm5l
+ZC4KCj4gQXMgZmFyIEkga25vdyBpdCBpcyB0aGUgcXhsIGRyaXZlcnMncwo+IGpvYiB0byBjYWxs
+IHR0bV9ldV9iYWNrb2ZmX3Jlc2VydmF0aW9uKCkuCgpMaWtlIG90aGVyIGRyaXZlcnMsIHF4bCBp
+cyBjdXJyZW50bHkgZG9pbmcgdGhlIHJpZ2h0LgoKPiBEb2luZyB0aGF0IGF1dG9tYXRpY2FsbHkg
+aW4KPiB0dG0gd2lsbCBtb3N0IGxpa2VseSBicmVhayBvdGhlciB0dG0gdXNlcnMuCj4KWW91IGFy
+ZSByaWdodC4gVGhleSBhcmUgcmVzcG9uc2libGUgZm9yIGRvaW5nIGJhY2tvZmYgaWYgZXJyb3Ig
+aGFwcGVucwp3aGlsZSB2YWxpZGF0aW5nIGJ1ZmZlcnMgYWZ0ZXJ3YXJkcy4KCgotLS0gYS9kcml2
+ZXJzL2dwdS9kcm0vdHRtL3R0bV9leGVjYnVmX3V0aWwuYworKysgYi9kcml2ZXJzL2dwdS9kcm0v
+dHRtL3R0bV9leGVjYnVmX3V0aWwuYwpAQCAtMTExLDggKzExMSwxMCBAQCBpbnQgdHRtX2V1X3Jl
+c2VydmVfYnVmZmVycyhzdHJ1Y3Qgd3dfYWNxCiAKIAlsaXN0X2Zvcl9lYWNoX2VudHJ5KGVudHJ5
+LCBsaXN0LCBoZWFkKSB7CiAJCXN0cnVjdCB0dG1fYnVmZmVyX29iamVjdCAqYm8gPSBlbnRyeS0+
+Ym87CisJCWJvb2wgbG9ja29uOwogCiAJCXJldCA9IF9fdHRtX2JvX3Jlc2VydmUoYm8sIGludHIs
+ICh0aWNrZXQgPT0gTlVMTCksIHRpY2tldCk7CisJCWxvY2tvbiA9ICFyZXQ7CiAJCWlmICghcmV0
+ICYmIHVubGlrZWx5KGF0b21pY19yZWFkKCZiby0+Y3B1X3dyaXRlcnMpID4gMCkpIHsKIAkJCXJl
+c2VydmF0aW9uX29iamVjdF91bmxvY2soYm8tPnJlc3YpOwogCkBAIC0xNTEsNiArMTUzLDcgQEAg
+aW50IHR0bV9ldV9yZXNlcnZlX2J1ZmZlcnMoc3RydWN0IHd3X2FjcQogCQkJCXJldCA9IDA7CiAJ
+CQl9CiAJCX0KKwkJbG9ja29uID0gIXJldDsKIAogCQlpZiAoIXJldCAmJiBlbnRyeS0+bnVtX3No
+YXJlZCkKIAkJCXJldCA9IHJlc2VydmF0aW9uX29iamVjdF9yZXNlcnZlX3NoYXJlZChiby0+cmVz
+diwKQEAgLTE2Myw2ICsxNjYsOCBAQCBpbnQgdHRtX2V1X3Jlc2VydmVfYnVmZmVycyhzdHJ1Y3Qg
+d3dfYWNxCiAJCQkJd3dfYWNxdWlyZV9kb25lKHRpY2tldCk7CiAJCQkJd3dfYWNxdWlyZV9maW5p
+KHRpY2tldCk7CiAJCQl9CisJCQlpZiAobG9ja29uKQorCQkJCXR0bV9ldV9iYWNrb2ZmX3Jlc2Vy
+dmF0aW9uX3JldmVyc2UobGlzdCwgZW50cnkpOwogCQkJcmV0dXJuIHJldDsKIAkJfQogCi0tCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZl
+bCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8v
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
