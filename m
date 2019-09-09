@@ -2,41 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2769AD2D9
-	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2019 07:52:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEB60AD3ED
+	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2019 09:32:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 674DA89498;
-	Mon,  9 Sep 2019 05:52:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F12D898C6;
+	Mon,  9 Sep 2019 07:32:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 68A3789498;
- Mon,  9 Sep 2019 05:52:22 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 13F30898C6
+ for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 07:32:36 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id B5F7330A00C5;
- Mon,  9 Sep 2019 05:52:21 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-117-59.ams2.redhat.com
- [10.36.117.59])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BD9E05D6A7;
- Mon,  9 Sep 2019 05:52:20 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id B9D2992F; Mon,  9 Sep 2019 07:52:19 +0200 (CEST)
-Date: Mon, 9 Sep 2019 07:52:19 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Hillf Danton <hdanton@sina.com>
-Message-ID: <20190909055219.q44k27cczwkuio3z@sirius.home.kraxel.org>
-References: <20190906055322.17900-1-hdanton@sina.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 98F5930A00CF
+ for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 07:32:35 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.222])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 417BF19C78;
+ Mon,  9 Sep 2019 07:32:35 +0000 (UTC)
+Date: Mon, 9 Sep 2019 09:32:34 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190909073234.ovafiyaaygjiq6bf@wingsuit>
+References: <20190906152704.5515-1-fziglio@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190906055322.17900-1-hdanton@sina.com>
+In-Reply-To: <20190906152704.5515-1-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.43]); Mon, 09 Sep 2019 05:52:21 +0000 (UTC)
-Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
+ (mx1.redhat.com [10.5.110.43]); Mon, 09 Sep 2019 07:32:35 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-gtk] spice-session: Fix SWAP_STR
+ macro
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,47 +45,99 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
- Jaak Ristioja <jaak@ristioja.ee>, Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0348234404=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-ICBIaSwKCi0tdmVyYm9zZSBwbGVhc2UuICBEbyB5b3Ugc2VlIHRoZSBzYW1lIGhhbmc/ICBEb2Vz
-IHRoZSBwYXRjaCBmaXggaXQ/Cgo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2V4ZWNi
-dWZfdXRpbC5jCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1fZXhlY2J1Zl91dGlsLmMK
-PiBAQCAtOTcsOCArOTcsOSBAQCBpbnQgdHRtX2V1X3Jlc2VydmVfYnVmZmVycyhzdHJ1Y3Qgd3df
-YWNxCj4gIAkJCSAgIHN0cnVjdCBsaXN0X2hlYWQgKmR1cHMsIGJvb2wgZGVsX2xydSkKWyAuLi4g
-XQoKPiArCQkJaWYgKGxvY2tlZCkKPiArCQkJCXR0bV9ldV9iYWNrb2ZmX3Jlc2VydmF0aW9uX3Jl
-dmVyc2UobGlzdCwgZW50cnkpOwoKSG1tLCBJIHRoaW5rIHRoZSBwYXRjaCBpcyB3cm9uZy4gIEFz
-IGZhciBJIGtub3cgaXQgaXMgdGhlIHF4bCBkcml2ZXJzJ3MKam9iIHRvIGNhbGwgdHRtX2V1X2Jh
-Y2tvZmZfcmVzZXJ2YXRpb24oKS4gIERvaW5nIHRoYXQgYXV0b21hdGljYWxseSBpbgp0dG0gd2ls
-bCBtb3N0IGxpa2VseSBicmVhayBvdGhlciB0dG0gdXNlcnMuCgpTbyBJIGd1ZXNzIHRoZSBjYWxs
-IGlzIG1pc3NpbmcgaW4gdGhlIHF4bCBkcml2ZXIgc29tZXdoZXJlLCBtb3N0IGxpa2VseQppbiBz
-b21lIGVycm9yIGhhbmRsaW5nIGNvZGUgcGF0aCBnaXZlbiB0aGF0IHRoaXMgYnVnIGlzIGEgcmVs
-YXRpdmVseQpyYXJlIGV2ZW50LgoKVGhlcmUgaXMgb25seSBhIHNpbmdsZSB0dG1fZXVfcmVzZXJ2
-ZV9idWZmZXJzKCkgY2FsbCBpbiBxeGwuClNvIGhvdyBhYm91dCB0aGlzPwoKLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0gY3V0IGhlcmUgLS0tLS0tLS0tLS0tLS0tLS0tLS0KZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvZ3B1L2RybS9xeGwvcXhsX3JlbGVhc2UuYyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhs
-X3JlbGVhc2UuYwppbmRleCAzMTIyMTZjYWVlYTIuLjJmOTk1MGZhMGI4ZCAxMDA2NDQKLS0tIGEv
-ZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfcmVsZWFzZS5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9x
-eGwvcXhsX3JlbGVhc2UuYwpAQCAtMjYyLDE4ICsyNjIsMjAgQEAgaW50IHF4bF9yZWxlYXNlX3Jl
-c2VydmVfbGlzdChzdHJ1Y3QgcXhsX3JlbGVhc2UgKnJlbGVhc2UsIGJvb2wgbm9faW50cikKIAly
-ZXQgPSB0dG1fZXVfcmVzZXJ2ZV9idWZmZXJzKCZyZWxlYXNlLT50aWNrZXQsICZyZWxlYXNlLT5i
-b3MsCiAJCQkJICAgICAhbm9faW50ciwgTlVMTCwgdHJ1ZSk7CiAJaWYgKHJldCkKLQkJcmV0dXJu
-IHJldDsKKwkJZ290byBlcnJfYmFja29mZjsKIAogCWxpc3RfZm9yX2VhY2hfZW50cnkoZW50cnks
-ICZyZWxlYXNlLT5ib3MsIHR2LmhlYWQpIHsKIAkJc3RydWN0IHF4bF9ibyAqYm8gPSB0b19xeGxf
-Ym8oZW50cnktPnR2LmJvKTsKIAogCQlyZXQgPSBxeGxfcmVsZWFzZV92YWxpZGF0ZV9ibyhibyk7
-Ci0JCWlmIChyZXQpIHsKLQkJCXR0bV9ldV9iYWNrb2ZmX3Jlc2VydmF0aW9uKCZyZWxlYXNlLT50
-aWNrZXQsICZyZWxlYXNlLT5ib3MpOwotCQkJcmV0dXJuIHJldDsKLQkJfQorCQlpZiAocmV0KQor
-CQkJZ290byBlcnJfYmFja29mZjsKIAl9CiAJcmV0dXJuIDA7CisKK2Vycl9iYWNrb2ZmOgorCXR0
-bV9ldV9iYWNrb2ZmX3Jlc2VydmF0aW9uKCZyZWxlYXNlLT50aWNrZXQsICZyZWxlYXNlLT5ib3Mp
-OworCXJldHVybiByZXQ7CiB9CiAKIHZvaWQgcXhsX3JlbGVhc2VfYmFja29mZl9yZXNlcnZlX2xp
-c3Qoc3RydWN0IHF4bF9yZWxlYXNlICpyZWxlYXNlKQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSBj
-dXQgaGVyZSAtLS0tLS0tLS0tLS0tLS0tLS0tLQoKY2hlZXJzLAogIEdlcmQKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcg
-bGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVl
-ZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+
+--===============0348234404==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="jd7lpk3yjanagne4"
+Content-Disposition: inline
+
+
+--jd7lpk3yjanagne4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Sep 06, 2019 at 04:27:04PM +0100, Frediano Ziglio wrote:
+> Really swap "x" and "y", not temporary copies.
+> The issue was introduced by 01c6343 "Use macro to swap
+> data in spice_session_start_migrating()".
+>=20
+> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+> ---
+>  src/spice-session.c | 9 +++------
+>  1 file changed, 3 insertions(+), 6 deletions(-)
+>=20
+> Removed RFC.
+> Tested, the original session is updated with the new values
+> after all connections are established.
+> As usually there are no other connection after these the
+> problem is not noted.
+Acked-by: Victor Toso <victortoso@redhat.com>
+>=20
+> diff --git a/src/spice-session.c b/src/spice-session.c
+> index 04ba124a..d0d9e541 100644
+> --- a/src/spice-session.c
+> +++ b/src/spice-session.c
+> @@ -1742,12 +1742,9 @@ void spice_session_switching_disconnect(SpiceSessi=
+on *self)
+>  }
+> =20
+>  #define SWAP_STR(x, y) G_STMT_START { \
+> -    const gchar *tmp;                 \
+> -    const gchar *a =3D x;               \
+> -    const gchar *b =3D y;               \
+> -    tmp =3D a;                          \
+> -    a =3D b;                            \
+> -    b =3D tmp;                          \
+> +    gchar *tmp =3D x;                   \
+> +    x =3D y;                            \
+> +    y =3D tmp;                          \
+>  } G_STMT_END
+> =20
+>  G_GNUC_INTERNAL
+> --=20
+> 2.20.1
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--jd7lpk3yjanagne4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl12ABIACgkQl9kSPeN6
+SE8C7g/+LThuzzPPKYjwk5zgVJzW0lbsImMh3lgqk2NywXUSti8Br0Ez19ir3xJh
+n3X5ox62uL0upMxygbfC1bCa9XMhuh5h2W9Lf8ka7ggKoQXyXdgKFt+up6I3T6l3
+UrUKm+qNhANSoLPpVzuLNSsqEmA/9gjgJGpYE9yMVcCzWhzXaipOEhuJ1v7UXX9d
+15FR6SeWzKb6/zUY76Zc/hZxgB30LG9ynwiDkJa5xkU8jav/MeoGpxTYPe8BhuNr
+ggozVij0Z7hOjSz2a/4pTWC18fg7THNFd0CVtDZap5OIk/Hx3yaT84JrEU1lW5OQ
+bxKP/jfnOIcheqEVnZAbqF7tYSHLVmIjArzZQPvKijZk/qFMpdfYBCSuhPKmHHj8
+ZgCafab3WWQp7MQOwH3vUT+80LXCjDajQopayIkocW9iTqFJDzkWuXWq1J8J8JoZ
+s8M4Sqct/B2uopYxIHzLBC6EzLbJeiEmvFr6A1CjP8vZeRzHmFBvFl3ZLtpiKVJW
+6lsbv2MRCBTkQP9kuc92GQ15rogol55qZye5HUaDbYYQRoXD/hRD1d5MncB0CB/k
+0Wv9wpFoSGekWnY/1HEiJHuebyIpdeXSNNItTe50J7l8iBUL4t7QXlonFoXX98X9
+GK224yia3fuV+B83Yiar7UqxybJJJZmFFBR17/UOby+M4PI1LAo=
+=sc6K
+-----END PGP SIGNATURE-----
+
+--jd7lpk3yjanagne4--
+
+--===============0348234404==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0348234404==--
