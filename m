@@ -1,35 +1,41 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D7D2AD4D1
-	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2019 10:23:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DE30AD52D
+	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2019 10:57:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0303E8995F;
-	Mon,  9 Sep 2019 08:23:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 132858982A;
+	Mon,  9 Sep 2019 08:57:22 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from r3-25.sinamail.sina.com.cn (r3-25.sinamail.sina.com.cn
- [202.108.3.25])
- by gabe.freedesktop.org (Postfix) with SMTP id F339C897EE
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 07:14:25 +0000 (UTC)
-Received: from unknown (HELO [IPv6:::ffff:172.20.10.2])([61.148.244.178])
- by sina.com with ESMTP
- id 5D75FBAB0002BC5A; Mon, 9 Sep 2019 15:13:48 +0800 (CST)
-X-Sender: hdanton@sina.com
-X-Auth-ID: hdanton@sina.com
-X-SMAIL-MID: 92381354923368
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8F1D08982A
+ for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 08:57:21 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 3C61440D89
+ for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 08:57:21 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.222])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DAD9F5C1D8;
+ Mon,  9 Sep 2019 08:57:20 +0000 (UTC)
+Date: Mon, 9 Sep 2019 10:57:20 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Snir Sheriber <ssheribe@redhat.com>
+Message-ID: <20190909085720.a5x4xkwncyqiyaax@wingsuit>
+References: <20190902160449.19589-1-victortoso@redhat.com>
+ <20190902160449.19589-7-victortoso@redhat.com>
+ <27429cfa-df7c-6e32-2784-cd243b0cd1bd@redhat.com>
 MIME-Version: 1.0
-To: Gerd Hoffmann <kraxel@redhat.com>
-From: Hillf Danton <hdanton@sina.com>
-Date: Mon, 9 Sep 2019 15:13:48 +0800
-Importance: normal
-X-Priority: 3
-In-Reply-To: <20190909055219.q44k27cczwkuio3z@sirius.home.kraxel.org>
-References: <20190906055322.17900-1-hdanton@sina.com>
- <20190909055219.q44k27cczwkuio3z@sirius.home.kraxel.org>
-X-Mailman-Approved-At: Mon, 09 Sep 2019 08:23:11 +0000
-Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
+In-Reply-To: <27429cfa-df7c-6e32-2784-cd243b0cd1bd@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.27]); Mon, 09 Sep 2019 08:57:21 +0000 (UTC)
+Subject: Re: [Spice-devel] [spice-gtk v1 6/6] RFC: test: session: gstreamer
+ init by us or client
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -41,238 +47,177 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- Jaak Ristioja <jaak@ristioja.ee>, Dave Airlie <airlied@redhat.com>
-Content-Type: multipart/mixed; boundary="===============0291912722=="
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0317254148=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
-Message-Id: <20190909082313.0303E8995F@gabe.freedesktop.org>
 
 
---===============0291912722==
-Content-Type: multipart/alternative;
-	boundary="_AD05A452-BEFD-47CB-8E14-119A02D5DF11_"
+--===============0317254148==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="dngpeth7l7i5tkgn"
+Content-Disposition: inline
 
 
---_AD05A452-BEFD-47CB-8E14-119A02D5DF11_
+--dngpeth7l7i5tkgn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
 
 Hi,
 
-On Mon, 9 Sep 2019 from Gerd Hoffmann <kraxel@redhat.com>
->
-> Hmm, I think the patch is wrong.  As far I know it is the qxl drivers's
-> job to call ttm_eu_backoff_reservation().  Doing that automatically in
-> ttm will most likely break other ttm users.
->
-Perhaps.
+On Sun, Sep 08, 2019 at 04:40:46PM +0300, Snir Sheriber wrote:
+> HI,
+>=20
+> On 9/2/19 7:04 PM, Victor Toso wrote:
+> > From: Victor Toso <me@victortoso.com>
+> >=20
+> > Does not work properly just because gst_is_initialized() checks if
+> > gst_init() or gst_check_init() was ever called but it does not
+> > consider if gst_deinit() was called too. I'm sending this RFC to check
+> > if should be added or wait till feedback on upstream about the API,
+> > that is, I have a downstream patch that gst_is_initialized() would
+> > return FALSE if gst_deinit() was called ...
+>=20
+>=20
+> Maybe should also be mentioned as comment in the code
+>=20
+>=20
+> >=20
+> > Signed-off-by: Victor Toso <victortoso@redhat.com>
+> > ---
+> >   tests/session.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
+> >   1 file changed, 49 insertions(+)
+> >=20
+> > diff --git a/tests/session.c b/tests/session.c
+> > index 8208016..8e1814e 100644
+> > --- a/tests/session.c
+> > +++ b/tests/session.c
+> > @@ -1,3 +1,6 @@
+> > +#include <stdbool.h>
+> > +#include <gst/gst.h>
+> > +
+> >   #include <spice-client.h>
+> >   typedef struct {
+> > @@ -333,6 +336,50 @@ static void test_session_uri_unix_good(void)
+> >       test_session_uri_good(tests, G_N_ELEMENTS(tests));
+> >   }
+> > +static void session_init_test_on_gst(bool should_init)
+> > +{
+> > +
+> > +    if (should_init) {
+> > +        GError *err =3D NULL;
+> > +        gst_init_check(NULL, NULL, &err);
+> > +        g_assert_no_error(err);
+> > +        g_assert_true(gst_is_initialized());
+> > +    } else if (gst_is_initialized()) {
+>=20
+>=20
+> Is this likely to happen?
+>=20
+>=20
+> > +#if 0
+> > +        /* Not working for now, gst_is_initialized() return TRUE also =
+if
+> > +         * gst_deinit() was called */
+> > +        gst_deinit();
+>=20
+> also documentation of gst_deinit mention:
+>=20
+> "After this call GStreamer (including this method) should not be used
+> anymore."
 
->So I guess the call is missing in the qxl driver somewhere, most likely
->in some error handling code path given that this bug is a relatively
->rare event.
->
->There is only a single ttm_eu_reserve_buffers() call in qxl.
->So how about this?
->
-No preference in either way if it is a right cure.
+Well, I was wondering if for testing purposes that could be fine.
 
-BTW a quick peep at the mainline tree shows not every
-ttm_eu_reserve_buffers() pairs with ttm_eu_backoff_reservation()
-without qxl being taken in account.
+> > +        g_assert_false(gst_is_initialized());
+> > +#endif
+> > +    }
+> > +
+> > +    SpiceSession *session =3D spice_session_new();
+> > +    g_assert_true(gst_is_initialized());
+> > +    g_object_unref(session);
+> > +    if (should_init) {
+> > +        g_assert_true(gst_is_initialized());
+> > +        gst_deinit();
+> > +#if 0
+> > +        g_assert_false(gst_is_initialized());
+> > +#endif
+> > +    } else {
+> > +#if 0
+> > +        /* Even if gst_deinit() is called, returns TRUE below */
+> > +        g_assert_false(gst_is_initialized());
+> > +#endif
+> > +    }
+> > +}
+> > +
+> > +static void test_session_gst_init_by_us(void)
+> > +{
+> > +    session_init_test_on_gst(true);
+> > +}
+> > +
+> > +static void test_session_gst_init_by_client(void)
+> > +{
+> > +    session_init_test_on_gst(false);
+> > +}
+> > +
+>=20
+> I find it a bit confusing, what about init_by_session and init_by_test
+> (or maybe init_externally and internally)
 
-Hillf
+Sure, I'll always take advice in renaming functions :)
 
---_AD05A452-BEFD-47CB-8E14-119A02D5DF11_
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset="utf-8"
+> Oh, and the rest of the patches i didn't comment on looks good
+> to me :)
 
-<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" xmlns:w=3D"urn:sc=
-hemas-microsoft-com:office:word" xmlns:m=3D"http://schemas.microsoft.com/of=
-fice/2004/12/omml" xmlns=3D"http://www.w3.org/TR/REC-html40"><head><meta ht=
-tp-equiv=3DContent-Type content=3D"text/html; charset=3Dutf-8"><meta name=
-=3DGenerator content=3D"Microsoft Word 15 (filtered medium)"><style><!--
-/* Font Definitions */
-@font-face
-	{font-family:Wingdings;
-	panose-1:5 0 0 0 0 0 0 0 0 0;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:DengXian;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:DengXian;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	text-align:justify;
-	text-justify:inter-ideograph;
-	font-size:10.5pt;
-	font-family:DengXian;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
-	{mso-style-priority:34;
-	margin:0cm;
-	margin-bottom:.0001pt;
-	text-align:justify;
-	text-justify:inter-ideograph;
-	text-indent:21.0pt;
-	font-size:10.5pt;
-	font-family:DengXian;}
-span.DefaultFontHxMailStyle
-	{mso-style-name:"Default Font HxMail Style";
-	font-family:DengXian;
-	color:windowtext;
-	font-weight:normal;
-	font-style:normal;
-	text-decoration:none none;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-/* Page Definitions */
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 90.0pt 72.0pt 90.0pt;}
-div.WordSection1
-	{page:WordSection1;}
-/* List Definitions */
-@list l0
-	{mso-list-id:1496729359;
-	mso-list-type:hybrid;
-	mso-list-template-ids:-1873276564 -1 67698691 67698693 67698689 67698691 6=
-7698693 67698689 67698691 67698693;}
-@list l0:level1
-	{mso-level-start-at:0;
-	mso-level-number-format:bullet;
-	mso-level-text:\F0D8;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:18.0pt;
-	text-indent:-18.0pt;
-	font-family:Wingdings;
-	mso-fareast-font-family:DengXian;
-	mso-bidi-font-family:"Times New Roman";}
-@list l0:level2
-	{mso-level-number-format:bullet;
-	mso-level-text:\F06E;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:42.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-@list l0:level3
-	{mso-level-number-format:bullet;
-	mso-level-text:\F075;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:63.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-@list l0:level4
-	{mso-level-number-format:bullet;
-	mso-level-text:\F06C;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:84.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-@list l0:level5
-	{mso-level-number-format:bullet;
-	mso-level-text:\F06E;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:105.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-@list l0:level6
-	{mso-level-number-format:bullet;
-	mso-level-text:\F075;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:126.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-@list l0:level7
-	{mso-level-number-format:bullet;
-	mso-level-text:\F06C;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:147.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-@list l0:level8
-	{mso-level-number-format:bullet;
-	mso-level-text:\F06E;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:168.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-@list l0:level9
-	{mso-level-number-format:bullet;
-	mso-level-text:\F075;
-	mso-level-tab-stop:none;
-	mso-level-number-position:left;
-	margin-left:189.0pt;
-	text-indent:-21.0pt;
-	font-family:Wingdings;}
-ol
-	{margin-bottom:0cm;}
-ul
-	{margin-bottom:0cm;}
---></style></head><body lang=3DZH-CN link=3Dblue vlink=3D"#954F72"><div cla=
-ss=3DWordSection1><p class=3DMsoNormal><span lang=3DEN-US>Hi,</span></p><p =
-class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p><p class=
-=3DMsoNormal><span lang=3DEN-US>On Mon, 9 Sep 2019 from Gerd Hoffmann &lt;k=
-raxel@redhat.com&gt;<o:p></o:p></span></p><p class=3DMsoNormal><span lang=
-=3DEN-US>&gt;<o:p>&nbsp;</o:p></span></p><p class=3DMsoNormal><span lang=3D=
-EN-US>&gt; Hmm, I think the patch is wrong.=C2=A0 As far I know it is the q=
-xl drivers's</span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt; job to =
-call ttm_eu_backoff_reservation().=C2=A0 Doing that automatically in</span>=
-</p><p class=3DMsoNormal><span lang=3DEN-US>&gt; ttm will most likely break=
- other ttm users.</span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt;<o:=
-p>&nbsp;</o:p></span></p><p class=3DMsoNormal><span lang=3DEN-US>Perhaps.</=
-span></p><p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></=
-p><p class=3DMsoNormal><span lang=3DEN-US>&gt;So I guess the call is missin=
-g in the qxl driver somewhere, most likely</span></p><p class=3DMsoNormal><=
-span lang=3DEN-US>&gt;in some error handling code path given that this bug =
-is a relatively</span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt;rare =
-event.</span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt;<o:p>&nbsp;</o=
-:p></span></p><p class=3DMsoNormal><span lang=3DEN-US>&gt;There is only a s=
-ingle ttm_eu_reserve_buffers() call in qxl.</span></p><p class=3DMsoNormal>=
-<span lang=3DEN-US>&gt;So how about this?</span></p><p class=3DMsoNormal><s=
-pan lang=3DEN-US>&gt;<o:p>&nbsp;</o:p></span></p><p class=3DMsoNormal><span=
- lang=3DEN-US>No preference in either way if it is a right cure.</span></p>=
-<p class=3DMsoNormal><span lang=3DEN-US><o:p>&nbsp;</o:p></span></p><p clas=
-s=3DMsoNormal><span lang=3DEN-US>BTW a quick peep at the mainline tree show=
-s not every</span></p><p class=3DMsoNormal><span lang=3DEN-US>ttm_eu_reserv=
-e_buffers() pairs with ttm_eu_backoff_reservation()</span></p><p class=3DMs=
-oNormal><span lang=3DEN-US>without qxl being taken in account.</span></p><p=
- class=3DMsoNormal><span class=3DDefaultFontHxMailStyle><span lang=3DEN-US>=
-<o:p>&nbsp;</o:p></span></span></p><p class=3DMsoNormal><span class=3DDefau=
-ltFontHxMailStyle><span lang=3DEN-US>Hillf<o:p></o:p></span></span></p></di=
-v></body></html>=
+Thanks!
 
---_AD05A452-BEFD-47CB-8E14-119A02D5DF11_--
+>=20
+> Snir.
+>=20
+>=20
+> >   int main(int argc, char* argv[])
+> >   {
+> >       g_test_init(&argc, &argv, NULL);
+> > @@ -341,6 +388,8 @@ int main(int argc, char* argv[])
+> >       g_test_add_func("/session/good-ipv4-uri", test_session_uri_ipv4_g=
+ood);
+> >       g_test_add_func("/session/good-ipv6-uri", test_session_uri_ipv6_g=
+ood);
+> >       g_test_add_func("/session/good-unix", test_session_uri_unix_good);
+> > +    g_test_add_func("/session/gstreamer/init-by-us", test_session_gst_=
+init_by_us);
+> > +    g_test_add_func("/session/gstreamer/init-by-client", test_session_=
+gst_init_by_client);
+> >       return g_test_run();
+> >   }
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
+--dngpeth7l7i5tkgn
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
---===============0291912722==
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl12E/AACgkQl9kSPeN6
+SE+wKQ//dqgpeykAH1slWTZzB/NS+NrD19u5M51ssw51Y48ts1lCPPSlQumiMn6J
+S5TCv5vH6nzQ2bOLOcH9v+4P/mAkb1lLEACBZs1ogy80hGlXTvweT/t3Eaj/pVih
+jCTOGVzSfSrs6x121KFPis0jzO/a6lS8SGyKRlmVm83MK5Nt2RU4kgTph+6BiMOS
+cAsHbzDPhOw+iEmLjo43htu0VblsfLf+CPGUfwdC2FKbMhDnQ8ynss6zQdoqS1NM
+ZJMnZX3UNsNO18T+nJFjSqXYIPopqel85TcKKbMig/nGEQt/HRaYEl8Szd5SCgRd
++kVSjhtaJAC7OGOHgG7rhhwh4QW06kRalV/7w8LAaxssWyQmbRbnxjub0RAjnm48
+dP5yMPM70rFEsANU8KSSSekV2N0LM0R7W4N8gVbgs+E2hlNmGDuftgRDLHwNgJEE
+6ru1dEvukWp7cGX4/RGi5Xx7pAhGnsvJh0RSt6qBT0/Dgqk94lqqXegQ3ixWwfzc
+BbWnpW2iwPNr5h25rJbJ533Sr4DL6dJKOBGjVPj2upcszVI/rG5eNx6K1E5Xm++o
+IAg+Rdrx4gLfsAn0PTowvlz6FAgtftSzK23I88mfeSJtBKB5nRqTcSjKwIOjex/3
+dSHTWs3t44Y4J6mn+wLihMzNRbFallqjYwiN1dJFstva174Oz5o=
+=IKq7
+-----END PGP SIGNATURE-----
+
+--dngpeth7l7i5tkgn--
+
+--===============0317254148==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -282,6 +227,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0291912722==--
-
-
+--===============0317254148==--
