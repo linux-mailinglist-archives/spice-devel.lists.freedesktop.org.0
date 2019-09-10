@@ -1,47 +1,53 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5B09ADC82
-	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2019 17:54:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CCD11AE1DE
+	for <lists+spice-devel@lfdr.de>; Tue, 10 Sep 2019 03:19:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 92D5B89CD3;
-	Mon,  9 Sep 2019 15:54:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5B2E689C89;
+	Tue, 10 Sep 2019 01:19:11 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C005B89CBC
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 15:54:34 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 59876155DB
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 15:54:34 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4F8C160623
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2019 15:54:34 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 4561F2551B;
- Mon,  9 Sep 2019 15:54:34 +0000 (UTC)
-Date: Mon, 9 Sep 2019 11:54:34 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Snir Sheriber <ssheribe@redhat.com>
-Message-ID: <1267427392.11234168.1568044474073.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20190909130630.8873-2-ssheribe@redhat.com>
-References: <20190909130630.8873-1-ssheribe@redhat.com>
- <20190909130630.8873-2-ssheribe@redhat.com>
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8408A89CAD
+ for <spice-devel@lists.freedesktop.org>; Tue, 10 Sep 2019 00:28:35 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id f2so8743073edw.3
+ for <spice-devel@lists.freedesktop.org>; Mon, 09 Sep 2019 17:28:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=jjFzACf4uPrKVceb+hzOWLEkDmaBmMMoxBZhKY4kfy8=;
+ b=p4p6OnJ6W0yj8et0kalgTnDjZLfDF8rMPBx5WYRdGTQcQc7c9xMCR8G/0xW6fQPv3i
+ wg5BZrBWKFHUDG0E7Gro52Ob0DC7vn8osGvDOyLxr4oLS6PKoAwiYTBqi1JSOKaOrY6y
+ GBnRWX1gzOIhliQ9oDaA/SybISWjB/54VQlJBwgtjtZ0GFrPE6GkK5mShmvUIjG0lmUp
+ xVyDjkg9cOHTBusasD3P/1Eqq+glkHoj1HYEIR3IHLcY2aLQXD7HRf65oWEoESY9vkT8
+ z5BUspFbBtTRMK8ANti1vZAUsLNUntc5Qp0YU/qHsprko332FE7MpO4LReHyL7Wa480o
+ BwbA==
+X-Gm-Message-State: APjAAAUXXRJqAJT5PkGSqs4wGyxWSp/cH/w102hsITngpzeOu8xUXTnJ
+ FOS3HXkgebiIFQPrErWdBrjippAbeYcAjnSJ95nbvqEIoow=
+X-Google-Smtp-Source: APXvYqyW6PXjd+dokx7kVLfkGf27ZtazXvMfUm7E1GTUIai0Q3bmxbqzzO+alYvUL6gaWtVw5O5P/+pCR2nZguyPEbg=
+X-Received: by 2002:a17:906:6b0f:: with SMTP id
+ q15mr21898242ejr.200.1568075313811; 
+ Mon, 09 Sep 2019 17:28:33 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.7, 10.4.195.1]
-Thread-Topic: .gitlab-ci: Save artifacts for copr builds use and deploy
-Thread-Index: UkTXuAN1x1JGW5FIDw4C7mIfbfeFYg==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.29]); Mon, 09 Sep 2019 15:54:34 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-gtk 2/3] .gitlab-ci: Save artifacts
- for copr builds use and deploy
+From: Rafael de Almeida <rafaelrdealmeida@gmail.com>
+Date: Mon, 9 Sep 2019 21:28:22 -0300
+Message-ID: <CAOnjVuo6XYni=KF1miXKET8oma7ixB2jLc6-OvfDUw3czr_tdA@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Tue, 10 Sep 2019 01:19:10 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=jjFzACf4uPrKVceb+hzOWLEkDmaBmMMoxBZhKY4kfy8=;
+ b=gEmP/ZfGcLmsi55eEofo/RJmN47qWLAQmldgqOHDuZlblDvp6E/x6leBulie/y2VtM
+ IqXNa5wC4NFUfdQ5DtdTeRbRo+UMjo7ogdX2YvXuV7QncgmDGTrvRw2vPz/yiRs0+eF7
+ OzTcHQFfBi/keWNPCNcCEnQGTm8g4rxbzV1hZy8+dZ8/8hy9UEgJCwDoeA2EvcxbzYdv
+ upQX+CN5OqjCXXB91Sn8KlRZPR7NLqKlVJrzi8gi6N+qSHR/b4Dd3OffbPrf7kI5eXME
+ MVaMDjNzzm8hppXurYITnES7jFckrivqJvZW9d5B6AMg+3XzW6i5GEIXyHLVpvRaLak5
+ bbbw==
+Subject: [Spice-devel] proxmox spice - control video and audio compression
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,94 +59,131 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1971288391=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiAKPiBkZXBsb3kgaXMgZG9uZSBieSB0cmlnZ2VyaW5nIGNvcHIncyB3ZWJob29rIHNvIGNvcHIg
-d2lsbAo+IGdldCB0aGUgYXJ0aWZhY3RzIGFuZCBnZW5lcmF0ZSBhIGJ1aWxkLgo+IC0tLQo+IAo+
-IFRoaXMgaXMgYW5vdGhlciBzdWdnZXN0aW9uIHRvIGludGVncmF0ZSBkZXBsb3ltZW50IHRvIGNv
-cHIKPiBUaGUgZmxvdyBpcyBhcyBmb2xsb3c6Cj4gLSBTdWNjZXNzZnVsIGdpdGxhYi1jaSBidWls
-ZCB3aWxsIGdlbmVyYXRlIHRhcmJhbGwgYW5kIHNwZWMgZmlsZQo+ICAgYXMgYWNjZXNzaWJsZSBh
-cnRpZmFjdHMKPiAtIG9uY2UgdGhlIGxpbnV4IGJ1aWxkIGNvbXBsZXRlZCB0aGUgZGVwbG95IGpv
-YiB3aWxsIHRyaWdnZXIgdGhlCj4gICBjb3ByJ3MgcHJvamVjdCBjdXN0b20gd2ViaG9vawo+IC0g
-VHJpZ2dlcmluZyB0aGUgd2ViaG9vayB3aWxsIGNhdXNlIGNvcHIgdG8gZXhlY3V0ZSBpdHMgcHJl
-LWRlZmluZWQKPiAgIGN1c3RvbSBzb3VyY2Ugc2NyaXB0IHdoaWNoIHdpbGwgZG93bmxvYWQgdGhl
-IGFydGlmYWN0cyBhbmQKPiAgIGxldCB0aGUgYnVpbGQgaW4gY29wciB0byBiZWdpbgo+IAo+IFRo
-cmVlIHN0ZXBzIGFyZSBuZWVkZWQgaW4gb3JkZXIgdG8gbWFrZSB0aGlzIHdvcms6Cj4gMS4gaGF2
-aW5nIHRoaXMgdHdvIHBhdGNoZXMKPiAyLiBzZXQgYSBjdXN0b20gc291cmNlIHNjcmlwdCBpbiBj
-b3ByIHRvIGp1c3QgZ2V0IHRoZSB0YXJiYWxsIGFuZCBzcGVjCj4gICAgZm9yIGV4YW1wbGU6Cj4g
-ICAgICAjIG9ubHkgZ2V0dGluZyB0aGUgc3BlY2ZpbGUgYW5kIHRhcmJhbGwgYXJ0aWZhY3RzLCBs
-b2NhdGUgaW4gb3V0cHV0ZGlyCj4gICAgICBhbmQgZWRpdAo+ICAgICAgIyByZWxlYXNlIG51bWJl
-cgo+ICAgICAgY3VybCAtTCAtLW91dHB1dCBhcnRpZmFjdHMuemlwCj4gICAgICAiaHR0cHM6Ly9n
-aXRsYWIuZnJlZWRla3RvcC5vcmcvc3BpY2Uvc3BpY2UtZ3RrLy0vam9icy9hcnRpZmFjdHMvbWFz
-dGVyL2Rvd25sb2FkP2pvYj1mZWRvcmEiCj4gICAgICB1bnppcCAtaiBhcnRpZmFjdHMuemlwICcq
-LnNwZWMnCj4gICAgICB1bnppcCAtaiBhcnRpZmFjdHMuemlwICcqLnRhci54eicKPiAgICAgIHNl
-ZCAtaSAtRQo+ICAgICAgInMvKF5SZWxlYXNlOltbOnNwYWNlOl1dKikoW14lXSopL1wxYGRhdGUr
-JyVZJW0lZCVIJU0uc3BpY2UubGF0ZXN0J2AvIgo+ICAgICAgKi5zcGVjCgpXaHkgeW91IG5lZWQg
-dGhpcz8gSSBtZWFuLCBpcyBub3QgZ29vZCB0aGUgdmVyc2lvbiBnZW5lcmF0ZWQgYnkgdGhlIENJ
-PwoKPiAzLiBzZXQgaW4gZ2l0bGFiIHRoZSBDT1BSX0lEX1VVSUQgZW52aXJvbm1lbnQgdmFyaWFi
-bGUgdG8gdGhlIHBhY2thZ2Uncwo+ICAgIDxDT1BSX0lEPi88Q09QUl9VVUlEPiAodGhpcyB2YXJp
-YWJsZSBuZWVkcyB0byBiZSBzZXQgaW4gdGhpcwo+ICAgICI8Q09QUl9JRD4vPENPUFJfVVVJRD4i
-IGZvcm0gYW5kIGNvbWJpbmF0aW9uIGR1ZSB0byBzb21lIGdpdGxhYgo+ICAgIGVudmlyb25tZW50
-IHZhcmlhYmxlcyBsaW1pdGF0aW9ucy4gVGhpcyB2YXJpYWJsZSBzaG91bGQgYmUgbWFza2VkCj4g
-ICAgc28gaXQgY2Fubm90IGJlIHVzZWQgYnkgYSBtYWxpY2lvdXMgZW50aXR5KQo+IAoKSSBzdXBw
-b3NlIGl0J3MgdXNlZCBhcyBhIGtpbmQgb2Ygc2VjdXJpdHkuIElzIHRoZSBDT1BSX0lEIHNlY3Jl
-dD8KCj4gCj4gUHJvcyBhbmQgY29ucyBpbiByZWdhcmQgdG8gdGhlIHByZXZpb3VzIHN1Z2dlc3Rp
-b24KPiAoaHR0cHM6Ly9wYXRjaHdvcmsuZnJlZWRlc2t0b3Aub3JnL3Nlcmllcy82NTg4MS8pCj4g
-UFJPUzoKPiAqIE9ubHkgbWlub3IgY2hhbmdlcyBhcmUgcmVxdWlyZWQKPiAqIC5jb3ByL01ha2Vm
-aWxlIGlzIG5vdCBuZWVkZWQKPiAqIGdpdGxhYi1jaSBidWlsZCBhcnRpZmFjdHMgYXJlIHVzZWQs
-IG5vdCBuZWVkIHRvIGJ1aWxkIGFnYWluCj4gKiBsZXNzIHNjcmlwdGluZyBoYWNrcwo+IAo+IENP
-TlM6Cj4gKiBnaXRsYWIgKyBjb3ByICsgY29kZSBtaW5vciBjb25maWd1cmF0aW9ucyBhcmUgcmVx
-dWlyZWQKPiAqIGN1c3RvbWl6ZWQgY29uZmlndXJhdGlvbnMgKG5vbiBzdGFuZGFyZCkKCldoYXQg
-ZG8geW91IG1lYW4gd2l0aCB0aGlzPyBXaGljaCBjb21wb25lbnQgY29uZmlndXJhdGlvbiBhcmUg
-eW91IHJlZmVycmluZyB0bz8KCj4gKiBUaGUgZW52aXJvbm1lbnQgdmFyaWFibGUgdHJpY2sgaXMg
-YSBiaXQgaGFja3kKPiAKCklzIG1vcmUgZm9yIHNlY3VyaXR5IGl0IHNlZW1zIHRvIG1lLgoKSSBs
-aWtlIHRoaXMgc29sdXRpb24gYmV0dGVyIHRoYW4gcHJldmlvdXMuIFBhcnQgb2YgdGhlIGNvbW1l
-bnRzIGFib3ZlCndvdWxkIGJlIGdvb2QgdG8gZ28gdG8gdGhlIGNvbW1pdCBtZXNzYWdlLgpMb29r
-cyBsaWtlIHRoaXMgc2VyaWVzIGlzIGEgYml0IFJGQy4KCldoZXJlJ3MgcGF0Y2ggMy8zID8KCj4g
-LS0tCj4gIC5naXRsYWItY2kueW1sIHwgMjMgKysrKysrKysrKysrKysrKysrKysrKysKPiAgMSBm
-aWxlIGNoYW5nZWQsIDIzIGluc2VydGlvbnMoKykKPiAKPiBkaWZmIC0tZ2l0IGEvLmdpdGxhYi1j
-aS55bWwgYi8uZ2l0bGFiLWNpLnltbAo+IGluZGV4IGUyZDFjNTUuLjgyNmU5MjUgMTAwNjQ0Cj4g
-LS0tIGEvLmdpdGxhYi1jaS55bWwKPiArKysgYi8uZ2l0bGFiLWNpLnltbAo+IEBAIC0yMCw5ICsy
-MCwxMiBAQCB2YXJpYWJsZXM6Cj4gICAgICAgICAgICAgICAgbWluZ3c2NC11c2JyZWRpciBtaW5n
-dzMyLXVzYnJlZGlyCj4gIAo+ICBmZWRvcmE6Cj4gKyAgc3RhZ2U6IGJ1aWxkCj4gICAgYXJ0aWZh
-Y3RzOgo+ICAgICAgcGF0aHM6Cj4gICAgICAgIC0gYnVpbGQtKi9tZXNvbi1sb2dzLyoudHh0Cj4g
-KyAgICAgIC0gYnVpbGQtZGVmYXVsdC9tZXNvbi1kaXN0L3NwaWNlLWd0ayoudGFyLnh6Cj4gKyAg
-ICAgIC0gYnVpbGQtZGVmYXVsdC8qLnNwZWMKPiAgICAgIHdoZW46IGFsd2F5cwo+ICAgICAgZXhw
-aXJlX2luOiAxIHdlZWsKPiAgCj4gQEAgLTMzLDYgKzM2LDggQEAgZmVkb3JhOgo+ICAgICAgLSBu
-aW5qYSAtQyBidWlsZC1zcGljZS1wcm90b2NvbCBpbnN0YWxsCj4gIAo+ICAgIHNjcmlwdDoKPiAr
-ICAgICMgVXNlIHZlcnNpb24gZm9ybWF0IGFzIGZvbGxvd3MKPiBbY3VycmVudC12ZXJzaW9uXS5b
-bnVtLW9mLWNvbW1pdHMtc2luY2UtbGFzdC10YWddCj4gKyAgICAtIGVjaG8gJChnaXQgZGVzY3Jp
-YmUgLS1tYXRjaD12XCogLS1hYmJyZXY9MCB8IHNlZCAicy92Ly8gOwo+IHMvJC8uLyIpJChnaXQg
-cmV2LWxpc3QgJChnaXQgZGVzY3JpYmUgLS1hYmJyZXY9MCkuLkhFQUQgfCB3YyAtbCkgPgo+IC50
-YXJiYWxsLXZlcnNpb24KPiAgICAgIC0gbWVzb24gLS1idWlsZHR5cGU9cmVsZWFzZSBidWlsZC1k
-ZWZhdWx0IC0td2Vycm9yCj4gICAgICAjIE1lc29uIGRvZXMgbm90IHVwZGF0ZSBzdWJtb2R1bGVz
-IHJlY3Vyc2l2ZWx5Cj4gICAgICAtIGdpdCBzdWJtb2R1bGUgdXBkYXRlIC0taW5pdCAtLXJlY3Vy
-c2l2ZQo+IEBAIC00OCw2ICs1Myw3IEBAIGZlZG9yYToKPiAgICAgIC0gbmluamEgLUMgYnVpbGQt
-ZmVhdC1kaXNhYmxlZCB0ZXN0Cj4gIAo+ICB3aW5kb3dzOgo+ICsgIHN0YWdlOiBidWlsZAo+ICAg
-IGFydGlmYWN0czoKPiAgICAgIHBhdGhzOgo+ICAgICAgICAtIGJ1aWxkLXdpbjY0L21lc29uLWxv
-Z3MvKi50eHQKPiBAQCAtNjcsMyArNzMsMjAgQEAgd2luZG93czoKPiAgICAgIC0gbWtkaXIgYnVp
-bGQtd2luNjQgJiYgY2QgYnVpbGQtd2luNjQKPiAgICAgIC0gbWluZ3c2NC1tZXNvbiAtLWJ1aWxk
-dHlwZT1yZWxlYXNlIC1EZ3RrX2RvYz1kaXNhYmxlZCAtLXdlcnJvcgo+ICAgICAgLSBuaW5qYSBp
-bnN0YWxsCj4gKwo+ICtmZWRvcmE6ZGVwbG95Ogo+ICsgIHN0YWdlOiBkZXBsb3kKPiArICBuZWVk
-czogWyJmZWRvcmEiXQo+ICsgIG9ubHk6Cj4gKyAgICB2YXJpYWJsZXM6Cj4gKyAgICAjIFJ1biB0
-aGlzIHN0YWdlIG9ubHkgaWYgQ09QUl9JRF9VVUlEIGlzIGRlZmluZWQKPiArICAgICMgQ09QUl9J
-RF9VVUlEIGlzIGdpdGxhYiBWQVJJQUJMRSB0aGF0IHNob3VsZCBiZSBzZXQgdG8gdGhpcyBzdHJp
-bmc6Cj4gIjxDT1BSX0lEPi88Q09QUl9VVUlEPiIKPiArICAgIC0gJENPUFJfSURfVVVJRAo+ICsg
-IHNjcmlwdDoKPiArICAgICMgVGhpcyBpcyBhIGN1c3RvbSB3ZWJob29rIHdoaWNoIGNhbiB0cmln
-ZXIgYSBjdXN0b20gc291cmNlIHNjcmlwdCAoc2V0Cj4gaW4gY29wcikgdGhhdAoKdHlwbzogdHJp
-Z2VyIC0+IHRyaWdnZXIKCj4gKyAgICAjIHNob3VsZCBqdXN0IGRvd25sb2FkIHRoZSBzcGVjZmls
-ZSBhbmQgdGFyYmFsbCBmcm9tIHRoZSBhcnRpZmFjdHMgdXJsLgo+ICsgICAgIyAgQ3JlYXRlIGEg
-Y29wcidzIGN1c3RvbSBzb3VyY2Ugc2NyaXB0Ogo+ICsgICAgIwo+IGh0dHBzOi8vZG9jcy5wYWd1
-cmUub3JnL2NvcHIuY29wci9jdXN0b21fc291cmNlX21ldGhvZC5odG1sI2N1c3RvbS1zb3VyY2Ut
-bWV0aG9kCj4gKyAgICAjICBHZXQgYXJ0aWZhY3RzIGNyZWF0ZWQgYnkgdGhpcyBnaXRsYWIgY2k6
-Cj4gKyAgICAjCj4gaHR0cHM6Ly9kb2NzLmdpdGxhYi5jb20vZWUvdXNlci9wcm9qZWN0L3BpcGVs
-aW5lcy9qb2JfYXJ0aWZhY3RzLmh0bWwjZG93bmxvYWRpbmctdGhlLWxhdGVzdC1hcnRpZmFjdHMK
-PiArICAgIC0gY3VybCAtWCBQT1NUCj4gaHR0cHM6Ly9jb3ByLmZlZG9yYWluZnJhY2xvdWQub3Jn
-L3dlYmhvb2tzL2N1c3RvbS8kQ09QUl9JRF9VVUlEL3NwaWNlLWd0ay8KCkZyZWRpYW5vCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1h
-aWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
-cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
+--===============1971288391==
+Content-Type: multipart/alternative; boundary="0000000000000f95cb059227fc5a"
+
+--0000000000000f95cb059227fc5a
+Content-Type: text/plain; charset="UTF-8"
+
+Hello,
+
+We use x2go and chrome remote desktop for VDI on the virtual machines that
+are on proxmox.
+
+We recently started using spice to access webcam through weaker computers
+(dualcore processors) that don't support good quality video conferencing.
+
+
+Everything is working perfectly (audio and image), but I believe there has
+been a high compression in the spice that causes a slight delay in sending
+video and audio.
+
+The network has hardly any more significant use even with video sending.
+
+How can I control compression? How do I deduce or disable compression in vm
+proxmox?
+
+best
+
+--0000000000000f95cb059227fc5a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span style=3D"color:rgb(25,30,30);font-family:&quot;Open =
+Sans&quot;,Roboto,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxy=
+gen,Ubuntu,Cantarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Hel=
+vetica Neue&quot;,sans-serif;font-size:14px">Hello,</span><br style=3D"box-=
+sizing:border-box;color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Rob=
+oto,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Can=
+tarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&qu=
+ot;,sans-serif;font-size:14px"><br style=3D"box-sizing:border-box;color:rgb=
+(25,30,30);font-family:&quot;Open Sans&quot;,Roboto,-apple-system,BlinkMacS=
+ystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quot=
+;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:14=
+px"><span style=3D"color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Ro=
+boto,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Ca=
+ntarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&q=
+uot;,sans-serif;font-size:14px">We use x2go and chrome remote desktop for V=
+DI on the virtual machines that are on proxmox.</span><br style=3D"box-sizi=
+ng:border-box;color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Roboto,=
+-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantare=
+ll,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,=
+sans-serif;font-size:14px"><br style=3D"box-sizing:border-box;color:rgb(25,=
+30,30);font-family:&quot;Open Sans&quot;,Roboto,-apple-system,BlinkMacSyste=
+mFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quot;,&q=
+uot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:14px">=
+<span style=3D"color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Roboto=
+,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantar=
+ell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;=
+,sans-serif;font-size:14px">We recently started using spice to access webca=
+m through weaker computers (dualcore processors) that don&#39;t support goo=
+d quality video conferencing.</span><br style=3D"box-sizing:border-box;colo=
+r:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Roboto,-apple-system,Blin=
+kMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans=
+&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-si=
+ze:14px"><br style=3D"box-sizing:border-box;color:rgb(25,30,30);font-family=
+:&quot;Open Sans&quot;,Roboto,-apple-system,BlinkMacSystemFont,&quot;Segoe =
+UI&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quo=
+t;,&quot;Helvetica Neue&quot;,sans-serif;font-size:14px"><br style=3D"box-s=
+izing:border-box;color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Robo=
+to,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cant=
+arell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quo=
+t;,sans-serif;font-size:14px"><span style=3D"color:rgb(25,30,30);font-famil=
+y:&quot;Open Sans&quot;,Roboto,-apple-system,BlinkMacSystemFont,&quot;Segoe=
+ UI&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quot;,&quot;Droid Sans&qu=
+ot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:14px">Everything is wor=
+king perfectly (audio and image), but I believe there has been a high compr=
+ession in the spice that causes a slight delay in sending video and audio.<=
+/span><br style=3D"box-sizing:border-box;color:rgb(25,30,30);font-family:&q=
+uot;Open Sans&quot;,Roboto,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&=
+quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,=
+&quot;Helvetica Neue&quot;,sans-serif;font-size:14px"><br style=3D"box-sizi=
+ng:border-box;color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Roboto,=
+-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantare=
+ll,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,=
+sans-serif;font-size:14px"><span style=3D"color:rgb(25,30,30);font-family:&=
+quot;Open Sans&quot;,Roboto,-apple-system,BlinkMacSystemFont,&quot;Segoe UI=
+&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;=
+,&quot;Helvetica Neue&quot;,sans-serif;font-size:14px">The network has hard=
+ly any more significant use even with video sending.</span><br style=3D"box=
+-sizing:border-box;color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Ro=
+boto,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Ca=
+ntarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&q=
+uot;,sans-serif;font-size:14px"><br style=3D"box-sizing:border-box;color:rg=
+b(25,30,30);font-family:&quot;Open Sans&quot;,Roboto,-apple-system,BlinkMac=
+SystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quo=
+t;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:1=
+4px"><span style=3D"color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,R=
+oboto,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,C=
+antarell,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&=
+quot;,sans-serif;font-size:14px">How can I control compression? How do I de=
+duce or disable compression in vm proxmox?</span><br style=3D"box-sizing:bo=
+rder-box;color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Roboto,-appl=
+e-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantarell,&q=
+uot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-=
+serif;font-size:14px"><br style=3D"box-sizing:border-box;color:rgb(25,30,30=
+);font-family:&quot;Open Sans&quot;,Roboto,-apple-system,BlinkMacSystemFont=
+,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantarell,&quot;Fira Sans&quot;,&quot;D=
+roid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;font-size:14px"><span=
+ style=3D"color:rgb(25,30,30);font-family:&quot;Open Sans&quot;,Roboto,-app=
+le-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Oxygen,Ubuntu,Cantarell,&=
+quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans=
+-serif;font-size:14px">best</span><br></div>
+
+--0000000000000f95cb059227fc5a--
+
+--===============1971288391==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1971288391==--
