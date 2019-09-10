@@ -2,56 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FA07AF67B
-	for <lists+spice-devel@lfdr.de>; Wed, 11 Sep 2019 09:12:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A62DAAF71C
+	for <lists+spice-devel@lfdr.de>; Wed, 11 Sep 2019 09:44:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5CFB26EA2E;
-	Wed, 11 Sep 2019 07:12:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2D71E6EA42;
+	Wed, 11 Sep 2019 07:44:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 048B26EA2E
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2019 07:12:13 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 589CEC04B2DD
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2019 07:12:12 +0000 (UTC)
-Received: by mail-wr1-f71.google.com with SMTP id s5so10030682wrv.23
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2019 00:12:12 -0700 (PDT)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B40C86E99F
+ for <spice-devel@lists.freedesktop.org>; Tue, 10 Sep 2019 21:03:42 +0000 (UTC)
+Received: by mail-ed1-x533.google.com with SMTP id p2so17415452edx.11
+ for <spice-devel@lists.freedesktop.org>; Tue, 10 Sep 2019 14:03:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=XLRsOc35nL9vhvH9CkSnWa7Jm0cHotxoPjPBp/AkD9g=;
- b=kt/hka6gwaHxmpOjq0423srY/HWaUTjBlBJnRL+g1htJ1fJW/5SqTUZ+Dy8aT88Fum
- dyfbut/k/bv/wKLcenD85m3V0cG9m5xeFP3LevQ5A3+y0UYAjyoPOWX67vd5h7yhJZ3Y
- GBYdQngal7AATL0d5GcsT9vQrnqbDiixbBa5a9tVdAMfpIaGxDZitSM/wWirXzobD9mm
- FZ+gEKdRAQUQxjsKDxswwxLnwet1NZEBELxmpDSFG/i905DH1UwBafFCaqyQfhCc53aE
- sD9iaHFaFq4d7FdWcBkbuF+bC5Ut7ojU85LHREQO+/G9wPwqwHY/tNIEHuwF4Mt/tkWK
- VmHg==
-X-Gm-Message-State: APjAAAWPFdjuyIORK31QCbpLg4fVATT+MW8eL+pQwVcDY5F7bckTwSx1
- G/LOPq/mSk3iSTNXC0Ewd1GuvZKzIB+8aLYUiRrTDQhiZdYYi/Ct/jStkR5dlxmzRWvD74it7lH
- UVgJK97pZXt50k18FucQu/TDKP6twO5E=
-X-Received: by 2002:a7b:c92d:: with SMTP id h13mr2706914wml.86.1568185930947; 
- Wed, 11 Sep 2019 00:12:10 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqynOYZd2pgYJX/yzXIn9Ef0r3yXp7hOPq+M7UQormogDf8kBwFkEsWMl68k36EQO9GzOinSXw==
-X-Received: by 2002:a7b:c92d:: with SMTP id h13mr2706905wml.86.1568185930808; 
- Wed, 11 Sep 2019 00:12:10 -0700 (PDT)
-Received: from pinea.redhat.com ([2001:861:3440:6a0:2cf1:592d:314d:825])
- by smtp.gmail.com with ESMTPSA id u10sm1698168wmm.43.2019.09.11.00.12.09
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2019 00:12:10 -0700 (PDT)
-From: Kevin Pouget <kpouget@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Date: Wed, 11 Sep 2019 09:12:06 +0200
-Message-Id: <20190911071206.7345-1-kpouget@redhat.com>
-X-Mailer: git-send-email 2.21.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=kYKnBYia5lnzOs+ifUsu4Xowmkbjz15Ir5p0I1+dtZA=;
+ b=oqW8xZol2Gd7bVXpWJbg6a/JrUD2wjSAQvmua93/mW2ltIJQd1w9KNm1mL2BQyvatR
+ fNTmymZqMVuUVtzFZw7LPF6zvCTJgAxMZlgIjv4idpxwYPETCpd3daXYxdX6NMPBNp54
+ MPIU1ansohavlrTablpciBTDLUrc4u5WU2xzOxPxmb2BFiMLJhxTOX/na6TbpATZsGba
+ JA/e56tt2EXEyB4RBcKImGi7duyM6P994nnnb99OAWDiI4d6+1HelvdC8KnAeOnHogzw
+ WryjtpQSGukxZTYDRbwyHYpGPJUwQ5igbtZFA0KKG1/xcYjcqbdAChl7o0VkkpAJp4kD
+ uogA==
+X-Gm-Message-State: APjAAAXOMsGr1zL9Lu/NCZlHo3UMZTvSstBZvogoilfMZJfpnNTXMKrp
+ wySXRDMJfeaLvWXNjqfB63YUIy9Rp6Qnec4Gp4qxafQp
+X-Google-Smtp-Source: APXvYqyNKxdXh5YWW5ljxrZys+YYmrtr0n28GVBBuUA4iN/Otg7keFV0LuuQPPHvM88tLyYGXRpPCt4JD1X+MkGXwCw=
+X-Received: by 2002:a50:f98c:: with SMTP id q12mr32137557edn.75.1568149421215; 
+ Tue, 10 Sep 2019 14:03:41 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Spice-devel] [PATCH spice-common] common/recorder.h: do not
- complain on unused (dummy) recorders
+References: <CAOnjVuo6XYni=KF1miXKET8oma7ixB2jLc6-OvfDUw3czr_tdA@mail.gmail.com>
+ <4c9bc703-a93d-cc4f-63f5-25808973618b@redhat.com>
+In-Reply-To: <4c9bc703-a93d-cc4f-63f5-25808973618b@redhat.com>
+From: Rafael de Almeida <rafaelrdealmeida@gmail.com>
+Date: Tue, 10 Sep 2019 18:03:29 -0300
+Message-ID: <CAOnjVuqzKY2oLyvq7Pc3T7sGcMZZUHw79+yNAJoU2_eoHtw=Zw@mail.gmail.com>
+To: uril@redhat.com
+X-Mailman-Approved-At: Wed, 11 Sep 2019 07:44:38 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=kYKnBYia5lnzOs+ifUsu4Xowmkbjz15Ir5p0I1+dtZA=;
+ b=RBJH8kauTU7KQoW5ISN7T52RqpJfykFmJ9vK/bJ4i5QQHekNohyzmjipUAZeM8G1bn
+ JNtHIKGWkxMObCi3+5pcQ4P1/Lk0dEKo5nvz9WT3iLf3BGr6AYEDe3bXmFdGLs0BU3uu
+ zH8z/vXAwk8cqREvhHdxqUuq+uFMhy1mE5GrTCSouhNqsipOyQ24kByt19Cy3yIzwg+r
+ EONHkqeBiBeT2Q7oo6KBbiaH8BvvtXiW67VK/zRDNIdSIRyGhodzPF2Sn+ZB84z/Ml66
+ H2ECObE5ddhQwjpx8+7bTrIyWvN9KShRNFlkXDrlbbufcCTVHhzCT0cmbpIJLNNNXdlJ
+ w0YQ==
+Subject: Re: [Spice-devel] proxmox spice - control video and audio
+ compression
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,28 +64,125 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0192857635=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-U2lnbmVkLW9mZi1ieTogS2V2aW4gUG91Z2V0IDxrcG91Z2V0QHJlZGhhdC5jb20+Ci0tLQogY29t
-bW9uL3JlY29yZGVyLmggfCAzICsrLQogMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwg
-MSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2NvbW1vbi9yZWNvcmRlci5oIGIvY29tbW9uL3Jl
-Y29yZGVyLmgKaW5kZXggOThiODc5Ny4uODQ0OGUwMiAxMDA2NDQKLS0tIGEvY29tbW9uL3JlY29y
-ZGVyLmgKKysrIGIvY29tbW9uL3JlY29yZGVyLmgKQEAgLTIwLDYgKzIwLDcgQEAKIAogI2luY2x1
-ZGUgPHN0ZGlvLmg+CiAjaW5jbHVkZSA8c3RkaW50Lmg+CisjaW5jbHVkZSA8c3BpY2UvbWFjcm9z
-Lmg+CiAKIC8qIFJlcGxhY2VtZW50IGRlY2xhcmF0aW9ucy4KICAqIFRoZXJlIGRlY2xhcmF0aW9u
-cyBzaG91bGQgZ2VuZXJhdGUgbm8gY29kZSAoYmVzaWRlIHdoZW4gbm8gb3B0aW1pemF0aW9uIGFy
-ZQpAQCAtNDUsNyArNDYsNyBAQCB0eXBlZGVmIHN0cnVjdCBTcGljZUR1bW15VHdlYWsgewogI2Rl
-ZmluZSBSRUNPUkRFUihyZWMsIG51bV9yaW5ncywgY29tbWVudCkgXAogICAgIFJFQ09SREVSX0RF
-RklORShyZWMsIG51bV9yaW5ncywgY29tbWVudCkKICNkZWZpbmUgUkVDT1JERVJfREVGSU5FKHJl
-YywgbnVtX3JpbmdzLCBjb21tZW50KSBcCi0gICAgY29uc3QgU3BpY2VFbXB0eVN0cnVjdCBzcGlj
-ZV9yZWNvcmRlcl8gIyMgcmVjID0ge30KKyAgICBjb25zdCBTcGljZUVtcHR5U3RydWN0IFNQSUNF
-X0dOVUNfVU5VU0VEIHNwaWNlX3JlY29yZGVyXyAjIyByZWMgPSB7fQogI2RlZmluZSBSRUNPUkRF
-Ul9UUkFDRShyZWMpIFwKICAgICAoc2l6ZW9mKHNwaWNlX3JlY29yZGVyXyAjIyByZWMpICE9IHNp
-emVvZihTcGljZUVtcHR5U3RydWN0KSkKICNkZWZpbmUgUkVDT1JERVJfVFdFQUtfREVDTEFSRShy
-ZWMpIFwKLS0gCjIuMjEuMAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3NwaWNlLWRldmVs
+--===============0192857635==
+Content-Type: multipart/alternative; boundary="00000000000034d4180592393dcc"
+
+--00000000000034d4180592393dcc
+Content-Type: text/plain; charset="UTF-8"
+
+Awesome, thanks!
+
+Em ter, 10 de set de 2019 08:31, Uri Lublin <uril@redhat.com> escreveu:
+
+> On 9/10/19 3:28 AM, Rafael de Almeida wrote:
+> > Hello,
+> >
+> > We use x2go and chrome remote desktop for VDI on the virtual machines
+> > that are on proxmox.
+> >
+> > We recently started using spice to access webcam through weaker
+> > computers (dualcore processors) that don't support good quality video
+> > conferencing.
+> >
+> >
+> > Everything is working perfectly (audio and image), but I believe there
+> > has been a high compression in the spice that causes a slight delay in
+> > sending video and audio.
+> >
+> > The network has hardly any more significant use even with video sending.
+> >
+> > How can I control compression? How do I deduce or disable compression in
+> > vm proxmox?
+> >
+>
+> Hi,
+>
+> You can use qemu-kvm -spice option to set the following options:
+>   * image-compression=[auto_glz|auto_lz|quic|glz|lz|off]
+>   * jpeg-wan-compression=[auto|never|always]
+>   * zlib-glz-wan-compression=[auto|never|always]
+>   * streaming-video=[off|all|filter]
+>
+> See man qemu-kvm for more information.
+> You can start by setting all these options to 'off'.
+>
+> See libvirt documentation about domain xml for setting these
+> options when running the VM via libvirt.
+>
+> Hope that helps,
+>      Uri.
+>
+
+--00000000000034d4180592393dcc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"auto">Awesome, thanks!=C2=A0</div></div><br><d=
+iv class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Em ter, 10 d=
+e set de 2019 08:31, Uri Lublin &lt;<a href=3D"mailto:uril@redhat.com" targ=
+et=3D"_blank">uril@redhat.com</a>&gt; escreveu:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">On 9/10/19 3:28 AM, Rafael de Almeida wrot=
+e:<br>
+&gt; Hello,<br>
+&gt; <br>
+&gt; We use x2go and chrome remote desktop for VDI on the virtual machines =
+<br>
+&gt; that are on proxmox.<br>
+&gt; <br>
+&gt; We recently started using spice to access webcam through weaker <br>
+&gt; computers (dualcore processors) that don&#39;t support good quality vi=
+deo <br>
+&gt; conferencing.<br>
+&gt; <br>
+&gt; <br>
+&gt; Everything is working perfectly (audio and image), but I believe there=
+ <br>
+&gt; has been a high compression in the spice that causes a slight delay in=
+ <br>
+&gt; sending video and audio.<br>
+&gt; <br>
+&gt; The network has hardly any more significant use even with video sendin=
+g.<br>
+&gt; <br>
+&gt; How can I control compression? How do I deduce or disable compression =
+in <br>
+&gt; vm proxmox?<br>
+&gt; <br>
+<br>
+Hi,<br>
+<br>
+You can use qemu-kvm -spice option to set the following options:<br>
+=C2=A0 * image-compression=3D[auto_glz|auto_lz|quic|glz|lz|off]<br>
+=C2=A0 * jpeg-wan-compression=3D[auto|never|always]<br>
+=C2=A0 * zlib-glz-wan-compression=3D[auto|never|always]<br>
+=C2=A0 * streaming-video=3D[off|all|filter]<br>
+<br>
+See man qemu-kvm for more information.<br>
+You can start by setting all these options to &#39;off&#39;.<br>
+<br>
+See libvirt documentation about domain xml for setting these<br>
+options when running the VM via libvirt.<br>
+<br>
+Hope that helps,<br>
+=C2=A0 =C2=A0 =C2=A0Uri.<br>
+</blockquote></div>
+
+--00000000000034d4180592393dcc--
+
+--===============0192857635==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0192857635==--
