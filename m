@@ -1,52 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7413FAF02F
-	for <lists+spice-devel@lfdr.de>; Tue, 10 Sep 2019 19:12:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FA07AF67B
+	for <lists+spice-devel@lfdr.de>; Wed, 11 Sep 2019 09:12:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 029FD6E944;
-	Tue, 10 Sep 2019 17:12:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5CFB26EA2E;
+	Wed, 11 Sep 2019 07:12:14 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BB3E06E943
- for <spice-devel@lists.freedesktop.org>; Tue, 10 Sep 2019 17:10:50 +0000 (UTC)
-Received: by mail-ed1-x52b.google.com with SMTP id v38so17828462edm.7
- for <spice-devel@lists.freedesktop.org>; Tue, 10 Sep 2019 10:10:50 -0700 (PDT)
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 048B26EA2E
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2019 07:12:13 +0000 (UTC)
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 589CEC04B2DD
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2019 07:12:12 +0000 (UTC)
+Received: by mail-wr1-f71.google.com with SMTP id s5so10030682wrv.23
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2019 00:12:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=4o8eC73L6U3UN90ZxoG5S4qvbULZUP+HCUn8CESrm8o=;
- b=eJMk7TkMB+pGnmxhziY5n3jjRWG2j2tcfGLAcpnpS/1dFbd/pD4cUxEbAHFM3Cnsku
- WYPH2s4seHXaerPRU7k36eqMkocJz7RUmbIE1Y8aXoeOgOCaptxSTc1ba4eeTxmb2Oxe
- cBaQ8nSzbPETNFuyWeyhBJX955hDjNJQ65OvUTR99lnt7APBYS8QE0bXJ8oUu27JqV/m
- oHp+I0Kvedk4Jlbi83B4vIfJjt3VKxmBGygKmu4Y7EjGEcI0R6gTOjEIJd0kSxRVUt5F
- EgCX5tkuV4mWY992oVwJnhi8aq6wIOf3gdnSJl9rI7sh3IdWsw9q11x9IAGk1xTCFsT4
- yw4Q==
-X-Gm-Message-State: APjAAAUHU9QY+mq9SsQpFr/DQUPD4FqSrzUDUzElwM2IkXdmyODbZ/3F
- /AIA6UFP8xzfe9XACACX79bWKRWfmVLwJG8aoijlrl9U
-X-Google-Smtp-Source: APXvYqwOLvtmQQU2q+JrRR1eSJSpTLLli6bhDZSQB5vMGGFoyhT+qDvAf3j5ToMdRacph0IYSq4fG360lbc0NbhKhaA=
-X-Received: by 2002:aa7:db43:: with SMTP id n3mr31084873edt.136.1568135448840; 
- Tue, 10 Sep 2019 10:10:48 -0700 (PDT)
-MIME-Version: 1.0
-From: =?UTF-8?Q?Aleix_Arag=C3=B3n?= <aaragon@elpuig.xeill.net>
-Date: Tue, 10 Sep 2019 19:10:37 +0200
-Message-ID: <CAKd2-H+aFEfqAwNje-9qwKT27EzALriUbsi9X0YifKviP2JYxA@mail.gmail.com>
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=XLRsOc35nL9vhvH9CkSnWa7Jm0cHotxoPjPBp/AkD9g=;
+ b=kt/hka6gwaHxmpOjq0423srY/HWaUTjBlBJnRL+g1htJ1fJW/5SqTUZ+Dy8aT88Fum
+ dyfbut/k/bv/wKLcenD85m3V0cG9m5xeFP3LevQ5A3+y0UYAjyoPOWX67vd5h7yhJZ3Y
+ GBYdQngal7AATL0d5GcsT9vQrnqbDiixbBa5a9tVdAMfpIaGxDZitSM/wWirXzobD9mm
+ FZ+gEKdRAQUQxjsKDxswwxLnwet1NZEBELxmpDSFG/i905DH1UwBafFCaqyQfhCc53aE
+ sD9iaHFaFq4d7FdWcBkbuF+bC5Ut7ojU85LHREQO+/G9wPwqwHY/tNIEHuwF4Mt/tkWK
+ VmHg==
+X-Gm-Message-State: APjAAAWPFdjuyIORK31QCbpLg4fVATT+MW8eL+pQwVcDY5F7bckTwSx1
+ G/LOPq/mSk3iSTNXC0Ewd1GuvZKzIB+8aLYUiRrTDQhiZdYYi/Ct/jStkR5dlxmzRWvD74it7lH
+ UVgJK97pZXt50k18FucQu/TDKP6twO5E=
+X-Received: by 2002:a7b:c92d:: with SMTP id h13mr2706914wml.86.1568185930947; 
+ Wed, 11 Sep 2019 00:12:10 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqynOYZd2pgYJX/yzXIn9Ef0r3yXp7hOPq+M7UQormogDf8kBwFkEsWMl68k36EQO9GzOinSXw==
+X-Received: by 2002:a7b:c92d:: with SMTP id h13mr2706905wml.86.1568185930808; 
+ Wed, 11 Sep 2019 00:12:10 -0700 (PDT)
+Received: from pinea.redhat.com ([2001:861:3440:6a0:2cf1:592d:314d:825])
+ by smtp.gmail.com with ESMTPSA id u10sm1698168wmm.43.2019.09.11.00.12.09
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Sep 2019 00:12:10 -0700 (PDT)
+From: Kevin Pouget <kpouget@redhat.com>
 To: spice-devel@lists.freedesktop.org
-X-Mailman-Approved-At: Tue, 10 Sep 2019 17:12:10 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=elpuig-xeill-net.20150623.gappssmtp.com; s=20150623;
- h=mime-version:from:date:message-id:subject:to;
- bh=4o8eC73L6U3UN90ZxoG5S4qvbULZUP+HCUn8CESrm8o=;
- b=heoqZtbpeoia5kXiZqtkh8RicI8PU8iGA8TowXPbDv1mHSx9w+006UICpYQO8lfGu/
- nNGqBRWuBPZZ/Bz0YHrbNM7vHDzVwpZgq+G+g2uDCUo4zR0PPwKbBfE11r1D24rzv/ik
- K+cbZ4+L+vMZNN6sX+9HLSUxGuCMDfC5kRORNgwM62Yf/59OsFDnS6gAhx31fpU7ZbJx
- hfR8P7M450WgyBDp0+k6ZFZznpKTU5QX7M4Xk48SBelXFBaUOlNokNT3kENIRy2llAtl
- MdAZSTIAM6vj4mcXgEtNYbU0z5YqJdMe9+IcouR+2aDW9zqBmCk4Hojx3+I3Xf6qIwSO
- 1FSQ==
-Subject: [Spice-devel] spice client using virt-viewer alternative?
+Date: Wed, 11 Sep 2019 09:12:06 +0200
+Message-Id: <20190911071206.7345-1-kpouget@redhat.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [Spice-devel] [PATCH spice-common] common/recorder.h: do not
+ complain on unused (dummy) recorders
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,54 +63,28 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0850518873=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0850518873==
-Content-Type: multipart/alternative; boundary="000000000000635fc0059235fc80"
-
---000000000000635fc0059235fc80
-Content-Type: text/plain; charset="UTF-8"
-
-Sorry if these message is not for this department, don't know what mail use
-for doubts like this.
-
-Always for the client is required to download something like "virt-viewer"
-to connect and watch the machine on the server?
-I mean, I can't make the client to just connect to my page and don't
-download nothing? just connect and click a button.
-
-My case: I have several users that connects to my page and they do they
-job, and they are always dynamically, always different people.
-They must download virt-viewer to watch the machine on the server or are an
-alternative that doesn't need to download something?
-
---000000000000635fc0059235fc80
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Sorry if these message is not for this department, do=
-n&#39;t know what mail use for doubts like this.</div><div><br></div>Always=
- for the client is required to download something like &quot;virt-viewer&qu=
-ot; to connect and watch the machine on the server?<br>I mean, I can&#39;t =
-make the client to just connect to my page and don&#39;t download nothing? =
-just connect and click a button.<div><br></div><div>My case: I have several=
- users that connects to my page and they do they job, and they are always d=
-ynamically, always different=C2=A0people.</div><div>They must download virt=
--viewer to watch the machine on the server or are an alternative that doesn=
-&#39;t need to download something?</div></div>
-
---000000000000635fc0059235fc80--
-
---===============0850518873==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0850518873==--
+U2lnbmVkLW9mZi1ieTogS2V2aW4gUG91Z2V0IDxrcG91Z2V0QHJlZGhhdC5jb20+Ci0tLQogY29t
+bW9uL3JlY29yZGVyLmggfCAzICsrLQogMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwg
+MSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2NvbW1vbi9yZWNvcmRlci5oIGIvY29tbW9uL3Jl
+Y29yZGVyLmgKaW5kZXggOThiODc5Ny4uODQ0OGUwMiAxMDA2NDQKLS0tIGEvY29tbW9uL3JlY29y
+ZGVyLmgKKysrIGIvY29tbW9uL3JlY29yZGVyLmgKQEAgLTIwLDYgKzIwLDcgQEAKIAogI2luY2x1
+ZGUgPHN0ZGlvLmg+CiAjaW5jbHVkZSA8c3RkaW50Lmg+CisjaW5jbHVkZSA8c3BpY2UvbWFjcm9z
+Lmg+CiAKIC8qIFJlcGxhY2VtZW50IGRlY2xhcmF0aW9ucy4KICAqIFRoZXJlIGRlY2xhcmF0aW9u
+cyBzaG91bGQgZ2VuZXJhdGUgbm8gY29kZSAoYmVzaWRlIHdoZW4gbm8gb3B0aW1pemF0aW9uIGFy
+ZQpAQCAtNDUsNyArNDYsNyBAQCB0eXBlZGVmIHN0cnVjdCBTcGljZUR1bW15VHdlYWsgewogI2Rl
+ZmluZSBSRUNPUkRFUihyZWMsIG51bV9yaW5ncywgY29tbWVudCkgXAogICAgIFJFQ09SREVSX0RF
+RklORShyZWMsIG51bV9yaW5ncywgY29tbWVudCkKICNkZWZpbmUgUkVDT1JERVJfREVGSU5FKHJl
+YywgbnVtX3JpbmdzLCBjb21tZW50KSBcCi0gICAgY29uc3QgU3BpY2VFbXB0eVN0cnVjdCBzcGlj
+ZV9yZWNvcmRlcl8gIyMgcmVjID0ge30KKyAgICBjb25zdCBTcGljZUVtcHR5U3RydWN0IFNQSUNF
+X0dOVUNfVU5VU0VEIHNwaWNlX3JlY29yZGVyXyAjIyByZWMgPSB7fQogI2RlZmluZSBSRUNPUkRF
+Ul9UUkFDRShyZWMpIFwKICAgICAoc2l6ZW9mKHNwaWNlX3JlY29yZGVyXyAjIyByZWMpICE9IHNp
+emVvZihTcGljZUVtcHR5U3RydWN0KSkKICNkZWZpbmUgUkVDT1JERVJfVFdFQUtfREVDTEFSRShy
+ZWMpIFwKLS0gCjIuMjEuMAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVk
+ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3NwaWNlLWRldmVs
