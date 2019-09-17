@@ -2,41 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3015DB40EB
-	for <lists+spice-devel@lfdr.de>; Mon, 16 Sep 2019 21:13:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BA3FB49A4
+	for <lists+spice-devel@lfdr.de>; Tue, 17 Sep 2019 10:37:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CAF8E6EA43;
-	Mon, 16 Sep 2019 19:13:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 011056EB62;
+	Tue, 17 Sep 2019 08:37:08 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A7476EA3E
- for <spice-devel@lists.freedesktop.org>; Mon, 16 Sep 2019 19:13:48 +0000 (UTC)
-Received: from jwhite.mn.codeweavers.com ([10.69.137.101])
- by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.89) (envelope-from <jwhite@codeweavers.com>)
- id 1i9wRX-0003Nb-RO
- for spice-devel@lists.freedesktop.org; Mon, 16 Sep 2019 14:13:47 -0500
-From: Jeremy White <jwhite@codeweavers.com>
-To: spice-devel@lists.freedesktop.org
-Date: Mon, 16 Sep 2019 14:13:33 -0500
-Message-Id: <20190916191333.27139-11-jwhite@codeweavers.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190916191333.27139-1-jwhite@codeweavers.com>
-References: <20190916191333.27139-1-jwhite@codeweavers.com>
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4DE866EB62
+ for <spice-devel@lists.freedesktop.org>; Tue, 17 Sep 2019 08:37:07 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id E055930821A3
+ for <spice-devel@lists.freedesktop.org>; Tue, 17 Sep 2019 08:37:06 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.155])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8D28E60BE1;
+ Tue, 17 Sep 2019 08:37:06 +0000 (UTC)
+Date: Tue, 17 Sep 2019 10:37:05 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190917083705.nbx4lqraggmkxvqm@wingsuit>
+References: <20190911075547.5210-1-fziglio@redhat.com>
 MIME-Version: 1.0
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; 
- d=codeweavers.com; s=6377696661; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:To:From:Sender:Reply-To:Cc:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nlh93m7whLG4qSZgLRGlMa5k9Ur+0jr9CaQ+35FJzRY=; b=W42L15NmJ7OBCLTsZCXkSbDSw3
- DftBNLCzSHISF4V/oDawGu+1FFbCOwSph0xoqo19kbgKo8qACbPJDfQ1SF8js4q8/VXMB8mn2ClF2
- e7+QhWby6w2KRIm4xqzhviTRHxepTuzT9zCwMvUjyepZqIeJTANRIfcqoug+je1GMbcU=;
-Subject: [Spice-devel] [PATCH x11spice 10/10] Do not use show_cursor_check
- on older Xorg builds.
+In-Reply-To: <20190911075547.5210-1-fziglio@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.47]); Tue, 17 Sep 2019 08:37:06 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 1/2] reds: Inline
+ reds_mig_switch function
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,32 +45,117 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1375865234=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-VmVyc2lvbnMgcHJpb3IgdG8gMS4yMCBkbyBub3QgaGF2ZSB0aGUgc2hvd19jdXJzb3JfY2hlY2sg
-ZnVuY3Rpb24uCgpTaWduZWQtb2ZmLWJ5OiBKZXJlbXkgV2hpdGUgPGp3aGl0ZUBjb2Rld2VhdmVy
-cy5jb20+Ci0tLQogc3BpY2UtdmlkZW8tZHVtbXkvc3JjL2Rpc3BsYXkuYyB8IDEwICsrKysrKysr
-KysKIDEgZmlsZSBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvc3BpY2Ut
-dmlkZW8tZHVtbXkvc3JjL2Rpc3BsYXkuYyBiL3NwaWNlLXZpZGVvLWR1bW15L3NyYy9kaXNwbGF5
-LmMKaW5kZXggNzg2ZTY5MTYuLjMxYmUwNDE2IDEwMDY0NAotLS0gYS9zcGljZS12aWRlby1kdW1t
-eS9zcmMvZGlzcGxheS5jCisrKyBiL3NwaWNlLXZpZGVvLWR1bW15L3NyYy9kaXNwbGF5LmMKQEAg
-LTExMywxMCArMTEzLDE2IEBAIGR1bW15X2NydGNfaGlkZV9jdXJzb3IoeGY4NkNydGNQdHIgY3J0
-YykKIHsKIH0KIAorI2lmIFhGODZfQ1JUQ19WRVJTSU9OID4gNwogc3RhdGljIEJvb2wKKyNlbHNl
-CitzdGF0aWMgdm9pZAorI2VuZGlmCiBkdW1teV9jcnRjX3Nob3dfY3Vyc29yKHhmODZDcnRjUHRy
-IGNydGMpCiB7CisjaWYgWEY4Nl9DUlRDX1ZFUlNJT04gPiA3CiAgICAgcmV0dXJuIFRSVUU7Cisj
-ZW5kaWYKIH0KIAogc3RhdGljIEJvb2wKQEAgLTE0MSw4ICsxNDcsMTIgQEAgc3RhdGljIGNvbnN0
-IHhmODZDcnRjRnVuY3NSZWMgY3J0Y19mdW5jcyA9IHsKICAgICAuc2hhZG93X2Rlc3Ryb3kgPSBO
-VUxMLAogICAgIC5zZXRfY3Vyc29yX2NvbG9ycyA9IGR1bW15X2NydGNfc2V0X2N1cnNvcl9jb2xv
-cnMsCiAgICAgLnNldF9jdXJzb3JfcG9zaXRpb24gPSBkdW1teV9jcnRjX3NldF9jdXJzb3JfcG9z
-aXRpb24sCisjaWYgWEY4Nl9DUlRDX1ZFUlNJT04gPiA3CiAgICAgLnNob3dfY3Vyc29yID0gTlVM
-TCwKICAgICAuc2hvd19jdXJzb3JfY2hlY2sgPSBkdW1teV9jcnRjX3Nob3dfY3Vyc29yLAorI2Vs
-c2UKKyAgICAuc2hvd19jdXJzb3IgPSBkdW1teV9jcnRjX3Nob3dfY3Vyc29yLAorI2VuZGlmCiAg
-ICAgLmhpZGVfY3Vyc29yID0gZHVtbXlfY3J0Y19oaWRlX2N1cnNvciwKICAgICAubG9hZF9jdXJz
-b3JfaW1hZ2UgPSBOVUxMLAogICAgIC5sb2FkX2N1cnNvcl9pbWFnZV9jaGVjayA9IE5VTEwsCi0t
-IAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-ClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1k
-ZXZlbA==
+
+--===============1375865234==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="p2d22h7llrwozc6j"
+Content-Disposition: inline
+
+
+--p2d22h7llrwozc6j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Sep 11, 2019 at 08:55:46AM +0100, Frediano Ziglio wrote:
+> No much reason for not inlining it, it's quite small and do
+> not reduce readability.
+> Note that spice_server_migrate_switch is deprecated and not
+> used by Qemu since commit 67be6726b6459472103ee87ceaf2e8e97c154965
+> (cfr "spice: raise requirement to 0.12" September 2012).
+>=20
+> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+For series,
+Acked-by: Victor Toso <victortoso@redhat.com>
+
+> ---
+>  server/reds.c | 17 ++++++-----------
+>  1 file changed, 6 insertions(+), 11 deletions(-)
+>=20
+> diff --git a/server/reds.c b/server/reds.c
+> index c294137be..cd8e796aa 100644
+> --- a/server/reds.c
+> +++ b/server/reds.c
+> @@ -3148,16 +3148,6 @@ static void reds_mig_finished(RedsState *reds, int=
+ completed)
+>      reds_mig_release(reds->config);
+>  }
+> =20
+> -static void reds_mig_switch(RedsState *reds)
+> -{
+> -    if (!reds->config->mig_spice) {
+> -        spice_warning("reds_mig_switch called without migrate_info set");
+> -        return;
+> -    }
+> -    main_channel_migrate_switch(reds->main_channel, reds->config->mig_sp=
+ice);
+> -    reds_mig_release(reds->config);
+> -}
+> -
+>  static void migrate_timeout(void *opaque)
+>  {
+>      RedsState *reds =3D opaque;
+> @@ -4427,7 +4417,12 @@ SPICE_GNUC_VISIBLE int spice_server_migrate_switch=
+(SpiceServer *reds)
+>         return 0;
+>      }
+>      reds->expect_migrate =3D FALSE;
+> -    reds_mig_switch(reds);
+> +    if (!reds->config->mig_spice) {
+> +        spice_warning("spice_server_migrate_switch called without migrat=
+e_info set");
+> +        return 0;
+> +    }
+> +    main_channel_migrate_switch(reds->main_channel, reds->config->mig_sp=
+ice);
+> +    reds_mig_release(reds->config);
+>      return 0;
+>  }
+> =20
+> --=20
+> 2.21.0
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--p2d22h7llrwozc6j
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2AmzEACgkQl9kSPeN6
+SE9hxQ/+NuMpbo+sXo1QZdT7UUFCfP2NFN78+Go/QYn+y/y1e7dJ/qZQbGvwxPSx
+0DdxS5oxshSM1mpjqlLmyt7QnQbcVLIPDpfNLl7JUkz7cQW00DIHYcPq1wxiWXN7
+bkl1DWSgoM8ovJo+xUOeZoSQ6+qGwEBTk5lOuWYpkee6JHScUsU6O9bQN3+vzbm2
+eObqq+j1u1lqKv4RzJ+iHmwO/EgFgt56MSX/x4Zm/RmYDKE5GU0AroKj1FRIh6si
+bNliEZR2KlL85TtuRt0VyRLtguheJRMGcnzQglIDookmlu3y7sLrrnenasqJK5y1
+FVh2uFSCk25i9AeLj3sHwDzhtEraxDMxX7XpEHrJyME22xP4dfvPhmDWGqFJ7MG4
+UNVncFYcS7hMvs83LdC/lCxW0936AfCa3umHXS+3PIBRKDERKnngPbwJvEJ2cEx5
+k6BT55M8FUGsigLtWD0SkXa+j4+CanKqtak7k8BaglpqtE7dzqKg32qJG0LuNupq
+L/EPZ1VG/T/wlpWJQYQDVHQcjszJdiyWw15IwXIuu3/aPwlBFZN54kiaEBE8XdNU
+Bxs/TFvLVNYNCE4V0yUw8tb2uxWNHEmFhqvsLGD3lO9xnRO4WNIKL7FihJWZaueo
+uj4DdphzEeHFEerX39sWXtswu/Zmr0mBPN7mvhsfRrSF94UfwUM=
+=3orI
+-----END PGP SIGNATURE-----
+
+--p2d22h7llrwozc6j--
+
+--===============1375865234==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1375865234==--
