@@ -2,40 +2,47 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 965EAB752A
-	for <lists+spice-devel@lfdr.de>; Thu, 19 Sep 2019 10:34:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2709B7576
+	for <lists+spice-devel@lfdr.de>; Thu, 19 Sep 2019 10:51:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 21B376F4ED;
-	Thu, 19 Sep 2019 08:34:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E716E6F4E5;
+	Thu, 19 Sep 2019 08:51:43 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 29B186F4ED
- for <spice-devel@lists.freedesktop.org>; Thu, 19 Sep 2019 08:33:59 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 630446F4E5
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 Sep 2019 08:51:43 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id CB8BB18C891B
- for <spice-devel@lists.freedesktop.org>; Thu, 19 Sep 2019 08:33:58 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 78D5719C5B;
- Thu, 19 Sep 2019 08:33:58 +0000 (UTC)
-Date: Thu, 19 Sep 2019 10:33:57 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190919083357.r4xftz6z6yci5ey5@wingsuit>
+ by mx1.redhat.com (Postfix) with ESMTPS id 01FC5308218D
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 Sep 2019 08:51:43 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id EC69660BF1
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 Sep 2019 08:51:42 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id E2AF64A460;
+ Thu, 19 Sep 2019 08:51:42 +0000 (UTC)
+Date: Thu, 19 Sep 2019 04:51:42 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Victor Toso <victortoso@redhat.com>
+Message-ID: <1014878350.2490912.1568883102055.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20190919083233.rjhnuxwzix3tm2ss@wingsuit>
 References: <20190916102104.20943-1-victortoso@redhat.com>
- <20190916102104.20943-11-victortoso@redhat.com>
- <609435609.453393.1568802087770.JavaMail.zimbra@redhat.com>
+ <20190916102104.20943-14-victortoso@redhat.com>
+ <20190919083233.rjhnuxwzix3tm2ss@wingsuit>
 MIME-Version: 1.0
-In-Reply-To: <609435609.453393.1568802087770.JavaMail.zimbra@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.70]); Thu, 19 Sep 2019 08:33:58 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH v7 10/20] fixup! usb-redir: add files for
- SCSI and USB MSC implementation
+X-Originating-IP: [10.33.32.17, 10.4.195.14]
+Thread-Topic: build: Do not build usbredir dependent file is usbredir disabled
+Thread-Index: GhgHcvs5cLgxunx7HOJ1VhcyAACVCQ==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.47]); Thu, 19 Sep 2019 08:51:43 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH v7 13/20] build: Do not build usbredir
+ dependent file is usbredir disabled
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,162 +55,63 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============2075909149=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============2075909149==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ncxhpa3pqzdjpt6l"
-Content-Disposition: inline
-
-
---ncxhpa3pqzdjpt6l
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Wed, Sep 18, 2019 at 06:21:27AM -0400, Frediano Ziglio wrote:
-> >=20
-> > From: Frediano Ziglio <fziglio@redhat.com>
-> >=20
-> > Do not use 0x%u as format, misleasding, %u is decimal.
-> > Also most of these are formatting lun number which in multiple cases are
-> > expressed as decimal.
->=20
-> I remember somebody acked this so can be squashed in the previous
-> which is already acked.
-
-Okay, I'll squash and apply changes from the review and send a
-v8 and then we wait for Yuri.
-
-Cheers,
->=20
-> > ---
-> >  src/cd-scsi.c | 20 ++++++++++----------
-> >  1 file changed, 10 insertions(+), 10 deletions(-)
-> >=20
-> > diff --git a/src/cd-scsi.c b/src/cd-scsi.c
-> > index 25842b3..ea682ef 100644
-> > --- a/src/cd-scsi.c
-> > +++ b/src/cd-scsi.c
-> > @@ -2079,7 +2079,7 @@ static void cd_scsi_cmd_send_event(CdScsiLU *dev,
-> > CdScsiRequest *req)
-> >      pers_prevent =3D event[1] & 0x80;
-> >      ext_req_code =3D (event[2] << 8) | event[3];
-> > =20
-> > -    SPICE_DEBUG("send_event, lun:0x%u immed:%u param_len:%u"
-> > +    SPICE_DEBUG("send_event, lun:%u immed:%u param_len:%u"
-> >                  " ext_req_event:0x%x ext_req_status:0x%x"
-> >                  " pers_prevent:0x%x ext_req_code:0x%x",
-> >                  req->lun, immed, event_param_len, ext_req_event,
-> > @@ -2177,7 +2177,7 @@ static void cd_scsi_cmd_start_stop_unit(CdScsiLU =
-*dev,
-> > CdScsiRequest *req)
-> >      load_eject =3D (req->cdb[4] & CD_START_STOP_FLAG_LOEJ) ? TRUE : FA=
-LSE;
-> >      power_cond =3D req->cdb[4] >> 4;
-> > =20
-> > -    SPICE_DEBUG("start_stop_unit, lun:0x%u"
-> > +    SPICE_DEBUG("start_stop_unit, lun:%u"
-> >                  " immed:%d start:%d load_eject:%d power_cond:0x%x(%s)",
-> >                  req->lun, immed, start, load_eject, power_cond,
-> >                  cd_scsi_start_stop_power_cond_name(power_cond));
-> > @@ -2187,23 +2187,23 @@ static void cd_scsi_cmd_start_stop_unit(CdScsiLU
-> > *dev, CdScsiRequest *req)
-> >          if (!start) { /* stop the unit */
-> >              if (load_eject) { /* eject medium */
-> >                  if (dev->prevent_media_removal) {
-> > -                    SPICE_DEBUG("start_stop_unit, lun:0x%u"
-> > +                    SPICE_DEBUG("start_stop_unit, lun:%u"
-> >                                  " prevent_media_removal set, eject fai=
-led",
-> >                                  req->lun);
-> >                      cd_scsi_cmd_complete_check_cond(dev, req,
-> >                      &sense_code_MEDIUM_REMOVAL_PREVENTED);
-> >                      return;
-> >                  }
-> > -                SPICE_DEBUG("start_stop_unit, lun:0x%u eject", req->lu=
-n);
-> > +                SPICE_DEBUG("start_stop_unit, lun:%u eject", req->lun);
-> >                  cd_scsi_lu_unload(dev);
-> >                  cd_scsi_dev_changed(dev->tgt->user_data, req->lun);
-> >              }
-> >              dev->power_cond =3D CD_SCSI_POWER_STOPPED;
-> > -            SPICE_DEBUG("start_stop_unit, lun:0x%u stopped", req->lun);
-> > +            SPICE_DEBUG("start_stop_unit, lun:%u stopped", req->lun);
-> >          } else { /* start the unit */
-> >              dev->power_cond =3D CD_SCSI_POWER_ACTIVE;
-> > -            SPICE_DEBUG("start_stop_unit, lun:0x%u started", req->lun);
-> > +            SPICE_DEBUG("start_stop_unit, lun:%u started", req->lun);
-> > =20
-> >              if (load_eject) { /* load medium */
-> > -                SPICE_DEBUG("start_stop_unit, lun:0x%u load with no me=
-dia",
-> > +                SPICE_DEBUG("start_stop_unit, lun:%u load with no medi=
-a",
-> >                              req->lun);
-> >                  cd_scsi_lu_load(dev, NULL);
-> >                  cd_scsi_dev_changed(dev->tgt->user_data, req->lun);
-> > @@ -2213,17 +2213,17 @@ static void cd_scsi_cmd_start_stop_unit(CdScsiLU
-> > *dev, CdScsiRequest *req)
-> >      case CD_START_STOP_POWER_COND_ACTIVE:
-> >          /* not error to specify transition to the current power condit=
-ion */
-> >          dev->power_cond =3D CD_SCSI_POWER_ACTIVE;
-> > -        SPICE_DEBUG("start_stop_unit, lun:0x%u active", req->lun);
-> > +        SPICE_DEBUG("start_stop_unit, lun:%u active", req->lun);
-> >          break;
-> >      case CD_START_STOP_POWER_COND_IDLE:
-> >      case CD_START_STOP_POWER_COND_FORCE_IDLE_0:
-> >          dev->power_cond =3D CD_SCSI_POWER_IDLE;
-> > -        SPICE_DEBUG("start_stop_unit, lun:0x%u idle", req->lun);
-> > +        SPICE_DEBUG("start_stop_unit, lun:%u idle", req->lun);
-> >          break;
-> >      case CD_START_STOP_POWER_COND_STANDBY:
-> >      case CD_START_STOP_POWER_COND_FORCE_STANDBY_0:
-> >          dev->power_cond =3D CD_SCSI_POWER_STANDBY;
-> > -        SPICE_DEBUG("start_stop_unit, lun:0x%u standby", req->lun);
-> > +        SPICE_DEBUG("start_stop_unit, lun:%u standby", req->lun);
-> >          break;
-> >      case CD_START_STOP_POWER_COND_LU_CONTROL:
-> >          break;
->=20
-> Frediano
-
---ncxhpa3pqzdjpt6l
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2DPXUACgkQl9kSPeN6
-SE8scw//du1eOmoADKaeyeXrR9WQw5sJSHPeX8pybP5Ygb3LI/FsbdU+/V/pB/Ha
-eOkIl7w7LDLY6cK/E2bZQVZn78LGytOTkK6fjT6pDd4RfkbzfpXpjkG/nUawYieK
-jZ7PLOQ4VszwBcUHKybqyzxjyvkcuyl4gp4L2fHrR4h0nJn5rKB3W3aLU4/lvvHD
-zu6jZIjWZ6SGVgxB4JKzN4DrQ/bsseedPUoHEX0/HI4xGJFxpmdqazkJczs1Ee6H
-n6Us0rWxmqCA1NIIS46AIjOmAAYjVElLbv6n34wohnWuqTsb4hMuV9Si+s/h2vS+
-VRH1pB1hYKUjw6v7/lm4ufZKeSmQlvLdY+CDfB0ISP9hPse+WzEOMTO+lizHLWJA
-OBKLY1cfjqn7ae2pZJ7oNp1AxVzQFkRHXdK99euSmTZieHRQL3LpNQHpCzKXgmPI
-+EP8uHb7AR2jvKcJYjlBjDn4aFi9gN5cE7tsz60RMG4ZFnONnlPu0FICopWInWgr
-6ICcjh54aqd+zHWUuz3z7r39rvluU+6kQtdY/z6eTbq/hGiYjGUVnWUk8uqM9XzP
-+uz6JtgFFlgaxNSJavKpKYWCKn0oaIHTL3+DeRWL3IDFq8D3efKn9wLK3BlCNTPL
-R1jvhOTQ9oEcCTDr4w5dWxU3+KiNcx1CsiYiaP6jyX4o2LB2Dmw=
-=O1kA
------END PGP SIGNATURE-----
-
---ncxhpa3pqzdjpt6l--
-
---===============2075909149==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============2075909149==--
+PiAKPiBIaSwKPiAKPiBPbiBNb24sIFNlcCAxNiwgMjAxOSBhdCAxMjoyMDo1NlBNICswMjAwLCBW
+aWN0b3IgVG9zbyB3cm90ZToKPiA+IEZyb206IEZyZWRpYW5vIFppZ2xpbyA8ZnppZ2xpb0ByZWRo
+YXQuY29tPgo+ID4gCj4gPiBUaGVzZSBmaWxlcyB3b3VsZCBlbmQgdXAgdG8gY29tcGlsZSBlbXB0
+eSBjb2RlLCBubyByZWFzb24KPiA+IHRvIGNvbXBpbGUgYW5kIGxpbmsgdGhlbS4KPiA+IAo+ID4g
+U2lnbmVkLW9mZi1ieTogRnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+Cj4gCj4g
+QWNrZWQtYnk6IFZpY3RvciBUb3NvIDx2aWN0b3J0b3NvQHJlZGhhdC5jb20+Cj4gCgpCZWZvcmUg
+SSBmb3JnZXQsIHR5cG8gaW4gdGl0bGUsIHNob3VsZCBiZQoKImJ1aWxkOiBEbyBub3QgYnVpbGQg
+dXNicmVkaXIgZGVwZW5kZW50IGZpbGUgaWYgdXNicmVkaXIgaXMgZGlzYWJsZWQiCgpIb3BlIGl0
+IGdldHMgaW4gdjgKCj4gPiAtLS0KPiA+ICBzcmMvbWVzb24uYnVpbGQgICB8IDEwICsrKysrLS0t
+LS0KPiA+ICBzcmMvdXNiLWJhY2tlbmQuYyB8ICA0IC0tLS0KPiA+ICBzcmMvdXNidXRpbC5jICAg
+ICB8ICAzIC0tLQo+ID4gIHNyYy91c2J1dGlsLmggICAgIHwgIDQgLS0tLQo+ID4gIDQgZmlsZXMg
+Y2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkKPiA+IAo+ID4gZGlmZiAt
+LWdpdCBhL3NyYy9tZXNvbi5idWlsZCBiL3NyYy9tZXNvbi5idWlsZAo+ID4gaW5kZXggMDBlYjI3
+Ny4uMDQ2MWRlYSAxMDA2NDQKPiA+IC0tLSBhL3NyYy9tZXNvbi5idWlsZAo+ID4gKysrIGIvc3Jj
+L21lc29uLmJ1aWxkCj4gPiBAQCAtMTE5LDExICsxMTksNiBAQCBzcGljZV9jbGllbnRfZ2xpYl9z
+b3VyY2VzID0gWwo+ID4gICAgJ3NwaWNlLXVyaS1wcml2LmgnLAo+ID4gICAgJ3NwaWNlLXV0aWwt
+cHJpdi5oJywKPiA+ICAgICd1c2ItZGV2aWNlLW1hbmFnZXItcHJpdi5oJywKPiA+IC0gICd1c2J1
+dGlsLmMnLAo+ID4gLSAgJ3VzYnV0aWwuaCcsCj4gPiAtICAndXNiLWJhY2tlbmQuYycsCj4gPiAt
+ICAndXNiLWVtdWxhdGlvbi5oJywKPiA+IC0gICd1c2ItYmFja2VuZC5oJywKPiA+ICAgICd2bWNz
+dHJlYW0uYycsCj4gPiAgICAndm1jc3RyZWFtLmgnLAo+ID4gIF0KPiA+IEBAIC0xNTksNiArMTU0
+LDExIEBAIGVuZGlmCj4gPiAgCj4gPiAgaWYgc3BpY2VfZ3RrX2hhc191c2JyZWRpcgo+ID4gICAg
+c3BpY2VfY2xpZW50X2dsaWJfc291cmNlcyArPSBbCj4gPiArICAgICd1c2J1dGlsLmMnLAo+ID4g
+KyAgICAndXNidXRpbC5oJywKPiA+ICsgICAgJ3VzYi1iYWNrZW5kLmMnLAo+ID4gKyAgICAndXNi
+LWVtdWxhdGlvbi5oJywKPiA+ICsgICAgJ3VzYi1iYWNrZW5kLmgnLAo+ID4gICAgICAndXNiLWRl
+dmljZS1jZC5jJywKPiA+ICAgICAgJ3VzYi1kZXZpY2UtY2QuaCcsCj4gPiAgICAgICdjZC1zY3Np
+LmMnLAo+ID4gZGlmZiAtLWdpdCBhL3NyYy91c2ItYmFja2VuZC5jIGIvc3JjL3VzYi1iYWNrZW5k
+LmMKPiA+IGluZGV4IDgxZDdjOWUuLjNhNWE4NzMgMTAwNjQ0Cj4gPiAtLS0gYS9zcmMvdXNiLWJh
+Y2tlbmQuYwo+ID4gKysrIGIvc3JjL3VzYi1iYWNrZW5kLmMKPiA+IEBAIC0yMiw4ICsyMiw2IEBA
+Cj4gPiAgCj4gPiAgI2luY2x1ZGUgImNvbmZpZy5oIgo+ID4gIAo+ID4gLSNpZmRlZiBVU0VfVVNC
+UkVESVIKPiA+IC0KPiA+ICAjaW5jbHVkZSA8Z2xpYi1vYmplY3QuaD4KPiA+ICAjaW5jbHVkZSA8
+aW50dHlwZXMuaD4KPiA+ICAjaW5jbHVkZSA8Z2lvL2dpby5oPgo+ID4gQEAgLTE1MjIsNSArMTUy
+MCwzIEBACj4gPiBzcGljZV91c2JfYmFja2VuZF9jcmVhdGVfZW11bGF0ZWRfZGV2aWNlKFNwaWNl
+VXNiQmFja2VuZCAqYmUsCj4gPiAgCj4gPiAgICAgIHJldHVybiBUUlVFOwo+ID4gIH0KPiA+IC0K
+PiA+IC0jZW5kaWYgLyogVVNCX1JFRElSICovCj4gPiBkaWZmIC0tZ2l0IGEvc3JjL3VzYnV0aWwu
+YyBiL3NyYy91c2J1dGlsLmMKPiA+IGluZGV4IDUwNTJlZjMuLmFlYmVkMzUgMTAwNjQ0Cj4gPiAt
+LS0gYS9zcmMvdXNidXRpbC5jCj4gPiArKysgYi9zcmMvdXNidXRpbC5jCj4gPiBAQCAtMjYsNyAr
+MjYsNiBAQAo+ID4gICNpbmNsdWRlIDxjdHlwZS5oPgo+ID4gICNpbmNsdWRlIDxzdGRsaWIuaD4K
+PiA+ICAKPiA+IC0jaWZkZWYgVVNFX1VTQlJFRElSCj4gPiAgI2luY2x1ZGUgPHN0ZGlvLmg+Cj4g
+PiAgI2lmZGVmIF9fbGludXhfXwo+ID4gICNpbmNsdWRlIDx1bmlzdGQuaD4KPiA+IEBAIC0yNzUs
+OCArMjc0LDYgQEAgdm9pZCBzcGljZV91c2JfdXRpbF9nZXRfZGV2aWNlX3N0cmluZ3MoaW50IGJ1
+cywgaW50Cj4gPiBhZGRyZXNzLAo+ID4gICAgICB9Cj4gPiAgfQo+ID4gIAo+ID4gLSNlbmRpZgo+
+ID4gLQo+ID4gICNpZmRlZiBVU0JVVElMX1RFU1QKPiA+ICBpbnQgbWFpbigpCj4gPiAgewo+ID4g
+ZGlmZiAtLWdpdCBhL3NyYy91c2J1dGlsLmggYi9zcmMvdXNidXRpbC5oCj4gPiBpbmRleCA2YzU3
+MGQ5Li4yZjY4M2ZhIDEwMDY0NAo+ID4gLS0tIGEvc3JjL3VzYnV0aWwuaAo+ID4gKysrIGIvc3Jj
+L3VzYnV0aWwuaAo+ID4gQEAgLTIxLDggKzIxLDYgQEAKPiA+ICAjcHJhZ21hIG9uY2UKPiA+ICAK
+PiA+ICAjaW5jbHVkZSA8Z2xpYi5oPgo+ID4gLQo+ID4gLSNpZmRlZiBVU0VfVVNCUkVESVIKPiA+
+ICAjaW5jbHVkZSA8bGlidXNiLmg+Cj4gPiAgCj4gPiAgR19CRUdJTl9ERUNMUwo+ID4gQEAgLTMy
+LDUgKzMwLDMgQEAgdm9pZCBzcGljZV91c2JfdXRpbF9nZXRfZGV2aWNlX3N0cmluZ3MoaW50IGJ1
+cywgaW50Cj4gPiBhZGRyZXNzLAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGdjaGFyICoqbWFudWZhY3R1cmVyLCBnY2hhcgo+ID4gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICoqcHJvZHVjdCk7Cj4gPiAgCj4gPiAgR19FTkRfREVDTFMK
+PiA+IC0KPiA+IC0jZW5kaWYgLyogVVNFX1VTQlJFRElSICovCgpGcmVkaWFubwpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5n
+IGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
