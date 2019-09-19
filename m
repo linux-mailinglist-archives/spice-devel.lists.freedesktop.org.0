@@ -1,47 +1,41 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45DB9B620B
-	for <lists+spice-devel@lfdr.de>; Wed, 18 Sep 2019 13:06:27 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 30815B74DA
+	for <lists+spice-devel@lfdr.de>; Thu, 19 Sep 2019 10:16:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BE6276EED4;
-	Wed, 18 Sep 2019 11:06:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A48EF6F45E;
+	Thu, 19 Sep 2019 08:16:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D8576EED4
- for <spice-devel@lists.freedesktop.org>; Wed, 18 Sep 2019 11:06:24 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5E5A86F45E
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 Sep 2019 08:16:33 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id ABECE3086228;
- Wed, 18 Sep 2019 11:06:23 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id A24C360C18;
- Wed, 18 Sep 2019 11:06:23 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 970D64EA64;
- Wed, 18 Sep 2019 11:06:23 +0000 (UTC)
-Date: Wed, 18 Sep 2019 07:06:23 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: =?utf-8?Q?Niccol=C3=B2?= Belli <darkbasic@linuxsystems.it>
-Message-ID: <19874737.458036.1568804783224.JavaMail.zimbra@redhat.com>
-In-Reply-To: <6be70c3dce8a4beaa49e88f6f35a20d0@linuxsystems.it>
-References: <3f6e9905c9111b49b559b2c73cf0b8b4@linuxsystems.it>
- <539543765.76418.1568620402733.JavaMail.zimbra@redhat.com>
- <6be70c3dce8a4beaa49e88f6f35a20d0@linuxsystems.it>
+ by mx1.redhat.com (Postfix) with ESMTPS id 079C246671
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 Sep 2019 08:16:33 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.155])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A659A19C5B;
+ Thu, 19 Sep 2019 08:16:32 +0000 (UTC)
+Date: Thu, 19 Sep 2019 10:16:31 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190919081631.45t45pscg4csw2wz@wingsuit>
+References: <20190916102104.20943-1-victortoso@redhat.com>
+ <20190916102104.20943-5-victortoso@redhat.com>
+ <212500435.450993.1568801010307.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.16, 10.4.195.10]
-Thread-Topic: Running SPICE on ppc64le
-Thread-Index: MEeqHy/3aNi9vSU9ybN1n/NuZQnPzg==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+In-Reply-To: <212500435.450993.1568801010307.JavaMail.zimbra@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.42]); Wed, 18 Sep 2019 11:06:24 +0000 (UTC)
-Subject: Re: [Spice-devel] Running SPICE on ppc64le
+ (mx1.redhat.com [10.5.110.30]); Thu, 19 Sep 2019 08:16:33 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH v7 04/20] usb-backend: no emulated isoch
+ devices
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,40 +48,119 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1962386687=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiAKPiBUaGUgZnVubnkgcGFydCBpcyB0aGF0IEknbSAqbm90KiBvbiBCaWcgRW5kaWFuLCBteSBw
-cGM2NCBydW5zIExpdHRsZQo+IEVuZGlhbiBGZWRvcmEuCj4gRm9yIHNvbWUgcmVhc29uIHNwaWNl
-IChhbmQgUVhMIGFwcGFyZW50bHkpIGRvbid0IGdldCBjb21waWxlZCBvbgo+IHBwYzY0bGU6IGFy
-ZSB5b3Ugc3VnZ2VzdGluZyB0aGF0IGlmIEkgc29tZWhvdyBlbmFibGUgaXQgYXQgY29tcGlsYXRp
-b24KPiB0aW1lIHRoZW4gaXQgc2hvdWxkIHdvcmsgb3V0IG9mIHRoZSBib3g/Cj4gSWYgc28sIHdo
-eSBkaWQgRmVkb3JhIGRpc2FibGUgaXQ/Cj4gCj4gTmljY29sbycKPiAKCkkgc3VwcG9zZSBmb3Ig
-aGlzdG9yaWMgcmVhc29ucyBhbmQgYXMgbm90IG11Y2ggdGVzdGVkIHRvIGxpbWl0IHRoZQpidWdz
-IGluIGNhc2UgdGhlcmUgYXJlIGlzc3VlcyA6LSkKSSByZW1lbWJlciBRWEwgd2FzIGRpc2FibGVk
-IGZvciBubyBJbnRlbCBtYWNoaW5lcyBidXQgSSBjYW5ub3QgZmluZAp0aGF0IGxpbWl0YXRpb24g
-YW55IG1vcmUgKEkgdGhpbmsgd2FzIGluIGRlZmF1bHQtY29uZmlncyBkaXJlY3RvcnkKb2YgUWVt
-dSkuCgpJbiB0aGUgUlBNIHNwZWMgZmlsZSB0aGVyZSBhcmUgdGhlc2UgbGluZXM6CgogICMgTWF0
-Y2hlcyBzcGljZSBFeGNsdXNpdmVBcmNoCiAgJWlmYXJjaCAle2l4ODZ9IHg4Nl82NCAle2FybX0g
-YWFyY2g2NAogICVnbG9iYWwgaGF2ZV9zcGljZSAgIDEKICAlZW5kaWYKCnNvIEkgc3VwcG9zZSB5
-b3Ugc2hvdWxkIGZvcmNlIGhhdmVfc3BpY2UgaWYgeW91IHdhbnQgdG8gcmVjb21waWxlIHRoZSBS
-UE0sCmxpa2UgYWRkaW5nICItRCAnaGF2ZV9zcGljZSAxJyIgdG8gbW9jayBjb21tYW5kLgoKRnJl
-ZGlhbm8KCj4gSWwgMjAxOS0wOS0xNiAwOTo1MyBGcmVkaWFubyBaaWdsaW8gaGEgc2NyaXR0bzoK
-PiA+PiBIaSwKPiA+PiBJcyB0aGVyZSBhbnkgcmVhc29uIHdoeSBTcGljZSBpcyBub3QgYXZhaWxh
-YmxlIG9uIHBwYzY0bGU/Cj4gPj4gSSd2ZSByZWFkIHRoZXJlIGFyZSBzdGlsbCBzb21lIGlzc3Vl
-cyB3aXRoIGJpZyBlbmRpYW4sIGJ1dCB3aGF0J3MKPiA+PiB3cm9uZwo+ID4+IHdpdGggbGl0dGxl
-IGVuZGlhbj8KPiA+PiBJIHdvdWxkIHJlYWxseSBsb3ZlIHRvIGJlIGFibGUgdG8gdXNlIFFYTCBh
-bmQgZXNwZWNpYWxseSBVU0IKPiA+PiByZWRpcmVjdGlvbgo+ID4+IG9uIG15IFJhcHRvciBCbGFj
-a2JpcmQgKFBvd2VyIDkpLgo+ID4+IAo+ID4+IEJlc3RzLAo+ID4+IE5pY2NvbG8nCj4gPiAKPiA+
-IFNQSUNFIGRvZXMgbm90IG1lYW4gUVhMLCB5b3UgY2FuIHVzZSBTUElDRSB3aXRob3V0IFFYTC4K
-PiA+IFdoeSBRWEwgaXMgbm90IGNvbXBpbGVkIGZvciBQUEMgSSBoYXZlIG5vIGlkZWEuCj4gPiBS
-ZWNlbnRseSB0aGVyZSB3ZXJlIHF1aXRlIHNvbWUgY29tcGF0aWJpbGl0eSBwYXRjaGVzIGZvciBi
-aWcgZW5kaWFuCj4gPiBtYWNoaW5lcywKPiA+IHNob3VsZCB3b3JrIG1vc3RseSBvdXQgb2YgdGhl
-IGJveCAoSSBoYXZlIG9ubHkgc29tZSBtaW5vciBwYXRjaGVzIGZvcgo+ID4gdGhlIGFnZW50KS4K
-PiA+IE9mZmljaWFsbHkgb25seSB4NjQgYW5kIHg4NiBhcmUgc3VwcG9ydGVkLgo+ID4gCj4gPiBG
-cmVkaWFubwo+IAo+IApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0
-b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3Bp
-Y2UtZGV2ZWw=
+
+--===============1962386687==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="glbjgq6oaou5vg7w"
+Content-Disposition: inline
+
+
+--glbjgq6oaou5vg7w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Wed, Sep 18, 2019 at 06:03:30AM -0400, Frediano Ziglio wrote:
+> >=20
+> > From: Yuri Benditovich <yuri.benditovich@daynix.com>
+> >=20
+> > SpiceUsbBackendDevice deals with real and emulated devices but there
+> > is no plans to implement emulated isochronous devices.
+> >=20
+> > This patch adds check to edev (emulated device) in the guard, fix the
+> > return value to FALSE instead of plain 0 and return early in case the
+> > code path is around emulated devices.
+> >=20
+> > This is a preparatory patch to extend emulated devices support.
+> >=20
+> > Signed-off-by: Victor Toso <victortoso@redhat.com>
+>=20
+> Should not also have the signed-off from original author?
+
+Yes
+
+> > t#
+>=20
+> typo ?
+
+Yes
+
+> > ---
+> >  src/usb-backend.c | 8 +++++++-
+> >  1 file changed, 7 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/src/usb-backend.c b/src/usb-backend.c
+> > index 5b52a40..3258240 100644
+> > --- a/src/usb-backend.c
+> > +++ b/src/usb-backend.c
+> > @@ -357,11 +357,17 @@ gboolean
+> > spice_usb_backend_device_isoch(SpiceUsbBackendDevice *dev)
+> >      gint i, j, k;
+> >      int rc;
+> > =20
+> > +    g_return_val_if_fail(libdev !=3D NULL || dev->edev !=3D NULL, FALS=
+E);
+> > +
+> > +    if (dev->edev) {
+>=20
+> "!=3D NULL" ? Sometimes we use sometimes not, not strong about.
+
+For new code it is better to add the explicit check indeed
+
+>=20
+> > +        /* currently we do not emulate isoch devices */
+> > +        return FALSE;
+> > +    }
+> > +
+> >      if (dev->cached_isochronous_valid) {
+> >          return dev->cached_isochronous;
+> >      }
+> > =20
+> > -    g_return_val_if_fail(libdev !=3D NULL, 0);
+> > =20
+> >      rc =3D libusb_get_active_config_descriptor(libdev, &conf_desc);
+> >      if (rc) {
+>=20
+> Otherwise fine for me.
+
+Thanks,
+
+--glbjgq6oaou5vg7w
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2DOV8ACgkQl9kSPeN6
+SE+QwA//caoY4iqd55ZOYhEnBk5ovkGjRyQ0CoYKBBpeh4xNRnD1L3pzG+ZI+zNr
+hDdwM0X4TRi0Pjc69M0kr7LPEEZeaAisH0kFgk78SQuLs8de8ha3V0XO9lKrOaue
+Y6eZuEVT7sbgce3TYy0BZ9z5YcOa6gcsligBV+2e+Fjub60v+RsM4vhTi4jPyRzk
+WFz9dcbzJB7nffnJC2ISmlsuDGbMjLoAi5K9x04D+RWWwEGHlHoM7sIpp43D8Gnr
+blO4CrRTSFxV13Lw5AYTx8KSfgZx5WDrb+qw49Yr5HohIHv6XYz2grHqpouAjjZR
+Nb0IbxvoHw5gI55+vXolWUNtR8WKqm9XCWw97EVyyDuS4W7CQysodhnXRmvB40A9
+OnhUAJXvAoOavLYVjm9oqY4OJGgcK9b6+JWiD5ybJSJLVxZMU+8AQznqEoeg6Owl
+ZoagzK4/GdEMhy+ixr5/dp2c14FMolAAsK5Fyk+hYehQOn5Qk+QwX7g8GRzmemY2
+ZvCii549dsmQksFMJr2GCSYirYqo74G0nn1lDbkNuNZBTnApWsdf3GPiHkM1lR1v
+U7BLfp3PMCsQINYikQ9ojG3e1CguRZv0hPu61H/j7qaNT+g6jUoaT+KSBYj8J/94
+bK/7wI6RsOStDL4uFt1FWyfQwkLhRGGmcFGVKsXKRCOpedOegh8=
+=Mu5A
+-----END PGP SIGNATURE-----
+
+--glbjgq6oaou5vg7w--
+
+--===============1962386687==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1962386687==--
