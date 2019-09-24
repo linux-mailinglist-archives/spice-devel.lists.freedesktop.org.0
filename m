@@ -1,37 +1,40 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB2E9BC834
-	for <lists+spice-devel@lfdr.de>; Tue, 24 Sep 2019 14:50:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6864ABC847
+	for <lists+spice-devel@lfdr.de>; Tue, 24 Sep 2019 14:55:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B9BA08924A;
-	Tue, 24 Sep 2019 12:50:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B20926EA1E;
+	Tue, 24 Sep 2019 12:55:24 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9C15C89242
- for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 12:50:06 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 883696EA1E
+ for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 12:55:22 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 11DC12103
- for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 12:50:06 +0000 (UTC)
-Received: from wingsuit.mxp.redhat.com (unknown [10.32.181.60])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 68F1410013D9
- for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 12:50:05 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 317358BA2DA
+ for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 12:55:22 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.60])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AE107600C8;
+ Tue, 24 Sep 2019 12:55:21 +0000 (UTC)
+Date: Tue, 24 Sep 2019 14:55:20 +0200
 From: Victor Toso <victortoso@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Date: Tue, 24 Sep 2019 14:50:04 +0200
-Message-Id: <20190924125004.31150-1-victortoso@redhat.com>
-In-Reply-To: <20190924091502.16038-2-victortoso@redhat.com>
-References: <20190924091502.16038-2-victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190924125520.dbtb223xfzujfywi@wingsuit>
+References: <20190924091502.16038-1-victortoso@redhat.com>
+ <20190924091502.16038-2-victortoso@redhat.com>
+ <753523787.3055120.1569320875233.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+In-Reply-To: <753523787.3055120.1569320875233.JavaMail.zimbra@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.71]); Tue, 24 Sep 2019 12:50:06 +0000 (UTC)
-Subject: [Spice-devel] [spice-gtk v2 1/6] Avoid accessing SpiceChannel's
+ (mx1.redhat.com [10.5.110.68]); Tue, 24 Sep 2019 12:55:22 +0000 (UTC)
+Subject: Re: [Spice-devel] [spice-gtk v1 1/6] Avoid accessing SpiceChannel's
  internals
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -44,224 +47,465 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1248080053=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-RnJvbTogVmljdG9yIFRvc28gPG1lQHZpY3RvcnRvc28uY29tPgoKU3BpY2VDaGFubmVsIHByb3Zp
-ZGVzIHNvbWUgaW50ZXJuYWwgdXRpbGl0eSBmdW5jdGlvbnMgdGhhdCB0aGlzIHBhdGNoCnRha2Vz
-IGFkdmFudGFnZSBvZjoKCiogc3BpY2VfY2hhbm5lbF9nZXRfY2hhbm5lbF90eXBlKCkKKiBzcGlj
-ZV9jaGFubmVsX2dldF9jaGFubmVsX2lkKCkKKiBzcGljZV9jaGFubmVsX2dldF9zdGF0ZSgpCgpT
-aWduZWQtb2ZmLWJ5OiBWaWN0b3IgVG9zbyA8dmljdG9ydG9zb0ByZWRoYXQuY29tPgotLS0KIHNy
-Yy9jaGFubmVsLWlucHV0cy5jIHwgNjUgKysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0t
-LS0tLS0tLS0tLS0KIHNyYy9jaGFubmVsLW1haW4uYyAgIHwgMjggKysrKysrKysrKy0tLS0tLS0t
-LQogc3JjL3NwaWNlLWF1ZGlvLmMgICAgfCAgNiArKy0tCiBzcmMvc3BpY2Utc2Vzc2lvbi5jICB8
-ICAzICstCiA0IGZpbGVzIGNoYW5nZWQsIDYzIGluc2VydGlvbnMoKyksIDM5IGRlbGV0aW9ucygt
-KQoKZGlmZiAtLWdpdCBhL3NyYy9jaGFubmVsLWlucHV0cy5jIGIvc3JjL2NoYW5uZWwtaW5wdXRz
-LmMKaW5kZXggYThjZGQyMy4uMjM4NWIzZSAxMDA2NDQKLS0tIGEvc3JjL2NoYW5uZWwtaW5wdXRz
-LmMKKysrIGIvc3JjL2NoYW5uZWwtaW5wdXRzLmMKQEAgLTMwNCwxNCArMzA0LDIwIEBAIHZvaWQg
-c3BpY2VfaW5wdXRzX2NoYW5uZWxfbW90aW9uKFNwaWNlSW5wdXRzQ2hhbm5lbCAqY2hhbm5lbCwg
-Z2ludCBkeCwgZ2ludCBkeSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdpbnQg
-YnV0dG9uX3N0YXRlKQogewogICAgIFNwaWNlSW5wdXRzQ2hhbm5lbFByaXZhdGUgKmM7CisgICAg
-ZW51bSBzcGljZV9jaGFubmVsX3N0YXRlIGNoYW5uZWxfc3RhdGU7CiAKICAgICBnX3JldHVybl9p
-Zl9mYWlsKGNoYW5uZWwgIT0gTlVMTCk7Ci0gICAgZ19yZXR1cm5faWZfZmFpbChTUElDRV9DSEFO
-TkVMKGNoYW5uZWwpLT5wcml2LT5zdGF0ZSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1VOQ09OTkVD
-VEVEKTsKLSAgICBpZiAoU1BJQ0VfQ0hBTk5FTChjaGFubmVsKS0+cHJpdi0+c3RhdGUgIT0gU1BJ
-Q0VfQ0hBTk5FTF9TVEFURV9SRUFEWSkKKworICAgIGNoYW5uZWxfc3RhdGUgPSBzcGljZV9jaGFu
-bmVsX2dldF9zdGF0ZShTUElDRV9DSEFOTkVMKGNoYW5uZWwpKTsKKyAgICBnX3JldHVybl9pZl9m
-YWlsKGNoYW5uZWxfc3RhdGUgIT0gU1BJQ0VfQ0hBTk5FTF9TVEFURV9VTkNPTk5FQ1RFRCk7CisK
-KyAgICBpZiAoY2hhbm5lbF9zdGF0ZSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1JFQURZKSB7CiAg
-ICAgICAgIHJldHVybjsKKyAgICB9CiAKLSAgICBpZiAoZHggPT0gMCAmJiBkeSA9PSAwKQorICAg
-IGlmIChkeCA9PSAwICYmIGR5ID09IDApIHsKICAgICAgICAgcmV0dXJuOworICAgIH0KIAogICAg
-IGMgPSBjaGFubmVsLT5wcml2OwogICAgIGMtPmJzICA9IGJ1dHRvbl9zdGF0ZTsKQEAgLTM2MCw4
-ICszNjYsOSBAQCB2b2lkIHNwaWNlX2lucHV0c19jaGFubmVsX3Bvc2l0aW9uKFNwaWNlSW5wdXRz
-Q2hhbm5lbCAqY2hhbm5lbCwgZ2ludCB4LCBnaW50IHksCiAKICAgICBnX3JldHVybl9pZl9mYWls
-KGNoYW5uZWwgIT0gTlVMTCk7CiAKLSAgICBpZiAoU1BJQ0VfQ0hBTk5FTChjaGFubmVsKS0+cHJp
-di0+c3RhdGUgIT0gU1BJQ0VfQ0hBTk5FTF9TVEFURV9SRUFEWSkKKyAgICBpZiAoc3BpY2VfY2hh
-bm5lbF9nZXRfc3RhdGUoU1BJQ0VfQ0hBTk5FTChjaGFubmVsKSkgIT0gU1BJQ0VfQ0hBTk5FTF9T
-VEFURV9SRUFEWSkgewogICAgICAgICByZXR1cm47CisgICAgfQogCiAgICAgYyA9IGNoYW5uZWwt
-PnByaXY7CiAgICAgYy0+YnMgID0gYnV0dG9uX3N0YXRlOwpAQCAtNDExLDEwICs0MTgsMTIgQEAg
-dm9pZCBzcGljZV9pbnB1dHNfY2hhbm5lbF9idXR0b25fcHJlc3MoU3BpY2VJbnB1dHNDaGFubmVs
-ICpjaGFubmVsLCBnaW50IGJ1dHRvbiwKIAogICAgIGdfcmV0dXJuX2lmX2ZhaWwoY2hhbm5lbCAh
-PSBOVUxMKTsKIAotICAgIGlmIChTUElDRV9DSEFOTkVMKGNoYW5uZWwpLT5wcml2LT5zdGF0ZSAh
-PSBTUElDRV9DSEFOTkVMX1NUQVRFX1JFQURZKQorICAgIGlmIChzcGljZV9jaGFubmVsX2dldF9z
-dGF0ZShTUElDRV9DSEFOTkVMKGNoYW5uZWwpKSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1JFQURZ
-KSB7CiAgICAgICAgIHJldHVybjsKLSAgICBpZiAoc3BpY2VfY2hhbm5lbF9nZXRfcmVhZF9vbmx5
-KFNQSUNFX0NIQU5ORUwoY2hhbm5lbCkpKQorICAgIH0KKyAgICBpZiAoc3BpY2VfY2hhbm5lbF9n
-ZXRfcmVhZF9vbmx5KFNQSUNFX0NIQU5ORUwoY2hhbm5lbCkpKSB7CiAgICAgICAgIHJldHVybjsK
-KyAgICB9CiAKICAgICBjID0gY2hhbm5lbC0+cHJpdjsKICAgICBzd2l0Y2ggKGJ1dHRvbikgewpA
-QCAtNDc2LDEwICs0ODUsMTIgQEAgdm9pZCBzcGljZV9pbnB1dHNfY2hhbm5lbF9idXR0b25fcmVs
-ZWFzZShTcGljZUlucHV0c0NoYW5uZWwgKmNoYW5uZWwsIGdpbnQgYnV0dG8KIAogICAgIGdfcmV0
-dXJuX2lmX2ZhaWwoY2hhbm5lbCAhPSBOVUxMKTsKIAotICAgIGlmIChTUElDRV9DSEFOTkVMKGNo
-YW5uZWwpLT5wcml2LT5zdGF0ZSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1JFQURZKQorICAgIGlm
-IChzcGljZV9jaGFubmVsX2dldF9zdGF0ZShTUElDRV9DSEFOTkVMKGNoYW5uZWwpKSAhPSBTUElD
-RV9DSEFOTkVMX1NUQVRFX1JFQURZKSB7CiAgICAgICAgIHJldHVybjsKLSAgICBpZiAoc3BpY2Vf
-Y2hhbm5lbF9nZXRfcmVhZF9vbmx5KFNQSUNFX0NIQU5ORUwoY2hhbm5lbCkpKQorICAgIH0KKyAg
-ICBpZiAoc3BpY2VfY2hhbm5lbF9nZXRfcmVhZF9vbmx5KFNQSUNFX0NIQU5ORUwoY2hhbm5lbCkp
-KSB7CiAgICAgICAgIHJldHVybjsKKyAgICB9CiAKICAgICBjID0gY2hhbm5lbC0+cHJpdjsKICAg
-ICBzd2l0Y2ggKGJ1dHRvbikgewpAQCAtNTM1LDEzICs1NDYsMTggQEAgdm9pZCBzcGljZV9pbnB1
-dHNfY2hhbm5lbF9rZXlfcHJlc3MoU3BpY2VJbnB1dHNDaGFubmVsICpjaGFubmVsLCBndWludCBz
-Y2FuY29kZSkKIHsKICAgICBTcGljZU1zZ2NLZXlEb3duIGRvd247CiAgICAgU3BpY2VNc2dPdXQg
-Km1zZzsKKyAgICBlbnVtIHNwaWNlX2NoYW5uZWxfc3RhdGUgY2hhbm5lbF9zdGF0ZTsKIAogICAg
-IGdfcmV0dXJuX2lmX2ZhaWwoY2hhbm5lbCAhPSBOVUxMKTsKLSAgICBnX3JldHVybl9pZl9mYWls
-KFNQSUNFX0NIQU5ORUwoY2hhbm5lbCktPnByaXYtPnN0YXRlICE9IFNQSUNFX0NIQU5ORUxfU1RB
-VEVfVU5DT05ORUNURUQpOwotICAgIGlmIChTUElDRV9DSEFOTkVMKGNoYW5uZWwpLT5wcml2LT5z
-dGF0ZSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1JFQURZKQorCisgICAgY2hhbm5lbF9zdGF0ZSA9
-IHNwaWNlX2NoYW5uZWxfZ2V0X3N0YXRlKFNQSUNFX0NIQU5ORUwoY2hhbm5lbCkpOworICAgIGdf
-cmV0dXJuX2lmX2ZhaWwoY2hhbm5lbF9zdGF0ZSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1VOQ09O
-TkVDVEVEKTsKKyAgICBpZiAoY2hhbm5lbF9zdGF0ZSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1JF
-QURZKSB7CiAgICAgICAgIHJldHVybjsKLSAgICBpZiAoc3BpY2VfY2hhbm5lbF9nZXRfcmVhZF9v
-bmx5KFNQSUNFX0NIQU5ORUwoY2hhbm5lbCkpKQorICAgIH0KKyAgICBpZiAoc3BpY2VfY2hhbm5l
-bF9nZXRfcmVhZF9vbmx5KFNQSUNFX0NIQU5ORUwoY2hhbm5lbCkpKSB7CiAgICAgICAgIHJldHVy
-bjsKKyAgICB9CiAKICAgICBkb3duLmNvZGUgPSBzcGljZV9tYWtlX3NjYW5jb2RlKHNjYW5jb2Rl
-LCBGQUxTRSk7CiAgICAgbXNnID0gc3BpY2VfbXNnX291dF9uZXcoU1BJQ0VfQ0hBTk5FTChjaGFu
-bmVsKSwgU1BJQ0VfTVNHQ19JTlBVVFNfS0VZX0RPV04pOwpAQCAtNTc4LDEzICs1OTQsMTggQEAg
-dm9pZCBzcGljZV9pbnB1dHNfY2hhbm5lbF9rZXlfcmVsZWFzZShTcGljZUlucHV0c0NoYW5uZWwg
-KmNoYW5uZWwsIGd1aW50IHNjYW5jb2QKIHsKICAgICBTcGljZU1zZ2NLZXlVcCB1cDsKICAgICBT
-cGljZU1zZ091dCAqbXNnOworICAgIGVudW0gc3BpY2VfY2hhbm5lbF9zdGF0ZSBjaGFubmVsX3N0
-YXRlOwogCiAgICAgZ19yZXR1cm5faWZfZmFpbChjaGFubmVsICE9IE5VTEwpOwotICAgIGdfcmV0
-dXJuX2lmX2ZhaWwoU1BJQ0VfQ0hBTk5FTChjaGFubmVsKS0+cHJpdi0+c3RhdGUgIT0gU1BJQ0Vf
-Q0hBTk5FTF9TVEFURV9VTkNPTk5FQ1RFRCk7Ci0gICAgaWYgKFNQSUNFX0NIQU5ORUwoY2hhbm5l
-bCktPnByaXYtPnN0YXRlICE9IFNQSUNFX0NIQU5ORUxfU1RBVEVfUkVBRFkpCisKKyAgICBjaGFu
-bmVsX3N0YXRlID0gc3BpY2VfY2hhbm5lbF9nZXRfc3RhdGUoU1BJQ0VfQ0hBTk5FTChjaGFubmVs
-KSk7CisgICAgZ19yZXR1cm5faWZfZmFpbChjaGFubmVsX3N0YXRlICE9IFNQSUNFX0NIQU5ORUxf
-U1RBVEVfVU5DT05ORUNURUQpOworICAgIGlmIChjaGFubmVsX3N0YXRlICE9IFNQSUNFX0NIQU5O
-RUxfU1RBVEVfUkVBRFkpIHsKICAgICAgICAgcmV0dXJuOwotICAgIGlmIChzcGljZV9jaGFubmVs
-X2dldF9yZWFkX29ubHkoU1BJQ0VfQ0hBTk5FTChjaGFubmVsKSkpCisgICAgfQorICAgIGlmIChz
-cGljZV9jaGFubmVsX2dldF9yZWFkX29ubHkoU1BJQ0VfQ0hBTk5FTChjaGFubmVsKSkpIHsKICAg
-ICAgICAgcmV0dXJuOworICAgIH0KIAogICAgIHVwLmNvZGUgPSBzcGljZV9tYWtlX3NjYW5jb2Rl
-KHNjYW5jb2RlLCBUUlVFKTsKICAgICBtc2cgPSBzcGljZV9tc2dfb3V0X25ldyhTUElDRV9DSEFO
-TkVMKGNoYW5uZWwpLCBTUElDRV9NU0dDX0lOUFVUU19LRVlfVVApOwpAQCAtNjI0LDEzICs2NDUs
-MTQgQEAgdm9pZCBzcGljZV9pbnB1dHNfY2hhbm5lbF9rZXlfcHJlc3NfYW5kX3JlbGVhc2UoU3Bp
-Y2VJbnB1dHNDaGFubmVsICppbnB1dF9jaGFubmUKICAgICBTcGljZUNoYW5uZWwgKmNoYW5uZWwg
-PSBTUElDRV9DSEFOTkVMKGlucHV0X2NoYW5uZWwpOwogCiAgICAgZ19yZXR1cm5faWZfZmFpbChj
-aGFubmVsICE9IE5VTEwpOwotICAgIGdfcmV0dXJuX2lmX2ZhaWwoY2hhbm5lbC0+cHJpdi0+c3Rh
-dGUgIT0gU1BJQ0VfQ0hBTk5FTF9TVEFURV9VTkNPTk5FQ1RFRCk7CisgICAgZ19yZXR1cm5faWZf
-ZmFpbChzcGljZV9jaGFubmVsX2dldF9zdGF0ZShjaGFubmVsKSAhPSBTUElDRV9DSEFOTkVMX1NU
-QVRFX1VOQ09OTkVDVEVEKTsKIAotICAgIGlmIChjaGFubmVsLT5wcml2LT5zdGF0ZSAhPSBTUElD
-RV9DSEFOTkVMX1NUQVRFX1JFQURZKQorICAgIGlmIChzcGljZV9jaGFubmVsX2dldF9zdGF0ZShj
-aGFubmVsKSAhPSBTUElDRV9DSEFOTkVMX1NUQVRFX1JFQURZKSB7CiAgICAgICAgIHJldHVybjsK
-LSAgICBpZiAoc3BpY2VfY2hhbm5lbF9nZXRfcmVhZF9vbmx5KGNoYW5uZWwpKQorICAgIH0KKyAg
-ICBpZiAoc3BpY2VfY2hhbm5lbF9nZXRfcmVhZF9vbmx5KGNoYW5uZWwpKSB7CiAgICAgICAgIHJl
-dHVybjsKLQorICAgIH0KICAgICBpZiAoc3BpY2VfY2hhbm5lbF90ZXN0X2NhcGFiaWxpdHkoY2hh
-bm5lbCwgU1BJQ0VfSU5QVVRTX0NBUF9LRVlfU0NBTkNPREUpKSB7CiAgICAgICAgIFNwaWNlTXNn
-T3V0ICptc2c7CiAgICAgICAgIGd1aW50MTYgY29kZTsKQEAgLTY2NCwxNiArNjg2LDE1IEBAIHN0
-YXRpYyBTcGljZU1zZ091dCogc2V0X2tleV9sb2NrcyhTcGljZUlucHV0c0NoYW5uZWwgKmNoYW5u
-ZWwsIGd1aW50IGxvY2tzKQogICAgIFNwaWNlTXNnY0tleU1vZGlmaWVycyBtb2RpZmllcnM7CiAg
-ICAgU3BpY2VNc2dPdXQgKm1zZzsKICAgICBTcGljZUlucHV0c0NoYW5uZWxQcml2YXRlICppYzsK
-LSAgICBTcGljZUNoYW5uZWxQcml2YXRlICpjOwogCiAgICAgZ19yZXR1cm5fdmFsX2lmX2ZhaWwo
-U1BJQ0VfSVNfSU5QVVRTX0NIQU5ORUwoY2hhbm5lbCksIE5VTEwpOwogCiAgICAgaWMgPSBjaGFu
-bmVsLT5wcml2OwotICAgIGMgPSBTUElDRV9DSEFOTkVMKGNoYW5uZWwpLT5wcml2OwotCiAgICAg
-aWMtPmxvY2tzID0gbG9ja3M7Ci0gICAgaWYgKGMtPnN0YXRlICE9IFNQSUNFX0NIQU5ORUxfU1RB
-VEVfUkVBRFkpCisKKyAgICBpZiAoc3BpY2VfY2hhbm5lbF9nZXRfc3RhdGUoU1BJQ0VfQ0hBTk5F
-TChjaGFubmVsKSkgIT0gU1BJQ0VfQ0hBTk5FTF9TVEFURV9SRUFEWSkgewogICAgICAgICByZXR1
-cm4gTlVMTDsKKyAgICB9CiAKICAgICBtc2cgPSBzcGljZV9tc2dfb3V0X25ldyhTUElDRV9DSEFO
-TkVMKGNoYW5uZWwpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNQSUNFX01TR0NfSU5Q
-VVRTX0tFWV9NT0RJRklFUlMpOwpkaWZmIC0tZ2l0IGEvc3JjL2NoYW5uZWwtbWFpbi5jIGIvc3Jj
-L2NoYW5uZWwtbWFpbi5jCmluZGV4IDMzNGJlN2QuLjI0NGUxNGMgMTAwNjQ0Ci0tLSBhL3NyYy9j
-aGFubmVsLW1haW4uYworKysgYi9zcmMvY2hhbm5lbC1tYWluLmMKQEAgLTIyMTEsNyArMjIxMSw3
-IEBAIHN0YXRpYyB2b2lkIG1pZ3JhdGVfY2hhbm5lbF9ldmVudF9jYihTcGljZUNoYW5uZWwgKmNo
-YW5uZWwsIFNwaWNlQ2hhbm5lbEV2ZW50IGV2CiAKICAgICBzd2l0Y2ggKGV2ZW50KSB7CiAgICAg
-Y2FzZSBTUElDRV9DSEFOTkVMX09QRU5FRDoKLSAgICAgICAgaWYgKGMtPmNoYW5uZWxfdHlwZSA9
-PSBTUElDRV9DSEFOTkVMX01BSU4pIHsKKyAgICAgICAgaWYgKHNwaWNlX2NoYW5uZWxfZ2V0X2No
-YW5uZWxfdHlwZShjaGFubmVsKSA9PSBTUElDRV9DSEFOTkVMX01BSU4pIHsKICAgICAgICAgICAg
-IFNwaWNlU2Vzc2lvbiAqc2Vzc2lvbiA9IHNwaWNlX2NoYW5uZWxfZ2V0X3Nlc3Npb24obWlnLT5z
-cmNfY2hhbm5lbCk7CiAgICAgICAgICAgICBpZiAobWlnLT5kb19zZWFtbGVzcykgewogICAgICAg
-ICAgICAgICAgIFNwaWNlTWFpbkNoYW5uZWxQcml2YXRlICptYWluX3ByaXYgPSBTUElDRV9NQUlO
-X0NIQU5ORUwoY2hhbm5lbCktPnByaXY7CkBAIC0yMjI3LDExICsyMjI3LDE1IEBAIHN0YXRpYyB2
-b2lkIG1pZ3JhdGVfY2hhbm5lbF9ldmVudF9jYihTcGljZUNoYW5uZWwgKmNoYW5uZWwsIFNwaWNl
-Q2hhbm5lbEV2ZW50IGV2CiAgICAgICAgICAgICBHTGlzdCAqY2hhbm5lbHMsICpsOwogICAgICAg
-ICAgICAgbCA9IGNoYW5uZWxzID0gc3BpY2Vfc2Vzc2lvbl9nZXRfY2hhbm5lbHMoc2Vzc2lvbik7
-CiAgICAgICAgICAgICB3aGlsZSAobCAhPSBOVUxMKSB7Ci0gICAgICAgICAgICAgICAgU3BpY2VD
-aGFubmVsUHJpdmF0ZSAgKmN1cmMgPSBTUElDRV9DSEFOTkVMKGwtPmRhdGEpLT5wcml2OworICAg
-ICAgICAgICAgICAgIFNwaWNlQ2hhbm5lbCAqaXQgPSBTUElDRV9DSEFOTkVMKGwtPmRhdGEpOwor
-CiAgICAgICAgICAgICAgICAgbCA9IGwtPm5leHQ7Ci0gICAgICAgICAgICAgICAgaWYgKGN1cmMt
-PmNoYW5uZWxfdHlwZSA9PSBTUElDRV9DSEFOTkVMX01BSU4pCisgICAgICAgICAgICAgICAgaWYg
-KHNwaWNlX2NoYW5uZWxfZ2V0X2NoYW5uZWxfdHlwZShpdCkgPT0gU1BJQ0VfQ0hBTk5FTF9NQUlO
-KSB7CiAgICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOwotICAgICAgICAgICAgICAgIG1pZ3Jh
-dGVfY2hhbm5lbF9jb25uZWN0KG1pZywgY3VyYy0+Y2hhbm5lbF90eXBlLCBjdXJjLT5jaGFubmVs
-X2lkKTsKKyAgICAgICAgICAgICAgICB9CisgICAgICAgICAgICAgICAgbWlncmF0ZV9jaGFubmVs
-X2Nvbm5lY3QobWlnLAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNw
-aWNlX2NoYW5uZWxfZ2V0X2NoYW5uZWxfdHlwZShpdCksCisgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgc3BpY2VfY2hhbm5lbF9nZXRfY2hhbm5lbF9pZChpdCkpOwogICAg
-ICAgICAgICAgfQogICAgICAgICAgICAgZ19saXN0X2ZyZWUoY2hhbm5lbHMpOwogICAgICAgICB9
-IGVsc2UgewpAQCAtMjI1NCwxMCArMjI1OCwxMSBAQCBzdGF0aWMgdm9pZCBtaWdyYXRlX2NoYW5u
-ZWxfZXZlbnRfY2IoU3BpY2VDaGFubmVsICpjaGFubmVsLCBTcGljZUNoYW5uZWxFdmVudCBldgog
-c3RhdGljIGdib29sZWFuIG1haW5fbWlncmF0ZV9oYW5kc2hha2VfZG9uZShncG9pbnRlciBkYXRh
-KQogewogICAgIHNwaWNlX21pZ3JhdGUgKm1pZyA9IGRhdGE7Ci0gICAgU3BpY2VDaGFubmVsUHJp
-dmF0ZSAgKmMgPSBTUElDRV9DSEFOTkVMKG1pZy0+ZHN0X2NoYW5uZWwpLT5wcml2OworICAgIFNw
-aWNlQ2hhbm5lbCAqY2hhbm5lbCA9IFNQSUNFX0NIQU5ORUwobWlnLT5kc3RfY2hhbm5lbCk7Cisg
-ICAgU3BpY2VDaGFubmVsUHJpdmF0ZSAqYyA9IGNoYW5uZWwtPnByaXY7CiAKLSAgICBnX3JldHVy
-bl92YWxfaWZfZmFpbChjLT5jaGFubmVsX3R5cGUgPT0gU1BJQ0VfQ0hBTk5FTF9NQUlOLCBGQUxT
-RSk7Ci0gICAgZ19yZXR1cm5fdmFsX2lmX2ZhaWwoYy0+c3RhdGUgPT0gU1BJQ0VfQ0hBTk5FTF9T
-VEFURV9NSUdSQVRJT05fSEFORFNIQUtFLCBGQUxTRSk7CisgICAgZ19yZXR1cm5fdmFsX2lmX2Zh
-aWwoc3BpY2VfY2hhbm5lbF9nZXRfY2hhbm5lbF90eXBlKGNoYW5uZWwpID09IFNQSUNFX0NIQU5O
-RUxfTUFJTiwgRkFMU0UpOworICAgIGdfcmV0dXJuX3ZhbF9pZl9mYWlsKHNwaWNlX2NoYW5uZWxf
-Z2V0X3N0YXRlKGNoYW5uZWwpID09IFNQSUNFX0NIQU5ORUxfU1RBVEVfTUlHUkFUSU9OX0hBTkRT
-SEFLRSwgRkFMU0UpOwogCiAgICAgYy0+c3RhdGUgPSBTUElDRV9DSEFOTkVMX1NUQVRFX01JR1JB
-VElORzsKICAgICBtaWctPm5jaGFubmVscy0tOwpAQCAtMjQwNywyMCArMjQxMiwxOCBAQCBzdGF0
-aWMgdm9pZCBtYWluX2hhbmRsZV9taWdyYXRlX2JlZ2luX3NlYW1sZXNzKFNwaWNlQ2hhbm5lbCAq
-Y2hhbm5lbCwgU3BpY2VNc2dJbgogCiBzdGF0aWMgdm9pZCBtYWluX2hhbmRsZV9taWdyYXRlX2Rz
-dF9zZWFtbGVzc19hY2soU3BpY2VDaGFubmVsICpjaGFubmVsLCBTcGljZU1zZ0luICppbikKIHsK
-LSAgICBTcGljZUNoYW5uZWxQcml2YXRlICAqYyA9IFNQSUNFX0NIQU5ORUwoY2hhbm5lbCktPnBy
-aXY7CiAgICAgU3BpY2VNYWluQ2hhbm5lbFByaXZhdGUgKm1haW5fcHJpdiA9IFNQSUNFX01BSU5f
-Q0hBTk5FTChjaGFubmVsKS0+cHJpdjsKIAotICAgIGdfcmV0dXJuX2lmX2ZhaWwoYy0+c3RhdGUg
-PT0gU1BJQ0VfQ0hBTk5FTF9TVEFURV9NSUdSQVRJT05fSEFORFNIQUtFKTsKKyAgICBnX3JldHVy
-bl9pZl9mYWlsKHNwaWNlX2NoYW5uZWxfZ2V0X3N0YXRlKGNoYW5uZWwpID09IFNQSUNFX0NIQU5O
-RUxfU1RBVEVfTUlHUkFUSU9OX0hBTkRTSEFLRSk7CiAgICAgbWFpbl9wcml2LT5taWdyYXRlX2Rh
-dGEtPmRvX3NlYW1sZXNzID0gdHJ1ZTsKICAgICBnX2lkbGVfYWRkKG1haW5fbWlncmF0ZV9oYW5k
-c2hha2VfZG9uZSwgbWFpbl9wcml2LT5taWdyYXRlX2RhdGEpOwogfQogCiBzdGF0aWMgdm9pZCBt
-YWluX2hhbmRsZV9taWdyYXRlX2RzdF9zZWFtbGVzc19uYWNrKFNwaWNlQ2hhbm5lbCAqY2hhbm5l
-bCwgU3BpY2VNc2dJbiAqaW4pCiB7Ci0gICAgU3BpY2VDaGFubmVsUHJpdmF0ZSAgKmMgPSBTUElD
-RV9DSEFOTkVMKGNoYW5uZWwpLT5wcml2OwogICAgIFNwaWNlTWFpbkNoYW5uZWxQcml2YXRlICpt
-YWluX3ByaXYgPSBTUElDRV9NQUlOX0NIQU5ORUwoY2hhbm5lbCktPnByaXY7CiAKLSAgICBnX3Jl
-dHVybl9pZl9mYWlsKGMtPnN0YXRlID09IFNQSUNFX0NIQU5ORUxfU1RBVEVfTUlHUkFUSU9OX0hB
-TkRTSEFLRSk7CisgICAgZ19yZXR1cm5faWZfZmFpbChzcGljZV9jaGFubmVsX2dldF9zdGF0ZShj
-aGFubmVsKSA9PSBTUElDRV9DSEFOTkVMX1NUQVRFX01JR1JBVElPTl9IQU5EU0hBS0UpOwogICAg
-IG1haW5fcHJpdi0+bWlncmF0ZV9kYXRhLT5kb19zZWFtbGVzcyA9IGZhbHNlOwogICAgIGdfaWRs
-ZV9hZGQobWFpbl9taWdyYXRlX2hhbmRzaGFrZV9kb25lLCBtYWluX3ByaXYtPm1pZ3JhdGVfZGF0
-YSk7CiB9CkBAIC0yNTUxLDExICsyNTU0LDEwIEBAIHN0YXRpYyB2b2lkIHNwaWNlX21haW5faGFu
-ZGxlX21zZyhTcGljZUNoYW5uZWwgKmNoYW5uZWwsIFNwaWNlTXNnSW4gKm1zZykKIHsKICAgICBp
-bnQgdHlwZSA9IHNwaWNlX21zZ19pbl90eXBlKG1zZyk7CiAgICAgU3BpY2VDaGFubmVsQ2xhc3Mg
-KnBhcmVudF9jbGFzczsKLSAgICBTcGljZUNoYW5uZWxQcml2YXRlICpjID0gU1BJQ0VfQ0hBTk5F
-TChjaGFubmVsKS0+cHJpdjsKIAogICAgIHBhcmVudF9jbGFzcyA9IFNQSUNFX0NIQU5ORUxfQ0xB
-U1Moc3BpY2VfbWFpbl9jaGFubmVsX3BhcmVudF9jbGFzcyk7CiAKLSAgICBpZiAoYy0+c3RhdGUg
-PT0gU1BJQ0VfQ0hBTk5FTF9TVEFURV9NSUdSQVRJT05fSEFORFNIQUtFKSB7CisgICAgaWYgKHNw
-aWNlX2NoYW5uZWxfZ2V0X3N0YXRlKGNoYW5uZWwpID09IFNQSUNFX0NIQU5ORUxfU1RBVEVfTUlH
-UkFUSU9OX0hBTkRTSEFLRSkgewogICAgICAgICBpZiAodHlwZSAhPSBTUElDRV9NU0dfTUFJTl9N
-SUdSQVRFX0RTVF9TRUFNTEVTU19BQ0sgJiYKICAgICAgICAgICAgIHR5cGUgIT0gU1BJQ0VfTVNH
-X01BSU5fTUlHUkFURV9EU1RfU0VBTUxFU1NfTkFDSykgewogICAgICAgICAgICAgZ19jcml0aWNh
-bCgidW5leHBlY3RlZCBtc2cgKCVkKS4iCmRpZmYgLS1naXQgYS9zcmMvc3BpY2UtYXVkaW8uYyBi
-L3NyYy9zcGljZS1hdWRpby5jCmluZGV4IGRhZjYyZGYuLjEwYjMxZDcgMTAwNjQ0Ci0tLSBhL3Ny
-Yy9zcGljZS1hdWRpby5jCisrKyBiL3NyYy9zcGljZS1hdWRpby5jCkBAIC0xNDUsMTEgKzE0NSwx
-MyBAQCBzdGF0aWMgdm9pZCBzcGljZV9hdWRpb19pbml0KFNwaWNlQXVkaW8gKnNlbGYpCiAKIHN0
-YXRpYyB2b2lkIGNvbm5lY3RfY2hhbm5lbChTcGljZUF1ZGlvICpzZWxmLCBTcGljZUNoYW5uZWwg
-KmNoYW5uZWwpCiB7Ci0gICAgaWYgKGNoYW5uZWwtPnByaXYtPnN0YXRlICE9IFNQSUNFX0NIQU5O
-RUxfU1RBVEVfVU5DT05ORUNURUQpCisgICAgaWYgKHNwaWNlX2NoYW5uZWxfZ2V0X3N0YXRlKGNo
-YW5uZWwpICE9IFNQSUNFX0NIQU5ORUxfU1RBVEVfVU5DT05ORUNURUQpIHsKICAgICAgICAgcmV0
-dXJuOworICAgIH0KIAotICAgIGlmIChTUElDRV9BVURJT19HRVRfQ0xBU1Moc2VsZiktPmNvbm5l
-Y3RfY2hhbm5lbChzZWxmLCBjaGFubmVsKSkKKyAgICBpZiAoU1BJQ0VfQVVESU9fR0VUX0NMQVNT
-KHNlbGYpLT5jb25uZWN0X2NoYW5uZWwoc2VsZiwgY2hhbm5lbCkpIHsKICAgICAgICAgc3BpY2Vf
-Y2hhbm5lbF9jb25uZWN0KGNoYW5uZWwpOworICAgIH0KIH0KIAogc3RhdGljIHZvaWQgdXBkYXRl
-X2F1ZGlvX2NoYW5uZWxzKFNwaWNlQXVkaW8gKnNlbGYsIFNwaWNlU2Vzc2lvbiAqc2Vzc2lvbikK
-ZGlmZiAtLWdpdCBhL3NyYy9zcGljZS1zZXNzaW9uLmMgYi9zcmMvc3BpY2Utc2Vzc2lvbi5jCmlu
-ZGV4IGQwZDllNTQuLmFmZWI3MjQgMTAwNjQ0Ci0tLSBhL3NyYy9zcGljZS1zZXNzaW9uLmMKKysr
-IGIvc3JjL3NwaWNlLXNlc3Npb24uYwpAQCAtMjIwMyw3ICsyMjAzLDYgQEAgR1NvY2tldENvbm5l
-Y3Rpb24qIHNwaWNlX3Nlc3Npb25fY2hhbm5lbF9vcGVuX2hvc3QoU3BpY2VTZXNzaW9uICpzZXNz
-aW9uLCBTcGljZUMKICAgICBnX3JldHVybl92YWxfaWZfZmFpbChTUElDRV9JU19TRVNTSU9OKHNl
-c3Npb24pLCBOVUxMKTsKIAogICAgIFNwaWNlU2Vzc2lvblByaXZhdGUgKnMgPSBzZXNzaW9uLT5w
-cml2OwotICAgIFNwaWNlQ2hhbm5lbFByaXZhdGUgKmMgPSBjaGFubmVsLT5wcml2OwogICAgIHNw
-aWNlX29wZW5faG9zdCBvcGVuX2hvc3QgPSB7IDAsIH07CiAgICAgZ2NoYXIgKnBvcnQsICplbmRw
-dHI7CiAKQEAgLTIyMTIsNyArMjIxMSw3IEBAIEdTb2NrZXRDb25uZWN0aW9uKiBzcGljZV9zZXNz
-aW9uX2NoYW5uZWxfb3Blbl9ob3N0KFNwaWNlU2Vzc2lvbiAqc2Vzc2lvbiwgU3BpY2VDCiAgICAg
-b3Blbl9ob3N0LnNlc3Npb24gPSBzZXNzaW9uOwogICAgIG9wZW5faG9zdC5jaGFubmVsID0gY2hh
-bm5lbDsKIAotICAgIGNvbnN0IGNoYXIgKm5hbWUgPSBzcGljZV9jaGFubmVsX3R5cGVfdG9fc3Ry
-aW5nKGMtPmNoYW5uZWxfdHlwZSk7CisgICAgY29uc3QgY2hhciAqbmFtZSA9IHNwaWNlX2NoYW5u
-ZWxfdHlwZV90b19zdHJpbmcoc3BpY2VfY2hhbm5lbF9nZXRfY2hhbm5lbF90eXBlKGNoYW5uZWwp
-KTsKICAgICBpZiAoc3BpY2Vfc3Rydl9jb250YWlucyhzLT5zZWN1cmVfY2hhbm5lbHMsICJhbGwi
-KSB8fAogICAgICAgICBzcGljZV9zdHJ2X2NvbnRhaW5zKHMtPnNlY3VyZV9jaGFubmVscywgbmFt
-ZSkpCiAgICAgICAgICp1c2VfdGxzID0gVFJVRTsKLS0gCjIuMjEuMAoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0
-ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNr
-dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1248080053==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="cmaiuch3i7rjjrqg"
+Content-Disposition: inline
+
+
+--cmaiuch3i7rjjrqg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Sep 24, 2019 at 06:27:55AM -0400, Frediano Ziglio wrote:
+> >=20
+> > From: Victor Toso <me@victortoso.com>
+> >=20
+> > SpiceChannel provides some internal utility functions that this patch
+> > takes advantage of:
+> >=20
+> > * spice_channel_get_channel_type()
+> > * spice_channel_get_channel_id()
+> > * spice_channel_get_state()
+> >=20
+> > Signed-off-by: Victor Toso <victortoso@redhat.com>
+>=20
+> The question is also why all these files have access to "private" fields?
+> How much NOT private they are? Looks like is more an "exported"
+> than a private.
+
+Considering that SpiceMainChannel and family are also
+SpiceChannel (base class), perhaps this is choice of
+implementation.
+
+I often consider that the private structure should really be
+accessed (read/write) with functions only.
+
+> > ---
+> >  src/channel-inputs.c | 65 +++++++++++++++++++++++++++++---------------
+> >  src/channel-main.c   | 28 +++++++++----------
+> >  src/spice-audio.c    |  6 ++--
+> >  src/spice-session.c  |  3 +-
+> >  4 files changed, 62 insertions(+), 40 deletions(-)
+> >=20
+> > diff --git a/src/channel-inputs.c b/src/channel-inputs.c
+> > index a8cdd23..73cbb0f 100644
+> > --- a/src/channel-inputs.c
+> > +++ b/src/channel-inputs.c
+> > @@ -304,14 +304,20 @@ void spice_inputs_channel_motion(SpiceInputsChann=
+el
+> > *channel, gint dx, gint dy,
+> >                                   gint button_state)
+> >  {
+> >      SpiceInputsChannelPrivate *c;
+> > +    gint channel_state;
+>=20
+> Why not enum spice_channel_state ?
+> Here and in different hunks
+
+Fixed
+
+>=20
+> > =20
+> >      g_return_if_fail(channel !=3D NULL);
+> > -    g_return_if_fail(SPICE_CHANNEL(channel)->priv->state !=3D
+> > SPICE_CHANNEL_STATE_UNCONNECTED);
+> > -    if (SPICE_CHANNEL(channel)->priv->state !=3D SPICE_CHANNEL_STATE_R=
+EADY)
+> > +
+> > +    channel_state =3D spice_channel_get_state(SPICE_CHANNEL(channel));
+> > +    g_return_if_fail(channel_state !=3D SPICE_CHANNEL_STATE_UNCONNECTE=
+D);
+> > +
+> > +    if (channel_state !=3D SPICE_CHANNEL_STATE_READY) {
+> >          return;
+> > +    }
+> > =20
+> > -    if (dx =3D=3D 0 && dy =3D=3D 0)
+> > +    if (dx =3D=3D 0 && dy =3D=3D 0) {
+> >          return;
+> > +    }
+> > =20
+> >      c =3D channel->priv;
+> >      c->bs  =3D button_state;
+> > @@ -360,8 +366,9 @@ void spice_inputs_channel_position(SpiceInputsChann=
+el
+> > *channel, gint x, gint y,
+> > =20
+> >      g_return_if_fail(channel !=3D NULL);
+> > =20
+> > -    if (SPICE_CHANNEL(channel)->priv->state !=3D SPICE_CHANNEL_STATE_R=
+EADY)
+> > +    if (spice_channel_get_state(SPICE_CHANNEL(channel)) !=3D
+> > SPICE_CHANNEL_STATE_READY) {
+> >          return;
+> > +    }
+> > =20
+> >      c =3D channel->priv;
+> >      c->bs  =3D button_state;
+> > @@ -411,10 +418,12 @@ void
+> > spice_inputs_channel_button_press(SpiceInputsChannel *channel, gint but=
+ton,
+> > =20
+> >      g_return_if_fail(channel !=3D NULL);
+> > =20
+> > -    if (SPICE_CHANNEL(channel)->priv->state !=3D SPICE_CHANNEL_STATE_R=
+EADY)
+> > +    if (spice_channel_get_state(SPICE_CHANNEL(channel)) !=3D
+> > SPICE_CHANNEL_STATE_READY) {
+> >          return;
+> > -    if (spice_channel_get_read_only(SPICE_CHANNEL(channel)))
+> > +    }
+> > +    if (spice_channel_get_read_only(SPICE_CHANNEL(channel))) {
+> >          return;
+> > +    }
+> > =20
+> >      c =3D channel->priv;
+> >      switch (button) {
+> > @@ -476,10 +485,12 @@ void
+> > spice_inputs_channel_button_release(SpiceInputsChannel *channel, gint b=
+utto
+> > =20
+> >      g_return_if_fail(channel !=3D NULL);
+> > =20
+> > -    if (SPICE_CHANNEL(channel)->priv->state !=3D SPICE_CHANNEL_STATE_R=
+EADY)
+> > +    if (spice_channel_get_state(SPICE_CHANNEL(channel)) !=3D
+> > SPICE_CHANNEL_STATE_READY) {
+> >          return;
+> > -    if (spice_channel_get_read_only(SPICE_CHANNEL(channel)))
+> > +    }
+> > +    if (spice_channel_get_read_only(SPICE_CHANNEL(channel))) {
+> >          return;
+> > +    }
+> > =20
+> >      c =3D channel->priv;
+> >      switch (button) {
+> > @@ -535,13 +546,18 @@ void spice_inputs_channel_key_press(SpiceInputsCh=
+annel
+> > *channel, guint scancode)
+> >  {
+> >      SpiceMsgcKeyDown down;
+> >      SpiceMsgOut *msg;
+> > +    gint channel_state;
+> > =20
+> >      g_return_if_fail(channel !=3D NULL);
+> > -    g_return_if_fail(SPICE_CHANNEL(channel)->priv->state !=3D
+> > SPICE_CHANNEL_STATE_UNCONNECTED);
+> > -    if (SPICE_CHANNEL(channel)->priv->state !=3D SPICE_CHANNEL_STATE_R=
+EADY)
+> > +
+> > +    channel_state =3D spice_channel_get_state(SPICE_CHANNEL(channel));
+> > +    g_return_if_fail(channel_state !=3D SPICE_CHANNEL_STATE_UNCONNECTE=
+D);
+> > +    if (channel_state !=3D SPICE_CHANNEL_STATE_READY) {
+> >          return;
+> > -    if (spice_channel_get_read_only(SPICE_CHANNEL(channel)))
+> > +    }
+> > +    if (spice_channel_get_read_only(SPICE_CHANNEL(channel))) {
+> >          return;
+> > +    }
+> > =20
+> >      down.code =3D spice_make_scancode(scancode, FALSE);
+> >      msg =3D spice_msg_out_new(SPICE_CHANNEL(channel),
+> >      SPICE_MSGC_INPUTS_KEY_DOWN);
+> > @@ -578,13 +594,18 @@ void
+> > spice_inputs_channel_key_release(SpiceInputsChannel *channel, guint sca=
+ncod
+> >  {
+> >      SpiceMsgcKeyUp up;
+> >      SpiceMsgOut *msg;
+> > +    gint channel_state;
+> > =20
+> >      g_return_if_fail(channel !=3D NULL);
+> > -    g_return_if_fail(SPICE_CHANNEL(channel)->priv->state !=3D
+> > SPICE_CHANNEL_STATE_UNCONNECTED);
+> > -    if (SPICE_CHANNEL(channel)->priv->state !=3D SPICE_CHANNEL_STATE_R=
+EADY)
+> > +
+> > +    channel_state =3D spice_channel_get_state(SPICE_CHANNEL(channel));
+> > +    g_return_if_fail(channel_state !=3D SPICE_CHANNEL_STATE_UNCONNECTE=
+D);
+> > +    if (channel_state !=3D SPICE_CHANNEL_STATE_READY) {
+> >          return;
+> > -    if (spice_channel_get_read_only(SPICE_CHANNEL(channel)))
+> > +    }
+> > +    if (spice_channel_get_read_only(SPICE_CHANNEL(channel))) {
+> >          return;
+> > +    }
+> > =20
+> >      up.code =3D spice_make_scancode(scancode, TRUE);
+> >      msg =3D spice_msg_out_new(SPICE_CHANNEL(channel),
+> >      SPICE_MSGC_INPUTS_KEY_UP);
+> > @@ -624,13 +645,14 @@ void
+> > spice_inputs_channel_key_press_and_release(SpiceInputsChannel *input_ch=
+anne
+> >      SpiceChannel *channel =3D SPICE_CHANNEL(input_channel);
+> > =20
+> >      g_return_if_fail(channel !=3D NULL);
+> > -    g_return_if_fail(channel->priv->state !=3D
+> > SPICE_CHANNEL_STATE_UNCONNECTED);
+> > +    g_return_if_fail(spice_channel_get_state(channel) !=3D
+> > SPICE_CHANNEL_STATE_UNCONNECTED);
+> > =20
+> > -    if (channel->priv->state !=3D SPICE_CHANNEL_STATE_READY)
+> > +    if (spice_channel_get_state(channel) !=3D SPICE_CHANNEL_STATE_READ=
+Y) {
+> >          return;
+> > -    if (spice_channel_get_read_only(channel))
+> > +    }
+> > +    if (spice_channel_get_read_only(channel)) {
+> >          return;
+> > -
+> > +    }
+> >      if (spice_channel_test_capability(channel,
+> >      SPICE_INPUTS_CAP_KEY_SCANCODE)) {
+> >          SpiceMsgOut *msg;
+> >          guint16 code;
+> > @@ -664,16 +686,15 @@ static SpiceMsgOut* set_key_locks(SpiceInputsChan=
+nel
+> > *channel, guint locks)
+> >      SpiceMsgcKeyModifiers modifiers;
+> >      SpiceMsgOut *msg;
+> >      SpiceInputsChannelPrivate *ic;
+> > -    SpiceChannelPrivate *c;
+> > =20
+> >      g_return_val_if_fail(SPICE_IS_INPUTS_CHANNEL(channel), NULL);
+> > =20
+> >      ic =3D channel->priv;
+> > -    c =3D SPICE_CHANNEL(channel)->priv;
+> > -
+> >      ic->locks =3D locks;
+> > -    if (c->state !=3D SPICE_CHANNEL_STATE_READY)
+> > +
+> > +    if (spice_channel_get_state(SPICE_CHANNEL(channel)) !=3D
+> > SPICE_CHANNEL_STATE_READY) {
+> >          return NULL;
+> > +    }
+> > =20
+> >      msg =3D spice_msg_out_new(SPICE_CHANNEL(channel),
+> >                              SPICE_MSGC_INPUTS_KEY_MODIFIERS);
+> > diff --git a/src/channel-main.c b/src/channel-main.c
+> > index 334be7d..ac0d408 100644
+> > --- a/src/channel-main.c
+> > +++ b/src/channel-main.c
+> > @@ -2204,14 +2204,13 @@ static void migrate_channel_event_cb(SpiceChann=
+el
+> > *channel, SpiceChannelEvent ev
+> >                                       gpointer data)
+> >  {
+> >      spice_migrate *mig =3D data;
+> > -    SpiceChannelPrivate  *c =3D SPICE_CHANNEL(channel)->priv;
+> > =20
+> >      g_return_if_fail(mig->nchannels > 0);
+> >      g_signal_handlers_disconnect_by_func(channel, migrate_channel_even=
+t_cb,
+> >      data);
+> > =20
+> >      switch (event) {
+> >      case SPICE_CHANNEL_OPENED:
+> > -        if (c->channel_type =3D=3D SPICE_CHANNEL_MAIN) {
+> > +        if (spice_channel_get_channel_type(channel) =3D=3D SPICE_CHANN=
+EL_MAIN) {
+> >              SpiceSession *session =3D
+> >              spice_channel_get_session(mig->src_channel);
+> >              if (mig->do_seamless) {
+> >                  SpiceMainChannelPrivate *main_priv =3D
+> >                  SPICE_MAIN_CHANNEL(channel)->priv;
+> > @@ -2227,11 +2226,15 @@ static void migrate_channel_event_cb(SpiceChann=
+el
+> > *channel, SpiceChannelEvent ev
+> >              GList *channels, *l;
+> >              l =3D channels =3D spice_session_get_channels(session);
+> >              while (l !=3D NULL) {
+> > -                SpiceChannelPrivate  *curc =3D SPICE_CHANNEL(l->data)-=
+>priv;
+> > +                SpiceChannel *it =3D SPICE_CHANNEL(l->data);
+> > +
+> >                  l =3D l->next;
+> > -                if (curc->channel_type =3D=3D SPICE_CHANNEL_MAIN)
+> > +                if (spice_channel_get_channel_type(it) =3D=3D
+> > SPICE_CHANNEL_MAIN) {
+> >                      continue;
+> > -                migrate_channel_connect(mig, curc->channel_type,
+> > curc->channel_id);
+> > +                }
+> > +                migrate_channel_connect(mig,
+> > +                                        spice_channel_get_channel_type=
+(it),
+> > +                                        spice_channel_get_channel_id(i=
+t));
+> >              }
+> >              g_list_free(channels);
+> >          } else {
+> > @@ -2254,10 +2257,10 @@ static void migrate_channel_event_cb(SpiceChann=
+el
+> > *channel, SpiceChannelEvent ev
+> >  static gboolean main_migrate_handshake_done(gpointer data)
+> >  {
+> >      spice_migrate *mig =3D data;
+> > -    SpiceChannelPrivate  *c =3D SPICE_CHANNEL(mig->dst_channel)->priv;
+> > +    SpiceChannel *channel =3D SPICE_CHANNEL(mig->dst_channel);
+> > =20
+> > -    g_return_val_if_fail(c->channel_type =3D=3D SPICE_CHANNEL_MAIN, FA=
+LSE);
+> > -    g_return_val_if_fail(c->state =3D=3D
+> > SPICE_CHANNEL_STATE_MIGRATION_HANDSHAKE, FALSE);
+> > +    g_return_val_if_fail(spice_channel_get_channel_type(channel) =3D=3D
+> > SPICE_CHANNEL_MAIN, FALSE);
+> > +    g_return_val_if_fail(spice_channel_get_state(channel) =3D=3D
+> > SPICE_CHANNEL_STATE_MIGRATION_HANDSHAKE, FALSE);
+> > =20
+> >      c->state =3D SPICE_CHANNEL_STATE_MIGRATING;
+> >      mig->nchannels--;
+> > @@ -2407,20 +2410,18 @@ static void
+> > main_handle_migrate_begin_seamless(SpiceChannel *channel, SpiceMsgIn
+> > =20
+> >  static void main_handle_migrate_dst_seamless_ack(SpiceChannel *channel,
+> >  SpiceMsgIn *in)
+> >  {
+> > -    SpiceChannelPrivate  *c =3D SPICE_CHANNEL(channel)->priv;
+> >      SpiceMainChannelPrivate *main_priv =3D SPICE_MAIN_CHANNEL(channel)=
+->priv;
+> > =20
+> > -    g_return_if_fail(c->state =3D=3D SPICE_CHANNEL_STATE_MIGRATION_HAN=
+DSHAKE);
+> > +    g_return_if_fail(spice_channel_get_state(channel) =3D=3D
+> > SPICE_CHANNEL_STATE_MIGRATION_HANDSHAKE);
+> >      main_priv->migrate_data->do_seamless =3D true;
+> >      g_idle_add(main_migrate_handshake_done, main_priv->migrate_data);
+> >  }
+> > =20
+> >  static void main_handle_migrate_dst_seamless_nack(SpiceChannel *channe=
+l,
+> >  SpiceMsgIn *in)
+> >  {
+> > -    SpiceChannelPrivate  *c =3D SPICE_CHANNEL(channel)->priv;
+> >      SpiceMainChannelPrivate *main_priv =3D SPICE_MAIN_CHANNEL(channel)=
+->priv;
+> > =20
+> > -    g_return_if_fail(c->state =3D=3D SPICE_CHANNEL_STATE_MIGRATION_HAN=
+DSHAKE);
+> > +    g_return_if_fail(spice_channel_get_state(channel) =3D=3D
+> > SPICE_CHANNEL_STATE_MIGRATION_HANDSHAKE);
+> >      main_priv->migrate_data->do_seamless =3D false;
+> >      g_idle_add(main_migrate_handshake_done, main_priv->migrate_data);
+> >  }
+> > @@ -2551,11 +2552,10 @@ static void spice_main_handle_msg(SpiceChannel
+> > *channel, SpiceMsgIn *msg)
+> >  {
+> >      int type =3D spice_msg_in_type(msg);
+> >      SpiceChannelClass *parent_class;
+> > -    SpiceChannelPrivate *c =3D SPICE_CHANNEL(channel)->priv;
+> > =20
+> >      parent_class =3D SPICE_CHANNEL_CLASS(spice_main_channel_parent_cla=
+ss);
+> > =20
+> > -    if (c->state =3D=3D SPICE_CHANNEL_STATE_MIGRATION_HANDSHAKE) {
+> > +    if (spice_channel_get_state(channel) =3D=3D
+> > SPICE_CHANNEL_STATE_MIGRATION_HANDSHAKE) {
+> >          if (type !=3D SPICE_MSG_MAIN_MIGRATE_DST_SEAMLESS_ACK &&
+> >              type !=3D SPICE_MSG_MAIN_MIGRATE_DST_SEAMLESS_NACK) {
+> >              g_critical("unexpected msg (%d)."
+> > diff --git a/src/spice-audio.c b/src/spice-audio.c
+> > index daf62df..10b31d7 100644
+> > --- a/src/spice-audio.c
+> > +++ b/src/spice-audio.c
+> > @@ -145,11 +145,13 @@ static void spice_audio_init(SpiceAudio *self)
+> > =20
+> >  static void connect_channel(SpiceAudio *self, SpiceChannel *channel)
+> >  {
+> > -    if (channel->priv->state !=3D SPICE_CHANNEL_STATE_UNCONNECTED)
+> > +    if (spice_channel_get_state(channel) !=3D SPICE_CHANNEL_STATE_UNCO=
+NNECTED)
+> > {
+> >          return;
+> > +    }
+> > =20
+> > -    if (SPICE_AUDIO_GET_CLASS(self)->connect_channel(self, channel))
+> > +    if (SPICE_AUDIO_GET_CLASS(self)->connect_channel(self, channel)) {
+> >          spice_channel_connect(channel);
+> > +    }
+> >  }
+> > =20
+> >  static void update_audio_channels(SpiceAudio *self, SpiceSession *sess=
+ion)
+> > diff --git a/src/spice-session.c b/src/spice-session.c
+> > index d0d9e54..afeb724 100644
+> > --- a/src/spice-session.c
+> > +++ b/src/spice-session.c
+> > @@ -2203,7 +2203,6 @@ GSocketConnection*
+> > spice_session_channel_open_host(SpiceSession *session, SpiceC
+> >      g_return_val_if_fail(SPICE_IS_SESSION(session), NULL);
+> > =20
+> >      SpiceSessionPrivate *s =3D session->priv;
+> > -    SpiceChannelPrivate *c =3D channel->priv;
+> >      spice_open_host open_host =3D { 0, };
+> >      gchar *port, *endptr;
+> > =20
+> > @@ -2212,7 +2211,7 @@ GSocketConnection*
+> > spice_session_channel_open_host(SpiceSession *session, SpiceC
+> >      open_host.session =3D session;
+> >      open_host.channel =3D channel;
+> > =20
+> > -    const char *name =3D spice_channel_type_to_string(c->channel_type);
+> > +    const char *name =3D
+> > spice_channel_type_to_string(spice_channel_get_channel_type(channel));
+> >      if (spice_strv_contains(s->secure_channels, "all") ||
+> >          spice_strv_contains(s->secure_channels, name))
+> >          *use_tls =3D TRUE;
+>=20
+> By the way, the patch does not compile.
+
+My bad in splitting up this and following patch, sorry.
+I sent v2, in my rebased version, the follow up patch removes
+SpiceChannelPrivate *c; from these two functions that are still
+using them in this patch.
+
+Thanks for review and checking it al.
+
+Cheers,
+
+>=20
+> Frediano
+
+--cmaiuch3i7rjjrqg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2KEjgACgkQl9kSPeN6
+SE+qag/+MDhe32mZHC9aZ7MZqRbLX3dR4xJVcBecp6U8IZkVBDCn9ODwKZjzD6qj
+fGArZfVSDJSrEkTSxl6tO+ukcpZYxs3fiSwEogEPPzPUkqGH0ScyKIBvXZ+TiXXR
+sNV68GaITJQPp16cfNMSqOwAYYLAFRJCryJwmpcW/R5yGP4RjpwHpFhooOwfb5mB
+CM5Qs6xkmiKiKict7pT8yywsYv/+W5+8NQx7j6j4jvppWtwldZYqNsSbs5ioNPX/
+2M67hdwrawMUS1/CxdXUsavq3RofmYnZ1bU4s2K2iTbiQuyCdmNPxF0o0jamwYtG
+3vdSwTODN38ue/7FuLtN0PND0ZGpLaumEZkuOov+itxdCILXqGiIk1YJNlPXQUOq
+r69C/1KFKbwApHCpUIOdva9H8M8pBcb1Np51pMxvB96OdVSKHyY/LlYoWiRAKY0R
+JjpId7r1AWzMJOTbp9w8aE7zFxHLC6W4/O2tmlIhAXTlNHNPZEeybJAKZ5vF/S09
+7T25CXsH0xVNkzJYjzuxBn8mimSvc0SQpgdLiCosml7ABr1xgBsYtU+VaTcH3sLl
+vU/MPQaRLR34A1b6wZE95RiEhM55iPThWGN5SYNzouxa9Ba84YrgOUDqFZASNWXd
++Rd4vfGInCp65Y/eldIVLNCH8KgeZo8bDxJk8YfPePfY10UVy0o=
+=KxCp
+-----END PGP SIGNATURE-----
+
+--cmaiuch3i7rjjrqg--
+
+--===============1248080053==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1248080053==--
