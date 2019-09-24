@@ -1,39 +1,40 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF4E9BC67C
-	for <lists+spice-devel@lfdr.de>; Tue, 24 Sep 2019 13:17:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 354ACBC6B9
+	for <lists+spice-devel@lfdr.de>; Tue, 24 Sep 2019 13:24:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5BCFC6E9F1;
-	Tue, 24 Sep 2019 11:17:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6AE4A8902A;
+	Tue, 24 Sep 2019 11:24:41 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 41CA36E9F1
- for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 11:17:35 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 71EFC6EA0D
+ for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 11:24:34 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id B827B8A1C82
- for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 11:17:34 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 1D40818C4285
+ for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 11:24:34 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.60])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6688619C58;
- Tue, 24 Sep 2019 11:17:34 +0000 (UTC)
-Date: Tue, 24 Sep 2019 13:17:33 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BEB201001938;
+ Tue, 24 Sep 2019 11:24:33 +0000 (UTC)
+Date: Tue, 24 Sep 2019 13:24:32 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20190924111733.6i4zltbv5ky2kcbn@wingsuit>
+Message-ID: <20190924112432.twmzlsodey52b2ih@wingsuit>
 References: <20190617154011.20310-1-fziglio@redhat.com>
+ <20190617154011.20310-2-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20190617154011.20310-1-fziglio@redhat.com>
+In-Reply-To: <20190617154011.20310-2-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.69]); Tue, 24 Sep 2019 11:17:34 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server v2 1/4] spicevmc: Do not use
- RedCharDevice pipe items handling
+ (mx1.redhat.com [10.5.110.62]); Tue, 24 Sep 2019 11:24:34 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server 2/4] spicevmc: Avoids DoS if
+ client is not able to get data faster enough
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,108 +47,165 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1285352436=="
+Content-Type: multipart/mixed; boundary="===============0937507515=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============1285352436==
+--===============0937507515==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="w7vg4i7iixezrrjh"
+	protocol="application/pgp-signature"; boundary="rppwt7cax5qeqm77"
 Content-Disposition: inline
 
 
---w7vg4i7iixezrrjh
+--rppwt7cax5qeqm77
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-On Mon, Jun 17, 2019 at 04:40:08PM +0100, Frediano Ziglio wrote:
-> As we don't use any token there's no reason to not queue directly instead
-> of passing through RedCharDevice.
-> This will make easier to limit the queue which currently is unlimited.
->=20
-> RedCharDevice flow control has some problems:
-> - it's really designed with VDI in mind. This for SpiceVMC would cause
->   code implementation to be confusing having to satisfy the agent token
->   handling;
-> - it's using items as unit not allowing counting bytes;
-> - it duplicates some queue management between RedChannelClient;
-> - it's broken (see comments in char-device.h);
-> - it forces "clients" to behave in some way not altering for instance the
->   queued items (which is very useful if items can be collapsed together);
-> - it replicates the token handling on the device queue too. This could
->   seems right but is not that if you have a network card going @ 1 GBit/s
->   you are able to upload more than 1 Gbit/s just using multiple
->   connections. The kernel will use a single queue for the network interfa=
-ce
->   limiting and sharing de facto the various buffers between the multiple
->   connections.
+On Mon, Jun 17, 2019 at 04:40:09PM +0100, Frediano Ziglio wrote:
+> This fix half (one direction) of
+> https://gitlab.freedesktop.org/spice/spice/issues/29.
+> Specifically if you have attempt to transfer a file to the client
+> using WebDAV.
+> Previously the queue to the client was unbound. If client was not
+> getting data fast enough the server started queuing data.
+> To easily test this you can use a tool to limit bandwidth and
+> transfer a big file (I used a "dd if=3D/dev/zero bs=3D1M of=3Dtest") from
+> the guest.
 >=20
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 > ---
-> Changes in v2:
-> - more commit message comments
-> ---
->  server/spicevmc.c | 15 +++++----------
->  1 file changed, 5 insertions(+), 10 deletions(-)
+>  server/spicevmc.c | 33 ++++++++++++++++++++++++++-------
+>  1 file changed, 26 insertions(+), 7 deletions(-)
 >=20
 > diff --git a/server/spicevmc.c b/server/spicevmc.c
-> index 84bbb73c2..8c41573ae 100644
+> index 8c41573ae..02e90199c 100644
 > --- a/server/spicevmc.c
 > +++ b/server/spicevmc.c
-> @@ -360,29 +360,24 @@ static RedPipeItem *spicevmc_chardev_read_msg_from_=
+> @@ -34,14 +34,14 @@
+>  #include "reds.h"
+>  #include "migration-protocol.h"
+> =20
+> -/* todo: add flow control. i.e.,
+> - * (a) limit the tokens available for the client
+> - * (b) limit the tokens available for the server
+> - */
+>  /* 64K should be enough for all but the largest writes + 32 bytes hdr */
+>  #define BUF_SIZE (64 * 1024 + 32)
+>  #define COMPRESS_THRESHOLD 1000
+> =20
+> +// limit of the queued data, at this limit we stop reading from device to
+> +// avoid DoS
+> +#define QUEUED_DATA_LIMIT (1024*1024)
+> +
+
+Looks fine,
+Acked-by: Victor Toso <victortoso@redhat.com>
+
+>  SPICE_DECLARE_TYPE(RedCharDeviceSpiceVmc, red_char_device_spicevmc, CHAR=
+_DEVICE_SPICEVMC);
+>  #define RED_TYPE_CHAR_DEVICE_SPICEVMC red_char_device_spicevmc_get_type()
+> =20
+> @@ -83,6 +83,7 @@ struct RedCharDeviceSpiceVmcClass
+>  static RedCharDevice *red_char_device_spicevmc_new(SpiceCharDeviceInstan=
+ce *sin,
+>                                                     RedsState *reds,
+>                                                     RedVmcChannel *channe=
+l);
+> +static void spicevmc_red_channel_queue_data(RedVmcChannel *channel, RedV=
+mcPipeItem *item);
+> =20
+>  G_DEFINE_TYPE(RedCharDeviceSpiceVmc, red_char_device_spicevmc, RED_TYPE_=
+CHAR_DEVICE)
+> =20
+> @@ -96,6 +97,7 @@ struct RedVmcChannel
+>      RedVmcPipeItem *pipe_item;
+>      RedCharDeviceWriteBuffer *recv_from_client_buf;
+>      uint8_t port_opened;
+> +    uint32_t queued_data;
+>      RedStatCounter in_data;
+>      RedStatCounter in_compressed;
+>      RedStatCounter in_decompressed;
+> @@ -337,7 +339,7 @@ static RedPipeItem *spicevmc_chardev_read_msg_from_de=
+v(RedCharDevice *self,
+> =20
+>      sif =3D spice_char_device_get_interface(sin);
+> =20
+> -    if (!channel->rcc) {
+> +    if (!channel->rcc || channel->queued_data >=3D QUEUED_DATA_LIMIT) {
+>          return NULL;
+>      }
+> =20
+> @@ -360,14 +362,14 @@ static RedPipeItem *spicevmc_chardev_read_msg_from_=
 dev(RedCharDevice *self,
 > =20
 >          msg_item_compressed =3D try_compress_lz4(channel, n, msg_item);
 >          if (msg_item_compressed !=3D NULL) {
-> -            return &msg_item_compressed->base;
-> +            red_channel_client_pipe_add_push(channel->rcc, &msg_item_com=
+> -            red_channel_client_pipe_add_push(channel->rcc, &msg_item_com=
 pressed->base);
-> +            return NULL;
+> +            spicevmc_red_channel_queue_data(channel, msg_item_compressed=
+);
+>              return NULL;
 >          }
 >  #endif
 >          stat_inc_counter(channel->out_data, n);
 >          msg_item->uncompressed_data_size =3D n;
 >          msg_item->buf_used =3D n;
-> -        return &msg_item->base;
-> -    } else {
-> -        channel->pipe_item =3D msg_item;
-> +        red_channel_client_pipe_add_push(channel->rcc, &msg_item->base);
+> -        red_channel_client_pipe_add_push(channel->rcc, &msg_item->base);
+> +        spicevmc_red_channel_queue_data(channel, msg_item);
 >          return NULL;
 >      }
-> +    channel->pipe_item =3D msg_item;
-> +    return NULL;
+>      channel->pipe_item =3D msg_item;
+> @@ -609,11 +611,19 @@ static void spicevmc_red_channel_release_msg_rcv_bu=
+f(RedChannelClient *rcc,
+>      }
 >  }
 > =20
->  static void spicevmc_chardev_send_msg_to_client(RedCharDevice *self,
->                                                  RedPipeItem *msg,
->                                                  RedClient *client)
+> +static void
+> +spicevmc_red_channel_queue_data(RedVmcChannel *channel, RedVmcPipeItem *=
+item)
+> +{
+> +    channel->queued_data +=3D item->buf_used;
+> +    red_channel_client_pipe_add_push(channel->rcc, &item->base);
+> +}
+> +
+>  static void spicevmc_red_channel_send_data(RedChannelClient *rcc,
+>                                             SpiceMarshaller *m,
+>                                             RedPipeItem *item)
 >  {
-> -    RedCharDeviceSpiceVmc *vmc =3D RED_CHAR_DEVICE_SPICEVMC(self);
-> -    RedVmcChannel *channel =3D RED_VMC_CHANNEL(vmc->channel);
-> -
-> -    spice_assert(red_channel_client_get_client(channel->rcc) =3D=3D clie=
-nt);
-> -    red_pipe_item_ref(msg);
-> -    red_channel_client_pipe_add_push(channel->rcc, msg);
+>      RedVmcPipeItem *i =3D SPICE_UPCAST(RedVmcPipeItem, item);
+> +    RedVmcChannel *channel =3D RED_VMC_CHANNEL(red_channel_client_get_ch=
+annel(rcc));
+> =20
+>      /* for compatibility send using not compressed data message */
+>      if (i->type =3D=3D SPICE_DATA_COMPRESSION_TYPE_NONE) {
+> @@ -630,6 +640,14 @@ static void spicevmc_red_channel_send_data(RedChanne=
+lClient *rcc,
+>      red_pipe_item_ref(item);
+>      spice_marshaller_add_by_ref_full(m, i->buf, i->buf_used,
+>                                       marshaller_unref_pipe_item, item);
+> +
+> +    // account for sent data and wake up device if was blocked
+> +    uint32_t old_queued_data =3D channel->queued_data;
+> +    channel->queued_data -=3D i->buf_used;
+> +    if (channel->chardev &&
+> +        old_queued_data >=3D QUEUED_DATA_LIMIT && channel->queued_data <=
+ QUEUED_DATA_LIMIT) {
+> +        red_char_device_wakeup(channel->chardev);
+> +    }
 >  }
-
-Is it worth to 1) update char-device.h that this is is not used
-in spicevmc; 2) update char-device.c with
-
-    -   klass->send_msg_to_client(dev, msg, client);
-    +   if (klass->send_msg_to_client) {
-    +       klass->send_msg_to_client(dev, msg, client);
-    +   }
-
-and remove this function?;
-
-Patch looks good.
-
->  static void red_port_init_item_free(struct RedPipeItem *base)
+> =20
+>  static void spicevmc_red_channel_send_migrate_data(RedChannelClient *rcc,
+> @@ -768,6 +786,7 @@ static void spicevmc_connect(RedChannel *channel, Red=
+Client *client,
+>          return;
+>      }
+>      vmc_channel->rcc =3D rcc;
+> +    vmc_channel->queued_data =3D 0;
+>      red_channel_client_ack_zero_messages_window(rcc);
+> =20
+>      if (strcmp(sin->subtype, "port") =3D=3D 0) {
 > --=20
 > 2.20.1
 >=20
@@ -156,29 +214,29 @@ Patch looks good.
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---w7vg4i7iixezrrjh
+--rppwt7cax5qeqm77
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2J+00ACgkQl9kSPeN6
-SE8TMw//WZFhn6T4g9l88U7dZndj42fwONiCDJwcMuIvS6JZkreinrKfvyStymHS
-o6I7s8sqA/iJcTub4/W9SsPlU1wSYVACrQvdDbVGykGg+EP8twHx1PrJwWoPT9tf
-482jlNST6UDBmbWqc5Lmc37lmciV37Qrml9K0Yc4Y1lDpbYQLnwtwU7wy0Uv8xCH
-IcnsL00xHaBoIkLsJKalFbPfuaAXiLbIVvcvqgPSLEgJmvaRMjdpBCIBEKgfyAQr
-QE0O8UJNNxz/P565nM8A8+G/Ls7lq+rmtwVDeHPqkVuU0AKHUUCeWU3nu/3Ytq1m
-zC/rFy1AoYQwnu2xGuaZ6vy8NAmbsAzmFGAJ1l8wB1aHclgqFUSwDL330d1+a4kf
-lEF0Pmu7frXYS3GGHcSMns2+wczPTVC84VknIfs9kH6N7kqbBA34CthsWuzvoSgc
-7Z5y6m/gzIv+A56YueLx2ZbGbvvSBsN4UjL395uXcMRsTlNGAHSw8iF2948cJVKt
-uEpSvCgfrC8Z05v05swb/aIiMGy0cRUmOiFSAtm2Suoa0gAtWL7e2IOC2tqYsHwn
-NQ5a5zOKLsPoSaLpNUIn5yOGIW0ZEUJZOaaM5k0ZxIbTCNWRnZ9D5x4Gjs61HVLd
-QPAA0om22/mXq2u6NIIvBEXaVJOnWmRM/0sbRDTQKfFsM6aNeNE=
-=+9FE
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2J/PAACgkQl9kSPeN6
+SE+wRg/+MCXw41meJ0NsGBLqj4aDOczh4/BoLcGboeo9KUwYELhqUguEeI5fAgLF
+iA8arSgHLoc/z1A2dFeANPbenCp1pxZaWb1v1NILjBt8f2iku8QDmuFwcO+biER5
+3QWqwtmG1/oe6HfZ58q95y6HcSgzvsDrYmIaF6E7xJEHw7v3iM42yLuuEW89UY9o
+UjaaDQEer1A1YmfooEb8C+l6hd1BTnnXMkWTA1GrhwqGZPYO4ArlhgVbMdrsgTaz
+4ujfEqF7SEBSH0PbmD5c48Sy4P9tTNd39QNZnkDTCl5gZZKOMbPSFaoBCjLLyGUO
+bILM7BYr/gZQO6PEcv/J8cFExbw8VY1Js/M0U5GT4ct7wD1x3MTqo0b56QwbACI5
+m2Y5NcZajqM8NWQCiCwtRDbcQdUn6dJtdAycwJakAQnv3c9gZjn6xkPy52ZZL77M
+SYw/jWJf2IBHBAKQ2ANMbGjPat/HfZWrdZalkW0PtMfuD1o8mIMnOZSUswpRua/a
++xl6O+HdlEwvaUoTYlONw+awkUr0PXi4wuI3KzdEW8GYTWV73rjaNmaXPNwZd1bk
+Kdc20sQQ50mKRCims/gl0oFloGNYX1o5sw9LxCTJfqk/OkuLmD2KhXp1NXS0o5lM
+MSzsWzYzsdxQkrEGr4zQrGH7muI2onANn8SyzpKEgFkh/l5lXHI=
+=W7Fl
 -----END PGP SIGNATURE-----
 
---w7vg4i7iixezrrjh--
+--rppwt7cax5qeqm77--
 
---===============1285352436==
+--===============0937507515==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -188,4 +246,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============1285352436==--
+--===============0937507515==--
