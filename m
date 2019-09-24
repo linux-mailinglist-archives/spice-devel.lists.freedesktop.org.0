@@ -1,52 +1,39 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0B4EBC5AF
-	for <lists+spice-devel@lfdr.de>; Tue, 24 Sep 2019 12:33:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BF4E9BC67C
+	for <lists+spice-devel@lfdr.de>; Tue, 24 Sep 2019 13:17:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3EEA189DCF;
-	Tue, 24 Sep 2019 10:33:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5BCFC6E9F1;
+	Tue, 24 Sep 2019 11:17:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.heh.ee (heh.ee [213.35.143.160])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4906589E3E;
- Tue, 24 Sep 2019 09:11:59 +0000 (UTC)
-Received: from [0.0.0.0] (unknown [127.0.0.1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 41CA36E9F1
+ for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 11:17:35 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.heh.ee (Postfix) with ESMTPSA id 28C8816D1A8;
- Tue, 24 Sep 2019 12:11:57 +0300 (EEST)
-From: Jaak Ristioja <jaak@ristioja.ee>
-To: Gerd Hoffmann <kraxel@redhat.com>
-References: <92785039-0941-4626-610b-f4e3d9613069@ristioja.ee>
- <20190905071407.47iywqcqomizs3yr@sirius.home.kraxel.org>
- <e4b7d889-15f3-0c90-3b9f-d395344499c0@ristioja.ee>
-Openpgp: preference=signencrypt
-Autocrypt: addr=jaak@ristioja.ee; prefer-encrypt=mutual; keydata=
- mDMEWyjlXBYJKwYBBAHaRw8BAQdABEPNmQfWmwZZXSl5vKnpI1UVtS4l2N9kv7KqyFYtfLe0
- IEphYWsgUmlzdGlvamEgPGphYWtAcmlzdGlvamEuZWU+iJYEExYIAD4WIQTjaPCMFhRItZ2p
- iV/uxscoTrbt3AUCWyjlXAIbIwUJA8OZNAULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRDu
- xscoTrbt3OYPAP9l6ZjLh4qK2r/H1b+7a7qZIAjwf0o4AX6qvtX1WERxywEAhhtOHg+G8idL
- FR08XPW7nlobl2qEHMnqBTqteSsz1gG4OARbKOVcEgorBgEEAZdVAQUBAQdAU6y3a2gcxTI+
- bZgPkJjPXxr0tvuLpCqkIb/envF5ajADAQgHiH4EGBYIACYWIQTjaPCMFhRItZ2piV/uxsco
- Trbt3AUCWyjlXAIbDAUJA8OZNAAKCRDuxscoTrbt3OG5AP0cd6gLbKVSBvSEgRNQ+BNk/1a5
- lSQtocXAcwUx0X9h0gEAqIZ9u7pCWBlRTL+rij97VWWkB/jb1deZ2gExNhd6RAU=
-Message-ID: <ccafdbaf-7f8e-8616-5543-2a178bd63828@ristioja.ee>
-Date: Tue, 24 Sep 2019 12:12:16 +0300
-User-Agent: undefined
+ by mx1.redhat.com (Postfix) with ESMTPS id B827B8A1C82
+ for <spice-devel@lists.freedesktop.org>; Tue, 24 Sep 2019 11:17:34 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.60])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6688619C58;
+ Tue, 24 Sep 2019 11:17:34 +0000 (UTC)
+Date: Tue, 24 Sep 2019 13:17:33 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190924111733.6i4zltbv5ky2kcbn@wingsuit>
+References: <20190617154011.20310-1-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <e4b7d889-15f3-0c90-3b9f-d395344499c0@ristioja.ee>
-Content-Language: et-EE
-X-Mailman-Approved-At: Tue, 24 Sep 2019 10:33:13 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=ristioja.ee; s=mail; 
- t=1569316317; bh=+FTdeih0wbhelrsKafPiC+6qY12Mc34G72pLIoqYmiU=;
- h=Subject:From:To:Cc:References:Date:In-Reply-To;
- b=m53PpNduD1hhf1kZVpM5uW3cjTbX/ZkAuZniKln+7rLOnqU+GWzphvKGHDB49Lh19
- vP4BxN9sfZmTzQbl5qCfm+/lyXwtR12dBPp56dszXqANLAorYn47JQfZAHZOn8QCsL
- tEZNkP0EVv5sJ66Er7Z5YaF4bEjrw59bzxW6C7VE=
-Subject: Re: [Spice-devel] Xorg indefinitely hangs in kernelspace
+In-Reply-To: <20190617154011.20310-1-fziglio@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.69]); Tue, 24 Sep 2019 11:17:34 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server v2 1/4] spicevmc: Do not use
+ RedCharDevice pipe items handling
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,133 +45,147 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1285352436=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gMDUuMDkuMTkgMTU6MzQsIEphYWsgUmlzdGlvamEgd3JvdGU6Cj4gT24gMDUuMDkuMTkgMTA6
-MTQsIEdlcmQgSG9mZm1hbm4gd3JvdGU6Cj4+IE9uIFR1ZSwgQXVnIDA2LCAyMDE5IGF0IDA5OjAw
-OjEwUE0gKzAzMDAsIEphYWsgUmlzdGlvamEgd3JvdGU6Cj4+PiBIZWxsbyEKPj4+Cj4+PiBJJ20g
-d3JpdGluZyB0byByZXBvcnQgYSBjcmFzaCBpbiB0aGUgUVhMIC8gRFJNIGNvZGUgaW4gdGhlIExp
-bnV4IGtlcm5lbC4KPj4+IEkgb3JpZ2luYWxseSBmaWxlZCB0aGUgaXNzdWUgb24gTGF1bmNoUGFk
-IGFuZCBtb3JlIGRldGFpbHMgY2FuIGJlIGZvdW5kCj4+PiB0aGVyZSwgYWx0aG91Z2ggSSBkb3Vi
-dCB3aGV0aGVyIHRoZXNlIGRldGFpbHMgYXJlIHVzZWZ1bC4KPj4KPj4gQW55IGNoYW5nZSB3aXRo
-IGtlcm5lbCA1LjMtcmM3ID8KPiAKPiBEaWRuJ3QgdHJ5LiBEaWQgeW91IGNoYW5nZSBzb21ldGhp
-bmc/IEkgY291bGQgdHJ5LCBidXQgSSd2ZSBkb25lIHNvCj4gYmVmb3JlIGFuZCBldmVyeSB0aW1l
-IHRoaXMgYnVnIG1hbmlmZXN0cyBpdHNlbGYgd2l0aCBNQUpPUi5NSU5PUi1yYyMgSQo+IGdldCBh
-c2tlZCB0byB0cnkgdmVyc2lvbiBNQUpPUi4oTUlOT1IrMSktcmMjIHNvIEkgZ3Vlc3MgSSBjb3Vs
-ZCBhcyB3ZWxsCj4gZ2l2ZSB1cD8KPiAKPiBBbHJpZ2h0LCBJJ2xsIGluc3RhbGwgNS4zLXJjNywg
-YnV0IG9uY2UgbW9yZSBpdCBtaWdodCB0YWtlIHNvbWUgdGltZSBmb3IKPiB0aGlzIGJ1ZyB0byBl
-eHBvc2UgaXRzZWxmLgoKSnVzdCBnb3QgdGhlIGlzc3VlIHdpdGggNS4zLjAtMDUwMzAwcmM3LWdl
-bmVyaWM6CgpbMTI0MjEyLjU0NzQwM10gSU5GTzogdGFzayBYb3JnOjc5NyBibG9ja2VkIGZvciBt
-b3JlIHRoYW4gMTIwIHNlY29uZHMuClsxMjQyMTIuNTQ4NjM5XSAgICAgICBOb3QgdGFpbnRlZCA1
-LjMuMC0wNTAzMDByYzctZ2VuZXJpYyAjMjAxOTA5MDIxODMxClsxMjQyMTIuNTQ5ODM5XSAiZWNo
-byAwID4gL3Byb2Mvc3lzL2tlcm5lbC9odW5nX3Rhc2tfdGltZW91dF9zZWNzIgpkaXNhYmxlcyB0
-aGlzIG1lc3NhZ2UuClsxMjQyMTIuNTQ3NDAzXSBJTkZPOiB0YXNrIFhvcmc6Nzk3IGJsb2NrZWQg
-Zm9yIG1vcmUgdGhhbiAxMjAgc2Vjb25kcy4KWzEyNDIxMi41NDg2MzldICAgICAgIE5vdCB0YWlu
-dGVkIDUuMy4wLTA1MDMwMHJjNy1nZW5lcmljICMyMDE5MDkwMjE4MzEKWzEyNDIxMi41NDk4Mzld
-ICJlY2hvIDAgPiAvcHJvYy9zeXMva2VybmVsL2h1bmdfdGFza190aW1lb3V0X3NlY3MiCmRpc2Fi
-bGVzIHRoaXMgbWVzc2FnZS4KWzEyNDIxMi41NTEzMjldIFhvcmcgICAgICAgICAgICBEICAgIDAg
-ICA3OTcgICAgNzczIDB4MDA0MDQwMDQKWzEyNDIxMi41NTEzMzFdIENhbGwgVHJhY2U6ClsxMjQy
-MTIuNTUxMzM2XSAgX19zY2hlZHVsZSsweDJiOS8weDZjMApbMTI0MjEyLjU1MTMzN10gIHNjaGVk
-dWxlKzB4NDIvMHhiMApbMTI0MjEyLjU1MTMzOF0gIHNjaGVkdWxlX3ByZWVtcHRfZGlzYWJsZWQr
-MHhlLzB4MTAKWzEyNDIxMi41NTEzNDBdICBfX3d3X211dGV4X2xvY2suaXNyYS4wKzB4MjYxLzB4
-N2YwClsxMjQyMTIuNTUxMzQ1XSAgPyB0dG1fYm9faW5pdCsweDZiLzB4MTAwIFt0dG1dClsxMjQy
-MTIuNTUxMzQ2XSAgX193d19tdXRleF9sb2NrX3Nsb3dwYXRoKzB4MTYvMHgyMApbMTI0MjEyLjU1
-MTM0N10gIHd3X211dGV4X2xvY2srMHgzOC8weDkwClsxMjQyMTIuNTUxMzUyXSAgdHRtX2V1X3Jl
-c2VydmVfYnVmZmVycysweDFjYy8weDJmMCBbdHRtXQpbMTI0MjEyLjU1MTM3MV0gIHF4bF9yZWxl
-YXNlX3Jlc2VydmVfbGlzdCsweDZkLzB4MTUwIFtxeGxdClsxMjQyMTIuNTUxMzczXSAgPyBxeGxf
-Ym9fcGluKzB4ZjQvMHgxOTAgW3F4bF0KWzEyNDIxMi41NTEzNzVdICBxeGxfY3Vyc29yX2F0b21p
-Y191cGRhdGUrMHgxYWIvMHgyZTAgW3F4bF0KWzEyNDIxMi41NTEzNzZdICA/IHF4bF9ib19waW4r
-MHhmNC8weDE5MCBbcXhsXQpbMTI0MjEyLjU1MTM4NF0gIGRybV9hdG9taWNfaGVscGVyX2NvbW1p
-dF9wbGFuZXMrMHhkNS8weDIyMCBbZHJtX2ttc19oZWxwZXJdClsxMjQyMTIuNTUxMzg4XSAgZHJt
-X2F0b21pY19oZWxwZXJfY29tbWl0X3RhaWwrMHgyYy8weDcwIFtkcm1fa21zX2hlbHBlcl0KWzEy
-NDIxMi41NTEzOTJdICBjb21taXRfdGFpbCsweDY4LzB4NzAgW2RybV9rbXNfaGVscGVyXQpbMTI0
-MjEyLjU1MTM5NV0gIGRybV9hdG9taWNfaGVscGVyX2NvbW1pdCsweDExOC8weDEyMCBbZHJtX2tt
-c19oZWxwZXJdClsxMjQyMTIuNTUxNDA3XSAgZHJtX2F0b21pY19jb21taXQrMHg0YS8weDUwIFtk
-cm1dClsxMjQyMTIuNTUxNDExXSAgZHJtX2F0b21pY19oZWxwZXJfdXBkYXRlX3BsYW5lKzB4ZWEv
-MHgxMDAgW2RybV9rbXNfaGVscGVyXQpbMTI0MjEyLjU1MTQxOF0gIF9fc2V0cGxhbmVfYXRvbWlj
-KzB4Y2IvMHgxMTAgW2RybV0KWzEyNDIxMi41NTE0MjhdICBkcm1fbW9kZV9jdXJzb3JfdW5pdmVy
-c2FsKzB4MTQwLzB4MjYwIFtkcm1dClsxMjQyMTIuNTUxNDM1XSAgZHJtX21vZGVfY3Vyc29yX2Nv
-bW1vbisweGNjLzB4MjIwIFtkcm1dClsxMjQyMTIuNTUxNDQxXSAgPyBkcm1fbW9kZV9jdXJzb3Jf
-aW9jdGwrMHg2MC8weDYwIFtkcm1dClsxMjQyMTIuNTUxNDQ3XSAgZHJtX21vZGVfY3Vyc29yMl9p
-b2N0bCsweGUvMHgxMCBbZHJtXQpbMTI0MjEyLjU1MTQ1Ml0gIGRybV9pb2N0bF9rZXJuZWwrMHhh
-ZS8weGYwIFtkcm1dClsxMjQyMTIuNTUxNDU4XSAgZHJtX2lvY3RsKzB4MjM0LzB4M2QwIFtkcm1d
-ClsxMjQyMTIuNTUxNDY0XSAgPyBkcm1fbW9kZV9jdXJzb3JfaW9jdGwrMHg2MC8weDYwIFtkcm1d
-ClsxMjQyMTIuNTUxNDY2XSAgPyB0aW1lcnF1ZXVlX2FkZCsweDVmLzB4YTAKWzEyNDIxMi41NTE0
-NjldICA/IGVucXVldWVfaHJ0aW1lcisweDNkLzB4OTAKWzEyNDIxMi41NTE0NzFdICBkb192ZnNf
-aW9jdGwrMHg0MDcvMHg2NzAKWzEyNDIxMi41NTE0NzNdICA/IGZwdXQrMHgxMy8weDIwClsxMjQy
-MTIuNTUxNDc1XSAgPyBfX3N5c19yZWN2bXNnKzB4ODgvMHhhMApbMTI0MjEyLjU1MTQ3Nl0gIGtz
-eXNfaW9jdGwrMHg2Ny8weDkwClsxMjQyMTIuNTUxNDc3XSAgX194NjRfc3lzX2lvY3RsKzB4MWEv
-MHgyMApbMTI0MjEyLjU1MTQ3OV0gIGRvX3N5c2NhbGxfNjQrMHg1YS8weDEzMApbMTI0MjEyLjU1
-MTQ4MF0gIGVudHJ5X1NZU0NBTExfNjRfYWZ0ZXJfaHdmcmFtZSsweDQ0LzB4YTkKWzEyNDIxMi41
-NTE0ODFdIFJJUDogMDAzMzoweDdmMDdjNzllZTQxNwpbMTI0MjEyLjU1MTQ4NV0gQ29kZTogQmFk
-IFJJUCB2YWx1ZS4KWzEyNDIxMi41NTE0ODVdIFJTUDogMDAyYjowMDAwN2ZmYzZiMWRlMWE4IEVG
-TEFHUzogMDAwMDMyNDYgT1JJR19SQVg6CjAwMDAwMDAwMDAwMDAwMTAKWzEyNDIxMi41NTE0ODZd
-IFJBWDogZmZmZmZmZmZmZmZmZmZkYSBSQlg6IDAwMDA1NjEyZjEwOWE2MTAgUkNYOgowMDAwN2Yw
-N2M3OWVlNDE3ClsxMjQyMTIuNTUxNDg3XSBSRFg6IDAwMDA3ZmZjNmIxZGUxZTAgUlNJOiAwMDAw
-MDAwMGMwMjQ2NGJiIFJESToKMDAwMDAwMDAwMDAwMDAwZQpbMTI0MjEyLjU1MTQ4N10gUkJQOiAw
-MDAwN2ZmYzZiMWRlMWUwIFIwODogMDAwMDAwMDAwMDAwMDA0MCBSMDk6CjAwMDAwMDAwMDAwMDAw
-MDQKWzEyNDIxMi41NTE0ODhdIFIxMDogMDAwMDAwMDAwMDAwMDAzZiBSMTE6IDAwMDAwMDAwMDAw
-MDMyNDYgUjEyOgowMDAwMDAwMGMwMjQ2NGJiClsxMjQyMTIuNTUxNDg4XSBSMTM6IDAwMDAwMDAw
-MDAwMDAwMGUgUjE0OiAwMDAwMDAwMDAwMDAwMDAwIFIxNToKMDAwMDU2MTJmMTA5ODFkMApbMTI0
-MzMzLjM3NjMyOF0gSU5GTzogdGFzayBYb3JnOjc5NyBibG9ja2VkIGZvciBtb3JlIHRoYW4gMjQx
-IHNlY29uZHMuClsxMjQzMzMuMzc3NDc0XSAgICAgICBOb3QgdGFpbnRlZCA1LjMuMC0wNTAzMDBy
-YzctZ2VuZXJpYyAjMjAxOTA5MDIxODMxClsxMjQzMzMuMzc4NjA5XSAiZWNobyAwID4gL3Byb2Mv
-c3lzL2tlcm5lbC9odW5nX3Rhc2tfdGltZW91dF9zZWNzIgpkaXNhYmxlcyB0aGlzIG1lc3NhZ2Uu
-ClsxMjQzMzMuMzc2MzI4XSBJTkZPOiB0YXNrIFhvcmc6Nzk3IGJsb2NrZWQgZm9yIG1vcmUgdGhh
-biAyNDEgc2Vjb25kcy4KWzEyNDMzMy4zNzc0NzRdICAgICAgIE5vdCB0YWludGVkIDUuMy4wLTA1
-MDMwMHJjNy1nZW5lcmljICMyMDE5MDkwMjE4MzEKWzEyNDMzMy4zNzg2MDldICJlY2hvIDAgPiAv
-cHJvYy9zeXMva2VybmVsL2h1bmdfdGFza190aW1lb3V0X3NlY3MiCmRpc2FibGVzIHRoaXMgbWVz
-c2FnZS4KWzEyNDMzMy4zODAwNjBdIFhvcmcgICAgICAgICAgICBEICAgIDAgICA3OTcgICAgNzcz
-IDB4MDA0MDQwMDQKWzEyNDMzMy4zODAwNjJdIENhbGwgVHJhY2U6ClsxMjQzMzMuMzgwMDY3XSAg
-X19zY2hlZHVsZSsweDJiOS8weDZjMApbMTI0MzMzLjM4MDA2OF0gIHNjaGVkdWxlKzB4NDIvMHhi
-MApbMTI0MzMzLjM4MDA2OV0gIHNjaGVkdWxlX3ByZWVtcHRfZGlzYWJsZWQrMHhlLzB4MTAKWzEy
-NDMzMy4zODAwNzBdICBfX3d3X211dGV4X2xvY2suaXNyYS4wKzB4MjYxLzB4N2YwClsxMjQzMzMu
-MzgwMDc2XSAgPyB0dG1fYm9faW5pdCsweDZiLzB4MTAwIFt0dG1dClsxMjQzMzMuMzgwMDc3XSAg
-X193d19tdXRleF9sb2NrX3Nsb3dwYXRoKzB4MTYvMHgyMApbMTI0MzMzLjM4MDA3N10gIHd3X211
-dGV4X2xvY2srMHgzOC8weDkwClsxMjQzMzMuMzgwMDgwXSAgdHRtX2V1X3Jlc2VydmVfYnVmZmVy
-cysweDFjYy8weDJmMCBbdHRtXQpbMTI0MzMzLjM4MDA4M10gIHF4bF9yZWxlYXNlX3Jlc2VydmVf
-bGlzdCsweDZkLzB4MTUwIFtxeGxdClsxMjQzMzMuMzgwMDg1XSAgPyBxeGxfYm9fcGluKzB4ZjQv
-MHgxOTAgW3F4bF0KWzEyNDMzMy4zODAwODddICBxeGxfY3Vyc29yX2F0b21pY191cGRhdGUrMHgx
-YWIvMHgyZTAgW3F4bF0KWzEyNDMzMy4zODAwODhdICA/IHF4bF9ib19waW4rMHhmNC8weDE5MCBb
-cXhsXQpbMTI0MzMzLjM4MDA5Nl0gIGRybV9hdG9taWNfaGVscGVyX2NvbW1pdF9wbGFuZXMrMHhk
-NS8weDIyMCBbZHJtX2ttc19oZWxwZXJdClsxMjQzMzMuMzgwMTAxXSAgZHJtX2F0b21pY19oZWxw
-ZXJfY29tbWl0X3RhaWwrMHgyYy8weDcwIFtkcm1fa21zX2hlbHBlcl0KWzEyNDMzMy4zODAxMDVd
-ICBjb21taXRfdGFpbCsweDY4LzB4NzAgW2RybV9rbXNfaGVscGVyXQpbMTI0MzMzLjM4MDEwOV0g
-IGRybV9hdG9taWNfaGVscGVyX2NvbW1pdCsweDExOC8weDEyMCBbZHJtX2ttc19oZWxwZXJdClsx
-MjQzMzMuMzgwMTI4XSAgZHJtX2F0b21pY19jb21taXQrMHg0YS8weDUwIFtkcm1dClsxMjQzMzMu
-MzgwMTMyXSAgZHJtX2F0b21pY19oZWxwZXJfdXBkYXRlX3BsYW5lKzB4ZWEvMHgxMDAgW2RybV9r
-bXNfaGVscGVyXQpbMTI0MzMzLjM4MDE0MF0gIF9fc2V0cGxhbmVfYXRvbWljKzB4Y2IvMHgxMTAg
-W2RybV0KWzEyNDMzMy4zODAxNDddICBkcm1fbW9kZV9jdXJzb3JfdW5pdmVyc2FsKzB4MTQwLzB4
-MjYwIFtkcm1dClsxMjQzMzMuMzgwMTUzXSAgZHJtX21vZGVfY3Vyc29yX2NvbW1vbisweGNjLzB4
-MjIwIFtkcm1dClsxMjQzMzMuMzgwMTYwXSAgPyBkcm1fbW9kZV9jdXJzb3JfaW9jdGwrMHg2MC8w
-eDYwIFtkcm1dClsxMjQzMzMuMzgwMTY2XSAgZHJtX21vZGVfY3Vyc29yMl9pb2N0bCsweGUvMHgx
-MCBbZHJtXQpbMTI0MzMzLjM4MDE3MV0gIGRybV9pb2N0bF9rZXJuZWwrMHhhZS8weGYwIFtkcm1d
-ClsxMjQzMzMuMzgwMTc2XSAgZHJtX2lvY3RsKzB4MjM0LzB4M2QwIFtkcm1dClsxMjQzMzMuMzgw
-MTgyXSAgPyBkcm1fbW9kZV9jdXJzb3JfaW9jdGwrMHg2MC8weDYwIFtkcm1dClsxMjQzMzMuMzgw
-MTg0XSAgPyB0aW1lcnF1ZXVlX2FkZCsweDVmLzB4YTAKWzEyNDMzMy4zODAxODZdICA/IGVucXVl
-dWVfaHJ0aW1lcisweDNkLzB4OTAKWzEyNDMzMy4zODAxODhdICBkb192ZnNfaW9jdGwrMHg0MDcv
-MHg2NzAKWzEyNDMzMy4zODAxOTBdICA/IGZwdXQrMHgxMy8weDIwClsxMjQzMzMuMzgwMTkyXSAg
-PyBfX3N5c19yZWN2bXNnKzB4ODgvMHhhMApbMTI0MzMzLjM4MDE5M10gIGtzeXNfaW9jdGwrMHg2
-Ny8weDkwClsxMjQzMzMuMzgwMTk0XSAgX194NjRfc3lzX2lvY3RsKzB4MWEvMHgyMApbMTI0MzMz
-LjM4MDE5NV0gIGRvX3N5c2NhbGxfNjQrMHg1YS8weDEzMApbMTI0MzMzLjM4MDE5N10gIGVudHJ5
-X1NZU0NBTExfNjRfYWZ0ZXJfaHdmcmFtZSsweDQ0LzB4YTkKWzEyNDMzMy4zODAxOThdIFJJUDog
-MDAzMzoweDdmMDdjNzllZTQxNwpbMTI0MzMzLjM4MDIwMl0gQ29kZTogQmFkIFJJUCB2YWx1ZS4K
-WzEyNDMzMy4zODAyMDNdIFJTUDogMDAyYjowMDAwN2ZmYzZiMWRlMWE4IEVGTEFHUzogMDAwMDMy
-NDYgT1JJR19SQVg6CjAwMDAwMDAwMDAwMDAwMTAKWzEyNDMzMy4zODAyMDRdIFJBWDogZmZmZmZm
-ZmZmZmZmZmZkYSBSQlg6IDAwMDA1NjEyZjEwOWE2MTAgUkNYOgowMDAwN2YwN2M3OWVlNDE3Clsx
-MjQzMzMuMzgwMjA0XSBSRFg6IDAwMDA3ZmZjNmIxZGUxZTAgUlNJOiAwMDAwMDAwMGMwMjQ2NGJi
-IFJESToKMDAwMDAwMDAwMDAwMDAwZQpbMTI0MzMzLjM4MDIwNV0gUkJQOiAwMDAwN2ZmYzZiMWRl
-MWUwIFIwODogMDAwMDAwMDAwMDAwMDA0MCBSMDk6CjAwMDAwMDAwMDAwMDAwMDQKWzEyNDMzMy4z
-ODAyMDVdIFIxMDogMDAwMDAwMDAwMDAwMDAzZiBSMTE6IDAwMDAwMDAwMDAwMDMyNDYgUjEyOgow
-MDAwMDAwMGMwMjQ2NGJiClsxMjQzMzMuMzgwMjA2XSBSMTM6IDAwMDAwMDAwMDAwMDAwMGUgUjE0
-OiAwMDAwMDAwMDAwMDAwMDAwIFIxNToKMDAwMDU2MTJmMTA5ODFkMAoKCkJlc3QgcmVnYXJkcywK
-SgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1k
-ZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBz
-Oi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+
+--===============1285352436==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="w7vg4i7iixezrrjh"
+Content-Disposition: inline
+
+
+--w7vg4i7iixezrrjh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Mon, Jun 17, 2019 at 04:40:08PM +0100, Frediano Ziglio wrote:
+> As we don't use any token there's no reason to not queue directly instead
+> of passing through RedCharDevice.
+> This will make easier to limit the queue which currently is unlimited.
+>=20
+> RedCharDevice flow control has some problems:
+> - it's really designed with VDI in mind. This for SpiceVMC would cause
+>   code implementation to be confusing having to satisfy the agent token
+>   handling;
+> - it's using items as unit not allowing counting bytes;
+> - it duplicates some queue management between RedChannelClient;
+> - it's broken (see comments in char-device.h);
+> - it forces "clients" to behave in some way not altering for instance the
+>   queued items (which is very useful if items can be collapsed together);
+> - it replicates the token handling on the device queue too. This could
+>   seems right but is not that if you have a network card going @ 1 GBit/s
+>   you are able to upload more than 1 Gbit/s just using multiple
+>   connections. The kernel will use a single queue for the network interfa=
+ce
+>   limiting and sharing de facto the various buffers between the multiple
+>   connections.
+>=20
+> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+> ---
+> Changes in v2:
+> - more commit message comments
+> ---
+>  server/spicevmc.c | 15 +++++----------
+>  1 file changed, 5 insertions(+), 10 deletions(-)
+>=20
+> diff --git a/server/spicevmc.c b/server/spicevmc.c
+> index 84bbb73c2..8c41573ae 100644
+> --- a/server/spicevmc.c
+> +++ b/server/spicevmc.c
+> @@ -360,29 +360,24 @@ static RedPipeItem *spicevmc_chardev_read_msg_from_=
+dev(RedCharDevice *self,
+> =20
+>          msg_item_compressed =3D try_compress_lz4(channel, n, msg_item);
+>          if (msg_item_compressed !=3D NULL) {
+> -            return &msg_item_compressed->base;
+> +            red_channel_client_pipe_add_push(channel->rcc, &msg_item_com=
+pressed->base);
+> +            return NULL;
+>          }
+>  #endif
+>          stat_inc_counter(channel->out_data, n);
+>          msg_item->uncompressed_data_size =3D n;
+>          msg_item->buf_used =3D n;
+> -        return &msg_item->base;
+> -    } else {
+> -        channel->pipe_item =3D msg_item;
+> +        red_channel_client_pipe_add_push(channel->rcc, &msg_item->base);
+>          return NULL;
+>      }
+> +    channel->pipe_item =3D msg_item;
+> +    return NULL;
+>  }
+> =20
+>  static void spicevmc_chardev_send_msg_to_client(RedCharDevice *self,
+>                                                  RedPipeItem *msg,
+>                                                  RedClient *client)
+>  {
+> -    RedCharDeviceSpiceVmc *vmc =3D RED_CHAR_DEVICE_SPICEVMC(self);
+> -    RedVmcChannel *channel =3D RED_VMC_CHANNEL(vmc->channel);
+> -
+> -    spice_assert(red_channel_client_get_client(channel->rcc) =3D=3D clie=
+nt);
+> -    red_pipe_item_ref(msg);
+> -    red_channel_client_pipe_add_push(channel->rcc, msg);
+>  }
+
+Is it worth to 1) update char-device.h that this is is not used
+in spicevmc; 2) update char-device.c with
+
+    -   klass->send_msg_to_client(dev, msg, client);
+    +   if (klass->send_msg_to_client) {
+    +       klass->send_msg_to_client(dev, msg, client);
+    +   }
+
+and remove this function?;
+
+Patch looks good.
+
+>  static void red_port_init_item_free(struct RedPipeItem *base)
+> --=20
+> 2.20.1
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--w7vg4i7iixezrrjh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2J+00ACgkQl9kSPeN6
+SE8TMw//WZFhn6T4g9l88U7dZndj42fwONiCDJwcMuIvS6JZkreinrKfvyStymHS
+o6I7s8sqA/iJcTub4/W9SsPlU1wSYVACrQvdDbVGykGg+EP8twHx1PrJwWoPT9tf
+482jlNST6UDBmbWqc5Lmc37lmciV37Qrml9K0Yc4Y1lDpbYQLnwtwU7wy0Uv8xCH
+IcnsL00xHaBoIkLsJKalFbPfuaAXiLbIVvcvqgPSLEgJmvaRMjdpBCIBEKgfyAQr
+QE0O8UJNNxz/P565nM8A8+G/Ls7lq+rmtwVDeHPqkVuU0AKHUUCeWU3nu/3Ytq1m
+zC/rFy1AoYQwnu2xGuaZ6vy8NAmbsAzmFGAJ1l8wB1aHclgqFUSwDL330d1+a4kf
+lEF0Pmu7frXYS3GGHcSMns2+wczPTVC84VknIfs9kH6N7kqbBA34CthsWuzvoSgc
+7Z5y6m/gzIv+A56YueLx2ZbGbvvSBsN4UjL395uXcMRsTlNGAHSw8iF2948cJVKt
+uEpSvCgfrC8Z05v05swb/aIiMGy0cRUmOiFSAtm2Suoa0gAtWL7e2IOC2tqYsHwn
+NQ5a5zOKLsPoSaLpNUIn5yOGIW0ZEUJZOaaM5k0ZxIbTCNWRnZ9D5x4Gjs61HVLd
+QPAA0om22/mXq2u6NIIvBEXaVJOnWmRM/0sbRDTQKfFsM6aNeNE=
+=+9FE
+-----END PGP SIGNATURE-----
+
+--w7vg4i7iixezrrjh--
+
+--===============1285352436==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1285352436==--
