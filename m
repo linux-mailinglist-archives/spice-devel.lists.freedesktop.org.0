@@ -1,44 +1,38 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54863BDB43
-	for <lists+spice-devel@lfdr.de>; Wed, 25 Sep 2019 11:40:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F6DEBDB5A
+	for <lists+spice-devel@lfdr.de>; Wed, 25 Sep 2019 11:45:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E012889895;
-	Wed, 25 Sep 2019 09:40:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E64076EB57;
+	Wed, 25 Sep 2019 09:45:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 02B6889895
- for <spice-devel@lists.freedesktop.org>; Wed, 25 Sep 2019 09:40:52 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B3D6E6EB57
+ for <spice-devel@lists.freedesktop.org>; Wed, 25 Sep 2019 09:45:50 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 9E58518CB8E7
- for <spice-devel@lists.freedesktop.org>; Wed, 25 Sep 2019 09:40:51 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 94AA010018F8
- for <spice-devel@lists.freedesktop.org>; Wed, 25 Sep 2019 09:40:51 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 8BEBA1808876;
- Wed, 25 Sep 2019 09:40:51 +0000 (UTC)
-Date: Wed, 25 Sep 2019 05:40:51 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Victor Toso <victortoso@redhat.com>
-Message-ID: <171959826.3206101.1569404451539.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20190925090701.19130-1-victortoso@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 5082C89AC6
+ for <spice-devel@lists.freedesktop.org>; Wed, 25 Sep 2019 09:45:50 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.60])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F33EB60126;
+ Wed, 25 Sep 2019 09:45:49 +0000 (UTC)
+Date: Wed, 25 Sep 2019 11:45:49 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20190925094549.5bwvjdcccsohnkba@wingsuit>
 References: <20190925090701.19130-1-victortoso@redhat.com>
+ <171959826.3206101.1569404451539.JavaMail.zimbra@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.18, 10.4.195.19]
-Thread-Topic: migrate.py
-Thread-Index: bYoKQ73SF02ZZg4tJG5b/W2mN0vpsg==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.63]); Wed, 25 Sep 2019 09:40:51 +0000 (UTC)
+In-Reply-To: <171959826.3206101.1569404451539.JavaMail.zimbra@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.26]); Wed, 25 Sep 2019 09:45:50 +0000 (UTC)
 Subject: Re: [Spice-devel] [spice 0/8] migrate.py
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -52,25 +46,89 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1246634164=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiAKPiBGcm9tOiBWaWN0b3IgVG9zbyA8bWVAdmljdG9ydG9zby5jb20+Cj4gCj4gU29tZSBjaGFu
-Z2VzIHRvIG1ha2UgdGhpcyB1c2FibGUuIE1vcmUgZml4ZXMgdG8gY29tZSBsYXRlci4KPiAKPiBW
-aWN0b3IgVG9zbyAoOCk6Cj4gICB0ZXN0czogbWlncmF0ZTogcmVtb3ZlIHNwaWNlYyBvcHRpb24K
-PiAgIHRlc3RzOiBtaWdyYXRlOiB1c2UgdXJpIGZvciBkZWZhdWx0J3Mgc3BpY3kgY2xpZW50Cj4g
-ICB0ZXN0czogbWlncmF0ZTogYWRkIHN1cHBvcnQgdG8gcnVuIHdpdGggcmVtb3RlLXZpZXdlcgo+
-ICAgdGVzdHM6IG1pZ3JhdGU6IGZpeCByZWxhdGl2ZSBxbXAucHkgcGF0aAo+ICAgdGVzdHM6IG1p
-Z3JhdGU6IHJlbW92ZSBtdWx0aXBsZSBjbGllbnQgb3B0aW9uCj4gICB0ZXN0czogbWlncmF0ZTog
-Ym9vbCBpbnN0ZWFkIG9mIG9uL29mZiBvcHRpb24gaW4gY21kIGxpbmUKPiAgIHRlc3RzOiBtaWdy
-YXRlOiBhZGQgb3B0aW9uIHRvIHdhaXQgdXNlciBpbnB1dAo+ICAgdGVzdHM6IG1pZ3JhdGU6IGFk
-ZCBjb3VudGVyIGZvciB0ZXN0cwo+IAo+ICB0ZXN0cy9taWdyYXRlLnB5IHwgNDAgKysrKysrKysr
-KysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMjQgaW5z
-ZXJ0aW9ucygrKSwgMTYgZGVsZXRpb25zKC0pCj4gCgpUaGV5IG1ha2Ugc2Vuc2UuCgpNYXliZSBh
-bHNvIHNvbWUgY29tbWVudHMgb24gaG93IHRvIGJldHRlciAoYW5kIGVhc2lseT8pCnNldHVwIGFs
-bCB0aGUgcmVxdWlyZW1lbnRzLgoKRnJlZGlhbm8KX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVs
-QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1246634164==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="54zd2hjtavz2pzrh"
+Content-Disposition: inline
+
+
+--54zd2hjtavz2pzrh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Wed, Sep 25, 2019 at 05:40:51AM -0400, Frediano Ziglio wrote:
+> >=20
+> > From: Victor Toso <me@victortoso.com>
+> >=20
+> > Some changes to make this usable. More fixes to come later.
+> >=20
+> > Victor Toso (8):
+> >   tests: migrate: remove spicec option
+> >   tests: migrate: use uri for default's spicy client
+> >   tests: migrate: add support to run with remote-viewer
+> >   tests: migrate: fix relative qmp.py path
+> >   tests: migrate: remove multiple client option
+> >   tests: migrate: bool instead of on/off option in cmd line
+> >   tests: migrate: add option to wait user input
+> >   tests: migrate: add counter for tests
+> >=20
+> >  tests/migrate.py | 40 ++++++++++++++++++++++++----------------
+> >  1 file changed, 24 insertions(+), 16 deletions(-)
+> >=20
+>=20
+> They make sense.
+
+Thanks,
+
+> Maybe also some comments on how to better (and easily?)
+> setup all the requirements.
+
+Promise that as soon as I get a few more fixes here (migrate.py)
+and spice-gtk, I'll do that.
+
+I'll send a v2 addressing the review, many thanks!
+
+>=20
+> Frediano
+
+--54zd2hjtavz2pzrh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2LN00ACgkQl9kSPeN6
+SE+1NBAAgbOhhBG+5x9qcZiE/BVpz5UB+tib9k06UNq7X+AgdTH6dLdLE07x9FUG
+oyKeQAHys5I8NB8ThpaQqT4Uvm5/b4rkfbAZmOJQcCLy5wCgf36Ngr5EMxQGxl3K
+b4Ued3Xv3m2722/kTEpKuwgApY4aoC2XfrKXSo93X/ZvbrNFi4u26m5mvYg7OLsq
+edH1Y7TCJ+mOEI7aQlwE0hWFAvH62c3N8Yso8oCyCmrKl/SXRBxc+59KC6FcS5OP
+/7ox6Ayf/gBlM/aEcAA14dG4+eW5BtxljgDXjXqJ3kMcDAx8NOslUCYIGqbhufqw
+xtev+6/ief6NB+rOHZDNSvlC2Qyb3evYsjEcva/hrzI1bdRX9KjJ/ZoWHBPozXY4
+vL23AOpuOugYQYbsVNfMUJ2GsFKuVg0ssxmOg/Gzji7i8HKg+0EEDbnuBF2a1Bm8
+x68Fjf+0qBI7layL8kGrBsRH4OYgNdEoyYL0USw6xaXclCUjotnP4PSywsCkrwhe
+5o+Pnb2RJw+D2qX0g8LbJUG5v27VFB14rTmYDQccmFy3AU5Qtf99nb2Jc+y8FSLK
+zARq4YKKphBew+qYJZR8bKpjkyIDMofY7tzZSigxsygRGxbvwbVYOJwIExntjVeP
+VLPSldSfhpvu/8G2vDP293R3JorzL3R9Z82qi2w3+SQTLAW2vus=
+=LO3+
+-----END PGP SIGNATURE-----
+
+--54zd2hjtavz2pzrh--
+
+--===============1246634164==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1246634164==--
