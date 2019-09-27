@@ -1,40 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16628C02D5
-	for <lists+spice-devel@lfdr.de>; Fri, 27 Sep 2019 12:04:07 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C614C03BD
+	for <lists+spice-devel@lfdr.de>; Fri, 27 Sep 2019 12:53:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7DB5D6EEF5;
-	Fri, 27 Sep 2019 10:04:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 493FE6EF02;
+	Fri, 27 Sep 2019 10:53:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BDF346EEF5
- for <spice-devel@lists.freedesktop.org>; Fri, 27 Sep 2019 10:04:03 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 5051291766
- for <spice-devel@lists.freedesktop.org>; Fri, 27 Sep 2019 10:04:03 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.60])
- by smtp.corp.redhat.com (Postfix) with ESMTP id F1F175D6B0
- for <spice-devel@lists.freedesktop.org>; Fri, 27 Sep 2019 10:04:02 +0000 (UTC)
-Date: Fri, 27 Sep 2019 12:04:02 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Message-ID: <20190927100402.ehpjboj25nbvdo7r@wingsuit>
-References: <20190919141133.10691-1-victortoso@redhat.com>
- <20190919141133.10691-20-victortoso@redhat.com>
+X-Greylist: delayed 400 seconds by postgrey-1.36 at gabe;
+ Fri, 27 Sep 2019 10:34:19 UTC
+Received: from frisell.zx2c4.com (frisell.zx2c4.com [192.95.5.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1E2656EEFF
+ for <spice-devel@lists.freedesktop.org>; Fri, 27 Sep 2019 10:34:18 +0000 (UTC)
+Received: by frisell.zx2c4.com (ZX2C4 Mail Server) with ESMTP id 386fb00d
+ for <spice-devel@lists.freedesktop.org>;
+ Fri, 27 Sep 2019 09:41:38 +0000 (UTC)
+Received: by frisell.zx2c4.com (ZX2C4 Mail Server) with ESMTPSA id e4f9b719
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO)
+ for <spice-devel@lists.freedesktop.org>;
+ Fri, 27 Sep 2019 09:41:38 +0000 (UTC)
+Received: by mail-ot1-f51.google.com with SMTP id e11so1801920otl.5
+ for <spice-devel@lists.freedesktop.org>; Fri, 27 Sep 2019 03:27:37 -0700 (PDT)
+X-Gm-Message-State: APjAAAUdAIl7/cAuQq2VTdokjMjGKGShqd3mVLY+zWkhlsoTm2zsCa1c
+ CFy1bffY99bpWgOKNstNzgQtWNOKRgqMt5JLB0Y=
+X-Google-Smtp-Source: APXvYqwVXnUACY8YXIoXjZwdM5rYGId4npscBvrBY1ov8pOPLtqkUrDmgoEnzKI2eQAVfpkmqpDiovy+FGHLh86ZbxQ=
+X-Received: by 2002:a05:6830:20cd:: with SMTP id
+ z13mr2645989otq.243.1569580056528; 
+ Fri, 27 Sep 2019 03:27:36 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190919141133.10691-20-victortoso@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.28]); Fri, 27 Sep 2019 10:04:03 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH v8 19/20] test-cd-emu: Make sure we can
- call spice_usb_backend_channel_flush_writes
+From: "Jason A. Donenfeld" <Jason@zx2c4.com>
+Date: Fri, 27 Sep 2019 12:27:25 +0200
+X-Gmail-Original-Message-ID: <CAHmME9r81ugJR_NDF74kvi=ahjNZWzEMo6CGDELL8tw_dmQTxA@mail.gmail.com>
+Message-ID: <CAHmME9r81ugJR_NDF74kvi=ahjNZWzEMo6CGDELL8tw_dmQTxA@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Fri, 27 Sep 2019 10:53:54 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=zx2c4.com;
+ h=mime-version
+ :from:date:message-id:subject:to:content-type; s=mail; bh=zAvMSY
+ PHlUWuvcUDIuXfn9/5iXU=; b=EooVSShX41jH7CZjKuhPmqpa2T5ZmQI2QVGYAi
+ 0e/8yZp+76wcEIFwuo/IcnMi0+EnF5Ja3JkpsNwjix4lgv2qcQMCrVrU/Ueas0Jd
+ TypU/0tf9Fqty2z1khUt7vD4EnhsVDCVnX695oAbYoDnDQM3BlYpivxj9WfQbTAv
+ H7kHC3FQY7JrefZTBrRn59yxnSR1v3/Nr0gkQmTc74IqlD8CR7o2C2k70qS9gXWE
+ GsFtjJkLsIlljGDYFi8RxA5Q+DDxm5hEl8ktznyejf5SogZwZMw4X52JiZau5OgH
+ SwkyX5Q8xuRjHMtHOPP5w5kV+0DQKpCSVZeTgpx0Fju12CyQ==
+Subject: [Spice-devel] regression from 0.14.0 -> 0.14.2 in screen resizing
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,101 +57,24 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1054831728=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1054831728==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="s2si7xhmlndl76ik"
-Content-Disposition: inline
-
-
---s2si7xhmlndl76ik
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-Sorry if I wasn't clear before but I'm completely fine with the
-tests patches as well. I take that only one patch (the command
-line option one) isn't going to be merged as some work on the
-design is pending, correct?
-
-Cheers,
-
-On Thu, Sep 19, 2019 at 04:11:32PM +0200, Victor Toso wrote:
-> From: Frediano Ziglio <fziglio@redhat.com>
->=20
-> Currently we call this function when the SPICE channel is up
-> however this function should continue to work as in theory
-> the channel could avoid to handle the message and stop the flow
-> (for instance to implement some kind of flow limitation)
-> and so will need to call this function again.
-> This was failing in the first USB emulation implementation
-> causing a crash.
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-> ---
->  tests/cd-emu.c | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/tests/cd-emu.c b/tests/cd-emu.c
-> index fb023a9..690423b 100644
-> --- a/tests/cd-emu.c
-> +++ b/tests/cd-emu.c
-> @@ -164,6 +164,10 @@ device_iteration(const int loop, const bool attach_o=
-n_connect)
->      g_assert_cmpint(hellos_sent, =3D=3D, hellos_expected);
->      g_assert_cmpint(messages_sent, >=3D, messages_expected);
-> =20
-> +    spice_usb_backend_channel_flush_writes(usb_ch);
-> +    g_assert_cmpint(hellos_sent, =3D=3D, hellos_expected);
-> +    g_assert_cmpint(messages_sent, >=3D, messages_expected);
-> +
->      // send hello reply
->      if (loop =3D=3D 0) {
->          DATA_START
-> --=20
-> 2.21.0
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---s2si7xhmlndl76ik
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2N3pIACgkQl9kSPeN6
-SE9lbg//csVqtBsr7QJZ9nWtTo+omhbhyUXvUaFVivGn9PVo0DeEm77PfLf0i6zZ
-RJhJCVjhRnVUxC4yZZTGG+n7B7Qu2G1dhf2d5/WznV4M+LWN65+OhGABJxgitNTd
-A4qD/lET9iqf3sM5qOZISdnyYWv5VIGWURLg43o3PItGer6RmCcmdqe/OZD73Wrt
-hQFX3nvZL89SDYlZ08WagfGGU4ShT5jCqfTxL8F207nvs2HcpnHXsrAC7uZXttT0
-mUrE0utthLs2Uy+FTRZEILwf/VmuzftEQkYpxqHFNocKb9gHQkGtqAMeamY55HhK
-3CQNqu1VWh/DxPMt3Id00OwR+agOXepozznCXEVIEneiVlZMKIO34iXlDvagYBoU
-lTW1X4unaarEY9YJkJgu7jltazbCSthA+2ZTKXKQ32kEFjNinMjybvE2TloOS7w5
-Q1DgkUVFZrpUkBpc1gqc53hBC9y+YQmcnv/Zlm3nL6Pvc0X/ukwP2moaVL3YBqJi
-vV66PbVF9fiAXZ4FwJhz9wBF/HSahb+BNvBLZHtBQ/KN9TiJtiy1ciFVG3W7CIu7
-5lTkrybP0Ocs+uL6f1EBYCNGbi/Mnm19D2Ta7WAx9lJZPHslQ3ik7kDLpYYl+y7J
-tqlhRm2SyrbgHsITPkYtM5EEk6u3ryvx5i7gbpODoNsLdqeOURo=
-=uThQ
------END PGP SIGNATURE-----
-
---s2si7xhmlndl76ik--
-
---===============1054831728==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1054831728==--
+SGksCgpNeSBkaXN0cm8gdXBncmFkZWQgc3BpY2UgZnJvbSAwLjE0LjAgdG8gMC4xNC4yLiBUaGlz
+IGhhcyBjYXVzZWQgc2NyZWVuCnJlc2l6aW5nIGdlb21ldHJ5IHByb2JsZW1zIGZvciBteSBXaW5k
+b3dzIGd1ZXN0LgoKSW4gc3BpY3ksIEkgZXhwZXJpZW5jZSBhIG1hc3NpdmUgYmxhY2sgYm9yZGVy
+IGFyb3VuZCB0aGUgc2NyZWVuLCBhcwp0aG91Z2ggaXQncyBnZXR0aW5nIHRoZSBpbnRlcm5hbCBj
+b29yZGluYXRlcyBhbmQgZXh0ZXJuYWwgY29vcmRpbmF0ZXMKb3V0IG9mIHN5bmMuIFRoaXMgc2Vl
+bXMgdG8gZ28gYXdheSBpbiBsby1kcGkgbW9kZS4KCkluIHJlbW90ZS12aWV3ZXIsIEkgZXhwZXJp
+ZW5jZSBvbmx5IH5zcXVhcmUgc2NyZWVuIHJlc29sdXRpb25zIGFuZCBiaWcKcGVyZm9ybWFuY2Ug
+cmVncmVzc2lvbnMuCgpSZXZlcnRpbmcgdG8gMC4xNC4wIChhbmQgcmVidWlsZGluZyBxZW11IHRv
+IHVzZSBpdCkgbWFrZXMgdGhpbmdzIHdvcmsKYWdhaW4sIHdpdGggYWxsIGd1ZXN0IHNjcmVlbiBy
+ZXNvbHV0aW9ucyBiZWluZyBwb3NzaWJsZSBhbmQgcmVzaXppbmcKd29ya2luZyB3ZWxsLgoKUGxl
+YXNlIGxldCBtZSBrbm93IGlmIHlvdSByZXF1aXJlIGFkZGl0aW9uYWwgaW5mb3JtYXRpb24gb3Ig
+d291bGQgbGlrZQptZSB0byB0cnkgd2l0aCBzb21lIGNvbW1pdHMgcmV2ZXJ0ZWQuCgpUaGFua3Ms
+Ckphc29uCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNw
+aWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
+aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZl
+bA==
