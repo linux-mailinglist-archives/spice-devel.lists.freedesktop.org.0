@@ -2,40 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D717AC9E9A
-	for <lists+spice-devel@lfdr.de>; Thu,  3 Oct 2019 14:35:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C99BC9EC6
+	for <lists+spice-devel@lfdr.de>; Thu,  3 Oct 2019 14:47:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1514389BF0;
-	Thu,  3 Oct 2019 12:35:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 12C736E133;
+	Thu,  3 Oct 2019 12:47:26 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1ABAF89BF0
- for <spice-devel@lists.freedesktop.org>; Thu,  3 Oct 2019 12:34:58 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2086C6E133
+ for <spice-devel@lists.freedesktop.org>; Thu,  3 Oct 2019 12:47:25 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id AE66930BD1DE
- for <spice-devel@lists.freedesktop.org>; Thu,  3 Oct 2019 12:34:57 +0000 (UTC)
-Received: from lub.tlv (dhcp-4-213.tlv.redhat.com [10.35.4.213])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 763E95D9DC;
- Thu,  3 Oct 2019 12:34:51 +0000 (UTC)
-To: Victor Toso <victortoso@redhat.com>, spice-devel@lists.freedesktop.org
+ by mx1.redhat.com (Postfix) with ESMTPS id B34797FDEC
+ for <spice-devel@lists.freedesktop.org>; Thu,  3 Oct 2019 12:47:24 +0000 (UTC)
+Received: from localhost (ovpn-117-253.ams2.redhat.com [10.36.117.253])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5777419C69;
+ Thu,  3 Oct 2019 12:47:19 +0000 (UTC)
+Date: Thu, 3 Oct 2019 14:47:18 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Uri Lublin <uril@redhat.com>
+Message-ID: <20191003124718.qjurbdfcjbzdhshd@wingsuit>
 References: <20191003101423.732-1-victortoso@redhat.com>
  <20191003101423.732-2-victortoso@redhat.com>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <07ce7d94-6bb0-3ed8-ea85-bbb5c0fbbefb@redhat.com>
-Date: Thu, 3 Oct 2019 15:34:50 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+ <07ce7d94-6bb0-3ed8-ea85-bbb5c0fbbefb@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191003101423.732-2-victortoso@redhat.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+In-Reply-To: <07ce7d94-6bb0-3ed8-ea85-bbb5c0fbbefb@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.49]); Thu, 03 Oct 2019 12:34:57 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.27]); Thu, 03 Oct 2019 12:47:24 +0000 (UTC)
 Subject: Re: [Spice-devel] [spice/tests/migrate v1 2/4] tests: migrate: wait
  user launch client option
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -49,68 +47,145 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1775280496=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gMTAvMy8xOSAxOjE0IFBNLCBWaWN0b3IgVG9zbyB3cm90ZToKPiBGcm9tOiBWaWN0b3IgVG9z
-byA8bWVAdmljdG9ydG9zby5jb20+Cj4gCj4gVXNlZnVsIHRvIHRlc3QgZGlmZmVyZW50IGNsaWVu
-dHMgcnVubmluZyBkaWZmZXJlbnQgdG9vbHMgKGdkYiwKPiB2YWxncmluZCkuCgpJdCBzZWVtcyB0
-byBtZSBpdCdzIGFscmVhZHkgc29sdmVkIGJ5IC0td2FpdC11c2VyLWlucHV0LgpUaGUgdXNlciBj
-YW4gc3RhcnQgdGhlIG1pZ3JhdGlvbiBvbmx5IGFmdGVyIHJ1bm5pbmcgdGhlIHRvb2wvY2xpZW50
-LgoKVXJpLgoKPiAKPiBTaWduZWQtb2ZmLWJ5OiBWaWN0b3IgVG9zbyA8dmljdG9ydG9zb0ByZWRo
-YXQuY29tPgo+IC0tLQo+ICAgdGVzdHMvbWlncmF0ZS5weSB8IDEzICsrKysrKysrKy0tLS0KPiAg
-IDEgZmlsZSBjaGFuZ2VkLCA5IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCj4gCj4gZGlm
-ZiAtLWdpdCBhL3Rlc3RzL21pZ3JhdGUucHkgYi90ZXN0cy9taWdyYXRlLnB5Cj4gaW5kZXggNWVk
-OWViYTQuLjg4ZTE3NjkxIDEwMDc1NQo+IC0tLSBhL3Rlc3RzL21pZ3JhdGUucHkKPiArKysgYi90
-ZXN0cy9taWdyYXRlLnB5Cj4gQEAgLTYzLDYgKzYzLDggQEAgZGVmIGdldF9hcmdzKCk6Cj4gICAg
-ICAgICAgICAgICAgICAgICAgICAgICBoZWxwPSJBcHBlbmQgb3B0aW9ucyBmb3IgYWdlbnQncyB2
-aXJ0c2VyaWFscG9ydCIpCj4gICAgICAgcGFyc2VyLmFkZF9hcmd1bWVudCgnLS13YWl0LXVzZXIt
-aW5wdXQnLCBkZXN0PSJ3YWl0X3VzZXJfaW5wdXQiLCBhY3Rpb249J3N0b3JlX3RydWUnLCBkZWZh
-dWx0PUZhbHNlLAo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgaGVscD0iV2FpdCB1c2VyJ3Mg
-aW5wdXQgdG8gc3RhcnQgbWlncmF0aW9uIHRlc3QiKQo+ICsgICAgcGFyc2VyLmFkZF9hcmd1bWVu
-dCgnLS13YWl0LXVzZXItY29ubmVjdCcsIGRlc3Q9IndhaXRfdXNlcl9jb25uZWN0IiwgYWN0aW9u
-PSdzdG9yZV90cnVlJywgZGVmYXVsdD1GYWxzZSwKPiArICAgICAgICAgICAgICAgICAgICAgICAg
-aGVscD0iV2FpdCBzcGljZSBjbGllbnQgdG8gY29ubmVjdCB0byBtb3ZlIHRvIG5leHQgc3RlcCBv
-ZiBtaWdyYXRpb24gKGRlZmF1bHQgRmFsc2UpIikKPiAgICAgICBwYXJzZXIuYWRkX2FyZ3VtZW50
-KCctLWNvdW50JywgZGVzdD0nY291bnRlcicsIHR5cGU9aW50LCBkZWZhdWx0PTEwMCwKPiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGhlbHA9Ik51bWJlciBvZiBtaWdyYXRpb25zIHRvIHJ1biAo
-c2V0IDAgZm9yIGluZmluaXRlKSIpCj4gICAgICAgYXJncyA9IHBhcnNlci5wYXJzZV9hcmdzKHN5
-cy5hcmd2WzE6XSkKPiBAQCAtMTc0LDI1ICsxNzYsMjggQEAgY2xhc3MgTWlncmF0b3Iob2JqZWN0
-KToKPiAgICAgICAgICAgICAgIGlmIG9zLnBhdGguZXhpc3RzKHgpOgo+ICAgICAgICAgICAgICAg
-ICAgIG9zLnVubGluayh4KQo+ICAgCj4gLSAgICBkZWYgaXRlcmF0ZShzZWxmLCB3YWl0X2Zvcl91
-c2VyX2lucHV0PUZhbHNlKToKPiArICAgIGRlZiBpdGVyYXRlKHNlbGYsIHdhaXRfZm9yX3VzZXJf
-aW5wdXQ9RmFsc2UsIHdhaXRfdXNlcl9jb25uZWN0PUZhbHNlKToKPiAgICAgICAgICAgd2FpdF9h
-Y3RpdmUoc2VsZi5hY3RpdmUucW1wLCBUcnVlKQo+ICAgICAgICAgICB3YWl0X2FjdGl2ZShzZWxm
-LnRhcmdldC5xbXAsIEZhbHNlKQo+ICAgICAgICAgICBpZiBub3Qgc2VsZi5jb25uZWN0ZWRfY2xp
-ZW50Ogo+ICAgICAgICAgICAgICAgaWYgc2VsZi5jbGllbnQ6Cj4gICAgICAgICAgICAgICAgICAg
-c2VsZi5jb25uZWN0ZWRfY2xpZW50ID0gc3RhcnRfY2xpZW50KGNsaWVudD1zZWxmLmNsaWVudCwg
-c3BpY2VfcG9ydD1zZWxmLnNwaWNlX3BvcnRzWzBdKQo+IC0gICAgICAgICAgICAgICAgd2FpdF9m
-b3JfZXZlbnQoc2VsZi5hY3RpdmUucW1wLCAnU1BJQ0VfSU5JVElBTElaRUQnKQo+ICAgCj4gICAg
-ICAgICAgICAgICBpZiB3YWl0X2Zvcl91c2VyX2lucHV0Ogo+ICAgICAgICAgICAgICAgICAgIHBy
-aW50ICJ3YWl0aW5nIGZvciBFbnRlciB0byBzdGFydCBtaWdyYXRpb25zIgo+ICAgICAgICAgICAg
-ICAgICAgIHJhd19pbnB1dCgpCj4gICAKPiArICAgICAgICAjIFRlc3RlciBjYW4gbGF1bmNoIGl0
-cyBvd24gY2xpZW50IG9yIHdlIHdhaXQgc3RhcnRfY2xpZW50KCkgdG8gY29ubmVjdAo+ICsgICAg
-ICAgIGlmIHdhaXRfdXNlcl9jb25uZWN0Ogo+ICsgICAgICAgICAgICB3YWl0X2Zvcl9ldmVudChz
-ZWxmLmFjdGl2ZS5xbXAsICdTUElDRV9JTklUSUFMSVpFRCcpCj4gKwo+ICAgICAgICAgICBzZWxm
-LmFjdGl2ZS5xbXAuY21kKCdjbGllbnRfbWlncmF0ZV9pbmZvJywgeydwcm90b2NvbCc6J3NwaWNl
-JywKPiAgICAgICAgICAgICAgICdob3N0bmFtZSc6J2xvY2FsaG9zdCcsICdwb3J0JzpzZWxmLnRh
-cmdldC5zcGljZV9wb3J0fSkKPiAgICAgICAgICAgc2VsZi5hY3RpdmUucW1wLmNtZCgnbWlncmF0
-ZScsIHsndXJpJzogJ3RjcDpsb2NhbGhvc3Q6JXMnICUgc2VsZi5taWdyYXRpb25fcG9ydH0pCj4g
-ICAgICAgICAgIHdhaXRfYWN0aXZlKHNlbGYuYWN0aXZlLnFtcCwgRmFsc2UpCj4gICAgICAgICAg
-IHdhaXRfYWN0aXZlKHNlbGYudGFyZ2V0LnFtcCwgVHJ1ZSkKPiAgIAo+IC0gICAgICAgIGlmIHNl
-bGYuY29ubmVjdGVkX2NsaWVudDoKPiArICAgICAgICBpZiBzZWxmLmNvbm5lY3RlZF9jbGllbnQg
-b3Igd2FpdF91c2VyX2Nvbm5lY3Q6Cj4gICAgICAgICAgICAgICB3YWl0X2Zvcl9ldmVudChzZWxm
-LnRhcmdldC5xbXAsICdTUElDRV9DT05ORUNURUQnKQo+ICAgCj4gICAgICAgICAgIGRlYWQgPSBz
-ZWxmLmFjdGl2ZQo+IEBAIC0yMjQsNyArMjI5LDcgQEAgZGVmIG1haW4oKToKPiAgICAgICBhdGV4
-aXQucmVnaXN0ZXIoY2xlYW51cCwgbWlncmF0b3IpCj4gICAgICAgY291bnRlciA9IDAKPiAgICAg
-ICB3aGlsZSBhcmdzLmNvdW50ZXIgPT0gMCBvciBjb3VudGVyIDwgYXJncy5jb3VudGVyOgo+IC0g
-ICAgICAgIG1pZ3JhdG9yLml0ZXJhdGUoYXJncy53YWl0X3VzZXJfaW5wdXQpCj4gKyAgICAgICAg
-bWlncmF0b3IuaXRlcmF0ZShhcmdzLndhaXRfdXNlcl9pbnB1dCwgYXJncy53YWl0X3VzZXJfY29u
-bmVjdCkKPiAgICAgICAgICAgY291bnRlciArPSAxCj4gICAKPiAgIGlmIF9fbmFtZV9fID09ICdf
-X21haW5fXyc6Cj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0
-b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3Bp
-Y2UtZGV2ZWw=
+
+--===============1775280496==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="yltfsrqlsr2fphny"
+Content-Disposition: inline
+
+
+--yltfsrqlsr2fphny
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Oct 03, 2019 at 03:34:50PM +0300, Uri Lublin wrote:
+> On 10/3/19 1:14 PM, Victor Toso wrote:
+> > From: Victor Toso <me@victortoso.com>
+> >=20
+> > Useful to test different clients running different tools (gdb,
+> > valgrind).
+>=20
+> It seems to me it's already solved by --wait-user-input.
+> The user can start the migration only after running the tool/client.
+
+They are similar but with wait-user-input you can do the wait
+without having to launch your own client, that is, it is good to
+test the host side migration. Also, both of them should work well
+together, that is:
+
+=2E/migrate.py --wait-user-connect --wait-user-input
+
+By default, test does not launch the client so it will wait we
+connect remote-viewer, than after connected it waits for user
+input to start migration.
+
+> Uri.
+>=20
+> >=20
+> > Signed-off-by: Victor Toso <victortoso@redhat.com>
+> > ---
+> >   tests/migrate.py | 13 +++++++++----
+> >   1 file changed, 9 insertions(+), 4 deletions(-)
+> >=20
+> > diff --git a/tests/migrate.py b/tests/migrate.py
+> > index 5ed9eba4..88e17691 100755
+> > --- a/tests/migrate.py
+> > +++ b/tests/migrate.py
+> > @@ -63,6 +63,8 @@ def get_args():
+> >                           help=3D"Append options for agent's virtserial=
+port")
+> >       parser.add_argument('--wait-user-input', dest=3D"wait_user_input"=
+, action=3D'store_true', default=3DFalse,
+> >                           help=3D"Wait user's input to start migration =
+test")
+> > +    parser.add_argument('--wait-user-connect', dest=3D"wait_user_conne=
+ct", action=3D'store_true', default=3DFalse,
+> > +                        help=3D"Wait spice client to connect to move t=
+o next step of migration (default False)")
+> >       parser.add_argument('--count', dest=3D'counter', type=3Dint, defa=
+ult=3D100,
+> >                           help=3D"Number of migrations to run (set 0 fo=
+r infinite)")
+> >       args =3D parser.parse_args(sys.argv[1:])
+> > @@ -174,25 +176,28 @@ class Migrator(object):
+> >               if os.path.exists(x):
+> >                   os.unlink(x)
+> > -    def iterate(self, wait_for_user_input=3DFalse):
+> > +    def iterate(self, wait_for_user_input=3DFalse, wait_user_connect=
+=3DFalse):
+> >           wait_active(self.active.qmp, True)
+> >           wait_active(self.target.qmp, False)
+> >           if not self.connected_client:
+> >               if self.client:
+> >                   self.connected_client =3D start_client(client=3Dself.=
+client, spice_port=3Dself.spice_ports[0])
+> > -                wait_for_event(self.active.qmp, 'SPICE_INITIALIZED')
+> >               if wait_for_user_input:
+> >                   print "waiting for Enter to start migrations"
+> >                   raw_input()
+> > +        # Tester can launch its own client or we wait start_client() t=
+o connect
+> > +        if wait_user_connect:
+> > +            wait_for_event(self.active.qmp, 'SPICE_INITIALIZED')
+> > +
+> >           self.active.qmp.cmd('client_migrate_info', {'protocol':'spice=
+',
+> >               'hostname':'localhost', 'port':self.target.spice_port})
+> >           self.active.qmp.cmd('migrate', {'uri': 'tcp:localhost:%s' % s=
+elf.migration_port})
+> >           wait_active(self.active.qmp, False)
+> >           wait_active(self.target.qmp, True)
+> > -        if self.connected_client:
+> > +        if self.connected_client or wait_user_connect:
+> >               wait_for_event(self.target.qmp, 'SPICE_CONNECTED')
+> >           dead =3D self.active
+> > @@ -224,7 +229,7 @@ def main():
+> >       atexit.register(cleanup, migrator)
+> >       counter =3D 0
+> >       while args.counter =3D=3D 0 or counter < args.counter:
+> > -        migrator.iterate(args.wait_user_input)
+> > +        migrator.iterate(args.wait_user_input, args.wait_user_connect)
+> >           counter +=3D 1
+> >   if __name__ =3D=3D '__main__':
+> >=20
+>=20
+
+--yltfsrqlsr2fphny
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2V7dYACgkQl9kSPeN6
+SE8kZw/+NPa5M+xIbMobSpveayfIW+Icv8jFgE7oMa1zFeDsAEJj5JwFMsmk8jPs
+BIYaI1JFaVwqZIUgRSYNTkTPPfWHO5ARD2yAZp/X5QpzvX2yRE89H8bzsG2keNNw
+lymrT5z6Bd9dOFxAb3qyByDAEe7HnqbjJZmy/NU1gwp1nxQ+f6bk4Yv99HPne1I4
+/eC1ARb6q/KX/sCnR0IivtMhmuD94TndeH4LeQ5XvgsLe1c92loGCVVBl8Qw064b
+d3HweNUp+eF5NpBcudlCJ86ztQK73p9RGRvEyDrttJNUWAf/XTNhL1jPXHCaLFbT
+uFfuO9H4p8/22U6R47o6KTT32TU8lJyPlOJ9dHlw/8fE53SaahGkiU5UDGmBWuGI
+35jRy+NL1MqPe+Zd8BXWgGfJr7irDkz6UhKiXF2iTA/Sg43GSGBIitnN7Ps2pPhy
+M4nzaFruRYU6cMCvKOUzSGx/SWpQoFTtYoNNdxHkSmVDzfjAlHdYaHnjuoxifHoB
+c9eYNz8EYYsyL5nMmaIUlNhA1SCoOYnBgbUzA4z7jisVrgv34EBSICO+wbXnTYfA
+LJ6rQDcBmZNV8EZLOFABucmos87YNHCY8zu3RHw8zoV8sA5szS/lMbbYdFz43Win
++1obDLwPa5RkUWG7zC1OcyW6CHr5hut/sYIj9r3n8OWOiX5Ow7c=
+=nVcI
+-----END PGP SIGNATURE-----
+
+--yltfsrqlsr2fphny--
+
+--===============1775280496==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1775280496==--
