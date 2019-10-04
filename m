@@ -1,40 +1,36 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5842ACB889
-	for <lists+spice-devel@lfdr.de>; Fri,  4 Oct 2019 12:42:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02FF1CBD06
+	for <lists+spice-devel@lfdr.de>; Fri,  4 Oct 2019 16:23:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C42BB6EB1C;
-	Fri,  4 Oct 2019 10:42:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 78DCE6EBAD;
+	Fri,  4 Oct 2019 14:23:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0FA646EB1A
- for <spice-devel@lists.freedesktop.org>; Fri,  4 Oct 2019 10:42:07 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D43AE6EBAD
+ for <spice-devel@lists.freedesktop.org>; Fri,  4 Oct 2019 14:23:35 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id A17FB8A1C9F
- for <spice-devel@lists.freedesktop.org>; Fri,  4 Oct 2019 10:42:06 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.36])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 50A995DA60;
- Fri,  4 Oct 2019 10:42:06 +0000 (UTC)
-Date: Fri, 4 Oct 2019 12:42:05 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20191004104205.chwqhdyknb5y32jr@wingsuit>
-References: <20190929110336.9613-1-fziglio@redhat.com>
- <1394890379.3737526.1569864645820.JavaMail.zimbra@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id 4CB8218021BB
+ for <spice-devel@lists.freedesktop.org>; Fri,  4 Oct 2019 14:23:35 +0000 (UTC)
+Received: from fziglio.remote.csb (unknown [10.33.32.15])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 325F0100EBDE;
+ Fri,  4 Oct 2019 14:23:33 +0000 (UTC)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: spice-devel@lists.freedesktop.org
+Date: Fri,  4 Oct 2019 15:23:28 +0100
+Message-Id: <20191004142328.23270-1-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <1394890379.3737526.1569864645820.JavaMail.zimbra@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.69]); Fri, 04 Oct 2019 10:42:06 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server] red-channel-client: Use
- SpiceMsgcAckSync structure
+ (mx1.redhat.com [10.5.110.70]); Fri, 04 Oct 2019 14:23:35 +0000 (UTC)
+Subject: [Spice-devel] [PATCH spice-server] ci: Update gitlab
+ makecheck-centos Job to support CentOS 8
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,91 +42,39 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0284432371=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============0284432371==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="x55icy5z4gtqszdd"
-Content-Disposition: inline
-
-
---x55icy5z4gtqszdd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Mon, Sep 30, 2019 at 01:30:45PM -0400, Frediano Ziglio wrote:
-> >=20
-> > red_channel_client_handle_message is called after parsing the
-> > message so it's not necessary to check it again or parse manually.
-> >=20
-> > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-> > ---
-> >  server/red-channel-client.c | 6 +-----
-> >  1 file changed, 1 insertion(+), 5 deletions(-)
-> >=20
-> > diff --git a/server/red-channel-client.c b/server/red-channel-client.c
-> > index 66b8fd4a..f861cce5 100644
-> > --- a/server/red-channel-client.c
-> > +++ b/server/red-channel-client.c
-> > @@ -1473,11 +1473,7 @@ bool
-> > red_channel_client_handle_message(RedChannelClient *rcc, uint16_t type,
-> >  {
-> >      switch (type) {
-> >      case SPICE_MSGC_ACK_SYNC:
-> > -        if (size !=3D sizeof(uint32_t)) {
-> > -            red_channel_warning(red_channel_client_get_channel(rcc), "=
-bad
-> > message size");
-> > -            return FALSE;
-> > -        }
-> > -        rcc->priv->ack_data.client_generation =3D *(uint32_t *)(messag=
-e);
-> > +        rcc->priv->ack_data.client_generation =3D ((SpiceMsgcAckSync *)
-> > message)->generation;
->=20
-> This last line is fine but I realized that for some reasons smartcard
-> channel is not setting the parser so would be better to leave the check.
-> Even better to use the parser maybe.
-
-Does it mean you nacked your patch?
-
---x55icy5z4gtqszdd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2XIf0ACgkQl9kSPeN6
-SE+oGA//ZC4bpxrxyEpxfUcU5nuNB+lkTcqjOgNR/8QKjvJZvwAIp7hsoV3zx1BT
-PD+nFfLn1Pbi7TpNDRdXD97/bHKqr7HM7PYwfTdf22XrAGTvUwA4/mjzRirn9Wj0
-UvK5glE9YyUOn6h8FAfsCptKsHpcakXf1yNy35cLhMAf5JBO0qSRW16Sn1YFUOJs
-FE6xNUBDbdmwMRrCdZflwQOTx0DV4wr6E0jV/aJOOUrvd1ahNMLioRh0setzy6jD
-dPJ1q9wLbStyvT6SxOGknu2SlBsQjjzI6gvdJQUZA9byzBnme1qt8qzNia6+wVHI
-Ej36p3ZIQM2YQdcM+VTn/rTkHf/1EsbeP172v+m83cVBqh4jR+Qd2nk2Hhc7G3Qa
-thSVYnyzS1nesJc4TxNr8opJG1GUjK9Q6zrwGHP6LV4ep7byZ3p0RGMmpgkTbQVj
-Rv4+RaMxwJFWWnqdDhGLLG1HcTGltqnfp9/NugX5s5IuTq6SnpaivVNPOrBRZ/FU
-L9x0wXd3SfTEG+6voPVcskGbibDEPPHuHLnFHrLF38r9e1WpIzN+/fZyLOZzc0cE
-VcPlpcCDpSukcKfZweDrQBkB6NqZCwCbpkzTzibXVmvQqTOjnW4cSunCtLeSHtpz
-WcIvGxXjAlRgV7kyNeu21FCTdoatwsdTiq8bAUH2KvncPjPDF/s=
-=ix2l
------END PGP SIGNATURE-----
-
---x55icy5z4gtqszdd--
-
---===============0284432371==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0284432371==--
+RGlzYWJsZSBjZWx0MC41MSwgbm93IG9ic29sZXRlLgpVcGRhdGUgcGFja2FnZSBuYW1lcyBhbmQg
+cmVwb3NpdG9yaWVzLgoKU2lnbmVkLW9mZi1ieTogRnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJl
+ZGhhdC5jb20+Ci0tLQogLmdpdGxhYi1jaS55bWwgfCAxMCArKysrKystLS0tCiAxIGZpbGUgY2hh
+bmdlZCwgNiBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQoKUmVzdWx0cyBhdCBodHRwczov
+L2dpdGxhYi5mcmVlZGVza3RvcC5vcmcvZnppZ2xpby9zcGljZS9waXBlbGluZXMvNjgzOTUKCmRp
+ZmYgLS1naXQgYS8uZ2l0bGFiLWNpLnltbCBiLy5naXRsYWItY2kueW1sCmluZGV4IDMzMjEwY2I5
+Li4wMWY2MzczMyAxMDA2NDQKLS0tIGEvLmdpdGxhYi1jaS55bWwKKysrIGIvLmdpdGxhYi1jaS55
+bWwKQEAgLTg1LDEzICs4NSwxNSBAQCBkaXN0Y2hlY2s6CiAjIFNhbWUgYXMgbWFrZWNoZWNrIGpv
+YiBidXQgdXNlIGEgQ2VudG9zIGltYWdlCiBtYWtlY2hlY2stY2VudG9zOgogICBiZWZvcmVfc2Ny
+aXB0OgorICAgIC0gZG5mIGluc3RhbGwgLXkgJ2RuZi1jb21tYW5kKGNvbmZpZy1tYW5hZ2VyKScK
+KyAgICAtIGRuZiBjb25maWctbWFuYWdlciAtLXNldC1lbmFibGVkIFBvd2VyVG9vbHMKICAgICAt
+ID4KLSAgICAgIHl1bSBpbnN0YWxsIGdpdCBsaWJ0b29sIG1ha2UgbGliYXNhbiBvcmMtZGV2ZWwg
+Z2xpYi1uZXR3b3JraW5nCi0gICAgICB5dW0tdXRpbHMgZ2NjIGdsaWIyLWRldmVsIGNlbHQwNTEt
+ZGV2ZWwKKyAgICAgIGRuZiBpbnN0YWxsIGdpdCBsaWJ0b29sIG1ha2UgbGliYXNhbiBvcmMtZGV2
+ZWwgZ2xpYi1uZXR3b3JraW5nCisgICAgICBnY2MgZ2xpYjItZGV2ZWwKICAgICAgIG9wdXMtZGV2
+ZWwgcGl4bWFuLWRldmVsIG9wZW5zc2wtZGV2ZWwgbGlianBlZy1kZXZlbAogICAgICAgbGliY2Fj
+YXJkLWRldmVsIGN5cnVzLXNhc2wtZGV2ZWwgbHo0LWRldmVsCiAgICAgICBnc3RyZWFtZXIxLWRl
+dmVsIGdzdHJlYW1lcjEtcGx1Z2lucy1iYXNlLWRldmVsCi0gICAgICBnaXQtY29yZSBweXBhcnNp
+bmcgcHl0aG9uLXNpeAorICAgICAgZ2l0LWNvcmUgcHl0aG9uMy1weXBhcnNpbmcgcHl0aG9uMy1z
+aXggcHl0aG9uMwogICAgICAgLXkKICAgICAtIGdpdCBjbG9uZSAke0NJX1JFUE9TSVRPUllfVVJM
+L3NwaWNlLmdpdC9zcGljZS1wcm90b2NvbC5naXR9CiAgICAgLSAoY2Qgc3BpY2UtcHJvdG9jb2wg
+JiYgLi9hdXRvZ2VuLnNoIC0tcHJlZml4PS91c3IgJiYgbWFrZSBpbnN0YWxsKQpAQCAtMTAwLDcg
+KzEwMiw3IEBAIG1ha2VjaGVjay1jZW50b3M6CiAgIC0gPgogICAgIENGTEFHUz0nLU8yIC1waXBl
+IC1nIC1mc2FuaXRpemU9YWRkcmVzcyAtZm5vLW9taXQtZnJhbWUtcG9pbnRlciAtV2ZyYW1lLWxh
+cmdlci10aGFuPTQwOTIwJwogICAgIExERkxBR1M9Jy1mc2FuaXRpemU9YWRkcmVzcyAtbGFzYW4n
+Ci0gICAgLi9hdXRvZ2VuLnNoIC0tZW5hYmxlLWNlbHQwNTEKKyAgICAuL2F1dG9nZW4uc2ggLS1k
+aXNhYmxlLWNlbHQwNTEKICAgLSBtYWtlCiAgIC0gbWFrZSAtQyBzZXJ2ZXIgY2hlY2sgfHwgKGNh
+dCBzZXJ2ZXIvdGVzdHMvdGVzdC1zdWl0ZS5sb2cgJiYgZXhpdCAxKQogCi0tIAoyLjIxLjAKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVs
+IG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
+aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA==
