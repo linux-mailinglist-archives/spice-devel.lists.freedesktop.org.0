@@ -2,37 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01260CE175
-	for <lists+spice-devel@lfdr.de>; Mon,  7 Oct 2019 14:19:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C823CE2B3
+	for <lists+spice-devel@lfdr.de>; Mon,  7 Oct 2019 15:07:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5156B6E5D1;
-	Mon,  7 Oct 2019 12:19:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9E55289F6E;
+	Mon,  7 Oct 2019 13:07:38 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 59DF86E5CE
- for <spice-devel@lists.freedesktop.org>; Mon,  7 Oct 2019 12:19:42 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 19B4189F6E
+ for <spice-devel@lists.freedesktop.org>; Mon,  7 Oct 2019 13:07:37 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 011B13091D42
- for <spice-devel@lists.freedesktop.org>; Mon,  7 Oct 2019 12:19:42 +0000 (UTC)
-Received: from wingsuit.mxp.redhat.com (unknown [10.32.181.37])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7CBC119C7F
- for <spice-devel@lists.freedesktop.org>; Mon,  7 Oct 2019 12:19:41 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id A0C487F745
+ for <spice-devel@lists.freedesktop.org>; Mon,  7 Oct 2019 13:07:36 +0000 (UTC)
+Received: from localhost (unknown [10.32.181.37])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4F38A5C1D4;
+ Mon,  7 Oct 2019 13:07:36 +0000 (UTC)
+Date: Mon, 7 Oct 2019 15:07:35 +0200
 From: Victor Toso <victortoso@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Date: Mon,  7 Oct 2019 14:19:35 +0200
-Message-Id: <20191007121935.22567-8-victortoso@redhat.com>
-In-Reply-To: <20191007121935.22567-1-victortoso@redhat.com>
-References: <20191007121935.22567-1-victortoso@redhat.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+Message-ID: <20191007130735.sc36pirys43x5voi@wingsuit>
+References: <20191007103906.30517-1-fziglio@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.42]); Mon, 07 Oct 2019 12:19:42 +0000 (UTC)
-Subject: [Spice-devel] [spice v1 8/8] tests: migrate: add seamless-migration
- option
+In-Reply-To: <20191007103906.30517-1-fziglio@redhat.com>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.71]); Mon, 07 Oct 2019 13:07:36 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-common] proto: Demarshal Smartcard
+ data field
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -44,83 +45,165 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1878152920=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-RnJvbTogVmljdG9yIFRvc28gPG1lQHZpY3RvcnRvc28uY29tPgoKTm93IHdlIGFsd2F5cyBhZGQg
-c2VhbWxlc3MtbWlncmF0aW9uIG9wdGlvbiB0byBxZW11IGNvbW1hbmQgbGluZSBhbmQKZGlzYWJs
-ZWQgKG9mZikgYnkgZGVmYXVsdCBhbHRob3VnaCBzZWFtbGVzcyBtaWdyYXRpb24gaXMgc3VwcG9y
-dGVkIGZvcgpvdmVyIDcgeWVhcnMgYWxyZWFkeSEKClNpZ25lZC1vZmYtYnk6IFZpY3RvciBUb3Nv
-IDx2aWN0b3J0b3NvQHJlZGhhdC5jb20+Ci0tLQogdGVzdHMvbWlncmF0ZS5weSB8IDE0ICsrKysr
-KysrKysrLS0tCiAxIGZpbGUgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMo
-LSkKCmRpZmYgLS1naXQgYS90ZXN0cy9taWdyYXRlLnB5IGIvdGVzdHMvbWlncmF0ZS5weQppbmRl
-eCBhOWEyYzFjYi4uM2RjYmM5ZjEgMTAwNzU1Ci0tLSBhL3Rlc3RzL21pZ3JhdGUucHkKKysrIGIv
-dGVzdHMvbWlncmF0ZS5weQpAQCAtNjksNiArNjksOCBAQCBkZWYgZ2V0X2FyZ3MoKToKICAgICAg
-ICAgICAgICAgICAgICAgICAgIGhlbHA9IldhaXQgc3BpY2UgY2xpZW50IHRvIGNvbm5lY3QgdG8g
-bW92ZSB0byBuZXh0IHN0ZXAgb2YgbWlncmF0aW9uIChkZWZhdWx0IEZhbHNlKSIpCiAgICAgcGFy
-c2VyLmFkZF9hcmd1bWVudCgnLS1jb3VudCcsIGRlc3Q9J2NvdW50ZXInLCB0eXBlPWludCwgZGVm
-YXVsdD0xMDAsCiAgICAgICAgICAgICAgICAgICAgICAgICBoZWxwPSJOdW1iZXIgb2YgbWlncmF0
-aW9ucyB0byBydW4gKHNldCAwIGZvciBpbmZpbml0ZSkiKQorICAgIHBhcnNlci5hZGRfYXJndW1l
-bnQoJy0tc2VhbWxlc3MtbWlncmF0aW9uJywgZGVzdD0ic2VhbWxlc3NfbWlncmF0aW9uIiwgYWN0
-aW9uPSdzdG9yZV90cnVlJywgZGVmYXVsdD1GYWxzZSwKKyAgICAgICAgICAgICAgICAgICAgICAg
-IGhlbHA9IkVuYWJsZSBzZWFtbGVzcy1taWdyYXRpb24gc3VwcG9ydCIpCiAgICAgYXJncyA9IHBh
-cnNlci5wYXJzZV9hcmdzKHN5cy5hcmd2WzE6XSkKICAgICBpZiBvcy5wYXRoLmV4aXN0cyhhcmdz
-LnFlbXUpOgogICAgICAgICBhcmdzLnFlbXVfZXhlYyA9IGFyZ3MucWVtdQpAQCAtNzksMTEgKzgx
-LDEyIEBAIGRlZiBnZXRfYXJncygpOgogICAgICAgICBzeXMuZXhpdCgxKQogICAgIHJldHVybiBh
-cmdzCiAKLWRlZiBzdGFydF9xZW11KHFlbXVfZXhlYywgaW1hZ2UsIHNwaWNlX3BvcnQsIHFtcF9m
-aWxlbmFtZSwgaW5jb21pbmdfcG9ydD1Ob25lLCB3aXRoX2FnZW50PUZhbHNlKToKK2RlZiBzdGFy
-dF9xZW11KHFlbXVfZXhlYywgc2VhbWxlc3NfbWlncmF0aW9uLCBpbWFnZSwgc3BpY2VfcG9ydCwg
-cW1wX2ZpbGVuYW1lLCBpbmNvbWluZ19wb3J0PU5vbmUsIHdpdGhfYWdlbnQ9RmFsc2UpOgorICAg
-IHNlYW1sZXNzX29wdGlvbiA9ICJvbiIgaWYgc2VhbWxlc3NfbWlncmF0aW9uIGVsc2UgIm9mZiIK
-ICAgICBhcmdzID0gWwogICAgICAgICBxZW11X2V4ZWMsCiAgICAgICAgICItcW1wIiwgInVuaXg6
-JXMsc2VydmVyLG5vd2FpdCIgJSBxbXBfZmlsZW5hbWUsCi0gICAgICAgICItc3BpY2UiLCAiZGlz
-YWJsZS10aWNrZXRpbmcscG9ydD0lcyIgJSBzcGljZV9wb3J0CisgICAgICAgICItc3BpY2UiLCAi
-c2VhbWxlc3MtbWlncmF0aW9uPSVzLGRpc2FibGUtdGlja2V0aW5nLHBvcnQ9JXMiICUgKHNlYW1s
-ZXNzX29wdGlvbiwgc3BpY2VfcG9ydCkKICAgICBdCiAgICAgaWYgaW5jb21pbmdfcG9ydDoKICAg
-ICAgICAgYXJncyArPSAoIi1pbmNvbWluZyB0Y3A6OiVzIiAlIGluY29taW5nX3BvcnQpLnNwbGl0
-KCkKQEAgLTE1Myw3ICsxNTYsNyBAQCBjbGFzcyBNaWdyYXRvcihvYmplY3QpOgogICAgIG1pZ3Jh
-dGlvbl9jb3VudCA9IDAKIAogICAgIGRlZiBfX2luaXRfXyhzZWxmLCBsb2csIGNsaWVudCwgcWVt
-dV9leGVjLCBpbWFnZSwgbW9uaXRvcl9maWxlcywKLSAgICAgICAgICAgICAgICAgc3BpY2VfcG9y
-dHMsIG1pZ3JhdGlvbl9wb3J0LCB2ZGFnZW50LCBob3N0bmFtZSk6CisgICAgICAgICAgICAgICAg
-IHNwaWNlX3BvcnRzLCBtaWdyYXRpb25fcG9ydCwgdmRhZ2VudCwgaG9zdG5hbWUsIHNlYW1sZXNz
-X21pZ3JhdGlvbik6CiAgICAgICAgIHNlbGYuY2xpZW50ID0gY2xpZW50IGlmIGNsaWVudCAhPSAi
-bm9uZSIgZWxzZSBOb25lCiAgICAgICAgIHNlbGYubG9nID0gbG9nCiAgICAgICAgIHNlbGYucWVt
-dV9leGVjID0gcWVtdV9leGVjCkBAIC0xNjMsMTYgKzE2NiwxOSBAQCBjbGFzcyBNaWdyYXRvcihv
-YmplY3QpOgogICAgICAgICBzZWxmLnNwaWNlX3BvcnRzID0gc3BpY2VfcG9ydHMKICAgICAgICAg
-c2VsZi52ZGFnZW50ID0gdmRhZ2VudAogICAgICAgICBzZWxmLmhvc3RuYW1lID0gaG9zdG5hbWUK
-KyAgICAgICAgc2VsZi5zZWFtbGVzc19taWdyYXRpb24gPSBzZWFtbGVzc19taWdyYXRpb24KIAog
-ICAgICAgICBzZWxmLmFjdGl2ZSA9IHN0YXJ0X3FlbXUocWVtdV9leGVjID0gcWVtdV9leGVjLAog
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaW1hZ2UgPSBpbWFnZSwKICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHNwaWNlX3BvcnQgPSBzcGljZV9wb3J0c1swXSwKICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHFtcF9maWxlbmFtZSA9IG1vbml0b3JfZmls
-ZXNbMF0sCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzZWFtbGVzc19taWdyYXRp
-b24gPSBzZWxmLnNlYW1sZXNzX21pZ3JhdGlvbiwKICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHdpdGhfYWdlbnQgPSBzZWxmLnZkYWdlbnQpCiAgICAgICAgIHNlbGYudGFyZ2V0ID0g
-c3RhcnRfcWVtdShxZW11X2V4ZWMgPSBxZW11X2V4ZWMsCiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBpbWFnZSA9IGltYWdlLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgc3BpY2VfcG9ydCA9IHNwaWNlX3BvcnRzWzFdLAogICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcW1wX2ZpbGVuYW1lID0gbW9uaXRvcl9maWxlc1sxXSwKKyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHNlYW1sZXNzX21pZ3JhdGlvbiA9IHNlbGYuc2VhbWxlc3NfbWln
-cmF0aW9uLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2l0aF9hZ2VudCA9IHNl
-bGYudmRhZ2VudCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGluY29taW5nX3Bv
-cnQgPSBtaWdyYXRpb25fcG9ydCkKICAgICAgICAgc2VsZi5yZW1vdmVfbW9uaXRvcl9maWxlcygp
-CkBAIC0yMzUsNiArMjQxLDcgQEAgY2xhc3MgTWlncmF0b3Iob2JqZWN0KToKICAgICAgICAgZGVs
-IGRlYWQKICAgICAgICAgc2VsZi5hY3RpdmUgPSBzZWxmLnRhcmdldAogICAgICAgICBzZWxmLnRh
-cmdldCA9IHN0YXJ0X3FlbXUoc3BpY2VfcG9ydCA9IG5ld19zcGljZV9wb3J0LAorICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgc2VhbWxlc3NfbWlncmF0aW9uID0gc2VsZi5zZWFtbGVz
-c19taWdyYXRpb24sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBxZW11X2V4ZWMg
-PSBzZWxmLnFlbXVfZXhlYywKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGltYWdl
-ID0gc2VsZi5pbWFnZSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHFtcF9maWxl
-bmFtZSA9IG5ld19xbXBfZmlsZW5hbWUsCkBAIC0yNTYsNiArMjYzLDcgQEAgZGVmIG1haW4oKToK
-ICAgICAgICAgICAgICAgICAgICAgICAgIG1pZ3JhdGlvbl9wb3J0ID0gYXJncy5taWdyYXRlX3Bv
-cnQsCiAgICAgICAgICAgICAgICAgICAgICAgICBzcGljZV9wb3J0cyA9IFthcmdzLnNwaWNlX3Bv
-cnQxLCBhcmdzLnNwaWNlX3BvcnQyXSwKICAgICAgICAgICAgICAgICAgICAgICAgIHZkYWdlbnQg
-PSBhcmdzLnZkYWdlbnQsCisgICAgICAgICAgICAgICAgICAgICAgICBzZWFtbGVzc19taWdyYXRp
-b24gPSBhcmdzLnNlYW1sZXNzX21pZ3JhdGlvbiwKICAgICAgICAgICAgICAgICAgICAgICAgIGhv
-c3RuYW1lID0gYXJncy5ob3N0bmFtZSkKICAgICBhdGV4aXQucmVnaXN0ZXIoY2xlYW51cCwgbWln
-cmF0b3IpCiAgICAgY291bnRlciA9IDAKLS0gCjIuMjEuMAoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNl
-LWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1878152920==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="jt72aycc2sgt4erq"
+Content-Disposition: inline
+
+
+--jt72aycc2sgt4erq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Mon, Oct 07, 2019 at 11:38:58AM +0100, Frediano Ziglio wrote:
+> Currently the demarshaler code is not used by spice-server.
+> Demarshal all the fields of the header message, not only the header.
+> Using generated code allows to easily check data and support
+> big endian machines. Generated code will be used by spice-server.
+>=20
+> The resulting change is.
+>=20
+>    diff -ru gen/generated_client_marshallers.c common/generated_client_ma=
+rshallers.c
+>     --- gen/generated_client_marshallers.c      2019-10-05 20:44:54.00000=
+0000 +0100
+>     +++ common/generated_client_marshallers.c   2019-10-05 20:45:33.00000=
+0000 +0100
+>     @@ -283,6 +283,7 @@
+>          spice_marshaller_add_uint32(m, src->type);
+>          spice_marshaller_add_uint32(m, src->reader_id);
+>          spice_marshaller_add_uint32(m, src->length);
+>     +    /* Don't marshall @nomarshal data */
+>      }
+>=20
+>      #endif /* USE_SMARTCARD */
+>     diff -ru gen/generated_server_demarshallers.c common/generated_server=
+_demarshallers.c
+>     --- gen/generated_server_demarshallers.c    2019-10-05 20:44:54.00000=
+0000 +0100
+>     +++ common/generated_server_demarshallers.c 2019-10-05 20:45:33.00000=
+0000 +0100
+>     @@ -1451,10 +1451,25 @@
+>          uint64_t nw_size;
+>          uint64_t mem_size;
+>          uint8_t *in, *end;
+>     +    uint64_t data__nw_size, data__mem_size;
+>     +    uint64_t data__nelements;
+>          VSCMsgHeader *out;
+>=20
+>     -    nw_size =3D 12;
+>     -    mem_size =3D sizeof(VSCMsgHeader);
+>     +    { /* data */
+>     +        uint32_t length__value;
+>     +        pos =3D start + 8;
+>     +        if (SPICE_UNLIKELY(pos + 4 > message_end)) {
+>     +            goto error;
+>     +        }
+>     +        length__value =3D read_uint32(pos);
+>     +        data__nelements =3D length__value;
+>     +
+>     +        data__nw_size =3D data__nelements;
+>     +        data__mem_size =3D sizeof(uint8_t) * data__nelements;
+>     +    }
+>     +
+>     +    nw_size =3D 12 + data__nw_size;
+>     +    mem_size =3D sizeof(VSCMsgHeader) + data__mem_size;
+>=20
+>          /* Check if message fits in reported side */
+>          if (nw_size > (uintptr_t) (message_end - start)) {
+>     @@ -1474,6 +1489,10 @@
+>          out->type =3D consume_uint32(&in);
+>          out->reader_id =3D consume_uint32(&in);
+>          out->length =3D consume_uint32(&in);
+>     +    verify(sizeof(out->data) =3D=3D 0);
+>     +    memcpy(out->data, in, data__nelements);
+>     +    in +=3D data__nelements;
+>     +    end +=3D data__nelements;
+>=20
+>          assert(in <=3D message_end);
+>          assert(end <=3D data + mem_size);
+>=20
+> The @nomarshal attribute allows to not change the marshaling code
+> (used by spice-gtk).
+
+Ah, I was thinking about that for a bit. That's interesting case.
+We do have data being sent but not described in the spice.proto
+file. From protocol point of view, I found that very weird. Is
+it? (honest question)
+
+> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+Patch seems fine, I've asked before elsewhere but I'd love to
+have a simple way to test smartcard if that exists!
+
+> ---
+>  spice.proto | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/spice.proto b/spice.proto
+> index 34ba3c8..616b960 100644
+> --- a/spice.proto
+> +++ b/spice.proto
+> @@ -1305,6 +1305,7 @@ channel SmartcardChannel : BaseChannel {
+>          vsc_message_type type;
+>          uint32 reader_id;
+>          uint32 length;
+> +        uint8 data[length] @end @nomarshal;
+
+This truly seems like a protocol fix to me.
+
+Cheers,
+
+>      } @ctype(VSCMsgHeader) header =3D 101;
+>  /* See comment on client data message above */
+>  /*
+> --=20
+> 2.21.0
+>=20
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--jt72aycc2sgt4erq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2bOJcACgkQl9kSPeN6
+SE9AoA//epqLhM6CRmpSR8oFsuTDSCyp+Kb7E8M+rXbHbeasVdUyXi+jZuIuNnyy
+UU05IEfK/BfkuWoXtOTokcN6Z5Vb6PVDXugIeEu24ZgfigHjnqoan1T3q8wTjzcw
+rCye6k0jyn/ibRy7DWZr9cDnLHX5Q/4zrgwqXc7AoLCztguTKaOU+mX5ADRVh3Dv
+F6Jt3fP7Ujme14cT1lvdwIbFZPI4+ml8NrIetX2V603qEmfCu7M8cYd9xXPr0qBB
+mLqjtgymZj2QdBw37gUADp14Ztusro5dO+zvF4oIjiX4DDmCKWjMVfn1zqNGvI+R
+dgeVuQonJo26jFfAPpJrLfbl+FAjG5tYXPkNbM8fVQ+fDoLpR4Olq6vtH40XCxM2
+fey6DmaSCnZEh71TjJIIYMSBQmdLvVJ6N3jOPWSQ71U72jfWp1RB+GF28nSQDze5
+ct3LQ/fVIcO936PowbV7+tYk2jkYRbZf+DFmjsfSNTfTk7tA/IadHzssPIcS/4OH
+QR2/i2h6Ymc9pBI/UN5kOKwFrAMqxl65zvVbvQCSJ5CRmoo1NBIeHyil+xrHCgd9
+gUOiMI381qDDW65H1IX6b1ay2U2CM53OMHYqnDRGgss5mL8VPxnIy8qzs5z+zsfr
+helYfR3IwMB/8Dnn+cGLFme5xtS0UJ1IB817jPhOE5ujyh9xnJg=
+=0VEA
+-----END PGP SIGNATURE-----
+
+--jt72aycc2sgt4erq--
+
+--===============1878152920==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1878152920==--
