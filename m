@@ -2,39 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82447D09F3
-	for <lists+spice-devel@lfdr.de>; Wed,  9 Oct 2019 10:33:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B5CBD0A9D
+	for <lists+spice-devel@lfdr.de>; Wed,  9 Oct 2019 11:12:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 02C266E929;
-	Wed,  9 Oct 2019 08:33:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AE8E46E93C;
+	Wed,  9 Oct 2019 09:12:47 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 69DBC6E929
- for <spice-devel@lists.freedesktop.org>; Wed,  9 Oct 2019 08:33:28 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 956E26E93C
+ for <spice-devel@lists.freedesktop.org>; Wed,  9 Oct 2019 09:12:46 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 11AFD9B28C
- for <spice-devel@lists.freedesktop.org>; Wed,  9 Oct 2019 08:33:28 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 16CE210275E2
+ for <spice-devel@lists.freedesktop.org>; Wed,  9 Oct 2019 09:12:46 +0000 (UTC)
 Received: from localhost (unknown [10.32.181.36])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B1C8E5D9E2;
- Wed,  9 Oct 2019 08:33:24 +0000 (UTC)
-Date: Wed, 9 Oct 2019 10:33:23 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B885560C05;
+ Wed,  9 Oct 2019 09:12:45 +0000 (UTC)
+Date: Wed, 9 Oct 2019 11:12:45 +0200
 From: Victor Toso <victortoso@redhat.com>
 To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20191009083323.sut4v3ypvya3tayl@wingsuit>
+Message-ID: <20191009091245.spxhhd47odyynm6k@wingsuit>
 References: <20191008173924.12388-1-fziglio@redhat.com>
- <20191008173924.12388-5-fziglio@redhat.com>
+ <20191008173924.12388-7-fziglio@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20191008173924.12388-5-fziglio@redhat.com>
+In-Reply-To: <20191008173924.12388-7-fziglio@redhat.com>
 User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.39]); Wed, 09 Oct 2019 08:33:28 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server v2 4/7] smartcard: Fix
- parsing multiple messages from the device
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
+ (mx1.redhat.com [10.5.110.64]); Wed, 09 Oct 2019 09:12:46 +0000 (UTC)
+Subject: Re: [Spice-devel] [PATCH spice-server v2 6/7] test-smartcard: Add
+ test for Smartcard device
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,128 +47,313 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0817121984=="
+Content-Type: multipart/mixed; boundary="===============0041694275=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---===============0817121984==
+--===============0041694275==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="tlt7g6gjqrf2obva"
+	protocol="application/pgp-signature"; boundary="jhrh3rz5peszul4p"
 Content-Disposition: inline
 
 
---tlt7g6gjqrf2obva
+--jhrh3rz5peszul4p
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-Code seems fine, I'd change a bit the commit log just to be
-straight forward with what this is fixing/improving. I'm
-suggesting to split what might be a bugfix but feel free to
-correct me if I'm mistaken ;)
-
-On Tue, Oct 08, 2019 at 06:39:21PM +0100, Frediano Ziglio wrote:
-> If the server is busy or the guest write multiple requests with
-> a single operation it could happen that we receive multiple
-> requests with a single read.
-
-This patch handles the scenario when a single read to guest
-device brings multiple requests to be handled. When this happens,
-we will iterate till all requests are handled and no more
-requests can be read from guest device.
-
-> This will make "remaining" > 0.
-> Use memmove instead of memcpy as the buffer can overlap if the
-> second request if bigger than the first.
-> "buf_pos" points to the point of the buffer after we read, if
-> we want the first part of the next request is "buf_pos - remaining".
-> Same consideration setting "buf_pos" for the next iteration.
-> Also check the loop condition. If the remaining buffer contains
-> a full request we don't need to read other bytes (note that there
-> could be no bytes left), just parse the request.
+On Tue, Oct 08, 2019 at 06:39:23PM +0100, Frediano Ziglio wrote:
+> Create Smardcard device.
+> Connect to it and test some messages are parsed and processed
+> as expected.
 >=20
 > Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+Acked-by: Victor Toso <victortoso@redhat.com>
+
+(and keeping ack of 5/7)
+
+> --
+> Changes since v1:
+> - add more comments
+> - limit time the test executes
 > ---
->  server/smartcard.c | 27 ++++++++++++++++++---------
->  1 file changed, 18 insertions(+), 9 deletions(-)
+>  server/tests/.gitignore       |   1 +
+>  server/tests/Makefile.am      |   4 +
+>  server/tests/meson.build      |   4 +
+>  server/tests/test-smartcard.c | 211 ++++++++++++++++++++++++++++++++++
+>  4 files changed, 220 insertions(+)
+>  create mode 100644 server/tests/test-smartcard.c
 >=20
-> diff --git a/server/smartcard.c b/server/smartcard.c
-> index 4c5bba07d..340118e18 100644
-> --- a/server/smartcard.c
-> +++ b/server/smartcard.c
-> @@ -130,19 +130,28 @@ static RedPipeItem *smartcard_read_msg_from_device(=
-RedCharDevice *self,
->      RedCharDeviceSmartcard *dev =3D RED_CHAR_DEVICE_SMARTCARD(self);
->      SpiceCharDeviceInterface *sif =3D spice_char_device_get_interface(si=
-n);
->      VSCMsgHeader *vheader =3D (VSCMsgHeader*)dev->priv->buf;
-> -    int n;
->      int remaining;
->      int actual_length;
+> diff --git a/server/tests/.gitignore b/server/tests/.gitignore
+> index 36e978d4f..56cc7eb9a 100644
+> --- a/server/tests/.gitignore
+> +++ b/server/tests/.gitignore
+> @@ -29,5 +29,6 @@ test-leaks
+>  test-sasl
+>  test-record
+>  test-websocket
+> +test-smartcard
+>  /test-*.log
+>  /test-*.trs
+> diff --git a/server/tests/Makefile.am b/server/tests/Makefile.am
+> index 982508510..dd285c24e 100644
+> --- a/server/tests/Makefile.am
+> +++ b/server/tests/Makefile.am
+> @@ -68,6 +68,10 @@ check_PROGRAMS =3D				\
+>  	test-record				\
+>  	$(NULL)
 > =20
-> -    while ((n =3D sif->read(sin, dev->priv->buf_pos, dev->priv->buf_size=
- - dev->priv->buf_used)) > 0) {
-> +    while (true) {
->          RedMsgItem *msg_to_client;
-> =20
-> -        dev->priv->buf_pos +=3D n;
-> -        dev->priv->buf_used +=3D n;
-> -        if (dev->priv->buf_used < sizeof(VSCMsgHeader)) {
-> -            continue;
-> +        // it's possible we already got a full message from a previous p=
-artial
-> +        // read. In this case we don't need to read any byte
-> +        if (dev->priv->buf_used < sizeof(VSCMsgHeader) ||
-> +            dev->priv->buf_used - sizeof(VSCMsgHeader) < ntohl(vheader->=
-length)) {
-> +            int n =3D sif->read(sin, dev->priv->buf_pos, dev->priv->buf_=
-size - dev->priv->buf_used);
-> +            if (n <=3D 0) {
-> +                break;
-> +            }
-> +            dev->priv->buf_pos +=3D n;
-> +            dev->priv->buf_used +=3D n;
+> +if HAVE_SMARTCARD
+> +check_PROGRAMS +=3D test-smartcard
+> +endif
 > +
-> +            if (dev->priv->buf_used < sizeof(VSCMsgHeader)) {
-> +                continue;
-> +            }
-> +            smartcard_read_buf_prepare(dev, vheader);
->          }
-> -        smartcard_read_buf_prepare(dev, vheader);
->          actual_length =3D ntohl(vheader->length);
->          if (dev->priv->buf_used - sizeof(VSCMsgHeader) < actual_length) {
->              continue;
-> @@ -150,9 +159,9 @@ static RedPipeItem *smartcard_read_msg_from_device(Re=
-dCharDevice *self,
->          msg_to_client =3D smartcard_char_device_on_message_from_device(d=
-ev, vheader);
->          remaining =3D dev->priv->buf_used - sizeof(VSCMsgHeader) - actua=
-l_length;
->          if (remaining > 0) {
-> -            memcpy(dev->priv->buf, dev->priv->buf_pos, remaining);
-> +            memmove(dev->priv->buf, dev->priv->buf_pos - remaining, rema=
-ining);
-
-This should be addressed in a separated patch as bug, If I
-understand correctly. Even before remaining could be > 0 but what
-was being memcpy was trash instead bytes being read by
-sif->read()
-
->          }
-> -        dev->priv->buf_pos =3D dev->priv->buf;
-> +        dev->priv->buf_pos =3D dev->priv->buf + remaining;
-
-This as well, again, If I'm not missing anything.
-
-Cheers,
-
-
->          dev->priv->buf_used =3D remaining;
->          if (msg_to_client) {
->              return &msg_to_client->base;
+>  if !OS_WIN32
+>  check_PROGRAMS +=3D				\
+>  	test-stream				\
+> diff --git a/server/tests/meson.build b/server/tests/meson.build
+> index 33472f14e..95ade60fa 100644
+> --- a/server/tests/meson.build
+> +++ b/server/tests/meson.build
+> @@ -65,6 +65,10 @@ if spice_server_has_sasl
+>    tests +=3D [['test-sasl', true]]
+>  endif
+> =20
+> +if spice_server_has_smartcard =3D=3D true
+> +  tests +=3D [['test-smartcard', true]]
+> +endif
+> +
+>  if host_machine.system() !=3D 'windows'
+>    tests +=3D [
+>      ['test-stream', true],
+> diff --git a/server/tests/test-smartcard.c b/server/tests/test-smartcard.c
+> new file mode 100644
+> index 000000000..aac2e7941
+> --- /dev/null
+> +++ b/server/tests/test-smartcard.c
+> @@ -0,0 +1,211 @@
+> +/* -*- Mode: C; c-basic-offset: 4; indent-tabs-mode: nil -*- */
+> +/*
+> +   Copyright (C) 2019 Red Hat, Inc.
+> +
+> +   This library is free software; you can redistribute it and/or
+> +   modify it under the terms of the GNU Lesser General Public
+> +   License as published by the Free Software Foundation; either
+> +   version 2.1 of the License, or (at your option) any later version.
+> +
+> +   This library is distributed in the hope that it will be useful,
+> +   but WITHOUT ANY WARRANTY; without even the implied warranty of
+> +   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+> +   Lesser General Public License for more details.
+> +
+> +   You should have received a copy of the GNU Lesser General Public
+> +   License along with this library; if not, see <http://www.gnu.org/lice=
+nses/>.
+> +*/
+> +/**
+> + * Test Smartcard device and channel
+> + */
+> +
+> +#include <config.h>
+> +#include <string.h>
+> +#include <stdlib.h>
+> +#include <stdio.h>
+> +#include <stdbool.h>
+> +#include <unistd.h>
+> +
+> +#include <spice/protocol.h>
+> +#include <spice/stream-device.h>
+> +
+> +#include "test-display-base.h"
+> +#include "test-glib-compat.h"
+> +#include "reds.h"
+> +#include "vmc-emu.h"
+> +#include "red-client.h"
+> +#include "net-utils.h"
+> +#include "win-alarm.h"
+> +
+> +static SpiceCoreInterface *core;
+> +static Test *test;
+> +static VmcEmu *vmc;
+> +typedef int TestFixture;
+> +
+> +static void test_smartcard_setup(TestFixture *fixture, gconstpointer use=
+r_data)
+> +{
+> +    g_assert_null(core);
+> +    g_assert_null(test);
+> +    g_assert_null(vmc);
+> +    core =3D basic_event_loop_init();
+> +    g_assert_nonnull(core);
+> +    test =3D test_new(core);
+> +    g_assert_nonnull(test);
+> +    vmc =3D vmc_emu_new("smartcard", NULL);
+> +    g_assert_nonnull(vmc);
+> +}
+> +
+> +static void test_smartcard_teardown(TestFixture *fixture, gconstpointer =
+user_data)
+> +{
+> +    g_assert_nonnull(core);
+> +    g_assert_nonnull(test);
+> +    g_assert_nonnull(vmc);
+> +
+> +    vmc_emu_destroy(vmc);
+> +    vmc =3D NULL;
+> +    test_destroy(test);
+> +    test =3D NULL;
+> +    basic_event_loop_destroy();
+> +    core =3D NULL;
+> +}
+> +
+> +static RedStream *create_dummy_stream(SpiceServer *server, int *p_socket)
+> +{
+> +    int sv[2];
+> +    g_assert_cmpint(socketpair(AF_LOCAL, SOCK_STREAM, 0, sv), =3D=3D, 0);
+> +    if (p_socket) {
+> +        *p_socket =3D sv[1];
+> +    }
+> +    red_socket_set_non_blocking(sv[0], true);
+> +    red_socket_set_non_blocking(sv[1], true);
+> +
+> +    RedStream * stream =3D red_stream_new(server, sv[0]);
+> +    g_assert_nonnull(stream);
+> +
+> +    return stream;
+> +}
+> +
+> +static void send_ack_sync(int socket, uint32_t generation)
+> +{
+> +    struct {
+> +        uint16_t dummy;
+> +        uint16_t type;
+> +        uint32_t len;
+> +        uint32_t generation;
+> +    } msg;
+> +    SPICE_VERIFY(sizeof(msg) =3D=3D 12);
+> +    msg.type =3D GUINT16_TO_LE(SPICE_MSGC_ACK_SYNC);
+> +    msg.len =3D GUINT32_TO_LE(sizeof(generation));
+> +    msg.generation =3D GUINT32_TO_LE(generation);
+> +
+> +    g_assert_cmpint(socket_write(socket, &msg.type, 10), =3D=3D, 10);
+> +}
+> +
+> +static void send_data(int socket, uint32_t type)
+> +{
+> +    struct {
+> +        uint16_t dummy;
+> +        uint16_t type;
+> +        uint32_t len;
+> +        VSCMsgHeader vheader;
+> +        char data[6];
+> +    } msg;
+> +    SPICE_VERIFY(sizeof(msg) =3D=3D 8+12+8);
+> +    msg.type =3D GUINT16_TO_LE(SPICE_MSGC_SMARTCARD_DATA);
+> +    msg.len =3D GUINT32_TO_LE(sizeof(VSCMsgHeader)+6);
+> +    msg.vheader.type =3D GUINT32_TO_LE(type);
+> +    msg.vheader.reader_id =3D 0;
+> +    msg.vheader.length =3D GUINT32_TO_LE(6);
+> +    strcpy(msg.data, "hello");
+> +
+> +    g_assert_cmpint(socket_write(socket, &msg.type, sizeof(msg)-4), =3D=
+=3D, sizeof(msg)-4);
+> +}
+> +
+> +static void check_data(void *opaque)
+> +{
+> +    static const char expected_buf[] =3D
+> +        // forwarded ReaderAdd message, note that payload is stripped
+> +        "\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00"
+> +        // forwarded APDU message
+> +        "\x00\x00\x00\x07\x00\x00\x00\x00\x00\x00\x00\x06\x68\x65\x6c\x6=
+c\x6f\x00";
+> +    const size_t expected_buf_len =3D sizeof(expected_buf) - 1;
+> +    g_assert_cmpint(vmc->write_pos, =3D=3D, expected_buf_len);
+> +    g_assert_true(memcmp(vmc->write_buf, expected_buf, expected_buf_len)=
+ =3D=3D 0);
+> +    basic_event_loop_quit();
+> +}
+> +
+> +static void test_smartcard(TestFixture *fixture, gconstpointer user_data)
+> +{
+> +    SpiceServer *const server =3D test->server;
+> +    uint8_t *p =3D vmc->message;
+> +
+> +    spice_server_add_interface(server, &vmc->instance.base);
+> +
+> +    // add VSC_Init message
+> +    memcpy(p, "\x00\x00\x00\x01\x0a\x0b\x0c\x0d\x00\x00\x00\x00", 12);
+> +    p +=3D 12;
+> +    vmc_emu_add_read_till(vmc, p);
+> +
+> +    // find Smartcard channel to connect to
+> +    RedChannel *channel =3D reds_find_channel(server, SPICE_CHANNEL_SMAR=
+TCARD, 0);
+> +    g_assert_nonnull(channel);
+> +
+> +    // create dummy RedClient and MainChannelClient
+> +    RedChannelCapabilities caps;
+> +    memset(&caps, 0, sizeof(caps));
+> +    uint32_t common_caps =3D 1 << SPICE_COMMON_CAP_MINI_HEADER;
+> +    caps.num_common_caps =3D 1;
+> +    caps.common_caps =3D spice_memdup(&common_caps, sizeof(common_caps));
+> +
+> +    RedClient *client =3D red_client_new(server, FALSE);
+> +    g_assert_nonnull(client);
+> +
+> +    MainChannel *main_channel =3D main_channel_new(server);
+> +    g_assert_nonnull(main_channel);
+> +
+> +    MainChannelClient *mcc;
+> +    mcc =3D main_channel_link(main_channel, client, create_dummy_stream(=
+server, NULL),
+> +                            0, FALSE, &caps);
+> +    g_assert_nonnull(mcc);
+> +    red_client_set_main(client, mcc);
+> +
+> +    // create our testing RedChannelClient
+> +    int client_socket;
+> +    red_channel_connect(channel, client, create_dummy_stream(server, &cl=
+ient_socket),
+> +                        FALSE, &caps);
+> +    red_channel_capabilities_reset(&caps);
+> +
+> +    // push data to device
+> +    spice_server_char_device_wakeup(&vmc->instance);
+> +
+> +    // push data into channel
+> +    send_ack_sync(client_socket, 1);
+> +    send_data(client_socket, VSC_ReaderAdd);
+> +    send_data(client_socket, VSC_APDU);
+> +
+> +    // check data are processed after a short time
+> +    SpiceTimer *watch_timer;
+> +    watch_timer =3D core->timer_add(check_data, core);
+> +    core->timer_start(watch_timer, 100);
+> +
+> +    // start all test
+> +    alarm(10);
+> +    basic_event_loop_mainloop();
+> +    alarm(0);
+> +
+> +    // cleanup
+> +    core->timer_remove(watch_timer);
+> +    red_client_destroy(client);
+> +    g_object_unref(main_channel);
+> +    g_object_unref(channel);
+> +}
+> +
+> +int main(int argc, char *argv[])
+> +{
+> +    g_test_init(&argc, &argv, NULL);
+> +
+> +    g_test_add("/server/smartcard", TestFixture, NULL, test_smartcard_se=
+tup,
+> +               test_smartcard, test_smartcard_teardown);
+> +
+> +    return g_test_run();
+> +}
 > --=20
 > 2.21.0
 >=20
@@ -177,29 +362,29 @@ Cheers,
 > Spice-devel@lists.freedesktop.org
 > https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---tlt7g6gjqrf2obva
+--jhrh3rz5peszul4p
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2dm1MACgkQl9kSPeN6
-SE8aXQ//aA8b+vBciLAtPqBOcDnn4dBvvKr1M0TSSdcSfiIhnsRBquPCfUvHJZrN
-p2XfS4hYBCyjgCSBOdYeCIFF5zbfvL2+LDO3po1T4oTJQvwYpn1qQH4DpBRwe43G
-bZTJTbuNLyOzm+IlaU6X1SUsPaOb8h/9LqBzu7/ZnPWALkVPhVtRDGWVZ2no0Frn
-Rvd8oNNvJyUljgY2cdsskg9H4r6qY97uaFRYajUbxDEqUZequHihO9/uvjrTDJlt
-b6VPO5dEd8O3lHoLf7QbXV72VIlxBwBVI4yru5nM4aQahMjzPPl9q6v2owDwC7BQ
-vuFi8judgkWVd9gUuFMopcv8xbFKG9eqAiO31QTz8G3QkbQoXIA+nOAA8kAdPJNK
-8BXrdNBwHE5dwSsIHhYbT9PzQd5itv3yHzMzMKigmRTWe/HytwpFqnO1kFTcaVH7
-y6RvNGsy3sExb/sfEqnHSMV0jBvwJMPuOJDoVBa4BEEC7TStha8JfJ25K5HdO2Du
-mjeMdtX2UnPVycbp3hWMg/BIthbFdf954h4cvkTVRJXuzrR5fqbYvFT3ckwxyfW+
-M8mWC5prlSOHvLUfAdK45mO6fmZjVpl7Exb8eSx7zvs7kNfISYV2eBLR3dQA8Lqz
-DVjEV77WwAphGaElxmRYc3L3C5KVpmxkapKBu3gDirQeQtXm9xg=
-=W3jW
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2dpIwACgkQl9kSPeN6
+SE+mLhAAh3onW1Zb5sGk+fWBCdt+s7NrbZaQ4X/AcpvE39x0lUrOpKdzMe9jR5gG
+T2MSxYcAoA9mVK6RvB9N2ugc55afPWUuqVzL31LrUK3U1hRxBi4xREfkpgy1/e0O
+x3A6fh0JhH0IxfIctY9L1Ibm3YvfeTNQPh4GFF1cwPZA8fhmzLTIUIu/m/bXGLXK
+8UBFv/h53FEYZUQSPsBpX9B9aK/iQPxR0yQzm/qDEUNFx+YcFnKnW/FnB8WbpNv/
+kbUMswujEGA98VSYd0I+w5nEz5sqlSZPImoccvGfNmY7ydoSKkNkdK3z89j9+vNk
+6JNsBxDKTHNh8QJVvrecGKbq+apaiINul6rGoqOmCn/grRfkPoTN1OL82B95HON6
+G0c6r38/UvkL1YkxNQfuGu0fFBIttgDAlxKdW9DZOrGcP83QfljmhkPT27DcSKH6
+UYkeSSNd19ypIp5CwHAO0fhfk5/XCPxom9uLYbQVrkseBV5+sL02pWtfDajLPkT9
+NR8Jnx87+anvzd/O87YDKgwPHLw6EStOpFQvMuc4f3DHKJmZw9o9Eot861kU7Woi
+2iAD8qwLemBMGK/iBhKtywXkrvJV5ZdJE9SYisCiyV+VO6iTtsvKNgjfQxiXbtNi
+yMu02t2Mnlto3JsQ4RWGQQ+qK8WftSLjmIPUVUjYOFkHwynAeo4=
+=QfUk
 -----END PGP SIGNATURE-----
 
---tlt7g6gjqrf2obva--
+--jhrh3rz5peszul4p--
 
---===============0817121984==
+--===============0041694275==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -209,4 +394,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0817121984==--
+--===============0041694275==--
