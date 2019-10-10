@@ -2,39 +2,37 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ABD0D26C9
-	for <lists+spice-devel@lfdr.de>; Thu, 10 Oct 2019 11:54:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D751D26DE
+	for <lists+spice-devel@lfdr.de>; Thu, 10 Oct 2019 12:02:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E1F186E353;
-	Thu, 10 Oct 2019 09:54:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD1646EAD8;
+	Thu, 10 Oct 2019 10:02:12 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B4426E353
- for <spice-devel@lists.freedesktop.org>; Thu, 10 Oct 2019 09:54:37 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0761F6E364
+ for <spice-devel@lists.freedesktop.org>; Thu, 10 Oct 2019 10:02:11 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 2412718C8902
- for <spice-devel@lists.freedesktop.org>; Thu, 10 Oct 2019 09:54:37 +0000 (UTC)
-Received: from localhost (unknown [10.32.181.36])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7935C5C1B5;
- Thu, 10 Oct 2019 09:54:36 +0000 (UTC)
-Date: Thu, 10 Oct 2019 11:54:35 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-Message-ID: <20191010095435.t7f4ptbgwi4bzfdg@wingsuit>
-References: <20190806145250.31813-1-fziglio@redhat.com>
- <20190806145250.31813-2-fziglio@redhat.com>
+ by mx1.redhat.com (Postfix) with ESMTPS id A3F5C10CC1E7
+ for <spice-devel@lists.freedesktop.org>; Thu, 10 Oct 2019 10:02:10 +0000 (UTC)
+Received: from fziglio.remote.csb (unknown [10.33.32.18])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4BE44196B2;
+ Thu, 10 Oct 2019 10:02:05 +0000 (UTC)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: spice-devel@lists.freedesktop.org
+Date: Thu, 10 Oct 2019 11:02:00 +0100
+Message-Id: <20191010100200.27748-1-fziglio@redhat.com>
+In-Reply-To: <20191010095435.t7f4ptbgwi4bzfdg@wingsuit>
+References: <20191010095435.t7f4ptbgwi4bzfdg@wingsuit>
 MIME-Version: 1.0
-In-Reply-To: <20190806145250.31813-2-fziglio@redhat.com>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.70]); Thu, 10 Oct 2019 09:54:37 +0000 (UTC)
-Subject: Re: [Spice-devel] [PATCH spice-server 2/2] event-loop: Change
- internal core interface
+ (mx1.redhat.com [10.5.110.65]); Thu, 10 Oct 2019 10:02:10 +0000 (UTC)
+Subject: [Spice-devel] [PATCH spice-server] event-loop: Change internal core
+ interface
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,1218 +44,712 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1372491113=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---===============1372491113==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ixjwqw5az33mxsfk"
-Content-Disposition: inline
-
-
---ixjwqw5az33mxsfk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Tue, Aug 06, 2019 at 03:52:50PM +0100, Frediano Ziglio wrote:
-> Allow to modify/cancel timers/watches without having to
-> retrieve the code interface.
-> This will make sure that you are not using the wrong interface.
-> Simplify code to deal with timers/watches.
-> Remove the requirement to have the core interface available
-> for removing timers/watches.
->=20
-> Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-Sorry to ask but could you please send a rebased version?
-
-> ---
->  server/char-device.c            |  28 ++---
->  server/event-loop.c             | 206 ++++++++++++++++++++++++--------
->  server/inputs-channel.c         |   6 +-
->  server/main-dispatcher.c        |   2 +-
->  server/red-channel-client.c     |  43 +++----
->  server/red-common.h             |  15 ++-
->  server/red-stream-device.c      |   5 +-
->  server/red-stream.c             |   2 +-
->  server/red-worker.c             |   2 +-
->  server/reds.c                   |  69 ++---------
->  server/reds.h                   |  12 --
->  server/tests/basic-event-loop.c |  35 +-----
->  12 files changed, 211 insertions(+), 214 deletions(-)
->=20
-> diff --git a/server/char-device.c b/server/char-device.c
-> index cfcc29da0..1ac54d5c5 100644
-> --- a/server/char-device.c
-> +++ b/server/char-device.c
-> @@ -163,7 +163,7 @@ static void red_char_device_client_free(RedCharDevice=
- *dev,
->  {
->      GList *l, *next;
-> =20
-> -    reds_core_timer_remove(dev->priv->reds, dev_client->wait_for_tokens_=
-timer);
-> +    red_timer_remove(dev_client->wait_for_tokens_timer);
->      dev_client->wait_for_tokens_timer =3D NULL;
-> =20
->      g_queue_free_full(dev_client->send_queue, (GDestroyNotify)red_pipe_i=
-tem_unref);
-> @@ -249,8 +249,6 @@ static uint64_t red_char_device_max_send_tokens(RedCh=
-arDevice *dev)
->  static void red_char_device_add_msg_to_client_queue(RedCharDeviceClient =
-*dev_client,
->                                                      RedPipeItem *msg)
->  {
-> -    RedCharDevice *dev =3D dev_client->dev;
-> -
->      if (g_queue_get_length(dev_client->send_queue) >=3D dev_client->max_=
-send_queue_size) {
->          red_char_device_handle_client_overflow(dev_client);
->          return;
-> @@ -259,8 +257,8 @@ static void red_char_device_add_msg_to_client_queue(R=
-edCharDeviceClient *dev_cli
->      red_pipe_item_ref(msg);
->      g_queue_push_head(dev_client->send_queue, msg);
->      if (!dev_client->wait_for_tokens_started) {
-> -        reds_core_timer_start(dev->priv->reds, dev_client->wait_for_toke=
-ns_timer,
-> -                              RED_CHAR_DEVICE_WAIT_TOKENS_TIMEOUT);
-> +        red_timer_start(dev_client->wait_for_tokens_timer,
-> +                        RED_CHAR_DEVICE_WAIT_TOKENS_TIMEOUT);
->          dev_client->wait_for_tokens_started =3D TRUE;
->      }
->  }
-> @@ -372,12 +370,12 @@ red_char_device_send_to_client_tokens_absorb(RedCha=
-rDevice *dev,
->      }
-> =20
->      if (red_char_device_can_send_to_client(dev_client)) {
-> -        reds_core_timer_cancel(dev->priv->reds, dev_client->wait_for_tok=
-ens_timer);
-> +        red_timer_cancel(dev_client->wait_for_tokens_timer);
->          dev_client->wait_for_tokens_started =3D FALSE;
->          red_char_device_read_from_device(dev_client->dev);
->      } else if (!g_queue_is_empty(dev_client->send_queue)) {
-> -        reds_core_timer_start(dev->priv->reds, dev_client->wait_for_toke=
-ns_timer,
-> -                              RED_CHAR_DEVICE_WAIT_TOKENS_TIMEOUT);
-> +        red_timer_start(dev_client->wait_for_tokens_timer,
-> +                        RED_CHAR_DEVICE_WAIT_TOKENS_TIMEOUT);
->          dev_client->wait_for_tokens_started =3D TRUE;
->      }
->  }
-> @@ -438,7 +436,7 @@ static int red_char_device_write_to_device(RedCharDev=
-ice *dev)
->      g_object_ref(dev);
-> =20
->      if (dev->priv->write_to_dev_timer) {
-> -        reds_core_timer_cancel(dev->priv->reds, dev->priv->write_to_dev_=
-timer);
-> +        red_timer_cancel(dev->priv->write_to_dev_timer);
->      }
-> =20
->      sif =3D spice_char_device_get_interface(dev->priv->sin);
-> @@ -475,8 +473,8 @@ static int red_char_device_write_to_device(RedCharDev=
-ice *dev)
->      if (dev->priv->running) {
->          if (dev->priv->cur_write_buf) {
->              if (dev->priv->write_to_dev_timer) {
-> -                reds_core_timer_start(dev->priv->reds, dev->priv->write_=
-to_dev_timer,
-> -                                      CHAR_DEVICE_WRITE_TO_TIMEOUT);
-> +                red_timer_start(dev->priv->write_to_dev_timer,
-> +                                CHAR_DEVICE_WRITE_TO_TIMEOUT);
->              }
->          } else {
->              spice_assert(g_queue_is_empty(&dev->priv->write_queue));
-> @@ -493,7 +491,7 @@ static void red_char_device_write_retry(void *opaque)
->      RedCharDevice *dev =3D opaque;
-> =20
->      if (dev->priv->write_to_dev_timer) {
-> -        reds_core_timer_cancel(dev->priv->reds, dev->priv->write_to_dev_=
-timer);
-> +        red_timer_cancel(dev->priv->write_to_dev_timer);
->      }
->      red_char_device_write_to_device(dev);
->  }
-> @@ -762,7 +760,7 @@ void red_char_device_stop(RedCharDevice *dev)
->      dev->priv->running =3D FALSE;
->      dev->priv->active =3D FALSE;
->      if (dev->priv->write_to_dev_timer) {
-> -        reds_core_timer_cancel(dev->priv->reds, dev->priv->write_to_dev_=
-timer);
-> +        red_timer_cancel(dev->priv->write_to_dev_timer);
->      }
->  }
-> =20
-> @@ -947,7 +945,7 @@ static void red_char_device_init_device_instance(RedC=
-harDevice *self)
-> =20
->      g_return_if_fail(self->priv->reds);
-> =20
-> -    reds_core_timer_remove(self->priv->reds, self->priv->write_to_dev_ti=
-mer);
-> +    red_timer_remove(self->priv->write_to_dev_timer);
->      self->priv->write_to_dev_timer =3D NULL;
-> =20
->      if (self->priv->sin =3D=3D NULL) {
-> @@ -1037,7 +1035,7 @@ red_char_device_finalize(GObject *object)
->  {
->      RedCharDevice *self =3D RED_CHAR_DEVICE(object);
-> =20
-> -    reds_core_timer_remove(self->priv->reds, self->priv->write_to_dev_ti=
-mer);
-> +    red_timer_remove(self->priv->write_to_dev_timer);
->      self->priv->write_to_dev_timer =3D NULL;
-> =20
->      write_buffers_queue_free(&self->priv->write_queue);
-> diff --git a/server/event-loop.c b/server/event-loop.c
-> index 1ccfd671f..6d2de95f2 100644
-> --- a/server/event-loop.c
-> +++ b/server/event-loop.c
-> @@ -25,28 +25,83 @@
-> =20
->  #include "red-common.h"
-> =20
-> +typedef struct SpiceCoreFuncs {
-> +    void (*timer_start)(SpiceTimer *timer, uint32_t ms);
-> +    void (*timer_cancel)(SpiceTimer *timer);
-> +    void (*timer_remove)(SpiceTimer *timer);
-> +    void (*watch_update_mask)(SpiceWatch *watch, int event_mask);
-> +    void (*watch_remove)(SpiceWatch *watch);
-> +} SpiceCoreFuncs;
-> +
->  struct SpiceTimer {
-> +    const SpiceCoreFuncs *funcs;
-> +};
-> +
-> +struct SpiceWatch {
-> +    const SpiceCoreFuncs *funcs;
-> +};
-> +
-> +void red_timer_start(SpiceTimer *timer, uint32_t ms)
-> +{
-> +    if (timer) {
-> +        timer->funcs->timer_start(timer, ms);
-> +    }
-> +}
-> +
-> +void red_timer_cancel(SpiceTimer *timer)
-> +{
-> +    if (timer) {
-> +        timer->funcs->timer_cancel(timer);
-> +    }
-> +}
-> +
-> +void red_timer_remove(SpiceTimer *timer)
-> +{
-> +    if (timer) {
-> +        timer->funcs->timer_remove(timer);
-> +    }
-> +}
-> +
-> +void red_watch_update_mask(SpiceWatch *watch, int event_mask)
-> +{
-> +    if (watch) {
-> +        watch->funcs->watch_update_mask(watch, event_mask);
-> +    }
-> +}
-> +
-> +void red_watch_remove(SpiceWatch *watch)
-> +{
-> +    if (watch) {
-> +        watch->funcs->watch_remove(watch);
-> +    }
-> +}
-> +
-> +static const SpiceCoreFuncs glib_core_funcs;
-> +
-> +typedef struct SpiceTimerGlib {
-> +    SpiceTimer base;
->      GMainContext *context;
->      SpiceTimerFunc func;
->      void *opaque;
->      GSource *source;
-> -};
-> +} SpiceTimerGlib;
-> =20
->  static SpiceTimer* timer_add(const SpiceCoreInterfaceInternal *iface,
->                               SpiceTimerFunc func, void *opaque)
->  {
-> -    SpiceTimer *timer =3D g_new0(SpiceTimer, 1);
-> +    SpiceTimerGlib *timer =3D g_new0(SpiceTimerGlib, 1);
-> =20
-> +    timer->base.funcs =3D &glib_core_funcs;
->      timer->context =3D iface->main_context;
->      timer->func =3D func;
->      timer->opaque =3D opaque;
-> =20
-> -    return timer;
-> +    return &timer->base;
->  }
-> =20
->  static gboolean timer_func(gpointer user_data)
->  {
-> -    SpiceTimer *timer =3D user_data;
-> +    SpiceTimerGlib *timer =3D (SpiceTimerGlib*) user_data;
-> =20
->      timer->func(timer->opaque);
->      /* timer might be free after func(), don't touch */
-> @@ -54,9 +109,9 @@ static gboolean timer_func(gpointer user_data)
->      return FALSE;
->  }
-> =20
-> -static void timer_cancel(const SpiceCoreInterfaceInternal *iface,
-> -                         SpiceTimer *timer)
-> +static void timer_cancel(SpiceTimer *timer_base)
->  {
-> +    SpiceTimerGlib *timer =3D SPICE_UPCAST(SpiceTimerGlib, timer_base);
->      if (timer->source) {
->          g_source_destroy(timer->source);
->          g_source_unref(timer->source);
-> @@ -64,10 +119,11 @@ static void timer_cancel(const SpiceCoreInterfaceInt=
-ernal *iface,
->      }
->  }
-> =20
-> -static void timer_start(const SpiceCoreInterfaceInternal *iface,
-> -                        SpiceTimer *timer, uint32_t ms)
-> +static void timer_start(SpiceTimer *timer_base, uint32_t ms)
->  {
-> -    timer_cancel(iface, timer);
-> +    timer_cancel(timer_base);
-> +
-> +    SpiceTimerGlib *timer =3D SPICE_UPCAST(SpiceTimerGlib, timer_base);
-> =20
->      timer->source =3D g_timeout_source_new(ms);
->      spice_assert(timer->source !=3D NULL);
-> @@ -77,10 +133,11 @@ static void timer_start(const SpiceCoreInterfaceInte=
-rnal *iface,
->      g_source_attach(timer->source, timer->context);
->  }
-> =20
-> -static void timer_remove(const SpiceCoreInterfaceInternal *iface,
-> -                         SpiceTimer *timer)
-> +static void timer_remove(SpiceTimer *timer_base)
->  {
-> -    timer_cancel(iface, timer);
-> +    timer_cancel(timer_base);
-> +
-> +    SpiceTimerGlib *timer =3D SPICE_UPCAST(SpiceTimerGlib, timer_base);
->      spice_assert(timer->source =3D=3D NULL);
->      g_free(timer);
->  }
-> @@ -110,18 +167,19 @@ static int giocondition_to_spice_event(GIOCondition=
- condition)
->  }
-> =20
->  #ifdef _WIN32
-> -struct SpiceWatch {
-> +typedef struct SpiceWatchGlib {
-> +    SpiceWatch base;
->      GMainContext *context;
->      void *opaque;
->      GSource *source;
->      GIOChannel *channel;
->      SpiceWatchFunc func;
-> -};
-> +} SpiceWatchGlib;
-> =20
->  static gboolean watch_func(GIOChannel *source, GIOCondition condition,
->                             gpointer data)
->  {
-> -    SpiceWatch *watch =3D data;
-> +    SpiceWatchGlib *watch =3D (SpiceWatchGlib*) data;
->      // this works also under Windows despite the name
->      int fd =3D g_io_channel_unix_get_fd(source);
-> =20
-> @@ -130,9 +188,9 @@ static gboolean watch_func(GIOChannel *source, GIOCon=
-dition condition,
->      return TRUE;
->  }
-> =20
-> -static void watch_update_mask(const SpiceCoreInterfaceInternal *iface,
-> -                              SpiceWatch *watch, int event_mask)
-> +static void watch_update_mask(SpiceWatch *watch_base, int event_mask)
->  {
-> +    SpiceWatchGlib *watch =3D SPICE_UPCAST(SpiceWatchGlib, watch_base);
->      if (watch->source) {
->          g_source_destroy(watch->source);
->          g_source_unref(watch->source);
-> @@ -155,26 +213,27 @@ static void watch_update_mask(const SpiceCoreInterf=
-aceInternal *iface,
->  static SpiceWatch *watch_add(const SpiceCoreInterfaceInternal *iface,
->                               int fd, int event_mask, SpiceWatchFunc func=
-, void *opaque)
->  {
-> -    SpiceWatch *watch;
-> +    SpiceWatchGlib *watch;
-> =20
->      spice_return_val_if_fail(fd !=3D -1, NULL);
->      spice_return_val_if_fail(func !=3D NULL, NULL);
-> =20
-> -    watch =3D g_new0(SpiceWatch, 1);
-> +    watch =3D g_new0(SpiceWatchGlib, 1);
-> +    watch->base.funcs =3D &glib_core_funcs;
->      watch->context =3D iface->main_context;
->      watch->channel =3D g_io_channel_win32_new_socket(fd);
->      watch->func =3D func;
->      watch->opaque =3D opaque;
-> =20
-> -    watch_update_mask(iface, watch, event_mask);
-> +    watch_update_mask(&watch->base, event_mask);
-> =20
-> -    return watch;
-> +    return &watch->base;
->  }
-> =20
-> -static void watch_remove(const SpiceCoreInterfaceInternal *iface,
-> -                         SpiceWatch *watch)
-> +static void watch_remove(SpiceWatch *watch_base)
->  {
-> -    watch_update_mask(iface, watch, 0);
-> +    SpiceWatchGlib *watch =3D SPICE_UPCAST(SpiceWatchGlib, watch_base);
-> +    watch_update_mask(watch_base, 0);
->      spice_assert(watch->source =3D=3D NULL);
-> =20
->      g_io_channel_unref(watch->channel);
-> @@ -183,16 +242,17 @@ static void watch_remove(const SpiceCoreInterfaceIn=
-ternal *iface,
-> =20
->  #else
-> =20
-> -struct SpiceWatch {
-> +typedef struct SpiceWatchGlib {
->      GSource source;
-> +    SpiceWatch spice_base;
->      gpointer unix_fd;
->      int fd;
-> -};
-> +} SpiceWatchGlib;
-> =20
->  static gboolean
->  spice_watch_check(GSource *source)
->  {
-> -    SpiceWatch *watch =3D SPICE_CONTAINEROF(source, SpiceWatch, source);
-> +    SpiceWatchGlib *watch =3D SPICE_CONTAINEROF(source, SpiceWatchGlib, =
-source);
-> =20
->      return g_source_query_unix_fd(&watch->source, watch->unix_fd) !=3D 0;
->  }
-> @@ -202,7 +262,7 @@ spice_watch_dispatch(GSource     *source,
->                       GSourceFunc  callback,
->                       gpointer     user_data)
->  {
-> -    SpiceWatch *watch =3D SPICE_CONTAINEROF(source, SpiceWatch, source);
-> +    SpiceWatchGlib *watch =3D SPICE_CONTAINEROF(source, SpiceWatchGlib, =
-source);
->      SpiceWatchFunc func =3D (SpiceWatchFunc)(void*) callback;
->      GIOCondition condition =3D g_source_query_unix_fd(&watch->source, wa=
-tch->unix_fd);
-> =20
-> @@ -217,9 +277,9 @@ static GSourceFuncs spice_watch_funcs =3D {
->      .dispatch =3D spice_watch_dispatch,
->  };
-> =20
-> -static void watch_update_mask(const SpiceCoreInterfaceInternal *iface,
-> -                              SpiceWatch *watch, int event_mask)
-> +static void watch_update_mask(SpiceWatch *watch_base, int event_mask)
->  {
-> +    SpiceWatchGlib *watch =3D SPICE_CONTAINEROF(watch_base, SpiceWatchGl=
-ib, spice_base);
->      GIOCondition condition =3D spice_event_to_giocondition(event_mask);
-> =20
->      g_source_modify_unix_fd(&watch->source, watch->unix_fd, condition);
-> @@ -228,11 +288,14 @@ static void watch_update_mask(const SpiceCoreInterf=
-aceInternal *iface,
->  static SpiceWatch *watch_add(const SpiceCoreInterfaceInternal *iface,
->                               int fd, int event_mask, SpiceWatchFunc func=
-, void *opaque)
->  {
-> -    SpiceWatch *watch =3D (SpiceWatch *) g_source_new(&spice_watch_funcs=
-, sizeof(SpiceWatch));
-> +    SPICE_VERIFY(SPICE_OFFSETOF(SpiceWatchGlib, source) =3D=3D 0);
-> +    SpiceWatchGlib *watch =3D
-> +        (SpiceWatchGlib *) g_source_new(&spice_watch_funcs, sizeof(Spice=
-WatchGlib));
-> =20
->      spice_return_val_if_fail(fd !=3D -1, NULL);
->      spice_return_val_if_fail(func !=3D NULL, NULL);
-> =20
-> +    watch->spice_base.funcs =3D &glib_core_funcs;
->      watch->fd =3D fd;
-> =20
->      g_source_set_callback(&watch->source, (GSourceFunc)(void*)(SpiceWatc=
-hFunc) func, opaque, NULL);
-> @@ -242,68 +305,103 @@ static SpiceWatch *watch_add(const SpiceCoreInterf=
-aceInternal *iface,
->      GIOCondition condition =3D spice_event_to_giocondition(event_mask);
->      watch->unix_fd =3D g_source_add_unix_fd(&watch->source, watch->fd, c=
-ondition);
-> =20
-> -    return watch;
-> +    return &watch->spice_base;
->  }
-> =20
-> -static void watch_remove(const SpiceCoreInterfaceInternal *iface,
-> -                         SpiceWatch *watch)
-> +static void watch_remove(SpiceWatch *watch_base)
->  {
-> +    SpiceWatchGlib *watch =3D SPICE_CONTAINEROF(watch_base, SpiceWatchGl=
-ib, spice_base);
-> +
->      g_source_remove_unix_fd(&watch->source, watch->unix_fd);
->      g_source_destroy(&watch->source);
->      g_source_unref(&watch->source);
->  }
->  #endif
-> =20
-> -const SpiceCoreInterfaceInternal event_loop_core =3D {
-> -    .timer_add =3D timer_add,
-> +static const SpiceCoreFuncs glib_core_funcs =3D {
->      .timer_start =3D timer_start,
->      .timer_cancel =3D timer_cancel,
->      .timer_remove =3D timer_remove,
-> =20
-> -    .watch_add =3D watch_add,
->      .watch_update_mask =3D watch_update_mask,
->      .watch_remove =3D watch_remove,
->  };
-> =20
-> +const SpiceCoreInterfaceInternal event_loop_core =3D {
-> +    .timer_add =3D timer_add,
-> +    .watch_add =3D watch_add,
-> +};
-> +
->  /*
->   * Adapter for SpiceCodeInterface
->   */
-> =20
-> +static const SpiceCoreFuncs qemu_core_funcs;
-> +
-> +typedef struct SpiceTimerQemu {
-> +    SpiceTimer base;
-> +    SpiceCoreInterface *core;
-> +    SpiceTimer *qemu_timer;
-> +} SpiceTimerQemu;
-> +
->  static SpiceTimer *adapter_timer_add(const SpiceCoreInterfaceInternal *i=
-face, SpiceTimerFunc func, void *opaque)
->  {
-> -    return iface->public_interface->timer_add(func, opaque);
-> +    SpiceTimerQemu *timer =3D g_new0(SpiceTimerQemu, 1);
-> +
-> +    timer->base.funcs =3D &qemu_core_funcs;
-> +    timer->core =3D iface->public_interface;
-> +    timer->qemu_timer =3D timer->core->timer_add(func, opaque);
-> +    return &timer->base;
->  }
-> =20
-> -static void adapter_timer_start(const SpiceCoreInterfaceInternal *iface,=
- SpiceTimer *timer, uint32_t ms)
-> +static void adapter_timer_start(SpiceTimer *timer_, uint32_t ms)
->  {
-> -    iface->public_interface->timer_start(timer, ms);
-> +    SpiceTimerQemu *timer =3D SPICE_UPCAST(SpiceTimerQemu, timer_);
-> +    timer->core->timer_start(timer->qemu_timer, ms);
->  }
-> =20
-> -static void adapter_timer_cancel(const SpiceCoreInterfaceInternal *iface=
-, SpiceTimer *timer)
-> +static void adapter_timer_cancel(SpiceTimer *timer_)
->  {
-> -    iface->public_interface->timer_cancel(timer);
-> +    SpiceTimerQemu *timer =3D SPICE_UPCAST(SpiceTimerQemu, timer_);
-> +    timer->core->timer_cancel(timer->qemu_timer);
->  }
-> =20
-> -static void adapter_timer_remove(const SpiceCoreInterfaceInternal *iface=
-, SpiceTimer *timer)
-> +static void adapter_timer_remove(SpiceTimer *timer_)
->  {
-> -    iface->public_interface->timer_remove(timer);
-> +    SpiceTimerQemu *timer =3D SPICE_UPCAST(SpiceTimerQemu, timer_);
-> +    timer->core->timer_remove(timer->qemu_timer);
-> +    g_free(timer);
->  }
-> =20
-> +typedef struct SpiceWatchQemu {
-> +    SpiceWatch base;
-> +    SpiceCoreInterface *core;
-> +    SpiceWatch *qemu_watch;
-> +} SpiceWatchQemu;
-> +
->  static SpiceWatch *adapter_watch_add(const SpiceCoreInterfaceInternal *i=
-face,
->                                       int fd, int event_mask, SpiceWatchF=
-unc func, void *opaque)
->  {
->      // note: Qemu API is fine having a SOCKET on Windows
-> -    return iface->public_interface->watch_add(fd, event_mask, func, opaq=
-ue);
-> +    SpiceWatchQemu *watch =3D g_new0(SpiceWatchQemu, 1);
-> +
-> +    watch->base.funcs =3D &qemu_core_funcs;
-> +    watch->core =3D iface->public_interface;
-> +    watch->qemu_watch =3D watch->core->watch_add(fd, event_mask, func, o=
-paque);
-> +    return &watch->base;
->  }
-> =20
-> -static void adapter_watch_update_mask(const SpiceCoreInterfaceInternal *=
-iface, SpiceWatch *watch, int event_mask)
-> +static void adapter_watch_update_mask(SpiceWatch *watch_, int event_mask)
->  {
-> -    iface->public_interface->watch_update_mask(watch, event_mask);
-> +    SpiceWatchQemu *watch =3D SPICE_UPCAST(SpiceWatchQemu, watch_);
-> +    watch->core->watch_update_mask(watch->qemu_watch, event_mask);
->  }
-> =20
-> -static void adapter_watch_remove(const SpiceCoreInterfaceInternal *iface=
-, SpiceWatch *watch)
-> +static void adapter_watch_remove(SpiceWatch *watch_)
->  {
-> -    iface->public_interface->watch_remove(watch);
-> +    SpiceWatchQemu *watch =3D SPICE_UPCAST(SpiceWatchQemu, watch_);
-> +    watch->core->watch_remove(watch->qemu_watch);
-> +    g_free(watch);
->  }
-> =20
->  static void adapter_channel_event(const SpiceCoreInterfaceInternal *ifac=
-e, int event, SpiceChannelEventInfo *info)
-> @@ -312,13 +410,17 @@ static void adapter_channel_event(const SpiceCoreIn=
-terfaceInternal *iface, int e
->          iface->public_interface->channel_event(event, info);
->  }
-> =20
-> -const SpiceCoreInterfaceInternal core_interface_adapter =3D {
-> -    .timer_add =3D adapter_timer_add,
-> +static const SpiceCoreFuncs qemu_core_funcs =3D {
->      .timer_start =3D adapter_timer_start,
->      .timer_cancel =3D adapter_timer_cancel,
->      .timer_remove =3D adapter_timer_remove,
-> -    .watch_add =3D adapter_watch_add,
-> +
->      .watch_update_mask =3D adapter_watch_update_mask,
->      .watch_remove =3D adapter_watch_remove,
-> +};
-> +
-> +const SpiceCoreInterfaceInternal core_interface_adapter =3D {
-> +    .timer_add =3D adapter_timer_add,
-> +    .watch_add =3D adapter_watch_add,
->      .channel_event =3D adapter_channel_event,
->  };
-> diff --git a/server/inputs-channel.c b/server/inputs-channel.c
-> index a1c35565c..280783c17 100644
-> --- a/server/inputs-channel.c
-> +++ b/server/inputs-channel.c
-> @@ -162,8 +162,7 @@ const VDAgentMouseState *inputs_channel_get_mouse_sta=
-te(InputsChannel *inputs)
-> =20
->  static void activate_modifiers_watch(InputsChannel *inputs)
->  {
-> -    SpiceCoreInterfaceInternal *core =3D red_channel_get_core_interface(=
-RED_CHANNEL(inputs));
-> -    core->timer_start(core, inputs->key_modifiers_timer, KEY_MODIFIERS_T=
-TL);
-> +    red_timer_start(inputs->key_modifiers_timer, KEY_MODIFIERS_TTL);
->  }
-> =20
->  static void kbd_push_scan(SpiceKbdInstance *sin, uint8_t scan)
-> @@ -600,10 +599,9 @@ static void
->  inputs_channel_finalize(GObject *object)
->  {
->      InputsChannel *self =3D INPUTS_CHANNEL(object);
-> -    SpiceCoreInterfaceInternal *core =3D red_channel_get_core_interface(=
-RED_CHANNEL(self));
-> =20
->      inputs_channel_detach_tablet(self, self->tablet);
-> -    core->timer_remove(core, self->key_modifiers_timer);
-> +    red_timer_remove(self->key_modifiers_timer);
-> =20
->      G_OBJECT_CLASS(inputs_channel_parent_class)->finalize(object);
->  }
-> diff --git a/server/main-dispatcher.c b/server/main-dispatcher.c
-> index 2ca68a4d1..7579fd379 100644
-> --- a/server/main-dispatcher.c
-> +++ b/server/main-dispatcher.c
-> @@ -288,7 +288,7 @@ static void main_dispatcher_finalize(GObject *object)
->  {
->      MainDispatcher *self =3D MAIN_DISPATCHER(object);
-> =20
-> -    reds_core_watch_remove(self->priv->reds, self->priv->watch);
-> +    red_watch_remove(self->priv->watch);
->      self->priv->watch =3D NULL;
->      G_OBJECT_CLASS(main_dispatcher_parent_class)->finalize(object);
->  }
-> diff --git a/server/red-channel-client.c b/server/red-channel-client.c
-> index 337733d5d..d19eafe78 100644
-> --- a/server/red-channel-client.c
-> +++ b/server/red-channel-client.c
-> @@ -216,8 +216,6 @@ typedef struct MarkerPipeItem {
-> =20
->  static void red_channel_client_start_ping_timer(RedChannelClient *rcc, u=
-int32_t timeout)
->  {
-> -    SpiceCoreInterfaceInternal *core;
-> -
->      if (!rcc->priv->latency_monitor.timer) {
->          return;
->      }
-> @@ -226,14 +224,11 @@ static void red_channel_client_start_ping_timer(Red=
-ChannelClient *rcc, uint32_t
->      }
->      rcc->priv->latency_monitor.state =3D PING_STATE_TIMER;
-> =20
-> -    core =3D red_channel_get_core_interface(rcc->priv->channel);
-> -    core->timer_start(core, rcc->priv->latency_monitor.timer, timeout);
-> +    red_timer_start(rcc->priv->latency_monitor.timer, timeout);
->  }
-> =20
->  static void red_channel_client_cancel_ping_timer(RedChannelClient *rcc)
->  {
-> -    SpiceCoreInterfaceInternal *core;
-> -
->      if (!rcc->priv->latency_monitor.timer) {
->          return;
->      }
-> @@ -241,8 +236,7 @@ static void red_channel_client_cancel_ping_timer(RedC=
-hannelClient *rcc)
->          return;
->      }
-> =20
-> -    core =3D red_channel_get_core_interface(rcc->priv->channel);
-> -    core->timer_cancel(core, rcc->priv->latency_monitor.timer);
-> +    red_timer_cancel(rcc->priv->latency_monitor.timer);
->      rcc->priv->latency_monitor.state =3D PING_STATE_NONE;
->  }
-> =20
-> @@ -332,13 +326,12 @@ red_channel_client_finalize(GObject *object)
->  {
->      RedChannelClient *self =3D RED_CHANNEL_CLIENT(object);
-> =20
-> -    SpiceCoreInterfaceInternal *core =3D red_channel_get_core_interface(=
-self->priv->channel);
->      if (self->priv->latency_monitor.timer) {
-> -        core->timer_remove(core, self->priv->latency_monitor.timer);
-> +        red_timer_remove(self->priv->latency_monitor.timer);
->          self->priv->latency_monitor.timer =3D NULL;
->      }
->      if (self->priv->connectivity_monitor.timer) {
-> -        core->timer_remove(core, self->priv->connectivity_monitor.timer);
-> +        red_timer_remove(self->priv->connectivity_monitor.timer);
->          self->priv->connectivity_monitor.timer =3D NULL;
->      }
-> =20
-> @@ -756,7 +749,6 @@ static void red_channel_client_connectivity_timer(voi=
-d *opaque)
->      }
-> =20
->      if (is_alive) {
-> -        SpiceCoreInterfaceInternal *core =3D red_channel_get_core_interf=
-ace(rcc->priv->channel);
->          monitor->received_bytes =3D false;
->          monitor->sent_bytes =3D false;
->          if (red_channel_client_is_blocked(rcc) || red_channel_client_wai=
-ting_for_ack(rcc)) {
-> @@ -767,7 +759,7 @@ static void red_channel_client_connectivity_timer(voi=
-d *opaque)
->          } else {
->               monitor->state =3D CONNECTIVITY_STATE_CONNECTED;
->          }
-> -        core->timer_start(core, rcc->priv->connectivity_monitor.timer,
-> +        red_timer_start(rcc->priv->connectivity_monitor.timer,
->                            rcc->priv->connectivity_monitor.timeout);
->      } else {
->          monitor->state =3D CONNECTIVITY_STATE_DISCONNECTED;
-> @@ -806,7 +798,7 @@ void red_channel_client_start_connectivity_monitoring=
-(RedChannelClient *rcc, uin
->              core, red_channel_client_connectivity_timer, rcc);
->          rcc->priv->connectivity_monitor.timeout =3D timeout_ms;
->          if (!red_client_during_migrate_at_target(rcc->priv->client)) {
-> -            core->timer_start(core, rcc->priv->connectivity_monitor.time=
-r,
-> +            red_timer_start(rcc->priv->connectivity_monitor.timer,
->                                rcc->priv->connectivity_monitor.timeout);
->          }
->      }
-> @@ -964,14 +956,11 @@ cleanup:
->  static void
->  red_channel_client_watch_update_mask(RedChannelClient *rcc, int event_ma=
-sk)
->  {
-> -    SpiceCoreInterfaceInternal *core;
-> -
->      if (!rcc->priv->stream->watch) {
->          return;
->      }
-> =20
-> -    core =3D red_channel_get_core_interface(rcc->priv->channel);
-> -    core->watch_update_mask(core, rcc->priv->stream->watch, event_mask);
-> +    red_watch_update_mask(rcc->priv->stream->watch, event_mask);
->  }
-> =20
->  static void red_channel_client_seamless_migration_done(RedChannelClient =
-*rcc)
-> @@ -981,8 +970,7 @@ static void red_channel_client_seamless_migration_don=
-e(RedChannelClient *rcc)
->      if (red_client_seamless_migration_done_for_channel(rcc->priv->client=
-)) {
->          red_channel_client_start_ping_timer(rcc, PING_TEST_IDLE_NET_TIME=
-OUT_MS);
->          if (rcc->priv->connectivity_monitor.timer) {
-> -            SpiceCoreInterfaceInternal *core =3D red_channel_get_core_in=
-terface(rcc->priv->channel);
-> -            core->timer_start(core, rcc->priv->connectivity_monitor.time=
-r,
-> +            red_timer_start(rcc->priv->connectivity_monitor.timer,
->                                rcc->priv->connectivity_monitor.timeout);
->          }
->      }
-> @@ -1000,14 +988,13 @@ bool red_channel_client_is_waiting_for_migrate_dat=
-a(RedChannelClient *rcc)
-> =20
->  void red_channel_client_default_migrate(RedChannelClient *rcc)
->  {
-> -    SpiceCoreInterfaceInternal *core =3D red_channel_get_core_interface(=
-rcc->priv->channel);
->      if (rcc->priv->latency_monitor.timer) {
->          red_channel_client_cancel_ping_timer(rcc);
-> -        core->timer_remove(core, rcc->priv->latency_monitor.timer);
-> +        red_timer_remove(rcc->priv->latency_monitor.timer);
->          rcc->priv->latency_monitor.timer =3D NULL;
->      }
->      if (rcc->priv->connectivity_monitor.timer) {
-> -        core->timer_remove(core, rcc->priv->connectivity_monitor.timer);
-> +        red_timer_remove(rcc->priv->connectivity_monitor.timer);
->          rcc->priv->connectivity_monitor.timer =3D NULL;
->      }
->      red_channel_client_pipe_add_type(rcc, RED_PIPE_ITEM_TYPE_MIGRATE);
-> @@ -1024,8 +1011,7 @@ void red_channel_client_destroy(RedChannelClient *r=
-cc)
->  void red_channel_client_shutdown(RedChannelClient *rcc)
->  {
->      if (rcc->priv->stream && rcc->priv->stream->watch) {
-> -        SpiceCoreInterfaceInternal *core =3D red_channel_get_core_interf=
-ace(rcc->priv->channel);
-> -        core->watch_remove(core, rcc->priv->stream->watch);
-> +        red_watch_remove(rcc->priv->stream->watch);
->          rcc->priv->stream->watch =3D NULL;
->          shutdown(rcc->priv->stream->socket, SHUT_RDWR);
->      }
-> @@ -1719,22 +1705,21 @@ static void red_channel_client_on_disconnect(RedC=
-hannelClient *rcc)
->  void red_channel_client_disconnect(RedChannelClient *rcc)
->  {
->      RedChannel *channel =3D rcc->priv->channel;
-> -    SpiceCoreInterfaceInternal *core =3D red_channel_get_core_interface(=
-channel);
-> =20
->      if (!red_channel_client_is_connected(rcc)) {
->          return;
->      }
->      red_channel_client_pipe_clear(rcc);
->      if (rcc->priv->stream->watch) {
-> -        core->watch_remove(core, rcc->priv->stream->watch);
-> +        red_watch_remove(rcc->priv->stream->watch);
->          rcc->priv->stream->watch =3D NULL;
->      }
->      if (rcc->priv->latency_monitor.timer) {
-> -        core->timer_remove(core, rcc->priv->latency_monitor.timer);
-> +        red_timer_remove(rcc->priv->latency_monitor.timer);
->          rcc->priv->latency_monitor.timer =3D NULL;
->      }
->      if (rcc->priv->connectivity_monitor.timer) {
-> -        core->timer_remove(core, rcc->priv->connectivity_monitor.timer);
-> +        red_timer_remove(rcc->priv->connectivity_monitor.timer);
->          rcc->priv->connectivity_monitor.timer =3D NULL;
->      }
->      red_channel_remove_client(channel, rcc);
-> diff --git a/server/red-common.h b/server/red-common.h
-> index 22ea8fc37..4b2e9f87c 100644
-> --- a/server/red-common.h
-> +++ b/server/red-common.h
-> @@ -40,17 +40,20 @@
->  #define SPICE_UPCAST(type, ptr) \
->      (verify_expr(SPICE_OFFSETOF(type, base) =3D=3D 0,SPICE_CONTAINEROF(p=
-tr, type, base)))
-> =20
-> +SPICE_BEGIN_DECLS
-> +
-> +void red_timer_start(SpiceTimer *timer, uint32_t ms);
-> +void red_timer_cancel(SpiceTimer *timer);
-> +void red_timer_remove(SpiceTimer *timer);
-> +void red_watch_update_mask(SpiceWatch *watch, int event_mask);
-> +void red_watch_remove(SpiceWatch *watch);
-> +
->  typedef struct SpiceCoreInterfaceInternal SpiceCoreInterfaceInternal;
-> =20
->  struct SpiceCoreInterfaceInternal {
->      SpiceTimer *(*timer_add)(const SpiceCoreInterfaceInternal *iface, Sp=
-iceTimerFunc func, void *opaque);
-> -    void (*timer_start)(const SpiceCoreInterfaceInternal *iface, SpiceTi=
-mer *timer, uint32_t ms);
-> -    void (*timer_cancel)(const SpiceCoreInterfaceInternal *iface, SpiceT=
-imer *timer);
-> -    void (*timer_remove)(const SpiceCoreInterfaceInternal *iface, SpiceT=
-imer *timer);
-> =20
->      SpiceWatch *(*watch_add)(const SpiceCoreInterfaceInternal *iface, in=
-t fd, int event_mask, SpiceWatchFunc func, void *opaque);
-> -    void (*watch_update_mask)(const SpiceCoreInterfaceInternal *iface, S=
-piceWatch *watch, int event_mask);
-> -    void (*watch_remove)(const SpiceCoreInterfaceInternal *iface, SpiceW=
-atch *watch);
-> =20
->      void (*channel_event)(const SpiceCoreInterfaceInternal *iface, int e=
-vent, SpiceChannelEventInfo *info);
-> =20
-> @@ -126,4 +129,6 @@ typedef struct GListIter {
->      { return G_TYPE_INSTANCE_GET_CLASS(obj, \
->               module_obj_name ## _get_type(), ModuleObjName ## Class); }
-> =20
-> +SPICE_END_DECLS
-> +
->  #endif /* RED_COMMON_H_ */
-> diff --git a/server/red-stream-device.c b/server/red-stream-device.c
-> index 620e581ef..44d9cd09d 100644
-> --- a/server/red-stream-device.c
-> +++ b/server/red-stream-device.c
-> @@ -120,7 +120,7 @@ stream_device_partial_read(StreamDevice *dev, SpiceCh=
-arDeviceInstance *sin)
->          if (!dev->close_timer) {
->              dev->close_timer =3D reds_core_timer_add(reds, close_timer_f=
-unc, dev);
->          }
-> -        reds_core_timer_start(reds, dev->close_timer, 0);
-> +        red_timer_start(dev->close_timer, 0);
->          return false;
->      }
-> =20
-> @@ -649,8 +649,7 @@ stream_device_dispose(GObject *object)
->  {
->      StreamDevice *dev =3D STREAM_DEVICE(object);
-> =20
-> -    RedsState *reds =3D red_char_device_get_server(RED_CHAR_DEVICE(dev));
-> -    reds_core_timer_remove(reds, dev->close_timer);
-> +    red_timer_remove(dev->close_timer);
-> =20
->      if (dev->stream_channel) {
->          // close all current connections and drop the reference
-> diff --git a/server/red-stream.c b/server/red-stream.c
-> index 04be3af37..aec482fb8 100644
-> --- a/server/red-stream.c
-> +++ b/server/red-stream.c
-> @@ -213,7 +213,7 @@ static ssize_t stream_ssl_read_cb(RedStream *s, void =
-*buf, size_t size)
->  void red_stream_remove_watch(RedStream* s)
->  {
->      if (s->watch) {
-> -        s->priv->core->watch_remove(s->priv->core, s->watch);
-> +        red_watch_remove(s->watch);
->          s->watch =3D NULL;
->      }
->  }
-> diff --git a/server/red-worker.c b/server/red-worker.c
-> index 98a4a9dc3..12a8e7398 100644
-> --- a/server/red-worker.c
-> +++ b/server/red-worker.c
-> @@ -1185,7 +1185,7 @@ void red_worker_free(RedWorker *worker)
->      worker->display_channel =3D NULL;
-> =20
->      if (worker->dispatch_watch) {
-> -        worker->core.watch_remove(&worker->core, worker->dispatch_watch);
-> +        red_watch_remove(worker->dispatch_watch);
->      }
-> =20
->      g_main_context_unref(worker->core.main_context);
-> diff --git a/server/reds.c b/server/reds.c
-> index f432f55a4..96dd58433 100644
-> --- a/server/reds.c
-> +++ b/server/reds.c
-> @@ -410,7 +410,7 @@ static void reds_mig_cleanup(RedsState *reds)
->          reds->mig_inprogress =3D FALSE;
->          reds->mig_wait_connect =3D FALSE;
->          reds->mig_wait_disconnect =3D FALSE;
-> -        reds_core_timer_cancel(reds, reds->mig_timer);
-> +        red_timer_cancel(reds->mig_timer);
->          reds_mig_cleanup_wait_disconnect(reds);
->      }
->  }
-> @@ -2429,7 +2429,6 @@ static void reds_handle_new_link(RedLinkInfo *link)
->  static void reds_handle_ssl_accept(int fd, int event, void *data)
->  {
->      RedLinkInfo *link =3D (RedLinkInfo *)data;
-> -    RedsState *reds =3D link->reds;
->      RedStreamSslStatus return_code =3D red_stream_ssl_accept(link->strea=
-m);
-> =20
->      switch (return_code) {
-> @@ -2437,12 +2436,10 @@ static void reds_handle_ssl_accept(int fd, int ev=
-ent, void *data)
->              reds_link_free(link);
->              return;
->          case RED_STREAM_SSL_STATUS_WAIT_FOR_READ:
-> -            reds_core_watch_update_mask(reds, link->stream->watch,
-> -                                        SPICE_WATCH_EVENT_READ);
-> +            red_watch_update_mask(link->stream->watch, SPICE_WATCH_EVENT=
-_READ);
->              return;
->          case RED_STREAM_SSL_STATUS_WAIT_FOR_WRITE:
-> -            reds_core_watch_update_mask(reds, link->stream->watch,
-> -                                        SPICE_WATCH_EVENT_WRITE);
-> +            red_watch_update_mask(link->stream->watch, SPICE_WATCH_EVENT=
-_WRITE);
->              return;
->          case RED_STREAM_SSL_STATUS_OK:
->              red_stream_remove_watch(link->stream);
-> @@ -2702,7 +2699,7 @@ void reds_set_client_mm_time_latency(RedsState *red=
-s, RedClient *client, uint32_
->  static void reds_cleanup_net(SpiceServer *reds)
->  {
->      if (reds->listen_socket !=3D -1) {
-> -       reds_core_watch_remove(reds, reds->listen_watch);
-> +       red_watch_remove(reds->listen_watch);
->         if (reds->config->spice_listen_socket_fd !=3D reds->listen_socket=
-) {
->            socket_close(reds->listen_socket);
->         }
-> @@ -2710,7 +2707,7 @@ static void reds_cleanup_net(SpiceServer *reds)
->         reds->listen_socket =3D -1;
->      }
->      if (reds->secure_listen_socket !=3D -1) {
-> -       reds_core_watch_remove(reds, reds->secure_listen_watch);
-> +       red_watch_remove(reds->secure_listen_watch);
->         socket_close(reds->secure_listen_socket);
->         reds->secure_listen_watch =3D NULL;
->         reds->secure_listen_socket =3D -1;
-> @@ -3031,7 +3028,7 @@ static void reds_mig_started(RedsState *reds)
-> =20
->      reds->mig_inprogress =3D TRUE;
->      reds->mig_wait_connect =3D TRUE;
-> -    reds_core_timer_start(reds, reds->mig_timer, MIGRATE_TIMEOUT);
-> +    red_timer_start(reds->mig_timer, MIGRATE_TIMEOUT);
->  }
-> =20
->  static void reds_mig_fill_wait_disconnect(RedsState *reds)
-> @@ -3046,7 +3043,7 @@ static void reds_mig_fill_wait_disconnect(RedsState=
- *reds)
->      }
->      reds->mig_wait_connect =3D FALSE;
->      reds->mig_wait_disconnect =3D TRUE;
-> -    reds_core_timer_start(reds, reds->mig_timer, MIGRATE_TIMEOUT);
-> +    red_timer_start(reds->mig_timer, MIGRATE_TIMEOUT);
->  }
-> =20
->  static void reds_mig_cleanup_wait_disconnect(RedsState *reds)
-> @@ -3863,7 +3860,7 @@ SPICE_GNUC_VISIBLE void spice_server_destroy(SpiceS=
-erver *reds)
->      if (reds->main_channel) {
->          red_channel_destroy(RED_CHANNEL(reds->main_channel));
->      }
-> -    reds_core_timer_remove(reds, reds->mig_timer);
-> +    red_timer_remove(reds->mig_timer);
-> =20
->      if (reds->ctx) {
->          SSL_CTX_free(reds->ctx);
-> @@ -4437,24 +4434,6 @@ SpiceWatch *reds_core_watch_add(RedsState *reds,
->     return reds->core.watch_add(&reds->core, fd, event_mask, func, opaque=
-);
->  }
-> =20
-> -void reds_core_watch_update_mask(RedsState *reds,
-> -                                 SpiceWatch *watch,
-> -                                 int event_mask)
-> -{
-> -   g_return_if_fail(reds !=3D NULL);
-> -   g_return_if_fail(reds->core.watch_update_mask !=3D NULL);
-> -
-> -   reds->core.watch_update_mask(&reds->core, watch, event_mask);
-> -}
-> -
-> -void reds_core_watch_remove(RedsState *reds, SpiceWatch *watch)
-> -{
-> -   g_return_if_fail(reds !=3D NULL);
-> -   g_return_if_fail(reds->core.watch_remove !=3D NULL);
-> -
-> -   reds->core.watch_remove(&reds->core, watch);
-> -}
-> -
->  SpiceTimer *reds_core_timer_add(RedsState *reds,
->                                  SpiceTimerFunc func,
->                                  void *opaque)
-> @@ -4466,38 +4445,6 @@ SpiceTimer *reds_core_timer_add(RedsState *reds,
-> =20
->  }
-> =20
-> -void reds_core_timer_start(RedsState *reds,
-> -                           SpiceTimer *timer,
-> -                           uint32_t ms)
-> -{
-> -   g_return_if_fail(reds !=3D NULL);
-> -   g_return_if_fail(reds->core.timer_start !=3D NULL);
-> -
-> -   return reds->core.timer_start(&reds->core, timer, ms);
-> -}
-> -
-> -void reds_core_timer_cancel(RedsState *reds,
-> -                            SpiceTimer *timer)
-> -{
-> -   g_return_if_fail(reds !=3D NULL);
-> -   g_return_if_fail(reds->core.timer_cancel !=3D NULL);
-> -
-> -   return reds->core.timer_cancel(&reds->core, timer);
-> -}
-> -
-> -void reds_core_timer_remove(RedsState *reds,
-> -                            SpiceTimer *timer)
-> -{
-> -    if (timer =3D=3D NULL) {
-> -        return;
-> -    }
-> -
-> -    g_return_if_fail(reds !=3D NULL);
-> -    g_return_if_fail(reds->core.timer_remove !=3D NULL);
-> -
-> -    reds->core.timer_remove(&reds->core, timer);
-> -}
-> -
->  void reds_update_client_mouse_allowed(RedsState *reds)
->  {
->      int allow_now =3D FALSE;
-> diff --git a/server/reds.h b/server/reds.h
-> index e3355f817..e2b6904ab 100644
-> --- a/server/reds.h
-> +++ b/server/reds.h
-> @@ -115,20 +115,8 @@ SpiceWatch *reds_core_watch_add(RedsState *reds,
->                                  int fd, int event_mask,
->                                  SpiceWatchFunc func,
->                                  void *opaque);
-> -void reds_core_watch_update_mask(RedsState *reds,
-> -                                 SpiceWatch *watch,
-> -                                 int event_mask);
-> -void reds_core_watch_remove(RedsState *reds, SpiceWatch *watch);
-> -
->  SpiceTimer *reds_core_timer_add(RedsState *reds,
->                                  SpiceTimerFunc func,
->                                  void *opaque);
-> -void reds_core_timer_start(RedsState *reds,
-> -                           SpiceTimer *timer,
-> -                           uint32_t ms);
-> -void reds_core_timer_cancel(RedsState *reds,
-> -                            SpiceTimer *timer);
-> -void reds_core_timer_remove(RedsState *reds,
-> -                            SpiceTimer *timer);
-> =20
->  #endif /* REDS_H_ */
-> diff --git a/server/tests/basic-event-loop.c b/server/tests/basic-event-l=
-oop.c
-> index e331e8522..70c9a4df5 100644
-> --- a/server/tests/basic-event-loop.c
-> +++ b/server/tests/basic-event-loop.c
-> @@ -83,48 +83,23 @@ static SpiceTimer* base_timer_add(SpiceTimerFunc func=
-, void *opaque)
->      return base_core_interface.timer_add(&base_core_interface, func, opa=
-que);
->  }
-> =20
-> -static void base_timer_start(SpiceTimer *timer, uint32_t ms)
-> -{
-> -    base_core_interface.timer_start(&base_core_interface, timer, ms);
-> -}
-> -
-> -static void base_timer_cancel(SpiceTimer *timer)
-> -{
-> -    base_core_interface.timer_cancel(&base_core_interface, timer);
-> -}
-> -
-> -static void base_timer_remove(SpiceTimer *timer)
-> -{
-> -    base_core_interface.timer_remove(&base_core_interface, timer);
-> -}
-> -
->  static SpiceWatch *base_watch_add(int fd, int event_mask, SpiceWatchFunc=
- func, void *opaque)
->  {
->      return base_core_interface.watch_add(&base_core_interface, fd, event=
-_mask, func, opaque);
->  }
-> =20
-> -static void base_watch_update_mask(SpiceWatch *watch, int event_mask)
-> -{
-> -    base_core_interface.watch_update_mask(&base_core_interface, watch, e=
-vent_mask);
-> -}
-> -
-> -static void base_watch_remove(SpiceWatch *watch)
-> -{
-> -    base_core_interface.watch_remove(&base_core_interface, watch);
-> -}
-> -
->  static SpiceCoreInterface core =3D {
->      .base =3D {
->          .major_version =3D SPICE_INTERFACE_CORE_MAJOR,
->          .minor_version =3D SPICE_INTERFACE_CORE_MINOR,
->      },
->      .timer_add =3D base_timer_add,
-> -    .timer_start =3D base_timer_start,
-> -    .timer_cancel =3D base_timer_cancel,
-> -    .timer_remove =3D base_timer_remove,
-> +    .timer_start =3D red_timer_start,
-> +    .timer_cancel =3D red_timer_cancel,
-> +    .timer_remove =3D red_timer_remove,
->      .watch_add =3D base_watch_add,
-> -    .watch_update_mask =3D base_watch_update_mask,
-> -    .watch_remove =3D base_watch_remove,
-> +    .watch_update_mask =3D red_watch_update_mask,
-> +    .watch_remove =3D red_watch_remove,
->      .channel_event =3D event_loop_channel_event,
->  };
-> =20
-> --=20
-> 2.20.1
->=20
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---ixjwqw5az33mxsfk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl2e/9sACgkQl9kSPeN6
-SE9ypw/8Cj+yZFmccgiF3horNUCqLXx3QmypHDvLQ8MVG1GiKxg6VP9qg8jq7KCM
-O1oP672bhXIJR3+IY5/3soB0rAN7t+KnxrCx1I4yt/tWqXgIWIa7qxt5f/C3b8vU
-HfPEPsvmk67hZl5J1mLr+7mHPbDVjCI+0JYkt61Ck5OX8B499XfAU8x4baDNJetn
-UCajEHApBiJfxYpTbmx/VT4343m45FrxsTrXYs+rQpYr5HpnmM8fKZ4Qsfqf9t59
-q+G310K9W5fVhyqeDP57ySwVHAga38xumoy+l7SncPGATnL9WeRgo+6rAQNiBGHA
-060shnTT9mBfkUHtf8mhzR2EmC0xUaxd48jPxSv6tNGJiYdxkD9x1NdNoTAnarlr
-sDkwbp9/biFJv4V03F2wTS/B5lcn566rIjD58AqO1M76CPemfRlK5hXnhqIzEqnj
-YDczVIE1+0RAA/46XaX5mP9KXr1A/nPdzjHKmPK7SQggf8Tg2e9AkIbqllnBGhBc
-T7ARUnzflU03cAXMYA5SPZfpGYFuFXvf0/IiN154qgWHyEQ9csh/sv31myrb6m9G
-wtMeK2PH+BPg6H4q6I6TU9xFHGeIdECgF2TVYb3Xa1dYfzRwg7Al6xh98tkAYYqC
-n2Re7PyqusMe13ouRhArvQUKkBKkbTHBzyN5vFiSV8OB15dTeFE=
-=T8cj
------END PGP SIGNATURE-----
-
---ixjwqw5az33mxsfk--
-
---===============1372491113==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============1372491113==--
+QWxsb3cgdG8gbW9kaWZ5L2NhbmNlbCB0aW1lcnMvd2F0Y2hlcyB3aXRob3V0IGhhdmluZyB0byBy
+ZXRyaWV2ZQp0aGUgY29kZSBpbnRlcmZhY2UuClRoaXMgd2lsbCBtYWtlIHN1cmUgdGhhdCB5b3Ug
+YXJlIG5vdCB1c2luZyB0aGUgd3JvbmcgaW50ZXJmYWNlLgpTaW1wbGlmeSBjb2RlIHRvIGRlYWwg
+d2l0aCB0aW1lcnMvd2F0Y2hlcy4KUmVtb3ZlIHRoZSByZXF1aXJlbWVudCB0byBoYXZlIHRoZSBj
+b3JlIGludGVyZmFjZSBhdmFpbGFibGUKZm9yIHJlbW92aW5nIHRpbWVycy93YXRjaGVzLgoKU2ln
+bmVkLW9mZi1ieTogRnJlZGlhbm8gWmlnbGlvIDxmemlnbGlvQHJlZGhhdC5jb20+CkFja2VkLWJ5
+OiBWaWN0b3IgVG9zbyA8dmljdG9ydG9zb0ByZWRoYXQuY29tPgotLS0KIHNlcnZlci9jaGFyLWRl
+dmljZS5jICAgICAgICAgICAgfCAgMjggKystLS0KIHNlcnZlci9ldmVudC1sb29wLmMgICAgICAg
+ICAgICAgfCAyMDYgKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0KIHNlcnZlci9pbnB1
+dHMtY2hhbm5lbC5jICAgICAgICAgfCAgIDYgKy0KIHNlcnZlci9tYWluLWRpc3BhdGNoZXIuYyAg
+ICAgICAgfCAgIDIgKy0KIHNlcnZlci9yZWQtY2hhbm5lbC1jbGllbnQuYyAgICAgfCAgNDMgKysr
+LS0tLQogc2VydmVyL3JlZC1jb21tb24uaCAgICAgICAgICAgICB8ICAxNSArKy0KIHNlcnZlci9y
+ZWQtc3RyZWFtLWRldmljZS5jICAgICAgfCAgIDUgKy0KIHNlcnZlci9yZWQtc3RyZWFtLmMgICAg
+ICAgICAgICAgfCAgIDIgKy0KIHNlcnZlci9yZWQtd29ya2VyLmMgICAgICAgICAgICAgfCAgIDIg
+Ky0KIHNlcnZlci9yZWRzLmMgICAgICAgICAgICAgICAgICAgfCAgNjkgKystLS0tLS0tLS0KIHNl
+cnZlci9yZWRzLmggICAgICAgICAgICAgICAgICAgfCAgMTIgLS0KIHNlcnZlci90ZXN0cy9iYXNp
+Yy1ldmVudC1sb29wLmMgfCAgMzUgKy0tLS0tCiAxMiBmaWxlcyBjaGFuZ2VkLCAyMTEgaW5zZXJ0
+aW9ucygrKSwgMjE0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3NlcnZlci9jaGFyLWRldmlj
+ZS5jIGIvc2VydmVyL2NoYXItZGV2aWNlLmMKaW5kZXggMDNhYzk5MDdjLi41YzZmNTgzYjIgMTAw
+NjQ0Ci0tLSBhL3NlcnZlci9jaGFyLWRldmljZS5jCisrKyBiL3NlcnZlci9jaGFyLWRldmljZS5j
+CkBAIC0xODcsNyArMTg3LDcgQEAgc3RhdGljIHZvaWQgcmVkX2NoYXJfZGV2aWNlX2NsaWVudF9m
+cmVlKFJlZENoYXJEZXZpY2UgKmRldiwKIHsKICAgICBHTGlzdCAqbCwgKm5leHQ7CiAKLSAgICBy
+ZWRzX2NvcmVfdGltZXJfcmVtb3ZlKGRldi0+cHJpdi0+cmVkcywgZGV2X2NsaWVudC0+d2FpdF9m
+b3JfdG9rZW5zX3RpbWVyKTsKKyAgICByZWRfdGltZXJfcmVtb3ZlKGRldl9jbGllbnQtPndhaXRf
+Zm9yX3Rva2Vuc190aW1lcik7CiAgICAgZGV2X2NsaWVudC0+d2FpdF9mb3JfdG9rZW5zX3RpbWVy
+ID0gTlVMTDsKIAogICAgIGdfcXVldWVfZnJlZV9mdWxsKGRldl9jbGllbnQtPnNlbmRfcXVldWUs
+IChHRGVzdHJveU5vdGlmeSlyZWRfcGlwZV9pdGVtX3VucmVmKTsKQEAgLTI3Myw4ICsyNzMsNiBA
+QCBzdGF0aWMgdWludDY0X3QgcmVkX2NoYXJfZGV2aWNlX21heF9zZW5kX3Rva2VucyhSZWRDaGFy
+RGV2aWNlICpkZXYpCiBzdGF0aWMgdm9pZCByZWRfY2hhcl9kZXZpY2VfYWRkX21zZ190b19jbGll
+bnRfcXVldWUoUmVkQ2hhckRldmljZUNsaWVudCAqZGV2X2NsaWVudCwKICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBSZWRQaXBlSXRlbSAqbXNnKQog
+ewotICAgIFJlZENoYXJEZXZpY2UgKmRldiA9IGRldl9jbGllbnQtPmRldjsKLQogICAgIGlmIChn
+X3F1ZXVlX2dldF9sZW5ndGgoZGV2X2NsaWVudC0+c2VuZF9xdWV1ZSkgPj0gZGV2X2NsaWVudC0+
+bWF4X3NlbmRfcXVldWVfc2l6ZSkgewogICAgICAgICByZWRfY2hhcl9kZXZpY2VfaGFuZGxlX2Ns
+aWVudF9vdmVyZmxvdyhkZXZfY2xpZW50KTsKICAgICAgICAgcmV0dXJuOwpAQCAtMjgzLDggKzI4
+MSw4IEBAIHN0YXRpYyB2b2lkIHJlZF9jaGFyX2RldmljZV9hZGRfbXNnX3RvX2NsaWVudF9xdWV1
+ZShSZWRDaGFyRGV2aWNlQ2xpZW50ICpkZXZfY2xpCiAgICAgcmVkX3BpcGVfaXRlbV9yZWYobXNn
+KTsKICAgICBnX3F1ZXVlX3B1c2hfaGVhZChkZXZfY2xpZW50LT5zZW5kX3F1ZXVlLCBtc2cpOwog
+ICAgIGlmICghZGV2X2NsaWVudC0+d2FpdF9mb3JfdG9rZW5zX3N0YXJ0ZWQpIHsKLSAgICAgICAg
+cmVkc19jb3JlX3RpbWVyX3N0YXJ0KGRldi0+cHJpdi0+cmVkcywgZGV2X2NsaWVudC0+d2FpdF9m
+b3JfdG9rZW5zX3RpbWVyLAotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUkVEX0NIQVJf
+REVWSUNFX1dBSVRfVE9LRU5TX1RJTUVPVVQpOworICAgICAgICByZWRfdGltZXJfc3RhcnQoZGV2
+X2NsaWVudC0+d2FpdF9mb3JfdG9rZW5zX3RpbWVyLAorICAgICAgICAgICAgICAgICAgICAgICAg
+UkVEX0NIQVJfREVWSUNFX1dBSVRfVE9LRU5TX1RJTUVPVVQpOwogICAgICAgICBkZXZfY2xpZW50
+LT53YWl0X2Zvcl90b2tlbnNfc3RhcnRlZCA9IFRSVUU7CiAgICAgfQogfQpAQCAtMzk2LDEyICsz
+OTQsMTIgQEAgcmVkX2NoYXJfZGV2aWNlX3NlbmRfdG9fY2xpZW50X3Rva2Vuc19hYnNvcmIoUmVk
+Q2hhckRldmljZSAqZGV2LAogICAgIH0KIAogICAgIGlmIChyZWRfY2hhcl9kZXZpY2VfY2FuX3Nl
+bmRfdG9fY2xpZW50KGRldl9jbGllbnQpKSB7Ci0gICAgICAgIHJlZHNfY29yZV90aW1lcl9jYW5j
+ZWwoZGV2LT5wcml2LT5yZWRzLCBkZXZfY2xpZW50LT53YWl0X2Zvcl90b2tlbnNfdGltZXIpOwor
+ICAgICAgICByZWRfdGltZXJfY2FuY2VsKGRldl9jbGllbnQtPndhaXRfZm9yX3Rva2Vuc190aW1l
+cik7CiAgICAgICAgIGRldl9jbGllbnQtPndhaXRfZm9yX3Rva2Vuc19zdGFydGVkID0gRkFMU0U7
+CiAgICAgICAgIHJlZF9jaGFyX2RldmljZV9yZWFkX2Zyb21fZGV2aWNlKGRldl9jbGllbnQtPmRl
+dik7CiAgICAgfSBlbHNlIGlmICghZ19xdWV1ZV9pc19lbXB0eShkZXZfY2xpZW50LT5zZW5kX3F1
+ZXVlKSkgewotICAgICAgICByZWRzX2NvcmVfdGltZXJfc3RhcnQoZGV2LT5wcml2LT5yZWRzLCBk
+ZXZfY2xpZW50LT53YWl0X2Zvcl90b2tlbnNfdGltZXIsCi0gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBSRURfQ0hBUl9ERVZJQ0VfV0FJVF9UT0tFTlNfVElNRU9VVCk7CisgICAgICAgIHJl
+ZF90aW1lcl9zdGFydChkZXZfY2xpZW50LT53YWl0X2Zvcl90b2tlbnNfdGltZXIsCisgICAgICAg
+ICAgICAgICAgICAgICAgICBSRURfQ0hBUl9ERVZJQ0VfV0FJVF9UT0tFTlNfVElNRU9VVCk7CiAg
+ICAgICAgIGRldl9jbGllbnQtPndhaXRfZm9yX3Rva2Vuc19zdGFydGVkID0gVFJVRTsKICAgICB9
+CiB9CkBAIC00NjIsNyArNDYwLDcgQEAgc3RhdGljIGludCByZWRfY2hhcl9kZXZpY2Vfd3JpdGVf
+dG9fZGV2aWNlKFJlZENoYXJEZXZpY2UgKmRldikKICAgICBnX29iamVjdF9yZWYoZGV2KTsKIAog
+ICAgIGlmIChkZXYtPnByaXYtPndyaXRlX3RvX2Rldl90aW1lcikgewotICAgICAgICByZWRzX2Nv
+cmVfdGltZXJfY2FuY2VsKGRldi0+cHJpdi0+cmVkcywgZGV2LT5wcml2LT53cml0ZV90b19kZXZf
+dGltZXIpOworICAgICAgICByZWRfdGltZXJfY2FuY2VsKGRldi0+cHJpdi0+d3JpdGVfdG9fZGV2
+X3RpbWVyKTsKICAgICB9CiAKICAgICBzaWYgPSBzcGljZV9jaGFyX2RldmljZV9nZXRfaW50ZXJm
+YWNlKGRldi0+cHJpdi0+c2luKTsKQEAgLTQ5OSw4ICs0OTcsOCBAQCBzdGF0aWMgaW50IHJlZF9j
+aGFyX2RldmljZV93cml0ZV90b19kZXZpY2UoUmVkQ2hhckRldmljZSAqZGV2KQogICAgIGlmIChk
+ZXYtPnByaXYtPnJ1bm5pbmcpIHsKICAgICAgICAgaWYgKGRldi0+cHJpdi0+Y3VyX3dyaXRlX2J1
+ZikgewogICAgICAgICAgICAgaWYgKGRldi0+cHJpdi0+d3JpdGVfdG9fZGV2X3RpbWVyKSB7Ci0g
+ICAgICAgICAgICAgICAgcmVkc19jb3JlX3RpbWVyX3N0YXJ0KGRldi0+cHJpdi0+cmVkcywgZGV2
+LT5wcml2LT53cml0ZV90b19kZXZfdGltZXIsCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIENIQVJfREVWSUNFX1dSSVRFX1RPX1RJTUVPVVQpOworICAgICAgICAgICAgICAg
+IHJlZF90aW1lcl9zdGFydChkZXYtPnByaXYtPndyaXRlX3RvX2Rldl90aW1lciwKKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgQ0hBUl9ERVZJQ0VfV1JJVEVfVE9fVElNRU9VVCk7CiAg
+ICAgICAgICAgICB9CiAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICBzcGljZV9hc3NlcnQo
+Z19xdWV1ZV9pc19lbXB0eSgmZGV2LT5wcml2LT53cml0ZV9xdWV1ZSkpOwpAQCAtNTE3LDcgKzUx
+NSw3IEBAIHN0YXRpYyB2b2lkIHJlZF9jaGFyX2RldmljZV93cml0ZV9yZXRyeSh2b2lkICpvcGFx
+dWUpCiAgICAgUmVkQ2hhckRldmljZSAqZGV2ID0gb3BhcXVlOwogCiAgICAgaWYgKGRldi0+cHJp
+di0+d3JpdGVfdG9fZGV2X3RpbWVyKSB7Ci0gICAgICAgIHJlZHNfY29yZV90aW1lcl9jYW5jZWwo
+ZGV2LT5wcml2LT5yZWRzLCBkZXYtPnByaXYtPndyaXRlX3RvX2Rldl90aW1lcik7CisgICAgICAg
+IHJlZF90aW1lcl9jYW5jZWwoZGV2LT5wcml2LT53cml0ZV90b19kZXZfdGltZXIpOwogICAgIH0K
+ICAgICByZWRfY2hhcl9kZXZpY2Vfd3JpdGVfdG9fZGV2aWNlKGRldik7CiB9CkBAIC04MDcsNyAr
+ODA1LDcgQEAgdm9pZCByZWRfY2hhcl9kZXZpY2Vfc3RvcChSZWRDaGFyRGV2aWNlICpkZXYpCiAg
+ICAgZGV2LT5wcml2LT5ydW5uaW5nID0gRkFMU0U7CiAgICAgZGV2LT5wcml2LT5hY3RpdmUgPSBG
+QUxTRTsKICAgICBpZiAoZGV2LT5wcml2LT53cml0ZV90b19kZXZfdGltZXIpIHsKLSAgICAgICAg
+cmVkc19jb3JlX3RpbWVyX2NhbmNlbChkZXYtPnByaXYtPnJlZHMsIGRldi0+cHJpdi0+d3JpdGVf
+dG9fZGV2X3RpbWVyKTsKKyAgICAgICAgcmVkX3RpbWVyX2NhbmNlbChkZXYtPnByaXYtPndyaXRl
+X3RvX2Rldl90aW1lcik7CiAgICAgfQogfQogCkBAIC05OTIsNyArOTkwLDcgQEAgc3RhdGljIHZv
+aWQgcmVkX2NoYXJfZGV2aWNlX2luaXRfZGV2aWNlX2luc3RhbmNlKFJlZENoYXJEZXZpY2UgKnNl
+bGYpCiAKICAgICBnX3JldHVybl9pZl9mYWlsKHNlbGYtPnByaXYtPnJlZHMpOwogCi0gICAgcmVk
+c19jb3JlX3RpbWVyX3JlbW92ZShzZWxmLT5wcml2LT5yZWRzLCBzZWxmLT5wcml2LT53cml0ZV90
+b19kZXZfdGltZXIpOworICAgIHJlZF90aW1lcl9yZW1vdmUoc2VsZi0+cHJpdi0+d3JpdGVfdG9f
+ZGV2X3RpbWVyKTsKICAgICBzZWxmLT5wcml2LT53cml0ZV90b19kZXZfdGltZXIgPSBOVUxMOwog
+CiAgICAgaWYgKHNlbGYtPnByaXYtPnNpbiA9PSBOVUxMKSB7CkBAIC0xMDgyLDcgKzEwODAsNyBA
+QCByZWRfY2hhcl9kZXZpY2VfZmluYWxpemUoR09iamVjdCAqb2JqZWN0KQogewogICAgIFJlZENo
+YXJEZXZpY2UgKnNlbGYgPSBSRURfQ0hBUl9ERVZJQ0Uob2JqZWN0KTsKIAotICAgIHJlZHNfY29y
+ZV90aW1lcl9yZW1vdmUoc2VsZi0+cHJpdi0+cmVkcywgc2VsZi0+cHJpdi0+d3JpdGVfdG9fZGV2
+X3RpbWVyKTsKKyAgICByZWRfdGltZXJfcmVtb3ZlKHNlbGYtPnByaXYtPndyaXRlX3RvX2Rldl90
+aW1lcik7CiAgICAgc2VsZi0+cHJpdi0+d3JpdGVfdG9fZGV2X3RpbWVyID0gTlVMTDsKIAogICAg
+IHdyaXRlX2J1ZmZlcnNfcXVldWVfZnJlZSgmc2VsZi0+cHJpdi0+d3JpdGVfcXVldWUpOwpkaWZm
+IC0tZ2l0IGEvc2VydmVyL2V2ZW50LWxvb3AuYyBiL3NlcnZlci9ldmVudC1sb29wLmMKaW5kZXgg
+MWNjZmQ2NzFmLi42ZDJkZTk1ZjIgMTAwNjQ0Ci0tLSBhL3NlcnZlci9ldmVudC1sb29wLmMKKysr
+IGIvc2VydmVyL2V2ZW50LWxvb3AuYwpAQCAtMjUsMjggKzI1LDgzIEBACiAKICNpbmNsdWRlICJy
+ZWQtY29tbW9uLmgiCiAKK3R5cGVkZWYgc3RydWN0IFNwaWNlQ29yZUZ1bmNzIHsKKyAgICB2b2lk
+ICgqdGltZXJfc3RhcnQpKFNwaWNlVGltZXIgKnRpbWVyLCB1aW50MzJfdCBtcyk7CisgICAgdm9p
+ZCAoKnRpbWVyX2NhbmNlbCkoU3BpY2VUaW1lciAqdGltZXIpOworICAgIHZvaWQgKCp0aW1lcl9y
+ZW1vdmUpKFNwaWNlVGltZXIgKnRpbWVyKTsKKyAgICB2b2lkICgqd2F0Y2hfdXBkYXRlX21hc2sp
+KFNwaWNlV2F0Y2ggKndhdGNoLCBpbnQgZXZlbnRfbWFzayk7CisgICAgdm9pZCAoKndhdGNoX3Jl
+bW92ZSkoU3BpY2VXYXRjaCAqd2F0Y2gpOworfSBTcGljZUNvcmVGdW5jczsKKwogc3RydWN0IFNw
+aWNlVGltZXIgeworICAgIGNvbnN0IFNwaWNlQ29yZUZ1bmNzICpmdW5jczsKK307CisKK3N0cnVj
+dCBTcGljZVdhdGNoIHsKKyAgICBjb25zdCBTcGljZUNvcmVGdW5jcyAqZnVuY3M7Cit9OworCit2
+b2lkIHJlZF90aW1lcl9zdGFydChTcGljZVRpbWVyICp0aW1lciwgdWludDMyX3QgbXMpCit7Cisg
+ICAgaWYgKHRpbWVyKSB7CisgICAgICAgIHRpbWVyLT5mdW5jcy0+dGltZXJfc3RhcnQodGltZXIs
+IG1zKTsKKyAgICB9Cit9CisKK3ZvaWQgcmVkX3RpbWVyX2NhbmNlbChTcGljZVRpbWVyICp0aW1l
+cikKK3sKKyAgICBpZiAodGltZXIpIHsKKyAgICAgICAgdGltZXItPmZ1bmNzLT50aW1lcl9jYW5j
+ZWwodGltZXIpOworICAgIH0KK30KKwordm9pZCByZWRfdGltZXJfcmVtb3ZlKFNwaWNlVGltZXIg
+KnRpbWVyKQoreworICAgIGlmICh0aW1lcikgeworICAgICAgICB0aW1lci0+ZnVuY3MtPnRpbWVy
+X3JlbW92ZSh0aW1lcik7CisgICAgfQorfQorCit2b2lkIHJlZF93YXRjaF91cGRhdGVfbWFzayhT
+cGljZVdhdGNoICp3YXRjaCwgaW50IGV2ZW50X21hc2spCit7CisgICAgaWYgKHdhdGNoKSB7Cisg
+ICAgICAgIHdhdGNoLT5mdW5jcy0+d2F0Y2hfdXBkYXRlX21hc2sod2F0Y2gsIGV2ZW50X21hc2sp
+OworICAgIH0KK30KKwordm9pZCByZWRfd2F0Y2hfcmVtb3ZlKFNwaWNlV2F0Y2ggKndhdGNoKQor
+eworICAgIGlmICh3YXRjaCkgeworICAgICAgICB3YXRjaC0+ZnVuY3MtPndhdGNoX3JlbW92ZSh3
+YXRjaCk7CisgICAgfQorfQorCitzdGF0aWMgY29uc3QgU3BpY2VDb3JlRnVuY3MgZ2xpYl9jb3Jl
+X2Z1bmNzOworCit0eXBlZGVmIHN0cnVjdCBTcGljZVRpbWVyR2xpYiB7CisgICAgU3BpY2VUaW1l
+ciBiYXNlOwogICAgIEdNYWluQ29udGV4dCAqY29udGV4dDsKICAgICBTcGljZVRpbWVyRnVuYyBm
+dW5jOwogICAgIHZvaWQgKm9wYXF1ZTsKICAgICBHU291cmNlICpzb3VyY2U7Ci19OworfSBTcGlj
+ZVRpbWVyR2xpYjsKIAogc3RhdGljIFNwaWNlVGltZXIqIHRpbWVyX2FkZChjb25zdCBTcGljZUNv
+cmVJbnRlcmZhY2VJbnRlcm5hbCAqaWZhY2UsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IFNwaWNlVGltZXJGdW5jIGZ1bmMsIHZvaWQgKm9wYXF1ZSkKIHsKLSAgICBTcGljZVRpbWVyICp0
+aW1lciA9IGdfbmV3MChTcGljZVRpbWVyLCAxKTsKKyAgICBTcGljZVRpbWVyR2xpYiAqdGltZXIg
+PSBnX25ldzAoU3BpY2VUaW1lckdsaWIsIDEpOwogCisgICAgdGltZXItPmJhc2UuZnVuY3MgPSAm
+Z2xpYl9jb3JlX2Z1bmNzOwogICAgIHRpbWVyLT5jb250ZXh0ID0gaWZhY2UtPm1haW5fY29udGV4
+dDsKICAgICB0aW1lci0+ZnVuYyA9IGZ1bmM7CiAgICAgdGltZXItPm9wYXF1ZSA9IG9wYXF1ZTsK
+IAotICAgIHJldHVybiB0aW1lcjsKKyAgICByZXR1cm4gJnRpbWVyLT5iYXNlOwogfQogCiBzdGF0
+aWMgZ2Jvb2xlYW4gdGltZXJfZnVuYyhncG9pbnRlciB1c2VyX2RhdGEpCiB7Ci0gICAgU3BpY2VU
+aW1lciAqdGltZXIgPSB1c2VyX2RhdGE7CisgICAgU3BpY2VUaW1lckdsaWIgKnRpbWVyID0gKFNw
+aWNlVGltZXJHbGliKikgdXNlcl9kYXRhOwogCiAgICAgdGltZXItPmZ1bmModGltZXItPm9wYXF1
+ZSk7CiAgICAgLyogdGltZXIgbWlnaHQgYmUgZnJlZSBhZnRlciBmdW5jKCksIGRvbid0IHRvdWNo
+ICovCkBAIC01NCw5ICsxMDksOSBAQCBzdGF0aWMgZ2Jvb2xlYW4gdGltZXJfZnVuYyhncG9pbnRl
+ciB1c2VyX2RhdGEpCiAgICAgcmV0dXJuIEZBTFNFOwogfQogCi1zdGF0aWMgdm9pZCB0aW1lcl9j
+YW5jZWwoY29uc3QgU3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJuYWwgKmlmYWNlLAotICAgICAgICAg
+ICAgICAgICAgICAgICAgIFNwaWNlVGltZXIgKnRpbWVyKQorc3RhdGljIHZvaWQgdGltZXJfY2Fu
+Y2VsKFNwaWNlVGltZXIgKnRpbWVyX2Jhc2UpCiB7CisgICAgU3BpY2VUaW1lckdsaWIgKnRpbWVy
+ID0gU1BJQ0VfVVBDQVNUKFNwaWNlVGltZXJHbGliLCB0aW1lcl9iYXNlKTsKICAgICBpZiAodGlt
+ZXItPnNvdXJjZSkgewogICAgICAgICBnX3NvdXJjZV9kZXN0cm95KHRpbWVyLT5zb3VyY2UpOwog
+ICAgICAgICBnX3NvdXJjZV91bnJlZih0aW1lci0+c291cmNlKTsKQEAgLTY0LDEwICsxMTksMTEg
+QEAgc3RhdGljIHZvaWQgdGltZXJfY2FuY2VsKGNvbnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVy
+bmFsICppZmFjZSwKICAgICB9CiB9CiAKLXN0YXRpYyB2b2lkIHRpbWVyX3N0YXJ0KGNvbnN0IFNw
+aWNlQ29yZUludGVyZmFjZUludGVybmFsICppZmFjZSwKLSAgICAgICAgICAgICAgICAgICAgICAg
+IFNwaWNlVGltZXIgKnRpbWVyLCB1aW50MzJfdCBtcykKK3N0YXRpYyB2b2lkIHRpbWVyX3N0YXJ0
+KFNwaWNlVGltZXIgKnRpbWVyX2Jhc2UsIHVpbnQzMl90IG1zKQogewotICAgIHRpbWVyX2NhbmNl
+bChpZmFjZSwgdGltZXIpOworICAgIHRpbWVyX2NhbmNlbCh0aW1lcl9iYXNlKTsKKworICAgIFNw
+aWNlVGltZXJHbGliICp0aW1lciA9IFNQSUNFX1VQQ0FTVChTcGljZVRpbWVyR2xpYiwgdGltZXJf
+YmFzZSk7CiAKICAgICB0aW1lci0+c291cmNlID0gZ190aW1lb3V0X3NvdXJjZV9uZXcobXMpOwog
+ICAgIHNwaWNlX2Fzc2VydCh0aW1lci0+c291cmNlICE9IE5VTEwpOwpAQCAtNzcsMTAgKzEzMywx
+MSBAQCBzdGF0aWMgdm9pZCB0aW1lcl9zdGFydChjb25zdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRl
+cm5hbCAqaWZhY2UsCiAgICAgZ19zb3VyY2VfYXR0YWNoKHRpbWVyLT5zb3VyY2UsIHRpbWVyLT5j
+b250ZXh0KTsKIH0KIAotc3RhdGljIHZvaWQgdGltZXJfcmVtb3ZlKGNvbnN0IFNwaWNlQ29yZUlu
+dGVyZmFjZUludGVybmFsICppZmFjZSwKLSAgICAgICAgICAgICAgICAgICAgICAgICBTcGljZVRp
+bWVyICp0aW1lcikKK3N0YXRpYyB2b2lkIHRpbWVyX3JlbW92ZShTcGljZVRpbWVyICp0aW1lcl9i
+YXNlKQogewotICAgIHRpbWVyX2NhbmNlbChpZmFjZSwgdGltZXIpOworICAgIHRpbWVyX2NhbmNl
+bCh0aW1lcl9iYXNlKTsKKworICAgIFNwaWNlVGltZXJHbGliICp0aW1lciA9IFNQSUNFX1VQQ0FT
+VChTcGljZVRpbWVyR2xpYiwgdGltZXJfYmFzZSk7CiAgICAgc3BpY2VfYXNzZXJ0KHRpbWVyLT5z
+b3VyY2UgPT0gTlVMTCk7CiAgICAgZ19mcmVlKHRpbWVyKTsKIH0KQEAgLTExMCwxOCArMTY3LDE5
+IEBAIHN0YXRpYyBpbnQgZ2lvY29uZGl0aW9uX3RvX3NwaWNlX2V2ZW50KEdJT0NvbmRpdGlvbiBj
+b25kaXRpb24pCiB9CiAKICNpZmRlZiBfV0lOMzIKLXN0cnVjdCBTcGljZVdhdGNoIHsKK3R5cGVk
+ZWYgc3RydWN0IFNwaWNlV2F0Y2hHbGliIHsKKyAgICBTcGljZVdhdGNoIGJhc2U7CiAgICAgR01h
+aW5Db250ZXh0ICpjb250ZXh0OwogICAgIHZvaWQgKm9wYXF1ZTsKICAgICBHU291cmNlICpzb3Vy
+Y2U7CiAgICAgR0lPQ2hhbm5lbCAqY2hhbm5lbDsKICAgICBTcGljZVdhdGNoRnVuYyBmdW5jOwot
+fTsKK30gU3BpY2VXYXRjaEdsaWI7CiAKIHN0YXRpYyBnYm9vbGVhbiB3YXRjaF9mdW5jKEdJT0No
+YW5uZWwgKnNvdXJjZSwgR0lPQ29uZGl0aW9uIGNvbmRpdGlvbiwKICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGdwb2ludGVyIGRhdGEpCiB7Ci0gICAgU3BpY2VXYXRjaCAqd2F0Y2ggPSBkYXRh
+OworICAgIFNwaWNlV2F0Y2hHbGliICp3YXRjaCA9IChTcGljZVdhdGNoR2xpYiopIGRhdGE7CiAg
+ICAgLy8gdGhpcyB3b3JrcyBhbHNvIHVuZGVyIFdpbmRvd3MgZGVzcGl0ZSB0aGUgbmFtZQogICAg
+IGludCBmZCA9IGdfaW9fY2hhbm5lbF91bml4X2dldF9mZChzb3VyY2UpOwogCkBAIC0xMzAsOSAr
+MTg4LDkgQEAgc3RhdGljIGdib29sZWFuIHdhdGNoX2Z1bmMoR0lPQ2hhbm5lbCAqc291cmNlLCBH
+SU9Db25kaXRpb24gY29uZGl0aW9uLAogICAgIHJldHVybiBUUlVFOwogfQogCi1zdGF0aWMgdm9p
+ZCB3YXRjaF91cGRhdGVfbWFzayhjb25zdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqaWZh
+Y2UsCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTcGljZVdhdGNoICp3YXRjaCwgaW50
+IGV2ZW50X21hc2spCitzdGF0aWMgdm9pZCB3YXRjaF91cGRhdGVfbWFzayhTcGljZVdhdGNoICp3
+YXRjaF9iYXNlLCBpbnQgZXZlbnRfbWFzaykKIHsKKyAgICBTcGljZVdhdGNoR2xpYiAqd2F0Y2gg
+PSBTUElDRV9VUENBU1QoU3BpY2VXYXRjaEdsaWIsIHdhdGNoX2Jhc2UpOwogICAgIGlmICh3YXRj
+aC0+c291cmNlKSB7CiAgICAgICAgIGdfc291cmNlX2Rlc3Ryb3kod2F0Y2gtPnNvdXJjZSk7CiAg
+ICAgICAgIGdfc291cmNlX3VucmVmKHdhdGNoLT5zb3VyY2UpOwpAQCAtMTU1LDI2ICsyMTMsMjcg
+QEAgc3RhdGljIHZvaWQgd2F0Y2hfdXBkYXRlX21hc2soY29uc3QgU3BpY2VDb3JlSW50ZXJmYWNl
+SW50ZXJuYWwgKmlmYWNlLAogc3RhdGljIFNwaWNlV2F0Y2ggKndhdGNoX2FkZChjb25zdCBTcGlj
+ZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqaWZhY2UsCiAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGludCBmZCwgaW50IGV2ZW50X21hc2ssIFNwaWNlV2F0Y2hGdW5jIGZ1bmMsIHZvaWQgKm9w
+YXF1ZSkKIHsKLSAgICBTcGljZVdhdGNoICp3YXRjaDsKKyAgICBTcGljZVdhdGNoR2xpYiAqd2F0
+Y2g7CiAKICAgICBzcGljZV9yZXR1cm5fdmFsX2lmX2ZhaWwoZmQgIT0gLTEsIE5VTEwpOwogICAg
+IHNwaWNlX3JldHVybl92YWxfaWZfZmFpbChmdW5jICE9IE5VTEwsIE5VTEwpOwogCi0gICAgd2F0
+Y2ggPSBnX25ldzAoU3BpY2VXYXRjaCwgMSk7CisgICAgd2F0Y2ggPSBnX25ldzAoU3BpY2VXYXRj
+aEdsaWIsIDEpOworICAgIHdhdGNoLT5iYXNlLmZ1bmNzID0gJmdsaWJfY29yZV9mdW5jczsKICAg
+ICB3YXRjaC0+Y29udGV4dCA9IGlmYWNlLT5tYWluX2NvbnRleHQ7CiAgICAgd2F0Y2gtPmNoYW5u
+ZWwgPSBnX2lvX2NoYW5uZWxfd2luMzJfbmV3X3NvY2tldChmZCk7CiAgICAgd2F0Y2gtPmZ1bmMg
+PSBmdW5jOwogICAgIHdhdGNoLT5vcGFxdWUgPSBvcGFxdWU7CiAKLSAgICB3YXRjaF91cGRhdGVf
+bWFzayhpZmFjZSwgd2F0Y2gsIGV2ZW50X21hc2spOworICAgIHdhdGNoX3VwZGF0ZV9tYXNrKCZ3
+YXRjaC0+YmFzZSwgZXZlbnRfbWFzayk7CiAKLSAgICByZXR1cm4gd2F0Y2g7CisgICAgcmV0dXJu
+ICZ3YXRjaC0+YmFzZTsKIH0KIAotc3RhdGljIHZvaWQgd2F0Y2hfcmVtb3ZlKGNvbnN0IFNwaWNl
+Q29yZUludGVyZmFjZUludGVybmFsICppZmFjZSwKLSAgICAgICAgICAgICAgICAgICAgICAgICBT
+cGljZVdhdGNoICp3YXRjaCkKK3N0YXRpYyB2b2lkIHdhdGNoX3JlbW92ZShTcGljZVdhdGNoICp3
+YXRjaF9iYXNlKQogewotICAgIHdhdGNoX3VwZGF0ZV9tYXNrKGlmYWNlLCB3YXRjaCwgMCk7Cisg
+ICAgU3BpY2VXYXRjaEdsaWIgKndhdGNoID0gU1BJQ0VfVVBDQVNUKFNwaWNlV2F0Y2hHbGliLCB3
+YXRjaF9iYXNlKTsKKyAgICB3YXRjaF91cGRhdGVfbWFzayh3YXRjaF9iYXNlLCAwKTsKICAgICBz
+cGljZV9hc3NlcnQod2F0Y2gtPnNvdXJjZSA9PSBOVUxMKTsKIAogICAgIGdfaW9fY2hhbm5lbF91
+bnJlZih3YXRjaC0+Y2hhbm5lbCk7CkBAIC0xODMsMTYgKzI0MiwxNyBAQCBzdGF0aWMgdm9pZCB3
+YXRjaF9yZW1vdmUoY29uc3QgU3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJuYWwgKmlmYWNlLAogCiAj
+ZWxzZQogCi1zdHJ1Y3QgU3BpY2VXYXRjaCB7Cit0eXBlZGVmIHN0cnVjdCBTcGljZVdhdGNoR2xp
+YiB7CiAgICAgR1NvdXJjZSBzb3VyY2U7CisgICAgU3BpY2VXYXRjaCBzcGljZV9iYXNlOwogICAg
+IGdwb2ludGVyIHVuaXhfZmQ7CiAgICAgaW50IGZkOwotfTsKK30gU3BpY2VXYXRjaEdsaWI7CiAK
+IHN0YXRpYyBnYm9vbGVhbgogc3BpY2Vfd2F0Y2hfY2hlY2soR1NvdXJjZSAqc291cmNlKQogewot
+ICAgIFNwaWNlV2F0Y2ggKndhdGNoID0gU1BJQ0VfQ09OVEFJTkVST0Yoc291cmNlLCBTcGljZVdh
+dGNoLCBzb3VyY2UpOworICAgIFNwaWNlV2F0Y2hHbGliICp3YXRjaCA9IFNQSUNFX0NPTlRBSU5F
+Uk9GKHNvdXJjZSwgU3BpY2VXYXRjaEdsaWIsIHNvdXJjZSk7CiAKICAgICByZXR1cm4gZ19zb3Vy
+Y2VfcXVlcnlfdW5peF9mZCgmd2F0Y2gtPnNvdXJjZSwgd2F0Y2gtPnVuaXhfZmQpICE9IDA7CiB9
+CkBAIC0yMDIsNyArMjYyLDcgQEAgc3BpY2Vfd2F0Y2hfZGlzcGF0Y2goR1NvdXJjZSAgICAgKnNv
+dXJjZSwKICAgICAgICAgICAgICAgICAgICAgIEdTb3VyY2VGdW5jICBjYWxsYmFjaywKICAgICAg
+ICAgICAgICAgICAgICAgIGdwb2ludGVyICAgICB1c2VyX2RhdGEpCiB7Ci0gICAgU3BpY2VXYXRj
+aCAqd2F0Y2ggPSBTUElDRV9DT05UQUlORVJPRihzb3VyY2UsIFNwaWNlV2F0Y2gsIHNvdXJjZSk7
+CisgICAgU3BpY2VXYXRjaEdsaWIgKndhdGNoID0gU1BJQ0VfQ09OVEFJTkVST0Yoc291cmNlLCBT
+cGljZVdhdGNoR2xpYiwgc291cmNlKTsKICAgICBTcGljZVdhdGNoRnVuYyBmdW5jID0gKFNwaWNl
+V2F0Y2hGdW5jKSh2b2lkKikgY2FsbGJhY2s7CiAgICAgR0lPQ29uZGl0aW9uIGNvbmRpdGlvbiA9
+IGdfc291cmNlX3F1ZXJ5X3VuaXhfZmQoJndhdGNoLT5zb3VyY2UsIHdhdGNoLT51bml4X2ZkKTsK
+IApAQCAtMjE3LDkgKzI3Nyw5IEBAIHN0YXRpYyBHU291cmNlRnVuY3Mgc3BpY2Vfd2F0Y2hfZnVu
+Y3MgPSB7CiAgICAgLmRpc3BhdGNoID0gc3BpY2Vfd2F0Y2hfZGlzcGF0Y2gsCiB9OwogCi1zdGF0
+aWMgdm9pZCB3YXRjaF91cGRhdGVfbWFzayhjb25zdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5h
+bCAqaWZhY2UsCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTcGljZVdhdGNoICp3YXRj
+aCwgaW50IGV2ZW50X21hc2spCitzdGF0aWMgdm9pZCB3YXRjaF91cGRhdGVfbWFzayhTcGljZVdh
+dGNoICp3YXRjaF9iYXNlLCBpbnQgZXZlbnRfbWFzaykKIHsKKyAgICBTcGljZVdhdGNoR2xpYiAq
+d2F0Y2ggPSBTUElDRV9DT05UQUlORVJPRih3YXRjaF9iYXNlLCBTcGljZVdhdGNoR2xpYiwgc3Bp
+Y2VfYmFzZSk7CiAgICAgR0lPQ29uZGl0aW9uIGNvbmRpdGlvbiA9IHNwaWNlX2V2ZW50X3RvX2dp
+b2NvbmRpdGlvbihldmVudF9tYXNrKTsKIAogICAgIGdfc291cmNlX21vZGlmeV91bml4X2ZkKCZ3
+YXRjaC0+c291cmNlLCB3YXRjaC0+dW5peF9mZCwgY29uZGl0aW9uKTsKQEAgLTIyOCwxMSArMjg4
+LDE0IEBAIHN0YXRpYyB2b2lkIHdhdGNoX3VwZGF0ZV9tYXNrKGNvbnN0IFNwaWNlQ29yZUludGVy
+ZmFjZUludGVybmFsICppZmFjZSwKIHN0YXRpYyBTcGljZVdhdGNoICp3YXRjaF9hZGQoY29uc3Qg
+U3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJuYWwgKmlmYWNlLAogICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBpbnQgZmQsIGludCBldmVudF9tYXNrLCBTcGljZVdhdGNoRnVuYyBmdW5jLCB2b2lk
+ICpvcGFxdWUpCiB7Ci0gICAgU3BpY2VXYXRjaCAqd2F0Y2ggPSAoU3BpY2VXYXRjaCAqKSBnX3Nv
+dXJjZV9uZXcoJnNwaWNlX3dhdGNoX2Z1bmNzLCBzaXplb2YoU3BpY2VXYXRjaCkpOworICAgIFNQ
+SUNFX1ZFUklGWShTUElDRV9PRkZTRVRPRihTcGljZVdhdGNoR2xpYiwgc291cmNlKSA9PSAwKTsK
+KyAgICBTcGljZVdhdGNoR2xpYiAqd2F0Y2ggPQorICAgICAgICAoU3BpY2VXYXRjaEdsaWIgKikg
+Z19zb3VyY2VfbmV3KCZzcGljZV93YXRjaF9mdW5jcywgc2l6ZW9mKFNwaWNlV2F0Y2hHbGliKSk7
+CiAKICAgICBzcGljZV9yZXR1cm5fdmFsX2lmX2ZhaWwoZmQgIT0gLTEsIE5VTEwpOwogICAgIHNw
+aWNlX3JldHVybl92YWxfaWZfZmFpbChmdW5jICE9IE5VTEwsIE5VTEwpOwogCisgICAgd2F0Y2gt
+PnNwaWNlX2Jhc2UuZnVuY3MgPSAmZ2xpYl9jb3JlX2Z1bmNzOwogICAgIHdhdGNoLT5mZCA9IGZk
+OwogCiAgICAgZ19zb3VyY2Vfc2V0X2NhbGxiYWNrKCZ3YXRjaC0+c291cmNlLCAoR1NvdXJjZUZ1
+bmMpKHZvaWQqKShTcGljZVdhdGNoRnVuYykgZnVuYywgb3BhcXVlLCBOVUxMKTsKQEAgLTI0Miw2
+OCArMzA1LDEwMyBAQCBzdGF0aWMgU3BpY2VXYXRjaCAqd2F0Y2hfYWRkKGNvbnN0IFNwaWNlQ29y
+ZUludGVyZmFjZUludGVybmFsICppZmFjZSwKICAgICBHSU9Db25kaXRpb24gY29uZGl0aW9uID0g
+c3BpY2VfZXZlbnRfdG9fZ2lvY29uZGl0aW9uKGV2ZW50X21hc2spOwogICAgIHdhdGNoLT51bml4
+X2ZkID0gZ19zb3VyY2VfYWRkX3VuaXhfZmQoJndhdGNoLT5zb3VyY2UsIHdhdGNoLT5mZCwgY29u
+ZGl0aW9uKTsKIAotICAgIHJldHVybiB3YXRjaDsKKyAgICByZXR1cm4gJndhdGNoLT5zcGljZV9i
+YXNlOwogfQogCi1zdGF0aWMgdm9pZCB3YXRjaF9yZW1vdmUoY29uc3QgU3BpY2VDb3JlSW50ZXJm
+YWNlSW50ZXJuYWwgKmlmYWNlLAotICAgICAgICAgICAgICAgICAgICAgICAgIFNwaWNlV2F0Y2gg
+KndhdGNoKQorc3RhdGljIHZvaWQgd2F0Y2hfcmVtb3ZlKFNwaWNlV2F0Y2ggKndhdGNoX2Jhc2Up
+CiB7CisgICAgU3BpY2VXYXRjaEdsaWIgKndhdGNoID0gU1BJQ0VfQ09OVEFJTkVST0Yod2F0Y2hf
+YmFzZSwgU3BpY2VXYXRjaEdsaWIsIHNwaWNlX2Jhc2UpOworCiAgICAgZ19zb3VyY2VfcmVtb3Zl
+X3VuaXhfZmQoJndhdGNoLT5zb3VyY2UsIHdhdGNoLT51bml4X2ZkKTsKICAgICBnX3NvdXJjZV9k
+ZXN0cm95KCZ3YXRjaC0+c291cmNlKTsKICAgICBnX3NvdXJjZV91bnJlZigmd2F0Y2gtPnNvdXJj
+ZSk7CiB9CiAjZW5kaWYKIAotY29uc3QgU3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJuYWwgZXZlbnRf
+bG9vcF9jb3JlID0gewotICAgIC50aW1lcl9hZGQgPSB0aW1lcl9hZGQsCitzdGF0aWMgY29uc3Qg
+U3BpY2VDb3JlRnVuY3MgZ2xpYl9jb3JlX2Z1bmNzID0gewogICAgIC50aW1lcl9zdGFydCA9IHRp
+bWVyX3N0YXJ0LAogICAgIC50aW1lcl9jYW5jZWwgPSB0aW1lcl9jYW5jZWwsCiAgICAgLnRpbWVy
+X3JlbW92ZSA9IHRpbWVyX3JlbW92ZSwKIAotICAgIC53YXRjaF9hZGQgPSB3YXRjaF9hZGQsCiAg
+ICAgLndhdGNoX3VwZGF0ZV9tYXNrID0gd2F0Y2hfdXBkYXRlX21hc2ssCiAgICAgLndhdGNoX3Jl
+bW92ZSA9IHdhdGNoX3JlbW92ZSwKIH07CiAKK2NvbnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVy
+bmFsIGV2ZW50X2xvb3BfY29yZSA9IHsKKyAgICAudGltZXJfYWRkID0gdGltZXJfYWRkLAorICAg
+IC53YXRjaF9hZGQgPSB3YXRjaF9hZGQsCit9OworCiAvKgogICogQWRhcHRlciBmb3IgU3BpY2VD
+b2RlSW50ZXJmYWNlCiAgKi8KIAorc3RhdGljIGNvbnN0IFNwaWNlQ29yZUZ1bmNzIHFlbXVfY29y
+ZV9mdW5jczsKKwordHlwZWRlZiBzdHJ1Y3QgU3BpY2VUaW1lclFlbXUgeworICAgIFNwaWNlVGlt
+ZXIgYmFzZTsKKyAgICBTcGljZUNvcmVJbnRlcmZhY2UgKmNvcmU7CisgICAgU3BpY2VUaW1lciAq
+cWVtdV90aW1lcjsKK30gU3BpY2VUaW1lclFlbXU7CisKIHN0YXRpYyBTcGljZVRpbWVyICphZGFw
+dGVyX3RpbWVyX2FkZChjb25zdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqaWZhY2UsIFNw
+aWNlVGltZXJGdW5jIGZ1bmMsIHZvaWQgKm9wYXF1ZSkKIHsKLSAgICByZXR1cm4gaWZhY2UtPnB1
+YmxpY19pbnRlcmZhY2UtPnRpbWVyX2FkZChmdW5jLCBvcGFxdWUpOworICAgIFNwaWNlVGltZXJR
+ZW11ICp0aW1lciA9IGdfbmV3MChTcGljZVRpbWVyUWVtdSwgMSk7CisKKyAgICB0aW1lci0+YmFz
+ZS5mdW5jcyA9ICZxZW11X2NvcmVfZnVuY3M7CisgICAgdGltZXItPmNvcmUgPSBpZmFjZS0+cHVi
+bGljX2ludGVyZmFjZTsKKyAgICB0aW1lci0+cWVtdV90aW1lciA9IHRpbWVyLT5jb3JlLT50aW1l
+cl9hZGQoZnVuYywgb3BhcXVlKTsKKyAgICByZXR1cm4gJnRpbWVyLT5iYXNlOwogfQogCi1zdGF0
+aWMgdm9pZCBhZGFwdGVyX3RpbWVyX3N0YXJ0KGNvbnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVy
+bmFsICppZmFjZSwgU3BpY2VUaW1lciAqdGltZXIsIHVpbnQzMl90IG1zKQorc3RhdGljIHZvaWQg
+YWRhcHRlcl90aW1lcl9zdGFydChTcGljZVRpbWVyICp0aW1lcl8sIHVpbnQzMl90IG1zKQogewot
+ICAgIGlmYWNlLT5wdWJsaWNfaW50ZXJmYWNlLT50aW1lcl9zdGFydCh0aW1lciwgbXMpOworICAg
+IFNwaWNlVGltZXJRZW11ICp0aW1lciA9IFNQSUNFX1VQQ0FTVChTcGljZVRpbWVyUWVtdSwgdGlt
+ZXJfKTsKKyAgICB0aW1lci0+Y29yZS0+dGltZXJfc3RhcnQodGltZXItPnFlbXVfdGltZXIsIG1z
+KTsKIH0KIAotc3RhdGljIHZvaWQgYWRhcHRlcl90aW1lcl9jYW5jZWwoY29uc3QgU3BpY2VDb3Jl
+SW50ZXJmYWNlSW50ZXJuYWwgKmlmYWNlLCBTcGljZVRpbWVyICp0aW1lcikKK3N0YXRpYyB2b2lk
+IGFkYXB0ZXJfdGltZXJfY2FuY2VsKFNwaWNlVGltZXIgKnRpbWVyXykKIHsKLSAgICBpZmFjZS0+
+cHVibGljX2ludGVyZmFjZS0+dGltZXJfY2FuY2VsKHRpbWVyKTsKKyAgICBTcGljZVRpbWVyUWVt
+dSAqdGltZXIgPSBTUElDRV9VUENBU1QoU3BpY2VUaW1lclFlbXUsIHRpbWVyXyk7CisgICAgdGlt
+ZXItPmNvcmUtPnRpbWVyX2NhbmNlbCh0aW1lci0+cWVtdV90aW1lcik7CiB9CiAKLXN0YXRpYyB2
+b2lkIGFkYXB0ZXJfdGltZXJfcmVtb3ZlKGNvbnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFs
+ICppZmFjZSwgU3BpY2VUaW1lciAqdGltZXIpCitzdGF0aWMgdm9pZCBhZGFwdGVyX3RpbWVyX3Jl
+bW92ZShTcGljZVRpbWVyICp0aW1lcl8pCiB7Ci0gICAgaWZhY2UtPnB1YmxpY19pbnRlcmZhY2Ut
+PnRpbWVyX3JlbW92ZSh0aW1lcik7CisgICAgU3BpY2VUaW1lclFlbXUgKnRpbWVyID0gU1BJQ0Vf
+VVBDQVNUKFNwaWNlVGltZXJRZW11LCB0aW1lcl8pOworICAgIHRpbWVyLT5jb3JlLT50aW1lcl9y
+ZW1vdmUodGltZXItPnFlbXVfdGltZXIpOworICAgIGdfZnJlZSh0aW1lcik7CiB9CiAKK3R5cGVk
+ZWYgc3RydWN0IFNwaWNlV2F0Y2hRZW11IHsKKyAgICBTcGljZVdhdGNoIGJhc2U7CisgICAgU3Bp
+Y2VDb3JlSW50ZXJmYWNlICpjb3JlOworICAgIFNwaWNlV2F0Y2ggKnFlbXVfd2F0Y2g7Cit9IFNw
+aWNlV2F0Y2hRZW11OworCiBzdGF0aWMgU3BpY2VXYXRjaCAqYWRhcHRlcl93YXRjaF9hZGQoY29u
+c3QgU3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJuYWwgKmlmYWNlLAogICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGludCBmZCwgaW50IGV2ZW50X21hc2ssIFNwaWNlV2F0Y2hGdW5j
+IGZ1bmMsIHZvaWQgKm9wYXF1ZSkKIHsKICAgICAvLyBub3RlOiBRZW11IEFQSSBpcyBmaW5lIGhh
+dmluZyBhIFNPQ0tFVCBvbiBXaW5kb3dzCi0gICAgcmV0dXJuIGlmYWNlLT5wdWJsaWNfaW50ZXJm
+YWNlLT53YXRjaF9hZGQoZmQsIGV2ZW50X21hc2ssIGZ1bmMsIG9wYXF1ZSk7CisgICAgU3BpY2VX
+YXRjaFFlbXUgKndhdGNoID0gZ19uZXcwKFNwaWNlV2F0Y2hRZW11LCAxKTsKKworICAgIHdhdGNo
+LT5iYXNlLmZ1bmNzID0gJnFlbXVfY29yZV9mdW5jczsKKyAgICB3YXRjaC0+Y29yZSA9IGlmYWNl
+LT5wdWJsaWNfaW50ZXJmYWNlOworICAgIHdhdGNoLT5xZW11X3dhdGNoID0gd2F0Y2gtPmNvcmUt
+PndhdGNoX2FkZChmZCwgZXZlbnRfbWFzaywgZnVuYywgb3BhcXVlKTsKKyAgICByZXR1cm4gJndh
+dGNoLT5iYXNlOwogfQogCi1zdGF0aWMgdm9pZCBhZGFwdGVyX3dhdGNoX3VwZGF0ZV9tYXNrKGNv
+bnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICppZmFjZSwgU3BpY2VXYXRjaCAqd2F0Y2gs
+IGludCBldmVudF9tYXNrKQorc3RhdGljIHZvaWQgYWRhcHRlcl93YXRjaF91cGRhdGVfbWFzayhT
+cGljZVdhdGNoICp3YXRjaF8sIGludCBldmVudF9tYXNrKQogewotICAgIGlmYWNlLT5wdWJsaWNf
+aW50ZXJmYWNlLT53YXRjaF91cGRhdGVfbWFzayh3YXRjaCwgZXZlbnRfbWFzayk7CisgICAgU3Bp
+Y2VXYXRjaFFlbXUgKndhdGNoID0gU1BJQ0VfVVBDQVNUKFNwaWNlV2F0Y2hRZW11LCB3YXRjaF8p
+OworICAgIHdhdGNoLT5jb3JlLT53YXRjaF91cGRhdGVfbWFzayh3YXRjaC0+cWVtdV93YXRjaCwg
+ZXZlbnRfbWFzayk7CiB9CiAKLXN0YXRpYyB2b2lkIGFkYXB0ZXJfd2F0Y2hfcmVtb3ZlKGNvbnN0
+IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICppZmFjZSwgU3BpY2VXYXRjaCAqd2F0Y2gpCitz
+dGF0aWMgdm9pZCBhZGFwdGVyX3dhdGNoX3JlbW92ZShTcGljZVdhdGNoICp3YXRjaF8pCiB7Ci0g
+ICAgaWZhY2UtPnB1YmxpY19pbnRlcmZhY2UtPndhdGNoX3JlbW92ZSh3YXRjaCk7CisgICAgU3Bp
+Y2VXYXRjaFFlbXUgKndhdGNoID0gU1BJQ0VfVVBDQVNUKFNwaWNlV2F0Y2hRZW11LCB3YXRjaF8p
+OworICAgIHdhdGNoLT5jb3JlLT53YXRjaF9yZW1vdmUod2F0Y2gtPnFlbXVfd2F0Y2gpOworICAg
+IGdfZnJlZSh3YXRjaCk7CiB9CiAKIHN0YXRpYyB2b2lkIGFkYXB0ZXJfY2hhbm5lbF9ldmVudChj
+b25zdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqaWZhY2UsIGludCBldmVudCwgU3BpY2VD
+aGFubmVsRXZlbnRJbmZvICppbmZvKQpAQCAtMzEyLDEzICs0MTAsMTcgQEAgc3RhdGljIHZvaWQg
+YWRhcHRlcl9jaGFubmVsX2V2ZW50KGNvbnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICpp
+ZmFjZSwgaW50IGUKICAgICAgICAgaWZhY2UtPnB1YmxpY19pbnRlcmZhY2UtPmNoYW5uZWxfZXZl
+bnQoZXZlbnQsIGluZm8pOwogfQogCi1jb25zdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCBj
+b3JlX2ludGVyZmFjZV9hZGFwdGVyID0gewotICAgIC50aW1lcl9hZGQgPSBhZGFwdGVyX3RpbWVy
+X2FkZCwKK3N0YXRpYyBjb25zdCBTcGljZUNvcmVGdW5jcyBxZW11X2NvcmVfZnVuY3MgPSB7CiAg
+ICAgLnRpbWVyX3N0YXJ0ID0gYWRhcHRlcl90aW1lcl9zdGFydCwKICAgICAudGltZXJfY2FuY2Vs
+ID0gYWRhcHRlcl90aW1lcl9jYW5jZWwsCiAgICAgLnRpbWVyX3JlbW92ZSA9IGFkYXB0ZXJfdGlt
+ZXJfcmVtb3ZlLAotICAgIC53YXRjaF9hZGQgPSBhZGFwdGVyX3dhdGNoX2FkZCwKKwogICAgIC53
+YXRjaF91cGRhdGVfbWFzayA9IGFkYXB0ZXJfd2F0Y2hfdXBkYXRlX21hc2ssCiAgICAgLndhdGNo
+X3JlbW92ZSA9IGFkYXB0ZXJfd2F0Y2hfcmVtb3ZlLAorfTsKKworY29uc3QgU3BpY2VDb3JlSW50
+ZXJmYWNlSW50ZXJuYWwgY29yZV9pbnRlcmZhY2VfYWRhcHRlciA9IHsKKyAgICAudGltZXJfYWRk
+ID0gYWRhcHRlcl90aW1lcl9hZGQsCisgICAgLndhdGNoX2FkZCA9IGFkYXB0ZXJfd2F0Y2hfYWRk
+LAogICAgIC5jaGFubmVsX2V2ZW50ID0gYWRhcHRlcl9jaGFubmVsX2V2ZW50LAogfTsKZGlmZiAt
+LWdpdCBhL3NlcnZlci9pbnB1dHMtY2hhbm5lbC5jIGIvc2VydmVyL2lucHV0cy1jaGFubmVsLmMK
+aW5kZXggYTFjMzU1NjVjLi4yODA3ODNjMTcgMTAwNjQ0Ci0tLSBhL3NlcnZlci9pbnB1dHMtY2hh
+bm5lbC5jCisrKyBiL3NlcnZlci9pbnB1dHMtY2hhbm5lbC5jCkBAIC0xNjIsOCArMTYyLDcgQEAg
+Y29uc3QgVkRBZ2VudE1vdXNlU3RhdGUgKmlucHV0c19jaGFubmVsX2dldF9tb3VzZV9zdGF0ZShJ
+bnB1dHNDaGFubmVsICppbnB1dHMpCiAKIHN0YXRpYyB2b2lkIGFjdGl2YXRlX21vZGlmaWVyc193
+YXRjaChJbnB1dHNDaGFubmVsICppbnB1dHMpCiB7Ci0gICAgU3BpY2VDb3JlSW50ZXJmYWNlSW50
+ZXJuYWwgKmNvcmUgPSByZWRfY2hhbm5lbF9nZXRfY29yZV9pbnRlcmZhY2UoUkVEX0NIQU5ORUwo
+aW5wdXRzKSk7Ci0gICAgY29yZS0+dGltZXJfc3RhcnQoY29yZSwgaW5wdXRzLT5rZXlfbW9kaWZp
+ZXJzX3RpbWVyLCBLRVlfTU9ESUZJRVJTX1RUTCk7CisgICAgcmVkX3RpbWVyX3N0YXJ0KGlucHV0
+cy0+a2V5X21vZGlmaWVyc190aW1lciwgS0VZX01PRElGSUVSU19UVEwpOwogfQogCiBzdGF0aWMg
+dm9pZCBrYmRfcHVzaF9zY2FuKFNwaWNlS2JkSW5zdGFuY2UgKnNpbiwgdWludDhfdCBzY2FuKQpA
+QCAtNjAwLDEwICs1OTksOSBAQCBzdGF0aWMgdm9pZAogaW5wdXRzX2NoYW5uZWxfZmluYWxpemUo
+R09iamVjdCAqb2JqZWN0KQogewogICAgIElucHV0c0NoYW5uZWwgKnNlbGYgPSBJTlBVVFNfQ0hB
+Tk5FTChvYmplY3QpOwotICAgIFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICpjb3JlID0gcmVk
+X2NoYW5uZWxfZ2V0X2NvcmVfaW50ZXJmYWNlKFJFRF9DSEFOTkVMKHNlbGYpKTsKIAogICAgIGlu
+cHV0c19jaGFubmVsX2RldGFjaF90YWJsZXQoc2VsZiwgc2VsZi0+dGFibGV0KTsKLSAgICBjb3Jl
+LT50aW1lcl9yZW1vdmUoY29yZSwgc2VsZi0+a2V5X21vZGlmaWVyc190aW1lcik7CisgICAgcmVk
+X3RpbWVyX3JlbW92ZShzZWxmLT5rZXlfbW9kaWZpZXJzX3RpbWVyKTsKIAogICAgIEdfT0JKRUNU
+X0NMQVNTKGlucHV0c19jaGFubmVsX3BhcmVudF9jbGFzcyktPmZpbmFsaXplKG9iamVjdCk7CiB9
+CmRpZmYgLS1naXQgYS9zZXJ2ZXIvbWFpbi1kaXNwYXRjaGVyLmMgYi9zZXJ2ZXIvbWFpbi1kaXNw
+YXRjaGVyLmMKaW5kZXggMmNhNjhhNGQxLi43NTc5ZmQzNzkgMTAwNjQ0Ci0tLSBhL3NlcnZlci9t
+YWluLWRpc3BhdGNoZXIuYworKysgYi9zZXJ2ZXIvbWFpbi1kaXNwYXRjaGVyLmMKQEAgLTI4OCw3
+ICsyODgsNyBAQCBzdGF0aWMgdm9pZCBtYWluX2Rpc3BhdGNoZXJfZmluYWxpemUoR09iamVjdCAq
+b2JqZWN0KQogewogICAgIE1haW5EaXNwYXRjaGVyICpzZWxmID0gTUFJTl9ESVNQQVRDSEVSKG9i
+amVjdCk7CiAKLSAgICByZWRzX2NvcmVfd2F0Y2hfcmVtb3ZlKHNlbGYtPnByaXYtPnJlZHMsIHNl
+bGYtPnByaXYtPndhdGNoKTsKKyAgICByZWRfd2F0Y2hfcmVtb3ZlKHNlbGYtPnByaXYtPndhdGNo
+KTsKICAgICBzZWxmLT5wcml2LT53YXRjaCA9IE5VTEw7CiAgICAgR19PQkpFQ1RfQ0xBU1MobWFp
+bl9kaXNwYXRjaGVyX3BhcmVudF9jbGFzcyktPmZpbmFsaXplKG9iamVjdCk7CiB9CmRpZmYgLS1n
+aXQgYS9zZXJ2ZXIvcmVkLWNoYW5uZWwtY2xpZW50LmMgYi9zZXJ2ZXIvcmVkLWNoYW5uZWwtY2xp
+ZW50LmMKaW5kZXggYzNhZDY4MTgzLi5kNmMzMzRlZTYgMTAwNjQ0Ci0tLSBhL3NlcnZlci9yZWQt
+Y2hhbm5lbC1jbGllbnQuYworKysgYi9zZXJ2ZXIvcmVkLWNoYW5uZWwtY2xpZW50LmMKQEAgLTIx
+Niw4ICsyMTYsNiBAQCB0eXBlZGVmIHN0cnVjdCBNYXJrZXJQaXBlSXRlbSB7CiAKIHN0YXRpYyB2
+b2lkIHJlZF9jaGFubmVsX2NsaWVudF9zdGFydF9waW5nX3RpbWVyKFJlZENoYW5uZWxDbGllbnQg
+KnJjYywgdWludDMyX3QgdGltZW91dCkKIHsKLSAgICBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5h
+bCAqY29yZTsKLQogICAgIGlmICghcmNjLT5wcml2LT5sYXRlbmN5X21vbml0b3IudGltZXIpIHsK
+ICAgICAgICAgcmV0dXJuOwogICAgIH0KQEAgLTIyNiwxNCArMjI0LDExIEBAIHN0YXRpYyB2b2lk
+IHJlZF9jaGFubmVsX2NsaWVudF9zdGFydF9waW5nX3RpbWVyKFJlZENoYW5uZWxDbGllbnQgKnJj
+YywgdWludDMyX3QKICAgICB9CiAgICAgcmNjLT5wcml2LT5sYXRlbmN5X21vbml0b3Iuc3RhdGUg
+PSBQSU5HX1NUQVRFX1RJTUVSOwogCi0gICAgY29yZSA9IHJlZF9jaGFubmVsX2dldF9jb3JlX2lu
+dGVyZmFjZShyY2MtPnByaXYtPmNoYW5uZWwpOwotICAgIGNvcmUtPnRpbWVyX3N0YXJ0KGNvcmUs
+IHJjYy0+cHJpdi0+bGF0ZW5jeV9tb25pdG9yLnRpbWVyLCB0aW1lb3V0KTsKKyAgICByZWRfdGlt
+ZXJfc3RhcnQocmNjLT5wcml2LT5sYXRlbmN5X21vbml0b3IudGltZXIsIHRpbWVvdXQpOwogfQog
+CiBzdGF0aWMgdm9pZCByZWRfY2hhbm5lbF9jbGllbnRfY2FuY2VsX3BpbmdfdGltZXIoUmVkQ2hh
+bm5lbENsaWVudCAqcmNjKQogewotICAgIFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICpjb3Jl
+OwotCiAgICAgaWYgKCFyY2MtPnByaXYtPmxhdGVuY3lfbW9uaXRvci50aW1lcikgewogICAgICAg
+ICByZXR1cm47CiAgICAgfQpAQCAtMjQxLDggKzIzNiw3IEBAIHN0YXRpYyB2b2lkIHJlZF9jaGFu
+bmVsX2NsaWVudF9jYW5jZWxfcGluZ190aW1lcihSZWRDaGFubmVsQ2xpZW50ICpyY2MpCiAgICAg
+ICAgIHJldHVybjsKICAgICB9CiAKLSAgICBjb3JlID0gcmVkX2NoYW5uZWxfZ2V0X2NvcmVfaW50
+ZXJmYWNlKHJjYy0+cHJpdi0+Y2hhbm5lbCk7Ci0gICAgY29yZS0+dGltZXJfY2FuY2VsKGNvcmUs
+IHJjYy0+cHJpdi0+bGF0ZW5jeV9tb25pdG9yLnRpbWVyKTsKKyAgICByZWRfdGltZXJfY2FuY2Vs
+KHJjYy0+cHJpdi0+bGF0ZW5jeV9tb25pdG9yLnRpbWVyKTsKICAgICByY2MtPnByaXYtPmxhdGVu
+Y3lfbW9uaXRvci5zdGF0ZSA9IFBJTkdfU1RBVEVfTk9ORTsKIH0KIApAQCAtMzMyLDEzICszMjYs
+MTIgQEAgcmVkX2NoYW5uZWxfY2xpZW50X2ZpbmFsaXplKEdPYmplY3QgKm9iamVjdCkKIHsKICAg
+ICBSZWRDaGFubmVsQ2xpZW50ICpzZWxmID0gUkVEX0NIQU5ORUxfQ0xJRU5UKG9iamVjdCk7CiAK
+LSAgICBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqY29yZSA9IHJlZF9jaGFubmVsX2dldF9j
+b3JlX2ludGVyZmFjZShzZWxmLT5wcml2LT5jaGFubmVsKTsKICAgICBpZiAoc2VsZi0+cHJpdi0+
+bGF0ZW5jeV9tb25pdG9yLnRpbWVyKSB7Ci0gICAgICAgIGNvcmUtPnRpbWVyX3JlbW92ZShjb3Jl
+LCBzZWxmLT5wcml2LT5sYXRlbmN5X21vbml0b3IudGltZXIpOworICAgICAgICByZWRfdGltZXJf
+cmVtb3ZlKHNlbGYtPnByaXYtPmxhdGVuY3lfbW9uaXRvci50aW1lcik7CiAgICAgICAgIHNlbGYt
+PnByaXYtPmxhdGVuY3lfbW9uaXRvci50aW1lciA9IE5VTEw7CiAgICAgfQogICAgIGlmIChzZWxm
+LT5wcml2LT5jb25uZWN0aXZpdHlfbW9uaXRvci50aW1lcikgewotICAgICAgICBjb3JlLT50aW1l
+cl9yZW1vdmUoY29yZSwgc2VsZi0+cHJpdi0+Y29ubmVjdGl2aXR5X21vbml0b3IudGltZXIpOwor
+ICAgICAgICByZWRfdGltZXJfcmVtb3ZlKHNlbGYtPnByaXYtPmNvbm5lY3Rpdml0eV9tb25pdG9y
+LnRpbWVyKTsKICAgICAgICAgc2VsZi0+cHJpdi0+Y29ubmVjdGl2aXR5X21vbml0b3IudGltZXIg
+PSBOVUxMOwogICAgIH0KIApAQCAtNzU2LDcgKzc0OSw2IEBAIHN0YXRpYyB2b2lkIHJlZF9jaGFu
+bmVsX2NsaWVudF9jb25uZWN0aXZpdHlfdGltZXIodm9pZCAqb3BhcXVlKQogICAgIH0KIAogICAg
+IGlmIChpc19hbGl2ZSkgewotICAgICAgICBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqY29y
+ZSA9IHJlZF9jaGFubmVsX2dldF9jb3JlX2ludGVyZmFjZShyY2MtPnByaXYtPmNoYW5uZWwpOwog
+ICAgICAgICBtb25pdG9yLT5yZWNlaXZlZF9ieXRlcyA9IGZhbHNlOwogICAgICAgICBtb25pdG9y
+LT5zZW50X2J5dGVzID0gZmFsc2U7CiAgICAgICAgIGlmIChyZWRfY2hhbm5lbF9jbGllbnRfaXNf
+YmxvY2tlZChyY2MpIHx8IHJlZF9jaGFubmVsX2NsaWVudF93YWl0aW5nX2Zvcl9hY2socmNjKSkg
+ewpAQCAtNzY3LDcgKzc1OSw3IEBAIHN0YXRpYyB2b2lkIHJlZF9jaGFubmVsX2NsaWVudF9jb25u
+ZWN0aXZpdHlfdGltZXIodm9pZCAqb3BhcXVlKQogICAgICAgICB9IGVsc2UgewogICAgICAgICAg
+ICAgIG1vbml0b3ItPnN0YXRlID0gQ09OTkVDVElWSVRZX1NUQVRFX0NPTk5FQ1RFRDsKICAgICAg
+ICAgfQotICAgICAgICBjb3JlLT50aW1lcl9zdGFydChjb3JlLCByY2MtPnByaXYtPmNvbm5lY3Rp
+dml0eV9tb25pdG9yLnRpbWVyLAorICAgICAgICByZWRfdGltZXJfc3RhcnQocmNjLT5wcml2LT5j
+b25uZWN0aXZpdHlfbW9uaXRvci50aW1lciwKICAgICAgICAgICAgICAgICAgICAgICAgICAgcmNj
+LT5wcml2LT5jb25uZWN0aXZpdHlfbW9uaXRvci50aW1lb3V0KTsKICAgICB9IGVsc2UgewogICAg
+ICAgICBtb25pdG9yLT5zdGF0ZSA9IENPTk5FQ1RJVklUWV9TVEFURV9ESVNDT05ORUNURUQ7CkBA
+IC04MDYsNyArNzk4LDcgQEAgdm9pZCByZWRfY2hhbm5lbF9jbGllbnRfc3RhcnRfY29ubmVjdGl2
+aXR5X21vbml0b3JpbmcoUmVkQ2hhbm5lbENsaWVudCAqcmNjLCB1aW4KICAgICAgICAgICAgIGNv
+cmUsIHJlZF9jaGFubmVsX2NsaWVudF9jb25uZWN0aXZpdHlfdGltZXIsIHJjYyk7CiAgICAgICAg
+IHJjYy0+cHJpdi0+Y29ubmVjdGl2aXR5X21vbml0b3IudGltZW91dCA9IHRpbWVvdXRfbXM7CiAg
+ICAgICAgIGlmICghcmVkX2NsaWVudF9kdXJpbmdfbWlncmF0ZV9hdF90YXJnZXQocmNjLT5wcml2
+LT5jbGllbnQpKSB7Ci0gICAgICAgICAgICBjb3JlLT50aW1lcl9zdGFydChjb3JlLCByY2MtPnBy
+aXYtPmNvbm5lY3Rpdml0eV9tb25pdG9yLnRpbWVyLAorICAgICAgICAgICAgcmVkX3RpbWVyX3N0
+YXJ0KHJjYy0+cHJpdi0+Y29ubmVjdGl2aXR5X21vbml0b3IudGltZXIsCiAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICByY2MtPnByaXYtPmNvbm5lY3Rpdml0eV9tb25pdG9yLnRpbWVvdXQp
+OwogICAgICAgICB9CiAgICAgfQpAQCAtOTY0LDggKzk1Niw2IEBAIGNsZWFudXA6CiBzdGF0aWMg
+dm9pZAogcmVkX2NoYW5uZWxfY2xpZW50X3dhdGNoX3VwZGF0ZV9tYXNrKFJlZENoYW5uZWxDbGll
+bnQgKnJjYywgaW50IGV2ZW50X21hc2spCiB7Ci0gICAgU3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJu
+YWwgKmNvcmU7Ci0KICAgICBpZiAoIXJjYy0+cHJpdi0+c3RyZWFtLT53YXRjaCkgewogICAgICAg
+ICByZXR1cm47CiAgICAgfQpAQCAtOTc0LDggKzk2NCw3IEBAIHJlZF9jaGFubmVsX2NsaWVudF93
+YXRjaF91cGRhdGVfbWFzayhSZWRDaGFubmVsQ2xpZW50ICpyY2MsIGludCBldmVudF9tYXNrKQog
+ICAgICAgICBldmVudF9tYXNrICY9IH5TUElDRV9XQVRDSF9FVkVOVF9SRUFEOwogICAgIH0KIAot
+ICAgIGNvcmUgPSByZWRfY2hhbm5lbF9nZXRfY29yZV9pbnRlcmZhY2UocmNjLT5wcml2LT5jaGFu
+bmVsKTsKLSAgICBjb3JlLT53YXRjaF91cGRhdGVfbWFzayhjb3JlLCByY2MtPnByaXYtPnN0cmVh
+bS0+d2F0Y2gsIGV2ZW50X21hc2spOworICAgIHJlZF93YXRjaF91cGRhdGVfbWFzayhyY2MtPnBy
+aXYtPnN0cmVhbS0+d2F0Y2gsIGV2ZW50X21hc2spOwogfQogCiB2b2lkIHJlZF9jaGFubmVsX2Ns
+aWVudF9ibG9ja19yZWFkKFJlZENoYW5uZWxDbGllbnQgKnJjYykKQEAgLTEwMDMsOCArOTkyLDcg
+QEAgc3RhdGljIHZvaWQgcmVkX2NoYW5uZWxfY2xpZW50X3NlYW1sZXNzX21pZ3JhdGlvbl9kb25l
+KFJlZENoYW5uZWxDbGllbnQgKnJjYykKICAgICBpZiAocmVkX2NsaWVudF9zZWFtbGVzc19taWdy
+YXRpb25fZG9uZV9mb3JfY2hhbm5lbChyY2MtPnByaXYtPmNsaWVudCkpIHsKICAgICAgICAgcmVk
+X2NoYW5uZWxfY2xpZW50X3N0YXJ0X3BpbmdfdGltZXIocmNjLCBQSU5HX1RFU1RfSURMRV9ORVRf
+VElNRU9VVF9NUyk7CiAgICAgICAgIGlmIChyY2MtPnByaXYtPmNvbm5lY3Rpdml0eV9tb25pdG9y
+LnRpbWVyKSB7Ci0gICAgICAgICAgICBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqY29yZSA9
+IHJlZF9jaGFubmVsX2dldF9jb3JlX2ludGVyZmFjZShyY2MtPnByaXYtPmNoYW5uZWwpOwotICAg
+ICAgICAgICAgY29yZS0+dGltZXJfc3RhcnQoY29yZSwgcmNjLT5wcml2LT5jb25uZWN0aXZpdHlf
+bW9uaXRvci50aW1lciwKKyAgICAgICAgICAgIHJlZF90aW1lcl9zdGFydChyY2MtPnByaXYtPmNv
+bm5lY3Rpdml0eV9tb25pdG9yLnRpbWVyLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cmNjLT5wcml2LT5jb25uZWN0aXZpdHlfbW9uaXRvci50aW1lb3V0KTsKICAgICAgICAgfQogICAg
+IH0KQEAgLTEwMjIsMTQgKzEwMTAsMTMgQEAgYm9vbCByZWRfY2hhbm5lbF9jbGllbnRfaXNfd2Fp
+dGluZ19mb3JfbWlncmF0ZV9kYXRhKFJlZENoYW5uZWxDbGllbnQgKnJjYykKIAogdm9pZCByZWRf
+Y2hhbm5lbF9jbGllbnRfZGVmYXVsdF9taWdyYXRlKFJlZENoYW5uZWxDbGllbnQgKnJjYykKIHsK
+LSAgICBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqY29yZSA9IHJlZF9jaGFubmVsX2dldF9j
+b3JlX2ludGVyZmFjZShyY2MtPnByaXYtPmNoYW5uZWwpOwogICAgIGlmIChyY2MtPnByaXYtPmxh
+dGVuY3lfbW9uaXRvci50aW1lcikgewogICAgICAgICByZWRfY2hhbm5lbF9jbGllbnRfY2FuY2Vs
+X3BpbmdfdGltZXIocmNjKTsKLSAgICAgICAgY29yZS0+dGltZXJfcmVtb3ZlKGNvcmUsIHJjYy0+
+cHJpdi0+bGF0ZW5jeV9tb25pdG9yLnRpbWVyKTsKKyAgICAgICAgcmVkX3RpbWVyX3JlbW92ZShy
+Y2MtPnByaXYtPmxhdGVuY3lfbW9uaXRvci50aW1lcik7CiAgICAgICAgIHJjYy0+cHJpdi0+bGF0
+ZW5jeV9tb25pdG9yLnRpbWVyID0gTlVMTDsKICAgICB9CiAgICAgaWYgKHJjYy0+cHJpdi0+Y29u
+bmVjdGl2aXR5X21vbml0b3IudGltZXIpIHsKLSAgICAgICAgY29yZS0+dGltZXJfcmVtb3ZlKGNv
+cmUsIHJjYy0+cHJpdi0+Y29ubmVjdGl2aXR5X21vbml0b3IudGltZXIpOworICAgICAgICByZWRf
+dGltZXJfcmVtb3ZlKHJjYy0+cHJpdi0+Y29ubmVjdGl2aXR5X21vbml0b3IudGltZXIpOwogICAg
+ICAgICByY2MtPnByaXYtPmNvbm5lY3Rpdml0eV9tb25pdG9yLnRpbWVyID0gTlVMTDsKICAgICB9
+CiAgICAgcmVkX2NoYW5uZWxfY2xpZW50X3BpcGVfYWRkX3R5cGUocmNjLCBSRURfUElQRV9JVEVN
+X1RZUEVfTUlHUkFURSk7CkBAIC0xMDQ2LDggKzEwMzMsNyBAQCB2b2lkIHJlZF9jaGFubmVsX2Ns
+aWVudF9kZXN0cm95KFJlZENoYW5uZWxDbGllbnQgKnJjYykKIHZvaWQgcmVkX2NoYW5uZWxfY2xp
+ZW50X3NodXRkb3duKFJlZENoYW5uZWxDbGllbnQgKnJjYykKIHsKICAgICBpZiAocmNjLT5wcml2
+LT5zdHJlYW0gJiYgcmNjLT5wcml2LT5zdHJlYW0tPndhdGNoKSB7Ci0gICAgICAgIFNwaWNlQ29y
+ZUludGVyZmFjZUludGVybmFsICpjb3JlID0gcmVkX2NoYW5uZWxfZ2V0X2NvcmVfaW50ZXJmYWNl
+KHJjYy0+cHJpdi0+Y2hhbm5lbCk7Ci0gICAgICAgIGNvcmUtPndhdGNoX3JlbW92ZShjb3JlLCBy
+Y2MtPnByaXYtPnN0cmVhbS0+d2F0Y2gpOworICAgICAgICByZWRfd2F0Y2hfcmVtb3ZlKHJjYy0+
+cHJpdi0+c3RyZWFtLT53YXRjaCk7CiAgICAgICAgIHJjYy0+cHJpdi0+c3RyZWFtLT53YXRjaCA9
+IE5VTEw7CiAgICAgICAgIHNodXRkb3duKHJjYy0+cHJpdi0+c3RyZWFtLT5zb2NrZXQsIFNIVVRf
+UkRXUik7CiAgICAgfQpAQCAtMTczMywyMiArMTcxOSwyMSBAQCBzdGF0aWMgdm9pZCByZWRfY2hh
+bm5lbF9jbGllbnRfb25fZGlzY29ubmVjdChSZWRDaGFubmVsQ2xpZW50ICpyY2MpCiB2b2lkIHJl
+ZF9jaGFubmVsX2NsaWVudF9kaXNjb25uZWN0KFJlZENoYW5uZWxDbGllbnQgKnJjYykKIHsKICAg
+ICBSZWRDaGFubmVsICpjaGFubmVsID0gcmNjLT5wcml2LT5jaGFubmVsOwotICAgIFNwaWNlQ29y
+ZUludGVyZmFjZUludGVybmFsICpjb3JlID0gcmVkX2NoYW5uZWxfZ2V0X2NvcmVfaW50ZXJmYWNl
+KGNoYW5uZWwpOwogCiAgICAgaWYgKCFyZWRfY2hhbm5lbF9jbGllbnRfaXNfY29ubmVjdGVkKHJj
+YykpIHsKICAgICAgICAgcmV0dXJuOwogICAgIH0KICAgICByZWRfY2hhbm5lbF9jbGllbnRfcGlw
+ZV9jbGVhcihyY2MpOwogICAgIGlmIChyY2MtPnByaXYtPnN0cmVhbS0+d2F0Y2gpIHsKLSAgICAg
+ICAgY29yZS0+d2F0Y2hfcmVtb3ZlKGNvcmUsIHJjYy0+cHJpdi0+c3RyZWFtLT53YXRjaCk7Cisg
+ICAgICAgIHJlZF93YXRjaF9yZW1vdmUocmNjLT5wcml2LT5zdHJlYW0tPndhdGNoKTsKICAgICAg
+ICAgcmNjLT5wcml2LT5zdHJlYW0tPndhdGNoID0gTlVMTDsKICAgICB9CiAgICAgaWYgKHJjYy0+
+cHJpdi0+bGF0ZW5jeV9tb25pdG9yLnRpbWVyKSB7Ci0gICAgICAgIGNvcmUtPnRpbWVyX3JlbW92
+ZShjb3JlLCByY2MtPnByaXYtPmxhdGVuY3lfbW9uaXRvci50aW1lcik7CisgICAgICAgIHJlZF90
+aW1lcl9yZW1vdmUocmNjLT5wcml2LT5sYXRlbmN5X21vbml0b3IudGltZXIpOwogICAgICAgICBy
+Y2MtPnByaXYtPmxhdGVuY3lfbW9uaXRvci50aW1lciA9IE5VTEw7CiAgICAgfQogICAgIGlmIChy
+Y2MtPnByaXYtPmNvbm5lY3Rpdml0eV9tb25pdG9yLnRpbWVyKSB7Ci0gICAgICAgIGNvcmUtPnRp
+bWVyX3JlbW92ZShjb3JlLCByY2MtPnByaXYtPmNvbm5lY3Rpdml0eV9tb25pdG9yLnRpbWVyKTsK
+KyAgICAgICAgcmVkX3RpbWVyX3JlbW92ZShyY2MtPnByaXYtPmNvbm5lY3Rpdml0eV9tb25pdG9y
+LnRpbWVyKTsKICAgICAgICAgcmNjLT5wcml2LT5jb25uZWN0aXZpdHlfbW9uaXRvci50aW1lciA9
+IE5VTEw7CiAgICAgfQogICAgIHJlZF9jaGFubmVsX3JlbW92ZV9jbGllbnQoY2hhbm5lbCwgcmNj
+KTsKZGlmZiAtLWdpdCBhL3NlcnZlci9yZWQtY29tbW9uLmggYi9zZXJ2ZXIvcmVkLWNvbW1vbi5o
+CmluZGV4IDIyZWE4ZmMzNy4uNGIyZTlmODdjIDEwMDY0NAotLS0gYS9zZXJ2ZXIvcmVkLWNvbW1v
+bi5oCisrKyBiL3NlcnZlci9yZWQtY29tbW9uLmgKQEAgLTQwLDE3ICs0MCwyMCBAQAogI2RlZmlu
+ZSBTUElDRV9VUENBU1QodHlwZSwgcHRyKSBcCiAgICAgKHZlcmlmeV9leHByKFNQSUNFX09GRlNF
+VE9GKHR5cGUsIGJhc2UpID09IDAsU1BJQ0VfQ09OVEFJTkVST0YocHRyLCB0eXBlLCBiYXNlKSkp
+CiAKK1NQSUNFX0JFR0lOX0RFQ0xTCisKK3ZvaWQgcmVkX3RpbWVyX3N0YXJ0KFNwaWNlVGltZXIg
+KnRpbWVyLCB1aW50MzJfdCBtcyk7Cit2b2lkIHJlZF90aW1lcl9jYW5jZWwoU3BpY2VUaW1lciAq
+dGltZXIpOwordm9pZCByZWRfdGltZXJfcmVtb3ZlKFNwaWNlVGltZXIgKnRpbWVyKTsKK3ZvaWQg
+cmVkX3dhdGNoX3VwZGF0ZV9tYXNrKFNwaWNlV2F0Y2ggKndhdGNoLCBpbnQgZXZlbnRfbWFzayk7
+Cit2b2lkIHJlZF93YXRjaF9yZW1vdmUoU3BpY2VXYXRjaCAqd2F0Y2gpOworCiB0eXBlZGVmIHN0
+cnVjdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5h
+bDsKIAogc3RydWN0IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsIHsKICAgICBTcGljZVRpbWVy
+ICooKnRpbWVyX2FkZCkoY29uc3QgU3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJuYWwgKmlmYWNlLCBT
+cGljZVRpbWVyRnVuYyBmdW5jLCB2b2lkICpvcGFxdWUpOwotICAgIHZvaWQgKCp0aW1lcl9zdGFy
+dCkoY29uc3QgU3BpY2VDb3JlSW50ZXJmYWNlSW50ZXJuYWwgKmlmYWNlLCBTcGljZVRpbWVyICp0
+aW1lciwgdWludDMyX3QgbXMpOwotICAgIHZvaWQgKCp0aW1lcl9jYW5jZWwpKGNvbnN0IFNwaWNl
+Q29yZUludGVyZmFjZUludGVybmFsICppZmFjZSwgU3BpY2VUaW1lciAqdGltZXIpOwotICAgIHZv
+aWQgKCp0aW1lcl9yZW1vdmUpKGNvbnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICppZmFj
+ZSwgU3BpY2VUaW1lciAqdGltZXIpOwogCiAgICAgU3BpY2VXYXRjaCAqKCp3YXRjaF9hZGQpKGNv
+bnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICppZmFjZSwgaW50IGZkLCBpbnQgZXZlbnRf
+bWFzaywgU3BpY2VXYXRjaEZ1bmMgZnVuYywgdm9pZCAqb3BhcXVlKTsKLSAgICB2b2lkICgqd2F0
+Y2hfdXBkYXRlX21hc2spKGNvbnN0IFNwaWNlQ29yZUludGVyZmFjZUludGVybmFsICppZmFjZSwg
+U3BpY2VXYXRjaCAqd2F0Y2gsIGludCBldmVudF9tYXNrKTsKLSAgICB2b2lkICgqd2F0Y2hfcmVt
+b3ZlKShjb25zdCBTcGljZUNvcmVJbnRlcmZhY2VJbnRlcm5hbCAqaWZhY2UsIFNwaWNlV2F0Y2gg
+KndhdGNoKTsKIAogICAgIHZvaWQgKCpjaGFubmVsX2V2ZW50KShjb25zdCBTcGljZUNvcmVJbnRl
+cmZhY2VJbnRlcm5hbCAqaWZhY2UsIGludCBldmVudCwgU3BpY2VDaGFubmVsRXZlbnRJbmZvICpp
+bmZvKTsKIApAQCAtMTI2LDQgKzEyOSw2IEBAIHR5cGVkZWYgc3RydWN0IEdMaXN0SXRlciB7CiAg
+ICAgeyByZXR1cm4gR19UWVBFX0lOU1RBTkNFX0dFVF9DTEFTUyhvYmosIFwKICAgICAgICAgICAg
+ICBtb2R1bGVfb2JqX25hbWUgIyMgX2dldF90eXBlKCksIE1vZHVsZU9iak5hbWUgIyMgQ2xhc3Mp
+OyB9CiAKK1NQSUNFX0VORF9ERUNMUworCiAjZW5kaWYgLyogUkVEX0NPTU1PTl9IXyAqLwpkaWZm
+IC0tZ2l0IGEvc2VydmVyL3JlZC1zdHJlYW0tZGV2aWNlLmMgYi9zZXJ2ZXIvcmVkLXN0cmVhbS1k
+ZXZpY2UuYwppbmRleCA2MjBlNTgxZWYuLjQ0ZDljZDA5ZCAxMDA2NDQKLS0tIGEvc2VydmVyL3Jl
+ZC1zdHJlYW0tZGV2aWNlLmMKKysrIGIvc2VydmVyL3JlZC1zdHJlYW0tZGV2aWNlLmMKQEAgLTEy
+MCw3ICsxMjAsNyBAQCBzdHJlYW1fZGV2aWNlX3BhcnRpYWxfcmVhZChTdHJlYW1EZXZpY2UgKmRl
+diwgU3BpY2VDaGFyRGV2aWNlSW5zdGFuY2UgKnNpbikKICAgICAgICAgaWYgKCFkZXYtPmNsb3Nl
+X3RpbWVyKSB7CiAgICAgICAgICAgICBkZXYtPmNsb3NlX3RpbWVyID0gcmVkc19jb3JlX3RpbWVy
+X2FkZChyZWRzLCBjbG9zZV90aW1lcl9mdW5jLCBkZXYpOwogICAgICAgICB9Ci0gICAgICAgIHJl
+ZHNfY29yZV90aW1lcl9zdGFydChyZWRzLCBkZXYtPmNsb3NlX3RpbWVyLCAwKTsKKyAgICAgICAg
+cmVkX3RpbWVyX3N0YXJ0KGRldi0+Y2xvc2VfdGltZXIsIDApOwogICAgICAgICByZXR1cm4gZmFs
+c2U7CiAgICAgfQogCkBAIC02NDksOCArNjQ5LDcgQEAgc3RyZWFtX2RldmljZV9kaXNwb3NlKEdP
+YmplY3QgKm9iamVjdCkKIHsKICAgICBTdHJlYW1EZXZpY2UgKmRldiA9IFNUUkVBTV9ERVZJQ0Uo
+b2JqZWN0KTsKIAotICAgIFJlZHNTdGF0ZSAqcmVkcyA9IHJlZF9jaGFyX2RldmljZV9nZXRfc2Vy
+dmVyKFJFRF9DSEFSX0RFVklDRShkZXYpKTsKLSAgICByZWRzX2NvcmVfdGltZXJfcmVtb3ZlKHJl
+ZHMsIGRldi0+Y2xvc2VfdGltZXIpOworICAgIHJlZF90aW1lcl9yZW1vdmUoZGV2LT5jbG9zZV90
+aW1lcik7CiAKICAgICBpZiAoZGV2LT5zdHJlYW1fY2hhbm5lbCkgewogICAgICAgICAvLyBjbG9z
+ZSBhbGwgY3VycmVudCBjb25uZWN0aW9ucyBhbmQgZHJvcCB0aGUgcmVmZXJlbmNlCmRpZmYgLS1n
+aXQgYS9zZXJ2ZXIvcmVkLXN0cmVhbS5jIGIvc2VydmVyL3JlZC1zdHJlYW0uYwppbmRleCAwNGJl
+M2FmMzcuLmFlYzQ4MmZiOCAxMDA2NDQKLS0tIGEvc2VydmVyL3JlZC1zdHJlYW0uYworKysgYi9z
+ZXJ2ZXIvcmVkLXN0cmVhbS5jCkBAIC0yMTMsNyArMjEzLDcgQEAgc3RhdGljIHNzaXplX3Qgc3Ry
+ZWFtX3NzbF9yZWFkX2NiKFJlZFN0cmVhbSAqcywgdm9pZCAqYnVmLCBzaXplX3Qgc2l6ZSkKIHZv
+aWQgcmVkX3N0cmVhbV9yZW1vdmVfd2F0Y2goUmVkU3RyZWFtKiBzKQogewogICAgIGlmIChzLT53
+YXRjaCkgewotICAgICAgICBzLT5wcml2LT5jb3JlLT53YXRjaF9yZW1vdmUocy0+cHJpdi0+Y29y
+ZSwgcy0+d2F0Y2gpOworICAgICAgICByZWRfd2F0Y2hfcmVtb3ZlKHMtPndhdGNoKTsKICAgICAg
+ICAgcy0+d2F0Y2ggPSBOVUxMOwogICAgIH0KIH0KZGlmZiAtLWdpdCBhL3NlcnZlci9yZWQtd29y
+a2VyLmMgYi9zZXJ2ZXIvcmVkLXdvcmtlci5jCmluZGV4IDk4YTRhOWRjMy4uMTJhOGU3Mzk4IDEw
+MDY0NAotLS0gYS9zZXJ2ZXIvcmVkLXdvcmtlci5jCisrKyBiL3NlcnZlci9yZWQtd29ya2VyLmMK
+QEAgLTExODUsNyArMTE4NSw3IEBAIHZvaWQgcmVkX3dvcmtlcl9mcmVlKFJlZFdvcmtlciAqd29y
+a2VyKQogICAgIHdvcmtlci0+ZGlzcGxheV9jaGFubmVsID0gTlVMTDsKIAogICAgIGlmICh3b3Jr
+ZXItPmRpc3BhdGNoX3dhdGNoKSB7Ci0gICAgICAgIHdvcmtlci0+Y29yZS53YXRjaF9yZW1vdmUo
+Jndvcmtlci0+Y29yZSwgd29ya2VyLT5kaXNwYXRjaF93YXRjaCk7CisgICAgICAgIHJlZF93YXRj
+aF9yZW1vdmUod29ya2VyLT5kaXNwYXRjaF93YXRjaCk7CiAgICAgfQogCiAgICAgZ19tYWluX2Nv
+bnRleHRfdW5yZWYod29ya2VyLT5jb3JlLm1haW5fY29udGV4dCk7CmRpZmYgLS1naXQgYS9zZXJ2
+ZXIvcmVkcy5jIGIvc2VydmVyL3JlZHMuYwppbmRleCA5OTBkYTM5MWUuLmM1NWFhM2Y4MiAxMDA2
+NDQKLS0tIGEvc2VydmVyL3JlZHMuYworKysgYi9zZXJ2ZXIvcmVkcy5jCkBAIC00MTAsNyArNDEw
+LDcgQEAgc3RhdGljIHZvaWQgcmVkc19taWdfY2xlYW51cChSZWRzU3RhdGUgKnJlZHMpCiAgICAg
+ICAgIHJlZHMtPm1pZ19pbnByb2dyZXNzID0gRkFMU0U7CiAgICAgICAgIHJlZHMtPm1pZ193YWl0
+X2Nvbm5lY3QgPSBGQUxTRTsKICAgICAgICAgcmVkcy0+bWlnX3dhaXRfZGlzY29ubmVjdCA9IEZB
+TFNFOwotICAgICAgICByZWRzX2NvcmVfdGltZXJfY2FuY2VsKHJlZHMsIHJlZHMtPm1pZ190aW1l
+cik7CisgICAgICAgIHJlZF90aW1lcl9jYW5jZWwocmVkcy0+bWlnX3RpbWVyKTsKICAgICAgICAg
+cmVkc19taWdfY2xlYW51cF93YWl0X2Rpc2Nvbm5lY3QocmVkcyk7CiAgICAgfQogfQpAQCAtMjQy
+OSw3ICsyNDI5LDYgQEAgc3RhdGljIHZvaWQgcmVkc19oYW5kbGVfbmV3X2xpbmsoUmVkTGlua0lu
+Zm8gKmxpbmspCiBzdGF0aWMgdm9pZCByZWRzX2hhbmRsZV9zc2xfYWNjZXB0KGludCBmZCwgaW50
+IGV2ZW50LCB2b2lkICpkYXRhKQogewogICAgIFJlZExpbmtJbmZvICpsaW5rID0gKFJlZExpbmtJ
+bmZvICopZGF0YTsKLSAgICBSZWRzU3RhdGUgKnJlZHMgPSBsaW5rLT5yZWRzOwogICAgIFJlZFN0
+cmVhbVNzbFN0YXR1cyByZXR1cm5fY29kZSA9IHJlZF9zdHJlYW1fc3NsX2FjY2VwdChsaW5rLT5z
+dHJlYW0pOwogCiAgICAgc3dpdGNoIChyZXR1cm5fY29kZSkgewpAQCAtMjQzNywxMiArMjQzNiwx
+MCBAQCBzdGF0aWMgdm9pZCByZWRzX2hhbmRsZV9zc2xfYWNjZXB0KGludCBmZCwgaW50IGV2ZW50
+LCB2b2lkICpkYXRhKQogICAgICAgICAgICAgcmVkc19saW5rX2ZyZWUobGluayk7CiAgICAgICAg
+ICAgICByZXR1cm47CiAgICAgICAgIGNhc2UgUkVEX1NUUkVBTV9TU0xfU1RBVFVTX1dBSVRfRk9S
+X1JFQUQ6Ci0gICAgICAgICAgICByZWRzX2NvcmVfd2F0Y2hfdXBkYXRlX21hc2socmVkcywgbGlu
+ay0+c3RyZWFtLT53YXRjaCwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBTUElDRV9XQVRDSF9FVkVOVF9SRUFEKTsKKyAgICAgICAgICAgIHJlZF93YXRjaF91cGRhdGVf
+bWFzayhsaW5rLT5zdHJlYW0tPndhdGNoLCBTUElDRV9XQVRDSF9FVkVOVF9SRUFEKTsKICAgICAg
+ICAgICAgIHJldHVybjsKICAgICAgICAgY2FzZSBSRURfU1RSRUFNX1NTTF9TVEFUVVNfV0FJVF9G
+T1JfV1JJVEU6Ci0gICAgICAgICAgICByZWRzX2NvcmVfd2F0Y2hfdXBkYXRlX21hc2socmVkcywg
+bGluay0+c3RyZWFtLT53YXRjaCwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBTUElDRV9XQVRDSF9FVkVOVF9XUklURSk7CisgICAgICAgICAgICByZWRfd2F0Y2hfdXBk
+YXRlX21hc2sobGluay0+c3RyZWFtLT53YXRjaCwgU1BJQ0VfV0FUQ0hfRVZFTlRfV1JJVEUpOwog
+ICAgICAgICAgICAgcmV0dXJuOwogICAgICAgICBjYXNlIFJFRF9TVFJFQU1fU1NMX1NUQVRVU19P
+SzoKICAgICAgICAgICAgIHJlZF9zdHJlYW1fcmVtb3ZlX3dhdGNoKGxpbmstPnN0cmVhbSk7CkBA
+IC0yNzAyLDcgKzI2OTksNyBAQCB2b2lkIHJlZHNfc2V0X2NsaWVudF9tbV90aW1lX2xhdGVuY3ko
+UmVkc1N0YXRlICpyZWRzLCBSZWRDbGllbnQgKmNsaWVudCwgdWludDMyXwogc3RhdGljIHZvaWQg
+cmVkc19jbGVhbnVwX25ldChTcGljZVNlcnZlciAqcmVkcykKIHsKICAgICBpZiAocmVkcy0+bGlz
+dGVuX3NvY2tldCAhPSAtMSkgewotICAgICAgIHJlZHNfY29yZV93YXRjaF9yZW1vdmUocmVkcywg
+cmVkcy0+bGlzdGVuX3dhdGNoKTsKKyAgICAgICByZWRfd2F0Y2hfcmVtb3ZlKHJlZHMtPmxpc3Rl
+bl93YXRjaCk7CiAgICAgICAgaWYgKHJlZHMtPmNvbmZpZy0+c3BpY2VfbGlzdGVuX3NvY2tldF9m
+ZCAhPSByZWRzLT5saXN0ZW5fc29ja2V0KSB7CiAgICAgICAgICAgc29ja2V0X2Nsb3NlKHJlZHMt
+Pmxpc3Rlbl9zb2NrZXQpOwogICAgICAgIH0KQEAgLTI3MTAsNyArMjcwNyw3IEBAIHN0YXRpYyB2
+b2lkIHJlZHNfY2xlYW51cF9uZXQoU3BpY2VTZXJ2ZXIgKnJlZHMpCiAgICAgICAgcmVkcy0+bGlz
+dGVuX3NvY2tldCA9IC0xOwogICAgIH0KICAgICBpZiAocmVkcy0+c2VjdXJlX2xpc3Rlbl9zb2Nr
+ZXQgIT0gLTEpIHsKLSAgICAgICByZWRzX2NvcmVfd2F0Y2hfcmVtb3ZlKHJlZHMsIHJlZHMtPnNl
+Y3VyZV9saXN0ZW5fd2F0Y2gpOworICAgICAgIHJlZF93YXRjaF9yZW1vdmUocmVkcy0+c2VjdXJl
+X2xpc3Rlbl93YXRjaCk7CiAgICAgICAgc29ja2V0X2Nsb3NlKHJlZHMtPnNlY3VyZV9saXN0ZW5f
+c29ja2V0KTsKICAgICAgICByZWRzLT5zZWN1cmVfbGlzdGVuX3dhdGNoID0gTlVMTDsKICAgICAg
+ICByZWRzLT5zZWN1cmVfbGlzdGVuX3NvY2tldCA9IC0xOwpAQCAtMzAzMSw3ICszMDI4LDcgQEAg
+c3RhdGljIHZvaWQgcmVkc19taWdfc3RhcnRlZChSZWRzU3RhdGUgKnJlZHMpCiAKICAgICByZWRz
+LT5taWdfaW5wcm9ncmVzcyA9IFRSVUU7CiAgICAgcmVkcy0+bWlnX3dhaXRfY29ubmVjdCA9IFRS
+VUU7Ci0gICAgcmVkc19jb3JlX3RpbWVyX3N0YXJ0KHJlZHMsIHJlZHMtPm1pZ190aW1lciwgTUlH
+UkFURV9USU1FT1VUKTsKKyAgICByZWRfdGltZXJfc3RhcnQocmVkcy0+bWlnX3RpbWVyLCBNSUdS
+QVRFX1RJTUVPVVQpOwogfQogCiBzdGF0aWMgdm9pZCByZWRzX21pZ19maWxsX3dhaXRfZGlzY29u
+bmVjdChSZWRzU3RhdGUgKnJlZHMpCkBAIC0zMDQ2LDcgKzMwNDMsNyBAQCBzdGF0aWMgdm9pZCBy
+ZWRzX21pZ19maWxsX3dhaXRfZGlzY29ubmVjdChSZWRzU3RhdGUgKnJlZHMpCiAgICAgfQogICAg
+IHJlZHMtPm1pZ193YWl0X2Nvbm5lY3QgPSBGQUxTRTsKICAgICByZWRzLT5taWdfd2FpdF9kaXNj
+b25uZWN0ID0gVFJVRTsKLSAgICByZWRzX2NvcmVfdGltZXJfc3RhcnQocmVkcywgcmVkcy0+bWln
+X3RpbWVyLCBNSUdSQVRFX1RJTUVPVVQpOworICAgIHJlZF90aW1lcl9zdGFydChyZWRzLT5taWdf
+dGltZXIsIE1JR1JBVEVfVElNRU9VVCk7CiB9CiAKIHN0YXRpYyB2b2lkIHJlZHNfbWlnX2NsZWFu
+dXBfd2FpdF9kaXNjb25uZWN0KFJlZHNTdGF0ZSAqcmVkcykKQEAgLTM4NTMsNyArMzg1MCw3IEBA
+IFNQSUNFX0dOVUNfVklTSUJMRSB2b2lkIHNwaWNlX3NlcnZlcl9kZXN0cm95KFNwaWNlU2VydmVy
+ICpyZWRzKQogICAgIGlmIChyZWRzLT5tYWluX2NoYW5uZWwpIHsKICAgICAgICAgcmVkX2NoYW5u
+ZWxfZGVzdHJveShSRURfQ0hBTk5FTChyZWRzLT5tYWluX2NoYW5uZWwpKTsKICAgICB9Ci0gICAg
+cmVkc19jb3JlX3RpbWVyX3JlbW92ZShyZWRzLCByZWRzLT5taWdfdGltZXIpOworICAgIHJlZF90
+aW1lcl9yZW1vdmUocmVkcy0+bWlnX3RpbWVyKTsKIAogICAgIGlmIChyZWRzLT5jdHgpIHsKICAg
+ICAgICAgU1NMX0NUWF9mcmVlKHJlZHMtPmN0eCk7CkBAIC00NDMyLDI0ICs0NDI5LDYgQEAgU3Bp
+Y2VXYXRjaCAqcmVkc19jb3JlX3dhdGNoX2FkZChSZWRzU3RhdGUgKnJlZHMsCiAgICByZXR1cm4g
+cmVkcy0+Y29yZS53YXRjaF9hZGQoJnJlZHMtPmNvcmUsIGZkLCBldmVudF9tYXNrLCBmdW5jLCBv
+cGFxdWUpOwogfQogCi12b2lkIHJlZHNfY29yZV93YXRjaF91cGRhdGVfbWFzayhSZWRzU3RhdGUg
+KnJlZHMsCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTcGljZVdhdGNoICp3YXRj
+aCwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludCBldmVudF9tYXNrKQotewot
+ICAgZ19yZXR1cm5faWZfZmFpbChyZWRzICE9IE5VTEwpOwotICAgZ19yZXR1cm5faWZfZmFpbChy
+ZWRzLT5jb3JlLndhdGNoX3VwZGF0ZV9tYXNrICE9IE5VTEwpOwotCi0gICByZWRzLT5jb3JlLndh
+dGNoX3VwZGF0ZV9tYXNrKCZyZWRzLT5jb3JlLCB3YXRjaCwgZXZlbnRfbWFzayk7Ci19Ci0KLXZv
+aWQgcmVkc19jb3JlX3dhdGNoX3JlbW92ZShSZWRzU3RhdGUgKnJlZHMsIFNwaWNlV2F0Y2ggKndh
+dGNoKQotewotICAgZ19yZXR1cm5faWZfZmFpbChyZWRzICE9IE5VTEwpOwotICAgZ19yZXR1cm5f
+aWZfZmFpbChyZWRzLT5jb3JlLndhdGNoX3JlbW92ZSAhPSBOVUxMKTsKLQotICAgcmVkcy0+Y29y
+ZS53YXRjaF9yZW1vdmUoJnJlZHMtPmNvcmUsIHdhdGNoKTsKLX0KLQogU3BpY2VUaW1lciAqcmVk
+c19jb3JlX3RpbWVyX2FkZChSZWRzU3RhdGUgKnJlZHMsCiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIFNwaWNlVGltZXJGdW5jIGZ1bmMsCiAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHZvaWQgKm9wYXF1ZSkKQEAgLTQ0NjEsMzggKzQ0NDAsNiBAQCBTcGljZVRpbWVyICpy
+ZWRzX2NvcmVfdGltZXJfYWRkKFJlZHNTdGF0ZSAqcmVkcywKIAogfQogCi12b2lkIHJlZHNfY29y
+ZV90aW1lcl9zdGFydChSZWRzU3RhdGUgKnJlZHMsCi0gICAgICAgICAgICAgICAgICAgICAgICAg
+ICBTcGljZVRpbWVyICp0aW1lciwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQzMl90
+IG1zKQotewotICAgZ19yZXR1cm5faWZfZmFpbChyZWRzICE9IE5VTEwpOwotICAgZ19yZXR1cm5f
+aWZfZmFpbChyZWRzLT5jb3JlLnRpbWVyX3N0YXJ0ICE9IE5VTEwpOwotCi0gICByZXR1cm4gcmVk
+cy0+Y29yZS50aW1lcl9zdGFydCgmcmVkcy0+Y29yZSwgdGltZXIsIG1zKTsKLX0KLQotdm9pZCBy
+ZWRzX2NvcmVfdGltZXJfY2FuY2VsKFJlZHNTdGF0ZSAqcmVkcywKLSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBTcGljZVRpbWVyICp0aW1lcikKLXsKLSAgIGdfcmV0dXJuX2lmX2ZhaWwocmVk
+cyAhPSBOVUxMKTsKLSAgIGdfcmV0dXJuX2lmX2ZhaWwocmVkcy0+Y29yZS50aW1lcl9jYW5jZWwg
+IT0gTlVMTCk7Ci0KLSAgIHJldHVybiByZWRzLT5jb3JlLnRpbWVyX2NhbmNlbCgmcmVkcy0+Y29y
+ZSwgdGltZXIpOwotfQotCi12b2lkIHJlZHNfY29yZV90aW1lcl9yZW1vdmUoUmVkc1N0YXRlICpy
+ZWRzLAotICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNwaWNlVGltZXIgKnRpbWVyKQotewot
+ICAgIGlmICh0aW1lciA9PSBOVUxMKSB7Ci0gICAgICAgIHJldHVybjsKLSAgICB9Ci0KLSAgICBn
+X3JldHVybl9pZl9mYWlsKHJlZHMgIT0gTlVMTCk7Ci0gICAgZ19yZXR1cm5faWZfZmFpbChyZWRz
+LT5jb3JlLnRpbWVyX3JlbW92ZSAhPSBOVUxMKTsKLQotICAgIHJlZHMtPmNvcmUudGltZXJfcmVt
+b3ZlKCZyZWRzLT5jb3JlLCB0aW1lcik7Ci19Ci0KIHZvaWQgcmVkc191cGRhdGVfY2xpZW50X21v
+dXNlX2FsbG93ZWQoUmVkc1N0YXRlICpyZWRzKQogewogICAgIGludCBhbGxvd19ub3cgPSBGQUxT
+RTsKZGlmZiAtLWdpdCBhL3NlcnZlci9yZWRzLmggYi9zZXJ2ZXIvcmVkcy5oCmluZGV4IGUzMzU1
+ZjgxNy4uZTJiNjkwNGFiIDEwMDY0NAotLS0gYS9zZXJ2ZXIvcmVkcy5oCisrKyBiL3NlcnZlci9y
+ZWRzLmgKQEAgLTExNSwyMCArMTE1LDggQEAgU3BpY2VXYXRjaCAqcmVkc19jb3JlX3dhdGNoX2Fk
+ZChSZWRzU3RhdGUgKnJlZHMsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludCBm
+ZCwgaW50IGV2ZW50X21hc2ssCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNwaWNl
+V2F0Y2hGdW5jIGZ1bmMsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKm9w
+YXF1ZSk7Ci12b2lkIHJlZHNfY29yZV93YXRjaF91cGRhdGVfbWFzayhSZWRzU3RhdGUgKnJlZHMs
+Ci0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBTcGljZVdhdGNoICp3YXRjaCwKLSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludCBldmVudF9tYXNrKTsKLXZvaWQgcmVk
+c19jb3JlX3dhdGNoX3JlbW92ZShSZWRzU3RhdGUgKnJlZHMsIFNwaWNlV2F0Y2ggKndhdGNoKTsK
+LQogU3BpY2VUaW1lciAqcmVkc19jb3JlX3RpbWVyX2FkZChSZWRzU3RhdGUgKnJlZHMsCiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNwaWNlVGltZXJGdW5jIGZ1bmMsCiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKm9wYXF1ZSk7Ci12b2lkIHJlZHNfY29yZV90
+aW1lcl9zdGFydChSZWRzU3RhdGUgKnJlZHMsCi0gICAgICAgICAgICAgICAgICAgICAgICAgICBT
+cGljZVRpbWVyICp0aW1lciwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQzMl90IG1z
+KTsKLXZvaWQgcmVkc19jb3JlX3RpbWVyX2NhbmNlbChSZWRzU3RhdGUgKnJlZHMsCi0gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgU3BpY2VUaW1lciAqdGltZXIpOwotdm9pZCByZWRzX2NvcmVf
+dGltZXJfcmVtb3ZlKFJlZHNTdGF0ZSAqcmVkcywKLSAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBTcGljZVRpbWVyICp0aW1lcik7CiAKICNlbmRpZiAvKiBSRURTX0hfICovCmRpZmYgLS1naXQg
+YS9zZXJ2ZXIvdGVzdHMvYmFzaWMtZXZlbnQtbG9vcC5jIGIvc2VydmVyL3Rlc3RzL2Jhc2ljLWV2
+ZW50LWxvb3AuYwppbmRleCBlMzMxZTg1MjIuLjcwYzlhNGRmNSAxMDA2NDQKLS0tIGEvc2VydmVy
+L3Rlc3RzL2Jhc2ljLWV2ZW50LWxvb3AuYworKysgYi9zZXJ2ZXIvdGVzdHMvYmFzaWMtZXZlbnQt
+bG9vcC5jCkBAIC04Myw0OCArODMsMjMgQEAgc3RhdGljIFNwaWNlVGltZXIqIGJhc2VfdGltZXJf
+YWRkKFNwaWNlVGltZXJGdW5jIGZ1bmMsIHZvaWQgKm9wYXF1ZSkKICAgICByZXR1cm4gYmFzZV9j
+b3JlX2ludGVyZmFjZS50aW1lcl9hZGQoJmJhc2VfY29yZV9pbnRlcmZhY2UsIGZ1bmMsIG9wYXF1
+ZSk7CiB9CiAKLXN0YXRpYyB2b2lkIGJhc2VfdGltZXJfc3RhcnQoU3BpY2VUaW1lciAqdGltZXIs
+IHVpbnQzMl90IG1zKQotewotICAgIGJhc2VfY29yZV9pbnRlcmZhY2UudGltZXJfc3RhcnQoJmJh
+c2VfY29yZV9pbnRlcmZhY2UsIHRpbWVyLCBtcyk7Ci19Ci0KLXN0YXRpYyB2b2lkIGJhc2VfdGlt
+ZXJfY2FuY2VsKFNwaWNlVGltZXIgKnRpbWVyKQotewotICAgIGJhc2VfY29yZV9pbnRlcmZhY2Uu
+dGltZXJfY2FuY2VsKCZiYXNlX2NvcmVfaW50ZXJmYWNlLCB0aW1lcik7Ci19Ci0KLXN0YXRpYyB2
+b2lkIGJhc2VfdGltZXJfcmVtb3ZlKFNwaWNlVGltZXIgKnRpbWVyKQotewotICAgIGJhc2VfY29y
+ZV9pbnRlcmZhY2UudGltZXJfcmVtb3ZlKCZiYXNlX2NvcmVfaW50ZXJmYWNlLCB0aW1lcik7Ci19
+Ci0KIHN0YXRpYyBTcGljZVdhdGNoICpiYXNlX3dhdGNoX2FkZChpbnQgZmQsIGludCBldmVudF9t
+YXNrLCBTcGljZVdhdGNoRnVuYyBmdW5jLCB2b2lkICpvcGFxdWUpCiB7CiAgICAgcmV0dXJuIGJh
+c2VfY29yZV9pbnRlcmZhY2Uud2F0Y2hfYWRkKCZiYXNlX2NvcmVfaW50ZXJmYWNlLCBmZCwgZXZl
+bnRfbWFzaywgZnVuYywgb3BhcXVlKTsKIH0KIAotc3RhdGljIHZvaWQgYmFzZV93YXRjaF91cGRh
+dGVfbWFzayhTcGljZVdhdGNoICp3YXRjaCwgaW50IGV2ZW50X21hc2spCi17Ci0gICAgYmFzZV9j
+b3JlX2ludGVyZmFjZS53YXRjaF91cGRhdGVfbWFzaygmYmFzZV9jb3JlX2ludGVyZmFjZSwgd2F0
+Y2gsIGV2ZW50X21hc2spOwotfQotCi1zdGF0aWMgdm9pZCBiYXNlX3dhdGNoX3JlbW92ZShTcGlj
+ZVdhdGNoICp3YXRjaCkKLXsKLSAgICBiYXNlX2NvcmVfaW50ZXJmYWNlLndhdGNoX3JlbW92ZSgm
+YmFzZV9jb3JlX2ludGVyZmFjZSwgd2F0Y2gpOwotfQotCiBzdGF0aWMgU3BpY2VDb3JlSW50ZXJm
+YWNlIGNvcmUgPSB7CiAgICAgLmJhc2UgPSB7CiAgICAgICAgIC5tYWpvcl92ZXJzaW9uID0gU1BJ
+Q0VfSU5URVJGQUNFX0NPUkVfTUFKT1IsCiAgICAgICAgIC5taW5vcl92ZXJzaW9uID0gU1BJQ0Vf
+SU5URVJGQUNFX0NPUkVfTUlOT1IsCiAgICAgfSwKICAgICAudGltZXJfYWRkID0gYmFzZV90aW1l
+cl9hZGQsCi0gICAgLnRpbWVyX3N0YXJ0ID0gYmFzZV90aW1lcl9zdGFydCwKLSAgICAudGltZXJf
+Y2FuY2VsID0gYmFzZV90aW1lcl9jYW5jZWwsCi0gICAgLnRpbWVyX3JlbW92ZSA9IGJhc2VfdGlt
+ZXJfcmVtb3ZlLAorICAgIC50aW1lcl9zdGFydCA9IHJlZF90aW1lcl9zdGFydCwKKyAgICAudGlt
+ZXJfY2FuY2VsID0gcmVkX3RpbWVyX2NhbmNlbCwKKyAgICAudGltZXJfcmVtb3ZlID0gcmVkX3Rp
+bWVyX3JlbW92ZSwKICAgICAud2F0Y2hfYWRkID0gYmFzZV93YXRjaF9hZGQsCi0gICAgLndhdGNo
+X3VwZGF0ZV9tYXNrID0gYmFzZV93YXRjaF91cGRhdGVfbWFzaywKLSAgICAud2F0Y2hfcmVtb3Zl
+ID0gYmFzZV93YXRjaF9yZW1vdmUsCisgICAgLndhdGNoX3VwZGF0ZV9tYXNrID0gcmVkX3dhdGNo
+X3VwZGF0ZV9tYXNrLAorICAgIC53YXRjaF9yZW1vdmUgPSByZWRfd2F0Y2hfcmVtb3ZlLAogICAg
+IC5jaGFubmVsX2V2ZW50ID0gZXZlbnRfbG9vcF9jaGFubmVsX2V2ZW50LAogfTsKIAotLSAKMi4y
+MS4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGlj
+ZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0
+dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
