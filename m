@@ -2,43 +2,47 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27641EA3C9
-	for <lists+spice-devel@lfdr.de>; Wed, 30 Oct 2019 20:05:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84C53EB42B
+	for <lists+spice-devel@lfdr.de>; Thu, 31 Oct 2019 16:46:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D5BAE6E81C;
-	Wed, 30 Oct 2019 19:05:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 048326E0B8;
+	Thu, 31 Oct 2019 15:46:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 171296E81C
- for <spice-devel@lists.freedesktop.org>; Wed, 30 Oct 2019 19:05:04 +0000 (UTC)
-Received: from jwhite.mn.codeweavers.com ([10.69.137.101])
- by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.89) (envelope-from <jwhite@codeweavers.com>)
- id 1iPtHC-0002mm-I1
- for spice-devel@lists.freedesktop.org; Wed, 30 Oct 2019 14:05:02 -0500
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ABC616E0B8
+ for <spice-devel@lists.freedesktop.org>; Thu, 31 Oct 2019 15:46:32 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-22-wZ33EA2NMIWeRWhOf6DPXw-1; Thu, 31 Oct 2019 11:46:29 -0400
+X-MC-Unique: wZ33EA2NMIWeRWhOf6DPXw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A7252800EB6
+ for <spice-devel@lists.freedesktop.org>; Thu, 31 Oct 2019 15:46:28 +0000 (UTC)
+Received: from localhost (ovpn-117-1.ams2.redhat.com [10.36.117.1])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 392405D713
+ for <spice-devel@lists.freedesktop.org>; Thu, 31 Oct 2019 15:46:28 +0000 (UTC)
+Date: Thu, 31 Oct 2019 16:46:27 +0100
+From: Victor Toso <victortoso@redhat.com>
 To: spice-devel@lists.freedesktop.org
-References: <20190916191333.27139-1-jwhite@codeweavers.com>
-From: Jeremy White <jwhite@codeweavers.com>
-Message-ID: <5bf52aa5-367a-bc99-99bd-6854aadd38c2@codeweavers.com>
-Date: Wed, 30 Oct 2019 14:05:02 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+Message-ID: <20191031154627.ase2nwgygawmzxdd@wingsuit>
 MIME-Version: 1.0
-In-Reply-To: <20190916191333.27139-1-jwhite@codeweavers.com>
-Content-Language: en-US
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; 
- d=codeweavers.com; s=6377696661; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:
- Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WyuFjzdNc0axaFegwv1Qftmb4rbEDMbwJT5Rhfk6fh8=; b=pYsEMBDTu7OKyhLpWSyOJsKtjv
- XPyO7nYzuEpu7ThrcrbVjCYN/c9Pg6ArJ079WOdYn43d+VYXvxEM0WqUfxB4x2z13KAHzr70IVY9/
- 1z8U73s4ebjaRsDhWizEgEsi+50kwH5OFwu3VjyaL1B4kW922R1QSNVQ8HYuqtYdoifo=;
-Subject: Re: [Spice-devel] [PATCH x11spice 00/10] Provide a simulated set of
- outputs and crtcs
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Mimecast-Spam-Score: 0
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=redhat.com; 
+ s=mimecast20190719; t=1572536791;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=Gr8/AoJkysWWU21cR02lSV5x4jZkcD/kkgfmaBfMmwk=;
+ b=FRiooTcKjxZ0uUU/yHwByMIoFjTuGmYxJzPWxh3+UuvdWaQhEh2vtWW8q2A+BpP6VBgtm6
+ pQOAhlHDQmzrMcx3X+0gb9FkvoyTad7cjqm8t8n1nXjqZo2SuoJemstTxDZ+477XAmuquG
+ KqKUoCGcxVVYuN3CpF6h90J2CvE7sw0=
+Subject: [Spice-devel] Using GitLab
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -50,27 +54,72 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============0542624902=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-UGluZz8KCkhlbnJpIGhhcyByZXZpZXdlZCB0aGVzZSwgYW5kIEkgY291bGQgaGF2ZSBoaW0gc2Vu
-ZCBhbiBhY2ssIGJ1dCBJIHdhcyAKc2VjcmV0bHkgaG9waW5nIHRvIGdldCBhbiBYIGV4cGVydCB0
-byByZXZpZXcgcGF0Y2ggNS4KCkNoZWVycywKCkplcmVteQoKT24gOS8xNi8xOSAyOjEzIFBNLCBK
-ZXJlbXkgV2hpdGUgd3JvdGU6Cj4gVGhlIHNwaWNlLXZpZGVvLWR1bW15IGRyaXZlciBoYXMgdHdv
-IGZsYXdzLiAgRmlyc3QsIGJ5IG5vdCBwcm92aWRpbmcKPiBhIGNydGMsIHdlIHRha2UgdGhlIFBy
-ZXNlbnQgZXh0ZW5zaW9uIGludG8gYSBjb2RlIHBhdGggd2hlcmUgaXQKPiBzaW11bGF0ZXMgYSBy
-ZWZyZXNoIHJhdGUsIGFuZCB0aGUgc2ltdWxhdGVkIHJhdGUgaXMgMUh6Lgo+IAo+IEFwcGxpY2F0
-aW9ucyB0aGF0IHF1ZXJ5IGFuZCB1c2UgdGhhdCByYXRlIHRoZW4gcGVyZm9ybSBiYWRseS4KPiBZ
-b3UgY2FuIHNlZSB0aGF0IG1vc3QgZWFzaWx5IHdpdGggZ2x4Z2VhcnMuCj4gCj4gU2Vjb25kLCB5
-b3UgY2Fubm90IGR5bmFtaWNhbGx5IHJlc2l6ZSBvdXIgZHVtbXkgZHJpdmVyLgo+IAo+IEJ5IGFk
-ZGluZyBhIHNpbXVsYXRlZCBzZXQgb2Ygb3V0cHV0cyBhbmQgY3J0Y3MsIHdlIGdpdmUgdGhlIGR1
-bW15Cj4gZHJpdmVyIHRoZSBhYmlsaXR5IHRvIGNvbnRyb2wgdGhlIHJlZnJlc2ggcmF0ZSBhbmQg
-dG8gYWxsb3cKPiBkeW5hbWljIHJlc2l6aW5nLgo+IAo+IAo+IF9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0Cj4g
-U3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVz
-a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo+IAoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0
-ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNr
-dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+--===============0542624902==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="gn3da6epwgydtknf"
+Content-Disposition: inline
+
+--gn3da6epwgydtknf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hi list,
+
+You might note that the Gitlab activity will increase a bit from
+now on, hopefully. It was agreed within some SPICE collaborators
+to give a serious try on using this infrastructure that is
+available to us.
+
+One potential great change and challenge is the usage of merge
+requests in oppose to patch series over mailing list. I hope the
+benefits outweigh the downsides in the long run.
+
+I invite you to subscribe to notifications of the components you
+might be interested, to discuss and review issues and merge
+requests and improve different areas code integration, testing
+and release.
+
+    https://gitlab.freedesktop.org/spice
+
+Cheers,
+Victor
+
+--gn3da6epwgydtknf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl27AdMACgkQl9kSPeN6
+SE8t4Q//ePFHzqYElEzvq1VA/4CYxSfbHCPJfip5vtmB3rwdF/pmE/U5ySsWs/CD
+WMrk41XQbs40CpFm1qONoUdY40IziueWQINuh+H6gs3RMLpiAKsgIF9HdvSMpwSI
+uV9fbXQBG9/+upFPuCFlMZmZ66zmPEG+62FT/sZMs7OK9I2UQRUECRPPZIYZYSf5
+QRFlljjHW2FblQPqeAX3p7N7lh080ujBErPDW2lAIYt1tY4cJZUylzl1i9ssV1dC
+YdjTcVpoIlFBzIBLOprS0Wof2mVHBHAEEQfzs0VZ5QPeprLWcPm4X/KsZdCg3d1H
+iEp0fj5nMtgRAxDI1ijbNUpLCj/9j0YCsRAKpYRFR+Y77MRuenxf6mimGvNKmMAE
++nwRnpzC1Qlj6rlWDK4asxzi4+eV9UIdB6F+PB71wm9ZMrpjjCzFgkrIXD/BePv2
+o6s2xe9H49ItE5Lmp17F9DvvMtKFM7GTeTxJw+pGasx78b+xq8MeUFC9q7f4ypUg
+Rq1JGdQDzvabHUTbu41cEL45UWhkAmZRO3FXHFU95Pf5fmNJIvPF1/bHcBzr6rwi
+N7OsrvahhhO1C7ltjYoX6Ehf/6xnImYp+qVt/8zIOOw5Dj/PWipu1dMrrWSjsP5R
+4a2+8Sps0Izr18uhi4VSGWVbiak1/rQ2JDdGDrw58AMqsFciy7s=
+=2Ldk
+-----END PGP SIGNATURE-----
+
+--gn3da6epwgydtknf--
+
+
+--===============0542624902==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0542624902==--
+
