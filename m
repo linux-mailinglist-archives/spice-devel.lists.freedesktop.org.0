@@ -1,53 +1,44 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75D00F36EB
-	for <lists+spice-devel@lfdr.de>; Thu,  7 Nov 2019 19:20:55 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1468FF4912
+	for <lists+spice-devel@lfdr.de>; Fri,  8 Nov 2019 13:00:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C8F2E6F780;
-	Thu,  7 Nov 2019 18:20:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7DFCB6F963;
+	Fri,  8 Nov 2019 12:00:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 2458 seconds by postgrey-1.36 at gabe;
- Thu, 07 Nov 2019 18:18:27 UTC
-Received: from mta-us-central-02.viasat.com (mta-us-central-02.viasat.com
- [8.37.103.59])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5FCAC6F77B
- for <spice-devel@lists.freedesktop.org>; Thu,  7 Nov 2019 18:18:27 +0000 (UTC)
-Received: from pps.filterd (wdc1mta01.viasat.com [127.0.0.1])
- by wdc1mta01.viasat.com (8.16.0.27/8.16.0.27) with SMTP id xA7HaI8B029802
- for <spice-devel@lists.freedesktop.org>; Thu, 7 Nov 2019 17:37:28 GMT
-From: "Timm, Brent" <Brent.Timm@viasat.com>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Thread-Topic: Software ECCN
-Thread-Index: AdWVkff2lUXTRObSTaiAqyRZsCyQfA==
-Date: Thu, 7 Nov 2019 17:37:26 +0000
-Message-ID: <E1706847C54D22429CEA6F504D422B4D6D3FEE07@wdc1exchmbxp01.hq.corp.viasat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3E5F16F94F;
+ Fri,  8 Nov 2019 11:40:02 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4AE39222C2;
+ Fri,  8 Nov 2019 11:40:01 +0000 (UTC)
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Fri,  8 Nov 2019 06:35:52 -0500
+Message-Id: <20191108113752.12502-85-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191108113752.12502-1-sashal@kernel.org>
+References: <20191108113752.12502-1-sashal@kernel.org>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-11-07_05:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=476 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1910280000 definitions=main-1911070164
-X-Mailman-Approved-At: Thu, 07 Nov 2019 18:20:52 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=viasat.com; h=from : to : subject :
- date : message-id : content-type : mime-version; s=pp1;
- bh=48eOXUn+1dalsf4OhfclZCl7BDcu7rp5JZESjMBsdEQ=;
- b=Bw5+8sCU91dqbF3nEGQpBvSgjEq4s0RwA3KEhLi/YxaQ/V4jOdiJLd3UUOPKzhIef+yU
- oNp5aJG0C60eL5HFMpQNNkZMRBGVMgeJm/zR0k0BLTE1gClG0CNI3f/OpoQrzKGpQEBm
- vImplFVyQhYvDe4QTz1zwPuEeRpTLftbPbR0wKUyUxH11aUQa1wAtEjaNNzsBi7X6m7e
- gA/LWL/oK/RDCmMrHL8RzRs0w753VCOcKTuO8Dfh1WL154b8bx7e5CwUHpyL1pQ70hAW
- XbQi/hD//vcGzQs4SXsaVufIUdw1N1nnhFaaOZYP3B5QhLpzKKZwuNUQFVGT3lrLCHu+ gw== 
-Subject: [Spice-devel] Software ECCN
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Mailman-Approved-At: Fri, 08 Nov 2019 12:00:47 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=kernel.org; s=default; t=1573213202;
+ bh=i2tWQS8K0Ossgcc5vBYSM8RWjs14zDUfRjUMgb8DQSQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=RI6D1H6WT2fLDZwloPGP2np3P381NSN9GYXoNXBGBIqQBf1FP83xmUZlJh26XbDGH
+ XNGcMyCSHaOROvwMzT5GHM6XuMhwcxAFSV4R3iOLXhIFcCqn1kqBp7aNZVnKs9WzBf
+ 2cjQ7CknoIyUPYs/qNiQb0bVs9KJL6gXUCAOLY9w=
+Subject: [Spice-devel] [PATCH AUTOSEL 4.19 085/205] qxl: fix null-pointer
+ crash during suspend
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,112 +50,58 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0213221413=="
+Cc: Sasha Levin <sashal@kernel.org>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, Peter Wu <peter@lekensteyn.nl>,
+ spice-devel@lists.freedesktop.org, Gerd Hoffmann <kraxel@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0213221413==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_E1706847C54D22429CEA6F504D422B4D6D3FEE07wdc1exchmbxp01h_"
-
---_000_E1706847C54D22429CEA6F504D422B4D6D3FEE07wdc1exchmbxp01h_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hello,
-
-Please provide the ECCN for SPICE Guest Tools.
-
-Thank you.
-
-Brent Timm
-Global Trade - Carlsbad
-ViaSat, Inc.
-(760)893-3149
-
-
---_000_E1706847C54D22429CEA6F504D422B4D6D3FEE07wdc1exchmbxp01h_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri",sans-serif;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri",sans-serif;}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">Hello,<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Please provide the ECCN for SPICE Guest Tools.<o:p><=
-/o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Thank you.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Brent Timm<o:p></o:p></p>
-<p class=3D"MsoNormal">Global Trade &#8211; Carlsbad<o:p></o:p></p>
-<p class=3D"MsoNormal">ViaSat, Inc.<o:p></o:p></p>
-<p class=3D"MsoNormal">(760)893-3149<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</body>
-</html>
-
---_000_E1706847C54D22429CEA6F504D422B4D6D3FEE07wdc1exchmbxp01h_--
-
---===============0213221413==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0213221413==--
+RnJvbTogUGV0ZXIgV3UgPHBldGVyQGxla2Vuc3RleW4ubmw+CgpbIFVwc3RyZWFtIGNvbW1pdCA3
+OTQ4YTJiMTU4NzMzMTlkMWJmZjRkMzdjMDliOWYyYmY4N2I5MDIxIF0KCiJjcnRjLT5oZWxwZXJf
+cHJpdmF0ZSIgaXMgbm90IGluaXRpYWxpemVkIGJ5IHRoZSBRWEwgZHJpdmVyIGFuZCB0aHVzIHRo
+ZQoiY3J0Y19mdW5jcy0+ZGlzYWJsZSIgY2FsbCB3b3VsZCBjcmFzaCAocmVzdWx0aW5nIGluIHN1
+c3BlbmQgZmFpbHVyZSkuCkZpeCB0aGlzIGJ5IGNvbnZlcnRpbmcgdGhlIHN1c3BlbmQvcmVzdW1l
+IGZ1bmN0aW9ucyB0byB1c2UgdGhlCmRybV9tb2RlX2NvbmZpZ19oZWxwZXJfKiBoZWxwZXJzLgoK
+VGVzdGVkIHN5c3RlbSBzbGVlcCB3aXRoIFFFTVUgMy4wIHVzaW5nICJlY2hvIG1lbSA+IC9zeXMv
+cG93ZXIvc3RhdGUiLgpEdXJpbmcgc3VzcGVuZCB0aGUgZm9sbG93aW5nIG1lc3NhZ2UgaXMgdmlz
+aWJsZSBmcm9tIFFFTVU6CgogICAgc3BpY2Uvc2VydmVyL2Rpc3BsYXktY2hhbm5lbC5jOjI0MjU6
+ZGlzcGxheV9jaGFubmVsX3ZhbGlkYXRlX3N1cmZhY2U6IGNhbnZhcyBhZGRyZXNzIGlzIDB4N2Zk
+MDVkYTY4MzA4IGZvciAwIChhbmQgaXMgTlVMTCkKICAgIHNwaWNlL3NlcnZlci9kaXNwbGF5LWNo
+YW5uZWwuYzoyNDI2OmRpc3BsYXlfY2hhbm5lbF92YWxpZGF0ZV9zdXJmYWNlOiBmYWlsZWQgb24g
+MAoKVGhpcyBzZWVtcyB0byBiZSB0cmlnZ2VyZWQgYnkgUVhMX0lPX05PVElGWV9DTUQgYWZ0ZXIK
+UVhMX0lPX0RFU1RST1lfUFJJTUFSWV9BU1lOQywgYnV0IGFzaWRlIGZyb20gdGhlIHdhcm5pbmcg
+dGhpbmdzIHN0aWxsCnNlZW0gdG8gd29yayAodGVzdGVkIHdpdGggYm90aCB0aGUgR1RLIGFuZCAt
+c3BpY2Ugb3B0aW9ucykuCgpTaWduZWQtb2ZmLWJ5OiBQZXRlciBXdSA8cGV0ZXJAbGVrZW5zdGV5
+bi5ubD4KTGluazogaHR0cDovL3BhdGNod29yay5mcmVlZGVza3RvcC5vcmcvcGF0Y2gvbXNnaWQv
+MjAxODA5MDQyMDI3NDcuMTQ5NjgtMS1wZXRlckBsZWtlbnN0ZXluLm5sClNpZ25lZC1vZmYtYnk6
+IEdlcmQgSG9mZm1hbm4gPGtyYXhlbEByZWRoYXQuY29tPgpTaWduZWQtb2ZmLWJ5OiBTYXNoYSBM
+ZXZpbiA8c2FzaGFsQGtlcm5lbC5vcmc+Ci0tLQogZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfZHJ2
+LmMgfCAyNiArKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDUgaW5z
+ZXJ0aW9ucygrKSwgMjEgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJt
+L3F4bC9xeGxfZHJ2LmMgYi9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuYwppbmRleCAyNDQ1
+ZTc1Y2Y3ZWE2Li5kMDBmNDVlZWQwM2NhIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vcXhs
+L3F4bF9kcnYuYworKysgYi9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuYwpAQCAtMTM2LDIw
+ICsxMzYsMTEgQEAgc3RhdGljIGludCBxeGxfZHJtX2ZyZWV6ZShzdHJ1Y3QgZHJtX2RldmljZSAq
+ZGV2KQogewogCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gZGV2LT5wZGV2OwogCXN0cnVjdCBxeGxf
+ZGV2aWNlICpxZGV2ID0gZGV2LT5kZXZfcHJpdmF0ZTsKLQlzdHJ1Y3QgZHJtX2NydGMgKmNydGM7
+Ci0KLQlkcm1fa21zX2hlbHBlcl9wb2xsX2Rpc2FibGUoZGV2KTsKLQotCWNvbnNvbGVfbG9jaygp
+OwotCXF4bF9mYmRldl9zZXRfc3VzcGVuZChxZGV2LCAxKTsKLQljb25zb2xlX3VubG9jaygpOwor
+CWludCByZXQ7CiAKLQkvKiB1bnBpbiB0aGUgZnJvbnQgYnVmZmVycyAqLwotCWxpc3RfZm9yX2Vh
+Y2hfZW50cnkoY3J0YywgJmRldi0+bW9kZV9jb25maWcuY3J0Y19saXN0LCBoZWFkKSB7Ci0JCWNv
+bnN0IHN0cnVjdCBkcm1fY3J0Y19oZWxwZXJfZnVuY3MgKmNydGNfZnVuY3MgPSBjcnRjLT5oZWxw
+ZXJfcHJpdmF0ZTsKLQkJaWYgKGNydGMtPmVuYWJsZWQpCi0JCQkoKmNydGNfZnVuY3MtPmRpc2Fi
+bGUpKGNydGMpOwotCX0KKwlyZXQgPSBkcm1fbW9kZV9jb25maWdfaGVscGVyX3N1c3BlbmQoZGV2
+KTsKKwlpZiAocmV0KQorCQlyZXR1cm4gcmV0OwogCiAJcXhsX2Rlc3Ryb3lfbW9uaXRvcnNfb2Jq
+ZWN0KHFkZXYpOwogCXF4bF9zdXJmX2V2aWN0KHFkZXYpOwpAQCAtMTc1LDE0ICsxNjYsNyBAQCBz
+dGF0aWMgaW50IHF4bF9kcm1fcmVzdW1lKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIGJvb2wgdGhh
+dykKIAl9CiAKIAlxeGxfY3JlYXRlX21vbml0b3JzX29iamVjdChxZGV2KTsKLQlkcm1faGVscGVy
+X3Jlc3VtZV9mb3JjZV9tb2RlKGRldik7Ci0KLQljb25zb2xlX2xvY2soKTsKLQlxeGxfZmJkZXZf
+c2V0X3N1c3BlbmQocWRldiwgMCk7Ci0JY29uc29sZV91bmxvY2soKTsKLQotCWRybV9rbXNfaGVs
+cGVyX3BvbGxfZW5hYmxlKGRldik7Ci0JcmV0dXJuIDA7CisJcmV0dXJuIGRybV9tb2RlX2NvbmZp
+Z19oZWxwZXJfcmVzdW1lKGRldik7CiB9CiAKIHN0YXRpYyBpbnQgcXhsX3BtX3N1c3BlbmQoc3Ry
+dWN0IGRldmljZSAqZGV2KQotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxA
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
+YW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
