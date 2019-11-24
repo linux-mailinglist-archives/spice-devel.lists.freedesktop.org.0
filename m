@@ -1,84 +1,44 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5DCE1068E2
-	for <lists+spice-devel@lfdr.de>; Fri, 22 Nov 2019 10:33:31 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B31AC10829E
+	for <lists+spice-devel@lfdr.de>; Sun, 24 Nov 2019 10:33:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E7ACB6F50F;
-	Fri, 22 Nov 2019 09:33:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0445E89EB4;
+	Sun, 24 Nov 2019 09:33:21 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from NAM01-BN3-obe.outbound.protection.outlook.com
- (mail-eopbgr740083.outbound.protection.outlook.com [40.107.74.83])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A894C6F4DD
- for <spice-devel@lists.freedesktop.org>; Fri, 22 Nov 2019 07:55:02 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KfDjTy811JYgAqXU7xlpFsrhRtugrJenn3k8+y+cp7fUSSY/q34Waun4Y42hO5dmUWU+K2vEF1FyONQu9eDw0vfqI+sZiFZY1Oz+QUjUSC3Mbe7VP3dUbsiP4kcDGj9UzR8pJRdq0TBqqpzeyeErWxS1KQfHy1+fMjk9eMdS/37Z8tlkgk0Un9ECkoazZ2IcjY23nG4aJgZFILYS6UyY6gpZ6gzrUpCAcOyXhfBRfQSpY/dBPX2QoS1LwxYmMMzQeyffKbptqgBIvUD5Xr4WLBW8JFYkN7KM2bncW8oz7pqeCVDz6xRtZ8iiRUUQJDa2saTBXwdayryzGhP8PLp7QA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S43rzYZJHpY+qsx+2QQPTPPMiBL2Mnh+9ZjJIVhit2M=;
- b=dIRRBtrGW3mb+bbfNfKl0mRKhzOHKW+gKdSaNMmPakkwTcM7dm86FMBWaauAEWnjK75afE7M/QqgHuzpJd7/9JVUJPqVz0bFGNmk9g/kxaVAmHsJvl/KvjxzbXswXIF11CAhxu+qbmhZqt57QjPkMXw08AIVUS4mKxTJXrkecn6gIfZ1c8nt1O2bYI4sb+xU7hSjIQfGImGKjGhkytuaYh52ueWZKDJVafz/zL/vgCDk+h2OI76piVJIWu71a4Fy6eggUzO7jckZgHWaMzl1px2GW4zlKBviygElULJdC95h9oNw78AExxXY75w7Xe83PQfr7u8V+266p2RFkfOVTg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=norwich.edu; dmarc=pass action=none header.from=norwich.edu;
- dkim=pass header.d=norwich.edu; arc=none
-Received: from BN7PR06MB5186.namprd06.prod.outlook.com (20.176.29.17) by
- BN7PR06MB6066.namprd06.prod.outlook.com (20.176.30.210) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2474.17; Fri, 22 Nov 2019 07:54:58 +0000
-Received: from BN7PR06MB5186.namprd06.prod.outlook.com
- ([fe80::6085:9f60:24c7:3831]) by BN7PR06MB5186.namprd06.prod.outlook.com
- ([fe80::6085:9f60:24c7:3831%6]) with mapi id 15.20.2474.019; Fri, 22 Nov 2019
- 07:54:57 +0000
-From: "Huw O. Read" <hread@norwich.edu>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Thread-Topic: Mac OSX Client
-Thread-Index: AQHVoQohTjzOWeODa0mJHX5L1lP2cQ==
-Date: Fri, 22 Nov 2019 07:54:56 +0000
-Message-ID: <B2B20520-0A31-4740-9B5D-14929AAA17F2@norwich.edu>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Microsoft-MacOutlook/10.16.0.190211
-x-originating-ip: [50.58.144.12]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 3594acaf-0146-4d76-19fb-08d76f2144e8
-x-ms-traffictypediagnostic: BN7PR06MB6066:
-x-ms-exchange-purlcount: 4
-x-microsoft-antispam-prvs: <BN7PR06MB6066BA6772D11F16E00574A1BC490@BN7PR06MB6066.namprd06.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-forefront-prvs: 02296943FF
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(346002)(376002)(366004)(396003)(136003)(39850400004)(199004)(189003)(76094002)(66556008)(88552002)(2501003)(14454004)(606006)(33656002)(5660300002)(6486002)(966005)(36756003)(2906002)(86362001)(81156014)(3480700005)(25786009)(478600001)(66066001)(9326002)(58126008)(6116002)(99286004)(3846002)(8936002)(2351001)(786003)(8676002)(316002)(81166006)(6506007)(186003)(26005)(256004)(14444005)(6436002)(71200400001)(71190400001)(66446008)(16799955002)(236005)(7116003)(102836004)(76116006)(2616005)(6306002)(54896002)(6512007)(64756008)(6916009)(66946007)(21615005)(7736002)(91956017)(66476007)(75432002)(790700001)(5640700003);
- DIR:OUT; SFP:1101; SCL:1; SRVR:BN7PR06MB6066;
- H:BN7PR06MB5186.namprd06.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: norwich.edu does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: t0dkPYJjihbHSQIFAGF8XAKsC9lWjlWMoTyCyYT4bM+W7rtratVkbGvyPYzsziGVxRQgzGmlSP6cu+SY88uQXP2MOBeMziOHOGLyLNN9f5Tb1qjL89k9ChK8L6qhJNO/yHXNH+aXRw3oDvL9QbuuwSLvsh7ej9O7U0CMT2H8X56tneyKuybI7LEvwWp78zl7fJ/z2X8hUf2+VTjN+c7sBObC5IN4HGDA6yqXe7/0gE86TPrw+DJnE808rbtkQJ3qrJ04FStQPgUGf+XI3rqLA5wO5i3URRixsFmWRiTTKgfSB0M4heDdD1hsqm5Tj4nEOxqNkEAQKjgGAIwL0iLoymJFj0FFVwSy4JRfsXIuqyoOeFqRaP/g3kFa9TdVmNNaNwvGHaNSEL/nd5IO6+TvvtpzJrioHcDQmrus39vj+qB9Yn6g2MLYJkwHZJUKv7qPaonb9hZtsrOeEfsop17aaACh+tOZQvXhc1E5dQUGBF4=
-x-ms-exchange-transport-forked: True
+X-Greylist: delayed 907 seconds by postgrey-1.36 at gabe;
+ Sun, 24 Nov 2019 08:27:30 UTC
+Received: from m13-115.163.com (m13-115.163.com [220.181.13.115])
+ by gabe.freedesktop.org (Postfix) with ESMTP id B0354892AA
+ for <spice-devel@lists.freedesktop.org>; Sun, 24 Nov 2019 08:27:30 +0000 (UTC)
+Received: from linuxgcc$163.com ( [111.18.92.9] ) by ajax-webmail-wmsvr115
+ (Coremail) ; Sun, 24 Nov 2019 16:12:18 +0800 (CST)
+X-Originating-IP: [111.18.92.9]
+Date: Sun, 24 Nov 2019 16:12:18 +0800 (CST)
+From: =?GBK?B?utjS48zO?= <linuxgcc@163.com>
+To: spice-devel@lists.freedesktop.org
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190724(ac680a23)
+ Copyright (c) 2002-2019 www.mailtech.cn 163com
+X-CM-CTRLDATA: NmvT5mZvb3Rlcl9odG09MTczOjU2
 MIME-Version: 1.0
-X-OriginatorOrg: norwich.edu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3594acaf-0146-4d76-19fb-08d76f2144e8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Nov 2019 07:54:57.3372 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 34fcb756-3a7c-4dea-ab4d-5324bc02ef5e
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: i6S+B0qtqAFnqntfSQp3t+WSTjx4xtnWDBNkHkMCpsKj5cE7YFStke7BkoG01tAejKYuGOiUwE2mGN1vQ1zMQw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR06MB6066
-X-Mailman-Approved-At: Fri, 22 Nov 2019 09:33:27 +0000
+Message-ID: <29990268.9698.16e9c77f757.Coremail.linuxgcc@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: c8GowADX5mpjO9pdaeFnAw--.9009W
+X-CM-SenderInfo: polq35xjffqiywtou0bp/1tbiEwl3JlXlu3cSkQABs1
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Mailman-Approved-At: Sun, 24 Nov 2019 09:33:19 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=norwich.edu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S43rzYZJHpY+qsx+2QQPTPPMiBL2Mnh+9ZjJIVhit2M=;
- b=ujX0scR5IkypzgoBPdV24kNg4cBKAxSO+sMtjoCvzp4tJk5l+kHBV3RTZJJsz5kpUdqFdOXOV2fmLsUXBybApz8sYPZuXEB+MyI4C5i8wZt866+b5hOUzYOG5j6NzzPoirzIw7dYj7RoddY4fFg+LYkwteKdAqkBO6wk+Af4eDA=
-X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=hread@norwich.edu; 
-Subject: [Spice-devel] Mac OSX Client
+ d=163.com; 
+ s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=THiRF
+ Bz9qg5tXwShwc18N8ESYeaJBjrdulUWMTqdCoI=; b=qCMulGOLE/rXBS/fvS5T9
+ frui7XZNeD6sBPXd7VsDxOFqheDuz7JHpbksfxK614YtATFRkFPkqgbtzsW7Y1nW
+ WLEbeF5l6R3x/xzRovNNmaK/jt815hKnuf5AwHwHcxPv5o7tgNpK+S1RGecgA6lb
+ 4UNKsSWSvCJSm0B/PV1mm8=
+Subject: [Spice-devel] how to spice-gtk-0.35 on windows 7 home
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -90,128 +50,28 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0945948735=="
+Content-Type: multipart/mixed; boundary="===============0376490422=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0945948735==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_B2B205200A3147409B5D14929AAA17F2norwichedu_"
+--===============0376490422==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_150977_1891462562.1574583138135"
 
---_000_B2B205200A3147409B5D14929AAA17F2norwichedu_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+------=_Part_150977_1891462562.1574583138135
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: 7bit
 
-SGVsbG8sDQpJdCBhcHBlYXJzIHRoYXQgdGhlIGJ1bmRsZSAoaHR0cDovL3Blb3BsZS5mcmVlZGVz
-a3RvcC5vcmcvfnRldWYvc3BpY2UtZ3RrLW9zeC9kbWcvMC41LjcvUmVtb3RlVmlld2VyLTAuNS43
-LTEuZG1nKSBvZiBSZW1vdGVWaWV3ZXIgaXMgaGF2aW5nIHRyb3VibGUgcnVubmluZyBvbiBuZXdl
-ciB2ZXJzaW9ucyBvZiBNYWMgT1NYIChhdCBsZWFzdCBmb3IgbWUpLiBJ4oCZdmUgdHJpZWQgZm9s
-bG93aW5nIHRoZSBpbnN0cnVjdGlvbnMgb24gaHR0cHM6Ly93d3cuc3BpY2Utc3BhY2Uub3JnL29z
-eC1jbGllbnQuaHRtbCBidXQgdW5mb3J0dW5hdGVseSBzb21lIG9mIHRoZSBzY3JpcHRzIGFwcGVh
-ciBhIGJpdCBvdXQgb2YgZGF0ZSAoY2VydGFpbiBVUkxzIHRoZXkgcG9pbnQgdG8gbm93IGdvIHRv
-IDQwNHMpLg0KDQpJIHdhcyBvbiBtYWNwb3J0cyBsb29raW5nIGZvciBzb21ldGhpbmcsIGFuZCBz
-dHVtYmxlZCBhY3Jvc3MgdmlydC12aWV3ZXIgKGh0dHBzOi8vd3d3Lm1hY3BvcnRzLm9yZy9wb3J0
-cy5waHA/Ynk9bmFtZSZzdWJzdHI9dmlydC12aWV3ZXIpLiBBbHRob3VnaCBpdCBpcyB2ZXJzaW9u
-IDAuNyAoSSBiZWxpZXZlIDAuOCBpcyB0aGUgbGF0ZXN0IGF0IHRoZSB0aW1lIG9mIHdyaXRpbmcp
-IGl0IGFwcGVhcnMgdG8gd29yay4gV291bGQgaXQgYmUgcG9zc2libGUgdG8gdXBkYXRlIHRoZSBo
-dHRwczovL3d3dy5zcGljZS1zcGFjZS5vcmcvb3N4LWNsaWVudC5odG1sIHdlYnNpdGUgdG8gc3Vn
-Z2VzdCBTcGljZSB1c2VycyBvbiBNYWMgY291bGQgaW5zdGFsbCB2aXJ0LXZpZXdlciBtdWNoIGVh
-c2llciB3aXRoOg0KDQokc3VkbyBwb3J0IGluc3RhbGwgdmlydC12aWV3ZXINCg0KQW5kIChvbiBw
-cm94bW94IGF0IGxlYXN0KSB0aGVuIGxhdW5jaCB0aGUgY2xpZW50IGZyb20gdGhlIHRlcm1pbmFs
-IHdpdGg6DQokcmVtb3RlLXZpZXdlciAvcGF0aC90by9kb3dubG9hZC52dg0KDQpKdXN0IGEgdGhv
-dWdodC4NCg0KQmVzdCBSZWdhcmRzLA0KICAgIEh1dw0KDQpwLnMuIEZvciB0aGUgc2FrZSBvZiBp
-dCwgYWZ0ZXIgaW5zdGFsbGluZyAwLjcgYXMgYWJvdmUsIEkgcmVtb3ZlZCBpdCBhbmQgdHJpZWQg
-aW5zdGFsbGluZyAwLjggZnJvbSB0aGUgdGFyYmFsbCBodHRwczovL3JlbGVhc2VzLnBhZ3VyZS5v
-cmcvdmlydC12aWV3ZXIvdmlydC12aWV3ZXItOC4wLnRhci5neiAgd2l0aDoNCiQuL2NvbmZpZ3Vy
-ZSDigJNwcmVmaXg9L29wdC9sb2NhbCAmJiBtYWtlICYmIHN1ZG8gbWFrZSBpbnN0YWxsDQpBbmQg
-aXQgc2VlbWVkIHRvIGluc3RhbGwgb2ssIEkgd2FzIGFibGUgdG8gbGF1bmNoIGEgVk0gdGhyb3Vn
-aCBzcGljZSB3aXRoIDAuOC4NCg0K
+please help me,i want build spice-gtk-0.35 on windows ,is there have same build guide?
+------=_Part_150977_1891462562.1574583138135
+Content-Type: text/html; charset=GBK
+Content-Transfer-Encoding: 7bit
 
---_000_B2B205200A3147409B5D14929AAA17F2norwichedu_
-Content-Type: text/html; charset="utf-8"
-Content-ID: <8417E03C7450CD43A6F64145F038B7FF@namprd06.prod.outlook.com>
-Content-Transfer-Encoding: base64
+<div style="line-height:1.7;color:#000000;font-size:14px;font-family:Arial">please help me,i want build&nbsp;spice-gtk-0.35 on windows ,is there have same build guide?</div><br><br><span title="neteasefooter"><p>&nbsp;</p></span>
+------=_Part_150977_1891462562.1574583138135--
 
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
-PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
-YWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3NlLTE6MiAxNSA1IDIgMiAyIDQgMyAy
-IDQ7fQ0KLyogU3R5bGUgRGVmaW5pdGlvbnMgKi8NCnAuTXNvTm9ybWFsLCBsaS5Nc29Ob3JtYWws
-IGRpdi5Nc29Ob3JtYWwNCgl7bWFyZ2luOjBpbjsNCgltYXJnaW4tYm90dG9tOi4wMDAxcHQ7DQoJ
-Zm9udC1zaXplOjExLjBwdDsNCglmb250LWZhbWlseToiQ2FsaWJyaSIsc2Fucy1zZXJpZjt9DQph
-OmxpbmssIHNwYW4uTXNvSHlwZXJsaW5rDQoJe21zby1zdHlsZS1wcmlvcml0eTo5OTsNCgljb2xv
-cjojMDU2M0MxOw0KCXRleHQtZGVjb3JhdGlvbjp1bmRlcmxpbmU7fQ0KYTp2aXNpdGVkLCBzcGFu
-Lk1zb0h5cGVybGlua0ZvbGxvd2VkDQoJe21zby1zdHlsZS1wcmlvcml0eTo5OTsNCgljb2xvcjoj
-OTU0RjcyOw0KCXRleHQtZGVjb3JhdGlvbjp1bmRlcmxpbmU7fQ0Kc3Bhbi5FbWFpbFN0eWxlMTcN
-Cgl7bXNvLXN0eWxlLXR5cGU6cGVyc29uYWwtY29tcG9zZTsNCglmb250LWZhbWlseToiQ2FsaWJy
-aSIsc2Fucy1zZXJpZjsNCgljb2xvcjp3aW5kb3d0ZXh0O30NCi5Nc29DaHBEZWZhdWx0DQoJe21z
-by1zdHlsZS10eXBlOmV4cG9ydC1vbmx5Ow0KCWZvbnQtZmFtaWx5OiJDYWxpYnJpIixzYW5zLXNl
-cmlmO30NCkBwYWdlIFdvcmRTZWN0aW9uMQ0KCXtzaXplOjguNWluIDExLjBpbjsNCgltYXJnaW46
-MS4waW4gMS4waW4gMS4waW4gMS4waW47fQ0KZGl2LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRT
-ZWN0aW9uMTt9DQotLT48L3N0eWxlPjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVk
-ZWZhdWx0cyB2OmV4dD0iZWRpdCIgc3BpZG1heD0iMTAyNiIgLz4NCjwveG1sPjwhW2VuZGlmXS0t
-PjwhLS1baWYgZ3RlIG1zbyA5XT48eG1sPg0KPG86c2hhcGVsYXlvdXQgdjpleHQ9ImVkaXQiPg0K
-PG86aWRtYXAgdjpleHQ9ImVkaXQiIGRhdGE9IjEiIC8+DQo8L286c2hhcGVsYXlvdXQ+PC94bWw+
-PCFbZW5kaWZdLS0+DQo8L2hlYWQ+DQo8Ym9keSBsYW5nPSJFTi1VUyIgbGluaz0iIzA1NjNDMSIg
-dmxpbms9IiM5NTRGNzIiPg0KPGRpdiBjbGFzcz0iV29yZFNlY3Rpb24xIj4NCjxwIGNsYXNzPSJN
-c29Ob3JtYWwiPkhlbGxvLDxvOnA+PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+SXQg
-YXBwZWFycyB0aGF0IHRoZSBidW5kbGUgKDxhIGhyZWY9Imh0dHA6Ly9wZW9wbGUuZnJlZWRlc2t0
-b3Aub3JnL350ZXVmL3NwaWNlLWd0ay1vc3gvZG1nLzAuNS43L1JlbW90ZVZpZXdlci0wLjUuNy0x
-LmRtZyI+aHR0cDovL3Blb3BsZS5mcmVlZGVza3RvcC5vcmcvfnRldWYvc3BpY2UtZ3RrLW9zeC9k
-bWcvMC41LjcvUmVtb3RlVmlld2VyLTAuNS43LTEuZG1nPC9hPikgb2YgUmVtb3RlVmlld2VyIGlz
-IGhhdmluZw0KIHRyb3VibGUgcnVubmluZyBvbiBuZXdlciB2ZXJzaW9ucyBvZiBNYWMgT1NYIChh
-dCBsZWFzdCBmb3IgbWUpLiBJ4oCZdmUgdHJpZWQgZm9sbG93aW5nIHRoZSBpbnN0cnVjdGlvbnMg
-b24NCjxhIGhyZWY9Imh0dHBzOi8vd3d3LnNwaWNlLXNwYWNlLm9yZy9vc3gtY2xpZW50Lmh0bWwi
-Pmh0dHBzOi8vd3d3LnNwaWNlLXNwYWNlLm9yZy9vc3gtY2xpZW50Lmh0bWw8L2E+IGJ1dCB1bmZv
-cnR1bmF0ZWx5IHNvbWUgb2YgdGhlIHNjcmlwdHMgYXBwZWFyIGEgYml0IG91dCBvZiBkYXRlIChj
-ZXJ0YWluIFVSTHMgdGhleSBwb2ludCB0byBub3cgZ28gdG8gNDA0cykuPG86cD48L286cD48L3A+
-DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjxwIGNsYXNzPSJN
-c29Ob3JtYWwiPkkgd2FzIG9uIG1hY3BvcnRzIGxvb2tpbmcgZm9yIHNvbWV0aGluZywgYW5kIHN0
-dW1ibGVkIGFjcm9zcyB2aXJ0LXZpZXdlciAoPGEgaHJlZj0iaHR0cHM6Ly93d3cubWFjcG9ydHMu
-b3JnL3BvcnRzLnBocD9ieT1uYW1lJmFtcDtzdWJzdHI9dmlydC12aWV3ZXIiPmh0dHBzOi8vd3d3
-Lm1hY3BvcnRzLm9yZy9wb3J0cy5waHA/Ynk9bmFtZSZhbXA7c3Vic3RyPXZpcnQtdmlld2VyPC9h
-PikuIEFsdGhvdWdoIGl0IGlzIHZlcnNpb24NCiAwLjcgKEkgYmVsaWV2ZSAwLjggaXMgdGhlIGxh
-dGVzdCBhdCB0aGUgdGltZSBvZiB3cml0aW5nKSBpdCBhcHBlYXJzIHRvIHdvcmsuIFdvdWxkIGl0
-IGJlIHBvc3NpYmxlIHRvIHVwZGF0ZSB0aGUNCjxhIGhyZWY9Imh0dHBzOi8vd3d3LnNwaWNlLXNw
-YWNlLm9yZy9vc3gtY2xpZW50Lmh0bWwiPmh0dHBzOi8vd3d3LnNwaWNlLXNwYWNlLm9yZy9vc3gt
-Y2xpZW50Lmh0bWw8L2E+IHdlYnNpdGUgdG8gc3VnZ2VzdCBTcGljZSB1c2VycyBvbiBNYWMgY291
-bGQgaW5zdGFsbCB2aXJ0LXZpZXdlciBtdWNoIGVhc2llciB3aXRoOjxvOnA+PC9vOnA+PC9wPg0K
-PHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8cCBjbGFzcz0iTXNv
-Tm9ybWFsIj4kc3VkbyBwb3J0IGluc3RhbGwgdmlydC12aWV3ZXI8bzpwPjwvbzpwPjwvcD4NCjxw
-IGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb05v
-cm1hbCI+QW5kIChvbiBwcm94bW94IGF0IGxlYXN0KSB0aGVuIGxhdW5jaCB0aGUgY2xpZW50IGZy
-b20gdGhlIHRlcm1pbmFsIHdpdGg6PG86cD48L286cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFs
-Ij4kcmVtb3RlLXZpZXdlciAvcGF0aC90by9kb3dubG9hZC52djxvOnA+PC9vOnA+PC9wPg0KPHAg
-Y2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8cCBjbGFzcz0iTXNvTm9y
-bWFsIj5KdXN0IGEgdGhvdWdodC48bzpwPjwvbzpwPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwi
-PjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gc3R5bGU9
-ImZvbnQtc2l6ZToxMC41cHQ7Y29sb3I6YmxhY2siPkJlc3QgUmVnYXJkcyw8L3NwYW4+PHNwYW4g
-c3R5bGU9ImNvbG9yOmJsYWNrIj48bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNv
-Tm9ybWFsIj48c3BhbiBzdHlsZT0iZm9udC1zaXplOjEwLjVwdDtjb2xvcjpibGFjayI+Jm5ic3A7
-ICZuYnNwOyBIdXcgPG86cD48L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+
-PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMC41cHQ7Y29sb3I6YmxhY2siPjxvOnA+Jm5ic3A7PC9v
-OnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIHN0eWxlPSJmb250LXNp
-emU6MTAuNXB0O2NvbG9yOmJsYWNrIj5wLnMuIEZvciB0aGUgc2FrZSBvZiBpdCwgYWZ0ZXIgaW5z
-dGFsbGluZyAwLjcgYXMgYWJvdmUsIEkgcmVtb3ZlZCBpdCBhbmQgdHJpZWQgaW5zdGFsbGluZyAw
-LjggZnJvbSB0aGUgdGFyYmFsbA0KPC9zcGFuPmh0dHBzOi8vcmVsZWFzZXMucGFndXJlLm9yZy92
-aXJ0LXZpZXdlci92aXJ0LXZpZXdlci04LjAudGFyLmd6Jm5ic3A7IHdpdGg6PG86cD48L286cD48
-L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj4kLi9jb25maWd1cmUg4oCTcHJlZml4PS9vcHQvbG9j
-YWwgJmFtcDsmYW1wOyBtYWtlICZhbXA7JmFtcDsgc3VkbyBtYWtlIGluc3RhbGw8bzpwPjwvbzpw
-PjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkFuZCBpdCBzZWVtZWQgdG8gaW5zdGFsbCBvaywg
-SSB3YXMgYWJsZSB0byBsYXVuY2ggYSBWTSB0aHJvdWdoIHNwaWNlIHdpdGggMC44LjxvOnA+PC9v
-OnA+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rp
-dj4NCjwvYm9keT4NCjwvaHRtbD4NCg==
 
---_000_B2B205200A3147409B5D14929AAA17F2norwichedu_--
-
---===============0945948735==
+--===============0376490422==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -221,4 +81,5 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
 ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
 L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
 
---===============0945948735==--
+--===============0376490422==--
+
