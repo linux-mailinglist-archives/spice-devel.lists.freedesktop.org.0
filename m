@@ -2,55 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA7CD10D0D8
-	for <lists+spice-devel@lfdr.de>; Fri, 29 Nov 2019 06:20:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80D1710D27F
+	for <lists+spice-devel@lfdr.de>; Fri, 29 Nov 2019 09:34:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 903646E886;
-	Fri, 29 Nov 2019 05:20:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EFB166E02F;
+	Fri, 29 Nov 2019 08:34:02 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 013786E886
- for <spice-devel@lists.freedesktop.org>; Fri, 29 Nov 2019 05:20:22 +0000 (UTC)
-Received: by mail-il1-x130.google.com with SMTP id b15so5804697iln.3
- for <spice-devel@lists.freedesktop.org>; Thu, 28 Nov 2019 21:20:22 -0800 (PST)
+Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
+ [IPv6:2607:f8b0:4864:20::e34])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 39DB26E037
+ for <spice-devel@lists.freedesktop.org>; Thu, 28 Nov 2019 20:18:25 +0000 (UTC)
+Received: by mail-vs1-xe34.google.com with SMTP id c25so18175581vsp.0
+ for <spice-devel@lists.freedesktop.org>; Thu, 28 Nov 2019 12:18:25 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=JMdeZeSwUCwQoL7OeWqv5z9Ls3tKdCA63pc2SbV+/XU=;
- b=XkChZd8Y2MUnLvBEii0gZcXJtgftvxU+OHPWpRweAQZEIVJzAtzeXII6u/7Q4HWQ2Y
- 5FmODrO3LkmKVaZo66mazWdfxxpHTvJpjsRoTa4yDLX4T/QqW5ulTpW0bN7/WcPQSji7
- ba3rkU+13TbkKto8Iqo6dTCbBZvAMGjxPW81+IRTL1coE5OsPNUdTFeHWHQcgDHOh+nS
- z8qkX0pCc4pGxKgzfM/+9tbaZC4bo7PuJ5FM/YXTPqpFkTy0FFmHlCzCxz7nevZeJfSK
- GnmyzgE/zW7CxSqlyRrl3ooSG2B/POYzz8U335uq7HSdoKNAG2BcacIMtbriL82FqPKc
- JOIQ==
-X-Gm-Message-State: APjAAAWuXwEoQvtglVKfsfHpQuKVlKixZeoN4FCzvuGbYezAHYNTE/7E
- sadk5xyec/Gk+8neuowtcb4NeURy7OPuhsWLewlNoBJ3
-X-Google-Smtp-Source: APXvYqwX4qYOIoSFuQIK3ffvG12aoEP8pj1/9tKZL/FgmzTBzmpumoe/05/b4ODSXFe/5N5HREo+dEMYvDR1B4EpHTw=
-X-Received: by 2002:a92:6611:: with SMTP id a17mr49844875ilc.148.1575004822124; 
- Thu, 28 Nov 2019 21:20:22 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=Lv3SD9DRXSC0l+2YL5m4kB7rlLX4YWLs0+0hgrYcmSU=;
+ b=K3U+il7bb4W1DgUbO8ZeZjbKYZbfWXku2A67G0o/eeha+E+Lew5QPPRXr75nf5mInJ
+ skrUgVU+wRzgjtLWI+p85A/OzgMQLZ0ydgP0jPC/xBJZXeVklxwZY6uXzDTueqkniKbp
+ 6+QmqANinbAoIAIU0OpKF9oo0PsYcqGPhJ0Es7G8lD1cTyEjz0CUPG9eDasV34AgoYGu
+ wahMotinEhKTmgNzJw8PjNKiiyX6okULoJVb8Z9rwlwAaYI2WpGis85sQPemsLcqGXiE
+ p2PTUySnE5c2E5u4ShVwRc7Zxu59knsKb0gw5JZyvwjPRy/yQXGov2Bq5E12/tecxHay
+ v3Vg==
+X-Gm-Message-State: APjAAAW7tHlRe9x9hlXKjkWdccZgrbZUfku2zd3grR3EAQDNbwUaSVKz
+ c537WqmHvW/OY2mBb/VVRumWCWm2qoX8bj6hNnXYrMfh
+X-Google-Smtp-Source: APXvYqzbVwZ+n807d8A3914Kq3gGZ00jnURQdDhfTfbs3WM+uikv6TdQAO5Mz/dP9l6u2imlx+M9mexeUG6DJ7Vv6uk=
+X-Received: by 2002:a67:c88f:: with SMTP id v15mr31364466vsk.172.1574972304071; 
+ Thu, 28 Nov 2019 12:18:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20191122070644.1434-1-yuri.benditovich@daynix.com>
-In-Reply-To: <20191122070644.1434-1-yuri.benditovich@daynix.com>
-From: Yuri Benditovich <yuri.benditovich@daynix.com>
-Date: Fri, 29 Nov 2019 07:20:09 +0200
-Message-ID: <CAOEp5Ocbj-xuU_uaUqqYGU0-N8CFF4cyUxP2aXjLD7hBV5P1Hw@mail.gmail.com>
-To: Spice List <spice-devel@lists.freedesktop.org>
+From: ra du <radu64.xyz@gmail.com>
+Date: Thu, 28 Nov 2019 15:18:13 -0500
+Message-ID: <CAOYDFCHuRBsrH8fPh+byyu3+Tfg5orv810w3FSOa4OW7OfLf1A@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Fri, 29 Nov 2019 08:34:01 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=JMdeZeSwUCwQoL7OeWqv5z9Ls3tKdCA63pc2SbV+/XU=;
- b=JCA4eSuyh8Vg/iMSrJrtSUNPoW50rZaqtD0PiQkfk9wv0DaO/1QPhgmB5iM9rRgE/k
- pfzWOmjA0u6CeTz0HMpo/Rc9soBxwVT14JoRXz25c1IRxQhPsjGeEomwDenVtefq9IIt
- WBcDBpC7dOKvC3Rn9fwXR9BmyhlDH0DEuhscIwk5UX8+5rFYXg0j2CyrCAo53zSHaJcH
- Sdzue7+vl/9mzNwu/B5DdvY5EQi5gwluPSZdG67ErJzNGIiaVst43prW8agJOM4MdfKI
- UPLiUZbbUp1Re/TiN+qPaS5gPkLeRZXalIidX4+t7oFUKFiQHHomMfJgyQzhNILnasHu
- JqhA==
-Subject: Re: [Spice-devel] [qxl-xddm] xddm: add Wix script for driver
- installation
+ d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=Lv3SD9DRXSC0l+2YL5m4kB7rlLX4YWLs0+0hgrYcmSU=;
+ b=BKJTrDqUVzGgLNjm231jIZQMwY27SdSxwDcAtSdo41SCE63JwgA99X+npvfOeJ7Ul2
+ e4Rokacj1ujBTbRTWQxpBJfaNsH/dGsNIUjN6Ip2NkdrR1yvsfFPHXqb5oSq7EmL8rA/
+ hlziP8NYBAyRnkC3jH+hiZO3FwZZsWLfhsCrYnIUv/y0KNPApv3PzHtcKmCbw+Ugb1SV
+ gyqyaPDyW+BJ51/PAbnoSLq0CHVP8kcyFvv1/GiKasuID2Urt9e6wUB1uDa/e2wA/s8n
+ 2M/0wTvCnqVezn2zCcNbKYbfp+vDZu05FIiZ9PEscmfl6y3SnK0icG2G8yEfxr5dFgaC
+ LprA==
+Subject: [Spice-devel] QXL on real hardware
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,87 +58,58 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yan Vugenfirer <yan@daynix.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0116824620=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-cGluZwoKT24gRnJpLCBOb3YgMjIsIDIwMTkgYXQgOTowNiBBTSBZdXJpIEJlbmRpdG92aWNoCjx5
-dXJpLmJlbmRpdG92aWNoQGRheW5peC5jb20+IHdyb3RlOgo+Cj4gU2lnbmVkLW9mZi1ieTogWXVy
-aSBCZW5kaXRvdmljaCA8eXVyaS5iZW5kaXRvdmljaEBkYXluaXguY29tPgo+IC0tLQo+ICB4ZGRt
-L1FYTEluc3RhbGxlci53eHMgfCA4OCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrCj4gIDEgZmlsZSBjaGFuZ2VkLCA4OCBpbnNlcnRpb25zKCspCj4gIGNyZWF0ZSBt
-b2RlIDEwMDY0NCB4ZGRtL1FYTEluc3RhbGxlci53eHMKPgo+IGRpZmYgLS1naXQgYS94ZGRtL1FY
-TEluc3RhbGxlci53eHMgYi94ZGRtL1FYTEluc3RhbGxlci53eHMKPiBuZXcgZmlsZSBtb2RlIDEw
-MDY0NAo+IGluZGV4IDAwMDAwMDAuLjY2NGIzZWQKPiAtLS0gL2Rldi9udWxsCj4gKysrIGIveGRk
-bS9RWExJbnN0YWxsZXIud3hzCj4gQEAgLTAsMCArMSw4OCBAQAo+ICs8P3htbCB2ZXJzaW9uPSIx
-LjAiIGVuY29kaW5nPSJVVEYtOCI/Pgo+ICs8V2l4IHhtbG5zPSJodHRwOi8vc2NoZW1hcy5taWNy
-b3NvZnQuY29tL3dpeC8yMDA2L3dpIgo+ICsgICAgIHhtbG5zOmRpZng9Imh0dHA6Ly9zY2hlbWFz
-Lm1pY3Jvc29mdC5jb20vd2l4L0RpZnhBcHBFeHRlbnNpb24iPgo+ICsKPiArICA8P2lmZGVmIFFY
-TDY0Qml0ID8+Cj4gKyAgICA8P2RlZmluZSBRWExQbGF0Zm9ybT14NjQgPz4KPiArICAgIDw/ZGVm
-aW5lIFFYTFByb2dyYW1GaWxlc0ZvbGRlcj0gUHJvZ3JhbUZpbGVzNjRGb2xkZXIgPz4KPiArICAg
-IDw/ZGVmaW5lIFFYTFdpbjY0PSB5ZXMgPz4KPiArICA8P2Vsc2U/Pgo+ICsgICAgPD9kZWZpbmUg
-UVhMUGxhdGZvcm09eDg2ID8+Cj4gKyAgICA8P2RlZmluZSBRWExQcm9ncmFtRmlsZXNGb2xkZXI9
-IFByb2dyYW1GaWxlc0ZvbGRlciA/Pgo+ICsgICAgPD9kZWZpbmUgUVhMV2luNjQ9IG5vID8+Cj4g
-KyAgPD9lbmRpZj8+Cj4gKwo+ICsgIDxQcm9kdWN0Cj4gKyAgICBOYW1lPSJSZWQgSGF0IFFYTCBH
-UFUiCj4gKyAgICBJZD0iKiIKPiArICAgIFVwZ3JhZGVDb2RlPSJ7NjdGNENCQjctMkNDNS00MTU1
-LTgzM0QtNDI1RUEzMTdERTUzfSIKPiArICAgIE1hbnVmYWN0dXJlcj0iUmVkIEhhdCwgSW5jLiIK
-PiArICAgIFZlcnNpb249IiQodmFyLlFYTFZlcnNpb24pIgo+ICsgICAgTGFuZ3VhZ2U9IjEwMzMi
-Pgo+ICsgICAgPFBhY2thZ2UKPiArICAgICAgTWFudWZhY3R1cmVyPSJSZWQgSGF0LCBJbmMuIgo+
-ICsgICAgICBJbnN0YWxsZXJWZXJzaW9uPSIyMDAiCj4gKyAgICAgIExhbmd1YWdlcz0iMTAzMyIK
-PiArICAgICAgUGxhdGZvcm09IiQodmFyLlFYTFBsYXRmb3JtKSIKPiArICAgICAgQ29tcHJlc3Nl
-ZD0ieWVzIgo+ICsgICAgICBJbnN0YWxsU2NvcGU9InBlck1hY2hpbmUiCj4gKyAgICAgIEluc3Rh
-bGxQcml2aWxlZ2VzPSJlbGV2YXRlZCIgLz4KPiArCj4gKyAgICA8P2lmICQodmFyLlFYTFBsYXRm
-b3JtKSA9IHg4NiA/Pgo+ICsgICAgICA8Q29uZGl0aW9uIE1lc3NhZ2U9IkVycm9yOiAzMi1iaXQg
-dmVyc2lvbiBvZiBRWEwgY2FuIG5vdCBiZSBpbnN0YWxsZWQgb24gNjQtYml0IFdpbmRvd3MuIj4K
-PiArICAgICAgICAgIDwhW0NEQVRBW05vdCBWZXJzaW9uTlQ2NF1dPgo+ICsgICAgICA8L0NvbmRp
-dGlvbj4KPiArICAgIDw/ZW5kaWY/Pgo+ICsKPiArICAgIDxDb25kaXRpb24gTWVzc2FnZT0iUVhM
-IGlzIG9ubHkgc3VwcG9ydGVkIG9uIFdpbmRvd3MgNyBvciBXaW5kb3dzIFNlcnZlciAyMDA4IFIy
-LiI+Cj4gKyAgICAgIDwhW0NEQVRBW0luc3RhbGxlZCBPUiAoVmVyc2lvbk5UID0gNjAxKV1dPgo+
-ICsgICAgPC9Db25kaXRpb24+Cj4gKwo+ICsgICAgPE1lZGlhIElkPSIxIiBDYWJpbmV0PSJRWEwk
-KHZhci5RWExWZXJzaW9uKS5jYWIiIEVtYmVkQ2FiPSJ5ZXMiIC8+Cj4gKwo+ICsgICAgPFByb3Bl
-cnR5IElkPSJQUkVWSU9VU1ZFUlNJT05TSU5TVEFMTEVEIiBTZWN1cmU9InllcyIgLz4KPiArICAg
-IDxVcGdyYWRlIElkPSJ7NjdGNENCQjctMkNDNS00MTU1LTgzM0QtNDI1RUEzMTdERTUzfSI+Cj4g
-KyAgICAgIDxVcGdyYWRlVmVyc2lvbgo+ICsgICAgICAgIE1pbmltdW09IjAuMC4wLjAiIE1heGlt
-dW09IiQodmFyLlFYTFZlcnNpb24pIgo+ICsgICAgICAgIFByb3BlcnR5PSJQUkVWSU9VU1ZFUlNJ
-T05TSU5TVEFMTEVEIgo+ICsgICAgICAgIEluY2x1ZGVNaW5pbXVtPSJ5ZXMiIEluY2x1ZGVNYXhp
-bXVtPSJubyIgLz4KPiArCj4gKyAgICAgIDxVcGdyYWRlVmVyc2lvbgo+ICsgICAgICAgIE1pbmlt
-dW09IiQodmFyLlFYTFZlcnNpb24pIiBNYXhpbXVtPSI5OS45OS45OS45OSIKPiArICAgICAgICBQ
-cm9wZXJ0eT0iTkVXRVJWRVJTSU9OSU5TVEFMTEVEIgo+ICsgICAgICAgIEluY2x1ZGVNaW5pbXVt
-PSJubyIgSW5jbHVkZU1heGltdW09InllcyIgLz4KPiArICAgIDwvVXBncmFkZT4KPiArCj4gKyAg
-ICA8RGlyZWN0b3J5IElkPSJUQVJHRVRESVIiIE5hbWU9IlNvdXJjZURpciI+Cj4gKyAgICAgIDxE
-aXJlY3RvcnkgSWQ9IiQodmFyLlFYTFByb2dyYW1GaWxlc0ZvbGRlcikiPgo+ICsgICAgICAgIDxE
-aXJlY3RvcnkgSWQ9Ik1BTlVGQUNUVVJFUkZPTERFUiIgTmFtZT0iUmVkIEhhdCI+Cj4gKyAgICAg
-ICAgICA8RGlyZWN0b3J5IElkPSJRWExfRGlyZWN0b3J5IiBOYW1lPSJRWEwiPgo+ICsKPiArICAg
-ICAgICAgICAgPENvbXBvbmVudCBJZD0iUVhMXzciIEd1aWQ9IntCOTM5ODUyRC03NzgwLTQ4OUEt
-QTE5RS04MTcwREI4NUY2MUN9IiBXaW42ND0iJCh2YXIuUVhMV2luNjQpIj4KPiArICAgICAgICAg
-ICAgICA8RmlsZSBJZD0icXhsLnN5cyIgTmFtZT0icXhsLnN5cyIgU291cmNlPSJxeGwuc3lzIiBW
-aXRhbD0ieWVzIiBLZXlQYXRoPSJ5ZXMiIERpc2tJZD0iMSIgUHJvY2Vzc29yQXJjaGl0ZWN0dXJl
-PSIkKHZhci5RWExQbGF0Zm9ybSkiLz4KPiArICAgICAgICAgICAgICA8RmlsZSBJZD0icXhsLmlu
-ZiIgTmFtZT0icXhsLmluZiIgU291cmNlPSJxeGwuaW5mIiBWaXRhbD0ieWVzIiBLZXlQYXRoPSJu
-byIgRGlza0lkPSIxIiBQcm9jZXNzb3JBcmNoaXRlY3R1cmU9IiQodmFyLlFYTFBsYXRmb3JtKSIv
-Pgo+ICsgICAgICAgICAgICAgIDxGaWxlIElkPSJxeGwuY2F0IiBOYW1lPSJxeGwuY2F0IiBTb3Vy
-Y2U9InF4bC5jYXQiIFZpdGFsPSJ5ZXMiIEtleVBhdGg9Im5vIiBEaXNrSWQ9IjEiIFByb2Nlc3Nv
-ckFyY2hpdGVjdHVyZT0iJCh2YXIuUVhMUGxhdGZvcm0pIi8+Cj4gKyAgICAgICAgICAgICAgPEZp
-bGUgSWQ9InF4bGRkLmRsbCIgTmFtZT0icXhsZGQuZGxsIiBTb3VyY2U9InF4bGRkLmRsbCIgVml0
-YWw9InllcyIgS2V5UGF0aD0ibm8iIERpc2tJZD0iMSIgUHJvY2Vzc29yQXJjaGl0ZWN0dXJlPSIk
-KHZhci5RWExQbGF0Zm9ybSkiLz4KPiArICAgICAgICAgICAgICA8ZGlmeDpEcml2ZXIgQWRkUmVt
-b3ZlUHJvZ3JhbXM9Im5vIiBQbHVnQW5kUGxheVByb21wdD0ibm8iIC8+Cj4gKyAgICAgICAgICAg
-IDwvQ29tcG9uZW50Pgo+ICsKPiArICAgICAgICAgIDwvRGlyZWN0b3J5Pgo+ICsgICAgICAgIDwv
-RGlyZWN0b3J5Pgo+ICsgICAgICA8L0RpcmVjdG9yeT4KPiArICAgIDwvRGlyZWN0b3J5Pgo+ICsK
-PiArICAgIDxDdXN0b21BY3Rpb24gSWQ9IlByZXZlbnREb3duZ3JhZGluZyIKPiArICAgICAgICAg
-ICAgICBFcnJvcj0iRXJyb3I6IE5ld2VyIHZlcnNpb24gb2YgUVhMIGlzIGFscmVhZHkgaW5zdGFs
-bGVkLiI+Cj4gKyAgICA8L0N1c3RvbUFjdGlvbj4KPiArCj4gKyAgICA8SW5zdGFsbEV4ZWN1dGVT
-ZXF1ZW5jZT4KPiArICAgICAgPFJlbW92ZUV4aXN0aW5nUHJvZHVjdHMgQWZ0ZXI9Ikluc3RhbGxJ
-bml0aWFsaXplIj5QUkVWSU9VU1ZFUlNJT05TSU5TVEFMTEVEJmx0OyZndDsiIjwvUmVtb3ZlRXhp
-c3RpbmdQcm9kdWN0cz4KPiArICAgICAgPEN1c3RvbSBBY3Rpb249IlByZXZlbnREb3duZ3JhZGlu
-ZyIgQWZ0ZXI9IkZpbmRSZWxhdGVkUHJvZHVjdHMiPk5FV0VSVkVSU0lPTklOU1RBTExFRCZsdDsm
-Z3Q7IiIgQU5EIE5PVCBJbnN0YWxsZWQ8L0N1c3RvbT4KPiArICAgIDwvSW5zdGFsbEV4ZWN1dGVT
-ZXF1ZW5jZT4KPiArCj4gKyAgICA8RmVhdHVyZSBJZD0iUHJvZHVjdEZlYXR1cmUiIFRpdGxlPSJR
-WEwiIExldmVsPSIxIj4KPiArICAgICAgPENvbXBvbmVudFJlZiBJZD0iUVhMXzciIC8+Cj4gKyAg
-ICA8L0ZlYXR1cmU+Cj4gKwo+ICsgIDwvUHJvZHVjdD4KPiArPC9XaXg+Cj4gLS0KPiAyLjIyLjAu
-d2luZG93cy4xCj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9w
-Lm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNl
-LWRldmVs
+--===============0116824620==
+Content-Type: multipart/alternative; boundary="000000000000b722a905986dd088"
+
+--000000000000b722a905986dd088
+Content-Type: text/plain; charset="UTF-8"
+
+Hi all,
+
+I was wondering if it is possible to get a SPICE (QXL) extra screen on real
+hardware.
+The idea is to use the qxl output and stream it over network to a secondary
+display.
+
+One solution that is out there is the virtScreen:
+https://github.com/kbumsik/VirtScreen
+This solution uses the intel virtualoutput and VNC server, but it is not
+very responsive.
+
+While doing some tests with the x11spice server, SPICE protocol seems to be
+better then vnc at remote display.
+
+Thanks.
+
+--000000000000b722a905986dd088
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi all,</div><div><br></div><div>I was wondering if i=
+t is possible to get a SPICE (QXL) extra screen on real hardware.</div><div=
+>The idea is to use the qxl output and stream it over network to a secondar=
+y display.</div><div><br></div><div>One solution that is out there is the v=
+irtScreen: <a href=3D"https://github.com/kbumsik/VirtScreen">https://github=
+.com/kbumsik/VirtScreen</a></div><div>This solution uses the intel virtualo=
+utput and VNC server, but it is not very responsive.</div><div><br></div><d=
+iv>While doing some tests with the x11spice server, SPICE protocol seems to=
+ be better then vnc at remote display.</div><div><br></div><div>Thanks.<br>=
+</div></div>
+
+--000000000000b722a905986dd088--
+
+--===============0116824620==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0116824620==--
