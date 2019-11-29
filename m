@@ -2,51 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80D1710D27F
-	for <lists+spice-devel@lfdr.de>; Fri, 29 Nov 2019 09:34:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7019B10D69A
+	for <lists+spice-devel@lfdr.de>; Fri, 29 Nov 2019 15:01:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EFB166E02F;
-	Fri, 29 Nov 2019 08:34:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 99CC16E911;
+	Fri, 29 Nov 2019 14:01:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
- [IPv6:2607:f8b0:4864:20::e34])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 39DB26E037
- for <spice-devel@lists.freedesktop.org>; Thu, 28 Nov 2019 20:18:25 +0000 (UTC)
-Received: by mail-vs1-xe34.google.com with SMTP id c25so18175581vsp.0
- for <spice-devel@lists.freedesktop.org>; Thu, 28 Nov 2019 12:18:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=Lv3SD9DRXSC0l+2YL5m4kB7rlLX4YWLs0+0hgrYcmSU=;
- b=K3U+il7bb4W1DgUbO8ZeZjbKYZbfWXku2A67G0o/eeha+E+Lew5QPPRXr75nf5mInJ
- skrUgVU+wRzgjtLWI+p85A/OzgMQLZ0ydgP0jPC/xBJZXeVklxwZY6uXzDTueqkniKbp
- 6+QmqANinbAoIAIU0OpKF9oo0PsYcqGPhJ0Es7G8lD1cTyEjz0CUPG9eDasV34AgoYGu
- wahMotinEhKTmgNzJw8PjNKiiyX6okULoJVb8Z9rwlwAaYI2WpGis85sQPemsLcqGXiE
- p2PTUySnE5c2E5u4ShVwRc7Zxu59knsKb0gw5JZyvwjPRy/yQXGov2Bq5E12/tecxHay
- v3Vg==
-X-Gm-Message-State: APjAAAW7tHlRe9x9hlXKjkWdccZgrbZUfku2zd3grR3EAQDNbwUaSVKz
- c537WqmHvW/OY2mBb/VVRumWCWm2qoX8bj6hNnXYrMfh
-X-Google-Smtp-Source: APXvYqzbVwZ+n807d8A3914Kq3gGZ00jnURQdDhfTfbs3WM+uikv6TdQAO5Mz/dP9l6u2imlx+M9mexeUG6DJ7Vv6uk=
-X-Received: by 2002:a67:c88f:: with SMTP id v15mr31364466vsk.172.1574972304071; 
- Thu, 28 Nov 2019 12:18:24 -0800 (PST)
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 49F9D6E911
+ for <spice-devel@lists.freedesktop.org>; Fri, 29 Nov 2019 14:01:44 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-426-UK-z3X2gMuGanwzyObpINw-1; Fri, 29 Nov 2019 09:01:41 -0500
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2840F80183C;
+ Fri, 29 Nov 2019 14:01:40 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2051C600C8;
+ Fri, 29 Nov 2019 14:01:40 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 17A8C4BB5C;
+ Fri, 29 Nov 2019 14:01:40 +0000 (UTC)
+Date: Fri, 29 Nov 2019 09:01:38 -0500 (EST)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: =?utf-8?B?6LS65q+F5rab?= <linuxgcc@163.com>
+Message-ID: <2070886453.13820400.1575036098352.JavaMail.zimbra@redhat.com>
+In-Reply-To: <29990268.9698.16e9c77f757.Coremail.linuxgcc@163.com>
+References: <29990268.9698.16e9c77f757.Coremail.linuxgcc@163.com>
 MIME-Version: 1.0
-From: ra du <radu64.xyz@gmail.com>
-Date: Thu, 28 Nov 2019 15:18:13 -0500
-Message-ID: <CAOYDFCHuRBsrH8fPh+byyu3+Tfg5orv810w3FSOa4OW7OfLf1A@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
-X-Mailman-Approved-At: Fri, 29 Nov 2019 08:34:01 +0000
+X-Originating-IP: [10.33.32.17, 10.4.195.17]
+Thread-Topic: how to spice-gtk-0.35 on windows 7 home
+Thread-Index: vlIUygVnT1uTM/+NIALUts6FnUUZhA==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-MC-Unique: UK-z3X2gMuGanwzyObpINw-1
+X-Mimecast-Spam-Score: 0
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=Lv3SD9DRXSC0l+2YL5m4kB7rlLX4YWLs0+0hgrYcmSU=;
- b=BKJTrDqUVzGgLNjm231jIZQMwY27SdSxwDcAtSdo41SCE63JwgA99X+npvfOeJ7Ul2
- e4Rokacj1ujBTbRTWQxpBJfaNsH/dGsNIUjN6Ip2NkdrR1yvsfFPHXqb5oSq7EmL8rA/
- hlziP8NYBAyRnkC3jH+hiZO3FwZZsWLfhsCrYnIUv/y0KNPApv3PzHtcKmCbw+Ugb1SV
- gyqyaPDyW+BJ51/PAbnoSLq0CHVP8kcyFvv1/GiKasuID2Urt9e6wUB1uDa/e2wA/s8n
- 2M/0wTvCnqVezn2zCcNbKYbfp+vDZu05FIiZ9PEscmfl6y3SnK0icG2G8yEfxr5dFgaC
- LprA==
-Subject: [Spice-devel] QXL on real hardware
+ d=redhat.com; 
+ s=mimecast20190719; t=1575036102;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=OHEhHpaqlLR7qO7JenIhTZ5FriBV8XVKGewsONiBz7I=;
+ b=d2iqzZy6YT5Qk8q+Fym7z+SWixI5CTteXvCNWXdMwM7PFtnNdaPfx0YeP4ONZsneqqxiEK
+ wN1kRuzBAVkjR6Gj8KVOHqgBtAulTHPoBwXQas8q9ZsUY2wtz06MEvLVRAafTk/kB2XlR8
+ Mv/WdHfiAtp9ZmL95pn8mlewe9vziuw=
+Subject: Re: [Spice-devel] how to spice-gtk-0.35 on windows 7 home
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,58 +66,20 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0116824620=="
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0116824620==
-Content-Type: multipart/alternative; boundary="000000000000b722a905986dd088"
-
---000000000000b722a905986dd088
-Content-Type: text/plain; charset="UTF-8"
-
-Hi all,
-
-I was wondering if it is possible to get a SPICE (QXL) extra screen on real
-hardware.
-The idea is to use the qxl output and stream it over network to a secondary
-display.
-
-One solution that is out there is the virtScreen:
-https://github.com/kbumsik/VirtScreen
-This solution uses the intel virtualoutput and VNC server, but it is not
-very responsive.
-
-While doing some tests with the x11spice server, SPICE protocol seems to be
-better then vnc at remote display.
-
-Thanks.
-
---000000000000b722a905986dd088
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi all,</div><div><br></div><div>I was wondering if i=
-t is possible to get a SPICE (QXL) extra screen on real hardware.</div><div=
->The idea is to use the qxl output and stream it over network to a secondar=
-y display.</div><div><br></div><div>One solution that is out there is the v=
-irtScreen: <a href=3D"https://github.com/kbumsik/VirtScreen">https://github=
-.com/kbumsik/VirtScreen</a></div><div>This solution uses the intel virtualo=
-utput and VNC server, but it is not very responsive.</div><div><br></div><d=
-iv>While doing some tests with the x11spice server, SPICE protocol seems to=
- be better then vnc at remote display.</div><div><br></div><div>Thanks.<br>=
-</div></div>
-
---000000000000b722a905986dd088--
-
---===============0116824620==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0116824620==--
+PiBGcm9tOiAi6LS65q+F5rabIiA8bGludXhnY2NAMTYzLmNvbT4KPiBUbzogc3BpY2UtZGV2ZWxA
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gU2VudDogU3VuZGF5LCAyNCBOb3ZlbWJlciwgMjAxOSA4
+OjEyOjE4IEFNCj4gU3ViamVjdDogW1NwaWNlLWRldmVsXSBob3cgdG8gc3BpY2UtZ3RrLTAuMzUg
+b24gd2luZG93cyA3IGhvbWUKCj4gcGxlYXNlIGhlbHAgbWUsaSB3YW50IGJ1aWxkIHNwaWNlLWd0
+ay0wLjM1IG9uIHdpbmRvd3MgLGlzIHRoZXJlIGhhdmUgc2FtZQo+IGJ1aWxkIGd1aWRlPwoKVXN1
+YWxseSBzcGljZS1ndGsgaXMgY3Jvc3MgYnVpbHQgZnJvbSBhIExpbnV4IG1hY2hpbmUuCkN1cnJl
+bnRseSB3ZSB1c2UgTWVzb24gYXMgYnVpbGQgc3lzdGVtLgpXaHkgZG8geW91IHdhbnQgdG8gYnVp
+bGQgMC4zNSBpbnN0ZWFkIG9mIDAuMzcgKHRoZSBsYXN0KSA/CgpGcmVkaWFubwoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGlu
+ZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
+ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
