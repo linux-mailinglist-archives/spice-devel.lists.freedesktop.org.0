@@ -1,44 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B31AC10829E
-	for <lists+spice-devel@lfdr.de>; Sun, 24 Nov 2019 10:33:22 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AA7CD10D0D8
+	for <lists+spice-devel@lfdr.de>; Fri, 29 Nov 2019 06:20:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0445E89EB4;
-	Sun, 24 Nov 2019 09:33:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 903646E886;
+	Fri, 29 Nov 2019 05:20:24 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 907 seconds by postgrey-1.36 at gabe;
- Sun, 24 Nov 2019 08:27:30 UTC
-Received: from m13-115.163.com (m13-115.163.com [220.181.13.115])
- by gabe.freedesktop.org (Postfix) with ESMTP id B0354892AA
- for <spice-devel@lists.freedesktop.org>; Sun, 24 Nov 2019 08:27:30 +0000 (UTC)
-Received: from linuxgcc$163.com ( [111.18.92.9] ) by ajax-webmail-wmsvr115
- (Coremail) ; Sun, 24 Nov 2019 16:12:18 +0800 (CST)
-X-Originating-IP: [111.18.92.9]
-Date: Sun, 24 Nov 2019 16:12:18 +0800 (CST)
-From: =?GBK?B?utjS48zO?= <linuxgcc@163.com>
-To: spice-devel@lists.freedesktop.org
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190724(ac680a23)
- Copyright (c) 2002-2019 www.mailtech.cn 163com
-X-CM-CTRLDATA: NmvT5mZvb3Rlcl9odG09MTczOjU2
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 013786E886
+ for <spice-devel@lists.freedesktop.org>; Fri, 29 Nov 2019 05:20:22 +0000 (UTC)
+Received: by mail-il1-x130.google.com with SMTP id b15so5804697iln.3
+ for <spice-devel@lists.freedesktop.org>; Thu, 28 Nov 2019 21:20:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=JMdeZeSwUCwQoL7OeWqv5z9Ls3tKdCA63pc2SbV+/XU=;
+ b=XkChZd8Y2MUnLvBEii0gZcXJtgftvxU+OHPWpRweAQZEIVJzAtzeXII6u/7Q4HWQ2Y
+ 5FmODrO3LkmKVaZo66mazWdfxxpHTvJpjsRoTa4yDLX4T/QqW5ulTpW0bN7/WcPQSji7
+ ba3rkU+13TbkKto8Iqo6dTCbBZvAMGjxPW81+IRTL1coE5OsPNUdTFeHWHQcgDHOh+nS
+ z8qkX0pCc4pGxKgzfM/+9tbaZC4bo7PuJ5FM/YXTPqpFkTy0FFmHlCzCxz7nevZeJfSK
+ GnmyzgE/zW7CxSqlyRrl3ooSG2B/POYzz8U335uq7HSdoKNAG2BcacIMtbriL82FqPKc
+ JOIQ==
+X-Gm-Message-State: APjAAAWuXwEoQvtglVKfsfHpQuKVlKixZeoN4FCzvuGbYezAHYNTE/7E
+ sadk5xyec/Gk+8neuowtcb4NeURy7OPuhsWLewlNoBJ3
+X-Google-Smtp-Source: APXvYqwX4qYOIoSFuQIK3ffvG12aoEP8pj1/9tKZL/FgmzTBzmpumoe/05/b4ODSXFe/5N5HREo+dEMYvDR1B4EpHTw=
+X-Received: by 2002:a92:6611:: with SMTP id a17mr49844875ilc.148.1575004822124; 
+ Thu, 28 Nov 2019 21:20:22 -0800 (PST)
 MIME-Version: 1.0
-Message-ID: <29990268.9698.16e9c77f757.Coremail.linuxgcc@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: c8GowADX5mpjO9pdaeFnAw--.9009W
-X-CM-SenderInfo: polq35xjffqiywtou0bp/1tbiEwl3JlXlu3cSkQABs1
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-X-Mailman-Approved-At: Sun, 24 Nov 2019 09:33:19 +0000
+References: <20191122070644.1434-1-yuri.benditovich@daynix.com>
+In-Reply-To: <20191122070644.1434-1-yuri.benditovich@daynix.com>
+From: Yuri Benditovich <yuri.benditovich@daynix.com>
+Date: Fri, 29 Nov 2019 07:20:09 +0200
+Message-ID: <CAOEp5Ocbj-xuU_uaUqqYGU0-N8CFF4cyUxP2aXjLD7hBV5P1Hw@mail.gmail.com>
+To: Spice List <spice-devel@lists.freedesktop.org>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=163.com; 
- s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=THiRF
- Bz9qg5tXwShwc18N8ESYeaJBjrdulUWMTqdCoI=; b=qCMulGOLE/rXBS/fvS5T9
- frui7XZNeD6sBPXd7VsDxOFqheDuz7JHpbksfxK614YtATFRkFPkqgbtzsW7Y1nW
- WLEbeF5l6R3x/xzRovNNmaK/jt815hKnuf5AwHwHcxPv5o7tgNpK+S1RGecgA6lb
- 4UNKsSWSvCJSm0B/PV1mm8=
-Subject: [Spice-devel] how to spice-gtk-0.35 on windows 7 home
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=JMdeZeSwUCwQoL7OeWqv5z9Ls3tKdCA63pc2SbV+/XU=;
+ b=JCA4eSuyh8Vg/iMSrJrtSUNPoW50rZaqtD0PiQkfk9wv0DaO/1QPhgmB5iM9rRgE/k
+ pfzWOmjA0u6CeTz0HMpo/Rc9soBxwVT14JoRXz25c1IRxQhPsjGeEomwDenVtefq9IIt
+ WBcDBpC7dOKvC3Rn9fwXR9BmyhlDH0DEuhscIwk5UX8+5rFYXg0j2CyrCAo53zSHaJcH
+ Sdzue7+vl/9mzNwu/B5DdvY5EQi5gwluPSZdG67ErJzNGIiaVst43prW8agJOM4MdfKI
+ UPLiUZbbUp1Re/TiN+qPaS5gPkLeRZXalIidX4+t7oFUKFiQHHomMfJgyQzhNILnasHu
+ JqhA==
+Subject: Re: [Spice-devel] [qxl-xddm] xddm: add Wix script for driver
+ installation
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -50,36 +62,87 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0376490422=="
+Cc: Yan Vugenfirer <yan@daynix.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0376490422==
-Content-Type: multipart/alternative; 
-	boundary="----=_Part_150977_1891462562.1574583138135"
-
-------=_Part_150977_1891462562.1574583138135
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: 7bit
-
-please help me,i want build spice-gtk-0.35 on windows ,is there have same build guide?
-------=_Part_150977_1891462562.1574583138135
-Content-Type: text/html; charset=GBK
-Content-Transfer-Encoding: 7bit
-
-<div style="line-height:1.7;color:#000000;font-size:14px;font-family:Arial">please help me,i want build&nbsp;spice-gtk-0.35 on windows ,is there have same build guide?</div><br><br><span title="neteasefooter"><p>&nbsp;</p></span>
-------=_Part_150977_1891462562.1574583138135--
-
-
---===============0376490422==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-
---===============0376490422==--
-
+cGluZwoKT24gRnJpLCBOb3YgMjIsIDIwMTkgYXQgOTowNiBBTSBZdXJpIEJlbmRpdG92aWNoCjx5
+dXJpLmJlbmRpdG92aWNoQGRheW5peC5jb20+IHdyb3RlOgo+Cj4gU2lnbmVkLW9mZi1ieTogWXVy
+aSBCZW5kaXRvdmljaCA8eXVyaS5iZW5kaXRvdmljaEBkYXluaXguY29tPgo+IC0tLQo+ICB4ZGRt
+L1FYTEluc3RhbGxlci53eHMgfCA4OCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrCj4gIDEgZmlsZSBjaGFuZ2VkLCA4OCBpbnNlcnRpb25zKCspCj4gIGNyZWF0ZSBt
+b2RlIDEwMDY0NCB4ZGRtL1FYTEluc3RhbGxlci53eHMKPgo+IGRpZmYgLS1naXQgYS94ZGRtL1FY
+TEluc3RhbGxlci53eHMgYi94ZGRtL1FYTEluc3RhbGxlci53eHMKPiBuZXcgZmlsZSBtb2RlIDEw
+MDY0NAo+IGluZGV4IDAwMDAwMDAuLjY2NGIzZWQKPiAtLS0gL2Rldi9udWxsCj4gKysrIGIveGRk
+bS9RWExJbnN0YWxsZXIud3hzCj4gQEAgLTAsMCArMSw4OCBAQAo+ICs8P3htbCB2ZXJzaW9uPSIx
+LjAiIGVuY29kaW5nPSJVVEYtOCI/Pgo+ICs8V2l4IHhtbG5zPSJodHRwOi8vc2NoZW1hcy5taWNy
+b3NvZnQuY29tL3dpeC8yMDA2L3dpIgo+ICsgICAgIHhtbG5zOmRpZng9Imh0dHA6Ly9zY2hlbWFz
+Lm1pY3Jvc29mdC5jb20vd2l4L0RpZnhBcHBFeHRlbnNpb24iPgo+ICsKPiArICA8P2lmZGVmIFFY
+TDY0Qml0ID8+Cj4gKyAgICA8P2RlZmluZSBRWExQbGF0Zm9ybT14NjQgPz4KPiArICAgIDw/ZGVm
+aW5lIFFYTFByb2dyYW1GaWxlc0ZvbGRlcj0gUHJvZ3JhbUZpbGVzNjRGb2xkZXIgPz4KPiArICAg
+IDw/ZGVmaW5lIFFYTFdpbjY0PSB5ZXMgPz4KPiArICA8P2Vsc2U/Pgo+ICsgICAgPD9kZWZpbmUg
+UVhMUGxhdGZvcm09eDg2ID8+Cj4gKyAgICA8P2RlZmluZSBRWExQcm9ncmFtRmlsZXNGb2xkZXI9
+IFByb2dyYW1GaWxlc0ZvbGRlciA/Pgo+ICsgICAgPD9kZWZpbmUgUVhMV2luNjQ9IG5vID8+Cj4g
+KyAgPD9lbmRpZj8+Cj4gKwo+ICsgIDxQcm9kdWN0Cj4gKyAgICBOYW1lPSJSZWQgSGF0IFFYTCBH
+UFUiCj4gKyAgICBJZD0iKiIKPiArICAgIFVwZ3JhZGVDb2RlPSJ7NjdGNENCQjctMkNDNS00MTU1
+LTgzM0QtNDI1RUEzMTdERTUzfSIKPiArICAgIE1hbnVmYWN0dXJlcj0iUmVkIEhhdCwgSW5jLiIK
+PiArICAgIFZlcnNpb249IiQodmFyLlFYTFZlcnNpb24pIgo+ICsgICAgTGFuZ3VhZ2U9IjEwMzMi
+Pgo+ICsgICAgPFBhY2thZ2UKPiArICAgICAgTWFudWZhY3R1cmVyPSJSZWQgSGF0LCBJbmMuIgo+
+ICsgICAgICBJbnN0YWxsZXJWZXJzaW9uPSIyMDAiCj4gKyAgICAgIExhbmd1YWdlcz0iMTAzMyIK
+PiArICAgICAgUGxhdGZvcm09IiQodmFyLlFYTFBsYXRmb3JtKSIKPiArICAgICAgQ29tcHJlc3Nl
+ZD0ieWVzIgo+ICsgICAgICBJbnN0YWxsU2NvcGU9InBlck1hY2hpbmUiCj4gKyAgICAgIEluc3Rh
+bGxQcml2aWxlZ2VzPSJlbGV2YXRlZCIgLz4KPiArCj4gKyAgICA8P2lmICQodmFyLlFYTFBsYXRm
+b3JtKSA9IHg4NiA/Pgo+ICsgICAgICA8Q29uZGl0aW9uIE1lc3NhZ2U9IkVycm9yOiAzMi1iaXQg
+dmVyc2lvbiBvZiBRWEwgY2FuIG5vdCBiZSBpbnN0YWxsZWQgb24gNjQtYml0IFdpbmRvd3MuIj4K
+PiArICAgICAgICAgIDwhW0NEQVRBW05vdCBWZXJzaW9uTlQ2NF1dPgo+ICsgICAgICA8L0NvbmRp
+dGlvbj4KPiArICAgIDw/ZW5kaWY/Pgo+ICsKPiArICAgIDxDb25kaXRpb24gTWVzc2FnZT0iUVhM
+IGlzIG9ubHkgc3VwcG9ydGVkIG9uIFdpbmRvd3MgNyBvciBXaW5kb3dzIFNlcnZlciAyMDA4IFIy
+LiI+Cj4gKyAgICAgIDwhW0NEQVRBW0luc3RhbGxlZCBPUiAoVmVyc2lvbk5UID0gNjAxKV1dPgo+
+ICsgICAgPC9Db25kaXRpb24+Cj4gKwo+ICsgICAgPE1lZGlhIElkPSIxIiBDYWJpbmV0PSJRWEwk
+KHZhci5RWExWZXJzaW9uKS5jYWIiIEVtYmVkQ2FiPSJ5ZXMiIC8+Cj4gKwo+ICsgICAgPFByb3Bl
+cnR5IElkPSJQUkVWSU9VU1ZFUlNJT05TSU5TVEFMTEVEIiBTZWN1cmU9InllcyIgLz4KPiArICAg
+IDxVcGdyYWRlIElkPSJ7NjdGNENCQjctMkNDNS00MTU1LTgzM0QtNDI1RUEzMTdERTUzfSI+Cj4g
+KyAgICAgIDxVcGdyYWRlVmVyc2lvbgo+ICsgICAgICAgIE1pbmltdW09IjAuMC4wLjAiIE1heGlt
+dW09IiQodmFyLlFYTFZlcnNpb24pIgo+ICsgICAgICAgIFByb3BlcnR5PSJQUkVWSU9VU1ZFUlNJ
+T05TSU5TVEFMTEVEIgo+ICsgICAgICAgIEluY2x1ZGVNaW5pbXVtPSJ5ZXMiIEluY2x1ZGVNYXhp
+bXVtPSJubyIgLz4KPiArCj4gKyAgICAgIDxVcGdyYWRlVmVyc2lvbgo+ICsgICAgICAgIE1pbmlt
+dW09IiQodmFyLlFYTFZlcnNpb24pIiBNYXhpbXVtPSI5OS45OS45OS45OSIKPiArICAgICAgICBQ
+cm9wZXJ0eT0iTkVXRVJWRVJTSU9OSU5TVEFMTEVEIgo+ICsgICAgICAgIEluY2x1ZGVNaW5pbXVt
+PSJubyIgSW5jbHVkZU1heGltdW09InllcyIgLz4KPiArICAgIDwvVXBncmFkZT4KPiArCj4gKyAg
+ICA8RGlyZWN0b3J5IElkPSJUQVJHRVRESVIiIE5hbWU9IlNvdXJjZURpciI+Cj4gKyAgICAgIDxE
+aXJlY3RvcnkgSWQ9IiQodmFyLlFYTFByb2dyYW1GaWxlc0ZvbGRlcikiPgo+ICsgICAgICAgIDxE
+aXJlY3RvcnkgSWQ9Ik1BTlVGQUNUVVJFUkZPTERFUiIgTmFtZT0iUmVkIEhhdCI+Cj4gKyAgICAg
+ICAgICA8RGlyZWN0b3J5IElkPSJRWExfRGlyZWN0b3J5IiBOYW1lPSJRWEwiPgo+ICsKPiArICAg
+ICAgICAgICAgPENvbXBvbmVudCBJZD0iUVhMXzciIEd1aWQ9IntCOTM5ODUyRC03NzgwLTQ4OUEt
+QTE5RS04MTcwREI4NUY2MUN9IiBXaW42ND0iJCh2YXIuUVhMV2luNjQpIj4KPiArICAgICAgICAg
+ICAgICA8RmlsZSBJZD0icXhsLnN5cyIgTmFtZT0icXhsLnN5cyIgU291cmNlPSJxeGwuc3lzIiBW
+aXRhbD0ieWVzIiBLZXlQYXRoPSJ5ZXMiIERpc2tJZD0iMSIgUHJvY2Vzc29yQXJjaGl0ZWN0dXJl
+PSIkKHZhci5RWExQbGF0Zm9ybSkiLz4KPiArICAgICAgICAgICAgICA8RmlsZSBJZD0icXhsLmlu
+ZiIgTmFtZT0icXhsLmluZiIgU291cmNlPSJxeGwuaW5mIiBWaXRhbD0ieWVzIiBLZXlQYXRoPSJu
+byIgRGlza0lkPSIxIiBQcm9jZXNzb3JBcmNoaXRlY3R1cmU9IiQodmFyLlFYTFBsYXRmb3JtKSIv
+Pgo+ICsgICAgICAgICAgICAgIDxGaWxlIElkPSJxeGwuY2F0IiBOYW1lPSJxeGwuY2F0IiBTb3Vy
+Y2U9InF4bC5jYXQiIFZpdGFsPSJ5ZXMiIEtleVBhdGg9Im5vIiBEaXNrSWQ9IjEiIFByb2Nlc3Nv
+ckFyY2hpdGVjdHVyZT0iJCh2YXIuUVhMUGxhdGZvcm0pIi8+Cj4gKyAgICAgICAgICAgICAgPEZp
+bGUgSWQ9InF4bGRkLmRsbCIgTmFtZT0icXhsZGQuZGxsIiBTb3VyY2U9InF4bGRkLmRsbCIgVml0
+YWw9InllcyIgS2V5UGF0aD0ibm8iIERpc2tJZD0iMSIgUHJvY2Vzc29yQXJjaGl0ZWN0dXJlPSIk
+KHZhci5RWExQbGF0Zm9ybSkiLz4KPiArICAgICAgICAgICAgICA8ZGlmeDpEcml2ZXIgQWRkUmVt
+b3ZlUHJvZ3JhbXM9Im5vIiBQbHVnQW5kUGxheVByb21wdD0ibm8iIC8+Cj4gKyAgICAgICAgICAg
+IDwvQ29tcG9uZW50Pgo+ICsKPiArICAgICAgICAgIDwvRGlyZWN0b3J5Pgo+ICsgICAgICAgIDwv
+RGlyZWN0b3J5Pgo+ICsgICAgICA8L0RpcmVjdG9yeT4KPiArICAgIDwvRGlyZWN0b3J5Pgo+ICsK
+PiArICAgIDxDdXN0b21BY3Rpb24gSWQ9IlByZXZlbnREb3duZ3JhZGluZyIKPiArICAgICAgICAg
+ICAgICBFcnJvcj0iRXJyb3I6IE5ld2VyIHZlcnNpb24gb2YgUVhMIGlzIGFscmVhZHkgaW5zdGFs
+bGVkLiI+Cj4gKyAgICA8L0N1c3RvbUFjdGlvbj4KPiArCj4gKyAgICA8SW5zdGFsbEV4ZWN1dGVT
+ZXF1ZW5jZT4KPiArICAgICAgPFJlbW92ZUV4aXN0aW5nUHJvZHVjdHMgQWZ0ZXI9Ikluc3RhbGxJ
+bml0aWFsaXplIj5QUkVWSU9VU1ZFUlNJT05TSU5TVEFMTEVEJmx0OyZndDsiIjwvUmVtb3ZlRXhp
+c3RpbmdQcm9kdWN0cz4KPiArICAgICAgPEN1c3RvbSBBY3Rpb249IlByZXZlbnREb3duZ3JhZGlu
+ZyIgQWZ0ZXI9IkZpbmRSZWxhdGVkUHJvZHVjdHMiPk5FV0VSVkVSU0lPTklOU1RBTExFRCZsdDsm
+Z3Q7IiIgQU5EIE5PVCBJbnN0YWxsZWQ8L0N1c3RvbT4KPiArICAgIDwvSW5zdGFsbEV4ZWN1dGVT
+ZXF1ZW5jZT4KPiArCj4gKyAgICA8RmVhdHVyZSBJZD0iUHJvZHVjdEZlYXR1cmUiIFRpdGxlPSJR
+WEwiIExldmVsPSIxIj4KPiArICAgICAgPENvbXBvbmVudFJlZiBJZD0iUVhMXzciIC8+Cj4gKyAg
+ICA8L0ZlYXR1cmU+Cj4gKwo+ICsgIDwvUHJvZHVjdD4KPiArPC9XaXg+Cj4gLS0KPiAyLjIyLjAu
+d2luZG93cy4xCj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9w
+Lm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNl
+LWRldmVs
