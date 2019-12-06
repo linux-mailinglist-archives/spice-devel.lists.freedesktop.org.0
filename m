@@ -2,58 +2,65 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 314A0115016
-	for <lists+spice-devel@lfdr.de>; Fri,  6 Dec 2019 12:57:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4745C1151CA
+	for <lists+spice-devel@lfdr.de>; Fri,  6 Dec 2019 15:03:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B5EF66F9DC;
-	Fri,  6 Dec 2019 11:57:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CC34C6FA27;
+	Fri,  6 Dec 2019 14:02:59 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-io1-xd41.google.com (mail-io1-xd41.google.com
- [IPv6:2607:f8b0:4864:20::d41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5F3ED6F9DC
- for <spice-devel@lists.freedesktop.org>; Fri,  6 Dec 2019 11:57:16 +0000 (UTC)
-Received: by mail-io1-xd41.google.com with SMTP id s2so7031078iog.10
- for <spice-devel@lists.freedesktop.org>; Fri, 06 Dec 2019 03:57:16 -0800 (PST)
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B3EF16FA29
+ for <spice-devel@lists.freedesktop.org>; Fri,  6 Dec 2019 13:59:52 +0000 (UTC)
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-321-2tvTrqw5MBOlrD4GuDvVLQ-1; Fri, 06 Dec 2019 08:59:49 -0500
+Received: by mail-lf1-f70.google.com with SMTP id x23so1095289lfc.5
+ for <spice-devel@lists.freedesktop.org>; Fri, 06 Dec 2019 05:59:49 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=cBaT/IqSIJjwIVeepinCdBcnIvTal01Oh3WGJ0qvmcs=;
- b=gB1eI/3deC//fuBSGtUMAb8I2C1VV83Kk1iYVe72RHD2YZSVOoWojwkmfdVt7zJ2iC
- nWRc/cxZA7xX9Weg4tzJJCsJOw5fvyUppbzdSQG8R9eZwKcigvapVh62FndaaAnzPoG/
- 2J5AHMhZJMwptVnf5hIrgqpsyRigkux3UPoLTq20HJfEc56NghGGx356uATU3z2E96Ij
- pYyUIVDAcc1HZUUrLq/jowSi26XD0G0tq5z+hHSqw5mmD3AEJ9d/MwgA6WxwxwrbKTo2
- DD1DeceyfVuC6KYijI3X0E/1qEp3b0wAGNKO36OzZ6F/6DNzoqpABjpdWPqdhU2YK0QZ
- oGnA==
-X-Gm-Message-State: APjAAAWb7tUqkXlbmTb2ccFIofBVf7rMPRnb/EthBFZj3mAfriMqthTf
- ayGlmQO9ynMvqz+HjYSiwbZ4fXYDVzPRJadX2/AQNA==
-X-Google-Smtp-Source: APXvYqwppBoQH8tbl8pAxX+pJYSqoJEWYYn3tOYwJPg3f0s6RWCPdQAXaFSLn3FcSuvlT/WvgfpbPk7Pr5uk3vOKRzM=
-X-Received: by 2002:a05:6638:c9:: with SMTP id
- w9mr12814105jao.30.1575633435741; 
- Fri, 06 Dec 2019 03:57:15 -0800 (PST)
+ bh=Chza0uBYKxS6iDGhUn/74tBOokMq3KyHVhXGXNjRnes=;
+ b=lkct9LH4jyolbnaq1tDmdxqn+7fD8kcXAXAuE8AS8ROfLgpdOOYCXDPj58C+6R3yue
+ JS+ynKZVcAG7AoaUKbJdCFXxH00+fYUzdnSlZGyzyjQ9/zb0a2hJJbgSztoAWTfoVBUz
+ Y13prXPp1gcLREPg0auqwMme4USdm7S/PKKwhTYicNyjFvcchF95J1WiSozzXxyez04K
+ o8MO2E9btUzpQAvj4tQdg66LbG+CWjx4MFq61/vbBEQoapNLc6n7WCFuvpDb3xd9itJd
+ LFW1yK1Z0TMMTF3TugrEG2qjMCIvqADdG5xVRbViGza/Rpwgu96kFFhY7rkFgsEsPDgR
+ nR2Q==
+X-Gm-Message-State: APjAAAVIZJRiZUsaAoeC3AfJiqO5UMEFwNRphQL8K3o/E2ouHbwPfclP
+ vawZM+C0hDZxzvgcBsXAmY/hWjIgr+bfeZCVbATO38ocHbYQOeEQkkppXw9gfDmTPudnrommdOC
+ Nkq2yRtODOQMgcYwCB3qiGHqoNa3DkSlmuqPPs6cYdz24EJk=
+X-Received: by 2002:a2e:9a93:: with SMTP id p19mr8972435lji.158.1575640788583; 
+ Fri, 06 Dec 2019 05:59:48 -0800 (PST)
+X-Google-Smtp-Source: APXvYqz1gXQ9R43gsQHElmSrSfuwcOvmBLB+xFPUoeutSNGoh0/oT7o/VnO7XMVzcnpeBafjqf4zEbIbe5ZRp9IHWXM=
+X-Received: by 2002:a2e:9a93:: with SMTP id p19mr8972428lji.158.1575640788488; 
+ Fri, 06 Dec 2019 05:59:48 -0800 (PST)
 MIME-Version: 1.0
 References: <20191205174915.24546-1-anezhins@redhat.com>
- <20191205174915.24546-9-anezhins@redhat.com>
- <235344538.14474760.1575628252178.JavaMail.zimbra@redhat.com>
-In-Reply-To: <235344538.14474760.1575628252178.JavaMail.zimbra@redhat.com>
-From: Yuri Benditovich <yuri.benditovich@daynix.com>
-Date: Fri, 6 Dec 2019 13:57:00 +0200
-Message-ID: <CAOEp5OcLfwyUMHhCn6HQRA9GV7Czz=QobVUkC4tsAbVpPjSrdg@mail.gmail.com>
+ <20191205174915.24546-4-anezhins@redhat.com>
+ <2027160826.14473184.1575626800688.JavaMail.zimbra@redhat.com>
+In-Reply-To: <2027160826.14473184.1575626800688.JavaMail.zimbra@redhat.com>
+From: Alexander Nezhinsky <anezhins@redhat.com>
+Date: Fri, 6 Dec 2019 16:05:23 +0200
+Message-ID: <CA+H+uez0WjgR-KOLucqiXqr+mmrtMcoVYvNh7yF9vkM8u0FEaw@mail.gmail.com>
 To: Frediano Ziglio <fziglio@redhat.com>
+X-MC-Unique: 2tvTrqw5MBOlrD4GuDvVLQ-1
+X-Mimecast-Spam-Score: 0
+X-Mailman-Approved-At: Fri, 06 Dec 2019 14:02:58 +0000
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=cBaT/IqSIJjwIVeepinCdBcnIvTal01Oh3WGJ0qvmcs=;
- b=OmP2jVluTG/PUlNaI0IiJhaJdKB2+WeRDv1pwze/HU3NDEFlHefIjJSkczV88LMitR
- HLVJhlTWbc36bU91hfALpSfjCKNkofzJNCamjFxTlP3PKobEN7hlEkSbdhGdzUbKgrzN
- OC28kw8VhWPoDEqKv6qwkZ/Sgu42iXa1ra1KAXZJR5UzbXtBREbHJ3gJ1qcaSO1UBDU7
- PCd1J+IG08N0o3MCOu5Tza3gtq4ZMj4HETcI4uUUbe5A5wF0RtoiiXBprj0Tl4eZ4u/v
- c8tIJcVHQcgdp9OqHOYwtRtz9btDU6ztfebAlMvW+8ntoM7KAEhc8gIbDir0G6k4Q77l
- u4AA==
-Subject: Re: [Spice-devel] [PATCH 8/9] auto-connect shared CD devices added
- using command line
+ d=redhat.com; 
+ s=mimecast20190719; t=1575640791;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LxMHgPse5zoGxWKqV4EAboa+owFl6Uwn5OeuqukRhZA=;
+ b=LV0y5FQkDrxEdaAcqpdgI5CUrC3Pn/xk9Y4GU/LEggwsCP779245jhKjF/jTH0W9BAvdY4
+ KUw22oFicbcEILmxFY+OPuRHIOICNoixM6zkSRaXdAesvXXlRFSxXNIllx+N8TiWQlx7JW
+ jRwecYYXjVONacW3pRecyR8ITGMgqMs=
+Subject: Re: [Spice-devel] [PATCH 3/9] Add --spice-share-cd command line
+ option
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,82 +72,100 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yan Vugenfirer <yan@daynix.com>,
- Spice List <spice-devel@lists.freedesktop.org>,
- Alexander Nezhinsky <anezhins@redhat.com>,
- Alexander Nezhinsky <alexander@daynix.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Yan Vugenfirer <yan@daynix.com>, spice-devel@lists.freedesktop.org,
+ alexander@daynix.com
+Content-Type: multipart/mixed; boundary="===============1867472585=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gRnJpLCBEZWMgNiwgMjAxOSBhdCAxMjozMCBQTSBGcmVkaWFubyBaaWdsaW8gPGZ6aWdsaW9A
-cmVkaGF0LmNvbT4gd3JvdGU6Cj4KPiA+Cj4gPiBGcm9tOiBBbGV4YW5kZXIgTmV6aGluc2t5IDxh
-bmV6aGluc0ByZWRoYXQuY29tPgo+ID4KPiA+IFR1cm4gc2hhcmVkIENEIGRldmljZXMgYWRkZWQg
-dXNpbmcgY29tbWFuZCBsaW5lIGludG8gaG90LXBsdWdnZWQgZGV2aWNlcwo+ID4gd2hpY2ggYXJl
-IHJlZGlyZWN0ZWQgYWNjb3JkaW5nIHRvICdhdXRvLWNvbm5lY3QnIGZpbHRlciBydWxlcy4KPiA+
-IEJ5IGRlZmF1bHQgY29tbWFuZCBsaW5lIGRldmljZXMgYXJlIGFkZGVkIHVzaW5nICdyZWRpcmVj
-dC1vbi1jb25uZWN0JyBmaWx0ZXIsCj4gPiB3aGljaCBkbyBub3QgZml0IHRoZSBzaGFyZCBDRCBj
-b25uZWN0aW5nIHJlcXVpcmVtZW50cy4KPiA+Cj4KPiBDYW4geW91IGRlc2NyaWJlIHRoZSByZXF1
-aXJlbWVudHMgaGVyZT8KCk15IDIgY2VudHM6CkkgdGhpbmsgdGhlIGdvYWwgaGVyZSBpcyB0byBt
-YWtlIHNvbWV0aGluZyB0aGF0IHRoZSB1c2VyIF9leHBlY3RzXy4KV2hlbiBoZSBjcmVhdGVzIHNo
-YXJlZCBDRCB2aWEgY29tbWFuZC1saW5lIGl0IGRvZXMgbm90IGV4cGVjdCBpdCB0bwpiZWhhdmUg
-ZXhhY3RseSBhcyBhbHJlYWR5IHByZXNlbnQgZGlzay1vbi1rZXkgLSBiZWNhdXNlIGZvcgpkaXNr
-LW9uLWtleSB0aGVyZSBhcmUgMiBwb3NzaWJpbGl0aWVzOiB1c2UgaXQgbG9jYWxseSBvciByZWRp
-cmVjdCBpdAppbW1lZGlhdGVseSBvbiBjb25uZWN0IHRvIFZNLgpXaXRoIHNoYXJlZCBDRCB0aGVy
-ZSBpcyBubyBvcHRpb24gdG8gdXNlIGl0IGxvY2FsbHkgc28gd2UgdHJ5IHRvCnJlZGlyZWN0IGl0
-IGF1dG9tYXRpY2FsbHkgaWYgdGhpcyBkb2VzIG5vdCB2aW9sYXRlIGV4aXN0aW5nIHJ1bGVzLgoK
-Pgo+IFRoaXMgcGF0Y2ggbG9va3MgbGlrZSBhbiB3b3JrYXJvdW5kIHRvIG1lLgoKRW11bGF0ZWQg
-ZGV2aWNlIGNyZWF0ZWQgdmlhIGNvbW1hbmQgbGluZSBpcyBpbmRlZWQgYSBzcGVjaWFsIGtpbmQg
-b2YgdGhpbmcuCkZyb20gb25lIHBvaW50IG9mIHZpZXcgaXQgaXMgYSBkZXZpY2UgdGhhdCAiZXhp
-c3RzIiBiZWZvcmUgY29ubmVjdGlvbi4KRnJvbSBhbm90aGVyIHBvaW50IG9mIHZpZXcgaXQgaXMg
-YSBkZXZpY2UgdGhhdCB3YXMgY3JlYXRlZCBlc3BlY2lhbGx5CnRvIHJlZGlyZWN0IGl0LgpXaGlj
-aCBzb2x1dGlvbiB5b3UnZCBzdWdnZXN0PwoKPgo+ID4gU2lnbmVkLW9mZi1ieTogQWxleGFuZGVy
-IE5lemhpbnNreSA8YW5lemhpbnNAcmVkaGF0LmNvbT4KPiA+IC0tLQo+ID4gIHNyYy91c2ItZGV2
-aWNlLW1hbmFnZXIuYyB8IDI1ICsrKysrKysrKysrKysrKysrKy0tLS0tLS0KPiA+ICAxIGZpbGUg
-Y2hhbmdlZCwgMTggaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKPiA+Cj4gPiBkaWZmIC0t
-Z2l0IGEvc3JjL3VzYi1kZXZpY2UtbWFuYWdlci5jIGIvc3JjL3VzYi1kZXZpY2UtbWFuYWdlci5j
-Cj4gPiBpbmRleCAwOTYxZWY5Li5hNjlhMzQ2IDEwMDY0NAo+ID4gLS0tIGEvc3JjL3VzYi1kZXZp
-Y2UtbWFuYWdlci5jCj4gPiArKysgYi9zcmMvdXNiLWRldmljZS1tYW5hZ2VyLmMKPiA+IEBAIC04
-ODksMTEgKzg4OSw5IEBAIHN0YXRpYyB2b2lkCj4gPiBzcGljZV91c2JfZGV2aWNlX21hbmFnZXJf
-Y2hlY2tfcmVkaXJfb25fY29ubmVjdCgKPiA+ICAgICAgR1Rhc2sgKnRhc2s7Cj4gPiAgICAgIFNw
-aWNlVXNiRGV2aWNlICpkZXZpY2U7Cj4gPiAgICAgIFNwaWNlVXNiQmFja2VuZERldmljZSAqYmRl
-djsKPiA+ICsgICAgZ2Jvb2xlYW4gaXNfY2QsIHNoYWxsX3JlZGlyZWN0Owo+ID4gICAgICBndWlu
-dCBpOwo+ID4KPiA+IC0gICAgaWYgKHByaXYtPnJlZGlyZWN0X29uX2Nvbm5lY3QgPT0gTlVMTCkK
-PiA+IC0gICAgICAgIHJldHVybjsKPiA+IC0KPiA+ICAgICAgZm9yIChpID0gMDsgaSA8IHByaXYt
-PmRldmljZXMtPmxlbjsgaSsrKSB7Cj4gPiAgICAgICAgICBkZXZpY2UgPSBnX3B0cl9hcnJheV9p
-bmRleChwcml2LT5kZXZpY2VzLCBpKTsKPiA+Cj4gPiBAQCAtOTAxLDEwICs4OTksMjMgQEAgc3Rh
-dGljIHZvaWQKPiA+IHNwaWNlX3VzYl9kZXZpY2VfbWFuYWdlcl9jaGVja19yZWRpcl9vbl9jb25u
-ZWN0KAo+ID4gICAgICAgICAgICAgIGNvbnRpbnVlOwo+ID4KPiA+ICAgICAgICAgIGJkZXYgPSBz
-cGljZV91c2JfZGV2aWNlX21hbmFnZXJfZGV2aWNlX3RvX2JkZXYoc2VsZiwgZGV2aWNlKTsKPiA+
-IC0gICAgICAgIGlmIChzcGljZV91c2JfYmFja2VuZF9kZXZpY2VfY2hlY2tfZmlsdGVyKAo+ID4g
-LSAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZGV2LAo+ID4gLSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwcml2LT5yZWRpcmVjdF9vbl9jb25uZWN0X3J1bGVzLAo+ID4gLSAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwcml2LT5yZWRpcmVjdF9vbl9jb25uZWN0X3J1bGVzX2NvdW50
-KSA9PSAwKSB7Cj4gPiArICAgICAgICBpc19jZCA9IHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9n
-ZXRfbGliZGV2KGJkZXYpID09IE5VTEw7Cj4KPiBUaGlzIGlzIGNoZWNraW5nIGlmIGVtdWxhdGVk
-LCBub3QgaWYgaXMgYSBDRC4KPgo+ID4gKwo+ID4gKyAgICAgICAgaWYgKHByaXYtPnJlZGlyZWN0
-X29uX2Nvbm5lY3QpIHsKPiA+ICsgICAgICAgICAgICBzaGFsbF9yZWRpcmVjdCA9ICFzcGljZV91
-c2JfYmFja2VuZF9kZXZpY2VfY2hlY2tfZmlsdGVyKAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgYmRldiwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBy
-aXYtPnJlZGlyZWN0X29uX2Nvbm5lY3RfcnVsZXMsCj4gPiArICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwcml2LT5yZWRpcmVjdF9vbl9jb25uZWN0X3J1bGVzX2NvdW50KTsKPgo+IFdo
-eSBub3Qgc2V0dGluZyBzb21lICJydWxlcyIgYW5kICJydWxlc19jb3VudCIgdmFyaWFibGUgaW5z
-dGVhZAo+IGFuZCBjYWxsIHNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9jaGVja19maWx0ZXIgb25j
-ZT8KPgo+ID4gKyAgICAgICAgfSBlbHNlIGlmIChpc19jZCkgewo+ID4gKyAgICAgICAgICAgIHNo
-YWxsX3JlZGlyZWN0ID0gIXNwaWNlX3VzYl9iYWNrZW5kX2RldmljZV9jaGVja19maWx0ZXIoCj4g
-PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZGV2LAo+ID4gKyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcHJpdi0+YXV0b19jb25uX2ZpbHRlcl9ydWxlcywKPiA+ICsr
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHByaXYtPmF1dG9fY29ubl9maWx0ZXJfcnVs
-ZXNfY291bnQpOwo+ID4gKyAgICAgICAgfSBlbHNlIHsKPiA+ICsgICAgICAgICAgICBzaGFsbF9y
-ZWRpcmVjdCA9IEZBTFNFOwo+ID4gKyAgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICAgaWYgKHNo
-YWxsX3JlZGlyZWN0KSB7Cj4gPiAgICAgICAgICAgICAgLyogTm90ZTogcmUtdXNlcyBzcGljZV91
-c2JfZGV2aWNlX21hbmFnZXJfY29ubmVjdF9kZXZpY2VfYXN5bmMncwo+ID4gICAgICAgICAgICAg
-ICAgIGNvbXBsZXRpb24gaGFuZGxpbmcgY29kZSEgKi8KPiA+ICAgICAgICAgICAgICB0YXNrID0g
-Z190YXNrX25ldyhzZWxmLAo+Cj4gRnJlZGlhbm8KPgo+IF9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCj4gU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gU3Bp
-Y2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
-cC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbApfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2Ut
-ZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-L21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWw=
+--===============1867472585==
+Content-Type: multipart/alternative; boundary="0000000000007de189059909756f"
+
+--0000000000007de189059909756f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Dec 6, 2019 at 12:06 PM Frediano Ziglio <fziglio@redhat.com> wrote:
+
+> >
+> > From: Alexander Nezhinsky <anezhins@redhat.com>
+> > +                rc =3D spice_usb_device_manager_create_shared_cd_devic=
+e(m,
+> > *name, &err);
+> > +                if (!rc) {
+> > +                    if (!err)
+>
+> minor: err =3D=3D NULL
+>
+OK
+
+
+>
+> > +                        g_warning("Failed to create shared CD device
+> %s",
+> > +                    else
+> > +                        g_warning("Failed to create shared CD device %=
+s:
+>
+> style: always brackets
+>
+Sure
+
+
+>
+> as you check for err above you can include in the else.
+>
+OK
+
+--0000000000007de189059909756f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Dec 6, 2019 at 12:06 PM Fredi=
+ano Ziglio &lt;<a href=3D"mailto:fziglio@redhat.com">fziglio@redhat.com</a>=
+&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">&gt;=
+ <br>
+&gt; From: Alexander Nezhinsky &lt;<a href=3D"mailto:anezhins@redhat.com" t=
+arget=3D"_blank">anezhins@redhat.com</a>&gt;<br>&gt; +=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rc =3D spice_usb_device_manager_create_s=
+hared_cd_device(m,<br>
+&gt; *name, &amp;err);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!rc) {<br=
+>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ if (!err)<br>
+<br>
+minor: err =3D=3D NULL<br></blockquote><div>OK</div><div>=C2=A0</div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex">
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 g_warning(&quot;Failed to create shared CD device %s&quot;,<=
+br>&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 else<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 g_warning(&quot;Failed to create shared CD device %s:<br><br=
+>
+style: always brackets<br></blockquote><div>Sure=C2=A0</div><div>=C2=A0</di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
+r-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
+as you check for err above you can include in the else.<br></blockquote><di=
+v>OK=C2=A0</div></div></div>
+
+--0000000000007de189059909756f--
+
+
+--===============1867472585==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============1867472585==--
+
