@@ -2,56 +2,67 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65808116DE3
-	for <lists+spice-devel@lfdr.de>; Mon,  9 Dec 2019 14:27:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11893117258
+	for <lists+spice-devel@lfdr.de>; Mon,  9 Dec 2019 18:02:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA9036E44C;
-	Mon,  9 Dec 2019 13:27:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4A58E899B5;
+	Mon,  9 Dec 2019 17:02:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EE1E76E44C
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Dec 2019 13:27:22 +0000 (UTC)
-Received: by mail-il1-x12e.google.com with SMTP id b15so12720953iln.3
- for <spice-devel@lists.freedesktop.org>; Mon, 09 Dec 2019 05:27:22 -0800 (PST)
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 40C80891AD
+ for <spice-devel@lists.freedesktop.org>; Mon,  9 Dec 2019 17:02:38 +0000 (UTC)
+Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
+ [209.85.167.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-359-G2nHpTRjO2idFNpd5b5OkA-1; Mon, 09 Dec 2019 12:02:33 -0500
+Received: by mail-lf1-f72.google.com with SMTP id x79so3039287lff.19
+ for <spice-devel@lists.freedesktop.org>; Mon, 09 Dec 2019 09:02:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=gqhrPAnpVPj6ctOtd8dQo8d4EV16X7HelpsVeAuGc+I=;
- b=agnwr5cdqbBQPM5RW3QbmXmxRBrvh/NZkTU28R1N+m9EVox26KYX1+cdSoTE6tRR4O
- oMO26V36rqZ4mWADT4r3osh+vmYIZ8xLrzXtNTPHUUQxnmEu/OZgdDyxU38Bintopp0h
- zmptR+q8EkWqz7iR1xyi1u9aC3mgr2E7TLBK/GFkg/YZIltC6k1TIj4ST4VW6TxAxtIC
- VmpRrpssYcxVCrNWMFJweB86UtaSjjUuGOU9qsEu+4Woz5sg0/5zRle/olrMwC3yY+sz
- m5a4AaWNCbc1F07lUSGNQFRobBw8XaAcBrTHErgfDxGp+J8G9621i6vr0h48Dplx3NUw
- WY/A==
-X-Gm-Message-State: APjAAAWCVPFzsxrXJvjtZH87FLJ6qfIp9is9s5ph1G7XH1Rw1cWN/bLu
- ZYvk09uRFUez4rTZgDNfCO373jAJQWPd5V5LB1qSTw==
-X-Google-Smtp-Source: APXvYqwMZBNm2qQqnhph4rAzdTgAayDZHg5doU/tkJcorZ178I0+2RgL3PCdeQRiqmwUUJNg4Yn7LpRodeFRyqAVM2w=
-X-Received: by 2002:a92:d244:: with SMTP id v4mr9928285ilg.148.1575898042343; 
- Mon, 09 Dec 2019 05:27:22 -0800 (PST)
+ bh=XBwJT1FoJe628jesdXhA9AndzbGJS168OnS8qUpmhyU=;
+ b=B7N/bw0NAmnYfs12x4FpOHbTP/Ll6qI36IBhb86PNciVFNtMdH6Z2/IhYmJfDXMdFj
+ l7gYGGpaBjZkOlLX1V377v21Qwc0DYngnRwa9k4fArn/aLLg98Vn6W9bZNUjUTuozI87
+ CH8du4VN0ozJhOXpz97MN3PY5JsvtXsrXLLifiIA6dcqI2CBSdfjytpxWmiPHHjG1BZk
+ dyZQe5J32B1INwLeBBRLGGbYE+cpdWVm4atAOqR+Ys3/gRyKN1Vr9O/4m2z3wFinpJEg
+ HZ0zKAhopcK1O39un7ZeUqmDuzWNCgMjUACrJkgtKuOC5aVWs0sI007so2sr5L6MCuCQ
+ zg0A==
+X-Gm-Message-State: APjAAAWmcDQdUA1qVv28Csnuf+0rNkGboZCmS0z5uzl2bEm8OD+qP5wD
+ J3Ij+URuceoniZpArNAfl5Z7S46eyqyqSVnNkM23vA3mP8q4Tt20OaUVbaSSzvCLWRBrir3HTit
+ WvIsrD5wlWy89EPJognlr/JbHruzcX0f2H3G6UB19VzD2XIk=
+X-Received: by 2002:a05:651c:1a2:: with SMTP id
+ c2mr17483566ljn.121.1575910951347; 
+ Mon, 09 Dec 2019 09:02:31 -0800 (PST)
+X-Google-Smtp-Source: APXvYqw3niEZrmmNiWyBSqYHEekiOL/hQ6uABQqUhy2MewFqCOEATNns8ANy+EsB3euIAkBS7saWcrOBl0agKtjrV4c=
+X-Received: by 2002:a05:651c:1a2:: with SMTP id
+ c2mr17483549ljn.121.1575910951175; 
+ Mon, 09 Dec 2019 09:02:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20191122063910.939-1-yuri.benditovich@daynix.com>
- <527cbe22-8fce-424b-19e4-96bab3126892@redhat.com>
-In-Reply-To: <527cbe22-8fce-424b-19e4-96bab3126892@redhat.com>
-From: Yuri Benditovich <yuri.benditovich@daynix.com>
-Date: Mon, 9 Dec 2019 15:27:08 +0200
-Message-ID: <CAOEp5OfOsdRBaQVn5TZNg-ZYx8f4dtO1F9-VcJ7SwqKpYky+OA@mail.gmail.com>
-To: uril@redhat.com
+References: <20191205174915.24546-1-anezhins@redhat.com>
+ <20191205174915.24546-3-anezhins@redhat.com>
+ <1860140170.14473019.1575626680942.JavaMail.zimbra@redhat.com>
+ <CA+H+uew4aWet5WbJXEJ8p=A46r3nUQ1oKN+KanJ9BgAv12FCHQ@mail.gmail.com>
+In-Reply-To: <CA+H+uew4aWet5WbJXEJ8p=A46r3nUQ1oKN+KanJ9BgAv12FCHQ@mail.gmail.com>
+From: Alexander Nezhinsky <anezhins@redhat.com>
+Date: Mon, 9 Dec 2019 19:02:40 +0200
+Message-ID: <CA+H+uewtm0G0rHgEa84hxDXBoOvtwu+cyXgyb08hc2gVQ4cOJQ@mail.gmail.com>
+To: Frediano Ziglio <fziglio@redhat.com>
+X-MC-Unique: G2nHpTRjO2idFNpd5b5OkA-1
+X-Mimecast-Spam-Score: 0
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=gqhrPAnpVPj6ctOtd8dQo8d4EV16X7HelpsVeAuGc+I=;
- b=EFxM4T9USI8y6uL7QUv+uxiNtdbfegcv05hVMkymdgrje9mxVsobJO0XQDekb8ycIT
- QwFtlUg+qEiEWg/jadhtZfltrcLfyfb+L8AXCzqO/WegVqiFQC4L7deoRGvARVwubndc
- eT12FkzATCl/tLrTAWKU8qckVqeuo+JBzG9aKrIj8d0p+e5AKpa4XaHK/ozywD1Tu/KR
- pn3XjvJNtbMHuMjCqfHj8hvoCWIMT8vwsvKIOH2DyB+ilU00V/1FSNUvBUNiQvaZPv6j
- Eh3xY9HYUXUGeg8YktApw4Yw1H1euxDTpAOul151CzkAUt+hmY87bTUjGIzEjt+S4n5a
- p94A==
-Subject: Re: [Spice-devel] [qxl-wddm-dod] add Wix script for driver
- installation
+ d=redhat.com; 
+ s=mimecast20190719; t=1575910957;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=fgNCgJ9W7gTKswj8+MERpIouwtar7R7dWK/qA1q4qYU=;
+ b=YL6ByEtfsTVD8gfESIc6vS0tt6toI2qsm6XkWituSVvwyy0wP2on9nGIPuLwL276yqxJuE
+ 7Gx8k7LhjtHktMrrroHvMfHBSOcXTqf8EU2Uu3ieD09Gj7Jgj7ThAQhotacOpU6b7Rxf8H
+ IfA3ZkH48XjLDvAbh6VaxmOg5fr++DU=
+Subject: Re: [Spice-devel] [PATCH 2/9] add spice_usb_device_manager shared
+ CD related api functions
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,107 +75,113 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: Yan Vugenfirer <yan@daynix.com>,
- Spice List <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Spice List <spice-devel@lists.freedesktop.org>,
+ Alexander Nezhinsky <alexander@daynix.com>
+Content-Type: multipart/mixed; boundary="===============0157420448=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Q2FuIHlvdSBwbGVhc2UgbWVyZ2UgaXQgb3IgeW91IHdhbnQgbWUgdG8gZG8gdGhhdD8KKEkgdHlw
-aWNhbGx5IGRvIG5vdCBtZXJnZSB0byB1cHN0cmVhbSByZXBvLCBqdXN0IGFkZCB0YWdzIG9uIGl0
-KQoKVGhhbmtzLApZdXJpCgpPbiBXZWQsIERlYyA0LCAyMDE5IGF0IDE6NDcgUE0gVXJpIEx1Ymxp
-biA8dXJpbEByZWRoYXQuY29tPiB3cm90ZToKPgo+IEhpIFl1cmksCj4KPiBJIHF1aWNrbHkgdGVz
-dGVkIGluc3RhbGwsIHVuaW5zdGFsbCwgYW5kIHVwZ3JhZGUuIFdvcmtzIHdlbGwgZm9yIG1lLgo+
-Cj4gU29tZSBtaW5vciBxdWVzdGlvbnM6Cj4gLSBJIHNlZSBVc2JESyBkb2VzIG5vdCB1c2UgZGlm
-eC4gSXMgaXQgZWFzaWVyIHRvIHVzZSBkaWZ4ID8KPiAtIERvIHBlb3BsZSBydW4gV2luZG93cyAx
-MCB4ODYgKDMyIGJpdCk/IERvIHdlIG5lZWQgc3VjaCBhIGRyaXZlciA/Cj4KPiBBY2suCj4KPiBU
-aGFua3MsCj4gICAgICBVcmkuCj4KPiBPbiAxMS8yMi8xOSA4OjM5IEFNLCBZdXJpIEJlbmRpdG92
-aWNoIHdyb3RlOgo+ID4gU2lnbmVkLW9mZi1ieTogWXVyaSBCZW5kaXRvdmljaCA8eXVyaS5iZW5k
-aXRvdmljaEBkYXluaXguY29tPgo+ID4gLS0tCj4gPiAgIFFYTFdERE1ET0RJbnN0YWxsZXIud3hz
-IHwgOTQgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPiA+ICAgMSBm
-aWxlIGNoYW5nZWQsIDk0IGluc2VydGlvbnMoKykKPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IFFY
-TFdERE1ET0RJbnN0YWxsZXIud3hzCj4gPgo+ID4gZGlmZiAtLWdpdCBhL1FYTFdERE1ET0RJbnN0
-YWxsZXIud3hzIGIvUVhMV0RETURPREluc3RhbGxlci53eHMKPiA+IG5ldyBmaWxlIG1vZGUgMTAw
-NjQ0Cj4gPiBpbmRleCAwMDAwMDAwLi42NDE0NWNjCj4gPiAtLS0gL2Rldi9udWxsCj4gPiArKysg
-Yi9RWExXRERNRE9ESW5zdGFsbGVyLnd4cwo+ID4gQEAgLTAsMCArMSw5NCBAQAo+ID4gKzw/eG1s
-IHZlcnNpb249IjEuMCIgZW5jb2Rpbmc9IlVURi04Ij8+Cj4gPiArPFdpeCB4bWxucz0iaHR0cDov
-L3NjaGVtYXMubWljcm9zb2Z0LmNvbS93aXgvMjAwNi93aSIKPiA+ICsgICAgIHhtbG5zOmRpZng9
-Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd2l4L0RpZnhBcHBFeHRlbnNpb24iPgo+ID4g
-Kwo+ID4gKyAgPD9pZmRlZiBRWExXRERNRE9ENjRCaXQgPz4KPiA+ICsgICAgPD9kZWZpbmUgUVhM
-V0RETURPRFBsYXRmb3JtPXg2NCA/Pgo+ID4gKyAgICA8P2RlZmluZSBRWExXRERNRE9EUHJvZ3Jh
-bUZpbGVzRm9sZGVyPSBQcm9ncmFtRmlsZXM2NEZvbGRlciA/Pgo+ID4gKyAgICA8P2RlZmluZSBR
-WExXRERNRE9EV2luNjQ9IHllcyA/Pgo+ID4gKyAgPD9lbHNlPz4KPiA+ICsgICAgPD9kZWZpbmUg
-UVhMV0RETURPRFBsYXRmb3JtPXg4NiA/Pgo+ID4gKyAgICA8P2RlZmluZSBRWExXRERNRE9EUHJv
-Z3JhbUZpbGVzRm9sZGVyPSBQcm9ncmFtRmlsZXNGb2xkZXIgPz4KPiA+ICsgICAgPD9kZWZpbmUg
-UVhMV0RETURPRFdpbjY0PSBubyA/Pgo+ID4gKyAgPD9lbmRpZj8+Cj4gPiArCj4gPiArICA8UHJv
-ZHVjdAo+ID4gKyAgICBOYW1lPSJSZWQgSGF0IFFYTCBjb250cm9sbGVyIgo+ID4gKyAgICBJZD0i
-KiIKPiA+ICsgICAgVXBncmFkZUNvZGU9Ins5MjdENTVFNy05QjgyLTRCRDQtQjc3OC1CMEY3NjY1
-REUyQzl9Igo+ID4gKyAgICBNYW51ZmFjdHVyZXI9IlJlZCBIYXQsIEluYy4iCj4gPiArICAgIFZl
-cnNpb249IiQodmFyLlFYTFdERE1ET0RWZXJzaW9uKSIKPiA+ICsgICAgTGFuZ3VhZ2U9IjEwMzMi
-Pgo+ID4gKyAgICA8UGFja2FnZQo+ID4gKyAgICAgIE1hbnVmYWN0dXJlcj0iUmVkIEhhdCwgSW5j
-LiIKPiA+ICsgICAgICBJbnN0YWxsZXJWZXJzaW9uPSIyMDAiCj4gPiArICAgICAgTGFuZ3VhZ2Vz
-PSIxMDMzIgo+ID4gKyAgICAgIFBsYXRmb3JtPSIkKHZhci5RWExXRERNRE9EUGxhdGZvcm0pIgo+
-ID4gKyAgICAgIENvbXByZXNzZWQ9InllcyIKPiA+ICsgICAgICBJbnN0YWxsU2NvcGU9InBlck1h
-Y2hpbmUiCj4gPiArICAgICAgSW5zdGFsbFByaXZpbGVnZXM9ImVsZXZhdGVkIiAvPgo+ID4gKwo+
-ID4gKyAgICA8UHJvcGVydHkgSWQ9IldJTjEwRk9VTkQiIFNlY3VyZT0ieWVzIj4KPiA+ICsgICAg
-ICA8RGlyZWN0b3J5U2VhcmNoIElkPSJzZWFyY2hTeXN0ZW0iIFBhdGg9IltTeXN0ZW1Gb2xkZXJd
-IiBEZXB0aD0iMCI+Cj4gPiArICAgICAgICA8RmlsZVNlYXJjaCBJZD0ic2VhcmNoRmlsZSIgTmFt
-ZT0iYWR2YXBpMzIuZGxsIiBNaW5WZXJzaW9uPSI2LjMuMTAwMDAuMCIvPgo+ID4gKyAgICAgIDwv
-RGlyZWN0b3J5U2VhcmNoPgo+ID4gKyAgICA8L1Byb3BlcnR5Pgo+ID4gKwo+ID4gKyAgICA8P2lm
-ICQodmFyLlFYTFdERE1ET0RQbGF0Zm9ybSkgPSB4ODYgPz4KPiA+ICsgICAgICA8Q29uZGl0aW9u
-IE1lc3NhZ2U9IkVycm9yOiAzMi1iaXQgdmVyc2lvbiBvZiBRWEwtV0RETS1ET0QgY2FuIG5vdCBi
-ZSBpbnN0YWxsZWQgb24gNjQtYml0IFdpbmRvd3MuIj4KPiA+ICsgICAgICAgICAgPCFbQ0RBVEFb
-Tm90IFZlcnNpb25OVDY0XV0+Cj4gPiArICAgICAgPC9Db25kaXRpb24+Cj4gPiArICAgIDw/ZW5k
-aWY/Pgo+ID4gKwo+ID4gKyAgICA8Q29uZGl0aW9uIE1lc3NhZ2U9IlFYTC1XRERNLURPRCBpcyBv
-bmx5IHN1cHBvcnRlZCBvbiBXaW5kb3dzIDEwIG9yIGhpZ2hlciBzeXN0ZW1zLiI+Cj4gPiArICAg
-ICAgPCFbQ0RBVEFbSW5zdGFsbGVkIE9SIChWZXJzaW9uTlQgPSA2MDMgQU5EIFdJTjEwRk9VTkQp
-IE9SIChWZXJzaW9uTlQgPiA2MDMpXV0+Cj4gPiArICAgIDwvQ29uZGl0aW9uPgo+ID4gKwo+ID4g
-KyAgICA8TWVkaWEgSWQ9IjEiIENhYmluZXQ9IlFYTFdERE1ET0QkKHZhci5RWExXRERNRE9EVmVy
-c2lvbikuY2FiIiBFbWJlZENhYj0ieWVzIiAvPgo+ID4gKwo+ID4gKyAgICA8UHJvcGVydHkgSWQ9
-IlBSRVZJT1VTVkVSU0lPTlNJTlNUQUxMRUQiIFNlY3VyZT0ieWVzIiAvPgo+ID4gKyAgICA8VXBn
-cmFkZSBJZD0iezkyN0Q1NUU3LTlCODItNEJENC1CNzc4LUIwRjc2NjVERTJDOX0iPgo+ID4gKyAg
-ICAgIDxVcGdyYWRlVmVyc2lvbgo+ID4gKyAgICAgICAgTWluaW11bT0iMC4wLjAuMCIgTWF4aW11
-bT0iJCh2YXIuUVhMV0RETURPRFZlcnNpb24pIgo+ID4gKyAgICAgICAgUHJvcGVydHk9IlBSRVZJ
-T1VTVkVSU0lPTlNJTlNUQUxMRUQiCj4gPiArICAgICAgICBJbmNsdWRlTWluaW11bT0ieWVzIiBJ
-bmNsdWRlTWF4aW11bT0ibm8iIC8+Cj4gPiArCj4gPiArICAgICAgPFVwZ3JhZGVWZXJzaW9uCj4g
-PiArICAgICAgICBNaW5pbXVtPSIkKHZhci5RWExXRERNRE9EVmVyc2lvbikiIE1heGltdW09Ijk5
-Ljk5Ljk5Ljk5Igo+ID4gKyAgICAgICAgUHJvcGVydHk9Ik5FV0VSVkVSU0lPTklOU1RBTExFRCIK
-PiA+ICsgICAgICAgIEluY2x1ZGVNaW5pbXVtPSJubyIgSW5jbHVkZU1heGltdW09InllcyIgLz4K
-PiA+ICsgICAgPC9VcGdyYWRlPgo+ID4gKwo+ID4gKyAgICA8RGlyZWN0b3J5IElkPSJUQVJHRVRE
-SVIiIE5hbWU9IlNvdXJjZURpciI+Cj4gPiArICAgICAgPERpcmVjdG9yeSBJZD0iJCh2YXIuUVhM
-V0RETURPRFByb2dyYW1GaWxlc0ZvbGRlcikiPgo+ID4gKyAgICAgICAgPERpcmVjdG9yeSBJZD0i
-TUFOVUZBQ1RVUkVSRk9MREVSIiBOYW1lPSJSZWQgSGF0Ij4KPiA+ICsgICAgICAgICAgPERpcmVj
-dG9yeSBJZD0iUVhMV0RETURPRF9EaXJlY3RvcnkiIE5hbWU9IlFYTC1XRERNLURPRCI+Cj4gPiAr
-Cj4gPiArICAgICAgICAgICAgPENvbXBvbmVudCBJZD0iUVhMV0RETURPRF8xMCIgR3VpZD0ie0Q0
-MzU5OUMwLTZFREYtNDNFQy05QkUxLTJGQ0Q5NURCQTRFQ30iIFdpbjY0PSIkKHZhci5RWExXRERN
-RE9EV2luNjQpIj4KPiA+ICsgICAgICAgICAgICAgICAgPEZpbGUgSWQ9InF4bGRvZC5zeXMiIE5h
-bWU9InF4bGRvZC5zeXMiIFNvdXJjZT0icXhsZG9kLnN5cyIgVml0YWw9InllcyIgS2V5UGF0aD0i
-eWVzIiBEaXNrSWQ9IjEiIFByb2Nlc3NvckFyY2hpdGVjdHVyZT0iJCh2YXIuUVhMV0RETURPRFBs
-YXRmb3JtKSIvPgo+ID4gKyAgICAgICAgICAgICAgICA8RmlsZSBJZD0icXhsZG9kLmluZiIgTmFt
-ZT0icXhsZG9kLmluZiIgU291cmNlPSJxeGxkb2QuaW5mIiBWaXRhbD0ieWVzIiBLZXlQYXRoPSJu
-byIgRGlza0lkPSIxIiBQcm9jZXNzb3JBcmNoaXRlY3R1cmU9IiQodmFyLlFYTFdERE1ET0RQbGF0
-Zm9ybSkiLz4KPiA+ICsgICAgICAgICAgICAgICAgPEZpbGUgSWQ9InF4bGRvZC5jYXQiIE5hbWU9
-InF4bGRvZC5jYXQiIFNvdXJjZT0icXhsZG9kLmNhdCIgVml0YWw9InllcyIgS2V5UGF0aD0ibm8i
-IERpc2tJZD0iMSIgUHJvY2Vzc29yQXJjaGl0ZWN0dXJlPSIkKHZhci5RWExXRERNRE9EUGxhdGZv
-cm0pIi8+Cj4gPiArICAgICAgICAgICAgICAgIDxGaWxlIElkPSJxeGxkb2QucGRiIiBOYW1lPSJx
-eGxkb2QucGRiIiBTb3VyY2U9InF4bGRvZC5wZGIiIFZpdGFsPSJ5ZXMiIEtleVBhdGg9Im5vIiBE
-aXNrSWQ9IjEiIFByb2Nlc3NvckFyY2hpdGVjdHVyZT0iJCh2YXIuUVhMV0RETURPRFBsYXRmb3Jt
-KSIvPgo+ID4gKyAgICAgICAgICAgICAgICA8ZGlmeDpEcml2ZXIgQWRkUmVtb3ZlUHJvZ3JhbXM9
-Im5vIiBQbHVnQW5kUGxheVByb21wdD0ibm8iIC8+Cj4gPiArICAgICAgICAgICAgPC9Db21wb25l
-bnQ+Cj4gPiArCj4gPiArICAgICAgICAgIDwvRGlyZWN0b3J5Pgo+ID4gKyAgICAgICAgPC9EaXJl
-Y3Rvcnk+Cj4gPiArICAgICAgPC9EaXJlY3Rvcnk+Cj4gPiArICAgIDwvRGlyZWN0b3J5Pgo+ID4g
-Kwo+ID4gKyAgICA8Q3VzdG9tQWN0aW9uIElkPSJQcmV2ZW50RG93bmdyYWRpbmciCj4gPiArICAg
-ICAgICAgICAgICBFcnJvcj0iRXJyb3I6IE5ld2VyIHZlcnNpb24gb2YgUVhMLVdERE0tRE9EIGlz
-IGFscmVhZHkgaW5zdGFsbGVkLiI+Cj4gPiArICAgIDwvQ3VzdG9tQWN0aW9uPgo+ID4gKwo+ID4g
-KyAgICA8SW5zdGFsbEV4ZWN1dGVTZXF1ZW5jZT4KPiA+ICsgICAgICA8UmVtb3ZlRXhpc3RpbmdQ
-cm9kdWN0cyBBZnRlcj0iSW5zdGFsbEluaXRpYWxpemUiPlBSRVZJT1VTVkVSU0lPTlNJTlNUQUxM
-RUQmbHQ7Jmd0OyIiPC9SZW1vdmVFeGlzdGluZ1Byb2R1Y3RzPgo+ID4gKyAgICAgIDxDdXN0b20g
-QWN0aW9uPSJQcmV2ZW50RG93bmdyYWRpbmciIEFmdGVyPSJGaW5kUmVsYXRlZFByb2R1Y3RzIj5O
-RVdFUlZFUlNJT05JTlNUQUxMRUQmbHQ7Jmd0OyIiIEFORCBOT1QgSW5zdGFsbGVkPC9DdXN0b20+
-Cj4gPiArICAgIDwvSW5zdGFsbEV4ZWN1dGVTZXF1ZW5jZT4KPiA+ICsKPiA+ICsgICAgPEZlYXR1
-cmUgSWQ9IlByb2R1Y3RGZWF0dXJlIiBUaXRsZT0iUVhMV0RETURPRCIgTGV2ZWw9IjEiPgo+ID4g
-KyAgICAgIDxDb21wb25lbnRSZWYgSWQ9IlFYTFdERE1ET0RfMTAiIC8+Cj4gPiArICAgIDwvRmVh
-dHVyZT4KPiA+ICsKPiA+ICsgIDwvUHJvZHVjdD4KPiA+ICs8L1dpeD4KPiA+Cj4KX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGlu
-ZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+--===============0157420448==
+Content-Type: multipart/alternative; boundary="000000000000715e320599485cd3"
+
+--000000000000715e320599485cd3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Dec 7, 2019 at 12:20 PM Alexander Nezhinsky <anezhins@redhat.com>
+wrote:
+
+>
+> On Fri, Dec 6, 2019 at 12:04 PM Frediano Ziglio <fziglio@redhat.com>
+> wrote:
+>
+> > +    bdev =3D spice_usb_device_manager_device_to_bdev(self, device);
+>>
+>> see below
+>>
+>> > +#ifdef USE_USBREDIR
+>> > +    SpiceUsbBackendDevice *bdev;
+>> > +    gboolean is_cd;
+>> > +
+>> > +    bdev =3D spice_usb_device_manager_device_to_bdev(self, device);
+>>
+>> Note that SpiceUsbBackendDevice is defined as
+>>
+>>     typedef struct _SpiceUsbDevice SpiceUsbBackendDevice;
+>>
+>> no need to call this function.
+>>
+>> I agree with Yuri. This is the current practice in all API functions.
+> We can rework it everywhere, or leave it as is.
+>
+>
+I looked at it just an inch deeper and saw that the function
+spice_usb_device_manager_device_to_bdev actually increments the reference
+of the device object.
+So it seems to be necessary and the change would require rework of some
+further logic, i guess.
+In view of the fact that the struct is the same, we could change the name
+of the functions to reflect the refcounting, like:
+spice_usb_device_manager_get_bdev_device() or just
+spice_usb_device_manager_get_device()
+What do you think?
+
+--000000000000715e320599485cd3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Sat, Dec 7, 2019 at 12:20 PM Alexa=
+nder Nezhinsky &lt;<a href=3D"mailto:anezhins@redhat.com">anezhins@redhat.c=
+om</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+"><div dir=3D"ltr"><div dir=3D"ltr"><br></div><div class=3D"gmail_quote"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Fri, Dec 6, 2019 at 12:04 PM Fredian=
+o Ziglio &lt;<a href=3D"mailto:fziglio@redhat.com" target=3D"_blank">fzigli=
+o@redhat.com</a>&gt; wrote:<br></div><br><blockquote class=3D"gmail_quote" =
+style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
+dding-left:1ex">&gt; +=C2=A0 =C2=A0 bdev =3D spice_usb_device_manager_devic=
+e_to_bdev(self, device);<br>
+<br>
+see below<br>
+<br></blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">&gt; +#i=
+fdef USE_USBREDIR<br>
+&gt; +=C2=A0 =C2=A0 SpiceUsbBackendDevice *bdev;<br>
+&gt; +=C2=A0 =C2=A0 gboolean is_cd;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 bdev =3D spice_usb_device_manager_device_to_bdev(self, =
+device);<br>
+<br>
+Note that SpiceUsbBackendDevice is defined as<br>
+<br>
+=C2=A0 =C2=A0 typedef struct _SpiceUsbDevice SpiceUsbBackendDevice;<br>
+<br>
+no need to call this function.<br>
+<br></blockquote><div>I agree with Yuri. This is the current practice in al=
+l API functions.</div><div>We can rework it everywhere, or leave it as is.<=
+/div><br></div></div></blockquote><div><br></div><div>I looked at it just a=
+n inch deeper and saw that the function spice_usb_device_manager_device_to_=
+bdev actually increments the reference of the device object.</div><div>So i=
+t seems to be necessary and the change would require rework of some further=
+ logic, i guess.</div><div>In view of the fact that the struct is the same,=
+ we could change the name of the functions to reflect the refcounting, like=
+:</div><div>spice_usb_device_manager_get_bdev_device() or just spice_usb_de=
+vice_manager_get_device()</div><div>What do you think?</div><div><br></div>=
+<div><br></div></div></div>
+
+--000000000000715e320599485cd3--
+
+
+--===============0157420448==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
+ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
+L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
+
+--===============0157420448==--
+
