@@ -2,54 +2,54 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5D7E126450
-	for <lists+spice-devel@lfdr.de>; Thu, 19 Dec 2019 15:10:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 991E712644F
+	for <lists+spice-devel@lfdr.de>; Thu, 19 Dec 2019 15:10:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B09766EB83;
-	Thu, 19 Dec 2019 14:10:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB6BA6EB82;
+	Thu, 19 Dec 2019 14:10:43 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 440B76E175
- for <spice-devel@lists.freedesktop.org>; Thu, 19 Dec 2019 13:03:11 +0000 (UTC)
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 510AD6E356
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 Dec 2019 13:13:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576760590;
+ s=mimecast20190719; t=1576761228;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=BIuW3mEuk8a1ZwAYQGdutllkKPAoXcw9K6KLzQ0xKIw=;
- b=Ldm6DMYGzsMONzs3GPF9Dt6AaLPCpqPIRFZqT7ulpsS7IkoPrz+SarFvPwaQpteyN0A99v
- ibc71lSO3Boup2uoq4Z2hO+vkYyK7x+7E63pXSHF0Av71wFM+QGKhMmOBl5ZMh35COiEA2
- DjTGumSvYCIw7+tS+tu6S+1VDBFMoFg=
+ bh=3xWdptGiax0pdVbALf1KWnovXqWWxHEyt0r89yHID0w=;
+ b=YLLAoETiY+Ruzfp4ncYR67/TywK02K7HUV1MsAlHX8Dt1BJFETl34WdB/EYW8dJCPZ1w+U
+ Bjo5GjAvRnyZLAiIyTIDgjLsR9nsHt3ho9+T0ho/UCgtZrpPVC4r3cdAhAruNLeGK+SQF9
+ 4YL6A6xpbNvwiF3qleM7VRuLwA2Ok8E=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-226-kdlq7Sa4OCmY1hrQqKMWSQ-1; Thu, 19 Dec 2019 08:02:02 -0500
-X-MC-Unique: kdlq7Sa4OCmY1hrQqKMWSQ-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-207-Nd4DKpusNceE6R0IkJcwBQ-1; Thu, 19 Dec 2019 08:12:41 -0500
+X-MC-Unique: Nd4DKpusNceE6R0IkJcwBQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1780E18B644F;
- Thu, 19 Dec 2019 13:02:00 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A7776100550E;
+ Thu, 19 Dec 2019 13:12:38 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-98.ams2.redhat.com
  [10.36.116.98])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6B95C10013A7;
- Thu, 19 Dec 2019 13:01:59 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A12C1620C0;
+ Thu, 19 Dec 2019 13:12:35 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 810C611AAA; Thu, 19 Dec 2019 14:01:58 +0100 (CET)
-Date: Thu, 19 Dec 2019 14:01:58 +0100
+ id 8020A9DA3; Thu, 19 Dec 2019 14:12:34 +0100 (CET)
+Date: Thu, 19 Dec 2019 14:12:34 +0100
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-Message-ID: <20191219130158.7rzdkyemupreudko@sirius.home.kraxel.org>
+Message-ID: <20191219131234.wm24cazvc7zrnhpn@sirius.home.kraxel.org>
 References: <20191218130214.170703-1-keiichiw@chromium.org>
- <CAAFQd5AEJ0sUzqrXJAmFnBn0aU8Ef6FwXYo0LgK0NO_CdWXRVg@mail.gmail.com>
- <20191219074639.kdkrqxwb6fdb67hu@sirius.home.kraxel.org>
  <3550989.gzE5nMqd4t@os-lin-dmo>
+ <CAAFQd5BgkEUwBFWdv2ZH98egjm=u0dBRgtexqkzjES+J1SEmag@mail.gmail.com>
+ <3878267.TzG3DlCiay@os-lin-dmo>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <3550989.gzE5nMqd4t@os-lin-dmo>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+In-Reply-To: <3878267.TzG3DlCiay@os-lin-dmo>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Mailman-Approved-At: Thu, 19 Dec 2019 14:10:42 +0000
 Subject: Re: [Spice-devel] [virtio-dev] Re: [PATCH v2 1/1] virtio-video: Add
  virtio video device specification
@@ -80,16 +80,28 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
   Hi,
 
-> > Not clearly defined in the spec:  When is the decoder supposed to send
-> > the response for a queue request?  When it finished decoding (i.e. frame
-> > is ready for playback), or when it doesn't need the buffer any more for
-> > decoding (i.e. buffer can be re-queued or pages can be released)?
-> In my eyes the both statements mean almost the same and both are valid.
+> > However that still doesn't let the driver know which buffers will be
+> > dequeued when. A simple example of this scenario is when the guest is
+> > done displaying a frame and requeues the buffer back to the decoder.
+> > Then the decoder will not choose it for decoding next frames into as
+> > long as the frame in that buffer is still used as a reference frame,
+> > even if one sends the drain request.
+> It might be that I'm getting your point wrong, but do you mean some hardware 
+> can mark a buffer as ready to be displayed yet still using the underlying 
+> memory to decode other frames?
 
-Well, no.  When the device decoded a P-Frame it can notify the device,
-saying "here is your decoded frame".  But the device might still need
-the buffer with the decoded frame to properly decode the following B/I
-Frames which reference the P-Frame.
+Yes, this is how I understand Tomasz Figa.
+
+> This means, if you occasionally/intentionally 
+> write to the buffer you mess up the whole decoding pipeline.
+
+And to avoid this the buffer handling aspect must be clarified in the
+specification.  Is the device allowed to continue using the buffer after
+finishing decoding and completing the queue request?  If so, how do we
+hand over buffer ownership back to the driver so it can free the pages?
+drain request?  How do we handle re-using buffers?  Can the driver
+simply re-queue them and expect the device figures by itself whenever it
+can use the buffer or whenever it is still needed as reference frame?
 
 cheers,
   Gerd
