@@ -1,66 +1,76 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D64AB128B96
-	for <lists+spice-devel@lfdr.de>; Sat, 21 Dec 2019 22:02:49 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id AB31112B0BE
+	for <lists+spice-devel@lfdr.de>; Fri, 27 Dec 2019 03:49:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D57D96E4B6;
-	Sat, 21 Dec 2019 21:02:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C7CC789739;
+	Fri, 27 Dec 2019 02:49:20 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
- [IPv6:2a00:1450:4864:20::541])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DF0B36E426
- for <spice-devel@lists.freedesktop.org>; Sat, 21 Dec 2019 06:46:49 +0000 (UTC)
-Received: by mail-ed1-x541.google.com with SMTP id c26so10642236eds.8
- for <spice-devel@lists.freedesktop.org>; Fri, 20 Dec 2019 22:46:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=F68oGD/1SJ7SshN3GZaSjxmczsdUavxsZol8X28uIyE=;
- b=P8SMOXEIcUFxwGpwlOTMUv+4/qMmRz1JSK6Ez8a6nErhGrgf9xjca1S2ra0j/J5GJo
- LdqciioD8JtJdPfr1Ck3F9rnJf3h7FMjvbLHRymJxUj+4BSxBpi38qmOPKsJvMh9ruY3
- rDDaH+9m6+KmRVAkgtmUuKjpJayROo7NuUfLs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=F68oGD/1SJ7SshN3GZaSjxmczsdUavxsZol8X28uIyE=;
- b=tGGsjIn10vFlCCDCav+vfC2kxXy2QZPbCu2k8DjLEDk2hAeoTMa237Vz6VLI1/deLs
- 73/kWaUV30naBs7Uhwff/mg+Yedb0tezhUxlDKm6pqz7uzkjcsOTpXcFet2PcbbCA6kY
- t1P63rcElTiy87+ywuJ45xK1+Dnx7SU9Oz7t9L9SA+rEX7Xv2zk6PVT/SE9cX2NO2bZv
- 4X5Z6CHVHiGevKBEYDna01RCxzOPbXZZlnzTO4S4EUqMYJrqr5GVDBTaWtnsirLxZ+Mp
- NBfmxFV9+cf5MCRNUbRaaN2jvLcuHaqXetMGGqJXPmmbTdzVqXL+/y5Yp42m4yw25tLb
- BN8w==
-X-Gm-Message-State: APjAAAXNmANrO2Z/WURlbawU1v5uQXsDLWLk/hP4jyooq/UuBk0iOTbu
- zEdXbb2cyRZnT51daHDuTf0AGENHDwU7zQ==
-X-Google-Smtp-Source: APXvYqyg54Ga9dDB7ba7ONYeLiPYGjBSK13LXjZq4RhfUP4n5I4wCZ8i08CkiPAS/gPwhfUff4OSHw==
-X-Received: by 2002:aa7:c6c5:: with SMTP id b5mr20365066eds.281.1576910808004; 
- Fri, 20 Dec 2019 22:46:48 -0800 (PST)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com.
- [209.85.221.43])
- by smtp.gmail.com with ESMTPSA id 11sm1385924ejw.34.2019.12.20.22.46.46
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Dec 2019 22:46:47 -0800 (PST)
-Received: by mail-wr1-f43.google.com with SMTP id b6so11482810wrq.0
- for <spice-devel@lists.freedesktop.org>; Fri, 20 Dec 2019 22:46:46 -0800 (PST)
-X-Received: by 2002:adf:f586:: with SMTP id f6mr18456128wro.46.1576910806048; 
- Fri, 20 Dec 2019 22:46:46 -0800 (PST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11olkn2016.outbound.protection.outlook.com [40.92.20.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6861589739
+ for <spice-devel@lists.freedesktop.org>; Fri, 27 Dec 2019 02:49:19 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hhZJgW/9OecP7j/BWOnmcZylM0b6uXsclJ+pxTDmmAj9NlqoVqAxrRx3EWoPQP8ZxRzy7A61rgt3o+Z+/BHgeEZ1098bYOETUqJfq/ireOxH61RE5gE2YjG1jR7j7hmxyjOgY+7dQAXNkbZKkfGkXzqEORjGtiak6GJb/cY7R6ssS3iZ6YfOp2MF8FLJOZYX94gCcd3vEcTmBwxqj0y/7iy/oCLF5Yx0d5PTWX6SvNSr+BsCNbSVKZAQ25DsGHPnrSU4a0JE5YXT6JdXe1YoA3Kza80gDeTF78CIu5qNfrEttXsDmBU3qo63jrWP7xFLW/daeC4c7wcKeyMftmu+9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=q7XXfv+Cm/G/1fqQnimbvrQ7zaJQZBo0v65hVV6DOeA=;
+ b=BzFH/IjQbrZhybnsorIzreuSzmRPCTkeKwPTIGhdo7sGBLRvv8GMFIBXynfElXhIxtaG1236AToZtIcL5Ongdj08V1fZeq2ShV93A8AinoThCaWxwRWTHYxLKlNcc96INl12gK1i4s8E2pU9ZHUbeaZuqnKnlE0SEmi0LKjBaakYY4kib+ClUo/KqctRdLJT6KP7v4lUGhm0DVt7b5ShPaauxgv1LeacXEiP15ozA5gWVwkqgXal3IqNghrZXu4Yun2YSfdPNMbqHYTgwfsBtKaCbE12DWVmj8QhmMXjqKdp45iG/PIE1iJGMoJBM0Vj3dRt5/vrF7QTmEKX7v6lqg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=live.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=q7XXfv+Cm/G/1fqQnimbvrQ7zaJQZBo0v65hVV6DOeA=;
+ b=IqwUrZPhvN/X8W22wajSyHpAMKPs3JTHAxfZ/Gcs0juSygKATKc9pdF4OcZ0geKzqXE5VjTV9u92slYk9obXsA/FNGVT9YZlxOmEi1CE92OLqP7S8fuEoHrHWjIyGV1+u6O4oEY3DH/58srAs+n/qEUrJI54lwGwUtFLZe42Fs0xZeUm8sEZ/UGVQStF0D36hLKFn4QN3myB2b3qO9ioZQMbfC+WqnEAdFwp1yGdUtsCyDoN4SDOebLl1ihXZikyrrG1jK4OB/f7UTgH2FHHHHoiLhEbXBAO1A/1acK2184PQxCvqvsUfWCqsTP5/JUhXIlULIruR+IjxWj5dBJeBg==
+Received: from BN8NAM11FT055.eop-nam11.prod.protection.outlook.com
+ (10.13.176.51) by BN8NAM11HT127.eop-nam11.prod.protection.outlook.com
+ (10.13.176.227) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2581.11; Fri, 27 Dec
+ 2019 02:49:17 +0000
+Received: from MN2PR06MB5966.namprd06.prod.outlook.com (10.13.176.56) by
+ BN8NAM11FT055.mail.protection.outlook.com (10.13.177.62) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2581.11 via Frontend Transport; Fri, 27 Dec 2019 02:49:17 +0000
+Received: from MN2PR06MB5966.namprd06.prod.outlook.com
+ ([fe80::8061:7adf:1611:69f]) by MN2PR06MB5966.namprd06.prod.outlook.com
+ ([fe80::8061:7adf:1611:69f%7]) with mapi id 15.20.2581.007; Fri, 27 Dec 2019
+ 02:49:17 +0000
+From: franklin zhou <codeit@live.com>
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Thread-Topic: cannot drag file from guest to client.
+Thread-Index: AQHVvGAeo+OALTGByU2BoJcUiD+rIg==
+Date: Fri, 27 Dec 2019 02:49:17 +0000
+Message-ID: <MN2PR06MB59667E5D641FCF397D0D0B8AB32A0@MN2PR06MB5966.namprd06.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-incomingtopheadermarker: OriginalChecksum:A373083DE11101F62D3323420DA24B91F41DA8EE15DF476E172E3EC11A785068;
+ UpperCasedChecksum:7C653D9DD5AB5FF342774951F29B70EF2F3DB4D906889FA44450F51B66134F9B;
+ SizeAsReceived:6674; Count:42
+x-tmn: [3LpgX7svfeIrV/ykuMqsy/ZLXhqTwM5k]
+x-ms-publictraffictype: Email
+x-incomingheadercount: 42
+x-eopattributedmessage: 0
+x-ms-office365-filtering-correlation-id: f42b4832-7bef-49f9-4ce0-08d78a775d8b
+x-ms-traffictypediagnostic: BN8NAM11HT127:
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: lrpgrPxUit2H26J2JvE9v/JlJQYREu/HOKajcj4SLCf3PeHsEqbDde6zlv+rrihVFp+tDYobhZisU2sCkHqXu26gmc/Xhe24M+Nid38MsRcsFA0aQZt4eaFMJ8YwKx2m/Gsu8JYbdMth3rDZddkuhX+8pSzgDinEM/Qyt+cwuV7FiTwvCLSb+HNfNiKXihe1
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-References: <20191218130214.170703-1-keiichiw@chromium.org>
- <2932378.s8JBUXtX1Y@os-lin-dmo>
- <CAD90VcZU_jkY=wZ21R_abTnO8BrL_Sf4AO4Rfz3NP5xZMwmaHA@mail.gmail.com>
- <2584386.DF4NACHtsB@os-lin-dmo>
-In-Reply-To: <2584386.DF4NACHtsB@os-lin-dmo>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Sat, 21 Dec 2019 15:46:34 +0900
-X-Gmail-Original-Message-ID: <CAAFQd5DUY6jYu-kuOP9pc72dddg80gZzMktxTGdkxE_PDw1HRg@mail.gmail.com>
-Message-ID: <CAAFQd5DUY6jYu-kuOP9pc72dddg80gZzMktxTGdkxE_PDw1HRg@mail.gmail.com>
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-X-Mailman-Approved-At: Sat, 21 Dec 2019 21:02:46 +0000
-Subject: Re: [Spice-devel] [PATCH v2 1/1] virtio-video: Add virtio video
- device specification
+X-OriginatorOrg: live.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: f42b4832-7bef-49f9-4ce0-08d78a775d8b
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Dec 2019 02:49:17.0926 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Internet
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8NAM11HT127
+Subject: [Spice-devel] cannot drag file from guest to client.
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,69 +82,73 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
- Alexandre Courbot <acourbot@chromium.org>,
- Keiichi Watanabe <keiichiw@chromium.org>,
- David Stevens <stevensd@chromium.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
- Hans Verkuil <hverkuil@xs4all.nl>,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
- Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
- Pawel Osciak <posciak@chromium.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1282713961=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Sat, Dec 21, 2019 at 12:46 AM Dmitry Sepp
-<dmitry.sepp@opensynergy.com> wrote:
-> On Freitag, 20. Dezember 2019 16:26:50 CET Keiichi Watanabe wrote:
-> > On Thu, Dec 19, 2019 at 10:28 PM Dmitry Sepp
-> > <dmitry.sepp@opensynergy.com> wrote:
-> > > On Mittwoch, 18. Dezember 2019 14:02:14 CET Keiichi Watanabe wrote:
-[snip]
-> > > > +enum virtio_video_format {
-> > > > + VIRTIO_VIDEO_FORMAT_UNDEFINED = 0,
-> > > > + /* Raw formats */
-> > > > + VIRTIO_VIDEO_FORMAT_NV12 = 1,
-> > > > + VIRTIO_VIDEO_FORMAT_YUV420,
-> > > > + VIRTIO_VIDEO_FORMAT_YVU420,
-> > >
-> > > Let's add some variants of RGB, like RGBA, ARGB. We need it for the
-> > > encoder in particular .
-> >
-> > Sounds good.
-> > BTW, which "ARGB8888" or "A8R8G8B8" is preferred? While the first one
-> > comes from DRM's FourCC, the second one comes from virtio_gpu_formats.
-> > I personally prefer the first one, then we can have a naming convention
-> > like: VIRTIO_VIDEO_FORMAT_<name from drm_fourcc.h>
-> >
->
-> I'd go with ARGB8888 and BGRA8888 (might be with X variants).
+--===============1282713961==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_MN2PR06MB59667E5D641FCF397D0D0B8AB32A0MN2PR06MB5966namp_"
 
-Just to make sure we're talking about the same formats. DRM naming
-convention is based on the little endian convention, which for 32-bit
-formats means that you interpret the whole pixel as a packed 32-bit
-word on a little endian system. For ARGB8888 that would mean (bit 31)
-ARGB (bit 0) in the 32-bit word and (byte 0) B, G, R, A (byte 3) when
-looking at separate bytes in memory. Does that correspond to your
-expected format?
+--_000_MN2PR06MB59667E5D641FCF397D0D0B8AB32A0MN2PR06MB5966namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-We also have to be specific about the A and X formats, as the A format
-should be supported only if the hardware (host) doesn't ignore the
-alpha channel. I haven't seen any hardware capable of encoding alpha
-channel yet, but apparently for WebM the standard is to just encode
-the alpha channel into another stream as Y, together with dummy U and
-V values. [1] That sounds like something that would be handled by two
-separate encoding streams and not just one that accepts RGBA on the
-input.
+I tried drag file from guest to client, but it cannot success, only drag fi=
+le from client to guest is ok. is it a bug or need some setting?
 
-[1] http://wiki.webmproject.org/alpha-channel
 
-Best regards,
-Tomasz
+
+client:  window10, ubuntu18.04
+
+guest: windows10, windows7, ubuntu18.04
+
+
+
+--_000_MN2PR06MB59667E5D641FCF397D0D0B8AB32A0MN2PR06MB5966namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
+ color: rgb(0, 0, 0);">
+<div>
+<p dir=3D"auto">I tried drag file from guest to client, but it cannot succe=
+ss, only drag file from client to guest is ok. is it a bug or need some set=
+ting?</p>
+<p dir=3D"auto"><br>
+</p>
+<p dir=3D"auto"><br>
+</p>
+<p dir=3D"auto">client:&nbsp; window10, ubuntu18.04</p>
+<p dir=3D"auto">guest: windows10, windows7, ubuntu18.04</p>
+<p dir=3D"auto"><br>
+</p>
+</div>
+<br>
+</div>
+</body>
+</html>
+
+--_000_MN2PR06MB59667E5D641FCF397D0D0B8AB32A0MN2PR06MB5966namp_--
+
+--===============1282713961==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1282713961==--
