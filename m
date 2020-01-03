@@ -2,56 +2,65 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0326012DF2F
-	for <lists+spice-devel@lfdr.de>; Wed,  1 Jan 2020 15:49:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2B1B12FA7E
+	for <lists+spice-devel@lfdr.de>; Fri,  3 Jan 2020 17:33:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22A9789BA3;
-	Wed,  1 Jan 2020 14:49:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CD2036E1F9;
+	Fri,  3 Jan 2020 16:33:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8ECAC89B8F
- for <spice-devel@lists.freedesktop.org>; Wed,  1 Jan 2020 14:49:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1577890169;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NmVhfI84RTnq2srDv0eTipd+CHNt31YYnAK8zUGNjv4=;
- b=djMTvbO7/+rbmevY5ko7lxJiW9fPfhiglewqH72ueuhqO3jEpOMLFczMPu5tL6XxxhHroy
- XfWQAzvw4SgMLafUIw/kW89ycHSGWsDlCMRE+xTFe3EtP3VBMk6O5zlLvS7papohW13y9B
- 5lq76z3CpEMxVeDeJJSbuqFgE++q9tg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-166-I3k8ZjjxMJW1_BX9yIEsVg-1; Wed, 01 Jan 2020 09:49:26 -0500
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6596A2F29;
- Wed,  1 Jan 2020 14:49:25 +0000 (UTC)
-Received: from lub.tlv (dhcp-4-107.tlv.redhat.com [10.35.4.107])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id C82CD7BFB0;
- Wed,  1 Jan 2020 14:49:24 +0000 (UTC)
-To: franklin zhou <codeit@live.com>,
- "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-References: <MN2PR06MB59667E5D641FCF397D0D0B8AB32A0@MN2PR06MB5966.namprd06.prod.outlook.com>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <dab14789-b519-6cd0-5a3f-2c337a7376c8@redhat.com>
-Date: Wed, 1 Jan 2020 16:49:23 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 18FE46E27C
+ for <spice-devel@lists.freedesktop.org>; Fri,  3 Jan 2020 16:33:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codeweavers.com; s=6377696661; h=Message-Id:Content-Type:MIME-Version:
+ Subject:To:From:Date:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=LOZdgjcxMhU5wYRNvwa4vX+bumNOFXceVTtQQ+OI0Ck=; b=HeEkVWkiSagB/MglZIs/ckcekR
+ CFlAHMCJtVlaAAR5YediyNjBr71hfWuktBogk6Ls3xrFHUHByYi6rQhTZLZvAkw0MTk1V4QleujSI
+ DbC5EIlbpLLfazhW+1HE3I4bo5c6FxShbdoD38tACFxk/JRP3tFdoZ3JYDkOQ3fQs5Rs=;
+Received: from 82-64-54-218.subs.proxad.net ([82.64.54.218] helo=amboise)
+ by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.89) (envelope-from <fgouget@free.fr>) id 1inPbf-0007zP-Qx
+ for spice-devel@lists.freedesktop.org; Fri, 03 Jan 2020 10:15:25 -0600
+Received: from fgouget by amboise with local (Exim 4.92)
+ (envelope-from <fgouget@amboise.dolphin>) id 1inPbd-0008WF-8I
+ for spice-devel@lists.freedesktop.org; Fri, 03 Jan 2020 17:15:21 +0100
+Date: Fri, 3 Jan 2020 17:15:21 +0100 (CET)
+From: Francois Gouget <fgouget@codeweavers.com>
+To: Spice devel <spice-devel@lists.freedesktop.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-In-Reply-To: <MN2PR06MB59667E5D641FCF397D0D0B8AB32A0@MN2PR06MB5966.namprd06.prod.outlook.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-MC-Unique: I3k8ZjjxMJW1_BX9yIEsVg-1
-X-Mimecast-Spam-Score: 0
-Subject: Re: [Spice-devel] cannot drag file from guest to client.
+Message-Id: <E1inPbd-0008WF-8I@amboise>
+X-Spam-Score: -23.8
+X-Spam-Report: Spam detection software,
+ running on the system "mail.codeweavers.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  This fixes building spice-gtk on Debian 10. Signed-off-by:
+ Francois Gouget <fgouget@codeweavers.com> --- See
+ https://github.com/mesonbuild/meson/issues/4720
+ Content analysis details:   (-23.8 points, 5.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -20 USER_IN_WHITELIST      From: address is in the user's white-list
+ -6.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+ -0.5 BAYES_00               BODY: Bayes spam probability is 0 to 1%
+ [score: 0.0000]
+ 0.0 TVD_RCVD_IP            Message was received from an IP address
+ 0.5 FREEMAIL_FROM          Sender email is commonly abused enduser mail
+ provider (fgouget[at]free.fr)
+ 1.0 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level
+ mail domains are different
+ 0.2 FREEMAIL_FORGED_FROMDOMAIN 2nd level domains in From and
+ EnvelopeFrom freemail headers are different
+ 1.0 AWL AWL: Adjusted score from AWL reputation of From: address
+Subject: [Spice-devel] [PATCH client] build: Avoid line continuation for
+ compatibility with older Meson
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,45 +72,39 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="windows-1252"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 12/27/19 4:49 AM, franklin zhou wrote:
-> I tried drag file from guest to client, but it cannot success, only drag =
+This fixes building spice-gtk on Debian 10.
 
-> file from client to guest is ok. is it a bug or need some setting?
+Signed-off-by: Francois Gouget <fgouget@codeweavers.com>
+---
 
+See https://github.com/mesonbuild/meson/issues/4720
 
-It (file-transfer, currently) only works from client to guest.
+ tests/meson.build | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-
-> =
-
-> =
-
-> =
-
-> client:=A0 window10, ubuntu18.04
-> =
-
-> guest: windows10, windows7, ubuntu18.04
-> =
-
-> =
-
-> =
-
-> =
-
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-> =
-
+diff --git a/tests/meson.build b/tests/meson.build
+index 57bd2cc5..bc5be5fd 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -23,9 +23,8 @@ endif
+ 
+ # create a static library from a shared one extracting all objects
+ # this allows to rewrite part of it if necessary for mocking
+-test_lib = \
+-  static_library('test-lib',
+-                 objects : spice_client_glib_lib.extract_all_objects())
++test_lib = static_library('test-lib',
++                          objects : spice_client_glib_lib.extract_all_objects())
+ 
+ foreach src : tests_sources
+   name = 'test-@0@'.format(src).split('.')[0]
+-- 
+2.20.1
 
 _______________________________________________
 Spice-devel mailing list
