@@ -2,56 +2,49 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0335A1311D1
-	for <lists+spice-devel@lfdr.de>; Mon,  6 Jan 2020 13:07:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 026061311CC
+	for <lists+spice-devel@lfdr.de>; Mon,  6 Jan 2020 13:07:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 44FFB6E29A;
-	Mon,  6 Jan 2020 12:07:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AAAD06E288;
+	Mon,  6 Jan 2020 12:07:42 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B063989D8A
- for <spice-devel@lists.freedesktop.org>; Mon,  6 Jan 2020 08:47:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1578300437;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LuwmtFiuk4QC6AlCiv2QuDvl6ZNYkiBQJ/wWpvPHom0=;
- b=jJ/D8EBQHzgwZexxqyBobFloy1rl4RigZdJuudmrmKkh6mKytAj+YtTYKDpQEBF4EGu9WO
- 2vQH0JZzKPI6SIdGSDfvlJUgpe7ECAUiVj9TjgeH0nH9YKg38zBoTLDhuNUg+xFJJXgjUs
- qPY2+uU96Wm5C5IL5WBAHvvyuBHSAew=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-299-Xg-vGluqNHK1In-eZEA4YA-1; Mon, 06 Jan 2020 03:47:13 -0500
-X-MC-Unique: Xg-vGluqNHK1In-eZEA4YA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3D070100550E;
- Mon,  6 Jan 2020 08:47:10 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-98.ams2.redhat.com
- [10.36.116.98])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 876D660F89;
- Mon,  6 Jan 2020 08:47:02 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 66A356DF9; Mon,  6 Jan 2020 09:47:01 +0100 (CET)
-Date: Mon, 6 Jan 2020 09:47:01 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-Message-ID: <20200106084701.3v5eew3bh4nh67sc@sirius.home.kraxel.org>
+Received: from plasma6.jpberlin.de (plasma6.jpberlin.de [80.241.56.68])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E8BAE6E213
+ for <spice-devel@lists.freedesktop.org>; Mon,  6 Jan 2020 09:29:14 +0000 (UTC)
+Received: from spamfilter06.heinlein-hosting.de
+ (spamfilter06.heinlein-hosting.de [80.241.56.125])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 0844DBA027;
+ Mon,  6 Jan 2020 10:29:11 +0100 (CET)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter06.heinlein-hosting.de (spamfilter06.heinlein-hosting.de
+ [80.241.56.125]) (amavisd-new, port 10030)
+ with ESMTP id eeTI_rgntkVz; Mon,  6 Jan 2020 10:29:10 +0100 (CET)
+Received: from webmail.opensynergy.com (unknown [217.66.60.5])
+ (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "webmail.opensynergy.com",
+ Issuer "GeoTrust EV RSA CA 2018" (not verified))
+ (Authenticated sender: opensynergy@jpberlin.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 61421B44C7;
+ Mon,  6 Jan 2020 10:29:09 +0100 (CET)
+Received: from os-lin-dmo.localnet (10.25.255.1) by MXS02.open-synergy.com
+ (10.25.10.18) with Microsoft SMTP Server (TLS) id 14.3.468.0; Mon, 6 Jan 2020
+ 10:29:08 +0100
+From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Date: Mon, 6 Jan 2020 10:29:08 +0100
+Message-ID: <7363398.GW5YExTkCf@os-lin-dmo>
+Organization: OpenSynergy
+In-Reply-To: <20200106083335.jmzhavtlq7ppgtic@sirius.home.kraxel.org>
 References: <20191218130214.170703-1-keiichiw@chromium.org>
- <20191218130214.170703-2-keiichiw@chromium.org>
- <2358784.0s52YacUgI@os-lin-dmo>
+ <CAAFQd5ANkgPdu71Oo6YjFPJ2dT24GK_Ne5=Omp6Sh+6FXT2BTw@mail.gmail.com>
+ <20200106083335.jmzhavtlq7ppgtic@sirius.home.kraxel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <2358784.0s52YacUgI@os-lin-dmo>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Originating-IP: [10.25.255.1]
 X-Mailman-Approved-At: Mon, 06 Jan 2020 12:07:42 +0000
-Subject: Re: [Spice-devel] [PATCH v2 1/1] virtio-video: Add virtio video
- device specification
+Subject: Re: [Spice-devel] [virtio-dev] Re: [PATCH v2 1/1] virtio-video: Add
+ virtio video device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,31 +56,48 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: virtio-dev@lists.oasis-open.org, alexlau@chromium.org,
- acourbot@chromium.org, tfiga@chromium.org, stevensd@chromium.org,
- daniel@ffwll.ch, spice-devel@lists.freedesktop.org, hverkuil@xs4all.nl,
- marcheu@chromium.org, dgreid@chromium.org, egranata@google.com,
- posciak@chromium.org, linux-media@vger.kernel.org
+Cc: virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
+ Alexandre Courbot <acourbot@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ David Stevens <stevensd@chromium.org>, Daniel Vetter <daniel@ffwll.ch>,
+ spice-devel@lists.freedesktop.org, Hans Verkuil <hverkuil@xs4all.nl>,
+ =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
+ Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-  Hi,
+Hi,
 
-> How should one deal with multiplanar formats? Do we create one resource per 
-> plane? Otherwise we need a way to send mem entries for each plane in one 
-> request.
+On Montag, 6. Januar 2020 09:33:35 CET Gerd Hoffmann wrote:
+>   Hi,
+> 
+> > > We also see the need to add a max_streams value to this structure so as
+> > > to
+> > > explicitly provide a limit on the number of streams the guest can
+> > > create.
+> > 
+> > What would be the advantage over just trying to create one and
+> > failing? The maximum number would be only meaningful for the special
+> > case when the streams are always only created by one user space
+> > process. Otherwise, if several processes do that, they are not aware
+> > of each other and the number could be higher than they can actually
+> > create, because other processes could have some streams created
+> > already.
+> 
+> Also the number of streams might not be fixed but depend on stream
+> parameters, i.e. hardware can decode one hd or two sd streams ...
+> 
+Ok, you are right. We'd better return an error from the device side.
 
-DRM uses arrays of handles and offsets (see struct drm_framebuffer).  A
-handle references a gem object (roughly the same as a resource), and the
-offset specifies the start of the plane within the gem object.  That
-allows both a single gem object with planes stored at different offsets
-and one gem object per plane.  virtio-video could do the same, or pick
-one of the two approaches and support only that.
+Regards,
+Dmitry.
 
-cheers,
-  Gerd
+> cheers,
+>   Gerd
+
 
 _______________________________________________
 Spice-devel mailing list
