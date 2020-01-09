@@ -1,54 +1,58 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4E4F138CFD
-	for <lists+spice-devel@lfdr.de>; Mon, 13 Jan 2020 09:38:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 94631138D0A
+	for <lists+spice-devel@lfdr.de>; Mon, 13 Jan 2020 09:38:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4369189F63;
-	Mon, 13 Jan 2020 08:38:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EA89489FA5;
+	Mon, 13 Jan 2020 08:38:49 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-x142.google.com (mail-lf1-x142.google.com
- [IPv6:2a00:1450:4864:20::142])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E67996E2D7
- for <spice-devel@lists.freedesktop.org>; Wed,  8 Jan 2020 13:52:28 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id 203so2473338lfa.12
- for <spice-devel@lists.freedesktop.org>; Wed, 08 Jan 2020 05:52:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gREgVfNHkrnImh18R6g4ghj10okoL/GHfD2UjRLPdA0=;
- b=A11jpJ+00gSOHB4pIP5SpNG4HWfLUBIhw2k0vgU4zLFNCAj1WTdiYRswhhwTccNk3i
- WZutgP0MR+iN7hzA2QZYi0GcFgtEGZCGiHR2GsPsRLEyOdY6psdkhHmrNiDmJie7/T1Y
- wuZb0IILLOH6DcaDOSCSRhg3W1DBx1ofXWLlY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gREgVfNHkrnImh18R6g4ghj10okoL/GHfD2UjRLPdA0=;
- b=Kot4sR3R9q9kW9s8iX92QRi5Ojajl/7EoJLTZm+T8n2m8+L2DOLQJFU70qFW5Z3mrn
- EKUb5riYHne90h4XiZamj7DPUwSOAO08lg7huKM0Wr/uqqNMqvNdayvTE1mSvH6xK1B0
- 1AJjUkY4Tq/WX5QqIaQTSMLbzaLoPn9ckYlgZGoVGJZ8Ll7PeLbbH57unBcXLWXRIpki
- KKkNbvUllhVcHBMg4GS1d8Rckfw6EVUivTaP6HbC8RnOPb+eRJV2z6xF40ZMlg9GuMX6
- sCUGK0Bx8gDyYZAZJPpIcMezKU5fqKTQhFPOJERqKvFtjpLAC74NQ6y8vhubpemr8LzG
- hj/Q==
-X-Gm-Message-State: APjAAAWhImIALImDojQUjcnkNVgbYtYs/zDJ+GFHdGj3RcwzLK06hPZC
- er4prWphg0pjgxbECvEq++nHyGa4aLqotcnp5OV/gQ==
-X-Google-Smtp-Source: APXvYqxT0+1T5zXeB+Bka51eCtxJvOSOH6wawbBWn4yF/znOVkEXzEw9qpv/KD/+IXn5iC3Lw09Y4IPbxGkInxQyYeE=
-X-Received: by 2002:a19:a408:: with SMTP id q8mr2843544lfc.174.1578491547417; 
- Wed, 08 Jan 2020 05:52:27 -0800 (PST)
-MIME-Version: 1.0
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 265CF89B60
+ for <spice-devel@lists.freedesktop.org>; Thu,  9 Jan 2020 13:41:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1578577268;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=DjXy+AfQxT5oKb1npjG/N/1uhSjMUf7kBqPATvqX9mE=;
+ b=UEE5Cic2CKebTJSye/hXiiWTuI85hOT7Ucwg8ZQ4ln7YT7Ve0j4HalGYsri20K9nSxE2W2
+ g+btYACPcABfo1r8InYoJ5veu8zk0vgzTy6rWveMSxw8B33gH64pzCgGNy4rB6AVFsTFmh
+ xjRROcd73LyUfs1cATVjoV89as9zriE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-83-okpr7GUaP9KNpZzaPf-FrQ-1; Thu, 09 Jan 2020 08:41:05 -0500
+X-MC-Unique: okpr7GUaP9KNpZzaPf-FrQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 69730477;
+ Thu,  9 Jan 2020 13:41:02 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-98.ams2.redhat.com
+ [10.36.116.98])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CE1315DA7C;
+ Thu,  9 Jan 2020 13:40:53 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id CD43431F29; Thu,  9 Jan 2020 14:40:52 +0100 (CET)
+Date: Thu, 9 Jan 2020 14:40:52 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Keiichi Watanabe <keiichiw@chromium.org>
+Message-ID: <20200109134052.iqxw7l2ibjxpzcrz@sirius.home.kraxel.org>
 References: <20191218130214.170703-1-keiichiw@chromium.org>
  <3550989.gzE5nMqd4t@os-lin-dmo>
  <CAAFQd5BgkEUwBFWdv2ZH98egjm=u0dBRgtexqkzjES+J1SEmag@mail.gmail.com>
  <3878267.TzG3DlCiay@os-lin-dmo>
  <20191219131234.wm24cazvc7zrnhpn@sirius.home.kraxel.org>
-In-Reply-To: <20191219131234.wm24cazvc7zrnhpn@sirius.home.kraxel.org>
-From: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Wed, 8 Jan 2020 22:52:16 +0900
-Message-ID: <CAD90Vcb4Vb49uHGRRg0nJaKo=goH6zOxdQR2d7piLH_byxDYyw@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Mailman-Approved-At: Mon, 13 Jan 2020 08:38:38 +0000
+ <CAD90Vcb4Vb49uHGRRg0nJaKo=goH6zOxdQR2d7piLH_byxDYyw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAD90Vcb4Vb49uHGRRg0nJaKo=goH6zOxdQR2d7piLH_byxDYyw@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Mailman-Approved-At: Mon, 13 Jan 2020 08:38:48 +0000
 Subject: Re: [Spice-devel] [virtio-dev] Re: [PATCH v2 1/1] virtio-video: Add
  virtio video device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -67,7 +71,7 @@ Cc: virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
  Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
  Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
  Dmitry Sepp <dmitry.sepp@opensynergy.com>,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ =?utf-8?B?U3TDqXBoYW5l?= Marchesin <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
@@ -76,53 +80,25 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Gerd,
+  Hi,
 
-On Thu, Dec 19, 2019 at 10:12 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
->   Hi,
->
-> > > However that still doesn't let the driver know which buffers will be
-> > > dequeued when. A simple example of this scenario is when the guest is
-> > > done displaying a frame and requeues the buffer back to the decoder.
-> > > Then the decoder will not choose it for decoding next frames into as
-> > > long as the frame in that buffer is still used as a reference frame,
-> > > even if one sends the drain request.
-> > It might be that I'm getting your point wrong, but do you mean some hardware
-> > can mark a buffer as ready to be displayed yet still using the underlying
-> > memory to decode other frames?
->
-> Yes, this is how I understand Tomasz Figa.
->
-> > This means, if you occasionally/intentionally
-> > write to the buffer you mess up the whole decoding pipeline.
->
-> And to avoid this the buffer handling aspect must be clarified in the
-> specification.  Is the device allowed to continue using the buffer after
-> finishing decoding and completing the queue request?  If so, how do we
-> hand over buffer ownership back to the driver so it can free the pages?
-> drain request?  How do we handle re-using buffers?  Can the driver
-> simply re-queue them and expect the device figures by itself whenever it
-> can use the buffer or whenever it is still needed as reference frame?
+> Regarding re-using, the driver can simply re-queue buffers returned by
+> the device. If the device needs a buffer as reference frame, it must
+> not return the buffer.
 
-The device shouldn't be able to access buffers after it completes a
-queue request.
-The device can touch buffer contents from when a queue request is sent
-until the device responds it.
-In contrast, the driver must not modify buffer contents in that period.
+Ok, that'll work.
 
-Regarding re-using, the driver can simply re-queue buffers returned by
-the device. If the device needs a buffer as reference frame, it must
-not return the buffer.
-I'll describe this rule in the next version of the patch.
+> I'll describe this rule in the next version of the patch.
 
-Best regards,
-Keiichi
+Good.  You should also add a note about ordering.  If the device returns
+the buffers as soon as they are no longer needed for decoding they
+might be completed out-of-order, specifically B-Frames might complete
+before the reference I/P frame.  Is the device allowed to do that or
+should it complete the buffers in playback order?
 
->
-> cheers,
->   Gerd
->
+cheers,
+  Gerd
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
