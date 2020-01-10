@@ -2,46 +2,50 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7420F138CFE
-	for <lists+spice-devel@lfdr.de>; Mon, 13 Jan 2020 09:38:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96398138CFB
+	for <lists+spice-devel@lfdr.de>; Mon, 13 Jan 2020 09:38:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 667CA89F6D;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6F3F189F6E;
 	Mon, 13 Jan 2020 08:38:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma6.jpberlin.de (plasma6.jpberlin.de [80.241.56.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F1BD46E9AF
- for <spice-devel@lists.freedesktop.org>; Fri, 10 Jan 2020 10:16:42 +0000 (UTC)
-Received: from spamfilter04.heinlein-hosting.de
- (spamfilter04.heinlein-hosting.de [80.241.56.122])
- by plasma.jpberlin.de (Postfix) with ESMTP id B6B9EAAB41;
- Fri, 10 Jan 2020 11:16:37 +0100 (CET)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter04.heinlein-hosting.de (spamfilter04.heinlein-hosting.de
- [80.241.56.122]) (amavisd-new, port 10030)
- with ESMTP id 9ySDSrvZZE_6; Fri, 10 Jan 2020 11:16:36 +0100 (CET)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "GeoTrust EV RSA CA 2018" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 8240CA08F7;
- Fri, 10 Jan 2020 11:16:35 +0100 (CET)
-Received: from os-lin-dmo.localnet (10.25.255.1) by MXS02.open-synergy.com
- (10.25.10.18) with Microsoft SMTP Server (TLS) id 14.3.468.0; Fri, 10 Jan
- 2020 11:16:35 +0100
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: Keiichi Watanabe <keiichiw@chromium.org>, <virtio-dev@lists.oasis-open.org>
-Date: Fri, 10 Jan 2020 11:16:34 +0100
-Message-ID: <2137719.ElGaqSPkdT@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <7712151.T7Z3S40VBb@os-lin-dmo>
+Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com
+ [IPv6:2a00:1450:4864:20::242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B05C86EA02
+ for <spice-devel@lists.freedesktop.org>; Fri, 10 Jan 2020 13:53:14 +0000 (UTC)
+Received: by mail-lj1-x242.google.com with SMTP id u1so2217064ljk.7
+ for <spice-devel@lists.freedesktop.org>; Fri, 10 Jan 2020 05:53:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=kpCahkqsg2dmWIC+LoX9pD4u9gP0UmBkgnsX1XL7Kzs=;
+ b=iGdnWDCncpUh4KhJEMBmRyoxrZrSQYsNOD2YAQ9XLY1dH6E3t+AFqkAK0oM1SAA5Ob
+ 8WhJ5z8uy8OTKTrRNi8FKVQNUuyAwdCmPsLX4NYPBZ1aUYdGG1MR2gyMUmv2sbFMi3rj
+ R5tsX6UNhyGtlthpPUznQ+LoCZ5SCGg10Yxxg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=kpCahkqsg2dmWIC+LoX9pD4u9gP0UmBkgnsX1XL7Kzs=;
+ b=OuyL5BuQs8bd4wXpwZyJENS/+/tde/mDW4AhHP24xkin5YCo3L7bOjv3f4bQPTzu7L
+ KvVk1ZU6pmST+spf7859BEjmFWLl/sn4hOup6qvYoct9tSNI9tTMDAnoVR0Mott9bHlS
+ GKSnoGwt2ekr79wWKprHmXMbZzodIi1TYZXINmaweOHjNWR5LFMw40WzBmaRk3Tji2nc
+ 0pGx+d7iGrLgUV2kuH2f6GqKoLVS+oTZ3S/uigMKt0xxZFH9ZUUjq0rYXrfdEXz579lr
+ 2+MZXiSZMYylB10/EQYv8lDXL4QDUMeu4WNprAwEQE8ET4yNm/ErcYsQNtTRXICmdMwk
+ 4zUw==
+X-Gm-Message-State: APjAAAVoSEHUq85U4xDHcppVHqC3msbyNEXQW4Y7GJONewAUuuiAOJjf
+ e17qDpUQfAvDUdVhdX0EL2nwk/F7s+kSOzm9AeC+gQ==
+X-Google-Smtp-Source: APXvYqwPuPjIFn33xApsv50dx1coK+pw2rBfPVpC6V/BItx3c1aEjBSCV6xIDeOeuG0tqYl6SgAgPPiKWmSkyOFfXlI=
+X-Received: by 2002:a2e:b4e7:: with SMTP id s7mr2604551ljm.58.1578664393018;
+ Fri, 10 Jan 2020 05:53:13 -0800 (PST)
+MIME-Version: 1.0
 References: <20191218130214.170703-1-keiichiw@chromium.org>
  <CAD90VcaQCSFTv-JyxZ7cO+Qnc0U2NRGikcYmmy=zitJby9NfXg@mail.gmail.com>
- <7712151.T7Z3S40VBb@os-lin-dmo>
-MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
+ <7712151.T7Z3S40VBb@os-lin-dmo> <2137719.ElGaqSPkdT@os-lin-dmo>
+In-Reply-To: <2137719.ElGaqSPkdT@os-lin-dmo>
+From: Keiichi Watanabe <keiichiw@chromium.org>
+Date: Fri, 10 Jan 2020 22:53:01 +0900
+Message-ID: <CAD90Vcbk5DerrFNQdH1wdAX=HxBjMz9-FoNiWm_ryvwsA_YvYA@mail.gmail.com>
+To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
 X-Mailman-Approved-At: Mon, 13 Jan 2020 08:38:38 +0000
 Subject: Re: [Spice-devel] [virtio-dev] Re: [PATCH v2 0/1] VirtIO video
  device specification
@@ -60,210 +64,354 @@ Cc: virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
  Alexandre Courbot <acourbot@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
  Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
  Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org, Dmitry Sepp <dmitry.sepp@opensynergy.com>,
- =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ spice-devel@lists.freedesktop.org,
+ =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGksCgpPbiBEb25uZXJzdGFnLCA5LiBKYW51YXIgMjAyMCAxNTo1NjowOCBDRVQgRG1pdHJ5IFNl
-cHAgd3JvdGU6Cj4gSGksCj4gCj4gT24gRGllbnN0YWcsIDcuIEphbnVhciAyMDIwIDExOjI1OjU2
-IENFVCBLZWlpY2hpIFdhdGFuYWJlIHdyb3RlOgo+ID4gSGkgRG1pdHJ5LAo+ID4gCj4gPiBPbiBN
-b24sIEphbiA2LCAyMDIwIGF0IDg6MjggUE0gRG1pdHJ5IFNlcHAgPGRtaXRyeS5zZXBwQG9wZW5z
-eW5lcmd5LmNvbT4KPiAKPiB3cm90ZToKPiA+ID4gSGksCj4gPiA+IAo+ID4gPiBPbiBNb250YWcs
-IDYuIEphbnVhciAyMDIwIDExOjMwOjIyIENFVCBLZWlpY2hpIFdhdGFuYWJlIHdyb3RlOgo+ID4g
-PiA+IEhpIERtaXRyeSwgVG9tYXN6LAo+ID4gPiA+IAo+ID4gPiA+IE9uIEZyaSwgSmFuIDMsIDIw
-MjAgYXQgMTA6MDUgUE0gRG1pdHJ5IFNlcHAKPiA+ID4gPiA8ZG1pdHJ5LnNlcHBAb3BlbnN5bmVy
-Z3kuY29tPgo+ID4gPiAKPiA+ID4gd3JvdGU6Cj4gPiA+ID4gPiBIaSBUb21hc3osIEtlaWljaGks
-Cj4gPiA+ID4gPiAKPiA+ID4gPiA+IE9uIFNhbXN0YWcsIDIxLiBEZXplbWJlciAyMDE5IDA3OjE5
-OjIzIENFVCBUb21hc3ogRmlnYSB3cm90ZToKPiA+ID4gPiA+ID4gT24gU2F0LCBEZWMgMjEsIDIw
-MTkgYXQgMzoxOCBQTSBUb21hc3ogRmlnYSA8dGZpZ2FAY2hyb21pdW0ub3JnPgo+IAo+IHdyb3Rl
-Ogo+ID4gPiA+ID4gPiA+IE9uIFNhdCwgRGVjIDIxLCAyMDE5IGF0IDE6MzYgUE0gS2VpaWNoaSBX
-YXRhbmFiZQo+ID4gPiA+ID4gPiA+IDxrZWlpY2hpd0BjaHJvbWl1bS5vcmc+Cj4gPiA+ID4gPiAK
-PiA+ID4gPiA+IHdyb3RlOgo+ID4gPiA+ID4gPiA+ID4gSGkgRG1pdHJ5LAo+ID4gPiA+ID4gPiA+
-ID4gCj4gPiA+ID4gPiA+ID4gPiBPbiBTYXQsIERlYyAyMSwgMjAxOSBhdCAxMjo1OSBBTSBEbWl0
-cnkgU2VwcAo+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA8ZG1pdHJ5LnNlcHBAb3Bl
-bnN5bmVyZ3kuY29tPiB3cm90ZToKPiA+ID4gPiA+ID4gPiA+ID4gSGkgS2VpaWNoaSwKPiA+ID4g
-PiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA+IE9uIE1pdHR3b2NoLCAxOC4gRGV6ZW1iZXIg
-MjAxOSAxNDowMjoxMyBDRVQgS2VpaWNoaSBXYXRhbmFiZQo+ID4gPiAKPiA+ID4gd3JvdGU6Cj4g
-PiA+ID4gPiA+ID4gPiA+ID4gSGksCj4gPiA+ID4gPiA+ID4gPiA+ID4gVGhpcyBpcyB0aGUgMm5k
-IHZlcnNpb24gb2YgdmlydGlvLXZpZGVvIHBhdGNoLiBUaGUgUERGIGlzCj4gPiA+ID4gPiA+ID4g
-PiA+ID4gYXZhaWxhYmxlCj4gPiA+ID4gPiA+ID4gPiA+ID4gaW4gWzFdLgo+ID4gPiA+ID4gPiA+
-ID4gPiA+IFRoZSBmaXJzdCB2ZXJzaW9uIHdhcyBzZW50IGF0IFsyXS4KPiA+ID4gPiA+ID4gPiA+
-ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gPiBBbnkgZmVlZGJhY2sgd291bGQgYmUgYXBwcmVjaWF0
-ZWQuIFRoYW5rIHlvdS4KPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gPiBC
-ZXN0LAo+ID4gPiA+ID4gPiA+ID4gPiA+IEtlaWljaGkKPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+
-ID4gPiA+ID4gPiA+ID4gPiBbMV06Cj4gPiA+ID4gPiA+ID4gPiA+ID4gaHR0cHM6Ly9kcml2ZS5n
-b29nbGUuY29tL2RyaXZlL2ZvbGRlcnMvMWVUNWZFY2tCb29yMmlIWlI0Zgo+ID4gPiA+ID4gPiA+
-ID4gPiA+IDRHCj4gPiA+ID4gPiA+ID4gPiA+ID4gTHhZego+ID4gPiA+ID4gPiA+ID4gPiA+IEZN
-VmEKPiA+ID4gPiA+ID4gPiA+ID4gPiBwT0Z4P3VzCj4gPiA+ID4gPiA+ID4gPiA+ID4gcD1zaGFy
-aW5nIFsyXToKPiA+ID4gPiA+ID4gPiA+ID4gPiBodHRwczovL21hcmttYWlsLm9yZy9tZXNzYWdl
-L2djNmgyNWFjY3QyMm5pdXQKPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4g
-PiBDaGFuZ2UgbG9nOgo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+IHYy
-Ogo+ID4gPiA+ID4gPiA+ID4gPiA+ICogUmVtb3ZlZCBmdW5jdGlvbmFsaXRpZXMgZXhjZXB0IGVu
-Y29kaW5nIGFuZCBkZWNvZGluZy4KPiA+ID4gPiA+ID4gPiA+ID4gPiAqIFNwbGl0ZWQgZW5jb2Rl
-ciBhbmQgZGVjb2RlciBpbnRvIGRpZmZlcmVudCBkZXZpY2VzIHRoYXQKPiA+ID4gPiA+ID4gPiA+
-ID4gPiB1c2UKPiA+ID4gPiA+ID4gPiA+ID4gPiB0aGUKPiA+ID4gPiA+ID4gPiA+ID4gPiBzYW1l
-Cj4gPiA+ID4gPiA+ID4gPiA+ID4gcHJvdG9jb2wuICogUmVwbGFjZWQgR0VUX0ZVTkNTIHdpdGgg
-R0VUX0NBUEFCSUxJVFkuCj4gPiA+ID4gPiA+ID4gPiA+ID4gKiBVcGRhdGVkIHN0cnVjdHMgZm9y
-IGNhcGFiaWxpdGllcy4KPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gPiAg
-IC0gRGVmaW5lZCBuZXcgc3RydWN0cyBhbmQgZW51bXMgc3VjaCBhcyBpbWFnZSBmb3JtYXRzLAo+
-ID4gPiA+ID4gPiA+ID4gPiA+ICAgcHJvZmlsZXMsCj4gPiA+ID4gPiA+ID4gPiA+ID4gICByYW5n
-ZQo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+IChtaW4sIG1heCwgc3Rl
-cCksIGV0Ywo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgICAqIEZv
-ciB2aXJ0aW9fdmlkZW9fcGl4ZWxfZm9ybWF0LCBjaG9zZSBhIG5hbWluZwo+ID4gPiA+ID4gPiA+
-ID4gPiA+ICAgICBjb252ZW50aW9uCj4gPiA+ID4gPiA+ID4gPiA+ID4gICAgIHRoYXQKPiA+ID4g
-PiA+ID4gPiA+ID4gPiAgICAgaXMgdXNlZAo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgICAKPiA+ID4g
-PiA+ID4gPiA+ID4gPiAgICAgICBpbiBEUk0uIFdlIHJlbW92ZWQgWEJHUiwgTlYyMSBhbmQgSTQy
-MiwgYXMgdGhleSBhcmUKPiA+ID4gPiA+ID4gPiA+ID4gPiAgICAgICBub3QKPiA+ID4gPiA+ID4g
-PiA+ID4gPiAgICAgICB1c2VkCj4gPiA+ID4gPiA+ID4gPiA+ID4gICAgICAgaW4gdGhlCj4gPiA+
-ID4gPiA+ID4gPiA+ID4gICAgICAgY3VycmVudCBkcmFmdCBpbXBsZW1lbnRhdGlvbi4KPiA+ID4g
-PiA+ID4gPiA+ID4gPiAgICAgICBodHRwczovL2x3bi5uZXQvQXJ0aWNsZXMvODA2NDE2Lwo+ID4g
-PiA+ID4gPiA+ID4gPiA+ICAgCj4gPiA+ID4gPiA+ID4gPiA+ID4gICAtIFJlbW92ZWQgdmlydGlv
-X3ZpZGVvX2NvbnRyb2wsIHdob3NlIHVzYWdlIHdhcyBub3QKPiA+ID4gPiA+ID4gPiA+ID4gPiAg
-IGRvY3VtZW50ZWQKPiA+ID4gPiA+ID4gPiA+ID4gPiAgIHlldAo+ID4gPiA+ID4gPiA+ID4gPiA+
-ICAgYW5kCj4gPiA+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA+ID4gd2hpY2ggaXMg
-bm90IG5lY2Vzc2FyeSBmb3IgdGhlIHNpbXBsZXN0IGRlY29kaW5nIHNjZW5hcmlvLgo+ID4gPiA+
-ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgLSBSZW1vdmVkIHZpcnRpb192aWRl
-b19kZXNjLCBhcyBpdCBpcyBubyBsb25nZXIgbmVlZGVkLgo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+
-ID4gPiA+ID4gPiA+ID4gPiA+ICogVXBkYXRlZCBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbmZpZyBm
-b3IgY2hhbmdlcyBhcm91bmQKPiA+ID4gPiA+ID4gPiA+ID4gPiBjYXBhYmlsaXRpZXMuCj4gPiA+
-ID4gPiA+ID4gPiA+ID4gKiBBZGRlZCBhIHdheSB0byByZXByZXNlbnQgc3VwcG9ydGVkIGNvbWJp
-bmF0aW9ucyBvZgo+ID4gPiA+ID4gPiA+ID4gPiA+IGZvcm1hdHMuCj4gPiA+ID4gPiA+ID4gPiA+
-ID4gCj4gPiA+ID4gPiA+ID4gPiA+ID4gICAtIEEgZmllbGQgIm1hc2siIGluIHZpcnRpb192aWRl
-b19mb3JtYXRfZGVzYyBwbGF5cyB0aGlzCj4gPiA+ID4gPiA+ID4gPiA+ID4gICByb2xlLgo+ID4g
-PiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+ICogUmVtb3ZlZCBWSVJUSU9fVklE
-RU9fVF9TVFJFQU1fe1NUQVJULFNUT1B9IGJlY2F1c2UgdGhleQo+ID4gPiA+ID4gPiA+ID4gPiA+
-IGRvbid0Cj4gPiA+ID4gPiA+ID4gPiA+ID4gcGxheQo+ID4gPiA+ID4gPiA+ID4gPiA+IGFueQo+
-ID4gPiA+ID4gPiA+ID4gPiA+IG1lYW5pbmdmdWwgcm9sZXMuICogUmVtb3ZlZCBWSVJUSU9fVklE
-RU9fVF9TVFJFQU1fe0FUVEFDSCwKPiA+ID4gPiA+ID4gPiA+ID4gPiBERVRBQ0h9X0JBQ0tJTkcK
-PiA+ID4gPiA+ID4gPiA+ID4gPiBhbmQgbWVyZ2VkIHRoZW0gaW50byBSRVNPVVJDRV97Q1JFQVRF
-LCBERVNUUk9ZfS4gKiBBZGRlZCBhCj4gPiA+ID4gPiA+ID4gPiA+ID4gd2F5Cj4gPiA+ID4gPiA+
-ID4gPiA+ID4gdG8KPiA+ID4gPiA+ID4gPiA+ID4gPiBub3RpZnkvc3BlY2lmeSByZXNvdXJjZSBj
-cmVhdGlvbiBtZXRob2QuCj4gPiA+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA+ID4g
-ICAtIEFkZGVkIGEgZmVhdHVyZSBmbGFnLgo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgLSBEZWZpbmVk
-IGVudW0gdmlydGlvX3ZpZGVvX21lbV90eXBlLgo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgLSBBZGRl
-ZCBuZXcgZmllbGRzIGluIHZpZGVvX3N0cmVhbV9jcmVhdGUuCj4gPiA+ID4gPiA+ID4gPiA+ID4g
-Cj4gPiA+ID4gPiA+ID4gPiA+ID4gKiBNb2RpZmllZCBmaWVsZHMgaW4gdmlydGlvX3ZpZGVvX3Bh
-cmFtcy4KPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gPiAgIC0gQWRkZWQg
-Y3JvcCBpbmZvcm1hdGlvbi4KPiA+ID4gPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4g
-PiAqIFJlbW92ZWQgZW51bSB2aXJ0aW9fdmlkZW9fY2hhbm5lbF90eXBlIGJlY2F1c2Ugd2UgY2Fu
-Cj4gPiA+ID4gPiA+ID4gPiA+ID4gZ2V0Cj4gPiA+ID4gPiA+ID4gPiA+ID4gdGhpcwo+ID4gPiA+
-ID4gPiA+ID4gPiA+IGluZm9ybWF0aW9uIGJ5IGltYWdlIGZvcm1hdC4KPiA+ID4gPiA+ID4gPiA+
-ID4gCj4gPiA+ID4gPiA+ID4gPiA+IENvdWxkIHlvdSBwbGVhc2UgZXhwbGFpbiB0aGlzPyBIb3cg
-ZG8geW91IGdldCB0aGUKPiA+ID4gPiA+ID4gPiA+ID4gaW5mb3JtYXRpb24/Cj4gPiA+ID4gPiA+
-ID4gPiAKPiA+ID4gPiA+ID4gPiA+IEl0IG1lYW5zIHRoYXQgaWYgaW1hZ2UgZm9ybWF0cyBhcmUg
-d2VsbC1kZWZpbmVkLCBjaGFubmVsCj4gPiA+ID4gPiA+ID4gPiBpbmZvcm1hdGlvbgo+ID4gPiA+
-ID4gPiA+ID4gKGUuZy4gdGhlIG9yZGVyIG9mIGNoYW5uZWxzKSBpcyB1bmlxdWVseSBkZXRlcm1p
-bmVkLgo+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4gPiA+IFN1cHBvc2UgeW91IGhhdmUg
-c29tZSBwaWVjZSBvZiBIVyBvbiB0aGUgaG9zdCBzaWRlIHRoYXQKPiA+ID4gPiA+ID4gPiA+ID4g
-d2FudHMKPiA+ID4gPiA+ID4gPiA+ID4gSTQyMAo+ID4gPiA+ID4gPiA+ID4gPiBhcwo+ID4gPiA+
-ID4gPiA+ID4gPiBvbmUKPiA+ID4gPiA+ID4gPiA+ID4gY29udGlnIGJ1ZmZlciB3LyBzb21lIG9m
-ZnNldHMuIEJ1dCBvbiB0aGUgZHJpdmVyIHNpZGUsIHNheSwKPiA+ID4gPiA+ID4gPiA+ID4gZ3Jh
-bGxvYwo+ID4gPiA+ID4gPiA+ID4gPiBnaXZlcyB5b3UgdGhyZWUgc2VwYXJhdGUgYnVmZmVycywg
-b25lIHBlciBjaGFubmVsLiBIb3cgZG8gd2UKPiA+ID4gPiA+ID4gPiA+ID4gcGFzcwo+ID4gPiA+
-ID4gPiA+ID4gPiB0aG9zZSB0byB0aGUgZGV2aWNlIHRoZW4/Cj4gPiA+ID4gPiA+ID4gPiAKPiA+
-ID4gPiA+ID4gPiA+IFlvdSdyZSB0YWxraW5nIGFib3V0IENyT1MgdXNlIGNhc2Ugd2hlcmUgYnVm
-ZmVycyBhcmUgYWxsb2NhdGVkCj4gPiA+ID4gPiA+ID4gPiBieQo+ID4gPiA+ID4gPiA+ID4gdmly
-dGlvLWdwdSwgcmlnaHQ/Cj4gPiA+ID4gPiA+ID4gPiBJbiB0aGlzIGNhc2UsIHZpcnRpby1ncHUg
-YWxsb2NhdGVzIG9uZSBjb250aWd1b3VzIGhvc3Qtc2lkZQo+ID4gPiA+ID4gPiA+ID4gYnVmZmVy
-Cj4gPiA+ID4gPiA+ID4gPiBhbmQKPiA+ID4gPiA+ID4gPiA+IHRoZSBjbGllbnQgcmVnYXJkcyBh
-IHBhaXIgb2YgKGJ1ZmZlciBGRCwgb2Zmc2V0KSBhcyBvbmUKPiA+ID4gPiA+ID4gPiA+IGNoYW5u
-ZWwuCj4gPiA+ID4gPiA+ID4gPiBBbmQsIHdlIGNhbiByZWdpc3RlciB0aGlzIHBhaXIgdG8gdGhl
-IGRldmljZSB3aGVuIHRoZSBidWZmZXIKPiA+ID4gPiA+ID4gPiA+IGlzCj4gPiA+ID4gPiA+ID4g
-PiBpbXBvcnRlZC4KPiA+ID4gPiA+ID4gPiA+IEluIHRoZSB2aXJ0aW8tdmRlYyBzcGVjIGRyYWZ0
-LCB0aGlzIHBhaXIgY29ycmVzcG9uZHMgdG8gc3RydWN0Cj4gPiA+ID4gPiA+ID4gPiB2aXJ0aW9f
-dmRlY19wbGFuZSBpbiBzdHJ1Y3QgdmlydGlvX3ZkZWNfcGxhbmUuCj4gPiA+ID4gPiA+ID4gPiAK
-PiA+ID4gPiA+ID4gPiA+IFNvLCBJIHN1cHBvc2Ugd2Ugd2lsbCBuZWVkIHNpbWlsYXIgc3RydWN0
-cyB3aGVuIHdlIGFkZCBhCj4gPiA+ID4gPiA+ID4gPiBjb250cm9sCj4gPiA+ID4gPiA+ID4gPiB0
-bwo+ID4gPiA+ID4gPiA+ID4gaW1wb3J0IGJ1ZmZlcnMuIEhvd2V2ZXIsIEkgZG9uJ3QgdGhpbmsg
-aXQncyBuZWNlc3Nhcnkgd2hlbgo+ID4gPiA+ID4gPiA+ID4gZ3Vlc3QKPiA+ID4gPiA+ID4gPiA+
-IHBhZ2VzCj4gPiA+ID4gPiA+ID4gPiBhcmUgdXNlZC4KPiA+ID4gPiA+ID4gPiAKPiA+ID4gPiA+
-ID4gPiBJIHRoaW5rIHdlIG5lZWQgc29tZSB3YXkgZm9yIHRoZSBndWVzdCB0byBrbm93IHdoZXRo
-ZXIgaXQgY2FuCj4gPiA+ID4gPiA+ID4gYWxsb2NhdGUKPiA+ID4gPiA+ID4gPiB0aGUgcGxhbmVz
-IGluIHNlcGFyYXRlIGJ1ZmZlcnMsIGV2ZW4gd2hlbiBndWVzdCBwYWdlcyBhcmUgdXNlZC4KPiA+
-ID4gPiA+ID4gPiBUaGlzCj4gPiA+ID4gPiA+ID4gd291bGQgYmUgZXF1aXZhbGVudCB0byBWNEwy
-IE0gYW5kIG5vbi1NIGZvcm1hdHMsIGJ1dCBtaXhpbmcgdGhpcwo+ID4gPiA+ID4gPiA+IGludG8K
-PiA+ID4gPiA+ID4gPiBGb3VyQ0MgaW4gVjRMMiBpcyBhbiBhY2tub3dsZWRnZWQgbWlzdGFrZSwg
-c28gd2Ugc2hvdWxkIGFkZCBhCj4gPiA+ID4gPiA+ID4gcXVlcnkgb3IKPiA+ID4gPiA+ID4gPiBz
-b21ldGhpbmcuCj4gPiA+ID4gPiAKPiA+ID4gPiA+IFllcywgdGhpcyBpcyB3aGF0IEkgbWVhbi4g
-SW4gZmFjdCwgd2UgYWxyZWFkeSBkbyBmYWNlIHRoZSBzaXR1YXRpb24KPiA+ID4gPiA+IHdoZW4K
-PiA+ID4gPiA+IHRoZSBkZXZpY2Ugc2lkZSBpcyBub3QgaGFwcHkgd2l0aCB0aGUgc2d0IGFuZCB3
-YW50cyBjb250aWcuIEkgdGhpbmsKPiA+ID4gPiA+IHdlJ2xsCj4gPiA+ID4gPiBhZGQgYSBtb2R1
-bGUgcGFyYW1ldGVyIGZvciBub3cuCj4gPiA+ID4gCj4gPiA+ID4gT2theS4gU28sIEkgc3VwcG9z
-ZSB3ZSdsbCBiZSBhYmxlIHRvIHVwZGF0ZSBzdHJ1Y3RzOgo+ID4gPiA+ICogQWRkIGEgZmxhZyBp
-biB2aXJ0aW9fdmlkZW9fZm9ybWF0X2Rlc2MgdGhhdCBpbmRpY2F0ZXMgd2hldGhlciBwbGFuZXMK
-PiA+ID4gPiBjYW4gYmUgaW4gc2VwYXJhdGUgYnVmZmVycywgYW5kCj4gPiA+ID4gKiBBZGQgYSBm
-bGFnIGluIHZpcnRpb192aWRlb19mb3JtYXRfZGVzYyB0aGF0IGluZGljYXRlcyB0aGF0IHRoZQo+
-ID4gPiA+IGRldmljZSByZXF1aXJlcyBjb250aWd1b3VzIGJ1ZmZlcnMgZm9yIHRoaXMgZm9ybWF0
-Lgo+ID4gPiA+IAo+ID4gPiA+IERvZXMgaXQgbWFrZSBzZW5zZT8KPiA+ID4gCj4gPiA+IFNvcnJ5
-LCBJIGRvbid0IHVuZGVyc3RhbmQgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgdHdvIGFib3Zl
-OiBpc24ndAo+ID4gPiB0aGUKPiA+ID4gZmlyc3QgY2FzZSBpcyBqdXN0IHdoZW4gdGhlIGZsYWcg
-aXMgbm90IHNldD8KPiA+IAo+ID4gQWgsIEkgd2FzIGNvbmZ1c2VkIGFuZCB3cm90ZSBzb21ldGhp
-bmcgc3RyYW5nZS4gWWVhaCwgIHRoZXNlIHR3byBhcmUgdGhlCj4gPiBzYW1lLiBTb3JyeSBmb3Ig
-dGhhdC4KPiA+IAo+ID4gU28sIHRoZSBzdWdnZXN0aW9uIGlzIHRvIGFkZCBhIGZpZWxkICJwbGFu
-ZXNfbGF5b3V0IiBpbgo+ID4gdmlydGlvX3ZpZGVvX2Zvcm1hdF9kZXNjLCB3aGljaCBpcyBvbmUg
-b2YgdGhlIGZvbGxvd2luZyBlbnVtczoKPiA+IAo+ID4gZW51bSB2aXJ0aW9fdmlkZW9fcGxhbmVz
-X2xheW91dCB7Cj4gPiAKPiA+ICAgICBWSVJUSU9fVklERU9fUExBTkVTX0xBWU9VVF9VTlNQRUMg
-PSAwLCAgLyogbm8gc3BlY2lhbCByZXF1aXJlbWVudCAqLwo+ID4gICAgIFZJUlRJT19WSURFT19Q
-TEFORVNfTEFZT1VUX0NPTlRJR1VPVVMsCj4gPiAKPiA+IH07Cj4gPiAKPiA+IElmIHdlIGhhdmUg
-YSBiZXR0ZXIgaWRlYSBvciBuYW1pbmcsIHBsZWFzZSBsZXQgbWUga25vdy4KPiAKPiBUaGUgbmFt
-aW5nIGxvb2tzIGdvb2QgZm9yIG1lLCBJIG1pZ2h0IG9ubHkgY2hhbmdlIHRvIENPTlRJRyBhcyB3
-ZSBoYXZlCj4gVU5TUEVDLgo+IAoKU28gaGVyZSB3ZSBhcmUgdGFsa2luZyBhYm91dCBwbGFuZSBs
-YXlvdXQgaW4gbWVtb3J5LCBhbSBJIGNvcnJlY3Q/IEJ1dCBJIHRoaW5rIAp3ZSBhbHNvIG5lZWQg
-YSB3YXkgdG8gY29tbXVuaWNhdGUgbWVtb3J5IHJlcXVpcmVtZW50cyBvZiB0aGUgZGV2aWNlOiB0
-aGUgCmRldmljZSBtaWdodCByZXF1aXJlIENNQSBidWZmZXJzIG9yIGl0IGNhbiBiZSBvayB3aXRo
-IFNHIGxpc3RzLiBXaGF0IGFib3V0IAphZGRpbmcgc29tZXRoaW5nIGxpa2UgdGhpcyB0byB2aXJ0
-aW9fdmlkZW9fZm9ybWF0X2Rlc2M6CgrigIvigIvigIvigIvigItlbnVtIHZpcnRpb192aWRlb19t
-ZW1fbGF5b3V0IHsKCVZJUlRJT19WSURFT19NRU1fTEFZT1VUX1VOREVGSU5FRCA9IDAsCgoJVklS
-VElPX1ZJREVPX01FTV9MQVlPVVRfQ09OVElHID0gMHgxMDAsCglWSVJUSU9fVklERU9fTUVNX0xB
-WU9VVF9OT05fQ09OVElHLAp9OwoKc3RydWN0IHZpcnRpb192aWRlb19mb3JtYXRfZGVzYyB7CiAg
-ICBfX2xlNjQgbWFzazsKICAgIF9fbGUzMiBmb3JtYXQ7IC8qIE9uZSBvZiBWSVJUSU9fVklERU9f
-Rk9STUFUXyogdHlwZXMgKi8KICAgIF9fbGUzMiBwbGFuZXNfbGF5b3V0OyAvKiBPbmUgb2YgVklS
-VElPX1ZJREVPX1BMQU5FU19MQVlPVVRfKiB0eXBlcyAqLwogICAgX19sZTMyIG1lbV9sYXlvdXQ7
-IC8qIE9uZSBvZiBWSVJUSU9fVklERU9fTUVNX0xBWU9VVF8qIHR5cGVzICovCiAgICAuLi4KfTsK
-CkJlc3QgcmVnYXJkcywKRG1pdHJ5LgoKPiBCZXN0IHJlZ2FyZHMsCj4gRG1pdHJ5Lgo+IAo+ID4g
-QmVzdCByZWdhcmRzLAo+ID4gS2VpaWNoaQo+ID4gCj4gPiA+IFJlZ2FyZHMsCj4gPiA+IERtaXRy
-eS4KPiA+ID4gCj4gPiA+ID4gQmVzdCByZWdhcmRzLAo+ID4gPiA+IEtlaWljaGkKPiA+ID4gPiAK
-PiA+ID4gPiA+IFJlZ2FyZHMsCj4gPiA+ID4gPiBEbWl0cnkuCj4gPiA+ID4gPiAKPiA+ID4gPiA+
-ID4gPiBGb3IgZnV0dXJlIFY0TDIgZGV2ZWxvcG1lbnQgd2UgY2FtZSB1cCB3aXRoIHRoZSBpZGVh
-IG9mIGEgZm9ybWF0Cj4gPiA+ID4gPiA+ID4gZmxhZwo+ID4gPiA+ID4gPiA+IHdoaWNoIGNvdWxk
-IG1lYW4gdGhhdCB0aGUgaGFyZHdhcmUgYWxsb3dzIHB1dHRpbmcgcGxhbmVzIGluCj4gPiA+ID4g
-PiA+ID4gc2VwYXJhdGUKPiA+ID4gPiA+ID4gPiBidWZmZXJzLiBXZSBjb3VsZCBoYXZlIGEgc2lt
-aWxhciBwZXItZm9ybWF0IGZsYWcgaW4gdGhlCj4gPiA+ID4gPiA+ID4gY2FwYWJpbGl0aWVzLAo+
-ID4gPiA+ID4gPiA+IGFzIHdlIGFscmVhZHkgaGF2ZSBhIGxpc3Qgb2YgYWxsIHRoZSBzdXBwb3J0
-ZWQgZm9ybWF0cyB0aGVyZS4KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IFNvcnJ5LCBmb3Jnb3Qg
-dG8gcGFzdGUgdGhlIGxpbmsgZnJvbSBmdXR1cmUgVjRMMiB3b3JrIG5vdGVzIGZyb20KPiA+ID4g
-PiA+ID4gdGhpcwo+ID4gPiA+ID4gPiB5ZWFyCj4gPiA+ID4gPiA+IEVMQ0U6IGh0dHBzOi8vd3d3
-LnNwaW5pY3MubmV0L2xpc3RzL2xpbnV4LW1lZGlhL21zZzE1OTc4OS5odG1sCj4gPiA+ID4gPiA+
-IAo+ID4gPiA+ID4gPiA+IEJlc3QgcmVnYXJkcywKPiA+ID4gPiA+ID4gPiBUb21hc3oKPiA+ID4g
-PiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+IEJlc3QgcmVnYXJkcywKPiA+ID4gPiA+ID4gPiA+IEtl
-aWljaGkKPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiBCZXN0IHJlZ2FyZHMsCj4g
-PiA+ID4gPiA+ID4gPiA+IERtaXRyeS4KPiA+ID4gPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+ID4g
-PiA+ID4gKiBSZW5hbWVkIHZpcnRpb192aWRlb19waW4gdG8gdmlydGlvX3ZpZGVvX2J1Zl90eXBl
-Lgo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+ICAgLSBJdCdzIHNpbWls
-YXIgdG8gVjRMMl9CVUZfVFlQRV9WSURFT197T1VUUFVULCBDQVBUVVJFfS4KPiA+ID4gPiA+ID4g
-PiA+ID4gPiAKPiA+ID4gPiA+ID4gPiA+ID4gPiAqIEFkZGVkIGFuIGVycm9yIGV2ZW50Lgo+ID4g
-PiA+ID4gPiA+ID4gPiA+ICogUmVvcmRlcmVkIHNvbWUgc3Vic2VjdGlvbnMuCj4gPiA+ID4gPiA+
-ID4gPiA+ID4gKiBDaGFuZ2VkIHN0eWxlcyB0byBtYWtlIGl0IGNvbnNpc3RlbnQgd2l0aCBvdGhl
-ciBkZXZpY2VzLgo+ID4gPiA+ID4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiA+ID4gPiA+IERtaXRy
-eSBTZXBwICgxKToKPiA+ID4gPiA+ID4gPiA+ID4gPiAgIHZpcnRpby12aWRlbzogQWRkIHZpcnRp
-byB2aWRlbyBkZXZpY2Ugc3BlY2lmaWNhdGlvbgo+ID4gPiA+ID4gPiA+ID4gPiA+ICAKPiA+ID4g
-PiA+ID4gPiA+ID4gPiAgY29udGVudC50ZXggICAgICB8ICAgMSArCj4gPiA+ID4gPiA+ID4gPiA+
-ID4gIHZpcnRpby12aWRlby50ZXggfCA1NzkKPiA+ID4gPiA+ID4gPiA+ID4gPiAgKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPiA+ID4gPiA+ID4gPiA+ID4g
-PiAgMiBmaWxlcyBjaGFuZ2VkLCA1ODAgaW5zZXJ0aW9ucygrKQo+ID4gPiA+ID4gPiA+ID4gPiA+
-ICBjcmVhdGUgbW9kZSAxMDA2NDQgdmlydGlvLXZpZGVvLnRleAo+ID4gPiA+ID4gPiA+ID4gPiA+
-IAo+ID4gPiA+ID4gPiA+ID4gPiA+IC0tCj4gPiA+ID4gPiA+ID4gPiA+ID4gMi4yNC4xLjczNS5n
-MDNmNGU3MjgxNy1nb29nCj4gCj4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gVG8gdW5zdWJzY3JpYmUsIGUtbWFp
-bDogdmlydGlvLWRldi11bnN1YnNjcmliZUBsaXN0cy5vYXNpcy1vcGVuLm9yZwo+IEZvciBhZGRp
-dGlvbmFsIGNvbW1hbmRzLCBlLW1haWw6IHZpcnRpby1kZXYtaGVscEBsaXN0cy5vYXNpcy1vcGVu
-Lm9yZwoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNw
-aWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
-aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZl
-bAo=
+Hi,
+
+
+On Fri, Jan 10, 2020 at 7:16 PM Dmitry Sepp <dmitry.sepp@opensynergy.com> wrote:
+>
+> Hi,
+>
+> On Donnerstag, 9. Januar 2020 15:56:08 CET Dmitry Sepp wrote:
+> > Hi,
+> >
+> > On Dienstag, 7. Januar 2020 11:25:56 CET Keiichi Watanabe wrote:
+> > > Hi Dmitry,
+> > >
+> > > On Mon, Jan 6, 2020 at 8:28 PM Dmitry Sepp <dmitry.sepp@opensynergy.com>
+> >
+> > wrote:
+> > > > Hi,
+> > > >
+> > > > On Montag, 6. Januar 2020 11:30:22 CET Keiichi Watanabe wrote:
+> > > > > Hi Dmitry, Tomasz,
+> > > > >
+> > > > > On Fri, Jan 3, 2020 at 10:05 PM Dmitry Sepp
+> > > > > <dmitry.sepp@opensynergy.com>
+> > > >
+> > > > wrote:
+> > > > > > Hi Tomasz, Keiichi,
+> > > > > >
+> > > > > > On Samstag, 21. Dezember 2019 07:19:23 CET Tomasz Figa wrote:
+> > > > > > > On Sat, Dec 21, 2019 at 3:18 PM Tomasz Figa <tfiga@chromium.org>
+> >
+> > wrote:
+> > > > > > > > On Sat, Dec 21, 2019 at 1:36 PM Keiichi Watanabe
+> > > > > > > > <keiichiw@chromium.org>
+> > > > > >
+> > > > > > wrote:
+> > > > > > > > > Hi Dmitry,
+> > > > > > > > >
+> > > > > > > > > On Sat, Dec 21, 2019 at 12:59 AM Dmitry Sepp
+> > > > > > > > >
+> > > > > > > > > <dmitry.sepp@opensynergy.com> wrote:
+> > > > > > > > > > Hi Keiichi,
+> > > > > > > > > >
+> > > > > > > > > > On Mittwoch, 18. Dezember 2019 14:02:13 CET Keiichi Watanabe
+> > > >
+> > > > wrote:
+> > > > > > > > > > > Hi,
+> > > > > > > > > > > This is the 2nd version of virtio-video patch. The PDF is
+> > > > > > > > > > > available
+> > > > > > > > > > > in [1].
+> > > > > > > > > > > The first version was sent at [2].
+> > > > > > > > > > >
+> > > > > > > > > > > Any feedback would be appreciated. Thank you.
+> > > > > > > > > > >
+> > > > > > > > > > > Best,
+> > > > > > > > > > > Keiichi
+> > > > > > > > > > >
+> > > > > > > > > > > [1]:
+> > > > > > > > > > > https://drive.google.com/drive/folders/1eT5fEckBoor2iHZR4f
+> > > > > > > > > > > 4G
+> > > > > > > > > > > LxYz
+> > > > > > > > > > > FMVa
+> > > > > > > > > > > pOFx?us
+> > > > > > > > > > > p=sharing [2]:
+> > > > > > > > > > > https://markmail.org/message/gc6h25acct22niut
+> > > > > > > > > > >
+> > > > > > > > > > > Change log:
+> > > > > > > > > > >
+> > > > > > > > > > > v2:
+> > > > > > > > > > > * Removed functionalities except encoding and decoding.
+> > > > > > > > > > > * Splited encoder and decoder into different devices that
+> > > > > > > > > > > use
+> > > > > > > > > > > the
+> > > > > > > > > > > same
+> > > > > > > > > > > protocol. * Replaced GET_FUNCS with GET_CAPABILITY.
+> > > > > > > > > > > * Updated structs for capabilities.
+> > > > > > > > > > >
+> > > > > > > > > > >   - Defined new structs and enums such as image formats,
+> > > > > > > > > > >   profiles,
+> > > > > > > > > > >   range
+> > > > > > > > > > >
+> > > > > > > > > > > (min, max, step), etc
+> > > > > > > > > > >
+> > > > > > > > > > >     * For virtio_video_pixel_format, chose a naming
+> > > > > > > > > > >     convention
+> > > > > > > > > > >     that
+> > > > > > > > > > >     is used
+> > > > > > > > > > >
+> > > > > > > > > > >       in DRM. We removed XBGR, NV21 and I422, as they are
+> > > > > > > > > > >       not
+> > > > > > > > > > >       used
+> > > > > > > > > > >       in the
+> > > > > > > > > > >       current draft implementation.
+> > > > > > > > > > >       https://lwn.net/Articles/806416/
+> > > > > > > > > > >
+> > > > > > > > > > >   - Removed virtio_video_control, whose usage was not
+> > > > > > > > > > >   documented
+> > > > > > > > > > >   yet
+> > > > > > > > > > >   and
+> > > > > > > > > > >
+> > > > > > > > > > > which is not necessary for the simplest decoding scenario.
+> > > > > > > > > > >
+> > > > > > > > > > >   - Removed virtio_video_desc, as it is no longer needed.
+> > > > > > > > > > >
+> > > > > > > > > > > * Updated struct virtio_video_config for changes around
+> > > > > > > > > > > capabilities.
+> > > > > > > > > > > * Added a way to represent supported combinations of
+> > > > > > > > > > > formats.
+> > > > > > > > > > >
+> > > > > > > > > > >   - A field "mask" in virtio_video_format_desc plays this
+> > > > > > > > > > >   role.
+> > > > > > > > > > >
+> > > > > > > > > > > * Removed VIRTIO_VIDEO_T_STREAM_{START,STOP} because they
+> > > > > > > > > > > don't
+> > > > > > > > > > > play
+> > > > > > > > > > > any
+> > > > > > > > > > > meaningful roles. * Removed VIRTIO_VIDEO_T_STREAM_{ATTACH,
+> > > > > > > > > > > DETACH}_BACKING
+> > > > > > > > > > > and merged them into RESOURCE_{CREATE, DESTROY}. * Added a
+> > > > > > > > > > > way
+> > > > > > > > > > > to
+> > > > > > > > > > > notify/specify resource creation method.
+> > > > > > > > > > >
+> > > > > > > > > > >   - Added a feature flag.
+> > > > > > > > > > >   - Defined enum virtio_video_mem_type.
+> > > > > > > > > > >   - Added new fields in video_stream_create.
+> > > > > > > > > > >
+> > > > > > > > > > > * Modified fields in virtio_video_params.
+> > > > > > > > > > >
+> > > > > > > > > > >   - Added crop information.
+> > > > > > > > > > >
+> > > > > > > > > > > * Removed enum virtio_video_channel_type because we can
+> > > > > > > > > > > get
+> > > > > > > > > > > this
+> > > > > > > > > > > information by image format.
+> > > > > > > > > >
+> > > > > > > > > > Could you please explain this? How do you get the
+> > > > > > > > > > information?
+> > > > > > > > >
+> > > > > > > > > It means that if image formats are well-defined, channel
+> > > > > > > > > information
+> > > > > > > > > (e.g. the order of channels) is uniquely determined.
+> > > > > > > > >
+> > > > > > > > > > Suppose you have some piece of HW on the host side that
+> > > > > > > > > > wants
+> > > > > > > > > > I420
+> > > > > > > > > > as
+> > > > > > > > > > one
+> > > > > > > > > > contig buffer w/ some offsets. But on the driver side, say,
+> > > > > > > > > > gralloc
+> > > > > > > > > > gives you three separate buffers, one per channel. How do we
+> > > > > > > > > > pass
+> > > > > > > > > > those to the device then?
+> > > > > > > > >
+> > > > > > > > > You're talking about CrOS use case where buffers are allocated
+> > > > > > > > > by
+> > > > > > > > > virtio-gpu, right?
+> > > > > > > > > In this case, virtio-gpu allocates one contiguous host-side
+> > > > > > > > > buffer
+> > > > > > > > > and
+> > > > > > > > > the client regards a pair of (buffer FD, offset) as one
+> > > > > > > > > channel.
+> > > > > > > > > And, we can register this pair to the device when the buffer
+> > > > > > > > > is
+> > > > > > > > > imported.
+> > > > > > > > > In the virtio-vdec spec draft, this pair corresponds to struct
+> > > > > > > > > virtio_vdec_plane in struct virtio_vdec_plane.
+> > > > > > > > >
+> > > > > > > > > So, I suppose we will need similar structs when we add a
+> > > > > > > > > control
+> > > > > > > > > to
+> > > > > > > > > import buffers. However, I don't think it's necessary when
+> > > > > > > > > guest
+> > > > > > > > > pages
+> > > > > > > > > are used.
+> > > > > > > >
+> > > > > > > > I think we need some way for the guest to know whether it can
+> > > > > > > > allocate
+> > > > > > > > the planes in separate buffers, even when guest pages are used.
+> > > > > > > > This
+> > > > > > > > would be equivalent to V4L2 M and non-M formats, but mixing this
+> > > > > > > > into
+> > > > > > > > FourCC in V4L2 is an acknowledged mistake, so we should add a
+> > > > > > > > query or
+> > > > > > > > something.
+> > > > > >
+> > > > > > Yes, this is what I mean. In fact, we already do face the situation
+> > > > > > when
+> > > > > > the device side is not happy with the sgt and wants contig. I think
+> > > > > > we'll
+> > > > > > add a module parameter for now.
+> > > > >
+> > > > > Okay. So, I suppose we'll be able to update structs:
+> > > > > * Add a flag in virtio_video_format_desc that indicates whether planes
+> > > > > can be in separate buffers, and
+> > > > > * Add a flag in virtio_video_format_desc that indicates that the
+> > > > > device requires contiguous buffers for this format.
+> > > > >
+> > > > > Does it make sense?
+> > > >
+> > > > Sorry, I don't understand the difference between the two above: isn't
+> > > > the
+> > > > first case is just when the flag is not set?
+> > >
+> > > Ah, I was confused and wrote something strange. Yeah,  these two are the
+> > > same. Sorry for that.
+> > >
+> > > So, the suggestion is to add a field "planes_layout" in
+> > > virtio_video_format_desc, which is one of the following enums:
+> > >
+> > > enum virtio_video_planes_layout {
+> > >
+> > >     VIRTIO_VIDEO_PLANES_LAYOUT_UNSPEC = 0,  /* no special requirement */
+> > >     VIRTIO_VIDEO_PLANES_LAYOUT_CONTIGUOUS,
+> > >
+> > > };
+> > >
+> > > If we have a better idea or naming, please let me know.
+> >
+> > The naming looks good for me, I might only change to CONTIG as we have
+> > UNSPEC.
+> >
+>
+> So here we are talking about plane layout in memory, am I correct? But I think
+> we also need a way to communicate memory requirements of the device: the
+> device might require CMA buffers or it can be ok with SG lists. What about
+> adding something like this to virtio_video_format_desc:
+>
+> enum virtio_video_mem_layout {
+>         VIRTIO_VIDEO_MEM_LAYOUT_UNDEFINED = 0,
+>
+>         VIRTIO_VIDEO_MEM_LAYOUT_CONTIG = 0x100,
+>         VIRTIO_VIDEO_MEM_LAYOUT_NON_CONTIG,
+> };
+>
+> struct virtio_video_format_desc {
+>     __le64 mask;
+>     __le32 format; /* One of VIRTIO_VIDEO_FORMAT_* types */
+>     __le32 planes_layout; /* One of VIRTIO_VIDEO_PLANES_LAYOUT_* types */
+>     __le32 mem_layout; /* One of VIRTIO_VIDEO_MEM_LAYOUT_* types */
+>     ...
+> };
+
+Good.
+I'd not like to call it NON_CONTIG, as it sounds like CMA buffers
+aren't allowed.
+Instead, how about this definition?
+
+enum virtio_video_mem_layout {
+        VIRTIO_VIDEO_MEM_LAYOUT_UNSPEC = 0,  /* no special requirement */
+        VIRTIO_VIDEO_MEM_LAYOUT_CONTIG = 1,
+};
+
+With this enum,
+* the device can simply ignore this field if it doesn't have any
+requirement and the struct is zero-initialized, and
+* if we need to add other types of memory layout requirements, we can
+add them as 2, 4, 8, etc to represent combinations of requirements.
+
+Just to confirm, are the following combination of planes_layout and
+mem_layout valid?
+(1) (planes_layout, mem_layout) = (contig, not specified)
+(2) (planes_layout, mem_layout) = (not specified, contig)
+
+In my understanding, (1) means that each plane must be a contiguous
+buffer while different planes don't have to be in a contig memory, but
+(2) is invalid.
+Is it correct?
+
+Best regards,
+Keiichi
+
+>
+> Best regards,
+> Dmitry.
+>
+> > Best regards,
+> > Dmitry.
+> >
+> > > Best regards,
+> > > Keiichi
+> > >
+> > > > Regards,
+> > > > Dmitry.
+> > > >
+> > > > > Best regards,
+> > > > > Keiichi
+> > > > >
+> > > > > > Regards,
+> > > > > > Dmitry.
+> > > > > >
+> > > > > > > > For future V4L2 development we came up with the idea of a format
+> > > > > > > > flag
+> > > > > > > > which could mean that the hardware allows putting planes in
+> > > > > > > > separate
+> > > > > > > > buffers. We could have a similar per-format flag in the
+> > > > > > > > capabilities,
+> > > > > > > > as we already have a list of all the supported formats there.
+> > > > > > >
+> > > > > > > Sorry, forgot to paste the link from future V4L2 work notes from
+> > > > > > > this
+> > > > > > > year
+> > > > > > > ELCE: https://www.spinics.net/lists/linux-media/msg159789.html
+> > > > > > >
+> > > > > > > > Best regards,
+> > > > > > > > Tomasz
+> > > > > > > >
+> > > > > > > > > Best regards,
+> > > > > > > > > Keiichi
+> > > > > > > > >
+> > > > > > > > > > Best regards,
+> > > > > > > > > > Dmitry.
+> > > > > > > > > >
+> > > > > > > > > > > * Renamed virtio_video_pin to virtio_video_buf_type.
+> > > > > > > > > > >
+> > > > > > > > > > >   - It's similar to V4L2_BUF_TYPE_VIDEO_{OUTPUT, CAPTURE}.
+> > > > > > > > > > >
+> > > > > > > > > > > * Added an error event.
+> > > > > > > > > > > * Reordered some subsections.
+> > > > > > > > > > > * Changed styles to make it consistent with other devices.
+> > > > > > > > > > >
+> > > > > > > > > > > Dmitry Sepp (1):
+> > > > > > > > > > >   virtio-video: Add virtio video device specification
+> > > > > > > > > > >
+> > > > > > > > > > >  content.tex      |   1 +
+> > > > > > > > > > >  virtio-video.tex | 579
+> > > > > > > > > > >  +++++++++++++++++++++++++++++++++++++++++++++++
+> > > > > > > > > > >  2 files changed, 580 insertions(+)
+> > > > > > > > > > >  create mode 100644 virtio-video.tex
+> > > > > > > > > > >
+> > > > > > > > > > > --
+> > > > > > > > > > > 2.24.1.735.g03f4e72817-goog
+> >
+> > ---------------------------------------------------------------------
+> > To unsubscribe, e-mail: virtio-dev-unsubscribe@lists.oasis-open.org
+> > For additional commands, e-mail: virtio-dev-help@lists.oasis-open.org
+>
+>
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
