@@ -1,73 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A07F14FC7C
-	for <lists+spice-devel@lfdr.de>; Sun,  2 Feb 2020 10:48:43 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CCB2154971
+	for <lists+spice-devel@lfdr.de>; Thu,  6 Feb 2020 17:42:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 374176EA59;
-	Sun,  2 Feb 2020 09:48:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 161AD6FAA9;
+	Thu,  6 Feb 2020 16:42:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4266E6EA59
- for <spice-devel@lists.freedesktop.org>; Sun,  2 Feb 2020 09:48:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1580636917;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mjwihljfT+lQHgMlkyAsqBN/tWNw0G7wb22133NqLCs=;
- b=I9Xxx8QrGdwwb+YhXS+mr+CMzp0h0iMRCzHY8EIltbjxuyTpK4NZUKM93xkn3zU5mC5Nm2
- kMXe8IRe5qoYq//Q/lgXGr0P4Sud6BW7E6N3GRHRLxt/C72nZAKSN8KaixEb1OWgs31hbz
- eblULaSGIM1GvEduw0lzb4oEvH/OXvo=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-108-l91oRP7IPVSVaF6OUR3rJw-1; Sun, 02 Feb 2020 04:48:33 -0500
-Received: by mail-wr1-f69.google.com with SMTP id j4so6353007wrs.13
- for <spice-devel@lists.freedesktop.org>; Sun, 02 Feb 2020 01:48:32 -0800 (PST)
+Received: from mail-pf1-x444.google.com (mail-pf1-x444.google.com
+ [IPv6:2607:f8b0:4864:20::444])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 263226FA2A
+ for <spice-devel@lists.freedesktop.org>; Thu,  6 Feb 2020 10:21:24 +0000 (UTC)
+Received: by mail-pf1-x444.google.com with SMTP id 185so2908828pfv.3
+ for <spice-devel@lists.freedesktop.org>; Thu, 06 Feb 2020 02:21:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=285hGBeyDEuWuK9GHboTvoJ1nNlVTOiPiFz7p6gTZeA=;
+ b=IRl6ADxEeaZcVHXBlmaucyLsfDiAsQttS9Aqmb3Aso5XIP9d9q5Aseia8xYcrYSYW8
+ BU9m26hP2MM1p+/TqGNNS12aJ+CvdrHetPbo1LXceBgX3iS26BPyIEGwBqSnrQmK3s+7
+ nnu+Mk1jFxdbJN1PeVWXtHCr9bJ2r8U0Mytk0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=ymG+qP3vzTFMHOH3G1DsEFMkCI3tSloiD1rGOGL4j8E=;
- b=kF7r2s//FWhsQ7EOGv2OeMbcXkeSkl/xTYlXYxyAdncIOzyBMbivhI0F32bSf5h61o
- IU/NIcUPHEOgbaHyF7bB7GE9E5wRa5UF+GcoI6y7fptyhA9xHCI+AGrxk2ssvuClJyiE
- hKB8N2fcTzg92XR+0mKcVJ9YGDRlSJKli+yuofqZS+Tu000wqsgauxaG7KbgDcjq5zxX
- SsG31EZ9kV37obfRmZpiOLTh6N1G8KR2PPBsB9JgtT6exSHvMpAS115YePcpaSPhoV6O
- m1/PBWHjm2y7VCiEr7GX8rGw9H3f5gSagp7iip2yGsCiclweGKpaa4LXdQ7Vegu47EJg
- vokg==
-X-Gm-Message-State: APjAAAVsqnwSI0nWoo0LZKmpAI2LZm3sgxmx4dhT9sjRRjnLmsgpoAJP
- jJfdHvk3FcqpH0sLGmzDSN6XM3gS//tfAzyqDPs/2EVQzrqyF+H4t3/U6Tx3eHSbijHa0umxmGI
- 0w3htfOEcMwHxauRrD5pe1ojoONaU5xY=
-X-Received: by 2002:a1c:151:: with SMTP id 78mr21957122wmb.182.1580636911697; 
- Sun, 02 Feb 2020 01:48:31 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxxIzvwf9Ow7wkG7vKJOhA1j/oWaanoD0U0SRBfZFtjeDBbhC+xZz3ugvNTchiepSG7RoECWw==
-X-Received: by 2002:a1c:151:: with SMTP id 78mr21957089wmb.182.1580636911289; 
- Sun, 02 Feb 2020 01:48:31 -0800 (PST)
-Received: from dhcp-4-211.tlv.redhat.com (bzq-82-81-161-50.red.bezeqint.net.
- [82.81.161.50])
- by smtp.gmail.com with ESMTPSA id k13sm19649190wrx.59.2020.02.02.01.48.30
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 02 Feb 2020 01:48:30 -0800 (PST)
-To: spice-devel@lists.freedesktop.org
-References: <1360771579957091@myt5-094cfe5c1616.qloud-c.yandex.net>
-From: Snir Sheriber <ssheribe@redhat.com>
-Message-ID: <83a3d13d-2b25-cf60-2404-762cd5f2313c@redhat.com>
-Date: Sun, 2 Feb 2020 11:48:29 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=285hGBeyDEuWuK9GHboTvoJ1nNlVTOiPiFz7p6gTZeA=;
+ b=bPlxiikqPAeLS4ZfmdNhD8jFFp4Q+vVR4UdJkh0qtnLdwuM0EiLB0WMyPN6Sps0qst
+ Mslw2xDcRQD1rgJMkCvXsJRwPSQ0NHk8CxKtUKYqQ0QNCiytR5A9CG64UtKg5t1qh5Dk
+ 13jZZYSyVd0q/7qv7mtqRiio2nCqM5Ba0ZyJ9U1woFeBX/A4FeQ11VeKYWbldkXJVac0
+ SenHkndOxGwTObfzKuL2RYjAmvtn8MHJFShxXVXseCM/5QO96tu9WyFsSWV1MQ56St2b
+ ipkviP/1lAQDTaBq91ZmR9IRZqW0RmQOu6w+6wujpXLePUNq/rDOn7B0M7dXkUcWsxN2
+ oKuw==
+X-Gm-Message-State: APjAAAWF3quLKkQ8j5rfVu4t4HcTk7ph48fcvbCxSaBHTAS4GkCykSjT
+ +xUWsE63mTAclr70Go+IMed2VA==
+X-Google-Smtp-Source: APXvYqwioWvoPL68xYIS9mGhV815DwhJrP/awpaRlx+n3TRUM43A/CgAVvfggHPktEvIamFzeA/7Hw==
+X-Received: by 2002:a62:2b8a:: with SMTP id r132mr2895675pfr.56.1580984479973; 
+ Thu, 06 Feb 2020 02:21:19 -0800 (PST)
+Received: from keiichiw1.tok.corp.google.com
+ ([2401:fa00:8f:203:863a:e217:a16c:53f2])
+ by smtp.gmail.com with ESMTPSA id v4sm2590270pff.174.2020.02.06.02.21.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Feb 2020 02:21:19 -0800 (PST)
+From: Keiichi Watanabe <keiichiw@chromium.org>
+To: virtio-dev@lists.oasis-open.org
+Date: Thu,  6 Feb 2020 19:20:56 +0900
+Message-Id: <20200206102058.247258-1-keiichiw@chromium.org>
+X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
 MIME-Version: 1.0
-In-Reply-To: <1360771579957091@myt5-094cfe5c1616.qloud-c.yandex.net>
-Content-Language: en-US
-X-MC-Unique: l91oRP7IPVSVaF6OUR3rJw-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] How to use spice-streaming-agent properly?
+X-Mailman-Approved-At: Thu, 06 Feb 2020 16:42:34 +0000
+Subject: [Spice-devel] [PATCH v3 0/2] Virtio video device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,83 +62,75 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="windows-1252"; Format="flowed"
+Cc: samiullah.khawaja@opensynergy.com, alexlau@chromium.org,
+ kiran.pawar@opensynergy.com, acourbot@chromium.org, dstaessens@chromium.org,
+ tfiga@chromium.org, hverkuil@xs4all.nl, stevensd@chromium.org,
+ kraxel@redhat.com, daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
+ dmitry.sepp@opensynergy.com, marcheu@chromium.org, dgreid@chromium.org,
+ egranata@google.com, posciak@chromium.org, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
-On 1/25/20 2:58 PM, ole-krutov@yandex.ru wrote:
-> Hello dear devs,
->
-> our host has libspice-server1 0.14.2, qemu-kvm 4.1, libvirt 5.0.0 with "r=
-amfb" option for mediated devices enabled,  NVIDIA GRID GPU. We'd like to s=
-tream GPU-accelerated video from Linux guests. spice-streaming-agent+gst-pl=
-ugin is built and sends video encoded to H.264 by NVENC codec from guest. Q=
-uality of video is very good, bitrate and presets can be set by cmdline par=
-ameters.
-> Guest's video config consists of hostdev mediated device which correspond=
-s to NVIDIA vGPU and second "none", which is needed because of libvirt 5.0 =
-does not allow guests with only mediated device set.
-> There are two showstoppers:
-
 Hi,
+Here is the 3rd version of virtio-video patches.
 
-Nice to hear that you are using it with nvenc and having fairly good =
+This patch set consists of two changes.
+The first patch adds the virtio-video protocol. This is an updated version of v2 patch [1].
+The second patch adds a new feature to use exported objects from different virtio devices, which are proposed in [2], as video buffers.
 
-results. Unfortunately
-Libvirt does not have the relevant bits to support spice-streaming-agent =
+PDFs are avaliable below:
+* full version [3]
+* only virtio-video section (first patch) [4]
+* only virtio-video section (first+second patch) [5]
 
-yet.
+Best regards,
+Keiichi
 
-But I know you should be able to workaround it by setting also qxl (i =
+[1] https://markmail.org/thread/yb25fim2dqfuktgf
+[2] https://markmail.org/message/2p5zgfanuv3fgwcu
+[3] https://drive.google.com/file/d/1Kl3M6weAm0vV1kj9A5dq2yypLXe_6TS2/view?usp=sharing
+[4] https://drive.google.com/file/d/1fN_6lft3RPuFKOnBm6P6XCy3fF7wwnu5/view?usp=sharing
+[5] https://drive.google.com/file/d/1jOsS2WdVhL4PpcWLO8Zukq5J0fXDiWn-/view?usp=sharing
 
-did not try with ramfb):
+Changes v2 -> v3:
+* Rename controlq -> commandq.
+* Add {QUERY,GET,SET}_CONTROL for bitrate, profile and level.
+* Update the definition of virtio_video_format_desc.
+  - Remove fields for profiles and levels.
+  - Define fields for memory layouts.
+  - Stop using FOURCC and define enum virtio_video_format.
+* Add a feature flag for non-contiguous memories.
+* Add a new section for buffer lifecycle.
+* Change RESOURCE_DESTROY to RESOURCE_DESTROY_ALL.
+* Add fields in virtio_video_config.
+* Remove constants like *_UNDEFINED or *_UNSPEC.
+* Rename some constants and structs.
+* Change structures and orders of subsections and paragraphs.
+* Add more detailed description for each command.
+* Address review comments.
+* Add a feature for exported objects as a separate patch.
 
-<qemu:commandline>
- =A0=A0 <qemu:arg value=3D'-device'/>
- =A0=A0 <qemu:arg value=3D'qxl,max_outputs=3D1'/>
-</qemu:commandline>
+Dmitry Sepp (1):
+  virtio-video: Add virtio video device specification
 
-max_outputs=3D1 is required to avoid some bug which is fixed on upstream =
+Keiichi Watanabe (1):
+  virtio-video: Define a feature for exported objects from different
+    virtio devices
 
-spice server.
+ .gitignore                        |    1 +
+ content.tex                       |    1 +
+ images/video-buffer-lifecycle.dot |   18 +
+ make-setup-generated.sh           |    8 +
+ virtio-video.tex                  | 1030 +++++++++++++++++++++++++++++
+ 5 files changed, 1058 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 images/video-buffer-lifecycle.dot
+ create mode 100644 virtio-video.tex
 
-> 1) when enabled, the video stream creates a new window in remote-viewer (=
-versions 6.0-8.0) instead of replace old one. Old SPICE traffic is sent alo=
-ng with H264 stream, consuming network and client CPU significantly. When t=
-his "old main" trafficis is disabled in remote-viewer, video streaming stop=
-s too. Remmina (all new builds including 2020.01.08) does not show this win=
-dow at all.
-
-I assume this is due to the ramfb. This was not tested yet with the =
-
-spice-streaming-agent setup.
-
-With the above suggested setup (& ramfb disabled) it will also be in =
-
-another window but the first
-window should not really be active, you can close it manually.
-
-> 2) No mouse or keyboard control is available in window with video stream,=
- so it can be used just like some "TV set" but all actions should be done i=
-n old window. Guest logs say about some mouse activity on unknown display w=
-hen mouse buttons are pressed on tthis window.
-
-Should also work with this setup.
-
-Snir.
-
->
-> Can that be fixed? Can spice-streaming-agent replace main display channel?
->
-> Thanks in advance!
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
->
-
+--
+2.25.0.341.g760bfbb309-goog
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
