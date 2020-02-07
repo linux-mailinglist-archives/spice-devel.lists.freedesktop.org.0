@@ -1,58 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 497A6155A74
-	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 16:15:10 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 506C8155A73
+	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 16:15:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 839D26E083;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5018F6E081;
 	Fri,  7 Feb 2020 15:15:05 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5A1C36FC72
- for <spice-devel@lists.freedesktop.org>; Fri,  7 Feb 2020 12:31:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581078711;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cCzR2J7hcjbrjaj4pXeOOcloP2sWKrLXwqs8XnX4kFU=;
- b=WhM2RnqHkx+iD1fE6l/G0X5GvILl971jEMIcF2YUB4Po/fdwp+TxJdlB/nwRH4gFsXt1WA
- CBMTiqqXNcIs1Ty32vdMt0kAULqMun9p6aKqsO21nBt6g0wdKHX6FRUPrarGRVJrFdHoJT
- cwwu9k/fW+6HgEOrEAmSJu7jaZ36MYM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-41-My83CBNIOP2eZaExU9r_Tg-1; Fri, 07 Feb 2020 07:31:47 -0500
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0D439184AEBE;
- Fri,  7 Feb 2020 12:31:45 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-112.ams2.redhat.com
- [10.36.116.112])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 21DED7FB60;
- Fri,  7 Feb 2020 12:31:43 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2FA08A1E0; Fri,  7 Feb 2020 13:31:43 +0100 (CET)
-Date: Fri, 7 Feb 2020 13:31:43 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
+Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
+ [IPv6:2a00:1450:4864:20::441])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 380356EABD
+ for <spice-devel@lists.freedesktop.org>; Fri,  7 Feb 2020 13:37:24 +0000 (UTC)
+Received: by mail-wr1-x441.google.com with SMTP id m16so2685681wrx.11
+ for <spice-devel@lists.freedesktop.org>; Fri, 07 Feb 2020 05:37:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=1CcTElHSNqMZM5zwk48mWmWtE3xBK2DdfIEEUuyZkGg=;
+ b=c72ecVghVbnBxD82XL/P39Jjig+XsM5ybdRwUtoHjTB404HjgQevnYA7ePFGNtuKxx
+ 8kgofSnmJOXcmRqrgPMKz/N29TXcqR23SymlnrvLQ7E9KQ6NFIuFg/0UxYqn5aRVAnCw
+ 9pXIkP1Uxe2lGcuauCe3ftg1ivRDGKomeB7Ps=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=1CcTElHSNqMZM5zwk48mWmWtE3xBK2DdfIEEUuyZkGg=;
+ b=iAQJS9ymtQQbOdMKpKPUFqbyfgx+GMMCiiY5YCLK8a4zXOwwdo6pCPjkic51q4HANA
+ TW7o8SFDvP6GFgHtOkJ0A9oo87IAI7vh46gUOxDYwz7mvj9IF0YGh5xal3+6+YdhZ6X6
+ QaRRD3NiKmbn7vqwiPT+1CJJmh7EyZDziBovydImha7KOeO01t7iFCmw9z506AeGKYfD
+ Y81hbQ9XjRebEF+6Op7afh8KsU6rv9w9MepGY9mCotCv/OAONe5QwltRv8WeTsGCiAtv
+ mRNKPMqu3VmcSOKk5YAuodCWJKeiIPSC4YUrIZIVUZMVuWiywWJD+Af4IcY/W+rXXQHg
+ XdWQ==
+X-Gm-Message-State: APjAAAWgbok8uifeNRdCgEGIphLPgSXbfdoHTMO+khcvmkyKosgr/dZV
+ xxbHZDlgyUUhpSBbJ03YSnih5A==
+X-Google-Smtp-Source: APXvYqzW2ypvPBQo3tzVbCDYecJkmF0aMsQiTlbyoInM4Dd9NFY9omFvK/0gunpcQRlvlf+XRCV+qA==
+X-Received: by 2002:adf:f787:: with SMTP id q7mr4764491wrp.297.1581082642747; 
+ Fri, 07 Feb 2020 05:37:22 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id a184sm3504277wmf.29.2020.02.07.05.37.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Feb 2020 05:37:22 -0800 (PST)
+Date: Fri, 7 Feb 2020 14:37:20 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20200207123143.y3m3moillue6udo6@sirius.home.kraxel.org>
+Message-ID: <20200207133720.GZ43062@phenom.ffwll.local>
 References: <20200207084135.4524-1-tzimmermann@suse.de>
  <20200207084135.4524-3-tzimmermann@suse.de>
- <20200207103333.rxebukm4hukavlq5@sirius.home.kraxel.org>
- <cd78b79f-ff4e-9c8e-4d87-ce717a717559@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <cd78b79f-ff4e-9c8e-4d87-ce717a717559@suse.de>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-MC-Unique: My83CBNIOP2eZaExU9r_Tg-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
+In-Reply-To: <20200207084135.4524-3-tzimmermann@suse.de>
+X-Operating-System: Linux phenom 5.3.0-3-amd64 
 X-Mailman-Approved-At: Fri, 07 Feb 2020 15:15:04 +0000
 Subject: Re: [Spice-devel] [PATCH 2/6] drm: Add drm_simple_encoder_{init,
  create}()
@@ -67,9 +66,10 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
  virtualization@lists.linux-foundation.org, noralf@tronnes.org,
- dri-devel@lists.freedesktop.org, daniel@ffwll.ch, alexander.deucher@amd.com,
+ kraxel@redhat.com, daniel@ffwll.ch, alexander.deucher@amd.com,
  spice-devel@lists.freedesktop.org, sam@ravnborg.org,
  emil.velikov@collabora.com
 Content-Type: text/plain; charset="us-ascii"
@@ -77,26 +77,185 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> > How about using
-> > 
-> > #define drm_simple_encoder_init(dev, type, name, ...) \
-> >         drm_encoder_init(dev, drm_simple_encoder_funcs_cleanup, type, name, __VA_ARGS__)
-> > 
-> > instead ?
+On Fri, Feb 07, 2020 at 09:41:31AM +0100, Thomas Zimmermann wrote:
+> The simple-encoder helpers initialize an encoder with an empty
+> implementation. This covers the requirements of most of the existing
+> DRM drivers. A call to drm_simple_encoder_create() allocates and
+> initializes an encoder instance, a call to drm_simple_encoder_init()
+> initializes a pre-allocated instance.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-> I guess you want to save a few lines in the implementation of
-> drm_simple_encoder_init() (?) If so, I'd rather try to share more
-> internal code among the various init and create functions.
+This has quick a bit midlayer taste to it ... I think having this as a
+helper would be cleaner ...
 
-Yes.  You have the namestr stuff duplicated in all functions, and with
-a #define that goes away.
+The other bit is drm_encoder->possible_crtcs. If we do create a helper for
+these, lets at least try to make them not suck too badly :-) Otherwise I
+guess it would be time to officially document what exactly possible_crtcs
+== 0 means from an uabi pov.
+-Daniel
 
-But maybe that can be simply be dropped?  The drivers with a simple
-encoder seem to not care much about the name and just pass NULL ...
+> ---
+>  drivers/gpu/drm/drm_encoder.c | 116 ++++++++++++++++++++++++++++++++++
+>  include/drm/drm_encoder.h     |  10 +++
+>  2 files changed, 126 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/drm_encoder.c b/drivers/gpu/drm/drm_encoder.c
+> index ffe691a1bf34..1a65cab1f310 100644
+> --- a/drivers/gpu/drm/drm_encoder.c
+> +++ b/drivers/gpu/drm/drm_encoder.c
+> @@ -178,6 +178,122 @@ int drm_encoder_init(struct drm_device *dev,
+>  }
+>  EXPORT_SYMBOL(drm_encoder_init);
+>  
+> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_cleanup = {
+> +	.destroy = drm_encoder_cleanup,
+> +};
+> +
+> +/**
+> + * drm_simple_encoder_init - Init a preallocated encoder
+> + * @dev: drm device
+> + * @funcs: callbacks for this encoder
+> + * @encoder_type: user visible type of the encoder
+> + * @name: printf style format string for the encoder name, or NULL
+> + *        for default name
+> + *
+> + * Initialises a preallocated encoder that has no further functionality. The
+> + * encoder will be released automatically.
+> + *
+> + * Returns:
+> + * Zero on success, error code on failure.
+> + */
+> +int drm_simple_encoder_init(struct drm_device *dev,
+> +			    struct drm_encoder *encoder,
+> +			    int encoder_type, const char *name, ...)
+> +{
+> +	char *namestr = NULL;
+> +	int ret;
+> +
+> +	if (name) {
+> +		va_list ap;
+> +
+> +		va_start(ap, name);
+> +		namestr = kvasprintf(GFP_KERNEL, name, ap);
+> +		va_end(ap);
+> +		if (!namestr)
+> +			return -ENOMEM;
+> +	}
+> +
+> +	ret = __drm_encoder_init(dev, encoder,
+> +				 &drm_simple_encoder_funcs_cleanup,
+> +				 encoder_type, namestr);
+> +	if (ret)
+> +		goto err_kfree;
+> +
+> +	return 0;
+> +
+> +err_kfree:
+> +	if (name)
+> +		kfree(namestr);
+> +	return ret;
+> +}
+> +EXPORT_SYMBOL(drm_simple_encoder_init);
+> +
+> +static void drm_encoder_destroy(struct drm_encoder *encoder)
+> +{
+> +	struct drm_device *dev = encoder->dev;
+> +
+> +	drm_encoder_cleanup(encoder);
+> +	devm_kfree(dev->dev, encoder);
+> +}
+> +
+> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_destroy = {
+> +	.destroy = drm_encoder_destroy,
+> +};
+> +
+> +/**
+> + * drm_simple_encoder_create - Allocate and initialize an encoder
+> + * @dev: drm device
+> + * @encoder_type: user visible type of the encoder
+> + * @name: printf style format string for the encoder name, or NULL for
+> + *        default name
+> + *
+> + * Allocates and initialises an encoder that has no further functionality. The
+> + * encoder will be released automatically.
+> + *
+> + * Returns:
+> + * The encoder on success, a pointer-encoder error code on failure.
+> + */
+> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,
+> +					      int encoder_type,
+> +					      const char *name, ...)
+> +{
+> +	char *namestr = NULL;
+> +	struct drm_encoder *encoder;
+> +	int ret;
+> +
+> +	encoder = devm_kzalloc(dev->dev, sizeof(*encoder), GFP_KERNEL);
+> +	if (!encoder)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	if (name) {
+> +		va_list ap;
+> +
+> +		va_start(ap, name);
+> +		namestr = kvasprintf(GFP_KERNEL, name, ap);
+> +		va_end(ap);
+> +		if (!namestr) {
+> +			ret = -ENOMEM;
+> +			goto err_devm_kfree;
+> +		}
+> +	}
+> +
+> +	ret = __drm_encoder_init(dev, encoder,
+> +				 &drm_simple_encoder_funcs_destroy,
+> +				 encoder_type, namestr);
+> +	if (ret)
+> +		goto err_kfree;
+> +
+> +	return encoder;
+> +
+> +err_kfree:
+> +	if (name)
+> +		kfree(namestr);
+> +err_devm_kfree:
+> +	devm_kfree(dev->dev, encoder);
+> +	return ERR_PTR(ret);
+> +}
+> +EXPORT_SYMBOL(drm_simple_encoder_create);
+> +
+>  /**
+>   * drm_encoder_cleanup - cleans up an initialised encoder
+>   * @encoder: encoder to cleanup
+> diff --git a/include/drm/drm_encoder.h b/include/drm/drm_encoder.h
+> index 5623994b6e9e..0214f6cf9de6 100644
+> --- a/include/drm/drm_encoder.h
+> +++ b/include/drm/drm_encoder.h
+> @@ -190,6 +190,16 @@ int drm_encoder_init(struct drm_device *dev,
+>  		     const struct drm_encoder_funcs *funcs,
+>  		     int encoder_type, const char *name, ...);
+>  
+> +__printf(4, 5)
+> +int drm_simple_encoder_init(struct drm_device *dev,
+> +			    struct drm_encoder *encoder,
+> +			    int encoder_type, const char *name, ...);
+> +
+> +__printf(3, 4)
+> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,
+> +					      int encoder_type,
+> +					      const char *name, ...);
+> +
+>  /**
+>   * drm_encoder_index - find the index of a registered encoder
+>   * @encoder: encoder to find index for
+> -- 
+> 2.25.0
+> 
 
-cheers,
-  Gerd
-
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
