@@ -2,22 +2,24 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D353D1558D6
-	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 14:56:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41FD91558F2
+	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 15:02:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 421526E060;
-	Fri,  7 Feb 2020 13:56:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A62C66FCB2;
+	Fri,  7 Feb 2020 14:02:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2F12F6E060;
- Fri,  7 Feb 2020 13:56:51 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6DD2F6FCB2;
+ Fri,  7 Feb 2020 14:02:06 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id C2854AFAE;
- Fri,  7 Feb 2020 13:56:49 +0000 (UTC)
-To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
-References: <20200207121405.25895-1-kraxel@redhat.com>
+ by mx2.suse.de (Postfix) with ESMTP id E72C9AD9F;
+ Fri,  7 Feb 2020 14:02:04 +0000 (UTC)
+To: Daniel Vetter <daniel@ffwll.ch>
+References: <20200207084135.4524-1-tzimmermann@suse.de>
+ <20200207084135.4524-3-tzimmermann@suse.de>
+ <20200207133720.GZ43062@phenom.ffwll.local>
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
  mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
@@ -44,13 +46,14 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
  HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
  3H26qrE=
-Message-ID: <4a6aae3a-5148-8593-0efe-1786cb0bf41e@suse.de>
-Date: Fri, 7 Feb 2020 14:56:46 +0100
+Message-ID: <86073cfa-496d-53d7-e4c4-9736128109fa@suse.de>
+Date: Fri, 7 Feb 2020 15:02:00 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200207121405.25895-1-kraxel@redhat.com>
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: add drm_driver.release callback.
+In-Reply-To: <20200207133720.GZ43062@phenom.ffwll.local>
+Subject: Re: [Spice-devel] [PATCH 2/6] drm: Add drm_simple_encoder_{init,
+ create}()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,143 +65,237 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>
-Content-Type: multipart/mixed; boundary="===============0575501850=="
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, kraxel@redhat.com,
+ alexander.deucher@amd.com, spice-devel@lists.freedesktop.org, sam@ravnborg.org,
+ emil.velikov@collabora.com
+Content-Type: multipart/mixed; boundary="===============1682161959=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0575501850==
+--===============1682161959==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="j5pSowMF1RznSZGlCiEpo0AL1G951df4M"
+ boundary="D9yXtwD7gGzdg2h5hIuwn2r8uxzLi9QfJ"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---j5pSowMF1RznSZGlCiEpo0AL1G951df4M
-Content-Type: multipart/mixed; boundary="bNca9cXX2dHZkq7Z8zobbXzJw9YbrdHUn";
+--D9yXtwD7gGzdg2h5hIuwn2r8uxzLi9QfJ
+Content-Type: multipart/mixed; boundary="V29EbvTwsuwyC9VZXdBdBOTohQtHfHr12";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
-Cc: David Airlie <airlied@linux.ie>, open list
- <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
-Message-ID: <4a6aae3a-5148-8593-0efe-1786cb0bf41e@suse.de>
-Subject: Re: [PATCH] drm/qxl: add drm_driver.release callback.
-References: <20200207121405.25895-1-kraxel@redhat.com>
-In-Reply-To: <20200207121405.25895-1-kraxel@redhat.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, kraxel@redhat.com,
+ alexander.deucher@amd.com, spice-devel@lists.freedesktop.org,
+ sam@ravnborg.org, emil.velikov@collabora.com
+Message-ID: <86073cfa-496d-53d7-e4c4-9736128109fa@suse.de>
+Subject: Re: [PATCH 2/6] drm: Add drm_simple_encoder_{init,create}()
+References: <20200207084135.4524-1-tzimmermann@suse.de>
+ <20200207084135.4524-3-tzimmermann@suse.de>
+ <20200207133720.GZ43062@phenom.ffwll.local>
+In-Reply-To: <20200207133720.GZ43062@phenom.ffwll.local>
 
---bNca9cXX2dHZkq7Z8zobbXzJw9YbrdHUn
+--V29EbvTwsuwyC9VZXdBdBOTohQtHfHr12
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
 Hi
 
-Am 07.02.20 um 13:14 schrieb Gerd Hoffmann:
-> Move final cleanups to qxl_drm_release() callback.
-> Add drm_atomic_helper_shutdown() call to qxl_pci_remove().
+Am 07.02.20 um 14:37 schrieb Daniel Vetter:
+> On Fri, Feb 07, 2020 at 09:41:31AM +0100, Thomas Zimmermann wrote:
+>> The simple-encoder helpers initialize an encoder with an empty
+>> implementation. This covers the requirements of most of the existing
+>> DRM drivers. A call to drm_simple_encoder_create() allocates and
+>> initializes an encoder instance, a call to drm_simple_encoder_init()
+>> initializes a pre-allocated instance.
+>>
+>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 >=20
-> Reorder calls in qxl_device_fini().  Cleaning up gem & ttm
-> might trigger qxl commands, so we should do that before
-> releaseing command rings.
+> This has quick a bit midlayer taste to it ... I think having this as a
+> helper would be cleaner ...
 
-Should the second part be a separate patch?
+How would such a helper roughly look like?
 
 Best regards
 Thomas
 
 >=20
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  drivers/gpu/drm/qxl/qxl_drv.c | 21 ++++++++++++++-------
->  drivers/gpu/drm/qxl/qxl_kms.c |  8 ++++----
->  2 files changed, 18 insertions(+), 11 deletions(-)
+> The other bit is drm_encoder->possible_crtcs. If we do create a helper =
+for
+> these, lets at least try to make them not suck too badly :-) Otherwise =
+I
+> guess it would be time to officially document what exactly possible_crt=
+cs
+> =3D=3D 0 means from an uabi pov.
+> -Daniel
 >=20
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_dr=
-v.c
-> index 1d601f57a6ba..8044363ba0f2 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> @@ -34,6 +34,7 @@
->  #include <linux/pci.h>
-> =20
->  #include <drm/drm.h>
-> +#include <drm/drm_atomic_helper.h>
->  #include <drm/drm_drv.h>
->  #include <drm/drm_file.h>
->  #include <drm/drm_modeset_helper.h>
-> @@ -132,21 +133,25 @@ qxl_pci_probe(struct pci_dev *pdev, const struct =
-pci_device_id *ent)
->  	return ret;
->  }
-> =20
-> +static void qxl_drm_release(struct drm_device *dev)
-> +{
-> +	struct qxl_device *qdev =3D dev->dev_private;
-> +
-> +	qxl_modeset_fini(qdev);
-> +	qxl_device_fini(qdev);
-> +	dev->dev_private =3D NULL;
-> +	kfree(qdev);
-> +}
-> +
->  static void
->  qxl_pci_remove(struct pci_dev *pdev)
->  {
->  	struct drm_device *dev =3D pci_get_drvdata(pdev);
-> -	struct qxl_device *qdev =3D dev->dev_private;
-> =20
->  	drm_dev_unregister(dev);
-> -
-> -	qxl_modeset_fini(qdev);
-> -	qxl_device_fini(qdev);
-> +	drm_atomic_helper_shutdown(dev);
->  	if (is_vga(pdev))
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
-> -
-> -	dev->dev_private =3D NULL;
-> -	kfree(qdev);
->  	drm_dev_put(dev);
->  }
-> =20
-> @@ -279,6 +284,8 @@ static struct drm_driver qxl_driver =3D {
->  	.major =3D 0,
->  	.minor =3D 1,
->  	.patchlevel =3D 0,
-> +
-> +	.release =3D qxl_drm_release,
->  };
-> =20
->  static int __init qxl_init(void)
-> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_km=
-s.c
-> index bfc1631093e9..70b20ee4741a 100644
-> --- a/drivers/gpu/drm/qxl/qxl_kms.c
-> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
-> @@ -299,12 +299,12 @@ void qxl_device_fini(struct qxl_device *qdev)
->  {
->  	qxl_bo_unref(&qdev->current_release_bo[0]);
->  	qxl_bo_unref(&qdev->current_release_bo[1]);
-> -	flush_work(&qdev->gc_work);
-> -	qxl_ring_free(qdev->command_ring);
-> -	qxl_ring_free(qdev->cursor_ring);
-> -	qxl_ring_free(qdev->release_ring);
->  	qxl_gem_fini(qdev);
->  	qxl_bo_fini(qdev);
-> +	flush_work(&qdev->gc_work);
-> +	qxl_ring_free(qdev->command_ring);
-> +	qxl_ring_free(qdev->cursor_ring);
-> +	qxl_ring_free(qdev->release_ring);
->  	io_mapping_free(qdev->surface_mapping);
->  	io_mapping_free(qdev->vram_mapping);
->  	iounmap(qdev->ram_header);
+>> ---
+>>  drivers/gpu/drm/drm_encoder.c | 116 +++++++++++++++++++++++++++++++++=
++
+>>  include/drm/drm_encoder.h     |  10 +++
+>>  2 files changed, 126 insertions(+)
+>>
+>> diff --git a/drivers/gpu/drm/drm_encoder.c b/drivers/gpu/drm/drm_encod=
+er.c
+>> index ffe691a1bf34..1a65cab1f310 100644
+>> --- a/drivers/gpu/drm/drm_encoder.c
+>> +++ b/drivers/gpu/drm/drm_encoder.c
+>> @@ -178,6 +178,122 @@ int drm_encoder_init(struct drm_device *dev,
+>>  }
+>>  EXPORT_SYMBOL(drm_encoder_init);
+>> =20
+>> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_cleanu=
+p =3D {
+>> +	.destroy =3D drm_encoder_cleanup,
+>> +};
+>> +
+>> +/**
+>> + * drm_simple_encoder_init - Init a preallocated encoder
+>> + * @dev: drm device
+>> + * @funcs: callbacks for this encoder
+>> + * @encoder_type: user visible type of the encoder
+>> + * @name: printf style format string for the encoder name, or NULL
+>> + *        for default name
+>> + *
+>> + * Initialises a preallocated encoder that has no further functionali=
+ty. The
+>> + * encoder will be released automatically.
+>> + *
+>> + * Returns:
+>> + * Zero on success, error code on failure.
+>> + */
+>> +int drm_simple_encoder_init(struct drm_device *dev,
+>> +			    struct drm_encoder *encoder,
+>> +			    int encoder_type, const char *name, ...)
+>> +{
+>> +	char *namestr =3D NULL;
+>> +	int ret;
+>> +
+>> +	if (name) {
+>> +		va_list ap;
+>> +
+>> +		va_start(ap, name);
+>> +		namestr =3D kvasprintf(GFP_KERNEL, name, ap);
+>> +		va_end(ap);
+>> +		if (!namestr)
+>> +			return -ENOMEM;
+>> +	}
+>> +
+>> +	ret =3D __drm_encoder_init(dev, encoder,
+>> +				 &drm_simple_encoder_funcs_cleanup,
+>> +				 encoder_type, namestr);
+>> +	if (ret)
+>> +		goto err_kfree;
+>> +
+>> +	return 0;
+>> +
+>> +err_kfree:
+>> +	if (name)
+>> +		kfree(namestr);
+>> +	return ret;
+>> +}
+>> +EXPORT_SYMBOL(drm_simple_encoder_init);
+>> +
+>> +static void drm_encoder_destroy(struct drm_encoder *encoder)
+>> +{
+>> +	struct drm_device *dev =3D encoder->dev;
+>> +
+>> +	drm_encoder_cleanup(encoder);
+>> +	devm_kfree(dev->dev, encoder);
+>> +}
+>> +
+>> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_destro=
+y =3D {
+>> +	.destroy =3D drm_encoder_destroy,
+>> +};
+>> +
+>> +/**
+>> + * drm_simple_encoder_create - Allocate and initialize an encoder
+>> + * @dev: drm device
+>> + * @encoder_type: user visible type of the encoder
+>> + * @name: printf style format string for the encoder name, or NULL fo=
+r
+>> + *        default name
+>> + *
+>> + * Allocates and initialises an encoder that has no further functiona=
+lity. The
+>> + * encoder will be released automatically.
+>> + *
+>> + * Returns:
+>> + * The encoder on success, a pointer-encoder error code on failure.
+>> + */
+>> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,=
+
+>> +					      int encoder_type,
+>> +					      const char *name, ...)
+>> +{
+>> +	char *namestr =3D NULL;
+>> +	struct drm_encoder *encoder;
+>> +	int ret;
+>> +
+>> +	encoder =3D devm_kzalloc(dev->dev, sizeof(*encoder), GFP_KERNEL);
+>> +	if (!encoder)
+>> +		return ERR_PTR(-ENOMEM);
+>> +
+>> +	if (name) {
+>> +		va_list ap;
+>> +
+>> +		va_start(ap, name);
+>> +		namestr =3D kvasprintf(GFP_KERNEL, name, ap);
+>> +		va_end(ap);
+>> +		if (!namestr) {
+>> +			ret =3D -ENOMEM;
+>> +			goto err_devm_kfree;
+>> +		}
+>> +	}
+>> +
+>> +	ret =3D __drm_encoder_init(dev, encoder,
+>> +				 &drm_simple_encoder_funcs_destroy,
+>> +				 encoder_type, namestr);
+>> +	if (ret)
+>> +		goto err_kfree;
+>> +
+>> +	return encoder;
+>> +
+>> +err_kfree:
+>> +	if (name)
+>> +		kfree(namestr);
+>> +err_devm_kfree:
+>> +	devm_kfree(dev->dev, encoder);
+>> +	return ERR_PTR(ret);
+>> +}
+>> +EXPORT_SYMBOL(drm_simple_encoder_create);
+>> +
+>>  /**
+>>   * drm_encoder_cleanup - cleans up an initialised encoder
+>>   * @encoder: encoder to cleanup
+>> diff --git a/include/drm/drm_encoder.h b/include/drm/drm_encoder.h
+>> index 5623994b6e9e..0214f6cf9de6 100644
+>> --- a/include/drm/drm_encoder.h
+>> +++ b/include/drm/drm_encoder.h
+>> @@ -190,6 +190,16 @@ int drm_encoder_init(struct drm_device *dev,
+>>  		     const struct drm_encoder_funcs *funcs,
+>>  		     int encoder_type, const char *name, ...);
+>> =20
+>> +__printf(4, 5)
+>> +int drm_simple_encoder_init(struct drm_device *dev,
+>> +			    struct drm_encoder *encoder,
+>> +			    int encoder_type, const char *name, ...);
+>> +
+>> +__printf(3, 4)
+>> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,=
+
+>> +					      int encoder_type,
+>> +					      const char *name, ...);
+>> +
+>>  /**
+>>   * drm_encoder_index - find the index of a registered encoder
+>>   * @encoder: encoder to find index for
+>> --=20
+>> 2.25.0
+>>
 >=20
 
 --=20
@@ -210,28 +307,28 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---bNca9cXX2dHZkq7Z8zobbXzJw9YbrdHUn--
+--V29EbvTwsuwyC9VZXdBdBOTohQtHfHr12--
 
---j5pSowMF1RznSZGlCiEpo0AL1G951df4M
+--D9yXtwD7gGzdg2h5hIuwn2r8uxzLi9QfJ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl49bJ4ACgkQaA3BHVML
-eiOOmQf6AoWbKa22Ovy6vMK3tNMpamOd23WriCqWH1ef4o8NQhAhb+p8gPG86IO2
-IHSmslvxRb3EIfMMm9A36Ju2OqPO0l7taQos50EyrBMHiWhcfGRmJXPTC//I2Xht
-A7kPTBe3QFALi0bgTx2b4NweWijkR+8+YXBSI0FoXngsZ370PdLx74kYw8YMmrzS
-cr7cWAcqOWtaxB5Nz5z7kHDx91qXlbwmqOB2xmmVNMDoMDL2Y07QIFHX36Dzw+Ux
-MxdzyfGwZwPVvQojh25IBSlDCknWnaYwxw0HcHmB7STtmIJ3HnFhB/eSu7mdA2oh
-BuCiP4FUTOk76pdSddmEQ3dqtlvJBg==
-=wLW5
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl49bdgACgkQaA3BHVML
+eiMkRgf/bJVyraD20+VdzFSjY+qyJIFr2Z88P38vlnV3xIAqh3bgaEJDIqlbNDlh
+vIIx99JRoC9KLh9vHd7Q5FGQjHt03TQyyRzCBd4cMBsdU4pDzrT5NMbiFF0B3xcl
+J5EC71XHbNidgUVfqbhNQaRYYWPlOwMOiP0k7Ta+fHFv1HOiLGtFzxADUB+i4sP4
+EP0mU+SX+SDbDARH5gPF1XBWeFmhO3t/moYYPYtK9QGtSVfy3xbIvxwDPGNfl3FE
+CzQ+zcQDTC+TBXfrmFS/gjLiLqnQ7sSu5J1qro775rNapNhoIH2CoiUgDk4HHCbz
+uGEPvP+MgtOAHZZt5BCOeKFffOaNQA==
+=LwHY
 -----END PGP SIGNATURE-----
 
---j5pSowMF1RznSZGlCiEpo0AL1G951df4M--
+--D9yXtwD7gGzdg2h5hIuwn2r8uxzLi9QfJ--
 
---===============0575501850==
+--===============1682161959==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -242,4 +339,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0575501850==--
+--===============1682161959==--
