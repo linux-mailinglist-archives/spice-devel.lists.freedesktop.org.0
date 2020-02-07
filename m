@@ -2,40 +2,50 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1C7F155A76
-	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 16:15:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD587155A75
+	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 16:15:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 889546E093;
-	Fri,  7 Feb 2020 15:15:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B863F6E091;
+	Fri,  7 Feb 2020 15:15:05 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 169796FCAF;
- Fri,  7 Feb 2020 14:00:35 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 07 Feb 2020 06:00:34 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,413,1574150400"; d="scan'208";a="345915846"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by fmsmga001.fm.intel.com with SMTP; 07 Feb 2020 06:00:31 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Fri, 07 Feb 2020 16:00:30 +0200
-Date: Fri, 7 Feb 2020 16:00:30 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20200207140030.GY13686@intel.com>
+X-Greylist: delayed 558 seconds by postgrey-1.36 at gabe;
+ Fri, 07 Feb 2020 14:46:17 UTC
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C34846FCDF
+ for <spice-devel@lists.freedesktop.org>; Fri,  7 Feb 2020 14:46:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds201912;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=66b7XSZ892In4dZ1AtrKGUvL65iL8vLWanZ6tyoqMyM=; b=fDjZZd5Te5Rl4u+13tgU7fo1yE
+ t0hdo1JSajVqq/0GyXpgPjWr34xG0ck/qHXuXiA7BaXEPZxkZZvu9kz5/vtschpCjAz7mRdZ4JU5e
+ /t4JvBnn+8BAMawK/EUP+Vg1Ttqw1XX/RAYzuW5B5QxNmYPcryDzcYiYufL2aprt5aRlaTwFRXRuh
+ sM1UBRz6YgGBCjioJvSrIzeD7TRHbIGNodRufiOFereFgTYpnypEcRxgkzhu+SEhiqA+vFvgWfxux
+ GmOh6bF5tlYq2gGIvRAOvc4T2fjbsWcNlW0SZJEIwxKsVgLgGQfdyjIfn3nlg12KrAhyWuEviug7A
+ hZq/uDJg==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:54428
+ helo=[192.168.10.61])
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1j04kb-0006FI-2F; Fri, 07 Feb 2020 15:36:57 +0100
+To: Thomas Zimmermann <tzimmermann@suse.de>, airlied@linux.ie,
+ daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ kraxel@redhat.com, sam@ravnborg.org, alexander.deucher@amd.com,
+ emil.velikov@collabora.com
 References: <20200207084135.4524-1-tzimmermann@suse.de>
  <20200207084135.4524-3-tzimmermann@suse.de>
- <20200207133720.GZ43062@phenom.ffwll.local>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Message-ID: <e43dcf9c-e228-dd01-2e55-5ad75804cf79@tronnes.org>
+Date: Fri, 7 Feb 2020 15:36:49 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200207133720.GZ43062@phenom.ffwll.local>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20200207084135.4524-3-tzimmermann@suse.de>
 X-Mailman-Approved-At: Fri, 07 Feb 2020 15:15:04 +0000
 Subject: Re: [Spice-devel] [PATCH 2/6] drm: Add drm_simple_encoder_{init,
  create}()
@@ -50,43 +60,92 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, kraxel@redhat.com,
- Thomas Zimmermann <tzimmermann@suse.de>, alexander.deucher@amd.com,
- spice-devel@lists.freedesktop.org, sam@ravnborg.org,
- emil.velikov@collabora.com
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, Feb 07, 2020 at 02:37:20PM +0100, Daniel Vetter wrote:
-> On Fri, Feb 07, 2020 at 09:41:31AM +0100, Thomas Zimmermann wrote:
-> > The simple-encoder helpers initialize an encoder with an empty
-> > implementation. This covers the requirements of most of the existing
-> > DRM drivers. A call to drm_simple_encoder_create() allocates and
-> > initializes an encoder instance, a call to drm_simple_encoder_init()
-> > initializes a pre-allocated instance.
-> > =
 
-> > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> =
 
-> This has quick a bit midlayer taste to it ... I think having this as a
-> helper would be cleaner ...
-> =
+Den 07.02.2020 09.41, skrev Thomas Zimmermann:
+> The simple-encoder helpers initialize an encoder with an empty
+> implementation. This covers the requirements of most of the existing
+> DRM drivers. A call to drm_simple_encoder_create() allocates and
+> initializes an encoder instance, a call to drm_simple_encoder_init()
+> initializes a pre-allocated instance.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/gpu/drm/drm_encoder.c | 116 ++++++++++++++++++++++++++++++++++
+>  include/drm/drm_encoder.h     |  10 +++
+>  2 files changed, 126 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/drm_encoder.c b/drivers/gpu/drm/drm_encoder.c
 
-> The other bit is drm_encoder->possible_crtcs. If we do create a helper for
-> these, lets at least try to make them not suck too badly :-) Otherwise I
-> guess it would be time to officially document what exactly possible_crtcs
-> =3D=3D 0 means from an uabi pov.
+<snip>
 
-I had some improvements for this stuff. Just re-sent the remainder.
+> +/**
+> + * drm_simple_encoder_create - Allocate and initialize an encoder
+> + * @dev: drm device
+> + * @encoder_type: user visible type of the encoder
+> + * @name: printf style format string for the encoder name, or NULL for
+> + *        default name
+> + *
+> + * Allocates and initialises an encoder that has no further functionality. The
+> + * encoder will be released automatically.
+> + *
+> + * Returns:
+> + * The encoder on success, a pointer-encoder error code on failure.
+> + */
+> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,
+> +					      int encoder_type,
+> +					      const char *name, ...)
+> +{
+> +	char *namestr = NULL;
+> +	struct drm_encoder *encoder;
+> +	int ret;
+> +
+> +	encoder = devm_kzalloc(dev->dev, sizeof(*encoder), GFP_KERNEL);
 
--- =
+The encoder can outlive the devres if the device is unbound when
+userspace has open fds, so you can't use devm_ here.
 
-Ville Syrj=E4l=E4
-Intel
+Noralf.
+
+> +	if (!encoder)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	if (name) {
+> +		va_list ap;
+> +
+> +		va_start(ap, name);
+> +		namestr = kvasprintf(GFP_KERNEL, name, ap);
+> +		va_end(ap);
+> +		if (!namestr) {
+> +			ret = -ENOMEM;
+> +			goto err_devm_kfree;
+> +		}
+> +	}
+> +
+> +	ret = __drm_encoder_init(dev, encoder,
+> +				 &drm_simple_encoder_funcs_destroy,
+> +				 encoder_type, namestr);
+> +	if (ret)
+> +		goto err_kfree;
+> +
+> +	return encoder;
+> +
+> +err_kfree:
+> +	if (name)
+> +		kfree(namestr);
+> +err_devm_kfree:
+> +	devm_kfree(dev->dev, encoder);
+> +	return ERR_PTR(ret);
+> +}
+> +EXPORT_SYMBOL(drm_simple_encoder_create);
+> +
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
