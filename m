@@ -1,60 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43E6D155821
-	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 14:08:30 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B129A1558B2
+	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 14:44:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C234E6FC79;
-	Fri,  7 Feb 2020 13:08:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 280786EAC4;
+	Fri,  7 Feb 2020 13:44:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8B23C6FC79
- for <spice-devel@lists.freedesktop.org>; Fri,  7 Feb 2020 13:08:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581080906;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=a5Ya+qI8IB2POyrzbBy/dE/8qbymCch8XL5gRsileW8=;
- b=J5iGibRC4NRIymQF4SNWEY6uuMdRhs+YPYkuKBWaQFFas7lHok7Pydb8lv1iLWKbKafXcX
- hu0yO0hKAZeclFdOcASOcwmfTszIettW2v/EstKgRBgP1Xb9ZnUtWA9UKVMhQs0M7RaFgO
- 0A2Drw2x70brmsOHdkL4KMspHBlcn1s=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-413-C-aIGr33ObGQuQFArBR52g-1; Fri, 07 Feb 2020 08:08:21 -0500
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 68F13800E21;
- Fri,  7 Feb 2020 13:08:20 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 5F2B01001B28;
- Fri,  7 Feb 2020 13:08:20 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 5293381739;
- Fri,  7 Feb 2020 13:08:20 +0000 (UTC)
-Date: Fri, 7 Feb 2020 08:08:19 -0500 (EST)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: franklin zhou <codeit@live.com>
-Message-ID: <538025878.12477291.1581080899485.JavaMail.zimbra@redhat.com>
-In-Reply-To: <MN2PR06MB59662A5FF2F03BAE5A4130DEB31C0@MN2PR06MB5966.namprd06.prod.outlook.com>
-References: <MN2PR06MB59662A5FF2F03BAE5A4130DEB31C0@MN2PR06MB5966.namprd06.prod.outlook.com>
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
+ [IPv6:2a00:1450:4864:20::444])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6EEC86FC94
+ for <spice-devel@lists.freedesktop.org>; Fri,  7 Feb 2020 13:44:15 +0000 (UTC)
+Received: by mail-wr1-x444.google.com with SMTP id y17so2751266wrh.5
+ for <spice-devel@lists.freedesktop.org>; Fri, 07 Feb 2020 05:44:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=m9Hn1RaUXFooKHwmRZTfAKZ274VjztClE8pDRYYGw2c=;
+ b=M0PjjdgYCPa6DgxGqO3xxPQ3OX262TSN0UqM6Kqiq8/lumJMhLG+2HPA3bnZvyhpwc
+ CVSO/cXMEAMr+UUk3ef8vaeTxw3+qSrjyvfJWj/sLyvEzrHr1LqWAjHi8Ap3jRrWzagR
+ fWYlOeYeXN31g0NzMnTA5QYYX6ZfrRyNtdkGc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=m9Hn1RaUXFooKHwmRZTfAKZ274VjztClE8pDRYYGw2c=;
+ b=tdi0LfHWx52Yt4E1DnqTHdOx8k+Ck/H6Wak14v9mSFG6TUWnZYupNdQZ0NGTkuTW3V
+ MbzKBtJzRP8pUS+94GmZOq3eLll/8ExHvAunJOGb3tv7n26H7w1/aOVCFQyqfYeJhWt5
+ Epz76H4ppv3NsMAf5nBckGlhoIvrYt1FyqXYuORypEgujRjnEz46qwDxYSbsKenw5heU
+ ZhqvNwTRs8JOsVXc/d8nIboiXrRDoJwNKqVY51JKvYvO29rgGQYkXl+aw+TLJvJCtLdR
+ zkEfqa+lrkzAPjEpdVbixgjgFJAtrEbESzdToWT5FdAbgazlAD4W5UXOgySFxnw17WOU
+ V9dg==
+X-Gm-Message-State: APjAAAXoENBUqFmihpyRejKnicVFuyEKUleMiIt5wHsOFn8tWnZEYX6J
+ fDHQWCTUqIwjnyI5F5AKySezSA==
+X-Google-Smtp-Source: APXvYqwJ37XAlNKHJ3NdiUGsMdK5N0tuoJlJ5hgMTD925OdVra68xNS96qXdlwiN2Ssrdy6rDTdM8Q==
+X-Received: by 2002:adf:d4ca:: with SMTP id w10mr5065348wrk.53.1581083054017; 
+ Fri, 07 Feb 2020 05:44:14 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id g25sm16762868wmh.3.2020.02.07.05.44.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Feb 2020 05:44:13 -0800 (PST)
+Date: Fri, 7 Feb 2020 14:44:11 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Message-ID: <20200207134411.GB43062@phenom.ffwll.local>
+Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
+ dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, 
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20200207121405.25895-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.17, 10.4.195.8]
-Thread-Topic: how disable  auto enter last user windows desktop
-Thread-Index: AQHV3ZNZ+Y2E9JDNQEi9wDVfqO4viiFLSlA1
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-MC-Unique: C-aIGr33ObGQuQFArBR52g-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] how disable auto enter last user windows desktop
+Content-Disposition: inline
+In-Reply-To: <20200207121405.25895-1-kraxel@redhat.com>
+X-Operating-System: Linux phenom 5.3.0-3-amd64 
+Subject: Re: [Spice-devel] [PATCH] drm/qxl: add drm_driver.release callback.
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,26 +71,119 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiBoaSwgYWxsLAoKPiBXaGVuIHVzZSBzcGljZSB3aW5kb3dzIHZtLCB3aGVuIEkgZmlyc3QgY29u
-bmVjdCBzcGljZTovL3h4eC54eHgueHh4OjU5MDEsCj4gd2luZG93cyBuZWVkIHVzZXIgbmFtZSBh
-bmQgcGFzc3dvcmQgdG8gbG9naW4sIHRoZW4gSSBpbnB1dCB1c2VyIG5hbWUgYW5kCj4gcGFzc3dv
-cmQgYW5kIGxvZ29u44CCCj4gYnV0IEkgZGlzY29ubmVjdCBhbmQgdGhlbiBjb25uZWN0IHNwaWNl
-Oi8veHh4Lnh4eC54eHg6NTkwMSBhZ2FpbiwgdGhlbiBpdAo+IGRvZXMgbm90IG5lZWQgdXNlciBu
-YW1lIGFuZCBwYXNzd29yZCwKPiBpdCBkaXJlY3RseSBjb25uZWN0IG15IGRlc2t0b3AsCj4gaG93
-IHRvIGRpc2FibGUgdGhlIGZ1bmN0aW9uIHRoYXQgYXV0byBlbnRlciBsYXN0IHVzZXIgc2Vzc2lv
-biA/CgpJJ20gbm90IGF3YXJlIG9mIHN1Y2ggZmVhdHVyZS4KQXJlIHlvdSB0YWxraW5nIGFib3V0
-IFNQSUNFIHBhc3N3b3JkIG9yIFdpbmRvd3Mgb25lPwpJZiB5b3UgYXJlIHJlZmVycmluZyB0byBX
-aW5kb3dzIHNpbXBseSBpZiB5b3UgZG9uJ3QgbG9jayB5b3VyCm1hY2hpbmUgdGhlIG1hY2hpbmUg
-c3RheXMgdW5sb2NrZWQsIGl0J3MgbGlrZSBsZWF2aW5nIHRoZSBwaHlzaWNhbApkZXNrdG9wIHdp
-dGggdGhlIHBjIHVubG9ja2VkIGFuZCBzb21lb25lIGVsc2UgY2FtZSBhbmQgdXNlIHRoZQptYWNo
-aW5lLiBJZiB5b3Ugd2FudCB0byBhdm9pZCB0aGF0IEkgdGhpbmsgd291bGQgYmUgZ29vZCBhIFJG
-RS4KCkZyZWRpYW5vCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0
-b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3Bp
-Y2UtZGV2ZWwK
+On Fri, Feb 07, 2020 at 01:14:05PM +0100, Gerd Hoffmann wrote:
+> Move final cleanups to qxl_drm_release() callback.
+> Add drm_atomic_helper_shutdown() call to qxl_pci_remove().
+> 
+> Reorder calls in qxl_device_fini().  Cleaning up gem & ttm
+> might trigger qxl commands, so we should do that before
+> releaseing command rings.
+> 
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/qxl/qxl_drv.c | 21 ++++++++++++++-------
+>  drivers/gpu/drm/qxl/qxl_kms.c |  8 ++++----
+>  2 files changed, 18 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+> index 1d601f57a6ba..8044363ba0f2 100644
+> --- a/drivers/gpu/drm/qxl/qxl_drv.c
+> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+> @@ -34,6 +34,7 @@
+>  #include <linux/pci.h>
+>  
+>  #include <drm/drm.h>
+> +#include <drm/drm_atomic_helper.h>
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_file.h>
+>  #include <drm/drm_modeset_helper.h>
+> @@ -132,21 +133,25 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+>  	return ret;
+>  }
+>  
+> +static void qxl_drm_release(struct drm_device *dev)
+> +{
+> +	struct qxl_device *qdev = dev->dev_private;
+> +
+> +	qxl_modeset_fini(qdev);
+> +	qxl_device_fini(qdev);
+
+Same here, there's a few iounmap and io_mapping_free which I think should
+be in the pci_remove hook.
+-Daniel
+
+> +	dev->dev_private = NULL;
+> +	kfree(qdev);
+> +}
+> +
+>  static void
+>  qxl_pci_remove(struct pci_dev *pdev)
+>  {
+>  	struct drm_device *dev = pci_get_drvdata(pdev);
+> -	struct qxl_device *qdev = dev->dev_private;
+>  
+>  	drm_dev_unregister(dev);
+> -
+> -	qxl_modeset_fini(qdev);
+> -	qxl_device_fini(qdev);
+> +	drm_atomic_helper_shutdown(dev);
+>  	if (is_vga(pdev))
+>  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+> -
+> -	dev->dev_private = NULL;
+> -	kfree(qdev);
+>  	drm_dev_put(dev);
+>  }
+>  
+> @@ -279,6 +284,8 @@ static struct drm_driver qxl_driver = {
+>  	.major = 0,
+>  	.minor = 1,
+>  	.patchlevel = 0,
+> +
+> +	.release = qxl_drm_release,
+>  };
+>  
+>  static int __init qxl_init(void)
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+> index bfc1631093e9..70b20ee4741a 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -299,12 +299,12 @@ void qxl_device_fini(struct qxl_device *qdev)
+>  {
+>  	qxl_bo_unref(&qdev->current_release_bo[0]);
+>  	qxl_bo_unref(&qdev->current_release_bo[1]);
+> -	flush_work(&qdev->gc_work);
+> -	qxl_ring_free(qdev->command_ring);
+> -	qxl_ring_free(qdev->cursor_ring);
+> -	qxl_ring_free(qdev->release_ring);
+>  	qxl_gem_fini(qdev);
+>  	qxl_bo_fini(qdev);
+> +	flush_work(&qdev->gc_work);
+> +	qxl_ring_free(qdev->command_ring);
+> +	qxl_ring_free(qdev->cursor_ring);
+> +	qxl_ring_free(qdev->release_ring);
+>  	io_mapping_free(qdev->surface_mapping);
+>  	io_mapping_free(qdev->vram_mapping);
+>  	iounmap(qdev->ram_header);
+> -- 
+> 2.18.1
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
