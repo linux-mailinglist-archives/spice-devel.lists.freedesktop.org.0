@@ -1,33 +1,33 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8322A155411
-	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 09:56:04 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63BAF155412
+	for <lists+spice-devel@lfdr.de>; Fri,  7 Feb 2020 09:56:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4495B6FBCF;
+	by gabe.freedesktop.org (Postfix) with ESMTP id A8B586FBD0;
 	Fri,  7 Feb 2020 08:55:58 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A9EF6FBC1;
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 34E846FBC0;
  Fri,  7 Feb 2020 08:41:42 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id C4FC0B149;
- Fri,  7 Feb 2020 08:41:39 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 2C5EFB019;
+ Fri,  7 Feb 2020 08:41:40 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
  mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
  sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
-Date: Fri,  7 Feb 2020 09:41:34 +0100
-Message-Id: <20200207084135.4524-6-tzimmermann@suse.de>
+Date: Fri,  7 Feb 2020 09:41:35 +0100
+Message-Id: <20200207084135.4524-7-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200207084135.4524-1-tzimmermann@suse.de>
 References: <20200207084135.4524-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 07 Feb 2020 08:55:57 +0000
-Subject: [Spice-devel] [PATCH 5/6] drm/qxl: Use simple encoder
+Subject: [Spice-devel] [PATCH 6/6] drm/simple-pipe: Use simple encoder
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,62 +46,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-The qxl driver uses an empty implementation for its encoder. Replace
-the code with the generic simple encoder.
+The simple-pipe helpers use an empty implementation for the encoder.
+Replace the code with the generic simple encoder.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/qxl/qxl_display.c | 17 ++---------------
- 1 file changed, 2 insertions(+), 15 deletions(-)
+ drivers/gpu/drm/drm_simple_kms_helper.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index ab4f8dd00400..fc71f7d9436a 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -1007,9 +1007,6 @@ static struct drm_encoder *qxl_best_encoder(struct drm_connector *connector)
- 	return &qxl_output->enc;
- }
+diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/drm/drm_simple_kms_helper.c
+index 15fb516ae2d8..e16606b3ee20 100644
+--- a/drivers/gpu/drm/drm_simple_kms_helper.c
++++ b/drivers/gpu/drm/drm_simple_kms_helper.c
+@@ -28,10 +28,6 @@
+  * encoder drivers.
+  */
  
--static const struct drm_encoder_helper_funcs qxl_enc_helper_funcs = {
+-static const struct drm_encoder_funcs drm_simple_kms_encoder_funcs = {
+-	.destroy = drm_encoder_cleanup,
 -};
 -
- static const struct drm_connector_helper_funcs qxl_connector_helper_funcs = {
- 	.get_modes = qxl_conn_get_modes,
- 	.mode_valid = qxl_conn_mode_valid,
-@@ -1059,15 +1056,6 @@ static const struct drm_connector_funcs qxl_connector_funcs = {
- 	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
- };
+ static enum drm_mode_status
+ drm_simple_kms_crtc_mode_valid(struct drm_crtc *crtc,
+ 			       const struct drm_display_mode *mode)
+@@ -288,8 +284,8 @@ int drm_simple_display_pipe_init(struct drm_device *dev,
+ 		return ret;
  
--static void qxl_enc_destroy(struct drm_encoder *encoder)
--{
--	drm_encoder_cleanup(encoder);
--}
--
--static const struct drm_encoder_funcs qxl_enc_funcs = {
--	.destroy = qxl_enc_destroy,
--};
--
- static int qxl_mode_create_hotplug_mode_update_property(struct qxl_device *qdev)
- {
- 	if (qdev->hotplug_mode_update_property)
-@@ -1098,15 +1086,14 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
- 	drm_connector_init(dev, &qxl_output->base,
- 			   &qxl_connector_funcs, DRM_MODE_CONNECTOR_VIRTUAL);
+ 	encoder->possible_crtcs = drm_crtc_mask(crtc);
+-	ret = drm_encoder_init(dev, encoder, &drm_simple_kms_encoder_funcs,
+-			       DRM_MODE_ENCODER_NONE, NULL);
++	ret = drm_simple_encoder_init(dev, encoder, DRM_MODE_ENCODER_NONE,
++				      NULL);
+ 	if (ret || !connector)
+ 		return ret;
  
--	drm_encoder_init(dev, &qxl_output->enc, &qxl_enc_funcs,
--			 DRM_MODE_ENCODER_VIRTUAL, NULL);
-+	drm_simple_encoder_init(dev, qxl_output->enc, DRM_MODE_ENCODER_VIRTUAL,
-+				NULL);
- 
- 	/* we get HPD via client monitors config */
- 	connector->polled = DRM_CONNECTOR_POLL_HPD;
- 	encoder->possible_crtcs = 1 << num_output;
- 	drm_connector_attach_encoder(&qxl_output->base,
- 					  &qxl_output->enc);
--	drm_encoder_helper_add(encoder, &qxl_enc_helper_funcs);
- 	drm_connector_helper_add(connector, &qxl_connector_helper_funcs);
- 
- 	drm_object_attach_property(&connector->base,
 -- 
 2.25.0
 
