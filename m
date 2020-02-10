@@ -1,65 +1,52 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1D00157E31
-	for <lists+spice-devel@lfdr.de>; Mon, 10 Feb 2020 16:06:40 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7670C158046
+	for <lists+spice-devel@lfdr.de>; Mon, 10 Feb 2020 17:57:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 224646EC74;
-	Mon, 10 Feb 2020 15:06:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 60D3C6ECC7;
+	Mon, 10 Feb 2020 16:57:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C5516EC74
- for <spice-devel@lists.freedesktop.org>; Mon, 10 Feb 2020 15:06:37 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id a9so731278wmj.3
- for <spice-devel@lists.freedesktop.org>; Mon, 10 Feb 2020 07:06:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=SZWw5BNnqsxO+B1PSnFYos2X0WTIUEc5MmcB9KkYh80=;
- b=W0V0l0jrXQHgBSOItUTUJwRpOtkv/Q/smtmpPUJS47OOLZBD9qbyJ8CY7KClmjxKxE
- OFc5xuUJTNI4H//VPHEy4UoWZp7QD8sRKpumXKABiIZpcpZIkyHN4QhqxByZ2lH+sKZu
- XV3LNb2Q4Jr9z+7WNawVmGuKpSgkkjfr0VcRE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=SZWw5BNnqsxO+B1PSnFYos2X0WTIUEc5MmcB9KkYh80=;
- b=Z56EtUE7ilPwZdX6NWv+p3V8Cu7bgWyGnFnM7U3B7sg/vPmXiv7KfIYwGldROm7S5i
- SC/e/TZTky/FxH4wJpNLHBbFIaXa+c7LXHTyGc5r3Gw9/dlaTYxeKfON+iz9jhsYJyjH
- rDiSSczF9Gfhg/EbsM/npYEVI1fqlfs/MgVyLAaCeiPtKSBO4hUg5obDxMuMICEqDNma
- 31CX6OmyVq154bYGFUWqiij6LEgtCFbJXjTPtIbNzkMPga9Jmm/NzOElrth8ZtsRLM3c
- G9e57GncA+t03hk3GBwa9Tz7t1Y8wWcEBX42WOFsxrp1wDjrE/2Xj50cypYyX1JRaOSl
- +Ziw==
-X-Gm-Message-State: APjAAAXlsumvoBX7nusmZN1pZxr1d2RxzbfGyEKmb8TsDZ8zL5iMXWP/
- fsJUFCZlsolIJmcBo7Qrx5RcaA==
-X-Google-Smtp-Source: APXvYqzYMP69IToA5/mmhtOboZyOY6hCkleSPGfnRYobetT8q7zeS4pAYMffcDEcpwKzvUZc8Wsx2Q==
-X-Received: by 2002:a1c:44d:: with SMTP id 74mr16475365wme.53.1581347195749;
- Mon, 10 Feb 2020 07:06:35 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id t13sm935403wrw.19.2020.02.10.07.06.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2020 07:06:35 -0800 (PST)
-Date: Mon, 10 Feb 2020 16:06:33 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Message-ID: <20200210150633.GS43062@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- David Airlie <airlied@linux.ie>,
+Received: from smtp.domeneshop.no (smtp.domeneshop.no
+ [IPv6:2a01:5b40:0:3005::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D6BFD6ECC7;
+ Mon, 10 Feb 2020 16:57:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+ ; s=ds201912;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=T30a/zt6Cn6nKQ6fTutzYa0Woqo49baFfIQ5xetTNbg=; b=KbA7NFnA+Iak9HzGODGtmI67nV
+ zzWy8XAZ9IjcYQRS6sy37wHh8BxJ8JhZ9A2PGV1auv5X6GtsNUHCJa5jkW2DvlY2oI0eRKlRmxucl
+ G6kNV9elUgofZHB+p5/sgWD4ApVnpjZXnadqFsKBFMM5Wdc/a2wWvUaT8XesBblwgXrcN5czw5Nmm
+ /m6RlptS5QtiMl5ZiYQp+A6yMtN4Rmh6w4AU8vaLyOub9AeUyfzCdfeuuO0SZIZerz1HyFwul8XzW
+ ++EX4xPdaSFMXi6+38U5TbzMHIE2P9y87XwDJuBsVSrKY5aysVbbk0s3VcXEMoU+wBnIt0juJGQcZ
+ OBzGCqnw==;
+Received: from 211.81-166-168.customer.lyse.net ([81.166.168.211]:61327
+ helo=[192.168.10.61])
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1j1CNX-00079T-R0; Mon, 10 Feb 2020 17:57:47 +0100
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, 
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>
+ <virtualization@lists.linux-foundation.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>
 References: <20200210113753.5614-1-kraxel@redhat.com>
  <20200210113753.5614-3-kraxel@redhat.com>
+ <20200210150633.GS43062@phenom.ffwll.local>
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Message-ID: <f83001ab-8017-0576-69fd-d5f62bda84fd@tronnes.org>
+Date: Mon, 10 Feb 2020 17:57:41 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200210113753.5614-3-kraxel@redhat.com>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
+In-Reply-To: <20200210150633.GS43062@phenom.ffwll.local>
 Subject: Re: [Spice-devel] [PATCH v2 2/2] drm/qxl: add drm_driver.release
  callback.
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -73,113 +60,119 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Mon, Feb 10, 2020 at 12:37:52PM +0100, Gerd Hoffmann wrote:
-> Move final cleanups to qxl_drm_release() callback.
-> Add drm_atomic_helper_shutdown() call to qxl_pci_remove().
+
+
+Den 10.02.2020 16.06, skrev Daniel Vetter:
+> On Mon, Feb 10, 2020 at 12:37:52PM +0100, Gerd Hoffmann wrote:
+>> Move final cleanups to qxl_drm_release() callback.
+>> Add drm_atomic_helper_shutdown() call to qxl_pci_remove().
+>>
+>> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+>> ---
+>>  drivers/gpu/drm/qxl/qxl_drv.c | 26 +++++++++++++++++++-------
+>>  1 file changed, 19 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+>> index 1d601f57a6ba..4fda3f9b29f4 100644
+>> --- a/drivers/gpu/drm/qxl/qxl_drv.c
+>> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+>> @@ -34,6 +34,7 @@
+>>  #include <linux/pci.h>
+>>  
+>>  #include <drm/drm.h>
+>> +#include <drm/drm_atomic_helper.h>
+>>  #include <drm/drm_drv.h>
+>>  #include <drm/drm_file.h>
+>>  #include <drm/drm_modeset_helper.h>
+>> @@ -132,21 +133,30 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+>>  	return ret;
+>>  }
+>>  
+>> +static void qxl_drm_release(struct drm_device *dev)
+>> +{
+>> +	struct qxl_device *qdev = dev->dev_private;
+>> +
+>> +	/*
+>> +	 * TODO: qxl_device_fini() call should be in qxl_pci_remove(),
+>> +	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
+>> +	 * non-trivial though.
+>> +	 */
+>> +	qxl_modeset_fini(qdev);
 > 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  drivers/gpu/drm/qxl/qxl_drv.c | 26 +++++++++++++++++++-------
->  1 file changed, 19 insertions(+), 7 deletions(-)
+> So the drm_mode_config_cleanup call in here belongs in ->release, but the
+> qxl_destroy_monitors_object feels like should be perfectly fine in the
+> remove hook. You might need to sprinkle a few drm_dev_enter/exit around to
+> protect code paths thought.
 > 
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-> index 1d601f57a6ba..4fda3f9b29f4 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> @@ -34,6 +34,7 @@
->  #include <linux/pci.h>
->  
->  #include <drm/drm.h>
-> +#include <drm/drm_atomic_helper.h>
->  #include <drm/drm_drv.h>
->  #include <drm/drm_file.h>
->  #include <drm/drm_modeset_helper.h>
-> @@ -132,21 +133,30 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
->  	return ret;
->  }
->  
-> +static void qxl_drm_release(struct drm_device *dev)
-> +{
-> +	struct qxl_device *qdev = dev->dev_private;
-> +
-> +	/*
-> +	 * TODO: qxl_device_fini() call should be in qxl_pci_remove(),
-> +	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
-> +	 * non-trivial though.
-> +	 */
-> +	qxl_modeset_fini(qdev);
-
-So the drm_mode_config_cleanup call in here belongs in ->release, but the
-qxl_destroy_monitors_object feels like should be perfectly fine in the
-remove hook. You might need to sprinkle a few drm_dev_enter/exit around to
-protect code paths thought.
-
-Aside from this lgtm, for the series
-
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-And up to you whether you want to fix this or not really.
-
-Btw for testing all these patches that add a ->release hook I think it'd
-be good if the drm core checks that drm_device->dev is set to NULL, and
-that we do this in the remove hook. Since that's guaranteed to be gone at
-that point, so anything in ->release that still needs the device is
-broken. Ofc maybe do that check only for drivers which have a ->release
-hook, and we might need a few fixups.
-
-Cheers, Daniel
-
-> +	qxl_device_fini(qdev);
-> +	dev->dev_private = NULL;
-> +	kfree(qdev);
-> +}
-> +
->  static void
->  qxl_pci_remove(struct pci_dev *pdev)
->  {
->  	struct drm_device *dev = pci_get_drvdata(pdev);
-> -	struct qxl_device *qdev = dev->dev_private;
->  
->  	drm_dev_unregister(dev);
-> -
-> -	qxl_modeset_fini(qdev);
-> -	qxl_device_fini(qdev);
-> +	drm_atomic_helper_shutdown(dev);
->  	if (is_vga(pdev))
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
-> -
-> -	dev->dev_private = NULL;
-> -	kfree(qdev);
->  	drm_dev_put(dev);
->  }
->  
-> @@ -279,6 +289,8 @@ static struct drm_driver qxl_driver = {
->  	.major = 0,
->  	.minor = 1,
->  	.patchlevel = 0,
-> +
-> +	.release = qxl_drm_release,
->  };
->  
->  static int __init qxl_init(void)
-> -- 
-> 2.18.1
+> Aside from this lgtm, for the series
+> 
+> Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> 
+> And up to you whether you want to fix this or not really.
+> 
+> Btw for testing all these patches that add a ->release hook I think it'd
+> be good if the drm core checks that drm_device->dev is set to NULL, and
+> that we do this in the remove hook. Since that's guaranteed to be gone at
+> that point, so anything in ->release that still needs the device is
+> broken. Ofc maybe do that check only for drivers which have a ->release
+> hook, and we might need a few fixups.
 > 
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+We take a ref on the parent device in drm_dev_init() and release it in
+drm_dev_fini(). I added this because of the DRM_DEV_* macros we have, to
+protect access to the device struct after it was unregistered. Setting
+drm_device->dev to NULL in drm_dev_unregister() instead will provide the
+same protection I think.
+
+commit 56be6503aab2
+drm/drv: Hold ref on parent device during drm_device lifetime
+
+Noralf.
+
+> Cheers, Daniel
+> 
+>> +	qxl_device_fini(qdev);
+>> +	dev->dev_private = NULL;
+>> +	kfree(qdev);
+>> +}
+>> +
+>>  static void
+>>  qxl_pci_remove(struct pci_dev *pdev)
+>>  {
+>>  	struct drm_device *dev = pci_get_drvdata(pdev);
+>> -	struct qxl_device *qdev = dev->dev_private;
+>>  
+>>  	drm_dev_unregister(dev);
+>> -
+>> -	qxl_modeset_fini(qdev);
+>> -	qxl_device_fini(qdev);
+>> +	drm_atomic_helper_shutdown(dev);
+>>  	if (is_vga(pdev))
+>>  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+>> -
+>> -	dev->dev_private = NULL;
+>> -	kfree(qdev);
+>>  	drm_dev_put(dev);
+>>  }
+>>  
+>> @@ -279,6 +289,8 @@ static struct drm_driver qxl_driver = {
+>>  	.major = 0,
+>>  	.minor = 1,
+>>  	.patchlevel = 0,
+>> +
+>> +	.release = qxl_drm_release,
+>>  };
+>>  
+>>  static int __init qxl_init(void)
+>> -- 
+>> 2.18.1
+>>
+> 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
