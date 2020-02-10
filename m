@@ -1,63 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7985156A1D
-	for <lists+spice-devel@lfdr.de>; Sun,  9 Feb 2020 13:37:59 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6803157393
+	for <lists+spice-devel@lfdr.de>; Mon, 10 Feb 2020 12:38:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C24B06E7D1;
-	Sun,  9 Feb 2020 12:37:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C36C26EC12;
+	Mon, 10 Feb 2020 11:38:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C4AD46E0BE
- for <spice-devel@lists.freedesktop.org>; Fri,  7 Feb 2020 16:26:40 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id p9so3178857wmc.2
- for <spice-devel@lists.freedesktop.org>; Fri, 07 Feb 2020 08:26:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=haJ9tAlqEtnx7C2L3psZq4GEHOiH4KsdX68oj3ToLWE=;
- b=Nl8NttX7KPMtO6O6ZfjDUX74QQA4B09mP24r4JoeDF1CU/J7tt/OENX1asEr+T66MA
- 8+9oFhYSN8sb9zgiYGEBgFdf4HpW2HwsDofWyHRc5d9MDKFny8LPbYwTQFnnX3ZZnSEY
- WXtsE9yhhOyvHJorEeXbNgpg1GpDbIlbI78rw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=haJ9tAlqEtnx7C2L3psZq4GEHOiH4KsdX68oj3ToLWE=;
- b=Nrj9yTF0eL5bEl58yBc3s8ff948sD81UW1nw4f6ZLNpSUrsOwGfAvfsZIAyKhyi7H/
- txwi1RzWaqLzh0QOewTXY6wTi6hhtk7U9rm5QwR7GOfGt17nSqAPjUn0tvMGngqV+Mnm
- Wp2NXYVW7NnkGPO0puwxXcvvadODuTnXpOEslOxYlswqfb0XmhWRmvGVFZT1tICQK7Gc
- 6Xz3cWDbdDxPEYJmoKvPh9y9wUhprpQ84eHY6i3IoxmRE3MYX0Ih6a4QpgVaSQb9iWTX
- fmM2YNHov2IHimAArYNNSafsIMZPDZfEbqROZkKqjdt2Xam3tddroiZrzvBaYO0oRYlW
- Iivw==
-X-Gm-Message-State: APjAAAX5TDxvGIg/vGYFpB3wd+IpxbmYgEeymHJ6TVIl1LDYZJccnqlC
- sPJXCgRyK7Ye3wNx/7wY0r4CjA==
-X-Google-Smtp-Source: APXvYqxKjQLj8Kx4lsLd9s8x0J57nuFgEDcrt/Xk8uQdGfK7PqZtb3jHLx0+8RndjtIakztQIy0RqQ==
-X-Received: by 2002:a1c:b7c4:: with SMTP id h187mr5427628wmf.105.1581092799398; 
- Fri, 07 Feb 2020 08:26:39 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id e22sm4047224wme.45.2020.02.07.08.26.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2020 08:26:38 -0800 (PST)
-Date: Fri, 7 Feb 2020 17:26:36 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20200207162636.GI43062@phenom.ffwll.local>
-References: <20200207084135.4524-1-tzimmermann@suse.de>
- <20200207084135.4524-3-tzimmermann@suse.de>
- <20200207133720.GZ43062@phenom.ffwll.local>
- <86073cfa-496d-53d7-e4c4-9736128109fa@suse.de>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <86073cfa-496d-53d7-e4c4-9736128109fa@suse.de>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
-X-Mailman-Approved-At: Sun, 09 Feb 2020 12:37:54 +0000
-Subject: Re: [Spice-devel] [PATCH 2/6] drm: Add drm_simple_encoder_{init,
- create}()
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 73DBC6EC0C
+ for <spice-devel@lists.freedesktop.org>; Mon, 10 Feb 2020 11:38:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1581334680;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:in-reply-to:in-reply-to:references:references;
+ bh=2ZushtPj0Mf6FOFUwvlbWGwy1n8DO8RBRToVDjY41Ks=;
+ b=AgKtBnK8yszwvl0J6YlHLu1qK2P9xNFtCiH55dfCvDto8UmtvpKCY6FS1i9x4laMz19Ls7
+ koCvWag0ZF5vwmx2ds4/gjiUV8KWjSh7RrzpFyH84Qr9sahDVmw6Zj7FFTiwfJodGKv/bc
+ ZN1EoE/19+6RslQjdGylHcWvD0jtwqE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-375-2_OboHYZMlyNc_yP1VF34w-1; Mon, 10 Feb 2020 06:37:58 -0500
+X-MC-Unique: 2_OboHYZMlyNc_yP1VF34w-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 75B62477;
+ Mon, 10 Feb 2020 11:37:57 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-112.ams2.redhat.com
+ [10.36.116.112])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B29495D9C9;
+ Mon, 10 Feb 2020 11:37:53 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 265949D1E; Mon, 10 Feb 2020 12:37:53 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Date: Mon, 10 Feb 2020 12:37:51 +0100
+Message-Id: <20200210113753.5614-2-kraxel@redhat.com>
+In-Reply-To: <20200210113753.5614-1-kraxel@redhat.com>
+References: <20200210113753.5614-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Subject: [Spice-devel] [PATCH v2 1/2] drm/qxl: reorder calls in
+ qxl_device_fini().
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,247 +57,51 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, kraxel@redhat.com,
- Daniel Vetter <daniel@ffwll.ch>, alexander.deucher@amd.com,
- spice-devel@lists.freedesktop.org, sam@ravnborg.org,
- emil.velikov@collabora.com
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, Feb 07, 2020 at 03:02:00PM +0100, Thomas Zimmermann wrote:
-> Hi
-> =
+Reorder calls in qxl_device_fini().  Cleaning up gem & ttm
+might trigger qxl commands, so we should do that before
+releaseing command rings.
 
-> Am 07.02.20 um 14:37 schrieb Daniel Vetter:
-> > On Fri, Feb 07, 2020 at 09:41:31AM +0100, Thomas Zimmermann wrote:
-> >> The simple-encoder helpers initialize an encoder with an empty
-> >> implementation. This covers the requirements of most of the existing
-> >> DRM drivers. A call to drm_simple_encoder_create() allocates and
-> >> initializes an encoder instance, a call to drm_simple_encoder_init()
-> >> initializes a pre-allocated instance.
-> >>
-> >> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> > =
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_kms.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-> > This has quick a bit midlayer taste to it ... I think having this as a
-> > helper would be cleaner ...
-> =
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index bfc1631093e9..70b20ee4741a 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -299,12 +299,12 @@ void qxl_device_fini(struct qxl_device *qdev)
+ {
+ 	qxl_bo_unref(&qdev->current_release_bo[0]);
+ 	qxl_bo_unref(&qdev->current_release_bo[1]);
+-	flush_work(&qdev->gc_work);
+-	qxl_ring_free(qdev->command_ring);
+-	qxl_ring_free(qdev->cursor_ring);
+-	qxl_ring_free(qdev->release_ring);
+ 	qxl_gem_fini(qdev);
+ 	qxl_bo_fini(qdev);
++	flush_work(&qdev->gc_work);
++	qxl_ring_free(qdev->command_ring);
++	qxl_ring_free(qdev->cursor_ring);
++	qxl_ring_free(qdev->release_ring);
+ 	io_mapping_free(qdev->surface_mapping);
+ 	io_mapping_free(qdev->vram_mapping);
+ 	iounmap(qdev->ram_header);
+-- 
+2.18.1
 
-> How would such a helper roughly look like?
-
-Essentially same code, but stuff the helper into drm-kms-helper.ko, then
-make sure it still works. The separate kernel module makes sure that the
-drm core and helper stuff aren't too close friends with each another :-)
-Essentially like the simple display pipe helpers.
--Daniel
-
-> =
-
-> Best regards
-> Thomas
-> =
-
-> > =
-
-> > The other bit is drm_encoder->possible_crtcs. If we do create a helper =
-for
-> > these, lets at least try to make them not suck too badly :-) Otherwise I
-> > guess it would be time to officially document what exactly possible_crt=
-cs
-> > =3D=3D 0 means from an uabi pov.
-> > -Daniel
-> > =
-
-> >> ---
-> >>  drivers/gpu/drm/drm_encoder.c | 116 ++++++++++++++++++++++++++++++++++
-> >>  include/drm/drm_encoder.h     |  10 +++
-> >>  2 files changed, 126 insertions(+)
-> >>
-> >> diff --git a/drivers/gpu/drm/drm_encoder.c b/drivers/gpu/drm/drm_encod=
-er.c
-> >> index ffe691a1bf34..1a65cab1f310 100644
-> >> --- a/drivers/gpu/drm/drm_encoder.c
-> >> +++ b/drivers/gpu/drm/drm_encoder.c
-> >> @@ -178,6 +178,122 @@ int drm_encoder_init(struct drm_device *dev,
-> >>  }
-> >>  EXPORT_SYMBOL(drm_encoder_init);
-> >>  =
-
-> >> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_cleanu=
-p =3D {
-> >> +	.destroy =3D drm_encoder_cleanup,
-> >> +};
-> >> +
-> >> +/**
-> >> + * drm_simple_encoder_init - Init a preallocated encoder
-> >> + * @dev: drm device
-> >> + * @funcs: callbacks for this encoder
-> >> + * @encoder_type: user visible type of the encoder
-> >> + * @name: printf style format string for the encoder name, or NULL
-> >> + *        for default name
-> >> + *
-> >> + * Initialises a preallocated encoder that has no further functionali=
-ty. The
-> >> + * encoder will be released automatically.
-> >> + *
-> >> + * Returns:
-> >> + * Zero on success, error code on failure.
-> >> + */
-> >> +int drm_simple_encoder_init(struct drm_device *dev,
-> >> +			    struct drm_encoder *encoder,
-> >> +			    int encoder_type, const char *name, ...)
-> >> +{
-> >> +	char *namestr =3D NULL;
-> >> +	int ret;
-> >> +
-> >> +	if (name) {
-> >> +		va_list ap;
-> >> +
-> >> +		va_start(ap, name);
-> >> +		namestr =3D kvasprintf(GFP_KERNEL, name, ap);
-> >> +		va_end(ap);
-> >> +		if (!namestr)
-> >> +			return -ENOMEM;
-> >> +	}
-> >> +
-> >> +	ret =3D __drm_encoder_init(dev, encoder,
-> >> +				 &drm_simple_encoder_funcs_cleanup,
-> >> +				 encoder_type, namestr);
-> >> +	if (ret)
-> >> +		goto err_kfree;
-> >> +
-> >> +	return 0;
-> >> +
-> >> +err_kfree:
-> >> +	if (name)
-> >> +		kfree(namestr);
-> >> +	return ret;
-> >> +}
-> >> +EXPORT_SYMBOL(drm_simple_encoder_init);
-> >> +
-> >> +static void drm_encoder_destroy(struct drm_encoder *encoder)
-> >> +{
-> >> +	struct drm_device *dev =3D encoder->dev;
-> >> +
-> >> +	drm_encoder_cleanup(encoder);
-> >> +	devm_kfree(dev->dev, encoder);
-> >> +}
-> >> +
-> >> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_destro=
-y =3D {
-> >> +	.destroy =3D drm_encoder_destroy,
-> >> +};
-> >> +
-> >> +/**
-> >> + * drm_simple_encoder_create - Allocate and initialize an encoder
-> >> + * @dev: drm device
-> >> + * @encoder_type: user visible type of the encoder
-> >> + * @name: printf style format string for the encoder name, or NULL for
-> >> + *        default name
-> >> + *
-> >> + * Allocates and initialises an encoder that has no further functiona=
-lity. The
-> >> + * encoder will be released automatically.
-> >> + *
-> >> + * Returns:
-> >> + * The encoder on success, a pointer-encoder error code on failure.
-> >> + */
-> >> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,
-> >> +					      int encoder_type,
-> >> +					      const char *name, ...)
-> >> +{
-> >> +	char *namestr =3D NULL;
-> >> +	struct drm_encoder *encoder;
-> >> +	int ret;
-> >> +
-> >> +	encoder =3D devm_kzalloc(dev->dev, sizeof(*encoder), GFP_KERNEL);
-> >> +	if (!encoder)
-> >> +		return ERR_PTR(-ENOMEM);
-> >> +
-> >> +	if (name) {
-> >> +		va_list ap;
-> >> +
-> >> +		va_start(ap, name);
-> >> +		namestr =3D kvasprintf(GFP_KERNEL, name, ap);
-> >> +		va_end(ap);
-> >> +		if (!namestr) {
-> >> +			ret =3D -ENOMEM;
-> >> +			goto err_devm_kfree;
-> >> +		}
-> >> +	}
-> >> +
-> >> +	ret =3D __drm_encoder_init(dev, encoder,
-> >> +				 &drm_simple_encoder_funcs_destroy,
-> >> +				 encoder_type, namestr);
-> >> +	if (ret)
-> >> +		goto err_kfree;
-> >> +
-> >> +	return encoder;
-> >> +
-> >> +err_kfree:
-> >> +	if (name)
-> >> +		kfree(namestr);
-> >> +err_devm_kfree:
-> >> +	devm_kfree(dev->dev, encoder);
-> >> +	return ERR_PTR(ret);
-> >> +}
-> >> +EXPORT_SYMBOL(drm_simple_encoder_create);
-> >> +
-> >>  /**
-> >>   * drm_encoder_cleanup - cleans up an initialised encoder
-> >>   * @encoder: encoder to cleanup
-> >> diff --git a/include/drm/drm_encoder.h b/include/drm/drm_encoder.h
-> >> index 5623994b6e9e..0214f6cf9de6 100644
-> >> --- a/include/drm/drm_encoder.h
-> >> +++ b/include/drm/drm_encoder.h
-> >> @@ -190,6 +190,16 @@ int drm_encoder_init(struct drm_device *dev,
-> >>  		     const struct drm_encoder_funcs *funcs,
-> >>  		     int encoder_type, const char *name, ...);
-> >>  =
-
-> >> +__printf(4, 5)
-> >> +int drm_simple_encoder_init(struct drm_device *dev,
-> >> +			    struct drm_encoder *encoder,
-> >> +			    int encoder_type, const char *name, ...);
-> >> +
-> >> +__printf(3, 4)
-> >> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,
-> >> +					      int encoder_type,
-> >> +					      const char *name, ...);
-> >> +
-> >>  /**
-> >>   * drm_encoder_index - find the index of a registered encoder
-> >>   * @encoder: encoder to find index for
-> >> -- =
-
-> >> 2.25.0
-> >>
-> > =
-
-> =
-
-> -- =
-
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
-> (HRB 36809, AG N=FCrnberg)
-> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
-> =
-
-
-
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
