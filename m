@@ -2,42 +2,42 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89A85160DF8
-	for <lists+spice-devel@lfdr.de>; Mon, 17 Feb 2020 10:05:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B96D160DF6
+	for <lists+spice-devel@lfdr.de>; Mon, 17 Feb 2020 10:05:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 498FC6E8BE;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 30DAC6E8BD;
 	Mon, 17 Feb 2020 09:05:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1268F6F96C;
- Fri, 14 Feb 2020 15:49:04 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 15BBC6FA1B;
+ Fri, 14 Feb 2020 16:01:57 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0D24A22314;
- Fri, 14 Feb 2020 15:49:02 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 02C552082F;
+ Fri, 14 Feb 2020 16:01:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581695343;
+ s=default; t=1581696116;
  bh=4qMPwk3Z+A8sUjt+dx/THCCgEBKZVpubcsBJndD38Pg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=g2KKcGG8aouDdwiVa4Cq4Q2IpWAhxBE0GhcQySkXlDs+/SPJzFRVHsegKYugiC7fr
- 830q8VCwiJBoff6Jf+g86q1nBvaOEnn4g4iiDcpBFlvRdj//n5l6WHf9KJln3QX7y4
- XdFBX9sutMxiwJJ2Eo4T+SdlgFgnDwJCYwUW9RfQ=
+ b=YEujC+0ozIrwbD3xwHjs1BnkO4v+fPNEbOTGG1iY0+ABU0vFm2sa3zIMBbuWQdzbN
+ E5E/0EoTcNszv5ChFakO33leT5KFFUWvnPCEPatFhz4geSgQxyjshvq+sJoAuTm4up
+ nJ/h1gm0g6MrKjncmz8ZGRgVVJXW2CLlahz99s3Q=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 10:39:59 -0500
-Message-Id: <20200214154854.6746-7-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 10:54:15 -0500
+Message-Id: <20200214160149.11681-5-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
-References: <20200214154854.6746-1-sashal@kernel.org>
+In-Reply-To: <20200214160149.11681-1-sashal@kernel.org>
+References: <20200214160149.11681-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Mailman-Approved-At: Mon, 17 Feb 2020 09:05:24 +0000
-Subject: [Spice-devel] [PATCH AUTOSEL 5.5 007/542] drm/qxl: Complete
+Subject: [Spice-devel] [PATCH AUTOSEL 5.4 005/459] drm/qxl: Complete
  exception handling in qxl_device_init()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
