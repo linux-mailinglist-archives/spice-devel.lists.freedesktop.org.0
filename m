@@ -1,47 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E06D15D89F
-	for <lists+spice-devel@lfdr.de>; Fri, 14 Feb 2020 14:37:01 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DA20160DF7
+	for <lists+spice-devel@lfdr.de>; Mon, 17 Feb 2020 10:05:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 258866E7F5;
-	Fri, 14 Feb 2020 13:36:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 56CBE6E8C2;
+	Mon, 17 Feb 2020 09:05:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E5056E7F1
- for <spice-devel@lists.freedesktop.org>; Fri, 14 Feb 2020 13:36:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581687412;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc; bh=GPmWxWPeWyJ4yanqYjqxsJb9kwmyfMzyZLJQdEXDG7w=;
- b=jUooLahymxccqZnQGbXaolLGHi/pEoqo6Rl9WKKlmLG3gyfw2uzBQc5SbHBAhfTqWxdJbF
- FvRTcWA7dTDSkwN4oUGDNFs+DfHbGuq2lsDHY6RGbPeEnFSAz9LZc8YKXyRyo/Om5WtNub
- HEBApgfY29BH4bVSeBxgT5gjFgXFuHw=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-354-eg9f1bVuMrOagcdCz0u9Aw-1; Fri, 14 Feb 2020 08:36:50 -0500
-X-MC-Unique: eg9f1bVuMrOagcdCz0u9Aw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 875D8107ACCA;
- Fri, 14 Feb 2020 13:36:49 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-117-39.ams2.redhat.com
- [10.36.117.39])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9A2065DD72;
- Fri, 14 Feb 2020 13:36:46 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id D33741747F; Fri, 14 Feb 2020 14:36:45 +0100 (CET)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Date: Fri, 14 Feb 2020 14:36:45 +0100
-Message-Id: <20200214133645.30977-1-kraxel@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Subject: [Spice-devel] [PATCH] drm/qxl: don't take vga ports on rev5+
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 73CF56E3CE
+ for <spice-devel@lists.freedesktop.org>; Fri, 14 Feb 2020 15:07:40 +0000 (UTC)
+Received: by mail-lj1-x22d.google.com with SMTP id q8so11114597ljb.2
+ for <spice-devel@lists.freedesktop.org>; Fri, 14 Feb 2020 07:07:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=gx9/WsPlkzd8ObP0+Em53OsYBaqqzWeynf1pPkdS64M=;
+ b=fIiEYgnAquBB7gVQsV0Fo1yfupZaROV6emUx2WI1yEKWLroY7NM1VKT0fXv3SQ9Pv+
+ cOVZr8Qhr93ba39xOat0CybXJ+38NAAk/LPfKZjryuofuXjq3tTDlSlyYvGYBQrK3xac
+ xgjX6CB+P3gCDbSGG+vICtaZ5BcfQX1TUpmgoIgQIHBsfvMbHBPhnKx4HS6esNp78xaE
+ 4L2a5Fc17kM55nhhpBcSFVpamYm4RSLq58QlhbRr1J5+q9fIWW84aV6Y930pMlR1UQMA
+ DLbVtKqXWnhiAluv0xe+GnqC6tXN7co60bj9dG2nZa635nyfM6LhTph3HM6nWtIllvwf
+ rYOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=gx9/WsPlkzd8ObP0+Em53OsYBaqqzWeynf1pPkdS64M=;
+ b=FwxpaY5prq01eG6j3Y3YEwePmCuzz8MbW4vffHbTnrELt7px6dNF1EYjgDIXC3Qh/L
+ qIrB+d54vZlzRrltju7DlKH5nhjwuHnR58vuZhw3s+icaWhHDjv/QWrE8MmvgpGSHvOM
+ 1Qpi2WUm9Ow8leUap6ZoXKPKZMcKK7IGYOPpbBLpR2UZUKDanJ6NKIUoo4XF6XwSGeNQ
+ AX+8J+yb23cuN5kCtdioRIqcoZD6LRwsLsiKtEIylw/pA1t/zv9HVqQZ7rPO7MqP8vR0
+ kRdSZLaBVqJ9tny5SzxWoGW/4Ym1Sgd35dloliFC43kqoEpCO/zydg0ddiTqkmmPNkII
+ U1vQ==
+X-Gm-Message-State: APjAAAV7O9evXWUnrIKOhIeVrqwLs/WtcEXN/PWOtTI1rZ3twKiHJjN3
+ 0fgAbZFwh+qNGkjZQP7eJDRjbw25BddR4gdXFC+dSU+a
+X-Google-Smtp-Source: APXvYqy6Fdc/n7LsozU20wx3WgDlBHs6IUjtsmTptC8t8hPdPfTN1aG0F39Y3WIl3Rhsed33n4H5aK6PazF5AR1uQgw=
+X-Received: by 2002:a2e:9b05:: with SMTP id u5mr2456668lji.59.1581692858455;
+ Fri, 14 Feb 2020 07:07:38 -0800 (PST)
+MIME-Version: 1.0
+From: ucontacti ss <ucontacti2012@gmail.com>
+Date: Fri, 14 Feb 2020 16:07:27 +0100
+Message-ID: <CAORX2Yfi7RMZvpJEz9A4xOWTMZzne-xa6OqRHy0uMFHSHsFm1Q@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Mon, 17 Feb 2020 09:05:24 +0000
+Subject: [Spice-devel] Spice Display Channel Capabilities
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,63 +57,60 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1440083345=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-qemu 5.0 introduces a new qxl hardware revision 5.  Unlike revision 4
-(and below) the device doesn't switch back into vga compatibility mode
-when someone touches the vga ports.  So we don't have to reserve the
-vga ports any more to avoid that happening.
+--===============1440083345==
+Content-Type: multipart/alternative; boundary="000000000000f8d95e059e8a905d"
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/qxl/qxl_drv.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+--000000000000f8d95e059e8a905d
+Content-Type: text/plain; charset="UTF-8"
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 4fda3f9b29f4..afea743989dd 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -93,7 +93,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	if (ret)
- 		goto disable_pci;
- 
--	if (is_vga(pdev)) {
-+	if (is_vga(pdev) && pdev->revision < 5) {
- 		ret = vga_get_interruptible(pdev, VGA_RSRC_LEGACY_IO);
- 		if (ret) {
- 			DRM_ERROR("can't get legacy vga ioports\n");
-@@ -124,7 +124,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- unload:
- 	qxl_device_fini(qdev);
- put_vga:
--	if (is_vga(pdev))
-+	if (is_vga(pdev) && pdev->revision < 5)
- 		vga_put(pdev, VGA_RSRC_LEGACY_IO);
- disable_pci:
- 	pci_disable_device(pdev);
-@@ -155,7 +155,7 @@ qxl_pci_remove(struct pci_dev *pdev)
- 
- 	drm_dev_unregister(dev);
- 	drm_atomic_helper_shutdown(dev);
--	if (is_vga(pdev))
-+	if (is_vga(pdev) && pdev->revision < 5)
- 		vga_put(pdev, VGA_RSRC_LEGACY_IO);
- 	drm_dev_put(dev);
- }
--- 
-2.18.2
+Dear developers.
+
+I have been reproducing spice protocol, (Not using spice-gtk actually). So
+far I have seen some image types and most of the stream types but I was not
+able to use some capabilities.
+First, how to enable Glyph string,
+Second, I only get one rendering message (draw_copy). I want to use full
+capability of Display Channel since it is the bottle neck.
+Las, for image type, how to enable JPEG, JPEG_Alpha, LZ_PLT. (The image
+type request message is a subset of all image types)
+Sorry for the long email.
+
+Best wishes,
+Saleh Daghigh
+
+--000000000000f8d95e059e8a905d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Dear developers. <br></div><div><br></div><div>I have=
+ been reproducing spice protocol, (Not using spice-gtk actually). So far I =
+have seen some image types and most of the stream types but I was not able =
+to use some capabilities.</div><div>First, how to enable Glyph string, <br>=
+</div><div>Second, I only get one rendering message (draw_copy). I want to =
+use full capability of Display Channel since it is the bottle neck.<br></di=
+v><div>Las, for image type, how to enable JPEG, JPEG_Alpha, LZ_PLT. (The im=
+age type request message is a subset of all image types)<br></div><div>Sorr=
+y for the long email.</div><div><br></div><div><div><div dir=3D"ltr" class=
+=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><d=
+iv><div dir=3D"ltr"><div dir=3D"ltr"><div><span style=3D"font-size:12.8px">=
+Best wishes,</span><br></div>Saleh Daghigh</div></div></div></div></div></d=
+iv></div></div>
+
+--000000000000f8d95e059e8a905d--
+
+--===============1440083345==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1440083345==--
