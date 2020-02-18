@@ -2,32 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7431162458
-	for <lists+spice-devel@lfdr.de>; Tue, 18 Feb 2020 11:15:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD5891632AC
+	for <lists+spice-devel@lfdr.de>; Tue, 18 Feb 2020 21:11:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EC0826E9D2;
-	Tue, 18 Feb 2020 10:15:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7C9716EA7B;
+	Tue, 18 Feb 2020 20:11:00 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E9EAB6E9B9;
- Tue, 18 Feb 2020 08:48:23 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id D34B5AE72;
- Tue, 18 Feb 2020 08:48:20 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
- sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
-Date: Tue, 18 Feb 2020 09:48:15 +0100
-Message-Id: <20200218084815.2137-5-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200218084815.2137-1-tzimmermann@suse.de>
-References: <20200218084815.2137-1-tzimmermann@suse.de>
-MIME-Version: 1.0
-X-Mailman-Approved-At: Tue, 18 Feb 2020 10:15:32 +0000
-Subject: [Spice-devel] [PATCH v2 4/4] drm/qxl: Use simple encoder
+Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E453D6EA75
+ for <spice-devel@lists.freedesktop.org>; Tue, 18 Feb 2020 20:10:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codeweavers.com; s=6377696661; h=Message-Id:Date:Subject:To:From:Sender:
+ Reply-To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=S4aaQbotD2wC1nAXiuWmpXBUaYsgqtrfZ1PPU/PSy6c=; b=OPFuNo0UB05vTHCnvfFUQtZUFP
+ 3+Py4vclDpG/dDVHmUZmegVehjsyPZdjStDoMH8dG4AUHch0WGztuLoGoK2vwuJyMnwoUx2NDT57s
+ upIha3IGxfMIM8050rTykrP5KOTLA+Mnve2CA24TxoKPAVp/fWg/AMKltPCsK7JbmLS4=;
+Received: from foghorn.codeweavers.com ([50.203.203.242]
+ helo=localhost.localdomain)
+ by mail.codeweavers.com with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.89) (envelope-from <hverbeet@codeweavers.com>)
+ id 1j48w7-0000F4-1k
+ for spice-devel@lists.freedesktop.org; Tue, 18 Feb 2020 13:53:39 -0600
+From: Henri Verbeet <hverbeet@codeweavers.com>
+To: spice-devel@lists.freedesktop.org
+Date: Tue, 18 Feb 2020 13:53:30 -0600
+Message-Id: <20200218195337.4080-1-hverbeet@codeweavers.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [Spice-devel] [PATCH x11spice 1/8] Style: tweak a few spaces to
+ match Spice style.
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,82 +45,49 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-The qxl driver uses an empty implementation for its encoder. Replace
-the code with the generic simple encoder.
+From: Jeremy White <jwhite@codeweavers.com>
 
-v2:
-	* rebase onto new simple-encoder interface
-
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Signed-off-by: Jeremy White <jwhite@codeweavers.com>
+Signed-off-by: Henri Verbeet <hverbeet@codeweavers.com>
 ---
- drivers/gpu/drm/qxl/qxl_display.c | 18 +++---------------
- 1 file changed, 3 insertions(+), 15 deletions(-)
+ spice-video-dummy/src/dummy.h             | 2 +-
+ spice-video-dummy/src/spicedummy_driver.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index ab4f8dd00400..9c0e1add59fb 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -31,6 +31,7 @@
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_plane_helper.h>
- #include <drm/drm_probe_helper.h>
-+#include <drm/drm_simple_kms_helper.h>
+diff --git a/spice-video-dummy/src/dummy.h b/spice-video-dummy/src/dummy.h
+index cb8afc3..d287a59 100644
+--- a/spice-video-dummy/src/dummy.h
++++ b/spice-video-dummy/src/dummy.h
+@@ -56,7 +56,7 @@ typedef struct dummyRec {
+     int cursorFG, cursorBG;
  
- #include "qxl_drv.h"
- #include "qxl_object.h"
-@@ -1007,9 +1008,6 @@ static struct drm_encoder *qxl_best_encoder(struct drm_connector *connector)
- 	return &qxl_output->enc;
- }
+     dummy_colors colors[1024];
+-    Bool (*CreateWindow)();    /* wrapped CreateWindow */
++    Bool (*CreateWindow)();     /* wrapped CreateWindow */
+     Bool prop;
  
--static const struct drm_encoder_helper_funcs qxl_enc_helper_funcs = {
--};
--
- static const struct drm_connector_helper_funcs qxl_connector_helper_funcs = {
- 	.get_modes = qxl_conn_get_modes,
- 	.mode_valid = qxl_conn_mode_valid,
-@@ -1059,15 +1057,6 @@ static const struct drm_connector_funcs qxl_connector_funcs = {
- 	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
- };
+     Bool glamor;
+diff --git a/spice-video-dummy/src/spicedummy_driver.c b/spice-video-dummy/src/spicedummy_driver.c
+index 1dbe87b..1efae47 100644
+--- a/spice-video-dummy/src/spicedummy_driver.c
++++ b/spice-video-dummy/src/spicedummy_driver.c
+@@ -292,7 +292,7 @@ dummy_enable_glamor(ScrnInfoRec * scrn)
+     const char *accel_method;
  
--static void qxl_enc_destroy(struct drm_encoder *encoder)
--{
--	drm_encoder_cleanup(encoder);
--}
--
--static const struct drm_encoder_funcs qxl_enc_funcs = {
--	.destroy = qxl_enc_destroy,
--};
--
- static int qxl_mode_create_hotplug_mode_update_property(struct qxl_device *qdev)
- {
- 	if (qdev->hotplug_mode_update_property)
-@@ -1098,15 +1087,14 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
- 	drm_connector_init(dev, &qxl_output->base,
- 			   &qxl_connector_funcs, DRM_MODE_CONNECTOR_VIRTUAL);
- 
--	drm_encoder_init(dev, &qxl_output->enc, &qxl_enc_funcs,
--			 DRM_MODE_ENCODER_VIRTUAL, NULL);
-+	drm_simple_encoder_init(dev, &qxl_output->enc,
-+				DRM_MODE_ENCODER_VIRTUAL);
- 
- 	/* we get HPD via client monitors config */
- 	connector->polled = DRM_CONNECTOR_POLL_HPD;
- 	encoder->possible_crtcs = 1 << num_output;
- 	drm_connector_attach_encoder(&qxl_output->base,
- 					  &qxl_output->enc);
--	drm_encoder_helper_add(encoder, &qxl_enc_helper_funcs);
- 	drm_connector_helper_add(connector, &qxl_connector_helper_funcs);
- 
- 	drm_object_attach_property(&connector->base,
+     if (((accel_method = xf86GetOptValString(dummy->Options, OPTION_ACCEL_METHOD))
+-        && strcmp(accel_method, "glamor")) || dummy->fd == -1) {
++         && strcmp(accel_method, "glamor")) || dummy->fd == -1) {
+         xf86DrvMsg(scrn->scrnIndex, X_CONFIG, "Glamor disabled.\n");
+         return FALSE;
+     }
 -- 
-2.25.0
+2.11.0
 
 _______________________________________________
 Spice-devel mailing list
