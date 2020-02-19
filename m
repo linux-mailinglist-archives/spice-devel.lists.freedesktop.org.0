@@ -1,39 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4F9F1632AB
-	for <lists+spice-devel@lfdr.de>; Tue, 18 Feb 2020 21:11:04 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0922164174
+	for <lists+spice-devel@lfdr.de>; Wed, 19 Feb 2020 11:22:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3AA676EA75;
-	Tue, 18 Feb 2020 20:11:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2FFB66EB39;
+	Wed, 19 Feb 2020 10:21:47 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7443A6EA75
- for <spice-devel@lists.freedesktop.org>; Tue, 18 Feb 2020 20:10:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codeweavers.com; s=6377696661; h=Message-Id:Date:Subject:To:From:Sender:
- Reply-To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1SLOjaZbQq8qTwt1KexhW23M8OCEsYJYrDGyFz8eH6o=; b=NkTw55AxrkxBwOEP20+3U6nOLv
- 8lJHYAwkojeTXJtH2CZxgL7L5nQu9pZ+gOUBBIUWS2Fnf7EQ8es/3GiDoX2asQRS5741y9XQaKPQz
- YIIuqcqR8L6HSEPiRVAdOzPOg95urN6SSo94p+ICYN5XMF6DbgE9hFm4O9LJ7PNNRhs8=;
-Received: from foghorn.codeweavers.com ([50.203.203.242]
- helo=localhost.localdomain)
- by mail.codeweavers.com with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.89) (envelope-from <hverbeet@codeweavers.com>)
- id 1j48wD-0000F4-1L
- for spice-devel@lists.freedesktop.org; Tue, 18 Feb 2020 13:53:45 -0600
-From: Henri Verbeet <hverbeet@codeweavers.com>
-To: spice-devel@lists.freedesktop.org
-Date: Tue, 18 Feb 2020 13:53:37 -0600
-Message-Id: <20200218195337.4080-8-hverbeet@codeweavers.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [Spice-devel] [PATCH x11spice 8/8] Do not provide a stub
- client_monitors_config in the QXLInterface.
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 65C646EB2E
+ for <spice-devel@lists.freedesktop.org>; Wed, 19 Feb 2020 10:21:42 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id c9so27554268wrw.8
+ for <spice-devel@lists.freedesktop.org>; Wed, 19 Feb 2020 02:21:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=I0KTH0UkBAvrOSijIO4+h7syZUN60LJupdfC6Nj/MjoFy01AeAyKX6hS3qK8A/nkPH
+ Z+KpeWnSVlILc6CexbTKyKQ81hlEAbn+VNwRgcLRub/S6F6bJGGQvb756PmOCyEiI3fQ
+ VFPwmZfHfBlC3fQjWz4WQdz70krfrRUgkgv8s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=A69eDd98xUwFXzkjUPNnnOOoLQzXG4iEJ3Ubc1ZVCE+Mqy5+tSwZ2ADfO+o5m1nIP1
+ 7fbrse6xWiiPGGvSQsHmBgzRHmOqRuvJUGPjVWIbCvGHZMBx5MxuhPuFL1WPI7H5H7O0
+ lYJ/lx4UUI5CeJ8gP+J815YPT6PmiJ4q52sHefV2qaYa5D91wYump54TbtsWUjo5fknp
+ GOqt5lQsB4wY7HFOXS4udjbSzujDa1OyZFB0+xZuAbI7D4Dz5PUEC1wZj2T6Rj4Edp+g
+ hVvAmFdBiedvHHviI7r7mFkEIv2U70wS1DhWYSkN43TBfPx+Bc2Q/U754Yxqkvw9nONr
+ JUFA==
+X-Gm-Message-State: APjAAAW83J3kUuNS8MMdS6RRvv60kKEAayLQ31csOukE8fWnpMosBV+N
+ SL6GxR0XlXUrYT6PHUTeyRWrHg==
+X-Google-Smtp-Source: APXvYqxytavNXoCPEGoURGrJpjzYeGuccrYtk5frvOQ50HTSIjjncj6zXH9yKZW8W08f70W0KjTN+g==
+X-Received: by 2002:a5d:5452:: with SMTP id w18mr33447398wrv.333.1582107701051; 
+ Wed, 19 Feb 2020 02:21:41 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id s23sm2370339wra.15.2020.02.19.02.21.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Feb 2020 02:21:40 -0800 (PST)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Date: Wed, 19 Feb 2020 11:20:38 +0100
+Message-Id: <20200219102122.1607365-9-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20200219102122.1607365-1-daniel.vetter@ffwll.ch>
+References: <20200219102122.1607365-1-daniel.vetter@ffwll.ch>
+MIME-Version: 1.0
+Subject: [Spice-devel] [PATCH 08/52] drm/qxl: Use drmm_add_final_kfree
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -45,70 +62,62 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-MIME-Version: 1.0
+Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-From: Jeremy White <jwhite@codeweavers.com>
+With this we can drop the final kfree from the release function.
 
-Using NULL causes the server to relay the message on to the agent,
-which does a superior job to anything we currently want to do.
-
-Signed-off-by: Jeremy White <jwhite@codeweavers.com>
-Acked-by: Henri Verbeet <hverbeet@codeweavers.com>
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
 ---
- src/spice.c | 27 +++------------------------
- 1 file changed, 3 insertions(+), 24 deletions(-)
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+ drivers/gpu/drm/qxl/qxl_kms.c | 2 ++
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/src/spice.c b/src/spice.c
-index 08a5d09..e9beec0 100644
---- a/src/spice.c
-+++ b/src/spice.c
-@@ -334,29 +334,6 @@ static void update_area_complete(QXLInstance *qin G_GNUC_UNUSED,
-     g_debug("TODO: %s UNIMPLEMENTED!", __func__);
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 4fda3f9b29f4..09102e2efabc 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 */
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+-	dev->dev_private = NULL;
+-	kfree(qdev);
  }
  
--static int client_monitors_config(QXLInstance *qin G_GNUC_UNUSED,
--                                  VDAgentMonitorsConfig *monitors_config)
--{
--    uint i;
--    if (!monitors_config) {
--        /* a NULL is used as a test to see if we support this function */
--        g_debug("%s: NULL monitors_config", __func__);
--        return TRUE;
--    }
--
--    g_debug("%s: [num %d|flags 0x%x]", __func__, monitors_config->num_of_monitors,
--            monitors_config->flags);
--    for (i = 0; i < monitors_config->num_of_monitors; i++)
--        g_debug("  %d:[height %d|width %d|depth %d|x %d|y %d]", i,
--                monitors_config->monitors[i].height,
--                monitors_config->monitors[i].width,
--                monitors_config->monitors[i].depth,
--                monitors_config->monitors[i].x, monitors_config->monitors[i].y);
--
--    g_debug("TODO: %s UNIMPLEMENTED", __func__);
--    return FALSE;
--}
--
- /* spice sends AT scancodes (with a strange escape).
-  * But xf86PostKeyboardEvent expects scancodes. Apparently most of the time
-  * you just need to add MIN_KEYCODE, see xf86-input-keyboard/src/atKeynames
-@@ -545,7 +522,9 @@ void initialize_spice_instance(spice_t *s)
-         .flush_resources = flush_resources,
-         .async_complete = async_complete,
-         .update_area_complete = update_area_complete,
--        .client_monitors_config = client_monitors_config,
-+        .client_monitors_config = NULL,     /* Specifying NULL here causes
-+                                               the better logic in the agent
-+                                               to operate */
-         .set_client_capabilities = NULL,    /* Allowed to be unset */
-     };
+ static void
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 70b20ee4741a..09d7b5f6d172 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -27,6 +27,7 @@
+ #include <linux/pci.h>
  
+ #include <drm/drm_drv.h>
++#include <drm/drm_managed.h>
+ #include <drm/drm_probe_helper.h>
+ 
+ #include "qxl_drv.h"
+@@ -121,6 +122,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	qdev->ddev.pdev = pdev;
+ 	pci_set_drvdata(pdev, &qdev->ddev);
+ 	qdev->ddev.dev_private = qdev;
++	drmm_add_final_kfree(&qdev->ddev, qdev);
+ 
+ 	mutex_init(&qdev->gem.mutex);
+ 	mutex_init(&qdev->update_area_mutex);
 -- 
-2.11.0
+2.24.1
 
 _______________________________________________
 Spice-devel mailing list
