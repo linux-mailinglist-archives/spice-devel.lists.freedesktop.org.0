@@ -2,44 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DF80166470
-	for <lists+spice-devel@lfdr.de>; Thu, 20 Feb 2020 18:23:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 465EA166998
+	for <lists+spice-devel@lfdr.de>; Thu, 20 Feb 2020 22:12:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E90BE6EE12;
-	Thu, 20 Feb 2020 17:23:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F8CA6EE5D;
+	Thu, 20 Feb 2020 21:12:18 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 930 seconds by postgrey-1.36 at gabe;
- Thu, 20 Feb 2020 17:23:11 UTC
-Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2920C6EE12
- for <spice-devel@lists.freedesktop.org>; Thu, 20 Feb 2020 17:23:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codeweavers.com; s=6377696661; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:
- Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9swa799AUMlCZ0Xi+vEeyLRj3J/oascKny0m0kc//n4=; b=eifbRw/DcslqpjuNumNJdE9Hd/
- 6kFM20qKywcTgoDO5rxn6BuxN8dtxP3q7u9LoIAXwxzjTVyPbEnYN9QCzThJKJIiDTpB4upk34+ry
- suSILFAZ22QzAlpJgpg+8T+OVu6xurdHZMHnXNcyGCXzZE7sV5PqksCN67DF1qyXXTGE=;
-Received: from jwhite.mn.codeweavers.com ([10.69.137.101])
- by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.89) (envelope-from <jwhite@codeweavers.com>)
- id 1j4pIb-0004tn-BD
- for spice-devel@lists.freedesktop.org; Thu, 20 Feb 2020 11:07:41 -0600
-To: spice-devel@lists.freedesktop.org
-References: <20200218195337.4080-1-hverbeet@codeweavers.com>
-From: Jeremy White <jwhite@codeweavers.com>
-Message-ID: <b2c08409-fbcd-a678-6069-55028d6e04ca@codeweavers.com>
-Date: Thu, 20 Feb 2020 11:07:41 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DDC436EE4A
+ for <spice-devel@lists.freedesktop.org>; Thu, 20 Feb 2020 18:51:21 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk4.altibox.net (Postfix) with ESMTPS id F22EF80A60;
+ Thu, 20 Feb 2020 19:42:31 +0100 (CET)
+Date: Thu, 20 Feb 2020 19:42:30 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200220184230.GA18993@ravnborg.org>
+References: <20200218084815.2137-1-tzimmermann@suse.de>
+ <20200218084815.2137-2-tzimmermann@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20200218195337.4080-1-hverbeet@codeweavers.com>
-Content-Language: en-US
-Subject: Re: [Spice-devel] [PATCH x11spice 1/8] Style: tweak a few spaces to
- match Spice style.
+Content-Disposition: inline
+In-Reply-To: <20200218084815.2137-2-tzimmermann@suse.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=XpTUx2N9 c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=8nJEP1OIZ-IA:10
+ a=cNTKbyX6Oi9ivAK1HFkA:9 a=wPNLvfGTeEIA:10
+X-Mailman-Approved-At: Thu, 20 Feb 2020 21:12:16 +0000
+Subject: Re: [Spice-devel] [PATCH v2 1/4] drm/simple-kms: Add
+ drm_simple_encoder_{init, create}()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,55 +46,211 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ virtualization@lists.linux-foundation.org, noralf@tronnes.org,
+ kraxel@redhat.com, daniel@ffwll.ch, alexander.deucher@amd.com,
+ spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Series acked and pushed.
+Hi Thomas.
 
-Cheers,
+On Tue, Feb 18, 2020 at 09:48:12AM +0100, Thomas Zimmermann wrote:
+> This patch makes the internal encoder implementation of the simple
+> KMS helpers available to drivers.
+> =
 
-Jeremy
+> These simple-encoder helpers initialize an encoder with an empty
+> implementation. This covers the requirements of most of the existing
+> DRM drivers. A call to drm_simple_encoder_create() allocates and
+> initializes an encoder instance, a call to drm_simple_encoder_init()
+> initializes a pre-allocated instance.
+> =
 
-On 2/18/20 1:53 PM, Henri Verbeet wrote:
-> From: Jeremy White <jwhite@codeweavers.com>
-> 
-> Signed-off-by: Jeremy White <jwhite@codeweavers.com>
-> Signed-off-by: Henri Verbeet <hverbeet@codeweavers.com>
+> v2:
+> 	* move simple encoder to KMS helpers
+> 	* remove name argument; simplifies implementation
+> 	* don't allocate with devm_ interfaces; unsafe with DRM
+> =
+
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 > ---
->   spice-video-dummy/src/dummy.h             | 2 +-
->   spice-video-dummy/src/spicedummy_driver.c | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/spice-video-dummy/src/dummy.h b/spice-video-dummy/src/dummy.h
-> index cb8afc3..d287a59 100644
-> --- a/spice-video-dummy/src/dummy.h
-> +++ b/spice-video-dummy/src/dummy.h
-> @@ -56,7 +56,7 @@ typedef struct dummyRec {
->       int cursorFG, cursorBG;
->   
->       dummy_colors colors[1024];
-> -    Bool (*CreateWindow)();    /* wrapped CreateWindow */
-> +    Bool (*CreateWindow)();     /* wrapped CreateWindow */
->       Bool prop;
->   
->       Bool glamor;
-> diff --git a/spice-video-dummy/src/spicedummy_driver.c b/spice-video-dummy/src/spicedummy_driver.c
-> index 1dbe87b..1efae47 100644
-> --- a/spice-video-dummy/src/spicedummy_driver.c
-> +++ b/spice-video-dummy/src/spicedummy_driver.c
-> @@ -292,7 +292,7 @@ dummy_enable_glamor(ScrnInfoRec * scrn)
->       const char *accel_method;
->   
->       if (((accel_method = xf86GetOptValString(dummy->Options, OPTION_ACCEL_METHOD))
-> -        && strcmp(accel_method, "glamor")) || dummy->fd == -1) {
-> +         && strcmp(accel_method, "glamor")) || dummy->fd == -1) {
->           xf86DrvMsg(scrn->scrnIndex, X_CONFIG, "Glamor disabled.\n");
->           return FALSE;
->       }
-> 
+>  drivers/gpu/drm/drm_simple_kms_helper.c | 83 ++++++++++++++++++++++++-
+>  include/drm/drm_simple_kms_helper.h     |  7 +++
+>  2 files changed, 87 insertions(+), 3 deletions(-)
+> =
 
+> diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/drm/dr=
+m_simple_kms_helper.c
+> index 15fb516ae2d8..745c2f34c42b 100644
+> --- a/drivers/gpu/drm/drm_simple_kms_helper.c
+> +++ b/drivers/gpu/drm/drm_simple_kms_helper.c
+> @@ -26,12 +26,90 @@
+>   * entity. Some flexibility for code reuse is provided through a separat=
+ely
+>   * allocated &drm_connector object and supporting optional &drm_bridge
+>   * encoder drivers.
+> + *
+> + * Many drivers use an encoder with an empty implementation. Such encode=
+rs
+> + * fulfill the minimum requirements of the display pipeline, but don't a=
+dd
+> + * additional functionality. The simple-encoder functions
+> + * drm_simple_encoder_init() and drm_simple_encoder_create() provide an
+> + * appropriate implementation.
+This paragraph reads a bit strange to me - I read this as a
+justification for addding a generic encoded that can be used by exisitg
+drivers.
+
+How about something like this:
+
+Many drivers requires a very simple encoder that only fullfill
+the minimum requirements of the display pipeline and do not add
+any extra functionslity.
+The simple-encoder functions drm_simple_encoder_init() and
+drm_simple_encoder_create() provides an imp=E5lmentation of such
+a simple encoder.
+The simple encoder includes automatically release of resources.
+
+And then leave it to the changelog to tell what should be done in
+existing drivers.
+
+
+
+>   */
+>  =
+
+> -static const struct drm_encoder_funcs drm_simple_kms_encoder_funcs =3D {
+> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_cleanup =
+=3D {
+>  	.destroy =3D drm_encoder_cleanup,
+>  };
+>  =
+
+> +/**
+> + * drm_simple_encoder_init - Initialize a preallocated encoder
+> + * @dev: drm device
+> + * @funcs: callbacks for this encoder
+> + * @encoder_type: user visible type of the encoder
+> + *
+> + * Initialises a preallocated encoder that has no further functionality.=
+ The
+> + * encoder will be released automatically. Settings for possible CRTC and
+> + * clones are left to their initial values. The encoder will be cleaned =
+up
+> + * automatically as part of the mode-setting cleanup.
+> + *
+> + * Also see drm_simple_encoder_create().
+s/Also see/See also/??
+
+
+> + *
+> + * Returns:
+> + * Zero on success, error code on failure.
+> + */
+> +int drm_simple_encoder_init(struct drm_device *dev,
+> +			    struct drm_encoder *encoder,
+> +			    int encoder_type)
+> +{
+> +	return drm_encoder_init(dev, encoder,
+> +				&drm_simple_encoder_funcs_cleanup,
+> +				encoder_type, NULL);
+> +}
+> +EXPORT_SYMBOL(drm_simple_encoder_init);
+> +
+> +static void drm_encoder_destroy(struct drm_encoder *encoder)
+> +{
+> +	drm_encoder_cleanup(encoder);
+> +	kfree(encoder);
+> +}
+> +
+> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_destroy =
+=3D {
+> +	.destroy =3D drm_encoder_destroy,
+> +};
+> +
+> +/**
+> + * drm_simple_encoder_create - Allocate and initialize an encoder
+> + * @dev: drm device
+> + * @encoder_type: user visible type of the encoder
+> + *
+> + * Allocates and initialises an encoder that has no further functionalit=
+y. The
+> + * encoder will be destroyed automatically as part of the mode-setting c=
+leanup.
+> + *
+> + * See drm_simple_encoder_init() for more information.
+> + *
+> + * Returns:
+> + * The encoder on success, a pointer-encoder error code on failure.
+                                pointer-encoded?
+
+
+
+> + */
+> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,
+> +					      int encoder_type)
+> +{
+> +	struct drm_encoder *encoder;
+> +	int ret;
+> +
+> +	encoder =3D kzalloc(sizeof(*encoder), GFP_KERNEL);
+> +	if (!encoder)
+> +		return ERR_PTR(-ENOMEM);
+> +	ret =3D drm_encoder_init(dev, encoder,
+> +			       &drm_simple_encoder_funcs_destroy,
+> +			       encoder_type, NULL);
+> +	if (ret)
+> +		goto err_kfree;
+> +
+> +	return encoder;
+> +
+> +err_kfree:
+> +	kfree(encoder);
+> +	return ERR_PTR(ret);
+> +}
+> +EXPORT_SYMBOL(drm_simple_encoder_create);
+> +
+>  static enum drm_mode_status
+>  drm_simple_kms_crtc_mode_valid(struct drm_crtc *crtc,
+>  			       const struct drm_display_mode *mode)
+> @@ -288,8 +366,7 @@ int drm_simple_display_pipe_init(struct drm_device *d=
+ev,
+>  		return ret;
+>  =
+
+>  	encoder->possible_crtcs =3D drm_crtc_mask(crtc);
+> -	ret =3D drm_encoder_init(dev, encoder, &drm_simple_kms_encoder_funcs,
+> -			       DRM_MODE_ENCODER_NONE, NULL);
+> +	ret =3D drm_simple_encoder_init(dev, encoder, DRM_MODE_ENCODER_NONE);
+>  	if (ret || !connector)
+>  		return ret;
+>  =
+
+> diff --git a/include/drm/drm_simple_kms_helper.h b/include/drm/drm_simple=
+_kms_helper.h
+> index e253ba7bea9d..54d5066d90c7 100644
+> --- a/include/drm/drm_simple_kms_helper.h
+> +++ b/include/drm/drm_simple_kms_helper.h
+> @@ -181,4 +181,11 @@ int drm_simple_display_pipe_init(struct drm_device *=
+dev,
+>  			const uint64_t *format_modifiers,
+>  			struct drm_connector *connector);
+>  =
+
+> +int drm_simple_encoder_init(struct drm_device *dev,
+> +			    struct drm_encoder *encoder,
+> +			    int encoder_type);
+> +
+> +struct drm_encoder *drm_simple_encoder_create(struct drm_device *dev,
+> +					      int encoder_type);
+> +
+>  #endif /* __LINUX_DRM_SIMPLE_KMS_HELPER_H */
+
+	Sam
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
