@@ -2,39 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2724D166996
-	for <lists+spice-devel@lfdr.de>; Thu, 20 Feb 2020 22:12:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51BFC168727
+	for <lists+spice-devel@lfdr.de>; Fri, 21 Feb 2020 20:01:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 869626EE5B;
-	Thu, 20 Feb 2020 21:12:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C59B66E484;
+	Fri, 21 Feb 2020 19:01:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A53D16EE4E;
- Thu, 20 Feb 2020 19:10:50 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1BE2E6E480;
+ Fri, 21 Feb 2020 19:01:02 +0000 (UTC)
 Received: from ravnborg.org (unknown [158.248.194.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by asavdk4.altibox.net (Postfix) with ESMTPS id 585E580A88;
- Thu, 20 Feb 2020 20:10:48 +0100 (CET)
-Date: Thu, 20 Feb 2020 20:10:47 +0100
+ by asavdk4.altibox.net (Postfix) with ESMTPS id A1E9C8066D;
+ Fri, 21 Feb 2020 20:00:58 +0100 (CET)
+Date: Fri, 21 Feb 2020 20:00:57 +0100
 From: Sam Ravnborg <sam@ravnborg.org>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20200220191047.GC20011@ravnborg.org>
+Message-ID: <20200221190057.GA27701@ravnborg.org>
 References: <20200218084815.2137-1-tzimmermann@suse.de>
- <20200218084815.2137-5-tzimmermann@suse.de>
+ <20200218084815.2137-4-tzimmermann@suse.de>
+ <20200220185642.GA20011@ravnborg.org>
+ <3044661c-7552-e685-37b3-88865f97a991@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200218084815.2137-5-tzimmermann@suse.de>
+In-Reply-To: <3044661c-7552-e685-37b3-88865f97a991@suse.de>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-CMAE-Score: 0
 X-CMAE-Analysis: v=2.3 cv=XpTUx2N9 c=1 sm=1 tr=0
  a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
- a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8
- a=wMNakxb3kf32nlJXWIsA:9 a=dtiwrycrY4r5epML:21 a=rIm5waDK4KQ2vjO9:21
- a=CjuIK1q_8ugA:10 a=E9Po1WZjFZOl8hwRPBS3:22
-X-Mailman-Approved-At: Thu, 20 Feb 2020 21:12:16 +0000
-Subject: Re: [Spice-devel] [PATCH v2 4/4] drm/qxl: Use simple encoder
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10
+ a=B5t_mNtYuAhHjmY7mtcA:9 a=CjuIK1q_8ugA:10
+Subject: Re: [Spice-devel] [PATCH v2 3/4] drm/mgag200: Use simple encoder
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,10 +47,9 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- virtualization@lists.linux-foundation.org, noralf@tronnes.org,
- kraxel@redhat.com, daniel@ffwll.ch, alexander.deucher@amd.com,
- spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
+ virtualization@lists.linux-foundation.org, kraxel@redhat.com,
+ alexander.deucher@amd.com, spice-devel@lists.freedesktop.org,
+ emil.velikov@collabora.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
@@ -58,82 +57,65 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 Hi Thomas.
 
-On Tue, Feb 18, 2020 at 09:48:15AM +0100, Thomas Zimmermann wrote:
-> The qxl driver uses an empty implementation for its encoder. Replace
-> the code with the generic simple encoder.
+On Fri, Feb 21, 2020 at 08:48:48AM +0100, Thomas Zimmermann wrote:
+> Hi Sam
 > 
-> v2:
-> 	* rebase onto new simple-encoder interface
+> thanks for reviewing the patch set.
 > 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-I looked at best_encoder - but could not see we could do anything.
-So from browsing the code:
-Acked-by: Sam Ravnborg <sam@ravnborg.org>
+> Am 20.02.20 um 19:56 schrieb Sam Ravnborg:
+> > Hi Thomas.
+> > 
+> > On Tue, Feb 18, 2020 at 09:48:14AM +0100, Thomas Zimmermann wrote:
+> >> The mgag200 driver uses an empty implementation for its encoder. Replace
+> >> the code with the generic simple encoder.
+> >>
+> >> v2:
+> >> 	* rebase onto new simple-encoder interface
+> >>
+> >> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> >> ---
+> >>  drivers/gpu/drm/mgag200/mgag200_drv.h  |  7 ---
+> >>  drivers/gpu/drm/mgag200/mgag200_mode.c | 61 ++------------------------
+> >>  2 files changed, 3 insertions(+), 65 deletions(-)
+> >>
+> >> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mgag200/mgag200_drv.h
+> >> index aa32aad222c2..9bb9e8e14539 100644
+> >> --- a/drivers/gpu/drm/mgag200/mgag200_drv.h
+> >> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
+> >> @@ -95,7 +95,6 @@
+> >>  #define MATROX_DPMS_CLEARED (-1)
+> >>  
+> >>  #define to_mga_crtc(x) container_of(x, struct mga_crtc, base)
+> >> -#define to_mga_encoder(x) container_of(x, struct mga_encoder, base)
+> >>  #define to_mga_connector(x) container_of(x, struct mga_connector, base)
+> >>  
+> >>  struct mga_crtc {
+> >> @@ -110,12 +109,6 @@ struct mga_mode_info {
+> >>  	struct mga_crtc *crtc;
+> >>  };
+> >>  
+> >> -struct mga_encoder {
+> >> -	struct drm_encoder base;
+> >> -	int last_dpms;
+> >> -};
+> >> -
+> >> -
+> >>  struct mga_i2c_chan {
+> >>  	struct i2c_adapter adapter;
+> >>  	struct drm_device *dev;
+> > 
+> > Any particular reason why the drm_encoder is not embedded in struct
+> > mga_device?
+> > 
+> > I found it more elegant - like you did it for ast in the previous patch.
+> 
+> I think I wanted something that uses drm_simple_encoder_create(). But I
+> can change that. The embedded variant is indeed better.
+
+You should consider to drop drm_simple_encoder_create() until there
+is a driver that really needs it.
 
 	Sam
-
-> ---
->  drivers/gpu/drm/qxl/qxl_display.c | 18 +++---------------
->  1 file changed, 3 insertions(+), 15 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-> index ab4f8dd00400..9c0e1add59fb 100644
-> --- a/drivers/gpu/drm/qxl/qxl_display.c
-> +++ b/drivers/gpu/drm/qxl/qxl_display.c
-> @@ -31,6 +31,7 @@
->  #include <drm/drm_gem_framebuffer_helper.h>
->  #include <drm/drm_plane_helper.h>
->  #include <drm/drm_probe_helper.h>
-> +#include <drm/drm_simple_kms_helper.h>
->  
->  #include "qxl_drv.h"
->  #include "qxl_object.h"
-> @@ -1007,9 +1008,6 @@ static struct drm_encoder *qxl_best_encoder(struct drm_connector *connector)
->  	return &qxl_output->enc;
->  }
->  
-> -static const struct drm_encoder_helper_funcs qxl_enc_helper_funcs = {
-> -};
-> -
->  static const struct drm_connector_helper_funcs qxl_connector_helper_funcs = {
->  	.get_modes = qxl_conn_get_modes,
->  	.mode_valid = qxl_conn_mode_valid,
-> @@ -1059,15 +1057,6 @@ static const struct drm_connector_funcs qxl_connector_funcs = {
->  	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
->  };
->  
-> -static void qxl_enc_destroy(struct drm_encoder *encoder)
-> -{
-> -	drm_encoder_cleanup(encoder);
-> -}
-> -
-> -static const struct drm_encoder_funcs qxl_enc_funcs = {
-> -	.destroy = qxl_enc_destroy,
-> -};
-> -
->  static int qxl_mode_create_hotplug_mode_update_property(struct qxl_device *qdev)
->  {
->  	if (qdev->hotplug_mode_update_property)
-> @@ -1098,15 +1087,14 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
->  	drm_connector_init(dev, &qxl_output->base,
->  			   &qxl_connector_funcs, DRM_MODE_CONNECTOR_VIRTUAL);
->  
-> -	drm_encoder_init(dev, &qxl_output->enc, &qxl_enc_funcs,
-> -			 DRM_MODE_ENCODER_VIRTUAL, NULL);
-> +	drm_simple_encoder_init(dev, &qxl_output->enc,
-> +				DRM_MODE_ENCODER_VIRTUAL);
->  
->  	/* we get HPD via client monitors config */
->  	connector->polled = DRM_CONNECTOR_POLL_HPD;
->  	encoder->possible_crtcs = 1 << num_output;
->  	drm_connector_attach_encoder(&qxl_output->base,
->  					  &qxl_output->enc);
-> -	drm_encoder_helper_add(encoder, &qxl_enc_helper_funcs);
->  	drm_connector_helper_add(connector, &qxl_connector_helper_funcs);
->  
->  	drm_object_attach_property(&connector->base,
-> -- 
-> 2.25.0
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
