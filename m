@@ -1,61 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7496C16872C
-	for <lists+spice-devel@lfdr.de>; Fri, 21 Feb 2020 20:03:15 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACC6F16889B
+	for <lists+spice-devel@lfdr.de>; Fri, 21 Feb 2020 22:04:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 55C916F4F1;
-	Fri, 21 Feb 2020 19:03:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5AE0F6F525;
+	Fri, 21 Feb 2020 21:03:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [IPv6:2a00:1450:4864:20::442])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9591B6F4F1
- for <spice-devel@lists.freedesktop.org>; Fri, 21 Feb 2020 19:03:11 +0000 (UTC)
-Received: by mail-wr1-x442.google.com with SMTP id t3so3199438wru.7
- for <spice-devel@lists.freedesktop.org>; Fri, 21 Feb 2020 11:03:11 -0800 (PST)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C24B66F511
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Feb 2020 21:03:38 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id w15so3535928wru.4
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Feb 2020 13:03:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=MJU4yIJ1OecX1mHUKDbEObOQjruIXSQ2ZxBhWrTtUGg=;
- b=Y5e6uRfE6sLzhHzmCheSW3DLIJ4hXkZ9XEIfb0xh9bXuteIGhYNEU0mHcCQLbsRBbq
- gx6pOJEzdbXGegCYo9FUpGTMA6UJUGZtiqKHWkukU4xEn119Y7DYpO9AIq2kYLsaU/MJ
- LiRE+LdAtDE7mSXCefIPi88xXWEvYwCveFd3U=
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=OUs744sfBj5Yz8FxWBbt8pW3CMj0kJQQuffQ6w3kONmB7i7nLUpEo6lRzYKC9JV7i8
+ 9TpKdlpvdxRAbYZqx3zz4rE0OH6c3o/y5Fpet2Z6OUurTg1yZRHHBiYlNaBdnqY/abnm
+ Osr1M+2I5bcERAqC/o5bxjfmgVS5FgYaCozLI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=MJU4yIJ1OecX1mHUKDbEObOQjruIXSQ2ZxBhWrTtUGg=;
- b=ENhvFoRBkLWbxhKklIxHVg04nkHbpVjErOQT8DkaPwaM7FjLsenPpLfHys8zf1sI96
- agllkWJ3moGmhZkUcltTW1cMN6XUzQX2PDDlWYQUQQdqvd2gErWYo7CD7AmQe3f+wWRF
- wa00VBACeDMn2A5fe4RBhZBhoFesr3A+WFa7r07r0sONCZ2Q8WwXtPSGq5XHOPLzT0+u
- hjr7D51FxlTUflQlwSwQ6O6upBcwMnyXxuZCsRDJF1dWRo+9prZiLOj3ug910cmByzdo
- Vjm07RQCx34Hhg6Nqu9aLRy4V9ht0nMG38HOwme3TftzAh7gJ1c5aUkYkevsXwbex+Vy
- N5iA==
-X-Gm-Message-State: APjAAAXf/myUiesUm+aGsaXMrSIN+kyILwfAkwMyvlvWDym0pgqWWhit
- Raos+rn6Nys3Oo9Tgu+FAXykyA==
-X-Google-Smtp-Source: APXvYqyIsxVr3qhWNgflnJwy5Wr/iFuVcPl1oz3Oo8BPA8Ltenpsf+FYTeR4zPjyGhXyag79xnUhOQ==
-X-Received: by 2002:adf:e9d2:: with SMTP id l18mr1330674wrn.344.1582311790198; 
- Fri, 21 Feb 2020 11:03:10 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
+ b=tHwFLGEsOYxHQ2xsVPOCv4ZYzRkRMvxMMm1DYKs3glf4ZfSjIsgtOMBsSC7wO45W9y
+ s/VC2Mj2Hcmvan2EWoGRTkleKZWKYsRV3dDu7NTwzYkRySweWahKHjoHxBaF7bMvht32
+ 2LT/G5J91PKhgjo4msGWgvhA2Um68KBvMHwQaKSV+xxhdJWHBBcBKf+aNE1g0NnXc7QM
+ T4mTVFRG05TfdkRAKp2tiltLquRGEsNCJUGA6G9L+o3JyUMaUvFr4pjtbAMCJaEEZFtr
+ XMX1HYsTO7aEl3grbNTnLu4a/TaBb6qTRSWB7HHD9WRbgwQpBz9GO4mdYOo32kx4yClh
+ Ltsw==
+X-Gm-Message-State: APjAAAUJEtJB0v3kaWLoKBogKoaBSiaW+0QjsyJpLJwvV1GXaG2LsN52
+ 9n/n8W03l1MiUIr77eFhYB0X2w==
+X-Google-Smtp-Source: APXvYqzmMEGPKaIKETbiA7OJ6Ovghfws0dfiq7Mol0uFNN7+X3yV0LhNGEsGp238gAJXe0N+E0ExQw==
+X-Received: by 2002:a5d:5011:: with SMTP id e17mr47740612wrt.134.1582319017533; 
+ Fri, 21 Feb 2020 13:03:37 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id t12sm4985772wrq.97.2020.02.21.11.03.09
+ by smtp.gmail.com with ESMTPSA id z6sm5483930wrw.36.2020.02.21.13.03.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2020 11:03:09 -0800 (PST)
-Date: Fri, 21 Feb 2020 20:03:07 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Sam Ravnborg <sam@ravnborg.org>
-Message-ID: <20200221190307.GG2363188@phenom.ffwll.local>
-References: <20200218084815.2137-1-tzimmermann@suse.de>
- <20200218084815.2137-4-tzimmermann@suse.de>
- <20200220185642.GA20011@ravnborg.org>
- <3044661c-7552-e685-37b3-88865f97a991@suse.de>
- <20200221190057.GA27701@ravnborg.org>
+ Fri, 21 Feb 2020 13:03:36 -0800 (PST)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Date: Fri, 21 Feb 2020 22:02:35 +0100
+Message-Id: <20200221210319.2245170-8-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20200221210319.2245170-1-daniel.vetter@ffwll.ch>
+References: <20200221210319.2245170-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200221190057.GA27701@ravnborg.org>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
-Subject: Re: [Spice-devel] [PATCH v2 3/4] drm/mgag200: Use simple encoder
+Subject: [Spice-devel] [PATCH 07/51] drm/qxl: Use drmm_add_final_kfree
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,83 +62,63 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, kraxel@redhat.com,
- Thomas Zimmermann <tzimmermann@suse.de>, alexander.deucher@amd.com,
- spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
+Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, Feb 21, 2020 at 08:00:57PM +0100, Sam Ravnborg wrote:
-> Hi Thomas.
-> 
-> On Fri, Feb 21, 2020 at 08:48:48AM +0100, Thomas Zimmermann wrote:
-> > Hi Sam
-> > 
-> > thanks for reviewing the patch set.
-> > 
-> > Am 20.02.20 um 19:56 schrieb Sam Ravnborg:
-> > > Hi Thomas.
-> > > 
-> > > On Tue, Feb 18, 2020 at 09:48:14AM +0100, Thomas Zimmermann wrote:
-> > >> The mgag200 driver uses an empty implementation for its encoder. Replace
-> > >> the code with the generic simple encoder.
-> > >>
-> > >> v2:
-> > >> 	* rebase onto new simple-encoder interface
-> > >>
-> > >> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> > >> ---
-> > >>  drivers/gpu/drm/mgag200/mgag200_drv.h  |  7 ---
-> > >>  drivers/gpu/drm/mgag200/mgag200_mode.c | 61 ++------------------------
-> > >>  2 files changed, 3 insertions(+), 65 deletions(-)
-> > >>
-> > >> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mgag200/mgag200_drv.h
-> > >> index aa32aad222c2..9bb9e8e14539 100644
-> > >> --- a/drivers/gpu/drm/mgag200/mgag200_drv.h
-> > >> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
-> > >> @@ -95,7 +95,6 @@
-> > >>  #define MATROX_DPMS_CLEARED (-1)
-> > >>  
-> > >>  #define to_mga_crtc(x) container_of(x, struct mga_crtc, base)
-> > >> -#define to_mga_encoder(x) container_of(x, struct mga_encoder, base)
-> > >>  #define to_mga_connector(x) container_of(x, struct mga_connector, base)
-> > >>  
-> > >>  struct mga_crtc {
-> > >> @@ -110,12 +109,6 @@ struct mga_mode_info {
-> > >>  	struct mga_crtc *crtc;
-> > >>  };
-> > >>  
-> > >> -struct mga_encoder {
-> > >> -	struct drm_encoder base;
-> > >> -	int last_dpms;
-> > >> -};
-> > >> -
-> > >> -
-> > >>  struct mga_i2c_chan {
-> > >>  	struct i2c_adapter adapter;
-> > >>  	struct drm_device *dev;
-> > > 
-> > > Any particular reason why the drm_encoder is not embedded in struct
-> > > mga_device?
-> > > 
-> > > I found it more elegant - like you did it for ast in the previous patch.
-> > 
-> > I think I wanted something that uses drm_simple_encoder_create(). But I
-> > can change that. The embedded variant is indeed better.
-> 
-> You should consider to drop drm_simple_encoder_create() until there
-> is a driver that really needs it.
+With this we can drop the final kfree from the release function.
 
-Yeah +1 on only the _init version. The create version really should use
-drmm_kzalloc I think, but we're not quite there yet :-)
--Daniel
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+---
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+ drivers/gpu/drm/qxl/qxl_kms.c | 2 ++
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 4fda3f9b29f4..09102e2efabc 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 */
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+-	dev->dev_private = NULL;
+-	kfree(qdev);
+ }
+ 
+ static void
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 70b20ee4741a..09d7b5f6d172 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -27,6 +27,7 @@
+ #include <linux/pci.h>
+ 
+ #include <drm/drm_drv.h>
++#include <drm/drm_managed.h>
+ #include <drm/drm_probe_helper.h>
+ 
+ #include "qxl_drv.h"
+@@ -121,6 +122,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	qdev->ddev.pdev = pdev;
+ 	pci_set_drvdata(pdev, &qdev->ddev);
+ 	qdev->ddev.dev_private = qdev;
++	drmm_add_final_kfree(&qdev->ddev, qdev);
+ 
+ 	mutex_init(&qdev->gem.mutex);
+ 	mutex_init(&qdev->update_area_mutex);
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.24.1
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
