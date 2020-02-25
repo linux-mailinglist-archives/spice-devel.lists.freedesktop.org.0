@@ -2,55 +2,30 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AA8B16BE58
-	for <lists+spice-devel@lfdr.de>; Tue, 25 Feb 2020 11:11:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E41316F983
+	for <lists+spice-devel@lfdr.de>; Wed, 26 Feb 2020 09:23:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 89A436E8B1;
-	Tue, 25 Feb 2020 10:11:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 98A4C6E27A;
+	Wed, 26 Feb 2020 08:23:01 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D260188A23
- for <spice-devel@lists.freedesktop.org>; Tue, 25 Feb 2020 10:01:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582624915;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=floPe8uFtiBcRJNt3b3yPKjP5sCVEHNZouWGo4bWZp8=;
- b=bcQDQ9DFgy1EDbWr1IicTYJ4kMxXLlsZntr6k6fNDy5+OTriBJ2wMVbSUovodFv1kJF7AB
- SIOne1kj6AZrGHBhHh4avcOON+NiLYqTT+OlgxPYGhw4T4I5jtR5EhM+VwDef4uYQNq8vI
- OQhpotMYUu7GpSAjHrTRkx1o8Wb0bl8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-104-ojrg6253Px6GKeMLJa8bFQ-1; Tue, 25 Feb 2020 05:01:51 -0500
-X-MC-Unique: ojrg6253Px6GKeMLJa8bFQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CA94B1050478;
- Tue, 25 Feb 2020 10:01:48 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-87.ams2.redhat.com
- [10.36.116.87])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E1C5360C18;
- Tue, 25 Feb 2020 10:01:45 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id BF82C1744A; Tue, 25 Feb 2020 11:01:44 +0100 (CET)
-Date: Tue, 25 Feb 2020 11:01:44 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Keiichi Watanabe <keiichiw@chromium.org>
-Message-ID: <20200225100144.c3rmtmq7kqyskkq7@sirius.home.kraxel.org>
-References: <20200206102058.247258-1-keiichiw@chromium.org>
- <20200206102058.247258-3-keiichiw@chromium.org>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7673B6EAB3;
+ Tue, 25 Feb 2020 13:11:05 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 2F459B162;
+ Tue, 25 Feb 2020 13:11:03 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
+ sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
+Date: Tue, 25 Feb 2020 14:10:51 +0100
+Message-Id: <20200225131055.27550-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200206102058.247258-3-keiichiw@chromium.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Mailman-Approved-At: Tue, 25 Feb 2020 10:11:45 +0000
-Subject: Re: [Spice-devel] [PATCH v3 2/2] virtio-video: Define a feature for
- exported objects from different virtio devices
+X-Mailman-Approved-At: Wed, 26 Feb 2020 08:23:01 +0000
+Subject: [Spice-devel] [PATCH v3 0/4] drm: Provide a simple encoder
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,31 +37,50 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: samiullah.khawaja@opensynergy.com, virtio-dev@lists.oasis-open.org,
- alexlau@chromium.org, kiran.pawar@opensynergy.com, acourbot@chromium.org,
- dstaessens@chromium.org, tfiga@chromium.org, hverkuil@xs4all.nl,
- stevensd@chromium.org, daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
- dmitry.sepp@opensynergy.com, marcheu@chromium.org, dgreid@chromium.org,
- egranata@google.com, posciak@chromium.org, linux-media@vger.kernel.org
+Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-  Hi,
+Many DRM drivers implement an encoder with an empty implementation. This
+patchset adds drm_simple_encoder_init(), which can be used by drivers
+instead. Except for the destroy callback, the simple encoder's implementation
+is empty.
 
-> +        /*
-> +         * Followed by either
-> +         * - struct virtio_video_mem_entry entries[]
-> +         *   for VIRTIO_VIDEO_MEM_TYPE_GUEST_PAGES
-> +         * - struct virtio_video_object_entry entries[]
-> +         *   for VIRTIO_VIDEO_MEM_TYPE_VIRTIO_OBJECT
+The patchset also converts 4 encoder instances to use the simple-encoder
+helpers. But there are at least 11 other drivers which can use the helper
+and I think I did not examine all drivers yet.
 
-Wouldn't that be a single virtio_video_object_entry?
-Or could it be one per plane?
+The patchset was smoke-tested on mgag200 by running the fbdev console
+and Gnome on X11.
 
-cheers,
-  Gerd
+v3:
+	* remove drm_simple_encoder_create() for lack of users (Sam, Daniel)
+	* provide more precise documentation (Sam)
+v2:
+	* move simple encoder to KMS helpers (Daniel)
+	* remove name argument; simplifies implementation (Gerd)
+	* don't allocate with devm_ interfaces; unsafe with DRM (Noralf)
+
+Thomas Zimmermann (4):
+  drm/simple-kms: Add drm_simple_encoder_{init,create}()
+  drm/ast: Use simple encoder
+  drm/mgag200: Use simple encoder
+  drm/qxl: Use simple encoder
+
+ drivers/gpu/drm/ast/ast_drv.h           |  6 +-
+ drivers/gpu/drm/ast/ast_mode.c          | 25 +++-----
+ drivers/gpu/drm/drm_simple_kms_helper.c | 34 +++++++++-
+ drivers/gpu/drm/mgag200/mgag200_drv.h   |  9 +--
+ drivers/gpu/drm/mgag200/mgag200_mode.c  | 85 +++----------------------
+ drivers/gpu/drm/qxl/qxl_display.c       | 18 +-----
+ include/drm/drm_simple_kms_helper.h     |  4 ++
+ 7 files changed, 59 insertions(+), 122 deletions(-)
+
+--
+2.25.0
 
 _______________________________________________
 Spice-devel mailing list
