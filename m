@@ -1,54 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 189D61711AE
-	for <lists+spice-devel@lfdr.de>; Thu, 27 Feb 2020 08:48:56 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FE7A1714A2
+	for <lists+spice-devel@lfdr.de>; Thu, 27 Feb 2020 11:03:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3FE786EC01;
-	Thu, 27 Feb 2020 07:48:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9C5FD6EC81;
+	Thu, 27 Feb 2020 10:03:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com
- [IPv6:2a00:1450:4864:20::242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 74CC06EBFB
- for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 07:24:38 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id e3so2121376lja.10
- for <spice-devel@lists.freedesktop.org>; Wed, 26 Feb 2020 23:24:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1fYhwtQugourf/YHI26V7fjd8Ko33Z1d0MTgj5fBllA=;
- b=WSbKcFqJ4JsgtMOnaqrCgpReGO+t6fT/urco7XNmD5aegv/hWCBT/JQ0uj9QyoXC9h
- yoJbfsBZasuYfjDQ9poaaVlBtFBLNnd1PlRiS83x9XRHzkH8rfK0PVPxEd6ZWA1f7zlh
- Vzvqz29hSWlCg6SjL81UiPpokRvDbCbkyoFSU=
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4B9916EC81
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 10:03:03 +0000 (UTC)
+Received: by mail-wr1-x42f.google.com with SMTP id v2so2474406wrp.12
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 02:03:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20150623.gappssmtp.com; s=20150623;
+ h=from:to:cc:subject:date:message-id;
+ bh=401ovKC9nI2YioFx50Al8+NHXdFTa+z5ywdPrlFMeno=;
+ b=xNFBBXPZ6SNhr+qoH1Si6w2VgUBwr6k1zlqYDOUGGp9qBdQdw6WFw/Gq9IggerHmmf
+ ofR35zAEor2r78c3OB1tdU6Wle0F8JDUaq6BJeyQV7XC0RA68mbOHlNUb0W+YGyYkULm
+ Jke2c4szXjoXN2zyku9th4l92PvV3acby/yGF7Qi0pwxz78KAmqvzGUbohvOmtlTQOYg
+ C6O8q84gj9jiGKflNsTUXcVkhVlzdIlAqYkd62wn50PpAEiq22W2KF/j2jb9KwBo1aFa
+ NTJV6VW3h+OFlYTZ6+4wow8DyLOKzJjs0xeRGwaEA/1MJNByNCYsKqsvT3PS0j/U9y9u
+ 8kGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=1fYhwtQugourf/YHI26V7fjd8Ko33Z1d0MTgj5fBllA=;
- b=Dkf30wqZlt+SxbO1nImUE6AvexUTktcK5QSXFHZU44H8Z7EYkPlmIDHttcv5PDnwK9
- ZuCb7xrYBhSfTQ5NfMpBJkmJxH8K+xIbh7c+MhGi7IfM2qcLPrNghL1DEGb0Nk0X5KD8
- K+t3WJFMzP0Y1A3ym2/f/uVL0VcBvGH7LMeMqguWR3Mm9MwaY6bntF936sk+YeF3T7ss
- XlrFCJSXEjJtqasWcDCN5/7Q7897qxwv3lK4gL7S8FCeFDpJfxW9uhzr4xSzolyNuJVI
- xpg5EwJK8SFiZ56vC5B1pwIyLuz6HAzrRKvroArLFXKFPri33lcpgBGLof1LhRUiu851
- o51Q==
-X-Gm-Message-State: ANhLgQ0Lh64h/b4YalMWItEWALpRNCzk1FKU+1doqM1cw8N3oIawoF+4
- H0pZbn49H8arXsI2LIX0F5gaVIGowQQoSyhsPh9UFA==
-X-Google-Smtp-Source: ADFU+vtNCr/250cISpJsBUpbs9vkqScUP52zZPdToAzJT1L+kZY3XIt5c86eam0t5V7qTMZ7noC06DquWvXrtlRtrac=
-X-Received: by 2002:a2e:8e6e:: with SMTP id t14mr1910977ljk.149.1582788276864; 
- Wed, 26 Feb 2020 23:24:36 -0800 (PST)
-MIME-Version: 1.0
-References: <20200206102058.247258-1-keiichiw@chromium.org>
- <20200206102058.247258-3-keiichiw@chromium.org>
- <20200225100144.c3rmtmq7kqyskkq7@sirius.home.kraxel.org>
-In-Reply-To: <20200225100144.c3rmtmq7kqyskkq7@sirius.home.kraxel.org>
-From: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Thu, 27 Feb 2020 16:24:25 +0900
-Message-ID: <CAD90VcaFyd2bFJUYzDF7OMsm+sWFFJuAHAqCk9hFEWnR8p+zVg@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Mailman-Approved-At: Thu, 27 Feb 2020 07:48:50 +0000
-Subject: Re: [Spice-devel] [PATCH v3 2/2] virtio-video: Define a feature for
- exported objects from different virtio devices
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=401ovKC9nI2YioFx50Al8+NHXdFTa+z5ywdPrlFMeno=;
+ b=F//QXJ0NZ+X/1bd/VMeiSKBbrers6vnUkNT8vLdD2ftRfTzLtVOZFjBbldtM2deZYn
+ DCj9kvT23XYkb5oY+9nnKK5SLT+jnHtIFWR+Axlo3K6faLFP0EpXdjcHJIQMiOF3iaGr
+ ptxHpO7TzNbiZXLVaFwVOLtbnWr1QcpexM9U5K+zukNPE07mo8WAeXOqYbz8fKf+nzsD
+ /DSUvHiMRM6fJOcaJT9BFdnFg0k5yG+tqS6QhZl7QQUIcHovXB6UPUu08X3pXan0h6kk
+ BneZDj3S7qTeD6CEDVqS5DbBPwIEg6xdsM6rjivRPSjWjbX5P5JrteeqvEI+I8sJmdr0
+ /42g==
+X-Gm-Message-State: APjAAAXRZrrWvV2bYlpUSm1isGfrvahTtfIUAlzuYGG3nZXZymoGEV1X
+ 6HSpj0IG7TGWxIqgPOUAOdsU482LtkU=
+X-Google-Smtp-Source: APXvYqwUgdPWO2+Evuv4bVeL44k6wzabtZkwyGBPMRjWGRNfWwvGoZBWV/J2niNvkK3cHLmx59cEmw==
+X-Received: by 2002:adf:df90:: with SMTP id z16mr3825145wrl.273.1582797781750; 
+ Thu, 27 Feb 2020 02:03:01 -0800 (PST)
+Received: from f2.redhat.com (bzq-79-177-42-131.red.bezeqint.net.
+ [79.177.42.131])
+ by smtp.gmail.com with ESMTPSA id h13sm7466429wml.45.2020.02.27.02.03.00
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 27 Feb 2020 02:03:01 -0800 (PST)
+From: Yuri Benditovich <yuri.benditovich@daynix.com>
+To: spice-devel@lists.freedesktop.org
+Date: Thu, 27 Feb 2020 12:02:53 +0200
+Message-Id: <20200227100255.8066-1-yuri.benditovich@daynix.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [Spice-devel] [PATCH qxl-wddm-dod 1/3] qxl-wddm-dod: Allow
+ additional low resolution
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,55 +63,39 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
- virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
- Kiran Pawar <kiran.pawar@opensynergy.com>,
- Alexandre Courbot <acourbot@chromium.org>,
- David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
- Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
- Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
- Dmitry Sepp <dmitry.sepp@opensynergy.com>,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
- Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
- Pawel Osciak <posciak@chromium.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>
+Cc: yan@daynix.com
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+https://bugzilla.redhat.com/show_bug.cgi?id=1758524
+Examples are displays 320*200 and 800*480
 
-On Tue, Feb 25, 2020 at 7:01 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
->   Hi,
->
-> > +        /*
-> > +         * Followed by either
-> > +         * - struct virtio_video_mem_entry entries[]
-> > +         *   for VIRTIO_VIDEO_MEM_TYPE_GUEST_PAGES
-> > +         * - struct virtio_video_object_entry entries[]
-> > +         *   for VIRTIO_VIDEO_MEM_TYPE_VIRTIO_OBJECT
->
-> Wouldn't that be a single virtio_video_object_entry?
-> Or could it be one per plane?
+Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
+---
+ qxldod/QxlDod.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-It depends on the value of "planes_layout" in virtio_video_resource_create.
-I have documented this restriction as follows:
+diff --git a/qxldod/QxlDod.h b/qxldod/QxlDod.h
+index d889b9d..016b1aa 100755
+--- a/qxldod/QxlDod.h
++++ b/qxldod/QxlDod.h
+@@ -19,8 +19,8 @@
+ #define BITS_PER_BYTE              8
+ 
+ #define POINTER_SIZE               64
+-#define MIN_WIDTH_SIZE             800
+-#define MIN_HEIGHT_SIZE            600
++#define MIN_WIDTH_SIZE             320
++#define MIN_HEIGHT_SIZE            200
+ #define INITIAL_WIDTH              1024
+ #define INITIAL_HEIGHT             768
+ #define QXL_BPP                    32
+-- 
+2.17.1
 
-> +If \field{planes_layout} is VIRTIO_VIDEO_PLANES_LAYOUT_SINGLE_BUFFER,
-> +the number of \field{virtio_video_object_entry} MUST be one. If it is
-> +VIRTIO_VIDEO_PLANES_LAYOUT_PER_PLANE, the number MUST be equal to
-> +\field{num_planes}.
-
-Best regards,
-Keiichi
-
-
->
-> cheers,
->   Gerd
->
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
