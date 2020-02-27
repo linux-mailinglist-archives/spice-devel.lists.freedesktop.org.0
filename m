@@ -1,60 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7ACF16FD17
-	for <lists+spice-devel@lfdr.de>; Wed, 26 Feb 2020 12:15:58 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E83221711AC
+	for <lists+spice-devel@lfdr.de>; Thu, 27 Feb 2020 08:48:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E192C6E26F;
-	Wed, 26 Feb 2020 11:15:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5B8C56EBFA;
+	Thu, 27 Feb 2020 07:48:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 689656E26F
- for <spice-devel@lists.freedesktop.org>; Wed, 26 Feb 2020 11:15:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1582715752;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qNsqv8ZK9i8Bza62QkOqGh/2r0aFUMgc/TDkWlWKjQg=;
- b=WH6hTmDjnDNHzigopaZmAsQ05+cnN/9y8OOTIBrzoLTvYft6ms1e2JVrvnVgUx1KmEfsFJ
- yJT3WaxIe/KL/Eytp1eOtTdij0/I1fh50VohSCmHopXz0QsL6DoFpDcy4AEWytCKBp8Dkn
- JipayAihehcZYlmVsnKIWTD24pJHqXs=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-52-kj6xflavMvmLZTsU33AWpw-1; Wed, 26 Feb 2020 06:15:50 -0500
-X-MC-Unique: kj6xflavMvmLZTsU33AWpw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7693C805735;
- Wed, 26 Feb 2020 11:15:49 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6C6E8100164D;
- Wed, 26 Feb 2020 11:15:49 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 61CC784461;
- Wed, 26 Feb 2020 11:15:49 +0000 (UTC)
-Date: Wed, 26 Feb 2020 06:15:48 -0500 (EST)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: ucontacti ss <ucontacti2012@gmail.com>
-Message-ID: <420182716.14553035.1582715748598.JavaMail.zimbra@redhat.com>
-In-Reply-To: <CAORX2Yfi7RMZvpJEz9A4xOWTMZzne-xa6OqRHy0uMFHSHsFm1Q@mail.gmail.com>
-References: <CAORX2Yfi7RMZvpJEz9A4xOWTMZzne-xa6OqRHy0uMFHSHsFm1Q@mail.gmail.com>
+Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com
+ [IPv6:2a00:1450:4864:20::244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5F67A6EBFA
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 07:24:13 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id 143so2025761ljj.7
+ for <spice-devel@lists.freedesktop.org>; Wed, 26 Feb 2020 23:24:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ulhfzZtjqHVApyH23tC1m4uF97F2GaK3aqMyj12HxmE=;
+ b=hHCjYsgfTgkXZ/zznQPV6HSvsdeObsvIsCq9SMzElPkgKtt/bEUuy26I6QqaTy1SE3
+ ur2XA32s47U7T74czc1kqvvkkeyit7ImqaNrNgSzA1hcz24FR5V/ZloWOSrJhf2PV26O
+ C4pHzE4cmSravi+LKRe0px08ajRcT+QwvZwCE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ulhfzZtjqHVApyH23tC1m4uF97F2GaK3aqMyj12HxmE=;
+ b=a5FuslUO6qjNtSFFh/dSHN5WEhQ3JARImG0CgQKWpMXNwj+BDUm6/0wVsFa2UodZ8d
+ LVpM6vES3PqqgwNUIGCKAQqxlAmXVJj6EhbcFBbA1gKYmblrXgxCQN+emI2WUCCCSf4X
+ x9Awmp/KOLIBa7v0FMogaiRj321imakARzPU4V/xOf7fC0FT1gDZDmiaNTpjsch0SwFm
+ UOs9bLz+xPijydOtg75cWXNW33oVXxdxKkIlLuA4OUuOp8Bh+HrmZROy89GEN1ZLZjkI
+ fjLCNTeJOEpKt++mG0/av/z0A+UFv5JhOJbhaz3sVFlTaSD7sk4PQhq7pTr6801c/aXe
+ tdvA==
+X-Gm-Message-State: ANhLgQ20hTDao0bHWBAw1MedqfAt0t3/fRLVlXpVjXJxTdEfu24NJ9Lf
+ QId+O3NG+CpcSa7ikdvJCAtYJa3B5SL7Whcs+BG0Rg==
+X-Google-Smtp-Source: ADFU+vul/JV3LM8z+jDl4Ywq6hXYMYZ79sLFk7RSr6JbYECi00uphmFPR6Tj9nVUMbPkox4o6RVK8PdqCACV6Gt/HuE=
+X-Received: by 2002:a2e:3514:: with SMTP id z20mr1887966ljz.261.1582788251546; 
+ Wed, 26 Feb 2020 23:24:11 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.14, 10.4.195.26]
-Thread-Topic: Spice Display Channel Capabilities
-Thread-Index: tqujb2noxhtQL26Tii7d+HCWR4HfBg==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] Spice Display Channel Capabilities
+References: <20200206102058.247258-1-keiichiw@chromium.org>
+ <20200206102058.247258-2-keiichiw@chromium.org>
+ <20200225095956.7rtwugfru4dbjj7q@sirius.home.kraxel.org>
+In-Reply-To: <20200225095956.7rtwugfru4dbjj7q@sirius.home.kraxel.org>
+From: Keiichi Watanabe <keiichiw@chromium.org>
+Date: Thu, 27 Feb 2020 16:24:00 +0900
+Message-ID: <CAD90VcaTJh5MTRggpOmCK2LAryMHha2+7nPkFVTT8N8S06tf-A@mail.gmail.com>
+To: Gerd Hoffmann <kraxel@redhat.com>
+X-Mailman-Approved-At: Thu, 27 Feb 2020 07:48:50 +0000
+Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
+ device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,41 +60,126 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
+ virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
+ Kiran Pawar <kiran.pawar@opensynergy.com>,
+ Alexandre Courbot <acourbot@chromium.org>,
+ David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dmitry Sepp <dmitry.sepp@opensynergy.com>,
+ =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
+ Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> Dear developers.
+Thanks for the review, Gerd.
+Please see my replies inline below.
 
-> I have been reproducing spice protocol, (Not using spice-gtk actually). So
-> far I have seen some image types and most of the stream types but I was not
-> able to use some capabilities.
-> First, how to enable Glyph string,
-> Second, I only get one rendering message (draw_copy). I want to use full
-> capability of Display Channel since it is the bottle neck.
+FYI, I'm implementing virtio-video device for ChromeOS that works with
+Dmitry's virtio-video driver
+https://patchwork.linuxtv.org/patch/61717/.
+Once it becomes fully functional, I'll post a list of possible
+improvements of protocol.
 
-The messages you receive depends on the guest stack. That is the OS version
-and driver type/version. Also you have to use QXL as card type.
-Can you provide more details on Guest OS version and drivers installed?
+On Tue, Feb 25, 2020 at 7:00 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> On Thu, Feb 06, 2020 at 07:20:57PM +0900, Keiichi Watanabe wrote:
+> > From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+> >
+> > The virtio video encoder device and decoder device provide functionalities to
+> > encode and decode video stream respectively.
+> > Though video encoder and decoder are provided as different devices, they use a
+> > same protocol.
+> >
+> > Signed-off-by: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+> > Signed-off-by: Keiichi Watanabe <keiichiw@chromium.org>
+>
+> Finally found the time for a closer look.
+> Pretty good overall, some minor nits below ...
+>
+> > +\begin{description}
+> > +\item[\field{version}] is the protocol version that the device talks.
+> > +  The device MUST set this to 0.
+>
+> What is the intended use case for this?
+>
+> Given that virtio has feature flags to negotiate support for optional
+> features and protocol extensions between driver and device, why do you
+> think this is needed?
 
-> Las, for image type, how to enable JPEG, JPEG_Alpha, LZ_PLT. (The image type
-> request message is a subset of all image types)
+While feature flags work well when we "extend" the protocol with an
+optional feature, they don't when we want to "drop" or "modify"
+features.
+For example, I guess it'd be useful when we want:
+* to abandon a non-optional command,
+* to change a non-optional struct's layout,or
+* to change the order of commands in which the device expects to be sent.
 
-All these are enabled without capabilities, that is they are assumed to
-be supported by the server/client. The selection is done by spice-server
-combining settings (like from Qemu) and bandwidth detection (for JPEG).
+Though it might be possible to handle these changes by feature flags,
+I suspect the version number allow us to transition protocols more
+smoothly.
+WDYT?
 
-> Sorry for the long email.
+>
+> > +The format description \field{virtio_video_format_desc} is defined as
+> > +follows:
+> > +\begin{lstlisting}
+> > +enum virtio_video_format {
+> > +        /* Raw formats */
+> > +        VIRTIO_VIDEO_FORMAT_RAW_MIN = 1,
+> > +        VIRTIO_VIDEO_FORMAT_ARGB8888 = VIRTIO_VIDEO_FORMAT_RAW_MIN,
+> > +        VIRTIO_VIDEO_FORMAT_BGRA8888,
+> > +        VIRTIO_VIDEO_FORMAT_NV12, /* 12  Y/CbCr 4:2:0  */
+> > +        VIRTIO_VIDEO_FORMAT_YUV420, /* 12  YUV 4:2:0     */
+> > +        VIRTIO_VIDEO_FORMAT_YVU420, /* 12  YVU 4:2:0     */
+> > +        VIRTIO_VIDEO_FORMAT_RAW_MAX = VIRTIO_VIDEO_FORMAT_YVU420,
+>
+> I'm wondering what the *_MIN and *_MAX values here (and elsewhere) are
+> good for?  I doubt drivers would actually loop over formats from min to
+> max, I'd expect they check for specific formats they can handle instead.
+>
+> If you want define the range for valid raw formats I'd suggest to leave
+> some room, so new formats can be added without changing MAX values, i.e.
+> use -- for example -- RAW_MIN = 0x100, RAW_MAX = 0x1ff, CODED_MIN=0x200,
+> CODED_MAX=0x2ff.  Or just drop them ...
 
-NP
+Ah, that's a good point. I agree that drivers don't need to loop over formats.
+If they need, they can define such an alias locally.
 
-> Best wishes,
-> Saleh Daghigh
+Still, I guess it's worth defining the range for valid raw/coded formats.
+This allows devices to report more detailed errors if a driver sent an
+unexpected format.
+i.e. "opposite format type" v.s. "unknown format"
 
-Frediano
+So, I'd use your idea of RAW_MIN = 0x100 and RAW_MAX = 0x1ff.
 
+>
+> > +struct virtio_video_query_control_level {
+> > +        le32 profile; /* One of VIRTIO_VIDEO_PROFILE_* */
+>                                                 ^^^^^^^  LEVEL ?
+
+Nope, it should be profile.
+This "profile" field is specified by the driver to query supported
+levels for a specific profile.
+
+In my understanding, supported levels depend on profiles.
+At least, the specification of H.264 [1] says that `"levels" are
+specified within each profile.` at section "0.5 Profiles and levels".
+
+[1] https://www.itu.int/rec/T-REC-H.264-201906-I/en
+
+Best regards,
+Keiichi
+
+>
+> cheers,
+>   Gerd
+>
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
