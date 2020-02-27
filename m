@@ -1,57 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FE7A1714A2
-	for <lists+spice-devel@lfdr.de>; Thu, 27 Feb 2020 11:03:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 663F91714A3
+	for <lists+spice-devel@lfdr.de>; Thu, 27 Feb 2020 11:03:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9C5FD6EC81;
-	Thu, 27 Feb 2020 10:03:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C87046EC83;
+	Thu, 27 Feb 2020 10:03:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4B9916EC81
- for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 10:03:03 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id v2so2474406wrp.12
- for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 02:03:03 -0800 (PST)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3FB736EC82
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 10:03:04 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id e8so2524085wrm.5
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 02:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id;
- bh=401ovKC9nI2YioFx50Al8+NHXdFTa+z5ywdPrlFMeno=;
- b=xNFBBXPZ6SNhr+qoH1Si6w2VgUBwr6k1zlqYDOUGGp9qBdQdw6WFw/Gq9IggerHmmf
- ofR35zAEor2r78c3OB1tdU6Wle0F8JDUaq6BJeyQV7XC0RA68mbOHlNUb0W+YGyYkULm
- Jke2c4szXjoXN2zyku9th4l92PvV3acby/yGF7Qi0pwxz78KAmqvzGUbohvOmtlTQOYg
- C6O8q84gj9jiGKflNsTUXcVkhVlzdIlAqYkd62wn50PpAEiq22W2KF/j2jb9KwBo1aFa
- NTJV6VW3h+OFlYTZ6+4wow8DyLOKzJjs0xeRGwaEA/1MJNByNCYsKqsvT3PS0j/U9y9u
- 8kGA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=VCHZ3QzuWYjTX3wKBgq8rgWOTpcGo0VAro2L7TwhSPU=;
+ b=whCIK15ndLET9WkVsOrffOS8cTTc14dW8HdA8abNoFfma2u93tWcNPLoh1b8ei/IXk
+ 9/UzXyhIH2spRSPjueu6Sk6a0rdyfu6aiDGm8Di9kROh564e3wLC5XyXvHEl4YbdtYQw
+ 4qUlDHk0PekzPEn5kC/pIPtFoT9xSE9HShdbY7WuyLIqwD0ZW97aTyYkkGD0E4c91I6C
+ mxuQqmLgGkfdFo6l5FSHV+5zt0G4BU+M42QePRoA05tBRWp6QlcrfN/seMjpopaO8Wvk
+ 6z7Nxw01q8rTz8Ug+ub300ydCycUtzJINoAjbWO4yHRR1S0DenwdXCjxhiNjgWz9CGqz
+ vR4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=401ovKC9nI2YioFx50Al8+NHXdFTa+z5ywdPrlFMeno=;
- b=F//QXJ0NZ+X/1bd/VMeiSKBbrers6vnUkNT8vLdD2ftRfTzLtVOZFjBbldtM2deZYn
- DCj9kvT23XYkb5oY+9nnKK5SLT+jnHtIFWR+Axlo3K6faLFP0EpXdjcHJIQMiOF3iaGr
- ptxHpO7TzNbiZXLVaFwVOLtbnWr1QcpexM9U5K+zukNPE07mo8WAeXOqYbz8fKf+nzsD
- /DSUvHiMRM6fJOcaJT9BFdnFg0k5yG+tqS6QhZl7QQUIcHovXB6UPUu08X3pXan0h6kk
- BneZDj3S7qTeD6CEDVqS5DbBPwIEg6xdsM6rjivRPSjWjbX5P5JrteeqvEI+I8sJmdr0
- /42g==
-X-Gm-Message-State: APjAAAXRZrrWvV2bYlpUSm1isGfrvahTtfIUAlzuYGG3nZXZymoGEV1X
- 6HSpj0IG7TGWxIqgPOUAOdsU482LtkU=
-X-Google-Smtp-Source: APXvYqwUgdPWO2+Evuv4bVeL44k6wzabtZkwyGBPMRjWGRNfWwvGoZBWV/J2niNvkK3cHLmx59cEmw==
-X-Received: by 2002:adf:df90:: with SMTP id z16mr3825145wrl.273.1582797781750; 
- Thu, 27 Feb 2020 02:03:01 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=VCHZ3QzuWYjTX3wKBgq8rgWOTpcGo0VAro2L7TwhSPU=;
+ b=fMR2ujUiuhhgqXaeuW3zwws41NVATNH+nItqvyTqxok6PabAkUH6VK2ExYJ4xiDU3L
+ 3zsen0v7Q6Oc5/KmK0YEQLe3Z/NMNBM9c2ytLNaSGdLjvoJJDZxMNpuRji2VupgPhcTo
+ TwxyDSqpjMjvLPY6bOR/4xlz1FU0fdpweGvqlGR6uwGXsQHM5n38VtCI/WlV8VLOLaOX
+ P+QgzNnHfXJj7XwZjGTGC//TGkgAj5M4dpl1sZF5gCyQ+Z2PGQqCZ9WEiEdin6NptAlO
+ Pj3x3C+0W+a3wOOna1lgvGGwGVhLDOZ0HJre7+26Hum60vcN80fKbuyf46atkFIiYglw
+ OIzw==
+X-Gm-Message-State: APjAAAVgYvrf7a4wxOT1m/SgH4YJKFVs7GgBDozHEWSB31ZDd0HsFsEt
+ B2+qBr/rlUmESLN/7GAqaWsRu+tj8/w=
+X-Google-Smtp-Source: APXvYqwaxQywGrDWMgttOKmU0rct1DmBVmLSPj4Ua7vJVDKTxJG6zF/8Q/Cr+b9JCFiMFQooA6aOlQ==
+X-Received: by 2002:a5d:608e:: with SMTP id w14mr3484654wrt.201.1582797782743; 
+ Thu, 27 Feb 2020 02:03:02 -0800 (PST)
 Received: from f2.redhat.com (bzq-79-177-42-131.red.bezeqint.net.
  [79.177.42.131])
- by smtp.gmail.com with ESMTPSA id h13sm7466429wml.45.2020.02.27.02.03.00
+ by smtp.gmail.com with ESMTPSA id h13sm7466429wml.45.2020.02.27.02.03.01
  (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 27 Feb 2020 02:03:01 -0800 (PST)
+ Thu, 27 Feb 2020 02:03:02 -0800 (PST)
 From: Yuri Benditovich <yuri.benditovich@daynix.com>
 To: spice-devel@lists.freedesktop.org
-Date: Thu, 27 Feb 2020 12:02:53 +0200
-Message-Id: <20200227100255.8066-1-yuri.benditovich@daynix.com>
+Date: Thu, 27 Feb 2020 12:02:54 +0200
+Message-Id: <20200227100255.8066-2-yuri.benditovich@daynix.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [Spice-devel] [PATCH qxl-wddm-dod 1/3] qxl-wddm-dod: Allow
- additional low resolution
+In-Reply-To: <20200227100255.8066-1-yuri.benditovich@daynix.com>
+References: <20200227100255.8066-1-yuri.benditovich@daynix.com>
+Subject: [Spice-devel] [PATCH qxl-wddm-dod 2/3] Enable screen rotation of
+ 180 and 270 degrees
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,29 +73,50 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-https://bugzilla.redhat.com/show_bug.cgi?id=1758524
-Examples are displays 320*200 and 800*480
+https://bugzilla.redhat.com/show_bug.cgi?id=1791804
+Currently the screen can be shown as Landscape and
+Portrait (90 deg. rotation). Allowing also Flipped
+Portrait (270 deg. rotation) and Flipped Landscape
+(180 deg).
 
 Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
 ---
- qxldod/QxlDod.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ qxldod/QxlDod.cpp | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/qxldod/QxlDod.h b/qxldod/QxlDod.h
-index d889b9d..016b1aa 100755
---- a/qxldod/QxlDod.h
-+++ b/qxldod/QxlDod.h
-@@ -19,8 +19,8 @@
- #define BITS_PER_BYTE              8
- 
- #define POINTER_SIZE               64
--#define MIN_WIDTH_SIZE             800
--#define MIN_HEIGHT_SIZE            600
-+#define MIN_WIDTH_SIZE             320
-+#define MIN_HEIGHT_SIZE            200
- #define INITIAL_WIDTH              1024
- #define INITIAL_HEIGHT             768
- #define QXL_BPP                    32
+diff --git a/qxldod/QxlDod.cpp b/qxldod/QxlDod.cpp
+index 95c0e97..6e97360 100755
+--- a/qxldod/QxlDod.cpp
++++ b/qxldod/QxlDod.cpp
+@@ -1299,8 +1299,8 @@ NTSTATUS QxlDod::EnumVidPnCofuncModality(_In_ CONST DXGKARG_ENUMVIDPNCOFUNCMODAL
+                 LocalVidPnPresentPath.ContentTransformation.RotationSupport.Identity = 1;
+                 // Sample supports only Rotate90
+                 LocalVidPnPresentPath.ContentTransformation.RotationSupport.Rotate90 = 1;
+-                LocalVidPnPresentPath.ContentTransformation.RotationSupport.Rotate180 = 0;
+-                LocalVidPnPresentPath.ContentTransformation.RotationSupport.Rotate270 = 0;
++                LocalVidPnPresentPath.ContentTransformation.RotationSupport.Rotate180 = 1;
++                LocalVidPnPresentPath.ContentTransformation.RotationSupport.Rotate270 = 1;
+                 SupportFieldsModified = TRUE;
+             }
+         } // End: ROTATION
+@@ -1639,6 +1639,8 @@ NTSTATUS QxlDod::SetSourceModeAndPath(CONST D3DKMDT_VIDPN_SOURCE_MODE* pSourceMo
+              if (pCurrentBddMode->DispInfo.Width == pModeInfo->VisScreenWidth &&
+                  pCurrentBddMode->DispInfo.Height == pModeInfo->VisScreenHeight )
+              {
++                 DbgPrint(TRACE_LEVEL_INFORMATION, ("%s: %dx%d, rotation %d\n", __FUNCTION__,
++                     pCurrentBddMode->SrcModeHeight, pCurrentBddMode->SrcModeWidth, pCurrentBddMode->Rotation));
+                  Status = m_pHWDevice->SetCurrentMode(m_pHWDevice->GetModeNumber(ModeIndex));
+                  if (NT_SUCCESS(Status))
+                  {
+@@ -1684,6 +1686,8 @@ NTSTATUS QxlDod::IsVidPnPathFieldsValid(CONST D3DKMDT_VIDPN_PRESENT_PATH* pPath)
+     }
+     else if ((pPath->ContentTransformation.Rotation != D3DKMDT_VPPR_IDENTITY) &&
+              (pPath->ContentTransformation.Rotation != D3DKMDT_VPPR_ROTATE90) &&
++             (pPath->ContentTransformation.Rotation != D3DKMDT_VPPR_ROTATE180) &&
++             (pPath->ContentTransformation.Rotation != D3DKMDT_VPPR_ROTATE270) &&
+              (pPath->ContentTransformation.Rotation != D3DKMDT_VPPR_NOTSPECIFIED) &&
+              (pPath->ContentTransformation.Rotation != D3DKMDT_VPPR_UNINITIALIZED))
+     {
 -- 
 2.17.1
 
