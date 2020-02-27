@@ -2,56 +2,40 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 948A617326F
-	for <lists+spice-devel@lfdr.de>; Fri, 28 Feb 2020 09:06:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E49A317326C
+	for <lists+spice-devel@lfdr.de>; Fri, 28 Feb 2020 09:06:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 05BB26EE41;
-	Fri, 28 Feb 2020 08:06:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5FA5A6EE3C;
+	Fri, 28 Feb 2020 08:06:14 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
- [IPv6:2a00:1450:4864:20::441])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 920276EC48
- for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 18:15:39 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id e8so4638852wrm.5
- for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 10:15:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
- b=UGjp3j2m8tSpVtgqlVsaT55NLPaJ+bCVZNIyBF9xRUhtONMNz9C25aIe4AKs+mpAuI
- fPMK5fZkOxdJBP1TkttHVjsFqD+3P/nq/HjaSFpRwkSmPeNftrevjNHz9YaqdM+rUxyq
- EdjgWR4GUIZHrdJ5QqimuB/ajA7WfCZI5Ptjo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=jGkQy6GARMrTdcko1Rer3WUnvLpzhV0C66wlxAxhWNE=;
- b=TB2yIQoIPXmTpySP/UL2RcfIt9Vf1REeRQHMuFQPvBnTk/BKmgx0lzDmjmfz0wnulQ
- wsHMGL98W3zSSsApkZ6g/poxgH0fLUBrVmriukgmfqywM4UrdSRUIhdmQWz/vXRwjCMz
- 0TSR2wMDHUEcFcdceCWYbt2LusMfeHlb6Al4SlyP1i6GUOWjwzKyBwltWDJsPOL8GO7B
- oJoSvBYRt0Q2cZlAZ5qYiUrUJAH2NZI5TOQZmEFNnOdqbrT9wEXla4ug58cyqOpmBzEt
- 5aSnN65WcnK6QyggXWIf/WB9qW5UJtRUP/WVAcYcG/58rbCIJHrkiiQsRMQfwIHI8IgB
- tz/Q==
-X-Gm-Message-State: APjAAAVUwHVaoiAfeQ/yjRUzLQINLK3+WgxV0xJcZ1d31ZrzBwPpbMgi
- KKrUAKIbOtpINLUP8uUXud4aIw==
-X-Google-Smtp-Source: APXvYqzi6pnLYSD8cXiyxKS8GvQP4s+u1dCT+w1GY+i7lVlNGRL1AhMKB3TARM9gKM0sDr2ZmPcmHQ==
-X-Received: by 2002:adf:cc8b:: with SMTP id p11mr155186wrj.8.1582827338247;
- Thu, 27 Feb 2020 10:15:38 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id q1sm8551152wrw.5.2020.02.27.10.15.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2020 10:15:37 -0800 (PST)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Thu, 27 Feb 2020 19:14:38 +0100
-Message-Id: <20200227181522.2711142-8-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200227181522.2711142-1-daniel.vetter@ffwll.ch>
-References: <20200227181522.2711142-1-daniel.vetter@ffwll.ch>
+Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CA03C6E0E1;
+ Thu, 27 Feb 2020 20:38:38 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk3.altibox.net (Postfix) with ESMTPS id 0DCA120031;
+ Thu, 27 Feb 2020 21:38:34 +0100 (CET)
+Date: Thu, 27 Feb 2020 21:38:33 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200227203833.GD27592@ravnborg.org>
+References: <20200225131055.27550-1-tzimmermann@suse.de>
+ <20200225131055.27550-2-tzimmermann@suse.de>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200225131055.27550-2-tzimmermann@suse.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=eMA9ckh1 c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8
+ a=e5mUnYsNAAAA:8 a=2WS2h4KZY83Cp39CgdIA:9 a=CjuIK1q_8ugA:10
+ a=E9Po1WZjFZOl8hwRPBS3:22 a=Vxmtnl_E_bksehYqCbjh:22
 X-Mailman-Approved-At: Fri, 28 Feb 2020 08:06:13 +0000
-Subject: [Spice-devel] [PATCH 07/51] drm/qxl: Use drmm_add_final_kfree
+Subject: Re: [Spice-devel] [PATCH v3 1/4] drm/simple-kms: Add
+ drm_simple_encoder_{init, create}()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,64 +47,118 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- m.felsch@pengutronix.de, virtualization@lists.linux-foundation.org,
- Gerd Hoffmann <kraxel@redhat.com>, Dave Airlie <airlied@redhat.com>,
- Daniel Vetter <daniel.vetter@intel.com>, l.stach@pengutronix.de
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ virtualization@lists.linux-foundation.org, noralf@tronnes.org,
+ kraxel@redhat.com, daniel@ffwll.ch, alexander.deucher@amd.com,
+ spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-With this we can drop the final kfree from the release function.
-
-Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: virtualization@lists.linux-foundation.org
-Cc: spice-devel@lists.freedesktop.org
----
- drivers/gpu/drm/qxl/qxl_drv.c | 2 --
- drivers/gpu/drm/qxl/qxl_kms.c | 2 ++
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 4fda3f9b29f4..09102e2efabc 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
- 	 */
- 	qxl_modeset_fini(qdev);
- 	qxl_device_fini(qdev);
--	dev->dev_private = NULL;
--	kfree(qdev);
- }
- 
- static void
-diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
-index 70b20ee4741a..09d7b5f6d172 100644
---- a/drivers/gpu/drm/qxl/qxl_kms.c
-+++ b/drivers/gpu/drm/qxl/qxl_kms.c
-@@ -27,6 +27,7 @@
- #include <linux/pci.h>
- 
- #include <drm/drm_drv.h>
-+#include <drm/drm_managed.h>
- #include <drm/drm_probe_helper.h>
- 
- #include "qxl_drv.h"
-@@ -121,6 +122,7 @@ int qxl_device_init(struct qxl_device *qdev,
- 	qdev->ddev.pdev = pdev;
- 	pci_set_drvdata(pdev, &qdev->ddev);
- 	qdev->ddev.dev_private = qdev;
-+	drmm_add_final_kfree(&qdev->ddev, qdev);
- 
- 	mutex_init(&qdev->gem.mutex);
- 	mutex_init(&qdev->update_area_mutex);
--- 
-2.24.1
-
+On Tue, Feb 25, 2020 at 02:10:52PM +0100, Thomas Zimmermann wrote:
+> This patch makes the internal encoder implementation of the simple
+> KMS helpers available to drivers.
+> 
+> These simple-encoder helpers initialize an encoder with an empty
+> implementation. This covers the requirements of most of the existing
+> DRM drivers. A call to drm_simple_encoder_create() allocates and
+> initializes an encoder instance, a call to drm_simple_encoder_init()
+> initializes a pre-allocated instance.
+> 
+> v3:
+> 	* remove drm_simple_encoder_create(); not required yet
+> 	* provide more precise documentation
+> v2:
+> 	* move simple encoder to KMS helpers
+> 	* remove name argument; simplifies implementation
+> 	* don't allocate with devm_ interfaces; unsafe with DRM
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
+> ---
+>  drivers/gpu/drm/drm_simple_kms_helper.c | 34 ++++++++++++++++++++++---
+>  include/drm/drm_simple_kms_helper.h     |  4 +++
+>  2 files changed, 35 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_simple_kms_helper.c b/drivers/gpu/drm/drm_simple_kms_helper.c
+> index 15fb516ae2d8..04309e4660de 100644
+> --- a/drivers/gpu/drm/drm_simple_kms_helper.c
+> +++ b/drivers/gpu/drm/drm_simple_kms_helper.c
+> @@ -26,12 +26,41 @@
+>   * entity. Some flexibility for code reuse is provided through a separately
+>   * allocated &drm_connector object and supporting optional &drm_bridge
+>   * encoder drivers.
+> + *
+> + * Many drivers require only a very simple encoder that fulfills the minimum
+> + * requirements of the display pipeline and does not add additional
+> + * functionality. The function drm_simple_encoder_init() provides an
+> + * implementation of such an encoder.
+>   */
+>  
+> -static const struct drm_encoder_funcs drm_simple_kms_encoder_funcs = {
+> +static const struct drm_encoder_funcs drm_simple_encoder_funcs_cleanup = {
+>  	.destroy = drm_encoder_cleanup,
+>  };
+>  
+> +/**
+> + * drm_simple_encoder_init - Initialize a preallocated encoder
+> + * @dev: drm device
+> + * @funcs: callbacks for this encoder
+> + * @encoder_type: user visible type of the encoder
+> + *
+> + * Initialises a preallocated encoder that has no further functionality.
+> + * Settings for possible CRTC and clones are left to their initial values.
+> + * The encoder will be cleaned up automatically as part of the mode-setting
+> + * cleanup.
+> + *
+> + * Returns:
+> + * Zero on success, error code on failure.
+> + */
+> +int drm_simple_encoder_init(struct drm_device *dev,
+> +			    struct drm_encoder *encoder,
+> +			    int encoder_type)
+> +{
+> +	return drm_encoder_init(dev, encoder,
+> +				&drm_simple_encoder_funcs_cleanup,
+> +				encoder_type, NULL);
+> +}
+> +EXPORT_SYMBOL(drm_simple_encoder_init);
+> +
+>  static enum drm_mode_status
+>  drm_simple_kms_crtc_mode_valid(struct drm_crtc *crtc,
+>  			       const struct drm_display_mode *mode)
+> @@ -288,8 +317,7 @@ int drm_simple_display_pipe_init(struct drm_device *dev,
+>  		return ret;
+>  
+>  	encoder->possible_crtcs = drm_crtc_mask(crtc);
+> -	ret = drm_encoder_init(dev, encoder, &drm_simple_kms_encoder_funcs,
+> -			       DRM_MODE_ENCODER_NONE, NULL);
+> +	ret = drm_simple_encoder_init(dev, encoder, DRM_MODE_ENCODER_NONE);
+>  	if (ret || !connector)
+>  		return ret;
+>  
+> diff --git a/include/drm/drm_simple_kms_helper.h b/include/drm/drm_simple_kms_helper.h
+> index e253ba7bea9d..a026375464ff 100644
+> --- a/include/drm/drm_simple_kms_helper.h
+> +++ b/include/drm/drm_simple_kms_helper.h
+> @@ -181,4 +181,8 @@ int drm_simple_display_pipe_init(struct drm_device *dev,
+>  			const uint64_t *format_modifiers,
+>  			struct drm_connector *connector);
+>  
+> +int drm_simple_encoder_init(struct drm_device *dev,
+> +			    struct drm_encoder *encoder,
+> +			    int encoder_type);
+> +
+>  #endif /* __LINUX_DRM_SIMPLE_KMS_HELPER_H */
+> -- 
+> 2.25.0
+> 
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
