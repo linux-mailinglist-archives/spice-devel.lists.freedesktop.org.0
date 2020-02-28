@@ -1,41 +1,52 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 101CA17326D
-	for <lists+spice-devel@lfdr.de>; Fri, 28 Feb 2020 09:06:18 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 003A7173271
+	for <lists+spice-devel@lfdr.de>; Fri, 28 Feb 2020 09:06:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9ED886EE3E;
-	Fri, 28 Feb 2020 08:06:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6CE806EE45;
+	Fri, 28 Feb 2020 08:06:35 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 75EC86E978;
- Thu, 27 Feb 2020 20:45:40 +0000 (UTC)
-Received: from ravnborg.org (unknown [158.248.194.18])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by asavdk4.altibox.net (Postfix) with ESMTPS id B61E3804F4;
- Thu, 27 Feb 2020 21:45:37 +0100 (CET)
-Date: Thu, 27 Feb 2020 21:45:36 +0100
-From: Sam Ravnborg <sam@ravnborg.org>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20200227204536.GF27592@ravnborg.org>
-References: <20200225131055.27550-1-tzimmermann@suse.de>
- <20200225131055.27550-5-tzimmermann@suse.de>
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5296F6E10B
+ for <spice-devel@lists.freedesktop.org>; Fri, 28 Feb 2020 01:32:26 +0000 (UTC)
+Received: by mail-lj1-x231.google.com with SMTP id a12so372874ljj.2
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2020 17:32:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=uplexsoft-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=rJSZWzu49+pBXRNIJxTrAGs54K9G8Jy1mu8GMQVjFhU=;
+ b=hnm5N/9vOw9D2rcb+WR/KiHp1pXk2QpembuosaY3xODDo5Q9msRavWKKmA+cl98DKL
+ 98SsZrBNzOfwl+tR1g33fSKXu2T3yVn5kf6YeawZBpYpSLaqGAvOLyHjSAl5jVh/+wcO
+ Hwf0UlN0tD5ijB4tAtT9CUlEa3HgrgzDbs0XG7NHNbR9KtPNN3z7moKhcF8D4BFEKa5d
+ OyzfrVLniYTKxp//r6/JJwHp3cYqsdjx1I2tg5uc92ZxBfd7eAvTCqlSxZJ+YookTAAG
+ ynDzcq7AXvIFy57x4BBz6ylbVUr7TprsqT/8K9BHsFQVoQC6iQ8H2nXxlXJKajTVvaXH
+ d4mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=rJSZWzu49+pBXRNIJxTrAGs54K9G8Jy1mu8GMQVjFhU=;
+ b=oTl87k6Mgy9ygz/tDeAmnW3vSndTCSEErgjft/R1++Q1XBri4rhV3Dob5tvIEY0YZF
+ OxeRMtB+CFiJWaIKsCZASmZk+Ib+PiT+xp4GdQrKcJXctu1XGAUN5KFIhjdTCGG7FcC3
+ CyDluwJMxX7TQz6/z389hyxRuu6q7EHcr/ejAaHzQMif4rB4yvZaFl3EDZb3GMLP5oaA
+ v+Ey4IVmsEZAG8e4iE9PYWjNTO22Wbj0o6gbzWVca23GQWcpQZghKnRNEsZEDbl2IzRA
+ CHgJQ+IlGURNVMehcGZx/WxM3y7EgD9P0z6g8uFXpndiPVDmSMG8MKOYHaQkGzk3qM07
+ nPAg==
+X-Gm-Message-State: ANhLgQ1UEoIkEdINR6um+HRugQq5iLZqmgdVlkLovC65cbuT69RJo/p3
+ ziVNm3TxWOZehhtGlZZhzgZUD+T6JcDyjfS47rJE/urMVyY=
+X-Google-Smtp-Source: ADFU+vsDA0RpCVwA39x8UKmfv0ARS2b0wS2mDMN3eoPPGDtJ8XvzIg9GN8azGBBWNqEMfWrK/kM7yaxdooA1GPNJedY=
+X-Received: by 2002:a2e:b0c9:: with SMTP id g9mr1210591ljl.134.1582853544273; 
+ Thu, 27 Feb 2020 17:32:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200225131055.27550-5-tzimmermann@suse.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.3 cv=XpTUx2N9 c=1 sm=1 tr=0
- a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
- a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8
- a=20KFwNOVAAAA:8 a=e5mUnYsNAAAA:8 a=o9TgPHjXIZK-mWzE72AA:9
- a=izEWnGWktayRdts4:21 a=Adzejz0Cq-E-AEgY:21 a=CjuIK1q_8ugA:10
- a=E9Po1WZjFZOl8hwRPBS3:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Mailman-Approved-At: Fri, 28 Feb 2020 08:06:13 +0000
-Subject: Re: [Spice-devel] [PATCH v3 4/4] drm/qxl: Use simple encoder
+From: =?UTF-8?B?7J207Z2s7KSA?= <gogohiman@uplexsoft.com>
+Date: Fri, 28 Feb 2020 10:32:06 +0900
+Message-ID: <CA+kg7JwMrSewked1yB6FDHK=PEQhMwNTM7b6yYK7J_ZjYFDJqw@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Fri, 28 Feb 2020 08:06:34 +0000
+Subject: [Spice-devel] Please contact us regarding spice
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,101 +58,91 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- virtualization@lists.linux-foundation.org, noralf@tronnes.org,
- kraxel@redhat.com, daniel@ffwll.ch, alexander.deucher@amd.com,
- spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1266333615=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Thomas.
+--===============1266333615==
+Content-Type: multipart/alternative; boundary="0000000000003cfe24059f98cfdd"
 
-On Tue, Feb 25, 2020 at 02:10:55PM +0100, Thomas Zimmermann wrote:
-> The qxl driver uses an empty implementation for its encoder. Replace
-> the code with the generic simple encoder.
-> 
-> v2:
-> 	* rebase onto new simple-encoder interface
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Acked-by: Sam Ravnborg <sam@ravnborg.org>
-> Acked-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  drivers/gpu/drm/qxl/qxl_display.c | 18 +++---------------
->  1 file changed, 3 insertions(+), 15 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-> index ab4f8dd00400..9c0e1add59fb 100644
-> --- a/drivers/gpu/drm/qxl/qxl_display.c
-> +++ b/drivers/gpu/drm/qxl/qxl_display.c
-> @@ -31,6 +31,7 @@
->  #include <drm/drm_gem_framebuffer_helper.h>
->  #include <drm/drm_plane_helper.h>
->  #include <drm/drm_probe_helper.h>
-> +#include <drm/drm_simple_kms_helper.h>
->  
->  #include "qxl_drv.h"
->  #include "qxl_object.h"
-> @@ -1007,9 +1008,6 @@ static struct drm_encoder *qxl_best_encoder(struct drm_connector *connector)
->  	return &qxl_output->enc;
->  }
->  
-> -static const struct drm_encoder_helper_funcs qxl_enc_helper_funcs = {
-> -};
-> -
->  static const struct drm_connector_helper_funcs qxl_connector_helper_funcs = {
->  	.get_modes = qxl_conn_get_modes,
->  	.mode_valid = qxl_conn_mode_valid,
-> @@ -1059,15 +1057,6 @@ static const struct drm_connector_funcs qxl_connector_funcs = {
->  	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
->  };
->  
-> -static void qxl_enc_destroy(struct drm_encoder *encoder)
-> -{
-> -	drm_encoder_cleanup(encoder);
-> -}
-> -
-> -static const struct drm_encoder_funcs qxl_enc_funcs = {
-> -	.destroy = qxl_enc_destroy,
-> -};
-> -
->  static int qxl_mode_create_hotplug_mode_update_property(struct qxl_device *qdev)
->  {
->  	if (qdev->hotplug_mode_update_property)
-> @@ -1098,15 +1087,14 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
->  	drm_connector_init(dev, &qxl_output->base,
->  			   &qxl_connector_funcs, DRM_MODE_CONNECTOR_VIRTUAL);
->  
-> -	drm_encoder_init(dev, &qxl_output->enc, &qxl_enc_funcs,
-> -			 DRM_MODE_ENCODER_VIRTUAL, NULL);
-> +	drm_simple_encoder_init(dev, &qxl_output->enc,
-> +				DRM_MODE_ENCODER_VIRTUAL);
-return value is ignored - as it was before.
-A quick grep told that it is 50/50 if return value is checked.
-So OK.
+--0000000000003cfe24059f98cfdd
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
->  
->  	/* we get HPD via client monitors config */
->  	connector->polled = DRM_CONNECTOR_POLL_HPD;
->  	encoder->possible_crtcs = 1 << num_output;
->  	drm_connector_attach_encoder(&qxl_output->base,
->  					  &qxl_output->enc);
-> -	drm_encoder_helper_add(encoder, &qxl_enc_helper_funcs);
->  	drm_connector_helper_add(connector, &qxl_connector_helper_funcs);
->  
->  	drm_object_attach_property(&connector->base,
-> -- 
-> 2.25.0
-> 
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+Please contact us
+I want to connect the assigned vGPU to VM after installing virt-viewer on a
+Windows 10 client in Redhat + KVM + Nvidia GPU + spice server environment
+It is possible to connect to RDP by assigning vGPU to the current VM, but
+not to virt-viewer.
+If there is a way to solve this problem, please contact us.
+*---------------------------------------------**---**---**--**--*
+*(=EC=A3=BC)=EC=9C=A0=ED=94=8C=EB=A0=89=EC=8A=A4=EC=86=8C=ED=94=84=ED=8A=B8=
+ **UPLEX**soft*
+=EC=9D=B4=ED=9D=AC=EC=A4=80 =EB=B6=80=EC=9E=A5
+Mobile : 010-4111-0670, Fax : 02-508-6881
+e-mail : gogohiman@uplexsoft.com <gilsoo.kim@uplexsoft.com>
+(=EC=9A=B0)14057 =EA=B2=BD=EA=B8=B0=EB=8F=84 =EC=95=88=EC=96=91=EC=8B=9C =
+=EB=8F=99=EC=95=88=EA=B5=AC =EB=B2=8C=EB=A7=90=EB=A1=9C 126, =EC=98=A4=EB=
+=B9=84=EC=A6=88=ED=83=80=EC=9B=8C 605=ED=98=B8
+*---------------------------------------------**---**---**--**--*
+
+--0000000000003cfe24059f98cfdd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Please contact us<br>I want to connect the assigned vGPU t=
+o VM after installing virt-viewer on a Windows 10 client in Redhat + KVM + =
+Nvidia GPU + spice server environment<br>It is possible to connect to RDP b=
+y assigning vGPU to the current VM, but not to virt-viewer.<div>If there is=
+ a way to solve this problem, please contact us.<br clear=3D"all"><div><div=
+ dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><=
+div dir=3D"ltr"><div><div dir=3D"ltr"><div><strong><font face=3D"GulimChe">=
+---------------------------------------------</font></strong><strong><font =
+face=3D"GulimChe">---</font></strong><strong><font face=3D"GulimChe">---</f=
+ont></strong><strong><font face=3D"GulimChe">--</font></strong><strong><fon=
+t face=3D"GulimChe">--</font></strong><br></div><div><font size=3D"2"><stro=
+ng><font face=3D"arial, helvetica, sans-serif">(=EC=A3=BC)=EC=9C=A0=ED=94=
+=8C=EB=A0=89=EC=8A=A4=EC=86=8C=ED=94=84=ED=8A=B8</font><font face=3D"GulimC=
+he">=C2=A0</font></strong><strong><span lang=3D"EN-US" style=3D"font-family=
+:&quot;arial black&quot;,sans-serif;color:rgb(204,0,0)">UPLEX</span></stron=
+g><strong><span lang=3D"EN-US" style=3D"font-family:=EA=B5=B4=EB=A6=BC;colo=
+r:rgb(204,0,0)">soft</span></strong><font face=3D"GulimChe"><br>=EC=9D=B4=
+=ED=9D=AC=EC=A4=80 =EB=B6=80=EC=9E=A5</font></font></div><div><font size=3D=
+"2"><font face=3D"GulimChe">Mobile : 010-4111-0670, Fax : 02-508-6881<br>e-=
+mail : gogohiman</font><a href=3D"mailto:gilsoo.kim@uplexsoft.com" style=3D=
+"color:rgb(17,85,204)" target=3D"_blank"><font color=3D"#0000ff" face=3D"Gu=
+limChe">@uplexsoft.com</font></a><br><font face=3D"GulimChe">(=EC=9A=B0)140=
+57</font></font><span lang=3D"EN-US" style=3D"font-family:=EA=B5=B4=EB=A6=
+=BC;font-size:12px;text-align:justify;text-indent:24px">=C2=A0</span><span =
+style=3D"font-family:=EA=B5=B4=EB=A6=BC;font-size:12px;text-align:justify;t=
+ext-indent:24px">=EA=B2=BD=EA=B8=B0=EB=8F=84 =EC=95=88=EC=96=91=EC=8B=9C =
+=EB=8F=99=EC=95=88=EA=B5=AC =EB=B2=8C=EB=A7=90=EB=A1=9C</span><span lang=3D=
+"EN-US" style=3D"font-family:=EA=B5=B4=EB=A6=BC;font-size:12px;text-align:j=
+ustify;text-indent:24px">=C2=A0126,=C2=A0</span><span lang=3D"EN-US" style=
+=3D"font-family:=EA=B5=B4=EB=A6=BC;font-size:12px;text-align:justify;text-i=
+ndent:24px">=EC=98=A4</span><span style=3D"font-family:=EA=B5=B4=EB=A6=BC;f=
+ont-size:12px;text-align:justify;text-indent:24px">=EB=B9=84=EC=A6=88=ED=83=
+=80=EC=9B=8C=C2=A0</span><span lang=3D"EN-US" style=3D"font-family:=EA=B5=
+=B4=EB=A6=BC;font-size:12px;text-align:justify;text-indent:24px">605</span>=
+<span style=3D"font-family:=EA=B5=B4=EB=A6=BC;font-size:12px;text-align:jus=
+tify;text-indent:24px">=ED=98=B8</span></div><div><strong><font face=3D"Gul=
+imChe">---------------------------------------------</font></strong><strong=
+><font face=3D"GulimChe">---</font></strong><strong><font face=3D"GulimChe"=
+>---</font></strong><strong><font face=3D"GulimChe">--</font></strong><stro=
+ng><font face=3D"GulimChe">--</font></strong></div></div></div></div></div>=
+</div></div></div>
+
+--0000000000003cfe24059f98cfdd--
+
+--===============1266333615==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1266333615==--
