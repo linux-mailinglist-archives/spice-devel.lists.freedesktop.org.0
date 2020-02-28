@@ -1,33 +1,38 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5F9A1732E1
-	for <lists+spice-devel@lfdr.de>; Fri, 28 Feb 2020 09:26:57 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3594E17459F
+	for <lists+spice-devel@lfdr.de>; Sat, 29 Feb 2020 09:34:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 106B26EE6C;
-	Fri, 28 Feb 2020 08:26:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AF1C76E15A;
+	Sat, 29 Feb 2020 08:34:28 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93F556EE50;
- Fri, 28 Feb 2020 08:18:33 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 49642B345;
- Fri, 28 Feb 2020 08:18:32 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: airlied@linux.ie, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kraxel@redhat.com, noralf@tronnes.org,
- sam@ravnborg.org, alexander.deucher@amd.com, emil.velikov@collabora.com
-Date: Fri, 28 Feb 2020 09:18:28 +0100
-Message-Id: <20200228081828.18463-5-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200228081828.18463-1-tzimmermann@suse.de>
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3E2A76F4B5;
+ Fri, 28 Feb 2020 19:36:09 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk4.altibox.net (Postfix) with ESMTPS id 0483980514;
+ Fri, 28 Feb 2020 20:36:04 +0100 (CET)
+Date: Fri, 28 Feb 2020 20:36:03 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200228193603.GA22966@ravnborg.org>
 References: <20200228081828.18463-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Fri, 28 Feb 2020 08:26:53 +0000
-Subject: [Spice-devel] [PATCH v4 4/4] drm/qxl: Use simple encoder
+Content-Disposition: inline
+In-Reply-To: <20200228081828.18463-1-tzimmermann@suse.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=XpTUx2N9 c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10
+ a=M3ojcJYEX91-BlvvUz8A:9 a=CjuIK1q_8ugA:10
+X-Mailman-Approved-At: Sat, 29 Feb 2020 08:34:28 +0000
+Subject: Re: [Spice-devel] [PATCH v4 0/4] drm: Provide a simple encoder
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,113 +44,39 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: airlied@linux.ie, dri-devel@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ virtualization@lists.linux-foundation.org, noralf@tronnes.org,
+ kraxel@redhat.com, daniel@ffwll.ch, alexander.deucher@amd.com,
+ spice-devel@lists.freedesktop.org, emil.velikov@collabora.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-The qxl driver uses an empty implementation for its encoder. Replace
-the code with the generic simple encoder.
+Hi Thomas.
 
-v4:
-	* handle errors returned from drm_simple_encoder_init()
-v2:
-	* rebase onto new simple-encoder interface
+On Fri, Feb 28, 2020 at 09:18:24AM +0100, Thomas Zimmermann wrote:
+> Many DRM drivers implement an encoder with an empty implementation. This
+> patchset adds drm_simple_encoder_init(), which drivers can use instead.
+> Except for the destroy callback, the simple encoder's implementation is
+> empty.
+> 
+> The patchset also converts 4 encoder instances to use the simple-encoder
+> helpers. But there are at least 11 other drivers which can use the helper
+> and I think I did not examine all drivers yet.
+> 
+> The patchset was smoke-tested on mgag200 by running the fbdev console
+> and Gnome on X11.
+> 
+> v4:
+> 	* print error messages with drm_err() (Sam)
+> 	* qxl: handle errors of drm_simple_encoder_init() (Sam)
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/qxl/qxl_display.c | 29 ++++++++++++++---------------
- 1 file changed, 14 insertions(+), 15 deletions(-)
+Looked through the patches - all looked good.
+IMO ready to apply.
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index ab4f8dd00400..09583a08e141 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -31,6 +31,7 @@
- #include <drm/drm_gem_framebuffer_helper.h>
- #include <drm/drm_plane_helper.h>
- #include <drm/drm_probe_helper.h>
-+#include <drm/drm_simple_kms_helper.h>
- 
- #include "qxl_drv.h"
- #include "qxl_object.h"
-@@ -1007,9 +1008,6 @@ static struct drm_encoder *qxl_best_encoder(struct drm_connector *connector)
- 	return &qxl_output->enc;
- }
- 
--static const struct drm_encoder_helper_funcs qxl_enc_helper_funcs = {
--};
--
- static const struct drm_connector_helper_funcs qxl_connector_helper_funcs = {
- 	.get_modes = qxl_conn_get_modes,
- 	.mode_valid = qxl_conn_mode_valid,
-@@ -1059,15 +1057,6 @@ static const struct drm_connector_funcs qxl_connector_funcs = {
- 	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
- };
- 
--static void qxl_enc_destroy(struct drm_encoder *encoder)
--{
--	drm_encoder_cleanup(encoder);
--}
--
--static const struct drm_encoder_funcs qxl_enc_funcs = {
--	.destroy = qxl_enc_destroy,
--};
--
- static int qxl_mode_create_hotplug_mode_update_property(struct qxl_device *qdev)
- {
- 	if (qdev->hotplug_mode_update_property)
-@@ -1086,6 +1075,7 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
- 	struct qxl_output *qxl_output;
- 	struct drm_connector *connector;
- 	struct drm_encoder *encoder;
-+	int ret;
- 
- 	qxl_output = kzalloc(sizeof(struct qxl_output), GFP_KERNEL);
- 	if (!qxl_output)
-@@ -1098,15 +1088,19 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
- 	drm_connector_init(dev, &qxl_output->base,
- 			   &qxl_connector_funcs, DRM_MODE_CONNECTOR_VIRTUAL);
- 
--	drm_encoder_init(dev, &qxl_output->enc, &qxl_enc_funcs,
--			 DRM_MODE_ENCODER_VIRTUAL, NULL);
-+	ret = drm_simple_encoder_init(dev, &qxl_output->enc,
-+				      DRM_MODE_ENCODER_VIRTUAL);
-+	if (ret) {
-+		drm_err(dev, "drm_simple_encoder_init() failed, error %d\n",
-+			ret);
-+		goto err_drm_connector_cleanup;
-+	}
- 
- 	/* we get HPD via client monitors config */
- 	connector->polled = DRM_CONNECTOR_POLL_HPD;
- 	encoder->possible_crtcs = 1 << num_output;
- 	drm_connector_attach_encoder(&qxl_output->base,
- 					  &qxl_output->enc);
--	drm_encoder_helper_add(encoder, &qxl_enc_helper_funcs);
- 	drm_connector_helper_add(connector, &qxl_connector_helper_funcs);
- 
- 	drm_object_attach_property(&connector->base,
-@@ -1116,6 +1110,11 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
- 	drm_object_attach_property(&connector->base,
- 				   dev->mode_config.suggested_y_property, 0);
- 	return 0;
-+
-+err_drm_connector_cleanup:
-+	drm_connector_cleanup(&qxl_output->base);
-+	kfree(qxl_output);
-+	return ret;
- }
- 
- static struct drm_framebuffer *
--- 
-2.25.0
-
+	Sam
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
