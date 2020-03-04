@@ -1,64 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FBC0178CF6
-	for <lists+spice-devel@lfdr.de>; Wed,  4 Mar 2020 09:58:14 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 45916178CF5
+	for <lists+spice-devel@lfdr.de>; Wed,  4 Mar 2020 09:58:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B0E4389229;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 27D5E8921A;
 	Wed,  4 Mar 2020 08:58:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D39BF893BC
- for <spice-devel@lists.freedesktop.org>; Wed,  4 Mar 2020 04:31:34 +0000 (UTC)
-Received: by mail-ot1-x342.google.com with SMTP id v19so738677ote.8
- for <spice-devel@lists.freedesktop.org>; Tue, 03 Mar 2020 20:31:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=i1xlbs3ZbDJUunrG0mUnxMqSYzI4Jrrt9ZvoGKTfYcA=;
- b=mKz8qgktXJjlsD4v4w7CRBUnqXzujHbbWhudDh37GcM/8kPum3j/j3WHX/fK9GmDUE
- TF0lKoAK2oJTLDxrxHbEOzW9mLfLJedSz5hT2EnY1334JPNFvxK2E27Sza3GmNpG4MHR
- YEtktMPfSPIc0bZSaYESIvhgzq3ZP4tjaaBPE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=i1xlbs3ZbDJUunrG0mUnxMqSYzI4Jrrt9ZvoGKTfYcA=;
- b=CYAiYuUyZDS4EU3xWCbmzLgMjERuZRR9ow3YnlLTEbOGrv6v0zjwY6oRlQ3SGuJrEQ
- KtEtfi5iDMmDkz9Tr22zh2whDToVuUZro95C96p96H2JWnecm6K+sl6J2Efopp+m6Pcs
- x1rQl0dQ1lM2ndfQ2nvskpmzhfmZXCHNYfQM0BVz8YMYnuasRmtSak0udtV1DdyE/fBu
- udPcZJ1lxvat6RzBs4nkVoGxsXMa510MLOxA4WTdb1WCaEmQaFEqWB+1wbaPy0dMnisv
- C9B0QtC3nAEJMUaD6wVdrG7xAHpUnqicgqhaZYnSTumvlxgM8Y1fgBZrqAFgkfIk9nnn
- XppA==
-X-Gm-Message-State: ANhLgQ369xoxhZe885Mx4qC394BYXSzAcc+fqUo/L6+PXUxNTKA67DOl
- vfnP9ZR8VPjC5MSNi8okwCS9M244Ny4=
-X-Google-Smtp-Source: ADFU+vsmwkbu4nkRbVktBqGa3XSrvy1RAgFGej4LFWInl5cfhukiRypFHMobX/YbFUSclkRo5cq23g==
-X-Received: by 2002:a9d:64cd:: with SMTP id n13mr973099otl.274.1583296293008; 
- Tue, 03 Mar 2020 20:31:33 -0800 (PST)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com.
- [209.85.210.53])
- by smtp.gmail.com with ESMTPSA id y13sm8665990otk.40.2020.03.03.20.31.31
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Mar 2020 20:31:31 -0800 (PST)
-Received: by mail-ot1-f53.google.com with SMTP id a20so772001otl.0
- for <spice-devel@lists.freedesktop.org>; Tue, 03 Mar 2020 20:31:31 -0800 (PST)
-X-Received: by 2002:a9d:75ca:: with SMTP id c10mr897245otl.97.1583296290586;
- Tue, 03 Mar 2020 20:31:30 -0800 (PST)
-MIME-Version: 1.0
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA0A76EAB0
+ for <spice-devel@lists.freedesktop.org>; Wed,  4 Mar 2020 06:43:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583304190;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=4fHgO8hU9Nn3A/mKut/Pf9QqB1oZmz2Y/YtOZ/w+kWY=;
+ b=gOwlQ9sqlxORhP/SGT6D9xCh7mVSkq9/oyjSL8qgbuZk7lyB2aDgdrk6A3Yc4Z/J92C16J
+ em0U8yAXVeiHp39tZhbOTdLzJ7q//W81RSE5iKfCs682x2kMaUy/O17oL+TiQrI7hNTjwL
+ fLGHRhhhtLzP39sN1UkQtaz+L73KIj0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-10-WbQqLtKTOnO822MGeUl4pw-1; Wed, 04 Mar 2020 01:42:58 -0500
+X-MC-Unique: WbQqLtKTOnO822MGeUl4pw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 29BD5189F760;
+ Wed,  4 Mar 2020 06:42:56 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-150.ams2.redhat.com
+ [10.36.116.150])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7B8F760C80;
+ Wed,  4 Mar 2020 06:42:52 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id B9E7D17506; Wed,  4 Mar 2020 07:42:51 +0100 (CET)
+Date: Wed, 4 Mar 2020 07:42:51 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Alexandre Courbot <acourbot@chromium.org>
+Message-ID: <20200304064251.zzkhevqgth6uets6@sirius.home.kraxel.org>
 References: <20200206102058.247258-1-keiichiw@chromium.org>
  <20200206102058.247258-2-keiichiw@chromium.org>
  <20200225095956.7rtwugfru4dbjj7q@sirius.home.kraxel.org>
  <CAD90VcaTJh5MTRggpOmCK2LAryMHha2+7nPkFVTT8N8S06tf-A@mail.gmail.com>
  <20200227092856.p4kuh5dhh2tk3nnf@sirius.home.kraxel.org>
-In-Reply-To: <20200227092856.p4kuh5dhh2tk3nnf@sirius.home.kraxel.org>
-From: Alexandre Courbot <acourbot@chromium.org>
-Date: Wed, 4 Mar 2020 13:31:19 +0900
-X-Gmail-Original-Message-ID: <CAPBb6MWwBbNULCfMxN_KLt_Zd8kmmNy2JPi6XjLF1YgxxCPydw@mail.gmail.com>
-Message-ID: <CAPBb6MWwBbNULCfMxN_KLt_Zd8kmmNy2JPi6XjLF1YgxxCPydw@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
+ <CAPBb6MWwBbNULCfMxN_KLt_Zd8kmmNy2JPi6XjLF1YgxxCPydw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAPBb6MWwBbNULCfMxN_KLt_Zd8kmmNy2JPi6XjLF1YgxxCPydw@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Mailman-Approved-At: Wed, 04 Mar 2020 08:58:08 +0000
 Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
  device specification
@@ -79,7 +72,7 @@ Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
  David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
  David Stevens <stevensd@chromium.org>, Daniel Vetter <daniel@ffwll.ch>,
  spice-devel@lists.freedesktop.org, Dmitry Sepp <dmitry.sepp@opensynergy.com>,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ =?utf-8?B?U3TDqXBoYW5l?= Marchesin <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
@@ -88,66 +81,46 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Thu, Feb 27, 2020 at 6:29 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
->   Hi,
->
-> > Dmitry's virtio-video driver
-> > https://patchwork.linuxtv.org/patch/61717/.
-> > Once it becomes fully functional, I'll post a list of possible
-> > improvements of protocol.
->
-> Cool.  Actually implementing things can find design problems
-> in the protocol you didn't notice earlier.
->
-> > > > +\begin{description}
-> > > > +\item[\field{version}] is the protocol version that the device talks.
-> > > > +  The device MUST set this to 0.
-> > >
-> > > What is the intended use case for this?
-> > >
-> > > Given that virtio has feature flags to negotiate support for optional
-> > > features and protocol extensions between driver and device, why do you
-> > > think this is needed?
-> >
-> > While feature flags work well when we "extend" the protocol with an
-> > optional feature, they don't when we want to "drop" or "modify"
-> > features.
-> > For example, I guess it'd be useful when we want:
-> > * to abandon a non-optional command,
-> > * to change a non-optional struct's layout,or
-> > * to change the order of commands in which the device expects to be sent.
-> >
-> > Though it might be possible to handle these changes by feature flags,
-> > I suspect the version number allow us to transition protocols more
-> > smoothly.
->
-> Feature flags can be mandatory, both device and driver can fail
-> initialization when a specific feature is not supported by the other
-> end.  So in case we did screw up things so badly that we have to
-> effectively start over (which I hope wouldn't be the case) we can add a
-> VERSION_2 feature flag for a new set of commands with new structs and
-> new semantics.
->
-> With a feature flag both driver and device can choose whenever they want
-> support v1 or v2 or both.  With a version config field this is more
-> limited, the device can't decide to support both.  So the bonus points
-> for a smooth transition go to the feature flags not the version field ;)
+  Hi,
 
-I agree that feature flags would be preferable in general, but I'm
-concerned by the fact that there is (IIUC) a limited number of them.
-Video tends to change significantly over time, and to have optional
-features that would also be presented as feature flags. After a while
-we may run out of them, while a new protocol version would allow us to
-extend the config struct with some new flags. Or am I missing
-something?
+> > With a feature flag both driver and device can choose whenever they want
+> > support v1 or v2 or both.  With a version config field this is more
+> > limited, the device can't decide to support both.  So the bonus points
+> > for a smooth transition go to the feature flags not the version field ;)
+> 
+> I agree that feature flags would be preferable in general, but I'm
+> concerned by the fact that there is (IIUC) a limited number of them.
 
-I also wonder how "support v1 or v2 or both" would work with feature
-flags. In order to make it possible to opt out of v1, I guess we would
-need "v1 supported" flag to begin with?
+We have 64 total, some reserved, 24 are available to devices right now,
+see https://www.kraxel.org/virtio/virtio-v1.1-cs01-video-v3.html#x1-130002
 
-Sorry for the newbie question about feature flags, I'm still in the
-process of wrapping my head around virtio. :)
+> Video tends to change significantly over time, and to have optional
+> features that would also be presented as feature flags. After a while
+> we may run out of them, while a new protocol version would allow us to
+> extend the config struct with some new flags. Or am I missing
+> something?
+
+Not everything needs a feature flag.  For example we have
+VIRTIO_VIDEO_CMD_QUERY_CAPABILITY, and we can add new video formats
+without needing a feature flag.  Maybe it is a good idea to explicitly
+say in the specs that this can happen and that the driver should simply
+ignore any unknown format returned by the device.
+
+> I also wonder how "support v1 or v2 or both" would work with feature
+> flags. In order to make it possible to opt out of v1, I guess we would
+> need "v1 supported" flag to begin with?
+
+The driver can ignore any device without v2 feature flag set.
+The device can refuse to accept a driver without v2 support (don't allow
+setting the FEATURES_OK bit).
+
+A explicit v1 feature flag would allow the guest driver print a more
+specific error message ("device doesn't support v1" instead of "feature
+negotiation failed"), but that's it.
+
+cheers,
+  Gerd
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
