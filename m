@@ -2,130 +2,66 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1630B177E92
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Mar 2020 19:44:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FBC0178CF6
+	for <lists+spice-devel@lfdr.de>; Wed,  4 Mar 2020 09:58:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6CDCC6E44C;
-	Tue,  3 Mar 2020 18:44:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B0E4389229;
+	Wed,  4 Mar 2020 08:58:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 1429 seconds by postgrey-1.36 at gabe;
- Tue, 03 Mar 2020 18:41:11 UTC
-Received: from gateway34.websitewelcome.com (gateway34.websitewelcome.com
- [192.185.148.204])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 070D489E35
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Mar 2020 18:41:11 +0000 (UTC)
-Received: from cm13.websitewelcome.com (cm13.websitewelcome.com [100.42.49.6])
- by gateway34.websitewelcome.com (Postfix) with ESMTP id ACD9D1C9E
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Mar 2020 12:17:20 -0600 (CST)
-Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
- id 9C6aj4dDYRP4z9C6ajSH0V; Tue, 03 Mar 2020 12:17:20 -0600
-X-Authority-Reason: nr=8
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ey4WjzYgUg1JN9sD4FRXGAPjCfky/AZd9UOFQ0HJlG0=; b=gXQ7WZT5wyzzwtk51w//ezXOQ8
- gC7Xv5gLPMT52rB6ZShyv2XBfyXvkKC22rA4sefKUXYJtEPtjQanAdIW5ApewUNP3CX/mhPBprm45
- BeWO/ZHdHnorUuYp+eccBBbasG7pPPd/v1lwgL0MM2AXtR63jMYZGO1zMe+vpwbqejcYVgXE2yaMb
- dxPdjy/x4fTSVDKTE5kYps/Sv76UiHOG7U+R4E4guIisKNXW5Jm9nqRepRbxb+xWxqzVKKePuThfq
- p7h1t2bLdOIdMX1Kb0C/lTE+96qhgc8pKd6f6bPyE6qrtPIyEU1g+RUeuktwmT9FjFtdoa7BZujT6
- ohN4jStg==;
-Received: from [201.162.240.41] (port=17449 helo=[192.168.43.132])
- by gator4166.hostgator.com with esmtpsa
- (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92)
- (envelope-from <gustavo@embeddedor.com>)
- id 1j9C6Y-003H1B-IC; Tue, 03 Mar 2020 12:17:19 -0600
-To: Jani Nikula <jani.nikula@linux.intel.com>,
- Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Rob Clark <robdclark@gmail.com>,
- Sean Paul <sean@poorly.run>, Dave Airlie <airlied@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Hans de Goede <hdegoede@redhat.com>,
- Eric Anholt <eric@anholt.net>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
-References: <20200225140347.GA22864@embeddedor> <87a756sqdc.fsf@intel.com>
-From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-Autocrypt: addr=gustavo@embeddedor.com; keydata=
- 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
- VtSixD1uOgytAP7RWS474w==
-Message-ID: <138ff691-94b3-1ce5-e7fa-e6d7c436bf8e@embeddedor.com>
-Date: Tue, 3 Mar 2020 12:20:16 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D39BF893BC
+ for <spice-devel@lists.freedesktop.org>; Wed,  4 Mar 2020 04:31:34 +0000 (UTC)
+Received: by mail-ot1-x342.google.com with SMTP id v19so738677ote.8
+ for <spice-devel@lists.freedesktop.org>; Tue, 03 Mar 2020 20:31:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=i1xlbs3ZbDJUunrG0mUnxMqSYzI4Jrrt9ZvoGKTfYcA=;
+ b=mKz8qgktXJjlsD4v4w7CRBUnqXzujHbbWhudDh37GcM/8kPum3j/j3WHX/fK9GmDUE
+ TF0lKoAK2oJTLDxrxHbEOzW9mLfLJedSz5hT2EnY1334JPNFvxK2E27Sza3GmNpG4MHR
+ YEtktMPfSPIc0bZSaYESIvhgzq3ZP4tjaaBPE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=i1xlbs3ZbDJUunrG0mUnxMqSYzI4Jrrt9ZvoGKTfYcA=;
+ b=CYAiYuUyZDS4EU3xWCbmzLgMjERuZRR9ow3YnlLTEbOGrv6v0zjwY6oRlQ3SGuJrEQ
+ KtEtfi5iDMmDkz9Tr22zh2whDToVuUZro95C96p96H2JWnecm6K+sl6J2Efopp+m6Pcs
+ x1rQl0dQ1lM2ndfQ2nvskpmzhfmZXCHNYfQM0BVz8YMYnuasRmtSak0udtV1DdyE/fBu
+ udPcZJ1lxvat6RzBs4nkVoGxsXMa510MLOxA4WTdb1WCaEmQaFEqWB+1wbaPy0dMnisv
+ C9B0QtC3nAEJMUaD6wVdrG7xAHpUnqicgqhaZYnSTumvlxgM8Y1fgBZrqAFgkfIk9nnn
+ XppA==
+X-Gm-Message-State: ANhLgQ369xoxhZe885Mx4qC394BYXSzAcc+fqUo/L6+PXUxNTKA67DOl
+ vfnP9ZR8VPjC5MSNi8okwCS9M244Ny4=
+X-Google-Smtp-Source: ADFU+vsmwkbu4nkRbVktBqGa3XSrvy1RAgFGej4LFWInl5cfhukiRypFHMobX/YbFUSclkRo5cq23g==
+X-Received: by 2002:a9d:64cd:: with SMTP id n13mr973099otl.274.1583296293008; 
+ Tue, 03 Mar 2020 20:31:33 -0800 (PST)
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com.
+ [209.85.210.53])
+ by smtp.gmail.com with ESMTPSA id y13sm8665990otk.40.2020.03.03.20.31.31
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Mar 2020 20:31:31 -0800 (PST)
+Received: by mail-ot1-f53.google.com with SMTP id a20so772001otl.0
+ for <spice-devel@lists.freedesktop.org>; Tue, 03 Mar 2020 20:31:31 -0800 (PST)
+X-Received: by 2002:a9d:75ca:: with SMTP id c10mr897245otl.97.1583296290586;
+ Tue, 03 Mar 2020 20:31:30 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <87a756sqdc.fsf@intel.com>
-Content-Language: en-US
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
-X-AntiAbuse: Original Domain - lists.freedesktop.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - embeddedor.com
-X-BWhitelist: no
-X-Source-IP: 201.162.240.41
-X-Source-L: No
-X-Exim-ID: 1j9C6Y-003H1B-IC
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: ([192.168.43.132]) [201.162.240.41]:17449
-X-Source-Auth: gustavo@embeddedor.com
-X-Email-Count: 28
-X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
-X-Local-Domain: yes
-X-Mailman-Approved-At: Tue, 03 Mar 2020 18:44:17 +0000
-Subject: Re: [Spice-devel] [PATCH][next] drm: Replace zero-length array with
- flexible-array member
+References: <20200206102058.247258-1-keiichiw@chromium.org>
+ <20200206102058.247258-2-keiichiw@chromium.org>
+ <20200225095956.7rtwugfru4dbjj7q@sirius.home.kraxel.org>
+ <CAD90VcaTJh5MTRggpOmCK2LAryMHha2+7nPkFVTT8N8S06tf-A@mail.gmail.com>
+ <20200227092856.p4kuh5dhh2tk3nnf@sirius.home.kraxel.org>
+In-Reply-To: <20200227092856.p4kuh5dhh2tk3nnf@sirius.home.kraxel.org>
+From: Alexandre Courbot <acourbot@chromium.org>
+Date: Wed, 4 Mar 2020 13:31:19 +0900
+X-Gmail-Original-Message-ID: <CAPBb6MWwBbNULCfMxN_KLt_Zd8kmmNy2JPi6XjLF1YgxxCPydw@mail.gmail.com>
+Message-ID: <CAPBb6MWwBbNULCfMxN_KLt_Zd8kmmNy2JPi6XjLF1YgxxCPydw@mail.gmail.com>
+To: Gerd Hoffmann <kraxel@redhat.com>
+X-Mailman-Approved-At: Wed, 04 Mar 2020 08:58:08 +0000
+Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
+ device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -137,82 +73,81 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, spice-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, freedreno@lists.freedesktop.org
+Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
+ virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
+ Kiran Pawar <kiran.pawar@opensynergy.com>, Hans Verkuil <hverkuil@xs4all.nl>,
+ David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ David Stevens <stevensd@chromium.org>, Daniel Vetter <daniel@ffwll.ch>,
+ spice-devel@lists.freedesktop.org, Dmitry Sepp <dmitry.sepp@opensynergy.com>,
+ =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
+ Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+On Thu, Feb 27, 2020 at 6:29 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+>   Hi,
+>
+> > Dmitry's virtio-video driver
+> > https://patchwork.linuxtv.org/patch/61717/.
+> > Once it becomes fully functional, I'll post a list of possible
+> > improvements of protocol.
+>
+> Cool.  Actually implementing things can find design problems
+> in the protocol you didn't notice earlier.
+>
+> > > > +\begin{description}
+> > > > +\item[\field{version}] is the protocol version that the device talks.
+> > > > +  The device MUST set this to 0.
+> > >
+> > > What is the intended use case for this?
+> > >
+> > > Given that virtio has feature flags to negotiate support for optional
+> > > features and protocol extensions between driver and device, why do you
+> > > think this is needed?
+> >
+> > While feature flags work well when we "extend" the protocol with an
+> > optional feature, they don't when we want to "drop" or "modify"
+> > features.
+> > For example, I guess it'd be useful when we want:
+> > * to abandon a non-optional command,
+> > * to change a non-optional struct's layout,or
+> > * to change the order of commands in which the device expects to be sent.
+> >
+> > Though it might be possible to handle these changes by feature flags,
+> > I suspect the version number allow us to transition protocols more
+> > smoothly.
+>
+> Feature flags can be mandatory, both device and driver can fail
+> initialization when a specific feature is not supported by the other
+> end.  So in case we did screw up things so badly that we have to
+> effectively start over (which I hope wouldn't be the case) we can add a
+> VERSION_2 feature flag for a new set of commands with new structs and
+> new semantics.
+>
+> With a feature flag both driver and device can choose whenever they want
+> support v1 or v2 or both.  With a version config field this is more
+> limited, the device can't decide to support both.  So the bonus points
+> for a smooth transition go to the feature flags not the version field ;)
 
+I agree that feature flags would be preferable in general, but I'm
+concerned by the fact that there is (IIUC) a limited number of them.
+Video tends to change significantly over time, and to have optional
+features that would also be presented as feature flags. After a while
+we may run out of them, while a new protocol version would allow us to
+extend the config struct with some new flags. Or am I missing
+something?
 
-On 2/25/20 08:17, Jani Nikula wrote:
-> On Tue, 25 Feb 2020, "Gustavo A. R. Silva" <gustavo@embeddedor.com> wrote:
->> The current codebase makes use of the zero-length array language
->> extension to the C90 standard, but the preferred mechanism to declare
->> variable-length types such as these ones is a flexible array member[1][2],
->> introduced in C99:
->>
->> struct foo {
->>         int stuff;
->>         struct boo array[];
->> };
->>
->> By making use of the mechanism above, we will get a compiler warning
->> in case the flexible array does not occur last in the structure, which
->> will help us prevent some kind of undefined behavior bugs from being
->> inadvertently introduced[3] to the codebase from now on.
->>
->> Also, notice that, dynamic memory allocations won't be affected by
->> this change:
->>
->> "Flexible array members have incomplete type, and so the sizeof operator
->> may not be applied. As a quirk of the original implementation of
->> zero-length arrays, sizeof evaluates to zero."[1]
->>
->> This issue was found with the help of Coccinelle.
->>
->> [1] https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html
->> [2] https://github.com/KSPP/linux/issues/21
->> [3] commit 76497732932f ("cxgb3/l2t: Fix undefined behaviour")
->>
->> Signed-off-by: Gustavo A. R. Silva <gustavo@embeddedor.com>
->> ---
->>  drivers/gpu/drm/etnaviv/etnaviv_gem.h         | 2 +-
->>  drivers/gpu/drm/gma500/intel_bios.h           | 2 +-
->>  drivers/gpu/drm/i915/display/intel_vbt_defs.h | 4 ++--
->>  drivers/gpu/drm/i915/gt/intel_lrc.c           | 2 +-
->>  drivers/gpu/drm/i915/i915_gpu_error.h         | 2 +-
-> 
-> Please split out the i915 changes to a separate patch.
-> 
+I also wonder how "support v1 or v2 or both" would work with feature
+flags. In order to make it possible to opt out of v1, I guess we would
+need "v1 supported" flag to begin with?
 
-Sure thing. I can do that.
-
->>  drivers/gpu/drm/msm/msm_gem.h                 | 2 +-
->>  drivers/gpu/drm/qxl/qxl_cmd.c                 | 2 +-
->>  drivers/gpu/drm/vboxvideo/vboxvideo.h         | 2 +-
->>  drivers/gpu/drm/vc4/vc4_drv.h                 | 2 +-
->>  drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c    | 2 +-
->>  drivers/gpu/drm/vmwgfx/vmwgfx_surface.c       | 2 +-
->>  include/drm/bridge/mhl.h                      | 4 ++--
->>  include/drm/drm_displayid.h                   | 2 +-
->>  include/uapi/drm/i915_drm.h                   | 4 ++--
-> 
-> Not sure it's worth touching uapi headers. They're full of both [0] and
-> []. Again, please at least split it to a separate patch to be decided
-> separately.
-> 
-
-Yeah, it's worth it; the purpose of these patches is to replace [0] with [] across
-the whole tree.
-
-Thanks
---
-Gustavo
-
+Sorry for the newbie question about feature flags, I'm still in the
+process of wrapping my head around virtio. :)
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
