@@ -1,55 +1,74 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9681F17CD6D
-	for <lists+spice-devel@lfdr.de>; Sat,  7 Mar 2020 11:05:14 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id F3CF517DBDB
+	for <lists+spice-devel@lfdr.de>; Mon,  9 Mar 2020 09:52:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 29A5B6E126;
-	Sat,  7 Mar 2020 10:05:11 +0000 (UTC)
-X-Original-To: Spice-devel@lists.freedesktop.org
-Delivered-To: Spice-devel@lists.freedesktop.org
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1E7256E126
- for <Spice-devel@lists.freedesktop.org>; Sat,  7 Mar 2020 10:05:08 +0000 (UTC)
-Received: by mail-vs1-xe30.google.com with SMTP id y204so3183261vsy.1
- for <Spice-devel@lists.freedesktop.org>; Sat, 07 Mar 2020 02:05:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=zoup-org.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/0ECV38uSOU1XbDaNMHE4Z/IM6K71LEkk6pfUuDbUlU=;
- b=aDQvtaAxBF72IeBOtdM/wembvEcUEXP/NHQE4i/65jN8bLYZOX0weqNmE9LD3aaK7T
- pGlO2WVHXFSXp4d6kAKy7MCkNp8f1nQ1+xW9mSqOqo44+CqfH0st+jZktvR7udGHAdbp
- AwHkUpE+OmZRMuJIa//d1Kh0nbmBpVlPOYaEO9k4rPg+PhYEUey7aMAxyinYALgxkTf2
- Z31aWO+O14ySm8p9vpzdBajbcysGT00/Yph9kTIRSKiFd0eBEXEkceAg3Z8TIWkQKTXI
- uhQZnMHrBquMP5gFXPqPmrype41enicVxGKNETRLCCxOWMIG8RE39qmNKOoz7A4KOAUK
- 7RIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/0ECV38uSOU1XbDaNMHE4Z/IM6K71LEkk6pfUuDbUlU=;
- b=W08VT3tYO8qlilY86kaRhrxsTF5yBdhVszvIDqrW2my99qCX8KhneTqNzhXzFiyArH
- 4VGr1H+4tcNEz6cewNHBDmnVPuNKp7+JscvcQ7QjrbFUJOU6q6oOJ92hyhn1jY6PaN6M
- 5RbaaSqdSQgJ2SdDwqSsBspW4b4eC5JR4JF9ju/5GSbYkTlvqAOFePDbiJ7qdAf8o1WN
- jO1FbbPME0YG1wIAlob5NV0VdrUTfd8Kukz7C476i76Xxapv7e5YK2Az2IFP632EB7pQ
- kqcdOwEnHMnmix6E0OcBHmeQuLtIBVAnKUoDu5fdPeRROjLmILrxXDvKe9iHbKvR7zoK
- IzCw==
-X-Gm-Message-State: ANhLgQ1bCdTWHNuacd6+AHJiYHLnvwOFeymSUZmXWvkcWyjkHo9tdcDj
- cxnFNBeKzQgvAHjYw/2XtS7Yg8JwmzZaT2eohBkPBA==
-X-Google-Smtp-Source: ADFU+vvh6oE1GJAHcTRZjuO7wFxLjEtamro9ajjEjgJsW4sxhEX5sjWA5bN+mEBg2I1d9vWYCpZOAJ8wmai/Ly2JFsE=
-X-Received: by 2002:a67:4c5:: with SMTP id 188mr4584880vse.43.1583575507958;
- Sat, 07 Mar 2020 02:05:07 -0800 (PST)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7088B6E357;
+	Mon,  9 Mar 2020 08:52:57 +0000 (UTC)
+X-Original-To: spice-devel@lists.freedesktop.org
+Delivered-To: spice-devel@lists.freedesktop.org
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ADC8F6E270;
+ Mon,  9 Mar 2020 07:49:52 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 8A072AD48;
+ Mon,  9 Mar 2020 07:49:50 +0000 (UTC)
+To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Rob Clark <robdclark@gmail.com>,
+ Sean Paul <sean@poorly.run>, Dave Airlie <airlied@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Hans de Goede <hdegoede@redhat.com>,
+ Eric Anholt <eric@anholt.net>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>
+References: <20200225140347.GA22864@embeddedor> <87a756sqdc.fsf@intel.com>
+ <138ff691-94b3-1ce5-e7fa-e6d7c436bf8e@embeddedor.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <67c46a2b-8127-a4b7-c825-8cba6f28db8c@suse.de>
+Date: Mon, 9 Mar 2020 08:49:45 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-References: <CAOvx4-1eG6nmiAdyb+xObGj921iCq-DT0FQRPUX_Uj175OYpkA@mail.gmail.com>
- <20200307082338.fw3s5oar3rxjgbj4@wingsuit>
-In-Reply-To: <20200307082338.fw3s5oar3rxjgbj4@wingsuit>
-From: Armin Ranjbar <zoup@zoup.org>
-Date: Sat, 7 Mar 2020 13:34:56 +0330
-Message-ID: <CAOvx4-2RmjdJM1PYdPgS_qF5sqVVBW=r-cxrHrmd9ciOotYZ4w@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>
-Subject: Re: [Spice-devel] USB Redirection doesn't work on Windows 10
+In-Reply-To: <138ff691-94b3-1ce5-e7fa-e6d7c436bf8e@embeddedor.com>
+X-Mailman-Approved-At: Mon, 09 Mar 2020 08:52:56 +0000
+Subject: Re: [Spice-devel] [PATCH][next] drm: Replace zero-length array with
+ flexible-array member
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,96 +80,172 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Spice List <Spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============0507209746=="
+Cc: linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, spice-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, freedreno@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1643306588=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0507209746==
-Content-Type: multipart/alternative; boundary="000000000000a094a205a040e7e0"
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1643306588==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="Ul1CrpBm5H0rrZlYhdIfEA75XDUYdEO4y"
 
---000000000000a094a205a040e7e0
-Content-Type: text/plain; charset="UTF-8"
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--Ul1CrpBm5H0rrZlYhdIfEA75XDUYdEO4y
+Content-Type: multipart/mixed; boundary="0DgKy29qpwpTjPxx9ZHosYzYcoKck294a";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Rob Clark <robdclark@gmail.com>,
+ Sean Paul <sean@poorly.run>, Dave Airlie <airlied@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Hans de Goede <hdegoede@redhat.com>,
+ Eric Anholt <eric@anholt.net>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>
+Cc: etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org
+Message-ID: <67c46a2b-8127-a4b7-c825-8cba6f28db8c@suse.de>
+Subject: Re: [PATCH][next] drm: Replace zero-length array with flexible-array
+ member
+References: <20200225140347.GA22864@embeddedor> <87a756sqdc.fsf@intel.com>
+ <138ff691-94b3-1ce5-e7fa-e6d7c436bf8e@embeddedor.com>
+In-Reply-To: <138ff691-94b3-1ce5-e7fa-e6d7c436bf8e@embeddedor.com>
 
-Hi! Thanks for the reply,
-
-
-On Sat, Mar 7, 2020 at 11:53 AM Victor Toso <victortoso@redhat.com> wrote:
-
-> From your logs:
->     (remote-viewer.exe:6384): GSpice-DEBUG: 19:00:09.266:
-> ../../src/spice-session.c:280 New session (compiled from package spice-gtk
-> 0.35)
->
-> Are you sure you are running the 0.37 one?
-
-
-ri  gir1.2-spice-client-glib-2.0         0.33-3.3+deb9u1
-amd64        GObject for communicating with Spice servers
-(GObject-Introspection)
-ri  gir1.2-spice-client-gtk-3.0          0.33-3.3+deb9u1
-amd64        GTK3 widget for SPICE clients (GObject-Introspection)
-ii  libspice-client-glib-2.0-8:amd64     0.37-1
- amd64        GObject for communicating with Spice servers (runtime library)
-ii  libspice-client-gtk-3.0-5:amd64      0.37-1
- amd64        GTK3 widget for SPICE clients (runtime library)
-ii  libspice-server1:amd64               0.14.2-4
- amd64        Implements the server side of the SPICE protocol
-ii  spice-client-glib-usb-acl-helper     0.37-1
- amd64        Helper tool to validate usb ACLs
-ii  spice-client-gtk                     0.37-1
- amd64        Simple clients for interacting with SPICE servers
-
-I think the prebuilt windows virt-viewer is built based on 0.35, correct?
-so that might be the issue here.
-
---000000000000a094a205a040e7e0
-Content-Type: text/html; charset="UTF-8"
+--0DgKy29qpwpTjPxx9ZHosYzYcoKck294a
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div><div dir=3D"ltr" class=3D"gmail_sign=
-ature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div>Hi! Thanks =
-for the reply,</div></div></div></div><br></div><br><div class=3D"gmail_quo=
-te"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Mar 7, 2020 at 11:53 AM V=
-ictor Toso &lt;<a href=3D"mailto:victortoso@redhat.com">victortoso@redhat.c=
-om</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-">From your logs:<br>
-=C2=A0 =C2=A0 (remote-viewer.exe:6384): GSpice-DEBUG: 19:00:09.266: ../../s=
-rc/spice-session.c:280 New session (compiled from package spice-gtk 0.35) <=
-br>
-<br>
-Are you sure you are running the 0.37 one?</blockquote><div><br></div><div>=
-ri =C2=A0gir1.2-spice-client-glib-2.0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.33-3.3+=
-deb9u1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 amd64=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0GObject for communicating with Spice servers (G=
-Object-Introspection)<br>ri =C2=A0gir1.2-spice-client-gtk-3.0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A00.33-3.3+deb9u1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 amd64 =C2=A0 =C2=A0 =C2=A0 =C2=A0GTK3 widget for S=
-PICE clients (GObject-Introspection)<br>ii =C2=A0libspice-client-glib-2.0-8=
-:amd64 =C2=A0 =C2=A0 0.37-1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0amd64 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0GObject for communicating with Spice servers (runtime library)<br=
->ii =C2=A0libspice-client-gtk-3.0-5:amd64 =C2=A0 =C2=A0 =C2=A00.37-1 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0amd64 =C2=A0 =C2=A0 =C2=A0 =C2=A0GTK3 widget for SPICE cli=
-ents (runtime library)<br>ii =C2=A0libspice-server1:amd64 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0.14.2-4 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0amd64 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0Implements the server side of the SPICE protocol<br>ii =C2=A0=
-spice-client-glib-usb-acl-helper =C2=A0 =C2=A0 0.37-1 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0amd64 =C2=A0 =C2=A0 =C2=A0 =C2=A0Helper tool to validate usb ACLs<br>ii =
-=C2=A0spice-client-gtk =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 0.37-1 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0amd64 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0Simple clients for interacting with SPICE servers<br></div><div><br><=
-/div><div>I think the prebuilt windows virt-viewer is built based on 0.35, =
-correct? so that might be the issue here.</div><div><br></div></div></div>
+Hi Gustavo
 
---000000000000a094a205a040e7e0--
+Am 03.03.20 um 19:20 schrieb Gustavo A. R. Silva:
+>=20
+>=20
+> On 2/25/20 08:17, Jani Nikula wrote:
+>> On Tue, 25 Feb 2020, "Gustavo A. R. Silva" <gustavo@embeddedor.com> wr=
+ote:
+>>> The current codebase makes use of the zero-length array language
+>>> extension to the C90 standard, but the preferred mechanism to declare=
 
---===============0507209746==
+>>> variable-length types such as these ones is a flexible array member[1=
+][2],
+>>> introduced in C99:
+>>>
+>>> struct foo {
+>>>         int stuff;
+>>>         struct boo array[];
+>>> };
+>>>
+>>> By making use of the mechanism above, we will get a compiler warning
+>>> in case the flexible array does not occur last in the structure, whic=
+h
+>>> will help us prevent some kind of undefined behavior bugs from being
+>>> inadvertently introduced[3] to the codebase from now on.
+>>>
+>>> Also, notice that, dynamic memory allocations won't be affected by
+>>> this change:
+>>>
+>>> "Flexible array members have incomplete type, and so the sizeof opera=
+tor
+>>> may not be applied. As a quirk of the original implementation of
+>>> zero-length arrays, sizeof evaluates to zero."[1]
+>>>
+>>> This issue was found with the help of Coccinelle.
+>>>
+>>> [1] https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html
+>>> [2] https://github.com/KSPP/linux/issues/21
+>>> [3] commit 76497732932f ("cxgb3/l2t: Fix undefined behaviour")
+>>>
+>>> Signed-off-by: Gustavo A. R. Silva <gustavo@embeddedor.com>
+>>> ---
+>>>  drivers/gpu/drm/etnaviv/etnaviv_gem.h         | 2 +-
+>>>  drivers/gpu/drm/gma500/intel_bios.h           | 2 +-
+>>>  drivers/gpu/drm/i915/display/intel_vbt_defs.h | 4 ++--
+>>>  drivers/gpu/drm/i915/gt/intel_lrc.c           | 2 +-
+>>>  drivers/gpu/drm/i915/i915_gpu_error.h         | 2 +-
+>>
+>> Please split out the i915 changes to a separate patch.
+>>
+>=20
+> Sure thing. I can do that.
+
+I think each driver deserves it's own patch. Makes backporting easier.
+
+Best regards
+Thomas
+
+>=20
+>>>  drivers/gpu/drm/msm/msm_gem.h                 | 2 +-
+>>>  drivers/gpu/drm/qxl/qxl_cmd.c                 | 2 +-
+>>>  drivers/gpu/drm/vboxvideo/vboxvideo.h         | 2 +-
+>>>  drivers/gpu/drm/vc4/vc4_drv.h                 | 2 +-
+>>>  drivers/gpu/drm/vmwgfx/vmwgfx_page_dirty.c    | 2 +-
+>>>  drivers/gpu/drm/vmwgfx/vmwgfx_surface.c       | 2 +-
+>>>  include/drm/bridge/mhl.h                      | 4 ++--
+>>>  include/drm/drm_displayid.h                   | 2 +-
+>>>  include/uapi/drm/i915_drm.h                   | 4 ++--
+>>
+>> Not sure it's worth touching uapi headers. They're full of both [0] an=
+d
+>> []. Again, please at least split it to a separate patch to be decided
+>> separately.
+>>
+>=20
+> Yeah, it's worth it; the purpose of these patches is to replace [0] wit=
+h [] across
+> the whole tree.
+>=20
+> Thanks
+> --
+> Gustavo
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--0DgKy29qpwpTjPxx9ZHosYzYcoKck294a--
+
+--Ul1CrpBm5H0rrZlYhdIfEA75XDUYdEO4y
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5l9RkACgkQaA3BHVML
+eiNGUQgAgjKSCBND55SWYJrmDfa3irwlGfO6EKxH9F6r/W+oYNLwfa7Re8zDiRjN
+oMHZLY2a2iKckXvawizS65l/0mqLfNQ11BfXFGBr6RAgxWt7Ac2pw1wP9FaVQ3HN
+PSksqH6ASJUhgDm9hfZSRu9fZDLV1AGIWdTE/pHRcJ8inzEV543+SffD2ddPFjwV
+m+hBDC678jVfSux+/aBkp40Mv9VryJTVN4TyQNRuUtmciIWSoVvoiJxk5d+0Ykcn
+McM6bm+GmCvvUmjlLa7LNv8Fv9zr17XF3Q2Nv2v8Gn+sYDXY2S8RU8BXlV05XZVE
+xLoQ88iIqzrGQjmARyUf0W4vvek8XQ==
+=9S1h
+-----END PGP SIGNATURE-----
+
+--Ul1CrpBm5H0rrZlYhdIfEA75XDUYdEO4y--
+
+--===============1643306588==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -161,4 +256,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0507209746==--
+--===============1643306588==--
