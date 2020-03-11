@@ -2,54 +2,56 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECECB1819FB
-	for <lists+spice-devel@lfdr.de>; Wed, 11 Mar 2020 14:40:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E0811820CB
+	for <lists+spice-devel@lfdr.de>; Wed, 11 Mar 2020 19:28:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 500486E987;
-	Wed, 11 Mar 2020 13:40:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B2ED66E9DB;
+	Wed, 11 Mar 2020 18:28:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 354 seconds by postgrey-1.36 at gabe;
- Wed, 11 Mar 2020 13:29:16 UTC
-Received: from lb1-smtp-cloud7.xs4all.net (lb1-smtp-cloud7.xs4all.net
- [194.109.24.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7D7C06E97B
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Mar 2020 13:29:16 +0000 (UTC)
-Received: from [IPv6:2001:420:44c1:2577:d578:21fa:bf61:c876]
- ([IPv6:2001:420:44c1:2577:d578:21fa:bf61:c876])
- by smtp-cloud7.xs4all.net with ESMTPA
- id C1NmjUCJkEE3qC1NpjPzQP; Wed, 11 Mar 2020 14:26:50 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=s1;
- t=1583933210; bh=d4zk5YWXejQ8kjLxF1sj4FKOLbv++IgtZnhKk9AS/l4=;
- h=Subject:To:From:Message-ID:Date:MIME-Version:Content-Type:From:
- Subject;
- b=Aixh6akpxMOsjNu9RgfbsGafMaaTKSBDtJy6Lzk7i4pLVGz4Gm/4UIT/EWOETfYAS
- ZAkSmHroYI5d4yJ7/L02YkZTJet1Vp56SorwGirz7NitUyWUHqIlUMPocBWQbhNXAV
- PhUEIe42ubVI41va/Sc/tEjdeFlyXaE4YxKwrWNydqforvsAt3p3Ga/2EUIqda++En
- Z+M0p3Ng39h916/aC06gmRlV18ZJTyE5qlAKu8lO99nRnFSln2AgDJP7Gv1b0sMeVr
- ZnCCanSAKgT42cO3+9167M4f4k1D0M2XV4FtG6AKxwiii0khEo3sQ/mTYM1yFacvtt
- tqXoIf7rC1kDg==
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>, linux-media@vger.kernel.org
-References: <20200218202753.652093-1-dmitry.sepp@opensynergy.com>
-From: Hans Verkuil <hverkuil@xs4all.nl>
-Message-ID: <c4d7622b-e396-3920-0e14-5a73a0225c0f@xs4all.nl>
-Date: Wed, 11 Mar 2020 14:26:46 +0100
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B5B046E9DB
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Mar 2020 18:28:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1583951282;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eqmeH2aR26PeovUU2oLFMJJFYR6WrWyFAXnjDkyKciI=;
+ b=PvZR7ErnbFQedBd11LI72FtSb8yfHvrVE/Z2jAiFlhTK7Yonpf9Goq6bspYD4S6whZ9IVh
+ wmX9U6LXGGgh1rKmbv7CGj+CK6rPy+Kba8H7Vdpx6o/t9mLxr0twn8ipuK5Ffm7nY9ORYW
+ G+Zdp7e2ZVPBKDicbBKlhvd4OKX9AM4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-63-ifNk0gwAP8OFOPliVdAlmQ-1; Wed, 11 Mar 2020 14:28:00 -0400
+X-MC-Unique: ifNk0gwAP8OFOPliVdAlmQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9177D800D4E;
+ Wed, 11 Mar 2020 18:27:59 +0000 (UTC)
+Received: from lub.tlv (dhcp-4-107.tlv.redhat.com [10.35.4.107])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id E48369CA3;
+ Wed, 11 Mar 2020 18:27:58 +0000 (UTC)
+To: Jeremy White <jwhite@codeweavers.com>, spice-devel@lists.freedesktop.org
+References: <20190917162300.21667-1-jwhite@codeweavers.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <ec986562-b8ca-6af0-986d-bde0c4699f27@redhat.com>
+Date: Wed, 11 Mar 2020 20:27:56 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200218202753.652093-1-dmitry.sepp@opensynergy.com>
+In-Reply-To: <20190917162300.21667-1-jwhite@codeweavers.com>
 Content-Language: en-US
-X-CMAE-Envelope: MS4wfADoSisLI3D7g4efSivmeW6JWdvVKJLlAoP0SrXsfclrkCLX8/cA0oUYw/fDHrV0fBiCT/fAyakptZ3gopDcXQtitlIcaRhc27dQNWxGy/0mFin9Bph5
- rfHwIH0/um50LItNKgWD7Z/cIII+cIbkyRe0PwyVnfKUpEQyVCjKlidJNZTpRt9rmXajTMHk2XcJ8FaKM7GXL5IJkLpN56tc7gp8y/C3fHO+m4Wq2xk/uAah
- Lc6oUl7KyDhAN7o6invofM1GhjzCoiNQVuawuHHdS8wW4lRWNJWYVdQU3LAKvP11HqIRJPs4guI0xt/MIfSc4cUzhTlZBYXm0iKWAnb+U96w7bBsCAf1a4L/
- ErA2Y0ynn4q4F04POA0HyS0LL4/14sE6X9y5RzKxfOgPxCIkoFduGicyFT5Q7v8iFtWPkJ2e0Cz+xn6N1Jo/cxVgl1K5SZTYw2olPnLXMg1hhP1/NyPuQlqb
- plGO4UwLdpHaGuN014FKOiVrOEOVjNt7ntdIRvvA69SnXX9wd4/11SQOVHCSvaczDnC8+zpezfdXefQRXzjpEdnpjj9wlEl/1kZRxa+6Hf/3EbAMx6IpJwbc
- tHnYZmtUFAHA7P+WlMgE7vIHGHWZaxseuCFOduzC9WHFTP20DyoMHq1kBQk65wG74pFUHNe1sPFRn+oYYq1yGcTloqEhFOX8EA7lySNfwcjDYrayZMkeeZxD
- VSFDG0ZcOOAr7+z/2hqopuTOVDZSt2EocnRda2B4phiW7JqCvTsNbDEOj3gEIXr6B5xf4Uamc11/+n7CfIx15HVAXYYVKxgoEmsWHkPunRX+GtEFR8UbRJPn
- LjO/u+9YxsYpr2QDPuym0BpzhJ+YgiFpVQbbGNAd5wyJxlvuwTywd2a6u4OsbLE129GDAlc3pK/xsTy/aOmTTiaBCtlsxV/nvIsNAjhH/qfnCrBbL3ESUq8v
- Lg0Yvg==
-X-Mailman-Approved-At: Wed, 11 Mar 2020 13:39:59 +0000
-Subject: Re: [Spice-devel] [PATCH v2 0/1] Virtio Video V4L2 driver
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] [PATCH x11spice] Fix compliation on gcc 4.X.
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,67 +63,119 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: samiullah.khawaja@opensynergy.com, virtio-dev@lists.oasis-open.org,
- alexlau@chromium.org, kiran.pawar@opensynergy.com, acourbot@chromium.org,
- dstaessens@chromium.org, tfiga@chromium.org, stevensd@chromium.org,
- kraxel@redhat.com, daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
- marcheu@chromium.org, dgreid@chromium.org, egranata@google.com,
- posciak@chromium.org
-Content-Type: text/plain; charset="us-ascii"
+Reply-To: uril@redhat.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Dmitry,
+Hi,
 
-On 2/18/20 9:27 PM, Dmitry Sepp wrote:
-> Hi all,
-> 
-> This is a v4l2 virtio video driver for the virtio-video device
-> specification v3 [1].
-> 
-> The first version of the driver was introduced here [2].
-> 
-> Changes v1 -> v2:
-> * support the v3 spec (mostly)
-> * add a module parameter to ask for pages from ZONE_DMA
-> 
-> What is not implemented:
-> * Plane layout flags should be used to propagate number of planes to
->   user-space
-> * There is no real use of stream creation with bitstream format in the
->   parameter list. The driver just uses the first bitstream format from
->   the list.
-> * Setting bitrate is done in a different way compared to the spec. This
->   is because it has been already agreed on that the way the spec
->   currently describes it requires changes.
-> 
-> Potential improvements:
-> * Do not send stream_create from open. Use corresponding state machine
->   condition to do this.
-> * Do not send stream_destroy from close. Do it in reqbufs(0).
-> * Cache format and control settings. Reduce calls to the device.
+Thanks for the ping on IRC.
 
-Some general notes:
+On 9/17/19 7:23 PM, Jeremy White wrote:
+> gcc 4.x warns if you use a { 0 } initialization construct
+> for a structure with an initial member that is also a struct.
+> 
+> The { } construct is simpler and appears to work on a wider
+> range of gcc versions.
 
-Before this can be merged it needs to pass v4l2-compliance.
+On my Fedora 31, gcc (version 9.2.1) does complain about {} but not 
+about {0}
+when built with -Wpedantic (see simple program below).
 
-I also strongly recommend adding support for V4L2_PIX_FMT_FWHT to
-allow testing with the vicodec emulation driver. This will also
-allow testing all sorts of corner cases without requiring special
-hardware.
 
-Regards,
+Does {0, } works better for you ?
 
-	Hans
+
+================
+
+#include <stdio.h>
+
+struct S {int a, b; };
+
+void print_s(struct S* ps)
+{
+	if (!ps) { printf("null\n"); return; }
+	printf("(%d, %d)\n", ps->a, ps->b);
+}
+
+int main ()
+{
+         struct S s = { };
+
+         print_s(&s);
+	return 0;
+}
+
+
+================
+
+Uri.
 
 > 
-> Best regards,
-> Dmitry.
+> This is a correction to fdfdf1107be100b983de1bff4beee8e6360f670b
 > 
-> [1] https://markmail.org/message/dmw3pr4fuajvarth
-> [2] https://markmail.org/message/wnnv6r6myvgb5at6
+> Signed-off-by: Jeremy White <jwhite@codeweavers.com>
+> ---
+>   src/gui.c    | 2 +-
+>   src/listen.c | 2 +-
+>   src/main.c   | 2 +-
+>   src/spice.c  | 2 +-
+>   4 files changed, 4 insertions(+), 4 deletions(-)
 > 
+> diff --git a/src/gui.c b/src/gui.c
+> index 88acf5c9..3c26b864 100644
+> --- a/src/gui.c
+> +++ b/src/gui.c
+> @@ -147,7 +147,7 @@ void session_disconnect_client(session_t *session)
+>   int main(int argc, char *argv[])
+>   {
+>       gui_t gui;
+> -    session_t session = { 0 };
+> +    session_t session = { };
+>   
+>       setlocale(LC_ALL, "");
+>       gui_create(&gui, &session, argc, argv);
+> diff --git a/src/listen.c b/src/listen.c
+> index 452fd81f..76c0798a 100644
+> --- a/src/listen.c
+> +++ b/src/listen.c
+> @@ -117,7 +117,7 @@ int listen_parse(const char *listen_spec, char **addr, int *port_start, int *por
+>   static int try_port(const char *addr, int port)
+>   {
+>       static const int on = 1, off = 0;
+> -    struct addrinfo ai = { 0 }, *res, *e;
+> +    struct addrinfo ai = { }, *res, *e;
+>       char portbuf[33];
+>       int sock, rc;
+>   
+> diff --git a/src/main.c b/src/main.c
+> index 71cbb465..890ff133 100644
+> --- a/src/main.c
+> +++ b/src/main.c
+> @@ -55,7 +55,7 @@ int main(int argc, char *argv[])
+>   {
+>       int rc;
+>   
+> -    session_t session = { 0 };
+> +    session_t session = { };
+>   
+>       int display_opened = 0;
+>       int spice_started = 0;
+> diff --git a/src/spice.c b/src/spice.c
+> index 08a5d09a..561c85ff 100644
+> --- a/src/spice.c
+> +++ b/src/spice.c
+> @@ -474,7 +474,7 @@ static int send_monitors_config(spice_t *s, int w, int h)
+>   
+>   int spice_create_primary(spice_t *s, int w, int h, int bytes_per_line, void *shmaddr)
+>   {
+> -    QXLDevSurfaceCreate surface = { 0 };
+> +    QXLDevSurfaceCreate surface = { };
+>   
+>       surface.height = h;
+>       surface.width = w;
 > 
 
 _______________________________________________
