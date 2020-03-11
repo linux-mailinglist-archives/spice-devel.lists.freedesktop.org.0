@@ -2,50 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC17B181469
-	for <lists+spice-devel@lfdr.de>; Wed, 11 Mar 2020 10:17:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7A0E18146B
+	for <lists+spice-devel@lfdr.de>; Wed, 11 Mar 2020 10:17:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4022A6E94D;
-	Wed, 11 Mar 2020 09:17:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0E6FB6E94E;
+	Wed, 11 Mar 2020 09:17:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com
- [IPv6:2a00:1450:4864:20::243])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AD1106E86D
- for <spice-devel@lists.freedesktop.org>; Tue, 10 Mar 2020 10:25:01 +0000 (UTC)
-Received: by mail-lj1-x243.google.com with SMTP id w1so13460336ljh.5
- for <spice-devel@lists.freedesktop.org>; Tue, 10 Mar 2020 03:25:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4EW8jVcFvlyN+XOI2qNXKHQx2koBIEQW3aiOESFxBlY=;
- b=kkgcRRhT+WkfLcvf1l6zDdie5cPlt53eFzqkN3RMj0sXzoQ4zDYJaObMizdrg4iLy+
- /mpQM82AL4El33d0vqrfhCqAzdJiaWj71Lsogg1ehHxp+X4Ba8buKh7lkKuVBSNycEWU
- 818RD0Q3/sMigS++vnGmN15zfxJJn59npSb80=
+Received: from mail-qk1-x744.google.com (mail-qk1-x744.google.com
+ [IPv6:2607:f8b0:4864:20::744])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E42016E3D2
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Mar 2020 00:09:38 +0000 (UTC)
+Received: by mail-qk1-x744.google.com with SMTP id u25so453109qkk.3
+ for <spice-devel@lists.freedesktop.org>; Tue, 10 Mar 2020 17:09:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ndufresne-ca.20150623.gappssmtp.com; s=20150623;
+ h=message-id:subject:from:to:cc:date:in-reply-to:references
+ :user-agent:mime-version:content-transfer-encoding;
+ bh=4KY+UX4K9T6g7aKaLn+i/NDmKto+DWqOkeGkT0qWmhc=;
+ b=eIpOkPGyTBTfQEAu4d9l57O+l20iUNeIYzRlSqSN4/gTIt93P7IjPVHtiUr09XYMbE
+ 09qU3jfXQ5SGmcF0iPCYUscySbfSnyv9jw8AlMxwtc2xxFphx+bzJFC4pCh70XzWk2ZB
+ 4eq07SE721I9ny29Xb6StKxgevFTLstGFvVE36q/KLgu5otYdUi1ERLBEp/Z2W1br2u+
+ cXTk8PKZOamlZt+LRQ6XPEflVIdDfVGBBVOdwyEEwtk7hHEgHU3tmTKWJguok0kQnn8T
+ ZAHgawRrrYXwXjenS+WO8poGZPYxLLbtMxZurvHgGMMkPjEp/RGorJyhfMnoo3uUF33r
+ Y0Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=4EW8jVcFvlyN+XOI2qNXKHQx2koBIEQW3aiOESFxBlY=;
- b=i9BUYr5nY7PjD8S7QrCoSfSjkTyicuoa3z5NH8J6Ua2d3+aHvbCXZaSbTPYu56xa/o
- 4JBsvUv5BCTHiAronLNaj60OB+P68BDo2oalycW5SzLL561qAoJp4K75+aSoXokLGP+K
- ZVoVt5muoNocI/QNbyzjI36dPNocgYApmuzh++STd+NkTvegsoW2ic6Bm2Q7RTBWAtUW
- U7Dr5W2Upw+oiuyZBenXI17fRy5lUhWrWtuUHeo1H12pHJj++m3cTsLVQK8k3qPy6KEx
- effQVLREfE/oPmaClv17d7oaT2TwK0HqM2gYGklYy0jgaZZblAue/seO79LUJkfIL/fT
- EpoA==
-X-Gm-Message-State: ANhLgQ2vf+O1/rtPDX5VfQXDLq+ov2zwoDQYucv83OEOMgLpre7qVUR9
- wOZhYgliaBA3LJ87tWhokdb9nkw4xGyxyVPuYdH51w==
-X-Google-Smtp-Source: ADFU+vtW5/7zhr7uQJ4/N/Osc/fHTow3Q5wtfAAAUcWazHartRXJFCJ78rc/Sqnm8eBHuNN3bNSX/rhf1ZkAkX7j0LA=
-X-Received: by 2002:a05:651c:1139:: with SMTP id
- e25mr1233556ljo.261.1583835899092; 
- Tue, 10 Mar 2020 03:24:59 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:user-agent:mime-version:content-transfer-encoding;
+ bh=4KY+UX4K9T6g7aKaLn+i/NDmKto+DWqOkeGkT0qWmhc=;
+ b=CEkIyor95sC7QuLcuGcP8OMpKjk7eLeg2Hxd5FM2Fxj728zchKxXIwp6QdZmbka4Da
+ svysBpd7wDt0olLBolsrmcU2/BA8qVKuiGZcxOVfQ2nIJ58GFrE+uTJSLnV/D1zAIJEw
+ yl5n4SnXjcHTefyBeVLNwXTq3W60tKeLwUKC7YaRXX43R8vcfPlVwyA2o2MJfctz64LY
+ b7CbCkQGoN7bLrVw1JxgJ1iqnxd+FGcTp+f7JWHQ7Z6JEO1bu2z4Jo8MtzP0ViSLGErD
+ pUkG7sou6ewdjJAL4biCb9yqccrdZ4ipI2PrW2EANdOdarm2118LigAM7lpDXAP0clIj
+ ZY0w==
+X-Gm-Message-State: ANhLgQ2svffoQoPL/RV0FSV35aVE1BMybgJ8OqzAZ7BPThpsazu6iNSr
+ FvktDBka/x0vef4lhbDzul5DWA==
+X-Google-Smtp-Source: ADFU+vuOvIynuGTpjW6akQ87yx5GrKE7qXqJ1vuvawejifg/kXfR6rC9YUoi/FdnXLmCLW9g3XMX4w==
+X-Received: by 2002:a37:2dc5:: with SMTP id t188mr402044qkh.249.1583885376787; 
+ Tue, 10 Mar 2020 17:09:36 -0700 (PDT)
+Received: from skullcanyon ([192.222.193.21])
+ by smtp.gmail.com with ESMTPSA id q1sm17195837qtp.81.2020.03.10.17.09.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2020 17:09:34 -0700 (PDT)
+Message-ID: <131538df137488c7253846773f37fc38f5b271c8.camel@ndufresne.ca>
+From: Nicolas Dufresne <nicolas@ndufresne.ca>
+To: Keiichi Watanabe <keiichiw@chromium.org>, Dmitry Sepp
+ <dmitry.sepp@opensynergy.com>
+Date: Tue, 10 Mar 2020 20:09:32 -0400
+In-Reply-To: <CAD90VcYsM6OV8=y_3pD+n7wBkgv-AMaEZ-t5Goirn4FLi73bmw@mail.gmail.com>
 References: <20200218202753.652093-1-dmitry.sepp@opensynergy.com>
  <20200218202753.652093-2-dmitry.sepp@opensynergy.com>
-In-Reply-To: <20200218202753.652093-2-dmitry.sepp@opensynergy.com>
-From: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Tue, 10 Mar 2020 19:24:45 +0900
-Message-ID: <CAD90VcYsM6OV8=y_3pD+n7wBkgv-AMaEZ-t5Goirn4FLi73bmw@mail.gmail.com>
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+ <CAD90VcYsM6OV8=y_3pD+n7wBkgv-AMaEZ-t5Goirn4FLi73bmw@mail.gmail.com>
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 11 Mar 2020 09:17:49 +0000
 Subject: Re: [Spice-devel] [PATCH v2 1/1] video_video: Add the Virtio Video
  V4L2 driver
@@ -69,5516 +80,3801 @@ Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
  Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
  Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
  spice-devel@lists.freedesktop.org,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Thanks Dmitry for submitting this patch!
-
-Sorry for the slow response.
-I implemented virtio-video decoder device for ChromeOS and could play
-a video with this driver on a VM on with several local patches [1].
-I think the driver is implemented well in general, but I found some
-problems to be fixed and a concern:
-
-# v4l2-compiance test
-I tried run v4l2-compliance test [2] against this driver, but 8 test
-cases are still failing in my environment.
-Would you mind fixing it to make it pass?
-
-# Takes a long time to decode the first frame
-When we tried a normal video player application, it takes a long time
-(2+ seconds) until the first frame is displayed.
-We cannot see such a problem when we used our previous virtio-vdec driver [3].
-
-I think this is because the application opens the /dev/video device to
-query capability, but the opening the device is an expensive operation
-in the current virtio-video driver implementation.
-This can be improved by moving STREAM_CREATE request from the open
-callback to a place where it's actually needed, as I suggested in the
-previous version.
-Though you listed this problem as one of "Potential improvements", I
-think this is a high priority issue.
-
-# Timing of dequeue
-This is not a problem but a concern. The current implementation
-processes host responses as 'batches' periodically in
-virtio_video_dequeue_cmd_func.
-As a result, decoded frames are dequeued as batches as well instead of
-being dequeued ASAP.
-e.g. 6 frames are dequeued over 10ms, no frames for 90ms, 6 frames over 10ms...
-
-I don't think this is a problem, but it should be aware of this.
-Note that the virtio-video seems to have slightly lower power
-consumption than the old virtio-vdec (~5%). It may be thanks to this
-design choice.
-
---
-
-See my other review comments inline. Note that my patch [4] addresses
-some of them.
-By the way, I guess the prefix of this mail's subject should be
-"virtio_video" instead of "video_video":)
-
-Best regards,
-Keiichi
-
-[1] https://chromium-review.googlesource.com/q/hashtag:%22virtio-video%22+(status:open%20OR%20status:merged)
-[2] https://git.linuxtv.org/v4l-utils.git/tree/utils/v4l2-compliance
-[3] https://lwn.net/Articles/803676/
-[4] https://chromium-review.googlesource.com/c/chromiumos/third_party/kernel/+/2060510/7
-
-
-On Wed, Feb 19, 2020 at 5:28 AM Dmitry Sepp <dmitry.sepp@opensynergy.com> wrote:
->
-> This adds a Virtio based video driver for video streaming device that
-> operates input and output data buffers to share video devices with
-> several guests. The current implementation consist of V4L2 based video
-> driver supporting video functions of decoder and encoder. The device
-> uses command structures to advertise and negotiate stream formats and
-> controls. This allows the driver to modify the processing logic of the
-> device on a per stream basis.
->
-> Signed-off-by: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-> Signed-off-by: Kiran Pawar <Kiran.Pawar@opensynergy.com>
-> Signed-off-by: Nikolay Martyanov <Nikolay.Martyanov@opensynergy.com>
-> Signed-off-by: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>
-> ---
->  drivers/media/Kconfig                       |    1 +
->  drivers/media/Makefile                      |    2 +
->  drivers/media/virtio/Kconfig                |   12 +
->  drivers/media/virtio/Makefile               |   12 +
->  drivers/media/virtio/virtio_video.h         |  402 +++++++
->  drivers/media/virtio/virtio_video_caps.c    |  498 +++++++++
->  drivers/media/virtio/virtio_video_dec.c     |  427 ++++++++
->  drivers/media/virtio/virtio_video_dec.h     |   30 +
->  drivers/media/virtio/virtio_video_device.c  | 1079 +++++++++++++++++++
->  drivers/media/virtio/virtio_video_driver.c  |  315 ++++++
->  drivers/media/virtio/virtio_video_enc.c     |  569 ++++++++++
->  drivers/media/virtio/virtio_video_enc.h     |   30 +
->  drivers/media/virtio/virtio_video_helpers.c |  250 +++++
->  drivers/media/virtio/virtio_video_vq.c      | 1012 +++++++++++++++++
->  include/uapi/linux/virtio_ids.h             |    2 +
->  include/uapi/linux/virtio_video.h           |  469 ++++++++
->  16 files changed, 5110 insertions(+)
->  create mode 100644 drivers/media/virtio/Kconfig
->  create mode 100644 drivers/media/virtio/Makefile
->  create mode 100644 drivers/media/virtio/virtio_video.h
->  create mode 100644 drivers/media/virtio/virtio_video_caps.c
->  create mode 100644 drivers/media/virtio/virtio_video_dec.c
->  create mode 100644 drivers/media/virtio/virtio_video_dec.h
->  create mode 100644 drivers/media/virtio/virtio_video_device.c
->  create mode 100644 drivers/media/virtio/virtio_video_driver.c
->  create mode 100644 drivers/media/virtio/virtio_video_enc.c
->  create mode 100644 drivers/media/virtio/virtio_video_enc.h
->  create mode 100644 drivers/media/virtio/virtio_video_helpers.c
->  create mode 100644 drivers/media/virtio/virtio_video_vq.c
->  create mode 100644 include/uapi/linux/virtio_video.h
->
-> diff --git a/drivers/media/Kconfig b/drivers/media/Kconfig
-> index 092e7509af9b..b89169e5d24d 100644
-> --- a/drivers/media/Kconfig
-> +++ b/drivers/media/Kconfig
-> @@ -205,6 +205,7 @@ source "drivers/media/pci/Kconfig"
->  source "drivers/media/platform/Kconfig"
->  source "drivers/media/mmc/Kconfig"
->  source "drivers/media/radio/Kconfig"
-> +source "drivers/media/virtio/Kconfig"
->
->  comment "Supported FireWire (IEEE 1394) Adapters"
->         depends on DVB_CORE && FIREWIRE
-> diff --git a/drivers/media/Makefile b/drivers/media/Makefile
-> index 4a330d0e5e40..1d886730bafd 100644
-> --- a/drivers/media/Makefile
-> +++ b/drivers/media/Makefile
-> @@ -34,6 +34,8 @@ obj-y += rc/
->
->  obj-$(CONFIG_CEC_CORE) += cec/
->
-> +obj-$(CONFIG_VIRTIO_VIDEO)  += virtio/
-> +
->  #
->  # Finally, merge the drivers that require the core
->  #
-> diff --git a/drivers/media/virtio/Kconfig b/drivers/media/virtio/Kconfig
-> new file mode 100644
-> index 000000000000..82012178254d
-> --- /dev/null
-> +++ b/drivers/media/virtio/Kconfig
-> @@ -0,0 +1,12 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +# Video driver for virtio
-> +
-> +config VIRTIO_VIDEO
-> +       tristate "Virtio video V4L2 driver"
-> +       depends on VIRTIO && VIDEO_DEV && VIDEO_V4L2
-> +       select VIDEOBUF2_DMA_SG
-> +       select VIDEOBUF2_DMA_CONTIG
-> +       select V4L2_MEM2MEM_DEV
-> +       help
-> +          This is the virtual video driver for virtio.
-> +          Say Y or M.
-> diff --git a/drivers/media/virtio/Makefile b/drivers/media/virtio/Makefile
-> new file mode 100644
-> index 000000000000..b17dce4cfc19
-> --- /dev/null
-> +++ b/drivers/media/virtio/Makefile
-> @@ -0,0 +1,12 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +obj-$(CONFIG_VIRTIO_VIDEO) += virtio-video.o
-> +
-> +virtio-video-objs := \
-> +    virtio_video_driver.o \
-> +    virtio_video_device.o \
-> +    virtio_video_vq.o \
-> +    virtio_video_dec.o \
-> +    virtio_video_enc.o \
-> +    virtio_video_caps.o \
-> +    virtio_video_helpers.o
-> diff --git a/drivers/media/virtio/virtio_video.h b/drivers/media/virtio/virtio_video.h
-> new file mode 100644
-> index 000000000000..c5a5704326c0
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video.h
-> @@ -0,0 +1,402 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/* Common header for virtio video driver.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-
-2020?
-
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef _VIRTIO_VIDEO_H
-> +#define _VIRTIO_VIDEO_H
-> +
-> +#include <linux/virtio.h>
-> +#include <linux/virtio_ids.h>
-> +#include <linux/virtio_config.h>
-> +#include <linux/virtio_video.h>
-> +#include <linux/list.h>
-> +#include <media/v4l2-device.h>
-> +#include <media/v4l2-mem2mem.h>
-> +#include <media/v4l2-ctrls.h>
-> +#include <media/videobuf2-dma-sg.h>
-> +#include <media/videobuf2-dma-contig.h>
-> +
-> +#define DRIVER_NAME "virtio-video"
-> +
-> +#define MIN_BUFS_MIN 0
-> +#define MIN_BUFS_MAX 32
-> +#define MIN_BUFS_STEP 1
-> +#define MIN_BUFS_DEF 1
-> +
-> +enum virtio_video_device_type {
-> +       VIRTIO_VIDEO_DEVICE_ENCODER = 0x0100,
-> +       VIRTIO_VIDEO_DEVICE_DECODER,
-> +};
-> +
-> +struct video_format_frame {
-> +       struct virtio_video_format_frame frame;
-> +       struct virtio_video_format_range *frame_rates;
-> +};
-> +
-> +struct video_format {
-> +       struct list_head formats_list_entry;
-> +       struct virtio_video_format_desc desc;
-> +       struct video_format_frame *frames;
-> +};
-> +
-> +struct video_control_fmt_data {
-> +       uint32_t min;
-> +       uint32_t max;
-> +       uint32_t num;
-> +       uint32_t skip_mask;
-> +       uint32_t *entries;
-> +};
-> +
-> +struct video_control_format {
-> +       struct list_head controls_list_entry;
-> +       uint32_t format;
-> +       struct video_control_fmt_data *profile;
-> +       struct video_control_fmt_data *level;
-> +};
-> +
-> +struct video_plane_format {
-> +       uint32_t plane_size;
-> +       uint32_t stride;
-> +};
-> +
-> +struct video_format_info {
-> +       uint32_t fourcc_format;
-> +       uint32_t frame_rate;
-> +       uint32_t frame_width;
-> +       uint32_t frame_height;
-> +       uint32_t min_buffers;
-> +       uint32_t max_buffers;
-> +       struct virtio_video_crop crop;
-> +       uint32_t num_planes;
-> +       struct video_plane_format plane_format[VIRTIO_VIDEO_MAX_PLANES];
-> +       bool is_updated;
-> +};
-> +
-> +struct video_control_info {
-> +       uint32_t profile;
-> +       uint32_t level;
-> +       uint32_t bitrate;
-> +       bool is_updated;
-> +};
-> +
-> +struct virtio_video;
-> +struct virtio_video_vbuffer;
-> +
-> +typedef void (*virtio_video_resp_cb)(struct virtio_video *vv,
-> +                                    struct virtio_video_vbuffer *vbuf);
-> +
-> +struct virtio_video_vbuffer {
-> +       char *buf;
-> +       int size;
-> +
-> +       void *data_buf;
-> +       uint32_t data_size;
-> +
-> +       char *resp_buf;
-> +       int resp_size;
-> +
-> +       void *priv;
-> +       virtio_video_resp_cb resp_cb;
-> +
-> +       struct list_head list;
-> +};
-> +
-> +struct virtio_video_queue {
-> +       struct virtqueue *vq;
-> +       spinlock_t qlock;
-> +       wait_queue_head_t ack_queue;
-> +       struct work_struct dequeue_work;
-> +};
-> +
-> +struct virtio_video {
-> +       struct v4l2_device v4l2_dev;
-> +       int instance;
-
-unused?
-
-> +
-> +       struct virtio_device *vdev;
-> +       struct virtio_video_queue commandq;
-> +       struct virtio_video_queue eventq;
-> +       wait_queue_head_t wq;
-> +       bool vq_ready;
-> +
-> +       struct kmem_cache *vbufs;
-> +
-> +       struct idr resource_idr;
-> +       spinlock_t resource_idr_lock;
-> +       struct idr stream_idr;
-> +       spinlock_t stream_idr_lock;
-> +
-> +       uint32_t max_caps_len;
-> +       uint32_t max_resp_len;
-> +       bool got_caps;
-> +       bool got_control;
-> +
-> +       bool has_iommu;
-> +       bool supp_non_contig;
-> +       struct list_head devices_list;
-> +
-> +       int debug;
-> +       int use_dma_mem;
-> +};
-> +
-> +struct virtio_video_device {
-> +       struct virtio_video *vv;
-> +       struct video_device video_dev;
-> +       struct mutex video_dev_mutex;
-> +
-> +       struct v4l2_m2m_dev *m2m_dev;
-> +
-> +       struct workqueue_struct *workqueue;
-> +
-> +       struct list_head devices_list_entry;
-> +       /* VIRTIO_VIDEO_FUNC_ */
-> +       uint32_t type;
-> +
-> +       uint32_t num_input_fmts;
-> +       struct list_head input_fmt_list;
-> +
-> +       uint32_t num_output_fmts;
-> +       struct list_head output_fmt_list;
-> +
-> +       struct list_head controls_fmt_list;
-> +};
-> +
-> +enum video_stream_state {
-> +       STREAM_STATE_IDLE = 0,
-> +       STREAM_STATE_INIT,
-> +       STREAM_STATE_METADATA, /* specific to decoder */
-> +       STREAM_STATE_RUNNING,
-> +       STREAM_STATE_DRAIN,
-> +       STREAM_STATE_STOPPED,
-> +       STREAM_STATE_RESET, /* specific to encoder */
-> +};
-
-Could you use same state names with state machines in the V4L2 documentation?
-https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/dev-decoder.html#state-machine
-
-e.g. Rename STREAM_STATE_METADATA to STREAM_STATE_DYNAMIC_RES_CHANGE
-
-> +
-> +struct virtio_video_stream {
-> +       uint32_t stream_id;
-> +       enum video_stream_state state;
-> +       struct video_device *video_dev;
-> +       struct v4l2_fh fh;
-> +       struct mutex vq_mutex;
-> +       struct v4l2_ctrl_handler ctrl_handler;
-> +       struct video_format_info in_info;
-> +       struct video_format_info out_info;
-> +       struct video_control_info control;
-> +       bool src_cleared;
-> +       bool dst_cleared;
-> +       bool src_destroyed;
-> +       bool dst_destroyed;
-> +       struct work_struct work;
-> +       struct video_format_frame *current_frame;
-> +};
-> +
-> +struct virtio_video_buffer {
-> +       struct v4l2_m2m_buffer v4l2_m2m_vb;
-> +       uint32_t resource_id;
-> +       bool queued;
-> +};
-> +
-> +static inline gfp_t
-> +virtio_video_gfp_flags(struct virtio_video *vv)
-> +{
-> +       if (vv->use_dma_mem)
-> +               return GFP_DMA;
-> +       else
-> +               return 0;
-> +}
-> +
-> +static inline const struct vb2_mem_ops *
-> +virtio_video_mem_ops(struct virtio_video *vv)
-> +{
-> +       if (vv->supp_non_contig)
-> +               return &vb2_dma_sg_memops;
-> +       else
-> +               return &vb2_dma_contig_memops;
-> +}
-> +
-> +static inline struct virtio_video_device *
-> +to_virtio_vd(struct video_device *video_dev)
-> +{
-> +       return container_of(video_dev, struct virtio_video_device,
-> +                        video_dev);
-> +}
-> +
-> +static inline struct virtio_video_stream *file2stream(struct file *file)
-> +{
-> +       return container_of(file->private_data, struct virtio_video_stream, fh);
-> +}
-> +
-> +static inline struct virtio_video_stream *ctrl2stream(struct v4l2_ctrl *ctrl)
-> +{
-> +       return container_of(ctrl->handler, struct virtio_video_stream,
-> +                           ctrl_handler);
-> +}
-> +
-> +static inline struct virtio_video_stream *work2stream(struct work_struct *work)
-> +{
-> +       return container_of(work, struct virtio_video_stream, work);
-> +}
-> +
-> +static inline struct virtio_video_buffer *to_virtio_vb(struct vb2_buffer *vb)
-> +{
-> +       struct vb2_v4l2_buffer *v4l2_vb = to_vb2_v4l2_buffer(vb);
-> +
-> +       return container_of(v4l2_vb, struct virtio_video_buffer,
-> +                           v4l2_m2m_vb.vb);
-> +}
-> +
-> +static inline uint32_t to_virtio_queue_type(enum v4l2_buf_type type)
-> +{
-> +       if (V4L2_TYPE_IS_OUTPUT(type))
-> +               return VIRTIO_VIDEO_QUEUE_TYPE_INPUT;
-> +       else
-> +               return VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT;
-> +}
-> +
-> +static inline bool within_range(uint32_t min, uint32_t val, uint32_t max)
-> +{
-> +       return ((val - min) <= (max - min));
-
-This doesn't validate if (min <= val) holds. For example,
-within_range(1, 0, 0) returns true.
-How about changing this condition to ((min <= val) && (val <= max))?
-
-> +}
-> +
-> +static inline bool needs_alignment(uint32_t val, uint32_t a)
-> +{
-> +       if (a == 0 || IS_ALIGNED(val, a))
-> +               return false;
-> +
-> +       return true;
-> +}
-> +
-> +int virtio_video_alloc_vbufs(struct virtio_video *vv);
-> +void virtio_video_free_vbufs(struct virtio_video *vv);
-> +int virtio_video_alloc_events(struct virtio_video *vv, size_t num);
-> +
-> +int virtio_video_device_init(struct virtio_video *vv, void *input_buf,
-> +                            void *output_buf);
-> +void virtio_video_device_deinit(struct virtio_video *vv);
-> +
-> +void virtio_video_stream_id_get(struct virtio_video *vv,
-> +                               struct virtio_video_stream *stream,
-> +                               uint32_t *id);
-> +void virtio_video_stream_id_put(struct virtio_video *vv, uint32_t id);
-> +void virtio_video_resource_id_get(struct virtio_video *vv, uint32_t *id);
-> +void virtio_video_resource_id_put(struct virtio_video *vv, uint32_t id);
-> +
-> +int virtio_video_cmd_stream_create(struct virtio_video *vv, uint32_t stream_id,
-> +                                  enum virtio_video_format format,
-> +                                  const char *tag);
-> +int virtio_video_cmd_stream_destroy(struct virtio_video *vv,
-> +                                   uint32_t stream_id);
-> +int virtio_video_cmd_stream_drain(struct virtio_video *vv, uint32_t stream_id);
-> +int virtio_video_cmd_resource_create(struct virtio_video *vv,
-> +                                    uint32_t stream_id, uint32_t resource_id,
-> +                                    uint32_t queue_type,
-> +                                    struct virtio_video_mem_entry *ents,
-> +                                   unsigned int num_planes,
-> +                                    unsigned int *num_entry);
-> +int virtio_video_cmd_resource_destroy_all(struct virtio_video *vv,
-> +                                         struct virtio_video_stream *stream,
-> +                                         uint32_t queue_type);
-> +int virtio_video_cmd_resource_queue(struct virtio_video *vv, uint32_t stream_id,
-> +                                   struct virtio_video_buffer *virtio_vb,
-> +                                   uint32_t data_size[], uint8_t num_data_size,
-> +                                   uint32_t queue_type);
-> +int virtio_video_cmd_queue_clear(struct virtio_video *vv,
-> +                                struct virtio_video_stream *stream,
-> +                                uint32_t queue_type);
-> +int virtio_video_query_capability(struct virtio_video *vv, void *resp_buf,
-> +                                 size_t resp_size, uint32_t queue_type);
-> +int virtio_video_query_control_profile(struct virtio_video *vv, void *resp_buf,
-> +                                      size_t resp_size, uint32_t format);
-> +int virtio_video_query_control_level(struct virtio_video *vv, void *resp_buf,
-> +                                    size_t resp_size, uint32_t format);
-> +int virtio_video_cmd_set_params(struct virtio_video *vv,
-> +                               struct virtio_video_stream *stream,
-> +                               struct video_format_info *format_info,
-> +                               uint32_t queue_type);
-> +int virtio_video_cmd_get_params(struct virtio_video *vv,
-> +                               struct virtio_video_stream *stream,
-> +                               uint32_t queue_type);
-> +int virtio_video_cmd_set_control(struct virtio_video *vv,
-> +                                uint32_t stream_id,
-> +                                uint32_t control, uint32_t val);
-> +int virtio_video_cmd_get_control(struct virtio_video *vv,
-> +                                struct virtio_video_stream *stream,
-> +                                uint32_t ctrl);
-> +
-> +void virtio_video_queue_res_chg_event(struct virtio_video_stream *stream);
-> +void virtio_video_queue_eos_event(struct virtio_video_stream *stream);
-> +void virtio_video_cmd_ack(struct virtqueue *vq);
-> +void virtio_video_event_ack(struct virtqueue *vq);
-> +void virtio_video_dequeue_cmd_func(struct work_struct *work);
-> +void virtio_video_dequeue_event_func(struct work_struct *work);
-> +void virtio_video_buf_done(struct virtio_video_buffer *virtio_vb,
-> +                          uint32_t flags, uint64_t timestamp, uint32_t size);
-> +int virtio_video_buf_plane_init(uint32_t idx, uint32_t resource_id,
-> +                               struct virtio_video_device *vvd,
-> +                               struct virtio_video_stream *stream,
-> +                               struct vb2_buffer *vb);
-> +void virtio_video_mark_drain_complete(struct virtio_video_stream *stream,
-> +                                     struct vb2_v4l2_buffer *v4l2_vb);
-> +
-> +int virtio_video_queue_setup(struct vb2_queue *vq, unsigned int *num_buffers,
-> +                            unsigned int *num_planes, unsigned int sizes[],
-> +                            struct device *alloc_devs[]);
-> +int virtio_video_buf_init(struct vb2_buffer *vb);
-> +void virtio_video_buf_cleanup(struct vb2_buffer *vb);
-> +int virtio_video_querycap(struct file *file, void *fh,
-> +                         struct v4l2_capability *cap);
-> +int virtio_video_enum_framesizes(struct file *file, void *fh,
-> +                                struct v4l2_frmsizeenum *f);
-> +int virtio_video_enum_framemintervals(struct file *file, void *fh,
-> +                                     struct v4l2_frmivalenum *f);
-> +int virtio_video_g_fmt(struct file *file, void *fh, struct v4l2_format *f);
-> +int virtio_video_s_fmt(struct file *file, void *fh, struct v4l2_format *f);
-> +int virtio_video_try_fmt(struct virtio_video_stream *stream,
-> +                        struct v4l2_format *f);
-> +int virtio_video_reqbufs(struct file *file, void *priv,
-> +                        struct v4l2_requestbuffers *rb);
-> +int virtio_video_subscribe_event(struct v4l2_fh *fh,
-> +                                const struct v4l2_event_subscription *sub);
-> +
-> +void virtio_video_free_caps_list(struct list_head *caps_list);
-> +int virtio_video_parse_virtio_capability(struct virtio_video_device *vvd,
-> +                                         void *input_buf, void *output_buf);
-> +void virtio_video_clean_capability(struct virtio_video_device *vvd);
-> +int virtio_video_parse_virtio_control(struct virtio_video_device *vvd);
-> +void virtio_video_clean_control(struct virtio_video_device *vvd);
-> +
-> +uint32_t virtio_video_format_to_v4l2(uint32_t format);
-> +uint32_t virtio_video_control_to_v4l2(uint32_t control);
-> +uint32_t virtio_video_profile_to_v4l2(uint32_t profile);
-> +uint32_t virtio_video_level_to_v4l2(uint32_t level);
-> +uint32_t virtio_video_v4l2_format_to_virtio(uint32_t v4l2_format);
-> +uint32_t virtio_video_v4l2_control_to_virtio(uint32_t v4l2_control);
-> +uint32_t virtio_video_v4l2_profile_to_virtio(uint32_t v4l2_profile);
-> +uint32_t virtio_video_v4l2_level_to_virtio(uint32_t v4l2_level);
-> +
-> +struct video_format *find_video_format(struct list_head *fmts_list,
-> +                                      uint32_t fourcc);
-
-Add a prefix "virtio_video_" like other functions?
-
-> +void virtio_video_format_from_info(struct video_format_info *info,
-> +                                  struct v4l2_pix_format_mplane *pix_mp);
-> +void virtio_video_format_fill_default_info(struct video_format_info *dst_info,
-> +                                          struct video_format_info *src_info);
-> +
-> +int virtio_video_g_selection(struct file *file, void *fh,
-> +                            struct v4l2_selection *sel);
-> +int virtio_video_s_selection(struct file *file, void *fh,
-> +                            struct v4l2_selection *sel);
-> +
-> +#endif /* _VIRTIO_VIDEO_H */
-> diff --git a/drivers/media/virtio/virtio_video_caps.c b/drivers/media/virtio/virtio_video_caps.c
-> new file mode 100644
-> index 000000000000..2f9d4da92810
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_caps.c
-> @@ -0,0 +1,498 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Driver for virtio video device.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include <media/v4l2-ioctl.h>
-> +#include <media/videobuf2-dma-sg.h>
-> +
-> +#include "virtio_video.h"
-> +
-> +static void virtio_video_free_frame_rates(struct video_format_frame *frame)
-> +{
-> +       if (!frame)
-> +               return;
-> +
-> +       kfree(frame->frame_rates);
-> +}
-> +
-> +static void virtio_video_free_frames(struct video_format *fmt)
-> +{
-> +       size_t idx = 0;
-> +
-> +       if (!fmt)
-> +               return;
-> +
-> +       for (idx = 0; idx < fmt->desc.num_frames; idx++)
-> +               virtio_video_free_frame_rates(&fmt->frames[idx]);
-> +       kfree(fmt->frames);
-> +}
-> +
-> +static void virtio_video_free_fmt(struct list_head *fmts_list)
-> +{
-> +       struct video_format *fmt = NULL;
-> +       struct video_format *tmp = NULL;
-> +
-> +       list_for_each_entry_safe(fmt, tmp, fmts_list, formats_list_entry) {
-> +               list_del(&fmt->formats_list_entry);
-> +               virtio_video_free_frames(fmt);
-> +               kfree(fmt);
-> +       }
-> +}
-> +
-> +static void virtio_video_free_fmts(struct virtio_video_device *vvd)
-> +{
-> +       virtio_video_free_fmt(&vvd->input_fmt_list);
-> +       virtio_video_free_fmt(&vvd->output_fmt_list);
-> +}
-> +
-> +static void assign_format_range(struct virtio_video_format_range *d_range,
-> +                               struct virtio_video_format_range *s_range)
-
-Add "virtio_video" prefix?
-
-> +{
-> +       d_range->min = le32_to_cpu(s_range->min);
-> +       d_range->max = le32_to_cpu(s_range->max);
-> +       d_range->step = le32_to_cpu(s_range->step);
-> +}
-> +
-> +static size_t
-> +virtio_video_parse_virtio_frame_rate(struct virtio_video_device *vvd,
-> +                                    struct virtio_video_format_range *f_rate,
-> +                                    void *buf)
-> +{
-> +       struct virtio_video_format_range *virtio_frame_rate = NULL;
-
-Generally speaking, it's a good idea to avoid initializing a local
-pointer with NULL at its declaration if it must be initialized below.
-This is because compilers can raise an error when you forget the
-actual initialization.
-
-Though it's not problematic immediately, could you avoid this?
-Actually, some parts of this patch don't do so.
-
-> +       size_t frame_rate_size = sizeof(struct virtio_video_format_range);
-> +
-> +       if (!f_rate || !buf || !vvd)
-> +               return 0;
-> +
-> +       virtio_frame_rate = buf;
-> +       assign_format_range(f_rate, virtio_frame_rate);
-> +       return frame_rate_size;
-> +}
-> +
-> +static size_t virtio_video_parse_virtio_frame(struct virtio_video_device *vvd,
-> +                                             struct video_format_frame *frm,
-> +                                             void *buf)
-> +{
-> +       struct virtio_video *vv = NULL;
-> +       struct virtio_video_format_frame *virtio_frame = NULL;
-> +       struct virtio_video_format_frame *frame = &frm->frame;
-> +       struct virtio_video_format_range *rate = NULL;
-> +       size_t idx, offset = 0;
-> +       size_t extra_size = 0;
-> +
-> +       if (!frame || !buf || !vvd)
-> +               return 0;
-> +
-> +       vv = vvd->vv;
-> +       virtio_frame = buf;
-> +
-> +       assign_format_range(&frame->width, &virtio_frame->width);
-> +       assign_format_range(&frame->height, &virtio_frame->height);
-> +
-> +       frame->num_rates = le32_to_cpu(virtio_frame->num_rates);
-> +       frm->frame_rates =  kcalloc(frame->num_rates,
-> +                                   sizeof(struct virtio_video_format_range),
-> +                                   GFP_KERNEL);
-> +
-> +       offset = sizeof(struct virtio_video_format_frame);
-> +       for (idx = 0; idx < frame->num_rates; idx++) {
-> +               rate = &frm->frame_rates[idx];
-> +               extra_size =
-> +                       virtio_video_parse_virtio_frame_rate(vvd, rate,
-> +                                                            buf + offset);
-> +               if (extra_size == 0) {
-> +                       kfree(frm->frame_rates);
-> +                       v4l2_err(&vv->v4l2_dev, "failed to parse frame rate\n");
-> +                       return 0;
-> +               }
-> +               offset += extra_size;
-> +       }
-> +
-> +       return offset;
-> +}
-> +
-> +static size_t virtio_video_parse_virtio_fmt(struct virtio_video_device *vvd,
-> +                                           struct video_format *fmt, void *buf)
-> +{
-> +       struct virtio_video *vv = NULL;
-> +       struct virtio_video_format_desc *virtio_fmt_desc = NULL;
-> +       struct virtio_video_format_desc *fmt_desc = NULL;
-> +       struct video_format_frame *frame = NULL;
-> +       size_t idx, offset = 0;
-> +       size_t extra_size = 0;
-> +
-> +       if (!fmt || !buf || !vvd)
-> +               return 0;
-> +
-> +       vv = vvd->vv;
-> +       virtio_fmt_desc = buf;
-> +       fmt_desc = &fmt->desc;
-> +
-> +       fmt_desc->format =
-> +               virtio_video_format_to_v4l2
-> +               (le32_to_cpu(virtio_fmt_desc->format));
-> +       fmt_desc->mask = le64_to_cpu(virtio_fmt_desc->mask);
-> +       fmt_desc->planes_layout = le32_to_cpu(virtio_fmt_desc->planes_layout);
-> +
-> +       fmt_desc->num_frames = le32_to_cpu(virtio_fmt_desc->num_frames);
-> +       fmt->frames = kcalloc(fmt_desc->num_frames,
-> +                             sizeof(struct video_format_frame),
-> +                             GFP_KERNEL);
-> +
-> +       offset = sizeof(struct virtio_video_format_desc);
-> +       for (idx = 0; idx < fmt_desc->num_frames; idx++) {
-> +               frame = &fmt->frames[idx];
-> +               extra_size =
-> +                       virtio_video_parse_virtio_frame(vvd, frame,
-> +                                                       buf + offset);
-> +               if (extra_size == 0) {
-> +                       kfree(fmt->frames);
-> +                       v4l2_err(&vv->v4l2_dev, "failed to parse frame\n");
-> +                       return 0;
-> +               }
-> +               offset += extra_size;
-> +       }
-> +
-> +       return offset;
-> +}
-> +
-> +int virtio_video_parse_virtio_capability(struct virtio_video_device *vvd,
-> +                                           void *input_buf, void *output_buf)
-> +{
-> +       struct virtio_video *vv = NULL;
-> +       struct virtio_video_query_capability_resp *input_resp = input_buf;
-> +       struct virtio_video_query_capability_resp *output_resp = output_buf;
-> +       int fmt_idx = 0;
-> +       size_t offset = 0;
-> +       struct video_format *fmt = NULL;
-> +
-> +       if (!input_buf || !output_buf || !vvd)
-> +               return -1;
-
-Instead of hard-coding -1, let's use -EINVAL.
-Same comments for all other "return -1" in this patch.
-
-> +
-> +       vv = vvd->vv;
-> +
-> +       if (le32_to_cpu(input_resp->num_descs) <= 0 ||
-> +           le32_to_cpu(output_resp->num_descs) <= 0) {
-> +               v4l2_err(&vv->v4l2_dev, "invalid capability response\n");
-> +               return -1;
-> +       }
-> +
-> +       vvd->num_input_fmts = le32_to_cpu(input_resp->num_descs);
-> +       offset = sizeof(struct virtio_video_query_capability_resp);
-> +
-> +       for (fmt_idx = 0; fmt_idx < vvd->num_input_fmts; fmt_idx++) {
-> +               size_t fmt_size = 0;
-> +
-> +               fmt = kzalloc(sizeof(*fmt), GFP_KERNEL);
-> +               if (!fmt) {
-> +                       virtio_video_free_fmts(vvd);
-> +                       return -1;
-> +               }
-> +
-> +               fmt_size = virtio_video_parse_virtio_fmt(vvd, fmt,
-> +                                                        input_buf + offset);
-> +               if (fmt_size == 0) {
-> +                       v4l2_err(&vv->v4l2_dev, "failed to parse input fmt\n");
-> +                       virtio_video_free_fmts(vvd);
-> +                       kfree(fmt);
-> +                       return -1;
-
-Instead of returning from here, please add an error label and goto
-statements to centralize error handlings.
-cf. https://www.kernel.org/doc/html/v5.4/process/coding-style.html#centralized-exiting-of-functions
-
-> +               }
-> +               offset += fmt_size;
-> +               list_add(&fmt->formats_list_entry, &vvd->input_fmt_list);
-> +       }
-> +
-> +       vvd->num_output_fmts = le32_to_cpu(output_resp->num_descs);
-> +       offset = sizeof(struct virtio_video_query_capability_resp);
-> +
-> +       for (fmt_idx = 0; fmt_idx < vvd->num_output_fmts; fmt_idx++) {
-> +               size_t fmt_size = 0;
-> +
-> +               fmt = kzalloc(sizeof(*fmt), GFP_KERNEL);
-> +               if (!fmt) {
-> +                       virtio_video_free_fmts(vvd);
-> +                       return -1;
-> +               }
-> +
-> +               fmt_size = virtio_video_parse_virtio_fmt(vvd, fmt,
-> +                                                        output_buf + offset);
-> +               if (fmt_size == 0) {
-> +                       v4l2_err(&vv->v4l2_dev, "failed to parse output fmt\n");
-> +                       virtio_video_free_fmts(vvd);
-> +                       kfree(fmt);
-> +                       return -1;
-> +               }
-> +               offset += fmt_size;
-> +               list_add(&fmt->formats_list_entry, &vvd->output_fmt_list);
-> +       }
-> +       return 0;
-> +}
-> +
-> +void virtio_video_clean_capability(struct virtio_video_device *vvd)
-> +{
-> +       if (!vvd)
-> +               return;
-> +       virtio_video_free_fmts(vvd);
-> +}
-> +
-> +static void
-> +virtio_video_free_control_fmt_data(struct video_control_fmt_data *data)
-> +{
-> +       if (!data)
-> +               return;
-> +
-> +       kfree(data->entries);
-> +       kfree(data);
-> +}
-> +
-> +static void virtio_video_free_control_formats(struct virtio_video_device *vvd)
-> +{
-> +       struct video_control_format *c_fmt = NULL;
-> +       struct video_control_format *tmp = NULL;
-> +
-> +       list_for_each_entry_safe(c_fmt, tmp, &vvd->controls_fmt_list,
-> +                                controls_list_entry) {
-> +               list_del(&c_fmt->controls_list_entry);
-> +               virtio_video_free_control_fmt_data(c_fmt->profile);
-> +               virtio_video_free_control_fmt_data(c_fmt->level);
-> +               kfree(c_fmt);
-> +       }
-> +}
-> +
-> +static int virtio_video_parse_control_levels(struct virtio_video_device *vvd,
-> +                                            struct video_control_format *fmt)
-> +{
-> +       int idx, ret = 0;
-> +       struct virtio_video_query_control_resp *resp_buf = NULL;
-> +       struct virtio_video_query_control_resp_level *l_resp_buf = NULL;
-> +       struct virtio_video *vv = NULL;
-> +       uint32_t virtio_format, num_levels, mask = 0;
-> +       uint32_t *virtio_levels = NULL;
-> +       struct video_control_fmt_data *level = NULL;
-> +       int max = 0, min = UINT_MAX;
-> +       size_t resp_size;
-> +
-> +       if (!vvd)
-> +               return -EINVAL;
-> +
-> +       vv = vvd->vv;
-> +       resp_size = vv->max_resp_len;
-> +
-> +       virtio_format = virtio_video_v4l2_format_to_virtio(fmt->format);
-> +
-> +       resp_buf = kzalloc(resp_size, GFP_KERNEL);
-> +       if (IS_ERR(resp_buf)) {
-> +               ret = PTR_ERR(resp_buf);
-> +               goto err;
-> +       }
-> +
-> +       vv->got_control = false;
-> +       ret = virtio_video_query_control_level(vv, resp_buf, resp_size,
-> +                                              virtio_format);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to query level\n");
-> +               goto err;
-> +       }
-> +
-> +       ret = wait_event_timeout(vv->wq, vv->got_control, 5 * HZ);
-> +       if (ret == 0) {
-> +               v4l2_err(&vv->v4l2_dev,
-> +                        "timed out waiting for query level\n");
-> +               ret = -EIO;
-> +               goto err;
-> +       }
-> +
-> +       ret = 0;
-> +       l_resp_buf = (void *)((char *)resp_buf + sizeof(*resp_buf));
-> +       num_levels = le32_to_cpu(l_resp_buf->num);
-> +       if (num_levels == 0)
-> +               goto err;
-> +
-> +       fmt->level = kzalloc(sizeof(*level), GFP_KERNEL);
-> +       if (!fmt->level) {
-> +               ret = -ENOMEM;
-> +               goto err;
-> +       }
-> +
-> +       level = fmt->level;
-> +       level->entries = kcalloc(num_levels, sizeof(uint32_t), GFP_KERNEL);
-> +       if (!level->entries) {
-> +               ret = -ENOMEM;
-> +               goto err;
-> +       }
-> +
-> +       virtio_levels = (void *)((char *)l_resp_buf + sizeof(*l_resp_buf));
-> +
-> +       for (idx = 0; idx < num_levels; idx++) {
-> +               level->entries[idx] =
-> +                       virtio_video_level_to_v4l2
-> +                       (le32_to_cpu(virtio_levels[idx]));
-> +
-> +               mask = mask | (1 << level->entries[idx]);
-> +               if (level->entries[idx] > max)
-> +                       max = level->entries[idx];
-> +               if (level->entries[idx] < min)
-> +                       min = level->entries[idx];
-> +       }
-> +       level->min = min;
-> +       level->max = max;
-> +       level->num = num_levels;
-> +       level->skip_mask = ~mask;
-> +err:
-
-"err" is not a good name, as the following 'kfree' must be executed
-even without an error.
-How about renaming it to "out_free_buf" like the example here?
-
-https://www.kernel.org/doc/html/v5.4/process/coding-style.html#centralized-exiting-of-functions
-
-> +       kfree(resp_buf);
-> +       return ret;
-> +}
-> +
-> +static int virtio_video_parse_control_profiles(struct virtio_video_device *vvd,
-> +                                              struct video_control_format *fmt)
-> +{
-> +       int idx, ret = 0;
-> +       struct virtio_video_query_control_resp *resp_buf = NULL;
-> +       struct virtio_video_query_control_resp_profile *p_resp_buf = NULL;
-> +       struct virtio_video *vv = NULL;
-> +       uint32_t virtio_format, num_profiles, mask = 0;
-> +       uint32_t *virtio_profiles = NULL;
-> +       struct video_control_fmt_data *profile = NULL;
-> +       int max = 0, min = UINT_MAX;
-> +       size_t resp_size;
-> +
-> +       if (!vvd)
-> +               return -EINVAL;
-> +
-> +       vv = vvd->vv;
-> +       resp_size = vv->max_resp_len;
-> +       virtio_format = virtio_video_v4l2_format_to_virtio(fmt->format);
-> +       resp_buf = kzalloc(resp_size, GFP_KERNEL);
-> +       if (IS_ERR(resp_buf)) {
-> +               ret = PTR_ERR(resp_buf);
-> +               goto err;
-> +       }
-> +
-> +       vv->got_control = false;
-> +       ret = virtio_video_query_control_profile(vv, resp_buf, resp_size,
-> +                                                virtio_format);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to query profile\n");
-> +               goto err;
-> +       }
-> +
-> +       ret = wait_event_timeout(vv->wq, vv->got_control, 5 * HZ);
-> +       if (ret == 0) {
-> +               v4l2_err(&vv->v4l2_dev,
-> +                        "timed out waiting for query profile\n");
-> +               ret = -EIO;
-> +               goto err;
-> +       }
-> +
-> +       ret = 0;
-> +       p_resp_buf = (void *)((char *)resp_buf + sizeof(*resp_buf));
-> +       num_profiles = le32_to_cpu(p_resp_buf->num);
-> +       if (num_profiles == 0)
-> +               goto err;
-> +
-> +       fmt->profile = kzalloc(sizeof(*profile), GFP_KERNEL);
-> +       if (!fmt->profile) {
-> +               ret = -ENOMEM;
-> +               goto err;
-> +       }
-> +
-> +       profile = fmt->profile;
-> +       profile->entries = kcalloc(num_profiles, sizeof(uint32_t), GFP_KERNEL);
-> +       if (!profile->entries) {
-> +               ret = -ENOMEM;
-> +               goto err;
-> +       }
-> +
-> +       virtio_profiles = (void *)((char *)p_resp_buf + sizeof(*p_resp_buf));
-> +
-> +       for (idx = 0; idx < num_profiles; idx++) {
-> +               profile->entries[idx] =
-> +                       virtio_video_profile_to_v4l2
-> +                       (le32_to_cpu(virtio_profiles[idx]));
-> +
-> +               mask = mask | (1 << profile->entries[idx]);
-> +               if (profile->entries[idx] > max)
-> +                       max = profile->entries[idx];
-> +               if (profile->entries[idx] < min)
-> +                       min = profile->entries[idx];
-> +       }
-> +       profile->min = min;
-> +       profile->max = max;
-> +       profile->num = num_profiles;
-> +       profile->skip_mask = ~mask;
-> +err:
-
-same
-
-> +       kfree(resp_buf);
-> +       return ret;
-> +}
-> +
-> +int virtio_video_parse_virtio_control(struct virtio_video_device *vvd)
-> +{
-> +       struct video_format *fmt = NULL;
-> +       struct video_control_format *c_fmt = NULL;
-> +       struct virtio_video *vv = NULL;
-> +       uint32_t virtio_format;
-> +       int ret = 0;
-> +
-> +       if (!vvd)
-> +               return -EINVAL;
-> +
-> +       vv = vvd->vv;
-> +
-> +       list_for_each_entry(fmt, &vvd->output_fmt_list, formats_list_entry) {
-> +               virtio_format =
-> +                       virtio_video_v4l2_format_to_virtio(fmt->desc.format);
-> +               if (virtio_format < VIRTIO_VIDEO_FORMAT_CODED_MIN ||
-> +                   virtio_format > VIRTIO_VIDEO_FORMAT_CODED_MAX)
-> +                       continue;
-> +
-> +               c_fmt = kzalloc(sizeof(*c_fmt), GFP_KERNEL);
-> +               if (!c_fmt) {
-> +                       virtio_video_free_control_formats(vvd);
-> +                       return -1;
-> +               }
-> +
-> +               c_fmt->format = fmt->desc.format;
-> +               ret = virtio_video_parse_control_profiles(vvd, c_fmt);
-> +               if (ret) {
-> +                       virtio_video_free_control_formats(vvd);
-> +                       kfree(c_fmt);
-
-These 'free' functions should be called under "err" label.
-
-> +                       v4l2_err(&vv->v4l2_dev,
-> +                                "failed to parse control profile\n");
-> +                       goto err;
-> +               }
-> +               ret = virtio_video_parse_control_levels(vvd, c_fmt);
-> +               if (ret) {
-> +                       virtio_video_free_control_formats(vvd);
-> +                       kfree(c_fmt);
-> +                       v4l2_err(&vv->v4l2_dev,
-> +                                "failed to parse control level\n");
-> +                       goto err;
-> +               }
-> +               list_add(&c_fmt->controls_list_entry, &vvd->controls_fmt_list);
-> +       }
-> +       return 0;
-> +err:
-> +       return ret;
-> +}
-> +
-> +void virtio_video_clean_control(struct virtio_video_device *vvd)
-> +{
-> +       if (!vvd)
-> +               return;
-> +
-> +       virtio_video_free_control_formats(vvd);
-> +}
-> diff --git a/drivers/media/virtio/virtio_video_dec.c b/drivers/media/virtio/virtio_video_dec.c
-> new file mode 100644
-> index 000000000000..fc805933fc5e
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_dec.c
-> @@ -0,0 +1,427 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Decoder for virtio video device.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include <media/v4l2-event.h>
-> +#include <media/v4l2-ioctl.h>
-> +
-> +#include "virtio_video.h"
-> +
-> +static void virtio_video_dec_buf_queue(struct vb2_buffer *vb)
-> +{
-> +       int i, ret;
-> +       struct vb2_buffer *src_buf;
-> +       struct vb2_v4l2_buffer *src_vb;
-> +       struct virtio_video_buffer *virtio_vb;
-> +       uint32_t data_size[VB2_MAX_PLANES] = {0};
-> +       struct vb2_v4l2_buffer *v4l2_vb = to_vb2_v4l2_buffer(vb);
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vb->vb2_queue);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       v4l2_m2m_buf_queue(stream->fh.m2m_ctx, v4l2_vb);
-> +
-> +       if ((stream->state != STREAM_STATE_INIT) ||
-> +           !V4L2_TYPE_IS_OUTPUT(vb->vb2_queue->type))
-> +               return;
-> +
-> +       src_vb = v4l2_m2m_next_src_buf(stream->fh.m2m_ctx);
-> +       if (!src_vb) {
-> +               v4l2_err(&vv->v4l2_dev, "no src buf during initialization\n");
-> +               return;
-> +       }
-> +
-> +       src_buf = &src_vb->vb2_buf;
-> +       for (i = 0; i < src_buf->num_planes; ++i)
-> +               data_size[i] = src_buf->planes[i].bytesused;
-> +
-> +       virtio_vb = to_virtio_vb(src_buf);
-> +
-> +       ret = virtio_video_cmd_resource_queue(vv, stream->stream_id,
-> +                                             virtio_vb, data_size,
-> +                                             src_buf->num_planes,
-> +                                             VIRTIO_VIDEO_QUEUE_TYPE_INPUT);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to queue an src buffer\n");
-> +               return;
-> +       }
-> +
-> +       virtio_vb->queued = true;
-> +       stream->src_cleared = false;
-> +       src_vb = v4l2_m2m_src_buf_remove(stream->fh.m2m_ctx);
-> +}
-> +
-> +static int virtio_video_dec_start_streaming(struct vb2_queue *vq,
-> +                                           unsigned int count)
-> +{
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vq);
-> +
-> +       if (!V4L2_TYPE_IS_OUTPUT(vq->type) &&
-> +           stream->state >= STREAM_STATE_INIT)
-> +               stream->state = STREAM_STATE_RUNNING;
-> +
-> +       return 0;
-> +}
-> +
-> +static void virtio_video_dec_stop_streaming(struct vb2_queue *vq)
-> +{
-> +       int ret, queue_type;
-> +       bool *cleared;
-> +       bool is_v4l2_output = V4L2_TYPE_IS_OUTPUT(vq->type);
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vq);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct vb2_v4l2_buffer *v4l2_vb;
-> +
-> +       if (is_v4l2_output) {
-> +               cleared = &stream->src_cleared;
-> +               queue_type = VIRTIO_VIDEO_QUEUE_TYPE_INPUT;
-> +       } else {
-> +               cleared = &stream->dst_cleared;
-> +               queue_type = VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT;
-> +       }
-> +
-> +       ret = virtio_video_cmd_queue_clear(vv, stream, queue_type);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to clear queue\n");
-> +               return;
-> +       }
-> +
-> +       ret = wait_event_timeout(vv->wq, *cleared, 5 * HZ);
-> +       if (ret == 0) {
-> +               v4l2_err(&vv->v4l2_dev, "timed out waiting for queue clear\n");
-> +               return;
-> +       }
-> +
-> +       for (;;) {
-> +               if (is_v4l2_output)
-> +                       v4l2_vb = v4l2_m2m_src_buf_remove(stream->fh.m2m_ctx);
-> +               else
-> +                       v4l2_vb = v4l2_m2m_dst_buf_remove(stream->fh.m2m_ctx);
-> +               if (!v4l2_vb)
-> +                       break;
-> +               v4l2_m2m_buf_done(v4l2_vb, VB2_BUF_STATE_ERROR);
-> +       }
-> +}
-> +
-> +static const struct vb2_ops virtio_video_dec_qops = {
-> +       .queue_setup     = virtio_video_queue_setup,
-> +       .buf_init        = virtio_video_buf_init,
-> +       .buf_cleanup     = virtio_video_buf_cleanup,
-> +       .buf_queue       = virtio_video_dec_buf_queue,
-> +       .start_streaming = virtio_video_dec_start_streaming,
-> +       .stop_streaming  = virtio_video_dec_stop_streaming,
-> +       .wait_prepare    = vb2_ops_wait_prepare,
-> +       .wait_finish     = vb2_ops_wait_finish,
-> +};
-> +
-> +static int virtio_video_dec_g_volatile_ctrl(struct v4l2_ctrl *ctrl)
-> +{
-> +       int ret = 0;
-> +       struct virtio_video_stream *stream = ctrl2stream(ctrl);
-> +
-> +       switch (ctrl->id) {
-> +       case V4L2_CID_MIN_BUFFERS_FOR_CAPTURE:
-> +               if (stream->state >= STREAM_STATE_METADATA)
-> +                       ctrl->val = stream->out_info.min_buffers;
-> +               else
-> +                       ctrl->val = 0;
-> +               break;
-> +       default:
-> +               ret = -EINVAL;
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static const struct v4l2_ctrl_ops virtio_video_dec_ctrl_ops = {
-> +       .g_volatile_ctrl        = virtio_video_dec_g_volatile_ctrl,
-> +};
-> +
-> +int virtio_video_dec_init_ctrls(struct virtio_video_stream *stream)
-> +{
-> +       struct v4l2_ctrl *ctrl;
-> +
-> +       v4l2_ctrl_handler_init(&stream->ctrl_handler, 1);
-> +
-> +       ctrl = v4l2_ctrl_new_std(&stream->ctrl_handler,
-> +                               &virtio_video_dec_ctrl_ops,
-> +                               V4L2_CID_MIN_BUFFERS_FOR_CAPTURE,
-> +                               MIN_BUFS_MIN, MIN_BUFS_MAX, MIN_BUFS_STEP,
-> +                               MIN_BUFS_DEF);
-> +       ctrl->flags |= V4L2_CTRL_FLAG_VOLATILE;
-
-Need to check if ctrl is non-NULL.
-
-> +
-> +       if (stream->ctrl_handler.error)
-> +               return stream->ctrl_handler.error;
-> +
-> +       v4l2_ctrl_handler_setup(&stream->ctrl_handler);
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_dec_init_queues(void *priv, struct vb2_queue *src_vq,
-> +                                struct vb2_queue *dst_vq)
-> +{
-> +       int ret;
-> +       struct virtio_video_stream *stream = priv;
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct device *dev = vv->v4l2_dev.dev;
-> +
-> +       src_vq->type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
-> +       src_vq->io_modes = VB2_MMAP | VB2_DMABUF;
-> +       src_vq->drv_priv = stream;
-> +       src_vq->buf_struct_size = sizeof(struct virtio_video_buffer);
-> +       src_vq->ops = &virtio_video_dec_qops;
-> +       src_vq->mem_ops = virtio_video_mem_ops(vv);
-> +       src_vq->min_buffers_needed = stream->in_info.min_buffers;
-> +       src_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
-> +       src_vq->lock = &stream->vq_mutex;
-> +       src_vq->gfp_flags = virtio_video_gfp_flags(vv);
-> +       src_vq->dev = dev;
-> +
-> +       ret = vb2_queue_init(src_vq);
-> +       if (ret)
-> +               return ret;
-> +
-> +       dst_vq->type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-> +       dst_vq->io_modes = VB2_MMAP | VB2_DMABUF;
-> +       dst_vq->drv_priv = stream;
-> +       dst_vq->buf_struct_size = sizeof(struct virtio_video_buffer);
-> +       dst_vq->ops = &virtio_video_dec_qops;
-> +       dst_vq->mem_ops = virtio_video_mem_ops(vv);
-> +       dst_vq->min_buffers_needed = stream->out_info.min_buffers;
-> +       dst_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
-> +       dst_vq->lock = &stream->vq_mutex;
-> +       dst_vq->gfp_flags = virtio_video_gfp_flags(vv);
-> +       dst_vq->dev = dev;
-> +
-> +       return vb2_queue_init(dst_vq);
-> +}
-> +
-> +static int virtio_video_try_decoder_cmd(struct file *file, void *fh,
-> +                                       struct v4l2_decoder_cmd *cmd)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       if (stream->state == STREAM_STATE_DRAIN)
-> +               return -EBUSY;
-> +
-> +       switch (cmd->cmd) {
-> +       case V4L2_DEC_CMD_STOP:
-> +       case V4L2_DEC_CMD_START:
-> +               if (cmd->flags != 0) {
-> +                       v4l2_err(&vv->v4l2_dev, "flags=%u are not supported",
-> +                                cmd->flags);
-> +                       return -EINVAL;
-> +               }
-> +               break;
-> +       default:
-> +               return -EINVAL;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int virtio_video_decoder_cmd(struct file *file, void *fh,
-> +                                   struct v4l2_decoder_cmd *cmd)
-> +{
-> +       int ret;
-> +       struct vb2_queue *src_vq, *dst_vq;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       ret = virtio_video_try_decoder_cmd(file, fh, cmd);
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       dst_vq = v4l2_m2m_get_vq(stream->fh.m2m_ctx,
-> +                                V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
-> +
-> +       switch (cmd->cmd) {
-> +       case V4L2_DEC_CMD_START:
-> +               vb2_clear_last_buffer_dequeued(dst_vq);
-> +               break;
-> +       case V4L2_DEC_CMD_STOP:
-> +               src_vq = v4l2_m2m_get_vq(stream->fh.m2m_ctx,
-> +                                        V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
-> +
-> +               if (!vb2_is_streaming(src_vq)) {
-> +                       v4l2_dbg(1, vv->debug,
-> +                                &vv->v4l2_dev, "output is not streaming\n");
-> +                       return 0;
-> +               }
-> +
-> +               if (!vb2_is_streaming(dst_vq)) {
-> +                       v4l2_dbg(1, vv->debug,
-> +                                &vv->v4l2_dev, "capture is not streaming\n");
-> +                       return 0;
-> +               }
-> +
-> +               ret = virtio_video_cmd_stream_drain(vv, stream->stream_id);
-> +               if (ret) {
-> +                       v4l2_err(&vv->v4l2_dev, "failed to drain stream\n");
-> +                       return ret;
-> +               }
-> +
-> +               stream->state = STREAM_STATE_DRAIN;
-> +               break;
-> +       default:
-> +               return -EINVAL;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int virtio_video_dec_enum_fmt_vid_cap(struct file *file, void *fh,
-> +                                            struct v4l2_fmtdesc *f)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format_info *info = NULL;
-> +       struct video_format *fmt = NULL;
-> +       unsigned long input_mask = 0;
-> +       int idx = 0, bit_num = 0;
-> +
-> +       if (f->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
-> +               return -EINVAL;
-> +
-> +       if (f->index >= vvd->num_output_fmts)
-> +               return -EINVAL;
-> +
-> +       info = &stream->in_info;
-> +       list_for_each_entry(fmt, &vvd->input_fmt_list, formats_list_entry) {
-> +               if (info->fourcc_format == fmt->desc.format) {
-> +                       input_mask = fmt->desc.mask;
-> +                       break;
-> +               }
-> +       }
-> +
-> +       if (input_mask == 0)
-> +               return -EINVAL;
-> +
-> +       list_for_each_entry(fmt, &vvd->output_fmt_list, formats_list_entry) {
-> +               if (test_bit(bit_num, &input_mask)) {
-> +                       if (f->index == idx) {
-> +                               f->pixelformat = fmt->desc.format;
-> +                               return 0;
-> +                       }
-> +                       idx++;
-> +               }
-> +               bit_num++;
-> +       }
-> +       return -EINVAL;
-> +}
-> +
-> +
-> +int virtio_video_dec_enum_fmt_vid_out(struct file *file, void *fh,
-> +                                     struct v4l2_fmtdesc *f)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format *fmt = NULL;
-> +       int idx = 0;
-> +
-> +       if (f->type != V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE)
-> +               return -EINVAL;
-> +
-> +       if (f->index >= vvd->num_input_fmts)
-> +               return -EINVAL;
-> +
-> +       list_for_each_entry(fmt, &vvd->input_fmt_list, formats_list_entry) {
-> +               if (f->index == idx) {
-> +                       f->pixelformat = fmt->desc.format;
-> +                       return 0;
-> +               }
-> +               idx++;
-> +       }
-> +       return -EINVAL;
-> +}
-> +
-> +static int virtio_video_dec_s_fmt(struct file *file, void *fh,
-> +                                 struct v4l2_format *f)
-> +{
-> +       int ret;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +
-> +       ret = virtio_video_s_fmt(file, fh, f);
-> +       if (ret)
-> +               return ret;
-> +
-> +       if (V4L2_TYPE_IS_OUTPUT(f->type)) {
-> +               if (stream->state == STREAM_STATE_IDLE)
-> +                       stream->state = STREAM_STATE_INIT;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct v4l2_ioctl_ops virtio_video_dec_ioctl_ops = {
-> +       .vidioc_querycap        = virtio_video_querycap,
-> +
-> +       .vidioc_enum_fmt_vid_cap = virtio_video_dec_enum_fmt_vid_cap,
-> +       .vidioc_g_fmt_vid_cap   = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_cap   = virtio_video_dec_s_fmt,
-> +
-> +       .vidioc_enum_fmt_vid_cap_mplane = virtio_video_dec_enum_fmt_vid_cap,
-> +       .vidioc_g_fmt_vid_cap_mplane    = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_cap_mplane    = virtio_video_dec_s_fmt,
-> +
-> +       .vidioc_enum_fmt_vid_out = virtio_video_dec_enum_fmt_vid_out,
-> +       .vidioc_g_fmt_vid_out   = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_out   = virtio_video_dec_s_fmt,
-> +
-> +       .vidioc_enum_fmt_vid_out_mplane = virtio_video_dec_enum_fmt_vid_out,
-> +       .vidioc_g_fmt_vid_out_mplane    = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_out_mplane    = virtio_video_dec_s_fmt,
-> +
-> +       .vidioc_g_selection = virtio_video_g_selection,
-> +       .vidioc_s_selection = virtio_video_s_selection,
-> +
-> +       .vidioc_try_decoder_cmd = virtio_video_try_decoder_cmd,
-> +       .vidioc_decoder_cmd     = virtio_video_decoder_cmd,
-> +       .vidioc_enum_frameintervals = virtio_video_enum_framemintervals,
-> +       .vidioc_enum_framesizes = virtio_video_enum_framesizes,
-> +
-> +       .vidioc_reqbufs         = virtio_video_reqbufs,
-> +       .vidioc_querybuf        = v4l2_m2m_ioctl_querybuf,
-> +       .vidioc_qbuf            = v4l2_m2m_ioctl_qbuf,
-> +       .vidioc_dqbuf           = v4l2_m2m_ioctl_dqbuf,
-> +       .vidioc_prepare_buf     = v4l2_m2m_ioctl_prepare_buf,
-> +       .vidioc_create_bufs     = v4l2_m2m_ioctl_create_bufs,
-> +       .vidioc_expbuf          = v4l2_m2m_ioctl_expbuf,
-> +
-> +       .vidioc_streamon        = v4l2_m2m_ioctl_streamon,
-> +       .vidioc_streamoff       = v4l2_m2m_ioctl_streamoff,
-> +
-> +       .vidioc_subscribe_event = virtio_video_subscribe_event,
-> +       .vidioc_unsubscribe_event = v4l2_event_unsubscribe,
-> +};
-> +
-> +int virtio_video_dec_init(struct video_device *vd)
-> +{
-> +       ssize_t num;
-> +
-> +       vd->ioctl_ops = &virtio_video_dec_ioctl_ops;
-> +       num = strscpy(vd->name, "stateful-decoder", sizeof(vd->name));
-
-Don't we want to check the value of "num"?
-Also, how about having a word "virtio" in the name of the driver?
-
-> +
-> +       return 0;
-> +}
-> diff --git a/drivers/media/virtio/virtio_video_dec.h b/drivers/media/virtio/virtio_video_dec.h
-> new file mode 100644
-> index 000000000000..0a1252248bbf
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_dec.h
-> @@ -0,0 +1,30 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/* Decoder header for virtio video driver.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef _VIRTIO_VIDEO_DEC_H
-> +#define _VIRTIO_VIDEO_DEC_H
-> +
-> +#include "virtio_video.h"
-> +
-> +int virtio_video_dec_init(struct video_device *vd);
-> +int virtio_video_dec_init_ctrls(struct virtio_video_stream *stream);
-> +int virtio_video_dec_init_queues(void *priv, struct vb2_queue *src_vq,
-> +                                struct vb2_queue *dst_vq);
-> +
-> +#endif /* _VIRTIO_VIDEO_DEC_H */
-> diff --git a/drivers/media/virtio/virtio_video_device.c b/drivers/media/virtio/virtio_video_device.c
-> new file mode 100644
-> index 000000000000..130e705580d1
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_device.c
-> @@ -0,0 +1,1079 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Driver for virtio video device.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include <media/v4l2-event.h>
-> +#include <media/v4l2-ioctl.h>
-> +#include <media/videobuf2-dma-sg.h>
-> +
-> +#include "virtio_video.h"
-> +#include "virtio_video_dec.h"
-> +#include "virtio_video_enc.h"
-> +
-> +int virtio_video_queue_setup(struct vb2_queue *vq, unsigned int *num_buffers,
-> +                            unsigned int *num_planes, unsigned int sizes[],
-> +                            struct device *alloc_devs[])
-> +{
-> +       int i;
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vq);
-> +       struct video_format_info *p_info;
-> +
-> +       if (*num_planes)
-> +               return 0;
-> +
-> +       if (V4L2_TYPE_IS_OUTPUT(vq->type))
-> +               p_info = &stream->in_info;
-> +       else
-> +               p_info = &stream->out_info;
-> +
-> +       *num_planes = p_info->num_planes;
-> +
-> +       for (i = 0; i < p_info->num_planes; i++)
-> +               sizes[i] = p_info->plane_format[i].plane_size;
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_buf_init(struct vb2_buffer *vb)
-> +{
-> +       int ret = 0;
-> +       unsigned int i, j;
-> +       struct scatterlist *sg;
-> +       struct virtio_video_mem_entry *ents;
-> +       uint32_t num_ents[VIRTIO_VIDEO_MAX_PLANES];
-> +       struct sg_table *sgt[VIRTIO_VIDEO_MAX_PLANES];
-> +       uint32_t resource_id, nents = 0;
-> +       struct vb2_queue *vq = vb->vb2_queue;
-> +       enum v4l2_buf_type queue_type = vq->type;
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vq);
-> +       struct virtio_video_buffer *virtio_vb = to_virtio_vb(vb);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       virtio_video_resource_id_get(vv, &resource_id);
-> +
-> +       if (vv->supp_non_contig) {
-> +               for (i = 0; i < vb->num_planes; i++) {
-> +                       sgt[i] = vb2_dma_sg_plane_desc(vb, i);
-> +                       nents += sgt[i]->nents;
-> +               }
-> +
-> +               ents = kcalloc(nents, sizeof(*ents), GFP_KERNEL);
-> +               if (!ents)
-> +                       return -ENOMEM;
-> +
-> +               for (i = 0; i < vb->num_planes; ++i) {
-> +                       for_each_sg(sgt[i]->sgl, sg, sgt[i]->nents, j) {
-> +                               ents[j].addr = cpu_to_le64(vv->has_iommu
-> +                                                          ? sg_dma_address(sg)
-> +                                                          : sg_phys(sg));
-> +                               ents[j].length = cpu_to_le32(sg->length);
-> +                       }
-> +                       num_ents[i] = sgt[i]->nents;
-> +               }
-> +       } else {
-> +               nents = vb->num_planes;
-> +
-> +               ents = kcalloc(nents, sizeof(*ents), GFP_KERNEL);
-> +               if (!ents)
-> +                       return -ENOMEM;
-> +
-> +               for (i = 0; i < vb->num_planes; ++i) {
-> +                       ents[i].addr =
-> +                               cpu_to_le64(vb2_dma_contig_plane_dma_addr(vb,
-> +                                                                         i));
-> +                       ents[i].length = cpu_to_le32(vb->planes[i].length);
-> +                       num_ents[i] = 1;
-> +               }
-> +       }
-> +
-> +       v4l2_dbg(1, vv->debug, &vv->v4l2_dev, "mem entries:\n");
-> +       if (vv->debug >= 1) {
-> +               for (i = 0; i < nents; i++)
-> +                       pr_debug("\t%03i: addr=%llx length=%u\n", i,
-> +                                       ents[i].addr, ents[i].length);
-> +       }
-> +
-> +       ret = virtio_video_cmd_resource_create(vv, stream->stream_id,
-> +                                              resource_id,
-> +                                              to_virtio_queue_type(queue_type),
-> +                                              ents, vb->num_planes,
-> +                                              num_ents);
-> +       if (ret) {
-> +               virtio_video_resource_id_put(vvd->vv, resource_id);
-> +               kfree(ents);
-> +
-> +               return ret;
-> +       }
-> +
-> +       virtio_vb->queued = false;
-> +       virtio_vb->resource_id = resource_id;
-> +
-> +       return 0;
-> +}
-> +
-> +void virtio_video_buf_cleanup(struct vb2_buffer *vb)
-> +{
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vb->vb2_queue);
-> +       struct virtio_video_buffer *virtio_vb = to_virtio_vb(vb);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       virtio_video_resource_id_put(vv, virtio_vb->resource_id);
-> +}
-> +
-> +int virtio_video_querycap(struct file *file, void *fh,
-> +                         struct v4l2_capability *cap)
-> +{
-> +       struct video_device *video_dev = video_devdata(file);
-> +
-> +       strncpy(cap->driver, DRIVER_NAME, sizeof(cap->driver));
-> +       strncpy(cap->card, video_dev->name, sizeof(cap->card));
-> +       snprintf(cap->bus_info, sizeof(cap->bus_info), "virtio:%s",
-> +                video_dev->name);
-
-v4l2-compliance test raises an error on this prefix "virtio:".
-We have two options:
-1. Move the driver code to /platform/ and use a prefix "platform:"
-like other virtual drivers such as vivid and vicodec.
-2. Modify v4l2-compliance test.
-
-I'm not sure which is better, though.
-
-> +
-> +       cap->device_caps = V4L2_CAP_VIDEO_M2M_MPLANE | V4L2_CAP_STREAMING;
-> +       cap->capabilities = cap->device_caps | V4L2_CAP_DEVICE_CAPS;
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_enum_framesizes(struct file *file, void *fh,
-> +                                struct v4l2_frmsizeenum *f)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format *fmt = NULL;
-> +       struct video_format_frame *frm = NULL;
-> +       struct virtio_video_format_frame *frame = NULL;
-> +       int idx = f->index;
-> +
-> +       fmt = find_video_format(&vvd->input_fmt_list, f->pixel_format);
-> +       if (fmt == NULL)
-> +               fmt = find_video_format(&vvd->output_fmt_list, f->pixel_format);
-> +       if (fmt == NULL)
-> +               return -EINVAL;
-> +
-> +       if (idx >= fmt->desc.num_frames)
-> +               return -EINVAL;
-> +
-> +       frm = &fmt->frames[idx];
-> +       frame = &frm->frame;
-> +
-> +       if (frame->width.min == frame->width.max &&
-> +           frame->height.min == frame->height.max) {
-> +               f->type = V4L2_FRMSIZE_TYPE_DISCRETE;
-> +               f->discrete.width = frame->width.min;
-> +               f->discrete.height = frame->height.min;
-> +               return 0;
-> +       }
-> +
-> +       f->type = V4L2_FRMSIZE_TYPE_CONTINUOUS;
-> +       f->stepwise.min_width = frame->width.min;
-> +       f->stepwise.max_width = frame->width.max;
-> +       f->stepwise.min_height = frame->height.min;
-> +       f->stepwise.max_height = frame->height.max;
-> +       f->stepwise.step_width = frame->width.step;
-> +       f->stepwise.step_height = frame->height.step;
-> +       return 0;
-> +}
-> +
-> +static bool in_stepped_interval(uint32_t int_start, uint32_t int_end,
-> +                               uint32_t step, uint32_t point)
-
-How about changing the interface like this?
-
-static bool in_stepped_interval(const struct
-virtio_video_format_range* range, uint32_t point)
-
-> +{
-> +       if (point < int_start || point > int_end)
-
-You can use within_range.
-
-> +               return false;
-> +
-> +       if (step == 0 && int_start == int_end && int_start == point)
-> +               return true;
-> +
-> +       if (step != 0 && (point - int_start) % step == 0)
-> +               return true;
-> +
-> +       return false;
-> +}
-> +
-> +int virtio_video_enum_framemintervals(struct file *file, void *fh,
-> +                                     struct v4l2_frmivalenum *f)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format *fmt = NULL;
-> +       struct video_format_frame *frm = NULL;
-> +       struct virtio_video_format_frame *frame = NULL;
-> +       struct virtio_video_format_range *frate = NULL;
-> +       int idx = f->index;
-> +       int f_idx = 0;
-> +
-> +       fmt = find_video_format(&vvd->input_fmt_list, f->pixel_format);
-> +       if (fmt == NULL)
-> +               fmt = find_video_format(&vvd->output_fmt_list, f->pixel_format);
-> +       if (fmt == NULL)
-> +               return -EINVAL;
-> +
-> +       for (f_idx = 0; f_idx <= fmt->desc.num_frames; f_idx++) {
-> +               frm = &fmt->frames[f_idx];
-> +               frame = &frm->frame;
-> +               if (in_stepped_interval(frame->width.min, frame->width.max,
-> +                                       frame->width.step, f->width) &&
-> +                  in_stepped_interval(frame->height.min, frame->height.max,
-> +                                       frame->height.step, f->height))
-> +                       break;
-> +       }
-> +
-> +       if (frame == NULL || f->index >= frame->num_rates)
-> +               return -EINVAL;
-> +
-> +       frate = &frm->frame_rates[idx];
-> +       if (frate->max == frate->min) {
-> +               f->type = V4L2_FRMIVAL_TYPE_DISCRETE;
-> +               f->discrete.numerator = 1;
-> +               f->discrete.denominator = frate->max;
-> +       } else {
-> +               f->stepwise.min.numerator = 1;
-> +               f->stepwise.min.denominator = frate->max;
-> +               f->stepwise.max.numerator = 1;
-> +               f->stepwise.max.denominator = frate->min;
-> +               f->stepwise.step.numerator = 1;
-> +               f->stepwise.step.denominator = frate->step;
-> +               if (frate->step == 1)
-> +                       f->type = V4L2_FRMIVAL_TYPE_CONTINUOUS;
-> +               else
-> +                       f->type = V4L2_FRMIVAL_TYPE_STEPWISE;
-> +       }
-> +       return 0;
-> +}
-> +
-> +
-> +int virtio_video_g_fmt(struct file *file, void *fh, struct v4l2_format *f)
-> +{
-> +       struct video_format_info *info;
-> +       struct v4l2_pix_format_mplane *pix_mp = &f->fmt.pix_mp;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +
-> +       if (!V4L2_TYPE_IS_OUTPUT(f->type))
-> +               info = &stream->out_info;
-> +       else
-> +               info = &stream->in_info;
-> +
-> +       virtio_video_format_from_info(info, pix_mp);
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_s_fmt(struct file *file, void *fh, struct v4l2_format *f)
-> +{
-> +       int i, ret;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct v4l2_pix_format_mplane *pix_mp = &f->fmt.pix_mp;
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct video_format_info info;
-> +       struct video_format_info *p_info;
-> +       uint32_t queue;
-> +
-> +       ret = virtio_video_try_fmt(stream, f);
-> +       if (ret)
-> +               return ret;
-> +
-> +       if (V4L2_TYPE_IS_OUTPUT(f->type)) {
-> +               virtio_video_format_fill_default_info(&info, &stream->in_info);
-> +               queue = VIRTIO_VIDEO_QUEUE_TYPE_INPUT;
-> +       } else {
-> +               virtio_video_format_fill_default_info(&info, &stream->out_info);
-> +               queue = VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT;
-> +       }
-> +
-> +       info.frame_width = pix_mp->width;
-> +       info.frame_height = pix_mp->height;
-> +       info.num_planes = pix_mp->num_planes;
-> +       info.fourcc_format = pix_mp->pixelformat;
-> +
-> +       for (i = 0; i < info.num_planes; i++) {
-> +               info.plane_format[i].stride =
-> +                                        pix_mp->plane_fmt[i].bytesperline;
-> +               info.plane_format[i].plane_size =
-> +                                        pix_mp->plane_fmt[i].sizeimage;
-> +       }
-> +
-> +       virtio_video_cmd_set_params(vv, stream, &info, queue);
-> +       virtio_video_cmd_get_params(vv, stream, VIRTIO_VIDEO_QUEUE_TYPE_INPUT);
-> +       virtio_video_cmd_get_params(vv, stream, VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +
-> +       if (V4L2_TYPE_IS_OUTPUT(f->type))
-> +               p_info = &stream->in_info;
-> +       else
-> +               p_info = &stream->out_info;
-> +
-> +       virtio_video_format_from_info(p_info, pix_mp);
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_g_selection(struct file *file, void *fh,
-> +                        struct v4l2_selection *sel)
-> +{
-> +       struct video_format_info *info = NULL;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +
-> +       switch (vvd->type) {
-> +       case VIRTIO_VIDEO_DEVICE_ENCODER:
-> +               if (!V4L2_TYPE_IS_OUTPUT(sel->type))
-> +                       return -EINVAL;
-> +               info = &stream->in_info;
-> +               break;
-> +       case VIRTIO_VIDEO_DEVICE_DECODER:
-> +               if (V4L2_TYPE_IS_OUTPUT(sel->type))
-> +                       return -EINVAL;
-> +               info = &stream->out_info;
-> +               break;
-> +       default:
-> +               v4l2_err(&vvd->vv->v4l2_dev, "unsupported device type\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       switch (sel->target) {
-> +       case V4L2_SEL_TGT_COMPOSE_BOUNDS:
-> +       case V4L2_SEL_TGT_COMPOSE_PADDED:
-
-Can't we support V4L2_SEL_TGT_COMPOSE as well?
-
-> +               sel->r.width = info->frame_width;
-> +               sel->r.height = info->frame_height;
-> +               break;
-> +       default:
-> +               v4l2_dbg(1, vvd->vv->debug, &vvd->vv->v4l2_dev,
-> +                        "unsupported/invalid selection target\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_s_selection(struct file *file, void *fh,
-> +                            struct v4l2_selection *sel)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       int ret;
-> +
-> +       stream->out_info.crop.top = sel->r.top;
-> +       stream->out_info.crop.left = sel->r.left;
-> +       stream->out_info.crop.width = sel->r.width;
-> +       stream->out_info.crop.height = sel->r.height;
-> +
-> +       ret = virtio_video_cmd_set_params(vv, stream,  &stream->out_info,
-> +                                          VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +       if (ret < 0)
-> +               return -EINVAL;
-> +
-> +       /* Get actual selection that was set */
-> +       return virtio_video_cmd_get_params(vv, stream,
-> +                                          VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +}
-> +
-> +int virtio_video_try_fmt(struct virtio_video_stream *stream,
-> +                        struct v4l2_format *f)
-> +{
-> +       int i, idx = 0;
-> +       struct v4l2_pix_format_mplane *pix_mp = &f->fmt.pix_mp;
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format *fmt = NULL;
-> +       bool found = false;
-> +       struct video_format_frame *frm = NULL;
-> +       struct virtio_video_format_frame *frame = NULL;
-> +
-> +       if (V4L2_TYPE_IS_OUTPUT(f->type))
-> +               fmt = find_video_format(&vvd->input_fmt_list,
-> +                                       pix_mp->pixelformat);
-> +       else
-> +               fmt = find_video_format(&vvd->output_fmt_list,
-> +                                       pix_mp->pixelformat);
-> +
-> +       if (!fmt) {
-
-Why is this condition needed?
-
-> +               if (f->type == V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
-> +                       virtio_video_format_from_info(&stream->out_info,
-> +                                                     pix_mp);
-> +               else if (f->type == V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE)
-> +                       virtio_video_format_from_info(&stream->in_info,
-> +                                                     pix_mp);
-> +               else
-> +                       return -EINVAL;
-> +               return 0;
-> +       }
-> +
-> +       for (i = 0; i < fmt->desc.num_frames && !found; i++) {
-
-|width| and |height| don't make any sense for coded formats whose
-metadata are in stream, such as VPx and H.264.
-
-So, we should have a if-statement like this before this for-loop:
-
-if (pix_mp->width == 0 && pix_mp->height == 0)  {
-        stream->current_frame = &fmt->frames[0];
-        return 0;
-}
-
-> +               frm = &fmt->frames[i];
-> +               frame = &frm->frame;
-> +               if (!within_range(frame->width.min, pix_mp->width,
-> +                                 frame->width.max))
-> +                       continue;
-> +
-> +               if (!within_range(frame->height.min, pix_mp->width,
-
-pix_mp->height
-
-> +                                 frame->height.max))
-> +                       continue;
-> +               idx = i;
-> +               /*
-> +                * Try to find a more suitable frame size. Go with the current
-> +                * one otherwise.
-> +                */
-> +               if (needs_alignment(pix_mp->width, frame->width.step))
-> +                       continue;
-> +
-> +               if (needs_alignment(pix_mp->height, frame->height.step))
-> +                       continue;
-> +
-> +               stream->current_frame = frm;
-> +               found = true;
-> +       }
-> +
-> +       if (!found) {
-> +               frm = &fmt->frames[idx];
-
-If num_frames==0, Null-dereference can occur.
-Even though the device is expected to return at least one frame info,
-the driver should add a check to avoid crash.
-
-> +               frame = &frm->frame;
-> +               pix_mp->width = clamp(pix_mp->width, frame->width.min,
-> +                                     frame->width.max);
-> +               if (frame->width.step != 0)
-> +                       pix_mp->width = ALIGN(pix_mp->width, frame->width.step);
-> +
-> +               pix_mp->height = clamp(pix_mp->height, frame->height.min,
-> +                                      frame->height.max);
-> +               if (frame->height.step != 0)
-> +                       pix_mp->height = ALIGN(pix_mp->height,
-> +                                              frame->height.step);
-> +               stream->current_frame = frm;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int virtio_video_queue_free(struct virtio_video *vv,
-> +                         struct virtio_video_stream *stream,
-> +                         enum v4l2_buf_type type)
-> +{
-> +       int ret;
-> +       uint32_t queue_type = to_virtio_queue_type(type);
-> +
-> +       ret = virtio_video_cmd_resource_destroy_all(vv, stream,
-> +                                                   queue_type);
-> +       if (ret)
-> +               v4l2_warn(&vv->v4l2_dev,
-> +                         "failed to destroy resources\n");
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_reqbufs(struct file *file, void *priv,
-> +                        struct v4l2_requestbuffers *rb)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct v4l2_m2m_ctx *m2m_ctx = stream->fh.m2m_ctx;
-> +       struct vb2_queue *vq = v4l2_m2m_get_vq(m2m_ctx, rb->type);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +
-> +       if (rb->count == 0)
-> +               virtio_video_queue_free(vvd->vv, stream, vq->type);
-> +
-> +       return v4l2_m2m_reqbufs(file, m2m_ctx, rb);
-> +}
-> +
-> +int virtio_video_subscribe_event(struct v4l2_fh *fh,
-> +                                const struct v4l2_event_subscription *sub)
-> +{
-> +       switch (sub->type) {
-> +       case V4L2_EVENT_SOURCE_CHANGE:
-> +               return v4l2_src_change_event_subscribe(fh, sub);
-> +       default:
-> +               return -EINVAL;
-> +       }
-> +}
-> +
-> +void virtio_video_queue_eos_event(struct virtio_video_stream *stream)
-> +{
-> +       static const struct v4l2_event eos_event = {
-> +               .type = V4L2_EVENT_EOS
-> +       };
-> +
-> +       v4l2_event_queue_fh(&stream->fh, &eos_event);
-> +}
-> +
-> +void virtio_video_queue_res_chg_event(struct virtio_video_stream *stream)
-> +{
-> +       static const struct v4l2_event ev_src_ch = {
-> +               .type = V4L2_EVENT_SOURCE_CHANGE,
-> +               .u.src_change.changes =
-> +                       V4L2_EVENT_SRC_CH_RESOLUTION,
-> +       };
-> +
-> +       v4l2_event_queue_fh(&stream->fh, &ev_src_ch);
-> +}
-> +
-> +void virtio_video_mark_drain_complete(struct virtio_video_stream *stream,
-> +                                     struct vb2_v4l2_buffer *v4l2_vb)
-> +{
-> +       struct vb2_buffer *vb2_buf;
-> +
-> +       v4l2_vb->flags |= V4L2_BUF_FLAG_LAST;
-> +
-> +       vb2_buf = &v4l2_vb->vb2_buf;
-> +       vb2_buf->planes[0].bytesused = 0;
-> +
-> +       v4l2_m2m_buf_done(v4l2_vb, VB2_BUF_STATE_DONE);
-> +       stream->state = STREAM_STATE_STOPPED;
-> +}
-> +
-> +void virtio_video_buf_done(struct virtio_video_buffer *virtio_vb,
-> +                          uint32_t flags, uint64_t timestamp, uint32_t size)
-> +{
-> +       int i;
-> +       enum vb2_buffer_state done_state = VB2_BUF_STATE_DONE;
-> +       struct vb2_v4l2_buffer *v4l2_vb = &virtio_vb->v4l2_m2m_vb.vb;
-> +       struct vb2_buffer *vb = &v4l2_vb->vb2_buf;
-> +       struct vb2_queue *vb2_queue = vb->vb2_queue;
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vb2_queue);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format_info *p_info;
-> +
-> +       virtio_vb->queued = false;
-> +
-> +       if (flags & VIRTIO_VIDEO_BUFFER_FLAG_ERR)
-> +               done_state = VB2_BUF_STATE_ERROR;
-> +
-> +       if (flags & VIRTIO_VIDEO_BUFFER_FLAG_IFRAME)
-> +               v4l2_vb->flags |= V4L2_BUF_FLAG_KEYFRAME;
-> +
-> +       if (flags & VIRTIO_VIDEO_BUFFER_FLAG_BFRAME)
-> +               v4l2_vb->flags |= V4L2_BUF_FLAG_BFRAME;
-> +
-> +       if (flags & VIRTIO_VIDEO_BUFFER_FLAG_PFRAME)
-> +               v4l2_vb->flags |= V4L2_BUF_FLAG_PFRAME;
-> +
-> +       if (flags & VIRTIO_VIDEO_BUFFER_FLAG_EOS) {
-> +               v4l2_vb->flags |= V4L2_BUF_FLAG_LAST;
-> +               stream->state = STREAM_STATE_STOPPED;
-> +               virtio_video_queue_eos_event(stream);
-> +       }
-> +
-> +       if (!V4L2_TYPE_IS_OUTPUT(vb2_queue->type)) {
-> +               switch (vvd->type) {
-> +               case VIRTIO_VIDEO_DEVICE_ENCODER:
-> +                       vb->planes[0].bytesused = size;
-> +                       break;
-> +               case VIRTIO_VIDEO_DEVICE_DECODER:
-> +                       p_info = &stream->out_info;
-> +                       for (i = 0; i < p_info->num_planes; i++)
-> +                               vb->planes[i].bytesused =
-> +                                       p_info->plane_format[i].plane_size;
-
-This is not always correct because the host can returns an empty
-buffer with the EOS flag or the ERR flag.
-In such case, we need to set 0 to bytesused.
-
-However, the current protocol doesn't define how to notify |bytesused|
-for decoder.
-We may need to extend the protocol to have |size| for each plane?
-
-> +                       break;
-> +               }
-> +
-> +               vb->timestamp = timestamp;
-> +       }
-> +
-> +       v4l2_m2m_buf_done(v4l2_vb, done_state);
-> +}
-> +
-> +static void virtio_video_worker(struct work_struct *work)
-
-Question:
-Why do you enqueue buffers here instead of in virtio_video_dec_buf_queue?
-Furthermore, I wonder why we have virtio_video_cmd_resource_queue for
-INPUT both in this function and that function.
-
-> +{
-> +       unsigned int i;
-> +       int ret;
-> +       struct vb2_buffer *vb2_buf;
-> +       struct vb2_v4l2_buffer *src_vb, *dst_vb;
-> +       struct virtio_video_buffer *virtio_vb;
-> +       struct virtio_video_stream *stream = work2stream(work);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct vb2_queue *src_vq =
-> +               v4l2_m2m_get_vq(stream->fh.m2m_ctx,
-> +                               V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
-> +       struct vb2_queue *dst_vq =
-> +               v4l2_m2m_get_vq(stream->fh.m2m_ctx,
-> +                               V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
-> +       struct virtio_video *vv = vvd->vv;
-> +       uint32_t data_size[VB2_MAX_PLANES] = {0};
-> +
-> +       mutex_lock(dst_vq->lock);
-
-Can't we narrow the range that requires the lock?
-How about obtaining a lock just before virtio_video_cmd_resource_queue()?
-
-At least, we can get lock inside of the for-loop to avoid blocking
-another work for a long time.
-
-> +       for (;;) {
-> +               dst_vb = v4l2_m2m_next_dst_buf(stream->fh.m2m_ctx);
-> +               if (dst_vb == NULL)
-> +                       break;
-> +
-> +               vb2_buf = &dst_vb->vb2_buf;
-> +               virtio_vb = to_virtio_vb(vb2_buf);
-> +
-> +               for (i = 0; i < vb2_buf->num_planes; ++i)
-> +                       data_size[i] = vb2_buf->planes[i].bytesused;
-> +
-> +               ret = virtio_video_cmd_resource_queue
-> +                       (vv, stream->stream_id, virtio_vb, data_size,
-> +                        vb2_buf->num_planes, VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +               if (ret) {
-> +                       v4l2_err(&vv->v4l2_dev,
-> +                                 "failed to queue a dst buffer\n");
-> +                       v4l2_m2m_job_finish(vvd->m2m_dev, stream->fh.m2m_ctx);
-> +                       mutex_unlock(dst_vq->lock);
-> +                       return;
-> +               }
-> +
-> +               virtio_vb->queued = true;
-> +               stream->dst_cleared = false;
-> +               dst_vb = v4l2_m2m_dst_buf_remove(stream->fh.m2m_ctx);
-> +       }
-> +       mutex_unlock(dst_vq->lock);
-> +
-> +       mutex_lock(src_vq->lock);
-> +       for (;;) {
-> +               if (stream->state == STREAM_STATE_DRAIN)
-> +                       break;
-> +
-> +               src_vb = v4l2_m2m_next_src_buf(stream->fh.m2m_ctx);
-> +               if (src_vb == NULL)
-> +                       break;
-> +
-> +               vb2_buf = &src_vb->vb2_buf;
-> +               virtio_vb = to_virtio_vb(vb2_buf);
-> +
-> +               for (i = 0; i < vb2_buf->num_planes; ++i)
-> +                       data_size[i] = vb2_buf->planes[i].bytesused;
-> +
-> +               ret = virtio_video_cmd_resource_queue
-> +                       (vv, stream->stream_id, virtio_vb, data_size,
-> +                        vb2_buf->num_planes, VIRTIO_VIDEO_QUEUE_TYPE_INPUT);
-> +               if (ret) {
-> +                       v4l2_err(&vv->v4l2_dev,
-> +                                 "failed to queue an src buffer\n");
-> +                       v4l2_m2m_job_finish(vvd->m2m_dev, stream->fh.m2m_ctx);
-> +                       mutex_unlock(src_vq->lock);
-> +                       return;
-> +               }
-> +
-> +               virtio_vb->queued = true;
-> +               stream->src_cleared = false;
-> +               src_vb = v4l2_m2m_src_buf_remove(stream->fh.m2m_ctx);
-> +       }
-> +       mutex_unlock(src_vq->lock);
-> +
-> +       v4l2_m2m_job_finish(vvd->m2m_dev, stream->fh.m2m_ctx);
-> +}
-> +
-> +static int virtio_video_device_open(struct file *file)
-> +{
-> +       int ret;
-> +       uint32_t stream_id;
-> +       char name[TASK_COMM_LEN];
-> +       struct virtio_video_stream *stream;
-> +       struct video_format *default_fmt;
-> +       enum virtio_video_format format;
-> +       struct video_device *video_dev = video_devdata(file);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       switch (vvd->type) {
-> +       case VIRTIO_VIDEO_DEVICE_ENCODER:
-> +               default_fmt = list_first_entry_or_null(&vvd->output_fmt_list,
-> +                                                      struct video_format,
-> +                                                      formats_list_entry);
-> +               break;
-> +       case VIRTIO_VIDEO_DEVICE_DECODER:
-> +               default_fmt = list_first_entry_or_null(&vvd->input_fmt_list,
-> +                                                      struct video_format,
-> +                                                      formats_list_entry);
-> +               break;
-> +       default:
-> +               v4l2_err(&vv->v4l2_dev, "unsupported device type\n");
-
-How about printing vvd->type?
-
-> +               return -EIO;
-> +       }
-> +
-> +       if (!default_fmt) {
-> +               v4l2_err(&vv->v4l2_dev, "device failed to start\n");
-> +               return -EIO;
-> +       }
-> +
-> +       stream = kzalloc(sizeof(*stream), GFP_KERNEL);
-> +       if (!stream)
-> +               return -ENOMEM;
-> +
-> +       get_task_comm(name, current);
-> +       format = virtio_video_v4l2_format_to_virtio(default_fmt->desc.format);
-
-As I mentioned in the previous version, it's better to avoid expensive
-operations like stream creation in open callback because applications
-usually open a video device only to query capabilities.
-We can delay to send stream_create until calling REQBUFS.
-
-> +       virtio_video_stream_id_get(vv, stream, &stream_id);
-> +       ret = virtio_video_cmd_stream_create(vv, stream_id, format, name);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to create stream\n");
-> +               goto err_stream_create;
-> +       }
-> +
-> +       stream->video_dev = video_dev;
-> +       stream->stream_id = stream_id;
-> +       stream->state = STREAM_STATE_IDLE;
-> +
-> +       ret = virtio_video_cmd_get_params(vv, stream,
-> +                                         VIRTIO_VIDEO_QUEUE_TYPE_INPUT);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to get stream in params\n");
-> +               goto err_init_ctrls;
-> +       }
-> +
-> +       ret = virtio_video_cmd_get_params(vv, stream,
-> +                                         VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to get stream out params\n");
-> +               goto err_init_ctrls;
-> +       }
-> +
-> +       ret = virtio_video_cmd_get_control(vv, stream,
-> +                                          VIRTIO_VIDEO_CONTROL_PROFILE);
-
-Since VIRTIO_VIODE_COTROLs are optional , we shouldn't call it unconditonally.
-Especially, CONTROL_PROFILE is valid only when a special type of coded
-formats is used.
-
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to get stream profile\n");
-> +               goto err_init_ctrls;
-> +       }
-> +
-> +       ret = virtio_video_cmd_get_control(vv, stream,
-> +                                          VIRTIO_VIDEO_CONTROL_LEVEL);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to get stream level\n");
-> +               goto err_init_ctrls;
-> +       }
-> +
-> +       ret = virtio_video_cmd_get_control(vv, stream,
-> +                                          VIRTIO_VIDEO_CONTROL_BITRATE);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to get stream bitrate\n");
-> +               goto err_init_ctrls;
-> +       }
-> +
-> +       mutex_init(&stream->vq_mutex);
-> +       INIT_WORK(&stream->work, virtio_video_worker);
-> +       v4l2_fh_init(&stream->fh, video_dev);
-> +       stream->fh.ctrl_handler = &stream->ctrl_handler;
-> +
-> +       switch (vvd->type) {
-> +       case VIRTIO_VIDEO_DEVICE_ENCODER:
-> +               stream->fh.m2m_ctx =
-> +                       v4l2_m2m_ctx_init(vvd->m2m_dev, stream,
-> +                                         &virtio_video_enc_init_queues);
-> +               break;
-> +       case VIRTIO_VIDEO_DEVICE_DECODER:
-> +               stream->fh.m2m_ctx =
-> +                       v4l2_m2m_ctx_init(vvd->m2m_dev, stream,
-> +                                         &virtio_video_dec_init_queues);
-> +               break;
-> +       default:
-> +               v4l2_err(&vv->v4l2_dev, "unsupported device type\n");
-> +               goto err_stream_create;
-> +       }
-> +
-> +       v4l2_m2m_set_src_buffered(stream->fh.m2m_ctx, true);
-> +       v4l2_m2m_set_dst_buffered(stream->fh.m2m_ctx, true);
-> +       file->private_data = &stream->fh;
-> +       v4l2_fh_add(&stream->fh);
-> +
-> +       switch (vvd->type) {
-> +       case VIRTIO_VIDEO_DEVICE_ENCODER:
-> +               ret = virtio_video_enc_init_ctrls(stream);
-> +               break;
-> +       case VIRTIO_VIDEO_DEVICE_DECODER:
-> +               ret = virtio_video_dec_init_ctrls(stream);
-> +               break;
-> +       default:
-> +               ret = 0;
-> +               break;
-
-unreachable or error?
-
-> +       }
-> +
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to init controls\n");
-> +               goto err_init_ctrls;
-> +       }
-> +       return 0;
-> +
-> +err_init_ctrls:
-> +       v4l2_fh_del(&stream->fh);
-> +       v4l2_fh_exit(&stream->fh);
-> +       mutex_lock(video_dev->lock);
-> +       v4l2_m2m_ctx_release(stream->fh.m2m_ctx);
-> +       mutex_unlock(video_dev->lock);
-> +err_stream_create:
-> +       virtio_video_stream_id_put(vv, stream_id);
-> +       kfree(stream);
-> +
-> +       return ret;
-> +}
-> +
-> +static int virtio_video_device_release(struct file *file)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct video_device *video_dev = video_devdata(file);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       v4l2_fh_del(&stream->fh);
-> +       v4l2_fh_exit(&stream->fh);
-> +       mutex_lock(video_dev->lock);
-> +       v4l2_m2m_ctx_release(stream->fh.m2m_ctx);
-> +       mutex_unlock(video_dev->lock);
-> +
-> +       virtio_video_cmd_stream_destroy(vv, stream->stream_id);
-> +       virtio_video_stream_id_put(vv, stream->stream_id);
-> +
-> +       kfree(stream);
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct v4l2_file_operations virtio_video_device_fops = {
-> +       .owner          = THIS_MODULE,
-> +       .open           = virtio_video_device_open,
-> +       .release        = virtio_video_device_release,
-> +       .poll           = v4l2_m2m_fop_poll,
-> +       .unlocked_ioctl = video_ioctl2,
-> +       .mmap           = v4l2_m2m_fop_mmap,
-> +};
-> +
-> +static void virtio_video_device_run(void *priv)
-> +{
-> +       struct virtio_video_stream *stream = priv;
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +
-> +       queue_work(vvd->workqueue, &stream->work);
-> +}
-> +
-> +static int virtio_video_device_job_ready(void *priv)
-> +{
-> +       struct virtio_video_stream *stream = priv;
-> +
-> +       if (stream->state == STREAM_STATE_STOPPED)
-> +               return 0;
-> +
-> +       if (v4l2_m2m_num_src_bufs_ready(stream->fh.m2m_ctx) > 0 ||
-> +           v4l2_m2m_num_dst_bufs_ready(stream->fh.m2m_ctx) > 0)
-> +               return 1;
-> +
-> +       return 0;
-> +}
-> +
-> +static void virtio_video_device_job_abort(void *priv)
-> +{
-> +       struct virtio_video_stream *stream = priv;
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +
-> +       v4l2_m2m_job_finish(vvd->m2m_dev, stream->fh.m2m_ctx);
-> +}
-> +
-> +static const struct v4l2_m2m_ops virtio_video_device_m2m_ops = {
-> +       .device_run     = virtio_video_device_run,
-> +       .job_ready      = virtio_video_device_job_ready,
-> +       .job_abort      = virtio_video_device_job_abort,
-> +};
-> +
-> +static int virtio_video_device_register(struct virtio_video_device *vvd)
-> +{
-> +       int ret = 0;
-> +       struct video_device *vd = NULL;
-> +       struct virtio_video *vv = NULL;
-> +
-> +       if (!vvd)
-> +               return -EINVAL;
-> +
-> +       vd = &vvd->video_dev;
-> +       vv = vvd->vv;
-> +
-> +       switch (vvd->type) {
-> +       case VIRTIO_VIDEO_DEVICE_ENCODER:
-> +               ret = virtio_video_enc_init(vd);
-> +               break;
-> +       case VIRTIO_VIDEO_DEVICE_DECODER:
-> +               ret = virtio_video_dec_init(vd);
-> +               break;
-> +       default:
-> +               v4l2_err(&vv->v4l2_dev, "unknown device type\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to init device\n");
-> +               return ret;
-> +       }
-> +
-> +       ret = video_register_device(vd, VFL_TYPE_GRABBER, 0);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to register video device\n");
-> +               return ret;
-> +       }
-> +
-> +       vvd->workqueue = alloc_ordered_workqueue(vd->name,
-> +                                                WQ_MEM_RECLAIM | WQ_FREEZABLE);
-> +       if (!vvd->workqueue) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to create a workqueue");
-> +               video_unregister_device(vd);
-> +               return -ENOMEM;
-> +       }
-> +
-> +       list_add(&vvd->devices_list_entry, &vv->devices_list);
-> +       v4l2_info(&vv->v4l2_dev, "Device '%s' registered as /dev/video%d\n",
-> +                 vd->name, vd->num);
-> +
-> +       return 0;
-> +}
-> +
-> +static void virtio_video_device_unregister(struct virtio_video_device *vvd)
-> +{
-> +       if (!vvd)
-> +               return;
-> +
-> +       list_del(&vvd->devices_list_entry);
-> +       flush_workqueue(vvd->workqueue);
-> +       destroy_workqueue(vvd->workqueue);
-> +       video_unregister_device(&vvd->video_dev);
-> +}
-> +
-> +static struct virtio_video_device *
-> +virtio_video_device_create(struct virtio_video *vv)
-> +{
-> +       struct device *dev = NULL;
-> +       struct video_device *vd = NULL;
-> +       struct v4l2_m2m_dev *m2m_dev = NULL;
-> +       struct virtio_video_device *vvd = NULL;
-> +
-> +       if (!vv)
-> +               return ERR_PTR(-EINVAL);
-> +
-> +       dev = &vv->vdev->dev;
-> +
-> +       vvd = devm_kzalloc(dev, sizeof(*vvd), GFP_KERNEL);
-> +       if (!vvd)
-> +               return ERR_PTR(-ENOMEM);
-> +
-> +       m2m_dev = v4l2_m2m_init(&virtio_video_device_m2m_ops);
-> +       if (IS_ERR(m2m_dev)) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to init m2m device\n");
-> +               goto err;
-> +       }
-> +
-> +       vvd->vv = vv;
-> +       vvd->m2m_dev = m2m_dev;
-> +       mutex_init(&vvd->video_dev_mutex);
-> +       vd = &vvd->video_dev;
-> +       vd->lock = &vvd->video_dev_mutex;
-> +       vd->v4l2_dev = &vv->v4l2_dev;
-> +       vd->vfl_dir = VFL_DIR_M2M;
-> +       vd->ioctl_ops = NULL;
-> +       vd->fops = &virtio_video_device_fops;
-> +       vd->device_caps = V4L2_CAP_STREAMING | V4L2_CAP_VIDEO_M2M_MPLANE;
-> +       vd->release = video_device_release_empty;
-> +
-> +       /* Use the selection API instead */
-> +       v4l2_disable_ioctl(vd, VIDIOC_CROPCAP);
-> +       v4l2_disable_ioctl(vd, VIDIOC_G_CROP);
-> +       v4l2_disable_ioctl(vd, VIDIOC_S_CROP);
-> +
-> +       video_set_drvdata(vd, vvd);
-> +
-> +       INIT_LIST_HEAD(&vvd->input_fmt_list);
-> +       INIT_LIST_HEAD(&vvd->output_fmt_list);
-> +       INIT_LIST_HEAD(&vvd->controls_fmt_list);
-> +
-> +       vvd->num_output_fmts = 0;
-> +       vvd->num_input_fmts = 0;
-> +
-> +       switch (vv->vdev->id.device) {
-> +       case VIRTIO_ID_VIDEO_ENC:
-> +               vvd->type = VIRTIO_VIDEO_DEVICE_ENCODER;
-> +               break;
-> +       case VIRTIO_ID_VIDEO_DEC:
-> +       default:
-
-error if it's neither VIDEO_ENC nore VIDEO_DEC?
-
-> +               vvd->type = VIRTIO_VIDEO_DEVICE_DECODER;
-> +               break;
-> +       }
-> +
-> +       return vvd;
-> +
-> +err:
-> +       devm_kfree(dev, vvd);
-> +
-> +       return ERR_CAST(m2m_dev);
-> +}
-> +
-> +void virtio_video_device_destroy(struct virtio_video_device *vvd)
-> +{
-> +       if (!vvd)
-> +               return;
-> +
-> +       v4l2_m2m_release(vvd->m2m_dev);
-> +       devm_kfree(&vvd->vv->vdev->dev, vvd);
-> +}
-> +
-> +int virtio_video_device_init(struct virtio_video *vv,
-> +                            void *input_buf, void *output_buf)
-> +{
-> +       int ret = 0;
-> +       struct virtio_video_device *vvd = NULL;
-> +
-> +       if (!vv || !input_buf || !output_buf)
-> +               return -EINVAL;
-> +
-> +
-> +       vvd = virtio_video_device_create(vv);
-> +       if (IS_ERR(vvd)) {
-> +               v4l2_err(&vv->v4l2_dev,
-> +                        "failed to create virtio video device\n");
-> +               ret = PTR_ERR(vvd);
-> +               goto failed;
-> +       }
-> +
-> +       ret = virtio_video_parse_virtio_capability(vvd, input_buf, output_buf);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to parse a function\n");
-> +               virtio_video_device_destroy(vvd);
-> +               ret = -EINVAL;
-> +               goto failed;
-> +       }
-> +
-> +       ret = virtio_video_parse_virtio_control(vvd);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to query controls\n");
-> +               virtio_video_clean_capability(vvd);
-> +               virtio_video_device_destroy(vvd);
-
-Please do these cleanups after goto.
-
-> +               goto failed;
-> +       }
-> +
-> +       ret = virtio_video_device_register(vvd);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev,
-> +                        "failed to init virtio video device\n");
-> +               virtio_video_clean_control(vvd);
-> +               virtio_video_clean_capability(vvd);
-> +               virtio_video_device_destroy(vvd);
-> +               goto failed;
-> +       }
-> +
-> +       return 0;
-> +
-> +failed:
-> +       virtio_video_device_deinit(vv);
-> +
-> +       return ret;
-> +}
-> +
-> +void virtio_video_device_deinit(struct virtio_video *vv)
-> +{
-> +       struct virtio_video_device *vvd = NULL, *tmp = NULL;
-> +
-> +       list_for_each_entry_safe(vvd, tmp, &vv->devices_list,
-> +                                devices_list_entry) {
-> +               virtio_video_device_unregister(vvd);
-> +               virtio_video_clean_control(vvd);
-> +               virtio_video_clean_capability(vvd);
-> +               virtio_video_device_destroy(vvd);
-> +       }
-> +}
-> diff --git a/drivers/media/virtio/virtio_video_driver.c b/drivers/media/virtio/virtio_video_driver.c
-> new file mode 100644
-> index 000000000000..2d4fd7671f4f
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_driver.c
-> @@ -0,0 +1,315 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Driver for virtio video device.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include <linux/module.h>
-> +#include <linux/version.h>
-> +#include <linux/dma-mapping.h>
-> +
-> +#include "virtio_video.h"
-> +
-> +static unsigned int debug;
-> +module_param(debug, uint, 0644);
-> +
-> +static unsigned int use_dma_mem;
-> +module_param(use_dma_mem, uint, 0644);
-> +MODULE_PARM_DESC(use_dma_mem, "Try to allocate buffers from the DMA zone");
-> +
-> +static void virtio_video_init_vq(struct virtio_video_queue *vvq,
-> +                                void (*work_func)(struct work_struct *work))
-> +{
-> +       spin_lock_init(&vvq->qlock);
-> +       init_waitqueue_head(&vvq->ack_queue);
-> +       INIT_WORK(&vvq->dequeue_work, work_func);
-> +}
-> +
-> +static void *dma_phys_alloc(struct device *dev, size_t size,
-> +                           dma_addr_t *dma_handle, gfp_t gfp,
-> +                           unsigned long attrs)
-> +{
-> +       void *ret;
-> +
-> +       ret = (void *)__get_free_pages(gfp, get_order(size));
-> +       if (ret)
-> +               *dma_handle = virt_to_phys(ret) - PFN_PHYS(dev->dma_pfn_offset);
-> +
-> +       return ret;
-> +}
-> +
-> +static void dma_phys_free(struct device *dev, size_t size,
-> +                         void *cpu_addr, dma_addr_t dma_addr,
-> +                         unsigned long attrs)
-> +{
-> +       free_pages((unsigned long)cpu_addr, get_order(size));
-> +}
-> +
-> +static dma_addr_t dma_phys_map_page(struct device *dev, struct page *page,
-> +                                   unsigned long offset, size_t size,
-> +                                   enum dma_data_direction dir,
-> +                                   unsigned long attrs)
-> +{
-> +       return page_to_phys(page) + offset - PFN_PHYS(dev->dma_pfn_offset);
-> +}
-> +
-> +static int dma_phys_map_sg(struct device *dev, struct scatterlist *sgl,
-> +                          int nents, enum dma_data_direction dir,
-> +                          unsigned long attrs)
-> +{
-> +       int i;
-> +       struct scatterlist *sg;
-> +
-> +       for_each_sg(sgl, sg, nents, i) {
-> +               dma_addr_t offset = PFN_PHYS(dev->dma_pfn_offset);
-> +               void *va;
-> +
-> +               BUG_ON(!sg_page(sg));
-
-AFAIK, BUG_ON isn't recommended to use.
-At least, /scripts/checkpatch.pl complains it.
-
-> +               va = sg_virt(sg);
-> +               sg_dma_address(sg) = (dma_addr_t)virt_to_phys(va) - offset;
-> +               sg_dma_len(sg) = sg->length;
-> +       }
-> +
-> +       return nents;
-> +}
-> +
-> +const struct dma_map_ops dma_phys_ops = {
-> +       .alloc                  = dma_phys_alloc,
-> +       .free                   = dma_phys_free,
-> +       .map_page               = dma_phys_map_page,
-> +       .map_sg                 = dma_phys_map_sg,
-> +};
-> +
-> +static int virtio_video_query_cap_resp_buf(struct virtio_video *vv, void
-> +                                          **resp_buf, int queue_type)
-> +{
-> +       int ret = 0;
-> +       int resp_size = vv->max_caps_len;
-> +
-> +       *resp_buf = kzalloc(vv->max_caps_len, GFP_KERNEL);
-> +       if (IS_ERR(*resp_buf)) {
-> +               ret = PTR_ERR(*resp_buf);
-> +               goto err;
-> +       }
-> +
-> +       vv->got_caps = false;
-> +       ret = virtio_video_query_capability(vv, *resp_buf, resp_size,
-> +                                           queue_type);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to query capability\n");
-> +               goto err;
-> +       }
-> +
-> +       ret = wait_event_timeout(vv->wq, vv->got_caps, 5 * HZ);
-> +       if (ret == 0) {
-> +               v4l2_err(&vv->v4l2_dev, "timed out waiting for get caps\n");
-> +               ret = -EIO;
-> +               goto err;
-> +       }
-> +
-> +       return 0;
-> +err:
-> +       return ret;
-> +}
-> +
-> +static int virtio_video_init(struct virtio_video *vv)
-> +{
-> +       int ret = 0;
-> +       void *input_resp_buf = NULL;
-> +       void *output_resp_buf = NULL;
-> +
-> +       if (!vv)
-> +               return -EINVAL;
-> +
-> +       ret = virtio_video_query_cap_resp_buf(vv, &input_resp_buf,
-> +                                             VIRTIO_VIDEO_QUEUE_TYPE_INPUT);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to get input caps\n");
-> +               goto err;
-> +       }
-> +
-> +       ret = virtio_video_query_cap_resp_buf(vv, &output_resp_buf,
-> +                                             VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to get output caps\n");
-> +               goto err;
-> +       }
-> +
-> +       ret = virtio_video_device_init(vv, input_resp_buf, output_resp_buf);
-> +       if (ret)
-> +               v4l2_err(&vv->v4l2_dev, "failed to initialize devices\n");
-> +
-> +err:
-> +       kfree(input_resp_buf);
-> +       kfree(output_resp_buf);
-> +
-> +       return ret;
-> +};
-> +
-> +static int virtio_video_probe(struct virtio_device *vdev)
-> +{
-> +       int ret;
-> +       struct virtio_video *vv;
-> +       struct virtqueue *vqs[2];
-> +       struct device *dev = &vdev->dev;
-> +
-> +       static const char * const names[] = { "control", "event" };
-> +       static vq_callback_t *callbacks[] = {
-> +               virtio_video_cmd_ack,
-> +               virtio_video_event_ack
-> +       };
-> +
-> +       if (!virtio_has_feature(vdev, VIRTIO_VIDEO_F_RESOURCE_GUEST_PAGES)) {
-> +               dev_err(dev, "device must support guest allocated buffers\n");
-> +               return -ENODEV;
-> +       }
-> +
-> +       vv = devm_kzalloc(dev, sizeof(*vv), GFP_KERNEL);
-> +       if (!vv)
-> +               return -ENOMEM;
-> +
-> +       vv->vdev = vdev;
-> +       vv->debug = debug;
-> +       vv->use_dma_mem = use_dma_mem;
-> +       vdev->priv = vv;
-> +
-> +       spin_lock_init(&vv->resource_idr_lock);
-> +       idr_init(&vv->resource_idr);
-> +       spin_lock_init(&vv->stream_idr_lock);
-> +       idr_init(&vv->stream_idr);
-> +
-> +       init_waitqueue_head(&vv->wq);
-> +
-> +       if (virtio_has_feature(vdev, VIRTIO_VIDEO_F_RESOURCE_NON_CONTIG))
-> +               vv->supp_non_contig = true;
-> +
-> +       vv->has_iommu = !virtio_has_iommu_quirk(vdev);
-> +       if (!vv->has_iommu)
-> +               set_dma_ops(dev, &dma_phys_ops);
-> +
-> +       dev_set_name(dev, "%s.%i", DRIVER_NAME, vdev->index);
-> +       ret = v4l2_device_register(dev, &vv->v4l2_dev);
-> +       if (ret)
-> +               goto err_v4l2_reg;
-> +
-> +       virtio_video_init_vq(&vv->commandq, virtio_video_dequeue_cmd_func);
-> +       virtio_video_init_vq(&vv->eventq, virtio_video_dequeue_event_func);
-> +
-> +       ret = virtio_find_vqs(vdev, 2, vqs, callbacks, names, NULL);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to find virt queues\n");
-> +               goto err_vqs;
-> +       }
-> +
-> +       vv->commandq.vq = vqs[0];
-> +       vv->eventq.vq = vqs[1];
-> +
-> +       ret = virtio_video_alloc_vbufs(vv);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to alloc vbufs\n");
-> +               goto err_vbufs;
-> +       }
-> +
-> +       virtio_cread(vdev, struct virtio_video_config, max_caps_length,
-> +                    &vv->max_caps_len);
-> +       if (!vv->max_caps_len) {
-> +               v4l2_err(&vv->v4l2_dev, "max_caps_len is zero\n");
-> +               ret = -EINVAL;
-> +               goto err_config;
-> +       }
-> +
-> +       virtio_cread(vdev, struct virtio_video_config, max_resp_length,
-> +                    &vv->max_resp_len);
-> +       if (!vv->max_resp_len) {
-> +               v4l2_err(&vv->v4l2_dev, "max_resp_len is zero\n");
-> +               ret = -EINVAL;
-> +               goto err_config;
-> +       }
-> +
-> +       ret = virtio_video_alloc_events(vv, vv->eventq.vq->num_free);
-> +       if (ret)
-> +               goto err_events;
-> +
-> +       virtio_device_ready(vdev);
-> +       vv->vq_ready = true;
-> +       vv->got_caps = false;
-> +
-> +       INIT_LIST_HEAD(&vv->devices_list);
-> +
-> +       ret = virtio_video_init(vv);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev,
-> +                        "failed to init virtio video\n");
-> +               goto err_init;
-> +       }
-> +
-> +       return 0;
-> +
-> +err_init:
-> +err_events:
-> +err_config:
-> +       virtio_video_free_vbufs(vv);
-> +err_vbufs:
-> +       vdev->config->del_vqs(vdev);
-> +err_vqs:
-> +       v4l2_device_unregister(&vv->v4l2_dev);
-> +err_v4l2_reg:
-> +       devm_kfree(&vdev->dev, vv);
-> +
-> +       return ret;
-> +}
-> +
-> +static void virtio_video_remove(struct virtio_device *vdev)
-> +{
-> +       struct virtio_video *vv = vdev->priv;
-> +
-> +       virtio_video_device_deinit(vv);
-> +       virtio_video_free_vbufs(vv);
-> +       vdev->config->del_vqs(vdev);
-> +       v4l2_device_unregister(&vv->v4l2_dev);
-> +       devm_kfree(&vdev->dev, vv);
-> +}
-> +
-> +static struct virtio_device_id id_table[] = {
-> +       { VIRTIO_ID_VIDEO_DEC, VIRTIO_DEV_ANY_ID },
-> +       { VIRTIO_ID_VIDEO_ENC, VIRTIO_DEV_ANY_ID },
-> +       { 0 },
-> +};
-> +
-> +static unsigned int features[] = {
-> +       VIRTIO_VIDEO_F_RESOURCE_GUEST_PAGES,
-> +       VIRTIO_VIDEO_F_RESOURCE_NON_CONTIG,
-> +};
-> +
-> +static struct virtio_driver virtio_video_driver = {
-> +       .feature_table = features,
-> +       .feature_table_size = ARRAY_SIZE(features),
-> +       .driver.name = DRIVER_NAME,
-> +       .driver.owner = THIS_MODULE,
-> +       .id_table = id_table,
-> +       .probe = virtio_video_probe,
-> +       .remove = virtio_video_remove,
-> +};
-> +
-> +module_virtio_driver(virtio_video_driver);
-> +
-> +MODULE_DEVICE_TABLE(virtio, id_table);
-> +MODULE_DESCRIPTION("virtio video driver");
-> +MODULE_AUTHOR("Dmitry Sepp <dmitry.sepp@opensynergy.com>");
-> +MODULE_AUTHOR("Kiran Pawar <kiran.pawar@opensynergy.com>");
-> +MODULE_AUTHOR("Nikolay Martyanov <nikolay.martyanov@opensynergy.com>");
-> +MODULE_AUTHOR("Samiullah Khawaja <samiullah.khawaja@opensynergy.com>");
-> +MODULE_LICENSE("GPL");
-> diff --git a/drivers/media/virtio/virtio_video_enc.c b/drivers/media/virtio/virtio_video_enc.c
-> new file mode 100644
-> index 000000000000..d9bd5f293900
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_enc.c
-> @@ -0,0 +1,569 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Encoder for virtio video device.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include <media/v4l2-event.h>
-> +#include <media/v4l2-ioctl.h>
-> +
-> +#include "virtio_video.h"
-> +
-> +static void virtio_video_enc_buf_queue(struct vb2_buffer *vb)
-> +{
-> +       struct vb2_v4l2_buffer *v4l2_vb = to_vb2_v4l2_buffer(vb);
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vb->vb2_queue);
-> +
-> +       v4l2_m2m_buf_queue(stream->fh.m2m_ctx, v4l2_vb);
-> +
-> +}
-> +
-> +static int virtio_video_enc_start_streaming(struct vb2_queue *vq,
-> +                                       unsigned int count)
-> +{
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vq);
-> +       bool input_queue = V4L2_TYPE_IS_OUTPUT(vq->type);
-> +
-> +       if (stream->state == STREAM_STATE_INIT ||
-> +           (!input_queue && stream->state == STREAM_STATE_RESET) ||
-> +           (input_queue && stream->state == STREAM_STATE_STOPPED))
-> +               stream->state = STREAM_STATE_RUNNING;
-> +
-> +       return 0;
-> +}
-> +
-> +static void virtio_video_enc_stop_streaming(struct vb2_queue *vq)
-> +{
-> +       int ret, queue_type;
-> +       bool *cleared;
-> +       bool is_v4l2_output = V4L2_TYPE_IS_OUTPUT(vq->type);
-> +       struct virtio_video_stream *stream = vb2_get_drv_priv(vq);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct vb2_v4l2_buffer *v4l2_vb;
-> +
-> +       if (is_v4l2_output) {
-> +               cleared = &stream->src_cleared;
-> +               queue_type = VIRTIO_VIDEO_QUEUE_TYPE_INPUT;
-> +       } else {
-> +               cleared = &stream->dst_cleared;
-> +               queue_type = VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT;
-> +       }
-> +
-> +       ret = virtio_video_cmd_queue_clear(vv, stream, queue_type);
-> +       if (ret) {
-> +               v4l2_err(&vv->v4l2_dev, "failed to clear queue\n");
-> +               return;
-> +       }
-> +
-> +       ret = wait_event_timeout(vv->wq, *cleared, 5 * HZ);
-> +       if (ret == 0) {
-> +               v4l2_err(&vv->v4l2_dev, "timed out waiting for queue clear\n");
-> +               return;
-> +       }
-> +
-> +       for (;;) {
-> +               if (is_v4l2_output)
-> +                       v4l2_vb = v4l2_m2m_src_buf_remove(stream->fh.m2m_ctx);
-> +               else
-> +                       v4l2_vb = v4l2_m2m_dst_buf_remove(stream->fh.m2m_ctx);
-> +               if (!v4l2_vb)
-> +                       break;
-> +               v4l2_m2m_buf_done(v4l2_vb, VB2_BUF_STATE_ERROR);
-> +       }
-> +
-> +       if (is_v4l2_output)
-> +               stream->state = STREAM_STATE_STOPPED;
-> +       else
-> +               stream->state = STREAM_STATE_RESET;
-> +}
-> +
-> +static const struct vb2_ops virtio_video_enc_qops = {
-> +       .queue_setup     = virtio_video_queue_setup,
-> +       .buf_init        = virtio_video_buf_init,
-> +       .buf_cleanup     = virtio_video_buf_cleanup,
-> +       .buf_queue       = virtio_video_enc_buf_queue,
-> +       .start_streaming = virtio_video_enc_start_streaming,
-> +       .stop_streaming  = virtio_video_enc_stop_streaming,
-> +       .wait_prepare    = vb2_ops_wait_prepare,
-> +       .wait_finish     = vb2_ops_wait_finish,
-> +};
-> +
-> +static int virtio_video_enc_s_ctrl(struct v4l2_ctrl *ctrl)
-> +{
-> +       int ret = 0;
-> +       struct virtio_video_stream *stream = ctrl2stream(ctrl);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       uint32_t control, value;
-> +
-> +       control = virtio_video_v4l2_control_to_virtio(ctrl->id);
-> +
-> +       switch (ctrl->id) {
-> +       case V4L2_CID_MPEG_VIDEO_BITRATE:
-> +               ret = virtio_video_cmd_set_control(vv, stream->stream_id,
-> +                                                  control, ctrl->val);
-> +               break;
-> +       case V4L2_CID_MPEG_VIDEO_H264_LEVEL:
-> +               value = virtio_video_v4l2_level_to_virtio(ctrl->val);
-> +               ret = virtio_video_cmd_set_control(vv, stream->stream_id,
-> +                                                  control, value);
-> +               break;
-> +       case V4L2_CID_MPEG_VIDEO_H264_PROFILE:
-> +               value = virtio_video_v4l2_profile_to_virtio(ctrl->val);
-> +               ret = virtio_video_cmd_set_control(vv, stream->stream_id,
-> +                                                  control, value);
-> +               break;
-> +       default:
-> +               ret = -EINVAL;
-> +               break;
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int virtio_video_enc_g_volatile_ctrl(struct v4l2_ctrl *ctrl)
-> +{
-> +       int ret = 0;
-> +       struct virtio_video_stream *stream = ctrl2stream(ctrl);
-> +
-> +       switch (ctrl->id) {
-> +       case V4L2_CID_MIN_BUFFERS_FOR_OUTPUT:
-> +               if (stream->state >= STREAM_STATE_INIT)
-> +                       ctrl->val = stream->in_info.min_buffers;
-> +               else
-> +                       ctrl->val = 0;
-> +               break;
-> +       default:
-> +               ret = -EINVAL;
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static const struct v4l2_ctrl_ops virtio_video_enc_ctrl_ops = {
-> +       .g_volatile_ctrl        = virtio_video_enc_g_volatile_ctrl,
-> +       .s_ctrl                 = virtio_video_enc_s_ctrl,
-> +};
-> +
-> +int virtio_video_enc_init_ctrls(struct virtio_video_stream *stream)
-> +{
-> +       struct v4l2_ctrl *ctrl;
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct video_control_format *c_fmt = NULL;
-> +
-> +       v4l2_ctrl_handler_init(&stream->ctrl_handler, 1);
-> +
-> +       ctrl = v4l2_ctrl_new_std(&stream->ctrl_handler,
-> +                               &virtio_video_enc_ctrl_ops,
-> +                               V4L2_CID_MIN_BUFFERS_FOR_OUTPUT,
-> +                               MIN_BUFS_MIN, MIN_BUFS_MAX, MIN_BUFS_STEP,
-> +                               MIN_BUFS_DEF);
-> +       ctrl->flags |= V4L2_CTRL_FLAG_VOLATILE;
-> +
-> +       list_for_each_entry(c_fmt, &vvd->controls_fmt_list,
-> +                           controls_list_entry) {
-> +               switch (c_fmt->format) {
-> +               case V4L2_PIX_FMT_H264:
-> +                       if (c_fmt->profile)
-> +                               v4l2_ctrl_new_std_menu
-> +                                       (&stream->ctrl_handler,
-> +                                        &virtio_video_enc_ctrl_ops,
-> +                                        V4L2_CID_MPEG_VIDEO_H264_PROFILE,
-> +                                        c_fmt->profile->max,
-> +                                        c_fmt->profile->skip_mask,
-> +                                        c_fmt->profile->min);
-> +
-> +                       if (c_fmt->level)
-> +                               v4l2_ctrl_new_std_menu
-> +                                       (&stream->ctrl_handler,
-> +                                        &virtio_video_enc_ctrl_ops,
-> +                                        V4L2_CID_MPEG_VIDEO_H264_LEVEL,
-> +                                        c_fmt->level->max,
-> +                                        c_fmt->level->skip_mask,
-> +                                        c_fmt->level->min);
-> +                       break;
-> +               default:
-> +                       v4l2_dbg(1, vv->debug,
-> +                                &vv->v4l2_dev, "unsupported format\n");
-> +                       break;
-> +               }
-> +       }
-> +
-> +       if (stream->control.bitrate) {
-> +               v4l2_ctrl_new_std(&stream->ctrl_handler,
-> +                                 &virtio_video_enc_ctrl_ops,
-> +                                 V4L2_CID_MPEG_VIDEO_BITRATE,
-> +                                 1, stream->control.bitrate,
-> +                                 1, stream->control.bitrate);
-> +       }
-> +
-> +       if (stream->ctrl_handler.error)
-> +               return stream->ctrl_handler.error;
-> +
-> +       v4l2_ctrl_handler_setup(&stream->ctrl_handler);
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_enc_init_queues(void *priv, struct vb2_queue *src_vq,
-> +                                struct vb2_queue *dst_vq)
-> +{
-> +       int ret;
-> +       struct virtio_video_stream *stream = priv;
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct device *dev = vv->v4l2_dev.dev;
-> +
-> +       src_vq->type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
-> +       src_vq->io_modes = VB2_MMAP | VB2_DMABUF;
-> +       src_vq->drv_priv = stream;
-> +       src_vq->buf_struct_size = sizeof(struct virtio_video_buffer);
-> +       src_vq->ops = &virtio_video_enc_qops;
-> +       src_vq->mem_ops = virtio_video_mem_ops(vv);
-> +       src_vq->min_buffers_needed = stream->in_info.min_buffers;
-> +       src_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
-> +       src_vq->lock = &stream->vq_mutex;
-> +       src_vq->gfp_flags = virtio_video_gfp_flags(vv);
-> +       src_vq->dev = dev;
-> +
-> +       ret = vb2_queue_init(src_vq);
-> +       if (ret)
-> +               return ret;
-> +
-> +       dst_vq->type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-> +       dst_vq->io_modes = VB2_MMAP | VB2_DMABUF;
-> +       dst_vq->drv_priv = stream;
-> +       dst_vq->buf_struct_size = sizeof(struct virtio_video_buffer);
-> +       dst_vq->ops = &virtio_video_enc_qops;
-> +       dst_vq->mem_ops = virtio_video_mem_ops(vv);
-> +       dst_vq->min_buffers_needed = stream->out_info.min_buffers;
-> +       dst_vq->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_COPY;
-> +       dst_vq->lock = &stream->vq_mutex;
-> +       dst_vq->gfp_flags = virtio_video_gfp_flags(vv);
-> +       dst_vq->dev = dev;
-> +
-> +       return vb2_queue_init(dst_vq);
-> +}
-> +
-> +static int virtio_video_try_encoder_cmd(struct file *file, void *fh,
-> +                                       struct v4l2_encoder_cmd *cmd)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       if (stream->state == STREAM_STATE_DRAIN)
-> +               return -EBUSY;
-> +
-> +       switch (cmd->cmd) {
-> +       case V4L2_ENC_CMD_STOP:
-> +       case V4L2_ENC_CMD_START:
-> +               if (cmd->flags != 0) {
-> +                       v4l2_err(&vv->v4l2_dev, "flags=%u are not supported",
-> +                                cmd->flags);
-> +                       return -EINVAL;
-> +               }
-> +               break;
-> +       default:
-> +               return -EINVAL;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int virtio_video_encoder_cmd(struct file *file, void *fh,
-> +                                   struct v4l2_encoder_cmd *cmd)
-> +{
-> +       int ret;
-> +       struct vb2_queue *src_vq, *dst_vq;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = video_drvdata(file);
-> +       struct virtio_video *vv = vvd->vv;
-> +
-> +       ret = virtio_video_try_encoder_cmd(file, fh, cmd);
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       dst_vq = v4l2_m2m_get_vq(stream->fh.m2m_ctx,
-> +                                V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
-> +
-> +       switch (cmd->cmd) {
-> +       case V4L2_ENC_CMD_START:
-> +               vb2_clear_last_buffer_dequeued(dst_vq);
-> +               stream->state = STREAM_STATE_RUNNING;
-> +               break;
-> +       case V4L2_ENC_CMD_STOP:
-> +               src_vq = v4l2_m2m_get_vq(stream->fh.m2m_ctx,
-> +                                        V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
-> +
-> +               if (!vb2_is_streaming(src_vq)) {
-> +                       v4l2_dbg(1, vv->debug,
-> +                                &vv->v4l2_dev, "output is not streaming\n");
-> +                       return 0;
-> +               }
-> +
-> +               if (!vb2_is_streaming(dst_vq)) {
-> +                       v4l2_dbg(1, vv->debug,
-> +                                &vv->v4l2_dev, "capture is not streaming\n");
-> +                       return 0;
-> +               }
-> +
-> +               ret = virtio_video_cmd_stream_drain(vv, stream->stream_id);
-> +               if (ret) {
-> +                       v4l2_err(&vv->v4l2_dev, "failed to drain stream\n");
-> +                       return ret;
-> +               }
-> +
-> +               stream->state = STREAM_STATE_DRAIN;
-> +               break;
-> +       default:
-> +               return -EINVAL;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int virtio_video_enc_enum_fmt_vid_cap(struct file *file, void *fh,
-> +                                            struct v4l2_fmtdesc *f)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format *fmt = NULL;
-> +       int idx = 0;
-> +
-> +       if (f->type != V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
-> +               return -EINVAL;
-> +
-> +       if (f->index >= vvd->num_output_fmts)
-> +               return -EINVAL;
-> +
-> +       list_for_each_entry(fmt, &vvd->output_fmt_list, formats_list_entry) {
-> +               if (f->index == idx) {
-> +                       f->pixelformat = fmt->desc.format;
-> +                       return 0;
-> +               }
-> +               idx++;
-> +       }
-> +       return -EINVAL;
-> +}
-> +
-> +static int virtio_video_enc_enum_fmt_vid_out(struct file *file, void *fh,
-> +                                            struct v4l2_fmtdesc *f)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct video_format_info *info = NULL;
-> +       struct video_format *fmt = NULL;
-> +       unsigned long output_mask = 0;
-> +       int idx = 0, bit_num = 0;
-> +
-> +       if (f->type != V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE)
-> +               return -EINVAL;
-> +
-> +       if (f->index >= vvd->num_input_fmts)
-> +               return -EINVAL;
-> +
-> +       info = &stream->out_info;
-> +       list_for_each_entry(fmt, &vvd->output_fmt_list, formats_list_entry) {
-> +               if (info->fourcc_format == fmt->desc.format) {
-> +                       output_mask = fmt->desc.mask;
-> +                       break;
-> +               }
-> +       }
-> +
-> +       if (output_mask == 0)
-> +               return -EINVAL;
-> +
-> +       list_for_each_entry(fmt, &vvd->input_fmt_list, formats_list_entry) {
-> +               if (test_bit(bit_num, &output_mask)) {
-> +                       if (f->index == idx) {
-> +                               f->pixelformat = fmt->desc.format;
-> +                               return 0;
-> +                       }
-> +                       idx++;
-> +               }
-> +               bit_num++;
-> +       }
-> +       return -EINVAL;
-> +}
-> +
-> +static int virtio_video_enc_s_fmt(struct file *file, void *fh,
-> +                                 struct v4l2_format *f)
-> +{
-> +       int ret;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +
-> +       ret = virtio_video_s_fmt(file, fh, f);
-> +       if (ret)
-> +               return ret;
-> +
-> +       if (!V4L2_TYPE_IS_OUTPUT(f->type)) {
-> +               if (stream->state == STREAM_STATE_IDLE)
-> +                       stream->state = STREAM_STATE_INIT;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int virtio_video_enc_try_framerate(struct virtio_video_stream *stream,
-> +                                         unsigned int fps)
-> +{
-> +       int rate_idx;
-> +       struct video_format_frame *frame = NULL;
-> +
-> +       if (stream->current_frame == NULL)
-> +               return -EINVAL;
-> +
-> +       frame = stream->current_frame;
-> +       for (rate_idx = 0; rate_idx < frame->frame.num_rates; rate_idx++) {
-> +               struct virtio_video_format_range *frame_rate =
-> +                       &frame->frame_rates[rate_idx];
-> +
-> +               if (within_range(frame_rate->min, fps, frame_rate->max))
-> +                       return 0;
-> +       }
-> +
-> +       return -EINVAL;
-> +}
-> +
-> +static void virtio_video_timeperframe_from_info(struct video_format_info *info,
-> +                                               struct v4l2_fract *timeperframe)
-> +{
-> +       timeperframe->numerator = info->frame_rate;
-> +       timeperframe->denominator = 1;
-> +}
-> +
-> +static int virtio_video_enc_g_parm(struct file *file, void *priv,
-> +                                  struct v4l2_streamparm *a)
-> +{
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct v4l2_outputparm *out = &a->parm.output;
-> +       struct v4l2_fract *timeperframe = &out->timeperframe;
-> +
-> +       if (!V4L2_TYPE_IS_OUTPUT(a->type)) {
-> +               v4l2_err(&vv->v4l2_dev,
-> +                        "getting FPS is only possible for the output queue\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       out->capability = V4L2_CAP_TIMEPERFRAME;
-> +       virtio_video_timeperframe_from_info(&stream->in_info, timeperframe);
-> +
-> +       return 0;
-> +}
-> +
-> +static int virtio_video_enc_s_parm(struct file *file, void *priv,
-> +                                  struct v4l2_streamparm *a)
-> +{
-> +       int ret;
-> +       u64 frame_interval, frame_rate;
-> +       struct video_format_info info;
-> +       struct virtio_video_stream *stream = file2stream(file);
-> +       struct virtio_video_device *vvd = to_virtio_vd(stream->video_dev);
-> +       struct virtio_video *vv = vvd->vv;
-> +       struct v4l2_outputparm *out = &a->parm.output;
-> +       struct v4l2_fract *timeperframe = &out->timeperframe;
-> +
-> +       if (V4L2_TYPE_IS_OUTPUT(a->type)) {
-> +               frame_interval = timeperframe->numerator * (u64)USEC_PER_SEC;
-> +               do_div(frame_interval, timeperframe->denominator);
-> +               if (!frame_interval)
-> +                       return -EINVAL;
-> +
-> +               frame_rate = (u64)USEC_PER_SEC;
-> +               do_div(frame_rate, frame_interval);
-> +       } else {
-> +               v4l2_err(&vv->v4l2_dev,
-> +                        "setting FPS is only possible for the output queue\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       ret = virtio_video_enc_try_framerate(stream, frame_rate);
-> +       if (ret)
-> +               return ret;
-> +
-> +       virtio_video_format_fill_default_info(&info, &stream->in_info);
-> +       info.frame_rate = frame_rate;
-> +
-> +       virtio_video_cmd_set_params(vv, stream, &info,
-> +                                   VIRTIO_VIDEO_QUEUE_TYPE_INPUT);
-> +       virtio_video_cmd_get_params(vv, stream, VIRTIO_VIDEO_QUEUE_TYPE_INPUT);
-> +       virtio_video_cmd_get_params(vv, stream, VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +
-> +       out->capability = V4L2_CAP_TIMEPERFRAME;
-> +       virtio_video_timeperframe_from_info(&stream->in_info, timeperframe);
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct v4l2_ioctl_ops virtio_video_enc_ioctl_ops = {
-> +       .vidioc_querycap        = virtio_video_querycap,
-> +
-> +       .vidioc_enum_fmt_vid_cap = virtio_video_enc_enum_fmt_vid_cap,
-> +       .vidioc_g_fmt_vid_cap   = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_cap   = virtio_video_enc_s_fmt,
-> +
-> +       .vidioc_enum_fmt_vid_cap_mplane = virtio_video_enc_enum_fmt_vid_cap,
-> +       .vidioc_g_fmt_vid_cap_mplane    = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_cap_mplane    = virtio_video_enc_s_fmt,
-> +
-> +       .vidioc_enum_fmt_vid_out = virtio_video_enc_enum_fmt_vid_out,
-> +       .vidioc_g_fmt_vid_out   = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_out   = virtio_video_enc_s_fmt,
-> +
-> +       .vidioc_enum_fmt_vid_out_mplane = virtio_video_enc_enum_fmt_vid_out,
-> +       .vidioc_g_fmt_vid_out_mplane    = virtio_video_g_fmt,
-> +       .vidioc_s_fmt_vid_out_mplane    = virtio_video_enc_s_fmt,
-> +
-> +       .vidioc_try_encoder_cmd = virtio_video_try_encoder_cmd,
-> +       .vidioc_encoder_cmd     = virtio_video_encoder_cmd,
-> +       .vidioc_enum_frameintervals = virtio_video_enum_framemintervals,
-> +       .vidioc_enum_framesizes = virtio_video_enum_framesizes,
-> +
-> +       .vidioc_g_selection = virtio_video_g_selection,
-> +       .vidioc_s_selection = virtio_video_s_selection,
-> +
-> +       .vidioc_reqbufs         = virtio_video_reqbufs,
-> +       .vidioc_querybuf        = v4l2_m2m_ioctl_querybuf,
-> +       .vidioc_qbuf            = v4l2_m2m_ioctl_qbuf,
-> +       .vidioc_dqbuf           = v4l2_m2m_ioctl_dqbuf,
-> +       .vidioc_prepare_buf     = v4l2_m2m_ioctl_prepare_buf,
-> +       .vidioc_create_bufs     = v4l2_m2m_ioctl_create_bufs,
-> +       .vidioc_expbuf          = v4l2_m2m_ioctl_expbuf,
-> +
-> +       .vidioc_streamon        = v4l2_m2m_ioctl_streamon,
-> +       .vidioc_streamoff       = v4l2_m2m_ioctl_streamoff,
-> +
-> +       .vidioc_s_parm          = virtio_video_enc_s_parm,
-> +       .vidioc_g_parm          = virtio_video_enc_g_parm,
-> +
-> +       .vidioc_subscribe_event = virtio_video_subscribe_event,
-> +       .vidioc_unsubscribe_event = v4l2_event_unsubscribe,
-> +};
-> +
-> +int virtio_video_enc_init(struct video_device *vd)
-> +{
-> +       ssize_t num;
-> +
-> +       vd->ioctl_ops = &virtio_video_enc_ioctl_ops;
-> +       num = strscpy(vd->name, "stateful-encoder", sizeof(vd->name));
-> +
-> +       return 0;
-> +}
-> diff --git a/drivers/media/virtio/virtio_video_enc.h b/drivers/media/virtio/virtio_video_enc.h
-> new file mode 100644
-> index 000000000000..3d2a27a8e08c
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_enc.h
-> @@ -0,0 +1,30 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/* Encoder header for virtio video driver.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef _VIRTIO_VIDEO_ENC_H
-> +#define _VIRTIO_VIDEO_ENC_H
-> +
-> +#include "virtio_video.h"
-> +
-> +int virtio_video_enc_init(struct video_device *vd);
-> +int virtio_video_enc_init_ctrls(struct virtio_video_stream *stream);
-> +int virtio_video_enc_init_queues(void *priv, struct vb2_queue *src_vq,
-> +                                struct vb2_queue *dst_vq);
-> +
-> +#endif /* _VIRTIO_VIDEO_ENC_H */
-> diff --git a/drivers/media/virtio/virtio_video_helpers.c b/drivers/media/virtio/virtio_video_helpers.c
-> new file mode 100644
-> index 000000000000..bc4754e7ca78
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_helpers.c
-> @@ -0,0 +1,250 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Driver for virtio video device.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "virtio_video.h"
-> +
-> +struct virtio_video_convert_table {
-> +       uint32_t virtio_value;
-> +       uint32_t v4l2_value;
-> +};
-> +
-> +static struct virtio_video_convert_table level_table[] = {
-> +       { VIRTIO_VIDEO_LEVEL_H264_1_0, V4L2_MPEG_VIDEO_H264_LEVEL_1_0 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_1_1, V4L2_MPEG_VIDEO_H264_LEVEL_1_1 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_1_2, V4L2_MPEG_VIDEO_H264_LEVEL_1_2 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_1_3, V4L2_MPEG_VIDEO_H264_LEVEL_1_3 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_2_0, V4L2_MPEG_VIDEO_H264_LEVEL_2_0 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_2_1, V4L2_MPEG_VIDEO_H264_LEVEL_2_1 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_2_2, V4L2_MPEG_VIDEO_H264_LEVEL_2_2 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_3_0, V4L2_MPEG_VIDEO_H264_LEVEL_3_0 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_3_1, V4L2_MPEG_VIDEO_H264_LEVEL_3_1 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_3_2, V4L2_MPEG_VIDEO_H264_LEVEL_3_2 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_4_0, V4L2_MPEG_VIDEO_H264_LEVEL_4_0 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_4_1, V4L2_MPEG_VIDEO_H264_LEVEL_4_1 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_4_2, V4L2_MPEG_VIDEO_H264_LEVEL_4_2 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_5_0, V4L2_MPEG_VIDEO_H264_LEVEL_5_0 },
-> +       { VIRTIO_VIDEO_LEVEL_H264_5_1, V4L2_MPEG_VIDEO_H264_LEVEL_5_1 },
-> +       { 0 },
-> +};
-> +
-> +uint32_t virtio_video_level_to_v4l2(uint32_t level)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(level_table); idx++) {
-> +               if (level_table[idx].virtio_value == level)
-> +                       return level_table[idx].v4l2_value;
-> +       }
-> +
-> +       return 0;
-
-0 is a valid profile. e.g. V4L2_MPEG_VIDEO_H264_LEVEL_1_0 == 0.
-How about returning a negative number for errors?
-
-> +}
-> +
-> +uint32_t virtio_video_v4l2_level_to_virtio(uint32_t v4l2_level)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(level_table); idx++) {
-> +               if (level_table[idx].v4l2_value == v4l2_level)
-> +                       return level_table[idx].virtio_value;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static struct virtio_video_convert_table profile_table[] = {
-> +       { VIRTIO_VIDEO_PROFILE_H264_BASELINE,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_BASELINE },
-> +       { VIRTIO_VIDEO_PROFILE_H264_MAIN, V4L2_MPEG_VIDEO_H264_PROFILE_MAIN },
-> +       { VIRTIO_VIDEO_PROFILE_H264_EXTENDED,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_EXTENDED },
-> +       { VIRTIO_VIDEO_PROFILE_H264_HIGH, V4L2_MPEG_VIDEO_H264_PROFILE_HIGH },
-> +       { VIRTIO_VIDEO_PROFILE_H264_HIGH10PROFILE,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_HIGH_10 },
-> +       { VIRTIO_VIDEO_PROFILE_H264_HIGH422PROFILE,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_HIGH_422},
-> +       { VIRTIO_VIDEO_PROFILE_H264_HIGH444PREDICTIVEPROFILE,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_HIGH_444_PREDICTIVE },
-> +       { VIRTIO_VIDEO_PROFILE_H264_SCALABLEBASELINE,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_SCALABLE_BASELINE },
-> +       { VIRTIO_VIDEO_PROFILE_H264_SCALABLEHIGH,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_SCALABLE_HIGH },
-> +       { VIRTIO_VIDEO_PROFILE_H264_STEREOHIGH,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_STEREO_HIGH },
-> +       { VIRTIO_VIDEO_PROFILE_H264_MULTIVIEWHIGH,
-> +               V4L2_MPEG_VIDEO_H264_PROFILE_MULTIVIEW_HIGH },
-> +       { 0 },
-
-How about VP9's profiles?
-
-> +};
-> +
-> +uint32_t virtio_video_profile_to_v4l2(uint32_t profile)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(profile_table); idx++) {
-> +               if (profile_table[idx].virtio_value == profile)
-> +                       return profile_table[idx].v4l2_value;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +uint32_t virtio_video_v4l2_profile_to_virtio(uint32_t v4l2_profile)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(profile_table); idx++) {
-> +               if (profile_table[idx].v4l2_value == v4l2_profile)
-> +                       return profile_table[idx].virtio_value;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static struct virtio_video_convert_table format_table[] = {
-> +       { VIRTIO_VIDEO_FORMAT_ARGB8888, V4L2_PIX_FMT_ARGB32 },
-> +       { VIRTIO_VIDEO_FORMAT_BGRA8888, V4L2_PIX_FMT_ABGR32 },
-> +       { VIRTIO_VIDEO_FORMAT_NV12, V4L2_PIX_FMT_NV12 },
-> +       { VIRTIO_VIDEO_FORMAT_YUV420, V4L2_PIX_FMT_YUV420 },
-> +       { VIRTIO_VIDEO_FORMAT_YVU420, V4L2_PIX_FMT_YVU420 },
-> +       { VIRTIO_VIDEO_FORMAT_MPEG2, V4L2_PIX_FMT_MPEG2 },
-> +       { VIRTIO_VIDEO_FORMAT_MPEG4, V4L2_PIX_FMT_MPEG4 },
-> +       { VIRTIO_VIDEO_FORMAT_H264, V4L2_PIX_FMT_H264 },
-> +       { VIRTIO_VIDEO_FORMAT_HEVC, V4L2_PIX_FMT_HEVC },
-> +       { VIRTIO_VIDEO_FORMAT_VP8, V4L2_PIX_FMT_VP8 },
-> +       { VIRTIO_VIDEO_FORMAT_VP9, V4L2_PIX_FMT_VP9 },
-> +       { 0 },
-> +};
-> +
-> +uint32_t virtio_video_format_to_v4l2(uint32_t format)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(format_table); idx++) {
-> +               if (format_table[idx].virtio_value == format)
-> +                       return format_table[idx].v4l2_value;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +uint32_t virtio_video_v4l2_format_to_virtio(uint32_t v4l2_format)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(format_table); idx++) {
-> +               if (format_table[idx].v4l2_value == v4l2_format)
-> +                       return format_table[idx].virtio_value;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static struct virtio_video_convert_table control_table[] = {
-> +       { VIRTIO_VIDEO_CONTROL_BITRATE, V4L2_CID_MPEG_VIDEO_BITRATE },
-> +       { VIRTIO_VIDEO_CONTROL_PROFILE, V4L2_CID_MPEG_VIDEO_H264_PROFILE },
-> +       { VIRTIO_VIDEO_CONTROL_LEVEL, V4L2_CID_MPEG_VIDEO_H264_LEVEL },
-> +       { 0 },
-> +};
-> +
-> +uint32_t virtio_video_control_to_v4l2(uint32_t control)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(control_table); idx++) {
-> +               if (control_table[idx].virtio_value == control)
-> +                       return control_table[idx].v4l2_value;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +uint32_t virtio_video_v4l2_control_to_virtio(uint32_t v4l2_control)
-> +{
-> +       size_t idx;
-> +
-> +       for (idx = 0; idx < ARRAY_SIZE(control_table); idx++) {
-> +               if (control_table[idx].v4l2_value == v4l2_control)
-> +                       return control_table[idx].virtio_value;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +uint32_t virtio_video_get_format_from_virtio_profile(uint32_t virtio_profile)
-> +{
-> +       if (virtio_profile >= VIRTIO_VIDEO_PROFILE_H264_MIN &&
-> +           virtio_profile <= VIRTIO_VIDEO_PROFILE_H264_MAX)
-> +               return VIRTIO_VIDEO_FORMAT_H264;
-> +       else if (virtio_profile >= VIRTIO_VIDEO_PROFILE_HEVC_MIN &&
-> +                virtio_profile <= VIRTIO_VIDEO_PROFILE_HEVC_MAX)
-> +               return VIRTIO_VIDEO_FORMAT_HEVC;
-> +       else if (virtio_profile >= VIRTIO_VIDEO_PROFILE_VP8_MIN &&
-> +                virtio_profile <= VIRTIO_VIDEO_PROFILE_VP8_MAX)
-> +               return VIRTIO_VIDEO_FORMAT_VP8;
-> +       else if (virtio_profile >= VIRTIO_VIDEO_PROFILE_VP9_MIN &&
-> +                virtio_profile <= VIRTIO_VIDEO_PROFILE_VP9_MAX)
-> +               return VIRTIO_VIDEO_FORMAT_VP9;
-> +
-> +       return 0;
-> +}
-> +
-> +struct video_format *find_video_format(struct list_head *fmts_list,
-> +                                      uint32_t format)
-> +{
-> +       struct video_format *fmt = NULL;
-> +
-> +       list_for_each_entry(fmt, fmts_list, formats_list_entry) {
-> +               if (fmt->desc.format == format)
-> +                       return fmt;
-> +       }
-> +
-> +       return NULL;
-> +}
-> +
-> +void virtio_video_format_from_info(struct video_format_info *info,
-> +                                  struct v4l2_pix_format_mplane *pix_mp)
-> +{
-> +       int i;
-> +
-> +       pix_mp->width = info->frame_width;
-> +       pix_mp->height = info->frame_height;
-> +       pix_mp->field = V4L2_FIELD_NONE;
-> +       pix_mp->colorspace = V4L2_COLORSPACE_REC709;
-> +       pix_mp->xfer_func = 0;
-> +       pix_mp->ycbcr_enc = 0;
-> +       pix_mp->quantization = 0;
-> +       memset(pix_mp->reserved, 0, sizeof(pix_mp->reserved));
-> +       memset(pix_mp->plane_fmt[0].reserved, 0,
-> +              sizeof(pix_mp->plane_fmt[0].reserved));
-> +
-> +       pix_mp->num_planes = info->num_planes;
-> +       pix_mp->pixelformat = info->fourcc_format;
-> +
-> +       for (i = 0; i < info->num_planes; i++) {
-> +               pix_mp->plane_fmt[i].bytesperline =
-> +                                        info->plane_format[i].stride;
-> +               pix_mp->plane_fmt[i].sizeimage =
-> +                                        info->plane_format[i].plane_size;
-> +       }
-> +}
-> +
-> +void virtio_video_format_fill_default_info(struct video_format_info *dst_info,
-> +                                         struct video_format_info *src_info)
-> +{
-> +       memcpy(dst_info, src_info, sizeof(*dst_info));
-> +}
-> diff --git a/drivers/media/virtio/virtio_video_vq.c b/drivers/media/virtio/virtio_video_vq.c
-> new file mode 100644
-> index 000000000000..4679e6b49cf3
-> --- /dev/null
-> +++ b/drivers/media/virtio/virtio_video_vq.c
-> @@ -0,0 +1,1012 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/* Driver for virtio video device.
-> + *
-> + * Copyright 2019 OpenSynergy GmbH.
-> + *
-> + * Based on drivers/gpu/drm/virtio/virtgpu_vq.c
-> + * Copyright (C) 2015 Red Hat, Inc.
-> + *
-> + * This program is free software; you can redistribute it and/or modify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#include "virtio_video.h"
-> +
-> +#define MAX_INLINE_CMD_SIZE   298
-> +#define MAX_INLINE_RESP_SIZE  298
-> +#define VBUFFER_SIZE          (sizeof(struct virtio_video_vbuffer) \
-> +                              + MAX_INLINE_CMD_SIZE               \
-> +                              + MAX_INLINE_RESP_SIZE)
-> +
-> +void virtio_video_resource_id_get(struct virtio_video *vv, uint32_t *id)
-
-How about renaming virtio_video_resource_id_{get,put} to
-{virtio_video_resource_id_alloc, remove}?
-It sounds like a function "*_get" doesn't have any side effect but it does.
-
-> +{
-> +       int handle;
-> +
-> +       idr_preload(GFP_KERNEL);
-> +       spin_lock(&vv->resource_idr_lock);
-> +       handle = idr_alloc(&vv->resource_idr, NULL, 1, 0, GFP_NOWAIT);
-> +       spin_unlock(&vv->resource_idr_lock);
-> +       idr_preload_end();
-> +       *id = handle;
-> +}
-> +
-> +void virtio_video_resource_id_put(struct virtio_video *vv, uint32_t id)
-> +{
-> +       spin_lock(&vv->resource_idr_lock);
-> +       idr_remove(&vv->resource_idr, id);
-> +       spin_unlock(&vv->resource_idr_lock);
-> +}
-> +
-> +void virtio_video_stream_id_get(struct virtio_video *vv,
-> +                               struct virtio_video_stream *stream,
-> +                               uint32_t *id)
-> +{
-> +       int handle;
-> +
-> +       idr_preload(GFP_KERNEL);
-> +       spin_lock(&vv->stream_idr_lock);
-> +       handle = idr_alloc(&vv->stream_idr, stream, 1, 0, 0);
-> +       spin_unlock(&vv->stream_idr_lock);
-> +       idr_preload_end();
-> +       *id = handle;
-> +}
-> +
-> +void virtio_video_stream_id_put(struct virtio_video *vv, uint32_t id)
-> +{
-> +       spin_lock(&vv->stream_idr_lock);
-> +       idr_remove(&vv->stream_idr, id);
-> +       spin_unlock(&vv->stream_idr_lock);
-> +}
-> +
-> +void virtio_video_cmd_ack(struct virtqueue *vq)
-> +{
-> +       struct virtio_video *vv = vq->vdev->priv;
-> +
-> +       schedule_work(&vv->commandq.dequeue_work);
-> +}
-> +
-> +void virtio_video_event_ack(struct virtqueue *vq)
-> +{
-> +       struct virtio_video *vv = vq->vdev->priv;
-> +
-> +       schedule_work(&vv->eventq.dequeue_work);
-> +}
-> +
-> +static struct virtio_video_vbuffer *
-> +virtio_video_get_vbuf(struct virtio_video *vv, int size,
-> +                     int resp_size, void *resp_buf,
-> +                     virtio_video_resp_cb resp_cb)
-> +{
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       vbuf = kmem_cache_alloc(vv->vbufs, GFP_KERNEL);
-> +       if (!vbuf)
-> +               return ERR_PTR(-ENOMEM);
-> +       memset(vbuf, 0, VBUFFER_SIZE);
-> +
-> +       BUG_ON(size > MAX_INLINE_CMD_SIZE);
-> +       vbuf->buf = (void *)vbuf + sizeof(*vbuf);
-> +       vbuf->size = size;
-> +
-> +       vbuf->resp_cb = resp_cb;
-> +       vbuf->resp_size = resp_size;
-> +       if (resp_size <= MAX_INLINE_RESP_SIZE && !resp_buf)
-> +               vbuf->resp_buf = (void *)vbuf->buf + size;
-> +       else
-> +               vbuf->resp_buf = resp_buf;
-> +       BUG_ON(!vbuf->resp_buf);
-> +
-> +       return vbuf;
-> +}
-> +
-> +static void free_vbuf(struct virtio_video *vv,
-> +                     struct virtio_video_vbuffer *vbuf)
-> +{
-> +       if (!vbuf->resp_cb &&
-> +           vbuf->resp_size > MAX_INLINE_RESP_SIZE)
-> +               kfree(vbuf->resp_buf);
-> +       kfree(vbuf->data_buf);
-> +       kmem_cache_free(vv->vbufs, vbuf);
-> +}
-> +
-> +static void reclaim_vbufs(struct virtqueue *vq, struct list_head *reclaim_list)
-> +{
-> +       struct virtio_video_vbuffer *vbuf;
-> +       unsigned int len;
-> +       struct virtio_video *vv = vq->vdev->priv;
-> +       int freed = 0;
-> +
-> +       while ((vbuf = virtqueue_get_buf(vq, &len))) {
-> +               list_add_tail(&vbuf->list, reclaim_list);
-> +               freed++;
-> +       }
-> +       if (freed == 0)
-> +               v4l2_dbg(1, vv->debug, &vv->v4l2_dev,
-> +                        "zero vbufs reclaimed\n");
-> +}
-> +
-> +static void detach_vbufs(struct virtqueue *vq, struct list_head *detach_list)
-> +{
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       while ((vbuf = virtqueue_detach_unused_buf(vq)) != NULL)
-> +               list_add_tail(&vbuf->list, detach_list);
-> +}
-> +
-> +static void virtio_video_deatch_vbufs(struct virtio_video *vv)
-> +{
-> +       struct list_head detach_list;
-> +       struct virtio_video_vbuffer *entry, *tmp;
-> +
-> +       INIT_LIST_HEAD(&detach_list);
-> +
-> +       detach_vbufs(vv->eventq.vq, &detach_list);
-> +       detach_vbufs(vv->commandq.vq, &detach_list);
-> +
-> +       if (list_empty(&detach_list))
-> +               return;
-> +
-> +       list_for_each_entry_safe(entry, tmp, &detach_list, list) {
-> +               list_del(&entry->list);
-> +               free_vbuf(vv, entry);
-> +       }
-> +}
-> +
-> +int virtio_video_alloc_vbufs(struct virtio_video *vv)
-> +{
-> +       vv->vbufs =
-> +               kmem_cache_create("virtio-video-vbufs", VBUFFER_SIZE,
-> +                                 __alignof__(struct virtio_video_vbuffer), 0,
-> +                                 NULL);
-> +       if (!vv->vbufs)
-> +               return -ENOMEM;
-> +
-> +       return 0;
-> +}
-> +
-> +void virtio_video_free_vbufs(struct virtio_video *vv)
-> +{
-> +       virtio_video_deatch_vbufs(vv);
-> +       kmem_cache_destroy(vv->vbufs);
-> +       vv->vbufs = NULL;
-> +}
-> +
-> +static void *virtio_video_alloc_req(struct virtio_video *vv,
-> +                                   struct virtio_video_vbuffer **vbuffer_p,
-> +                                   int size)
-> +{
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       vbuf = virtio_video_get_vbuf(vv, size,
-> +                                    sizeof(struct virtio_video_cmd_hdr),
-> +                                    NULL, NULL);
-> +       if (IS_ERR(vbuf)) {
-> +               *vbuffer_p = NULL;
-> +               return ERR_CAST(vbuf);
-> +       }
-> +       *vbuffer_p = vbuf;
-> +
-> +       return vbuf->buf;
-> +}
-> +
-> +static void *
-> +virtio_video_alloc_req_resp(struct virtio_video *vv,
-> +                           virtio_video_resp_cb cb,
-> +                           struct virtio_video_vbuffer **vbuffer_p,
-> +                           int req_size, int resp_size,
-> +                           void *resp_buf)
-> +{
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       vbuf = virtio_video_get_vbuf(vv, req_size, resp_size, resp_buf, cb);
-> +       if (IS_ERR(vbuf)) {
-> +               *vbuffer_p = NULL;
-> +               return ERR_CAST(vbuf);
-> +       }
-> +       *vbuffer_p = vbuf;
-> +
-> +       return vbuf->buf;
-> +}
-> +
-> +void virtio_video_dequeue_cmd_func(struct work_struct *work)
-> +{
-> +       struct virtio_video *vv =
-> +               container_of(work, struct virtio_video,
-> +                            commandq.dequeue_work);
-> +       struct list_head reclaim_list;
-> +       struct virtio_video_vbuffer *entry, *tmp;
-> +       struct virtio_video_cmd_hdr *resp;
-> +
-> +       INIT_LIST_HEAD(&reclaim_list);
-> +       spin_lock(&vv->commandq.qlock);
-> +       do {
-> +               virtqueue_disable_cb(vv->commandq.vq);
-> +               reclaim_vbufs(vv->commandq.vq, &reclaim_list);
-> +
-> +       } while (!virtqueue_enable_cb(vv->commandq.vq));
-> +       spin_unlock(&vv->commandq.qlock);
-> +
-> +       list_for_each_entry_safe(entry, tmp, &reclaim_list, list) {
-> +               resp = (struct virtio_video_cmd_hdr *)entry->resp_buf;
-> +               if (resp->type >=
-> +                   cpu_to_le32(VIRTIO_VIDEO_RESP_ERR_INVALID_OPERATION))
-> +                       v4l2_dbg(1, vv->debug, &vv->v4l2_dev,
-> +                                "response 0x%x\n", le32_to_cpu(resp->type));
-> +               if (entry->resp_cb)
-> +                       entry->resp_cb(vv, entry);
-> +
-> +               list_del(&entry->list);
-> +               free_vbuf(vv, entry);
-> +       }
-> +       wake_up(&vv->commandq.ack_queue);
-> +}
-> +
-> +void virtio_video_dequeue_event_func(struct work_struct *work)
-> +{
-> +       struct virtio_video *vv =
-> +               container_of(work, struct virtio_video,
-> +                            eventq.dequeue_work);
-> +       struct list_head reclaim_list;
-> +       struct virtio_video_vbuffer *entry, *tmp;
-> +
-> +       INIT_LIST_HEAD(&reclaim_list);
-> +       spin_lock(&vv->eventq.qlock);
-> +       do {
-> +               virtqueue_disable_cb(vv->eventq.vq);
-> +               reclaim_vbufs(vv->eventq.vq, &reclaim_list);
-> +
-> +       } while (!virtqueue_enable_cb(vv->eventq.vq));
-> +       spin_unlock(&vv->eventq.qlock);
-> +
-> +       list_for_each_entry_safe(entry, tmp, &reclaim_list, list) {
-> +               entry->resp_cb(vv, entry);
-> +               list_del(&entry->list);
-> +       }
-> +       wake_up(&vv->eventq.ack_queue);
-> +}
-> +
-> +static int
-> +virtio_video_queue_cmd_buffer_locked(struct virtio_video *vv,
-> +                                     struct virtio_video_vbuffer *vbuf)
-> +{
-> +       struct virtqueue *vq = vv->commandq.vq;
-> +       struct scatterlist *sgs[3], vreq, vout, vresp;
-> +       int outcnt = 0, incnt = 0;
-> +       int ret;
-> +
-> +       if (!vv->vq_ready)
-> +               return -ENODEV;
-> +
-> +       sg_init_one(&vreq, vbuf->buf, vbuf->size);
-> +       sgs[outcnt + incnt] = &vreq;
-> +       outcnt++;
-> +
-> +       if (vbuf->data_size) {
-> +               sg_init_one(&vout, vbuf->data_buf, vbuf->data_size);
-> +               sgs[outcnt + incnt] = &vout;
-> +               outcnt++;
-> +       }
-> +
-> +       if (vbuf->resp_size) {
-> +               sg_init_one(&vresp, vbuf->resp_buf, vbuf->resp_size);
-> +               sgs[outcnt + incnt] = &vresp;
-> +               incnt++;
-> +       }
-> +
-> +retry:
-> +       ret = virtqueue_add_sgs(vq, sgs, outcnt, incnt, vbuf, GFP_ATOMIC);
-> +       if (ret == -ENOSPC) {
-> +               spin_unlock(&vv->commandq.qlock);
-> +               wait_event(vv->commandq.ack_queue, vq->num_free);
-> +               spin_lock(&vv->commandq.qlock);
-> +               goto retry;
-> +       } else {
-> +               virtqueue_kick(vq);
-> +       }
-> +
-> +       return ret;
-> +}
-> +
-> +static int virtio_video_queue_cmd_buffer(struct virtio_video *vv,
-> +                                         struct virtio_video_vbuffer *vbuf)
-> +{
-> +       int ret;
-> +
-> +       spin_lock(&vv->commandq.qlock);
-> +       ret = virtio_video_queue_cmd_buffer_locked(vv, vbuf);
-> +       spin_unlock(&vv->commandq.qlock);
-> +
-> +       return ret;
-> +}
-> +
-> +static int virtio_video_queue_event_buffer(struct virtio_video *vv,
-> +                                          struct virtio_video_vbuffer *vbuf)
-> +{
-> +       int ret;
-> +       struct scatterlist vresp;
-> +       struct virtqueue *vq = vv->eventq.vq;
-> +
-> +       spin_lock(&vv->eventq.qlock);
-> +       sg_init_one(&vresp, vbuf->resp_buf, vbuf->resp_size);
-> +       ret = virtqueue_add_inbuf(vq, &vresp, 1, vbuf, GFP_ATOMIC);
-> +       spin_unlock(&vv->eventq.qlock);
-> +       if (ret)
-> +               return ret;
-> +
-> +       virtqueue_kick(vq);
-> +
-> +       return 0;
-> +}
-> +
-> +static void virtio_video_event_cb(struct virtio_video *vv,
-> +                                 struct virtio_video_vbuffer *vbuf)
-> +{
-> +       int ret;
-> +       struct virtio_video_stream *stream;
-> +       struct virtio_video_event *event =
-> +               (struct virtio_video_event *)vbuf->resp_buf;
-> +
-> +       stream = idr_find(&vv->stream_idr, event->stream_id);
-> +       if (!stream) {
-> +               v4l2_warn(&vv->v4l2_dev, "no stream %u found for event\n",
-> +                         event->stream_id);
-> +               return;
-> +       }
-> +
-> +       switch (le32_to_cpu(event->event_type)) {
-> +       case VIRTIO_VIDEO_EVENT_DECODER_RESOLUTION_CHANGED:
-> +               virtio_video_cmd_get_params(vv, stream,
-> +                                          VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT);
-> +               virtio_video_queue_res_chg_event(stream);
-> +               if (stream->state == STREAM_STATE_INIT) {
-> +                       stream->state = STREAM_STATE_METADATA;
-> +                       wake_up(&vv->wq);
-> +               }
-> +               break;
-> +       default:
-> +               v4l2_warn(&vv->v4l2_dev, "failed to queue event buffer\n");
-> +               break;
-> +       }
-> +
-> +       memset(vbuf->resp_buf, 0, vbuf->resp_size);
-> +       ret = virtio_video_queue_event_buffer(vv, vbuf);
-> +       if (ret)
-> +               v4l2_warn(&vv->v4l2_dev, "queue event buffer failed\n");
-> +}
-> +
-> +int virtio_video_alloc_events(struct virtio_video *vv, size_t num)
-> +{
-> +       int ret;
-> +       size_t i;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       for (i = 0; i < num; i++) {
-> +               vbuf = virtio_video_get_vbuf(vv, 0,
-> +                                            sizeof(struct virtio_video_event),
-> +                                            NULL, virtio_video_event_cb);
-> +               if (IS_ERR(vbuf))
-> +                       return PTR_ERR(vbuf);
-> +
-> +               ret = virtio_video_queue_event_buffer(vv, vbuf);
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +int virtio_video_cmd_stream_create(struct virtio_video *vv, uint32_t stream_id,
-> +                                  enum virtio_video_format format,
-> +                                  const char *tag)
-> +{
-> +       struct virtio_video_stream_create *req_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       req_p = virtio_video_alloc_req(vv, &vbuf, sizeof(*req_p));
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_STREAM_CREATE);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream_id);
-> +       req_p->in_mem_type = cpu_to_le32(VIRTIO_VIDEO_MEM_TYPE_GUEST_PAGES);
-> +       req_p->out_mem_type = cpu_to_le32(VIRTIO_VIDEO_MEM_TYPE_GUEST_PAGES);
-> +       req_p->coded_format = cpu_to_le32(format);
-> +       strncpy(req_p->tag, tag, sizeof(req_p->tag) - 1);
-> +       req_p->tag[sizeof(req_p->tag) - 1] = 0;
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +int virtio_video_cmd_stream_destroy(struct virtio_video *vv, uint32_t stream_id)
-> +{
-> +       struct virtio_video_stream_destroy *req_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       req_p = virtio_video_alloc_req(vv, &vbuf, sizeof(*req_p));
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_STREAM_DESTROY);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream_id);
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +int virtio_video_cmd_stream_drain(struct virtio_video *vv, uint32_t stream_id)
-> +{
-> +       struct virtio_video_stream_drain *req_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       req_p = virtio_video_alloc_req(vv, &vbuf, sizeof(*req_p));
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_STREAM_DRAIN);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream_id);
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +int virtio_video_cmd_resource_create(struct virtio_video *vv,
-> +                                    uint32_t stream_id, uint32_t resource_id,
-> +                                    uint32_t queue_type,
-> +                                    struct virtio_video_mem_entry *ents,
-> +                                    unsigned int num_planes,
-> +                                    unsigned int *num_entry)
-> +{
-> +       unsigned int i = 0, nents = 0;
-> +       struct virtio_video_resource_create *req_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       req_p = virtio_video_alloc_req(vv, &vbuf, sizeof(*req_p));
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_RESOURCE_CREATE);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream_id);
-> +       req_p->resource_id = cpu_to_le32(resource_id);
-> +       req_p->queue_type = cpu_to_le32(queue_type);
-> +        req_p->num_planes = cpu_to_le32(num_planes);
-> +
-> +       for (i = 0; i < num_planes; i++) {
-> +               nents += num_entry[i];
-> +               req_p->num_entries[i] = cpu_to_le32(num_entry[i]);
-> +       }
-> +
-> +       vbuf->data_buf = ents;
-> +       vbuf->data_size = sizeof(*ents) * nents;
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +int virtio_video_cmd_resource_destroy_all(struct virtio_video *vv,
-> +                                         struct virtio_video_stream *stream,
-> +                                         enum virtio_video_queue_type qtype)
-> +{
-> +       struct virtio_video_resource_destroy_all *req_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       req_p = virtio_video_alloc_req(vv, &vbuf, sizeof(*req_p));
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_RESOURCE_DESTROY_ALL);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream->stream_id);
-> +       req_p->queue_type = cpu_to_le32(qtype);
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-
-We should make DESTROY_ALL a synchrounous command.
-It seems that stream->{src,dst}_destroyed is defined but not used.
-
-> +}
-> +
-> +static void
-> +virtio_video_cmd_resource_queue_cb(struct virtio_video *vv,
-> +                                  struct virtio_video_vbuffer *vbuf)
-> +{
-> +       uint32_t flags, bytesused;
-> +       uint64_t timestamp;
-> +       struct virtio_video_buffer *virtio_vb = vbuf->priv;
-> +       struct virtio_video_resource_queue_resp *resp =
-> +               (struct virtio_video_resource_queue_resp *)vbuf->resp_buf;
-> +
-> +       flags = le32_to_cpu(resp->flags);
-> +       bytesused = le32_to_cpu(resp->size);
-> +       timestamp = le64_to_cpu(resp->timestamp);
-> +
-> +       virtio_video_buf_done(virtio_vb, flags, timestamp, bytesused);
-> +}
-> +
-> +int virtio_video_cmd_resource_queue(struct virtio_video *vv, uint32_t stream_id,
-> +                                   struct virtio_video_buffer *virtio_vb,
-> +                                   uint32_t data_size[],
-> +                                   uint8_t num_data_size, uint32_t queue_type)
-> +{
-> +       uint8_t i;
-> +       struct virtio_video_resource_queue *req_p;
-> +       struct virtio_video_resource_queue_resp *resp_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +       size_t resp_size = sizeof(struct virtio_video_resource_queue_resp);
-> +
-> +       req_p = virtio_video_alloc_req_resp(vv,
-> +                                           &virtio_video_cmd_resource_queue_cb,
-> +                                           &vbuf, sizeof(*req_p), resp_size,
-> +                                           NULL);
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_RESOURCE_QUEUE);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream_id);
-> +       req_p->queue_type = cpu_to_le32(queue_type);
-> +       req_p->resource_id = cpu_to_le32(virtio_vb->resource_id);
-> +       req_p->num_data_sizes = num_data_size;
-> +       req_p->timestamp =
-> +               cpu_to_le64(virtio_vb->v4l2_m2m_vb.vb.vb2_buf.timestamp);
-> +
-> +       for (i = 0; i < num_data_size; ++i)
-> +               req_p->data_sizes[i] = cpu_to_le32(data_size[i]);
-> +
-> +       resp_p = (struct virtio_video_resource_queue_resp *)vbuf->resp_buf;
-> +       memset(resp_p, 0, sizeof(*resp_p));
-> +
-> +       vbuf->priv = virtio_vb;
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +static void
-> +virtio_video_cmd_queue_clear_cb(struct virtio_video *vv,
-> +                               struct virtio_video_vbuffer *vbuf)
-> +{
-> +       struct virtio_video_stream *stream = vbuf->priv;
-> +       struct virtio_video_queue_clear *req_p =
-> +               (struct virtio_video_queue_clear *)vbuf->buf;
-> +
-> +       if (le32_to_cpu(req_p->queue_type) == VIRTIO_VIDEO_QUEUE_TYPE_INPUT)
-> +               stream->src_cleared = true;
-> +       else
-> +               stream->dst_cleared = true;
-> +
-> +       wake_up(&vv->wq);
-> +}
-> +
-> +int virtio_video_cmd_queue_clear(struct virtio_video *vv,
-> +                                struct virtio_video_stream *stream,
-> +                                uint32_t queue_type)
-> +{
-> +       struct virtio_video_queue_clear *req_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       req_p = virtio_video_alloc_req_resp
-> +               (vv, &virtio_video_cmd_queue_clear_cb,
-> +                &vbuf, sizeof(*req_p),
-> +                sizeof(struct virtio_video_cmd_hdr), NULL);
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_QUEUE_CLEAR);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream->stream_id);
-> +       req_p->queue_type = cpu_to_le32(queue_type);
-> +
-> +       vbuf->priv = stream;
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +static void
-> +virtio_video_query_caps_cb(struct virtio_video *vv,
-> +                          struct virtio_video_vbuffer *vbuf)
-> +{
-> +       bool *got_resp_p = vbuf->priv;
-> +       *got_resp_p = true;
-> +       wake_up(&vv->wq);
-> +}
-> +
-> +int virtio_video_query_capability(struct virtio_video *vv, void *resp_buf,
-> +                                 size_t resp_size, uint32_t queue_type)
-> +{
-> +       struct virtio_video_query_capability *req_p = NULL;
-> +       struct virtio_video_vbuffer *vbuf = NULL;
-> +
-> +       if (!vv || !resp_buf)
-> +               return -1;
-> +
-> +       req_p = virtio_video_alloc_req_resp(vv, &virtio_video_query_caps_cb,
-> +                                           &vbuf, sizeof(*req_p), resp_size,
-> +                                           resp_buf);
-> +       if (IS_ERR(req_p))
-> +               return -1;
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_QUERY_CAPABILITY);
-> +       req_p->queue_type = cpu_to_le32(queue_type);
-> +
-> +       vbuf->priv = &vv->got_caps;
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +int virtio_video_query_control_level(struct virtio_video *vv, void *resp_buf,
-> +                                    size_t resp_size, uint32_t format)
-> +{
-> +       struct virtio_video_query_control *req_p = NULL;
-> +       struct virtio_video_query_control_level *ctrl_l = NULL;
-> +       struct virtio_video_vbuffer *vbuf = NULL;
-> +       uint32_t req_size = 0;
-> +
-> +       if (!vv || !resp_buf)
-> +               return -1;
-> +
-> +       req_size = sizeof(struct virtio_video_query_control) +
-> +               sizeof(struct virtio_video_query_control_level);
-> +
-> +       req_p = virtio_video_alloc_req_resp(vv, &virtio_video_query_caps_cb,
-> +                                           &vbuf, req_size, resp_size,
-> +                                           resp_buf);
-> +       if (IS_ERR(req_p))
-> +               return -1;
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_QUERY_CONTROL);
-> +       req_p->control = cpu_to_le32(VIRTIO_VIDEO_CONTROL_LEVEL);
-> +       ctrl_l = (void *)((char *)req_p +
-> +                         sizeof(struct virtio_video_query_control));
-> +       ctrl_l->format = cpu_to_le32(format);
-> +
-> +       vbuf->priv = &vv->got_control;
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +int virtio_video_query_control_profile(struct virtio_video *vv, void *resp_buf,
-> +                                      size_t resp_size, uint32_t format)
-> +{
-> +       struct virtio_video_query_control *req_p = NULL;
-> +       struct virtio_video_query_control_profile *ctrl_p = NULL;
-> +       struct virtio_video_vbuffer *vbuf = NULL;
-> +       uint32_t req_size = 0;
-> +
-> +       if (!vv || !resp_buf)
-> +               return -1;
-> +
-> +       req_size = sizeof(struct virtio_video_query_control) +
-> +               sizeof(struct virtio_video_query_control_profile);
-> +
-> +       req_p = virtio_video_alloc_req_resp(vv, &virtio_video_query_caps_cb,
-> +                                           &vbuf, req_size, resp_size,
-> +                                           resp_buf);
-> +       if (IS_ERR(req_p))
-> +               return -1;
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_QUERY_CONTROL);
-> +       req_p->control = cpu_to_le32(VIRTIO_VIDEO_CONTROL_PROFILE);
-> +       ctrl_p = (void *)((char *)req_p +
-> +                         sizeof(struct virtio_video_query_control));
-> +       ctrl_p->format = cpu_to_le32(format);
-> +
-> +       vbuf->priv = &vv->got_control;
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +static void
-> +virtio_video_cmd_get_params_cb(struct virtio_video *vv,
-> +                              struct virtio_video_vbuffer *vbuf)
-> +{
-> +       int i;
-> +       struct virtio_video_get_params_resp *resp =
-> +               (struct virtio_video_get_params_resp *)vbuf->resp_buf;
-> +       struct virtio_video_params *params = &resp->params;
-> +       struct virtio_video_stream *stream = vbuf->priv;
-> +       enum virtio_video_queue_type queue_type;
-> +       struct video_format_info *format_info = NULL;
-> +
-> +       queue_type = le32_to_cpu(params->queue_type);
-> +       if (queue_type == VIRTIO_VIDEO_QUEUE_TYPE_INPUT)
-> +               format_info = &stream->in_info;
-> +       else
-> +               format_info = &stream->out_info;
-> +
-> +       if (!format_info)
-> +               return;
-> +
-> +       format_info->frame_rate = le32_to_cpu(params->frame_rate);
-> +       format_info->frame_width = le32_to_cpu(params->frame_width);
-> +       format_info->frame_height = le32_to_cpu(params->frame_height);
-> +       format_info->min_buffers = le32_to_cpu(params->min_buffers);
-> +       format_info->max_buffers = le32_to_cpu(params->max_buffers);
-> +       format_info->fourcc_format =
-> +               virtio_video_format_to_v4l2(le32_to_cpu(params->format));
-> +
-> +       format_info->crop.top = le32_to_cpu(params->crop.top);
-> +       format_info->crop.left = le32_to_cpu(params->crop.left);
-> +       format_info->crop.width = le32_to_cpu(params->crop.width);
-> +       format_info->crop.height = le32_to_cpu(params->crop.height);
-> +
-> +       format_info->num_planes = le32_to_cpu(params->num_planes);
-> +       for (i = 0; i < le32_to_cpu(params->num_planes); i++) {
-> +               struct virtio_video_plane_format *plane_formats =
-> +                                                &params->plane_formats[i];
-> +               struct video_plane_format *plane_format =
-> +                                                &format_info->plane_format[i];
-> +
-> +               plane_format->plane_size =
-> +                                le32_to_cpu(plane_formats->plane_size);
-> +               plane_format->stride = le32_to_cpu(plane_formats->stride);
-> +       }
-> +
-> +       format_info->is_updated = true;
-> +       wake_up(&vv->wq);
-> +}
-> +
-> +int virtio_video_cmd_get_params(struct virtio_video *vv,
-> +                              struct virtio_video_stream *stream,
-> +                              uint32_t queue_type)
-> +{
-> +       int ret;
-> +       struct virtio_video_get_params *req_p = NULL;
-> +       struct virtio_video_vbuffer *vbuf = NULL;
-> +       struct virtio_video_get_params_resp *resp_p;
-> +       struct video_format_info *format_info = NULL;
-> +       size_t resp_size = sizeof(struct virtio_video_get_params_resp);
-> +
-> +       if (!vv || !stream)
-> +               return -1;
-> +
-> +       req_p = virtio_video_alloc_req_resp(vv,
-> +                                       &virtio_video_cmd_get_params_cb,
-> +                                       &vbuf, sizeof(*req_p), resp_size,
-> +                                       NULL);
-> +
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_GET_PARAMS);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream->stream_id);
-> +       req_p->queue_type = cpu_to_le32(queue_type);
-> +
-> +       resp_p = (struct virtio_video_get_params_resp *)vbuf->resp_buf;
-> +       memset(resp_p, 0, sizeof(*resp_p));
-> +
-> +       if (req_p->queue_type == VIRTIO_VIDEO_QUEUE_TYPE_INPUT)
-> +               format_info = &stream->in_info;
-> +       else
-> +               format_info = &stream->out_info;
-> +
-> +       format_info->is_updated = false;
-> +
-> +       vbuf->priv = stream;
-> +       ret = virtio_video_queue_cmd_buffer(vv, vbuf);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret = wait_event_timeout(vv->wq,
-> +                                format_info->is_updated, 5 * HZ);
-> +       if (ret == 0) {
-> +               v4l2_err(&vv->v4l2_dev, "timed out waiting for get_params\n");
-> +               return -1;
-> +       }
-> +       return 0;
-> +}
-> +
-> +int
-> +virtio_video_cmd_set_params(struct virtio_video *vv,
-> +                           struct virtio_video_stream *stream,
-> +                           struct video_format_info *format_info,
-> +                           uint32_t queue_type)
-
-I think we need to make SET_PARAMS synchronous?
-Even get_params is synchrnous and called after set_params, get_params
-can return parameters that is not changed by set_params.
-
-> +{
-> +       int i;
-> +       struct virtio_video_set_params *req_p;
-> +       struct virtio_video_vbuffer *vbuf;
-> +
-> +       req_p = virtio_video_alloc_req(vv, &vbuf, sizeof(*req_p));
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_SET_PARAMS);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream->stream_id);
-> +       req_p->params.queue_type = cpu_to_le32(queue_type);
-> +       req_p->params.frame_rate = cpu_to_le32(format_info->frame_rate);
-> +       req_p->params.frame_width = cpu_to_le32(format_info->frame_width);
-> +       req_p->params.frame_height = cpu_to_le32(format_info->frame_height);
-> +       req_p->params.format = virtio_video_v4l2_format_to_virtio(
-> +                                cpu_to_le32(format_info->fourcc_format));
-> +       req_p->params.min_buffers = cpu_to_le32(format_info->min_buffers);
-> +       req_p->params.max_buffers = cpu_to_le32(format_info->max_buffers);
-> +       req_p->params.num_planes = cpu_to_le32(format_info->num_planes);
-> +
-> +       for (i = 0; i < format_info->num_planes; i++) {
-> +               struct virtio_video_plane_format *plane_formats =
-> +                       &req_p->params.plane_formats[i];
-> +               struct video_plane_format *plane_format =
-> +                       &format_info->plane_format[i];
-> +               plane_formats->plane_size =
-> +                                cpu_to_le32(plane_format->plane_size);
-> +               plane_formats->stride = cpu_to_le32(plane_format->stride);
-> +       }
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> +static void
-> +virtio_video_cmd_get_ctrl_profile_cb(struct virtio_video *vv,
-> +                                    struct virtio_video_vbuffer *vbuf)
-> +{
-> +       struct virtio_video_get_control_resp *resp =
-> +               (struct virtio_video_get_control_resp *)vbuf->resp_buf;
-> +       struct virtio_video_control_val_profile *resp_p = NULL;
-> +       struct virtio_video_stream *stream = vbuf->priv;
-> +       struct video_control_info *control = &stream->control;
-> +
-> +       if (!control)
-> +               return;
-> +
-> +       resp_p = (void *)((char *) resp +
-> +                         sizeof(struct virtio_video_get_control_resp));
-> +
-> +       control->profile = le32_to_cpu(resp_p->profile);
-> +       control->is_updated = true;
-> +       wake_up(&vv->wq);
-> +}
-> +
-> +static void
-> +virtio_video_cmd_get_ctrl_level_cb(struct virtio_video *vv,
-> +                                  struct virtio_video_vbuffer *vbuf)
-> +{
-> +       struct virtio_video_get_control_resp *resp =
-> +               (struct virtio_video_get_control_resp *)vbuf->resp_buf;
-> +       struct virtio_video_control_val_level *resp_p = NULL;
-> +       struct virtio_video_stream *stream = vbuf->priv;
-> +       struct video_control_info *control = &stream->control;
-> +
-> +       if (!control)
-> +               return;
-> +
-> +       resp_p = (void *)((char *)resp +
-> +                         sizeof(struct virtio_video_get_control_resp));
-> +
-> +       control->level = le32_to_cpu(resp_p->level);
-> +       control->is_updated = true;
-> +       wake_up(&vv->wq);
-> +}
-> +
-> +static void
-> +virtio_video_cmd_get_ctrl_bitrate_cb(struct virtio_video *vv,
-> +                                    struct virtio_video_vbuffer *vbuf)
-> +{
-> +       struct virtio_video_get_control_resp *resp =
-> +               (struct virtio_video_get_control_resp *)vbuf->resp_buf;
-> +       struct virtio_video_control_val_bitrate *resp_p = NULL;
-> +       struct virtio_video_stream *stream = vbuf->priv;
-> +       struct video_control_info *control = &stream->control;
-> +
-> +       if (!control)
-> +               return;
-> +
-> +       resp_p = (void *)((char *) resp +
-> +                         sizeof(struct virtio_video_get_control_resp));
-> +
-> +       control->bitrate = le32_to_cpu(resp_p->bitrate);
-> +       control->is_updated = true;
-> +       wake_up(&vv->wq);
-> +}
-> +
-> +int virtio_video_cmd_get_control(struct virtio_video *vv,
-> +                                struct virtio_video_stream *stream,
-> +                                uint32_t virtio_ctrl)
-> +{
-> +       int ret = 0;
-> +       struct virtio_video_get_control *req_p = NULL;
-> +       struct virtio_video_get_control_resp *resp_p = NULL;
-> +       struct virtio_video_vbuffer *vbuf = NULL;
-> +       size_t resp_size = sizeof(struct virtio_video_get_control_resp);
-> +       virtio_video_resp_cb cb;
-> +
-> +       if (!vv)
-> +               return -1;
-> +
-> +       switch (virtio_ctrl) {
-> +       case VIRTIO_VIDEO_CONTROL_PROFILE:
-> +               resp_size += sizeof(struct virtio_video_control_val_profile);
-> +               cb = &virtio_video_cmd_get_ctrl_profile_cb;
-> +               break;
-> +       case VIRTIO_VIDEO_CONTROL_LEVEL:
-> +               resp_size += sizeof(struct virtio_video_control_val_level);
-> +               cb = &virtio_video_cmd_get_ctrl_level_cb;
-> +               break;
-> +       case VIRTIO_VIDEO_CONTROL_BITRATE:
-> +               resp_size += sizeof(struct virtio_video_control_val_bitrate);
-> +               cb = &virtio_video_cmd_get_ctrl_bitrate_cb;
-> +               break;
-> +       default:
-> +               return -1;
-> +       }
-> +
-> +       req_p = virtio_video_alloc_req_resp(vv, cb, &vbuf,
-> +                                           sizeof(*req_p), resp_size, NULL);
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_GET_CONTROL);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream->stream_id);
-> +       req_p->control = cpu_to_le32(virtio_ctrl);
-> +
-> +       resp_p = (struct virtio_video_get_control_resp *)vbuf->resp_buf;
-> +       memset(resp_p, 0, resp_size);
-> +
-> +       stream->control.is_updated = false;
-> +
-> +       vbuf->priv = stream;
-> +       ret = virtio_video_queue_cmd_buffer(vv, vbuf);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret = wait_event_timeout(vv->wq, stream->control.is_updated, 5 * HZ);
-> +       if (ret == 0) {
-> +               v4l2_err(&vv->v4l2_dev, "timed out waiting for get_params\n");
-> +               return -1;
-> +       }
-> +       return 0;
-> +}
-> +
-> +int virtio_video_cmd_set_control(struct virtio_video *vv, uint32_t stream_id,
-> +                                uint32_t control, uint32_t value)
-> +{
-> +       struct virtio_video_set_control *req_p = NULL;
-> +       struct virtio_video_vbuffer *vbuf = NULL;
-> +       struct virtio_video_control_val_level *ctrl_l = NULL;
-> +       struct virtio_video_control_val_profile *ctrl_p = NULL;
-> +       struct virtio_video_control_val_bitrate *ctrl_b = NULL;
-> +       size_t size;
-> +
-> +       if (!vv || value == 0)
-> +               return -EINVAL;
-> +
-> +       switch (control) {
-> +       case VIRTIO_VIDEO_CONTROL_PROFILE:
-> +               size = sizeof(struct virtio_video_control_val_profile);
-> +               break;
-> +       case VIRTIO_VIDEO_CONTROL_LEVEL:
-> +               size = sizeof(struct virtio_video_control_val_level);
-> +               break;
-> +       case VIRTIO_VIDEO_CONTROL_BITRATE:
-> +               size = sizeof(struct virtio_video_control_val_bitrate);
-> +               break;
-> +       default:
-> +               return -1;
-> +       }
-> +
-> +       req_p = virtio_video_alloc_req(vv, &vbuf, size + sizeof(*req_p));
-> +       if (IS_ERR(req_p))
-> +               return PTR_ERR(req_p);
-> +
-> +       req_p->hdr.type = cpu_to_le32(VIRTIO_VIDEO_CMD_SET_CONTROL);
-> +       req_p->hdr.stream_id = cpu_to_le32(stream_id);
-> +       req_p->control = cpu_to_le32(control);
-> +
-> +       switch (control) {
-> +       case VIRTIO_VIDEO_CONTROL_PROFILE:
-> +               ctrl_p = (void *)((char *)req_p +
-> +                                 sizeof(struct virtio_video_set_control));
-> +               ctrl_p->profile = cpu_to_le32(value);
-> +               break;
-> +       case VIRTIO_VIDEO_CONTROL_LEVEL:
-> +               ctrl_l = (void *)((char *)req_p +
-> +                                sizeof(struct virtio_video_set_control));
-> +               ctrl_l->level = cpu_to_le32(value);
-> +               break;
-> +       case VIRTIO_VIDEO_CONTROL_BITRATE:
-> +               ctrl_b = (void *)((char *)req_p +
-> +                                sizeof(struct virtio_video_set_control));
-> +               ctrl_b->bitrate = cpu_to_le32(value);
-> +               break;
-> +       }
-> +
-> +       return virtio_video_queue_cmd_buffer(vv, vbuf);
-> +}
-> +
-> diff --git a/include/uapi/linux/virtio_ids.h b/include/uapi/linux/virtio_ids.h
-> index 6d5c3b2d4f4d..89dfc94ecaa3 100644
-> --- a/include/uapi/linux/virtio_ids.h
-> +++ b/include/uapi/linux/virtio_ids.h
-> @@ -43,5 +43,7 @@
->  #define VIRTIO_ID_INPUT        18 /* virtio input */
->  #define VIRTIO_ID_VSOCK        19 /* virtio vsock transport */
->  #define VIRTIO_ID_CRYPTO       20 /* virtio crypto */
-> +#define VIRTIO_ID_VIDEO_ENC    30 /* virtio video encoder */
-> +#define VIRTIO_ID_VIDEO_DEC    31 /* virtio video decoder */
->
->  #endif /* _LINUX_VIRTIO_IDS_H */
-> diff --git a/include/uapi/linux/virtio_video.h b/include/uapi/linux/virtio_video.h
-> new file mode 100644
-> index 000000000000..0dd98a2237c6
-> --- /dev/null
-> +++ b/include/uapi/linux/virtio_video.h
-> @@ -0,0 +1,469 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Virtio Video Device
-> + *
-> + * This header is BSD licensed so anyone can use the definitions
-> + * to implement compatible drivers/servers:
-> + *
-> + * Redistribution and use in source and binary forms, with or without
-> + * modification, are permitted provided that the following conditions
-> + * are met:
-> + * 1. Redistributions of source code must retain the above copyright
-> + *    notice, this list of conditions and the following disclaimer.
-> + * 2. Redistributions in binary form must reproduce the above copyright
-> + *    notice, this list of conditions and the following disclaimer in the
-> + *    documentation and/or other materials provided with the distribution.
-> + * 3. Neither the name of IBM nor the names of its contributors
-> + *    may be used to endorse or promote products derived from this software
-> + *    without specific prior written permission.
-> + * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-> + * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-> + * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-> + * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL IBM OR
-> + * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-> + * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-> + * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
-> + * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-> + * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-> + * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-> + * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-> + * SUCH DAMAGE.
-> + *
-> + * Copyright (C) 2019 OpenSynergy GmbH.
-> + */
-> +
-> +#ifndef _UAPI_LINUX_VIRTIO_VIDEO_H
-> +#define _UAPI_LINUX_VIRTIO_VIDEO_H
-> +
-> +#include <linux/types.h>
-> +#include <linux/virtio_config.h>
-> +
-> +/*
-> + * Feature bits
-> + */
-> +
-> +/* Guest pages can be used for video buffers. */
-> +#define VIRTIO_VIDEO_F_RESOURCE_GUEST_PAGES 0
-> +/*
-> + * The host can process buffers even if they are non-contiguous memory such as
-> + * scatter-gather lists.
-> + */
-> +#define VIRTIO_VIDEO_F_RESOURCE_NON_CONTIG 1
-> +
-> +/*
-> + * Image formats
-> + */
-> +
-> +enum virtio_video_format {
-> +       /* Raw formats */
-> +       VIRTIO_VIDEO_FORMAT_RAW_MIN = 1,
-> +       VIRTIO_VIDEO_FORMAT_ARGB8888 = VIRTIO_VIDEO_FORMAT_RAW_MIN,
-> +       VIRTIO_VIDEO_FORMAT_BGRA8888,
-> +       VIRTIO_VIDEO_FORMAT_NV12, /* 12  Y/CbCr 4:2:0  */
-> +       VIRTIO_VIDEO_FORMAT_YUV420, /* 12  YUV 4:2:0     */
-> +       VIRTIO_VIDEO_FORMAT_YVU420, /* 12  YVU 4:2:0     */
-> +       VIRTIO_VIDEO_FORMAT_RAW_MAX = VIRTIO_VIDEO_FORMAT_YVU420,
-> +
-> +       /* Coded formats */
-> +       VIRTIO_VIDEO_FORMAT_CODED_MIN = 0x1000,
-> +       VIRTIO_VIDEO_FORMAT_MPEG2 =
-> +               VIRTIO_VIDEO_FORMAT_CODED_MIN, /* MPEG-2 Part 2 */
-> +       VIRTIO_VIDEO_FORMAT_MPEG4, /* MPEG-4 Part 2 */
-> +       VIRTIO_VIDEO_FORMAT_H264, /* H.264 */
-> +       VIRTIO_VIDEO_FORMAT_HEVC, /* HEVC aka H.265*/
-> +       VIRTIO_VIDEO_FORMAT_VP8, /* VP8 */
-> +       VIRTIO_VIDEO_FORMAT_VP9, /* VP9 */
-> +       VIRTIO_VIDEO_FORMAT_CODED_MAX = VIRTIO_VIDEO_FORMAT_VP9,
-> +};
-> +
-> +enum virtio_video_profile {
-> +       /* H.264 */
-> +       VIRTIO_VIDEO_PROFILE_H264_MIN = 0x100,
-> +       VIRTIO_VIDEO_PROFILE_H264_BASELINE = VIRTIO_VIDEO_PROFILE_H264_MIN,
-> +       VIRTIO_VIDEO_PROFILE_H264_MAIN,
-> +       VIRTIO_VIDEO_PROFILE_H264_EXTENDED,
-> +       VIRTIO_VIDEO_PROFILE_H264_HIGH,
-> +       VIRTIO_VIDEO_PROFILE_H264_HIGH10PROFILE,
-> +       VIRTIO_VIDEO_PROFILE_H264_HIGH422PROFILE,
-> +       VIRTIO_VIDEO_PROFILE_H264_HIGH444PREDICTIVEPROFILE,
-> +       VIRTIO_VIDEO_PROFILE_H264_SCALABLEBASELINE,
-> +       VIRTIO_VIDEO_PROFILE_H264_SCALABLEHIGH,
-> +       VIRTIO_VIDEO_PROFILE_H264_STEREOHIGH,
-> +       VIRTIO_VIDEO_PROFILE_H264_MULTIVIEWHIGH,
-> +       VIRTIO_VIDEO_PROFILE_H264_MAX = VIRTIO_VIDEO_PROFILE_H264_MULTIVIEWHIGH,
-> +
-> +       /* HEVC */
-> +       VIRTIO_VIDEO_PROFILE_HEVC_MIN = 0x200,
-> +       VIRTIO_VIDEO_PROFILE_HEVC_MAIN = VIRTIO_VIDEO_PROFILE_HEVC_MIN,
-> +       VIRTIO_VIDEO_PROFILE_HEVC_MAIN10,
-> +       VIRTIO_VIDEO_PROFILE_HEVC_MAIN_STILL_PICTURE,
-> +       VIRTIO_VIDEO_PROFILE_HEVC_MAX =
-> +               VIRTIO_VIDEO_PROFILE_HEVC_MAIN_STILL_PICTURE,
-> +
-> +       /* VP8 */
-> +       VIRTIO_VIDEO_PROFILE_VP8_MIN = 0x300,
-> +       VIRTIO_VIDEO_PROFILE_VP8_PROFILE0 = VIRTIO_VIDEO_PROFILE_VP8_MIN,
-> +       VIRTIO_VIDEO_PROFILE_VP8_PROFILE1,
-> +       VIRTIO_VIDEO_PROFILE_VP8_PROFILE2,
-> +       VIRTIO_VIDEO_PROFILE_VP8_PROFILE3,
-> +       VIRTIO_VIDEO_PROFILE_VP8_MAX = VIRTIO_VIDEO_PROFILE_VP8_PROFILE3,
-> +
-> +       /* VP9 */
-> +       VIRTIO_VIDEO_PROFILE_VP9_MIN = 0x400,
-> +       VIRTIO_VIDEO_PROFILE_VP9_PROFILE0 = VIRTIO_VIDEO_PROFILE_VP9_MIN,
-> +       VIRTIO_VIDEO_PROFILE_VP9_PROFILE1,
-> +       VIRTIO_VIDEO_PROFILE_VP9_PROFILE2,
-> +       VIRTIO_VIDEO_PROFILE_VP9_PROFILE3,
-> +       VIRTIO_VIDEO_PROFILE_VP9_MAX = VIRTIO_VIDEO_PROFILE_VP9_PROFILE3,
-> +};
-> +
-> +enum virtio_video_level {
-> +       /* H.264 */
-> +       VIRTIO_VIDEO_LEVEL_H264_MIN = 0x100,
-> +       VIRTIO_VIDEO_LEVEL_H264_1_0 = VIRTIO_VIDEO_LEVEL_H264_MIN,
-> +       VIRTIO_VIDEO_LEVEL_H264_1_1,
-> +       VIRTIO_VIDEO_LEVEL_H264_1_2,
-> +       VIRTIO_VIDEO_LEVEL_H264_1_3,
-> +       VIRTIO_VIDEO_LEVEL_H264_2_0,
-> +       VIRTIO_VIDEO_LEVEL_H264_2_1,
-> +       VIRTIO_VIDEO_LEVEL_H264_2_2,
-> +       VIRTIO_VIDEO_LEVEL_H264_3_0,
-> +       VIRTIO_VIDEO_LEVEL_H264_3_1,
-> +       VIRTIO_VIDEO_LEVEL_H264_3_2,
-> +       VIRTIO_VIDEO_LEVEL_H264_4_0,
-> +       VIRTIO_VIDEO_LEVEL_H264_4_1,
-> +       VIRTIO_VIDEO_LEVEL_H264_4_2,
-> +       VIRTIO_VIDEO_LEVEL_H264_5_0,
-> +       VIRTIO_VIDEO_LEVEL_H264_5_1,
-> +       VIRTIO_VIDEO_LEVEL_H264_MAX = VIRTIO_VIDEO_LEVEL_H264_5_1,
-> +};
-> +
-> +/*
-> + * Config
-> + */
-> +
-> +struct virtio_video_config {
-> +       __le32 version;
-> +       __le32 max_caps_length;
-> +       __le32 max_resp_length;
-> +};
-> +
-> +/*
-> + * Commands
-> + */
-> +
-> +enum virtio_video_cmd_type {
-> +       /* Command */
-> +       VIRTIO_VIDEO_CMD_QUERY_CAPABILITY = 0x0100,
-> +       VIRTIO_VIDEO_CMD_STREAM_CREATE,
-> +       VIRTIO_VIDEO_CMD_STREAM_DESTROY,
-> +       VIRTIO_VIDEO_CMD_STREAM_DRAIN,
-> +       VIRTIO_VIDEO_CMD_RESOURCE_CREATE,
-> +       VIRTIO_VIDEO_CMD_RESOURCE_QUEUE,
-> +       VIRTIO_VIDEO_CMD_RESOURCE_DESTROY_ALL,
-> +       VIRTIO_VIDEO_CMD_QUEUE_CLEAR,
-> +       VIRTIO_VIDEO_CMD_GET_PARAMS,
-> +       VIRTIO_VIDEO_CMD_SET_PARAMS,
-> +       VIRTIO_VIDEO_CMD_QUERY_CONTROL,
-> +       VIRTIO_VIDEO_CMD_GET_CONTROL,
-> +       VIRTIO_VIDEO_CMD_SET_CONTROL,
-> +
-> +       /* Response */
-> +       VIRTIO_VIDEO_RESP_OK_NODATA = 0x0200,
-> +       VIRTIO_VIDEO_RESP_OK_QUERY_CAPABILITY,
-> +       VIRTIO_VIDEO_RESP_OK_RESOURCE_QUEUE,
-> +       VIRTIO_VIDEO_RESP_OK_GET_PARAMS,
-> +       VIRTIO_VIDEO_RESP_OK_QUERY_CONTROL,
-> +       VIRTIO_VIDEO_RESP_OK_GET_CONTROL,
-> +
-> +       VIRTIO_VIDEO_RESP_ERR_INVALID_OPERATION = 0x0300,
-> +       VIRTIO_VIDEO_RESP_ERR_OUT_OF_MEMORY,
-> +       VIRTIO_VIDEO_RESP_ERR_INVALID_STREAM_ID,
-> +       VIRTIO_VIDEO_RESP_ERR_INVALID_RESOURCE_ID,
-> +       VIRTIO_VIDEO_RESP_ERR_INVALID_PARAMETER,
-> +       VIRTIO_VIDEO_RESP_ERR_UNSUPPORTED_CONTROL,
-> +};
-> +
-> +struct virtio_video_cmd_hdr {
-> +       __le32 type; /* One of enum virtio_video_cmd_type */
-> +       __le32 stream_id;
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_QUERY_CAPABILITY */
-> +enum virtio_video_queue_type {
-> +       VIRTIO_VIDEO_QUEUE_TYPE_INPUT = 0x100,
-> +       VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT,
-> +};
-> +
-> +struct virtio_video_query_capability {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
-> +       __u8 padding[4];
-> +};
-> +
-> +enum virtio_video_planes_layout_flag {
-> +       VIRTIO_VIDEO_PLANES_LAYOUT_SINGLE_BUFFER = 1 << 0,
-> +       VIRTIO_VIDEO_PLANES_LAYOUT_PER_PLANE = 1 << 1,
-> +};
-> +
-> +struct virtio_video_format_range {
-> +       __le32 min;
-> +       __le32 max;
-> +       __le32 step;
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_format_frame {
-> +       struct virtio_video_format_range width;
-> +       struct virtio_video_format_range height;
-> +       __le32 num_rates;
-> +       __u8 padding[4];
-> +       /* Followed by struct virtio_video_format_range frame_rates[] */
-> +};
-> +
-> +struct virtio_video_format_desc {
-> +       __le64 mask;
-> +       __le32 format; /* One of VIRTIO_VIDEO_FORMAT_* types */
-> +       __le32 planes_layout; /* Bitmask with VIRTIO_VIDEO_PLANES_LAYOUT_* */
-> +       __le32 plane_align;
-> +       __le32 num_frames;
-> +       /* Followed by struct virtio_video_format_frame frames[] */
-> +};
-> +
-> +struct virtio_video_query_capability_resp {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 num_descs;
-> +       __u8 padding[4];
-> +       /* Followed by struct virtio_video_format_desc descs[] */
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_STREAM_CREATE */
-> +enum virtio_video_mem_type {
-> +       VIRTIO_VIDEO_MEM_TYPE_GUEST_PAGES,
-> +};
-> +
-> +struct virtio_video_stream_create {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 in_mem_type; /* One of VIRTIO_VIDEO_MEM_TYPE_* types */
-> +       __le32 out_mem_type; /* One of VIRTIO_VIDEO_MEM_TYPE_* types */
-> +       __le32 coded_format; /* One of VIRTIO_VIDEO_FORMAT_* types */
-> +       __u8 padding[4];
-> +       __u8 tag[64];
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_STREAM_DESTROY */
-> +struct virtio_video_stream_destroy {
-> +       struct virtio_video_cmd_hdr hdr;
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_STREAM_DRAIN */
-> +struct virtio_video_stream_drain {
-> +       struct virtio_video_cmd_hdr hdr;
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_RESOURCE_CREATE */
-> +struct virtio_video_mem_entry {
-> +       __le64 addr;
-> +       __le32 length;
-> +       __u8 padding[4];
-> +};
-> +
-> +#define VIRTIO_VIDEO_MAX_PLANES 8
-> +
-> +struct virtio_video_resource_create {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
-> +       __le32 resource_id;
-> +       __le32 planes_layout;
-> +       __le32 num_planes;
-> +       __le32 plane_offsets[VIRTIO_VIDEO_MAX_PLANES];
-> +       __le32 num_entries[VIRTIO_VIDEO_MAX_PLANES];
-> +       /* Followed by struct virtio_video_mem_entry entries[] */
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_RESOURCE_QUEUE */
-> +struct virtio_video_resource_queue {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
-> +       __le32 resource_id;
-> +       __le64 timestamp;
-> +       __le32 num_data_sizes;
-> +       __le32 data_sizes[VIRTIO_VIDEO_MAX_PLANES];
-> +       __u8 padding[4];
-> +};
-> +
-> +enum virtio_video_buffer_flag {
-> +       VIRTIO_VIDEO_BUFFER_FLAG_ERR = 0x0001,
-> +       VIRTIO_VIDEO_BUFFER_FLAG_EOS = 0x0002,
-> +
-> +       /* Encoder only */
-> +       VIRTIO_VIDEO_BUFFER_FLAG_IFRAME = 0x0004,
-> +       VIRTIO_VIDEO_BUFFER_FLAG_PFRAME = 0x0008,
-> +       VIRTIO_VIDEO_BUFFER_FLAG_BFRAME = 0x0010,
-> +};
-> +
-> +struct virtio_video_resource_queue_resp {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le64 timestamp;
-> +       __le32 flags; /* One of VIRTIO_VIDEO_BUFFER_FLAG_* flags */
-> +       __le32 size; /* Encoded size */
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_RESOURCE_DESTROY_ALL */
-> +struct virtio_video_resource_destroy_all {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
-> +       __u8 padding[4];
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_QUEUE_CLEAR */
-> +struct virtio_video_queue_clear {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
-> +       __u8 padding[4];
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_GET_PARAMS */
-> +struct virtio_video_plane_format {
-> +       __le32 plane_size;
-> +       __le32 stride;
-> +};
-> +
-> +struct virtio_video_crop {
-> +       __le32 left;
-> +       __le32 top;
-> +       __le32 width;
-> +       __le32 height;
-> +};
-> +
-> +struct virtio_video_params {
-> +       __le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
-> +       __le32 format; /* One of VIRTIO_VIDEO_FORMAT_* types */
-> +       __le32 frame_width;
-> +       __le32 frame_height;
-> +       __le32 min_buffers;
-> +       __le32 max_buffers;
-> +       struct virtio_video_crop crop;
-> +       __le32 frame_rate;
-> +       __le32 num_planes;
-> +       struct virtio_video_plane_format plane_formats[VIRTIO_VIDEO_MAX_PLANES];
-> +};
-> +
-> +struct virtio_video_get_params {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_get_params_resp {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       struct virtio_video_params params;
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_SET_PARAMS */
-> +struct virtio_video_set_params {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       struct virtio_video_params params;
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_QUERY_CONTROL */
-> +enum virtio_video_control_type {
-> +       VIRTIO_VIDEO_CONTROL_BITRATE = 1,
-> +       VIRTIO_VIDEO_CONTROL_PROFILE,
-> +       VIRTIO_VIDEO_CONTROL_LEVEL,
-> +};
-> +
-> +struct virtio_video_query_control_profile {
-> +       __le32 format; /* One of VIRTIO_VIDEO_FORMAT_* */
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_query_control_level {
-> +       __le32 format; /* One of VIRTIO_VIDEO_FORMAT_* */
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_query_control {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 control; /* One of VIRTIO_VIDEO_CONTROL_* types */
-> +       __u8 padding[4];
-> +       /*
-> +        * Followed by a value of struct virtio_video_query_control_*
-> +        * in accordance with the value of control.
-> +        */
-> +};
-> +
-> +struct virtio_video_query_control_resp_profile {
-> +       __le32 num;
-> +       __u8 padding[4];
-> +       /* Followed by an array le32 profiles[] */
-> +};
-> +
-> +struct virtio_video_query_control_resp_level {
-> +       __le32 num;
-> +       __u8 padding[4];
-> +       /* Followed by an array le32 level[] */
-> +};
-> +
-> +struct virtio_video_query_control_resp {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       /* Followed by one of struct virtio_video_query_control_resp_* */
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_GET_CONTROL */
-> +struct virtio_video_get_control {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 control; /* One of VIRTIO_VIDEO_CONTROL_* types */
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_control_val_bitrate {
-> +       __le32 bitrate;
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_control_val_profile {
-> +       __le32 profile;
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_control_val_level {
-> +       __le32 level;
-> +       __u8 padding[4];
-> +};
-> +
-> +struct virtio_video_get_control_resp {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       /* Followed by one of struct virtio_video_control_val_* */
-> +};
-> +
-> +/* VIRTIO_VIDEO_CMD_SET_CONTROL */
-> +struct virtio_video_set_control {
-> +       struct virtio_video_cmd_hdr hdr;
-> +       __le32 control; /* One of VIRTIO_VIDEO_CONTROL_* types */
-> +       __u8 padding[4];
-> +       /* Followed by one of struct virtio_video_control_val_* */
-> +};
-> +
-> +struct virtio_video_set_control_resp {
-> +       struct virtio_video_cmd_hdr hdr;
-> +};
-> +
-> +/*
-> + * Events
-> + */
-> +
-> +enum virtio_video_event_type {
-> +       /* For all devices */
-> +       VIRTIO_VIDEO_EVENT_ERROR = 0x0100,
-> +
-> +       /* For decoder only */
-> +       VIRTIO_VIDEO_EVENT_DECODER_RESOLUTION_CHANGED = 0x0200,
-> +};
-> +
-> +struct virtio_video_event {
-> +       __le32 event_type; /* One of VIRTIO_VIDEO_EVENT_* types */
-> +       __le32 stream_id;
-> +};
-> +
-> +#endif /* _UAPI_LINUX_VIRTIO_VIDEO_H */
-
-> --
-> 2.25.0
->
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+TGUgbWFyZGkgMTAgbWFycyAyMDIwIMOgIDE5OjI0ICswOTAwLCBLZWlpY2hpIFdhdGFuYWJlIGEg
+w6ljcml0IDoKPiBUaGFua3MgRG1pdHJ5IGZvciBzdWJtaXR0aW5nIHRoaXMgcGF0Y2ghCj4gCj4g
+U29ycnkgZm9yIHRoZSBzbG93IHJlc3BvbnNlLgo+IEkgaW1wbGVtZW50ZWQgdmlydGlvLXZpZGVv
+IGRlY29kZXIgZGV2aWNlIGZvciBDaHJvbWVPUyBhbmQgY291bGQgcGxheQo+IGEgdmlkZW8gd2l0
+aCB0aGlzIGRyaXZlciBvbiBhIFZNIG9uIHdpdGggc2V2ZXJhbCBsb2NhbCBwYXRjaGVzIFsxXS4K
+PiBJIHRoaW5rIHRoZSBkcml2ZXIgaXMgaW1wbGVtZW50ZWQgd2VsbCBpbiBnZW5lcmFsLCBidXQg
+SSBmb3VuZCBzb21lCj4gcHJvYmxlbXMgdG8gYmUgZml4ZWQgYW5kIGEgY29uY2VybjoKPiAKPiAj
+IHY0bDItY29tcGlhbmNlIHRlc3QKPiBJIHRyaWVkIHJ1biB2NGwyLWNvbXBsaWFuY2UgdGVzdCBb
+Ml0gYWdhaW5zdCB0aGlzIGRyaXZlciwgYnV0IDggdGVzdAo+IGNhc2VzIGFyZSBzdGlsbCBmYWls
+aW5nIGluIG15IGVudmlyb25tZW50Lgo+IFdvdWxkIHlvdSBtaW5kIGZpeGluZyBpdCB0byBtYWtl
+IGl0IHBhc3M/Cj4gCj4gIyBUYWtlcyBhIGxvbmcgdGltZSB0byBkZWNvZGUgdGhlIGZpcnN0IGZy
+YW1lCj4gV2hlbiB3ZSB0cmllZCBhIG5vcm1hbCB2aWRlbyBwbGF5ZXIgYXBwbGljYXRpb24sIGl0
+IHRha2VzIGEgbG9uZyB0aW1lCj4gKDIrIHNlY29uZHMpIHVudGlsIHRoZSBmaXJzdCBmcmFtZSBp
+cyBkaXNwbGF5ZWQuCj4gV2UgY2Fubm90IHNlZSBzdWNoIGEgcHJvYmxlbSB3aGVuIHdlIHVzZWQg
+b3VyIHByZXZpb3VzIHZpcnRpby12ZGVjIGRyaXZlciBbM10uCj4gCj4gSSB0aGluayB0aGlzIGlz
+IGJlY2F1c2UgdGhlIGFwcGxpY2F0aW9uIG9wZW5zIHRoZSAvZGV2L3ZpZGVvIGRldmljZSB0bwo+
+IHF1ZXJ5IGNhcGFiaWxpdHksIGJ1dCB0aGUgb3BlbmluZyB0aGUgZGV2aWNlIGlzIGFuIGV4cGVu
+c2l2ZSBvcGVyYXRpb24KPiBpbiB0aGUgY3VycmVudCB2aXJ0aW8tdmlkZW8gZHJpdmVyIGltcGxl
+bWVudGF0aW9uLgo+IFRoaXMgY2FuIGJlIGltcHJvdmVkIGJ5IG1vdmluZyBTVFJFQU1fQ1JFQVRF
+IHJlcXVlc3QgZnJvbSB0aGUgb3Blbgo+IGNhbGxiYWNrIHRvIGEgcGxhY2Ugd2hlcmUgaXQncyBh
+Y3R1YWxseSBuZWVkZWQsIGFzIEkgc3VnZ2VzdGVkIGluIHRoZQo+IHByZXZpb3VzIHZlcnNpb24u
+Cj4gVGhvdWdoIHlvdSBsaXN0ZWQgdGhpcyBwcm9ibGVtIGFzIG9uZSBvZiAiUG90ZW50aWFsIGlt
+cHJvdmVtZW50cyIsIEkKPiB0aGluayB0aGlzIGlzIGEgaGlnaCBwcmlvcml0eSBpc3N1ZS4KPiAK
+PiAjIFRpbWluZyBvZiBkZXF1ZXVlCj4gVGhpcyBpcyBub3QgYSBwcm9ibGVtIGJ1dCBhIGNvbmNl
+cm4uIFRoZSBjdXJyZW50IGltcGxlbWVudGF0aW9uCj4gcHJvY2Vzc2VzIGhvc3QgcmVzcG9uc2Vz
+IGFzICdiYXRjaGVzJyBwZXJpb2RpY2FsbHkgaW4KPiB2aXJ0aW9fdmlkZW9fZGVxdWV1ZV9jbWRf
+ZnVuYy4KPiBBcyBhIHJlc3VsdCwgZGVjb2RlZCBmcmFtZXMgYXJlIGRlcXVldWVkIGFzIGJhdGNo
+ZXMgYXMgd2VsbCBpbnN0ZWFkIG9mCj4gYmVpbmcgZGVxdWV1ZWQgQVNBUC4KPiBlLmcuIDYgZnJh
+bWVzIGFyZSBkZXF1ZXVlZCBvdmVyIDEwbXMsIG5vIGZyYW1lcyBmb3IgOTBtcywgNiBmcmFtZXMg
+b3ZlciAxMG1zLi4uCgpJIHNlZSB0aGlzIGFzIGEgcHJvYmxlbSBmb3IgbGl2ZSB2aWRlbyBwbGF5
+YmFjay4gRG9lcyB0aGlzIGJlaGF2aW91ciBnbwphd2F5IGlmIHRoZSBpbnB1dCAoZW5jb2RlZCBi
+dWZmZXJzKSBhcmUgbGl2ZSA/IChzZW50IHRvIHRoZSBkZWNvZGVyIG9uCmEgZnJhbWVyYXRlIHBh
+Y2UpLgoKPiAKPiBJIGRvbid0IHRoaW5rIHRoaXMgaXMgYSBwcm9ibGVtLCBidXQgaXQgc2hvdWxk
+IGJlIGF3YXJlIG9mIHRoaXMuCj4gTm90ZSB0aGF0IHRoZSB2aXJ0aW8tdmlkZW8gc2VlbXMgdG8g
+aGF2ZSBzbGlnaHRseSBsb3dlciBwb3dlcgo+IGNvbnN1bXB0aW9uIHRoYW4gdGhlIG9sZCB2aXJ0
+aW8tdmRlYyAofjUlKS4gSXQgbWF5IGJlIHRoYW5rcyB0byB0aGlzCj4gZGVzaWduIGNob2ljZS4K
+PiAKPiAtLQo+IAo+IFNlZSBteSBvdGhlciByZXZpZXcgY29tbWVudHMgaW5saW5lLiBOb3RlIHRo
+YXQgbXkgcGF0Y2ggWzRdIGFkZHJlc3Nlcwo+IHNvbWUgb2YgdGhlbS4KPiBCeSB0aGUgd2F5LCBJ
+IGd1ZXNzIHRoZSBwcmVmaXggb2YgdGhpcyBtYWlsJ3Mgc3ViamVjdCBzaG91bGQgYmUKPiAidmly
+dGlvX3ZpZGVvIiBpbnN0ZWFkIG9mICJ2aWRlb192aWRlbyI6KQo+IAo+IEJlc3QgcmVnYXJkcywK
+PiBLZWlpY2hpCj4gCj4gWzFdIGh0dHBzOi8vY2hyb21pdW0tcmV2aWV3Lmdvb2dsZXNvdXJjZS5j
+b20vcS9oYXNodGFnOiUyMnZpcnRpby12aWRlbyUyMisoc3RhdHVzOm9wZW4lMjBPUiUyMHN0YXR1
+czptZXJnZWQpCj4gWzJdIGh0dHBzOi8vZ2l0LmxpbnV4dHYub3JnL3Y0bC11dGlscy5naXQvdHJl
+ZS91dGlscy92NGwyLWNvbXBsaWFuY2UKPiBbM10gaHR0cHM6Ly9sd24ubmV0L0FydGljbGVzLzgw
+MzY3Ni8KPiBbNF0gaHR0cHM6Ly9jaHJvbWl1bS1yZXZpZXcuZ29vZ2xlc291cmNlLmNvbS9jL2No
+cm9taXVtb3MvdGhpcmRfcGFydHkva2VybmVsLysvMjA2MDUxMC83Cj4gCj4gCj4gT24gV2VkLCBG
+ZWIgMTksIDIwMjAgYXQgNToyOCBBTSBEbWl0cnkgU2VwcCA8ZG1pdHJ5LnNlcHBAb3BlbnN5bmVy
+Z3kuY29tPiB3cm90ZToKPiA+IFRoaXMgYWRkcyBhIFZpcnRpbyBiYXNlZCB2aWRlbyBkcml2ZXIg
+Zm9yIHZpZGVvIHN0cmVhbWluZyBkZXZpY2UgdGhhdAo+ID4gb3BlcmF0ZXMgaW5wdXQgYW5kIG91
+dHB1dCBkYXRhIGJ1ZmZlcnMgdG8gc2hhcmUgdmlkZW8gZGV2aWNlcyB3aXRoCj4gPiBzZXZlcmFs
+IGd1ZXN0cy4gVGhlIGN1cnJlbnQgaW1wbGVtZW50YXRpb24gY29uc2lzdCBvZiBWNEwyIGJhc2Vk
+IHZpZGVvCj4gPiBkcml2ZXIgc3VwcG9ydGluZyB2aWRlbyBmdW5jdGlvbnMgb2YgZGVjb2RlciBh
+bmQgZW5jb2Rlci4gVGhlIGRldmljZQo+ID4gdXNlcyBjb21tYW5kIHN0cnVjdHVyZXMgdG8gYWR2
+ZXJ0aXNlIGFuZCBuZWdvdGlhdGUgc3RyZWFtIGZvcm1hdHMgYW5kCj4gPiBjb250cm9scy4gVGhp
+cyBhbGxvd3MgdGhlIGRyaXZlciB0byBtb2RpZnkgdGhlIHByb2Nlc3NpbmcgbG9naWMgb2YgdGhl
+Cj4gPiBkZXZpY2Ugb24gYSBwZXIgc3RyZWFtIGJhc2lzLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5
+OiBEbWl0cnkgU2VwcCA8ZG1pdHJ5LnNlcHBAb3BlbnN5bmVyZ3kuY29tPgo+ID4gU2lnbmVkLW9m
+Zi1ieTogS2lyYW4gUGF3YXIgPEtpcmFuLlBhd2FyQG9wZW5zeW5lcmd5LmNvbT4KPiA+IFNpZ25l
+ZC1vZmYtYnk6IE5pa29sYXkgTWFydHlhbm92IDxOaWtvbGF5Lk1hcnR5YW5vdkBvcGVuc3luZXJn
+eS5jb20+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBTYW1pdWxsYWggS2hhd2FqYSA8c2FtaXVsbGFoLmto
+YXdhamFAb3BlbnN5bmVyZ3kuY29tPgo+ID4gLS0tCj4gPiAgZHJpdmVycy9tZWRpYS9LY29uZmln
+ICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDEgKwo+ID4gIGRyaXZlcnMvbWVkaWEvTWFrZWZp
+bGUgICAgICAgICAgICAgICAgICAgICAgfCAgICAyICsKPiA+ICBkcml2ZXJzL21lZGlhL3ZpcnRp
+by9LY29uZmlnICAgICAgICAgICAgICAgIHwgICAxMiArCj4gPiAgZHJpdmVycy9tZWRpYS92aXJ0
+aW8vTWFrZWZpbGUgICAgICAgICAgICAgICB8ICAgMTIgKwo+ID4gIGRyaXZlcnMvbWVkaWEvdmly
+dGlvL3ZpcnRpb192aWRlby5oICAgICAgICAgfCAgNDAyICsrKysrKysKPiA+ICBkcml2ZXJzL21l
+ZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fY2Fwcy5jICAgIHwgIDQ5OCArKysrKysrKysKPiA+ICBk
+cml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZGVjLmMgICAgIHwgIDQyNyArKysrKysr
+Kwo+ID4gIGRyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19kZWMuaCAgICAgfCAgIDMw
+ICsKPiA+ICBkcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZGV2aWNlLmMgIHwgMTA3
+OSArKysrKysrKysrKysrKysrKysrCj4gPiAgZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlvX3Zp
+ZGVvX2RyaXZlci5jICB8ICAzMTUgKysrKysrCj4gPiAgZHJpdmVycy9tZWRpYS92aXJ0aW8vdmly
+dGlvX3ZpZGVvX2VuYy5jICAgICB8ICA1NjkgKysrKysrKysrKwo+ID4gIGRyaXZlcnMvbWVkaWEv
+dmlydGlvL3ZpcnRpb192aWRlb19lbmMuaCAgICAgfCAgIDMwICsKPiA+ICBkcml2ZXJzL21lZGlh
+L3ZpcnRpby92aXJ0aW9fdmlkZW9faGVscGVycy5jIHwgIDI1MCArKysrKwo+ID4gIGRyaXZlcnMv
+bWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb192cS5jICAgICAgfCAxMDEyICsrKysrKysrKysrKysr
+KysrCj4gPiAgaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb19pZHMuaCAgICAgICAgICAgICB8ICAg
+IDIgKwo+ID4gIGluY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fdmlkZW8uaCAgICAgICAgICAgfCAg
+NDY5ICsrKysrKysrCj4gPiAgMTYgZmlsZXMgY2hhbmdlZCwgNTExMCBpbnNlcnRpb25zKCspCj4g
+PiAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvbWVkaWEvdmlydGlvL0tjb25maWcKPiA+ICBj
+cmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9tZWRpYS92aXJ0aW8vTWFrZWZpbGUKPiA+ICBjcmVh
+dGUgbW9kZSAxMDA2NDQgZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlvX3ZpZGVvLmgKPiA+ICBj
+cmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlvX3ZpZGVvX2NhcHMu
+Ywo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlk
+ZW9fZGVjLmMKPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9tZWRpYS92aXJ0aW8vdmly
+dGlvX3ZpZGVvX2RlYy5oCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvbWVkaWEvdmly
+dGlvL3ZpcnRpb192aWRlb19kZXZpY2UuYwo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJz
+L21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZHJpdmVyLmMKPiA+ICBjcmVhdGUgbW9kZSAxMDA2
+NDQgZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlvX3ZpZGVvX2VuYy5jCj4gPiAgY3JlYXRlIG1v
+ZGUgMTAwNjQ0IGRyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19lbmMuaAo+ID4gIGNy
+ZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9faGVscGVy
+cy5jCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192
+aWRlb192cS5jCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IGluY2x1ZGUvdWFwaS9saW51eC92aXJ0
+aW9fdmlkZW8uaAo+ID4gCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9tZWRpYS9LY29uZmlnIGIv
+ZHJpdmVycy9tZWRpYS9LY29uZmlnCj4gPiBpbmRleCAwOTJlNzUwOWFmOWIuLmI4OTE2OWU1ZDI0
+ZCAxMDA2NDQKPiA+IC0tLSBhL2RyaXZlcnMvbWVkaWEvS2NvbmZpZwo+ID4gKysrIGIvZHJpdmVy
+cy9tZWRpYS9LY29uZmlnCj4gPiBAQCAtMjA1LDYgKzIwNSw3IEBAIHNvdXJjZSAiZHJpdmVycy9t
+ZWRpYS9wY2kvS2NvbmZpZyIKPiA+ICBzb3VyY2UgImRyaXZlcnMvbWVkaWEvcGxhdGZvcm0vS2Nv
+bmZpZyIKPiA+ICBzb3VyY2UgImRyaXZlcnMvbWVkaWEvbW1jL0tjb25maWciCj4gPiAgc291cmNl
+ICJkcml2ZXJzL21lZGlhL3JhZGlvL0tjb25maWciCj4gPiArc291cmNlICJkcml2ZXJzL21lZGlh
+L3ZpcnRpby9LY29uZmlnIgo+ID4gCj4gPiAgY29tbWVudCAiU3VwcG9ydGVkIEZpcmVXaXJlIChJ
+RUVFIDEzOTQpIEFkYXB0ZXJzIgo+ID4gICAgICAgICBkZXBlbmRzIG9uIERWQl9DT1JFICYmIEZJ
+UkVXSVJFCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9tZWRpYS9NYWtlZmlsZSBiL2RyaXZlcnMv
+bWVkaWEvTWFrZWZpbGUKPiA+IGluZGV4IDRhMzMwZDBlNWU0MC4uMWQ4ODY3MzBiYWZkIDEwMDY0
+NAo+ID4gLS0tIGEvZHJpdmVycy9tZWRpYS9NYWtlZmlsZQo+ID4gKysrIGIvZHJpdmVycy9tZWRp
+YS9NYWtlZmlsZQo+ID4gQEAgLTM0LDYgKzM0LDggQEAgb2JqLXkgKz0gcmMvCj4gPiAKPiA+ICBv
+YmotJChDT05GSUdfQ0VDX0NPUkUpICs9IGNlYy8KPiA+IAo+ID4gK29iai0kKENPTkZJR19WSVJU
+SU9fVklERU8pICArPSB2aXJ0aW8vCj4gPiArCj4gPiAgIwo+ID4gICMgRmluYWxseSwgbWVyZ2Ug
+dGhlIGRyaXZlcnMgdGhhdCByZXF1aXJlIHRoZSBjb3JlCj4gPiAgIwo+ID4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvbWVkaWEvdmlydGlvL0tjb25maWcgYi9kcml2ZXJzL21lZGlhL3ZpcnRpby9LY29u
+ZmlnCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+ID4gaW5kZXggMDAwMDAwMDAwMDAwLi44MjAx
+MjE3ODI1NGQKPiA+IC0tLSAvZGV2L251bGwKPiA+ICsrKyBiL2RyaXZlcnMvbWVkaWEvdmlydGlv
+L0tjb25maWcKPiA+IEBAIC0wLDAgKzEsMTIgQEAKPiA+ICsjIFNQRFgtTGljZW5zZS1JZGVudGlm
+aWVyOiBHUEwtMi4wKwo+ID4gKyMgVmlkZW8gZHJpdmVyIGZvciB2aXJ0aW8KPiA+ICsKPiA+ICtj
+b25maWcgVklSVElPX1ZJREVPCj4gPiArICAgICAgIHRyaXN0YXRlICJWaXJ0aW8gdmlkZW8gVjRM
+MiBkcml2ZXIiCj4gPiArICAgICAgIGRlcGVuZHMgb24gVklSVElPICYmIFZJREVPX0RFViAmJiBW
+SURFT19WNEwyCj4gPiArICAgICAgIHNlbGVjdCBWSURFT0JVRjJfRE1BX1NHCj4gPiArICAgICAg
+IHNlbGVjdCBWSURFT0JVRjJfRE1BX0NPTlRJRwo+ID4gKyAgICAgICBzZWxlY3QgVjRMMl9NRU0y
+TUVNX0RFVgo+ID4gKyAgICAgICBoZWxwCj4gPiArICAgICAgICAgIFRoaXMgaXMgdGhlIHZpcnR1
+YWwgdmlkZW8gZHJpdmVyIGZvciB2aXJ0aW8uCj4gPiArICAgICAgICAgIFNheSBZIG9yIE0uCj4g
+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9tZWRpYS92aXJ0aW8vTWFrZWZpbGUgYi9kcml2ZXJzL21l
+ZGlhL3ZpcnRpby9NYWtlZmlsZQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGluZGV4IDAw
+MDAwMDAwMDAwMC4uYjE3ZGNlNGNmYzE5Cj4gPiAtLS0gL2Rldi9udWxsCj4gPiArKysgYi9kcml2
+ZXJzL21lZGlhL3ZpcnRpby9NYWtlZmlsZQo+ID4gQEAgLTAsMCArMSwxMiBAQAo+ID4gKyMgU1BE
+WC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjArCj4gPiArCj4gPiArb2JqLSQoQ09ORklHX1ZJ
+UlRJT19WSURFTykgKz0gdmlydGlvLXZpZGVvLm8KPiA+ICsKPiA+ICt2aXJ0aW8tdmlkZW8tb2Jq
+cyA6PSBcCj4gPiArICAgIHZpcnRpb192aWRlb19kcml2ZXIubyBcCj4gPiArICAgIHZpcnRpb192
+aWRlb19kZXZpY2UubyBcCj4gPiArICAgIHZpcnRpb192aWRlb192cS5vIFwKPiA+ICsgICAgdmly
+dGlvX3ZpZGVvX2RlYy5vIFwKPiA+ICsgICAgdmlydGlvX3ZpZGVvX2VuYy5vIFwKPiA+ICsgICAg
+dmlydGlvX3ZpZGVvX2NhcHMubyBcCj4gPiArICAgIHZpcnRpb192aWRlb19oZWxwZXJzLm8KPiA+
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW8uaCBiL2RyaXZl
+cnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlby5oCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+
+ID4gaW5kZXggMDAwMDAwMDAwMDAwLi5jNWE1NzA0MzI2YzAKPiA+IC0tLSAvZGV2L251bGwKPiA+
+ICsrKyBiL2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlby5oCj4gPiBAQCAtMCwwICsx
+LDQwMiBAQAo+ID4gKy8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKyAqLwo+ID4g
+Ky8qIENvbW1vbiBoZWFkZXIgZm9yIHZpcnRpbyB2aWRlbyBkcml2ZXIuCj4gPiArICoKPiA+ICsg
+KiBDb3B5cmlnaHQgMjAxOSBPcGVuU3luZXJneSBHbWJILgo+IAo+IDIwMjA/Cj4gCj4gPiArICoK
+PiA+ICsgKiBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1
+dGUgaXQgYW5kL29yIG1vZGlmeQo+ID4gKyAqIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgR05V
+IEdlbmVyYWwgUHVibGljIExpY2Vuc2UgYXMgcHVibGlzaGVkIGJ5Cj4gPiArICogdGhlIEZyZWUg
+U29mdHdhcmUgRm91bmRhdGlvbjsgZWl0aGVyIHZlcnNpb24gMiBvZiB0aGUgTGljZW5zZSwgb3IK
+PiA+ICsgKiAoYXQgeW91ciBvcHRpb24pIGFueSBsYXRlciB2ZXJzaW9uLgo+ID4gKyAqCj4gPiAr
+ICogVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBi
+ZSB1c2VmdWwsCj4gPiArICogYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRob3V0IGV2ZW4g
+dGhlIGltcGxpZWQgd2FycmFudHkgb2YKPiA+ICsgKiBNRVJDSEFOVEFCSUxJVFkgb3IgRklUTkVT
+UyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhlCj4gPiArICogR05VIEdlbmVyYWwg
+UHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPiA+ICsgKgo+ID4gKyAqIFlvdSBzaG91
+bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNl
+Cj4gPiArICogYWxvbmcgd2l0aCB0aGlzIHByb2dyYW07IGlmIG5vdCwgc2VlIDxodHRwOi8vd3d3
+LmdudS5vcmcvbGljZW5zZXMvPjsuCj4gPiArICovCj4gPiArCj4gPiArI2lmbmRlZiBfVklSVElP
+X1ZJREVPX0gKPiA+ICsjZGVmaW5lIF9WSVJUSU9fVklERU9fSAo+ID4gKwo+ID4gKyNpbmNsdWRl
+IDxsaW51eC92aXJ0aW8uaD4KPiA+ICsjaW5jbHVkZSA8bGludXgvdmlydGlvX2lkcy5oPgo+ID4g
+KyNpbmNsdWRlIDxsaW51eC92aXJ0aW9fY29uZmlnLmg+Cj4gPiArI2luY2x1ZGUgPGxpbnV4L3Zp
+cnRpb192aWRlby5oPgo+ID4gKyNpbmNsdWRlIDxsaW51eC9saXN0Lmg+Cj4gPiArI2luY2x1ZGUg
+PG1lZGlhL3Y0bDItZGV2aWNlLmg+Cj4gPiArI2luY2x1ZGUgPG1lZGlhL3Y0bDItbWVtMm1lbS5o
+Pgo+ID4gKyNpbmNsdWRlIDxtZWRpYS92NGwyLWN0cmxzLmg+Cj4gPiArI2luY2x1ZGUgPG1lZGlh
+L3ZpZGVvYnVmMi1kbWEtc2cuaD4KPiA+ICsjaW5jbHVkZSA8bWVkaWEvdmlkZW9idWYyLWRtYS1j
+b250aWcuaD4KPiA+ICsKPiA+ICsjZGVmaW5lIERSSVZFUl9OQU1FICJ2aXJ0aW8tdmlkZW8iCj4g
+PiArCj4gPiArI2RlZmluZSBNSU5fQlVGU19NSU4gMAo+ID4gKyNkZWZpbmUgTUlOX0JVRlNfTUFY
+IDMyCj4gPiArI2RlZmluZSBNSU5fQlVGU19TVEVQIDEKPiA+ICsjZGVmaW5lIE1JTl9CVUZTX0RF
+RiAxCj4gPiArCj4gPiArZW51bSB2aXJ0aW9fdmlkZW9fZGV2aWNlX3R5cGUgewo+ID4gKyAgICAg
+ICBWSVJUSU9fVklERU9fREVWSUNFX0VOQ09ERVIgPSAweDAxMDAsCj4gPiArICAgICAgIFZJUlRJ
+T19WSURFT19ERVZJQ0VfREVDT0RFUiwKPiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVjdCB2aWRlb19m
+b3JtYXRfZnJhbWUgewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9mcmFt
+ZSBmcmFtZTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19mb3JtYXRfcmFuZ2UgKmZy
+YW1lX3JhdGVzOwo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpZGVvX2Zvcm1hdCB7Cj4gPiAr
+ICAgICAgIHN0cnVjdCBsaXN0X2hlYWQgZm9ybWF0c19saXN0X2VudHJ5Owo+ID4gKyAgICAgICBz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9kZXNjIGRlc2M7Cj4gPiArICAgICAgIHN0cnVjdCB2
+aWRlb19mb3JtYXRfZnJhbWUgKmZyYW1lczsKPiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVjdCB2aWRl
+b19jb250cm9sX2ZtdF9kYXRhIHsKPiA+ICsgICAgICAgdWludDMyX3QgbWluOwo+ID4gKyAgICAg
+ICB1aW50MzJfdCBtYXg7Cj4gPiArICAgICAgIHVpbnQzMl90IG51bTsKPiA+ICsgICAgICAgdWlu
+dDMyX3Qgc2tpcF9tYXNrOwo+ID4gKyAgICAgICB1aW50MzJfdCAqZW50cmllczsKPiA+ICt9Owo+
+ID4gKwo+ID4gK3N0cnVjdCB2aWRlb19jb250cm9sX2Zvcm1hdCB7Cj4gPiArICAgICAgIHN0cnVj
+dCBsaXN0X2hlYWQgY29udHJvbHNfbGlzdF9lbnRyeTsKPiA+ICsgICAgICAgdWludDMyX3QgZm9y
+bWF0Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fY29udHJvbF9mbXRfZGF0YSAqcHJvZmlsZTsK
+PiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2NvbnRyb2xfZm10X2RhdGEgKmxldmVsOwo+ID4gK307
+Cj4gPiArCj4gPiArc3RydWN0IHZpZGVvX3BsYW5lX2Zvcm1hdCB7Cj4gPiArICAgICAgIHVpbnQz
+Ml90IHBsYW5lX3NpemU7Cj4gPiArICAgICAgIHVpbnQzMl90IHN0cmlkZTsKPiA+ICt9Owo+ID4g
+Kwo+ID4gK3N0cnVjdCB2aWRlb19mb3JtYXRfaW5mbyB7Cj4gPiArICAgICAgIHVpbnQzMl90IGZv
+dXJjY19mb3JtYXQ7Cj4gPiArICAgICAgIHVpbnQzMl90IGZyYW1lX3JhdGU7Cj4gPiArICAgICAg
+IHVpbnQzMl90IGZyYW1lX3dpZHRoOwo+ID4gKyAgICAgICB1aW50MzJfdCBmcmFtZV9oZWlnaHQ7
+Cj4gPiArICAgICAgIHVpbnQzMl90IG1pbl9idWZmZXJzOwo+ID4gKyAgICAgICB1aW50MzJfdCBt
+YXhfYnVmZmVyczsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19jcm9wIGNyb3A7Cj4g
+PiArICAgICAgIHVpbnQzMl90IG51bV9wbGFuZXM7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRlb19w
+bGFuZV9mb3JtYXQgcGxhbmVfZm9ybWF0W1ZJUlRJT19WSURFT19NQVhfUExBTkVTXTsKPiA+ICsg
+ICAgICAgYm9vbCBpc191cGRhdGVkOwo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpZGVvX2Nv
+bnRyb2xfaW5mbyB7Cj4gPiArICAgICAgIHVpbnQzMl90IHByb2ZpbGU7Cj4gPiArICAgICAgIHVp
+bnQzMl90IGxldmVsOwo+ID4gKyAgICAgICB1aW50MzJfdCBiaXRyYXRlOwo+ID4gKyAgICAgICBi
+b29sIGlzX3VwZGF0ZWQ7Cj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvOwo+
+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlcjsKPiA+ICsKPiA+ICt0eXBlZGVmIHZvaWQg
+KCp2aXJ0aW9fdmlkZW9fcmVzcF9jYikoc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVm
+ZmVyICp2YnVmKTsKPiA+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgewo+ID4g
+KyAgICAgICBjaGFyICpidWY7Cj4gPiArICAgICAgIGludCBzaXplOwo+ID4gKwo+ID4gKyAgICAg
+ICB2b2lkICpkYXRhX2J1ZjsKPiA+ICsgICAgICAgdWludDMyX3QgZGF0YV9zaXplOwo+ID4gKwo+
+ID4gKyAgICAgICBjaGFyICpyZXNwX2J1ZjsKPiA+ICsgICAgICAgaW50IHJlc3Bfc2l6ZTsKPiA+
+ICsKPiA+ICsgICAgICAgdm9pZCAqcHJpdjsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX3Jlc3Bf
+Y2IgcmVzcF9jYjsKPiA+ICsKPiA+ICsgICAgICAgc3RydWN0IGxpc3RfaGVhZCBsaXN0Owo+ID4g
+K307Cj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19xdWV1ZSB7Cj4gPiArICAgICAgIHN0
+cnVjdCB2aXJ0cXVldWUgKnZxOwo+ID4gKyAgICAgICBzcGlubG9ja190IHFsb2NrOwo+ID4gKyAg
+ICAgICB3YWl0X3F1ZXVlX2hlYWRfdCBhY2tfcXVldWU7Cj4gPiArICAgICAgIHN0cnVjdCB3b3Jr
+X3N0cnVjdCBkZXF1ZXVlX3dvcms7Cj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3Zp
+ZGVvIHsKPiA+ICsgICAgICAgc3RydWN0IHY0bDJfZGV2aWNlIHY0bDJfZGV2Owo+ID4gKyAgICAg
+ICBpbnQgaW5zdGFuY2U7Cj4gCj4gdW51c2VkPwo+IAo+ID4gKwo+ID4gKyAgICAgICBzdHJ1Y3Qg
+dmlydGlvX2RldmljZSAqdmRldjsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19xdWV1
+ZSBjb21tYW5kcTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19xdWV1ZSBldmVudHE7
+Cj4gPiArICAgICAgIHdhaXRfcXVldWVfaGVhZF90IHdxOwo+ID4gKyAgICAgICBib29sIHZxX3Jl
+YWR5Owo+ID4gKwo+ID4gKyAgICAgICBzdHJ1Y3Qga21lbV9jYWNoZSAqdmJ1ZnM7Cj4gPiArCj4g
+PiArICAgICAgIHN0cnVjdCBpZHIgcmVzb3VyY2VfaWRyOwo+ID4gKyAgICAgICBzcGlubG9ja190
+IHJlc291cmNlX2lkcl9sb2NrOwo+ID4gKyAgICAgICBzdHJ1Y3QgaWRyIHN0cmVhbV9pZHI7Cj4g
+PiArICAgICAgIHNwaW5sb2NrX3Qgc3RyZWFtX2lkcl9sb2NrOwo+ID4gKwo+ID4gKyAgICAgICB1
+aW50MzJfdCBtYXhfY2Fwc19sZW47Cj4gPiArICAgICAgIHVpbnQzMl90IG1heF9yZXNwX2xlbjsK
+PiA+ICsgICAgICAgYm9vbCBnb3RfY2FwczsKPiA+ICsgICAgICAgYm9vbCBnb3RfY29udHJvbDsK
+PiA+ICsKPiA+ICsgICAgICAgYm9vbCBoYXNfaW9tbXU7Cj4gPiArICAgICAgIGJvb2wgc3VwcF9u
+b25fY29udGlnOwo+ID4gKyAgICAgICBzdHJ1Y3QgbGlzdF9oZWFkIGRldmljZXNfbGlzdDsKPiA+
+ICsKPiA+ICsgICAgICAgaW50IGRlYnVnOwo+ID4gKyAgICAgICBpbnQgdXNlX2RtYV9tZW07Cj4g
+PiArfTsKPiA+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSB7Cj4gPiArICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZGV2aWNl
+IHZpZGVvX2RldjsKPiA+ICsgICAgICAgc3RydWN0IG11dGV4IHZpZGVvX2Rldl9tdXRleDsKPiA+
+ICsKPiA+ICsgICAgICAgc3RydWN0IHY0bDJfbTJtX2RldiAqbTJtX2RldjsKPiA+ICsKPiA+ICsg
+ICAgICAgc3RydWN0IHdvcmtxdWV1ZV9zdHJ1Y3QgKndvcmtxdWV1ZTsKPiA+ICsKPiA+ICsgICAg
+ICAgc3RydWN0IGxpc3RfaGVhZCBkZXZpY2VzX2xpc3RfZW50cnk7Cj4gPiArICAgICAgIC8qIFZJ
+UlRJT19WSURFT19GVU5DXyAqLwo+ID4gKyAgICAgICB1aW50MzJfdCB0eXBlOwo+ID4gKwo+ID4g
+KyAgICAgICB1aW50MzJfdCBudW1faW5wdXRfZm10czsKPiA+ICsgICAgICAgc3RydWN0IGxpc3Rf
+aGVhZCBpbnB1dF9mbXRfbGlzdDsKPiA+ICsKPiA+ICsgICAgICAgdWludDMyX3QgbnVtX291dHB1
+dF9mbXRzOwo+ID4gKyAgICAgICBzdHJ1Y3QgbGlzdF9oZWFkIG91dHB1dF9mbXRfbGlzdDsKPiA+
+ICsKPiA+ICsgICAgICAgc3RydWN0IGxpc3RfaGVhZCBjb250cm9sc19mbXRfbGlzdDsKPiA+ICt9
+Owo+ID4gKwo+ID4gK2VudW0gdmlkZW9fc3RyZWFtX3N0YXRlIHsKPiA+ICsgICAgICAgU1RSRUFN
+X1NUQVRFX0lETEUgPSAwLAo+ID4gKyAgICAgICBTVFJFQU1fU1RBVEVfSU5JVCwKPiA+ICsgICAg
+ICAgU1RSRUFNX1NUQVRFX01FVEFEQVRBLCAvKiBzcGVjaWZpYyB0byBkZWNvZGVyICovCj4gPiAr
+ICAgICAgIFNUUkVBTV9TVEFURV9SVU5OSU5HLAo+ID4gKyAgICAgICBTVFJFQU1fU1RBVEVfRFJB
+SU4sCj4gPiArICAgICAgIFNUUkVBTV9TVEFURV9TVE9QUEVELAo+ID4gKyAgICAgICBTVFJFQU1f
+U1RBVEVfUkVTRVQsIC8qIHNwZWNpZmljIHRvIGVuY29kZXIgKi8KPiA+ICt9Owo+IAo+IENvdWxk
+IHlvdSB1c2Ugc2FtZSBzdGF0ZSBuYW1lcyB3aXRoIHN0YXRlIG1hY2hpbmVzIGluIHRoZSBWNEwy
+IGRvY3VtZW50YXRpb24/Cj4gaHR0cHM6Ly9saW51eHR2Lm9yZy9kb3dubG9hZHMvdjRsLWR2Yi1h
+cGlzL3VhcGkvdjRsL2Rldi1kZWNvZGVyLmh0bWwjc3RhdGUtbWFjaGluZQo+IAo+IGUuZy4gUmVu
+YW1lIFNUUkVBTV9TVEFURV9NRVRBREFUQSB0byBTVFJFQU1fU1RBVEVfRFlOQU1JQ19SRVNfQ0hB
+TkdFCj4gCj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gewo+ID4gKyAgICAg
+ICB1aW50MzJfdCBzdHJlYW1faWQ7Cj4gPiArICAgICAgIGVudW0gdmlkZW9fc3RyZWFtX3N0YXRl
+IHN0YXRlOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZGV2aWNlICp2aWRlb19kZXY7Cj4gPiAr
+ICAgICAgIHN0cnVjdCB2NGwyX2ZoIGZoOwo+ID4gKyAgICAgICBzdHJ1Y3QgbXV0ZXggdnFfbXV0
+ZXg7Cj4gPiArICAgICAgIHN0cnVjdCB2NGwyX2N0cmxfaGFuZGxlciBjdHJsX2hhbmRsZXI7Cj4g
+PiArICAgICAgIHN0cnVjdCB2aWRlb19mb3JtYXRfaW5mbyBpbl9pbmZvOwo+ID4gKyAgICAgICBz
+dHJ1Y3QgdmlkZW9fZm9ybWF0X2luZm8gb3V0X2luZm87Cj4gPiArICAgICAgIHN0cnVjdCB2aWRl
+b19jb250cm9sX2luZm8gY29udHJvbDsKPiA+ICsgICAgICAgYm9vbCBzcmNfY2xlYXJlZDsKPiA+
+ICsgICAgICAgYm9vbCBkc3RfY2xlYXJlZDsKPiA+ICsgICAgICAgYm9vbCBzcmNfZGVzdHJveWVk
+Owo+ID4gKyAgICAgICBib29sIGRzdF9kZXN0cm95ZWQ7Cj4gPiArICAgICAgIHN0cnVjdCB3b3Jr
+X3N0cnVjdCB3b3JrOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZm9ybWF0X2ZyYW1lICpjdXJy
+ZW50X2ZyYW1lOwo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19idWZmZXIg
+ewo+ID4gKyAgICAgICBzdHJ1Y3QgdjRsMl9tMm1fYnVmZmVyIHY0bDJfbTJtX3ZiOwo+ID4gKyAg
+ICAgICB1aW50MzJfdCByZXNvdXJjZV9pZDsKPiA+ICsgICAgICAgYm9vbCBxdWV1ZWQ7Cj4gPiAr
+fTsKPiA+ICsKPiA+ICtzdGF0aWMgaW5saW5lIGdmcF90Cj4gPiArdmlydGlvX3ZpZGVvX2dmcF9m
+bGFncyhzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2dikKPiA+ICt7Cj4gPiArICAgICAgIGlmICh2di0+
+dXNlX2RtYV9tZW0pCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIEdGUF9ETUE7Cj4gPiArICAg
+ICAgIGVsc2UKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiAr
+c3RhdGljIGlubGluZSBjb25zdCBzdHJ1Y3QgdmIyX21lbV9vcHMgKgo+ID4gK3ZpcnRpb192aWRl
+b19tZW1fb3BzKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2KQo+ID4gK3sKPiA+ICsgICAgICAgaWYg
+KHZ2LT5zdXBwX25vbl9jb250aWcpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuICZ2YjJfZG1h
+X3NnX21lbW9wczsKPiA+ICsgICAgICAgZWxzZQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAm
+dmIyX2RtYV9jb250aWdfbWVtb3BzOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgaW5saW5lIHN0
+cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICoKPiA+ICt0b192aXJ0aW9fdmQoc3RydWN0IHZpZGVv
+X2RldmljZSAqdmlkZW9fZGV2KQo+ID4gK3sKPiA+ICsgICAgICAgcmV0dXJuIGNvbnRhaW5lcl9v
+Zih2aWRlb19kZXYsIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlLAo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgIHZpZGVvX2Rldik7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbmxpbmUg
+c3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKmZpbGUyc3RyZWFtKHN0cnVjdCBmaWxlICpmaWxl
+KQo+ID4gK3sKPiA+ICsgICAgICAgcmV0dXJuIGNvbnRhaW5lcl9vZihmaWxlLT5wcml2YXRlX2Rh
+dGEsIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtLCBmaCk7Cj4gPiArfQo+ID4gKwo+ID4gK3N0
+YXRpYyBpbmxpbmUgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKmN0cmwyc3RyZWFtKHN0cnVj
+dCB2NGwyX2N0cmwgKmN0cmwpCj4gPiArewo+ID4gKyAgICAgICByZXR1cm4gY29udGFpbmVyX29m
+KGN0cmwtPmhhbmRsZXIsIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGN0cmxfaGFuZGxlcik7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRp
+YyBpbmxpbmUgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKndvcmsyc3RyZWFtKHN0cnVjdCB3
+b3JrX3N0cnVjdCAqd29yaykKPiA+ICt7Cj4gPiArICAgICAgIHJldHVybiBjb250YWluZXJfb2Yo
+d29yaywgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0sIHdvcmspOwo+ID4gK30KPiA+ICsKPiA+
+ICtzdGF0aWMgaW5saW5lIHN0cnVjdCB2aXJ0aW9fdmlkZW9fYnVmZmVyICp0b192aXJ0aW9fdmIo
+c3RydWN0IHZiMl9idWZmZXIgKnZiKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZiMl92NGwy
+X2J1ZmZlciAqdjRsMl92YiA9IHRvX3ZiMl92NGwyX2J1ZmZlcih2Yik7Cj4gPiArCj4gPiArICAg
+ICAgIHJldHVybiBjb250YWluZXJfb2YodjRsMl92Yiwgc3RydWN0IHZpcnRpb192aWRlb19idWZm
+ZXIsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgdjRsMl9tMm1fdmIudmIpOwo+ID4g
+K30KPiA+ICsKPiA+ICtzdGF0aWMgaW5saW5lIHVpbnQzMl90IHRvX3ZpcnRpb19xdWV1ZV90eXBl
+KGVudW0gdjRsMl9idWZfdHlwZSB0eXBlKQo+ID4gK3sKPiA+ICsgICAgICAgaWYgKFY0TDJfVFlQ
+RV9JU19PVVRQVVQodHlwZSkpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIFZJUlRJT19WSURF
+T19RVUVVRV9UWVBFX0lOUFVUOwo+ID4gKyAgICAgICBlbHNlCj4gPiArICAgICAgICAgICAgICAg
+cmV0dXJuIFZJUlRJT19WSURFT19RVUVVRV9UWVBFX09VVFBVVDsKPiA+ICt9Cj4gPiArCj4gPiAr
+c3RhdGljIGlubGluZSBib29sIHdpdGhpbl9yYW5nZSh1aW50MzJfdCBtaW4sIHVpbnQzMl90IHZh
+bCwgdWludDMyX3QgbWF4KQo+ID4gK3sKPiA+ICsgICAgICAgcmV0dXJuICgodmFsIC0gbWluKSA8
+PSAobWF4IC0gbWluKSk7Cj4gCj4gVGhpcyBkb2Vzbid0IHZhbGlkYXRlIGlmIChtaW4gPD0gdmFs
+KSBob2xkcy4gRm9yIGV4YW1wbGUsCj4gd2l0aGluX3JhbmdlKDEsIDAsIDApIHJldHVybnMgdHJ1
+ZS4KPiBIb3cgYWJvdXQgY2hhbmdpbmcgdGhpcyBjb25kaXRpb24gdG8gKChtaW4gPD0gdmFsKSAm
+JiAodmFsIDw9IG1heCkpPwo+IAo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgaW5saW5lIGJvb2wg
+bmVlZHNfYWxpZ25tZW50KHVpbnQzMl90IHZhbCwgdWludDMyX3QgYSkKPiA+ICt7Cj4gPiArICAg
+ICAgIGlmIChhID09IDAgfHwgSVNfQUxJR05FRCh2YWwsIGEpKQo+ID4gKyAgICAgICAgICAgICAg
+IHJldHVybiBmYWxzZTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIHRydWU7Cj4gPiArfQo+ID4g
+Kwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fYWxsb2NfdmJ1ZnMoc3RydWN0IHZpcnRpb192aWRlbyAq
+dnYpOwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2ZyZWVfdmJ1ZnMoc3RydWN0IHZpcnRpb192aWRl
+byAqdnYpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fYWxsb2NfZXZlbnRzKHN0cnVjdCB2aXJ0aW9f
+dmlkZW8gKnZ2LCBzaXplX3QgbnVtKTsKPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2Rldmlj
+ZV9pbml0KHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB2b2lkICppbnB1dF9idWYsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKm91dHB1dF9idWYpOwo+ID4gK3ZvaWQgdmly
+dGlvX3ZpZGVvX2RldmljZV9kZWluaXQoc3RydWN0IHZpcnRpb192aWRlbyAqdnYpOwo+ID4gKwo+
+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX3N0cmVhbV9pZF9nZXQoc3RydWN0IHZpcnRpb192aWRlbyAq
+dnYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlk
+ZW9fc3RyZWFtICpzdHJlYW0sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVp
+bnQzMl90ICppZCk7Cj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fc3RyZWFtX2lkX3B1dChzdHJ1Y3Qg
+dmlydGlvX3ZpZGVvICp2diwgdWludDMyX3QgaWQpOwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX3Jl
+c291cmNlX2lkX2dldChzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwgdWludDMyX3QgKmlkKTsKPiA+
+ICt2b2lkIHZpcnRpb192aWRlb19yZXNvdXJjZV9pZF9wdXQoc3RydWN0IHZpcnRpb192aWRlbyAq
+dnYsIHVpbnQzMl90IGlkKTsKPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2NtZF9zdHJlYW1f
+Y3JlYXRlKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB1aW50MzJfdCBzdHJlYW1faWQsCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVudW0gdmlydGlvX3ZpZGVvX2Zvcm1h
+dCBmb3JtYXQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGNo
+YXIgKnRhZyk7Cj4gPiAraW50IHZpcnRpb192aWRlb19jbWRfc3RyZWFtX2Rlc3Ryb3koc3RydWN0
+IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICB1aW50MzJfdCBzdHJlYW1faWQpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fY21kX3N0cmVhbV9k
+cmFpbihzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwgdWludDMyX3Qgc3RyZWFtX2lkKTsKPiA+ICtp
+bnQgdmlydGlvX3ZpZGVvX2NtZF9yZXNvdXJjZV9jcmVhdGUoc3RydWN0IHZpcnRpb192aWRlbyAq
+dnYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3Qgc3Ry
+ZWFtX2lkLCB1aW50MzJfdCByZXNvdXJjZV9pZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICB1aW50MzJfdCBxdWV1ZV90eXBlLAo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fbWVtX2VudHJ5ICplbnRzLAo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IG51bV9w
+bGFuZXMsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQg
+aW50ICpudW1fZW50cnkpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fY21kX3Jlc291cmNlX2Rlc3Ry
+b3lfYWxsKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSwK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQzMl90IHF1
+ZXVlX3R5cGUpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fY21kX3Jlc291cmNlX3F1ZXVlKHN0cnVj
+dCB2aXJ0aW9fdmlkZW8gKnZ2LCB1aW50MzJfdCBzdHJlYW1faWQsCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2J1ZmZlciAqdmlydGlv
+X3ZiLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3QgZGF0
+YV9zaXplW10sIHVpbnQ4X3QgbnVtX2RhdGFfc2l6ZSwKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHVpbnQzMl90IHF1ZXVlX3R5cGUpOwo+ID4gK2ludCB2aXJ0aW9fdmlk
+ZW9fY21kX3F1ZXVlX2NsZWFyKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVh
+bSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQzMl90IHF1ZXVlX3R5
+cGUpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fcXVlcnlfY2FwYWJpbGl0eShzdHJ1Y3QgdmlydGlv
+X3ZpZGVvICp2diwgdm9pZCAqcmVzcF9idWYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgc2l6ZV90IHJlc3Bfc2l6ZSwgdWludDMyX3QgcXVldWVfdHlwZSk7Cj4gPiAraW50
+IHZpcnRpb192aWRlb19xdWVyeV9jb250cm9sX3Byb2ZpbGUoc3RydWN0IHZpcnRpb192aWRlbyAq
+dnYsIHZvaWQgKnJlc3BfYnVmLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgc2l6ZV90IHJlc3Bfc2l6ZSwgdWludDMyX3QgZm9ybWF0KTsKPiA+ICtpbnQgdmlydGlv
+X3ZpZGVvX3F1ZXJ5X2NvbnRyb2xfbGV2ZWwoc3RydWN0IHZpcnRpb192aWRlbyAqdnYsIHZvaWQg
+KnJlc3BfYnVmLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVf
+dCByZXNwX3NpemUsIHVpbnQzMl90IGZvcm1hdCk7Cj4gPiAraW50IHZpcnRpb192aWRlb19jbWRf
+c2V0X3BhcmFtcyhzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9pbmZvICpm
+b3JtYXRfaW5mbywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3Qg
+cXVldWVfdHlwZSk7Cj4gPiAraW50IHZpcnRpb192aWRlb19jbWRfZ2V0X3BhcmFtcyhzdHJ1Y3Qg
+dmlydGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3Ry
+dWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSwKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgdWludDMyX3QgcXVldWVfdHlwZSk7Cj4gPiAraW50IHZpcnRpb192aWRlb19j
+bWRfc2V0X2NvbnRyb2woc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICB1aW50MzJfdCBzdHJlYW1faWQsCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICB1aW50MzJfdCBjb250cm9sLCB1aW50MzJfdCB2YWwpOwo+ID4g
+K2ludCB2aXJ0aW9fdmlkZW9fY21kX2dldF9jb250cm9sKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRl
+b19zdHJlYW0gKnN0cmVhbSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVp
+bnQzMl90IGN0cmwpOwo+ID4gKwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX3F1ZXVlX3Jlc19jaGdf
+ZXZlbnQoc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSk7Cj4gPiArdm9pZCB2aXJ0
+aW9fdmlkZW9fcXVldWVfZW9zX2V2ZW50KHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJl
+YW0pOwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2NtZF9hY2soc3RydWN0IHZpcnRxdWV1ZSAqdnEp
+Owo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2V2ZW50X2FjayhzdHJ1Y3QgdmlydHF1ZXVlICp2cSk7
+Cj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fZGVxdWV1ZV9jbWRfZnVuYyhzdHJ1Y3Qgd29ya19zdHJ1
+Y3QgKndvcmspOwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2RlcXVldWVfZXZlbnRfZnVuYyhzdHJ1
+Y3Qgd29ya19zdHJ1Y3QgKndvcmspOwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2J1Zl9kb25lKHN0
+cnVjdCB2aXJ0aW9fdmlkZW9fYnVmZmVyICp2aXJ0aW9fdmIsCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICB1aW50MzJfdCBmbGFncywgdWludDY0X3QgdGltZXN0YW1wLCB1aW50MzJfdCBz
+aXplKTsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2J1Zl9wbGFuZV9pbml0KHVpbnQzMl90IGlkeCwg
+dWludDMyX3QgcmVzb3VyY2VfaWQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQsCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0sCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2YjJfYnVmZmVyICp2Yik7Cj4gPiAr
+dm9pZCB2aXJ0aW9fdmlkZW9fbWFya19kcmFpbl9jb21wbGV0ZShzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X3N0cmVhbSAqc3RyZWFtLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBzdHJ1Y3QgdmIyX3Y0bDJfYnVmZmVyICp2NGwyX3ZiKTsKPiA+ICsKPiA+ICtpbnQgdmlydGlv
+X3ZpZGVvX3F1ZXVlX3NldHVwKHN0cnVjdCB2YjJfcXVldWUgKnZxLCB1bnNpZ25lZCBpbnQgKm51
+bV9idWZmZXJzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQg
+Km51bV9wbGFuZXMsIHVuc2lnbmVkIGludCBzaXplc1tdLAo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBzdHJ1Y3QgZGV2aWNlICphbGxvY19kZXZzW10pOwo+ID4gK2ludCB2aXJ0aW9f
+dmlkZW9fYnVmX2luaXQoc3RydWN0IHZiMl9idWZmZXIgKnZiKTsKPiA+ICt2b2lkIHZpcnRpb192
+aWRlb19idWZfY2xlYW51cChzdHJ1Y3QgdmIyX2J1ZmZlciAqdmIpOwo+ID4gK2ludCB2aXJ0aW9f
+dmlkZW9fcXVlcnljYXAoc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQgKmZoLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICBzdHJ1Y3QgdjRsMl9jYXBhYmlsaXR5ICpjYXApOwo+ID4gK2ludCB2
+aXJ0aW9fdmlkZW9fZW51bV9mcmFtZXNpemVzKHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpmaCwK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwyX2ZybXNpemVl
+bnVtICpmKTsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2VudW1fZnJhbWVtaW50ZXJ2YWxzKHN0cnVj
+dCBmaWxlICpmaWxlLCB2b2lkICpmaCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgc3RydWN0IHY0bDJfZnJtaXZhbGVudW0gKmYpOwo+ID4gK2ludCB2aXJ0aW9fdmlk
+ZW9fZ19mbXQoc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQgKmZoLCBzdHJ1Y3QgdjRsMl9mb3JtYXQg
+KmYpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fc19mbXQoc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQg
+KmZoLCBzdHJ1Y3QgdjRsMl9mb3JtYXQgKmYpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fdHJ5X2Zt
+dChzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtLAo+ID4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgIHN0cnVjdCB2NGwyX2Zvcm1hdCAqZik7Cj4gPiAraW50IHZpcnRpb192aWRlb19y
+ZXFidWZzKHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpwcml2LAo+ID4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgIHN0cnVjdCB2NGwyX3JlcXVlc3RidWZmZXJzICpyYik7Cj4gPiAraW50IHZpcnRp
+b192aWRlb19zdWJzY3JpYmVfZXZlbnQoc3RydWN0IHY0bDJfZmggKmZoLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IHY0bDJfZXZlbnRfc3Vic2NyaXB0
+aW9uICpzdWIpOwo+ID4gKwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2ZyZWVfY2Fwc19saXN0KHN0
+cnVjdCBsaXN0X2hlYWQgKmNhcHNfbGlzdCk7Cj4gPiAraW50IHZpcnRpb192aWRlb19wYXJzZV92
+aXJ0aW9fY2FwYWJpbGl0eShzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkLAo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdm9pZCAqaW5wdXRfYnVmLCB2
+b2lkICpvdXRwdXRfYnVmKTsKPiA+ICt2b2lkIHZpcnRpb192aWRlb19jbGVhbl9jYXBhYmlsaXR5
+KHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9f
+cGFyc2VfdmlydGlvX2NvbnRyb2woc3RydWN0IHZpcnRpb192aWRlb19kZXZpY2UgKnZ2ZCk7Cj4g
+PiArdm9pZCB2aXJ0aW9fdmlkZW9fY2xlYW5fY29udHJvbChzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Rl
+dmljZSAqdnZkKTsKPiA+ICsKPiA+ICt1aW50MzJfdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X3RvX3Y0
+bDIodWludDMyX3QgZm9ybWF0KTsKPiA+ICt1aW50MzJfdCB2aXJ0aW9fdmlkZW9fY29udHJvbF90
+b192NGwyKHVpbnQzMl90IGNvbnRyb2wpOwo+ID4gK3VpbnQzMl90IHZpcnRpb192aWRlb19wcm9m
+aWxlX3RvX3Y0bDIodWludDMyX3QgcHJvZmlsZSk7Cj4gPiArdWludDMyX3QgdmlydGlvX3ZpZGVv
+X2xldmVsX3RvX3Y0bDIodWludDMyX3QgbGV2ZWwpOwo+ID4gK3VpbnQzMl90IHZpcnRpb192aWRl
+b192NGwyX2Zvcm1hdF90b192aXJ0aW8odWludDMyX3QgdjRsMl9mb3JtYXQpOwo+ID4gK3VpbnQz
+Ml90IHZpcnRpb192aWRlb192NGwyX2NvbnRyb2xfdG9fdmlydGlvKHVpbnQzMl90IHY0bDJfY29u
+dHJvbCk7Cj4gPiArdWludDMyX3QgdmlydGlvX3ZpZGVvX3Y0bDJfcHJvZmlsZV90b192aXJ0aW8o
+dWludDMyX3QgdjRsMl9wcm9maWxlKTsKPiA+ICt1aW50MzJfdCB2aXJ0aW9fdmlkZW9fdjRsMl9s
+ZXZlbF90b192aXJ0aW8odWludDMyX3QgdjRsMl9sZXZlbCk7Cj4gPiArCj4gPiArc3RydWN0IHZp
+ZGVvX2Zvcm1hdCAqZmluZF92aWRlb19mb3JtYXQoc3RydWN0IGxpc3RfaGVhZCAqZm10c19saXN0
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3QgZm91
+cmNjKTsKPiAKPiBBZGQgYSBwcmVmaXggInZpcnRpb192aWRlb18iIGxpa2Ugb3RoZXIgZnVuY3Rp
+b25zPwo+IAo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2Zvcm1hdF9mcm9tX2luZm8oc3RydWN0IHZp
+ZGVvX2Zvcm1hdF9pbmZvICppbmZvLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBzdHJ1Y3QgdjRsMl9waXhfZm9ybWF0X21wbGFuZSAqcGl4X21wKTsKPiA+ICt2b2lkIHZp
+cnRpb192aWRlb19mb3JtYXRfZmlsbF9kZWZhdWx0X2luZm8oc3RydWN0IHZpZGVvX2Zvcm1hdF9p
+bmZvICpkc3RfaW5mbywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBzdHJ1Y3QgdmlkZW9fZm9ybWF0X2luZm8gKnNyY19pbmZvKTsKPiA+ICsKPiA+ICtpbnQg
+dmlydGlvX3ZpZGVvX2dfc2VsZWN0aW9uKHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpmaCwKPiA+
+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHY0bDJfc2VsZWN0aW9uICpzZWwp
+Owo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fc19zZWxlY3Rpb24oc3RydWN0IGZpbGUgKmZpbGUsIHZv
+aWQgKmZoLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdjRsMl9zZWxl
+Y3Rpb24gKnNlbCk7Cj4gPiArCj4gPiArI2VuZGlmIC8qIF9WSVJUSU9fVklERU9fSCAqLwo+ID4g
+ZGlmZiAtLWdpdCBhL2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19jYXBzLmMgYi9k
+cml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fY2Fwcy5jCj4gPiBuZXcgZmlsZSBtb2Rl
+IDEwMDY0NAo+ID4gaW5kZXggMDAwMDAwMDAwMDAwLi4yZjlkNGRhOTI4MTAKPiA+IC0tLSAvZGV2
+L251bGwKPiA+ICsrKyBiL2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19jYXBzLmMK
+PiA+IEBAIC0wLDAgKzEsNDk4IEBACj4gPiArLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQ
+TC0yLjArCj4gPiArLyogRHJpdmVyIGZvciB2aXJ0aW8gdmlkZW8gZGV2aWNlLgo+ID4gKyAqCj4g
+PiArICogQ29weXJpZ2h0IDIwMTkgT3BlblN5bmVyZ3kgR21iSC4KPiA+ICsgKgo+ID4gKyAqIFRo
+aXMgcHJvZ3JhbSBpcyBmcmVlIHNvZnR3YXJlOyB5b3UgY2FuIHJlZGlzdHJpYnV0ZSBpdCBhbmQv
+b3IgbW9kaWZ5Cj4gPiArICogaXQgdW5kZXIgdGhlIHRlcm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQ
+dWJsaWMgTGljZW5zZSBhcyBwdWJsaXNoZWQgYnkKPiA+ICsgKiB0aGUgRnJlZSBTb2Z0d2FyZSBG
+b3VuZGF0aW9uOyBlaXRoZXIgdmVyc2lvbiAyIG9mIHRoZSBMaWNlbnNlLCBvcgo+ID4gKyAqIChh
+dCB5b3VyIG9wdGlvbikgYW55IGxhdGVyIHZlcnNpb24uCj4gPiArICoKPiA+ICsgKiBUaGlzIHBy
+b2dyYW0gaXMgZGlzdHJpYnV0ZWQgaW4gdGhlIGhvcGUgdGhhdCBpdCB3aWxsIGJlIHVzZWZ1bCwK
+PiA+ICsgKiBidXQgV0lUSE9VVCBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZlbiB0aGUgaW1wbGll
+ZCB3YXJyYW50eSBvZgo+ID4gKyAqIE1FUkNIQU5UQUJJTElUWSBvciBGSVRORVNTIEZPUiBBIFBB
+UlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUKPiA+ICsgKiBHTlUgR2VuZXJhbCBQdWJsaWMgTGlj
+ZW5zZSBmb3IgbW9yZSBkZXRhaWxzLgo+ID4gKyAqCj4gPiArICogWW91IHNob3VsZCBoYXZlIHJl
+Y2VpdmVkIGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UKPiA+ICsgKiBh
+bG9uZyB3aXRoIHRoaXMgcHJvZ3JhbTsgaWYgbm90LCBzZWUgPGh0dHA6Ly93d3cuZ251Lm9yZy9s
+aWNlbnNlcy8+Oy4KPiA+ICsgKi8KPiA+ICsKPiA+ICsjaW5jbHVkZSA8bWVkaWEvdjRsMi1pb2N0
+bC5oPgo+ID4gKyNpbmNsdWRlIDxtZWRpYS92aWRlb2J1ZjItZG1hLXNnLmg+Cj4gPiArCj4gPiAr
+I2luY2x1ZGUgInZpcnRpb192aWRlby5oIgo+ID4gKwo+ID4gK3N0YXRpYyB2b2lkIHZpcnRpb192
+aWRlb19mcmVlX2ZyYW1lX3JhdGVzKHN0cnVjdCB2aWRlb19mb3JtYXRfZnJhbWUgKmZyYW1lKQo+
+ID4gK3sKPiA+ICsgICAgICAgaWYgKCFmcmFtZSkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm47
+Cj4gPiArCj4gPiArICAgICAgIGtmcmVlKGZyYW1lLT5mcmFtZV9yYXRlcyk7Cj4gPiArfQo+ID4g
+Kwo+ID4gK3N0YXRpYyB2b2lkIHZpcnRpb192aWRlb19mcmVlX2ZyYW1lcyhzdHJ1Y3QgdmlkZW9f
+Zm9ybWF0ICpmbXQpCj4gPiArewo+ID4gKyAgICAgICBzaXplX3QgaWR4ID0gMDsKPiA+ICsKPiA+
+ICsgICAgICAgaWYgKCFmbXQpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuOwo+ID4gKwo+ID4g
+KyAgICAgICBmb3IgKGlkeCA9IDA7IGlkeCA8IGZtdC0+ZGVzYy5udW1fZnJhbWVzOyBpZHgrKykK
+PiA+ICsgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9fZnJlZV9mcmFtZV9yYXRlcygmZm10LT5m
+cmFtZXNbaWR4XSk7Cj4gPiArICAgICAgIGtmcmVlKGZtdC0+ZnJhbWVzKTsKPiA+ICt9Cj4gPiAr
+Cj4gPiArc3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX2ZyZWVfZm10KHN0cnVjdCBsaXN0X2hlYWQg
+KmZtdHNfbGlzdCkKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRlb19mb3JtYXQgKmZtdCA9
+IE5VTEw7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRlb19mb3JtYXQgKnRtcCA9IE5VTEw7Cj4gPiAr
+Cj4gPiArICAgICAgIGxpc3RfZm9yX2VhY2hfZW50cnlfc2FmZShmbXQsIHRtcCwgZm10c19saXN0
+LCBmb3JtYXRzX2xpc3RfZW50cnkpIHsKPiA+ICsgICAgICAgICAgICAgICBsaXN0X2RlbCgmZm10
+LT5mb3JtYXRzX2xpc3RfZW50cnkpOwo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192aWRlb19m
+cmVlX2ZyYW1lcyhmbXQpOwo+ID4gKyAgICAgICAgICAgICAgIGtmcmVlKGZtdCk7Cj4gPiArICAg
+ICAgIH0KPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX2ZyZWVfZm10
+cyhzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkKQo+ID4gK3sKPiA+ICsgICAgICAgdmly
+dGlvX3ZpZGVvX2ZyZWVfZm10KCZ2dmQtPmlucHV0X2ZtdF9saXN0KTsKPiA+ICsgICAgICAgdmly
+dGlvX3ZpZGVvX2ZyZWVfZm10KCZ2dmQtPm91dHB1dF9mbXRfbGlzdCk7Cj4gPiArfQo+ID4gKwo+
+ID4gK3N0YXRpYyB2b2lkIGFzc2lnbl9mb3JtYXRfcmFuZ2Uoc3RydWN0IHZpcnRpb192aWRlb19m
+b3JtYXRfcmFuZ2UgKmRfcmFuZ2UsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X3JhbmdlICpzX3JhbmdlKQo+IAo+IEFkZCAidmly
+dGlvX3ZpZGVvIiBwcmVmaXg/Cj4gCj4gPiArewo+ID4gKyAgICAgICBkX3JhbmdlLT5taW4gPSBs
+ZTMyX3RvX2NwdShzX3JhbmdlLT5taW4pOwo+ID4gKyAgICAgICBkX3JhbmdlLT5tYXggPSBsZTMy
+X3RvX2NwdShzX3JhbmdlLT5tYXgpOwo+ID4gKyAgICAgICBkX3JhbmdlLT5zdGVwID0gbGUzMl90
+b19jcHUoc19yYW5nZS0+c3RlcCk7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBzaXplX3QKPiA+
+ICt2aXJ0aW9fdmlkZW9fcGFyc2VfdmlydGlvX2ZyYW1lX3JhdGUoc3RydWN0IHZpcnRpb192aWRl
+b19kZXZpY2UgKnZ2ZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9yYW5nZSAqZl9yYXRlLAo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKmJ1ZikKPiA+ICt7Cj4gPiArICAgICAgIHN0
+cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X3JhbmdlICp2aXJ0aW9fZnJhbWVfcmF0ZSA9IE5VTEw7
+Cj4gCj4gR2VuZXJhbGx5IHNwZWFraW5nLCBpdCdzIGEgZ29vZCBpZGVhIHRvIGF2b2lkIGluaXRp
+YWxpemluZyBhIGxvY2FsCj4gcG9pbnRlciB3aXRoIE5VTEwgYXQgaXRzIGRlY2xhcmF0aW9uIGlm
+IGl0IG11c3QgYmUgaW5pdGlhbGl6ZWQgYmVsb3cuCj4gVGhpcyBpcyBiZWNhdXNlIGNvbXBpbGVy
+cyBjYW4gcmFpc2UgYW4gZXJyb3Igd2hlbiB5b3UgZm9yZ2V0IHRoZQo+IGFjdHVhbCBpbml0aWFs
+aXphdGlvbi4KPiAKPiBUaG91Z2ggaXQncyBub3QgcHJvYmxlbWF0aWMgaW1tZWRpYXRlbHksIGNv
+dWxkIHlvdSBhdm9pZCB0aGlzPwo+IEFjdHVhbGx5LCBzb21lIHBhcnRzIG9mIHRoaXMgcGF0Y2gg
+ZG9uJ3QgZG8gc28uCj4gCj4gPiArICAgICAgIHNpemVfdCBmcmFtZV9yYXRlX3NpemUgPSBzaXpl
+b2Yoc3RydWN0IHZpcnRpb192aWRlb19mb3JtYXRfcmFuZ2UpOwo+ID4gKwo+ID4gKyAgICAgICBp
+ZiAoIWZfcmF0ZSB8fCAhYnVmIHx8ICF2dmQpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIDA7
+Cj4gPiArCj4gPiArICAgICAgIHZpcnRpb19mcmFtZV9yYXRlID0gYnVmOwo+ID4gKyAgICAgICBh
+c3NpZ25fZm9ybWF0X3JhbmdlKGZfcmF0ZSwgdmlydGlvX2ZyYW1lX3JhdGUpOwo+ID4gKyAgICAg
+ICByZXR1cm4gZnJhbWVfcmF0ZV9zaXplOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgc2l6ZV90
+IHZpcnRpb192aWRlb19wYXJzZV92aXJ0aW9fZnJhbWUoc3RydWN0IHZpcnRpb192aWRlb19kZXZp
+Y2UgKnZ2ZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBzdHJ1Y3QgdmlkZW9fZm9ybWF0X2ZyYW1lICpmcm0sCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgdm9pZCAqYnVmKQo+ID4gK3sKPiA+ICsgICAgICAg
+c3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlv
+X3ZpZGVvX2Zvcm1hdF9mcmFtZSAqdmlydGlvX2ZyYW1lID0gTlVMTDsKPiA+ICsgICAgICAgc3Ry
+dWN0IHZpcnRpb192aWRlb19mb3JtYXRfZnJhbWUgKmZyYW1lID0gJmZybS0+ZnJhbWU7Cj4gPiAr
+ICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X3JhbmdlICpyYXRlID0gTlVMTDsKPiA+
+ICsgICAgICAgc2l6ZV90IGlkeCwgb2Zmc2V0ID0gMDsKPiA+ICsgICAgICAgc2l6ZV90IGV4dHJh
+X3NpemUgPSAwOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoIWZyYW1lIHx8ICFidWYgfHwgIXZ2ZCkK
+PiA+ICsgICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICsKPiA+ICsgICAgICAgdnYgPSB2dmQt
+PnZ2Owo+ID4gKyAgICAgICB2aXJ0aW9fZnJhbWUgPSBidWY7Cj4gPiArCj4gPiArICAgICAgIGFz
+c2lnbl9mb3JtYXRfcmFuZ2UoJmZyYW1lLT53aWR0aCwgJnZpcnRpb19mcmFtZS0+d2lkdGgpOwo+
+ID4gKyAgICAgICBhc3NpZ25fZm9ybWF0X3JhbmdlKCZmcmFtZS0+aGVpZ2h0LCAmdmlydGlvX2Zy
+YW1lLT5oZWlnaHQpOwo+ID4gKwo+ID4gKyAgICAgICBmcmFtZS0+bnVtX3JhdGVzID0gbGUzMl90
+b19jcHUodmlydGlvX2ZyYW1lLT5udW1fcmF0ZXMpOwo+ID4gKyAgICAgICBmcm0tPmZyYW1lX3Jh
+dGVzID0gIGtjYWxsb2MoZnJhbWUtPm51bV9yYXRlcywKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHNpemVvZihzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9yYW5nZSks
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBHRlBfS0VSTkVMKTsKPiA+
+ICsKPiA+ICsgICAgICAgb2Zmc2V0ID0gc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0
+X2ZyYW1lKTsKPiA+ICsgICAgICAgZm9yIChpZHggPSAwOyBpZHggPCBmcmFtZS0+bnVtX3JhdGVz
+OyBpZHgrKykgewo+ID4gKyAgICAgICAgICAgICAgIHJhdGUgPSAmZnJtLT5mcmFtZV9yYXRlc1tp
+ZHhdOwo+ID4gKyAgICAgICAgICAgICAgIGV4dHJhX3NpemUgPQo+ID4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgdmlydGlvX3ZpZGVvX3BhcnNlX3ZpcnRpb19mcmFtZV9yYXRlKHZ2ZCwgcmF0ZSwK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBidWYgKyBvZmZzZXQpOwo+ID4gKyAgICAgICAgICAgICAgIGlmIChleHRyYV9zaXpl
+ID09IDApIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGtmcmVlKGZybS0+ZnJhbWVfcmF0
+ZXMpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2Rldiwg
+ImZhaWxlZCB0byBwYXJzZSBmcmFtZSByYXRlXG4iKTsKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgIHJldHVybiAwOwo+ID4gKyAgICAgICAgICAgICAgIH0KPiA+ICsgICAgICAgICAgICAgICBv
+ZmZzZXQgKz0gZXh0cmFfc2l6ZTsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1
+cm4gb2Zmc2V0Owo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgc2l6ZV90IHZpcnRpb192aWRlb19w
+YXJzZV92aXJ0aW9fZm10KHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aWRlb19mb3Jt
+YXQgKmZtdCwgdm9pZCAqYnVmKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRl
+byAqdnYgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9kZXNj
+ICp2aXJ0aW9fZm10X2Rlc2MgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X2Zvcm1hdF9kZXNjICpmbXRfZGVzYyA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRlb19m
+b3JtYXRfZnJhbWUgKmZyYW1lID0gTlVMTDsKPiA+ICsgICAgICAgc2l6ZV90IGlkeCwgb2Zmc2V0
+ID0gMDsKPiA+ICsgICAgICAgc2l6ZV90IGV4dHJhX3NpemUgPSAwOwo+ID4gKwo+ID4gKyAgICAg
+ICBpZiAoIWZtdCB8fCAhYnVmIHx8ICF2dmQpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIDA7
+Cj4gPiArCj4gPiArICAgICAgIHZ2ID0gdnZkLT52djsKPiA+ICsgICAgICAgdmlydGlvX2ZtdF9k
+ZXNjID0gYnVmOwo+ID4gKyAgICAgICBmbXRfZGVzYyA9ICZmbXQtPmRlc2M7Cj4gPiArCj4gPiAr
+ICAgICAgIGZtdF9kZXNjLT5mb3JtYXQgPQo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192aWRl
+b19mb3JtYXRfdG9fdjRsMgo+ID4gKyAgICAgICAgICAgICAgIChsZTMyX3RvX2NwdSh2aXJ0aW9f
+Zm10X2Rlc2MtPmZvcm1hdCkpOwo+ID4gKyAgICAgICBmbXRfZGVzYy0+bWFzayA9IGxlNjRfdG9f
+Y3B1KHZpcnRpb19mbXRfZGVzYy0+bWFzayk7Cj4gPiArICAgICAgIGZtdF9kZXNjLT5wbGFuZXNf
+bGF5b3V0ID0gbGUzMl90b19jcHUodmlydGlvX2ZtdF9kZXNjLT5wbGFuZXNfbGF5b3V0KTsKPiA+
+ICsKPiA+ICsgICAgICAgZm10X2Rlc2MtPm51bV9mcmFtZXMgPSBsZTMyX3RvX2NwdSh2aXJ0aW9f
+Zm10X2Rlc2MtPm51bV9mcmFtZXMpOwo+ID4gKyAgICAgICBmbXQtPmZyYW1lcyA9IGtjYWxsb2Mo
+Zm10X2Rlc2MtPm51bV9mcmFtZXMsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+aXplb2Yoc3RydWN0IHZpZGVvX2Zvcm1hdF9mcmFtZSksCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBHRlBfS0VSTkVMKTsKPiA+ICsKPiA+ICsgICAgICAgb2Zmc2V0ID0gc2l6ZW9m
+KHN0cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X2Rlc2MpOwo+ID4gKyAgICAgICBmb3IgKGlkeCA9
+IDA7IGlkeCA8IGZtdF9kZXNjLT5udW1fZnJhbWVzOyBpZHgrKykgewo+ID4gKyAgICAgICAgICAg
+ICAgIGZyYW1lID0gJmZtdC0+ZnJhbWVzW2lkeF07Cj4gPiArICAgICAgICAgICAgICAgZXh0cmFf
+c2l6ZSA9Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9fcGFyc2Vfdmly
+dGlvX2ZyYW1lKHZ2ZCwgZnJhbWUsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGJ1ZiArIG9mZnNldCk7Cj4gPiArICAgICAgICAgICAg
+ICAgaWYgKGV4dHJhX3NpemUgPT0gMCkgewo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAga2Zy
+ZWUoZm10LT5mcmFtZXMpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2
+LT52NGwyX2RldiwgImZhaWxlZCB0byBwYXJzZSBmcmFtZVxuIik7Cj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICByZXR1cm4gMDsKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArICAgICAgICAg
+ICAgICAgb2Zmc2V0ICs9IGV4dHJhX3NpemU7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAg
+ICAgcmV0dXJuIG9mZnNldDsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19wYXJz
+ZV92aXJ0aW9fY2FwYWJpbGl0eShzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkLAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2b2lkICppbnB1dF9i
+dWYsIHZvaWQgKm91dHB1dF9idWYpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3Zp
+ZGVvICp2diA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fcXVlcnlfY2Fw
+YWJpbGl0eV9yZXNwICppbnB1dF9yZXNwID0gaW5wdXRfYnVmOwo+ID4gKyAgICAgICBzdHJ1Y3Qg
+dmlydGlvX3ZpZGVvX3F1ZXJ5X2NhcGFiaWxpdHlfcmVzcCAqb3V0cHV0X3Jlc3AgPSBvdXRwdXRf
+YnVmOwo+ID4gKyAgICAgICBpbnQgZm10X2lkeCA9IDA7Cj4gPiArICAgICAgIHNpemVfdCBvZmZz
+ZXQgPSAwOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZm9ybWF0ICpmbXQgPSBOVUxMOwo+ID4g
+Kwo+ID4gKyAgICAgICBpZiAoIWlucHV0X2J1ZiB8fCAhb3V0cHV0X2J1ZiB8fCAhdnZkKQo+ID4g
+KyAgICAgICAgICAgICAgIHJldHVybiAtMTsKPiAKPiBJbnN0ZWFkIG9mIGhhcmQtY29kaW5nIC0x
+LCBsZXQncyB1c2UgLUVJTlZBTC4KPiBTYW1lIGNvbW1lbnRzIGZvciBhbGwgb3RoZXIgInJldHVy
+biAtMSIgaW4gdGhpcyBwYXRjaC4KPiAKPiA+ICsKPiA+ICsgICAgICAgdnYgPSB2dmQtPnZ2Owo+
+ID4gKwo+ID4gKyAgICAgICBpZiAobGUzMl90b19jcHUoaW5wdXRfcmVzcC0+bnVtX2Rlc2NzKSA8
+PSAwIHx8Cj4gPiArICAgICAgICAgICBsZTMyX3RvX2NwdShvdXRwdXRfcmVzcC0+bnVtX2Rlc2Nz
+KSA8PSAwKSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwgImlu
+dmFsaWQgY2FwYWJpbGl0eSByZXNwb25zZVxuIik7Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJu
+IC0xOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHZ2ZC0+bnVtX2lucHV0X2ZtdHMg
+PSBsZTMyX3RvX2NwdShpbnB1dF9yZXNwLT5udW1fZGVzY3MpOwo+ID4gKyAgICAgICBvZmZzZXQg
+PSBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9jYXBhYmlsaXR5X3Jlc3ApOwo+ID4g
+Kwo+ID4gKyAgICAgICBmb3IgKGZtdF9pZHggPSAwOyBmbXRfaWR4IDwgdnZkLT5udW1faW5wdXRf
+Zm10czsgZm10X2lkeCsrKSB7Cj4gPiArICAgICAgICAgICAgICAgc2l6ZV90IGZtdF9zaXplID0g
+MDsKPiA+ICsKPiA+ICsgICAgICAgICAgICAgICBmbXQgPSBremFsbG9jKHNpemVvZigqZm10KSwg
+R0ZQX0tFUk5FTCk7Cj4gPiArICAgICAgICAgICAgICAgaWYgKCFmbXQpIHsKPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgIHZpcnRpb192aWRlb19mcmVlX2ZtdHModnZkKTsKPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgIHJldHVybiAtMTsKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArCj4g
+PiArICAgICAgICAgICAgICAgZm10X3NpemUgPSB2aXJ0aW9fdmlkZW9fcGFyc2VfdmlydGlvX2Zt
+dCh2dmQsIGZtdCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGlucHV0X2J1ZiArIG9mZnNldCk7Cj4gPiArICAgICAgICAgICAgICAg
+aWYgKGZtdF9zaXplID09IDApIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHY0bDJfZXJy
+KCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gcGFyc2UgaW5wdXQgZm10XG4iKTsKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIHZpcnRpb192aWRlb19mcmVlX2ZtdHModnZkKTsKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIGtmcmVlKGZtdCk7Cj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICByZXR1cm4gLTE7Cj4gCj4gSW5zdGVhZCBvZiByZXR1cm5pbmcgZnJvbSBoZXJlLCBwbGVhc2Ug
+YWRkIGFuIGVycm9yIGxhYmVsIGFuZCBnb3RvCj4gc3RhdGVtZW50cyB0byBjZW50cmFsaXplIGVy
+cm9yIGhhbmRsaW5ncy4KPiBjZi4gaHR0cHM6Ly93d3cua2VybmVsLm9yZy9kb2MvaHRtbC92NS40
+L3Byb2Nlc3MvY29kaW5nLXN0eWxlLmh0bWwjY2VudHJhbGl6ZWQtZXhpdGluZy1vZi1mdW5jdGlv
+bnMKPiAKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArICAgICAgICAgICAgICAgb2Zmc2V0ICs9
+IGZtdF9zaXplOwo+ID4gKyAgICAgICAgICAgICAgIGxpc3RfYWRkKCZmbXQtPmZvcm1hdHNfbGlz
+dF9lbnRyeSwgJnZ2ZC0+aW5wdXRfZm10X2xpc3QpOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiAr
+ICAgICAgIHZ2ZC0+bnVtX291dHB1dF9mbXRzID0gbGUzMl90b19jcHUob3V0cHV0X3Jlc3AtPm51
+bV9kZXNjcyk7Cj4gPiArICAgICAgIG9mZnNldCA9IHNpemVvZihzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X3F1ZXJ5X2NhcGFiaWxpdHlfcmVzcCk7Cj4gPiArCj4gPiArICAgICAgIGZvciAoZm10X2lkeCA9
+IDA7IGZtdF9pZHggPCB2dmQtPm51bV9vdXRwdXRfZm10czsgZm10X2lkeCsrKSB7Cj4gPiArICAg
+ICAgICAgICAgICAgc2l6ZV90IGZtdF9zaXplID0gMDsKPiA+ICsKPiA+ICsgICAgICAgICAgICAg
+ICBmbXQgPSBremFsbG9jKHNpemVvZigqZm10KSwgR0ZQX0tFUk5FTCk7Cj4gPiArICAgICAgICAg
+ICAgICAgaWYgKCFmbXQpIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHZpcnRpb192aWRl
+b19mcmVlX2ZtdHModnZkKTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtMTsK
+PiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgZm10X3NpemUg
+PSB2aXJ0aW9fdmlkZW9fcGFyc2VfdmlydGlvX2ZtdCh2dmQsIGZtdCwKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG91dHB1dF9idWYg
+KyBvZmZzZXQpOwo+ID4gKyAgICAgICAgICAgICAgIGlmIChmbXRfc2l6ZSA9PSAwKSB7Cj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRv
+IHBhcnNlIG91dHB1dCBmbXRcbiIpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdmlydGlv
+X3ZpZGVvX2ZyZWVfZm10cyh2dmQpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAga2ZyZWUo
+Zm10KTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtMTsKPiA+ICsgICAgICAg
+ICAgICAgICB9Cj4gPiArICAgICAgICAgICAgICAgb2Zmc2V0ICs9IGZtdF9zaXplOwo+ID4gKyAg
+ICAgICAgICAgICAgIGxpc3RfYWRkKCZmbXQtPmZvcm1hdHNfbGlzdF9lbnRyeSwgJnZ2ZC0+b3V0
+cHV0X2ZtdF9saXN0KTsKPiA+ICsgICAgICAgfQo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9
+Cj4gPiArCj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fY2xlYW5fY2FwYWJpbGl0eShzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX2RldmljZSAqdnZkKQo+ID4gK3sKPiA+ICsgICAgICAgaWYgKCF2dmQpCj4gPiAr
+ICAgICAgICAgICAgICAgcmV0dXJuOwo+ID4gKyAgICAgICB2aXJ0aW9fdmlkZW9fZnJlZV9mbXRz
+KHZ2ZCk7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyB2b2lkCj4gPiArdmlydGlvX3ZpZGVvX2Zy
+ZWVfY29udHJvbF9mbXRfZGF0YShzdHJ1Y3QgdmlkZW9fY29udHJvbF9mbXRfZGF0YSAqZGF0YSkK
+PiA+ICt7Cj4gPiArICAgICAgIGlmICghZGF0YSkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm47
+Cj4gPiArCj4gPiArICAgICAgIGtmcmVlKGRhdGEtPmVudHJpZXMpOwo+ID4gKyAgICAgICBrZnJl
+ZShkYXRhKTsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX2ZyZWVf
+Y29udHJvbF9mb3JtYXRzKHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQpCj4gPiArewo+
+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fY29udHJvbF9mb3JtYXQgKmNfZm10ID0gTlVMTDsKPiA+
+ICsgICAgICAgc3RydWN0IHZpZGVvX2NvbnRyb2xfZm9ybWF0ICp0bXAgPSBOVUxMOwo+ID4gKwo+
+ID4gKyAgICAgICBsaXN0X2Zvcl9lYWNoX2VudHJ5X3NhZmUoY19mbXQsIHRtcCwgJnZ2ZC0+Y29u
+dHJvbHNfZm10X2xpc3QsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb250
+cm9sc19saXN0X2VudHJ5KSB7Cj4gPiArICAgICAgICAgICAgICAgbGlzdF9kZWwoJmNfZm10LT5j
+b250cm9sc19saXN0X2VudHJ5KTsKPiA+ICsgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9fZnJl
+ZV9jb250cm9sX2ZtdF9kYXRhKGNfZm10LT5wcm9maWxlKTsKPiA+ICsgICAgICAgICAgICAgICB2
+aXJ0aW9fdmlkZW9fZnJlZV9jb250cm9sX2ZtdF9kYXRhKGNfZm10LT5sZXZlbCk7Cj4gPiArICAg
+ICAgICAgICAgICAga2ZyZWUoY19mbXQpOwo+ID4gKyAgICAgICB9Cj4gPiArfQo+ID4gKwo+ID4g
+K3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX3BhcnNlX2NvbnRyb2xfbGV2ZWxzKHN0cnVjdCB2aXJ0
+aW9fdmlkZW9fZGV2aWNlICp2dmQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBzdHJ1Y3QgdmlkZW9fY29udHJvbF9mb3JtYXQgKmZtdCkKPiA+ICt7Cj4g
+PiArICAgICAgIGludCBpZHgsIHJldCA9IDA7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlk
+ZW9fcXVlcnlfY29udHJvbF9yZXNwICpyZXNwX2J1ZiA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVj
+dCB2aXJ0aW9fdmlkZW9fcXVlcnlfY29udHJvbF9yZXNwX2xldmVsICpsX3Jlc3BfYnVmID0gTlVM
+TDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSBOVUxMOwo+ID4gKyAgICAg
+ICB1aW50MzJfdCB2aXJ0aW9fZm9ybWF0LCBudW1fbGV2ZWxzLCBtYXNrID0gMDsKPiA+ICsgICAg
+ICAgdWludDMyX3QgKnZpcnRpb19sZXZlbHMgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3Qgdmlk
+ZW9fY29udHJvbF9mbXRfZGF0YSAqbGV2ZWwgPSBOVUxMOwo+ID4gKyAgICAgICBpbnQgbWF4ID0g
+MCwgbWluID0gVUlOVF9NQVg7Cj4gPiArICAgICAgIHNpemVfdCByZXNwX3NpemU7Cj4gPiArCj4g
+PiArICAgICAgIGlmICghdnZkKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+
+ID4gKwo+ID4gKyAgICAgICB2diA9IHZ2ZC0+dnY7Cj4gPiArICAgICAgIHJlc3Bfc2l6ZSA9IHZ2
+LT5tYXhfcmVzcF9sZW47Cj4gPiArCj4gPiArICAgICAgIHZpcnRpb19mb3JtYXQgPSB2aXJ0aW9f
+dmlkZW9fdjRsMl9mb3JtYXRfdG9fdmlydGlvKGZtdC0+Zm9ybWF0KTsKPiA+ICsKPiA+ICsgICAg
+ICAgcmVzcF9idWYgPSBremFsbG9jKHJlc3Bfc2l6ZSwgR0ZQX0tFUk5FTCk7Cj4gPiArICAgICAg
+IGlmIChJU19FUlIocmVzcF9idWYpKSB7Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gUFRSX0VS
+UihyZXNwX2J1Zik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnI7Cj4gPiArICAgICAgIH0K
+PiA+ICsKPiA+ICsgICAgICAgdnYtPmdvdF9jb250cm9sID0gZmFsc2U7Cj4gPiArICAgICAgIHJl
+dCA9IHZpcnRpb192aWRlb19xdWVyeV9jb250cm9sX2xldmVsKHZ2LCByZXNwX2J1ZiwgcmVzcF9z
+aXplLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2
+aXJ0aW9fZm9ybWF0KTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICAg
+IHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gcXVlcnkgbGV2ZWxcbiIpOwo+ID4g
+KyAgICAgICAgICAgICAgIGdvdG8gZXJyOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAg
+IHJldCA9IHdhaXRfZXZlbnRfdGltZW91dCh2di0+d3EsIHZ2LT5nb3RfY29udHJvbCwgNSAqIEha
+KTsKPiA+ICsgICAgICAgaWYgKHJldCA9PSAwKSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9l
+cnIoJnZ2LT52NGwyX2RldiwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAidGltZWQgb3V0
+IHdhaXRpbmcgZm9yIHF1ZXJ5IGxldmVsXG4iKTsKPiA+ICsgICAgICAgICAgICAgICByZXQgPSAt
+RUlPOwo+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZXJyOwo+ID4gKyAgICAgICB9Cj4gPiArCj4g
+PiArICAgICAgIHJldCA9IDA7Cj4gPiArICAgICAgIGxfcmVzcF9idWYgPSAodm9pZCAqKSgoY2hh
+ciAqKXJlc3BfYnVmICsgc2l6ZW9mKCpyZXNwX2J1ZikpOwo+ID4gKyAgICAgICBudW1fbGV2ZWxz
+ID0gbGUzMl90b19jcHUobF9yZXNwX2J1Zi0+bnVtKTsKPiA+ICsgICAgICAgaWYgKG51bV9sZXZl
+bHMgPT0gMCkKPiA+ICsgICAgICAgICAgICAgICBnb3RvIGVycjsKPiA+ICsKPiA+ICsgICAgICAg
+Zm10LT5sZXZlbCA9IGt6YWxsb2Moc2l6ZW9mKCpsZXZlbCksIEdGUF9LRVJORUwpOwo+ID4gKyAg
+ICAgICBpZiAoIWZtdC0+bGV2ZWwpIHsKPiA+ICsgICAgICAgICAgICAgICByZXQgPSAtRU5PTUVN
+Owo+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZXJyOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiAr
+ICAgICAgIGxldmVsID0gZm10LT5sZXZlbDsKPiA+ICsgICAgICAgbGV2ZWwtPmVudHJpZXMgPSBr
+Y2FsbG9jKG51bV9sZXZlbHMsIHNpemVvZih1aW50MzJfdCksIEdGUF9LRVJORUwpOwo+ID4gKyAg
+ICAgICBpZiAoIWxldmVsLT5lbnRyaWVzKSB7Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gLUVO
+T01FTTsKPiA+ICsgICAgICAgICAgICAgICBnb3RvIGVycjsKPiA+ICsgICAgICAgfQo+ID4gKwo+
+ID4gKyAgICAgICB2aXJ0aW9fbGV2ZWxzID0gKHZvaWQgKikoKGNoYXIgKilsX3Jlc3BfYnVmICsg
+c2l6ZW9mKCpsX3Jlc3BfYnVmKSk7Cj4gPiArCj4gPiArICAgICAgIGZvciAoaWR4ID0gMDsgaWR4
+IDwgbnVtX2xldmVsczsgaWR4KyspIHsKPiA+ICsgICAgICAgICAgICAgICBsZXZlbC0+ZW50cmll
+c1tpZHhdID0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHZpcnRpb192aWRlb19sZXZlbF90
+b192NGwyCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAobGUzMl90b19jcHUodmlydGlvX2xl
+dmVsc1tpZHhdKSk7Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgbWFzayA9IG1hc2sgfCAoMSA8
+PCBsZXZlbC0+ZW50cmllc1tpZHhdKTsKPiA+ICsgICAgICAgICAgICAgICBpZiAobGV2ZWwtPmVu
+dHJpZXNbaWR4XSA+IG1heCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIG1heCA9IGxldmVs
+LT5lbnRyaWVzW2lkeF07Cj4gPiArICAgICAgICAgICAgICAgaWYgKGxldmVsLT5lbnRyaWVzW2lk
+eF0gPCBtaW4pCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBtaW4gPSBsZXZlbC0+ZW50cmll
+c1tpZHhdOwo+ID4gKyAgICAgICB9Cj4gPiArICAgICAgIGxldmVsLT5taW4gPSBtaW47Cj4gPiAr
+ICAgICAgIGxldmVsLT5tYXggPSBtYXg7Cj4gPiArICAgICAgIGxldmVsLT5udW0gPSBudW1fbGV2
+ZWxzOwo+ID4gKyAgICAgICBsZXZlbC0+c2tpcF9tYXNrID0gfm1hc2s7Cj4gPiArZXJyOgo+IAo+
+ICJlcnIiIGlzIG5vdCBhIGdvb2QgbmFtZSwgYXMgdGhlIGZvbGxvd2luZyAna2ZyZWUnIG11c3Qg
+YmUgZXhlY3V0ZWQKPiBldmVuIHdpdGhvdXQgYW4gZXJyb3IuCj4gSG93IGFib3V0IHJlbmFtaW5n
+IGl0IHRvICJvdXRfZnJlZV9idWYiIGxpa2UgdGhlIGV4YW1wbGUgaGVyZT8KPiAKPiBodHRwczov
+L3d3dy5rZXJuZWwub3JnL2RvYy9odG1sL3Y1LjQvcHJvY2Vzcy9jb2Rpbmctc3R5bGUuaHRtbCNj
+ZW50cmFsaXplZC1leGl0aW5nLW9mLWZ1bmN0aW9ucwo+IAo+ID4gKyAgICAgICBrZnJlZShyZXNw
+X2J1Zik7Cj4gPiArICAgICAgIHJldHVybiByZXQ7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBp
+bnQgdmlydGlvX3ZpZGVvX3BhcnNlX2NvbnRyb2xfcHJvZmlsZXMoc3RydWN0IHZpcnRpb192aWRl
+b19kZXZpY2UgKnZ2ZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgc3RydWN0IHZpZGVvX2NvbnRyb2xfZm9ybWF0ICpmbXQpCj4gPiArewo+ID4gKyAg
+ICAgICBpbnQgaWR4LCByZXQgPSAwOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1
+ZXJ5X2NvbnRyb2xfcmVzcCAqcmVzcF9idWYgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX3F1ZXJ5X2NvbnRyb2xfcmVzcF9wcm9maWxlICpwX3Jlc3BfYnVmID0gTlVMTDsK
+PiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSBOVUxMOwo+ID4gKyAgICAgICB1
+aW50MzJfdCB2aXJ0aW9fZm9ybWF0LCBudW1fcHJvZmlsZXMsIG1hc2sgPSAwOwo+ID4gKyAgICAg
+ICB1aW50MzJfdCAqdmlydGlvX3Byb2ZpbGVzID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0IHZp
+ZGVvX2NvbnRyb2xfZm10X2RhdGEgKnByb2ZpbGUgPSBOVUxMOwo+ID4gKyAgICAgICBpbnQgbWF4
+ID0gMCwgbWluID0gVUlOVF9NQVg7Cj4gPiArICAgICAgIHNpemVfdCByZXNwX3NpemU7Cj4gPiAr
+Cj4gPiArICAgICAgIGlmICghdnZkKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFM
+Owo+ID4gKwo+ID4gKyAgICAgICB2diA9IHZ2ZC0+dnY7Cj4gPiArICAgICAgIHJlc3Bfc2l6ZSA9
+IHZ2LT5tYXhfcmVzcF9sZW47Cj4gPiArICAgICAgIHZpcnRpb19mb3JtYXQgPSB2aXJ0aW9fdmlk
+ZW9fdjRsMl9mb3JtYXRfdG9fdmlydGlvKGZtdC0+Zm9ybWF0KTsKPiA+ICsgICAgICAgcmVzcF9i
+dWYgPSBremFsbG9jKHJlc3Bfc2l6ZSwgR0ZQX0tFUk5FTCk7Cj4gPiArICAgICAgIGlmIChJU19F
+UlIocmVzcF9idWYpKSB7Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gUFRSX0VSUihyZXNwX2J1
+Zik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnI7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+
+ICsgICAgICAgdnYtPmdvdF9jb250cm9sID0gZmFsc2U7Cj4gPiArICAgICAgIHJldCA9IHZpcnRp
+b192aWRlb19xdWVyeV9jb250cm9sX3Byb2ZpbGUodnYsIHJlc3BfYnVmLCByZXNwX3NpemUsCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdmlydGlv
+X2Zvcm1hdCk7Cj4gPiArICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwy
+X2VycigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRvIHF1ZXJ5IHByb2ZpbGVcbiIpOwo+ID4gKyAg
+ICAgICAgICAgICAgIGdvdG8gZXJyOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJl
+dCA9IHdhaXRfZXZlbnRfdGltZW91dCh2di0+d3EsIHZ2LT5nb3RfY29udHJvbCwgNSAqIEhaKTsK
+PiA+ICsgICAgICAgaWYgKHJldCA9PSAwKSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIo
+JnZ2LT52NGwyX2RldiwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAidGltZWQgb3V0IHdh
+aXRpbmcgZm9yIHF1ZXJ5IHByb2ZpbGVcbiIpOwo+ID4gKyAgICAgICAgICAgICAgIHJldCA9IC1F
+SU87Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnI7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+
+ICsgICAgICAgcmV0ID0gMDsKPiA+ICsgICAgICAgcF9yZXNwX2J1ZiA9ICh2b2lkICopKChjaGFy
+ICopcmVzcF9idWYgKyBzaXplb2YoKnJlc3BfYnVmKSk7Cj4gPiArICAgICAgIG51bV9wcm9maWxl
+cyA9IGxlMzJfdG9fY3B1KHBfcmVzcF9idWYtPm51bSk7Cj4gPiArICAgICAgIGlmIChudW1fcHJv
+ZmlsZXMgPT0gMCkKPiA+ICsgICAgICAgICAgICAgICBnb3RvIGVycjsKPiA+ICsKPiA+ICsgICAg
+ICAgZm10LT5wcm9maWxlID0ga3phbGxvYyhzaXplb2YoKnByb2ZpbGUpLCBHRlBfS0VSTkVMKTsK
+PiA+ICsgICAgICAgaWYgKCFmbXQtPnByb2ZpbGUpIHsKPiA+ICsgICAgICAgICAgICAgICByZXQg
+PSAtRU5PTUVNOwo+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZXJyOwo+ID4gKyAgICAgICB9Cj4g
+PiArCj4gPiArICAgICAgIHByb2ZpbGUgPSBmbXQtPnByb2ZpbGU7Cj4gPiArICAgICAgIHByb2Zp
+bGUtPmVudHJpZXMgPSBrY2FsbG9jKG51bV9wcm9maWxlcywgc2l6ZW9mKHVpbnQzMl90KSwgR0ZQ
+X0tFUk5FTCk7Cj4gPiArICAgICAgIGlmICghcHJvZmlsZS0+ZW50cmllcykgewo+ID4gKyAgICAg
+ICAgICAgICAgIHJldCA9IC1FTk9NRU07Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnI7Cj4g
+PiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX3Byb2ZpbGVzID0gKHZvaWQgKiko
+KGNoYXIgKilwX3Jlc3BfYnVmICsgc2l6ZW9mKCpwX3Jlc3BfYnVmKSk7Cj4gPiArCj4gPiArICAg
+ICAgIGZvciAoaWR4ID0gMDsgaWR4IDwgbnVtX3Byb2ZpbGVzOyBpZHgrKykgewo+ID4gKyAgICAg
+ICAgICAgICAgIHByb2ZpbGUtPmVudHJpZXNbaWR4XSA9Cj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICB2aXJ0aW9fdmlkZW9fcHJvZmlsZV90b192NGwyCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAobGUzMl90b19jcHUodmlydGlvX3Byb2ZpbGVzW2lkeF0pKTsKPiA+ICsKPiA+ICsgICAg
+ICAgICAgICAgICBtYXNrID0gbWFzayB8ICgxIDw8IHByb2ZpbGUtPmVudHJpZXNbaWR4XSk7Cj4g
+PiArICAgICAgICAgICAgICAgaWYgKHByb2ZpbGUtPmVudHJpZXNbaWR4XSA+IG1heCkKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgIG1heCA9IHByb2ZpbGUtPmVudHJpZXNbaWR4XTsKPiA+ICsg
+ICAgICAgICAgICAgICBpZiAocHJvZmlsZS0+ZW50cmllc1tpZHhdIDwgbWluKQo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgbWluID0gcHJvZmlsZS0+ZW50cmllc1tpZHhdOwo+ID4gKyAgICAg
+ICB9Cj4gPiArICAgICAgIHByb2ZpbGUtPm1pbiA9IG1pbjsKPiA+ICsgICAgICAgcHJvZmlsZS0+
+bWF4ID0gbWF4Owo+ID4gKyAgICAgICBwcm9maWxlLT5udW0gPSBudW1fcHJvZmlsZXM7Cj4gPiAr
+ICAgICAgIHByb2ZpbGUtPnNraXBfbWFzayA9IH5tYXNrOwo+ID4gK2VycjoKPiAKPiBzYW1lCj4g
+Cj4gPiArICAgICAgIGtmcmVlKHJlc3BfYnVmKTsKPiA+ICsgICAgICAgcmV0dXJuIHJldDsKPiA+
+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19wYXJzZV92aXJ0aW9fY29udHJvbChzdHJ1
+Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZp
+ZGVvX2Zvcm1hdCAqZm10ID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2NvbnRyb2xf
+Zm9ybWF0ICpjX2ZtdCA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2
+ID0gTlVMTDsKPiA+ICsgICAgICAgdWludDMyX3QgdmlydGlvX2Zvcm1hdDsKPiA+ICsgICAgICAg
+aW50IHJldCA9IDA7Cj4gPiArCj4gPiArICAgICAgIGlmICghdnZkKQo+ID4gKyAgICAgICAgICAg
+ICAgIHJldHVybiAtRUlOVkFMOwo+ID4gKwo+ID4gKyAgICAgICB2diA9IHZ2ZC0+dnY7Cj4gPiAr
+Cj4gPiArICAgICAgIGxpc3RfZm9yX2VhY2hfZW50cnkoZm10LCAmdnZkLT5vdXRwdXRfZm10X2xp
+c3QsIGZvcm1hdHNfbGlzdF9lbnRyeSkgewo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb19mb3Jt
+YXQgPQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdmlydGlvX3ZpZGVvX3Y0bDJfZm9ybWF0
+X3RvX3ZpcnRpbyhmbXQtPmRlc2MuZm9ybWF0KTsKPiA+ICsgICAgICAgICAgICAgICBpZiAodmly
+dGlvX2Zvcm1hdCA8IFZJUlRJT19WSURFT19GT1JNQVRfQ09ERURfTUlOIHx8Cj4gPiArICAgICAg
+ICAgICAgICAgICAgIHZpcnRpb19mb3JtYXQgPiBWSVJUSU9fVklERU9fRk9STUFUX0NPREVEX01B
+WCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOwo+ID4gKwo+ID4gKyAgICAg
+ICAgICAgICAgIGNfZm10ID0ga3phbGxvYyhzaXplb2YoKmNfZm10KSwgR0ZQX0tFUk5FTCk7Cj4g
+PiArICAgICAgICAgICAgICAgaWYgKCFjX2ZtdCkgewo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgdmlydGlvX3ZpZGVvX2ZyZWVfY29udHJvbF9mb3JtYXRzKHZ2ZCk7Cj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICByZXR1cm4gLTE7Cj4gPiArICAgICAgICAgICAgICAgfQo+ID4gKwo+ID4g
+KyAgICAgICAgICAgICAgIGNfZm10LT5mb3JtYXQgPSBmbXQtPmRlc2MuZm9ybWF0Owo+ID4gKyAg
+ICAgICAgICAgICAgIHJldCA9IHZpcnRpb192aWRlb19wYXJzZV9jb250cm9sX3Byb2ZpbGVzKHZ2
+ZCwgY19mbXQpOwo+ID4gKyAgICAgICAgICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgIHZpcnRpb192aWRlb19mcmVlX2NvbnRyb2xfZm9ybWF0cyh2dmQpOwo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAga2ZyZWUoY19mbXQpOwo+IAo+IFRoZXNlICdmcmVlJyBm
+dW5jdGlvbnMgc2hvdWxkIGJlIGNhbGxlZCB1bmRlciAiZXJyIiBsYWJlbC4KPiAKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAiZmFpbGVkIHRvIHBhcnNlIGNvbnRyb2wgcHJvZmlsZVxu
+Iik7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBnb3RvIGVycjsKPiA+ICsgICAgICAgICAg
+ICAgICB9Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX3BhcnNlX2NvbnRy
+b2xfbGV2ZWxzKHZ2ZCwgY19mbXQpOwo+ID4gKyAgICAgICAgICAgICAgIGlmIChyZXQpIHsKPiA+
+ICsgICAgICAgICAgICAgICAgICAgICAgIHZpcnRpb192aWRlb19mcmVlX2NvbnRyb2xfZm9ybWF0
+cyh2dmQpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAga2ZyZWUoY19mbXQpOwo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwKPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICJmYWlsZWQgdG8gcGFyc2UgY29udHJvbCBsZXZlbFxu
+Iik7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBnb3RvIGVycjsKPiA+ICsgICAgICAgICAg
+ICAgICB9Cj4gPiArICAgICAgICAgICAgICAgbGlzdF9hZGQoJmNfZm10LT5jb250cm9sc19saXN0
+X2VudHJ5LCAmdnZkLT5jb250cm9sc19mbXRfbGlzdCk7Cj4gPiArICAgICAgIH0KPiA+ICsgICAg
+ICAgcmV0dXJuIDA7Cj4gPiArZXJyOgo+ID4gKyAgICAgICByZXR1cm4gcmV0Owo+ID4gK30KPiA+
+ICsKPiA+ICt2b2lkIHZpcnRpb192aWRlb19jbGVhbl9jb250cm9sKHN0cnVjdCB2aXJ0aW9fdmlk
+ZW9fZGV2aWNlICp2dmQpCj4gPiArewo+ID4gKyAgICAgICBpZiAoIXZ2ZCkKPiA+ICsgICAgICAg
+ICAgICAgICByZXR1cm47Cj4gPiArCj4gPiArICAgICAgIHZpcnRpb192aWRlb19mcmVlX2NvbnRy
+b2xfZm9ybWF0cyh2dmQpOwo+ID4gK30KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL21lZGlhL3Zp
+cnRpby92aXJ0aW9fdmlkZW9fZGVjLmMgYi9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlk
+ZW9fZGVjLmMKPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gPiBpbmRleCAwMDAwMDAwMDAwMDAu
+LmZjODA1OTMzZmM1ZQo+ID4gLS0tIC9kZXYvbnVsbAo+ID4gKysrIGIvZHJpdmVycy9tZWRpYS92
+aXJ0aW8vdmlydGlvX3ZpZGVvX2RlYy5jCj4gPiBAQCAtMCwwICsxLDQyNyBAQAo+ID4gKy8vIFNQ
+RFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKwo+ID4gKy8qIERlY29kZXIgZm9yIHZpcnRp
+byB2aWRlbyBkZXZpY2UuCj4gPiArICoKPiA+ICsgKiBDb3B5cmlnaHQgMjAxOSBPcGVuU3luZXJn
+eSBHbWJILgo+ID4gKyAqCj4gPiArICogVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlv
+dSBjYW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnkKPiA+ICsgKiBpdCB1bmRlciB0aGUg
+dGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFzIHB1Ymxpc2hlZCBieQo+
+ID4gKyAqIHRoZSBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb247IGVpdGhlciB2ZXJzaW9uIDIgb2Yg
+dGhlIExpY2Vuc2UsIG9yCj4gPiArICogKGF0IHlvdXIgb3B0aW9uKSBhbnkgbGF0ZXIgdmVyc2lv
+bi4KPiA+ICsgKgo+ID4gKyAqIFRoaXMgcHJvZ3JhbSBpcyBkaXN0cmlidXRlZCBpbiB0aGUgaG9w
+ZSB0aGF0IGl0IHdpbGwgYmUgdXNlZnVsLAo+ID4gKyAqIGJ1dCBXSVRIT1VUIEFOWSBXQVJSQU5U
+WTsgd2l0aG91dCBldmVuIHRoZSBpbXBsaWVkIHdhcnJhbnR5IG9mCj4gPiArICogTUVSQ0hBTlRB
+QklMSVRZIG9yIEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFLiAgU2VlIHRoZQo+ID4g
+KyAqIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGZvciBtb3JlIGRldGFpbHMuCj4gPiArICoK
+PiA+ICsgKiBZb3Ugc2hvdWxkIGhhdmUgcmVjZWl2ZWQgYSBjb3B5IG9mIHRoZSBHTlUgR2VuZXJh
+bCBQdWJsaWMgTGljZW5zZQo+ID4gKyAqIGFsb25nIHdpdGggdGhpcyBwcm9ncmFtOyBpZiBub3Qs
+IHNlZSA8aHR0cDovL3d3dy5nbnUub3JnL2xpY2Vuc2VzLz47Lgo+ID4gKyAqLwo+ID4gKwo+ID4g
+KyNpbmNsdWRlIDxtZWRpYS92NGwyLWV2ZW50Lmg+Cj4gPiArI2luY2x1ZGUgPG1lZGlhL3Y0bDIt
+aW9jdGwuaD4KPiA+ICsKPiA+ICsjaW5jbHVkZSAidmlydGlvX3ZpZGVvLmgiCj4gPiArCj4gPiAr
+c3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX2RlY19idWZfcXVldWUoc3RydWN0IHZiMl9idWZmZXIg
+KnZiKQo+ID4gK3sKPiA+ICsgICAgICAgaW50IGksIHJldDsKPiA+ICsgICAgICAgc3RydWN0IHZi
+Ml9idWZmZXIgKnNyY19idWY7Cj4gPiArICAgICAgIHN0cnVjdCB2YjJfdjRsMl9idWZmZXIgKnNy
+Y192YjsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19idWZmZXIgKnZpcnRpb192YjsK
+PiA+ICsgICAgICAgdWludDMyX3QgZGF0YV9zaXplW1ZCMl9NQVhfUExBTkVTXSA9IHswfTsKPiA+
+ICsgICAgICAgc3RydWN0IHZiMl92NGwyX2J1ZmZlciAqdjRsMl92YiA9IHRvX3ZiMl92NGwyX2J1
+ZmZlcih2Yik7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0g
+PSB2YjJfZ2V0X2Rydl9wcml2KHZiLT52YjJfcXVldWUpOwo+ID4gKyAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlkZW9fZGV2KTsK
+PiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSB2dmQtPnZ2Owo+ID4gKwo+ID4g
+KyAgICAgICB2NGwyX20ybV9idWZfcXVldWUoc3RyZWFtLT5maC5tMm1fY3R4LCB2NGwyX3ZiKTsK
+PiA+ICsKPiA+ICsgICAgICAgaWYgKChzdHJlYW0tPnN0YXRlICE9IFNUUkVBTV9TVEFURV9JTklU
+KSB8fAo+ID4gKyAgICAgICAgICAgIVY0TDJfVFlQRV9JU19PVVRQVVQodmItPnZiMl9xdWV1ZS0+
+dHlwZSkpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuOwo+ID4gKwo+ID4gKyAgICAgICBzcmNf
+dmIgPSB2NGwyX20ybV9uZXh0X3NyY19idWYoc3RyZWFtLT5maC5tMm1fY3R4KTsKPiA+ICsgICAg
+ICAgaWYgKCFzcmNfdmIpIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJf
+ZGV2LCAibm8gc3JjIGJ1ZiBkdXJpbmcgaW5pdGlhbGl6YXRpb25cbiIpOwo+ID4gKyAgICAgICAg
+ICAgICAgIHJldHVybjsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICBzcmNfYnVmID0g
+JnNyY192Yi0+dmIyX2J1ZjsKPiA+ICsgICAgICAgZm9yIChpID0gMDsgaSA8IHNyY19idWYtPm51
+bV9wbGFuZXM7ICsraSkKPiA+ICsgICAgICAgICAgICAgICBkYXRhX3NpemVbaV0gPSBzcmNfYnVm
+LT5wbGFuZXNbaV0uYnl0ZXN1c2VkOwo+ID4gKwo+ID4gKyAgICAgICB2aXJ0aW9fdmIgPSB0b192
+aXJ0aW9fdmIoc3JjX2J1Zik7Cj4gPiArCj4gPiArICAgICAgIHJldCA9IHZpcnRpb192aWRlb19j
+bWRfcmVzb3VyY2VfcXVldWUodnYsIHN0cmVhbS0+c3RyZWFtX2lkLAo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZpcnRpb192YiwgZGF0YV9zaXplLAo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNyY19idWYt
+Pm51bV9wbGFuZXMsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgVklSVElPX1ZJREVPX1FVRVVFX1RZUEVfSU5QVVQpOwo+ID4gKyAgICAgICBpZiAocmV0
+KSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwgImZhaWxlZCB0
+byBxdWV1ZSBhbiBzcmMgYnVmZmVyXG4iKTsKPiA+ICsgICAgICAgICAgICAgICByZXR1cm47Cj4g
+PiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX3ZiLT5xdWV1ZWQgPSB0cnVlOwo+
+ID4gKyAgICAgICBzdHJlYW0tPnNyY19jbGVhcmVkID0gZmFsc2U7Cj4gPiArICAgICAgIHNyY192
+YiA9IHY0bDJfbTJtX3NyY19idWZfcmVtb3ZlKHN0cmVhbS0+ZmgubTJtX2N0eCk7Cj4gPiArfQo+
+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX2RlY19zdGFydF9zdHJlYW1pbmcoc3Ry
+dWN0IHZiMl9xdWV1ZSAqdnEsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHVuc2lnbmVkIGludCBjb3VudCkKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0gPSB2YjJfZ2V0X2Rydl9wcml2KHZxKTsKPiA+ICsK
+PiA+ICsgICAgICAgaWYgKCFWNEwyX1RZUEVfSVNfT1VUUFVUKHZxLT50eXBlKSAmJgo+ID4gKyAg
+ICAgICAgICAgc3RyZWFtLT5zdGF0ZSA+PSBTVFJFQU1fU1RBVEVfSU5JVCkKPiA+ICsgICAgICAg
+ICAgICAgICBzdHJlYW0tPnN0YXRlID0gU1RSRUFNX1NUQVRFX1JVTk5JTkc7Cj4gPiArCj4gPiAr
+ICAgICAgIHJldHVybiAwOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgdm9pZCB2aXJ0aW9fdmlk
+ZW9fZGVjX3N0b3Bfc3RyZWFtaW5nKHN0cnVjdCB2YjJfcXVldWUgKnZxKQo+ID4gK3sKPiA+ICsg
+ICAgICAgaW50IHJldCwgcXVldWVfdHlwZTsKPiA+ICsgICAgICAgYm9vbCAqY2xlYXJlZDsKPiA+
+ICsgICAgICAgYm9vbCBpc192NGwyX291dHB1dCA9IFY0TDJfVFlQRV9JU19PVVRQVVQodnEtPnR5
+cGUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtID0gdmIy
+X2dldF9kcnZfcHJpdih2cSk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNl
+ICp2dmQgPSB0b192aXJ0aW9fdmQoc3RyZWFtLT52aWRlb19kZXYpOwo+ID4gKyAgICAgICBzdHJ1
+Y3QgdmlydGlvX3ZpZGVvICp2diA9IHZ2ZC0+dnY7Cj4gPiArICAgICAgIHN0cnVjdCB2YjJfdjRs
+Ml9idWZmZXIgKnY0bDJfdmI7Cj4gPiArCj4gPiArICAgICAgIGlmIChpc192NGwyX291dHB1dCkg
+ewo+ID4gKyAgICAgICAgICAgICAgIGNsZWFyZWQgPSAmc3RyZWFtLT5zcmNfY2xlYXJlZDsKPiA+
+ICsgICAgICAgICAgICAgICBxdWV1ZV90eXBlID0gVklSVElPX1ZJREVPX1FVRVVFX1RZUEVfSU5Q
+VVQ7Cj4gPiArICAgICAgIH0gZWxzZSB7Cj4gPiArICAgICAgICAgICAgICAgY2xlYXJlZCA9ICZz
+dHJlYW0tPmRzdF9jbGVhcmVkOwo+ID4gKyAgICAgICAgICAgICAgIHF1ZXVlX3R5cGUgPSBWSVJU
+SU9fVklERU9fUVVFVUVfVFlQRV9PVVRQVVQ7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAg
+ICAgcmV0ID0gdmlydGlvX3ZpZGVvX2NtZF9xdWV1ZV9jbGVhcih2diwgc3RyZWFtLCBxdWV1ZV90
+eXBlKTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfZXJy
+KCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gY2xlYXIgcXVldWVcbiIpOwo+ID4gKyAgICAgICAg
+ICAgICAgIHJldHVybjsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB3YWl0
+X2V2ZW50X3RpbWVvdXQodnYtPndxLCAqY2xlYXJlZCwgNSAqIEhaKTsKPiA+ICsgICAgICAgaWYg
+KHJldCA9PSAwKSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2Rldiwg
+InRpbWVkIG91dCB3YWl0aW5nIGZvciBxdWV1ZSBjbGVhclxuIik7Cj4gPiArICAgICAgICAgICAg
+ICAgcmV0dXJuOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIGZvciAoOzspIHsKPiA+
+ICsgICAgICAgICAgICAgICBpZiAoaXNfdjRsMl9vdXRwdXQpCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICB2NGwyX3ZiID0gdjRsMl9tMm1fc3JjX2J1Zl9yZW1vdmUoc3RyZWFtLT5maC5tMm1f
+Y3R4KTsKPiA+ICsgICAgICAgICAgICAgICBlbHNlCj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICB2NGwyX3ZiID0gdjRsMl9tMm1fZHN0X2J1Zl9yZW1vdmUoc3RyZWFtLT5maC5tMm1fY3R4KTsK
+PiA+ICsgICAgICAgICAgICAgICBpZiAoIXY0bDJfdmIpCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICBicmVhazsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX20ybV9idWZfZG9uZSh2NGwyX3Zi
+LCBWQjJfQlVGX1NUQVRFX0VSUk9SKTsKPiA+ICsgICAgICAgfQo+ID4gK30KPiA+ICsKPiA+ICtz
+dGF0aWMgY29uc3Qgc3RydWN0IHZiMl9vcHMgdmlydGlvX3ZpZGVvX2RlY19xb3BzID0gewo+ID4g
+KyAgICAgICAucXVldWVfc2V0dXAgICAgID0gdmlydGlvX3ZpZGVvX3F1ZXVlX3NldHVwLAo+ID4g
+KyAgICAgICAuYnVmX2luaXQgICAgICAgID0gdmlydGlvX3ZpZGVvX2J1Zl9pbml0LAo+ID4gKyAg
+ICAgICAuYnVmX2NsZWFudXAgICAgID0gdmlydGlvX3ZpZGVvX2J1Zl9jbGVhbnVwLAo+ID4gKyAg
+ICAgICAuYnVmX3F1ZXVlICAgICAgID0gdmlydGlvX3ZpZGVvX2RlY19idWZfcXVldWUsCj4gPiAr
+ICAgICAgIC5zdGFydF9zdHJlYW1pbmcgPSB2aXJ0aW9fdmlkZW9fZGVjX3N0YXJ0X3N0cmVhbWlu
+ZywKPiA+ICsgICAgICAgLnN0b3Bfc3RyZWFtaW5nICA9IHZpcnRpb192aWRlb19kZWNfc3RvcF9z
+dHJlYW1pbmcsCj4gPiArICAgICAgIC53YWl0X3ByZXBhcmUgICAgPSB2YjJfb3BzX3dhaXRfcHJl
+cGFyZSwKPiA+ICsgICAgICAgLndhaXRfZmluaXNoICAgICA9IHZiMl9vcHNfd2FpdF9maW5pc2gs
+Cj4gPiArfTsKPiA+ICsKPiA+ICtzdGF0aWMgaW50IHZpcnRpb192aWRlb19kZWNfZ192b2xhdGls
+ZV9jdHJsKHN0cnVjdCB2NGwyX2N0cmwgKmN0cmwpCj4gPiArewo+ID4gKyAgICAgICBpbnQgcmV0
+ID0gMDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IGN0
+cmwyc3RyZWFtKGN0cmwpOwo+ID4gKwo+ID4gKyAgICAgICBzd2l0Y2ggKGN0cmwtPmlkKSB7Cj4g
+PiArICAgICAgIGNhc2UgVjRMMl9DSURfTUlOX0JVRkZFUlNfRk9SX0NBUFRVUkU6Cj4gPiArICAg
+ICAgICAgICAgICAgaWYgKHN0cmVhbS0+c3RhdGUgPj0gU1RSRUFNX1NUQVRFX01FVEFEQVRBKQo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgY3RybC0+dmFsID0gc3RyZWFtLT5vdXRfaW5mby5t
+aW5fYnVmZmVyczsKPiA+ICsgICAgICAgICAgICAgICBlbHNlCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICBjdHJsLT52YWwgPSAwOwo+ID4gKyAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAg
+ICAgICBkZWZhdWx0Ogo+ID4gKyAgICAgICAgICAgICAgIHJldCA9IC1FSU5WQUw7Cj4gPiArICAg
+ICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIHJldDsKPiA+ICt9Cj4gPiArCj4gPiArc3Rh
+dGljIGNvbnN0IHN0cnVjdCB2NGwyX2N0cmxfb3BzIHZpcnRpb192aWRlb19kZWNfY3RybF9vcHMg
+PSB7Cj4gPiArICAgICAgIC5nX3ZvbGF0aWxlX2N0cmwgICAgICAgID0gdmlydGlvX3ZpZGVvX2Rl
+Y19nX3ZvbGF0aWxlX2N0cmwsCj4gPiArfTsKPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2Rl
+Y19pbml0X2N0cmxzKHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0pCj4gPiArewo+
+ID4gKyAgICAgICBzdHJ1Y3QgdjRsMl9jdHJsICpjdHJsOwo+ID4gKwo+ID4gKyAgICAgICB2NGwy
+X2N0cmxfaGFuZGxlcl9pbml0KCZzdHJlYW0tPmN0cmxfaGFuZGxlciwgMSk7Cj4gPiArCj4gPiAr
+ICAgICAgIGN0cmwgPSB2NGwyX2N0cmxfbmV3X3N0ZCgmc3RyZWFtLT5jdHJsX2hhbmRsZXIsCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2aXJ0aW9fdmlkZW9fZGVjX2N0cmxf
+b3BzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBWNEwyX0NJRF9NSU5fQlVG
+RkVSU19GT1JfQ0FQVFVSRSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTUlO
+X0JVRlNfTUlOLCBNSU5fQlVGU19NQVgsIE1JTl9CVUZTX1NURVAsCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIE1JTl9CVUZTX0RFRik7Cj4gPiArICAgICAgIGN0cmwtPmZsYWdz
+IHw9IFY0TDJfQ1RSTF9GTEFHX1ZPTEFUSUxFOwo+IAo+IE5lZWQgdG8gY2hlY2sgaWYgY3RybCBp
+cyBub24tTlVMTC4KPiAKPiA+ICsKPiA+ICsgICAgICAgaWYgKHN0cmVhbS0+Y3RybF9oYW5kbGVy
+LmVycm9yKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiBzdHJlYW0tPmN0cmxfaGFuZGxlci5l
+cnJvcjsKPiA+ICsKPiA+ICsgICAgICAgdjRsMl9jdHJsX2hhbmRsZXJfc2V0dXAoJnN0cmVhbS0+
+Y3RybF9oYW5kbGVyKTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+
+ID4gK2ludCB2aXJ0aW9fdmlkZW9fZGVjX2luaXRfcXVldWVzKHZvaWQgKnByaXYsIHN0cnVjdCB2
+YjJfcXVldWUgKnNyY192cSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0
+cnVjdCB2YjJfcXVldWUgKmRzdF92cSkKPiA+ICt7Cj4gPiArICAgICAgIGludCByZXQ7Cj4gPiAr
+ICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0gPSBwcml2Owo+ID4gKyAg
+ICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0cmVh
+bS0+dmlkZW9fZGV2KTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSB2dmQt
+PnZ2Owo+ID4gKyAgICAgICBzdHJ1Y3QgZGV2aWNlICpkZXYgPSB2di0+djRsMl9kZXYuZGV2Owo+
+ID4gKwo+ID4gKyAgICAgICBzcmNfdnEtPnR5cGUgPSBWNEwyX0JVRl9UWVBFX1ZJREVPX09VVFBV
+VF9NUExBTkU7Cj4gPiArICAgICAgIHNyY192cS0+aW9fbW9kZXMgPSBWQjJfTU1BUCB8IFZCMl9E
+TUFCVUY7Cj4gPiArICAgICAgIHNyY192cS0+ZHJ2X3ByaXYgPSBzdHJlYW07Cj4gPiArICAgICAg
+IHNyY192cS0+YnVmX3N0cnVjdF9zaXplID0gc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fdmlkZW9fYnVm
+ZmVyKTsKPiA+ICsgICAgICAgc3JjX3ZxLT5vcHMgPSAmdmlydGlvX3ZpZGVvX2RlY19xb3BzOwo+
+ID4gKyAgICAgICBzcmNfdnEtPm1lbV9vcHMgPSB2aXJ0aW9fdmlkZW9fbWVtX29wcyh2dik7Cj4g
+PiArICAgICAgIHNyY192cS0+bWluX2J1ZmZlcnNfbmVlZGVkID0gc3RyZWFtLT5pbl9pbmZvLm1p
+bl9idWZmZXJzOwo+ID4gKyAgICAgICBzcmNfdnEtPnRpbWVzdGFtcF9mbGFncyA9IFY0TDJfQlVG
+X0ZMQUdfVElNRVNUQU1QX0NPUFk7Cj4gPiArICAgICAgIHNyY192cS0+bG9jayA9ICZzdHJlYW0t
+PnZxX211dGV4Owo+ID4gKyAgICAgICBzcmNfdnEtPmdmcF9mbGFncyA9IHZpcnRpb192aWRlb19n
+ZnBfZmxhZ3ModnYpOwo+ID4gKyAgICAgICBzcmNfdnEtPmRldiA9IGRldjsKPiA+ICsKPiA+ICsg
+ICAgICAgcmV0ID0gdmIyX3F1ZXVlX2luaXQoc3JjX3ZxKTsKPiA+ICsgICAgICAgaWYgKHJldCkK
+PiA+ICsgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+ID4gKwo+ID4gKyAgICAgICBkc3RfdnEt
+PnR5cGUgPSBWNEwyX0JVRl9UWVBFX1ZJREVPX0NBUFRVUkVfTVBMQU5FOwo+ID4gKyAgICAgICBk
+c3RfdnEtPmlvX21vZGVzID0gVkIyX01NQVAgfCBWQjJfRE1BQlVGOwo+ID4gKyAgICAgICBkc3Rf
+dnEtPmRydl9wcml2ID0gc3RyZWFtOwo+ID4gKyAgICAgICBkc3RfdnEtPmJ1Zl9zdHJ1Y3Rfc2l6
+ZSA9IHNpemVvZihzdHJ1Y3QgdmlydGlvX3ZpZGVvX2J1ZmZlcik7Cj4gPiArICAgICAgIGRzdF92
+cS0+b3BzID0gJnZpcnRpb192aWRlb19kZWNfcW9wczsKPiA+ICsgICAgICAgZHN0X3ZxLT5tZW1f
+b3BzID0gdmlydGlvX3ZpZGVvX21lbV9vcHModnYpOwo+ID4gKyAgICAgICBkc3RfdnEtPm1pbl9i
+dWZmZXJzX25lZWRlZCA9IHN0cmVhbS0+b3V0X2luZm8ubWluX2J1ZmZlcnM7Cj4gPiArICAgICAg
+IGRzdF92cS0+dGltZXN0YW1wX2ZsYWdzID0gVjRMMl9CVUZfRkxBR19USU1FU1RBTVBfQ09QWTsK
+PiA+ICsgICAgICAgZHN0X3ZxLT5sb2NrID0gJnN0cmVhbS0+dnFfbXV0ZXg7Cj4gPiArICAgICAg
+IGRzdF92cS0+Z2ZwX2ZsYWdzID0gdmlydGlvX3ZpZGVvX2dmcF9mbGFncyh2dik7Cj4gPiArICAg
+ICAgIGRzdF92cS0+ZGV2ID0gZGV2Owo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdmIyX3F1ZXVl
+X2luaXQoZHN0X3ZxKTsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlkZW9f
+dHJ5X2RlY29kZXJfY21kKHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpmaCwKPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdjRsMl9kZWNvZGVyX2NtZCAq
+Y21kKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVh
+bSA9IGZpbGUyc3RyZWFtKGZpbGUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Rl
+dmljZSAqdnZkID0gdmlkZW9fZHJ2ZGF0YShmaWxlKTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRp
+b192aWRlbyAqdnYgPSB2dmQtPnZ2Owo+ID4gKwo+ID4gKyAgICAgICBpZiAoc3RyZWFtLT5zdGF0
+ZSA9PSBTVFJFQU1fU1RBVEVfRFJBSU4pCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FQlVT
+WTsKPiA+ICsKPiA+ICsgICAgICAgc3dpdGNoIChjbWQtPmNtZCkgewo+ID4gKyAgICAgICBjYXNl
+IFY0TDJfREVDX0NNRF9TVE9QOgo+ID4gKyAgICAgICBjYXNlIFY0TDJfREVDX0NNRF9TVEFSVDoK
+PiA+ICsgICAgICAgICAgICAgICBpZiAoY21kLT5mbGFncyAhPSAwKSB7Cj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmxhZ3M9JXUgYXJlIG5vdCBz
+dXBwb3J0ZWQiLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY21kLT5mbGFn
+cyk7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsgICAg
+ICAgICAgICAgICB9Cj4gPiArICAgICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAgICAgIGRlZmF1
+bHQ6Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiArICAgICAgIH0KPiA+
+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmly
+dGlvX3ZpZGVvX2RlY29kZXJfY21kKHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpmaCwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwyX2RlY29kZXJfY21k
+ICpjbWQpCj4gPiArewo+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmIy
+X3F1ZXVlICpzcmNfdnEsICpkc3RfdnE7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9f
+c3RyZWFtICpzdHJlYW0gPSBmaWxlMnN0cmVhbShmaWxlKTsKPiA+ICsgICAgICAgc3RydWN0IHZp
+cnRpb192aWRlb19kZXZpY2UgKnZ2ZCA9IHZpZGVvX2RydmRhdGEoZmlsZSk7Cj4gPiArICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2ID0gdnZkLT52djsKPiA+ICsKPiA+ICsgICAgICAgcmV0
+ID0gdmlydGlvX3ZpZGVvX3RyeV9kZWNvZGVyX2NtZChmaWxlLCBmaCwgY21kKTsKPiA+ICsgICAg
+ICAgaWYgKHJldCA8IDApCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKPiA+ICsKPiA+
+ICsgICAgICAgZHN0X3ZxID0gdjRsMl9tMm1fZ2V0X3ZxKHN0cmVhbS0+ZmgubTJtX2N0eCwKPiA+
+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFY0TDJfQlVGX1RZUEVfVklERU9fQ0FQ
+VFVSRV9NUExBTkUpOwo+ID4gKwo+ID4gKyAgICAgICBzd2l0Y2ggKGNtZC0+Y21kKSB7Cj4gPiAr
+ICAgICAgIGNhc2UgVjRMMl9ERUNfQ01EX1NUQVJUOgo+ID4gKyAgICAgICAgICAgICAgIHZiMl9j
+bGVhcl9sYXN0X2J1ZmZlcl9kZXF1ZXVlZChkc3RfdnEpOwo+ID4gKyAgICAgICAgICAgICAgIGJy
+ZWFrOwo+ID4gKyAgICAgICBjYXNlIFY0TDJfREVDX0NNRF9TVE9QOgo+ID4gKyAgICAgICAgICAg
+ICAgIHNyY192cSA9IHY0bDJfbTJtX2dldF92cShzdHJlYW0tPmZoLm0ybV9jdHgsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFY0TDJfQlVGX1RZUEVfVklERU9f
+T1VUUFVUX01QTEFORSk7Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgaWYgKCF2YjJfaXNfc3Ry
+ZWFtaW5nKHNyY192cSkpIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHY0bDJfZGJnKDEs
+IHZ2LT5kZWJ1ZywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2di0+djRs
+Ml9kZXYsICJvdXRwdXQgaXMgbm90IHN0cmVhbWluZ1xuIik7Cj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICByZXR1cm4gMDsKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArCj4gPiArICAgICAg
+ICAgICAgICAgaWYgKCF2YjJfaXNfc3RyZWFtaW5nKGRzdF92cSkpIHsKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgIHY0bDJfZGJnKDEsIHZ2LT5kZWJ1ZywKPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICZ2di0+djRsMl9kZXYsICJjYXB0dXJlIGlzIG5vdCBzdHJlYW1pbmdc
+biIpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIDA7Cj4gPiArICAgICAgICAg
+ICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICAgICAgICAgIHJldCA9IHZpcnRpb192aWRlb19jbWRf
+c3RyZWFtX2RyYWluKHZ2LCBzdHJlYW0tPnN0cmVhbV9pZCk7Cj4gPiArICAgICAgICAgICAgICAg
+aWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwy
+X2RldiwgImZhaWxlZCB0byBkcmFpbiBzdHJlYW1cbiIpOwo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgcmV0dXJuIHJldDsKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArCj4gPiArICAgICAg
+ICAgICAgICAgc3RyZWFtLT5zdGF0ZSA9IFNUUkVBTV9TVEFURV9EUkFJTjsKPiA+ICsgICAgICAg
+ICAgICAgICBicmVhazsKPiA+ICsgICAgICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICBy
+ZXR1cm4gLUVJTlZBTDsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsK
+PiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlkZW9fZGVjX2VudW1fZm10X3Zp
+ZF9jYXAoc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQgKmZoLAo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHY0bDJfZm10ZGVzYyAqZikKPiA+ICt7
+Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0gPSBmaWxlMnN0
+cmVhbShmaWxlKTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19kZXZpY2UgKnZ2ZCA9
+IHRvX3ZpcnRpb192ZChzdHJlYW0tPnZpZGVvX2Rldik7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRl
+b19mb3JtYXRfaW5mbyAqaW5mbyA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRlb19mb3Jt
+YXQgKmZtdCA9IE5VTEw7Cj4gPiArICAgICAgIHVuc2lnbmVkIGxvbmcgaW5wdXRfbWFzayA9IDA7
+Cj4gPiArICAgICAgIGludCBpZHggPSAwLCBiaXRfbnVtID0gMDsKPiA+ICsKPiA+ICsgICAgICAg
+aWYgKGYtPnR5cGUgIT0gVjRMMl9CVUZfVFlQRV9WSURFT19DQVBUVVJFX01QTEFORSkKPiA+ICsg
+ICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAgICAgaWYgKGYtPmlu
+ZGV4ID49IHZ2ZC0+bnVtX291dHB1dF9mbXRzKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAt
+RUlOVkFMOwo+ID4gKwo+ID4gKyAgICAgICBpbmZvID0gJnN0cmVhbS0+aW5faW5mbzsKPiA+ICsg
+ICAgICAgbGlzdF9mb3JfZWFjaF9lbnRyeShmbXQsICZ2dmQtPmlucHV0X2ZtdF9saXN0LCBmb3Jt
+YXRzX2xpc3RfZW50cnkpIHsKPiA+ICsgICAgICAgICAgICAgICBpZiAoaW5mby0+Zm91cmNjX2Zv
+cm1hdCA9PSBmbXQtPmRlc2MuZm9ybWF0KSB7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBp
+bnB1dF9tYXNrID0gZm10LT5kZXNjLm1hc2s7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBi
+cmVhazsKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAg
+ICAgaWYgKGlucHV0X21hc2sgPT0gMCkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZB
+TDsKPiA+ICsKPiA+ICsgICAgICAgbGlzdF9mb3JfZWFjaF9lbnRyeShmbXQsICZ2dmQtPm91dHB1
+dF9mbXRfbGlzdCwgZm9ybWF0c19saXN0X2VudHJ5KSB7Cj4gPiArICAgICAgICAgICAgICAgaWYg
+KHRlc3RfYml0KGJpdF9udW0sICZpbnB1dF9tYXNrKSkgewo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgaWYgKGYtPmluZGV4ID09IGlkeCkgewo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBmLT5waXhlbGZvcm1hdCA9IGZtdC0+ZGVzYy5mb3JtYXQ7Cj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAwOwo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgfQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgaWR4Kys7Cj4gPiArICAgICAgICAgICAg
+ICAgfQo+ID4gKyAgICAgICAgICAgICAgIGJpdF9udW0rKzsKPiA+ICsgICAgICAgfQo+ID4gKyAg
+ICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICt9Cj4gPiArCj4gPiArCj4gPiAraW50IHZpcnRpb192
+aWRlb19kZWNfZW51bV9mbXRfdmlkX291dChzdHJ1Y3QgZmlsZSAqZmlsZSwgdm9pZCAqZmgsCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwyX2ZtdGRl
+c2MgKmYpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3Ry
+ZWFtID0gZmlsZTJzdHJlYW0oZmlsZSk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9f
+ZGV2aWNlICp2dmQgPSB0b192aXJ0aW9fdmQoc3RyZWFtLT52aWRlb19kZXYpOwo+ID4gKyAgICAg
+ICBzdHJ1Y3QgdmlkZW9fZm9ybWF0ICpmbXQgPSBOVUxMOwo+ID4gKyAgICAgICBpbnQgaWR4ID0g
+MDsKPiA+ICsKPiA+ICsgICAgICAgaWYgKGYtPnR5cGUgIT0gVjRMMl9CVUZfVFlQRV9WSURFT19P
+VVRQVVRfTVBMQU5FKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4gKwo+
+ID4gKyAgICAgICBpZiAoZi0+aW5kZXggPj0gdnZkLT5udW1faW5wdXRfZm10cykKPiA+ICsgICAg
+ICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAgICAgbGlzdF9mb3JfZWFj
+aF9lbnRyeShmbXQsICZ2dmQtPmlucHV0X2ZtdF9saXN0LCBmb3JtYXRzX2xpc3RfZW50cnkpIHsK
+PiA+ICsgICAgICAgICAgICAgICBpZiAoZi0+aW5kZXggPT0gaWR4KSB7Cj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICBmLT5waXhlbGZvcm1hdCA9IGZtdC0+ZGVzYy5mb3JtYXQ7Cj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiAr
+ICAgICAgICAgICAgICAgaWR4Kys7Cj4gPiArICAgICAgIH0KPiA+ICsgICAgICAgcmV0dXJuIC1F
+SU5WQUw7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX2RlY19zX2Zt
+dChzdHJ1Y3QgZmlsZSAqZmlsZSwgdm9pZCAqZmgsCj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgc3RydWN0IHY0bDJfZm9ybWF0ICpmKQo+ID4gK3sKPiA+ICsgICAgICAgaW50
+IHJldDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IGZp
+bGUyc3RyZWFtKGZpbGUpOwo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fc19m
+bXQoZmlsZSwgZmgsIGYpOwo+ID4gKyAgICAgICBpZiAocmV0KQo+ID4gKyAgICAgICAgICAgICAg
+IHJldHVybiByZXQ7Cj4gPiArCj4gPiArICAgICAgIGlmIChWNEwyX1RZUEVfSVNfT1VUUFVUKGYt
+PnR5cGUpKSB7Cj4gPiArICAgICAgICAgICAgICAgaWYgKHN0cmVhbS0+c3RhdGUgPT0gU1RSRUFN
+X1NUQVRFX0lETEUpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBzdHJlYW0tPnN0YXRlID0g
+U1RSRUFNX1NUQVRFX0lOSVQ7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJu
+IDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdjRsMl9pb2N0bF9vcHMg
+dmlydGlvX3ZpZGVvX2RlY19pb2N0bF9vcHMgPSB7Cj4gPiArICAgICAgIC52aWRpb2NfcXVlcnlj
+YXAgICAgICAgID0gdmlydGlvX3ZpZGVvX3F1ZXJ5Y2FwLAo+ID4gKwo+ID4gKyAgICAgICAudmlk
+aW9jX2VudW1fZm10X3ZpZF9jYXAgPSB2aXJ0aW9fdmlkZW9fZGVjX2VudW1fZm10X3ZpZF9jYXAs
+Cj4gPiArICAgICAgIC52aWRpb2NfZ19mbXRfdmlkX2NhcCAgID0gdmlydGlvX3ZpZGVvX2dfZm10
+LAo+ID4gKyAgICAgICAudmlkaW9jX3NfZm10X3ZpZF9jYXAgICA9IHZpcnRpb192aWRlb19kZWNf
+c19mbXQsCj4gPiArCj4gPiArICAgICAgIC52aWRpb2NfZW51bV9mbXRfdmlkX2NhcF9tcGxhbmUg
+PSB2aXJ0aW9fdmlkZW9fZGVjX2VudW1fZm10X3ZpZF9jYXAsCj4gPiArICAgICAgIC52aWRpb2Nf
+Z19mbXRfdmlkX2NhcF9tcGxhbmUgICAgPSB2aXJ0aW9fdmlkZW9fZ19mbXQsCj4gPiArICAgICAg
+IC52aWRpb2Nfc19mbXRfdmlkX2NhcF9tcGxhbmUgICAgPSB2aXJ0aW9fdmlkZW9fZGVjX3NfZm10
+LAo+ID4gKwo+ID4gKyAgICAgICAudmlkaW9jX2VudW1fZm10X3ZpZF9vdXQgPSB2aXJ0aW9fdmlk
+ZW9fZGVjX2VudW1fZm10X3ZpZF9vdXQsCj4gPiArICAgICAgIC52aWRpb2NfZ19mbXRfdmlkX291
+dCAgID0gdmlydGlvX3ZpZGVvX2dfZm10LAo+ID4gKyAgICAgICAudmlkaW9jX3NfZm10X3ZpZF9v
+dXQgICA9IHZpcnRpb192aWRlb19kZWNfc19mbXQsCj4gPiArCj4gPiArICAgICAgIC52aWRpb2Nf
+ZW51bV9mbXRfdmlkX291dF9tcGxhbmUgPSB2aXJ0aW9fdmlkZW9fZGVjX2VudW1fZm10X3ZpZF9v
+dXQsCj4gPiArICAgICAgIC52aWRpb2NfZ19mbXRfdmlkX291dF9tcGxhbmUgICAgPSB2aXJ0aW9f
+dmlkZW9fZ19mbXQsCj4gPiArICAgICAgIC52aWRpb2Nfc19mbXRfdmlkX291dF9tcGxhbmUgICAg
+PSB2aXJ0aW9fdmlkZW9fZGVjX3NfZm10LAo+ID4gKwo+ID4gKyAgICAgICAudmlkaW9jX2dfc2Vs
+ZWN0aW9uID0gdmlydGlvX3ZpZGVvX2dfc2VsZWN0aW9uLAo+ID4gKyAgICAgICAudmlkaW9jX3Nf
+c2VsZWN0aW9uID0gdmlydGlvX3ZpZGVvX3Nfc2VsZWN0aW9uLAo+ID4gKwo+ID4gKyAgICAgICAu
+dmlkaW9jX3RyeV9kZWNvZGVyX2NtZCA9IHZpcnRpb192aWRlb190cnlfZGVjb2Rlcl9jbWQsCj4g
+PiArICAgICAgIC52aWRpb2NfZGVjb2Rlcl9jbWQgICAgID0gdmlydGlvX3ZpZGVvX2RlY29kZXJf
+Y21kLAo+ID4gKyAgICAgICAudmlkaW9jX2VudW1fZnJhbWVpbnRlcnZhbHMgPSB2aXJ0aW9fdmlk
+ZW9fZW51bV9mcmFtZW1pbnRlcnZhbHMsCj4gPiArICAgICAgIC52aWRpb2NfZW51bV9mcmFtZXNp
+emVzID0gdmlydGlvX3ZpZGVvX2VudW1fZnJhbWVzaXplcywKPiA+ICsKPiA+ICsgICAgICAgLnZp
+ZGlvY19yZXFidWZzICAgICAgICAgPSB2aXJ0aW9fdmlkZW9fcmVxYnVmcywKPiA+ICsgICAgICAg
+LnZpZGlvY19xdWVyeWJ1ZiAgICAgICAgPSB2NGwyX20ybV9pb2N0bF9xdWVyeWJ1ZiwKPiA+ICsg
+ICAgICAgLnZpZGlvY19xYnVmICAgICAgICAgICAgPSB2NGwyX20ybV9pb2N0bF9xYnVmLAo+ID4g
+KyAgICAgICAudmlkaW9jX2RxYnVmICAgICAgICAgICA9IHY0bDJfbTJtX2lvY3RsX2RxYnVmLAo+
+ID4gKyAgICAgICAudmlkaW9jX3ByZXBhcmVfYnVmICAgICA9IHY0bDJfbTJtX2lvY3RsX3ByZXBh
+cmVfYnVmLAo+ID4gKyAgICAgICAudmlkaW9jX2NyZWF0ZV9idWZzICAgICA9IHY0bDJfbTJtX2lv
+Y3RsX2NyZWF0ZV9idWZzLAo+ID4gKyAgICAgICAudmlkaW9jX2V4cGJ1ZiAgICAgICAgICA9IHY0
+bDJfbTJtX2lvY3RsX2V4cGJ1ZiwKPiA+ICsKPiA+ICsgICAgICAgLnZpZGlvY19zdHJlYW1vbiAg
+ICAgICAgPSB2NGwyX20ybV9pb2N0bF9zdHJlYW1vbiwKPiA+ICsgICAgICAgLnZpZGlvY19zdHJl
+YW1vZmYgICAgICAgPSB2NGwyX20ybV9pb2N0bF9zdHJlYW1vZmYsCj4gPiArCj4gPiArICAgICAg
+IC52aWRpb2Nfc3Vic2NyaWJlX2V2ZW50ID0gdmlydGlvX3ZpZGVvX3N1YnNjcmliZV9ldmVudCwK
+PiA+ICsgICAgICAgLnZpZGlvY191bnN1YnNjcmliZV9ldmVudCA9IHY0bDJfZXZlbnRfdW5zdWJz
+Y3JpYmUsCj4gPiArfTsKPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2RlY19pbml0KHN0cnVj
+dCB2aWRlb19kZXZpY2UgKnZkKQo+ID4gK3sKPiA+ICsgICAgICAgc3NpemVfdCBudW07Cj4gPiAr
+Cj4gPiArICAgICAgIHZkLT5pb2N0bF9vcHMgPSAmdmlydGlvX3ZpZGVvX2RlY19pb2N0bF9vcHM7
+Cj4gPiArICAgICAgIG51bSA9IHN0cnNjcHkodmQtPm5hbWUsICJzdGF0ZWZ1bC1kZWNvZGVyIiwg
+c2l6ZW9mKHZkLT5uYW1lKSk7Cj4gCj4gRG9uJ3Qgd2Ugd2FudCB0byBjaGVjayB0aGUgdmFsdWUg
+b2YgIm51bSI/Cj4gQWxzbywgaG93IGFib3V0IGhhdmluZyBhIHdvcmQgInZpcnRpbyIgaW4gdGhl
+IG5hbWUgb2YgdGhlIGRyaXZlcj8KPiAKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiAr
+fQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19kZWMu
+aCBiL2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19kZWMuaAo+ID4gbmV3IGZpbGUg
+bW9kZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAwMDAwMC4uMGExMjUyMjQ4YmJmCj4gPiAtLS0g
+L2Rldi9udWxsCj4gPiArKysgYi9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZGVj
+LmgKPiA+IEBAIC0wLDAgKzEsMzAgQEAKPiA+ICsvKiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjog
+R1BMLTIuMCsgKi8KPiA+ICsvKiBEZWNvZGVyIGhlYWRlciBmb3IgdmlydGlvIHZpZGVvIGRyaXZl
+ci4KPiA+ICsgKgo+ID4gKyAqIENvcHlyaWdodCAyMDE5IE9wZW5TeW5lcmd5IEdtYkguCj4gPiAr
+ICoKPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91IGNhbiByZWRpc3Ry
+aWJ1dGUgaXQgYW5kL29yIG1vZGlmeQo+ID4gKyAqIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUg
+R05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgYXMgcHVibGlzaGVkIGJ5Cj4gPiArICogdGhlIEZy
+ZWUgU29mdHdhcmUgRm91bmRhdGlvbjsgZWl0aGVyIHZlcnNpb24gMiBvZiB0aGUgTGljZW5zZSwg
+b3IKPiA+ICsgKiAoYXQgeW91ciBvcHRpb24pIGFueSBsYXRlciB2ZXJzaW9uLgo+ID4gKyAqCj4g
+PiArICogVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2ls
+bCBiZSB1c2VmdWwsCj4gPiArICogYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRob3V0IGV2
+ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YKPiA+ICsgKiBNRVJDSEFOVEFCSUxJVFkgb3IgRklU
+TkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhlCj4gPiArICogR05VIEdlbmVy
+YWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPiA+ICsgKgo+ID4gKyAqIFlvdSBz
+aG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNl
+bnNlCj4gPiArICogYWxvbmcgd2l0aCB0aGlzIHByb2dyYW07IGlmIG5vdCwgc2VlIDxodHRwOi8v
+d3d3LmdudS5vcmcvbGljZW5zZXMvPjsuCj4gPiArICovCj4gPiArCj4gPiArI2lmbmRlZiBfVklS
+VElPX1ZJREVPX0RFQ19ICj4gPiArI2RlZmluZSBfVklSVElPX1ZJREVPX0RFQ19ICj4gPiArCj4g
+PiArI2luY2x1ZGUgInZpcnRpb192aWRlby5oIgo+ID4gKwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9f
+ZGVjX2luaXQoc3RydWN0IHZpZGVvX2RldmljZSAqdmQpOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9f
+ZGVjX2luaXRfY3RybHMoc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSk7Cj4gPiAr
+aW50IHZpcnRpb192aWRlb19kZWNfaW5pdF9xdWV1ZXModm9pZCAqcHJpdiwgc3RydWN0IHZiMl9x
+dWV1ZSAqc3JjX3ZxLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0
+IHZiMl9xdWV1ZSAqZHN0X3ZxKTsKPiA+ICsKPiA+ICsjZW5kaWYgLyogX1ZJUlRJT19WSURFT19E
+RUNfSCAqLwo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRl
+b19kZXZpY2UuYyBiL2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19kZXZpY2UuYwo+
+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAwMDAwMC4uMTMwZTcwNTU4
+MGQxCj4gPiAtLS0gL2Rldi9udWxsCj4gPiArKysgYi9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0
+aW9fdmlkZW9fZGV2aWNlLmMKPiA+IEBAIC0wLDAgKzEsMTA3OSBAQAo+ID4gKy8vIFNQRFgtTGlj
+ZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKwo+ID4gKy8qIERyaXZlciBmb3IgdmlydGlvIHZpZGVv
+IGRldmljZS4KPiA+ICsgKgo+ID4gKyAqIENvcHlyaWdodCAyMDE5IE9wZW5TeW5lcmd5IEdtYkgu
+Cj4gPiArICoKPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91IGNhbiBy
+ZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1vZGlmeQo+ID4gKyAqIGl0IHVuZGVyIHRoZSB0ZXJtcyBv
+ZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgYXMgcHVibGlzaGVkIGJ5Cj4gPiArICog
+dGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbjsgZWl0aGVyIHZlcnNpb24gMiBvZiB0aGUgTGlj
+ZW5zZSwgb3IKPiA+ICsgKiAoYXQgeW91ciBvcHRpb24pIGFueSBsYXRlciB2ZXJzaW9uLgo+ID4g
+KyAqCj4gPiArICogVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQg
+aXQgd2lsbCBiZSB1c2VmdWwsCj4gPiArICogYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRo
+b3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YKPiA+ICsgKiBNRVJDSEFOVEFCSUxJVFkg
+b3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhlCj4gPiArICogR05V
+IEdlbmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPiA+ICsgKgo+ID4gKyAq
+IFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1Ymxp
+YyBMaWNlbnNlCj4gPiArICogYWxvbmcgd2l0aCB0aGlzIHByb2dyYW07IGlmIG5vdCwgc2VlIDxo
+dHRwOi8vd3d3LmdudS5vcmcvbGljZW5zZXMvPjsuCj4gPiArICovCj4gPiArCj4gPiArI2luY2x1
+ZGUgPG1lZGlhL3Y0bDItZXZlbnQuaD4KPiA+ICsjaW5jbHVkZSA8bWVkaWEvdjRsMi1pb2N0bC5o
+Pgo+ID4gKyNpbmNsdWRlIDxtZWRpYS92aWRlb2J1ZjItZG1hLXNnLmg+Cj4gPiArCj4gPiArI2lu
+Y2x1ZGUgInZpcnRpb192aWRlby5oIgo+ID4gKyNpbmNsdWRlICJ2aXJ0aW9fdmlkZW9fZGVjLmgi
+Cj4gPiArI2luY2x1ZGUgInZpcnRpb192aWRlb19lbmMuaCIKPiA+ICsKPiA+ICtpbnQgdmlydGlv
+X3ZpZGVvX3F1ZXVlX3NldHVwKHN0cnVjdCB2YjJfcXVldWUgKnZxLCB1bnNpZ25lZCBpbnQgKm51
+bV9idWZmZXJzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQg
+Km51bV9wbGFuZXMsIHVuc2lnbmVkIGludCBzaXplc1tdLAo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBzdHJ1Y3QgZGV2aWNlICphbGxvY19kZXZzW10pCj4gPiArewo+ID4gKyAgICAg
+ICBpbnQgaTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9
+IHZiMl9nZXRfZHJ2X3ByaXYodnEpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZm9ybWF0X2lu
+Zm8gKnBfaW5mbzsKPiA+ICsKPiA+ICsgICAgICAgaWYgKCpudW1fcGxhbmVzKQo+ID4gKyAgICAg
+ICAgICAgICAgIHJldHVybiAwOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoVjRMMl9UWVBFX0lTX09V
+VFBVVCh2cS0+dHlwZSkpCj4gPiArICAgICAgICAgICAgICAgcF9pbmZvID0gJnN0cmVhbS0+aW5f
+aW5mbzsKPiA+ICsgICAgICAgZWxzZQo+ID4gKyAgICAgICAgICAgICAgIHBfaW5mbyA9ICZzdHJl
+YW0tPm91dF9pbmZvOwo+ID4gKwo+ID4gKyAgICAgICAqbnVtX3BsYW5lcyA9IHBfaW5mby0+bnVt
+X3BsYW5lczsKPiA+ICsKPiA+ICsgICAgICAgZm9yIChpID0gMDsgaSA8IHBfaW5mby0+bnVtX3Bs
+YW5lczsgaSsrKQo+ID4gKyAgICAgICAgICAgICAgIHNpemVzW2ldID0gcF9pbmZvLT5wbGFuZV9m
+b3JtYXRbaV0ucGxhbmVfc2l6ZTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+
+ID4gKwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fYnVmX2luaXQoc3RydWN0IHZiMl9idWZmZXIgKnZi
+KQo+ID4gK3sKPiA+ICsgICAgICAgaW50IHJldCA9IDA7Cj4gPiArICAgICAgIHVuc2lnbmVkIGlu
+dCBpLCBqOwo+ID4gKyAgICAgICBzdHJ1Y3Qgc2NhdHRlcmxpc3QgKnNnOwo+ID4gKyAgICAgICBz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX21lbV9lbnRyeSAqZW50czsKPiA+ICsgICAgICAgdWludDMyX3Qg
+bnVtX2VudHNbVklSVElPX1ZJREVPX01BWF9QTEFORVNdOwo+ID4gKyAgICAgICBzdHJ1Y3Qgc2df
+dGFibGUgKnNndFtWSVJUSU9fVklERU9fTUFYX1BMQU5FU107Cj4gPiArICAgICAgIHVpbnQzMl90
+IHJlc291cmNlX2lkLCBuZW50cyA9IDA7Cj4gPiArICAgICAgIHN0cnVjdCB2YjJfcXVldWUgKnZx
+ID0gdmItPnZiMl9xdWV1ZTsKPiA+ICsgICAgICAgZW51bSB2NGwyX2J1Zl90eXBlIHF1ZXVlX3R5
+cGUgPSB2cS0+dHlwZTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0
+cmVhbSA9IHZiMl9nZXRfZHJ2X3ByaXYodnEpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3Zp
+ZGVvX2J1ZmZlciAqdmlydGlvX3ZiID0gdG9fdmlydGlvX3ZiKHZiKTsKPiA+ICsgICAgICAgc3Ry
+dWN0IHZpcnRpb192aWRlb19kZXZpY2UgKnZ2ZCA9IHRvX3ZpcnRpb192ZChzdHJlYW0tPnZpZGVv
+X2Rldik7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2ID0gdnZkLT52djsKPiA+
+ICsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX3Jlc291cmNlX2lkX2dldCh2diwgJnJlc291cmNl
+X2lkKTsKPiA+ICsKPiA+ICsgICAgICAgaWYgKHZ2LT5zdXBwX25vbl9jb250aWcpIHsKPiA+ICsg
+ICAgICAgICAgICAgICBmb3IgKGkgPSAwOyBpIDwgdmItPm51bV9wbGFuZXM7IGkrKykgewo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgc2d0W2ldID0gdmIyX2RtYV9zZ19wbGFuZV9kZXNjKHZi
+LCBpKTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIG5lbnRzICs9IHNndFtpXS0+bmVudHM7
+Cj4gPiArICAgICAgICAgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICAgICAgICAgIGVudHMgPSBr
+Y2FsbG9jKG5lbnRzLCBzaXplb2YoKmVudHMpLCBHRlBfS0VSTkVMKTsKPiA+ICsgICAgICAgICAg
+ICAgICBpZiAoIWVudHMpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVOT01F
+TTsKPiA+ICsKPiA+ICsgICAgICAgICAgICAgICBmb3IgKGkgPSAwOyBpIDwgdmItPm51bV9wbGFu
+ZXM7ICsraSkgewo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgZm9yX2VhY2hfc2coc2d0W2ld
+LT5zZ2wsIHNnLCBzZ3RbaV0tPm5lbnRzLCBqKSB7Cj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGVudHNbal0uYWRkciA9IGNwdV90b19sZTY0KHZ2LT5oYXNfaW9tbXUKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+PyBzZ19kbWFfYWRkcmVzcyhzZykKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBzZ19waHlzKHNnKSk7Cj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGVudHNbal0ubGVuZ3RoID0gY3B1X3RvX2xlMzIoc2ctPmxl
+bmd0aCk7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICB9Cj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICBudW1fZW50c1tpXSA9IHNndFtpXS0+bmVudHM7Cj4gPiArICAgICAgICAgICAgICAg
+fQo+ID4gKyAgICAgICB9IGVsc2Ugewo+ID4gKyAgICAgICAgICAgICAgIG5lbnRzID0gdmItPm51
+bV9wbGFuZXM7Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgZW50cyA9IGtjYWxsb2MobmVudHMs
+IHNpemVvZigqZW50cyksIEdGUF9LRVJORUwpOwo+ID4gKyAgICAgICAgICAgICAgIGlmICghZW50
+cykKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtRU5PTUVNOwo+ID4gKwo+ID4g
+KyAgICAgICAgICAgICAgIGZvciAoaSA9IDA7IGkgPCB2Yi0+bnVtX3BsYW5lczsgKytpKSB7Cj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICBlbnRzW2ldLmFkZHIgPQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBjcHVfdG9fbGU2NCh2YjJfZG1hX2NvbnRpZ19wbGFuZV9kbWFf
+YWRkcih2YiwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaSkpOwo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgZW50c1tpXS5sZW5ndGggPSBjcHVfdG9fbGUzMih2Yi0+cGxhbmVzW2ldLmxlbmd0aCk7
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBudW1fZW50c1tpXSA9IDE7Cj4gPiArICAgICAg
+ICAgICAgICAgfQo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHY0bDJfZGJnKDEsIHZ2
+LT5kZWJ1ZywgJnZ2LT52NGwyX2RldiwgIm1lbSBlbnRyaWVzOlxuIik7Cj4gPiArICAgICAgIGlm
+ICh2di0+ZGVidWcgPj0gMSkgewo+ID4gKyAgICAgICAgICAgICAgIGZvciAoaSA9IDA7IGkgPCBu
+ZW50czsgaSsrKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcHJfZGVidWcoIlx0JTAzaTog
+YWRkcj0lbGx4IGxlbmd0aD0ldVxuIiwgaSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBlbnRzW2ldLmFkZHIsIGVudHNbaV0ubGVuZ3RoKTsKPiA+ICsgICAgICAg
+fQo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fY21kX3Jlc291cmNlX2NyZWF0
+ZSh2diwgc3RyZWFtLT5zdHJlYW1faWQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHJlc291cmNlX2lkLAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICB0b192aXJ0aW9fcXVldWVfdHlwZShxdWV1ZV90eXBl
+KSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZW50
+cywgdmItPm51bV9wbGFuZXMsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIG51bV9lbnRzKTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAg
+ICAgICAgICAgIHZpcnRpb192aWRlb19yZXNvdXJjZV9pZF9wdXQodnZkLT52diwgcmVzb3VyY2Vf
+aWQpOwo+ID4gKyAgICAgICAgICAgICAgIGtmcmVlKGVudHMpOwo+ID4gKwo+ID4gKyAgICAgICAg
+ICAgICAgIHJldHVybiByZXQ7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgdmlydGlv
+X3ZiLT5xdWV1ZWQgPSBmYWxzZTsKPiA+ICsgICAgICAgdmlydGlvX3ZiLT5yZXNvdXJjZV9pZCA9
+IHJlc291cmNlX2lkOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4g
+PiArdm9pZCB2aXJ0aW9fdmlkZW9fYnVmX2NsZWFudXAoc3RydWN0IHZiMl9idWZmZXIgKnZiKQo+
+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IHZi
+Ml9nZXRfZHJ2X3ByaXYodmItPnZiMl9xdWV1ZSk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9f
+dmlkZW9fYnVmZmVyICp2aXJ0aW9fdmIgPSB0b192aXJ0aW9fdmIodmIpOwo+ID4gKyAgICAgICBz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlk
+ZW9fZGV2KTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSB2dmQtPnZ2Owo+
+ID4gKwo+ID4gKyAgICAgICB2aXJ0aW9fdmlkZW9fcmVzb3VyY2VfaWRfcHV0KHZ2LCB2aXJ0aW9f
+dmItPnJlc291cmNlX2lkKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19xdWVy
+eWNhcChzdHJ1Y3QgZmlsZSAqZmlsZSwgdm9pZCAqZmgsCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgIHN0cnVjdCB2NGwyX2NhcGFiaWxpdHkgKmNhcCkKPiA+ICt7Cj4gPiArICAgICAgIHN0
+cnVjdCB2aWRlb19kZXZpY2UgKnZpZGVvX2RldiA9IHZpZGVvX2RldmRhdGEoZmlsZSk7Cj4gPiAr
+Cj4gPiArICAgICAgIHN0cm5jcHkoY2FwLT5kcml2ZXIsIERSSVZFUl9OQU1FLCBzaXplb2YoY2Fw
+LT5kcml2ZXIpKTsKPiA+ICsgICAgICAgc3RybmNweShjYXAtPmNhcmQsIHZpZGVvX2Rldi0+bmFt
+ZSwgc2l6ZW9mKGNhcC0+Y2FyZCkpOwo+ID4gKyAgICAgICBzbnByaW50ZihjYXAtPmJ1c19pbmZv
+LCBzaXplb2YoY2FwLT5idXNfaW5mbyksICJ2aXJ0aW86JXMiLAo+ID4gKyAgICAgICAgICAgICAg
+ICB2aWRlb19kZXYtPm5hbWUpOwo+IAo+IHY0bDItY29tcGxpYW5jZSB0ZXN0IHJhaXNlcyBhbiBl
+cnJvciBvbiB0aGlzIHByZWZpeCAidmlydGlvOiIuCj4gV2UgaGF2ZSB0d28gb3B0aW9uczoKPiAx
+LiBNb3ZlIHRoZSBkcml2ZXIgY29kZSB0byAvcGxhdGZvcm0vIGFuZCB1c2UgYSBwcmVmaXggInBs
+YXRmb3JtOiIKPiBsaWtlIG90aGVyIHZpcnR1YWwgZHJpdmVycyBzdWNoIGFzIHZpdmlkIGFuZCB2
+aWNvZGVjLgo+IDIuIE1vZGlmeSB2NGwyLWNvbXBsaWFuY2UgdGVzdC4KPiAKPiBJJ20gbm90IHN1
+cmUgd2hpY2ggaXMgYmV0dGVyLCB0aG91Z2guCj4gCj4gPiArCj4gPiArICAgICAgIGNhcC0+ZGV2
+aWNlX2NhcHMgPSBWNEwyX0NBUF9WSURFT19NMk1fTVBMQU5FIHwgVjRMMl9DQVBfU1RSRUFNSU5H
+Owo+ID4gKyAgICAgICBjYXAtPmNhcGFiaWxpdGllcyA9IGNhcC0+ZGV2aWNlX2NhcHMgfCBWNEwy
+X0NBUF9ERVZJQ0VfQ0FQUzsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4g
+Kwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fZW51bV9mcmFtZXNpemVzKHN0cnVjdCBmaWxlICpmaWxl
+LCB2b2lkICpmaCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2
+NGwyX2ZybXNpemVlbnVtICpmKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRl
+b19zdHJlYW0gKnN0cmVhbSA9IGZpbGUyc3RyZWFtKGZpbGUpOwo+ID4gKyAgICAgICBzdHJ1Y3Qg
+dmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlkZW9fZGV2
+KTsKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdCAqZm10ID0gTlVMTDsKPiA+ICsgICAg
+ICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9mcmFtZSAqZnJtID0gTlVMTDsKPiA+ICsgICAgICAgc3Ry
+dWN0IHZpcnRpb192aWRlb19mb3JtYXRfZnJhbWUgKmZyYW1lID0gTlVMTDsKPiA+ICsgICAgICAg
+aW50IGlkeCA9IGYtPmluZGV4Owo+ID4gKwo+ID4gKyAgICAgICBmbXQgPSBmaW5kX3ZpZGVvX2Zv
+cm1hdCgmdnZkLT5pbnB1dF9mbXRfbGlzdCwgZi0+cGl4ZWxfZm9ybWF0KTsKPiA+ICsgICAgICAg
+aWYgKGZtdCA9PSBOVUxMKQo+ID4gKyAgICAgICAgICAgICAgIGZtdCA9IGZpbmRfdmlkZW9fZm9y
+bWF0KCZ2dmQtPm91dHB1dF9mbXRfbGlzdCwgZi0+cGl4ZWxfZm9ybWF0KTsKPiA+ICsgICAgICAg
+aWYgKGZtdCA9PSBOVUxMKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4g
+Kwo+ID4gKyAgICAgICBpZiAoaWR4ID49IGZtdC0+ZGVzYy5udW1fZnJhbWVzKQo+ID4gKyAgICAg
+ICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4gKwo+ID4gKyAgICAgICBmcm0gPSAmZm10LT5m
+cmFtZXNbaWR4XTsKPiA+ICsgICAgICAgZnJhbWUgPSAmZnJtLT5mcmFtZTsKPiA+ICsKPiA+ICsg
+ICAgICAgaWYgKGZyYW1lLT53aWR0aC5taW4gPT0gZnJhbWUtPndpZHRoLm1heCAmJgo+ID4gKyAg
+ICAgICAgICAgZnJhbWUtPmhlaWdodC5taW4gPT0gZnJhbWUtPmhlaWdodC5tYXgpIHsKPiA+ICsg
+ICAgICAgICAgICAgICBmLT50eXBlID0gVjRMMl9GUk1TSVpFX1RZUEVfRElTQ1JFVEU7Cj4gPiAr
+ICAgICAgICAgICAgICAgZi0+ZGlzY3JldGUud2lkdGggPSBmcmFtZS0+d2lkdGgubWluOwo+ID4g
+KyAgICAgICAgICAgICAgIGYtPmRpc2NyZXRlLmhlaWdodCA9IGZyYW1lLT5oZWlnaHQubWluOwo+
+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAwOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAg
+ICAgIGYtPnR5cGUgPSBWNEwyX0ZSTVNJWkVfVFlQRV9DT05USU5VT1VTOwo+ID4gKyAgICAgICBm
+LT5zdGVwd2lzZS5taW5fd2lkdGggPSBmcmFtZS0+d2lkdGgubWluOwo+ID4gKyAgICAgICBmLT5z
+dGVwd2lzZS5tYXhfd2lkdGggPSBmcmFtZS0+d2lkdGgubWF4Owo+ID4gKyAgICAgICBmLT5zdGVw
+d2lzZS5taW5faGVpZ2h0ID0gZnJhbWUtPmhlaWdodC5taW47Cj4gPiArICAgICAgIGYtPnN0ZXB3
+aXNlLm1heF9oZWlnaHQgPSBmcmFtZS0+aGVpZ2h0Lm1heDsKPiA+ICsgICAgICAgZi0+c3RlcHdp
+c2Uuc3RlcF93aWR0aCA9IGZyYW1lLT53aWR0aC5zdGVwOwo+ID4gKyAgICAgICBmLT5zdGVwd2lz
+ZS5zdGVwX2hlaWdodCA9IGZyYW1lLT5oZWlnaHQuc3RlcDsKPiA+ICsgICAgICAgcmV0dXJuIDA7
+Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBib29sIGluX3N0ZXBwZWRfaW50ZXJ2YWwodWludDMy
+X3QgaW50X3N0YXJ0LCB1aW50MzJfdCBpbnRfZW5kLAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB1aW50MzJfdCBzdGVwLCB1aW50MzJfdCBwb2ludCkKPiAKPiBIb3cgYWJvdXQg
+Y2hhbmdpbmcgdGhlIGludGVyZmFjZSBsaWtlIHRoaXM/Cj4gCj4gc3RhdGljIGJvb2wgaW5fc3Rl
+cHBlZF9pbnRlcnZhbChjb25zdCBzdHJ1Y3QKPiB2aXJ0aW9fdmlkZW9fZm9ybWF0X3JhbmdlKiBy
+YW5nZSwgdWludDMyX3QgcG9pbnQpCj4gCj4gPiArewo+ID4gKyAgICAgICBpZiAocG9pbnQgPCBp
+bnRfc3RhcnQgfHwgcG9pbnQgPiBpbnRfZW5kKQo+IAo+IFlvdSBjYW4gdXNlIHdpdGhpbl9yYW5n
+ZS4KPiAKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gZmFsc2U7Cj4gPiArCj4gPiArICAgICAg
+IGlmIChzdGVwID09IDAgJiYgaW50X3N0YXJ0ID09IGludF9lbmQgJiYgaW50X3N0YXJ0ID09IHBv
+aW50KQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiB0cnVlOwo+ID4gKwo+ID4gKyAgICAgICBp
+ZiAoc3RlcCAhPSAwICYmIChwb2ludCAtIGludF9zdGFydCkgJSBzdGVwID09IDApCj4gPiArICAg
+ICAgICAgICAgICAgcmV0dXJuIHRydWU7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiBmYWxzZTsK
+PiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19lbnVtX2ZyYW1lbWludGVydmFscyhz
+dHJ1Y3QgZmlsZSAqZmlsZSwgdm9pZCAqZmgsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHN0cnVjdCB2NGwyX2ZybWl2YWxlbnVtICpmKQo+ID4gK3sKPiA+ICsgICAg
+ICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IGZpbGUyc3RyZWFtKGZpbGUp
+Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlv
+X3ZkKHN0cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdCAq
+Zm10ID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9mcmFtZSAqZnJtID0g
+TlVMTDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19mb3JtYXRfZnJhbWUgKmZyYW1l
+ID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19mb3JtYXRfcmFuZ2UgKmZy
+YXRlID0gTlVMTDsKPiA+ICsgICAgICAgaW50IGlkeCA9IGYtPmluZGV4Owo+ID4gKyAgICAgICBp
+bnQgZl9pZHggPSAwOwo+ID4gKwo+ID4gKyAgICAgICBmbXQgPSBmaW5kX3ZpZGVvX2Zvcm1hdCgm
+dnZkLT5pbnB1dF9mbXRfbGlzdCwgZi0+cGl4ZWxfZm9ybWF0KTsKPiA+ICsgICAgICAgaWYgKGZt
+dCA9PSBOVUxMKQo+ID4gKyAgICAgICAgICAgICAgIGZtdCA9IGZpbmRfdmlkZW9fZm9ybWF0KCZ2
+dmQtPm91dHB1dF9mbXRfbGlzdCwgZi0+cGl4ZWxfZm9ybWF0KTsKPiA+ICsgICAgICAgaWYgKGZt
+dCA9PSBOVUxMKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4gKwo+ID4g
+KyAgICAgICBmb3IgKGZfaWR4ID0gMDsgZl9pZHggPD0gZm10LT5kZXNjLm51bV9mcmFtZXM7IGZf
+aWR4KyspIHsKPiA+ICsgICAgICAgICAgICAgICBmcm0gPSAmZm10LT5mcmFtZXNbZl9pZHhdOwo+
+ID4gKyAgICAgICAgICAgICAgIGZyYW1lID0gJmZybS0+ZnJhbWU7Cj4gPiArICAgICAgICAgICAg
+ICAgaWYgKGluX3N0ZXBwZWRfaW50ZXJ2YWwoZnJhbWUtPndpZHRoLm1pbiwgZnJhbWUtPndpZHRo
+Lm1heCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmcmFtZS0+
+d2lkdGguc3RlcCwgZi0+d2lkdGgpICYmCj4gPiArICAgICAgICAgICAgICAgICAgaW5fc3RlcHBl
+ZF9pbnRlcnZhbChmcmFtZS0+aGVpZ2h0Lm1pbiwgZnJhbWUtPmhlaWdodC5tYXgsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZnJhbWUtPmhlaWdodC5zdGVwLCBm
+LT5oZWlnaHQpKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAgICAg
+IH0KPiA+ICsKPiA+ICsgICAgICAgaWYgKGZyYW1lID09IE5VTEwgfHwgZi0+aW5kZXggPj0gZnJh
+bWUtPm51bV9yYXRlcykKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsK
+PiA+ICsgICAgICAgZnJhdGUgPSAmZnJtLT5mcmFtZV9yYXRlc1tpZHhdOwo+ID4gKyAgICAgICBp
+ZiAoZnJhdGUtPm1heCA9PSBmcmF0ZS0+bWluKSB7Cj4gPiArICAgICAgICAgICAgICAgZi0+dHlw
+ZSA9IFY0TDJfRlJNSVZBTF9UWVBFX0RJU0NSRVRFOwo+ID4gKyAgICAgICAgICAgICAgIGYtPmRp
+c2NyZXRlLm51bWVyYXRvciA9IDE7Cj4gPiArICAgICAgICAgICAgICAgZi0+ZGlzY3JldGUuZGVu
+b21pbmF0b3IgPSBmcmF0ZS0+bWF4Owo+ID4gKyAgICAgICB9IGVsc2Ugewo+ID4gKyAgICAgICAg
+ICAgICAgIGYtPnN0ZXB3aXNlLm1pbi5udW1lcmF0b3IgPSAxOwo+ID4gKyAgICAgICAgICAgICAg
+IGYtPnN0ZXB3aXNlLm1pbi5kZW5vbWluYXRvciA9IGZyYXRlLT5tYXg7Cj4gPiArICAgICAgICAg
+ICAgICAgZi0+c3RlcHdpc2UubWF4Lm51bWVyYXRvciA9IDE7Cj4gPiArICAgICAgICAgICAgICAg
+Zi0+c3RlcHdpc2UubWF4LmRlbm9taW5hdG9yID0gZnJhdGUtPm1pbjsKPiA+ICsgICAgICAgICAg
+ICAgICBmLT5zdGVwd2lzZS5zdGVwLm51bWVyYXRvciA9IDE7Cj4gPiArICAgICAgICAgICAgICAg
+Zi0+c3RlcHdpc2Uuc3RlcC5kZW5vbWluYXRvciA9IGZyYXRlLT5zdGVwOwo+ID4gKyAgICAgICAg
+ICAgICAgIGlmIChmcmF0ZS0+c3RlcCA9PSAxKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+Zi0+dHlwZSA9IFY0TDJfRlJNSVZBTF9UWVBFX0NPTlRJTlVPVVM7Cj4gPiArICAgICAgICAgICAg
+ICAgZWxzZQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgZi0+dHlwZSA9IFY0TDJfRlJNSVZB
+TF9UWVBFX1NURVBXSVNFOwo+ID4gKyAgICAgICB9Cj4gPiArICAgICAgIHJldHVybiAwOwo+ID4g
+K30KPiA+ICsKPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2dfZm10KHN0cnVjdCBmaWxlICpm
+aWxlLCB2b2lkICpmaCwgc3RydWN0IHY0bDJfZm9ybWF0ICpmKQo+ID4gK3sKPiA+ICsgICAgICAg
+c3RydWN0IHZpZGVvX2Zvcm1hdF9pbmZvICppbmZvOwo+ID4gKyAgICAgICBzdHJ1Y3QgdjRsMl9w
+aXhfZm9ybWF0X21wbGFuZSAqcGl4X21wID0gJmYtPmZtdC5waXhfbXA7Cj4gPiArICAgICAgIHN0
+cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0gPSBmaWxlMnN0cmVhbShmaWxlKTsKPiA+
+ICsKPiA+ICsgICAgICAgaWYgKCFWNEwyX1RZUEVfSVNfT1VUUFVUKGYtPnR5cGUpKQo+ID4gKyAg
+ICAgICAgICAgICAgIGluZm8gPSAmc3RyZWFtLT5vdXRfaW5mbzsKPiA+ICsgICAgICAgZWxzZQo+
+ID4gKyAgICAgICAgICAgICAgIGluZm8gPSAmc3RyZWFtLT5pbl9pbmZvOwo+ID4gKwo+ID4gKyAg
+ICAgICB2aXJ0aW9fdmlkZW9fZm9ybWF0X2Zyb21faW5mbyhpbmZvLCBwaXhfbXApOwo+ID4gKwo+
+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19z
+X2ZtdChzdHJ1Y3QgZmlsZSAqZmlsZSwgdm9pZCAqZmgsIHN0cnVjdCB2NGwyX2Zvcm1hdCAqZikK
+PiA+ICt7Cj4gPiArICAgICAgIGludCBpLCByZXQ7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9f
+dmlkZW9fc3RyZWFtICpzdHJlYW0gPSBmaWxlMnN0cmVhbShmaWxlKTsKPiA+ICsgICAgICAgc3Ry
+dWN0IHY0bDJfcGl4X2Zvcm1hdF9tcGxhbmUgKnBpeF9tcCA9ICZmLT5mbXQucGl4X21wOwo+ID4g
+KyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0
+cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSB2
+dmQtPnZ2Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZm9ybWF0X2luZm8gaW5mbzsKPiA+ICsg
+ICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9pbmZvICpwX2luZm87Cj4gPiArICAgICAgIHVpbnQz
+Ml90IHF1ZXVlOwo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fdHJ5X2ZtdChz
+dHJlYW0sIGYpOwo+ID4gKyAgICAgICBpZiAocmV0KQo+ID4gKyAgICAgICAgICAgICAgIHJldHVy
+biByZXQ7Cj4gPiArCj4gPiArICAgICAgIGlmIChWNEwyX1RZUEVfSVNfT1VUUFVUKGYtPnR5cGUp
+KSB7Cj4gPiArICAgICAgICAgICAgICAgdmlydGlvX3ZpZGVvX2Zvcm1hdF9maWxsX2RlZmF1bHRf
+aW5mbygmaW5mbywgJnN0cmVhbS0+aW5faW5mbyk7Cj4gPiArICAgICAgICAgICAgICAgcXVldWUg
+PSBWSVJUSU9fVklERU9fUVVFVUVfVFlQRV9JTlBVVDsKPiA+ICsgICAgICAgfSBlbHNlIHsKPiA+
+ICsgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9fZm9ybWF0X2ZpbGxfZGVmYXVsdF9pbmZvKCZp
+bmZvLCAmc3RyZWFtLT5vdXRfaW5mbyk7Cj4gPiArICAgICAgICAgICAgICAgcXVldWUgPSBWSVJU
+SU9fVklERU9fUVVFVUVfVFlQRV9PVVRQVVQ7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAg
+ICAgaW5mby5mcmFtZV93aWR0aCA9IHBpeF9tcC0+d2lkdGg7Cj4gPiArICAgICAgIGluZm8uZnJh
+bWVfaGVpZ2h0ID0gcGl4X21wLT5oZWlnaHQ7Cj4gPiArICAgICAgIGluZm8ubnVtX3BsYW5lcyA9
+IHBpeF9tcC0+bnVtX3BsYW5lczsKPiA+ICsgICAgICAgaW5mby5mb3VyY2NfZm9ybWF0ID0gcGl4
+X21wLT5waXhlbGZvcm1hdDsKPiA+ICsKPiA+ICsgICAgICAgZm9yIChpID0gMDsgaSA8IGluZm8u
+bnVtX3BsYW5lczsgaSsrKSB7Cj4gPiArICAgICAgICAgICAgICAgaW5mby5wbGFuZV9mb3JtYXRb
+aV0uc3RyaWRlID0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGl4X21wLT5wbGFuZV9mbXRbaV0uYnl0ZXNwZXJsaW5lOwo+ID4gKyAgICAgICAgICAgICAgIGlu
+Zm8ucGxhbmVfZm9ybWF0W2ldLnBsYW5lX3NpemUgPQo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwaXhfbXAtPnBsYW5lX2ZtdFtpXS5zaXplaW1hZ2U7Cj4gPiAr
+ICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX2NtZF9zZXRfcGFyYW1zKHZ2
+LCBzdHJlYW0sICZpbmZvLCBxdWV1ZSk7Cj4gPiArICAgICAgIHZpcnRpb192aWRlb19jbWRfZ2V0
+X3BhcmFtcyh2diwgc3RyZWFtLCBWSVJUSU9fVklERU9fUVVFVUVfVFlQRV9JTlBVVCk7Cj4gPiAr
+ICAgICAgIHZpcnRpb192aWRlb19jbWRfZ2V0X3BhcmFtcyh2diwgc3RyZWFtLCBWSVJUSU9fVklE
+RU9fUVVFVUVfVFlQRV9PVVRQVVQpOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoVjRMMl9UWVBFX0lT
+X09VVFBVVChmLT50eXBlKSkKPiA+ICsgICAgICAgICAgICAgICBwX2luZm8gPSAmc3RyZWFtLT5p
+bl9pbmZvOwo+ID4gKyAgICAgICBlbHNlCj4gPiArICAgICAgICAgICAgICAgcF9pbmZvID0gJnN0
+cmVhbS0+b3V0X2luZm87Cj4gPiArCj4gPiArICAgICAgIHZpcnRpb192aWRlb19mb3JtYXRfZnJv
+bV9pbmZvKHBfaW5mbywgcGl4X21wKTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiAr
+fQo+ID4gKwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fZ19zZWxlY3Rpb24oc3RydWN0IGZpbGUgKmZp
+bGUsIHZvaWQgKmZoLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwyX3Nl
+bGVjdGlvbiAqc2VsKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9pbmZv
+ICppbmZvID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0
+cmVhbSA9IGZpbGUyc3RyZWFtKGZpbGUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X2RldmljZSAqdnZkID0gdmlkZW9fZHJ2ZGF0YShmaWxlKTsKPiA+ICsKPiA+ICsgICAgICAgc3dp
+dGNoICh2dmQtPnR5cGUpIHsKPiA+ICsgICAgICAgY2FzZSBWSVJUSU9fVklERU9fREVWSUNFX0VO
+Q09ERVI6Cj4gPiArICAgICAgICAgICAgICAgaWYgKCFWNEwyX1RZUEVfSVNfT1VUUFVUKHNlbC0+
+dHlwZSkpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsg
+ICAgICAgICAgICAgICBpbmZvID0gJnN0cmVhbS0+aW5faW5mbzsKPiA+ICsgICAgICAgICAgICAg
+ICBicmVhazsKPiA+ICsgICAgICAgY2FzZSBWSVJUSU9fVklERU9fREVWSUNFX0RFQ09ERVI6Cj4g
+PiArICAgICAgICAgICAgICAgaWYgKFY0TDJfVFlQRV9JU19PVVRQVVQoc2VsLT50eXBlKSkKPiA+
+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4gKyAgICAgICAgICAg
+ICAgIGluZm8gPSAmc3RyZWFtLT5vdXRfaW5mbzsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsK
+PiA+ICsgICAgICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnZkLT52
+di0+djRsMl9kZXYsICJ1bnN1cHBvcnRlZCBkZXZpY2UgdHlwZVxuIik7Cj4gPiArICAgICAgICAg
+ICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgc3dp
+dGNoIChzZWwtPnRhcmdldCkgewo+ID4gKyAgICAgICBjYXNlIFY0TDJfU0VMX1RHVF9DT01QT1NF
+X0JPVU5EUzoKPiA+ICsgICAgICAgY2FzZSBWNEwyX1NFTF9UR1RfQ09NUE9TRV9QQURERUQ6Cj4g
+Cj4gQ2FuJ3Qgd2Ugc3VwcG9ydCBWNEwyX1NFTF9UR1RfQ09NUE9TRSBhcyB3ZWxsPwo+IAo+ID4g
+KyAgICAgICAgICAgICAgIHNlbC0+ci53aWR0aCA9IGluZm8tPmZyYW1lX3dpZHRoOwo+ID4gKyAg
+ICAgICAgICAgICAgIHNlbC0+ci5oZWlnaHQgPSBpbmZvLT5mcmFtZV9oZWlnaHQ7Cj4gPiArICAg
+ICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAgICAgIGRlZmF1bHQ6Cj4gPiArICAgICAgICAgICAg
+ICAgdjRsMl9kYmcoMSwgdnZkLT52di0+ZGVidWcsICZ2dmQtPnZ2LT52NGwyX2RldiwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAidW5zdXBwb3J0ZWQvaW52YWxpZCBzZWxlY3Rpb24gdGFy
+Z2V0XG4iKTsKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsgICAgICAg
+fQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRp
+b192aWRlb19zX3NlbGVjdGlvbihzdHJ1Y3QgZmlsZSAqZmlsZSwgdm9pZCAqZmgsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwyX3NlbGVjdGlvbiAqc2VsKQo+ID4g
+K3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IGZpbGUy
+c3RyZWFtKGZpbGUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZk
+ID0gdG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsgICAgICAgc3RydWN0IHZp
+cnRpb192aWRlbyAqdnYgPSB2dmQtPnZ2Owo+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gKwo+ID4g
+KyAgICAgICBzdHJlYW0tPm91dF9pbmZvLmNyb3AudG9wID0gc2VsLT5yLnRvcDsKPiA+ICsgICAg
+ICAgc3RyZWFtLT5vdXRfaW5mby5jcm9wLmxlZnQgPSBzZWwtPnIubGVmdDsKPiA+ICsgICAgICAg
+c3RyZWFtLT5vdXRfaW5mby5jcm9wLndpZHRoID0gc2VsLT5yLndpZHRoOwo+ID4gKyAgICAgICBz
+dHJlYW0tPm91dF9pbmZvLmNyb3AuaGVpZ2h0ID0gc2VsLT5yLmhlaWdodDsKPiA+ICsKPiA+ICsg
+ICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2NtZF9zZXRfcGFyYW1zKHZ2LCBzdHJlYW0sICAmc3Ry
+ZWFtLT5vdXRfaW5mbywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBWSVJUSU9fVklERU9fUVVFVUVfVFlQRV9PVVRQVVQpOwo+ID4gKyAgICAgICBpZiAocmV0
+IDwgMCkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAg
+ICAgLyogR2V0IGFjdHVhbCBzZWxlY3Rpb24gdGhhdCB3YXMgc2V0ICovCj4gPiArICAgICAgIHJl
+dHVybiB2aXJ0aW9fdmlkZW9fY21kX2dldF9wYXJhbXModnYsIHN0cmVhbSwKPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBWSVJUSU9fVklERU9fUVVFVUVfVFlQ
+RV9PVVRQVVQpOwo+ID4gK30KPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX3RyeV9mbXQoc3Ry
+dWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSwKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICBzdHJ1Y3QgdjRsMl9mb3JtYXQgKmYpCj4gPiArewo+ID4gKyAgICAgICBpbnQgaSwgaWR4
+ID0gMDsKPiA+ICsgICAgICAgc3RydWN0IHY0bDJfcGl4X2Zvcm1hdF9tcGxhbmUgKnBpeF9tcCA9
+ICZmLT5mbXQucGl4X21wOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAq
+dnZkID0gdG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsgICAgICAgc3RydWN0
+IHZpZGVvX2Zvcm1hdCAqZm10ID0gTlVMTDsKPiA+ICsgICAgICAgYm9vbCBmb3VuZCA9IGZhbHNl
+Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZm9ybWF0X2ZyYW1lICpmcm0gPSBOVUxMOwo+ID4g
+KyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9mcmFtZSAqZnJhbWUgPSBOVUxMOwo+
+ID4gKwo+ID4gKyAgICAgICBpZiAoVjRMMl9UWVBFX0lTX09VVFBVVChmLT50eXBlKSkKPiA+ICsg
+ICAgICAgICAgICAgICBmbXQgPSBmaW5kX3ZpZGVvX2Zvcm1hdCgmdnZkLT5pbnB1dF9mbXRfbGlz
+dCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwaXhfbXAtPnBp
+eGVsZm9ybWF0KTsKPiA+ICsgICAgICAgZWxzZQo+ID4gKyAgICAgICAgICAgICAgIGZtdCA9IGZp
+bmRfdmlkZW9fZm9ybWF0KCZ2dmQtPm91dHB1dF9mbXRfbGlzdCwKPiA+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwaXhfbXAtPnBpeGVsZm9ybWF0KTsKPiA+ICsKPiA+
+ICsgICAgICAgaWYgKCFmbXQpIHsKPiAKPiBXaHkgaXMgdGhpcyBjb25kaXRpb24gbmVlZGVkPwo+
+IAo+ID4gKyAgICAgICAgICAgICAgIGlmIChmLT50eXBlID09IFY0TDJfQlVGX1RZUEVfVklERU9f
+Q0FQVFVSRV9NUExBTkUpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9f
+Zm9ybWF0X2Zyb21faW5mbygmc3RyZWFtLT5vdXRfaW5mbywKPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBpeF9tcCk7Cj4gPiArICAgICAg
+ICAgICAgICAgZWxzZSBpZiAoZi0+dHlwZSA9PSBWNEwyX0JVRl9UWVBFX1ZJREVPX09VVFBVVF9N
+UExBTkUpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9fZm9ybWF0X2Zy
+b21faW5mbygmc3RyZWFtLT5pbl9pbmZvLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGl4X21wKTsKPiA+ICsgICAgICAgICAgICAgICBl
+bHNlCj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsgICAg
+ICAgICAgICAgICByZXR1cm4gMDsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICBmb3Ig
+KGkgPSAwOyBpIDwgZm10LT5kZXNjLm51bV9mcmFtZXMgJiYgIWZvdW5kOyBpKyspIHsKPiA+IHdp
+ZHRofCBhbmQgfGhlaWdodHwgZG9uJ3QgbWFrZSBhbnkgc2Vuc2UgZm9yIGNvZGVkIGZvcm1hdHMg
+d2hvc2UKPiBtZXRhZGF0YSBhcmUgaW4gc3RyZWFtLCBzdWNoIGFzIFZQeCBhbmQgSC4yNjQuCj4g
+Cj4gU28sIHdlIHNob3VsZCBoYXZlIGEgaWYtc3RhdGVtZW50IGxpa2UgdGhpcyBiZWZvcmUgdGhp
+cyBmb3ItbG9vcDoKPiAKPiBpZiAocGl4X21wLT53aWR0aCA9PSAwICYmIHBpeF9tcC0+aGVpZ2h0
+ID09IDApICB7Cj4gICAgICAgICBzdHJlYW0tPmN1cnJlbnRfZnJhbWUgPSAmZm10LT5mcmFtZXNb
+MF07Cj4gICAgICAgICByZXR1cm4gMDsKPiB9Cj4gCj4gPiArICAgICAgICAgICAgICAgZnJtID0g
+JmZtdC0+ZnJhbWVzW2ldOwo+ID4gKyAgICAgICAgICAgICAgIGZyYW1lID0gJmZybS0+ZnJhbWU7
+Cj4gPiArICAgICAgICAgICAgICAgaWYgKCF3aXRoaW5fcmFuZ2UoZnJhbWUtPndpZHRoLm1pbiwg
+cGl4X21wLT53aWR0aCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmcmFt
+ZS0+d2lkdGgubWF4KSkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOwo+ID4g
+Kwo+ID4gKyAgICAgICAgICAgICAgIGlmICghd2l0aGluX3JhbmdlKGZyYW1lLT5oZWlnaHQubWlu
+LCBwaXhfbXAtPndpZHRoLAo+IAo+IHBpeF9tcC0+aGVpZ2h0Cj4gCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgZnJhbWUtPmhlaWdodC5tYXgpKQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgY29udGludWU7Cj4gPiArICAgICAgICAgICAgICAgaWR4ID0gaTsKPiA+ICsg
+ICAgICAgICAgICAgICAvKgo+ID4gKyAgICAgICAgICAgICAgICAqIFRyeSB0byBmaW5kIGEgbW9y
+ZSBzdWl0YWJsZSBmcmFtZSBzaXplLiBHbyB3aXRoIHRoZSBjdXJyZW50Cj4gPiArICAgICAgICAg
+ICAgICAgICogb25lIG90aGVyd2lzZS4KPiA+ICsgICAgICAgICAgICAgICAgKi8KPiA+ICsgICAg
+ICAgICAgICAgICBpZiAobmVlZHNfYWxpZ25tZW50KHBpeF9tcC0+d2lkdGgsIGZyYW1lLT53aWR0
+aC5zdGVwKSkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOwo+ID4gKwo+ID4g
+KyAgICAgICAgICAgICAgIGlmIChuZWVkc19hbGlnbm1lbnQocGl4X21wLT5oZWlnaHQsIGZyYW1l
+LT5oZWlnaHQuc3RlcCkpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBjb250aW51ZTsKPiA+
+ICsKPiA+ICsgICAgICAgICAgICAgICBzdHJlYW0tPmN1cnJlbnRfZnJhbWUgPSBmcm07Cj4gPiAr
+ICAgICAgICAgICAgICAgZm91bmQgPSB0cnVlOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAg
+ICAgIGlmICghZm91bmQpIHsKPiA+ICsgICAgICAgICAgICAgICBmcm0gPSAmZm10LT5mcmFtZXNb
+aWR4XTsKPiAKPiBJZiBudW1fZnJhbWVzPT0wLCBOdWxsLWRlcmVmZXJlbmNlIGNhbiBvY2N1ci4K
+PiBFdmVuIHRob3VnaCB0aGUgZGV2aWNlIGlzIGV4cGVjdGVkIHRvIHJldHVybiBhdCBsZWFzdCBv
+bmUgZnJhbWUgaW5mbywKPiB0aGUgZHJpdmVyIHNob3VsZCBhZGQgYSBjaGVjayB0byBhdm9pZCBj
+cmFzaC4KPiAKPiA+ICsgICAgICAgICAgICAgICBmcmFtZSA9ICZmcm0tPmZyYW1lOwo+ID4gKyAg
+ICAgICAgICAgICAgIHBpeF9tcC0+d2lkdGggPSBjbGFtcChwaXhfbXAtPndpZHRoLCBmcmFtZS0+
+d2lkdGgubWluLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmcmFt
+ZS0+d2lkdGgubWF4KTsKPiA+ICsgICAgICAgICAgICAgICBpZiAoZnJhbWUtPndpZHRoLnN0ZXAg
+IT0gMCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHBpeF9tcC0+d2lkdGggPSBBTElHTihw
+aXhfbXAtPndpZHRoLCBmcmFtZS0+d2lkdGguc3RlcCk7Cj4gPiArCj4gPiArICAgICAgICAgICAg
+ICAgcGl4X21wLT5oZWlnaHQgPSBjbGFtcChwaXhfbXAtPmhlaWdodCwgZnJhbWUtPmhlaWdodC5t
+aW4sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmcmFtZS0+aGVp
+Z2h0Lm1heCk7Cj4gPiArICAgICAgICAgICAgICAgaWYgKGZyYW1lLT5oZWlnaHQuc3RlcCAhPSAw
+KQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcGl4X21wLT5oZWlnaHQgPSBBTElHTihwaXhf
+bXAtPmhlaWdodCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgZnJhbWUtPmhlaWdodC5zdGVwKTsKPiA+ICsgICAgICAgICAgICAgICBzdHJlYW0tPmN1
+cnJlbnRfZnJhbWUgPSBmcm07Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJu
+IDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX3F1ZXVlX2ZyZWUo
+c3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgIHN0
+cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0sCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgIGVudW0gdjRsMl9idWZfdHlwZSB0eXBlKQo+ID4gK3sKPiA+ICsgICAgICAgaW50IHJl
+dDsKPiA+ICsgICAgICAgdWludDMyX3QgcXVldWVfdHlwZSA9IHRvX3ZpcnRpb19xdWV1ZV90eXBl
+KHR5cGUpOwo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fY21kX3Jlc291cmNl
+X2Rlc3Ryb3lfYWxsKHZ2LCBzdHJlYW0sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcXVldWVfdHlwZSk7Cj4gPiArICAgICAgIGlmIChyZXQp
+Cj4gPiArICAgICAgICAgICAgICAgdjRsMl93YXJuKCZ2di0+djRsMl9kZXYsCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICJmYWlsZWQgdG8gZGVzdHJveSByZXNvdXJjZXNcbiIpOwo+ID4g
+Kwo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRl
+b19yZXFidWZzKHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpwcml2LAo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgIHN0cnVjdCB2NGwyX3JlcXVlc3RidWZmZXJzICpyYikKPiA+ICt7Cj4gPiAr
+ICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0gPSBmaWxlMnN0cmVhbShm
+aWxlKTsKPiA+ICsgICAgICAgc3RydWN0IHY0bDJfbTJtX2N0eCAqbTJtX2N0eCA9IHN0cmVhbS0+
+ZmgubTJtX2N0eDsKPiA+ICsgICAgICAgc3RydWN0IHZiMl9xdWV1ZSAqdnEgPSB2NGwyX20ybV9n
+ZXRfdnEobTJtX2N0eCwgcmItPnR5cGUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X2RldmljZSAqdnZkID0gdmlkZW9fZHJ2ZGF0YShmaWxlKTsKPiA+ICsKPiA+ICsgICAgICAgaWYg
+KHJiLT5jb3VudCA9PSAwKQo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192aWRlb19xdWV1ZV9m
+cmVlKHZ2ZC0+dnYsIHN0cmVhbSwgdnEtPnR5cGUpOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4g
+djRsMl9tMm1fcmVxYnVmcyhmaWxlLCBtMm1fY3R4LCByYik7Cj4gPiArfQo+ID4gKwo+ID4gK2lu
+dCB2aXJ0aW9fdmlkZW9fc3Vic2NyaWJlX2V2ZW50KHN0cnVjdCB2NGwyX2ZoICpmaCwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IHN0cnVjdCB2NGwyX2V2ZW50X3N1
+YnNjcmlwdGlvbiAqc3ViKQo+ID4gK3sKPiA+ICsgICAgICAgc3dpdGNoIChzdWItPnR5cGUpIHsK
+PiA+ICsgICAgICAgY2FzZSBWNEwyX0VWRU5UX1NPVVJDRV9DSEFOR0U6Cj4gPiArICAgICAgICAg
+ICAgICAgcmV0dXJuIHY0bDJfc3JjX2NoYW5nZV9ldmVudF9zdWJzY3JpYmUoZmgsIHN1Yik7Cj4g
+PiArICAgICAgIGRlZmF1bHQ6Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4g
+PiArICAgICAgIH0KPiA+ICt9Cj4gPiArCj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fcXVldWVfZW9z
+X2V2ZW50KHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0pCj4gPiArewo+ID4gKyAg
+ICAgICBzdGF0aWMgY29uc3Qgc3RydWN0IHY0bDJfZXZlbnQgZW9zX2V2ZW50ID0gewo+ID4gKyAg
+ICAgICAgICAgICAgIC50eXBlID0gVjRMMl9FVkVOVF9FT1MKPiA+ICsgICAgICAgfTsKPiA+ICsK
+PiA+ICsgICAgICAgdjRsMl9ldmVudF9xdWV1ZV9maCgmc3RyZWFtLT5maCwgJmVvc19ldmVudCk7
+Cj4gPiArfQo+ID4gKwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX3F1ZXVlX3Jlc19jaGdfZXZlbnQo
+c3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSkKPiA+ICt7Cj4gPiArICAgICAgIHN0
+YXRpYyBjb25zdCBzdHJ1Y3QgdjRsMl9ldmVudCBldl9zcmNfY2ggPSB7Cj4gPiArICAgICAgICAg
+ICAgICAgLnR5cGUgPSBWNEwyX0VWRU5UX1NPVVJDRV9DSEFOR0UsCj4gPiArICAgICAgICAgICAg
+ICAgLnUuc3JjX2NoYW5nZS5jaGFuZ2VzID0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIFY0
+TDJfRVZFTlRfU1JDX0NIX1JFU09MVVRJT04sCj4gPiArICAgICAgIH07Cj4gPiArCj4gPiArICAg
+ICAgIHY0bDJfZXZlbnRfcXVldWVfZmgoJnN0cmVhbS0+ZmgsICZldl9zcmNfY2gpOwo+ID4gK30K
+PiA+ICsKPiA+ICt2b2lkIHZpcnRpb192aWRlb19tYXJrX2RyYWluX2NvbXBsZXRlKHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHN0cnVjdCB2YjJfdjRsMl9idWZmZXIgKnY0bDJfdmIpCj4gPiArewo+ID4g
+KyAgICAgICBzdHJ1Y3QgdmIyX2J1ZmZlciAqdmIyX2J1ZjsKPiA+ICsKPiA+ICsgICAgICAgdjRs
+Ml92Yi0+ZmxhZ3MgfD0gVjRMMl9CVUZfRkxBR19MQVNUOwo+ID4gKwo+ID4gKyAgICAgICB2YjJf
+YnVmID0gJnY0bDJfdmItPnZiMl9idWY7Cj4gPiArICAgICAgIHZiMl9idWYtPnBsYW5lc1swXS5i
+eXRlc3VzZWQgPSAwOwo+ID4gKwo+ID4gKyAgICAgICB2NGwyX20ybV9idWZfZG9uZSh2NGwyX3Zi
+LCBWQjJfQlVGX1NUQVRFX0RPTkUpOwo+ID4gKyAgICAgICBzdHJlYW0tPnN0YXRlID0gU1RSRUFN
+X1NUQVRFX1NUT1BQRUQ7Cj4gPiArfQo+ID4gKwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2J1Zl9k
+b25lKHN0cnVjdCB2aXJ0aW9fdmlkZW9fYnVmZmVyICp2aXJ0aW9fdmIsCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICB1aW50MzJfdCBmbGFncywgdWludDY0X3QgdGltZXN0YW1wLCB1aW50
+MzJfdCBzaXplKQo+ID4gK3sKPiA+ICsgICAgICAgaW50IGk7Cj4gPiArICAgICAgIGVudW0gdmIy
+X2J1ZmZlcl9zdGF0ZSBkb25lX3N0YXRlID0gVkIyX0JVRl9TVEFURV9ET05FOwo+ID4gKyAgICAg
+ICBzdHJ1Y3QgdmIyX3Y0bDJfYnVmZmVyICp2NGwyX3ZiID0gJnZpcnRpb192Yi0+djRsMl9tMm1f
+dmIudmI7Cj4gPiArICAgICAgIHN0cnVjdCB2YjJfYnVmZmVyICp2YiA9ICZ2NGwyX3ZiLT52YjJf
+YnVmOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmIyX3F1ZXVlICp2YjJfcXVldWUgPSB2Yi0+dmIyX3F1
+ZXVlOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtID0gdmIy
+X2dldF9kcnZfcHJpdih2YjJfcXVldWUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsgICAg
+ICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9pbmZvICpwX2luZm87Cj4gPiArCj4gPiArICAgICAgIHZp
+cnRpb192Yi0+cXVldWVkID0gZmFsc2U7Cj4gPiArCj4gPiArICAgICAgIGlmIChmbGFncyAmIFZJ
+UlRJT19WSURFT19CVUZGRVJfRkxBR19FUlIpCj4gPiArICAgICAgICAgICAgICAgZG9uZV9zdGF0
+ZSA9IFZCMl9CVUZfU1RBVEVfRVJST1I7Cj4gPiArCj4gPiArICAgICAgIGlmIChmbGFncyAmIFZJ
+UlRJT19WSURFT19CVUZGRVJfRkxBR19JRlJBTUUpCj4gPiArICAgICAgICAgICAgICAgdjRsMl92
+Yi0+ZmxhZ3MgfD0gVjRMMl9CVUZfRkxBR19LRVlGUkFNRTsKPiA+ICsKPiA+ICsgICAgICAgaWYg
+KGZsYWdzICYgVklSVElPX1ZJREVPX0JVRkZFUl9GTEFHX0JGUkFNRSkKPiA+ICsgICAgICAgICAg
+ICAgICB2NGwyX3ZiLT5mbGFncyB8PSBWNEwyX0JVRl9GTEFHX0JGUkFNRTsKPiA+ICsKPiA+ICsg
+ICAgICAgaWYgKGZsYWdzICYgVklSVElPX1ZJREVPX0JVRkZFUl9GTEFHX1BGUkFNRSkKPiA+ICsg
+ICAgICAgICAgICAgICB2NGwyX3ZiLT5mbGFncyB8PSBWNEwyX0JVRl9GTEFHX1BGUkFNRTsKPiA+
+ICsKPiA+ICsgICAgICAgaWYgKGZsYWdzICYgVklSVElPX1ZJREVPX0JVRkZFUl9GTEFHX0VPUykg
+ewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfdmItPmZsYWdzIHw9IFY0TDJfQlVGX0ZMQUdfTEFT
+VDsKPiA+ICsgICAgICAgICAgICAgICBzdHJlYW0tPnN0YXRlID0gU1RSRUFNX1NUQVRFX1NUT1BQ
+RUQ7Cj4gPiArICAgICAgICAgICAgICAgdmlydGlvX3ZpZGVvX3F1ZXVlX2Vvc19ldmVudChzdHJl
+YW0pOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIGlmICghVjRMMl9UWVBFX0lTX09V
+VFBVVCh2YjJfcXVldWUtPnR5cGUpKSB7Cj4gPiArICAgICAgICAgICAgICAgc3dpdGNoICh2dmQt
+PnR5cGUpIHsKPiA+ICsgICAgICAgICAgICAgICBjYXNlIFZJUlRJT19WSURFT19ERVZJQ0VfRU5D
+T0RFUjoKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHZiLT5wbGFuZXNbMF0uYnl0ZXN1c2Vk
+ID0gc2l6ZTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICAg
+ICAgICAgIGNhc2UgVklSVElPX1ZJREVPX0RFVklDRV9ERUNPREVSOgo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgcF9pbmZvID0gJnN0cmVhbS0+b3V0X2luZm87Cj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICBmb3IgKGkgPSAwOyBpIDwgcF9pbmZvLT5udW1fcGxhbmVzOyBpKyspCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZiLT5wbGFuZXNbaV0uYnl0ZXN1c2VkID0K
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwX2luZm8tPnBsYW5l
+X2Zvcm1hdFtpXS5wbGFuZV9zaXplOwo+IAo+IFRoaXMgaXMgbm90IGFsd2F5cyBjb3JyZWN0IGJl
+Y2F1c2UgdGhlIGhvc3QgY2FuIHJldHVybnMgYW4gZW1wdHkKPiBidWZmZXIgd2l0aCB0aGUgRU9T
+IGZsYWcgb3IgdGhlIEVSUiBmbGFnLgo+IEluIHN1Y2ggY2FzZSwgd2UgbmVlZCB0byBzZXQgMCB0
+byBieXRlc3VzZWQuCj4gCj4gSG93ZXZlciwgdGhlIGN1cnJlbnQgcHJvdG9jb2wgZG9lc24ndCBk
+ZWZpbmUgaG93IHRvIG5vdGlmeSB8Ynl0ZXN1c2VkfAo+IGZvciBkZWNvZGVyLgo+IFdlIG1heSBu
+ZWVkIHRvIGV4dGVuZCB0aGUgcHJvdG9jb2wgdG8gaGF2ZSB8c2l6ZXwgZm9yIGVhY2ggcGxhbmU/
+Cj4gCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgICAgICAg
+ICB9Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgdmItPnRpbWVzdGFtcCA9IHRpbWVzdGFtcDsK
+PiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICB2NGwyX20ybV9idWZfZG9uZSh2NGwyX3Zi
+LCBkb25lX3N0YXRlKTsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgdmlydGlvX3ZpZGVv
+X3dvcmtlcihzdHJ1Y3Qgd29ya19zdHJ1Y3QgKndvcmspCj4gCj4gUXVlc3Rpb246Cj4gV2h5IGRv
+IHlvdSBlbnF1ZXVlIGJ1ZmZlcnMgaGVyZSBpbnN0ZWFkIG9mIGluIHZpcnRpb192aWRlb19kZWNf
+YnVmX3F1ZXVlPwo+IEZ1cnRoZXJtb3JlLCBJIHdvbmRlciB3aHkgd2UgaGF2ZSB2aXJ0aW9fdmlk
+ZW9fY21kX3Jlc291cmNlX3F1ZXVlIGZvcgo+IElOUFVUIGJvdGggaW4gdGhpcyBmdW5jdGlvbiBh
+bmQgdGhhdCBmdW5jdGlvbi4KPiAKPiA+ICt7Cj4gPiArICAgICAgIHVuc2lnbmVkIGludCBpOwo+
+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmIyX2J1ZmZlciAqdmIyX2J1
+ZjsKPiA+ICsgICAgICAgc3RydWN0IHZiMl92NGwyX2J1ZmZlciAqc3JjX3ZiLCAqZHN0X3ZiOwo+
+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2J1ZmZlciAqdmlydGlvX3ZiOwo+ID4gKyAg
+ICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtID0gd29yazJzdHJlYW0od29y
+ayk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQgPSB0b192aXJ0
+aW9fdmQoc3RyZWFtLT52aWRlb19kZXYpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmIyX3F1ZXVlICpz
+cmNfdnEgPQo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfbTJtX2dldF92cShzdHJlYW0tPmZoLm0y
+bV9jdHgsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFY0TDJfQlVGX1RZUEVf
+VklERU9fT1VUUFVUX01QTEFORSk7Cj4gPiArICAgICAgIHN0cnVjdCB2YjJfcXVldWUgKmRzdF92
+cSA9Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9tMm1fZ2V0X3ZxKHN0cmVhbS0+ZmgubTJtX2N0
+eCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgVjRMMl9CVUZfVFlQRV9WSURF
+T19DQVBUVVJFX01QTEFORSk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2ID0g
+dnZkLT52djsKPiA+ICsgICAgICAgdWludDMyX3QgZGF0YV9zaXplW1ZCMl9NQVhfUExBTkVTXSA9
+IHswfTsKPiA+ICsKPiA+ICsgICAgICAgbXV0ZXhfbG9jayhkc3RfdnEtPmxvY2spOwo+IAo+IENh
+bid0IHdlIG5hcnJvdyB0aGUgcmFuZ2UgdGhhdCByZXF1aXJlcyB0aGUgbG9jaz8KPiBIb3cgYWJv
+dXQgb2J0YWluaW5nIGEgbG9jayBqdXN0IGJlZm9yZSB2aXJ0aW9fdmlkZW9fY21kX3Jlc291cmNl
+X3F1ZXVlKCk/Cj4gCj4gQXQgbGVhc3QsIHdlIGNhbiBnZXQgbG9jayBpbnNpZGUgb2YgdGhlIGZv
+ci1sb29wIHRvIGF2b2lkIGJsb2NraW5nCj4gYW5vdGhlciB3b3JrIGZvciBhIGxvbmcgdGltZS4K
+PiAKPiA+ICsgICAgICAgZm9yICg7Oykgewo+ID4gKyAgICAgICAgICAgICAgIGRzdF92YiA9IHY0
+bDJfbTJtX25leHRfZHN0X2J1ZihzdHJlYW0tPmZoLm0ybV9jdHgpOwo+ID4gKyAgICAgICAgICAg
+ICAgIGlmIChkc3RfdmIgPT0gTlVMTCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGJyZWFr
+Owo+ID4gKwo+ID4gKyAgICAgICAgICAgICAgIHZiMl9idWYgPSAmZHN0X3ZiLT52YjJfYnVmOwo+
+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192YiA9IHRvX3ZpcnRpb192Yih2YjJfYnVmKTsKPiA+
+ICsKPiA+ICsgICAgICAgICAgICAgICBmb3IgKGkgPSAwOyBpIDwgdmIyX2J1Zi0+bnVtX3BsYW5l
+czsgKytpKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgZGF0YV9zaXplW2ldID0gdmIyX2J1
+Zi0+cGxhbmVzW2ldLmJ5dGVzdXNlZDsKPiA+ICsKPiA+ICsgICAgICAgICAgICAgICByZXQgPSB2
+aXJ0aW9fdmlkZW9fY21kX3Jlc291cmNlX3F1ZXVlCj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICAodnYsIHN0cmVhbS0+c3RyZWFtX2lkLCB2aXJ0aW9fdmIsIGRhdGFfc2l6ZSwKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICB2YjJfYnVmLT5udW1fcGxhbmVzLCBWSVJUSU9fVklERU9fUVVF
+VUVfVFlQRV9PVVRQVVQpOwo+ID4gKyAgICAgICAgICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgImZhaWxlZCB0byBxdWV1ZSBhIGRzdCBidWZmZXJcbiIp
+Owo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdjRsMl9tMm1fam9iX2ZpbmlzaCh2dmQtPm0y
+bV9kZXYsIHN0cmVhbS0+ZmgubTJtX2N0eCk7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBt
+dXRleF91bmxvY2soZHN0X3ZxLT5sb2NrKTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJl
+dHVybjsKPiA+ICsgICAgICAgICAgICAgICB9Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgdmly
+dGlvX3ZiLT5xdWV1ZWQgPSB0cnVlOwo+ID4gKyAgICAgICAgICAgICAgIHN0cmVhbS0+ZHN0X2Ns
+ZWFyZWQgPSBmYWxzZTsKPiA+ICsgICAgICAgICAgICAgICBkc3RfdmIgPSB2NGwyX20ybV9kc3Rf
+YnVmX3JlbW92ZShzdHJlYW0tPmZoLm0ybV9jdHgpOwo+ID4gKyAgICAgICB9Cj4gPiArICAgICAg
+IG11dGV4X3VubG9jayhkc3RfdnEtPmxvY2spOwo+ID4gKwo+ID4gKyAgICAgICBtdXRleF9sb2Nr
+KHNyY192cS0+bG9jayk7Cj4gPiArICAgICAgIGZvciAoOzspIHsKPiA+ICsgICAgICAgICAgICAg
+ICBpZiAoc3RyZWFtLT5zdGF0ZSA9PSBTVFJFQU1fU1RBVEVfRFJBSU4pCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICBicmVhazsKPiA+ICsKPiA+ICsgICAgICAgICAgICAgICBzcmNfdmIgPSB2
+NGwyX20ybV9uZXh0X3NyY19idWYoc3RyZWFtLT5maC5tMm1fY3R4KTsKPiA+ICsgICAgICAgICAg
+ICAgICBpZiAoc3JjX3ZiID09IE5VTEwpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBicmVh
+azsKPiA+ICsKPiA+ICsgICAgICAgICAgICAgICB2YjJfYnVmID0gJnNyY192Yi0+dmIyX2J1ZjsK
+PiA+ICsgICAgICAgICAgICAgICB2aXJ0aW9fdmIgPSB0b192aXJ0aW9fdmIodmIyX2J1Zik7Cj4g
+PiArCj4gPiArICAgICAgICAgICAgICAgZm9yIChpID0gMDsgaSA8IHZiMl9idWYtPm51bV9wbGFu
+ZXM7ICsraSkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGRhdGFfc2l6ZVtpXSA9IHZiMl9i
+dWYtPnBsYW5lc1tpXS5ieXRlc3VzZWQ7Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgcmV0ID0g
+dmlydGlvX3ZpZGVvX2NtZF9yZXNvdXJjZV9xdWV1ZQo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgKHZ2LCBzdHJlYW0tPnN0cmVhbV9pZCwgdmlydGlvX3ZiLCBkYXRhX3NpemUsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgdmIyX2J1Zi0+bnVtX3BsYW5lcywgVklSVElPX1ZJREVPX1FV
+RVVFX1RZUEVfSU5QVVQpOwo+ID4gKyAgICAgICAgICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgImZhaWxlZCB0byBxdWV1ZSBhbiBzcmMgYnVmZmVyXG4i
+KTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHY0bDJfbTJtX2pvYl9maW5pc2godnZkLT5t
+Mm1fZGV2LCBzdHJlYW0tPmZoLm0ybV9jdHgpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+bXV0ZXhfdW5sb2NrKHNyY192cS0+bG9jayk7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBy
+ZXR1cm47Cj4gPiArICAgICAgICAgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICAgICAgICAgIHZp
+cnRpb192Yi0+cXVldWVkID0gdHJ1ZTsKPiA+ICsgICAgICAgICAgICAgICBzdHJlYW0tPnNyY19j
+bGVhcmVkID0gZmFsc2U7Cj4gPiArICAgICAgICAgICAgICAgc3JjX3ZiID0gdjRsMl9tMm1fc3Jj
+X2J1Zl9yZW1vdmUoc3RyZWFtLT5maC5tMm1fY3R4KTsKPiA+ICsgICAgICAgfQo+ID4gKyAgICAg
+ICBtdXRleF91bmxvY2soc3JjX3ZxLT5sb2NrKTsKPiA+ICsKPiA+ICsgICAgICAgdjRsMl9tMm1f
+am9iX2ZpbmlzaCh2dmQtPm0ybV9kZXYsIHN0cmVhbS0+ZmgubTJtX2N0eCk7Cj4gPiArfQo+ID4g
+Kwo+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX2RldmljZV9vcGVuKHN0cnVjdCBmaWxlICpm
+aWxlKQo+ID4gK3sKPiA+ICsgICAgICAgaW50IHJldDsKPiA+ICsgICAgICAgdWludDMyX3Qgc3Ry
+ZWFtX2lkOwo+ID4gKyAgICAgICBjaGFyIG5hbWVbVEFTS19DT01NX0xFTl07Cj4gPiArICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW07Cj4gPiArICAgICAgIHN0cnVjdCB2
+aWRlb19mb3JtYXQgKmRlZmF1bHRfZm10Owo+ID4gKyAgICAgICBlbnVtIHZpcnRpb192aWRlb19m
+b3JtYXQgZm9ybWF0Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZGV2aWNlICp2aWRlb19kZXYg
+PSB2aWRlb19kZXZkYXRhKGZpbGUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Rl
+dmljZSAqdnZkID0gdmlkZW9fZHJ2ZGF0YShmaWxlKTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRp
+b192aWRlbyAqdnYgPSB2dmQtPnZ2Owo+ID4gKwo+ID4gKyAgICAgICBzd2l0Y2ggKHZ2ZC0+dHlw
+ZSkgewo+ID4gKyAgICAgICBjYXNlIFZJUlRJT19WSURFT19ERVZJQ0VfRU5DT0RFUjoKPiA+ICsg
+ICAgICAgICAgICAgICBkZWZhdWx0X2ZtdCA9IGxpc3RfZmlyc3RfZW50cnlfb3JfbnVsbCgmdnZk
+LT5vdXRwdXRfZm10X2xpc3QsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdCwKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmb3JtYXRzX2xpc3Rf
+ZW50cnkpOwo+ID4gKyAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICBjYXNlIFZJUlRJ
+T19WSURFT19ERVZJQ0VfREVDT0RFUjoKPiA+ICsgICAgICAgICAgICAgICBkZWZhdWx0X2ZtdCA9
+IGxpc3RfZmlyc3RfZW50cnlfb3JfbnVsbCgmdnZkLT5pbnB1dF9mbXRfbGlzdCwKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3Qg
+dmlkZW9fZm9ybWF0LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGZvcm1hdHNfbGlzdF9lbnRyeSk7Cj4gPiArICAgICAgICAgICAgICAg
+YnJlYWs7Cj4gPiArICAgICAgIGRlZmF1bHQ6Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIo
+JnZ2LT52NGwyX2RldiwgInVuc3VwcG9ydGVkIGRldmljZSB0eXBlXG4iKTsKPiAKPiBIb3cgYWJv
+dXQgcHJpbnRpbmcgdnZkLT50eXBlPwo+IAo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlP
+Owo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIGlmICghZGVmYXVsdF9mbXQpIHsKPiA+
+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZGV2aWNlIGZhaWxlZCB0
+byBzdGFydFxuIik7Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU87Cj4gPiArICAgICAg
+IH0KPiA+ICsKPiA+ICsgICAgICAgc3RyZWFtID0ga3phbGxvYyhzaXplb2YoKnN0cmVhbSksIEdG
+UF9LRVJORUwpOwo+ID4gKyAgICAgICBpZiAoIXN0cmVhbSkKPiA+ICsgICAgICAgICAgICAgICBy
+ZXR1cm4gLUVOT01FTTsKPiA+ICsKPiA+ICsgICAgICAgZ2V0X3Rhc2tfY29tbShuYW1lLCBjdXJy
+ZW50KTsKPiA+ICsgICAgICAgZm9ybWF0ID0gdmlydGlvX3ZpZGVvX3Y0bDJfZm9ybWF0X3RvX3Zp
+cnRpbyhkZWZhdWx0X2ZtdC0+ZGVzYy5mb3JtYXQpOwo+IAo+IEFzIEkgbWVudGlvbmVkIGluIHRo
+ZSBwcmV2aW91cyB2ZXJzaW9uLCBpdCdzIGJldHRlciB0byBhdm9pZCBleHBlbnNpdmUKPiBvcGVy
+YXRpb25zIGxpa2Ugc3RyZWFtIGNyZWF0aW9uIGluIG9wZW4gY2FsbGJhY2sgYmVjYXVzZSBhcHBs
+aWNhdGlvbnMKPiB1c3VhbGx5IG9wZW4gYSB2aWRlbyBkZXZpY2Ugb25seSB0byBxdWVyeSBjYXBh
+YmlsaXRpZXMuCj4gV2UgY2FuIGRlbGF5IHRvIHNlbmQgc3RyZWFtX2NyZWF0ZSB1bnRpbCBjYWxs
+aW5nIFJFUUJVRlMuCj4gCj4gPiArICAgICAgIHZpcnRpb192aWRlb19zdHJlYW1faWRfZ2V0KHZ2
+LCBzdHJlYW0sICZzdHJlYW1faWQpOwo+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fY21k
+X3N0cmVhbV9jcmVhdGUodnYsIHN0cmVhbV9pZCwgZm9ybWF0LCBuYW1lKTsKPiA+ICsgICAgICAg
+aWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJm
+YWlsZWQgdG8gY3JlYXRlIHN0cmVhbVxuIik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnJf
+c3RyZWFtX2NyZWF0ZTsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICBzdHJlYW0tPnZp
+ZGVvX2RldiA9IHZpZGVvX2RldjsKPiA+ICsgICAgICAgc3RyZWFtLT5zdHJlYW1faWQgPSBzdHJl
+YW1faWQ7Cj4gPiArICAgICAgIHN0cmVhbS0+c3RhdGUgPSBTVFJFQU1fU1RBVEVfSURMRTsKPiA+
+ICsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2NtZF9nZXRfcGFyYW1zKHZ2LCBzdHJl
+YW0sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBWSVJUSU9f
+VklERU9fUVVFVUVfVFlQRV9JTlBVVCk7Cj4gPiArICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAg
+ICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRvIGdldCBzdHJlYW0g
+aW4gcGFyYW1zXG4iKTsKPiA+ICsgICAgICAgICAgICAgICBnb3RvIGVycl9pbml0X2N0cmxzOwo+
+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJldCA9IHZpcnRpb192aWRlb19jbWRfZ2V0
+X3BhcmFtcyh2diwgc3RyZWFtLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgVklSVElPX1ZJREVPX1FVRVVFX1RZUEVfT1VUUFVUKTsKPiA+ICsgICAgICAgaWYg
+KHJldCkgewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJmYWls
+ZWQgdG8gZ2V0IHN0cmVhbSBvdXQgcGFyYW1zXG4iKTsKPiA+ICsgICAgICAgICAgICAgICBnb3Rv
+IGVycl9pbml0X2N0cmxzOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJldCA9IHZp
+cnRpb192aWRlb19jbWRfZ2V0X2NvbnRyb2wodnYsIHN0cmVhbSwKPiA+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBWSVJUSU9fVklERU9fQ09OVFJPTF9QUk9GSUxF
+KTsKPiAKPiBTaW5jZSBWSVJUSU9fVklPREVfQ09UUk9McyBhcmUgb3B0aW9uYWwgLCB3ZSBzaG91
+bGRuJ3QgY2FsbCBpdCB1bmNvbmRpdG9uYWxseS4KPiBFc3BlY2lhbGx5LCBDT05UUk9MX1BST0ZJ
+TEUgaXMgdmFsaWQgb25seSB3aGVuIGEgc3BlY2lhbCB0eXBlIG9mIGNvZGVkCj4gZm9ybWF0cyBp
+cyB1c2VkLgo+IAo+ID4gKyAgICAgICBpZiAocmV0KSB7Cj4gPiArICAgICAgICAgICAgICAgdjRs
+Ml9lcnIoJnZ2LT52NGwyX2RldiwgImZhaWxlZCB0byBnZXQgc3RyZWFtIHByb2ZpbGVcbiIpOwo+
+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZXJyX2luaXRfY3RybHM7Cj4gPiArICAgICAgIH0KPiA+
+ICsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2NtZF9nZXRfY29udHJvbCh2diwgc3Ry
+ZWFtLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFZJUlRJ
+T19WSURFT19DT05UUk9MX0xFVkVMKTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAg
+ICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gZ2V0IHN0cmVhbSBs
+ZXZlbFxuIik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnJfaW5pdF9jdHJsczsKPiA+ICsg
+ICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fY21kX2dldF9jb250
+cm9sKHZ2LCBzdHJlYW0sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgVklSVElPX1ZJREVPX0NPTlRST0xfQklUUkFURSk7Cj4gPiArICAgICAgIGlmIChyZXQp
+IHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRv
+IGdldCBzdHJlYW0gYml0cmF0ZVxuIik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnJfaW5p
+dF9jdHJsczsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICBtdXRleF9pbml0KCZzdHJl
+YW0tPnZxX211dGV4KTsKPiA+ICsgICAgICAgSU5JVF9XT1JLKCZzdHJlYW0tPndvcmssIHZpcnRp
+b192aWRlb193b3JrZXIpOwo+ID4gKyAgICAgICB2NGwyX2ZoX2luaXQoJnN0cmVhbS0+ZmgsIHZp
+ZGVvX2Rldik7Cj4gPiArICAgICAgIHN0cmVhbS0+ZmguY3RybF9oYW5kbGVyID0gJnN0cmVhbS0+
+Y3RybF9oYW5kbGVyOwo+ID4gKwo+ID4gKyAgICAgICBzd2l0Y2ggKHZ2ZC0+dHlwZSkgewo+ID4g
+KyAgICAgICBjYXNlIFZJUlRJT19WSURFT19ERVZJQ0VfRU5DT0RFUjoKPiA+ICsgICAgICAgICAg
+ICAgICBzdHJlYW0tPmZoLm0ybV9jdHggPQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdjRs
+Ml9tMm1fY3R4X2luaXQodnZkLT5tMm1fZGV2LCBzdHJlYW0sCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAmdmlydGlvX3ZpZGVvX2VuY19pbml0X3F1ZXVlcyk7
+Cj4gPiArICAgICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAgICAgIGNhc2UgVklSVElPX1ZJREVP
+X0RFVklDRV9ERUNPREVSOgo+ID4gKyAgICAgICAgICAgICAgIHN0cmVhbS0+ZmgubTJtX2N0eCA9
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICB2NGwyX20ybV9jdHhfaW5pdCh2dmQtPm0ybV9k
+ZXYsIHN0cmVhbSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICZ2aXJ0aW9fdmlkZW9fZGVjX2luaXRfcXVldWVzKTsKPiA+ICsgICAgICAgICAgICAgICBicmVh
+azsKPiA+ICsgICAgICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYt
+PnY0bDJfZGV2LCAidW5zdXBwb3J0ZWQgZGV2aWNlIHR5cGVcbiIpOwo+ID4gKyAgICAgICAgICAg
+ICAgIGdvdG8gZXJyX3N0cmVhbV9jcmVhdGU7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAg
+ICAgdjRsMl9tMm1fc2V0X3NyY19idWZmZXJlZChzdHJlYW0tPmZoLm0ybV9jdHgsIHRydWUpOwo+
+ID4gKyAgICAgICB2NGwyX20ybV9zZXRfZHN0X2J1ZmZlcmVkKHN0cmVhbS0+ZmgubTJtX2N0eCwg
+dHJ1ZSk7Cj4gPiArICAgICAgIGZpbGUtPnByaXZhdGVfZGF0YSA9ICZzdHJlYW0tPmZoOwo+ID4g
+KyAgICAgICB2NGwyX2ZoX2FkZCgmc3RyZWFtLT5maCk7Cj4gPiArCj4gPiArICAgICAgIHN3aXRj
+aCAodnZkLT50eXBlKSB7Cj4gPiArICAgICAgIGNhc2UgVklSVElPX1ZJREVPX0RFVklDRV9FTkNP
+REVSOgo+ID4gKyAgICAgICAgICAgICAgIHJldCA9IHZpcnRpb192aWRlb19lbmNfaW5pdF9jdHJs
+cyhzdHJlYW0pOwo+ID4gKyAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICBjYXNlIFZJ
+UlRJT19WSURFT19ERVZJQ0VfREVDT0RFUjoKPiA+ICsgICAgICAgICAgICAgICByZXQgPSB2aXJ0
+aW9fdmlkZW9fZGVjX2luaXRfY3RybHMoc3RyZWFtKTsKPiA+ICsgICAgICAgICAgICAgICBicmVh
+azsKPiA+ICsgICAgICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICByZXQgPSAwOwo+ID4g
+KyAgICAgICAgICAgICAgIGJyZWFrOwo+IAo+IHVucmVhY2hhYmxlIG9yIGVycm9yPwo+IAo+ID4g
+KyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAgICAgICAgICAg
+ICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRvIGluaXQgY29udHJvbHNcbiIpOwo+
+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZXJyX2luaXRfY3RybHM7Cj4gPiArICAgICAgIH0KPiA+
+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArCj4gPiArZXJyX2luaXRfY3RybHM6Cj4gPiArICAgICAg
+IHY0bDJfZmhfZGVsKCZzdHJlYW0tPmZoKTsKPiA+ICsgICAgICAgdjRsMl9maF9leGl0KCZzdHJl
+YW0tPmZoKTsKPiA+ICsgICAgICAgbXV0ZXhfbG9jayh2aWRlb19kZXYtPmxvY2spOwo+ID4gKyAg
+ICAgICB2NGwyX20ybV9jdHhfcmVsZWFzZShzdHJlYW0tPmZoLm0ybV9jdHgpOwo+ID4gKyAgICAg
+ICBtdXRleF91bmxvY2sodmlkZW9fZGV2LT5sb2NrKTsKPiA+ICtlcnJfc3RyZWFtX2NyZWF0ZToK
+PiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX3N0cmVhbV9pZF9wdXQodnYsIHN0cmVhbV9pZCk7Cj4g
+PiArICAgICAgIGtmcmVlKHN0cmVhbSk7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiByZXQ7Cj4g
+PiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX2RldmljZV9yZWxlYXNlKHN0
+cnVjdCBmaWxlICpmaWxlKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19z
+dHJlYW0gKnN0cmVhbSA9IGZpbGUyc3RyZWFtKGZpbGUpOwo+ID4gKyAgICAgICBzdHJ1Y3Qgdmlk
+ZW9fZGV2aWNlICp2aWRlb19kZXYgPSB2aWRlb19kZXZkYXRhKGZpbGUpOwo+ID4gKyAgICAgICBz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdmlkZW9fZHJ2ZGF0YShmaWxlKTsKPiA+
+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSB2dmQtPnZ2Owo+ID4gKwo+ID4gKyAg
+ICAgICB2NGwyX2ZoX2RlbCgmc3RyZWFtLT5maCk7Cj4gPiArICAgICAgIHY0bDJfZmhfZXhpdCgm
+c3RyZWFtLT5maCk7Cj4gPiArICAgICAgIG11dGV4X2xvY2sodmlkZW9fZGV2LT5sb2NrKTsKPiA+
+ICsgICAgICAgdjRsMl9tMm1fY3R4X3JlbGVhc2Uoc3RyZWFtLT5maC5tMm1fY3R4KTsKPiA+ICsg
+ICAgICAgbXV0ZXhfdW5sb2NrKHZpZGVvX2Rldi0+bG9jayk7Cj4gPiArCj4gPiArICAgICAgIHZp
+cnRpb192aWRlb19jbWRfc3RyZWFtX2Rlc3Ryb3kodnYsIHN0cmVhbS0+c3RyZWFtX2lkKTsKPiA+
+ICsgICAgICAgdmlydGlvX3ZpZGVvX3N0cmVhbV9pZF9wdXQodnYsIHN0cmVhbS0+c3RyZWFtX2lk
+KTsKPiA+ICsKPiA+ICsgICAgICAga2ZyZWUoc3RyZWFtKTsKPiA+ICsKPiA+ICsgICAgICAgcmV0
+dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdjRsMl9maWxlX29w
+ZXJhdGlvbnMgdmlydGlvX3ZpZGVvX2RldmljZV9mb3BzID0gewo+ID4gKyAgICAgICAub3duZXIg
+ICAgICAgICAgPSBUSElTX01PRFVMRSwKPiA+ICsgICAgICAgLm9wZW4gICAgICAgICAgID0gdmly
+dGlvX3ZpZGVvX2RldmljZV9vcGVuLAo+ID4gKyAgICAgICAucmVsZWFzZSAgICAgICAgPSB2aXJ0
+aW9fdmlkZW9fZGV2aWNlX3JlbGVhc2UsCj4gPiArICAgICAgIC5wb2xsICAgICAgICAgICA9IHY0
+bDJfbTJtX2ZvcF9wb2xsLAo+ID4gKyAgICAgICAudW5sb2NrZWRfaW9jdGwgPSB2aWRlb19pb2N0
+bDIsCj4gPiArICAgICAgIC5tbWFwICAgICAgICAgICA9IHY0bDJfbTJtX2ZvcF9tbWFwLAo+ID4g
+K307Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX2RldmljZV9ydW4odm9pZCAq
+cHJpdikKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJl
+YW0gPSBwcml2Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0g
+dG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsKPiA+ICsgICAgICAgcXVldWVf
+d29yayh2dmQtPndvcmtxdWV1ZSwgJnN0cmVhbS0+d29yayk7Cj4gPiArfQo+ID4gKwo+ID4gK3N0
+YXRpYyBpbnQgdmlydGlvX3ZpZGVvX2RldmljZV9qb2JfcmVhZHkodm9pZCAqcHJpdikKPiA+ICt7
+Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0gPSBwcml2Owo+
+ID4gKwo+ID4gKyAgICAgICBpZiAoc3RyZWFtLT5zdGF0ZSA9PSBTVFJFQU1fU1RBVEVfU1RPUFBF
+RCkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICsKPiA+ICsgICAgICAgaWYgKHY0
+bDJfbTJtX251bV9zcmNfYnVmc19yZWFkeShzdHJlYW0tPmZoLm0ybV9jdHgpID4gMCB8fAo+ID4g
+KyAgICAgICAgICAgdjRsMl9tMm1fbnVtX2RzdF9idWZzX3JlYWR5KHN0cmVhbS0+ZmgubTJtX2N0
+eCkgPiAwKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAxOwo+ID4gKwo+ID4gKyAgICAgICBy
+ZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX2Rldmlj
+ZV9qb2JfYWJvcnQodm9pZCAqcHJpdikKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9f
+dmlkZW9fc3RyZWFtICpzdHJlYW0gPSBwcml2Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3Zp
+ZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsK
+PiA+ICsgICAgICAgdjRsMl9tMm1fam9iX2ZpbmlzaCh2dmQtPm0ybV9kZXYsIHN0cmVhbS0+Zmgu
+bTJtX2N0eCk7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdjRsMl9tMm1f
+b3BzIHZpcnRpb192aWRlb19kZXZpY2VfbTJtX29wcyA9IHsKPiA+ICsgICAgICAgLmRldmljZV9y
+dW4gICAgID0gdmlydGlvX3ZpZGVvX2RldmljZV9ydW4sCj4gPiArICAgICAgIC5qb2JfcmVhZHkg
+ICAgICA9IHZpcnRpb192aWRlb19kZXZpY2Vfam9iX3JlYWR5LAo+ID4gKyAgICAgICAuam9iX2Fi
+b3J0ICAgICAgPSB2aXJ0aW9fdmlkZW9fZGV2aWNlX2pvYl9hYm9ydCwKPiA+ICt9Owo+ID4gKwo+
+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX2RldmljZV9yZWdpc3RlcihzdHJ1Y3QgdmlydGlv
+X3ZpZGVvX2RldmljZSAqdnZkKQo+ID4gK3sKPiA+ICsgICAgICAgaW50IHJldCA9IDA7Cj4gPiAr
+ICAgICAgIHN0cnVjdCB2aWRlb19kZXZpY2UgKnZkID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0
+IHZpcnRpb192aWRlbyAqdnYgPSBOVUxMOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoIXZ2ZCkKPiA+
+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAgICAgdmQgPSAm
+dnZkLT52aWRlb19kZXY7Cj4gPiArICAgICAgIHZ2ID0gdnZkLT52djsKPiA+ICsKPiA+ICsgICAg
+ICAgc3dpdGNoICh2dmQtPnR5cGUpIHsKPiA+ICsgICAgICAgY2FzZSBWSVJUSU9fVklERU9fREVW
+SUNFX0VOQ09ERVI6Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2VuY19p
+bml0KHZkKTsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgY2FzZSBWSVJU
+SU9fVklERU9fREVWSUNFX0RFQ09ERVI6Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gdmlydGlv
+X3ZpZGVvX2RlY19pbml0KHZkKTsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAg
+ICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAi
+dW5rbm93biBkZXZpY2UgdHlwZVxuIik7Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5W
+QUw7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAg
+ICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gaW5pdCBkZXZpY2Vc
+biIpOwo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gPiArICAgICAgIH0KPiA+ICsK
+PiA+ICsgICAgICAgcmV0ID0gdmlkZW9fcmVnaXN0ZXJfZGV2aWNlKHZkLCBWRkxfVFlQRV9HUkFC
+QkVSLCAwKTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJf
+ZXJyKCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gcmVnaXN0ZXIgdmlkZW8gZGV2aWNlXG4iKTsK
+PiA+ICsgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiAr
+ICAgICAgIHZ2ZC0+d29ya3F1ZXVlID0gYWxsb2Nfb3JkZXJlZF93b3JrcXVldWUodmQtPm5hbWUs
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgV1Ff
+TUVNX1JFQ0xBSU0gfCBXUV9GUkVFWkFCTEUpOwo+ID4gKyAgICAgICBpZiAoIXZ2ZC0+d29ya3F1
+ZXVlKSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwgImZhaWxl
+ZCB0byBjcmVhdGUgYSB3b3JrcXVldWUiKTsKPiA+ICsgICAgICAgICAgICAgICB2aWRlb191bnJl
+Z2lzdGVyX2RldmljZSh2ZCk7Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9NRU07Cj4g
+PiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgbGlzdF9hZGQoJnZ2ZC0+ZGV2aWNlc19saXN0
+X2VudHJ5LCAmdnYtPmRldmljZXNfbGlzdCk7Cj4gPiArICAgICAgIHY0bDJfaW5mbygmdnYtPnY0
+bDJfZGV2LCAiRGV2aWNlICclcycgcmVnaXN0ZXJlZCBhcyAvZGV2L3ZpZGVvJWRcbiIsCj4gPiAr
+ICAgICAgICAgICAgICAgICB2ZC0+bmFtZSwgdmQtPm51bSk7Cj4gPiArCj4gPiArICAgICAgIHJl
+dHVybiAwOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgdm9pZCB2aXJ0aW9fdmlkZW9fZGV2aWNl
+X3VucmVnaXN0ZXIoc3RydWN0IHZpcnRpb192aWRlb19kZXZpY2UgKnZ2ZCkKPiA+ICt7Cj4gPiAr
+ICAgICAgIGlmICghdnZkKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybjsKPiA+ICsKPiA+ICsg
+ICAgICAgbGlzdF9kZWwoJnZ2ZC0+ZGV2aWNlc19saXN0X2VudHJ5KTsKPiA+ICsgICAgICAgZmx1
+c2hfd29ya3F1ZXVlKHZ2ZC0+d29ya3F1ZXVlKTsKPiA+ICsgICAgICAgZGVzdHJveV93b3JrcXVl
+dWUodnZkLT53b3JrcXVldWUpOwo+ID4gKyAgICAgICB2aWRlb191bnJlZ2lzdGVyX2RldmljZSgm
+dnZkLT52aWRlb19kZXYpOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgc3RydWN0IHZpcnRpb192
+aWRlb19kZXZpY2UgKgo+ID4gK3ZpcnRpb192aWRlb19kZXZpY2VfY3JlYXRlKHN0cnVjdCB2aXJ0
+aW9fdmlkZW8gKnZ2KQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IGRldmljZSAqZGV2ID0gTlVM
+TDsKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2RldmljZSAqdmQgPSBOVUxMOwo+ID4gKyAgICAg
+ICBzdHJ1Y3QgdjRsMl9tMm1fZGV2ICptMm1fZGV2ID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0
+IHZpcnRpb192aWRlb19kZXZpY2UgKnZ2ZCA9IE5VTEw7Cj4gPiArCj4gPiArICAgICAgIGlmICgh
+dnYpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7Cj4gPiArCj4g
+PiArICAgICAgIGRldiA9ICZ2di0+dmRldi0+ZGV2Owo+ID4gKwo+ID4gKyAgICAgICB2dmQgPSBk
+ZXZtX2t6YWxsb2MoZGV2LCBzaXplb2YoKnZ2ZCksIEdGUF9LRVJORUwpOwo+ID4gKyAgICAgICBp
+ZiAoIXZ2ZCkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gRVJSX1BUUigtRU5PTUVNKTsKPiA+
+ICsKPiA+ICsgICAgICAgbTJtX2RldiA9IHY0bDJfbTJtX2luaXQoJnZpcnRpb192aWRlb19kZXZp
+Y2VfbTJtX29wcyk7Cj4gPiArICAgICAgIGlmIChJU19FUlIobTJtX2RldikpIHsKPiA+ICsgICAg
+ICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRvIGluaXQgbTJtIGRl
+dmljZVxuIik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnI7Cj4gPiArICAgICAgIH0KPiA+
+ICsKPiA+ICsgICAgICAgdnZkLT52diA9IHZ2Owo+ID4gKyAgICAgICB2dmQtPm0ybV9kZXYgPSBt
+Mm1fZGV2Owo+ID4gKyAgICAgICBtdXRleF9pbml0KCZ2dmQtPnZpZGVvX2Rldl9tdXRleCk7Cj4g
+PiArICAgICAgIHZkID0gJnZ2ZC0+dmlkZW9fZGV2Owo+ID4gKyAgICAgICB2ZC0+bG9jayA9ICZ2
+dmQtPnZpZGVvX2Rldl9tdXRleDsKPiA+ICsgICAgICAgdmQtPnY0bDJfZGV2ID0gJnZ2LT52NGwy
+X2RldjsKPiA+ICsgICAgICAgdmQtPnZmbF9kaXIgPSBWRkxfRElSX00yTTsKPiA+ICsgICAgICAg
+dmQtPmlvY3RsX29wcyA9IE5VTEw7Cj4gPiArICAgICAgIHZkLT5mb3BzID0gJnZpcnRpb192aWRl
+b19kZXZpY2VfZm9wczsKPiA+ICsgICAgICAgdmQtPmRldmljZV9jYXBzID0gVjRMMl9DQVBfU1RS
+RUFNSU5HIHwgVjRMMl9DQVBfVklERU9fTTJNX01QTEFORTsKPiA+ICsgICAgICAgdmQtPnJlbGVh
+c2UgPSB2aWRlb19kZXZpY2VfcmVsZWFzZV9lbXB0eTsKPiA+ICsKPiA+ICsgICAgICAgLyogVXNl
+IHRoZSBzZWxlY3Rpb24gQVBJIGluc3RlYWQgKi8KPiA+ICsgICAgICAgdjRsMl9kaXNhYmxlX2lv
+Y3RsKHZkLCBWSURJT0NfQ1JPUENBUCk7Cj4gPiArICAgICAgIHY0bDJfZGlzYWJsZV9pb2N0bCh2
+ZCwgVklESU9DX0dfQ1JPUCk7Cj4gPiArICAgICAgIHY0bDJfZGlzYWJsZV9pb2N0bCh2ZCwgVklE
+SU9DX1NfQ1JPUCk7Cj4gPiArCj4gPiArICAgICAgIHZpZGVvX3NldF9kcnZkYXRhKHZkLCB2dmQp
+Owo+ID4gKwo+ID4gKyAgICAgICBJTklUX0xJU1RfSEVBRCgmdnZkLT5pbnB1dF9mbXRfbGlzdCk7
+Cj4gPiArICAgICAgIElOSVRfTElTVF9IRUFEKCZ2dmQtPm91dHB1dF9mbXRfbGlzdCk7Cj4gPiAr
+ICAgICAgIElOSVRfTElTVF9IRUFEKCZ2dmQtPmNvbnRyb2xzX2ZtdF9saXN0KTsKPiA+ICsKPiA+
+ICsgICAgICAgdnZkLT5udW1fb3V0cHV0X2ZtdHMgPSAwOwo+ID4gKyAgICAgICB2dmQtPm51bV9p
+bnB1dF9mbXRzID0gMDsKPiA+ICsKPiA+ICsgICAgICAgc3dpdGNoICh2di0+dmRldi0+aWQuZGV2
+aWNlKSB7Cj4gPiArICAgICAgIGNhc2UgVklSVElPX0lEX1ZJREVPX0VOQzoKPiA+ICsgICAgICAg
+ICAgICAgICB2dmQtPnR5cGUgPSBWSVJUSU9fVklERU9fREVWSUNFX0VOQ09ERVI7Cj4gPiArICAg
+ICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAgICAgIGNhc2UgVklSVElPX0lEX1ZJREVPX0RFQzoK
+PiA+ICsgICAgICAgZGVmYXVsdDoKPiAKPiBlcnJvciBpZiBpdCdzIG5laXRoZXIgVklERU9fRU5D
+IG5vcmUgVklERU9fREVDPwo+IAo+ID4gKyAgICAgICAgICAgICAgIHZ2ZC0+dHlwZSA9IFZJUlRJ
+T19WSURFT19ERVZJQ0VfREVDT0RFUjsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+ICsg
+ICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdnZkOwo+ID4gKwo+ID4gK2VycjoKPiA+
+ICsgICAgICAgZGV2bV9rZnJlZShkZXYsIHZ2ZCk7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiBF
+UlJfQ0FTVChtMm1fZGV2KTsKPiA+ICt9Cj4gPiArCj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fZGV2
+aWNlX2Rlc3Ryb3koc3RydWN0IHZpcnRpb192aWRlb19kZXZpY2UgKnZ2ZCkKPiA+ICt7Cj4gPiAr
+ICAgICAgIGlmICghdnZkKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybjsKPiA+ICsKPiA+ICsg
+ICAgICAgdjRsMl9tMm1fcmVsZWFzZSh2dmQtPm0ybV9kZXYpOwo+ID4gKyAgICAgICBkZXZtX2tm
+cmVlKCZ2dmQtPnZ2LT52ZGV2LT5kZXYsIHZ2ZCk7Cj4gPiArfQo+ID4gKwo+ID4gK2ludCB2aXJ0
+aW9fdmlkZW9fZGV2aWNlX2luaXQoc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKmlucHV0X2J1Ziwgdm9pZCAqb3V0cHV0X2J1ZikK
+PiA+ICt7Cj4gPiArICAgICAgIGludCByZXQgPSAwOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlv
+X3ZpZGVvX2RldmljZSAqdnZkID0gTlVMTDsKPiA+ICsKPiA+ICsgICAgICAgaWYgKCF2diB8fCAh
+aW5wdXRfYnVmIHx8ICFvdXRwdXRfYnVmKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlO
+VkFMOwo+ID4gKwo+ID4gKwo+ID4gKyAgICAgICB2dmQgPSB2aXJ0aW9fdmlkZW9fZGV2aWNlX2Ny
+ZWF0ZSh2dik7Cj4gPiArICAgICAgIGlmIChJU19FUlIodnZkKSkgewo+ID4gKyAgICAgICAgICAg
+ICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ImZhaWxlZCB0byBjcmVhdGUgdmlydGlvIHZpZGVvIGRldmljZVxuIik7Cj4gPiArICAgICAgICAg
+ICAgICAgcmV0ID0gUFRSX0VSUih2dmQpOwo+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZmFpbGVk
+Owo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJldCA9IHZpcnRpb192aWRlb19wYXJz
+ZV92aXJ0aW9fY2FwYWJpbGl0eSh2dmQsIGlucHV0X2J1Ziwgb3V0cHV0X2J1Zik7Cj4gPiArICAg
+ICAgIGlmIChyZXQpIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2
+LCAiZmFpbGVkIHRvIHBhcnNlIGEgZnVuY3Rpb25cbiIpOwo+ID4gKyAgICAgICAgICAgICAgIHZp
+cnRpb192aWRlb19kZXZpY2VfZGVzdHJveSh2dmQpOwo+ID4gKyAgICAgICAgICAgICAgIHJldCA9
+IC1FSU5WQUw7Cj4gPiArICAgICAgICAgICAgICAgZ290byBmYWlsZWQ7Cj4gPiArICAgICAgIH0K
+PiA+ICsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX3BhcnNlX3ZpcnRpb19jb250cm9s
+KHZ2ZCk7Cj4gPiArICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2Vy
+cigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRvIHF1ZXJ5IGNvbnRyb2xzXG4iKTsKPiA+ICsgICAg
+ICAgICAgICAgICB2aXJ0aW9fdmlkZW9fY2xlYW5fY2FwYWJpbGl0eSh2dmQpOwo+ID4gKyAgICAg
+ICAgICAgICAgIHZpcnRpb192aWRlb19kZXZpY2VfZGVzdHJveSh2dmQpOwo+IAo+IFBsZWFzZSBk
+byB0aGVzZSBjbGVhbnVwcyBhZnRlciBnb3RvLgo+IAo+ID4gKyAgICAgICAgICAgICAgIGdvdG8g
+ZmFpbGVkOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJldCA9IHZpcnRpb192aWRl
+b19kZXZpY2VfcmVnaXN0ZXIodnZkKTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAg
+ICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgImZhaWxlZCB0byBpbml0IHZpcnRpbyB2aWRlbyBkZXZpY2VcbiIpOwo+ID4gKyAgICAg
+ICAgICAgICAgIHZpcnRpb192aWRlb19jbGVhbl9jb250cm9sKHZ2ZCk7Cj4gPiArICAgICAgICAg
+ICAgICAgdmlydGlvX3ZpZGVvX2NsZWFuX2NhcGFiaWxpdHkodnZkKTsKPiA+ICsgICAgICAgICAg
+ICAgICB2aXJ0aW9fdmlkZW9fZGV2aWNlX2Rlc3Ryb3kodnZkKTsKPiA+ICsgICAgICAgICAgICAg
+ICBnb3RvIGZhaWxlZDsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsK
+PiA+ICsKPiA+ICtmYWlsZWQ6Cj4gPiArICAgICAgIHZpcnRpb192aWRlb19kZXZpY2VfZGVpbml0
+KHZ2KTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIHJldDsKPiA+ICt9Cj4gPiArCj4gPiArdm9p
+ZCB2aXJ0aW9fdmlkZW9fZGV2aWNlX2RlaW5pdChzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2dikKPiA+
+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQgPSBOVUxMLCAq
+dG1wID0gTlVMTDsKPiA+ICsKPiA+ICsgICAgICAgbGlzdF9mb3JfZWFjaF9lbnRyeV9zYWZlKHZ2
+ZCwgdG1wLCAmdnYtPmRldmljZXNfbGlzdCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGRldmljZXNfbGlzdF9lbnRyeSkgewo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192
+aWRlb19kZXZpY2VfdW5yZWdpc3Rlcih2dmQpOwo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192
+aWRlb19jbGVhbl9jb250cm9sKHZ2ZCk7Cj4gPiArICAgICAgICAgICAgICAgdmlydGlvX3ZpZGVv
+X2NsZWFuX2NhcGFiaWxpdHkodnZkKTsKPiA+ICsgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9f
+ZGV2aWNlX2Rlc3Ryb3kodnZkKTsKPiA+ICsgICAgICAgfQo+ID4gK30KPiA+IGRpZmYgLS1naXQg
+YS9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZHJpdmVyLmMgYi9kcml2ZXJzL21l
+ZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZHJpdmVyLmMKPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0
+Cj4gPiBpbmRleCAwMDAwMDAwMDAwMDAuLjJkNGZkNzY3MWY0Zgo+ID4gLS0tIC9kZXYvbnVsbAo+
+ID4gKysrIGIvZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlvX3ZpZGVvX2RyaXZlci5jCj4gPiBA
+QCAtMCwwICsxLDMxNSBAQAo+ID4gKy8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4w
+Kwo+ID4gKy8qIERyaXZlciBmb3IgdmlydGlvIHZpZGVvIGRldmljZS4KPiA+ICsgKgo+ID4gKyAq
+IENvcHlyaWdodCAyMDE5IE9wZW5TeW5lcmd5IEdtYkguCj4gPiArICoKPiA+ICsgKiBUaGlzIHBy
+b2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1v
+ZGlmeQo+ID4gKyAqIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGlj
+IExpY2Vuc2UgYXMgcHVibGlzaGVkIGJ5Cj4gPiArICogdGhlIEZyZWUgU29mdHdhcmUgRm91bmRh
+dGlvbjsgZWl0aGVyIHZlcnNpb24gMiBvZiB0aGUgTGljZW5zZSwgb3IKPiA+ICsgKiAoYXQgeW91
+ciBvcHRpb24pIGFueSBsYXRlciB2ZXJzaW9uLgo+ID4gKyAqCj4gPiArICogVGhpcyBwcm9ncmFt
+IGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsCj4gPiAr
+ICogYnV0IFdJVEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRob3V0IGV2ZW4gdGhlIGltcGxpZWQgd2Fy
+cmFudHkgb2YKPiA+ICsgKiBNRVJDSEFOVEFCSUxJVFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNV
+TEFSIFBVUlBPU0UuICBTZWUgdGhlCj4gPiArICogR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2Ug
+Zm9yIG1vcmUgZGV0YWlscy4KPiA+ICsgKgo+ID4gKyAqIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZl
+ZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlCj4gPiArICogYWxvbmcg
+d2l0aCB0aGlzIHByb2dyYW07IGlmIG5vdCwgc2VlIDxodHRwOi8vd3d3LmdudS5vcmcvbGljZW5z
+ZXMvPjsuCj4gPiArICovCj4gPiArCj4gPiArI2luY2x1ZGUgPGxpbnV4L21vZHVsZS5oPgo+ID4g
+KyNpbmNsdWRlIDxsaW51eC92ZXJzaW9uLmg+Cj4gPiArI2luY2x1ZGUgPGxpbnV4L2RtYS1tYXBw
+aW5nLmg+Cj4gPiArCj4gPiArI2luY2x1ZGUgInZpcnRpb192aWRlby5oIgo+ID4gKwo+ID4gK3N0
+YXRpYyB1bnNpZ25lZCBpbnQgZGVidWc7Cj4gPiArbW9kdWxlX3BhcmFtKGRlYnVnLCB1aW50LCAw
+NjQ0KTsKPiA+ICsKPiA+ICtzdGF0aWMgdW5zaWduZWQgaW50IHVzZV9kbWFfbWVtOwo+ID4gK21v
+ZHVsZV9wYXJhbSh1c2VfZG1hX21lbSwgdWludCwgMDY0NCk7Cj4gPiArTU9EVUxFX1BBUk1fREVT
+Qyh1c2VfZG1hX21lbSwgIlRyeSB0byBhbGxvY2F0ZSBidWZmZXJzIGZyb20gdGhlIERNQSB6b25l
+Iik7Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX2luaXRfdnEoc3RydWN0IHZp
+cnRpb192aWRlb19xdWV1ZSAqdnZxLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgdm9pZCAoKndvcmtfZnVuYykoc3RydWN0IHdvcmtfc3RydWN0ICp3b3JrKSkKPiA+ICt7Cj4g
+PiArICAgICAgIHNwaW5fbG9ja19pbml0KCZ2dnEtPnFsb2NrKTsKPiA+ICsgICAgICAgaW5pdF93
+YWl0cXVldWVfaGVhZCgmdnZxLT5hY2tfcXVldWUpOwo+ID4gKyAgICAgICBJTklUX1dPUksoJnZ2
+cS0+ZGVxdWV1ZV93b3JrLCB3b3JrX2Z1bmMpOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgdm9p
+ZCAqZG1hX3BoeXNfYWxsb2Moc3RydWN0IGRldmljZSAqZGV2LCBzaXplX3Qgc2l6ZSwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBkbWFfYWRkcl90ICpkbWFfaGFuZGxlLCBnZnBfdCBn
+ZnAsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgbG9uZyBhdHRycykK
+PiA+ICt7Cj4gPiArICAgICAgIHZvaWQgKnJldDsKPiA+ICsKPiA+ICsgICAgICAgcmV0ID0gKHZv
+aWQgKilfX2dldF9mcmVlX3BhZ2VzKGdmcCwgZ2V0X29yZGVyKHNpemUpKTsKPiA+ICsgICAgICAg
+aWYgKHJldCkKPiA+ICsgICAgICAgICAgICAgICAqZG1hX2hhbmRsZSA9IHZpcnRfdG9fcGh5cyhy
+ZXQpIC0gUEZOX1BIWVMoZGV2LT5kbWFfcGZuX29mZnNldCk7Cj4gPiArCj4gPiArICAgICAgIHJl
+dHVybiByZXQ7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyB2b2lkIGRtYV9waHlzX2ZyZWUoc3Ry
+dWN0IGRldmljZSAqZGV2LCBzaXplX3Qgc2l6ZSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgdm9pZCAqY3B1X2FkZHIsIGRtYV9hZGRyX3QgZG1hX2FkZHIsCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgYXR0cnMpCj4gPiArewo+ID4gKyAgICAgICBmcmVl
+X3BhZ2VzKCh1bnNpZ25lZCBsb25nKWNwdV9hZGRyLCBnZXRfb3JkZXIoc2l6ZSkpOwo+ID4gK30K
+PiA+ICsKPiA+ICtzdGF0aWMgZG1hX2FkZHJfdCBkbWFfcGh5c19tYXBfcGFnZShzdHJ1Y3QgZGV2
+aWNlICpkZXYsIHN0cnVjdCBwYWdlICpwYWdlLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgdW5zaWduZWQgbG9uZyBvZmZzZXQsIHNpemVfdCBzaXplLAo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZW51bSBkbWFfZGF0YV9kaXJlY3Rpb24gZGly
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgbG9uZyBh
+dHRycykKPiA+ICt7Cj4gPiArICAgICAgIHJldHVybiBwYWdlX3RvX3BoeXMocGFnZSkgKyBvZmZz
+ZXQgLSBQRk5fUEhZUyhkZXYtPmRtYV9wZm5fb2Zmc2V0KTsKPiA+ICt9Cj4gPiArCj4gPiArc3Rh
+dGljIGludCBkbWFfcGh5c19tYXBfc2coc3RydWN0IGRldmljZSAqZGV2LCBzdHJ1Y3Qgc2NhdHRl
+cmxpc3QgKnNnbCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgIGludCBuZW50cywgZW51
+bSBkbWFfZGF0YV9kaXJlY3Rpb24gZGlyLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+dW5zaWduZWQgbG9uZyBhdHRycykKPiA+ICt7Cj4gPiArICAgICAgIGludCBpOwo+ID4gKyAgICAg
+ICBzdHJ1Y3Qgc2NhdHRlcmxpc3QgKnNnOwo+ID4gKwo+ID4gKyAgICAgICBmb3JfZWFjaF9zZyhz
+Z2wsIHNnLCBuZW50cywgaSkgewo+ID4gKyAgICAgICAgICAgICAgIGRtYV9hZGRyX3Qgb2Zmc2V0
+ID0gUEZOX1BIWVMoZGV2LT5kbWFfcGZuX29mZnNldCk7Cj4gPiArICAgICAgICAgICAgICAgdm9p
+ZCAqdmE7Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgQlVHX09OKCFzZ19wYWdlKHNnKSk7Cj4g
+Cj4gQUZBSUssIEJVR19PTiBpc24ndCByZWNvbW1lbmRlZCB0byB1c2UuCj4gQXQgbGVhc3QsIC9z
+Y3JpcHRzL2NoZWNrcGF0Y2gucGwgY29tcGxhaW5zIGl0Lgo+IAo+ID4gKyAgICAgICAgICAgICAg
+IHZhID0gc2dfdmlydChzZyk7Cj4gPiArICAgICAgICAgICAgICAgc2dfZG1hX2FkZHJlc3Moc2cp
+ID0gKGRtYV9hZGRyX3QpdmlydF90b19waHlzKHZhKSAtIG9mZnNldDsKPiA+ICsgICAgICAgICAg
+ICAgICBzZ19kbWFfbGVuKHNnKSA9IHNnLT5sZW5ndGg7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+
+ICsgICAgICAgcmV0dXJuIG5lbnRzOwo+ID4gK30KPiA+ICsKPiA+ICtjb25zdCBzdHJ1Y3QgZG1h
+X21hcF9vcHMgZG1hX3BoeXNfb3BzID0gewo+ID4gKyAgICAgICAuYWxsb2MgICAgICAgICAgICAg
+ICAgICA9IGRtYV9waHlzX2FsbG9jLAo+ID4gKyAgICAgICAuZnJlZSAgICAgICAgICAgICAgICAg
+ICA9IGRtYV9waHlzX2ZyZWUsCj4gPiArICAgICAgIC5tYXBfcGFnZSAgICAgICAgICAgICAgID0g
+ZG1hX3BoeXNfbWFwX3BhZ2UsCj4gPiArICAgICAgIC5tYXBfc2cgICAgICAgICAgICAgICAgID0g
+ZG1hX3BoeXNfbWFwX3NnLAo+ID4gK307Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlk
+ZW9fcXVlcnlfY2FwX3Jlc3BfYnVmKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB2b2lkCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKipyZXNwX2J1ZiwgaW50
+IHF1ZXVlX3R5cGUpCj4gPiArewo+ID4gKyAgICAgICBpbnQgcmV0ID0gMDsKPiA+ICsgICAgICAg
+aW50IHJlc3Bfc2l6ZSA9IHZ2LT5tYXhfY2Fwc19sZW47Cj4gPiArCj4gPiArICAgICAgICpyZXNw
+X2J1ZiA9IGt6YWxsb2ModnYtPm1heF9jYXBzX2xlbiwgR0ZQX0tFUk5FTCk7Cj4gPiArICAgICAg
+IGlmIChJU19FUlIoKnJlc3BfYnVmKSkgewo+ID4gKyAgICAgICAgICAgICAgIHJldCA9IFBUUl9F
+UlIoKnJlc3BfYnVmKTsKPiA+ICsgICAgICAgICAgICAgICBnb3RvIGVycjsKPiA+ICsgICAgICAg
+fQo+ID4gKwo+ID4gKyAgICAgICB2di0+Z290X2NhcHMgPSBmYWxzZTsKPiA+ICsgICAgICAgcmV0
+ID0gdmlydGlvX3ZpZGVvX3F1ZXJ5X2NhcGFiaWxpdHkodnYsICpyZXNwX2J1ZiwgcmVzcF9zaXpl
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBxdWV1ZV90
+eXBlKTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfZXJy
+KCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gcXVlcnkgY2FwYWJpbGl0eVxuIik7Cj4gPiArICAg
+ICAgICAgICAgICAgZ290byBlcnI7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0
+ID0gd2FpdF9ldmVudF90aW1lb3V0KHZ2LT53cSwgdnYtPmdvdF9jYXBzLCA1ICogSFopOwo+ID4g
+KyAgICAgICBpZiAocmV0ID09IDApIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYt
+PnY0bDJfZGV2LCAidGltZWQgb3V0IHdhaXRpbmcgZm9yIGdldCBjYXBzXG4iKTsKPiA+ICsgICAg
+ICAgICAgICAgICByZXQgPSAtRUlPOwo+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZXJyOwo+ID4g
+KyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJldHVybiAwOwo+ID4gK2VycjoKPiA+ICsgICAg
+ICAgcmV0dXJuIHJldDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlkZW9f
+aW5pdChzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2dikKPiA+ICt7Cj4gPiArICAgICAgIGludCByZXQg
+PSAwOwo+ID4gKyAgICAgICB2b2lkICppbnB1dF9yZXNwX2J1ZiA9IE5VTEw7Cj4gPiArICAgICAg
+IHZvaWQgKm91dHB1dF9yZXNwX2J1ZiA9IE5VTEw7Cj4gPiArCj4gPiArICAgICAgIGlmICghdnYp
+Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiArCj4gPiArICAgICAgIHJl
+dCA9IHZpcnRpb192aWRlb19xdWVyeV9jYXBfcmVzcF9idWYodnYsICZpbnB1dF9yZXNwX2J1ZiwK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBWSVJUSU9f
+VklERU9fUVVFVUVfVFlQRV9JTlBVVCk7Cj4gPiArICAgICAgIGlmIChyZXQpIHsKPiA+ICsgICAg
+ICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFpbGVkIHRvIGdldCBpbnB1dCBj
+YXBzXG4iKTsKPiA+ICsgICAgICAgICAgICAgICBnb3RvIGVycjsKPiA+ICsgICAgICAgfQo+ID4g
+Kwo+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fcXVlcnlfY2FwX3Jlc3BfYnVmKHZ2LCAm
+b3V0cHV0X3Jlc3BfYnVmLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIFZJUlRJT19WSURFT19RVUVVRV9UWVBFX09VVFBVVCk7Cj4gPiArICAgICAgIGlm
+IChyZXQpIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFp
+bGVkIHRvIGdldCBvdXRwdXQgY2Fwc1xuIik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnI7
+Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2Rldmlj
+ZV9pbml0KHZ2LCBpbnB1dF9yZXNwX2J1Ziwgb3V0cHV0X3Jlc3BfYnVmKTsKPiA+ICsgICAgICAg
+aWYgKHJldCkKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJfZGV2LCAiZmFp
+bGVkIHRvIGluaXRpYWxpemUgZGV2aWNlc1xuIik7Cj4gPiArCj4gPiArZXJyOgo+ID4gKyAgICAg
+ICBrZnJlZShpbnB1dF9yZXNwX2J1Zik7Cj4gPiArICAgICAgIGtmcmVlKG91dHB1dF9yZXNwX2J1
+Zik7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiByZXQ7Cj4gPiArfTsKPiA+ICsKPiA+ICtzdGF0
+aWMgaW50IHZpcnRpb192aWRlb19wcm9iZShzdHJ1Y3QgdmlydGlvX2RldmljZSAqdmRldikKPiA+
+ICt7Cj4gPiArICAgICAgIGludCByZXQ7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW8g
+KnZ2Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydHF1ZXVlICp2cXNbMl07Cj4gPiArICAgICAgIHN0
+cnVjdCBkZXZpY2UgKmRldiA9ICZ2ZGV2LT5kZXY7Cj4gPiArCj4gPiArICAgICAgIHN0YXRpYyBj
+b25zdCBjaGFyICogY29uc3QgbmFtZXNbXSA9IHsgImNvbnRyb2wiLCAiZXZlbnQiIH07Cj4gPiAr
+ICAgICAgIHN0YXRpYyB2cV9jYWxsYmFja190ICpjYWxsYmFja3NbXSA9IHsKPiA+ICsgICAgICAg
+ICAgICAgICB2aXJ0aW9fdmlkZW9fY21kX2FjaywKPiA+ICsgICAgICAgICAgICAgICB2aXJ0aW9f
+dmlkZW9fZXZlbnRfYWNrCj4gPiArICAgICAgIH07Cj4gPiArCj4gPiArICAgICAgIGlmICghdmly
+dGlvX2hhc19mZWF0dXJlKHZkZXYsIFZJUlRJT19WSURFT19GX1JFU09VUkNFX0dVRVNUX1BBR0VT
+KSkgewo+ID4gKyAgICAgICAgICAgICAgIGRldl9lcnIoZGV2LCAiZGV2aWNlIG11c3Qgc3VwcG9y
+dCBndWVzdCBhbGxvY2F0ZWQgYnVmZmVyc1xuIik7Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJu
+IC1FTk9ERVY7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgdnYgPSBkZXZtX2t6YWxs
+b2MoZGV2LCBzaXplb2YoKnZ2KSwgR0ZQX0tFUk5FTCk7Cj4gPiArICAgICAgIGlmICghdnYpCj4g
+PiArICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9NRU07Cj4gPiArCj4gPiArICAgICAgIHZ2LT52
+ZGV2ID0gdmRldjsKPiA+ICsgICAgICAgdnYtPmRlYnVnID0gZGVidWc7Cj4gPiArICAgICAgIHZ2
+LT51c2VfZG1hX21lbSA9IHVzZV9kbWFfbWVtOwo+ID4gKyAgICAgICB2ZGV2LT5wcml2ID0gdnY7
+Cj4gPiArCj4gPiArICAgICAgIHNwaW5fbG9ja19pbml0KCZ2di0+cmVzb3VyY2VfaWRyX2xvY2sp
+Owo+ID4gKyAgICAgICBpZHJfaW5pdCgmdnYtPnJlc291cmNlX2lkcik7Cj4gPiArICAgICAgIHNw
+aW5fbG9ja19pbml0KCZ2di0+c3RyZWFtX2lkcl9sb2NrKTsKPiA+ICsgICAgICAgaWRyX2luaXQo
+JnZ2LT5zdHJlYW1faWRyKTsKPiA+ICsKPiA+ICsgICAgICAgaW5pdF93YWl0cXVldWVfaGVhZCgm
+dnYtPndxKTsKPiA+ICsKPiA+ICsgICAgICAgaWYgKHZpcnRpb19oYXNfZmVhdHVyZSh2ZGV2LCBW
+SVJUSU9fVklERU9fRl9SRVNPVVJDRV9OT05fQ09OVElHKSkKPiA+ICsgICAgICAgICAgICAgICB2
+di0+c3VwcF9ub25fY29udGlnID0gdHJ1ZTsKPiA+ICsKPiA+ICsgICAgICAgdnYtPmhhc19pb21t
+dSA9ICF2aXJ0aW9faGFzX2lvbW11X3F1aXJrKHZkZXYpOwo+ID4gKyAgICAgICBpZiAoIXZ2LT5o
+YXNfaW9tbXUpCj4gPiArICAgICAgICAgICAgICAgc2V0X2RtYV9vcHMoZGV2LCAmZG1hX3BoeXNf
+b3BzKTsKPiA+ICsKPiA+ICsgICAgICAgZGV2X3NldF9uYW1lKGRldiwgIiVzLiVpIiwgRFJJVkVS
+X05BTUUsIHZkZXYtPmluZGV4KTsKPiA+ICsgICAgICAgcmV0ID0gdjRsMl9kZXZpY2VfcmVnaXN0
+ZXIoZGV2LCAmdnYtPnY0bDJfZGV2KTsKPiA+ICsgICAgICAgaWYgKHJldCkKPiA+ICsgICAgICAg
+ICAgICAgICBnb3RvIGVycl92NGwyX3JlZzsKPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVv
+X2luaXRfdnEoJnZ2LT5jb21tYW5kcSwgdmlydGlvX3ZpZGVvX2RlcXVldWVfY21kX2Z1bmMpOwo+
+ID4gKyAgICAgICB2aXJ0aW9fdmlkZW9faW5pdF92cSgmdnYtPmV2ZW50cSwgdmlydGlvX3ZpZGVv
+X2RlcXVldWVfZXZlbnRfZnVuYyk7Cj4gPiArCj4gPiArICAgICAgIHJldCA9IHZpcnRpb19maW5k
+X3Zxcyh2ZGV2LCAyLCB2cXMsIGNhbGxiYWNrcywgbmFtZXMsIE5VTEwpOwo+ID4gKyAgICAgICBp
+ZiAocmV0KSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwgImZh
+aWxlZCB0byBmaW5kIHZpcnQgcXVldWVzXG4iKTsKPiA+ICsgICAgICAgICAgICAgICBnb3RvIGVy
+cl92cXM7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgdnYtPmNvbW1hbmRxLnZxID0g
+dnFzWzBdOwo+ID4gKyAgICAgICB2di0+ZXZlbnRxLnZxID0gdnFzWzFdOwo+ID4gKwo+ID4gKyAg
+ICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fYWxsb2NfdmJ1ZnModnYpOwo+ID4gKyAgICAgICBpZiAo
+cmV0KSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwgImZhaWxl
+ZCB0byBhbGxvYyB2YnVmc1xuIik7Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnJfdmJ1ZnM7
+Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX2NyZWFkKHZkZXYsIHN0cnVj
+dCB2aXJ0aW9fdmlkZW9fY29uZmlnLCBtYXhfY2Fwc19sZW5ndGgsCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAmdnYtPm1heF9jYXBzX2xlbik7Cj4gPiArICAgICAgIGlmICghdnYtPm1heF9jYXBz
+X2xlbikgewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJtYXhf
+Y2Fwc19sZW4gaXMgemVyb1xuIik7Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gLUVJTlZBTDsK
+PiA+ICsgICAgICAgICAgICAgICBnb3RvIGVycl9jb25maWc7Cj4gPiArICAgICAgIH0KPiA+ICsK
+PiA+ICsgICAgICAgdmlydGlvX2NyZWFkKHZkZXYsIHN0cnVjdCB2aXJ0aW9fdmlkZW9fY29uZmln
+LCBtYXhfcmVzcF9sZW5ndGgsCj4gPiArICAgICAgICAgICAgICAgICAgICAmdnYtPm1heF9yZXNw
+X2xlbik7Cj4gPiArICAgICAgIGlmICghdnYtPm1heF9yZXNwX2xlbikgewo+ID4gKyAgICAgICAg
+ICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJtYXhfcmVzcF9sZW4gaXMgemVyb1xuIik7
+Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gLUVJTlZBTDsKPiA+ICsgICAgICAgICAgICAgICBn
+b3RvIGVycl9jb25maWc7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0ID0gdmly
+dGlvX3ZpZGVvX2FsbG9jX2V2ZW50cyh2diwgdnYtPmV2ZW50cS52cS0+bnVtX2ZyZWUpOwo+ID4g
+KyAgICAgICBpZiAocmV0KQo+ID4gKyAgICAgICAgICAgICAgIGdvdG8gZXJyX2V2ZW50czsKPiA+
+ICsKPiA+ICsgICAgICAgdmlydGlvX2RldmljZV9yZWFkeSh2ZGV2KTsKPiA+ICsgICAgICAgdnYt
+PnZxX3JlYWR5ID0gdHJ1ZTsKPiA+ICsgICAgICAgdnYtPmdvdF9jYXBzID0gZmFsc2U7Cj4gPiAr
+Cj4gPiArICAgICAgIElOSVRfTElTVF9IRUFEKCZ2di0+ZGV2aWNlc19saXN0KTsKPiA+ICsKPiA+
+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2luaXQodnYpOwo+ID4gKyAgICAgICBpZiAocmV0
+KSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAiZmFpbGVkIHRvIGluaXQgdmlydGlvIHZpZGVvXG4iKTsKPiA+
+ICsgICAgICAgICAgICAgICBnb3RvIGVycl9pbml0Owo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiAr
+ICAgICAgIHJldHVybiAwOwo+ID4gKwo+ID4gK2Vycl9pbml0Ogo+ID4gK2Vycl9ldmVudHM6Cj4g
+PiArZXJyX2NvbmZpZzoKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX2ZyZWVfdmJ1ZnModnYpOwo+
+ID4gK2Vycl92YnVmczoKPiA+ICsgICAgICAgdmRldi0+Y29uZmlnLT5kZWxfdnFzKHZkZXYpOwo+
+ID4gK2Vycl92cXM6Cj4gPiArICAgICAgIHY0bDJfZGV2aWNlX3VucmVnaXN0ZXIoJnZ2LT52NGwy
+X2Rldik7Cj4gPiArZXJyX3Y0bDJfcmVnOgo+ID4gKyAgICAgICBkZXZtX2tmcmVlKCZ2ZGV2LT5k
+ZXYsIHZ2KTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIHJldDsKPiA+ICt9Cj4gPiArCj4gPiAr
+c3RhdGljIHZvaWQgdmlydGlvX3ZpZGVvX3JlbW92ZShzdHJ1Y3QgdmlydGlvX2RldmljZSAqdmRl
+dikKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2ID0gdmRldi0+cHJp
+djsKPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX2RldmljZV9kZWluaXQodnYpOwo+ID4g
+KyAgICAgICB2aXJ0aW9fdmlkZW9fZnJlZV92YnVmcyh2dik7Cj4gPiArICAgICAgIHZkZXYtPmNv
+bmZpZy0+ZGVsX3Zxcyh2ZGV2KTsKPiA+ICsgICAgICAgdjRsMl9kZXZpY2VfdW5yZWdpc3Rlcigm
+dnYtPnY0bDJfZGV2KTsKPiA+ICsgICAgICAgZGV2bV9rZnJlZSgmdmRldi0+ZGV2LCB2dik7Cj4g
+PiArfQo+ID4gKwo+ID4gK3N0YXRpYyBzdHJ1Y3QgdmlydGlvX2RldmljZV9pZCBpZF90YWJsZVtd
+ID0gewo+ID4gKyAgICAgICB7IFZJUlRJT19JRF9WSURFT19ERUMsIFZJUlRJT19ERVZfQU5ZX0lE
+IH0sCj4gPiArICAgICAgIHsgVklSVElPX0lEX1ZJREVPX0VOQywgVklSVElPX0RFVl9BTllfSUQg
+fSwKPiA+ICsgICAgICAgeyAwIH0sCj4gPiArfTsKPiA+ICsKPiA+ICtzdGF0aWMgdW5zaWduZWQg
+aW50IGZlYXR1cmVzW10gPSB7Cj4gPiArICAgICAgIFZJUlRJT19WSURFT19GX1JFU09VUkNFX0dV
+RVNUX1BBR0VTLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fRl9SRVNPVVJDRV9OT05fQ09OVElH
+LAo+ID4gK307Cj4gPiArCj4gPiArc3RhdGljIHN0cnVjdCB2aXJ0aW9fZHJpdmVyIHZpcnRpb192
+aWRlb19kcml2ZXIgPSB7Cj4gPiArICAgICAgIC5mZWF0dXJlX3RhYmxlID0gZmVhdHVyZXMsCj4g
+PiArICAgICAgIC5mZWF0dXJlX3RhYmxlX3NpemUgPSBBUlJBWV9TSVpFKGZlYXR1cmVzKSwKPiA+
+ICsgICAgICAgLmRyaXZlci5uYW1lID0gRFJJVkVSX05BTUUsCj4gPiArICAgICAgIC5kcml2ZXIu
+b3duZXIgPSBUSElTX01PRFVMRSwKPiA+ICsgICAgICAgLmlkX3RhYmxlID0gaWRfdGFibGUsCj4g
+PiArICAgICAgIC5wcm9iZSA9IHZpcnRpb192aWRlb19wcm9iZSwKPiA+ICsgICAgICAgLnJlbW92
+ZSA9IHZpcnRpb192aWRlb19yZW1vdmUsCj4gPiArfTsKPiA+ICsKPiA+ICttb2R1bGVfdmlydGlv
+X2RyaXZlcih2aXJ0aW9fdmlkZW9fZHJpdmVyKTsKPiA+ICsKPiA+ICtNT0RVTEVfREVWSUNFX1RB
+QkxFKHZpcnRpbywgaWRfdGFibGUpOwo+ID4gK01PRFVMRV9ERVNDUklQVElPTigidmlydGlvIHZp
+ZGVvIGRyaXZlciIpOwo+ID4gK01PRFVMRV9BVVRIT1IoIkRtaXRyeSBTZXBwIDxkbWl0cnkuc2Vw
+cEBvcGVuc3luZXJneS5jb20+Iik7Cj4gPiArTU9EVUxFX0FVVEhPUigiS2lyYW4gUGF3YXIgPGtp
+cmFuLnBhd2FyQG9wZW5zeW5lcmd5LmNvbT4iKTsKPiA+ICtNT0RVTEVfQVVUSE9SKCJOaWtvbGF5
+IE1hcnR5YW5vdiA8bmlrb2xheS5tYXJ0eWFub3ZAb3BlbnN5bmVyZ3kuY29tPiIpOwo+ID4gK01P
+RFVMRV9BVVRIT1IoIlNhbWl1bGxhaCBLaGF3YWphIDxzYW1pdWxsYWgua2hhd2FqYUBvcGVuc3lu
+ZXJneS5jb20+Iik7Cj4gPiArTU9EVUxFX0xJQ0VOU0UoIkdQTCIpOwo+ID4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvbWVkaWEvdmlydGlvL3ZpcnRpb192aWRlb19lbmMuYyBiL2RyaXZlcnMvbWVkaWEv
+dmlydGlvL3ZpcnRpb192aWRlb19lbmMuYwo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGlu
+ZGV4IDAwMDAwMDAwMDAwMC4uZDliZDVmMjkzOTAwCj4gPiAtLS0gL2Rldi9udWxsCj4gPiArKysg
+Yi9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZW5jLmMKPiA+IEBAIC0wLDAgKzEs
+NTY5IEBACj4gPiArLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjArCj4gPiArLyog
+RW5jb2RlciBmb3IgdmlydGlvIHZpZGVvIGRldmljZS4KPiA+ICsgKgo+ID4gKyAqIENvcHlyaWdo
+dCAyMDE5IE9wZW5TeW5lcmd5IEdtYkguCj4gPiArICoKPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMg
+ZnJlZSBzb2Z0d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1vZGlmeQo+ID4g
+KyAqIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2Ug
+YXMgcHVibGlzaGVkIGJ5Cj4gPiArICogdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbjsgZWl0
+aGVyIHZlcnNpb24gMiBvZiB0aGUgTGljZW5zZSwgb3IKPiA+ICsgKiAoYXQgeW91ciBvcHRpb24p
+IGFueSBsYXRlciB2ZXJzaW9uLgo+ID4gKyAqCj4gPiArICogVGhpcyBwcm9ncmFtIGlzIGRpc3Ry
+aWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsCj4gPiArICogYnV0IFdJ
+VEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRob3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YK
+PiA+ICsgKiBNRVJDSEFOVEFCSUxJVFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBP
+U0UuICBTZWUgdGhlCj4gPiArICogR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUg
+ZGV0YWlscy4KPiA+ICsgKgo+ID4gKyAqIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkg
+b2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlCj4gPiArICogYWxvbmcgd2l0aCB0aGlz
+IHByb2dyYW07IGlmIG5vdCwgc2VlIDxodHRwOi8vd3d3LmdudS5vcmcvbGljZW5zZXMvPjsuCj4g
+PiArICovCj4gPiArCj4gPiArI2luY2x1ZGUgPG1lZGlhL3Y0bDItZXZlbnQuaD4KPiA+ICsjaW5j
+bHVkZSA8bWVkaWEvdjRsMi1pb2N0bC5oPgo+ID4gKwo+ID4gKyNpbmNsdWRlICJ2aXJ0aW9fdmlk
+ZW8uaCIKPiA+ICsKPiA+ICtzdGF0aWMgdm9pZCB2aXJ0aW9fdmlkZW9fZW5jX2J1Zl9xdWV1ZShz
+dHJ1Y3QgdmIyX2J1ZmZlciAqdmIpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmIyX3Y0bDJf
+YnVmZmVyICp2NGwyX3ZiID0gdG9fdmIyX3Y0bDJfYnVmZmVyKHZiKTsKPiA+ICsgICAgICAgc3Ry
+dWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IHZiMl9nZXRfZHJ2X3ByaXYodmItPnZi
+Ml9xdWV1ZSk7Cj4gPiArCj4gPiArICAgICAgIHY0bDJfbTJtX2J1Zl9xdWV1ZShzdHJlYW0tPmZo
+Lm0ybV9jdHgsIHY0bDJfdmIpOwo+ID4gKwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgaW50IHZp
+cnRpb192aWRlb19lbmNfc3RhcnRfc3RyZWFtaW5nKHN0cnVjdCB2YjJfcXVldWUgKnZxLAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGludCBjb3Vu
+dCkKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0g
+PSB2YjJfZ2V0X2Rydl9wcml2KHZxKTsKPiA+ICsgICAgICAgYm9vbCBpbnB1dF9xdWV1ZSA9IFY0
+TDJfVFlQRV9JU19PVVRQVVQodnEtPnR5cGUpOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoc3RyZWFt
+LT5zdGF0ZSA9PSBTVFJFQU1fU1RBVEVfSU5JVCB8fAo+ID4gKyAgICAgICAgICAgKCFpbnB1dF9x
+dWV1ZSAmJiBzdHJlYW0tPnN0YXRlID09IFNUUkVBTV9TVEFURV9SRVNFVCkgfHwKPiA+ICsgICAg
+ICAgICAgIChpbnB1dF9xdWV1ZSAmJiBzdHJlYW0tPnN0YXRlID09IFNUUkVBTV9TVEFURV9TVE9Q
+UEVEKSkKPiA+ICsgICAgICAgICAgICAgICBzdHJlYW0tPnN0YXRlID0gU1RSRUFNX1NUQVRFX1JV
+Tk5JTkc7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiAwOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0
+aWMgdm9pZCB2aXJ0aW9fdmlkZW9fZW5jX3N0b3Bfc3RyZWFtaW5nKHN0cnVjdCB2YjJfcXVldWUg
+KnZxKQo+ID4gK3sKPiA+ICsgICAgICAgaW50IHJldCwgcXVldWVfdHlwZTsKPiA+ICsgICAgICAg
+Ym9vbCAqY2xlYXJlZDsKPiA+ICsgICAgICAgYm9vbCBpc192NGwyX291dHB1dCA9IFY0TDJfVFlQ
+RV9JU19PVVRQVVQodnEtPnR5cGUpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0
+cmVhbSAqc3RyZWFtID0gdmIyX2dldF9kcnZfcHJpdih2cSk7Cj4gPiArICAgICAgIHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQgPSB0b192aXJ0aW9fdmQoc3RyZWFtLT52aWRlb19kZXYp
+Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diA9IHZ2ZC0+dnY7Cj4gPiArICAg
+ICAgIHN0cnVjdCB2YjJfdjRsMl9idWZmZXIgKnY0bDJfdmI7Cj4gPiArCj4gPiArICAgICAgIGlm
+IChpc192NGwyX291dHB1dCkgewo+ID4gKyAgICAgICAgICAgICAgIGNsZWFyZWQgPSAmc3RyZWFt
+LT5zcmNfY2xlYXJlZDsKPiA+ICsgICAgICAgICAgICAgICBxdWV1ZV90eXBlID0gVklSVElPX1ZJ
+REVPX1FVRVVFX1RZUEVfSU5QVVQ7Cj4gPiArICAgICAgIH0gZWxzZSB7Cj4gPiArICAgICAgICAg
+ICAgICAgY2xlYXJlZCA9ICZzdHJlYW0tPmRzdF9jbGVhcmVkOwo+ID4gKyAgICAgICAgICAgICAg
+IHF1ZXVlX3R5cGUgPSBWSVJUSU9fVklERU9fUVVFVUVfVFlQRV9PVVRQVVQ7Cj4gPiArICAgICAg
+IH0KPiA+ICsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2NtZF9xdWV1ZV9jbGVhcih2
+diwgc3RyZWFtLCBxdWV1ZV90eXBlKTsKPiA+ICsgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAg
+ICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJmYWlsZWQgdG8gY2xlYXIgcXVldWVc
+biIpOwo+ID4gKyAgICAgICAgICAgICAgIHJldHVybjsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4g
+KyAgICAgICByZXQgPSB3YWl0X2V2ZW50X3RpbWVvdXQodnYtPndxLCAqY2xlYXJlZCwgNSAqIEha
+KTsKPiA+ICsgICAgICAgaWYgKHJldCA9PSAwKSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9l
+cnIoJnZ2LT52NGwyX2RldiwgInRpbWVkIG91dCB3YWl0aW5nIGZvciBxdWV1ZSBjbGVhclxuIik7
+Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAg
+ICAgIGZvciAoOzspIHsKPiA+ICsgICAgICAgICAgICAgICBpZiAoaXNfdjRsMl9vdXRwdXQpCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICB2NGwyX3ZiID0gdjRsMl9tMm1fc3JjX2J1Zl9yZW1v
+dmUoc3RyZWFtLT5maC5tMm1fY3R4KTsKPiA+ICsgICAgICAgICAgICAgICBlbHNlCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICB2NGwyX3ZiID0gdjRsMl9tMm1fZHN0X2J1Zl9yZW1vdmUoc3Ry
+ZWFtLT5maC5tMm1fY3R4KTsKPiA+ICsgICAgICAgICAgICAgICBpZiAoIXY0bDJfdmIpCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX20y
+bV9idWZfZG9uZSh2NGwyX3ZiLCBWQjJfQlVGX1NUQVRFX0VSUk9SKTsKPiA+ICsgICAgICAgfQo+
+ID4gKwo+ID4gKyAgICAgICBpZiAoaXNfdjRsMl9vdXRwdXQpCj4gPiArICAgICAgICAgICAgICAg
+c3RyZWFtLT5zdGF0ZSA9IFNUUkVBTV9TVEFURV9TVE9QUEVEOwo+ID4gKyAgICAgICBlbHNlCj4g
+PiArICAgICAgICAgICAgICAgc3RyZWFtLT5zdGF0ZSA9IFNUUkVBTV9TVEFURV9SRVNFVDsKPiA+
+ICt9Cj4gPiArCj4gPiArc3RhdGljIGNvbnN0IHN0cnVjdCB2YjJfb3BzIHZpcnRpb192aWRlb19l
+bmNfcW9wcyA9IHsKPiA+ICsgICAgICAgLnF1ZXVlX3NldHVwICAgICA9IHZpcnRpb192aWRlb19x
+dWV1ZV9zZXR1cCwKPiA+ICsgICAgICAgLmJ1Zl9pbml0ICAgICAgICA9IHZpcnRpb192aWRlb19i
+dWZfaW5pdCwKPiA+ICsgICAgICAgLmJ1Zl9jbGVhbnVwICAgICA9IHZpcnRpb192aWRlb19idWZf
+Y2xlYW51cCwKPiA+ICsgICAgICAgLmJ1Zl9xdWV1ZSAgICAgICA9IHZpcnRpb192aWRlb19lbmNf
+YnVmX3F1ZXVlLAo+ID4gKyAgICAgICAuc3RhcnRfc3RyZWFtaW5nID0gdmlydGlvX3ZpZGVvX2Vu
+Y19zdGFydF9zdHJlYW1pbmcsCj4gPiArICAgICAgIC5zdG9wX3N0cmVhbWluZyAgPSB2aXJ0aW9f
+dmlkZW9fZW5jX3N0b3Bfc3RyZWFtaW5nLAo+ID4gKyAgICAgICAud2FpdF9wcmVwYXJlICAgID0g
+dmIyX29wc193YWl0X3ByZXBhcmUsCj4gPiArICAgICAgIC53YWl0X2ZpbmlzaCAgICAgPSB2YjJf
+b3BzX3dhaXRfZmluaXNoLAo+ID4gK307Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlk
+ZW9fZW5jX3NfY3RybChzdHJ1Y3QgdjRsMl9jdHJsICpjdHJsKQo+ID4gK3sKPiA+ICsgICAgICAg
+aW50IHJldCA9IDA7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJl
+YW0gPSBjdHJsMnN0cmVhbShjdHJsKTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19k
+ZXZpY2UgKnZ2ZCA9IHRvX3ZpcnRpb192ZChzdHJlYW0tPnZpZGVvX2Rldik7Cj4gPiArICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2ID0gdnZkLT52djsKPiA+ICsgICAgICAgdWludDMyX3Qg
+Y29udHJvbCwgdmFsdWU7Cj4gPiArCj4gPiArICAgICAgIGNvbnRyb2wgPSB2aXJ0aW9fdmlkZW9f
+djRsMl9jb250cm9sX3RvX3ZpcnRpbyhjdHJsLT5pZCk7Cj4gPiArCj4gPiArICAgICAgIHN3aXRj
+aCAoY3RybC0+aWQpIHsKPiA+ICsgICAgICAgY2FzZSBWNEwyX0NJRF9NUEVHX1ZJREVPX0JJVFJB
+VEU6Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2NtZF9zZXRfY29udHJv
+bCh2diwgc3RyZWFtLT5zdHJlYW1faWQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBjb250cm9sLCBjdHJsLT52YWwpOwo+ID4gKyAgICAgICAg
+ICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICBjYXNlIFY0TDJfQ0lEX01QRUdfVklERU9fSDI2NF9M
+RVZFTDoKPiA+ICsgICAgICAgICAgICAgICB2YWx1ZSA9IHZpcnRpb192aWRlb192NGwyX2xldmVs
+X3RvX3ZpcnRpbyhjdHJsLT52YWwpOwo+ID4gKyAgICAgICAgICAgICAgIHJldCA9IHZpcnRpb192
+aWRlb19jbWRfc2V0X2NvbnRyb2wodnYsIHN0cmVhbS0+c3RyZWFtX2lkLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udHJvbCwgdmFsdWUp
+Owo+ID4gKyAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICBjYXNlIFY0TDJfQ0lEX01Q
+RUdfVklERU9fSDI2NF9QUk9GSUxFOgo+ID4gKyAgICAgICAgICAgICAgIHZhbHVlID0gdmlydGlv
+X3ZpZGVvX3Y0bDJfcHJvZmlsZV90b192aXJ0aW8oY3RybC0+dmFsKTsKPiA+ICsgICAgICAgICAg
+ICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fY21kX3NldF9jb250cm9sKHZ2LCBzdHJlYW0tPnN0cmVh
+bV9pZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGNvbnRyb2wsIHZhbHVlKTsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAg
+ICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICByZXQgPSAtRUlOVkFMOwo+ID4gKyAgICAg
+ICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJldHVybiBy
+ZXQ7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX2VuY19nX3ZvbGF0
+aWxlX2N0cmwoc3RydWN0IHY0bDJfY3RybCAqY3RybCkKPiA+ICt7Cj4gPiArICAgICAgIGludCBy
+ZXQgPSAwOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtID0g
+Y3RybDJzdHJlYW0oY3RybCk7Cj4gPiArCj4gPiArICAgICAgIHN3aXRjaCAoY3RybC0+aWQpIHsK
+PiA+ICsgICAgICAgY2FzZSBWNEwyX0NJRF9NSU5fQlVGRkVSU19GT1JfT1VUUFVUOgo+ID4gKyAg
+ICAgICAgICAgICAgIGlmIChzdHJlYW0tPnN0YXRlID49IFNUUkVBTV9TVEFURV9JTklUKQo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgY3RybC0+dmFsID0gc3RyZWFtLT5pbl9pbmZvLm1pbl9i
+dWZmZXJzOwo+ID4gKyAgICAgICAgICAgICAgIGVsc2UKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgIGN0cmwtPnZhbCA9IDA7Cj4gPiArICAgICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAgICAg
+IGRlZmF1bHQ6Cj4gPiArICAgICAgICAgICAgICAgcmV0ID0gLUVJTlZBTDsKPiA+ICsgICAgICAg
+fQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gcmV0Owo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMg
+Y29uc3Qgc3RydWN0IHY0bDJfY3RybF9vcHMgdmlydGlvX3ZpZGVvX2VuY19jdHJsX29wcyA9IHsK
+PiA+ICsgICAgICAgLmdfdm9sYXRpbGVfY3RybCAgICAgICAgPSB2aXJ0aW9fdmlkZW9fZW5jX2df
+dm9sYXRpbGVfY3RybCwKPiA+ICsgICAgICAgLnNfY3RybCAgICAgICAgICAgICAgICAgPSB2aXJ0
+aW9fdmlkZW9fZW5jX3NfY3RybCwKPiA+ICt9Owo+ID4gKwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9f
+ZW5jX2luaXRfY3RybHMoc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSkKPiA+ICt7
+Cj4gPiArICAgICAgIHN0cnVjdCB2NGwyX2N0cmwgKmN0cmw7Cj4gPiArICAgICAgIHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQgPSB0b192aXJ0aW9fdmQoc3RyZWFtLT52aWRlb19kZXYp
+Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diA9IHZ2ZC0+dnY7Cj4gPiArICAg
+ICAgIHN0cnVjdCB2aWRlb19jb250cm9sX2Zvcm1hdCAqY19mbXQgPSBOVUxMOwo+ID4gKwo+ID4g
+KyAgICAgICB2NGwyX2N0cmxfaGFuZGxlcl9pbml0KCZzdHJlYW0tPmN0cmxfaGFuZGxlciwgMSk7
+Cj4gPiArCj4gPiArICAgICAgIGN0cmwgPSB2NGwyX2N0cmxfbmV3X3N0ZCgmc3RyZWFtLT5jdHJs
+X2hhbmRsZXIsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2aXJ0aW9fdmlk
+ZW9fZW5jX2N0cmxfb3BzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBWNEwy
+X0NJRF9NSU5fQlVGRkVSU19GT1JfT1VUUFVULAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBNSU5fQlVGU19NSU4sIE1JTl9CVUZTX01BWCwgTUlOX0JVRlNfU1RFUCwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTUlOX0JVRlNfREVGKTsKPiA+ICsgICAgICAg
+Y3RybC0+ZmxhZ3MgfD0gVjRMMl9DVFJMX0ZMQUdfVk9MQVRJTEU7Cj4gPiArCj4gPiArICAgICAg
+IGxpc3RfZm9yX2VhY2hfZW50cnkoY19mbXQsICZ2dmQtPmNvbnRyb2xzX2ZtdF9saXN0LAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRyb2xzX2xpc3RfZW50cnkpIHsKPiA+ICsg
+ICAgICAgICAgICAgICBzd2l0Y2ggKGNfZm10LT5mb3JtYXQpIHsKPiA+ICsgICAgICAgICAgICAg
+ICBjYXNlIFY0TDJfUElYX0ZNVF9IMjY0Ogo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgaWYg
+KGNfZm10LT5wcm9maWxlKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2NGwy
+X2N0cmxfbmV3X3N0ZF9tZW51Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgKCZzdHJlYW0tPmN0cmxfaGFuZGxlciwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgJnZpcnRpb192aWRlb19lbmNfY3RybF9vcHMsCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFY0TDJfQ0lEX01QRUdfVklERU9fSDI2
+NF9QUk9GSUxFLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBj
+X2ZtdC0+cHJvZmlsZS0+bWF4LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBjX2ZtdC0+cHJvZmlsZS0+c2tpcF9tYXNrLAo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBjX2ZtdC0+cHJvZmlsZS0+bWluKTsKPiA+ICsKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgIGlmIChjX2ZtdC0+bGV2ZWwpCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHY0bDJfY3RybF9uZXdfc3RkX21lbnUKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoJnN0cmVhbS0+Y3RybF9oYW5kbGVyLAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmdmlydGlvX3ZpZGVvX2Vu
+Y19jdHJsX29wcywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+VjRMMl9DSURfTVBFR19WSURFT19IMjY0X0xFVkVMLAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBjX2ZtdC0+bGV2ZWwtPm1heCwKPiA+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgY19mbXQtPmxldmVsLT5za2lwX21hc2ssCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNfZm10LT5sZXZlbC0+bWlu
+KTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICAgICAgICAg
+IGRlZmF1bHQ6Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICB2NGwyX2RiZygxLCB2di0+ZGVi
+dWcsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmdnYtPnY0bDJfZGV2LCAi
+dW5zdXBwb3J0ZWQgZm9ybWF0XG4iKTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGJyZWFr
+Owo+ID4gKyAgICAgICAgICAgICAgIH0KPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICBp
+ZiAoc3RyZWFtLT5jb250cm9sLmJpdHJhdGUpIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2N0
+cmxfbmV3X3N0ZCgmc3RyZWFtLT5jdHJsX2hhbmRsZXIsCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgJnZpcnRpb192aWRlb19lbmNfY3RybF9vcHMsCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgVjRMMl9DSURfTVBFR19WSURFT19CSVRSQVRFLAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDEsIHN0cmVhbS0+Y29udHJvbC5iaXRy
+YXRlLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDEsIHN0cmVhbS0+Y29u
+dHJvbC5iaXRyYXRlKTsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICBpZiAoc3RyZWFt
+LT5jdHJsX2hhbmRsZXIuZXJyb3IpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIHN0cmVhbS0+
+Y3RybF9oYW5kbGVyLmVycm9yOwo+ID4gKwo+ID4gKyAgICAgICB2NGwyX2N0cmxfaGFuZGxlcl9z
+ZXR1cCgmc3RyZWFtLT5jdHJsX2hhbmRsZXIpOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsK
+PiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19lbmNfaW5pdF9xdWV1ZXModm9pZCAq
+cHJpdiwgc3RydWN0IHZiMl9xdWV1ZSAqc3JjX3ZxLAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgc3RydWN0IHZiMl9xdWV1ZSAqZHN0X3ZxKQo+ID4gK3sKPiA+ICsgICAgICAg
+aW50IHJldDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9
+IHByaXY7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQgPSB0b192
+aXJ0aW9fdmQoc3RyZWFtLT52aWRlb19kZXYpOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3Zp
+ZGVvICp2diA9IHZ2ZC0+dnY7Cj4gPiArICAgICAgIHN0cnVjdCBkZXZpY2UgKmRldiA9IHZ2LT52
+NGwyX2Rldi5kZXY7Cj4gPiArCj4gPiArICAgICAgIHNyY192cS0+dHlwZSA9IFY0TDJfQlVGX1RZ
+UEVfVklERU9fT1VUUFVUX01QTEFORTsKPiA+ICsgICAgICAgc3JjX3ZxLT5pb19tb2RlcyA9IFZC
+Ml9NTUFQIHwgVkIyX0RNQUJVRjsKPiA+ICsgICAgICAgc3JjX3ZxLT5kcnZfcHJpdiA9IHN0cmVh
+bTsKPiA+ICsgICAgICAgc3JjX3ZxLT5idWZfc3RydWN0X3NpemUgPSBzaXplb2Yoc3RydWN0IHZp
+cnRpb192aWRlb19idWZmZXIpOwo+ID4gKyAgICAgICBzcmNfdnEtPm9wcyA9ICZ2aXJ0aW9fdmlk
+ZW9fZW5jX3FvcHM7Cj4gPiArICAgICAgIHNyY192cS0+bWVtX29wcyA9IHZpcnRpb192aWRlb19t
+ZW1fb3BzKHZ2KTsKPiA+ICsgICAgICAgc3JjX3ZxLT5taW5fYnVmZmVyc19uZWVkZWQgPSBzdHJl
+YW0tPmluX2luZm8ubWluX2J1ZmZlcnM7Cj4gPiArICAgICAgIHNyY192cS0+dGltZXN0YW1wX2Zs
+YWdzID0gVjRMMl9CVUZfRkxBR19USU1FU1RBTVBfQ09QWTsKPiA+ICsgICAgICAgc3JjX3ZxLT5s
+b2NrID0gJnN0cmVhbS0+dnFfbXV0ZXg7Cj4gPiArICAgICAgIHNyY192cS0+Z2ZwX2ZsYWdzID0g
+dmlydGlvX3ZpZGVvX2dmcF9mbGFncyh2dik7Cj4gPiArICAgICAgIHNyY192cS0+ZGV2ID0gZGV2
+Owo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB2YjJfcXVldWVfaW5pdChzcmNfdnEpOwo+ID4gKyAg
+ICAgICBpZiAocmV0KQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gPiArCj4gPiAr
+ICAgICAgIGRzdF92cS0+dHlwZSA9IFY0TDJfQlVGX1RZUEVfVklERU9fQ0FQVFVSRV9NUExBTkU7
+Cj4gPiArICAgICAgIGRzdF92cS0+aW9fbW9kZXMgPSBWQjJfTU1BUCB8IFZCMl9ETUFCVUY7Cj4g
+PiArICAgICAgIGRzdF92cS0+ZHJ2X3ByaXYgPSBzdHJlYW07Cj4gPiArICAgICAgIGRzdF92cS0+
+YnVmX3N0cnVjdF9zaXplID0gc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fdmlkZW9fYnVmZmVyKTsKPiA+
+ICsgICAgICAgZHN0X3ZxLT5vcHMgPSAmdmlydGlvX3ZpZGVvX2VuY19xb3BzOwo+ID4gKyAgICAg
+ICBkc3RfdnEtPm1lbV9vcHMgPSB2aXJ0aW9fdmlkZW9fbWVtX29wcyh2dik7Cj4gPiArICAgICAg
+IGRzdF92cS0+bWluX2J1ZmZlcnNfbmVlZGVkID0gc3RyZWFtLT5vdXRfaW5mby5taW5fYnVmZmVy
+czsKPiA+ICsgICAgICAgZHN0X3ZxLT50aW1lc3RhbXBfZmxhZ3MgPSBWNEwyX0JVRl9GTEFHX1RJ
+TUVTVEFNUF9DT1BZOwo+ID4gKyAgICAgICBkc3RfdnEtPmxvY2sgPSAmc3RyZWFtLT52cV9tdXRl
+eDsKPiA+ICsgICAgICAgZHN0X3ZxLT5nZnBfZmxhZ3MgPSB2aXJ0aW9fdmlkZW9fZ2ZwX2ZsYWdz
+KHZ2KTsKPiA+ICsgICAgICAgZHN0X3ZxLT5kZXYgPSBkZXY7Cj4gPiArCj4gPiArICAgICAgIHJl
+dHVybiB2YjJfcXVldWVfaW5pdChkc3RfdnEpOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgaW50
+IHZpcnRpb192aWRlb190cnlfZW5jb2Rlcl9jbWQoc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQgKmZo
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwy
+X2VuY29kZXJfY21kICpjbWQpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X3N0cmVhbSAqc3RyZWFtID0gZmlsZTJzdHJlYW0oZmlsZSk7Cj4gPiArICAgICAgIHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQgPSB2aWRlb19kcnZkYXRhKGZpbGUpOwo+ID4gKyAgICAg
+ICBzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diA9IHZ2ZC0+dnY7Cj4gPiArCj4gPiArICAgICAgIGlm
+IChzdHJlYW0tPnN0YXRlID09IFNUUkVBTV9TVEFURV9EUkFJTikKPiA+ICsgICAgICAgICAgICAg
+ICByZXR1cm4gLUVCVVNZOwo+ID4gKwo+ID4gKyAgICAgICBzd2l0Y2ggKGNtZC0+Y21kKSB7Cj4g
+PiArICAgICAgIGNhc2UgVjRMMl9FTkNfQ01EX1NUT1A6Cj4gPiArICAgICAgIGNhc2UgVjRMMl9F
+TkNfQ01EX1NUQVJUOgo+ID4gKyAgICAgICAgICAgICAgIGlmIChjbWQtPmZsYWdzICE9IDApIHsK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJmbGFn
+cz0ldSBhcmUgbm90IHN1cHBvcnRlZCIsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBjbWQtPmZsYWdzKTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtRUlO
+VkFMOwo+ID4gKyAgICAgICAgICAgICAgIH0KPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+
+ICsgICAgICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+
+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiAr
+c3RhdGljIGludCB2aXJ0aW9fdmlkZW9fZW5jb2Rlcl9jbWQoc3RydWN0IGZpbGUgKmZpbGUsIHZv
+aWQgKmZoLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHY0
+bDJfZW5jb2Rlcl9jbWQgKmNtZCkKPiA+ICt7Cj4gPiArICAgICAgIGludCByZXQ7Cj4gPiArICAg
+ICAgIHN0cnVjdCB2YjJfcXVldWUgKnNyY192cSwgKmRzdF92cTsKPiA+ICsgICAgICAgc3RydWN0
+IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IGZpbGUyc3RyZWFtKGZpbGUpOwo+ID4gKyAg
+ICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdmlkZW9fZHJ2ZGF0YShmaWxl
+KTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSB2dmQtPnZ2Owo+ID4gKwo+
+ID4gKyAgICAgICByZXQgPSB2aXJ0aW9fdmlkZW9fdHJ5X2VuY29kZXJfY21kKGZpbGUsIGZoLCBj
+bWQpOwo+ID4gKyAgICAgICBpZiAocmV0IDwgMCkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4g
+cmV0Owo+ID4gKwo+ID4gKyAgICAgICBkc3RfdnEgPSB2NGwyX20ybV9nZXRfdnEoc3RyZWFtLT5m
+aC5tMm1fY3R4LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgVjRMMl9CVUZf
+VFlQRV9WSURFT19DQVBUVVJFX01QTEFORSk7Cj4gPiArCj4gPiArICAgICAgIHN3aXRjaCAoY21k
+LT5jbWQpIHsKPiA+ICsgICAgICAgY2FzZSBWNEwyX0VOQ19DTURfU1RBUlQ6Cj4gPiArICAgICAg
+ICAgICAgICAgdmIyX2NsZWFyX2xhc3RfYnVmZmVyX2RlcXVldWVkKGRzdF92cSk7Cj4gPiArICAg
+ICAgICAgICAgICAgc3RyZWFtLT5zdGF0ZSA9IFNUUkVBTV9TVEFURV9SVU5OSU5HOwo+ID4gKyAg
+ICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICBjYXNlIFY0TDJfRU5DX0NNRF9TVE9QOgo+
+ID4gKyAgICAgICAgICAgICAgIHNyY192cSA9IHY0bDJfbTJtX2dldF92cShzdHJlYW0tPmZoLm0y
+bV9jdHgsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFY0TDJf
+QlVGX1RZUEVfVklERU9fT1VUUFVUX01QTEFORSk7Cj4gPiArCj4gPiArICAgICAgICAgICAgICAg
+aWYgKCF2YjJfaXNfc3RyZWFtaW5nKHNyY192cSkpIHsKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgIHY0bDJfZGJnKDEsIHZ2LT5kZWJ1ZywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICZ2di0+djRsMl9kZXYsICJvdXRwdXQgaXMgbm90IHN0cmVhbWluZ1xuIik7Cj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICsgICAgICAgICAgICAgICB9Cj4g
+PiArCj4gPiArICAgICAgICAgICAgICAgaWYgKCF2YjJfaXNfc3RyZWFtaW5nKGRzdF92cSkpIHsK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHY0bDJfZGJnKDEsIHZ2LT5kZWJ1ZywKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2di0+djRsMl9kZXYsICJjYXB0dXJlIGlz
+IG5vdCBzdHJlYW1pbmdcbiIpOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIDA7
+Cj4gPiArICAgICAgICAgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICAgICAgICAgIHJldCA9IHZp
+cnRpb192aWRlb19jbWRfc3RyZWFtX2RyYWluKHZ2LCBzdHJlYW0tPnN0cmVhbV9pZCk7Cj4gPiAr
+ICAgICAgICAgICAgICAgaWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdjRs
+Ml9lcnIoJnZ2LT52NGwyX2RldiwgImZhaWxlZCB0byBkcmFpbiBzdHJlYW1cbiIpOwo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKPiA+ICsgICAgICAgICAgICAgICB9Cj4g
+PiArCj4gPiArICAgICAgICAgICAgICAgc3RyZWFtLT5zdGF0ZSA9IFNUUkVBTV9TVEFURV9EUkFJ
+TjsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgZGVmYXVsdDoKPiA+ICsg
+ICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAg
+ICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlkZW9f
+ZW5jX2VudW1fZm10X3ZpZF9jYXAoc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQgKmZoLAo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHY0bDJfZm10
+ZGVzYyAqZikKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpz
+dHJlYW0gPSBmaWxlMnN0cmVhbShmaWxlKTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRl
+b19kZXZpY2UgKnZ2ZCA9IHRvX3ZpcnRpb192ZChzdHJlYW0tPnZpZGVvX2Rldik7Cj4gPiArICAg
+ICAgIHN0cnVjdCB2aWRlb19mb3JtYXQgKmZtdCA9IE5VTEw7Cj4gPiArICAgICAgIGludCBpZHgg
+PSAwOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoZi0+dHlwZSAhPSBWNEwyX0JVRl9UWVBFX1ZJREVP
+X0NBUFRVUkVfTVBMQU5FKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4g
+Kwo+ID4gKyAgICAgICBpZiAoZi0+aW5kZXggPj0gdnZkLT5udW1fb3V0cHV0X2ZtdHMpCj4gPiAr
+ICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiArCj4gPiArICAgICAgIGxpc3RfZm9y
+X2VhY2hfZW50cnkoZm10LCAmdnZkLT5vdXRwdXRfZm10X2xpc3QsIGZvcm1hdHNfbGlzdF9lbnRy
+eSkgewo+ID4gKyAgICAgICAgICAgICAgIGlmIChmLT5pbmRleCA9PSBpZHgpIHsKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIGYtPnBpeGVsZm9ybWF0ID0gZm10LT5kZXNjLmZvcm1hdDsKPiA+
+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAwOwo+ID4gKyAgICAgICAgICAgICAgIH0K
+PiA+ICsgICAgICAgICAgICAgICBpZHgrKzsKPiA+ICsgICAgICAgfQo+ID4gKyAgICAgICByZXR1
+cm4gLUVJTlZBTDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlkZW9fZW5j
+X2VudW1fZm10X3ZpZF9vdXQoc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQgKmZoLAo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHY0bDJfZm10ZGVz
+YyAqZikKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJl
+YW0gPSBmaWxlMnN0cmVhbShmaWxlKTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19k
+ZXZpY2UgKnZ2ZCA9IHRvX3ZpcnRpb192ZChzdHJlYW0tPnZpZGVvX2Rldik7Cj4gPiArICAgICAg
+IHN0cnVjdCB2aWRlb19mb3JtYXRfaW5mbyAqaW5mbyA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVj
+dCB2aWRlb19mb3JtYXQgKmZtdCA9IE5VTEw7Cj4gPiArICAgICAgIHVuc2lnbmVkIGxvbmcgb3V0
+cHV0X21hc2sgPSAwOwo+ID4gKyAgICAgICBpbnQgaWR4ID0gMCwgYml0X251bSA9IDA7Cj4gPiAr
+Cj4gPiArICAgICAgIGlmIChmLT50eXBlICE9IFY0TDJfQlVGX1RZUEVfVklERU9fT1VUUFVUX01Q
+TEFORSkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAg
+ICAgaWYgKGYtPmluZGV4ID49IHZ2ZC0+bnVtX2lucHV0X2ZtdHMpCj4gPiArICAgICAgICAgICAg
+ICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiArCj4gPiArICAgICAgIGluZm8gPSAmc3RyZWFtLT5vdXRf
+aW5mbzsKPiA+ICsgICAgICAgbGlzdF9mb3JfZWFjaF9lbnRyeShmbXQsICZ2dmQtPm91dHB1dF9m
+bXRfbGlzdCwgZm9ybWF0c19saXN0X2VudHJ5KSB7Cj4gPiArICAgICAgICAgICAgICAgaWYgKGlu
+Zm8tPmZvdXJjY19mb3JtYXQgPT0gZm10LT5kZXNjLmZvcm1hdCkgewo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgb3V0cHV0X21hc2sgPSBmbXQtPmRlc2MubWFzazsKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICAgICAgICAgIH0KPiA+ICsgICAgICAgfQo+
+ID4gKwo+ID4gKyAgICAgICBpZiAob3V0cHV0X21hc2sgPT0gMCkKPiA+ICsgICAgICAgICAgICAg
+ICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAgICAgbGlzdF9mb3JfZWFjaF9lbnRyeShm
+bXQsICZ2dmQtPmlucHV0X2ZtdF9saXN0LCBmb3JtYXRzX2xpc3RfZW50cnkpIHsKPiA+ICsgICAg
+ICAgICAgICAgICBpZiAodGVzdF9iaXQoYml0X251bSwgJm91dHB1dF9tYXNrKSkgewo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgaWYgKGYtPmluZGV4ID09IGlkeCkgewo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBmLT5waXhlbGZvcm1hdCA9IGZtdC0+ZGVzYy5mb3JtYXQ7
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAwOwo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgfQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgaWR4Kys7Cj4g
+PiArICAgICAgICAgICAgICAgfQo+ID4gKyAgICAgICAgICAgICAgIGJpdF9udW0rKzsKPiA+ICsg
+ICAgICAgfQo+ID4gKyAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICt9Cj4gPiArCj4gPiArc3Rh
+dGljIGludCB2aXJ0aW9fdmlkZW9fZW5jX3NfZm10KHN0cnVjdCBmaWxlICpmaWxlLCB2b2lkICpm
+aCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdjRsMl9mb3Jt
+YXQgKmYpCj4gPiArewo+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gKyAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtID0gZmlsZTJzdHJlYW0oZmlsZSk7Cj4gPiArCj4gPiAr
+ICAgICAgIHJldCA9IHZpcnRpb192aWRlb19zX2ZtdChmaWxlLCBmaCwgZik7Cj4gPiArICAgICAg
+IGlmIChyZXQpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKPiA+ICsKPiA+ICsgICAg
+ICAgaWYgKCFWNEwyX1RZUEVfSVNfT1VUUFVUKGYtPnR5cGUpKSB7Cj4gPiArICAgICAgICAgICAg
+ICAgaWYgKHN0cmVhbS0+c3RhdGUgPT0gU1RSRUFNX1NUQVRFX0lETEUpCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICBzdHJlYW0tPnN0YXRlID0gU1RSRUFNX1NUQVRFX0lOSVQ7Cj4gPiArICAg
+ICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRp
+YyBpbnQgdmlydGlvX3ZpZGVvX2VuY190cnlfZnJhbWVyYXRlKHN0cnVjdCB2aXJ0aW9fdmlkZW9f
+c3RyZWFtICpzdHJlYW0sCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICB1bnNpZ25lZCBpbnQgZnBzKQo+ID4gK3sKPiA+ICsgICAgICAgaW50IHJhdGVfaWR4Owo+
+ID4gKyAgICAgICBzdHJ1Y3QgdmlkZW9fZm9ybWF0X2ZyYW1lICpmcmFtZSA9IE5VTEw7Cj4gPiAr
+Cj4gPiArICAgICAgIGlmIChzdHJlYW0tPmN1cnJlbnRfZnJhbWUgPT0gTlVMTCkKPiA+ICsgICAg
+ICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAgICAgZnJhbWUgPSBzdHJl
+YW0tPmN1cnJlbnRfZnJhbWU7Cj4gPiArICAgICAgIGZvciAocmF0ZV9pZHggPSAwOyByYXRlX2lk
+eCA8IGZyYW1lLT5mcmFtZS5udW1fcmF0ZXM7IHJhdGVfaWR4KyspIHsKPiA+ICsgICAgICAgICAg
+ICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9yYW5nZSAqZnJhbWVfcmF0ZSA9Cj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAmZnJhbWUtPmZyYW1lX3JhdGVzW3JhdGVfaWR4XTsKPiA+
+ICsKPiA+ICsgICAgICAgICAgICAgICBpZiAod2l0aGluX3JhbmdlKGZyYW1lX3JhdGUtPm1pbiwg
+ZnBzLCBmcmFtZV9yYXRlLT5tYXgpKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJu
+IDA7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiAr
+fQo+ID4gKwo+ID4gK3N0YXRpYyB2b2lkIHZpcnRpb192aWRlb190aW1lcGVyZnJhbWVfZnJvbV9p
+bmZvKHN0cnVjdCB2aWRlb19mb3JtYXRfaW5mbyAqaW5mbywKPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwyX2ZyYWN0ICp0aW1lcGVy
+ZnJhbWUpCj4gPiArewo+ID4gKyAgICAgICB0aW1lcGVyZnJhbWUtPm51bWVyYXRvciA9IGluZm8t
+PmZyYW1lX3JhdGU7Cj4gPiArICAgICAgIHRpbWVwZXJmcmFtZS0+ZGVub21pbmF0b3IgPSAxOwo+
+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgaW50IHZpcnRpb192aWRlb19lbmNfZ19wYXJtKHN0cnVj
+dCBmaWxlICpmaWxlLCB2b2lkICpwcml2LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBzdHJ1Y3QgdjRsMl9zdHJlYW1wYXJtICphKQo+ID4gK3sKPiA+ICsgICAgICAgc3Ry
+dWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IGZpbGUyc3RyZWFtKGZpbGUpOwo+ID4g
+KyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2RldmljZSAqdnZkID0gdG9fdmlydGlvX3ZkKHN0
+cmVhbS0+dmlkZW9fZGV2KTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPSB2
+dmQtPnZ2Owo+ID4gKyAgICAgICBzdHJ1Y3QgdjRsMl9vdXRwdXRwYXJtICpvdXQgPSAmYS0+cGFy
+bS5vdXRwdXQ7Cj4gPiArICAgICAgIHN0cnVjdCB2NGwyX2ZyYWN0ICp0aW1lcGVyZnJhbWUgPSAm
+b3V0LT50aW1lcGVyZnJhbWU7Cj4gPiArCj4gPiArICAgICAgIGlmICghVjRMMl9UWVBFX0lTX09V
+VFBVVChhLT50eXBlKSkgewo+ID4gKyAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9k
+ZXYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgImdldHRpbmcgRlBTIGlzIG9ubHkgcG9z
+c2libGUgZm9yIHRoZSBvdXRwdXQgcXVldWVcbiIpOwo+ID4gKyAgICAgICAgICAgICAgIHJldHVy
+biAtRUlOVkFMOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIG91dC0+Y2FwYWJpbGl0
+eSA9IFY0TDJfQ0FQX1RJTUVQRVJGUkFNRTsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX3RpbWVw
+ZXJmcmFtZV9mcm9tX2luZm8oJnN0cmVhbS0+aW5faW5mbywgdGltZXBlcmZyYW1lKTsKPiA+ICsK
+PiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmlydGlv
+X3ZpZGVvX2VuY19zX3Bhcm0oc3RydWN0IGZpbGUgKmZpbGUsIHZvaWQgKnByaXYsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2NGwyX3N0cmVhbXBhcm0gKmEp
+Cj4gPiArewo+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gKyAgICAgICB1NjQgZnJhbWVfaW50ZXJ2
+YWwsIGZyYW1lX3JhdGU7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRlb19mb3JtYXRfaW5mbyBpbmZv
+Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtID0gZmlsZTJz
+dHJlYW0oZmlsZSk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZGV2aWNlICp2dmQg
+PSB0b192aXJ0aW9fdmQoc3RyZWFtLT52aWRlb19kZXYpOwo+ID4gKyAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvICp2diA9IHZ2ZC0+dnY7Cj4gPiArICAgICAgIHN0cnVjdCB2NGwyX291dHB1dHBh
+cm0gKm91dCA9ICZhLT5wYXJtLm91dHB1dDsKPiA+ICsgICAgICAgc3RydWN0IHY0bDJfZnJhY3Qg
+KnRpbWVwZXJmcmFtZSA9ICZvdXQtPnRpbWVwZXJmcmFtZTsKPiA+ICsKPiA+ICsgICAgICAgaWYg
+KFY0TDJfVFlQRV9JU19PVVRQVVQoYS0+dHlwZSkpIHsKPiA+ICsgICAgICAgICAgICAgICBmcmFt
+ZV9pbnRlcnZhbCA9IHRpbWVwZXJmcmFtZS0+bnVtZXJhdG9yICogKHU2NClVU0VDX1BFUl9TRUM7
+Cj4gPiArICAgICAgICAgICAgICAgZG9fZGl2KGZyYW1lX2ludGVydmFsLCB0aW1lcGVyZnJhbWUt
+PmRlbm9taW5hdG9yKTsKPiA+ICsgICAgICAgICAgICAgICBpZiAoIWZyYW1lX2ludGVydmFsKQo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPiArCj4gPiArICAg
+ICAgICAgICAgICAgZnJhbWVfcmF0ZSA9ICh1NjQpVVNFQ19QRVJfU0VDOwo+ID4gKyAgICAgICAg
+ICAgICAgIGRvX2RpdihmcmFtZV9yYXRlLCBmcmFtZV9pbnRlcnZhbCk7Cj4gPiArICAgICAgIH0g
+ZWxzZSB7Cj4gPiArICAgICAgICAgICAgICAgdjRsMl9lcnIoJnZ2LT52NGwyX2RldiwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAic2V0dGluZyBGUFMgaXMgb25seSBwb3NzaWJsZSBmb3Ig
+dGhlIG91dHB1dCBxdWV1ZVxuIik7Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7
+Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX2VuY190
+cnlfZnJhbWVyYXRlKHN0cmVhbSwgZnJhbWVfcmF0ZSk7Cj4gPiArICAgICAgIGlmIChyZXQpCj4g
+PiArICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX3Zp
+ZGVvX2Zvcm1hdF9maWxsX2RlZmF1bHRfaW5mbygmaW5mbywgJnN0cmVhbS0+aW5faW5mbyk7Cj4g
+PiArICAgICAgIGluZm8uZnJhbWVfcmF0ZSA9IGZyYW1lX3JhdGU7Cj4gPiArCj4gPiArICAgICAg
+IHZpcnRpb192aWRlb19jbWRfc2V0X3BhcmFtcyh2diwgc3RyZWFtLCAmaW5mbywKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFZJUlRJT19WSURFT19RVUVVRV9UWVBFX0lO
+UFVUKTsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX2NtZF9nZXRfcGFyYW1zKHZ2LCBzdHJlYW0s
+IFZJUlRJT19WSURFT19RVUVVRV9UWVBFX0lOUFVUKTsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVv
+X2NtZF9nZXRfcGFyYW1zKHZ2LCBzdHJlYW0sIFZJUlRJT19WSURFT19RVUVVRV9UWVBFX09VVFBV
+VCk7Cj4gPiArCj4gPiArICAgICAgIG91dC0+Y2FwYWJpbGl0eSA9IFY0TDJfQ0FQX1RJTUVQRVJG
+UkFNRTsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX3RpbWVwZXJmcmFtZV9mcm9tX2luZm8oJnN0
+cmVhbS0+aW5faW5mbywgdGltZXBlcmZyYW1lKTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7
+Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdjRsMl9pb2N0bF9vcHMgdmly
+dGlvX3ZpZGVvX2VuY19pb2N0bF9vcHMgPSB7Cj4gPiArICAgICAgIC52aWRpb2NfcXVlcnljYXAg
+ICAgICAgID0gdmlydGlvX3ZpZGVvX3F1ZXJ5Y2FwLAo+ID4gKwo+ID4gKyAgICAgICAudmlkaW9j
+X2VudW1fZm10X3ZpZF9jYXAgPSB2aXJ0aW9fdmlkZW9fZW5jX2VudW1fZm10X3ZpZF9jYXAsCj4g
+PiArICAgICAgIC52aWRpb2NfZ19mbXRfdmlkX2NhcCAgID0gdmlydGlvX3ZpZGVvX2dfZm10LAo+
+ID4gKyAgICAgICAudmlkaW9jX3NfZm10X3ZpZF9jYXAgICA9IHZpcnRpb192aWRlb19lbmNfc19m
+bXQsCj4gPiArCj4gPiArICAgICAgIC52aWRpb2NfZW51bV9mbXRfdmlkX2NhcF9tcGxhbmUgPSB2
+aXJ0aW9fdmlkZW9fZW5jX2VudW1fZm10X3ZpZF9jYXAsCj4gPiArICAgICAgIC52aWRpb2NfZ19m
+bXRfdmlkX2NhcF9tcGxhbmUgICAgPSB2aXJ0aW9fdmlkZW9fZ19mbXQsCj4gPiArICAgICAgIC52
+aWRpb2Nfc19mbXRfdmlkX2NhcF9tcGxhbmUgICAgPSB2aXJ0aW9fdmlkZW9fZW5jX3NfZm10LAo+
+ID4gKwo+ID4gKyAgICAgICAudmlkaW9jX2VudW1fZm10X3ZpZF9vdXQgPSB2aXJ0aW9fdmlkZW9f
+ZW5jX2VudW1fZm10X3ZpZF9vdXQsCj4gPiArICAgICAgIC52aWRpb2NfZ19mbXRfdmlkX291dCAg
+ID0gdmlydGlvX3ZpZGVvX2dfZm10LAo+ID4gKyAgICAgICAudmlkaW9jX3NfZm10X3ZpZF9vdXQg
+ICA9IHZpcnRpb192aWRlb19lbmNfc19mbXQsCj4gPiArCj4gPiArICAgICAgIC52aWRpb2NfZW51
+bV9mbXRfdmlkX291dF9tcGxhbmUgPSB2aXJ0aW9fdmlkZW9fZW5jX2VudW1fZm10X3ZpZF9vdXQs
+Cj4gPiArICAgICAgIC52aWRpb2NfZ19mbXRfdmlkX291dF9tcGxhbmUgICAgPSB2aXJ0aW9fdmlk
+ZW9fZ19mbXQsCj4gPiArICAgICAgIC52aWRpb2Nfc19mbXRfdmlkX291dF9tcGxhbmUgICAgPSB2
+aXJ0aW9fdmlkZW9fZW5jX3NfZm10LAo+ID4gKwo+ID4gKyAgICAgICAudmlkaW9jX3RyeV9lbmNv
+ZGVyX2NtZCA9IHZpcnRpb192aWRlb190cnlfZW5jb2Rlcl9jbWQsCj4gPiArICAgICAgIC52aWRp
+b2NfZW5jb2Rlcl9jbWQgICAgID0gdmlydGlvX3ZpZGVvX2VuY29kZXJfY21kLAo+ID4gKyAgICAg
+ICAudmlkaW9jX2VudW1fZnJhbWVpbnRlcnZhbHMgPSB2aXJ0aW9fdmlkZW9fZW51bV9mcmFtZW1p
+bnRlcnZhbHMsCj4gPiArICAgICAgIC52aWRpb2NfZW51bV9mcmFtZXNpemVzID0gdmlydGlvX3Zp
+ZGVvX2VudW1fZnJhbWVzaXplcywKPiA+ICsKPiA+ICsgICAgICAgLnZpZGlvY19nX3NlbGVjdGlv
+biA9IHZpcnRpb192aWRlb19nX3NlbGVjdGlvbiwKPiA+ICsgICAgICAgLnZpZGlvY19zX3NlbGVj
+dGlvbiA9IHZpcnRpb192aWRlb19zX3NlbGVjdGlvbiwKPiA+ICsKPiA+ICsgICAgICAgLnZpZGlv
+Y19yZXFidWZzICAgICAgICAgPSB2aXJ0aW9fdmlkZW9fcmVxYnVmcywKPiA+ICsgICAgICAgLnZp
+ZGlvY19xdWVyeWJ1ZiAgICAgICAgPSB2NGwyX20ybV9pb2N0bF9xdWVyeWJ1ZiwKPiA+ICsgICAg
+ICAgLnZpZGlvY19xYnVmICAgICAgICAgICAgPSB2NGwyX20ybV9pb2N0bF9xYnVmLAo+ID4gKyAg
+ICAgICAudmlkaW9jX2RxYnVmICAgICAgICAgICA9IHY0bDJfbTJtX2lvY3RsX2RxYnVmLAo+ID4g
+KyAgICAgICAudmlkaW9jX3ByZXBhcmVfYnVmICAgICA9IHY0bDJfbTJtX2lvY3RsX3ByZXBhcmVf
+YnVmLAo+ID4gKyAgICAgICAudmlkaW9jX2NyZWF0ZV9idWZzICAgICA9IHY0bDJfbTJtX2lvY3Rs
+X2NyZWF0ZV9idWZzLAo+ID4gKyAgICAgICAudmlkaW9jX2V4cGJ1ZiAgICAgICAgICA9IHY0bDJf
+bTJtX2lvY3RsX2V4cGJ1ZiwKPiA+ICsKPiA+ICsgICAgICAgLnZpZGlvY19zdHJlYW1vbiAgICAg
+ICAgPSB2NGwyX20ybV9pb2N0bF9zdHJlYW1vbiwKPiA+ICsgICAgICAgLnZpZGlvY19zdHJlYW1v
+ZmYgICAgICAgPSB2NGwyX20ybV9pb2N0bF9zdHJlYW1vZmYsCj4gPiArCj4gPiArICAgICAgIC52
+aWRpb2Nfc19wYXJtICAgICAgICAgID0gdmlydGlvX3ZpZGVvX2VuY19zX3Bhcm0sCj4gPiArICAg
+ICAgIC52aWRpb2NfZ19wYXJtICAgICAgICAgID0gdmlydGlvX3ZpZGVvX2VuY19nX3Bhcm0sCj4g
+PiArCj4gPiArICAgICAgIC52aWRpb2Nfc3Vic2NyaWJlX2V2ZW50ID0gdmlydGlvX3ZpZGVvX3N1
+YnNjcmliZV9ldmVudCwKPiA+ICsgICAgICAgLnZpZGlvY191bnN1YnNjcmliZV9ldmVudCA9IHY0
+bDJfZXZlbnRfdW5zdWJzY3JpYmUsCj4gPiArfTsKPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVv
+X2VuY19pbml0KHN0cnVjdCB2aWRlb19kZXZpY2UgKnZkKQo+ID4gK3sKPiA+ICsgICAgICAgc3Np
+emVfdCBudW07Cj4gPiArCj4gPiArICAgICAgIHZkLT5pb2N0bF9vcHMgPSAmdmlydGlvX3ZpZGVv
+X2VuY19pb2N0bF9vcHM7Cj4gPiArICAgICAgIG51bSA9IHN0cnNjcHkodmQtPm5hbWUsICJzdGF0
+ZWZ1bC1lbmNvZGVyIiwgc2l6ZW9mKHZkLT5uYW1lKSk7Cj4gPiArCj4gPiArICAgICAgIHJldHVy
+biAwOwo+ID4gK30KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9f
+dmlkZW9fZW5jLmggYi9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fZW5jLmgKPiA+
+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gPiBpbmRleCAwMDAwMDAwMDAwMDAuLjNkMmEyN2E4ZTA4
+Ywo+ID4gLS0tIC9kZXYvbnVsbAo+ID4gKysrIGIvZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlv
+X3ZpZGVvX2VuYy5oCj4gPiBAQCAtMCwwICsxLDMwIEBACj4gPiArLyogU1BEWC1MaWNlbnNlLUlk
+ZW50aWZpZXI6IEdQTC0yLjArICovCj4gPiArLyogRW5jb2RlciBoZWFkZXIgZm9yIHZpcnRpbyB2
+aWRlbyBkcml2ZXIuCj4gPiArICoKPiA+ICsgKiBDb3B5cmlnaHQgMjAxOSBPcGVuU3luZXJneSBH
+bWJILgo+ID4gKyAqCj4gPiArICogVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBj
+YW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnkKPiA+ICsgKiBpdCB1bmRlciB0aGUgdGVy
+bXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFzIHB1Ymxpc2hlZCBieQo+ID4g
+KyAqIHRoZSBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb247IGVpdGhlciB2ZXJzaW9uIDIgb2YgdGhl
+IExpY2Vuc2UsIG9yCj4gPiArICogKGF0IHlvdXIgb3B0aW9uKSBhbnkgbGF0ZXIgdmVyc2lvbi4K
+PiA+ICsgKgo+ID4gKyAqIFRoaXMgcHJvZ3JhbSBpcyBkaXN0cmlidXRlZCBpbiB0aGUgaG9wZSB0
+aGF0IGl0IHdpbGwgYmUgdXNlZnVsLAo+ID4gKyAqIGJ1dCBXSVRIT1VUIEFOWSBXQVJSQU5UWTsg
+d2l0aG91dCBldmVuIHRoZSBpbXBsaWVkIHdhcnJhbnR5IG9mCj4gPiArICogTUVSQ0hBTlRBQklM
+SVRZIG9yIEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFLiAgU2VlIHRoZQo+ID4gKyAq
+IEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGZvciBtb3JlIGRldGFpbHMuCj4gPiArICoKPiA+
+ICsgKiBZb3Ugc2hvdWxkIGhhdmUgcmVjZWl2ZWQgYSBjb3B5IG9mIHRoZSBHTlUgR2VuZXJhbCBQ
+dWJsaWMgTGljZW5zZQo+ID4gKyAqIGFsb25nIHdpdGggdGhpcyBwcm9ncmFtOyBpZiBub3QsIHNl
+ZSA8aHR0cDovL3d3dy5nbnUub3JnL2xpY2Vuc2VzLz47Lgo+ID4gKyAqLwo+ID4gKwo+ID4gKyNp
+Zm5kZWYgX1ZJUlRJT19WSURFT19FTkNfSAo+ID4gKyNkZWZpbmUgX1ZJUlRJT19WSURFT19FTkNf
+SAo+ID4gKwo+ID4gKyNpbmNsdWRlICJ2aXJ0aW9fdmlkZW8uaCIKPiA+ICsKPiA+ICtpbnQgdmly
+dGlvX3ZpZGVvX2VuY19pbml0KHN0cnVjdCB2aWRlb19kZXZpY2UgKnZkKTsKPiA+ICtpbnQgdmly
+dGlvX3ZpZGVvX2VuY19pbml0X2N0cmxzKHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJl
+YW0pOwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fZW5jX2luaXRfcXVldWVzKHZvaWQgKnByaXYsIHN0
+cnVjdCB2YjJfcXVldWUgKnNyY192cSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHN0cnVjdCB2YjJfcXVldWUgKmRzdF92cSk7Cj4gPiArCj4gPiArI2VuZGlmIC8qIF9WSVJU
+SU9fVklERU9fRU5DX0ggKi8KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL21lZGlhL3ZpcnRpby92
+aXJ0aW9fdmlkZW9faGVscGVycy5jIGIvZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlvX3ZpZGVv
+X2hlbHBlcnMuYwo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAwMDAw
+MC4uYmM0NzU0ZTdjYTc4Cj4gPiAtLS0gL2Rldi9udWxsCj4gPiArKysgYi9kcml2ZXJzL21lZGlh
+L3ZpcnRpby92aXJ0aW9fdmlkZW9faGVscGVycy5jCj4gPiBAQCAtMCwwICsxLDI1MCBAQAo+ID4g
+Ky8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKwo+ID4gKy8qIERyaXZlciBmb3Ig
+dmlydGlvIHZpZGVvIGRldmljZS4KPiA+ICsgKgo+ID4gKyAqIENvcHlyaWdodCAyMDE5IE9wZW5T
+eW5lcmd5IEdtYkguCj4gPiArICoKPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0d2Fy
+ZTsgeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1vZGlmeQo+ID4gKyAqIGl0IHVuZGVy
+IHRoZSB0ZXJtcyBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgYXMgcHVibGlzaGVk
+IGJ5Cj4gPiArICogdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbjsgZWl0aGVyIHZlcnNpb24g
+MiBvZiB0aGUgTGljZW5zZSwgb3IKPiA+ICsgKiAoYXQgeW91ciBvcHRpb24pIGFueSBsYXRlciB2
+ZXJzaW9uLgo+ID4gKyAqCj4gPiArICogVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRo
+ZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsCj4gPiArICogYnV0IFdJVEhPVVQgQU5ZIFdB
+UlJBTlRZOyB3aXRob3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YKPiA+ICsgKiBNRVJD
+SEFOVEFCSUxJVFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBTZWUgdGhl
+Cj4gPiArICogR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4KPiA+
+ICsgKgo+ID4gKyAqIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBH
+ZW5lcmFsIFB1YmxpYyBMaWNlbnNlCj4gPiArICogYWxvbmcgd2l0aCB0aGlzIHByb2dyYW07IGlm
+IG5vdCwgc2VlIDxodHRwOi8vd3d3LmdudS5vcmcvbGljZW5zZXMvPjsuCj4gPiArICovCj4gPiAr
+Cj4gPiArI2luY2x1ZGUgInZpcnRpb192aWRlby5oIgo+ID4gKwo+ID4gK3N0cnVjdCB2aXJ0aW9f
+dmlkZW9fY29udmVydF90YWJsZSB7Cj4gPiArICAgICAgIHVpbnQzMl90IHZpcnRpb192YWx1ZTsK
+PiA+ICsgICAgICAgdWludDMyX3QgdjRsMl92YWx1ZTsKPiA+ICt9Owo+ID4gKwo+ID4gK3N0YXRp
+YyBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbnZlcnRfdGFibGUgbGV2ZWxfdGFibGVbXSA9IHsKPiA+
+ICsgICAgICAgeyBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF8xXzAsIFY0TDJfTVBFR19WSURFT19I
+MjY0X0xFVkVMXzFfMCB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19MRVZFTF9IMjY0XzFf
+MSwgVjRMMl9NUEVHX1ZJREVPX0gyNjRfTEVWRUxfMV8xIH0sCj4gPiArICAgICAgIHsgVklSVElP
+X1ZJREVPX0xFVkVMX0gyNjRfMV8yLCBWNEwyX01QRUdfVklERU9fSDI2NF9MRVZFTF8xXzIgfSwK
+PiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF8xXzMsIFY0TDJfTVBFR19WSURF
+T19IMjY0X0xFVkVMXzFfMyB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19MRVZFTF9IMjY0
+XzJfMCwgVjRMMl9NUEVHX1ZJREVPX0gyNjRfTEVWRUxfMl8wIH0sCj4gPiArICAgICAgIHsgVklS
+VElPX1ZJREVPX0xFVkVMX0gyNjRfMl8xLCBWNEwyX01QRUdfVklERU9fSDI2NF9MRVZFTF8yXzEg
+fSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF8yXzIsIFY0TDJfTVBFR19W
+SURFT19IMjY0X0xFVkVMXzJfMiB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19MRVZFTF9I
+MjY0XzNfMCwgVjRMMl9NUEVHX1ZJREVPX0gyNjRfTEVWRUxfM18wIH0sCj4gPiArICAgICAgIHsg
+VklSVElPX1ZJREVPX0xFVkVMX0gyNjRfM18xLCBWNEwyX01QRUdfVklERU9fSDI2NF9MRVZFTF8z
+XzEgfSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF8zXzIsIFY0TDJfTVBF
+R19WSURFT19IMjY0X0xFVkVMXzNfMiB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19MRVZF
+TF9IMjY0XzRfMCwgVjRMMl9NUEVHX1ZJREVPX0gyNjRfTEVWRUxfNF8wIH0sCj4gPiArICAgICAg
+IHsgVklSVElPX1ZJREVPX0xFVkVMX0gyNjRfNF8xLCBWNEwyX01QRUdfVklERU9fSDI2NF9MRVZF
+TF80XzEgfSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF80XzIsIFY0TDJf
+TVBFR19WSURFT19IMjY0X0xFVkVMXzRfMiB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19M
+RVZFTF9IMjY0XzVfMCwgVjRMMl9NUEVHX1ZJREVPX0gyNjRfTEVWRUxfNV8wIH0sCj4gPiArICAg
+ICAgIHsgVklSVElPX1ZJREVPX0xFVkVMX0gyNjRfNV8xLCBWNEwyX01QRUdfVklERU9fSDI2NF9M
+RVZFTF81XzEgfSwKPiA+ICsgICAgICAgeyAwIH0sCj4gPiArfTsKPiA+ICsKPiA+ICt1aW50MzJf
+dCB2aXJ0aW9fdmlkZW9fbGV2ZWxfdG9fdjRsMih1aW50MzJfdCBsZXZlbCkKPiA+ICt7Cj4gPiAr
+ICAgICAgIHNpemVfdCBpZHg7Cj4gPiArCj4gPiArICAgICAgIGZvciAoaWR4ID0gMDsgaWR4IDwg
+QVJSQVlfU0laRShsZXZlbF90YWJsZSk7IGlkeCsrKSB7Cj4gPiArICAgICAgICAgICAgICAgaWYg
+KGxldmVsX3RhYmxlW2lkeF0udmlydGlvX3ZhbHVlID09IGxldmVsKQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgcmV0dXJuIGxldmVsX3RhYmxlW2lkeF0udjRsMl92YWx1ZTsKPiA+ICsgICAg
+ICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsKPiAKPiAwIGlzIGEgdmFsaWQgcHJvZmls
+ZS4gZS5nLiBWNEwyX01QRUdfVklERU9fSDI2NF9MRVZFTF8xXzAgPT0gMC4KPiBIb3cgYWJvdXQg
+cmV0dXJuaW5nIGEgbmVnYXRpdmUgbnVtYmVyIGZvciBlcnJvcnM/Cj4gCj4gPiArfQo+ID4gKwo+
+ID4gK3VpbnQzMl90IHZpcnRpb192aWRlb192NGwyX2xldmVsX3RvX3ZpcnRpbyh1aW50MzJfdCB2
+NGwyX2xldmVsKQo+ID4gK3sKPiA+ICsgICAgICAgc2l6ZV90IGlkeDsKPiA+ICsKPiA+ICsgICAg
+ICAgZm9yIChpZHggPSAwOyBpZHggPCBBUlJBWV9TSVpFKGxldmVsX3RhYmxlKTsgaWR4KyspIHsK
+PiA+ICsgICAgICAgICAgICAgICBpZiAobGV2ZWxfdGFibGVbaWR4XS52NGwyX3ZhbHVlID09IHY0
+bDJfbGV2ZWwpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gbGV2ZWxfdGFibGVb
+aWR4XS52aXJ0aW9fdmFsdWU7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJu
+IDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbnZlcnRf
+dGFibGUgcHJvZmlsZV90YWJsZVtdID0gewo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19QUk9G
+SUxFX0gyNjRfQkFTRUxJTkUsCj4gPiArICAgICAgICAgICAgICAgVjRMMl9NUEVHX1ZJREVPX0gy
+NjRfUFJPRklMRV9CQVNFTElORSB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19QUk9GSUxF
+X0gyNjRfTUFJTiwgVjRMMl9NUEVHX1ZJREVPX0gyNjRfUFJPRklMRV9NQUlOIH0sCj4gPiArICAg
+ICAgIHsgVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9FWFRFTkRFRCwKPiA+ICsgICAgICAgICAg
+ICAgICBWNEwyX01QRUdfVklERU9fSDI2NF9QUk9GSUxFX0VYVEVOREVEIH0sCj4gPiArICAgICAg
+IHsgVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9ISUdILCBWNEwyX01QRUdfVklERU9fSDI2NF9Q
+Uk9GSUxFX0hJR0ggfSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fUFJPRklMRV9IMjY0X0hJ
+R0gxMFBST0ZJTEUsCj4gPiArICAgICAgICAgICAgICAgVjRMMl9NUEVHX1ZJREVPX0gyNjRfUFJP
+RklMRV9ISUdIXzEwIH0sCj4gPiArICAgICAgIHsgVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9I
+SUdINDIyUFJPRklMRSwKPiA+ICsgICAgICAgICAgICAgICBWNEwyX01QRUdfVklERU9fSDI2NF9Q
+Uk9GSUxFX0hJR0hfNDIyfSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fUFJPRklMRV9IMjY0
+X0hJR0g0NDRQUkVESUNUSVZFUFJPRklMRSwKPiA+ICsgICAgICAgICAgICAgICBWNEwyX01QRUdf
+VklERU9fSDI2NF9QUk9GSUxFX0hJR0hfNDQ0X1BSRURJQ1RJVkUgfSwKPiA+ICsgICAgICAgeyBW
+SVJUSU9fVklERU9fUFJPRklMRV9IMjY0X1NDQUxBQkxFQkFTRUxJTkUsCj4gPiArICAgICAgICAg
+ICAgICAgVjRMMl9NUEVHX1ZJREVPX0gyNjRfUFJPRklMRV9TQ0FMQUJMRV9CQVNFTElORSB9LAo+
+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19QUk9GSUxFX0gyNjRfU0NBTEFCTEVISUdILAo+ID4g
+KyAgICAgICAgICAgICAgIFY0TDJfTVBFR19WSURFT19IMjY0X1BST0ZJTEVfU0NBTEFCTEVfSElH
+SCB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19QUk9GSUxFX0gyNjRfU1RFUkVPSElHSCwK
+PiA+ICsgICAgICAgICAgICAgICBWNEwyX01QRUdfVklERU9fSDI2NF9QUk9GSUxFX1NURVJFT19I
+SUdIIH0sCj4gPiArICAgICAgIHsgVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9NVUxUSVZJRVdI
+SUdILAo+ID4gKyAgICAgICAgICAgICAgIFY0TDJfTVBFR19WSURFT19IMjY0X1BST0ZJTEVfTVVM
+VElWSUVXX0hJR0ggfSwKPiA+ICsgICAgICAgeyAwIH0sCj4gCj4gSG93IGFib3V0IFZQOSdzIHBy
+b2ZpbGVzPwo+IAo+ID4gK307Cj4gPiArCj4gPiArdWludDMyX3QgdmlydGlvX3ZpZGVvX3Byb2Zp
+bGVfdG9fdjRsMih1aW50MzJfdCBwcm9maWxlKQo+ID4gK3sKPiA+ICsgICAgICAgc2l6ZV90IGlk
+eDsKPiA+ICsKPiA+ICsgICAgICAgZm9yIChpZHggPSAwOyBpZHggPCBBUlJBWV9TSVpFKHByb2Zp
+bGVfdGFibGUpOyBpZHgrKykgewo+ID4gKyAgICAgICAgICAgICAgIGlmIChwcm9maWxlX3RhYmxl
+W2lkeF0udmlydGlvX3ZhbHVlID09IHByb2ZpbGUpCj4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICByZXR1cm4gcHJvZmlsZV90YWJsZVtpZHhdLnY0bDJfdmFsdWU7Cj4gPiArICAgICAgIH0KPiA+
+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK3VpbnQzMl90IHZpcnRp
+b192aWRlb192NGwyX3Byb2ZpbGVfdG9fdmlydGlvKHVpbnQzMl90IHY0bDJfcHJvZmlsZSkKPiA+
+ICt7Cj4gPiArICAgICAgIHNpemVfdCBpZHg7Cj4gPiArCj4gPiArICAgICAgIGZvciAoaWR4ID0g
+MDsgaWR4IDwgQVJSQVlfU0laRShwcm9maWxlX3RhYmxlKTsgaWR4KyspIHsKPiA+ICsgICAgICAg
+ICAgICAgICBpZiAocHJvZmlsZV90YWJsZVtpZHhdLnY0bDJfdmFsdWUgPT0gdjRsMl9wcm9maWxl
+KQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHByb2ZpbGVfdGFibGVbaWR4XS52
+aXJ0aW9fdmFsdWU7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4g
+PiArfQo+ID4gKwo+ID4gK3N0YXRpYyBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbnZlcnRfdGFibGUg
+Zm9ybWF0X3RhYmxlW10gPSB7Cj4gPiArICAgICAgIHsgVklSVElPX1ZJREVPX0ZPUk1BVF9BUkdC
+ODg4OCwgVjRMMl9QSVhfRk1UX0FSR0IzMiB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19G
+T1JNQVRfQkdSQTg4ODgsIFY0TDJfUElYX0ZNVF9BQkdSMzIgfSwKPiA+ICsgICAgICAgeyBWSVJU
+SU9fVklERU9fRk9STUFUX05WMTIsIFY0TDJfUElYX0ZNVF9OVjEyIH0sCj4gPiArICAgICAgIHsg
+VklSVElPX1ZJREVPX0ZPUk1BVF9ZVVY0MjAsIFY0TDJfUElYX0ZNVF9ZVVY0MjAgfSwKPiA+ICsg
+ICAgICAgeyBWSVJUSU9fVklERU9fRk9STUFUX1lWVTQyMCwgVjRMMl9QSVhfRk1UX1lWVTQyMCB9
+LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19GT1JNQVRfTVBFRzIsIFY0TDJfUElYX0ZNVF9N
+UEVHMiB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19GT1JNQVRfTVBFRzQsIFY0TDJfUElY
+X0ZNVF9NUEVHNCB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19GT1JNQVRfSDI2NCwgVjRM
+Ml9QSVhfRk1UX0gyNjQgfSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fRk9STUFUX0hFVkMs
+IFY0TDJfUElYX0ZNVF9IRVZDIH0sCj4gPiArICAgICAgIHsgVklSVElPX1ZJREVPX0ZPUk1BVF9W
+UDgsIFY0TDJfUElYX0ZNVF9WUDggfSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fRk9STUFU
+X1ZQOSwgVjRMMl9QSVhfRk1UX1ZQOSB9LAo+ID4gKyAgICAgICB7IDAgfSwKPiA+ICt9Owo+ID4g
+Kwo+ID4gK3VpbnQzMl90IHZpcnRpb192aWRlb19mb3JtYXRfdG9fdjRsMih1aW50MzJfdCBmb3Jt
+YXQpCj4gPiArewo+ID4gKyAgICAgICBzaXplX3QgaWR4Owo+ID4gKwo+ID4gKyAgICAgICBmb3Ig
+KGlkeCA9IDA7IGlkeCA8IEFSUkFZX1NJWkUoZm9ybWF0X3RhYmxlKTsgaWR4KyspIHsKPiA+ICsg
+ICAgICAgICAgICAgICBpZiAoZm9ybWF0X3RhYmxlW2lkeF0udmlydGlvX3ZhbHVlID09IGZvcm1h
+dCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiBmb3JtYXRfdGFibGVbaWR4XS52
+NGwyX3ZhbHVlOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIHJldHVybiAwOwo+ID4g
+K30KPiA+ICsKPiA+ICt1aW50MzJfdCB2aXJ0aW9fdmlkZW9fdjRsMl9mb3JtYXRfdG9fdmlydGlv
+KHVpbnQzMl90IHY0bDJfZm9ybWF0KQo+ID4gK3sKPiA+ICsgICAgICAgc2l6ZV90IGlkeDsKPiA+
+ICsKPiA+ICsgICAgICAgZm9yIChpZHggPSAwOyBpZHggPCBBUlJBWV9TSVpFKGZvcm1hdF90YWJs
+ZSk7IGlkeCsrKSB7Cj4gPiArICAgICAgICAgICAgICAgaWYgKGZvcm1hdF90YWJsZVtpZHhdLnY0
+bDJfdmFsdWUgPT0gdjRsMl9mb3JtYXQpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1
+cm4gZm9ybWF0X3RhYmxlW2lkeF0udmlydGlvX3ZhbHVlOwo+ID4gKyAgICAgICB9Cj4gPiArCj4g
+PiArICAgICAgIHJldHVybiAwOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgc3RydWN0IHZpcnRp
+b192aWRlb19jb252ZXJ0X3RhYmxlIGNvbnRyb2xfdGFibGVbXSA9IHsKPiA+ICsgICAgICAgeyBW
+SVJUSU9fVklERU9fQ09OVFJPTF9CSVRSQVRFLCBWNEwyX0NJRF9NUEVHX1ZJREVPX0JJVFJBVEUg
+fSwKPiA+ICsgICAgICAgeyBWSVJUSU9fVklERU9fQ09OVFJPTF9QUk9GSUxFLCBWNEwyX0NJRF9N
+UEVHX1ZJREVPX0gyNjRfUFJPRklMRSB9LAo+ID4gKyAgICAgICB7IFZJUlRJT19WSURFT19DT05U
+Uk9MX0xFVkVMLCBWNEwyX0NJRF9NUEVHX1ZJREVPX0gyNjRfTEVWRUwgfSwKPiA+ICsgICAgICAg
+eyAwIH0sCj4gPiArfTsKPiA+ICsKPiA+ICt1aW50MzJfdCB2aXJ0aW9fdmlkZW9fY29udHJvbF90
+b192NGwyKHVpbnQzMl90IGNvbnRyb2wpCj4gPiArewo+ID4gKyAgICAgICBzaXplX3QgaWR4Owo+
+ID4gKwo+ID4gKyAgICAgICBmb3IgKGlkeCA9IDA7IGlkeCA8IEFSUkFZX1NJWkUoY29udHJvbF90
+YWJsZSk7IGlkeCsrKSB7Cj4gPiArICAgICAgICAgICAgICAgaWYgKGNvbnRyb2xfdGFibGVbaWR4
+XS52aXJ0aW9fdmFsdWUgPT0gY29udHJvbCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJl
+dHVybiBjb250cm9sX3RhYmxlW2lkeF0udjRsMl92YWx1ZTsKPiA+ICsgICAgICAgfQo+ID4gKwo+
+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArdWludDMyX3QgdmlydGlvX3Zp
+ZGVvX3Y0bDJfY29udHJvbF90b192aXJ0aW8odWludDMyX3QgdjRsMl9jb250cm9sKQo+ID4gK3sK
+PiA+ICsgICAgICAgc2l6ZV90IGlkeDsKPiA+ICsKPiA+ICsgICAgICAgZm9yIChpZHggPSAwOyBp
+ZHggPCBBUlJBWV9TSVpFKGNvbnRyb2xfdGFibGUpOyBpZHgrKykgewo+ID4gKyAgICAgICAgICAg
+ICAgIGlmIChjb250cm9sX3RhYmxlW2lkeF0udjRsMl92YWx1ZSA9PSB2NGwyX2NvbnRyb2wpCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gY29udHJvbF90YWJsZVtpZHhdLnZpcnRp
+b192YWx1ZTsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9
+Cj4gPiArCj4gPiArdWludDMyX3QgdmlydGlvX3ZpZGVvX2dldF9mb3JtYXRfZnJvbV92aXJ0aW9f
+cHJvZmlsZSh1aW50MzJfdCB2aXJ0aW9fcHJvZmlsZSkKPiA+ICt7Cj4gPiArICAgICAgIGlmICh2
+aXJ0aW9fcHJvZmlsZSA+PSBWSVJUSU9fVklERU9fUFJPRklMRV9IMjY0X01JTiAmJgo+ID4gKyAg
+ICAgICAgICAgdmlydGlvX3Byb2ZpbGUgPD0gVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9NQVgp
+Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIFZJUlRJT19WSURFT19GT1JNQVRfSDI2NDsKPiA+
+ICsgICAgICAgZWxzZSBpZiAodmlydGlvX3Byb2ZpbGUgPj0gVklSVElPX1ZJREVPX1BST0ZJTEVf
+SEVWQ19NSU4gJiYKPiA+ICsgICAgICAgICAgICAgICAgdmlydGlvX3Byb2ZpbGUgPD0gVklSVElP
+X1ZJREVPX1BST0ZJTEVfSEVWQ19NQVgpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIFZJUlRJ
+T19WSURFT19GT1JNQVRfSEVWQzsKPiA+ICsgICAgICAgZWxzZSBpZiAodmlydGlvX3Byb2ZpbGUg
+Pj0gVklSVElPX1ZJREVPX1BST0ZJTEVfVlA4X01JTiAmJgo+ID4gKyAgICAgICAgICAgICAgICB2
+aXJ0aW9fcHJvZmlsZSA8PSBWSVJUSU9fVklERU9fUFJPRklMRV9WUDhfTUFYKQo+ID4gKyAgICAg
+ICAgICAgICAgIHJldHVybiBWSVJUSU9fVklERU9fRk9STUFUX1ZQODsKPiA+ICsgICAgICAgZWxz
+ZSBpZiAodmlydGlvX3Byb2ZpbGUgPj0gVklSVElPX1ZJREVPX1BST0ZJTEVfVlA5X01JTiAmJgo+
+ID4gKyAgICAgICAgICAgICAgICB2aXJ0aW9fcHJvZmlsZSA8PSBWSVJUSU9fVklERU9fUFJPRklM
+RV9WUDlfTUFYKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiBWSVJUSU9fVklERU9fRk9STUFU
+X1ZQOTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0cnVj
+dCB2aWRlb19mb3JtYXQgKmZpbmRfdmlkZW9fZm9ybWF0KHN0cnVjdCBsaXN0X2hlYWQgKmZtdHNf
+bGlzdCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQzMl90
+IGZvcm1hdCkKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aWRlb19mb3JtYXQgKmZtdCA9IE5V
+TEw7Cj4gPiArCj4gPiArICAgICAgIGxpc3RfZm9yX2VhY2hfZW50cnkoZm10LCBmbXRzX2xpc3Qs
+IGZvcm1hdHNfbGlzdF9lbnRyeSkgewo+ID4gKyAgICAgICAgICAgICAgIGlmIChmbXQtPmRlc2Mu
+Zm9ybWF0ID09IGZvcm1hdCkKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiBmbXQ7
+Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIE5VTEw7Cj4gPiArfQo+ID4g
+Kwo+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2Zvcm1hdF9mcm9tX2luZm8oc3RydWN0IHZpZGVvX2Zv
+cm1hdF9pbmZvICppbmZvLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+dHJ1Y3QgdjRsMl9waXhfZm9ybWF0X21wbGFuZSAqcGl4X21wKQo+ID4gK3sKPiA+ICsgICAgICAg
+aW50IGk7Cj4gPiArCj4gPiArICAgICAgIHBpeF9tcC0+d2lkdGggPSBpbmZvLT5mcmFtZV93aWR0
+aDsKPiA+ICsgICAgICAgcGl4X21wLT5oZWlnaHQgPSBpbmZvLT5mcmFtZV9oZWlnaHQ7Cj4gPiAr
+ICAgICAgIHBpeF9tcC0+ZmllbGQgPSBWNEwyX0ZJRUxEX05PTkU7Cj4gPiArICAgICAgIHBpeF9t
+cC0+Y29sb3JzcGFjZSA9IFY0TDJfQ09MT1JTUEFDRV9SRUM3MDk7Cj4gPiArICAgICAgIHBpeF9t
+cC0+eGZlcl9mdW5jID0gMDsKPiA+ICsgICAgICAgcGl4X21wLT55Y2Jjcl9lbmMgPSAwOwo+ID4g
+KyAgICAgICBwaXhfbXAtPnF1YW50aXphdGlvbiA9IDA7Cj4gPiArICAgICAgIG1lbXNldChwaXhf
+bXAtPnJlc2VydmVkLCAwLCBzaXplb2YocGl4X21wLT5yZXNlcnZlZCkpOwo+ID4gKyAgICAgICBt
+ZW1zZXQocGl4X21wLT5wbGFuZV9mbXRbMF0ucmVzZXJ2ZWQsIDAsCj4gPiArICAgICAgICAgICAg
+ICBzaXplb2YocGl4X21wLT5wbGFuZV9mbXRbMF0ucmVzZXJ2ZWQpKTsKPiA+ICsKPiA+ICsgICAg
+ICAgcGl4X21wLT5udW1fcGxhbmVzID0gaW5mby0+bnVtX3BsYW5lczsKPiA+ICsgICAgICAgcGl4
+X21wLT5waXhlbGZvcm1hdCA9IGluZm8tPmZvdXJjY19mb3JtYXQ7Cj4gPiArCj4gPiArICAgICAg
+IGZvciAoaSA9IDA7IGkgPCBpbmZvLT5udW1fcGxhbmVzOyBpKyspIHsKPiA+ICsgICAgICAgICAg
+ICAgICBwaXhfbXAtPnBsYW5lX2ZtdFtpXS5ieXRlc3BlcmxpbmUgPQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbmZvLT5wbGFuZV9mb3JtYXRbaV0uc3RyaWRl
+Owo+ID4gKyAgICAgICAgICAgICAgIHBpeF9tcC0+cGxhbmVfZm10W2ldLnNpemVpbWFnZSA9Cj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGluZm8tPnBsYW5lX2Zv
+cm1hdFtpXS5wbGFuZV9zaXplOwo+ID4gKyAgICAgICB9Cj4gPiArfQo+ID4gKwo+ID4gK3ZvaWQg
+dmlydGlvX3ZpZGVvX2Zvcm1hdF9maWxsX2RlZmF1bHRfaW5mbyhzdHJ1Y3QgdmlkZW9fZm9ybWF0
+X2luZm8gKmRzdF9pbmZvLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9pbmZvICpzcmNfaW5mbykKPiA+ICt7Cj4gPiArICAg
+ICAgIG1lbWNweShkc3RfaW5mbywgc3JjX2luZm8sIHNpemVvZigqZHN0X2luZm8pKTsKPiA+ICt9
+Cj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9tZWRpYS92aXJ0aW8vdmlydGlvX3ZpZGVvX3ZxLmMg
+Yi9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fdnEuYwo+ID4gbmV3IGZpbGUgbW9k
+ZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAwMDAwMC4uNDY3OWU2YjQ5Y2YzCj4gPiAtLS0gL2Rl
+di9udWxsCj4gPiArKysgYi9kcml2ZXJzL21lZGlhL3ZpcnRpby92aXJ0aW9fdmlkZW9fdnEuYwo+
+ID4gQEAgLTAsMCArMSwxMDEyIEBACj4gPiArLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQ
+TC0yLjArCj4gPiArLyogRHJpdmVyIGZvciB2aXJ0aW8gdmlkZW8gZGV2aWNlLgo+ID4gKyAqCj4g
+PiArICogQ29weXJpZ2h0IDIwMTkgT3BlblN5bmVyZ3kgR21iSC4KPiA+ICsgKgo+ID4gKyAqIEJh
+c2VkIG9uIGRyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV92cS5jCj4gPiArICogQ29weXJp
+Z2h0IChDKSAyMDE1IFJlZCBIYXQsIEluYy4KPiA+ICsgKgo+ID4gKyAqIFRoaXMgcHJvZ3JhbSBp
+cyBmcmVlIHNvZnR3YXJlOyB5b3UgY2FuIHJlZGlzdHJpYnV0ZSBpdCBhbmQvb3IgbW9kaWZ5Cj4g
+PiArICogaXQgdW5kZXIgdGhlIHRlcm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5z
+ZSBhcyBwdWJsaXNoZWQgYnkKPiA+ICsgKiB0aGUgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uOyBl
+aXRoZXIgdmVyc2lvbiAyIG9mIHRoZSBMaWNlbnNlLCBvcgo+ID4gKyAqIChhdCB5b3VyIG9wdGlv
+bikgYW55IGxhdGVyIHZlcnNpb24uCj4gPiArICoKPiA+ICsgKiBUaGlzIHByb2dyYW0gaXMgZGlz
+dHJpYnV0ZWQgaW4gdGhlIGhvcGUgdGhhdCBpdCB3aWxsIGJlIHVzZWZ1bCwKPiA+ICsgKiBidXQg
+V0lUSE9VVCBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZlbiB0aGUgaW1wbGllZCB3YXJyYW50eSBv
+Zgo+ID4gKyAqIE1FUkNIQU5UQUJJTElUWSBvciBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVS
+UE9TRS4gIFNlZSB0aGUKPiA+ICsgKiBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBmb3IgbW9y
+ZSBkZXRhaWxzLgo+ID4gKyAqCj4gPiArICogWW91IHNob3VsZCBoYXZlIHJlY2VpdmVkIGEgY29w
+eSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UKPiA+ICsgKiBhbG9uZyB3aXRoIHRo
+aXMgcHJvZ3JhbTsgaWYgbm90LCBzZWUgPGh0dHA6Ly93d3cuZ251Lm9yZy9saWNlbnNlcy8+Oy4K
+PiA+ICsgKi8KPiA+ICsKPiA+ICsjaW5jbHVkZSAidmlydGlvX3ZpZGVvLmgiCj4gPiArCj4gPiAr
+I2RlZmluZSBNQVhfSU5MSU5FX0NNRF9TSVpFICAgMjk4Cj4gPiArI2RlZmluZSBNQVhfSU5MSU5F
+X1JFU1BfU0laRSAgMjk4Cj4gPiArI2RlZmluZSBWQlVGRkVSX1NJWkUgICAgICAgICAgKHNpemVv
+ZihzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIpIFwKPiA+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICArIE1BWF9JTkxJTkVfQ01EX1NJWkUgICAgICAgICAgICAgICBcCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgKyBNQVhfSU5MSU5FX1JFU1BfU0laRSkKPiA+ICsK
+PiA+ICt2b2lkIHZpcnRpb192aWRlb19yZXNvdXJjZV9pZF9nZXQoc3RydWN0IHZpcnRpb192aWRl
+byAqdnYsIHVpbnQzMl90ICppZCkKPiAKPiBIb3cgYWJvdXQgcmVuYW1pbmcgdmlydGlvX3ZpZGVv
+X3Jlc291cmNlX2lkX3tnZXQscHV0fSB0bwo+IHt2aXJ0aW9fdmlkZW9fcmVzb3VyY2VfaWRfYWxs
+b2MsIHJlbW92ZX0/Cj4gSXQgc291bmRzIGxpa2UgYSBmdW5jdGlvbiAiKl9nZXQiIGRvZXNuJ3Qg
+aGF2ZSBhbnkgc2lkZSBlZmZlY3QgYnV0IGl0IGRvZXMuCj4gCj4gPiArewo+ID4gKyAgICAgICBp
+bnQgaGFuZGxlOwo+ID4gKwo+ID4gKyAgICAgICBpZHJfcHJlbG9hZChHRlBfS0VSTkVMKTsKPiA+
+ICsgICAgICAgc3Bpbl9sb2NrKCZ2di0+cmVzb3VyY2VfaWRyX2xvY2spOwo+ID4gKyAgICAgICBo
+YW5kbGUgPSBpZHJfYWxsb2MoJnZ2LT5yZXNvdXJjZV9pZHIsIE5VTEwsIDEsIDAsIEdGUF9OT1dB
+SVQpOwo+ID4gKyAgICAgICBzcGluX3VubG9jaygmdnYtPnJlc291cmNlX2lkcl9sb2NrKTsKPiA+
+ICsgICAgICAgaWRyX3ByZWxvYWRfZW5kKCk7Cj4gPiArICAgICAgICppZCA9IGhhbmRsZTsKPiA+
+ICt9Cj4gPiArCj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fcmVzb3VyY2VfaWRfcHV0KHN0cnVjdCB2
+aXJ0aW9fdmlkZW8gKnZ2LCB1aW50MzJfdCBpZCkKPiA+ICt7Cj4gPiArICAgICAgIHNwaW5fbG9j
+aygmdnYtPnJlc291cmNlX2lkcl9sb2NrKTsKPiA+ICsgICAgICAgaWRyX3JlbW92ZSgmdnYtPnJl
+c291cmNlX2lkciwgaWQpOwo+ID4gKyAgICAgICBzcGluX3VubG9jaygmdnYtPnJlc291cmNlX2lk
+cl9sb2NrKTsKPiA+ICt9Cj4gPiArCj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fc3RyZWFtX2lkX2dl
+dChzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSwKPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgdWludDMyX3QgKmlkKQo+ID4gK3sKPiA+ICsgICAgICAgaW50
+IGhhbmRsZTsKPiA+ICsKPiA+ICsgICAgICAgaWRyX3ByZWxvYWQoR0ZQX0tFUk5FTCk7Cj4gPiAr
+ICAgICAgIHNwaW5fbG9jaygmdnYtPnN0cmVhbV9pZHJfbG9jayk7Cj4gPiArICAgICAgIGhhbmRs
+ZSA9IGlkcl9hbGxvYygmdnYtPnN0cmVhbV9pZHIsIHN0cmVhbSwgMSwgMCwgMCk7Cj4gPiArICAg
+ICAgIHNwaW5fdW5sb2NrKCZ2di0+c3RyZWFtX2lkcl9sb2NrKTsKPiA+ICsgICAgICAgaWRyX3By
+ZWxvYWRfZW5kKCk7Cj4gPiArICAgICAgICppZCA9IGhhbmRsZTsKPiA+ICt9Cj4gPiArCj4gPiAr
+dm9pZCB2aXJ0aW9fdmlkZW9fc3RyZWFtX2lkX3B1dChzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwg
+dWludDMyX3QgaWQpCj4gPiArewo+ID4gKyAgICAgICBzcGluX2xvY2soJnZ2LT5zdHJlYW1faWRy
+X2xvY2spOwo+ID4gKyAgICAgICBpZHJfcmVtb3ZlKCZ2di0+c3RyZWFtX2lkciwgaWQpOwo+ID4g
+KyAgICAgICBzcGluX3VubG9jaygmdnYtPnN0cmVhbV9pZHJfbG9jayk7Cj4gPiArfQo+ID4gKwo+
+ID4gK3ZvaWQgdmlydGlvX3ZpZGVvX2NtZF9hY2soc3RydWN0IHZpcnRxdWV1ZSAqdnEpCj4gPiAr
+ewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diA9IHZxLT52ZGV2LT5wcml2Owo+
+ID4gKwo+ID4gKyAgICAgICBzY2hlZHVsZV93b3JrKCZ2di0+Y29tbWFuZHEuZGVxdWV1ZV93b3Jr
+KTsKPiA+ICt9Cj4gPiArCj4gPiArdm9pZCB2aXJ0aW9fdmlkZW9fZXZlbnRfYWNrKHN0cnVjdCB2
+aXJ0cXVldWUgKnZxKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYg
+PSB2cS0+dmRldi0+cHJpdjsKPiA+ICsKPiA+ICsgICAgICAgc2NoZWR1bGVfd29yaygmdnYtPmV2
+ZW50cS5kZXF1ZXVlX3dvcmspOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgc3RydWN0IHZpcnRp
+b192aWRlb192YnVmZmVyICoKPiA+ICt2aXJ0aW9fdmlkZW9fZ2V0X3ZidWYoc3RydWN0IHZpcnRp
+b192aWRlbyAqdnYsIGludCBzaXplLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgIGludCByZXNw
+X3NpemUsIHZvaWQgKnJlc3BfYnVmLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHZpcnRpb192
+aWRlb19yZXNwX2NiIHJlc3BfY2IpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3Zp
+ZGVvX3ZidWZmZXIgKnZidWY7Cj4gPiArCj4gPiArICAgICAgIHZidWYgPSBrbWVtX2NhY2hlX2Fs
+bG9jKHZ2LT52YnVmcywgR0ZQX0tFUk5FTCk7Cj4gPiArICAgICAgIGlmICghdmJ1ZikKPiA+ICsg
+ICAgICAgICAgICAgICByZXR1cm4gRVJSX1BUUigtRU5PTUVNKTsKPiA+ICsgICAgICAgbWVtc2V0
+KHZidWYsIDAsIFZCVUZGRVJfU0laRSk7Cj4gPiArCj4gPiArICAgICAgIEJVR19PTihzaXplID4g
+TUFYX0lOTElORV9DTURfU0laRSk7Cj4gPiArICAgICAgIHZidWYtPmJ1ZiA9ICh2b2lkICopdmJ1
+ZiArIHNpemVvZigqdmJ1Zik7Cj4gPiArICAgICAgIHZidWYtPnNpemUgPSBzaXplOwo+ID4gKwo+
+ID4gKyAgICAgICB2YnVmLT5yZXNwX2NiID0gcmVzcF9jYjsKPiA+ICsgICAgICAgdmJ1Zi0+cmVz
+cF9zaXplID0gcmVzcF9zaXplOwo+ID4gKyAgICAgICBpZiAocmVzcF9zaXplIDw9IE1BWF9JTkxJ
+TkVfUkVTUF9TSVpFICYmICFyZXNwX2J1ZikKPiA+ICsgICAgICAgICAgICAgICB2YnVmLT5yZXNw
+X2J1ZiA9ICh2b2lkICopdmJ1Zi0+YnVmICsgc2l6ZTsKPiA+ICsgICAgICAgZWxzZQo+ID4gKyAg
+ICAgICAgICAgICAgIHZidWYtPnJlc3BfYnVmID0gcmVzcF9idWY7Cj4gPiArICAgICAgIEJVR19P
+TighdmJ1Zi0+cmVzcF9idWYpOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdmJ1ZjsKPiA+ICt9
+Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgZnJlZV92YnVmKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAq
+dmJ1ZikKPiA+ICt7Cj4gPiArICAgICAgIGlmICghdmJ1Zi0+cmVzcF9jYiAmJgo+ID4gKyAgICAg
+ICAgICAgdmJ1Zi0+cmVzcF9zaXplID4gTUFYX0lOTElORV9SRVNQX1NJWkUpCj4gPiArICAgICAg
+ICAgICAgICAga2ZyZWUodmJ1Zi0+cmVzcF9idWYpOwo+ID4gKyAgICAgICBrZnJlZSh2YnVmLT5k
+YXRhX2J1Zik7Cj4gPiArICAgICAgIGttZW1fY2FjaGVfZnJlZSh2di0+dmJ1ZnMsIHZidWYpOwo+
+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgdm9pZCByZWNsYWltX3ZidWZzKHN0cnVjdCB2aXJ0cXVl
+dWUgKnZxLCBzdHJ1Y3QgbGlzdF9oZWFkICpyZWNsYWltX2xpc3QpCj4gPiArewo+ID4gKyAgICAg
+ICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWY7Cj4gPiArICAgICAgIHVuc2lnbmVk
+IGludCBsZW47Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2ID0gdnEtPnZkZXYt
+PnByaXY7Cj4gPiArICAgICAgIGludCBmcmVlZCA9IDA7Cj4gPiArCj4gPiArICAgICAgIHdoaWxl
+ICgodmJ1ZiA9IHZpcnRxdWV1ZV9nZXRfYnVmKHZxLCAmbGVuKSkpIHsKPiA+ICsgICAgICAgICAg
+ICAgICBsaXN0X2FkZF90YWlsKCZ2YnVmLT5saXN0LCByZWNsYWltX2xpc3QpOwo+ID4gKyAgICAg
+ICAgICAgICAgIGZyZWVkKys7Cj4gPiArICAgICAgIH0KPiA+ICsgICAgICAgaWYgKGZyZWVkID09
+IDApCj4gPiArICAgICAgICAgICAgICAgdjRsMl9kYmcoMSwgdnYtPmRlYnVnLCAmdnYtPnY0bDJf
+ZGV2LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICJ6ZXJvIHZidWZzIHJlY2xhaW1lZFxu
+Iik7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyB2b2lkIGRldGFjaF92YnVmcyhzdHJ1Y3Qgdmly
+dHF1ZXVlICp2cSwgc3RydWN0IGxpc3RfaGVhZCAqZGV0YWNoX2xpc3QpCj4gPiArewo+ID4gKyAg
+ICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWY7Cj4gPiArCj4gPiArICAgICAg
+IHdoaWxlICgodmJ1ZiA9IHZpcnRxdWV1ZV9kZXRhY2hfdW51c2VkX2J1Zih2cSkpICE9IE5VTEwp
+Cj4gPiArICAgICAgICAgICAgICAgbGlzdF9hZGRfdGFpbCgmdmJ1Zi0+bGlzdCwgZGV0YWNoX2xp
+c3QpOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgdm9pZCB2aXJ0aW9fdmlkZW9fZGVhdGNoX3Zi
+dWZzKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2KQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IGxp
+c3RfaGVhZCBkZXRhY2hfbGlzdDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVm
+ZmVyICplbnRyeSwgKnRtcDsKPiA+ICsKPiA+ICsgICAgICAgSU5JVF9MSVNUX0hFQUQoJmRldGFj
+aF9saXN0KTsKPiA+ICsKPiA+ICsgICAgICAgZGV0YWNoX3ZidWZzKHZ2LT5ldmVudHEudnEsICZk
+ZXRhY2hfbGlzdCk7Cj4gPiArICAgICAgIGRldGFjaF92YnVmcyh2di0+Y29tbWFuZHEudnEsICZk
+ZXRhY2hfbGlzdCk7Cj4gPiArCj4gPiArICAgICAgIGlmIChsaXN0X2VtcHR5KCZkZXRhY2hfbGlz
+dCkpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuOwo+ID4gKwo+ID4gKyAgICAgICBsaXN0X2Zv
+cl9lYWNoX2VudHJ5X3NhZmUoZW50cnksIHRtcCwgJmRldGFjaF9saXN0LCBsaXN0KSB7Cj4gPiAr
+ICAgICAgICAgICAgICAgbGlzdF9kZWwoJmVudHJ5LT5saXN0KTsKPiA+ICsgICAgICAgICAgICAg
+ICBmcmVlX3ZidWYodnYsIGVudHJ5KTsKPiA+ICsgICAgICAgfQo+ID4gK30KPiA+ICsKPiA+ICtp
+bnQgdmlydGlvX3ZpZGVvX2FsbG9jX3ZidWZzKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2KQo+ID4g
+K3sKPiA+ICsgICAgICAgdnYtPnZidWZzID0KPiA+ICsgICAgICAgICAgICAgICBrbWVtX2NhY2hl
+X2NyZWF0ZSgidmlydGlvLXZpZGVvLXZidWZzIiwgVkJVRkZFUl9TSVpFLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIF9fYWxpZ25vZl9fKHN0cnVjdCB2aXJ0aW9fdmlkZW9f
+dmJ1ZmZlciksIDAsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTlVMTCk7
+Cj4gPiArICAgICAgIGlmICghdnYtPnZidWZzKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAt
+RU5PTUVNOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+ICt9Cj4gPiArCj4gPiArdm9p
+ZCB2aXJ0aW9fdmlkZW9fZnJlZV92YnVmcyhzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2dikKPiA+ICt7
+Cj4gPiArICAgICAgIHZpcnRpb192aWRlb19kZWF0Y2hfdmJ1ZnModnYpOwo+ID4gKyAgICAgICBr
+bWVtX2NhY2hlX2Rlc3Ryb3kodnYtPnZidWZzKTsKPiA+ICsgICAgICAgdnYtPnZidWZzID0gTlVM
+TDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgKnZpcnRpb192aWRlb19hbGxvY19yZXEo
+c3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKip2YnVmZmVyX3AsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbnQgc2l6ZSkKPiA+ICt7Cj4gPiArICAg
+ICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAqdmJ1ZjsKPiA+ICsKPiA+ICsgICAgICAg
+dmJ1ZiA9IHZpcnRpb192aWRlb19nZXRfdmJ1Zih2diwgc2l6ZSwKPiA+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19jbWRfaGRy
+KSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOVUxMLCBOVUxMKTsK
+PiA+ICsgICAgICAgaWYgKElTX0VSUih2YnVmKSkgewo+ID4gKyAgICAgICAgICAgICAgICp2YnVm
+ZmVyX3AgPSBOVUxMOwo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiBFUlJfQ0FTVCh2YnVmKTsK
+PiA+ICsgICAgICAgfQo+ID4gKyAgICAgICAqdmJ1ZmZlcl9wID0gdmJ1ZjsKPiA+ICsKPiA+ICsg
+ICAgICAgcmV0dXJuIHZidWYtPmJ1ZjsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQgKgo+
+ID4gK3ZpcnRpb192aWRlb19hbGxvY19yZXFfcmVzcChzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICB2aXJ0aW9fdmlkZW9fcmVzcF9jYiBjYiwK
+PiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZm
+ZXIgKip2YnVmZmVyX3AsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgaW50IHJlcV9z
+aXplLCBpbnQgcmVzcF9zaXplLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQg
+KnJlc3BfYnVmKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVmZmVy
+ICp2YnVmOwo+ID4gKwo+ID4gKyAgICAgICB2YnVmID0gdmlydGlvX3ZpZGVvX2dldF92YnVmKHZ2
+LCByZXFfc2l6ZSwgcmVzcF9zaXplLCByZXNwX2J1ZiwgY2IpOwo+ID4gKyAgICAgICBpZiAoSVNf
+RVJSKHZidWYpKSB7Cj4gPiArICAgICAgICAgICAgICAgKnZidWZmZXJfcCA9IE5VTEw7Cj4gPiAr
+ICAgICAgICAgICAgICAgcmV0dXJuIEVSUl9DQVNUKHZidWYpOwo+ID4gKyAgICAgICB9Cj4gPiAr
+ICAgICAgICp2YnVmZmVyX3AgPSB2YnVmOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdmJ1Zi0+
+YnVmOwo+ID4gK30KPiA+ICsKPiA+ICt2b2lkIHZpcnRpb192aWRlb19kZXF1ZXVlX2NtZF9mdW5j
+KHN0cnVjdCB3b3JrX3N0cnVjdCAqd29yaykKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0
+aW9fdmlkZW8gKnZ2ID0KPiA+ICsgICAgICAgICAgICAgICBjb250YWluZXJfb2Yod29yaywgc3Ry
+dWN0IHZpcnRpb192aWRlbywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29tbWFu
+ZHEuZGVxdWV1ZV93b3JrKTsKPiA+ICsgICAgICAgc3RydWN0IGxpc3RfaGVhZCByZWNsYWltX2xp
+c3Q7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAqZW50cnksICp0bXA7
+Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fY21kX2hkciAqcmVzcDsKPiA+ICsKPiA+
+ICsgICAgICAgSU5JVF9MSVNUX0hFQUQoJnJlY2xhaW1fbGlzdCk7Cj4gPiArICAgICAgIHNwaW5f
+bG9jaygmdnYtPmNvbW1hbmRxLnFsb2NrKTsKPiA+ICsgICAgICAgZG8gewo+ID4gKyAgICAgICAg
+ICAgICAgIHZpcnRxdWV1ZV9kaXNhYmxlX2NiKHZ2LT5jb21tYW5kcS52cSk7Cj4gPiArICAgICAg
+ICAgICAgICAgcmVjbGFpbV92YnVmcyh2di0+Y29tbWFuZHEudnEsICZyZWNsYWltX2xpc3QpOwo+
+ID4gKwo+ID4gKyAgICAgICB9IHdoaWxlICghdmlydHF1ZXVlX2VuYWJsZV9jYih2di0+Y29tbWFu
+ZHEudnEpKTsKPiA+ICsgICAgICAgc3Bpbl91bmxvY2soJnZ2LT5jb21tYW5kcS5xbG9jayk7Cj4g
+PiArCj4gPiArICAgICAgIGxpc3RfZm9yX2VhY2hfZW50cnlfc2FmZShlbnRyeSwgdG1wLCAmcmVj
+bGFpbV9saXN0LCBsaXN0KSB7Cj4gPiArICAgICAgICAgICAgICAgcmVzcCA9IChzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX2NtZF9oZHIgKillbnRyeS0+cmVzcF9idWY7Cj4gPiArICAgICAgICAgICAgICAg
+aWYgKHJlc3AtPnR5cGUgPj0KPiA+ICsgICAgICAgICAgICAgICAgICAgY3B1X3RvX2xlMzIoVklS
+VElPX1ZJREVPX1JFU1BfRVJSX0lOVkFMSURfT1BFUkFUSU9OKSkKPiA+ICsgICAgICAgICAgICAg
+ICAgICAgICAgIHY0bDJfZGJnKDEsIHZ2LT5kZWJ1ZywgJnZ2LT52NGwyX2RldiwKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICJyZXNwb25zZSAweCV4XG4iLCBsZTMyX3RvX2Nw
+dShyZXNwLT50eXBlKSk7Cj4gPiArICAgICAgICAgICAgICAgaWYgKGVudHJ5LT5yZXNwX2NiKQo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgZW50cnktPnJlc3BfY2IodnYsIGVudHJ5KTsKPiA+
+ICsKPiA+ICsgICAgICAgICAgICAgICBsaXN0X2RlbCgmZW50cnktPmxpc3QpOwo+ID4gKyAgICAg
+ICAgICAgICAgIGZyZWVfdmJ1Zih2diwgZW50cnkpOwo+ID4gKyAgICAgICB9Cj4gPiArICAgICAg
+IHdha2VfdXAoJnZ2LT5jb21tYW5kcS5hY2tfcXVldWUpOwo+ID4gK30KPiA+ICsKPiA+ICt2b2lk
+IHZpcnRpb192aWRlb19kZXF1ZXVlX2V2ZW50X2Z1bmMoc3RydWN0IHdvcmtfc3RydWN0ICp3b3Jr
+KQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlbyAqdnYgPQo+ID4gKyAgICAg
+ICAgICAgICAgIGNvbnRhaW5lcl9vZih3b3JrLCBzdHJ1Y3QgdmlydGlvX3ZpZGVvLAo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBldmVudHEuZGVxdWV1ZV93b3JrKTsKPiA+ICsgICAg
+ICAgc3RydWN0IGxpc3RfaGVhZCByZWNsYWltX2xpc3Q7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0
+aW9fdmlkZW9fdmJ1ZmZlciAqZW50cnksICp0bXA7Cj4gPiArCj4gPiArICAgICAgIElOSVRfTElT
+VF9IRUFEKCZyZWNsYWltX2xpc3QpOwo+ID4gKyAgICAgICBzcGluX2xvY2soJnZ2LT5ldmVudHEu
+cWxvY2spOwo+ID4gKyAgICAgICBkbyB7Cj4gPiArICAgICAgICAgICAgICAgdmlydHF1ZXVlX2Rp
+c2FibGVfY2IodnYtPmV2ZW50cS52cSk7Cj4gPiArICAgICAgICAgICAgICAgcmVjbGFpbV92YnVm
+cyh2di0+ZXZlbnRxLnZxLCAmcmVjbGFpbV9saXN0KTsKPiA+ICsKPiA+ICsgICAgICAgfSB3aGls
+ZSAoIXZpcnRxdWV1ZV9lbmFibGVfY2IodnYtPmV2ZW50cS52cSkpOwo+ID4gKyAgICAgICBzcGlu
+X3VubG9jaygmdnYtPmV2ZW50cS5xbG9jayk7Cj4gPiArCj4gPiArICAgICAgIGxpc3RfZm9yX2Vh
+Y2hfZW50cnlfc2FmZShlbnRyeSwgdG1wLCAmcmVjbGFpbV9saXN0LCBsaXN0KSB7Cj4gPiArICAg
+ICAgICAgICAgICAgZW50cnktPnJlc3BfY2IodnYsIGVudHJ5KTsKPiA+ICsgICAgICAgICAgICAg
+ICBsaXN0X2RlbCgmZW50cnktPmxpc3QpOwo+ID4gKyAgICAgICB9Cj4gPiArICAgICAgIHdha2Vf
+dXAoJnZ2LT5ldmVudHEuYWNrX3F1ZXVlKTsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGludAo+
+ID4gK3ZpcnRpb192aWRlb19xdWV1ZV9jbWRfYnVmZmVyX2xvY2tlZChzdHJ1Y3QgdmlydGlvX3Zp
+ZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0
+IHZpcnRpb192aWRlb192YnVmZmVyICp2YnVmKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZp
+cnRxdWV1ZSAqdnEgPSB2di0+Y29tbWFuZHEudnE7Cj4gPiArICAgICAgIHN0cnVjdCBzY2F0dGVy
+bGlzdCAqc2dzWzNdLCB2cmVxLCB2b3V0LCB2cmVzcDsKPiA+ICsgICAgICAgaW50IG91dGNudCA9
+IDAsIGluY250ID0gMDsKPiA+ICsgICAgICAgaW50IHJldDsKPiA+ICsKPiA+ICsgICAgICAgaWYg
+KCF2di0+dnFfcmVhZHkpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9ERVY7Cj4gPiAr
+Cj4gPiArICAgICAgIHNnX2luaXRfb25lKCZ2cmVxLCB2YnVmLT5idWYsIHZidWYtPnNpemUpOwo+
+ID4gKyAgICAgICBzZ3Nbb3V0Y250ICsgaW5jbnRdID0gJnZyZXE7Cj4gPiArICAgICAgIG91dGNu
+dCsrOwo+ID4gKwo+ID4gKyAgICAgICBpZiAodmJ1Zi0+ZGF0YV9zaXplKSB7Cj4gPiArICAgICAg
+ICAgICAgICAgc2dfaW5pdF9vbmUoJnZvdXQsIHZidWYtPmRhdGFfYnVmLCB2YnVmLT5kYXRhX3Np
+emUpOwo+ID4gKyAgICAgICAgICAgICAgIHNnc1tvdXRjbnQgKyBpbmNudF0gPSAmdm91dDsKPiA+
+ICsgICAgICAgICAgICAgICBvdXRjbnQrKzsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAg
+ICBpZiAodmJ1Zi0+cmVzcF9zaXplKSB7Cj4gPiArICAgICAgICAgICAgICAgc2dfaW5pdF9vbmUo
+JnZyZXNwLCB2YnVmLT5yZXNwX2J1ZiwgdmJ1Zi0+cmVzcF9zaXplKTsKPiA+ICsgICAgICAgICAg
+ICAgICBzZ3Nbb3V0Y250ICsgaW5jbnRdID0gJnZyZXNwOwo+ID4gKyAgICAgICAgICAgICAgIGlu
+Y250Kys7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICtyZXRyeToKPiA+ICsgICAgICAgcmV0ID0g
+dmlydHF1ZXVlX2FkZF9zZ3ModnEsIHNncywgb3V0Y250LCBpbmNudCwgdmJ1ZiwgR0ZQX0FUT01J
+Qyk7Cj4gPiArICAgICAgIGlmIChyZXQgPT0gLUVOT1NQQykgewo+ID4gKyAgICAgICAgICAgICAg
+IHNwaW5fdW5sb2NrKCZ2di0+Y29tbWFuZHEucWxvY2spOwo+ID4gKyAgICAgICAgICAgICAgIHdh
+aXRfZXZlbnQodnYtPmNvbW1hbmRxLmFja19xdWV1ZSwgdnEtPm51bV9mcmVlKTsKPiA+ICsgICAg
+ICAgICAgICAgICBzcGluX2xvY2soJnZ2LT5jb21tYW5kcS5xbG9jayk7Cj4gPiArICAgICAgICAg
+ICAgICAgZ290byByZXRyeTsKPiA+ICsgICAgICAgfSBlbHNlIHsKPiA+ICsgICAgICAgICAgICAg
+ICB2aXJ0cXVldWVfa2ljayh2cSk7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+ICsgICAgICAgcmV0
+dXJuIHJldDsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIGludCB2aXJ0aW9fdmlkZW9fcXVldWVf
+Y21kX2J1ZmZlcihzdHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAqdmJ1
+ZikKPiA+ICt7Cj4gPiArICAgICAgIGludCByZXQ7Cj4gPiArCj4gPiArICAgICAgIHNwaW5fbG9j
+aygmdnYtPmNvbW1hbmRxLnFsb2NrKTsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX3F1
+ZXVlX2NtZF9idWZmZXJfbG9ja2VkKHZ2LCB2YnVmKTsKPiA+ICsgICAgICAgc3Bpbl91bmxvY2so
+JnZ2LT5jb21tYW5kcS5xbG9jayk7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiByZXQ7Cj4gPiAr
+fQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdmlydGlvX3ZpZGVvX3F1ZXVlX2V2ZW50X2J1ZmZlcihz
+dHJ1Y3QgdmlydGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWYpCj4gPiArewo+
+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gKyAgICAgICBzdHJ1Y3Qgc2NhdHRlcmxpc3QgdnJlc3A7
+Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0cXVldWUgKnZxID0gdnYtPmV2ZW50cS52cTsKPiA+ICsK
+PiA+ICsgICAgICAgc3Bpbl9sb2NrKCZ2di0+ZXZlbnRxLnFsb2NrKTsKPiA+ICsgICAgICAgc2df
+aW5pdF9vbmUoJnZyZXNwLCB2YnVmLT5yZXNwX2J1ZiwgdmJ1Zi0+cmVzcF9zaXplKTsKPiA+ICsg
+ICAgICAgcmV0ID0gdmlydHF1ZXVlX2FkZF9pbmJ1Zih2cSwgJnZyZXNwLCAxLCB2YnVmLCBHRlBf
+QVRPTUlDKTsKPiA+ICsgICAgICAgc3Bpbl91bmxvY2soJnZ2LT5ldmVudHEucWxvY2spOwo+ID4g
+KyAgICAgICBpZiAocmV0KQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gPiArCj4g
+PiArICAgICAgIHZpcnRxdWV1ZV9raWNrKHZxKTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIDA7
+Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyB2b2lkIHZpcnRpb192aWRlb19ldmVudF9jYihzdHJ1
+Y3QgdmlydGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWYpCj4gPiArewo+ID4gKyAgICAgICBp
+bnQgcmV0Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtOwo+
+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2V2ZW50ICpldmVudCA9Cj4gPiArICAgICAg
+ICAgICAgICAgKHN0cnVjdCB2aXJ0aW9fdmlkZW9fZXZlbnQgKil2YnVmLT5yZXNwX2J1ZjsKPiA+
+ICsKPiA+ICsgICAgICAgc3RyZWFtID0gaWRyX2ZpbmQoJnZ2LT5zdHJlYW1faWRyLCBldmVudC0+
+c3RyZWFtX2lkKTsKPiA+ICsgICAgICAgaWYgKCFzdHJlYW0pIHsKPiA+ICsgICAgICAgICAgICAg
+ICB2NGwyX3dhcm4oJnZ2LT52NGwyX2RldiwgIm5vIHN0cmVhbSAldSBmb3VuZCBmb3IgZXZlbnRc
+biIsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgIGV2ZW50LT5zdHJlYW1faWQpOwo+ID4g
+KyAgICAgICAgICAgICAgIHJldHVybjsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICBz
+d2l0Y2ggKGxlMzJfdG9fY3B1KGV2ZW50LT5ldmVudF90eXBlKSkgewo+ID4gKyAgICAgICBjYXNl
+IFZJUlRJT19WSURFT19FVkVOVF9ERUNPREVSX1JFU09MVVRJT05fQ0hBTkdFRDoKPiA+ICsgICAg
+ICAgICAgICAgICB2aXJ0aW9fdmlkZW9fY21kX2dldF9wYXJhbXModnYsIHN0cmVhbSwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBWSVJUSU9fVklERU9fUVVF
+VUVfVFlQRV9PVVRQVVQpOwo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192aWRlb19xdWV1ZV9y
+ZXNfY2hnX2V2ZW50KHN0cmVhbSk7Cj4gPiArICAgICAgICAgICAgICAgaWYgKHN0cmVhbS0+c3Rh
+dGUgPT0gU1RSRUFNX1NUQVRFX0lOSVQpIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHN0
+cmVhbS0+c3RhdGUgPSBTVFJFQU1fU1RBVEVfTUVUQURBVEE7Cj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICB3YWtlX3VwKCZ2di0+d3EpOwo+ID4gKyAgICAgICAgICAgICAgIH0KPiA+ICsgICAg
+ICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAg
+ICB2NGwyX3dhcm4oJnZ2LT52NGwyX2RldiwgImZhaWxlZCB0byBxdWV1ZSBldmVudCBidWZmZXJc
+biIpOwo+ID4gKyAgICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiAr
+ICAgICAgIG1lbXNldCh2YnVmLT5yZXNwX2J1ZiwgMCwgdmJ1Zi0+cmVzcF9zaXplKTsKPiA+ICsg
+ICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX3F1ZXVlX2V2ZW50X2J1ZmZlcih2diwgdmJ1Zik7Cj4g
+PiArICAgICAgIGlmIChyZXQpCj4gPiArICAgICAgICAgICAgICAgdjRsMl93YXJuKCZ2di0+djRs
+Ml9kZXYsICJxdWV1ZSBldmVudCBidWZmZXIgZmFpbGVkXG4iKTsKPiA+ICt9Cj4gPiArCj4gPiAr
+aW50IHZpcnRpb192aWRlb19hbGxvY19ldmVudHMoc3RydWN0IHZpcnRpb192aWRlbyAqdnYsIHNp
+emVfdCBudW0pCj4gPiArewo+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gKyAgICAgICBzaXplX3Qg
+aTsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVmZmVyICp2YnVmOwo+ID4gKwo+
+ID4gKyAgICAgICBmb3IgKGkgPSAwOyBpIDwgbnVtOyBpKyspIHsKPiA+ICsgICAgICAgICAgICAg
+ICB2YnVmID0gdmlydGlvX3ZpZGVvX2dldF92YnVmKHZ2LCAwLAo+ID4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fdmlkZW9f
+ZXZlbnQpLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+TlVMTCwgdmlydGlvX3ZpZGVvX2V2ZW50X2NiKTsKPiA+ICsgICAgICAgICAgICAgICBpZiAoSVNf
+RVJSKHZidWYpKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIFBUUl9FUlIodmJ1
+Zik7Cj4gPiArCj4gPiArICAgICAgICAgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX3F1ZXVlX2V2
+ZW50X2J1ZmZlcih2diwgdmJ1Zik7Cj4gPiArICAgICAgICAgICAgICAgaWYgKHJldCkKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gPiArICAgICAgIH0KPiA+ICsKPiA+
+ICsgICAgICAgcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fY21k
+X3N0cmVhbV9jcmVhdGUoc3RydWN0IHZpcnRpb192aWRlbyAqdnYsIHVpbnQzMl90IHN0cmVhbV9p
+ZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZW51bSB2aXJ0aW9fdmlk
+ZW9fZm9ybWF0IGZvcm1hdCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+Y29uc3QgY2hhciAqdGFnKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19z
+dHJlYW1fY3JlYXRlICpyZXFfcDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVm
+ZmVyICp2YnVmOwo+ID4gKwo+ID4gKyAgICAgICByZXFfcCA9IHZpcnRpb192aWRlb19hbGxvY19y
+ZXEodnYsICZ2YnVmLCBzaXplb2YoKnJlcV9wKSk7Cj4gPiArICAgICAgIGlmIChJU19FUlIocmVx
+X3ApKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiBQVFJfRVJSKHJlcV9wKTsKPiA+ICsKPiA+
+ICsgICAgICAgcmVxX3AtPmhkci50eXBlID0gY3B1X3RvX2xlMzIoVklSVElPX1ZJREVPX0NNRF9T
+VFJFQU1fQ1JFQVRFKTsKPiA+ICsgICAgICAgcmVxX3AtPmhkci5zdHJlYW1faWQgPSBjcHVfdG9f
+bGUzMihzdHJlYW1faWQpOwo+ID4gKyAgICAgICByZXFfcC0+aW5fbWVtX3R5cGUgPSBjcHVfdG9f
+bGUzMihWSVJUSU9fVklERU9fTUVNX1RZUEVfR1VFU1RfUEFHRVMpOwo+ID4gKyAgICAgICByZXFf
+cC0+b3V0X21lbV90eXBlID0gY3B1X3RvX2xlMzIoVklSVElPX1ZJREVPX01FTV9UWVBFX0dVRVNU
+X1BBR0VTKTsKPiA+ICsgICAgICAgcmVxX3AtPmNvZGVkX2Zvcm1hdCA9IGNwdV90b19sZTMyKGZv
+cm1hdCk7Cj4gPiArICAgICAgIHN0cm5jcHkocmVxX3AtPnRhZywgdGFnLCBzaXplb2YocmVxX3At
+PnRhZykgLSAxKTsKPiA+ICsgICAgICAgcmVxX3AtPnRhZ1tzaXplb2YocmVxX3AtPnRhZykgLSAx
+XSA9IDA7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiB2aXJ0aW9fdmlkZW9fcXVldWVfY21kX2J1
+ZmZlcih2diwgdmJ1Zik7Cj4gPiArfQo+ID4gKwo+ID4gK2ludCB2aXJ0aW9fdmlkZW9fY21kX3N0
+cmVhbV9kZXN0cm95KHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB1aW50MzJfdCBzdHJlYW1faWQp
+Cj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbV9kZXN0cm95ICpy
+ZXFfcDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVmZmVyICp2YnVmOwo+ID4g
+Kwo+ID4gKyAgICAgICByZXFfcCA9IHZpcnRpb192aWRlb19hbGxvY19yZXEodnYsICZ2YnVmLCBz
+aXplb2YoKnJlcV9wKSk7Cj4gPiArICAgICAgIGlmIChJU19FUlIocmVxX3ApKQo+ID4gKyAgICAg
+ICAgICAgICAgIHJldHVybiBQVFJfRVJSKHJlcV9wKTsKPiA+ICsKPiA+ICsgICAgICAgcmVxX3At
+Pmhkci50eXBlID0gY3B1X3RvX2xlMzIoVklSVElPX1ZJREVPX0NNRF9TVFJFQU1fREVTVFJPWSk7
+Cj4gPiArICAgICAgIHJlcV9wLT5oZHIuc3RyZWFtX2lkID0gY3B1X3RvX2xlMzIoc3RyZWFtX2lk
+KTsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIHZpcnRpb192aWRlb19xdWV1ZV9jbWRfYnVmZmVy
+KHZ2LCB2YnVmKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19jbWRfc3RyZWFt
+X2RyYWluKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB1aW50MzJfdCBzdHJlYW1faWQpCj4gPiAr
+ewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbV9kcmFpbiAqcmVxX3A7Cj4g
+PiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAqdmJ1ZjsKPiA+ICsKPiA+ICsg
+ICAgICAgcmVxX3AgPSB2aXJ0aW9fdmlkZW9fYWxsb2NfcmVxKHZ2LCAmdmJ1Ziwgc2l6ZW9mKCpy
+ZXFfcCkpOwo+ID4gKyAgICAgICBpZiAoSVNfRVJSKHJlcV9wKSkKPiA+ICsgICAgICAgICAgICAg
+ICByZXR1cm4gUFRSX0VSUihyZXFfcCk7Cj4gPiArCj4gPiArICAgICAgIHJlcV9wLT5oZHIudHlw
+ZSA9IGNwdV90b19sZTMyKFZJUlRJT19WSURFT19DTURfU1RSRUFNX0RSQUlOKTsKPiA+ICsgICAg
+ICAgcmVxX3AtPmhkci5zdHJlYW1faWQgPSBjcHVfdG9fbGUzMihzdHJlYW1faWQpOwo+ID4gKwo+
+ID4gKyAgICAgICByZXR1cm4gdmlydGlvX3ZpZGVvX3F1ZXVlX2NtZF9idWZmZXIodnYsIHZidWYp
+Owo+ID4gK30KPiA+ICsKPiA+ICtpbnQgdmlydGlvX3ZpZGVvX2NtZF9yZXNvdXJjZV9jcmVhdGUo
+c3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgdWludDMyX3Qgc3RyZWFtX2lkLCB1aW50MzJfdCByZXNvdXJjZV9pZCwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1aW50MzJfdCBxdWV1ZV90eXBlLAo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlk
+ZW9fbWVtX2VudHJ5ICplbnRzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHVuc2lnbmVkIGludCBudW1fcGxhbmVzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHVuc2lnbmVkIGludCAqbnVtX2VudHJ5KQo+ID4gK3sKPiA+ICsgICAgICAg
+dW5zaWduZWQgaW50IGkgPSAwLCBuZW50cyA9IDA7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9f
+dmlkZW9fcmVzb3VyY2VfY3JlYXRlICpyZXFfcDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192
+aWRlb192YnVmZmVyICp2YnVmOwo+ID4gKwo+ID4gKyAgICAgICByZXFfcCA9IHZpcnRpb192aWRl
+b19hbGxvY19yZXEodnYsICZ2YnVmLCBzaXplb2YoKnJlcV9wKSk7Cj4gPiArICAgICAgIGlmIChJ
+U19FUlIocmVxX3ApKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiBQVFJfRVJSKHJlcV9wKTsK
+PiA+ICsKPiA+ICsgICAgICAgcmVxX3AtPmhkci50eXBlID0gY3B1X3RvX2xlMzIoVklSVElPX1ZJ
+REVPX0NNRF9SRVNPVVJDRV9DUkVBVEUpOwo+ID4gKyAgICAgICByZXFfcC0+aGRyLnN0cmVhbV9p
+ZCA9IGNwdV90b19sZTMyKHN0cmVhbV9pZCk7Cj4gPiArICAgICAgIHJlcV9wLT5yZXNvdXJjZV9p
+ZCA9IGNwdV90b19sZTMyKHJlc291cmNlX2lkKTsKPiA+ICsgICAgICAgcmVxX3AtPnF1ZXVlX3R5
+cGUgPSBjcHVfdG9fbGUzMihxdWV1ZV90eXBlKTsKPiA+ICsgICAgICAgIHJlcV9wLT5udW1fcGxh
+bmVzID0gY3B1X3RvX2xlMzIobnVtX3BsYW5lcyk7Cj4gPiArCj4gPiArICAgICAgIGZvciAoaSA9
+IDA7IGkgPCBudW1fcGxhbmVzOyBpKyspIHsKPiA+ICsgICAgICAgICAgICAgICBuZW50cyArPSBu
+dW1fZW50cnlbaV07Cj4gPiArICAgICAgICAgICAgICAgcmVxX3AtPm51bV9lbnRyaWVzW2ldID0g
+Y3B1X3RvX2xlMzIobnVtX2VudHJ5W2ldKTsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAg
+ICB2YnVmLT5kYXRhX2J1ZiA9IGVudHM7Cj4gPiArICAgICAgIHZidWYtPmRhdGFfc2l6ZSA9IHNp
+emVvZigqZW50cykgKiBuZW50czsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIHZpcnRpb192aWRl
+b19xdWV1ZV9jbWRfYnVmZmVyKHZ2LCB2YnVmKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRp
+b192aWRlb19jbWRfcmVzb3VyY2VfZGVzdHJveV9hbGwoc3RydWN0IHZpcnRpb192aWRlbyAqdnYs
+Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgZW51bSB2aXJ0aW9fdmlkZW9fcXVldWVfdHlwZSBxdHlwZSkKPiA+ICt7
+Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fcmVzb3VyY2VfZGVzdHJveV9hbGwgKnJl
+cV9wOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWY7Cj4gPiAr
+Cj4gPiArICAgICAgIHJlcV9wID0gdmlydGlvX3ZpZGVvX2FsbG9jX3JlcSh2diwgJnZidWYsIHNp
+emVvZigqcmVxX3ApKTsKPiA+ICsgICAgICAgaWYgKElTX0VSUihyZXFfcCkpCj4gPiArICAgICAg
+ICAgICAgICAgcmV0dXJuIFBUUl9FUlIocmVxX3ApOwo+ID4gKwo+ID4gKyAgICAgICByZXFfcC0+
+aGRyLnR5cGUgPSBjcHVfdG9fbGUzMihWSVJUSU9fVklERU9fQ01EX1JFU09VUkNFX0RFU1RST1lf
+QUxMKTsKPiA+ICsgICAgICAgcmVxX3AtPmhkci5zdHJlYW1faWQgPSBjcHVfdG9fbGUzMihzdHJl
+YW0tPnN0cmVhbV9pZCk7Cj4gPiArICAgICAgIHJlcV9wLT5xdWV1ZV90eXBlID0gY3B1X3RvX2xl
+MzIocXR5cGUpOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdmlydGlvX3ZpZGVvX3F1ZXVlX2Nt
+ZF9idWZmZXIodnYsIHZidWYpOwo+IAo+IFdlIHNob3VsZCBtYWtlIERFU1RST1lfQUxMIGEgc3lu
+Y2hyb3Vub3VzIGNvbW1hbmQuCj4gSXQgc2VlbXMgdGhhdCBzdHJlYW0tPntzcmMsZHN0fV9kZXN0
+cm95ZWQgaXMgZGVmaW5lZCBidXQgbm90IHVzZWQuCj4gCj4gPiArfQo+ID4gKwo+ID4gK3N0YXRp
+YyB2b2lkCj4gPiArdmlydGlvX3ZpZGVvX2NtZF9yZXNvdXJjZV9xdWV1ZV9jYihzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3Ry
+dWN0IHZpcnRpb192aWRlb192YnVmZmVyICp2YnVmKQo+ID4gK3sKPiA+ICsgICAgICAgdWludDMy
+X3QgZmxhZ3MsIGJ5dGVzdXNlZDsKPiA+ICsgICAgICAgdWludDY0X3QgdGltZXN0YW1wOwo+ID4g
+KyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2J1ZmZlciAqdmlydGlvX3ZiID0gdmJ1Zi0+cHJp
+djsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19yZXNvdXJjZV9xdWV1ZV9yZXNwICpy
+ZXNwID0KPiA+ICsgICAgICAgICAgICAgICAoc3RydWN0IHZpcnRpb192aWRlb19yZXNvdXJjZV9x
+dWV1ZV9yZXNwICopdmJ1Zi0+cmVzcF9idWY7Cj4gPiArCj4gPiArICAgICAgIGZsYWdzID0gbGUz
+Ml90b19jcHUocmVzcC0+ZmxhZ3MpOwo+ID4gKyAgICAgICBieXRlc3VzZWQgPSBsZTMyX3RvX2Nw
+dShyZXNwLT5zaXplKTsKPiA+ICsgICAgICAgdGltZXN0YW1wID0gbGU2NF90b19jcHUocmVzcC0+
+dGltZXN0YW1wKTsKPiA+ICsKPiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX2J1Zl9kb25lKHZpcnRp
+b192YiwgZmxhZ3MsIHRpbWVzdGFtcCwgYnl0ZXN1c2VkKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50
+IHZpcnRpb192aWRlb19jbWRfcmVzb3VyY2VfcXVldWUoc3RydWN0IHZpcnRpb192aWRlbyAqdnYs
+IHVpbnQzMl90IHN0cmVhbV9pZCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fYnVmZmVyICp2aXJ0aW9fdmIsCj4gPiArICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICB1aW50MzJfdCBkYXRhX3NpemVbXSwKPiA+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQ4X3QgbnVtX2RhdGFfc2l6ZSwgdWlu
+dDMyX3QgcXVldWVfdHlwZSkKPiA+ICt7Cj4gPiArICAgICAgIHVpbnQ4X3QgaTsKPiA+ICsgICAg
+ICAgc3RydWN0IHZpcnRpb192aWRlb19yZXNvdXJjZV9xdWV1ZSAqcmVxX3A7Cj4gPiArICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW9fcmVzb3VyY2VfcXVldWVfcmVzcCAqcmVzcF9wOwo+ID4gKyAg
+ICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWY7Cj4gPiArICAgICAgIHNpemVf
+dCByZXNwX3NpemUgPSBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19yZXNvdXJjZV9xdWV1ZV9y
+ZXNwKTsKPiA+ICsKPiA+ICsgICAgICAgcmVxX3AgPSB2aXJ0aW9fdmlkZW9fYWxsb2NfcmVxX3Jl
+c3AodnYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2
+aXJ0aW9fdmlkZW9fY21kX3Jlc291cmNlX3F1ZXVlX2NiLAo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAmdmJ1Ziwgc2l6ZW9mKCpyZXFfcCksIHJlc3Bfc2l6
+ZSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTlVMTCk7
+Cj4gPiArICAgICAgIGlmIChJU19FUlIocmVxX3ApKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVy
+biBQVFJfRVJSKHJlcV9wKTsKPiA+ICsKPiA+ICsgICAgICAgcmVxX3AtPmhkci50eXBlID0gY3B1
+X3RvX2xlMzIoVklSVElPX1ZJREVPX0NNRF9SRVNPVVJDRV9RVUVVRSk7Cj4gPiArICAgICAgIHJl
+cV9wLT5oZHIuc3RyZWFtX2lkID0gY3B1X3RvX2xlMzIoc3RyZWFtX2lkKTsKPiA+ICsgICAgICAg
+cmVxX3AtPnF1ZXVlX3R5cGUgPSBjcHVfdG9fbGUzMihxdWV1ZV90eXBlKTsKPiA+ICsgICAgICAg
+cmVxX3AtPnJlc291cmNlX2lkID0gY3B1X3RvX2xlMzIodmlydGlvX3ZiLT5yZXNvdXJjZV9pZCk7
+Cj4gPiArICAgICAgIHJlcV9wLT5udW1fZGF0YV9zaXplcyA9IG51bV9kYXRhX3NpemU7Cj4gPiAr
+ICAgICAgIHJlcV9wLT50aW1lc3RhbXAgPQo+ID4gKyAgICAgICAgICAgICAgIGNwdV90b19sZTY0
+KHZpcnRpb192Yi0+djRsMl9tMm1fdmIudmIudmIyX2J1Zi50aW1lc3RhbXApOwo+ID4gKwo+ID4g
+KyAgICAgICBmb3IgKGkgPSAwOyBpIDwgbnVtX2RhdGFfc2l6ZTsgKytpKQo+ID4gKyAgICAgICAg
+ICAgICAgIHJlcV9wLT5kYXRhX3NpemVzW2ldID0gY3B1X3RvX2xlMzIoZGF0YV9zaXplW2ldKTsK
+PiA+ICsKPiA+ICsgICAgICAgcmVzcF9wID0gKHN0cnVjdCB2aXJ0aW9fdmlkZW9fcmVzb3VyY2Vf
+cXVldWVfcmVzcCAqKXZidWYtPnJlc3BfYnVmOwo+ID4gKyAgICAgICBtZW1zZXQocmVzcF9wLCAw
+LCBzaXplb2YoKnJlc3BfcCkpOwo+ID4gKwo+ID4gKyAgICAgICB2YnVmLT5wcml2ID0gdmlydGlv
+X3ZiOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdmlydGlvX3ZpZGVvX3F1ZXVlX2NtZF9idWZm
+ZXIodnYsIHZidWYpOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgdm9pZAo+ID4gK3ZpcnRpb192
+aWRlb19jbWRfcXVldWVfY2xlYXJfY2Ioc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAq
+dmJ1ZikKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJl
+YW0gPSB2YnVmLT5wcml2Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1ZXVlX2Ns
+ZWFyICpyZXFfcCA9Cj4gPiArICAgICAgICAgICAgICAgKHN0cnVjdCB2aXJ0aW9fdmlkZW9fcXVl
+dWVfY2xlYXIgKil2YnVmLT5idWY7Cj4gPiArCj4gPiArICAgICAgIGlmIChsZTMyX3RvX2NwdShy
+ZXFfcC0+cXVldWVfdHlwZSkgPT0gVklSVElPX1ZJREVPX1FVRVVFX1RZUEVfSU5QVVQpCj4gPiAr
+ICAgICAgICAgICAgICAgc3RyZWFtLT5zcmNfY2xlYXJlZCA9IHRydWU7Cj4gPiArICAgICAgIGVs
+c2UKPiA+ICsgICAgICAgICAgICAgICBzdHJlYW0tPmRzdF9jbGVhcmVkID0gdHJ1ZTsKPiA+ICsK
+PiA+ICsgICAgICAgd2FrZV91cCgmdnYtPndxKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRp
+b192aWRlb19jbWRfcXVldWVfY2xlYXIoc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAq
+c3RyZWFtLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3QgcXVl
+dWVfdHlwZSkKPiA+ICt7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fcXVldWVfY2xl
+YXIgKnJlcV9wOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWY7
+Cj4gPiArCj4gPiArICAgICAgIHJlcV9wID0gdmlydGlvX3ZpZGVvX2FsbG9jX3JlcV9yZXNwCj4g
+PiArICAgICAgICAgICAgICAgKHZ2LCAmdmlydGlvX3ZpZGVvX2NtZF9xdWV1ZV9jbGVhcl9jYiwK
+PiA+ICsgICAgICAgICAgICAgICAgJnZidWYsIHNpemVvZigqcmVxX3ApLAo+ID4gKyAgICAgICAg
+ICAgICAgICBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19jbWRfaGRyKSwgTlVMTCk7Cj4gPiAr
+ICAgICAgIGlmIChJU19FUlIocmVxX3ApKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiBQVFJf
+RVJSKHJlcV9wKTsKPiA+ICsKPiA+ICsgICAgICAgcmVxX3AtPmhkci50eXBlID0gY3B1X3RvX2xl
+MzIoVklSVElPX1ZJREVPX0NNRF9RVUVVRV9DTEVBUik7Cj4gPiArICAgICAgIHJlcV9wLT5oZHIu
+c3RyZWFtX2lkID0gY3B1X3RvX2xlMzIoc3RyZWFtLT5zdHJlYW1faWQpOwo+ID4gKyAgICAgICBy
+ZXFfcC0+cXVldWVfdHlwZSA9IGNwdV90b19sZTMyKHF1ZXVlX3R5cGUpOwo+ID4gKwo+ID4gKyAg
+ICAgICB2YnVmLT5wcml2ID0gc3RyZWFtOwo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdmlydGlv
+X3ZpZGVvX3F1ZXVlX2NtZF9idWZmZXIodnYsIHZidWYpOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0
+aWMgdm9pZAo+ID4gK3ZpcnRpb192aWRlb19xdWVyeV9jYXBzX2NiKHN0cnVjdCB2aXJ0aW9fdmlk
+ZW8gKnZ2LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRl
+b192YnVmZmVyICp2YnVmKQo+ID4gK3sKPiA+ICsgICAgICAgYm9vbCAqZ290X3Jlc3BfcCA9IHZi
+dWYtPnByaXY7Cj4gPiArICAgICAgICpnb3RfcmVzcF9wID0gdHJ1ZTsKPiA+ICsgICAgICAgd2Fr
+ZV91cCgmdnYtPndxKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19xdWVyeV9j
+YXBhYmlsaXR5KHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB2b2lkICpyZXNwX2J1ZiwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaXplX3QgcmVzcF9zaXplLCB1aW50MzJf
+dCBxdWV1ZV90eXBlKQo+ID4gK3sKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19xdWVy
+eV9jYXBhYmlsaXR5ICpyZXFfcCA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlk
+ZW9fdmJ1ZmZlciAqdmJ1ZiA9IE5VTEw7Cj4gPiArCj4gPiArICAgICAgIGlmICghdnYgfHwgIXJl
+c3BfYnVmKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtMTsKPiA+ICsKPiA+ICsgICAgICAg
+cmVxX3AgPSB2aXJ0aW9fdmlkZW9fYWxsb2NfcmVxX3Jlc3AodnYsICZ2aXJ0aW9fdmlkZW9fcXVl
+cnlfY2Fwc19jYiwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgJnZidWYsIHNpemVvZigqcmVxX3ApLCByZXNwX3NpemUsCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlc3BfYnVmKTsKPiA+ICsgICAgICAgaWYgKElT
+X0VSUihyZXFfcCkpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC0xOwo+ID4gKwo+ID4gKyAg
+ICAgICByZXFfcC0+aGRyLnR5cGUgPSBjcHVfdG9fbGUzMihWSVJUSU9fVklERU9fQ01EX1FVRVJZ
+X0NBUEFCSUxJVFkpOwo+ID4gKyAgICAgICByZXFfcC0+cXVldWVfdHlwZSA9IGNwdV90b19sZTMy
+KHF1ZXVlX3R5cGUpOwo+ID4gKwo+ID4gKyAgICAgICB2YnVmLT5wcml2ID0gJnZ2LT5nb3RfY2Fw
+czsKPiA+ICsKPiA+ICsgICAgICAgcmV0dXJuIHZpcnRpb192aWRlb19xdWV1ZV9jbWRfYnVmZmVy
+KHZ2LCB2YnVmKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19xdWVyeV9jb250
+cm9sX2xldmVsKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB2b2lkICpyZXNwX2J1ZiwKPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaXplX3QgcmVzcF9zaXplLCB1aW50
+MzJfdCBmb3JtYXQpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1ZXJ5
+X2NvbnRyb2wgKnJlcV9wID0gTlVMTDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19x
+dWVyeV9jb250cm9sX2xldmVsICpjdHJsX2wgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX3ZidWZmZXIgKnZidWYgPSBOVUxMOwo+ID4gKyAgICAgICB1aW50MzJfdCByZXFf
+c2l6ZSA9IDA7Cj4gPiArCj4gPiArICAgICAgIGlmICghdnYgfHwgIXJlc3BfYnVmKQo+ID4gKyAg
+ICAgICAgICAgICAgIHJldHVybiAtMTsKPiA+ICsKPiA+ICsgICAgICAgcmVxX3NpemUgPSBzaXpl
+b2Yoc3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9jb250cm9sKSArCj4gPiArICAgICAgICAgICAg
+ICAgc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fdmlkZW9fcXVlcnlfY29udHJvbF9sZXZlbCk7Cj4gPiAr
+Cj4gPiArICAgICAgIHJlcV9wID0gdmlydGlvX3ZpZGVvX2FsbG9jX3JlcV9yZXNwKHZ2LCAmdmly
+dGlvX3ZpZGVvX3F1ZXJ5X2NhcHNfY2IsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICZ2YnVmLCByZXFfc2l6ZSwgcmVzcF9zaXplLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXNwX2J1Zik7Cj4gPiArICAgICAg
+IGlmIChJU19FUlIocmVxX3ApKQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAtMTsKPiA+ICsK
+PiA+ICsgICAgICAgcmVxX3AtPmhkci50eXBlID0gY3B1X3RvX2xlMzIoVklSVElPX1ZJREVPX0NN
+RF9RVUVSWV9DT05UUk9MKTsKPiA+ICsgICAgICAgcmVxX3AtPmNvbnRyb2wgPSBjcHVfdG9fbGUz
+MihWSVJUSU9fVklERU9fQ09OVFJPTF9MRVZFTCk7Cj4gPiArICAgICAgIGN0cmxfbCA9ICh2b2lk
+ICopKChjaGFyICopcmVxX3AgKwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICBzaXplb2Yo
+c3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9jb250cm9sKSk7Cj4gPiArICAgICAgIGN0cmxfbC0+
+Zm9ybWF0ID0gY3B1X3RvX2xlMzIoZm9ybWF0KTsKPiA+ICsKPiA+ICsgICAgICAgdmJ1Zi0+cHJp
+diA9ICZ2di0+Z290X2NvbnRyb2w7Cj4gPiArCj4gPiArICAgICAgIHJldHVybiB2aXJ0aW9fdmlk
+ZW9fcXVldWVfY21kX2J1ZmZlcih2diwgdmJ1Zik7Cj4gPiArfQo+ID4gKwo+ID4gK2ludCB2aXJ0
+aW9fdmlkZW9fcXVlcnlfY29udHJvbF9wcm9maWxlKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LCB2
+b2lkICpyZXNwX2J1ZiwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHNpemVfdCByZXNwX3NpemUsIHVpbnQzMl90IGZvcm1hdCkKPiA+ICt7Cj4gPiArICAgICAgIHN0
+cnVjdCB2aXJ0aW9fdmlkZW9fcXVlcnlfY29udHJvbCAqcmVxX3AgPSBOVUxMOwo+ID4gKyAgICAg
+ICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1ZXJ5X2NvbnRyb2xfcHJvZmlsZSAqY3RybF9wID0gTlVM
+TDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVmZmVyICp2YnVmID0gTlVMTDsK
+PiA+ICsgICAgICAgdWludDMyX3QgcmVxX3NpemUgPSAwOwo+ID4gKwo+ID4gKyAgICAgICBpZiAo
+IXZ2IHx8ICFyZXNwX2J1ZikKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLTE7Cj4gPiArCj4g
+PiArICAgICAgIHJlcV9zaXplID0gc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fdmlkZW9fcXVlcnlfY29u
+dHJvbCkgKwo+ID4gKyAgICAgICAgICAgICAgIHNpemVvZihzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1
+ZXJ5X2NvbnRyb2xfcHJvZmlsZSk7Cj4gPiArCj4gPiArICAgICAgIHJlcV9wID0gdmlydGlvX3Zp
+ZGVvX2FsbG9jX3JlcV9yZXNwKHZ2LCAmdmlydGlvX3ZpZGVvX3F1ZXJ5X2NhcHNfY2IsCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2YnVmLCByZXFfc2l6
+ZSwgcmVzcF9zaXplLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICByZXNwX2J1Zik7Cj4gPiArICAgICAgIGlmIChJU19FUlIocmVxX3ApKQo+ID4gKyAgICAg
+ICAgICAgICAgIHJldHVybiAtMTsKPiA+ICsKPiA+ICsgICAgICAgcmVxX3AtPmhkci50eXBlID0g
+Y3B1X3RvX2xlMzIoVklSVElPX1ZJREVPX0NNRF9RVUVSWV9DT05UUk9MKTsKPiA+ICsgICAgICAg
+cmVxX3AtPmNvbnRyb2wgPSBjcHVfdG9fbGUzMihWSVJUSU9fVklERU9fQ09OVFJPTF9QUk9GSUxF
+KTsKPiA+ICsgICAgICAgY3RybF9wID0gKHZvaWQgKikoKGNoYXIgKilyZXFfcCArCj4gPiArICAg
+ICAgICAgICAgICAgICAgICAgICAgIHNpemVvZihzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1ZXJ5X2Nv
+bnRyb2wpKTsKPiA+ICsgICAgICAgY3RybF9wLT5mb3JtYXQgPSBjcHVfdG9fbGUzMihmb3JtYXQp
+Owo+ID4gKwo+ID4gKyAgICAgICB2YnVmLT5wcml2ID0gJnZ2LT5nb3RfY29udHJvbDsKPiA+ICsK
+PiA+ICsgICAgICAgcmV0dXJuIHZpcnRpb192aWRlb19xdWV1ZV9jbWRfYnVmZmVyKHZ2LCB2YnVm
+KTsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQKPiA+ICt2aXJ0aW9fdmlkZW9fY21kX2dl
+dF9wYXJhbXNfY2Ioc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVmZmVyICp2YnVmKQo+ID4gK3sK
+PiA+ICsgICAgICAgaW50IGk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fZ2V0X3Bh
+cmFtc19yZXNwICpyZXNwID0KPiA+ICsgICAgICAgICAgICAgICAoc3RydWN0IHZpcnRpb192aWRl
+b19nZXRfcGFyYW1zX3Jlc3AgKil2YnVmLT5yZXNwX2J1ZjsKPiA+ICsgICAgICAgc3RydWN0IHZp
+cnRpb192aWRlb19wYXJhbXMgKnBhcmFtcyA9ICZyZXNwLT5wYXJhbXM7Cj4gPiArICAgICAgIHN0
+cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtICpzdHJlYW0gPSB2YnVmLT5wcml2Owo+ID4gKyAgICAg
+ICBlbnVtIHZpcnRpb192aWRlb19xdWV1ZV90eXBlIHF1ZXVlX3R5cGU7Cj4gPiArICAgICAgIHN0
+cnVjdCB2aWRlb19mb3JtYXRfaW5mbyAqZm9ybWF0X2luZm8gPSBOVUxMOwo+ID4gKwo+ID4gKyAg
+ICAgICBxdWV1ZV90eXBlID0gbGUzMl90b19jcHUocGFyYW1zLT5xdWV1ZV90eXBlKTsKPiA+ICsg
+ICAgICAgaWYgKHF1ZXVlX3R5cGUgPT0gVklSVElPX1ZJREVPX1FVRVVFX1RZUEVfSU5QVVQpCj4g
+PiArICAgICAgICAgICAgICAgZm9ybWF0X2luZm8gPSAmc3RyZWFtLT5pbl9pbmZvOwo+ID4gKyAg
+ICAgICBlbHNlCj4gPiArICAgICAgICAgICAgICAgZm9ybWF0X2luZm8gPSAmc3RyZWFtLT5vdXRf
+aW5mbzsKPiA+ICsKPiA+ICsgICAgICAgaWYgKCFmb3JtYXRfaW5mbykKPiA+ICsgICAgICAgICAg
+ICAgICByZXR1cm47Cj4gPiArCj4gPiArICAgICAgIGZvcm1hdF9pbmZvLT5mcmFtZV9yYXRlID0g
+bGUzMl90b19jcHUocGFyYW1zLT5mcmFtZV9yYXRlKTsKPiA+ICsgICAgICAgZm9ybWF0X2luZm8t
+PmZyYW1lX3dpZHRoID0gbGUzMl90b19jcHUocGFyYW1zLT5mcmFtZV93aWR0aCk7Cj4gPiArICAg
+ICAgIGZvcm1hdF9pbmZvLT5mcmFtZV9oZWlnaHQgPSBsZTMyX3RvX2NwdShwYXJhbXMtPmZyYW1l
+X2hlaWdodCk7Cj4gPiArICAgICAgIGZvcm1hdF9pbmZvLT5taW5fYnVmZmVycyA9IGxlMzJfdG9f
+Y3B1KHBhcmFtcy0+bWluX2J1ZmZlcnMpOwo+ID4gKyAgICAgICBmb3JtYXRfaW5mby0+bWF4X2J1
+ZmZlcnMgPSBsZTMyX3RvX2NwdShwYXJhbXMtPm1heF9idWZmZXJzKTsKPiA+ICsgICAgICAgZm9y
+bWF0X2luZm8tPmZvdXJjY19mb3JtYXQgPQo+ID4gKyAgICAgICAgICAgICAgIHZpcnRpb192aWRl
+b19mb3JtYXRfdG9fdjRsMihsZTMyX3RvX2NwdShwYXJhbXMtPmZvcm1hdCkpOwo+ID4gKwo+ID4g
+KyAgICAgICBmb3JtYXRfaW5mby0+Y3JvcC50b3AgPSBsZTMyX3RvX2NwdShwYXJhbXMtPmNyb3Au
+dG9wKTsKPiA+ICsgICAgICAgZm9ybWF0X2luZm8tPmNyb3AubGVmdCA9IGxlMzJfdG9fY3B1KHBh
+cmFtcy0+Y3JvcC5sZWZ0KTsKPiA+ICsgICAgICAgZm9ybWF0X2luZm8tPmNyb3Aud2lkdGggPSBs
+ZTMyX3RvX2NwdShwYXJhbXMtPmNyb3Aud2lkdGgpOwo+ID4gKyAgICAgICBmb3JtYXRfaW5mby0+
+Y3JvcC5oZWlnaHQgPSBsZTMyX3RvX2NwdShwYXJhbXMtPmNyb3AuaGVpZ2h0KTsKPiA+ICsKPiA+
+ICsgICAgICAgZm9ybWF0X2luZm8tPm51bV9wbGFuZXMgPSBsZTMyX3RvX2NwdShwYXJhbXMtPm51
+bV9wbGFuZXMpOwo+ID4gKyAgICAgICBmb3IgKGkgPSAwOyBpIDwgbGUzMl90b19jcHUocGFyYW1z
+LT5udW1fcGxhbmVzKTsgaSsrKSB7Cj4gPiArICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192
+aWRlb19wbGFuZV9mb3JtYXQgKnBsYW5lX2Zvcm1hdHMgPQo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZwYXJhbXMtPnBsYW5lX2Zvcm1hdHNbaV07
+Cj4gPiArICAgICAgICAgICAgICAgc3RydWN0IHZpZGVvX3BsYW5lX2Zvcm1hdCAqcGxhbmVfZm9y
+bWF0ID0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAmZm9ybWF0X2luZm8tPnBsYW5lX2Zvcm1hdFtpXTsKPiA+ICsKPiA+ICsgICAgICAgICAgICAg
+ICBwbGFuZV9mb3JtYXQtPnBsYW5lX3NpemUgPQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgbGUzMl90b19jcHUocGxhbmVfZm9ybWF0cy0+cGxhbmVfc2l6ZSk7Cj4gPiArICAg
+ICAgICAgICAgICAgcGxhbmVfZm9ybWF0LT5zdHJpZGUgPSBsZTMyX3RvX2NwdShwbGFuZV9mb3Jt
+YXRzLT5zdHJpZGUpOwo+ID4gKyAgICAgICB9Cj4gPiArCj4gPiArICAgICAgIGZvcm1hdF9pbmZv
+LT5pc191cGRhdGVkID0gdHJ1ZTsKPiA+ICsgICAgICAgd2FrZV91cCgmdnYtPndxKTsKPiA+ICt9
+Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19jbWRfZ2V0X3BhcmFtcyhzdHJ1Y3QgdmlydGlv
+X3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHVpbnQzMl90IHF1ZXVlX3R5cGUpCj4gPiArewo+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4g
+KyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2dldF9wYXJhbXMgKnJlcV9wID0gTlVMTDsKPiA+
+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb192YnVmZmVyICp2YnVmID0gTlVMTDsKPiA+ICsg
+ICAgICAgc3RydWN0IHZpcnRpb192aWRlb19nZXRfcGFyYW1zX3Jlc3AgKnJlc3BfcDsKPiA+ICsg
+ICAgICAgc3RydWN0IHZpZGVvX2Zvcm1hdF9pbmZvICpmb3JtYXRfaW5mbyA9IE5VTEw7Cj4gPiAr
+ICAgICAgIHNpemVfdCByZXNwX3NpemUgPSBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19nZXRf
+cGFyYW1zX3Jlc3ApOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoIXZ2IHx8ICFzdHJlYW0pCj4gPiAr
+ICAgICAgICAgICAgICAgcmV0dXJuIC0xOwo+ID4gKwo+ID4gKyAgICAgICByZXFfcCA9IHZpcnRp
+b192aWRlb19hbGxvY19yZXFfcmVzcCh2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAmdmlydGlvX3ZpZGVvX2NtZF9nZXRfcGFyYW1zX2NiLAo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZ2YnVmLCBzaXplb2YoKnJlcV9wKSwg
+cmVzcF9zaXplLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5V
+TEwpOwo+ID4gKwo+ID4gKyAgICAgICBpZiAoSVNfRVJSKHJlcV9wKSkKPiA+ICsgICAgICAgICAg
+ICAgICByZXR1cm4gUFRSX0VSUihyZXFfcCk7Cj4gPiArCj4gPiArICAgICAgIHJlcV9wLT5oZHIu
+dHlwZSA9IGNwdV90b19sZTMyKFZJUlRJT19WSURFT19DTURfR0VUX1BBUkFNUyk7Cj4gPiArICAg
+ICAgIHJlcV9wLT5oZHIuc3RyZWFtX2lkID0gY3B1X3RvX2xlMzIoc3RyZWFtLT5zdHJlYW1faWQp
+Owo+ID4gKyAgICAgICByZXFfcC0+cXVldWVfdHlwZSA9IGNwdV90b19sZTMyKHF1ZXVlX3R5cGUp
+Owo+ID4gKwo+ID4gKyAgICAgICByZXNwX3AgPSAoc3RydWN0IHZpcnRpb192aWRlb19nZXRfcGFy
+YW1zX3Jlc3AgKil2YnVmLT5yZXNwX2J1ZjsKPiA+ICsgICAgICAgbWVtc2V0KHJlc3BfcCwgMCwg
+c2l6ZW9mKCpyZXNwX3ApKTsKPiA+ICsKPiA+ICsgICAgICAgaWYgKHJlcV9wLT5xdWV1ZV90eXBl
+ID09IFZJUlRJT19WSURFT19RVUVVRV9UWVBFX0lOUFVUKQo+ID4gKyAgICAgICAgICAgICAgIGZv
+cm1hdF9pbmZvID0gJnN0cmVhbS0+aW5faW5mbzsKPiA+ICsgICAgICAgZWxzZQo+ID4gKyAgICAg
+ICAgICAgICAgIGZvcm1hdF9pbmZvID0gJnN0cmVhbS0+b3V0X2luZm87Cj4gPiArCj4gPiArICAg
+ICAgIGZvcm1hdF9pbmZvLT5pc191cGRhdGVkID0gZmFsc2U7Cj4gPiArCj4gPiArICAgICAgIHZi
+dWYtPnByaXYgPSBzdHJlYW07Cj4gPiArICAgICAgIHJldCA9IHZpcnRpb192aWRlb19xdWV1ZV9j
+bWRfYnVmZmVyKHZ2LCB2YnVmKTsKPiA+ICsgICAgICAgaWYgKHJldCkKPiA+ICsgICAgICAgICAg
+ICAgICByZXR1cm4gcmV0Owo+ID4gKwo+ID4gKyAgICAgICByZXQgPSB3YWl0X2V2ZW50X3RpbWVv
+dXQodnYtPndxLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZm9ybWF0X2lu
+Zm8tPmlzX3VwZGF0ZWQsIDUgKiBIWik7Cj4gPiArICAgICAgIGlmIChyZXQgPT0gMCkgewo+ID4g
+KyAgICAgICAgICAgICAgIHY0bDJfZXJyKCZ2di0+djRsMl9kZXYsICJ0aW1lZCBvdXQgd2FpdGlu
+ZyBmb3IgZ2V0X3BhcmFtc1xuIik7Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC0xOwo+ID4g
+KyAgICAgICB9Cj4gPiArICAgICAgIHJldHVybiAwOwo+ID4gK30KPiA+ICsKPiA+ICtpbnQKPiA+
+ICt2aXJ0aW9fdmlkZW9fY21kX3NldF9wYXJhbXMoc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0g
+KnN0cmVhbSwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdmlkZW9fZm9y
+bWF0X2luZm8gKmZvcm1hdF9pbmZvLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgIHVp
+bnQzMl90IHF1ZXVlX3R5cGUpCj4gCj4gSSB0aGluayB3ZSBuZWVkIHRvIG1ha2UgU0VUX1BBUkFN
+UyBzeW5jaHJvbm91cz8KPiBFdmVuIGdldF9wYXJhbXMgaXMgc3luY2hybm91cyBhbmQgY2FsbGVk
+IGFmdGVyIHNldF9wYXJhbXMsIGdldF9wYXJhbXMKPiBjYW4gcmV0dXJuIHBhcmFtZXRlcnMgdGhh
+dCBpcyBub3QgY2hhbmdlZCBieSBzZXRfcGFyYW1zLgo+IAo+ID4gK3sKPiA+ICsgICAgICAgaW50
+IGk7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fc2V0X3BhcmFtcyAqcmVxX3A7Cj4g
+PiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAqdmJ1ZjsKPiA+ICsKPiA+ICsg
+ICAgICAgcmVxX3AgPSB2aXJ0aW9fdmlkZW9fYWxsb2NfcmVxKHZ2LCAmdmJ1Ziwgc2l6ZW9mKCpy
+ZXFfcCkpOwo+ID4gKyAgICAgICBpZiAoSVNfRVJSKHJlcV9wKSkKPiA+ICsgICAgICAgICAgICAg
+ICByZXR1cm4gUFRSX0VSUihyZXFfcCk7Cj4gPiArCj4gPiArICAgICAgIHJlcV9wLT5oZHIudHlw
+ZSA9IGNwdV90b19sZTMyKFZJUlRJT19WSURFT19DTURfU0VUX1BBUkFNUyk7Cj4gPiArICAgICAg
+IHJlcV9wLT5oZHIuc3RyZWFtX2lkID0gY3B1X3RvX2xlMzIoc3RyZWFtLT5zdHJlYW1faWQpOwo+
+ID4gKyAgICAgICByZXFfcC0+cGFyYW1zLnF1ZXVlX3R5cGUgPSBjcHVfdG9fbGUzMihxdWV1ZV90
+eXBlKTsKPiA+ICsgICAgICAgcmVxX3AtPnBhcmFtcy5mcmFtZV9yYXRlID0gY3B1X3RvX2xlMzIo
+Zm9ybWF0X2luZm8tPmZyYW1lX3JhdGUpOwo+ID4gKyAgICAgICByZXFfcC0+cGFyYW1zLmZyYW1l
+X3dpZHRoID0gY3B1X3RvX2xlMzIoZm9ybWF0X2luZm8tPmZyYW1lX3dpZHRoKTsKPiA+ICsgICAg
+ICAgcmVxX3AtPnBhcmFtcy5mcmFtZV9oZWlnaHQgPSBjcHVfdG9fbGUzMihmb3JtYXRfaW5mby0+
+ZnJhbWVfaGVpZ2h0KTsKPiA+ICsgICAgICAgcmVxX3AtPnBhcmFtcy5mb3JtYXQgPSB2aXJ0aW9f
+dmlkZW9fdjRsMl9mb3JtYXRfdG9fdmlydGlvKAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgY3B1X3RvX2xlMzIoZm9ybWF0X2luZm8tPmZvdXJjY19mb3JtYXQpKTsKPiA+ICsg
+ICAgICAgcmVxX3AtPnBhcmFtcy5taW5fYnVmZmVycyA9IGNwdV90b19sZTMyKGZvcm1hdF9pbmZv
+LT5taW5fYnVmZmVycyk7Cj4gPiArICAgICAgIHJlcV9wLT5wYXJhbXMubWF4X2J1ZmZlcnMgPSBj
+cHVfdG9fbGUzMihmb3JtYXRfaW5mby0+bWF4X2J1ZmZlcnMpOwo+ID4gKyAgICAgICByZXFfcC0+
+cGFyYW1zLm51bV9wbGFuZXMgPSBjcHVfdG9fbGUzMihmb3JtYXRfaW5mby0+bnVtX3BsYW5lcyk7
+Cj4gPiArCj4gPiArICAgICAgIGZvciAoaSA9IDA7IGkgPCBmb3JtYXRfaW5mby0+bnVtX3BsYW5l
+czsgaSsrKSB7Cj4gPiArICAgICAgICAgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19wbGFuZV9m
+b3JtYXQgKnBsYW5lX2Zvcm1hdHMgPQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgJnJlcV9w
+LT5wYXJhbXMucGxhbmVfZm9ybWF0c1tpXTsKPiA+ICsgICAgICAgICAgICAgICBzdHJ1Y3Qgdmlk
+ZW9fcGxhbmVfZm9ybWF0ICpwbGFuZV9mb3JtYXQgPQo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgJmZvcm1hdF9pbmZvLT5wbGFuZV9mb3JtYXRbaV07Cj4gPiArICAgICAgICAgICAgICAgcGxh
+bmVfZm9ybWF0cy0+cGxhbmVfc2l6ZSA9Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBjcHVfdG9fbGUzMihwbGFuZV9mb3JtYXQtPnBsYW5lX3NpemUpOwo+ID4gKyAgICAgICAg
+ICAgICAgIHBsYW5lX2Zvcm1hdHMtPnN0cmlkZSA9IGNwdV90b19sZTMyKHBsYW5lX2Zvcm1hdC0+
+c3RyaWRlKTsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4gKyAgICAgICByZXR1cm4gdmlydGlvX3Zp
+ZGVvX3F1ZXVlX2NtZF9idWZmZXIodnYsIHZidWYpOwo+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMg
+dm9pZAo+ID4gK3ZpcnRpb192aWRlb19jbWRfZ2V0X2N0cmxfcHJvZmlsZV9jYihzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWYpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1
+Y3QgdmlydGlvX3ZpZGVvX2dldF9jb250cm9sX3Jlc3AgKnJlc3AgPQo+ID4gKyAgICAgICAgICAg
+ICAgIChzdHJ1Y3QgdmlydGlvX3ZpZGVvX2dldF9jb250cm9sX3Jlc3AgKil2YnVmLT5yZXNwX2J1
+ZjsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19jb250cm9sX3ZhbF9wcm9maWxlICpy
+ZXNwX3AgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3Ry
+ZWFtID0gdmJ1Zi0+cHJpdjsKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2NvbnRyb2xfaW5mbyAq
+Y29udHJvbCA9ICZzdHJlYW0tPmNvbnRyb2w7Cj4gPiArCj4gPiArICAgICAgIGlmICghY29udHJv
+bCkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm47Cj4gPiArCj4gPiArICAgICAgIHJlc3BfcCA9
+ICh2b2lkICopKChjaGFyICopIHJlc3AgKwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICBz
+aXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19nZXRfY29udHJvbF9yZXNwKSk7Cj4gPiArCj4gPiAr
+ICAgICAgIGNvbnRyb2wtPnByb2ZpbGUgPSBsZTMyX3RvX2NwdShyZXNwX3AtPnByb2ZpbGUpOwo+
+ID4gKyAgICAgICBjb250cm9sLT5pc191cGRhdGVkID0gdHJ1ZTsKPiA+ICsgICAgICAgd2FrZV91
+cCgmdnYtPndxKTsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZvaWQKPiA+ICt2aXJ0aW9fdmlk
+ZW9fY21kX2dldF9jdHJsX2xldmVsX2NiKHN0cnVjdCB2aXJ0aW9fdmlkZW8gKnZ2LAo+ID4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZm
+ZXIgKnZidWYpCj4gPiArewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2dldF9jb250
+cm9sX3Jlc3AgKnJlc3AgPQo+ID4gKyAgICAgICAgICAgICAgIChzdHJ1Y3QgdmlydGlvX3ZpZGVv
+X2dldF9jb250cm9sX3Jlc3AgKil2YnVmLT5yZXNwX2J1ZjsKPiA+ICsgICAgICAgc3RydWN0IHZp
+cnRpb192aWRlb19jb250cm9sX3ZhbF9sZXZlbCAqcmVzcF9wID0gTlVMTDsKPiA+ICsgICAgICAg
+c3RydWN0IHZpcnRpb192aWRlb19zdHJlYW0gKnN0cmVhbSA9IHZidWYtPnByaXY7Cj4gPiArICAg
+ICAgIHN0cnVjdCB2aWRlb19jb250cm9sX2luZm8gKmNvbnRyb2wgPSAmc3RyZWFtLT5jb250cm9s
+Owo+ID4gKwo+ID4gKyAgICAgICBpZiAoIWNvbnRyb2wpCj4gPiArICAgICAgICAgICAgICAgcmV0
+dXJuOwo+ID4gKwo+ID4gKyAgICAgICByZXNwX3AgPSAodm9pZCAqKSgoY2hhciAqKXJlc3AgKwo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19n
+ZXRfY29udHJvbF9yZXNwKSk7Cj4gPiArCj4gPiArICAgICAgIGNvbnRyb2wtPmxldmVsID0gbGUz
+Ml90b19jcHUocmVzcF9wLT5sZXZlbCk7Cj4gPiArICAgICAgIGNvbnRyb2wtPmlzX3VwZGF0ZWQg
+PSB0cnVlOwo+ID4gKyAgICAgICB3YWtlX3VwKCZ2di0+d3EpOwo+ID4gK30KPiA+ICsKPiA+ICtz
+dGF0aWMgdm9pZAo+ID4gK3ZpcnRpb192aWRlb19jbWRfZ2V0X2N0cmxfYml0cmF0ZV9jYihzdHJ1
+Y3QgdmlydGlvX3ZpZGVvICp2diwKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWYpCj4gPiArewo+ID4gKyAgICAg
+ICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2dldF9jb250cm9sX3Jlc3AgKnJlc3AgPQo+ID4gKyAgICAg
+ICAgICAgICAgIChzdHJ1Y3QgdmlydGlvX3ZpZGVvX2dldF9jb250cm9sX3Jlc3AgKil2YnVmLT5y
+ZXNwX2J1ZjsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19jb250cm9sX3ZhbF9iaXRy
+YXRlICpyZXNwX3AgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVh
+bSAqc3RyZWFtID0gdmJ1Zi0+cHJpdjsKPiA+ICsgICAgICAgc3RydWN0IHZpZGVvX2NvbnRyb2xf
+aW5mbyAqY29udHJvbCA9ICZzdHJlYW0tPmNvbnRyb2w7Cj4gPiArCj4gPiArICAgICAgIGlmICgh
+Y29udHJvbCkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm47Cj4gPiArCj4gPiArICAgICAgIHJl
+c3BfcCA9ICh2b2lkICopKChjaGFyICopIHJlc3AgKwo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19nZXRfY29udHJvbF9yZXNwKSk7Cj4gPiAr
+Cj4gPiArICAgICAgIGNvbnRyb2wtPmJpdHJhdGUgPSBsZTMyX3RvX2NwdShyZXNwX3AtPmJpdHJh
+dGUpOwo+ID4gKyAgICAgICBjb250cm9sLT5pc191cGRhdGVkID0gdHJ1ZTsKPiA+ICsgICAgICAg
+d2FrZV91cCgmdnYtPndxKTsKPiA+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19jbWRf
+Z2V0X2NvbnRyb2woc3RydWN0IHZpcnRpb192aWRlbyAqdnYsCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbSAqc3RyZWFtLAo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3QgdmlydGlvX2N0cmwpCj4g
+PiArewo+ID4gKyAgICAgICBpbnQgcmV0ID0gMDsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192
+aWRlb19nZXRfY29udHJvbCAqcmVxX3AgPSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlv
+X3ZpZGVvX2dldF9jb250cm9sX3Jlc3AgKnJlc3BfcCA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVj
+dCB2aXJ0aW9fdmlkZW9fdmJ1ZmZlciAqdmJ1ZiA9IE5VTEw7Cj4gPiArICAgICAgIHNpemVfdCBy
+ZXNwX3NpemUgPSBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19nZXRfY29udHJvbF9yZXNwKTsK
+PiA+ICsgICAgICAgdmlydGlvX3ZpZGVvX3Jlc3BfY2IgY2I7Cj4gPiArCj4gPiArICAgICAgIGlm
+ICghdnYpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC0xOwo+ID4gKwo+ID4gKyAgICAgICBz
+d2l0Y2ggKHZpcnRpb19jdHJsKSB7Cj4gPiArICAgICAgIGNhc2UgVklSVElPX1ZJREVPX0NPTlRS
+T0xfUFJPRklMRToKPiA+ICsgICAgICAgICAgICAgICByZXNwX3NpemUgKz0gc2l6ZW9mKHN0cnVj
+dCB2aXJ0aW9fdmlkZW9fY29udHJvbF92YWxfcHJvZmlsZSk7Cj4gPiArICAgICAgICAgICAgICAg
+Y2IgPSAmdmlydGlvX3ZpZGVvX2NtZF9nZXRfY3RybF9wcm9maWxlX2NiOwo+ID4gKyAgICAgICAg
+ICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICBjYXNlIFZJUlRJT19WSURFT19DT05UUk9MX0xFVkVM
+Ogo+ID4gKyAgICAgICAgICAgICAgIHJlc3Bfc2l6ZSArPSBzaXplb2Yoc3RydWN0IHZpcnRpb192
+aWRlb19jb250cm9sX3ZhbF9sZXZlbCk7Cj4gPiArICAgICAgICAgICAgICAgY2IgPSAmdmlydGlv
+X3ZpZGVvX2NtZF9nZXRfY3RybF9sZXZlbF9jYjsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsK
+PiA+ICsgICAgICAgY2FzZSBWSVJUSU9fVklERU9fQ09OVFJPTF9CSVRSQVRFOgo+ID4gKyAgICAg
+ICAgICAgICAgIHJlc3Bfc2l6ZSArPSBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19jb250cm9s
+X3ZhbF9iaXRyYXRlKTsKPiA+ICsgICAgICAgICAgICAgICBjYiA9ICZ2aXJ0aW9fdmlkZW9fY21k
+X2dldF9jdHJsX2JpdHJhdGVfY2I7Cj4gPiArICAgICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAg
+ICAgIGRlZmF1bHQ6Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC0xOwo+ID4gKyAgICAgICB9
+Cj4gPiArCj4gPiArICAgICAgIHJlcV9wID0gdmlydGlvX3ZpZGVvX2FsbG9jX3JlcV9yZXNwKHZ2
+LCBjYiwgJnZidWYsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHNpemVvZigqcmVxX3ApLCByZXNwX3NpemUsIE5VTEwpOwo+ID4gKyAgICAgICBpZiAoSVNf
+RVJSKHJlcV9wKSkKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gUFRSX0VSUihyZXFfcCk7Cj4g
+PiArCj4gPiArICAgICAgIHJlcV9wLT5oZHIudHlwZSA9IGNwdV90b19sZTMyKFZJUlRJT19WSURF
+T19DTURfR0VUX0NPTlRST0wpOwo+ID4gKyAgICAgICByZXFfcC0+aGRyLnN0cmVhbV9pZCA9IGNw
+dV90b19sZTMyKHN0cmVhbS0+c3RyZWFtX2lkKTsKPiA+ICsgICAgICAgcmVxX3AtPmNvbnRyb2wg
+PSBjcHVfdG9fbGUzMih2aXJ0aW9fY3RybCk7Cj4gPiArCj4gPiArICAgICAgIHJlc3BfcCA9IChz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX2dldF9jb250cm9sX3Jlc3AgKil2YnVmLT5yZXNwX2J1ZjsKPiA+
+ICsgICAgICAgbWVtc2V0KHJlc3BfcCwgMCwgcmVzcF9zaXplKTsKPiA+ICsKPiA+ICsgICAgICAg
+c3RyZWFtLT5jb250cm9sLmlzX3VwZGF0ZWQgPSBmYWxzZTsKPiA+ICsKPiA+ICsgICAgICAgdmJ1
+Zi0+cHJpdiA9IHN0cmVhbTsKPiA+ICsgICAgICAgcmV0ID0gdmlydGlvX3ZpZGVvX3F1ZXVlX2Nt
+ZF9idWZmZXIodnYsIHZidWYpOwo+ID4gKyAgICAgICBpZiAocmV0KQo+ID4gKyAgICAgICAgICAg
+ICAgIHJldHVybiByZXQ7Cj4gPiArCj4gPiArICAgICAgIHJldCA9IHdhaXRfZXZlbnRfdGltZW91
+dCh2di0+d3EsIHN0cmVhbS0+Y29udHJvbC5pc191cGRhdGVkLCA1ICogSFopOwo+ID4gKyAgICAg
+ICBpZiAocmV0ID09IDApIHsKPiA+ICsgICAgICAgICAgICAgICB2NGwyX2VycigmdnYtPnY0bDJf
+ZGV2LCAidGltZWQgb3V0IHdhaXRpbmcgZm9yIGdldF9wYXJhbXNcbiIpOwo+ID4gKyAgICAgICAg
+ICAgICAgIHJldHVybiAtMTsKPiA+ICsgICAgICAgfQo+ID4gKyAgICAgICByZXR1cm4gMDsKPiA+
+ICt9Cj4gPiArCj4gPiAraW50IHZpcnRpb192aWRlb19jbWRfc2V0X2NvbnRyb2woc3RydWN0IHZp
+cnRpb192aWRlbyAqdnYsIHVpbnQzMl90IHN0cmVhbV9pZCwKPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHVpbnQzMl90IGNvbnRyb2wsIHVpbnQzMl90IHZhbHVlKQo+ID4gK3sK
+PiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19zZXRfY29udHJvbCAqcmVxX3AgPSBOVUxM
+Owo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX3ZidWZmZXIgKnZidWYgPSBOVUxMOwo+
+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbnRyb2xfdmFsX2xldmVsICpjdHJsX2wg
+PSBOVUxMOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbnRyb2xfdmFsX3Byb2Zp
+bGUgKmN0cmxfcCA9IE5VTEw7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fY29udHJv
+bF92YWxfYml0cmF0ZSAqY3RybF9iID0gTlVMTDsKPiA+ICsgICAgICAgc2l6ZV90IHNpemU7Cj4g
+PiArCj4gPiArICAgICAgIGlmICghdnYgfHwgdmFsdWUgPT0gMCkKPiA+ICsgICAgICAgICAgICAg
+ICByZXR1cm4gLUVJTlZBTDsKPiA+ICsKPiA+ICsgICAgICAgc3dpdGNoIChjb250cm9sKSB7Cj4g
+PiArICAgICAgIGNhc2UgVklSVElPX1ZJREVPX0NPTlRST0xfUFJPRklMRToKPiA+ICsgICAgICAg
+ICAgICAgICBzaXplID0gc2l6ZW9mKHN0cnVjdCB2aXJ0aW9fdmlkZW9fY29udHJvbF92YWxfcHJv
+ZmlsZSk7Cj4gPiArICAgICAgICAgICAgICAgYnJlYWs7Cj4gPiArICAgICAgIGNhc2UgVklSVElP
+X1ZJREVPX0NPTlRST0xfTEVWRUw6Cj4gPiArICAgICAgICAgICAgICAgc2l6ZSA9IHNpemVvZihz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbnRyb2xfdmFsX2xldmVsKTsKPiA+ICsgICAgICAgICAgICAg
+ICBicmVhazsKPiA+ICsgICAgICAgY2FzZSBWSVJUSU9fVklERU9fQ09OVFJPTF9CSVRSQVRFOgo+
+ID4gKyAgICAgICAgICAgICAgIHNpemUgPSBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19jb250
+cm9sX3ZhbF9iaXRyYXRlKTsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAg
+ZGVmYXVsdDoKPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLTE7Cj4gPiArICAgICAgIH0KPiA+
+ICsKPiA+ICsgICAgICAgcmVxX3AgPSB2aXJ0aW9fdmlkZW9fYWxsb2NfcmVxKHZ2LCAmdmJ1Ziwg
+c2l6ZSArIHNpemVvZigqcmVxX3ApKTsKPiA+ICsgICAgICAgaWYgKElTX0VSUihyZXFfcCkpCj4g
+PiArICAgICAgICAgICAgICAgcmV0dXJuIFBUUl9FUlIocmVxX3ApOwo+ID4gKwo+ID4gKyAgICAg
+ICByZXFfcC0+aGRyLnR5cGUgPSBjcHVfdG9fbGUzMihWSVJUSU9fVklERU9fQ01EX1NFVF9DT05U
+Uk9MKTsKPiA+ICsgICAgICAgcmVxX3AtPmhkci5zdHJlYW1faWQgPSBjcHVfdG9fbGUzMihzdHJl
+YW1faWQpOwo+ID4gKyAgICAgICByZXFfcC0+Y29udHJvbCA9IGNwdV90b19sZTMyKGNvbnRyb2wp
+Owo+ID4gKwo+ID4gKyAgICAgICBzd2l0Y2ggKGNvbnRyb2wpIHsKPiA+ICsgICAgICAgY2FzZSBW
+SVJUSU9fVklERU9fQ09OVFJPTF9QUk9GSUxFOgo+ID4gKyAgICAgICAgICAgICAgIGN0cmxfcCA9
+ICh2b2lkICopKChjaGFyICopcmVxX3AgKwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHNpemVvZihzdHJ1Y3QgdmlydGlvX3ZpZGVvX3NldF9jb250cm9sKSk7Cj4gPiArICAg
+ICAgICAgICAgICAgY3RybF9wLT5wcm9maWxlID0gY3B1X3RvX2xlMzIodmFsdWUpOwo+ID4gKyAg
+ICAgICAgICAgICAgIGJyZWFrOwo+ID4gKyAgICAgICBjYXNlIFZJUlRJT19WSURFT19DT05UUk9M
+X0xFVkVMOgo+ID4gKyAgICAgICAgICAgICAgIGN0cmxfbCA9ICh2b2lkICopKChjaGFyICopcmVx
+X3AgKwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2l6ZW9mKHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fc2V0X2NvbnRyb2wpKTsKPiA+ICsgICAgICAgICAgICAgICBjdHJsX2wtPmxl
+dmVsID0gY3B1X3RvX2xlMzIodmFsdWUpOwo+ID4gKyAgICAgICAgICAgICAgIGJyZWFrOwo+ID4g
+KyAgICAgICBjYXNlIFZJUlRJT19WSURFT19DT05UUk9MX0JJVFJBVEU6Cj4gPiArICAgICAgICAg
+ICAgICAgY3RybF9iID0gKHZvaWQgKikoKGNoYXIgKilyZXFfcCArCj4gPiArICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBzaXplb2Yoc3RydWN0IHZpcnRpb192aWRlb19zZXRfY29udHJv
+bCkpOwo+ID4gKyAgICAgICAgICAgICAgIGN0cmxfYi0+Yml0cmF0ZSA9IGNwdV90b19sZTMyKHZh
+bHVlKTsKPiA+ICsgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgfQo+ID4gKwo+ID4g
+KyAgICAgICByZXR1cm4gdmlydGlvX3ZpZGVvX3F1ZXVlX2NtZF9idWZmZXIodnYsIHZidWYpOwo+
+ID4gK30KPiA+ICsKPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX2lk
+cy5oIGIvaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb19pZHMuaAo+ID4gaW5kZXggNmQ1YzNiMmQ0
+ZjRkLi44OWRmYzk0ZWNhYTMgMTAwNjQ0Cj4gPiAtLS0gYS9pbmNsdWRlL3VhcGkvbGludXgvdmly
+dGlvX2lkcy5oCj4gPiArKysgYi9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX2lkcy5oCj4gPiBA
+QCAtNDMsNSArNDMsNyBAQAo+ID4gICNkZWZpbmUgVklSVElPX0lEX0lOUFVUICAgICAgICAxOCAv
+KiB2aXJ0aW8gaW5wdXQgKi8KPiA+ICAjZGVmaW5lIFZJUlRJT19JRF9WU09DSyAgICAgICAgMTkg
+LyogdmlydGlvIHZzb2NrIHRyYW5zcG9ydCAqLwo+ID4gICNkZWZpbmUgVklSVElPX0lEX0NSWVBU
+TyAgICAgICAyMCAvKiB2aXJ0aW8gY3J5cHRvICovCj4gPiArI2RlZmluZSBWSVJUSU9fSURfVklE
+RU9fRU5DICAgIDMwIC8qIHZpcnRpbyB2aWRlbyBlbmNvZGVyICovCj4gPiArI2RlZmluZSBWSVJU
+SU9fSURfVklERU9fREVDICAgIDMxIC8qIHZpcnRpbyB2aWRlbyBkZWNvZGVyICovCj4gPiAKPiA+
+ICAjZW5kaWYgLyogX0xJTlVYX1ZJUlRJT19JRFNfSCAqLwo+ID4gZGlmZiAtLWdpdCBhL2luY2x1
+ZGUvdWFwaS9saW51eC92aXJ0aW9fdmlkZW8uaCBiL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9f
+dmlkZW8uaAo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGluZGV4IDAwMDAwMDAwMDAwMC4u
+MGRkOThhMjIzN2M2Cj4gPiAtLS0gL2Rldi9udWxsCj4gPiArKysgYi9pbmNsdWRlL3VhcGkvbGlu
+dXgvdmlydGlvX3ZpZGVvLmgKPiA+IEBAIC0wLDAgKzEsNDY5IEBACj4gPiArLyogU1BEWC1MaWNl
+bnNlLUlkZW50aWZpZXI6IEdQTC0yLjArICovCj4gPiArLyoKPiA+ICsgKiBWaXJ0aW8gVmlkZW8g
+RGV2aWNlCj4gPiArICoKPiA+ICsgKiBUaGlzIGhlYWRlciBpcyBCU0QgbGljZW5zZWQgc28gYW55
+b25lIGNhbiB1c2UgdGhlIGRlZmluaXRpb25zCj4gPiArICogdG8gaW1wbGVtZW50IGNvbXBhdGli
+bGUgZHJpdmVycy9zZXJ2ZXJzOgo+ID4gKyAqCj4gPiArICogUmVkaXN0cmlidXRpb24gYW5kIHVz
+ZSBpbiBzb3VyY2UgYW5kIGJpbmFyeSBmb3Jtcywgd2l0aCBvciB3aXRob3V0Cj4gPiArICogbW9k
+aWZpY2F0aW9uLCBhcmUgcGVybWl0dGVkIHByb3ZpZGVkIHRoYXQgdGhlIGZvbGxvd2luZyBjb25k
+aXRpb25zCj4gPiArICogYXJlIG1ldDoKPiA+ICsgKiAxLiBSZWRpc3RyaWJ1dGlvbnMgb2Ygc291
+cmNlIGNvZGUgbXVzdCByZXRhaW4gdGhlIGFib3ZlIGNvcHlyaWdodAo+ID4gKyAqICAgIG5vdGlj
+ZSwgdGhpcyBsaXN0IG9mIGNvbmRpdGlvbnMgYW5kIHRoZSBmb2xsb3dpbmcgZGlzY2xhaW1lci4K
+PiA+ICsgKiAyLiBSZWRpc3RyaWJ1dGlvbnMgaW4gYmluYXJ5IGZvcm0gbXVzdCByZXByb2R1Y2Ug
+dGhlIGFib3ZlIGNvcHlyaWdodAo+ID4gKyAqICAgIG5vdGljZSwgdGhpcyBsaXN0IG9mIGNvbmRp
+dGlvbnMgYW5kIHRoZSBmb2xsb3dpbmcgZGlzY2xhaW1lciBpbiB0aGUKPiA+ICsgKiAgICBkb2N1
+bWVudGF0aW9uIGFuZC9vciBvdGhlciBtYXRlcmlhbHMgcHJvdmlkZWQgd2l0aCB0aGUgZGlzdHJp
+YnV0aW9uLgo+ID4gKyAqIDMuIE5laXRoZXIgdGhlIG5hbWUgb2YgSUJNIG5vciB0aGUgbmFtZXMg
+b2YgaXRzIGNvbnRyaWJ1dG9ycwo+ID4gKyAqICAgIG1heSBiZSB1c2VkIHRvIGVuZG9yc2Ugb3Ig
+cHJvbW90ZSBwcm9kdWN0cyBkZXJpdmVkIGZyb20gdGhpcyBzb2Z0d2FyZQo+ID4gKyAqICAgIHdp
+dGhvdXQgc3BlY2lmaWMgcHJpb3Igd3JpdHRlbiBwZXJtaXNzaW9uLgo+ID4gKyAqIFRISVMgU09G
+VFdBUkUgSVMgUFJPVklERUQgQlkgVEhFIENPUFlSSUdIVCBIT0xERVJTIEFORCBDT05UUklCVVRP
+UlMKPiA+ICsgKiBgYEFTIElTJycgQU5EIEFOWSBFWFBSRVNTIE9SIElNUExJRUQgV0FSUkFOVElF
+UywgSU5DTFVESU5HLCBCVVQgTk9UCj4gPiArICogTElNSVRFRCBUTywgVEhFIElNUExJRUQgV0FS
+UkFOVElFUyBPRiBNRVJDSEFOVEFCSUxJVFkgQU5EIEZJVE5FU1MKPiA+ICsgKiBGT1IgQSBQQVJU
+SUNVTEFSIFBVUlBPU0UgQVJFIERJU0NMQUlNRUQuICBJTiBOTyBFVkVOVCBTSEFMTCBJQk0gT1IK
+PiA+ICsgKiBDT05UUklCVVRPUlMgQkUgTElBQkxFIEZPUiBBTlkgRElSRUNULCBJTkRJUkVDVCwg
+SU5DSURFTlRBTCwKPiA+ICsgKiBTUEVDSUFMLCBFWEVNUExBUlksIE9SIENPTlNFUVVFTlRJQUwg
+REFNQUdFUyAoSU5DTFVESU5HLCBCVVQgTk9UCj4gPiArICogTElNSVRFRCBUTywgUFJPQ1VSRU1F
+TlQgT0YgU1VCU1RJVFVURSBHT09EUyBPUiBTRVJWSUNFUzsgTE9TUyBPRgo+ID4gKyAqIFVTRSwg
+REFUQSwgT1IgUFJPRklUUzsgT1IgQlVTSU5FU1MgSU5URVJSVVBUSU9OKSBIT1dFVkVSIENBVVNF
+RCBBTkQKPiA+ICsgKiBPTiBBTlkgVEhFT1JZIE9GIExJQUJJTElUWSwgV0hFVEhFUiBJTiBDT05U
+UkFDVCwgU1RSSUNUIExJQUJJTElUWSwKPiA+ICsgKiBPUiBUT1JUIChJTkNMVURJTkcgTkVHTElH
+RU5DRSBPUiBPVEhFUldJU0UpIEFSSVNJTkcgSU4gQU5ZIFdBWSBPVVQKPiA+ICsgKiBPRiBUSEUg
+VVNFIE9GIFRISVMgU09GVFdBUkUsIEVWRU4gSUYgQURWSVNFRCBPRiBUSEUgUE9TU0lCSUxJVFkg
+T0YKPiA+ICsgKiBTVUNIIERBTUFHRS4KPiA+ICsgKgo+ID4gKyAqIENvcHlyaWdodCAoQykgMjAx
+OSBPcGVuU3luZXJneSBHbWJILgo+ID4gKyAqLwo+ID4gKwo+ID4gKyNpZm5kZWYgX1VBUElfTElO
+VVhfVklSVElPX1ZJREVPX0gKPiA+ICsjZGVmaW5lIF9VQVBJX0xJTlVYX1ZJUlRJT19WSURFT19I
+Cj4gPiArCj4gPiArI2luY2x1ZGUgPGxpbnV4L3R5cGVzLmg+Cj4gPiArI2luY2x1ZGUgPGxpbnV4
+L3ZpcnRpb19jb25maWcuaD4KPiA+ICsKPiA+ICsvKgo+ID4gKyAqIEZlYXR1cmUgYml0cwo+ID4g
+KyAqLwo+ID4gKwo+ID4gKy8qIEd1ZXN0IHBhZ2VzIGNhbiBiZSB1c2VkIGZvciB2aWRlbyBidWZm
+ZXJzLiAqLwo+ID4gKyNkZWZpbmUgVklSVElPX1ZJREVPX0ZfUkVTT1VSQ0VfR1VFU1RfUEFHRVMg
+MAo+ID4gKy8qCj4gPiArICogVGhlIGhvc3QgY2FuIHByb2Nlc3MgYnVmZmVycyBldmVuIGlmIHRo
+ZXkgYXJlIG5vbi1jb250aWd1b3VzIG1lbW9yeSBzdWNoIGFzCj4gPiArICogc2NhdHRlci1nYXRo
+ZXIgbGlzdHMuCj4gPiArICovCj4gPiArI2RlZmluZSBWSVJUSU9fVklERU9fRl9SRVNPVVJDRV9O
+T05fQ09OVElHIDEKPiA+ICsKPiA+ICsvKgo+ID4gKyAqIEltYWdlIGZvcm1hdHMKPiA+ICsgKi8K
+PiA+ICsKPiA+ICtlbnVtIHZpcnRpb192aWRlb19mb3JtYXQgewo+ID4gKyAgICAgICAvKiBSYXcg
+Zm9ybWF0cyAqLwo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fRk9STUFUX1JBV19NSU4gPSAxLAo+
+ID4gKyAgICAgICBWSVJUSU9fVklERU9fRk9STUFUX0FSR0I4ODg4ID0gVklSVElPX1ZJREVPX0ZP
+Uk1BVF9SQVdfTUlOLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fRk9STUFUX0JHUkE4ODg4LAo+
+ID4gKyAgICAgICBWSVJUSU9fVklERU9fRk9STUFUX05WMTIsIC8qIDEyICBZL0NiQ3IgNDoyOjAg
+ICovCj4gPiArICAgICAgIFZJUlRJT19WSURFT19GT1JNQVRfWVVWNDIwLCAvKiAxMiAgWVVWIDQ6
+MjowICAgICAqLwo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fRk9STUFUX1lWVTQyMCwgLyogMTIg
+IFlWVSA0OjI6MCAgICAgKi8KPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0ZPUk1BVF9SQVdfTUFY
+ID0gVklSVElPX1ZJREVPX0ZPUk1BVF9ZVlU0MjAsCj4gPiArCj4gPiArICAgICAgIC8qIENvZGVk
+IGZvcm1hdHMgKi8KPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0ZPUk1BVF9DT0RFRF9NSU4gPSAw
+eDEwMDAsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19GT1JNQVRfTVBFRzIgPQo+ID4gKyAgICAg
+ICAgICAgICAgIFZJUlRJT19WSURFT19GT1JNQVRfQ09ERURfTUlOLCAvKiBNUEVHLTIgUGFydCAy
+ICovCj4gPiArICAgICAgIFZJUlRJT19WSURFT19GT1JNQVRfTVBFRzQsIC8qIE1QRUctNCBQYXJ0
+IDIgKi8KPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0ZPUk1BVF9IMjY0LCAvKiBILjI2NCAqLwo+
+ID4gKyAgICAgICBWSVJUSU9fVklERU9fRk9STUFUX0hFVkMsIC8qIEhFVkMgYWthIEguMjY1Ki8K
+PiA+ICsgICAgICAgVklSVElPX1ZJREVPX0ZPUk1BVF9WUDgsIC8qIFZQOCAqLwo+ID4gKyAgICAg
+ICBWSVJUSU9fVklERU9fRk9STUFUX1ZQOSwgLyogVlA5ICovCj4gPiArICAgICAgIFZJUlRJT19W
+SURFT19GT1JNQVRfQ09ERURfTUFYID0gVklSVElPX1ZJREVPX0ZPUk1BVF9WUDksCj4gPiArfTsK
+PiA+ICsKPiA+ICtlbnVtIHZpcnRpb192aWRlb19wcm9maWxlIHsKPiA+ICsgICAgICAgLyogSC4y
+NjQgKi8KPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9NSU4gPSAweDEwMCwK
+PiA+ICsgICAgICAgVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9CQVNFTElORSA9IFZJUlRJT19W
+SURFT19QUk9GSUxFX0gyNjRfTUlOLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fUFJPRklMRV9I
+MjY0X01BSU4sCj4gPiArICAgICAgIFZJUlRJT19WSURFT19QUk9GSUxFX0gyNjRfRVhURU5ERUQs
+Cj4gPiArICAgICAgIFZJUlRJT19WSURFT19QUk9GSUxFX0gyNjRfSElHSCwKPiA+ICsgICAgICAg
+VklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9ISUdIMTBQUk9GSUxFLAo+ID4gKyAgICAgICBWSVJU
+SU9fVklERU9fUFJPRklMRV9IMjY0X0hJR0g0MjJQUk9GSUxFLAo+ID4gKyAgICAgICBWSVJUSU9f
+VklERU9fUFJPRklMRV9IMjY0X0hJR0g0NDRQUkVESUNUSVZFUFJPRklMRSwKPiA+ICsgICAgICAg
+VklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9TQ0FMQUJMRUJBU0VMSU5FLAo+ID4gKyAgICAgICBW
+SVJUSU9fVklERU9fUFJPRklMRV9IMjY0X1NDQUxBQkxFSElHSCwKPiA+ICsgICAgICAgVklSVElP
+X1ZJREVPX1BST0ZJTEVfSDI2NF9TVEVSRU9ISUdILAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9f
+UFJPRklMRV9IMjY0X01VTFRJVklFV0hJR0gsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19QUk9G
+SUxFX0gyNjRfTUFYID0gVklSVElPX1ZJREVPX1BST0ZJTEVfSDI2NF9NVUxUSVZJRVdISUdILAo+
+ID4gKwo+ID4gKyAgICAgICAvKiBIRVZDICovCj4gPiArICAgICAgIFZJUlRJT19WSURFT19QUk9G
+SUxFX0hFVkNfTUlOID0gMHgyMDAsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19QUk9GSUxFX0hF
+VkNfTUFJTiA9IFZJUlRJT19WSURFT19QUk9GSUxFX0hFVkNfTUlOLAo+ID4gKyAgICAgICBWSVJU
+SU9fVklERU9fUFJPRklMRV9IRVZDX01BSU4xMCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1BS
+T0ZJTEVfSEVWQ19NQUlOX1NUSUxMX1BJQ1RVUkUsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19Q
+Uk9GSUxFX0hFVkNfTUFYID0KPiA+ICsgICAgICAgICAgICAgICBWSVJUSU9fVklERU9fUFJPRklM
+RV9IRVZDX01BSU5fU1RJTExfUElDVFVSRSwKPiA+ICsKPiA+ICsgICAgICAgLyogVlA4ICovCj4g
+PiArICAgICAgIFZJUlRJT19WSURFT19QUk9GSUxFX1ZQOF9NSU4gPSAweDMwMCwKPiA+ICsgICAg
+ICAgVklSVElPX1ZJREVPX1BST0ZJTEVfVlA4X1BST0ZJTEUwID0gVklSVElPX1ZJREVPX1BST0ZJ
+TEVfVlA4X01JTiwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1BST0ZJTEVfVlA4X1BST0ZJTEUx
+LAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fUFJPRklMRV9WUDhfUFJPRklMRTIsCj4gPiArICAg
+ICAgIFZJUlRJT19WSURFT19QUk9GSUxFX1ZQOF9QUk9GSUxFMywKPiA+ICsgICAgICAgVklSVElP
+X1ZJREVPX1BST0ZJTEVfVlA4X01BWCA9IFZJUlRJT19WSURFT19QUk9GSUxFX1ZQOF9QUk9GSUxF
+MywKPiA+ICsKPiA+ICsgICAgICAgLyogVlA5ICovCj4gPiArICAgICAgIFZJUlRJT19WSURFT19Q
+Uk9GSUxFX1ZQOV9NSU4gPSAweDQwMCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1BST0ZJTEVf
+VlA5X1BST0ZJTEUwID0gVklSVElPX1ZJREVPX1BST0ZJTEVfVlA5X01JTiwKPiA+ICsgICAgICAg
+VklSVElPX1ZJREVPX1BST0ZJTEVfVlA5X1BST0ZJTEUxLAo+ID4gKyAgICAgICBWSVJUSU9fVklE
+RU9fUFJPRklMRV9WUDlfUFJPRklMRTIsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19QUk9GSUxF
+X1ZQOV9QUk9GSUxFMywKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1BST0ZJTEVfVlA5X01BWCA9
+IFZJUlRJT19WSURFT19QUk9GSUxFX1ZQOV9QUk9GSUxFMywKPiA+ICt9Owo+ID4gKwo+ID4gK2Vu
+dW0gdmlydGlvX3ZpZGVvX2xldmVsIHsKPiA+ICsgICAgICAgLyogSC4yNjQgKi8KPiA+ICsgICAg
+ICAgVklSVElPX1ZJREVPX0xFVkVMX0gyNjRfTUlOID0gMHgxMDAsCj4gPiArICAgICAgIFZJUlRJ
+T19WSURFT19MRVZFTF9IMjY0XzFfMCA9IFZJUlRJT19WSURFT19MRVZFTF9IMjY0X01JTiwKPiA+
+ICsgICAgICAgVklSVElPX1ZJREVPX0xFVkVMX0gyNjRfMV8xLAo+ID4gKyAgICAgICBWSVJUSU9f
+VklERU9fTEVWRUxfSDI2NF8xXzIsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19MRVZFTF9IMjY0
+XzFfMywKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0xFVkVMX0gyNjRfMl8wLAo+ID4gKyAgICAg
+ICBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF8yXzEsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19M
+RVZFTF9IMjY0XzJfMiwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0xFVkVMX0gyNjRfM18wLAo+
+ID4gKyAgICAgICBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF8zXzEsCj4gPiArICAgICAgIFZJUlRJ
+T19WSURFT19MRVZFTF9IMjY0XzNfMiwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0xFVkVMX0gy
+NjRfNF8wLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF80XzEsCj4gPiArICAg
+ICAgIFZJUlRJT19WSURFT19MRVZFTF9IMjY0XzRfMiwKPiA+ICsgICAgICAgVklSVElPX1ZJREVP
+X0xFVkVMX0gyNjRfNV8wLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fTEVWRUxfSDI2NF81XzEs
+Cj4gPiArICAgICAgIFZJUlRJT19WSURFT19MRVZFTF9IMjY0X01BWCA9IFZJUlRJT19WSURFT19M
+RVZFTF9IMjY0XzVfMSwKPiA+ICt9Owo+ID4gKwo+ID4gKy8qCj4gPiArICogQ29uZmlnCj4gPiAr
+ICovCj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19jb25maWcgewo+ID4gKyAgICAgICBf
+X2xlMzIgdmVyc2lvbjsKPiA+ICsgICAgICAgX19sZTMyIG1heF9jYXBzX2xlbmd0aDsKPiA+ICsg
+ICAgICAgX19sZTMyIG1heF9yZXNwX2xlbmd0aDsKPiA+ICt9Owo+ID4gKwo+ID4gKy8qCj4gPiAr
+ICogQ29tbWFuZHMKPiA+ICsgKi8KPiA+ICsKPiA+ICtlbnVtIHZpcnRpb192aWRlb19jbWRfdHlw
+ZSB7Cj4gPiArICAgICAgIC8qIENvbW1hbmQgKi8KPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0NN
+RF9RVUVSWV9DQVBBQklMSVRZID0gMHgwMTAwLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fQ01E
+X1NUUkVBTV9DUkVBVEUsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19DTURfU1RSRUFNX0RFU1RS
+T1ksCj4gPiArICAgICAgIFZJUlRJT19WSURFT19DTURfU1RSRUFNX0RSQUlOLAo+ID4gKyAgICAg
+ICBWSVJUSU9fVklERU9fQ01EX1JFU09VUkNFX0NSRUFURSwKPiA+ICsgICAgICAgVklSVElPX1ZJ
+REVPX0NNRF9SRVNPVVJDRV9RVUVVRSwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0NNRF9SRVNP
+VVJDRV9ERVNUUk9ZX0FMTCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0NNRF9RVUVVRV9DTEVB
+UiwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0NNRF9HRVRfUEFSQU1TLAo+ID4gKyAgICAgICBW
+SVJUSU9fVklERU9fQ01EX1NFVF9QQVJBTVMsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19DTURf
+UVVFUllfQ09OVFJPTCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX0NNRF9HRVRfQ09OVFJPTCwK
+PiA+ICsgICAgICAgVklSVElPX1ZJREVPX0NNRF9TRVRfQ09OVFJPTCwKPiA+ICsKPiA+ICsgICAg
+ICAgLyogUmVzcG9uc2UgKi8KPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1JFU1BfT0tfTk9EQVRB
+ID0gMHgwMjAwLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fUkVTUF9PS19RVUVSWV9DQVBBQklM
+SVRZLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fUkVTUF9PS19SRVNPVVJDRV9RVUVVRSwKPiA+
+ICsgICAgICAgVklSVElPX1ZJREVPX1JFU1BfT0tfR0VUX1BBUkFNUywKPiA+ICsgICAgICAgVklS
+VElPX1ZJREVPX1JFU1BfT0tfUVVFUllfQ09OVFJPTCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVP
+X1JFU1BfT0tfR0VUX0NPTlRST0wsCj4gPiArCj4gPiArICAgICAgIFZJUlRJT19WSURFT19SRVNQ
+X0VSUl9JTlZBTElEX09QRVJBVElPTiA9IDB4MDMwMCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVP
+X1JFU1BfRVJSX09VVF9PRl9NRU1PUlksCj4gPiArICAgICAgIFZJUlRJT19WSURFT19SRVNQX0VS
+Ul9JTlZBTElEX1NUUkVBTV9JRCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1JFU1BfRVJSX0lO
+VkFMSURfUkVTT1VSQ0VfSUQsCj4gPiArICAgICAgIFZJUlRJT19WSURFT19SRVNQX0VSUl9JTlZB
+TElEX1BBUkFNRVRFUiwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1JFU1BfRVJSX1VOU1VQUE9S
+VEVEX0NPTlRST0wsCj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NtZF9o
+ZHIgewo+ID4gKyAgICAgICBfX2xlMzIgdHlwZTsgLyogT25lIG9mIGVudW0gdmlydGlvX3ZpZGVv
+X2NtZF90eXBlICovCj4gPiArICAgICAgIF9fbGUzMiBzdHJlYW1faWQ7Cj4gPiArfTsKPiA+ICsK
+PiA+ICsvKiBWSVJUSU9fVklERU9fQ01EX1FVRVJZX0NBUEFCSUxJVFkgKi8KPiA+ICtlbnVtIHZp
+cnRpb192aWRlb19xdWV1ZV90eXBlIHsKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1FVRVVFX1RZ
+UEVfSU5QVVQgPSAweDEwMCwKPiA+ICsgICAgICAgVklSVElPX1ZJREVPX1FVRVVFX1RZUEVfT1VU
+UFVULAo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9jYXBhYmls
+aXR5IHsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19jbWRfaGRyIGhkcjsKPiA+ICsg
+ICAgICAgX19sZTMyIHF1ZXVlX3R5cGU7IC8qIE9uZSBvZiBWSVJUSU9fVklERU9fUVVFVUVfVFlQ
+RV8qIHR5cGVzICovCj4gPiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+ICt9Owo+ID4gKwo+
+ID4gK2VudW0gdmlydGlvX3ZpZGVvX3BsYW5lc19sYXlvdXRfZmxhZyB7Cj4gPiArICAgICAgIFZJ
+UlRJT19WSURFT19QTEFORVNfTEFZT1VUX1NJTkdMRV9CVUZGRVIgPSAxIDw8IDAsCj4gPiArICAg
+ICAgIFZJUlRJT19WSURFT19QTEFORVNfTEFZT1VUX1BFUl9QTEFORSA9IDEgPDwgMSwKPiA+ICt9
+Owo+ID4gKwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X3JhbmdlIHsKPiA+ICsgICAg
+ICAgX19sZTMyIG1pbjsKPiA+ICsgICAgICAgX19sZTMyIG1heDsKPiA+ICsgICAgICAgX19sZTMy
+IHN0ZXA7Cj4gPiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+ICt9Owo+ID4gKwo+ID4gK3N0
+cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X2ZyYW1lIHsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRp
+b192aWRlb19mb3JtYXRfcmFuZ2Ugd2lkdGg7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlk
+ZW9fZm9ybWF0X3JhbmdlIGhlaWdodDsKPiA+ICsgICAgICAgX19sZTMyIG51bV9yYXRlczsKPiA+
+ICsgICAgICAgX191OCBwYWRkaW5nWzRdOwo+ID4gKyAgICAgICAvKiBGb2xsb3dlZCBieSBzdHJ1
+Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9yYW5nZSBmcmFtZV9yYXRlc1tdICovCj4gPiArfTsKPiA+
+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX2Zvcm1hdF9kZXNjIHsKPiA+ICsgICAgICAgX19s
+ZTY0IG1hc2s7Cj4gPiArICAgICAgIF9fbGUzMiBmb3JtYXQ7IC8qIE9uZSBvZiBWSVJUSU9fVklE
+RU9fRk9STUFUXyogdHlwZXMgKi8KPiA+ICsgICAgICAgX19sZTMyIHBsYW5lc19sYXlvdXQ7IC8q
+IEJpdG1hc2sgd2l0aCBWSVJUSU9fVklERU9fUExBTkVTX0xBWU9VVF8qICovCj4gPiArICAgICAg
+IF9fbGUzMiBwbGFuZV9hbGlnbjsKPiA+ICsgICAgICAgX19sZTMyIG51bV9mcmFtZXM7Cj4gPiAr
+ICAgICAgIC8qIEZvbGxvd2VkIGJ5IHN0cnVjdCB2aXJ0aW9fdmlkZW9fZm9ybWF0X2ZyYW1lIGZy
+YW1lc1tdICovCj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1ZXJ5X2Nh
+cGFiaWxpdHlfcmVzcCB7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fY21kX2hkciBo
+ZHI7Cj4gPiArICAgICAgIF9fbGUzMiBudW1fZGVzY3M7Cj4gPiArICAgICAgIF9fdTggcGFkZGlu
+Z1s0XTsKPiA+ICsgICAgICAgLyogRm9sbG93ZWQgYnkgc3RydWN0IHZpcnRpb192aWRlb19mb3Jt
+YXRfZGVzYyBkZXNjc1tdICovCj4gPiArfTsKPiA+ICsKPiA+ICsvKiBWSVJUSU9fVklERU9fQ01E
+X1NUUkVBTV9DUkVBVEUgKi8KPiA+ICtlbnVtIHZpcnRpb192aWRlb19tZW1fdHlwZSB7Cj4gPiAr
+ICAgICAgIFZJUlRJT19WSURFT19NRU1fVFlQRV9HVUVTVF9QQUdFUywKPiA+ICt9Owo+ID4gKwo+
+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtX2NyZWF0ZSB7Cj4gPiArICAgICAgIHN0cnVj
+dCB2aXJ0aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArICAgICAgIF9fbGUzMiBpbl9tZW1fdHlw
+ZTsgLyogT25lIG9mIFZJUlRJT19WSURFT19NRU1fVFlQRV8qIHR5cGVzICovCj4gPiArICAgICAg
+IF9fbGUzMiBvdXRfbWVtX3R5cGU7IC8qIE9uZSBvZiBWSVJUSU9fVklERU9fTUVNX1RZUEVfKiB0
+eXBlcyAqLwo+ID4gKyAgICAgICBfX2xlMzIgY29kZWRfZm9ybWF0OyAvKiBPbmUgb2YgVklSVElP
+X1ZJREVPX0ZPUk1BVF8qIHR5cGVzICovCj4gPiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+
+ICsgICAgICAgX191OCB0YWdbNjRdOwo+ID4gK307Cj4gPiArCj4gPiArLyogVklSVElPX1ZJREVP
+X0NNRF9TVFJFQU1fREVTVFJPWSAqLwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fc3RyZWFtX2Rl
+c3Ryb3kgewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NtZF9oZHIgaGRyOwo+ID4g
+K307Cj4gPiArCj4gPiArLyogVklSVElPX1ZJREVPX0NNRF9TVFJFQU1fRFJBSU4gKi8KPiA+ICtz
+dHJ1Y3QgdmlydGlvX3ZpZGVvX3N0cmVhbV9kcmFpbiB7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0
+aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArfTsKPiA+ICsKPiA+ICsvKiBWSVJUSU9fVklERU9f
+Q01EX1JFU09VUkNFX0NSRUFURSAqLwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fbWVtX2VudHJ5
+IHsKPiA+ICsgICAgICAgX19sZTY0IGFkZHI7Cj4gPiArICAgICAgIF9fbGUzMiBsZW5ndGg7Cj4g
+PiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+ICt9Owo+ID4gKwo+ID4gKyNkZWZpbmUgVklS
+VElPX1ZJREVPX01BWF9QTEFORVMgOAo+ID4gKwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fcmVz
+b3VyY2VfY3JlYXRlIHsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19jbWRfaGRyIGhk
+cjsKPiA+ICsgICAgICAgX19sZTMyIHF1ZXVlX3R5cGU7IC8qIE9uZSBvZiBWSVJUSU9fVklERU9f
+UVVFVUVfVFlQRV8qIHR5cGVzICovCj4gPiArICAgICAgIF9fbGUzMiByZXNvdXJjZV9pZDsKPiA+
+ICsgICAgICAgX19sZTMyIHBsYW5lc19sYXlvdXQ7Cj4gPiArICAgICAgIF9fbGUzMiBudW1fcGxh
+bmVzOwo+ID4gKyAgICAgICBfX2xlMzIgcGxhbmVfb2Zmc2V0c1tWSVJUSU9fVklERU9fTUFYX1BM
+QU5FU107Cj4gPiArICAgICAgIF9fbGUzMiBudW1fZW50cmllc1tWSVJUSU9fVklERU9fTUFYX1BM
+QU5FU107Cj4gPiArICAgICAgIC8qIEZvbGxvd2VkIGJ5IHN0cnVjdCB2aXJ0aW9fdmlkZW9fbWVt
+X2VudHJ5IGVudHJpZXNbXSAqLwo+ID4gK307Cj4gPiArCj4gPiArLyogVklSVElPX1ZJREVPX0NN
+RF9SRVNPVVJDRV9RVUVVRSAqLwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fcmVzb3VyY2VfcXVl
+dWUgewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NtZF9oZHIgaGRyOwo+ID4gKyAg
+ICAgICBfX2xlMzIgcXVldWVfdHlwZTsgLyogT25lIG9mIFZJUlRJT19WSURFT19RVUVVRV9UWVBF
+XyogdHlwZXMgKi8KPiA+ICsgICAgICAgX19sZTMyIHJlc291cmNlX2lkOwo+ID4gKyAgICAgICBf
+X2xlNjQgdGltZXN0YW1wOwo+ID4gKyAgICAgICBfX2xlMzIgbnVtX2RhdGFfc2l6ZXM7Cj4gPiAr
+ICAgICAgIF9fbGUzMiBkYXRhX3NpemVzW1ZJUlRJT19WSURFT19NQVhfUExBTkVTXTsKPiA+ICsg
+ICAgICAgX191OCBwYWRkaW5nWzRdOwo+ID4gK307Cj4gPiArCj4gPiArZW51bSB2aXJ0aW9fdmlk
+ZW9fYnVmZmVyX2ZsYWcgewo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fQlVGRkVSX0ZMQUdfRVJS
+ID0gMHgwMDAxLAo+ID4gKyAgICAgICBWSVJUSU9fVklERU9fQlVGRkVSX0ZMQUdfRU9TID0gMHgw
+MDAyLAo+ID4gKwo+ID4gKyAgICAgICAvKiBFbmNvZGVyIG9ubHkgKi8KPiA+ICsgICAgICAgVklS
+VElPX1ZJREVPX0JVRkZFUl9GTEFHX0lGUkFNRSA9IDB4MDAwNCwKPiA+ICsgICAgICAgVklSVElP
+X1ZJREVPX0JVRkZFUl9GTEFHX1BGUkFNRSA9IDB4MDAwOCwKPiA+ICsgICAgICAgVklSVElPX1ZJ
+REVPX0JVRkZFUl9GTEFHX0JGUkFNRSA9IDB4MDAxMCwKPiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVj
+dCB2aXJ0aW9fdmlkZW9fcmVzb3VyY2VfcXVldWVfcmVzcCB7Cj4gPiArICAgICAgIHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArICAgICAgIF9fbGU2NCB0aW1lc3RhbXA7Cj4g
+PiArICAgICAgIF9fbGUzMiBmbGFnczsgLyogT25lIG9mIFZJUlRJT19WSURFT19CVUZGRVJfRkxB
+R18qIGZsYWdzICovCj4gPiArICAgICAgIF9fbGUzMiBzaXplOyAvKiBFbmNvZGVkIHNpemUgKi8K
+PiA+ICt9Owo+ID4gKwo+ID4gKy8qIFZJUlRJT19WSURFT19DTURfUkVTT1VSQ0VfREVTVFJPWV9B
+TEwgKi8KPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX3Jlc291cmNlX2Rlc3Ryb3lfYWxsIHsKPiA+
+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19jbWRfaGRyIGhkcjsKPiA+ICsgICAgICAgX19s
+ZTMyIHF1ZXVlX3R5cGU7IC8qIE9uZSBvZiBWSVJUSU9fVklERU9fUVVFVUVfVFlQRV8qIHR5cGVz
+ICovCj4gPiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+ICt9Owo+ID4gKwo+ID4gKy8qIFZJ
+UlRJT19WSURFT19DTURfUVVFVUVfQ0xFQVIgKi8KPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1
+ZXVlX2NsZWFyIHsKPiA+ICsgICAgICAgc3RydWN0IHZpcnRpb192aWRlb19jbWRfaGRyIGhkcjsK
+PiA+ICsgICAgICAgX19sZTMyIHF1ZXVlX3R5cGU7IC8qIE9uZSBvZiBWSVJUSU9fVklERU9fUVVF
+VUVfVFlQRV8qIHR5cGVzICovCj4gPiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+ICt9Owo+
+ID4gKwo+ID4gKy8qIFZJUlRJT19WSURFT19DTURfR0VUX1BBUkFNUyAqLwo+ID4gK3N0cnVjdCB2
+aXJ0aW9fdmlkZW9fcGxhbmVfZm9ybWF0IHsKPiA+ICsgICAgICAgX19sZTMyIHBsYW5lX3NpemU7
+Cj4gPiArICAgICAgIF9fbGUzMiBzdHJpZGU7Cj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX2Nyb3Agewo+ID4gKyAgICAgICBfX2xlMzIgbGVmdDsKPiA+ICsgICAgICAgX19s
+ZTMyIHRvcDsKPiA+ICsgICAgICAgX19sZTMyIHdpZHRoOwo+ID4gKyAgICAgICBfX2xlMzIgaGVp
+Z2h0Owo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19wYXJhbXMgewo+ID4g
+KyAgICAgICBfX2xlMzIgcXVldWVfdHlwZTsgLyogT25lIG9mIFZJUlRJT19WSURFT19RVUVVRV9U
+WVBFXyogdHlwZXMgKi8KPiA+ICsgICAgICAgX19sZTMyIGZvcm1hdDsgLyogT25lIG9mIFZJUlRJ
+T19WSURFT19GT1JNQVRfKiB0eXBlcyAqLwo+ID4gKyAgICAgICBfX2xlMzIgZnJhbWVfd2lkdGg7
+Cj4gPiArICAgICAgIF9fbGUzMiBmcmFtZV9oZWlnaHQ7Cj4gPiArICAgICAgIF9fbGUzMiBtaW5f
+YnVmZmVyczsKPiA+ICsgICAgICAgX19sZTMyIG1heF9idWZmZXJzOwo+ID4gKyAgICAgICBzdHJ1
+Y3QgdmlydGlvX3ZpZGVvX2Nyb3AgY3JvcDsKPiA+ICsgICAgICAgX19sZTMyIGZyYW1lX3JhdGU7
+Cj4gPiArICAgICAgIF9fbGUzMiBudW1fcGxhbmVzOwo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlv
+X3ZpZGVvX3BsYW5lX2Zvcm1hdCBwbGFuZV9mb3JtYXRzW1ZJUlRJT19WSURFT19NQVhfUExBTkVT
+XTsKPiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fZ2V0X3BhcmFtcyB7Cj4g
+PiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArICAgICAgIF9f
+bGUzMiBxdWV1ZV90eXBlOyAvKiBPbmUgb2YgVklSVElPX1ZJREVPX1FVRVVFX1RZUEVfKiB0eXBl
+cyAqLwo+ID4gKyAgICAgICBfX3U4IHBhZGRpbmdbNF07Cj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1
+Y3QgdmlydGlvX3ZpZGVvX2dldF9wYXJhbXNfcmVzcCB7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0
+aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fcGFy
+YW1zIHBhcmFtczsKPiA+ICt9Owo+ID4gKwo+ID4gKy8qIFZJUlRJT19WSURFT19DTURfU0VUX1BB
+UkFNUyAqLwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fc2V0X3BhcmFtcyB7Cj4gPiArICAgICAg
+IHN0cnVjdCB2aXJ0aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0
+aW9fdmlkZW9fcGFyYW1zIHBhcmFtczsKPiA+ICt9Owo+ID4gKwo+ID4gKy8qIFZJUlRJT19WSURF
+T19DTURfUVVFUllfQ09OVFJPTCAqLwo+ID4gK2VudW0gdmlydGlvX3ZpZGVvX2NvbnRyb2xfdHlw
+ZSB7Cj4gPiArICAgICAgIFZJUlRJT19WSURFT19DT05UUk9MX0JJVFJBVEUgPSAxLAo+ID4gKyAg
+ICAgICBWSVJUSU9fVklERU9fQ09OVFJPTF9QUk9GSUxFLAo+ID4gKyAgICAgICBWSVJUSU9fVklE
+RU9fQ09OVFJPTF9MRVZFTCwKPiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9f
+cXVlcnlfY29udHJvbF9wcm9maWxlIHsKPiA+ICsgICAgICAgX19sZTMyIGZvcm1hdDsgLyogT25l
+IG9mIFZJUlRJT19WSURFT19GT1JNQVRfKiAqLwo+ID4gKyAgICAgICBfX3U4IHBhZGRpbmdbNF07
+Cj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1Y3QgdmlydGlvX3ZpZGVvX3F1ZXJ5X2NvbnRyb2xfbGV2
+ZWwgewo+ID4gKyAgICAgICBfX2xlMzIgZm9ybWF0OyAvKiBPbmUgb2YgVklSVElPX1ZJREVPX0ZP
+Uk1BVF8qICovCj4gPiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+ICt9Owo+ID4gKwo+ID4g
+K3N0cnVjdCB2aXJ0aW9fdmlkZW9fcXVlcnlfY29udHJvbCB7Cj4gPiArICAgICAgIHN0cnVjdCB2
+aXJ0aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArICAgICAgIF9fbGUzMiBjb250cm9sOyAvKiBP
+bmUgb2YgVklSVElPX1ZJREVPX0NPTlRST0xfKiB0eXBlcyAqLwo+ID4gKyAgICAgICBfX3U4IHBh
+ZGRpbmdbNF07Cj4gPiArICAgICAgIC8qCj4gPiArICAgICAgICAqIEZvbGxvd2VkIGJ5IGEgdmFs
+dWUgb2Ygc3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9jb250cm9sXyoKPiA+ICsgICAgICAgICog
+aW4gYWNjb3JkYW5jZSB3aXRoIHRoZSB2YWx1ZSBvZiBjb250cm9sLgo+ID4gKyAgICAgICAgKi8K
+PiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fcXVlcnlfY29udHJvbF9yZXNw
+X3Byb2ZpbGUgewo+ID4gKyAgICAgICBfX2xlMzIgbnVtOwo+ID4gKyAgICAgICBfX3U4IHBhZGRp
+bmdbNF07Cj4gPiArICAgICAgIC8qIEZvbGxvd2VkIGJ5IGFuIGFycmF5IGxlMzIgcHJvZmlsZXNb
+XSAqLwo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9jb250cm9s
+X3Jlc3BfbGV2ZWwgewo+ID4gKyAgICAgICBfX2xlMzIgbnVtOwo+ID4gKyAgICAgICBfX3U4IHBh
+ZGRpbmdbNF07Cj4gPiArICAgICAgIC8qIEZvbGxvd2VkIGJ5IGFuIGFycmF5IGxlMzIgbGV2ZWxb
+XSAqLwo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9jb250cm9s
+X3Jlc3Agewo+ID4gKyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NtZF9oZHIgaGRyOwo+ID4g
+KyAgICAgICAvKiBGb2xsb3dlZCBieSBvbmUgb2Ygc3RydWN0IHZpcnRpb192aWRlb19xdWVyeV9j
+b250cm9sX3Jlc3BfKiAqLwo+ID4gK307Cj4gPiArCj4gPiArLyogVklSVElPX1ZJREVPX0NNRF9H
+RVRfQ09OVFJPTCAqLwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fZ2V0X2NvbnRyb2wgewo+ID4g
+KyAgICAgICBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NtZF9oZHIgaGRyOwo+ID4gKyAgICAgICBfX2xl
+MzIgY29udHJvbDsgLyogT25lIG9mIFZJUlRJT19WSURFT19DT05UUk9MXyogdHlwZXMgKi8KPiA+
+ICsgICAgICAgX191OCBwYWRkaW5nWzRdOwo+ID4gK307Cj4gPiArCj4gPiArc3RydWN0IHZpcnRp
+b192aWRlb19jb250cm9sX3ZhbF9iaXRyYXRlIHsKPiA+ICsgICAgICAgX19sZTMyIGJpdHJhdGU7
+Cj4gPiArICAgICAgIF9fdTggcGFkZGluZ1s0XTsKPiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVjdCB2
+aXJ0aW9fdmlkZW9fY29udHJvbF92YWxfcHJvZmlsZSB7Cj4gPiArICAgICAgIF9fbGUzMiBwcm9m
+aWxlOwo+ID4gKyAgICAgICBfX3U4IHBhZGRpbmdbNF07Cj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1
+Y3QgdmlydGlvX3ZpZGVvX2NvbnRyb2xfdmFsX2xldmVsIHsKPiA+ICsgICAgICAgX19sZTMyIGxl
+dmVsOwo+ID4gKyAgICAgICBfX3U4IHBhZGRpbmdbNF07Cj4gPiArfTsKPiA+ICsKPiA+ICtzdHJ1
+Y3QgdmlydGlvX3ZpZGVvX2dldF9jb250cm9sX3Jlc3Agewo+ID4gKyAgICAgICBzdHJ1Y3Qgdmly
+dGlvX3ZpZGVvX2NtZF9oZHIgaGRyOwo+ID4gKyAgICAgICAvKiBGb2xsb3dlZCBieSBvbmUgb2Yg
+c3RydWN0IHZpcnRpb192aWRlb19jb250cm9sX3ZhbF8qICovCj4gPiArfTsKPiA+ICsKPiA+ICsv
+KiBWSVJUSU9fVklERU9fQ01EX1NFVF9DT05UUk9MICovCj4gPiArc3RydWN0IHZpcnRpb192aWRl
+b19zZXRfY29udHJvbCB7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fY21kX2hkciBo
+ZHI7Cj4gPiArICAgICAgIF9fbGUzMiBjb250cm9sOyAvKiBPbmUgb2YgVklSVElPX1ZJREVPX0NP
+TlRST0xfKiB0eXBlcyAqLwo+ID4gKyAgICAgICBfX3U4IHBhZGRpbmdbNF07Cj4gPiArICAgICAg
+IC8qIEZvbGxvd2VkIGJ5IG9uZSBvZiBzdHJ1Y3QgdmlydGlvX3ZpZGVvX2NvbnRyb2xfdmFsXyog
+Ki8KPiA+ICt9Owo+ID4gKwo+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fc2V0X2NvbnRyb2xfcmVz
+cCB7Cj4gPiArICAgICAgIHN0cnVjdCB2aXJ0aW9fdmlkZW9fY21kX2hkciBoZHI7Cj4gPiArfTsK
+PiA+ICsKPiA+ICsvKgo+ID4gKyAqIEV2ZW50cwo+ID4gKyAqLwo+ID4gKwo+ID4gK2VudW0gdmly
+dGlvX3ZpZGVvX2V2ZW50X3R5cGUgewo+ID4gKyAgICAgICAvKiBGb3IgYWxsIGRldmljZXMgKi8K
+PiA+ICsgICAgICAgVklSVElPX1ZJREVPX0VWRU5UX0VSUk9SID0gMHgwMTAwLAo+ID4gKwo+ID4g
+KyAgICAgICAvKiBGb3IgZGVjb2RlciBvbmx5ICovCj4gPiArICAgICAgIFZJUlRJT19WSURFT19F
+VkVOVF9ERUNPREVSX1JFU09MVVRJT05fQ0hBTkdFRCA9IDB4MDIwMCwKPiA+ICt9Owo+ID4gKwo+
+ID4gK3N0cnVjdCB2aXJ0aW9fdmlkZW9fZXZlbnQgewo+ID4gKyAgICAgICBfX2xlMzIgZXZlbnRf
+dHlwZTsgLyogT25lIG9mIFZJUlRJT19WSURFT19FVkVOVF8qIHR5cGVzICovCj4gPiArICAgICAg
+IF9fbGUzMiBzdHJlYW1faWQ7Cj4gPiArfTsKPiA+ICsKPiA+ICsjZW5kaWYgLyogX1VBUElfTElO
+VVhfVklSVElPX1ZJREVPX0ggKi8KPiA+IC0tCj4gPiAyLjI1LjAKPiA+IAoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBs
+aXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
+ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
