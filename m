@@ -2,46 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2C79182E0E
-	for <lists+spice-devel@lfdr.de>; Thu, 12 Mar 2020 11:44:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38A19182E0F
+	for <lists+spice-devel@lfdr.de>; Thu, 12 Mar 2020 11:44:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 864E56E12E;
-	Thu, 12 Mar 2020 10:44:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5E43B6E135;
+	Thu, 12 Mar 2020 10:44:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DF9A66E124
- for <spice-devel@lists.freedesktop.org>; Thu, 12 Mar 2020 10:29:44 +0000 (UTC)
-Received: from spamfilter02.heinlein-hosting.de
- (spamfilter02.heinlein-hosting.de [80.241.56.116])
- by plasma.jpberlin.de (Postfix) with ESMTP id EF12EBBF62;
- Thu, 12 Mar 2020 11:29:40 +0100 (CET)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
- [80.241.56.116]) (amavisd-new, port 10030)
- with ESMTP id gHerBSLszxZn; Thu, 12 Mar 2020 11:29:39 +0100 (CET)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "GeoTrust EV RSA CA 2018" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 478A4BD71D;
- Thu, 12 Mar 2020 11:29:39 +0100 (CET)
-Received: from os-lin-dmo.localnet (10.25.255.1) by MXS02.open-synergy.com
- (10.25.10.18) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 12 Mar
- 2020 11:29:38 +0100
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: Keiichi Watanabe <keiichiw@chromium.org>, Hans Verkuil <hverkuil@xs4all.nl>
-Date: Thu, 12 Mar 2020 11:29:38 +0100
-Message-ID: <1799967.VLH7GnMWUR@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <1ac18708-262f-c751-d955-267931270028@xs4all.nl>
+Received: from lb3-smtp-cloud8.xs4all.net (lb3-smtp-cloud8.xs4all.net
+ [194.109.24.29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 164EF6E120
+ for <spice-devel@lists.freedesktop.org>; Thu, 12 Mar 2020 10:37:05 +0000 (UTC)
+Received: from [192.168.2.10] ([46.9.234.233])
+ by smtp-cloud8.xs4all.net with ESMTPA
+ id CLD2jwVkXhVf8CLD5jME1m; Thu, 12 Mar 2020 11:37:04 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=s1;
+ t=1584009424; bh=aGrg7qZfZCYGh0cHGrNmxeV1OrTKKhJ8HGddZQHHCWE=;
+ h=Subject:To:From:Message-ID:Date:MIME-Version:Content-Type:From:
+ Subject;
+ b=Dab3J+8Rfm555gsj5nHTYvT6ydnuJfdCEE6gzVrhm9jErKAifpchNrIHoxFKxCuu1
+ JxPfk+W/4hMK6T9PWaLHxertQCthJvr/kHr7sIw4fFKffp5FYtZMqtLnyZK7sMb80J
+ cr7cCHlywKAOI8i57zRhdumCKVqpK4ZCfmzmSevOsSCqTn6wrvchttQkqR6o3riAXg
+ 8WJSP++tbOe7WmXGTnhnT+oRw8yDAolGpIbIKdIl7iwKFMNmL34S7rAC93mLJ6Iczj
+ xr/fvbQKwRuKKVIcVSlkBm6k3eUc5E6YsetiRGwrBsayuu0fC6rZVCQACe9qCAC47T
+ /vSMPrv6pnp2w==
+To: Dmitry Sepp <dmitry.sepp@opensynergy.com>,
+ Keiichi Watanabe <keiichiw@chromium.org>
 References: <20200218202753.652093-1-dmitry.sepp@opensynergy.com>
  <CAD90VcZUqU0nVQEn1vNOQkcicR5GA+HzBGd+M7O_b69f2BCUxA@mail.gmail.com>
  <1ac18708-262f-c751-d955-267931270028@xs4all.nl>
+ <1799967.VLH7GnMWUR@os-lin-dmo>
+From: Hans Verkuil <hverkuil@xs4all.nl>
+Message-ID: <645df052-7fbb-386a-d620-9d1908773896@xs4all.nl>
+Date: Thu, 12 Mar 2020 11:37:00 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
+In-Reply-To: <1799967.VLH7GnMWUR@os-lin-dmo>
+Content-Language: en-US
+X-CMAE-Envelope: MS4wfHKnbDE2aNxmEnKvUaMCZpBjREJu2qNDYIaZrBjcvZSOSjjYFNMFZ9vBFnf3EGl9r9eE5QSwfA7lPfPpy8t8voZ3Ms88iRo79ekoBExt6+oS+y+77vkm
+ nHd/2dCiQJAXJSGjp8LUpp+X6ViPP7H/B7ltslbB7wQfBnKUwWUT1QZE+Gx7IVknVh9dzOSGX7+BTMs60HCuPuJ51m0FZaGbxgOqzRPnbP4SsHqFjX9dTD43
+ LcMZu82Uj+d4G/vLXD773+ATCAFO5vo4mu2ZuZHMsM9vPBFSw0iQhDrT7C1lhbwWLOK/L5LmD1o1x3v9VbAV3bXlMhZe59iXCNwAj7xXgQshokhsmNF3unTM
+ m2uxRlQdNJSETeGRr6B3HtC27OKtwG7AVUXgEywldshREm/RPoPUKrGxY7p3c8fIBzV3Ej/yBqPN+8PVLLOYJpWTHJggjhD6BCUrRQjm0Sb/vg+3gqIaYV5F
+ VfhAA1R7hpO4c5w7ogVYukUeZrKcVLpJOGp51Y6wk/wRYGqqIvejcrwnIlBvpxOaHXkgd5QNJC7x/9REwVM5l8f2DwYvMNbdNAUFX7dCn8P89vVE7eoMEmaD
+ FYH8X/rfSvaJuEHSsSvMaHYnZRLVb+9UdvocSRjZ3Opq+9ClCY13aRS/00zApuDEiCJD83B6el9cvhmDoEIYMC++XQQewZ3JATufBtNw2dGGvp8zQrwmBzZr
+ +/FKh2IoQ7M5IudHmXguSQNcihDEG4Fm0VnK9zAgMUCgUPQJW+vJJHY3uXbC0nT/BTJ2qmFzk9hP3nKt8zMVGS8EPrMtlN6K8Az8GWg/84s5BjHqWdRhzAK/
+ /v2jVQwJVLBVr2Tm3TQ=
 X-Mailman-Approved-At: Thu, 12 Mar 2020 10:44:53 +0000
 Subject: Re: [Spice-devel] [PATCH v2 0/1] Virtio Video V4L2 driver
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -62,154 +68,89 @@ Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
  David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
  David Stevens <stevensd@chromium.org>, Gerd Hoffmann <kraxel@redhat.com>,
  Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
- =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ =?UTF-8?Q?St=c3=a9phane_Marchesin?= <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Hans,
-
-I'm not sure about crosvm, for us it is probably still feasible to implemen=
-t =
-
-FWHT in the device (but it is unfortunately not supposed to be upstreamed =
-
-yet).
-
-The main question is what would be the proper user-space tool to test that?=
- Is =
-
-v4l2-ctl OK for that? As for gstreamer, AFAIK it does not respect the v4l2 =
-
-Video Decoder Interface Spec and we have seen some issues with it.
-
-Best regards,
-Dmitry.
-
-On Donnerstag, 12. M=E4rz 2020 10:54:35 CET Hans Verkuil wrote:
-> On 3/12/20 10:49 AM, Keiichi Watanabe wrote:
-> > Hi Hans,
-> > =
-
-> > On Wed, Mar 11, 2020 at 10:26 PM Hans Verkuil <hverkuil@xs4all.nl> wrot=
-e:
-> >> Hi Dmitry,
-> >> =
-
-> >> On 2/18/20 9:27 PM, Dmitry Sepp wrote:
-> >>> Hi all,
-> >>> =
-
-> >>> This is a v4l2 virtio video driver for the virtio-video device
-> >>> specification v3 [1].
-> >>> =
-
-> >>> The first version of the driver was introduced here [2].
-> >>> =
-
-> >>> Changes v1 -> v2:
-> >>> * support the v3 spec (mostly)
-> >>> * add a module parameter to ask for pages from ZONE_DMA
-> >>> =
-
-> >>> What is not implemented:
-> >>> * Plane layout flags should be used to propagate number of planes to
-> >>> =
-
-> >>>   user-space
-> >>> =
-
-> >>> * There is no real use of stream creation with bitstream format in the
-> >>> =
-
-> >>>   parameter list. The driver just uses the first bitstream format from
-> >>>   the list.
-> >>> =
-
-> >>> * Setting bitrate is done in a different way compared to the spec. Th=
-is
-> >>> =
-
-> >>>   is because it has been already agreed on that the way the spec
-> >>>   currently describes it requires changes.
-> >>> =
-
-> >>> Potential improvements:
-> >>> * Do not send stream_create from open. Use corresponding state machine
-> >>> =
-
-> >>>   condition to do this.
-> >>> =
-
-> >>> * Do not send stream_destroy from close. Do it in reqbufs(0).
-> >>> * Cache format and control settings. Reduce calls to the device.
-> >> =
-
-> >> Some general notes:
-> >> =
-
-> >> Before this can be merged it needs to pass v4l2-compliance.
-> >> =
-
-> >> I also strongly recommend adding support for V4L2_PIX_FMT_FWHT to
-> >> allow testing with the vicodec emulation driver. This will also
-> >> allow testing all sorts of corner cases without requiring special
-> >> hardware.
-> > =
-
-> > I agree that it's great if we could test virtio-video with vicodec,
-> > but I wonder if supporting FWHT is actually needed for the initial
-> > patch.
-> > Though it wouldn't be difficult to support FWHT in the driver, we also
-> > needs to support it in the host's hypervisor to test it. It's not easy
-> > for our hypervisor to support FWHT, as it doesn't talk to v4l2 driver
-> > directly.
-> > Without the host-side implementation, it makes no sense to support it.
-> > Also, if we support FWHT, we should have the format in a list of
-> > supported formats in the virtio specification. However, I'm not sure
-> > if FWHT is a general codec enough to be added in the spec, which
-> > shouldn't be specific to Linux.
-> =
-
-> Good point, I didn't know that.
-> =
-
-> Is it possible to add support for FWHT under a linux debug/test option?
-> =
-
-> It's really the main reason for having this, since you would never use
-> this in production code. But it is so nice to have for regression testing.
-> =
-
-> Regards,
-> =
-
-> 	Hans
-> =
-
-> > Best regards,
-> > Keiichi
-> > =
-
-> >> Regards,
-> >> =
-
-> >>         Hans
-> >>> =
-
-> >>> Best regards,
-> >>> Dmitry.
-> >>> =
-
-> >>> [1] https://markmail.org/message/dmw3pr4fuajvarth
-> >>> [2] https://markmail.org/message/wnnv6r6myvgb5at6
-
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+T24gMy8xMi8yMCAxMToyOSBBTSwgRG1pdHJ5IFNlcHAgd3JvdGU6Cj4gSGkgSGFucywKPiAKPiBJ
+J20gbm90IHN1cmUgYWJvdXQgY3Jvc3ZtLCBmb3IgdXMgaXQgaXMgcHJvYmFibHkgc3RpbGwgZmVh
+c2libGUgdG8gaW1wbGVtZW50IAo+IEZXSFQgaW4gdGhlIGRldmljZSAoYnV0IGl0IGlzIHVuZm9y
+dHVuYXRlbHkgbm90IHN1cHBvc2VkIHRvIGJlIHVwc3RyZWFtZWQgCj4geWV0KS4KPiAKPiBUaGUg
+bWFpbiBxdWVzdGlvbiBpcyB3aGF0IHdvdWxkIGJlIHRoZSBwcm9wZXIgdXNlci1zcGFjZSB0b29s
+IHRvIHRlc3QgdGhhdD8gSXMgCj4gdjRsMi1jdGwgT0sgZm9yIHRoYXQ/IEFzIGZvciBnc3RyZWFt
+ZXIsIEFGQUlLIGl0IGRvZXMgbm90IHJlc3BlY3QgdGhlIHY0bDIgCj4gVmlkZW8gRGVjb2RlciBJ
+bnRlcmZhY2UgU3BlYyBhbmQgd2UgaGF2ZSBzZWVuIHNvbWUgaXNzdWVzIHdpdGggaXQuCgpBIGNv
+bWJvIG9mIHY0bDItY3RsIGFuZCB2NGwyLWNvbXBsaWFuY2UuIEluIHY0bC11dGlscyB5b3UgZmlu
+ZCBhIHRlc3QtbWVkaWEKc2NyaXB0IGluIGNvbnRyaWIvdGVzdCB0aGF0IHRlc3RzIHRoZSB2YXJp
+b3VzIHZpcnR1YWwgdjRsMiBkcml2ZXJzLCBpbmNsdWRpbmcKdmljb2RlYy4KCkJhc2ljYWxseSB5
+b3Ugd2FudCB0byBydW4gdGhlIHNhbWUgKG9yIGF0IGxlYXN0IGFzIG11Y2ggYXMgcG9zc2libGUp
+IHZpY29kZWMKdGVzdHMgZm9yIHRoaXMgdmlydGlvIGRyaXZlciBpbiBhIGxpbnV4IGd1ZXN0IFZN
+LgoKVGhlIHNjcmlwdCB1c2VzIHRoZSB2aWNvZGVjIGVuY29kZXIgdG8gY3JlYXRlIHRlc3Qgc3Ry
+ZWFtcywgYnV0IGluIHRoZSBWTSB5b3UKY2FuIGFsc28gbG9hZCB2aWNvZGVjIGFuZCB1c2UgaXQg
+dG8gZG8gdGhlIHNhbWUgdGhpbmcsIHdoaWNoIGNhbiB0aGVuIGJlIGZlZAp0byB0aGUgdmlydGlv
+IGRyaXZlciB3aG8gcGFzc2VzIGl0IHRvIHRoZSB2aWNvZGVjIGluc3RhbmNlIHJ1bm5pbmcgb24g
+dGhlIGhvc3QsCmFuZCB0aGUgcmVzdWx0IGdvZXMgYmFjayB0byB0aGUgVk0uCgpJdCB3b3VsZCBi
+ZSBhIGdyZWF0IHNldHVwIHRvIGNoZWNrIHRoZSBjb3JuZXIgY2FzZXMgYW5kIHZlcmlmeSB0aGUg
+cmVzdWx0cyBvZgp0aGUgY29kZWMuIEFuZCBpdCBjYW4gYmUgYWRkZWQgdG8ga2VybmVsLWNpIGFu
+ZCBteSBvd24gZGFpbHkgcmVncmVzc2lvbiB0ZXN0LgoKUmVnYXJkcywKCglIYW5zCgo+IAo+IEJl
+c3QgcmVnYXJkcywKPiBEbWl0cnkuCj4gCj4gT24gRG9ubmVyc3RhZywgMTIuIE3DpHJ6IDIwMjAg
+MTA6NTQ6MzUgQ0VUIEhhbnMgVmVya3VpbCB3cm90ZToKPj4gT24gMy8xMi8yMCAxMDo0OSBBTSwg
+S2VpaWNoaSBXYXRhbmFiZSB3cm90ZToKPj4+IEhpIEhhbnMsCj4+Pgo+Pj4gT24gV2VkLCBNYXIg
+MTEsIDIwMjAgYXQgMTA6MjYgUE0gSGFucyBWZXJrdWlsIDxodmVya3VpbEB4czRhbGwubmw+IHdy
+b3RlOgo+Pj4+IEhpIERtaXRyeSwKPj4+Pgo+Pj4+IE9uIDIvMTgvMjAgOToyNyBQTSwgRG1pdHJ5
+IFNlcHAgd3JvdGU6Cj4+Pj4+IEhpIGFsbCwKPj4+Pj4KPj4+Pj4gVGhpcyBpcyBhIHY0bDIgdmly
+dGlvIHZpZGVvIGRyaXZlciBmb3IgdGhlIHZpcnRpby12aWRlbyBkZXZpY2UKPj4+Pj4gc3BlY2lm
+aWNhdGlvbiB2MyBbMV0uCj4+Pj4+Cj4+Pj4+IFRoZSBmaXJzdCB2ZXJzaW9uIG9mIHRoZSBkcml2
+ZXIgd2FzIGludHJvZHVjZWQgaGVyZSBbMl0uCj4+Pj4+Cj4+Pj4+IENoYW5nZXMgdjEgLT4gdjI6
+Cj4+Pj4+ICogc3VwcG9ydCB0aGUgdjMgc3BlYyAobW9zdGx5KQo+Pj4+PiAqIGFkZCBhIG1vZHVs
+ZSBwYXJhbWV0ZXIgdG8gYXNrIGZvciBwYWdlcyBmcm9tIFpPTkVfRE1BCj4+Pj4+Cj4+Pj4+IFdo
+YXQgaXMgbm90IGltcGxlbWVudGVkOgo+Pj4+PiAqIFBsYW5lIGxheW91dCBmbGFncyBzaG91bGQg
+YmUgdXNlZCB0byBwcm9wYWdhdGUgbnVtYmVyIG9mIHBsYW5lcyB0bwo+Pj4+Pgo+Pj4+PiAgIHVz
+ZXItc3BhY2UKPj4+Pj4KPj4+Pj4gKiBUaGVyZSBpcyBubyByZWFsIHVzZSBvZiBzdHJlYW0gY3Jl
+YXRpb24gd2l0aCBiaXRzdHJlYW0gZm9ybWF0IGluIHRoZQo+Pj4+Pgo+Pj4+PiAgIHBhcmFtZXRl
+ciBsaXN0LiBUaGUgZHJpdmVyIGp1c3QgdXNlcyB0aGUgZmlyc3QgYml0c3RyZWFtIGZvcm1hdCBm
+cm9tCj4+Pj4+ICAgdGhlIGxpc3QuCj4+Pj4+Cj4+Pj4+ICogU2V0dGluZyBiaXRyYXRlIGlzIGRv
+bmUgaW4gYSBkaWZmZXJlbnQgd2F5IGNvbXBhcmVkIHRvIHRoZSBzcGVjLiBUaGlzCj4+Pj4+Cj4+
+Pj4+ICAgaXMgYmVjYXVzZSBpdCBoYXMgYmVlbiBhbHJlYWR5IGFncmVlZCBvbiB0aGF0IHRoZSB3
+YXkgdGhlIHNwZWMKPj4+Pj4gICBjdXJyZW50bHkgZGVzY3JpYmVzIGl0IHJlcXVpcmVzIGNoYW5n
+ZXMuCj4+Pj4+Cj4+Pj4+IFBvdGVudGlhbCBpbXByb3ZlbWVudHM6Cj4+Pj4+ICogRG8gbm90IHNl
+bmQgc3RyZWFtX2NyZWF0ZSBmcm9tIG9wZW4uIFVzZSBjb3JyZXNwb25kaW5nIHN0YXRlIG1hY2hp
+bmUKPj4+Pj4KPj4+Pj4gICBjb25kaXRpb24gdG8gZG8gdGhpcy4KPj4+Pj4KPj4+Pj4gKiBEbyBu
+b3Qgc2VuZCBzdHJlYW1fZGVzdHJveSBmcm9tIGNsb3NlLiBEbyBpdCBpbiByZXFidWZzKDApLgo+
+Pj4+PiAqIENhY2hlIGZvcm1hdCBhbmQgY29udHJvbCBzZXR0aW5ncy4gUmVkdWNlIGNhbGxzIHRv
+IHRoZSBkZXZpY2UuCj4+Pj4KPj4+PiBTb21lIGdlbmVyYWwgbm90ZXM6Cj4+Pj4KPj4+PiBCZWZv
+cmUgdGhpcyBjYW4gYmUgbWVyZ2VkIGl0IG5lZWRzIHRvIHBhc3MgdjRsMi1jb21wbGlhbmNlLgo+
+Pj4+Cj4+Pj4gSSBhbHNvIHN0cm9uZ2x5IHJlY29tbWVuZCBhZGRpbmcgc3VwcG9ydCBmb3IgVjRM
+Ml9QSVhfRk1UX0ZXSFQgdG8KPj4+PiBhbGxvdyB0ZXN0aW5nIHdpdGggdGhlIHZpY29kZWMgZW11
+bGF0aW9uIGRyaXZlci4gVGhpcyB3aWxsIGFsc28KPj4+PiBhbGxvdyB0ZXN0aW5nIGFsbCBzb3J0
+cyBvZiBjb3JuZXIgY2FzZXMgd2l0aG91dCByZXF1aXJpbmcgc3BlY2lhbAo+Pj4+IGhhcmR3YXJl
+Lgo+Pj4KPj4+IEkgYWdyZWUgdGhhdCBpdCdzIGdyZWF0IGlmIHdlIGNvdWxkIHRlc3QgdmlydGlv
+LXZpZGVvIHdpdGggdmljb2RlYywKPj4+IGJ1dCBJIHdvbmRlciBpZiBzdXBwb3J0aW5nIEZXSFQg
+aXMgYWN0dWFsbHkgbmVlZGVkIGZvciB0aGUgaW5pdGlhbAo+Pj4gcGF0Y2guCj4+PiBUaG91Z2gg
+aXQgd291bGRuJ3QgYmUgZGlmZmljdWx0IHRvIHN1cHBvcnQgRldIVCBpbiB0aGUgZHJpdmVyLCB3
+ZSBhbHNvCj4+PiBuZWVkcyB0byBzdXBwb3J0IGl0IGluIHRoZSBob3N0J3MgaHlwZXJ2aXNvciB0
+byB0ZXN0IGl0LiBJdCdzIG5vdCBlYXN5Cj4+PiBmb3Igb3VyIGh5cGVydmlzb3IgdG8gc3VwcG9y
+dCBGV0hULCBhcyBpdCBkb2Vzbid0IHRhbGsgdG8gdjRsMiBkcml2ZXIKPj4+IGRpcmVjdGx5Lgo+
+Pj4gV2l0aG91dCB0aGUgaG9zdC1zaWRlIGltcGxlbWVudGF0aW9uLCBpdCBtYWtlcyBubyBzZW5z
+ZSB0byBzdXBwb3J0IGl0Lgo+Pj4gQWxzbywgaWYgd2Ugc3VwcG9ydCBGV0hULCB3ZSBzaG91bGQg
+aGF2ZSB0aGUgZm9ybWF0IGluIGEgbGlzdCBvZgo+Pj4gc3VwcG9ydGVkIGZvcm1hdHMgaW4gdGhl
+IHZpcnRpbyBzcGVjaWZpY2F0aW9uLiBIb3dldmVyLCBJJ20gbm90IHN1cmUKPj4+IGlmIEZXSFQg
+aXMgYSBnZW5lcmFsIGNvZGVjIGVub3VnaCB0byBiZSBhZGRlZCBpbiB0aGUgc3BlYywgd2hpY2gK
+Pj4+IHNob3VsZG4ndCBiZSBzcGVjaWZpYyB0byBMaW51eC4KPj4KPj4gR29vZCBwb2ludCwgSSBk
+aWRuJ3Qga25vdyB0aGF0Lgo+Pgo+PiBJcyBpdCBwb3NzaWJsZSB0byBhZGQgc3VwcG9ydCBmb3Ig
+RldIVCB1bmRlciBhIGxpbnV4IGRlYnVnL3Rlc3Qgb3B0aW9uPwo+Pgo+PiBJdCdzIHJlYWxseSB0
+aGUgbWFpbiByZWFzb24gZm9yIGhhdmluZyB0aGlzLCBzaW5jZSB5b3Ugd291bGQgbmV2ZXIgdXNl
+Cj4+IHRoaXMgaW4gcHJvZHVjdGlvbiBjb2RlLiBCdXQgaXQgaXMgc28gbmljZSB0byBoYXZlIGZv
+ciByZWdyZXNzaW9uIHRlc3RpbmcuCj4+Cj4+IFJlZ2FyZHMsCj4+Cj4+IAlIYW5zCj4+Cj4+PiBC
+ZXN0IHJlZ2FyZHMsCj4+PiBLZWlpY2hpCj4+Pgo+Pj4+IFJlZ2FyZHMsCj4+Pj4KPj4+PiAgICAg
+ICAgIEhhbnMKPj4+Pj4KPj4+Pj4gQmVzdCByZWdhcmRzLAo+Pj4+PiBEbWl0cnkuCj4+Pj4+Cj4+
+Pj4+IFsxXSBodHRwczovL21hcmttYWlsLm9yZy9tZXNzYWdlL2RtdzNwcjRmdWFqdmFydGgKPj4+
+Pj4gWzJdIGh0dHBzOi8vbWFya21haWwub3JnL21lc3NhZ2Uvd25udjZyNm15dmdiNWF0Ngo+IAo+
+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2Ut
+ZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRw
+czovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
