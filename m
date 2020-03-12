@@ -2,45 +2,49 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D25FB182D22
-	for <lists+spice-devel@lfdr.de>; Thu, 12 Mar 2020 11:11:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EECCF182D21
+	for <lists+spice-devel@lfdr.de>; Thu, 12 Mar 2020 11:11:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F40146E0E4;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6792E6E0E0;
 	Thu, 12 Mar 2020 10:11:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E83AA6E0CF
- for <spice-devel@lists.freedesktop.org>; Thu, 12 Mar 2020 09:04:07 +0000 (UTC)
-Received: from hefe.heinlein-support.de (hefe.heinlein-support.de
- [91.198.250.172])
- by plasma.jpberlin.de (Postfix) with ESMTP id 5D23FBDBE9;
- Thu, 12 Mar 2020 10:04:03 +0100 (CET)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([91.198.250.140])
- by hefe.heinlein-support.de (hefe.heinlein-support.de [91.198.250.172])
- (amavisd-new, port 10030)
- with ESMTP id Rqa_x91R7uHK; Thu, 12 Mar 2020 10:03:59 +0100 (CET)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "GeoTrust EV RSA CA 2018" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id C879CBDA56;
- Thu, 12 Mar 2020 10:03:58 +0100 (CET)
-Received: from os-lin-dmo.localnet (10.25.255.1) by MXS02.open-synergy.com
- (10.25.10.18) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 12 Mar
- 2020 10:03:58 +0100
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: <linux-media@vger.kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>
-Date: Thu, 12 Mar 2020 10:03:58 +0100
-Message-ID: <3182728.aeNJFYEL58@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <c4d7622b-e396-3920-0e14-5a73a0225c0f@xs4all.nl>
+Received: from mail-lf1-x144.google.com (mail-lf1-x144.google.com
+ [IPv6:2a00:1450:4864:20::144])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 03D8B6E0E0
+ for <spice-devel@lists.freedesktop.org>; Thu, 12 Mar 2020 09:49:24 +0000 (UTC)
+Received: by mail-lf1-x144.google.com with SMTP id j17so4229773lfe.7
+ for <spice-devel@lists.freedesktop.org>; Thu, 12 Mar 2020 02:49:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ihDA5z/RB6EziP2l1mK0CTlDF0iu+inIbruq+zZtDCQ=;
+ b=Z7CsPvtViFrzA/69kofxcBVaBnbTWNmbuL51JtAh+O33iyTY0Eo6PsMCIvNlF3nM/P
+ cUVuzZ3giLxRuysQCRLgfhHVKSp+YGvC2d2nKIuCudR/LIXHV1/y9TWkl4hImqt0yxzk
+ zTghrM9Lnt2M1F7TnIBpQWnz4ulugPqOEjnck=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ihDA5z/RB6EziP2l1mK0CTlDF0iu+inIbruq+zZtDCQ=;
+ b=kg/1qepYEVXewSHOqrVV1+LzNI4mhUma7//T21YHLf7PZc+AszhiTpPerX8nsKVI2T
+ bbCG2e5yEIqp9uyp/hHuVG9/bYQizM8fY7mRt/RPQkWTlpzr1SpsjLB2iHTc2MLwps0d
+ TfZhv3jSrjLNuDMTdLyv/zUdWxAfpfBsA49B0A/IqT3P6KM/V1QeOKVtFZnbFLOyKLh5
+ XZ/osfwf7H4Gtu7lo7HdchUYI47Za47b5kkcre6SKragXOVPKWL4PqBFrlR13XeYp7wM
+ 7JSrGGwBnRq71tPh4xvRDJAT2gBUV9TttXHQ2kGDpdqZPGZyDTZHOmHaqLh/XExWG4FT
+ d35w==
+X-Gm-Message-State: ANhLgQ1rfx6KXVwAIYftQr4Li2rEce0c2/kwtuhHluSOefD+6htZSTM4
+ wdIVzW5aXnO1rqy/thTnlXCFsYOR7gtLTPAESSPMKg==
+X-Google-Smtp-Source: ADFU+vs/N/pAegpoMyJQhDsktbDiRdVGouE4qmZM6UzCstoU9btKXYbgO9oLeOdJ4ZD2a+8VDCJ7cl1oH4OYRe+kRzg=
+X-Received: by 2002:a19:f00d:: with SMTP id p13mr4700463lfc.147.1584006563275; 
+ Thu, 12 Mar 2020 02:49:23 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200218202753.652093-1-dmitry.sepp@opensynergy.com>
  <c4d7622b-e396-3920-0e14-5a73a0225c0f@xs4all.nl>
-MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
+In-Reply-To: <c4d7622b-e396-3920-0e14-5a73a0225c0f@xs4all.nl>
+From: Keiichi Watanabe <keiichiw@chromium.org>
+Date: Thu, 12 Mar 2020 18:49:11 +0900
+Message-ID: <CAD90VcZUqU0nVQEn1vNOQkcicR5GA+HzBGd+M7O_b69f2BCUxA@mail.gmail.com>
+To: Hans Verkuil <hverkuil@xs4all.nl>
 X-Mailman-Approved-At: Thu, 12 Mar 2020 10:11:32 +0000
 Subject: Re: [Spice-devel] [PATCH v2 0/1] Virtio Video V4L2 driver
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -54,107 +58,96 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: samiullah.khawaja@opensynergy.com, virtio-dev@lists.oasis-open.org,
- alexlau@chromium.org, kiran.pawar@opensynergy.com, acourbot@chromium.org,
- dstaessens@chromium.org, tfiga@chromium.org, stevensd@chromium.org,
- kraxel@redhat.com, daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
- marcheu@chromium.org, dgreid@chromium.org, egranata@google.com,
- posciak@chromium.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
+ virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
+ Kiran Pawar <kiran.pawar@opensynergy.com>,
+ Alexandre Courbot <acourbot@chromium.org>,
+ David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ David Stevens <stevensd@chromium.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dmitry Sepp <dmitry.sepp@opensynergy.com>,
+ =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
+ Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 Hi Hans,
 
-Thanks for reviewing.
-
-Sure, we understand the driver must pass v4l2-compliance. But the spec is n=
-ot =
-
-finalized yet, so it was a bit out of the scope.
-
-Best regards,
-Dmitry.
-
-On Mittwoch, 11. M=E4rz 2020 14:26:46 CET Hans Verkuil wrote:
+On Wed, Mar 11, 2020 at 10:26 PM Hans Verkuil <hverkuil@xs4all.nl> wrote:
+>
 > Hi Dmitry,
-> =
-
+>
 > On 2/18/20 9:27 PM, Dmitry Sepp wrote:
 > > Hi all,
-> > =
-
+> >
 > > This is a v4l2 virtio video driver for the virtio-video device
 > > specification v3 [1].
-> > =
-
+> >
 > > The first version of the driver was introduced here [2].
-> > =
-
+> >
 > > Changes v1 -> v2:
 > > * support the v3 spec (mostly)
 > > * add a module parameter to ask for pages from ZONE_DMA
-> > =
-
+> >
 > > What is not implemented:
 > > * Plane layout flags should be used to propagate number of planes to
-> > =
-
 > >   user-space
-> > =
-
 > > * There is no real use of stream creation with bitstream format in the
-> > =
-
 > >   parameter list. The driver just uses the first bitstream format from
 > >   the list.
-> > =
-
 > > * Setting bitrate is done in a different way compared to the spec. This
-> > =
-
 > >   is because it has been already agreed on that the way the spec
 > >   currently describes it requires changes.
-> > =
-
+> >
 > > Potential improvements:
 > > * Do not send stream_create from open. Use corresponding state machine
-> > =
-
 > >   condition to do this.
-> > =
-
 > > * Do not send stream_destroy from close. Do it in reqbufs(0).
 > > * Cache format and control settings. Reduce calls to the device.
-> =
-
+>
 > Some general notes:
-> =
-
+>
 > Before this can be merged it needs to pass v4l2-compliance.
-> =
-
+>
 > I also strongly recommend adding support for V4L2_PIX_FMT_FWHT to
 > allow testing with the vicodec emulation driver. This will also
 > allow testing all sorts of corner cases without requiring special
 > hardware.
-> =
 
+I agree that it's great if we could test virtio-video with vicodec,
+but I wonder if supporting FWHT is actually needed for the initial
+patch.
+Though it wouldn't be difficult to support FWHT in the driver, we also
+needs to support it in the host's hypervisor to test it. It's not easy
+for our hypervisor to support FWHT, as it doesn't talk to v4l2 driver
+directly.
+Without the host-side implementation, it makes no sense to support it.
+Also, if we support FWHT, we should have the format in a list of
+supported formats in the virtio specification. However, I'm not sure
+if FWHT is a general codec enough to be added in the spec, which
+shouldn't be specific to Linux.
+
+Best regards,
+Keiichi
+
+>
 > Regards,
-> =
-
-> 	Hans
-> =
-
+>
+>         Hans
+>
+> >
 > > Best regards,
 > > Dmitry.
-> > =
-
+> >
 > > [1] https://markmail.org/message/dmw3pr4fuajvarth
 > > [2] https://markmail.org/message/wnnv6r6myvgb5at6
-
-
+> >
+> >
+>
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
