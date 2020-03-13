@@ -1,50 +1,66 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A37C11834F5
-	for <lists+spice-devel@lfdr.de>; Thu, 12 Mar 2020 16:29:16 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FD5C1842B0
+	for <lists+spice-devel@lfdr.de>; Fri, 13 Mar 2020 09:32:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 82FC26EAE8;
-	Thu, 12 Mar 2020 15:29:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BB91C6EB92;
+	Fri, 13 Mar 2020 08:32:06 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 993F16E1B5
- for <spice-devel@lists.freedesktop.org>; Thu, 12 Mar 2020 11:48:55 +0000 (UTC)
-Received: from gerste.heinlein-support.de (gerste.heinlein-support.de
- [91.198.250.173])
- by plasma.jpberlin.de (Postfix) with ESMTP id D0FE9B9A08;
- Thu, 12 Mar 2020 12:48:51 +0100 (CET)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([91.198.250.140])
- by gerste.heinlein-support.de (gerste.heinlein-support.de [91.198.250.173])
- (amavisd-new, port 10030)
- with ESMTP id 8s9p-ZFrkGl4; Thu, 12 Mar 2020 12:48:50 +0100 (CET)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "GeoTrust EV RSA CA 2018" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 31E39B786B;
- Thu, 12 Mar 2020 12:48:50 +0100 (CET)
-Received: from os-lin-dmo.localnet (10.25.255.1) by MXS01.open-synergy.com
- (10.25.10.17) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 12 Mar
- 2020 12:48:49 +0100
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: <linux-media@vger.kernel.org>, Hans Verkuil <hverkuil@xs4all.nl>
-Date: Thu, 12 Mar 2020 12:48:49 +0100
-Message-ID: <12620787.dW097sEU6C@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <6f8c37b1-8dc4-e3bb-01ed-4ebedaf90915@xs4all.nl>
+Received: from mail-qk1-x741.google.com (mail-qk1-x741.google.com
+ [IPv6:2607:f8b0:4864:20::741])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D77736E152
+ for <spice-devel@lists.freedesktop.org>; Fri, 13 Mar 2020 02:29:49 +0000 (UTC)
+Received: by mail-qk1-x741.google.com with SMTP id f28so10049277qkk.13
+ for <spice-devel@lists.freedesktop.org>; Thu, 12 Mar 2020 19:29:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ndufresne-ca.20150623.gappssmtp.com; s=20150623;
+ h=message-id:subject:from:to:cc:date:in-reply-to:references
+ :user-agent:mime-version:content-transfer-encoding;
+ bh=5dNLyaIWQY8NO/c7Zkzyskl+bY+VQeoUGdwq4QxXPLs=;
+ b=m2uEGD1W5frptnBgKaLy6jd/vdi6ZdwNIykYwUVOKQND1kdQs3mVRoqEW0DotLpNEG
+ vajBpMd5RVflNZtU655ZS4+rS7W4d9ekvy4g4BS8BM5odV3PoIbZavZ1XWS/HFnGWFiM
+ UlRpWCexX6KB/Htqc1N278klSESQOvoih2Q4rj730lFwBhuD4GO+n0baIn9cr7xWX+MH
+ +GsLcajK+z+T5xcBIT1xU3vAoPpmTiyNCQVXLk9nygtLbe0wDJxlg3ApZMp8Lwor5OcJ
+ E67EwHgA3e3N1KSak4SZOpyPhtIRdYxun2rHbceyhOwmYSHPY6gEiWMeB5xsC5PwJKwm
+ dcjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:user-agent:mime-version:content-transfer-encoding;
+ bh=5dNLyaIWQY8NO/c7Zkzyskl+bY+VQeoUGdwq4QxXPLs=;
+ b=hpdkup0iqcn8lj6qW9ENjFJoJ3fbwVISN83VakF3xtyqB5WfXdKp/vLWXGf6I6BbEO
+ dWyeApwUtROXBNLPU1vihOxZBP1aEI3a6BBNBLHE5mBda5S8nxXP3n62LRrkFom4Koi+
+ JpamsJA/j8xSJyYgFhlhCcCJrfG/sJCXOc/06530S9X1K/wAW4bv9J98XcDg1E9UT4Zc
+ U1I1/Bi4yPNDgxc/LjI3umq4qoYTuMuLm9alDFaVisr88xyCJtuopQRP17Da/PWJ+m6D
+ kr3f9AksV3Im3FTyRuD0xWQ30vY8axKpCN+kbbkEw33jAmQAOqurG3ea2vNNTVn2gAJE
+ sUZw==
+X-Gm-Message-State: ANhLgQ0kOcOGQ8olLywfCtFuNlZU7zruFol/tfgdqG8VFaFkaTwGqFFS
+ 7WNcS4Nxm0kk2BCP81M2T4Q3RA==
+X-Google-Smtp-Source: ADFU+vvWltpeB8rBB/JSj8OGRPyy2pIJkFxhgCaDnf8Wu4Ysjqok9Im5aStyfJZ/1rBkflhLQmktZA==
+X-Received: by 2002:a05:620a:16b8:: with SMTP id
+ s24mr11042342qkj.104.1584066588822; 
+ Thu, 12 Mar 2020 19:29:48 -0700 (PDT)
+Received: from skullcanyon ([192.222.193.21])
+ by smtp.gmail.com with ESMTPSA id x74sm9833194qkb.40.2020.03.12.19.29.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Mar 2020 19:29:47 -0700 (PDT)
+Message-ID: <75f3a24ac5cd4f656aadf4312bdbcb70a6803a6e.camel@ndufresne.ca>
+From: Nicolas Dufresne <nicolas@ndufresne.ca>
+To: Dmitry Sepp <dmitry.sepp@opensynergy.com>, Keiichi Watanabe
+ <keiichiw@chromium.org>, Hans Verkuil <hverkuil@xs4all.nl>
+Date: Thu, 12 Mar 2020 22:29:44 -0400
+In-Reply-To: <1799967.VLH7GnMWUR@os-lin-dmo>
 References: <20200218202753.652093-1-dmitry.sepp@opensynergy.com>
- <20719772.EfDdHjke4D@os-lin-dmo>
- <6f8c37b1-8dc4-e3bb-01ed-4ebedaf90915@xs4all.nl>
+ <CAD90VcZUqU0nVQEn1vNOQkcicR5GA+HzBGd+M7O_b69f2BCUxA@mail.gmail.com>
+ <1ac18708-262f-c751-d955-267931270028@xs4all.nl>
+ <1799967.VLH7GnMWUR@os-lin-dmo>
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
 MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
-X-Mailman-Approved-At: Thu, 12 Mar 2020 15:29:12 +0000
-Subject: Re: [Spice-devel] [PATCH v2 1/1] video_video: Add the Virtio Video
- V4L2 driver
+X-Mailman-Approved-At: Fri, 13 Mar 2020 08:32:05 +0000
+Subject: Re: [Spice-devel] [PATCH v2 0/1] Virtio Video V4L2 driver
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,67 +72,116 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: samiullah.khawaja@opensynergy.com, virtio-dev@lists.oasis-open.org,
- alexlau@chromium.org, kiran.pawar@opensynergy.com, acourbot@chromium.org,
- dstaessens@chromium.org, tfiga@chromium.org, stevensd@chromium.org,
- kraxel@redhat.com, daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
- marcheu@chromium.org, dgreid@chromium.org,
- Nikolay Martyanov <Nikolay.Martyanov@opensynergy.com>, egranata@google.com,
- posciak@chromium.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
+ virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
+ Kiran Pawar <kiran.pawar@opensynergy.com>,
+ Alexandre Courbot <acourbot@chromium.org>,
+ David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ David Stevens <stevensd@chromium.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
+ Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Hans,
-
-One more thing:
-
-> GFP_DMA? That's unusual. I'd expect GFP_DMA32. All V4L2 drivers use that.
-
-GFP_DMA32 had no effect for me on arm64. Probably I need to recheck.
-
-Best regards,
-Dmitry. =
-
-
-On Donnerstag, 12. M=E4rz 2020 11:18:26 CET Hans Verkuil wrote:
-> On 3/12/20 11:15 AM, Dmitry Sepp wrote:
-> > Hi Hans,
-> > =
-
-> > Thank you for your great detailed review!
-> > =
-
-> > I won't provide inline answers as your comments totally make sense. The=
-re
-> > is> =
-
-> > only one thing I want to mention:
-> >>> +	struct video_plane_format plane_format[VIRTIO_VIDEO_MAX_PLANES];
-> >> =
-
-> >> Why is this virtio specific? Any reason for not using VIDEO_MAX_PLANES?
-> > =
-
-> > I'd say this is because VIDEO_MAX_PLANES does not exist outside of the
-> > Linux OS, so for whatever other system we need a virtio specific
-> > definition.
-> OK, good reason :-)
-> =
-
-> It's probably a good thing to add a comment where VIRTIO_VIDEO_MAX_PLANES=
- is
-> defined that explains this.
-> =
-
-> Regards,
-> =
-
-> 	Hans
-
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+SGkgRGltaXRyeSwKCkxlIGpldWRpIDEyIG1hcnMgMjAyMCDDoCAxMToyOSArMDEwMCwgRG1pdHJ5
+IFNlcHAgYSDDqWNyaXQgOgo+IEhpIEhhbnMsCj4gCj4gSSdtIG5vdCBzdXJlIGFib3V0IGNyb3N2
+bSwgZm9yIHVzIGl0IGlzIHByb2JhYmx5IHN0aWxsIGZlYXNpYmxlIHRvIGltcGxlbWVudCAKPiBG
+V0hUIGluIHRoZSBkZXZpY2UgKGJ1dCBpdCBpcyB1bmZvcnR1bmF0ZWx5IG5vdCBzdXBwb3NlZCB0
+byBiZSB1cHN0cmVhbWVkIAo+IHlldCkuCj4gCj4gVGhlIG1haW4gcXVlc3Rpb24gaXMgd2hhdCB3
+b3VsZCBiZSB0aGUgcHJvcGVyIHVzZXItc3BhY2UgdG9vbCB0byB0ZXN0IHRoYXQ/IElzIAo+IHY0
+bDItY3RsIE9LIGZvciB0aGF0PyBBcyBmb3IgZ3N0cmVhbWVyLCBBRkFJSyBpdCBkb2VzIG5vdCBy
+ZXNwZWN0IHRoZSB2NGwyIAo+IFZpZGVvIERlY29kZXIgSW50ZXJmYWNlIFNwZWMgYW5kIHdlIGhh
+dmUgc2VlbiBzb21lIGlzc3VlcyB3aXRoIGl0LgoKR1N0cmVhbWVyIGVsZW1lbnQgaGFzIGJlZW4g
+aW1wbGVtZW50ZWQgdG8gc3VwcG9ydCB3aGF0IHJlYWwgZHJpdmVycyBkbywKbm90IHdoYXQgdGhl
+IHNwZWMgc3VnZ2VzdCBzaG91bGQgYmUgZG9uZS4gQUZBSUMsIG5vdCBhbGwgZHJpdmVycyBoYXZl
+CmJlZW4gdXBkYXRlZCB3aXRoIGFsbCB0aGUgbmV3IGZlYXR1cmVzIHJlcXVpcmVkIGJ5IHRoZSBz
+cGVjLiBBbmQgdGhlCm5ldyBmZWF0dXJlcyBhcmUgbm90IGNvbXBhdGlibGUgd2l0aCBkcml2ZXJz
+IHRoYXQgYXJlIG5vdCBwb3J0ZWQsIHNvIGl0CmNyZWF0ZXMgYSBsb3Qgb2YgY29tcGxleGl0eSBm
+b3IgdXNlcnNwYWNlIHRvIHN0YXkgYmFja3dhcmQgY29tcGF0aWJsZS4KVGhvdWdoLCB0aGUgc3Bl
+YyBzaG91bGQgYWxsb3cgZHJpdmVycyB0byBzdGF5IGJhY2t3YXJkIGNvbXBhdGlibGUsIGlmCm5v
+dCwgd2UnZCBiZSB2ZXJ5IGhhcHB5IHRvIGxlYXJuIHdoeS4KCkFib3V0IHRoZSBvdGhlciBpc3N1
+ZXMsIEknZCBiZSB2ZXJ5IGhhcHB5IHRvIGxlYXJuIHdoYXQgdGhleSBhcmUsIGl0J3MKdGhlIGZp
+cnN0IGZlZWRiYWNrIEkgZ2V0IGZyb20geW91ciB0ZWFtIHRodXMgZmFyLiBQbGVhc2UgZmVlbCBm
+cmVlIHRvCmZpbGUgaXNzdWVzIG9yIHNlbmQgbWUgKG9yIGdzdHJlYW1lci1kZXZlbCBsaXN0KSBh
+biBlbWFpbC4KCkluIHRlcm0gb2YgdXNlcnNwYWNlLCBwbGVhc2UgY29uc2lkZXIgRkZNUEVHIGFs
+c28sIGFzIGl0J3Mgc3VwcG9ydCBmb3IKVjRMMiBTdGF0ZWZ1bCBDT0RFQ3MgaGFzIGdhaW5lZCBt
+b21lbnR1bS4gSXQgaXMgYWdhaW4gaW1wbGVtZW50ZWQgdG8Kc3VwcG9ydCByZWFsIGRyaXZlcnMs
+IGJ1dCBzdGFydGVkIG11Y2ggbW9yZSByZWNlbnRseSB0YXJnZXR0aW5nIHRoZQpRdWFsY29tbS9W
+ZW51cyBkcml2ZXIsIHNvIGl0IGRpZG4ndCBoYXZlIHRvIHN1ZmZlciBhbGwgdGhlIGxlZ2FjeSBh
+bmQKZGlyZWN0aW9ucyBjaGFuZ2VzIGluIHRoZSBWNEwyIEFQSSBzaW5jZSAyMDExLgoKQXMgZm9y
+IHRoZSB2aXJ0aW8gdmlkZW8gZHJpdmVyLCBpdCB3aWxsIHJlbWFpbiB1c2VsZXNzIHRvIG5vbi0K
+Y2hyb21lb3MvY2hyb21lIHVzZXJzIGFzIGxvbmcgYXMgaXQncyBub3Qgc3VwcG9ydGVkIGJ5IGFu
+eSB1c2Vyc3BhY2UuCkknZCBiZSB2ZXJ5IGhhcHB5IHNvIHNlZSBtb3JlIGNvbnRyaWJ1dGlvbiBp
+bnRvIEZGTVBFRyBhbmQgR1N0cmVhbWVyIHRvCmltcGxlbWVudCB0aGUgZmVhdHVyZXMgdGhhdCwg
+Zm9yIG5vdywgYXJlIG9ubHkgaW1wbGVtZW50ZWQgaW4gdGhlCnNwZWMuIAoKRnJvbSB5b3VyIGNv
+bW1lbnQsIGJyaWRnaW5nIGEgTGludXggZHJpdmVyIGluIHRoZSBob3N0IHRocm91Z2ggdmlydGlv
+LQp2aWRlbyBzZWVtcyBsaWtlIGEgaHVnZSB0YXNrcy4gSSBiZWxpZXZlIHRoaXMgaXMgYW4gaW1w
+b3J0YW50IGlzc3VlIHRvCmFkZHJlc3MgaW4gdGhlIGxvbmcgdGVybS4gSWYgeW91IGNvdWxkIHBy
+b3ZpZGUgbW9yZSBkZXRhaWxzLCBJIHRoaW5rIGl0CndvdWxkIGJlbmVmaXQgdG8gcmVhZGVycyB1
+bmRlcnN0YW5kaW5nLgoKPiAKPiBCZXN0IHJlZ2FyZHMsCj4gRG1pdHJ5Lgo+IAo+IE9uIERvbm5l
+cnN0YWcsIDEyLiBNw6RyeiAyMDIwIDEwOjU0OjM1IENFVCBIYW5zIFZlcmt1aWwgd3JvdGU6Cj4g
+PiBPbiAzLzEyLzIwIDEwOjQ5IEFNLCBLZWlpY2hpIFdhdGFuYWJlIHdyb3RlOgo+ID4gPiBIaSBI
+YW5zLAo+ID4gPiAKPiA+ID4gT24gV2VkLCBNYXIgMTEsIDIwMjAgYXQgMTA6MjYgUE0gSGFucyBW
+ZXJrdWlsIDxodmVya3VpbEB4czRhbGwubmw+IHdyb3RlOgo+ID4gPiA+IEhpIERtaXRyeSwKPiA+
+ID4gPiAKPiA+ID4gPiBPbiAyLzE4LzIwIDk6MjcgUE0sIERtaXRyeSBTZXBwIHdyb3RlOgo+ID4g
+PiA+ID4gSGkgYWxsLAo+ID4gPiA+ID4gCj4gPiA+ID4gPiBUaGlzIGlzIGEgdjRsMiB2aXJ0aW8g
+dmlkZW8gZHJpdmVyIGZvciB0aGUgdmlydGlvLXZpZGVvIGRldmljZQo+ID4gPiA+ID4gc3BlY2lm
+aWNhdGlvbiB2MyBbMV0uCj4gPiA+ID4gPiAKPiA+ID4gPiA+IFRoZSBmaXJzdCB2ZXJzaW9uIG9m
+IHRoZSBkcml2ZXIgd2FzIGludHJvZHVjZWQgaGVyZSBbMl0uCj4gPiA+ID4gPiAKPiA+ID4gPiA+
+IENoYW5nZXMgdjEgLT4gdjI6Cj4gPiA+ID4gPiAqIHN1cHBvcnQgdGhlIHYzIHNwZWMgKG1vc3Rs
+eSkKPiA+ID4gPiA+ICogYWRkIGEgbW9kdWxlIHBhcmFtZXRlciB0byBhc2sgZm9yIHBhZ2VzIGZy
+b20gWk9ORV9ETUEKPiA+ID4gPiA+IAo+ID4gPiA+ID4gV2hhdCBpcyBub3QgaW1wbGVtZW50ZWQ6
+Cj4gPiA+ID4gPiAqIFBsYW5lIGxheW91dCBmbGFncyBzaG91bGQgYmUgdXNlZCB0byBwcm9wYWdh
+dGUgbnVtYmVyIG9mIHBsYW5lcyB0bwo+ID4gPiA+ID4gCj4gPiA+ID4gPiAgIHVzZXItc3BhY2UK
+PiA+ID4gPiA+IAo+ID4gPiA+ID4gKiBUaGVyZSBpcyBubyByZWFsIHVzZSBvZiBzdHJlYW0gY3Jl
+YXRpb24gd2l0aCBiaXRzdHJlYW0gZm9ybWF0IGluIHRoZQo+ID4gPiA+ID4gCj4gPiA+ID4gPiAg
+IHBhcmFtZXRlciBsaXN0LiBUaGUgZHJpdmVyIGp1c3QgdXNlcyB0aGUgZmlyc3QgYml0c3RyZWFt
+IGZvcm1hdCBmcm9tCj4gPiA+ID4gPiAgIHRoZSBsaXN0Lgo+ID4gPiA+ID4gCj4gPiA+ID4gPiAq
+IFNldHRpbmcgYml0cmF0ZSBpcyBkb25lIGluIGEgZGlmZmVyZW50IHdheSBjb21wYXJlZCB0byB0
+aGUgc3BlYy4gVGhpcwo+ID4gPiA+ID4gCj4gPiA+ID4gPiAgIGlzIGJlY2F1c2UgaXQgaGFzIGJl
+ZW4gYWxyZWFkeSBhZ3JlZWQgb24gdGhhdCB0aGUgd2F5IHRoZSBzcGVjCj4gPiA+ID4gPiAgIGN1
+cnJlbnRseSBkZXNjcmliZXMgaXQgcmVxdWlyZXMgY2hhbmdlcy4KPiA+ID4gPiA+IAo+ID4gPiA+
+ID4gUG90ZW50aWFsIGltcHJvdmVtZW50czoKPiA+ID4gPiA+ICogRG8gbm90IHNlbmQgc3RyZWFt
+X2NyZWF0ZSBmcm9tIG9wZW4uIFVzZSBjb3JyZXNwb25kaW5nIHN0YXRlIG1hY2hpbmUKPiA+ID4g
+PiA+IAo+ID4gPiA+ID4gICBjb25kaXRpb24gdG8gZG8gdGhpcy4KPiA+ID4gPiA+IAo+ID4gPiA+
+ID4gKiBEbyBub3Qgc2VuZCBzdHJlYW1fZGVzdHJveSBmcm9tIGNsb3NlLiBEbyBpdCBpbiByZXFi
+dWZzKDApLgo+ID4gPiA+ID4gKiBDYWNoZSBmb3JtYXQgYW5kIGNvbnRyb2wgc2V0dGluZ3MuIFJl
+ZHVjZSBjYWxscyB0byB0aGUgZGV2aWNlLgo+ID4gPiA+IAo+ID4gPiA+IFNvbWUgZ2VuZXJhbCBu
+b3RlczoKPiA+ID4gPiAKPiA+ID4gPiBCZWZvcmUgdGhpcyBjYW4gYmUgbWVyZ2VkIGl0IG5lZWRz
+IHRvIHBhc3MgdjRsMi1jb21wbGlhbmNlLgo+ID4gPiA+IAo+ID4gPiA+IEkgYWxzbyBzdHJvbmds
+eSByZWNvbW1lbmQgYWRkaW5nIHN1cHBvcnQgZm9yIFY0TDJfUElYX0ZNVF9GV0hUIHRvCj4gPiA+
+ID4gYWxsb3cgdGVzdGluZyB3aXRoIHRoZSB2aWNvZGVjIGVtdWxhdGlvbiBkcml2ZXIuIFRoaXMg
+d2lsbCBhbHNvCj4gPiA+ID4gYWxsb3cgdGVzdGluZyBhbGwgc29ydHMgb2YgY29ybmVyIGNhc2Vz
+IHdpdGhvdXQgcmVxdWlyaW5nIHNwZWNpYWwKPiA+ID4gPiBoYXJkd2FyZS4KPiA+ID4gCj4gPiA+
+IEkgYWdyZWUgdGhhdCBpdCdzIGdyZWF0IGlmIHdlIGNvdWxkIHRlc3QgdmlydGlvLXZpZGVvIHdp
+dGggdmljb2RlYywKPiA+ID4gYnV0IEkgd29uZGVyIGlmIHN1cHBvcnRpbmcgRldIVCBpcyBhY3R1
+YWxseSBuZWVkZWQgZm9yIHRoZSBpbml0aWFsCj4gPiA+IHBhdGNoLgo+ID4gPiBUaG91Z2ggaXQg
+d291bGRuJ3QgYmUgZGlmZmljdWx0IHRvIHN1cHBvcnQgRldIVCBpbiB0aGUgZHJpdmVyLCB3ZSBh
+bHNvCj4gPiA+IG5lZWRzIHRvIHN1cHBvcnQgaXQgaW4gdGhlIGhvc3QncyBoeXBlcnZpc29yIHRv
+IHRlc3QgaXQuIEl0J3Mgbm90IGVhc3kKPiA+ID4gZm9yIG91ciBoeXBlcnZpc29yIHRvIHN1cHBv
+cnQgRldIVCwgYXMgaXQgZG9lc24ndCB0YWxrIHRvIHY0bDIgZHJpdmVyCj4gPiA+IGRpcmVjdGx5
+Lgo+ID4gPiBXaXRob3V0IHRoZSBob3N0LXNpZGUgaW1wbGVtZW50YXRpb24sIGl0IG1ha2VzIG5v
+IHNlbnNlIHRvIHN1cHBvcnQgaXQuCj4gPiA+IEFsc28sIGlmIHdlIHN1cHBvcnQgRldIVCwgd2Ug
+c2hvdWxkIGhhdmUgdGhlIGZvcm1hdCBpbiBhIGxpc3Qgb2YKPiA+ID4gc3VwcG9ydGVkIGZvcm1h
+dHMgaW4gdGhlIHZpcnRpbyBzcGVjaWZpY2F0aW9uLiBIb3dldmVyLCBJJ20gbm90IHN1cmUKPiA+
+ID4gaWYgRldIVCBpcyBhIGdlbmVyYWwgY29kZWMgZW5vdWdoIHRvIGJlIGFkZGVkIGluIHRoZSBz
+cGVjLCB3aGljaAo+ID4gPiBzaG91bGRuJ3QgYmUgc3BlY2lmaWMgdG8gTGludXguCj4gPiAKPiA+
+IEdvb2QgcG9pbnQsIEkgZGlkbid0IGtub3cgdGhhdC4KPiA+IAo+ID4gSXMgaXQgcG9zc2libGUg
+dG8gYWRkIHN1cHBvcnQgZm9yIEZXSFQgdW5kZXIgYSBsaW51eCBkZWJ1Zy90ZXN0IG9wdGlvbj8K
+PiA+IAo+ID4gSXQncyByZWFsbHkgdGhlIG1haW4gcmVhc29uIGZvciBoYXZpbmcgdGhpcywgc2lu
+Y2UgeW91IHdvdWxkIG5ldmVyIHVzZQo+ID4gdGhpcyBpbiBwcm9kdWN0aW9uIGNvZGUuIEJ1dCBp
+dCBpcyBzbyBuaWNlIHRvIGhhdmUgZm9yIHJlZ3Jlc3Npb24gdGVzdGluZy4KPiA+IAo+ID4gUmVn
+YXJkcywKPiA+IAo+ID4gCUhhbnMKPiA+IAo+ID4gPiBCZXN0IHJlZ2FyZHMsCj4gPiA+IEtlaWlj
+aGkKPiA+ID4gCj4gPiA+ID4gUmVnYXJkcywKPiA+ID4gPiAKPiA+ID4gPiAgICAgICAgIEhhbnMK
+PiA+ID4gPiA+IEJlc3QgcmVnYXJkcywKPiA+ID4gPiA+IERtaXRyeS4KPiA+ID4gPiA+IAo+ID4g
+PiA+ID4gWzFdIGh0dHBzOi8vbWFya21haWwub3JnL21lc3NhZ2UvZG13M3ByNGZ1YWp2YXJ0aAo+
+ID4gPiA+ID4gWzJdIGh0dHBzOi8vbWFya21haWwub3JnL21lc3NhZ2Uvd25udjZyNm15dmdiNWF0
+Ngo+IAo+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+U3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9y
+ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRl
+dmVsCg==
