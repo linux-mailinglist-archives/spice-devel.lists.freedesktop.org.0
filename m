@@ -2,55 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 322501886FA
-	for <lists+spice-devel@lfdr.de>; Tue, 17 Mar 2020 15:11:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1502018AC6E
+	for <lists+spice-devel@lfdr.de>; Thu, 19 Mar 2020 06:48:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 332EE6E145;
-	Tue, 17 Mar 2020 14:11:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 02B436E07D;
+	Thu, 19 Mar 2020 05:48:47 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com
- [IPv6:2a00:1450:4864:20::244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 17BB389DA2
- for <spice-devel@lists.freedesktop.org>; Tue, 17 Mar 2020 09:18:39 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id o10so21907464ljc.8
- for <spice-devel@lists.freedesktop.org>; Tue, 17 Mar 2020 02:18:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=EXTECaoRIAH/N+0cnidFBTckkNu/Y2stcECyKBiKMSM=;
- b=UhKugyo3yoN72voK54QuLJMl4GpEybWwDmr5RUKgYhDnUEY3C/BamPXbZHjSZt+xJP
- wiNB5uxvOMT1Pq8TwnUh4jjpYuLrzTvW52Ib2j7VyaU9JrVJpE60gM6Zj0N4jYSxIdvD
- XnQsynrO/r0qlUYNFBMy8y4x5KSbUOc5WhStk=
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6637A6E954
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 Mar 2020 01:52:05 +0000 (UTC)
+Received: by mail-pf1-x434.google.com with SMTP id x2so488761pfn.9
+ for <spice-devel@lists.freedesktop.org>; Wed, 18 Mar 2020 18:52:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:content-transfer-encoding:mime-version:subject:message-id:date
+ :to; bh=68XWUlTkhpcywwmNalVfYnbVlvm4J91yymSo+Gb2H/0=;
+ b=av+jRilfOTW63VOFCi4udZllCZWGhNo+XALtHB32+t+wyJu1s7jSsj/0/AnjhhWysx
+ /hnUlMLzdBG6gVTRW74Eiv1kkK5Mmunyw4GGzITa8OnyCihijktyxEc+Y3TRPs6jMuPP
+ tC8PWr85foKhwafXjr2p9L+afzLvax0jx4NxzOu3kNqcisH+K5yCpwaDC2dtPk7Q3k/n
+ JchDMn26ABktL1sBqXFdM6DIhLQfftl2nWSoMX2MCrYkwg446u57RZTj1DrXv7AcDr2+
+ q1riylMiVY0aig71ABfaR5+WHE4lmmcHZUXllUqYyEMlAcbKzxL9W3+q5QwzCytWNSMD
+ z+jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=EXTECaoRIAH/N+0cnidFBTckkNu/Y2stcECyKBiKMSM=;
- b=Yq2r3jWZ+HutBXlgOOqk33XEsN/kjA5aMGdKKFaluNeqjL8yyigB/KIqzuaywKHNbf
- KRRfMEAOouMgAc5OA0ATTSWHHf0tVVydOU/iuqVQkGvY01Dreizh++kZerSb/QPoQ27s
- zVRo2dsPZoEnl8rKnDAYvnfrPoJ3XM4f3whuJbJH7+lAzOwPQiCOLaUNYkAYU1GKKoXN
- qpr/jegzb4Dj7oHcckNagvMmeyHnMbhGtqazRKe1AAC+DTHIAsPzw/AOAzM5ktm5CZG1
- 4eniPdBDaY+B5WFQ2hUm0vib/1YmqFOPpDKUjlV1CMF5O8yvg4Q9FL1FyImpdVUUlIr1
- TW9A==
-X-Gm-Message-State: ANhLgQ3TFuCzXggE4CaSvFrPcNv4sW9ZhrZdkqG5OTnqfDQXXgYZFfqC
- FEqh1yMg6rsgzZaT1xqXoJklHKKZabHenHwmjCK2WQ==
-X-Google-Smtp-Source: ADFU+vvCGkBqd8UYmCkxH7QhX19fR7M4LzHZzhe0fWYk25rvmbHcfqtGsff4qjoOyG08qyL1bPshtFsiowz+j5+pErc=
-X-Received: by 2002:a2e:8798:: with SMTP id n24mr2250808lji.114.1584436717382; 
- Tue, 17 Mar 2020 02:18:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200218202753.652093-1-dmitry.sepp@opensynergy.com>
- <CAD90VcZ5rYHw9qqS7pvaX0TP240qcmoA5MKxKuVVn-eVVrORSA@mail.gmail.com>
- <CAD90VcbON1XTuBpuqxV6E+reY8dYq08N8G-jrAO=z-6ytcvtHQ@mail.gmail.com>
- <1780647.tdWV9SEqCh@os-lin-dmo>
-In-Reply-To: <1780647.tdWV9SEqCh@os-lin-dmo>
-From: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Tue, 17 Mar 2020 18:18:26 +0900
-Message-ID: <CAD90VcbG2QJvj7L-Ek64AHb4sg3tkYJKsrDn2fVO4FLiwMYOxQ@mail.gmail.com>
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-X-Mailman-Approved-At: Tue, 17 Mar 2020 14:11:42 +0000
-Subject: Re: [Spice-devel] [PATCH v2 1/1] video_video: Add the Virtio Video
- V4L2 driver
+ h=x-gm-message-state:from:content-transfer-encoding:mime-version
+ :subject:message-id:date:to;
+ bh=68XWUlTkhpcywwmNalVfYnbVlvm4J91yymSo+Gb2H/0=;
+ b=HEMp3zcywGh1OdJ19ylHjtR6j5cWsFBbd3Ys7U68LpICY2NrzXKPY5zj8WRMBCTFCU
+ vX6TuCzJ+2K/nMY5Gd4iUcmGYeHSVlU6JyP7bfPCSmS9zHA6J6hkBxYZQrKAUteOcWzL
+ kkXJpukeCpHSJ0rmUCVzEHvrhpf/HowZh2ctADjtnSGT163r+2x9ZKOdmJpzSWe99q0O
+ YKA6mk1qsTAH1l4V7FjWxJnkpK/zBBqj4RFlxyjaAS2TfXoNwQEYFQj2taCHar/l9fo/
+ MFdzJ8XVn/f2Gmr6bwBomPbjR+oGu84KPNObOkgKky+M49KS4VdAXVnhSTs62zTfITaj
+ zGug==
+X-Gm-Message-State: ANhLgQ1aZYMa3Ai0QE6dz83HATnyqDtofIaiJfpRnqVzr5e+OdzTXk/Z
+ FrZHVcxh1QloVHPszBAd8Fh1bxqj
+X-Google-Smtp-Source: ADFU+vveBKtb8LItnDZU5uyHdB2saavP8YwVqBfthfN9voh22IH8U3M2cNTLH/oJ8Y7bOGp6gqZTcw==
+X-Received: by 2002:aa7:8190:: with SMTP id g16mr1334330pfi.111.1584582724665; 
+ Wed, 18 Mar 2020 18:52:04 -0700 (PDT)
+Received: from [192.168.0.104] ([110.184.84.223])
+ by smtp.gmail.com with ESMTPSA id y30sm274354pff.67.2020.03.18.18.52.03
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 18 Mar 2020 18:52:04 -0700 (PDT)
+From: =?utf-8?B?5LiB5b+X5Z2a?= <zhijian.ding203@gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 13.0 \(3608.60.0.2.5\))
+Message-Id: <85483164-6926-4832-98D0-326DB0CA357D@gmail.com>
+Date: Thu, 19 Mar 2020 09:52:02 +0800
+To: spice-devel@lists.freedesktop.org
+X-Mailer: Apple Mail (2.3608.60.0.2.5)
+X-Mailman-Approved-At: Thu, 19 Mar 2020 05:48:46 +0000
+Subject: [Spice-devel] How to monitor the Status of  SPICE Connection
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,55 +64,19 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
- virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
- Kiran Pawar <kiran.pawar@opensynergy.com>,
- Alexandre Courbot <acourbot@chromium.org>,
- Nikolay Martyanov <Nikolay.Martyanov@opensynergy.com>,
- David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
- Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
- Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
- Pawel Osciak <posciak@chromium.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gVHVlLCBNYXIgMTcsIDIwMjAgYXQgNjoxMCBQTSBEbWl0cnkgU2VwcCA8ZG1pdHJ5LnNlcHBA
-b3BlbnN5bmVyZ3kuY29tPiB3cm90ZToKPgo+IEhpIEtlaWljaGksCj4KPiBPbiBEaWVuc3RhZywg
-MTcuIE3DpHJ6IDIwMjAgMDc6NTM6MjYgQ0VUIEtlaWljaGkgV2F0YW5hYmUgd3JvdGU6Cj4gPiA+
-ID4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fdmlkZW8uaAo+ID4gPiA+
-IGIvaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb192aWRlby5oIG5ldyBmaWxlIG1vZGUgMTAwNjQ0
-Cj4gPiA+ID4gaW5kZXggMDAwMDAwMDAwMDAwLi4wZGQ5OGEyMjM3YzYKPiA+ID4gPiAtLS0gL2Rl
-di9udWxsCj4gPiA+ID4gKysrIGIvaW5jbHVkZS91YXBpL2xpbnV4L3ZpcnRpb192aWRlby5oCj4g
-PiA+ID4gQEAgLTAsMCArMSw0NjkgQEAKPiA+ID4gPiArLyogU1BEWC1MaWNlbnNlLUlkZW50aWZp
-ZXI6IEdQTC0yLjArICovCj4gPiA+Cj4gPiA+IEkgc3VzcGVjdCBpdCdzIG5vdCBleHBlY3RlZCB0
-byB1c2UgR1BMIGxpY2VuY2Ugd2l0aG91dCBleGNlcHRpb25zIGluIGEKPiA+ID4gVUFQSSBoZWFk
-ZXIgZmlsZToKPiA+ID4gaHR0cHM6Ly93d3cua2VybmVsLm9yZy9kb2MvaHRtbC92NS40L3Byb2Nl
-c3MvbGljZW5zZS1ydWxlcy5odG1sCj4gPiA+Cj4gPiA+IElmIEdQTCBpcyB1c2VkIGhlcmUsIG9u
-bHkgR1BMIHVzZXIgcHJvZ3JhbXMgY2FuIGluY2x1ZGUgdGhpcyBoZWFkZXIKPiA+ID4gZmlsZSwg
-Y2FuJ3QgdGhleT8KPiA+ID4gU28sIGNhbiB3ZSB1c2UgQlNEIGxpY2VuY2UgbGlrZSBvdGhlciB2
-aXJ0aW8gaGVhZGVycyAoZS5nLiB2aXJ0aW9fZ3B1LmgpPwo+ID4gPgo+ID4gPiBOb3RlIHRoYXQg
-SSBmb3VuZCB0aGlzIHByb2dyYW0gd2hlbiBydW5uaW5nCj4gPiA+IC9zY3JpcHRzL2hlYWRlcnNf
-aW5zdGFsbC5zaC4gVGhvdWdoIGl0IHN1Z2dlc3RlZCB0byBhZGQgIldJVEgKPiA+ID4gTGludXgt
-c3lzY2FsbC1ub3RlIiwgaXQgc2hvdWxkbid0IGJlIHRoZSBjYXNlIGJlY2F1c2UgdGhpcyBoZWFk
-ZXIKPiA+ID4gZG9lc24ndCBwcm92aWRlIHN5c2NhbGwgaW50ZXJmYWNlLgo+ID4gPgo+ID4gPiBC
-ZXN0IHJlZ2FyZHMsCj4gPiA+IEtlaWljaGkKPiA+ID4KPiA+ID4gPiArLyoKPiA+ID4gPiArICog
-VmlydGlvIFZpZGVvIERldmljZQo+ID4gPiA+ICsgKgo+ID4gPiA+ICsgKiBUaGlzIGhlYWRlciBp
-cyBCU0QgbGljZW5zZWQgc28gYW55b25lIGNhbiB1c2UgdGhlIGRlZmluaXRpb25zCj4gPiA+ID4g
-KyAqIHRvIGltcGxlbWVudCBjb21wYXRpYmxlIGRyaXZlcnMvc2VydmVyczoKPiA+ID4gPiArICoK
-PiA+Cj4gPiBBaCwgdGhpcyBsaW5lIHNheXMgdGhpcyBoZWFkZXIgaXMgQlNEIGxpY2Vuc2VkLgo+
-ID4gU28sIHRoZSBTUERYLUxpY2Vuc2UtSWRlbnRpZmllciBhYm92ZSBzaG91bGQgYmUgc2ltcGx5
-IHdyb25nLgo+ID4KPgo+IEFjY29yZGluZyB0byBzb21lIHJlY2VudCB1cHN0cmVhbSBkaXNjdXNz
-aW9uIGFib3V0IHZpcnRpby1zbmQsIHdoaWNoIHdhcyBhbHNvCj4gcHJvcG9zZWQgYnkgb3VyIGVu
-Z2luZWVycywgaXQgc2hvdWxkIGJlCj4gLyogU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEJTRC0z
-LUNsYXVzZSAqLwo+CgpTb3VuZHMgZ29vZC4gVGhhbmtzIGZvciBsZXR0aW5nIG1lIGtub3cuCgpC
-ZXN0IHJlZ2FyZHMsCktlaWljaGkKCj4gQmVzdCByZWdhcmRzLAo+IERtaXRyeS4KPgo+ID4gQmVz
-dCByZWdhcmRzLAo+ID4gS2VpaWNoaQo+Cj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
+Hi, Spice Develop Team. I am a student of UESTC from China.
+
+As titled, in my project, I want to develop a client program in the VM to monitor the spice connectin status and inform to background timely.
+
+Any hints or ideas?
+
+With my best regards.
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
