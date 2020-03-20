@@ -2,46 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75B2918C6FC
-	for <lists+spice-devel@lfdr.de>; Fri, 20 Mar 2020 06:27:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AD1118C994
+	for <lists+spice-devel@lfdr.de>; Fri, 20 Mar 2020 10:08:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F038D6E102;
-	Fri, 20 Mar 2020 05:27:45 +0000 (UTC)
-X-Original-To: spice-devel@freedesktop.org
-Delivered-To: spice-devel@freedesktop.org
-X-Greylist: delayed 379 seconds by postgrey-1.36 at gabe;
- Fri, 20 Mar 2020 05:27:44 UTC
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5E246E102
- for <spice-devel@freedesktop.org>; Fri, 20 Mar 2020 05:27:44 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 68C66107ACC4;
- Fri, 20 Mar 2020 05:21:24 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 5EEFB9081;
- Fri, 20 Mar 2020 05:21:24 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 13AE61809563;
- Fri, 20 Mar 2020 05:21:24 +0000 (UTC)
-Date: Fri, 20 Mar 2020 01:21:23 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@gmail.com>
-Message-ID: <2121591056.17755756.1584681683491.JavaMail.zimbra@redhat.com>
-In-Reply-To: <CAJ+F1CJcW4Eua+Z6pUYa1QmqsD1FPSG3Lr+3csd4EaFuYJ3oUA@mail.gmail.com>
-References: <20200319170555.672E67610F@kemper.freedesktop.org>
- <CAJ+F1CJcW4Eua+Z6pUYa1QmqsD1FPSG3Lr+3csd4EaFuYJ3oUA@mail.gmail.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.33.32.16, 10.4.195.23]
-Thread-Topic: src/channel-main.c
-Thread-Index: CUtuk7j5vX/mXZZ5wq1Ultae+qhyNg==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Subject: Re: [Spice-devel] [Spice-commits] src/channel-main.c
+	by gabe.freedesktop.org (Postfix) with ESMTP id 290F06E053;
+	Fri, 20 Mar 2020 09:08:57 +0000 (UTC)
+X-Original-To: spice-devel@lists.freedesktop.org
+Delivered-To: spice-devel@lists.freedesktop.org
+X-Greylist: delayed 378 seconds by postgrey-1.36 at gabe;
+ Fri, 20 Mar 2020 09:07:03 UTC
+Received: from zg8tmtyylji0my4xnjqunzqa.icoremail.net
+ (zg8tmtyylji0my4xnjqunzqa.icoremail.net [162.243.164.74])
+ by gabe.freedesktop.org (Postfix) with SMTP id 9C47D6E053
+ for <spice-devel@lists.freedesktop.org>; Fri, 20 Mar 2020 09:07:03 +0000 (UTC)
+Received: from DESKTOP-40HKDGN (unknown [112.96.192.25])
+ by sr0414.icoremail.net (Coremail) with SMTP id
+ AQAAfwB3f3MDhXReju_5AA--.22444S2; 
+ Fri, 20 Mar 2020 16:55:32 +0800 (CST)
+Date: Fri, 20 Mar 2020 17:00:39 +0800
+From: "yanzeng.wang@std.uestc.edu.cn" <yanzeng.wang@std.uestc.edu.cn>
+To: spice-devel <spice-devel@lists.freedesktop.org>
+X-Priority: 3
+X-GUID: 1C8F02AA-EFD6-403C-8FA1-9D47F8CBA6C1
+X-Has-Attach: no
+X-Mailer: Foxmail 7.2.9.156[cn]
+Mime-Version: 1.0
+Message-ID: <202003201700374079587@std.uestc.edu.cn>
+X-CM-TRANSID: AQAAfwB3f3MDhXReju_5AA--.22444S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+ VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUO-7k0a2IF6F4UM7kC6x804xWl14x267AK
+ xVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGw
+ A2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r1I
+ 6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j6r4UM28EF7xvwVC2z280aVAFwI0_Gr
+ 1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY
+ 62kv0487Mc02F40En4AKxVAvwIkv4cxYr24l5I8CrVC2j2CEjI02ccxYII8I67AEr4CY67
+ k08wAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCj
+ c4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4xvF2IEb7IF0Fy264kE64k0F24lFcxC0VAYjx
+ AxZF0Ex2IqxwCjr7xvwVCIw2I0I7xG6c02F41l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC
+ 6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUGVWUWwC20s026x8GjcxK67AKxVWUGVWUWw
+ C2zVAF1VAY17CE14v26r1j6r15MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_
+ JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr
+ 1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_Gr1l
+ 6VACY4xI67k04243AbIYCTnIWIevJa73UjIFyTuYvjxUcD7aUUUUU
+X-CM-SenderInfo: qsqrmkqsqyiliqy6233goxv2lwfovvfxof0/
+X-Mailman-Approved-At: Fri, 20 Mar 2020 09:08:55 +0000
+Subject: [Spice-devel] [is there Android's SPICE vdagent?]
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,62 +58,62 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-commits@lists.freedesktop.org, spice-devel@freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0747787396=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> 
-> Hi
-> 
-> On Thu, Mar 19, 2020 at 6:05 PM GitLab Mirror
-> <gitlab-mirror@kemper.freedesktop.org> wrote:
-> >
-> >  src/channel-main.c |   36 +++++++++++++++++++-----------------
-> >  1 file changed, 19 insertions(+), 17 deletions(-)
-> >
-> > New commits:
-> > commit 1defa5c0f0107b8496b7696408aad064c65947a5
-> > Author: Frediano Ziglio <fziglio@redhat.com>
-> > Date:   Tue Mar 17 21:27:19 2020 +0000
-> >
-> >     channel-main: Fix indentation
-> >
-> >     Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-> >     Acked-by: Victor Toso <victortoso@redhat.com>
-> >
-> > diff --git a/src/channel-main.c b/src/channel-main.c
-> > index 1e85a36..0a0b9ca 100644
-> > --- a/src/channel-main.c
-> > +++ b/src/channel-main.c
-> > @@ -283,13 +283,13 @@ static void spice_main_get_property(GObject
-> > *object,
-> >      switch (prop_id) {
-> >      case PROP_MOUSE_MODE:
-> >          g_value_set_int(value, c->mouse_mode);
-> > -       break;
-> > +    break;
-> >      case PROP_AGENT_CONNECTED:
-> >          g_value_set_boolean(value, c->agent_connected);
-> > -       break;
-> > +    break;
-> >      case PROP_AGENT_CAPS_0:
-> >          g_value_set_int(value, c->agent_caps[0]);
-> > -       break;
-> > +    break;
-> 
-> Hmm, this looks weird:
-> 
-> https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/channel-main.c#L283
->
+This is a multi-part message in MIME format.
 
-Indeed, thanks
+--===============0747787396==
+Content-Type: multipart/alternative;
+	boundary="----=_001_NextPart447070128263_=----"
 
-https://gitlab.freedesktop.org/spice/spice-gtk/-/merge_requests/38
+This is a multi-part message in MIME format.
 
-Frediano
+------=_001_NextPart447070128263_=----
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: base64
+
+DQpEZWFyIHNpcnMsDQogICAgSSB3b3VsZCBsaWtlIHRvIGtub3cgaWYgdGhlcmUgaXMgQW5kcm9p
+ZCdzIFNQSUNFIHZkYWdlbnQ/DQpCZWNhdXNlIHdlIGFyZSBkZXZlbG9wcGluZyAgYW5kcm9pZCBW
+TXMgYW5kIHRoZSBzcGljZSB2YWRnZW50IG1heSBiZSBuZWVkZWQuDQpJZiBub3QsY2FuIHlvdSBv
+ZmZlciBob3cgdG8gYnVpbGQgb25lPw0KICAgIENoZWVycyENCiAgICB5YW56ZW5nLndhbmcNCg0K
+DQp5YW56ZW5nLndhbmdAc3RkLnVlc3RjLmVkdS5jbg0K
+
+------=_001_NextPart447070128263_=----
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charse=
+t=3Dus-ascii"><style>body { line-height: 1.5; }body { font-size: 10.5pt; f=
+ont-family: 'Microsoft YaHei UI'; color: rgb(0, 0, 0); line-height: 1.5; }=
+</style></head><body>=0A<div><span></span><br></div>=0A<div>Dear sirs,</di=
+v><div><span style=3D"color: rgb(0, 0, 0); background-color: rgba(0, 0, 0,=
+ 0);">&nbsp; &nbsp; I would like to know if there is&nbsp;</span><span sty=
+le=3D"background-color: transparent;">Android's SPICE vdagent?</span></div=
+><div>Because we are developping &nbsp;android VMs and the spice vadgent m=
+ay be needed.</div><div>If not,can you offer how to build one?</div><div><=
+span style=3D"color: rgb(0, 0, 0); font-size: 10.5pt; line-height: 1.5; ba=
+ckground-color: rgba(0, 0, 0, 0);">&nbsp; &nbsp;&nbsp;</span>Cheers!</div>=
+<div>&nbsp; &nbsp; yanzeng.wang</div><hr style=3D"width: 210px; height: 1p=
+x;" color=3D"#b5c4df" size=3D"1" align=3D"left">=0A<div><span><div style=
+=3D"MARGIN: 10px; FONT-FAMILY: verdana; FONT-SIZE: 10pt"><div>yanzeng.wang=
+@std.uestc.edu.cn</div></div></span></div>=0A</body></html>
+------=_001_NextPart447070128263_=------
+
+
+--===============0747787396==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0747787396==--
+
