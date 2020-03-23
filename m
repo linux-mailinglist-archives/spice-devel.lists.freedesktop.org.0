@@ -2,51 +2,55 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AD1118C994
-	for <lists+spice-devel@lfdr.de>; Fri, 20 Mar 2020 10:08:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5FA418F73E
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Mar 2020 15:50:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 290F06E053;
-	Fri, 20 Mar 2020 09:08:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 978C26E150;
+	Mon, 23 Mar 2020 14:50:11 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 378 seconds by postgrey-1.36 at gabe;
- Fri, 20 Mar 2020 09:07:03 UTC
-Received: from zg8tmtyylji0my4xnjqunzqa.icoremail.net
- (zg8tmtyylji0my4xnjqunzqa.icoremail.net [162.243.164.74])
- by gabe.freedesktop.org (Postfix) with SMTP id 9C47D6E053
- for <spice-devel@lists.freedesktop.org>; Fri, 20 Mar 2020 09:07:03 +0000 (UTC)
-Received: from DESKTOP-40HKDGN (unknown [112.96.192.25])
- by sr0414.icoremail.net (Coremail) with SMTP id
- AQAAfwB3f3MDhXReju_5AA--.22444S2; 
- Fri, 20 Mar 2020 16:55:32 +0800 (CST)
-Date: Fri, 20 Mar 2020 17:00:39 +0800
-From: "yanzeng.wang@std.uestc.edu.cn" <yanzeng.wang@std.uestc.edu.cn>
-To: spice-devel <spice-devel@lists.freedesktop.org>
-X-Priority: 3
-X-GUID: 1C8F02AA-EFD6-403C-8FA1-9D47F8CBA6C1
-X-Has-Attach: no
-X-Mailer: Foxmail 7.2.9.156[cn]
-Mime-Version: 1.0
-Message-ID: <202003201700374079587@std.uestc.edu.cn>
-X-CM-TRANSID: AQAAfwB3f3MDhXReju_5AA--.22444S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
- VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUO-7k0a2IF6F4UM7kC6x804xWl14x267AK
- xVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AKwVWUJVWUGw
- A2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26r1I
- 6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j6r4UM28EF7xvwVC2z280aVAFwI0_Gr
- 1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY
- 62kv0487Mc02F40En4AKxVAvwIkv4cxYr24l5I8CrVC2j2CEjI02ccxYII8I67AEr4CY67
- k08wAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCj
- c4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4xvF2IEb7IF0Fy264kE64k0F24lFcxC0VAYjx
- AxZF0Ex2IqxwCjr7xvwVCIw2I0I7xG6c02F41l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC
- 6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUGVWUWwC20s026x8GjcxK67AKxVWUGVWUWw
- C2zVAF1VAY17CE14v26r1j6r15MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_
- JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr
- 1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_Gr1l
- 6VACY4xI67k04243AbIYCTnIWIevJa73UjIFyTuYvjxUcD7aUUUUU
-X-CM-SenderInfo: qsqrmkqsqyiliqy6233goxv2lwfovvfxof0/
-X-Mailman-Approved-At: Fri, 20 Mar 2020 09:08:55 +0000
-Subject: [Spice-devel] [is there Android's SPICE vdagent?]
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DBE5B6E14E
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 14:50:07 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id 31so11415856wrs.3
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 07:50:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=8EEdhlDxPGCszNH39KDQNapCEw4c4r8sQpDp4YCg1tQ=;
+ b=k6urjDIZuhuoPs7ZD1FcgK966/qfJ2UPTH/pF2x/0l3M2i5NjEOO2+CAPg/c5Jgmy7
+ Xqox1R+kNuDHbksH1YUUSK19MipDveHSjMjRL/WnIAQU+7rjQkYIBFV8dOhNc4rjoz9u
+ QPYbQbxCarRmHX4lypKkyIWHvlxsSzatXbFp8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=8EEdhlDxPGCszNH39KDQNapCEw4c4r8sQpDp4YCg1tQ=;
+ b=Irko30HTee5jRZ5NjIjCZVNJC5ITeCkNhAl2rWHfMIcy2TYdj3UOVl/r3JTrkb/1T1
+ ZMTchyjIRHejH9V7DiYeHGxpLH97sLzFa+NDGukdGhQGtMLSZmmbxXIjnk9iOMwlz2lR
+ cXrLrw1IT8TOc5RmbNk0s5bKNu+ZrLA55oYeptxLFH6rJKoXIhErXM3eSLUUTPrX7TZI
+ rpeRqfnS0aShrXsU/+6mn0p+CfHyEEZ8n4TtaZQEVvw9rZ4JtKGDIR2pkRRin8WUW/VQ
+ oU02/exDcezZrA5P5GIb2BsJF0OqEJ6nOHrnkBQcqgU4clB/85qosBkAfSu7lR2tTAc+
+ +SNg==
+X-Gm-Message-State: ANhLgQ0hdlnPd5cSyevpNgAbcP57sv/VXQKwVPpdbpSbnHLwhf3Si1gV
+ ZQxse6PrRdL9UrF5rS9CQwYoYQ==
+X-Google-Smtp-Source: ADFU+vvH2AC0AyJuWazp1JxP6K2wqcG7brSho8DLZzVQcpb9YvutEdwaVpcxqLcib+NAIqWSIGA0qA==
+X-Received: by 2002:a5d:5286:: with SMTP id c6mr30023307wrv.418.1584975006564; 
+ Mon, 23 Mar 2020 07:50:06 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id s22sm20376522wmc.16.2020.03.23.07.50.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Mar 2020 07:50:05 -0700 (PDT)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Date: Mon, 23 Mar 2020 15:49:06 +0100
+Message-Id: <20200323144950.3018436-8-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200323144950.3018436-1-daniel.vetter@ffwll.ch>
+References: <20200323144950.3018436-1-daniel.vetter@ffwll.ch>
+MIME-Version: 1.0
+Subject: [Spice-devel] [PATCH 07/51] drm/qxl: Use drmm_add_final_kfree
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,62 +62,65 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0747787396=="
+Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
+With this we can drop the final kfree from the release function.
 
---===============0747787396==
-Content-Type: multipart/alternative;
-	boundary="----=_001_NextPart447070128263_=----"
+Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+---
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+ drivers/gpu/drm/qxl/qxl_kms.c | 2 ++
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-This is a multi-part message in MIME format.
-
-------=_001_NextPart447070128263_=----
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: base64
-
-DQpEZWFyIHNpcnMsDQogICAgSSB3b3VsZCBsaWtlIHRvIGtub3cgaWYgdGhlcmUgaXMgQW5kcm9p
-ZCdzIFNQSUNFIHZkYWdlbnQ/DQpCZWNhdXNlIHdlIGFyZSBkZXZlbG9wcGluZyAgYW5kcm9pZCBW
-TXMgYW5kIHRoZSBzcGljZSB2YWRnZW50IG1heSBiZSBuZWVkZWQuDQpJZiBub3QsY2FuIHlvdSBv
-ZmZlciBob3cgdG8gYnVpbGQgb25lPw0KICAgIENoZWVycyENCiAgICB5YW56ZW5nLndhbmcNCg0K
-DQp5YW56ZW5nLndhbmdAc3RkLnVlc3RjLmVkdS5jbg0K
-
-------=_001_NextPart447070128263_=----
-Content-Type: text/html;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charse=
-t=3Dus-ascii"><style>body { line-height: 1.5; }body { font-size: 10.5pt; f=
-ont-family: 'Microsoft YaHei UI'; color: rgb(0, 0, 0); line-height: 1.5; }=
-</style></head><body>=0A<div><span></span><br></div>=0A<div>Dear sirs,</di=
-v><div><span style=3D"color: rgb(0, 0, 0); background-color: rgba(0, 0, 0,=
- 0);">&nbsp; &nbsp; I would like to know if there is&nbsp;</span><span sty=
-le=3D"background-color: transparent;">Android's SPICE vdagent?</span></div=
-><div>Because we are developping &nbsp;android VMs and the spice vadgent m=
-ay be needed.</div><div>If not,can you offer how to build one?</div><div><=
-span style=3D"color: rgb(0, 0, 0); font-size: 10.5pt; line-height: 1.5; ba=
-ckground-color: rgba(0, 0, 0, 0);">&nbsp; &nbsp;&nbsp;</span>Cheers!</div>=
-<div>&nbsp; &nbsp; yanzeng.wang</div><hr style=3D"width: 210px; height: 1p=
-x;" color=3D"#b5c4df" size=3D"1" align=3D"left">=0A<div><span><div style=
-=3D"MARGIN: 10px; FONT-FAMILY: verdana; FONT-SIZE: 10pt"><div>yanzeng.wang=
-@std.uestc.edu.cn</div></div></span></div>=0A</body></html>
-------=_001_NextPart447070128263_=------
-
-
---===============0747787396==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 4fda3f9b29f4..09102e2efabc 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 */
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+-	dev->dev_private = NULL;
+-	kfree(qdev);
+ }
+ 
+ static void
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 70b20ee4741a..09d7b5f6d172 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -27,6 +27,7 @@
+ #include <linux/pci.h>
+ 
+ #include <drm/drm_drv.h>
++#include <drm/drm_managed.h>
+ #include <drm/drm_probe_helper.h>
+ 
+ #include "qxl_drv.h"
+@@ -121,6 +122,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 	qdev->ddev.pdev = pdev;
+ 	pci_set_drvdata(pdev, &qdev->ddev);
+ 	qdev->ddev.dev_private = qdev;
++	drmm_add_final_kfree(&qdev->ddev, qdev);
+ 
+ 	mutex_init(&qdev->gem.mutex);
+ 	mutex_init(&qdev->update_area_mutex);
+-- 
+2.25.1
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0747787396==--
-
