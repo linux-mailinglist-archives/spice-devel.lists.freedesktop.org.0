@@ -2,55 +2,47 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2ABDD190073
-	for <lists+spice-devel@lfdr.de>; Mon, 23 Mar 2020 22:36:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BB3F190078
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Mar 2020 22:36:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8C70E8991E;
-	Mon, 23 Mar 2020 21:36:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C3CE5899E6;
+	Mon, 23 Mar 2020 21:36:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
- [IPv6:2a00:1450:4864:20::241])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0BE7089FC3
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 12:08:07 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id 19so14212352ljj.7
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 05:08:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=G1kmi4azK6I9kl/p6cHctZkv1a8MPJawGqGhCqNb2yk=;
- b=QLcac98mZfYlUtwusKNdWQU97I9Gs25cvgovhkOCpd4RgltH2AGqXNffMFrSq68r4j
- zuKISq/voPy0eDDl+v6U5R5VlAwahbwWP8eJCxYRW2G79FmHM8Lh7JgQcvBq/c7fWg7u
- KZSSdprcwLpwe+/YXyfW0E6p570hudPMSMmLo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=G1kmi4azK6I9kl/p6cHctZkv1a8MPJawGqGhCqNb2yk=;
- b=UvfpkXYl8eZkEKctPuCxz84enWulGqRXK9DI38Y8ZsmLr1BmypeiZFBlvvSZ1R404x
- nT+atT61b/s3yDdmFDe+yeaLqmIeiXYZG0WqoC5J/U52mjcmdNBuZEOhmGgtwn0KukZ3
- SarxZncx7pUexOIQlJzH5uViUqOxSELUfyrDZ6Nb0SSPupqrvkhM5iKj3GcQGmIjzuaS
- o0qi/xUKLWip/Pz6u4i209EUqTmpytF+ct6h2JdMTgBkjHRigiTZCQRIipA+L9lN/gFD
- OL68KUDdd54fPZS5tfQpCl0dNqye7fDEe8P1HM6pTHQycwVzqIQkHRarQITcOpD5jaVe
- 9Iug==
-X-Gm-Message-State: ANhLgQ1qnMTsSHfN+128xAZkei7zvVMRr+LdDQ/xLmmgQLrY7G5cdPAE
- vtayCJxiGJ1XDn3IY66ky/v2ueoiCQKMCRr3CEbL4A==
-X-Google-Smtp-Source: ADFU+vtLvIvZ3eN7AZJeNEGr1wODw+/sFDTcLwS1UWMXcHhKbrn9CKkocKY6q2JoeJ/iLSi2NCXOlm9wfjftCJtm2hs=
-X-Received: by 2002:a2e:9a90:: with SMTP id p16mr14058285lji.277.1584965285362; 
- Mon, 23 Mar 2020 05:08:05 -0700 (PDT)
-MIME-Version: 1.0
+Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 75FB46E116
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 13:28:15 +0000 (UTC)
+Received: from hefe.heinlein-support.de (hefe.heinlein-support.de
+ [91.198.250.172])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 4FE1FBA32B;
+ Mon, 23 Mar 2020 14:28:11 +0100 (CET)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from plasma.jpberlin.de ([91.198.250.140])
+ by hefe.heinlein-support.de (hefe.heinlein-support.de [91.198.250.172])
+ (amavisd-new, port 10030)
+ with ESMTP id WJGZGc0gbrGQ; Mon, 23 Mar 2020 14:28:09 +0100 (CET)
+Received: from webmail.opensynergy.com (unknown [217.66.60.5])
+ (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "webmail.opensynergy.com",
+ Issuer "GeoTrust EV RSA CA 2018" (not verified))
+ (Authenticated sender: opensynergy@jpberlin.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 793D8BAE9C;
+ Mon, 23 Mar 2020 14:28:09 +0100 (CET)
+Received: from os-lin-dmo.localnet (10.25.255.1) by MXS02.open-synergy.com
+ (10.25.10.18) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 23 Mar
+ 2020 14:28:08 +0100
+From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+To: Alexandre Courbot <acourbot@chromium.org>, Keiichi Watanabe
+ <keiichiw@chromium.org>
+Date: Mon, 23 Mar 2020 14:28:08 +0100
+Message-ID: <8121654.T7Z3S40VBb@os-lin-dmo>
+Organization: OpenSynergy
+In-Reply-To: <CAD90VcaYi2KawNOewRaL1QihUjgja6nLyzU+0R7nsHPN3voXDA@mail.gmail.com>
 References: <20200206102058.247258-1-keiichiw@chromium.org>
- <20200206102058.247258-2-keiichiw@chromium.org>
- <20200225095956.7rtwugfru4dbjj7q@sirius.home.kraxel.org>
- <CAD90VcaTJh5MTRggpOmCK2LAryMHha2+7nPkFVTT8N8S06tf-A@mail.gmail.com>
- <20200227092856.p4kuh5dhh2tk3nnf@sirius.home.kraxel.org>
- <CAPBb6MWwBbNULCfMxN_KLt_Zd8kmmNy2JPi6XjLF1YgxxCPydw@mail.gmail.com>
- <20200304064251.zzkhevqgth6uets6@sirius.home.kraxel.org>
  <CAPBb6MVPjgLkbVjOY6O3srywNm8Zb1pMR2pGM1NinByhgFaZ_A@mail.gmail.com>
-In-Reply-To: <CAPBb6MVPjgLkbVjOY6O3srywNm8Zb1pMR2pGM1NinByhgFaZ_A@mail.gmail.com>
-From: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Mon, 23 Mar 2020 21:07:54 +0900
-Message-ID: <CAD90VcaYi2KawNOewRaL1QihUjgja6nLyzU+0R7nsHPN3voXDA@mail.gmail.com>
-To: Alexandre Courbot <acourbot@chromium.org>
+ <CAD90VcaYi2KawNOewRaL1QihUjgja6nLyzU+0R7nsHPN3voXDA@mail.gmail.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.25.255.1]
 X-Mailman-Approved-At: Mon, 23 Mar 2020 21:36:11 +0000
 Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
  device specification
@@ -71,45 +63,104 @@ Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
  David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
  Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
  Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org, Dmitry Sepp <dmitry.sepp@opensynergy.com>,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ spice-devel@lists.freedesktop.org,
+ =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi everyone,
+Hi Keiichi,
 
-I have implemented a virtio-video device following my v3 spec in
-crosvm, which worked well together with Dmitry's driver [1]. I've
-started preparing v4 proposal to address problems found while
-implementing the driver and the devices.
+On Montag, 23. M=E4rz 2020 13:07:54 CET Keiichi Watanabe wrote:
+> Hi everyone,
+> =
 
-Regarding v3 protocol, I'm thinking about how we can differentiate
-'parameters' and 'controls' in the virtio-video spec?
-In the previous discussion, we decided to have a profile, level and
-bitrate as controls because we want to query supported values for each
-field.
-But, I don't think it's a good criteria because it'd be possible to
-query other values in params.
+> I have implemented a virtio-video device following my v3 spec in
+> crosvm, which worked well together with Dmitry's driver [1]. I've
+> started preparing v4 proposal to address problems found while
+> implementing the driver and the devices.
 
-So, I'm thinking about what should be the difference between params
-and controls. If no difference, we should deprecate
-virtio_video_params and have every field there as a control value
-instead.
-If we add a new command to get and set multiple controls at once, this
-change won't cause overhead.
+Great news!
 
-What do you think? Is there anything I missed?
-If it sounds fine, I'll remove virtio_video_params from the v4 spec proposal.
+> =
+
+> Regarding v3 protocol, I'm thinking about how we can differentiate
+> 'parameters' and 'controls' in the virtio-video spec?
+> In the previous discussion, we decided to have a profile, level and
+> bitrate as controls because we want to query supported values for each
+> field.
+> But, I don't think it's a good criteria because it'd be possible to
+> query other values in params.
+
+Could you elaborate on this? Do you now how the design could look like or i=
+t =
+
+is just an idea? AFAIR during the discussion of OpenSynergy's original v1 s=
+pec =
+
+your point was to separate something that we call 'controls' now to reduce =
+the =
+
+command data size and make command handling less error prone.
+
+On one hand if don't really see any difference in params vs controls it wou=
+ld =
+
+for sure make sense to remove one of the two. On the other hand I'd of cour=
+se =
+
+like to avoid moving back in forth, especially when it comes to such a majo=
+r =
+
+driver rework.
+
+> =
+
+> So, I'm thinking about what should be the difference between params
+> and controls. If no difference, we should deprecate
+> virtio_video_params and have every field there as a control value
+> instead.
+
+I deem we should then deprecate controls instead. Params seem to be more =
+
+abstract. Width and height don't sound like a control for me.
+
+> If we add a new command to get and set multiple controls at once, this
+> change won't cause overhead.
+> =
+
+
+How would we do this? Provide a flexible array member where each entry has =
+a =
+
+type field first?
+
+What can also make sense is to potentially join set and get calls (probably =
+
+provide 'get' stuff automatically within a response to 'set'). Anyway set a=
+nd =
+
+get are currently used in conjunction all the time.
 
 Best regards,
-Keiichi
+Dmitry.
 
-[1]: https://patchwork.linuxtv.org/patch/61717/
+> What do you think? Is there anything I missed?
+> If it sounds fine, I'll remove virtio_video_params from the v4 spec
+> proposal.
+> =
+
+> Best regards,
+> Keiichi
+> =
+
+> [1]: https://patchwork.linuxtv.org/patch/61717/
+
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
