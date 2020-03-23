@@ -1,48 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BB3F190078
-	for <lists+spice-devel@lfdr.de>; Mon, 23 Mar 2020 22:36:17 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 28805190072
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Mar 2020 22:36:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3CE5899E6;
-	Mon, 23 Mar 2020 21:36:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 97017897FD;
+	Mon, 23 Mar 2020 21:36:12 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 75FB46E116
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 13:28:15 +0000 (UTC)
-Received: from hefe.heinlein-support.de (hefe.heinlein-support.de
- [91.198.250.172])
- by plasma.jpberlin.de (Postfix) with ESMTP id 4FE1FBA32B;
- Mon, 23 Mar 2020 14:28:11 +0100 (CET)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([91.198.250.140])
- by hefe.heinlein-support.de (hefe.heinlein-support.de [91.198.250.172])
- (amavisd-new, port 10030)
- with ESMTP id WJGZGc0gbrGQ; Mon, 23 Mar 2020 14:28:09 +0100 (CET)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "GeoTrust EV RSA CA 2018" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 793D8BAE9C;
- Mon, 23 Mar 2020 14:28:09 +0100 (CET)
-Received: from os-lin-dmo.localnet (10.25.255.1) by MXS02.open-synergy.com
- (10.25.10.18) with Microsoft SMTP Server (TLS) id 14.3.487.0; Mon, 23 Mar
- 2020 14:28:08 +0100
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: Alexandre Courbot <acourbot@chromium.org>, Keiichi Watanabe
- <keiichiw@chromium.org>
-Date: Mon, 23 Mar 2020 14:28:08 +0100
-Message-ID: <8121654.T7Z3S40VBb@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <CAD90VcaYi2KawNOewRaL1QihUjgja6nLyzU+0R7nsHPN3voXDA@mail.gmail.com>
+Received: from mail-lf1-x141.google.com (mail-lf1-x141.google.com
+ [IPv6:2a00:1450:4864:20::141])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E68C36E21D
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 15:48:28 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id n20so10617211lfl.10
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 08:48:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=lTTRaLtHtO/Dzo1hQ/OUZ0h7xwYtngBybpLWImeU4KU=;
+ b=ZkKo4e5TLlsCTaA08LfGNHUPMBj6zhetIDQwYi4ZDxjkr827Tr786a+ehrUpJwlcXN
+ d9C92OxTiTvUCj0i2pucNzGBGJ5+U6qGHNirsaQtkL2DpxQ2su622Swx+Sg2Tlipuj0r
+ OevxjuYYYOwiMJAK5O4z7UNsVogbQkpb07+LQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=lTTRaLtHtO/Dzo1hQ/OUZ0h7xwYtngBybpLWImeU4KU=;
+ b=cjgunDYKNwcyQ9vOgL37YalnLwRts+qya/Hf6r0qtzQvKqqbkZ3VzXm45IOFnOxKFL
+ SV2RCZCNCu5JDAErmkjpU0DRfJpBuVVP4qCDX4LZ8QSmpmNt5NgwQKAgrNjZ+KMSOZ63
+ i3MFXeczJk2jeYO3/KE93AhJGch/aTdFfqHFrDwiZ7AiNA3b490dw7wgmDPBuBTr0xn4
+ XW5RBIyJqqPBgpEmIWzaGIDJxYxhxZnyrGTqes2dZETOZtlbgeTMxRK51TC53/7WDoR0
+ hfdMcggzXIbA804vlYCtcO9rWBLyaXjtEAnBA3bVB9OqQrkAd4+EGeBFpYmdXOswyvbh
+ U2Ww==
+X-Gm-Message-State: ANhLgQ0aXBCFgqDPu/Ao4yovq7K94VC6fmyGLRYTt2qWUTmIsSMJjiLh
+ ldH90GYc7lFarB9cE67eaLq6yLEgL4m5eUdYEMzRMg==
+X-Google-Smtp-Source: ADFU+vstBGHjHiJjILn7zs9DnLOB8AlIhFkiBss3AO8kr+mH4zRVkfRw3I1B1g97LdOEdshnC3/SG+VQ/fzyghRnDbg=
+X-Received: by 2002:a05:6512:4cf:: with SMTP id
+ w15mr13305202lfq.147.1584978506177; 
+ Mon, 23 Mar 2020 08:48:26 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200206102058.247258-1-keiichiw@chromium.org>
  <CAPBb6MVPjgLkbVjOY6O3srywNm8Zb1pMR2pGM1NinByhgFaZ_A@mail.gmail.com>
  <CAD90VcaYi2KawNOewRaL1QihUjgja6nLyzU+0R7nsHPN3voXDA@mail.gmail.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
+ <8121654.T7Z3S40VBb@os-lin-dmo>
+In-Reply-To: <8121654.T7Z3S40VBb@os-lin-dmo>
+From: Keiichi Watanabe <keiichiw@chromium.org>
+Date: Tue, 24 Mar 2020 00:48:14 +0900
+Message-ID: <CAD90VcZ2zzzwveYgDs5UdjfZUt=yX4wNX-f_-3V18xz93_fpvQ@mail.gmail.com>
+To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
 X-Mailman-Approved-At: Mon, 23 Mar 2020 21:36:11 +0000
 Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
  device specification
@@ -60,108 +66,96 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
  virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
  Kiran Pawar <kiran.pawar@opensynergy.com>,
+ Alexandre Courbot <acourbot@chromium.org>,
  David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
  Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
  Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
  spice-devel@lists.freedesktop.org,
- =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Keiichi,
-
-On Montag, 23. M=E4rz 2020 13:07:54 CET Keiichi Watanabe wrote:
-> Hi everyone,
-> =
-
-> I have implemented a virtio-video device following my v3 spec in
-> crosvm, which worked well together with Dmitry's driver [1]. I've
-> started preparing v4 proposal to address problems found while
-> implementing the driver and the devices.
-
-Great news!
-
-> =
-
-> Regarding v3 protocol, I'm thinking about how we can differentiate
-> 'parameters' and 'controls' in the virtio-video spec?
-> In the previous discussion, we decided to have a profile, level and
-> bitrate as controls because we want to query supported values for each
-> field.
-> But, I don't think it's a good criteria because it'd be possible to
-> query other values in params.
-
-Could you elaborate on this? Do you now how the design could look like or i=
-t =
-
-is just an idea? AFAIR during the discussion of OpenSynergy's original v1 s=
-pec =
-
-your point was to separate something that we call 'controls' now to reduce =
-the =
-
-command data size and make command handling less error prone.
-
-On one hand if don't really see any difference in params vs controls it wou=
-ld =
-
-for sure make sense to remove one of the two. On the other hand I'd of cour=
-se =
-
-like to avoid moving back in forth, especially when it comes to such a majo=
-r =
-
-driver rework.
-
-> =
-
-> So, I'm thinking about what should be the difference between params
-> and controls. If no difference, we should deprecate
-> virtio_video_params and have every field there as a control value
-> instead.
-
-I deem we should then deprecate controls instead. Params seem to be more =
-
-abstract. Width and height don't sound like a control for me.
-
-> If we add a new command to get and set multiple controls at once, this
-> change won't cause overhead.
-> =
-
-
-How would we do this? Provide a flexible array member where each entry has =
-a =
-
-type field first?
-
-What can also make sense is to potentially join set and get calls (probably =
-
-provide 'get' stuff automatically within a response to 'set'). Anyway set a=
-nd =
-
-get are currently used in conjunction all the time.
-
-Best regards,
-Dmitry.
-
-> What do you think? Is there anything I missed?
-> If it sounds fine, I'll remove virtio_video_params from the v4 spec
-> proposal.
-> =
-
-> Best regards,
-> Keiichi
-> =
-
-> [1]: https://patchwork.linuxtv.org/patch/61717/
-
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+SGksCgpPbiBNb24sIE1hciAyMywgMjAyMCBhdCAxMDoyOCBQTSBEbWl0cnkgU2VwcAo8ZG1pdHJ5
+LnNlcHBAb3BlbnN5bmVyZ3kuY29tPiB3cm90ZToKPgo+IEhpIEtlaWljaGksCj4KPiBPbiBNb250
+YWcsIDIzLiBNw6RyeiAyMDIwIDEzOjA3OjU0IENFVCBLZWlpY2hpIFdhdGFuYWJlIHdyb3RlOgo+
+ID4gSGkgZXZlcnlvbmUsCj4gPgo+ID4gSSBoYXZlIGltcGxlbWVudGVkIGEgdmlydGlvLXZpZGVv
+IGRldmljZSBmb2xsb3dpbmcgbXkgdjMgc3BlYyBpbgo+ID4gY3Jvc3ZtLCB3aGljaCB3b3JrZWQg
+d2VsbCB0b2dldGhlciB3aXRoIERtaXRyeSdzIGRyaXZlciBbMV0uIEkndmUKPiA+IHN0YXJ0ZWQg
+cHJlcGFyaW5nIHY0IHByb3Bvc2FsIHRvIGFkZHJlc3MgcHJvYmxlbXMgZm91bmQgd2hpbGUKPiA+
+IGltcGxlbWVudGluZyB0aGUgZHJpdmVyIGFuZCB0aGUgZGV2aWNlcy4KPgo+IEdyZWF0IG5ld3Mh
+Cj4KPiA+Cj4gPiBSZWdhcmRpbmcgdjMgcHJvdG9jb2wsIEknbSB0aGlua2luZyBhYm91dCBob3cg
+d2UgY2FuIGRpZmZlcmVudGlhdGUKPiA+ICdwYXJhbWV0ZXJzJyBhbmQgJ2NvbnRyb2xzJyBpbiB0
+aGUgdmlydGlvLXZpZGVvIHNwZWM/Cj4gPiBJbiB0aGUgcHJldmlvdXMgZGlzY3Vzc2lvbiwgd2Ug
+ZGVjaWRlZCB0byBoYXZlIGEgcHJvZmlsZSwgbGV2ZWwgYW5kCj4gPiBiaXRyYXRlIGFzIGNvbnRy
+b2xzIGJlY2F1c2Ugd2Ugd2FudCB0byBxdWVyeSBzdXBwb3J0ZWQgdmFsdWVzIGZvciBlYWNoCj4g
+PiBmaWVsZC4KPiA+IEJ1dCwgSSBkb24ndCB0aGluayBpdCdzIGEgZ29vZCBjcml0ZXJpYSBiZWNh
+dXNlIGl0J2QgYmUgcG9zc2libGUgdG8KPiA+IHF1ZXJ5IG90aGVyIHZhbHVlcyBpbiBwYXJhbXMu
+Cj4KPiBDb3VsZCB5b3UgZWxhYm9yYXRlIG9uIHRoaXM/IERvIHlvdSBub3cgaG93IHRoZSBkZXNp
+Z24gY291bGQgbG9vayBsaWtlIG9yIGl0Cj4gaXMganVzdCBhbiBpZGVhPyBBRkFJUiBkdXJpbmcg
+dGhlIGRpc2N1c3Npb24gb2YgT3BlblN5bmVyZ3kncyBvcmlnaW5hbCB2MSBzcGVjCj4geW91ciBw
+b2ludCB3YXMgdG8gc2VwYXJhdGUgc29tZXRoaW5nIHRoYXQgd2UgY2FsbCAnY29udHJvbHMnIG5v
+dyB0byByZWR1Y2UgdGhlCj4gY29tbWFuZCBkYXRhIHNpemUgYW5kIG1ha2UgY29tbWFuZCBoYW5k
+bGluZyBsZXNzIGVycm9yIHByb25lLgoKVGhlIHByb2JsZW0gaW4gdjMgaXMgdGhhdCBpZiB3ZSB3
+YW50IHRvIGFkZCBhIG5ldyB2YWx1ZSB0byBiZSBzZXQgaXQnZApiZSB1bmNsZWFyIHdoaWNoIHBh
+cmFtcyBvciBjb250cm9scyBpcyBiZXR0ZXIgdG8gYmUgZXh0ZW5kZWQuCk9uZSBwb3NzaWJsZSBy
+dWxlIG1heSBiZSAiaWYgYSB2YWx1ZSBjYW4gYmUgcXVlcmllZCBieSB0aGUgZHJpdmVyLCBpdApz
+aG91bGQgYmUgYSBjb250cm9sIi4gSG93ZXZlciwgdGhpcyBydWxlIGRvZXNuJ3QgZXhwbGFpbiB3
+aHkgd2UgaGF2ZQoiZm9ybWF0IiBpbiBwYXJhbXMgZm9yIGV4YW1wbGUuIFNvLCBJIHRoaW5rIHdl
+IG5lZWQgYSBkaXNjdXNzaW9uIGFuZAptYXkgd2FudCB0byByZWFycmFuZ2UgdGhlIHN0cnVjdHVy
+ZXMuCgpZZWFoLCBpbiB0aGUgcHJldmlvdXMgZGlzY3Vzc2lvbiwgSSBzdWdnZXN0ZWQgdG8gaGF2
+ZSBwcm9maWxlLCBsZXZlbAphbmQgYml0cmF0ZSBhcyBjb250cm9sIHZhbHVlcyBpbnN0ZWFkIG9m
+IG1lbWJlcnMgb2YgcGFyYW1zLiBOb3csIEknbQp3b25kZXJpbmcgd2hldGhlciB3ZSBjYW4gaGF2
+ZSBldmVyeSB2YWx1ZXMgYXMgY29udHJvbCB2YWx1ZXMuCkkgZG9uJ3QgdGhpbmsgaXQncyBhIHBl
+cmZlY3QgaWRlYSwgYnV0IEkgaGF2ZW4ndCBjb21lIHVwIHdpdGggYW55CmJldHRlciBjb25jcmV0
+ZSBkZXNpZ24geWV0LiBTbywgSSdkIHJlYWxseSBhcHByZWNpYXRlIGlmIHlvdSBjb3VsZApzaGFy
+ZSB5b3VyIHRob3VnaHRzLgoKPgo+IE9uIG9uZSBoYW5kIGlmIGRvbid0IHJlYWxseSBzZWUgYW55
+IGRpZmZlcmVuY2UgaW4gcGFyYW1zIHZzIGNvbnRyb2xzIGl0IHdvdWxkCj4gZm9yIHN1cmUgbWFr
+ZSBzZW5zZSB0byByZW1vdmUgb25lIG9mIHRoZSB0d28uIE9uIHRoZSBvdGhlciBoYW5kIEknZCBv
+ZiBjb3Vyc2UKPiBsaWtlIHRvIGF2b2lkIG1vdmluZyBiYWNrIGluIGZvcnRoLCBlc3BlY2lhbGx5
+IHdoZW4gaXQgY29tZXMgdG8gc3VjaCBhIG1ham9yCj4gZHJpdmVyIHJld29yay4KClllcywgSSB1
+bmRlcnN0YW5kIHRoYXQgaXQgbWF5IHJlcXVpcmUgYSBiaWcgY2hhbmdlIGluIHRoZSBpbXBsZW1l
+bnRhdGlvbi4KSSdtIHNvcnJ5IGZvciBub3QgYmVpbmcgYWJsZSB0byB0aGluayBvZiB0aGlzIHBv
+aW50IHNlcmlvdXNseSBpbiB0aGUKcHJldmlvdXMgdGhyZWFkLgoKT2YgY291cnNlLCBJJ2QgYWxz
+byByZWFsbHkgbGlrZSB0byBhdm9pZCByZXdvcmssIGJ1dCBJIGJlbGlldmUgd2UKc2hvdWxkbid0
+IGdpdmUgdXAgZGVmaW5pbmcgYSBjbGVhbiBhbmQgcmVhc29uYWJsZSBzcGVjaWZpY2F0aW9uLgpM
+ZXQncyBmaW5kIGEgY2xlYXIgZGVmaW5pdGlvbiBpbiB0aGlzIGN5Y2xlIHRvIGF2b2lkIGZ1dHVy
+ZSByZXdvcmsuCgo+Cj4gPgo+ID4gU28sIEknbSB0aGlua2luZyBhYm91dCB3aGF0IHNob3VsZCBi
+ZSB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHBhcmFtcwo+ID4gYW5kIGNvbnRyb2xzLiBJZiBubyBk
+aWZmZXJlbmNlLCB3ZSBzaG91bGQgZGVwcmVjYXRlCj4gPiB2aXJ0aW9fdmlkZW9fcGFyYW1zIGFu
+ZCBoYXZlIGV2ZXJ5IGZpZWxkIHRoZXJlIGFzIGEgY29udHJvbCB2YWx1ZQo+ID4gaW5zdGVhZC4K
+Pgo+IEkgZGVlbSB3ZSBzaG91bGQgdGhlbiBkZXByZWNhdGUgY29udHJvbHMgaW5zdGVhZC4gUGFy
+YW1zIHNlZW0gdG8gYmUgbW9yZQo+IGFic3RyYWN0LiBXaWR0aCBhbmQgaGVpZ2h0IGRvbid0IHNv
+dW5kIGxpa2UgYSBjb250cm9sIGZvciBtZS4KClRob3VnaCB0aGlzIGlzIGFjdHVhbGx5IG9uZSBv
+ZiBvcHRpb25zLCBob3cgY2FuIHdlIHF1ZXJ5IHByb2ZpbGVzIGFuZApsZXZlbHMgaWYgdGhleSBh
+cmUgaW4gcGFyYW1zPwpUaGlzIGlzIHdoeSB3ZSBkZWNpZGVkIHRoZW0gYXMgY29udHJvbHMuCgpC
+ZXN0IHJlZ2FyZHMsCktlaWljaGkKCj4KPiA+IElmIHdlIGFkZCBhIG5ldyBjb21tYW5kIHRvIGdl
+dCBhbmQgc2V0IG11bHRpcGxlIGNvbnRyb2xzIGF0IG9uY2UsIHRoaXMKPiA+IGNoYW5nZSB3b24n
+dCBjYXVzZSBvdmVyaGVhZC4KPiA+Cj4KPiBIb3cgd291bGQgd2UgZG8gdGhpcz8gUHJvdmlkZSBh
+IGZsZXhpYmxlIGFycmF5IG1lbWJlciB3aGVyZSBlYWNoIGVudHJ5IGhhcyBhCj4gdHlwZSBmaWVs
+ZCBmaXJzdD8KClllYWgsIHNvbWV0aGluZyBsaWtlIHRoZSBpZGVhLiBCdXQsIEkgaGF2ZW4ndCBk
+ZXNpZ25lZCBhbiBhY3R1YWwgc3RydWN0dXJlIHlldC4KCj4KPiBXaGF0IGNhbiBhbHNvIG1ha2Ug
+c2Vuc2UgaXMgdG8gcG90ZW50aWFsbHkgam9pbiBzZXQgYW5kIGdldCBjYWxscyAocHJvYmFibHkK
+PiBwcm92aWRlICdnZXQnIHN0dWZmIGF1dG9tYXRpY2FsbHkgd2l0aGluIGEgcmVzcG9uc2UgdG8g
+J3NldCcpLiBBbnl3YXkgc2V0IGFuZAo+IGdldCBhcmUgY3VycmVudGx5IHVzZWQgaW4gY29uanVu
+Y3Rpb24gYWxsIHRoZSB0aW1lLgoKSXQnZCBtYWtlIHNlbnNlIHRvIHJldHVybiBuZXcgaW5wdXQg
+YW5kIG91dHB1dCBwYXJhbXMgd2hlbiBvbmUgb2YKcGFyYW1zIGlzIHVwZGF0ZWQuCkJ1dCwgaWYg
+d2UgY2hvb3NlIHRoaXMgZGVzaWduLCB3ZSBuZWVkIHRvIGFzc3VtZSBvbmUgZGV2aWNlIGhhcyBq
+dXN0CnR3byBwYXJhbXM7IGlucHV0IGFuZCBvdXRwdXQuCgpUaGlzIGlzIG9rYXkgZm9yIHZpZGVv
+IGRlY29kZXIgYW5kIGVuY29kZXIsIGJ1dCBpdCBtYXkgYmVjb21lIGEKcHJvYmxlbSBpZiB3ZSB3
+YW50IHRvIHN1cHBvcnQgb3RoZXIgdHlwZXMgb2YgdmlkZW8gZGV2aWNlIHRoYXQgaGFzCm9ubHkg
+b25lIGRpcmVjdGlvbi4gKGUuZy4gdmlkZW8gY2FwdHVyZSBkZXZpY2UpClRob3VnaCB3ZSBoYXZl
+IG5vIHBsYW4gZm9yIHN1cHBvcnRpbmcgdGhpcywgT3BlblN5bmVyZ3kncyB2MSBwcm9wb3NhbApj
+b250YWluZWQgdGhpcyB0eXBlIElJUkMuCgpCZXN0IHJlZ2FyZHMsCktlaWljaGkKCj4KPiBCZXN0
+IHJlZ2FyZHMsCj4gRG1pdHJ5Lgo+Cj4gPiBXaGF0IGRvIHlvdSB0aGluaz8gSXMgdGhlcmUgYW55
+dGhpbmcgSSBtaXNzZWQ/Cj4gPiBJZiBpdCBzb3VuZHMgZmluZSwgSSdsbCByZW1vdmUgdmlydGlv
+X3ZpZGVvX3BhcmFtcyBmcm9tIHRoZSB2NCBzcGVjCj4gPiBwcm9wb3NhbC4KPiA+Cj4gPiBCZXN0
+IHJlZ2FyZHMsCj4gPiBLZWlpY2hpCj4gPgo+ID4gWzFdOiBodHRwczovL3BhdGNod29yay5saW51
+eHR2Lm9yZy9wYXRjaC82MTcxNy8KPgo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0
+cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby9zcGljZS1kZXZlbAo=
