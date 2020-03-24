@@ -1,57 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28805190072
-	for <lists+spice-devel@lfdr.de>; Mon, 23 Mar 2020 22:36:14 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BCD4190621
+	for <lists+spice-devel@lfdr.de>; Tue, 24 Mar 2020 08:16:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 97017897FD;
-	Mon, 23 Mar 2020 21:36:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 652626E07D;
+	Tue, 24 Mar 2020 07:16:02 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-x141.google.com (mail-lf1-x141.google.com
- [IPv6:2a00:1450:4864:20::141])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E68C36E21D
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 15:48:28 +0000 (UTC)
-Received: by mail-lf1-x141.google.com with SMTP id n20so10617211lfl.10
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Mar 2020 08:48:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=lTTRaLtHtO/Dzo1hQ/OUZ0h7xwYtngBybpLWImeU4KU=;
- b=ZkKo4e5TLlsCTaA08LfGNHUPMBj6zhetIDQwYi4ZDxjkr827Tr786a+ehrUpJwlcXN
- d9C92OxTiTvUCj0i2pucNzGBGJ5+U6qGHNirsaQtkL2DpxQ2su622Swx+Sg2Tlipuj0r
- OevxjuYYYOwiMJAK5O4z7UNsVogbQkpb07+LQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=lTTRaLtHtO/Dzo1hQ/OUZ0h7xwYtngBybpLWImeU4KU=;
- b=cjgunDYKNwcyQ9vOgL37YalnLwRts+qya/Hf6r0qtzQvKqqbkZ3VzXm45IOFnOxKFL
- SV2RCZCNCu5JDAErmkjpU0DRfJpBuVVP4qCDX4LZ8QSmpmNt5NgwQKAgrNjZ+KMSOZ63
- i3MFXeczJk2jeYO3/KE93AhJGch/aTdFfqHFrDwiZ7AiNA3b490dw7wgmDPBuBTr0xn4
- XW5RBIyJqqPBgpEmIWzaGIDJxYxhxZnyrGTqes2dZETOZtlbgeTMxRK51TC53/7WDoR0
- hfdMcggzXIbA804vlYCtcO9rWBLyaXjtEAnBA3bVB9OqQrkAd4+EGeBFpYmdXOswyvbh
- U2Ww==
-X-Gm-Message-State: ANhLgQ0aXBCFgqDPu/Ao4yovq7K94VC6fmyGLRYTt2qWUTmIsSMJjiLh
- ldH90GYc7lFarB9cE67eaLq6yLEgL4m5eUdYEMzRMg==
-X-Google-Smtp-Source: ADFU+vstBGHjHiJjILn7zs9DnLOB8AlIhFkiBss3AO8kr+mH4zRVkfRw3I1B1g97LdOEdshnC3/SG+VQ/fzyghRnDbg=
-X-Received: by 2002:a05:6512:4cf:: with SMTP id
- w15mr13305202lfq.147.1584978506177; 
- Mon, 23 Mar 2020 08:48:26 -0700 (PDT)
+Received: from us-smtp-delivery-74.mimecast.com
+ (us-smtp-delivery-74.mimecast.com [63.128.21.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 494F36E07D
+ for <spice-devel@lists.freedesktop.org>; Tue, 24 Mar 2020 07:16:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1585034160;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KWCkTsx/OEj2Wq48W4MBeZrybA5MhXuJ2Rv7MadOXdo=;
+ b=LlCse8vo8M9S1XmtG1stQWVdA9kEje9UqXVDjFExleraD8p1kd36IHTknO6aLZlmDkY6bN
+ Nauw1U4dzwF7MFCtoqrRf7GwUUbWoXiOQNgDLN+GAce9KqUi7EKlo8NOt9t3IWHc6oC2OD
+ Uc9cTBAyb7B8yoF8K3WARy4GepkQ4us=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-228-5I88Ad1nM8Gylu7spD0dmg-1; Tue, 24 Mar 2020 03:15:54 -0400
+X-MC-Unique: 5I88Ad1nM8Gylu7spD0dmg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3DBF48017DF;
+ Tue, 24 Mar 2020 07:15:53 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 3490A6266C;
+ Tue, 24 Mar 2020 07:15:53 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 0176418089C8;
+ Tue, 24 Mar 2020 07:15:52 +0000 (UTC)
+Date: Tue, 24 Mar 2020 03:15:52 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: yanzeng wang <yanzeng.wang@std.uestc.edu.cn>
+Message-ID: <1059295903.19426820.1585034152395.JavaMail.zimbra@redhat.com>
+In-Reply-To: <202003201700374079587@std.uestc.edu.cn>
+References: <202003201700374079587@std.uestc.edu.cn>
 MIME-Version: 1.0
-References: <20200206102058.247258-1-keiichiw@chromium.org>
- <CAPBb6MVPjgLkbVjOY6O3srywNm8Zb1pMR2pGM1NinByhgFaZ_A@mail.gmail.com>
- <CAD90VcaYi2KawNOewRaL1QihUjgja6nLyzU+0R7nsHPN3voXDA@mail.gmail.com>
- <8121654.T7Z3S40VBb@os-lin-dmo>
-In-Reply-To: <8121654.T7Z3S40VBb@os-lin-dmo>
-From: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Tue, 24 Mar 2020 00:48:14 +0900
-Message-ID: <CAD90VcZ2zzzwveYgDs5UdjfZUt=yX4wNX-f_-3V18xz93_fpvQ@mail.gmail.com>
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-X-Mailman-Approved-At: Mon, 23 Mar 2020 21:36:11 +0000
-Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
- device specification
+X-Originating-IP: [10.33.32.9, 10.4.195.27]
+Thread-Topic: [is there Android's SPICE vdagent?]
+Thread-Index: CtX13ioG6+1FLcbs3/uGrhjQKq5cRQ==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] [is there Android's SPICE vdagent?]
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,99 +66,27 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
- virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
- Kiran Pawar <kiran.pawar@opensynergy.com>,
- Alexandre Courbot <acourbot@chromium.org>,
- David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
- Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
- Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
- Pawel Osciak <posciak@chromium.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGksCgpPbiBNb24sIE1hciAyMywgMjAyMCBhdCAxMDoyOCBQTSBEbWl0cnkgU2VwcAo8ZG1pdHJ5
-LnNlcHBAb3BlbnN5bmVyZ3kuY29tPiB3cm90ZToKPgo+IEhpIEtlaWljaGksCj4KPiBPbiBNb250
-YWcsIDIzLiBNw6RyeiAyMDIwIDEzOjA3OjU0IENFVCBLZWlpY2hpIFdhdGFuYWJlIHdyb3RlOgo+
-ID4gSGkgZXZlcnlvbmUsCj4gPgo+ID4gSSBoYXZlIGltcGxlbWVudGVkIGEgdmlydGlvLXZpZGVv
-IGRldmljZSBmb2xsb3dpbmcgbXkgdjMgc3BlYyBpbgo+ID4gY3Jvc3ZtLCB3aGljaCB3b3JrZWQg
-d2VsbCB0b2dldGhlciB3aXRoIERtaXRyeSdzIGRyaXZlciBbMV0uIEkndmUKPiA+IHN0YXJ0ZWQg
-cHJlcGFyaW5nIHY0IHByb3Bvc2FsIHRvIGFkZHJlc3MgcHJvYmxlbXMgZm91bmQgd2hpbGUKPiA+
-IGltcGxlbWVudGluZyB0aGUgZHJpdmVyIGFuZCB0aGUgZGV2aWNlcy4KPgo+IEdyZWF0IG5ld3Mh
-Cj4KPiA+Cj4gPiBSZWdhcmRpbmcgdjMgcHJvdG9jb2wsIEknbSB0aGlua2luZyBhYm91dCBob3cg
-d2UgY2FuIGRpZmZlcmVudGlhdGUKPiA+ICdwYXJhbWV0ZXJzJyBhbmQgJ2NvbnRyb2xzJyBpbiB0
-aGUgdmlydGlvLXZpZGVvIHNwZWM/Cj4gPiBJbiB0aGUgcHJldmlvdXMgZGlzY3Vzc2lvbiwgd2Ug
-ZGVjaWRlZCB0byBoYXZlIGEgcHJvZmlsZSwgbGV2ZWwgYW5kCj4gPiBiaXRyYXRlIGFzIGNvbnRy
-b2xzIGJlY2F1c2Ugd2Ugd2FudCB0byBxdWVyeSBzdXBwb3J0ZWQgdmFsdWVzIGZvciBlYWNoCj4g
-PiBmaWVsZC4KPiA+IEJ1dCwgSSBkb24ndCB0aGluayBpdCdzIGEgZ29vZCBjcml0ZXJpYSBiZWNh
-dXNlIGl0J2QgYmUgcG9zc2libGUgdG8KPiA+IHF1ZXJ5IG90aGVyIHZhbHVlcyBpbiBwYXJhbXMu
-Cj4KPiBDb3VsZCB5b3UgZWxhYm9yYXRlIG9uIHRoaXM/IERvIHlvdSBub3cgaG93IHRoZSBkZXNp
-Z24gY291bGQgbG9vayBsaWtlIG9yIGl0Cj4gaXMganVzdCBhbiBpZGVhPyBBRkFJUiBkdXJpbmcg
-dGhlIGRpc2N1c3Npb24gb2YgT3BlblN5bmVyZ3kncyBvcmlnaW5hbCB2MSBzcGVjCj4geW91ciBw
-b2ludCB3YXMgdG8gc2VwYXJhdGUgc29tZXRoaW5nIHRoYXQgd2UgY2FsbCAnY29udHJvbHMnIG5v
-dyB0byByZWR1Y2UgdGhlCj4gY29tbWFuZCBkYXRhIHNpemUgYW5kIG1ha2UgY29tbWFuZCBoYW5k
-bGluZyBsZXNzIGVycm9yIHByb25lLgoKVGhlIHByb2JsZW0gaW4gdjMgaXMgdGhhdCBpZiB3ZSB3
-YW50IHRvIGFkZCBhIG5ldyB2YWx1ZSB0byBiZSBzZXQgaXQnZApiZSB1bmNsZWFyIHdoaWNoIHBh
-cmFtcyBvciBjb250cm9scyBpcyBiZXR0ZXIgdG8gYmUgZXh0ZW5kZWQuCk9uZSBwb3NzaWJsZSBy
-dWxlIG1heSBiZSAiaWYgYSB2YWx1ZSBjYW4gYmUgcXVlcmllZCBieSB0aGUgZHJpdmVyLCBpdApz
-aG91bGQgYmUgYSBjb250cm9sIi4gSG93ZXZlciwgdGhpcyBydWxlIGRvZXNuJ3QgZXhwbGFpbiB3
-aHkgd2UgaGF2ZQoiZm9ybWF0IiBpbiBwYXJhbXMgZm9yIGV4YW1wbGUuIFNvLCBJIHRoaW5rIHdl
-IG5lZWQgYSBkaXNjdXNzaW9uIGFuZAptYXkgd2FudCB0byByZWFycmFuZ2UgdGhlIHN0cnVjdHVy
-ZXMuCgpZZWFoLCBpbiB0aGUgcHJldmlvdXMgZGlzY3Vzc2lvbiwgSSBzdWdnZXN0ZWQgdG8gaGF2
-ZSBwcm9maWxlLCBsZXZlbAphbmQgYml0cmF0ZSBhcyBjb250cm9sIHZhbHVlcyBpbnN0ZWFkIG9m
-IG1lbWJlcnMgb2YgcGFyYW1zLiBOb3csIEknbQp3b25kZXJpbmcgd2hldGhlciB3ZSBjYW4gaGF2
-ZSBldmVyeSB2YWx1ZXMgYXMgY29udHJvbCB2YWx1ZXMuCkkgZG9uJ3QgdGhpbmsgaXQncyBhIHBl
-cmZlY3QgaWRlYSwgYnV0IEkgaGF2ZW4ndCBjb21lIHVwIHdpdGggYW55CmJldHRlciBjb25jcmV0
-ZSBkZXNpZ24geWV0LiBTbywgSSdkIHJlYWxseSBhcHByZWNpYXRlIGlmIHlvdSBjb3VsZApzaGFy
-ZSB5b3VyIHRob3VnaHRzLgoKPgo+IE9uIG9uZSBoYW5kIGlmIGRvbid0IHJlYWxseSBzZWUgYW55
-IGRpZmZlcmVuY2UgaW4gcGFyYW1zIHZzIGNvbnRyb2xzIGl0IHdvdWxkCj4gZm9yIHN1cmUgbWFr
-ZSBzZW5zZSB0byByZW1vdmUgb25lIG9mIHRoZSB0d28uIE9uIHRoZSBvdGhlciBoYW5kIEknZCBv
-ZiBjb3Vyc2UKPiBsaWtlIHRvIGF2b2lkIG1vdmluZyBiYWNrIGluIGZvcnRoLCBlc3BlY2lhbGx5
-IHdoZW4gaXQgY29tZXMgdG8gc3VjaCBhIG1ham9yCj4gZHJpdmVyIHJld29yay4KClllcywgSSB1
-bmRlcnN0YW5kIHRoYXQgaXQgbWF5IHJlcXVpcmUgYSBiaWcgY2hhbmdlIGluIHRoZSBpbXBsZW1l
-bnRhdGlvbi4KSSdtIHNvcnJ5IGZvciBub3QgYmVpbmcgYWJsZSB0byB0aGluayBvZiB0aGlzIHBv
-aW50IHNlcmlvdXNseSBpbiB0aGUKcHJldmlvdXMgdGhyZWFkLgoKT2YgY291cnNlLCBJJ2QgYWxz
-byByZWFsbHkgbGlrZSB0byBhdm9pZCByZXdvcmssIGJ1dCBJIGJlbGlldmUgd2UKc2hvdWxkbid0
-IGdpdmUgdXAgZGVmaW5pbmcgYSBjbGVhbiBhbmQgcmVhc29uYWJsZSBzcGVjaWZpY2F0aW9uLgpM
-ZXQncyBmaW5kIGEgY2xlYXIgZGVmaW5pdGlvbiBpbiB0aGlzIGN5Y2xlIHRvIGF2b2lkIGZ1dHVy
-ZSByZXdvcmsuCgo+Cj4gPgo+ID4gU28sIEknbSB0aGlua2luZyBhYm91dCB3aGF0IHNob3VsZCBi
-ZSB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHBhcmFtcwo+ID4gYW5kIGNvbnRyb2xzLiBJZiBubyBk
-aWZmZXJlbmNlLCB3ZSBzaG91bGQgZGVwcmVjYXRlCj4gPiB2aXJ0aW9fdmlkZW9fcGFyYW1zIGFu
-ZCBoYXZlIGV2ZXJ5IGZpZWxkIHRoZXJlIGFzIGEgY29udHJvbCB2YWx1ZQo+ID4gaW5zdGVhZC4K
-Pgo+IEkgZGVlbSB3ZSBzaG91bGQgdGhlbiBkZXByZWNhdGUgY29udHJvbHMgaW5zdGVhZC4gUGFy
-YW1zIHNlZW0gdG8gYmUgbW9yZQo+IGFic3RyYWN0LiBXaWR0aCBhbmQgaGVpZ2h0IGRvbid0IHNv
-dW5kIGxpa2UgYSBjb250cm9sIGZvciBtZS4KClRob3VnaCB0aGlzIGlzIGFjdHVhbGx5IG9uZSBv
-ZiBvcHRpb25zLCBob3cgY2FuIHdlIHF1ZXJ5IHByb2ZpbGVzIGFuZApsZXZlbHMgaWYgdGhleSBh
-cmUgaW4gcGFyYW1zPwpUaGlzIGlzIHdoeSB3ZSBkZWNpZGVkIHRoZW0gYXMgY29udHJvbHMuCgpC
-ZXN0IHJlZ2FyZHMsCktlaWljaGkKCj4KPiA+IElmIHdlIGFkZCBhIG5ldyBjb21tYW5kIHRvIGdl
-dCBhbmQgc2V0IG11bHRpcGxlIGNvbnRyb2xzIGF0IG9uY2UsIHRoaXMKPiA+IGNoYW5nZSB3b24n
-dCBjYXVzZSBvdmVyaGVhZC4KPiA+Cj4KPiBIb3cgd291bGQgd2UgZG8gdGhpcz8gUHJvdmlkZSBh
-IGZsZXhpYmxlIGFycmF5IG1lbWJlciB3aGVyZSBlYWNoIGVudHJ5IGhhcyBhCj4gdHlwZSBmaWVs
-ZCBmaXJzdD8KClllYWgsIHNvbWV0aGluZyBsaWtlIHRoZSBpZGVhLiBCdXQsIEkgaGF2ZW4ndCBk
-ZXNpZ25lZCBhbiBhY3R1YWwgc3RydWN0dXJlIHlldC4KCj4KPiBXaGF0IGNhbiBhbHNvIG1ha2Ug
-c2Vuc2UgaXMgdG8gcG90ZW50aWFsbHkgam9pbiBzZXQgYW5kIGdldCBjYWxscyAocHJvYmFibHkK
-PiBwcm92aWRlICdnZXQnIHN0dWZmIGF1dG9tYXRpY2FsbHkgd2l0aGluIGEgcmVzcG9uc2UgdG8g
-J3NldCcpLiBBbnl3YXkgc2V0IGFuZAo+IGdldCBhcmUgY3VycmVudGx5IHVzZWQgaW4gY29uanVu
-Y3Rpb24gYWxsIHRoZSB0aW1lLgoKSXQnZCBtYWtlIHNlbnNlIHRvIHJldHVybiBuZXcgaW5wdXQg
-YW5kIG91dHB1dCBwYXJhbXMgd2hlbiBvbmUgb2YKcGFyYW1zIGlzIHVwZGF0ZWQuCkJ1dCwgaWYg
-d2UgY2hvb3NlIHRoaXMgZGVzaWduLCB3ZSBuZWVkIHRvIGFzc3VtZSBvbmUgZGV2aWNlIGhhcyBq
-dXN0CnR3byBwYXJhbXM7IGlucHV0IGFuZCBvdXRwdXQuCgpUaGlzIGlzIG9rYXkgZm9yIHZpZGVv
-IGRlY29kZXIgYW5kIGVuY29kZXIsIGJ1dCBpdCBtYXkgYmVjb21lIGEKcHJvYmxlbSBpZiB3ZSB3
-YW50IHRvIHN1cHBvcnQgb3RoZXIgdHlwZXMgb2YgdmlkZW8gZGV2aWNlIHRoYXQgaGFzCm9ubHkg
-b25lIGRpcmVjdGlvbi4gKGUuZy4gdmlkZW8gY2FwdHVyZSBkZXZpY2UpClRob3VnaCB3ZSBoYXZl
-IG5vIHBsYW4gZm9yIHN1cHBvcnRpbmcgdGhpcywgT3BlblN5bmVyZ3kncyB2MSBwcm9wb3NhbApj
-b250YWluZWQgdGhpcyB0eXBlIElJUkMuCgpCZXN0IHJlZ2FyZHMsCktlaWljaGkKCj4KPiBCZXN0
-IHJlZ2FyZHMsCj4gRG1pdHJ5Lgo+Cj4gPiBXaGF0IGRvIHlvdSB0aGluaz8gSXMgdGhlcmUgYW55
-dGhpbmcgSSBtaXNzZWQ/Cj4gPiBJZiBpdCBzb3VuZHMgZmluZSwgSSdsbCByZW1vdmUgdmlydGlv
-X3ZpZGVvX3BhcmFtcyBmcm9tIHRoZSB2NCBzcGVjCj4gPiBwcm9wb3NhbC4KPiA+Cj4gPiBCZXN0
-IHJlZ2FyZHMsCj4gPiBLZWlpY2hpCj4gPgo+ID4gWzFdOiBodHRwczovL3BhdGNod29yay5saW51
-eHR2Lm9yZy9wYXRjaC82MTcxNy8KPgo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9zcGljZS1kZXZlbAo=
+> Dear sirs,
+> I would like to know if there is Android's SPICE vdagent?
+> Because we are developping android VMs and the spice vadgent may be needed.
+> If not,can you offer how to build one?
+> Cheers!
+> yanzeng.wang
+
+> yanzeng.wang@std.uestc.edu.cn
+
+As far as I know no vd_agent for Android.
+But it's C, should not too hard to port.
+
+Frediano
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
