@@ -1,48 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE3681927E6
-	for <lists+spice-devel@lfdr.de>; Wed, 25 Mar 2020 13:12:23 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93ACC1950C4
+	for <lists+spice-devel@lfdr.de>; Fri, 27 Mar 2020 06:46:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B3F656E83F;
-	Wed, 25 Mar 2020 12:12:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C3A296E97E;
+	Fri, 27 Mar 2020 05:46:41 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 24C5389EA6
- for <spice-devel@lists.freedesktop.org>; Wed, 25 Mar 2020 09:47:35 +0000 (UTC)
-Received: from hefe.heinlein-support.de (hefe.heinlein-support.de
- [91.198.250.172])
- by plasma.jpberlin.de (Postfix) with ESMTP id A0824B6F58;
- Wed, 25 Mar 2020 10:47:31 +0100 (CET)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([91.198.250.140])
- by hefe.heinlein-support.de (hefe.heinlein-support.de [91.198.250.172])
- (amavisd-new, port 10030)
- with ESMTP id NA1pINGt8Iq3; Wed, 25 Mar 2020 10:47:30 +0100 (CET)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "GeoTrust EV RSA CA 2018" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 55CEFB9950;
- Wed, 25 Mar 2020 10:47:29 +0100 (CET)
-Received: from os-lin-dmo.localnet (10.25.255.1) by MXS01.open-synergy.com
- (10.25.10.17) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 25 Mar
- 2020 10:47:28 +0100
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Wed, 25 Mar 2020 10:47:28 +0100
-Message-ID: <6557912.4vTCxPXJkl@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <CAD90VcZ2zzzwveYgDs5UdjfZUt=yX4wNX-f_-3V18xz93_fpvQ@mail.gmail.com>
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
+ [IPv6:2a00:1450:4864:20::241])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CE8C16E233
+ for <spice-devel@lists.freedesktop.org>; Fri, 27 Mar 2020 03:35:26 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id w1so8751645ljh.5
+ for <spice-devel@lists.freedesktop.org>; Thu, 26 Mar 2020 20:35:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=XeKEAn+hfGPdPoufqsnHb2SpBKodsES2luZcQ7Ela5Q=;
+ b=CSR5bJDBXMcoSEbB5Nd3zgKhlO79Icw0k7BnNPNgE2X3XmM1u5brug+nIpe3TRrBOF
+ jRUFpO5GwXhRXzorRWkSuJBpTlh8HF1y+9oMW9vTWKyeHGW29CEX027LEwybcle+gz7h
+ Q487S1K2luqmNMlKkOrrbCMm1TqjPAqPHfUUI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=XeKEAn+hfGPdPoufqsnHb2SpBKodsES2luZcQ7Ela5Q=;
+ b=AaC+fFAMQCkydnwID9NGZ5KUtu+gA/AJuYVIt1XVC6dTQu4k8BgGslurApklKYPcas
+ 5fOYtimlujtqZFhhwUALIeg/jl494C25WBpXViME3iRQjc61fNhKSQiRL7kOizwnxUfd
+ aP1zm0ZVDpuQQItbfb9JAdBkgqsK/PSXsk0NJGXqX8RseJwF7OojROK1z3zgTMF1l6UV
+ E1Er3gbPC/QpQdt/6FF75NgflFdHPlpFiNTS11D1Wc5mjHfXnL+jXbKZG9nR+cxCHt76
+ wQvsZ4IngkXYG6vVe3Ahfd5TsuCEOqp/2Cz94WiDPiVNycBNCfQdxAtEtUMvVCnIND+Z
+ 2xKg==
+X-Gm-Message-State: AGi0Pub5EYNryLSB5nVP1l1r1nhR0Rh+8HVGA6W14jCl2Ao7UWH1NXBS
+ Sjrfh83LTNVL6C/jRd1tsvV00aq0P3QycTIJSyNNIw==
+X-Google-Smtp-Source: ADFU+vtjulxSFTo36CtAnIJ5vsca80/mJlumHbCNSz5io67ukcq/GXdbEhAvsymt/X08b3XnJVezylK5cLVVj08J43s=
+X-Received: by 2002:a2e:95c3:: with SMTP id y3mr7108877ljh.149.1585280124808; 
+ Thu, 26 Mar 2020 20:35:24 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200206102058.247258-1-keiichiw@chromium.org>
  <8121654.T7Z3S40VBb@os-lin-dmo>
  <CAD90VcZ2zzzwveYgDs5UdjfZUt=yX4wNX-f_-3V18xz93_fpvQ@mail.gmail.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
-X-Mailman-Approved-At: Wed, 25 Mar 2020 12:12:20 +0000
+ <6557912.4vTCxPXJkl@os-lin-dmo>
+In-Reply-To: <6557912.4vTCxPXJkl@os-lin-dmo>
+From: Keiichi Watanabe <keiichiw@chromium.org>
+Date: Fri, 27 Mar 2020 12:35:13 +0900
+Message-ID: <CAD90VcZMDt=Xx0E+1h6U-8xa9EMjmhpvSqRb_GYq8BAHhnpTLw@mail.gmail.com>
+To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+X-Mailman-Approved-At: Fri, 27 Mar 2020 05:46:41 +0000
 Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
  device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -64,197 +70,138 @@ Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
  Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
  Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
  spice-devel@lists.freedesktop.org,
- =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
  Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
  Pawel Osciak <posciak@chromium.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Keiichi,
-
-On Montag, 23. M=E4rz 2020 16:48:14 CET Keiichi Watanabe wrote:
-> Hi,
-> =
-
-> On Mon, Mar 23, 2020 at 10:28 PM Dmitry Sepp
-> =
-
-> <dmitry.sepp@opensynergy.com> wrote:
-> > Hi Keiichi,
-> > =
-
-> > On Montag, 23. M=E4rz 2020 13:07:54 CET Keiichi Watanabe wrote:
-> > > Hi everyone,
-> > > =
-
-> > > I have implemented a virtio-video device following my v3 spec in
-> > > crosvm, which worked well together with Dmitry's driver [1]. I've
-> > > started preparing v4 proposal to address problems found while
-> > > implementing the driver and the devices.
-> > =
-
-> > Great news!
-> > =
-
-> > > Regarding v3 protocol, I'm thinking about how we can differentiate
-> > > 'parameters' and 'controls' in the virtio-video spec?
-> > > In the previous discussion, we decided to have a profile, level and
-> > > bitrate as controls because we want to query supported values for each
-> > > field.
-> > > But, I don't think it's a good criteria because it'd be possible to
-> > > query other values in params.
-> > =
-
-> > Could you elaborate on this? Do you now how the design could look like =
-or
-> > it is just an idea? AFAIR during the discussion of OpenSynergy's origin=
-al
-> > v1 spec your point was to separate something that we call 'controls' now
-> > to reduce the command data size and make command handling less error
-> > prone.
-> =
-
-> The problem in v3 is that if we want to add a new value to be set it'd
-> be unclear which params or controls is better to be extended.
-> One possible rule may be "if a value can be queried by the driver, it
-> should be a control". However, this rule doesn't explain why we have
-> "format" in params for example. So, I think we need a discussion and
-> may want to rearrange the structures.
-> =
-
-> Yeah, in the previous discussion, I suggested to have profile, level
-> and bitrate as control values instead of members of params. Now, I'm
-> wondering whether we can have every values as control values.
-> I don't think it's a perfect idea, but I haven't come up with any
-> better concrete design yet. So, I'd really appreciate if you could
-> share your thoughts.
-> =
-
-
-Ok, we can for example add more precise definition to input and output. Let=
-'s =
-
-say we have 'bitstream' format structure and a 'image' format structure. E.=
-g. =
-
-for decoder obviously bitstream is input and image is output.
-
-Then instead of params and controls we can define some abstract 'properties=
-'. =
-
-And make some of the properties assigned/mapped/available to bitstream and =
-
-some to image, depending on the current function. I think that could make =
-
-sense as for example for decoder 'bitstream' probably requires very few bas=
-ic =
-
-'properties' like fourcc format, in contrast to 'image'. But for encoder =
-
-'bitstream' will also have the bitrate 'property' set.
-
-> > On one hand if don't really see any difference in params vs controls it
-> > would for sure make sense to remove one of the two. On the other hand I=
-'d
-> > of course like to avoid moving back in forth, especially when it comes =
-to
-> > such a major driver rework.
-> =
-
-> Yes, I understand that it may require a big change in the implementation.
-> I'm sorry for not being able to think of this point seriously in the
-> previous thread.
-> =
-
-> Of course, I'd also really like to avoid rework, but I believe we
-> shouldn't give up defining a clean and reasonable specification.
-> Let's find a clear definition in this cycle to avoid future rework.
-> =
-
-> > > So, I'm thinking about what should be the difference between params
-> > > and controls. If no difference, we should deprecate
-> > > virtio_video_params and have every field there as a control value
-> > > instead.
-> > =
-
-> > I deem we should then deprecate controls instead. Params seem to be more
-> > abstract. Width and height don't sound like a control for me.
-> =
-
-> Though this is actually one of options, how can we query profiles and
-> levels if they are in params?
-> This is why we decided them as controls.
-> =
-
-> Best regards,
-> Keiichi
-> =
-
-> > > If we add a new command to get and set multiple controls at once, this
-> > > change won't cause overhead.
-> > =
-
-> > How would we do this? Provide a flexible array member where each entry =
-has
-> > a type field first?
-> =
-
-> Yeah, something like the idea. But, I haven't designed an actual structure
-> yet.
-> > What can also make sense is to potentially join set and get calls
-> > (probably
-> > provide 'get' stuff automatically within a response to 'set'). Anyway s=
-et
-> > and get are currently used in conjunction all the time.
-> =
-
-> It'd make sense to return new input and output params when one of
-> params is updated.
-> But, if we choose this design, we need to assume one device has just
-> two params; input and output.
-> =
-
-> This is okay for video decoder and encoder, but it may become a
-> problem if we want to support other types of video device that has
-> only one direction. (e.g. video capture device)
-> Though we have no plan for supporting this, OpenSynergy's v1 proposal
-> contained this type IIRC.
-
-Honestly speaking, the idea is not completely abandoned. The spec and the =
-
-driver has more than enough functionality to handle a simple Android EVS =
-
-camera use-case. But I think let's discuss this separately later.
-
-Best regards,
-Dmitry.
-
-> =
-
-> Best regards,
-> Keiichi
-> =
-
-> > Best regards,
-> > Dmitry.
-> > =
-
-> > > What do you think? Is there anything I missed?
-> > > If it sounds fine, I'll remove virtio_video_params from the v4 spec
-> > > proposal.
-> > > =
-
-> > > Best regards,
-> > > Keiichi
-> > > =
-
-> > > [1]: https://patchwork.linuxtv.org/patch/61717/
-
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+SGkgRG1pdHJ5LAoKT24gV2VkLCBNYXIgMjUsIDIwMjAgYXQgNjo0NyBQTSBEbWl0cnkgU2VwcCA8
+ZG1pdHJ5LnNlcHBAb3BlbnN5bmVyZ3kuY29tPiB3cm90ZToKPgo+IEhpIEtlaWljaGksCj4KPiBP
+biBNb250YWcsIDIzLiBNw6RyeiAyMDIwIDE2OjQ4OjE0IENFVCBLZWlpY2hpIFdhdGFuYWJlIHdy
+b3RlOgo+ID4gSGksCj4gPgo+ID4gT24gTW9uLCBNYXIgMjMsIDIwMjAgYXQgMTA6MjggUE0gRG1p
+dHJ5IFNlcHAKPiA+Cj4gPiA8ZG1pdHJ5LnNlcHBAb3BlbnN5bmVyZ3kuY29tPiB3cm90ZToKPiA+
+ID4gSGkgS2VpaWNoaSwKPiA+ID4KPiA+ID4gT24gTW9udGFnLCAyMy4gTcOkcnogMjAyMCAxMzow
+Nzo1NCBDRVQgS2VpaWNoaSBXYXRhbmFiZSB3cm90ZToKPiA+ID4gPiBIaSBldmVyeW9uZSwKPiA+
+ID4gPgo+ID4gPiA+IEkgaGF2ZSBpbXBsZW1lbnRlZCBhIHZpcnRpby12aWRlbyBkZXZpY2UgZm9s
+bG93aW5nIG15IHYzIHNwZWMgaW4KPiA+ID4gPiBjcm9zdm0sIHdoaWNoIHdvcmtlZCB3ZWxsIHRv
+Z2V0aGVyIHdpdGggRG1pdHJ5J3MgZHJpdmVyIFsxXS4gSSd2ZQo+ID4gPiA+IHN0YXJ0ZWQgcHJl
+cGFyaW5nIHY0IHByb3Bvc2FsIHRvIGFkZHJlc3MgcHJvYmxlbXMgZm91bmQgd2hpbGUKPiA+ID4g
+PiBpbXBsZW1lbnRpbmcgdGhlIGRyaXZlciBhbmQgdGhlIGRldmljZXMuCj4gPiA+Cj4gPiA+IEdy
+ZWF0IG5ld3MhCj4gPiA+Cj4gPiA+ID4gUmVnYXJkaW5nIHYzIHByb3RvY29sLCBJJ20gdGhpbmtp
+bmcgYWJvdXQgaG93IHdlIGNhbiBkaWZmZXJlbnRpYXRlCj4gPiA+ID4gJ3BhcmFtZXRlcnMnIGFu
+ZCAnY29udHJvbHMnIGluIHRoZSB2aXJ0aW8tdmlkZW8gc3BlYz8KPiA+ID4gPiBJbiB0aGUgcHJl
+dmlvdXMgZGlzY3Vzc2lvbiwgd2UgZGVjaWRlZCB0byBoYXZlIGEgcHJvZmlsZSwgbGV2ZWwgYW5k
+Cj4gPiA+ID4gYml0cmF0ZSBhcyBjb250cm9scyBiZWNhdXNlIHdlIHdhbnQgdG8gcXVlcnkgc3Vw
+cG9ydGVkIHZhbHVlcyBmb3IgZWFjaAo+ID4gPiA+IGZpZWxkLgo+ID4gPiA+IEJ1dCwgSSBkb24n
+dCB0aGluayBpdCdzIGEgZ29vZCBjcml0ZXJpYSBiZWNhdXNlIGl0J2QgYmUgcG9zc2libGUgdG8K
+PiA+ID4gPiBxdWVyeSBvdGhlciB2YWx1ZXMgaW4gcGFyYW1zLgo+ID4gPgo+ID4gPiBDb3VsZCB5
+b3UgZWxhYm9yYXRlIG9uIHRoaXM/IERvIHlvdSBub3cgaG93IHRoZSBkZXNpZ24gY291bGQgbG9v
+ayBsaWtlIG9yCj4gPiA+IGl0IGlzIGp1c3QgYW4gaWRlYT8gQUZBSVIgZHVyaW5nIHRoZSBkaXNj
+dXNzaW9uIG9mIE9wZW5TeW5lcmd5J3Mgb3JpZ2luYWwKPiA+ID4gdjEgc3BlYyB5b3VyIHBvaW50
+IHdhcyB0byBzZXBhcmF0ZSBzb21ldGhpbmcgdGhhdCB3ZSBjYWxsICdjb250cm9scycgbm93Cj4g
+PiA+IHRvIHJlZHVjZSB0aGUgY29tbWFuZCBkYXRhIHNpemUgYW5kIG1ha2UgY29tbWFuZCBoYW5k
+bGluZyBsZXNzIGVycm9yCj4gPiA+IHByb25lLgo+ID4KPiA+IFRoZSBwcm9ibGVtIGluIHYzIGlz
+IHRoYXQgaWYgd2Ugd2FudCB0byBhZGQgYSBuZXcgdmFsdWUgdG8gYmUgc2V0IGl0J2QKPiA+IGJl
+IHVuY2xlYXIgd2hpY2ggcGFyYW1zIG9yIGNvbnRyb2xzIGlzIGJldHRlciB0byBiZSBleHRlbmRl
+ZC4KPiA+IE9uZSBwb3NzaWJsZSBydWxlIG1heSBiZSAiaWYgYSB2YWx1ZSBjYW4gYmUgcXVlcmll
+ZCBieSB0aGUgZHJpdmVyLCBpdAo+ID4gc2hvdWxkIGJlIGEgY29udHJvbCIuIEhvd2V2ZXIsIHRo
+aXMgcnVsZSBkb2Vzbid0IGV4cGxhaW4gd2h5IHdlIGhhdmUKPiA+ICJmb3JtYXQiIGluIHBhcmFt
+cyBmb3IgZXhhbXBsZS4gU28sIEkgdGhpbmsgd2UgbmVlZCBhIGRpc2N1c3Npb24gYW5kCj4gPiBt
+YXkgd2FudCB0byByZWFycmFuZ2UgdGhlIHN0cnVjdHVyZXMuCj4gPgo+ID4gWWVhaCwgaW4gdGhl
+IHByZXZpb3VzIGRpc2N1c3Npb24sIEkgc3VnZ2VzdGVkIHRvIGhhdmUgcHJvZmlsZSwgbGV2ZWwK
+PiA+IGFuZCBiaXRyYXRlIGFzIGNvbnRyb2wgdmFsdWVzIGluc3RlYWQgb2YgbWVtYmVycyBvZiBw
+YXJhbXMuIE5vdywgSSdtCj4gPiB3b25kZXJpbmcgd2hldGhlciB3ZSBjYW4gaGF2ZSBldmVyeSB2
+YWx1ZXMgYXMgY29udHJvbCB2YWx1ZXMuCj4gPiBJIGRvbid0IHRoaW5rIGl0J3MgYSBwZXJmZWN0
+IGlkZWEsIGJ1dCBJIGhhdmVuJ3QgY29tZSB1cCB3aXRoIGFueQo+ID4gYmV0dGVyIGNvbmNyZXRl
+IGRlc2lnbiB5ZXQuIFNvLCBJJ2QgcmVhbGx5IGFwcHJlY2lhdGUgaWYgeW91IGNvdWxkCj4gPiBz
+aGFyZSB5b3VyIHRob3VnaHRzLgo+ID4KPgo+IE9rLCB3ZSBjYW4gZm9yIGV4YW1wbGUgYWRkIG1v
+cmUgcHJlY2lzZSBkZWZpbml0aW9uIHRvIGlucHV0IGFuZCBvdXRwdXQuIExldCdzCj4gc2F5IHdl
+IGhhdmUgJ2JpdHN0cmVhbScgZm9ybWF0IHN0cnVjdHVyZSBhbmQgYSAnaW1hZ2UnIGZvcm1hdCBz
+dHJ1Y3R1cmUuIEUuZy4KPiBmb3IgZGVjb2RlciBvYnZpb3VzbHkgYml0c3RyZWFtIGlzIGlucHV0
+IGFuZCBpbWFnZSBpcyBvdXRwdXQuCj4KPiBUaGVuIGluc3RlYWQgb2YgcGFyYW1zIGFuZCBjb250
+cm9scyB3ZSBjYW4gZGVmaW5lIHNvbWUgYWJzdHJhY3QgJ3Byb3BlcnRpZXMnLgo+IEFuZCBtYWtl
+IHNvbWUgb2YgdGhlIHByb3BlcnRpZXMgYXNzaWduZWQvbWFwcGVkL2F2YWlsYWJsZSB0byBiaXRz
+dHJlYW0gYW5kCj4gc29tZSB0byBpbWFnZSwgZGVwZW5kaW5nIG9uIHRoZSBjdXJyZW50IGZ1bmN0
+aW9uLiBJIHRoaW5rIHRoYXQgY291bGQgbWFrZQo+IHNlbnNlIGFzIGZvciBleGFtcGxlIGZvciBk
+ZWNvZGVyICdiaXRzdHJlYW0nIHByb2JhYmx5IHJlcXVpcmVzIHZlcnkgZmV3IGJhc2ljCj4gJ3By
+b3BlcnRpZXMnIGxpa2UgZm91cmNjIGZvcm1hdCwgaW4gY29udHJhc3QgdG8gJ2ltYWdlJy4gQnV0
+IGZvciBlbmNvZGVyCj4gJ2JpdHN0cmVhbScgd2lsbCBhbHNvIGhhdmUgdGhlIGJpdHJhdGUgJ3By
+b3BlcnR5JyBzZXQuCgpBaCwgaXQgc291bmRzIGxpa2UgYSBnb29kIGlkZWEgdG8gaGF2ZSBzZXBh
+cmF0ZSBzdHJ1Y3RzIGZvciBiaXRzdHJlYW1zCmFuZCBpbWFnZXMuCk9rYXksIGxldCBtZSBzb3J0
+IG91dCBwcm9wZXJ0aWVzIGJhc2VkIG9uIHRoZSBpZGVhLgoKIyBCaXRzdHJlYW0KKiBmb3JtYXQK
+KiBtaW4vbWF4IG51bWJlciBvZiBidWZmZXJzCiogYml0cmF0ZSAoZW5jb2RlciBvbmx5KQoqIHBy
+b2ZpbGUgKGRlcGVuZGluZyBvbiBmb3JtYXQpCiogbGV2ZWwgKGRlcGVuZGluZyBvbiBmb3JtYXQv
+cHJvZmlsZSkKCiMgSW1hZ2UKKiBmb3JtYXQKKiBtaW4vbWF4IG51bWJlciBvZiBidWZmZXJzCiog
+d2lkdGgvaGVpZ2h0CiogY3JvcCBpbmZvcm1hdGlvbgoqIG51bWJlciBvZiBwbGFuZXMKKiBwbGFu
+ZSBmb3JtYXQKKiBwbGFuZSBsYXlvdXQKClRoZW4sIHdlIGhhdmUgdGhyZWUgY2F0ZWdvcmllcyBo
+ZXJlOgooYSkgTWFuZGF0b3J5IHByb3BlcnRpZXMgZm9yIGJpdHN0cmVhbXMgZm9yIGJvdGggZnVu
+Y3Rpb25zCihiKSBNYW5kYXRvcnkgcHJvcGVydGllcyBmb3IgaW1hZ2VzIGZvciBib3RoIGZ1bmN0
+aW9ucwooYykgT3B0aW9uYWwgcHJvcGVydGllcyBmb3IgYml0c3RyZWFtIChlLmcuIGJpdHJhdGUs
+IHByb2ZpbGUsIGxldmVsKQoKU28sIGhvdyBhYm91dCBkZWZpbmluZyBzdHJ1Y3RzIGZvciBlYWNo
+IChhKSwgKGIpIGFuZCAoYyk/CgooYSkgYW5kIChiKSBjYW4gYmUgc2ltaWxhciB0byB2aXJ0aW9f
+dmlkZW9fcGFyYW1zIGluIHYzIHNwZWMgZHJhZnQ6CmUuZy4Kc3RydWN0IHZpcnRpb192aWRlb197
+Yml0c3RyZWFtLCBpbWFnZX1faW5mbyB7CiAgaW50IGZvcm1hdDsKICBpbnQgbWluX2J1ZmZlcnM7
+CiAgaW50IG1heF9idWZmZXJzOwogIC4uLgp9CgooYykgd291bGQgYmUgdmVyeSBzaW1pbGFyIHRv
+IHN0cnVjdCB2aXJ0aW9fdmlkZW9fKl9jb250cm9sIGluIHYzLgpSZW5hbWluZyB0aGVtIHRvICdw
+cm9wZXJ0aWVzJyB3b3VsZCBiZSBhIG5pY2UgaWRlYSBhcyBEbWl0cnkgc2FpZC4KCldoaWxlIHRo
+ZSBkZXNpZ25zIG9mIHN0cnVjdHMgYXJlIG5vdCBjaGFuZ2VkIGZyb20gJ3BhcmFtcycgYW5kCidj
+b250cm9scycsIHdlIG5vdyBoYXZlIHJ1bGVzIGZvciBkaWZmZXJlbnRpYXRpb24gYXQgbGVhc3Qu
+CldoYXQgZG8geW91IHRoaW5rPwoKQmVzdCByZWdhcmRzLApLZWlpY2hpCgoKCj4KPiA+ID4gT24g
+b25lIGhhbmQgaWYgZG9uJ3QgcmVhbGx5IHNlZSBhbnkgZGlmZmVyZW5jZSBpbiBwYXJhbXMgdnMg
+Y29udHJvbHMgaXQKPiA+ID4gd291bGQgZm9yIHN1cmUgbWFrZSBzZW5zZSB0byByZW1vdmUgb25l
+IG9mIHRoZSB0d28uIE9uIHRoZSBvdGhlciBoYW5kIEknZAo+ID4gPiBvZiBjb3Vyc2UgbGlrZSB0
+byBhdm9pZCBtb3ZpbmcgYmFjayBpbiBmb3J0aCwgZXNwZWNpYWxseSB3aGVuIGl0IGNvbWVzIHRv
+Cj4gPiA+IHN1Y2ggYSBtYWpvciBkcml2ZXIgcmV3b3JrLgo+ID4KPiA+IFllcywgSSB1bmRlcnN0
+YW5kIHRoYXQgaXQgbWF5IHJlcXVpcmUgYSBiaWcgY2hhbmdlIGluIHRoZSBpbXBsZW1lbnRhdGlv
+bi4KPiA+IEknbSBzb3JyeSBmb3Igbm90IGJlaW5nIGFibGUgdG8gdGhpbmsgb2YgdGhpcyBwb2lu
+dCBzZXJpb3VzbHkgaW4gdGhlCj4gPiBwcmV2aW91cyB0aHJlYWQuCj4gPgo+ID4gT2YgY291cnNl
+LCBJJ2QgYWxzbyByZWFsbHkgbGlrZSB0byBhdm9pZCByZXdvcmssIGJ1dCBJIGJlbGlldmUgd2UK
+PiA+IHNob3VsZG4ndCBnaXZlIHVwIGRlZmluaW5nIGEgY2xlYW4gYW5kIHJlYXNvbmFibGUgc3Bl
+Y2lmaWNhdGlvbi4KPiA+IExldCdzIGZpbmQgYSBjbGVhciBkZWZpbml0aW9uIGluIHRoaXMgY3lj
+bGUgdG8gYXZvaWQgZnV0dXJlIHJld29yay4KPiA+Cj4gPiA+ID4gU28sIEknbSB0aGlua2luZyBh
+Ym91dCB3aGF0IHNob3VsZCBiZSB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHBhcmFtcwo+ID4gPiA+
+IGFuZCBjb250cm9scy4gSWYgbm8gZGlmZmVyZW5jZSwgd2Ugc2hvdWxkIGRlcHJlY2F0ZQo+ID4g
+PiA+IHZpcnRpb192aWRlb19wYXJhbXMgYW5kIGhhdmUgZXZlcnkgZmllbGQgdGhlcmUgYXMgYSBj
+b250cm9sIHZhbHVlCj4gPiA+ID4gaW5zdGVhZC4KPiA+ID4KPiA+ID4gSSBkZWVtIHdlIHNob3Vs
+ZCB0aGVuIGRlcHJlY2F0ZSBjb250cm9scyBpbnN0ZWFkLiBQYXJhbXMgc2VlbSB0byBiZSBtb3Jl
+Cj4gPiA+IGFic3RyYWN0LiBXaWR0aCBhbmQgaGVpZ2h0IGRvbid0IHNvdW5kIGxpa2UgYSBjb250
+cm9sIGZvciBtZS4KPiA+Cj4gPiBUaG91Z2ggdGhpcyBpcyBhY3R1YWxseSBvbmUgb2Ygb3B0aW9u
+cywgaG93IGNhbiB3ZSBxdWVyeSBwcm9maWxlcyBhbmQKPiA+IGxldmVscyBpZiB0aGV5IGFyZSBp
+biBwYXJhbXM/Cj4gPiBUaGlzIGlzIHdoeSB3ZSBkZWNpZGVkIHRoZW0gYXMgY29udHJvbHMuCj4g
+Pgo+ID4gQmVzdCByZWdhcmRzLAo+ID4gS2VpaWNoaQo+ID4KPiA+ID4gPiBJZiB3ZSBhZGQgYSBu
+ZXcgY29tbWFuZCB0byBnZXQgYW5kIHNldCBtdWx0aXBsZSBjb250cm9scyBhdCBvbmNlLCB0aGlz
+Cj4gPiA+ID4gY2hhbmdlIHdvbid0IGNhdXNlIG92ZXJoZWFkLgo+ID4gPgo+ID4gPiBIb3cgd291
+bGQgd2UgZG8gdGhpcz8gUHJvdmlkZSBhIGZsZXhpYmxlIGFycmF5IG1lbWJlciB3aGVyZSBlYWNo
+IGVudHJ5IGhhcwo+ID4gPiBhIHR5cGUgZmllbGQgZmlyc3Q/Cj4gPgo+ID4gWWVhaCwgc29tZXRo
+aW5nIGxpa2UgdGhlIGlkZWEuIEJ1dCwgSSBoYXZlbid0IGRlc2lnbmVkIGFuIGFjdHVhbCBzdHJ1
+Y3R1cmUKPiA+IHlldC4KPiA+ID4gV2hhdCBjYW4gYWxzbyBtYWtlIHNlbnNlIGlzIHRvIHBvdGVu
+dGlhbGx5IGpvaW4gc2V0IGFuZCBnZXQgY2FsbHMKPiA+ID4gKHByb2JhYmx5Cj4gPiA+IHByb3Zp
+ZGUgJ2dldCcgc3R1ZmYgYXV0b21hdGljYWxseSB3aXRoaW4gYSByZXNwb25zZSB0byAnc2V0Jyku
+IEFueXdheSBzZXQKPiA+ID4gYW5kIGdldCBhcmUgY3VycmVudGx5IHVzZWQgaW4gY29uanVuY3Rp
+b24gYWxsIHRoZSB0aW1lLgo+ID4KPiA+IEl0J2QgbWFrZSBzZW5zZSB0byByZXR1cm4gbmV3IGlu
+cHV0IGFuZCBvdXRwdXQgcGFyYW1zIHdoZW4gb25lIG9mCj4gPiBwYXJhbXMgaXMgdXBkYXRlZC4K
+PiA+IEJ1dCwgaWYgd2UgY2hvb3NlIHRoaXMgZGVzaWduLCB3ZSBuZWVkIHRvIGFzc3VtZSBvbmUg
+ZGV2aWNlIGhhcyBqdXN0Cj4gPiB0d28gcGFyYW1zOyBpbnB1dCBhbmQgb3V0cHV0Lgo+ID4KPiA+
+IFRoaXMgaXMgb2theSBmb3IgdmlkZW8gZGVjb2RlciBhbmQgZW5jb2RlciwgYnV0IGl0IG1heSBi
+ZWNvbWUgYQo+ID4gcHJvYmxlbSBpZiB3ZSB3YW50IHRvIHN1cHBvcnQgb3RoZXIgdHlwZXMgb2Yg
+dmlkZW8gZGV2aWNlIHRoYXQgaGFzCj4gPiBvbmx5IG9uZSBkaXJlY3Rpb24uIChlLmcuIHZpZGVv
+IGNhcHR1cmUgZGV2aWNlKQo+ID4gVGhvdWdoIHdlIGhhdmUgbm8gcGxhbiBmb3Igc3VwcG9ydGlu
+ZyB0aGlzLCBPcGVuU3luZXJneSdzIHYxIHByb3Bvc2FsCj4gPiBjb250YWluZWQgdGhpcyB0eXBl
+IElJUkMuCj4KPiBIb25lc3RseSBzcGVha2luZywgdGhlIGlkZWEgaXMgbm90IGNvbXBsZXRlbHkg
+YWJhbmRvbmVkLiBUaGUgc3BlYyBhbmQgdGhlCj4gZHJpdmVyIGhhcyBtb3JlIHRoYW4gZW5vdWdo
+IGZ1bmN0aW9uYWxpdHkgdG8gaGFuZGxlIGEgc2ltcGxlIEFuZHJvaWQgRVZTCj4gY2FtZXJhIHVz
+ZS1jYXNlLiBCdXQgSSB0aGluayBsZXQncyBkaXNjdXNzIHRoaXMgc2VwYXJhdGVseSBsYXRlci4K
+Pgo+IEJlc3QgcmVnYXJkcywKPiBEbWl0cnkuCj4KPiA+Cj4gPiBCZXN0IHJlZ2FyZHMsCj4gPiBL
+ZWlpY2hpCj4gPgo+ID4gPiBCZXN0IHJlZ2FyZHMsCj4gPiA+IERtaXRyeS4KPiA+ID4KPiA+ID4g
+PiBXaGF0IGRvIHlvdSB0aGluaz8gSXMgdGhlcmUgYW55dGhpbmcgSSBtaXNzZWQ/Cj4gPiA+ID4g
+SWYgaXQgc291bmRzIGZpbmUsIEknbGwgcmVtb3ZlIHZpcnRpb192aWRlb19wYXJhbXMgZnJvbSB0
+aGUgdjQgc3BlYwo+ID4gPiA+IHByb3Bvc2FsLgo+ID4gPiA+Cj4gPiA+ID4gQmVzdCByZWdhcmRz
+LAo+ID4gPiA+IEtlaWljaGkKPiA+ID4gPgo+ID4gPiA+IFsxXTogaHR0cHM6Ly9wYXRjaHdvcmsu
+bGludXh0di5vcmcvcGF0Y2gvNjE3MTcvCj4KPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxA
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
+YW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwK
