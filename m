@@ -2,55 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93ACC1950C4
-	for <lists+spice-devel@lfdr.de>; Fri, 27 Mar 2020 06:46:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F680198C6F
+	for <lists+spice-devel@lfdr.de>; Tue, 31 Mar 2020 08:40:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3A296E97E;
-	Fri, 27 Mar 2020 05:46:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A1AE46E544;
+	Tue, 31 Mar 2020 06:40:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
- [IPv6:2a00:1450:4864:20::241])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CE8C16E233
- for <spice-devel@lists.freedesktop.org>; Fri, 27 Mar 2020 03:35:26 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id w1so8751645ljh.5
- for <spice-devel@lists.freedesktop.org>; Thu, 26 Mar 2020 20:35:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=XeKEAn+hfGPdPoufqsnHb2SpBKodsES2luZcQ7Ela5Q=;
- b=CSR5bJDBXMcoSEbB5Nd3zgKhlO79Icw0k7BnNPNgE2X3XmM1u5brug+nIpe3TRrBOF
- jRUFpO5GwXhRXzorRWkSuJBpTlh8HF1y+9oMW9vTWKyeHGW29CEX027LEwybcle+gz7h
- Q487S1K2luqmNMlKkOrrbCMm1TqjPAqPHfUUI=
+Received: from mail-pl1-x641.google.com (mail-pl1-x641.google.com
+ [IPv6:2607:f8b0:4864:20::641])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D325F89C9B
+ for <spice-devel@lists.freedesktop.org>; Mon, 30 Mar 2020 02:04:12 +0000 (UTC)
+Received: by mail-pl1-x641.google.com with SMTP id c12so3285417plz.2
+ for <spice-devel@lists.freedesktop.org>; Sun, 29 Mar 2020 19:04:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:from:to:cc:subject:date:message-id;
+ bh=7gDKMMIuCNqmz3/gFIq4MvPM1PkZWROW621H1HN1ayU=;
+ b=YJJOQ42obRjUghoYW825UVnnfvOqdCKDZkxvr3ldjeYbs7HRcGtW6yF5gngzV0UmqG
+ 4aYmhqZAjcQ+IiSthEWrCfX9hV3RYpQM7Vu2pbx+urVDPIyvVGq+Exd+n6v+1S6ZQKpX
+ ruFgLZPndrkkCwS3ubZCF3PY/BRMoVIGmrPG9qd2WYHiWwXOkD/54gaL4H2XioMs0KMR
+ duSW6t1hVwdCwGN82mLZyv9JSEetla7hhTRpdoC43ztw9pTKIPsdv8PrvxUU3+G49Yig
+ ZvedXcOfBlKJULgZoWlTq+B9SZzdGakmwQZaBrZHCNxzTjMp7sUx2kLLJNjDg5HE18Lj
+ Z0NA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=XeKEAn+hfGPdPoufqsnHb2SpBKodsES2luZcQ7Ela5Q=;
- b=AaC+fFAMQCkydnwID9NGZ5KUtu+gA/AJuYVIt1XVC6dTQu4k8BgGslurApklKYPcas
- 5fOYtimlujtqZFhhwUALIeg/jl494C25WBpXViME3iRQjc61fNhKSQiRL7kOizwnxUfd
- aP1zm0ZVDpuQQItbfb9JAdBkgqsK/PSXsk0NJGXqX8RseJwF7OojROK1z3zgTMF1l6UV
- E1Er3gbPC/QpQdt/6FF75NgflFdHPlpFiNTS11D1Wc5mjHfXnL+jXbKZG9nR+cxCHt76
- wQvsZ4IngkXYG6vVe3Ahfd5TsuCEOqp/2Cz94WiDPiVNycBNCfQdxAtEtUMvVCnIND+Z
- 2xKg==
-X-Gm-Message-State: AGi0Pub5EYNryLSB5nVP1l1r1nhR0Rh+8HVGA6W14jCl2Ao7UWH1NXBS
- Sjrfh83LTNVL6C/jRd1tsvV00aq0P3QycTIJSyNNIw==
-X-Google-Smtp-Source: ADFU+vtjulxSFTo36CtAnIJ5vsca80/mJlumHbCNSz5io67ukcq/GXdbEhAvsymt/X08b3XnJVezylK5cLVVj08J43s=
-X-Received: by 2002:a2e:95c3:: with SMTP id y3mr7108877ljh.149.1585280124808; 
- Thu, 26 Mar 2020 20:35:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200206102058.247258-1-keiichiw@chromium.org>
- <8121654.T7Z3S40VBb@os-lin-dmo>
- <CAD90VcZ2zzzwveYgDs5UdjfZUt=yX4wNX-f_-3V18xz93_fpvQ@mail.gmail.com>
- <6557912.4vTCxPXJkl@os-lin-dmo>
-In-Reply-To: <6557912.4vTCxPXJkl@os-lin-dmo>
-From: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Fri, 27 Mar 2020 12:35:13 +0900
-Message-ID: <CAD90VcZMDt=Xx0E+1h6U-8xa9EMjmhpvSqRb_GYq8BAHhnpTLw@mail.gmail.com>
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-X-Mailman-Approved-At: Fri, 27 Mar 2020 05:46:41 +0000
-Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
- device specification
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+ bh=7gDKMMIuCNqmz3/gFIq4MvPM1PkZWROW621H1HN1ayU=;
+ b=nQJSYG9ucCRYMXaTpWxsgBK/jpDNHstqBvsGLXjfiW22R9oqQG2aZSjF62mkH/f8cp
+ qlhtoJDLxt50cW622nSBUmokPktpxM2LXjncyRwflJmaFBvtn7RqxZJvBTd9h8aArfp1
+ lVtvok89h0Cf1jERKneODzMli9BET4MOWQ+PIS0fQyk08O1Xhu6TvZwhGp8SGEcATN8H
+ jGXWJOXleq2j/wKcbTqR2js6dWI6nSbvmCF0hJys/sizECgnJoTheyxPxiud6fGPoYbN
+ 4UOgRVNxdr795FooviiPqf/hZo+TlP/EJoQH1CplggdmtPsUdIqDwvUY8fF0IF9BuuDs
+ ktBA==
+X-Gm-Message-State: ANhLgQ3/YEuM05nJMEcokKTEzMJ2O0mlEfZTEmjlHRlifps9MMTCUoiv
+ BrW42+lBUDuEDNXV2mjEmA4=
+X-Google-Smtp-Source: ADFU+vtqsbUeEdwSHonlCDsKOUHraHM3bcnXAJPPFZPf2ZHwkP278wf9E4Y0HVJgNAcsVnErLpLvBQ==
+X-Received: by 2002:a17:90a:7182:: with SMTP id
+ i2mr13099104pjk.74.1585533852357; 
+ Sun, 29 Mar 2020 19:04:12 -0700 (PDT)
+Received: from software.domain.org ([104.207.149.93])
+ by smtp.gmail.com with ESMTPSA id e126sm8946089pfa.122.2020.03.29.19.04.05
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Sun, 29 Mar 2020 19:04:11 -0700 (PDT)
+From: Huacai Chen <chenhc@lemote.com>
+To: Dave Airlie <airlied@redhat.com>,
+	Gerd Hoffmann <kraxel@redhat.com>
+Date: Mon, 30 Mar 2020 10:12:22 +0800
+Message-Id: <1585534342-889-1-git-send-email-chenhc@lemote.com>
+X-Mailer: git-send-email 2.7.0
+X-Mailman-Approved-At: Tue, 31 Mar 2020 06:40:45 +0000
+Subject: [Spice-devel] [PATCH] drm/qxl: Use correct notify port address when
+ creating cursor ring
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,146 +64,48 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
- virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
- Kiran Pawar <kiran.pawar@opensynergy.com>,
- Alexandre Courbot <acourbot@chromium.org>,
- David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
- Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
- Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
- Pawel Osciak <posciak@chromium.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Huacai Chen <chenhuacai@gmail.com>, stable@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Fuxin Zhang <zhangfx@lemote.com>,
+ Huacai Chen <chenhc@lemote.com>, spice-devel@lists.freedesktop.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGkgRG1pdHJ5LAoKT24gV2VkLCBNYXIgMjUsIDIwMjAgYXQgNjo0NyBQTSBEbWl0cnkgU2VwcCA8
-ZG1pdHJ5LnNlcHBAb3BlbnN5bmVyZ3kuY29tPiB3cm90ZToKPgo+IEhpIEtlaWljaGksCj4KPiBP
-biBNb250YWcsIDIzLiBNw6RyeiAyMDIwIDE2OjQ4OjE0IENFVCBLZWlpY2hpIFdhdGFuYWJlIHdy
-b3RlOgo+ID4gSGksCj4gPgo+ID4gT24gTW9uLCBNYXIgMjMsIDIwMjAgYXQgMTA6MjggUE0gRG1p
-dHJ5IFNlcHAKPiA+Cj4gPiA8ZG1pdHJ5LnNlcHBAb3BlbnN5bmVyZ3kuY29tPiB3cm90ZToKPiA+
-ID4gSGkgS2VpaWNoaSwKPiA+ID4KPiA+ID4gT24gTW9udGFnLCAyMy4gTcOkcnogMjAyMCAxMzow
-Nzo1NCBDRVQgS2VpaWNoaSBXYXRhbmFiZSB3cm90ZToKPiA+ID4gPiBIaSBldmVyeW9uZSwKPiA+
-ID4gPgo+ID4gPiA+IEkgaGF2ZSBpbXBsZW1lbnRlZCBhIHZpcnRpby12aWRlbyBkZXZpY2UgZm9s
-bG93aW5nIG15IHYzIHNwZWMgaW4KPiA+ID4gPiBjcm9zdm0sIHdoaWNoIHdvcmtlZCB3ZWxsIHRv
-Z2V0aGVyIHdpdGggRG1pdHJ5J3MgZHJpdmVyIFsxXS4gSSd2ZQo+ID4gPiA+IHN0YXJ0ZWQgcHJl
-cGFyaW5nIHY0IHByb3Bvc2FsIHRvIGFkZHJlc3MgcHJvYmxlbXMgZm91bmQgd2hpbGUKPiA+ID4g
-PiBpbXBsZW1lbnRpbmcgdGhlIGRyaXZlciBhbmQgdGhlIGRldmljZXMuCj4gPiA+Cj4gPiA+IEdy
-ZWF0IG5ld3MhCj4gPiA+Cj4gPiA+ID4gUmVnYXJkaW5nIHYzIHByb3RvY29sLCBJJ20gdGhpbmtp
-bmcgYWJvdXQgaG93IHdlIGNhbiBkaWZmZXJlbnRpYXRlCj4gPiA+ID4gJ3BhcmFtZXRlcnMnIGFu
-ZCAnY29udHJvbHMnIGluIHRoZSB2aXJ0aW8tdmlkZW8gc3BlYz8KPiA+ID4gPiBJbiB0aGUgcHJl
-dmlvdXMgZGlzY3Vzc2lvbiwgd2UgZGVjaWRlZCB0byBoYXZlIGEgcHJvZmlsZSwgbGV2ZWwgYW5k
-Cj4gPiA+ID4gYml0cmF0ZSBhcyBjb250cm9scyBiZWNhdXNlIHdlIHdhbnQgdG8gcXVlcnkgc3Vw
-cG9ydGVkIHZhbHVlcyBmb3IgZWFjaAo+ID4gPiA+IGZpZWxkLgo+ID4gPiA+IEJ1dCwgSSBkb24n
-dCB0aGluayBpdCdzIGEgZ29vZCBjcml0ZXJpYSBiZWNhdXNlIGl0J2QgYmUgcG9zc2libGUgdG8K
-PiA+ID4gPiBxdWVyeSBvdGhlciB2YWx1ZXMgaW4gcGFyYW1zLgo+ID4gPgo+ID4gPiBDb3VsZCB5
-b3UgZWxhYm9yYXRlIG9uIHRoaXM/IERvIHlvdSBub3cgaG93IHRoZSBkZXNpZ24gY291bGQgbG9v
-ayBsaWtlIG9yCj4gPiA+IGl0IGlzIGp1c3QgYW4gaWRlYT8gQUZBSVIgZHVyaW5nIHRoZSBkaXNj
-dXNzaW9uIG9mIE9wZW5TeW5lcmd5J3Mgb3JpZ2luYWwKPiA+ID4gdjEgc3BlYyB5b3VyIHBvaW50
-IHdhcyB0byBzZXBhcmF0ZSBzb21ldGhpbmcgdGhhdCB3ZSBjYWxsICdjb250cm9scycgbm93Cj4g
-PiA+IHRvIHJlZHVjZSB0aGUgY29tbWFuZCBkYXRhIHNpemUgYW5kIG1ha2UgY29tbWFuZCBoYW5k
-bGluZyBsZXNzIGVycm9yCj4gPiA+IHByb25lLgo+ID4KPiA+IFRoZSBwcm9ibGVtIGluIHYzIGlz
-IHRoYXQgaWYgd2Ugd2FudCB0byBhZGQgYSBuZXcgdmFsdWUgdG8gYmUgc2V0IGl0J2QKPiA+IGJl
-IHVuY2xlYXIgd2hpY2ggcGFyYW1zIG9yIGNvbnRyb2xzIGlzIGJldHRlciB0byBiZSBleHRlbmRl
-ZC4KPiA+IE9uZSBwb3NzaWJsZSBydWxlIG1heSBiZSAiaWYgYSB2YWx1ZSBjYW4gYmUgcXVlcmll
-ZCBieSB0aGUgZHJpdmVyLCBpdAo+ID4gc2hvdWxkIGJlIGEgY29udHJvbCIuIEhvd2V2ZXIsIHRo
-aXMgcnVsZSBkb2Vzbid0IGV4cGxhaW4gd2h5IHdlIGhhdmUKPiA+ICJmb3JtYXQiIGluIHBhcmFt
-cyBmb3IgZXhhbXBsZS4gU28sIEkgdGhpbmsgd2UgbmVlZCBhIGRpc2N1c3Npb24gYW5kCj4gPiBt
-YXkgd2FudCB0byByZWFycmFuZ2UgdGhlIHN0cnVjdHVyZXMuCj4gPgo+ID4gWWVhaCwgaW4gdGhl
-IHByZXZpb3VzIGRpc2N1c3Npb24sIEkgc3VnZ2VzdGVkIHRvIGhhdmUgcHJvZmlsZSwgbGV2ZWwK
-PiA+IGFuZCBiaXRyYXRlIGFzIGNvbnRyb2wgdmFsdWVzIGluc3RlYWQgb2YgbWVtYmVycyBvZiBw
-YXJhbXMuIE5vdywgSSdtCj4gPiB3b25kZXJpbmcgd2hldGhlciB3ZSBjYW4gaGF2ZSBldmVyeSB2
-YWx1ZXMgYXMgY29udHJvbCB2YWx1ZXMuCj4gPiBJIGRvbid0IHRoaW5rIGl0J3MgYSBwZXJmZWN0
-IGlkZWEsIGJ1dCBJIGhhdmVuJ3QgY29tZSB1cCB3aXRoIGFueQo+ID4gYmV0dGVyIGNvbmNyZXRl
-IGRlc2lnbiB5ZXQuIFNvLCBJJ2QgcmVhbGx5IGFwcHJlY2lhdGUgaWYgeW91IGNvdWxkCj4gPiBz
-aGFyZSB5b3VyIHRob3VnaHRzLgo+ID4KPgo+IE9rLCB3ZSBjYW4gZm9yIGV4YW1wbGUgYWRkIG1v
-cmUgcHJlY2lzZSBkZWZpbml0aW9uIHRvIGlucHV0IGFuZCBvdXRwdXQuIExldCdzCj4gc2F5IHdl
-IGhhdmUgJ2JpdHN0cmVhbScgZm9ybWF0IHN0cnVjdHVyZSBhbmQgYSAnaW1hZ2UnIGZvcm1hdCBz
-dHJ1Y3R1cmUuIEUuZy4KPiBmb3IgZGVjb2RlciBvYnZpb3VzbHkgYml0c3RyZWFtIGlzIGlucHV0
-IGFuZCBpbWFnZSBpcyBvdXRwdXQuCj4KPiBUaGVuIGluc3RlYWQgb2YgcGFyYW1zIGFuZCBjb250
-cm9scyB3ZSBjYW4gZGVmaW5lIHNvbWUgYWJzdHJhY3QgJ3Byb3BlcnRpZXMnLgo+IEFuZCBtYWtl
-IHNvbWUgb2YgdGhlIHByb3BlcnRpZXMgYXNzaWduZWQvbWFwcGVkL2F2YWlsYWJsZSB0byBiaXRz
-dHJlYW0gYW5kCj4gc29tZSB0byBpbWFnZSwgZGVwZW5kaW5nIG9uIHRoZSBjdXJyZW50IGZ1bmN0
-aW9uLiBJIHRoaW5rIHRoYXQgY291bGQgbWFrZQo+IHNlbnNlIGFzIGZvciBleGFtcGxlIGZvciBk
-ZWNvZGVyICdiaXRzdHJlYW0nIHByb2JhYmx5IHJlcXVpcmVzIHZlcnkgZmV3IGJhc2ljCj4gJ3By
-b3BlcnRpZXMnIGxpa2UgZm91cmNjIGZvcm1hdCwgaW4gY29udHJhc3QgdG8gJ2ltYWdlJy4gQnV0
-IGZvciBlbmNvZGVyCj4gJ2JpdHN0cmVhbScgd2lsbCBhbHNvIGhhdmUgdGhlIGJpdHJhdGUgJ3By
-b3BlcnR5JyBzZXQuCgpBaCwgaXQgc291bmRzIGxpa2UgYSBnb29kIGlkZWEgdG8gaGF2ZSBzZXBh
-cmF0ZSBzdHJ1Y3RzIGZvciBiaXRzdHJlYW1zCmFuZCBpbWFnZXMuCk9rYXksIGxldCBtZSBzb3J0
-IG91dCBwcm9wZXJ0aWVzIGJhc2VkIG9uIHRoZSBpZGVhLgoKIyBCaXRzdHJlYW0KKiBmb3JtYXQK
-KiBtaW4vbWF4IG51bWJlciBvZiBidWZmZXJzCiogYml0cmF0ZSAoZW5jb2RlciBvbmx5KQoqIHBy
-b2ZpbGUgKGRlcGVuZGluZyBvbiBmb3JtYXQpCiogbGV2ZWwgKGRlcGVuZGluZyBvbiBmb3JtYXQv
-cHJvZmlsZSkKCiMgSW1hZ2UKKiBmb3JtYXQKKiBtaW4vbWF4IG51bWJlciBvZiBidWZmZXJzCiog
-d2lkdGgvaGVpZ2h0CiogY3JvcCBpbmZvcm1hdGlvbgoqIG51bWJlciBvZiBwbGFuZXMKKiBwbGFu
-ZSBmb3JtYXQKKiBwbGFuZSBsYXlvdXQKClRoZW4sIHdlIGhhdmUgdGhyZWUgY2F0ZWdvcmllcyBo
-ZXJlOgooYSkgTWFuZGF0b3J5IHByb3BlcnRpZXMgZm9yIGJpdHN0cmVhbXMgZm9yIGJvdGggZnVu
-Y3Rpb25zCihiKSBNYW5kYXRvcnkgcHJvcGVydGllcyBmb3IgaW1hZ2VzIGZvciBib3RoIGZ1bmN0
-aW9ucwooYykgT3B0aW9uYWwgcHJvcGVydGllcyBmb3IgYml0c3RyZWFtIChlLmcuIGJpdHJhdGUs
-IHByb2ZpbGUsIGxldmVsKQoKU28sIGhvdyBhYm91dCBkZWZpbmluZyBzdHJ1Y3RzIGZvciBlYWNo
-IChhKSwgKGIpIGFuZCAoYyk/CgooYSkgYW5kIChiKSBjYW4gYmUgc2ltaWxhciB0byB2aXJ0aW9f
-dmlkZW9fcGFyYW1zIGluIHYzIHNwZWMgZHJhZnQ6CmUuZy4Kc3RydWN0IHZpcnRpb192aWRlb197
-Yml0c3RyZWFtLCBpbWFnZX1faW5mbyB7CiAgaW50IGZvcm1hdDsKICBpbnQgbWluX2J1ZmZlcnM7
-CiAgaW50IG1heF9idWZmZXJzOwogIC4uLgp9CgooYykgd291bGQgYmUgdmVyeSBzaW1pbGFyIHRv
-IHN0cnVjdCB2aXJ0aW9fdmlkZW9fKl9jb250cm9sIGluIHYzLgpSZW5hbWluZyB0aGVtIHRvICdw
-cm9wZXJ0aWVzJyB3b3VsZCBiZSBhIG5pY2UgaWRlYSBhcyBEbWl0cnkgc2FpZC4KCldoaWxlIHRo
-ZSBkZXNpZ25zIG9mIHN0cnVjdHMgYXJlIG5vdCBjaGFuZ2VkIGZyb20gJ3BhcmFtcycgYW5kCidj
-b250cm9scycsIHdlIG5vdyBoYXZlIHJ1bGVzIGZvciBkaWZmZXJlbnRpYXRpb24gYXQgbGVhc3Qu
-CldoYXQgZG8geW91IHRoaW5rPwoKQmVzdCByZWdhcmRzLApLZWlpY2hpCgoKCj4KPiA+ID4gT24g
-b25lIGhhbmQgaWYgZG9uJ3QgcmVhbGx5IHNlZSBhbnkgZGlmZmVyZW5jZSBpbiBwYXJhbXMgdnMg
-Y29udHJvbHMgaXQKPiA+ID4gd291bGQgZm9yIHN1cmUgbWFrZSBzZW5zZSB0byByZW1vdmUgb25l
-IG9mIHRoZSB0d28uIE9uIHRoZSBvdGhlciBoYW5kIEknZAo+ID4gPiBvZiBjb3Vyc2UgbGlrZSB0
-byBhdm9pZCBtb3ZpbmcgYmFjayBpbiBmb3J0aCwgZXNwZWNpYWxseSB3aGVuIGl0IGNvbWVzIHRv
-Cj4gPiA+IHN1Y2ggYSBtYWpvciBkcml2ZXIgcmV3b3JrLgo+ID4KPiA+IFllcywgSSB1bmRlcnN0
-YW5kIHRoYXQgaXQgbWF5IHJlcXVpcmUgYSBiaWcgY2hhbmdlIGluIHRoZSBpbXBsZW1lbnRhdGlv
-bi4KPiA+IEknbSBzb3JyeSBmb3Igbm90IGJlaW5nIGFibGUgdG8gdGhpbmsgb2YgdGhpcyBwb2lu
-dCBzZXJpb3VzbHkgaW4gdGhlCj4gPiBwcmV2aW91cyB0aHJlYWQuCj4gPgo+ID4gT2YgY291cnNl
-LCBJJ2QgYWxzbyByZWFsbHkgbGlrZSB0byBhdm9pZCByZXdvcmssIGJ1dCBJIGJlbGlldmUgd2UK
-PiA+IHNob3VsZG4ndCBnaXZlIHVwIGRlZmluaW5nIGEgY2xlYW4gYW5kIHJlYXNvbmFibGUgc3Bl
-Y2lmaWNhdGlvbi4KPiA+IExldCdzIGZpbmQgYSBjbGVhciBkZWZpbml0aW9uIGluIHRoaXMgY3lj
-bGUgdG8gYXZvaWQgZnV0dXJlIHJld29yay4KPiA+Cj4gPiA+ID4gU28sIEknbSB0aGlua2luZyBh
-Ym91dCB3aGF0IHNob3VsZCBiZSB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHBhcmFtcwo+ID4gPiA+
-IGFuZCBjb250cm9scy4gSWYgbm8gZGlmZmVyZW5jZSwgd2Ugc2hvdWxkIGRlcHJlY2F0ZQo+ID4g
-PiA+IHZpcnRpb192aWRlb19wYXJhbXMgYW5kIGhhdmUgZXZlcnkgZmllbGQgdGhlcmUgYXMgYSBj
-b250cm9sIHZhbHVlCj4gPiA+ID4gaW5zdGVhZC4KPiA+ID4KPiA+ID4gSSBkZWVtIHdlIHNob3Vs
-ZCB0aGVuIGRlcHJlY2F0ZSBjb250cm9scyBpbnN0ZWFkLiBQYXJhbXMgc2VlbSB0byBiZSBtb3Jl
-Cj4gPiA+IGFic3RyYWN0LiBXaWR0aCBhbmQgaGVpZ2h0IGRvbid0IHNvdW5kIGxpa2UgYSBjb250
-cm9sIGZvciBtZS4KPiA+Cj4gPiBUaG91Z2ggdGhpcyBpcyBhY3R1YWxseSBvbmUgb2Ygb3B0aW9u
-cywgaG93IGNhbiB3ZSBxdWVyeSBwcm9maWxlcyBhbmQKPiA+IGxldmVscyBpZiB0aGV5IGFyZSBp
-biBwYXJhbXM/Cj4gPiBUaGlzIGlzIHdoeSB3ZSBkZWNpZGVkIHRoZW0gYXMgY29udHJvbHMuCj4g
-Pgo+ID4gQmVzdCByZWdhcmRzLAo+ID4gS2VpaWNoaQo+ID4KPiA+ID4gPiBJZiB3ZSBhZGQgYSBu
-ZXcgY29tbWFuZCB0byBnZXQgYW5kIHNldCBtdWx0aXBsZSBjb250cm9scyBhdCBvbmNlLCB0aGlz
-Cj4gPiA+ID4gY2hhbmdlIHdvbid0IGNhdXNlIG92ZXJoZWFkLgo+ID4gPgo+ID4gPiBIb3cgd291
-bGQgd2UgZG8gdGhpcz8gUHJvdmlkZSBhIGZsZXhpYmxlIGFycmF5IG1lbWJlciB3aGVyZSBlYWNo
-IGVudHJ5IGhhcwo+ID4gPiBhIHR5cGUgZmllbGQgZmlyc3Q/Cj4gPgo+ID4gWWVhaCwgc29tZXRo
-aW5nIGxpa2UgdGhlIGlkZWEuIEJ1dCwgSSBoYXZlbid0IGRlc2lnbmVkIGFuIGFjdHVhbCBzdHJ1
-Y3R1cmUKPiA+IHlldC4KPiA+ID4gV2hhdCBjYW4gYWxzbyBtYWtlIHNlbnNlIGlzIHRvIHBvdGVu
-dGlhbGx5IGpvaW4gc2V0IGFuZCBnZXQgY2FsbHMKPiA+ID4gKHByb2JhYmx5Cj4gPiA+IHByb3Zp
-ZGUgJ2dldCcgc3R1ZmYgYXV0b21hdGljYWxseSB3aXRoaW4gYSByZXNwb25zZSB0byAnc2V0Jyku
-IEFueXdheSBzZXQKPiA+ID4gYW5kIGdldCBhcmUgY3VycmVudGx5IHVzZWQgaW4gY29uanVuY3Rp
-b24gYWxsIHRoZSB0aW1lLgo+ID4KPiA+IEl0J2QgbWFrZSBzZW5zZSB0byByZXR1cm4gbmV3IGlu
-cHV0IGFuZCBvdXRwdXQgcGFyYW1zIHdoZW4gb25lIG9mCj4gPiBwYXJhbXMgaXMgdXBkYXRlZC4K
-PiA+IEJ1dCwgaWYgd2UgY2hvb3NlIHRoaXMgZGVzaWduLCB3ZSBuZWVkIHRvIGFzc3VtZSBvbmUg
-ZGV2aWNlIGhhcyBqdXN0Cj4gPiB0d28gcGFyYW1zOyBpbnB1dCBhbmQgb3V0cHV0Lgo+ID4KPiA+
-IFRoaXMgaXMgb2theSBmb3IgdmlkZW8gZGVjb2RlciBhbmQgZW5jb2RlciwgYnV0IGl0IG1heSBi
-ZWNvbWUgYQo+ID4gcHJvYmxlbSBpZiB3ZSB3YW50IHRvIHN1cHBvcnQgb3RoZXIgdHlwZXMgb2Yg
-dmlkZW8gZGV2aWNlIHRoYXQgaGFzCj4gPiBvbmx5IG9uZSBkaXJlY3Rpb24uIChlLmcuIHZpZGVv
-IGNhcHR1cmUgZGV2aWNlKQo+ID4gVGhvdWdoIHdlIGhhdmUgbm8gcGxhbiBmb3Igc3VwcG9ydGlu
-ZyB0aGlzLCBPcGVuU3luZXJneSdzIHYxIHByb3Bvc2FsCj4gPiBjb250YWluZWQgdGhpcyB0eXBl
-IElJUkMuCj4KPiBIb25lc3RseSBzcGVha2luZywgdGhlIGlkZWEgaXMgbm90IGNvbXBsZXRlbHkg
-YWJhbmRvbmVkLiBUaGUgc3BlYyBhbmQgdGhlCj4gZHJpdmVyIGhhcyBtb3JlIHRoYW4gZW5vdWdo
-IGZ1bmN0aW9uYWxpdHkgdG8gaGFuZGxlIGEgc2ltcGxlIEFuZHJvaWQgRVZTCj4gY2FtZXJhIHVz
-ZS1jYXNlLiBCdXQgSSB0aGluayBsZXQncyBkaXNjdXNzIHRoaXMgc2VwYXJhdGVseSBsYXRlci4K
-Pgo+IEJlc3QgcmVnYXJkcywKPiBEbWl0cnkuCj4KPiA+Cj4gPiBCZXN0IHJlZ2FyZHMsCj4gPiBL
-ZWlpY2hpCj4gPgo+ID4gPiBCZXN0IHJlZ2FyZHMsCj4gPiA+IERtaXRyeS4KPiA+ID4KPiA+ID4g
-PiBXaGF0IGRvIHlvdSB0aGluaz8gSXMgdGhlcmUgYW55dGhpbmcgSSBtaXNzZWQ/Cj4gPiA+ID4g
-SWYgaXQgc291bmRzIGZpbmUsIEknbGwgcmVtb3ZlIHZpcnRpb192aWRlb19wYXJhbXMgZnJvbSB0
-aGUgdjQgc3BlYwo+ID4gPiA+IHByb3Bvc2FsLgo+ID4gPiA+Cj4gPiA+ID4gQmVzdCByZWdhcmRz
-LAo+ID4gPiA+IEtlaWljaGkKPiA+ID4gPgo+ID4gPiA+IFsxXTogaHR0cHM6Ly9wYXRjaHdvcmsu
-bGludXh0di5vcmcvcGF0Y2gvNjE3MTcvCj4KPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxA
-bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
-YW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwK
+The command ring and cursor ring use different notify port addresses
+definition: QXL_IO_NOTIFY_CMD and QXL_IO_NOTIFY_CURSOR. However, in
+qxl_device_init() we use QXL_IO_NOTIFY_CMD to create both command ring
+and cursor ring. This doesn't cause any problems now, because QEMU's
+behaviors on QXL_IO_NOTIFY_CMD and QXL_IO_NOTIFY_CURSOR are the same.
+However, QEMU's behavior may be change in future, so let's fix it.
+
+P.S.: In the X.org QXL driver, the notify port address of cursor ring
+      is correct.
+
+Cc: <stable@vger.kernel.org>
+Signed-off-by: Huacai Chen <chenhc@lemote.com>
+---
+ drivers/gpu/drm/qxl/qxl_kms.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index bfc1631..9bdbe0d 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -218,7 +218,7 @@ int qxl_device_init(struct qxl_device *qdev,
+ 				&(qdev->ram_header->cursor_ring_hdr),
+ 				sizeof(struct qxl_command),
+ 				QXL_CURSOR_RING_SIZE,
+-				qdev->io_base + QXL_IO_NOTIFY_CMD,
++				qdev->io_base + QXL_IO_NOTIFY_CURSOR,
+ 				false,
+ 				&qdev->cursor_event);
+ 
+-- 
+2.7.0
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
