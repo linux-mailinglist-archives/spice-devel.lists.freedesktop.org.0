@@ -1,58 +1,39 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E38E519FB8F
-	for <lists+spice-devel@lfdr.de>; Mon,  6 Apr 2020 19:29:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ACA019FB61
+	for <lists+spice-devel@lfdr.de>; Mon,  6 Apr 2020 19:24:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7F2F36E463;
-	Mon,  6 Apr 2020 17:29:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DE3786E450;
+	Mon,  6 Apr 2020 17:24:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E08216E45E;
- Mon,  6 Apr 2020 17:29:39 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 26AD5B1FC1;
- Mon,  6 Apr 2020 17:29:37 +0000 (UTC)
-To: Daniel Vetter <daniel.vetter@ffwll.ch>,
- DRI Development <dri-devel@lists.freedesktop.org>
-References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
-Date: Mon, 6 Apr 2020 14:11:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+X-Greylist: delayed 407 seconds by postgrey-1.36 at gabe;
+ Mon, 06 Apr 2020 17:24:09 UTC
+Received: from mail.nanotek.info (mail.nanotek.info [188.166.13.56])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 62A316E450
+ for <spice-devel@lists.freedesktop.org>; Mon,  6 Apr 2020 17:24:09 +0000 (UTC)
+Received: from ousire.calculus.lan (unknown [185.107.80.152])
+ by mail.nanotek.info (Postfix) with ESMTPSA id B661C600FE
+ for <spice-devel@lists.freedesktop.org>; Mon,  6 Apr 2020 19:08:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=nanotek.info;
+ s=default; t=1586192926;
+ bh=VGw5mEDxK75Rw0NxJFCyROpf1KFr5dETJDVmq4GKwyc=;
+ h=To:From:Subject:Date:From;
+ b=R6FwbJjfFP1Ydtz3nZa4fcxmJVkDs5TXe1M9NVNSIsSTmeWbhL+4f6y3lvS1OALkL
+ dVyKXCox1LDDI0BT4i/gDX6GHfJyvyzL9W4iETePUbBGylVaS6CApcBOlk2MZ5gJ5g
+ Ux7YhhLr57XzZPD+LjVnVTn7CRW3nKtNcztxgYoQ=
+To: spice-devel@lists.freedesktop.org
+From: shiftag <shiftag@nanotek.info>
+Message-ID: <3ae50a13-3580-39ba-bca0-8a2bfa2bd6f1@nanotek.info>
+Date: Mon, 6 Apr 2020 21:17:19 +0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.1
 MIME-Version: 1.0
-In-Reply-To: <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-Subject: Re: [Spice-devel] [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
+Content-Type: multipart/mixed; boundary="------------295FD802BF8311059C1568E5"
+Content-Language: en-US
+Subject: [Spice-devel] Can't activate share folding in virt-viewer
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,218 +45,328 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@redhat.com>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
- spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@intel.com>
-Content-Type: multipart/mixed; boundary="===============0382861704=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0382861704==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS
-Content-Type: multipart/mixed; boundary="6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>,
- DRI Development <dri-devel@lists.freedesktop.org>
-Cc: spice-devel@lists.freedesktop.org,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, Gerd Hoffmann
- <kraxel@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>,
- Dave Airlie <airlied@redhat.com>
-Message-ID: <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
-Subject: Re: [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
-References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-In-Reply-To: <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
-
---6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG
+This is a multi-part message in MIME format.
+--------------295FD802BF8311059C1568E5
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
+Hello,
+
+I would to use share folder with a Windows 10 guest. I installed spice
+guest tool and spice webdav daemon in the guest operating system. Also,
+spice webdav is running as a service in windows guest. Then, I add
+"Channel spice-webdav" as hardware for the Windows virtual machine.
+
+Finally, I would to like "share folding" in virt-viewer client but it's
+grey (screenshot attached).
+
+Did I miss a step ?
+
+Thanks
 
 
-Am 03.04.20 um 15:58 schrieb Daniel Vetter:
-> Also need to remove the drm_dev_put from the remove hook.
->=20
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: Dave Airlie <airlied@redhat.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: spice-devel@lists.freedesktop.org
-> ---
->  drivers/gpu/drm/qxl/qxl_drv.c | 15 ++++++++-------
->  drivers/gpu/drm/qxl/qxl_drv.h |  3 +--
->  drivers/gpu/drm/qxl/qxl_kms.c | 12 +-----------
->  3 files changed, 10 insertions(+), 20 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_dr=
-v.c
-> index 09102e2efabc..6b4ae4c5fb76 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> @@ -81,13 +81,16 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
-i_device_id *ent)
->  		return -EINVAL; /* TODO: ENODEV ? */
->  	}
-> =20
-> -	qdev =3D kzalloc(sizeof(struct qxl_device), GFP_KERNEL);
-> -	if (!qdev)
-> +	qdev =3D devm_drm_dev_alloc(&pdev->dev, &qxl_driver,
-> +				  struct qxl_device, ddev);
-> +	if (IS_ERR(qdev)) {
-> +		pr_err("Unable to init drm dev");
->  		return -ENOMEM;
-> +	}
+--------------295FD802BF8311059C1568E5
+Content-Type: image/png;
+ name="cap.png"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="cap.png"
 
-My feeling is that it is too early to allocate. Wouldn't it be better to
-first do the pdev and conflicting-fb stuff and allocate right before
-qxl_device_init() ?
+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
+--------------295FD802BF8311059C1568E5
+Content-Type: application/pgp-keys;
+ name="pEpkey.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="pEpkey.asc"
 
-Best regards
-Thomas
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-> =20
->  	ret =3D pci_enable_device(pdev);
->  	if (ret)
-> -		goto free_dev;
-> +		return ret;
-> =20
->  	ret =3D drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, "qxl"=
-);
->  	if (ret)
-> @@ -101,7 +104,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
-i_device_id *ent)
->  		}
->  	}
-> =20
-> -	ret =3D qxl_device_init(qdev, &qxl_driver, pdev);
-> +	ret =3D qxl_device_init(qdev, pdev);
->  	if (ret)
->  		goto put_vga;
-> =20
-> @@ -128,8 +131,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pc=
-i_device_id *ent)
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
->  disable_pci:
->  	pci_disable_device(pdev);
-> -free_dev:
-> -	kfree(qdev);
-> +
->  	return ret;
->  }
-> =20
-> @@ -155,7 +157,6 @@ qxl_pci_remove(struct pci_dev *pdev)
->  	drm_atomic_helper_shutdown(dev);
->  	if (is_vga(pdev))
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
-> -	drm_dev_put(dev);
->  }
-> =20
->  DEFINE_DRM_GEM_FOPS(qxl_fops);
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_dr=
-v.h
-> index 435126facc9b..86ac191d9205 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.h
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.h
-> @@ -276,8 +276,7 @@ struct qxl_device {
->  extern const struct drm_ioctl_desc qxl_ioctls[];
->  extern int qxl_max_ioctl;
-> =20
-> -int qxl_device_init(struct qxl_device *qdev, struct drm_driver *drv,
-> -		    struct pci_dev *pdev);
-> +int qxl_device_init(struct qxl_device *qdev, struct pci_dev *pdev);
->  void qxl_device_fini(struct qxl_device *qdev);
-> =20
->  int qxl_modeset_init(struct qxl_device *qdev);
-> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_km=
-s.c
-> index 9eed1a375f24..91a34dd835d7 100644
-> --- a/drivers/gpu/drm/qxl/qxl_kms.c
-> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
-> @@ -108,21 +108,13 @@ static void qxl_gc_work(struct work_struct *work)=
+mQENBF0OSVMBCAC5Hgszpm3mVUMnhzeW5DottzZ4L7pauBOjJlxGXjmM2Y4xeLpM
+DJYehKPvfZFcmB/V3KeNaTzRYnOZN93qY0gKhJ9TJGAMHVvgh8Zq2vthj5goktET
+RtAXdomFxI/LoEgjllnfIgM8mD0iLR/2Ezu+/dIEAoExr/RDmwAnrIDB9umLXC6i
+5axwOjE9kdpWqc5gXnDdjUiwXKZW7IBhdxyxzroPbe2IWwnMhY5YD4Y4VISnTlg7
+QK+3T28d3kjPzhH/38N7ovcALdIzT2bicUih8itbRsNSJ3vRQ3K+5O6hRAQaanQ4
+suKmOgbhr9Cr5SLoFwmCUpXTVC1ncUMSos9rABEBAAG0HnNoaWZ0YWcgPHNoaWZ0
+YWdAbmFub3Rlay5pbmZvPokBVAQTAQgAPhYhBEQgRlKwJL5G4hLCqQBnAt6QbDc4
+BQJdDklTAhsDBQkB4TOABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEABnAt6Q
+bDc4L5oIAI7KPZfJkw2NAFAurCk8/15ULvS8/KQO7YbSnL3tikp33AtNBZ4bEwaB
+7OYPj7TLNw4827kquyrSfGN+yr/8OOBfLbeUAU8IAl0S44ep+zw0IdzTu74LQ0O3
+dgNY4F97UCVrddCuVshjflsXAheVlsnS5uNqghx6ZAZBJUKagVd3BInHd7xJZihk
+d/OWYCY0Js4FrkeJ/reInYBtDARAWNBNOpkE8BI24T+Tp7N+IjsTRE/+h+PUatXY
+aV8B4tx4NrbZxQiVrko8ALJmNhP1M/jaNCNeNGLCCd3Kf5GDUFzKO1EBw6x8uwLp
+HnDlJx2HauI4qsFmcgLC+RDsvIbAkFO5AQ0EXQ5JUwEIALgselxxrB1PAQgAZMhl
+ljolLCYZTZCOKrX0H6ldwenWWNDDAEagEEYDLV/U6n43/vvhyG1+GNA1T2FYMnHS
+FRod6MJxj8cbxOZbjkUdADfG53u/TxIFKObc87GRkm1Z/unyjJiqS2uGdh47qHpN
+fdDdJo+QPHfecDijPynF+ExL9Olxu3KuKs8E5PrRZIS4YAu0AawZ06pXbHg9j6nc
+82epiXLRrH6gIoYmF1aktmpZQxcE1Mkysxt8Gz0N6XZyGKbPoo6/+V70oWQDRY97
+JIY3QWS9Ff9R2wh2q/0KL0S3CeCtaX10Hq9Fzbu0eoRTU1ChGQ/JCRzjiBm5O0Ra
+56sAEQEAAYkBPAQYAQgAJhYhBEQgRlKwJL5G4hLCqQBnAt6QbDc4BQJdDklTAhsM
+BQkB4TOAAAoJEABnAt6QbDc4pQoH/0TBWhEfLIULRHmgQntagoO8KJTM6ot9ukAZ
+KTsl5sfCiygXo3sjUDiXWamlq3HWbGwJFPqIjhbevEGt/PKuv1AuOBmQgMnY99jg
+hZSXpaSnCPL5gW4iVJD91FNGXmxrmNE/8iToBUXlIMre9OiCuJ4an5MvwXLP8hlA
+Z4LbAPWqQaLiGplruJSv30mvFfMaBrUdnX9NCGzX0uGoqqDpe67JxDCabU4HHHBe
+1rk9jrLAbTjADt0F3POJOaBcIj+kqKK75BIN679pm++FhD6OoJ0H11Jt58ZJ5nIp
+/8dfTBVrecKP+vqMXaneUyD0vXCPYi7xR03IshPrXDTfMBI5FOQ=3D
+=3D/RHM
+-----END PGP PUBLIC KEY BLOCK-----
 
->  }
-> =20
->  int qxl_device_init(struct qxl_device *qdev,
-> -		    struct drm_driver *drv,
->  		    struct pci_dev *pdev)
->  {
->  	int r, sb;
-> =20
-> -	r =3D drm_dev_init(&qdev->ddev, drv, &pdev->dev);
-> -	if (r) {
-> -		pr_err("Unable to init drm dev");
-> -		goto error;
-> -	}
-> -
->  	qdev->ddev.pdev =3D pdev;
->  	pci_set_drvdata(pdev, &qdev->ddev);
->  	qdev->ddev.dev_private =3D qdev;
-> -	drmm_add_final_kfree(&qdev->ddev, qdev);
-> =20
->  	mutex_init(&qdev->gem.mutex);
->  	mutex_init(&qdev->update_area_mutex);
-> @@ -138,8 +130,7 @@ int qxl_device_init(struct qxl_device *qdev,
->  	qdev->vram_mapping =3D io_mapping_create_wc(qdev->vram_base, pci_reso=
-urce_len(pdev, 0));
->  	if (!qdev->vram_mapping) {
->  		pr_err("Unable to create vram_mapping");
-> -		r =3D -ENOMEM;
-> -		goto error;
-> +		return -ENOMEM;
->  	}
-> =20
->  	if (pci_resource_len(pdev, 4) > 0) {
-> @@ -293,7 +284,6 @@ int qxl_device_init(struct qxl_device *qdev,
->  	io_mapping_free(qdev->surface_mapping);
->  vram_mapping_free:
->  	io_mapping_free(qdev->vram_mapping);
-> -error:
->  	return r;
->  }
-> =20
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---6kv8mAox5GvUraJWEerWSr8Z7ZNmjb3HG--
-
---U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl6LHF0ACgkQaA3BHVML
-eiN5oAgAiGX1c+294XzOEnNtdftBXz6wvc9tUg7FAMoBixHQK3BrcgYD9CIZ5RkA
-EMKoRH7GkgVruL7ABjv6Pw2h/Gb3ywxUui1pNONAmqj5mk59l7ZpNxHHgtArTvV1
-+puo9VV2l7UklAoH+w8xf9obXFKSwfwyRX+bIuemq1pJGwRbIQ0/XxkTe4fK6CVu
-g8+b9arcUfykEiZXH6MUWOZwUkj2nvC/oVVdc3+sFThfbKhkAd2j+Zbfa2OOXWJ6
-Rf1no3zjvXrwawkGBd6k/WpwHBziIM5C6LHeAOR4OVckgLFI+cLjEiix7VyYcwYR
-kiWzBaGT9GfEkX90fAqhSFia/0GXQA==
-=mZNW
------END PGP SIGNATURE-----
-
---U47qTCGnlx1wJpHiO8OcTjEHNNfTq4eiS--
-
---===============0382861704==
+--------------295FD802BF8311059C1568E5
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -286,4 +377,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0382861704==--
+--------------295FD802BF8311059C1568E5--
