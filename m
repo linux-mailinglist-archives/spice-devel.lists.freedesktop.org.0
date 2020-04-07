@@ -2,52 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E13131A0815
-	for <lists+spice-devel@lfdr.de>; Tue,  7 Apr 2020 09:19:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4984D1A0FDA
+	for <lists+spice-devel@lfdr.de>; Tue,  7 Apr 2020 17:05:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C19786E525;
-	Tue,  7 Apr 2020 07:19:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AE9956E092;
+	Tue,  7 Apr 2020 15:05:38 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
- [IPv6:2607:f8b0:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 03F0E6E52E
- for <spice-devel@lists.freedesktop.org>; Tue,  7 Apr 2020 07:19:11 +0000 (UTC)
-Received: by mail-ot1-x344.google.com with SMTP id l23so2100552otf.3
- for <spice-devel@lists.freedesktop.org>; Tue, 07 Apr 2020 00:19:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=xNt3fDE6uJaNJCPc+/p8WDTR1SyRQ5WstF8jn/ypiGg=;
- b=DmvXpxRMjwvCS4gQNEX4ITP0c8Ox3pRdomle/scBfSC52mVwde2qeCuylii8tNsjTI
- BNx0hDHffFu5pGwTIyIgu13huMIpbmjHM+XsBTsSqasGaBqSoy1yRmJqXm+lSO1ikIaR
- EE1W4IsLjHWRXOR/K5uxIUPqgIqPOJbYCNerE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=xNt3fDE6uJaNJCPc+/p8WDTR1SyRQ5WstF8jn/ypiGg=;
- b=XIlHtD8kx5nUPRQtd+tmsr+wF5oK+XtWgcpZuTsbGqHPChkHnWcNJle2t2Xz7qBMCA
- tX96Bjh5Az24BNUX0ZwV8D1W+7RS2T3bkvo5gF4FriC6R6LZB3/ym1hmSF677BJ030Jc
- OR+IwGS6oSTroi1RFWPyhtv/Ms43aZchd78bvywvqnXw7YVbaZPSeb6ad5l49FCetxb6
- sH14XRwFpYFCbjeETSELfT5hCetgYn5xbUA90rN18VcKsg6wheAXammG8sGZKK4qk106
- 3cxhP7wlsT5LHnbvywf7eJ6rHEXtVOjjeuarq4s797vgCgLI9FGxjXMpRqlriJ7pY+Wz
- QQQg==
-X-Gm-Message-State: AGi0PuZ8YGQJeVsjvLgEdHMQ4RBnjxQMjQARMCkRUdB6oOckDiX2fiWW
- 43YBEI8zsKTo7s5RjijxgHu6WIm2kcSISBF+J1r/Cw==
-X-Google-Smtp-Source: APiQypJtSZZoscLNc2qZAw5+6Gq+qMAG5y4QND3L+RtVHbUwDzAmVPY2eeqlD6VMpx2R3w5b8nhL/OI59tyfSeXJrgg=
-X-Received: by 2002:a9d:2056:: with SMTP id n80mr479406ota.281.1586243951190; 
- Tue, 07 Apr 2020 00:19:11 -0700 (PDT)
+Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C17D36E7EA
+ for <spice-devel@lists.freedesktop.org>; Tue,  7 Apr 2020 09:21:31 +0000 (UTC)
+Received: from spamfilter02.heinlein-hosting.de
+ (spamfilter02.heinlein-hosting.de [80.241.56.116])
+ by plasma.jpberlin.de (Postfix) with ESMTP id 5DB61B9F3B;
+ Tue,  7 Apr 2020 11:21:25 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+ [80.241.56.116]) (amavisd-new, port 10030)
+ with ESMTP id Y2OHnfO7ZGnf; Tue,  7 Apr 2020 11:21:24 +0200 (CEST)
+Received: from webmail.opensynergy.com (unknown [217.66.60.5])
+ (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "webmail.opensynergy.com",
+ Issuer "GeoTrust EV RSA CA 2018" (not verified))
+ (Authenticated sender: opensynergy@jpberlin.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 00EEAB992E;
+ Tue,  7 Apr 2020 11:21:23 +0200 (CEST)
+Received: from os-lin-dmo.localnet (10.25.255.1) by MXS01.open-synergy.com
+ (10.25.10.17) with Microsoft SMTP Server (TLS) id 14.3.487.0; Tue, 7 Apr 2020
+ 11:21:04 +0200
+From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+To: Alexandre Courbot <acourbot@chromium.org>, Keiichi Watanabe
+ <keiichiw@chromium.org>
+Date: Tue, 7 Apr 2020 11:21:04 +0200
+Message-ID: <5576106.alqRGMn8q6@os-lin-dmo>
+Organization: OpenSynergy
+In-Reply-To: <CAD90VcYDU+8L4u-CuRY8ZaRyzYD_w0qwV1AN=8TbFYCbfUGz3w@mail.gmail.com>
+References: <20200206102058.247258-1-keiichiw@chromium.org>
+ <CAPBb6MVhVL-2EAJZ3UiN8BwjTyUXVirjF0gnfBBZjuvx07ijKA@mail.gmail.com>
+ <CAD90VcYDU+8L4u-CuRY8ZaRyzYD_w0qwV1AN=8TbFYCbfUGz3w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200403135828.2542770-1-daniel.vetter@ffwll.ch>
- <20200403135828.2542770-31-daniel.vetter@ffwll.ch>
- <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
-In-Reply-To: <f85e0d74-2d1a-03ce-3eef-8c21b90845d4@suse.de>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Tue, 7 Apr 2020 09:19:00 +0200
-Message-ID: <CAKMK7uEfEMq8BNGYHHJa0Q10D9FAmEuogS0k9=pkL2WhyAT9iA@mail.gmail.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [Spice-devel] [PATCH 30/44] drm/qxl: Use devm_drm_dev_alloc
+X-Originating-IP: [10.25.255.1]
+X-Rspamd-Queue-Id: 5DB61B9F3B
+X-Rspamd-Score: -2.62 / 15.00 / 200.00
+X-Mailman-Approved-At: Tue, 07 Apr 2020 15:05:38 +0000
+Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
+ device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,112 +59,182 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@redhat.com>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- DRI Development <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
- NET..." <virtualization@lists.linux-foundation.org>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Daniel Vetter <daniel.vetter@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
+ virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
+ Kiran Pawar <kiran.pawar@opensynergy.com>,
+ David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ spice-devel@lists.freedesktop.org,
+ =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico
+ Granata <egranata@google.com>, Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBBcHIgNiwgMjAyMCBhdCA3OjI5IFBNIFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVy
-bWFubkBzdXNlLmRlPiB3cm90ZToKPgo+Cj4KPiBBbSAwMy4wNC4yMCB1bSAxNTo1OCBzY2hyaWVi
-IERhbmllbCBWZXR0ZXI6Cj4gPiBBbHNvIG5lZWQgdG8gcmVtb3ZlIHRoZSBkcm1fZGV2X3B1dCBm
-cm9tIHRoZSByZW1vdmUgaG9vay4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBEYW5pZWwgVmV0dGVy
-IDxkYW5pZWwudmV0dGVyQGludGVsLmNvbT4KPiA+IENjOiBEYXZlIEFpcmxpZSA8YWlybGllZEBy
-ZWRoYXQuY29tPgo+ID4gQ2M6IEdlcmQgSG9mZm1hbm4gPGtyYXhlbEByZWRoYXQuY29tPgo+ID4g
-Q2M6IHZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCj4gPiBDYzogc3Bp
-Y2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gPiAtLS0KPiA+ICBkcml2ZXJzL2dwdS9k
-cm0vcXhsL3F4bF9kcnYuYyB8IDE1ICsrKysrKysrLS0tLS0tLQo+ID4gIGRyaXZlcnMvZ3B1L2Ry
-bS9xeGwvcXhsX2Rydi5oIHwgIDMgKy0tCj4gPiAgZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfa21z
-LmMgfCAxMiArLS0tLS0tLS0tLS0KPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDEwIGluc2VydGlvbnMo
-KyksIDIwIGRlbGV0aW9ucygtKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
-cXhsL3F4bF9kcnYuYyBiL2RyaXZlcnMvZ3B1L2RybS9xeGwvcXhsX2Rydi5jCj4gPiBpbmRleCAw
-OTEwMmUyZWZhYmMuLjZiNGFlNGM1ZmI3NiAxMDA2NDQKPiA+IC0tLSBhL2RyaXZlcnMvZ3B1L2Ry
-bS9xeGwvcXhsX2Rydi5jCj4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuYwo+
-ID4gQEAgLTgxLDEzICs4MSwxNiBAQCBxeGxfcGNpX3Byb2JlKHN0cnVjdCBwY2lfZGV2ICpwZGV2
-LCBjb25zdCBzdHJ1Y3QgcGNpX2RldmljZV9pZCAqZW50KQo+ID4gICAgICAgICAgICAgICByZXR1
-cm4gLUVJTlZBTDsgLyogVE9ETzogRU5PREVWID8gKi8KPiA+ICAgICAgIH0KPiA+Cj4gPiAtICAg
-ICBxZGV2ID0ga3phbGxvYyhzaXplb2Yoc3RydWN0IHF4bF9kZXZpY2UpLCBHRlBfS0VSTkVMKTsK
-PiA+IC0gICAgIGlmICghcWRldikKPiA+ICsgICAgIHFkZXYgPSBkZXZtX2RybV9kZXZfYWxsb2Mo
-JnBkZXYtPmRldiwgJnF4bF9kcml2ZXIsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHN0cnVjdCBxeGxfZGV2aWNlLCBkZGV2KTsKPiA+ICsgICAgIGlmIChJU19FUlIocWRldikp
-IHsKPiA+ICsgICAgICAgICAgICAgcHJfZXJyKCJVbmFibGUgdG8gaW5pdCBkcm0gZGV2Iik7Cj4g
-PiAgICAgICAgICAgICAgIHJldHVybiAtRU5PTUVNOwo+ID4gKyAgICAgfQo+Cj4gTXkgZmVlbGlu
-ZyBpcyB0aGF0IGl0IGlzIHRvbyBlYXJseSB0byBhbGxvY2F0ZS4gV291bGRuJ3QgaXQgYmUgYmV0
-dGVyIHRvCj4gZmlyc3QgZG8gdGhlIHBkZXYgYW5kIGNvbmZsaWN0aW5nLWZiIHN0dWZmIGFuZCBh
-bGxvY2F0ZSByaWdodCBiZWZvcmUKPiBxeGxfZGV2aWNlX2luaXQoKSA/CgpJdCBkb2Vzbid0IG1h
-dHRlci4gSSBjYW4gcmVvcmRlciwgb3IgSSBjYW4gYWxzbyBub3QgcmVvcmRlciwgaXQnbGwKaGF2
-ZSAwIGVmZmVjdHMgb24gY2xlYW51cCAoYWxsIGRvbmUgYXV0b21hdGljYWxseSkgb3IgY29ycmVj
-dG5lc3MKKGl0J3MganVzdCBhIG1lbW9yeSBhbGxvY2F0aW9uLCBpdCBkb2Vzbid0IGRvIGFueXRo
-aW5nKS4KLURhbmllbAoKCj4gQmVzdCByZWdhcmRzCj4gVGhvbWFzCj4KPiA+Cj4gPiAgICAgICBy
-ZXQgPSBwY2lfZW5hYmxlX2RldmljZShwZGV2KTsKPiA+ICAgICAgIGlmIChyZXQpCj4gPiAtICAg
-ICAgICAgICAgIGdvdG8gZnJlZV9kZXY7Cj4gPiArICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4g
-Pgo+ID4gICAgICAgcmV0ID0gZHJtX2ZiX2hlbHBlcl9yZW1vdmVfY29uZmxpY3RpbmdfcGNpX2Zy
-YW1lYnVmZmVycyhwZGV2LCAicXhsIik7Cj4gPiAgICAgICBpZiAocmV0KQo+ID4gQEAgLTEwMSw3
-ICsxMDQsNyBAQCBxeGxfcGNpX3Byb2JlKHN0cnVjdCBwY2lfZGV2ICpwZGV2LCBjb25zdCBzdHJ1
-Y3QgcGNpX2RldmljZV9pZCAqZW50KQo+ID4gICAgICAgICAgICAgICB9Cj4gPiAgICAgICB9Cj4g
-Pgo+ID4gLSAgICAgcmV0ID0gcXhsX2RldmljZV9pbml0KHFkZXYsICZxeGxfZHJpdmVyLCBwZGV2
-KTsKPiA+ICsgICAgIHJldCA9IHF4bF9kZXZpY2VfaW5pdChxZGV2LCBwZGV2KTsKPiA+ICAgICAg
-IGlmIChyZXQpCj4gPiAgICAgICAgICAgICAgIGdvdG8gcHV0X3ZnYTsKPiA+Cj4gPiBAQCAtMTI4
-LDggKzEzMSw3IEBAIHF4bF9wY2lfcHJvYmUoc3RydWN0IHBjaV9kZXYgKnBkZXYsIGNvbnN0IHN0
-cnVjdCBwY2lfZGV2aWNlX2lkICplbnQpCj4gPiAgICAgICAgICAgICAgIHZnYV9wdXQocGRldiwg
-VkdBX1JTUkNfTEVHQUNZX0lPKTsKPiA+ICBkaXNhYmxlX3BjaToKPiA+ICAgICAgIHBjaV9kaXNh
-YmxlX2RldmljZShwZGV2KTsKPiA+IC1mcmVlX2RldjoKPiA+IC0gICAgIGtmcmVlKHFkZXYpOwo+
-ID4gKwo+ID4gICAgICAgcmV0dXJuIHJldDsKPiA+ICB9Cj4gPgo+ID4gQEAgLTE1NSw3ICsxNTcs
-NiBAQCBxeGxfcGNpX3JlbW92ZShzdHJ1Y3QgcGNpX2RldiAqcGRldikKPiA+ICAgICAgIGRybV9h
-dG9taWNfaGVscGVyX3NodXRkb3duKGRldik7Cj4gPiAgICAgICBpZiAoaXNfdmdhKHBkZXYpKQo+
-ID4gICAgICAgICAgICAgICB2Z2FfcHV0KHBkZXYsIFZHQV9SU1JDX0xFR0FDWV9JTyk7Cj4gPiAt
-ICAgICBkcm1fZGV2X3B1dChkZXYpOwo+ID4gIH0KPiA+Cj4gPiAgREVGSU5FX0RSTV9HRU1fRk9Q
-UyhxeGxfZm9wcyk7Cj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfZHJ2
-LmggYi9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuaAo+ID4gaW5kZXggNDM1MTI2ZmFjYzli
-Li44NmFjMTkxZDkyMDUgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9k
-cnYuaAo+ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfZHJ2LmgKPiA+IEBAIC0yNzYs
-OCArMjc2LDcgQEAgc3RydWN0IHF4bF9kZXZpY2Ugewo+ID4gIGV4dGVybiBjb25zdCBzdHJ1Y3Qg
-ZHJtX2lvY3RsX2Rlc2MgcXhsX2lvY3Rsc1tdOwo+ID4gIGV4dGVybiBpbnQgcXhsX21heF9pb2N0
-bDsKPiA+Cj4gPiAtaW50IHF4bF9kZXZpY2VfaW5pdChzdHJ1Y3QgcXhsX2RldmljZSAqcWRldiwg
-c3RydWN0IGRybV9kcml2ZXIgKmRydiwKPiA+IC0gICAgICAgICAgICAgICAgIHN0cnVjdCBwY2lf
-ZGV2ICpwZGV2KTsKPiA+ICtpbnQgcXhsX2RldmljZV9pbml0KHN0cnVjdCBxeGxfZGV2aWNlICpx
-ZGV2LCBzdHJ1Y3QgcGNpX2RldiAqcGRldik7Cj4gPiAgdm9pZCBxeGxfZGV2aWNlX2Zpbmkoc3Ry
-dWN0IHF4bF9kZXZpY2UgKnFkZXYpOwo+ID4KPiA+ICBpbnQgcXhsX21vZGVzZXRfaW5pdChzdHJ1
-Y3QgcXhsX2RldmljZSAqcWRldik7Cj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3F4
-bC9xeGxfa21zLmMgYi9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9rbXMuYwo+ID4gaW5kZXggOWVl
-ZDFhMzc1ZjI0Li45MWEzNGRkODM1ZDcgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0v
-cXhsL3F4bF9rbXMuYwo+ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfa21zLmMKPiA+
-IEBAIC0xMDgsMjEgKzEwOCwxMyBAQCBzdGF0aWMgdm9pZCBxeGxfZ2Nfd29yayhzdHJ1Y3Qgd29y
-a19zdHJ1Y3QgKndvcmspCj4gPiAgfQo+ID4KPiA+ICBpbnQgcXhsX2RldmljZV9pbml0KHN0cnVj
-dCBxeGxfZGV2aWNlICpxZGV2LAo+ID4gLSAgICAgICAgICAgICAgICAgc3RydWN0IGRybV9kcml2
-ZXIgKmRydiwKPiA+ICAgICAgICAgICAgICAgICAgIHN0cnVjdCBwY2lfZGV2ICpwZGV2KQo+ID4g
-IHsKPiA+ICAgICAgIGludCByLCBzYjsKPiA+Cj4gPiAtICAgICByID0gZHJtX2Rldl9pbml0KCZx
-ZGV2LT5kZGV2LCBkcnYsICZwZGV2LT5kZXYpOwo+ID4gLSAgICAgaWYgKHIpIHsKPiA+IC0gICAg
-ICAgICAgICAgcHJfZXJyKCJVbmFibGUgdG8gaW5pdCBkcm0gZGV2Iik7Cj4gPiAtICAgICAgICAg
-ICAgIGdvdG8gZXJyb3I7Cj4gPiAtICAgICB9Cj4gPiAtCj4gPiAgICAgICBxZGV2LT5kZGV2LnBk
-ZXYgPSBwZGV2Owo+ID4gICAgICAgcGNpX3NldF9kcnZkYXRhKHBkZXYsICZxZGV2LT5kZGV2KTsK
-PiA+ICAgICAgIHFkZXYtPmRkZXYuZGV2X3ByaXZhdGUgPSBxZGV2Owo+ID4gLSAgICAgZHJtbV9h
-ZGRfZmluYWxfa2ZyZWUoJnFkZXYtPmRkZXYsIHFkZXYpOwo+ID4KPiA+ICAgICAgIG11dGV4X2lu
-aXQoJnFkZXYtPmdlbS5tdXRleCk7Cj4gPiAgICAgICBtdXRleF9pbml0KCZxZGV2LT51cGRhdGVf
-YXJlYV9tdXRleCk7Cj4gPiBAQCAtMTM4LDggKzEzMCw3IEBAIGludCBxeGxfZGV2aWNlX2luaXQo
-c3RydWN0IHF4bF9kZXZpY2UgKnFkZXYsCj4gPiAgICAgICBxZGV2LT52cmFtX21hcHBpbmcgPSBp
-b19tYXBwaW5nX2NyZWF0ZV93YyhxZGV2LT52cmFtX2Jhc2UsIHBjaV9yZXNvdXJjZV9sZW4ocGRl
-diwgMCkpOwo+ID4gICAgICAgaWYgKCFxZGV2LT52cmFtX21hcHBpbmcpIHsKPiA+ICAgICAgICAg
-ICAgICAgcHJfZXJyKCJVbmFibGUgdG8gY3JlYXRlIHZyYW1fbWFwcGluZyIpOwo+ID4gLSAgICAg
-ICAgICAgICByID0gLUVOT01FTTsKPiA+IC0gICAgICAgICAgICAgZ290byBlcnJvcjsKPiA+ICsg
-ICAgICAgICAgICAgcmV0dXJuIC1FTk9NRU07Cj4gPiAgICAgICB9Cj4gPgo+ID4gICAgICAgaWYg
-KHBjaV9yZXNvdXJjZV9sZW4ocGRldiwgNCkgPiAwKSB7Cj4gPiBAQCAtMjkzLDcgKzI4NCw2IEBA
-IGludCBxeGxfZGV2aWNlX2luaXQoc3RydWN0IHF4bF9kZXZpY2UgKnFkZXYsCj4gPiAgICAgICBp
-b19tYXBwaW5nX2ZyZWUocWRldi0+c3VyZmFjZV9tYXBwaW5nKTsKPiA+ICB2cmFtX21hcHBpbmdf
-ZnJlZToKPiA+ICAgICAgIGlvX21hcHBpbmdfZnJlZShxZGV2LT52cmFtX21hcHBpbmcpOwo+ID4g
-LWVycm9yOgo+ID4gICAgICAgcmV0dXJuIHI7Cj4gPiAgfQo+ID4KPiA+Cj4KPiAtLQo+IFRob21h
-cyBaaW1tZXJtYW5uCj4gR3JhcGhpY3MgRHJpdmVyIERldmVsb3Blcgo+IFNVU0UgU29mdHdhcmUg
-U29sdXRpb25zIEdlcm1hbnkgR21iSAo+IE1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywg
-R2VybWFueQo+IChIUkIgMzY4MDksIEFHIE7DvHJuYmVyZykKPiBHZXNjaMOkZnRzZsO8aHJlcjog
-RmVsaXggSW1lbmTDtnJmZmVyCj4KCgotLSAKRGFuaWVsIFZldHRlcgpTb2Z0d2FyZSBFbmdpbmVl
-ciwgSW50ZWwgQ29ycG9yYXRpb24KKzQxICgwKSA3OSAzNjUgNTcgNDggLSBodHRwOi8vYmxvZy5m
-ZndsbC5jaApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpT
-cGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-Cmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2
-ZWwK
+Hi Alexandre, Keiichi,
+
+Thanks for the updates,
+
+On Montag, 6. April 2020 13:46:33 CEST Keiichi Watanabe wrote:
+> 
+> It seems that you're suggesting a big struct where bitstream params,
+> image params and all controls are merged into, right?
+> After rethinking, it makes sense to me.
+> Originally, we had two motivations to have input params and output
+> params separately:
+> (1) We could reuse virtio_video_params for both queues.
+> (2) We have considered extending virtio-video for video capture like V4L2.
+> However, (1) doesn't seem to be a good idea as per the recent discussion.
+> Regarding (2), the virtio-video design shouldn't be affected by other
+> possible use cases. They should be discussed after we finalize
+> virtio-video design.
+> Hence, I guess we have no reason to stick to separate params into two.
+> I'm supportive of this idea now.
+> Also, having only one struct would simplify updating parameters.
+> 
+> > struct codec_params {
+> > 
+> >     u32 frame_width;
+> >     u32 frame_height;
+> >     /* H264, VP8, VP9, etc */
+> >     enum virtio_codec format;
+> >     union {
+> >     
+> >         struct {
+> >         
+> >             enum h264_profile profile;
+> >             enum h264_level level;
+> >         
+> >         } h264;
+> >         struct {
+> >         
+> >             enum vp8_profile profile;
+> >         
+> >         } vp8;
+> >         ....
+> >     
+> >     };
+> >     u32 bitrate;
+> >     ....
+> > 
+> > };
+> 
+> More specifically, this struct would be:
+> 
+> // the word "codec" might not be needed in the struct name.
+> struct virtio_video_codec_params {
+>     // Image format
+>     enum virtio_video_frame_format frame_format;
+>     le32 frame_width;
+>     le32 frame_height;
+>     le32 min_frame_buffers;
+>     le32 max_frame_buffers;
+>     le32 cur_frame_buffers; // It's needed for REQBUFS's "count"
+>     struct virtio_video_crop crop;
+>     le32 frame_rate;
+>     le32 num_planes;
+>     struct virtio_video_plane_format \
+>         plane_formats[VIRTIO_VIDEO_MAX_PLANES];
+> 
+>     // Bitstream format
+>     enum virtio_video_coded_format coded_format;
+>     le32 min_coded_buffers;
+>     le32 max_coded_buffers;
+>     le32 cur_coded_buffers;
+>     le32 bitrate;
+>     union {
+>         struct {
+>           enum h264_profile profile;
+>           enum h264_level level;
+>         } h264;
+>         struct {
+>           enum vp8_profile profile;
+>         } vp8;
+>         ...
+>     } codec;
+> }
+> 
+
+I would strongly disagree with this approach as it kills the flexibility and 
+any possibility of having a uni-directional stream for seemingly no reason.
+
+I could be useful if it was possible to store the structure in the config 
+space, but that won't fly as we have multiple streams with different settings. 
+Also one device can support multiple formats, so we won't be able to handle 
+the unions.
+
+> > The idea being that depending on the value of "format", only the
+> > relevant member of the union becomes meaningful. This ensures that the
+> > device/driver does not need to check for every control whether it is
+> > valid in the current context ; it just needs to check what "format" is
+> > and take the values from the relevant members.
+> 
+> I like this idea to use union to make it more structured.
+> 
+
+I don't really have any strong objections agains unions per se, but I deem we 
+need to keep the structure flexible. At the very beginning of the development 
+there was a discussion about stream priority. If I add a 'prio' field to this 
+structure it will break the binary compatibility with older versions.
+
+> > I don't think we even need to have a different queue for both structs
+> > (which is what V4L2 does, but again for its own reasons). Just a
+> > single one per coding or decoding context could be enough AFAICT.
+> > 
+> > Depending on whether we are decoding or encoding, access to some
+> > members would be restricted to read/only for the device or driver. For
+> > instance, when encoding the driver can set "bitrate" to the desired
+> > encoding rate. When decoding, the decoder can report the video's
+> > bitrate there.
+> > 
+> > Now I'm not sure what would be the best way to share this structure.
+> > Either a memory area shared between the driver and device, with
+> > commands/messages sent to notify that something has changed, or
+> > sending the whole structure with each command/message.
+> 
+> I don't think the first idea is feasible in the virtio mechanism. So,
+> we can utilize the same way as the previous proposal; SET_PARAMS and
+> GET_PARAMS.
+> 
+
+For similar thing the virtio config space exists, but as I mentioned above, it 
+won't fit the current virtio-video design (or we probably can pre-define the max 
+number of streams on the device side and have params for each stream in the 
+config space, but this looks clumsy).
+
+> We also need to think of how to advertise supported profiles and
+> levels. Probably, we might want to extend struct
+> virtio_video_format_desc to include supported profiles/levels in a
+> response of QUERY_CAPABLITY.
+> 
+
+It would mean back to spec v1 AFAIR. We probably need to recall why we got rid 
+of that.
+
+> > Now the parameters I have listed above are not subject to changing a
+> > lot, but there are also parameters that we may want to specify/be
+> > notified on with each frame. For instance, whether we want a frame to
+> > be forcibly encoded as a keyframe. V4L2 uses a control for this, but
+> > we could probably do better if we can pass this information with each
+> > frame to be encoded. Maybe we can implement that by using different
+> > QUEUE commands for encoder and decoder, or again by using a union.
+> 
+> Ah, I haven't come up with such a kind of parameter. Perhaps, we can
+> extend struct virtio_video_resource_queue to have this flag.
+> 
+
+This looks sane for me.
+
+Best regards,
+Dmitry.
+
+
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
