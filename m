@@ -2,56 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 631231A94C0
-	for <lists+spice-devel@lfdr.de>; Wed, 15 Apr 2020 09:42:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 345F11AD878
+	for <lists+spice-devel@lfdr.de>; Fri, 17 Apr 2020 10:24:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8B06D6E8A9;
-	Wed, 15 Apr 2020 07:41:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B41EA6E107;
+	Fri, 17 Apr 2020 08:24:08 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
- [IPv6:2a00:1450:4864:20::444])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F353E6E8A2
- for <spice-devel@lists.freedesktop.org>; Wed, 15 Apr 2020 07:41:10 +0000 (UTC)
-Received: by mail-wr1-x444.google.com with SMTP id d17so10952940wrg.11
- for <spice-devel@lists.freedesktop.org>; Wed, 15 Apr 2020 00:41:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=iuc/XJLW7jx8+pEwob1pirWjoguAAeRMm1k3+8UesVw=;
- b=BYVAcYa0NlhY4UFF40LKJQ5hAzuCj4h07n6TT7VHWz2VCViHQy+X+R+ybyzmrUDa3B
- EqIuMQexBibUhIB21VCmmgjCAMZ5Nfkvp89+MMBAZdS53n7M+/xpp+syN4HWZGHuCr9P
- Qd+vZULguyMQ1QZqNrJvuWZy0UbPYz3RYesn4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=iuc/XJLW7jx8+pEwob1pirWjoguAAeRMm1k3+8UesVw=;
- b=o2cZRPKFrOzKF9Loccds1BJS6FjKd195y0rM6bbOBWuKdEn/i0sd0qkOnOXA8/KgBY
- UbQtdd8nVYqZwJbgoSVwzXp0yL53dOyfhfSzYtulUE+hS1HGsW3d6x/SWFxAurnNNSTl
- oiWWg0b+8HzhjiswbQwvsHsRQ/Y8t6FcFPIwN+WQ45API+9B30+tACTIM8izaW//VyaS
- NnzcZh2O0yrCMeViURFZvWetw8ywEf+tmrF7H+AceP1t2kDKBHUdBEJ+mkoCigEa8PCL
- E+smFDFqLcgqYnyTh+jAgJ2V2ABEcBxw/2j7JbHccNgsPFFqR7x7ZKry/g3PGoGZoPLh
- 7lhQ==
-X-Gm-Message-State: AGi0PuZX/R6cvn8YHsYf8banACo+CDsHQyVS6ejeqOYguqowj503E+Y5
- qqcCxdGReIAEU8goSihQBUA+Jw==
-X-Google-Smtp-Source: APiQypJcvSEy69rGsq4WT09/HGg1ghfuOce7qX0cTJq71kOMlHmeDISaBKFnUe8YWxQG1v8zOhJy3w==
-X-Received: by 2002:a5d:4ed1:: with SMTP id s17mr22728493wrv.310.1586936469300; 
- Wed, 15 Apr 2020 00:41:09 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id u30sm1878552wru.13.2020.04.15.00.41.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Apr 2020 00:41:08 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: Intel Graphics Development <intel-gfx@lists.freedesktop.org>
-Date: Wed, 15 Apr 2020 09:40:02 +0200
-Message-Id: <20200415074034.175360-28-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
-References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
+Received: from plasma4.jpberlin.de (plasma4.jpberlin.de [80.241.57.33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 90FB96E3B7
+ for <spice-devel@lists.freedesktop.org>; Fri, 17 Apr 2020 08:09:13 +0000 (UTC)
+Received: from spamfilter06.heinlein-hosting.de
+ (spamfilter06.heinlein-hosting.de [80.241.56.125])
+ by plasma.jpberlin.de (Postfix) with ESMTP id D8DD1B72E5;
+ Fri, 17 Apr 2020 10:09:01 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter06.heinlein-hosting.de (spamfilter06.heinlein-hosting.de
+ [80.241.56.125]) (amavisd-new, port 10030)
+ with ESMTP id 9OGyaBnwFwGX; Fri, 17 Apr 2020 10:08:57 +0200 (CEST)
+Received: from webmail.opensynergy.com (unknown [217.66.60.5])
+ (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "webmail.opensynergy.com",
+ Issuer "GeoTrust EV RSA CA 2018" (not verified))
+ (Authenticated sender: opensynergy@jpberlin.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 1EC1BBB09E;
+ Fri, 17 Apr 2020 10:08:57 +0200 (CEST)
+Received: from os-lin-dmo.localnet (10.25.255.1) by MXS02.open-synergy.com
+ (10.25.10.18) with Microsoft SMTP Server (TLS) id 14.3.487.0; Fri, 17 Apr
+ 2020 10:08:56 +0200
+From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+To: Keiichi Watanabe <keiichiw@chromium.org>
+Date: Fri, 17 Apr 2020 10:08:56 +0200
+Message-ID: <3536507.QJadu78ljV@os-lin-dmo>
+Organization: OpenSynergy
+In-Reply-To: <CAD90Vcb7UwWAqHOKb7rUV6q3TCSCCEpbbkv6oK0PnEL246TgJQ@mail.gmail.com>
+References: <20200206102058.247258-1-keiichiw@chromium.org>
+ <5576106.alqRGMn8q6@os-lin-dmo>
+ <CAD90Vcb7UwWAqHOKb7rUV6q3TCSCCEpbbkv6oK0PnEL246TgJQ@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [Spice-devel] [PATCH 27/59] drm/qxl: Don't use
- drm_device->dev_private
+X-Originating-IP: [10.25.255.1]
+X-Rspamd-Queue-Id: D8DD1B72E5
+X-Rspamd-Score: -5.75 / 15.00 / 200.00
+X-Mailman-Approved-At: Fri, 17 Apr 2020 08:24:08 +0000
+Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
+ device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,440 +58,206 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Vetter <daniel.vetter@intel.com>, Dave Airlie <airlied@redhat.com>
+Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
+ virtio-dev@lists.oasis-open.org, Alex Lau <alexlau@chromium.org>,
+ Kiran Pawar <kiran.pawar@opensynergy.com>,
+ Alexandre Courbot <acourbot@chromium.org>,
+ David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ spice-devel@lists.freedesktop.org,
+ =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
+ Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Upcasting using a container_of macro is more typesafe, faster and
-easier for the compiler to optimize.
+Hi,
 
-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: virtualization@lists.linux-foundation.org
-Cc: spice-devel@lists.freedesktop.org
----
- drivers/gpu/drm/qxl/qxl_debugfs.c |  7 +++----
- drivers/gpu/drm/qxl/qxl_display.c | 32 +++++++++++++++----------------
- drivers/gpu/drm/qxl/qxl_drv.c     |  8 ++++----
- drivers/gpu/drm/qxl/qxl_drv.h     |  4 ++--
- drivers/gpu/drm/qxl/qxl_dumb.c    |  2 +-
- drivers/gpu/drm/qxl/qxl_gem.c     |  2 +-
- drivers/gpu/drm/qxl/qxl_ioctl.c   | 14 +++++++-------
- drivers/gpu/drm/qxl/qxl_irq.c     |  2 +-
- drivers/gpu/drm/qxl/qxl_kms.c     |  1 -
- drivers/gpu/drm/qxl/qxl_object.c  |  2 +-
- drivers/gpu/drm/qxl/qxl_release.c |  2 +-
- drivers/gpu/drm/qxl/qxl_ttm.c     |  2 +-
- 12 files changed, 38 insertions(+), 40 deletions(-)
+On Donnerstag, 9. April 2020 12:46:27 CEST Keiichi Watanabe wrote:
+> Currently, we have three options of the design of per-stream properties:
+> 
+> 1. Have two structs for image format and bitstream format.
+> Pros:
+> Well structured. Easy to support uni-directional stream.
+> Cons:
+> Not all properties may not be classified well. For example, bitrate in
+> encoder is about "how we encode it" rather than "what we encode it
+> into". So, it may be a bit strange to have it in the bitstream
+> information.
+> 
+> 2. Have one struct that contains all properties.
+> Pros:
+> Well structured. Since updating one format affects the other format,
+> it may make more sense to have everything in one struct.
+> Also, we can have any per-stream properties there that may be tied to
+> neither image format nor bitstream format.
+> Cons:
+> If we want to support uni-directional streams in the virtio-video
+> protocol, we may be going to have many unused fields in that struct.
+> 
+> 3. Have every property as a separate subcommand like v3's controls
+> Pros:
+> Easy to add more properties in the future.
+> Cons:
+> Less structured. So, we need to be careful not to overlook mandatory
+> properties when we implement the driver and device.
+> 
+> 
+> IMHO, I'm relatively supportive of 2, but we might need to rethink
+> whether we really want to support uni-directional streams in
+> virtio-video.
 
-diff --git a/drivers/gpu/drm/qxl/qxl_debugfs.c b/drivers/gpu/drm/qxl/qxl_debugfs.c
-index 88123047fdd4..524d35b648d8 100644
---- a/drivers/gpu/drm/qxl/qxl_debugfs.c
-+++ b/drivers/gpu/drm/qxl/qxl_debugfs.c
-@@ -39,7 +39,7 @@ static int
- qxl_debugfs_irq_received(struct seq_file *m, void *data)
- {
- 	struct drm_info_node *node = (struct drm_info_node *) m->private;
--	struct qxl_device *qdev = node->minor->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(node->minor->dev);
- 
- 	seq_printf(m, "%d\n", atomic_read(&qdev->irq_received));
- 	seq_printf(m, "%d\n", atomic_read(&qdev->irq_received_display));
-@@ -53,7 +53,7 @@ static int
- qxl_debugfs_buffers_info(struct seq_file *m, void *data)
- {
- 	struct drm_info_node *node = (struct drm_info_node *) m->private;
--	struct qxl_device *qdev = node->minor->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(node->minor->dev);
- 	struct qxl_bo *bo;
- 
- 	list_for_each_entry(bo, &qdev->gem.objects, list) {
-@@ -83,8 +83,7 @@ void
- qxl_debugfs_init(struct drm_minor *minor)
- {
- #if defined(CONFIG_DEBUG_FS)
--	struct qxl_device *dev =
--		(struct qxl_device *) minor->dev->dev_private;
-+	struct qxl_device *dev = to_qxl(minor->dev);
- 
- 	drm_debugfs_create_files(qxl_debugfs_list, QXL_DEBUGFS_ENTRIES,
- 				 minor->debugfs_root, minor);
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 09583a08e141..1082cd5d2fd4 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -221,7 +221,7 @@ static int qxl_add_mode(struct drm_connector *connector,
- 			bool preferred)
- {
- 	struct drm_device *dev = connector->dev;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_display_mode *mode = NULL;
- 	int rc;
- 
-@@ -242,7 +242,7 @@ static int qxl_add_mode(struct drm_connector *connector,
- static int qxl_add_monitors_config_modes(struct drm_connector *connector)
- {
- 	struct drm_device *dev = connector->dev;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct qxl_output *output = drm_connector_to_qxl_output(connector);
- 	int h = output->index;
- 	struct qxl_head *head;
-@@ -310,7 +310,7 @@ static void qxl_crtc_update_monitors_config(struct drm_crtc *crtc,
- 					    const char *reason)
- {
- 	struct drm_device *dev = crtc->dev;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct qxl_crtc *qcrtc = to_qxl_crtc(crtc);
- 	struct qxl_head head;
- 	int oldcount, i = qcrtc->index;
-@@ -400,7 +400,7 @@ static int qxl_framebuffer_surface_dirty(struct drm_framebuffer *fb,
- 					 unsigned int num_clips)
- {
- 	/* TODO: vmwgfx where this was cribbed from had locking. Why? */
--	struct qxl_device *qdev = fb->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(fb->dev);
- 	struct drm_clip_rect norect;
- 	struct qxl_bo *qobj;
- 	bool is_primary;
-@@ -462,7 +462,7 @@ static const struct drm_crtc_helper_funcs qxl_crtc_helper_funcs = {
- static int qxl_primary_atomic_check(struct drm_plane *plane,
- 				    struct drm_plane_state *state)
- {
--	struct qxl_device *qdev = plane->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(plane->dev);
- 	struct qxl_bo *bo;
- 
- 	if (!state->crtc || !state->fb)
-@@ -476,7 +476,7 @@ static int qxl_primary_atomic_check(struct drm_plane *plane,
- static int qxl_primary_apply_cursor(struct drm_plane *plane)
- {
- 	struct drm_device *dev = plane->dev;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_framebuffer *fb = plane->state->fb;
- 	struct qxl_crtc *qcrtc = to_qxl_crtc(plane->state->crtc);
- 	struct qxl_cursor_cmd *cmd;
-@@ -523,7 +523,7 @@ static int qxl_primary_apply_cursor(struct drm_plane *plane)
- static void qxl_primary_atomic_update(struct drm_plane *plane,
- 				      struct drm_plane_state *old_state)
- {
--	struct qxl_device *qdev = plane->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(plane->dev);
- 	struct qxl_bo *bo = gem_to_qxl_bo(plane->state->fb->obj[0]);
- 	struct qxl_bo *primary;
- 	struct drm_clip_rect norect = {
-@@ -554,7 +554,7 @@ static void qxl_primary_atomic_update(struct drm_plane *plane,
- static void qxl_primary_atomic_disable(struct drm_plane *plane,
- 				       struct drm_plane_state *old_state)
- {
--	struct qxl_device *qdev = plane->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(plane->dev);
- 
- 	if (old_state->fb) {
- 		struct qxl_bo *bo = gem_to_qxl_bo(old_state->fb->obj[0]);
-@@ -570,7 +570,7 @@ static void qxl_cursor_atomic_update(struct drm_plane *plane,
- 				     struct drm_plane_state *old_state)
- {
- 	struct drm_device *dev = plane->dev;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_framebuffer *fb = plane->state->fb;
- 	struct qxl_crtc *qcrtc = to_qxl_crtc(plane->state->crtc);
- 	struct qxl_release *release;
-@@ -679,7 +679,7 @@ static void qxl_cursor_atomic_update(struct drm_plane *plane,
- static void qxl_cursor_atomic_disable(struct drm_plane *plane,
- 				      struct drm_plane_state *old_state)
- {
--	struct qxl_device *qdev = plane->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(plane->dev);
- 	struct qxl_release *release;
- 	struct qxl_cursor_cmd *cmd;
- 	int ret;
-@@ -762,7 +762,7 @@ static void qxl_calc_dumb_shadow(struct qxl_device *qdev,
- static int qxl_plane_prepare_fb(struct drm_plane *plane,
- 				struct drm_plane_state *new_state)
- {
--	struct qxl_device *qdev = plane->dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(plane->dev);
- 	struct drm_gem_object *obj;
- 	struct qxl_bo *user_bo;
- 	struct qxl_surface surf;
-@@ -923,7 +923,7 @@ static int qdev_crtc_init(struct drm_device *dev, int crtc_id)
- {
- 	struct qxl_crtc *qxl_crtc;
- 	struct drm_plane *primary, *cursor;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	int r;
- 
- 	qxl_crtc = kzalloc(sizeof(struct qxl_crtc), GFP_KERNEL);
-@@ -965,7 +965,7 @@ static int qdev_crtc_init(struct drm_device *dev, int crtc_id)
- static int qxl_conn_get_modes(struct drm_connector *connector)
- {
- 	struct drm_device *dev = connector->dev;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct qxl_output *output = drm_connector_to_qxl_output(connector);
- 	unsigned int pwidth = 1024;
- 	unsigned int pheight = 768;
-@@ -991,7 +991,7 @@ static enum drm_mode_status qxl_conn_mode_valid(struct drm_connector *connector,
- 			       struct drm_display_mode *mode)
- {
- 	struct drm_device *ddev = connector->dev;
--	struct qxl_device *qdev = ddev->dev_private;
-+	struct qxl_device *qdev = to_qxl(ddev);
- 
- 	if (qxl_check_mode(qdev, mode->hdisplay, mode->vdisplay) != 0)
- 		return MODE_BAD;
-@@ -1021,7 +1021,7 @@ static enum drm_connector_status qxl_conn_detect(
- 	struct qxl_output *output =
- 		drm_connector_to_qxl_output(connector);
- 	struct drm_device *ddev = connector->dev;
--	struct qxl_device *qdev = ddev->dev_private;
-+	struct qxl_device *qdev = to_qxl(ddev);
- 	bool connected = false;
- 
- 	/* The first monitor is always connected */
-@@ -1071,7 +1071,7 @@ static int qxl_mode_create_hotplug_mode_update_property(struct qxl_device *qdev)
- 
- static int qdev_output_init(struct drm_device *dev, int num_output)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct qxl_output *qxl_output;
- 	struct drm_connector *connector;
- 	struct drm_encoder *encoder;
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 6b4ae4c5fb76..13872b882775 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -137,7 +137,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 
- static void qxl_drm_release(struct drm_device *dev)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 
- 	/*
- 	 * TODO: qxl_device_fini() call should be in qxl_pci_remove(),
-@@ -164,7 +164,7 @@ DEFINE_DRM_GEM_FOPS(qxl_fops);
- static int qxl_drm_freeze(struct drm_device *dev)
- {
- 	struct pci_dev *pdev = dev->pdev;
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	int ret;
- 
- 	ret = drm_mode_config_helper_suspend(dev);
-@@ -186,7 +186,7 @@ static int qxl_drm_freeze(struct drm_device *dev)
- 
- static int qxl_drm_resume(struct drm_device *dev, bool thaw)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 
- 	qdev->ram_header->int_mask = QXL_INTERRUPT_MASK;
- 	if (!thaw) {
-@@ -245,7 +245,7 @@ static int qxl_pm_restore(struct device *dev)
- {
- 	struct pci_dev *pdev = to_pci_dev(dev);
- 	struct drm_device *drm_dev = pci_get_drvdata(pdev);
--	struct qxl_device *qdev = drm_dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(drm_dev);
- 
- 	qxl_io_reset(qdev);
- 	return qxl_drm_resume(drm_dev, false);
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index 86ac191d9205..31e35f787df2 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -192,8 +192,6 @@ struct qxl_debugfs {
- 
- int qxl_debugfs_fence_init(struct qxl_device *rdev);
- 
--struct qxl_device;
--
- struct qxl_device {
- 	struct drm_device ddev;
- 
-@@ -273,6 +271,8 @@ struct qxl_device {
- 	int monitors_config_height;
- };
- 
-+#define to_qxl(dev) container_of(dev, struct qxl_device, ddev)
-+
- extern const struct drm_ioctl_desc qxl_ioctls[];
- extern int qxl_max_ioctl;
- 
-diff --git a/drivers/gpu/drm/qxl/qxl_dumb.c b/drivers/gpu/drm/qxl/qxl_dumb.c
-index 272d19b677d8..24e903383aa1 100644
---- a/drivers/gpu/drm/qxl/qxl_dumb.c
-+++ b/drivers/gpu/drm/qxl/qxl_dumb.c
-@@ -32,7 +32,7 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
- 			    struct drm_device *dev,
- 			    struct drm_mode_create_dumb *args)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct qxl_bo *qobj;
- 	uint32_t handle;
- 	int r;
-diff --git a/drivers/gpu/drm/qxl/qxl_gem.c b/drivers/gpu/drm/qxl/qxl_gem.c
-index 69f37db1027a..5ff6fa9b799c 100644
---- a/drivers/gpu/drm/qxl/qxl_gem.c
-+++ b/drivers/gpu/drm/qxl/qxl_gem.c
-@@ -34,7 +34,7 @@ void qxl_gem_object_free(struct drm_gem_object *gobj)
- 	struct qxl_device *qdev;
- 	struct ttm_buffer_object *tbo;
- 
--	qdev = (struct qxl_device *)gobj->dev->dev_private;
-+	qdev = to_qxl(gobj->dev);
- 
- 	qxl_surface_evict(qdev, qobj, false);
- 
-diff --git a/drivers/gpu/drm/qxl/qxl_ioctl.c b/drivers/gpu/drm/qxl/qxl_ioctl.c
-index 8117a45b3610..d9a583966949 100644
---- a/drivers/gpu/drm/qxl/qxl_ioctl.c
-+++ b/drivers/gpu/drm/qxl/qxl_ioctl.c
-@@ -36,7 +36,7 @@
- static int qxl_alloc_ioctl(struct drm_device *dev, void *data,
- 			   struct drm_file *file_priv)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_alloc *qxl_alloc = data;
- 	int ret;
- 	struct qxl_bo *qobj;
-@@ -64,7 +64,7 @@ static int qxl_alloc_ioctl(struct drm_device *dev, void *data,
- static int qxl_map_ioctl(struct drm_device *dev, void *data,
- 			 struct drm_file *file_priv)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_map *qxl_map = data;
- 
- 	return qxl_mode_dumb_mmap(file_priv, &qdev->ddev, qxl_map->handle,
-@@ -279,7 +279,7 @@ static int qxl_process_single_command(struct qxl_device *qdev,
- static int qxl_execbuffer_ioctl(struct drm_device *dev, void *data,
- 				struct drm_file *file_priv)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_execbuffer *execbuffer = data;
- 	struct drm_qxl_command user_cmd;
- 	int cmd_num;
-@@ -304,7 +304,7 @@ static int qxl_execbuffer_ioctl(struct drm_device *dev, void *data,
- static int qxl_update_area_ioctl(struct drm_device *dev, void *data,
- 				 struct drm_file *file)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_update_area *update_area = data;
- 	struct qxl_rect area = {.left = update_area->left,
- 				.top = update_area->top,
-@@ -354,7 +354,7 @@ static int qxl_update_area_ioctl(struct drm_device *dev, void *data,
- static int qxl_getparam_ioctl(struct drm_device *dev, void *data,
- 		       struct drm_file *file_priv)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_getparam *param = data;
- 
- 	switch (param->param) {
-@@ -373,7 +373,7 @@ static int qxl_getparam_ioctl(struct drm_device *dev, void *data,
- static int qxl_clientcap_ioctl(struct drm_device *dev, void *data,
- 				  struct drm_file *file_priv)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_clientcap *param = data;
- 	int byte, idx;
- 
-@@ -394,7 +394,7 @@ static int qxl_clientcap_ioctl(struct drm_device *dev, void *data,
- static int qxl_alloc_surf_ioctl(struct drm_device *dev, void *data,
- 				struct drm_file *file)
- {
--	struct qxl_device *qdev = dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_alloc_surf *param = data;
- 	struct qxl_bo *qobj;
- 	int handle;
-diff --git a/drivers/gpu/drm/qxl/qxl_irq.c b/drivers/gpu/drm/qxl/qxl_irq.c
-index 8435af108632..1ba5a702d763 100644
---- a/drivers/gpu/drm/qxl/qxl_irq.c
-+++ b/drivers/gpu/drm/qxl/qxl_irq.c
-@@ -32,7 +32,7 @@
- irqreturn_t qxl_irq_handler(int irq, void *arg)
- {
- 	struct drm_device *dev = (struct drm_device *) arg;
--	struct qxl_device *qdev = (struct qxl_device *)dev->dev_private;
-+	struct qxl_device *qdev = to_qxl(dev);
- 	uint32_t pending;
- 
- 	pending = xchg(&qdev->ram_header->int_pending, 0);
-diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
-index 91a34dd835d7..a6d873052cd4 100644
---- a/drivers/gpu/drm/qxl/qxl_kms.c
-+++ b/drivers/gpu/drm/qxl/qxl_kms.c
-@@ -114,7 +114,6 @@ int qxl_device_init(struct qxl_device *qdev,
- 
- 	qdev->ddev.pdev = pdev;
- 	pci_set_drvdata(pdev, &qdev->ddev);
--	qdev->ddev.dev_private = qdev;
- 
- 	mutex_init(&qdev->gem.mutex);
- 	mutex_init(&qdev->update_area_mutex);
-diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-index ab72dc3476e9..edc8a9916872 100644
---- a/drivers/gpu/drm/qxl/qxl_object.c
-+++ b/drivers/gpu/drm/qxl/qxl_object.c
-@@ -33,7 +33,7 @@ static void qxl_ttm_bo_destroy(struct ttm_buffer_object *tbo)
- 	struct qxl_device *qdev;
- 
- 	bo = to_qxl_bo(tbo);
--	qdev = (struct qxl_device *)bo->tbo.base.dev->dev_private;
-+	qdev = to_qxl(bo->tbo.base.dev);
- 
- 	qxl_surface_evict(qdev, bo, false);
- 	WARN_ON_ONCE(bo->map_count > 0);
-diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
-index 2feca734c7b1..4fae3e393da1 100644
---- a/drivers/gpu/drm/qxl/qxl_release.c
-+++ b/drivers/gpu/drm/qxl/qxl_release.c
-@@ -243,7 +243,7 @@ static int qxl_release_validate_bo(struct qxl_bo *bo)
- 		return ret;
- 
- 	/* allocate a surface for reserved + validated buffers */
--	ret = qxl_bo_check_id(bo->tbo.base.dev->dev_private, bo);
-+	ret = qxl_bo_check_id(to_qxl(bo->tbo.base.dev), bo);
- 	if (ret)
- 		return ret;
- 	return 0;
-diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c b/drivers/gpu/drm/qxl/qxl_ttm.c
-index 93a2eb14844b..f09a712b1ed2 100644
---- a/drivers/gpu/drm/qxl/qxl_ttm.c
-+++ b/drivers/gpu/drm/qxl/qxl_ttm.c
-@@ -243,7 +243,7 @@ static void qxl_bo_move_notify(struct ttm_buffer_object *bo,
- 	if (!qxl_ttm_bo_is_qxl_bo(bo))
- 		return;
- 	qbo = to_qxl_bo(bo);
--	qdev = qbo->tbo.base.dev->dev_private;
-+	qdev = to_qxl(qbo->tbo.base.dev);
- 
- 	if (bo->mem.mem_type == TTM_PL_PRIV && qbo->surface_id)
- 		qxl_surface_evict(qdev, qbo, new_mem ? true : false);
--- 
-2.25.1
+Ok, let's assume we keep it is one struct. Anyway, we indeed can just ignore 
+some of the fields if we want so. We need to define some conventions for the 
+struct. Like whether we should fill all the fields all the time when sending 
+set_params() and so on.
+
+I want to ask you about the frame-level bitrate control here [1]. Is it 
+planned to support it? If yes, we also need a control to enable that and a way 
+to pass minimum and maximum value for the quantization parameter.
+
+> I guess it's worthwhile to create a separate protocol like
+> virtio-camera even if it somehow overlaps with virtio-video.
+> Only for a simple video capture scenario, extending the virtio-video
+> protocol can be one of simple solutions. However, if we want to extend
+> it for more features like MIPI cameras, it's not hard to imagine the
+> protocol becoming very complicated.
+> I wonder if we can keep virtio protocols simple and clean rather than
+> making an all-in-one protocol for media devices like V4L2.
+> 
+> > I could be useful if it was possible to store the structure in the config
+> > space, but that won't fly as we have multiple streams with different
+> > settings. Also one device can support multiple formats, so we won't be
+> > able to handle the unions.
+> 
+> Yeah, this structure should be per-stream properties but virtio's
+> config is for per-device properties.
+> So, it doesn't work as you said.
+> 
+> > > > The idea being that depending on the value of "format", only the
+> > > > relevant member of the union becomes meaningful. This ensures that the
+> > > > device/driver does not need to check for every control whether it is
+> > > > valid in the current context ; it just needs to check what "format" is
+> > > > and take the values from the relevant members.
+> > > 
+> > > I like this idea to use union to make it more structured.
+> > 
+> > I don't really have any strong objections agains unions per se, but I deem
+> > we need to keep the structure flexible. At the very beginning of the
+> > development there was a discussion about stream priority. If I add a
+> > 'prio' field to this structure it will break the binary compatibility
+> > with older versions.
+> Hmm, I don't think unions can incur any extra binary compatibility
+> issues compared with designs using only structs.
+> Since alignment rules are well-defined for unions as well as structs,
+> it'd be okay.
+> We might want to have an explicit field to show the size of a union like:
+> 
+> union {
+>   struct {
+>     ...
+>   } h264;
+>   struct {
+>     ...
+>   } vp8;
+>   ...
+>   u8 _align[MAX_SIZE_OF_FIELDS_IN_THIS_UNION];
+> }
+> 
+> > > > I don't think we even need to have a different queue for both structs
+> > > > (which is what V4L2 does, but again for its own reasons). Just a
+> > > > single one per coding or decoding context could be enough AFAICT.
+> > > > 
+> > > > Depending on whether we are decoding or encoding, access to some
+> > > > members would be restricted to read/only for the device or driver. For
+> > > > instance, when encoding the driver can set "bitrate" to the desired
+> > > > encoding rate. When decoding, the decoder can report the video's
+> > > > bitrate there.
+> > > > 
+> > > > Now I'm not sure what would be the best way to share this structure.
+> > > > Either a memory area shared between the driver and device, with
+> > > > commands/messages sent to notify that something has changed, or
+> > > > sending the whole structure with each command/message.
+> > > 
+> > > I don't think the first idea is feasible in the virtio mechanism. So,
+> > > we can utilize the same way as the previous proposal; SET_PARAMS and
+> > > GET_PARAMS.
+> > 
+> > For similar thing the virtio config space exists, but as I mentioned
+> > above, it won't fit the current virtio-video design (or we probably can
+> > pre-define the max number of streams on the device side and have params
+> > for each stream in the config space, but this looks clumsy).
+> > 
+> > > We also need to think of how to advertise supported profiles and
+> > > levels. Probably, we might want to extend struct
+> > > virtio_video_format_desc to include supported profiles/levels in a
+> > > response of QUERY_CAPABLITY.
+> > 
+> > It would mean back to spec v1 AFAIR. We probably need to recall why we got
+> > rid of that.
+> 
+> Probably, this reply:
+> https://markmail.org/thread/zr3ycvxixnwi5agt
+> At that time, I assumed that we'll have profiles/levels/bitrates as
+> controls, aparting from other per-stream properties. In that
+> situation, it made sense to have a separate mechanism to get/set/query
+> these properties.
+> However, we are likely not to end up distinguishing these properties
+> from other properties. If so, we don't need any other querying
+> mechanism other than QUERY_CAPABILITY.
+> 
+> To support profiles, we can extend virtio_video_format_desc to
+> (a) add fields like "profiles" and "levels" that shows supported
+> values as bit mask, or
+> (b) add fields like "num_profiles" and "num_levels" that describes the
+> lengths of arrays that follows.
+> 
+> My personal preference is (a).
+> 
+
+Yes, this should be ok. We had arrays in the spec v1, but as we have now 
+bitmasks for formats, we can do so for profiles and levels.
+
+We currently have two problems with capabilities when it comes to the real 
+implementation:
+
+1. If we want to avoid calling stream_create in open(), we need to have 
+bitrates already on per-format basis in capabilities.
+2. We also need to know min input and output buffer count in advance, i.e. it 
+should not be in params, especially for encoder that won't report it after 
+metadata parsing like decoder, please see [2] (thanks Nicolas Dufresne for 
+helping with that issue).
+
+[1] https://github.com/chromium/chromium/blob/master/media/gpu/v4l2/
+v4l2_video_encode_accelerator.cc#L1579
+[2] https://gitlab.freedesktop.org/gstreamer/gst-plugins-good/-/issues/672
+
+Best regards,
+Dmitry.
+
+> Best regards,
+> Keiichi
+> 
+> > > > Now the parameters I have listed above are not subject to changing a
+> > > > lot, but there are also parameters that we may want to specify/be
+> > > > notified on with each frame. For instance, whether we want a frame to
+> > > > be forcibly encoded as a keyframe. V4L2 uses a control for this, but
+> > > > we could probably do better if we can pass this information with each
+> > > > frame to be encoded. Maybe we can implement that by using different
+> > > > QUEUE commands for encoder and decoder, or again by using a union.
+> > > 
+> > > Ah, I haven't come up with such a kind of parameter. Perhaps, we can
+> > > extend struct virtio_video_resource_queue to have this flag.
+> > 
+> > This looks sane for me.
+> > 
+> > Best regards,
+> > Dmitry.
+
 
 _______________________________________________
 Spice-devel mailing list
