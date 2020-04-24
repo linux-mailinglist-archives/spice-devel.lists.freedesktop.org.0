@@ -2,44 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B0711B719B
-	for <lists+spice-devel@lfdr.de>; Fri, 24 Apr 2020 12:11:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A3971B7157
+	for <lists+spice-devel@lfdr.de>; Fri, 24 Apr 2020 11:58:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0F2986E44E;
-	Fri, 24 Apr 2020 10:11:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D32AF6E02C;
+	Fri, 24 Apr 2020 09:58:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
- [209.85.166.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 421386E44B
- for <spice-devel@lists.freedesktop.org>; Fri, 24 Apr 2020 09:50:14 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id e9so9701595iok.9
- for <spice-devel@lists.freedesktop.org>; Fri, 24 Apr 2020 02:50:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=6dHUDskGTlpWCtHIuIBU/ej74enmuqs9QrIOjUxDxTw=;
- b=TpuioqjJ4gcspVunAScf9uXZ6PmC0wv+HGsX1BPed3TwJLOSwIazUDu0L9rSoxJRKC
- bpK0g4yZEAp4TA5HKaZtLRkJ1zD7nn1Svx9vWhIIsldsyKyAvazr62nEcMf7veYW9JoR
- l4j4hvJ1CHhm/m6JqhHJRhML9eGbSVtiCYkfuCf4QyzanmS3DCu1Cuyx13cbRKqJJSNe
- tJcFQXmFHYeOD1q74G3uPdgCoqL38FRnotdhoqzyBIUBd4tjfoH1tEYFY3L9ysI+fdFr
- FU9kwRsZozAY/6WKmz0T4ukqjU043za1Q8Pwq3snnWhSZN4DHiD2G5/B+SAj3Zt6alcZ
- FAxg==
-X-Gm-Message-State: AGi0PubJ3ISkdRATIzrVpR/HfpUBtyEmS0139p2H9kRNOdjht7WTKdMu
- bFs8x2FAWZc10xhLJcv1tmr7rFnupUwkzgEioy4=
-X-Google-Smtp-Source: APiQypLo8lbC1Ovo4n92FN/j46YMwq/dyCmxWua4lxqlPJfsenvQiuY5gG/RchGdG0F7d3aJexBikTqnhB//ZAoT9/Q=
-X-Received: by 2002:a6b:7317:: with SMTP id e23mr7827695ioh.72.1587721813333; 
- Fri, 24 Apr 2020 02:50:13 -0700 (PDT)
-MIME-Version: 1.0
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 521EF6E02C
+ for <spice-devel@lists.freedesktop.org>; Fri, 24 Apr 2020 09:58:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1587722332;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=JE79+wofZ/vQi9Js/RC7p80m+SKhfKiuI320PsFcIa4=;
+ b=RBQbzOlm9ZwmFvIQ7iEWIC/+LmBDfMeeFRh8Pb997UaL0cBD0G9t8NF2DKOiBEpJBEdkvd
+ 0NKgAoXu6nvlJRt6xPfM5Uuqw7HsMeTHDIaOYLUnIs4D7ylewikVZjC7ORx8KA6X4QTUNZ
+ t2wUB0xGPcjhZ47UwS3sjv3Sb5SJ5qM=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-93-TV-a6NB1PyuqHbYkyB7JEA-1; Fri, 24 Apr 2020 05:58:46 -0400
+X-MC-Unique: TV-a6NB1PyuqHbYkyB7JEA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C288D107ACF2;
+ Fri, 24 Apr 2020 09:58:44 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-113-193.ams2.redhat.com
+ [10.36.113.193])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4EE445C1D0;
+ Fri, 24 Apr 2020 09:58:44 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 4AD0A9D98; Fri, 24 Apr 2020 11:58:43 +0200 (CEST)
+Date: Fri, 24 Apr 2020 11:58:43 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Huacai Chen <chenhc@lemote.com>
+Message-ID: <20200424095843.owgjzaxdfkzr5ahk@sirius.home.kraxel.org>
 References: <1585635488-17507-1-git-send-email-chenhc@lemote.com>
  <20200331145325.f6j2jjczlz33xuyi@sirius.home.kraxel.org>
-In-Reply-To: <20200331145325.f6j2jjczlz33xuyi@sirius.home.kraxel.org>
-From: Huacai Chen <chenhc@lemote.com>
-Date: Fri, 24 Apr 2020 17:57:37 +0800
-Message-ID: <CAAhV-H6vpKk=MD3PX8r6ByT7u4fhwfUcBX6c8FGVA-D0yqm28g@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Mailman-Approved-At: Fri, 24 Apr 2020 10:11:10 +0000
+ <CAAhV-H6vpKk=MD3PX8r6ByT7u4fhwfUcBX6c8FGVA-D0yqm28g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAAhV-H6vpKk=MD3PX8r6ByT7u4fhwfUcBX6c8FGVA-D0yqm28g@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Subject: Re: [Spice-devel] [PATCH Resend] drm/qxl: Use correct notify port
  address when creating cursor ring
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -61,33 +70,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,  Gerd
-
-On Tue, Mar 31, 2020 at 10:53 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
->
-> On Tue, Mar 31, 2020 at 02:18:08PM +0800, Huacai Chen wrote:
-> > The command ring and cursor ring use different notify port addresses
-> > definition: QXL_IO_NOTIFY_CMD and QXL_IO_NOTIFY_CURSOR. However, in
-> > qxl_device_init() we use QXL_IO_NOTIFY_CMD to create both command ring
-> > and cursor ring. This doesn't cause any problems now, because QEMU's
-> > behaviors on QXL_IO_NOTIFY_CMD and QXL_IO_NOTIFY_CURSOR are the same.
-> > However, QEMU's behavior may be change in future, so let's fix it.
+On Fri, Apr 24, 2020 at 05:57:37PM +0800, Huacai Chen wrote:
+> Hi,  Gerd
+> 
+> On Tue, Mar 31, 2020 at 10:53 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
 > >
-> > P.S.: In the X.org QXL driver, the notify port address of cursor ring
-> >       is correct.
+> > On Tue, Mar 31, 2020 at 02:18:08PM +0800, Huacai Chen wrote:
+> > > The command ring and cursor ring use different notify port addresses
+> > > definition: QXL_IO_NOTIFY_CMD and QXL_IO_NOTIFY_CURSOR. However, in
+> > > qxl_device_init() we use QXL_IO_NOTIFY_CMD to create both command ring
+> > > and cursor ring. This doesn't cause any problems now, because QEMU's
+> > > behaviors on QXL_IO_NOTIFY_CMD and QXL_IO_NOTIFY_CURSOR are the same.
+> > > However, QEMU's behavior may be change in future, so let's fix it.
+> > >
+> > > P.S.: In the X.org QXL driver, the notify port address of cursor ring
+> > >       is correct.
+> > >
+> > > Cc: <stable@vger.kernel.org>
+> > > Signed-off-by: Huacai Chen <chenhc@lemote.com>
 > >
-> > Cc: <stable@vger.kernel.org>
-> > Signed-off-by: Huacai Chen <chenhc@lemote.com>
->
-> Pushed to drm-misc-next.
-It seems that this patch hasn't appear in upstream.
+> > Pushed to drm-misc-next.
+> It seems that this patch hasn't appear in upstream.
 
->
-> thanks,
->   Gerd
->
-Thanks,
-Huacai
+Was probably to late for the 5.7 merge window, should land in 5.8
+
+cheers,
+  Gerd
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
