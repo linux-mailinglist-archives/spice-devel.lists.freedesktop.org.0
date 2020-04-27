@@ -1,32 +1,46 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA5061B998E
-	for <lists+spice-devel@lfdr.de>; Mon, 27 Apr 2020 10:16:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 472D01BA0DD
+	for <lists+spice-devel@lfdr.de>; Mon, 27 Apr 2020 12:14:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 59ACE89A9A;
-	Mon, 27 Apr 2020 08:16:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A88696E203;
+	Mon, 27 Apr 2020 10:14:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from relay.sw.ru (relay.sw.ru [185.231.240.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 18B7989D89;
- Mon, 27 Apr 2020 07:55:43 +0000 (UTC)
-Received: from vvs-ws.sw.ru ([172.16.24.21])
- by relay.sw.ru with esmtp (Exim 4.92.3)
- (envelope-from <vvs@virtuozzo.com>)
- id 1jSybv-00024J-Os; Mon, 27 Apr 2020 10:55:27 +0300
-From: Vasily Averin <vvs@virtuozzo.com>
-To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>
-Message-ID: <d0d96600-b147-0c44-f551-97a66083518d@virtuozzo.com>
-Date: Mon, 27 Apr 2020 10:55:27 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+X-Greylist: delayed 334 seconds by postgrey-1.36 at gabe;
+ Mon, 27 Apr 2020 08:36:54 UTC
+Received: from forward100j.mail.yandex.net (forward100j.mail.yandex.net
+ [IPv6:2a02:6b8:0:801:2::100])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 971646E0E8
+ for <spice-devel@lists.freedesktop.org>; Mon, 27 Apr 2020 08:36:54 +0000 (UTC)
+Received: from mxback23g.mail.yandex.net (mxback23g.mail.yandex.net
+ [IPv6:2a02:6b8:0:1472:2741:0:8b7:323])
+ by forward100j.mail.yandex.net (Yandex) with ESMTP id CDB4950E16C7
+ for <spice-devel@lists.freedesktop.org>; Mon, 27 Apr 2020 11:31:17 +0300 (MSK)
+Received: from localhost (localhost [::1])
+ by mxback23g.mail.yandex.net (mxback/Yandex) with ESMTP id yGOXMY5rdd-VHGiaEoE;
+ Mon, 27 Apr 2020 11:31:17 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
+ t=1587976277; bh=F6//Q91qBwjPUb22v0nF9g5NX+IqQ4dsU60cZWtQ0KA=;
+ h=Message-Id:Date:Subject:To:From;
+ b=d5k0ut5l6C/Pwwn+FHC1IWeV5Pip2nIRhr8JemmhG5l0CFKPfIOlKsL5LhEq1zf7s
+ eAGMcX2evRK6SLtqhUMrwVKnRnV4FktdnRsOpni8PpjiUzizc5ipODPSVOcHkaKOsy
+ 9FabPpswCfID4nXHtlhjMrxC9tSyinFpEGGY/HS8=
+Authentication-Results: mxback23g.mail.yandex.net;
+ dkim=pass header.i=@yandex.ru
+Received: by sas1-68ac888a1313.qloud-c.yandex.net with HTTP;
+ Mon, 27 Apr 2020 11:31:17 +0300
+From: Oleg Krutov <ole-krutov@yandex.ru>
+To: spice-devel@lists.freedesktop.org
 MIME-Version: 1.0
-Content-Language: en-US
-X-Mailman-Approved-At: Mon, 27 Apr 2020 08:16:35 +0000
-Subject: [Spice-devel] [PATCH] drm/qxl: lost qxl_bo_kunmap_atomic_page in
- qxl_image_init_helper()
+X-Mailer: Yamail [ http://yandex.ru ] 5.0
+Date: Mon, 27 Apr 2020 11:31:17 +0300
+Message-Id: <5137131587976277@sas1-68ac888a1313.qloud-c.yandex.net>
+X-Mailman-Approved-At: Mon, 27 Apr 2020 10:14:02 +0000
+Subject: [Spice-devel] Spice-streaming-agent: is it possible to replace main
+ display channel with agent's video stream?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -38,35 +52,25 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, spice-devel@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- virtualization@lists.linux-foundation.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1342284781=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
----
- drivers/gpu/drm/qxl/qxl_image.c | 1 +
- 1 file changed, 1 insertion(+)
+--===============1342284781==
+Content-Transfer-Encoding: 8bit
+Content-Type: text/html; charset=utf-8
 
-diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
-index 43688ecdd8a0..7270da62fc29 100644
---- a/drivers/gpu/drm/qxl/qxl_image.c
-+++ b/drivers/gpu/drm/qxl/qxl_image.c
-@@ -212,6 +212,7 @@ qxl_image_init_helper(struct qxl_device *qdev,
- 		break;
- 	default:
- 		DRM_ERROR("unsupported image bit depth\n");
-+		qxl_bo_kunmap_atomic_page(qdev, image_bo, ptr);
- 		return -EINVAL; /* TODO: cleanup */
- 	}
- 	image->u.bitmap.flags = QXL_BITMAP_TOP_DOWN;
--- 
-2.17.1
+We are trying to make plugin which uses nvidia FBC + NVENC instead of gst-plugin. When using FBC, I must set "display" to "on", else FBC is reporting as not supported. I can't do the trick with qxl+nvidia with display off as with gst-plugin. Thus, two spice windows appear, one with main display channel with choppy video, and second -- with h264 compressed captured video. There is no mouse controls in second window, and first window consumes much cpu and network bandwidth when video or dynamic graphics is displayed. So it would be great to stop output primary display and redirect agent's video stream into it. Is it somehow possible? Thank you.<br /><br />-- <br />Отправлено из мобильного приложения Яндекс.Почты
+
+--===============1342284781==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1342284781==--
