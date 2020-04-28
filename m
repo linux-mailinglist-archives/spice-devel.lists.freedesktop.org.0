@@ -2,56 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DADCF1BBACA
-	for <lists+spice-devel@lfdr.de>; Tue, 28 Apr 2020 12:08:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 189F11BC06C
+	for <lists+spice-devel@lfdr.de>; Tue, 28 Apr 2020 16:00:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 587856E27A;
-	Tue, 28 Apr 2020 10:08:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F0CC06E4AD;
+	Tue, 28 Apr 2020 14:00:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CA3BB6E27A
- for <spice-devel@lists.freedesktop.org>; Tue, 28 Apr 2020 10:08:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588068517;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uWZzpPWI309eQ5heatyd+Lh2e6+CyRm6BeOiXCHILg4=;
- b=PMyVKfdwWdeorNiJdgjOsm19onOJRaEQZQRVv+gHON85RJMOhi6ow2zcBKvUuPhZqGwi9C
- qpK5NJuk+/ExkevFtoZk7W6IqmAZwIUz9LBLHGUfkCRelBDq9LaUFKtBmzWqkAO8TSkweq
- w6t7zPvoUgIpn6OAax6yg1HzVJwxfYI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-312-i9eRR77nP2uZiUf26ZEegg-1; Tue, 28 Apr 2020 06:08:34 -0400
-X-MC-Unique: i9eRR77nP2uZiUf26ZEegg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EE5921005510;
- Tue, 28 Apr 2020 10:08:32 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-113-193.ams2.redhat.com
- [10.36.113.193])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 885A55D9E2;
- Tue, 28 Apr 2020 10:08:32 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 62B4C9D98; Tue, 28 Apr 2020 12:08:31 +0200 (CEST)
-Date: Tue, 28 Apr 2020 12:08:31 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Vasily Averin <vvs@virtuozzo.com>
-Message-ID: <20200428100831.a4525pdp335ffkgi@sirius.home.kraxel.org>
-References: <d0d96600-b147-0c44-f551-97a66083518d@virtuozzo.com>
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C841A6E4AD
+ for <spice-devel@lists.freedesktop.org>; Tue, 28 Apr 2020 14:00:15 +0000 (UTC)
+Received: by mail-wm1-x341.google.com with SMTP id u127so2991336wmg.1
+ for <spice-devel@lists.freedesktop.org>; Tue, 28 Apr 2020 07:00:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=Ps7I9Le1y+DBQ90d3polh0iWEICybIDac38fYlXMUHU=;
+ b=RTXgbW5JR0qaHgN6xT1CbnFJkWffgxVeYV9PCtA/lHqfLfEeR37BG3yppLYmEhp9Oo
+ 9AV97owvuWPTrWYj9o9dDUq8lcxHcw6cctt4Lyj8cSIfxEcL6KbuQesljWupR6oSs9w/
+ R8I1b9G4gFRCAbkHMZGlZWQMIxZhYww8BqPxs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Ps7I9Le1y+DBQ90d3polh0iWEICybIDac38fYlXMUHU=;
+ b=gimjCAtoXMOLWwiihzCa3q8/rtfFEaPQw1x1O4Qxq5vnb0EhCVAG5ery2vvXN2BdVA
+ y5TjTgSEHBfeKRdSind8ba+lORFI25frm2punPAjKPU5lEew8M+Q8z6q0llprMEPMDkO
+ CDj9MNm86ByXqSpQUuFrWLavVw8HB5xYfInfjyprOsjhvuknXi2kxzPQiSRzhopII3mh
+ oTaS3+f5MQ1urOAjLuGfMlwdZmWhp2mlTWOswOjOxG3sxpcB3uvRJjLjgATaKBwr1T1z
+ +gwpu1y+CVJ0NPRaTqhPd71Le93qAAKqq9nidZq0t2N0K6hI8wGWpFI+apeXW8MDVE0V
+ FnQA==
+X-Gm-Message-State: AGi0PuY+pZ8czJ4tI8i9hP9HQkfu2YRWphJTFJi4R/poTXpwEWc3pA2x
+ +zhDAcfLCR9F04RnzY804D3HOw==
+X-Google-Smtp-Source: APiQypIEnobdueqT/cHpOrriPZZPy/M74lLsyOtUmRObtKxhAJT95KOZC9e05zorxNWpOlR6T77frg==
+X-Received: by 2002:a1c:808c:: with SMTP id b134mr4975620wmd.131.1588082414409; 
+ Tue, 28 Apr 2020 07:00:14 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id w12sm25030016wrk.56.2020.04.28.07.00.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Apr 2020 07:00:13 -0700 (PDT)
+Date: Tue, 28 Apr 2020 16:00:11 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Sam Ravnborg <sam@ravnborg.org>
+Message-ID: <20200428140011.GK3456981@phenom.ffwll.local>
+References: <20200415074034.175360-1-daniel.vetter@ffwll.ch>
+ <20200415074034.175360-27-daniel.vetter@ffwll.ch>
+ <20200424150911.GB20856@ravnborg.org>
 MIME-Version: 1.0
-In-Reply-To: <d0d96600-b147-0c44-f551-97a66083518d@virtuozzo.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: lost qxl_bo_kunmap_atomic_page
- in qxl_image_init_helper()
+In-Reply-To: <20200424150911.GB20856@ravnborg.org>
+X-Operating-System: Linux phenom 5.3.0-3-amd64 
+Subject: Re: [Spice-devel] [PATCH 26/59] drm/qxl: Use devm_drm_dev_alloc
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,36 +65,173 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>
+Cc: Dave Airlie <airlied@redhat.com>, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, spice-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Mon, Apr 27, 2020 at 10:55:27AM +0300, Vasily Averin wrote:
-> Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
-> ---
->  drivers/gpu/drm/qxl/qxl_image.c | 1 +
->  1 file changed, 1 insertion(+)
+On Fri, Apr 24, 2020 at 05:09:11PM +0200, Sam Ravnborg wrote:
+> Hi Daniel
 > 
-> diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
-> index 43688ecdd8a0..7270da62fc29 100644
-> --- a/drivers/gpu/drm/qxl/qxl_image.c
-> +++ b/drivers/gpu/drm/qxl/qxl_image.c
-> @@ -212,6 +212,7 @@ qxl_image_init_helper(struct qxl_device *qdev,
->  		break;
->  	default:
->  		DRM_ERROR("unsupported image bit depth\n");
-> +		qxl_bo_kunmap_atomic_page(qdev, image_bo, ptr);
->  		return -EINVAL; /* TODO: cleanup */
+> On Wed, Apr 15, 2020 at 09:40:01AM +0200, Daniel Vetter wrote:
+> > Also need to remove the drm_dev_put from the remove hook.
+> > 
+> > Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+> > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> > Cc: Dave Airlie <airlied@redhat.com>
+> > Cc: Gerd Hoffmann <kraxel@redhat.com>
+> > Cc: virtualization@lists.linux-foundation.org
+> > Cc: spice-devel@lists.freedesktop.org
+> > ---
+> >  drivers/gpu/drm/qxl/qxl_drv.c | 15 ++++++++-------
+> >  drivers/gpu/drm/qxl/qxl_drv.h |  3 +--
+> >  drivers/gpu/drm/qxl/qxl_kms.c | 12 +-----------
+> >  3 files changed, 10 insertions(+), 20 deletions(-)
+> > 
+> > diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+> > index 09102e2efabc..6b4ae4c5fb76 100644
+> > --- a/drivers/gpu/drm/qxl/qxl_drv.c
+> > +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+> > @@ -81,13 +81,16 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+> >  		return -EINVAL; /* TODO: ENODEV ? */
+> >  	}
+> >  
+> > -	qdev = kzalloc(sizeof(struct qxl_device), GFP_KERNEL);
+> > -	if (!qdev)
+> > +	qdev = devm_drm_dev_alloc(&pdev->dev, &qxl_driver,
+> > +				  struct qxl_device, ddev);
+> > +	if (IS_ERR(qdev)) {
+> > +		pr_err("Unable to init drm dev");
+> >  		return -ENOMEM;
+> > +	}
+> 
+> The other patches do not add any error message when devm_drm_dev_alloc()
+> fails and driver core will log that driver init failed.
+> 
+> So the pr_err() above should be dropped.
+> I know it comes from qxl_device_init() but that does not make it a good
+> idea.
 
-I guess you can ditch the TODO comment now, it's done ;)
+Hm I know we're inconsistent here, but some drivers have error logging on
+all branches, some dont. I'm just trying to go with the prevailing style.
 
-take care,
-  Gerd
+> With this fixed:
 
+Insisting on this or ok as-is?
+-Daniel
+
+> Acked-by: Sam Ravnborg <sam@ravnborg.org>
+> 
+> >  
+> >  	ret = pci_enable_device(pdev);
+> >  	if (ret)
+> > -		goto free_dev;
+> > +		return ret;
+> >  
+> >  	ret = drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, "qxl");
+> >  	if (ret)
+> > @@ -101,7 +104,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+> >  		}
+> >  	}
+> >  
+> > -	ret = qxl_device_init(qdev, &qxl_driver, pdev);
+> > +	ret = qxl_device_init(qdev, pdev);
+> >  	if (ret)
+> >  		goto put_vga;
+> >  
+> > @@ -128,8 +131,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+> >  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+> >  disable_pci:
+> >  	pci_disable_device(pdev);
+> > -free_dev:
+> > -	kfree(qdev);
+> > +
+> >  	return ret;
+> >  }
+> >  
+> > @@ -155,7 +157,6 @@ qxl_pci_remove(struct pci_dev *pdev)
+> >  	drm_atomic_helper_shutdown(dev);
+> >  	if (is_vga(pdev))
+> >  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
+> > -	drm_dev_put(dev);
+> >  }
+> >  
+> >  DEFINE_DRM_GEM_FOPS(qxl_fops);
+> > diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+> > index 435126facc9b..86ac191d9205 100644
+> > --- a/drivers/gpu/drm/qxl/qxl_drv.h
+> > +++ b/drivers/gpu/drm/qxl/qxl_drv.h
+> > @@ -276,8 +276,7 @@ struct qxl_device {
+> >  extern const struct drm_ioctl_desc qxl_ioctls[];
+> >  extern int qxl_max_ioctl;
+> >  
+> > -int qxl_device_init(struct qxl_device *qdev, struct drm_driver *drv,
+> > -		    struct pci_dev *pdev);
+> > +int qxl_device_init(struct qxl_device *qdev, struct pci_dev *pdev);
+> >  void qxl_device_fini(struct qxl_device *qdev);
+> >  
+> >  int qxl_modeset_init(struct qxl_device *qdev);
+> > diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+> > index 9eed1a375f24..91a34dd835d7 100644
+> > --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> > +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> > @@ -108,21 +108,13 @@ static void qxl_gc_work(struct work_struct *work)
+> >  }
+> >  
+> >  int qxl_device_init(struct qxl_device *qdev,
+> > -		    struct drm_driver *drv,
+> >  		    struct pci_dev *pdev)
+> >  {
+> >  	int r, sb;
+> >  
+> > -	r = drm_dev_init(&qdev->ddev, drv, &pdev->dev);
+> > -	if (r) {
+> > -		pr_err("Unable to init drm dev");
+> > -		goto error;
+> > -	}
+> > -
+> >  	qdev->ddev.pdev = pdev;
+> >  	pci_set_drvdata(pdev, &qdev->ddev);
+> >  	qdev->ddev.dev_private = qdev;
+> > -	drmm_add_final_kfree(&qdev->ddev, qdev);
+> >  
+> >  	mutex_init(&qdev->gem.mutex);
+> >  	mutex_init(&qdev->update_area_mutex);
+> > @@ -138,8 +130,7 @@ int qxl_device_init(struct qxl_device *qdev,
+> >  	qdev->vram_mapping = io_mapping_create_wc(qdev->vram_base, pci_resource_len(pdev, 0));
+> >  	if (!qdev->vram_mapping) {
+> >  		pr_err("Unable to create vram_mapping");
+> > -		r = -ENOMEM;
+> > -		goto error;
+> > +		return -ENOMEM;
+> >  	}
+> >  
+> >  	if (pci_resource_len(pdev, 4) > 0) {
+> > @@ -293,7 +284,6 @@ int qxl_device_init(struct qxl_device *qdev,
+> >  	io_mapping_free(qdev->surface_mapping);
+> >  vram_mapping_free:
+> >  	io_mapping_free(qdev->vram_mapping);
+> > -error:
+> >  	return r;
+> >  }
+> >  
+> > -- 
+> > 2.25.1
+> > 
+> > _______________________________________________
+> > dri-devel mailing list
+> > dri-devel@lists.freedesktop.org
+> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
