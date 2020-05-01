@@ -2,56 +2,33 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 795561BDAD8
-	for <lists+spice-devel@lfdr.de>; Wed, 29 Apr 2020 13:40:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C2CB1C154B
+	for <lists+spice-devel@lfdr.de>; Fri,  1 May 2020 15:55:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C0C366EA98;
-	Wed, 29 Apr 2020 11:40:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 059C16E2BD;
+	Fri,  1 May 2020 13:55:00 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D4F6E6EA99
- for <spice-devel@lists.freedesktop.org>; Wed, 29 Apr 2020 11:40:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1588160410;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5mqMgQo5IcYAB9Ei3ggszTVdUwAn8W39aKOIR9CnuqI=;
- b=KmgyHxvIV9zFIYgsGcqhi2/OuBZqTpPCqQ3yoRgIWKR8SSfOn4iIx+ypJTKYBQe2nsh76S
- ljvYzUbrTsaz5EPUIXJJUMOOnvSfI4hBYqUHt2bcpEN4PzTGm6DszxIZ9R+i6WA65tYg7Z
- TOpX4C1wfc4OTD4XYIxSRCvDar4+gwE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-125-kggWqf7OMTmb1_CVmQuQ8Q-1; Wed, 29 Apr 2020 07:40:07 -0400
-X-MC-Unique: kggWqf7OMTmb1_CVmQuQ8Q-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 48474835B40;
- Wed, 29 Apr 2020 11:40:05 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-113-193.ams2.redhat.com
- [10.36.113.193])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DA04660BF4;
- Wed, 29 Apr 2020 11:40:02 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id B87B31753B; Wed, 29 Apr 2020 13:40:01 +0200 (CEST)
-Date: Wed, 29 Apr 2020 13:40:01 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Vasily Averin <vvs@virtuozzo.com>
-Message-ID: <20200429114001.k4yhfssob7l6otnk@sirius.home.kraxel.org>
-References: <20200429082837.uedcapxmennuc5a2@sirius.home.kraxel.org>
- <fa17b338-66ae-f299-68fe-8d32419d9071@virtuozzo.com>
+X-Greylist: delayed 366 seconds by postgrey-1.36 at gabe;
+ Fri, 01 May 2020 12:57:19 UTC
+Received: from relay-1.mailobj.net (relay-1.mailobj.net [213.182.54.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 28C186E2A9
+ for <spice-devel@lists.freedesktop.org>; Fri,  1 May 2020 12:57:19 +0000 (UTC)
+Received: from www-1.localdomain (www-1.in.mailobj.net [192.168.90.193])
+ by relay-1.mailobj.net (Postfix) with SMTP id DCAB81425
+ for <spice-devel@lists.freedesktop.org>; Fri,  1 May 2020 14:51:09 +0200 (CEST)
+Received: by www-1.mailo.com with http webmail; Fri,  1 May 2020
+ 14:51:09 +0200 (CEST)
+X-EA-Auth: AXz0QTB7v1X/Hsl/tWKo6+lE8qb4l4YAVzcRgpZm4Psq0/l/Msisi4szDqlGEBZyiTEpVhbZdfIvM5Bg7v2KwA==
+From: bruts@netc.fr
+To: spice-devel@lists.freedesktop.org
+Date: Fri,  1 May 2020 14:51:09 +0200 (CEST)
+X-Priority: 3
 MIME-Version: 1.0
-In-Reply-To: <fa17b338-66ae-f299-68fe-8d32419d9071@virtuozzo.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: qxl_release use after free
+X-Mailer: COMS/EA19.11/r20200424
+Message-ID: <ea-mime-5eac1b3d-6ff7-79657c9c@www-1.mailo.com>
+X-Mailman-Approved-At: Fri, 01 May 2020 13:54:58 +0000
+Subject: [Spice-devel] spice-vdagent: how to enable additional mouse buttons?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,36 +40,56 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- Caicai <caizhaopeng@uniontech.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0408883485=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Wed, Apr 29, 2020 at 12:01:24PM +0300, Vasily Averin wrote:
-> qxl_release should not be accesses after qxl_push_*_ring_release() calls:
-> userspace driver can process submitted command quickly, move qxl_release
-> into release_ring, generate interrupt and trigger garbage collector.
-> 
-> It can lead to crashes in qxl driver or trigger memory corruption
-> in some kmalloc-192 slab object
-> 
-> Gerd Hoffmann proposes to swap the qxl_release_fence_buffer_objects() +
-> qxl_push_{cursor,command}_ring_release() calls to close that race window.
-> 
-> cc: stable@vger.kernel.org
-> Fixes: f64122c1f6ad ("drm: add new QXL driver. (v1.4)")
-> Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
+--===============0408883485==
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_001_5eac1b3d_6ff7_3276fb62"
 
-Pushed to drm-misc-fixes.
+------=_NextPart_001_5eac1b3d_6ff7_3276fb62
+Content-Type: text/plain;
+ charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-thanks,
-  Gerd
+
+I am using spice-vdagent on most of my qemu-kvm vm's, while this is very c=
+onvenient, mouse button 8 and 9 are not working (those are the side buttons=
+ of the mouse, one is often used for BACK function of the browser, which my=
+ thumb is actually addicted to).
+
+How could i make these buttons work with spice-vdagent?
+
+
+
+Thanks for the suggestions,
+
+
+
+Bruts
+
+
+
+------=_NextPart_001_5eac1b3d_6ff7_3276fb62
+Content-Type: text/html;
+ charset="UTF-8"
+
+<br><div>I am using spice-vdagent on most of my qemu-kvm vm's, while this is very convenient, mouse button 8 and 9 are not working (those are the side buttons of the mouse, one is often used for BACK function of the browser, which my thumb is actually addicted to).</div><div>How could i make these buttons work with spice-vdagent?</div><div><br></div><div>Thanks for the suggestions,</div><div><br></div><div>Bruts<br></div>
+
+------=_NextPart_001_5eac1b3d_6ff7_3276fb62--
+
+
+--===============0408883485==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0408883485==--
+
