@@ -1,61 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC2C41C29CC
-	for <lists+spice-devel@lfdr.de>; Sun,  3 May 2020 06:42:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 105361C23E1
+	for <lists+spice-devel@lfdr.de>; Sat,  2 May 2020 09:40:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4E4EC6E143;
-	Sun,  3 May 2020 04:42:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 10DA56E02F;
+	Sat,  2 May 2020 07:39:57 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BAAB26E02F
- for <spice-devel@lists.freedesktop.org>; Sat,  2 May 2020 07:38:53 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id s8so4169831wrt.9
- for <spice-devel@lists.freedesktop.org>; Sat, 02 May 2020 00:38:53 -0700 (PDT)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9AC4C6E02F
+ for <spice-devel@lists.freedesktop.org>; Sat,  2 May 2020 07:39:55 +0000 (UTC)
+Received: by mail-wr1-x42f.google.com with SMTP id h9so4154150wrt.0
+ for <spice-devel@lists.freedesktop.org>; Sat, 02 May 2020 00:39:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:subject:to:message-id:date:user-agent:mime-version
  :content-transfer-encoding:content-language;
  bh=LEEpIRSLlSnc+NVQxO64CMCtHlGxbJ8ZeYPcAAoGPuY=;
- b=vfBoDnJjJGTiHunQ9so70o5obw4+Dh3L9TnMB3Za8Ul8tFLGuUhbXDbmvDiDwsQ8by
- wZCv1ce20mygdAduOX8e6mivQX4jCXDVb4UPwv41ttEbdGx8aWVsYgUxEDI0Fqh+UuVr
- PE6H/O1Z06iatTgRkY9NUYb+zmskobmoEJJWKoXZ9goxxGSbAh4nKEsFA8f7yscj+tjc
- 0xRfgHbLqXE97mZVcotYa3rM/5yEAjEFT/UF6PzI/7/DrXbljd1Z4q+EJ6oTXnCN9XjY
- JnosmbZebTUVhp3WXzI3WeQvYNoBiTLocYFsqJT1Jqx3bPyyt/S6YonDfE7tjeCgqtmD
- +mfg==
+ b=IIAEzBNEiEbaOTmCHZ+oaqGyPVJiekMH57053zR0JWn+HSO9DZJPjgp6osQMfd0b0/
+ eJ+YstwY7j7mPRb44x3RgH6Jb083PIGrb0+ec+4i4jsDXRntQvPN7p9OvS3tf9bNnPGu
+ v7VMCzJmWehjKNofGQgyFujDuPW6Fdsb/3g8tr3q8PTH4Ax3bB8vBBuxmOcI0An1hohJ
+ PjRGsZP95+O519Iw2LQbK5N3CCA2lWGqcp8xmL63LbHvvxPozcXGGySiXtXi+8P+Zb59
+ KT13aR+/07mI31XsK+eVefwVFi/siaPSHnQ8+j6sYLyqiUG9LLWXALoZsPrJUftzVWmt
+ p7xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:subject:to:message-id:date:user-agent
  :mime-version:content-transfer-encoding:content-language;
  bh=LEEpIRSLlSnc+NVQxO64CMCtHlGxbJ8ZeYPcAAoGPuY=;
- b=ba0m7/59QBpeHgdQPajyFLatfZJbLUIzR2jXB0Vs+IkFo6OihLIeObEwwoNvat0f56
- DjD8z22l1NFwb2bMZOlNRwhbGCRVuRP8dPsNXa6HlCSGBCSAVky3ko9ek5uUKOmqb/1y
- yEXFqzCGE23yXU+EcM1clD3mLClaDkK7WEi4p8rzp1wkM+ouzTqvMquqMRcfSS3Fq3Pf
- Vvg17maR1YAG9ZqFZ6GXpSXhSvrjobyitqMQLT9vQOZltF0D847OnUP2LXXW+ujtL8LU
- FWtIySMCVOu8V4zPK/2QU+5B0KGxCuOQFrTCRU3IK6kRwg6j5Qb4BIxDoPZCzHmQPdg/
- EFUw==
-X-Gm-Message-State: AGi0PuZraAYDyxvYretSJKYE94YjI8rCAQeIlwRsOTCEthbj7tZuTKjh
- IfOqz67z3f69NlnfJ+tG1aaU1wWMGYs=
-X-Google-Smtp-Source: APiQypKlDDlCzm6noPU/4FcnNeJPw8ZysSgxrOk9dDPG1Jmq42IuUtkZOSRLFYa1cZOJ6cFuuLYCzw==
-X-Received: by 2002:adf:ee03:: with SMTP id y3mr7558277wrn.190.1588405131860; 
- Sat, 02 May 2020 00:38:51 -0700 (PDT)
+ b=LYMniHO5/YisOQvnhXnlyaijsSvha/mnlA4ahrILqCvpnp/cyWBX2BZNz9Re1JKee3
+ u2esRuXfOoUUFr/wvRBpMKcc1ggt4NNzVFxE7Jzdh/MJ1EBB7AVgZwDd21qKOwvNHHfU
+ KcWTF0O4D/Z1rdXVmhdjMTMraUo+n+MfGbJgbb5gJgzq6geYP4oxjptd7FUyEdb4HaBf
+ UR3vHezyY9Z8FDbNogngoD2dPSE25IvwrJBvSmEpiwg/XsYh5Hk5VSjZ7DzjMZQ/rcWM
+ bq3h2Nlbd2D65lzboya/akqzojwwjskmwcZkPv0DqzKoS1CwRr5e4DZF33MWXybveO7s
+ PVbA==
+X-Gm-Message-State: AGi0PubIk5xsUJ8ZC2jbxNlv054ejXNm6mYwkbh27zAAlg3vMZJIjjCT
+ nYtVA03BR8mJPOfm6bmcFNTKTuZ3ALA=
+X-Google-Smtp-Source: APiQypJ3OAT53x9VMI9OoXYNhu19xIEwA/2UBpAKvY1CqR7XRyH2HWS+cmvzf2cf4YtcerGOKBVvSg==
+X-Received: by 2002:a5d:474b:: with SMTP id o11mr7999689wrs.391.1588405193789; 
+ Sat, 02 May 2020 00:39:53 -0700 (PDT)
 Received: from [10.35.0.240] (p4FCDEF90.dip0.t-ipconnect.de. [79.205.239.144])
  by smtp.googlemail.com with ESMTPSA id
- a67sm2898070wmc.30.2020.05.02.00.38.50
+ k3sm8849783wru.90.2020.05.02.00.39.53
  for <spice-devel@lists.freedesktop.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 02 May 2020 00:38:51 -0700 (PDT)
+ Sat, 02 May 2020 00:39:53 -0700 (PDT)
 From: Felix Leimbach <felix.leimbach@gmail.com>
 To: spice-devel@lists.freedesktop.org
-Message-ID: <7cbfbb62-31ff-5eef-5427-7958921a1bfa@gmail.com>
-Date: Sat, 2 May 2020 09:38:50 +0200
+Message-ID: <2cf4ba98-a177-1166-1420-5310395ccd2b@gmail.com>
+Date: Sat, 2 May 2020 09:39:52 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
 Content-Language: en-US
-X-Mailman-Approved-At: Sun, 03 May 2020 04:42:41 +0000
 Subject: [Spice-devel] Stuttering video playback on LAN
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -165,7 +164,7 @@ bW90ZS12aWV3ZXIuZXhlOjE2MzI0KTogR1NwaWNlLUNSSVRJQ0FMICoqOiAwODowMDo1MC45MTI6
 IF91c2Jka19oaWRlcl91cGRhdGU6IGFzc2VydGlvbiAncHJpdi0+dXNiZGtfYXBpICE9IE5VTEwn
 IGZhaWxlZAoocmVtb3RlLXZpZXdlci5leGU6MTYzMjQpOiBHU3BpY2UtV0FSTklORyAqKjogMDg6
 MDA6NTAuOTE5OiBXYXJuaW5nIG5vIGF1dG9tb3VudC1pbmhpYml0aW5nIGltcGxlbWVudGF0aW9u
-IGF2YWlsYWJsZQoKVGhhbmtzLApGZWxpeAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
+IGF2YWlsYWJsZQoKVGhhbmtzLApGZWxpeAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBs
+aXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
+bi9saXN0aW5mby9zcGljZS1kZXZlbAo=
