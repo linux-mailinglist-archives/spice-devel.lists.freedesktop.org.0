@@ -1,61 +1,58 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 105361C23E1
-	for <lists+spice-devel@lfdr.de>; Sat,  2 May 2020 09:40:00 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 777C31C2D7A
+	for <lists+spice-devel@lfdr.de>; Sun,  3 May 2020 17:34:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 10DA56E02F;
-	Sat,  2 May 2020 07:39:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EFFBA890BB;
+	Sun,  3 May 2020 15:34:06 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9AC4C6E02F
- for <spice-devel@lists.freedesktop.org>; Sat,  2 May 2020 07:39:55 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id h9so4154150wrt.0
- for <spice-devel@lists.freedesktop.org>; Sat, 02 May 2020 00:39:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:subject:to:message-id:date:user-agent:mime-version
- :content-transfer-encoding:content-language;
- bh=LEEpIRSLlSnc+NVQxO64CMCtHlGxbJ8ZeYPcAAoGPuY=;
- b=IIAEzBNEiEbaOTmCHZ+oaqGyPVJiekMH57053zR0JWn+HSO9DZJPjgp6osQMfd0b0/
- eJ+YstwY7j7mPRb44x3RgH6Jb083PIGrb0+ec+4i4jsDXRntQvPN7p9OvS3tf9bNnPGu
- v7VMCzJmWehjKNofGQgyFujDuPW6Fdsb/3g8tr3q8PTH4Ax3bB8vBBuxmOcI0An1hohJ
- PjRGsZP95+O519Iw2LQbK5N3CCA2lWGqcp8xmL63LbHvvxPozcXGGySiXtXi+8P+Zb59
- KT13aR+/07mI31XsK+eVefwVFi/siaPSHnQ8+j6sYLyqiUG9LLWXALoZsPrJUftzVWmt
- p7xA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:subject:to:message-id:date:user-agent
- :mime-version:content-transfer-encoding:content-language;
- bh=LEEpIRSLlSnc+NVQxO64CMCtHlGxbJ8ZeYPcAAoGPuY=;
- b=LYMniHO5/YisOQvnhXnlyaijsSvha/mnlA4ahrILqCvpnp/cyWBX2BZNz9Re1JKee3
- u2esRuXfOoUUFr/wvRBpMKcc1ggt4NNzVFxE7Jzdh/MJ1EBB7AVgZwDd21qKOwvNHHfU
- KcWTF0O4D/Z1rdXVmhdjMTMraUo+n+MfGbJgbb5gJgzq6geYP4oxjptd7FUyEdb4HaBf
- UR3vHezyY9Z8FDbNogngoD2dPSE25IvwrJBvSmEpiwg/XsYh5Hk5VSjZ7DzjMZQ/rcWM
- bq3h2Nlbd2D65lzboya/akqzojwwjskmwcZkPv0DqzKoS1CwRr5e4DZF33MWXybveO7s
- PVbA==
-X-Gm-Message-State: AGi0PubIk5xsUJ8ZC2jbxNlv054ejXNm6mYwkbh27zAAlg3vMZJIjjCT
- nYtVA03BR8mJPOfm6bmcFNTKTuZ3ALA=
-X-Google-Smtp-Source: APiQypJ3OAT53x9VMI9OoXYNhu19xIEwA/2UBpAKvY1CqR7XRyH2HWS+cmvzf2cf4YtcerGOKBVvSg==
-X-Received: by 2002:a5d:474b:: with SMTP id o11mr7999689wrs.391.1588405193789; 
- Sat, 02 May 2020 00:39:53 -0700 (PDT)
-Received: from [10.35.0.240] (p4FCDEF90.dip0.t-ipconnect.de. [79.205.239.144])
- by smtp.googlemail.com with ESMTPSA id
- k3sm8849783wru.90.2020.05.02.00.39.53
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 02 May 2020 00:39:53 -0700 (PDT)
-From: Felix Leimbach <felix.leimbach@gmail.com>
-To: spice-devel@lists.freedesktop.org
-Message-ID: <2cf4ba98-a177-1166-1420-5310395ccd2b@gmail.com>
-Date: Sat, 2 May 2020 09:39:52 +0200
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CE23F890BB
+ for <spice-devel@lists.freedesktop.org>; Sun,  3 May 2020 15:34:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1588520044;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=re/NviGGQCbfAnidVtHDCCIhlbHsh6CCHzqD/QABe74=;
+ b=Mj2k1io+mpvS22yM8j28z01+cWUCbBn8sUNCkdKGtNCp2ZdglvoKIRCriDwMDtKGvQjVl3
+ OR7pE+Kla8nLapGb6WP572lhZttdRF97mw/UCkZ8LWDIGIgSyBQcERO/pJ1090Jl95Mpbg
+ rUQFQm2cfda8tJQX6CJgZjjPOJKoW+c=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-59-Gk7eFVP-NgOWc-CWpGVuVA-1; Sun, 03 May 2020 11:34:02 -0400
+X-MC-Unique: Gk7eFVP-NgOWc-CWpGVuVA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 396BA107ACCA;
+ Sun,  3 May 2020 15:34:01 +0000 (UTC)
+Received: from lub.tlv (unknown [10.35.206.184])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id D9A035D9D5;
+ Sun,  3 May 2020 15:33:59 +0000 (UTC)
+To: bruts@netc.fr, spice-devel@lists.freedesktop.org
+References: <ea-mime-5eac1b3d-6ff7-79657c9c@www-1.mailo.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <2a20aee3-9416-c0aa-1f89-3d450fd0e424@redhat.com>
+Date: Sun, 3 May 2020 18:33:55 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
+In-Reply-To: <ea-mime-5eac1b3d-6ff7-79657c9c@www-1.mailo.com>
 Content-Language: en-US
-Subject: [Spice-devel] Stuttering video playback on LAN
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] spice-vdagent: how to enable additional mouse
+ buttons?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,104 +64,33 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Reply-To: uril@redhat.com
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGksCgpJIGV4cGVyaWVuY2Ugc3R1dHRlcmluZyB2aWRlbyBwbGF5YmFjayBpbiByZW1vdGUtdmll
-d2VyIGRlc3BpdGUgY29ubmVjdGluZyB2aWEgR0JpdC9zIExBTiwgdXNpbmcgZmFzdCBoYXJkd2Fy
-ZSBhbmQgdGhlIFFYTCBkcml2ZXIuClVwIHVudGlsIGEgdmlkZW8gc2l6ZSBvZiByb3VnaGx5IDgw
-MHg2MDAgdGhlIHBsYXliYWNrIGlzIHNtb290aC4gQnV0IG9uIGFueXRoaW5nIGJpZ2dlciwgbGlr
-ZSBteSBuYXRpdmUgcmVzb2x1dGlvbiBvZiAyNTQweDE0NDAsIHZpZGVvIHBsYXliYWNrIGlzIHN0
-dXR0ZXJpbmcgYW5ub3lpbmdseS4KQWZ0ZXIgbG90cyBvZiB1bnN1Y2Nlc3NmdWwgdGlua2VyaW5n
-IHdpdGggc3BpY2UgcGFyYW1ldGVycyBhbmQgcXhsIHBhcmFtZXRlcnMgSSdtIGFza2luZyB5b3Ug
-Z3V5cyBmb3IgaGVscC4KCkNsaWVudDoKV2luZG93cyAxMCAxOTA5ClJlbW90ZSBWaWV3ZXIgOC4w
-LTI1NgpRdWFkY29yZSBpNy03ODIwSFEgMi45R0h6CjE2R0IgRERSNCBSQU0KCkhvc3Qgb2YgdGhl
-IFZNOgpHZW50b28gTGludXgKS2VybmVsIDQuMTQuMTcyClFlbXUgNC4yLjAKUXVhZGNvcmUgaTct
-NzcwMEsgNC4yR0h6CjY0R0IgRERSNCBSQU0KU2VydmVyIGlzIGhlYWRsZXNzLCBoYXMgbm8gZGVk
-aWNhdGVkIGdyYXBoaWNzIGNhcmQsIG9ubHkgdGhlIEludGVsIEhEIDYzMCBmcm9tIHRoZSBDUFUK
-Ckd1ZXN0IFZNOgpEZWJpYW4gQnVsbHNleWUKSSBkb24ndCB0aGluayBpdCdzIGd1ZXN0IHJlbGF0
-ZWQsIGJlY2F1c2UgdGhlIHNhbWUgcHJvYmxlbSBoYXBwZW5zIHdpdGggYSBXaW5kb3dzIDEwIEd1
-ZXN0IHdpdGggbGF0ZXN0IFFYTCBkcml2ZXJzIGFuZCBzcGljZS10b29scyBpbnN0YWxsZWQuCgpO
-ZXR3b3JrIHBlcmZvcm1hbmNlIGNsaWVudDw9Pmhvc3Q6ClBpbmcgMC4ybXMKVGhyb3VnaHB1dCBi
-ZW5jaG1hcmtlZCBhdCA5NjBNQml0L3MKClFlbXUgaW52b2NhdGlvbiBvbiBob3N0OgojcWVtdS1z
-eXN0ZW0teDg2XzY0Ci1zcGljZSBwb3J0PTU5MDYsYWRkcj0xMC40Mi4yLjI1MCxwYXNzd29yZD1j
-aGFuZ2VkCi12Z2Egbm9uZSAtZGV2aWNlIHF4bC12Z2EscmFtX3NpemVfbWI9MTI4LHZnYW1lbV9t
-Yj0zMix2cmFtX3NpemVfbWI9MTI4LHZyYW02NF9zaXplX21iPTI1NixtYXhfb3V0cHV0cz0xCi1N
-IHEzNSAtc21wIDIgLWNwdSBob3N0IC0tZW5hYmxlLWt2bQotZHJpdmUgZmlsZT12bWZsbGluLnJh
-dyxpZj12aXJ0aW8sZm9ybWF0PXJhdyxpbmRleD0wLGNhY2hlPW5vbmUsYWlvPW5hdGl2ZSAtbSAy
-NDU3NgotbmV0IG5pYyxtb2RlbD12aXJ0aW8sbWFjYWRkcj01Mjo1NDowMDo3NDowMTowNiAtbmV0
-IHRhcCxpZm5hbWU9dm1mbGxpbixzY3JpcHQ9bm8sZG93bnNjcmlwdD1ubyAtayBkZQotbW9uaXRv
-ciB0Y3A6MTI3LjAuMC4xOjU5NTYsc2VydmVyLG5vd2FpdAotZGV2aWNlIHZpcnRpby1zZXJpYWws
-aWQ9dmlydGlvLXNlcmlhbDEKLWNoYXJkZXYgc3BpY2V2bWMsaWQ9dmRhZ2VudCxkZWJ1Zz0wLG5h
-bWU9dmRhZ2VudAotZGV2aWNlIHZpcnRzZXJpYWxwb3J0LGJ1cz12aXJ0aW8tc2VyaWFsMS4wLGNo
-YXJkZXY9dmRhZ2VudCxuYW1lPWNvbS5yZWRoYXQuc3BpY2UuMAotcnRjIGJhc2U9dXRjLGNsb2Nr
-PWhvc3QgLWRhZW1vbml6ZSAtLWRldmljZSB2aXJ0aW8tYmFsbG9vbiAtYm9vdCBjIC1ub2RlZmF1
-bHRzIC1zb3VuZGh3IGhkYQoKU3BpY2UgcGFyYW1ldGVycyBJIHRyaWVkOgotc3BpY2Ugc3RyZWFt
-aW5nLXZpZGVvPWFsbCxpbWFnZS1jb21wcmVzc2lvbj1vZmYsanBlZy13YW4tY29tcHJlc3Npb249
-bmV2ZXIsemxpYi1nbHotd2FuLWNvbXByZXNzaW9uPW5ldmVyLHBsYXliYWNrLWNvbXByZXNzaW9u
-PW9mZgotc3BpY2Ugc3RyZWFtaW5nLXZpZGVvPW9mZixpbWFnZS1jb21wcmVzc2lvbj1vZmYsanBl
-Zy13YW4tY29tcHJlc3Npb249bmV2ZXIsemxpYi1nbHotd2FuLWNvbXByZXNzaW9uPW5ldmVyLHBs
-YXliYWNrLWNvbXByZXNzaW9uPW9mZgoKR3Vlc3Qga2VybmVsOgpMaW51eCBndWVzdCA1LjQuMC00
-LWFtZDY0ICMxIFNNUCBEZWJpYW4gNS40LjE5LTEgKDIwMjAtMDItMTMpIHg4Nl82NCBHTlUvTGlu
-dXgKZ3Vlc3Qga2VybmVsOiBxeGwgMDAwMDowMDowMy4wOiByZW1vdmVfY29uZmxpY3RpbmdfcGNp
-X2ZyYW1lYnVmZmVyczogYmFyIDA6IDB4ZTgwMDAwMDAgLT4gMHhlZmZmZmZmZgpndWVzdCBrZXJu
-ZWw6IHF4bCAwMDAwOjAwOjAzLjA6IHJlbW92ZV9jb25mbGljdGluZ19wY2lfZnJhbWVidWZmZXJz
-OiBiYXIgMTogMHhmMDAwMDAwMCAtPiAweGY3ZmZmZmZmCmd1ZXN0IGtlcm5lbDogcXhsIDAwMDA6
-MDA6MDMuMDogcmVtb3ZlX2NvbmZsaWN0aW5nX3BjaV9mcmFtZWJ1ZmZlcnM6IGJhciAyOiAweGY4
-MDU0MDAwIC0+IDB4ZjgwNTVmZmYKZ3Vlc3Qga2VybmVsOiBxeGwgMDAwMDowMDowMy4wOiByZW1v
-dmVfY29uZmxpY3RpbmdfcGNpX2ZyYW1lYnVmZmVyczogYmFyIDQ6IDB4ZDAwMDAwMDAgLT4gMHhk
-ZmZmZmZmZgpndWVzdCBrZXJuZWw6IHF4bCAwMDAwOjAwOjAzLjA6IHZnYWFyYjogZGVhY3RpdmF0
-ZSB2Z2EgY29uc29sZQpndWVzdCBrZXJuZWw6IFtkcm1dIERldmljZSBWZXJzaW9uIDAuMApndWVz
-dCBrZXJuZWw6IFtkcm1dIENvbXByZXNzaW9uIGxldmVsIDAgbG9nIGxldmVsIDAKZ3Vlc3Qga2Vy
-bmVsOiBbZHJtXSAyNDU3NCBpbyBwYWdlcyBhdCBvZmZzZXQgMHgyMDAwMDAwCmd1ZXN0IGtlcm5l
-bDogW2RybV0gMzM1NTQ0MzIgYnl0ZSBkcmF3IGFyZWEgYXQgb2Zmc2V0IDB4MApndWVzdCBrZXJu
-ZWw6IFtkcm1dIFJBTSBoZWFkZXIgb2Zmc2V0OiAweDdmZmUwMDAKZ3Vlc3Qga2VybmVsOiBbZHJt
-XSBxeGw6IDMyTSBvZiBWUkFNIG1lbW9yeSBzaXplCmd1ZXN0IGtlcm5lbDogW2RybV0gcXhsOiAx
-MjdNIG9mIElPIHBhZ2VzIG1lbW9yeSByZWFkeSAoVlJBTSBkb21haW4pCmd1ZXN0IGtlcm5lbDog
-W2RybV0gcXhsOiAyNTZNIG9mIFN1cmZhY2UgbWVtb3J5IHNpemUKZ3Vlc3Qga2VybmVsOiBbZHJt
-XSBzbG90IDAgKG1haW4pOiBiYXNlIDB4ZTgwMDAwMDAsIHNpemUgMHgwN2ZmZTAwMCwgZ3B1X29m
-ZnNldCAweDIwMDAwMDAwMDAwCmd1ZXN0IGtlcm5lbDogW2RybV0gc2xvdCAxIChzdXJmYWNlcyk6
-IGJhc2UgMHhkMDAwMDAwMCwgc2l6ZSAweDEwMDAwMDAwLCBncHVfb2Zmc2V0IDB4MzAwMDAwMDAw
-MDAKZ3Vlc3Qga2VybmVsOiBbZHJtXSBJbml0aWFsaXplZCBxeGwgMC4xLjAgMjAxMjAxMTcgZm9y
-IDAwMDA6MDA6MDMuMCBvbiBtaW5vciAwCmd1ZXN0IGtlcm5lbDogZmJjb246IHF4bGRybWZiIChm
-YjApIGlzIHByaW1hcnkgZGV2aWNlCmd1ZXN0IGtlcm5lbDogcXhsIDAwMDA6MDA6MDMuMDogZmIw
-OiBxeGxkcm1mYiBmcmFtZSBidWZmZXIgZGV2aWNlCgpHdWVzdCBYLU9yZzoKWC5PcmcgWCBTZXJ2
-ZXIgMS4yMC44ClvCoMKgIDIwNS41MTZdIChJSSkgTG9hZE1vZHVsZTogInF4bCIKW8KgwqAgMjA1
-LjUxNl0gKElJKSBMb2FkaW5nIC91c3IvbGliL3hvcmcvbW9kdWxlcy9kcml2ZXJzL3F4bF9kcnYu
-c28KW8KgwqAgMjA1LjUxOF0gKElJKSBNb2R1bGUgcXhsOiB2ZW5kb3I9IlguT3JnIEZvdW5kYXRp
-b24iClvCoMKgIDIwNS41MjBdIChJSSkgcXhsOiBEcml2ZXIgZm9yIFFYTCB2aXJ0dWFsIGdyYXBo
-aWNzOiBRWEwgMQpbwqDCoCAyMDUuNTI1XSAoSUkpIHF4bCgwKTogQ3JlYXRpbmcgZGVmYXVsdCBE
-aXNwbGF5IHN1YnNlY3Rpb24gaW4gU2NyZWVuIHNlY3Rpb24KW8KgwqAgMjA1LjUyNV0gKD09KSBx
-eGwoMCk6IERlcHRoIDI0LCAoLS0pIGZyYW1lYnVmZmVyIGJwcCAzMgpbwqDCoCAyMDUuNTI1XSAo
-PT0pIHF4bCgwKTogUkdCIHdlaWdodCA4ODgKW8KgwqAgMjA1LjUyNV0gKD09KSBxeGwoMCk6IERl
-ZmF1bHQgdmlzdWFsIGlzIFRydWVDb2xvcgpbwqDCoCAyMDUuNTI1XSAoPT0pIHF4bCgwKTogVXNp
-bmcgZ2FtbWEgY29ycmVjdGlvbiAoMS4wLCAxLjAsIDEuMCkKW8KgwqAgMjA1LjUyNV0gKElJKSBx
-eGwoMCk6IERlZmVycmVkIEZyYW1lczogRGlzYWJsZWQKW8KgwqAgMjA1LjUyNV0gKElJKSBxeGwo
-MCk6IE9mZnNjcmVlbiBTdXJmYWNlczogRW5hYmxlZApbwqDCoCAyMDUuNTI1XSAoSUkpIHF4bCgw
-KTogSW1hZ2UgQ2FjaGU6IEVuYWJsZWQKW8KgwqAgMjA1LjUyNV0gKElJKSBxeGwoMCk6IEZhbGxi
-YWNrIENhY2hlOiBFbmFibGVkClvCoMKgIDIwNS41MjVdICg9PSkgcXhsKDApOiBEUEkgc2V0IHRv
-ICg5NiwgOTYpCiMgZ2x4Z2VhcnMKOTcwOSBmcmFtZXMgaW4gNS4wIHNlY29uZHMgPSAxOTQxLjY3
-NSBGUFMKMTE3MTkgZnJhbWVzIGluIDUuMCBzZWNvbmRzID0gMjM0My43ODAgRlBTCgpSZW1vdGUt
-Vmlld2VyIGNvbnNvbGUgb3V0cHV0IG9uIFdpbmRvd3MgY2xpZW50OgoiQzpcUHJvZ3JhbSBGaWxl
-c1xWaXJ0Vmlld2VyIHY4LjAtMjU2XGJpblxyZW1vdGUtdmlld2VyLmV4ZSIgLS1ob3RrZXlzPXRv
-Z2dsZS1mdWxsc2NyZWVuPXNoaWZ0K2YxMSBzcGljZTovLzEwLjQyLjIuMjUwOjU5MDYKKHJlbW90
-ZS12aWV3ZXIuZXhlOjE2MzI0KTogR1NwaWNlLUNSSVRJQ0FMICoqOiAwODowMDozMi40Njc6IF91
-c2Jka19oaWRlcl91cGRhdGU6IGFzc2VydGlvbiAncHJpdi0+dXNiZGtfYXBpICE9IE5VTEwnIGZh
-aWxlZAoocmVtb3RlLXZpZXdlci5leGU6MTYzMjQpOiBHU3BpY2UtQ1JJVElDQUwgKio6IDA4OjAw
-OjMyLjUyNjogZmlsZSAuLi8uLi9zcmMvdXNiLWRldmljZS1tYW5hZ2VyLmM6IGxpbmUgMTgxNSAo
-cHJvYmVfaXNvY2hyb25vdXNfZW5kcG9pbnQpOiBzaG91bGQgbm90IGJlIHJlYWNoZWQKKHJlbW90
-ZS12aWV3ZXIuZXhlOjE2MzI0KTogR3RrLVdBUk5JTkcgKio6IDA4OjAwOjMyLjk1MDogVGhlbWUg
-ZGlyZWN0b3J5IDI1NngyNTZAMi9hbmltYXRpb25zIG9mIHRoZW1lIGhpY29sb3IgaGFzIG5vIHNp
-emUgZmllbGQKKHJlbW90ZS12aWV3ZXIuZXhlOjE2MzI0KTogU3BpY2UtV0FSTklORyAqKjogMDg6
-MDA6NTAuODA0OiAuLi8uLi9zcmMvY2hhbm5lbC1kaXNwbGF5LWdzdC5jOjcxNTpnc3R2aWRlb19o
-YXNfY29kZWM6IE5vIHZpZGVvIGRlY29kZXJzIGZyb20gR1N0cmVhbWVyIHdlcmUgZm91bmQKKHJl
-bW90ZS12aWV3ZXIuZXhlOjE2MzI0KTogR1NwaWNlLUNSSVRJQ0FMICoqOiAwODowMDo1MC45MTI6
-IF91c2Jka19oaWRlcl91cGRhdGU6IGFzc2VydGlvbiAncHJpdi0+dXNiZGtfYXBpICE9IE5VTEwn
-IGZhaWxlZAoocmVtb3RlLXZpZXdlci5leGU6MTYzMjQpOiBHU3BpY2UtV0FSTklORyAqKjogMDg6
-MDA6NTAuOTE5OiBXYXJuaW5nIG5vIGF1dG9tb3VudC1pbmhpYml0aW5nIGltcGxlbWVudGF0aW9u
-IGF2YWlsYWJsZQoKVGhhbmtzLApGZWxpeAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBs
-aXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
-bi9saXN0aW5mby9zcGljZS1kZXZlbAo=
+On 5/1/20 3:51 PM, bruts@netc.fr wrote:
+> 
+> I am using spice-vdagent on most of my qemu-kvm vm's, while this is very 
+> convenient, mouse button 8 and 9 are not working (those are the side 
+> buttons of the mouse, one is often used for BACK function of the 
+> browser, which my thumb is actually addicted to).
+> How could i make these buttons work with spice-vdagent?
+
+Hi,
+
+Currently 5 mouse buttons are supported. I think some code is needed to 
+be added in order to support more buttons.
+
+Uri.
+
+> 
+> Thanks for the suggestions,
+> 
+> Bruts
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
