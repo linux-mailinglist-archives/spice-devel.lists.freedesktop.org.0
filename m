@@ -1,43 +1,43 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AD801C93A1
-	for <lists+spice-devel@lfdr.de>; Thu,  7 May 2020 17:06:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76FBB1C93A2
+	for <lists+spice-devel@lfdr.de>; Thu,  7 May 2020 17:06:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 166E76E9F1;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7BE466E9F3;
 	Thu,  7 May 2020 15:06:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DEA026E9B9;
- Thu,  7 May 2020 14:30:14 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 295D36E9BB;
+ Thu,  7 May 2020 14:30:28 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E563E20B1F;
- Thu,  7 May 2020 14:30:13 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 30BBD2083B;
+ Thu,  7 May 2020 14:30:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588861814;
+ s=default; t=1588861828;
  bh=hrN4jo85YX8bUHMiL0SJw51uMtj6bE77uz+J0atkXvc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=KSOfqGhRHhJKfKxPcihtvELrR/dcchiOCd5EYoeozLFnxVsAVz+liOydgvnkgLOhD
- 0G0MDKtDR9AVegGNIcQEXTwmn/SREX3DUFRcEfIdHRhaJ5U1jcc+9PjQxiE/O9+i7x
- Cut09Jwi/BtiF+g6mpaGjI9LFWUa21V/26SHcOJI=
+ b=H5shdAG02r5I9NsJpnMagvC1iO6hMX9o5elM+G1pxKJQPZt/8bWKt4S8O12bPB10Z
+ HUNjsoMwopFbhrOBZiqPTq68LaMXdFI8hFMa5VpW9cPfN0l2Sq/lUKnEHeBqamjRfM
+ tIgigNAkORa6a//NQYognA7eJFUpB79YKbJlrzx0=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu,  7 May 2020 10:30:01 -0400
-Message-Id: <20200507143003.27047-9-sashal@kernel.org>
+Date: Thu,  7 May 2020 10:30:17 -0400
+Message-Id: <20200507143018.27195-8-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200507143003.27047-1-sashal@kernel.org>
-References: <20200507143003.27047-1-sashal@kernel.org>
+In-Reply-To: <20200507143018.27195-1-sashal@kernel.org>
+References: <20200507143018.27195-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Mailman-Approved-At: Thu, 07 May 2020 15:06:05 +0000
-Subject: [Spice-devel] [PATCH AUTOSEL 4.9 09/11] drm/qxl: lost
+Subject: [Spice-devel] [PATCH AUTOSEL 4.4 8/9] drm/qxl: lost
  qxl_bo_kunmap_atomic_page in qxl_image_init_helper()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
