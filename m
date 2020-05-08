@@ -1,47 +1,46 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F5301CA291
-	for <lists+spice-devel@lfdr.de>; Fri,  8 May 2020 07:22:27 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E5B51CA6AC
+	for <lists+spice-devel@lfdr.de>; Fri,  8 May 2020 10:59:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B6A7E6E143;
-	Fri,  8 May 2020 05:22:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 74EB56E134;
+	Fri,  8 May 2020 08:59:31 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from forward104j.mail.yandex.net (forward104j.mail.yandex.net
  [IPv6:2a02:6b8:0:801:2::107])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5AEAB6E123
- for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 01:22:21 +0000 (UTC)
-Received: from forward102q.mail.yandex.net (forward102q.mail.yandex.net
- [IPv6:2a02:6b8:c0e:1ba:0:640:516:4e7d])
- by forward104j.mail.yandex.net (Yandex) with ESMTP id BCBCC4A149B
- for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 04:22:18 +0300 (MSK)
-Received: from mxback10q.mail.yandex.net (mxback10q.mail.yandex.net
- [IPv6:2a02:6b8:c0e:1b4:0:640:b6ef:cb3])
- by forward102q.mail.yandex.net (Yandex) with ESMTP id BA73D7F20002
- for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 04:22:18 +0300 (MSK)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E893D6EAB1
+ for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 08:51:10 +0000 (UTC)
+Received: from forward100q.mail.yandex.net (forward100q.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:4b:0:640:4012:bb97])
+ by forward104j.mail.yandex.net (Yandex) with ESMTP id 5DD624A2268
+ for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 11:51:02 +0300 (MSK)
+Received: from mxback2q.mail.yandex.net (mxback2q.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:40:0:640:9c8c:4946])
+ by forward100q.mail.yandex.net (Yandex) with ESMTP id 5B4A9708000B
+ for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 11:51:02 +0300 (MSK)
 Received: from localhost (localhost [::1])
- by mxback10q.mail.yandex.net (mxback/Yandex) with ESMTP id Ks5ACib6Or-MHDGise9;
- Fri, 08 May 2020 04:22:18 +0300
+ by mxback2q.mail.yandex.net (mxback/Yandex) with ESMTP id 5tgpMA5Ftd-p1MGZ1X2; 
+ Fri, 08 May 2020 11:51:02 +0300
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
- t=1588900938; bh=Rn6II7+hCV8is9XtBQKB04xmDZTFI6Qbrm1NLCe2FdI=;
+ t=1588927862; bh=IsEu2Gj5EYc4j9MuKTGCmnQoEq/TVNKHmFC8mg89A2I=;
  h=Message-Id:Date:Subject:To:From;
- b=TCMmZ3Kmf1Yusi24zQPyNgBp0EcHD+WNeqTuC2pohED03SSKE2gu+uSD4H3lgoI9v
- AGx7EXFIdzVwdCPuvyHcUeprtw1JOU9KdIa1QFDriep9lVkwyGUt4oH9/k6Gbd2eX/
- oTyLoG3tK6+k/gWIRMpwI5EYTa9LhCy6BTe7uYTM=
-Authentication-Results: mxback10q.mail.yandex.net;
- dkim=pass header.i=@yandex.ru
-Received: by vla5-344e18ef0bef.qloud-c.yandex.net with HTTP;
- Fri, 08 May 2020 04:22:17 +0300
+ b=nF3qbFJfGbAMF8y0wPw3UhA308QShwhjw3Jl2qcl44lWTvqqEMmJJTAHakJ0GSUcl
+ XitTBUJxOuoHm+oYq4BPKTIU401UjVh2xykbtkxNhe9dSbMcwmAquyypX45c3XkmYU
+ TlopzVbWnTUz1Cy6YEUqXY6VLQlaFHoTCTazx1WY=
+Authentication-Results: mxback2q.mail.yandex.net; dkim=pass header.i=@yandex.ru
+Received: by vla1-d97dbca235a9.qloud-c.yandex.net with HTTP;
+ Fri, 08 May 2020 11:51:01 +0300
 From: ole-krutov@yandex.ru
 To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 MIME-Version: 1.0
 X-Mailer: Yamail [ http://yandex.ru ] 5.0
-Date: Fri, 08 May 2020 04:22:17 +0300
-Message-Id: <1370141588898543@mail.yandex.ru>
-X-Mailman-Approved-At: Fri, 08 May 2020 05:22:24 +0000
-Subject: [Spice-devel] No mouse when spice-streaming-agent is working
+Date: Fri, 08 May 2020 11:51:01 +0300
+Message-Id: <1440611588927772@mail.yandex.ru>
+X-Mailman-Approved-At: Fri, 08 May 2020 08:59:30 +0000
+Subject: [Spice-devel] Failed to build spice-vdagent 0.20 under ubuntu 18.04
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,17 +52,104 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1698617750=="
+Content-Type: multipart/mixed; boundary="===============2105739525=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1698617750==
-Content-Transfer-Encoding: 8bit
+--===============2105739525==
+Content-Transfer-Encoding: base64
 Content-Type: text/html; charset=utf-8
 
-<div>Hi there.</div><div>KVM guest has two video adapters: qxl and Nvidia vGPU with display="off". Initially one window with startup messages is opened. When Xorg is run, spice-streaming agent starts and second window with hardware encoded h264 video appears. Keyboard works ok in this window but mice doesn't. When mouse is moving over this window, many messages  "ubuntu spice-vdagentd: mouse event for unknown monitor (1 &gt;= 1)" appear in syslog. When x11vnc is run in this X session, all is working in VNC viewer window. Could anybody help localize a problem? Thank you.</div>
+PGRpdj48ZGl2Pi4vYXV0b2dlbi5zaDwvZGl2PjxkaXY+Y2hlY2tpbmcgZm9yIGEgQlNELWNvbXBh
+dGlibGUgaW5zdGFsbC4uLiAvdXNyL2Jpbi9pbnN0YWxsIC1jPC9kaXY+PGRpdj5jaGVja2luZyB3
+aGV0aGVyIGJ1aWxkIGVudmlyb25tZW50IGlzIHNhbmUuLi4geWVzPC9kaXY+PGRpdj5jaGVja2lu
+ZyBmb3IgYSB0aHJlYWQtc2FmZSBta2RpciAtcC4uLiAvYmluL21rZGlyIC1wPC9kaXY+PGRpdj5j
+aGVja2luZyBmb3IgZ2F3ay4uLiBnYXdrPC9kaXY+PGRpdj5jaGVja2luZyB3aGV0aGVyIG1ha2Ug
+c2V0cyAkKE1BS0UpLi4uIHllczwvZGl2PjxkaXY+Y2hlY2tpbmcgd2hldGhlciBtYWtlIHN1cHBv
+cnRzIG5lc3RlZCB2YXJpYWJsZXMuLi4geWVzPC9kaXY+PGRpdj5jaGVja2luZyB3aGV0aGVyIG1h
+a2Ugc3VwcG9ydHMgbmVzdGVkIHZhcmlhYmxlcy4uLiAoY2FjaGVkKSB5ZXM8L2Rpdj48ZGl2PmNo
+ZWNraW5nIGZvciBnY2MuLi4gZ2NjPC9kaXY+PGRpdj5jaGVja2luZyB3aGV0aGVyIHRoZSBDIGNv
+bXBpbGVyIHdvcmtzLi4uIHllczwvZGl2PjxkaXY+Y2hlY2tpbmcgZm9yIEMgY29tcGlsZXIgZGVm
+YXVsdCBvdXRwdXQgZmlsZSBuYW1lLi4uIGEub3V0PC9kaXY+PGRpdj5jaGVja2luZyBmb3Igc3Vm
+Zml4IG9mIGV4ZWN1dGFibGVzLi4uPC9kaXY+PGRpdj5jaGVja2luZyB3aGV0aGVyIHdlIGFyZSBj
+cm9zcyBjb21waWxpbmcuLi4gbm88L2Rpdj48ZGl2PmNoZWNraW5nIGZvciBzdWZmaXggb2Ygb2Jq
+ZWN0IGZpbGVzLi4uIG88L2Rpdj48ZGl2PmNoZWNraW5nIHdoZXRoZXIgd2UgYXJlIHVzaW5nIHRo
+ZSBHTlUgQyBjb21waWxlci4uLiB5ZXM8L2Rpdj48ZGl2PmNoZWNraW5nIHdoZXRoZXIgZ2NjIGFj
+Y2VwdHMgLWcuLi4geWVzPC9kaXY+PGRpdj5jaGVja2luZyBmb3IgZ2NjIG9wdGlvbiB0byBhY2Nl
+cHQgSVNPIEM4OS4uLiBub25lIG5lZWRlZDwvZGl2PjxkaXY+Y2hlY2tpbmcgd2hldGhlciBnY2Mg
+dW5kZXJzdGFuZHMgLWMgYW5kIC1vIHRvZ2V0aGVyLi4uIHllczwvZGl2PjxkaXY+Y2hlY2tpbmcg
+Zm9yIHN0eWxlIG9mIGluY2x1ZGUgdXNlZCBieSBtYWtlLi4uIEdOVTwvZGl2PjxkaXY+Y2hlY2tp
+bmcgZGVwZW5kZW5jeSBzdHlsZSBvZiBnY2MuLi4gZ2NjMzwvZGl2PjxkaXY+Y2hlY2tpbmcgaG93
+IHRvIHJ1biB0aGUgQyBwcmVwcm9jZXNzb3IuLi4gZ2NjIC1FPC9kaXY+PGRpdj5jaGVja2luZyBm
+b3IgZ3JlcCB0aGF0IGhhbmRsZXMgbG9uZyBsaW5lcyBhbmQgLWUuLi4gL2Jpbi9ncmVwPC9kaXY+
+PGRpdj5jaGVja2luZyBmb3IgZWdyZXAuLi4gL2Jpbi9ncmVwIC1FPC9kaXY+PGRpdj5jaGVja2lu
+ZyBmb3IgQU5TSSBDIGhlYWRlciBmaWxlcy4uLiB5ZXM8L2Rpdj48ZGl2PmNoZWNraW5nIGZvciBz
+cGVjaWFsIEMgY29tcGlsZXIgb3B0aW9ucyBuZWVkZWQgZm9yIGxhcmdlIGZpbGVzLi4uIG5vPC9k
+aXY+PGRpdj5jaGVja2luZyBmb3IgX0ZJTEVfT0ZGU0VUX0JJVFMgdmFsdWUgbmVlZGVkIGZvciBs
+YXJnZSBmaWxlcy4uLiBubzwvZGl2PjxkaXY+Y2hlY2tpbmcgd2hldGhlciBsbiAtcyB3b3Jrcy4u
+LiB5ZXM8L2Rpdj48ZGl2PmNoZWNraW5nIGZvciBwa2ctY29uZmlnLi4uIC91c3IvYmluL3BrZy1j
+b25maWc8L2Rpdj48ZGl2PmNoZWNraW5nIHBrZy1jb25maWcgaXMgYXQgbGVhc3QgdmVyc2lvbiAw
+LjkuMC4uLiB5ZXM8L2Rpdj48ZGl2PmNoZWNraW5nIGZvciBpbml0IHNjcmlwdCBmbGF2b3IuLi4g
+bm9uZTwvZGl2PjxkaXY+Y2hlY2tpbmcgZm9yIEdUSy4uLiBubzwvZGl2PjxkaXY+Y2hlY2tpbmcg
+Zm9yIEdJTzIuLi4geWVzPC9kaXY+PGRpdj5jaGVja2luZyBmb3IgWC4uLiB5ZXM8L2Rpdj48ZGl2
+PmNoZWNraW5nIGZvciBTUElDRS4uLiB5ZXM8L2Rpdj48ZGl2PmNoZWNraW5nIGZvciBBTFNBLi4u
+IHllczwvZGl2PjxkaXY+Y2hlY2tpbmcgZm9yIERCVVMuLi4geWVzPC9kaXY+PGRpdj5jaGVja2lu
+ZyBmb3IgRFJNLi4uIHllczwvZGl2PjxkaXY+Y2hlY2tpbmcgZm9yIExJQlNZU1RFTURfTE9HSU4u
+Li4gbm88L2Rpdj48ZGl2PmNoZWNraW5nIGZvciBMSUJTWVNURU1EX0xPR0lOLi4uIG5vPC9kaXY+
+PGRpdj5jaGVja2luZyBmb3IgUENJQUNDRVNTLi4uIHllczwvZGl2PjxkaXY+Y2hlY2tpbmcgd2hl
+dGhlciBnY2Mgc3VwcG9ydHMgLVdhbGwuLi4geWVzPC9kaXY+PGRpdj5jaGVja2luZyB3aGV0aGVy
+IGdjYyBzdXBwb3J0cyAtV2Vycm9yLi4uIHllczwvZGl2PjxkaXY+Y2hlY2tpbmcgd2hldGhlciBn
+Y2Mgc3VwcG9ydHMgLVdwLC1EX0ZPUlRJRllfU09VUkNFPTIuLi4geWVzPC9kaXY+PGRpdj5jaGVj
+a2luZyB3aGV0aGVyIGdjYyBzdXBwb3J0cyAtZm5vLXN0cmljdC1hbGlhc2luZy4uLiB5ZXM8L2Rp
+dj48ZGl2PmNoZWNraW5nIHdoZXRoZXIgZ2NjIHN1cHBvcnRzIC1mc3RhY2stcHJvdGVjdG9yLi4u
+IHllczwvZGl2PjxkaXY+Y2hlY2tpbmcgd2hldGhlciBnY2Mgc3VwcG9ydHMgLS1wYXJhbT1zc3At
+YnVmZmVyLXNpemU9NC4uLiB5ZXM8L2Rpdj48ZGl2PmNoZWNraW5nIGZvciBQSUUgc3VwcG9ydC4u
+LiB5ZXM8L2Rpdj48ZGl2PmNoZWNraW5nIHRoYXQgZ2VuZXJhdGVkIGZpbGVzIGFyZSBuZXdlciB0
+aGFuIGNvbmZpZ3VyZS4uLiBkb25lPC9kaXY+PGRpdj5jb25maWd1cmU6IGNyZWF0aW5nIC4vY29u
+ZmlnLnN0YXR1czwvZGl2PjxkaXY+Y29uZmlnLnN0YXR1czogY3JlYXRpbmcgTWFrZWZpbGU8L2Rp
+dj48ZGl2PmNvbmZpZy5zdGF0dXM6IGNyZWF0aW5nIGRhdGEvc3BpY2UtdmRhZ2VudC4xPC9kaXY+
+PGRpdj5jb25maWcuc3RhdHVzOiBjcmVhdGluZyBkYXRhL3NwaWNlLXZkYWdlbnRkLjE8L2Rpdj48
+ZGl2PmNvbmZpZy5zdGF0dXM6IGNyZWF0aW5nIHNyYy9jb25maWcuaDwvZGl2PjxkaXY+Y29uZmln
+LnN0YXR1czogZXhlY3V0aW5nIGRlcGZpbGVzIGNvbW1hbmRzPC9kaXY+PGRpdj5jb25maWd1cmU6
+PC9kaXY+PGRpdj7CoDwvZGl2PjxkaXY+c3BpY2UtdmRhZ2VudCAwLjIwLjA8L2Rpdj48ZGl2Pj09
+PT09PT09PT09PT09PT09PT09PC9kaXY+PGRpdj7CoDwvZGl2PjxkaXY+cHJlZml4OiAvdXNyL2xv
+Y2FsPC9kaXY+PGRpdj5jIGNvbXBpbGVyOiBnY2M8L2Rpdj48ZGl2PsKgPC9kaXY+PGRpdj5zZXNz
+aW9uLWluZm86IGNvbnNvbGUta2l0PC9kaXY+PGRpdj5wY2lhY2Nlc3M6IHllczwvZGl2PjxkaXY+
+c3RhdGljIHVpbnB1dDogbm88L2Rpdj48ZGl2PnZkYWdlbnRkIHBpZSArIHJlbHJvOiB5ZXM8L2Rp
+dj48ZGl2PsKgPC9kaXY+PGRpdj5pbnN0YWxsIFJIIGluaXRzY3JpcHQ6IG5vPC9kaXY+PGRpdj5p
+bnN0YWxsIHN5c3RlbWQgc2VydmljZTogbm88L2Rpdj48ZGl2PnVkZXZkaXI6IC9saWIvdWRldjwv
+ZGl2PjxkaXY+wqA8L2Rpdj48ZGl2PnVzZSBHVEsrOiBubzwvZGl2PjxkaXY+wqA8L2Rpdj48ZGl2
+Pk5vdyB0eXBlICdtYWtlJyB0byBidWlsZCBzcGljZS12ZGFnZW50PC9kaXY+PGRpdj7CoDwvZGl2
+PjxkaXY+PGJyIC8+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PTwvZGl2
+PjxkaXY+bWFrZTwvZGl2PjxkaXY+wqA8L2Rpdj48ZGl2PjxkaXY+Q0Mgc3JjL3NyY19zcGljZV92
+ZGFnZW50LXVkc2NzLm88L2Rpdj48ZGl2PkNDIHNyYy9zcmNfc3BpY2VfdmRhZ2VudC12ZGFnZW50
+LWNvbm5lY3Rpb24ubzwvZGl2PjxkaXY+c3JjL3ZkYWdlbnQtY29ubmVjdGlvbi5jOiBJbiBmdW5j
+dGlvbiDigJh2ZGFnZW50X2Nvbm5lY3Rpb25fd3JpdGXigJk6PC9kaXY+PGRpdj5zcmMvdmRhZ2Vu
+dC1jb25uZWN0aW9uLmM6MjM0OjM5OiBlcnJvcjogaW1wbGljaXQgZGVjbGFyYXRpb24gb2YgZnVu
+Y3Rpb24g4oCYR19TT1VSQ0VfRlVOQ+KAmTsgZGlkIHlvdSBtZWFuIOKAmEdfSU5MSU5FX0ZVTkPi
+gJk/IFstV2Vycm9yPWltcGxpY2l0LWZ1bmN0aW9uLWRlY2xhcmF0aW9uXTwvZGl2PjxkaXY+Z19z
+b3VyY2Vfc2V0X2NhbGxiYWNrKHNvdXJjZSwgR19TT1VSQ0VfRlVOQyhvdXRfc3RyZWFtX3JlYWR5
+X2NiKSw8L2Rpdj48ZGl2Pl5+fn5+fn5+fn5+fn48L2Rpdj48ZGl2PkdfSU5MSU5FX0ZVTkM8L2Rp
+dj48ZGl2PnNyYy92ZGFnZW50LWNvbm5lY3Rpb24uYzoyMzQ6Mzk6IGVycm9yOiBwYXNzaW5nIGFy
+Z3VtZW50IDIgb2Yg4oCYZ19zb3VyY2Vfc2V0X2NhbGxiYWNr4oCZIG1ha2VzIHBvaW50ZXIgZnJv
+bSBpbnRlZ2VyIHdpdGhvdXQgYSBjYXN0IFstV2Vycm9yPWludC1jb252ZXJzaW9uXTwvZGl2Pjxk
+aXY+SW4gZmlsZSBpbmNsdWRlZCBmcm9tIC91c3IvaW5jbHVkZS9nbGliLTIuMC9nbGliL2dpb2No
+YW5uZWwuaDozMzowLDwvZGl2PjxkaXY+ZnJvbSAvdXNyL2luY2x1ZGUvZ2xpYi0yLjAvZ2xpYi5o
+OjU0LDwvZGl2PjxkaXY+ZnJvbSAvdXNyL2luY2x1ZGUvZ2xpYi0yLjAvZ2xpYi9ncHJpbnRmLmg6
+MjEsPC9kaXY+PGRpdj5mcm9tIC91c3IvaW5jbHVkZS9nbGliLTIuMC9nbGliL2dzdGRpby5oOjIy
+LDwvZGl2PjxkaXY+ZnJvbSBzcmMvdmRhZ2VudC1jb25uZWN0aW9uLmM6MjI6PC9kaXY+PGRpdj4v
+dXNyL2luY2x1ZGUvZ2xpYi0yLjAvZ2xpYi9nbWFpbi5oOjQ2MjoxMDogbm90ZTogZXhwZWN0ZWQg
+4oCYR1NvdXJjZUZ1bmMge2FrYSBpbnQgKCopKHZvaWQgKil94oCZIGJ1dCBhcmd1bWVudCBpcyBv
+ZiB0eXBlIOKAmGludOKAmTwvZGl2PjxkaXY+dm9pZCBnX3NvdXJjZV9zZXRfY2FsbGJhY2sgKEdT
+b3VyY2UgKnNvdXJjZSw8L2Rpdj48ZGl2Pl5+fn5+fn5+fn5+fn5+fn5+fn5+fjwvZGl2PjxkaXY+
+Y2MxOiBhbGwgd2FybmluZ3MgYmVpbmcgdHJlYXRlZCBhcyBlcnJvcnM8L2Rpdj48ZGl2Pk1ha2Vm
+aWxlOjEwOTQ6IHJlY2lwZSBmb3IgdGFyZ2V0ICdzcmMvc3JjX3NwaWNlX3ZkYWdlbnQtdmRhZ2Vu
+dC1jb25uZWN0aW9uLm8nIGZhaWxlZDwvZGl2PjxkaXY+bWFrZTogKioqIFtzcmMvc3JjX3NwaWNl
+X3ZkYWdlbnQtdmRhZ2VudC1jb25uZWN0aW9uLm9dIEVycm9yIDE8L2Rpdj48ZGl2PnVzZXJAdWJ1
+bnR1On4vcGtnL3ZkX2FnZW50JCBsZXNzIFJFQURNRS5tZDwvZGl2PjxkaXY+wqA8L2Rpdj48ZGl2
+PsKgPC9kaXY+PC9kaXY+PC9kaXY+
 
---===============1698617750==
+--===============2105739525==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -74,4 +160,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============1698617750==--
+--===============2105739525==--
