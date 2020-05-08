@@ -1,44 +1,47 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76FBB1C93A2
-	for <lists+spice-devel@lfdr.de>; Thu,  7 May 2020 17:06:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F5301CA291
+	for <lists+spice-devel@lfdr.de>; Fri,  8 May 2020 07:22:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7BE466E9F3;
-	Thu,  7 May 2020 15:06:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B6A7E6E143;
+	Fri,  8 May 2020 05:22:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 295D36E9BB;
- Thu,  7 May 2020 14:30:28 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 30BBD2083B;
- Thu,  7 May 2020 14:30:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588861828;
- bh=hrN4jo85YX8bUHMiL0SJw51uMtj6bE77uz+J0atkXvc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=H5shdAG02r5I9NsJpnMagvC1iO6hMX9o5elM+G1pxKJQPZt/8bWKt4S8O12bPB10Z
- HUNjsoMwopFbhrOBZiqPTq68LaMXdFI8hFMa5VpW9cPfN0l2Sq/lUKnEHeBqamjRfM
- tIgigNAkORa6a//NQYognA7eJFUpB79YKbJlrzx0=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Thu,  7 May 2020 10:30:17 -0400
-Message-Id: <20200507143018.27195-8-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200507143018.27195-1-sashal@kernel.org>
-References: <20200507143018.27195-1-sashal@kernel.org>
+Received: from forward104j.mail.yandex.net (forward104j.mail.yandex.net
+ [IPv6:2a02:6b8:0:801:2::107])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5AEAB6E123
+ for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 01:22:21 +0000 (UTC)
+Received: from forward102q.mail.yandex.net (forward102q.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:1ba:0:640:516:4e7d])
+ by forward104j.mail.yandex.net (Yandex) with ESMTP id BCBCC4A149B
+ for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 04:22:18 +0300 (MSK)
+Received: from mxback10q.mail.yandex.net (mxback10q.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:1b4:0:640:b6ef:cb3])
+ by forward102q.mail.yandex.net (Yandex) with ESMTP id BA73D7F20002
+ for <spice-devel@lists.freedesktop.org>; Fri,  8 May 2020 04:22:18 +0300 (MSK)
+Received: from localhost (localhost [::1])
+ by mxback10q.mail.yandex.net (mxback/Yandex) with ESMTP id Ks5ACib6Or-MHDGise9;
+ Fri, 08 May 2020 04:22:18 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
+ t=1588900938; bh=Rn6II7+hCV8is9XtBQKB04xmDZTFI6Qbrm1NLCe2FdI=;
+ h=Message-Id:Date:Subject:To:From;
+ b=TCMmZ3Kmf1Yusi24zQPyNgBp0EcHD+WNeqTuC2pohED03SSKE2gu+uSD4H3lgoI9v
+ AGx7EXFIdzVwdCPuvyHcUeprtw1JOU9KdIa1QFDriep9lVkwyGUt4oH9/k6Gbd2eX/
+ oTyLoG3tK6+k/gWIRMpwI5EYTa9LhCy6BTe7uYTM=
+Authentication-Results: mxback10q.mail.yandex.net;
+ dkim=pass header.i=@yandex.ru
+Received: by vla5-344e18ef0bef.qloud-c.yandex.net with HTTP;
+ Fri, 08 May 2020 04:22:17 +0300
+From: ole-krutov@yandex.ru
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-Mailman-Approved-At: Thu, 07 May 2020 15:06:05 +0000
-Subject: [Spice-devel] [PATCH AUTOSEL 4.4 8/9] drm/qxl: lost
- qxl_bo_kunmap_atomic_page in qxl_image_init_helper()
+X-Mailer: Yamail [ http://yandex.ru ] 5.0
+Date: Fri, 08 May 2020 04:22:17 +0300
+Message-Id: <1370141588898543@mail.yandex.ru>
+X-Mailman-Approved-At: Fri, 08 May 2020 05:22:24 +0000
+Subject: [Spice-devel] No mouse when spice-streaming-agent is working
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,46 +53,25 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
- spice-devel@lists.freedesktop.org, Vasily Averin <vvs@virtuozzo.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1698617750=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-From: Vasily Averin <vvs@virtuozzo.com>
+--===============1698617750==
+Content-Transfer-Encoding: 8bit
+Content-Type: text/html; charset=utf-8
 
-[ Upstream commit 5b5703dbafae74adfbe298a56a81694172caf5e6 ]
+<div>Hi there.</div><div>KVM guest has two video adapters: qxl and Nvidia vGPU with display="off". Initially one window with startup messages is opened. When Xorg is run, spice-streaming agent starts and second window with hardware encoded h264 video appears. Keyboard works ok in this window but mice doesn't. When mouse is moving over this window, many messages  "ubuntu spice-vdagentd: mouse event for unknown monitor (1 &gt;= 1)" appear in syslog. When x11vnc is run in this X session, all is working in VNC viewer window. Could anybody help localize a problem? Thank you.</div>
 
-v2: removed TODO reminder
-
-Signed-off-by: Vasily Averin <vvs@virtuozzo.com>
-Link: http://patchwork.freedesktop.org/patch/msgid/a4e0ae09-a73c-1c62-04ef-3f990d41bea9@virtuozzo.com
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/qxl/qxl_image.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
-index 7fbcc35e8ad35..c89c10055641e 100644
---- a/drivers/gpu/drm/qxl/qxl_image.c
-+++ b/drivers/gpu/drm/qxl/qxl_image.c
-@@ -210,7 +210,8 @@ qxl_image_init_helper(struct qxl_device *qdev,
- 		break;
- 	default:
- 		DRM_ERROR("unsupported image bit depth\n");
--		return -EINVAL; /* TODO: cleanup */
-+		qxl_bo_kunmap_atomic_page(qdev, image_bo, ptr);
-+		return -EINVAL;
- 	}
- 	image->u.bitmap.flags = QXL_BITMAP_TOP_DOWN;
- 	image->u.bitmap.x = width;
--- 
-2.20.1
+--===============1698617750==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1698617750==--
