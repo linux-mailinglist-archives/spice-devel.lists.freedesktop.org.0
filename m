@@ -1,33 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F357E1CDBEF
-	for <lists+spice-devel@lfdr.de>; Mon, 11 May 2020 15:53:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 14E6F1CDEA4
+	for <lists+spice-devel@lfdr.de>; Mon, 11 May 2020 17:15:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 792BC89951;
-	Mon, 11 May 2020 13:53:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3CDD36E2BE;
+	Mon, 11 May 2020 15:15:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from relay-2.mailobj.net (relay-2.mailobj.net [213.182.54.5])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ED57A6E47A
- for <spice-devel@lists.freedesktop.org>; Mon, 11 May 2020 13:47:42 +0000 (UTC)
-Received: from www-2.localdomain (www-2.in.mailobj.net [192.168.90.194])
- by relay-2.mailobj.net (Postfix) with SMTP id 7B3C51333;
- Mon, 11 May 2020 15:47:41 +0200 (CEST)
-Received: by www-2.mailo.com with http webmail; Mon, 11 May 2020
- 15:47:41 +0200 (CEST)
-X-EA-Auth: ln5ZAamCMzuokptHDIASA+qOE3p2sei+JEZXpeUaXcMN7VH/87UXJQ8jT7w8ScEIEdHa6Daee0GL6x9Y24+wVg==
-From: bruts@netc.fr
-To: uril@redhat.com,
- spice-devel@lists.freedesktop.org
-Date: Mon, 11 May 2020 15:47:41 +0200 (CEST)
-X-Priority: 3
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 411BD6E2BE
+ for <spice-devel@lists.freedesktop.org>; Mon, 11 May 2020 15:15:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1589210142;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uNlG6EGMjeFsQMwAMLrE0LFGNG0ajRCDmJaFbHxuSWI=;
+ b=XdCrPPmR97KXd5XD634IFStxTVvTgPYw3rjE7F8l+lRcOY1TRWbPeCeYdLzkKXzkxacCO9
+ X/1XpBVyBLaM/mgCXBZbfC3stMuzukDbgIWdC4VOozrn72hoKghv+c3mPtEizzRsqQJ/pz
+ O85mR++NhAbpFNlof0yhykCg4sqZmjU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-359-OTgAO778M3O9Op3Zv9u_cw-1; Mon, 11 May 2020 11:15:37 -0400
+X-MC-Unique: OTgAO778M3O9Op3Zv9u_cw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3B0B6107ACCA;
+ Mon, 11 May 2020 15:15:36 +0000 (UTC)
+Received: from lub.tlv (unknown [10.35.206.198])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 15D376E6E0;
+ Mon, 11 May 2020 15:15:34 +0000 (UTC)
+To: bruts@netc.fr, spice-devel@lists.freedesktop.org
+References: <ea-mime-5eb9577d-38b6-56ab01e2@www-2.mailo.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <9f3f0810-bc2f-50c6-d324-4c6cbd740200@redhat.com>
+Date: Mon, 11 May 2020 18:15:31 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-X-Mailer: COMS/EA19.11/r20200424
-Message-ID: <ea-mime-5eb9577d-38b6-56ab01e2@www-2.mailo.com>
-In-Reply-To: <8d345dc9-b878-0d67-4bf8-1292aaf8c303@redhat.com>
-X-Mailman-Approved-At: Mon, 11 May 2020 13:53:29 +0000
+In-Reply-To: <ea-mime-5eb9577d-38b6-56ab01e2@www-2.mailo.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Subject: Re: [Spice-devel] spice-vdagent: how to enable additional mouse
  buttons?
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -41,433 +64,109 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1421521457=="
+Reply-To: uril@redhat.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1421521457==
-Content-Type: multipart/alternative;
- boundary="----=_NextPart_001_5eb9577d_38b6_7edc156d"
-
-------=_NextPart_001_5eb9577d_38b6_7edc156d
-Content-Type: text/plain;
- charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-
-
-Uri,
-
-
-
-Would it be as simple as adding:
-
-
-
-ioctl(uinput->fd, UI_SET_KEYBIT,=C2=A0 BTN_BACK);
-
-ioctl(uinput->fd, UI_SET_KEYBIT,=C2=A0 BTN_FORWARD);
-
-
-
-and re-compiling / testing?
-
-
-
-I am not an experienced coder and have not had the time yet to get a good =
-overview of the spice-vdagent code, so this might be a too simple approach.
-
-
-
-I guess all of these values might be tested:
-
-
-
-#define BTN_MISC=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x100
-#define BTN_0=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-0
-#define BTN_1=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-1
-#define BTN_2=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-2
-#define BTN_3=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-3
-#define BTN_4=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-4
-#define BTN_5=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-5
-#define BTN_6=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-6
-#define BTN_7=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-7
-#define BTN_8=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-8
-#define BTN_9=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x10=
-9
-
-#define BTN_MOUSE=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x110
-#define BTN_LEFT=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x110
-#define BTN_RIGHT=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x111
-#define BTN_MIDDLE=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x112
-#define BTN_SIDE=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x113
-#define BTN_EXTRA=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x114
-#define BTN_FORWARD=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x115
-#define BTN_BACK=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x116
-#define BTN_TASK=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x117
-
-
-
-Is there any way to test the btn value? Like xev is not showing me anythin=
-g related to this value?
-
-
-
-Your input is appreciated!
-
-
-
-Thanks
-
-
-
-
-
-De : Uri Lublin <uril@redhat.com>
-=C3=80 : bruts@netc.fr;
-=C2=A0=C2=A0=C2=A0spice-devel@lists.freedesktop.org
-Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse bu=
-ttons?
-Date : 11/05/2020 15:23:30 Europe/Paris
-
-On 5/11/20 4:08 PM, bruts@netc.fr wrote:
-> Hi,
->=20
->=20
->=20
-> Yes most likely.
->=20
-> I find these lines of code:
->=20
->=20
->=20
-> /* buttons */
-> =C2=A0=C2=A0=C2=A0 ioctl(uinput->fd, UI_SET_EVBIT, EV_KEY);
-> =C2=A0=C2=A0=C2=A0 ioctl(uinput->fd, UI_SET_KEYBIT, BTN_LEFT);
-> =C2=A0=C2=A0=C2=A0 ioctl(uinput->fd, UI_SET_KEYBIT, BTN_MIDDLE);
-> =C2=A0=C2=A0=C2=A0 ioctl(uinput->fd, UI_SET_KEYBIT, BTN_RIGHT);
->=20
-> =C2=A0=C2=A0=C2=A0 /* wheel */
-> =C2=A0=C2=A0=C2=A0 ioctl(uinput->fd, UI_SET_EVBIT, EV_REL);
-> =C2=A0=C2=A0=C2=A0 ioctl(uinput->fd, UI_SET_RELBIT, REL_WHEEL);
->=20
->=20
-> I will probably need to declare the additional mouse buttons of my mouse=
- (Logitech G403), so I run xev to find some information:
->=20
->=20
->=20
-> (BTN_LEFT, BTN_RIGHT, button 8, button 9)
->=20
->=20
->=20
-> ButtonPress event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 361327, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x0, button 1, same_screen YES
->=20
-> ButtonRelease event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 361426, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x100, button 1, same_screen YES
->=20
-> ButtonPress event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 362448, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x0, button 3, same_screen YES
->=20
-> ButtonRelease event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 362556, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x400, button 3, same_screen YES
->=20
-> ButtonPress event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 366829, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x0, button 8, same_screen YES
->=20
-> ButtonRelease event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 366949, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x0, button 8, same_screen YES
->=20
-> ButtonPress event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 368093, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x0, button 9, same_screen YES
->=20
-> ButtonRelease event, serial 48, synthetic NO, window 0x3000001,
-> =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 368250, (127,94), root:(12=
-8,144),
-> =C2=A0=C2=A0=C2=A0 state 0x0, button 9, same_screen YES
->=20
->=20
->=20
-> Now the next question is obvious: how do I adjust the code to add suppor=
-t for button 8,9 ?
->=20
->=20
->=20
-> I thought BTN_LEFT and BTN_RIGHT would be declared in uinput.h but they =
-are global variables? or where are they declared?
-
-I found them in
-/usr/include/linux/input-event-codes.h.
-There is also BTN_BACK but I'm not sure it's mapped to any of button-8=20
-or 9.
-
-Uri.
-
->=20
-> Any help with adding support for these buttons would be very appreciated=
- and finally make me stop using virtualbox lol.
->=20
-> Thanks!
->=20
->=20
->=20
->=20
->=20
->=20
->=20
-> De : Uri Lublin <uril@redhat.com>
-> =C3=80 : bruts@netc.fr;
-> =C2=A0=C2=A0=C2=A0spice-devel@lists.freedesktop.org
-> Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse =
-buttons?
-> Date : 03/05/2020 17:33:55 Europe/Paris
->=20
-> On 5/1/20 3:51 PM, bruts@netc.fr wrote:
->>
->> I am using spice-vdagent on most of my qemu-kvm vm's, while this is ver=
-y
->> convenient, mouse button 8 and 9 are not working (those are the side
->> buttons of the mouse, one is often used for BACK function of the
->> browser, which my thumb is actually addicted to).
->> How could i make these buttons work with spice-vdagent?
->=20
-> Hi,
->=20
-> Currently 5 mouse buttons are supported. I think some code is needed to
-> be added in order to support more buttons.
->=20
-> Uri.
->=20
->>
->> Thanks for the suggestions,
->>
->> Bruts
->=20
->=20
->=20
-
-
-
-------=_NextPart_001_5eb9577d_38b6_7edc156d
-Content-Type: text/html;
- charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div>Uri,</div><div><br></div><div>Would it be as simple as =
-adding:</div><div><br></div><div>ioctl(uinput-&gt;fd, UI_SET_KEYBIT,=C2=A0	=
-BTN_BACK);</div><div>ioctl(uinput-&gt;fd, UI_SET_KEYBIT,=C2=A0	BTN_FORWARD)=
-;</div><div><br></div><div>and re-compiling / testing?</div><div><br></div>=
-<div>I am not an experienced coder and have not had the time yet to get a g=
-ood overview of the spice-vdagent code, so this might be a too simple appro=
-ach.</div><div><br></div><div>I guess all of these values might be tested:<=
-/div><div><br></div><div>#define BTN_MISC=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=
-=A0 0x100<br>#define BTN_0=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=
-=A0=C2=A0 0x100<br>#define BTN_1=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=
-=A0=C2=A0=C2=A0 0x101<br>#define BTN_2=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0=
- =C2=A0=C2=A0=C2=A0 0x102<br>#define BTN_3=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=
-=C2=A0 =C2=A0=C2=A0=C2=A0 0x103<br>#define BTN_4=C2=A0=C2=A0=C2=A0 =C2=A0=
-=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x104<br>#define BTN_5=C2=A0=C2=A0=C2=A0 =
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x105<br>#define BTN_6=C2=A0=C2=A0=C2=
-=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x106<br>#define BTN_7=C2=A0=C2=
-=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x107<br>#define BTN_8=C2=
-=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x108<br>#define BTN_=
-9=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x109<br><br>#def=
-ine BTN_MOUSE=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x110<br>#define BTN_LEF=
-T=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x110<br>#define BTN_RIGHT=C2=A0=C2=
-=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x111<br>#define BTN_MIDDLE=C2=A0=C2=A0=C2=A0 =
-=C2=A0=C2=A0=C2=A0 0x112<br>#define BTN_SIDE=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=
-=C2=A0 0x113<br>#define BTN_EXTRA=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x11=
-4<br>#define BTN_FORWARD=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x115<br>#def=
-ine BTN_BACK=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x116<br>#define BTN_TASK=
-=C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 0x117</div><div><br></div><div>Is the=
-re any way to test the btn value? Like xev is not showing me anything relat=
-ed to this value?<br></div><div><br></div><div>Your input is appreciated!</=
-div><div><br></div><div>Thanks<br></div><div><br></div><br><br><blockquote =
-type=3D"cite" style=3D"margin:0 0 0 0.5em;border-left:1px #00f solid;paddin=
-g-left:1em;">De : Uri Lublin &lt;uril@redhat.com&gt;<br>
-=C3=80 : bruts@netc.fr;<br>
-=C2=A0=C2=A0=C2=A0spice-devel@lists.freedesktop.org<br>
-Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse bu=
-ttons?<br>
-Date : 11/05/2020 15:23:30 Europe/Paris<br>
-<br>
-On 5/11/20 4:08 PM, bruts@netc.fr wrote:<br>
-&gt; Hi,<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; Yes most likely.<br>
-&gt; <br>
-&gt; I find these lines of code:<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; /* buttons */<br>
-&gt;  =C2=A0=C2=A0=C2=A0 ioctl(uinput-&gt;fd, UI_SET_EVBIT, EV_KEY);<br>
-&gt;  =C2=A0=C2=A0=C2=A0 ioctl(uinput-&gt;fd, UI_SET_KEYBIT, BTN_LEFT);<br=
->
-&gt;  =C2=A0=C2=A0=C2=A0 ioctl(uinput-&gt;fd, UI_SET_KEYBIT, BTN_MIDDLE);<=
-br>
-&gt;  =C2=A0=C2=A0=C2=A0 ioctl(uinput-&gt;fd, UI_SET_KEYBIT, BTN_RIGHT);<b=
-r>
-&gt; <br>
-&gt;  =C2=A0=C2=A0=C2=A0 /* wheel */<br>
-&gt;  =C2=A0=C2=A0=C2=A0 ioctl(uinput-&gt;fd, UI_SET_EVBIT, EV_REL);<br>
-&gt;  =C2=A0=C2=A0=C2=A0 ioctl(uinput-&gt;fd, UI_SET_RELBIT, REL_WHEEL);<b=
-r>
-&gt; <br>
-&gt; <br>
-&gt; I will probably need to declare the additional mouse buttons of my mo=
-use (Logitech G403), so I run xev to find some information:<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; (BTN_LEFT, BTN_RIGHT, button 8, button 9)<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; ButtonPress event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 361327, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x0, button 1, same_screen YES<br>
-&gt; <br>
-&gt; ButtonRelease event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 361426, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x100, button 1, same_screen YES<br>
-&gt; <br>
-&gt; ButtonPress event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 362448, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x0, button 3, same_screen YES<br>
-&gt; <br>
-&gt; ButtonRelease event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 362556, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x400, button 3, same_screen YES<br>
-&gt; <br>
-&gt; ButtonPress event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 366829, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x0, button 8, same_screen YES<br>
-&gt; <br>
-&gt; ButtonRelease event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 366949, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x0, button 8, same_screen YES<br>
-&gt; <br>
-&gt; ButtonPress event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 368093, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x0, button 9, same_screen YES<br>
-&gt; <br>
-&gt; ButtonRelease event, serial 48, synthetic NO, window 0x3000001,<br>
-&gt;  =C2=A0=C2=A0=C2=A0 root 0x3ad, subw 0x0, time 368250, (127,94), root=
-:(128,144),<br>
-&gt;  =C2=A0=C2=A0=C2=A0 state 0x0, button 9, same_screen YES<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; Now the next question is obvious: how do I adjust the code to add sup=
-port for button 8,9 ?<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; I thought BTN_LEFT and BTN_RIGHT would be declared in uinput.h but th=
-ey are global variables? or where are they declared?<br>
-<br>
-I found them in<br>
-/usr/include/linux/input-event-codes.h.<br>
-There is also 	BTN_BACK but I'm not sure it's mapped to any of button-8 <b=
-r>
-or 9.<br>
-<br>
-Uri.<br>
-<br>
-&gt; <br>
-&gt; Any help with adding support for these buttons would be very apprecia=
-ted and finally make me stop using virtualbox lol.<br>
-&gt; <br>
-&gt; Thanks!<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; De : Uri Lublin &lt;uril@redhat.com&gt;<br>
-&gt; =C3=80 : bruts@netc.fr;<br>
-&gt;  =C2=A0=C2=A0=C2=A0spice-devel@lists.freedesktop.org<br>
-&gt; Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mou=
-se buttons?<br>
-&gt; Date : 03/05/2020 17:33:55 Europe/Paris<br>
-&gt; <br>
-&gt; On 5/1/20 3:51 PM, bruts@netc.fr wrote:<br>
-&gt;&gt;<br>
-&gt;&gt; I am using spice-vdagent on most of my qemu-kvm vm's, while this =
-is very<br>
-&gt;&gt; convenient, mouse button 8 and 9 are not working (those are the s=
-ide<br>
-&gt;&gt; buttons of the mouse, one is often used for BACK function of the<=
-br>
-&gt;&gt; browser, which my thumb is actually addicted to).<br>
-&gt;&gt; How could i make these buttons work with spice-vdagent?<br>
-&gt; <br>
-&gt; Hi,<br>
-&gt; <br>
-&gt; Currently 5 mouse buttons are supported. I think some code is needed =
-to<br>
-&gt; be added in order to support more buttons.<br>
-&gt; <br>
-&gt; Uri.<br>
-&gt; <br>
-&gt;&gt;<br>
-&gt;&gt; Thanks for the suggestions,<br>
-&gt;&gt;<br>
-&gt;&gt; Bruts<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-<br></blockquote>
-
-------=_NextPart_001_5eb9577d_38b6_7edc156d--
-
-
---===============1421521457==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============1421521457==--
-
+T24gNS8xMS8yMCA0OjQ3IFBNLCBicnV0c0BuZXRjLmZyIHdyb3RlOgo+IAo+IAo+IFVyaSwKPiAK
+PiAKPiAKPiBXb3VsZCBpdCBiZSBhcyBzaW1wbGUgYXMgYWRkaW5nOgo+IAo+IAo+IAo+IGlvY3Rs
+KHVpbnB1dC0+ZmQsIFVJX1NFVF9LRVlCSVQswqAgQlROX0JBQ0spOwo+IAo+IGlvY3RsKHVpbnB1
+dC0+ZmQsIFVJX1NFVF9LRVlCSVQswqAgQlROX0ZPUldBUkQpOwo+IAo+IAo+IAo+IGFuZCByZS1j
+b21waWxpbmcgLyB0ZXN0aW5nPwoKSSdtIHNvcnJ5LCBidXQgaXQgaXMgbm90IHRoYXQgc2ltcGxl
+LgoKClRoYXQncyB0aGUgYWdlbnQgc2lkZS4KWW91IGFsc28gbmVlZCB0aGUgY2xpZW50IHNpZGUs
+IGFuZAp0byBhZGQgdGhvc2UgYnV0dG9ucyB0byB0aGUgcHJvdG9jb2wgKGluY2x1ZGluZyBjbGll
+bnQvc2VydmVyLCBwb3NzaWJseSAKd2l0aCBhIHByb3BlciBjYXBhYmlsaXR5KS4KClVyaS4KCj4g
+Cj4gCj4gCj4gSSBhbSBub3QgYW4gZXhwZXJpZW5jZWQgY29kZXIgYW5kIGhhdmUgbm90IGhhZCB0
+aGUgdGltZSB5ZXQgdG8gZ2V0IGEgZ29vZCBvdmVydmlldyBvZiB0aGUgc3BpY2UtdmRhZ2VudCBj
+b2RlLCBzbyB0aGlzIG1pZ2h0IGJlIGEgdG9vIHNpbXBsZSBhcHByb2FjaC4KPiAKPiAKPiAKPiBJ
+IGd1ZXNzIGFsbCBvZiB0aGVzZSB2YWx1ZXMgbWlnaHQgYmUgdGVzdGVkOgo+IAo+IAo+IAo+ICNk
+ZWZpbmUgQlROX01JU0PCoMKgwqAgwqDCoMKgIDB4MTAwCj4gI2RlZmluZSBCVE5fMMKgwqDCoCDC
+oMKgwqAgwqDCoMKgIDB4MTAwCj4gI2RlZmluZSBCVE5fMcKgwqDCoCDCoMKgwqAgwqDCoMKgIDB4
+MTAxCj4gI2RlZmluZSBCVE5fMsKgwqDCoCDCoMKgwqAgwqDCoMKgIDB4MTAyCj4gI2RlZmluZSBC
+VE5fM8KgwqDCoCDCoMKgwqAgwqDCoMKgIDB4MTAzCj4gI2RlZmluZSBCVE5fNMKgwqDCoCDCoMKg
+wqAgwqDCoMKgIDB4MTA0Cj4gI2RlZmluZSBCVE5fNcKgwqDCoCDCoMKgwqAgwqDCoMKgIDB4MTA1
+Cj4gI2RlZmluZSBCVE5fNsKgwqDCoCDCoMKgwqAgwqDCoMKgIDB4MTA2Cj4gI2RlZmluZSBCVE5f
+N8KgwqDCoCDCoMKgwqAgwqDCoMKgIDB4MTA3Cj4gI2RlZmluZSBCVE5fOMKgwqDCoCDCoMKgwqAg
+wqDCoMKgIDB4MTA4Cj4gI2RlZmluZSBCVE5fOcKgwqDCoCDCoMKgwqAgwqDCoMKgIDB4MTA5Cj4g
+Cj4gI2RlZmluZSBCVE5fTU9VU0XCoMKgwqAgwqDCoMKgIDB4MTEwCj4gI2RlZmluZSBCVE5fTEVG
+VMKgwqDCoCDCoMKgwqAgMHgxMTAKPiAjZGVmaW5lIEJUTl9SSUdIVMKgwqDCoCDCoMKgwqAgMHgx
+MTEKPiAjZGVmaW5lIEJUTl9NSURETEXCoMKgwqAgwqDCoMKgIDB4MTEyCj4gI2RlZmluZSBCVE5f
+U0lERcKgwqDCoCDCoMKgwqAgMHgxMTMKPiAjZGVmaW5lIEJUTl9FWFRSQcKgwqDCoCDCoMKgwqAg
+MHgxMTQKPiAjZGVmaW5lIEJUTl9GT1JXQVJEwqDCoMKgIMKgwqDCoCAweDExNQo+ICNkZWZpbmUg
+QlROX0JBQ0vCoMKgwqAgwqDCoMKgIDB4MTE2Cj4gI2RlZmluZSBCVE5fVEFTS8KgwqDCoCDCoMKg
+wqAgMHgxMTcKPiAKPiAKPiAKPiBJcyB0aGVyZSBhbnkgd2F5IHRvIHRlc3QgdGhlIGJ0biB2YWx1
+ZT8gTGlrZSB4ZXYgaXMgbm90IHNob3dpbmcgbWUgYW55dGhpbmcgcmVsYXRlZCB0byB0aGlzIHZh
+bHVlPwo+IAo+IAo+IAo+IFlvdXIgaW5wdXQgaXMgYXBwcmVjaWF0ZWQhCj4gCj4gCj4gCj4gVGhh
+bmtzCj4gCj4gCj4gCj4gCj4gCj4gRGUgOiBVcmkgTHVibGluIDx1cmlsQHJlZGhhdC5jb20+Cj4g
+w4AgOiBicnV0c0BuZXRjLmZyOwo+ICDCoMKgwqBzcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3Rv
+cC5vcmcKPiBTdWpldCA6IFJlOiBbU3BpY2UtZGV2ZWxdIHNwaWNlLXZkYWdlbnQ6IGhvdyB0byBl
+bmFibGUgYWRkaXRpb25hbCBtb3VzZSBidXR0b25zPwo+IERhdGUgOiAxMS8wNS8yMDIwIDE1OjIz
+OjMwIEV1cm9wZS9QYXJpcwo+IAo+IE9uIDUvMTEvMjAgNDowOCBQTSwgYnJ1dHNAbmV0Yy5mciB3
+cm90ZToKPj4gSGksCj4+Cj4+Cj4+Cj4+IFllcyBtb3N0IGxpa2VseS4KPj4KPj4gSSBmaW5kIHRo
+ZXNlIGxpbmVzIG9mIGNvZGU6Cj4+Cj4+Cj4+Cj4+IC8qIGJ1dHRvbnMgKi8KPj4gIMKgwqDCoCBp
+b2N0bCh1aW5wdXQtPmZkLCBVSV9TRVRfRVZCSVQsIEVWX0tFWSk7Cj4+ICDCoMKgwqAgaW9jdGwo
+dWlucHV0LT5mZCwgVUlfU0VUX0tFWUJJVCwgQlROX0xFRlQpOwo+PiAgwqDCoMKgIGlvY3RsKHVp
+bnB1dC0+ZmQsIFVJX1NFVF9LRVlCSVQsIEJUTl9NSURETEUpOwo+PiAgwqDCoMKgIGlvY3RsKHVp
+bnB1dC0+ZmQsIFVJX1NFVF9LRVlCSVQsIEJUTl9SSUdIVCk7Cj4+Cj4+ICDCoMKgwqAgLyogd2hl
+ZWwgKi8KPj4gIMKgwqDCoCBpb2N0bCh1aW5wdXQtPmZkLCBVSV9TRVRfRVZCSVQsIEVWX1JFTCk7
+Cj4+ICDCoMKgwqAgaW9jdGwodWlucHV0LT5mZCwgVUlfU0VUX1JFTEJJVCwgUkVMX1dIRUVMKTsK
+Pj4KPj4KPj4gSSB3aWxsIHByb2JhYmx5IG5lZWQgdG8gZGVjbGFyZSB0aGUgYWRkaXRpb25hbCBt
+b3VzZSBidXR0b25zIG9mIG15IG1vdXNlIChMb2dpdGVjaCBHNDAzKSwgc28gSSBydW4geGV2IHRv
+IGZpbmQgc29tZSBpbmZvcm1hdGlvbjoKPj4KPj4KPj4KPj4gKEJUTl9MRUZULCBCVE5fUklHSFQs
+IGJ1dHRvbiA4LCBidXR0b24gOSkKPj4KPj4KPj4KPj4gQnV0dG9uUHJlc3MgZXZlbnQsIHNlcmlh
+bCA0OCwgc3ludGhldGljIE5PLCB3aW5kb3cgMHgzMDAwMDAxLAo+PiAgwqDCoMKgIHJvb3QgMHgz
+YWQsIHN1YncgMHgwLCB0aW1lIDM2MTMyNywgKDEyNyw5NCksIHJvb3Q6KDEyOCwxNDQpLAo+PiAg
+wqDCoMKgIHN0YXRlIDB4MCwgYnV0dG9uIDEsIHNhbWVfc2NyZWVuIFlFUwo+Pgo+PiBCdXR0b25S
+ZWxlYXNlIGV2ZW50LCBzZXJpYWwgNDgsIHN5bnRoZXRpYyBOTywgd2luZG93IDB4MzAwMDAwMSwK
+Pj4gIMKgwqDCoCByb290IDB4M2FkLCBzdWJ3IDB4MCwgdGltZSAzNjE0MjYsICgxMjcsOTQpLCBy
+b290OigxMjgsMTQ0KSwKPj4gIMKgwqDCoCBzdGF0ZSAweDEwMCwgYnV0dG9uIDEsIHNhbWVfc2Ny
+ZWVuIFlFUwo+Pgo+PiBCdXR0b25QcmVzcyBldmVudCwgc2VyaWFsIDQ4LCBzeW50aGV0aWMgTk8s
+IHdpbmRvdyAweDMwMDAwMDEsCj4+ICDCoMKgwqAgcm9vdCAweDNhZCwgc3VidyAweDAsIHRpbWUg
+MzYyNDQ4LCAoMTI3LDk0KSwgcm9vdDooMTI4LDE0NCksCj4+ICDCoMKgwqAgc3RhdGUgMHgwLCBi
+dXR0b24gMywgc2FtZV9zY3JlZW4gWUVTCj4+Cj4+IEJ1dHRvblJlbGVhc2UgZXZlbnQsIHNlcmlh
+bCA0OCwgc3ludGhldGljIE5PLCB3aW5kb3cgMHgzMDAwMDAxLAo+PiAgwqDCoMKgIHJvb3QgMHgz
+YWQsIHN1YncgMHgwLCB0aW1lIDM2MjU1NiwgKDEyNyw5NCksIHJvb3Q6KDEyOCwxNDQpLAo+PiAg
+wqDCoMKgIHN0YXRlIDB4NDAwLCBidXR0b24gMywgc2FtZV9zY3JlZW4gWUVTCj4+Cj4+IEJ1dHRv
+blByZXNzIGV2ZW50LCBzZXJpYWwgNDgsIHN5bnRoZXRpYyBOTywgd2luZG93IDB4MzAwMDAwMSwK
+Pj4gIMKgwqDCoCByb290IDB4M2FkLCBzdWJ3IDB4MCwgdGltZSAzNjY4MjksICgxMjcsOTQpLCBy
+b290OigxMjgsMTQ0KSwKPj4gIMKgwqDCoCBzdGF0ZSAweDAsIGJ1dHRvbiA4LCBzYW1lX3NjcmVl
+biBZRVMKPj4KPj4gQnV0dG9uUmVsZWFzZSBldmVudCwgc2VyaWFsIDQ4LCBzeW50aGV0aWMgTk8s
+IHdpbmRvdyAweDMwMDAwMDEsCj4+ICDCoMKgwqAgcm9vdCAweDNhZCwgc3VidyAweDAsIHRpbWUg
+MzY2OTQ5LCAoMTI3LDk0KSwgcm9vdDooMTI4LDE0NCksCj4+ICDCoMKgwqAgc3RhdGUgMHgwLCBi
+dXR0b24gOCwgc2FtZV9zY3JlZW4gWUVTCj4+Cj4+IEJ1dHRvblByZXNzIGV2ZW50LCBzZXJpYWwg
+NDgsIHN5bnRoZXRpYyBOTywgd2luZG93IDB4MzAwMDAwMSwKPj4gIMKgwqDCoCByb290IDB4M2Fk
+LCBzdWJ3IDB4MCwgdGltZSAzNjgwOTMsICgxMjcsOTQpLCByb290OigxMjgsMTQ0KSwKPj4gIMKg
+wqDCoCBzdGF0ZSAweDAsIGJ1dHRvbiA5LCBzYW1lX3NjcmVlbiBZRVMKPj4KPj4gQnV0dG9uUmVs
+ZWFzZSBldmVudCwgc2VyaWFsIDQ4LCBzeW50aGV0aWMgTk8sIHdpbmRvdyAweDMwMDAwMDEsCj4+
+ICDCoMKgwqAgcm9vdCAweDNhZCwgc3VidyAweDAsIHRpbWUgMzY4MjUwLCAoMTI3LDk0KSwgcm9v
+dDooMTI4LDE0NCksCj4+ICDCoMKgwqAgc3RhdGUgMHgwLCBidXR0b24gOSwgc2FtZV9zY3JlZW4g
+WUVTCj4+Cj4+Cj4+Cj4+IE5vdyB0aGUgbmV4dCBxdWVzdGlvbiBpcyBvYnZpb3VzOiBob3cgZG8g
+SSBhZGp1c3QgdGhlIGNvZGUgdG8gYWRkIHN1cHBvcnQgZm9yIGJ1dHRvbiA4LDkgPwo+Pgo+Pgo+
+Pgo+PiBJIHRob3VnaHQgQlROX0xFRlQgYW5kIEJUTl9SSUdIVCB3b3VsZCBiZSBkZWNsYXJlZCBp
+biB1aW5wdXQuaCBidXQgdGhleSBhcmUgZ2xvYmFsIHZhcmlhYmxlcz8gb3Igd2hlcmUgYXJlIHRo
+ZXkgZGVjbGFyZWQ/Cj4gCj4gSSBmb3VuZCB0aGVtIGluCj4gL3Vzci9pbmNsdWRlL2xpbnV4L2lu
+cHV0LWV2ZW50LWNvZGVzLmguCj4gVGhlcmUgaXMgYWxzbyBCVE5fQkFDSyBidXQgSSdtIG5vdCBz
+dXJlIGl0J3MgbWFwcGVkIHRvIGFueSBvZiBidXR0b24tOAo+IG9yIDkuCj4gCj4gVXJpLgo+IAo+
+Pgo+PiBBbnkgaGVscCB3aXRoIGFkZGluZyBzdXBwb3J0IGZvciB0aGVzZSBidXR0b25zIHdvdWxk
+IGJlIHZlcnkgYXBwcmVjaWF0ZWQgYW5kIGZpbmFsbHkgbWFrZSBtZSBzdG9wIHVzaW5nIHZpcnR1
+YWxib3ggbG9sLgo+Pgo+PiBUaGFua3MhCj4+Cj4+Cj4+Cj4+Cj4+Cj4+Cj4+Cj4+IERlIDogVXJp
+IEx1YmxpbiA8dXJpbEByZWRoYXQuY29tPgo+PiDDgCA6IGJydXRzQG5ldGMuZnI7Cj4+ICDCoMKg
+wqBzcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPj4gU3VqZXQgOiBSZTogW1NwaWNl
+LWRldmVsXSBzcGljZS12ZGFnZW50OiBob3cgdG8gZW5hYmxlIGFkZGl0aW9uYWwgbW91c2UgYnV0
+dG9ucz8KPj4gRGF0ZSA6IDAzLzA1LzIwMjAgMTc6MzM6NTUgRXVyb3BlL1BhcmlzCj4+Cj4+IE9u
+IDUvMS8yMCAzOjUxIFBNLCBicnV0c0BuZXRjLmZyIHdyb3RlOgo+Pj4KPj4+IEkgYW0gdXNpbmcg
+c3BpY2UtdmRhZ2VudCBvbiBtb3N0IG9mIG15IHFlbXUta3ZtIHZtJ3MsIHdoaWxlIHRoaXMgaXMg
+dmVyeQo+Pj4gY29udmVuaWVudCwgbW91c2UgYnV0dG9uIDggYW5kIDkgYXJlIG5vdCB3b3JraW5n
+ICh0aG9zZSBhcmUgdGhlIHNpZGUKPj4+IGJ1dHRvbnMgb2YgdGhlIG1vdXNlLCBvbmUgaXMgb2Z0
+ZW4gdXNlZCBmb3IgQkFDSyBmdW5jdGlvbiBvZiB0aGUKPj4+IGJyb3dzZXIsIHdoaWNoIG15IHRo
+dW1iIGlzIGFjdHVhbGx5IGFkZGljdGVkIHRvKS4KPj4+IEhvdyBjb3VsZCBpIG1ha2UgdGhlc2Ug
+YnV0dG9ucyB3b3JrIHdpdGggc3BpY2UtdmRhZ2VudD8KPj4KPj4gSGksCj4+Cj4+IEN1cnJlbnRs
+eSA1IG1vdXNlIGJ1dHRvbnMgYXJlIHN1cHBvcnRlZC4gSSB0aGluayBzb21lIGNvZGUgaXMgbmVl
+ZGVkIHRvCj4+IGJlIGFkZGVkIGluIG9yZGVyIHRvIHN1cHBvcnQgbW9yZSBidXR0b25zLgo+Pgo+
+PiBVcmkuCj4+Cj4+Pgo+Pj4gVGhhbmtzIGZvciB0aGUgc3VnZ2VzdGlvbnMsCj4+Pgo+Pj4gQnJ1
+dHMKPj4KPj4KPj4KPiAKPiAKPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5m
+cmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
+aW5mby9zcGljZS1kZXZlbAo=
