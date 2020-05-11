@@ -2,30 +2,30 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FE5A1CDED2
-	for <lists+spice-devel@lfdr.de>; Mon, 11 May 2020 17:24:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2092A1CE882
+	for <lists+spice-devel@lfdr.de>; Tue, 12 May 2020 00:53:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AD7AE6E4B6;
-	Mon, 11 May 2020 15:24:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7EA746E7E5;
+	Mon, 11 May 2020 22:53:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from relay-2.mailobj.net (relay-2.mailobj.net [213.182.54.5])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B3B316E4B6
- for <spice-devel@lists.freedesktop.org>; Mon, 11 May 2020 15:24:45 +0000 (UTC)
-Received: from www-2.localdomain (www-2.in.mailobj.net [192.168.90.194])
- by relay-2.mailobj.net (Postfix) with SMTP id 46491136B;
- Mon, 11 May 2020 17:24:44 +0200 (CEST)
-Received: by www-2.mailo.com with http webmail; Mon, 11 May 2020
- 17:24:44 +0200 (CEST)
-X-EA-Auth: SFOEGurRWKeto7UxVvfeSgRVsuEYcZr2j/Eyh7Jb3U5lB5M2pA0zjijKLLQa6wSEGBAd+8zoyrRU23FOExA7Fg==
+Received: from relay-1.mailobj.net (relay-1.mailobj.net [213.182.54.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 184D46E7D0
+ for <spice-devel@lists.freedesktop.org>; Mon, 11 May 2020 22:53:05 +0000 (UTC)
+Received: from www-1.localdomain (www-1.in.mailobj.net [192.168.90.193])
+ by relay-1.mailobj.net (Postfix) with SMTP id 0366F12DB;
+ Tue, 12 May 2020 00:53:03 +0200 (CEST)
+Received: by www-1.mailo.com with http webmail; Tue, 12 May 2020
+ 00:53:02 +0200 (CEST)
+X-EA-Auth: Ult3LVgo4CJnEmVXkYm0eUCIIISt9v5CNPZz+rGadhNhI+4kIOB/EK5mtPFTQGFRdMS0q8HiE9j32pVY2iSP9g==
 From: bruts@netc.fr
 To: uril@redhat.com,
  spice-devel@lists.freedesktop.org
-Date: Mon, 11 May 2020 17:24:44 +0200 (CEST)
+Date: Tue, 12 May 2020 00:53:02 +0200 (CEST)
 X-Priority: 3
 MIME-Version: 1.0
 X-Mailer: COMS/EA19.11/r20200424
-Message-ID: <ea-mime-5eb96e3c-6e49-693d35e9@www-2.mailo.com>
+Message-ID: <ea-mime-5eb9d74e-6a24-301848c1@www-1.mailo.com>
 In-Reply-To: <9f3f0810-bc2f-50c6-d324-4c6cbd740200@redhat.com>
 Subject: Re: [Spice-devel] spice-vdagent: how to enable additional mouse
  buttons?
@@ -40,46 +40,54 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0803498814=="
+Content-Type: multipart/mixed; boundary="===============1538544256=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0803498814==
+--===============1538544256==
 Content-Type: multipart/alternative;
- boundary="----=_NextPart_001_5eb96e3c_6e49_54d48866"
+ boundary="----=_NextPart_001_5eb9d74e_6a24_208f92af"
 
-------=_NextPart_001_5eb96e3c_6e49_54d48866
+------=_NextPart_001_5eb9d74e_6a24_208f92af
 Content-Type: text/plain;
  charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 
 
-Hi Uri,
+Uri (and others),
 
 
 
-Ok that's probably a bridge too far for me without any help from a develop=
-er...
+I found the similar question in a few corners of the internet and I think =
+adding at least the additional default mouse buttons should not be all that=
+ much work.
 
-Any chance I could get this help you think, or will I have to wait until f=
-uture release when this might be implemented?
+With some guidance I could probably do it myself, though the guidance woul=
+d need to be quite substantial :)
 
-As I wrote in the first post, my thumb is kind of addicted to the BACK but=
-ton (button 8) on my mouse and it gives just too much frustration
+The mouse and the main buttons is already forwarded and that is the main p=
+art.
 
-using Spice on qemu-kvm if I keep clicking that button in any guest withou=
-t a result...
+with xev it is clear to see which buttons work on the host, but not on the=
+ guest.
 
-What help/advise could you give me on top of what you already did?
-
-
-
-Your help is/has been appreciated!
-
+Anyone with some spare time (which I know is always limited for everyone),=
+ but help me where to fix this in the code and i will write a patch - or gi=
+ve me a good start - or start yourself.
 
 
-Cheers!
+
+a semi working mouse in the guest is very annoying and can be one of the c=
+ritical points why to use spice (or not) - at least i know it is in my case=
+.
+
+
+
+Thanks!!
+
+
+
 
 
 De : Uri Lublin <uril@redhat.com>
@@ -323,23 +331,26 @@ ry
 
 
 
-------=_NextPart_001_5eb96e3c_6e49_54d48866
+------=_NextPart_001_5eb9d74e_6a24_208f92af
 Content-Type: text/html;
  charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div>Hi Uri,</div><div><br></div><div>Ok that's probably a b=
-ridge too far for me without any help from a developer...</div><div>Any cha=
-nce I could get this help you think, or will I have to wait until future re=
-lease when this might be implemented?</div><div>As I wrote in the first pos=
-t, my thumb is kind of addicted to the BACK button (button 8) on my mouse a=
-nd it gives just too much frustration</div><div>using Spice on qemu-kvm if =
-I keep clicking that button in any guest without a result...</div><div>What=
- help/advise could you give me on top of what you already did?</div><div><b=
-r></div><div>Your help is/has been appreciated!</div><div><br></div><div>Ch=
-eers!<br></div><br><blockquote type=3D"cite" style=3D"margin:0 0 0 0.5em;bo=
-rder-left:1px #00f solid;padding-left:1em;">De : Uri Lublin &lt;uril@redhat=
-.com&gt;<br>
+<div><br></div><div>Uri (and others),</div><div><br></div><div>I found the =
+similar question in a few corners of the internet and I think adding at lea=
+st the additional default mouse buttons should not be all that much work.</=
+div><div>With some guidance I could probably do it myself, though the guida=
+nce would need to be quite substantial :)</div><div>The mouse and the main =
+buttons is already forwarded and that is the main part.</div><div>with xev =
+it is clear to see which buttons work on the host, but not on the guest.</d=
+iv><div>Anyone with some spare time (which I know is always limited for eve=
+ryone), but help me where to fix this in the code and i will write a patch =
+- or give me a good start - or start yourself.</div><div><br></div><div>a s=
+emi working mouse in the guest is very annoying and can be one of the criti=
+cal points why to use spice (or not) - at least i know it is in my case.</d=
+iv><div><br></div><div>Thanks!!<br></div><div><br></div><br><br><blockquote=
+ type=3D"cite" style=3D"margin:0 0 0 0.5em;border-left:1px #00f solid;paddi=
+ng-left:1em;">De : Uri Lublin &lt;uril@redhat.com&gt;<br>
 =C3=80 : bruts@netc.fr;<br>
 =C2=A0=C2=A0=C2=A0spice-devel@lists.freedesktop.org<br>
 Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse bu=
@@ -598,10 +609,10 @@ ded to<br>
 &gt; <br>
 <br></blockquote>
 
-------=_NextPart_001_5eb96e3c_6e49_54d48866--
+------=_NextPart_001_5eb9d74e_6a24_208f92af--
 
 
---===============0803498814==
+--===============1538544256==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -612,5 +623,5 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0803498814==--
+--===============1538544256==--
 
