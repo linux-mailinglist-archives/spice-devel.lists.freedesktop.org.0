@@ -2,70 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A35AD1CFEFF
-	for <lists+spice-devel@lfdr.de>; Tue, 12 May 2020 22:09:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B91461D0041
+	for <lists+spice-devel@lfdr.de>; Tue, 12 May 2020 23:11:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 144486E1B6;
-	Tue, 12 May 2020 20:08:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ECB276E99E;
+	Tue, 12 May 2020 21:11:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9923B6E1B6
- for <spice-devel@lists.freedesktop.org>; Tue, 12 May 2020 20:08:57 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 97C906E99E
+ for <spice-devel@lists.freedesktop.org>; Tue, 12 May 2020 21:11:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589314136;
+ s=mimecast20190719; t=1589317906;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tQL3vQ73fSYEwfe9ktKra4og+OOBphHjkVoDCuQF0HQ=;
- b=gD1hG3Kjwgv9n+uRZR/cDFGd+pLce0WYFa6tXu5WA4CNbykTn3M6Jp124M3sH5MA5CNdkF
- x7WpWcs5FM422dQC7w+3ZbG2/68dIugSq+1YFCJz8G/hM3tbwoF69uD0XDH3QFUort8l0Y
- Jdtjg0R7+x5NFrU39VPccngII/yJ5e4=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-90-y82-nOcpMGm-7r0OvzHyDA-1; Tue, 12 May 2020 16:08:51 -0400
-X-MC-Unique: y82-nOcpMGm-7r0OvzHyDA-1
-Received: by mail-wm1-f70.google.com with SMTP id 23so2305230wma.8
- for <spice-devel@lists.freedesktop.org>; Tue, 12 May 2020 13:08:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=tQL3vQ73fSYEwfe9ktKra4og+OOBphHjkVoDCuQF0HQ=;
- b=jmI2SEIu819eDjnmksrT/M0Or0A8TUMgiDxCuRW+dMeNC//e2b7fGBzAqCNAoCxZjJ
- 15WosnDPRa1JLIo1zv2rELVUJEEW/qV0ew+jkiUSNvaimR0MgMM4n8EkIvv4IBk4jmbf
- o9ZKs+o92CeQM2IXkHMOUzaekM5x/A+SegfhBA4ZbWl5DQ/a2fUQVpOc1bb8URRSUGdb
- 4/Z09JB2srFwY3wanx3tSqpZmNPVXnM9hbP025UD61tq/mgpztDpTRBmUn1JIAuFQawL
- x7GguqByeDx7hrzFicUoOkcMOQTmzPJxFTr0B3UumdDQTwshPYWWXP7f5BB8Fs8PUgE7
- 9AjA==
-X-Gm-Message-State: AGi0PuYJ9CelsL4o8YoA/QgPitCOtPJCdO+5ROrH22zjmIUGHwWCLQlL
- HKWy+x3M7fVPpMdAqcijz0vGUZuzF9C9VhcAX22h6y99w03hKDQE6Lfun9lzGbps6I84knATQ0Y
- eV8av2ZZw3QEMGR3qIsmjWxaixsvAflI=
-X-Received: by 2002:adf:e682:: with SMTP id r2mr25827022wrm.378.1589314129640; 
- Tue, 12 May 2020 13:08:49 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJ7k51Ew9J+5h8m5gBUvXvt2KXuT4KvnQ2XEz6Fvtrucq6IT0aI/oxhdiEkJnNbYnpfq/XgIw==
-X-Received: by 2002:adf:e682:: with SMTP id r2mr25827001wrm.378.1589314129325; 
- Tue, 12 May 2020 13:08:49 -0700 (PDT)
-Received: from [192.168.1.138] ([151.21.9.164])
- by smtp.gmail.com with ESMTPSA id r11sm21384721wma.35.2020.05.12.13.08.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 May 2020 13:08:48 -0700 (PDT)
-To: =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@gmail.com>
+ bh=hqn3HUeqE6xh/nEmyj60yoF+NPpqzYR9/jsvSIWc3N8=;
+ b=iY6J3TyHtvPrzcbpe65mcK8Vk8e+6omw1k21s7bFqaDa1hF7lrEmfSdF0tTSX6V4eQDmXM
+ 6Tz20yKhXanlSXBwXMS1FQveeryQT3o42G4vWuDbzq5SePnjTc9tvOK7tdDOE1nYI/NERy
+ JpU97nx2GIW7FHcgOg+TWgQ70TPwhe0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-414-2kRuyDoLOFK5Xb-9mFkL5Q-1; Tue, 12 May 2020 17:11:44 -0400
+X-MC-Unique: 2kRuyDoLOFK5Xb-9mFkL5Q-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6BCF2107ACF2;
+ Tue, 12 May 2020 21:11:43 +0000 (UTC)
+Received: from localhost (ovpn-112-136.ams2.redhat.com [10.36.112.136])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 01A2B6E6E7;
+ Tue, 12 May 2020 21:11:42 +0000 (UTC)
+Date: Tue, 12 May 2020 23:11:41 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Francesco Giudici <fgiudici@redhat.com>
+Message-ID: <20200512211141.gjewx74ruurghvot@wingsuit>
 References: <CAMxuvawzmqKdLwk6AvthZkmZTr9T+q+UU8Q+raVHj0nZ2swhiw@mail.gmail.com>
  <20200512092427.GI1191162@redhat.com>
  <80cd33e2-94e1-df9a-65ea-ac84d07b18d1@redhat.com>
  <CAJ+F1C+pJ3irit25KgUrppZSiRHCaL7Lt+iqaPYaFmM16PavnQ@mail.gmail.com>
-From: Francesco Giudici <fgiudici@redhat.com>
-Message-ID: <aeadf3f5-b104-4ebf-e2e9-90aa5d320d5f@redhat.com>
-Date: Tue, 12 May 2020 22:08:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ <aeadf3f5-b104-4ebf-e2e9-90aa5d320d5f@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CAJ+F1C+pJ3irit25KgUrppZSiRHCaL7Lt+iqaPYaFmM16PavnQ@mail.gmail.com>
-Content-Language: en-US
+In-Reply-To: <aeadf3f5-b104-4ebf-e2e9-90aa5d320d5f@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Subject: Re: [Spice-devel] About decisions and reviews
@@ -81,100 +62,78 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1831704456=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-CgpPbiAxMi8wNS8yMCAxOToxMywgTWFyYy1BbmRyw6kgTHVyZWF1IHdyb3RlOgo+IEhpCj4gCj4g
-T24gVHVlLCBNYXkgMTIsIDIwMjAgYXQgNTowNyBQTSBGcmFuY2VzY28gR2l1ZGljaSA8ZmdpdWRp
-Y2lAcmVkaGF0LmNvbT4gd3JvdGU6Cj4+Cj4+Cj4+Cj4+IE9uIDEyLzA1LzIwIDExOjI0LCBEYW5p
-ZWwgUC4gQmVycmFuZ8OpIHdyb3RlOgo+Pj4gT24gTW9uLCBNYXkgMTEsIDIwMjAgYXQgMTI6MTY6
-MjRQTSArMDIwMCwgTWFyYy1BbmRyw6kgTHVyZWF1IHdyb3RlOgo+Pj4+IEhpLAo+Pj4+Cj4+Pj4g
-QWJvdXQgIk1vdmUgY29kZSB0byBDKysiOgo+Pj4+IGh0dHBzOi8vZ2l0bGFiLmZyZWVkZXNrdG9w
-Lm9yZy9zcGljZS9zcGljZS8tL21lcmdlX3JlcXVlc3RzLzYyCj4+Pj4KPj4+PiBJIHdvdWxkIGxp
-a2UgdG8ga25vdyBob3cgdGhlIGRlY2lzaW9uIGhhcHBlbmVkLiBBcyBsb25nIGFzIEkgaGF2ZSBi
-ZWVuCj4+Pj4gaW52b2x2ZWQgaW4gdGhlIFNwaWNlIHByb2plY3QsIHdlIGhhZCBvcGVuIGRpc2N1
-c3Npb25zIGFuZCBkaWQKPj4+PiBtYW5kYXRvcnkgcmV2aWV3IGZvciBhbnl0aGluZyBub24tdHJp
-dmlhbC4KPj4+Pgo+Pj4+IFRoaXMgY2hhbmdlIGlzIHN1YnN0YW50aWFsLCBhbmQgaW1wYWN0cyB0
-aGUgd29yayBhbmQgY29udHJpYnV0aW9uIG9mCj4+Pj4gb3RoZXJzLiBXaGVyZSBkaWQgdGhlIGRp
-c2N1c3Npb24gaGFwcGVuPyBXaG8gcmV2aWV3ZWQgdGhlIGNvZGUKPj4+PiBjaGFuZ2VzPwo+Pj4K
-Pj4+IExvb2tpbmcgYXQgdGhhdCBtZXJnZSByZXF1ZXN0LCBpdCBpcyBwcmV0dHkgc3VycHJpc2lu
-ZyB0byBzZWUgYSAxMDAKPj4+IHBhdGNoIGxvbmcgc2VyaWVzIG1lcmdlZCB3aXRoIG5vIHJldmll
-dyBjb21tZW50cyB2aXNpYmxlIG9uIHRoZSBjb2RlCj4+PiBmcm9tIG90aGVyIG1haW50YWluZXJz
-Lgo+Pj4KPj4+IFJlZ2FyZHMsCj4+PiBEYW5pZWwKPj4+Cj4+Cj4+IEkgc2VlIHlvdXIgcG9pbnRz
-OiBhIHByb3BlciBkaXNjdXNzaW9uIGFuZCBmYWlyIHJldmlldyBvbiB0aGUgYnJhbmNoCj4+IHdv
-dWxkIGhhdmUgYmVlbiB0aGUgd2F5IHRvIGdvLgo+PiBUbyBoYXZlIGEgZmFpciBvdmVyYWxsIHBp
-Y3R1cmUgYnR3LCBJIHRoaW5rIHdlIHNob3VsZCBhbHNvIGNvbnNpZGVyIHNvbWUKPj4gb3RoZXIg
-cG9pbnRzOgo+PiAkPiBnaXQgc2hvcnRsb2cgLS1zaW5jZSAwMS8wMS8yMDE5IC1zIC1uCj4+ICAg
-ICAgNDExICBGcmVkaWFubyBaaWdsaW8KPj4gICAgICAgMjkgIFZpY3RvciBUb3NvCj4+ICAgICAg
-IDIwICBVcmkgTHVibGluCj4+ICAgICAgIDE0ICBGcmFuY29pcyBHb3VnZXQKPj4gICAgICAgMTEg
-IENocmlzdG9waGUgRmVyZ2VhdQo+PiAgICAgICAxMCAgU25pciBTaGVyaWJlcgo+PiAgICAgICAg
-NiAgRWR1YXJkbyBMaW1hIChFdHJ1bmtvKQo+PiAgICAgICAgNiAgSm9uYXRob24gSm9uZ3NtYQo+
-PiAgICAgICAgNiAgS2V2aW4gUG91Z2V0Cj4+ICAgICAgICA2ICBMdWvDocWhIEhyw6F6a8O9Cj4+
-ICAgICAgICA1ICBKYW1lcyBMZSBDdWlyb3QKPj4gICAgICAgIDMgIFRoaWFnbyBNZW5kZXMKPj4g
-ICAgICAgIDIgIFJvc2VuIFBlbmV2Cj4+ICAgICAgICAxICBCZW5qYW1pbiBUaXNzb2lyZXMKPj4g
-ICAgICAgIDEgIENocmlzdGlhbiBFaHJoYXJkdAo+PiAgICAgICAgMSAgRG91Z2xhcyBQYXVsCj4+
-ICAgICAgICAxICBHaWxtYXIgU2FudG9zIEpyCj4+ICAgICAgICAxICBKZXJlbXkgV2hpdGUKPj4g
-ICAgICAgIDEgIHdvcmxkb2ZwZWFjZQo+PiAgICAgICAgMSAg6LCiIOaYhuaYjgo+IAo+IFRvIGJl
-ICJmYWlyIiwgdGhlIG51bWJlciBvZiBjb21taXRzIGluIHNwaWNlIHNlcnZlciBhbG9uZSBvdmVy
-IDEuNXkgaXMKPiBub3QgYSB2ZXJ5IGdvb2QgbWV0cmljLiBDZXJ0YWlubHksIEZyZWRpYW5vJ3Mg
-d29yayBpcyBjb25zZXF1ZW50LAo+IHRoYW5rIHlvdSwgYnV0IGl0J3MgYWxzbyBwYXJ0IG9mIGhp
-cyBqb2IgYWZhaWsuCk15IHBvaW50IGhlcmUgaXMgdGhhdCBpbiB0aGUgbGFzdCAxLjV5IHRoZXJl
-IHdhcyB2ZXJ5IGxpdHRsZSAKY29udHJpYnV0aW9uIHRvIHRoZSBwcm9qZWN0IGFwYXJ0IGZyb20g
-RnJlZGlhbm8uIFNhbWUgb24gdGhlIHJldmlldyAKc2lkZS4gSW4gdGhpcyBjb250ZXh0LCBJIGNh
-biB1bmRlcnN0YW5kIHdoeSB0aGUgYnJhbmNoIHdhcyBtZXJnZWQuIEkgCmhhdmUgbXkgb3Bpbmlv
-biwgYnV0IGhlcmUgSSBkb24ndCB3YW50IHRvIHNheSBoZSBkaWQgaXQgcmlnaHQgb3IgaGUgZGlk
-IAppdCB3cm9uZzogSSdtIGp1c3Qgc2F5aW5nIEkgY2FuIHVuZGVyc3RhbmQgd2h5IGhlIGRpZC4K
-Cj4gCj4+Cj4+IEZyZWRpYW5vJ3MgYnJhbmNoZXMgZG9uJ3QgZ2V0IG11Y2ggcmV2aWV3cyAoaWYg
-YW55Li4uIHNlZSB0aGUgZnVsbCBsaXN0Cj4+IG9mIG1lcmdlZC9jbG9zZWQgTVIgaW4gZ2l0bGFi
-IGZvciB0aGUgc3BpY2Uvc3BpY2UgcHJvamVjdCkuIEkgdGhpbmsgd2UKPj4gYWxsIGFncmVlIHRo
-YXQgaGlzIGludGVudGlvbiBpcyBnb29kLCB3aGljaCBpcyB0byBqdXN0IG1vdmUgdGhlIHByb2pl
-Y3QKPj4gZm9yd2FyZC4gV29uZGVyaW5nIHdobyB3b3VsZCBoYXZlIGxvb2tlZCBpbnRvIGhpcyAx
-MDAgcGF0Y2hlcyBicmFuY2ggdG8KPj4gZG8gYSBmYWlyIHJldmlldyBpbiBhIHJlYXNvbmFibGUg
-dGltZS1mcmFtZS4KPj4gSSBmZWVsIChhdCBsZWFzdCBwYXJ0aWFsbHkpIGd1aWx0eSBmb3IgdGhp
-cyBzaXR1YXRpb24uCj4+Cj4+IFRoYXQgc2FpZC4uLiBhdCB0aGlzIHBvaW50IHRoZSBicmFuY2gg
-aGFzIGJlZW4gbWVyZ2VkLiBXaGF0IGFyZSB0aGUKPj4gcHJvcG9zYWxzIG5vdz8KPj4KPj4gRHJh
-ZnQgYSBtb3JlIGZvcm1hbCByZXZpZXcvY29tbWl0IHBvbGljeT8gV2hhdCBpZiBhIGJyYW5jaCBk
-b2Vzbid0IGdldCBhCj4+IGZhaXIgcmV2aWV3IGluIGFuIGFjY2VwdGFibGUgdGltZS1mcmFtZT8g
-V2hvIHdpbGwgaGF2ZSB0aGUgbGFzdCB3b3JkIGlmCj4+IHVuYW5pbWl0eSBpcyBub3QgcmVhY2hl
-ZD8KPiAKPiBXaGF0IGRvZXMgYW4gYWNjZXB0YWJsZSB0aW1lLWZyYW1lIG1lYW4/IElmIHRoZSB3
-b3JrIGlzIGltcG9ydGFudCwgdGhlCj4gcHJvamVjdCBtYWludGFpbmVycyBzaG91bGQgZG8gYSBy
-ZXZpZXcgaW4gYSB0aW1lbHkgbWFubmVyLiBJZiBub2JvZHkKPiBoYXMgZW5vdWdoIHRpbWUgdG8g
-cmV2aWV3IGNoYW5nZXMsIGlzbid0IGl0IGJlY2F1c2Ugd2UsIGNvbGxlY3RpdmVseSwKPiBoYXZl
-IG1vcmUgaW1wb3J0YW50IHRoaW5ncyB0byBkbz8gVGhlIGNvbnRyaWJ1dG9yIHdobyBwcm9wb3Nl
-ZCBzdWNoIGEKPiBjaGFuZ2UgaW4gdGhlIGZpcnN0IHBsYWNlIHNob3VsZCByZWFsaXplIHRoYXQu
-CgpXZWxsLCBhZ3JlZWluZyBvbiB3aGF0IGlzICJpbXBvcnRhbnQiIGlzIG5vdCBlYXN5LCBhcyBp
-dCBpcyBwZXJzb25hbC4gCkFueSBjb250cmlidXRpb24gaXMgaW1wb3J0YW50IHRvIHRoZSBzdWJt
-aXR0ZXIgOy0pCkJ1dCBteSBwb2ludCBpcywgbGV0J3MgbWFrZSB0aGUgcnVsZXMgY2xlYXJlciwg
-c28gdG8gdHJ5IHRvIGF2b2lkIApzaW1pbGFyIHNpdHVhdGlvbnMgaW4gdGhlIGZ1dHVyZS4KCj4g
-Cj4+Cj4+IERvIHlvdSB3YW50IHRvIGRvIGEgcG9zdC1tZXJnZSByZXZpZXcgdG8gY29uc2lkZXIg
-cmV2ZXJ0aW5nIHRoZSBjb21taXRzPwo+PiBEbyB5b3Ugd2FudCB0byBoYXZlIGEgZGV0YWNoZWQg
-IkMiIGJyYW5jaCB3aXRoIHRoZSBmb3JtZXIgY29kZSB0byBiZQo+PiBrZXB0IGFzIGEgInN0YWJs
-ZSBDIiBvbmU/Cj4+IE9yIHdoYXQgZWxzZT8KPiAKPiBJIGFtIGEgcGFzdCBjb250cmlidXRvciB0
-byB0aGUgU3BpY2Ugc2VydmVyLCBidXQgSSByZWd1bGFybHkgaGF2ZSB0bwo+IHJlYWQgb3IgZGVi
-dWcgdGhlIGNvZGUuIEkga2VlcCBjby1tYWludGFpbmluZyB0aGUgc3BpY2UtZ3RrIGNsaWVudCwK
-PiBhbHRob3VnaCBpdCBzZWVtcyBvdGhlcnMgYXJlIGRvaW5nIGEgcHJldHR5IGdvb2Qgam9iIGF0
-IGhlbHBpbmcgbWUuIElzCj4gdGhlcmUgYSBwcm9ibGVtIHdpdGggdGhlIFNwaWNlIHNlcnZlciBt
-YWludGVuYW5jZT8gSSBkb24ndCBrbm93Lgo+IAo+IFdoYXQgZG8geW91IHdhbnQgbWUgdG8gc2F5
-Li4uIEkgYW0gZGlzYXBwb2ludGVkIGJ5IHRoaXMgY2hhbmdlLCB0aGUKPiBuYXR1cmUgb2YgdGhl
-IGNoYW5nZSwgc3dpdGNoaW5nIHRvIGMrKywgYW5kIHRoZSB3YXkgaXQgaGFwcGVuZWQuIEl0Cj4g
-ZG9lc24ndCByZWZsZWN0IHByYWN0aWNlcyBJIGxpa2UgaW4gb3Blbi1zb3VyY2UgcHJvamVjdHMg
-YW5kIHRoZSB3YXkKPiB0aGUgU3BpY2UgcHJvamVjdCBoYXMgYmVlbiBkZXZlbG9wZWQgaW4gdGhl
-IHBhc3QuCj4gCj4gT3ZlcmFsbCwgdGhlIHdheSBpdCBoYXBwZW5lZCBpcyBkZXRyaW1lbnRhbCB0
-byB0aGUgcHJvamVjdCBpbWhvLCBhbmQgSQo+IHdvdWxkIGluZGVlZCByZXZlcnQgdGhlIGNoYW5n
-ZSBpZiBub2JvZHkgcmV2aWV3ZWQgaXQgb3Blbmx5LiBUaGUgc3BpY2UKPiBzZXJ2ZXIgc2hvdWxk
-IG5vdCB0byBiZSB0YWtlbiBzbyBsaWdodGx5LCBpdCBkb2Vzbid0IGRlc2VydmUgaXQKPiBlaXRo
-ZXIuCgpJIGxpa2UgdGhlIGxvdmUgeW91IGhhdmUgZm9yIHRoZSBwcm9qZWN0LiBSZWFsbHksIGdy
-ZWF0IHRvIHNlZSBpdC4gSXQgaXMgCmFsc28gb2sgdG8gZGlzYWdyZWUgYW5kIGFyZ3VlLiBCdXQg
-d2hlbiB5b3Ugc2F5ICJ0YWtlbiBzbyBsaWdodGx5LCBpdCAKZG9lc24ndCBkZXNlcnZlIGl0IiB5
-b3UgYXJlIHB1dHRpbmcgYmxhbWUgdGhlcmUuLi4gSGV5LCB3ZSBoYXZlIGFsbCB0aGUgCnNhbWUg
-Z29hbCB0byBtYWtlIFNQSUNFIGJldHRlciBhbmQgYmV0dGVyLiBGcmVkaWFubyBtZXJnZWQgdGhl
-IGJyYW5jaCB0byAKaW1wcm92ZSB0aGUgcHJvamVjdCwgbm90IHRvIG1ha2UgaXQgd29yc2UuLi4g
-YW5kIGhlIHByb3ZlZCB0byBsb3ZlIHRoZSAKcHJvamVjdCB0b28uIFdlIGFyZSBhbGwgb24gdGhl
-IHNhbWUgc2lkZSEKU28sIGxldCdzIG1vdmUgZm9yd2FyZC4uLiBGcmVkaWFubyBtZXJnZWQgaXQs
-IHRoaXMgaXMgZG9uZS4gV2hhdCB3b3VsZCAKeW91IHByb3Bvc2UgdG8gZG8gbm93PyBMZXQncyBt
-b3ZlIHRoZSBkaXNjdXNzaW9uIG9uIHdoYXQgdG8gZG8gbm93IDotKQoKRnJhbmNlc2NvCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBt
-YWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwK
+--===============1831704456==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="o6xxxa5kx3umefoe"
+Content-Disposition: inline
+
+--o6xxxa5kx3umefoe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hi,
+
+On Tue, May 12, 2020 at 10:08:46PM +0200, Francesco Giudici wrote:
+> So, let's move forward... Frediano merged it, this is done.
+> What would you propose to do now? Let's move the discussion on
+> what to do now :-)
+
+I agree that this is the best course of action.
+
+My suggestion was to ping people that used to be involved in
+Spice and are proficient in C++ and possibly would enjoy some
+wine and/or chocolates as good incentive to make time to
+review/test it (before the merge). So, options that come to mind
+now:
+
+1) Revert, wait review, reviewed, (merging again or not)
+2) Revert, wait review, never reviewed, (cyber dust or a fork)
+3) Revert and fork it.
+
+I have a quite heavy trust in Frediano so my expectation of a
+fork is that it would become quite hard to GObject server to stay
+in parity with spice-cpp without new contributors.
+
+Cheers,
+Victor
+
+--o6xxxa5kx3umefoe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl67EQ0ACgkQl9kSPeN6
+SE9jzQ/+IJR9HVlUXHnk4F9zOP22ffg+F/2rXpmDgnDRerIjnGqyVLbIkNaKwdpz
+wAfoMnf2J2PSV4PY0u9R1R+dDIWT/Le3omxpj208U9XJuSKjgtdREgOa7fAEs6Iy
+cBy8kT74BhDQqExBR7/RaDaFNwUx7qgMcTBmf2TG0DQd1cCF5sm7QwqJmeXPXOv3
+dQ3iyTWyGCtBaTp8hforqhK7EEdd1DGfsPLwamjSmyzeS0BnB7QIE6fq76Fv4CwK
+iQFjHkZRYm9WlGsusBEJwUN4z/PrTYZ2MTuclL9aYL/cu+Xs8CPj/iXPSwCR5FIx
+yJvztFcaIhTEaNGEMmm1JCA1LoKuKinRcuIvrlYQgDTI6HKsxx3YyD5XVFpBUf1E
+NFirGCuJMvbyu0/F/kExlnWyai+AhVC+XlaHTGUMU54faXqs1S98NyXoPystaotv
+LIo8kkDIVq8K550VRgsretiPkyfGqeYo5lldlYP3Vq9lAaZUTKHp8p+TWWB1ceHi
+nyVq1TRWrsCYVHRxwYUKrxLBE3NRXYZsQxtjDZxp4NKkGRJdMpg8AiA/eP6P03FH
+YKyGd7lvXBMJrDxeZGSC6tbSEGJ0xRWXkECI8HGrAEGlzrHZnMGnH6L4pJE91jQX
+tgpzeOLwCaypO9u6YKQehqUh/8oW62w78clLFA6kC/jLfdJOTzY=
+=IxbF
+-----END PGP SIGNATURE-----
+
+--o6xxxa5kx3umefoe--
+
+
+--===============1831704456==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1831704456==--
+
