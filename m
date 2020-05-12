@@ -2,57 +2,32 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B2F51D0101
-	for <lists+spice-devel@lfdr.de>; Tue, 12 May 2020 23:39:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 925751D0160
+	for <lists+spice-devel@lfdr.de>; Tue, 12 May 2020 23:58:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D85946E9C3;
-	Tue, 12 May 2020 21:39:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 172956E9E0;
+	Tue, 12 May 2020 21:58:31 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6FBE76E9C3
- for <spice-devel@lists.freedesktop.org>; Tue, 12 May 2020 21:39:53 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id 50so17322138wrc.11
- for <spice-devel@lists.freedesktop.org>; Tue, 12 May 2020 14:39:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=tj9FqFSvrbr2+1Qoap1UB+tY+Igj1R3Idi9o71c7M0g=;
- b=VOJZRYdu+1nGN4TZUtWvOdX5PpetGL0lsWSBa/n0LldTk7KByiPvHlg3YqHgb429vO
- QK0myhgDx97jSyBdn7YBtE/twAR76CpWjjeSSWo2lujZaDejuubelaSSaE1ecdHIEcWT
- edek8r8HcMTlWTSVw+vjQsyHMVVigOF0rUWjIEqMcwhYl7KlDr1D0f4UlGGzm8nVNTCO
- QA61bECFjQQLvfQbx6TgNpmWUQ/Ex/qDH5B7Q+eb7XqaWGGBKA38ayVa1dW+SYO+MmgW
- xiRv7Mf4qQaYpqXnOKQeIqJnZ1DF86DUxIjLra1j7U/cmZ2UKqYsvtFADxZNMBxtqIPZ
- PHEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=tj9FqFSvrbr2+1Qoap1UB+tY+Igj1R3Idi9o71c7M0g=;
- b=MO8DFmYY8EZ7YkvtExPAEa9jCHN7/lO32jK4tG5wx2BrOuTp1cNcf1+YcGijVY2yZD
- NCsWmGlXxcSJJwkkBkGQDXVPl19OVbmhKjz5whqotke+GyGoLFy9Lhx2YKeK5NpsKqyA
- D0b17L2BBBxCbO3bwunOc27uaN/ajmu1v5MzcFCKAU9hK8pKDOLbxj79+8OAdRUNgPYL
- yPPpRlfHxyXt1iBs0mrcN66MQGPehEFn2r79+xwVxPEtbLAdFCuBEfcWRApjBBmeen0q
- Q3ec58OGy5/K71obi/HPmGhh0Uw5BABIIOCAkQX7PRdrsh/6BCHczBWi9VjR+r4wuEBB
- VR9g==
-X-Gm-Message-State: AGi0PuYsPaUtl6duqW0/muiOnLoymVSgLw6/znjfVo56Soowuk0RLMgv
- NF0Tb6yYrwFy0MTw9LeSDwQo9eT3JHl7/Mqr6wiiBueY
-X-Google-Smtp-Source: APiQypIJeB91dpUlNaTGrog5+F+il8RGAHKiZilrKHzNsCb6DYTebsij9xKhizpzi03TGwMduCSO9ZYVHvfxQcWxmA0=
-X-Received: by 2002:adf:c7c3:: with SMTP id y3mr26778102wrg.196.1589319592015; 
- Tue, 12 May 2020 14:39:52 -0700 (PDT)
+Received: from relay-1.mailobj.net (relay-1.mailobj.net [213.182.54.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2CB886E9E0
+ for <spice-devel@lists.freedesktop.org>; Tue, 12 May 2020 21:58:29 +0000 (UTC)
+Received: from www-1.localdomain (www-1.in.mailobj.net [192.168.90.193])
+ by relay-1.mailobj.net (Postfix) with SMTP id 1157311F4;
+ Tue, 12 May 2020 23:58:27 +0200 (CEST)
+Received: by www-1.mailo.com with http webmail; Tue, 12 May 2020
+ 23:58:26 +0200 (CEST)
+X-EA-Auth: 0ydz7wwUHadoYbDRTNG4ZyJ9xwohor72lUdNL/wvEfDL+px5cSZvGaGD/MRHNeGnUOfjFY1o/9hre/k7SNA+zw==
+From: bruts@netc.fr
+To: "Victor Toso" <victortoso@redhat.com>
+Date: Tue, 12 May 2020 23:58:26 +0200 (CEST)
+X-Priority: 3
 MIME-Version: 1.0
-References: <CAMxuvawzmqKdLwk6AvthZkmZTr9T+q+UU8Q+raVHj0nZ2swhiw@mail.gmail.com>
- <20200512092427.GI1191162@redhat.com>
- <80cd33e2-94e1-df9a-65ea-ac84d07b18d1@redhat.com>
- <CAJ+F1C+pJ3irit25KgUrppZSiRHCaL7Lt+iqaPYaFmM16PavnQ@mail.gmail.com>
- <aeadf3f5-b104-4ebf-e2e9-90aa5d320d5f@redhat.com>
-In-Reply-To: <aeadf3f5-b104-4ebf-e2e9-90aa5d320d5f@redhat.com>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
-Date: Tue, 12 May 2020 23:39:39 +0200
-Message-ID: <CAJ+F1CKLL1FbVQm9XjbSrH4OeTdLyw921t2ifRC4cHuhZpyWzQ@mail.gmail.com>
-To: Francesco Giudici <fgiudici@redhat.com>
-Subject: Re: [Spice-devel] About decisions and reviews
+X-Mailer: COMS/EA19.11/r20200424
+Message-ID: <ea-mime-5ebb1c02-6f46-557ff269@www-1.mailo.com>
+In-Reply-To: <20200512052559.3cqwgmrlugzqdbld@wingsuit>
+Subject: Re: [Spice-devel] spice-vdagent: how to enable additional mouse
+ buttons?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,117 +39,173 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0177412076=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGkKCk9uIFR1ZSwgTWF5IDEyLCAyMDIwIGF0IDEwOjA4IFBNIEZyYW5jZXNjbyBHaXVkaWNpIDxm
-Z2l1ZGljaUByZWRoYXQuY29tPiB3cm90ZToKPgo+Cj4KPiBPbiAxMi8wNS8yMCAxOToxMywgTWFy
-Yy1BbmRyw6kgTHVyZWF1IHdyb3RlOgo+ID4gSGkKPiA+Cj4gPiBPbiBUdWUsIE1heSAxMiwgMjAy
-MCBhdCA1OjA3IFBNIEZyYW5jZXNjbyBHaXVkaWNpIDxmZ2l1ZGljaUByZWRoYXQuY29tPiB3cm90
-ZToKPiA+Pgo+ID4+Cj4gPj4KPiA+PiBPbiAxMi8wNS8yMCAxMToyNCwgRGFuaWVsIFAuIEJlcnJh
-bmfDqSB3cm90ZToKPiA+Pj4gT24gTW9uLCBNYXkgMTEsIDIwMjAgYXQgMTI6MTY6MjRQTSArMDIw
-MCwgTWFyYy1BbmRyw6kgTHVyZWF1IHdyb3RlOgo+ID4+Pj4gSGksCj4gPj4+Pgo+ID4+Pj4gQWJv
-dXQgIk1vdmUgY29kZSB0byBDKysiOgo+ID4+Pj4gaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Au
-b3JnL3NwaWNlL3NwaWNlLy0vbWVyZ2VfcmVxdWVzdHMvNjIKPiA+Pj4+Cj4gPj4+PiBJIHdvdWxk
-IGxpa2UgdG8ga25vdyBob3cgdGhlIGRlY2lzaW9uIGhhcHBlbmVkLiBBcyBsb25nIGFzIEkgaGF2
-ZSBiZWVuCj4gPj4+PiBpbnZvbHZlZCBpbiB0aGUgU3BpY2UgcHJvamVjdCwgd2UgaGFkIG9wZW4g
-ZGlzY3Vzc2lvbnMgYW5kIGRpZAo+ID4+Pj4gbWFuZGF0b3J5IHJldmlldyBmb3IgYW55dGhpbmcg
-bm9uLXRyaXZpYWwuCj4gPj4+Pgo+ID4+Pj4gVGhpcyBjaGFuZ2UgaXMgc3Vic3RhbnRpYWwsIGFu
-ZCBpbXBhY3RzIHRoZSB3b3JrIGFuZCBjb250cmlidXRpb24gb2YKPiA+Pj4+IG90aGVycy4gV2hl
-cmUgZGlkIHRoZSBkaXNjdXNzaW9uIGhhcHBlbj8gV2hvIHJldmlld2VkIHRoZSBjb2RlCj4gPj4+
-PiBjaGFuZ2VzPwo+ID4+Pgo+ID4+PiBMb29raW5nIGF0IHRoYXQgbWVyZ2UgcmVxdWVzdCwgaXQg
-aXMgcHJldHR5IHN1cnByaXNpbmcgdG8gc2VlIGEgMTAwCj4gPj4+IHBhdGNoIGxvbmcgc2VyaWVz
-IG1lcmdlZCB3aXRoIG5vIHJldmlldyBjb21tZW50cyB2aXNpYmxlIG9uIHRoZSBjb2RlCj4gPj4+
-IGZyb20gb3RoZXIgbWFpbnRhaW5lcnMuCj4gPj4+Cj4gPj4+IFJlZ2FyZHMsCj4gPj4+IERhbmll
-bAo+ID4+Pgo+ID4+Cj4gPj4gSSBzZWUgeW91ciBwb2ludHM6IGEgcHJvcGVyIGRpc2N1c3Npb24g
-YW5kIGZhaXIgcmV2aWV3IG9uIHRoZSBicmFuY2gKPiA+PiB3b3VsZCBoYXZlIGJlZW4gdGhlIHdh
-eSB0byBnby4KPiA+PiBUbyBoYXZlIGEgZmFpciBvdmVyYWxsIHBpY3R1cmUgYnR3LCBJIHRoaW5r
-IHdlIHNob3VsZCBhbHNvIGNvbnNpZGVyIHNvbWUKPiA+PiBvdGhlciBwb2ludHM6Cj4gPj4gJD4g
-Z2l0IHNob3J0bG9nIC0tc2luY2UgMDEvMDEvMjAxOSAtcyAtbgo+ID4+ICAgICAgNDExICBGcmVk
-aWFubyBaaWdsaW8KPiA+PiAgICAgICAyOSAgVmljdG9yIFRvc28KPiA+PiAgICAgICAyMCAgVXJp
-IEx1Ymxpbgo+ID4+ICAgICAgIDE0ICBGcmFuY29pcyBHb3VnZXQKPiA+PiAgICAgICAxMSAgQ2hy
-aXN0b3BoZSBGZXJnZWF1Cj4gPj4gICAgICAgMTAgIFNuaXIgU2hlcmliZXIKPiA+PiAgICAgICAg
-NiAgRWR1YXJkbyBMaW1hIChFdHJ1bmtvKQo+ID4+ICAgICAgICA2ICBKb25hdGhvbiBKb25nc21h
-Cj4gPj4gICAgICAgIDYgIEtldmluIFBvdWdldAo+ID4+ICAgICAgICA2ICBMdWvDocWhIEhyw6F6
-a8O9Cj4gPj4gICAgICAgIDUgIEphbWVzIExlIEN1aXJvdAo+ID4+ICAgICAgICAzICBUaGlhZ28g
-TWVuZGVzCj4gPj4gICAgICAgIDIgIFJvc2VuIFBlbmV2Cj4gPj4gICAgICAgIDEgIEJlbmphbWlu
-IFRpc3NvaXJlcwo+ID4+ICAgICAgICAxICBDaHJpc3RpYW4gRWhyaGFyZHQKPiA+PiAgICAgICAg
-MSAgRG91Z2xhcyBQYXVsCj4gPj4gICAgICAgIDEgIEdpbG1hciBTYW50b3MgSnIKPiA+PiAgICAg
-ICAgMSAgSmVyZW15IFdoaXRlCj4gPj4gICAgICAgIDEgIHdvcmxkb2ZwZWFjZQo+ID4+ICAgICAg
-ICAxICDosKIg5piG5piOCj4gPgo+ID4gVG8gYmUgImZhaXIiLCB0aGUgbnVtYmVyIG9mIGNvbW1p
-dHMgaW4gc3BpY2Ugc2VydmVyIGFsb25lIG92ZXIgMS41eSBpcwo+ID4gbm90IGEgdmVyeSBnb29k
-IG1ldHJpYy4gQ2VydGFpbmx5LCBGcmVkaWFubydzIHdvcmsgaXMgY29uc2VxdWVudCwKPiA+IHRo
-YW5rIHlvdSwgYnV0IGl0J3MgYWxzbyBwYXJ0IG9mIGhpcyBqb2IgYWZhaWsuCj4gTXkgcG9pbnQg
-aGVyZSBpcyB0aGF0IGluIHRoZSBsYXN0IDEuNXkgdGhlcmUgd2FzIHZlcnkgbGl0dGxlCj4gY29u
-dHJpYnV0aW9uIHRvIHRoZSBwcm9qZWN0IGFwYXJ0IGZyb20gRnJlZGlhbm8uIFNhbWUgb24gdGhl
-IHJldmlldwo+IHNpZGUuIEluIHRoaXMgY29udGV4dCwgSSBjYW4gdW5kZXJzdGFuZCB3aHkgdGhl
-IGJyYW5jaCB3YXMgbWVyZ2VkLiBJCj4gaGF2ZSBteSBvcGluaW9uLCBidXQgaGVyZSBJIGRvbid0
-IHdhbnQgdG8gc2F5IGhlIGRpZCBpdCByaWdodCBvciBoZSBkaWQKPiBpdCB3cm9uZzogSSdtIGp1
-c3Qgc2F5aW5nIEkgY2FuIHVuZGVyc3RhbmQgd2h5IGhlIGRpZC4KCkkgZG9uJ3QgdW5kZXJzdGFu
-ZCB0aGUganVzdGlmaWNhdGlvbiwgaG9uZXN0bHkuIFRoZSBzcGljZSBzZXJ2ZXIgaXMKbm90IG92
-ZXJ3aGVsbWVkIHdpdGggTVIsIGFuZCB0aGVyZSBpcyBubyBydXNoIHRvIHN3aXRjaCB0byBDKysu
-Cgo+Cj4gPgo+ID4+Cj4gPj4gRnJlZGlhbm8ncyBicmFuY2hlcyBkb24ndCBnZXQgbXVjaCByZXZp
-ZXdzIChpZiBhbnkuLi4gc2VlIHRoZSBmdWxsIGxpc3QKPiA+PiBvZiBtZXJnZWQvY2xvc2VkIE1S
-IGluIGdpdGxhYiBmb3IgdGhlIHNwaWNlL3NwaWNlIHByb2plY3QpLiBJIHRoaW5rIHdlCj4gPj4g
-YWxsIGFncmVlIHRoYXQgaGlzIGludGVudGlvbiBpcyBnb29kLCB3aGljaCBpcyB0byBqdXN0IG1v
-dmUgdGhlIHByb2plY3QKPiA+PiBmb3J3YXJkLiBXb25kZXJpbmcgd2hvIHdvdWxkIGhhdmUgbG9v
-a2VkIGludG8gaGlzIDEwMCBwYXRjaGVzIGJyYW5jaCB0bwo+ID4+IGRvIGEgZmFpciByZXZpZXcg
-aW4gYSByZWFzb25hYmxlIHRpbWUtZnJhbWUuCj4gPj4gSSBmZWVsIChhdCBsZWFzdCBwYXJ0aWFs
-bHkpIGd1aWx0eSBmb3IgdGhpcyBzaXR1YXRpb24uCj4gPj4KPiA+PiBUaGF0IHNhaWQuLi4gYXQg
-dGhpcyBwb2ludCB0aGUgYnJhbmNoIGhhcyBiZWVuIG1lcmdlZC4gV2hhdCBhcmUgdGhlCj4gPj4g
-cHJvcG9zYWxzIG5vdz8KPiA+Pgo+ID4+IERyYWZ0IGEgbW9yZSBmb3JtYWwgcmV2aWV3L2NvbW1p
-dCBwb2xpY3k/IFdoYXQgaWYgYSBicmFuY2ggZG9lc24ndCBnZXQgYQo+ID4+IGZhaXIgcmV2aWV3
-IGluIGFuIGFjY2VwdGFibGUgdGltZS1mcmFtZT8gV2hvIHdpbGwgaGF2ZSB0aGUgbGFzdCB3b3Jk
-IGlmCj4gPj4gdW5hbmltaXR5IGlzIG5vdCByZWFjaGVkPwo+ID4KPiA+IFdoYXQgZG9lcyBhbiBh
-Y2NlcHRhYmxlIHRpbWUtZnJhbWUgbWVhbj8gSWYgdGhlIHdvcmsgaXMgaW1wb3J0YW50LCB0aGUK
-PiA+IHByb2plY3QgbWFpbnRhaW5lcnMgc2hvdWxkIGRvIGEgcmV2aWV3IGluIGEgdGltZWx5IG1h
-bm5lci4gSWYgbm9ib2R5Cj4gPiBoYXMgZW5vdWdoIHRpbWUgdG8gcmV2aWV3IGNoYW5nZXMsIGlz
-bid0IGl0IGJlY2F1c2Ugd2UsIGNvbGxlY3RpdmVseSwKPiA+IGhhdmUgbW9yZSBpbXBvcnRhbnQg
-dGhpbmdzIHRvIGRvPyBUaGUgY29udHJpYnV0b3Igd2hvIHByb3Bvc2VkIHN1Y2ggYQo+ID4gY2hh
-bmdlIGluIHRoZSBmaXJzdCBwbGFjZSBzaG91bGQgcmVhbGl6ZSB0aGF0Lgo+Cj4gV2VsbCwgYWdy
-ZWVpbmcgb24gd2hhdCBpcyAiaW1wb3J0YW50IiBpcyBub3QgZWFzeSwgYXMgaXQgaXMgcGVyc29u
-YWwuCj4gQW55IGNvbnRyaWJ1dGlvbiBpcyBpbXBvcnRhbnQgdG8gdGhlIHN1Ym1pdHRlciA7LSkK
-Ckl0J3MgYSBjb2xsZWN0aXZlIHdvcmssIG5vdCBzb21lYm9keSdzIHByb2plY3Qgd2l0aCBpdHMg
-cGVyc29uYWwKcHJpb3JpdHkgb3Igd2lzaGVzLgoKPiBCdXQgbXkgcG9pbnQgaXMsIGxldCdzIG1h
-a2UgdGhlIHJ1bGVzIGNsZWFyZXIsIHNvIHRvIHRyeSB0byBhdm9pZAo+IHNpbWlsYXIgc2l0dWF0
-aW9ucyBpbiB0aGUgZnV0dXJlLgoKV2UgaGF2ZSBoYWQgcnVsZXMgZm9yIHllYXJzLiBBbnl0aGlu
-ZyBub24tdHJpdmlhbCBoYXMgbWFuZGF0b3J5CnJldmlld3MuIEFuZCBpbiBwcmFjdGljZSwgd2Ug
-dHJ5IHRvIGdvIHRocm91Z2ggcmV2aWV3IGFsbCB0aGUgdGltZS4KCj4gPgo+ID4+Cj4gPj4gRG8g
-eW91IHdhbnQgdG8gZG8gYSBwb3N0LW1lcmdlIHJldmlldyB0byBjb25zaWRlciByZXZlcnRpbmcg
-dGhlIGNvbW1pdHM/Cj4gPj4gRG8geW91IHdhbnQgdG8gaGF2ZSBhIGRldGFjaGVkICJDIiBicmFu
-Y2ggd2l0aCB0aGUgZm9ybWVyIGNvZGUgdG8gYmUKPiA+PiBrZXB0IGFzIGEgInN0YWJsZSBDIiBv
-bmU/Cj4gPj4gT3Igd2hhdCBlbHNlPwo+ID4KPiA+IEkgYW0gYSBwYXN0IGNvbnRyaWJ1dG9yIHRv
-IHRoZSBTcGljZSBzZXJ2ZXIsIGJ1dCBJIHJlZ3VsYXJseSBoYXZlIHRvCj4gPiByZWFkIG9yIGRl
-YnVnIHRoZSBjb2RlLiBJIGtlZXAgY28tbWFpbnRhaW5pbmcgdGhlIHNwaWNlLWd0ayBjbGllbnQs
-Cj4gPiBhbHRob3VnaCBpdCBzZWVtcyBvdGhlcnMgYXJlIGRvaW5nIGEgcHJldHR5IGdvb2Qgam9i
-IGF0IGhlbHBpbmcgbWUuIElzCj4gPiB0aGVyZSBhIHByb2JsZW0gd2l0aCB0aGUgU3BpY2Ugc2Vy
-dmVyIG1haW50ZW5hbmNlPyBJIGRvbid0IGtub3cuCj4gPgo+ID4gV2hhdCBkbyB5b3Ugd2FudCBt
-ZSB0byBzYXkuLi4gSSBhbSBkaXNhcHBvaW50ZWQgYnkgdGhpcyBjaGFuZ2UsIHRoZQo+ID4gbmF0
-dXJlIG9mIHRoZSBjaGFuZ2UsIHN3aXRjaGluZyB0byBjKyssIGFuZCB0aGUgd2F5IGl0IGhhcHBl
-bmVkLiBJdAo+ID4gZG9lc24ndCByZWZsZWN0IHByYWN0aWNlcyBJIGxpa2UgaW4gb3Blbi1zb3Vy
-Y2UgcHJvamVjdHMgYW5kIHRoZSB3YXkKPiA+IHRoZSBTcGljZSBwcm9qZWN0IGhhcyBiZWVuIGRl
-dmVsb3BlZCBpbiB0aGUgcGFzdC4KPiA+Cj4gPiBPdmVyYWxsLCB0aGUgd2F5IGl0IGhhcHBlbmVk
-IGlzIGRldHJpbWVudGFsIHRvIHRoZSBwcm9qZWN0IGltaG8sIGFuZCBJCj4gPiB3b3VsZCBpbmRl
-ZWQgcmV2ZXJ0IHRoZSBjaGFuZ2UgaWYgbm9ib2R5IHJldmlld2VkIGl0IG9wZW5seS4gVGhlIHNw
-aWNlCj4gPiBzZXJ2ZXIgc2hvdWxkIG5vdCB0byBiZSB0YWtlbiBzbyBsaWdodGx5LCBpdCBkb2Vz
-bid0IGRlc2VydmUgaXQKPiA+IGVpdGhlci4KPgo+IEkgbGlrZSB0aGUgbG92ZSB5b3UgaGF2ZSBm
-b3IgdGhlIHByb2plY3QuIFJlYWxseSwgZ3JlYXQgdG8gc2VlIGl0LiBJdCBpcwo+IGFsc28gb2sg
-dG8gZGlzYWdyZWUgYW5kIGFyZ3VlLiBCdXQgd2hlbiB5b3Ugc2F5ICJ0YWtlbiBzbyBsaWdodGx5
-LCBpdAo+IGRvZXNuJ3QgZGVzZXJ2ZSBpdCIgeW91IGFyZSBwdXR0aW5nIGJsYW1lIHRoZXJlLi4u
-IEhleSwgd2UgaGF2ZSBhbGwgdGhlCj4gc2FtZSBnb2FsIHRvIG1ha2UgU1BJQ0UgYmV0dGVyIGFu
-ZCBiZXR0ZXIuIEZyZWRpYW5vIG1lcmdlZCB0aGUgYnJhbmNoIHRvCj4gaW1wcm92ZSB0aGUgcHJv
-amVjdCwgbm90IHRvIG1ha2UgaXQgd29yc2UuLi4gYW5kIGhlIHByb3ZlZCB0byBsb3ZlIHRoZQo+
-IHByb2plY3QgdG9vLiBXZSBhcmUgYWxsIG9uIHRoZSBzYW1lIHNpZGUhCgpJIGFtIG5vdCB0YWxr
-aW5nIGFib3V0IGZlZWxpbmdzIGhlcmUsIGJ1dCBvZiBwcmFjdGljZXMgYW5kIHJ1bGVzLgoKQnV0
-IHdlIGFyZSBhbHNvIGh1bWFuLCBhbmQgd2UgaGF2ZSBmZWVsaW5ncy4KCj4gU28sIGxldCdzIG1v
-dmUgZm9yd2FyZC4uLiBGcmVkaWFubyBtZXJnZWQgaXQsIHRoaXMgaXMgZG9uZS4gV2hhdCB3b3Vs
-ZAo+IHlvdSBwcm9wb3NlIHRvIGRvIG5vdz8gTGV0J3MgbW92ZSB0aGUgZGlzY3Vzc2lvbiBvbiB3
-aGF0IHRvIGRvIG5vdyA6LSkKPgoKV2Ugc2VlbSB0byBhZ3JlZSBpdCdzIGEgbWlzdGFrZS4gSWYg
-aXQgaXMsIHRoZW4gd2Ugc2hvdWxkIGNvcnJlY3QgaXQuCgpSZXZlcnRpbmcgdGhlIHNlcmllcyBp
-cyBhIHNpbXBsZSBjb21taXQgYXdheS4KCi0tIApNYXJjLUFuZHLDqSBMdXJlYXUKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGlu
-ZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
+--===============0177412076==
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_001_5ebb1c02_6f46_35653b02"
+
+------=_NextPart_001_5ebb1c02_6f46_35653b02
+Content-Type: text/plain;
+ charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Victor,
+
+
+
+Yes it was certainly a good read and i got some ideas from it, but the cod=
+e has changed quite a lot since 2017 and the patches correspond to the curr=
+ent code only for about 10-15%.
+
+Maybe someone from the Spice team can suggest a patch to add additional mo=
+use buttons - i am sure that it would be a matter of minutes to an hour for=
+ anyone who is involved with coding the spice-vdagent project to create a g=
+eneral patch idea to add additional mouse buttons
+
+
+
+It is just a matter of forwarding them to the guest - for some reason it w=
+as decided not to add them.
+
+
+
+thanks!
+
+
+
+
+
+De : Victor Toso <victortoso@redhat.com>
+=C3=80 : bruts@netc.fr
+Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse bu=
+ttons?
+Date : 12/05/2020 07:25:59 Europe/Paris
+Copie =C3=A0 : uril@redhat.com;
+=C2=A0=C2=A0=C2=A0spice-devel@lists.freedesktop.org
+
+Hi,
+
+On Tue, May 12, 2020 at 12:53:02AM +0200, bruts@netc.fr wrote:
+>=20
+>=20
+> Uri (and others),
+>=20
+> I found the similar question in a few corners of the internet
+> and I think adding at least the additional default mouse
+> buttons should not be all that much work.
+
+You can take a look at this proposal to adding horizontal wheel
+support to Spice
+
+https://lists.freedesktop.org/archives/spice-devel/2017-October/040558.htm=
+l
+
+> With some guidance I could probably do it myself, though the
+> guidance would need to be quite substantial :)
+>=20
+> The mouse and the main buttons is already forwarded and that is
+> the main part.
+>=20
+> with xev it is clear to see which buttons work on the host, but
+> not on the guest.
+>=20
+> Anyone with some spare time (which I know is always limited for
+> everyone), but help me where to fix this in the code and i will
+> write a patch - or give me a good start - or start yourself.
+>=20
+> a semi working mouse in the guest is very annoying and can be
+> one of the critical points why to use spice (or not) - at least
+> i know it is in my case.
+>=20
+> Thanks!!
+
+Cheers,
+Victor
+
+
+
+------=_NextPart_001_5ebb1c02_6f46_35653b02
+Content-Type: text/html;
+ charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hi Victor,</div><div><br></div><div>Yes it was certainly a good read a=
+nd i got some ideas from it, but the code has changed quite a lot since 201=
+7 and the patches correspond to the current code only for about 10-15%.</di=
+v><div>Maybe someone from the Spice team can suggest a patch to add additio=
+nal mouse buttons - i am sure that it would be a matter of minutes to an ho=
+ur for anyone who is involved with coding the spice-vdagent project to crea=
+te a general patch idea to add additional mouse buttons</div><div><br></div=
+><div>It is just a matter of forwarding them to the guest - for some reason=
+ it was decided not to add them.</div><div><br></div><div>thanks!<br></div>=
+<div><br></div><br><br><blockquote type=3D"cite" style=3D"margin:0 0 0 0.5e=
+m;border-left:1px #00f solid;padding-left:1em;">De : Victor Toso &lt;victor=
+toso@redhat.com&gt;<br>
+=C3=80 : bruts@netc.fr<br>
+Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse bu=
+ttons?<br>
+Date : 12/05/2020 07:25:59 Europe/Paris<br>
+Copie =C3=A0 : uril@redhat.com;<br>
+=C2=A0=C2=A0=C2=A0spice-devel@lists.freedesktop.org<br>
+<br>
+Hi,<br>
+<br>
+On Tue, May 12, 2020 at 12:53:02AM +0200, bruts@netc.fr wrote:<br>
+&gt; <br>
+&gt; <br>
+&gt; Uri (and others),<br>
+&gt; <br>
+&gt; I found the similar question in a few corners of the internet<br>
+&gt; and I think adding at least the additional default mouse<br>
+&gt; buttons should not be all that much work.<br>
+<br>
+You can take a look at this proposal to adding horizontal wheel<br>
+support to Spice<br>
+<br>
+	<a href=3D"https://lists.freedesktop.org/archives/spice-devel/2017-Octobe=
+r/040558.html" rel=3D"noreferrer">https://lists.freedesktop.org/archives/sp=
+ice-devel/2017-October/040558.html</a><br>
+<br>
+&gt; With some guidance I could probably do it myself, though the<br>
+&gt; guidance would need to be quite substantial :)<br>
+&gt; <br>
+&gt; The mouse and the main buttons is already forwarded and that is<br>
+&gt; the main part.<br>
+&gt; <br>
+&gt; with xev it is clear to see which buttons work on the host, but<br>
+&gt; not on the guest.<br>
+&gt; <br>
+&gt; Anyone with some spare time (which I know is always limited for<br>
+&gt; everyone), but help me where to fix this in the code and i will<br>
+&gt; write a patch - or give me a good start - or start yourself.<br>
+&gt; <br>
+&gt; a semi working mouse in the guest is very annoying and can be<br>
+&gt; one of the critical points why to use spice (or not) - at least<br>
+&gt; i know it is in my case.<br>
+&gt; <br>
+&gt; Thanks!!<br>
+<br>
+Cheers,<br>
+Victor<br>
+<br></blockquote>
+
+------=_NextPart_001_5ebb1c02_6f46_35653b02--
+
+
+--===============0177412076==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0177412076==--
+
