@@ -2,48 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C63671D196D
-	for <lists+spice-devel@lfdr.de>; Wed, 13 May 2020 17:30:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B51331D2A07
+	for <lists+spice-devel@lfdr.de>; Thu, 14 May 2020 10:27:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 444266EA6C;
-	Wed, 13 May 2020 15:29:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A97689E59;
+	Thu, 14 May 2020 08:27:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 1770 seconds by postgrey-1.36 at gabe;
- Wed, 13 May 2020 15:29:58 UTC
-Received: from server.thinsia.com (server.thinsia.com [94.124.92.232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1FF9C6EA6C
- for <spice-devel@lists.freedesktop.org>; Wed, 13 May 2020 15:29:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=thinsia.com
- ; s=x;
- h=Content-Type:MIME-Version:Date:Message-ID:Subject:From:Reply-To:To:
- Sender:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=6+0Y2ntOkFhNxpNsoWMTZ2Mkcys26QXq/wgOKiFs2jI=; b=dxUZTQWlrLkanV2JGPuAZZ82fC
- 8tCGhu2u/uZ6eta0M8dBNUwCibjo6ZZHj3YrONLfYRCZeIk4C3SDePZF0hphBa94dtAGl4R4Tre6+
- nfjGKH7tAJv6eZofo9+fNFnGnjsI94hOjQ9Ys0Fwg2Io2RTOqUasD5LdD6aiwup6rwnBqyMbigdWO
- rSx9dwqWENcu0dNnEEZoZJrD1ASLox6aK8GSTy/E4lUl3FL4/q+4buoi3450X4xP0O8aOFvDkV6Dj
- PutonSGGxJXPDDvtDAE+qX66EjVS/v5ho7HcFhvUWBbtocP2gCIP48VLUpmTLJznmOLIVjumP4+j3
- nHishysA==;
-Received: from d57e265a.static.ziggozakelijk.nl ([213.126.38.90]
- helo=[192.168.14.15]) by server.thinsia.com with esmtpa (Exim 4.92.2)
- (envelope-from <sassen@thinsia.com>) id 1jYss1-002YRU-5M
- for spice-devel@lists.freedesktop.org; Wed, 13 May 2020 17:00:29 +0200
-To: spice-devel@lists.freedesktop.org
-From: Roland Sassen <sassen@thinsia.com>
-Organization: Thinsia
-Message-ID: <4ca6628d-7930-d01e-8001-0d0640b4f6ea@thinsia.com>
-Date: Wed, 13 May 2020 17:00:19 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:77.0) Gecko/20100101
- Thunderbird/77.0
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [IPv6:2a00:1450:4864:20::442])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C128E6E157
+ for <spice-devel@lists.freedesktop.org>; Wed, 13 May 2020 22:38:41 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id y3so1482664wrt.1
+ for <spice-devel@lists.freedesktop.org>; Wed, 13 May 2020 15:38:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:message-id:subject:mime-version;
+ bh=Wsxlu2k84QXr08eDUQZS5Etmc/J0rvPjQN8WS0bAHoc=;
+ b=bhh8UTpiI0xlhxBAFLrohmiw3dagcgMpMgoQhDf4EBD2u9SzLK3gKXfmxNiA0p3EsQ
+ 4OCDYgsUqTkfQ75WiirdeyB+HRPebIUT2xX/1yKDOfgNhRyr3AV9eJ3/SAAtHmP2ljK2
+ Yq0Zb7Kq0RFAphqavHdgtOvpiN4D2a2LVdsBI6+x9rYgz7WWihy3lae7MoCqceMxo27c
+ V/6BKOcUMwMoz3vQzaq2DBNYXXm78V8Knl+iWnuUo+OG5f9/qZWU1hdqiT7rN3iGFyBm
+ +SSKl8+VmaNayLXQFAyZ57an80hVs4yS6ZKVjcteIV6XzPIWmH+zTcwgaqn8gwr9Kcm1
+ 1/hA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:message-id:subject:mime-version;
+ bh=Wsxlu2k84QXr08eDUQZS5Etmc/J0rvPjQN8WS0bAHoc=;
+ b=YNoKHkeID5coTLovvpdGAjp80m+e0ZSjTktedBK8MVdOnu8d79ALVhXD2vSebpQkIv
+ IaQsJ1r/kXLc+q84a0YYE4P5nJwpc/BjpSdvJQzs8Ubt5HAQSEJwl/lsMsSYO264l2QT
+ 8WVvh1QmZXo2DGI2Vjio/fBeJSi4yAlOmiT8byc/1wMtEfcQZVyA1IMQ44SM3VxhmGkb
+ omke7cpB7mxGODIdkpLwbKvvK1KL7cjgEhkWhhH+J93UM419+LXdjFD8TqtbdnzQWpIY
+ dZDMJAB1xdYvX+eLQmAuK2kEWdX0XaKVx4cnQIFRMB0onUCJotsDgB7HDOSlQngYA9Y+
+ 7jtw==
+X-Gm-Message-State: AOAM533oNNfRg3HMaXkTUOVb3O44J/qMoJ1J629I6vKO2RwMZu2OYCUc
+ GeM9FBS4w85uZvcHfu9rTUSySFPtlTA=
+X-Google-Smtp-Source: ABdhPJw7gZzMjvAMPNJ1g+UgQvh7vK8xVzP7QbfnSrX2rcb66MazkLrMz7DlsCmnxFyNYQ+60ehK3A==
+X-Received: by 2002:a5d:5642:: with SMTP id j2mr1747771wrw.52.1589409520218;
+ Wed, 13 May 2020 15:38:40 -0700 (PDT)
+Received: from melroy-pc (228-27-145-85.ftth.glasoperator.nl. [85.145.27.228])
+ by smtp.gmail.com with ESMTPSA id
+ u16sm1160369wrq.17.2020.05.13.15.38.39
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 13 May 2020 15:38:39 -0700 (PDT)
+Date: Thu, 14 May 2020 00:38:38 +0200
+From: Melroy van den Berg <webmaster1989@gmail.com>
+To: "=?utf-8?Q?spice-devel=40lists.freedesktop.org?="
+ <spice-devel@lists.freedesktop.org>
+Message-ID: <9FF76525-8C44-4C05-A238-2C0C3382A3D2@getmailspring.com>
+X-Mailer: Mailspring
 MIME-Version: 1.0
-Content-Language: en-US
-X-Antivirus: AVG (VPS 200513-0, 13-05-2020), Outbound message
-X-Antivirus-Status: Clean
-X-Authenticated-Id: thinsia
-Subject: [Spice-devel] virtual gl
+X-Mailman-Approved-At: Thu, 14 May 2020 08:27:53 +0000
+Subject: [Spice-devel] Bug in qxl kernel driver (bpp)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,73 +65,60 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: sassen@thinsia.com
-Content-Type: multipart/mixed; boundary="===============1601702055=="
+Content-Type: multipart/mixed; boundary="===============1901037868=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---===============1601702055==
-Content-Type: multipart/alternative;
- boundary="------------0BB262F488D46A34A4405E42"
-Content-Language: en-US
+--===============1901037868==
+Content-Type: multipart/alternative; boundary="5ebc76ee_675f203f_374e"
 
-This is a multi-part message in MIME format.
---------------0BB262F488D46A34A4405E42
-Content-Type: text/plain; charset=utf-8; format=flowed
+--5ebc76ee_675f203f_374e
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello, is it possible to use spice together with virtual GL?
+Hi folks,
 
-Thanks, Roland
+The Xorg log is getting spammed with the following messages (I noticed I'm not the only one on the Internet):
+> qxl_surface_create: Bad bpp: 1 (1)
+> qxl_surface_create: Bad bpp: 1 (1)
+> qxl_surface_create: Bad bpp: 1 (1)
 
-Thinisa Research <https://www.thinsia.com/>
-Roland Sassen
-Eeserstr. 14
-9531 CM Borger
-the Netherlands
-phone +31599820288
-email sassen@thinsia.com
+I think this isn't nice for anyone. So I propose a fix in the driver around here:
+https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/qxl/qxl_cmd.c#L396
+A valid value of Bits per pixel (bpp aka Pixelmap) is often 24 (or 32 bit depth). Please try to play around with this, and see if you could make Xorg server happy again.
+Thanks!
+Regards,
+Melroy van den Berg
+
+--5ebc76ee_675f203f_374e
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<div>Hi folks,</div><br><div>The Xorg log is getting spammed with the fol=
+lowing messages (I noticed I'm not the only one on the Internet):</div><b=
+lockquote>qxl=5Fsurface=5Fcreate: Bad bpp: 1 (1)</blockquote><blockquote>=
+qxl=5Fsurface=5Fcreate: Bad bpp: 1 (1)</blockquote><blockquote>qxl=5Fsurf=
+ace=5Fcreate: Bad bpp: 1 (1)</blockquote><br><div>I think this isn't nice=
+ for anyone. So I propose a fix in the driver around here<span data-emoji=
+-typing=3D=22true=22>:</span></div><div><a href=3D=22https://elixir.bootl=
+in.com/linux/latest/source/drivers/gpu/drm/qxl/qxl=5Fcmd.c=23L396=22 titl=
+e=3D=22https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/qxl=
+/qxl=5Fcmd.c=23L396=22>https://elixir.bootlin.com/linux/latest/source/dri=
+vers/gpu/drm/qxl/qxl=5Fcmd.c=23L396</a><br></div><div>A valid value of Bi=
+ts per pixel (bpp aka Pixelmap) is often 24 (or 32 bit depth). Please try=
+ to play around with this, and see if you could make Xorg server happy ag=
+ain.</div><br><div>Thanks=21</div><br><div>Regards,</div><div>Melroy van =
+den Berg<br></div><img class=3D=22mailspring-open=22 alt=3D=22Sent from M=
+ailspring=22 width=3D=220=22 height=3D=220=22 style=3D=22border:0; width:=
+0; height:0;=22 src=3D=22https://link.getmailspring.com/open/9=46=4676525=
+-8C44-4C05-A238-2C0C3382A3D2=40getmailspring.com=3Fme=3Dc137ee54&amp;reci=
+pient=3Dc3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3Jn=22>
+--5ebc76ee_675f203f_374e--
 
 
--- 
-Deze e-mail is gecontroleerd op virussen door AVG.
-http://www.avg.com
-
---------------0BB262F488D46A34A4405E42
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    Hello, is it possible to use spice together with virtual GL?<br>
-    <br>
-    Thanks, Roland<br>
-    <br>
-    <a moz-do-not-send="true" href="https://www.thinsia.com/">Thinisa
-      Research</a><br>
-    Roland Sassen<br>
-    Eeserstr. 14<br>
-    9531 CM Borger<br>
-    the Netherlands<br>
-    phone +31599820288<br>
-    email <a class="moz-txt-link-abbreviated" href="mailto:sassen@thinsia.com">sassen@thinsia.com</a><br>
-  <div id="DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br /> <table style="border-top: 1px solid #D3D4DE;">
-	<tr>
-      <td style="width: 55px; padding-top: 18px;"><a href="http://www.avg.com/email-signature?utm_medium=email&utm_source=link&utm_campaign=sig-email&utm_content=emailclient" target="_blank"><img src="https://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=""  width="46" height="29" style="width: 46px; height: 29px;" /></a></td>
-		<td style="width: 470px; padding-top: 17px; color: #41424e; font-size: 13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virusvrij. <a href="http://www.avg.com/email-signature?utm_medium=email&utm_source=link&utm_campaign=sig-email&utm_content=emailclient" target="_blank" style="color: #4453ea;">www.avg.com</a> 		</td>
-	</tr>
-</table>
-<a href="#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width="1" height="1"> </a></div></body>
-</html>
-
---------------0BB262F488D46A34A4405E42--
-
---===============1601702055==
+--===============1901037868==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -132,4 +129,5 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============1601702055==--
+--===============1901037868==--
+
