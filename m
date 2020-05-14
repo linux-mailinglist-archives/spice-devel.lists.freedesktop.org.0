@@ -2,41 +2,54 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B778E1D34C2
-	for <lists+spice-devel@lfdr.de>; Thu, 14 May 2020 17:15:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 070991D33C3
+	for <lists+spice-devel@lfdr.de>; Thu, 14 May 2020 16:58:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A740C6E35D;
-	Thu, 14 May 2020 15:15:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 734496E369;
+	Thu, 14 May 2020 14:58:35 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 363 seconds by postgrey-1.36 at gabe;
- Thu, 14 May 2020 15:04:09 UTC
-Received: from mail-40141.protonmail.ch (mail-40141.protonmail.ch
- [185.70.40.141])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B03A26E086
- for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 15:04:09 +0000 (UTC)
-Date: Thu, 14 May 2020 14:57:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail; t=1589468279;
- bh=U0tA3MqxJ62EccdOxU6ThEFlJ5WlUtBrqU3oohnPcRg=;
- h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
- b=DzLcsQ97MNVIZnA0t/uaxLdyEXPqd+9W0q9Er6Ls2Fd1CqKzBt8QaLQ1cbTKaiG/1
- 2t82Sm4Y2LqIcYReIAet42nQ9KfDHEuXezqvbekIT9N87XK+FArDYyJqTKLBWCqHXb
- UktsP+pmZwxXmcaRDMD2zNoQpo3bcQcRkTEkQdHc=
-To: Frediano Ziglio <fziglio@redhat.com>
-From: Melroy van den Berg <melroy89@protonmail.com>
-Message-ID: <7r1IhzdmmYDsgCapmHaP4MXEEaHwy-GPjB1kSiTn-zBmmlkIP32fT2Blj3BqGiZSr6AqqApQF1lgwH5LdoqTQFofviZgo4wjjnOYvqdGDvQ=@protonmail.com>
-In-Reply-To: <553095995.26944814.1589448379881.JavaMail.zimbra@redhat.com>
-References: <9FF76525-8C44-4C05-A238-2C0C3382A3D2@getmailspring.com>
- <553095995.26944814.1589448379881.JavaMail.zimbra@redhat.com>
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 600B36E369
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 14:58:34 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id k12so30745812wmj.3
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 07:58:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=keo4r46875Mz9UTX78kZwPSiaTfSENDZ7+x7qe3qefM=;
+ b=ARqQXfpZee04yLJRrzCqh886DxKdWyIHclckcN3HR9h8Ux9DVHVF3UnTFltLbu28hf
+ KpuYoZ7LBlXS1+cQvuGMCOTScGiTckQ0qW2XMIJqWZ42BtMo2y6mvSp2+oF+5x/CFP3t
+ nitF+Rn0Jy7VX+PCgTA2UVSyKbKA45Kxe6KMY2CnL83FYG2GgLqa98xymKvp3P+ppaJ6
+ atpL6T0NRK5oeo8kedD/pbdscIonL6dDeETATgky43qGzAV32xOOoPEJac9NDkvbV0Eq
+ IET5/ssVcrKO5jFiNk2Vjr0s0yn83IlAvK3WvoHKZ0B9mFjqRbFvo7L+iC4eQXJ8GgOb
+ mg+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=keo4r46875Mz9UTX78kZwPSiaTfSENDZ7+x7qe3qefM=;
+ b=Dr+PXXWAzkcF5sfw+x1OQ8jGQk3hiBOU1A+CLaNvttUJhcOloMIKKu/Mry6e7eU+9m
+ nsLmCu13jh/DrA+MOJReoBE64QERFib92zDFGZ9jv8pzfw2+bM7X+xdcBVfNPqc1C0ho
+ VY+EBiBW7T87QZ3RnThvhK/vg64Pi1E83wDk4Zl53TrL4z8Ud4zYYwHpuQX3xO+K+R05
+ elQdw2QdKcxblXkF59iyZNhp1hO0F77bkQXiDGP5yC8mvlKOrv2fLM6YJaZMcFArhAXK
+ N/vEeaphl1kvY+a1xvDVlKQ9/jA1Mqgdsn5GTHgj5hRJVKAiFZGK1EsvEBtgZt4tdEdj
+ V0hQ==
+X-Gm-Message-State: AGi0PuYL3OBmrxEfI3LpYy5D8I1m99xsnYtQJUuTEtxmhpC6qSU8TyG6
+ +JAA7p5TlQg41DG7ZvN60b5ljIrVHjJXZkod/9r8RxnnoH4=
+X-Google-Smtp-Source: APiQypI1xDxmy6SkLDxN15uqTjEuMYEKU4KUTh2nVMiB4RbKS6z24xKdMV8U9JTVy3+4RDaNWkg3/acYJMUDBvwApTg=
+X-Received: by 2002:a1c:9cd4:: with SMTP id f203mr25720783wme.26.1589468311510; 
+ Thu, 14 May 2020 07:58:31 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Status: No, score=-0.7 required=7.0 tests=ALL_TRUSTED,DKIM_SIGNED,
- DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
- FREEMAIL_FROM,FREEMAIL_REPLYTO_END_DIGIT shortcircuit=no
- autolearn=disabled version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on mail.protonmail.ch
-X-Mailman-Approved-At: Thu, 14 May 2020 15:15:04 +0000
-Subject: Re: [Spice-devel] Bug in qxl kernel driver (bpp)
+References: <CAMxuvawzmqKdLwk6AvthZkmZTr9T+q+UU8Q+raVHj0nZ2swhiw@mail.gmail.com>
+ <CAJ+F1CKCb=Kj7MqE0Jz3uNmBVvguB5_jbm7DWsNeMdKEsv5FdQ@mail.gmail.com>
+In-Reply-To: <CAJ+F1CKCb=Kj7MqE0Jz3uNmBVvguB5_jbm7DWsNeMdKEsv5FdQ@mail.gmail.com>
+From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
+Date: Thu, 14 May 2020 16:58:18 +0200
+Message-ID: <CAJ+F1CJFkBL6OQOzdrrXkW7zyvELfe-RX_c4RB7FUnRAK1Ec-g@mail.gmail.com>
+To: spice-devel <spice-devel@lists.freedesktop.org>,
+ Frediano Ziglio <fziglio@redhat.com>
+Subject: Re: [Spice-devel] About decisions and reviews
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,51 +61,111 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Melroy van den Berg <melroy89@protonmail.com>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- Melroy van den Berg <webmaster1989@gmail.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1680570722=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGksCgpUaGFua3MgZm9yIHlvdXIgcmVzcG9uc2UuCgpJdCBsb29rcyBnb29kIGFyb3VuZCB0aGVy
-ZToKaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL3hvcmcvZHJpdmVyL3hmODYtdmlkZW8t
-cXhsLy0vYmxvYi9tYXN0ZXIvc3JjL3F4bF91eGEuYyNMNDA5CgpUaGVyZSBpcyBhIGNhbGwgd2l0
-aGluIHF4bF9jcmVhdGVfcGl4bWFwKCkgdG93YXJkczogcXhsLT5ib19mdW5jcy0+Y3JlYXRlX3N1
-cmZhY2UgKHF4bCwgdywgaCwgZGVwdGgpClRoZSAnZGVwdGgnIHZhcmlhYmxlIGlzIHByb3BlcmJs
-eSAxIHdpdGhpbiB0aGlzIGZ1bmN0aW9uIGFscmVhZHkuCgpUaGF0IGNyZWF0ZSBwaXhtYXAgZnVu
-Y3Rpb24gcG9pbnRlciBpcyBhZGRlZCB0byBzY3JlZW4tPkNyZWF0ZVBpeG1hcC4KQW55IGNhbGwg
-Y291bGQgcG90ZW50aWFsbHkgcHV0ICcxJyBpbnRvIHRoZSA0dGggcGFyYW1ldGVyLCBsaWtlIHRo
-ZXNlIGNhbGxzOgpodHRwczovL2dpdGxhYi5mcmVlZGVza3RvcC5vcmcveG9yZy9kcml2ZXIveGY4
-Ni12aWRlby1xeGwvLS9ibG9iL21hc3Rlci9zcmMvdXhhL3V4YS1yZW5kZXIuYyNMNDcwCmh0dHBz
-Oi8vZ2l0bGFiLmZyZWVkZXNrdG9wLm9yZy94b3JnL2RyaXZlci94Zjg2LXZpZGVvLXF4bC8tL2Js
-b2IvbWFzdGVyL3NyYy91eGEvdXhhLXJlbmRlci5jI0w3OTUKaHR0cHM6Ly9naXRsYWIuZnJlZWRl
-c2t0b3Aub3JnL3hvcmcvZHJpdmVyL3hmODYtdmlkZW8tcXhsLy0vYmxvYi9tYXN0ZXIvc3JjL3V4
-YS91eGEtZ2x5cGhzLmMjTDE2MQpodHRwczovL2dpdGxhYi5mcmVlZGVza3RvcC5vcmcveG9yZy9k
-cml2ZXIveGY4Ni12aWRlby1xeGwvLS9ibG9iL21hc3Rlci9zcmMvdXhhL3V4YS1nbHlwaHMuYyNM
-OTI3Cmh0dHBzOi8vZ2l0bGFiLmZyZWVkZXNrdG9wLm9yZy94b3JnL2RyaXZlci94Zjg2LXZpZGVv
-LXF4bC8tL2Jsb2IvbWFzdGVyL3NyYy9kZnBzLmMjTDM1NwoKUmVnYXJkcywKTWVscm95IHZhbiBk
-ZW4gQmVyZwoK4oCQ4oCQ4oCQ4oCQ4oCQ4oCQ4oCQIE9yaWdpbmFsIE1lc3NhZ2Ug4oCQ4oCQ4oCQ
-4oCQ4oCQ4oCQ4oCQCk9wIGRvbmRlcmRhZywgbWVpIDE0LCAyMDIwIDExOjI2IEFNLCBGcmVkaWFu
-byBaaWdsaW8gPGZ6aWdsaW9AcmVkaGF0LmNvbT4gc2NocmVlZjoKCj4gPiBIaSBmb2xrcywKPgo+
-ID4gVGhlIFhvcmcgbG9nIGlzIGdldHRpbmcgc3BhbW1lZCB3aXRoIHRoZSBmb2xsb3dpbmcgbWVz
-c2FnZXMgKEkgbm90aWNlZCBJJ20KPiA+IG5vdCB0aGUgb25seSBvbmUgb24gdGhlIEludGVybmV0
-KToKPgo+ID4gPiBxeGxfc3VyZmFjZV9jcmVhdGU6IEJhZCBicHA6IDEgKDEpCj4gPgo+ID4gPiBx
-eGxfc3VyZmFjZV9jcmVhdGU6IEJhZCBicHA6IDEgKDEpCj4gPgo+ID4gPiBxeGxfc3VyZmFjZV9j
-cmVhdGU6IEJhZCBicHA6IDEgKDEpCj4gPgo+ID4gSSB0aGluayB0aGlzIGlzbid0IG5pY2UgZm9y
-IGFueW9uZS4gU28gSSBwcm9wb3NlIGEgZml4IGluIHRoZSBkcml2ZXIgYXJvdW5kCj4gPiBoZXJl
-IDoKPiA+IGh0dHBzOi8vZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L2xhdGVzdC9zb3VyY2UvZHJp
-dmVycy9ncHUvZHJtL3F4bC9xeGxfY21kLmMjTDM5Ngo+ID4gQSB2YWxpZCB2YWx1ZSBvZiBCaXRz
-IHBlciBwaXhlbCAoYnBwIGFrYSBQaXhlbG1hcCkgaXMgb2Z0ZW4gMjQgKG9yIDMyIGJpdAo+ID4g
-ZGVwdGgpLiBQbGVhc2UgdHJ5IHRvIHBsYXkgYXJvdW5kIHdpdGggdGhpcywgYW5kIHNlZSBpZiB5
-b3UgY291bGQgbWFrZSBYb3JnCj4gPiBzZXJ2ZXIgaGFwcHkgYWdhaW4uCj4KPiA+IFRoYW5rcyEK
-Pgo+ID4gUmVnYXJkcywKPiA+IE1lbHJveSB2YW4gZGVuIEJlcmcKPgo+IEhpLAo+IHRoZSAiYnBw
-IiB2YWx1ZSBkb2VzIG5vdCBhcnJpdmUgdG8gdGhlIGtlcm5lbCBzbyB0aGVyZSdzIG5vIHBvaW50
-IHRvIHVwZGF0ZSBpdC4KPiBJdCBhcnJpdmVzIGZyb20gc29tZSBvdGhlciBjYWxscyBpbiB0aGUg
-ZHJpdmVyLiBJIHRoaW5rIHRoZSBmdW5jdGlvbiB0byBiZSBjaGFuZ2VkCj4gc2hvdWxkIHF4bF9j
-cmVhdGVfcGl4bWFwIGluIHRoZSBYb3JnIGRyaXZlciAoc3JjL3F4bF91eGEuYykuCj4KPiBSZWdh
-cmRzLAo+IEZyZWRpYW5vCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3NwaWNlLWRldmVsCg==
+--===============1680570722==
+Content-Type: multipart/alternative; boundary="00000000000016e6a905a59ceee7"
+
+--00000000000016e6a905a59ceee7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+On Thu, May 14, 2020 at 2:32 PM Marc-Andr=C3=A9 Lureau <
+marcandre.lureau@gmail.com> wrote:
+
+> Hi
+>
+> On Mon, May 11, 2020 at 12:16 PM Marc-Andr=C3=A9 Lureau <
+> marcandre.lureau@redhat.com> wrote:
+>
+>> Hi,
+>>
+>> About "Move code to C++":
+>> https://gitlab.freedesktop.org/spice/spice/-/merge_requests/62
+>>
+>> I would like to know how the decision happened. As long as I have been
+>> involved in the Spice project, we had open discussions and did
+>> mandatory review for anything non-trivial.
+>>
+>> This change is substantial, and impacts the work and contribution of
+>> others. Where did the discussion happen? Who reviewed the code
+>> changes?
+>>
+>>
+> Since no real discussion nor public review took place, I propose to rever=
+t
+> the change and add a HACKING file to make the rules clear. See:
+>
+> https://gitlab.freedesktop.org/spice/spice/-/merge_requests/91
+>
+
+
+I propose a spice-space page derived from libvirt "Project governance":
+https://gitlab.freedesktop.org/spice/spice-space-pages/-/merge_requests/18
+
+(readable version
+https://gitlab.freedesktop.org/spice/spice-space-pages/-/blob/9a1907de182f9=
+f64450a7348e9e6a1423dfa580a/governance.rst
+)
+
+--00000000000016e6a905a59ceee7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Hi<br></div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, May 14, 2020 at 2:32 PM Mar=
+c-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcandre.lureau@gmail.com">marca=
+ndre.lureau@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr">Hi<br></div><br><div=
+ class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, May 11=
+, 2020 at 12:16 PM Marc-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcandre.l=
+ureau@redhat.com" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt; wro=
+te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<br>
+<br>
+About &quot;Move code to C++&quot;:<br>
+<a href=3D"https://gitlab.freedesktop.org/spice/spice/-/merge_requests/62" =
+rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop.org/spice/s=
+pice/-/merge_requests/62</a><br>
+<br>
+I would like to know how the decision happened. As long as I have been<br>
+involved in the Spice project, we had open discussions and did<br>
+mandatory review for anything non-trivial.<br>
+<br>
+This change is substantial, and impacts the work and contribution of<br>
+others. Where did the discussion happen? Who reviewed the code<br>
+changes?<br>
+<br></blockquote><div><br></div><div>Since no real discussion nor public re=
+view took place, I propose to revert the change and add a HACKING file to m=
+ake the rules clear. See:<br></div><div><br></div><div><a href=3D"https://g=
+itlab.freedesktop.org/spice/spice/-/merge_requests/91" target=3D"_blank">ht=
+tps://gitlab.freedesktop.org/spice/spice/-/merge_requests/91</a></div></div=
+></div></blockquote><div><br></div><div><br></div><div>I propose a spice-sp=
+ace page derived from libvirt &quot;Project governance&quot;: <a href=3D"ht=
+tps://gitlab.freedesktop.org/spice/spice-space-pages/-/merge_requests/18">h=
+ttps://gitlab.freedesktop.org/spice/spice-space-pages/-/merge_requests/18</=
+a></div><div><br></div><div></div><div>(readable version <a href=3D"https:/=
+/gitlab.freedesktop.org/spice/spice-space-pages/-/blob/9a1907de182f9f64450a=
+7348e9e6a1423dfa580a/governance.rst">https://gitlab.freedesktop.org/spice/s=
+pice-space-pages/-/blob/9a1907de182f9f64450a7348e9e6a1423dfa580a/governance=
+.rst</a>)</div></div></div>
+
+--00000000000016e6a905a59ceee7--
+
+--===============1680570722==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1680570722==--
