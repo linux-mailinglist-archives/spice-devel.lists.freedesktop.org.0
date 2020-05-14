@@ -2,46 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4D241D2DD2
-	for <lists+spice-devel@lfdr.de>; Thu, 14 May 2020 13:06:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5235D1D2F04
+	for <lists+spice-devel@lfdr.de>; Thu, 14 May 2020 14:02:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 91CD16E31A;
-	Thu, 14 May 2020 11:06:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6645D6E334;
+	Thu, 14 May 2020 12:02:38 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from server.thinsia.com (server.thinsia.com [94.124.92.232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8D4ED6E31A
- for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 11:06:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=thinsia.com
- ; s=x;
- h=Content-Type:MIME-Version:Date:Message-ID:Subject:From:Reply-To:To:
- Sender:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=ykAtOBRHxs+hqYjmMOecTZSrWBJ9GVFXyH3paLgLjTs=; b=FW2F55p/lOva2j+Whijg9b3DZR
- 2sr1/df+YzFqihzAGYdEvd+99mOYBT/sZFye/3piW+KZs9qexCBozCXC7TN7aowN7wpQJpDVY/87q
- xlJTHxvuqOZt8rGmJb2iMJJ1m6c9r7sghLMz42BzbuCvruECa0fB8oo/PvGMRqUMwJQ4s/t+0zBE9
- xJn8SigIWIuCin83Qmwr+GtPpuJ6KFTwfmEcCKENDBS93kzrscLFgIZLBTU/xMWWUD6RvwF9TBy61
- buK/VtTmYp5nCLhoCkkCDo0J8PZxLULezMuPYdu/LCaE1dbNwH1WkIZWATO1BWWX81a48edanAtU3
- Z3JKIGWw==;
-Received: from d57e265a.static.ziggozakelijk.nl ([213.126.38.90]
- helo=[192.168.14.15]) by server.thinsia.com with esmtpa (Exim 4.92.2)
- (envelope-from <sassen@thinsia.com>) id 1jZBgY-002dxp-Rd
- for spice-devel@lists.freedesktop.org; Thu, 14 May 2020 13:05:54 +0200
-To: spice-devel@lists.freedesktop.org
-From: Roland Sassen <sassen@thinsia.com>
-Organization: Thinsia
-Message-ID: <a001cb4e-31a5-ecf2-e8b8-8a8aac17ad24@thinsia.com>
-Date: Thu, 14 May 2020 13:05:47 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:77.0) Gecko/20100101
- Thunderbird/77.0
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 806896E334
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 12:02:37 +0000 (UTC)
+Received: by mail-wm1-x32a.google.com with SMTP id h4so30031975wmb.4
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 05:02:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Iu4tUg6TZzCMujVuh60s7emHxmVJvz3RkfNm8bn7sjg=;
+ b=UqCReKsl4tZxh093S+IiLxmEA5YqUP31dCb8TjuiMl0O/a1qiQibI59goPf4j4O9Bo
+ hgGPV/DXxKqBc47jehMOMTwOK7tWQM89ygc1ymYcgf1h5PV373hInRERAr6w1x8F4ChN
+ SI2tRnY9gmi5PQSO6oaHuFEMl3D2zeHe8RTMGXXfsAa4PU01DARla+J+GclGKUfD0CMN
+ +g8j91v6DX+Hycjq1n3pv7cKK2CvKJe2adEhGDOKTNBRgL2F59JbiBc/ixLPwQsPhytk
+ ETBw31moTenTU/ZWP3azJwvYOm2ze86I1B13ka8r3UOpgY/Na7/nuQ8RfJ+u++nFXvW2
+ f1Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Iu4tUg6TZzCMujVuh60s7emHxmVJvz3RkfNm8bn7sjg=;
+ b=Ekpmmd9SiCV0HP7coHSTiofEgcry8ZzUjXJfRWSEAl5V5wDsyqhE70CDg/yAgQBK0a
+ xOzIxXSBnWlGiTfirEAGjBuzgBhSr8aS2/c3qddNCgq6QE2wRyCgMq4cYDFDvFMHHXzr
+ 19AKyPAs6AXXHMUOAcBL3LTxVp+KjbT+GnDywauiOu6CNtIJ8m+EJc3FjBkvGApj38+z
+ ILzwjP/8QjIgj0uOpkPK+FvJAexhfNR8ebMHTkz2BYC7EPzRH5NwzJLVOcSOzFtXofYm
+ oHWFPJm6iSqhn17hjzsg26yOQU3njIHPKbcvRPtqEa2d5xoTOlF1c1GLgaqJ4XQhdCj+
+ iz7g==
+X-Gm-Message-State: AGi0PuY6OarxvxJX4ePeoLvlY0478Qb6EJCjTm8gdVzuNA/qTA00UIEC
+ HTVyZvZ5qORGNSW93u236RD8njR7cjmccFoNlDMCL22mfd0=
+X-Google-Smtp-Source: APiQypJPkmi4itgUe1dE/nbtUKpKLMwkIFlZzxBrUoK0x1BSU5M1zQG5a6dTk49KmAsulGAHl638vvfjsVNnYuP8GB4=
+X-Received: by 2002:a1c:e4c1:: with SMTP id b184mr32276482wmh.4.1589457756179; 
+ Thu, 14 May 2020 05:02:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Language: en-US
-X-Antivirus: AVG (VPS 200513-0, 13-05-2020), Outbound message
-X-Antivirus-Status: Clean
-X-Authenticated-Id: thinsia
-Subject: [Spice-devel] Spice status
+References: <4ca6628d-7930-d01e-8001-0d0640b4f6ea@thinsia.com>
+In-Reply-To: <4ca6628d-7930-d01e-8001-0d0640b4f6ea@thinsia.com>
+From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
+Date: Thu, 14 May 2020 14:02:23 +0200
+Message-ID: <CAJ+F1C+SWYeUqoGnGZBGV11=8x05qTW5ZNQ3_Z6MDLLXdNt7yw@mail.gmail.com>
+To: sassen@thinsia.com
+Subject: Re: [Spice-devel] virtual gl
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,126 +59,66 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: sassen@thinsia.com
-Content-Type: multipart/mixed; boundary="===============1516110975=="
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============2008882109=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---===============1516110975==
-Content-Type: multipart/alternative;
- boundary="------------D02D968EAB1656B080240D74"
-Content-Language: en-US
+--===============2008882109==
+Content-Type: multipart/alternative; boundary="000000000000f15d9305a59a78eb"
 
-This is a multi-part message in MIME format.
---------------D02D968EAB1656B080240D74
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-can you please give me a short update about Spice?
-
-1 status quo
-2 roadmap
-3 how many people work on the project
-4 support for mobile phones
-5 video from mobile phones
-
-thanks in advance,
-
-
-Roland
-Thinsia Research
-Roland Sassen
-the Netherlands
-sassen@thinsia.com
-
-
--- 
-Deze e-mail is gecontroleerd op virussen door AVG.
-http://www.avg.com
-
---------------D02D968EAB1656B080240D74
-Content-Type: text/html; charset=utf-8
+--000000000000f15d9305a59a78eb
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<html>
-  <head>
+Hi
 
-    <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DUTF-8=
-">
-  </head>
-  <body>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix">can
-      you please give me a short update about Spice?</div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix"><br>
-    </div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix">1=C2=A0=C2=A0=C2=A0
-      status quo</div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix">2=C2=A0=C2=A0=C2=A0
-      roadmap</div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix">3=C2=A0=C2=A0=C2=A0
-      how many people work on the project</div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix">4=C2=A0=C2=A0=C2=A0
-      support for mobile phones</div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix">5=C2=A0=C2=A0=C2=A0
-      video from mobile phones<br>
-    </div>
-    <br>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix">thanks
-      in advance,</div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix"><br>
-    </div>
-    <div
-class=3D"809314d0c4881d4841d185c08b152359b0bac06ac3581de2ec418ec92a0326fbmo=
-z-cite-prefix"><br>
-    </div>
-    Roland<br>
-    Thinsia Research<br>
-    Roland Sassen<br>
-    the Netherlands<br>
-    <a class=3D"moz-txt-link-abbreviated" href=3D"mailto:sassen@thinsia.com=
-">sassen@thinsia.com</a><br>
-  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br /> <table style=3D"b=
-order-top: 1px solid #D3D4DE;">
-	<tr>
-      <td style=3D"width: 55px; padding-top: 18px;"><a href=3D"http://www.a=
-vg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaign=3D=
-sig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"https://=
-ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=3D""=
-  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></a></t=
-d>
-		<td style=3D"width: 470px; padding-top: 17px; color: #41424e; font-size: =
-13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virusv=
-rij. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_s=
-ource=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D"=
-_blank" style=3D"color: #4453ea;">www.avg.com</a> 		</td>
-	</tr>
-</table>
-<a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" height=3D"1">=
- </a></div></body>
-</html>
+On Wed, May 13, 2020 at 5:30 PM Roland Sassen <sassen@thinsia.com> wrote:
 
---------------D02D968EAB1656B080240D74--
+> Hello, is it possible to use spice together with virtual GL?
+>
 
---===============1516110975==
+If you are talking about VirtualGL (https://virtualgl.org/), Spice doesn't
+provide 3d rendering itself. However, you may use 3d/opengl in the
+guest/remote, by various means. Either via cpu rendering, gpu passthrough,
+or virgl. Thus, you can use VirtualGL together with Spice, but the 2
+solutions will remain distinct. They offer different trade-offs. Spice is
+designed to work at the display/monitor level, whatever the OS, while
+VirtualGL is more an X11 application-level solution, afaik.
+
+
+--=20
+Marc-Andr=C3=A9 Lureau
+
+--000000000000f15d9305a59a78eb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Hi<br></div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, May 13, 2020 at 5:30 PM Rol=
+and Sassen &lt;<a href=3D"mailto:sassen@thinsia.com">sassen@thinsia.com</a>=
+&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+ =20
+
+   =20
+ =20
+  <div>
+    Hello, is it possible to use spice together with virtual GL?<br></div><=
+/blockquote><div><br></div><div>If you are talking about VirtualGL (<a href=
+=3D"https://virtualgl.org/">https://virtualgl.org/</a>), Spice doesn&#39;t =
+provide 3d rendering itself. However, you may use 3d/opengl in the guest/re=
+mote, by various means. Either via cpu rendering, gpu passthrough, or virgl=
+. Thus, you can use VirtualGL together with Spice, but the 2 solutions will=
+ remain distinct. They offer different trade-offs. Spice is designed to wor=
+k at the display/monitor level, whatever the OS, while VirtualGL is more an=
+ X11 application-level solution, afaik. <br></div><div><br></div><br></div>=
+-- <br><div dir=3D"ltr" class=3D"gmail_signature">Marc-Andr=C3=A9 Lureau<br=
+></div></div>
+
+--000000000000f15d9305a59a78eb--
+
+--===============2008882109==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -183,4 +129,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============1516110975==--
+--===============2008882109==--
