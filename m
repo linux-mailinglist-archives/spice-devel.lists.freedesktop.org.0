@@ -1,60 +1,31 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6FCB1D34AC
-	for <lists+spice-devel@lfdr.de>; Thu, 14 May 2020 17:12:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B22FF1D35A1
+	for <lists+spice-devel@lfdr.de>; Thu, 14 May 2020 17:53:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5C8F96E373;
-	Thu, 14 May 2020 15:12:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BB5416EB7A;
+	Thu, 14 May 2020 15:53:19 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 359356E373
- for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 15:12:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589469132;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Dg7wb1cmGXgFZRXcklXb4jLNNe7fbq7Jx/Jvoy4OVEM=;
- b=AP9B1NSyNszBzR20iyCk/m3e2tlC1DBcW7MtLnkLyL3GuBkMGbHCXpXzFYRSujfvfyU5yr
- k1JReTLOPyEYarrERuR63raUXVWGzhIm3tkXXFEts1cQct0AyrAGNsT57yef4yDFPh93n+
- pawGP5gFUed5zn4Mzo8Kv5JJYiqIMVg=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-90-HvL9Ewl5OvyQr9Sxeii2LA-1; Thu, 14 May 2020 11:12:03 -0400
-X-MC-Unique: HvL9Ewl5OvyQr9Sxeii2LA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 99C8A8730BF;
- Thu, 14 May 2020 15:12:02 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 434DE5D9F3;
- Thu, 14 May 2020 15:12:02 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id DBBF94CAA8;
- Thu, 14 May 2020 15:12:01 +0000 (UTC)
-Date: Thu, 14 May 2020 11:12:01 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Kevin Pouget <kpouget@redhat.com>
-Message-ID: <1179901412.26985815.1589469121636.JavaMail.zimbra@redhat.com>
-In-Reply-To: <CADJ1XR06vjWyWmqSerAFHiaOZNN-YqrHMe2FVP5c2jxpZMA2DA@mail.gmail.com>
-References: <ea-mime-5ebbbbed-7a95-56c13533@www-1.mailo.com>
- <CADJ1XR06vjWyWmqSerAFHiaOZNN-YqrHMe2FVP5c2jxpZMA2DA@mail.gmail.com>
+Received: from relay-1.mailobj.net (relay-1.mailobj.net [213.182.54.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9F7066EB7A
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 May 2020 15:53:18 +0000 (UTC)
+Received: from www-1.localdomain (www-1.in.mailobj.net [192.168.90.193])
+ by relay-1.mailobj.net (Postfix) with SMTP id AB7C91460;
+ Thu, 14 May 2020 17:53:16 +0200 (CEST)
+Received: by www-1.mailo.com with http webmail; Thu, 14 May 2020
+ 17:53:16 +0200 (CEST)
+X-EA-Auth: 9MN2DiWma8N7ILz8wLfZu1i2oCB3RJJZJo4FnbXWxp+GXJUjnt4KUTeZalukgG1Z6gj54Kaarc1HwekHDki6GQ==
+From: bruts@netc.fr
+To: "Frediano Ziglio" <fziglio@redhat.com>, "Kevin Pouget" <kpouget@redhat.com>
+Date: Thu, 14 May 2020 17:53:16 +0200 (CEST)
+X-Priority: 3
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.20, 10.4.195.20]
-Thread-Topic: spice-vdagent: how to enable additional mouse buttons?
-Thread-Index: 46XPvnNXQqv2cLSGtpIRtw7sUddG2w==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+X-Mailer: COMS/EA19.11/r20200424
+Message-ID: <ea-mime-5ebd696c-ba6-1bfbfbc6@www-1.mailo.com>
+In-Reply-To: <1179901412.26985815.1589469121636.JavaMail.zimbra@redhat.com>
 Subject: Re: [Spice-devel] spice-vdagent: how to enable additional mouse
  buttons?
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -68,167 +39,1184 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Spice devel <spice-devel@lists.freedesktop.org>, bruts@netc.fr
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Spice devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============0186132803=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-PiBIZWxsbywKCj4gSSd2ZSBwdXNoZWQgc29tZSBjb21taXRzIHRvIGdldCB0aGUgbW91c2UgYnV0
-dG9ucyB3b3JraW5nIHdpdGggdGhlIFZEQWdlbnQKPiAoYW5kIG9ubHkgaXQsIHNvbWUgYml0cyBh
-cmUgbWlzc2luZyBpbiBzcGljZS1zZXJ2ZXIgdG8gaGFuZGxlIHRoZSBvdGhlcgo+IHR5cGVzIEkg
-dGhpbmspOgoKPiBodHRwczovL2dpdGxhYi5mcmVlZGVza3RvcC5vcmcva3BvdWdldC9zcGljZS8t
-L2NvbW1pdHMvZXhwL21vdXNlLWJ0Cj4gaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL2tw
-b3VnZXQvc3BpY2UtZ3RrLy0vY29tbWl0cy9leHAvbW91c2UtYnQKPiBodHRwczovL2dpdGxhYi5m
-cmVlZGVza3RvcC5vcmcva3BvdWdldC9zcGljZS1wcm90b2NvbC8tL2NvbW1pdHMvZXhwL21vdXNl
-LWJ0Cj4gaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL2twb3VnZXQvdmRfYWdlbnQvLS90
-cmVlL2V4cC9tb3VzZS1idAoKTmluZSBhbmQgc2ltcGxlISBUaGFua3MhCgpXb25kZXJpbmcgd2h5
-IHRoZXJlJ3Mgbm8gU1BJQ0VfTU9VU0VfQlVUVE9OX01BU0tfVVAgYW5kIFNQSUNFX01PVVNFX0JV
-VFRPTl9NQVNLX0RPV04uCkl0IGxvb2tzIGEgYml0IGluY29oZXJlbnQuCk5vdCBhIHJlZ3Jlc3Np
-b24gb2YgeW91ciBwYXRjaGVzLiBNYXliZSB0aGV5IGRvbid0IGNoYW5nZSBzb21lIGludGVybmFs
-IHN0YXR1cwoKPiBhbmQgSSB1cGxvYWRlZCBhIHNtYWxsIGRlbW8gb2YgdGhlIHdheSBpdCB3b3Jr
-cyBpbiBteSB3b3Jrc3RhdGlvbjogbXkgbW91c2UKPiBoYXMgMiBleHRyYSBidXR0b25zICg4IGFu
-ZCA5KSB0aGF0IGFyZSBwcm9wZXJseSBmb3J3YXJkZWQKPiA+IGh0dHA6Ly9wZW9wbGUucmVkaGF0
-LmNvbS9+a3BvdWdldC8yMC0wNS0xNC9tb3VzZS1idC5ta3YKCj4gSSBob3BlIGl0IHdpbGwgd29y
-ayB0aGUgc2FtZSBvbiB5b3VyIHNpZGUhCgo+IE9uIFdlZCwgTWF5IDEzLCAyMDIwIGF0IDExOjIw
-IEFNIDwgYnJ1dHNAbmV0Yy5mciA+IHdyb3RlOgoKPiA+IEhpIEtldmluIGFuZCBGcmVkaWFubywK
-PiAKCj4gPiBZZXMgdGhlcmUgbWlnaHQgYmUgaXNzdWVzIGxpa2UgRnJlZGlhbm8gaXMgcG9pbnRp
-bmcgb3V0LCBwcm9iYWJseSB0aGV5IGFyZQo+ID4gbm90IHdlbGwgZGVmaW5lZCwgc28gaXQgbWln
-aHQgYmUgbm90IHRyaXZpYWwgdG8gY3JlYXRlIHNvbWV0aGluZyBmb3IgdGhlCj4gPiBwdWJsaWMg
-b3V0IG9mIHRoaXMuCj4gCj4gPiBTdGlsbCBJIHdvbmRlciB3aHkgdGhlcmUgYXJlIHRoZXNlIGVu
-dHJpZXMgaW4KPiA+IC91c3IvaW5jbHVkZS9saW51eC9pbnB1dC1ldmVudC1jb2Rlcy5oOgo+IAo+
-ID4gI2RlZmluZSBCVE5fTU9VU0UgMHgxMTAKPiAKPiA+ICNkZWZpbmUgQlROX0xFRlQgMHgxMTAK
-PiAKPiA+ICNkZWZpbmUgQlROX1JJR0hUIDB4MTExCj4gCj4gPiAjZGVmaW5lIEJUTl9NSURETEUg
-MHgxMTIKPiAKPiA+ICNkZWZpbmUgQlROX1NJREUgMHgxMTMKPiAKPiA+ICNkZWZpbmUgQlROX0VY
-VFJBIDB4MTE0Cj4gCj4gPiAjZGVmaW5lIEJUTl9GT1JXQVJEIDB4MTE1Cj4gCj4gPiAjZGVmaW5l
-IEJUTl9CQUNLIDB4MTE2Cj4gCj4gPiAjZGVmaW5lIEJUTl9UQVNLIDB4MTE3Cj4gCgo+ID4gVGhl
-eSBtdXN0IGhhdmUgc29tZSBtZWFuaW5nIG5vPyBQZXJoYXBzIHRoZXkgYXJlIG1hdGNoZWQgdG8g
-ZGlmZmVyZW50IG1vdXNlCj4gPiBidXR0b25zLCBsaWtlIG9uZSB0aW1lIHRvIGJ1dHRvbiA4LCB0
-aGUgb3RoZXIgbW91c2UgZGVjbGFyZXMgaXQgYXMgYnV0dG9uCj4gPiAxMCwgdGhhdCBpcyB3aGF0
-IHlvdSBtZWFuPwo+IAoKPiA+IFN0aWxsIEkgd291bGQgYmUgdmVyeSBoYXBweSBpZiBLZXZpbiB3
-b3VsZCBoYXZlIHRoZSB0aW1lIHRvIG1ha2UgYSBsaXR0bGUKPiA+IHBhdGNoLCBvciBhbiBhcHBy
-b2FjaCB0byB0aGF0IGxpdHRsZSBwYXRjaCwgc28gSSBjb3VsZCB1c2UgaXQgZm9yIG15Cj4gPiBp
-bmRpdmlkdWFsIG1vdXNlIGJ1dHRvbnMsIEkgdW5kZXJzdGFuZCBpdCBpcyBub3QgZWFzeSB0byBn
-ZXQgdGhpcyBvdXQgdG8KPiA+IHRoZQo+ID4gcHVibGljLCBzdGlsbCBpZiB0aGVyZSBpcyBhIHBh
-dGNoIGF2YWlsYWJsZSBpbiB0aGUgbWFpbGluZyBsaXN0LCB0aGVuIGF0Cj4gPiBsZWFzdCBwZW9w
-bGUgY2FuIGdyYWIgdGhhdCBhbmQgY2hhbmdlIGl0IHRvIHRoZWlyIGxpa2luZywgcmlnaHQ/Cj4g
-Cgo+ID4gQW55d2F5LCBhbGwgdGhlIHJlcGxpZXMgYW5kIGhlbHAgaXMgYXBwcmVjaWF0ZWQhIExl
-dCdzIGdldCBteSB0aHVtYiBoYXBweQo+ID4gYW5kCj4gPiBnaXZlIGhpbSB0aGF0IG1vdXNlIGJ1
-dHRvbiA7KQo+IAoKPiA+ID4gRGUgOiBGcmVkaWFubyBaaWdsaW8gPCBmemlnbGlvQHJlZGhhdC5j
-b20gPgo+ID4gCj4gCj4gPiA+IMOAIDogS2V2aW4gUG91Z2V0IDwga3BvdWdldEByZWRoYXQuY29t
-ID4KPiA+IAo+IAo+ID4gPiBTdWpldCA6IFJlOiBbU3BpY2UtZGV2ZWxdIHNwaWNlLXZkYWdlbnQ6
-IGhvdyB0byBlbmFibGUgYWRkaXRpb25hbCBtb3VzZQo+ID4gPiBidXR0b25zPwo+ID4gCj4gCj4g
-PiA+IERhdGUgOiAxMy8wNS8yMDIwIDA5OjQ5OjQ1IEV1cm9wZS9QYXJpcwo+ID4gCj4gCj4gPiA+
-IENvcGllIMOgIDogYnJ1dHNAbmV0Yy5mciA7Cj4gPiAKPiAKPiA+ID4gU3BpY2UgZGV2ZWwgPCBz
-cGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcgPgo+ID4gCj4gCgo+ID4gPiBIaSwKPiA+
-IAo+IAo+ID4gPiBpZiBJIHJlbWVtYmVyIEkgdGhpbmsgdGhlIG1haW4gaXNzdWUgaXMgdGhhdCB0
-aGVzZSBidXR0b25zIGFyZSBraW5kIG9mCj4gPiA+IHdpbGQKPiA+ID4gd2VzdC4KPiA+IAo+IAo+
-ID4gPiBCYXNpY2FsbHkgd2hhdCBpcyBidXR0b24gNiAoZmlyc3QgNSBhcmUgd2VsbCBkZWZpbmVk
-KSA/IEl0IGNhbiBiZQo+ID4gPiBhbnl0aGluZwo+ID4gPiBzbwo+ID4gPiBpdCBjb3VsZAo+ID4g
-Cj4gCj4gPiA+IGJlIHRoYXQgZm9yIGluc3RhbmNlIG15IGNsaWVudCBsZWZ0IGJlY29tZXMgcmln
-aHQgb24gdGhlIGd1ZXN0Lgo+ID4gCj4gCj4gPiA+IE1heWJlIGp1c3QgY2hhbmdpbmcgbW91c2Ug
-bW9kZWwgdGhlIHNlbWFudGljIG9mIHRoZSBidXR0b25zIG9uIHRoZSBndWVzdAo+ID4gPiBjaGFu
-Z2UuCj4gPiAKPiAKPiA+ID4gQWxzbyBJIHJlbWVtYmVyIHRoYXQgR1RLIGhhZCBzb21lIHByb2Js
-ZW1zLCB0aGVzZSBidXR0b25zIGFyZSBub3QKPiA+ID4gZGVmaW5lZCwKPiA+ID4gSQo+ID4gPiB0
-aGluawo+ID4gCj4gCj4gPiA+IHRoZXkgYXJlIHBhc3NlZCBmcm9tIHRoZSB1bmRlcmx5aW5nIHN5
-c3RlbSAoV2luZG93cywgWDExLCBXYXlsYW5kKS4KPiA+IAo+IAoKPiA+ID4gSG93ZXZlciBJIHNl
-ZSB0d28gIndvcmthcm91bmQiOgo+ID4gCj4gCj4gPiA+IDEtIGxldCB0aGUgdXNlcnMgdGFrZSBj
-YXJlIG9mIHRoZSBtaXNtYXRjaC4gRWl0aGVyIGdldHRpbmcgdXNlZCB0byB1c2UgYQo+ID4gPiBi
-dXR0b24KPiA+IAo+IAo+ID4gPiBpbnN0ZWFkIG9mIHRoZSBvdGhlciBvciB1c2luZyBzb21lIHRv
-b2xzOwo+ID4gCj4gCj4gPiA+IDItIGFkZCBhIG1lc3NhZ2UgdG8gY29tbXVuaWNhdGUgdGhlIG1l
-YW5pbmcgb2YgdGhlIHZhcmlvdXMgYnV0dG9ucyAod2hpY2gKPiA+ID4gY2FuCj4gPiAKPiAKPiA+
-ID4gY2hhbmdlIGZvciBpbnN0YW5jZSBjaGFuZ2luZyBtb3VzZSkuCj4gPiAKPiAKCj4gPiA+IEkg
-dGhpbmsgMSBpcyB3aGF0IHdhcyBpbXBsZW1lbnRlZCBieSB0aGUgcGF0Y2hlcywgSSdkIGdvIGZv
-ciB0aGlzIHdheS4KPiA+IAo+IAo+ID4gPiBJIGhvcGUgc29mdHdhcmVzIGFyZSBub3QgYXNzb2Np
-YXRpbmcgYnV0dG9uIHNlbWFudGljcyB0byBjb21wdXRlcgo+ID4gPiBzaHV0ZG93bgo+ID4gCj4g
-Cj4gPiA+IG9yIHNvbWV0aGluZyAiZGFuZ2Vyb3VzIiBsaWtlIHRoaXMuCj4gPiAKPiAKCj4gPiA+
-IEZyZWRpYW5vCj4gPiAKPiAKCj4gPiA+ID4gT24gVHVlLCBNYXkgMTIsIDIwMjAgYXQgMTE6NTgg
-UE0gPCBicnV0c0BuZXRjLmZyID4gd3JvdGU6Cj4gPiA+IAo+ID4gCj4gCgo+ID4gPiA+ID4gSGkg
-VmljdG9yLAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAoKPiA+ID4gPiA+IFllcyBpdCB3YXMgY2Vy
-dGFpbmx5IGEgZ29vZCByZWFkIGFuZCBpIGdvdCBzb21lIGlkZWFzIGZyb20gaXQsIGJ1dAo+ID4g
-PiA+ID4gdGhlCj4gPiA+ID4gPiBjb2RlCj4gPiA+ID4gPiBoYXMgY2hhbmdlZCBxdWl0ZSBhIGxv
-dCBzaW5jZSAyMDE3IGFuZCB0aGUgcGF0Y2hlcyBjb3JyZXNwb25kIHRvIHRoZQo+ID4gPiA+ID4g
-Y3VycmVudAo+ID4gPiA+ID4gY29kZSBvbmx5IGZvciBhYm91dCAxMC0xNSUuCj4gPiA+ID4gCj4g
-PiA+IAo+ID4gCj4gCj4gPiA+ID4gPiBNYXliZSBzb21lb25lIGZyb20gdGhlIFNwaWNlIHRlYW0g
-Y2FuIHN1Z2dlc3QgYSBwYXRjaCB0byBhZGQKPiA+ID4gPiA+IGFkZGl0aW9uYWwKPiA+ID4gPiA+
-IG1vdXNlCj4gPiA+ID4gPiBidXR0b25zIC0gaSBhbSBzdXJlIHRoYXQgaXQgd291bGQgYmUgYSBt
-YXR0ZXIgb2YgbWludXRlcyB0byBhbiBob3VyCj4gPiA+ID4gPiBmb3IKPiA+ID4gPiA+IGFueW9u
-ZSB3aG8gaXMgaW52b2x2ZWQgd2l0aCBjb2RpbmcgdGhlIHNwaWNlLXZkYWdlbnQgcHJvamVjdCB0
-bwo+ID4gPiA+ID4gY3JlYXRlCj4gPiA+ID4gPiBhCj4gPiA+ID4gPiBnZW5lcmFsIHBhdGNoIGlk
-ZWEgdG8gYWRkIGFkZGl0aW9uYWwgbW91c2UgYnV0dG9ucwo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+
-IAoKPiA+ID4gPiBIZWxsbywKPiA+ID4gCj4gPiAKPiAKCj4gPiA+ID4gSSdsbCBnaXZlIGl0IGEg
-dHJ5IHRoaXMgbW9ybmluZywgaW5kZWVkIGl0IHNob3VsZG4ndCByZXF1aXJlIChtdWNofGFueSkK
-PiA+ID4gPiBuZXcKPiA+ID4gPiBjb2RlLCBvbmx5IGZsYWdzIGhlcmUgYW5kIHRoZXJlLiBMZXQn
-cyBzZWUKPiA+ID4gCj4gPiAKPiAKCj4gPiA+ID4gS2V2aW4KPiA+ID4gCj4gPiAKPiAKCj4gPiA+
-ID4gPiBJdCBpcyBqdXN0IGEgbWF0dGVyIG9mIGZvcndhcmRpbmcgdGhlbSB0byB0aGUgZ3Vlc3Qg
-LSBmb3Igc29tZSByZWFzb24KPiA+ID4gPiA+IGl0Cj4gPiA+ID4gPiB3YXMKPiA+ID4gPiA+IGRl
-Y2lkZWQgbm90IHRvIGFkZCB0aGVtLgo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAoKPiA+ID4gPiA+
-IHRoYW5rcyEKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAKCj4gPiA+ID4gPiA+IERlIDogVmljdG9y
-IFRvc28gPCB2aWN0b3J0b3NvQHJlZGhhdC5jb20gPgo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+
-IAo+ID4gCj4gCj4gPiA+ID4gPiA+IMOAIDogYnJ1dHNAbmV0Yy5mcgo+ID4gPiA+ID4gCj4gPiA+
-ID4gCj4gPiA+IAo+ID4gCj4gCj4gPiA+ID4gPiA+IFN1amV0IDogUmU6IFtTcGljZS1kZXZlbF0g
-c3BpY2UtdmRhZ2VudDogaG93IHRvIGVuYWJsZSBhZGRpdGlvbmFsCj4gPiA+ID4gPiA+IG1vdXNl
-Cj4gPiA+ID4gPiA+IGJ1dHRvbnM/Cj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAK
-PiA+ID4gPiA+ID4gRGF0ZSA6IDEyLzA1LzIwMjAgMDc6MjU6NTkgRXVyb3BlL1BhcmlzCj4gPiA+
-ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAKPiA+ID4gPiA+ID4gQ29waWUgw6AgOiB1cmls
-QHJlZGhhdC5jb20gOwo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+IAo+ID4gCj4gCj4gPiA+ID4g
-PiA+IHNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+ID4gPiA+ID4gCj4gPiA+ID4g
-Cj4gPiA+IAo+ID4gCj4gCgo+ID4gPiA+ID4gPiBIaSwKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4g
-PiAKPiA+IAo+IAoKPiA+ID4gPiA+ID4gT24gVHVlLCBNYXkgMTIsIDIwMjAgYXQgMTI6NTM6MDJB
-TSArMDIwMCwgYnJ1dHNAbmV0Yy5mciB3cm90ZToKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAK
-PiA+IAo+IAo+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAK
-PiA+ID4gPiA+ID4gPgo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+IAo+ID4gCj4gCj4gPiA+ID4g
-PiA+ID4gVXJpIChhbmQgb3RoZXJzKSwKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+
-IAo+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAKPiA+ID4g
-PiA+ID4gPiBJIGZvdW5kIHRoZSBzaW1pbGFyIHF1ZXN0aW9uIGluIGEgZmV3IGNvcm5lcnMgb2Yg
-dGhlIGludGVybmV0Cj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAKPiA+ID4gPiA+
-ID4gPiBhbmQgSSB0aGluayBhZGRpbmcgYXQgbGVhc3QgdGhlIGFkZGl0aW9uYWwgZGVmYXVsdCBt
-b3VzZQo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+IAo+ID4gCj4gCj4gPiA+ID4gPiA+ID4gYnV0
-dG9ucyBzaG91bGQgbm90IGJlIGFsbCB0aGF0IG11Y2ggd29yay4KPiA+ID4gPiA+IAo+ID4gPiA+
-IAo+ID4gPiAKPiA+IAo+IAoKPiA+ID4gPiA+ID4gWW91IGNhbiB0YWtlIGEgbG9vayBhdCB0aGlz
-IHByb3Bvc2FsIHRvIGFkZGluZyBob3Jpem9udGFsIHdoZWVsCj4gPiA+ID4gPiAKPiA+ID4gPiAK
-PiA+ID4gCj4gPiAKPiAKPiA+ID4gPiA+ID4gc3VwcG9ydCB0byBTcGljZQo+ID4gPiA+ID4gCj4g
-PiA+ID4gCj4gPiA+IAo+ID4gCj4gCgo+ID4gPiA+ID4gPiBodHRwczovL2xpc3RzLmZyZWVkZXNr
-dG9wLm9yZy9hcmNoaXZlcy9zcGljZS1kZXZlbC8yMDE3LU9jdG9iZXIvMDQwNTU4Lmh0bWwKPiA+
-ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAoKPiA+ID4gPiA+ID4gPiBXaXRoIHNvbWUg
-Z3VpZGFuY2UgSSBjb3VsZCBwcm9iYWJseSBkbyBpdCBteXNlbGYsIHRob3VnaCB0aGUKPiA+ID4g
-PiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAo+ID4gPiA+ID4gPiA+IGd1aWRhbmNlIHdvdWxk
-IG5lZWQgdG8gYmUgcXVpdGUgc3Vic3RhbnRpYWwgOikKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4g
-PiAKPiA+IAo+IAo+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAK
-PiAKPiA+ID4gPiA+ID4gPiBUaGUgbW91c2UgYW5kIHRoZSBtYWluIGJ1dHRvbnMgaXMgYWxyZWFk
-eSBmb3J3YXJkZWQgYW5kIHRoYXQgaXMKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+
-IAo+ID4gPiA+ID4gPiA+IHRoZSBtYWluIHBhcnQuCj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4g
-Cj4gPiAKPiAKPiA+ID4gPiA+ID4gPgo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+IAo+ID4gCj4g
-Cj4gPiA+ID4gPiA+ID4gd2l0aCB4ZXYgaXQgaXMgY2xlYXIgdG8gc2VlIHdoaWNoIGJ1dHRvbnMg
-d29yayBvbiB0aGUgaG9zdCwgYnV0Cj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAK
-PiA+ID4gPiA+ID4gPiBub3Qgb24gdGhlIGd1ZXN0Lgo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+
-IAo+ID4gCj4gCj4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+
-IAo+ID4gPiA+ID4gPiA+IEFueW9uZSB3aXRoIHNvbWUgc3BhcmUgdGltZSAod2hpY2ggSSBrbm93
-IGlzIGFsd2F5cyBsaW1pdGVkIGZvcgo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+IAo+ID4gCj4g
-Cj4gPiA+ID4gPiA+ID4gZXZlcnlvbmUpLCBidXQgaGVscCBtZSB3aGVyZSB0byBmaXggdGhpcyBp
-biB0aGUgY29kZSBhbmQgaSB3aWxsCj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAK
-PiA+ID4gPiA+ID4gPiB3cml0ZSBhIHBhdGNoIC0gb3IgZ2l2ZSBtZSBhIGdvb2Qgc3RhcnQgLSBv
-ciBzdGFydCB5b3Vyc2VsZi4KPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAo+ID4g
-PiA+ID4gPiA+Cj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAKPiA+ID4gPiA+ID4g
-PiBhIHNlbWkgd29ya2luZyBtb3VzZSBpbiB0aGUgZ3Vlc3QgaXMgdmVyeSBhbm5veWluZyBhbmQg
-Y2FuIGJlCj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAKPiA+ID4gPiA+ID4gPiBv
-bmUgb2YgdGhlIGNyaXRpY2FsIHBvaW50cyB3aHkgdG8gdXNlIHNwaWNlIChvciBub3QpIC0gYXQg
-bGVhc3QKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAo+ID4gPiA+ID4gPiA+IGkg
-a25vdyBpdCBpcyBpbiBteSBjYXNlLgo+ID4gPiA+ID4gCj4gPiA+ID4gCj4gPiA+IAo+ID4gCj4g
-Cj4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAo+ID4gPiA+
-ID4gPiA+IFRoYW5rcyEhCj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+ID4gCj4gPiAKPiAKCj4gPiA+
-ID4gPiA+IENoZWVycywKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAo+ID4gPiA+
-ID4gPiBWaWN0b3IKPiA+ID4gPiA+IAo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAoKPiA+ID4gPiA+
-IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gPiA+ID4g
-Cj4gPiA+IAo+ID4gCj4gCj4gPiA+ID4gPiBTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKPiA+ID4g
-PiAKPiA+ID4gCj4gPiAKPiAKPiA+ID4gPiA+IFNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9w
-Lm9yZwo+ID4gPiA+IAo+ID4gPiAKPiA+IAo+IAo+ID4gPiA+ID4gaHR0cHM6Ly9saXN0cy5mcmVl
-ZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo+ID4gPiA+IAo+ID4gPiAK
-PiA+IAo+IAoKPiA+ID4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwo+ID4gPiAKPiA+IAo+IAo+ID4gPiA+IFNwaWNlLWRldmVsIG1haWxpbmcgbGlzdAo+
-ID4gPiAKPiA+IAo+IAo+ID4gPiA+IFNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+
-ID4gPiAKPiA+IAo+IAo+ID4gPiA+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
-YW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwKPiA+ID4gCj4gPiAKPiAKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApT
-cGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
-cC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo=
+--===============0186132803==
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_001_5ebd696c_ba6_5b0dec14"
+
+------=_NextPart_001_5ebd696c_ba6_5b0dec14
+Content-Type: text/plain;
+ charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Frediano,
+
+
+
+Yes it's quite a bit incoherent, having said that, i just saw a picture of=
+ a mouse with like 30 buttons on it :-)
+
+Didn't have time yet to test your patches Kevin, will do so in evening hou=
+rs, I will update you after.
+
+
+
+From the bottom of my thumb, i thank you :-)
+
+
+
+Roger
+
+
+
+De : Frediano Ziglio <fziglio@redhat.com>
+=C3=80 : Kevin Pouget <kpouget@redhat.com>
+Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse bu=
+ttons?
+Date : 14/05/2020 17:12:01 Europe/Paris
+Copie =C3=A0 : bruts@netc.fr;
+=C2=A0=C2=A0=C2=A0Spice devel <spice-devel@lists.freedesktop.org>
+
+> Hello,
+
+> I've pushed some commits to get the mouse buttons working with the VDAge=
+nt
+> (and only it, some bits are missing in spice-server to handle the other
+> types I think):
+
+> https://gitlab.freedesktop.org/kpouget/spice/-/commits/exp/mouse-bt
+> https://gitlab.freedesktop.org/kpouget/spice-gtk/-/commits/exp/mouse-bt
+> https://gitlab.freedesktop.org/kpouget/spice-protocol/-/commits/exp/mous=
+e-bt
+> https://gitlab.freedesktop.org/kpouget/vd_agent/-/tree/exp/mouse-bt
+
+Nine and simple! Thanks!
+
+Wondering why there's no SPICE_MOUSE_BUTTON_MASK_UP and SPICE_MOUSE_BUTTON=
+_MASK_DOWN.
+It looks a bit incoherent.
+Not a regression of your patches. Maybe they don't change some internal st=
+atus
+
+> and I uploaded a small demo of the way it works in my workstation: my mo=
+use
+> has 2 extra buttons (8 and 9) that are properly forwarded
+> > http://people.redhat.com/~kpouget/20-05-14/mouse-bt.mkv
+
+> I hope it will work the same on your side!
+
+> On Wed, May 13, 2020 at 11:20 AM < bruts@netc.fr > wrote:
+
+> > Hi Kevin and Frediano,
+>=20
+
+> > Yes there might be issues like Frediano is pointing out, probably they=
+ are
+> > not well defined, so it might be not trivial to create something for t=
+he
+> > public out of this.
+>=20
+> > Still I wonder why there are these entries in
+> > /usr/include/linux/input-event-codes.h:
+>=20
+> > #define BTN_MOUSE 0x110
+>=20
+> > #define BTN_LEFT 0x110
+>=20
+> > #define BTN_RIGHT 0x111
+>=20
+> > #define BTN_MIDDLE 0x112
+>=20
+> > #define BTN_SIDE 0x113
+>=20
+> > #define BTN_EXTRA 0x114
+>=20
+> > #define BTN_FORWARD 0x115
+>=20
+> > #define BTN_BACK 0x116
+>=20
+> > #define BTN_TASK 0x117
+>=20
+
+> > They must have some meaning no? Perhaps they are matched to different =
+mouse
+> > buttons, like one time to button 8, the other mouse declares it as but=
+ton
+> > 10, that is what you mean?
+>=20
+
+> > Still I would be very happy if Kevin would have the time to make a lit=
+tle
+> > patch, or an approach to that little patch, so I could use it for my
+> > individual mouse buttons, I understand it is not easy to get this out =
+to
+> > the
+> > public, still if there is a patch available in the mailing list, then =
+at
+> > least people can grab that and change it to their liking, right?
+>=20
+
+> > Anyway, all the replies and help is appreciated! Let's get my thumb ha=
+ppy
+> > and
+> > give him that mouse button ;)
+>=20
+
+> > > De : Frediano Ziglio < fziglio@redhat.com >
+> >=20
+>=20
+> > > =C3=80 : Kevin Pouget < kpouget@redhat.com >
+> >=20
+>=20
+> > > Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mo=
+use
+> > > buttons?
+> >=20
+>=20
+> > > Date : 13/05/2020 09:49:45 Europe/Paris
+> >=20
+>=20
+> > > Copie =C3=A0 : bruts@netc.fr ;
+> >=20
+>=20
+> > > Spice devel < spice-devel@lists.freedesktop.org >
+> >=20
+>=20
+
+> > > Hi,
+> >=20
+>=20
+> > > if I remember I think the main issue is that these buttons are kind =
+of
+> > > wild
+> > > west.
+> >=20
+>=20
+> > > Basically what is button 6 (first 5 are well defined) ? It can be
+> > > anything
+> > > so
+> > > it could
+> >=20
+>=20
+> > > be that for instance my client left becomes right on the guest.
+> >=20
+>=20
+> > > Maybe just changing mouse model the semantic of the buttons on the g=
+uest
+> > > change.
+> >=20
+>=20
+> > > Also I remember that GTK had some problems, these buttons are not
+> > > defined,
+> > > I
+> > > think
+> >=20
+>=20
+> > > they are passed from the underlying system (Windows, X11, Wayland).
+> >=20
+>=20
+
+> > > However I see two "workaround":
+> >=20
+>=20
+> > > 1- let the users take care of the mismatch. Either getting used to u=
+se a
+> > > button
+> >=20
+>=20
+> > > instead of the other or using some tools;
+> >=20
+>=20
+> > > 2- add a message to communicate the meaning of the various buttons (=
+which
+> > > can
+> >=20
+>=20
+> > > change for instance changing mouse).
+> >=20
+>=20
+
+> > > I think 1 is what was implemented by the patches, I'd go for this wa=
+y.
+> >=20
+>=20
+> > > I hope softwares are not associating button semantics to computer
+> > > shutdown
+> >=20
+>=20
+> > > or something "dangerous" like this.
+> >=20
+>=20
+
+> > > Frediano
+> >=20
+>=20
+
+> > > > On Tue, May 12, 2020 at 11:58 PM < bruts@netc.fr > wrote:
+> > >=20
+> >=20
+>=20
+
+> > > > > Hi Victor,
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > Yes it was certainly a good read and i got some ideas from it, b=
+ut
+> > > > > the
+> > > > > code
+> > > > > has changed quite a lot since 2017 and the patches correspond to=
+ the
+> > > > > current
+> > > > > code only for about 10-15%.
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > Maybe someone from the Spice team can suggest a patch to add
+> > > > > additional
+> > > > > mouse
+> > > > > buttons - i am sure that it would be a matter of minutes to an h=
+our
+> > > > > for
+> > > > > anyone who is involved with coding the spice-vdagent project to
+> > > > > create
+> > > > > a
+> > > > > general patch idea to add additional mouse buttons
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > Hello,
+> > >=20
+> >=20
+>=20
+
+> > > > I'll give it a try this morning, indeed it shouldn't require (much=
+|any)
+> > > > new
+> > > > code, only flags here and there. Let's see
+> > >=20
+> >=20
+>=20
+
+> > > > Kevin
+> > >=20
+> >=20
+>=20
+
+> > > > > It is just a matter of forwarding them to the guest - for some r=
+eason
+> > > > > it
+> > > > > was
+> > > > > decided not to add them.
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > thanks!
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > > De : Victor Toso < victortoso@redhat.com >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > =C3=80 : bruts@netc.fr
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > Sujet : Re: [Spice-devel] spice-vdagent: how to enable additio=
+nal
+> > > > > > mouse
+> > > > > > buttons?
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > Date : 12/05/2020 07:25:59 Europe/Paris
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > Copie =C3=A0 : uril@redhat.com ;
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > spice-devel@lists.freedesktop.org
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > > Hi,
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > > On Tue, May 12, 2020 at 12:53:02AM +0200, bruts@netc.fr wrote:
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > Uri (and others),
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > I found the similar question in a few corners of the interne=
+t
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > and I think adding at least the additional default mouse
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > buttons should not be all that much work.
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > > You can take a look at this proposal to adding horizontal whee=
+l
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > support to Spice
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > > https://lists.freedesktop.org/archives/spice-devel/2017-Octobe=
+r/040558.html
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > > > With some guidance I could probably do it myself, though the
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > guidance would need to be quite substantial :)
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > The mouse and the main buttons is already forwarded and that=
+ is
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > the main part.
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > with xev it is clear to see which buttons work on the host, =
+but
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > not on the guest.
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > Anyone with some spare time (which I know is always limited =
+for
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > everyone), but help me where to fix this in the code and i w=
+ill
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > write a patch - or give me a good start - or start yourself.
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > a semi working mouse in the guest is very annoying and can b=
+e
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > one of the critical points why to use spice (or not) - at le=
+ast
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > i know it is in my case.
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > >
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > > Thanks!!
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > > Cheers,
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > > Victor
+> > > > >=20
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > > _______________________________________________
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > Spice-devel mailing list
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > Spice-devel@lists.freedesktop.org
+> > > >=20
+> > >=20
+> >=20
+>=20
+> > > > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> > > >=20
+> > >=20
+> >=20
+>=20
+
+> > > > _______________________________________________
+> > >=20
+> >=20
+>=20
+> > > > Spice-devel mailing list
+> > >=20
+> >=20
+>=20
+> > > > Spice-devel@lists.freedesktop.org
+> > >=20
+> >=20
+>=20
+> > > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> > >=20
+> >=20
+>=20
+
+
+
+------=_NextPart_001_5ebd696c_ba6_5b0dec14
+Content-Type: text/html;
+ charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hi Frediano,</div><div><br></div><div>Yes it's quite a bit incoherent,=
+ having said that, i just saw a picture of a mouse with like 30 buttons on =
+it :-)</div><div>Didn't have time yet to test your patches Kevin, will do s=
+o in evening hours, I will update you after.</div><div><br></div><div>From =
+the bottom of my thumb, i thank you :-)</div><div><br></div><div>Roger<br><=
+/div><br><br><blockquote type=3D"cite" style=3D"margin:0 0 0 0.5em;border-l=
+eft:1px #00f solid;padding-left:1em;">De : Frediano Ziglio &lt;fziglio@redh=
+at.com&gt;<br>
+=C3=80 : Kevin Pouget &lt;kpouget@redhat.com&gt;<br>
+Sujet : Re: [Spice-devel] spice-vdagent: how to enable additional mouse bu=
+ttons?<br>
+Date : 14/05/2020 17:12:01 Europe/Paris<br>
+Copie =C3=A0 : bruts@netc.fr;<br>
+=C2=A0=C2=A0=C2=A0Spice devel &lt;spice-devel@lists.freedesktop.org&gt;<br=
+>
+<br>
+&gt; Hello,<br>
+<br>
+&gt; I've pushed some commits to get the mouse buttons working with the VD=
+Agent<br>
+&gt; (and only it, some bits are missing in spice-server to handle the oth=
+er<br>
+&gt; types I think):<br>
+<br>
+&gt; <a href=3D"https://gitlab.freedesktop.org/kpouget/spice/-/commits/exp=
+/mouse-bt" rel=3D"noreferrer">https://gitlab.freedesktop.org/kpouget/spice/=
+-/commits/exp/mouse-bt</a><br>
+&gt; <a href=3D"https://gitlab.freedesktop.org/kpouget/spice-gtk/-/commits=
+/exp/mouse-bt" rel=3D"noreferrer">https://gitlab.freedesktop.org/kpouget/sp=
+ice-gtk/-/commits/exp/mouse-bt</a><br>
+&gt; <a href=3D"https://gitlab.freedesktop.org/kpouget/spice-protocol/-/co=
+mmits/exp/mouse-bt" rel=3D"noreferrer">https://gitlab.freedesktop.org/kpoug=
+et/spice-protocol/-/commits/exp/mouse-bt</a><br>
+&gt; <a href=3D"https://gitlab.freedesktop.org/kpouget/vd_agent/-/tree/exp=
+/mouse-bt" rel=3D"noreferrer">https://gitlab.freedesktop.org/kpouget/vd_age=
+nt/-/tree/exp/mouse-bt</a><br>
+<br>
+Nine and simple! Thanks!<br>
+<br>
+Wondering why there's no SPICE_MOUSE_BUTTON_MASK_UP and SPICE_MOUSE_BUTTON=
+_MASK_DOWN.<br>
+It looks a bit incoherent.<br>
+Not a regression of your patches. Maybe they don't change some internal st=
+atus<br>
+<br>
+&gt; and I uploaded a small demo of the way it works in my workstation: my=
+ mouse<br>
+&gt; has 2 extra buttons (8 and 9) that are properly forwarded<br>
+&gt; &gt; <a href=3D"http://people.redhat.com/~kpouget/20-05-14/mouse-bt.m=
+kv" rel=3D"noreferrer">http://people.redhat.com/~kpouget/20-05-14/mouse-bt.=
+mkv</a><br>
+<br>
+&gt; I hope it will work the same on your side!<br>
+<br>
+&gt; On Wed, May 13, 2020 at 11:20 AM &lt; bruts@netc.fr &gt; wrote:<br>
+<br>
+&gt; &gt; Hi Kevin and Frediano,<br>
+&gt; <br>
+<br>
+&gt; &gt; Yes there might be issues like Frediano is pointing out, probabl=
+y they are<br>
+&gt; &gt; not well defined, so it might be not trivial to create something=
+ for the<br>
+&gt; &gt; public out of this.<br>
+&gt; <br>
+&gt; &gt; Still I wonder why there are these entries in<br>
+&gt; &gt; /usr/include/linux/input-event-codes.h:<br>
+&gt; <br>
+&gt; &gt; #define BTN_MOUSE 0x110<br>
+&gt; <br>
+&gt; &gt; #define BTN_LEFT 0x110<br>
+&gt; <br>
+&gt; &gt; #define BTN_RIGHT 0x111<br>
+&gt; <br>
+&gt; &gt; #define BTN_MIDDLE 0x112<br>
+&gt; <br>
+&gt; &gt; #define BTN_SIDE 0x113<br>
+&gt; <br>
+&gt; &gt; #define BTN_EXTRA 0x114<br>
+&gt; <br>
+&gt; &gt; #define BTN_FORWARD 0x115<br>
+&gt; <br>
+&gt; &gt; #define BTN_BACK 0x116<br>
+&gt; <br>
+&gt; &gt; #define BTN_TASK 0x117<br>
+&gt; <br>
+<br>
+&gt; &gt; They must have some meaning no? Perhaps they are matched to diff=
+erent mouse<br>
+&gt; &gt; buttons, like one time to button 8, the other mouse declares it =
+as button<br>
+&gt; &gt; 10, that is what you mean?<br>
+&gt; <br>
+<br>
+&gt; &gt; Still I would be very happy if Kevin would have the time to make=
+ a little<br>
+&gt; &gt; patch, or an approach to that little patch, so I could use it fo=
+r my<br>
+&gt; &gt; individual mouse buttons, I understand it is not easy to get thi=
+s out to<br>
+&gt; &gt; the<br>
+&gt; &gt; public, still if there is a patch available in the mailing list,=
+ then at<br>
+&gt; &gt; least people can grab that and change it to their liking, right?=
+<br>
+&gt; <br>
+<br>
+&gt; &gt; Anyway, all the replies and help is appreciated! Let's get my th=
+umb happy<br>
+&gt; &gt; and<br>
+&gt; &gt; give him that mouse button ;)<br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; De : Frediano Ziglio &lt; fziglio@redhat.com &gt;<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; =C3=80 : Kevin Pouget &lt; kpouget@redhat.com &gt;<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; Sujet : Re: [Spice-devel] spice-vdagent: how to enable addi=
+tional mouse<br>
+&gt; &gt; &gt; buttons?<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; Date : 13/05/2020 09:49:45 Europe/Paris<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; Copie =C3=A0 : bruts@netc.fr ;<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; Spice devel &lt; spice-devel@lists.freedesktop.org &gt;<br>=
+
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; Hi,<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; if I remember I think the main issue is that these buttons =
+are kind of<br>
+&gt; &gt; &gt; wild<br>
+&gt; &gt; &gt; west.<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; Basically what is button 6 (first 5 are well defined) ? It =
+can be<br>
+&gt; &gt; &gt; anything<br>
+&gt; &gt; &gt; so<br>
+&gt; &gt; &gt; it could<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; be that for instance my client left becomes right on the gu=
+est.<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; Maybe just changing mouse model the semantic of the buttons=
+ on the guest<br>
+&gt; &gt; &gt; change.<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; Also I remember that GTK had some problems, these buttons a=
+re not<br>
+&gt; &gt; &gt; defined,<br>
+&gt; &gt; &gt; I<br>
+&gt; &gt; &gt; think<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; they are passed from the underlying system (Windows, X11, W=
+ayland).<br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; However I see two &quot;workaround&quot;:<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; 1- let the users take care of the mismatch. Either getting =
+used to use a<br>
+&gt; &gt; &gt; button<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; instead of the other or using some tools;<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; 2- add a message to communicate the meaning of the various =
+buttons (which<br>
+&gt; &gt; &gt; can<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; change for instance changing mouse).<br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; I think 1 is what was implemented by the patches, I'd go fo=
+r this way.<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; I hope softwares are not associating button semantics to co=
+mputer<br>
+&gt; &gt; &gt; shutdown<br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; or something &quot;dangerous&quot; like this.<br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; Frediano<br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; On Tue, May 12, 2020 at 11:58 PM &lt; bruts@netc.fr &g=
+t; wrote:<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; Hi Victor,<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; Yes it was certainly a good read and i got some i=
+deas from it, but<br>
+&gt; &gt; &gt; &gt; &gt; the<br>
+&gt; &gt; &gt; &gt; &gt; code<br>
+&gt; &gt; &gt; &gt; &gt; has changed quite a lot since 2017 and the patche=
+s correspond to the<br>
+&gt; &gt; &gt; &gt; &gt; current<br>
+&gt; &gt; &gt; &gt; &gt; code only for about 10-15%.<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; Maybe someone from the Spice team can suggest a p=
+atch to add<br>
+&gt; &gt; &gt; &gt; &gt; additional<br>
+&gt; &gt; &gt; &gt; &gt; mouse<br>
+&gt; &gt; &gt; &gt; &gt; buttons - i am sure that it would be a matter of =
+minutes to an hour<br>
+&gt; &gt; &gt; &gt; &gt; for<br>
+&gt; &gt; &gt; &gt; &gt; anyone who is involved with coding the spice-vdag=
+ent project to<br>
+&gt; &gt; &gt; &gt; &gt; create<br>
+&gt; &gt; &gt; &gt; &gt; a<br>
+&gt; &gt; &gt; &gt; &gt; general patch idea to add additional mouse button=
+s<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; Hello,<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; I'll give it a try this morning, indeed it shouldn't r=
+equire (much|any)<br>
+&gt; &gt; &gt; &gt; new<br>
+&gt; &gt; &gt; &gt; code, only flags here and there. Let's see<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; Kevin<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; It is just a matter of forwarding them to the gue=
+st - for some reason<br>
+&gt; &gt; &gt; &gt; &gt; it<br>
+&gt; &gt; &gt; &gt; &gt; was<br>
+&gt; &gt; &gt; &gt; &gt; decided not to add them.<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; thanks!<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; &gt; De : Victor Toso &lt; victortoso@redhat.com =
+&gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; =C3=80 : bruts@netc.fr<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; Sujet : Re: [Spice-devel] spice-vdagent: how=
+ to enable additional<br>
+&gt; &gt; &gt; &gt; &gt; &gt; mouse<br>
+&gt; &gt; &gt; &gt; &gt; &gt; buttons?<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; Date : 12/05/2020 07:25:59 Europe/Paris<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; Copie =C3=A0 : uril@redhat.com ;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; spice-devel@lists.freedesktop.org<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; &gt; Hi,<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; &gt; On Tue, May 12, 2020 at 12:53:02AM +0200, br=
+uts@netc.fr wrote:<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; Uri (and others),<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; I found the similar question in a few c=
+orners of the internet<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; and I think adding at least the additio=
+nal default mouse<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; buttons should not be all that much wor=
+k.<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; &gt; You can take a look at this proposal to addi=
+ng horizontal wheel<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; support to Spice<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; &gt; <a href=3D"https://lists.freedesktop.org/arc=
+hives/spice-devel/2017-October/040558.html" rel=3D"noreferrer">https://list=
+s.freedesktop.org/archives/spice-devel/2017-October/040558.html</a><br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; With some guidance I could probably do =
+it myself, though the<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; guidance would need to be quite substan=
+tial :)<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; The mouse and the main buttons is alrea=
+dy forwarded and that is<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; the main part.<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; with xev it is clear to see which butto=
+ns work on the host, but<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; not on the guest.<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; Anyone with some spare time (which I kn=
+ow is always limited for<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; everyone), but help me where to fix thi=
+s in the code and i will<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; write a patch - or give me a good start=
+ - or start yourself.<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; a semi working mouse in the guest is ve=
+ry annoying and can be<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; one of the critical points why to use s=
+pice (or not) - at least<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; i know it is in my case.<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; &gt; Thanks!!<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; &gt; Cheers,<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; &gt; Victor<br>
+&gt; &gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; &gt; _______________________________________________<b=
+r>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; Spice-devel mailing list<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; Spice-devel@lists.freedesktop.org<br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; &gt; <a href=3D"https://lists.freedesktop.org/mailman/=
+listinfo/spice-devel" rel=3D"noreferrer">https://lists.freedesktop.org/mail=
+man/listinfo/spice-devel</a><br>
+&gt; &gt; &gt; &gt; <br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br>
+&gt; &gt; &gt; &gt; _______________________________________________<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; Spice-devel mailing list<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; Spice-devel@lists.freedesktop.org<br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+&gt; &gt; &gt; &gt; <a href=3D"https://lists.freedesktop.org/mailman/listi=
+nfo/spice-devel" rel=3D"noreferrer">https://lists.freedesktop.org/mailman/l=
+istinfo/spice-devel</a><br>
+&gt; &gt; &gt; <br>
+&gt; &gt; <br>
+&gt; <br>
+<br></blockquote>
+
+------=_NextPart_001_5ebd696c_ba6_5b0dec14--
+
+
+--===============0186132803==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0186132803==--
+
