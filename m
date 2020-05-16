@@ -1,53 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 414E11D5C01
-	for <lists+spice-devel@lfdr.de>; Fri, 15 May 2020 23:58:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 22FC71D627A
+	for <lists+spice-devel@lfdr.de>; Sat, 16 May 2020 18:07:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AD0626ED5F;
-	Fri, 15 May 2020 21:58:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8070D6E038;
+	Sat, 16 May 2020 16:07:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7E0836ED5F
- for <spice-devel@lists.freedesktop.org>; Fri, 15 May 2020 21:58:31 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id w64so4119711wmg.4
- for <spice-devel@lists.freedesktop.org>; Fri, 15 May 2020 14:58:31 -0700 (PDT)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DC71E6E038
+ for <spice-devel@lists.freedesktop.org>; Sat, 16 May 2020 16:07:06 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id w64so5708377wmg.4
+ for <spice-devel@lists.freedesktop.org>; Sat, 16 May 2020 09:07:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=VofX1xW9IYwfhrvF+lKacmx0lLH6nbLTeeOWh8Fllzk=;
- b=nQ3CM/Mav7y3eJJYUjH1f3aumRUZAQv+/r0wdXlrTRm17U5DqmJf1599GcCkpInyXo
- gbA2UmTTPQAqk3GuaWxAPGwForDLO4R7QS03XnHzHaveDo6VXGAUFBF6N6QcBV0cXcyu
- Ok+EGUKC/u1Gw2oh1rXFrry4uNDwf33JnF+5Jk5+KpjF22S0QtQ5vzTTlsXxh7/bumXd
- yJuSD9rGb5mRYwrBqg47T8flnoOPCuRfKeKyJX3l8/M8gJ67mncbx8Q6I80JDyOfiom2
- n6KH1jOibYdwH6VG3eHL/nS1MzyC5RrQjPmsgNe5VJULXWlWzQZc5IX3i4kmC24xVvKQ
- ArZw==
+ h=from:subject:references:to:message-id:date:user-agent:mime-version
+ :in-reply-to:content-transfer-encoding:content-language;
+ bh=Ugei+PQe6SrsZgzBpSaWGzKwInvednTyySHrJvgSA6g=;
+ b=aCxmmIwv9hfTC3SZEHfei4e9sZnONCkxIWH7/K6mBiJW+vW0gz6kmriDapsYd64zgB
+ uKGQ9twdfsaFMQG1bYAoGLrEaVlb4m2f55cedkCa1l4IqWrRCaN4m4bagRcFYrKSBV28
+ OYjAxU6ndWw9jnJIq9td5LmSlRXil9u8Lt3uRc/ASGJpmSSoelMmYZxhgUJv64ZAoHMp
+ +KtuZKpHgvd/ftp8835LFYzuTf6O2eMMuKc/tKaBEQncw03V6hOrx87v4uViaFg+pfKw
+ wUZEiu2OUBMwDcTfglg0hLEyu9qh1IxccaXQyfFX1nw8gvpk2UcJbaF0Plcq9kHMrh9S
+ LGvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=VofX1xW9IYwfhrvF+lKacmx0lLH6nbLTeeOWh8Fllzk=;
- b=AEROsM/EzoMnNEQJmUr6XicMH/xdiho9w+P8+bbRaudGe67CiZFLacwoZuIKdmQtbL
- i8UVPe0WWZ/yx8xR+LSVKad9nhCgrOijg8ClvJjyHXEXUm846NsuA6hvPZIEBF58dQ5B
- CkbkFAZuYfd6bqrBriEgt0P+DhBzuhIfN1zW3DGP6+GYrOSypoFUmYFLZa9W798NHycg
- mbPP8dHqRFUb/eIJymMMiYEnG4sX3llibb1Ynjsk9aic/2Q4R1RkC0cUnIkCqbMeQSlJ
- U/tDxEN1CjBoqMb3B5PrrWY2uJeYFLo9h3DulICNlaq9Zlwl2pdg9CL3yzabMUNTxolD
- gq1w==
-X-Gm-Message-State: AOAM533fYtygwoDGq5xyWKve9m+EmAcbhQ8XR/wn0TeltsWWuGbOWLjF
- rQG4E96QGa5S44qIhhX1qvlkrWCFcIlN7PzDa5I=
-X-Google-Smtp-Source: ABdhPJxkFwjk332qa+KOKXtRxwWVMNWG533QS6nw0ASzpRAqpyKJMDY+RJ+m+ULkwxaGWVn4fq4M/xP2AWmlISUiu6s=
-X-Received: by 2002:a1c:a595:: with SMTP id o143mr6374920wme.32.1589579909957; 
- Fri, 15 May 2020 14:58:29 -0700 (PDT)
+ h=x-gm-message-state:from:subject:references:to:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=Ugei+PQe6SrsZgzBpSaWGzKwInvednTyySHrJvgSA6g=;
+ b=L08TNmy8bEbZP066cbnYy25OiIC85Tgouur+vDX3YQwfUH5JfiHoqQr9hfeANLKb5r
+ nLtnoYWpUH95TkEX6o84f3HjsXj0ra2jfbwnH81I7D/mbhLmIDTxpg07Q+xO1EJ6Orz8
+ JlTcxkMU8IZTQenqUehVsArV16vwJdLhEayIa74i44eZc7yag0v+zzgKUk2A5jGCTwtx
+ UZziUB4+L2Rgg2ObIoAN0e5c1x0xbSkMZ5LKgUQjbmKoBSBYUVjcUMaZJA5KqnB9r5qf
+ T104cxxo6lURMjLMkW3MBMQmqMEP/qT9WGaFy2roHgKhOOpMv+Ry+p2c+Nz2fm/ekHcS
+ RK2A==
+X-Gm-Message-State: AOAM531CF15ggPd83s+QlUp2iH/T+b+v+uA+1i+OXKqUsjiXuqBBSF7I
+ 4mdTQ0IfYEYDvB1DCz/YAxOIBFC3jXs=
+X-Google-Smtp-Source: ABdhPJwGBnH/w70eZHA+9j2aAivtsNOIqUX7ixtJXLhqDC3VSJEXVSPKyE7uePg/HjEzZGB9IzZGaQ==
+X-Received: by 2002:a7b:c651:: with SMTP id q17mr10502796wmk.52.1589645224420; 
+ Sat, 16 May 2020 09:07:04 -0700 (PDT)
+Received: from [10.35.0.240] (p4fe9bf1e.dip0.t-ipconnect.de. [79.233.191.30])
+ by smtp.googlemail.com with ESMTPSA id
+ a184sm8559024wmh.24.2020.05.16.09.07.03
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 16 May 2020 09:07:03 -0700 (PDT)
+From: Felix Leimbach <felix.leimbach@gmail.com>
+References: <7cbfbb62-31ff-5eef-5427-7958921a1bfa@gmail.com>
+ <631443465.25687850.1588591196710.JavaMail.zimbra@redhat.com>
+To: spice-devel@lists.freedesktop.org
+Message-ID: <7a072038-02e9-afcc-d856-82483e0c7cb9@gmail.com>
+Date: Sat, 16 May 2020 18:07:03 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-References: <63b7a25f-0f32-1626-5c1b-3811a4f0467f@redhat.com>
-In-Reply-To: <63b7a25f-0f32-1626-5c1b-3811a4f0467f@redhat.com>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
-Date: Fri, 15 May 2020 23:58:17 +0200
-Message-ID: <CAJ+F1CLMA99GrML-19GB4bzB+MSzJZw8gA+Vtdf7Siv6RAyC3Q@mail.gmail.com>
-To: Francesco Giudici <fgiudici@redhat.com>
-Subject: Re: [Spice-devel] SPICE: changing the merge rules - a proposal
+In-Reply-To: <631443465.25687850.1588591196710.JavaMail.zimbra@redhat.com>
+Content-Language: en-US
+Subject: Re: [Spice-devel] Stuttering video playback on LAN
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,230 +71,190 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============0709177410=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0709177410==
-Content-Type: multipart/alternative; boundary="000000000000e00f2a05a5b6e902"
-
---000000000000e00f2a05a5b6e902
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-On Fri, May 15, 2020 at 7:06 PM Francesco Giudici <fgiudici@redhat.com>
-wrote:
-
-> Hi,
->    the community around the SPICE project always tried to follow one
-> fundamental, implicit rule for accepting code contributions to the
-> project: every merge request (beside trivial patches) should be reviewed
-> and acked at least by one before getting merged.
-> While everyone agrees with this fundamental rule, the actual status of
-> some SPICE projects makes the rule impractical to let the project move
-> forward.
->
-
-I wasn't aware of a maintenance problem. Perhaps we should first list the
-projects that have maintenance issues & discuss our options, before
-changing the common rule.
-
-Let's consider the spice/spice project as an example: the number of
-> contributions is very low, both on the commit side (only 4 different
-> contributors with more than 1 commit from the beginning of the year, and
-> a single contributor with 90% of commits) and on the review side (in the
-> last 40 merge requests before the C++ switch one, 21 had no comments).
->
-
-You are omitting the passive reviewers. I consider myself as one of them.
-If you need people to be more proactive, you could at least reach me &
-probably others past contributors.
-
-The x11spice project is another example: we have only 4 contributors
-> from the beginning of the year (and a single contributor holding 70% of
-> the commits) and the reviews on the gitlab merge requests have been
-> provided by two people only, each one reviewing the merge requests of
-> the other.
->
-
-As projects become more specific/marginal, it's clear that the number of
-maintainers is lower. Yet, we have those projects under the same umbrella,
-and I don't think they should be treated differently. 2 active
-developers/maintainers can be very healthy, I would say. So do we have a
-maintenance issue with x11spice? Do we want to move the project out of the
-"Spice-space" projects for ex? What is the problem exactly?
-
-For the sake of having the projects being able to move forward with a
-> reduced number of contributors/reviewers, the proposal is to *allow* a
-> maintainer to merge a Merge Request without an explicit ack if the three
-> following conditions are met:
-> 1) The Merge Request has been pending for at least 3 weeks without
-> getting new comments
-> 2) The Merge Request submitter has kept asking a review on a weekly basis
-> 3) There are no pending nacks on the Merge Request
->
->
-It's hard to define a delay to bypass a reviewing & consensus rule. In
-general, it should really be frowned upon. There is clearly more than one
-person interested and using Spice. If the issue is important, it should be
-fairly easy to get someone else to look at the issue in a timely manner. If
-not, there are probably more important/interesting things to do to get
-other interested.
-
-If Spice is good enough for our users and interested parties, then it may
-be risky to change it in wild directions without their approval.
-
-But 3 weeks is way too short. You could have more important work, family
-issue, get sick and go on holiday, all happening each after the other. If
-we need you to review some code, because you have the best experience, we
-should wait. If really we want a delay, I would argue waiting 3 months
-minimum (there might be exceptional circumstances, but they are exception,
-not the rule). And during that time, the contributor should have attempted
-multiple time to involve people, by different means (at least ML, irc and
-gitlab issue+MR - eventually try a conf call to explain the motivation,
-present the work differently etc, complain about the Spice project laziness
-on public blog if need be etc).
-
-
-Note that having patches reviewed would still be the preferred way. If
-> at any time the number of contributors would raise again, we can switch
-> back to the mandatory review rule. Until then the priority is to allow
-> the project to move forward.
->
-> What do you think? Please share your thoughts and/or contribute with
-> your own ideas.
->
-
-Thanks, but I think the trivial rule is already very subtle and generally
-disapproved (fwiw, I am still in favor of a subjective trivial rule), so I
-don't think this proposal would work.
-
-We have to grow a community, by convincing people and doing interesting
-work. Not by doing personal thing, and then leave the pieces behind,
-because we did it alone and didn't gather others.
-
-Perhaps Spice is doing the job. Perhaps Spice needs to define new
-objectives. These are interesting topics that I believe people would want
-to discuss and participate. If not, we are doing it wrong.
-
-thanks
-
---=20
-Marc-Andr=C3=A9 Lureau
-
---000000000000e00f2a05a5b6e902
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi<br></div><br><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Fri, May 15, 2020 at 7:06 PM Francesco Giu=
-dici &lt;<a href=3D"mailto:fgiudici@redhat.com">fgiudici@redhat.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<br>
-=C2=A0 =C2=A0the community around the SPICE project always tried to follow =
-one <br>
-fundamental, implicit rule for accepting code contributions to the <br>
-project: every merge request (beside trivial patches) should be reviewed <b=
-r>
-and acked at least by one before getting merged.<br>
-While everyone agrees with this fundamental rule, the actual status of <br>
-some SPICE projects makes the rule impractical to let the project move <br>
-forward.<br></blockquote><div><br></div><div>I wasn&#39;t aware of a mainte=
-nance problem. Perhaps we should first list the projects that have maintena=
-nce issues &amp; discuss our options, before changing the common rule.</div=
-><div> <br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-Let&#39;s consider the spice/spice project as an example: the number of <br=
->
-contributions is very low, both on the commit side (only 4 different <br>
-contributors with more than 1 commit from the beginning of the year, and <b=
-r>
-a single contributor with 90% of commits) and on the review side (in the <b=
-r>
-last 40 merge requests before the C++ switch one, 21 had no comments).<br><=
-/blockquote><div><br></div><div>You are omitting the passive reviewers. I c=
-onsider myself as one of them. If you need people to be more proactive, you=
- could at least reach me &amp; probably others past contributors.</div><div=
-> <br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-The x11spice project is another example: we have only 4 contributors <br>
-from the beginning of the year (and a single contributor holding 70% of <br=
->
-the commits) and the reviews on the gitlab merge requests have been <br>
-provided by two people only, each one reviewing the merge requests of <br>
-the other.<br></blockquote><div><br></div><div>As projects become more spec=
-ific/marginal, it&#39;s clear that the number of maintainers is lower. Yet,=
- we have those projects under the same umbrella, and I don&#39;t think they=
- should be treated differently. 2 active developers/maintainers can be very=
- healthy, I would say. So do we have a maintenance issue with x11spice? Do =
-we want to move the project out of the &quot;Spice-space&quot; projects for=
- ex? What is the problem exactly?<br></div><div> <br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
-gb(204,204,204);padding-left:1ex">
-For the sake of having the projects being able to move forward with a <br>
-reduced number of contributors/reviewers, the proposal is to *allow* a <br>
-maintainer to merge a Merge Request without an explicit ack if the three <b=
-r>
-following conditions are met:<br>
-1) The Merge Request has been pending for at least 3 weeks without <br>
-getting new comments<br>
-2) The Merge Request submitter has kept asking a review on a weekly basis<b=
-r>
-3) There are no pending nacks on the Merge Request<br>
-<br></blockquote><div><br></div><div>It&#39;s hard to define a delay to byp=
-ass a reviewing &amp; consensus rule. In general, it should really be frown=
-ed upon. There is clearly more than one person interested and using Spice. =
-If the issue is important, it should be fairly easy to get someone else to =
-look at the issue in a timely manner. If not, there are probably more impor=
-tant/interesting things to do to get other interested.</div><div><br></div>=
-<div>If Spice is good enough for our users and interested parties, then it =
-may be risky to change it in wild directions without their approval.<br><br=
->But 3 weeks is way too short. You could have more important work, family i=
-ssue, get sick and go on holiday, all happening each after the other. If we=
- need you to review some code, because you have the best experience, we sho=
-uld wait. If really we want a delay, I would argue waiting 3 months minimum=
- (there might be exceptional circumstances, but they are exception, not the=
- rule). And during that time, the contributor should have attempted multipl=
-e time to involve people, by different means (at least ML, irc and gitlab i=
-ssue+MR - eventually try a conf call to explain the motivation, present the=
- work differently etc, complain about the Spice project laziness on public =
-blog if need be etc).<br><br><br></div><blockquote class=3D"gmail_quote" st=
-yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
-ing-left:1ex">
-Note that having patches reviewed would still be the preferred way. If <br>
-at any time the number of contributors would raise again, we can switch <br=
->
-back to the mandatory review rule. Until then the priority is to allow <br>
-the project to move forward.<br>
-<br>
-What do you think? Please share your thoughts and/or contribute with <br>
-your own ideas.<br></blockquote><div><br></div><div>Thanks, but I think the=
- trivial rule is already very subtle and generally disapproved (fwiw, I am =
-still in favor of a subjective trivial rule), so I don&#39;t think this pro=
-posal would work.</div><div><br></div><div>We have to grow a community, by =
-convincing people and doing interesting work. Not by doing personal thing, =
-and then leave the pieces behind, because we did it alone and didn&#39;t ga=
-ther others.</div><div><br></div><div>Perhaps Spice is doing the job. Perha=
-ps Spice needs to define new objectives. These are interesting topics that =
-I believe people would want to discuss and participate. If not, we are doin=
-g it wrong.<br></div><div><br></div><div>thanks</div><div><br></div></div>-=
-- <br><div dir=3D"ltr" class=3D"gmail_signature">Marc-Andr=C3=A9 Lureau<br>=
-</div></div>
-
---000000000000e00f2a05a5b6e902--
-
---===============0709177410==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0709177410==--
+SGkgRmVyZGlhbm8KCgo+ID4gCj4gPiBIaSwKPiA+IAo+ID4gSSBleHBlcmllbmNlIHN0dXR0ZXJp
+bmcgdmlkZW8gcGxheWJhY2sgaW4gcmVtb3RlLXZpZXdlciBkZXNwaXRlIGNvbm5lY3RpbmcKPiA+
+IHZpYSBHQml0L3MgTEFOLCB1c2luZyBmYXN0IGhhcmR3YXJlIGFuZCB0aGUgUVhMIGRyaXZlci4K
+PiA+IFVwIHVudGlsIGEgdmlkZW8gc2l6ZSBvZiByb3VnaGx5IDgwMHg2MDAgdGhlIHBsYXliYWNr
+IGlzIHNtb290aC4gQnV0IG9uCj4gPiBhbnl0aGluZyBiaWdnZXIsIGxpa2UgbXkgbmF0aXZlIHJl
+c29sdXRpb24gb2YgMjU0MHgxNDQwLCB2aWRlbyBwbGF5YmFjayBpcwo+ID4gc3R1dHRlcmluZyBh
+bm5veWluZ2x5Lgo+ID4gQWZ0ZXIgbG90cyBvZiB1bnN1Y2Nlc3NmdWwgdGlua2VyaW5nIHdpdGgg
+c3BpY2UgcGFyYW1ldGVycyBhbmQgcXhsIHBhcmFtZXRlcnMKPiA+IEknbSBhc2tpbmcgeW91IGd1
+eXMgZm9yIGhlbHAuCj4gPiAKPiA+IENsaWVudDoKPiA+IFdpbmRvd3MgMTAgMTkwOQo+ID4gUmVt
+b3RlIFZpZXdlciA4LjAtMjU2Cj4gPiBRdWFkY29yZSBpNy03ODIwSFEgMi45R0h6Cj4gPiAxNkdC
+IEREUjQgUkFNCj4gPiAKPiA+IEhvc3Qgb2YgdGhlIFZNOgo+ID4gR2VudG9vIExpbnV4Cj4gPiBL
+ZXJuZWwgNC4xNC4xNzIKPiA+IFFlbXUgNC4yLjAKCkkndmUgdXBkYXRlZCB0byBuZXdlciB2ZXJz
+aW9ucyBpbiB0aGUgbWVhbnRpbWUsIGJ1dCBubyBub3RpY2VhYmxlIGNoYW5nZXMuCgpRZW11IDUu
+MC4wCkhvc3Qga2VybmVsIDUuNC4zOQpSZW1vdGUgVmlld2VyIDkuMC0yNTYgKHg2NCkgb24gdGhl
+IFdpbmRvd3MgMTAgQ2xpZW50Cgo+ID4gUXVhZGNvcmUgaTctNzcwMEsgNC4yR0h6Cj4gPiA2NEdC
+IEREUjQgUkFNCj4gPiBTZXJ2ZXIgaXMgaGVhZGxlc3MsIGhhcyBubyBkZWRpY2F0ZWQgZ3JhcGhp
+Y3MgY2FyZCwgb25seSB0aGUgSW50ZWwgSEQgNjMwCj4gPiBmcm9tIHRoZSBDUFUKPiA+IAo+ID4g
+R3Vlc3QgVk06Cj4gPiBEZWJpYW4gQnVsbHNleWUKPiA+IEkgZG9uJ3QgdGhpbmsgaXQncyBndWVz
+dCByZWxhdGVkLCBiZWNhdXNlIHRoZSBzYW1lIHByb2JsZW0gaGFwcGVucyB3aXRoIGEKPiA+IFdp
+bmRvd3MgMTAgR3Vlc3Qgd2l0aCBsYXRlc3QgUVhMIGRyaXZlcnMgYW5kIHNwaWNlLXRvb2xzIGlu
+c3RhbGxlZC4KPiA+IAo+ID4gTmV0d29yayBwZXJmb3JtYW5jZSBjbGllbnQ8PT5ob3N0Ogo+ID4g
+UGluZyAwLjJtcwo+ID4gVGhyb3VnaHB1dCBiZW5jaG1hcmtlZCBhdCA5NjBNQml0L3MKPiA+IAo+
+ID4gUWVtdSBpbnZvY2F0aW9uIG9uIGhvc3Q6Cj4gPiAjcWVtdS1zeXN0ZW0teDg2XzY0Cj4gPiAt
+c3BpY2UgcG9ydD01OTA2LGFkZHI9MTAuNDIuMi4yNTAscGFzc3dvcmQ9Y2hhbmdlZAo+ID4gLXZn
+YSBub25lIC1kZXZpY2UKPiA+IHF4bC12Z2EscmFtX3NpemVfbWI9MTI4LHZnYW1lbV9tYj0zMix2
+cmFtX3NpemVfbWI9MTI4LHZyYW02NF9zaXplX21iPTI1NixtYXhfb3V0cHV0cz0xCj4gPiAtTSBx
+MzUgLXNtcCAyIC1jcHUgaG9zdCAtLWVuYWJsZS1rdm0KPiA+IC1kcml2ZSBmaWxlPXZtZmxsaW4u
+cmF3LGlmPXZpcnRpbyxmb3JtYXQ9cmF3LGluZGV4PTAsY2FjaGU9bm9uZSxhaW89bmF0aXZlIC1t
+Cj4gPiAyNDU3Ngo+ID4gLW5ldCBuaWMsbW9kZWw9dmlydGlvLG1hY2FkZHI9NTI6NTQ6MDA6NzQ6
+MDE6MDYgLW5ldAo+ID4gdGFwLGlmbmFtZT12bWZsbGluLHNjcmlwdD1ubyxkb3duc2NyaXB0PW5v
+IC1rIGRlCj4gPiAtbW9uaXRvciB0Y3A6MTI3LjAuMC4xOjU5NTYsc2VydmVyLG5vd2FpdAo+ID4g
+LWRldmljZSB2aXJ0aW8tc2VyaWFsLGlkPXZpcnRpby1zZXJpYWwxCj4gPiAtY2hhcmRldiBzcGlj
+ZXZtYyxpZD12ZGFnZW50LGRlYnVnPTAsbmFtZT12ZGFnZW50Cj4gPiAtZGV2aWNlCj4gPiB2aXJ0
+c2VyaWFscG9ydCxidXM9dmlydGlvLXNlcmlhbDEuMCxjaGFyZGV2PXZkYWdlbnQsbmFtZT1jb20u
+cmVkaGF0LnNwaWNlLjAKPiA+IC1ydGMgYmFzZT11dGMsY2xvY2s9aG9zdCAtZGFlbW9uaXplIC0t
+ZGV2aWNlIHZpcnRpby1iYWxsb29uIC1ib290IGMKPiA+IC1ub2RlZmF1bHRzIC1zb3VuZGh3IGhk
+YQo+ID4gCj4gPiBTcGljZSBwYXJhbWV0ZXJzIEkgdHJpZWQ6Cj4gPiAtc3BpY2UKPiA+IHN0cmVh
+bWluZy12aWRlbz1hbGwsaW1hZ2UtY29tcHJlc3Npb249b2ZmLGpwZWctd2FuLWNvbXByZXNzaW9u
+PW5ldmVyLHpsaWItZ2x6LXdhbi1jb21wcmVzc2lvbj1uZXZlcixwbGF5YmFjay1jb21wcmVzc2lv
+bj1vZmYKPgo+IFdoeSBwbGF5YmFjay1jb21wcmVzc2lvbiBvZmYgPwo+IFRoZSBzdHJlYW1pbmct
+dmlkZW8gc2hvdWxkIGhlbHAgcXVpdGUgYSBsb3QsIGF0IGxlYXN0IGlmIHlvdSBwbGF5IHZpZGVv
+cy4KPiBBbmQgd2h5IGltYWdlLWNvbXByZXNzaW9uIGlzIGFsc28gb2ZmPwo+Cj4gV2l0aG91dCBj
+b21wcmVzc2lvbiBhbmQgMUdCL3MgY29ubmVjdGlvbiBhdCB5b3VyIHJlc29sdXRpb24geW91IGZp
+bGwgYWxsIHRoZSBiYW5kd2lkdGggd2l0aCBqdXN0IDggZnJhbWVzIHBlciBzZWNvbmQuCgpJIHRy
+aWVkIGJvdGgsIGFuZCB0dXJuaW5nIG9mZiBjb21wcmVzc2lvbiBnYXZlIHNsaWdodGx5IGJldHRl
+ciByZXN1bHRzLiBJdCdzIG5vdCB0aGUgc29sdXRpb24sIGFzIHlvdSBzYXksIGJlY2F1c2UgaXQg
+c2F0dXJhdGVzIHRoZSBHQi9zIGxpbmsuCgpUZXN0ICMxOiBzdHJlYW1pbmctdmlkZW89YWxsIGFu
+ZCBubyBvdGhlciBvcHRpb25zIChpZSBkZWZhdWx0cyk6ClN0dXR0ZXJpbmcgaXMgd29yc2UKQmFu
+ZHdpZHRoOiAxMDVNYml0L3MKClRlc3QgIzI6IHN0cmVhbWluZy12aWRlbz1hbGwsaW1hZ2UtY29t
+cHJlc3Npb249b2ZmLGpwZWctd2FuLWNvbXByZXNzaW9uPW5ldmVyLHpsaWItZ2x6LXdhbi1jb21w
+cmVzc2lvbj1uZXZlcixwbGF5YmFjay1jb21wcmVzc2lvbj1vZmYKU3R1dHRlcmluZyBpcyBhIGJp
+dCBsZXNzLCBidXQgc3RpbGwgbm90IHVzYWJsZQpCYW5kd2lkdGg6IDk3ME1CaXQvcwoKVGhlIHJl
+bW90ZS12aWV3ZXIuZXhlIG9uIHRoZSBjbGllbnQgdXNlcyBleGFjdGx5IDEwMCUgb2Ygb25lIENQ
+VSBjb3JlLCByZWdhcmRsZXNzIG9mIGFueSBzZXR0aW5nLiBJcyB0aGUgY2xpZW50IHRoZSBsaW1p
+dGluZyBmYWN0b3I/PwoKSSBub3RpY2VkIHZlcnkgaGlnaCBDUFUgdXNhZ2UgaW4gdGhlIGd1ZXN0
+IGR1cmluZyBwbGF5YmFjaywgYmVjYXVzZSBjaHJvbWUsIHZsYywgbXB2IHVzZWQgc29mdHdhcmUg
+aDI2NCBkZWNvZGluZy4KSSBmaXhlZCB0aGlzIGJ5IHBhc3NpbmcgYSB2aXJ0dWFsaXplZCBpbnN0
+YW5jZSBvZiB0aGUgaG9zdHMgSW50ZWwgR1BVIHRvIHRoZSBndWVzdCB2aWEgR1ZULWcuCgpUaGVz
+ZSBhcmUgdGhlIHFlbXUgcGFyYW1ldGVycyBJIHVzZSBmb3IgR1ZULWc6Ci1zcGljZSBwb3J0PTU5
+MDYsYWRkcj0xMC40Mi4yLjI1MCxwYXNzd29yZD1jaGFuZ2VkCi12Z2EgdmlydGlvCi1kaXNwbGF5
+IGVnbC1oZWFkbGVzcyxyZW5kZXJub2RlPS9kZXYvZHJpL2NhcmQwCi1kZXZpY2UgdmZpby1wY2ks
+c3lzZnNkZXY9L3N5cy9idXMvbWRldi9kZXZpY2VzL2YxNGM4MGQ1LTlhZGUtNDgwMi05NTA5LTFk
+ODc3ZDMyZDE1OSxkaXNwbGF5PW9uLHJhbWZiPW9uLGRyaXZlcj12ZmlvLXBjaS1ub2hvdHBsdWcK
+ClVuZm9ydHVuYXRlbHkgdmlkZW8gcGxheWJhY2sgaXMgc3RpbGwgbm90IHNtb290aGVyLiBJbiBm
+YWN0IGl0IGlzIGFib3V0IHRoZSBzYW1lIHNtb290aG5lc3MgYnV0IG5ldyB2aXN1YWwgYXJ0ZWZh
+Y3RzIGluIHRoZSB2aWRlbyBtYWtlIGl0IHdvcnNlLiBJIHRoaW5rIHRoaXMgaXMgZHVlIHRvIGVn
+bC1oZWFkbGVzcy4KRm9yIHRlc3RpbmcvY29tcGFyaXNvbiBJIGluc3RhbGxlZCBhIFdpbmRvd3Mg
+MTAgZ3Vlc3Qgd2l0aCB0aGUgc2FtZSBHVlQtZyBHUFUgYW5kIHVzZWQgUkRQIHdpdGggaDI2NCBh
+Y3RpdmF0ZWQuIFBsYXliYWNrIHdhcyBtdWNoIGJldHRlciBhbmQgdXNlZCBvbmx5IGFib3V0IDEy
+ME1CaXQvcy4KCk5leHQgSSB0cmllZCB1c2luZyB0aGUgc3BpY2Utc3RyZWFtaW5nLWFnZW50IGlu
+IHRoZSBndWVzdCB0byBzZW5kIGEgaDI2NCBlbmNvZGVkIHBpY3R1cmUgdmlhIHNwaWNlLgpIb3dl
+dmVyLCB0aGUgd2luZG93cyBidWlsZCBvZiByZW1vdGUtdmlld2VyIGRvZXNuJ3Qgc2VlbSB0byBz
+dXBwb3J0IHRoaXMuIFRoZSBuZXcgc3BpY2UgZGlzcGxheSBpcyBjcmVhdGVkIGFuZCBJIHNlZSB0
+aGUgbW91c2UgY3Vyc29yIGluIGl0IGJ1dCBubyBwaWN0dXJlIChqdXN0IGJsYWNrKS4KCkxvZyBm
+cm9tIHRoZSBndWVzdDoKZmVsaXhAaWRlZml4On4kIC4vc3BpY2Utc3RyZWFtaW5nLWFnZW50IC1k
+CnNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1XTogR09UIFNUQVJUX1NUT1AgbWVzc2FnZSAtLSBy
+ZXF1ZXN0IHRvIFNUQVJUIHN0cmVhbWluZwpzcGljZS1zdHJlYW1pbmctYWdlbnRbMjQ2NV06IHN0
+cmVhbWluZyBzdGFydHMgbm93CnNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1XTogR290IGRldmlj
+ZSBpbmZvIG9mIDEgZGV2aWNlcyBmcm9tIHRoZSBwbHVnaW4Kc3BpY2Utc3RyZWFtaW5nLWFnZW50
+WzI0NjVdOsKgwqDCoCBzdHJlYW0gaWQgMDogZGV2aWNlIGFkZHJlc3M6IHBjaS8wMDAwLzA2LjAs
+IGRldmljZSBkaXNwbGF5IGlkOiAyCnNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1XTogZ290IGEg
+ZnJhbWUgLS0gc2l6ZSBpcyAzMjEyNjUgKDI2IG1zKSAoMTU4OTY0MTY2MDI4NSBtcyBmcm9tIGxh
+c3QgZnJhbWUpKDE1ODk2NDE2NjAyNTgxMzYgdXMpCnNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1
+XTogd1hoIDE5MjBYMTIwMMKgIGNvZGVjPTEKc3BpY2Utc3RyZWFtaW5nLWFnZW50WzI0NjVdOiBn
+b3QgYSBmcmFtZSAtLSBzaXplIGlzIDMzNTE3NSAoODcgbXMpICg4NyBtcyBmcm9tIGxhc3QgZnJh
+bWUpKDE4OSB1cykKc3BpY2Utc3RyZWFtaW5nLWFnZW50WzI0NjVdOiBnb3QgYSBmcmFtZSAtLSBz
+aXplIGlzIDM0MTA5OCAoMTMzIG1zKSAoMTMzIG1zIGZyb20gbGFzdCBmcmFtZSkoNjYgdXMpCgpM
+b2cgZnJvbSByZW1vdGUtdmlld2VyLmV4ZSBvbiBjbGllbnQgKFdpbmRvd3MpOgpyZW1vdGUtdmll
+d2VyLmV4ZToxNDM2KTogR1NwaWNlLVdBUk5JTkcgKio6IDE2OjM2OjQ3LjM0Nzogbm90aWZ5IHRo
+ZSBzZXJ2ZXIgdGhhdCBzdHJlYW0gNDggZG9lcyBub3QgZXhpc3QKKHJlbW90ZS12aWV3ZXIuZXhl
+OjE0MzYpOiBHU3BpY2UtQ1JJVElDQUwgKio6IDE2OjM2OjQ3LjM0ODogZGlzcGxheV9oYW5kbGVf
+c3RyZWFtX2NsaXA6IGFzc2VydGlvbiAnc3QgIT0gTlVMTCcgZmFpbGVkCihyZW1vdGUtdmlld2Vy
+LmV4ZToxNDM2KTogR1NwaWNlLVdBUk5JTkcgKio6IDE2OjM2OjQ3LjM1Njogbm90aWZ5IHRoZSBz
+ZXJ2ZXIgdGhhdCBzdHJlYW0gNDEgZG9lcyBub3QgZXhpc3QKKHJlbW90ZS12aWV3ZXIuZXhlOjE0
+MzYpOiBHU3BpY2UtQ1JJVElDQUwgKio6IDE2OjM2OjQ3LjM1NzogZGlzcGxheV9oYW5kbGVfc3Ry
+ZWFtX2NsaXA6IGFzc2VydGlvbiAnc3QgIT0gTlVMTCcgZmFpbGVkCihyZW1vdGUtdmlld2VyLmV4
+ZToxNDM2KTogR1NwaWNlLVdBUk5JTkcgKio6IDE2OjM2OjQ3LjM2Mzogbm90aWZ5IHRoZSBzZXJ2
+ZXIgdGhhdCBzdHJlYW0gMzMgZG9lcyBub3QgZXhpc3QKKHJlbW90ZS12aWV3ZXIuZXhlOjE0MzYp
+OiBHU3BpY2UtQ1JJVElDQUwgKio6IDE2OjM2OjQ3LjM2NDogZGlzcGxheV9oYW5kbGVfc3RyZWFt
+X2NsaXA6IGFzc2VydGlvbiAnc3QgIT0gTlVMTCcgZmFpbGVkCihyZW1vdGUtdmlld2VyLmV4ZTox
+NDM2KTogR1NwaWNlLVdBUk5JTkcgKio6IDE2OjM2OjQ3LjM2Njogbm90aWZ5IHRoZSBzZXJ2ZXIg
+dGhhdCBzdHJlYW0gMzQgZG9lcyBub3QgZXhpc3QKKHJlbW90ZS12aWV3ZXIuZXhlOjE0MzYpOiBH
+U3BpY2UtQ1JJVElDQUwgKio6IDE2OjM2OjQ3LjM2NzogZGlzcGxheV9oYW5kbGVfc3RyZWFtX2Ns
+aXA6IGFzc2VydGlvbiAnc3QgIT0gTlVMTAoKSWYgSSB1c2UgcmVtb3RlIHZpZXdlciBmcm9tIGEg
+bGludXggY2xpZW50IHRoZW4gaXQgZG9lcyBpbmRlZWQgd29yayEgUGxheWJhY2sgaXMgbmVhcmx5
+IHNtb290aCwgYWJvdXQgdGhlIHNhbWUgYXMgd2l0aCBSRFAgYW5kIGgyNjQhClNvIEkgZ3Vlc3Mg
+aXQncyBhIGJ1ZyBpbiB0aGUgd2luZG93cyByZW1vdGUtdmlld2VyLiBTZWVtcyBsaWtlIGl0IGRv
+ZXNuJ3QgaGF2ZSBnc3RyZWFtZXIgc3VwcG9ydCwgc28gSSdsbCBvcGVuIGEgYnVnIHJlcG9ydC4K
+CkFueSBvdGhlciBpZGVhcyB3aGF0IEkgY2FuIHRyeSB0byBnZXQgZ29vZCByZWFzb25hYmxlIHZp
+ZGVvIHBsYXliYWNrIHdpdGggZ29vZCBvZmZpY2Utd29yayBwZXJmb3JtYW5jZT8KCk9uIGEgc2lk
+ZSBub3RlOiBBdWRpbyB2aWEgc3BpY2UgaXNuJ3Qgd29ya2luZy4gSSBoZWFyIGEgZmV3IHN0cmFu
+Z2Ugbm9pc2VzIGFuZCB0aGVuIG9ubHkgc2lsZW5jZS4gU28gSSB1c2UgcHVsc2VhdWRpbyB0cmFu
+c21pdHRpbmcgdGhlIHNvdW5kIHRvIHRoZSBjbGllbnQgaW5kZXBlbmRlbnQgb2Ygc3BpY2UuCgo+
+ID4gLXNwaWNlCj4gPiBzdHJlYW1pbmctdmlkZW89b2ZmLGltYWdlLWNvbXByZXNzaW9uPW9mZixq
+cGVnLXdhbi1jb21wcmVzc2lvbj1uZXZlcix6bGliLWdsei13YW4tY29tcHJlc3Npb249bmV2ZXIs
+cGxheWJhY2stY29tcHJlc3Npb249b2ZmCj4gPiAKPiA+IEd1ZXN0IGtlcm5lbDoKPiA+IExpbnV4
+IGd1ZXN0IDUuNC4wLTQtYW1kNjQgIzEgU01QIERlYmlhbiA1LjQuMTktMSAoMjAyMC0wMi0xMykg
+eDg2XzY0Cj4gPiBHTlUvTGludXgKPiA+IGd1ZXN0IGtlcm5lbDogcXhsIDAwMDA6MDA6MDMuMDog
+cmVtb3ZlX2NvbmZsaWN0aW5nX3BjaV9mcmFtZWJ1ZmZlcnM6IGJhciAwOgo+ID4gMHhlODAwMDAw
+MCAtPiAweGVmZmZmZmZmCj4gPiBndWVzdCBrZXJuZWw6IHF4bCAwMDAwOjAwOjAzLjA6IHJlbW92
+ZV9jb25mbGljdGluZ19wY2lfZnJhbWVidWZmZXJzOiBiYXIgMToKPiA+IDB4ZjAwMDAwMDAgLT4g
+MHhmN2ZmZmZmZgo+ID4gZ3Vlc3Qga2VybmVsOiBxeGwgMDAwMDowMDowMy4wOiByZW1vdmVfY29u
+ZmxpY3RpbmdfcGNpX2ZyYW1lYnVmZmVyczogYmFyIDI6Cj4gPiAweGY4MDU0MDAwIC0+IDB4Zjgw
+NTVmZmYKPiA+IGd1ZXN0IGtlcm5lbDogcXhsIDAwMDA6MDA6MDMuMDogcmVtb3ZlX2NvbmZsaWN0
+aW5nX3BjaV9mcmFtZWJ1ZmZlcnM6IGJhciA0Ogo+ID4gMHhkMDAwMDAwMCAtPiAweGRmZmZmZmZm
+Cj4gPiBndWVzdCBrZXJuZWw6IHF4bCAwMDAwOjAwOjAzLjA6IHZnYWFyYjogZGVhY3RpdmF0ZSB2
+Z2EgY29uc29sZQo+ID4gZ3Vlc3Qga2VybmVsOiBbZHJtXSBEZXZpY2UgVmVyc2lvbiAwLjAKPiA+
+IGd1ZXN0IGtlcm5lbDogW2RybV0gQ29tcHJlc3Npb24gbGV2ZWwgMCBsb2cgbGV2ZWwgMAo+ID4g
+Z3Vlc3Qga2VybmVsOiBbZHJtXSAyNDU3NCBpbyBwYWdlcyBhdCBvZmZzZXQgMHgyMDAwMDAwCj4g
+PiBndWVzdCBrZXJuZWw6IFtkcm1dIDMzNTU0NDMyIGJ5dGUgZHJhdyBhcmVhIGF0IG9mZnNldCAw
+eDAKPiA+IGd1ZXN0IGtlcm5lbDogW2RybV0gUkFNIGhlYWRlciBvZmZzZXQ6IDB4N2ZmZTAwMAo+
+ID4gZ3Vlc3Qga2VybmVsOiBbZHJtXSBxeGw6IDMyTSBvZiBWUkFNIG1lbW9yeSBzaXplCj4gPiBn
+dWVzdCBrZXJuZWw6IFtkcm1dIHF4bDogMTI3TSBvZiBJTyBwYWdlcyBtZW1vcnkgcmVhZHkgKFZS
+QU0gZG9tYWluKQo+ID4gZ3Vlc3Qga2VybmVsOiBbZHJtXSBxeGw6IDI1Nk0gb2YgU3VyZmFjZSBt
+ZW1vcnkgc2l6ZQo+ID4gZ3Vlc3Qga2VybmVsOiBbZHJtXSBzbG90IDAgKG1haW4pOiBiYXNlIDB4
+ZTgwMDAwMDAsIHNpemUgMHgwN2ZmZTAwMCwKPiA+IGdwdV9vZmZzZXQgMHgyMDAwMDAwMDAwMAo+
+ID4gZ3Vlc3Qga2VybmVsOiBbZHJtXSBzbG90IDEgKHN1cmZhY2VzKTogYmFzZSAweGQwMDAwMDAw
+LCBzaXplIDB4MTAwMDAwMDAsCj4gPiBncHVfb2Zmc2V0IDB4MzAwMDAwMDAwMDAKPiA+IGd1ZXN0
+IGtlcm5lbDogW2RybV0gSW5pdGlhbGl6ZWQgcXhsIDAuMS4wIDIwMTIwMTE3IGZvciAwMDAwOjAw
+OjAzLjAgb24gbWlub3IKPiA+IDAKPiA+IGd1ZXN0IGtlcm5lbDogZmJjb246IHF4bGRybWZiIChm
+YjApIGlzIHByaW1hcnkgZGV2aWNlCj4gPiBndWVzdCBrZXJuZWw6IHF4bCAwMDAwOjAwOjAzLjA6
+IGZiMDogcXhsZHJtZmIgZnJhbWUgYnVmZmVyIGRldmljZQo+ID4gCj4gPiBHdWVzdCBYLU9yZzoK
+PiA+IFguT3JnIFggU2VydmVyIDEuMjAuOAo+ID4gW8KgwqAgMjA1LjUxNl0gKElJKSBMb2FkTW9k
+dWxlOiAicXhsIgo+ID4gW8KgwqAgMjA1LjUxNl0gKElJKSBMb2FkaW5nIC91c3IvbGliL3hvcmcv
+bW9kdWxlcy9kcml2ZXJzL3F4bF9kcnYuc28KPiA+IFvCoMKgIDIwNS41MThdIChJSSkgTW9kdWxl
+IHF4bDogdmVuZG9yPSJYLk9yZyBGb3VuZGF0aW9uIgo+ID4gW8KgwqAgMjA1LjUyMF0gKElJKSBx
+eGw6IERyaXZlciBmb3IgUVhMIHZpcnR1YWwgZ3JhcGhpY3M6IFFYTCAxCj4gPiBbwqDCoCAyMDUu
+NTI1XSAoSUkpIHF4bCgwKTogQ3JlYXRpbmcgZGVmYXVsdCBEaXNwbGF5IHN1YnNlY3Rpb24gaW4g
+U2NyZWVuCj4gPiBzZWN0aW9uCj4gPiBbwqDCoCAyMDUuNTI1XSAoPT0pIHF4bCgwKTogRGVwdGgg
+MjQsICgtLSkgZnJhbWVidWZmZXIgYnBwIDMyCj4gPiBbwqDCoCAyMDUuNTI1XSAoPT0pIHF4bCgw
+KTogUkdCIHdlaWdodCA4ODgKPiA+IFvCoMKgIDIwNS41MjVdICg9PSkgcXhsKDApOiBEZWZhdWx0
+IHZpc3VhbCBpcyBUcnVlQ29sb3IKPiA+IFvCoMKgIDIwNS41MjVdICg9PSkgcXhsKDApOiBVc2lu
+ZyBnYW1tYSBjb3JyZWN0aW9uICgxLjAsIDEuMCwgMS4wKQo+ID4gW8KgwqAgMjA1LjUyNV0gKElJ
+KSBxeGwoMCk6IERlZmVycmVkIEZyYW1lczogRGlzYWJsZWQKPiA+IFvCoMKgIDIwNS41MjVdIChJ
+SSkgcXhsKDApOiBPZmZzY3JlZW4gU3VyZmFjZXM6IEVuYWJsZWQKPiA+IFvCoMKgIDIwNS41MjVd
+IChJSSkgcXhsKDApOiBJbWFnZSBDYWNoZTogRW5hYmxlZAo+ID4gW8KgwqAgMjA1LjUyNV0gKElJ
+KSBxeGwoMCk6IEZhbGxiYWNrIENhY2hlOiBFbmFibGVkCj4gPiBbwqDCoCAyMDUuNTI1XSAoPT0p
+IHF4bCgwKTogRFBJIHNldCB0byAoOTYsIDk2KQo+ID4gIyBnbHhnZWFycwo+ID4gOTcwOSBmcmFt
+ZXMgaW4gNS4wIHNlY29uZHMgPSAxOTQxLjY3NSBGUFMKPiA+IDExNzE5IGZyYW1lcyBpbiA1LjAg
+c2Vjb25kcyA9IDIzNDMuNzgwIEZQUwo+ID4gCj4gPiBSZW1vdGUtVmlld2VyIGNvbnNvbGUgb3V0
+cHV0IG9uIFdpbmRvd3MgY2xpZW50Ogo+ID4gIkM6XFByb2dyYW0gRmlsZXNcVmlydFZpZXdlciB2
+OC4wLTI1NlxiaW5ccmVtb3RlLXZpZXdlci5leGUiCj4gPiAtLWhvdGtleXM9dG9nZ2xlLWZ1bGxz
+Y3JlZW49c2hpZnQrZjExIHNwaWNlOi8vMTAuNDIuMi4yNTA6NTkwNgo+ID4gKHJlbW90ZS12aWV3
+ZXIuZXhlOjE2MzI0KTogR1NwaWNlLUNSSVRJQ0FMICoqOiAwODowMDozMi40Njc6Cj4gPiBfdXNi
+ZGtfaGlkZXJfdXBkYXRlOiBhc3NlcnRpb24gJ3ByaXYtPnVzYmRrX2FwaSAhPSBOVUxMJyBmYWls
+ZWQKPiA+IChyZW1vdGUtdmlld2VyLmV4ZToxNjMyNCk6IEdTcGljZS1DUklUSUNBTCAqKjogMDg6
+MDA6MzIuNTI2OiBmaWxlCj4gPiAuLi8uLi9zcmMvdXNiLWRldmljZS1tYW5hZ2VyLmM6IGxpbmUg
+MTgxNSAocHJvYmVfaXNvY2hyb25vdXNfZW5kcG9pbnQpOgo+ID4gc2hvdWxkIG5vdCBiZSByZWFj
+aGVkCj4gPiAocmVtb3RlLXZpZXdlci5leGU6MTYzMjQpOiBHdGstV0FSTklORyAqKjogMDg6MDA6
+MzIuOTUwOiBUaGVtZSBkaXJlY3RvcnkKPiA+IDI1NngyNTZAMi9hbmltYXRpb25zIG9mIHRoZW1l
+IGhpY29sb3IgaGFzIG5vIHNpemUgZmllbGQKPiA+IChyZW1vdGUtdmlld2VyLmV4ZToxNjMyNCk6
+IFNwaWNlLVdBUk5JTkcgKio6IDA4OjAwOjUwLjgwNDoKPiA+IC4uLy4uL3NyYy9jaGFubmVsLWRp
+c3BsYXktZ3N0LmM6NzE1OmdzdHZpZGVvX2hhc19jb2RlYzogTm8gdmlkZW8gZGVjb2RlcnMKPiA+
+IGZyb20gR1N0cmVhbWVyIHdlcmUgZm91bmQKPiA+IChyZW1vdGUtdmlld2VyLmV4ZToxNjMyNCk6
+IEdTcGljZS1DUklUSUNBTCAqKjogMDg6MDA6NTAuOTEyOgo+ID4gX3VzYmRrX2hpZGVyX3VwZGF0
+ZTogYXNzZXJ0aW9uICdwcml2LT51c2Jka19hcGkgIT0gTlVMTCcgZmFpbGVkCj4gPiAocmVtb3Rl
+LXZpZXdlci5leGU6MTYzMjQpOiBHU3BpY2UtV0FSTklORyAqKjogMDg6MDA6NTAuOTE5OiBXYXJu
+aW5nIG5vCj4gPiBhdXRvbW91bnQtaW5oaWJpdGluZyBpbXBsZW1lbnRhdGlvbiBhdmFpbGFibGUK
+PiA+IAo+ID4gVGhhbmtzLAo+ID4gRmVsaXgKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBs
+aXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
+bi9saXN0aW5mby9zcGljZS1kZXZlbAo=
