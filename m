@@ -1,62 +1,53 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 476CF1D750B
-	for <lists+spice-devel@lfdr.de>; Mon, 18 May 2020 12:21:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D747E1D75AE
+	for <lists+spice-devel@lfdr.de>; Mon, 18 May 2020 12:56:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B59FD6E1ED;
-	Mon, 18 May 2020 10:21:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E29C3899E7;
+	Mon, 18 May 2020 10:56:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 01A5F6E405
- for <spice-devel@lists.freedesktop.org>; Mon, 18 May 2020 10:21:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7D7E1899E7
+ for <spice-devel@lists.freedesktop.org>; Mon, 18 May 2020 10:56:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1589797313;
+ s=mimecast20190719; t=1589799384;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=4Ydu2c2zo4ITQUVIsdS3TUgcTRoSJsQl/3ax80Z3Ln0=;
- b=ZpUNFR1n5assrDMUBQ6soRJvTBTXaHWmwKWV6q6JzEvY+yCt6uJPDEwP1QnzbDxsnkVSEJ
- ZypLL+/vvCOAIk6w2PtlMzJTk9MCrEyzl+r1T4EvbKaPbs+V1vJJ38Twy9ZrmTgqnBz4qI
- Okqe9y0IznYE5MwEvOskfwarF9DqEks=
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:in-reply-to:in-reply-to:  references:references;
+ bh=yHUdqO4ku8HNpGpEcSjCu6EIsPuCjw87A4iJDrQYqww=;
+ b=aVSX2EqxjaQYnfGFTn+tOzwiz4RjiMEQMaPCAML0g0ilNm+hTE13fn3T/dZnOI76bJvMUJ
+ RFa7NZGgdWjfdDOOzcaaHP2NYQr62ky6d6enmBI9pJrE0/Zb9llA5okoJNXsXo/DQPdNOw
+ X/JnXnPkw30CeKORsadjkO79Teg2+K4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-293-G6zeDTC5ON-2ZH3dj6kiUA-1; Mon, 18 May 2020 06:21:51 -0400
-X-MC-Unique: G6zeDTC5ON-2ZH3dj6kiUA-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ us-mta-343-CMrivwQ7NBK8ORL21a3YWw-1; Mon, 18 May 2020 06:56:21 -0400
+X-MC-Unique: CMrivwQ7NBK8ORL21a3YWw-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CEBB4107ACF6;
- Mon, 18 May 2020 10:21:46 +0000 (UTC)
-Received: from lub.tlv (unknown [10.35.206.194])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 8E51B2E05D;
- Mon, 18 May 2020 10:21:45 +0000 (UTC)
-To: Felix Leimbach <felix.leimbach@gmail.com>,
- spice-devel@lists.freedesktop.org
-References: <7cbfbb62-31ff-5eef-5427-7958921a1bfa@gmail.com>
- <631443465.25687850.1588591196710.JavaMail.zimbra@redhat.com>
- <7a072038-02e9-afcc-d856-82483e0c7cb9@gmail.com>
- <d88af62f-de68-e846-da40-980024e40179@redhat.com>
- <6cf0ba19-2091-1486-12a4-faedbe28ba17@gmail.com>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <273469d7-6b85-8ad3-2f93-8a5f5fece664@redhat.com>
-Date: Mon, 18 May 2020 13:21:41 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2411A100726A
+ for <spice-devel@lists.freedesktop.org>; Mon, 18 May 2020 10:56:20 +0000 (UTC)
+Received: from redhat.com (unknown [10.36.110.61])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2FF5B78B4E;
+ Mon, 18 May 2020 10:56:18 +0000 (UTC)
+Date: Mon, 18 May 2020 11:56:16 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Francesco Giudici <fgiudici@redhat.com>
+Message-ID: <20200518105616.GH1430944@redhat.com>
+References: <63b7a25f-0f32-1626-5c1b-3811a4f0467f@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <6cf0ba19-2091-1486-12a4-faedbe28ba17@gmail.com>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+In-Reply-To: <63b7a25f-0f32-1626-5c1b-3811a4f0467f@redhat.com>
+User-Agent: Mutt/1.13.4 (2020-02-15)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] Stuttering video playback on LAN
+Content-Disposition: inline
+Subject: Re: [Spice-devel] SPICE: changing the merge rules - a proposal
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,161 +59,99 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gNS8xNy8yMCA2OjM1IFBNLCBGZWxpeCBMZWltYmFjaCB3cm90ZToKPiBIaSBVcmksCj4gCj4g
-T24gMTcuMDUuMjAgMTY6MDgsIFVyaSBMdWJsaW4gd3JvdGU6Cj4+IE9uIDUvMTYvMjAgNzowNyBQ
-TSwgRmVsaXggTGVpbWJhY2ggd3JvdGU6Cj4+Pgo+Pj4+Pgo+Pj4+PiBJIGV4cGVyaWVuY2Ugc3R1
-dHRlcmluZyB2aWRlbyBwbGF5YmFjayBpbiByZW1vdGUtdmlld2VyIGRlc3BpdGUgY29ubmVjdGlu
-Zwo+Pj4+PiB2aWEgR0JpdC9zIExBTiwgdXNpbmcgZmFzdCBoYXJkd2FyZSBhbmQgdGhlIFFYTCBk
-cml2ZXIuCj4+Pj4+IFVwIHVudGlsIGEgdmlkZW8gc2l6ZSBvZiByb3VnaGx5IDgwMHg2MDAgdGhl
-IHBsYXliYWNrIGlzIHNtb290aC4gQnV0IG9uCj4+Pj4+IGFueXRoaW5nIGJpZ2dlciwgbGlrZSBt
-eSBuYXRpdmUgcmVzb2x1dGlvbiBvZiAyNTQweDE0NDAsIHZpZGVvIHBsYXliYWNrIGlzCj4+Pj4+
-IHN0dXR0ZXJpbmcgYW5ub3lpbmdseS4KPj4+Pj4gQWZ0ZXIgbG90cyBvZiB1bnN1Y2Nlc3NmdWwg
-dGlua2VyaW5nIHdpdGggc3BpY2UgcGFyYW1ldGVycyBhbmQgcXhsIHBhcmFtZXRlcnMKPj4+Pj4g
-SSdtIGFza2luZyB5b3UgZ3V5cyBmb3IgaGVscC4KPj4+Pj4KPj4+Pj4gQ2xpZW50Ogo+Pj4+PiBX
-aW5kb3dzIDEwIDE5MDkKPj4+Pj4gUmVtb3RlIFZpZXdlciA4LjAtMjU2Cj4+Pj4+IFF1YWRjb3Jl
-IGk3LTc4MjBIUSAyLjlHSHoKPj4+Pj4gMTZHQiBERFI0IFJBTQo+Pj4+Pgo+Pj4+PiBIb3N0IG9m
-IHRoZSBWTToKPj4+Pj4gR2VudG9vIExpbnV4Cj4+Pj4+IEtlcm5lbCA0LjE0LjE3Mgo+Pj4+PiBR
-ZW11IDQuMi4wCj4+Pgo+Pj4gSSd2ZSB1cGRhdGVkIHRvIG5ld2VyIHZlcnNpb25zIGluIHRoZSBt
-ZWFudGltZSwgYnV0IG5vIG5vdGljZWFibGUgY2hhbmdlcy4KPj4+Cj4+PiBRZW11IDUuMC4wCj4+
-PiBIb3N0IGtlcm5lbCA1LjQuMzkKPj4+IFJlbW90ZSBWaWV3ZXIgOS4wLTI1NiAoeDY0KSBvbiB0
-aGUgV2luZG93cyAxMCBDbGllbnQKPj4+Cj4+Pj4+IDxzbmlwcGVkPgo+Pj4+Pgo+Pgo+PiA8c25p
-cHBlZD4KPj4KPj4+IEkgbm90aWNlZCB2ZXJ5IGhpZ2ggQ1BVIHVzYWdlIGluIHRoZSBndWVzdCBk
-dXJpbmcgcGxheWJhY2ssIGJlY2F1c2UgY2hyb21lLCB2bGMsIG1wdiB1c2VkIHNvZnR3YXJlIGgy
-NjQgZGVjb2RpbmcuCj4+PiBJIGZpeGVkIHRoaXMgYnkgcGFzc2luZyBhIHZpcnR1YWxpemVkIGlu
-c3RhbmNlIG9mIHRoZSBob3N0cyBJbnRlbCBHUFUgdG8gdGhlIGd1ZXN0IHZpYSBHVlQtZy4KPj4+
-Cj4+PiBUaGVzZSBhcmUgdGhlIHFlbXUgcGFyYW1ldGVycyBJIHVzZSBmb3IgR1ZULWc6Cj4+PiAt
-c3BpY2UgcG9ydD01OTA2LGFkZHI9MTAuNDIuMi4yNTAscGFzc3dvcmQ9Y2hhbmdlZAo+Pj4gLXZn
-YSB2aXJ0aW8KPj4+IC1kaXNwbGF5IGVnbC1oZWFkbGVzcyxyZW5kZXJub2RlPS9kZXYvZHJpL2Nh
-cmQwCj4+PiAtZGV2aWNlIHZmaW8tcGNpLHN5c2ZzZGV2PS9zeXMvYnVzL21kZXYvZGV2aWNlcy9m
-MTRjODBkNS05YWRlLTQ4MDItOTUwOS0xZDg3N2QzMmQxNTksZGlzcGxheT1vbixyYW1mYj1vbixk
-cml2ZXI9dmZpby1wY2ktbm9ob3RwbHVnCj4+Cj4+IFBlcmhhcHMgaGVyZSBpdCB3b3VsZCBoZWxw
-IHRvIHNldCBzdHJlYW1pbmctdmlkZW89YWxsIC1zcGljZSBvcHRpb24uCj4gCj4gSXQgZG9lc24n
-dCByZWFsbHkgaGVscC4gU3RpbGwgdmVyeSBzdHV0dGVyaW5nIHBsYXliYWNrLCBldmVuIHdpdGgg
-YSB2aWRlby1wbGF5ZXIgd2luZG93IHNpemUgb2Ygb25seSA3MjB4NTc2Lgo+IEkgbm93IGJlbGll
-dmUgdGhpcyBpcyBjYXVzZWQgYnkgYSBDUFUgYm90dGxlbmVjayBvbiB0aGUgQ0xJRU5UIChub3Qg
-Z3Vlc3QpLCBpLmUuIG15IFdpbmRvd3MgMTAgbWFjaGluZS4KPiB2aXJ0LXZpZXdlci5leGUgdXNl
-cyBjb25zaXN0ZW50bHkgMTIlIENQVSwgd2hpY2ggaXMgMTAwJSBvZiBvbmUgY29yZSAoUXVhZCBD
-b3JlIHdpdGggU01UID0+IDggbG9naWNhbCBjb3JlcykuCj4gVGhpcyBpcyBjcmF6eSwgc2luY2Ug
-dGhlIENQVSBjb3JlIGlzIHJ1bm5pbmcgYSBtb2Rlcm4gaTcgYXQgMy42IEdIeiAoVHVyYm8pIHdp
-dGggbm8gb3RoZXIgc2lnbmlmaWNhbnQgQ1BVIHVzZXJzIChzeXN0ZW0gaXMgaWRsZSkuCj4gQ291
-bGQgdGhpcyBiZSBhIHByb2JsZW0gb2YgcmVtb3RlLXZpZXdlci5leGUgbm90IHVzaW5nIGdzdHJl
-YW1lciBjb2RlY3MgKGFuZCBodyBhY2NlbCkgcHJvcGVybHk/Cj4gR290IHRoZXNlIHNwaWNlLWRl
-YnVnIG1lc3NhZ2VzIG9uIHRoZSBjbGllbnQ6ICJubyB2aWRlbyBkZWNvZGVycyBmcm9tIEdTVHJl
-YW1lciBmb3Ige21qcGVnLHZwOCxoMjY0LHZwOSxoMjY1fSB3ZXJlIGZvdW5kIi4KCk1heWJlIHRo
-ZSBjbGllbnQgaXMgYnVpbHQgd2l0aG91dCBnc3RyZWFtZXIuCgo+IAo+IEFsc28gSSBub3RpY2Vk
-IHRoYXQgdGhlIHFlbXUgcHJvY2VzcyBvbiB0aGUgaG9zdCBpcyB1c2luZyBtdWNoIENQVSwgcHJv
-YmFibHkgZHVlIHRvIHNwaWNlIGVuY29kaW5nIHRoZSB2aWRlbyBmcmFtZXMuCj4gVGhlIGhvc3Qg
-c2hvd3MgNCBxZW11LXlzdGVtLXg4Nl82NCB0aHJlYWRzIHVzaW5nIDkzJSwgMzQlLCAyNCUsIDE2
-JSBDUFUgd2hlbiBwbGF5aW5nIGEgNzIweDU3NiB2aWRlbyBpbiB0aGUgZ3Vlc3QuCj4gSG93ZXZl
-ciB0aGUgZ3Vlc3Qgc2hvd3Mgb25seSAxNCUgYW5kIDclIHVzZSBmb3IgaXRzIDIgdkNQVXMgaW4g
-aHRvcCBiZWNhdXNlIGl0IHVzZXMgVkEtQVBJIChHUFQtZykgaW4gdGhlIHZpZGVvIHBsYXllciAo
-dmxjLCBtcHYpLgoKV2l0aCBlZ2wtaGVhZGxlc3MsIHNwaWNlLXNlcnZlciBlbmNvZGVzIHRoZSB3
-aG9sZSBzY3JlZW4sIG5vdCA3MjB4NTc2IAp2aWRlby4gU2luY2UgdGhlIGNsaWVudApzdXBwb3J0
-cyBhbG1vc3Qgbm8gY29kZWMgbGlrZWx5Cml0J3MgdXNpbmcgbWpwZWcKCj4gCj4gU28gdGhlIGhv
-c3QgcWVtdSB0aHJlYWRzIHVzZSBNVUNIIG1vcmUgQ1BVIHRoYW4gdGhlIGd1ZXN0LiBXaGVuIEkg
-ZGlzY29ubmVjdCBzcGljZSAodmlkZW8gc3RpbGwgcGxheWluZykgdGhlIGhvc3QgcWVtdSBDUFUg
-dXNhZ2UgZHJvcHMgdG8gMzUlLCAxJSwgMSUsIDElLCBhcyBleHBlY3RlZC4KPiBDb25jbHVzaW9u
-OiBTcGljZSBlbmNvZGluZyBvbiB0aGUgaG9zdCBpcyB2ZXJ5IENQVSBodW5ncnkuCgpZb3VyIGNv
-bmNsdXNpb24gbWFrZXMgc2Vuc2UgdG8gbWUuCgo+IAo+IElzIGl0IHBvc3NpYmxlIHRvIEdQVS1h
-Y2NlbGVyYXRlIHRoZSB2aWRlbyBlbmNvZGluZyBpbiB0aGUgaG9zdCBxZW11IHByb2Nlc3M/CgpJ
-IHRoaW5rIGl0IGNhbiBub3QgdXNlIGFueXRoaW5nIG90aGVyIHRoYW4gbWpwZWcgaWYgdGhhdCdz
-IHRoZSBvbmx5IApjb2RlYyB0aGUgY2xpZW50IHN1cHBvcnRzLgoKPiBJJ3ZlIGJ1aWx0IHNwaWNl
-IGFuZCBxZW11IHdpdGggZ3N0cmVhbWVyIGFuZCBkcm0gc3VwcG9ydCBhbmQgVkEtQVBJIGlzIHdv
-cmtpbmcgbmljZWx5Lgo+IENhbiBzcGljZSB1c2UgdGhhdD8gSG93PwoKUG9zc2libHksIGZvciBI
-MjY0IHlvdSBuZWVkIHRvIGNoYW5nZSB0aGUgZ2V0X2dzdF9jb2RlY19uYW1lIChnc3RyZWFtZXIg
-CnBpcGUpOwpGb3IgdnA4IGl0IHNob3VsZCBiZSBkb25lIGFscmVhZHkuCgo+IAo+Pj4KPj4+IFVu
-Zm9ydHVuYXRlbHkgdmlkZW8gcGxheWJhY2sgaXMgc3RpbGwgbm90IHNtb290aGVyLiBJbiBmYWN0
-IGl0IGlzIGFib3V0IHRoZSBzYW1lIHNtb290aG5lc3MgYnV0IG5ldyB2aXN1YWwgYXJ0ZWZhY3Rz
-IGluIHRoZSB2aWRlbyBtYWtlIGl0IHdvcnNlLiBJIHRoaW5rIHRoaXMgaXMgZHVlIHRvIGVnbC1o
-ZWFkbGVzcy4KPj4+IEZvciB0ZXN0aW5nL2NvbXBhcmlzb24gSSBpbnN0YWxsZWQgYSBXaW5kb3dz
-IDEwIGd1ZXN0IHdpdGggdGhlIHNhbWUgR1ZULWcgR1BVIGFuZCB1c2VkIFJEUCB3aXRoIGgyNjQg
-YWN0aXZhdGVkLiBQbGF5YmFjayB3YXMgbXVjaCBiZXR0ZXIgYW5kIHVzZWQgb25seSBhYm91dCAx
-MjBNQml0L3MuCj4+Pgo+Pj4gTmV4dCBJIHRyaWVkIHVzaW5nIHRoZSBzcGljZS1zdHJlYW1pbmct
-YWdlbnQgaW4gdGhlIGd1ZXN0IHRvIHNlbmQgYSBoMjY0IGVuY29kZWQgcGljdHVyZSB2aWEgc3Bp
-Y2UuCj4+PiBIb3dldmVyLCB0aGUgd2luZG93cyBidWlsZCBvZiByZW1vdGUtdmlld2VyIGRvZXNu
-J3Qgc2VlbSB0byBzdXBwb3J0IHRoaXMuIFRoZSBuZXcgc3BpY2UgZGlzcGxheSBpcyBjcmVhdGVk
-IGFuZCBJIHNlZSB0aGUgbW91c2UgY3Vyc29yIGluIGl0IGJ1dCBubyBwaWN0dXJlIChqdXN0IGJs
-YWNrKS4KPj4KPj4gWW91IG1heSBiZSB0aGUgZmlyc3QgdG8gdGVzdCBzcGljZS1zdHJlYW1pbmct
-YWdlbnQgKyB3aW5kb3dzIGNsaWVudC4KPj4KPj4gSSB0aGluayB0aGVyZSBpcyBzb21lIHdvcmsg
-dG8gYmUgZG9uZSBpbiB0aGUgd2luZG93cyBjbGllbnQgdG8gbWFrZQo+PiBpdCBoYW5kbGUgYmV0
-dGVyIHN0cmVhbXMgZnJvbSBzcGljZS1zdHJlYW1pbmctYWdlbnQKPj4KPj4gQWxzbyB0aGVyZSBp
-cyBzb21lIHdvcmsgdG8gYmUgZG9uZSB0byBlbmFibGUgc3BpY2Utc3RyZWFtaW5nLWFnZW50Cj4+
-IG9uIHdpbmRvd3MgZ3Vlc3RzLgo+Pgo+Pj4gTG9nIGZyb20gdGhlIGd1ZXN0Ogo+Pj4gZmVsaXhA
-aWRlZml4On4kIC4vc3BpY2Utc3RyZWFtaW5nLWFnZW50IC1kCj4+PiBzcGljZS1zdHJlYW1pbmct
-YWdlbnRbMjQ2NV06IEdPVCBTVEFSVF9TVE9QIG1lc3NhZ2UgLS0gcmVxdWVzdCB0byBTVEFSVCBz
-dHJlYW1pbmcKPj4+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1XTogc3RyZWFtaW5nIHN0YXJ0
-cyBub3cKPj4+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1XTogR290IGRldmljZSBpbmZvIG9m
-IDEgZGV2aWNlcyBmcm9tIHRoZSBwbHVnaW4KPj4+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1
-XTrCoMKgwqAgc3RyZWFtIGlkIDA6IGRldmljZSBhZGRyZXNzOiBwY2kvMDAwMC8wNi4wLCBkZXZp
-Y2UgZGlzcGxheSBpZDogMgo+Pj4gc3BpY2Utc3RyZWFtaW5nLWFnZW50WzI0NjVdOiBnb3QgYSBm
-cmFtZSAtLSBzaXplIGlzIDMyMTI2NSAoMjYgbXMpICgxNTg5NjQxNjYwMjg1IG1zIGZyb20gbGFz
-dCBmcmFtZSkoMTU4OTY0MTY2MDI1ODEzNiB1cykKPj4+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsy
-NDY1XTogd1hoIDE5MjBYMTIwMMKgIGNvZGVjPTEKPj4KPj4gTm90ZSB0aGF0IGl0J3Mgbm90IEgy
-NjQsIGJ1dCBNSlBFRyAoY29kZWM9MSkKPiAKPiBZb3UgYXJlIHJpZ2h0LCBzbyBJIGRlYnVnZ2Vk
-IHRoaXM6Cj4gCj4gTGF1bmNoaW5nIHNwaWNlLXN0cmVhbWluZy1hZ2VudCB3aXRoIEdTVF9ERUJV
-Rz02IHNob3dzIGEgYnVuY2ggb2YgaDI2NCByZWxhdGVkIG1lc3NhZ2VzIHdoaWNoIHNlZW0gdG8g
-aW5kaWNhdGUgdGhhdCB0aGUgZ3N0cmVhbWVyIGNvZGVjcyBhcmUgbG9hZGVkIChub3Qgc3VyZSk6
-Cj4gZ3N0cmVnaXN0cnkuYzo0NjE6Z3N0X3JlZ2lzdHJ5X2FkZF9wbHVnaW46PHJlZ2lzdHJ5MD4g
-YWRkaW5nIHBsdWdpbiAweDU1ZDI3OWY4ZmU3MCBmb3IgZmlsZW5hbWUgIi91c3IvbGliL3g4Nl82
-NC1saW51eC1nbnUvZ3N0cmVhbWVyLTEuMC9saWJnc3R1dmNoMjY0LnNvIgo+IGdzdHJlZ2lzdHJ5
-LmM6NTc3OmdzdF9yZWdpc3RyeV9hZGRfZmVhdHVyZTo8cmVnaXN0cnkwPiBhZGRpbmcgZmVhdHVy
-ZSAweDU1ZDI3OWZlMTY1MCAodmlkZW8veC1oMjY0KQo+IGdzdHJlZ2lzdHJ5Y2h1bmtzLmM6NzI5
-OmdzdF9yZWdpc3RyeV9jaHVua3NfbG9hZF9mZWF0dXJlOiBBZGRlZCBmZWF0dXJlIHZwOGVuYywg
-cGx1Z2luIDB4NTVkMjc5ZWQxMTUwIHZweAo+IAo+IEhvd2V2ZXIgSSBkaWRuJ3QgZmluZCBhbiBh
-cmd1bWVudCB0byBmb3JjZSBzcGljZS1zdHJlYW1pbmctYWdlbnQgdG8gdXNlIGEgc3BlY2lmaWMg
-Y29kZWMuIFJlYWRpbmcgdGhlIHNvdXJjZSBjb2RlIEkgZm91bmQgdGhlIG9wdGlvbiAiLWMgY29k
-ZWNfbmFtZT1oMjY0IiwgYnV0IGl0IGRvZXNuJ3Qgc2VlbSB0byBoYXZlIGFueSBlZmZlY3QuCj4g
-Cj4gTWF5YmUgaXQgZmFpbHMgYXV0by1uZWdvdGlhdGlvbiB3aXRoIHRoZSBjbGllbnQgd2hpY2gg
-ZG9lcyBub3Qgc3VwcG9ydCBpdD8KCkxpa2VseS4KClVyaS4KCj4gT24gdGhlIGNsaWVudCB3aXRo
-IHRoZSAiLS1zcGljZS1kZWJ1ZyIgb3B0aW9uIEkgZm91bmQgaW50ZXJlc3RpbmcgbWVzc2FnZXM6
-Cj4gCj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogU3BpY2UtREVCVUc6IDE3OjE3OjA2LjIx
-ODogLi4vc3JjL2NoYW5uZWwtZGlzcGxheS1nc3QuYzo3OTI6Z3N0dmlkZW9faGFzX2NvZGVjOiBO
-byB2aWRlbyBkZWNvZGVycyBmcm9tIEdTdHJlYW1lciBmb3IgbWpwZWcgd2VyZSBmb3VuZAo+IChy
-ZW1vdGUtdmlld2VyLmV4ZToxNTk1Nik6IEdTcGljZS1ERUJVRzogMTc6MTc6MDYuMjE4OiAuLi9z
-cmMvY2hhbm5lbC1kaXNwbGF5LmM6ODk0IEdTdHJlYW1lciBkb2VzIG5vdCBzdXBwb3J0IHRoZSBt
-anBlZyBjb2RlYwo+IChyZW1vdGUtdmlld2VyLmV4ZToxNTk1Nik6IFNwaWNlLURFQlVHOiAxNzox
-NzowNi4yMTk6IC4uL3NyYy9jaGFubmVsLWRpc3BsYXktZ3N0LmM6NzkyOmdzdHZpZGVvX2hhc19j
-b2RlYzogTm8gdmlkZW8gZGVjb2RlcnMgZnJvbSBHU3RyZWFtZXIgZm9yIHZwOCB3ZXJlIGZvdW5k
-Cj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogR1NwaWNlLURFQlVHOiAxNzoxNzowNi4yMjA6
-IC4uL3NyYy9jaGFubmVsLWRpc3BsYXkuYzo4OTQgR1N0cmVhbWVyIGRvZXMgbm90IHN1cHBvcnQg
-dGhlIHZwOCBjb2RlYwo+IChyZW1vdGUtdmlld2VyLmV4ZToxNTk1Nik6IFNwaWNlLURFQlVHOiAx
-NzoxNzowNi4yMjE6IC4uL3NyYy9jaGFubmVsLWRpc3BsYXktZ3N0LmM6NzkyOmdzdHZpZGVvX2hh
-c19jb2RlYzogTm8gdmlkZW8gZGVjb2RlcnMgZnJvbSBHU3RyZWFtZXIgZm9yIGgyNjQgd2VyZSBm
-b3VuZAo+IChyZW1vdGUtdmlld2VyLmV4ZToxNTk1Nik6IEdTcGljZS1ERUJVRzogMTc6MTc6MDYu
-MjIyOiAuLi9zcmMvY2hhbm5lbC1kaXNwbGF5LmM6ODk0IEdTdHJlYW1lciBkb2VzIG5vdCBzdXBw
-b3J0IHRoZSBoMjY0IGNvZGVjCj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogU3BpY2UtREVC
-VUc6IDE3OjE3OjA2LjIyMzogLi4vc3JjL2NoYW5uZWwtZGlzcGxheS1nc3QuYzo3OTI6Z3N0dmlk
-ZW9faGFzX2NvZGVjOiBObyB2aWRlbyBkZWNvZGVycyBmcm9tIEdTdHJlYW1lciBmb3IgdnA5IHdl
-cmUgZm91bmQKPiAocmVtb3RlLXZpZXdlci5leGU6MTU5NTYpOiBHU3BpY2UtREVCVUc6IDE3OjE3
-OjA2LjIyNDogLi4vc3JjL2NoYW5uZWwtZGlzcGxheS5jOjg5NCBHU3RyZWFtZXIgZG9lcyBub3Qg
-c3VwcG9ydCB0aGUgdnA5IGNvZGVjCj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogU3BpY2Ut
-REVCVUc6IDE3OjE3OjA2LjIyNzogLi4vc3JjL2NoYW5uZWwtZGlzcGxheS1nc3QuYzo3OTI6Z3N0
-dmlkZW9faGFzX2NvZGVjOiBObyB2aWRlbyBkZWNvZGVycyBmcm9tIEdTdHJlYW1lciBmb3IgaDI2
-NSB3ZXJlIGZvdW5kCj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogR1NwaWNlLURFQlVHOiAx
-NzoxNzowNi4yMzA6IC4uL3NyYy9jaGFubmVsLWRpc3BsYXkuYzo4OTQgR1N0cmVhbWVyIGRvZXMg
-bm90IHN1cHBvcnQgdGhlIGgyNjUgY29kZWMKPiAKPiBBbnkgaWRlYXMgaG93IHRvIGZpeCB0aGlz
-PyBTaG91bGQgSSBvcGVuIGEgYnVnIHJlcG9ydCA+Cj4+PiA8c25pcHBlZD4KPj4+Cj4+PiBJZiBJ
-IHVzZSByZW1vdGUgdmlld2VyIGZyb20gYSBsaW51eCBjbGllbnQgdGhlbiBpdCBkb2VzIGluZGVl
-ZCB3b3JrISBQbGF5YmFjayBpcyBuZWFybHkgc21vb3RoLCBhYm91dCB0aGUgc2FtZSBhcyB3aXRo
-IFJEUCBhbmQgaDI2NCEKPj4+IFNvIEkgZ3Vlc3MgaXQncyBhIGJ1ZyBpbiB0aGUgd2luZG93cyBy
-ZW1vdGUtdmlld2VyLiBTZWVtcyBsaWtlIGl0IGRvZXNuJ3QgaGF2ZSBnc3RyZWFtZXIgc3VwcG9y
-dCwgc28gSSdsbCBvcGVuIGEgYnVnIHJlcG9ydC4KPj4+Cj4+PiBBbnkgb3RoZXIgaWRlYXMgd2hh
-dCBJIGNhbiB0cnkgdG8gZ2V0IGdvb2QgcmVhc29uYWJsZSB2aWRlbyBwbGF5YmFjayB3aXRoIGdv
-b2Qgb2ZmaWNlLXdvcmsgcGVyZm9ybWFuY2U/Cj4+Pgo+Pj4gT24gYSBzaWRlIG5vdGU6IEF1ZGlv
-IHZpYSBzcGljZSBpc24ndCB3b3JraW5nLiBJIGhlYXIgYSBmZXcgc3RyYW5nZSBub2lzZXMgYW5k
-IHRoZW4gb25seSBzaWxlbmNlLiBTbyBJIHVzZSBwdWxzZWF1ZGlvIHRyYW5zbWl0dGluZyB0aGUg
-c291bmQgdG8gdGhlIGNsaWVudCBpbmRlcGVuZGVudCBvZiBzcGljZS4KPiAKPiBGb3VuZCB0aGUg
-cmVhc29uOiBJdCdzIGEgcmVncmVzc2lvbiBpbiB0aGUgd2luZG93cyB2ZXJzaW9uIG9mIHJlbW90
-ZS12aWV3ZXIuIFdhcyBjYXVzZWQgYnkgbGliZ3N0ZGlyZWN0c291bmQuZGxsIGJlaW5nIHJlcGxh
-Y2VkIHdpdGggbGliZ3N0d2FzYXBpLmRsbCBhbmQgdGhpcyBjaGFuZ2VkIHRoZSBhdWRpbyBzdWJz
-eXN0ZW0gYmVpbmcgdXNlZC4KPiBEZXRhaWxzOiBodHRwczovL2dpdGxhYi5jb20vdmlydC12aWV3
-ZXIvdmlydC12aWV3ZXIvLS9pc3N1ZXMvMgo+IAo+IENoZWVycywKPiBGZWxpeAo+IAoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFp
-bGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3Rz
-LmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
+On Fri, May 15, 2020 at 07:05:50PM +0200, Francesco Giudici wrote:
+> Hi,
+>   the community around the SPICE project always tried to follow one
+> fundamental, implicit rule for accepting code contributions to the project:
+> every merge request (beside trivial patches) should be reviewed and acked at
+> least by one before getting merged.
+> While everyone agrees with this fundamental rule, the actual status of some
+> SPICE projects makes the rule impractical to let the project move forward.
+> Let's consider the spice/spice project as an example: the number of
+> contributions is very low, both on the commit side (only 4 different
+> contributors with more than 1 commit from the beginning of the year, and a
+> single contributor with 90% of commits) and on the review side (in the last
+> 40 merge requests before the C++ switch one, 21 had no comments).
+> The x11spice project is another example: we have only 4 contributors from
+> the beginning of the year (and a single contributor holding 70% of the
+> commits) and the reviews on the gitlab merge requests have been provided by
+> two people only, each one reviewing the merge requests of the other.
+
+I think these paragraphs here are the highlighting the key issue. There
+just is not sufficient contribution to SPICE in general. I think the most
+important thing is to consider why the SPICE project has such a low rate
+of contribution, and more importantly what steps can be done to make SPICE
+more interesting to attract contributors.
+
+For a project that has such a large codebase and featureset, it is not
+healthy to have such a small community. The "bus factor" is waay too
+low here, such that SPICE would be in serious trouble as a project if
+one or two main contributors moved onto to different work.
+
+So for any changes in process, it is wise to consider what effects those
+change have on people SPICE would like to attract as new contributors.
+
+For example, if new feature work by an existing contributor is discussed
+out of band between two contributors, instead of via merge request comments
+this sets up new contributors up as second class citizenships - the out of
+band discussions are essentially invisible to them, so they can't see or
+understand the rationale for decisions. This makes it harder for them to
+learn how to effectively contribute to the project.
+
+This is the big thing that concerned me about the merge request that adopted
+C++. Reading between the lines I get the impression this was indeed discussed
+between the several contributors but out of band, instead of on the merge
+request which had no comments. Thus that discussion is invisible to any 3rd
+party contributor interested in SPICE. I think this risks discouraging people
+from contributed to SPICE, so it is something to be wary of doing too often,
+especially for really big technical changes.  
+
+> For the sake of having the projects being able to move forward with a
+> reduced number of contributors/reviewers, the proposal is to *allow* a
+> maintainer to merge a Merge Request without an explicit ack if the three
+> following conditions are met:
+> 1) The Merge Request has been pending for at least 3 weeks without getting
+> new comments
+> 2) The Merge Request submitter has kept asking a review on a weekly basis
+
+Note since spice is using gitlab, it is possible to explicitly tag people
+by name in the comments to ask for reviews, and/or assign people as a
+reviewer. I'd suggest to make use of such tagging, so that people can be
+aware they they are being explicitly asked for feedback if something has
+been sitting for a long time.
+
+> 3) There are no pending nacks on the Merge Request
+> 
+> Note that having patches reviewed would still be the preferred way. If at
+> any time the number of contributors would raise again, we can switch back to
+> the mandatory review rule. Until then the priority is to allow the project
+> to move forward.
+
+Contributors are unlikely to magically rise again on their own, without
+proactive work to make SPICE a more attractive project to contribute to.
+This is a very difficult problem for projects in general, not just SPICE,
+to which I don't have any magic answers. At least try to think about what
+you like to see from projects when you are approaching them as a new
+contributor, and then make sure SPICE follows these practices where ever
+possible / practical. Code being pushed with no review is a turn-off to
+me as a external contributor, unless the project is clearly setup as a
+single-author personal project, rather than a team project.
+
+Regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
