@@ -2,64 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7B461D68AA
-	for <lists+spice-devel@lfdr.de>; Sun, 17 May 2020 17:35:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2712F1D7B3C
+	for <lists+spice-devel@lfdr.de>; Mon, 18 May 2020 16:29:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E54106E08A;
-	Sun, 17 May 2020 15:35:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 40C8A89E06;
+	Mon, 18 May 2020 14:29:32 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 848316E08A
- for <spice-devel@lists.freedesktop.org>; Sun, 17 May 2020 15:35:15 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id k12so6826456wmj.3
- for <spice-devel@lists.freedesktop.org>; Sun, 17 May 2020 08:35:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:subject:to:references:cc:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=eBdpOjAAZmfkHROrLdaTZhfk4WHLvR/tncm01WyJQtk=;
- b=hVKdUVk+2XOe1OrnITfYLvMPeT6g9A+GQW7e2xnufJ7pkIKzw7YylbfjS8OJVLCCiX
- 7VJdwyzpxfYqmJ9ZiGoS8OCInVWPj44jiwdmpK78qQlEaXXe9e0SwLptjuF7v8QmxeGd
- p5FwAKE2orMZPfnFwJ5m63nyPi3kVjfAgOXQRVc7up9ysf0ZUtFI1w5L7OJRS/oU0Jbj
- A73DOp7JU0pyd93P5YbpoIf/EnwDW5aq+c8GVSlWzJ1Z9RWM2PoZ6zA5ERCTrXWFgrjd
- Y371TOG9Kki2R4ZeiE8Y7fq84NWi6RuBdgu88s5vCRDLDJnUvXWnrLC0qAZ3jQ4yAkIt
- pHbw==
+Received: from mail-lf1-x141.google.com (mail-lf1-x141.google.com
+ [IPv6:2a00:1450:4864:20::141])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 899AC89FEC
+ for <spice-devel@lists.freedesktop.org>; Mon, 18 May 2020 05:18:06 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id c12so3400050lfc.10
+ for <spice-devel@lists.freedesktop.org>; Sun, 17 May 2020 22:18:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=R6XThvaZXB1dN0cK45SJnOdWuuOV+pI9ElPF9opIOSI=;
+ b=hYS4Lze16p+zT0c9g5OMpRgAP9AI+NBzeD99CUFM+lO9uX1PSUreGwWxQSayj4FPfZ
+ zi/+IfJO4GF+wuxSmguXlYaPucn1tien71u2oPI5u4vlpadkeXayC2gB3rMBAdvnaNXC
+ fSaWr//ssWDOMS19sfcrIHYct8q8wrUsYfw6I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:subject:to:references:cc:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=eBdpOjAAZmfkHROrLdaTZhfk4WHLvR/tncm01WyJQtk=;
- b=E2LXzNqLbzRxFbnlrroPM47corYCfGVz7yBJAOD5V/UZHbLFmk5GI++GRA8yNe7lZM
- oFqGjntyu+RGyvTtM+hnLQxb2tFCbOBe5iUtCdCx/jzzPQkdc5SGCAHXGOJeaWnAlz1y
- r7xKmG7dt5rTICKyIpbrrVkfbanrf4juMNizJM1VueAsnsNO4Ohwia4gQVAFjnKIsSSs
- qgqrxXZaJ4+VVU4ZpvrCqsliqHd3FX7HfYvtz4v8Mf8pkFeAwGAbl8MBmJsS0tuBhukl
- D7fgZQv+S+DJyhNlZ0qIQYWSm5K71CoxbCH+VOpM/dL6naXtCWhCwZ72YCtK+caxQGg5
- 6Gwg==
-X-Gm-Message-State: AOAM530AsxaE3kmpftqm4MqtEFORgmrzbpa0j1N5iWImpStTibFkHABz
- 74iLk2t/AlHBfHRRDRJaMNk=
-X-Google-Smtp-Source: ABdhPJx42LsAmgex/AlGrUj9BTt18uIVu1kTEFz90wiwSWtdrxQwd+ucjVCTWiMWBTHQTD1i4SjHXQ==
-X-Received: by 2002:a1c:3bc5:: with SMTP id i188mr14522196wma.90.1589729713858; 
- Sun, 17 May 2020 08:35:13 -0700 (PDT)
-Received: from [10.35.0.240] (p4FCDEB08.dip0.t-ipconnect.de. [79.205.235.8])
- by smtp.googlemail.com with ESMTPSA id v126sm12907103wma.9.2020.05.17.08.35.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 17 May 2020 08:35:13 -0700 (PDT)
-From: Felix Leimbach <felix.leimbach@gmail.com>
-To: spice-devel@lists.freedesktop.org
-References: <7cbfbb62-31ff-5eef-5427-7958921a1bfa@gmail.com>
- <631443465.25687850.1588591196710.JavaMail.zimbra@redhat.com>
- <7a072038-02e9-afcc-d856-82483e0c7cb9@gmail.com>
- <d88af62f-de68-e846-da40-980024e40179@redhat.com>
-Message-ID: <6cf0ba19-2091-1486-12a4-faedbe28ba17@gmail.com>
-Date: Sun, 17 May 2020 17:35:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=R6XThvaZXB1dN0cK45SJnOdWuuOV+pI9ElPF9opIOSI=;
+ b=UKqEj9lW5droZh+JONsa0nezIr4RKiZG3ralDx/MtwhKSPT8JBFPrG7L8rwq3AvRgs
+ JCLUYGLc/m53VpMBXxIdo9d2uKltYTubsiW5WiJoh7Fh1vKKWpKPrxQnPa3qgLdwuoCl
+ ogFu9sMb27h7nkdEqPovXdjd6Z3CKh9K467pYl1rh4BLWMuMGBlmeLAhjiVOT6W081Wc
+ E0fEmT+2ARuxcUaxSbtZYbR/t4Ld6SJ+JjEZwDKPjtIKw52eyHgarPRcuCfA8VmqXPR8
+ hInzRia3uzEWJ2AmpSIAndCzvHGNkMXNQ19PrXjSZvvscZH+t8u0fm7NVsVsKrnc593F
+ veQQ==
+X-Gm-Message-State: AOAM530sscJNJcSsZheO1WyiFTnQlTiaqncetoCb3eGcZCJ9w071adFf
+ vsC0swZk9mVzM58/cXHWrjzP9/2z6YG1s0pIReRhSx7mMl4=
+X-Google-Smtp-Source: ABdhPJyhm1FQ2ynDH5Qbvl7m9n6n8HVcHMWU9rPKmqW9DEDA+6sCtMYED+AQI/F3dJpbc22O43E8pNSsTlWK9Xr5uZc=
+X-Received: by 2002:a05:6512:3384:: with SMTP id
+ h4mr10497973lfg.150.1589779084803; 
+ Sun, 17 May 2020 22:18:04 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <d88af62f-de68-e846-da40-980024e40179@redhat.com>
-Content-Language: en-US
-Subject: Re: [Spice-devel] Stuttering video playback on LAN
+References: <20200206102058.247258-1-keiichiw@chromium.org>
+ <20200206102058.247258-2-keiichiw@chromium.org>
+In-Reply-To: <20200206102058.247258-2-keiichiw@chromium.org>
+From: Keiichi Watanabe <keiichiw@chromium.org>
+Date: Mon, 18 May 2020 14:17:53 +0900
+Message-ID: <CAD90Vca6=AGq6aN8voNyQ7Lh69LeDZzCxebGQ+sv_mU+mqRGLA@mail.gmail.com>
+To: virtio-dev@lists.oasis-open.org
+X-Mailman-Approved-At: Mon, 18 May 2020 14:29:30 +0000
+Subject: Re: [Spice-devel] [PATCH v3 1/2] virtio-video: Add virtio video
+ device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,148 +60,1134 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
+ Alex Lau <alexlau@chromium.org>, Kiran Pawar <kiran.pawar@opensynergy.com>,
+ Alexandre Courbot <acourbot@chromium.org>,
+ David Staessens <dstaessens@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
+ Hans Verkuil <hverkuil@xs4all.nl>, David Stevens <stevensd@chromium.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ spice-devel@lists.freedesktop.org, Dmitry Sepp <dmitry.sepp@opensynergy.com>,
+ =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
+ Dylan Reid <dgreid@chromium.org>, Enrico Granata <egranata@google.com>,
+ Pawel Osciak <posciak@chromium.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGkgVXJpLAoKT24gMTcuMDUuMjAgMTY6MDgsIFVyaSBMdWJsaW4gd3JvdGU6Cj4gT24gNS8xNi8y
-MCA3OjA3IFBNLCBGZWxpeCBMZWltYmFjaCB3cm90ZToKPj4KPj4+Pgo+Pj4+IEkgZXhwZXJpZW5j
-ZSBzdHV0dGVyaW5nIHZpZGVvIHBsYXliYWNrIGluIHJlbW90ZS12aWV3ZXIgZGVzcGl0ZSBjb25u
-ZWN0aW5nCj4+Pj4gdmlhIEdCaXQvcyBMQU4sIHVzaW5nIGZhc3QgaGFyZHdhcmUgYW5kIHRoZSBR
-WEwgZHJpdmVyLgo+Pj4+IFVwIHVudGlsIGEgdmlkZW8gc2l6ZSBvZiByb3VnaGx5IDgwMHg2MDAg
-dGhlIHBsYXliYWNrIGlzIHNtb290aC4gQnV0IG9uCj4+Pj4gYW55dGhpbmcgYmlnZ2VyLCBsaWtl
-IG15IG5hdGl2ZSByZXNvbHV0aW9uIG9mIDI1NDB4MTQ0MCwgdmlkZW8gcGxheWJhY2sgaXMKPj4+
-PiBzdHV0dGVyaW5nIGFubm95aW5nbHkuCj4+Pj4gQWZ0ZXIgbG90cyBvZiB1bnN1Y2Nlc3NmdWwg
-dGlua2VyaW5nIHdpdGggc3BpY2UgcGFyYW1ldGVycyBhbmQgcXhsIHBhcmFtZXRlcnMKPj4+PiBJ
-J20gYXNraW5nIHlvdSBndXlzIGZvciBoZWxwLgo+Pj4+Cj4+Pj4gQ2xpZW50Ogo+Pj4+IFdpbmRv
-d3MgMTAgMTkwOQo+Pj4+IFJlbW90ZSBWaWV3ZXIgOC4wLTI1Ngo+Pj4+IFF1YWRjb3JlIGk3LTc4
-MjBIUSAyLjlHSHoKPj4+PiAxNkdCIEREUjQgUkFNCj4+Pj4KPj4+PiBIb3N0IG9mIHRoZSBWTToK
-Pj4+PiBHZW50b28gTGludXgKPj4+PiBLZXJuZWwgNC4xNC4xNzIKPj4+PiBRZW11IDQuMi4wCj4+
-Cj4+IEkndmUgdXBkYXRlZCB0byBuZXdlciB2ZXJzaW9ucyBpbiB0aGUgbWVhbnRpbWUsIGJ1dCBu
-byBub3RpY2VhYmxlIGNoYW5nZXMuCj4+Cj4+IFFlbXUgNS4wLjAKPj4gSG9zdCBrZXJuZWwgNS40
-LjM5Cj4+IFJlbW90ZSBWaWV3ZXIgOS4wLTI1NiAoeDY0KSBvbiB0aGUgV2luZG93cyAxMCBDbGll
-bnQKPj4KPj4+PiA8c25pcHBlZD4KPj4+Pgo+Cj4gPHNuaXBwZWQ+Cj4KPj4gSSBub3RpY2VkIHZl
-cnkgaGlnaCBDUFUgdXNhZ2UgaW4gdGhlIGd1ZXN0IGR1cmluZyBwbGF5YmFjaywgYmVjYXVzZSBj
-aHJvbWUsIHZsYywgbXB2IHVzZWQgc29mdHdhcmUgaDI2NCBkZWNvZGluZy4KPj4gSSBmaXhlZCB0
-aGlzIGJ5IHBhc3NpbmcgYSB2aXJ0dWFsaXplZCBpbnN0YW5jZSBvZiB0aGUgaG9zdHMgSW50ZWwg
-R1BVIHRvIHRoZSBndWVzdCB2aWEgR1ZULWcuCj4+Cj4+IFRoZXNlIGFyZSB0aGUgcWVtdSBwYXJh
-bWV0ZXJzIEkgdXNlIGZvciBHVlQtZzoKPj4gLXNwaWNlIHBvcnQ9NTkwNixhZGRyPTEwLjQyLjIu
-MjUwLHBhc3N3b3JkPWNoYW5nZWQKPj4gLXZnYSB2aXJ0aW8KPj4gLWRpc3BsYXkgZWdsLWhlYWRs
-ZXNzLHJlbmRlcm5vZGU9L2Rldi9kcmkvY2FyZDAKPj4gLWRldmljZSB2ZmlvLXBjaSxzeXNmc2Rl
-dj0vc3lzL2J1cy9tZGV2L2RldmljZXMvZjE0YzgwZDUtOWFkZS00ODAyLTk1MDktMWQ4NzdkMzJk
-MTU5LGRpc3BsYXk9b24scmFtZmI9b24sZHJpdmVyPXZmaW8tcGNpLW5vaG90cGx1Zwo+Cj4gUGVy
-aGFwcyBoZXJlIGl0IHdvdWxkIGhlbHAgdG8gc2V0IHN0cmVhbWluZy12aWRlbz1hbGwgLXNwaWNl
-IG9wdGlvbi4KCkl0IGRvZXNuJ3QgcmVhbGx5IGhlbHAuIFN0aWxsIHZlcnkgc3R1dHRlcmluZyBw
-bGF5YmFjaywgZXZlbiB3aXRoIGEgdmlkZW8tcGxheWVyIHdpbmRvdyBzaXplIG9mIG9ubHkgNzIw
-eDU3Ni4KSSBub3cgYmVsaWV2ZSB0aGlzIGlzIGNhdXNlZCBieSBhIENQVSBib3R0bGVuZWNrIG9u
-IHRoZSBDTElFTlQgKG5vdCBndWVzdCksIGkuZS4gbXkgV2luZG93cyAxMCBtYWNoaW5lLgp2aXJ0
-LXZpZXdlci5leGUgdXNlcyBjb25zaXN0ZW50bHkgMTIlIENQVSwgd2hpY2ggaXMgMTAwJSBvZiBv
-bmUgY29yZSAoUXVhZCBDb3JlIHdpdGggU01UID0+IDggbG9naWNhbCBjb3JlcykuClRoaXMgaXMg
-Y3JhenksIHNpbmNlIHRoZSBDUFUgY29yZSBpcyBydW5uaW5nIGEgbW9kZXJuIGk3IGF0IDMuNiBH
-SHogKFR1cmJvKSB3aXRoIG5vIG90aGVyIHNpZ25pZmljYW50IENQVSB1c2VycyAoc3lzdGVtIGlz
-IGlkbGUpLgpDb3VsZCB0aGlzIGJlIGEgcHJvYmxlbSBvZiByZW1vdGUtdmlld2VyLmV4ZSBub3Qg
-dXNpbmcgZ3N0cmVhbWVyIGNvZGVjcyAoYW5kIGh3IGFjY2VsKSBwcm9wZXJseT8KR290IHRoZXNl
-IHNwaWNlLWRlYnVnIG1lc3NhZ2VzIG9uIHRoZSBjbGllbnQ6ICJubyB2aWRlbyBkZWNvZGVycyBm
-cm9tIEdTVHJlYW1lciBmb3Ige21qcGVnLHZwOCxoMjY0LHZwOSxoMjY1fSB3ZXJlIGZvdW5kIi4K
-CkFsc28gSSBub3RpY2VkIHRoYXQgdGhlIHFlbXUgcHJvY2VzcyBvbiB0aGUgaG9zdCBpcyB1c2lu
-ZyBtdWNoIENQVSwgcHJvYmFibHkgZHVlIHRvIHNwaWNlIGVuY29kaW5nIHRoZSB2aWRlbyBmcmFt
-ZXMuClRoZSBob3N0IHNob3dzIDQgcWVtdS15c3RlbS14ODZfNjQgdGhyZWFkcyB1c2luZyA5MyUs
-IDM0JSwgMjQlLCAxNiUgQ1BVIHdoZW4gcGxheWluZyBhIDcyMHg1NzYgdmlkZW8gaW4gdGhlIGd1
-ZXN0LgpIb3dldmVyIHRoZSBndWVzdCBzaG93cyBvbmx5IDE0JSBhbmQgNyUgdXNlIGZvciBpdHMg
-MiB2Q1BVcyBpbiBodG9wIGJlY2F1c2UgaXQgdXNlcyBWQS1BUEkgKEdQVC1nKSBpbiB0aGUgdmlk
-ZW8gcGxheWVyICh2bGMsIG1wdikuCgpTbyB0aGUgaG9zdCBxZW11IHRocmVhZHMgdXNlIE1VQ0gg
-bW9yZSBDUFUgdGhhbiB0aGUgZ3Vlc3QuIFdoZW4gSSBkaXNjb25uZWN0IHNwaWNlICh2aWRlbyBz
-dGlsbCBwbGF5aW5nKSB0aGUgaG9zdCBxZW11IENQVSB1c2FnZSBkcm9wcyB0byAzNSUsIDElLCAx
-JSwgMSUsIGFzIGV4cGVjdGVkLgpDb25jbHVzaW9uOiBTcGljZSBlbmNvZGluZyBvbiB0aGUgaG9z
-dCBpcyB2ZXJ5IENQVSBodW5ncnkuCgpJcyBpdCBwb3NzaWJsZSB0byBHUFUtYWNjZWxlcmF0ZSB0
-aGUgdmlkZW8gZW5jb2RpbmcgaW4gdGhlIGhvc3QgcWVtdSBwcm9jZXNzPwpJJ3ZlIGJ1aWx0IHNw
-aWNlIGFuZCBxZW11IHdpdGggZ3N0cmVhbWVyIGFuZCBkcm0gc3VwcG9ydCBhbmQgVkEtQVBJIGlz
-IHdvcmtpbmcgbmljZWx5LgpDYW4gc3BpY2UgdXNlIHRoYXQ/IEhvdz8KCj4+Cj4+IFVuZm9ydHVu
-YXRlbHkgdmlkZW8gcGxheWJhY2sgaXMgc3RpbGwgbm90IHNtb290aGVyLiBJbiBmYWN0IGl0IGlz
-IGFib3V0IHRoZSBzYW1lIHNtb290aG5lc3MgYnV0IG5ldyB2aXN1YWwgYXJ0ZWZhY3RzIGluIHRo
-ZSB2aWRlbyBtYWtlIGl0IHdvcnNlLiBJIHRoaW5rIHRoaXMgaXMgZHVlIHRvIGVnbC1oZWFkbGVz
-cy4KPj4gRm9yIHRlc3RpbmcvY29tcGFyaXNvbiBJIGluc3RhbGxlZCBhIFdpbmRvd3MgMTAgZ3Vl
-c3Qgd2l0aCB0aGUgc2FtZSBHVlQtZyBHUFUgYW5kIHVzZWQgUkRQIHdpdGggaDI2NCBhY3RpdmF0
-ZWQuIFBsYXliYWNrIHdhcyBtdWNoIGJldHRlciBhbmQgdXNlZCBvbmx5IGFib3V0IDEyME1CaXQv
-cy4KPj4KPj4gTmV4dCBJIHRyaWVkIHVzaW5nIHRoZSBzcGljZS1zdHJlYW1pbmctYWdlbnQgaW4g
-dGhlIGd1ZXN0IHRvIHNlbmQgYSBoMjY0IGVuY29kZWQgcGljdHVyZSB2aWEgc3BpY2UuCj4+IEhv
-d2V2ZXIsIHRoZSB3aW5kb3dzIGJ1aWxkIG9mIHJlbW90ZS12aWV3ZXIgZG9lc24ndCBzZWVtIHRv
-IHN1cHBvcnQgdGhpcy4gVGhlIG5ldyBzcGljZSBkaXNwbGF5IGlzIGNyZWF0ZWQgYW5kIEkgc2Vl
-IHRoZSBtb3VzZSBjdXJzb3IgaW4gaXQgYnV0IG5vIHBpY3R1cmUgKGp1c3QgYmxhY2spLgo+Cj4g
-WW91IG1heSBiZSB0aGUgZmlyc3QgdG8gdGVzdCBzcGljZS1zdHJlYW1pbmctYWdlbnQgKyB3aW5k
-b3dzIGNsaWVudC4KPgo+IEkgdGhpbmsgdGhlcmUgaXMgc29tZSB3b3JrIHRvIGJlIGRvbmUgaW4g
-dGhlIHdpbmRvd3MgY2xpZW50IHRvIG1ha2UKPiBpdCBoYW5kbGUgYmV0dGVyIHN0cmVhbXMgZnJv
-bSBzcGljZS1zdHJlYW1pbmctYWdlbnQKPgo+IEFsc28gdGhlcmUgaXMgc29tZSB3b3JrIHRvIGJl
-IGRvbmUgdG8gZW5hYmxlIHNwaWNlLXN0cmVhbWluZy1hZ2VudAo+IG9uIHdpbmRvd3MgZ3Vlc3Rz
-Lgo+Cj4+IExvZyBmcm9tIHRoZSBndWVzdDoKPj4gZmVsaXhAaWRlZml4On4kIC4vc3BpY2Utc3Ry
-ZWFtaW5nLWFnZW50IC1kCj4+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1XTogR09UIFNUQVJU
-X1NUT1AgbWVzc2FnZSAtLSByZXF1ZXN0IHRvIFNUQVJUIHN0cmVhbWluZwo+PiBzcGljZS1zdHJl
-YW1pbmctYWdlbnRbMjQ2NV06IHN0cmVhbWluZyBzdGFydHMgbm93Cj4+IHNwaWNlLXN0cmVhbWlu
-Zy1hZ2VudFsyNDY1XTogR290IGRldmljZSBpbmZvIG9mIDEgZGV2aWNlcyBmcm9tIHRoZSBwbHVn
-aW4KPj4gc3BpY2Utc3RyZWFtaW5nLWFnZW50WzI0NjVdOsKgwqDCoCBzdHJlYW0gaWQgMDogZGV2
-aWNlIGFkZHJlc3M6IHBjaS8wMDAwLzA2LjAsIGRldmljZSBkaXNwbGF5IGlkOiAyCj4+IHNwaWNl
-LXN0cmVhbWluZy1hZ2VudFsyNDY1XTogZ290IGEgZnJhbWUgLS0gc2l6ZSBpcyAzMjEyNjUgKDI2
-IG1zKSAoMTU4OTY0MTY2MDI4NSBtcyBmcm9tIGxhc3QgZnJhbWUpKDE1ODk2NDE2NjAyNTgxMzYg
-dXMpCj4+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNDY1XTogd1hoIDE5MjBYMTIwMMKgIGNvZGVj
-PTEKPgo+IE5vdGUgdGhhdCBpdCdzIG5vdCBIMjY0LCBidXQgTUpQRUcgKGNvZGVjPTEpCgpZb3Ug
-YXJlIHJpZ2h0LCBzbyBJIGRlYnVnZ2VkIHRoaXM6CgpMYXVuY2hpbmcgc3BpY2Utc3RyZWFtaW5n
-LWFnZW50IHdpdGggR1NUX0RFQlVHPTYgc2hvd3MgYSBidW5jaCBvZiBoMjY0IHJlbGF0ZWQgbWVz
-c2FnZXMgd2hpY2ggc2VlbSB0byBpbmRpY2F0ZSB0aGF0IHRoZSBnc3RyZWFtZXIgY29kZWNzIGFy
-ZSBsb2FkZWQgKG5vdCBzdXJlKToKZ3N0cmVnaXN0cnkuYzo0NjE6Z3N0X3JlZ2lzdHJ5X2FkZF9w
-bHVnaW46PHJlZ2lzdHJ5MD4gYWRkaW5nIHBsdWdpbiAweDU1ZDI3OWY4ZmU3MCBmb3IgZmlsZW5h
-bWUgIi91c3IvbGliL3g4Nl82NC1saW51eC1nbnUvZ3N0cmVhbWVyLTEuMC9saWJnc3R1dmNoMjY0
-LnNvIgpnc3RyZWdpc3RyeS5jOjU3Nzpnc3RfcmVnaXN0cnlfYWRkX2ZlYXR1cmU6PHJlZ2lzdHJ5
-MD4gYWRkaW5nIGZlYXR1cmUgMHg1NWQyNzlmZTE2NTAgKHZpZGVvL3gtaDI2NCkKZ3N0cmVnaXN0
-cnljaHVua3MuYzo3Mjk6Z3N0X3JlZ2lzdHJ5X2NodW5rc19sb2FkX2ZlYXR1cmU6IEFkZGVkIGZl
-YXR1cmUgdnA4ZW5jLCBwbHVnaW4gMHg1NWQyNzllZDExNTAgdnB4CgpIb3dldmVyIEkgZGlkbid0
-IGZpbmQgYW4gYXJndW1lbnQgdG8gZm9yY2Ugc3BpY2Utc3RyZWFtaW5nLWFnZW50IHRvIHVzZSBh
-IHNwZWNpZmljIGNvZGVjLiBSZWFkaW5nIHRoZSBzb3VyY2UgY29kZSBJIGZvdW5kIHRoZSBvcHRp
-b24gIi1jIGNvZGVjX25hbWU9aDI2NCIsIGJ1dCBpdCBkb2Vzbid0IHNlZW0gdG8gaGF2ZSBhbnkg
-ZWZmZWN0LgoKTWF5YmUgaXQgZmFpbHMgYXV0by1uZWdvdGlhdGlvbiB3aXRoIHRoZSBjbGllbnQg
-d2hpY2ggZG9lcyBub3Qgc3VwcG9ydCBpdD8KT24gdGhlIGNsaWVudCB3aXRoIHRoZSAiLS1zcGlj
-ZS1kZWJ1ZyIgb3B0aW9uIEkgZm91bmQgaW50ZXJlc3RpbmcgbWVzc2FnZXM6CgoocmVtb3RlLXZp
-ZXdlci5leGU6MTU5NTYpOiBTcGljZS1ERUJVRzogMTc6MTc6MDYuMjE4OiAuLi9zcmMvY2hhbm5l
-bC1kaXNwbGF5LWdzdC5jOjc5Mjpnc3R2aWRlb19oYXNfY29kZWM6IE5vIHZpZGVvIGRlY29kZXJz
-IGZyb20gR1N0cmVhbWVyIGZvciBtanBlZyB3ZXJlIGZvdW5kCihyZW1vdGUtdmlld2VyLmV4ZTox
-NTk1Nik6IEdTcGljZS1ERUJVRzogMTc6MTc6MDYuMjE4OiAuLi9zcmMvY2hhbm5lbC1kaXNwbGF5
-LmM6ODk0IEdTdHJlYW1lciBkb2VzIG5vdCBzdXBwb3J0IHRoZSBtanBlZyBjb2RlYwoocmVtb3Rl
-LXZpZXdlci5leGU6MTU5NTYpOiBTcGljZS1ERUJVRzogMTc6MTc6MDYuMjE5OiAuLi9zcmMvY2hh
-bm5lbC1kaXNwbGF5LWdzdC5jOjc5Mjpnc3R2aWRlb19oYXNfY29kZWM6IE5vIHZpZGVvIGRlY29k
-ZXJzIGZyb20gR1N0cmVhbWVyIGZvciB2cDggd2VyZSBmb3VuZAoocmVtb3RlLXZpZXdlci5leGU6
-MTU5NTYpOiBHU3BpY2UtREVCVUc6IDE3OjE3OjA2LjIyMDogLi4vc3JjL2NoYW5uZWwtZGlzcGxh
-eS5jOjg5NCBHU3RyZWFtZXIgZG9lcyBub3Qgc3VwcG9ydCB0aGUgdnA4IGNvZGVjCihyZW1vdGUt
-dmlld2VyLmV4ZToxNTk1Nik6IFNwaWNlLURFQlVHOiAxNzoxNzowNi4yMjE6IC4uL3NyYy9jaGFu
-bmVsLWRpc3BsYXktZ3N0LmM6NzkyOmdzdHZpZGVvX2hhc19jb2RlYzogTm8gdmlkZW8gZGVjb2Rl
-cnMgZnJvbSBHU3RyZWFtZXIgZm9yIGgyNjQgd2VyZSBmb3VuZAoocmVtb3RlLXZpZXdlci5leGU6
-MTU5NTYpOiBHU3BpY2UtREVCVUc6IDE3OjE3OjA2LjIyMjogLi4vc3JjL2NoYW5uZWwtZGlzcGxh
-eS5jOjg5NCBHU3RyZWFtZXIgZG9lcyBub3Qgc3VwcG9ydCB0aGUgaDI2NCBjb2RlYwoocmVtb3Rl
-LXZpZXdlci5leGU6MTU5NTYpOiBTcGljZS1ERUJVRzogMTc6MTc6MDYuMjIzOiAuLi9zcmMvY2hh
-bm5lbC1kaXNwbGF5LWdzdC5jOjc5Mjpnc3R2aWRlb19oYXNfY29kZWM6IE5vIHZpZGVvIGRlY29k
-ZXJzIGZyb20gR1N0cmVhbWVyIGZvciB2cDkgd2VyZSBmb3VuZAoocmVtb3RlLXZpZXdlci5leGU6
-MTU5NTYpOiBHU3BpY2UtREVCVUc6IDE3OjE3OjA2LjIyNDogLi4vc3JjL2NoYW5uZWwtZGlzcGxh
-eS5jOjg5NCBHU3RyZWFtZXIgZG9lcyBub3Qgc3VwcG9ydCB0aGUgdnA5IGNvZGVjCihyZW1vdGUt
-dmlld2VyLmV4ZToxNTk1Nik6IFNwaWNlLURFQlVHOiAxNzoxNzowNi4yMjc6IC4uL3NyYy9jaGFu
-bmVsLWRpc3BsYXktZ3N0LmM6NzkyOmdzdHZpZGVvX2hhc19jb2RlYzogTm8gdmlkZW8gZGVjb2Rl
-cnMgZnJvbSBHU3RyZWFtZXIgZm9yIGgyNjUgd2VyZSBmb3VuZAoocmVtb3RlLXZpZXdlci5leGU6
-MTU5NTYpOiBHU3BpY2UtREVCVUc6IDE3OjE3OjA2LjIzMDogLi4vc3JjL2NoYW5uZWwtZGlzcGxh
-eS5jOjg5NCBHU3RyZWFtZXIgZG9lcyBub3Qgc3VwcG9ydCB0aGUgaDI2NSBjb2RlYwoKQW55IGlk
-ZWFzIGhvdyB0byBmaXggdGhpcz8gU2hvdWxkIEkgb3BlbiBhIGJ1ZyByZXBvcnQ/Cgo+PiA8c25p
-cHBlZD4KPj4KPj4gSWYgSSB1c2UgcmVtb3RlIHZpZXdlciBmcm9tIGEgbGludXggY2xpZW50IHRo
-ZW4gaXQgZG9lcyBpbmRlZWQgd29yayEgUGxheWJhY2sgaXMgbmVhcmx5IHNtb290aCwgYWJvdXQg
-dGhlIHNhbWUgYXMgd2l0aCBSRFAgYW5kIGgyNjQhCj4+IFNvIEkgZ3Vlc3MgaXQncyBhIGJ1ZyBp
-biB0aGUgd2luZG93cyByZW1vdGUtdmlld2VyLiBTZWVtcyBsaWtlIGl0IGRvZXNuJ3QgaGF2ZSBn
-c3RyZWFtZXIgc3VwcG9ydCwgc28gSSdsbCBvcGVuIGEgYnVnIHJlcG9ydC4KPj4KPj4gQW55IG90
-aGVyIGlkZWFzIHdoYXQgSSBjYW4gdHJ5IHRvIGdldCBnb29kIHJlYXNvbmFibGUgdmlkZW8gcGxh
-eWJhY2sgd2l0aCBnb29kIG9mZmljZS13b3JrIHBlcmZvcm1hbmNlPwo+Pgo+PiBPbiBhIHNpZGUg
-bm90ZTogQXVkaW8gdmlhIHNwaWNlIGlzbid0IHdvcmtpbmcuIEkgaGVhciBhIGZldyBzdHJhbmdl
-IG5vaXNlcyBhbmQgdGhlbiBvbmx5IHNpbGVuY2UuIFNvIEkgdXNlIHB1bHNlYXVkaW8gdHJhbnNt
-aXR0aW5nIHRoZSBzb3VuZCB0byB0aGUgY2xpZW50IGluZGVwZW5kZW50IG9mIHNwaWNlLgoKRm91
-bmQgdGhlIHJlYXNvbjogSXQncyBhIHJlZ3Jlc3Npb24gaW4gdGhlIHdpbmRvd3MgdmVyc2lvbiBv
-ZiByZW1vdGUtdmlld2VyLiBXYXMgY2F1c2VkIGJ5IGxpYmdzdGRpcmVjdHNvdW5kLmRsbCBiZWlu
-ZyByZXBsYWNlZCB3aXRoIGxpYmdzdHdhc2FwaS5kbGwgYW5kIHRoaXMgY2hhbmdlZCB0aGUgYXVk
-aW8gc3Vic3lzdGVtIGJlaW5nIHVzZWQuCkRldGFpbHM6IGh0dHBzOi8vZ2l0bGFiLmNvbS92aXJ0
-LXZpZXdlci92aXJ0LXZpZXdlci8tL2lzc3Vlcy8yCgpDaGVlcnMsCkZlbGl4CgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5n
-IGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwK
+Hi,
+While I'm writing the next version of this proposal, I came up with
+some changes on the protocol. Let me share my ideas in advance. I'd
+like to hear your idea if you have another thought.
+
+On Thu, Feb 6, 2020 at 7:21 PM Keiichi Watanabe <keiichiw@chromium.org> wrote:
+>
+> From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+>
+> The virtio video encoder device and decoder device provide functionalities to
+> encode and decode video stream respectively.
+> Though video encoder and decoder are provided as different devices, they use a
+> same protocol.
+>
+> Signed-off-by: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+> Signed-off-by: Keiichi Watanabe <keiichiw@chromium.org>
+> ---
+>  .gitignore                        |   1 +
+>  content.tex                       |   1 +
+>  images/video-buffer-lifecycle.dot |  18 +
+>  make-setup-generated.sh           |   8 +
+>  virtio-video.tex                  | 988 ++++++++++++++++++++++++++++++
+>  5 files changed, 1016 insertions(+)
+>  create mode 100644 .gitignore
+>  create mode 100644 images/video-buffer-lifecycle.dot
+>  create mode 100644 virtio-video.tex
+>
+> diff --git a/.gitignore b/.gitignore
+> new file mode 100644
+> index 0000000..31272c2
+> --- /dev/null
+> +++ b/.gitignore
+> @@ -0,0 +1 @@
+> +/images/generated/
+> diff --git a/content.tex b/content.tex
+> index b91a132..b75a40f 100644
+> --- a/content.tex
+> +++ b/content.tex
+> @@ -6062,6 +6062,7 @@ \subsubsection{Legacy Interface: Framing Requirements}\label{sec:Device
+>  \input{virtio-fs.tex}
+>  \input{virtio-rpmb.tex}
+>  \input{virtio-iommu.tex}
+> +\input{virtio-video.tex}
+>
+>  \chapter{Reserved Feature Bits}\label{sec:Reserved Feature Bits}
+>
+> diff --git a/images/video-buffer-lifecycle.dot b/images/video-buffer-lifecycle.dot
+> new file mode 100644
+> index 0000000..98f379b
+> --- /dev/null
+> +++ b/images/video-buffer-lifecycle.dot
+> @@ -0,0 +1,18 @@
+> +digraph {
+> +  graph [ rankdir = LR, layout = dot ];
+> +
+> +  init [style = invis]
+> +  destroyed  [style = invis]
+> +  created [label="Created", shape=circle]
+> +  dequeued [label="Dequeued", shape=circle]
+> +  queued [label="Queued", shape=circle]
+> +
+> +  init -> created [label="RESOURCE_CREATE"]
+> +
+> +  created -> queued [label="RESOURCE_QUEUE is sent"]
+> +  dequeued -> queued [label="RESOURCE_QUEUE\n is sent"]
+> +  queued -> dequeued [label="RESOURCE_QUEUE\n has returned"]
+> +
+> +  created -> destroyed [label="RESOURCE_DESTROY_ALL"]
+> +  dequeued -> destroyed [label="RESOURCE_DESTROY_ALL"]
+> +}
+> diff --git a/make-setup-generated.sh b/make-setup-generated.sh
+> index f15d148..4caff72 100755
+> --- a/make-setup-generated.sh
+> +++ b/make-setup-generated.sh
+> @@ -61,3 +61,11 @@ cat > setup-generated.tex <<EOF
+>  \newcommand{\virtiodraftstagename}{$STAGENAME}
+>  \newcommand{\virtiodraftoasisstagename}{$OASISSTAGENAME}
+>  EOF
+> +
+> +# Generate PNG from DOT
+> +mkdir -p images/generated
+> +for file in images/*.dot
+> +do
+> +    BASENAME=`basename "$file" .dot`
+> +    dot -Tpng -o images/generated/${BASENAME}.png ${file}
+> +done
+> diff --git a/virtio-video.tex b/virtio-video.tex
+> new file mode 100644
+> index 0000000..2eeee53
+> --- /dev/null
+> +++ b/virtio-video.tex
+> @@ -0,0 +1,988 @@
+> +\section{Video Device}\label{sec:Device Types / Video Device}
+> +
+> +The virtio video encoder device and decoder device are virtual devices
+> +that supports encoding and decoding respectively. While the encoder
+> +and the decoder are different devices, they use the same protocol.
+> +
+> +\subsection{Device ID}
+> +\label{sec:Device Types / Video Device / Device ID}
+> +
+> +\begin{description}
+> +\item[30] encoder device
+> +\item[31] decoder device
+> +\end{description}
+> +
+> +\subsection{Virtqueues}
+> +\label{sec:Device Types / Video Device / Virtqueues}
+> +
+> +\begin{description}
+> +\item[0] commandq - queue for sending commands.
+> +\item[1] eventq - queue for sending events happened in the device.
+> +\end{description}
+> +
+> +\subsection{Feature bits}
+> +\label{sec:Device Types / Video Device / Feature bits}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_F_RESOURCE_GUEST_PAGES (0)] Guest pages can be used
+> +  for video buffers.
+> +\item[VIRTIO_VIDEO_F_RESOURCE_NON_CONTIG (1)] The device can use
+> +  non-contiguous memories for video buffers. Without this flag, the
+> +  driver and device MUST use video buffers that are contiguous in the
+> +  device-side.
+> +\end{description}
+> +
+> +\devicenormative{\subsubsection}{Feature bits}{Device Types / Video
+> +  Device / Feature bits}
+> +
+> +The device MUST offer VIRTIO_VIDEO_F_RESOURCE_GUEST_PAGES.
+> +
+> +\subsection{Device configuration layout}
+> +\label{sec:Device Types / Video Device / Device configuration layout}
+> +
+> +Video device configuration uses the following layout structure:
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_config {
+> +        le32 version;
+> +        le32 max_caps_length;
+> +        le32 max_resp_length;
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[\field{version}] is the protocol version that the device talks.
+> +  The device MUST set this to 0.
+> +\item[\field{max_caps_length}] defines the maximum length of a
+> +  descriptor required to call VIRTIO_VIDEO_CMD_QUERY_CAPABILITY in
+> +  bytes. The device MUST set this value.
+> +\item[\field{max_resp_length}] defines the maximum length of a
+> +  descriptor required to call a command other than
+> +  VIRTIO_VIDEO_CMD_QUERY_CAPABILITY in bytes. The device MUST set this
+> +  value.
+> +\end{description}
+> +
+> +\subsection{Device Initialization}
+> +\label{sec:Device Types / Video Device / Device Initialization}
+> +
+> +\devicenormative{\subsubsection}{Device Initialization}{Device Types /
+> +  Video Device / Device Initialization}
+> +
+> +The driver SHOULD query device capability by using the
+> +VIRTIO_VIDEO_CMD_QUERY_CAPABILITY and use that information for the
+> +initial setup.
+> +
+> +\subsection{Device Operation}
+> +\label{sec:Device Types / Video Device / Device Operation}
+> +
+> +The driver allocates input and output buffers and queues the buffers
+> +to the device. The device performs operations on the buffers according
+> +to the function in question.
+> +
+> +\subsubsection{Command Virtqueue}
+> +
+> +\paragraph{Device Operation: Command header}
+> +
+> +All commands and responses on the command virtqueue have a fixed
+> +header using the following layout structure and definitions:
+> +
+> +\begin{lstlisting}
+> +  enum virtio_video_cmd_type {
+> +        /* Command */
+> +        VIRTIO_VIDEO_CMD_QUERY_CAPABILITY = 0x0100,
+> +        VIRTIO_VIDEO_CMD_STREAM_CREATE,
+> +        VIRTIO_VIDEO_CMD_STREAM_DESTROY,
+> +        VIRTIO_VIDEO_CMD_STREAM_DRAIN,
+> +        VIRTIO_VIDEO_CMD_RESOURCE_CREATE,
+> +        VIRTIO_VIDEO_CMD_RESOURCE_QUEUE,
+> +        VIRTIO_VIDEO_CMD_RESOURCE_DESTROY_ALL,
+> +        VIRTIO_VIDEO_CMD_QUEUE_CLEAR,
+> +        VIRTIO_VIDEO_CMD_GET_PARAMS,
+> +        VIRTIO_VIDEO_CMD_SET_PARAMS,
+> +        VIRTIO_VIDEO_CMD_QUERY_CONTROL,
+> +        VIRTIO_VIDEO_CMD_GET_CONTROL,
+> +        VIRTIO_VIDEO_CMD_SET_CONTROL,
+> +
+> +        /* Response */
+> +        VIRTIO_VIDEO_RESP_OK_NODATA = 0x0200,
+> +        VIRTIO_VIDEO_RESP_OK_QUERY_CAPABILITY,
+> +        VIRTIO_VIDEO_RESP_OK_RESOURCE_QUEUE,
+> +        VIRTIO_VIDEO_RESP_OK_GET_PARAMS,
+> +        VIRTIO_VIDEO_RESP_OK_QUERY_CONTROL,
+> +        VIRTIO_VIDEO_RESP_OK_GET_CONTROL,
+> +
+> +        VIRTIO_VIDEO_RESP_ERR_INVALID_OPERATION = 0x0300,
+> +        VIRTIO_VIDEO_RESP_ERR_OUT_OF_MEMORY,
+> +        VIRTIO_VIDEO_RESP_ERR_INVALID_STREAM_ID,
+> +        VIRTIO_VIDEO_RESP_ERR_INVALID_RESOURCE_ID,
+> +        VIRTIO_VIDEO_RESP_ERR_INVALID_PARAMETER,
+> +        VIRTIO_VIDEO_RESP_ERR_UNSUPPORTED_CONTROL,
+> +};
+> +
+> +struct virtio_video_cmd_hdr {
+> +        le32 type;
+> +        le32 stream_id;
+> +};
+> +\end{lstlisting}
+> +
+> +The fixed header \field{virtio_video_cmd_hdr} in each message includes
+> +the following field:
+> +\begin{description}
+> +\item[\field{type}] specifies the type of the driver command
+> +  (VIRTIO_VIDEO_CMD_*) or the device response (VIRTIO_VIDEO_RESP_*).
+> +\item[\field{stream_id}] specifies a target stream if needed.
+> +\end{description}
+> +
+> +On success the device will return VIRTIO_VIDEO_RESP_OK_NODATA in case
+> +there is no payload. Otherwise the \field{type} field will indicate
+> +the kind of payload.
+> +
+> +On error the device will return one of the VIRTIO_VIDEO_RESP_ERR_*
+> +error codes.
+> +
+> +\paragraph{Device Operation: Query device capability}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_CMD_QUERY_CAPABILITY] Retrieve information about
+> +supported formats.
+> +
+> +The driver uses \field{virtio_video_query_capability} to send a
+> +query request.
+> +
+> +\begin{lstlisting}
+> +enum virtio_video_queue_type {
+> +        VIRTIO_VIDEO_QUEUE_TYPE_INPUT = 0x100,
+> +        VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT,
+> +};
+> +
+> +struct virtio_video_query_capability {
+> +        struct virtio_video_ctrl_hdr hdr;
+> +        le32 queue_type;
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{queue_type}] is the queue type that the driver asks
+> +information about. The driver MUST set either
+> +\field{VIRTIO_VIDEO_QUEUE_TYPE_INPUT} or
+> +\field{VIRTIO_VIDEO_QUEUE_TYPE_OUTPUT}.
+> +\end{description}
+> +
+> +The device responds to VIRTIO_VIDEO_CMD_QUERY_CAPABILITY with
+> +\field{virtio_video_query_capability_resp}.
+> +\begin{lstlisting}
+> +struct virtio_video_query_capability_resp {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 num_descs;
+> +        u8 padding[4];
+> +        /* Followed by struct virtio_video_format_desc descs[] */
+> +};
+> +\end{lstlisting}
+> +
+> +The device MUST return its capability with \field{
+> +  virtio_video_capability_resp} that includes the following fields:
+> +\begin{description}
+> +\item[\field{num_descs}] is a number of \field{virtio_video_format_desc}
+> +  that follow. The value MUST not exceed 64.
+> +\end{description}
+> +
+> +The format description \field{virtio_video_format_desc} is defined as
+> +follows:
+> +\begin{lstlisting}
+> +enum virtio_video_format {
+> +        /* Raw formats */
+> +        VIRTIO_VIDEO_FORMAT_RAW_MIN = 1,
+> +        VIRTIO_VIDEO_FORMAT_ARGB8888 = VIRTIO_VIDEO_FORMAT_RAW_MIN,
+> +        VIRTIO_VIDEO_FORMAT_BGRA8888,
+> +        VIRTIO_VIDEO_FORMAT_NV12, /* 12  Y/CbCr 4:2:0  */
+> +        VIRTIO_VIDEO_FORMAT_YUV420, /* 12  YUV 4:2:0     */
+> +        VIRTIO_VIDEO_FORMAT_YVU420, /* 12  YVU 4:2:0     */
+> +        VIRTIO_VIDEO_FORMAT_RAW_MAX = VIRTIO_VIDEO_FORMAT_YVU420,
+> +
+> +        /* Coded formats */
+> +        VIRTIO_VIDEO_FORMAT_CODED_MIN = 0x1000,
+> +        VIRTIO_VIDEO_FORMAT_MPEG2 = VIRTIO_VIDEO_FORMAT_CODED_MIN, /* MPEG-2 Part 2 */
+> +        VIRTIO_VIDEO_FORMAT_MPEG4, /* MPEG-4 Part 2 */
+> +        VIRTIO_VIDEO_FORMAT_H264, /* H.264 */
+> +        VIRTIO_VIDEO_FORMAT_HEVC, /* HEVC aka H.265*/
+> +        VIRTIO_VIDEO_FORMAT_VP8, /* VP8 */
+> +        VIRTIO_VIDEO_FORMAT_VP9, /* VP9 */
+> +        VIRTIO_VIDEO_FORMAT_CODED_MAX = VIRTIO_VIDEO_FORMAT_VP9,
+> +};
+> +
+> +enum virtio_video_planes_layout_flag {
+> +        VIRTIO_VIDEO_PLANES_LAYOUT_SINGLE_BUFFER = 1 << 0,
+> +        VIRTIO_VIDEO_PLANES_LAYOUT_PER_PLANE = 1 << 1,
+> +};
+> +
+> +struct virtio_video_format_desc {
+> +        le64 mask;
+> +        le32 format; /* One of VIRTIO_VIDEO_FORMAT_* types */
+> +        le32 planes_layout; /* Bitmask with VIRTIO_VIDEO_PLANES_LAYOUT_* */
+> +        le32 plane_align;
+> +        le32 num_frames;
+> +        /* Followed by struct virtio_video_format_frame frames[] */
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{mask}] is a bitset that represents the supported
+> +  combination of input and output format. If \textit{i}-th bit is set
+> +  in \field{mask} of \textit{j}-th \field{virtio_video_format_desc}
+> +  for input, the device supports encoding or decoding from the
+> +  \textit{j}-th input format to \textit{i}-th output format.
+> +\item[\field{format}] specifies an image format. The device MUST set
+> +  one of \field{enum virtio_video_format}.
+> +\item[\field{planes_layout}] is a bitmask representing a set of plane
+> +  layout types the device supports. This driver MUST ignore this field
+> +  for encoded formats.
+> +  \begin{description}
+> +  \item[\field{VIRTIO_VIDEO_PLANES_LAYOUT_SINGLE_BUFFER}] The device
+> +    expects planes in one buffer laid out one after another.
+> +  \item[\field{VIRTIO_VIDEO_PLANES_LAYOUT_PER_PLANE}] The device
+> +    expects planes to be located in separate buffers.
+> +  \end{description}
+> +\item[\field{plane_align}] is a plane alignment the device require
+> +  when multiple planes are located in one buffer. The driver MUST
+> +  ignore this field if \field{format} is a bitstream format or
+> +  \field{planes_layout} doesn't have
+> +  \field{VIRTIO_VIDEO_PLANES_LAYOUT_SINGLE_BUFFER} bit.
+> +\item[\field{num_frames}] is the number of
+> +  \field{virtio_video_format_frame} that follows.
+> +\end{description}
+> +
+> +The frame information \field{virtio_video_format_frame} is defined as
+> +follows:
+> +\begin{lstlisting}
+> +struct virtio_video_format_range {
+> +        le32 min;
+> +        le32 max;
+> +        le32 step;
+> +        u8 padding[4];
+> +};
+> +
+> +struct virtio_video_format_frame {
+> +        struct virtio_video_format_range width;
+> +        struct virtio_video_format_range height;
+> +        le32 num_rates;
+> +        u8 padding[4];
+> +        /* Followed by struct virtio_video_format_range frame_rates[] */
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{width, height}] represents a range of resolutions
+> +  supported by the device. If its \field{step} is not applicable, its
+> +  \field{min} is equal to its \field{max}.
+> +\item[\field{num_rates}] is the number of
+> +  \field{virtio_video_format_ranges} that follows to represent
+> +  supported frame rates.
+> +\end{description}
+> +\end{description}
+> +
+> +\devicenormative{\subparagraph}{Device Operation: Query device
+> +  capability}{Device Types / Video Device / Device Operation / Device
+> +  Operation: Query device capability}
+> +
+> +The total size of the device response MUST not exceed
+> +\field{max_cap_length} in bytes reported in the device configuration.
+> +
+> +\paragraph{Device Operation: Create streams}
+> +
+> +To process buffers, the device needs to associate them with a certain
+> +video stream (essentially, a context). Streams are created by
+> +VIRTIO_VIDEO_CMD_STREAM_CREATE with a default set of parameters
+> +determined by the device.
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_CMD_STREAM_CREATE] Create a video stream (context)
+> +  within the device.
+> +
+> +\begin{lstlisting}
+> +enum virtio_video_mem_type {
+> +        VIRTIO_VIDEO_MEM_TYPE_GUEST_PAGES,
+> +};
+> +
+> +struct virtio_video_stream_create {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 in_mem_type; /* One of VIRTIO_VIDEO_MEM_TYPE_* types */
+> +        le32 out_mem_type; /* One of VIRTIO_VIDEO_MEM_TYPE_* types */
+> +        le32 coded_format; /* One of VIRTIO_VIDEO_FORMAT_* types */
+> +        u8 padding[4];
+> +        u8 tag[64];
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{in_mem_type, out_mem_type}] is a type of buffer
+> +  management for input /output buffers. The driver MUST set a value in
+> +  \field{enum virtio_video_mem_type} that the device reported a
+> +  corresponding feature bit.
+> +\begin{description}
+> +\item[\field{VIRTIO_VIDEO_MEM_TYPE_GUEST_PAGES}] Use guest pages.
+> +\end{description}
+> +\item[\field{coded_format}] is the encoded format that will be
+> +  processed.
+> +\item[\field{tag}] is the name associated with this stream. The tag
+> +  MUST be encoded in UTF-8 and NUL-terminated.
+
+I wonder why we need this "tag" field. I have kept this field from
+Dmitry's first proposal, where this was called "char debug_name[64]".
+However, on second thought, I have no idea what is the necessity to
+have this field. Our VMM implementation in ChromeOS simply ignores
+this field.
+If OpenSynergy's implementation relies on this field, I'm curious
+about the usage. We might want to have an enum value instead of this
+field where arbitrary values can be stored.
+
+> +\end{description}
+> +
+> +The driver MUST set \field{stream_id} in \field{virtio_video_cmd_hdr}
+> +to an integer that is not used before. If a used value is passed as
+> +\field{stream_id}, the device MUST reports an error with
+> +VIRTIO_VIDEO_RESP_ERR_INVALID_STREAM_ID.
+
+I'm wondering if we can't generate stream_id in the host side so that
+we will have less error control code. In the current design, both the
+device and the driver have error checks; the device must check that a
+given ID is available and the driver must check if the device didn't
+return the INVALID_STREAM_ID error. Instead, by generating IDs in the
+device, we will be free from this type of failure. Same for
+resource_id in RESOURCE_CREATE.
+
+I guess this design originally came from the virtio-gpu protocol.
+However, I couldn't find a benefit of adopting the same design here.
+
+Any feedback is welcome.
+
+Best regards,
+Keiichi
+
+
+> +
+> +\item[VIRTIO_VIDEO_CMD_STREAM_DESTROY] Destroy a video stream
+> +  (context) within the device.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_stream_destroy {
+> +        struct virtio_video_cmd_hdr hdr;
+> +};
+> +\end{lstlisting}
+> +\end{description}
+> +
+> +\paragraph{Device Operation: Import resources}
+> +
+> +\begin{itemize*}
+> +\item Use VIRTIO_VIDEO_CMD_RESOURCE_CREATE to import a resource to use
+> +  it as a video buffer.
+> +\item Use VIRTIO_VIDEO_CMD_RESOURCE_DESTROY_ALL to invalidate all the
+> +  resources imported by VIRTIO_VIDEO_CMD_RESOURCE_CREATE so far.
+> +\end{itemize*}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_CMD_RESOURCE_CREATE] Create a resource descriptor
+> +  within the device.
+> +
+> +The driver sends \field{virtio_video_resource_create} defined as
+> +follows:
+> +\begin{lstlisting}
+> +#define VIRTIO_VIDEO_MAX_PLANES 8
+> +
+> +struct virtio_video_resource_create {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
+> +        le32 resource_id;
+> +        le32 planes_layout;
+> +        le32 num_planes;
+> +        le32 plane_offsets[VIRTIO_VIDEO_MAX_PLANES];
+> +        le32 num_entries[VIRTIO_VIDEO_MAX_PLANES];
+> +        /* Followed by struct virtio_video_mem_entry entries[] */
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{queue_type}] specifies a direction of queue which the
+> +  resource will be used for.
+> +\item[\field{resource_id}] is an identifier of the resource. The
+> +  driver MUST set it to an integer that is not used before for the
+> +  given \field{queue_type}. If the specified \field{resource_id} is
+> +  already in use, the device MUST report an error with
+> +  VIRTIO_VIDEO_RESP_ERR_INVALID_RESOURCE_ID.
+> +\item[\field{planes_layout}] specifies a plane layout. The driver MUST
+> +  set only one bit of \field{virtio_video_planes_layout_flag} that is
+> +  supported for a current raw format.
+> +\item[\field{num_planes}] specifies a number of planes.
+> +\item[\field{plane_offsets}] specifies offsets for each plane.
+> +\item[\field{num_entries}] is an array of numbers of \field{entries}
+> +  memory entries for each plane. If \field{planes_layout} is
+> +  VIRTIO_VIDEO_PLANES_LAYOUT_SINGLE_BUFFER, only the first element is
+> +  used.
+> +\end{description}
+> +
+> +The \field{virtio_video_resource_create} is followed by an array of
+> +\field{virtio_video_mem_entry} defined as follows:
+> +\begin{lstlisting}
+> +struct virtio_video_mem_entry {
+> +        le64 addr;
+> +        le32 length;
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{addr}] is the physical guest address.
+> +\item[\field{length}] is the length of the resource.
+> +\end{description}
+> +The number of \field{virtio_video_mem_entry} MUST be equal to the sum
+> +of integers in the array \field{num_entries}.
+> +
+> +\item[VIRTIO_VIDEO_CMD_RESOURCE_DESTROY_ALL] Invalidate all the
+> +  resource descriptor created so far.
+> +\begin{lstlisting}
+> +struct virtio_video_resource_destroy_all {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{queue_type}] is a type of queue.
+> +\end{description}
+> +\end{description}
+> +
+> +\paragraph{Device Operation: Process buffers}
+> +
+> +\begin{itemize*}
+> +\item Use VIRTIO_VIDEO_CMD_RESOURCE_QUEUE to queue the resource for
+> +  processing in the device. The request completes asynchronously and
+> +  out-of-order when the device has finished with the buffer.
+> +\item Use VIRTIO_VIDEO_CMD_STREAM_DRAIN to ask the device to process
+> +  and return all of the already queued buffers.
+> +\item Use VIRTIO_VIDEO_CMD_QUEUE_CLEAR to ask the device to return
+> +  back already queued buffers from the input or the output queue. This
+> +  also includes input or output buffers that can be currently owned by
+> +  the device's processing pipeline.
+> +\end{itemize*}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_CMD_RESOURCE_QUEUE] Add a buffer to the device's
+> +queue.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_resource_queue {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 queue_type;
+> +        le32 resource_id;
+> +        le64 timestamp;
+> +        le32 num_data_sizes;
+> +        le32 data_sizes[VIRTIO_VIDEO_MAX_PLANES];
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[\field{resource_id}] is the ID of the resource to be queued.
+> +\item[\field{timestamp}] is an abstract sequence counter that can be
+> +  used for synchronization. For an input buffer, the driver MUST set a
+> +  \field{timestamp}.
+> +\item[\field{num_data_sizes}] is the number of \field{data_sizes}
+> +  entries in use.
+> +\item[\field{data_sizes}] number of data bytes within a plane.
+> +\end{description}
+> +
+> +The device returns \field{virtio_video_resource_queue_resp} defined as
+> +follows:
+> +\begin{lstlisting}
+> +enum virtio_video_buffer_flag {
+> +        VIRTIO_VIDEO_BUFFER_FLAG_ERR = 0x0001,
+> +        VIRTIO_VIDEO_BUFFER_FLAG_EOS = 0x0002,
+> +
+> +        /* Encoder only */
+> +        VIRTIO_VIDEO_BUFFER_FLAG_IFRAME = 0x0004,
+> +        VIRTIO_VIDEO_BUFFER_FLAG_PFRAME = 0x0008,
+> +        VIRTIO_VIDEO_BUFFER_FLAG_BFRAME = 0x0010,
+> +};
+> +
+> +struct virtio_video_resource_queue_resp {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le64 timestamp;
+> +        le32 flags;
+> +        le32 size; /* Encoded size */
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{timestamp}] is an abstract sequence counter that can be
+> +  used for synchronization. For an output buffer, the device MUST copy
+> +  the \field{timestamp} of the input buffer this output buffer was
+> +  produced from.
+> +\item[\field{flags}] marks specific buffers in the sequence with
+> +  VIRTIO_VIDEO_BUFFER_FLAG_* flags.
+> +\item[\field{size}] is the data size in the buffer (encoder only).
+> +\end{description}
+> +
+> +\begin{itemize*}
+> +\item For each VIRTIO_VIDEO_CMD_RESOURCE_QUEUE request, the device
+> +  MUST send a response to the queue request with
+> +  VIRTIO_VIDEO_OK_NODATA when it has finished processing the buffer
+> +  successfully.
+> +\item The device MUST mark a buffer that triggered a processing error
+> +  with the VIRTIO_VIDEO_BUFFER_F_ERR flag.
+> +\item The device MUST mark the last buffer with the
+> +  VIRTIO_VIDEO_BUFFER_F_EOS flag to denote completion of the drain
+> +  sequence.
+> +\item In case of encoder, to denote a particular frame type the device
+> +  MUST mark the respective buffer with VIRTIO_VIDEO_BUFFER_IFRAME,
+> +  VIRTIO_VIDEO_BUFFER_PFRAME, or VIRTIO_VIDEO_BUFFER_BFRAME.
+> +\item If the processing was stopped due to
+> +  VIRTIO_VIDEO_CMD_QUEUE_CLEAR, the device MUST respond with
+> +  VIRTIO_VIDEO_RESP_OK_NODATA as a response type and
+> +  VIRTIO_VIDEO_BUFFER_FLAG_ERR in \field{flags}.
+> +\item The driver and device MUST follow requirements about buffer
+> +  ownership explained in \ref{sec:Device Types / Video Device / Device
+> +    Operation / Buffer lifecycle}.
+> +\end{itemize*}
+> +
+> +\item[VIRTIO_VIDEO_CMD_STREAM_DRAIN] Ask the device to push all the
+> +  queued buffers through the pipeline.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_stream_drain {
+> +        struct virtio_video_cmd_hdr hdr;
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{itemize*}
+> +\item While the device is processing a VIRTIO_VIDEO_CMD_STREAM_DRAIN
+> +  command, the device MUST return
+> +  VIRTIO_VIDEO_RESP_ERR_INVALID_OPERATION for incoming commands of
+> +  VIRTIO_VIDEO_CMD_RESOURCE_QUEUE for input buffers and
+> +  VIRTIO_VIDEO_CMD_STREAM_DRAIN.
+> +\item If the processing was stopped due to
+> +  VIRTIO_VIDEO_CMD_QUEUE_CLEAR, the device MUST respond with
+> +  VIRTIO_VIDEO_RESP_OK_NODATA as a response type and
+> +  VIRTIO_VIDEO_BUFFER_FLAG_ERR in \field{flags}.
+> +\end{itemize*}
+> +
+> +\item[VIRTIO_VIDEO_CMD_QUEUE_CLEAR] Return already queued
+> +  buffers back from the input or the output queue of the device. The
+> +  device SHOULD return all of the buffers from the respective queue as
+> +  soon as possible without pushing the buffers through the processing
+> +  pipeline.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_resource_queue_clear {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{queue_type}] queue type.
+> +\end{description}
+> +
+> +While the device is processing a VIRTIO_VIDEO_CMD_QUEUE_CLEAR command,
+> +the device MUST return VIRTIO_VIDEO_RESP_ERR_INVALID_OPERATION for
+> +incoming commands of VIRTIO_VIDEO_CMD_RESOURCE_QUEUE,
+> +VIRTIO_VIDEO_CMD_STREAM_DRAIN, and VIRTIO_VIDEO_CMD_QUEUE_CLEAR.
+> +
+> +\end{description}
+> +
+> +\paragraph{Device Operation: Handle stream parameters}
+> +
+> +\begin{itemize*}
+> +\item Use VIRTIO_VIDEO_CMD_GET_PARAMS to get the current stream
+> +  parameters for input and output streams from the device.
+> +\item Use VIRTIO_VIDEO_CMD_SET_PARAMS to provide new stream parameters
+> +  to the device.
+> +\item After setting stream parameters, the driver may issue
+> +  VIRTIO_VIDEO_CMD_GET_PARAMS as some parameters of both input and
+> +  output can be changed implicitly by the device during the set
+> +  operation.
+> +\end{itemize*}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_CMD_GET_PARAMS] Get parameters of the input or the
+> +  output of a stream.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_plane_format {
+> +        le32 plane_size;
+> +        le32 stride;
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[\field{plane_size}] size of the plane in bytes.
+> +\item[\field{stride}] stride used for the plane in bytes.
+> +\end{description}
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_crop {
+> +        le32 left;
+> +        le32 top;
+> +        le32 width;
+> +        le32 height;
+> +};
+> +
+> +struct virtio_video_params {
+> +        le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
+> +        le32 format; /* One of VIRTIO_VIDEO_FORMAT_* types */
+> +        le32 frame_width;
+> +        le32 frame_height;
+> +        le32 min_buffers;
+> +        le32 max_buffers;
+> +        struct virtio_video_crop crop;
+> +        le32 frame_rate;
+> +        le32 num_planes;
+> +        struct virtio_video_plane_format plane_formats[VIRTIO_VIDEO_MAX_PLANES];
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[\field{frame_width}] the value to get/set.
+> +\item[\field{frame_height}] the value to get/set.
+> +\item[\field{pixel_format}] the value to get/set.
+> +\item[\field{min_buffers}] minimum buffers required to handle the
+> +  format (r/o).
+> +\item[\field{max_buffers}] maximum buffers required to handle the
+> +  format (r/o).
+> +\item[\field{crop}] cropping (composing) rectangle.
+> +\item[\field{frame_rate}] the value to get/set.
+> +\item[\field{num_planes}] number of planes used to store pixel data
+> +(r/o).
+> +\item[\field{plane_formats}] description of each plane.
+> +\end{description}
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_get_params {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 queue_type; /* One of VIRTIO_VIDEO_QUEUE_TYPE_* types */
+> +        u8 padding[4];
+> +};
+> +
+> +struct virtio_video_get_params_resp {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        struct virtio_video_params params;
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[\field{queue_type}] queue type.
+> +\item[\field{params}] parameter values.
+> +\end{description}
+> +
+> +\item[VIRTIO_VIDEO_CMD_SET_PARAMS] Change parameters of a stream.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_set_params {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        struct virtio_video_params params;
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[\field{params}] parameters to set.
+> +\end{description}
+> +
+> +Setting stream parameters might have side effects within the device.
+> +For example, the device MAY perform alignment of width and height,
+> +change the number of planes it uses for the format, or do whatever
+> +changes that are required to continue normal operation using the
+> +updated parameters. It is up to the driver to check the parameter set
+> +after the VIRTIO_VIDEO_CMD_SET_PARAMS request has been issued.
+> +\end{description}
+> +
+> +\paragraph{Device Operation: Handle control values}
+> +
+> +The driver can query, get and set control values. Though control
+> +values are associated with a video stream like stream parameters,
+> +supported values differ depending on the device capabilities and
+> +formats of videos being processed.
+> +
+> +\subparagraph{Commands for controls}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_CMD_QUERY_CONTROL] Query supported control values.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_query_control {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 control; /* One of VIRTIO_VIDEO_CONTROL_* types */
+> +        u8 padding[4];
+> +};
+> +
+> +struct virtio_video_query_control_resp {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        /* Followed by one of struct virtio_video_query_control_resp_* */
+> +};
+> +\end{lstlisting}
+> +
+> +If the device supports a given control, the device MUST return a
+> +struct that indicates supported control values after sending
+> +\field{virtio_video_query_control_resp}. The struct used as the
+> +response differs depending on the value of requested \field{control}.
+> +Otherwise, the device MUST report an error with
+> +VIRTIO_VIDEO_RESP_UNSUPPORTED_CONTROL.
+> +
+> +\item[VIRTIO_VIDEO_CMD_GET_CONTROL] Get a control value.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_get_control {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 control; /* One of VIRTIO_VIDEO_CONTROL_* types */
+> +        u8 padding[4];
+> +};
+> +
+> +struct virtio_video_get_control_resp {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        /* Followed by one of struct virtio_video_control_val_* */
+> +};
+> +\end{lstlisting}
+> +
+> +If the device supports a given control and a control value is
+> +available, the device MUST return a control value after
+> +\field{virtio_video_get_control_resp}.
+> +The struct used as the response differs depending on the value of
+> +requested as \field{control}. If the given control is unsupported, the
+> +device MUST report an error with
+> +VIRTIO_VIDEO_RESP_UNSUPPORTED_CONTROL.
+> +
+> +\item[VIRTIO_VIDEO_CMD_SET_CONTROL] Set a control value.
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_set_control {
+> +        struct virtio_video_cmd_hdr hdr;
+> +        le32 control; /* One of VIRTIO_VIDEO_CONTROL_* types */
+> +        u8 padding[4];
+> +        /* Followed by one of struct virtio_video_control_val_* */
+> +};
+> +
+> +struct virtio_video_set_control_resp {
+> +        struct virtio_video_cmd_hdr hdr;
+> +};
+> +\end{lstlisting}
+> +
+> +The driver MUST set \field{control} in
+> +\field{virtio_video_set_control} and send a corresponding struct after
+> +it. If the given control is unsupported, the device MUST report an
+> +error with VIRTIO_VIDEO_RESP_UNSUPPORTED_CONTROL.
+> +\end{description}
+> +
+> +\subparagraph{Types of controls}
+> +
+> +The types of controls are defined as follows:
+> +\begin{lstlisting}
+> +enum virtio_video_control_type {
+> +        VIRTIO_VIDEO_CONTROL_BITRATE = 1,
+> +        VIRTIO_VIDEO_CONTROL_PROFILE,
+> +        VIRTIO_VIDEO_CONTROL_LEVEL,
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_CONTROL_BITRATE] Bitrate of video. (Only for the
+> +  encoder device.)
+> +
+> +The driver can VIRTIO_VIDEO_CMD_GET_CONTROL and
+> +VIRTIO_VIDEO_CMD_SET_CONTROL to get and set a bitrate for encoding
+> +respectively.
+> +The following \field{virtio_video_control_val_bitrate} is used when
+> +the device returns a value as a response of
+> +VIRTIO_VIDEO_CMD_GET_CONTROL and when the driver specifies a value to
+> +be set by VIRTIO_VIDEO_CMD_SET_CONTROL.
+> +\begin{lstlisting}
+> +struct virtio_video_control_val_bitrate {
+> +        le32 bitrate;
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +
+> +\item[VIRTIO_VIDEO_CONTROL_PROFILE] Profile of a compressed video
+> +  stream.
+> +
+> +VIRTIO_VIDEO_CONTROL_PROFILE is used to handle profiles, which
+> +represent sets of cabalities for several compressed formats such as
+> +H.264 and VP9. The enum representing profiles are defined as follows:
+> +\begin{lstlisting}
+> +enum virtio_video_profile {
+> +        /* H.264 */
+> +        VIRTIO_VIDEO_PROFILE_H264_MIN = 0x100,
+> +        VIRTIO_VIDEO_PROFILE_H264_BASELINE = VIRTIO_VIDEO_PROFILE_H264_MIN,
+> +        VIRTIO_VIDEO_PROFILE_H264_MAIN,
+> +        VIRTIO_VIDEO_PROFILE_H264_EXTENDED,
+> +        VIRTIO_VIDEO_PROFILE_H264_HIGH,
+> +        VIRTIO_VIDEO_PROFILE_H264_HIGH10PROFILE,
+> +        VIRTIO_VIDEO_PROFILE_H264_HIGH422PROFILE,
+> +        VIRTIO_VIDEO_PROFILE_H264_HIGH444PREDICTIVEPROFILE,
+> +        VIRTIO_VIDEO_PROFILE_H264_SCALABLEBASELINE,
+> +        VIRTIO_VIDEO_PROFILE_H264_SCALABLEHIGH,
+> +        VIRTIO_VIDEO_PROFILE_H264_STEREOHIGH,
+> +        VIRTIO_VIDEO_PROFILE_H264_MULTIVIEWHIGH,
+> +        VIRTIO_VIDEO_PROFILE_H264_MAX = VIRTIO_VIDEO_PROFILE_H264_MULTIVIEWHIGH,
+> +
+> +        /* HEVC */
+> +        VIRTIO_VIDEO_PROFILE_HEVC_MIN = 0x200,
+> +        VIRTIO_VIDEO_PROFILE_HEVC_MAIN = VIRTIO_VIDEO_PROFILE_HEVC_MIN,
+> +        VIRTIO_VIDEO_PROFILE_HEVC_MAIN10,
+> +        VIRTIO_VIDEO_PROFILE_HEVC_MAIN_STILL_PICTURE,
+> +        VIRTIO_VIDEO_PROFILE_HEVC_MAX =
+> +                VIRTIO_VIDEO_PROFILE_HEVC_MAIN_STILL_PICTURE,
+> +
+> +        /* VP8 */
+> +        VIRTIO_VIDEO_PROFILE_VP8_MIN = 0x300,
+> +        VIRTIO_VIDEO_PROFILE_VP8_PROFILE0 = VIRTIO_VIDEO_PROFILE_VP8_MIN,
+> +        VIRTIO_VIDEO_PROFILE_VP8_PROFILE1,
+> +        VIRTIO_VIDEO_PROFILE_VP8_PROFILE2,
+> +        VIRTIO_VIDEO_PROFILE_VP8_PROFILE3,
+> +        VIRTIO_VIDEO_PROFILE_VP8_MAX = VIRTIO_VIDEO_PROFILE_VP8_PROFILE3,
+> +
+> +        /* VP9 */
+> +        VIRTIO_VIDEO_PROFILE_VP9_MIN = 0x400,
+> +        VIRTIO_VIDEO_PROFILE_VP9_PROFILE0 = VIRTIO_VIDEO_PROFILE_VP9_MIN,
+> +        VIRTIO_VIDEO_PROFILE_VP9_PROFILE1,
+> +        VIRTIO_VIDEO_PROFILE_VP9_PROFILE2,
+> +        VIRTIO_VIDEO_PROFILE_VP9_PROFILE3,
+> +        VIRTIO_VIDEO_PROFILE_VP9_MAX = VIRTIO_VIDEO_PROFILE_VP9_PROFILE3,
+> +};
+> +\end{lstlisting}
+> +
+> +The driver can query supported profiles for a compressed format by
+> +VIRTIO_VIDEO_CMD_QUERY_CONTROL command with
+> +\field{virtio_video_query_control_profile}. If the device supports the
+> +given format and the format's profiles are listed in \field{enum
+> +  virtio_video_profile}, the device MUST returns a list of supported
+> +profiles as a response
+> +\field{virtio_video_query_control_resp_profile}.
+> +\begin{lstlisting}
+> +struct virtio_video_query_control_profile {
+> +        le32 format; /* One of VIRTIO_VIDEO_FORMAT_* */
+> +        u8 padding[4];
+> +};
+> +
+> +struct virtio_video_query_control_resp_profile {
+> +        le32 num;
+> +        u8 padding[4];
+> +        /* Followed by an array le32 profiles[] */
+> +};
+> +\end{lstlisting}
+> +
+> +The device and the driver use \field{virtio_video_control_val_profile}
+> +for VIRTIO_VIDEO_CMD_GET_CONTROL and VIRTIO_VIDEO_CMD_SET_CONTROL.
+> +\begin{lstlisting}
+> +struct virtio_video_control_val_profile {
+> +        le32 profile;
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +
+> +\item[VIRTIO_VIDEO_CONTROL_LEVEL] Level of a compressed video stream.
+> +
+> +VIRTIO_VIDEO_CONTROL_LEVEL is used to handle levels of video stream.
+> +Levels are defined for some compressed video formats to specify sets
+> +of constraints that indicate a degree of required decoder performance.
+> +The enum representing levels are defined as follows:
+> +\begin{lstlisting}
+> +enum virtio_video_level {
+> +        /* H.264 */
+> +        VIRTIO_VIDEO_LEVEL_H264_MIN = 0x100,
+> +        VIRTIO_VIDEO_LEVEL_H264_1_0 = VIRTIO_VIDEO_LEVEL_H264_MIN,
+> +        VIRTIO_VIDEO_LEVEL_H264_1_1,
+> +        VIRTIO_VIDEO_LEVEL_H264_1_2,
+> +        VIRTIO_VIDEO_LEVEL_H264_1_3,
+> +        VIRTIO_VIDEO_LEVEL_H264_2_0,
+> +        VIRTIO_VIDEO_LEVEL_H264_2_1,
+> +        VIRTIO_VIDEO_LEVEL_H264_2_2,
+> +        VIRTIO_VIDEO_LEVEL_H264_3_0,
+> +        VIRTIO_VIDEO_LEVEL_H264_3_1,
+> +        VIRTIO_VIDEO_LEVEL_H264_3_2,
+> +        VIRTIO_VIDEO_LEVEL_H264_4_0,
+> +        VIRTIO_VIDEO_LEVEL_H264_4_1,
+> +        VIRTIO_VIDEO_LEVEL_H264_4_2,
+> +        VIRTIO_VIDEO_LEVEL_H264_5_0,
+> +        VIRTIO_VIDEO_LEVEL_H264_5_1,
+> +        VIRTIO_VIDEO_LEVEL_H264_MAX = VIRTIO_VIDEO_LEVEL_H264_5_1,
+> +};
+> +\end{lstlisting}
+> +
+> +The driver can query supported levels for a compressed format by
+> +VIRTIO_VIDEO_CMD_QUERY_CONTROL command with
+> +\field{virtio_video_query_control_level}. If the device supports the
+> +given format and the format's levels are listed in \field{enum
+> +  virtio_video_level}, the device MUST return a list of supported
+> +levels as a response \field{virtio_video_query_control_resp_level}.
+> +\begin{lstlisting}
+> +struct virtio_video_query_control_level {
+> +        le32 profile; /* One of VIRTIO_VIDEO_PROFILE_* */
+> +        u8 padding[4];
+> +};
+> +
+> +struct virtio_video_query_control_resp_level {
+> +        le32 num;
+> +        u8 padding[4];
+> +        /* Followed by an array le32 level[] */
+> +};
+> +\end{lstlisting}
+> +
+> +The device and the driver use \field{virtio_video_control_val_level}
+> +for VIRTIO_VIDEO_CMD_GET_CONTROL and VIRTIO_VIDEO_CMD_SET_CONTROL.
+> +\begin{lstlisting}
+> +struct virtio_video_control_val_level {
+> +        le32 level;
+> +        u8 padding[4];
+> +};
+> +\end{lstlisting}
+> +\end{description}
+> +
+> +\subsubsection{Buffer lifecycle}
+> +\label{sec:Device Types / Video Device / Device Operation / Buffer
+> +  lifecycle}
+> +
+> +The state machine in Figure~\ref{fig:buffer-lifecycle} shows the life
+> +cycle of a video buffer.
+> +
+> +\begin{figure}[h]
+> +  \centering
+> +  \includegraphics[width=\textwidth]{images/generated/video-buffer-lifecycle.png}
+> +  \caption{Lifecycle of a buffer}
+> +  \label{fig:buffer-lifecycle}
+> +\end{figure}
+> +
+> +\drivernormative{\subparagraph}{Buffer lifecycle}{Device Types / Video
+> +  Device / Device Operation / Device Operation: Buffer lifecycle}
+> +
+> +The following table shows whether the driver can read or write each
+> +buffer in each state in Figure~\ref{fig:buffer-lifecycle}. The driver
+> +MUST not read or write buffers in the state that doesn't permit.
+> +\begin{center}
+> +  \begin{tabular}{|c|c|c|}
+> +    \hline
+> +    State & Input buffers & Output buffers \\
+> +    \hline
+> +    Created  & Read / Write & Read \\
+> +    Queued   & -            & -    \\
+> +    Dequeued & Read / Write & Read \\
+> +    \hline
+> +  \end{tabular}
+> +\end{center}
+> +
+> +\devicenormative{\subparagraph}{Buffer lifecycle}{Device Types / Video
+> +  Device / Device Operation / Device Operation: Buffer lifecycle}
+> +
+> +The following table shows whether the device can read or write each
+> +buffer in each state in Figure~\ref{fig:buffer-lifecycle}. The device
+> +MUST not read or write buffers in the state that doesn't permit.
+> +\begin{center}
+> +  \begin{tabular}{ |c|c|c| }
+> +    \hline
+> +    State & Input buffers & Output buffers \\
+> +    \hline
+> +    Created  & -    & - \\
+> +    Queued   & Read & Read / Write \\
+> +    Dequeued & -    & Read \\
+> +    \hline
+> +  \end{tabular}
+> +\end{center}
+> +
+> +\subsubsection{Event Virtqueue}
+> +
+> +While processing buffers, the device can send asynchronous event
+> +notifications to the driver. The behaviour depends on the exact
+> +stream. For example, the decoder device sends a resolution change
+> +event when it encounters new resolution metadata in the stream.
+> +
+> +The device can report events on the event queue. The driver initially
+> +populates the queue with device-writeable buffers. When the device
+> +needs to report an event, it fills a buffer and notifies the driver.
+> +The driver consumes the report and adds a new buffer to the virtqueue.
+> +
+> +\begin{lstlisting}
+> +enum virtio_video_event_type {
+> +        /* For all devices */
+> +        VIRTIO_VIDEO_EVENT_ERROR = 0x0100,
+> +
+> +        /* For decoder only */
+> +        VIRTIO_VIDEO_EVENT_DECODER_RESOLUTION_CHANGED = 0x0200,
+> +};
+> +
+> +struct virtio_video_event {
+> +        le32 event_type; /* One of VIRTIO_VIDEO_EVENT_* types */
+> +        le32 stream_id;
+> +};
+> +\end{lstlisting}
+> +
+> +\begin{description}
+> +\item[\field{event_type}] type of the triggered event .
+> +\item[\field{stream_id}] id of the source stream.
+> +\end{description}
+> +
+> +The device MUST send VIRTIO_VIDEO_EVENT_DECODER_RESOLUTION_CHANGED
+> +whenever it encounters new resolution data in the stream. This
+> +includes the case of the initial device configuration after metadata
+> +has been parsed and the case of dynamic resolution change.
+> --
+> 2.25.0.341.g760bfbb309-goog
+>
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
