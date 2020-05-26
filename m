@@ -1,60 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F7DD1E07A8
-	for <lists+spice-devel@lfdr.de>; Mon, 25 May 2020 09:19:36 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B7101E2371
+	for <lists+spice-devel@lfdr.de>; Tue, 26 May 2020 15:55:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C8B7B89C16;
-	Mon, 25 May 2020 07:19:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8E3EA6E1D7;
+	Tue, 26 May 2020 13:55:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8E97C89C16
- for <spice-devel@lists.freedesktop.org>; Mon, 25 May 2020 07:19:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590391171;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SWipd8uJolrow48rIBOQ2JEkV1zBKjc8jlB7z6uRsj8=;
- b=TykxWPDM6IykADPu9iHXG+26vLXumAdsCXnKdZfNgPDh1xM8eZdPhqluGaeLBOHKq1jr+K
- JHG3xDXOqR0k/cXCAnCPX3PTagq2MFoYpZkHZR4T0gbc7rRVhA+zeoZFRVzaaSx+HOWRi2
- Yr9XQ1hK4uFq5VmQXQUL1n+yJbfKx/g=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-108-T4faX0e1OAK9Mid5vxWnNA-1; Mon, 25 May 2020 03:19:30 -0400
-X-MC-Unique: T4faX0e1OAK9Mid5vxWnNA-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 222EB80183C;
- Mon, 25 May 2020 07:19:29 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 1C1876EDAF;
- Mon, 25 May 2020 07:19:27 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 4756354D1E;
- Mon, 25 May 2020 07:19:26 +0000 (UTC)
-Date: Mon, 25 May 2020 03:19:24 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: =?utf-8?B?0JjQu9GM0Y8=?= <iliya@i-terezie.ru>
-Message-ID: <1317899397.28040740.1590391164979.JavaMail.zimbra@redhat.com>
-In-Reply-To: <5f8d4665157ae5fc7b8e2c27f5d81b14@i-terezie.ru>
-References: <5f8d4665157ae5fc7b8e2c27f5d81b14@i-terezie.ru>
+Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 21CBB6E1D7
+ for <spice-devel@lists.freedesktop.org>; Tue, 26 May 2020 13:55:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codeweavers.com; s=6377696661; h=Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Date:Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=qYqqUrnrTxydlMOZWIdHIT7iNYOMsZxB17ohM6Lve8s=; b=Dq4bv3p0KYJ+almadJVwqbjfRw
+ kVRkz0+T9H8HaiZ6yeA0UKEP0JqM7/oSSQE+S+lzpCw4PGyiWQuGmAZqPqX+1TOCSh2FYGCAM5Mws
+ dxn4BNjVCWC/LWCXGhWNKm5DyQW0qAfW4UzRGxBP2iaumBR86AzhNSaJP7QE2lWCBmnw=;
+Received: from jwhite.vpn.codeweavers.com ([10.69.141.101] helo=[10.0.0.11])
+ by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.89) (envelope-from <jwhite@codeweavers.com>)
+ id 1jda3X-0001kL-P4
+ for spice-devel@lists.freedesktop.org; Tue, 26 May 2020 08:55:49 -0500
+To: spice-devel@lists.freedesktop.org
+From: Jeremy White <jwhite@codeweavers.com>
+Message-ID: <9de80072-fffc-9155-d2dc-9aab7ad73745@codeweavers.com>
+Date: Tue, 26 May 2020 08:55:46 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.3, 10.4.195.1]
-Thread-Topic: Work via slow networks
-Thread-Index: 1dWp0xBtPko8Oh8XPmLSQ2HYSu6zKA==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] Work via slow networks
+Content-Language: en-US
+X-Spam-Score: -26.2
+X-Spam-Report: Spam detection software,
+ running on the system "mail.codeweavers.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview:  Hi all, I'm trying to get x11spice and spice-html5, at least
+ as packaged for Fedora, into a pretty much 'turn key' state. I've got 3 use
+ cases. The first is user A sharing their current desktop, either for themselves,
+ or to get help. That case is largely done, imho, modulo some documentation
+ and perhaps some streamlining [...] 
+ Content analysis details:   (-26.2 points, 5.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -20 USER_IN_WHITELIST      From: address is in the user's white-list
+ -6.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+ -0.5 BAYES_00               BODY: Bayes spam probability is 0 to 1%
+ [score: 0.0000]
+ 0.3 AWL AWL: Adjusted score from AWL reputation of From: address
+Subject: [Spice-devel] Brainstorming help with x11spice on socket
+ permissions across users
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,33 +67,44 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> 
-> I have a problem with slow rendering of a changing desktop via a slow
-> network. SPICE tries to render all the states of the screen
-> sequentially, instead of immediately drawing the final state.
-> 
-> What settings can you remove this behavior?
+Hi all,
 
-Hi,
-  I'm not sure, unfortunately, there's a way to entirely remove this behavior,
-at least with current optimizations.
-Can you describe better your case?
-What's slow mean, I mean, speed? 10Mbit? Less? More?
-Do you know the latency of the connection?
-What type (mobile/wifi/cabled/lan/wan) ?
-Which kind of guest (OS/configuration/use case) are you using?
-In the subject you state a "slow network" in the message you speak
-about "slow rendering", that's quite different from the way I see it,
-what specific issues are you noting?
+I'm trying to get x11spice and spice-html5, at least as packaged for 
+Fedora, into a pretty much 'turn key' state.
 
-Frediano
+I've got 3 use cases.  The first is user A sharing their current 
+desktop, either for themselves, or to get help.  That case is largely 
+done, imho, modulo some documentation and perhaps some streamlining. 
+The second is user A getting access to a new session for themselves.  I 
+don't feel blocked on this case; the work should be straight forward, if 
+fiddly (I may regret those words; doing a secure 'su' like function out 
+of apache may be harder than I think).
 
+The 3rd case, however, has me troubled.  This is the case that user A 
+(potentially apache) starts x11spice which then does an xdmcp request to 
+gdm, and eventually supports a log in by user B.  This makes it 
+challenging to provide a way for user B to launch a spice agent or a 
+pulseaudio daemon and have it securely connect back to the spice process 
+started by user A.  The approach I've used in the past is to have a 
+privileged binary use information from an X atom to adjust socket 
+permissions.  But that feels unsatisfying, and it seems to me that this 
+is an area with a lot of modern thinking that I've largely missed.
+
+As an added complexity, in the ideal case, you have a vdagent running as 
+user A during the login process, which knows to reap itself and give way 
+to a vdagent launched by user B.
+
+I was hoping that others would have modern instincts on how to more 
+correctly implement the third use case.  Clue bats or other ideas welcome.
+
+Cheers,
+
+Jeremy
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
