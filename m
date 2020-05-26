@@ -2,59 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46C4D1E25D6
-	for <lists+spice-devel@lfdr.de>; Tue, 26 May 2020 17:44:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 727551E2692
+	for <lists+spice-devel@lfdr.de>; Tue, 26 May 2020 18:11:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB0FD6E20C;
-	Tue, 26 May 2020 15:44:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EEAE56E21B;
+	Tue, 26 May 2020 16:11:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5EA6D6E20C
- for <spice-devel@lists.freedesktop.org>; Tue, 26 May 2020 15:44:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590507858;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=KKRPqNYtoRAoOJ4Hq6BOgppLMdK64zyz9Acd2zmrfXw=;
- b=fOy3rXcNXdFgtHQInfNclOYbPFzgAmx8JyGAe8OYxsb9IHUZa8BwxIeGaJVr92FP9WqAzB
- m5OsIEWOwYFa2/QyYLepkEM6vT0mNCn+CjMUQzQb2bgEBpqR5t7IP/Luq60L110EDVBiv3
- F4uh48+HwXu3I4bXFXRjiFKQZ8G6X7o=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-186-bln20cUSN8yVEZ5qf73i0Q-1; Tue, 26 May 2020 11:44:10 -0400
-X-MC-Unique: bln20cUSN8yVEZ5qf73i0Q-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DEFB8107ACCA;
- Tue, 26 May 2020 15:44:09 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id D8D5D6FB85;
- Tue, 26 May 2020 15:44:09 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id B0AED1809541;
- Tue, 26 May 2020 15:44:09 +0000 (UTC)
-Date: Tue, 26 May 2020 11:44:09 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Jeremy White <jwhite@codeweavers.com>
-Message-ID: <80043775.28156178.1590507849418.JavaMail.zimbra@redhat.com>
-In-Reply-To: <9de80072-fffc-9155-d2dc-9aab7ad73745@codeweavers.com>
+Received: from mail.codeweavers.com (mail.codeweavers.com [50.203.203.244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F22DF6E21B
+ for <spice-devel@lists.freedesktop.org>; Tue, 26 May 2020 16:11:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codeweavers.com; s=6377696661; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=+xe85gD/cSSrRTL0xu4nkMCNTHCNIwcFH94Di2QcQko=; b=v5Wm9pn5v5F9JLhJ0uVhLKEOhz
+ DPk1qFKj1n+Ty+b5KWfIE+nmlQ3YnxOabC/4bLQel9+o85kt7xPTLEpLrgg+22gDvuoSjWn1E8oXn
+ HPtRfvJQ4j/wKDQiDOI6jM2dOIv1Ekz2sl+KCOtpRlDHLr6klAUB3MtCLqtVrd42HHtM=;
+Received: from jwhite.vpn.codeweavers.com ([10.69.141.101] helo=[10.0.0.11])
+ by mail.codeweavers.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.89) (envelope-from <jwhite@codeweavers.com>)
+ id 1jdcAw-00046M-Rx; Tue, 26 May 2020 11:11:37 -0500
+To: =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@gmail.com>
 References: <9de80072-fffc-9155-d2dc-9aab7ad73745@codeweavers.com>
+ <CAJ+F1C+GjG_jawa1y=KReZfBvf0j40Jxs3MhMCQ5Dj0nx6r7xA@mail.gmail.com>
+From: Jeremy White <jwhite@codeweavers.com>
+Message-ID: <a251a7b4-80f3-dcbd-a11b-a16c0f91694b@codeweavers.com>
+Date: Tue, 26 May 2020 11:11:33 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.3, 10.4.195.11]
-Thread-Topic: Brainstorming help with x11spice on socket permissions across
- users
-Thread-Index: 7unkMBhZJphceiG/pKCwXmBpDb2yWw==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+In-Reply-To: <CAJ+F1C+GjG_jawa1y=KReZfBvf0j40Jxs3MhMCQ5Dj0nx6r7xA@mail.gmail.com>
+Content-Language: en-US
+X-Spam-Score: -26.3
+X-Spam-Report: Spam detection software,
+ running on the system "mail.codeweavers.com", 
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ Content preview: > > I didn't know you could do that. I suppose the solution
+ is X11 only? It > would be nice to have gnome-remote-desktop integration.
+ Though GNOME > seems more interested to support RDP these days (ha [...] 
+ Content analysis details:   (-26.3 points, 5.0 required)
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -20 USER_IN_WHITELIST      From: address is in the user's white-list
+ -6.0 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+ -0.5 BAYES_00               BODY: Bayes spam probability is 0 to 1%
+ [score: 0.0000]
+ 0.2 AWL AWL: Adjusted score from AWL reputation of From: address
 Subject: Re: [Spice-devel] Brainstorming help with x11spice on socket
  permissions across users
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -68,66 +67,55 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-I suppose you are talking about the unix socket for vdagent, right?
-
-> 
-> Hi all,
-> 
-> I'm trying to get x11spice and spice-html5, at least as packaged for
-> Fedora, into a pretty much 'turn key' state.
-> 
-> I've got 3 use cases.  The first is user A sharing their current
-> desktop, either for themselves, or to get help.  That case is largely
-> done, imho, modulo some documentation and perhaps some streamlining.
-> The second is user A getting access to a new session for themselves.  I
-> don't feel blocked on this case; the work should be straight forward, if
-> fiddly (I may regret those words; doing a secure 'su' like function out
-> of apache may be harder than I think).
-> 
-
-I would check for the 2nd case if the session is maintained in case you
-are using SystemD. I suppose the user could want to launch a background
-X11 session and disconnect from the system.
-
-> The 3rd case, however, has me troubled.  This is the case that user A
-> (potentially apache) starts x11spice which then does an xdmcp request to
-> gdm, and eventually supports a log in by user B.  This makes it
-> challenging to provide a way for user B to launch a spice agent or a
-> pulseaudio daemon and have it securely connect back to the spice process
-> started by user A.  The approach I've used in the past is to have a
-> privileged binary use information from an X atom to adjust socket
-> permissions.  But that feels unsatisfying, and it seems to me that this
-> is an area with a lot of modern thinking that I've largely missed.
-> 
-
-As far as I know in the normal (physical) case in case of XDMCP two X11
-sessions are involved and X11 client have to reconnect to another session.
-So for symmetry you should reconnect the client and have separate socket
-for vdagent. Sockets are associated (permission) to different users and
-processes are associated to same user.
-
-> As an added complexity, in the ideal case, you have a vdagent running as
-> user A during the login process, which knows to reap itself and give way
-> to a vdagent launched by user B.
-> 
-> I was hoping that others would have modern instincts on how to more
-> correctly implement the third use case.  Clue bats or other ideas welcome.
-> 
-> Cheers,
-> 
-> Jeremy
-
-To be honest I don't remember last time I used XDMCP.
-
-Frediano
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+PiAKPiBJIGRpZG4ndCBrbm93IHlvdSBjb3VsZCBkbyB0aGF0LiBJIHN1cHBvc2UgdGhlIHNvbHV0
+aW9uIGlzIFgxMSBvbmx5PyBJdCAKPiB3b3VsZCBiZSBuaWNlIHRvIGhhdmUgZ25vbWUtcmVtb3Rl
+LWRlc2t0b3AgaW50ZWdyYXRpb24uIFRob3VnaCBHTk9NRSAKPiBzZWVtcyBtb3JlIGludGVyZXN0
+ZWQgdG8gc3VwcG9ydCBSRFAgdGhlc2UgZGF5cyAoaGF2aW5nIGEgZ2xpYi9nb2JqZWN0IAo+IHNl
+cnZlciBsaWJyYXJ5IHdvdWxkIGNlcnRhaW5seSBoZWxwIHRoZW0gdG8gY29uc2lkZXIgU3BpY2Us
+ICpoaW50KiA7KQoKWWVzLCBhbHRob3VnaCBJJ20gbm90IHN1cmUgV2F5bGFuZCBzdXBwb3J0IHdv
+dWxkIGJlIGhhcmQuCgo+IAo+ICAgICBUaGUgc2Vjb25kIGlzIHVzZXIgQSBnZXR0aW5nIGFjY2Vz
+cyB0byBhIG5ldyBzZXNzaW9uIGZvciB0aGVtc2VsdmVzLsKgIEkKPiAgICAgZG9uJ3QgZmVlbCBi
+bG9ja2VkIG9uIHRoaXMgY2FzZTsgdGhlIHdvcmsgc2hvdWxkIGJlIHN0cmFpZ2h0Cj4gICAgIGZv
+cndhcmQsIGlmCj4gICAgIGZpZGRseSAoSSBtYXkgcmVncmV0IHRob3NlIHdvcmRzOyBkb2luZyBh
+IHNlY3VyZSAnc3UnIGxpa2UgZnVuY3Rpb24gb3V0Cj4gICAgIG9mIGFwYWNoZSBtYXkgYmUgaGFy
+ZGVyIHRoYW4gSSB0aGluaykuCj4gCj4gCj4gTXVsdGlwbGUgdXNlciBzZXNzaW9uIGlzIHRyaWNr
+eS4gQWZhaWssIHRoaXMgaXMgbW9zdGx5IHVzZWQgZm9yIGRlc2t0b3AgCj4gZGV2ZWxvcG1lbnQu
+IFRoZSBpbnN0cnVjdGlvbnMgdG8gc2V0dXAgc3VjaCBlbnZpcm9ubW5lbnQgY2hhbmdlIG92ZXIg
+Cj4gdGltZSBhbmQgZGVza3RvcC4gRGlkIEkgbWlzcyBzb21ldGhpbmc/IFdoYXQncyB0aGUgdXNl
+IGNhc2U/CgpUaGUgdXNlIGNhc2UgaXMgSSd2ZSBnb3QgYSBzZXJ2ZXIgSSdkIGxpa2UgdG8gZ2V0
+IGFjY2VzcyB0by4gIEkgaGl0IGEgCndlYiBwYWdlLCBwcm92aWRlIG15IGNyZWRlbnRpYWxzLCBh
+bmQgSSBoYXZlIGEgZnVsbCBsb2dpbiBzZXNzaW9uLiAKVXNpbmcgeGRtY3AvZ2RtIGhhcyB0aGUg
+dmlydHVlIG9mIGdvaW5nIHRocm91Z2ggJ3N0YW5kYXJkJyBjaGFubmVscy4KCj4gCj4gCj4gICAg
+IFRoZSAzcmQgY2FzZSwgaG93ZXZlciwgaGFzIG1lIHRyb3VibGVkLsKgIFRoaXMgaXMgdGhlIGNh
+c2UgdGhhdCB1c2VyIEEKPiAgICAgKHBvdGVudGlhbGx5IGFwYWNoZSkgc3RhcnRzIHgxMXNwaWNl
+IHdoaWNoIHRoZW4gZG9lcyBhbiB4ZG1jcAo+ICAgICByZXF1ZXN0IHRvCj4gICAgIGdkbSwgYW5k
+IGV2ZW50dWFsbHkgc3VwcG9ydHMgYSBsb2cgaW4gYnkgdXNlciBCLsKgIFRoaXMgbWFrZXMgaXQK
+PiAgICAgY2hhbGxlbmdpbmcgdG8gcHJvdmlkZSBhIHdheSBmb3IgdXNlciBCIHRvIGxhdW5jaCBh
+IHNwaWNlIGFnZW50IG9yIGEKPiAgICAgcHVsc2VhdWRpbyBkYWVtb24gYW5kIGhhdmUgaXQgc2Vj
+dXJlbHkgY29ubmVjdCBiYWNrIHRvIHRoZSBzcGljZQo+ICAgICBwcm9jZXNzCj4gICAgIHN0YXJ0
+ZWQgYnkgdXNlciBBLsKgIFRoZSBhcHByb2FjaCBJJ3ZlIHVzZWQgaW4gdGhlIHBhc3QgaXMgdG8g
+aGF2ZSBhCj4gICAgIHByaXZpbGVnZWQgYmluYXJ5IHVzZSBpbmZvcm1hdGlvbiBmcm9tIGFuIFgg
+YXRvbSB0byBhZGp1c3Qgc29ja2V0Cj4gICAgIHBlcm1pc3Npb25zLsKgIEJ1dCB0aGF0IGZlZWxz
+IHVuc2F0aXNmeWluZywgYW5kIGl0IHNlZW1zIHRvIG1lIHRoYXQgdGhpcwo+ICAgICBpcyBhbiBh
+cmVhIHdpdGggYSBsb3Qgb2YgbW9kZXJuIHRoaW5raW5nIHRoYXQgSSd2ZSBsYXJnZWx5IG1pc3Nl
+ZC4KPiAKPiAgICAgQXMgYW4gYWRkZWQgY29tcGxleGl0eSwgaW4gdGhlIGlkZWFsIGNhc2UsIHlv
+dSBoYXZlIGEgdmRhZ2VudAo+ICAgICBydW5uaW5nIGFzCj4gICAgIHVzZXIgQSBkdXJpbmcgdGhl
+IGxvZ2luIHByb2Nlc3MsIHdoaWNoIGtub3dzIHRvIHJlYXAgaXRzZWxmIGFuZCBnaXZlCj4gICAg
+IHdheQo+ICAgICB0byBhIHZkYWdlbnQgbGF1bmNoZWQgYnkgdXNlciBCLgo+IAo+ICAgICBJIHdh
+cyBob3BpbmcgdGhhdCBvdGhlcnMgd291bGQgaGF2ZSBtb2Rlcm4gaW5zdGluY3RzIG9uIGhvdyB0
+byBtb3JlCj4gICAgIGNvcnJlY3RseSBpbXBsZW1lbnQgdGhlIHRoaXJkIHVzZSBjYXNlLsKgIENs
+dWUgYmF0cyBvciBvdGhlciBpZGVhcwo+ICAgICB3ZWxjb21lLgo+IAo+IAo+IFRoaXMgaXMgc3lz
+dGVtZC9kZXNrdG9wIHRlcnJpdG9yaWVzLCBhbmQgSSBkb24ndCBrbm93IHdoYXQgd291bGQgYmUg
+dGhlIAo+IGJlc3Qgd2F5IHRvIGRvIGFsbCB0aGF0LiBJIHdvdWxkIHN1Z2dlc3QgeW91IGFzayB0
+aGUgCj4gZ25vbWUtcmVtb3RlLWRlc2t0b3AgJiBzeXN0ZW1kL2xvZ2luZCBkZXZlbG9wcGVycywg
+b3Igb3RoZXIgZGVza3RvcCAKPiBkZXZlbG9wcGVycyBob3cgdGhleSBwbGFuIG9yIG5vdCB0byBz
+b2x2ZSBpdC4KCkNoZWNrLCB0aGFua3MuCgpDaGVlcnMsCgpKZXJlbXkKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0
+ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNr
+dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
