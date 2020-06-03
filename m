@@ -1,48 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 118A11EBE7D
-	for <lists+spice-devel@lfdr.de>; Tue,  2 Jun 2020 16:54:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8445E1ECC11
+	for <lists+spice-devel@lfdr.de>; Wed,  3 Jun 2020 10:59:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF2D16E3FE;
-	Tue,  2 Jun 2020 14:54:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BC5C789CDF;
+	Wed,  3 Jun 2020 08:59:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from forward501o.mail.yandex.net (forward501o.mail.yandex.net
- [IPv6:2a02:6b8:0:1a2d::611])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D89D36E3FE
- for <spice-devel@lists.freedesktop.org>; Tue,  2 Jun 2020 14:54:33 +0000 (UTC)
-Received: from mxback14j.mail.yandex.net (mxback14j.mail.yandex.net
- [IPv6:2a02:6b8:0:1619::90])
- by forward501o.mail.yandex.net (Yandex) with ESMTP id E7D7A1E80BE6;
- Tue,  2 Jun 2020 17:54:25 +0300 (MSK)
-Received: from localhost (localhost [::1])
- by mxback14j.mail.yandex.net (mxback/Yandex) with ESMTP id oPB1NyWt3Z-sPLqJl7Q;
- Tue, 02 Jun 2020 17:54:25 +0300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
- t=1591109665; bh=fseGmhKUnLOzbVWq+J/CnNt6SapMBgEbIdfXaDoQ/LQ=;
- h=Message-Id:Cc:Subject:In-Reply-To:Date:References:To:From;
- b=vpWoU43XprjRQlV3Viyik0Fz03SdNqmSlftonjSWka/pvcoN6TTOmCPzjdnios825
- pPOZH8AdkFlM7Haqb1cGS2ESHT70NheqcVoGwg4Uck+hOeHzbB8MjXertPoG4n0Q7f
- v2vDgHjIEaZJ6J2fITU3xEoFMuD48lEYxwWKgiW8=
-Authentication-Results: mxback14j.mail.yandex.net;
- dkim=pass header.i=@yandex.ru
-Received: by sas8-f59b61ed75ea.qloud-c.yandex.net with HTTP;
- Tue, 02 Jun 2020 17:54:25 +0300
-From: ole-krutov@yandex.ru
-To: "uril@redhat.com" <uril@redhat.com>, Frediano Ziglio <fziglio@redhat.com>
-In-Reply-To: <599d5340-6b36-36c3-7a4c-875ca16e3b0d@redhat.com>
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1C04F89CDF
+ for <spice-devel@lists.freedesktop.org>; Wed,  3 Jun 2020 08:59:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1591174783;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=6IWPNTwiPD4H3YZQy+35M2Qx6HaXhUXQ7sKUFwvMeMI=;
+ b=CwXOorlXmrejjpRQoTgtpEPu+ybZAjQpD6Tcwi1URAGMHTDDffkM/i3u6CSm02WKojaMk6
+ +U796mUvMEZLW3576bxiaYJ1QhI1kHfAWlxH92vPgfbd0RL3Zh+WUjbofC6/pxbhu7oqwS
+ VLjrPLlH3OrpCWAh7L/YOkj+KG1I78o=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-421-b8Q9Ad3QPBmaOdZ9lv5O1Q-1; Wed, 03 Jun 2020 04:59:33 -0400
+X-MC-Unique: b8Q9Ad3QPBmaOdZ9lv5O1Q-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B26C6461;
+ Wed,  3 Jun 2020 08:59:32 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AB2D15D9CD;
+ Wed,  3 Jun 2020 08:59:32 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id A1E611809542;
+ Wed,  3 Jun 2020 08:59:32 +0000 (UTC)
+Date: Wed, 3 Jun 2020 04:59:31 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: ole-krutov@yandex.ru
+Message-ID: <1580811552.28905463.1591174771374.JavaMail.zimbra@redhat.com>
+In-Reply-To: <130131591108845@mail.yandex.ru>
 References: <2062121591020278@mail.yandex.ru>
  <191822355.28679337.1591021618597.JavaMail.zimbra@redhat.com>
  <1516151591025233@mail.yandex.ru>
  <c663aa55-9b44-6211-6898-e4930b8dae24@redhat.com>
  <118741591105408@mail.yandex.ru>
  <599d5340-6b36-36c3-7a4c-875ca16e3b0d@redhat.com>
+ <130131591108845@mail.yandex.ru>
 MIME-Version: 1.0
-X-Mailer: Yamail [ http://yandex.ru ] 5.0
-Date: Tue, 02 Jun 2020 17:54:25 +0300
-Message-Id: <130131591108845@mail.yandex.ru>
+X-Originating-IP: [10.33.32.3, 10.4.195.11]
+Thread-Topic: No mouse under Win 10 when Nvidia drivers are active
+Thread-Index: htPSIFMbZ+3oleMlCWaITtOK4H0BYA==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Subject: Re: [Spice-devel] No mouse under Win 10 when Nvidia drivers are
  active
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -56,109 +72,416 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============0225002730=="
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1669707529=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0225002730==
-Content-Transfer-Encoding: base64
+--===============1669707529==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_28905462_2122789709.1591174771373"
+
+------=_Part_28905462_2122789709.1591174771373
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Hi, 
+I think the mouse issue are similar to https://gitlab.freedesktop.org/spice/win32/vd_agent/-/issues/13 and 
+https://gitlab.freedesktop.org/spice/win32/vd_agent/-/issues/8 . 
+In other word for some combination of displays the agent is not able to handle mouse events 
+causing the events to get discarded. The solution would be for the agent to either handle all 
+cases or being able to tell the server that is not capable to handle the mouse allowing 
+the server to fall back to server mouse. 
+
+I think you can see the display using the "console vnc" feature that allows Qemu 
+to use spice to send "frames". 
+
+Ole, what's your configuration for the guest/host or the mediated device? 
+Software installed on the host? 
+Type of Nvidia card/setup? 
+
+Thanks, 
+Frediano 
+
+> Well, I just create a VM with a mediated device, run it, set up Nvidia
+> drivers, and after VM reboot its window can be shown with remote-viewer.
+> When display is set to "none", just nvidia window appears, when QXL display
+> is set, two windows appear.
+
+> 02.06.2020, 17:30, "Uri Lublin" <uril@redhat.com>:
+
+> > On 6/2/20 4:50 PM, ole-krutov@yandex.ru wrote:
+> 
+
+> > > Hi,
+> > 
+> 
+> > > No, I do not use spice-streaming-agent with windows VM at all.
+> > 
+> 
+
+> > How do you see the NVIDIA window on the client ?
+> 
+
+> > > 01.06.2020, 22:24, "Uri Lublin" < uril@redhat.com >:
+> > 
+> 
+
+> > > On 6/1/20 6:59 PM, ole-krutov@yandex.ru
+> > 
+> 
+> > > <mailto: ole-krutov@yandex.ru > wrote:
+> > 
+> 
+
+> > > Now I have tried different combinations of vd-agent state and
+> > 
+> 
+> > > mouse
+> > 
+> 
+> > > cursor type. In no case mouse cursor was visible on nvidia display
+> > 
+> 
+> > > window. With dual display, qxl+nvidia, stopping vd-agent made
+> > 
+> 
+> > > cursor
+> > 
+> 
+> > > visible on qxl window. Reaction to mouse events was seen on nvidia
+> > 
+> 
+> > > window too, but with invisible mouse cursor.
+> > 
+> 
+
+> > > Hi,
+> > 
+> 
+
+> > > I assume you have your own spice-streaming-agent plugin.
+> > 
+> 
+
+> > > Does it support the display_info interface ?
+> > 
+> 
+
+> > > Uri
+> > 
+> 
+
+> > > 01.06.2020, 17:27, "Frediano Ziglio" < fziglio@redhat.com
+> > 
+> 
+> > > <mailto: fziglio@redhat.com >>:
+> > 
+> 
+
+> > > Hi all,
+> > 
+> 
+> > > when just qxl adapter is attached to VM all works
+> > 
+> 
+> > > well. But
+> > 
+> 
+> > > when Nvidia GRID
+> > 
+> 
+> > > instance is attached and its drivers are running,
+> > 
+> 
+> > > mouse cursor
+> > 
+> 
+> > > is never
+> > 
+> 
+> > > shown on its display window. Sometimes it's just
+> > 
+> 
+> > > invisible but
+> > 
+> 
+> > > active and
+> > 
+> 
+> > > reacting to mouse movements, clicks and wheel scrolling,
+> > 
+> 
+> > > sometimes it's
+> > 
+> 
+> > > totally missing. This behaviour is a bit dependent of is
+> > 
+> 
+> > > Nvidia adapter
+> > 
+> 
+> > > alone or together with qxl. Just sometimes mouse
+> > 
+> 
+> > > cursor is
+> > 
+> 
+> > > visible on qxl
+> > 
+> 
+> > > display but it's very unstable and totally unusable.
+> > 
+> 
+> > > Similar
+> > 
+> 
+> > > behaviour is
+> > 
+> 
+> > > under linux VM too. Is it normal "won't fix" state,
+> > 
+> 
+> > > or can I
+> > 
+> 
+> > > provide some
+> > 
+> 
+> > > additional info? Windows has latest vd-agent and
+> > 
+> 
+> > > spice-agent
+> > 
+> 
+> > > installed.
+> > 
+> 
+
+> > > Hi,
+> > 
+> 
+> > > recently we got similar reports. Can you try to see
+> > 
+> 
+> > > what's happen if
+> > 
+> 
+> > > you disable the agent?
+> > 
+> 
+
+> > > It seems that in these conditions the agent is not able to
+> > 
+> 
+> > > handle
+> > 
+> 
+> > > the mouse
+> > 
+> 
+> > > so mouse events are "lost".
+> > 
+> 
+
+> > > Another test would you could do is to use the "spicy"
+> > 
+> 
+> > > utility. This
+> > 
+> 
+> > > utility
+> > 
+> 
+> > > has an option to switch manually the mouse mode
+> > 
+> 
+> > > (server/client). It
+> > 
+> 
+> > > would be
+> > 
+> 
+> > > helpful to understand different behaviour using the 2 modes.
+> > 
+> 
+
+> > > Frediano
+> > 
+> 
+
+> > > _______________________________________________
+> > 
+> 
+> > > Spice-devel mailing list
+> > 
+> 
+> > > Spice-devel@lists.freedesktop.org
+> > 
+> 
+> > > <mailto: Spice-devel@lists.freedesktop.org >
+> > 
+> 
+> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> > 
+> 
+
+------=_Part_28905462_2122789709.1591174771373
 Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-PGRpdj5XZWxsLCBJIGp1c3QgY3JlYXRlIGEgVk0gd2l0aCBhIG1lZGlhdGVkIGRldmljZSwgcnVu
-IGl0LCBzZXQgdXAgTnZpZGlhIGRyaXZlcnMsIGFuZCBhZnRlciBWTSByZWJvb3QgaXRzIHdpbmRv
-dyBjYW4gYmUgc2hvd24gd2l0aCByZW1vdGUtdmlld2VyLiBXaGVuIGRpc3BsYXkgaXMgc2V0IHRv
-ICJub25lIiwganVzdCBudmlkaWEgd2luZG93IGFwcGVhcnMsIHdoZW4gUVhMIGRpc3BsYXkgaXMg
-c2V0LCB0d28gd2luZG93cyBhcHBlYXIuPC9kaXY+PGRpdj48YnIgLz48L2Rpdj48ZGl2PjxiciAv
-PjwvZGl2PjxkaXY+MDIuMDYuMjAyMCwgMTc6MzAsICJVcmkgTHVibGluIiAmbHQ7dXJpbEByZWRo
-YXQuY29tJmd0Ozo8L2Rpdj48YmxvY2txdW90ZT48cD5PbiA2LzIvMjAgNDo1MCBQTSwgPGEgaHJl
-Zj0ibWFpbHRvOm9sZS1rcnV0b3ZAeWFuZGV4LnJ1Ij5vbGUta3J1dG92QHlhbmRleC5ydTwvYT4g
-d3JvdGU6PGJyIC8+PC9wPjxibG9ja3F1b3RlIGNsYXNzPSIyMTBlN2E4NDhlOGZjYjQ1d21pLXF1
-b3RlIj7CoEhpLDxiciAvPsKgTm8sIEkgZG8gbm90IHVzZSBzcGljZS1zdHJlYW1pbmctYWdlbnQg
-d2l0aCB3aW5kb3dzIFZNIGF0IGFsbC48YnIgLz48L2Jsb2NrcXVvdGU+PHA+PGJyIC8+SG93IGRv
-IHlvdSBzZWUgdGhlIE5WSURJQSB3aW5kb3cgb24gdGhlIGNsaWVudCA/PGJyIC8+PGJyIC8+PGJy
-IC8+PC9wPjxibG9ja3F1b3RlIGNsYXNzPSIyMTBlN2E4NDhlOGZjYjQ1d21pLXF1b3RlIj7CoDAx
-LjA2LjIwMjAsIDIyOjI0LCAiVXJpIEx1YmxpbiIgJmx0OzxhIGhyZWY9Im1haWx0bzp1cmlsQHJl
-ZGhhdC5jb20iPnVyaWxAcmVkaGF0LmNvbTwvYT4mZ3Q7OjxiciAvPjxiciAvPsKgwqDCoMKgwqBP
-biA2LzEvMjAgNjo1OSBQTSwgPGEgaHJlZj0ibWFpbHRvOm9sZS1rcnV0b3ZAeWFuZGV4LnJ1Ij5v
-bGUta3J1dG92QHlhbmRleC5ydTwvYT48YnIgLz7CoMKgwqDCoMKgJmx0O21haWx0bzo8YSBocmVm
-PSJtYWlsdG86b2xlLWtydXRvdkB5YW5kZXgucnUiPm9sZS1rcnV0b3ZAeWFuZGV4LnJ1PC9hPiZn
-dDsgd3JvdGU6PGJyIC8+PGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoE5vdyBJIGhhdmUgdHJp
-ZWQgZGlmZmVyZW50IGNvbWJpbmF0aW9ucyBvZiB2ZC1hZ2VudCBzdGF0ZSBhbmQ8YnIgLz7CoMKg
-wqDCoMKgwqDCoMKgwqBtb3VzZTxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjdXJzb3IgdHlw
-ZS4gSW4gbm8gY2FzZSBtb3VzZSBjdXJzb3Igd2FzIHZpc2libGUgb24gbnZpZGlhIGRpc3BsYXk8
-YnIgLz7CoMKgwqDCoMKgwqDCoMKgwqDCoMKgd2luZG93LiBXaXRoIGR1YWwgZGlzcGxheSwgcXhs
-K252aWRpYSwgc3RvcHBpbmcgdmQtYWdlbnQgbWFkZTxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoGN1
-cnNvcjxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqB2aXNpYmxlIG9uIHF4bCB3aW5kb3cuIFJl
-YWN0aW9uIHRvIG1vdXNlIGV2ZW50cyB3YXMgc2VlbiBvbiBudmlkaWE8YnIgLz7CoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgd2luZG93IHRvbywgYnV0IHdpdGggaW52aXNpYmxlIG1vdXNlIGN1cnNvci48
-YnIgLz48YnIgLz48YnIgLz48YnIgLz7CoMKgwqDCoMKgSGksPGJyIC8+PGJyIC8+wqDCoMKgwqDC
-oEkgYXNzdW1lIHlvdSBoYXZlIHlvdXIgb3duIHNwaWNlLXN0cmVhbWluZy1hZ2VudCBwbHVnaW4u
-PGJyIC8+PGJyIC8+wqDCoMKgwqDCoERvZXMgaXQgc3VwcG9ydCB0aGUgZGlzcGxheV9pbmZvIGlu
-dGVyZmFjZSA/PGJyIC8+PGJyIC8+wqDCoMKgwqDCoFVyaTxiciAvPjxiciAvPsKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAwMS4wNi4yMDIwLCAxNzoyNywgIkZyZWRpYW5vIFppZ2xpbyIgJmx0OzxhIGhy
-ZWY9Im1haWx0bzpmemlnbGlvQHJlZGhhdC5jb20iPmZ6aWdsaW9AcmVkaGF0LmNvbTwvYT48YnIg
-Lz7CoMKgwqDCoMKgwqDCoMKgwqAmbHQ7bWFpbHRvOjxhIGhyZWY9Im1haWx0bzpmemlnbGlvQHJl
-ZGhhdC5jb20iPmZ6aWdsaW9AcmVkaGF0LmNvbTwvYT4mZ3Q7Jmd0Ozo8YnIgLz48YnIgLz7CoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBIaSBhbGwsPGJyIC8+wqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgd2hlbiBqdXN0IHF4bCBhZGFwdGVy
-IGlzIGF0dGFjaGVkIHRvIFZNIGFsbCB3b3JrczxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoHdlbGwu
-IEJ1dDxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgd2hlbiBOdmlk
-aWEgR1JJRDxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGlu
-c3RhbmNlIGlzIGF0dGFjaGVkIGFuZCBpdHMgZHJpdmVycyBhcmUgcnVubmluZyw8YnIgLz7CoMKg
-wqDCoMKgwqDCoMKgwqBtb3VzZSBjdXJzb3I8YnIgLz7CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoGlzIG5ldmVyPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgc2hvd24gb24gaXRzIGRpc3BsYXkgd2luZG93LiBTb21ldGltZXMgaXQncyBq
-dXN0PGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgaW52aXNpYmxlIGJ1dDxiciAvPsKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYWN0aXZlIGFuZDxiciAvPsKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJlYWN0aW5nIHRvIG1vdXNlIG1vdmVtZW50cywg
-Y2xpY2tzIGFuZCB3aGVlbCBzY3JvbGxpbmcsPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBzb21ldGltZXMgaXQnczxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoHRvdGFsbHkgbWlzc2luZy4gVGhpcyBiZWhhdmlvdXIgaXMgYSBi
-aXQgZGVwZW5kZW50IG9mIGlzPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBOdmlkaWEgYWRhcHRlcjxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoGFsb25lIG9yIHRvZ2V0aGVyIHdpdGggcXhsLiBKdXN0IHNvbWV0aW1lcyBtb3Vz
-ZTxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoGN1cnNvciBpczxiciAvPsKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgdmlzaWJsZSBvbiBxeGw8YnIgLz7CoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkaXNwbGF5IGJ1dCBpdCdzIHZlcnkgdW5zdGFibGUg
-YW5kIHRvdGFsbHkgdW51c2FibGUuPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgU2ltaWxhcjxiciAv
-PsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYmVoYXZpb3VyIGlzPGJyIC8+
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdW5kZXIgbGludXggVk0g
-dG9vLiBJcyBpdCBub3JtYWwgIndvbid0IGZpeCIgc3RhdGUsPGJyIC8+wqDCoMKgwqDCoMKgwqDC
-oMKgb3IgY2FuIEk8YnIgLz7CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHBy
-b3ZpZGUgc29tZTxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oGFkZGl0aW9uYWwgaW5mbz8gV2luZG93cyBoYXMgbGF0ZXN0IHZkLWFnZW50IGFuZDxiciAvPsKg
-wqDCoMKgwqDCoMKgwqDCoHNwaWNlLWFnZW50PGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBpbnN0YWxsZWQuPGJyIC8+PGJyIC8+PGJyIC8+wqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgSGksPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgcmVjZW50bHkgd2UgZ290IHNpbWlsYXIgcmVwb3J0cy4gQ2FuIHlvdSB0cnkgdG8gc2VlPGJy
-IC8+wqDCoMKgwqDCoMKgwqDCoMKgd2hhdCdzIGhhcHBlbiBpZjxiciAvPsKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoHlvdSBkaXNhYmxlIHRoZSBhZ2VudD88YnIgLz48YnIgLz7CoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBJdCBzZWVtcyB0aGF0IGluIHRoZXNlIGNvbmRpdGlvbnMg
-dGhlIGFnZW50IGlzIG5vdCBhYmxlIHRvPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgaGFuZGxlPGJy
-IC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdGhlIG1vdXNlPGJyIC8+wqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgc28gbW91c2UgZXZlbnRzIGFyZSAibG9zdCIuPGJyIC8+PGJy
-IC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgQW5vdGhlciB0ZXN0IHdvdWxkIHlvdSBj
-b3VsZCBkbyBpcyB0byB1c2UgdGhlICJzcGljeSI8YnIgLz7CoMKgwqDCoMKgwqDCoMKgwqB1dGls
-aXR5LiBUaGlzPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdXRpbGl0eTxiciAv
-PsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGhhcyBhbiBvcHRpb24gdG8gc3dpdGNoIG1h
-bnVhbGx5IHRoZSBtb3VzZSBtb2RlPGJyIC8+wqDCoMKgwqDCoMKgwqDCoMKgKHNlcnZlci9jbGll
-bnQpLiBJdDxiciAvPsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHdvdWxkIGJlPGJyIC8+
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaGVscGZ1bCB0byB1bmRlcnN0YW5kIGRpZmZl
-cmVudCBiZWhhdmlvdXIgdXNpbmcgdGhlIDIgbW9kZXMuPGJyIC8+PGJyIC8+wqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgRnJlZGlhbm88YnIgLz48YnIgLz48YnIgLz7CoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX188
-YnIgLz7CoMKgwqDCoMKgwqDCoMKgwqDCoMKgU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0PGJyIC8+
-wqDCoMKgwqDCoMKgwqDCoMKgPGEgaHJlZj0ibWFpbHRvOlNwaWNlLWRldmVsQGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZyI+U3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnPC9hPjxiciAvPsKg
-wqDCoMKgwqDCoMKgwqDCoCZsdDttYWlsdG86PGEgaHJlZj0ibWFpbHRvOlNwaWNlLWRldmVsQGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZyI+U3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnPC9h
-PiZndDs8YnIgLz7CoMKgwqDCoMKgwqDCoMKgwqA8YSBocmVmPSJodHRwczovL2xpc3RzLmZyZWVk
-ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsIj5odHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsPC9hPjxiciAvPjxiciAv
-PjwvYmxvY2txdW90ZT48cD48YnIgLz48L3A+PC9ibG9ja3F1b3RlPg==
+<html><body><div style=3D"font-family: courier new,courier,monaco,monospace=
+,sans-serif; font-size: 12pt; color: #000000"><div>Hi,<br></div><div>&nbsp;=
+ I think the mouse issue are similar to <a href=3D"https://gitlab.freedeskt=
+op.org/spice/win32/vd_agent/-/issues/13">https://gitlab.freedesktop.org/spi=
+ce/win32/vd_agent/-/issues/13</a> and<br></div><div><a href=3D"https://gitl=
+ab.freedesktop.org/spice/win32/vd_agent/-/issues/8">https://gitlab.freedesk=
+top.org/spice/win32/vd_agent/-/issues/8</a>.<br></div><div>In other word fo=
+r some combination of displays the agent is not able to handle mouse events=
+<br></div><div>causing the events to get discarded. The solution would be f=
+or the agent to either handle all<br></div><div>cases or being able to tell=
+ the server that is not capable to handle the mouse allowing<br></div><div>=
+the server to fall back to server mouse.<br></div><div><br></div><div>I thi=
+nk you can see the display using the "console vnc" feature that allows Qemu=
+<br></div><div>to use spice to send "frames".<br></div><div><br></div><div>=
+Ole, what's your configuration for the guest/host or the mediated device?<b=
+r></div><div>Software installed on the host?<br></div><div>Type of Nvidia c=
+ard/setup?<br></div><div><br></div><div>Thanks,<br></div><div>&nbsp; Fredia=
+no<br></div><div><br></div><div><br></div><blockquote style=3D"border-left:=
+2px solid #1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:n=
+ormal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sa=
+ns-serif;font-size:12pt;" data-mce-style=3D"border-left: 2px solid #1010FF;=
+ margin-left: 5px; padding-left: 5px; color: #000; font-weight: normal; fon=
+t-style: normal; text-decoration: none; font-family: Helvetica,Arial,sans-s=
+erif; font-size: 12pt;"><div><br></div><div>Well, I just create a VM with a=
+ mediated device, run it, set up Nvidia drivers, and after VM reboot its wi=
+ndow can be shown with remote-viewer. When display is set to "none", just n=
+vidia window appears, when QXL display is set, two windows appear.</div><di=
+v><br></div><div><br></div><div>02.06.2020, 17:30, "Uri Lublin" &lt;uril@re=
+dhat.com&gt;:</div><blockquote><p>On 6/2/20 4:50 PM, <a href=3D"mailto:ole-=
+krutov@yandex.ru" target=3D"_blank" data-mce-href=3D"mailto:ole-krutov@yand=
+ex.ru">ole-krutov@yandex.ru</a> wrote:<br></p><blockquote class=3D"210e7a84=
+8e8fcb45wmi-quote">&nbsp;Hi,<br>&nbsp;No, I do not use spice-streaming-agen=
+t with windows VM at all.<br></blockquote><p><br>How do you see the NVIDIA =
+window on the client ?<br></p><div><br></div><blockquote class=3D"210e7a848=
+e8fcb45wmi-quote">&nbsp;01.06.2020, 22:24, "Uri Lublin" &lt;<a href=3D"mail=
+to:uril@redhat.com" target=3D"_blank" data-mce-href=3D"mailto:uril@redhat.c=
+om">uril@redhat.com</a>&gt;:<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;On 6/1/20 6:59 PM, <a href=3D"mailto:ole-krutov@yandex.ru" target=3D"_bla=
+nk" data-mce-href=3D"mailto:ole-krutov@yandex.ru">ole-krutov@yandex.ru</a><=
+br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;mailto:<a href=3D"mailto:ole-krutov@ya=
+ndex.ru" target=3D"_blank" data-mce-href=3D"mailto:ole-krutov@yandex.ru">ol=
+e-krutov@yandex.ru</a>&gt; wrote:<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now I have tried different combi=
+nations of vd-agent state and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;mouse<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;cursor type. In no case mouse cursor was visible on nvidia disp=
+lay<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wi=
+ndow. With dual display, qxl+nvidia, stopping vd-agent made<br>&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cursor<br>&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visible on qxl window. Reaction =
+to mouse events was seen on nvidia<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window too, but with invisible mouse cursor.<b=
+r><div><br></div><br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hi,<br><d=
+iv><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I assume you have your own spice=
+-streaming-agent plugin.<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do=
+es it support the display_info interface ?<br><div><br></div>&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;Uri<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01.06.2020, 17:27, "Frediano Ziglio" &lt;<a hr=
+ef=3D"mailto:fziglio@redhat.com" target=3D"_blank" data-mce-href=3D"mailto:=
+fziglio@redhat.com">fziglio@redhat.com</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&lt;mailto:<a href=3D"mailto:fziglio@redhat.com" t=
+arget=3D"_blank" data-mce-href=3D"mailto:fziglio@redhat.com">fziglio@redhat=
+.com</a>&gt;&gt;:<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;Hi all,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w=
+hen just qxl adapter is attached to VM all works<br>&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;well. But<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;when Nvidia GRID<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;instance is attached and its drivers are running,<br>&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mouse cursor<br>&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;is never<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;shown on its display window. Sometimes it's just<br>&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invisible but<br>&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;active and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;reacting to mouse movements, clicks and wheel scrolling,<br>&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sometimes it's<br>&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;totally missing. This behaviour is a bit dependent =
+of is<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nvidia adapter<br>&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alone or together with qxl. Just =
+sometimes mouse<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cu=
+rsor is<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visible on qxl<br>&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display but it's very unstable =
+and totally unusable.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;Similar<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;behaviour is<br>&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;under linux VM too. Is it nor=
+mal "won't fix" state,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;or can I<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provide some<br>&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;additional info? Windows ha=
+s latest vd-agent and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;spice-agent<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;installed.<br><di=
+v><br></div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hi,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rece=
+ntly we got similar reports. Can you try to see<br>&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;what's happen if<br>&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you disabl=
+e the agent?<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It seems that in these condit=
+ions the agent is not able to<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;handle<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the mouse<br>&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so mouse e=
+vents are "lost".<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Another test would you c=
+ould do is to use the "spicy"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;utility. This<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;utility<br>&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;has a=
+n option to switch manually the mouse mode<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;(server/client). It<br>&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;would be<br>=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;helpful to understand different behaviour using the 2 modes.=
+<br><div><br></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Frediano<br><div><br></div><br>&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________=
+____________________________<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;Spice-devel mailing list<br>&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=3D"mailto:Spice-devel@lists.freedeskt=
+op.org" target=3D"_blank" data-mce-href=3D"mailto:Spice-devel@lists.freedes=
+ktop.org">Spice-devel@lists.freedesktop.org</a><br>&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;mailto:<a href=3D"mailto:Spice-devel@list=
+s.freedesktop.org" target=3D"_blank" data-mce-href=3D"mailto:Spice-devel@li=
+sts.freedesktop.org">Spice-devel@lists.freedesktop.org</a>&gt;<br>&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=3D"https://lists.freed=
+esktop.org/mailman/listinfo/spice-devel" target=3D"_blank" data-mce-href=3D=
+"https://lists.freedesktop.org/mailman/listinfo/spice-devel">https://lists.=
+freedesktop.org/mailman/listinfo/spice-devel</a><br><div><br></div></blockq=
+uote><p><br></p></blockquote></blockquote><div><br></div></div></body></htm=
+l>
+------=_Part_28905462_2122789709.1591174771373--
 
---===============0225002730==
+
+--===============1669707529==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -169,4 +492,5 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0225002730==--
+--===============1669707529==--
+
