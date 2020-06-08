@@ -2,58 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5844C1F1BBF
-	for <lists+spice-devel@lfdr.de>; Mon,  8 Jun 2020 17:12:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 679EA1F1BC0
+	for <lists+spice-devel@lfdr.de>; Mon,  8 Jun 2020 17:12:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C81696E947;
-	Mon,  8 Jun 2020 15:12:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D2E446E957;
+	Mon,  8 Jun 2020 15:12:42 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D6DE6E947
- for <spice-devel@lists.freedesktop.org>; Mon,  8 Jun 2020 15:12:02 +0000 (UTC)
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 78D706E94E
+ for <spice-devel@lists.freedesktop.org>; Mon,  8 Jun 2020 15:12:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591629121;
+ s=mimecast20190719; t=1591629160;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ya8wyVgnrxC1uXjPeJOARwE3VdIDda6+jXLKl+P4kW0=;
- b=GKTBJwUM/p42d4MtXbuXVdUjS3UQPeGI4zP1O+69c+k2Wai07zXM0OCNiuSBVznFu9roGH
- IaEmN4/zKuqT7lTrU0SfVBRbSAZ+7l2/PTmY6DEvRCwg1co3yVNgIWIB42453LpWSfx/iC
- LKbBIYsLuRCHK75cnLhe40QszdByXX4=
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com
- [209.85.210.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-325-gj1pMkb4O0-iIQ-PnKVBpg-1; Mon, 08 Jun 2020 11:11:59 -0400
-X-MC-Unique: gj1pMkb4O0-iIQ-PnKVBpg-1
-Received: by mail-ot1-f70.google.com with SMTP id e66so7942756otb.9
- for <spice-devel@lists.freedesktop.org>; Mon, 08 Jun 2020 08:11:59 -0700 (PDT)
+ bh=MUl8VXbEn0nh3FXMYSW4aNlXuldqhneyaV9n5VQcDhg=;
+ b=Z7by+mtIGgbBF6zRsRODCuRtHPNgxURbyLbaY1T9+SMHcGdBy7496uRPxX02xUiM/ohxAW
+ m6jhfdI68AARqhaTsV51ZhM3Ex1RZxxz1XXToqrss0024jJ1IgKA8w8ZYGNd1/VwrQk2+l
+ RnUTIZ2piJx2hcVvoP+7bnOp7PamCtg=
+Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com
+ [209.85.161.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-276-bPMyDY2ZP2OXXww3SYsmpg-1; Mon, 08 Jun 2020 11:12:38 -0400
+X-MC-Unique: bPMyDY2ZP2OXXww3SYsmpg-1
+Received: by mail-oo1-f72.google.com with SMTP id l4so9620385oog.15
+ for <spice-devel@lists.freedesktop.org>; Mon, 08 Jun 2020 08:12:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:content-transfer-encoding;
- bh=Ya8wyVgnrxC1uXjPeJOARwE3VdIDda6+jXLKl+P4kW0=;
- b=S5q54pORI56V4wY+X0Ru9Tp+vmdgRlx5hVpzIwr54AD6yfLasCEmV/40zGB4DOQ3+O
- nRjTX3MtNiXb/igH3vyiwmRrCdEImSY44p1E+6wW1SQ4FpQZA+2nKyGfnwOQH9GVECE+
- tsOIuZkE+/IEyGPfihl55h/j0jw9Ew77wNCqsVtmjaHTr19UNQkviocSDZGKPxrOZ0RF
- A7X8UnLKazVx+WLSqNTFilN5EA4q278j/HeJJPbvRYhneMy9HUsMPfUZTnqRljYWxk7K
- NbCInb+NxeRj1i/l5ksnVzVEzSZh1swnntui/ZWNHEooVA7WsBZ4iMbsu/fsA0wrB15A
- dJ/w==
-X-Gm-Message-State: AOAM532u0EywfV+rcly95eUCjPYOUIy9zBwY1asJPaJ5y+1Kgyh4MCkI
- CZ0XRXdwAXMuD072AXPT1X3WNDF0AW/KEY4baXKVfUB3ZoTcOT0zgqKBRz4C04+HnE8G74esqCi
- EdQm1TshJu+d3sqaqPlW/83rdHr6Ne3RlUfT8oojwU1TTqRo=
-X-Received: by 2002:a4a:6c0d:: with SMTP id q13mr1038613ooc.50.1591629118119; 
- Mon, 08 Jun 2020 08:11:58 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzvuVwqgLd0vA2hku1Hg45/eghWbbzRZRw+2Wbzpgl0pgyuYZhVSYPTcZUkJ76//q/DEMGJ75mxGq5ebdNT2pY=
-X-Received: by 2002:a4a:6c0d:: with SMTP id q13mr1038555ooc.50.1591629117377; 
- Mon, 08 Jun 2020 08:11:57 -0700 (PDT)
+ bh=MUl8VXbEn0nh3FXMYSW4aNlXuldqhneyaV9n5VQcDhg=;
+ b=cee1L1/BZcxQZLKoAopOYDITi23J26tMIchsLgHPrKUBVShZ8cj9viTrcvJf6y1+sj
+ EFN4EJ4eLLOUTg6wW6UrnQuLn+Lk7/6aRN569g4T15XiVL24g0WY1FSjB9+o72bN+grd
+ fSBQO0NihtdiH5YaxNP72VMyFCukbSqpI6Bpk7qoXyQAibNat+YnGtbbsJKh1u7BMvnT
+ AHAp4BIEJYhC1o1vwO3XN8h2Ilju9ixSj7hNYuZ7snfFELBrpAvN1ndh8EhAw0W+VBe1
+ ZGBQ2ys8OWvhQUwqnC1EXfP+ib4ii6m6IFf1OMQ3XvBhnXrE7/IY8cLUes7sJg4Pqk6k
+ nr3Q==
+X-Gm-Message-State: AOAM530VyHnJSZx1BMkkvQFr5NS0g+S21GdT3wSFGdVlTnFVfv9a4kiX
+ f8h14bt9PxOAnQB4HoCL5HuJQOVwFn3Y42e+jA1EX7fP5aHg1BD8xrvwg/hMcSLUvljqtw6ttX4
+ wtVATHezt6DR6wlmhsIGBdwQafQ20f5YGPIxLvkSxkxf/wIw=
+X-Received: by 2002:aca:ec97:: with SMTP id k145mr10643955oih.92.1591629157335; 
+ Mon, 08 Jun 2020 08:12:37 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJx0Gp2p6ej4zs8V5BFA5sMfYP4lAv+jgasX8ZMzvWNfWQiRTe/ye7bocN+eIY6m+5uR6BltLV1qQnu/DTEImUM=
+X-Received: by 2002:aca:ec97:: with SMTP id k145mr10643915oih.92.1591629156728; 
+ Mon, 08 Jun 2020 08:12:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <CADJ1XR3kFo__t5DsGf3xVJCxF=QSrYge1RWG9qN4kW48eBYpLQ@mail.gmail.com>
 In-Reply-To: <CADJ1XR3kFo__t5DsGf3xVJCxF=QSrYge1RWG9qN4kW48eBYpLQ@mail.gmail.com>
 From: Kevin Pouget <kpouget@redhat.com>
-Date: Mon, 8 Jun 2020 17:11:46 +0200
-Message-ID: <CADJ1XR3yhwLdVMkHbk1-Z51COUkPgvQq5Tm0zdJnTQgkLp+=kQ@mail.gmail.com>
+Date: Mon, 8 Jun 2020 17:12:25 +0200
+Message-ID: <CADJ1XR1P_O9GUs1uHO-w3NCfar61iiVd_GS3HomZFmC=+zAhjQ@mail.gmail.com>
 To: Spice devel <spice-devel@lists.freedesktop.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
@@ -74,593 +74,616 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-commit 2023bb376713a39c47607f2698ad0f5e43ddf994
+commit 75679dc95d450173319f462b25f267cb3025778f
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Mon May 20 16:23:54 2019 +0100
+Date:   Wed Apr 1 20:43:04 2020 +0100
 
-  red-channel-client: Remove "self"
-
-  It was left unchanged to reduce diff.
+  dispatcher: Use IS-A relationship for Dispatcher hierarchy
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch removes the historical usage of `self`, and uses instead
-the implicit `this->`.
-
-As I mentionned above, I think it's more readable to have an explicit
-`this->`, we'll discuss this later on.
-
-Besides that, the patch looks good to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 61affed2a2e36b59e6935e608d7d80242f976c7e
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Mon May 20 16:49:17 2019 +0100
-
-  red-channel-client: Better private initialisation
-
-  Initialise RedChannelClientPrivate fields from the new
-  constructor instead from RedChannelClient.
-  Also change some fields to constants (actually many of them).
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch moves constructor/destructor code from `RedChannelClient`
-to `RedChannelClientPrivate`.
-
-Minor: the diff of this patch is confusing, as the constructor and
-destructor are mixed up as the order of the function has changed :#]
-
-
-Minor: I don't see "many" fields changed to `const`, only 3 of them
-...?
-
-Besides these minor comments, the patch looks good to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit b86f6e9a53a1fe2b6ef0a518ef99fada9d4915ed
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Wed May 22 05:04:17 2019 +0100
-
-  utils: Add red::unique_ptr
-
-  red::unique_link will be used to manage "priv" fields.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch adds utility functions/classes.
-
-The patch looks good to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 1ac616c4a34e9e075f36b0a4b057383443a02429
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 03:36:54 2019 +0100
-
-  Use utils.hpp for allocating/removing priv field
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch updates the Channel classes and encapuslates their `priv`
-behind a `unique_link` attribute.
-
-I understand that with this update, C++ / the `unique_link` class take
-care of the life-cycle of the `priv` object.
-
-Minor: this comment is ... hard to read!
-
-> This even empty is better to by declared here to make sure
-> we call the right delete for priv field
-
-The patch looks good to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 7720039ee0c1fecdf0947dedd323f6ab0069ff9d
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 03:43:52 2019 +0100
-
-  red-channel-client: Move handle_message as a virtual function
-
-  The messages coming are from the client so it's a better place
-  to be in RedChannelClient instead of RedChannel.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch makes `dcc_handle_message` a virtual method of
-`RedChannelClient`. This method is implemented in the different client
-channel classes, instead of `main_channel_handle_message`,
-`dcc_handle_message`, etc.
-
-The patch looks good to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 851696a6455af827439b65f5668c9d755d9aa331
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 03:54:28 2019 +0100
-
-  red-channel-client: Preparation, rename send_item to avoid clash
-
-  We will use this name for a virtual function from RedChannel.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch renames `RedChannelClient`'s method `send_item` into
- `send_any_item`.
-
-The patch looks good to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 669df4fb38a3f3928cc5f7089aaf7d93e6fbd2a0
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 04:35:56 2019 +0100
-
-  red-channel-client: Make send_item a virtual function
-
-  The items are send from RedChannelClient so move the callback
-  to a virtual function in RedChannelClient instead of RedChannel.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch refactors the `struct RedChannel`'s `send_item` callback
-attribute into a virtual method `RedChannelClient::send_item`, then
-proceeds with the rewriting to implement the virtual method in the
-different client-channel final classes.
-
-Most of the patch is a simple rewriting equivalent to `s/client
-channel/this` / or removal thanks to the implicit `this->`.
-
-Minor typo in the commit message: s/send/sent
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 2ffa7d00c60808e2f640df9bc9b5d62598455588
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 08:29:26 2019 +0100
-
-  inputs-channel-client: Improve encapsulation for InputsChannelClient
-
-  Move most inputs_channel_client_* functions inside the class.
-  This also helps preparing handle_migrate_data to be virtual.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch moves most inputs_channel_client_* functions inside the
-class. Most of the patch consists in rewriting `s/channel/this` / or
-removal thanks to the implicit `this->`, or removing static method
-prefixes (eg,
-`s/inputs_channel_client_send_migrate_data/send_migrate_data`).
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 2b04f644f670af79fef9332deb75722f056c5819
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Fri May 24 20:00:01 2019 +0100
-
-  red-channel-client: Move handle_migrate_data as virtual function
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch rewrites the `handle_migrate_date` attribute callback into
-a virtual function of the `RedChannelClient` class.
+This patch adds class inheritance to the `Dispatcher` to avoid the
+usage of the `parent` attribute. Surprisingly, there is no related
+update of the code.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 28a4fc5a1088458046bcc41972f6a18fcdecdcfe
+commit 164a333f991f09452844a94ad84a3190a2b6149d
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Fri May 24 20:23:16 2019 +0100
+Date:   Wed Apr 1 20:50:44 2020 +0100
 
-  red-channel-client: Move migrate as virtual method
+  Define and use (un)ref
+
+  Avoids g_object_(un)ref.
+  This in preparation to remove GObject.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch is similar to the previous one, the `migrate` class
-attribute is rewritten into a virtual class method.
+This patch updates the  `Dispatcher` class to add `ref`/`unref`
+methods, and updates the code accordingly.
+
+The `RedClient` definition is moved from `red-client.cpp` to
+`red-client.h` and now inherits from `GObject` instead of having it as
+a parent. It's not very clear why the definition was moved as the
+patch removes references to it.
+
+Minor: the commit message could have been prefixed with 'dispatch'
+and/or split another way.
+
+Besides that, the code looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 70367fd4601d2a61662c448cded5ef3bf7dbb5e0
+commit f680cc7870143beb61de6094728667a34e6083ca
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue May 28 19:31:44 2019 +0100
+Date:   Thu May 23 11:47:39 2019 +0100
 
-  red-channel-client: Move handle_migrate_flush_mark as a virtual function
+  dispatcher: Add a more safe dispatcher_send_message_custom version
 
-  Note that the return value was removed as not used.
+  Use a template to wrap the other dispatcher_send_message_custom
+  avoiding having to pass a void* opaque and extract payload size
+  from passed type.
+  Will be used more by next commit when Dispatchers are turned into
+  C++.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-Same kind of rewritting as the previous patches
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit d5ea93d3a8d4463eddb2fdb233d3a5a5640a155b
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue May 28 19:46:39 2019 +0100
-
-  Make disconnect a virtual function
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-Same kind of rewritting as the previous patches
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit cf51158811e52c5f20580505c925a01e7536cd5f
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue May 28 19:53:46 2019 +0100
-
-  red-channel-client: Move handle_migrate_data_get_serial as a virtual function
-
-  Virtual functions cannot be null so use a return value instead
-  and return the serial using a reference.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-Same kind of rewritting as the previous patches
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit fdedbe9e94f816ded0f0521570fbb2c8defe4be4
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 05:07:19 2019 +0100
-
-  dcc-send: Avoid to call DISPLAY_CHANNEL_CLIENT to cast
-
-  It's useless now, it's always a DisplayChannelClient, pass the
-  right type.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch changes the type of `ChannelClient` variables to a more
-suitable one, and renames the variables when relevant (eg:
-`s/RedChannelClient *rcc/DisplayChannelClient *dcc`).
+This patch adds a safer dispatcher_send_message_custom method,
+which overrides and calls the existing one.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit bd4b1caeb8e629286457714e0ab412918d13e9c1
+commit f4aefa728ed6c2bd37ca6d404703b041c0938f60
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Mon Mar 9 18:31:20 2020 +0000
+Date:   Thu Mar 5 08:27:57 2020 +0000
 
-  Use template to make adding timers/watches safer
-
-  Instead of forcibly cast functions cast only if data pointer and
-  function pointers match. This also allows to remove dangerous
-  casts all over the place.
+  Remove GObject from Dispatcher hierarchy
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch improves the type safety of timers/watches functions, by
-relying on C++ templates.
+Big patch so not easy to review. Overall, it turns the dispatcher into
+C++ classes and updates the code accordingly.
+
+Looks good to me, but I didn't look at it in depth.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 435ea33540941e93fdf942a1cd16222f3cbbbcbd
+commit 43c6bf91b7c53ee9f93f7ea1cead5bba94c61f88
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue Mar 3 14:47:53 2020 +0000
+Date:   Thu Mar 5 13:01:27 2020 +0000
 
-  Reduce C++ symbols visibility
+  reds: Remove a weak pointer usage
 
-  This allows the compiler to do some more optimisations on the
-  produced binary.
-  To allows possible future portability include header/footer in
-  some helper header files.
+  RedCharDevice can all be removed just calling unref, beside
+  the agent that needs special threatment.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-*This patch encapsulates the visibility macros
- (`G_BEGIN_DECLS`/`G_END_DECLS`) into dedicated header files
- (`push-visibility.h`/`pop-visibility.h`).
+The logic of the code before/after the patch is not fully clear to me.
 
-It also changes the visibility to this:
+I understand that the clean-up of `RedCharDevice`-based objects is
+simplified thanks to inheritance (`smartcard_device_disconnect` and
+`spicevmc_device_disconnect`'s behavior is now identical, so the
+cleanup is done in `reds_remove_char_device`.
 
-    #if defined(__GNUC__) && __GNUC__ >= 4 && !defined(__MINGW32__)
-    #pragma GCC visibility push(hidden)
-    #endif
+Seems fine to me.
 
-and
+Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-    #if defined(__GNUC__) && __GNUC__ >= 4 && !defined(__MINGW32__)
-    #pragma GCC visibility pop
-    #endif
-
-I don't really know the implication of these last changes, so I cannot
-ack...
-
-commit 0807ccea59cb4df03d2e99e6e9f56c09ec74d9c8
+commit cc86a7fb53cf9eb1b65c4feee26af94ed5a01714
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Sat May 25 08:27:17 2019 +0100
+Date:   Thu Mar 5 10:17:38 2020 +0000
 
-  cursor-channel-client: Move all public functions to methods
+  red-client: Automatically convert functions to methods
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch changes public functions to class methods, and adapts the
-code accordingly.
+This patch converts C functions to C++ methods, and updates the code
+accordingly.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 3136a11f39d491d0cdb65c6d45b5f12b566da3de
+commit fef97b14e50b550c6148482b4b8049c3f6ba96ae
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Sat May 25 08:35:36 2019 +0100
+Date:   Thu Mar 5 10:21:43 2020 +0000
 
-  cursor-channel-client: Use covariance to avoid some casts
+  red-client: Make RedClient pure C++
 
-  CursorChannelClient knows that the channel is a CursorChannel.
+  Remove GObject.
+  Add access protection.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch removes some casts by relying on the assuption that
-`CursorChannelClient`'s channel is necessarily an instance of
-`CursorChannel`.
+This patch turns the `RedClient` into an object, and removes GObject
+usage.
+
+Seems fine to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 9fd105e925e09be021a8d65f8795a8fe8de384e7
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Tue Mar 17 18:56:02 2020 +0000
+
+  main-channel: Automatic convert functions to methods
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch converts C functions to C++ methods, and updates the code
+accordingly.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 104aa6e1af2a7d39019ed6b489f8787a1066f7fb
+commit ab7486a9e8667160390811abc677dfdc5ee33028
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Sat Feb 29 21:22:02 2020 +0000
+Date:   Tue Mar 17 19:11:18 2020 +0000
 
-  Remove GObject from RedChannel
-
-  The patch seems pretty huge but mainly are mechanical steps:
-  - remove GObject declarations
-  - do not inherit from GObject
-  - add SPICE_CXX_GLIB_ALLOCATOR to avoid using C++ allocators
-  - CLASS_init and CLASS_constructor code goes into C++ constructor
-  - CLASS_dispose and CLASS_finalize code goes into C++ destructor
-  - g_object_new is replaced by new operator
-  - class members goes into virtual methods
-  - class parameters became argument to constructor
-  - use push-visibility.h and pop-visibility.h to limit visibility
-  - temporary use XXX_CAST for old GObject casts, they will
-    be replaced
-  - g_object_get is replaced by accessors
+  main-channel-client: Automatically convert
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-I didn't look at this big patch.
-
-commit 9df07e3f203e05571d6de1ef748200d8571ba2b0
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Sat Feb 29 22:13:00 2020 +0000
-
-  inputs-channel: Make InputsChannel more encapsulated
-
-  Put functions into methods.
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch rewrites C functions into C++ class methods.
+This patch converts C functions to C++ methods, and updates the code
+accordingly.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 6444fd6cfe0f21bb62b6af40984761b7478a41b9
+commit 350646608dd8e2283e47d32b7487915b2f49ddc2
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Sun Mar 1 06:57:11 2020 +0000
+Date:   Sat Jun 1 00:46:19 2019 +0100
 
-  inputs-channel: More C++ on InputsChannel
+  red-channel: Small simplification
 
-  Removed ugly converts putting in InputsChannelClient::get_channel().
-  Removed silly accessors.
+  Use std::max to make code smaller
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch turns C functions into C++ class methods, and, similarly to
-a previous patch, overrides the `get_channel` method to properly cast
-the `InputsChannelClient`'s channel into a `InputsChannel` instance.
+
+Simple code simplification, looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit fe0298a2905121a02ee64f429e9f88148d17c6ee
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Fri Mar 6 04:03:24 2020 +0000
+
+  safe-list: Add a class to implement a list with safe iterators
+
+  The reason to not using STL is that our code from how was designed requires
+  the iterator to be safe to the delete of the element pointed by the iterator.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch defines a `safe_list` class. As far as I understand (and as
+the name/commit/comments suggest), this class allows the deletion of
+the current iterator, while traversing the list.
+
+    /* Implementation of a list with more "safe" iterators.
+     * Specifically the item under an iterator can be removed while scanning
+     * the list. This to allow objects in the list to delete themselves from
+     * the list.
+     */
+
+I'm not a C++ export, but what I can read looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 767a9caded058fbde64fa4cc8e719c6ccef5f707
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Fri Mar 6 04:13:00 2020 +0000
+
+  Allow to compile without C++ library
+
+  Provide a suitable allocator using GLib
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch defines a class-wrapper `Mallocator` around GLib
+`g_malloc/g_free` functions. This class is used with the `safe_list`
+class. The `==` and `!=` operators of the class are defined to return
+`true` / `false`, respectively.
+
+The purpose of this class and the operator overloading is unclear to
+me, but what I can read looks good.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit ec66702526fc4d5f046f5ef35d2751a90b16c14e
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Tue Mar 10 10:13:02 2020 +0000
+
+  reds: Use red::safe_list instead of GList
+
+  Use an utility list.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch turns `GList *` into `red::safe_list<T>` lists and updates
+the code accordingly.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 2bf72a5ce2d2af77daf81ca2fade7283b2a2709a
+commit 4233df686eb2e18f47e05f541e83eee66ddd8273
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Sun Mar 1 18:48:42 2020 +0000
+Date:   Fri Mar 6 04:40:11 2020 +0000
 
-  stream-channel: More incapsulation for StreamChannel
-
-  Put all functions into methods.
-  Separate public/private part.
+  reds: Move clients to safe_list
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-Same kind of changes as previous patches.
+This patch turns `GList *` into `red::safe_list<T>` lists and updates
+the code accordingly.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit f42a20c508aeb3431f1d334b1eff955b07f5d567
+commit 2b11c917dc9bced674304384b01e26506098fd06
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue Mar 3 09:07:54 2020 +0000
+Date:   Thu Feb 6 21:38:51 2020 +0000
 
-  Improve CommonGraphicsChannel encapsulation
+  Do not use GError to just return an error string
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-Same kind of changes as previous patches.
+This patch replaces `GError *` by `char *` for returning simple string
+error messages.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 9ae11a3545336ffa8fab3552ea8d16e72481d9da
+commit 26e6d1555162a09937e2c8c910fbee631dcdf53c
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 02:32:50 2019 +0100
+Date:   Thu Mar 5 18:45:17 2020 +0000
 
-  red-channel-client: Move some methods to a protected section
+  char-device: Prepare to move functions to methods
 
-  Reduce visibility and increase encapsulation.
+  Move structure declaration at the end.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch changes the visibility of some methods (public->protected).
+This patch moves a structure declaration from the upper part of the
+file to the bottom.
+
+Looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 5f7aaf2a9a133f90869a453d3b00ccd97383dbb7
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Fri Mar 6 06:47:57 2020 +0000
+
+  char-device: Remove define trick, won't work on C++
+
+  C++ check parameter type, not founding the functions at
+  link time.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch removes a "trick" that was used to deal with opaque types.
+
+I didn't understand exactly what is all behind it, but the new code is
+definitely clearer and less mysterious.
+
+Looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 1411383483e2b948db022ebfbcbf630852f2c5f6
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Tue Mar 10 10:30:27 2020 +0000
+
+  char-device: Automatically convert functions to methods
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch converts C functions to C++ methods, and updates the code
+accordingly.
+
+Looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 454b18fcae80f021c67c6148ac84ee515c903032
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Fri Mar 6 10:12:22 2020 +0000
+
+  char-device: Convert some static functions to methods
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch converts C functions to C++ methods, and updates the code
+accordingly.
+
+Looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 9dcf937767b009b9b0e1bef6c0d6a3bb6dc657c2
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Fri Mar 6 18:40:51 2020 +0000
+
+  reds: Move qxl_instances to red::safe_list
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch turns `GList *` into `red::safe_list<T>` lists and updates
+the code accordingly.
+
+Looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit b28db35af51dfff5984ffab42a09256732391427
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Sat Mar 7 10:01:42 2020 +0000
+
+  reds: Make mig_wait_disconnect_clients a std::forward_list
+
+  In the meanwhile remove a leak on the program.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch turns `GList *` into `red::forward_list<T>` lists and
+updates the code accordingly.
+
+I guess that the leak is related to this hunk:
+
+    -g_list_free(reds->mig_wait_disconnect_clients);
+    +reds->mig_wait_disconnect_clients.clear();
+
+as `g_list_free` doesn't release the memory of dynamically allocated
+objects. I didn't look further to confirm this guess.
+
+
+Looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 54c083091943f61a8ebe0b4d420c3311c37df3e6
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Sun Mar 8 18:54:23 2020 +0000
+
+  input-channels: Improve encapsulation
+
+  Update member access to limit it.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch changes the visibility of multiple methods.
 
 Seems safe to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit aecbdd9e5b885cdde10d43404b8e465e750964ea
+commit bf04d7d721c939c058bb17d72c5d68a51ffe8b19
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu May 23 09:07:20 2019 +0100
+Date:   Fri Mar 6 18:49:46 2020 +0000
 
-  red-channel-client: Make handle_message protected
+  utils: Very skinny share_ptr implementation for our references
+
+  It will be used to refactor reference counting code.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch changes `handle_message` visibility (public->protected).
+This patch defines a `share_ptr` class.
 
-But it also makes `handle_pong` a class method instead of a C
-function. This is unrelated to the commit message and should have been
-in a dedicated commit ...
+Minor: `s/inspired to/inspired from` (or similar to...)
 
-The code changes look good to me, but with the situation I think there
-is nothing to do to split the commit...
+I'm not a C++ expert but this seems safe to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 2d865a78da9b7946a9fab788a68168c2f057810d
+commit 5126e383670db631c5546fa5677f79982bfe8246
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue Mar 3 10:01:37 2020 +0000
+Date:   Fri Mar 6 20:23:42 2020 +0000
 
-  red-channel-client: Make start_connectivity_monitoring protected
+  Use shared_ptr implementation to handle reference counting
+
+  This allows to make easier the management of owning.
+  Reference counting is automatically updated based on shared
+  pointers modification.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch changes ` start_connectivity_monitoring` visibility
-(public->protected).
+This patch replaces the `ref`/`unref` reference counting by the
+`share_ptr` wrapping, as defined in the previous patch.
 
-But it alsmo makes `start_net_test` a class method instead of a C
-function. I don't understand why this isn't mentioned in the commit
-message (same as the previous patch), nor if it was mandatory to have
-these two changes in the same commit.
-
-The code changes look good to me.
+I didn't study in details how this works, but seems good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 411cb2630152abf76b30337c274dfd4c2a472c88
+commit 597461e443962fa0294794b1db3d2f1c0fb18812
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue Mar 3 15:34:41 2020 +0000
+Date:   Sun Mar 8 05:46:56 2020 +0000
 
-  main-channel: Remove some casts
+  Add and use red::make_shared
 
-  Add MainChannelClient::get_channel to avoid to manually cast
-  to derived type.
-  Pass objects as MainChannelClient instead of RedChannelClient if
-  we need a MainChannelClient.
+  Allow to create an object already contained in a shared pointer
+  to avoid having not owned objects.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-Like some previous patches, this patch removes some casts by using
-proper datatypes, and relying on the fact that `MainChannelClient`'s
-channel are `MainChannel` instances.
+This patch uses more `share_ptr` pointer wrappers.
+
+Minor: seems that some TODOs are left in the code:
+
+    // XXX make_shared
+
+Seems good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 724f23e4bd9ce59279b5731f8bf4962b6f1d9acc
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Sat Mar 7 12:22:22 2020 +0000
+
+  Use red::shared_ptr_counted for RedChannelClient
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch adds more usage of `make_shared`/`share_ptr` (minor: could
+have been mentioned in the commit message).
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 4372c0a3ff04807c30cb50c178c1a51b31585431
+commit 2b9e1dcd5509dd2931e070f397adf5d2abcfa005
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Tue Mar 3 17:13:20 2020 +0000
+Date:   Mon Mar 9 02:25:03 2020 +0000
 
-  inputs-channels-client: Call pipe_add_init from InputsChannelClient::init
+  dispatcher: Reuse base reference counting for Dispatcher hierararchy
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch moves the call to `pipe_add_init` from `on_connect` method
-to `init`, and marks `pipe_add_init` as private.
+Minor: `s/hierararchy/hierarchy` in the commit message.
 
-Seems safe to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 16f89a80fad790d7e7ca9e94ce8a65b29ff7d82a
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Wed Mar 4 07:57:35 2020 +0000
-
-  inputs-channel: Move some methods to protected
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch moves some methods visibility from `public` to `private`.
-
-Minor: the commit message says protected instead of private.
-
-Seems safe to me.
-
-Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-commit 13f27ab8e9ad4d412cba3398e3de206b04699d7f
-Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Wed May 29 08:56:32 2019 +0100
-
-  sound: Make on_message_done a virtual function
-
-  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
-
-This patch makes `on_message_done` method virtual, with a default
-empty body, and changes the rest of code accordingly.
+This patch continues the transition to using more `shared_ptr`.
 
 Looks good to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit 9e5781e81cca2afca7c506d44ba24e244c210f5e
+commit be5bda4d4f1a6c348e45694143228965bda718b7
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu Mar 5 05:25:54 2020 +0000
+Date:   Sat Mar 7 11:26:13 2020 +0000
 
-  char-device: Do not use signals just to call our routine
+  utils: Add red::weak_ptr and red::shared_ptr_counted_weak
 
-  The only notify was done from the same file.
-  All other read of the property were replaced.
-  Preparing to remove GObject.
+  Implements weak pointers and helper to implement them.
+  They will be used for RedCharDevice.
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-This patch removes the usage of GObject signal `sin` to trigger device
-instance initialization. The function is called directly instead of
-triggering the signal.
+This patch implements `weak_ptr` and `shared_ptr_counted_weak`
+classes.
 
-I don't understand though why a call was added when setting
-`PROP_SPICE_SERVER` property, as it wasn't there before.
+I didn't look at it.
+
+commit f6f998004bc586ec0afdc550f0bdeb026d2dcd29
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Sun Mar 8 12:51:07 2020 +0000
+
+  Wrap spice.h in order to do some adjustment
+
+  Instead of including spice.h directly include an header that wraps
+  it. This allows to remove the SPICE_SERVER_INTERNAL define.
+  Currently is used to rename SpiceCharDeviceInstance to RedCharDevice
+  and reduce its visibility to hidden. This remove some warnings
+  and some weird code in the source.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch removes naming tricks from the code.
+
+I could not understand all of it, but it seems safe.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-commit ea0d056bb779d6e34e230ed9558e613cac347cdd
+commit 1e9205a3b8b0a1c63bd81418f570e0b2ee16c0b2
 Author: Frediano Ziglio <fziglio@redhat.com>
-Date:   Thu Mar 5 05:35:43 2020 +0000
+Date:   Sat Mar 7 22:11:34 2020 +0000
 
-  char-device: Define and use (un)ref
-
-  Prepare to remove GObject.
+  char-device: Remove GObject from RedCharDevice
 
   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 
-*This patch adds `ref`/`unref` methods to `struct
- SpiceCharDeviceState` and updates the code accordingly.
+Big patch, I didn't look at it.
 
-It also adds class inheritance to avoid the usage of the `parent`
-attribute and changes the code accordingly, by removing useless casts.
+commit fd06625ba165d247be97058dc607e44bd128d5f7
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Sun Mar 15 07:02:42 2020 +0000
 
-Minor: this could have been mentionned in the commit message as it
-takes most of the patch changes.
+  red-stream-device: Better encapsulation
 
-Besides this remark, the patch looks good to me.
+  Remove all members public, set correct access and create
+  missing methods.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch converts C functions to C++ methods, and updates the code
+accordingly.
+
+Looks good to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 31f0ce20867ecd4c07a2d5e20135cd188704e77e
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Tue Mar 10 08:23:14 2020 +0000
+
+  Avoids registering type just to get the nick of an enum value
+
+  We don't use anymore GObject parameters so avoid having to
+  register enum values to GType system to use them.
+  We just need to get the nick value of the enum values for
+  debug purposes.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+I don't know how these nicks / templates work, I didn't try to
+understand the patch.
+
+commit 46cda65123a09187e69b0cd5ee5cc4d0064670cf
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Sun Mar 8 10:52:53 2020 +0000
+
+  build: Remove GObject dependency
+
+  Not used anymore.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch removes GObjects from the meson and autotools build
+systems.
+
+It also removes unused GObject helper macros/inline functions.
+
+Seems safe to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 851b136bb4881a0bfa6838ba03c8e7a491b17b2e
+Author: Frediano Ziglio <fziglio@redhat.com>
+Date:   Tue Mar 10 16:32:51 2020 +0000
+
+  sound: Make functions exported not visible
+
+  Allows the compiler to do some additional optimizations.
+
+  Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+
+This patch changes the visibility of the functions definied in the
+`sound.h` header.
+
+Seems safe to me.
+
+Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+commit 62801ad9acfc61280dfa32b767b7915eaed7ff24
+Author: Frediano Ziglio <freddy77@gmail.com>
+Date:   Tue May 5 05:08:37 2020 +0100
+
+  char-device: Remove obsolete declaration
+
+  Signed-off-by: Frediano Ziglio <freddy77@gmail.com>
+
+This patch removes an unused `struct` forward declaration.
+
+Seems safe to me.
 
 Acked-by: Kevin Pouget <kpouget@redhat.com>
 
