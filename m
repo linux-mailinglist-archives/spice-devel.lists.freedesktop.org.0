@@ -2,67 +2,42 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DD231F69BC
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Jun 2020 16:14:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8F5B1F7587
+	for <lists+spice-devel@lfdr.de>; Fri, 12 Jun 2020 10:57:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 56CE96E83C;
-	Thu, 11 Jun 2020 14:14:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2CC306E5BE;
+	Fri, 12 Jun 2020 08:57:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D70726E176
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jun 2020 14:14:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591884888;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=mu41ns6tlaPd0ublGt+vL5nVsJ0GMTWOlMKa6k6fUbY=;
- b=AWHA+1IJTqtqxlcsRMpNZTZ0uzwaABD7uU0bTIcQ4SFT2QhwmZFkRxcx+/pV/EW4VQU5E2
- JPOqzbSCvN+qHjczRk9s6ojxT3XyezCOccixZh+F64cA+k4pTsh2X3p4jH2yRY+vXCQq9k
- d7rRCICHyD4sZf/TrYY6u8upjdK/Uuk=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-143-dvDDhTrdO6myH01wS7C5rA-1; Thu, 11 Jun 2020 10:14:46 -0400
-X-MC-Unique: dvDDhTrdO6myH01wS7C5rA-1
-Received: by mail-wr1-f70.google.com with SMTP id z10so2632181wrs.2
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Jun 2020 07:14:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:to:from:subject:message-id:date:user-agent
- :mime-version:content-language:content-transfer-encoding;
- bh=mu41ns6tlaPd0ublGt+vL5nVsJ0GMTWOlMKa6k6fUbY=;
- b=WszWPlR6pcpwogJNK0CW+EGJlLdCsKa8CSLp4oKIMHPp8NpIZjMTqUQWlHEzz/M+gG
- 1BLpHYJdyAve+J4HVbBfj45vRcXY3VtuYvUxZHYi5sszckwvRqjD81o3LeKhk9u1yQsO
- 4yJM8vHpGqcbbbcLna8i5Xgf1v9kH3M7YhpI8dYsLeQfZDpWNUF9hvXJGdHvz+/bVJRs
- GPOZS94rH+S+swECyUAVzGnAfJhRmTGZ+GeGgtdhrWqOUuGIf7vHUSiRxMcr1qx7Q6Eh
- 7S77a1oJHAGeMtf2+OAJlFjzxOPXjCOQs1iR0FJQ4/akd8Vd0MP8Hrb2eocZzDStMrsL
- Cozw==
-X-Gm-Message-State: AOAM531lqjAfGKJXkV+7U/MRGzmQCfzxq65WIiVb1+bPafyMSsX5Wo/D
- 9EWt1wHdQEnDzdQbxt/HWKko9Icr0xylFKzrBRusrxyzoXOlFzfxN4EFfFPvYxRAsg0eqJftnFq
- Y5rM6aZ08PLnWfjznvmG/y6K5ZSwsoaQ=
-X-Received: by 2002:a7b:c08f:: with SMTP id r15mr8271432wmh.6.1591884885402;
- Thu, 11 Jun 2020 07:14:45 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxZbiFr9Vx0MUajI0kz079FBTECrsOoPAzndpCm+8MmXdsqqGsS+MO6oSnU6P8dIanKE2J1jw==
-X-Received: by 2002:a7b:c08f:: with SMTP id r15mr8271412wmh.6.1591884885134;
- Thu, 11 Jun 2020 07:14:45 -0700 (PDT)
-Received: from [192.168.1.62] ([151.30.82.57])
- by smtp.gmail.com with ESMTPSA id o15sm5191081wrv.48.2020.06.11.07.14.44
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Jun 2020 07:14:44 -0700 (PDT)
-To: spice-devel <spice-devel@lists.freedesktop.org>
-From: Francesco Giudici <fgiudici@redhat.com>
-Message-ID: <596e9d0f-a8d2-ff4e-a34b-92bacfc52cfe@redhat.com>
-Date: Thu, 11 Jun 2020 16:14:43 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+X-Greylist: delayed 1850 seconds by postgrey-1.36 at gabe;
+ Fri, 12 Jun 2020 08:57:24 UTC
+Received: from m1515.mail.126.com (m1515.mail.126.com [220.181.15.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D4AEA6E877
+ for <spice-devel@lists.freedesktop.org>; Fri, 12 Jun 2020 08:57:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
+ s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=ZOwsi
+ LsaXBLUyWYlQjquCGvcso21dcMLlXgzg57u2Qc=; b=KnHPGRZOwH6QlBsKo7ENC
+ 7oU8WaxmXbLVtCHp0Es4qYRlqbeV8Ete9C8GWzXvZAJGiht1vGlVmeFmx7AC72CM
+ JEtZMFDIXJrQtgIRRwnfb7q53uCCQjyuyLesMLYkHTIVWXWHb2wb6Mgs92pa0BKm
+ Z33UP+RSkzgG1ELS38K3Uw=
+Received: from qishiyexu2$126.com ( [121.8.254.210] ) by
+ ajax-webmail-wmsvr15 (Coremail) ; Fri, 12 Jun 2020 16:26:29 +0800 (CST)
+X-Originating-IP: [121.8.254.210]
+Date: Fri, 12 Jun 2020 16:26:29 +0800 (CST)
+From: =?GBK?B?s8Ke3Q==?= <qishiyexu2@126.com>
+To: spice-devel@lists.freedesktop.org
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190724(ac680a23)
+ Copyright (c) 2002-2020 www.mailtech.cn 126com
+X-CM-CTRLDATA: f8AXyGZvb3Rlcl9odG09MTE1NDo1Ng==
 MIME-Version: 1.0
-Content-Language: en-US
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: [Spice-devel] SPICE: contributor guidelines
+Message-ID: <16656b4b.5cd5.172a7a33052.Coremail.qishiyexu2@126.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: D8qowADn74c2PONezu7IAA--.47082W
+X-CM-SenderInfo: xtlvxxp1h03ja6rslhhfrp/1tbigRZBKFpEAUPm6gAAsu
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Subject: [Spice-devel] Is it possible to put spice channels into different
+ threads?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,50 +49,70 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============0588231955=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi SPICE community!
-    After thinking a while on the discussion in the thread:
-"SPICE: changing the merge rules - a proposal"
-I would like to come back on the topic and make explicit the way merge 
-requests, changes and reviews are expected to be managed in our 
-community. The core points that seems to me all of us want and agree 
-upon are:
+--===============0588231955==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_86442_22816324.1591950389330"
 
-* Each merge request / patch should get a review (trivial patches may be 
-an exception and be merged without review).
+------=_Part_86442_22816324.1591950389330
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
 
-* Each merge request / patch should get a review in a timely manner.
+SGksCgoKU3BpY2UtZ3RrIGlzIG5vdyB1c2luZyBjby1yb3V0aW5lIHRvIGhhbmRsZSBkaWZmZXJl
+bnQgY2hhbm5lbCBjb25uZWN0aW9ucy4gV2hlbiBhIGNoYW5uZWwgaXMgaGFuZGxpbmcgZGF0YSwg
+b3RoZXIgY2hhbm5lbHMgd291bGQgaGF2ZSB0byB3YWl0LCByYXRoZXIgdGhhbiBoYW5kbGluZyBz
+eW5jaHJvbm91c2x5LiAgVGhhdCB3b3VsZCBicmluZyB1cyBmb2xsb3dpbmcgaXNzdWVzOgogMS4g
+SWYgc29tZSBsZXNzIGltcG9ydGFudCBjaGFubmVscyAobGlrZSB1c2IgY2hhbm5lbHMpIGFyZSB0
+cmFuc2ZlcmluZyBiaWcgZGF0YSwgaW1wb3J0YW50IGNoYW5uZWxzIChtYWluLWNoYW5uZWwsIGRp
+c3BsYXktY2hhbm5lbCxpbnB1dC1jaGFubmVsKSB3aWxsIGJlIGFmZmVjdGVkLiAgCiAyLiBXaGVu
+IHJlY2VpdmluZyBiaWcgZGF0YSBsaWtlIGZpbGUgdHJhbnNmZXJpbmcoR19JT19JTiksIHNlbmQg
+ZXZlbnQgKEdfSU9fT1VUKSB3aWxsIG5vdCBiZSB0cmlnZ2VyZWQuCiAzLiBGbG93IGNvbnRyb2wg
+YmV0d2VlbiBkaWZmZXJlbnQgY2hhbm5lbHMgd2lsbCBiZSBoYXJkIHRvIGRvLiAKCgpJcyBpcyBw
+b3NzaWJsZShhbmQgbWFrZSBzZW5zZSkgdG8gcHV0IGNoYW5uZWxzIGludG8gZGlmZmVyZW50IHRo
+cmVhZHMgc28gdGhleSBjYW4gc3luY2hyb25vdXNseSByZWNlaXZlICYgc2VuZCBtc2csIHdpdGhv
+dXQgYWZmZWN0IGVhY2ggb3RoZXI/CgoKQlIsCkRvbg==
+------=_Part_86442_22816324.1591950389330
+Content-Type: text/html; charset=GBK
+Content-Transfer-Encoding: base64
 
-Note that the meaning of "timely" and what a "trivial" patch is are not 
-defined: I think this is exactly the point for an open source community. 
-We don't want strict rules that force people to contribute in a specific 
-way or under a strict time-frame and I (we) trust each other to do the 
-right thing in respect of the project and the community. This is enough 
-once there are clear guidelines.
-There could be errors from time to time, sure... but as long as we stay 
-together and collaborate as a community, they can be easily fixed.
+PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOiMwMDAwMDA7Zm9udC1zaXplOjE0cHg7
+Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjowOyI+SGksPC9kaXY+PGRpdiBz
+dHlsZT0ibWFyZ2luOjA7Ij48YnI+PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjA7Ij5TcGljZS1n
+dGsgaXMgbm93IHVzaW5nIGNvLXJvdXRpbmUgdG8gaGFuZGxlIGRpZmZlcmVudCBjaGFubmVsIGNv
+bm5lY3Rpb25zLiBXaGVuIGEgY2hhbm5lbCBpcyBoYW5kbGluZyBkYXRhLCBvdGhlciBjaGFubmVs
+cyB3b3VsZCBoYXZlIHRvIHdhaXQsIHJhdGhlciB0aGFuIGhhbmRsaW5nIHN5bmNocm9ub3VzbHku
+Jm5ic3A7IFRoYXQgd291bGQgYnJpbmcgdXMgZm9sbG93aW5nIGlzc3Vlczo8L2Rpdj48ZGl2IHN0
+eWxlPSJtYXJnaW46MDsiPiZuYnNwOzEuIElmIHNvbWUgbGVzcyBpbXBvcnRhbnQgY2hhbm5lbHMg
+KGxpa2UgdXNiIGNoYW5uZWxzKSBhcmUgdHJhbnNmZXJpbmcgYmlnIGRhdGEsIGltcG9ydGFudCBj
+aGFubmVscyAobWFpbi1jaGFubmVsLCBkaXNwbGF5LWNoYW5uZWwsaW5wdXQtY2hhbm5lbCkgd2ls
+bCBiZSBhZmZlY3RlZC4mbmJzcDsmbmJzcDs8L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46MDsiPiZu
+YnNwOzIuIFdoZW4gcmVjZWl2aW5nIGJpZyBkYXRhIGxpa2UgZmlsZSB0cmFuc2ZlcmluZyhHX0lP
+X0lOKSwgc2VuZCBldmVudCAoR19JT19PVVQpIHdpbGwgbm90IGJlIHRyaWdnZXJlZC48L2Rpdj48
+ZGl2IHN0eWxlPSJtYXJnaW46MDsiPiZuYnNwOzMuIEZsb3cgY29udHJvbCBiZXR3ZWVuIGRpZmZl
+cmVudCBjaGFubmVscyB3aWxsIGJlIGhhcmQgdG8gZG8uJm5ic3A7PC9kaXY+PGRpdiBzdHlsZT0i
+bWFyZ2luOjA7Ij48YnI+PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjA7Ij5JcyBpcyBwb3NzaWJs
+ZShhbmQgbWFrZSBzZW5zZSkgdG8gcHV0IGNoYW5uZWxzIGludG8gZGlmZmVyZW50IHRocmVhZHMg
+c28gdGhleSBjYW4gc3luY2hyb25vdXNseSByZWNlaXZlICZhbXA7IHNlbmQgbXNnLCB3aXRob3V0
+IGFmZmVjdCBlYWNoIG90aGVyPzwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowOyI+PGJyPjwvZGl2
+PjxkaXYgc3R5bGU9Im1hcmdpbjowOyI+QlIsPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjA7Ij5E
+b248L2Rpdj48L2Rpdj48YnI+PGJyPjxzcGFuIHRpdGxlPSJuZXRlYXNlZm9vdGVyIj48cD4mbmJz
+cDs8L3A+PC9zcGFuPg==
+------=_Part_86442_22816324.1591950389330--
 
-Unfortunately enforcing some strict rules was exactly what I tried to do 
-in my previous mail. It may have brought tension to our community and 
-that was not my intention, sorry for that.
 
-So, for the sake of clarity for actual and future contributors, if we 
-want to write down a short and simple list of "rules" (guidelines) for 
-contributing to the SPICE project, I would say they could be:
-
-1) Get a review before merging a non-trivial patch
-2) Keep asking reviews more and more if not getting one
-3) Ensure each one asking a review gets one in a timely manner
-
-I would love to read your comments, opinions and ideas.
-
-Francesco
+--===============0588231955==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0588231955==--
+
