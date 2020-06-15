@@ -1,61 +1,69 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A4221F9519
-	for <lists+spice-devel@lfdr.de>; Mon, 15 Jun 2020 13:15:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B5F91F9769
+	for <lists+spice-devel@lfdr.de>; Mon, 15 Jun 2020 14:59:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EED3E6E0BC;
-	Mon, 15 Jun 2020 11:15:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BBEA289C5E;
+	Mon, 15 Jun 2020 12:59:20 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E3AC6E0BC
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:15:11 +0000 (UTC)
+Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [205.139.110.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 30E9289C5E
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 12:59:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592219710;
+ s=mimecast20190719; t=1592225958;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/oYO/YwT0FEXn86GK05QzxvL9iwXB9ceZ4OzdXp1VsY=;
- b=UKLyomGkNd0Xc3E8NVN/QD+73VrDMjlyEulBtKA9kgVSZawh4ZBdbSZoFsKR+TNRduZnvu
- KYcmDrPXsJN2VcPrj3FQfP+H8q76f88idvw/zNWx8mGlnIb/uUzn8cpmIwnz2mT9owKucj
- 2t7XJfDQ4UdUXPicDJoJ8KeTZdkXCNk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-509-2sWLI7wcPC-RpTAvSKz-Eg-1; Mon, 15 Jun 2020 07:15:08 -0400
-X-MC-Unique: 2sWLI7wcPC-RpTAvSKz-Eg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EFA029116E
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:15:07 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E89E619D7D
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:15:07 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id E15581809542;
- Mon, 15 Jun 2020 11:15:07 +0000 (UTC)
-Date: Mon, 15 Jun 2020 07:15:07 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Kevin Pouget <kpouget@redhat.com>
-Message-ID: <1123560576.30559684.1592219707895.JavaMail.zimbra@redhat.com>
-In-Reply-To: <CADJ1XR1P_O9GUs1uHO-w3NCfar61iiVd_GS3HomZFmC=+zAhjQ@mail.gmail.com>
-References: <CADJ1XR3kFo__t5DsGf3xVJCxF=QSrYge1RWG9qN4kW48eBYpLQ@mail.gmail.com>
- <CADJ1XR1P_O9GUs1uHO-w3NCfar61iiVd_GS3HomZFmC=+zAhjQ@mail.gmail.com>
+ bh=O2S4/Jd0QOPRmD+hv6CQ+i/DRcV9Aml2cI4bSkKMwQ4=;
+ b=G/9BOnfi4WjhhMo8Fpg87wgSyBuy1pB3GT+JQ/oIOagAXRFZc9vuwKW4yc5uwyuOycTPZQ
+ RPbz5ifcc34gIfrksDPp2fFZu6GwGGX3Z6TQ4TawoJe+6jZVRVOPBYKYDiiDw22M8qRGqF
+ mhLrsM0cAYydDDPWCkika1H85hwVriY=
+Received: from mail-io1-f71.google.com (mail-io1-f71.google.com
+ [209.85.166.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-8---5KOcojPbqnyRU8HmWoJw-1; Mon, 15 Jun 2020 08:59:13 -0400
+X-MC-Unique: --5KOcojPbqnyRU8HmWoJw-1
+Received: by mail-io1-f71.google.com with SMTP id a16so11339232iow.9
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 05:59:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=O2S4/Jd0QOPRmD+hv6CQ+i/DRcV9Aml2cI4bSkKMwQ4=;
+ b=NdrwQDUm+pR8zJgatHs3NHHuGgnRROVh30dNQnlXEvoYPXc5Hil/1txSWVh5QpVi8I
+ 0aMUnkoILAzjd+EnJMSPAK3vMx4BxoUnUHaO6ZT+W37Skv9rjLrDNpJxexNOw6F2/vI4
+ H4DyMsou2rB0ofgIGKEkVU0gYj/sNU77U/rifl3JgL3Hnpr/0jluJRjJA/JVyocmBBq+
+ REejuribk/xJSyFKGxs06/I909izZK3iy7YEUtQH0PbDMivhXgCAWhRuepD1q44aq628
+ 9HRhDWp1CXbGD1evD6A+YXhkN80vZJL0nMiQbaTsAcXKS5hv2ik3QYJJbEBcdgtZ/rVf
+ 1dYg==
+X-Gm-Message-State: AOAM532FzvO8SNhuXYaVAtoiPchIosXp5Mc0isNvH0HIcb7PWKVICwox
+ OrETHV6uVxHKGkAkawmFRc64cFyOh3P2MbEYCOH2fgXhF/2fFYJ7VZCiopNB9pz9UibrDVeeHZy
+ 68QJSfrxG5bAkKzPuvDJWwKo1Dzv83gzM3BX4AEIwJ4ioDMA=
+X-Received: by 2002:a92:da0c:: with SMTP id z12mr26687363ilm.234.1592225952665; 
+ Mon, 15 Jun 2020 05:59:12 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwLGqFyEXL1OofyuzgupZ5MRyfkkTabdjAbSIGhAN+IQepOh3cn3Yh27x1iD7U1OqLzkBrs5qLau5z8PcORfrY=
+X-Received: by 2002:a92:da0c:: with SMTP id z12mr26687343ilm.234.1592225952361; 
+ Mon, 15 Jun 2020 05:59:12 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.17, 10.4.195.26]
-Thread-Topic: Review of the C++ patches
-Thread-Index: zS4nFqBYGpgbTv863Ce1c7sfrAL4PQ==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+References: <16656b4b.5cd5.172a7a33052.Coremail.qishiyexu2@126.com>
+ <CAJ+F1CLYf0xoQ-UraTQzPoGk9Vpvt_=yoyW+ENZHdznf3kmLqA@mail.gmail.com>
+ <2bd8d90a.9bae.172a91d8976.Coremail.qishiyexu2@126.com>
+ <1346340456.30483558.1592030402447.JavaMail.zimbra@redhat.com>
+ <4f7d70eb.7593.172b79b8cc5.Coremail.qishiyexu2@126.com>
+In-Reply-To: <4f7d70eb.7593.172b79b8cc5.Coremail.qishiyexu2@126.com>
+From: Jakub Janku <jjanku@redhat.com>
+Date: Mon, 15 Jun 2020 14:59:00 +0200
+Message-ID: <CAH=CeiCKL2PinjiCXPBeo=gUacADMLhVJ72qGm9H2JY94jLY+g@mail.gmail.com>
+To: =?UTF-8?B?6ZmI54Kk?= <qishiyexu2@126.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jjanku@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] Review of the C++ patches
+Subject: Re: [Spice-devel] Is it possible to put spice channels into
+ different threads?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,183 +75,103 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Spice devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
->
-> commit 43c6bf91b7c53ee9f93f7ea1cead5bba94c61f88
-> Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Thu Mar 5 13:01:27 2020 +0000
->
->   reds: Remove a weak pointer usage
->
->   RedCharDevice can all be removed just calling unref, beside
->   the agent that needs special threatment.
->
->   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
->
-> The logic of the code before/after the patch is not fully clear to me.
->
-> I understand that the clean-up of `RedCharDevice`-based objects is
-> simplified thanks to inheritance (`smartcard_device_disconnect` and
-> `spicevmc_device_disconnect`'s behavior is now identical, so the
-> cleanup is done in `reds_remove_char_device`.
->
-> Seems fine to me.
->
-> Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-It's a pretty "standard" way to implement weak/strong references.
-I think it's the same used by standard C++. It uses 2 counters, one
-for weak pointers, the other for strong ones.
-
->
-> commit ab7486a9e8667160390811abc677dfdc5ee33028
-> Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Tue Mar 17 19:11:18 2020 +0000
->
->   main-channel-client: Automatically convert
->
->   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
->
-> This patch converts C functions to C++ methods, and updates the code
-> accordingly.
->
-> Looks good to me.
->
-> Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-The "Automatic" patches are almost helped by a series of really ugly scripts
-(a mix of Coccinelle, Python, Bash and Perl!).
-
->
-> commit fe0298a2905121a02ee64f429e9f88148d17c6ee
-> Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Fri Mar 6 04:03:24 2020 +0000
->
->   safe-list: Add a class to implement a list with safe iterators
->
->   The reason to not using STL is that our code from how was designed requires
->   the iterator to be safe to the delete of the element pointed by the iterator.
->
->   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
->
-> This patch defines a `safe_list` class. As far as I understand (and as
-> the name/commit/comments suggest), this class allows the deletion of
-> the current iterator, while traversing the list.
->
->     /* Implementation of a list with more "safe" iterators.
->      * Specifically the item under an iterator can be removed while scanning
->      * the list. This to allow objects in the list to delete themselves from
->      * the list.
->      */
->
-> I'm not a C++ export, but what I can read looks good to me.
->
-> Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-Unfortunately the code was and is relaying on this behaviour.
-Better safe than sorry!
-
->
-> commit 767a9caded058fbde64fa4cc8e719c6ccef5f707
-> Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Fri Mar 6 04:13:00 2020 +0000
->
->   Allow to compile without C++ library
->
->   Provide a suitable allocator using GLib
->
->   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
->
-> This patch defines a class-wrapper `Mallocator` around GLib
-> `g_malloc/g_free` functions. This class is used with the `safe_list`
-> class. The `==` and `!=` operators of the class are defined to return
-> `true` / `false`, respectively.
->
-> The purpose of this class and the operator overloading is unclear to
-> me, but what I can read looks good.
->
-> Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-Mainly the purpose is allowing to tell other container how to handle
-memory allocations replacing default allocations.
-
->
-> commit 54c083091943f61a8ebe0b4d420c3311c37df3e6
-> Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Sun Mar 8 18:54:23 2020 +0000
->
->   input-channels: Improve encapsulation
->
->   Update member access to limit it.
->
->   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
->
-> This patch changes the visibility of multiple methods.
->
-> Seems safe to me.
->
-> Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-Yes, I think some warnings are raised if you don't have these
-changes.
-
->
-> commit 597461e443962fa0294794b1db3d2f1c0fb18812
-> Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Sun Mar 8 05:46:56 2020 +0000
->
->   Add and use red::make_shared
->
->   Allow to create an object already contained in a shared pointer
->   to avoid having not owned objects.
->
->   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
->
-> This patch uses more `share_ptr` pointer wrappers.
->
-> Minor: seems that some TODOs are left in the code:
->
->     // XXX make_shared
->
-> Seems good to me.
->
-> Acked-by: Kevin Pouget <kpouget@redhat.com>
-
-Yes, there are a bit of "XXX", but none are regressions.
-
-> 
-> On Mon, Jun 8, 2020 at 5:10 PM Kevin Pouget <kpouget@redhat.com> wrote:
-> >
-> > Hello spice-devel
-> >
-> > I worked on the review of Frediano's C++ patches during the last weeks,
-> > I tried to understand the gist of the commits and summarize it in the
-> > review message.
-> > It's not an in-depth review, and I only spotted minor details.
-> >
-> > A few patches are not acked, mostly because they were too big for me to
-> > study carefully enough.
-> >
-> > Overall, I really appreciate the effort made to adapt the code to C++, from
-> > my point of view it is greatly beneficial for the code as it reduces a lot
-> > the amount of code duplication (boilerplate code) by leveraging C++
-> > inheritance, polymorphism, virtual methods, etc.
-> > Likewise, the ref-counting is made simpler and safer with custom classes
-> > (share_ptr). These custom classes mimic existing ones AFAICT, but they are
-> > more "C-safe" as they cannot throw exceptions.
-> >
-> > 3 mails will follow with the reviews.
-> >
-> > Best regards,
-> >
-> > Kevin
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+SGksCgp5ZXMsIEkgdGhpbmsgdGhpcyBpcyBhIHJlYWwgaXNzdWUuIEkgZmVlbCBsaWtlIEkndmUg
+c3R1bWJsZWQgYWNyb3NzCnNvbWV0aGluZyBzaW1pbGFyIGluIHRoZSBwYXN0IHdoZW4gd29ya2lu
+ZyBvbiB3ZWJkYXYuCgpTbyB5ZWFoLCBpdCBzZWVtcyBsaWtlIHRoZSBjaGFubmVsIG1pZ2h0IGdl
+dCBibG9ja2VkIGluIG9uZSBkaXJlY3Rpb24KLS0gbWVhbmluZyBkYXRhIGlzbid0IHNlbnQgdW50
+aWwgeW91IHJlYWQgYWxsIGF2YWlsYWJsZSBkYXRhLgoKSG93ZXZlciwgdGhhdCBkb2Vzbid0IG1l
+YW4gdGhhdCBvdGhlciBjaGFubmVscyB3b24ndCB3b3JrIGltaG8uIEluIGEKbW9yZSByZWFsaXN0
+aWMgc2NlbmFyaW8sIHlvdSB3b2xkIHJlYWQgdGhlIGRhdGEgZnJvbSB2ZGFnZW50IGluIGNodW5r
+cwphbmQgYWN0dWFsbHkgZG8gc29tZXRoaW5nIHdpdGggaXQuIFdlYmRhdiB1c2VzIHRoZSBjb2Rl
+IGluIHZtY3N0cmVhbS5jCnRvIHJlYWQgdGhlIGRhdGEgaW4gY29yb3V0aW5lIGFuZCB0aGUgYnVm
+ZmVyIGlzIGRlbGl2ZXJlZCB0byB0aGUKV2ViZGF2Q2hhbm5lbCB1c2luZyBhbiBpZGxlIGNhbGxi
+YWNrLiBUaGlzIGdpdmVzIG90aGVyIGV2ZW50cyB0aGUKb3Bwb3J0dW5pdHkgdG8gZmlyZSBhbmQg
+YmUgcHJvY2Vzc2VkIGFuZCB0aGUgY29kZSBjYW4geWllbGQgdG8gYW5vdGhlcgpjb3JvdXRpbmUu
+IFNvIGltcG9ydGFudCBjaGFubmVscywgbGlrZSBEaXNwbGF5LCBzaG91bGQgY29udGludWUKd29y
+a2luZyBqdXN0IGZpbmUuCgpQUywgaXQncyBiZWVuIHF1aXRlIHNvbWUgdGltZSwgc28gSSBtaWdo
+dCBub3QgcmVtZW1iZXIgaXQgY29ycmVjdGx5LgpCdXQgYW55d2F5LCBpZiB5b3UgbG9vayBhdCBj
+aGFubmVsLXdlYmRhdi5jIGFuZCB2bWNzdHJlYW0uYywgeW91CnNob3VsZCBob3BlZnVsbHkgZ2V0
+IGEgYmV0dGVyIGlkZWEuCgpDaGVlcnMsCkpha3ViCgpPbiBNb24sIEp1biAxNSwgMjAyMCBhdCAx
+Mjo1MiBQTSDpmYjngqQgPHFpc2hpeWV4dTJAMTI2LmNvbT4gd3JvdGU6Cj4KPiBIaSwKPgo+IEFm
+dGVyIGRlYnVnZ2luZywgSSAgdGhpbmsgbXkgcHJvYmxlbSBpcyBwcm9iYWJseSBub3QgYWNjb2Np
+YXRlZCB3aXRoIGNvb3BlcmF0aXZlIG11bHRpdGFza2luZy4KPiBIZXJlIGlzIHdoZXJlIHNwaWNl
+LWd0ayByZWFkIGRhdGE6Cj4KPiAgICAgLyogdHJlYXQgYWxsIGluY29taW5nIGRhdGEgKGJsb2Nr
+IG9uIG1lc3NhZ2UgY29tcGxldGlvbikgKi8KPiAgICAgd2hpbGUgKCFjLT5oYXNfZXJyb3IgJiYK
+PiAgICAgICAgICAgIGMtPnN0YXRlICE9IFNQSUNFX0NIQU5ORUxfU1RBVEVfTUlHUkFUSU5HICYm
+Cj4gICAgICAgICAgICBnX3BvbGxhYmxlX2lucHV0X3N0cmVhbV9pc19yZWFkYWJsZShHX1BPTExB
+QkxFX0lOUFVUX1NUUkVBTShjLT5pbikpCj4gICAgICkgeyBkbwo+ICAgICAgICAgICAgIHNwaWNl
+X2NoYW5uZWxfcmVjdl9tc2coY2hhbm5lbCwKPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIChoYW5kbGVyX21zZ19pbilTUElDRV9DSEFOTkVMX0dFVF9DTEFTUyhjaGFubmVsKS0+
+aGFuZGxlX21zZywgTlVMTCk7Cj4gI2lmZGVmIEhBVkVfU0FTTAo+ICAgICAgICAgICAgIC8qIGZs
+dXNoIHRoZSBzYXNsIGJ1ZmZlciB0b28gKi8KPiAgICAgICAgIHdoaWxlIChjLT5zYXNsX2RlY29k
+ZWQgIT0gTlVMTCk7Cj4gI2Vsc2UKPiAgICAgICAgIHdoaWxlIChGQUxTRSk7Cj4gI2VuZGlmCj4g
+ICAgIH0KPgo+Cj4gSWYgdmRhZ2VudCBzZW5kcyBsb3RzIG9mIGRhdGEsIHNwaWNlX2NoYW5uZWxf
+cmVjdl9tc2cgd2lsbCBiZSBjYWxsZWQgdGhlIHdob2xlIHRpbWUsIHNvIGl0ZXJhdGVfd3JpdGUg
+d2lsbCBub3QgYmUgY2FsbGVkLCBhbmQgZGF0YSB3aWxsIG5vdCBiZSBzZW50IG91dCB1bmxlc3Mg
+dmRhZ2VudCBzdG9wcyBzZW5kaW5nIGRhdGEuCj4KPiBCUgo+IERvbgo+Cj4KPgo+Cj4gQXQgMjAy
+MC0wNi0xMyAxNDo0MDowMiwgIkZyZWRpYW5vIFppZ2xpbyIgPGZ6aWdsaW9AcmVkaGF0LmNvbT4g
+d3JvdGU6Cj4KPiBIaSwKPiAgIHRoZSBwYXR0ZXJuIHVzZWQgaW4gc3BpY2UtZ3RrIGlzIGNhbGxl
+ZCBjb29wZXJhdGl2ZSBtdWx0aXRhc2tpbmcgKHNlZSBodHRwczovL2VuLndpa2lwZWRpYS5vcmcv
+d2lraS9Db29wZXJhdGl2ZV9tdWx0aXRhc2tpbmcpLCBpZiB5b3UgYWRkIGNvZGUgdGhhdCBpcyBu
+b3QgY29vcGVyYXRpdmUgeW91IGdldCB3aGF0IHlvdSBkZXNjcmliZWQuIFVzZSBjb3JvdXRpbmUg
+ZnVuY3Rpb25zIHRvIHJlYWQgcmVtb3RlIGRhdGEgc28gdGhlIHJlYWQgd29uJ3Qgc3RvcCBvdGhl
+ciBjb2RlLiBJZiB5b3UgbmVlZCB0byBydW4gZXhwZW5zaXZlIG9yIGJsb2NraW5nIGNvZGUgaXQn
+cyBhIGdvb2QgaWRlYSB0byBydW4gaXQgaW4gYW5vdGhlciB0aHJlYWQgcmVtb3ZpbmcgdGhlIGJs
+b2NrYWdlLgo+Cj4gRnJlZGlhbm8KPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Cj4KPgo+Cj4gSGkKPgo+IEhlcmUgaXMgbXkgZXhwZXJpbWVudDoKPiBJIGNyZWF0ZWQgYSBuZXcg
+cG9ydC1jaGFubmVsIHRvIHRyYW5zZmVyIGRhdGEgYmV0d2VlbiB2ZGFnZW50IGFuZCBzcGljZS1n
+dGsuIEkgdXNlZCBhIHdoaWxlIGxvb3AgdG8gc2VuZCAya2IgZGF0YSB0byBndGssIGd0ayByZWNl
+aXZlZCBhbmQgZHJvcCB0aGUgZGF0YS4gSW4gdGhlIG1lYW4gdGltZSBJIHVzZWQgYSB0aW1lcigx
+bXMpIHRvIHNlbmQgMmtiIGRhdGEgdG8gdmRhZ2VudC4KPiBTdHJhbmdlIHRoaW5nIGlzIHRoYXQg
+Z3RrIHdpbGwgY29udGludWFsbHkgcmVjZWl2ZSBkYXRhIGZvciBhIHdoaWxlKDEwc2VjcyAtIDcw
+c2VjcykgdGhlbiBzZW5kIGEgd2hvbGUgYnVuY2ggb2YgZGF0YSB0byB2ZGFnZW50LiBXaGVuIHJl
+Y2VpdmluZyBkYXRhLCBzZW5kIGRhdGEgd2lsbCBiZSBhZGRlZCB0byB0Y3AgYnVmZmVyIGJ1dCB3
+aWxsIG5vdCBiZSBzZW50IG91dC4KPgo+IFNvIEkgdGhpbmsgc2VuZCBldmVudCB3aWxsIGJlIGFm
+ZmVjdGVkIGJ5IHJlY2VpdmUgZXZlbnQsIHRoZW4gSSBndWVzcyB1c2luZyBkaWZmZXJlbnQgdGhy
+ZWFkIHdvdWxkIGhlbHAuCj4gQ291bGQgeW91IHBsZWFzZSBjb3JyZWN0IG1lIGlmIEnigJltIHdy
+b25nPwo+Cj4gQlIKPiBEb24KPgo+Cj4KPgo+Cj4KPgo+Cj4g5ZyoIDIwMjAtMDYtMTIgMjA6MDM6
+MzDvvIwiTWFyYy1BbmRyw6kgTHVyZWF1IiA8bWFyY2FuZHJlLmx1cmVhdUBnbWFpbC5jb20+IOWG
+memBk++8mgo+Cj4gSGkKPgo+IE9uIEZyaSwgSnVuIDEyLCAyMDIwIGF0IDEyOjU3IFBNIOmZiOeC
+pCA8cWlzaGl5ZXh1MkAxMjYuY29tPiB3cm90ZToKPj4KPj4gSGksCj4+Cj4+IFNwaWNlLWd0ayBp
+cyBub3cgdXNpbmcgY28tcm91dGluZSB0byBoYW5kbGUgZGlmZmVyZW50IGNoYW5uZWwgY29ubmVj
+dGlvbnMuIFdoZW4gYSBjaGFubmVsIGlzIGhhbmRsaW5nIGRhdGEsIG90aGVyIGNoYW5uZWxzIHdv
+dWxkIGhhdmUgdG8gd2FpdCwgcmF0aGVyIHRoYW4gaGFuZGxpbmcgc3luY2hyb25vdXNseS4gIFRo
+YXQgd291bGQgYnJpbmcgdXMgZm9sbG93aW5nIGlzc3VlczoKPj4gIDEuIElmIHNvbWUgbGVzcyBp
+bXBvcnRhbnQgY2hhbm5lbHMgKGxpa2UgdXNiIGNoYW5uZWxzKSBhcmUgdHJhbnNmZXJpbmcgYmln
+IGRhdGEsIGltcG9ydGFudCBjaGFubmVscyAobWFpbi1jaGFubmVsLCBkaXNwbGF5LWNoYW5uZWws
+aW5wdXQtY2hhbm5lbCkgd2lsbCBiZSBhZmZlY3RlZC4KPj4gIDIuIFdoZW4gcmVjZWl2aW5nIGJp
+ZyBkYXRhIGxpa2UgZmlsZSB0cmFuc2ZlcmluZyhHX0lPX0lOKSwgc2VuZCBldmVudCAoR19JT19P
+VVQpIHdpbGwgbm90IGJlIHRyaWdnZXJlZC4KPj4gIDMuIEZsb3cgY29udHJvbCBiZXR3ZWVuIGRp
+ZmZlcmVudCBjaGFubmVscyB3aWxsIGJlIGhhcmQgdG8gZG8uCj4+Cj4+IElzIGlzIHBvc3NpYmxl
+KGFuZCBtYWtlIHNlbnNlKSB0byBwdXQgY2hhbm5lbHMgaW50byBkaWZmZXJlbnQgdGhyZWFkcyBz
+byB0aGV5IGNhbiBzeW5jaHJvbm91c2x5IHJlY2VpdmUgJiBzZW5kIG1zZywgd2l0aG91dCBhZmZl
+Y3QgZWFjaCBvdGhlcj8KPj4KPgo+IFN3aXRjaGluZyB0byB0aHJlYWRzIHdvdWxkIGJlIHBvc3Np
+YmxlLCBidXQgdGhhdCB3b3VsZG4ndCBoZWxwIGluIHRoZSBzaXR1YXRpb24geW91IGRlc2NyaWJl
+LCBhcyB5b3UgYXJlIHZlcnkgbGlrZWx5IGJvdW5kIG9uIElPLiBVc2luZyBzZXZlcmFsIHRocmVh
+ZHMgd291bGQgYWN0dWFsbHkgY3JlYXRlIG1vcmUgcHJvYmxlbXMgdG8gc3luY2hyb25pemUgYW5k
+IHNjaGVkdWxlIHRoZSBkaWZmZXJlbnQgY2hhbm5lbHMuCj4KPiBJbyBvcGVyYXRpb25zIGluIGNv
+cm91dGluZXMgYXJlIG5vbi1ibG9ja2luZywgc28gdGhleSBzaG91bGRuJ3QgYWZmZWN0IG90aGVy
+IHNwaWNlLWd0ayB0YXNrLiBJZiB5b3UgaG93ZXZlciBvYnNlcnZlIGEgYmxvY2tpbmcgQ1BVLXRh
+c2sgaW4gc29tZSBjaGFubmVsLCB0aGlzIG1heSBhZmZlY3QgdGhlIHBlcmZvcm1hbmNlIG9mIG90
+aGVyIGNoYW5uZWxzLiBCdXQgaW4gZ2VuZXJhbCwgZXhjZXB0IGZvciB2aWRlby9pbWFnZSBkZWNv
+ZGluZyB3aGljaCBtYXkgYmUgZG9uZSBpbiBhIHNlcGFyYXRlIHRocmVhZCwgdGhlIGNsaWVudCBz
+aWRlIGRvZXNuJ3QgZG8gbXVjaCB3b3JrLgo+Cj4gVVNCLCBjbGlwYm9hcmQgYW5kIGZpbGUgc2hh
+cmluZyBtYXkgdXNlIGxhcmdlIGFtb3VudHMgb2YgZGF0YSwgYW5kIHdlIHJlbHkgb24gdGhlIGds
+aWIgc291cmNlIGFuZCBrZXJuZWwgdG8gcHJpb3JpdGl6ZSBjaGFubmVsczogdGhpcyBpc24ndCBn
+cmVhdCBpbiBzb21lIGNhc2VzIGFuZCBtYXkgcmVjZWl2ZSBpbXByb3ZlbWVudHMuCj4KPgo+IC0t
+Cj4gTWFyYy1BbmRyw6kgTHVyZWF1Cj4KPgo+Cj4KPgo+Cj4gX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KPiBTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKPiBT
+cGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNr
+dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCj4KPgo+IF9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gU3BpY2UtZGV2ZWwgbWFpbGluZyBs
+aXN0Cj4gU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBs
+aXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
+ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
