@@ -1,45 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32C561F94E9
-	for <lists+spice-devel@lfdr.de>; Mon, 15 Jun 2020 12:52:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5D231F9514
+	for <lists+spice-devel@lfdr.de>; Mon, 15 Jun 2020 13:13:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B1286E063;
-	Mon, 15 Jun 2020 10:52:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3C3F089CE2;
+	Mon, 15 Jun 2020 11:13:32 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from m1536.mail.126.com (m1536.mail.126.com [220.181.15.36])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BF11E6E063
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 10:52:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=b3EyJ
- 4tSUSGpC6bveMcz0L0nHlXmzD4m5rLiSuFWr6o=; b=n0IglGePhve2veW/0jRoM
- KSLs29L9npEBDO6mumopMWYZ4Qt9k/M/2IrgK8C3tW+/RYIpNDEQpKppOayh33l7
- bBi+eWEAwT77npQ1S4qcwhohmE3zxY4nK7U9tSy0t1+p6M7ws9tzRTIzDY9i55Aq
- sbhC/UxLu6r0XgKNnsJwhQ=
-Received: from qishiyexu2$126.com ( [121.8.254.210] ) by
- ajax-webmail-wmsvr36 (Coremail) ; Mon, 15 Jun 2020 18:52:04 +0800 (CST)
-X-Originating-IP: [121.8.254.210]
-Date: Mon, 15 Jun 2020 18:52:04 +0800 (CST)
-From: =?GBK?B?s8Ke3Q==?= <qishiyexu2@126.com>
-To: "Frediano Ziglio" <fziglio@redhat.com>
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190724(ac680a23)
- Copyright (c) 2002-2020 www.mailtech.cn 126com
-In-Reply-To: <1346340456.30483558.1592030402447.JavaMail.zimbra@redhat.com>
-References: <16656b4b.5cd5.172a7a33052.Coremail.qishiyexu2@126.com>
- <CAJ+F1CLYf0xoQ-UraTQzPoGk9Vpvt_=yoyW+ENZHdznf3kmLqA@mail.gmail.com>
- <2bd8d90a.9bae.172a91d8976.Coremail.qishiyexu2@126.com>
- <1346340456.30483558.1592030402447.JavaMail.zimbra@redhat.com>
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9429289CE2
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:13:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1592219609;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Kxc6N3tbfl7V1Jgm7vMSlOxN9s6LP55TOM4BAMaJNMI=;
+ b=cmBE/UeGMoEiwxkJAt/0dim9ezLM4Jg+lMnfwJY/FF8Q3lXs/WvLZctrIZykqlzzOyBRWC
+ 4HrRddCGLFyteq2qJwX17npwUGEtLBBbTU8ELxFnIsPV7kkStolOQGp3u2RO5YUMk5xfbr
+ /6PGCqZSy1JgoercAaYRcMdJcWE6Yn4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-393-VEDYNRNeOrK-WW80sJGWaQ-1; Mon, 15 Jun 2020 07:13:24 -0400
+X-MC-Unique: VEDYNRNeOrK-WW80sJGWaQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3EDC418A8223
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:13:23 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 38E977F4F9
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:13:23 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 32A3A1809542;
+ Mon, 15 Jun 2020 11:13:23 +0000 (UTC)
+Date: Mon, 15 Jun 2020 07:13:22 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Kevin Pouget <kpouget@redhat.com>
+Message-ID: <1239063427.30559640.1592219602905.JavaMail.zimbra@redhat.com>
+In-Reply-To: <CADJ1XR2az5F2qvwMrFxo_--SfwYFRP_Dw8=6ii8dLYryzZF96g@mail.gmail.com>
+References: <CADJ1XR3kFo__t5DsGf3xVJCxF=QSrYge1RWG9qN4kW48eBYpLQ@mail.gmail.com>
+ <CADJ1XR2az5F2qvwMrFxo_--SfwYFRP_Dw8=6ii8dLYryzZF96g@mail.gmail.com>
 MIME-Version: 1.0
-Message-ID: <4f7d70eb.7593.172b79b8cc5.Coremail.qishiyexu2@126.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: JMqowEAp0kLVUudeU8HJAA--.16874W
-X-CM-SenderInfo: xtlvxxp1h03ja6rslhhfrp/1tbigQNEKFpEAVoM1gACsz
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-Subject: Re: [Spice-devel] Is it possible to put spice channels into
- different threads?
+X-Originating-IP: [10.33.32.17, 10.4.195.26]
+Thread-Topic: Review of the C++ patches
+Thread-Index: /EV61gwDwCIZTLVFdGcp6M5fplyxUA==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] Review of the C++ patches
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,267 +67,225 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1601203231=="
+Cc: Spice devel <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1601203231==
-Content-Type: multipart/alternative; 
-	boundary="----=_Part_109197_72788649.1592218324165"
+> commit 7b3637417062fe657c0bf1fced5ef59a489dbdc3
+> Author: Frediano Ziglio <fziglio@redhat.com>
+> Date:   Mon Mar 9 10:04:24 2020 +0000
+>
+>   Adjust some warnings
+>
+>   Remove -Werror and add -fpermissive, this will allow to compile C code with
+>   a GNU C++ compiler.
+>
+>   Ignore warnings as our code use some feature like empty arrays.
+>
+>   Remove warnings not available in C++.
+>
+>   Bump GLIB_VERSION_MAX_ALLOWED to reduce the warning, looks like the
+>   GLib headers for C++ are not able to handle them correctly.
+>
+>   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+>
+> This patch adds multiple warning to the build systems.
+>
+> I understand that they ease the transition from C to 'C + C++', but
+> without a deeper look it's hard to tell which ones should be
+> eventually removed and which ones (if any) must stay because of the
+> C/C++ cooperation.
+>
+> Minor: the explicit-cast fix in `server/red-client.c` doesn't seem to
+> belong to this patch. I wonder if it's a patch split issue or if there
+> is a link with build system patch.
+>
+>
+> Apart from this minor comment, the patch looks good to me.
+>
+> Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-------=_Part_109197_72788649.1592218324165
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: base64
+Yes, could be a split issue. Not that changes much at the end of the series
+but probably was a split.
 
-SGksCgoKQWZ0ZXIgZGVidWdnaW5nLCBJICB0aGluayBteSBwcm9ibGVtIGlzIHByb2JhYmx5IG5v
-dCBhY2NvY2lhdGVkIHdpdGggY29vcGVyYXRpdmUgbXVsdGl0YXNraW5nLgpIZXJlIGlzIHdoZXJl
-IHNwaWNlLWd0ayByZWFkIGRhdGE6CgoKICAgIC8qIHRyZWF0IGFsbCBpbmNvbWluZyBkYXRhIChi
-bG9jayBvbiBtZXNzYWdlIGNvbXBsZXRpb24pICovCiAgICB3aGlsZSAoIWMtPmhhc19lcnJvciAm
-JgogICAgICAgICAgIGMtPnN0YXRlICE9IFNQSUNFX0NIQU5ORUxfU1RBVEVfTUlHUkFUSU5HICYm
-CiAgICAgICAgICAgZ19wb2xsYWJsZV9pbnB1dF9zdHJlYW1faXNfcmVhZGFibGUoR19QT0xMQUJM
-RV9JTlBVVF9TVFJFQU0oYy0+aW4pKQogICAgKSB7IGRvCiAgICAgICAgICAgIHNwaWNlX2NoYW5u
-ZWxfcmVjdl9tc2coY2hhbm5lbCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAo
-aGFuZGxlcl9tc2dfaW4pU1BJQ0VfQ0hBTk5FTF9HRVRfQ0xBU1MoY2hhbm5lbCktPmhhbmRsZV9t
-c2csIE5VTEwpOwojaWZkZWYgSEFWRV9TQVNMCiAgICAgICAgICAgIC8qIGZsdXNoIHRoZSBzYXNs
-IGJ1ZmZlciB0b28gKi8KICAgICAgICB3aGlsZSAoYy0+c2FzbF9kZWNvZGVkICE9IE5VTEwpOwoj
-ZWxzZQogICAgICAgIHdoaWxlIChGQUxTRSk7CiNlbmRpZgogICAgfQoKCgoKSWYgdmRhZ2VudCBz
-ZW5kcyBsb3RzIG9mIGRhdGEsIHNwaWNlX2NoYW5uZWxfcmVjdl9tc2cgd2lsbCBiZSBjYWxsZWQg
-dGhlIHdob2xlIHRpbWUsIHNvIGl0ZXJhdGVfd3JpdGUgd2lsbCBub3QgYmUgY2FsbGVkLCBhbmQg
-ZGF0YSB3aWxsIG5vdCBiZSBzZW50IG91dCB1bmxlc3MgdmRhZ2VudCBzdG9wcyBzZW5kaW5nIGRh
-dGEuCgoKQlIKRG9uCgoKCgoKCgoKCgpBdCAyMDIwLTA2LTEzIDE0OjQwOjAyLCAiRnJlZGlhbm8g
-WmlnbGlvIiA8ZnppZ2xpb0ByZWRoYXQuY29tPiB3cm90ZToKCkhpLAogIHRoZSBwYXR0ZXJuIHVz
-ZWQgaW4gc3BpY2UtZ3RrIGlzIGNhbGxlZCBjb29wZXJhdGl2ZSBtdWx0aXRhc2tpbmcgKHNlZSBo
-dHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9Db29wZXJhdGl2ZV9tdWx0aXRhc2tpbmcpLCBp
-ZiB5b3UgYWRkIGNvZGUgdGhhdCBpcyBub3QgY29vcGVyYXRpdmUgeW91IGdldCB3aGF0IHlvdSBk
-ZXNjcmliZWQuIFVzZSBjb3JvdXRpbmUgZnVuY3Rpb25zIHRvIHJlYWQgcmVtb3RlIGRhdGEgc28g
-dGhlIHJlYWQgd29uJ3Qgc3RvcCBvdGhlciBjb2RlLiBJZiB5b3UgbmVlZCB0byBydW4gZXhwZW5z
-aXZlIG9yIGJsb2NraW5nIGNvZGUgaXQncyBhIGdvb2QgaWRlYSB0byBydW4gaXQgaW4gYW5vdGhl
-ciB0aHJlYWQgcmVtb3ZpbmcgdGhlIGJsb2NrYWdlLgoKCgpGcmVkaWFubwoKCgoKCgoKSGkgCgoK
-SGVyZSBpcyBteSBleHBlcmltZW50OgpJIGNyZWF0ZWQgYSBuZXcgcG9ydC1jaGFubmVsIHRvIHRy
-YW5zZmVyIGRhdGEgYmV0d2VlbiB2ZGFnZW50IGFuZCBzcGljZS1ndGsuIEkgdXNlZCBhIHdoaWxl
-IGxvb3AgdG8gc2VuZCAya2IgZGF0YSB0byBndGssIGd0ayByZWNlaXZlZCBhbmQgZHJvcCB0aGUg
-ZGF0YS4gSW4gdGhlIG1lYW4gdGltZSBJIHVzZWQgYSB0aW1lcigxbXMpIHRvIHNlbmQgMmtiIGRh
-dGEgdG8gdmRhZ2VudC4gClN0cmFuZ2UgdGhpbmcgaXMgdGhhdCBndGsgd2lsbCBjb250aW51YWxs
-eSByZWNlaXZlIGRhdGEgZm9yIGEgd2hpbGUoMTBzZWNzIC0gNzBzZWNzKSB0aGVuIHNlbmQgYSB3
-aG9sZSBidW5jaCBvZiBkYXRhIHRvIHZkYWdlbnQuIFdoZW4gcmVjZWl2aW5nIGRhdGEsIHNlbmQg
-ZGF0YSB3aWxsIGJlIGFkZGVkIHRvIHRjcCBidWZmZXIgYnV0IHdpbGwgbm90IGJlIHNlbnQgb3V0
-LgoKClNvIEkgdGhpbmsgc2VuZCBldmVudCB3aWxsIGJlIGFmZmVjdGVkIGJ5IHJlY2VpdmUgZXZl
-bnQsIHRoZW4gSSBndWVzcyB1c2luZyBkaWZmZXJlbnQgdGhyZWFkIHdvdWxkIGhlbHAuIApDb3Vs
-ZCB5b3UgcGxlYXNlIGNvcnJlY3QgbWUgaWYgSaGvbSB3cm9uZz8KCgpCUgpEb24KCgoKCgoKCgoK
-CgoKCgoKCtTaIDIwMjAtMDYtMTIgMjA6MDM6MzCjrCJNYXJjLUFuZHKopiBMdXJlYXUiIDxtYXJj
-YW5kcmUubHVyZWF1QGdtYWlsLmNvbT4g0LS1wKO6CgpIaQoKCgpPbiBGcmksIEp1biAxMiwgMjAy
-MCBhdCAxMjo1NyBQTSCzwp7dIDxxaXNoaXlleHUyQDEyNi5jb20+IHdyb3RlOgoKSGksCgoKU3Bp
-Y2UtZ3RrIGlzIG5vdyB1c2luZyBjby1yb3V0aW5lIHRvIGhhbmRsZSBkaWZmZXJlbnQgY2hhbm5l
-bCBjb25uZWN0aW9ucy4gV2hlbiBhIGNoYW5uZWwgaXMgaGFuZGxpbmcgZGF0YSwgb3RoZXIgY2hh
-bm5lbHMgd291bGQgaGF2ZSB0byB3YWl0LCByYXRoZXIgdGhhbiBoYW5kbGluZyBzeW5jaHJvbm91
-c2x5LiAgVGhhdCB3b3VsZCBicmluZyB1cyBmb2xsb3dpbmcgaXNzdWVzOgogMS4gSWYgc29tZSBs
-ZXNzIGltcG9ydGFudCBjaGFubmVscyAobGlrZSB1c2IgY2hhbm5lbHMpIGFyZSB0cmFuc2Zlcmlu
-ZyBiaWcgZGF0YSwgaW1wb3J0YW50IGNoYW5uZWxzIChtYWluLWNoYW5uZWwsIGRpc3BsYXktY2hh
-bm5lbCxpbnB1dC1jaGFubmVsKSB3aWxsIGJlIGFmZmVjdGVkLiAgCiAyLiBXaGVuIHJlY2Vpdmlu
-ZyBiaWcgZGF0YSBsaWtlIGZpbGUgdHJhbnNmZXJpbmcoR19JT19JTiksIHNlbmQgZXZlbnQgKEdf
-SU9fT1VUKSB3aWxsIG5vdCBiZSB0cmlnZ2VyZWQuCiAzLiBGbG93IGNvbnRyb2wgYmV0d2VlbiBk
-aWZmZXJlbnQgY2hhbm5lbHMgd2lsbCBiZSBoYXJkIHRvIGRvLiAKCgpJcyBpcyBwb3NzaWJsZShh
-bmQgbWFrZSBzZW5zZSkgdG8gcHV0IGNoYW5uZWxzIGludG8gZGlmZmVyZW50IHRocmVhZHMgc28g
-dGhleSBjYW4gc3luY2hyb25vdXNseSByZWNlaXZlICYgc2VuZCBtc2csIHdpdGhvdXQgYWZmZWN0
-IGVhY2ggb3RoZXI/CgoKCgpTd2l0Y2hpbmcgdG8gdGhyZWFkcyB3b3VsZCBiZSBwb3NzaWJsZSwg
-YnV0IHRoYXQgd291bGRuJ3QgaGVscCBpbiB0aGUgc2l0dWF0aW9uIHlvdSBkZXNjcmliZSwgYXMg
-eW91IGFyZSB2ZXJ5IGxpa2VseSBib3VuZCBvbiBJTy4gVXNpbmcgc2V2ZXJhbCB0aHJlYWRzIHdv
-dWxkIGFjdHVhbGx5IGNyZWF0ZSBtb3JlIHByb2JsZW1zIHRvIHN5bmNocm9uaXplIGFuZCBzY2hl
-ZHVsZSB0aGUgZGlmZmVyZW50IGNoYW5uZWxzLgoKCklvIG9wZXJhdGlvbnMgaW4gY29yb3V0aW5l
-cyBhcmUgbm9uLWJsb2NraW5nLCBzbyB0aGV5IHNob3VsZG4ndCBhZmZlY3Qgb3RoZXIgc3BpY2Ut
-Z3RrIHRhc2suIElmIHlvdSBob3dldmVyIG9ic2VydmUgYSBibG9ja2luZyBDUFUtdGFzayBpbiBz
-b21lIGNoYW5uZWwsIHRoaXMgbWF5IGFmZmVjdCB0aGUgcGVyZm9ybWFuY2Ugb2Ygb3RoZXIgY2hh
-bm5lbHMuIEJ1dCBpbiBnZW5lcmFsLCBleGNlcHQgZm9yIHZpZGVvL2ltYWdlIGRlY29kaW5nIHdo
-aWNoIG1heSBiZSBkb25lIGluIGEgc2VwYXJhdGUgdGhyZWFkLCB0aGUgY2xpZW50IHNpZGUgZG9l
-c24ndCBkbyBtdWNoIHdvcmsuCgoKVVNCLCBjbGlwYm9hcmQgYW5kIGZpbGUgc2hhcmluZyBtYXkg
-dXNlIGxhcmdlIGFtb3VudHMgb2YgZGF0YSwgYW5kIHdlIHJlbHkgb24gdGhlIGdsaWIgc291cmNl
-IGFuZCBrZXJuZWwgdG8gcHJpb3JpdGl6ZSBjaGFubmVsczogdGhpcyBpc24ndCBncmVhdCBpbiBz
-b21lIGNhc2VzIGFuZCBtYXkgcmVjZWl2ZSBpbXByb3ZlbWVudHMuCgoKCgotLQoKTWFyYy1BbmRy
-qKYgTHVyZWF1CgoKCgoKCiAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGlu
-Zm8vc3BpY2UtZGV2ZWwKCgo=
-------=_Part_109197_72788649.1592218324165
-Content-Type: text/html; charset=GBK
-Content-Transfer-Encoding: base64
+>
+> commit e788e6e4762fc1c9a13a44b05907fb109bef9cde
+> Author: Frediano Ziglio <fziglio@redhat.com>
+> Date:   Wed May 22 07:45:30 2019 +0100
+>
+>   Remove conversion warnings
+>
+>   Use casts to avoid all that warning.
+>   They should go away once you use more type safe types.
+>
+>   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+>
+> This patch adds explicit casting in many (many many) places.
+>
+> Minor style inconsistency: pointer cast types are sometimes written `(type
+> *)`, sometimes `(type*)`, and once `(type* )`.
+>
 
-PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOiMwMDAwMDA7Zm9udC1zaXplOjE0cHg7
-Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjogMDsiPkhpLDwvZGl2PjxkaXYg
-c3R5bGU9Im1hcmdpbjogMDsiPjxicj48L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij5BZnRl
-ciBkZWJ1Z2dpbmcsIEkmbmJzcDsgdGhpbmsgbXkgcHJvYmxlbSBpcyBwcm9iYWJseSBub3QgYWNj
-b2NpYXRlZCB3aXRoIGNvb3BlcmF0aXZlIG11bHRpdGFza2luZy48L2Rpdj48ZGl2IHN0eWxlPSJt
-YXJnaW46IDA7Ij5IZXJlIGlzIHdoZXJlIHNwaWNlLWd0ayByZWFkIGRhdGE6PC9kaXY+PGRpdiBz
-dHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjogMDsiPjxkaXYg
-c3R5bGU9ImNvbG9yOiByZ2IoMjEyLCAyMTIsIDIxMik7IGJhY2tncm91bmQtY29sb3I6IHJnYigz
-MCwgMzAsIDMwKTsgZm9udC1mYW1pbHk6IENvbnNvbGFzLCAmcXVvdDtDb3VyaWVyIE5ldyZxdW90
-OywgbW9ub3NwYWNlOyBsaW5lLWhlaWdodDogMTlweDsgd2hpdGUtc3BhY2U6IHByZTsiPjxkaXY+
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7PHNwYW4gc3R5bGU9ImNvbG9yOiAjNmE5OTU1OyI+Lyom
-bmJzcDt0cmVhdCZuYnNwO2FsbCZuYnNwO2luY29taW5nJm5ic3A7ZGF0YSZuYnNwOyhibG9jayZu
-YnNwO29uJm5ic3A7bWVzc2FnZSZuYnNwO2NvbXBsZXRpb24pJm5ic3A7Ki88L3NwYW4+PC9kaXY+
-PGRpdj4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDs8c3BhbiBzdHlsZT0iY29sb3I6ICNjNTg2YzA7
-Ij53aGlsZTwvc3Bhbj4mbmJzcDsoITxzcGFuIHN0eWxlPSJjb2xvcjogIzljZGNmZTsiPmM8L3Nw
-YW4+LSZndDs8c3BhbiBzdHlsZT0iY29sb3I6ICM5Y2RjZmU7Ij5oYXNfZXJyb3I8L3NwYW4+Jm5i
-c3A7JmFtcDsmYW1wOzwvZGl2PjxkaXY+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
-c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7PHNwYW4gc3R5bGU9ImNvbG9yOiAjOWNk
-Y2ZlOyI+Yzwvc3Bhbj4tJmd0OzxzcGFuIHN0eWxlPSJjb2xvcjogIzljZGNmZTsiPnN0YXRlPC9z
-cGFuPiZuYnNwOyE9Jm5ic3A7U1BJQ0VfQ0hBTk5FTF9TVEFURV9NSUdSQVRJTkcmbmJzcDsmYW1w
-OyZhbXA7PC9kaXY+PGRpdj4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
-cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDs8c3BhbiBzdHlsZT0iY29sb3I6ICNkY2RjYWE7Ij5n
-X3BvbGxhYmxlX2lucHV0X3N0cmVhbV9pc19yZWFkYWJsZTwvc3Bhbj4oPHNwYW4gc3R5bGU9ImNv
-bG9yOiAjZGNkY2FhOyI+R19QT0xMQUJMRV9JTlBVVF9TVFJFQU08L3NwYW4+KDxzcGFuIHN0eWxl
-PSJjb2xvcjogIzljZGNmZTsiPmM8L3NwYW4+LSZndDs8c3BhbiBzdHlsZT0iY29sb3I6ICM5Y2Rj
-ZmU7Ij5pbjwvc3Bhbj4pKTwvZGl2PjxkaXY+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7KSZuYnNw
-O3smbmJzcDs8c3BhbiBzdHlsZT0iY29sb3I6ICNjNTg2YzA7Ij5kbzwvc3Bhbj48L2Rpdj48ZGl2
-PiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOzxzcGFuIHN0eWxlPSJjb2xvcjogI2RjZGNhYTsiPnNwaWNlX2NoYW5u
-ZWxfcmVjdl9tc2c8L3NwYW4+KGNoYW5uZWwsPC9kaXY+PGRpdj4mbmJzcDsmbmJzcDsmbmJzcDsm
-bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
-cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
-bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
-cDsmbmJzcDsmbmJzcDsmbmJzcDsoaGFuZGxlcl9tc2dfaW4pPHNwYW4gc3R5bGU9ImNvbG9yOiAj
-ZGNkY2FhOyI+U1BJQ0VfQ0hBTk5FTF9HRVRfQ0xBU1M8L3NwYW4+KGNoYW5uZWwpLSZndDs8c3Bh
-biBzdHlsZT0iY29sb3I6ICM5Y2RjZmU7Ij5oYW5kbGVfbXNnPC9zcGFuPiwmbmJzcDs8c3BhbiBz
-dHlsZT0iY29sb3I6ICM1NjljZDY7Ij5OVUxMPC9zcGFuPik7PC9kaXY+PGRpdj48c3BhbiBzdHls
-ZT0iY29sb3I6ICNjNTg2YzA7Ij4jaWZkZWY8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjNTY5
-Y2Q2OyI+Jm5ic3A7SEFWRV9TQVNMPC9zcGFuPjwvZGl2PjxkaXY+Jm5ic3A7Jm5ic3A7Jm5ic3A7
-Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7PHNw
-YW4gc3R5bGU9ImNvbG9yOiAjNmE5OTU1OyI+LyombmJzcDtmbHVzaCZuYnNwO3RoZSZuYnNwO3Nh
-c2wmbmJzcDtidWZmZXImbmJzcDt0b28mbmJzcDsqLzwvc3Bhbj48L2Rpdj48ZGl2PiZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOzxzcGFuIHN0eWxlPSJjb2xv
-cjogI2M1ODZjMDsiPndoaWxlPC9zcGFuPiZuYnNwOyg8c3BhbiBzdHlsZT0iY29sb3I6ICM5Y2Rj
-ZmU7Ij5jPC9zcGFuPi0mZ3Q7PHNwYW4gc3R5bGU9ImNvbG9yOiAjOWNkY2ZlOyI+c2FzbF9kZWNv
-ZGVkPC9zcGFuPiZuYnNwOyE9Jm5ic3A7PHNwYW4gc3R5bGU9ImNvbG9yOiAjNTY5Y2Q2OyI+TlVM
-TDwvc3Bhbj4pOzwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImNvbG9yOiAjYzU4NmMwOyI+I2Vsc2U8
-L3NwYW4+PC9kaXY+PGRpdj4mbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
-cDsmbmJzcDs8c3BhbiBzdHlsZT0iY29sb3I6ICNjNTg2YzA7Ij53aGlsZTwvc3Bhbj4mbmJzcDso
-PHNwYW4gc3R5bGU9ImNvbG9yOiAjNTY5Y2Q2OyI+RkFMU0U8L3NwYW4+KTs8L2Rpdj48ZGl2Pjxz
-cGFuIHN0eWxlPSJjb2xvcjogI2M1ODZjMDsiPiNlbmRpZjwvc3Bhbj48L2Rpdj48ZGl2PiZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwO308L2Rpdj48L2Rpdj48L2Rpdj48cCBzdHlsZT0ibWFyZ2luOiAw
-OyI+PGJyPjwvcD48ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij5JZiB2ZGFnZW50IHNlbmRzIGxvdHMg
-b2YgZGF0YSwmbmJzcDs8c3BhbiBzdHlsZT0iY29sb3I6IHJnYigyMjAsIDIyMCwgMTcwKTsgYmFj
-a2dyb3VuZC1jb2xvcjogcmdiKDMwLCAzMCwgMzApOyBmb250LWZhbWlseTogQ29uc29sYXMsICZx
-dW90O0NvdXJpZXIgTmV3JnF1b3Q7LCBtb25vc3BhY2U7IHdoaXRlLXNwYWNlOiBwcmU7Ij5zcGlj
-ZV9jaGFubmVsX3JlY3ZfbXNnPC9zcGFuPiZuYnNwO3dpbGwgYmUgY2FsbGVkIHRoZSB3aG9sZSB0
-aW1lLCBzbyBpdGVyYXRlX3dyaXRlIHdpbGwgbm90IGJlIGNhbGxlZCwgYW5kIGRhdGEgd2lsbCBu
-b3QgYmUgc2VudCBvdXQgdW5sZXNzIHZkYWdlbnQgc3RvcHMgc2VuZGluZyBkYXRhLjwvZGl2Pjxk
-aXYgc3R5bGU9Im1hcmdpbjogMDsiPjxicj48L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij5C
-UjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjogMDsiPkRvbjwvZGl2PjxwIHN0eWxlPSJtYXJnaW46
-IDA7Ij48YnI+PC9wPjxwIHN0eWxlPSJtYXJnaW46IDA7Ij48YnI+PC9wPjxkaXYgc3R5bGU9InBv
-c2l0aW9uOnJlbGF0aXZlO3pvb206MSI+PC9kaXY+PGRpdiBpZD0iZGl2TmV0ZWFzZU1haWxDYXJk
-Ij48L2Rpdj48cCBzdHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48cD5BdCAyMDIwLTA2LTEzIDE0
-OjQwOjAyLCAiRnJlZGlhbm8gWmlnbGlvIiAmbHQ7ZnppZ2xpb0ByZWRoYXQuY29tJmd0OyB3cm90
-ZTo8L3A+PGJsb2NrcXVvdGUgaWQ9ImlzUmVwbHlDb250ZW50IiBzdHlsZT0iUEFERElORy1MRUZU
-OiAxZXg7IE1BUkdJTjogMHB4IDBweCAwcHggMC44ZXg7IEJPUkRFUi1MRUZUOiAjY2NjIDFweCBz
-b2xpZCI+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IGNvdXJpZXIgbmV3LGNvdXJpZXIsbW9uYWNv
-LG1vbm9zcGFjZSxzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiAjMDAwMDAwIj48
-ZGl2PkhpLDwvZGl2PjxkaXY+Jm5ic3A7IHRoZSBwYXR0ZXJuIHVzZWQgaW4gc3BpY2UtZ3RrIGlz
-IGNhbGxlZCBjb29wZXJhdGl2ZSBtdWx0aXRhc2tpbmcgKHNlZSA8YSBocmVmPSJodHRwczovL2Vu
-Lndpa2lwZWRpYS5vcmcvd2lraS9Db29wZXJhdGl2ZV9tdWx0aXRhc2tpbmciPmh0dHBzOi8vZW4u
-d2lraXBlZGlhLm9yZy93aWtpL0Nvb3BlcmF0aXZlX211bHRpdGFza2luZzwvYT4pLCBpZiB5b3Ug
-YWRkIGNvZGUgdGhhdCBpcyBub3QgY29vcGVyYXRpdmUgeW91IGdldCB3aGF0IHlvdSBkZXNjcmli
-ZWQuIFVzZSBjb3JvdXRpbmUgZnVuY3Rpb25zIHRvIHJlYWQgcmVtb3RlIGRhdGEgc28gdGhlIHJl
-YWQgd29uJ3Qgc3RvcCBvdGhlciBjb2RlLiBJZiB5b3UgbmVlZCB0byBydW4gZXhwZW5zaXZlIG9y
-IGJsb2NraW5nIGNvZGUgaXQncyBhIGdvb2QgaWRlYSB0byBydW4gaXQgaW4gYW5vdGhlciB0aHJl
-YWQgcmVtb3ZpbmcgdGhlIGJsb2NrYWdlLjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PkZy
-ZWRpYW5vPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxociBpZD0iendjaHIiPjxibG9ja3F1b3Rl
-IHN0eWxlPSJib3JkZXItbGVmdDoycHggc29saWQgIzEwMTBGRjttYXJnaW4tbGVmdDo1cHg7cGFk
-ZGluZy1sZWZ0OjVweDtjb2xvcjojMDAwO2ZvbnQtd2VpZ2h0Om5vcm1hbDtmb250LXN0eWxlOm5v
-cm1hbDt0ZXh0LWRlY29yYXRpb246bm9uZTtmb250LWZhbWlseTpIZWx2ZXRpY2EsQXJpYWwsc2Fu
-cy1zZXJpZjtmb250LXNpemU6MTJwdDsiIGRhdGEtbWNlLXN0eWxlPSJib3JkZXItbGVmdDogMnB4
-IHNvbGlkICMxMDEwRkY7IG1hcmdpbi1sZWZ0OiA1cHg7IHBhZGRpbmctbGVmdDogNXB4OyBjb2xv
-cjogIzAwMDsgZm9udC13ZWlnaHQ6IG5vcm1hbDsgZm9udC1zdHlsZTogbm9ybWFsOyB0ZXh0LWRl
-Y29yYXRpb246IG5vbmU7IGZvbnQtZmFtaWx5OiBIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZjsg
-Zm9udC1zaXplOiAxMnB0OyI+PGJyPjxkaXY+PGJyPjwvZGl2PkhpJm5ic3A7PGRpdj48YnI+PC9k
-aXY+PGRpdj5IZXJlIGlzIG15IGV4cGVyaW1lbnQ6PC9kaXY+PGRpdj5JIGNyZWF0ZWQgYSBuZXcg
-cG9ydC1jaGFubmVsIHRvIHRyYW5zZmVyIGRhdGEgYmV0d2VlbiB2ZGFnZW50IGFuZCBzcGljZS1n
-dGsuIEkgdXNlZCBhIHdoaWxlIGxvb3AgdG8gc2VuZCAya2IgZGF0YSB0byBndGssIGd0ayByZWNl
-aXZlZCBhbmQgZHJvcCB0aGUgZGF0YS4gSW4gdGhlIG1lYW4gdGltZSBJIHVzZWQgYSB0aW1lcigx
-bXMpIHRvIHNlbmQgMmtiIGRhdGEgdG8gdmRhZ2VudC4mbmJzcDs8L2Rpdj48ZGl2PlN0cmFuZ2Ug
-dGhpbmcgaXMgdGhhdCBndGsgd2lsbCBjb250aW51YWxseSByZWNlaXZlIGRhdGEgZm9yIGEgd2hp
-bGUoMTBzZWNzIC0gNzBzZWNzKSB0aGVuIHNlbmQgYSB3aG9sZSBidW5jaCBvZiBkYXRhIHRvIHZk
-YWdlbnQuIFdoZW4gcmVjZWl2aW5nIGRhdGEsIHNlbmQgZGF0YSB3aWxsIGJlIGFkZGVkIHRvIHRj
-cCBidWZmZXIgYnV0IHdpbGwgbm90IGJlIHNlbnQgb3V0LjwvZGl2PjxkaXY+PGJyPjwvZGl2Pjxk
-aXY+U28gSSB0aGluayBzZW5kIGV2ZW50IHdpbGwgYmUgYWZmZWN0ZWQgYnkgcmVjZWl2ZSBldmVu
-dCwgdGhlbiBJIGd1ZXNzIHVzaW5nIGRpZmZlcmVudCB0aHJlYWQgd291bGQgaGVscC4mbmJzcDs8
-L2Rpdj48ZGl2PkNvdWxkIHlvdSBwbGVhc2UgY29ycmVjdCBtZSBpZiBJoa9tIHdyb25nPzwvZGl2
-PjxkaXY+PGJyPjwvZGl2PjxkaXY+QlI8L2Rpdj48ZGl2PkRvbjxicj48ZGl2Pjxicj48L2Rpdj48
-YnI+PGRpdj48YnI+PC9kaXY+PGJyPjxkaXYgX2FwcD0iIj48YnI+PC9kaXY+PGJyPjxkaXY+PGJy
-PjwvZGl2Pjxicj7U2iAyMDIwLTA2LTEyIDIwOjAzOjMwo6wiTWFyYy1BbmRyqKYmbmJzcDtMdXJl
-YXUiJm5ic3A7Jmx0O21hcmNhbmRyZS5sdXJlYXVAZ21haWwuY29tJmd0OyDQtLXAo7o8YnI+PGJs
-b2NrcXVvdGUgaWQ9ImlzUmVwbHlDb250ZW50IiBzdHlsZT0iUEFERElORy1MRUZUOiAxZXg7IE1B
-UkdJTjogMHB4IDBweCAwcHggMC44ZXg7IEJPUkRFUi1MRUZUOiAjY2NjIDFweCBzb2xpZCIgZGF0
-YS1tY2Utc3R5bGU9InBhZGRpbmctbGVmdDogMWV4OyBtYXJnaW46IDBweCAwcHggMHB4IDAuOGV4
-OyBib3JkZXItbGVmdDogI2NjYyAxcHggc29saWQ7Ij48ZGl2IGRpcj0ibHRyIj48ZGl2IGRpcj0i
-bHRyIj5IaTxicj48L2Rpdj48YnI+PGRpdiBjbGFzcz0iZ21haWxfcXVvdGUiPjxkaXYgZGlyPSJs
-dHIiIGNsYXNzPSJnbWFpbF9hdHRyIj5PbiBGcmksIEp1biAxMiwgMjAyMCBhdCAxMjo1NyBQTSCz
-wp7dICZsdDs8YSBocmVmPSJtYWlsdG86cWlzaGl5ZXh1MkAxMjYuY29tIiB0YXJnZXQ9Il9ibGFu
-ayIgZGF0YS1tY2UtaHJlZj0ibWFpbHRvOnFpc2hpeWV4dTJAMTI2LmNvbSI+cWlzaGl5ZXh1MkAx
-MjYuY29tPC9hPiZndDsgd3JvdGU6PGJyPjwvZGl2PjxibG9ja3F1b3RlIGNsYXNzPSJnbWFpbF9x
-dW90ZSIgc3R5bGU9Im1hcmdpbjowcHggMHB4IDBweCAwLjhleDtib3JkZXItbGVmdDoxcHggc29s
-aWQgcmdiKDIwNCwyMDQsMjA0KTtwYWRkaW5nLWxlZnQ6MWV4IiBkYXRhLW1jZS1zdHlsZT0ibWFy
-Z2luOiAwcHggMHB4IDBweCAwLjhleDsgYm9yZGVyLWxlZnQ6IDFweCBzb2xpZCAjY2NjY2NjOyBw
-YWRkaW5nLWxlZnQ6IDFleDsiPjxkaXYgc3R5bGU9ImxpbmUtaGVpZ2h0OjEuNztjb2xvcjpyZ2Io
-MCwwLDApO2ZvbnQtc2l6ZToxNHB4O2ZvbnQtZmFtaWx5OkFyaWFsIiBkYXRhLW1jZS1zdHlsZT0i
-bGluZS1oZWlnaHQ6IDEuNzsgY29sb3I6ICMwMDAwMDA7IGZvbnQtc2l6ZTogMTRweDsgZm9udC1m
-YW1pbHk6IEFyaWFsOyI+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCIgZGF0YS1tY2Utc3R5bGU9Im1h
-cmdpbjogMHB4OyI+SGksPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCIgZGF0YS1tY2Utc3R5
-bGU9Im1hcmdpbjogMHB4OyI+PGJyPjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiIGRhdGEt
-bWNlLXN0eWxlPSJtYXJnaW46IDBweDsiPlNwaWNlLWd0ayBpcyBub3cgdXNpbmcgY28tcm91dGlu
-ZSB0byBoYW5kbGUgZGlmZmVyZW50IGNoYW5uZWwgY29ubmVjdGlvbnMuIFdoZW4gYSBjaGFubmVs
-IGlzIGhhbmRsaW5nIGRhdGEsIG90aGVyIGNoYW5uZWxzIHdvdWxkIGhhdmUgdG8gd2FpdCwgcmF0
-aGVyIHRoYW4gaGFuZGxpbmcgc3luY2hyb25vdXNseS4mbmJzcDsgVGhhdCB3b3VsZCBicmluZyB1
-cyBmb2xsb3dpbmcgaXNzdWVzOjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiIGRhdGEtbWNl
-LXN0eWxlPSJtYXJnaW46IDBweDsiPiZuYnNwOzEuIElmIHNvbWUgbGVzcyBpbXBvcnRhbnQgY2hh
-bm5lbHMgKGxpa2UgdXNiIGNoYW5uZWxzKSBhcmUgdHJhbnNmZXJpbmcgYmlnIGRhdGEsIGltcG9y
-dGFudCBjaGFubmVscyAobWFpbi1jaGFubmVsLCBkaXNwbGF5LWNoYW5uZWwsaW5wdXQtY2hhbm5l
-bCkgd2lsbCBiZSBhZmZlY3RlZC4mbmJzcDsmbmJzcDs8L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46
-MHB4IiBkYXRhLW1jZS1zdHlsZT0ibWFyZ2luOiAwcHg7Ij4mbmJzcDsyLiBXaGVuIHJlY2Vpdmlu
-ZyBiaWcgZGF0YSBsaWtlIGZpbGUgdHJhbnNmZXJpbmcoR19JT19JTiksIHNlbmQgZXZlbnQgKEdf
-SU9fT1VUKSB3aWxsIG5vdCBiZSB0cmlnZ2VyZWQuPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjBw
-eCIgZGF0YS1tY2Utc3R5bGU9Im1hcmdpbjogMHB4OyI+Jm5ic3A7My4gRmxvdyBjb250cm9sIGJl
-dHdlZW4gZGlmZmVyZW50IGNoYW5uZWxzIHdpbGwgYmUgaGFyZCB0byBkby4mbmJzcDs8L2Rpdj48
-ZGl2IHN0eWxlPSJtYXJnaW46MHB4IiBkYXRhLW1jZS1zdHlsZT0ibWFyZ2luOiAwcHg7Ij48YnI+
-PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCIgZGF0YS1tY2Utc3R5bGU9Im1hcmdpbjogMHB4
-OyI+SXMgaXMgcG9zc2libGUoYW5kIG1ha2Ugc2Vuc2UpIHRvIHB1dCBjaGFubmVscyBpbnRvIGRp
-ZmZlcmVudCB0aHJlYWRzIHNvIHRoZXkgY2FuIHN5bmNocm9ub3VzbHkgcmVjZWl2ZSAmYW1wOyBz
-ZW5kIG1zZywgd2l0aG91dCBhZmZlY3QgZWFjaCBvdGhlcj88L2Rpdj48ZGl2IHN0eWxlPSJtYXJn
-aW46MHB4IiBkYXRhLW1jZS1zdHlsZT0ibWFyZ2luOiAwcHg7Ij48YnI+PC9kaXY+PC9kaXY+PC9i
-bG9ja3F1b3RlPjxkaXY+PGJyPjwvZGl2PjxkaXY+U3dpdGNoaW5nIHRvIHRocmVhZHMgd291bGQg
-YmUgcG9zc2libGUsIGJ1dCB0aGF0IHdvdWxkbid0IGhlbHAgaW4gdGhlIHNpdHVhdGlvbiB5b3Ug
-ZGVzY3JpYmUsIGFzIHlvdSBhcmUgdmVyeSBsaWtlbHkgYm91bmQgb24gSU8uIFVzaW5nIHNldmVy
-YWwgdGhyZWFkcyB3b3VsZCBhY3R1YWxseSBjcmVhdGUgbW9yZSBwcm9ibGVtcyB0byBzeW5jaHJv
-bml6ZSBhbmQgc2NoZWR1bGUgdGhlIGRpZmZlcmVudCBjaGFubmVscy48L2Rpdj48ZGl2Pjxicj48
-L2Rpdj48ZGl2PklvIG9wZXJhdGlvbnMgaW4gY29yb3V0aW5lcyBhcmUgbm9uLWJsb2NraW5nLCBz
-byB0aGV5IHNob3VsZG4ndCBhZmZlY3Qgb3RoZXIgc3BpY2UtZ3RrIHRhc2suIElmIHlvdSBob3dl
-dmVyIG9ic2VydmUgYSBibG9ja2luZyBDUFUtdGFzayBpbiBzb21lIGNoYW5uZWwsIHRoaXMgbWF5
-IGFmZmVjdCB0aGUgcGVyZm9ybWFuY2Ugb2Ygb3RoZXIgY2hhbm5lbHMuIEJ1dCBpbiBnZW5lcmFs
-LCBleGNlcHQgZm9yIHZpZGVvL2ltYWdlIGRlY29kaW5nIHdoaWNoIG1heSBiZSBkb25lIGluIGEg
-c2VwYXJhdGUgdGhyZWFkLCB0aGUgY2xpZW50IHNpZGUgZG9lc24ndCBkbyBtdWNoIHdvcmsuPC9k
-aXY+PGRpdj48YnI+PC9kaXY+PGRpdj5VU0IsIGNsaXBib2FyZCBhbmQgZmlsZSBzaGFyaW5nIG1h
-eSB1c2UgbGFyZ2UgYW1vdW50cyBvZiBkYXRhLCBhbmQgd2UgcmVseSBvbiB0aGUgZ2xpYiBzb3Vy
-Y2UgYW5kIGtlcm5lbCB0byBwcmlvcml0aXplIGNoYW5uZWxzOiB0aGlzIGlzbid0IGdyZWF0IGlu
-IHNvbWUgY2FzZXMgYW5kIG1heSByZWNlaXZlIGltcHJvdmVtZW50cy48YnI+PC9kaXY+PGRpdj48
-YnI+PC9kaXY+PC9kaXY+PGJyPi0tIDxicj48ZGl2IGRpcj0ibHRyIiBjbGFzcz0iZ21haWxfc2ln
-bmF0dXJlIj5NYXJjLUFuZHKopiBMdXJlYXU8YnI+PC9kaXY+PC9kaXY+PC9ibG9ja3F1b3RlPjwv
-ZGl2Pjxicj48ZGl2Pjxicj48L2Rpdj48cD4mbmJzcDs8L3A+PGJyPl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fPGJyPlNwaWNlLWRldmVsIG1haWxpbmcgbGlz
-dDxicj5TcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmc8YnI+aHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbDxicj48L2Jsb2NrcXVv
-dGU+PGRpdj48YnI+PC9kaXY+PC9kaXY+PC9ibG9ja3F1b3RlPjwvZGl2Pg==
-------=_Part_109197_72788649.1592218324165--
+It was a pity, sorry about that
 
+> There is a type changed from `RedChannelClient *rcc` to
+> `CursorChannelClient *ccc` in function
+> `cursor_channel_client_reset_cursor_cache`. I'm not sure this belonged
+> to this patch. But the change seems to be consistent, with `ccc =
+> CURSOR_CHANNEL_CLIENT(rcc)`
+>
+>
+> Besides that, the patch looks good to me.
+>
+> Acked-by: Kevin Pouget <kpouget@redhat.com>
 
---===============1601203231==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+thanks
+
+>
+> commit e6e6ded681ff154f236f260f071389c4c8c0d944
+> Author: Frediano Ziglio <fziglio@redhat.com>
+> Date:   Sun May 26 15:10:28 2019 +0100
+>
+>   Use C++ IS-A relationship for RedChannelClient and RedChannel
+>
+>   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+>
+>
+> The code modifications of this patch uses inheritance for structure
+> types with a parent:
+>
+>     struct CommonGraphicsChannel
+>     {
+>         RedChannel parent;
+>
+>         ...
+>     };
+>
+> becomes:
+>
+>     struct CommonGraphicsChannel: public RedChannel
+>     {
+>         CommonGraphicsChannelPrivate *priv;
+>     };
+>
+>
+> Minor: this patch renames 19 files from C to C++ without any
+> modification, they could have been in a dedicated patch. Likewise,
+> some modifications are purly C-to-C++ transition (eg,
+> `s/inttypes.h/ctypes/`).
+>
+> Minor: some of the modifications could have been included in the
+> previous patch (casts) or elsewhere (eg, assert-before-ref check).
+>
+> Besides that, the patch looks good to me.
+>
+> Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+Probably the files included some headers that requires C++.
+
+>
+> commit 874e7450887375730a4b3675b9b1b7002b440ea8
+> Author: Frediano Ziglio <fziglio@redhat.com>
+> Date:   Tue May 28 05:03:01 2019 +0100
+>
+>   Move all red_channel_client_* functions in header as methods
+>
+>   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+>
+> This (big) patch rewrites `red_channel_client_*(rcc, ...)` functions
+> and calls into object methods.
+>
+> One aspect that could be discussed is the usage of the implicit
+> `this`:
+>
+>     red_channel_client_push(rcc); // old
+>     push(); // new, inside another RedChannelClient method
+>
+> my preference would be for avoiding this implicit `this`:
+>
+>     this->push();
+>
+> I think it makes the code easier to read, as you immediately know that
+> `push` belongs (or is inherited) to the current class.
+>
+> I don't know how common this is in C++, but a Python motto is
+> `Explicit is better than implicit`.
+>
+> Besides that, the patch looks good to me.
+>
+> Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+The use of "this" usually is pretty limited in C++ general styl,
+to distinguish in case were is ambiguous or to retrieve just the
+pointer to the object.
+Other languages have much more explicit usage of this/self but for
+other reasons (Python being a dynamic language, other because they
+are not much object oriented).
+I was discussion the distinguish and I found a "-Wshadow" warning in
+gcc which could avoid this issue.
+
+>
+> commit 38cd152952968e37d0cc96e95e3e5e47a2f66c2f
+> Author: Frediano Ziglio <fziglio@redhat.com>
+> Date:   Sun Mar 1 19:38:38 2020 +0000
+>
+>   automake: Link with C++ linker
+>
+>   If automake sees no C++ files in the source it assumes have to
+>   use C linker settings not linking C++ library.
+>   This was not a problem as code did not use C++ libraries but next
+>   patch will use pure virtual function call.
+>   It could be provided but as later we will use RTTI use C++ library.
+>
+>   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
+>
+> This patch adds a `dummy.cpp` in the SOURCES files in order to trick
+> the linker to use C++ linking. The linker is aware of this trick and
+> doesn't complain about the missing file.
+>
+> The patch looks good to me.
+>
+> Acked-by: Kevin Pouget <kpouget@redhat.com>
+
+yes, crazy trick, but it was on Automake manuals!
+
+> 
+> 
+> On Mon, Jun 8, 2020 at 5:10 PM Kevin Pouget <kpouget@redhat.com> wrote:
+> >
+> > Hello spice-devel
+> >
+> > I worked on the review of Frediano's C++ patches during the last weeks,
+> > I tried to understand the gist of the commits and summarize it in the
+> > review message.
+> > It's not an in-depth review, and I only spotted minor details.
+> >
+> > A few patches are not acked, mostly because they were too big for me to
+> > study carefully enough.
+> >
+> > Overall, I really appreciate the effort made to adapt the code to C++, from
+> > my point of view it is greatly beneficial for the code as it reduces a lot
+> > the amount of code duplication (boilerplate code) by leveraging C++
+> > inheritance, polymorphism, virtual methods, etc.
+> > Likewise, the ref-counting is made simpler and safer with custom classes
+> > (share_ptr). These custom classes mimic existing ones AFAICT, but they are
+> > more "C-safe" as they cannot throw exceptions.
+> >
+> > 3 mails will follow with the reviews.
+> >
+> > Best regards,
+> >
+> > Kevin
+> 
+> _______________________________________________
+> Spice-devel mailing list
+> Spice-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> 
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============1601203231==--
-
