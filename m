@@ -1,58 +1,58 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5D231F9514
-	for <lists+spice-devel@lfdr.de>; Mon, 15 Jun 2020 13:13:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35DFC1F9517
+	for <lists+spice-devel@lfdr.de>; Mon, 15 Jun 2020 13:14:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3C3F089CE2;
-	Mon, 15 Jun 2020 11:13:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B9DE46E05D;
+	Mon, 15 Jun 2020 11:14:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9429289CE2
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:13:31 +0000 (UTC)
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1EAE16E05D
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:14:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592219609;
+ s=mimecast20190719; t=1592219693;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Kxc6N3tbfl7V1Jgm7vMSlOxN9s6LP55TOM4BAMaJNMI=;
- b=cmBE/UeGMoEiwxkJAt/0dim9ezLM4Jg+lMnfwJY/FF8Q3lXs/WvLZctrIZykqlzzOyBRWC
- 4HrRddCGLFyteq2qJwX17npwUGEtLBBbTU8ELxFnIsPV7kkStolOQGp3u2RO5YUMk5xfbr
- /6PGCqZSy1JgoercAaYRcMdJcWE6Yn4=
+ bh=8XIPd7Lnl56vRIbwiy+pSQ2U2Gtkk1aFM7orYJp6ZPg=;
+ b=dRivoso8qffpQlxf6GtFxfNqOhD3vnZlIofoN94AjIMcNw13srYQuRxROWOxKF9pMtjzkC
+ IY+hdpR0T9voF6QbIUfvh7onX9LpKfEG/tTmNdvb6ReVpidkV+TEG/mXltp87uP0cMq8aB
+ m8HdUXlecFJ//PS95J0TbFQcWSKvaXY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-393-VEDYNRNeOrK-WW80sJGWaQ-1; Mon, 15 Jun 2020 07:13:24 -0400
-X-MC-Unique: VEDYNRNeOrK-WW80sJGWaQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-445-S4m9vKVQOFCpDBBXb9Bfog-1; Mon, 15 Jun 2020 07:14:41 -0400
+X-MC-Unique: S4m9vKVQOFCpDBBXb9Bfog-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3EDC418A8223
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:13:23 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3AE47100CCC6
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:14:38 +0000 (UTC)
 Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 38E977F4F9
- for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:13:23 +0000 (UTC)
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 351DC768AE
+ for <spice-devel@lists.freedesktop.org>; Mon, 15 Jun 2020 11:14:38 +0000 (UTC)
 Received: from zmail25.collab.prod.int.phx2.redhat.com
  (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 32A3A1809542;
- Mon, 15 Jun 2020 11:13:23 +0000 (UTC)
-Date: Mon, 15 Jun 2020 07:13:22 -0400 (EDT)
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 2EBF6833A0;
+ Mon, 15 Jun 2020 11:14:38 +0000 (UTC)
+Date: Mon, 15 Jun 2020 07:14:38 -0400 (EDT)
 From: Frediano Ziglio <fziglio@redhat.com>
 To: Kevin Pouget <kpouget@redhat.com>
-Message-ID: <1239063427.30559640.1592219602905.JavaMail.zimbra@redhat.com>
-In-Reply-To: <CADJ1XR2az5F2qvwMrFxo_--SfwYFRP_Dw8=6ii8dLYryzZF96g@mail.gmail.com>
+Message-ID: <2028661974.30559670.1592219678158.JavaMail.zimbra@redhat.com>
+In-Reply-To: <CADJ1XR3yhwLdVMkHbk1-Z51COUkPgvQq5Tm0zdJnTQgkLp+=kQ@mail.gmail.com>
 References: <CADJ1XR3kFo__t5DsGf3xVJCxF=QSrYge1RWG9qN4kW48eBYpLQ@mail.gmail.com>
- <CADJ1XR2az5F2qvwMrFxo_--SfwYFRP_Dw8=6ii8dLYryzZF96g@mail.gmail.com>
+ <CADJ1XR3yhwLdVMkHbk1-Z51COUkPgvQq5Tm0zdJnTQgkLp+=kQ@mail.gmail.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.33.32.17, 10.4.195.26]
 Thread-Topic: Review of the C++ patches
-Thread-Index: /EV61gwDwCIZTLVFdGcp6M5fplyxUA==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Thread-Index: Pegeg0JiPa/9jqcjz0ompq2iUHh1Mg==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Subject: Re: [Spice-devel] Review of the C++ patches
@@ -73,185 +73,150 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> commit 7b3637417062fe657c0bf1fced5ef59a489dbdc3
+>
+> commit 61affed2a2e36b59e6935e608d7d80242f976c7e
 > Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Mon Mar 9 10:04:24 2020 +0000
+> Date:   Mon May 20 16:49:17 2019 +0100
 >
->   Adjust some warnings
+>   red-channel-client: Better private initialisation
 >
->   Remove -Werror and add -fpermissive, this will allow to compile C code with
->   a GNU C++ compiler.
->
->   Ignore warnings as our code use some feature like empty arrays.
->
->   Remove warnings not available in C++.
->
->   Bump GLIB_VERSION_MAX_ALLOWED to reduce the warning, looks like the
->   GLib headers for C++ are not able to handle them correctly.
+>   Initialise RedChannelClientPrivate fields from the new
+>   constructor instead from RedChannelClient.
+>   Also change some fields to constants (actually many of them).
 >
 >   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 >
-> This patch adds multiple warning to the build systems.
+> This patch moves constructor/destructor code from `RedChannelClient`
+> to `RedChannelClientPrivate`.
 >
-> I understand that they ease the transition from C to 'C + C++', but
-> without a deeper look it's hard to tell which ones should be
-> eventually removed and which ones (if any) must stay because of the
-> C/C++ cooperation.
+> Minor: the diff of this patch is confusing, as the constructor and
+> destructor are mixed up as the order of the function has changed :#]
 >
-> Minor: the explicit-cast fix in `server/red-client.c` doesn't seem to
-> belong to this patch. I wonder if it's a patch split issue or if there
-> is a link with build system patch.
+
+Not clear. What do you mean? I usually tried to reduce the diff size.
+
+
 >
+> Minor: I don't see "many" fields changed to `const`, only 3 of them
+> ...?
 >
-> Apart from this minor comment, the patch looks good to me.
+> Besides these minor comments, the patch looks good to me.
 >
 > Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-Yes, could be a split issue. Not that changes much at the end of the series
-but probably was a split.
-
 >
-> commit e788e6e4762fc1c9a13a44b05907fb109bef9cde
+> commit 2b04f644f670af79fef9332deb75722f056c5819
 > Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Wed May 22 07:45:30 2019 +0100
+> Date:   Fri May 24 20:00:01 2019 +0100
 >
->   Remove conversion warnings
->
->   Use casts to avoid all that warning.
->   They should go away once you use more type safe types.
+>   red-channel-client: Move handle_migrate_data as virtual function
 >
 >   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 >
-> This patch adds explicit casting in many (many many) places.
+> This patch rewrites the `handle_migrate_date` attribute callback into
+> a virtual function of the `RedChannelClient` class.
 >
-> Minor style inconsistency: pointer cast types are sometimes written `(type
-> *)`, sometimes `(type*)`, and once `(type* )`.
+> After a short investigation, I don't understand where
+> `channel_class->handle_migrate_data` used to be defined, so I cannot
+> double check that it was actually removed ...
 >
-
-It was a pity, sorry about that
-
-> There is a type changed from `RedChannelClient *rcc` to
-> `CursorChannelClient *ccc` in function
-> `cursor_channel_client_reset_cursor_cache`. I'm not sure this belonged
-> to this patch. But the change seems to be consistent, with `ccc =
-> CURSOR_CHANNEL_CLIENT(rcc)`
->
->
-> Besides that, the patch looks good to me.
+> Part from this, the patch looks good to me.
 >
 > Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-thanks
+Part of the virtual method were in RedChannel and not in RedChannelClient
+which was pretty confusing. Before GObject client and channel code
+were pretty close (same file) and all virtual methods (callback in C)
+were in RedChannel.
 
 >
-> commit e6e6ded681ff154f236f260f071389c4c8c0d944
+> commit bd4b1caeb8e629286457714e0ab412918d13e9c1
 > Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Sun May 26 15:10:28 2019 +0100
+> Date:   Mon Mar 9 18:31:20 2020 +0000
 >
->   Use C++ IS-A relationship for RedChannelClient and RedChannel
+>   Use template to make adding timers/watches safer
+>
+>   Instead of forcibly cast functions cast only if data pointer and
+>   function pointers match. This also allows to remove dangerous
+>   casts all over the place.
 >
 >   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 >
+> This patch improves the type safety of timers/watches functions, by
+> relying on C++ templates.
 >
-> The code modifications of this patch uses inheritance for structure
-> types with a parent:
+> Minor: I don't understand why the definitions are protected with
+> `#ifdef __cplusplus`: if we're not compiling with C++, these functions
+> are not available? seems strange to me to have 2 different sets of
+> function available after a `#include` based on C/C++ distinction ...?
 >
->     struct CommonGraphicsChannel
->     {
->         RedChannel parent;
->
->         ...
->     };
->
-> becomes:
->
->     struct CommonGraphicsChannel: public RedChannel
->     {
->         CommonGraphicsChannelPrivate *priv;
->     };
->
->
-> Minor: this patch renames 19 files from C to C++ without any
-> modification, they could have been in a dedicated patch. Likewise,
-> some modifications are purly C-to-C++ transition (eg,
-> `s/inttypes.h/ctypes/`).
->
-> Minor: some of the modifications could have been included in the
-> previous patch (casts) or elsewhere (eg, assert-before-ref check).
->
-> Besides that, the patch looks good to me.
+> With a solution/answer for this concern:
 >
 > Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-Probably the files included some headers that requires C++.
+I would say it's normal, but maybe it got obsolete (meaning the file
+is now only compatible with C++).
+Similar pattern in spice-common/common/rect.h (no, I didn't write it,
+it was there since... I don't know!)
 
 >
-> commit 874e7450887375730a4b3675b9b1b7002b440ea8
+> commit 435ea33540941e93fdf942a1cd16222f3cbbbcbd
 > Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Tue May 28 05:03:01 2019 +0100
+> Date:   Tue Mar 3 14:47:53 2020 +0000
 >
->   Move all red_channel_client_* functions in header as methods
+>   Reduce C++ symbols visibility
+>
+>   This allows the compiler to do some more optimisations on the
+>   produced binary.
+>   To allows possible future portability include header/footer in
+>   some helper header files.
 >
 >   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 >
-> This (big) patch rewrites `red_channel_client_*(rcc, ...)` functions
-> and calls into object methods.
+> *This patch encapsulates the visibility macros
+>  (`G_BEGIN_DECLS`/`G_END_DECLS`) into dedicated header files
+>  (`push-visibility.h`/`pop-visibility.h`).
 >
-> One aspect that could be discussed is the usage of the implicit
-> `this`:
+> It also changes the visibility to this:
 >
->     red_channel_client_push(rcc); // old
->     push(); // new, inside another RedChannelClient method
+>     #if defined(__GNUC__) && __GNUC__ >= 4 && !defined(__MINGW32__)
+>     #pragma GCC visibility push(hidden)
+>     #endif
 >
-> my preference would be for avoiding this implicit `this`:
+> and
 >
->     this->push();
+>     #if defined(__GNUC__) && __GNUC__ >= 4 && !defined(__MINGW32__)
+>     #pragma GCC visibility pop
+>     #endif
 >
-> I think it makes the code easier to read, as you immediately know that
-> `push` belongs (or is inherited) to the current class.
->
-> I don't know how common this is in C++, but a Python motto is
-> `Explicit is better than implicit`.
->
-> Besides that, the patch looks good to me.
->
-> Acked-by: Kevin Pouget <kpouget@redhat.com>
+> I don't really know the implication of these last changes, so I cannot
+> ack...
 
-The use of "this" usually is pretty limited in C++ general styl,
-to distinguish in case were is ambiguous or to retrieve just the
-pointer to the object.
-Other languages have much more explicit usage of this/self but for
-other reasons (Python being a dynamic language, other because they
-are not much object oriented).
-I was discussion the distinguish and I found a "-Wshadow" warning in
-gcc which could avoid this issue.
+The reason about it is not that easy, there is a long webpage on GCC manuals
+which is pretty good. They reduce symbols visibility allowing some additional
+optimizations of the code. Semantically they declare the various classes
+as internal to the module.
 
 >
-> commit 38cd152952968e37d0cc96e95e3e5e47a2f66c2f
+> commit 13f27ab8e9ad4d412cba3398e3de206b04699d7f
 > Author: Frediano Ziglio <fziglio@redhat.com>
-> Date:   Sun Mar 1 19:38:38 2020 +0000
+> Date:   Wed May 29 08:56:32 2019 +0100
 >
->   automake: Link with C++ linker
->
->   If automake sees no C++ files in the source it assumes have to
->   use C linker settings not linking C++ library.
->   This was not a problem as code did not use C++ libraries but next
->   patch will use pure virtual function call.
->   It could be provided but as later we will use RTTI use C++ library.
+>   sound: Make on_message_done a virtual function
 >
 >   Signed-off-by: Frediano Ziglio <fziglio@redhat.com>
 >
-> This patch adds a `dummy.cpp` in the SOURCES files in order to trick
-> the linker to use C++ linking. The linker is aware of this trick and
-> doesn't complain about the missing file.
+> This patch makes `on_message_done` method virtual, with a default
+> empty body, and changes the rest of code accordingly.
 >
-> The patch looks good to me.
+> Looks good to me.
 >
 > Acked-by: Kevin Pouget <kpouget@redhat.com>
 
-yes, crazy trick, but it was on Automake manuals!
+I got a recent MR to improve this. The history of SoundChannel is pretty
+weird, I remember I almost rewrote the classes. They were using RedChannelClient
+but at the same time replacing these objects with other code.
 
-> 
 > 
 > On Mon, Jun 8, 2020 at 5:10 PM Kevin Pouget <kpouget@redhat.com> wrote:
 > >
@@ -278,12 +243,6 @@ yes, crazy trick, but it was on Automake manuals!
 > > Best regards,
 > >
 > > Kevin
-> 
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-> 
 
 _______________________________________________
 Spice-devel mailing list
