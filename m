@@ -1,45 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 501331FA67A
-	for <lists+spice-devel@lfdr.de>; Tue, 16 Jun 2020 04:38:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D72071FB26F
+	for <lists+spice-devel@lfdr.de>; Tue, 16 Jun 2020 15:46:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E1106EBE9;
-	Tue, 16 Jun 2020 02:38:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 55B0D6E16B;
+	Tue, 16 Jun 2020 13:46:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from m1536.mail.126.com (m1536.mail.126.com [220.181.15.36])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DE8B06EBE9
- for <spice-devel@lists.freedesktop.org>; Tue, 16 Jun 2020 02:38:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=B6KCg
- Z33TGCAoG5sXkXFfYDFBZ0eziEV+TcYd759+1U=; b=HJBM1K62Xvl0m+/FM4e8i
- THjJ/pdd7240HfAEfnf8jPmo4mDIy+m7qMsYoDuiihR/zd/bfz4K+uxFC5o/OrW9
- lQSee3U76U6R6gZ/+yunBkscjLtuTSc6K9SH5l3n6te5nDd088/1nBzov69VR1Lr
- 9FmS2cStQ5+Zqk7qma3MoI=
-Received: from qishiyexu2$126.com ( [121.8.254.210] ) by
- ajax-webmail-wmsvr36 (Coremail) ; Tue, 16 Jun 2020 10:38:42 +0800 (CST)
-X-Originating-IP: [121.8.254.210]
-Date: Tue, 16 Jun 2020 10:38:42 +0800 (CST)
-From: =?GBK?B?s8Ke3Q==?= <qishiyexu2@126.com>
-To: "Jakub Janku" <jjanku@redhat.com>
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190724(ac680a23)
- Copyright (c) 2002-2020 www.mailtech.cn 126com
-In-Reply-To: <CAH=CeiCKL2PinjiCXPBeo=gUacADMLhVJ72qGm9H2JY94jLY+g@mail.gmail.com>
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 218E86E16B
+ for <spice-devel@lists.freedesktop.org>; Tue, 16 Jun 2020 13:46:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1592315172;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=PC1htiPnRwDMolorlSyojf9i+SQp+TvBErIxQwbR7FU=;
+ b=Y5RHQlt0izIW0I81JmgTtgwj3H6mRrJp4FtYz3tr5cjot0od5ZSUq/342pBQDsE4CxugI7
+ uCxUSSBMpfl083Om7dFX/bqVezK5FPmH3ddRhPiLXFwq9/NljMxjz0g/CoYdT9wfHD1s+F
+ +CZ8MRlIa/nToIqmONGn9YI9IYpz1wg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-439-TBhWM11-MAGwu0LBKyR9BQ-1; Tue, 16 Jun 2020 09:46:04 -0400
+X-MC-Unique: TBhWM11-MAGwu0LBKyR9BQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5F7831512EC;
+ Tue, 16 Jun 2020 13:46:03 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 522BE5D965;
+ Tue, 16 Jun 2020 13:46:03 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 3CCE01048F9;
+ Tue, 16 Jun 2020 13:46:03 +0000 (UTC)
+Date: Tue, 16 Jun 2020 09:46:02 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: =?utf-8?B?6ZmI54Kk?= <qishiyexu2@126.com>
+Message-ID: <383099151.30745646.1592315162623.JavaMail.zimbra@redhat.com>
+In-Reply-To: <31d3c6e7.2079.172bafe3abf.Coremail.qishiyexu2@126.com>
 References: <16656b4b.5cd5.172a7a33052.Coremail.qishiyexu2@126.com>
  <CAJ+F1CLYf0xoQ-UraTQzPoGk9Vpvt_=yoyW+ENZHdznf3kmLqA@mail.gmail.com>
  <2bd8d90a.9bae.172a91d8976.Coremail.qishiyexu2@126.com>
  <1346340456.30483558.1592030402447.JavaMail.zimbra@redhat.com>
  <4f7d70eb.7593.172b79b8cc5.Coremail.qishiyexu2@126.com>
  <CAH=CeiCKL2PinjiCXPBeo=gUacADMLhVJ72qGm9H2JY94jLY+g@mail.gmail.com>
+ <31d3c6e7.2079.172bafe3abf.Coremail.qishiyexu2@126.com>
 MIME-Version: 1.0
-Message-ID: <31d3c6e7.2079.172bafe3abf.Coremail.qishiyexu2@126.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: JMqowECJSUKzMOhekADKAA--.48262W
-X-CM-SenderInfo: xtlvxxp1h03ja6rslhhfrp/1tbimgJFKFpEAWi0vAACsI
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Originating-IP: [10.33.32.4, 10.4.195.6]
+Thread-Topic: Is it possible to put spice channels into different threads?
+Thread-Index: COhTf8HqmcWMrm+R76lDm/361+gRDg==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Subject: Re: [Spice-devel] Is it possible to put spice channels into
  different threads?
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -54,249 +73,474 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============2132048886=="
+Content-Type: multipart/mixed; boundary="===============0753705903=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============2132048886==
+--===============0753705903==
 Content-Type: multipart/alternative; 
-	boundary="----=_Part_30288_1443366370.1592275122879"
+	boundary="----=_Part_30745645_1313786515.1592315162622"
 
-------=_Part_30288_1443366370.1592275122879
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: base64
+------=_Part_30745645_1313786515.1592315162622
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-SGksCgoKRm9yIG5vdyBJIHNpbXBseSB1c2VkIGEgY291bnRlciB0byB3b3JrIGFyb3VuZCB0aGlz
-IGlzc3VlLgoKCndoaWxlICguLi4gZ19wb2xsYWJsZV9pbnB1dF9zdHJlYW1faXNfcmVhZGFibGUg
-KSB7CiAgaWYgKGxvb3AgPiAxMCkKICAgIGJyZWFrOwp9CgoKVWdseSBidXQgc2VlbXMgdXNlZnVs
-LgoKCkJSCkRvbgoKCgoKCgoKCgoKCgoKCgoKCkF0IDIwMjAtMDYtMTUgMjA6NTk6MDAsICJKYWt1
-YiBKYW5rdSIgPGpqYW5rdUByZWRoYXQuY29tPiB3cm90ZToKPkhpLAo+Cj55ZXMsIEkgdGhpbmsg
-dGhpcyBpcyBhIHJlYWwgaXNzdWUuIEkgZmVlbCBsaWtlIEkndmUgc3R1bWJsZWQgYWNyb3NzCj5z
-b21ldGhpbmcgc2ltaWxhciBpbiB0aGUgcGFzdCB3aGVuIHdvcmtpbmcgb24gd2ViZGF2Lgo+Cj5T
-byB5ZWFoLCBpdCBzZWVtcyBsaWtlIHRoZSBjaGFubmVsIG1pZ2h0IGdldCBibG9ja2VkIGluIG9u
-ZSBkaXJlY3Rpb24KPi0tIG1lYW5pbmcgZGF0YSBpc24ndCBzZW50IHVudGlsIHlvdSByZWFkIGFs
-bCBhdmFpbGFibGUgZGF0YS4KPgo+SG93ZXZlciwgdGhhdCBkb2Vzbid0IG1lYW4gdGhhdCBvdGhl
-ciBjaGFubmVscyB3b24ndCB3b3JrIGltaG8uIEluIGEKPm1vcmUgcmVhbGlzdGljIHNjZW5hcmlv
-LCB5b3Ugd29sZCByZWFkIHRoZSBkYXRhIGZyb20gdmRhZ2VudCBpbiBjaHVua3MKPmFuZCBhY3R1
-YWxseSBkbyBzb21ldGhpbmcgd2l0aCBpdC4gV2ViZGF2IHVzZXMgdGhlIGNvZGUgaW4gdm1jc3Ry
-ZWFtLmMKPnRvIHJlYWQgdGhlIGRhdGEgaW4gY29yb3V0aW5lIGFuZCB0aGUgYnVmZmVyIGlzIGRl
-bGl2ZXJlZCB0byB0aGUKPldlYmRhdkNoYW5uZWwgdXNpbmcgYW4gaWRsZSBjYWxsYmFjay4gVGhp
-cyBnaXZlcyBvdGhlciBldmVudHMgdGhlCj5vcHBvcnR1bml0eSB0byBmaXJlIGFuZCBiZSBwcm9j
-ZXNzZWQgYW5kIHRoZSBjb2RlIGNhbiB5aWVsZCB0byBhbm90aGVyCj5jb3JvdXRpbmUuIFNvIGlt
-cG9ydGFudCBjaGFubmVscywgbGlrZSBEaXNwbGF5LCBzaG91bGQgY29udGludWUKPndvcmtpbmcg
-anVzdCBmaW5lLgo+Cj5QUywgaXQncyBiZWVuIHF1aXRlIHNvbWUgdGltZSwgc28gSSBtaWdodCBu
-b3QgcmVtZW1iZXIgaXQgY29ycmVjdGx5Lgo+QnV0IGFueXdheSwgaWYgeW91IGxvb2sgYXQgY2hh
-bm5lbC13ZWJkYXYuYyBhbmQgdm1jc3RyZWFtLmMsIHlvdQo+c2hvdWxkIGhvcGVmdWxseSBnZXQg
-YSBiZXR0ZXIgaWRlYS4KPgo+Q2hlZXJzLAo+SmFrdWIKPgo+T24gTW9uLCBKdW4gMTUsIDIwMjAg
-YXQgMTI6NTIgUE0gs8Ke3SA8cWlzaGl5ZXh1MkAxMjYuY29tPiB3cm90ZToKPj4KPj4gSGksCj4+
-Cj4+IEFmdGVyIGRlYnVnZ2luZywgSSAgdGhpbmsgbXkgcHJvYmxlbSBpcyBwcm9iYWJseSBub3Qg
-YWNjb2NpYXRlZCB3aXRoIGNvb3BlcmF0aXZlIG11bHRpdGFza2luZy4KPj4gSGVyZSBpcyB3aGVy
-ZSBzcGljZS1ndGsgcmVhZCBkYXRhOgo+Pgo+PiAgICAgLyogdHJlYXQgYWxsIGluY29taW5nIGRh
-dGEgKGJsb2NrIG9uIG1lc3NhZ2UgY29tcGxldGlvbikgKi8KPj4gICAgIHdoaWxlICghYy0+aGFz
-X2Vycm9yICYmCj4+ICAgICAgICAgICAgYy0+c3RhdGUgIT0gU1BJQ0VfQ0hBTk5FTF9TVEFURV9N
-SUdSQVRJTkcgJiYKPj4gICAgICAgICAgICBnX3BvbGxhYmxlX2lucHV0X3N0cmVhbV9pc19yZWFk
-YWJsZShHX1BPTExBQkxFX0lOUFVUX1NUUkVBTShjLT5pbikpCj4+ICAgICApIHsgZG8KPj4gICAg
-ICAgICAgICAgc3BpY2VfY2hhbm5lbF9yZWN2X21zZyhjaGFubmVsLAo+PiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIChoYW5kbGVyX21zZ19pbilTUElDRV9DSEFOTkVMX0dFVF9D
-TEFTUyhjaGFubmVsKS0+aGFuZGxlX21zZywgTlVMTCk7Cj4+ICNpZmRlZiBIQVZFX1NBU0wKPj4g
-ICAgICAgICAgICAgLyogZmx1c2ggdGhlIHNhc2wgYnVmZmVyIHRvbyAqLwo+PiAgICAgICAgIHdo
-aWxlIChjLT5zYXNsX2RlY29kZWQgIT0gTlVMTCk7Cj4+ICNlbHNlCj4+ICAgICAgICAgd2hpbGUg
-KEZBTFNFKTsKPj4gI2VuZGlmCj4+ICAgICB9Cj4+Cj4+Cj4+IElmIHZkYWdlbnQgc2VuZHMgbG90
-cyBvZiBkYXRhLCBzcGljZV9jaGFubmVsX3JlY3ZfbXNnIHdpbGwgYmUgY2FsbGVkIHRoZSB3aG9s
-ZSB0aW1lLCBzbyBpdGVyYXRlX3dyaXRlIHdpbGwgbm90IGJlIGNhbGxlZCwgYW5kIGRhdGEgd2ls
-bCBub3QgYmUgc2VudCBvdXQgdW5sZXNzIHZkYWdlbnQgc3RvcHMgc2VuZGluZyBkYXRhLgo+Pgo+
-PiBCUgo+PiBEb24KPj4KPj4KPj4KPj4KPj4gQXQgMjAyMC0wNi0xMyAxNDo0MDowMiwgIkZyZWRp
-YW5vIFppZ2xpbyIgPGZ6aWdsaW9AcmVkaGF0LmNvbT4gd3JvdGU6Cj4+Cj4+IEhpLAo+PiAgIHRo
-ZSBwYXR0ZXJuIHVzZWQgaW4gc3BpY2UtZ3RrIGlzIGNhbGxlZCBjb29wZXJhdGl2ZSBtdWx0aXRh
-c2tpbmcgKHNlZSBodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9Db29wZXJhdGl2ZV9tdWx0
-aXRhc2tpbmcpLCBpZiB5b3UgYWRkIGNvZGUgdGhhdCBpcyBub3QgY29vcGVyYXRpdmUgeW91IGdl
-dCB3aGF0IHlvdSBkZXNjcmliZWQuIFVzZSBjb3JvdXRpbmUgZnVuY3Rpb25zIHRvIHJlYWQgcmVt
-b3RlIGRhdGEgc28gdGhlIHJlYWQgd29uJ3Qgc3RvcCBvdGhlciBjb2RlLiBJZiB5b3UgbmVlZCB0
-byBydW4gZXhwZW5zaXZlIG9yIGJsb2NraW5nIGNvZGUgaXQncyBhIGdvb2QgaWRlYSB0byBydW4g
-aXQgaW4gYW5vdGhlciB0aHJlYWQgcmVtb3ZpbmcgdGhlIGJsb2NrYWdlLgo+Pgo+PiBGcmVkaWFu
-bwo+Pgo+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+Pgo+Pgo+Pgo+PiBIaQo+
-Pgo+PiBIZXJlIGlzIG15IGV4cGVyaW1lbnQ6Cj4+IEkgY3JlYXRlZCBhIG5ldyBwb3J0LWNoYW5u
-ZWwgdG8gdHJhbnNmZXIgZGF0YSBiZXR3ZWVuIHZkYWdlbnQgYW5kIHNwaWNlLWd0ay4gSSB1c2Vk
-IGEgd2hpbGUgbG9vcCB0byBzZW5kIDJrYiBkYXRhIHRvIGd0aywgZ3RrIHJlY2VpdmVkIGFuZCBk
-cm9wIHRoZSBkYXRhLiBJbiB0aGUgbWVhbiB0aW1lIEkgdXNlZCBhIHRpbWVyKDFtcykgdG8gc2Vu
-ZCAya2IgZGF0YSB0byB2ZGFnZW50Lgo+PiBTdHJhbmdlIHRoaW5nIGlzIHRoYXQgZ3RrIHdpbGwg
-Y29udGludWFsbHkgcmVjZWl2ZSBkYXRhIGZvciBhIHdoaWxlKDEwc2VjcyAtIDcwc2VjcykgdGhl
-biBzZW5kIGEgd2hvbGUgYnVuY2ggb2YgZGF0YSB0byB2ZGFnZW50LiBXaGVuIHJlY2VpdmluZyBk
-YXRhLCBzZW5kIGRhdGEgd2lsbCBiZSBhZGRlZCB0byB0Y3AgYnVmZmVyIGJ1dCB3aWxsIG5vdCBi
-ZSBzZW50IG91dC4KPj4KPj4gU28gSSB0aGluayBzZW5kIGV2ZW50IHdpbGwgYmUgYWZmZWN0ZWQg
-YnkgcmVjZWl2ZSBldmVudCwgdGhlbiBJIGd1ZXNzIHVzaW5nIGRpZmZlcmVudCB0aHJlYWQgd291
-bGQgaGVscC4KPj4gQ291bGQgeW91IHBsZWFzZSBjb3JyZWN0IG1lIGlmIEmhr20gd3Jvbmc/Cj4+
-Cj4+IEJSCj4+IERvbgo+Pgo+Pgo+Pgo+Pgo+Pgo+Pgo+Pgo+Pgo+PiDU2iAyMDIwLTA2LTEyIDIw
-OjAzOjMwo6wiTWFyYy1BbmRyqKYgTHVyZWF1IiA8bWFyY2FuZHJlLmx1cmVhdUBnbWFpbC5jb20+
-INC0tcCjugo+Pgo+PiBIaQo+Pgo+PiBPbiBGcmksIEp1biAxMiwgMjAyMCBhdCAxMjo1NyBQTSCz
-wp7dIDxxaXNoaXlleHUyQDEyNi5jb20+IHdyb3RlOgo+Pj4KPj4+IEhpLAo+Pj4KPj4+IFNwaWNl
-LWd0ayBpcyBub3cgdXNpbmcgY28tcm91dGluZSB0byBoYW5kbGUgZGlmZmVyZW50IGNoYW5uZWwg
-Y29ubmVjdGlvbnMuIFdoZW4gYSBjaGFubmVsIGlzIGhhbmRsaW5nIGRhdGEsIG90aGVyIGNoYW5u
-ZWxzIHdvdWxkIGhhdmUgdG8gd2FpdCwgcmF0aGVyIHRoYW4gaGFuZGxpbmcgc3luY2hyb25vdXNs
-eS4gIFRoYXQgd291bGQgYnJpbmcgdXMgZm9sbG93aW5nIGlzc3VlczoKPj4+ICAxLiBJZiBzb21l
-IGxlc3MgaW1wb3J0YW50IGNoYW5uZWxzIChsaWtlIHVzYiBjaGFubmVscykgYXJlIHRyYW5zZmVy
-aW5nIGJpZyBkYXRhLCBpbXBvcnRhbnQgY2hhbm5lbHMgKG1haW4tY2hhbm5lbCwgZGlzcGxheS1j
-aGFubmVsLGlucHV0LWNoYW5uZWwpIHdpbGwgYmUgYWZmZWN0ZWQuCj4+PiAgMi4gV2hlbiByZWNl
-aXZpbmcgYmlnIGRhdGEgbGlrZSBmaWxlIHRyYW5zZmVyaW5nKEdfSU9fSU4pLCBzZW5kIGV2ZW50
-IChHX0lPX09VVCkgd2lsbCBub3QgYmUgdHJpZ2dlcmVkLgo+Pj4gIDMuIEZsb3cgY29udHJvbCBi
-ZXR3ZWVuIGRpZmZlcmVudCBjaGFubmVscyB3aWxsIGJlIGhhcmQgdG8gZG8uCj4+Pgo+Pj4gSXMg
-aXMgcG9zc2libGUoYW5kIG1ha2Ugc2Vuc2UpIHRvIHB1dCBjaGFubmVscyBpbnRvIGRpZmZlcmVu
-dCB0aHJlYWRzIHNvIHRoZXkgY2FuIHN5bmNocm9ub3VzbHkgcmVjZWl2ZSAmIHNlbmQgbXNnLCB3
-aXRob3V0IGFmZmVjdCBlYWNoIG90aGVyPwo+Pj4KPj4KPj4gU3dpdGNoaW5nIHRvIHRocmVhZHMg
-d291bGQgYmUgcG9zc2libGUsIGJ1dCB0aGF0IHdvdWxkbid0IGhlbHAgaW4gdGhlIHNpdHVhdGlv
-biB5b3UgZGVzY3JpYmUsIGFzIHlvdSBhcmUgdmVyeSBsaWtlbHkgYm91bmQgb24gSU8uIFVzaW5n
-IHNldmVyYWwgdGhyZWFkcyB3b3VsZCBhY3R1YWxseSBjcmVhdGUgbW9yZSBwcm9ibGVtcyB0byBz
-eW5jaHJvbml6ZSBhbmQgc2NoZWR1bGUgdGhlIGRpZmZlcmVudCBjaGFubmVscy4KPj4KPj4gSW8g
-b3BlcmF0aW9ucyBpbiBjb3JvdXRpbmVzIGFyZSBub24tYmxvY2tpbmcsIHNvIHRoZXkgc2hvdWxk
-bid0IGFmZmVjdCBvdGhlciBzcGljZS1ndGsgdGFzay4gSWYgeW91IGhvd2V2ZXIgb2JzZXJ2ZSBh
-IGJsb2NraW5nIENQVS10YXNrIGluIHNvbWUgY2hhbm5lbCwgdGhpcyBtYXkgYWZmZWN0IHRoZSBw
-ZXJmb3JtYW5jZSBvZiBvdGhlciBjaGFubmVscy4gQnV0IGluIGdlbmVyYWwsIGV4Y2VwdCBmb3Ig
-dmlkZW8vaW1hZ2UgZGVjb2Rpbmcgd2hpY2ggbWF5IGJlIGRvbmUgaW4gYSBzZXBhcmF0ZSB0aHJl
-YWQsIHRoZSBjbGllbnQgc2lkZSBkb2Vzbid0IGRvIG11Y2ggd29yay4KPj4KPj4gVVNCLCBjbGlw
-Ym9hcmQgYW5kIGZpbGUgc2hhcmluZyBtYXkgdXNlIGxhcmdlIGFtb3VudHMgb2YgZGF0YSwgYW5k
-IHdlIHJlbHkgb24gdGhlIGdsaWIgc291cmNlIGFuZCBrZXJuZWwgdG8gcHJpb3JpdGl6ZSBjaGFu
-bmVsczogdGhpcyBpc24ndCBncmVhdCBpbiBzb21lIGNhc2VzIGFuZCBtYXkgcmVjZWl2ZSBpbXBy
-b3ZlbWVudHMuCj4+Cj4+Cj4+IC0tCj4+IE1hcmMtQW5kcqimIEx1cmVhdQo+Pgo+Pgo+Pgo+Pgo+
-Pgo+Pgo+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+
-PiBTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKPj4gU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0
-b3Aub3JnCj4+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
-c3BpY2UtZGV2ZWwKPj4KPj4KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KPj4gU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0Cj4+IFNwaWNlLWRldmVsQGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwo+PiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
-------=_Part_30288_1443366370.1592275122879
-Content-Type: text/html; charset=GBK
-Content-Transfer-Encoding: base64
+Hi,=20
+I have an old patch on that code that instead checks if there are pending=
+=20
+data to send and exit the loop instead of a simple counter.=20
 
-PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOiMwMDAwMDA7Zm9udC1zaXplOjE0cHg7
-Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjogMDsiPkhpLDwvZGl2PjxkaXYg
-c3R5bGU9Im1hcmdpbjogMDsiPjxicj48L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij5Gb3Ig
-bm93IEkgc2ltcGx5IHVzZWQgYSBjb3VudGVyIHRvIHdvcmsgYXJvdW5kIHRoaXMgaXNzdWUuPC9k
-aXY+PGRpdiBzdHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjog
-MDsiPndoaWxlICguLi4mbmJzcDs8c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IGFyaWFsOyB3aGl0
-ZS1zcGFjZTogcHJlLXdyYXA7Ij5nX3BvbGxhYmxlX2lucHV0X3N0cmVhbV9pc19yZWFkYWJsZSA8
-L3NwYW4+KSB7PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOiAwOyI+Jm5ic3A7IGlmIChsb29wICZn
-dDsgMTApPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOiAwOyI+Jm5ic3A7ICZuYnNwOyBicmVhazs8
-L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij59PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOiAw
-OyI+PGJyPjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjogMDsiPlVnbHkgYnV0IHNlZW1zIHVzZWZ1
-bC48L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij48YnI+PC9kaXY+PGRpdiBzdHlsZT0ibWFy
-Z2luOiAwOyI+QlI8L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij5Eb248L2Rpdj48cCBzdHls
-ZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48cCBzdHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48cCBz
-dHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48cCBzdHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48
-ZGl2IHN0eWxlPSJwb3NpdGlvbjpyZWxhdGl2ZTt6b29tOjEiPjwvZGl2PjxkaXYgaWQ9ImRpdk5l
-dGVhc2VNYWlsQ2FyZCI+PC9kaXY+PHAgc3R5bGU9Im1hcmdpbjogMDsiPjxicj48L3A+PHByZT48
-YnI+QXQgMjAyMC0wNi0xNSAyMDo1OTowMCwgIkpha3ViIEphbmt1IiAmbHQ7amphbmt1QHJlZGhh
-dC5jb20mZ3Q7IHdyb3RlOgomZ3Q7SGksCiZndDsKJmd0O3llcywgSSB0aGluayB0aGlzIGlzIGEg
-cmVhbCBpc3N1ZS4gSSBmZWVsIGxpa2UgSSd2ZSBzdHVtYmxlZCBhY3Jvc3MKJmd0O3NvbWV0aGlu
-ZyBzaW1pbGFyIGluIHRoZSBwYXN0IHdoZW4gd29ya2luZyBvbiB3ZWJkYXYuCiZndDsKJmd0O1Nv
-IHllYWgsIGl0IHNlZW1zIGxpa2UgdGhlIGNoYW5uZWwgbWlnaHQgZ2V0IGJsb2NrZWQgaW4gb25l
-IGRpcmVjdGlvbgomZ3Q7LS0gbWVhbmluZyBkYXRhIGlzbid0IHNlbnQgdW50aWwgeW91IHJlYWQg
-YWxsIGF2YWlsYWJsZSBkYXRhLgomZ3Q7CiZndDtIb3dldmVyLCB0aGF0IGRvZXNuJ3QgbWVhbiB0
-aGF0IG90aGVyIGNoYW5uZWxzIHdvbid0IHdvcmsgaW1oby4gSW4gYQomZ3Q7bW9yZSByZWFsaXN0
-aWMgc2NlbmFyaW8sIHlvdSB3b2xkIHJlYWQgdGhlIGRhdGEgZnJvbSB2ZGFnZW50IGluIGNodW5r
-cwomZ3Q7YW5kIGFjdHVhbGx5IGRvIHNvbWV0aGluZyB3aXRoIGl0LiBXZWJkYXYgdXNlcyB0aGUg
-Y29kZSBpbiB2bWNzdHJlYW0uYwomZ3Q7dG8gcmVhZCB0aGUgZGF0YSBpbiBjb3JvdXRpbmUgYW5k
-IHRoZSBidWZmZXIgaXMgZGVsaXZlcmVkIHRvIHRoZQomZ3Q7V2ViZGF2Q2hhbm5lbCB1c2luZyBh
-biBpZGxlIGNhbGxiYWNrLiBUaGlzIGdpdmVzIG90aGVyIGV2ZW50cyB0aGUKJmd0O29wcG9ydHVu
-aXR5IHRvIGZpcmUgYW5kIGJlIHByb2Nlc3NlZCBhbmQgdGhlIGNvZGUgY2FuIHlpZWxkIHRvIGFu
-b3RoZXIKJmd0O2Nvcm91dGluZS4gU28gaW1wb3J0YW50IGNoYW5uZWxzLCBsaWtlIERpc3BsYXks
-IHNob3VsZCBjb250aW51ZQomZ3Q7d29ya2luZyBqdXN0IGZpbmUuCiZndDsKJmd0O1BTLCBpdCdz
-IGJlZW4gcXVpdGUgc29tZSB0aW1lLCBzbyBJIG1pZ2h0IG5vdCByZW1lbWJlciBpdCBjb3JyZWN0
-bHkuCiZndDtCdXQgYW55d2F5LCBpZiB5b3UgbG9vayBhdCBjaGFubmVsLXdlYmRhdi5jIGFuZCB2
-bWNzdHJlYW0uYywgeW91CiZndDtzaG91bGQgaG9wZWZ1bGx5IGdldCBhIGJldHRlciBpZGVhLgom
-Z3Q7CiZndDtDaGVlcnMsCiZndDtKYWt1YgomZ3Q7CiZndDtPbiBNb24sIEp1biAxNSwgMjAyMCBh
-dCAxMjo1MiBQTSCzwp7dICZsdDtxaXNoaXlleHUyQDEyNi5jb20mZ3Q7IHdyb3RlOgomZ3Q7Jmd0
-OwomZ3Q7Jmd0OyBIaSwKJmd0OyZndDsKJmd0OyZndDsgQWZ0ZXIgZGVidWdnaW5nLCBJICB0aGlu
-ayBteSBwcm9ibGVtIGlzIHByb2JhYmx5IG5vdCBhY2NvY2lhdGVkIHdpdGggY29vcGVyYXRpdmUg
-bXVsdGl0YXNraW5nLgomZ3Q7Jmd0OyBIZXJlIGlzIHdoZXJlIHNwaWNlLWd0ayByZWFkIGRhdGE6
-CiZndDsmZ3Q7CiZndDsmZ3Q7ICAgICAvKiB0cmVhdCBhbGwgaW5jb21pbmcgZGF0YSAoYmxvY2sg
-b24gbWVzc2FnZSBjb21wbGV0aW9uKSAqLwomZ3Q7Jmd0OyAgICAgd2hpbGUgKCFjLSZndDtoYXNf
-ZXJyb3IgJmFtcDsmYW1wOwomZ3Q7Jmd0OyAgICAgICAgICAgIGMtJmd0O3N0YXRlICE9IFNQSUNF
-X0NIQU5ORUxfU1RBVEVfTUlHUkFUSU5HICZhbXA7JmFtcDsKJmd0OyZndDsgICAgICAgICAgICBn
-X3BvbGxhYmxlX2lucHV0X3N0cmVhbV9pc19yZWFkYWJsZShHX1BPTExBQkxFX0lOUFVUX1NUUkVB
-TShjLSZndDtpbikpCiZndDsmZ3Q7ICAgICApIHsgZG8KJmd0OyZndDsgICAgICAgICAgICAgc3Bp
-Y2VfY2hhbm5lbF9yZWN2X21zZyhjaGFubmVsLAomZ3Q7Jmd0OyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIChoYW5kbGVyX21zZ19pbilTUElDRV9DSEFOTkVMX0dFVF9DTEFTUyhj
-aGFubmVsKS0mZ3Q7aGFuZGxlX21zZywgTlVMTCk7CiZndDsmZ3Q7ICNpZmRlZiBIQVZFX1NBU0wK
-Jmd0OyZndDsgICAgICAgICAgICAgLyogZmx1c2ggdGhlIHNhc2wgYnVmZmVyIHRvbyAqLwomZ3Q7
-Jmd0OyAgICAgICAgIHdoaWxlIChjLSZndDtzYXNsX2RlY29kZWQgIT0gTlVMTCk7CiZndDsmZ3Q7
-ICNlbHNlCiZndDsmZ3Q7ICAgICAgICAgd2hpbGUgKEZBTFNFKTsKJmd0OyZndDsgI2VuZGlmCiZn
-dDsmZ3Q7ICAgICB9CiZndDsmZ3Q7CiZndDsmZ3Q7CiZndDsmZ3Q7IElmIHZkYWdlbnQgc2VuZHMg
-bG90cyBvZiBkYXRhLCBzcGljZV9jaGFubmVsX3JlY3ZfbXNnIHdpbGwgYmUgY2FsbGVkIHRoZSB3
-aG9sZSB0aW1lLCBzbyBpdGVyYXRlX3dyaXRlIHdpbGwgbm90IGJlIGNhbGxlZCwgYW5kIGRhdGEg
-d2lsbCBub3QgYmUgc2VudCBvdXQgdW5sZXNzIHZkYWdlbnQgc3RvcHMgc2VuZGluZyBkYXRhLgom
-Z3Q7Jmd0OwomZ3Q7Jmd0OyBCUgomZ3Q7Jmd0OyBEb24KJmd0OyZndDsKJmd0OyZndDsKJmd0OyZn
-dDsKJmd0OyZndDsKJmd0OyZndDsgQXQgMjAyMC0wNi0xMyAxNDo0MDowMiwgIkZyZWRpYW5vIFpp
-Z2xpbyIgJmx0O2Z6aWdsaW9AcmVkaGF0LmNvbSZndDsgd3JvdGU6CiZndDsmZ3Q7CiZndDsmZ3Q7
-IEhpLAomZ3Q7Jmd0OyAgIHRoZSBwYXR0ZXJuIHVzZWQgaW4gc3BpY2UtZ3RrIGlzIGNhbGxlZCBj
-b29wZXJhdGl2ZSBtdWx0aXRhc2tpbmcgKHNlZSBodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lr
-aS9Db29wZXJhdGl2ZV9tdWx0aXRhc2tpbmcpLCBpZiB5b3UgYWRkIGNvZGUgdGhhdCBpcyBub3Qg
-Y29vcGVyYXRpdmUgeW91IGdldCB3aGF0IHlvdSBkZXNjcmliZWQuIFVzZSBjb3JvdXRpbmUgZnVu
-Y3Rpb25zIHRvIHJlYWQgcmVtb3RlIGRhdGEgc28gdGhlIHJlYWQgd29uJ3Qgc3RvcCBvdGhlciBj
-b2RlLiBJZiB5b3UgbmVlZCB0byBydW4gZXhwZW5zaXZlIG9yIGJsb2NraW5nIGNvZGUgaXQncyBh
-IGdvb2QgaWRlYSB0byBydW4gaXQgaW4gYW5vdGhlciB0aHJlYWQgcmVtb3ZpbmcgdGhlIGJsb2Nr
-YWdlLgomZ3Q7Jmd0OwomZ3Q7Jmd0OyBGcmVkaWFubwomZ3Q7Jmd0OwomZ3Q7Jmd0OyBfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7
-Jmd0OyBIaQomZ3Q7Jmd0OwomZ3Q7Jmd0OyBIZXJlIGlzIG15IGV4cGVyaW1lbnQ6CiZndDsmZ3Q7
-IEkgY3JlYXRlZCBhIG5ldyBwb3J0LWNoYW5uZWwgdG8gdHJhbnNmZXIgZGF0YSBiZXR3ZWVuIHZk
-YWdlbnQgYW5kIHNwaWNlLWd0ay4gSSB1c2VkIGEgd2hpbGUgbG9vcCB0byBzZW5kIDJrYiBkYXRh
-IHRvIGd0aywgZ3RrIHJlY2VpdmVkIGFuZCBkcm9wIHRoZSBkYXRhLiBJbiB0aGUgbWVhbiB0aW1l
-IEkgdXNlZCBhIHRpbWVyKDFtcykgdG8gc2VuZCAya2IgZGF0YSB0byB2ZGFnZW50LgomZ3Q7Jmd0
-OyBTdHJhbmdlIHRoaW5nIGlzIHRoYXQgZ3RrIHdpbGwgY29udGludWFsbHkgcmVjZWl2ZSBkYXRh
-IGZvciBhIHdoaWxlKDEwc2VjcyAtIDcwc2VjcykgdGhlbiBzZW5kIGEgd2hvbGUgYnVuY2ggb2Yg
-ZGF0YSB0byB2ZGFnZW50LiBXaGVuIHJlY2VpdmluZyBkYXRhLCBzZW5kIGRhdGEgd2lsbCBiZSBh
-ZGRlZCB0byB0Y3AgYnVmZmVyIGJ1dCB3aWxsIG5vdCBiZSBzZW50IG91dC4KJmd0OyZndDsKJmd0
-OyZndDsgU28gSSB0aGluayBzZW5kIGV2ZW50IHdpbGwgYmUgYWZmZWN0ZWQgYnkgcmVjZWl2ZSBl
-dmVudCwgdGhlbiBJIGd1ZXNzIHVzaW5nIGRpZmZlcmVudCB0aHJlYWQgd291bGQgaGVscC4KJmd0
-OyZndDsgQ291bGQgeW91IHBsZWFzZSBjb3JyZWN0IG1lIGlmIEmhr20gd3Jvbmc/CiZndDsmZ3Q7
-CiZndDsmZ3Q7IEJSCiZndDsmZ3Q7IERvbgomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7
-Jmd0OwomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7Jmd0OyDU2iAyMDIw
-LTA2LTEyIDIwOjAzOjMwo6wiTWFyYy1BbmRyqKYgTHVyZWF1IiAmbHQ7bWFyY2FuZHJlLmx1cmVh
-dUBnbWFpbC5jb20mZ3Q7INC0tcCjugomZ3Q7Jmd0OwomZ3Q7Jmd0OyBIaQomZ3Q7Jmd0OwomZ3Q7
-Jmd0OyBPbiBGcmksIEp1biAxMiwgMjAyMCBhdCAxMjo1NyBQTSCzwp7dICZsdDtxaXNoaXlleHUy
-QDEyNi5jb20mZ3Q7IHdyb3RlOgomZ3Q7Jmd0OyZndDsKJmd0OyZndDsmZ3Q7IEhpLAomZ3Q7Jmd0
-OyZndDsKJmd0OyZndDsmZ3Q7IFNwaWNlLWd0ayBpcyBub3cgdXNpbmcgY28tcm91dGluZSB0byBo
-YW5kbGUgZGlmZmVyZW50IGNoYW5uZWwgY29ubmVjdGlvbnMuIFdoZW4gYSBjaGFubmVsIGlzIGhh
-bmRsaW5nIGRhdGEsIG90aGVyIGNoYW5uZWxzIHdvdWxkIGhhdmUgdG8gd2FpdCwgcmF0aGVyIHRo
-YW4gaGFuZGxpbmcgc3luY2hyb25vdXNseS4gIFRoYXQgd291bGQgYnJpbmcgdXMgZm9sbG93aW5n
-IGlzc3VlczoKJmd0OyZndDsmZ3Q7ICAxLiBJZiBzb21lIGxlc3MgaW1wb3J0YW50IGNoYW5uZWxz
-IChsaWtlIHVzYiBjaGFubmVscykgYXJlIHRyYW5zZmVyaW5nIGJpZyBkYXRhLCBpbXBvcnRhbnQg
-Y2hhbm5lbHMgKG1haW4tY2hhbm5lbCwgZGlzcGxheS1jaGFubmVsLGlucHV0LWNoYW5uZWwpIHdp
-bGwgYmUgYWZmZWN0ZWQuCiZndDsmZ3Q7Jmd0OyAgMi4gV2hlbiByZWNlaXZpbmcgYmlnIGRhdGEg
-bGlrZSBmaWxlIHRyYW5zZmVyaW5nKEdfSU9fSU4pLCBzZW5kIGV2ZW50IChHX0lPX09VVCkgd2ls
-bCBub3QgYmUgdHJpZ2dlcmVkLgomZ3Q7Jmd0OyZndDsgIDMuIEZsb3cgY29udHJvbCBiZXR3ZWVu
-IGRpZmZlcmVudCBjaGFubmVscyB3aWxsIGJlIGhhcmQgdG8gZG8uCiZndDsmZ3Q7Jmd0OwomZ3Q7
-Jmd0OyZndDsgSXMgaXMgcG9zc2libGUoYW5kIG1ha2Ugc2Vuc2UpIHRvIHB1dCBjaGFubmVscyBp
-bnRvIGRpZmZlcmVudCB0aHJlYWRzIHNvIHRoZXkgY2FuIHN5bmNocm9ub3VzbHkgcmVjZWl2ZSAm
-YW1wOyBzZW5kIG1zZywgd2l0aG91dCBhZmZlY3QgZWFjaCBvdGhlcj8KJmd0OyZndDsmZ3Q7CiZn
-dDsmZ3Q7CiZndDsmZ3Q7IFN3aXRjaGluZyB0byB0aHJlYWRzIHdvdWxkIGJlIHBvc3NpYmxlLCBi
-dXQgdGhhdCB3b3VsZG4ndCBoZWxwIGluIHRoZSBzaXR1YXRpb24geW91IGRlc2NyaWJlLCBhcyB5
-b3UgYXJlIHZlcnkgbGlrZWx5IGJvdW5kIG9uIElPLiBVc2luZyBzZXZlcmFsIHRocmVhZHMgd291
-bGQgYWN0dWFsbHkgY3JlYXRlIG1vcmUgcHJvYmxlbXMgdG8gc3luY2hyb25pemUgYW5kIHNjaGVk
-dWxlIHRoZSBkaWZmZXJlbnQgY2hhbm5lbHMuCiZndDsmZ3Q7CiZndDsmZ3Q7IElvIG9wZXJhdGlv
-bnMgaW4gY29yb3V0aW5lcyBhcmUgbm9uLWJsb2NraW5nLCBzbyB0aGV5IHNob3VsZG4ndCBhZmZl
-Y3Qgb3RoZXIgc3BpY2UtZ3RrIHRhc2suIElmIHlvdSBob3dldmVyIG9ic2VydmUgYSBibG9ja2lu
-ZyBDUFUtdGFzayBpbiBzb21lIGNoYW5uZWwsIHRoaXMgbWF5IGFmZmVjdCB0aGUgcGVyZm9ybWFu
-Y2Ugb2Ygb3RoZXIgY2hhbm5lbHMuIEJ1dCBpbiBnZW5lcmFsLCBleGNlcHQgZm9yIHZpZGVvL2lt
-YWdlIGRlY29kaW5nIHdoaWNoIG1heSBiZSBkb25lIGluIGEgc2VwYXJhdGUgdGhyZWFkLCB0aGUg
-Y2xpZW50IHNpZGUgZG9lc24ndCBkbyBtdWNoIHdvcmsuCiZndDsmZ3Q7CiZndDsmZ3Q7IFVTQiwg
-Y2xpcGJvYXJkIGFuZCBmaWxlIHNoYXJpbmcgbWF5IHVzZSBsYXJnZSBhbW91bnRzIG9mIGRhdGEs
-IGFuZCB3ZSByZWx5IG9uIHRoZSBnbGliIHNvdXJjZSBhbmQga2VybmVsIHRvIHByaW9yaXRpemUg
-Y2hhbm5lbHM6IHRoaXMgaXNuJ3QgZ3JlYXQgaW4gc29tZSBjYXNlcyBhbmQgbWF5IHJlY2VpdmUg
-aW1wcm92ZW1lbnRzLgomZ3Q7Jmd0OwomZ3Q7Jmd0OwomZ3Q7Jmd0OyAtLQomZ3Q7Jmd0OyBNYXJj
-LUFuZHKopiBMdXJlYXUKJmd0OyZndDsKJmd0OyZndDsKJmd0OyZndDsKJmd0OyZndDsKJmd0OyZn
-dDsKJmd0OyZndDsKJmd0OyZndDsgX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KJmd0OyZndDsgU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0CiZndDsmZ3Q7IFNw
-aWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwomZ3Q7Jmd0OyBodHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCiZndDsmZ3Q7CiZndDsm
-Z3Q7CiZndDsmZ3Q7IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCiZndDsmZ3Q7IFNwaWNlLWRldmVsIG1haWxpbmcgbGlzdAomZ3Q7Jmd0OyBTcGljZS1kZXZl
-bEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKJmd0OyZndDsgaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
-cC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo8L3ByZT48L2Rpdj4=
-------=_Part_30288_1443366370.1592275122879--
+But I think that both solutions are not perfect. The reason is that a chann=
+el=20
+is either reading or writing. If there's for instance a very big message to=
+ read=20
+the code will be stuck on reading until all message is received. For the sa=
+me=20
+reason if network buffer on the socket is pretty full writing a big message=
+=20
+will avoid receiving data till the server will read some data decreasing ou=
+r=20
+socket send buffer. So a read could block writes while a write could block =
+reads=20
+(note that other channels are not blocked, we are speaking about reads/writ=
+es=20
+on a single channel).=20
+
+Maybe would be good if the socket polling code would poll both read and wri=
+te=20
+so to avoid one blocking the other.=20
+
+One issue of the loop (current code) on read is that if you manage to get=
+=20
+stuck on it and the read messages cause messages to be queued for writing=
+=20
+the queue can grow indefinitely.=20
+
+Frediano=20
+
+----- Original Message -----
+
+> Hi,
+
+> For now I simply used a counter to work around this issue.
+
+> while (... g_pollable_input_stream_is_readable ) {
+> if (loop > 10)
+> break;
+> }
+
+> Ugly but seems useful.
+
+> BR
+> Don
+
+> At 2020-06-15 20:59:00, "Jakub Janku" <jjanku@redhat.com> wrote:
+> >Hi,
+> >
+> >yes, I think this is a real issue. I feel like I've stumbled across
+> >something similar in the past when working on webdav.
+> >
+> >So yeah, it seems like the channel might get blocked in one direction
+> >-- meaning data isn't sent until you read all available data.
+> >
+> >However, that doesn't mean that other channels won't work imho. In a
+> >more realistic scenario, you wold read the data from vdagent in chunks
+> >and actually do something with it. Webdav uses the code in vmcstream.c
+> >to read the data in coroutine and the buffer is delivered to the
+> >WebdavChannel using an idle callback. This gives other events the
+> >opportunity to fire and be processed and the code can yield to another
+> >coroutine. So important channels, like Display, should continue
+> >working just fine.
+> >
+> >PS, it's been quite some time, so I might not remember it correctly.
+> >But anyway, if you look at channel-webdav.c and vmcstream.c, you
+> >should hopefully get a better idea.
+> >
+> >Cheers,
+> >Jakub
+> >
+> >On Mon, Jun 15, 2020 at 12:52 PM =E9=99=88=E7=82=A4 <qishiyexu2@126.com>=
+ wrote:
+> >>
+> >> Hi,
+> >>
+> >> After debugging, I  think my problem is probably not accociated with
+> >> cooperative multitasking.
+> >> Here is where spice-gtk read data:
+> >>
+> >>     /* treat all incoming data (block on message completion) */
+> >>     while (!c->has_error &&
+> >>            c->state !=3D SPICE_CHANNEL_STATE_MIGRATING &&
+> >>            g_pollable_input_stream_is_readable(G_POLLABLE_INPUT_STREAM=
+(c->in))
+> >>     ) { do
+> >>             spice_channel_recv_msg(channel,
+> >>                                    (handler_msg_in)SPICE_CHANNEL_GET_C=
+LASS(channel)->handle_msg,
+> >>                                    NULL);
+> >> #ifdef HAVE_SASL
+> >>             /* flush the sasl buffer too */
+> >>         while (c->sasl_decoded !=3D NULL);
+> >> #else
+> >>         while (FALSE);
+> >> #endif
+> >>     }
+> >>
+> >>
+> >> If vdagent sends lots of data, spice_channel_recv_msg will be called t=
+he
+> >> whole time, so iterate_write will not be called, and data will not be
+> >> sent out unless vdagent stops sending data.
+> >>
+> >> BR
+> >> Don
+> >>
+> >>
+> >>
+> >>
+> >> At 2020-06-13 14:40:02, "Frediano Ziglio" <fziglio@redhat.com> wrote:
+> >>
+> >> Hi,
+> >>   the pattern used in spice-gtk is called cooperative multitasking (se=
+e
+> >>   https://en.wikipedia.org/wiki/Cooperative_multitasking), if you add
+> >>   code that is not cooperative you get what you described. Use corouti=
+ne
+> >>   functions to read remote data so the read won't stop other code. If =
+you
+> >>   need to run expensive or blocking code it's a good idea to run it in
+> >>   another thread removing the blockage.
+> >>
+> >> Frediano
+> >>
+> >> ________________________________
+> >>
+> >>
+> >>
+> >> Hi
+> >>
+> >> Here is my experiment:
+> >> I created a new port-channel to transfer data between vdagent and
+> >> spice-gtk. I used a while loop to send 2kb data to gtk, gtk received a=
+nd
+> >> drop the data. In the mean time I used a timer(1ms) to send 2kb data t=
+o
+> >> vdagent.
+> >> Strange thing is that gtk will continually receive data for a while(10=
+secs
+> >> - 70secs) then send a whole bunch of data to vdagent. When receiving
+> >> data, send data will be added to tcp buffer but will not be sent out.
+> >>
+> >> So I think send event will be affected by receive event, then I guess
+> >> using different thread would help.
+> >> Could you please correct me if I=E2=80=99m wrong?
+> >>
+> >> BR
+> >> Don
+> >>
+> >>
+> >>
+> >>
+> >>
+> >>
+> >>
+> >>
+> >> =E5=9C=A8 2020-06-12 20:03:30=EF=BC=8C"Marc-Andr=C3=A9 Lureau" <marcan=
+dre.lureau@gmail.com> =E5=86=99=E9=81=93=EF=BC=9A
+> >>
+> >> Hi
+> >>
+> >> On Fri, Jun 12, 2020 at 12:57 PM =E9=99=88=E7=82=A4 <qishiyexu2@126.co=
+m> wrote:
+> >>>
+> >>> Hi,
+> >>>
+> >>> Spice-gtk is now using co-routine to handle different channel
+> >>> connections. When a channel is handling data, other channels would ha=
+ve
+> >>> to wait, rather than handling synchronously.  That would bring us
+> >>> following issues:
+> >>>  1. If some less important channels (like usb channels) are transferi=
+ng
+> >>>  big data, important channels (main-channel,
+> >>>  display-channel,input-channel) will be affected.
+> >>>  2. When receiving big data like file transfering(G_IO_IN), send even=
+t
+> >>>  (G_IO_OUT) will not be triggered.
+> >>>  3. Flow control between different channels will be hard to do.
+> >>>
+> >>> Is is possible(and make sense) to put channels into different threads=
+ so
+> >>> they can synchronously receive & send msg, without affect each other?
+> >>>
+> >>
+> >> Switching to threads would be possible, but that wouldn't help in the
+> >> situation you describe, as you are very likely bound on IO. Using seve=
+ral
+> >> threads would actually create more problems to synchronize and schedul=
+e
+> >> the different channels.
+> >>
+> >> Io operations in coroutines are non-blocking, so they shouldn't affect
+> >> other spice-gtk task. If you however observe a blocking CPU-task in so=
+me
+> >> channel, this may affect the performance of other channels. But in
+> >> general, except for video/image decoding which may be done in a separa=
+te
+> >> thread, the client side doesn't do much work.
+> >>
+> >> USB, clipboard and file sharing may use large amounts of data, and we =
+rely
+> >> on the glib source and kernel to prioritize channels: this isn't great=
+ in
+> >> some cases and may receive improvements.
+> >>
+> >>
+> >> --
+> >> Marc-Andr=C3=A9 Lureau
+> >>
+> >>
+> >>
+> >>
+> >>
+> >>
+> >> _______________________________________________
+> >> Spice-devel mailing list
+> >> Spice-devel@lists.freedesktop.org
+> >> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+> >>
+> >>
+> >> _______________________________________________
+> >> Spice-devel mailing list
+> >> Spice-devel@lists.freedesktop.org
+> >> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+------=_Part_30745645_1313786515.1592315162622
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><body><div style=3D"font-family: courier new,courier,monaco,monospace=
+,sans-serif; font-size: 12pt; color: #000000"><div>Hi,<br></div><div>&nbsp;=
+ I have an old patch on that code that instead checks if there are pending<=
+/div><div>data to send and exit the loop instead of a simple counter.<br></=
+div><div><br></div><div>But I think that both solutions are not perfect. Th=
+e reason is that a channel<br></div><div>is either reading or writing. If t=
+here's for instance a very big message to read<br></div><div>the code will =
+be stuck on reading until all message is received. For the same<br></div><d=
+iv>reason if network buffer on the socket is pretty full writing a big mess=
+age<br></div><div>will avoid receiving data till the server will read some =
+data decreasing our<br></div><div>socket send buffer. So a read could block=
+ writes while a write could block reads<br></div><div>(note that other chan=
+nels are not blocked, we are speaking about reads/writes<br></div><div>on a=
+ single channel).<br></div><div><br></div><div>Maybe would be good if the s=
+ocket polling code would poll both read and write<br></div><div>so to avoid=
+ one blocking the other.<br></div><div><br></div><div>One issue of the loop=
+ (current code) on read is that if you manage to get<br></div><div>stuck on=
+ it and the read messages cause messages to be queued for writing<br></div>=
+<div>the queue can grow <span lang=3D"en">indefinitely.</span><br></div><di=
+v><span lang=3D"en"><br></span></div><div><span lang=3D"en">Frediano<br></s=
+pan></div><div><br></div><hr id=3D"zwchr"><blockquote style=3D"border-left:=
+2px solid #1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:n=
+ormal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sa=
+ns-serif;font-size:12pt;" data-mce-style=3D"border-left: 2px solid #1010FF;=
+ margin-left: 5px; padding-left: 5px; color: #000; font-weight: normal; fon=
+t-style: normal; text-decoration: none; font-family: Helvetica,Arial,sans-s=
+erif; font-size: 12pt;"><br><div><br></div><div style=3D"line-height:1.7;co=
+lor:#000000;font-size:14px;font-family:Arial" data-mce-style=3D"line-height=
+: 1.7; color: #000000; font-size: 14px; font-family: Arial;"><div style=3D"=
+margin: 0;" data-mce-style=3D"margin: 0;">Hi,</div><div style=3D"margin: 0;=
+" data-mce-style=3D"margin: 0;"><br></div><div style=3D"margin: 0;" data-mc=
+e-style=3D"margin: 0;">For now I simply used a counter to work around this =
+issue.</div><div style=3D"margin: 0;" data-mce-style=3D"margin: 0;"><br></d=
+iv><div style=3D"margin: 0;" data-mce-style=3D"margin: 0;">while (...&nbsp;=
+<span style=3D"font-family: arial; white-space: pre-wrap;" data-mce-style=
+=3D"font-family: arial; white-space: pre-wrap;">g_pollable_input_stream_is_=
+readable </span>) {</div><div style=3D"margin: 0;" data-mce-style=3D"margin=
+: 0;">&nbsp; if (loop &gt; 10)</div><div style=3D"margin: 0;" data-mce-styl=
+e=3D"margin: 0;">&nbsp; &nbsp; break;</div><div style=3D"margin: 0;" data-m=
+ce-style=3D"margin: 0;">}</div><div style=3D"margin: 0;" data-mce-style=3D"=
+margin: 0;"><br></div><div style=3D"margin: 0;" data-mce-style=3D"margin: 0=
+;">Ugly but seems useful.</div><div style=3D"margin: 0;" data-mce-style=3D"=
+margin: 0;"><br></div><div style=3D"margin: 0;" data-mce-style=3D"margin: 0=
+;">BR</div><div style=3D"margin: 0;" data-mce-style=3D"margin: 0;">Don</div=
+><p style=3D"margin: 0;" data-mce-style=3D"margin: 0;"><br></p><p style=3D"=
+margin: 0;" data-mce-style=3D"margin: 0;"><br></p><p style=3D"margin: 0;" d=
+ata-mce-style=3D"margin: 0;"><br></p><p style=3D"margin: 0;" data-mce-style=
+=3D"margin: 0;"><br></p><div style=3D"position:relative;zoom:1" data-mce-st=
+yle=3D"position: relative; zoom: 1;"><br></div><div id=3D"divNeteaseMailCar=
+d"><br></div><p style=3D"margin: 0;" data-mce-style=3D"margin: 0;"><br></p>=
+<pre><br>At 2020-06-15 20:59:00, "Jakub Janku" &lt;jjanku@redhat.com&gt; wr=
+ote:
+&gt;Hi,
+&gt;
+&gt;yes, I think this is a real issue. I feel like I've stumbled across
+&gt;something similar in the past when working on webdav.
+&gt;
+&gt;So yeah, it seems like the channel might get blocked in one direction
+&gt;-- meaning data isn't sent until you read all available data.
+&gt;
+&gt;However, that doesn't mean that other channels won't work imho. In a
+&gt;more realistic scenario, you wold read the data from vdagent in chunks
+&gt;and actually do something with it. Webdav uses the code in vmcstream.c
+&gt;to read the data in coroutine and the buffer is delivered to the
+&gt;WebdavChannel using an idle callback. This gives other events the
+&gt;opportunity to fire and be processed and the code can yield to another
+&gt;coroutine. So important channels, like Display, should continue
+&gt;working just fine.
+&gt;
+&gt;PS, it's been quite some time, so I might not remember it correctly.
+&gt;But anyway, if you look at channel-webdav.c and vmcstream.c, you
+&gt;should hopefully get a better idea.
+&gt;
+&gt;Cheers,
+&gt;Jakub
+&gt;
+&gt;On Mon, Jun 15, 2020 at 12:52 PM =E9=99=88=E7=82=A4 &lt;qishiyexu2@126.=
+com&gt; wrote:
+&gt;&gt;
+&gt;&gt; Hi,
+&gt;&gt;
+&gt;&gt; After debugging, I  think my problem is probably not accociated wi=
+th cooperative multitasking.
+&gt;&gt; Here is where spice-gtk read data:
+&gt;&gt;
+&gt;&gt;     /* treat all incoming data (block on message completion) */
+&gt;&gt;     while (!c-&gt;has_error &amp;&amp;
+&gt;&gt;            c-&gt;state !=3D SPICE_CHANNEL_STATE_MIGRATING &amp;&am=
+p;
+&gt;&gt;            g_pollable_input_stream_is_readable(G_POLLABLE_INPUT_ST=
+REAM(c-&gt;in))
+&gt;&gt;     ) { do
+&gt;&gt;             spice_channel_recv_msg(channel,
+&gt;&gt;                                    (handler_msg_in)SPICE_CHANNEL_G=
+ET_CLASS(channel)-&gt;handle_msg, NULL);
+&gt;&gt; #ifdef HAVE_SASL
+&gt;&gt;             /* flush the sasl buffer too */
+&gt;&gt;         while (c-&gt;sasl_decoded !=3D NULL);
+&gt;&gt; #else
+&gt;&gt;         while (FALSE);
+&gt;&gt; #endif
+&gt;&gt;     }
+&gt;&gt;
+&gt;&gt;
+&gt;&gt; If vdagent sends lots of data, spice_channel_recv_msg will be call=
+ed the whole time, so iterate_write will not be called, and data will not b=
+e sent out unless vdagent stops sending data.
+&gt;&gt;
+&gt;&gt; BR
+&gt;&gt; Don
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt; At 2020-06-13 14:40:02, "Frediano Ziglio" &lt;fziglio@redhat.com&g=
+t; wrote:
+&gt;&gt;
+&gt;&gt; Hi,
+&gt;&gt;   the pattern used in spice-gtk is called cooperative multitasking=
+ (see https://en.wikipedia.org/wiki/Cooperative_multitasking), if you add c=
+ode that is not cooperative you get what you described. Use coroutine funct=
+ions to read remote data so the read won't stop other code. If you need to =
+run expensive or blocking code it's a good idea to run it in another thread=
+ removing the blockage.
+&gt;&gt;
+&gt;&gt; Frediano
+&gt;&gt;
+&gt;&gt; ________________________________
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt; Hi
+&gt;&gt;
+&gt;&gt; Here is my experiment:
+&gt;&gt; I created a new port-channel to transfer data between vdagent and =
+spice-gtk. I used a while loop to send 2kb data to gtk, gtk received and dr=
+op the data. In the mean time I used a timer(1ms) to send 2kb data to vdage=
+nt.
+&gt;&gt; Strange thing is that gtk will continually receive data for a whil=
+e(10secs - 70secs) then send a whole bunch of data to vdagent. When receivi=
+ng data, send data will be added to tcp buffer but will not be sent out.
+&gt;&gt;
+&gt;&gt; So I think send event will be affected by receive event, then I gu=
+ess using different thread would help.
+&gt;&gt; Could you please correct me if I=E2=80=99m wrong?
+&gt;&gt;
+&gt;&gt; BR
+&gt;&gt; Don
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt; =E5=9C=A8 2020-06-12 20:03:30=EF=BC=8C"Marc-Andr=C3=A9 Lureau" &lt=
+;marcandre.lureau@gmail.com&gt; =E5=86=99=E9=81=93=EF=BC=9A
+&gt;&gt;
+&gt;&gt; Hi
+&gt;&gt;
+&gt;&gt; On Fri, Jun 12, 2020 at 12:57 PM =E9=99=88=E7=82=A4 &lt;qishiyexu2=
+@126.com&gt; wrote:
+&gt;&gt;&gt;
+&gt;&gt;&gt; Hi,
+&gt;&gt;&gt;
+&gt;&gt;&gt; Spice-gtk is now using co-routine to handle different channel =
+connections. When a channel is handling data, other channels would have to =
+wait, rather than handling synchronously.  That would bring us following is=
+sues:
+&gt;&gt;&gt;  1. If some less important channels (like usb channels) are tr=
+ansfering big data, important channels (main-channel, display-channel,input=
+-channel) will be affected.
+&gt;&gt;&gt;  2. When receiving big data like file transfering(G_IO_IN), se=
+nd event (G_IO_OUT) will not be triggered.
+&gt;&gt;&gt;  3. Flow control between different channels will be hard to do=
+.
+&gt;&gt;&gt;
+&gt;&gt;&gt; Is is possible(and make sense) to put channels into different =
+threads so they can synchronously receive &amp; send msg, without affect ea=
+ch other?
+&gt;&gt;&gt;
+&gt;&gt;
+&gt;&gt; Switching to threads would be possible, but that wouldn't help in =
+the situation you describe, as you are very likely bound on IO. Using sever=
+al threads would actually create more problems to synchronize and schedule =
+the different channels.
+&gt;&gt;
+&gt;&gt; Io operations in coroutines are non-blocking, so they shouldn't af=
+fect other spice-gtk task. If you however observe a blocking CPU-task in so=
+me channel, this may affect the performance of other channels. But in gener=
+al, except for video/image decoding which may be done in a separate thread,=
+ the client side doesn't do much work.
+&gt;&gt;
+&gt;&gt; USB, clipboard and file sharing may use large amounts of data, and=
+ we rely on the glib source and kernel to prioritize channels: this isn't g=
+reat in some cases and may receive improvements.
+&gt;&gt;
+&gt;&gt;
+&gt;&gt; --
+&gt;&gt; Marc-Andr=C3=A9 Lureau
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+&gt;&gt; _______________________________________________
+&gt;&gt; Spice-devel mailing list
+&gt;&gt; Spice-devel@lists.freedesktop.org
+&gt;&gt; https://lists.freedesktop.org/mailman/listinfo/spice-devel
+&gt;&gt;
+&gt;&gt;
+&gt;&gt; _______________________________________________
+&gt;&gt; Spice-devel mailing list
+&gt;&gt; Spice-devel@lists.freedesktop.org
+&gt;&gt; https://lists.freedesktop.org/mailman/listinfo/spice-devel
+</pre></div></blockquote><div><br></div></div></body></html>
+------=_Part_30745645_1313786515.1592315162622--
 
 
---===============2132048886==
+--===============0753705903==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -307,5 +551,5 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============2132048886==--
+--===============0753705903==--
 
