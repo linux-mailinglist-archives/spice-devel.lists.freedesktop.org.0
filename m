@@ -2,60 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A1C11FC99C
-	for <lists+spice-devel@lfdr.de>; Wed, 17 Jun 2020 11:17:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 913401FCB07
+	for <lists+spice-devel@lfdr.de>; Wed, 17 Jun 2020 12:41:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7995C6E544;
-	Wed, 17 Jun 2020 09:17:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8F98E6E0A6;
+	Wed, 17 Jun 2020 10:41:17 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2978E6E544
- for <spice-devel@lists.freedesktop.org>; Wed, 17 Jun 2020 09:17:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1592385418;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3hoxKkV/JzpY4Z+SwawQ/OaRrUZLxZBYffUeoHHmOiU=;
- b=WgTgo0XMd5xwSC0EtaDxT1WTqKELk3oOBhF5IkUmKYHeesgV3envwAYFS0aezlwbX6LtpJ
- x5WaY4PGw/sHuyMfLU4OVTQ75cV4zSMSoFwFfd3/npU0WGnm879tGcDj1AUVaJRhQVTKAW
- DX5yCFVQXuQ8O78rrcpouu4DrXiU/5Q=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-166-R_DO4TaaOoeXleayii46Mw-1; Wed, 17 Jun 2020 05:16:55 -0400
-X-MC-Unique: R_DO4TaaOoeXleayii46Mw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0671F873430;
- Wed, 17 Jun 2020 09:16:55 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 003C35D9D3;
- Wed, 17 Jun 2020 09:16:54 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id EDE7218095FF;
- Wed, 17 Jun 2020 09:16:54 +0000 (UTC)
-Date: Wed, 17 Jun 2020 05:16:54 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: David Arledge <wdarledge@yahoo.com>
-Message-ID: <1740361965.30895039.1592385414642.JavaMail.zimbra@redhat.com>
-In-Reply-To: <410177428.1340580.1592328689772@mail.yahoo.com>
+X-Greylist: delayed 398 seconds by postgrey-1.36 at gabe;
+ Wed, 17 Jun 2020 10:41:16 UTC
+Received: from mail.nanotek.info (mail.nanotek.info [188.166.13.56])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 17AE36E0A6
+ for <spice-devel@lists.freedesktop.org>; Wed, 17 Jun 2020 10:41:16 +0000 (UTC)
+Received: from ousire.calculus.lan (unknown [185.107.80.152])
+ by mail.nanotek.info (Postfix) with ESMTPSA id 2C6E65FF23;
+ Wed, 17 Jun 2020 12:24:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=nanotek.info;
+ s=default; t=1592389472;
+ bh=CSm6+oN6MUAmYdn1s66R9sSQhOHlfNXJgtW+nHgCkj0=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=Uxq9/g1GXaR0Z9dsww6xgniKTONBnocwulw93V4qD+XEyuZJPJHTbkcgxL3bB0+XN
+ KhFoBmzf4FWUecuq+ByfuRiRuX5DOmgTDY092XCtZMhEUpg5MhO1wCD8yceyuwR1mz
+ +jkSlTcn2RCJxvuY5CzTu7UVj5rnYEcR8rGM52B0=
+To: Frediano Ziglio <fziglio@redhat.com>, David Arledge <wdarledge@yahoo.com>
 References: <1107345351.1422205.1592328530239.ref@mail.yahoo.com>
  <1107345351.1422205.1592328530239@mail.yahoo.com>
  <410177428.1340580.1592328689772@mail.yahoo.com>
+ <1740361965.30895039.1592385414642.JavaMail.zimbra@redhat.com>
+From: shiftag <shiftag@nanotek.info>
+Message-ID: <a349b5a0-87cf-5e77-9958-60011f5cbec6@nanotek.info>
+Date: Wed, 17 Jun 2020 14:34:35 +0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.1
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.9, 10.4.195.17]
-Thread-Topic: HELP for install of spice-gtk on Slackware
-Thread-Index: uJnOWZOeSZD3CdZmNLNLUA5idmXA8w==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+In-Reply-To: <1740361965.30895039.1592385414642.JavaMail.zimbra@redhat.com>
+Content-Language: en-US
 Subject: Re: [Spice-devel] HELP for install of spice-gtk on Slackware
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -69,61 +50,19 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> Sorry, forgot the screenshot.
-> Pardon!
-> David
-
-> On Tuesday, June 16, 2020, 12:28:56 PM CDT, David Arledge
-> <wdarledge@yahoo.com> wrote:
-
-> Sirs;
-
-> I have had a problem installing "spice-gtk". I have installed without problem
-> - opus, vala, spice, opus, spice-protocol,
-> six & pyparsing. Attached is a screenshot of the error while running -
-
-> ./# installpkg spice-gtk.SlackBuild
-
-> Did the programmer fail to "end the file" properly or did I make a mistake.
-
-> You are my only hope of settling this question. Without your amicable help, I
-> will fail to install
-> Spice-gtk then fail to install Remmina, then fail at preforming the task
-> required of me to "add
-> a folder in Windows to the Desktop" on my Linux (Slackware) box for the "IT
-> Support Pro"
-> Certification by Google/Coursera. This RDP - Remmina is mandated by Coursera
-> to accomplish
-> this simple task. The part of this that has been a real challenge is the
-> installing of .tar.gz on
-> Slackware. If you use Slack, then you know how difficult this can be for a
-> Novice. I have
-> accomplished this - as you can obviously see - but, I am having trouble with
-> your package.
-
-> Could you take a look and tell me if this is a fatal error or can I just -
-> "Ctrl-C" out and move on to
-> the other dependencies for Remmina - vte3 and json-glib and libsodium and
-> freerdp without
-> any consequences?
-
-> Thank you ever so much for your Reply.
-
-> W David Arledge
-> wdarledge@yahoo.com
-
-Hi,
-  it looks like the file SpiceClientGLib-2.0.gir was not generate correctly.
-Can you post the content?
-
-Frediano
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+Ck9uIDYvMTcvMjAgMToxNiBQTSwgRnJlZGlhbm8gWmlnbGlvIHdyb3RlOgo+PiAuLyMgaW5zdGFs
+bHBrZyBzcGljZS1ndGsuU2xhY2tCdWlsZAo+CldoYXQgaXMgdGhhdCA/CgpBIC5TbGFja0J1aWxk
+IGlzIGEgc2NyaXB0IGZpbGUgYW5kIGluc3RhbGxwa2cgY29tbWFuZCBpcyB1c2UgdG8gaW5zdGFs
+bAphIHBhY2thZ2UgKC50eHovLnRneiBmaWxlIHRvZGF5KS4gU28geWVzLCB5b3UgYXJlIGRvaW5n
+IHNvbWV0aGluZyB3cm9uZwpoZXJlLiBZb3Ugc2hvdWxkIGRvOgoKwqDCoMKgICMgc2ggc3BpY2Ut
+Z3RrLlNsYWNrQnVpbGQKCmFuZCBpZiBldmVyeXRoaW5nIGlzIG9rCgrCoMKgwqAgIyBpbnN0YWxs
+cGtnCi9zb21lL3BhdGgvdXN1YWxseS9pbi90bXAvc3BpY2UtZ3RrLXZlcnNpb24tYXJjaC1zb21l
+c3R1ZmYudGd6CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9w
+Lm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNl
+LWRldmVsCg==
