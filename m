@@ -1,62 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3E842105A5
-	for <lists+spice-devel@lfdr.de>; Wed,  1 Jul 2020 10:03:28 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C3FF0210D52
+	for <lists+spice-devel@lfdr.de>; Wed,  1 Jul 2020 16:15:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4FA6C6E408;
-	Wed,  1 Jul 2020 08:03:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2EEBF6E903;
+	Wed,  1 Jul 2020 14:15:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D99CC6E408
- for <spice-devel@lists.freedesktop.org>; Wed,  1 Jul 2020 08:03:26 +0000 (UTC)
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 907AB6E8E4
+ for <spice-devel@lists.freedesktop.org>; Wed,  1 Jul 2020 14:15:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593590605;
+ s=mimecast20190719; t=1593612924;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type;
- bh=4cLHqmxsfEwfj+gzaho/256u79lDsUI5MN70Wxjc3Jo=;
- b=fY3SuTmVRaexvTmtBzOIYeVxtFAy4sUTdCSKY43bWANAuqj3Rjnl/32uyhGxWGqFTTqduC
- UylDYMXnDyyFej67YtvR1m7WKPyvEZyTGg7u0oAZKklPA0sRKzb/LsfhS4Czy6/HcWCpkb
- 1t1WBtUsdEDhykhPbjWqn4LHQap6+is=
-Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com
- [209.85.161.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-158-8QH4MGAJOlmcg2XyJulwDQ-1; Wed, 01 Jul 2020 04:03:22 -0400
-X-MC-Unique: 8QH4MGAJOlmcg2XyJulwDQ-1
-Received: by mail-oo1-f72.google.com with SMTP id v13so2503949oor.3
- for <spice-devel@lists.freedesktop.org>; Wed, 01 Jul 2020 01:03:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=4cLHqmxsfEwfj+gzaho/256u79lDsUI5MN70Wxjc3Jo=;
- b=nlfePM5URN8Ea9h/7bC8SmFxxzqtxfQ/+EWX7AZ9HAk1b6GcNBYTYSXDfhIka+I1R6
- 5K33Ob4u9694yAxc+0CUNIf7SMX8vnhOwepAcxVHDmP4IG7/O16Im/CMD2GzuszvC4Lf
- eG3s7woa50GtzIGDRTgTLYPhfmxYorIfxJKsFwWmuXpPooAOZKdkxJoI/sOX8awt0uHF
- c6Et9M3UCgDtXXKqQRlZY5pyCZHB70rkBfp4oT4hhXgK6BoHe3HA6ksmrYedUg3cwS1I
- KCyQ706iO+ZQgwdphTYjvB5tmp9DlhvGduyf2ketFkYDBjF8BaicaAkCrVg0O5hvoHLJ
- 0mpA==
-X-Gm-Message-State: AOAM531Gm+86rUzIk2/hMiPReTma28U+TfFKUiSU3U/VCNOWcnMbrM1z
- 5HrvlmRDjSgeCc0YSOeex4OztXdAc8eZokFwY/aT0znnkpmMMkNeGxw0YKQHe5/lpHX5bHyOzQS
- Uikx5LOhNiVjAo9n3ud5ziqnW6BffXvghDJ/2K78Dsaf1/tY=
-X-Received: by 2002:a05:6830:198:: with SMTP id
- q24mr21489027ota.202.1593590601833; 
- Wed, 01 Jul 2020 01:03:21 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJz8m4dnQzQ3ctXASs6LGPpiyDLmfH10uwNAf9w5zvITMf0lGCY+XUfltwgDocXC8CZf91awoPoPQDIdjqP5eWA=
-X-Received: by 2002:a05:6830:198:: with SMTP id
- q24mr21489010ota.202.1593590601553; 
- Wed, 01 Jul 2020 01:03:21 -0700 (PDT)
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=4BuzN2hqiNhdXEwUtdvaugNcqIDlHLj7OSrNNeFBf6M=;
+ b=Vlj2B9a+K3LtEM1z7yPvfQXFF0+mM+TYZF88cnPxoReVz+xVPwhpSMU+PZ3CoxKtwYTMJb
+ Qo5GppCPQkWHv0xVHAkNMcTkcjedya9TcQgB50Zod2mJ+cDUPi2NAJyzkoJgJ3lrmRE0E3
+ pHnJvRuke6yrFJhdXBVNe++k113oWjw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-395-WcyUyTtSMc-aqw9maFxMTQ-1; Wed, 01 Jul 2020 10:15:21 -0400
+X-MC-Unique: WcyUyTtSMc-aqw9maFxMTQ-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5239A18FE86C
+ for <spice-devel@lists.freedesktop.org>; Wed,  1 Jul 2020 14:15:09 +0000 (UTC)
+Received: from localhost (ovpn-114-63.ams2.redhat.com [10.36.114.63])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 043C5BA03E;
+ Wed,  1 Jul 2020 14:15:07 +0000 (UTC)
+Date: Wed, 1 Jul 2020 16:15:07 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Kevin Pouget <kpouget@redhat.com>
+Message-ID: <20200701141507.oljra4ncxridh6kl@wingsuit>
+References: <CADJ1XR2+S76nWdj4ahYQxtw5PkR3cTwz+MrP5Q=7LktvL611jQ@mail.gmail.com>
 MIME-Version: 1.0
-From: Kevin Pouget <kpouget@redhat.com>
-Date: Wed, 1 Jul 2020 10:03:10 +0200
-Message-ID: <CADJ1XR2+S76nWdj4ahYQxtw5PkR3cTwz+MrP5Q=7LktvL611jQ@mail.gmail.com>
-To: Spice devel <spice-devel@lists.freedesktop.org>
+In-Reply-To: <CADJ1XR2+S76nWdj4ahYQxtw5PkR3cTwz+MrP5Q=7LktvL611jQ@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kpouget@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=victortoso@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Spice-devel] Identifying and removing potentially divisive language
+Subject: Re: [Spice-devel] Identifying and removing potentially divisive
+ language
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,96 +60,97 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0618915351=="
+Cc: Spice devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============0824464259=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0618915351==
-Content-Type: multipart/alternative; boundary="000000000000b9341a05a95cb96e"
+--===============0824464259==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="wvw2aacbadaf3ufu"
+Content-Disposition: inline
 
---000000000000b9341a05a95cb96e
-Content-Type: text/plain; charset="UTF-8"
-
-Hello SPICE community,
-
-following Chris Wright (Red Hat CTO) blog post on "Making open source
-more inclusive by eradicating problematic language" [1], I would like
-to suggest that we have a look at SPICE source code to find out if/where
-such language is used and how to remove it.
-
-To illustrate the motivations of this move, consider the phrase "the
-final solution". I am quite sure you would agree that these words
-cannot be used inside a project. You would agree because the WWII
-events are still in minds and not so ancient yet.
-Git "master", or the "master/slave" pattern may not trigger similar
-thoughts if your ancestors didn't suffer slavery;
-"whitelist/blacklist" neither, if the color of your skin doesn't get
-you into trouble (white=allow, black=deny).
-Overall, I would advise, when thinking about these questions, not to
-forget on which side your history/country/skin color/sexual
-orientation sits you. If it's the oppressor side, you're not at the
-right place to say it's not relevant.
-
----
-
-I had a quick `grep` look at SPICE code base, searching for
-`blacklist/whitelist/slave` and I could only find very few occurrences
-of these words, which is nice. Can you find other problem words?
-
-`master` is used for git default's branch, but not much
-elsewhere. Let's discuss if we could get rid of this one, for instance
-changing it to `main` (just a suggestion). I don't think that it can
-break that many things (only the CI comes to my mind, where the
-`master` branch may be treated differently) as git name default
-branch's name is often omitted in the usual workflows.
-
-Please share your thoughts about this
-
-best regards,
-
-Kevin
-
-
-1:
-https://www.redhat.com/en/blog/making-open-source-more-inclusive-eradicating-problematic-language
-
---000000000000b9341a05a95cb96e
-Content-Type: text/html; charset="UTF-8"
+--wvw2aacbadaf3ufu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hello SPICE community,<br><br>following Chris Wright (Red =
-Hat CTO) blog post on &quot;Making open source<br>more inclusive by eradica=
-ting problematic language&quot; [1], I would like<br>to suggest that we hav=
-e a look at SPICE source code to find out if/where<br>such language is used=
- and how to remove it.<br><br>To illustrate the motivations of this move, c=
-onsider the phrase &quot;the<br>final solution&quot;. I am quite sure you w=
-ould agree that these words<br>cannot be used inside a project. You would a=
-gree because the WWII<br>events are still in minds and not so ancient yet. =
-<br>Git &quot;master&quot;, or the &quot;master/slave&quot; pattern may not=
- trigger similar<br>thoughts if your ancestors didn&#39;t suffer slavery;<b=
-r>&quot;whitelist/blacklist&quot; neither, if the color of your skin doesn&=
-#39;t get<br>you into trouble (white=3Dallow, black=3Ddeny).<br>Overall, I =
-would advise, when thinking about these questions, not to<br>forget on whic=
-h side your history/country/skin color/sexual<br>orientation sits you. If i=
-t&#39;s the oppressor side, you&#39;re not at the<br>right place to say it&=
-#39;s not relevant.<br><br>---<br><br>I had a quick `grep` look at SPICE co=
-de base, searching for<br>`blacklist/whitelist/slave` and I could only find=
- very few occurrences<br>of these words, which is nice. Can you find other =
-problem words?<br><br>`master` is used for git default&#39;s branch, but no=
-t much<br>elsewhere. Let&#39;s discuss if we could get rid of this one, for=
- instance<br>changing it to `main` (just a suggestion). I don&#39;t think t=
-hat it can<br>break that many things (only the CI comes to my mind, where t=
-he<br>`master` branch may be treated differently) as git name default<br>br=
-anch&#39;s name is often omitted in the usual workflows.<br><br>Please shar=
-e your thoughts about this<br><br>best regards,<br><br>Kevin<br><br><br>1: =
-<a href=3D"https://www.redhat.com/en/blog/making-open-source-more-inclusive=
--eradicating-problematic-language">https://www.redhat.com/en/blog/making-op=
-en-source-more-inclusive-eradicating-problematic-language</a></div>
+Hi,
 
---000000000000b9341a05a95cb96e--
+On Wed, Jul 01, 2020 at 10:03:10AM +0200, Kevin Pouget wrote:
+> Hello SPICE community,
+>=20
+> following Chris Wright (Red Hat CTO) blog post on "Making open
+> source more inclusive by eradicating problematic language" [1],
+> I would like to suggest that we have a look at SPICE source
+> code to find out if/where such language is used and how to
+> remove it.
+>=20
+> To illustrate the motivations of this move, consider the phrase
+> "the final solution". I am quite sure you would agree that
+> these words cannot be used inside a project. You would agree
+> because the WWII events are still in minds and not so ancient
+> yet.  Git "master", or the "master/slave" pattern may not
+> trigger similar thoughts if your ancestors didn't suffer
+> slavery; "whitelist/blacklist" neither, if the color of your
+> skin doesn't get you into trouble (white=3Dallow, black=3Ddeny).
+> Overall, I would advise, when thinking about these questions,
+> not to forget on which side your history/country/skin
+> color/sexual orientation sits you. If it's the oppressor side,
+> you're not at the right place to say it's not relevant.
+>=20
+> ---
+>=20
+> I had a quick `grep` look at SPICE code base, searching for
+> `blacklist/whitelist/slave` and I could only find very few
+> occurrences of these words, which is nice. Can you find other
+> problem words?
+>=20
+> `master` is used for git default's branch, but not much
+> elsewhere. Let's discuss if we could get rid of this one, for
+> instance changing it to `main` (just a suggestion). I don't
+> think that it can break that many things (only the CI comes to
+> my mind, where the `master` branch may be treated differently)
+> as git name default branch's name is often omitted in the usual
+> workflows.
+>=20
+> Please share your thoughts about this
+
+Not a native english speaker but I've read a few discussions
+around the user of master as git as in master copy instead of
+master/slave. Another examples of the use of master from native
+speakers included master as in school teacher or someone that is
+in charge of something (the offense being where the subject of
+control is the slave).
+
+Still, I don't really mind to changing it to main, even more if
+there are people that feel this can really be offensive in some
+way..
+
+--wvw2aacbadaf3ufu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAl78mmoACgkQl9kSPeN6
+SE+IcBAAgX4uhJiJJJWQMR2r2V02N7aX7S3e1pHQuYXMuQtW74gkEPuaeHXC+s2Q
+mqvhuevXeqx2eP+aSQnwiCPE0wNMqhADZkAcxDZcjV9Ojaio9IKOwGTXq69AMFRA
+y56pYOVlErImibCHzewKBCD12PaR2ekYuujflJO+4bequeCtKnAIdyWH5Z5fsoh2
+YuW1XGCF00ZZ00hgyfdUUexuqcp1Pg1WY9RFJntvhog3NWleycj53k8F6xrlx7XK
+eAd+oKNGrOfe3YhLI01oEVAyjm1QJXM6z0xC/TX6y0IEdo59gaotuqN4f7bwDIcA
+caRiycLIyz5LLLBXETMCsuGfooaCu34TnM2+WQQs3RGwPbgAMipfHpBj6vl9WM1a
+FbDhg0x7EtYoq42N3Jsbgsz9B4gdIp/2F63Ll+UxxJTyQ+S8XZEfb1n+gGqxWHel
+llaP7nYvtYk3IqY5a0ojeOrS/AjOOuJIPpP985lQLvzAxiCj+RwghiYIwqzqhSB8
+i8wdD00RZKv+qIIUzTz2SoIVAj0CFkVtJuwSXbECU0c1v0YWRPuiWwkC5aIcuFzm
+iS/YNTZb38pFdwY+njQ8xpj3VmMDn1rXnXxdn0l2WQev3XRsR14kKYtf+ugSV+0P
+ZdfDtrAokbrPW3yAWh1f3xMJ4FXGhDMW75w16sQr/3YwqtRWzzc=
+=zuWe
+-----END PGP SIGNATURE-----
+
+--wvw2aacbadaf3ufu--
 
 
---===============0618915351==
+--===============0824464259==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -168,5 +161,5 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0618915351==--
+--===============0824464259==--
 
