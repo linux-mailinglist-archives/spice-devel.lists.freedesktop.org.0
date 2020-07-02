@@ -1,54 +1,55 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1FBF21267D
-	for <lists+spice-devel@lfdr.de>; Thu,  2 Jul 2020 16:40:45 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 249182126FF
+	for <lists+spice-devel@lfdr.de>; Thu,  2 Jul 2020 16:53:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9BFB76E99B;
-	Thu,  2 Jul 2020 14:40:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 967B66E9AB;
+	Thu,  2 Jul 2020 14:53:24 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma2.jpberlin.de (plasma2.jpberlin.de [91.198.250.140])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AF6E66E247
- for <spice-devel@lists.freedesktop.org>; Thu,  2 Jul 2020 13:47:13 +0000 (UTC)
-Received: from gerste.heinlein-support.de (gerste.heinlein-support.de
- [91.198.250.173])
- by plasma.jpberlin.de (Postfix) with ESMTP id BD1EABD5F7;
- Thu,  2 Jul 2020 15:47:08 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([91.198.250.140])
- by gerste.heinlein-support.de (gerste.heinlein-support.de [91.198.250.173])
- (amavisd-new, port 10030)
- with ESMTP id q6sM-WGaF5cz; Thu,  2 Jul 2020 15:47:06 +0200 (CEST)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "Let's Encrypt Authority X3" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 3B615BE472;
- Thu,  2 Jul 2020 15:47:06 +0200 (CEST)
-Received: from os-lin-dmo.localnet (10.25.255.1) by webmail.opensynergy.com
- (10.25.10.17) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 2 Jul 2020
- 15:47:05 +0200
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: Keiichi Watanabe <keiichiw@chromium.org>
-Date: Thu, 2 Jul 2020 15:47:05 +0200
-Message-ID: <3163123.i8GTTo9gJ5@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <CAD90VcbmrismAXW0t7K6M-=a2-P+OCOw8PvBr6r8S_3LNYu=pw@mail.gmail.com>
-References: <20200623111325.237158-1-keiichiw@chromium.org>
- <2850781.lI95146Gml@os-lin-dmo>
- <CAD90VcbmrismAXW0t7K6M-=a2-P+OCOw8PvBr6r8S_3LNYu=pw@mail.gmail.com>
+Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
+ [IPv6:2607:f8b0:4864:20::a2f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C307C6E9AB
+ for <spice-devel@lists.freedesktop.org>; Thu,  2 Jul 2020 14:53:23 +0000 (UTC)
+Received: by mail-vk1-xa2f.google.com with SMTP id g22so2190851vke.9
+ for <spice-devel@lists.freedesktop.org>; Thu, 02 Jul 2020 07:53:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=yxZDcg7BxGZoR2qrJGDSquHSIWRYgOS0upudjqhqFO8=;
+ b=Ffi7eGWifeActhjgl1cgx6Km2Ml1326x45Gl6Ol+JTXuhNeVc6tGvAEFxqEHo8lERy
+ /xlocAxlTigZuNT25RInkfckD6VQk0QyC63KRiU5IfY53IU2sQGZTU7MQeUZ3smd0ns+
+ Ki527wzFahOmTn9bJMoybh0Pj+97P/mUeZaY9XNLKgS/d0v8a+B+wy2jSq4QKgvUMKtB
+ m3povU6T6yOdTCxFftfWwiPowElkmTV9NPLYiDDcOJ2hJQb12PxYjRsgWWCmXZNsbGJk
+ cP8rXcRsNx722r0RP+BNdPBMyDHIxXxOUAro/eKHrvQ4eaTj5BT5GUBMynaPncTtvkU/
+ kg/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=yxZDcg7BxGZoR2qrJGDSquHSIWRYgOS0upudjqhqFO8=;
+ b=YmF1yHYczcBoDrFbgO+CO/PL5PmjHGg9sNDFBVzqRO4J0N3ZIh5J8CUMdW9Riam9pf
+ RZc5ARHsQqLGcJn34RKxpqPJA61ZKocug/aP7f/OGGJQ+om5JuNrnEiSRLe+goqBN+rW
+ UTKD1KmMfrsupVl14NM9myjKXMK1VLydK9sj/Oy58QIJe2eeoidpupnptUa7R19j9jl4
+ Fq5X+qCAfne1KTVoVYZWda20rlD2zPxbeR5bbaez1v8aei4VB8HpWd4vpDGus/pNibRA
+ F9/OoxrFwVoTIpgQKy4jXPujCFDBPJyStRSv+uVq3/HM+cZDjTNuQ5FXLr8crsqhI6+o
+ dC9w==
+X-Gm-Message-State: AOAM533f9cLy+Uk4UVSZMbMlL3vcgyxi6NdGBiYCpMzFEQBAMWPy3UG+
+ 2INkPmkEOJ1+QQL0y+7kKLr8DcXaBQVa2PLICvA=
+X-Google-Smtp-Source: ABdhPJwjsM/ALeW23YNxYO3NCuITF2b+jqf2bR+jbt6MylgxnITJ8II2KXNXq6mGiFCWVkwozkS1t3cNUq3jkMAOT3I=
+X-Received: by 2002:a1f:ae53:: with SMTP id x80mr21899075vke.41.1593701602867; 
+ Thu, 02 Jul 2020 07:53:22 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
-X-MBO-SPAM-Probability: 0
-X-Rspamd-Score: -5.60 / 15.00 / 200.00
-X-Rspamd-Queue-Id: BD1EABD5F7
-X-Rspamd-UID: 03c435
-X-Mailman-Approved-At: Thu, 02 Jul 2020 14:40:39 +0000
-Subject: Re: [Spice-devel] [PATCH RFC v4 0/1] Virtio Video Device
- Specification
+References: <20200528123106.846919-1-ogutsua@gmail.com>
+ <CAJjKVYMQTBmMAWLv9JMRV2pdq96mi7GHd+AJjwv=T0T=hEJn9g@mail.gmail.com>
+In-Reply-To: <CAJjKVYMQTBmMAWLv9JMRV2pdq96mi7GHd+AJjwv=T0T=hEJn9g@mail.gmail.com>
+From: =?UTF-8?Q?Oliver_Guti=C3=A9rrez?= <ogutsua@gmail.com>
+Date: Thu, 2 Jul 2020 15:53:11 +0100
+Message-ID: <CA+J7JHtzSwg7tj2OR5uaDtzFJivnc=v+NH=2nN+D6=w_3im6gg@mail.gmail.com>
+To: Oliver Gutierrez <ogutierrez@redhat.com>
+Subject: Re: [Spice-devel] [PATCH] Added needed import of function
+ arraybuffer_to_str
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,163 +61,134 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Hans Verkuil <hverkuil@xs4all.nl>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Pawel Osciak <posciak@chromium.org>, virtio-dev@lists.oasis-open.org,
- David Staessens <dstaessens@chromium.org>,
- Nicolas Dufresne <nicolas@ndufresne.ca>, spice-devel@lists.freedesktop.org,
- Dylan Reid <dgreid@chromium.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Alex Lau <alexlau@chromium.org>, Saket Sinha <saket.sinha89@gmail.com>,
- =?ISO-8859-1?Q?St=E9phane?= Marchesin <marcheu@chromium.org>,
- Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
- Kiran Pawar <kiran.pawar@opensynergy.com>,
- Alexandre Courbot <acourbot@chromium.org>, Tomasz Figa <tfiga@chromium.org>,
- David Stevens <stevensd@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Enrico
- Granata <egranata@google.com>, Gerd Hoffmann <kraxel@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1816660642=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Keiichi,
+--===============1816660642==
+Content-Type: multipart/alternative; boundary="000000000000eac10705a976912e"
 
-Thanks for the clarification. I believe we should explicitly describe this in 
-the VIRTIO_VIDEO_CMD_RESOURCE_ATTACH section. And I also still see a problem 
-there. If it is a guest allocated resource, we cannot consider it to be free 
-until the device really releases it. And it won't happen until we issue the 
-next ATTACH call. Also, as we discussed before, it might be not possible to 
-free individual buffers, but the whole queue only.
+--000000000000eac10705a976912e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Best regards,
-Dmitry.
+Hi there.
 
-On Donnerstag, 2. Juli 2020 14:50:58 CEST Keiichi Watanabe wrote:
-> Hi Dmitry,
-> 
-> On Thu, Jul 2, 2020 at 4:32 PM Dmitry Sepp <dmitry.sepp@opensynergy.com> 
-wrote:
-> > Hi Keiichi,
-> > 
-> > Thank you very much for the hard work to update the spec and to summarize
-> > all of the recent proposals!
-> > 
-> > I want to again raise a topic that was discussed earlier and unfortunately
-> > the latest proposal cannot resolve the problem. I hope together with
-> > upstream people we'll be able to find a neat solution.
-> > 
-> > Please consider the following case:
-> > 1. Encoder case
-> > 2. User app does reqbufs with DMABUF flag.
-> > 3. User app submits frames to encode, each frame has a different fd, might
-> > be a completely new buffer.
-> > 4. Driver receives this buffer via queue() and does this check to verify
-> > whether it is a known dmabuf:
-> > https://elixir.bootlin.com/linux/v5.7.6/source/drivers/media/common/videob
-> > uf2/ videobuf2-core.c#L1163
-> > 5. When the check fails, it does cleanup.
-> > 6. BUG: As we got rid of the flexible resource detach/destroy calls, host
-> > side has no way to know the resource has a new memory region. The new sgt
-> > is never propagated to the host.
-> > 
-> > The mentioned earlier
-> > CMD_RESOURE_REASSIGN_ENTRIES/CMD_RESOURE_REASSIGN_OBJECT are not included
-> > in the spec.
-> 
-> This shouldn't be a problem. Though we don't have a per-resource
-> detach command, we can _replace_ attached sg-list or virtio-object by
-> calling the attach command.
-> In your scenario, if the driver notices a new dmabuf is given at 4 and
-> 5, the driver should send RESOURCE_ATTACH command with the new dmabuf.
-> Then, the old dmabuf was regarded as "detached". Please see the
-> "Buffer life cycle" section.
-> 
-> I renamed RESOURCE_REASSIGN_* commands to RESOURCE_ATTACH as it's also
-> used at the first time to attach a buffer.
-> 
-> Best regards,
-> Keiichi
-> 
-> > Thanks in advance.
-> > 
-> > Best regards,
-> > Dmitry.
-> > 
-> > On Dienstag, 23. Juni 2020 13:13:24 CEST Keiichi Watanabe wrote:
-> > > This is the v4 RFC of virtio video device specification.
-> > > PDF versions are available at [1, 2].
-> > > 
-> > > Note that this patch depends on a recent patchset "Cross-device resource
-> > > sharing" [3].
-> > > 
-> > > Here is a list of major changes from v3:
-> > > * Redesingned struct definitions for each command and request based on
-> > > 
-> > >   discussions at [4].
-> > > 
-> > > * Renamed commands/structs/enums to more descriptive names.
-> > > * Had different structs and fields for image formats and bitstream
-> > > formats.
-> > > * Added more detailed specification for supported video codecs.
-> > > * Made stream_id be allocated by the device.
-> > > * Had a single parameter struct per-stream instead of per-queue
-> > > parameters
-> > > and controls.
-> > > * Allowed the driver to specify the number of buffers to use via
-> > > 
-> > >   "cur_{image,bitstream}_buffers".
-> > > 
-> > > * Renamed RESOURCE_CREATE command to RESOURCE_ATTACH command and allow
-> > > the
-> > > 
-> > >   driver to use this command when replacing backing memories as well.
-> > > 
-> > > [5] is the diff of the header file from v3. Note that it only contains
-> > > changes in the header. We haven't updated the driver nor device
-> > > implementation to focus on protocol design discussion first.
-> > > 
-> > > While it may appear that many parts have been changed since the previous
-> > > revision, these changes are to address the issues raised in previous
-> > > discussions or/and to make the protocol simpler and easier to prevent
-> > > misuse.
-> > > I'd appreciate any types of feedback.
-> > > 
-> > > Best regards,
-> > > Keiichi
-> > > 
-> > > [1] (full):
-> > > https://drive.google.com/file/d/1DiOJZfUJ5wvFtnNFQicxt0zkp4Ob1o9C/view?u
-> > > sp=
-> > > sharing [2] (only video section):
-> > > https://drive.google.com/file/d/188uAkIWE0BsXETECez98y5fJKw8rslj3/view?u
-> > > sp=
-> > > sharing [3]
-> > > https://lists.oasis-open.org/archives/virtio-comment/202003/msg00035.htm
-> > > l
-> > > [4] https://markmail.org/thread/c6h3e3zn647qli3w
-> > > [5]
-> > > https://chromium-review.googlesource.com/c/chromiumos/third_party/kernel
-> > > /+/
-> > > 2164411
-> > > 
-> > > Keiichi Watanabe (1):
-> > >   virtio-video: Add virtio video device specification
-> > >  
-> > >  .gitignore                        |    1 +
-> > >  content.tex                       |    1 +
-> > >  images/video-buffer-lifecycle.dot |   18 +
-> > >  make-setup-generated.sh           |    8 +
-> > >  virtio-video.tex                  | 1163 +++++++++++++++++++++++++++++
-> > >  5 files changed, 1191 insertions(+)
-> > >  create mode 100644 .gitignore
-> > >  create mode 100644 images/video-buffer-lifecycle.dot
-> > >  create mode 100644 virtio-video.tex
-> > > 
-> > > --
-> > > 2.27.0.111.gc72c7da667-goog
+Is there any option to get this fix into spice-html5 code?
 
+Thanks in advance.
+
+
+
+El jue., 28 may. 2020 a las 13:33, Oliver Gutierrez (<ogutierrez@redhat.com=
+>)
+escribi=C3=B3:
+
+> This is a patch to fix the SPICE port feature not being working since the
+> change made to use module imports instead of inline loading of scripts.
+>
+> Right now works with only this change.
+>
+> On Thu, May 28, 2020 at 1:31 PM Oliver Gutierrez <ogutsua@gmail.com>
+> wrote:
+>
+>> ---
+>>  src/port.js | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/src/port.js b/src/port.js
+>> index 74523ae..b254131 100644
+>> --- a/src/port.js
+>> +++ b/src/port.js
+>> @@ -20,7 +20,7 @@
+>>  */
+>>
+>>  import { Constants } from './enums.js';
+>> -import { DEBUG } from './utils.js';
+>> +import { DEBUG, arraybuffer_to_str } from './utils.js';
+>>  import { SpiceConn } from './spiceconn.js';
+>>  import { SpiceMsgPortInit } from './spicemsg.js';
+>>
+>> --
+>> 2.25.1
+>>
+>> _______________________________________________
+>> Spice-devel mailing list
+>> Spice-devel@lists.freedesktop.org
+>> https://lists.freedesktop.org/mailman/listinfo/spice-devel
+>>
+>>
+>
+> --
+> Oliver Gutierrez
+> Software Engineer - Desktop Management tools
+> Red Hat
+>
+
+--000000000000eac10705a976912e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi there.</div><div><br></div><div>Is there any optio=
+n to get this fix into spice-html5 code?</div><div><br></div><div>Thanks in=
+ advance.<br></div><div><br></div><div><br></div></div><br><div class=3D"gm=
+ail_quote"><div dir=3D"ltr" class=3D"gmail_attr">El jue., 28 may. 2020 a la=
+s 13:33, Oliver Gutierrez (&lt;<a href=3D"mailto:ogutierrez@redhat.com">ogu=
+tierrez@redhat.com</a>&gt;) escribi=C3=B3:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex"><div dir=3D"ltr"><div>This is a patch to fix the=
+ SPICE port feature not being working since the change made to use module i=
+mports instead of inline loading of scripts.</div><div><br></div><div>Right=
+ now works with only this change.<br></div></div><br><div class=3D"gmail_qu=
+ote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, May 28, 2020 at 1:31 PM =
+Oliver Gutierrez &lt;<a href=3D"mailto:ogutsua@gmail.com" target=3D"_blank"=
+>ogutsua@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex">---<br>
+=C2=A0src/port.js | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/src/port.js b/src/port.js<br>
+index 74523ae..b254131 100644<br>
+--- a/src/port.js<br>
++++ b/src/port.js<br>
+@@ -20,7 +20,7 @@<br>
+=C2=A0*/<br>
+<br>
+=C2=A0import { Constants } from &#39;./enums.js&#39;;<br>
+-import { DEBUG } from &#39;./utils.js&#39;;<br>
++import { DEBUG, arraybuffer_to_str } from &#39;./utils.js&#39;;<br>
+=C2=A0import { SpiceConn } from &#39;./spiceconn.js&#39;;<br>
+=C2=A0import { SpiceMsgPortInit } from &#39;./spicemsg.js&#39;;<br>
+<br>
+-- <br>
+2.25.1<br>
+<br>
+_______________________________________________<br>
+Spice-devel mailing list<br>
+<a href=3D"mailto:Spice-devel@lists.freedesktop.org" target=3D"_blank">Spic=
+e-devel@lists.freedesktop.org</a><br>
+<a href=3D"https://lists.freedesktop.org/mailman/listinfo/spice-devel" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.freedesktop.org/mailman/lis=
+tinfo/spice-devel</a><br>
+<br>
+</blockquote></div><br clear=3D"all"><br>-- <br><div dir=3D"ltr"><div dir=
+=3D"ltr"><div><div dir=3D"ltr"><span>Oliver Gutierrez<br>Software Engineer =
+- Desktop Management tools<br>Red Hat</span></div></div></div></div>
+</blockquote></div>
+
+--000000000000eac10705a976912e--
+
+--===============1816660642==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1816660642==--
