@@ -2,51 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B11F211FDF
-	for <lists+spice-devel@lfdr.de>; Thu,  2 Jul 2020 11:25:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC280212066
+	for <lists+spice-devel@lfdr.de>; Thu,  2 Jul 2020 11:54:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E26276E8B3;
-	Thu,  2 Jul 2020 09:25:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8B4FB6EABF;
+	Thu,  2 Jul 2020 09:54:52 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from plasma2.jpberlin.de (plasma2.jpberlin.de [91.198.250.140])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6B4196E207
- for <spice-devel@lists.freedesktop.org>; Thu,  2 Jul 2020 07:32:14 +0000 (UTC)
-Received: from spamfilter01.heinlein-hosting.de
- (spamfilter01.heinlein-hosting.de [80.241.56.115])
- by plasma.jpberlin.de (Postfix) with ESMTP id B94B9BCF28;
- Thu,  2 Jul 2020 09:32:09 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from plasma.jpberlin.de ([80.241.56.68])
- by spamfilter01.heinlein-hosting.de (spamfilter01.heinlein-hosting.de
- [80.241.56.115]) (amavisd-new, port 10030)
- with ESMTP id E6Bem4w4gEjv; Thu,  2 Jul 2020 09:32:07 +0200 (CEST)
-Received: from webmail.opensynergy.com (unknown [217.66.60.5])
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "webmail.opensynergy.com",
- Issuer "Let's Encrypt Authority X3" (not verified))
- (Authenticated sender: opensynergy@jpberlin.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id E4649BCE3F;
- Thu,  2 Jul 2020 09:32:06 +0200 (CEST)
-Received: from os-lin-dmo.localnet (10.25.255.1) by webmail.opensynergy.com
- (10.25.10.17) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 2 Jul 2020
- 09:32:06 +0200
-From: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-To: <virtio-dev@lists.oasis-open.org>, Keiichi Watanabe <keiichiw@chromium.org>
-Date: Thu, 2 Jul 2020 09:32:05 +0200
-Message-ID: <2850781.lI95146Gml@os-lin-dmo>
-Organization: OpenSynergy
-In-Reply-To: <20200623111325.237158-1-keiichiw@chromium.org>
-References: <20200623111325.237158-1-keiichiw@chromium.org>
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6F9CA6EABF
+ for <spice-devel@lists.freedesktop.org>; Thu,  2 Jul 2020 09:54:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1593683689;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9wa9IijoolLJGpfY3uuqt5fLh4i11U6XuN8c+BwQR+4=;
+ b=I+vAAk85ZXPGa5WWLl6J+XQ8N9OAuqWPwDHqM6YMArBqPhsO00IVWFMDQX4E/IDzIiNuA6
+ +RuKm7XaoP98j5V5sPAtEgcP61l5Riq5e9xbJQhBXA5W40fMaLNAmfNXJ+d+DgO9a6cHM3
+ oa+YrvqWO+tca8K8cyB1Icfmk+h5Pe4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-276-Ew4YQ1r6N4K6mhPIdg9Cdg-1; Thu, 02 Jul 2020 05:54:48 -0400
+X-MC-Unique: Ew4YQ1r6N4K6mhPIdg9Cdg-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1BDC218FE860;
+ Thu,  2 Jul 2020 09:54:47 +0000 (UTC)
+Received: from lub.tlv (unknown [10.35.206.206])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 19A8F6109F;
+ Thu,  2 Jul 2020 09:54:45 +0000 (UTC)
+To: Peter Kecho <peterkecho@gmail.com>, spice-devel@lists.freedesktop.org
+References: <CAH2czN4u-BCHHGsA9eGo5m3LgF0xUXhZWzxJ-xOBtgUJDH8bxQ@mail.gmail.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <3dc1a89a-39de-e85c-915b-fe7495ce2982@redhat.com>
+Date: Thu, 2 Jul 2020 12:54:43 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-X-Originating-IP: [10.25.255.1]
-X-MBO-SPAM-Probability: 0
-X-Rspamd-Score: -5.09 / 15.00 / 200.00
-X-Rspamd-Queue-Id: B94B9BCF28
-X-Rspamd-UID: f083ff
-X-Mailman-Approved-At: Thu, 02 Jul 2020 09:25:27 +0000
-Subject: Re: [Spice-devel] [PATCH RFC v4 0/1] Virtio Video Device
- Specification
+In-Reply-To: <CAH2czN4u-BCHHGsA9eGo5m3LgF0xUXhZWzxJ-xOBtgUJDH8bxQ@mail.gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=uril@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] drag and drop
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,111 +65,28 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: mst@redhat.com, hverkuil@xs4all.nl, laurent.pinchart@ideasonboard.com,
- posciak@chromium.org, dstaessens@chromium.org, nicolas@ndufresne.ca,
- spice-devel@lists.freedesktop.org, dgreid@chromium.org,
- linux-media@vger.kernel.org, alexlau@chromium.org, saket.sinha89@gmail.com,
- marcheu@chromium.org, samiullah.khawaja@opensynergy.com,
- kiran.pawar@opensynergy.com, acourbot@chromium.org, tfiga@chromium.org,
- stevensd@chromium.org, daniel@ffwll.ch, egranata@google.com, kraxel@redhat.com
-Content-Type: text/plain; charset="us-ascii"
+Reply-To: uril@redhat.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Keiichi,
+On 7/2/20 8:57 AM, Peter Kecho wrote:
+> Hello.
+> 
+> I'm using a Manjaro host with XFCE and running a windows 10 vm on KVM. I 
+> have downloaded and ran the spice guest tools latest on the windows 
+> client and can now copy and paste from host to vm and from vm to host, 
+> but can only drag and drop from host to vm. I cannot drag and drop from 
+> vm to host. Please advise.
 
-Thank you very much for the hard work to update the spec and to summarize all 
-of the recent proposals!
+Hi,
 
-I want to again raise a topic that was discussed earlier and unfortunately the 
-latest proposal cannot resolve the problem. I hope together with upstream 
-people we'll be able to find a neat solution.
+The drag and drop feature only works from client to guest.
 
-Please consider the following case:
-1. Encoder case
-2. User app does reqbufs with DMABUF flag.
-3. User app submits frames to encode, each frame has a different fd, might be a 
-completely new buffer.
-4. Driver receives this buffer via queue() and does this check to verify 
-whether it is a known dmabuf:
-https://elixir.bootlin.com/linux/v5.7.6/source/drivers/media/common/videobuf2/
-videobuf2-core.c#L1163
-5. When the check fails, it does cleanup.
-6. BUG: As we got rid of the flexible resource detach/destroy calls, host side 
-has no way to know the resource has a new memory region. The new sgt is never 
-propagated to the host.
+If you need to copy files both ways, you can try using webdav
 
-The mentioned earlier CMD_RESOURE_REASSIGN_ENTRIES/CMD_RESOURE_REASSIGN_OBJECT 
-are not included in the spec.
-
-Thanks in advance.
-
-Best regards,
-Dmitry.
-
-On Dienstag, 23. Juni 2020 13:13:24 CEST Keiichi Watanabe wrote:
-> 
-> This is the v4 RFC of virtio video device specification.
-> PDF versions are available at [1, 2].
-> 
-> Note that this patch depends on a recent patchset "Cross-device resource
-> sharing" [3].
-> 
-> Here is a list of major changes from v3:
-> * Redesingned struct definitions for each command and request based on
->   discussions at [4].
-> * Renamed commands/structs/enums to more descriptive names.
-> * Had different structs and fields for image formats and bitstream formats.
-> * Added more detailed specification for supported video codecs.
-> * Made stream_id be allocated by the device.
-> * Had a single parameter struct per-stream instead of per-queue parameters
-> and controls.
-> * Allowed the driver to specify the number of buffers to use via
->   "cur_{image,bitstream}_buffers".
-> * Renamed RESOURCE_CREATE command to RESOURCE_ATTACH command and allow the
->   driver to use this command when replacing backing memories as well.
-> 
-> [5] is the diff of the header file from v3. Note that it only contains
-> changes in the header. We haven't updated the driver nor device
-> implementation to focus on protocol design discussion first.
-> 
-> While it may appear that many parts have been changed since the previous
-> revision, these changes are to address the issues raised in previous
-> discussions or/and to make the protocol simpler and easier to prevent
-> misuse.
-> I'd appreciate any types of feedback.
-> 
-> Best regards,
-> Keiichi
-> 
-> [1] (full):
-> https://drive.google.com/file/d/1DiOJZfUJ5wvFtnNFQicxt0zkp4Ob1o9C/view?usp=
-> sharing [2] (only video section):
-> https://drive.google.com/file/d/188uAkIWE0BsXETECez98y5fJKw8rslj3/view?usp=
-> sharing [3]
-> https://lists.oasis-open.org/archives/virtio-comment/202003/msg00035.html
-> [4] https://markmail.org/thread/c6h3e3zn647qli3w
-> [5]
-> https://chromium-review.googlesource.com/c/chromiumos/third_party/kernel/+/
-> 2164411
-> 
-> Keiichi Watanabe (1):
->   virtio-video: Add virtio video device specification
-> 
->  .gitignore                        |    1 +
->  content.tex                       |    1 +
->  images/video-buffer-lifecycle.dot |   18 +
->  make-setup-generated.sh           |    8 +
->  virtio-video.tex                  | 1163 +++++++++++++++++++++++++++++
->  5 files changed, 1191 insertions(+)
->  create mode 100644 .gitignore
->  create mode 100644 images/video-buffer-lifecycle.dot
->  create mode 100644 virtio-video.tex
-> 
-> --
-> 2.27.0.111.gc72c7da667-goog
-
+Uri.
 
 _______________________________________________
 Spice-devel mailing list
