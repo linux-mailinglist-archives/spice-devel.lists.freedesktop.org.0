@@ -1,67 +1,66 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C07D21343B
-	for <lists+spice-devel@lfdr.de>; Fri,  3 Jul 2020 08:35:49 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 84D49213496
+	for <lists+spice-devel@lfdr.de>; Fri,  3 Jul 2020 09:03:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9CEC96E8C8;
-	Fri,  3 Jul 2020 06:35:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 526E86E8D3;
+	Fri,  3 Jul 2020 07:03:26 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
- [IPv6:2607:f8b0:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3279E6E8C5
- for <spice-devel@lists.freedesktop.org>; Fri,  3 Jul 2020 05:50:39 +0000 (UTC)
-Received: by mail-ot1-x344.google.com with SMTP id 72so25919469otc.3
- for <spice-devel@lists.freedesktop.org>; Thu, 02 Jul 2020 22:50:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=YHaRbdolqkz8jcWhwgVqLvvhyIEi7Wo2td1s1ya5wVA=;
- b=LSccDe/hO6HaOT7AeFBQkqj7VeHBevWDCM32VW6vhczFKuf4eABwtOO8sc+Qc5Gj9t
- slXcACPE/EE7ME+hdmWXM0VPk/mPVhhEzMC4jZG/EL70YY3rvPvUaoL4IUUCKfychOJB
- 0muHZfaVRucQ/0/HFg7ZdnVLa9NmNr/OdWrtU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=YHaRbdolqkz8jcWhwgVqLvvhyIEi7Wo2td1s1ya5wVA=;
- b=drz3fJHYlldU9orvf4ON70aQgUpZEGwlh93G3IcdYRuY/VuG1nLZ0r+FPW8uY+rBlJ
- Q+Kru3SzlVhK3UOIN1R8drO53PEBycUsjw/BRafNXUKVKWoGDiIkEEGGwkQQrGR6Cf2o
- S4YGQSHP4kh9gY8t0vducH1hWl65rCnuRBulugz++Da8+0Hcxd5xgFAxlYciCHyMmSDH
- 27eafReooWmqtJDvdtY3ESaiZNbMY1C7qZZ+W10hwfp3/vD1DF8NPDSEpLHYu2UYq4BS
- KSN5u1kDzcjdqPP/w10C6pNQzpGSKjeLVmmB1x8/KLRL3t+7xkmPgbhJd3nKA8frQQK6
- RMbg==
-X-Gm-Message-State: AOAM532HywOEar1H90+CC/6VL5W3Y0u6bkLPQDx8qnswVooUjdPrMEO/
- JZci21Aq809u6LhpEJsnobp6E1xmvPc=
-X-Google-Smtp-Source: ABdhPJzv6EF6mIjR46do25YlVY7Rmi7xpKxXeZ9G3mPxZN8Ik4dgZSGYBZ7WXWin20ex1H/VFni/wQ==
-X-Received: by 2002:a05:6830:14c6:: with SMTP id
- t6mr17102738otq.18.1593755433918; 
- Thu, 02 Jul 2020 22:50:33 -0700 (PDT)
-Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com.
- [209.85.167.181])
- by smtp.gmail.com with ESMTPSA id t16sm3310459oou.28.2020.07.02.22.50.33
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Jul 2020 22:50:33 -0700 (PDT)
-Received: by mail-oi1-f181.google.com with SMTP id t198so13074727oie.7
- for <spice-devel@lists.freedesktop.org>; Thu, 02 Jul 2020 22:50:33 -0700 (PDT)
-X-Received: by 2002:aca:7243:: with SMTP id p64mr16148813oic.94.1593755127258; 
- Thu, 02 Jul 2020 22:45:27 -0700 (PDT)
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B047E6E8D3
+ for <spice-devel@lists.freedesktop.org>; Fri,  3 Jul 2020 07:03:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1593759803;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ndGn0ixnwTx0Nrv0bIwaCM2U1k7u+Wk1R/KkbTPBzNM=;
+ b=IukS5evuNZ6gpZg7Odm8GSJbw4d2ULaJWCJclgXX82DiPmFdbqB9jby4ckePaXzM33GQ4O
+ iRmre4RO4UoqDG2OE+5piH2an5GMeLY8fSvTQ0K4N3WjhNM3g/61vatcbXPb+ff3+te2go
+ 3Hk0tMkZkCO8e7SGBcSTN3kpWk6yzhM=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-265-0chp0wgqNES6UiJlZ4Jyiw-1; Fri, 03 Jul 2020 03:03:15 -0400
+X-MC-Unique: 0chp0wgqNES6UiJlZ4Jyiw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4F1557BBA
+ for <spice-devel@lists.freedesktop.org>; Fri,  3 Jul 2020 07:03:14 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 4360B2B4C8
+ for <spice-devel@lists.freedesktop.org>; Fri,  3 Jul 2020 07:03:14 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 3A9B76C9C4;
+ Fri,  3 Jul 2020 07:03:14 +0000 (UTC)
+Date: Fri, 3 Jul 2020 03:03:13 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Julien Rope <jrope@redhat.com>
+Message-ID: <2041603877.33468028.1593759793858.JavaMail.zimbra@redhat.com>
+In-Reply-To: <CAD5yKqxLyUhX0Eq9XffjeEHOjY5yVWxH-5rg2=7oZTuLfrGVEQ@mail.gmail.com>
+References: <CADJ1XR2+S76nWdj4ahYQxtw5PkR3cTwz+MrP5Q=7LktvL611jQ@mail.gmail.com>
+ <20200701141507.oljra4ncxridh6kl@wingsuit>
+ <20200702101045.GG1888119@redhat.com>
+ <231701763.32923904.1593698964424.JavaMail.zimbra@redhat.com>
+ <CAD5yKqxLyUhX0Eq9XffjeEHOjY5yVWxH-5rg2=7oZTuLfrGVEQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200623111325.237158-1-keiichiw@chromium.org>
- <2850781.lI95146Gml@os-lin-dmo>
- <CAD90VcbmrismAXW0t7K6M-=a2-P+OCOw8PvBr6r8S_3LNYu=pw@mail.gmail.com>
- <3163123.i8GTTo9gJ5@os-lin-dmo>
-In-Reply-To: <3163123.i8GTTo9gJ5@os-lin-dmo>
-From: Alexandre Courbot <acourbot@chromium.org>
-Date: Fri, 3 Jul 2020 14:45:15 +0900
-X-Gmail-Original-Message-ID: <CAPBb6MWqYHidfaaTKq43yDtjOmKEi=AMC3O9vLdWpPBd_vFrUA@mail.gmail.com>
-Message-ID: <CAPBb6MWqYHidfaaTKq43yDtjOmKEi=AMC3O9vLdWpPBd_vFrUA@mail.gmail.com>
-To: Dmitry Sepp <dmitry.sepp@opensynergy.com>
-X-Mailman-Approved-At: Fri, 03 Jul 2020 06:35:45 +0000
-Subject: Re: [Spice-devel] [PATCH RFC v4 0/1] Virtio Video Device
- Specification
+X-Originating-IP: [10.40.193.100, 10.4.195.25]
+Thread-Topic: Identifying and removing potentially divisive language
+Thread-Index: W3I3g3q3V/+uVCYrEyWP/pqc7tOolQ==
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] Identifying and removing potentially divisive
+ language
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,184 +72,445 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Hans Verkuil <hverkuil@xs4all.nl>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Pawel Osciak <posciak@chromium.org>, virtio-dev@lists.oasis-open.org,
- David Staessens <dstaessens@chromium.org>,
- Nicolas Dufresne <nicolas@ndufresne.ca>, spice-devel@lists.freedesktop.org,
- Dylan Reid <dgreid@chromium.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Alex Lau <alexlau@chromium.org>, Saket Sinha <saket.sinha89@gmail.com>,
- =?UTF-8?Q?St=C3=A9phane_Marchesin?= <marcheu@chromium.org>,
- Samiullah Khawaja <samiullah.khawaja@opensynergy.com>,
- Kiran Pawar <kiran.pawar@opensynergy.com>, Tomasz Figa <tfiga@chromium.org>,
- David Stevens <stevensd@chromium.org>, Daniel Vetter <daniel@ffwll.ch>,
- Enrico Granata <egranata@google.com>, Gerd Hoffmann <kraxel@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Spice devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============0821383999=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Dmitry,
+--===============0821383999==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_33468027_682813514.1593759793857"
 
-On Thu, Jul 2, 2020 at 10:47 PM Dmitry Sepp <dmitry.sepp@opensynergy.com> wrote:
->
-> Hi Keiichi,
->
-> Thanks for the clarification. I believe we should explicitly describe this in
-> the VIRTIO_VIDEO_CMD_RESOURCE_ATTACH section. And I also still see a problem
-> there. If it is a guest allocated resource, we cannot consider it to be free
-> until the device really releases it. And it won't happen until we issue the
-> next ATTACH call. Also, as we discussed before, it might be not possible to
-> free individual buffers, but the whole queue only.
+------=_Part_33468027_682813514.1593759793857
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-In the case of the encoder, a V4L2 driver is not supposed to let
-user-space dequeue an input frame while it is used as reference for
-the encoding process. So if we add a similar rule in the virtio-video
-specification, I suppose this would solve the problem?
+> Well... Your examples are contradicting: the "master/slave" relation used=
+ in
+> electronics or psychology are re-using the slavery concepts too... This
+> doesn't make it right :-)
 
-For the decoder case, we have a bigger problem though. Since DMABUFs
-can be arbitrarily attached to any V4L2 buffer ID, we may end up
-re-queueing the DMABUF of a decoded frame that is still used as
-reference under a different V4L2 buffer ID. In this case I don't think
-the driver has a way to know that the memory resource should not be
-overwritten, and it will thus happily use it as a decode target. The
-easiest fix is probably to update the V4L2 stateful specification to
-require that reused DMABUFs must always be assigned to the same V4L2
-buffer ID, and must be kept alive as long as decoding is in progress,
-or until a resolution change event is received. We can then apply a
-similar rule to the virtio device.
+That depends on the etymology and history, not an expert on this.=20
+I think there's a mild root, but still this require some technical language=
+ explanation.=20
+They can contradict only if they came from 2 separate roots, if this is tru=
+e is means the there are multiple concepts involved not only one.=20
 
->
-> Best regards,
-> Dmitry.
->
-> On Donnerstag, 2. Juli 2020 14:50:58 CEST Keiichi Watanabe wrote:
-> > Hi Dmitry,
-> >
-> > On Thu, Jul 2, 2020 at 4:32 PM Dmitry Sepp <dmitry.sepp@opensynergy.com>
-> wrote:
-> > > Hi Keiichi,
+> Now I'm not working in electronics or psychology, so I'm not going to try=
+ and
+> change their wording.
+
+> Regarding changing it now rather than waiting: Daniel is mentioning two h=
+ints
+> - git, or github. As our code is hosted in gitlab, I would add that one t=
+oo
+> :)
+> The idea being that if they choose a new word, it will become the new
+> default, and we could align with them for consistency, rather than arguin=
+g
+> among us and picking a potentially different name
+
+It makes sense, but more at Gitlab level, not a world global de-facto for m=
+e=20
+
+> This doesn't prevent us from changing words that are in our code (like
+> blacklist/whitelist?). I think there's not a lot of them.
+
+> Regards,
+> Julien
+
+> Le jeu. 2 juil. 2020 =C3=A0 16:09, Frediano Ziglio < fziglio@redhat.com >=
+ a =C3=A9crit
+> :
+
+> > > On Wed, Jul 01, 2020 at 04:15:07PM +0200, Victor Toso wrote:
+>=20
+> > > > Hi,
+>=20
+> > > >
+>=20
+> > > > On Wed, Jul 01, 2020 at 10:03:10AM +0200, Kevin Pouget wrote:
+>=20
+> > > > > Hello SPICE community,
+>=20
+> > > > >
+>=20
+> > > > > following Chris Wright (Red Hat CTO) blog post on "Making open
+>=20
+> > > > > source more inclusive by eradicating problematic language" [1],
+>=20
+> > > > > I would like to suggest that we have a look at SPICE source
+>=20
+> > > > > code to find out if/where such language is used and how to
+>=20
+> > > > > remove it.
+>=20
+> > > > >
+>=20
+> > > > > To illustrate the motivations of this move, consider the phrase
+>=20
+> > > > > "the final solution". I am quite sure you would agree that
+>=20
+> > > > > these words cannot be used inside a project. You would agree
+>=20
+> > > > > because the WWII events are still in minds and not so ancient
+>=20
+> > > > > yet. Git "master", or the "master/slave" pattern may not
+>=20
+> > > > > trigger similar thoughts if your ancestors didn't suffer
+>=20
+> > > > > slavery; "whitelist/blacklist" neither, if the color of your
+>=20
+> > > > > skin doesn't get you into trouble (white=3Dallow, black=3Ddeny).
+>=20
+> > > > > Overall, I would advise, when thinking about these questions,
+>=20
+> > > > > not to forget on which side your history/country/skin
+>=20
+> > > > > color/sexual orientation sits you. If it's the oppressor side,
+>=20
+> > > > > you're not at the right place to say it's not relevant.
+>=20
+> > > > >
+>=20
+> > > > > ---
+>=20
+> > > > >
+>=20
+> > > > > I had a quick `grep` look at SPICE code base, searching for
+>=20
+> > > > > `blacklist/whitelist/slave` and I could only find very few
+>=20
+> > > > > occurrences of these words, which is nice. Can you find other
+>=20
+> > > > > problem words?
+>=20
+> > > > >
+>=20
+> > > > > `master` is used for git default's branch, but not much
+>=20
+> > > > > elsewhere. Let's discuss if we could get rid of this one, for
+>=20
+> > > > > instance changing it to `main` (just a suggestion). I don't
+>=20
+> > > > > think that it can break that many things (only the CI comes to
+>=20
+> > > > > my mind, where the `master` branch may be treated differently)
+>=20
+> > > > > as git name default branch's name is often omitted in the usual
+>=20
+> > > > > workflows.
+>=20
+> > > > >
+>=20
+> > > > > Please share your thoughts about this
+>=20
+> > > >
+>=20
+> > > > Not a native english speaker but I've read a few discussions
+>=20
+> > > > around the user of master as git as in master copy instead of
+>=20
+> > > > master/slave. Another examples of the use of master from native
+>=20
+> > > > speakers included master as in school teacher or someone that is
+>=20
+> > > > in charge of something (the offense being where the subject of
+>=20
+> > > > control is the slave).
+>=20
+> > > >
+>=20
+> > > > Still, I don't really mind to changing it to main, even more if
+>=20
+> > > > there are people that feel this can really be offensive in some
+>=20
+> > > > way..
+>=20
 > > >
-> > > Thank you very much for the hard work to update the spec and to summarize
-> > > all of the recent proposals!
+>=20
+> > > I think the primary downside in changing the branch name is if we
+>=20
+> > > end up with different branch names chosen by each project. There is
+>=20
+> > > value in the fact that essentially every project uses the same
+>=20
+> > > branch name for their latest development branch, as it gives end
+>=20
+> > > users consistent expectations.
+>=20
 > > >
-> > > I want to again raise a topic that was discussed earlier and unfortunately
-> > > the latest proposal cannot resolve the problem. I hope together with
-> > > upstream people we'll be able to find a neat solution.
+>=20
+> > > I'm in favour of changing the branch name, but my inclination is
+>=20
+> > > to wait and see a little longer, in order to identify what the
+>=20
+> > > new defacto standard ends up being. "main" is a good bet as a new
+>=20
+> > > standard, but it would be nice to see it "in action".
+>=20
 > > >
-> > > Please consider the following case:
-> > > 1. Encoder case
-> > > 2. User app does reqbufs with DMABUF flag.
-> > > 3. User app submits frames to encode, each frame has a different fd, might
-> > > be a completely new buffer.
-> > > 4. Driver receives this buffer via queue() and does this check to verify
-> > > whether it is a known dmabuf:
-> > > https://elixir.bootlin.com/linux/v5.7.6/source/drivers/media/common/videob
-> > > uf2/ videobuf2-core.c#L1163
-> > > 5. When the check fails, it does cleanup.
-> > > 6. BUG: As we got rid of the flexible resource detach/destroy calls, host
-> > > side has no way to know the resource has a new memory region. The new sgt
-> > > is never propagated to the host.
+>=20
+> > > I'd be looking for two possible signs
+>=20
 > > >
-> > > The mentioned earlier
-> > > CMD_RESOURE_REASSIGN_ENTRIES/CMD_RESOURE_REASSIGN_OBJECT are not included
-> > > in the spec.
-> >
-> > This shouldn't be a problem. Though we don't have a per-resource
-> > detach command, we can _replace_ attached sg-list or virtio-object by
-> > calling the attach command.
-> > In your scenario, if the driver notices a new dmabuf is given at 4 and
-> > 5, the driver should send RESOURCE_ATTACH command with the new dmabuf.
-> > Then, the old dmabuf was regarded as "detached". Please see the
-> > "Buffer life cycle" section.
-> >
-> > I renamed RESOURCE_REASSIGN_* commands to RESOURCE_ATTACH as it's also
-> > used at the first time to attach a buffer.
-> >
-> > Best regards,
-> > Keiichi
-> >
-> > > Thanks in advance.
+>=20
+> > > Whether the Git maintainers themselves decide to standardize
+>=20
+> > > on a new term.
+>=20
 > > >
-> > > Best regards,
-> > > Dmitry.
+>=20
+> > > What GitHub actually decide upon & roll out.
+>=20
 > > >
-> > > On Dienstag, 23. Juni 2020 13:13:24 CEST Keiichi Watanabe wrote:
-> > > > This is the v4 RFC of virtio video device specification.
-> > > > PDF versions are available at [1, 2].
-> > > >
-> > > > Note that this patch depends on a recent patchset "Cross-device resource
-> > > > sharing" [3].
-> > > >
-> > > > Here is a list of major changes from v3:
-> > > > * Redesingned struct definitions for each command and request based on
-> > > >
-> > > >   discussions at [4].
-> > > >
-> > > > * Renamed commands/structs/enums to more descriptive names.
-> > > > * Had different structs and fields for image formats and bitstream
-> > > > formats.
-> > > > * Added more detailed specification for supported video codecs.
-> > > > * Made stream_id be allocated by the device.
-> > > > * Had a single parameter struct per-stream instead of per-queue
-> > > > parameters
-> > > > and controls.
-> > > > * Allowed the driver to specify the number of buffers to use via
-> > > >
-> > > >   "cur_{image,bitstream}_buffers".
-> > > >
-> > > > * Renamed RESOURCE_CREATE command to RESOURCE_ATTACH command and allow
-> > > > the
-> > > >
-> > > >   driver to use this command when replacing backing memories as well.
-> > > >
-> > > > [5] is the diff of the header file from v3. Note that it only contains
-> > > > changes in the header. We haven't updated the driver nor device
-> > > > implementation to focus on protocol design discussion first.
-> > > >
-> > > > While it may appear that many parts have been changed since the previous
-> > > > revision, these changes are to address the issues raised in previous
-> > > > discussions or/and to make the protocol simpler and easier to prevent
-> > > > misuse.
-> > > > I'd appreciate any types of feedback.
-> > > >
-> > > > Best regards,
-> > > > Keiichi
-> > > >
-> > > > [1] (full):
-> > > > https://drive.google.com/file/d/1DiOJZfUJ5wvFtnNFQicxt0zkp4Ob1o9C/view?u
-> > > > sp=
-> > > > sharing [2] (only video section):
-> > > > https://drive.google.com/file/d/188uAkIWE0BsXETECez98y5fJKw8rslj3/view?u
-> > > > sp=
-> > > > sharing [3]
-> > > > https://lists.oasis-open.org/archives/virtio-comment/202003/msg00035.htm
-> > > > l
-> > > > [4] https://markmail.org/thread/c6h3e3zn647qli3w
-> > > > [5]
-> > > > https://chromium-review.googlesource.com/c/chromiumos/third_party/kernel
-> > > > /+/
-> > > > 2164411
-> > > >
-> > > > Keiichi Watanabe (1):
-> > > >   virtio-video: Add virtio video device specification
-> > > >
-> > > >  .gitignore                        |    1 +
-> > > >  content.tex                       |    1 +
-> > > >  images/video-buffer-lifecycle.dot |   18 +
-> > > >  make-setup-generated.sh           |    8 +
-> > > >  virtio-video.tex                  | 1163 +++++++++++++++++++++++++++++
-> > > >  5 files changed, 1191 insertions(+)
-> > > >  create mode 100644 .gitignore
-> > > >  create mode 100644 images/video-buffer-lifecycle.dot
-> > > >  create mode 100644 virtio-video.tex
-> > > >
-> > > > --
-> > > > 2.27.0.111.gc72c7da667-goog
->
->
+>=20
+> > > Either of those two decisions will set a defacto standard across a
+>=20
+> > > vast number of projects, and thus it will be beneficial to have
+>=20
+> > > alignment with those decisisons.
+>=20
+> > >
+>=20
+> > > Regards,
+>=20
+> > > Daniel
+>=20
+
+> > Hi,
+>=20
+> > I have different feeling about these changes. On one side I agree with
+>=20
+> > Michal that these changes appears positive but they are potentially
+>=20
+> > aggravating the real issue just hiding the problem.
+>=20
+> > About the words I think "master" have multiple meaning, removing blindl=
+y
+>=20
+> > because some meaning could remember some bad memories looks excessive.
+>=20
+> > And even if this word is used in the "master&slave" reference hinting
+>=20
+> > human slavery there are on the other side many uses (like master&slave
+>=20
+> > relationship in electronic circuit or master&slave used in communicatio=
+n
+>=20
+> > or in psychology) were this is far from human slavery.
+>=20
+> > "blacklist" is very similar, it's used in a lot of places without negat=
+ive
+>=20
+> > references, "black" is simply a color which, being usually associated
+>=20
+> > with no light is seen negative, not for race discrimination (like yin
+>=20
+> > and yang concept). I checked multiple dictionaries and hardly find
+>=20
+> > races references for "blacklist". For the same reasons we should remove
+>=20
+> > wording like "dark", "white", "yellow", "black".
+>=20
+
+> > About the "master" branch technically can be changed easily. I won't
+>=20
+> > wait a "de-facto" change, if all project would wait a "de-facto" change
+>=20
+> > the only name would be "master"! So if most of the group agree to chang=
+e
+>=20
+> > and like "main" I would just rename to "main".
+>=20
+
+> > Regards,
+>=20
+> > Frediano
+>=20
+
+> > _______________________________________________
+>=20
+> > Spice-devel mailing list
+>=20
+> > Spice-devel@lists.freedesktop.org
+>=20
+> > https://lists.freedesktop.org/mailman/listinfo/spice-devel
+>=20
+
+> --
+
+> Julien ROP=C3=89
+
+> Senior Software Engineer - SPICE
+
+> jrope@redhat.com
+
+------=_Part_33468027_682813514.1593759793857
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><body><div style=3D"font-family: courier new,courier,monaco,monospace=
+,sans-serif; font-size: 12pt; color: #000000"><blockquote style=3D"border-l=
+eft:2px solid #1010FF;margin-left:5px;padding-left:5px;color:#000;font-weig=
+ht:normal;font-style:normal;text-decoration:none;font-family:Helvetica,Aria=
+l,sans-serif;font-size:12pt;" data-mce-style=3D"border-left: 2px solid #101=
+0FF; margin-left: 5px; padding-left: 5px; color: #000; font-weight: normal;=
+ font-style: normal; text-decoration: none; font-family: Helvetica,Arial,sa=
+ns-serif; font-size: 12pt;"><div dir=3D"ltr"><div><br></div><div>Well... Yo=
+ur examples are contradicting: the "master/slave" relation used in electron=
+ics or psychology are re-using the slavery concepts too... This doesn't mak=
+e it right :-)</div></div></blockquote><div>That depends on the etymology a=
+nd history, not an expert on this.<br></div><div>I think there's a mild roo=
+t, but still this require some technical language explanation.<br></div><di=
+v>They can contradict only if they came from 2 separate roots, if this is t=
+rue is means the there are multiple concepts involved not only one.<br></di=
+v><blockquote style=3D"border-left:2px solid #1010FF;margin-left:5px;paddin=
+g-left:5px;color:#000;font-weight:normal;font-style:normal;text-decoration:=
+none;font-family:Helvetica,Arial,sans-serif;font-size:12pt;" data-mce-style=
+=3D"border-left: 2px solid #1010FF; margin-left: 5px; padding-left: 5px; co=
+lor: #000; font-weight: normal; font-style: normal; text-decoration: none; =
+font-family: Helvetica,Arial,sans-serif; font-size: 12pt;"><div dir=3D"ltr"=
+><div>Now I'm not working in electronics or psychology, so I'm not going to=
+ try and change their wording. <br></div><div><br></div><div>Regarding chan=
+ging it now rather than waiting: Daniel is mentioning two hints - git, or g=
+ithub. As our code is hosted in gitlab, I would add that one too :)</div><d=
+iv>The idea being that if they choose a new word, it will become the new de=
+fault, and we could align with them for consistency, rather than arguing am=
+ong us and picking a potentially different name<br></div></div></blockquote=
+><div>It makes sense, but more at Gitlab level, not a world global de-facto=
+ for me<br></div><blockquote style=3D"border-left:2px solid #1010FF;margin-=
+left:5px;padding-left:5px;color:#000;font-weight:normal;font-style:normal;t=
+ext-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:12pt;"=
+ data-mce-style=3D"border-left: 2px solid #1010FF; margin-left: 5px; paddin=
+g-left: 5px; color: #000; font-weight: normal; font-style: normal; text-dec=
+oration: none; font-family: Helvetica,Arial,sans-serif; font-size: 12pt;"><=
+div dir=3D"ltr"><div>This doesn't prevent us from changing words that are i=
+n our code (like blacklist/whitelist?). I think there's not a lot of them.<=
+/div><div><br></div><div>Regards,</div><div>Julien<br></div><div><br></div>=
+</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=
+Le&nbsp;jeu. 2 juil. 2020 =C3=A0&nbsp;16:09, Frediano Ziglio &lt;<a href=3D=
+"mailto:fziglio@redhat.com" target=3D"_blank" data-mce-href=3D"mailto:fzigl=
+io@redhat.com">fziglio@redhat.com</a>&gt; a =C3=A9crit&nbsp;:<br></div><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
+:1px solid rgb(204,204,204);padding-left:1ex" data-mce-style=3D"margin: 0px=
+ 0px 0px 0.8ex; border-left: 1px solid #cccccc; padding-left: 1ex;"><br> &g=
+t; On Wed, Jul 01, 2020 at 04:15:07PM +0200, Victor Toso wrote:<br> &gt; &g=
+t; Hi,<br> &gt; &gt; <br> &gt; &gt; On Wed, Jul 01, 2020 at 10:03:10AM +020=
+0, Kevin Pouget wrote:<br> &gt; &gt; &gt; Hello SPICE community,<br> &gt; &=
+gt; &gt; <br> &gt; &gt; &gt; following Chris Wright (Red Hat CTO) blog post=
+ on "Making open<br> &gt; &gt; &gt; source more inclusive by eradicating pr=
+oblematic language" [1],<br> &gt; &gt; &gt; I would like to suggest that we=
+ have a look at SPICE source<br> &gt; &gt; &gt; code to find out if/where s=
+uch language is used and how to<br> &gt; &gt; &gt; remove it.<br> &gt; &gt;=
+ &gt; <br> &gt; &gt; &gt; To illustrate the motivations of this move, consi=
+der the phrase<br> &gt; &gt; &gt; "the final solution". I am quite sure you=
+ would agree that<br> &gt; &gt; &gt; these words cannot be used inside a pr=
+oject. You would agree<br> &gt; &gt; &gt; because the WWII events are still=
+ in minds and not so ancient<br> &gt; &gt; &gt; yet.&nbsp; Git "master", or=
+ the "master/slave" pattern may not<br> &gt; &gt; &gt; trigger similar thou=
+ghts if your ancestors didn't suffer<br> &gt; &gt; &gt; slavery; "whitelist=
+/blacklist" neither, if the color of your<br> &gt; &gt; &gt; skin doesn't g=
+et you into trouble (white=3Dallow, black=3Ddeny).<br> &gt; &gt; &gt; Overa=
+ll, I would advise, when thinking about these questions,<br> &gt; &gt; &gt;=
+ not to forget on which side your history/country/skin<br> &gt; &gt; &gt; c=
+olor/sexual orientation sits you. If it's the oppressor side,<br> &gt; &gt;=
+ &gt; you're not at the right place to say it's not relevant.<br> &gt; &gt;=
+ &gt; <br> &gt; &gt; &gt; ---<br> &gt; &gt; &gt; <br> &gt; &gt; &gt; I had =
+a quick `grep` look at SPICE code base, searching for<br> &gt; &gt; &gt; `b=
+lacklist/whitelist/slave` and I could only find very few<br> &gt; &gt; &gt;=
+ occurrences of these words, which is nice. Can you find other<br> &gt; &gt=
+; &gt; problem words?<br> &gt; &gt; &gt; <br> &gt; &gt; &gt; `master` is us=
+ed for git default's branch, but not much<br> &gt; &gt; &gt; elsewhere. Let=
+'s discuss if we could get rid of this one, for<br> &gt; &gt; &gt; instance=
+ changing it to `main` (just a suggestion). I don't<br> &gt; &gt; &gt; thin=
+k that it can break that many things (only the CI comes to<br> &gt; &gt; &g=
+t; my mind, where the `master` branch may be treated differently)<br> &gt; =
+&gt; &gt; as git name default branch's name is often omitted in the usual<b=
+r> &gt; &gt; &gt; workflows.<br> &gt; &gt; &gt; <br> &gt; &gt; &gt; Please =
+share your thoughts about this<br> &gt; &gt; <br> &gt; &gt; Not a native en=
+glish speaker but I've read a few discussions<br> &gt; &gt; around the user=
+ of master as git as in master copy instead of<br> &gt; &gt; master/slave. =
+Another examples of the use of master from native<br> &gt; &gt; speakers in=
+cluded master as in school teacher or someone that is<br> &gt; &gt; in char=
+ge of something (the offense being where the subject of<br> &gt; &gt; contr=
+ol is the slave).<br> &gt; &gt; <br> &gt; &gt; Still, I don't really mind t=
+o changing it to main, even more if<br> &gt; &gt; there are people that fee=
+l this can really be offensive in some<br> &gt; &gt; way..<br> &gt; <br> &g=
+t; I think the primary downside in changing the branch name is if we<br> &g=
+t; end up with different branch names chosen by each project. There is<br> =
+&gt; value in the fact that essentially every project uses the same<br> &gt=
+; branch name for their latest development branch, as it gives end<br> &gt;=
+ users consistent expectations.<br> &gt; <br> &gt; I'm in favour of changin=
+g the branch name, but my inclination is<br> &gt; to wait and see a little =
+longer, in order to identify what the<br> &gt; new defacto standard ends up=
+ being. "main" is a good bet as a new<br> &gt; standard, but it would be ni=
+ce to see it "in action".<br> &gt; <br> &gt; I'd be looking for two possibl=
+e signs<br> &gt; <br> &gt; Whether the Git maintainers themselves decide to=
+ standardize<br> &gt; on a new term.<br> &gt; <br> &gt; What GitHub actuall=
+y decide upon &amp; roll out.<br> &gt; <br> &gt; Either of those two decisi=
+ons will set a defacto standard across a<br> &gt; vast number of projects, =
+and thus it will be beneficial to have<br> &gt; alignment with those decisi=
+sons.<br> &gt; <br> &gt; Regards,<br> &gt; Daniel<br><br> Hi,<br> &nbsp; &n=
+bsp;I have different feeling about these changes. On one side I agree with<=
+br> Michal that these changes appears positive but they are potentially<br>=
+ aggravating the real issue just hiding the problem.<br> About the words I =
+think "master" have multiple meaning, removing blindly<br> because some mea=
+ning could remember some bad memories looks excessive.<br> And even if this=
+ word is used in the "master&amp;slave" reference hinting<br> human slavery=
+ there are on the other side many uses (like master&amp;slave<br> relations=
+hip in electronic circuit or master&amp;slave used in communication<br> or =
+in psychology) were this is far from human slavery.<br> "blacklist" is very=
+ similar, it's used in a lot of places without negative<br> references, "bl=
+ack" is simply a color which, being usually associated<br> with no light is=
+ seen negative, not for race discrimination (like yin<br> and yang concept)=
+. I checked multiple dictionaries and hardly find<br> races references for =
+"blacklist". For the same reasons we should remove<br> wording like "dark",=
+ "white", "yellow", "black".<br><br> About the "master" branch technically =
+can be changed easily. I won't<br> wait a "de-facto" change, if all project=
+ would wait a "de-facto" change<br> the only name would be "master"! So if =
+most of the group agree to change<br> and like "main" I would just rename t=
+o "main".<br><br> Regards,<br> &nbsp; Frediano<br><br> ____________________=
+___________________________<br> Spice-devel mailing list<br><a href=3D"mail=
+to:Spice-devel@lists.freedesktop.org" target=3D"_blank" data-mce-href=3D"ma=
+ilto:Spice-devel@lists.freedesktop.org">Spice-devel@lists.freedesktop.org</=
+a><br><a href=3D"https://lists.freedesktop.org/mailman/listinfo/spice-devel=
+" rel=3D"noreferrer" target=3D"_blank" data-mce-href=3D"https://lists.freed=
+esktop.org/mailman/listinfo/spice-devel">https://lists.freedesktop.org/mail=
+man/listinfo/spice-devel</a><br><br></blockquote></div><br clear=3D"all"><b=
+r>-- <br><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"ltr"><div><=
+div dir=3D"ltr"><div><div dir=3D"ltr"><p style=3D"font-weight:bold;margin:0=
+px;padding:0px;font-size:14px;text-transform:capitalize;font-family:RedHatT=
+ext,sans-serif" data-mce-style=3D"font-weight: bold; margin: 0px; padding: =
+0px; font-size: 14px; text-transform: capitalize; font-family: RedHatText,s=
+ans-serif;"><span>Julien ROP=C3=89</span></p><p style=3D"font-size:12px;mar=
+gin:0px;text-transform:capitalize;font-family:RedHatText,sans-serif" data-m=
+ce-style=3D"font-size: 12px; margin: 0px; text-transform: capitalize; font-=
+family: RedHatText,sans-serif;"><span>Senior Software Engineer - SPICE</spa=
+n></p><p style=3D"margin:0px;font-size:12px;font-family:RedHatText,sans-ser=
+if" data-mce-style=3D"margin: 0px; font-size: 12px; font-family: RedHatText=
+,sans-serif;"><span style=3D"margin:0px;padding:0px" data-mce-style=3D"marg=
+in: 0px; padding: 0px;"><a href=3D"mailto:jrope@redhat.com" target=3D"_blan=
+k" data-mce-href=3D"mailto:jrope@redhat.com">jrope@redhat.com</a><br></span=
+></p><a href=3D"https://www.redhat.com/" style=3D"color:rgb(17,85,204)" tar=
+get=3D"_blank" data-mce-href=3D"https://www.redhat.com/" data-mce-style=3D"=
+color: #1155cc;"><img src=3D"https://marketing-outfit-prod-images.s3-us-wes=
+t-2.amazonaws.com/f5445ae0c9ddafd5b2f1836854d7416a/Logo-RedHat-Email.png" w=
+idth=3D"90" height=3D"auto"></a><br data-mce-bogus=3D"1"></div></div></div>=
+</div></div></div></blockquote><div><br></div></div></body></html>
+------=_Part_33468027_682813514.1593759793857--
+
+
+--===============0821383999==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0821383999==--
+
