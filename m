@@ -2,58 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D3BF21C7F6
-	for <lists+spice-devel@lfdr.de>; Sun, 12 Jul 2020 10:01:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D27021C7F7
+	for <lists+spice-devel@lfdr.de>; Sun, 12 Jul 2020 10:01:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D8EE96E20F;
-	Sun, 12 Jul 2020 08:01:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CDAC6E218;
+	Sun, 12 Jul 2020 08:01:29 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
- [IPv6:2a00:1450:4864:20::443])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 458576E20F
- for <spice-devel@lists.freedesktop.org>; Sun, 12 Jul 2020 08:01:27 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id q5so9851685wru.6
- for <spice-devel@lists.freedesktop.org>; Sun, 12 Jul 2020 01:01:27 -0700 (PDT)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6D1FA6E20F
+ for <spice-devel@lists.freedesktop.org>; Sun, 12 Jul 2020 08:01:28 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id a6so9839752wrm.4
+ for <spice-devel@lists.freedesktop.org>; Sun, 12 Jul 2020 01:01:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=y1+oIIluRlcIbp+6ZK+Eb2t5bvTnWqBssaFtkK1I25Q=;
- b=bpU/co1mMknJdpsQyirB3rYAyX3W5vKKwTKqJTi5kpLaS3MSvDZJKMwip/tjWA6BM/
- /9Y0ywDHzIdxTmhNmKVu/AS2oxwZo0Tt8h6X3SkWHD8ZofJGfiF1f3DJpgFdxaFVsZVG
- bAExYjVc2WUgF3JcI3RjzasBRwrFyH/E/RrnwD9sWAu1Q2jjfxMhDgbykUe0riU4EHhm
- LoQIPezT/ceHPQQqcfheF2X31AJ/E+h1yR3dcsNSAAPWzS+dWueQkWHPdoJZmQfba/E+
- aK/vCAftVyQkEiExmqPHbi3AQnMuZhXeyJBpjFPoEm8PNQt2McCl7PhCKT4pfgIgP4ZC
- 2OhQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=lQMofIeoufGYecKRyCbMZIEa+/Z8U/jjT1qRL7Vdvzo=;
+ b=m3ED+cqYYeNCdceQWg49SaqmVH1/FRnVHu5Bxg48zzpCVXzplpoBeA2Cg5H4ZA+lq4
+ DYXEvHVzC3hUCXz3JKwVmebWJ1d6Q0wCAwbl0mpRBiwCTk7GXsqe9gzx/trBfdA6elzn
+ eoQEtLJgLngI3rv302jKT+IGOPuF6HyooT67SWMcKvYfLsYDPRmXYa9Icc7lxgM7DHVT
+ 9oDMdR8u1q8qL0CtP+uU6PVFqM2TGZgnDmFHyqEAbSDNoCdVuTRMuzkV83f2WIYTiXAS
+ Z7jiyiJZEOgTWM3sY1jAy1ZCXckLhR03XJrFRuOCrk1i47N7nWRBr+67ba0gPO1+iYLE
+ bvAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=y1+oIIluRlcIbp+6ZK+Eb2t5bvTnWqBssaFtkK1I25Q=;
- b=C5EW5RFQtV9Qirawz47JzvTBmK5NWBpiVSC6klMe0uVvDbyNJ6j6RfoQby3mpPTkpI
- 5h2qLRnYq0d07grcZYiSo56BjqceJ+RX58wrHgW4oav0adWqEKBOAxSoujMoWk6K0sVG
- H5d5/+iEDpIodunwdgeBYugmcr6UpGscqMU+7iz7ha0FnGvaY+ISqiVWp40dRRbZGZr4
- iQkcM+QGkpZlkpSL2ie36Mk9IFuX0E/WXiWWtyNXqyKXEAqt/oLHaejRaaHVJhmIiJ1Q
- hJ35WDCXJi1w0BOxtkg034ycXSRSG1u4HZop4X/K0tsq/XZgc6uTbiw5lI8K9tZjnCLO
- n0vQ==
-X-Gm-Message-State: AOAM532rXSGusbEf4q63nwamKoHfD1nydm3WIsvIlzs+am/FDaGDAopk
- PnxGqAufgDSdDWPCOWvLS7opRWRS+Rg=
-X-Google-Smtp-Source: ABdhPJww+LVKRVbs8R2NCqr2IDmWDZV0Cfvv8xDYI/ArNUFKMsZ23OGQ6AoSu5Zwb1n9jYU46fBhZQ==
-X-Received: by 2002:adf:82f5:: with SMTP id 108mr73838819wrc.218.1594540885588; 
- Sun, 12 Jul 2020 01:01:25 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=lQMofIeoufGYecKRyCbMZIEa+/Z8U/jjT1qRL7Vdvzo=;
+ b=gf5Rz2uDBJPvsChQtYW7o1aaPYuUHARfY7k+U2s3v+k0Tqkl++DbJq0Ps82qN1xh9q
+ ypfDfioiagXx9dTO8+v+4Gyl+YRZlkVYOHzvS9uaRwdWnLm5QutGy7aIQG7pUY3Dx4NN
+ YpIA380BaxS1IJ3I8Yvlc6iVJ+iknLtlPF62+jZM9z/fexG6aNXqmQu2YU/xcXBZqKyr
+ u9Mmq1JncvVNa+sRmGB7SQYXU8pNCWXnYI7LnzVONto0qrHh9E8W/dK5A9oY02lMEyTA
+ +i52CPurkkEPv+rJErA9m3QRYgCVabHRczu0EFhBULB7f/38HmIiANB6+U6De5eeQlDD
+ bA+Q==
+X-Gm-Message-State: AOAM532yYj+ix8Fu2EkXJJNb02xLfSFsoCYQbioSL41tqHBHaNhkpOLs
+ 0QCWk5F7Y44vhA4ggtfWc4Tp1eyORVE=
+X-Google-Smtp-Source: ABdhPJwHnNnZZ8wTevOKROjF4N6FISXPUBUS7VsjHT4HGUDe32t6ewyBPWODoHqbvpMv2eovrxzuiw==
+X-Received: by 2002:a5d:4984:: with SMTP id r4mr73175693wrq.215.1594540886812; 
+ Sun, 12 Jul 2020 01:01:26 -0700 (PDT)
 Received: from localhost.localdomain (bzq-109-67-95-41.red.bezeqint.net.
  [109.67.95.41])
- by smtp.gmail.com with ESMTPSA id s15sm16466246wmj.41.2020.07.12.01.01.24
+ by smtp.gmail.com with ESMTPSA id s15sm16466246wmj.41.2020.07.12.01.01.25
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 12 Jul 2020 01:01:25 -0700 (PDT)
+ Sun, 12 Jul 2020 01:01:26 -0700 (PDT)
 From: Yuri Benditovich <yuri.benditovich@daynix.com>
 To: spice-devel@lists.freedesktop.org
-Date: Sun, 12 Jul 2020 11:01:06 +0300
-Message-Id: <20200712080107.175-1-yuri.benditovich@daynix.com>
+Date: Sun, 12 Jul 2020 11:01:07 +0300
+Message-Id: <20200712080107.175-2-yuri.benditovich@daynix.com>
 X-Mailer: git-send-email 2.22.0.windows.1
+In-Reply-To: <20200712080107.175-1-yuri.benditovich@daynix.com>
+References: <20200712080107.175-1-yuri.benditovich@daynix.com>
 MIME-Version: 1.0
-Subject: [Spice-devel] [PATCH 1/2] qxl-wddm-dod: fix behavior on v5 device
+Subject: [Spice-devel] [PATCH 2/2] qxl-wddm-dod: reduce verbosity of
+ stampinf in build
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,57 +74,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-https://bugzilla.redhat.com/show_bug.cgi?id=1851845
-v5 device requires explicit reset to switch to VGA mode.
+Suppress unneeded stampinf logs during driver build.
 
 Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
 ---
- qxldod/QxlDod.cpp | 4 +++-
- qxldod/QxlDod.h   | 2 ++
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ qxldod/qxldod.vcxproj | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/qxldod/QxlDod.cpp b/qxldod/QxlDod.cpp
-index 7f03ee1..341518e 100755
---- a/qxldod/QxlDod.cpp
-+++ b/qxldod/QxlDod.cpp
-@@ -134,6 +134,7 @@ NTSTATUS QxlDod::CheckHardware()
-         Header.DeviceID == 0x0100 &&
-         Header.RevisionID >= 4)
-     {
-+        m_Revision = Header.RevisionID;
-         Status = STATUS_SUCCESS;
-     }
- 
-@@ -4795,7 +4796,8 @@ NTSTATUS QxlDevice::HWClose(void)
- {
-     PAGED_CODE();
-     QxlClose();
--    if (m_bUefiMode)
-+    /* QXL device rev 5+ requires explicit reset to switch to VGA mode */
-+    if (m_bUefiMode || m_pQxlDod->Revision() > 4)
-     {
-         DbgPrint(TRACE_LEVEL_INFORMATION, ("%s: Resetting the device\n", __FUNCTION__));
-         WRITE_PORT_UCHAR((PUCHAR)(m_IoBase + QXL_IO_RESET), 0);
-diff --git a/qxldod/QxlDod.h b/qxldod/QxlDod.h
-index 016b1aa..24cbd39 100755
---- a/qxldod/QxlDod.h
-+++ b/qxldod/QxlDod.h
-@@ -720,6 +720,7 @@ private:
-     KTIMER m_VsyncTimer;
-     KDPC   m_VsyncTimerDpc;
-     BOOLEAN m_bVsyncEnabled;
-+    UCHAR m_Revision = 0;
-     LONG m_VsyncFiredCounter;
- public:
-     QxlDod(_In_ DEVICE_OBJECT* pPhysicalDeviceObject);
-@@ -819,6 +820,7 @@ public:
-         return m_DxgkInterface.DxgkCbAcquirePostDisplayOwnership(m_DxgkInterface.DeviceHandle, &DispInfo);
-     }
-     VOID EnableVsync(BOOLEAN bEnable);
-+    UCHAR Revision() const { return m_Revision; }
- private:
-     VOID CleanUp(VOID);
-     NTSTATUS CheckHardware();
+diff --git a/qxldod/qxldod.vcxproj b/qxldod/qxldod.vcxproj
+index 15e36d9..0091b83 100755
+--- a/qxldod/qxldod.vcxproj
++++ b/qxldod/qxldod.vcxproj
+@@ -192,7 +192,7 @@
+       <Command>Inf2Cat /driver:$(OutDir) /os:8_X86,6_3_X86</Command>
+     </PostBuildEvent>
+     <Inf>
+-      <EnableVerbose>true</EnableVerbose>
++      <EnableVerbose>false</EnableVerbose>
+       <KmdfVersionNumber>
+       </KmdfVersionNumber>
+       <UmdfVersionNumber>
+@@ -264,7 +264,7 @@
+       <Command>Inf2Cat /driver:$(OutDir) /os:8_X64,Server8_X64,Server6_3_X64,6_3_X64</Command>
+     </PostBuildEvent>
+     <Inf>
+-      <EnableVerbose>true</EnableVerbose>
++      <EnableVerbose>false</EnableVerbose>
+       <KmdfVersionNumber>
+       </KmdfVersionNumber>
+       <UmdfVersionNumber>
 -- 
 2.22.0.windows.1
 
