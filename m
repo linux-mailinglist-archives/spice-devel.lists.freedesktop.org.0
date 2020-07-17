@@ -2,62 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89AF8220597
-	for <lists+spice-devel@lfdr.de>; Wed, 15 Jul 2020 08:58:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE32E225074
+	for <lists+spice-devel@lfdr.de>; Sun, 19 Jul 2020 09:34:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6A29A6E420;
-	Wed, 15 Jul 2020 06:58:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2070E6E4CA;
+	Sun, 19 Jul 2020 07:34:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 44E2F89EA3
- for <spice-devel@lists.freedesktop.org>; Wed, 15 Jul 2020 06:58:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1594796293;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=fb22TQh54baaoDwRwbyNm0yTAsnaeKHxJqk4JBYaD2s=;
- b=RtYpeKOePXXe3hCv3gnhsABT0nA+zd877Y3sWyJ94iNx4YKQorn8cgfLS/rv3OWQW2RkH1
- giTBzGHFa3QDeqWABT42+TZe3Y8VftU/2LWjHNizzmBsODWNwYMDT6YZZnlfV3jUJEIAtU
- 1vKWLD7nAdGIfEcbsixCh8R3YejL8AE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-494-hVqcMij6OgWYDcpjYJtuIw-1; Wed, 15 Jul 2020 02:58:08 -0400
-X-MC-Unique: hVqcMij6OgWYDcpjYJtuIw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 42E4518C63C1;
- Wed, 15 Jul 2020 06:58:07 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 39B893C67;
- Wed, 15 Jul 2020 06:58:07 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 2437372F5F;
- Wed, 15 Jul 2020 06:58:07 +0000 (UTC)
-Date: Wed, 15 Jul 2020 02:58:04 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Yuri Benditovich <yuri.benditovich@daynix.com>
-Message-ID: <1058379660.34570031.1594796284347.JavaMail.zimbra@redhat.com>
-In-Reply-To: <CAOEp5OcRXP_ULCSJvwHLh7LqArVQV6OM1abVkC82YP3ksYmVFQ@mail.gmail.com>
-References: <20200712080107.175-1-yuri.benditovich@daynix.com>
- <20200713073148.3w63nucg5z23kzlm@sirius.home.kraxel.org>
- <319372330.34271280.1594631536029.JavaMail.zimbra@redhat.com>
- <CAOEp5OcRXP_ULCSJvwHLh7LqArVQV6OM1abVkC82YP3ksYmVFQ@mail.gmail.com>
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 660D86E225
+ for <spice-devel@lists.freedesktop.org>; Fri, 17 Jul 2020 17:18:03 +0000 (UTC)
+Received: by mail-qk1-x729.google.com with SMTP id q198so9436649qka.2
+ for <spice-devel@lists.freedesktop.org>; Fri, 17 Jul 2020 10:18:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=h38TQwCBImDBfQsB6PwxurXhJJ3k3kt0HsW6a6idhA4=;
+ b=BrcZHnii77JiWAJndNorZt/lU8/B4Q20xuAe8XH7Dl9SuKoJjkVvd60mLuV3oEW1zb
+ Ffd2qrOGAJ91K2Hmt3bzbV2HoFvtcnjosiuxyB1XFlXOfo3ZpVGLBnoxezhpcygB1NSQ
+ suQ/fMkw2xPu3juH1sciEv/GJTyERkeKWm2Umr3S/OB+Jawg7ShEvrIg/PqWIjZRKuSb
+ xpGoaQhjYvPnAw0FI4knrKe6gNbvqSon3wYyi/1UoKK7L5EyiuoBX38EHltWsyzauDAx
+ SEz1blKHdIbK2Vi7e+8Dq0aIyIoDCgyixFp8qT+7W6osh/3/8seVuVDE+PZ8ZlhYUH8m
+ drvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=h38TQwCBImDBfQsB6PwxurXhJJ3k3kt0HsW6a6idhA4=;
+ b=UYBHGZMLnkmlnVagfw6hennk+AW7WttK7e7jDLnlM3dL7tm/wu5K/x6FHh+E8MOSV6
+ kKTw2pRXkQNwtNT6KNznwpL4ZIvlh+tcneF6qmdJBskM1izkLC74orbibBr2s47KabWs
+ wH+KlyhJ008JGCTOaUVGQZbmoLM0qYDi+weclBEHeYpZeHhOsbn7/A0otns/Ug9IdxBs
+ Rt7a6aBjVEcfYXygQrVFiEWbGzjCAkoTQ5Uk6ZJJApidzEapkpzEfNPMLucsYBAji0/w
+ LQV6zHbrmldIgnpKZaRlkEjKSz9MFTj2fI5LYdn1J1o0vo/BoBaQ5Rs+7+cjDrLr1oTL
+ CzVQ==
+X-Gm-Message-State: AOAM533nKKa3JZ933q9UqutSbJphwCteuM2HtfFZ1uAVXu/xMufwhZB4
+ N+UVVQuMqEgVfEKLKssnurVTEj7kWk9t20gPs9oks9gt6IY=
+X-Google-Smtp-Source: ABdhPJxgx76r5k0MWb/vj63O930IyBCYEIxudo43ttfwPcUiU6D7eoQO3jXvK7vGp+DuWCK1QFaE6VLkX13uVdkl9Q0=
+X-Received: by 2002:a37:b987:: with SMTP id
+ j129mr10201203qkf.120.1595006282230; 
+ Fri, 17 Jul 2020 10:18:02 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.40.193.158, 10.4.195.7]
-Thread-Topic: qxl-wddm-dod: fix behavior on v5 device
-Thread-Index: Aq7jq4VP4cGvwqVOCu2fC8vxLrecaQ==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] [PATCH 1/2] qxl-wddm-dod: fix behavior on v5
- device
+From: Koopa Koopa <codingkoopa@gmail.com>
+Date: Fri, 17 Jul 2020 13:17:51 -0400
+Message-ID: <CAM1wO0mtiMoPAmH89pbCLQPS215fd0Nyq9E79TZDRyHNUHApfQ@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Sun, 19 Jul 2020 07:34:08 +0000
+Subject: [Spice-devel] Can't write from guest to host with webdav
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,127 +58,106 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yan Vugenfirer <yan@daynix.com>,
- Spice List <spice-devel@lists.freedesktop.org>,
- Gerd Hoffmann <kraxel@redhat.com>
-Content-Type: multipart/mixed; boundary="===============0078908640=="
+Content-Type: multipart/mixed; boundary="===============1479439369=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0078908640==
-Content-Type: multipart/alternative; 
-	boundary="----=_Part_34570030_675088623.1594796284345"
+--===============1479439369==
+Content-Type: multipart/alternative; boundary="000000000000ddede205aaa65609"
 
-------=_Part_34570030_675088623.1594796284345
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+--000000000000ddede205aaa65609
+Content-Type: text/plain; charset="UTF-8"
 
-Acked the series 
+Hi all,
 
-Frediano 
+I'm looking to share a folder between my Arch Linux host and a Windows 10
+guest, and SPICE's folder sharing with webdav seems to be the best option
+for me. I've set up the QEMU devices that webdav needs, and installed the
+Windows service. I have the drive mapped, and am able to navigate the host
+folder (apart from the occasional "Windows cannot access
+\\localhost@9843\DavWWWRoot\"
+that doesn't occur again), and copy files from the host to the guest. When
+trying to copy a new file (with data) or write to an existing file from the
+guest, though, the application (e.g. File Explorer, or other programs which
+save files) hangs for a little bit, before the transaction fails. For File
+Explorer, it displays "Error 0x80070021: The process cannot access the file
+because another process has locked a portion of the file."
 
-> On Mon, Jul 13, 2020 at 12:12 PM Frediano Ziglio < fziglio@redhat.com >
-> wrote:
+This is the output of remote-viewer:
+  (remote-viewer:16120): GSpice-WARNING **: 12:58:46.205: Warning no
+automount-inhibiting implementation available
 
-> > >
-> 
-> > > Hi,
-> 
-> > >
-> 
-> > > > @@ -4795,7 +4796,8 @@ NTSTATUS QxlDevice::HWClose(void)
-> 
-> > > > {
-> 
-> > > > PAGED_CODE();
-> 
-> > > > QxlClose();
-> 
-> > > > - if (m_bUefiMode)
-> 
-> > > > + /* QXL device rev 5+ requires explicit reset to switch to VGA mode */
-> 
-> > > > + if (m_bUefiMode || m_pQxlDod->Revision() > 4)
-> 
-> > > > {
-> 
-> > > > DbgPrint(TRACE_LEVEL_INFORMATION, ("%s: Resetting the device\n",
-> 
-> > > > __FUNCTION__));
-> 
-> > > > WRITE_PORT_UCHAR((PUCHAR)(m_IoBase + QXL_IO_RESET), 0);
-> 
-> > >
-> 
-> > > I'm wondering why this is conditional in the first place?
-> 
-> > > Isn't it a good idea to reset the device on close no matter what?
-> 
+  (remote-viewer:16120): phodav-WARNING **: 12:58:57.910:
+(../phodav-2.4/libphodav/phodav-method-propfind.c:70):prop_resourcetype:
+code should not be reached
 
-> The intention was to leave the entire procedure as is where possible.
-> For example, when we do not use the reset, user screen resize does not happen
-> until the BDD starts programming the VGA.
+  (remote-viewer:16120): phodav-WARNING **: 12:59:04.714:
+(../phodav-2.4/libphodav/phodav-method-propfind.c:70):prop_resourcetype:
+code should not be reached
 
-> > >
-> 
-> > > take care,
-> 
-> > > Gerd
-> 
-> > >
-> 
+  (remote-viewer:16120): GSpice-WARNING **: 12:59:04.793:
+(../spice-gtk-0.38/src/channel-webdav.c:330):demux_to_client_cb: runtime
+check failed: (size == c->demux.size)
+  phodav-Message: 13:00:06.047: missing lock: /testfile
+urn:uuid:ceb212f1-f8af-4dd3-b36c-a7e627b6c08a
+  phodav-Message: 13:00:06.062: missing lock: /testfile
+urn:uuid:ceb212f1-f8af-4dd3-b36c-a7e627b6c08a
+  phodav-Message: 13:00:06.076: missing lock: /testfile
+urn:uuid:ceb212f1-f8af-4dd3-b36c-a7e627b6c08a
 
-> > Surely it's less willing to cause possible regressions.
-> 
+I read that the first GSpice error always occurs on non-GNOME host
+environments. The phodav error occurs whenever I view the root directory of
+the share, or try copying/writing to a file anywhere in the share. The
+second GSpice and other phodav messages occur when copying/writing a file
+in the share.
 
-> > Frediano
-> 
+This occurs both with remote-viewer, and spicy. The same result occurs
+whether or not I have the "Read only" checkbox in remote-viewer checked.
 
-------=_Part_34570030_675088623.1594796284345
-Content-Type: text/html; charset=utf-8
+Thanks!
+
+--000000000000ddede205aaa65609
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<html><body><div style=3D"font-family: courier new,courier,monaco,monospace=
-,sans-serif; font-size: 12pt; color: #000000"><div>Acked the series<br></di=
-v><div><br></div><div>Frediano<br></div><blockquote style=3D"border-left:2p=
-x solid #1010FF;margin-left:5px;padding-left:5px;color:#000;font-weight:nor=
-mal;font-style:normal;text-decoration:none;font-family:Helvetica,Arial,sans=
--serif;font-size:12pt;" data-mce-style=3D"border-left: 2px solid #1010FF; m=
-argin-left: 5px; padding-left: 5px; color: #000; font-weight: normal; font-=
-style: normal; text-decoration: none; font-family: Helvetica,Arial,sans-ser=
-if; font-size: 12pt;"><div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Mon, Jul 13, 2020 at 12:12 PM Frediano Zig=
-lio &lt;<a href=3D"mailto:fziglio@redhat.com" target=3D"_blank" data-mce-hr=
-ef=3D"mailto:fziglio@redhat.com">fziglio@redhat.com</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left:1px solid rgb(204,204,204);padding-left:1ex" data-mce-style=3D"margin=
-: 0px 0px 0px 0.8ex; border-left: 1px solid #cccccc; padding-left: 1ex;">&g=
-t; <br> &gt; Hi,<br> &gt; <br> &gt; &gt; @@ -4795,7 +4796,8 @@ NTSTATUS Qxl=
-Device::HWClose(void)<br> &gt; &gt;&nbsp; {<br> &gt; &gt;&nbsp; &nbsp; &nbs=
-p; PAGED_CODE();<br> &gt; &gt;&nbsp; &nbsp; &nbsp; QxlClose();<br> &gt; &gt=
-; -&nbsp; &nbsp; if (m_bUefiMode)<br> &gt; &gt; +&nbsp; &nbsp; /* QXL devic=
-e rev 5+ requires explicit reset to switch to VGA mode */<br> &gt; &gt; +&n=
-bsp; &nbsp; if (m_bUefiMode || m_pQxlDod-&gt;Revision() &gt; 4)<br> &gt; &g=
-t;&nbsp; &nbsp; &nbsp; {<br> &gt; &gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Db=
-gPrint(TRACE_LEVEL_INFORMATION, ("%s: Resetting the device\n",<br> &gt; &gt=
-;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; __FUNCTION__));<br> &gt; &gt;&nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; WRITE_PORT_UCHAR((PUCHAR)(m_IoBase + QXL_IO_RESET)=
-, 0);<br> &gt; <br> &gt; I'm wondering why this is conditional in the first=
- place?<br> &gt; Isn't it a good idea to reset the device on close no matte=
-r what?<br></blockquote><div><br></div><div>The intention was to leave the =
-entire procedure as is where possible.</div><div>For example, when we do no=
-t use the reset, user screen resize does not happen until the BDD starts pr=
-ogramming the VGA.</div><div><br></div><blockquote class=3D"gmail_quote" st=
-yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
-ing-left:1ex" data-mce-style=3D"margin: 0px 0px 0px 0.8ex; border-left: 1px=
- solid #cccccc; padding-left: 1ex;">&gt; <br> &gt; take care,<br> &gt;&nbsp=
-; &nbsp;Gerd<br> &gt; <br> <br> Surely it's less willing to cause possible =
-regressions.<br> <br> Frediano<br> <br></blockquote></div></div></blockquot=
-e><div><br></div></div></body></html>
-------=_Part_34570030_675088623.1594796284345--
+<div dir=3D"ltr"><div>Hi all,</div><div><br></div><div>I&#39;m looking to s=
+hare a folder between my Arch Linux host and a Windows 10 guest, and SPICE&=
+#39;s folder sharing with webdav seems to be the best option for me. I&#39;=
+ve set up the QEMU devices that webdav needs, and installed the Windows ser=
+vice. I have the drive mapped, and am able to navigate the host folder (apa=
+rt from the occasional &quot;Windows cannot access \\localhost@9843\DavWWWR=
+oot\&quot; that doesn&#39;t occur again), and copy files from the host to t=
+he guest. When trying to copy a new file (with data) or write to an existin=
+g file from the guest, though, the application (e.g. File Explorer, or othe=
+r programs which save files) hangs for a little bit, before the transaction=
+ fails. For File Explorer, it displays &quot;Error 0x80070021: The process =
+cannot access the file because another process has locked a portion of the =
+file.&quot;<br></div><div><br></div><div>This is the output of remote-viewe=
+r:<br></div><div>=C2=A0 (remote-viewer:16120): GSpice-WARNING **: 12:58:46.=
+205: Warning no automount-inhibiting implementation available<br>=C2=A0 <br=
+>=C2=A0 (remote-viewer:16120): phodav-WARNING **: 12:58:57.910: (../phodav-=
+2.4/libphodav/phodav-method-propfind.c:70):prop_resourcetype: code should n=
+ot be reached<br>=C2=A0 <br>=C2=A0 (remote-viewer:16120): phodav-WARNING **=
+: 12:59:04.714: (../phodav-2.4/libphodav/phodav-method-propfind.c:70):prop_=
+resourcetype: code should not be reached<br>=C2=A0 <br>=C2=A0 (remote-viewe=
+r:16120): GSpice-WARNING **: 12:59:04.793: (../spice-gtk-0.38/src/channel-w=
+ebdav.c:330):demux_to_client_cb: runtime check failed: (size =3D=3D c-&gt;d=
+emux.size)<br>=C2=A0 phodav-Message: 13:00:06.047: missing lock: /testfile =
+urn:uuid:ceb212f1-f8af-4dd3-b36c-a7e627b6c08a<br>=C2=A0 phodav-Message: 13:=
+00:06.062: missing lock: /testfile urn:uuid:ceb212f1-f8af-4dd3-b36c-a7e627b=
+6c08a<br>=C2=A0 phodav-Message: 13:00:06.076: missing lock: /testfile urn:u=
+uid:ceb212f1-f8af-4dd3-b36c-a7e627b6c08a</div><div><br></div><div>I read th=
+at the first GSpice error always occurs on non-GNOME host environments. The=
+ phodav error occurs whenever I view the root directory of the share, or tr=
+y copying/writing to a file anywhere in the share. The second GSpice and ot=
+her phodav messages occur when copying/writing a file in the share.</div><d=
+iv><br></div><div>This occurs both with remote-viewer, and spicy. The same =
+result occurs whether or not I have the &quot;Read only&quot; checkbox in r=
+emote-viewer checked.<br></div><div><br></div><div>Thanks!<br></div></div>
 
+--000000000000ddede205aaa65609--
 
---===============0078908640==
+--===============1479439369==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -200,5 +168,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0078908640==--
-
+--===============1479439369==--
