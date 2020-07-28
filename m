@@ -1,56 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 689C322E6F4
-	for <lists+spice-devel@lfdr.de>; Mon, 27 Jul 2020 09:52:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5EB6230878
+	for <lists+spice-devel@lfdr.de>; Tue, 28 Jul 2020 13:18:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 77AF789D39;
-	Mon, 27 Jul 2020 07:52:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 33C096E262;
+	Tue, 28 Jul 2020 11:18:00 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7E8CC89D39
- for <spice-devel@lists.freedesktop.org>; Mon, 27 Jul 2020 07:52:54 +0000 (UTC)
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B8A5D6E262
+ for <spice-devel@lists.freedesktop.org>; Tue, 28 Jul 2020 11:17:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595836373;
+ s=mimecast20190719; t=1595935077;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=RBClhqOLnhsk6XnWKbLMyDpWkpESKgigXL25Bpq6zNM=;
- b=bU2ZDhjtY7hrb3nRii6nsitWGidj77G+as0xcm+rJdeNJ26d+XGZ8t9PEM8qbMsgGfId2e
- g+BawK8GDjdvLaRQm9kD3b4n1y8MYaQPFEgAYGCuhMY97byOLEq3v6/V6FhpJ1DhgKRryI
- Kuejz8GzPiIs5E78upLxNhNM0hFnOvU=
-Received: from mail-oi1-f200.google.com (mail-oi1-f200.google.com
- [209.85.167.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-391-eYm99pZtPCSTQog2_GiRFg-1; Mon, 27 Jul 2020 03:52:49 -0400
-X-MC-Unique: eYm99pZtPCSTQog2_GiRFg-1
-Received: by mail-oi1-f200.google.com with SMTP id h17so3489708oib.18
- for <spice-devel@lists.freedesktop.org>; Mon, 27 Jul 2020 00:52:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=RBClhqOLnhsk6XnWKbLMyDpWkpESKgigXL25Bpq6zNM=;
- b=Q5s8v0ffQHPbCeUW5bAuo/jsDO3Vn1hGEhZHnS+hNvD+P4vXY9hoLuUHn4UxTyH55z
- g/qswOVSCstHb5bBefHBigkN7kefsnrcLfq2+EQG7WosmBIwJ4kXqFkA2KE/cF8STiNs
- z3Fym427UbYYwqBe74vZTTYD+vLLwfjrlBO1VYdb4Bhv6LBn9xCDZ9TkPYQo3aB6lCLP
- ssrVF7Q1J6JLYtVBClyw2EEfbpMYvk7unC4mpqa+YthkQHTBhHSp2tSz2Z0DSrpirg1N
- 9x6Pvh3GZBbQ4TD5X3zH+m8KVe36KeFY+Mk2s9n40UotjiIeCWBP4vIAqvyqWs8gwWyG
- mhqg==
-X-Gm-Message-State: AOAM530Gw9u1Mozs+UZx073dIfbeqLeMnqhDWGns8XzWCU+7ovv+qZMO
- ENdn4aDFCA+UAIA0OYVu4YwkiudAjxmNp4m+zQULCfu4S5c88BYcY1NZyUGCuor5QUmygTm5vCI
- 9C75Tu+GqaAMFq6WBQ5ZSlUYUwOre8VNm/saew+A5T/T47xA=
-X-Received: by 2002:aca:bed5:: with SMTP id
- o204mr16152882oif.169.1595836368640; 
- Mon, 27 Jul 2020 00:52:48 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzNBtMr8ZbawdDoOeNePCM1pd9Dth5Ie5YPuugAWUU5zcAGjp4RxDRMA5hcKuIfxZdvIs5mDaMXuXlMRKRJl7U=
-X-Received: by 2002:aca:bed5:: with SMTP id
- o204mr16152864oif.169.1595836368236; 
- Mon, 27 Jul 2020 00:52:48 -0700 (PDT)
-MIME-Version: 1.0
+ bh=+71ax4LAsv2kUgvnV6u3UCEn/02y9MBPC37xpxITss4=;
+ b=NfiDjmeaJ1tnooi5LJKxP/MHdYdnGWawHFOO/P0pCJ+2U0+38Eqd3dOaHpMKdF4U8OFEGy
+ Cb+wSIV8jdnXCRXOToMRabm6udawUZyv9ULRVFedpS4zHdhS0T845XzsGR0tem5neTE28v
+ 2RgJKEYWITng00N/hxr8U25TeO7FDgw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-484-W6o-DoWeMfG-jRpyjyR6qg-1; Tue, 28 Jul 2020 07:17:51 -0400
+X-MC-Unique: W6o-DoWeMfG-jRpyjyR6qg-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3379C800597;
+ Tue, 28 Jul 2020 11:17:50 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2B69B79CF3;
+ Tue, 28 Jul 2020 11:17:50 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 1591E1809547;
+ Tue, 28 Jul 2020 11:17:50 +0000 (UTC)
+Date: Tue, 28 Jul 2020 07:17:47 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Felix Leimbach <felix.leimbach@gmail.com>
+Message-ID: <1584828164.36457886.1595935067458.JavaMail.zimbra@redhat.com>
+In-Reply-To: <9e08513d-88aa-a253-730a-7c20e535bbd9@gmail.com>
 References: <7cbfbb62-31ff-5eef-5427-7958921a1bfa@gmail.com>
  <631443465.25687850.1588591196710.JavaMail.zimbra@redhat.com>
  <7a072038-02e9-afcc-d856-82483e0c7cb9@gmail.com>
@@ -58,11 +53,11 @@ References: <7cbfbb62-31ff-5eef-5427-7958921a1bfa@gmail.com>
  <6cf0ba19-2091-1486-12a4-faedbe28ba17@gmail.com>
  <273469d7-6b85-8ad3-2f93-8a5f5fece664@redhat.com>
  <9e08513d-88aa-a253-730a-7c20e535bbd9@gmail.com>
-In-Reply-To: <9e08513d-88aa-a253-730a-7c20e535bbd9@gmail.com>
-From: Kevin Pouget <kpouget@redhat.com>
-Date: Mon, 27 Jul 2020 09:52:37 +0200
-Message-ID: <CADJ1XR0JTd6oiPBASj7NJuE_Je+=gRgCNZhHqScbcVrimYpERg@mail.gmail.com>
-To: Felix Leimbach <felix.leimbach@gmail.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.33.32.9, 10.4.195.9]
+Thread-Topic: Stuttering video playback on LAN
+Thread-Index: 5ohmNpVw9KkeIVA+cOvaidepE2LJmg==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Subject: Re: [Spice-devel] Stuttering video playback on LAN
@@ -77,231 +72,230 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Spice devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hello,
-
-for the record, I'm sure that I managed to run spice-streaming-agent
-with the Intel vaapih264enc encoder. Unfortunately I don't have
-anymore the setup to try it again, but all the gstreamer encoders were
-working properly (vaapi h264/vp8, nvenc h264 ...)
-
-I would recommend testing GST from the command-line first: get a
-pipeline that encodes the screen (ximagescr) into h264, decodes it and
-shows it onscreen, then replace the encoder with vaapih264enc. If it
-works, the problem might be in spice-streaming-agent or its
-configuration, if it doesn't work, the problem is on the gst+vaapi
-libraries (and vgpu) setup
-
-I hope that can help,
-Kevin
-
-On Mon, Jul 27, 2020 at 9:40 AM Felix Leimbach <felix.leimbach@gmail.com> wrote:
->
-> Hi Uri
->
-> I've succeeded in using h264 with spice-streaming-agent, but only with a linux client. The windows client does not seem to support anything besides mjpeg, even after installing and tinkering with gstreamer.
-> I've opened a bugreport: https://gitlab.com/virt-viewer/virt-viewer/-/issues/5
->
-> Another drawback: spice-streaming-agent only works with the x264enc encoder, which does not support VAAPI based hardware acceleration with the Intel GPU I passed through with GVT-g.
->
-> The vaapih264enc codec claimed that it cannot produce a x-h264 stream:
->
-> # ./spice-streaming-agent -d -c gst.h264=vaapih264enc
-> ...
-> spice-streaming-agent[266317]: Gstreamer plugin: Specified encoder named 'vaapih264enc' cannot produce 'video/x-h264, stream-format=(string)byte-stream, framerate=(fraction)25/1' streams. Make sure that gst.CODEC=ENCODER is correctly specified and that the encoder is available.
-> spice-streaming-agent[266317]: Gstreamer plugin: 'x264enc' encoder plugin is used
->
-> The avenc_h264 codec loaded but failed:
->
-> # ./spice-streaming-agent -c gst.h264=avenc_h264_omx:bitrate=100000
-> spice-streaming-agent[269477]: Gstreamer plugin: Looking for encoder plugins which can produce a 'video/x-h264, stream-format=(string)byte-stream, framerate=(fraction)25/1' stream
-> spice-streaming-agent[269477]: Gstreamer plugin: 'vaapih264enc' plugin is available
-> spice-streaming-agent[269477]: Gstreamer plugin: 'x264enc' plugin is available
-> spice-streaming-agent[269477]: Gstreamer plugin: 'avenc_h264_omx' plugin is available
-> spice-streaming-agent[269477]: Gstreamer plugin: 'avenc_h264_omx' encoder plugin is used
-> spice-streaming-agent[269477]: Gstreamer plugin: Trying to set encoder property: 'bitrate = 100000'
-> ** (spice-streaming-agent:269477): CRITICAL **: 22:47:26.612: gst_vaapi_display_lock: assertion 'display != NULL' failed
-> ** (spice-streaming-agent:269477): CRITICAL **: 22:47:26.612: gst_vaapi_display_unlock: assertion 'display != NULL' failed
-> ** (spice-streaming-agent:269477): CRITICAL **: 22:47:26.617: gst_vaapi_display_lock: assertion 'display != NULL' failed
-> ** (spice-streaming-agent:269477): CRITICAL **: 22:47:26.617: gst_vaapi_display_unlock: assertion 'display != NULL' failed
-> spice-streaming-agent[269477]: No sample- EOS or state change
->
-> So I reverted back to using regular spice in qemu without spice-streaming-agent.
-> I think it would be a huge improvement if the spice component in the qemu host process could leverage GPU based encoding with h264. We wouldn't need a guest agent, we wouldn't require GPU passthrough and have great performance for multimedia use-cases. Not sure were I would open a feature request for that, though.
->
-> Best,
-> Felix
->
->
-> On 18.05.20 12:21, Uri Lublin wrote:
-> > On 5/17/20 6:35 PM, Felix Leimbach wrote:
-> >> Hi Uri,
-> >>
-> >> On 17.05.20 16:08, Uri Lublin wrote:
-> >>> On 5/16/20 7:07 PM, Felix Leimbach wrote:
-> >>>>
-> >>>>>>
-> >>>>>> I experience stuttering video playback in remote-viewer despite connecting
-> >>>>>> via GBit/s LAN, using fast hardware and the QXL driver.
-> >>>>>> Up until a video size of roughly 800x600 the playback is smooth. But on
-> >>>>>> anything bigger, like my native resolution of 2540x1440, video playback is
-> >>>>>> stuttering annoyingly.
-> >>>>>> After lots of unsuccessful tinkering with spice parameters and qxl parameters
-> >>>>>> I'm asking you guys for help.
-> >>>>>>
-> >>>>>> Client:
-> >>>>>> Windows 10 1909
-> >>>>>> Remote Viewer 8.0-256
-> >>>>>> Quadcore i7-7820HQ 2.9GHz
-> >>>>>> 16GB DDR4 RAM
-> >>>>>>
-> >>>>>> Host of the VM:
-> >>>>>> Gentoo Linux
-> >>>>>> Kernel 4.14.172
-> >>>>>> Qemu 4.2.0
-> >>>>
-> >>>> I've updated to newer versions in the meantime, but no noticeable changes.
-> >>>>
-> >>>> Qemu 5.0.0
-> >>>> Host kernel 5.4.39
-> >>>> Remote Viewer 9.0-256 (x64) on the Windows 10 Client
-> >>>>
-> >>>>>> <snipped>
-> >>>>>>
-> >>>
-> >>> <snipped>
-> >>>
-> >>>> I noticed very high CPU usage in the guest during playback, because chrome, vlc, mpv used software h264 decoding.
-> >>>> I fixed this by passing a virtualized instance of the hosts Intel GPU to the guest via GVT-g.
-> >>>>
-> >>>> These are the qemu parameters I use for GVT-g:
-> >>>> -spice port=5906,addr=10.42.2.250,password=changed
-> >>>> -vga virtio
-> >>>> -display egl-headless,rendernode=/dev/dri/card0
-> >>>> -device vfio-pci,sysfsdev=/sys/bus/mdev/devices/f14c80d5-9ade-4802-9509-1d877d32d159,display=on,ramfb=on,driver=vfio-pci-nohotplug
-> >>>
-> >>> Perhaps here it would help to set streaming-video=all -spice option.
-> >>
-> >> It doesn't really help. Still very stuttering playback, even with a video-player window size of only 720x576.
-> >> I now believe this is caused by a CPU bottleneck on the CLIENT (not guest), i.e. my Windows 10 machine.
-> >> virt-viewer.exe uses consistently 12% CPU, which is 100% of one core (Quad Core with SMT => 8 logical cores).
-> >> This is crazy, since the CPU core is running a modern i7 at 3.6 GHz (Turbo) with no other significant CPU users (system is idle).
-> >> Could this be a problem of remote-viewer.exe not using gstreamer codecs (and hw accel) properly?
-> >> Got these spice-debug messages on the client: "no video decoders from GSTreamer for {mjpeg,vp8,h264,vp9,h265} were found".
-> >
-> > Maybe the client is built without gstreamer.
->
->
->
->
-> >> Also I noticed that the qemu process on the host is using much CPU, probably due to spice encoding the video frames.
-> >> The host shows 4 qemu-ystem-x86_64 threads using 93%, 34%, 24%, 16% CPU when playing a 720x576 video in the guest.
-> >> However the guest shows only 14% and 7% use for its 2 vCPUs in htop because it uses VA-API (GPT-g) in the video player (vlc, mpv).
-> >
-> > With egl-headless, spice-server encodes the whole screen, not 720x576 video. Since the client
-> > supports almost no codec likely
-> > it's using mjpeg
-> >
-> >>
-> >> So the host qemu threads use MUCH more CPU than the guest. When I disconnect spice (video still playing) the host qemu CPU usage drops to 35%, 1%, 1%, 1%, as expected.
-> >> Conclusion: Spice encoding on the host is very CPU hungry.
-> >
-> > Your conclusion makes sense to me.
-> >
-> >>
-> >> Is it possible to GPU-accelerate the video encoding in the host qemu process?
-> >
-> > I think it can not use anything other than mjpeg if that's the only codec the client supports.
-> >
-> >> I've built spice and qemu with gstreamer and drm support and VA-API is working nicely.
-> >> Can spice use that? How?
-> >
-> > Possibly, for H264 you need to change the get_gst_codec_name (gstreamer pipe);
-> > For vp8 it should be done already.
-> >
-> >>
-> >>>>
-> >>>> Unfortunately video playback is still not smoother. In fact it is about the same smoothness but new visual artefacts in the video make it worse. I think this is due to egl-headless.
-> >>>> For testing/comparison I installed a Windows 10 guest with the same GVT-g GPU and used RDP with h264 activated. Playback was much better and used only about 120MBit/s.
-> >>>>
-> >>>> Next I tried using the spice-streaming-agent in the guest to send a h264 encoded picture via spice.
-> >>>> However, the windows build of remote-viewer doesn't seem to support this. The new spice display is created and I see the mouse cursor in it but no picture (just black).
-> >>>
-> >>> You may be the first to test spice-streaming-agent + windows client.
-> >>>
-> >>> I think there is some work to be done in the windows client to make
-> >>> it handle better streams from spice-streaming-agent
-> >>>
-> >>> Also there is some work to be done to enable spice-streaming-agent
-> >>> on windows guests.
-> >>>
-> >>>> Log from the guest:
-> >>>> felix@idefix:~$ ./spice-streaming-agent -d
-> >>>> spice-streaming-agent[2465]: GOT START_STOP message -- request to START streaming
-> >>>> spice-streaming-agent[2465]: streaming starts now
-> >>>> spice-streaming-agent[2465]: Got device info of 1 devices from the plugin
-> >>>> spice-streaming-agent[2465]:    stream id 0: device address: pci/0000/06.0, device display id: 2
-> >>>> spice-streaming-agent[2465]: got a frame -- size is 321265 (26 ms) (1589641660285 ms from last frame)(1589641660258136 us)
-> >>>> spice-streaming-agent[2465]: wXh 1920X1200  codec=1
-> >>>
-> >>> Note that it's not H264, but MJPEG (codec=1)
-> >>
-> >> You are right, so I debugged this:
-> >>
-> >> Launching spice-streaming-agent with GST_DEBUG=6 shows a bunch of h264 related messages which seem to indicate that the gstreamer codecs are loaded (not sure):
-> >> gstregistry.c:461:gst_registry_add_plugin:<registry0> adding plugin 0x55d279f8fe70 for filename "/usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstuvch264.so"
-> >> gstregistry.c:577:gst_registry_add_feature:<registry0> adding feature 0x55d279fe1650 (video/x-h264)
-> >> gstregistrychunks.c:729:gst_registry_chunks_load_feature: Added feature vp8enc, plugin 0x55d279ed1150 vpx
-> >>
-> >> However I didn't find an argument to force spice-streaming-agent to use a specific codec. Reading the source code I found the option "-c codec_name=h264", but it doesn't seem to have any effect.
-> >>
-> >> Maybe it fails auto-negotiation with the client which does not support it?
-> >
-> > Likely.
-> >
-> > Uri.
-> >
-> >> On the client with the "--spice-debug" option I found interesting messages:
-> >>
-> >> (remote-viewer.exe:15956): Spice-DEBUG: 17:17:06.218: ../src/channel-display-gst.c:792:gstvideo_has_codec: No video decoders from GStreamer for mjpeg were found
-> >> (remote-viewer.exe:15956): GSpice-DEBUG: 17:17:06.218: ../src/channel-display.c:894 GStreamer does not support the mjpeg codec
-> >> (remote-viewer.exe:15956): Spice-DEBUG: 17:17:06.219: ../src/channel-display-gst.c:792:gstvideo_has_codec: No video decoders from GStreamer for vp8 were found
-> >> (remote-viewer.exe:15956): GSpice-DEBUG: 17:17:06.220: ../src/channel-display.c:894 GStreamer does not support the vp8 codec
-> >> (remote-viewer.exe:15956): Spice-DEBUG: 17:17:06.221: ../src/channel-display-gst.c:792:gstvideo_has_codec: No video decoders from GStreamer for h264 were found
-> >> (remote-viewer.exe:15956): GSpice-DEBUG: 17:17:06.222: ../src/channel-display.c:894 GStreamer does not support the h264 codec
-> >> (remote-viewer.exe:15956): Spice-DEBUG: 17:17:06.223: ../src/channel-display-gst.c:792:gstvideo_has_codec: No video decoders from GStreamer for vp9 were found
-> >> (remote-viewer.exe:15956): GSpice-DEBUG: 17:17:06.224: ../src/channel-display.c:894 GStreamer does not support the vp9 codec
-> >> (remote-viewer.exe:15956): Spice-DEBUG: 17:17:06.227: ../src/channel-display-gst.c:792:gstvideo_has_codec: No video decoders from GStreamer for h265 were found
-> >> (remote-viewer.exe:15956): GSpice-DEBUG: 17:17:06.230: ../src/channel-display.c:894 GStreamer does not support the h265 codec
-> >>
-> >> Any ideas how to fix this? Should I open a bug report >
-> >>>> <snipped>
-> >>>>
-> >>>> If I use remote viewer from a linux client then it does indeed work! Playback is nearly smooth, about the same as with RDP and h264!
-> >>>> So I guess it's a bug in the windows remote-viewer. Seems like it doesn't have gstreamer support, so I'll open a bug report.
-> >>>>
-> >>>> Any other ideas what I can try to get good reasonable video playback with good office-work performance?
-> >>>>
-> >>>> On a side note: Audio via spice isn't working. I hear a few strange noises and then only silence. So I use pulseaudio transmitting the sound to the client independent of spice.
-> >>
-> >> Found the reason: It's a regression in the windows version of remote-viewer. Was caused by libgstdirectsound.dll being replaced with libgstwasapi.dll and this changed the audio subsystem being used.
-> >> Details: https://gitlab.com/virt-viewer/virt-viewer/-/issues/2
-> >>
-> >> Cheers,
-> >> Felix
-> >>
->
-> _______________________________________________
-> Spice-devel mailing list
-> Spice-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+SGksCiAgZGlkIHlvdSBpbnN0YWxsIGxpYnZhLWludGVsLWRyaXZlciBwYWNrYWdlPwpXaXRob3V0
+IGl0IHZhYXBpIHdvbid0IHdvcmsuCgpGcmVkaWFubwoKPiAKPiBIaSBVcmkKPiAKPiBJJ3ZlIHN1
+Y2NlZWRlZCBpbiB1c2luZyBoMjY0IHdpdGggc3BpY2Utc3RyZWFtaW5nLWFnZW50LCBidXQgb25s
+eSB3aXRoIGEKPiBsaW51eCBjbGllbnQuIFRoZSB3aW5kb3dzIGNsaWVudCBkb2VzIG5vdCBzZWVt
+IHRvIHN1cHBvcnQgYW55dGhpbmcgYmVzaWRlcwo+IG1qcGVnLCBldmVuIGFmdGVyIGluc3RhbGxp
+bmcgYW5kIHRpbmtlcmluZyB3aXRoIGdzdHJlYW1lci4KPiBJJ3ZlIG9wZW5lZCBhIGJ1Z3JlcG9y
+dDoKPiBodHRwczovL2dpdGxhYi5jb20vdmlydC12aWV3ZXIvdmlydC12aWV3ZXIvLS9pc3N1ZXMv
+NQo+IAo+IEFub3RoZXIgZHJhd2JhY2s6IHNwaWNlLXN0cmVhbWluZy1hZ2VudCBvbmx5IHdvcmtz
+IHdpdGggdGhlIHgyNjRlbmMgZW5jb2RlciwKPiB3aGljaCBkb2VzIG5vdCBzdXBwb3J0IFZBQVBJ
+IGJhc2VkIGhhcmR3YXJlIGFjY2VsZXJhdGlvbiB3aXRoIHRoZSBJbnRlbCBHUFUKPiBJIHBhc3Nl
+ZCB0aHJvdWdoIHdpdGggR1ZULWcuCj4gCj4gVGhlIHZhYXBpaDI2NGVuYyBjb2RlYyBjbGFpbWVk
+IHRoYXQgaXQgY2Fubm90IHByb2R1Y2UgYSB4LWgyNjQgc3RyZWFtOgo+IAo+ICMgLi9zcGljZS1z
+dHJlYW1pbmctYWdlbnQgLWQgLWMgZ3N0LmgyNjQ9dmFhcGloMjY0ZW5jCj4gLi4uCj4gc3BpY2Ut
+c3RyZWFtaW5nLWFnZW50WzI2NjMxN106IEdzdHJlYW1lciBwbHVnaW46IFNwZWNpZmllZCBlbmNv
+ZGVyIG5hbWVkCj4gJ3ZhYXBpaDI2NGVuYycgY2Fubm90IHByb2R1Y2UgJ3ZpZGVvL3gtaDI2NCwK
+PiBzdHJlYW0tZm9ybWF0PShzdHJpbmcpYnl0ZS1zdHJlYW0sIGZyYW1lcmF0ZT0oZnJhY3Rpb24p
+MjUvMScgc3RyZWFtcy4gTWFrZQo+IHN1cmUgdGhhdCBnc3QuQ09ERUM9RU5DT0RFUiBpcyBjb3Jy
+ZWN0bHkgc3BlY2lmaWVkIGFuZCB0aGF0IHRoZSBlbmNvZGVyIGlzCj4gYXZhaWxhYmxlLgo+IHNw
+aWNlLXN0cmVhbWluZy1hZ2VudFsyNjYzMTddOiBHc3RyZWFtZXIgcGx1Z2luOiAneDI2NGVuYycg
+ZW5jb2RlciBwbHVnaW4gaXMKPiB1c2VkCj4gCj4gVGhlIGF2ZW5jX2gyNjQgY29kZWMgbG9hZGVk
+IGJ1dCBmYWlsZWQ6Cj4gCj4gIyAuL3NwaWNlLXN0cmVhbWluZy1hZ2VudCAtYyBnc3QuaDI2ND1h
+dmVuY19oMjY0X29teDpiaXRyYXRlPTEwMDAwMAo+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNjk0
+NzddOiBHc3RyZWFtZXIgcGx1Z2luOiBMb29raW5nIGZvciBlbmNvZGVyIHBsdWdpbnMKPiB3aGlj
+aCBjYW4gcHJvZHVjZSBhICd2aWRlby94LWgyNjQsIHN0cmVhbS1mb3JtYXQ9KHN0cmluZylieXRl
+LXN0cmVhbSwKPiBmcmFtZXJhdGU9KGZyYWN0aW9uKTI1LzEnIHN0cmVhbQo+IHNwaWNlLXN0cmVh
+bWluZy1hZ2VudFsyNjk0NzddOiBHc3RyZWFtZXIgcGx1Z2luOiAndmFhcGloMjY0ZW5jJyBwbHVn
+aW4gaXMKPiBhdmFpbGFibGUKPiBzcGljZS1zdHJlYW1pbmctYWdlbnRbMjY5NDc3XTogR3N0cmVh
+bWVyIHBsdWdpbjogJ3gyNjRlbmMnIHBsdWdpbiBpcwo+IGF2YWlsYWJsZQo+IHNwaWNlLXN0cmVh
+bWluZy1hZ2VudFsyNjk0NzddOiBHc3RyZWFtZXIgcGx1Z2luOiAnYXZlbmNfaDI2NF9vbXgnIHBs
+dWdpbiBpcwo+IGF2YWlsYWJsZQo+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNjk0NzddOiBHc3Ry
+ZWFtZXIgcGx1Z2luOiAnYXZlbmNfaDI2NF9vbXgnIGVuY29kZXIKPiBwbHVnaW4gaXMgdXNlZAo+
+IHNwaWNlLXN0cmVhbWluZy1hZ2VudFsyNjk0NzddOiBHc3RyZWFtZXIgcGx1Z2luOiBUcnlpbmcg
+dG8gc2V0IGVuY29kZXIKPiBwcm9wZXJ0eTogJ2JpdHJhdGUgPSAxMDAwMDAnCj4gKiogKHNwaWNl
+LXN0cmVhbWluZy1hZ2VudDoyNjk0NzcpOiBDUklUSUNBTCAqKjogMjI6NDc6MjYuNjEyOgo+IGdz
+dF92YWFwaV9kaXNwbGF5X2xvY2s6IGFzc2VydGlvbiAnZGlzcGxheSAhPSBOVUxMJyBmYWlsZWQK
+PiAqKiAoc3BpY2Utc3RyZWFtaW5nLWFnZW50OjI2OTQ3Nyk6IENSSVRJQ0FMICoqOiAyMjo0Nzoy
+Ni42MTI6Cj4gZ3N0X3ZhYXBpX2Rpc3BsYXlfdW5sb2NrOiBhc3NlcnRpb24gJ2Rpc3BsYXkgIT0g
+TlVMTCcgZmFpbGVkCj4gKiogKHNwaWNlLXN0cmVhbWluZy1hZ2VudDoyNjk0NzcpOiBDUklUSUNB
+TCAqKjogMjI6NDc6MjYuNjE3Ogo+IGdzdF92YWFwaV9kaXNwbGF5X2xvY2s6IGFzc2VydGlvbiAn
+ZGlzcGxheSAhPSBOVUxMJyBmYWlsZWQKPiAqKiAoc3BpY2Utc3RyZWFtaW5nLWFnZW50OjI2OTQ3
+Nyk6IENSSVRJQ0FMICoqOiAyMjo0NzoyNi42MTc6Cj4gZ3N0X3ZhYXBpX2Rpc3BsYXlfdW5sb2Nr
+OiBhc3NlcnRpb24gJ2Rpc3BsYXkgIT0gTlVMTCcgZmFpbGVkCj4gc3BpY2Utc3RyZWFtaW5nLWFn
+ZW50WzI2OTQ3N106IE5vIHNhbXBsZS0gRU9TIG9yIHN0YXRlIGNoYW5nZQo+IAo+IFNvIEkgcmV2
+ZXJ0ZWQgYmFjayB0byB1c2luZyByZWd1bGFyIHNwaWNlIGluIHFlbXUgd2l0aG91dAo+IHNwaWNl
+LXN0cmVhbWluZy1hZ2VudC4KPiBJIHRoaW5rIGl0IHdvdWxkIGJlIGEgaHVnZSBpbXByb3ZlbWVu
+dCBpZiB0aGUgc3BpY2UgY29tcG9uZW50IGluIHRoZSBxZW11Cj4gaG9zdCBwcm9jZXNzIGNvdWxk
+IGxldmVyYWdlIEdQVSBiYXNlZCBlbmNvZGluZyB3aXRoIGgyNjQuIFdlIHdvdWxkbid0IG5lZWQg
+YQo+IGd1ZXN0IGFnZW50LCB3ZSB3b3VsZG4ndCByZXF1aXJlIEdQVSBwYXNzdGhyb3VnaCBhbmQg
+aGF2ZSBncmVhdCBwZXJmb3JtYW5jZQo+IGZvciBtdWx0aW1lZGlhIHVzZS1jYXNlcy4gTm90IHN1
+cmUgd2VyZSBJIHdvdWxkIG9wZW4gYSBmZWF0dXJlIHJlcXVlc3QgZm9yCj4gdGhhdCwgdGhvdWdo
+Lgo+IAo+IEJlc3QsCj4gRmVsaXgKPiAKPiAKPiBPbiAxOC4wNS4yMCAxMjoyMSwgVXJpIEx1Ymxp
+biB3cm90ZToKPiA+IE9uIDUvMTcvMjAgNjozNSBQTSwgRmVsaXggTGVpbWJhY2ggd3JvdGU6Cj4g
+Pj4gSGkgVXJpLAo+ID4+Cj4gPj4gT24gMTcuMDUuMjAgMTY6MDgsIFVyaSBMdWJsaW4gd3JvdGU6
+Cj4gPj4+IE9uIDUvMTYvMjAgNzowNyBQTSwgRmVsaXggTGVpbWJhY2ggd3JvdGU6Cj4gPj4+Pgo+
+ID4+Pj4+Pgo+ID4+Pj4+PiBJIGV4cGVyaWVuY2Ugc3R1dHRlcmluZyB2aWRlbyBwbGF5YmFjayBp
+biByZW1vdGUtdmlld2VyIGRlc3BpdGUKPiA+Pj4+Pj4gY29ubmVjdGluZwo+ID4+Pj4+PiB2aWEg
+R0JpdC9zIExBTiwgdXNpbmcgZmFzdCBoYXJkd2FyZSBhbmQgdGhlIFFYTCBkcml2ZXIuCj4gPj4+
+Pj4+IFVwIHVudGlsIGEgdmlkZW8gc2l6ZSBvZiByb3VnaGx5IDgwMHg2MDAgdGhlIHBsYXliYWNr
+IGlzIHNtb290aC4gQnV0Cj4gPj4+Pj4+IG9uCj4gPj4+Pj4+IGFueXRoaW5nIGJpZ2dlciwgbGlr
+ZSBteSBuYXRpdmUgcmVzb2x1dGlvbiBvZiAyNTQweDE0NDAsIHZpZGVvCj4gPj4+Pj4+IHBsYXli
+YWNrIGlzCj4gPj4+Pj4+IHN0dXR0ZXJpbmcgYW5ub3lpbmdseS4KPiA+Pj4+Pj4gQWZ0ZXIgbG90
+cyBvZiB1bnN1Y2Nlc3NmdWwgdGlua2VyaW5nIHdpdGggc3BpY2UgcGFyYW1ldGVycyBhbmQgcXhs
+Cj4gPj4+Pj4+IHBhcmFtZXRlcnMKPiA+Pj4+Pj4gSSdtIGFza2luZyB5b3UgZ3V5cyBmb3IgaGVs
+cC4KPiA+Pj4+Pj4KPiA+Pj4+Pj4gQ2xpZW50Ogo+ID4+Pj4+PiBXaW5kb3dzIDEwIDE5MDkKPiA+
+Pj4+Pj4gUmVtb3RlIFZpZXdlciA4LjAtMjU2Cj4gPj4+Pj4+IFF1YWRjb3JlIGk3LTc4MjBIUSAy
+LjlHSHoKPiA+Pj4+Pj4gMTZHQiBERFI0IFJBTQo+ID4+Pj4+Pgo+ID4+Pj4+PiBIb3N0IG9mIHRo
+ZSBWTToKPiA+Pj4+Pj4gR2VudG9vIExpbnV4Cj4gPj4+Pj4+IEtlcm5lbCA0LjE0LjE3Mgo+ID4+
+Pj4+PiBRZW11IDQuMi4wCj4gPj4+Pgo+ID4+Pj4gSSd2ZSB1cGRhdGVkIHRvIG5ld2VyIHZlcnNp
+b25zIGluIHRoZSBtZWFudGltZSwgYnV0IG5vIG5vdGljZWFibGUKPiA+Pj4+IGNoYW5nZXMuCj4g
+Pj4+Pgo+ID4+Pj4gUWVtdSA1LjAuMAo+ID4+Pj4gSG9zdCBrZXJuZWwgNS40LjM5Cj4gPj4+PiBS
+ZW1vdGUgVmlld2VyIDkuMC0yNTYgKHg2NCkgb24gdGhlIFdpbmRvd3MgMTAgQ2xpZW50Cj4gPj4+
+Pgo+ID4+Pj4+PiA8c25pcHBlZD4KPiA+Pj4+Pj4KPiA+Pj4KPiA+Pj4gPHNuaXBwZWQ+Cj4gPj4+
+Cj4gPj4+PiBJIG5vdGljZWQgdmVyeSBoaWdoIENQVSB1c2FnZSBpbiB0aGUgZ3Vlc3QgZHVyaW5n
+IHBsYXliYWNrLCBiZWNhdXNlCj4gPj4+PiBjaHJvbWUsIHZsYywgbXB2IHVzZWQgc29mdHdhcmUg
+aDI2NCBkZWNvZGluZy4KPiA+Pj4+IEkgZml4ZWQgdGhpcyBieSBwYXNzaW5nIGEgdmlydHVhbGl6
+ZWQgaW5zdGFuY2Ugb2YgdGhlIGhvc3RzIEludGVsIEdQVSB0bwo+ID4+Pj4gdGhlIGd1ZXN0IHZp
+YSBHVlQtZy4KPiA+Pj4+Cj4gPj4+PiBUaGVzZSBhcmUgdGhlIHFlbXUgcGFyYW1ldGVycyBJIHVz
+ZSBmb3IgR1ZULWc6Cj4gPj4+PiAtc3BpY2UgcG9ydD01OTA2LGFkZHI9MTAuNDIuMi4yNTAscGFz
+c3dvcmQ9Y2hhbmdlZAo+ID4+Pj4gLXZnYSB2aXJ0aW8KPiA+Pj4+IC1kaXNwbGF5IGVnbC1oZWFk
+bGVzcyxyZW5kZXJub2RlPS9kZXYvZHJpL2NhcmQwCj4gPj4+PiAtZGV2aWNlCj4gPj4+PiB2Zmlv
+LXBjaSxzeXNmc2Rldj0vc3lzL2J1cy9tZGV2L2RldmljZXMvZjE0YzgwZDUtOWFkZS00ODAyLTk1
+MDktMWQ4NzdkMzJkMTU5LGRpc3BsYXk9b24scmFtZmI9b24sZHJpdmVyPXZmaW8tcGNpLW5vaG90
+cGx1Zwo+ID4+Pgo+ID4+PiBQZXJoYXBzIGhlcmUgaXQgd291bGQgaGVscCB0byBzZXQgc3RyZWFt
+aW5nLXZpZGVvPWFsbCAtc3BpY2Ugb3B0aW9uLgo+ID4+Cj4gPj4gSXQgZG9lc24ndCByZWFsbHkg
+aGVscC4gU3RpbGwgdmVyeSBzdHV0dGVyaW5nIHBsYXliYWNrLCBldmVuIHdpdGggYQo+ID4+IHZp
+ZGVvLXBsYXllciB3aW5kb3cgc2l6ZSBvZiBvbmx5IDcyMHg1NzYuCj4gPj4gSSBub3cgYmVsaWV2
+ZSB0aGlzIGlzIGNhdXNlZCBieSBhIENQVSBib3R0bGVuZWNrIG9uIHRoZSBDTElFTlQgKG5vdAo+
+ID4+IGd1ZXN0KSwgaS5lLiBteSBXaW5kb3dzIDEwIG1hY2hpbmUuCj4gPj4gdmlydC12aWV3ZXIu
+ZXhlIHVzZXMgY29uc2lzdGVudGx5IDEyJSBDUFUsIHdoaWNoIGlzIDEwMCUgb2Ygb25lIGNvcmUg
+KFF1YWQKPiA+PiBDb3JlIHdpdGggU01UID0+IDggbG9naWNhbCBjb3JlcykuCj4gPj4gVGhpcyBp
+cyBjcmF6eSwgc2luY2UgdGhlIENQVSBjb3JlIGlzIHJ1bm5pbmcgYSBtb2Rlcm4gaTcgYXQgMy42
+IEdIego+ID4+IChUdXJibykgd2l0aCBubyBvdGhlciBzaWduaWZpY2FudCBDUFUgdXNlcnMgKHN5
+c3RlbSBpcyBpZGxlKS4KPiA+PiBDb3VsZCB0aGlzIGJlIGEgcHJvYmxlbSBvZiByZW1vdGUtdmll
+d2VyLmV4ZSBub3QgdXNpbmcgZ3N0cmVhbWVyIGNvZGVjcwo+ID4+IChhbmQgaHcgYWNjZWwpIHBy
+b3Blcmx5Pwo+ID4+IEdvdCB0aGVzZSBzcGljZS1kZWJ1ZyBtZXNzYWdlcyBvbiB0aGUgY2xpZW50
+OiAibm8gdmlkZW8gZGVjb2RlcnMgZnJvbQo+ID4+IEdTVHJlYW1lciBmb3Ige21qcGVnLHZwOCxo
+MjY0LHZwOSxoMjY1fSB3ZXJlIGZvdW5kIi4KPiA+Cj4gPiBNYXliZSB0aGUgY2xpZW50IGlzIGJ1
+aWx0IHdpdGhvdXQgZ3N0cmVhbWVyLgo+IAo+IAo+IAo+IAo+ID4+IEFsc28gSSBub3RpY2VkIHRo
+YXQgdGhlIHFlbXUgcHJvY2VzcyBvbiB0aGUgaG9zdCBpcyB1c2luZyBtdWNoIENQVSwKPiA+PiBw
+cm9iYWJseSBkdWUgdG8gc3BpY2UgZW5jb2RpbmcgdGhlIHZpZGVvIGZyYW1lcy4KPiA+PiBUaGUg
+aG9zdCBzaG93cyA0IHFlbXUteXN0ZW0teDg2XzY0IHRocmVhZHMgdXNpbmcgOTMlLCAzNCUsIDI0
+JSwgMTYlIENQVQo+ID4+IHdoZW4gcGxheWluZyBhIDcyMHg1NzYgdmlkZW8gaW4gdGhlIGd1ZXN0
+Lgo+ID4+IEhvd2V2ZXIgdGhlIGd1ZXN0IHNob3dzIG9ubHkgMTQlIGFuZCA3JSB1c2UgZm9yIGl0
+cyAyIHZDUFVzIGluIGh0b3AKPiA+PiBiZWNhdXNlIGl0IHVzZXMgVkEtQVBJIChHUFQtZykgaW4g
+dGhlIHZpZGVvIHBsYXllciAodmxjLCBtcHYpLgo+ID4KPiA+IFdpdGggZWdsLWhlYWRsZXNzLCBz
+cGljZS1zZXJ2ZXIgZW5jb2RlcyB0aGUgd2hvbGUgc2NyZWVuLCBub3QgNzIweDU3Ngo+ID4gdmlk
+ZW8uIFNpbmNlIHRoZSBjbGllbnQKPiA+IHN1cHBvcnRzIGFsbW9zdCBubyBjb2RlYyBsaWtlbHkK
+PiA+IGl0J3MgdXNpbmcgbWpwZWcKPiA+Cj4gPj4KPiA+PiBTbyB0aGUgaG9zdCBxZW11IHRocmVh
+ZHMgdXNlIE1VQ0ggbW9yZSBDUFUgdGhhbiB0aGUgZ3Vlc3QuIFdoZW4gSQo+ID4+IGRpc2Nvbm5l
+Y3Qgc3BpY2UgKHZpZGVvIHN0aWxsIHBsYXlpbmcpIHRoZSBob3N0IHFlbXUgQ1BVIHVzYWdlIGRy
+b3BzIHRvCj4gPj4gMzUlLCAxJSwgMSUsIDElLCBhcyBleHBlY3RlZC4KPiA+PiBDb25jbHVzaW9u
+OiBTcGljZSBlbmNvZGluZyBvbiB0aGUgaG9zdCBpcyB2ZXJ5IENQVSBodW5ncnkuCj4gPgo+ID4g
+WW91ciBjb25jbHVzaW9uIG1ha2VzIHNlbnNlIHRvIG1lLgo+ID4KPiA+Pgo+ID4+IElzIGl0IHBv
+c3NpYmxlIHRvIEdQVS1hY2NlbGVyYXRlIHRoZSB2aWRlbyBlbmNvZGluZyBpbiB0aGUgaG9zdCBx
+ZW11Cj4gPj4gcHJvY2Vzcz8KPiA+Cj4gPiBJIHRoaW5rIGl0IGNhbiBub3QgdXNlIGFueXRoaW5n
+IG90aGVyIHRoYW4gbWpwZWcgaWYgdGhhdCdzIHRoZSBvbmx5IGNvZGVjCj4gPiB0aGUgY2xpZW50
+IHN1cHBvcnRzLgo+ID4KPiA+PiBJJ3ZlIGJ1aWx0IHNwaWNlIGFuZCBxZW11IHdpdGggZ3N0cmVh
+bWVyIGFuZCBkcm0gc3VwcG9ydCBhbmQgVkEtQVBJIGlzCj4gPj4gd29ya2luZyBuaWNlbHkuCj4g
+Pj4gQ2FuIHNwaWNlIHVzZSB0aGF0PyBIb3c/Cj4gPgo+ID4gUG9zc2libHksIGZvciBIMjY0IHlv
+dSBuZWVkIHRvIGNoYW5nZSB0aGUgZ2V0X2dzdF9jb2RlY19uYW1lIChnc3RyZWFtZXIKPiA+IHBp
+cGUpOwo+ID4gRm9yIHZwOCBpdCBzaG91bGQgYmUgZG9uZSBhbHJlYWR5Lgo+ID4KPiA+Pgo+ID4+
+Pj4KPiA+Pj4+IFVuZm9ydHVuYXRlbHkgdmlkZW8gcGxheWJhY2sgaXMgc3RpbGwgbm90IHNtb290
+aGVyLiBJbiBmYWN0IGl0IGlzIGFib3V0Cj4gPj4+PiB0aGUgc2FtZSBzbW9vdGhuZXNzIGJ1dCBu
+ZXcgdmlzdWFsIGFydGVmYWN0cyBpbiB0aGUgdmlkZW8gbWFrZSBpdAo+ID4+Pj4gd29yc2UuIEkg
+dGhpbmsgdGhpcyBpcyBkdWUgdG8gZWdsLWhlYWRsZXNzLgo+ID4+Pj4gRm9yIHRlc3RpbmcvY29t
+cGFyaXNvbiBJIGluc3RhbGxlZCBhIFdpbmRvd3MgMTAgZ3Vlc3Qgd2l0aCB0aGUgc2FtZQo+ID4+
+Pj4gR1ZULWcgR1BVIGFuZCB1c2VkIFJEUCB3aXRoIGgyNjQgYWN0aXZhdGVkLiBQbGF5YmFjayB3
+YXMgbXVjaCBiZXR0ZXIKPiA+Pj4+IGFuZCB1c2VkIG9ubHkgYWJvdXQgMTIwTUJpdC9zLgo+ID4+
+Pj4KPiA+Pj4+IE5leHQgSSB0cmllZCB1c2luZyB0aGUgc3BpY2Utc3RyZWFtaW5nLWFnZW50IGlu
+IHRoZSBndWVzdCB0byBzZW5kIGEgaDI2NAo+ID4+Pj4gZW5jb2RlZCBwaWN0dXJlIHZpYSBzcGlj
+ZS4KPiA+Pj4+IEhvd2V2ZXIsIHRoZSB3aW5kb3dzIGJ1aWxkIG9mIHJlbW90ZS12aWV3ZXIgZG9l
+c24ndCBzZWVtIHRvIHN1cHBvcnQKPiA+Pj4+IHRoaXMuIFRoZSBuZXcgc3BpY2UgZGlzcGxheSBp
+cyBjcmVhdGVkIGFuZCBJIHNlZSB0aGUgbW91c2UgY3Vyc29yIGluIGl0Cj4gPj4+PiBidXQgbm8g
+cGljdHVyZSAoanVzdCBibGFjaykuCj4gPj4+Cj4gPj4+IFlvdSBtYXkgYmUgdGhlIGZpcnN0IHRv
+IHRlc3Qgc3BpY2Utc3RyZWFtaW5nLWFnZW50ICsgd2luZG93cyBjbGllbnQuCj4gPj4+Cj4gPj4+
+IEkgdGhpbmsgdGhlcmUgaXMgc29tZSB3b3JrIHRvIGJlIGRvbmUgaW4gdGhlIHdpbmRvd3MgY2xp
+ZW50IHRvIG1ha2UKPiA+Pj4gaXQgaGFuZGxlIGJldHRlciBzdHJlYW1zIGZyb20gc3BpY2Utc3Ry
+ZWFtaW5nLWFnZW50Cj4gPj4+Cj4gPj4+IEFsc28gdGhlcmUgaXMgc29tZSB3b3JrIHRvIGJlIGRv
+bmUgdG8gZW5hYmxlIHNwaWNlLXN0cmVhbWluZy1hZ2VudAo+ID4+PiBvbiB3aW5kb3dzIGd1ZXN0
+cy4KPiA+Pj4KPiA+Pj4+IExvZyBmcm9tIHRoZSBndWVzdDoKPiA+Pj4+IGZlbGl4QGlkZWZpeDp+
+JCAuL3NwaWNlLXN0cmVhbWluZy1hZ2VudCAtZAo+ID4+Pj4gc3BpY2Utc3RyZWFtaW5nLWFnZW50
+WzI0NjVdOiBHT1QgU1RBUlRfU1RPUCBtZXNzYWdlIC0tIHJlcXVlc3QgdG8gU1RBUlQKPiA+Pj4+
+IHN0cmVhbWluZwo+ID4+Pj4gc3BpY2Utc3RyZWFtaW5nLWFnZW50WzI0NjVdOiBzdHJlYW1pbmcg
+c3RhcnRzIG5vdwo+ID4+Pj4gc3BpY2Utc3RyZWFtaW5nLWFnZW50WzI0NjVdOiBHb3QgZGV2aWNl
+IGluZm8gb2YgMSBkZXZpY2VzIGZyb20gdGhlCj4gPj4+PiBwbHVnaW4KPiA+Pj4+IHNwaWNlLXN0
+cmVhbWluZy1hZ2VudFsyNDY1XTrCoMKgwqAgc3RyZWFtIGlkIDA6IGRldmljZSBhZGRyZXNzOgo+
+ID4+Pj4gcGNpLzAwMDAvMDYuMCwgZGV2aWNlIGRpc3BsYXkgaWQ6IDIKPiA+Pj4+IHNwaWNlLXN0
+cmVhbWluZy1hZ2VudFsyNDY1XTogZ290IGEgZnJhbWUgLS0gc2l6ZSBpcyAzMjEyNjUgKDI2IG1z
+KQo+ID4+Pj4gKDE1ODk2NDE2NjAyODUgbXMgZnJvbSBsYXN0IGZyYW1lKSgxNTg5NjQxNjYwMjU4
+MTM2IHVzKQo+ID4+Pj4gc3BpY2Utc3RyZWFtaW5nLWFnZW50WzI0NjVdOiB3WGggMTkyMFgxMjAw
+wqAgY29kZWM9MQo+ID4+Pgo+ID4+PiBOb3RlIHRoYXQgaXQncyBub3QgSDI2NCwgYnV0IE1KUEVH
+IChjb2RlYz0xKQo+ID4+Cj4gPj4gWW91IGFyZSByaWdodCwgc28gSSBkZWJ1Z2dlZCB0aGlzOgo+
+ID4+Cj4gPj4gTGF1bmNoaW5nIHNwaWNlLXN0cmVhbWluZy1hZ2VudCB3aXRoIEdTVF9ERUJVRz02
+IHNob3dzIGEgYnVuY2ggb2YgaDI2NAo+ID4+IHJlbGF0ZWQgbWVzc2FnZXMgd2hpY2ggc2VlbSB0
+byBpbmRpY2F0ZSB0aGF0IHRoZSBnc3RyZWFtZXIgY29kZWNzIGFyZQo+ID4+IGxvYWRlZCAobm90
+IHN1cmUpOgo+ID4+IGdzdHJlZ2lzdHJ5LmM6NDYxOmdzdF9yZWdpc3RyeV9hZGRfcGx1Z2luOjxy
+ZWdpc3RyeTA+IGFkZGluZyBwbHVnaW4KPiA+PiAweDU1ZDI3OWY4ZmU3MCBmb3IgZmlsZW5hbWUK
+PiA+PiAiL3Vzci9saWIveDg2XzY0LWxpbnV4LWdudS9nc3RyZWFtZXItMS4wL2xpYmdzdHV2Y2gy
+NjQuc28iCj4gPj4gZ3N0cmVnaXN0cnkuYzo1Nzc6Z3N0X3JlZ2lzdHJ5X2FkZF9mZWF0dXJlOjxy
+ZWdpc3RyeTA+IGFkZGluZyBmZWF0dXJlCj4gPj4gMHg1NWQyNzlmZTE2NTAgKHZpZGVvL3gtaDI2
+NCkKPiA+PiBnc3RyZWdpc3RyeWNodW5rcy5jOjcyOTpnc3RfcmVnaXN0cnlfY2h1bmtzX2xvYWRf
+ZmVhdHVyZTogQWRkZWQgZmVhdHVyZQo+ID4+IHZwOGVuYywgcGx1Z2luIDB4NTVkMjc5ZWQxMTUw
+IHZweAo+ID4+Cj4gPj4gSG93ZXZlciBJIGRpZG4ndCBmaW5kIGFuIGFyZ3VtZW50IHRvIGZvcmNl
+IHNwaWNlLXN0cmVhbWluZy1hZ2VudCB0byB1c2UgYQo+ID4+IHNwZWNpZmljIGNvZGVjLiBSZWFk
+aW5nIHRoZSBzb3VyY2UgY29kZSBJIGZvdW5kIHRoZSBvcHRpb24gIi1jCj4gPj4gY29kZWNfbmFt
+ZT1oMjY0IiwgYnV0IGl0IGRvZXNuJ3Qgc2VlbSB0byBoYXZlIGFueSBlZmZlY3QuCj4gPj4KPiA+
+PiBNYXliZSBpdCBmYWlscyBhdXRvLW5lZ290aWF0aW9uIHdpdGggdGhlIGNsaWVudCB3aGljaCBk
+b2VzIG5vdCBzdXBwb3J0IGl0Pwo+ID4KPiA+IExpa2VseS4KPiA+Cj4gPiBVcmkuCj4gPgo+ID4+
+IE9uIHRoZSBjbGllbnQgd2l0aCB0aGUgIi0tc3BpY2UtZGVidWciIG9wdGlvbiBJIGZvdW5kIGlu
+dGVyZXN0aW5nCj4gPj4gbWVzc2FnZXM6Cj4gPj4KPiA+PiAocmVtb3RlLXZpZXdlci5leGU6MTU5
+NTYpOiBTcGljZS1ERUJVRzogMTc6MTc6MDYuMjE4Ogo+ID4+IC4uL3NyYy9jaGFubmVsLWRpc3Bs
+YXktZ3N0LmM6NzkyOmdzdHZpZGVvX2hhc19jb2RlYzogTm8gdmlkZW8gZGVjb2RlcnMKPiA+PiBm
+cm9tIEdTdHJlYW1lciBmb3IgbWpwZWcgd2VyZSBmb3VuZAo+ID4+IChyZW1vdGUtdmlld2VyLmV4
+ZToxNTk1Nik6IEdTcGljZS1ERUJVRzogMTc6MTc6MDYuMjE4Ogo+ID4+IC4uL3NyYy9jaGFubmVs
+LWRpc3BsYXkuYzo4OTQgR1N0cmVhbWVyIGRvZXMgbm90IHN1cHBvcnQgdGhlIG1qcGVnIGNvZGVj
+Cj4gPj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogU3BpY2UtREVCVUc6IDE3OjE3OjA2LjIx
+OToKPiA+PiAuLi9zcmMvY2hhbm5lbC1kaXNwbGF5LWdzdC5jOjc5Mjpnc3R2aWRlb19oYXNfY29k
+ZWM6IE5vIHZpZGVvIGRlY29kZXJzCj4gPj4gZnJvbSBHU3RyZWFtZXIgZm9yIHZwOCB3ZXJlIGZv
+dW5kCj4gPj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogR1NwaWNlLURFQlVHOiAxNzoxNzow
+Ni4yMjA6Cj4gPj4gLi4vc3JjL2NoYW5uZWwtZGlzcGxheS5jOjg5NCBHU3RyZWFtZXIgZG9lcyBu
+b3Qgc3VwcG9ydCB0aGUgdnA4IGNvZGVjCj4gPj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTog
+U3BpY2UtREVCVUc6IDE3OjE3OjA2LjIyMToKPiA+PiAuLi9zcmMvY2hhbm5lbC1kaXNwbGF5LWdz
+dC5jOjc5Mjpnc3R2aWRlb19oYXNfY29kZWM6IE5vIHZpZGVvIGRlY29kZXJzCj4gPj4gZnJvbSBH
+U3RyZWFtZXIgZm9yIGgyNjQgd2VyZSBmb3VuZAo+ID4+IChyZW1vdGUtdmlld2VyLmV4ZToxNTk1
+Nik6IEdTcGljZS1ERUJVRzogMTc6MTc6MDYuMjIyOgo+ID4+IC4uL3NyYy9jaGFubmVsLWRpc3Bs
+YXkuYzo4OTQgR1N0cmVhbWVyIGRvZXMgbm90IHN1cHBvcnQgdGhlIGgyNjQgY29kZWMKPiA+PiAo
+cmVtb3RlLXZpZXdlci5leGU6MTU5NTYpOiBTcGljZS1ERUJVRzogMTc6MTc6MDYuMjIzOgo+ID4+
+IC4uL3NyYy9jaGFubmVsLWRpc3BsYXktZ3N0LmM6NzkyOmdzdHZpZGVvX2hhc19jb2RlYzogTm8g
+dmlkZW8gZGVjb2RlcnMKPiA+PiBmcm9tIEdTdHJlYW1lciBmb3IgdnA5IHdlcmUgZm91bmQKPiA+
+PiAocmVtb3RlLXZpZXdlci5leGU6MTU5NTYpOiBHU3BpY2UtREVCVUc6IDE3OjE3OjA2LjIyNDoK
+PiA+PiAuLi9zcmMvY2hhbm5lbC1kaXNwbGF5LmM6ODk0IEdTdHJlYW1lciBkb2VzIG5vdCBzdXBw
+b3J0IHRoZSB2cDkgY29kZWMKPiA+PiAocmVtb3RlLXZpZXdlci5leGU6MTU5NTYpOiBTcGljZS1E
+RUJVRzogMTc6MTc6MDYuMjI3Ogo+ID4+IC4uL3NyYy9jaGFubmVsLWRpc3BsYXktZ3N0LmM6Nzky
+OmdzdHZpZGVvX2hhc19jb2RlYzogTm8gdmlkZW8gZGVjb2RlcnMKPiA+PiBmcm9tIEdTdHJlYW1l
+ciBmb3IgaDI2NSB3ZXJlIGZvdW5kCj4gPj4gKHJlbW90ZS12aWV3ZXIuZXhlOjE1OTU2KTogR1Nw
+aWNlLURFQlVHOiAxNzoxNzowNi4yMzA6Cj4gPj4gLi4vc3JjL2NoYW5uZWwtZGlzcGxheS5jOjg5
+NCBHU3RyZWFtZXIgZG9lcyBub3Qgc3VwcG9ydCB0aGUgaDI2NSBjb2RlYwo+ID4+Cj4gPj4gQW55
+IGlkZWFzIGhvdyB0byBmaXggdGhpcz8gU2hvdWxkIEkgb3BlbiBhIGJ1ZyByZXBvcnQgPgo+ID4+
+Pj4gPHNuaXBwZWQ+Cj4gPj4+Pgo+ID4+Pj4gSWYgSSB1c2UgcmVtb3RlIHZpZXdlciBmcm9tIGEg
+bGludXggY2xpZW50IHRoZW4gaXQgZG9lcyBpbmRlZWQgd29yayEKPiA+Pj4+IFBsYXliYWNrIGlz
+IG5lYXJseSBzbW9vdGgsIGFib3V0IHRoZSBzYW1lIGFzIHdpdGggUkRQIGFuZCBoMjY0IQo+ID4+
+Pj4gU28gSSBndWVzcyBpdCdzIGEgYnVnIGluIHRoZSB3aW5kb3dzIHJlbW90ZS12aWV3ZXIuIFNl
+ZW1zIGxpa2UgaXQKPiA+Pj4+IGRvZXNuJ3QgaGF2ZSBnc3RyZWFtZXIgc3VwcG9ydCwgc28gSSds
+bCBvcGVuIGEgYnVnIHJlcG9ydC4KPiA+Pj4+Cj4gPj4+PiBBbnkgb3RoZXIgaWRlYXMgd2hhdCBJ
+IGNhbiB0cnkgdG8gZ2V0IGdvb2QgcmVhc29uYWJsZSB2aWRlbyBwbGF5YmFjawo+ID4+Pj4gd2l0
+aCBnb29kIG9mZmljZS13b3JrIHBlcmZvcm1hbmNlPwo+ID4+Pj4KPiA+Pj4+IE9uIGEgc2lkZSBu
+b3RlOiBBdWRpbyB2aWEgc3BpY2UgaXNuJ3Qgd29ya2luZy4gSSBoZWFyIGEgZmV3IHN0cmFuZ2UK
+PiA+Pj4+IG5vaXNlcyBhbmQgdGhlbiBvbmx5IHNpbGVuY2UuIFNvIEkgdXNlIHB1bHNlYXVkaW8g
+dHJhbnNtaXR0aW5nIHRoZQo+ID4+Pj4gc291bmQgdG8gdGhlIGNsaWVudCBpbmRlcGVuZGVudCBv
+ZiBzcGljZS4KPiA+Pgo+ID4+IEZvdW5kIHRoZSByZWFzb246IEl0J3MgYSByZWdyZXNzaW9uIGlu
+IHRoZSB3aW5kb3dzIHZlcnNpb24gb2YKPiA+PiByZW1vdGUtdmlld2VyLiBXYXMgY2F1c2VkIGJ5
+IGxpYmdzdGRpcmVjdHNvdW5kLmRsbCBiZWluZyByZXBsYWNlZCB3aXRoCj4gPj4gbGliZ3N0d2Fz
+YXBpLmRsbCBhbmQgdGhpcyBjaGFuZ2VkIHRoZSBhdWRpbyBzdWJzeXN0ZW0gYmVpbmcgdXNlZC4K
+PiA+PiBEZXRhaWxzOiBodHRwczovL2dpdGxhYi5jb20vdmlydC12aWV3ZXIvdmlydC12aWV3ZXIv
+LS9pc3N1ZXMvMgo+ID4+Cj4gPj4gQ2hlZXJzLAo+ID4+IEZlbGl4Cj4gPj4KPiAKPiBfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IFNwaWNlLWRldmVsIG1h
+aWxpbmcgbGlzdAo+IFNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0dHBzOi8v
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwKPiAKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVs
+IG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
+aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo=
