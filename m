@@ -1,53 +1,62 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E70FB232B83
-	for <lists+spice-devel@lfdr.de>; Thu, 30 Jul 2020 07:46:29 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66A49232D6A
+	for <lists+spice-devel@lfdr.de>; Thu, 30 Jul 2020 10:10:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C9CE26E854;
-	Thu, 30 Jul 2020 05:46:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9F8396E893;
+	Thu, 30 Jul 2020 08:10:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F3696E171
- for <spice-devel@lists.freedesktop.org>; Wed, 29 Jul 2020 22:13:36 +0000 (UTC)
-Received: by mail-qk1-x72c.google.com with SMTP id j187so23811542qke.11
- for <spice-devel@lists.freedesktop.org>; Wed, 29 Jul 2020 15:13:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=OoY2bEFpvKAZd4H2+DpP/H+9pN5VSyimrTqEvwpNzLU=;
- b=JdEUKf13fa6XUREL0D8Ws+z7Kn1hoPkk1rTHfv2etwpeo0+LMvMrr4UgjXOPctQMv+
- kyiF5DOnqzyLV+g3Q+UMPwpin//Wt1mvfmqoqV8nAfd0soJbEeji8HyqQksGRAJH1/AI
- 3GhAiA7O5l4udzFfrRQXSn61Sq5f7IUjT8hQVIs2F2w5LZTJQS6zW5PnHI5Rs9i5jH2P
- HcYb7rQHDXuUf+0VcA0rtdBuHPxgdU0puQtCPCucVnJxG5ELtcysrIX41qlyWSCcay+W
- Wgb5dVAqzOqd4EQutn8zoYaEy7Oojhv4KiflkPG/woej3+D2uco+OUYOknJf4lmGcT3P
- nzIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=OoY2bEFpvKAZd4H2+DpP/H+9pN5VSyimrTqEvwpNzLU=;
- b=HzMrTms+3/wXus/x2tfKmVMnt7TxfsHw86MHJQyhWUPB5quZQF/RSGl/gKtAAbivk3
- qCecT/uNrn0N/XwtmUBB7Hx4GrySNx8KpiSOU8GgMddKCch51fP4jpWaxfyXpQdVe6qh
- k8JvUp0us6bwwKuSroiV04hmGrSnTreY156VF8qyaWBNwmvb648Vn43gN7TAoBTg8Zn+
- 4VJqXhMySAMapBcrfyU9HhsnOMgIzVDIiFtLFBuXeVqWWkVer87GCl/hB/tqK5CVb7Jv
- lmXit2WP6Y9WTe66Sq78IWvketnIRdzCL+ajLBXw7jlYqZGA7xIFDBSR2Cth+oSn51/h
- d/Kg==
-X-Gm-Message-State: AOAM5312RFTZUut9YEbCDlhNS8vJVTYLzVi/J6cwqNTkIqK4nM6KkC9K
- QKcvIQaQeZH3gCWQqeKE41QtrBQwkQHQUozkFsMaGHQF
-X-Google-Smtp-Source: ABdhPJzSVLs6bAfnazJrcsdZLwlJMndsXJ2Y1HZefTpK912CqKI/kF/xeOuJzp1+QoLofqaua0Vlj57mnlD0zeMBfhM=
-X-Received: by 2002:a37:b907:: with SMTP id j7mr7348907qkf.120.1596060815325; 
- Wed, 29 Jul 2020 15:13:35 -0700 (PDT)
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B88706E893
+ for <spice-devel@lists.freedesktop.org>; Thu, 30 Jul 2020 08:10:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1596096625;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Uj0kNaDJA4krf0WKlYa/XflPTtH9h2/zMUhxxdL1zgc=;
+ b=fsEWUQClM38kNkSNjGZDqyB9hr7X4rdeW5a+VF1zReXbkY1CGTlqBJjZA0Jlh8xG27wlla
+ mA2xLuQDmPjyaEPDlRP6gt7ALcwsQ94kv77ZgxcDvZDsg4ByBjCmSWtn57pfX+xI1AD6eO
+ ZNE/VMqHw6dHwkTaPhF+njFVW5pUMi8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-90-80DuNB8NM429V6tgUSp0QQ-1; Thu, 30 Jul 2020 04:10:19 -0400
+X-MC-Unique: 80DuNB8NM429V6tgUSp0QQ-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 15A0D1800D4A;
+ Thu, 30 Jul 2020 08:10:18 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 0E9611002388;
+ Thu, 30 Jul 2020 08:10:18 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 06C07180954D;
+ Thu, 30 Jul 2020 08:10:18 +0000 (UTC)
+Date: Thu, 30 Jul 2020 04:10:15 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Koopa Koopa <codingkoopa@gmail.com>
+Message-ID: <74120881.36683304.1596096615307.JavaMail.zimbra@redhat.com>
+In-Reply-To: <CAM1wO0kUjpzX+G-YjaG7JfhnRAvFJ2g-n6ZQByPBMYRng6jvNA@mail.gmail.com>
+References: <CAM1wO0kUjpzX+G-YjaG7JfhnRAvFJ2g-n6ZQByPBMYRng6jvNA@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 2002:ad4:4494:0:0:0:0:0 with HTTP; Wed, 29 Jul 2020 15:13:34
- -0700 (PDT)
-From: Koopa Koopa <codingkoopa@gmail.com>
-Date: Wed, 29 Jul 2020 18:13:34 -0400
-Message-ID: <CAM1wO0kUjpzX+G-YjaG7JfhnRAvFJ2g-n6ZQByPBMYRng6jvNA@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
-X-Mailman-Approved-At: Thu, 30 Jul 2020 05:46:25 +0000
-Subject: [Spice-devel] Webdav on Windows XP
+X-Originating-IP: [10.33.32.2, 10.4.195.7]
+Thread-Topic: Webdav on Windows XP
+Thread-Index: rwOYNKcGExmnldyeUOx4ShEhqXeYiA==
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] Webdav on Windows XP
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,39 +68,59 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi all,
+> 
+> Hi all,
+> 
+> I'm trying to setup a Windows XP SP3 virtual machine with SPICE folder
+> sharing. The latest version, v2.4, fails to install, as the
+> spice-webdavd service fails to start. Running spice-webdavd.exe
+> manually yields the error message "The procedure entry point
+> AcquireSRWLockExclusive could not be located in the dynamic link
+> library KERNEL32.dll", which seems to be a deficiency in using XP [1].
+> After some digging, I've determined that the cause of this is that,
+> when starting the service, spice-webdavd calls g_mutex_lock from Glib
+> [2], which had XP support removed a couple of years ago [3].
+> 
+> Version v2.2, which comes from before the Glib change was made,
+> successfully installs and runs. I have been able to map and somewhat
+> use a network drive mapped to the share, but it has broken and I can't
+> seem to get it working again; Windows just says that "The network path
+> http://localhost:9843 could not be found." Strangely enough, when
+> going to that address in Mypal, the share directory is displayed
+> without any issues, and I can browse it.
+> 
 
-I'm trying to setup a Windows XP SP3 virtual machine with SPICE folder
-sharing. The latest version, v2.4, fails to install, as the
-spice-webdavd service fails to start. Running spice-webdavd.exe
-manually yields the error message "The procedure entry point
-AcquireSRWLockExclusive could not be located in the dynamic link
-library KERNEL32.dll", which seems to be a deficiency in using XP [1].
-After some digging, I've determined that the cause of this is that,
-when starting the service, spice-webdavd calls g_mutex_lock from Glib
-[2], which had XP support removed a couple of years ago [3].
+The purpose of spice-webdavd is to provide the port to be able to use
+webdav from the guest. If another program is able to use it I would
+try to understand why Windows cannot.
 
-Version v2.2, which comes from before the Glib change was made,
-successfully installs and runs. I have been able to map and somewhat
-use a network drive mapped to the share, but it has broken and I can't
-seem to get it working again; Windows just says that "The network path
-http://localhost:9843 could not be found." Strangely enough, when
-going to that address in Mypal, the share directory is displayed
-without any issues, and I can browse it.
+Just to confirm, using netstat in the guest can you see the port (9843)
+in listening state?
+Is the Windows XP service running?
 
-If this configuration is not supported, I totally understand. Part of
-why I want to point this out is so that, at the very least, this
-incompatibility could be added to the Spice User Manual [4]. Thanks!
+> If this configuration is not supported, I totally understand. Part of
+> why I want to point this out is so that, at the very least, this
+> incompatibility could be added to the Spice User Manual [4]. Thanks!
+> 
 
-[1] https://github.com/rclone/rclone/issues/1481
-[2] https://gitlab.gnome.org/GNOME/phodav/-/blob/2fe6090823b251c7accfd1f9706d2577e06fe189/spice/spice-webdavd.c#L636
-[3] https://gitlab.gnome.org/GNOME/glib/-/commit/cce29579389e892eb263d8507a71b3b3ca7433bb
-[4] https://www.spice-space.org/spice-user-manual.html
+I would avoid it, Microsoft stopped supporting XP more than 6 years
+ago. Windows XP is abandonware.
+
+> [1] https://github.com/rclone/rclone/issues/1481
+> [2]
+> https://gitlab.gnome.org/GNOME/phodav/-/blob/2fe6090823b251c7accfd1f9706d2577e06fe189/spice/spice-webdavd.c#L636
+> [3]
+> https://gitlab.gnome.org/GNOME/glib/-/commit/cce29579389e892eb263d8507a71b3b3ca7433bb
+> [4] https://www.spice-space.org/spice-user-manual.html
+
+Frediano
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
