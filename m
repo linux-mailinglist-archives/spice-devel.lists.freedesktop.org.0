@@ -2,64 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 508C623EDBD
-	for <lists+spice-devel@lfdr.de>; Fri,  7 Aug 2020 15:12:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7119723FEA0
+	for <lists+spice-devel@lfdr.de>; Sun,  9 Aug 2020 15:56:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DBC506E12F;
-	Fri,  7 Aug 2020 13:12:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9C9D489F9F;
+	Sun,  9 Aug 2020 13:56:17 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
- [IPv6:2a00:1450:4864:20::341])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 098C96E12F
- for <spice-devel@lists.freedesktop.org>; Fri,  7 Aug 2020 13:12:06 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id g8so1691546wmk.3
- for <spice-devel@lists.freedesktop.org>; Fri, 07 Aug 2020 06:12:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=EEI1Q+fppn24GUPwdHUe/rrjbN2XPprAGHaCmC9qOCk=;
- b=N78Hjx0pAcuP2VQLKJkukTxDF+52k9EvIjw1q3rhWkg1C+u2aeSRZYWPwPKisJXP8Q
- Dbx7yoJIM1L5p+lScZJ5ji9JdlO60MwT7urL//OWbV4LZewRq5sblDIb7zYNecfVdw7+
- j2I7l6qqQeMtKspM19SnVntRgx2QpvKM/9eAU=
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 99E946E250
+ for <spice-devel@lists.freedesktop.org>; Sat,  8 Aug 2020 19:45:24 +0000 (UTC)
+Received: by mail-io1-xd2d.google.com with SMTP id z6so5186638iow.6
+ for <spice-devel@lists.freedesktop.org>; Sat, 08 Aug 2020 12:45:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=clientandfuller-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=K/KRcPLisskpdxQpd/lkOdPDB9GF+1KjxBI6bARysgo=;
+ b=oIb4t+nDLFg3mJAV5T+3V+CA4Cjo12KBtjYusnz1KQJV9BUEkhshGx5v7vKZLZEaVA
+ BYGJVxMlErUZ8PGEhT8kNb3FZMWRohoMCDeib9f1Z9aPbJ5aJRSYVcT2e/b655ZNiF4d
+ ZlJ3l8fDJeP+PsgOf7PiImSPfB8M0ye3CpcpQ+k5GUjy4tJ57jXVDJZEeQsmMrOmPLxf
+ VwqEVk5FjVGr+E7x0jgUMExdcAL4SjlBwWMz9ytTb6gI8tGwh3O9Q317D/DyC/nMGmN1
+ eeHp7nLcS+1uXFYGbxzqJBN02ttNg4R3fcCcf/tHmwwjChAF593axujdcSvq0LoOlSko
+ bNSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=EEI1Q+fppn24GUPwdHUe/rrjbN2XPprAGHaCmC9qOCk=;
- b=rjJu/NYb3rM0WkMS1q6vYiGwFN8Buo0xGcL1R9a4yKK60hSFhnhKLDvrsYENWmtAFz
- aCJNQ6T80kWkrVwo/q0NmsFpRjtpyxxmesWtXezeO3yEERlnPdeIN/MJMb9U8fZgemav
- fASSaDUPCZlZZQQpM7RwwzXRoTkG8nbY5McCO6oh+vsrQ9BFdXRUVZr1+o6Pf1ET0hXZ
- NlVcAwMYF+vBDDl4BPzsEYbNQQ5mH6bWhJZ5eP6G93U1e2fcXiASL1k2RuAAIGwWwdhy
- l2oqaFJP4rmx8A4uWG1sx4EyZ8XIK8Uy8lUZk937YX/3/Ev/JNkamjEc8/18x7uOZbZl
- bF9w==
-X-Gm-Message-State: AOAM530dt0IOl0kwWJLJaBKFLUXLcpmToCFBeAN2wSv+iBg1zE6YT7mW
- bf8rB2o26d4BffLZPYt5/Lvy0w==
-X-Google-Smtp-Source: ABdhPJyD5OPGKoTthEZngYIDRYz+e6OwbxqKcFkbXwnJNTrU9Di7izRE54UTv2wtNjkvOJXMA2srGQ==
-X-Received: by 2002:a7b:c258:: with SMTP id b24mr12470414wmj.122.1596805924546; 
- Fri, 07 Aug 2020 06:12:04 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id l11sm9904436wme.11.2020.08.07.06.12.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Aug 2020 06:12:03 -0700 (PDT)
-Date: Fri, 7 Aug 2020 15:12:01 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Message-ID: <20200807131201.GF2352366@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, 
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20200807105501.24599-1-kraxel@redhat.com>
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=K/KRcPLisskpdxQpd/lkOdPDB9GF+1KjxBI6bARysgo=;
+ b=s/4QCHo/1CDqKTjvXGjbtMKujUjtDYkbHmCQwVzxOMVj9WQ2VwuFh1ULv7J8SsoLg6
+ FozPwMCFKdyQ8u8A03JyoQjITMntj6qNrFECk97DtCfMkfJN5cTMtoyY0ZGMozXesZDa
+ fjvEyUf1vQlvlZwxD9Odj3eq5lO9N8jf6L00H0Vl7wsVVyK91NaFi5biC7r0Fl7/o1ig
+ 9PB0Meo9VauxGYX/BXtOAWoKmBNQ5DI7o1b7QyTlyDySVT7Ka+++5/44Iqnv40hLm418
+ XGlDkUib4VycW3RXJX8V4KCORHG9YsAQ8BV2KfkanBC4t+sXOK70nCtQdImW3DYxuBj+
+ YNsA==
+X-Gm-Message-State: AOAM532wCrVk54dxH9F66dpC7EPA/Sgovy0j9eoq4QXC+dVjuMEw319M
+ vY131gg2ANmyR/JiYwM6iFs8T7u5NOHbhswUfqif4VynU9/OPA==
+X-Google-Smtp-Source: ABdhPJzzOguxjDrkgwX/ByXGU4AUUl3yVYtCn3WoQaTMgiycwJXiH7f5ML/v6tpomCpZDXYlcKqoreFdo/LOfH27eCU=
+X-Received: by 2002:a05:6638:27a:: with SMTP id
+ x26mr11340992jaq.43.1596915923624; 
+ Sat, 08 Aug 2020 12:45:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200807105501.24599-1-kraxel@redhat.com>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-Subject: Re: [Spice-devel] [PATCH v2] drm/qxl: don't take vga ports on rev5+
+From: "D. L. Fuller" <dlfuller@clientandfuller.com>
+Date: Sat, 8 Aug 2020 15:44:47 -0400
+Message-ID: <CAHUfaU-tGwT_1evuTRZ_U9P0y-P8opcAkgBWE1NVf5Q6FsbY2A@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Sun, 09 Aug 2020 13:56:16 +0000
+Subject: [Spice-devel] OSX Client Bundle
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,72 +59,90 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1293144950=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, Aug 07, 2020 at 12:55:01PM +0200, Gerd Hoffmann wrote:
-> qemu 5.0 introduces a new qxl hardware revision 5.  Unlike revision 4
-> (and below) the device doesn't switch back into vga compatibility mode
-> when someone touches the vga ports.  So we don't have to reserve the
-> vga ports any more to avoid that happening.
-> 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+--===============1293144950==
+Content-Type: multipart/alternative; boundary="0000000000005d3e1505ac62f622"
 
-Does what it says on the label.
+--0000000000005d3e1505ac62f622
+Content-Type: text/plain; charset="UTF-8"
 
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Noob here trying to use SPICE from a Mac for a Proxmox VM.
 
-> ---
->  drivers/gpu/drm/qxl/qxl_drv.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-> index 13872b882775..6e7f16f4cec7 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> @@ -96,7 +96,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
->  	if (ret)
->  		goto disable_pci;
->  
-> -	if (is_vga(pdev)) {
-> +	if (is_vga(pdev) && pdev->revision < 5) {
->  		ret = vga_get_interruptible(pdev, VGA_RSRC_LEGACY_IO);
->  		if (ret) {
->  			DRM_ERROR("can't get legacy vga ioports\n");
-> @@ -127,7 +127,7 @@ qxl_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
->  unload:
->  	qxl_device_fini(qdev);
->  put_vga:
-> -	if (is_vga(pdev))
-> +	if (is_vga(pdev) && pdev->revision < 5)
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
->  disable_pci:
->  	pci_disable_device(pdev);
-> @@ -155,7 +155,7 @@ qxl_pci_remove(struct pci_dev *pdev)
->  
->  	drm_dev_unregister(dev);
->  	drm_atomic_helper_shutdown(dev);
-> -	if (is_vga(pdev))
-> +	if (is_vga(pdev) && pdev->revision < 5)
->  		vga_put(pdev, VGA_RSRC_LEGACY_IO);
->  }
->  
-> -- 
-> 2.18.4
-> 
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+I downloaded and installed RemoteViewer from RemoteViewer-0.5.7-1.dmg.  And
+setup my Ubuntu VM for SPICE in the Proxmox Console. Then I had to download
+the "download" file which I assume is not needed in this case.
+
+
+RemoteViewer opens with a window requesting an URL.  Everything I try is
+rejected.
+
+
+What am I missing?  Any suggestions sure appreciated.
+
+
+*--Don*
+
+--0000000000005d3e1505ac62f622
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">
+
+
+
+
+
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia">Noob here trying to use SPICE from a Mac for a Pr=
+oxmox VM.</p>
+<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia;min-height:15px"><br></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia">I downloaded and installed RemoteViewer from Remo=
+teViewer-0.5.7-1.dmg.<span class=3D"gmail-Apple-converted-space">=C2=A0 </s=
+pan>And setup my Ubuntu VM for SPICE in the Proxmox Console. Then I had to =
+download the &quot;download&quot; file which I assume is not needed in this=
+ case.</p>
+<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia;min-height:15px"><br></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia">RemoteViewer opens with a window requesting an UR=
+L.<span class=3D"gmail-Apple-converted-space">=C2=A0 </span>Everything I tr=
+y is rejected.</p>
+<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia;min-height:15px"><br></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia">What am I missing?<span class=3D"gmail-Apple-conv=
+erted-space">=C2=A0 </span>Any suggestions sure appreciated.</p>
+<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
+rmal;font-family:Georgia;min-height:15px"><br></p><p class=3D"gmail-p2" sty=
+le=3D"margin:0px;font-variant-numeric:normal;font-variant-east-asian:normal=
+;font-stretch:normal;font-size:13px;line-height:normal;font-family:Georgia;=
+min-height:15px"><i>--Don</i></p></div>
+
+--0000000000005d3e1505ac62f622--
+
+--===============1293144950==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1293144950==--
