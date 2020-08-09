@@ -2,52 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7119723FEA0
-	for <lists+spice-devel@lfdr.de>; Sun,  9 Aug 2020 15:56:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8BFF23FEAD
+	for <lists+spice-devel@lfdr.de>; Sun,  9 Aug 2020 16:11:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9C9D489F9F;
-	Sun,  9 Aug 2020 13:56:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0570189FE3;
+	Sun,  9 Aug 2020 14:11:01 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 99E946E250
- for <spice-devel@lists.freedesktop.org>; Sat,  8 Aug 2020 19:45:24 +0000 (UTC)
-Received: by mail-io1-xd2d.google.com with SMTP id z6so5186638iow.6
- for <spice-devel@lists.freedesktop.org>; Sat, 08 Aug 2020 12:45:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=clientandfuller-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:from:date:message-id:subject:to;
- bh=K/KRcPLisskpdxQpd/lkOdPDB9GF+1KjxBI6bARysgo=;
- b=oIb4t+nDLFg3mJAV5T+3V+CA4Cjo12KBtjYusnz1KQJV9BUEkhshGx5v7vKZLZEaVA
- BYGJVxMlErUZ8PGEhT8kNb3FZMWRohoMCDeib9f1Z9aPbJ5aJRSYVcT2e/b655ZNiF4d
- ZlJ3l8fDJeP+PsgOf7PiImSPfB8M0ye3CpcpQ+k5GUjy4tJ57jXVDJZEeQsmMrOmPLxf
- VwqEVk5FjVGr+E7x0jgUMExdcAL4SjlBwWMz9ytTb6gI8tGwh3O9Q317D/DyC/nMGmN1
- eeHp7nLcS+1uXFYGbxzqJBN02ttNg4R3fcCcf/tHmwwjChAF593axujdcSvq0LoOlSko
- bNSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=K/KRcPLisskpdxQpd/lkOdPDB9GF+1KjxBI6bARysgo=;
- b=s/4QCHo/1CDqKTjvXGjbtMKujUjtDYkbHmCQwVzxOMVj9WQ2VwuFh1ULv7J8SsoLg6
- FozPwMCFKdyQ8u8A03JyoQjITMntj6qNrFECk97DtCfMkfJN5cTMtoyY0ZGMozXesZDa
- fjvEyUf1vQlvlZwxD9Odj3eq5lO9N8jf6L00H0Vl7wsVVyK91NaFi5biC7r0Fl7/o1ig
- 9PB0Meo9VauxGYX/BXtOAWoKmBNQ5DI7o1b7QyTlyDySVT7Ka+++5/44Iqnv40hLm418
- XGlDkUib4VycW3RXJX8V4KCORHG9YsAQ8BV2KfkanBC4t+sXOK70nCtQdImW3DYxuBj+
- YNsA==
-X-Gm-Message-State: AOAM532wCrVk54dxH9F66dpC7EPA/Sgovy0j9eoq4QXC+dVjuMEw319M
- vY131gg2ANmyR/JiYwM6iFs8T7u5NOHbhswUfqif4VynU9/OPA==
-X-Google-Smtp-Source: ABdhPJzzOguxjDrkgwX/ByXGU4AUUl3yVYtCn3WoQaTMgiycwJXiH7f5ML/v6tpomCpZDXYlcKqoreFdo/LOfH27eCU=
-X-Received: by 2002:a05:6638:27a:: with SMTP id
- x26mr11340992jaq.43.1596915923624; 
- Sat, 08 Aug 2020 12:45:23 -0700 (PDT)
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37DA989FE3
+ for <spice-devel@lists.freedesktop.org>; Sun,  9 Aug 2020 14:11:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1596982258;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eAKqhWbvQ4AZP2mAj81Wl83iXiy5WEpM67xzOYyou/I=;
+ b=MV8jwt5evIeGEoRqoqjxn4mNvdpMmWMYh480Y5qbwBwmIeuEEQw5Ei5vrlxddiVQ3yE59o
+ 31WtxqxtVrPojsh66k4sq+A/9NlD8eS7NMu5E7MkqdCMP1wKfWaDhBMrQeYJFSEg0QRTz5
+ 6qM36I3It36haSoJsjq2VzykJJl6uMI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-420-_BawLwsZOIKkXsNYsmtQoA-1; Sun, 09 Aug 2020 10:10:56 -0400
+X-MC-Unique: _BawLwsZOIKkXsNYsmtQoA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8C4581005504;
+ Sun,  9 Aug 2020 14:10:55 +0000 (UTC)
+Received: from lub.tlv (unknown [10.35.206.231])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B3D0B5FC3B;
+ Sun,  9 Aug 2020 14:10:54 +0000 (UTC)
+To: "D. L. Fuller" <dlfuller@clientandfuller.com>,
+ spice-devel@lists.freedesktop.org
+References: <CAHUfaU-tGwT_1evuTRZ_U9P0y-P8opcAkgBWE1NVf5Q6FsbY2A@mail.gmail.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <f9eae79b-0d37-084b-3195-a2fb71c3ad07@redhat.com>
+Date: Sun, 9 Aug 2020 17:10:52 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-From: "D. L. Fuller" <dlfuller@clientandfuller.com>
-Date: Sat, 8 Aug 2020 15:44:47 -0400
-Message-ID: <CAHUfaU-tGwT_1evuTRZ_U9P0y-P8opcAkgBWE1NVf5Q6FsbY2A@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
-X-Mailman-Approved-At: Sun, 09 Aug 2020 13:56:16 +0000
-Subject: [Spice-devel] OSX Client Bundle
+In-Reply-To: <CAHUfaU-tGwT_1evuTRZ_U9P0y-P8opcAkgBWE1NVf5Q6FsbY2A@mail.gmail.com>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=uril@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] OSX Client Bundle
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,90 +66,45 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1293144950=="
+Reply-To: uril@redhat.com
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1293144950==
-Content-Type: multipart/alternative; boundary="0000000000005d3e1505ac62f622"
+On 8/8/20 10:44 PM, D. L. Fuller wrote:
+> Noob here trying to use SPICE from a Mac for a Proxmox VM.
+> 
 
---0000000000005d3e1505ac62f622
-Content-Type: text/plain; charset="UTF-8"
+Note that I do not run Promox VMs nor use a Mac client.
 
-Noob here trying to use SPICE from a Mac for a Proxmox VM.
+> 
+> I downloaded and installed RemoteViewer from 
+> RemoteViewer-0.5.7-1.dmg.And setup my Ubuntu VM for SPICE in the Proxmox 
+> Console. Then I had to download the "download" file which I assume is 
+> not needed in this case.
 
+Is the "download" file of type .vv, e.g. console.vv?
 
-I downloaded and installed RemoteViewer from RemoteViewer-0.5.7-1.dmg.  And
-setup my Ubuntu VM for SPICE in the Proxmox Console. Then I had to download
-the "download" file which I assume is not needed in this case.
+If it is, try running from the command line: remote-viewer 
+<path-of-console.vv>
 
+BTW, is 0.5.7 the latest verion of remote-viewer for Mac ?
 
-RemoteViewer opens with a window requesting an URL.  Everything I try is
-rejected.
+> 
+> RemoteViewer opens with a window requesting an URL.Everything I try is 
+> rejected.
+> 
+> 
+> What am I missing?Any suggestions sure appreciated.
+> 
 
+If you know the hostname and port the spice-server is listening
+on (via qemu-kvm), try -- spice://host:port
 
-What am I missing?  Any suggestions sure appreciated.
-
-
-*--Don*
-
---0000000000005d3e1505ac62f622
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">
-
-
-
-
-
-<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia">Noob here trying to use SPICE from a Mac for a Pr=
-oxmox VM.</p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia;min-height:15px"><br></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia">I downloaded and installed RemoteViewer from Remo=
-teViewer-0.5.7-1.dmg.<span class=3D"gmail-Apple-converted-space">=C2=A0 </s=
-pan>And setup my Ubuntu VM for SPICE in the Proxmox Console. Then I had to =
-download the &quot;download&quot; file which I assume is not needed in this=
- case.</p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia;min-height:15px"><br></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia">RemoteViewer opens with a window requesting an UR=
-L.<span class=3D"gmail-Apple-converted-space">=C2=A0 </span>Everything I tr=
-y is rejected.</p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia;min-height:15px"><br></p>
-<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia">What am I missing?<span class=3D"gmail-Apple-conv=
-erted-space">=C2=A0 </span>Any suggestions sure appreciated.</p>
-<p class=3D"gmail-p2" style=3D"margin:0px;font-variant-numeric:normal;font-=
-variant-east-asian:normal;font-stretch:normal;font-size:13px;line-height:no=
-rmal;font-family:Georgia;min-height:15px"><br></p><p class=3D"gmail-p2" sty=
-le=3D"margin:0px;font-variant-numeric:normal;font-variant-east-asian:normal=
-;font-stretch:normal;font-size:13px;line-height:normal;font-family:Georgia;=
-min-height:15px"><i>--Don</i></p></div>
-
---0000000000005d3e1505ac62f622--
-
---===============1293144950==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Uri
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============1293144950==--
