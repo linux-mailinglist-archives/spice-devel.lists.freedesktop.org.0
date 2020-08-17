@@ -1,60 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4A9A247DE4
-	for <lists+spice-devel@lfdr.de>; Tue, 18 Aug 2020 07:32:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FD622483FF
+	for <lists+spice-devel@lfdr.de>; Tue, 18 Aug 2020 13:40:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8604389D7D;
-	Tue, 18 Aug 2020 05:32:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0AAF089BB0;
+	Tue, 18 Aug 2020 11:40:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DD55789D77
- for <spice-devel@lists.freedesktop.org>; Tue, 18 Aug 2020 05:31:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597728718;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=9Noci4JN4Y072U2/9cvvICErzfzJhbNXxGZMILC+bAY=;
- b=RRagv0xuZtUm1jZ7uhcXckaLka/i0Z7et2sW2Q6EuDMlGxScHzGaRjP3qZmdaLxsOV1QIs
- zJ8opGqtLpvL1bZZsgqVeGbU/blBb2ib63XQVsz8ea7X0N2hfo+/HUt/tHLFzoJWhJXx58
- G1uoJgf5lMNj8N9uXm9/7OLFy1onwVc=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-360-FjLsA3E2NbqC72kR0e2Bow-1; Tue, 18 Aug 2020 01:31:54 -0400
-X-MC-Unique: FjLsA3E2NbqC72kR0e2Bow-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A8A4310082E5;
- Tue, 18 Aug 2020 05:31:52 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-195.ams2.redhat.com
- [10.36.112.195])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 117267D901;
- Tue, 18 Aug 2020 05:31:52 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id D96F617447; Tue, 18 Aug 2020 07:31:50 +0200 (CEST)
-Date: Tue, 18 Aug 2020 07:31:50 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Sean Paul <sean@poorly.run>
-Message-ID: <20200818053150.pwkga4vzipk7pf6t@sirius.home.kraxel.org>
-References: <20200817195846.14076-1-sean@poorly.run>
- <20200817200521.GA1551172@ravnborg.org>
- <CAMavQKL2=Gx+XCbMYc5p08jRNtH5ju=oadhxBxzgNf+gzo3fnA@mail.gmail.com>
- <CAMavQK+zsBHoMc_C=-=v-43u=tZ_pJ6XSGBhD6MLQN01pjbyEA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMavQK+zsBHoMc_C=-=v-43u=tZ_pJ6XSGBhD6MLQN01pjbyEA@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
-X-Mimecast-Spam-Score: 0.001
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: Fix build errors
+Received: from mail-qk1-x743.google.com (mail-qk1-x743.google.com
+ [IPv6:2607:f8b0:4864:20::743])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B93898984E
+ for <spice-devel@lists.freedesktop.org>; Mon, 17 Aug 2020 19:58:52 +0000 (UTC)
+Received: by mail-qk1-x743.google.com with SMTP id b14so16150338qkn.4
+ for <spice-devel@lists.freedesktop.org>; Mon, 17 Aug 2020 12:58:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poorly.run; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=xU/OG6O79qAJpRUJHqCBtq8zJaVc3EZyZVdl+5wcZRM=;
+ b=Ko4qegpWNtFSVLEeQI4gXqPbS8llypdR84EVgC3gY4CMu+A100ob3JNemmxAABbqk3
+ G5E4ty8S0zoJB7/ciDC6/5/hYKri7FdVmcn7tYCUrE88d3L0euuwzIanbSYGKpRJ9LQi
+ TgkY0sCCRiJct8GRsjWFcczcs6ErkzltXtL43Ez3niR1X0a13YiWQfG9H3BrGFJdoDsL
+ bcAVZLeqi8HTlc8ytpiLpkafA6uu2aYk3PfISy/HGQMfGGnQ0p1JMonSsa1m5E6dCHTz
+ Mg84cpt57IsjDSufU06nt/94y9cof1jcAyeF5OuMl7erca2qi1wT/jk7s9RRwV2/RZmM
+ zpVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=xU/OG6O79qAJpRUJHqCBtq8zJaVc3EZyZVdl+5wcZRM=;
+ b=jfaCrh6SVYO/LxlhoNrQ2NkzMnaeWOMNEAennRmqzCG3sVrcQUNNcwSszIhq1U54iJ
+ WyOp39blkCX5LmgBRuMCHcvpVrqOwgs4pyuHq4DgiBpwbKxwt0HijVLFndeeXN94ojsb
+ X6cGHpiyeKQnGu3kLFIITZoVfdXrzcJKX6xqEkSulz0f7mu5uzcb/K86cesPJCWhzT3Q
+ bC85IHdXGpTctP1WU+BRVOjyvRtEeyCTK2cdlZo+TLdlxnOwsRPfg52VpyFZ2lENOC9u
+ kZ3yTzvVxX5R4c0Wn1UFBaJZk6luyGoX2axmQAcEe/ZJTodjzhD10zO7udW3X37PXJ85
+ l1gw==
+X-Gm-Message-State: AOAM531YbLFnf4+rxyaHh37iJloNmB/IblbmnvonoIYhOx/lSdsDBOk1
+ wR2VikbTvjEeTJX0Pd2Jojmlwg==
+X-Google-Smtp-Source: ABdhPJzBYAedRoy68cQ0vEr2YM3vkFw8UixJcb006ITTDtCA7o6bIk9pvIQafxDkxq6fGfGJ4rBQ8Q==
+X-Received: by 2002:a37:afc3:: with SMTP id y186mr14469113qke.36.1597694331908; 
+ Mon, 17 Aug 2020 12:58:51 -0700 (PDT)
+Received: from localhost (mobile-166-170-57-110.mycingular.net.
+ [166.170.57.110])
+ by smtp.gmail.com with ESMTPSA id k55sm20463099qtf.17.2020.08.17.12.58.51
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 17 Aug 2020 12:58:51 -0700 (PDT)
+From: Sean Paul <sean@poorly.run>
+To: dri-devel@lists.freedesktop.org
+Date: Mon, 17 Aug 2020 15:58:38 -0400
+Message-Id: <20200817195846.14076-1-sean@poorly.run>
+X-Mailer: git-send-email 2.17.1
+X-Mailman-Approved-At: Tue, 18 Aug 2020 11:40:14 +0000
+Subject: [Spice-devel] [PATCH] drm/qxl: Fix build errors
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,28 +62,63 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org, Sean Paul <seanpaul@chromium.org>,
- Dave Airlie <airlied@redhat.com>, spice-devel@lists.freedesktop.org,
- Sidong Yang <realwakka@gmail.com>, Sam Ravnborg <sam@ravnborg.org>
+Cc: David Airlie <airlied@linux.ie>, virtualization@lists.linux-foundation.org,
+ Sean Paul <seanpaul@chromium.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, Sidong Yang <realwakka@gmail.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-  Hi,
+From: Sean Paul <seanpaul@chromium.org>
 
-> I guess things are never quite so easy :-). It looks like Daniel's
-> patch is in drm-misc-fixes and Sidong's patch is in drm-misc-next. On
-> their own they're fine, but once they are merged in drm-tip the build
-> error shows up.
+Introduced in the patch below, the END macro was missing 'dev' and BEGIN
+macro needs drm_drv_uses_atomic_modeset() from drm_drv.h
 
-Ah, ok.  I've already wondered how that got past my build testing.
-This explains it.
+Fixes: bbaac1354cc9 ("drm/qxl: Replace deprecated function in qxl_display")
+Cc: Sidong Yang <realwakka@gmail.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Signed-off-by: Sean Paul <seanpaul@chromium.org>
+---
+ drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-thanks for looking into it,
-  Gerd
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index fa79688013b7..5b4fd6952b53 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -28,6 +28,7 @@
+ 
+ #include <drm/drm_atomic.h>
+ #include <drm/drm_atomic_helper.h>
++#include <drm/drm_drv.h>
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_plane_helper.h>
+ #include <drm/drm_probe_helper.h>
+@@ -186,7 +187,7 @@ void qxl_display_read_client_monitors_config(struct qxl_device *qdev)
+ 
+ 	DRM_MODESET_LOCK_ALL_BEGIN(dev, ctx, DRM_MODESET_ACQUIRE_INTERRUPTIBLE, ret);
+ 	qxl_update_offset_props(qdev);
+-	DRM_MODESET_LOCK_ALL_END(ctx, ret);
++	DRM_MODESET_LOCK_ALL_END(dev, ctx, ret);
+ 	if (!drm_helper_hpd_irq_event(dev)) {
+ 		/* notify that the monitor configuration changed, to
+ 		   adjust at the arbitrary resolution */
+@@ -431,7 +432,7 @@ static int qxl_framebuffer_surface_dirty(struct drm_framebuffer *fb,
+ 			  clips, num_clips, inc, 0);
+ 
+ out_lock_end:
+-	DRM_MODESET_LOCK_ALL_END(ctx, ret);
++	DRM_MODESET_LOCK_ALL_END(fb->dev, ctx, ret);
+ 
+ 	return 0;
+ }
+-- 
+Sean Paul, Software Engineer, Google / Chromium OS
 
 _______________________________________________
 Spice-devel mailing list
