@@ -1,54 +1,39 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 994E7246529
-	for <lists+spice-devel@lfdr.de>; Mon, 17 Aug 2020 13:09:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF5162477EB
+	for <lists+spice-devel@lfdr.de>; Mon, 17 Aug 2020 22:05:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 279D86E146;
-	Mon, 17 Aug 2020 11:09:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7121C89F24;
+	Mon, 17 Aug 2020 20:05:28 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 40D9089F71
- for <spice-devel@lists.freedesktop.org>; Mon, 17 Aug 2020 11:09:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597662574;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=sRXpA3KVhG5i/ooij8DK6osX068yWEAfosvf8o3Zs6Y=;
- b=OdiuTF2A9JUIKC8qxrw9lYity2OJi0wuf71i4M6tzD0bPYW2tbR8Ihqf7miGYBDMIHcAxV
- GYPVuksXCItFCQCSwaXviftbU60/aJCgu4eR9reP3gmWtDlovtGPuZtR8/bUDdtPveIL7y
- ZA1DbSZL+5Ag8F2tgKKk1ZrtZ/EoVXQ=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-239-OQTjsRyGO2CmwRxlHku8Ow-1; Mon, 17 Aug 2020 07:08:28 -0400
-X-MC-Unique: OQTjsRyGO2CmwRxlHku8Ow-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C870E89F24;
+ Mon, 17 Aug 2020 20:05:27 +0000 (UTC)
+Received: from ravnborg.org (unknown [188.228.123.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9C4B2185E53C;
- Mon, 17 Aug 2020 11:08:26 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-195.ams2.redhat.com
- [10.36.112.195])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3997310013C2;
- Mon, 17 Aug 2020 11:08:26 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 201FA9D8F; Mon, 17 Aug 2020 13:08:24 +0200 (CEST)
-Date: Mon, 17 Aug 2020 13:08:24 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Sidong Yang <realwakka@gmail.com>
-Message-ID: <20200817110824.ascomag3nh7ufabs@sirius.home.kraxel.org>
-References: <20200524022624.10363-1-realwakka@gmail.com>
+ by asavdk4.altibox.net (Postfix) with ESMTPS id F098D804AF;
+ Mon, 17 Aug 2020 22:05:22 +0200 (CEST)
+Date: Mon, 17 Aug 2020 22:05:21 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Sean Paul <sean@poorly.run>
+Message-ID: <20200817200521.GA1551172@ravnborg.org>
+References: <20200817195846.14076-1-sean@poorly.run>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200524022624.10363-1-realwakka@gmail.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: Replace deprecated function in
- qxl_display
+In-Reply-To: <20200817195846.14076-1-sean@poorly.run>
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=aP3eV41m c=1 sm=1 tr=0
+ a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
+ a=kj9zAlcOel0A:10 a=cm27Pg_UAAAA:8 a=7gkXJVJtAAAA:8 a=pGLkceISAAAA:8
+ a=20KFwNOVAAAA:8 a=Z4Rwk6OoAAAA:8 a=e5mUnYsNAAAA:8 a=Fn0XzTm-E8DT0MMFozsA:9
+ a=N3S3ulj5AKuxvIIe:21 a=7IyYmjEE0Ti2w03Z:21 a=CjuIK1q_8ugA:10
+ a=-RoEEKskQ1sA:10 a=xmb-EsYY8bH0VWELuYED:22 a=E9Po1WZjFZOl8hwRPBS3:22
+ a=HkZW87K1Qel5hWWM3VKY:22 a=Vxmtnl_E_bksehYqCbjh:22
+Subject: Re: [Spice-devel] [PATCH] drm/qxl: Fix build errors
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,36 +45,77 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, Sean Paul <seanpaul@chromium.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ spice-devel@lists.freedesktop.org, Sidong Yang <realwakka@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Sun, May 24, 2020 at 11:26:23AM +0900, Sidong Yang wrote:
-> Hi, Dave.
-> 
-> This is resended e-mail for your advice.
-> 
-> I'm a newbie interested in linux kernel and qxl module.
-> Please check this patch and give me advice for me.
-> Also I'll be glad if there is any task that you bothered.
-> Thanks.
-> 
-> Sidong.
-> 
-> Replace deprecated function drm_modeset_lock/unlock_all with
-> helper function DRM_MODESET_LOCK_ALL_BEGIN/END.
-> 
-> Signed-off-by: Sidong Yang <realwakka@gmail.com>
+Hi Sean.
 
-Queued for drm-misc-next.
+On Mon, Aug 17, 2020 at 03:58:38PM -0400, Sean Paul wrote:
+> From: Sean Paul <seanpaul@chromium.org>
+> 
+> Introduced in the patch below, the END macro was missing 'dev' and BEGIN
+> macro needs drm_drv_uses_atomic_modeset() from drm_drv.h
+> 
+> Fixes: bbaac1354cc9 ("drm/qxl: Replace deprecated function in qxl_display")
+We should not use Fixes for local fixes like this, as we do not want the
+robots to pick this commit.
+With the Fixes: dropped (maybe just reference the commit in the
+changelog):
+Acked-by: Sam Ravnborg <sam@ravnborg.org>
 
-thanks,
-  Gerd
 
+> Cc: Sidong Yang <realwakka@gmail.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: virtualization@lists.linux-foundation.org
+> Signed-off-by: Sean Paul <seanpaul@chromium.org>
+> ---
+>  drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+> index fa79688013b7..5b4fd6952b53 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -28,6 +28,7 @@
+>  
+>  #include <drm/drm_atomic.h>
+>  #include <drm/drm_atomic_helper.h>
+> +#include <drm/drm_drv.h>
+>  #include <drm/drm_gem_framebuffer_helper.h>
+>  #include <drm/drm_plane_helper.h>
+>  #include <drm/drm_probe_helper.h>
+> @@ -186,7 +187,7 @@ void qxl_display_read_client_monitors_config(struct qxl_device *qdev)
+>  
+>  	DRM_MODESET_LOCK_ALL_BEGIN(dev, ctx, DRM_MODESET_ACQUIRE_INTERRUPTIBLE, ret);
+>  	qxl_update_offset_props(qdev);
+> -	DRM_MODESET_LOCK_ALL_END(ctx, ret);
+> +	DRM_MODESET_LOCK_ALL_END(dev, ctx, ret);
+>  	if (!drm_helper_hpd_irq_event(dev)) {
+>  		/* notify that the monitor configuration changed, to
+>  		   adjust at the arbitrary resolution */
+> @@ -431,7 +432,7 @@ static int qxl_framebuffer_surface_dirty(struct drm_framebuffer *fb,
+>  			  clips, num_clips, inc, 0);
+>  
+>  out_lock_end:
+> -	DRM_MODESET_LOCK_ALL_END(ctx, ret);
+> +	DRM_MODESET_LOCK_ALL_END(fb->dev, ctx, ret);
+>  
+>  	return 0;
+>  }
+> -- 
+> Sean Paul, Software Engineer, Google / Chromium OS
+> 
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
