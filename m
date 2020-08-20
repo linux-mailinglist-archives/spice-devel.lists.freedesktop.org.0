@@ -2,58 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 156FF24999B
-	for <lists+spice-devel@lfdr.de>; Wed, 19 Aug 2020 11:49:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CE0E24C2A6
+	for <lists+spice-devel@lfdr.de>; Thu, 20 Aug 2020 17:56:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1A41589C97;
-	Wed, 19 Aug 2020 09:49:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EF31E6E3A4;
+	Thu, 20 Aug 2020 15:56:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B78226E199;
- Wed, 19 Aug 2020 02:18:07 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id d6so24415983ejr.5;
- Tue, 18 Aug 2020 19:18:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+FtZ30xD7F4CZ/+/kanc2qcUjEGS85bRNmxMV0hbX3I=;
- b=kOZno89ECZj6jVLAofx0JYLgCM7bLIMxM7XAq01DXsTvgmE6+vdVEGINNrEw9CrO6q
- hhfO8Ok5Qpm+QcIsUzJsuG41E1oKzmHRFBnEiUpFzDcckhfTl1O9G3xk+0Xdt+lJ28Ox
- 84NBsEtRgRyWygzMTkVyQumtvunuhdFgfFhKJIVrC6SG7EXgKptI16hgZNUmwwLfq9I/
- xFHPSL9epK5Li4EZbsDm/XaTwhnkDABhW04Y75nreWj3/71so6UT5DOYbEtPsIH7HG5Q
- adO0CW/3HzSrSI/8upvsKMdC4Exvwltwp+4ZLXg/rDj9yHJnztmi3x1f/uoi/Cfz9zqV
- SEvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+FtZ30xD7F4CZ/+/kanc2qcUjEGS85bRNmxMV0hbX3I=;
- b=QSBA2bN59DzzytzI7v+4PIzgx25PB+Q1mIiW+S9Gt5Ck3Nia3EUYOBdI/yaLPgJtKz
- vbezHYIIVx9v4IOcST0IuXkyhXCQ6lo/nH7ywUQBhVxo6RtBl9p1nQ49PwppFiP856ZV
- y0xEZmnLVRrNI/DvYYYYq+EvIJeS3gqOQtjxmK3NsM3gctfuTzB+bUShW88O2xJwFJgN
- OLazLbZIFHRgiBcIiuYzCJE8z8FaINLqYZ0hjT4/xn51M6ss1evxHSNPCT9d9yPHxyN+
- D6uq1CqOIn3fRE+TUm66glpsLMln/7HDVfdXkLMWzfgQNwU6t9cHdfm4vfEpJV27EoRW
- QpxA==
-X-Gm-Message-State: AOAM533LyE8IFS6pcyFckJ03yCFmLsRG0L/20aDdaP+Qrb7V8qhWuROC
- fZXh26YjbAts0p2D13akzO90jE1lWU4rymgt78Ol3UO6COc=
-X-Google-Smtp-Source: ABdhPJwOVxXlhVZPhM/VXYOHCZ5BD7otzTxtw2JShtHqq7RtGHtTEeWNcWBFLQm5bLFs+h/OjcLMVfdYi9hE5ww2B8Y=
-X-Received: by 2002:a17:906:d054:: with SMTP id
- bo20mr24181293ejb.9.1597803486353; 
- Tue, 18 Aug 2020 19:18:06 -0700 (PDT)
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 733466E3A4
+ for <spice-devel@lists.freedesktop.org>; Thu, 20 Aug 2020 15:56:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597938992;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LGWbKgaJGd0RnUSjh4VW43MCuTrvhPJj+ciZ2fWGf/M=;
+ b=di9uUnmJPfvxDpbo2Suc/OhBPxFLHi3NFMYm11F735NaN17wnfwiAP2IHYYk8hM6I6VzRa
+ vb/4I1fnBkhoXQYoguT0fpU/pjMruzCqN0hpvCK/tmlmTEBqQr1mCig1eltWtv4d/SSVEJ
+ QfV0aTaICW7dCZU6RSymuhD5r+rSqdA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-24-Buw5XWKONdOpzHWm00MNkg-1; Thu, 20 Aug 2020 11:56:28 -0400
+X-MC-Unique: Buw5XWKONdOpzHWm00MNkg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CED5D8030C3;
+ Thu, 20 Aug 2020 15:56:27 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C79E5100238E;
+ Thu, 20 Aug 2020 15:56:27 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id BEEC218095FF;
+ Thu, 20 Aug 2020 15:56:27 +0000 (UTC)
+Date: Thu, 20 Aug 2020 11:56:25 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: Mario Marietto <marietto2008@gmail.com>
+Message-ID: <424998896.38226851.1597938985480.JavaMail.zimbra@redhat.com>
+In-Reply-To: <CA+1FSiicEUDT8jhNCnzPmwo0JwzH27F2uSCinwE36CFtrSg2pg@mail.gmail.com>
+References: <CA+1FSiicEUDT8jhNCnzPmwo0JwzH27F2uSCinwE36CFtrSg2pg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200817195846.14076-1-sean@poorly.run>
- <20200817200521.GA1551172@ravnborg.org>
- <CAMavQKL2=Gx+XCbMYc5p08jRNtH5ju=oadhxBxzgNf+gzo3fnA@mail.gmail.com>
- <CAMavQK+zsBHoMc_C=-=v-43u=tZ_pJ6XSGBhD6MLQN01pjbyEA@mail.gmail.com>
- <20200818053150.pwkga4vzipk7pf6t@sirius.home.kraxel.org>
-In-Reply-To: <20200818053150.pwkga4vzipk7pf6t@sirius.home.kraxel.org>
-From: Dave Airlie <airlied@gmail.com>
-Date: Wed, 19 Aug 2020 12:17:55 +1000
-Message-ID: <CAPM=9txiz6k2k7SBtPRbvA3C6NvoyH2TCaLgGM+-08yoouoSUQ@mail.gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Mailman-Approved-At: Wed, 19 Aug 2020 09:48:59 +0000
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: Fix build errors
+X-Originating-IP: [10.40.195.108, 10.4.195.26]
+Thread-Topic: xen and the support for spice GL
+Thread-Index: R/R5CCmivbyivntjnnTSsjAvKzeSOg==
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
+X-Mimecast-Spam-Score: 0.001
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] xen and the support for spice GL
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,40 +68,38 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Sam Ravnborg <sam@ravnborg.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, "open list:VIRTIO CORE,
- NET..." <virtualization@lists.linux-foundation.org>,
- Sean Paul <seanpaul@chromium.org>,
- spice-devel <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>, Sidong Yang <realwakka@gmail.com>,
- Sean Paul <sean@poorly.run>
+Cc: spice-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, 18 Aug 2020 at 15:32, Gerd Hoffmann <kraxel@redhat.com> wrote:
->
->   Hi,
->
-> > I guess things are never quite so easy :-). It looks like Daniel's
-> > patch is in drm-misc-fixes and Sidong's patch is in drm-misc-next. On
-> > their own they're fine, but once they are merged in drm-tip the build
-> > error shows up.
->
-> Ah, ok.  I've already wondered how that got past my build testing.
-> This explains it.
->
-> thanks for looking into it,
+> Hello.
 
-I've fixed this in drm-tip with a fixup.
+> To make a long story short,I tried to pass through my two kinect 2 devices
+> from ubuntu 20.04 to a two qemu / kvm virtual machines,where on the first
+> one I have also passed through my RTX 2080 ti and on the second one,I have
+> passed through also the IGPU (Intel UHD Graphics 630). This is the tutorial
+> that I have followed :
+> https://blog.tmm.cx/2020/05/15/passing-an-intel-gpu-to-a-linux-kvm-virtual-machine/
 
-In future when we find these silent conflicts, can someone please
-https://drm.pages.freedesktop.org/maintainer-tools/drm-tip.html
+> It worked great,except for a "little" problem. When I attach the second
+> kinect to the vm,as soon as I try to use it,its connection drops. For this
+> reason,I've got an idea. Maybe what I want to do works better using the
+> xen-hypervisor. So,I have created a new connection and a new vm with xen and
+> virt manager and I tried to assign the Intel UHD Graphics 630 GPU to the vm
+> following the tutorial above.
+> It's a shame that it didn't work because the error that u see below :
+> "hypervisor / libvirt does not support spice GL". So my question is if xen
+> supports the spice GL or not. thanks.
 
-follow those instructions to fix it up.
+Hi,
+  I really didn't understand what you are trying to do.
+I'm confused between KVM/Xen (I think they are quite different).
+What's a "kinect" ?
 
-Dave.
+Frediano
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
