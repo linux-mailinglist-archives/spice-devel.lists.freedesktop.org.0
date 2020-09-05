@@ -2,77 +2,62 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10A7825E5D1
-	for <lists+spice-devel@lfdr.de>; Sat,  5 Sep 2020 08:27:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5463325E9B2
+	for <lists+spice-devel@lfdr.de>; Sat,  5 Sep 2020 20:32:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 991276ED24;
-	Sat,  5 Sep 2020 06:27:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C788D6E183;
+	Sat,  5 Sep 2020 18:32:35 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from NAM02-CY1-obe.outbound.protection.outlook.com
- (mail-eopbgr760059.outbound.protection.outlook.com [40.107.76.59])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 806FF6ED20
- for <spice-devel@lists.freedesktop.org>; Sat,  5 Sep 2020 04:38:38 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DftJLHEkioqZciXyBwmbvcTf/I62Dt64tYDUWrJg3wUbhEJyOfJAlFq1jR5Ib244oFS8ppmuNltsAQ9DpRfjcFwcz6ov5B5CFuJobv0M+DAWTDGv5QJNb2HuYLZusJFG3c+S7XnpPR1fDjOkmMejcII22tkOhFvYCF9vRVXfQdC6XnF7s8G/O5s1BFT00/R9obr1iwJq0eGChLR/qQU/jVN0IJ17wLxyvGZRZxgroUdYKPkMwyniQtDuQ2Aow79gedOt+xy4bTRPZaMgbEAVOKSiYVy8OK//Ur2La0gF8CjW4jlCBTMbcDFVr+Y+g4v8mTLQdjapFlJe/L/TfIDdCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OBlemmxQbKmZWaYJUWeoR48LjhskMrwZow4HBssKsFc=;
- b=inAkMh9QhuowoGjKhXJeFS6jEoPYaxXlDEwGtZOWRFmXKUVrRjsy4sNaCBskgiO6HYB59abeT4kpJtJA7SMTP99dDy2B7jVx2amJLm7iEccjEWQJm+6icEiVGNVMcLQNweHGdTIW8yBZnsPUvCogGePwzr7z5lfkv6J2WjU+1Y/5Mp8/yoIUvsJakzmbTYZsm3DC006QJtY2aC91HR7oE/+JQoRtHY8zPDmVlrJPjhG4KVLU1/nyd5zAaEL4ICVX+N4nsZoveNDzeIYU2rjeUweqf/DMUkiU/RrVnFynFSwB0Ei5PEb5+FUYZt0QGgbh1JkFKKVqc8TP3bjWSlBgxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vtc.vsc.edu; dmarc=pass action=none header.from=vtc.vsc.edu;
- dkim=pass header.d=vtc.vsc.edu; arc=none
-Received: from BL0PR0102MB3492.prod.exchangelabs.com (2603:10b6:207:1e::14) by
- BL0PR01MB5201.prod.exchangelabs.com (2603:10b6:208:65::19) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3326.21; Sat, 5 Sep 2020 04:38:34 +0000
-Received: from BL0PR0102MB3492.prod.exchangelabs.com
- ([fe80::4024:509a:df43:efc4]) by BL0PR0102MB3492.prod.exchangelabs.com
- ([fe80::4024:509a:df43:efc4%4]) with mapi id 15.20.3348.017; Sat, 5 Sep 2020
- 04:38:34 +0000
-From: "Thayer, Kevin I." <kit10290@vtc.vsc.edu>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Thread-Topic: Shared Playback with simultaneous clients connection
-Thread-Index: AQHWgz1yN2vCoLhg7keaNEU+Bgi/iA==
-Date: Sat, 5 Sep 2020 04:38:34 +0000
-Message-ID: <BL0PR0102MB34922D74D1058DC6BD08D669C52A0@BL0PR0102MB3492.prod.exchangelabs.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: lists.freedesktop.org; dkim=none (message not signed)
- header.d=none; lists.freedesktop.org;
- dmarc=none action=none header.from=vtc.vsc.edu;
-x-originating-ip: [174.83.3.246]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 2ecca534-fcfb-43fc-0100-08d851558c94
-x-ms-traffictypediagnostic: BL0PR01MB5201:
-x-microsoft-antispam-prvs: <BL0PR01MB5201CFB6F62246485AE7421BC52A0@BL0PR01MB5201.prod.exchangelabs.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: apjXcSELzKdo41mZDo5ShHbFgjZ2tjtUGihssQ8jDBqEpxhWak5CF/FYgS2V6w7mujWOgw3BGS+Cz1snMoR88wpBFDdNNQd+1suZZJBkAfPVQPrI1GnjkJ4uW9F1oeISPDZ6srgSNisJxT5W6DJav2za05p+rea6J9B1M7Nfe6GSXar6AVx9DoTC300HJjvcD7J+0EQW4sxMC5mEThhBRQUjdt4XS9L5nPXPvYzZlhZbqawUgmKgXoQWeTK9L2dJRLcjxYXnImHi37CjXmk30e9tyPuhap9XegUAFGVvgsO23TewcEExmR7yBlhpj/UeK1HWBXsgRmEoUv1qu/Yqhw==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BL0PR0102MB3492.prod.exchangelabs.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(346002)(396003)(39860400002)(376002)(136003)(2906002)(478600001)(64756008)(66946007)(6916009)(66476007)(66556008)(66446008)(5660300002)(9686003)(55016002)(8936002)(86362001)(76116006)(83380400001)(75432002)(71200400001)(786003)(316002)(52536014)(19627405001)(7696005)(8676002)(33656002)(26005)(4744005)(186003)(6506007);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: 51p2XrgAbmqKv5kitUoOKRvBzQ7cP+qBaxw+fo+NaBL0KXk9s1mWYYazrOz1sY4WVq6HMOdqtsuJ+nXI7waAtjz3/WGnLoPhaJMiKZcwXoiWQkRfw3YG+Co8XGgSxvHoyQgJjFN3suViZpsxia/dr3HMdeaCHys2ELSkNT7RlDSEAm02iisdbYrrb9/CTBWGByNOL3S8bdOIzUPiieP0D9WQlrUqLjBtRgjlu4sBc6ROcSYCNKw1e/YTeNeR7Goto93ZKpMb5jmaYK8CwvrF6iYJiGFM3TNNZQ7nF0o/fRxbyvjryAhQ2sM4XEusjBSOjuUxtXOFPjFEzXyLCKT9GbkaUMP689ivBmNew2kIz09yasz35BaU+ZIrnnGQ9qFOuLP8wXSU1xfYg3h35M2wfSccmR2m+PWxxtHNfS27wypIjeCnuEaihoBgNhfvh/7dQF4sKs/xIPx2qn7g0PV6YTjU5xHHYunlAS2Zui72gzO2vWCW+XGUFAhDpJ5CwR5VqZMROS23jK5W5rb0M5u40kMs8RJMKMKT+G3y5bFuY1YeUbhG0grFvhHmKTJpA2TPZ+qlLpOGsi+vWonx9IXX2S7uc8N0PmowkpH6lmzSLBmZDNX71g4drM4yXdq0ccLCFyHnmozgeH9DJIcTVjvUaQ==
-x-ms-exchange-transport-forked: True
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 169E06E183
+ for <spice-devel@lists.freedesktop.org>; Sat,  5 Sep 2020 18:32:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1599330752;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=sc+lapmZrUh+C6pBYt8Lh9VhKRguXma8IYKsmca4JBM=;
+ b=NjynEpdkf6F6SSFxwDo2dEWwUgq1NTuUfwWNJ/1O6ALGbOijZ7LmVLa3iqDvNoXR4dcGF7
+ LWfBNzE+a26NLIWz/EFXcUBD5ugEcgl7+RCiH6fMPjiM5olEx7ESNlKE2+CpFrSt/Hc05a
+ TXBvwzgUYVSJ6pXjuQT7PZOSa7gdCw8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-455-UiYHiVzJOkqB0Zv2UhlF5A-1; Sat, 05 Sep 2020 14:32:28 -0400
+X-MC-Unique: UiYHiVzJOkqB0Zv2UhlF5A-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A9605801AC4;
+ Sat,  5 Sep 2020 18:32:27 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 9B1347E188;
+ Sat,  5 Sep 2020 18:32:27 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 794CB79A25;
+ Sat,  5 Sep 2020 18:32:27 +0000 (UTC)
+Date: Sat, 5 Sep 2020 14:32:26 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: "Kevin I. Thayer" <kit10290@vtc.vsc.edu>
+Message-ID: <1496214542.361463.1599330746892.JavaMail.zimbra@redhat.com>
+In-Reply-To: <BL0PR0102MB34922D74D1058DC6BD08D669C52A0@BL0PR0102MB3492.prod.exchangelabs.com>
+References: <BL0PR0102MB34922D74D1058DC6BD08D669C52A0@BL0PR0102MB3492.prod.exchangelabs.com>
 MIME-Version: 1.0
-X-OriginatorOrg: vtc.vsc.edu
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR0102MB3492.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ecca534-fcfb-43fc-0100-08d851558c94
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Sep 2020 04:38:34.5205 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b17e9703-dbdd-49fa-909c-03dfd13086af
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: JXGYdKlPJegNatAthl32rhqFF9MFprfBmolz+RVnuYLwM0UeymQLH7K5NUU0+ne5DJKCsh4gjX6f15HHRUJJZg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR01MB5201
-X-Mailman-Approved-At: Sat, 05 Sep 2020 06:27:29 +0000
-Subject: [Spice-devel] Shared Playback with simultaneous clients connection
+X-Originating-IP: [10.33.32.2, 10.4.195.29]
+Thread-Topic: Shared Playback with simultaneous clients connection
+Thread-Index: AQHWgz1yN2vCoLhg7keaNEU+Bgi/iMffADcu
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
+X-Mimecast-Spam-Score: 0.001
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Spice-devel] Shared Playback with simultaneous clients
+ connection
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,105 +69,51 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1652823025=="
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1652823025==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_BL0PR0102MB34922D74D1058DC6BD08D669C52A0BL0PR0102MB3492_"
+> Hello,
+> I am a college student working on my senior project for Vermont Technical
+> College. My little team hoped to use, the kimchi/wok environment to create a
+> collaborative web browsing service. I have used the proper settings to allow
+> for multiple users to use the same VM. But I have noticed both in practice
+> and in the documentation; that you cannot have audio for any subsequent
+> connections after the first one. I was curious if that feature has been
+> added to later versions, or if it was still being worked out along the
+> pipeline.
+> Would you be able to give me any more information?
 
---_000_BL0PR0102MB34922D74D1058DC6BD08D669C52A0BL0PR0102MB3492_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+> Thank you for your time,
+> Kevin Thayer
+> B.S. CIT
 
-Hello,
-I am a college student working on my senior project for Vermont Technical C=
-ollege. My little team hoped to use, the kimchi/wok environment to create a=
- collaborative web browsing service. I have used the proper settings to all=
-ow for multiple users to use the same VM. But I have noticed both in practi=
-ce and in the documentation; that you cannot have audio for any subsequent =
-connections after the first one. I was curious if that feature has been add=
-ed to later versions, or if it was still being worked out along the pipelin=
-e.
-Would you be able to give me any more information?
+Hi,
+   short answer:
 
-Thank you for your time,
-Kevin Thayer
-B.S. CIT
+Not possible and there's no plan to support it.
 
+Long answer:
 
+Multi client support was started many years ago but then abandoned although still
+in the code. Nobody remove it but also nobody improved and tested since long time.
+On the other hand however nobody wanted to break the existing multi client support
+and the channel added was even tested a bit to see if multi client worked.
+I don't think that currently, maybe with some limitations, it would be crazily
+hard to support multi client for playback channel. At the time multi client was
+written (time before I knew SPICE even existed) sound channels had an entirely
+different implementation which was written not supporting multi client. More
+recently sound channels inherit from RedChannel which allows to support multiple
+channels. I think that removing the support for time sync if you have more
+than a client and not sending audio frames if client does not support the encoding
+of the first client (which is very probable) it shouldn't be hard to implement it.
+Not saying that I personally have time to try.
 
-
---_000_BL0PR0102MB34922D74D1058DC6BD08D669C52A0BL0PR0102MB3492_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
-: 12pt; color: rgb(0, 0, 0);">
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-Hello, <o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-I am a college student working on my senior project for Vermont<o:p>&nbsp;T=
-echnical College. My little team hoped to use, the kimchi/wok environment t=
-o create a collaborative web browsing service. I have used the proper setti=
-ngs to allow for multiple users to use
- the same VM. But I have noticed both in practice and in the documentation;=
- that you cannot have audio for any subsequent connections after the first =
-one. I was curious if that feature has been added to later versions, or if =
-it was still being worked out along
- the pipeline.&nbsp;</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-<o:p>Would you be able to give me any more information?&nbsp;</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-<o:p><br>
-</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-<o:p>Thank you for your time,</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-<o:p>Kevin Thayer</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-<o:p>B.S. CIT</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-<o:p><br>
-</o:p></p>
-<p class=3D"MsoNormal" style=3D"margin: 0in 0in 0.0001pt; font-size: 11pt; =
-font-family: Calibri, sans-serif">
-<o:p><br>
-</o:p></p>
-<br>
-</div>
-</body>
-</html>
-
---_000_BL0PR0102MB34922D74D1058DC6BD08D669C52A0BL0PR0102MB3492_--
-
---===============1652823025==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Frediano
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============1652823025==--
