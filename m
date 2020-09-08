@@ -2,52 +2,65 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 593C0260ECF
-	for <lists+spice-devel@lfdr.de>; Tue,  8 Sep 2020 11:39:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B6CD2610BE
+	for <lists+spice-devel@lfdr.de>; Tue,  8 Sep 2020 13:35:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2BDE46E7D0;
-	Tue,  8 Sep 2020 09:39:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C8C2A6E1D2;
+	Tue,  8 Sep 2020 11:35:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E6356E7D0
- for <spice-devel@lists.freedesktop.org>; Tue,  8 Sep 2020 09:39:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599557959;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0KEVHWP2GiLQz9DhPmZh/HeQE3DHcZKHvJrF/RegTIU=;
- b=QUfq8M92LX7WvSdzzdvWIMmeoKsqcIvz+fQGzdV63UccYDv5SvGJzvo8OVGEldAXJCw4yv
- bqJ3Vgf244u/ZXuXRvzBYn56BUB0awbalnHQSD3gxzhTzP+82Hp0x1WrM4Pdr7dtjQA4EO
- H+lpTm6Sjv/V/FgMJJe/DPiFqSgSTTM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-119-FQLYQ8IjMDq3GhQpyAEKYw-1; Tue, 08 Sep 2020 05:39:18 -0400
-X-MC-Unique: FQLYQ8IjMDq3GhQpyAEKYw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 856CF802B61;
- Tue,  8 Sep 2020 09:39:16 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-56.ams2.redhat.com
- [10.36.112.56])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 59DF060C15;
- Tue,  8 Sep 2020 09:39:13 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 95CBC204AE; Tue,  8 Sep 2020 11:39:12 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Date: Tue,  8 Sep 2020 11:39:12 +0200
-Message-Id: <20200908093912.26792-4-kraxel@redhat.com>
-In-Reply-To: <20200908093912.26792-1-kraxel@redhat.com>
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C0AA6E1B7
+ for <spice-devel@lists.freedesktop.org>; Tue,  8 Sep 2020 11:35:26 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id a65so16917429wme.5
+ for <spice-devel@lists.freedesktop.org>; Tue, 08 Sep 2020 04:35:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=WSL45Uni0wlxXIfxBtB/5y1z+V6rIa7ooXBAdktfl/A=;
+ b=ZLxft09DWWUQ61e1fg70TdQn/PgGhrvi+SfoTYjEbKMGf2binVugy8MuM9Xj99eAEe
+ VJLWkbCEhx0Q+0u1QI5c9QlkB5pVHml2SnWMDDRBQ9uR8HBRc6kNmOcsXnb8pl0Il5H7
+ XC9oedgjy1s3YBZnSyLsf4JQOOOfT7ZCvDezk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=WSL45Uni0wlxXIfxBtB/5y1z+V6rIa7ooXBAdktfl/A=;
+ b=qnjLpEn1XrJ2JIt4J14pGd8PuxwlSdhYfufxcTtbPTo/iNaO4ZKqHBlWgw65/s71LE
+ Idf2lYeUy4I5VvcMIvVepaEOBCsHWXz6Ub46lSm3gdXdHthMxUjWyF7cG24U8BNSUtqr
+ pjsrKcfzlJU6IjO2N9aw1AGXTiq5/fucpmS02UKzBLGSbcf86FCIzrJDO7msctR3SJSu
+ CGc/yROMxkL9aBkzU8jGlKc0nxvRuRH7quoypCzq1eJ/yn3gVROIqI7zlNAQ+1urEjlu
+ 03n38fTFLaU4CKj7N0feXx28s47CdxsSXhmGuJSTWKJAf2FhGdZW8XaQTM3LjRbbek2s
+ cAjw==
+X-Gm-Message-State: AOAM5319CHUWJKAzkfLmpMzHX/vxZZQJl/6TZkfWJ9GuvLSgsPZWEeZc
+ +XBy+u6KQZoaW4CAJHC1ItQ74uBNd5nRSQUJ
+X-Google-Smtp-Source: ABdhPJwO92ecdG4LyeNex6dqtxEb2Oh6YdMfEcJIZ3ccJ7o2d+SykbHHt95D77rql1tnIOcP64ekjA==
+X-Received: by 2002:a1c:7215:: with SMTP id n21mr4226341wmc.154.1599564924815; 
+ Tue, 08 Sep 2020 04:35:24 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id c6sm33689920wrr.15.2020.09.08.04.35.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Sep 2020 04:35:24 -0700 (PDT)
+Date: Tue, 8 Sep 2020 13:35:22 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Message-ID: <20200908113522.GK2352366@phenom.ffwll.local>
+Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
+ dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, 
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>
 References: <20200908093912.26792-1-kraxel@redhat.com>
+ <20200908093912.26792-2-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Subject: [Spice-devel] [PATCH 3/3] drm/qxl: handle shadow in primary destroy
+Content-Disposition: inline
+In-Reply-To: <20200908093912.26792-2-kraxel@redhat.com>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
+Subject: Re: [Spice-devel] [PATCH 1/3] drm/qxl: use drmm_mode_config_init
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,9 +73,8 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>,
+ dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
  Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
@@ -70,30 +82,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-qxl_primary_atomic_disable must check whenever the framebuffer bo has a
-shadow surface and in case it has check the shadow primary status.
+On Tue, Sep 08, 2020 at 11:39:10AM +0200, Gerd Hoffmann wrote:
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/qxl/qxl_display.c | 2 ++
- 1 file changed, 2 insertions(+)
+Btw going all in on devm_drm_dev_alloc and managed functions might be good
+cleanup for virtio.
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 85dcb7fe56a9..3dcbb359e0f5 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -560,6 +560,8 @@ static void qxl_primary_atomic_disable(struct drm_plane *plane,
- 	if (old_state->fb) {
- 		struct qxl_bo *bo = gem_to_qxl_bo(old_state->fb->obj[0]);
- 
-+		if (bo->shadow)
-+			bo = bo->shadow;
- 		if (bo->is_primary) {
- 			qxl_io_destroy_primary(qdev);
- 			bo->is_primary = false;
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+> ---
+>  drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+> index fa79688013b7..4be04eaf7f37 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -1190,7 +1190,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+>  	int i;
+>  	int ret;
+>  
+> -	drm_mode_config_init(&qdev->ddev);
+> +	ret = drmm_mode_config_init(&qdev->ddev);
+> +	if (ret)
+> +		return ret;
+>  
+>  	ret = qxl_create_monitors_object(qdev);
+>  	if (ret)
+> @@ -1223,5 +1225,4 @@ int qxl_modeset_init(struct qxl_device *qdev)
+>  void qxl_modeset_fini(struct qxl_device *qdev)
+>  {
+>  	qxl_destroy_monitors_object(qdev);
+> -	drm_mode_config_cleanup(&qdev->ddev);
+>  }
+> -- 
+> 2.27.0
+> 
+
 -- 
-2.27.0
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
