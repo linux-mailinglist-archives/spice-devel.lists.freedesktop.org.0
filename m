@@ -2,62 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5463325E9B2
-	for <lists+spice-devel@lfdr.de>; Sat,  5 Sep 2020 20:32:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96A6E260ED7
+	for <lists+spice-devel@lfdr.de>; Tue,  8 Sep 2020 11:39:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C788D6E183;
-	Sat,  5 Sep 2020 18:32:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 95DE36E7D4;
+	Tue,  8 Sep 2020 09:39:22 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 169E06E183
- for <spice-devel@lists.freedesktop.org>; Sat,  5 Sep 2020 18:32:33 +0000 (UTC)
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DBA596E7D2
+ for <spice-devel@lists.freedesktop.org>; Tue,  8 Sep 2020 09:39:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599330752;
+ s=mimecast20190719; t=1599557959;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=sc+lapmZrUh+C6pBYt8Lh9VhKRguXma8IYKsmca4JBM=;
- b=NjynEpdkf6F6SSFxwDo2dEWwUgq1NTuUfwWNJ/1O6ALGbOijZ7LmVLa3iqDvNoXR4dcGF7
- LWfBNzE+a26NLIWz/EFXcUBD5ugEcgl7+RCiH6fMPjiM5olEx7ESNlKE2+CpFrSt/Hc05a
- TXBvwzgUYVSJ6pXjuQT7PZOSa7gdCw8=
+ bh=7ctRHl4aTOwSZ2a6/9fruNAVYsNTURKB5JwaBFn5RLs=;
+ b=jQXrAnUaTMmk8dFsEdtsRa/Vr3f6PHnhAGFoT8AzZ8MaJjHNqCne9eILmWbtDSsi7uWP37
+ wk52eNFOGcSFKSUunMHDVN//RTCFpzuobWRXfQjtTeqI2ZnEILuowdDPr+AbTDWGN4HfdU
+ Et/Niqw8Sk/coOclvl64rH9K8XvgQYE=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-455-UiYHiVzJOkqB0Zv2UhlF5A-1; Sat, 05 Sep 2020 14:32:28 -0400
-X-MC-Unique: UiYHiVzJOkqB0Zv2UhlF5A-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-486-QnoSP66aOxmn1KZwsSd8uA-1; Tue, 08 Sep 2020 05:39:17 -0400
+X-MC-Unique: QnoSP66aOxmn1KZwsSd8uA-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A9605801AC4;
- Sat,  5 Sep 2020 18:32:27 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9B1347E188;
- Sat,  5 Sep 2020 18:32:27 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 794CB79A25;
- Sat,  5 Sep 2020 18:32:27 +0000 (UTC)
-Date: Sat, 5 Sep 2020 14:32:26 -0400 (EDT)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: "Kevin I. Thayer" <kit10290@vtc.vsc.edu>
-Message-ID: <1496214542.361463.1599330746892.JavaMail.zimbra@redhat.com>
-In-Reply-To: <BL0PR0102MB34922D74D1058DC6BD08D669C52A0@BL0PR0102MB3492.prod.exchangelabs.com>
-References: <BL0PR0102MB34922D74D1058DC6BD08D669C52A0@BL0PR0102MB3492.prod.exchangelabs.com>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7D0F71DDF7;
+ Tue,  8 Sep 2020 09:39:16 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-112-56.ams2.redhat.com
+ [10.36.112.56])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 27D361002388;
+ Tue,  8 Sep 2020 09:39:13 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 62378204A1; Tue,  8 Sep 2020 11:39:12 +0200 (CEST)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Date: Tue,  8 Sep 2020 11:39:10 +0200
+Message-Id: <20200908093912.26792-2-kraxel@redhat.com>
+In-Reply-To: <20200908093912.26792-1-kraxel@redhat.com>
+References: <20200908093912.26792-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.2, 10.4.195.29]
-Thread-Topic: Shared Playback with simultaneous clients connection
-Thread-Index: AQHWgz1yN2vCoLhg7keaNEU+Bgi/iMffADcu
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
-X-Mimecast-Spam-Score: 0.001
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] Shared Playback with simultaneous clients
- connection
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Subject: [Spice-devel] [PATCH 1/3] drm/qxl: use drmm_mode_config_init
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,49 +59,45 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> Hello,
-> I am a college student working on my senior project for Vermont Technical
-> College. My little team hoped to use, the kimchi/wok environment to create a
-> collaborative web browsing service. I have used the proper settings to allow
-> for multiple users to use the same VM. But I have noticed both in practice
-> and in the documentation; that you cannot have audio for any subsequent
-> connections after the first one. I was curious if that feature has been
-> added to later versions, or if it was still being worked out along the
-> pipeline.
-> Would you be able to give me any more information?
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-> Thank you for your time,
-> Kevin Thayer
-> B.S. CIT
-
-Hi,
-   short answer:
-
-Not possible and there's no plan to support it.
-
-Long answer:
-
-Multi client support was started many years ago but then abandoned although still
-in the code. Nobody remove it but also nobody improved and tested since long time.
-On the other hand however nobody wanted to break the existing multi client support
-and the channel added was even tested a bit to see if multi client worked.
-I don't think that currently, maybe with some limitations, it would be crazily
-hard to support multi client for playback channel. At the time multi client was
-written (time before I knew SPICE even existed) sound channels had an entirely
-different implementation which was written not supporting multi client. More
-recently sound channels inherit from RedChannel which allows to support multiple
-channels. I think that removing the support for time sync if you have more
-than a client and not sending audio frames if client does not support the encoding
-of the first client (which is very probable) it shouldn't be hard to implement it.
-Not saying that I personally have time to try.
-
-Frediano
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index fa79688013b7..4be04eaf7f37 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1190,7 +1190,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+ 	int i;
+ 	int ret;
+ 
+-	drm_mode_config_init(&qdev->ddev);
++	ret = drmm_mode_config_init(&qdev->ddev);
++	if (ret)
++		return ret;
+ 
+ 	ret = qxl_create_monitors_object(qdev);
+ 	if (ret)
+@@ -1223,5 +1225,4 @@ int qxl_modeset_init(struct qxl_device *qdev)
+ void qxl_modeset_fini(struct qxl_device *qdev)
+ {
+ 	qxl_destroy_monitors_object(qdev);
+-	drm_mode_config_cleanup(&qdev->ddev);
+ }
+-- 
+2.27.0
 
 _______________________________________________
 Spice-devel mailing list
