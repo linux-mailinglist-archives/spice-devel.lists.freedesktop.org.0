@@ -1,66 +1,52 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B6CD2610BE
-	for <lists+spice-devel@lfdr.de>; Tue,  8 Sep 2020 13:35:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D24B262EA8
+	for <lists+spice-devel@lfdr.de>; Wed,  9 Sep 2020 14:44:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C8C2A6E1D2;
-	Tue,  8 Sep 2020 11:35:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B0B8B894C3;
+	Wed,  9 Sep 2020 12:44:40 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4C0AA6E1B7
- for <spice-devel@lists.freedesktop.org>; Tue,  8 Sep 2020 11:35:26 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id a65so16917429wme.5
- for <spice-devel@lists.freedesktop.org>; Tue, 08 Sep 2020 04:35:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=WSL45Uni0wlxXIfxBtB/5y1z+V6rIa7ooXBAdktfl/A=;
- b=ZLxft09DWWUQ61e1fg70TdQn/PgGhrvi+SfoTYjEbKMGf2binVugy8MuM9Xj99eAEe
- VJLWkbCEhx0Q+0u1QI5c9QlkB5pVHml2SnWMDDRBQ9uR8HBRc6kNmOcsXnb8pl0Il5H7
- XC9oedgjy1s3YBZnSyLsf4JQOOOfT7ZCvDezk=
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A6E4689191
+ for <spice-devel@lists.freedesktop.org>; Wed,  9 Sep 2020 12:42:26 +0000 (UTC)
+Received: by mail-qt1-x830.google.com with SMTP id c18so1743199qtw.5
+ for <spice-devel@lists.freedesktop.org>; Wed, 09 Sep 2020 05:42:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=JaMsyeJ+iWA80KnuU579f4XwqaZ6OgYtkOn+HaHqLEU=;
+ b=L5h9/nruVLgcy+iDgyJyIBCM+baAdCZ3FjbjdCMnZbUnBirxLtqepUdKxdgg+m8nRD
+ GDytXbKRiY0PksLF0QFPmFohl7nRy4JdJuo0ek8aACVGekIhvXtDGP6FwPkYSHFmBDxg
+ 2YqYjRB1+MbW/cCES56C3GmSl9tKus23Ef5JmP4C2r40LxP55a44MCrkoea66Y+qTzvs
+ Lq1u8qoFV1TNh+gYzHD/n3pTKBA7qZPStTXscR3LbwJTGFstWIz7SScrt3Jvn/dG8Ec3
+ na0ANY5SNgOfK9dpisDI/mGZCeFIhvcB+DSYGAJg1t1C1v1GqLRGGFLmna0jc+aywMB2
+ liqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=WSL45Uni0wlxXIfxBtB/5y1z+V6rIa7ooXBAdktfl/A=;
- b=qnjLpEn1XrJ2JIt4J14pGd8PuxwlSdhYfufxcTtbPTo/iNaO4ZKqHBlWgw65/s71LE
- Idf2lYeUy4I5VvcMIvVepaEOBCsHWXz6Ub46lSm3gdXdHthMxUjWyF7cG24U8BNSUtqr
- pjsrKcfzlJU6IjO2N9aw1AGXTiq5/fucpmS02UKzBLGSbcf86FCIzrJDO7msctR3SJSu
- CGc/yROMxkL9aBkzU8jGlKc0nxvRuRH7quoypCzq1eJ/yn3gVROIqI7zlNAQ+1urEjlu
- 03n38fTFLaU4CKj7N0feXx28s47CdxsSXhmGuJSTWKJAf2FhGdZW8XaQTM3LjRbbek2s
- cAjw==
-X-Gm-Message-State: AOAM5319CHUWJKAzkfLmpMzHX/vxZZQJl/6TZkfWJ9GuvLSgsPZWEeZc
- +XBy+u6KQZoaW4CAJHC1ItQ74uBNd5nRSQUJ
-X-Google-Smtp-Source: ABdhPJwO92ecdG4LyeNex6dqtxEb2Oh6YdMfEcJIZ3ccJ7o2d+SykbHHt95D77rql1tnIOcP64ekjA==
-X-Received: by 2002:a1c:7215:: with SMTP id n21mr4226341wmc.154.1599564924815; 
- Tue, 08 Sep 2020 04:35:24 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id c6sm33689920wrr.15.2020.09.08.04.35.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Sep 2020 04:35:24 -0700 (PDT)
-Date: Tue, 8 Sep 2020 13:35:22 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Message-ID: <20200908113522.GK2352366@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, 
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20200908093912.26792-1-kraxel@redhat.com>
- <20200908093912.26792-2-kraxel@redhat.com>
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=JaMsyeJ+iWA80KnuU579f4XwqaZ6OgYtkOn+HaHqLEU=;
+ b=ZXv0xo9Kfm+Z5LqWyWmduo2aehjGnOOGJy/Sxuv4mMNy09NasIRjPY4ZpiMVrtWufJ
+ yA5xFxbmw3aLGHQW2pVgAaLga09xUGsEG5Fj5EP3wpDMhFZFjID+kWdJcWNP5HD84GvO
+ 6TqagtF5Fi+zdE7Xjd/iqdoPqr5rsZETmgL7MY7He0shJ1cX3IcKYUyeS5M/NMbsiD/J
+ WL/tFONJ/AVLQEpaaiwLLAVwzYP8xl1PFEkFLVALv8rbJNeFKvPevStnH5kdp6RKENRL
+ u9oHTwEeHdGW4iCz03xNUQQ4qsm+4wBTpTBS9+tNSE7f5oyK65mdU61f4zEvgz8G5mmh
+ 5nhw==
+X-Gm-Message-State: AOAM5336n/sgaL9U2QG4DD59SrDUPrFiAH8NPXELyMTHvC9JTaw7ZHse
+ 2jpjBesBFmwZO2ryPut5GYOqw2vFiOBVPtYrhtQuVgDCxKk=
+X-Google-Smtp-Source: ABdhPJx49cllXE5NCfe+48wscAqYnh3SiS/Z/EE5Pu3L1Xroydl7i+hVroiP/22ce4ysBPRJcsfxlOUUhq0LYMCWfv0=
+X-Received: by 2002:ac8:ecb:: with SMTP id w11mr2863890qti.373.1599655345431; 
+ Wed, 09 Sep 2020 05:42:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200908093912.26792-2-kraxel@redhat.com>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-Subject: Re: [Spice-devel] [PATCH 1/3] drm/qxl: use drmm_mode_config_init
+From: Ding Fei <danix800@gmail.com>
+Date: Wed, 9 Sep 2020 20:42:14 +0800
+Message-ID: <CAPVVTEDBiN0KzDBZFBUNhKc3MydLUoOKiz0bS2-MtkdkenNqYg@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Wed, 09 Sep 2020 12:44:39 +0000
+Subject: [Spice-devel] Is it a possible memory leak
+ (spice-gtk/src/channel-display.c)?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,58 +58,60 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1073491703=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, Sep 08, 2020 at 11:39:10AM +0200, Gerd Hoffmann wrote:
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+--===============1073491703==
+Content-Type: multipart/alternative; boundary="000000000000a0a8cd05aee0c8b6"
 
-Btw going all in on devm_drm_dev_alloc and managed functions might be good
-cleanup for virtio.
+--000000000000a0a8cd05aee0c8b6
+Content-Type: text/plain; charset="UTF-8"
 
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Hi all, for the latest commit in 'spice-gtk/src/channel-display.c', in the
+static function
+'create_canvas', the first returning point (line 997) and the 'if
+(surface->primary)' (line 1036)
+is not taken then the second returning point, the allocated memory for
+surface would be lost.
 
-> ---
->  drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-> index fa79688013b7..4be04eaf7f37 100644
-> --- a/drivers/gpu/drm/qxl/qxl_display.c
-> +++ b/drivers/gpu/drm/qxl/qxl_display.c
-> @@ -1190,7 +1190,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
->  	int i;
->  	int ret;
->  
-> -	drm_mode_config_init(&qdev->ddev);
-> +	ret = drmm_mode_config_init(&qdev->ddev);
-> +	if (ret)
-> +		return ret;
->  
->  	ret = qxl_create_monitors_object(qdev);
->  	if (ret)
-> @@ -1223,5 +1225,4 @@ int qxl_modeset_init(struct qxl_device *qdev)
->  void qxl_modeset_fini(struct qxl_device *qdev)
->  {
->  	qxl_destroy_monitors_object(qdev);
-> -	drm_mode_config_cleanup(&qdev->ddev);
->  }
-> -- 
-> 2.27.0
-> 
+All the calling site store surface on the stack.
+
+Can anyone confirm this?
 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Best Regards
+
+Ding Fei
+E-mail: danix800@gmail.com
+
+--000000000000a0a8cd05aee0c8b6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi all, for the latest commit in &#39;spice-gtk/src/channe=
+l-display.c&#39;, in the static function<div>&#39;create_canvas&#39;, the f=
+irst returning point (line 997) and the &#39;if (surface-&gt;primary)&#39; =
+(line 1036)</div><div>is not taken then the second returning point, the all=
+ocated memory for surface would be lost.</div><div><br></div><div>All the c=
+alling site store surface on the stack.</div><div><div><div><div><div><div>=
+<br clear=3D"all"><div>Can anyone confirm this?</div><div><br></div>-- <br>=
+<div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signatur=
+e">Best Regards<br>=C2=A0<br>Ding Fei<br>E-mail: <a href=3D"mailto:danix800=
+@gmail.com" target=3D"_blank">danix800@gmail.com</a></div></div></div></div=
+></div></div></div></div>
+
+--000000000000a0a8cd05aee0c8b6--
+
+--===============1073491703==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1073491703==--
