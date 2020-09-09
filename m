@@ -1,61 +1,58 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34EC9262FF3
-	for <lists+spice-devel@lfdr.de>; Wed,  9 Sep 2020 16:45:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 89651262FFB
+	for <lists+spice-devel@lfdr.de>; Wed,  9 Sep 2020 16:49:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B4A036E0E3;
-	Wed,  9 Sep 2020 14:45:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4C5286E2F2;
+	Wed,  9 Sep 2020 14:49:03 +0000 (UTC)
 X-Original-To: spice-devel@freedesktop.org
 Delivered-To: spice-devel@freedesktop.org
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B7FA6E0E3
- for <spice-devel@freedesktop.org>; Wed,  9 Sep 2020 14:45:11 +0000 (UTC)
-Received: from us-smtp-1.mimecast.com (us-smtp-2.mimecast.com [207.211.31.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 40F3A80121C
- for <spice-devel@freedesktop.org>; Wed,  9 Sep 2020 14:45:10 +0000 (UTC)
-Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
- [209.85.217.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-39-Y5O42PCvPueNj8pW63vRFQ-1; Wed, 09 Sep 2020 10:45:08 -0400
-X-MC-Unique: Y5O42PCvPueNj8pW63vRFQ-1
-Received: by mail-vs1-f71.google.com with SMTP id v131so717558vsv.9
- for <spice-devel@freedesktop.org>; Wed, 09 Sep 2020 07:45:08 -0700 (PDT)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A173D6E30F
+ for <spice-devel@freedesktop.org>; Wed,  9 Sep 2020 14:49:02 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id z23so3914121ejr.13
+ for <spice-devel@freedesktop.org>; Wed, 09 Sep 2020 07:49:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Ot+lqKal94YoVkO5LMKn09ESCVr7d+P7NQBh0GI30+E=;
+ b=K7syHENUaObbzf5C9KII+UM66kxa2sJzZBMlwgdqcXrQPCrqOvNxaEp2mb7C2HHUiU
+ eYYFV9zI39HHuZ5h62UlMEJC15zAmD1NeOFoODG7T4AnzP4eZsaShoNVnIkddf2hACzn
+ dqQksAs4zR2rgGeIVEaoXucQurO3KRRQAl1O+8+DFOw0NHQtVhkygHapzeUbPSlkMtMM
+ 7rwt42dVr7agCwV+1jo7a0DCciA3VDM+F2SG90pbukvBqNzYWsHdHVrR4A7aWqJVDsIc
+ mqDOZ1wr7fMJmN3ZK3T4WWQ3FHuCXmmHwOkSMzhF/qwNMZxZ8ha4ur9IS/5V/HpQzdi2
+ C7RQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=mRVN6T/AnU6aQUS/fY/dEcjwWw628nmGIq7h+ZiY+YI=;
- b=Sd5J0ud7H2Cn/IYDtxkkA2LuNSlXr7/nTDRx9lAYrK4UqFw3uzPgkcTwxksli4zHJn
- OY043QLXX968j8naEWzn0mHSVxSDj2ve3WH29J0/E7l/kzewKfrgxUxYp17LaFNSzv4c
- tL3ocxD5SeaLYdH3gjWrXUXz8qDhGw601sG1ZSvFdzRa06DUmHofv5aPejOWpdVWPE2X
- khecgmx92/jMJzGzMdeBRwusq71wwmG8fCcHefbkCr+wOyMwj+MPb7HrXK6XkBlScro/
- Y1HRCPJ7531z2Hf8Pd3GIh7hTR5lhvagqgJFvyImEatNCLj7FoUQ+VSAuH3h79AGxlCs
- zbAQ==
-X-Gm-Message-State: AOAM532SgudHo+ROS4CPzPQwLNN/joUi0CxTHW1Yrc7jiAZLj9B5NAcY
- GhQs4404EYZGhTk1Q4S0DhGEE/8FETi5czQ4tMsg9/cN2gIoc8/DAhxfbeSDUUokJxBGGJSLCBq
- DoY58/GsHUNwZdZUTfXMSJ1NVD3Hqa6GhsCNQxAw=
-X-Received: by 2002:a1f:8c04:: with SMTP id o4mr941214vkd.18.1599662707937;
- Wed, 09 Sep 2020 07:45:07 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwCQLCEC+SStLmeU5BbE6CALsAMuG1OILRU6rJkf8rbi5Lqvo7Paz6cXDjKlzdsufp4xUqNDA91UP19+0AvfxU=
-X-Received: by 2002:a1f:8c04:: with SMTP id o4mr941205vkd.18.1599662707754;
- Wed, 09 Sep 2020 07:45:07 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=Ot+lqKal94YoVkO5LMKn09ESCVr7d+P7NQBh0GI30+E=;
+ b=NOqwH+HllnPvd1q3CA5TN6X8RQGFuoanlsbgkUyIoDdciqFsgLZ33sH+djd0XRXgVx
+ XKw9CjbmAG9/4WSTlJEFf4ijqlXIW/mwmdemTxYciX7Swayc0OA444fozfDNes37JuYD
+ wK0kPSQbyaHpGdWCIr7dj07eIMy1Ba2OAGka7YYYL8hNcFmYiqG7IfCgG+U48Opu8iCJ
+ 4z8+A0YYxcEcbj8gdwMmeLERGOf6Fu4I7C/PxpYIhPLCMEO0yPnZJCSPPz62ccj646ks
+ KOCBf0T7J3rcKHbjVvNkQQNKLfsjdLWEPA3/tBcOLp4pcZugjhSbZFLU33Nmpc6G2Mcj
+ IzTA==
+X-Gm-Message-State: AOAM532y+ZXluzczT1L8EQX/sWeLh5LcKEWSOM4tAvdOH7psmo/HthbL
+ cWUGcGh+rZTzBmDz25y03e5B3U4D7YfC+5UqgVM=
+X-Google-Smtp-Source: ABdhPJyn5C43kCSQTwYiU014Z/xjpHXDmxyOBvA+mNmYTdW5L0HvDe/lHhCzpzHSg9NlM6WvTqW9lTiSvwtz6/u3KZY=
+X-Received: by 2002:a17:906:4bd7:: with SMTP id
+ x23mr3933974ejv.92.1599662941201; 
+ Wed, 09 Sep 2020 07:49:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200909135044.0B7FA76130@kemper.freedesktop.org>
  <CAJ+F1CJr=UC8H4CdpsTkv1yHPJh-yF85MDYkA-A4y6jtO5sf0Q@mail.gmail.com>
  <1746534140.655311.1599661009588.JavaMail.zimbra@redhat.com>
  <CAH=CeiBb4eUew8i0MjNnLdvi3Z8HG6bgXGQVedGcFtJtChpZUQ@mail.gmail.com>
  <28522181.657126.1599662196864.JavaMail.zimbra@redhat.com>
-In-Reply-To: <28522181.657126.1599662196864.JavaMail.zimbra@redhat.com>
-From: Jakub Janku <jjanku@redhat.com>
-Date: Wed, 9 Sep 2020 16:44:56 +0200
-Message-ID: <CAH=CeiB+89q6C6fSu-814jaN98_eCGe72qkwZTFp7V7OXnehLw@mail.gmail.com>
-To: Frediano Ziglio <fziglio@redhat.com>
-X-Mimecast-Spam-Score: 0.0
-X-Mimecast-Originator: redhat.com
+ <CAH=CeiB+89q6C6fSu-814jaN98_eCGe72qkwZTFp7V7OXnehLw@mail.gmail.com>
+In-Reply-To: <CAH=CeiB+89q6C6fSu-814jaN98_eCGe72qkwZTFp7V7OXnehLw@mail.gmail.com>
+From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
+Date: Wed, 9 Sep 2020 18:48:49 +0400
+Message-ID: <CAJ+F1CLVPu1UDBubZinJCMNuY8BX_vbdFOjE8pvWquA-id-27w@mail.gmail.com>
+To: Jakub Janku <jjanku@redhat.com>
 Subject: Re: [Spice-devel] [Spice-commits] 6 commits - meson.build
  src/map-file src/spice-glib-sym-file src/spice-gtk-session.c
  src/spice-session.c src/spice-session.h src/spice-session-priv.h
@@ -71,35 +68,165 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-commits@lists.freedesktop.org, spice-devel@freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0640069601=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBTZXAgOSwgMjAyMCBhdCA0OjM2IFBNIEZyZWRpYW5vIFppZ2xpbyA8ZnppZ2xpb0By
-ZWRoYXQuY29tPiB3cm90ZToKPgo+ID4gT24gV2VkLCBTZXAgOSwgMjAyMCBhdCA0OjE2IFBNIEZy
-ZWRpYW5vIFppZ2xpbyA8ZnppZ2xpb0ByZWRoYXQuY29tPiB3cm90ZToKPiA+ID4KPiA+ID4gPiA+
-IGNvbW1pdCA0YjkwOTJiOTZiOGRhOTQ2ZmYzZDE3OTIyYjBmY2YyMjVjNWRjODFmCj4gPiA+ID4K
-PiA+ID4gPiA+IEF1dGhvcjogSmFrdWIgSmFua8WvIDwgamphbmt1QHJlZGhhdC5jb20gPgo+ID4g
-PiA+Cj4gPiA+ID4gPiBEYXRlOiBTYXQgTWF5IDIzIDE2OjI4OjUyIDIwMjAgKzAyMDAKPiA+ID4g
-Pgo+ID4gPgo+ID4gPiA+ID4gc2Vzc2lvbjogbWFrZSBzcGljZV9zZXNzaW9uX2dldF93ZWJkYXZf
-c2VydmVyKCkgcHVibGljCj4gPiA+ID4KPiA+ID4KPiA+ID4gPiA+IEl0IHdpbGwgYmUgbmVjZXNz
-YXJ5IHRvIGFjY2VzcyB0aGUgd2ViZGF2IHNlcnZlciBmcm9tCj4gPiA+ID4gPiBzcGljZS1ndGst
-c2Vzc2lvbi5jCj4gPiA+ID4KPiA+ID4gPiA+IHdoaWNoIGlzbid0IGNvbXBpbGVkIHdpdGggc3Bp
-Y2Utc2Vzc2lvbi1wcml2LmgsIHNvIG1ha2UKPiA+ID4gPgo+ID4gPiA+ID4gc3BpY2Vfc2Vzc2lv
-bl9nZXRfd2ViZGF2X3NlcnZlcigpIHB1YmxpYy4KPiA+ID4gPgo+ID4gPgo+ID4gPiA+IEkgaGF2
-ZW4ndCBsb29rZWQgYXQgdGhlIHdob2xlIHNlcmllcy4gV291bGRuJ3QgaXQgbWFrZSBzZW5zZSB0
-byBtYWtlIGl0IGEKPiA+ID4gPiByZWFkLW9ubHkgcHJvcGVydHkgaW5zdGVhZD8KPiA+ID4KPiA+
-ID4gSXQgc291bmRzIHJlYXNvbmFibGUgZm9yIG1lLgo+ID4gPiBKYWt1YiA/Cj4gPiA+Cj4gPgo+
-ID4gSSBhZ3JlZS4KPiA+Cj4gPiBSZXZlcnQgdGhlIGNvbW1pdHMgcGxlYXNlLiBJJ2xsIHJlb3Bl
-biB0aGUgbWVyZ2UgcmVxdWVzdCBvbmNlIEkgaGF2ZSBpdAo+ID4gcmVhZHkuCj4gPgo+ID4gQ2hl
-ZXJzLAo+ID4gSmFrdWIKPiA+Cj4KPiBUbyBiZSBob25lc3QgSSBkb24ndCBzZWUgdGhlIG5lZWQg
-dG8gcmV2ZXJ0IGNvbW1pdHMsIGl0J3MganVzdCBhIGNoYW5nZQo+IGZyb20gcHVibGljIHRvIHBy
-aXZhdGUuCgpPaywgc28gc2hvdWxkIEkgb3BlbiBhIHNlcGFyYXRlIE1SPwoKVG8gbWFrZSBzdXJl
-IHRoYXQgSSBkaWRuJ3QgbWlzdW5kZXJzdGFuZCBpdDogdGhlIHN1Z2dlc3Rpb24gaXMgdG8ga2Vl
-cApzcGljZV9zZXNzaW9uX2dldF93ZWJkYXZfc2VydmVyKCkgcHJpdmF0ZSBhbmQgaW5zdGFsbCBh
-IG5ldwpTcGljZVNlc3Npb24gcmVhZC1vbmx5IHByb3BlcnR5ICJ3ZWJkYXYiLCBjb3JyZWN0Pwo+
-Cj4gRnJlZGlhbm8KPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNr
-dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3Nw
-aWNlLWRldmVsCg==
+--===============0640069601==
+Content-Type: multipart/alternative; boundary="0000000000005ee6aa05aee28df8"
+
+--0000000000005ee6aa05aee28df8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+On Wed, Sep 9, 2020 at 6:45 PM Jakub Janku <jjanku@redhat.com> wrote:
+
+> On Wed, Sep 9, 2020 at 4:36 PM Frediano Ziglio <fziglio@redhat.com> wrote=
+:
+> >
+> > > On Wed, Sep 9, 2020 at 4:16 PM Frediano Ziglio <fziglio@redhat.com>
+> wrote:
+> > > >
+> > > > > > commit 4b9092b96b8da946ff3d17922b0fcf225c5dc81f
+> > > > >
+> > > > > > Author: Jakub Jank=C5=AF < jjanku@redhat.com >
+> > > > >
+> > > > > > Date: Sat May 23 16:28:52 2020 +0200
+> > > > >
+> > > >
+> > > > > > session: make spice_session_get_webdav_server() public
+> > > > >
+> > > >
+> > > > > > It will be necessary to access the webdav server from
+> > > > > > spice-gtk-session.c
+> > > > >
+> > > > > > which isn't compiled with spice-session-priv.h, so make
+> > > > >
+> > > > > > spice_session_get_webdav_server() public.
+> > > > >
+> > > >
+> > > > > I haven't looked at the whole series. Wouldn't it make sense to
+> make it a
+> > > > > read-only property instead?
+> > > >
+> > > > It sounds reasonable for me.
+> > > > Jakub ?
+> > > >
+> > >
+> > > I agree.
+> > >
+> > > Revert the commits please. I'll reopen the merge request once I have =
+it
+> > > ready.
+> > >
+> > > Cheers,
+> > > Jakub
+> > >
+> >
+> > To be honest I don't see the need to revert commits, it's just a change
+> > from public to private.
+>
+> Ok, so should I open a separate MR?
+>
+> To make sure that I didn't misunderstand it: the suggestion is to keep
+> spice_session_get_webdav_server() private and install a new
+> SpiceSession read-only property "webdav", correct?
+>
+>
+yes (the main motivation is to avoid adding new library symbols, and
+properties can be looked up at runtime, which may avoid bumping
+dependencies in some cases)
+
+
+--=20
+Marc-Andr=C3=A9 Lureau
+
+--0000000000005ee6aa05aee28df8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Hi<br></div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 9, 2020 at 6:45 PM Jaku=
+b Janku &lt;<a href=3D"mailto:jjanku@redhat.com">jjanku@redhat.com</a>&gt; =
+wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Wed, S=
+ep 9, 2020 at 4:36 PM Frediano Ziglio &lt;<a href=3D"mailto:fziglio@redhat.=
+com" target=3D"_blank">fziglio@redhat.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; &gt; On Wed, Sep 9, 2020 at 4:16 PM Frediano Ziglio &lt;<a href=3D"mai=
+lto:fziglio@redhat.com" target=3D"_blank">fziglio@redhat.com</a>&gt; wrote:=
+<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; commit 4b9092b96b8da946ff3d17922b0fcf225c5dc81f<br=
+>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; Author: Jakub Jank=C5=AF &lt; <a href=3D"mailto:jj=
+anku@redhat.com" target=3D"_blank">jjanku@redhat.com</a> &gt;<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; Date: Sat May 23 16:28:52 2020 +0200<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; session: make spice_session_get_webdav_server() pu=
+blic<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; It will be necessary to access the webdav server f=
+rom<br>
+&gt; &gt; &gt; &gt; &gt; spice-gtk-session.c<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; which isn&#39;t compiled with spice-session-priv.h=
+, so make<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; &gt; spice_session_get_webdav_server() public.<br>
+&gt; &gt; &gt; &gt;<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; &gt; I haven&#39;t looked at the whole series. Wouldn&#39;t =
+it make sense to make it a<br>
+&gt; &gt; &gt; &gt; read-only property instead?<br>
+&gt; &gt; &gt;<br>
+&gt; &gt; &gt; It sounds reasonable for me.<br>
+&gt; &gt; &gt; Jakub ?<br>
+&gt; &gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; I agree.<br>
+&gt; &gt;<br>
+&gt; &gt; Revert the commits please. I&#39;ll reopen the merge request once=
+ I have it<br>
+&gt; &gt; ready.<br>
+&gt; &gt;<br>
+&gt; &gt; Cheers,<br>
+&gt; &gt; Jakub<br>
+&gt; &gt;<br>
+&gt;<br>
+&gt; To be honest I don&#39;t see the need to revert commits, it&#39;s just=
+ a change<br>
+&gt; from public to private.<br>
+<br>
+Ok, so should I open a separate MR?<br>
+<br>
+To make sure that I didn&#39;t misunderstand it: the suggestion is to keep<=
+br>
+spice_session_get_webdav_server() private and install a new<br>
+SpiceSession read-only property &quot;webdav&quot;, correct?<br><br></block=
+quote><div><br></div><div>yes (the main motivation is to avoid adding new l=
+ibrary symbols, and properties can be looked up at runtime, which may avoid=
+ bumping dependencies in some cases)<br></div></div><br clear=3D"all"><br>-=
+- <br><div dir=3D"ltr" class=3D"gmail_signature">Marc-Andr=C3=A9 Lureau<br>=
+</div></div>
+
+--0000000000005ee6aa05aee28df8--
+
+--===============0640069601==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0640069601==--
