@@ -2,57 +2,50 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89651262FFB
-	for <lists+spice-devel@lfdr.de>; Wed,  9 Sep 2020 16:49:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82E7026307F
+	for <lists+spice-devel@lfdr.de>; Wed,  9 Sep 2020 17:27:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C5286E2F2;
-	Wed,  9 Sep 2020 14:49:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 12F666EC16;
+	Wed,  9 Sep 2020 15:27:51 +0000 (UTC)
 X-Original-To: spice-devel@freedesktop.org
 Delivered-To: spice-devel@freedesktop.org
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A173D6E30F
- for <spice-devel@freedesktop.org>; Wed,  9 Sep 2020 14:49:02 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id z23so3914121ejr.13
- for <spice-devel@freedesktop.org>; Wed, 09 Sep 2020 07:49:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ot+lqKal94YoVkO5LMKn09ESCVr7d+P7NQBh0GI30+E=;
- b=K7syHENUaObbzf5C9KII+UM66kxa2sJzZBMlwgdqcXrQPCrqOvNxaEp2mb7C2HHUiU
- eYYFV9zI39HHuZ5h62UlMEJC15zAmD1NeOFoODG7T4AnzP4eZsaShoNVnIkddf2hACzn
- dqQksAs4zR2rgGeIVEaoXucQurO3KRRQAl1O+8+DFOw0NHQtVhkygHapzeUbPSlkMtMM
- 7rwt42dVr7agCwV+1jo7a0DCciA3VDM+F2SG90pbukvBqNzYWsHdHVrR4A7aWqJVDsIc
- mqDOZ1wr7fMJmN3ZK3T4WWQ3FHuCXmmHwOkSMzhF/qwNMZxZ8ha4ur9IS/5V/HpQzdi2
- C7RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ot+lqKal94YoVkO5LMKn09ESCVr7d+P7NQBh0GI30+E=;
- b=NOqwH+HllnPvd1q3CA5TN6X8RQGFuoanlsbgkUyIoDdciqFsgLZ33sH+djd0XRXgVx
- XKw9CjbmAG9/4WSTlJEFf4ijqlXIW/mwmdemTxYciX7Swayc0OA444fozfDNes37JuYD
- wK0kPSQbyaHpGdWCIr7dj07eIMy1Ba2OAGka7YYYL8hNcFmYiqG7IfCgG+U48Opu8iCJ
- 4z8+A0YYxcEcbj8gdwMmeLERGOf6Fu4I7C/PxpYIhPLCMEO0yPnZJCSPPz62ccj646ks
- KOCBf0T7J3rcKHbjVvNkQQNKLfsjdLWEPA3/tBcOLp4pcZugjhSbZFLU33Nmpc6G2Mcj
- IzTA==
-X-Gm-Message-State: AOAM532y+ZXluzczT1L8EQX/sWeLh5LcKEWSOM4tAvdOH7psmo/HthbL
- cWUGcGh+rZTzBmDz25y03e5B3U4D7YfC+5UqgVM=
-X-Google-Smtp-Source: ABdhPJyn5C43kCSQTwYiU014Z/xjpHXDmxyOBvA+mNmYTdW5L0HvDe/lHhCzpzHSg9NlM6WvTqW9lTiSvwtz6/u3KZY=
-X-Received: by 2002:a17:906:4bd7:: with SMTP id
- x23mr3933974ejv.92.1599662941201; 
- Wed, 09 Sep 2020 07:49:01 -0700 (PDT)
-MIME-Version: 1.0
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 962866EC16
+ for <spice-devel@freedesktop.org>; Wed,  9 Sep 2020 15:27:49 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0D63A805EEE;
+ Wed,  9 Sep 2020 15:27:49 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 06B447E8DA;
+ Wed,  9 Sep 2020 15:27:49 +0000 (UTC)
+Received: from zmail25.collab.prod.int.phx2.redhat.com
+ (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id F36B91826D2A;
+ Wed,  9 Sep 2020 15:27:48 +0000 (UTC)
+Date: Wed, 9 Sep 2020 11:27:48 -0400 (EDT)
+From: Frediano Ziglio <fziglio@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@gmail.com>
+Message-ID: <1145253150.663633.1599665268770.JavaMail.zimbra@redhat.com>
+In-Reply-To: <CAJ+F1CLVPu1UDBubZinJCMNuY8BX_vbdFOjE8pvWquA-id-27w@mail.gmail.com>
 References: <20200909135044.0B7FA76130@kemper.freedesktop.org>
  <CAJ+F1CJr=UC8H4CdpsTkv1yHPJh-yF85MDYkA-A4y6jtO5sf0Q@mail.gmail.com>
  <1746534140.655311.1599661009588.JavaMail.zimbra@redhat.com>
  <CAH=CeiBb4eUew8i0MjNnLdvi3Z8HG6bgXGQVedGcFtJtChpZUQ@mail.gmail.com>
  <28522181.657126.1599662196864.JavaMail.zimbra@redhat.com>
  <CAH=CeiB+89q6C6fSu-814jaN98_eCGe72qkwZTFp7V7OXnehLw@mail.gmail.com>
-In-Reply-To: <CAH=CeiB+89q6C6fSu-814jaN98_eCGe72qkwZTFp7V7OXnehLw@mail.gmail.com>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
-Date: Wed, 9 Sep 2020 18:48:49 +0400
-Message-ID: <CAJ+F1CLVPu1UDBubZinJCMNuY8BX_vbdFOjE8pvWquA-id-27w@mail.gmail.com>
-To: Jakub Janku <jjanku@redhat.com>
+ <CAJ+F1CLVPu1UDBubZinJCMNuY8BX_vbdFOjE8pvWquA-id-27w@mail.gmail.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.33.32.4, 10.4.195.29]
+Thread-Topic: 6 commits - meson.build src/map-file src/spice-glib-sym-file
+ src/spice-gtk-session.c src/spice-session.c src/spice-session.h
+ src/spice-session-priv.h
+Thread-Index: 53FN9cIXER4H1fTnbWYencHh3hLCKw==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Subject: Re: [Spice-devel] [Spice-commits] 6 commits - meson.build
  src/map-file src/spice-glib-sym-file src/spice-gtk-session.c
  src/spice-session.c src/spice-session.h src/spice-session-priv.h
@@ -67,166 +60,54 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-commits@lists.freedesktop.org, spice-devel@freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0640069601=="
+Cc: spice-devel@freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0640069601==
-Content-Type: multipart/alternative; boundary="0000000000005ee6aa05aee28df8"
-
---0000000000005ee6aa05aee28df8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-On Wed, Sep 9, 2020 at 6:45 PM Jakub Janku <jjanku@redhat.com> wrote:
-
-> On Wed, Sep 9, 2020 at 4:36 PM Frediano Ziglio <fziglio@redhat.com> wrote=
-:
-> >
-> > > On Wed, Sep 9, 2020 at 4:16 PM Frediano Ziglio <fziglio@redhat.com>
-> wrote:
-> > > >
-> > > > > > commit 4b9092b96b8da946ff3d17922b0fcf225c5dc81f
-> > > > >
-> > > > > > Author: Jakub Jank=C5=AF < jjanku@redhat.com >
-> > > > >
-> > > > > > Date: Sat May 23 16:28:52 2020 +0200
-> > > > >
-> > > >
-> > > > > > session: make spice_session_get_webdav_server() public
-> > > > >
-> > > >
-> > > > > > It will be necessary to access the webdav server from
-> > > > > > spice-gtk-session.c
-> > > > >
-> > > > > > which isn't compiled with spice-session-priv.h, so make
-> > > > >
-> > > > > > spice_session_get_webdav_server() public.
-> > > > >
-> > > >
-> > > > > I haven't looked at the whole series. Wouldn't it make sense to
-> make it a
-> > > > > read-only property instead?
-> > > >
-> > > > It sounds reasonable for me.
-> > > > Jakub ?
-> > > >
-> > >
-> > > I agree.
-> > >
-> > > Revert the commits please. I'll reopen the merge request once I have =
-it
-> > > ready.
-> > >
-> > > Cheers,
-> > > Jakub
-> > >
-> >
-> > To be honest I don't see the need to revert commits, it's just a change
-> > from public to private.
->
-> Ok, so should I open a separate MR?
->
-> To make sure that I didn't misunderstand it: the suggestion is to keep
-> spice_session_get_webdav_server() private and install a new
-> SpiceSession read-only property "webdav", correct?
->
->
-yes (the main motivation is to avoid adding new library symbols, and
-properties can be looked up at runtime, which may avoid bumping
-dependencies in some cases)
-
-
---=20
-Marc-Andr=C3=A9 Lureau
-
---0000000000005ee6aa05aee28df8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Hi<br></div><br><div class=3D"gmail_quote=
-"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 9, 2020 at 6:45 PM Jaku=
-b Janku &lt;<a href=3D"mailto:jjanku@redhat.com">jjanku@redhat.com</a>&gt; =
-wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
-px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Wed, S=
-ep 9, 2020 at 4:36 PM Frediano Ziglio &lt;<a href=3D"mailto:fziglio@redhat.=
-com" target=3D"_blank">fziglio@redhat.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; &gt; On Wed, Sep 9, 2020 at 4:16 PM Frediano Ziglio &lt;<a href=3D"mai=
-lto:fziglio@redhat.com" target=3D"_blank">fziglio@redhat.com</a>&gt; wrote:=
-<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; commit 4b9092b96b8da946ff3d17922b0fcf225c5dc81f<br=
->
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; Author: Jakub Jank=C5=AF &lt; <a href=3D"mailto:jj=
-anku@redhat.com" target=3D"_blank">jjanku@redhat.com</a> &gt;<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; Date: Sat May 23 16:28:52 2020 +0200<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; session: make spice_session_get_webdav_server() pu=
-blic<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; It will be necessary to access the webdav server f=
-rom<br>
-&gt; &gt; &gt; &gt; &gt; spice-gtk-session.c<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; which isn&#39;t compiled with spice-session-priv.h=
-, so make<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; &gt; spice_session_get_webdav_server() public.<br>
-&gt; &gt; &gt; &gt;<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; &gt; I haven&#39;t looked at the whole series. Wouldn&#39;t =
-it make sense to make it a<br>
-&gt; &gt; &gt; &gt; read-only property instead?<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; It sounds reasonable for me.<br>
-&gt; &gt; &gt; Jakub ?<br>
-&gt; &gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; I agree.<br>
-&gt; &gt;<br>
-&gt; &gt; Revert the commits please. I&#39;ll reopen the merge request once=
- I have it<br>
-&gt; &gt; ready.<br>
-&gt; &gt;<br>
-&gt; &gt; Cheers,<br>
-&gt; &gt; Jakub<br>
-&gt; &gt;<br>
-&gt;<br>
-&gt; To be honest I don&#39;t see the need to revert commits, it&#39;s just=
- a change<br>
-&gt; from public to private.<br>
-<br>
-Ok, so should I open a separate MR?<br>
-<br>
-To make sure that I didn&#39;t misunderstand it: the suggestion is to keep<=
-br>
-spice_session_get_webdav_server() private and install a new<br>
-SpiceSession read-only property &quot;webdav&quot;, correct?<br><br></block=
-quote><div><br></div><div>yes (the main motivation is to avoid adding new l=
-ibrary symbols, and properties can be looked up at runtime, which may avoid=
- bumping dependencies in some cases)<br></div></div><br clear=3D"all"><br>-=
-- <br><div dir=3D"ltr" class=3D"gmail_signature">Marc-Andr=C3=A9 Lureau<br>=
-</div></div>
-
---0000000000005ee6aa05aee28df8--
-
---===============0640069601==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0640069601==--
+PiBIaQoKPiBPbiBXZWQsIFNlcCA5LCAyMDIwIGF0IDY6NDUgUE0gSmFrdWIgSmFua3UgPCBqamFu
+a3VAcmVkaGF0LmNvbSA+IHdyb3RlOgoKPiA+IE9uIFdlZCwgU2VwIDksIDIwMjAgYXQgNDozNiBQ
+TSBGcmVkaWFubyBaaWdsaW8gPCBmemlnbGlvQHJlZGhhdC5jb20gPgo+ID4gd3JvdGU6Cj4gCj4g
+PiA+Cj4gCj4gPiA+ID4gT24gV2VkLCBTZXAgOSwgMjAyMCBhdCA0OjE2IFBNIEZyZWRpYW5vIFpp
+Z2xpbyA8IGZ6aWdsaW9AcmVkaGF0LmNvbSA+Cj4gPiA+ID4gd3JvdGU6Cj4gCj4gPiA+ID4gPgo+
+IAo+ID4gPiA+ID4gPiA+IGNvbW1pdCA0YjkwOTJiOTZiOGRhOTQ2ZmYzZDE3OTIyYjBmY2YyMjVj
+NWRjODFmCj4gCj4gPiA+ID4gPiA+Cj4gCj4gPiA+ID4gPiA+ID4gQXV0aG9yOiBKYWt1YiBKYW5r
+xa8gPCBqamFua3VAcmVkaGF0LmNvbSA+Cj4gCj4gPiA+ID4gPiA+Cj4gCj4gPiA+ID4gPiA+ID4g
+RGF0ZTogU2F0IE1heSAyMyAxNjoyODo1MiAyMDIwICswMjAwCj4gCj4gPiA+ID4gPiA+Cj4gCj4g
+PiA+ID4gPgo+IAo+ID4gPiA+ID4gPiA+IHNlc3Npb246IG1ha2Ugc3BpY2Vfc2Vzc2lvbl9nZXRf
+d2ViZGF2X3NlcnZlcigpIHB1YmxpYwo+IAo+ID4gPiA+ID4gPgo+IAo+ID4gPiA+ID4KPiAKPiA+
+ID4gPiA+ID4gPiBJdCB3aWxsIGJlIG5lY2Vzc2FyeSB0byBhY2Nlc3MgdGhlIHdlYmRhdiBzZXJ2
+ZXIgZnJvbQo+IAo+ID4gPiA+ID4gPiA+IHNwaWNlLWd0ay1zZXNzaW9uLmMKPiAKPiA+ID4gPiA+
+ID4KPiAKPiA+ID4gPiA+ID4gPiB3aGljaCBpc24ndCBjb21waWxlZCB3aXRoIHNwaWNlLXNlc3Np
+b24tcHJpdi5oLCBzbyBtYWtlCj4gCj4gPiA+ID4gPiA+Cj4gCj4gPiA+ID4gPiA+ID4gc3BpY2Vf
+c2Vzc2lvbl9nZXRfd2ViZGF2X3NlcnZlcigpIHB1YmxpYy4KPiAKPiA+ID4gPiA+ID4KPiAKPiA+
+ID4gPiA+Cj4gCj4gPiA+ID4gPiA+IEkgaGF2ZW4ndCBsb29rZWQgYXQgdGhlIHdob2xlIHNlcmll
+cy4gV291bGRuJ3QgaXQgbWFrZSBzZW5zZSB0bwo+ID4gPiA+ID4gPiBtYWtlCj4gPiA+ID4gPiA+
+IGl0IGEKPiAKPiA+ID4gPiA+ID4gcmVhZC1vbmx5IHByb3BlcnR5IGluc3RlYWQ/Cj4gCj4gPiA+
+ID4gPgo+IAo+ID4gPiA+ID4gSXQgc291bmRzIHJlYXNvbmFibGUgZm9yIG1lLgo+IAo+ID4gPiA+
+ID4gSmFrdWIgPwo+IAo+ID4gPiA+ID4KPiAKPiA+ID4gPgo+IAo+ID4gPiA+IEkgYWdyZWUuCj4g
+Cj4gPiA+ID4KPiAKPiA+ID4gPiBSZXZlcnQgdGhlIGNvbW1pdHMgcGxlYXNlLiBJJ2xsIHJlb3Bl
+biB0aGUgbWVyZ2UgcmVxdWVzdCBvbmNlIEkgaGF2ZSBpdAo+IAo+ID4gPiA+IHJlYWR5Lgo+IAo+
+ID4gPiA+Cj4gCj4gPiA+ID4gQ2hlZXJzLAo+IAo+ID4gPiA+IEpha3ViCj4gCj4gPiA+ID4KPiAK
+PiA+ID4KPiAKPiA+ID4gVG8gYmUgaG9uZXN0IEkgZG9uJ3Qgc2VlIHRoZSBuZWVkIHRvIHJldmVy
+dCBjb21taXRzLCBpdCdzIGp1c3QgYSBjaGFuZ2UKPiAKPiA+ID4gZnJvbSBwdWJsaWMgdG8gcHJp
+dmF0ZS4KPiAKCj4gPiBPaywgc28gc2hvdWxkIEkgb3BlbiBhIHNlcGFyYXRlIE1SPwo+IAoKPiA+
+IFRvIG1ha2Ugc3VyZSB0aGF0IEkgZGlkbid0IG1pc3VuZGVyc3RhbmQgaXQ6IHRoZSBzdWdnZXN0
+aW9uIGlzIHRvIGtlZXAKPiAKPiA+IHNwaWNlX3Nlc3Npb25fZ2V0X3dlYmRhdl9zZXJ2ZXIoKSBw
+cml2YXRlIGFuZCBpbnN0YWxsIGEgbmV3Cj4gCj4gPiBTcGljZVNlc3Npb24gcmVhZC1vbmx5IHBy
+b3BlcnR5ICJ3ZWJkYXYiLCBjb3JyZWN0Pwo+IAoKPiB5ZXMgKHRoZSBtYWluIG1vdGl2YXRpb24g
+aXMgdG8gYXZvaWQgYWRkaW5nIG5ldyBsaWJyYXJ5IHN5bWJvbHMsIGFuZAo+IHByb3BlcnRpZXMg
+Y2FuIGJlIGxvb2tlZCB1cCBhdCBydW50aW1lLCB3aGljaCBtYXkgYXZvaWQgYnVtcGluZyBkZXBl
+bmRlbmNpZXMKPiBpbiBzb21lIGNhc2VzKQoKT2gsIEkgdGhvdWdoIHRoZSBpZGVhIHdhcyBtYWtp
+bmcgdGhlIG5ldyBwcm9wZXJ0eSBwcml2YXRlIHRvIGluIHRoZSBmdXR1cmUgaXQgY291bGQgYmUg
+cmVtb3ZlZCBpZiBub3QgbmVlZGVkIGFueW1vcmUuIApZb3UgY2FuIGFjaGlldmUgdGhlIGR5bmFt
+aWMgcmVzb2x1dGlvbiB1c2luZyBkbHN5bSBpZiBuZWVkZWQgdXNpbmcgbGlicmFyeSBzeW1ib2xz
+LiAKSXQncyBub3QgdGhhdCBlYXN5IHRvIGxvb2sgdGhlIHByb3BlcnR5IGR5bmFtaWNhbGx5LCB0
+byBhdm9pZCB3YXJuaW5ncyB5b3UgaGF2ZSB0byB1c2UgZ19vYmplY3RfY2xhc3NfZmluZF9wcm9w
+ZXJ0eSBmaXJzdC4gCkZvciBhICJnZXQiIGJldHdlZW4gc3BpY2UtZ3RrIGFuZCBzcGljZS1nbGli
+IHRoZSBjdXJyZW50IHNvbHV0aW9uIGlzIGVhc2llciBhbmQgY29uc2lzdGVudCwgdGhlcmUgYXJl
+IGFscmVhZHkgbXVsdGlwbGUgc3BpY2Vfc2Vzc2lvbl9nZXRfKiBmdW5jdGlvbnMuIAoKRnJlZGlh
+bm8gCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNl
+LWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0
+cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo=
