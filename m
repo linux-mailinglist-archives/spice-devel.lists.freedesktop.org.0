@@ -1,52 +1,55 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86AD727A171
-	for <lists+spice-devel@lfdr.de>; Sun, 27 Sep 2020 16:58:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 562A327A172
+	for <lists+spice-devel@lfdr.de>; Sun, 27 Sep 2020 16:58:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B90CB6E0D8;
-	Sun, 27 Sep 2020 14:58:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D66DC6E0E7;
+	Sun, 27 Sep 2020 14:58:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E3786E0D8
- for <spice-devel@lists.freedesktop.org>; Sun, 27 Sep 2020 14:58:09 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 629F76E0E7
+ for <spice-devel@lists.freedesktop.org>; Sun, 27 Sep 2020 14:58:25 +0000 (UTC)
 Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1601218687;
+ s=mimecast20190719; t=1601218704;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=emFydObY5sOmzVU7aR2Oxn+24L3b3rXtNM8x9eSycYY=;
- b=UEIb/IgDc+wZxixa0WD1Y40ww1my6xYW88SeIhWdCHcmePYn0b9doG9AYNPVliFAQlmrFY
- ktIkWaxAP5Klvg7IXFb+udZFr5y0gu5oV3HpM9HIhZKFjwRQ7o7IPVFEH1tomQVlKNDzgM
- 1Yy405ZiJw6NVRclz1hgUY44zkPHJLk=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=8Y86zsB51YRxIrGPaBaJ0OMrK6jcKF47UHG43z60HUs=;
+ b=KKEuxVdNUoeRRvyADGt4hojTYMSylUJM2Ecmmz3uf6Kc2ifNc45lTfxl1II9GBTqrnAYok
+ PKTzmh7ID5kg0qsFNF691eavPwHnMOXpdLn0OVvU5ep0cWTEtNoeQ03AxJX8/kvoVQYDTY
+ eaHUTUT3imwfJxHoRmAMkhoa/qLaW4U=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-364-NwAf63WvN329U0R4_XFiRA-1; Sun, 27 Sep 2020 10:58:05 -0400
-X-MC-Unique: NwAf63WvN329U0R4_XFiRA-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-195-6AhkGRkrP32wLC_Dwu1F7g-1; Sun, 27 Sep 2020 10:58:19 -0400
+X-MC-Unique: 6AhkGRkrP32wLC_Dwu1F7g-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0215C1DDE2;
- Sun, 27 Sep 2020 14:58:04 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8A6EF1005E5C;
+ Sun, 27 Sep 2020 14:58:18 +0000 (UTC)
 Received: from localhost (unknown [10.36.110.56])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8CD1C55777;
- Sun, 27 Sep 2020 14:57:54 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 34ECF60C84;
+ Sun, 27 Sep 2020 14:58:07 +0000 (UTC)
 From: marcandre.lureau@redhat.com
 To: qemu-devel@nongnu.org
-Date: Sun, 27 Sep 2020 18:57:45 +0400
-Message-Id: <20200927145751.365446-1-marcandre.lureau@redhat.com>
+Date: Sun, 27 Sep 2020 18:57:46 +0400
+Message-Id: <20200927145751.365446-2-marcandre.lureau@redhat.com>
+In-Reply-To: <20200927145751.365446-1-marcandre.lureau@redhat.com>
+References: <20200927145751.365446-1-marcandre.lureau@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=marcandre.lureau@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Spice-devel] [PATCH v3 0/6] Add physical display dimensions to
- spice/virtio-gpu
+Subject: [Spice-devel] [PATCH v3 1/6] edid: fix physical display size
+ computation
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,27 +68,23 @@ Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-RnJvbTogTWFyYy1BbmRyw6kgTHVyZWF1IDxtYXJjYW5kcmUubHVyZWF1QHJlZGhhdC5jb20+DQoK
-SGksDQoNClRoaXMgc2VyaWVzIGltcHJvdmVzIHRoZSBzdXBwb3J0IGZvciBIaURQSSBkaXNwbGF5
-cyB3aXRoIFNwaWNlLg0KVGhlIHJlbGF0ZWQgc3BpY2Ugc2VyaWVzIGhhdmUgYWxyZWFkeSBiZWVu
-IG1lcmdlZC4NCg0KdjM6DQogLSBzaW1wbGlmeSB0aGUgaGFuZGxpbmcgb2YgU3BpY2UgbW9uaXRv
-ciBjb25maWd1cmF0aW9uIChGcmVkaWFubykNCnYyOg0KIC0gYWRkIGEgcGF0Y2ggdG8gInNwaWNl
-OiByZW1vdmUgdGhlIHNpbmdsZSBtb25pdG9yIGNvbmZpZyBsb2dpYyIgKEdlcmQpDQoNCk1hcmMt
-QW5kcsOpIEx1cmVhdSAoNik6DQogIGVkaWQ6IGZpeCBwaHlzaWNhbCBkaXNwbGF5IHNpemUgY29t
-cHV0YXRpb24NCiAgZWRpZDogdXNlIHBoeXNpY2FsIGRpbWVuc2lvbnMgaWYgYXZhaWxhYmxlDQog
-IHVpOiBhZGQgZ2V0dGVyIGZvciBVSUluZm8NCiAgc3BpY2U6IHJlbW92ZSB0aGUgc2luZ2xlIG1v
-bml0b3IgY29uZmlnIGxvZ2ljDQogIHNwaWNlOiBnZXQgbW9uaXRvcnMgcGh5c2ljYWwgZGltZW5z
-aW9uDQogIHZpcnRpby1ncHU6IHNldCBwaHlzaWNhbCBkaW1lbnNpb25zIGZvciBFRElEDQoNCiBo
-dy9kaXNwbGF5L2VkaWQtZ2VuZXJhdGUuYyAgICAgfCAzNiArKysrKysrKysrKysrKysrKysrKysr
-Ky0tLS0tLS0tLS0tDQogaHcvZGlzcGxheS92aXJ0aW8tZ3B1LWJhc2UuYyAgIHwgIDIgKysNCiBo
-dy9kaXNwbGF5L3ZpcnRpby1ncHUuYyAgICAgICAgfCAgMiArKw0KIGluY2x1ZGUvaHcvZGlzcGxh
-eS9lZGlkLmggICAgICB8ICA1ICsrKystDQogaW5jbHVkZS9ody92aXJ0aW8vdmlydGlvLWdwdS5o
-IHwgIDEgKw0KIGluY2x1ZGUvdWkvY29uc29sZS5oICAgICAgICAgICB8ICA0ICsrKysNCiBxZW11
-LWVkaWQuYyAgICAgICAgICAgICAgICAgICAgfCAxMSArKysrKysrKystLQ0KIHVpL2NvbnNvbGUu
-YyAgICAgICAgICAgICAgICAgICB8ICA3ICsrKysrKysNCiB1aS9zcGljZS1kaXNwbGF5LmMgICAg
-ICAgICAgICAgfCAzNSArKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0NCiA5IGZpbGVz
-IGNoYW5nZWQsIDY2IGluc2VydGlvbnMoKyksIDM3IGRlbGV0aW9ucygtKQ0KDQotLSANCjIuMjYu
-Mg0KDQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3Bp
-Y2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpo
-dHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVs
-Cg==
+RnJvbTogTWFyYy1BbmRyw6kgTHVyZWF1IDxtYXJjYW5kcmUubHVyZWF1QHJlZGhhdC5jb20+CgpE
+aXZpZGUgdGhlIHJlc29sdXRpb24gYnkgdGhlIERQSSwgYW5kIG11bHRpcGx5IHRvIG1tLgoKTm90
+ZSB0aGUgY29tcHV0YXRpb24gZG9uZSBmb3IgZWRpZFsyMS8yMl0gaXMgY29ycmVjdCAoaW4gY20p
+LgoKU2lnbmVkLW9mZi1ieTogTWFyYy1BbmRyw6kgTHVyZWF1IDxtYXJjYW5kcmUubHVyZWF1QHJl
+ZGhhdC5jb20+Ci0tLQogaHcvZGlzcGxheS9lZGlkLWdlbmVyYXRlLmMgfCA0ICsrLS0KIDEgZmls
+ZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEv
+aHcvZGlzcGxheS9lZGlkLWdlbmVyYXRlLmMgYi9ody9kaXNwbGF5L2VkaWQtZ2VuZXJhdGUuYwpp
+bmRleCBlNTg0NzJmZGU1Li42MThjNzRlMWRmIDEwMDY0NAotLS0gYS9ody9kaXNwbGF5L2VkaWQt
+Z2VuZXJhdGUuYworKysgYi9ody9kaXNwbGF5L2VkaWQtZ2VuZXJhdGUuYwpAQCAtMjA4LDggKzIw
+OCw4IEBAIHN0YXRpYyB2b2lkIGVkaWRfZGVzY190aW1pbmcodWludDhfdCAqZGVzYywKICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3QgZHBpKQogewogICAgIC8qIHBoeXNpY2Fs
+IGRpc3BsYXkgc2l6ZSAqLwotICAgIHVpbnQzMl90IHhtbSA9IHhyZXMgKiBkcGkgLyAyNTQ7Ci0g
+ICAgdWludDMyX3QgeW1tID0geXJlcyAqIGRwaSAvIDI1NDsKKyAgICB1aW50MzJfdCB4bW0gPSB4
+cmVzICogMjU0IC8gMTAgLyBkcGk7CisgICAgdWludDMyX3QgeW1tID0geXJlcyAqIDI1NCAvIDEw
+IC8gZHBpOwogCiAgICAgLyogcHVsbCBzb21lIHJlYWxpc3RpYyBsb29raW5nIHRpbWluZ3Mgb3V0
+IG9mIHRoaW4gYWlyICovCiAgICAgdWludDMyX3QgeGZyb250ID0geHJlcyAqIDI1IC8gMTAwOwot
+LSAKMi4yNi4yCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Au
+b3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2Ut
+ZGV2ZWwK
