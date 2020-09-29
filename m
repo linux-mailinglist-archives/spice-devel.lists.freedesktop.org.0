@@ -1,53 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89AB127C1A5
-	for <lists+spice-devel@lfdr.de>; Tue, 29 Sep 2020 11:51:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0881727C1AC
+	for <lists+spice-devel@lfdr.de>; Tue, 29 Sep 2020 11:51:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 57FAB6E194;
-	Tue, 29 Sep 2020 09:51:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 37CEF6E1C0;
+	Tue, 29 Sep 2020 09:51:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8CE7389913
- for <spice-devel@lists.freedesktop.org>; Tue, 29 Sep 2020 09:51:23 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B33836E1C0
+ for <spice-devel@lists.freedesktop.org>; Tue, 29 Sep 2020 09:51:25 +0000 (UTC)
 Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1601373082;
+ s=mimecast20190719; t=1601373084;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Dl7oJNx8xiscrH7qkNvsvsXbXDNDkryA8i8rRYQshiM=;
- b=IxCWd8xYe/oH3jXWCCc467DROJJEN5Wc3JZwrfhy/g8NWjiBXl9lzufJBYR1Xh+bSWUras
- vFFKxduGVyhGZWS8PXhD/mPokoIw4+lcWsoAPBntvx6Rgrya3C3MnUvLTaDww9VrSZkEWZ
- eh0GnTDC2VPuIwXMUS0/4BFH1FCalbk=
+ bh=MLBC9c7g+buByVnQKzb2FYeE8IkGsx3HaMgTlvR/Q7I=;
+ b=MHvV7xIX3hYbdwujsS1lCyFjklkFOffn9S/wm8HXymm2mjogP5MujQPaL0PEAUA9lzZQ5J
+ cq9mfeT2DL0k2Vg4s0QMm3/MOBp1wuIs0CbaA7VzteWKZFg/3ge7I2IxY37KEXsyVVR3tL
+ FQ+XChheK36IIJwt2KnZSPU6JSr8cfU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-531-etnK6e0bO12nGcjePxetrg-1; Tue, 29 Sep 2020 05:51:20 -0400
-X-MC-Unique: etnK6e0bO12nGcjePxetrg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ us-mta-570-5SWsxV-yNTisYFVPaJZCLA-1; Tue, 29 Sep 2020 05:51:20 -0400
+X-MC-Unique: 5SWsxV-yNTisYFVPaJZCLA-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 50B351091066;
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7037B801AE2;
  Tue, 29 Sep 2020 09:51:19 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-112-56.ams2.redhat.com
  [10.36.112.56])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 54B995C1CF;
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5447C10013C0;
  Tue, 29 Sep 2020 09:51:16 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 78E6C358097; Tue, 29 Sep 2020 11:51:15 +0200 (CEST)
+ id 917F1358098; Tue, 29 Sep 2020 11:51:15 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Date: Tue, 29 Sep 2020 11:51:13 +0200
-Message-Id: <20200929095115.24430-3-kraxel@redhat.com>
+Date: Tue, 29 Sep 2020 11:51:14 +0200
+Message-Id: <20200929095115.24430-4-kraxel@redhat.com>
 In-Reply-To: <20200929095115.24430-1-kraxel@redhat.com>
 References: <20200929095115.24430-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Subject: [Spice-devel] [PATCH v2 2/4] drm/qxl: release shadow on shutdown
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Subject: [Spice-devel] [PATCH v2 3/4] drm/qxl: handle shadow in primary
+ destroy
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,28 +71,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-In case we have a shadow surface on shutdown release
-it so it doesn't leak.
+qxl_primary_atomic_disable must check whenever the framebuffer bo has a
+shadow surface and in case it has check the shadow primary status.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/gpu/drm/qxl/qxl_display.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/gpu/drm/qxl/qxl_display.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 5bef8f121e54..1d9c51022be4 100644
+index 1d9c51022be4..d133e6c2aaf4 100644
 --- a/drivers/gpu/drm/qxl/qxl_display.c
 +++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -1220,5 +1220,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+@@ -561,6 +561,8 @@ static void qxl_primary_atomic_disable(struct drm_plane *plane,
+ 	if (old_state->fb) {
+ 		struct qxl_bo *bo = gem_to_qxl_bo(old_state->fb->obj[0]);
  
- void qxl_modeset_fini(struct qxl_device *qdev)
- {
-+	if (qdev->dumb_shadow_bo) {
-+		drm_gem_object_put(&qdev->dumb_shadow_bo->tbo.base);
-+		qdev->dumb_shadow_bo = NULL;
-+	}
- 	qxl_destroy_monitors_object(qdev);
- }
++		if (bo->shadow)
++			bo = bo->shadow;
+ 		if (bo->is_primary) {
+ 			qxl_io_destroy_primary(qdev);
+ 			bo->is_primary = false;
 -- 
 2.27.0
 
