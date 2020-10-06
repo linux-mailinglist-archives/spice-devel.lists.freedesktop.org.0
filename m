@@ -2,44 +2,44 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 818B2284B5E
-	for <lists+spice-devel@lfdr.de>; Tue,  6 Oct 2020 14:09:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25C1C284B5F
+	for <lists+spice-devel@lfdr.de>; Tue,  6 Oct 2020 14:09:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E46C66E461;
-	Tue,  6 Oct 2020 12:09:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9F7916E138;
+	Tue,  6 Oct 2020 12:09:26 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B50776E456
- for <spice-devel@lists.freedesktop.org>; Tue,  6 Oct 2020 12:09:22 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 161986E138
+ for <spice-devel@lists.freedesktop.org>; Tue,  6 Oct 2020 12:09:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1601986161;
+ s=mimecast20190719; t=1601986164;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EKXsQ2VtW4liWRuy95n6cq81gzNT98Ca4xtWZkmWPMM=;
- b=NXXe+4Upq1rGMytK0ifUQS8JpN2Ep2pGilrOOdnMDOUxQs7s9ssj5Eu8Dkg8jH8b6fXCBh
- bJq1iwft31B+ijXbaCta1/Um/fhi5+n/HthRGXxRgY3LwofQuzXZj3pG4to6UGIzytNbqj
- KjzVGt0l8MkP3X5tYKg3H8bER5QVh84=
+ bh=+zToWmSFuh7AToU2ffZWlOJwUpTXHRbEkVwoqNo3F5M=;
+ b=QasjymFiL14bUcvkJTOdC4WMMo0AQva+Q0CifA+/OcaVqYsDJf7rtnWviwdRrrdmuHPPPo
+ OYb6DgSFrdNazpCMtKq0Z3reilgWYr+QqxC+X/1hQxJ5zVpSvmo5Cee/zxUEeknlpZwY9L
+ QSGUoOjlrD5ADoC6oK28FoxwgwP05yI=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-79-tZ1v6sK7OWagHdqa-c_UtQ-1; Tue, 06 Oct 2020 08:09:19 -0400
-X-MC-Unique: tZ1v6sK7OWagHdqa-c_UtQ-1
+ us-mta-433-ZYLCms02O4imcNTfybDSAw-1; Tue, 06 Oct 2020 08:09:22 -0400
+X-MC-Unique: ZYLCms02O4imcNTfybDSAw-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
  [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 97D1E10866AB;
- Tue,  6 Oct 2020 12:09:18 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0E6EF8030A8;
+ Tue,  6 Oct 2020 12:09:21 +0000 (UTC)
 Received: from fziglio.remote.csb (unknown [10.40.194.31])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id D955B5C1BD;
- Tue,  6 Oct 2020 12:09:15 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 304E45C1BD;
+ Tue,  6 Oct 2020 12:09:18 +0000 (UTC)
 From: Frediano Ziglio <fziglio@redhat.com>
 To: spice-devel@lists.freedesktop.org
-Date: Tue,  6 Oct 2020 13:08:57 +0100
-Message-Id: <20201006120901.17027-3-fziglio@redhat.com>
+Date: Tue,  6 Oct 2020 13:08:58 +0100
+Message-Id: <20201006120901.17027-4-fziglio@redhat.com>
 In-Reply-To: <20201006120901.17027-1-fziglio@redhat.com>
 References: <20201006120901.17027-1-fziglio@redhat.com>
 MIME-Version: 1.0
@@ -48,8 +48,7 @@ Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Spice-devel] [PATCH spice-common 2/6] quic: Check image size in
- quic_decode_begin
+Subject: [Spice-devel] [PATCH spice-common 3/6] quic: Check RLE lengths
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,46 +68,33 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 From: Frediano Ziglio <freddy77@gmail.com>
 
-Avoid some overflow in code due to images too big or
-negative numbers.
+Avoid buffer overflows decoding images. On compression we compute
+lengths till end of line so it won't cause regressions.
+Proved by fuzzing the code.
 
 Signed-off-by: Frediano Ziglio <freddy77@gmail.com>
 Acked-by: Uri Lublin <uril@redhat.com>
 ---
- common/quic.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ common/quic_tmpl.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/common/quic.c b/common/quic.c
-index bc753ca..6815316 100644
---- a/common/quic.c
-+++ b/common/quic.c
-@@ -56,6 +56,9 @@ typedef uint8_t BYTE;
- #define MINwminext 1
- #define MAXwminext 100000000
+diff --git a/common/quic_tmpl.c b/common/quic_tmpl.c
+index ecd6f3f..ebae992 100644
+--- a/common/quic_tmpl.c
++++ b/common/quic_tmpl.c
+@@ -563,7 +563,11 @@ static void FNAME_DECL(uncompress_row_seg)(const PIXEL * const prev_row,
+ do_run:
+         state->waitcnt = stopidx - i;
+         run_index = i;
+-        run_end = i + decode_state_run(encoder, state);
++        run_end = decode_state_run(encoder, state);
++        if (run_end < 0 || run_end > (end - i)) {
++            encoder->usr->error(encoder->usr, "wrong RLE\n");
++        }
++        run_end += i;
  
-+/* Maximum image size in pixels, mainly to avoid possible integer overflows */
-+#define SPICE_MAX_IMAGE_SIZE (512 * 1024 * 1024 - 1)
-+
- typedef struct QuicFamily {
-     unsigned int nGRcodewords[MAXNUMCODES];      /* indexed by code number, contains number of
-                                                     unmodified GR codewords in the code */
-@@ -1165,6 +1168,16 @@ int quic_decode_begin(QuicContext *quic, uint32_t *io_ptr, unsigned int num_io_w
-     height = encoder->io_word;
-     decode_eat32bits(encoder);
- 
-+    if (width <= 0 || height <= 0) {
-+        encoder->usr->warn(encoder->usr, "invalid size\n");
-+        return QUIC_ERROR;
-+    }
-+
-+    /* avoid too big images */
-+    if ((uint64_t) width * height > SPICE_MAX_IMAGE_SIZE) {
-+        encoder->usr->error(encoder->usr, "image too large\n");
-+    }
-+
-     quic_image_params(encoder, type, &channels, &bpc);
- 
-     if (!encoder_reset_channels(encoder, channels, width, bpc)) {
+         for (; i < run_end; i++) {
+             UNCOMPRESS_PIX_START(&cur_row[i]);
 -- 
 2.26.2
 
