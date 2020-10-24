@@ -2,44 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68323297C95
-	for <lists+spice-devel@lfdr.de>; Sat, 24 Oct 2020 15:27:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A53DB298240
+	for <lists+spice-devel@lfdr.de>; Sun, 25 Oct 2020 16:17:34 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 60A196E8B2;
-	Sat, 24 Oct 2020 13:27:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0B8036E9CA;
+	Sun, 25 Oct 2020 15:17:31 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 912 seconds by postgrey-1.36 at gabe;
- Fri, 23 Oct 2020 17:36:13 UTC
-Received: from m13104.mail.163.com (m13104.mail.163.com [220.181.13.104])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C8AFD6E2ED
- for <spice-devel@lists.freedesktop.org>; Fri, 23 Oct 2020 17:36:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=ctCrP
- yUylz5Xr3QBMQPn2bT5X2KtTfJwUvS74sgm0TY=; b=ehS7lRgXebNEJlWTtwQX2
- cZOCNa+VnDD71y9H8a2obJ5VuKZ6bkVfeUJPyHC5BYprWRx4Khk3XsCyFy210S+A
- Fn0ZaznVPdJnQp5k0zYTXPr4bQsd1ZQASw1LblAvHl3OhUg0cgTYQKfwymplJCT5
- 9TO1y+EPkTsGcNeWWfxymg=
-Received: from franklee1973$163.com ( [113.90.38.182] ) by
- ajax-webmail-wmsvr104 (Coremail) ; Sat, 24 Oct 2020 01:20:52 +0800 (CST)
-X-Originating-IP: [113.90.38.182]
-Date: Sat, 24 Oct 2020 01:20:52 +0800 (CST)
-From: hshsh <franklee1973@163.com>
-To: spice-devel@lists.freedesktop.org
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190724(ac680a23)
- Copyright (c) 2002-2020 www.mailtech.cn 163com
-X-CM-CTRLDATA: NPaJfWZvb3Rlcl9odG09MzExMjo1Ng==
-Content-Type: multipart/mixed; 
- boundary="----=_Part_135_1414951729.1603473652509"
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BD8A26E8D6;
+ Sat, 24 Oct 2020 20:38:49 +0000 (UTC)
+Received: from ravnborg.org (unknown [188.228.123.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk4.altibox.net (Postfix) with ESMTPS id A32E380548;
+ Sat, 24 Oct 2020 22:38:39 +0200 (CEST)
+Date: Sat, 24 Oct 2020 22:38:38 +0200
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20201024203838.GB93644@ravnborg.org>
+References: <20201020122046.31167-1-tzimmermann@suse.de>
+ <20201020122046.31167-11-tzimmermann@suse.de>
 MIME-Version: 1.0
-Message-ID: <6a34253e.27.175567a3b1e.Coremail.franklee1973@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: aMGowACnkrj0EJNfClSXAA--.33162W
-X-CM-SenderInfo: xiud0y5ohhimixt6il2tof0z/xtbBSRzGcFaD8eAbcwABsO
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-X-Mailman-Approved-At: Sat, 24 Oct 2020 13:27:55 +0000
-Subject: [Spice-devel] how to get surface screen-shot in spice-server
+Content-Disposition: inline
+In-Reply-To: <20201020122046.31167-11-tzimmermann@suse.de>
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=fu7ymmwf c=1 sm=1 tr=0
+ a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
+ a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8 a=Ogo0Iva9nwArjqrsVXIA:9
+ a=x50s5EHYZIou7SfH:21 a=IqrjcI2zc_8-tyTa:21 a=CjuIK1q_8ugA:10
+ a=qfUslh1TxfEA:10 a=E9Po1WZjFZOl8hwRPBS3:22
+X-Mailman-Approved-At: Sun, 25 Oct 2020 15:17:29 +0000
+Subject: Re: [Spice-devel] [PATCH v5 10/10] drm/fb_helper: Support
+ framebuffers in I/O memory
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,116 +46,431 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: luben.tuikov@amd.com, heiko@sntech.de, airlied@linux.ie,
+ nouveau@lists.freedesktop.org, linus.walleij@linaro.org,
+ dri-devel@lists.freedesktop.org, chris@chris-wilson.co.uk,
+ melissa.srw@gmail.com, eric@anholt.net, ray.huang@amd.com, kraxel@redhat.com,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com, robh@kernel.org,
+ linux-samsung-soc@vger.kernel.org, jy0922.shim@samsung.com,
+ lima@lists.freedesktop.org, oleksandr_andrushchenko@epam.com, krzk@kernel.org,
+ steven.price@arm.com, linux-rockchip@lists.infradead.org, kgene@kernel.org,
+ alyssa.rosenzweig@collabora.com, linux+etnaviv@armlinux.org.uk,
+ spice-devel@lists.freedesktop.org, bskeggs@redhat.com,
+ maarten.lankhorst@linux.intel.com, etnaviv@lists.freedesktop.org,
+ mripard@kernel.org, inki.dae@samsung.com, hdegoede@redhat.com,
+ christian.gmeiner@gmail.com, xen-devel@lists.xenproject.org,
+ virtualization@lists.linux-foundation.org, sean@poorly.run, apaneers@amd.com,
+ linux-arm-kernel@lists.infradead.org, linaro-mm-sig@lists.linaro.org,
+ amd-gfx@lists.freedesktop.org, tomeu.vizoso@collabora.com,
+ sw0312.kim@samsung.com, hjc@rock-chips.com, kyungmin.park@samsung.com,
+ miaoqinglang@huawei.com, yuq825@gmail.com, daniel@ffwll.ch,
+ alexander.deucher@amd.com, linux-media@vger.kernel.org,
+ christian.koenig@amd.com, l.stach@pengutronix.de
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-------=_Part_135_1414951729.1603473652509
-Content-Type: multipart/alternative; 
-	boundary="----=_Part_137_443776761.1603473652510"
+Hi Thomas.
 
-------=_Part_137_443776761.1603473652510
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: base64
+On Tue, Oct 20, 2020 at 02:20:46PM +0200, Thomas Zimmermann wrote:
+> At least sparc64 requires I/O-specific access to framebuffers. This
+> patch updates the fbdev console accordingly.
+> 
+> For drivers with direct access to the framebuffer memory, the callback
+> functions in struct fb_ops test for the type of memory and call the rsp
+> fb_sys_ of fb_cfb_ functions. Read and write operations are implemented
+> internally by DRM's fbdev helper.
+> 
+> For drivers that employ a shadow buffer, fbdev's blit function retrieves
+> the framebuffer address as struct dma_buf_map, and uses dma_buf_map
+> interfaces to access the buffer.
+> 
+> The bochs driver on sparc64 uses a workaround to flag the framebuffer as
+> I/O memory and avoid a HW exception. With the introduction of struct
+> dma_buf_map, this is not required any longer. The patch removes the rsp
+> code from both, bochs and fbdev.
+> 
+> v5:
+> 	* implement fb_read/fb_write internally (Daniel, Sam)
+> v4:
+> 	* move dma_buf_map changes into separate patch (Daniel)
+> 	* TODO list: comment on fbdev updates (Daniel)
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Tested-by: Sam Ravnborg <sam@ravnborg.org>
+Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
 
-SGksIHNwaWNlIGd1cnVzOgogICBJIGFtIGEgc3BpY2UgZGV2ZWxvcGVyIGluIG15IGNvbXBhbnkg
-d2hpY2ggZGV2bGUgd2l0aCBkZXNrdG9wIGNsb3VkIGNvbXB1dGluZy4KICAgSW4gc3BpY2UtMC4x
-Mi40IHdlIGNhbiBnZXQgc3VyZmFjZSBzY3JlZW4tc2hvdCBpbiByZWRfd29ya2VyLmMgYnkgYWRk
-aW5nIHRoaXMgbGluZSBpbiByZWRfcHJvY2Vzc19jb21tYW5kcygpOgogICAgICAgc3VyZmFjZV9m
-bHVzaCh3b3JrZXIsIHN1cmZhY2VfaWQsICZyZWN0KTsKICAgRnVuY3Rpb24gc3VyZmFjZV9mbHVz
-aCBmbHVzaCB1bmRyYXcgaW1hZ2UgdG8gc3VyZmFjZSwgdGhlbiB3ZSBnZXQgdGhlIHNjcmVlbi1z
-aG90IGJ5IHJlYWRpbmcgc3VyZmFjZSBhZGRyZXNzLgogIAogICBCdXQgaW4gc3BpY2UtMC4xNC4z
-IHdlIGNhbiBub3QgZ2V0IHByb3BlciBzY3JlZW4tc2hvdCwgYnkgYWRkaW5nIHRoaXMgbGluZSBp
-biByZWRfcHJvY2Vzc19kaXNwbGF5KCk6CiAgICAgICAgICAgICBkaXNwbGF5X2NoYW5uZWxfY3Vy
-cmVudF9mbHVzaCh3b3JrZXItPmRpc3BsYXlfY2hhbm5lbCwgc3VyZmFjZV9pZCk7CiAgIFdlIGdl
-dCBzY3JlZW4tc2hvdCB0aGF0IGZsaWNrZXIgd2l0aCB3aGl0ZSBiYXJzLCBJIGRvIG5vdCBrbm93
-IHdoeS4KICAKICAgTXVjaCBhcHByZWNpYXRpb24gZm9yIGFueSByZXBseSEKCnJlZ2FyZHMKRnJh
-bmsKCgoKCgoKCgoKCgoKCgoKCgp8Ck5hbWVQb3NpdGlvbgpmcmFua2xlZTE5NzNAMTYzLmNvbQpP
-cmdhbml6YXRpb246CkFkZHJlc3M6ClRlbGVwaG9uZToKQ2VsbHBob25lOgp8CgrJqMPouMO2/s6s
-wuujrL/J0tS9q7Xn19PD+8as0bjL2bGjtOa1vcrWu/ogyrnTw7Dv1voKCnw=
-------=_Part_137_443776761.1603473652510
-Content-Type: text/html; charset=GBK
-Content-Transfer-Encoding: base64
+But see a few comments below on naming for you to consider.
 
-PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOiMwMDAwMDA7Zm9udC1zaXplOjE0cHg7
-Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjowOyI+SGksIHNwaWNlIGd1cnVz
-Ojxicj4mbmJzcDsmbmJzcDsgSSBhbSBhIHNwaWNlIGRldmVsb3BlciBpbiBteSBjb21wYW55IHdo
-aWNoIGRldmxlIHdpdGggZGVza3RvcCBjbG91ZCBjb21wdXRpbmcuPGJyPiZuYnNwOyZuYnNwOyBJ
-biBzcGljZS0wLjEyLjQgd2UgY2FuIGdldCBzdXJmYWNlIHNjcmVlbi1zaG90IGluIHJlZF93b3Jr
-ZXIuYyBieSBhZGRpbmcgdGhpcyBsaW5lIGluIHJlZF9wcm9jZXNzX2NvbW1hbmRzKCk6PGJyPiZu
-YnNwOyAmbmJzcDsgJm5ic3A7Jm5ic3A7IHN1cmZhY2VfZmx1c2god29ya2VyLCBzdXJmYWNlX2lk
-LCAmYW1wO3JlY3QpOzxicj4mbmJzcDsmbmJzcDsgRnVuY3Rpb24gc3VyZmFjZV9mbHVzaCBmbHVz
-aCB1bmRyYXcgaW1hZ2UgdG8gc3VyZmFjZSwgdGhlbiB3ZSBnZXQgdGhlIHNjcmVlbi1zaG90IGJ5
-IHJlYWRpbmcgc3VyZmFjZSBhZGRyZXNzLjxicj4mbmJzcDsmbmJzcDsgPGJyPiZuYnNwOyZuYnNw
-OyBCdXQgaW4gc3BpY2UtMC4xNC4zIHdlIGNhbiBub3QgZ2V0IHByb3BlciBzY3JlZW4tc2hvdCwg
-YnkgYWRkaW5nIHRoaXMgbGluZSBpbiByZWRfcHJvY2Vzc19kaXNwbGF5KCk6PGJyPiZuYnNwOyZu
-YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
-OyZuYnNwOyBkaXNwbGF5X2NoYW5uZWxfY3VycmVudF9mbHVzaCh3b3JrZXItJmd0O2Rpc3BsYXlf
-Y2hhbm5lbCwgc3VyZmFjZV9pZCk7PGJyPiZuYnNwOyZuYnNwOyBXZSBnZXQgc2NyZWVuLXNob3Qg
-dGhhdCBmbGlja2VyIHdpdGggd2hpdGUgYmFycywgSSBkbyBub3Qga25vdyB3aHkuPGJyPiZuYnNw
-OyZuYnNwOyA8YnI+Jm5ic3A7Jm5ic3A7IE11Y2ggYXBwcmVjaWF0aW9uIGZvciBhbnkgcmVwbHkh
-PGJyPjxicj5yZWdhcmRzPGJyPkZyYW5rPGJyPjwvZGl2PjxwIHN0eWxlPSJtYXJnaW46IDA7Ij48
-YnI+PC9wPjxwIHN0eWxlPSJtYXJnaW46IDA7Ij48YnI+PC9wPjxwIHN0eWxlPSJtYXJnaW46IDA7
-Ij48YnI+PC9wPjxwIHN0eWxlPSJtYXJnaW46IDA7Ij48YnI+PC9wPjxwIHN0eWxlPSJtYXJnaW46
-IDA7Ij48YnI+PC9wPjxkaXYgaWQ9ImRpdk5ldGVhc2VNYWlsQ2FyZCI+PHRhYmxlIGNsYXNzPSJu
-dGVzX25vdF9mcmVzaF90YWJsZSIgYm9yZGVyPSIwIiBjZWxscGFkZGluZz0iMCIgY2VsbHNwYWNp
-bmc9IjAiPiA8dGJvZHk+PHRyPjx0ZCBzdHlsZT0iYmFja2dyb3VuZC1yZXBlYXQ6bm8tcmVwZWF0
-IiBiYWNrZ3JvdW5kPSJodHRwczovL21pbWcuMTI3Lm5ldC94bS9hbGwvbXAvMTAwOTE2L2ltZy9j
-YXJkYmcxLmdpZiI+IDxkaXYgY2xhc3M9Im1wLWNhcmQgdmNhcmQiIHN0eWxlPSJmb250LXNpemU6
-MTBweDtmb250LWZhbWlseTp0YWhvbWEsc2Fucy1zZXJpZjt3aWR0aDozNjhweDtoZWlnaHQ6MjIx
-cHg7bGluZS1oZWlnaHQ6MjBweDt6b29tOjE7b3ZlcmZsb3c6aGlkZGVuOyI+IDxkaXYgY2xhc3M9
-Im1wLWNhcmRfcGhvdG8iIHN0eWxlPSJmbG9hdDpsZWZ0O2Rpc3BsYXk6aW5saW5lO21hcmdpbjoy
-MHB4IDAgMCAyMHB4O3dpZHRoOjk1cHg7aGVpZ2h0Ojk1cHg7b3ZlcmZsb3c6aGlkZGVuIj4gPGlt
-ZyBzdHlsZT0id2lkdGg6OTVweCIgY2xhc3M9InBob3RvIiBzcmM9Imh0dHBzOi8vbWltZy4xMjcu
-bmV0L3htL2FsbC9tcC8xMDA5MTYvaW1nL2VtcHR5LmdpZiI+IDwvZGl2PiA8ZGl2IGNsYXNzPSJt
-cC1jYXJkX3RleHQiIHN0eWxlPSJ6b29tOjE7bWFyZ2luOjMwcHggMCAwIDEzNXB4O3dpZHRoOjIw
-NXB4Ij4gPGRpdiBjbGFzcz0ibXAtY2FyZF9mbiIgc3R5bGU9IiI+IDxzdHJvbmcgY2xhc3M9ImZu
-IiBmdW5jPSJuYW1lIiBzdHlsZT0iZm9udC1zaXplOjE0cHgiPk5hbWU8L3N0cm9uZz4gPHNwYW4g
-Y2xhc3M9InRpdGxlIiBmdW5jPSJrZXkxIj5Qb3NpdGlvbjwvc3Bhbj4gPC9kaXY+IDxkaXYgY2xh
-c3M9Im1wLWNhcmRfZW1haWwiIHN0eWxlPSIiPiA8c3Ryb25nIGNsYXNzPSJlbWFpbCIgZnVuYz0i
-a2V5MiIgc3R5bGU9ImZvbnQtZmFtaWx5OnRhaG9tYSxzYW5zLXNlcmlmO2ZvbnQtc2l6ZToxMHB4
-Ij4gZnJhbmtsZWUxOTczQDE2My5jb20gPC9zdHJvbmc+IDwvZGl2PiA8ZGl2IGNsYXNzPSJtcC1j
-YXJkX29yZyIgc3R5bGU9Im1hcmdpbi10b3A6MjBweCI+IDxzdHJvbmcgY2xhc3M9Im9yZyIgZnVu
-Yz0ia2V5MyI+T3JnYW5pemF0aW9uOjwvc3Ryb25nPiA8L2Rpdj4gPGRpdiBjbGFzcz0ibXAtY2Fy
-ZF9hZHIiPiA8c3BhbiBjbGFzcz0iYWRyIj48c3BhbiBjbGFzcz0ic3RyZWV0LWFkZHJlc3MiIGZ1
-bmM9ImtleTQiPiBBZGRyZXNzOjwvc3Bhbj48L3NwYW4+IDwvZGl2PiA8ZGl2IGNsYXNzPSJtcC1j
-YXJkX3BobiI+PHNwYW4gY2xhc3M9InRlbCIgZnVuYz0ia2V5NSI+IFRlbGVwaG9uZTo8L3NwYW4+
-IDwvZGl2PiA8ZGl2IGNsYXNzPSJtcC1jYXJkX21vYiI+PHNwYW4gY2xhc3M9InRlbCIgZnVuYz0i
-a2V5NiI+IENlbGxwaG9uZTo8L3NwYW4+IDwvZGl2PiA8L2Rpdj48L2Rpdj4gPC90ZD4gPHRkIHN0
-eWxlPSJwYWRkaW5nLWxlZnQ6MTBweDtsaW5lLWhlaWdodDoyMHB4O3dpZHRoOjE4MHB4O2ZvbnQt
-c2l6ZToxMnB4O2NvbG9yOiM3ZDdkN2QiPiA8ZGl2IGNsYXNzPSJtcC1jYXJkX2NvZGUiPiA8aW1n
-IHN0eWxlPSJkaXNwbGF5OmJsb2NrIiBzcmM9Imh0dHBzOi8vZWNhcmQubWFpbC4xNjMuY29tL2Vj
-YXJkL3FyL2ZyYW5rbGVlMTk3M0AxNjMuY29tLzFiYmE5NTA1NjZjYTVjMjYvdDEzMzg2MDQ3MzAw
-MDAucG5nIiBhbHQ9Irb+zqzC6yIgaGVpZ2h0PSIxODAiIHdpZHRoPSIxODAiPiA8cCBzdHlsZT0i
-bWFyZ2luOjAiPsmow+i4w7b+zqzC66Osv8nS1L2rtefX08P7xqzRuMvZsaO05rW9yta7+iA8YSBo
-cmVmPSJodHRwczovL2hlbHAubWFpbC4xNjMuY29tL2ZhcURldGFpbC5kbz9jb2RlPWQ3YTVkYzg0
-NzFjZDBjMGU4YjRiOGY0ZjhlNDk5OThiMzc0MTczY2ZlOTE3MTMwNWZhMWNlNjMwZDdmNjdhYzJi
-MDVlZTlhYzM3N2UzNjI1IiB0YXJnZXQ9Il9ibGFuayIgc3R5bGU9ImNvbG9yOiMwMDU1OTAiPsq5
-08Ow79b6PC9hPiA8L3A+IDwvZGl2PiA8L3RkPiA8L3RyPjwvdGJvZHk+PC90YWJsZT48L2Rpdj48
-L2Rpdj48YnI+PGJyPjxzcGFuIHRpdGxlPSJuZXRlYXNlZm9vdGVyIj48cD4mbmJzcDs8L3A+PC9z
-cGFuPg==
-------=_Part_137_443776761.1603473652510--
+	Sam
 
-------=_Part_135_1414951729.1603473652509
-Content-Type: text/x-vCard; name="=?GBK?Q?=C3=FB=C6=AC.vcf?="
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="=?GBK?Q?=C3=FB=C6=AC.vcf?="
-Content-Location: http://img6.mimg.126.net/photo/4/H7hpQMaDCZlUeZqJwurVzw==/t1338604730479/34058472182015140.vcf
+> ---
+>  Documentation/gpu/todo.rst        |  19 ++-
+>  drivers/gpu/drm/bochs/bochs_kms.c |   1 -
+>  drivers/gpu/drm/drm_fb_helper.c   | 227 ++++++++++++++++++++++++++++--
+>  include/drm/drm_mode_config.h     |  12 --
+>  4 files changed, 230 insertions(+), 29 deletions(-)
+> 
+> diff --git a/Documentation/gpu/todo.rst b/Documentation/gpu/todo.rst
+> index 7e6fc3c04add..638b7f704339 100644
+> --- a/Documentation/gpu/todo.rst
+> +++ b/Documentation/gpu/todo.rst
+> @@ -197,13 +197,28 @@ Convert drivers to use drm_fbdev_generic_setup()
+>  ------------------------------------------------
+>  
+>  Most drivers can use drm_fbdev_generic_setup(). Driver have to implement
+> -atomic modesetting and GEM vmap support. Current generic fbdev emulation
+> -expects the framebuffer in system memory (or system-like memory).
+> +atomic modesetting and GEM vmap support. Historically, generic fbdev emulation
+> +expected the framebuffer in system memory or system-like memory. By employing
+> +struct dma_buf_map, drivers with frambuffers in I/O memory can be supported
+> +as well.
+>  
+>  Contact: Maintainer of the driver you plan to convert
+>  
+>  Level: Intermediate
+>  
+> +Reimplement functions in drm_fbdev_fb_ops without fbdev
+> +-------------------------------------------------------
+> +
+> +A number of callback functions in drm_fbdev_fb_ops could benefit from
+> +being rewritten without dependencies on the fbdev module. Some of the
+> +helpers could further benefit from using struct dma_buf_map instead of
+> +raw pointers.
+> +
+> +Contact: Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter
+> +
+> +Level: Advanced
+> +
+> +
+>  drm_framebuffer_funcs and drm_mode_config_funcs.fb_create cleanup
+>  -----------------------------------------------------------------
+>  
+> diff --git a/drivers/gpu/drm/bochs/bochs_kms.c b/drivers/gpu/drm/bochs/bochs_kms.c
+> index 13d0d04c4457..853081d186d5 100644
+> --- a/drivers/gpu/drm/bochs/bochs_kms.c
+> +++ b/drivers/gpu/drm/bochs/bochs_kms.c
+> @@ -151,7 +151,6 @@ int bochs_kms_init(struct bochs_device *bochs)
+>  	bochs->dev->mode_config.preferred_depth = 24;
+>  	bochs->dev->mode_config.prefer_shadow = 0;
+>  	bochs->dev->mode_config.prefer_shadow_fbdev = 1;
+> -	bochs->dev->mode_config.fbdev_use_iomem = true;
+>  	bochs->dev->mode_config.quirk_addfb_prefer_host_byte_order = true;
+>  
+>  	bochs->dev->mode_config.funcs = &bochs_mode_funcs;
+> diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
+> index 6212cd7cde1d..1d3180841778 100644
+> --- a/drivers/gpu/drm/drm_fb_helper.c
+> +++ b/drivers/gpu/drm/drm_fb_helper.c
+> @@ -372,24 +372,22 @@ static void drm_fb_helper_resume_worker(struct work_struct *work)
+>  }
+>  
+>  static void drm_fb_helper_dirty_blit_real(struct drm_fb_helper *fb_helper,
+> -					  struct drm_clip_rect *clip)
+> +					  struct drm_clip_rect *clip,
+> +					  struct dma_buf_map *dst)
+>  {
+>  	struct drm_framebuffer *fb = fb_helper->fb;
+>  	unsigned int cpp = fb->format->cpp[0];
+>  	size_t offset = clip->y1 * fb->pitches[0] + clip->x1 * cpp;
+>  	void *src = fb_helper->fbdev->screen_buffer + offset;
+> -	void *dst = fb_helper->buffer->map.vaddr + offset;
+>  	size_t len = (clip->x2 - clip->x1) * cpp;
+>  	unsigned int y;
+>  
+> -	for (y = clip->y1; y < clip->y2; y++) {
+> -		if (!fb_helper->dev->mode_config.fbdev_use_iomem)
+> -			memcpy(dst, src, len);
+> -		else
+> -			memcpy_toio((void __iomem *)dst, src, len);
+> +	dma_buf_map_incr(dst, offset); /* go to first pixel within clip rect */
+>  
+> +	for (y = clip->y1; y < clip->y2; y++) {
+> +		dma_buf_map_memcpy_to(dst, src, len);
+> +		dma_buf_map_incr(dst, fb->pitches[0]);
+>  		src += fb->pitches[0];
+> -		dst += fb->pitches[0];
+>  	}
+>  }
+>  
+> @@ -417,8 +415,9 @@ static void drm_fb_helper_dirty_work(struct work_struct *work)
+>  			ret = drm_client_buffer_vmap(helper->buffer, &map);
+>  			if (ret)
+>  				return;
+> -			drm_fb_helper_dirty_blit_real(helper, &clip_copy);
+> +			drm_fb_helper_dirty_blit_real(helper, &clip_copy, &map);
+>  		}
+> +
+>  		if (helper->fb->funcs->dirty)
+>  			helper->fb->funcs->dirty(helper->fb, NULL, 0, 0,
+>  						 &clip_copy, 1);
+> @@ -2027,6 +2026,206 @@ static int drm_fbdev_fb_mmap(struct fb_info *info, struct vm_area_struct *vma)
+>  		return -ENODEV;
+>  }
+>  
+> +static bool drm_fbdev_use_iomem(struct fb_info *info)
+> +{
+> +	struct drm_fb_helper *fb_helper = info->par;
+> +	struct drm_client_buffer *buffer = fb_helper->buffer;
+> +
+> +	return !drm_fbdev_use_shadow_fb(fb_helper) && buffer->map.is_iomem;
+> +}
+> +
+> +static ssize_t fb_read_screen_base(struct fb_info *info, char __user *buf, size_t count, 
+> +				   loff_t pos)
+The naming here confused me - a name like:
+fb_read_iomem() would have helped me more.
+With the current naming I shall remember that the screen_base member is
+the iomem pointer.
 
-QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpOOjtOYW1lOzs7DQpGTjpOYW1lDQpUSVRMRTpQb3Np
-dGlvbg0KT1JHOk9yZ2FuaXphdGlvblw6DQpBRFI7VFlQRT1QUkVGOjtBZGRyZXNzXDo7Ozs7Ow0K
-VEVMO1RZUEU9Q0VMTCxWT0lDRTpDZWxscGhvbmU6DQpURUw7VFlQRT1WT0lDRTpUZWxlcGhvbmU6
-DQpFTUFJTDtUWVBFPVBSRUYsSU5URVJORVQ6ZnJhbmtsZWUxOTczQDE2My5jb20NCkVORDpWQ0FS
-RA0K
-------=_Part_135_1414951729.1603473652509
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> +{
+> +	const char __iomem *src = info->screen_base + pos;
+> +	size_t alloc_size = min(count, PAGE_SIZE);
+> +	ssize_t ret = 0;
+> +	char *tmp;
+> +
+> +	tmp = kmalloc(alloc_size, GFP_KERNEL);
+> +	if (!tmp)
+> +		return -ENOMEM;
+> +
 
+I looked around and could not find other places where
+we copy from iomem to mem to usermem in chunks of PAGE_SIZE.
+
+> +	while (count) {
+> +		size_t c = min(count, alloc_size);
+> +
+> +		memcpy_fromio(tmp, src, c);
+> +		if (copy_to_user(buf, tmp, c)) {
+> +			ret = -EFAULT;
+> +			break;
+> +		}
+> +
+> +		src += c;
+> +		buf += c;
+> +		ret += c;
+> +		count -= c;
+> +	}
+> +
+> +	kfree(tmp);
+> +
+> +	return ret;
+> +}
+> +
+> +static ssize_t fb_read_screen_buffer(struct fb_info *info, char __user *buf, size_t count,
+> +				     loff_t pos)
+And fb_read_sysmem() here.
+
+> +{
+> +	const char *src = info->screen_buffer + pos;
+> +
+> +	if (copy_to_user(buf, src, count))
+> +		return -EFAULT;
+> +
+> +	return count;
+> +}
+> +
+> +static ssize_t drm_fbdev_fb_read(struct fb_info *info, char __user *buf,
+> +				 size_t count, loff_t *ppos)
+> +{
+> +	loff_t pos = *ppos;
+> +	size_t total_size;
+> +	ssize_t ret;
+> +
+> +	if (info->state != FBINFO_STATE_RUNNING)
+> +		return -EPERM;
+> +
+> +	if (info->screen_size)
+> +		total_size = info->screen_size;
+> +	else
+> +		total_size = info->fix.smem_len;
+> +
+> +	if (pos >= total_size)
+> +		return 0;
+> +	if (count >= total_size)
+> +		count = total_size;
+> +	if (total_size - count < pos)
+> +		count = total_size - pos;
+> +
+> +	if (drm_fbdev_use_iomem(info))
+> +		ret = fb_read_screen_base(info, buf, count, pos);
+> +	else
+> +		ret = fb_read_screen_buffer(info, buf, count, pos);
+> +
+> +	if (ret > 0)
+> +		*ppos = ret;
+> +
+> +	return ret;
+> +}
+> +
+> +static ssize_t fb_write_screen_base(struct fb_info *info, const char __user *buf, size_t count,
+> +				    loff_t pos)
+
+fb_write_iomem()
+
+> +{
+> +	char __iomem *dst = info->screen_base + pos;
+> +	size_t alloc_size = min(count, PAGE_SIZE);
+> +	ssize_t ret = 0;
+> +	u8 *tmp;
+> +
+> +	tmp = kmalloc(alloc_size, GFP_KERNEL);
+> +	if (!tmp)
+> +		return -ENOMEM;
+> +
+> +	while (count) {
+> +		size_t c = min(count, alloc_size);
+> +
+> +		if (copy_from_user(tmp, buf, c)) {
+> +			ret = -EFAULT;
+> +			break;
+> +		}
+> +		memcpy_toio(dst, tmp, c);
+> +
+> +		dst += c;
+> +		buf += c;
+> +		ret += c;
+> +		count -= c;
+> +	}
+> +
+> +	kfree(tmp);
+> +
+> +	return ret;
+> +}
+> +
+> +static ssize_t fb_write_screen_buffer(struct fb_info *info, const char __user *buf, size_t count,
+> +				      loff_t pos)
+fb_write_sysmem()
+
+> +{
+> +	char *dst = info->screen_buffer + pos;
+> +
+> +	if (copy_from_user(dst, buf, count))
+> +		return -EFAULT;
+> +
+> +	return count;
+> +}
+> +
+> +static ssize_t drm_fbdev_fb_write(struct fb_info *info, const char __user *buf,
+> +				  size_t count, loff_t *ppos)
+> +{
+> +	loff_t pos = *ppos;
+> +	size_t total_size;
+> +	ssize_t ret;
+> +	int err;
+> +
+> +	if (info->state != FBINFO_STATE_RUNNING)
+> +		return -EPERM;
+> +
+> +	if (info->screen_size)
+> +		total_size = info->screen_size;
+> +	else
+> +		total_size = info->fix.smem_len;
+> +
+> +	if (pos > total_size)
+> +		return -EFBIG;
+> +	if (count > total_size) {
+> +		err = -EFBIG;
+> +		count = total_size;
+> +	}
+> +	if (total_size - count < pos) {
+> +		if (!err)
+> +			err = -ENOSPC;
+> +		count = total_size - pos;
+> +	}
+> +
+> +	/*
+> +	 * Copy to framebuffer even if we already logged an error. Emulates
+> +	 * the behavior of the original fbdev implementation.
+> +	 */
+> +	if (drm_fbdev_use_iomem(info))
+> +		ret = fb_write_screen_base(info, buf, count, pos);
+> +	else
+> +		ret = fb_write_screen_buffer(info, buf, count, pos);
+> +
+> +	if (ret > 0)
+> +		*ppos = ret;
+> +
+> +	if (err)
+> +		return err;
+> +
+> +	return ret;
+> +}
+> +
+> +static void drm_fbdev_fb_fillrect(struct fb_info *info,
+> +				  const struct fb_fillrect *rect)
+> +{
+> +	if (drm_fbdev_use_iomem(info))
+> +		drm_fb_helper_cfb_fillrect(info, rect);
+> +	else
+> +		drm_fb_helper_sys_fillrect(info, rect);
+> +}
+> +
+> +static void drm_fbdev_fb_copyarea(struct fb_info *info,
+> +				  const struct fb_copyarea *area)
+> +{
+> +	if (drm_fbdev_use_iomem(info))
+> +		drm_fb_helper_cfb_copyarea(info, area);
+> +	else
+> +		drm_fb_helper_sys_copyarea(info, area);
+> +}
+> +
+> +static void drm_fbdev_fb_imageblit(struct fb_info *info,
+> +				   const struct fb_image *image)
+> +{
+> +	if (drm_fbdev_use_iomem(info))
+> +		drm_fb_helper_cfb_imageblit(info, image);
+> +	else
+> +		drm_fb_helper_sys_imageblit(info, image);
+> +}
+> +
+>  static const struct fb_ops drm_fbdev_fb_ops = {
+>  	.owner		= THIS_MODULE,
+>  	DRM_FB_HELPER_DEFAULT_OPS,
+> @@ -2034,11 +2233,11 @@ static const struct fb_ops drm_fbdev_fb_ops = {
+>  	.fb_release	= drm_fbdev_fb_release,
+>  	.fb_destroy	= drm_fbdev_fb_destroy,
+>  	.fb_mmap	= drm_fbdev_fb_mmap,
+> -	.fb_read	= drm_fb_helper_sys_read,
+> -	.fb_write	= drm_fb_helper_sys_write,
+> -	.fb_fillrect	= drm_fb_helper_sys_fillrect,
+> -	.fb_copyarea	= drm_fb_helper_sys_copyarea,
+> -	.fb_imageblit	= drm_fb_helper_sys_imageblit,
+> +	.fb_read	= drm_fbdev_fb_read,
+> +	.fb_write	= drm_fbdev_fb_write,
+> +	.fb_fillrect	= drm_fbdev_fb_fillrect,
+> +	.fb_copyarea	= drm_fbdev_fb_copyarea,
+> +	.fb_imageblit	= drm_fbdev_fb_imageblit,
+>  };
+>  
+>  static struct fb_deferred_io drm_fbdev_defio = {
+> diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
+> index 5ffbb4ed5b35..ab424ddd7665 100644
+> --- a/include/drm/drm_mode_config.h
+> +++ b/include/drm/drm_mode_config.h
+> @@ -877,18 +877,6 @@ struct drm_mode_config {
+>  	 */
+>  	bool prefer_shadow_fbdev;
+>  
+> -	/**
+> -	 * @fbdev_use_iomem:
+> -	 *
+> -	 * Set to true if framebuffer reside in iomem.
+> -	 * When set to true memcpy_toio() is used when copying the framebuffer in
+> -	 * drm_fb_helper.drm_fb_helper_dirty_blit_real().
+> -	 *
+> -	 * FIXME: This should be replaced with a per-mapping is_iomem
+> -	 * flag (like ttm does), and then used everywhere in fbdev code.
+> -	 */
+> -	bool fbdev_use_iomem;
+> -
+>  	/**
+>  	 * @quirk_addfb_prefer_xbgr_30bpp:
+>  	 *
+> -- 
+> 2.28.0
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
-------=_Part_135_1414951729.1603473652509--
-
