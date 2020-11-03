@@ -1,48 +1,34 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E2912A4F8E
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 20:01:36 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 59B022A50D3
+	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 21:22:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A06086ECE6;
-	Tue,  3 Nov 2020 19:01:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 285FF6E8C9;
+	Tue,  3 Nov 2020 20:22:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A29486ECE0;
- Tue,  3 Nov 2020 19:00:23 +0000 (UTC)
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1604430021;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=p7vA0Pp8Yw32NcCmeGMglrNZNTsusNNmUR0JbokXn0s=;
- b=Wh43mnWM8kdYti+K6Ejg70IQfa+GmZ8DCSo20FQE/hkLNmxVT4iphQnlk6m40FPrmWktQO
- 8ayXKz0ztE1cqx/iEhmcbhojQh9yCHEkFANOGr1w8fGEwrPOcrWAWxi/OenSb5evTEILWa
- oclhRZDu2W0eltn+sc+1j25HCEzKjNSXz+4io/CbYUyMFuxTbNnNJEiCm1jMBn8PGej5s3
- E3JpbZR0aFWpI6lV+SZv22HUNUyPWbXG8oMYz+BmJikgi+ivLhTWpXqqgXf53DcJR+Ltrn
- dCfpJUdQQNPCTgPlSMPzbs0whzNCaCVS/fZbTm34UVovthqkFff3qyFpeY0sbA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1604430021;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=p7vA0Pp8Yw32NcCmeGMglrNZNTsusNNmUR0JbokXn0s=;
- b=STcwQ6RaI64DeextSGHfCvrA9zLqnmZlfhd6kn3GgHfcpWRfVbJIkhHpoM7lA8B8jXR4lp
- QBLUYE/euA+zomCg==
-To: Linus Torvalds <torvalds@linux-foundation.org>
-In-Reply-To: <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
-References: <20201103092712.714480842@linutronix.de>
- <20201103095858.827582066@linutronix.de>
- <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
-Date: Tue, 03 Nov 2020 20:00:20 +0100
-Message-ID: <87y2ji1d17.fsf@nanos.tec.linutronix.de>
-MIME-Version: 1.0
-X-Mailman-Approved-At: Tue, 03 Nov 2020 19:01:34 +0000
-Subject: Re: [Spice-devel] [patch V3 22/37] highmem: High implementation
- details and document API
+Received: from ciao.gmane.io (static.214.254.202.116.clients.your-server.de
+ [116.202.254.214])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C17C6E8DB
+ for <spice-devel@lists.freedesktop.org>; Tue,  3 Nov 2020 20:22:53 +0000 (UTC)
+Received: from list by ciao.gmane.io with local (Exim 4.92)
+ (envelope-from <gcesd-spice-space-devel@m.gmane-mx.org>)
+ id 1ka2pP-000920-4S
+ for spice-devel@lists.freedesktop.org; Tue, 03 Nov 2020 21:22:51 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: spice-devel@lists.freedesktop.org
+From: Ian Pilcher <arequipeno@gmail.com>
+Date: Tue, 3 Nov 2020 14:22:45 -0600
+Message-ID: <rnse6m$11ke$1@ciao.gmane.io>
+Mime-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.3.1
+X-Mozilla-News-Host: news://news.gmane.org:119
+Content-Language: en-US
+Subject: [Spice-devel] [PATCH] desktop_layout: ignore unconnected video
+ devices
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,87 +40,68 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Juri Lelli <juri.lelli@redhat.com>, linux-aio@kvack.org,
- Peter Zijlstra <peterz@infradead.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel <dri-devel@lists.freedesktop.org>, linux-mips@vger.kernel.org,
- Ben Segall <bsegall@google.com>, Chris Mason <clm@fb.com>,
- Huang Rui <ray.huang@amd.com>, Paul Mackerras <paulus@samba.org>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Bristot de Oliveira <bristot@redhat.com>,
- linux-sparc <sparclinux@vger.kernel.org>, Vincent Chen <deanbo422@gmail.com>,
- Christoph Hellwig <hch@lst.de>, Vincent Guittot <vincent.guittot@linaro.org>,
- Paul McKenney <paulmck@kernel.org>, Max Filippov <jcmvbkbc@gmail.com>,
- Michael Ellerman <mpe@ellerman.id.au>,
- the arch/x86 maintainers <x86@kernel.org>,
- Russell King <linux@armlinux.org.uk>, linux-csky@vger.kernel.org,
- Ingo Molnar <mingo@kernel.org>, David Airlie <airlied@linux.ie>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Mel Gorman <mgorman@suse.de>, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>,
- "open list:SYNOPSYS ARC ARCHITECTURE" <linux-snps-arc@lists.infradead.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-xtensa@linux-xtensa.org,
- Arnd Bergmann <arnd@arndb.de>, intel-gfx <intel-gfx@lists.freedesktop.org>,
- Roland Scheidegger <sroland@vmware.com>, Josef Bacik <josef@toxicpanda.com>,
- Steven Rostedt <rostedt@goodmis.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>, spice-devel@lists.freedesktop.org,
- David Sterba <dsterba@suse.com>, virtualization@lists.linux-foundation.org,
- Dietmar Eggemann <dietmar.eggemann@arm.com>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
- Jani Nikula <jani.nikula@linux.intel.com>, Chris Zankel <chris@zankel.net>,
- Michal Simek <monstr@monstr.eu>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Nick Hu <nickhu@andestech.com>, Linux-MM <linux-mm@kvack.org>,
- Vineet Gupta <vgupta@synopsys.com>, LKML <linux-kernel@vger.kernel.org>,
- Christian Koenig <christian.koenig@amd.com>, Benjamin LaHaise <bcrl@kvack.org>,
- Daniel Vetter <daniel@ffwll.ch>, linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- "David S. Miller" <davem@davemloft.net>,
- linux-btrfs <linux-btrfs@vger.kernel.org>, Greentime Hu <green.hu@gmail.com>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, Nov 03 2020 at 09:48, Linus Torvalds wrote:
-> I have no complaints about the patch, but it strikes me that if people
-> want to actually have much better debug coverage, this is where it
-> should be (I like the "every other address" thing too, don't get me
-> wrong).
->
-> In particular, instead of these PageHighMem(page) tests, I think
-> something like this would be better:
->
->    #ifdef CONFIG_DEBUG_HIGHMEM
->      #define page_use_kmap(page) ((page),1)
->    #else
->      #define page_use_kmap(page) PageHighMem(page)
->    #endif
->
-> adn then replace those "if (!PageHighMem(page))" tests with "if
-> (!page_use_kmap())" instead.
->
-> IOW, in debug mode, it would _always_ remap the page, whether it's
-> highmem or not. That would really stress the highmem code and find any
-> fragilities.
+Currently, the Windows agent does not function properly if it detects a
+non-QXL video adapter connected to the guest.  See:
 
-Yes, that makes a lot of sense. We just have to avoid that for the
-architectures with aliasing issues.
+   https://gitlab.freedesktop.org/spice/win32/vd_agent/-/issues/15
+   https://gitlab.freedesktop.org/spice/win32/vd_agent/-/issues/13
 
-> Anyway, this is all sepatrate from the series, which still looks fine
-> to me. Just a reaction to seeing the patch, and Thomas' earlier
-> mention that the highmem debugging doesn't actually do much.
+This is true even when the non-QXL adapter does not have any displays
+attached, such as when a physical GPU is passed through to the guest for
+AI/ML workloads.
 
-Right, forcing it for both kmap and kmap_local is straight forward. I'll
-cook a patch on top for that.
+With this patch, the agent ignores the presence of unconnected video
+outputs and the mouse works as expected.  If a display is connected to
+a non-QXL adapter, the behavior is unchanged.  (Tested on Windows 10 Pro
+x64.)
 
-Thanks,
+---
+  vdagent/desktop_layout.cpp | 13 +++++++++++++
+  1 file changed, 13 insertions(+)
 
-        tglx
+diff --git a/vdagent/desktop_layout.cpp b/vdagent/desktop_layout.cpp
+index 07074da..8b538a1 100644
+--- a/vdagent/desktop_layout.cpp
++++ b/vdagent/desktop_layout.cpp
+@@ -48,6 +48,16 @@ DesktopLayout::~DesktopLayout()
+      delete _display_config;
+  }
 
++static BOOL
++dev_has_monitor(DISPLAY_DEVICE &dev_info)
++{
++    DISPLAY_DEVICE mon_info;
++
++    ZeroMemory(&mon_info, sizeof(mon_info));
++    mon_info.cb = sizeof(mon_info);
++    return EnumDisplayDevices(dev_info.DeviceName, 0, &mon_info, 0);
++}
++
+  static bool
+  get_next_display(DWORD &dev_id, DISPLAY_DEVICE &dev_info)
+  {
+@@ -64,6 +74,9 @@ get_next_display(DWORD &dev_id, DISPLAY_DEVICE &dev_info)
+          if (wcsstr(dev_info.DeviceString, L"Citrix Indirect Display")) {
+              continue;
+          }
++        if (!dev_has_monitor(dev_info)) {
++            continue;
++        }
+          return true;
+      }
+      return false;
+-- 
+2.26.2
+
+-- 
+========================================================================
+                  In Soviet Russia, Google searches you!
+========================================================================
 
 _______________________________________________
 Spice-devel mailing list
