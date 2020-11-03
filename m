@@ -2,62 +2,45 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D55F92A4F83
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 20:00:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E2912A4F8E
+	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 20:01:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 68D8E6ECD9;
-	Tue,  3 Nov 2020 19:00:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A06086ECE6;
+	Tue,  3 Nov 2020 19:01:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com
- [IPv6:2a00:1450:4864:20::242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B6D7B6E8E2
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Nov 2020 17:48:32 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id v19so15064883lji.5
- for <spice-devel@lists.freedesktop.org>; Tue, 03 Nov 2020 09:48:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=o0HUqTtrB0uneYNpLQNhQJ6FusME7LjWI9KZLqRyy8M=;
- b=HlBdVjW42hUSJkakIiVHCgxY07l6tlPx/MKTOg49MQqEt9fKpSl2tO6bNlSfEMf3/D
- yOb2ZUXxHpDZzPlQCZuCKgGgj4iIodCB3C8y4WCLAE53N4IY/fO4MumxqPXGllxVBzjJ
- AuMTxQdvsElAjMkZERbVlQwjny9JwixE30+4I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=o0HUqTtrB0uneYNpLQNhQJ6FusME7LjWI9KZLqRyy8M=;
- b=Q0SGI7HaKr8ozQLUe7xJyYdQ9NIthkXQcnnIJ9MjhTJ0A2iVdL2+wsNuMqvS5JwPKA
- RjYJxC/+rtk2h2zSG+/x3T27rsK3/Fe7s4qMvf31GJdOQ0S0k+5Zn3CyEU9WBUoXQXGs
- vGNIXeQh4Ddo8frQgwiL8OgWSukeBLZDFut8qzfztq9Hj9ZnzsyiaHl5yoabo6irefq7
- 8bZ7tUPDZazndNtS0aC8RydWODfEjF1Z+sNbOqdyueftodtlfg/Rj2D2kQCdlzAyun9+
- 9QJZQgio1lSVcBGIQ9/bbYEsFpDnnC2pYRaXiMupd0in20TTWqDEI4t592u54Fr1swzn
- 1Jcg==
-X-Gm-Message-State: AOAM532sILEAhE852NS8LVVA5IRxdmJKqNqZ0x5Gj80gSyrmp4vF0T98
- md12fFO8+xDEwQdf/mJkAtqcaneCH3xIgQ==
-X-Google-Smtp-Source: ABdhPJyvGIOERgJh3hXuDjBZRoArK4DDJcYAV5m1zDIIF2XHB07UGleSHQMz95pIZ6zv3AlBkh6oKw==
-X-Received: by 2002:a2e:515a:: with SMTP id b26mr9783713lje.262.1604425710794; 
- Tue, 03 Nov 2020 09:48:30 -0800 (PST)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com.
- [209.85.167.51])
- by smtp.gmail.com with ESMTPSA id 2sm4091489lfd.67.2020.11.03.09.48.28
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2020 09:48:30 -0800 (PST)
-Received: by mail-lf1-f51.google.com with SMTP id 141so23368388lfn.5
- for <spice-devel@lists.freedesktop.org>; Tue, 03 Nov 2020 09:48:28 -0800 (PST)
-X-Received: by 2002:a19:4815:: with SMTP id v21mr8859386lfa.603.1604425706752; 
- Tue, 03 Nov 2020 09:48:26 -0800 (PST)
-MIME-Version: 1.0
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A29486ECE0;
+ Tue,  3 Nov 2020 19:00:23 +0000 (UTC)
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1604430021;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=p7vA0Pp8Yw32NcCmeGMglrNZNTsusNNmUR0JbokXn0s=;
+ b=Wh43mnWM8kdYti+K6Ejg70IQfa+GmZ8DCSo20FQE/hkLNmxVT4iphQnlk6m40FPrmWktQO
+ 8ayXKz0ztE1cqx/iEhmcbhojQh9yCHEkFANOGr1w8fGEwrPOcrWAWxi/OenSb5evTEILWa
+ oclhRZDu2W0eltn+sc+1j25HCEzKjNSXz+4io/CbYUyMFuxTbNnNJEiCm1jMBn8PGej5s3
+ E3JpbZR0aFWpI6lV+SZv22HUNUyPWbXG8oMYz+BmJikgi+ivLhTWpXqqgXf53DcJR+Ltrn
+ dCfpJUdQQNPCTgPlSMPzbs0whzNCaCVS/fZbTm34UVovthqkFff3qyFpeY0sbA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1604430021;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=p7vA0Pp8Yw32NcCmeGMglrNZNTsusNNmUR0JbokXn0s=;
+ b=STcwQ6RaI64DeextSGHfCvrA9zLqnmZlfhd6kn3GgHfcpWRfVbJIkhHpoM7lA8B8jXR4lp
+ QBLUYE/euA+zomCg==
+To: Linus Torvalds <torvalds@linux-foundation.org>
+In-Reply-To: <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
 References: <20201103092712.714480842@linutronix.de>
  <20201103095858.827582066@linutronix.de>
-In-Reply-To: <20201103095858.827582066@linutronix.de>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Tue, 3 Nov 2020 09:48:10 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
-Message-ID: <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
-To: Thomas Gleixner <tglx@linutronix.de>
-X-Mailman-Approved-At: Tue, 03 Nov 2020 19:00:17 +0000
+ <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
+Date: Tue, 03 Nov 2020 20:00:20 +0100
+Message-ID: <87y2ji1d17.fsf@nanos.tec.linutronix.de>
+MIME-Version: 1.0
+X-Mailman-Approved-At: Tue, 03 Nov 2020 19:01:34 +0000
 Subject: Re: [Spice-devel] [patch V3 22/37] highmem: High implementation
  details and document API
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -116,57 +99,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, Nov 3, 2020 at 2:33 AM Thomas Gleixner <tglx@linutronix.de> wrote:
+On Tue, Nov 03 2020 at 09:48, Linus Torvalds wrote:
+> I have no complaints about the patch, but it strikes me that if people
+> want to actually have much better debug coverage, this is where it
+> should be (I like the "every other address" thing too, don't get me
+> wrong).
 >
-> +static inline void *kmap(struct page *page)
-> +{
-> +       void *addr;
-> +
-> +       might_sleep();
-> +       if (!PageHighMem(page))
-> +               addr = page_address(page);
-> +       else
-> +               addr = kmap_high(page);
-> +       kmap_flush_tlb((unsigned long)addr);
-> +       return addr;
-> +}
-> +
-> +static inline void kunmap(struct page *page)
-> +{
-> +       might_sleep();
-> +       if (!PageHighMem(page))
-> +               return;
-> +       kunmap_high(page);
-> +}
+> In particular, instead of these PageHighMem(page) tests, I think
+> something like this would be better:
+>
+>    #ifdef CONFIG_DEBUG_HIGHMEM
+>      #define page_use_kmap(page) ((page),1)
+>    #else
+>      #define page_use_kmap(page) PageHighMem(page)
+>    #endif
+>
+> adn then replace those "if (!PageHighMem(page))" tests with "if
+> (!page_use_kmap())" instead.
+>
+> IOW, in debug mode, it would _always_ remap the page, whether it's
+> highmem or not. That would really stress the highmem code and find any
+> fragilities.
 
-I have no complaints about the patch, but it strikes me that if people
-want to actually have much better debug coverage, this is where it
-should be (I like the "every other address" thing too, don't get me
-wrong).
+Yes, that makes a lot of sense. We just have to avoid that for the
+architectures with aliasing issues.
 
-In particular, instead of these PageHighMem(page) tests, I think
-something like this would be better:
+> Anyway, this is all sepatrate from the series, which still looks fine
+> to me. Just a reaction to seeing the patch, and Thomas' earlier
+> mention that the highmem debugging doesn't actually do much.
 
-   #ifdef CONFIG_DEBUG_HIGHMEM
-     #define page_use_kmap(page) ((page),1)
-   #else
-     #define page_use_kmap(page) PageHighMem(page)
-   #endif
+Right, forcing it for both kmap and kmap_local is straight forward. I'll
+cook a patch on top for that.
 
-adn then replace those "if (!PageHighMem(page))" tests with "if
-(!page_use_kmap())" instead.
+Thanks,
 
-IOW, in debug mode, it would _always_ remap the page, whether it's
-highmem or not. That would really stress the highmem code and find any
-fragilities.
+        tglx
 
-No?
 
-Anyway, this is all sepatrate from the series, which still looks fine
-to me. Just a reaction to seeing the patch, and Thomas' earlier
-mention that the highmem debugging doesn't actually do much.
-
-               Linus
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
