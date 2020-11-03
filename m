@@ -1,63 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFF0C2A40E2
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 10:57:42 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 615552A40E8
+	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 10:59:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 44A876E8A6;
-	Tue,  3 Nov 2020 09:57:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EAFA36E8A1;
+	Tue,  3 Nov 2020 09:59:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AEDE96E8A6
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Nov 2020 09:57:39 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4F6F86E8A1
+ for <spice-devel@lists.freedesktop.org>; Tue,  3 Nov 2020 09:59:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1604397458;
+ s=mimecast20190719; t=1604397548;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=nZ9m0hwlkgMYf+AAaWej/3tiBYQVpvsEYZtO3FhUMOI=;
- b=jWK4PiFir+e6yO3emh0n0aomBdQmQHbfV/YIQrlCuCw8lsYQKnDYcuC4IMU9C/W2RdbnAK
- 0hKKEIOfgUWvJ9XVZiANVCjD3Uvbvc2y68NDcHKEDix5+lKNmQaGcweAK/hxo/0n+gBP9u
- EROs7J0fOYOWYqyitHoDhsyMS72dK08=
+ bh=CUHv3E7DaDsWYJQn/2itnX+x5TimZMcVNAiMuJRMRf8=;
+ b=JkH9Lh/7mFI3/O8jLlJ3r1r4lLfN4FS2/mjDc9YAuZGjgQEXfiK9YlbXzUC5gPA9KSHMCF
+ uUMx4AMNPKpZKkYWR79U9FZG5yXfQ1iteN2LS+KrkR3cl+qoB/GpkL3BcnOZfYiM2LyeG6
+ vQ+oOTNzOsq+nYS6g0WuSG9iM4oVmtM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-552-nXrP1CMQOxm8QxaOZRhGmg-1; Tue, 03 Nov 2020 04:57:36 -0500
-X-MC-Unique: nXrP1CMQOxm8QxaOZRhGmg-1
+ us-mta-473-nElUQhsANkKUqZnLBYOGAA-1; Tue, 03 Nov 2020 04:59:04 -0500
+X-MC-Unique: nElUQhsANkKUqZnLBYOGAA-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
  [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EF70B1009E23;
- Tue,  3 Nov 2020 09:57:35 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A32E2802B56;
+ Tue,  3 Nov 2020 09:59:03 +0000 (UTC)
 Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id D6FD41002C2D;
- Tue,  3 Nov 2020 09:57:35 +0000 (UTC)
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 9B1F11002C21;
+ Tue,  3 Nov 2020 09:59:03 +0000 (UTC)
 Received: from zmail25.collab.prod.int.phx2.redhat.com
  (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id CE5158C7C5;
- Tue,  3 Nov 2020 09:57:35 +0000 (UTC)
-Date: Tue, 3 Nov 2020 04:57:35 -0500 (EST)
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 9472D18095FF;
+ Tue,  3 Nov 2020 09:59:03 +0000 (UTC)
+Date: Tue, 3 Nov 2020 04:59:03 -0500 (EST)
 From: Frediano Ziglio <fziglio@redhat.com>
 To: spice-devel@lists.freedesktop.org
-Message-ID: <733489647.375009.1604397455296.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20201103094834.7691-1-fziglio@redhat.com>
+Message-ID: <179211112.375178.1604397543568.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20201103094834.7691-10-fziglio@redhat.com>
 References: <20201103094834.7691-1-fziglio@redhat.com>
+ <20201103094834.7691-10-fziglio@redhat.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.33.32.16, 10.4.195.5]
-Thread-Topic: vdagentd: Avoid calling chmod
-Thread-Index: 3eCtZrovC7cedX5FZSAwPrMZDarcZg==
+Thread-Topic: Add a test for session_info
+Thread-Index: L1w2FVD8vPatgAaNrf2Ox9J2GHWgqw==
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] [PATCH vd_agent_linux 01/10] vdagentd: Avoid
- calling chmod
+Subject: Re: [Spice-devel] [PATCH vd_agent_linux 10/10] Add a test for
+ session_info
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,59 +76,136 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This entire series has been already reviewed and merged as part of security
-audit from SUSE security team.
+Hi,
+   this is currently failing on Gitlab CI, I suppose due to the fact
+that is run inside a container (potentially not in a user session).
 
-Note that the classifications are Low/Medium.
-
-Distributions should already have patches/packages.
-
-Regards,
-  Frediano Ziglio
+Frediano
 
 > 
-> Create the socket with the right permissions using umask.
-> This also prevents possible symlink exploitation in case socket
-> path is not secure.
+> Test from Uri, integrated in test suite.
 > 
+> Signed-off-by: Uri Lublin <uril@redhat.com>
 > Signed-off-by: Frediano Ziglio <freddy77@gmail.com>
-> Acked-by: Uri Lublin <uril@redhat.com>
 > ---
->  src/vdagentd/vdagentd.c | 12 ++----------
->  1 file changed, 2 insertions(+), 10 deletions(-)
+>  Makefile.am               | 30 ++++++++++++++++++++
+>  tests/test-session-info.c | 58 +++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 88 insertions(+)
+>  create mode 100644 tests/test-session-info.c
 > 
-> diff --git a/src/vdagentd/vdagentd.c b/src/vdagentd/vdagentd.c
-> index dca6980..a2b74bb 100644
-> --- a/src/vdagentd/vdagentd.c
-> +++ b/src/vdagentd/vdagentd.c
-> @@ -1208,7 +1208,9 @@ int main(int argc, char *argv[])
->      /* systemd socket activation not enabled, create our own */
->  #endif /* WITH_SYSTEMD_SOCKET_ACTIVATION */
->      {
-> +        mode_t mode = umask(0111);
->          udscs_server_listen_to_address(server, vdagentd_socket, &err);
-> +        umask(mode);
->      }
+> diff --git a/Makefile.am b/Makefile.am
+> index 575ba52..f4c65b4 100644
+> --- a/Makefile.am
+> +++ b/Makefile.am
+> @@ -109,13 +109,43 @@ src_spice_vdagentd_SOURCES =			\
+>  	src/vdagentd/virtio-port.h		\
+>  	$(NULL)
 >  
->      if (err) {
-> @@ -1219,16 +1221,6 @@ int main(int argc, char *argv[])
->          return 1;
->      }
+> +tests_test_session_info_CFLAGS =		\
+> +	$(DBUS_CFLAGS)				\
+> +	$(LIBSYSTEMD_DAEMON_CFLAGS)		\
+> +	$(LIBSYSTEMD_LOGIN_CFLAGS)		\
+> +	$(SPICE_CFLAGS)				\
+> +	$(GIO2_CFLAGS)				\
+> +	-I$(srcdir)/src				\
+> +	-I$(srcdir)/src/vdagentd		\
+> +	-DUDSCS_NO_SERVER			\
+> +	$(NULL)
+> +
+> +tests_test_session_info_LDADD =			\
+> +	$(DBUS_LIBS)				\
+> +	$(LIBSYSTEMD_DAEMON_LIBS)		\
+> +	$(LIBSYSTEMD_LOGIN_LIBS)		\
+> +	$(SPICE_LIBS)				\
+> +	$(GIO2_LIBS)				\
+> +	$(NULL)
+> +
+> +tests_test_session_info_SOURCES =		\
+> +	$(common_sources)			\
+> +	src/vdagentd/session-info.h		\
+> +	tests/test-session-info.c		\
+> +	$(NULL)
+> +
+> +check_PROGRAMS += tests/test-session-info
+> +
+>  if HAVE_CONSOLE_KIT
+>  src_spice_vdagentd_SOURCES += src/vdagentd/console-kit.c
+> +tests_test_session_info_SOURCES += src/vdagentd/console-kit.c
+>  else
+>  if HAVE_LIBSYSTEMD_LOGIN
+>  src_spice_vdagentd_SOURCES += src/vdagentd/systemd-login.c
+> +tests_test_session_info_SOURCES += src/vdagentd/systemd-login.c
+>  else
+>  src_spice_vdagentd_SOURCES += src/vdagentd/dummy-session-info.c
+> +tests_test_session_info_SOURCES += src/vdagentd/dummy-session-info.c
+>  endif
+>  endif
 >  
-> -    /* no need to set permissions on a socket that was provided by systemd
-> */
-> -    if (own_socket) {
-> -        if (chmod(vdagentd_socket, 0666)) {
-> -            syslog(LOG_CRIT, "Fatal could not change permissions on %s: %m",
-> -                   vdagentd_socket);
-> -            udscs_destroy_server(server);
-> -            return 1;
-> -        }
-> -    }
-> -
->  #ifdef WITH_STATIC_UINPUT
->      uinput = vdagentd_uinput_create(uinput_device, 1024, 768, NULL, 0,
->                                      debug > 1, uinput_fake);
+> diff --git a/tests/test-session-info.c b/tests/test-session-info.c
+> new file mode 100644
+> index 0000000..dae3ec6
+> --- /dev/null
+> +++ b/tests/test-session-info.c
+> @@ -0,0 +1,58 @@
+> +/*  test-session-info.c  - test session info
+> +
+> +    Copyright 2020 Red Hat, Inc.
+> +
+> +    This program is free software: you can redistribute it and/or modify
+> +    it under the terms of the GNU General Public License as published by
+> +    the Free Software Foundation, either version 3 of the License, or
+> +    (at your option) any later version.
+> +
+> +    This program is distributed in the hope that it will be useful,
+> +    but WITHOUT ANY WARRANTY; without even the implied warranty of
+> +    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> +    GNU General Public License for more details.
+> +
+> +    You should have received a copy of the GNU General Public License
+> +    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+> +*/
+> +#include <config.h>
+> +
+> +#undef NDEBUG
+> +#include <assert.h>
+> +#include <stdio.h>
+> +#include <stdlib.h>
+> +#include <unistd.h>
+> +
+> +#include "session-info.h"
+> +
+> +int main(int argc, char *argv[])
+> +{
+> +    int pid, uid, ck_uid;
+> +
+> +    pid = (int)getpid();
+> +
+> +    struct session_info *session_info = session_info_create(1);
+> +    if (session_info == NULL) {
+> +        return 1;
+> +    }
+> +
+> +    char *session = session_info_session_for_pid(session_info, pid);
+> +    if (session == NULL) {
+> +        session_info_destroy(session_info);
+> +        return 2;
+> +    }
+> +    ck_uid = session_info_uid_for_session(session_info, session);
+> +
+> +    free(session);
+> +    session_info_destroy(session_info);
+> +
+> +    uid = getuid();
+> +    printf("MAIN: uid is %d, ck_uid is %d\n", uid, ck_uid);
+> +
+> +    if (uid != ck_uid) {
+> +        fprintf(stderr, "MAIN: uid (%d) does not match console-kit uid
+> %d\n", uid, ck_uid);
+> +        return 3;
+> +    }
+> +
+> +    return 0;
+> +}
 
 _______________________________________________
 Spice-devel mailing list
