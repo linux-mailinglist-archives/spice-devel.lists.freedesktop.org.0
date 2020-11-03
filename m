@@ -2,63 +2,42 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 615552A40E8
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 10:59:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CDA22A45E4
+	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 14:06:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EAFA36E8A1;
-	Tue,  3 Nov 2020 09:59:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B3E466EC8A;
+	Tue,  3 Nov 2020 13:06:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4F6F86E8A1
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Nov 2020 09:59:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1604397548;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=CUHv3E7DaDsWYJQn/2itnX+x5TimZMcVNAiMuJRMRf8=;
- b=JkH9Lh/7mFI3/O8jLlJ3r1r4lLfN4FS2/mjDc9YAuZGjgQEXfiK9YlbXzUC5gPA9KSHMCF
- uUMx4AMNPKpZKkYWR79U9FZG5yXfQ1iteN2LS+KrkR3cl+qoB/GpkL3BcnOZfYiM2LyeG6
- vQ+oOTNzOsq+nYS6g0WuSG9iM4oVmtM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-473-nElUQhsANkKUqZnLBYOGAA-1; Tue, 03 Nov 2020 04:59:04 -0500
-X-MC-Unique: nElUQhsANkKUqZnLBYOGAA-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A32E2802B56;
- Tue,  3 Nov 2020 09:59:03 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9B1F11002C21;
- Tue,  3 Nov 2020 09:59:03 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 9472D18095FF;
- Tue,  3 Nov 2020 09:59:03 +0000 (UTC)
-Date: Tue, 3 Nov 2020 04:59:03 -0500 (EST)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: spice-devel@lists.freedesktop.org
-Message-ID: <179211112.375178.1604397543568.JavaMail.zimbra@redhat.com>
-In-Reply-To: <20201103094834.7691-10-fziglio@redhat.com>
-References: <20201103094834.7691-1-fziglio@redhat.com>
- <20201103094834.7691-10-fziglio@redhat.com>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 973BF6E891;
+ Tue,  3 Nov 2020 09:30:19 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AEF6BAF5B;
+ Tue,  3 Nov 2020 09:30:18 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+ daniel@ffwll.ch, sam@ravnborg.org, alexander.deucher@amd.com,
+ christian.koenig@amd.com, kraxel@redhat.com, l.stach@pengutronix.de,
+ linux+etnaviv@armlinux.org.uk, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ yuq825@gmail.com, bskeggs@redhat.com, robh@kernel.org,
+ tomeu.vizoso@collabora.com, steven.price@arm.com,
+ alyssa.rosenzweig@collabora.com, hjc@rock-chips.com, heiko@sntech.de,
+ hdegoede@redhat.com, sean@poorly.run, eric@anholt.net,
+ oleksandr_andrushchenko@epam.com, ray.huang@amd.com,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com, luben.tuikov@amd.com,
+ apaneers@amd.com, linus.walleij@linaro.org, melissa.srw@gmail.com,
+ chris@chris-wilson.co.uk, miaoqinglang@huawei.com
+Date: Tue,  3 Nov 2020 10:30:05 +0100
+Message-Id: <20201103093015.1063-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.16, 10.4.195.5]
-Thread-Topic: Add a test for session_info
-Thread-Index: L1w2FVD8vPatgAaNrf2Ox9J2GHWgqw==
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] [PATCH vd_agent_linux 10/10] Add a test for
- session_info
+X-Mailman-Approved-At: Tue, 03 Nov 2020 13:06:33 +0000
+Subject: [Spice-devel] [PATCH v7 00/10] Support GEM object mappings from I/O
+ memory
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,142 +49,156 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Frediano Ziglio <freddy77@gmail.com>
+Cc: linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ xen-devel@lists.xenproject.org, spice-devel@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
-   this is currently failing on Gitlab CI, I suppose due to the fact
-that is run inside a container (potentially not in a user session).
+DRM's fbdev console uses regular load and store operations to update
+framebuffer memory. The bochs driver on sparc64 requires the use of
+I/O-specific load and store operations. We have a workaround, but need
+a long-term solution to the problem.
 
-Frediano
+This patchset changes GEM's vmap/vunmap interfaces to forward pointers
+of type struct dma_buf_map and updates the generic fbdev emulation to
+use them correctly. This enables I/O-memory operations on all framebuffers
+that require and support them.
 
-> 
-> Test from Uri, integrated in test suite.
-> 
-> Signed-off-by: Uri Lublin <uril@redhat.com>
-> Signed-off-by: Frediano Ziglio <freddy77@gmail.com>
-> ---
->  Makefile.am               | 30 ++++++++++++++++++++
->  tests/test-session-info.c | 58 +++++++++++++++++++++++++++++++++++++++
->  2 files changed, 88 insertions(+)
->  create mode 100644 tests/test-session-info.c
-> 
-> diff --git a/Makefile.am b/Makefile.am
-> index 575ba52..f4c65b4 100644
-> --- a/Makefile.am
-> +++ b/Makefile.am
-> @@ -109,13 +109,43 @@ src_spice_vdagentd_SOURCES =			\
->  	src/vdagentd/virtio-port.h		\
->  	$(NULL)
->  
-> +tests_test_session_info_CFLAGS =		\
-> +	$(DBUS_CFLAGS)				\
-> +	$(LIBSYSTEMD_DAEMON_CFLAGS)		\
-> +	$(LIBSYSTEMD_LOGIN_CFLAGS)		\
-> +	$(SPICE_CFLAGS)				\
-> +	$(GIO2_CFLAGS)				\
-> +	-I$(srcdir)/src				\
-> +	-I$(srcdir)/src/vdagentd		\
-> +	-DUDSCS_NO_SERVER			\
-> +	$(NULL)
-> +
-> +tests_test_session_info_LDADD =			\
-> +	$(DBUS_LIBS)				\
-> +	$(LIBSYSTEMD_DAEMON_LIBS)		\
-> +	$(LIBSYSTEMD_LOGIN_LIBS)		\
-> +	$(SPICE_LIBS)				\
-> +	$(GIO2_LIBS)				\
-> +	$(NULL)
-> +
-> +tests_test_session_info_SOURCES =		\
-> +	$(common_sources)			\
-> +	src/vdagentd/session-info.h		\
-> +	tests/test-session-info.c		\
-> +	$(NULL)
-> +
-> +check_PROGRAMS += tests/test-session-info
-> +
->  if HAVE_CONSOLE_KIT
->  src_spice_vdagentd_SOURCES += src/vdagentd/console-kit.c
-> +tests_test_session_info_SOURCES += src/vdagentd/console-kit.c
->  else
->  if HAVE_LIBSYSTEMD_LOGIN
->  src_spice_vdagentd_SOURCES += src/vdagentd/systemd-login.c
-> +tests_test_session_info_SOURCES += src/vdagentd/systemd-login.c
->  else
->  src_spice_vdagentd_SOURCES += src/vdagentd/dummy-session-info.c
-> +tests_test_session_info_SOURCES += src/vdagentd/dummy-session-info.c
->  endif
->  endif
->  
-> diff --git a/tests/test-session-info.c b/tests/test-session-info.c
-> new file mode 100644
-> index 0000000..dae3ec6
-> --- /dev/null
-> +++ b/tests/test-session-info.c
-> @@ -0,0 +1,58 @@
-> +/*  test-session-info.c  - test session info
-> +
-> +    Copyright 2020 Red Hat, Inc.
-> +
-> +    This program is free software: you can redistribute it and/or modify
-> +    it under the terms of the GNU General Public License as published by
-> +    the Free Software Foundation, either version 3 of the License, or
-> +    (at your option) any later version.
-> +
-> +    This program is distributed in the hope that it will be useful,
-> +    but WITHOUT ANY WARRANTY; without even the implied warranty of
-> +    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> +    GNU General Public License for more details.
-> +
-> +    You should have received a copy of the GNU General Public License
-> +    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-> +*/
-> +#include <config.h>
-> +
-> +#undef NDEBUG
-> +#include <assert.h>
-> +#include <stdio.h>
-> +#include <stdlib.h>
-> +#include <unistd.h>
-> +
-> +#include "session-info.h"
-> +
-> +int main(int argc, char *argv[])
-> +{
-> +    int pid, uid, ck_uid;
-> +
-> +    pid = (int)getpid();
-> +
-> +    struct session_info *session_info = session_info_create(1);
-> +    if (session_info == NULL) {
-> +        return 1;
-> +    }
-> +
-> +    char *session = session_info_session_for_pid(session_info, pid);
-> +    if (session == NULL) {
-> +        session_info_destroy(session_info);
-> +        return 2;
-> +    }
-> +    ck_uid = session_info_uid_for_session(session_info, session);
-> +
-> +    free(session);
-> +    session_info_destroy(session_info);
-> +
-> +    uid = getuid();
-> +    printf("MAIN: uid is %d, ck_uid is %d\n", uid, ck_uid);
-> +
-> +    if (uid != ck_uid) {
-> +        fprintf(stderr, "MAIN: uid (%d) does not match console-kit uid
-> %d\n", uid, ck_uid);
-> +        return 3;
-> +    }
-> +
-> +    return 0;
-> +}
+Patches #1 to #4 prepare VRAM helpers and drivers.
+
+Next is the update of the GEM vmap functions. Patch #5 adds vmap and vunmap
+that is usable with TTM-based GEM drivers, and patch #6 updates GEM's
+vmap/vunmap callback to forward instances of type struct dma_buf_map. While
+the patch touches many files throughout the DRM modules, the applied changes
+are mostly trivial interface fixes. Several TTM-based GEM drivers now use
+the new vmap code. Patch #7 updates GEM's internal vmap/vunmap functions to
+forward struct dma_buf_map.
+
+With struct dma_buf_map propagated through the layers, patches #8 to #10
+convert DRM clients and generic fbdev emulation to use it. Updating the
+fbdev framebuffer will select the correct functions, either for system or
+I/O memory.
+
+There is also a set of IGT testcases for fbdev at [1]. Reading and writting
+fbdev device files has several corner cases near the EOF that the tests cover
+as well. The original fbdev code has different semantics with the different
+implementations (sys, cfb). Patch #10 and the testcases intend to harmonize
+the behaviour and serve as a reference.
+
+v7:
+	* return number of read/written bytes in fbdev code; if any
+	* init QXL cursor from BO buffer (kernel test robot)
+	* use min_t(size_t,) (kernel test robot)
+v6:
+	* don't call page_to_phys() on fbdev framebuffers in I/O memory;
+	  warn instead (Daniel)
+v5:
+	* rebase onto latest TTM changes (Christian)
+	* support TTM premapped memory correctly (Christian)
+	* implement fb_read/fb_write internally (Sam, Daniel)
+	* cleanups
+v4:
+	* provide TTM vmap/vunmap plus GEM helpers and convert drivers
+	  over (Christian, Daniel)
+	* remove several empty functions
+	* more TODOs and documentation (Daniel)
+v3:
+	* recreate the whole patchset on top of struct dma_buf_map
+v2:
+	* RFC patchset
+
+[1] https://gitlab.freedesktop.org/tzimmermann/igt-gpu-tools/-/merge_requests/1
+
+Thomas Zimmermann (10):
+  drm/vram-helper: Remove invariant parameters from internal kmap
+    function
+  drm/cma-helper: Remove empty drm_gem_cma_prime_vunmap()
+  drm/etnaviv: Remove empty etnaviv_gem_prime_vunmap()
+  drm/exynos: Remove empty exynos_drm_gem_prime_{vmap,vunmap}()
+  drm/ttm: Add vmap/vunmap to TTM and TTM GEM helpers
+  drm/gem: Use struct dma_buf_map in GEM vmap ops and convert GEM
+    backends
+  drm/gem: Update internal GEM vmap/vunmap interfaces to use struct
+    dma_buf_map
+  drm/gem: Store client buffer mappings as struct dma_buf_map
+  dma-buf-map: Add memcpy and pointer-increment interfaces
+  drm/fb_helper: Support framebuffers in I/O memory
+
+ Documentation/gpu/todo.rst                  |  37 ++-
+ drivers/gpu/drm/Kconfig                     |   2 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  36 ---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |   2 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c     |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.h  |   1 -
+ drivers/gpu/drm/ast/ast_cursor.c            |  27 +--
+ drivers/gpu/drm/ast/ast_drv.h               |   7 +-
+ drivers/gpu/drm/bochs/bochs_kms.c           |   1 -
+ drivers/gpu/drm/drm_client.c                |  38 +--
+ drivers/gpu/drm/drm_fb_helper.c             | 250 ++++++++++++++++++--
+ drivers/gpu/drm/drm_gem.c                   |  29 ++-
+ drivers/gpu/drm/drm_gem_cma_helper.c        |  27 +--
+ drivers/gpu/drm/drm_gem_shmem_helper.c      |  48 ++--
+ drivers/gpu/drm/drm_gem_ttm_helper.c        |  38 +++
+ drivers/gpu/drm/drm_gem_vram_helper.c       | 117 +++++----
+ drivers/gpu/drm/drm_internal.h              |   5 +-
+ drivers/gpu/drm/drm_prime.c                 |  14 +-
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h       |   3 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c       |   1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  12 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.c     |  12 -
+ drivers/gpu/drm/exynos/exynos_drm_gem.h     |   2 -
+ drivers/gpu/drm/lima/lima_gem.c             |   6 +-
+ drivers/gpu/drm/lima/lima_sched.c           |  11 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c      |  10 +-
+ drivers/gpu/drm/nouveau/Kconfig             |   1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.h        |   2 -
+ drivers/gpu/drm/nouveau/nouveau_gem.c       |   6 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.h       |   2 -
+ drivers/gpu/drm/nouveau/nouveau_prime.c     |  20 --
+ drivers/gpu/drm/panfrost/panfrost_perfcnt.c |  14 +-
+ drivers/gpu/drm/qxl/qxl_display.c           |  15 +-
+ drivers/gpu/drm/qxl/qxl_draw.c              |  14 +-
+ drivers/gpu/drm/qxl/qxl_drv.h               |  11 +-
+ drivers/gpu/drm/qxl/qxl_object.c            |  31 ++-
+ drivers/gpu/drm/qxl/qxl_object.h            |   2 +-
+ drivers/gpu/drm/qxl/qxl_prime.c             |  12 +-
+ drivers/gpu/drm/radeon/radeon.h             |   1 -
+ drivers/gpu/drm/radeon/radeon_gem.c         |   7 +-
+ drivers/gpu/drm/radeon/radeon_prime.c       |  20 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  22 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.h |   4 +-
+ drivers/gpu/drm/tiny/cirrus.c               |  10 +-
+ drivers/gpu/drm/tiny/gm12u320.c             |  10 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c           |  72 ++++++
+ drivers/gpu/drm/udl/udl_modeset.c           |   8 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c       |  11 +-
+ drivers/gpu/drm/vc4/vc4_bo.c                |   7 +-
+ drivers/gpu/drm/vc4/vc4_drv.h               |   2 +-
+ drivers/gpu/drm/vgem/vgem_drv.c             |  16 +-
+ drivers/gpu/drm/vkms/vkms_plane.c           |  15 +-
+ drivers/gpu/drm/vkms/vkms_writeback.c       |  22 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.c     |  18 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.h     |   6 +-
+ include/drm/drm_client.h                    |   7 +-
+ include/drm/drm_gem.h                       |   5 +-
+ include/drm/drm_gem_cma_helper.h            |   3 +-
+ include/drm/drm_gem_shmem_helper.h          |   4 +-
+ include/drm/drm_gem_ttm_helper.h            |   6 +
+ include/drm/drm_gem_vram_helper.h           |  14 +-
+ include/drm/drm_mode_config.h               |  12 -
+ include/drm/ttm/ttm_bo_api.h                |  28 +++
+ include/linux/dma-buf-map.h                 |  93 +++++++-
+ 64 files changed, 856 insertions(+), 438 deletions(-)
+
+--
+2.29.0
 
 _______________________________________________
 Spice-devel mailing list
