@@ -2,44 +2,44 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50BE52A40A3
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 10:49:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F42A2A40A4
+	for <lists+spice-devel@lfdr.de>; Tue,  3 Nov 2020 10:49:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1F2186E8A4;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 400B96E8A2;
 	Tue,  3 Nov 2020 09:49:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D862F6E89F
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Nov 2020 09:49:12 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8907D6E89F
+ for <spice-devel@lists.freedesktop.org>; Tue,  3 Nov 2020 09:49:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1604396951;
+ s=mimecast20190719; t=1604396952;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=nrVIiRX5mhsZutuENvms2ufws9mx3dTVLOsd0TO4Iwo=;
- b=UJMhUEM0wbI2AYpNp27TQcI6be0JI5MWRKd/b5kEU1sLiJIK6bZKoEwViJQsdIyieK4ZbR
- /SJImDZA6bdaEHBjU3K2PORJrsT+jJ8aMKmK51Db+fWUobXVsViOWg27PQBwuaSxh2cRKc
- CVvWOkY1w1qg3y1j0jNSOXb8q+87dCE=
+ bh=CmEt1jOpwgAAWGjqe5bCZOWR32JuyB5rJAenJ8zaXP4=;
+ b=W0MfvnfP8k6BgxXQfLmbLr0ZksVIMSwXVr9YiW7rxYz77f0ObX6eNtwAVkg7jPm/25DL8O
+ ZML5MyESLZlpMM98JIDW8q27LlC/KaeRovLViwVdk1hFVT0mN36He/qnYok/CuKCff6wsk
+ 4XJgy2SNe1ESj9IYqcBmRHy5aDDTfMI=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-293-R1cJUfGeP6SngQkGgWYXhA-1; Tue, 03 Nov 2020 04:49:08 -0500
-X-MC-Unique: R1cJUfGeP6SngQkGgWYXhA-1
+ us-mta-178-yxC0pG5PPj-QZpVVqijBGA-1; Tue, 03 Nov 2020 04:49:10 -0500
+X-MC-Unique: yxC0pG5PPj-QZpVVqijBGA-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3573B8030DD;
- Tue,  3 Nov 2020 09:48:50 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AEB93EC1B6;
+ Tue,  3 Nov 2020 09:48:51 +0000 (UTC)
 Received: from fziglio.remote.csb (unknown [10.33.32.16])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 5321021E8F;
- Tue,  3 Nov 2020 09:48:49 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 9FBA2385;
+ Tue,  3 Nov 2020 09:48:50 +0000 (UTC)
 From: Frediano Ziglio <fziglio@redhat.com>
 To: spice-devel@lists.freedesktop.org
-Date: Tue,  3 Nov 2020 09:48:30 +0000
-Message-Id: <20201103094834.7691-6-fziglio@redhat.com>
+Date: Tue,  3 Nov 2020 09:48:31 +0000
+Message-Id: <20201103094834.7691-7-fziglio@redhat.com>
 In-Reply-To: <20201103094834.7691-1-fziglio@redhat.com>
 References: <20201103094834.7691-1-fziglio@redhat.com>
 MIME-Version: 1.0
@@ -48,7 +48,8 @@ Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Spice-devel] [PATCH vd_agent_linux 06/10] Better check for sessions
+Subject: [Spice-devel] [PATCH vd_agent_linux 07/10] vdagentd: Limit number
+ of agents per session to 1
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,162 +69,54 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 From: Frediano Ziglio <freddy77@gmail.com>
 
-Do not allow other users to hijack a session checking that
-the process is launched by the owner of the session.
-
 Signed-off-by: Frediano Ziglio <freddy77@gmail.com>
 Acked-by: Uri Lublin <uril@redhat.com>
 ---
- src/vdagentd/console-kit.c        | 67 +++++++++++++++++++++++++++++++
- src/vdagentd/dummy-session-info.c |  5 +++
- src/vdagentd/session-info.h       |  3 ++
- src/vdagentd/systemd-login.c      |  9 +++++
- src/vdagentd/vdagentd.c           | 10 ++++-
- 5 files changed, 93 insertions(+), 1 deletion(-)
+ src/vdagentd/vdagentd.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/src/vdagentd/console-kit.c b/src/vdagentd/console-kit.c
-index fcdb0b6..77429bc 100644
---- a/src/vdagentd/console-kit.c
-+++ b/src/vdagentd/console-kit.c
-@@ -568,3 +568,70 @@ exit:
-     }
-     return ret;
- }
-+
-+uid_t session_info_uid_for_session(struct session_info *info, const char *session)
-+{
-+    DBusError error;
-+    DBusMessage *message = NULL;
-+    DBusMessage *reply = NULL;
-+    uint32_t uid;
-+    uid_t ret = -1;
-+    const char *err_msg;
-+
-+    g_return_val_if_fail(info != NULL, ret);
-+    g_return_val_if_fail(info->connection != NULL, ret);
-+    g_return_val_if_fail(info->active_session != NULL, ret);
-+
-+    dbus_error_init(&error);
-+
-+    err_msg = "(console-kit) Unable to create dbus message for GetUnixUser";
-+    message = dbus_message_new_method_call(INTERFACE_CONSOLE_KIT,
-+                                           session,
-+                                           INTERFACE_CONSOLE_KIT_SESSION,
-+                                           "GetUnixUser");
-+    if (message == NULL) {
-+        goto exit;
-+    }
-+
-+    err_msg = "(console-kit) GetUnixUser failed";
-+    reply = dbus_connection_send_with_reply_and_block(info->connection,
-+                                                      message,
-+                                                      -1,
-+                                                      &error);
-+    if (reply == NULL || dbus_error_is_set(&error)) {
-+        goto exit;
-+    }
-+
-+    dbus_error_init(&error);
-+    err_msg = "(console-kit) fail to get session-type from reply";
-+    if (!dbus_message_get_args(reply,
-+                               &error,
-+                               DBUS_TYPE_UINT32, &uid,
-+                               DBUS_TYPE_INVALID)) {
-+        goto exit;
-+    }
-+
-+    if (info->verbose) {
-+        syslog(LOG_DEBUG, "(console-kit) unix user is '%u'", (unsigned) uid);
-+    }
-+
-+    err_msg = NULL;
-+    ret = uid;
-+
-+exit:
-+    if (err_msg) {
-+        if (dbus_error_is_set(&error)) {
-+            syslog(LOG_ERR, "%s: %s", err_msg, error.message);
-+            dbus_error_free(&error);
-+        } else {
-+            syslog(LOG_ERR, "%s", err_msg);
-+        }
-+    }
-+    if (reply != NULL) {
-+        dbus_message_unref(reply);
-+    }
-+    if (message != NULL) {
-+        dbus_message_unref(message);
-+    }
-+    return ret;
-+}
-diff --git a/src/vdagentd/dummy-session-info.c b/src/vdagentd/dummy-session-info.c
-index 7fd1eea..137c01a 100644
---- a/src/vdagentd/dummy-session-info.c
-+++ b/src/vdagentd/dummy-session-info.c
-@@ -55,3 +55,8 @@ gboolean session_info_session_is_locked(G_GNUC_UNUSED struct session_info *si)
- {
-     return FALSE;
- }
-+
-+uid_t session_info_uid_for_session(struct session_info *si, const char *session)
-+{
-+    return -1;
-+}
-diff --git a/src/vdagentd/session-info.h b/src/vdagentd/session-info.h
-index c8edb86..96aa8d3 100644
---- a/src/vdagentd/session-info.h
-+++ b/src/vdagentd/session-info.h
-@@ -40,4 +40,7 @@ char *session_info_session_for_pid(struct session_info *ck, uint32_t pid);
- gboolean session_info_session_is_locked(struct session_info *si);
- gboolean session_info_is_user(struct session_info *si);
- 
-+/* get owner of a given session */
-+uid_t session_info_uid_for_session(struct session_info *si, const char *session);
-+
- #endif
-diff --git a/src/vdagentd/systemd-login.c b/src/vdagentd/systemd-login.c
-index 2d2311c..42ccc5f 100644
---- a/src/vdagentd/systemd-login.c
-+++ b/src/vdagentd/systemd-login.c
-@@ -394,3 +394,12 @@ gboolean session_info_is_user(struct session_info *si)
- 
-     return ret;
- }
-+
-+uid_t session_info_uid_for_session(struct session_info *si, const char *session)
-+{
-+    uid_t ret = -1;
-+    if (sd_session_get_uid(session, &ret) < 0) {
-+        return -1;
-+    }
-+    return ret;
-+}
 diff --git a/src/vdagentd/vdagentd.c b/src/vdagentd/vdagentd.c
-index fc22338..59aa523 100644
+index 59aa523..92885b5 100644
 --- a/src/vdagentd/vdagentd.c
 +++ b/src/vdagentd/vdagentd.c
-@@ -988,12 +988,20 @@ static void agent_connect(UdscsConnection *conn)
+@@ -952,6 +952,20 @@ static gboolean remove_active_xfers(gpointer key, gpointer value, gpointer conn)
+         return 0;
+ }
  
-         agent_data->session = session_info_session_for_pid(session_info, pid_uid.pid);
- 
-+        uid_t session_uid = session_info_uid_for_session(session_info, agent_data->session);
++/* Check if this connection matches the passed session */
++static int connection_matches_session(UdscsConnection *conn, void *priv)
++{
++    const char *session = priv;
++    const struct agent_data *agent_data = g_object_get_data(G_OBJECT(conn), "agent_data");
 +
-         /* Check that the UID of the PID did not change, this should be done after
-          * computing the session to avoid race conditions.
-          * This can happen as vdagent_connection_get_peer_pid_uid get information
-          * from the time of creating the socket, but the process in the meantime
-          * have been replaced */
--        if (!check_uid_of_pid(pid_uid.pid, pid_uid.uid)) {
-+        if (!check_uid_of_pid(pid_uid.pid, pid_uid.uid) ||
-+            /* Check that the user launching the Agent is the same as session one
-+             * or root user.
-+             * This prevents session hijacks from other users. */
-+            (pid_uid.uid != 0 && pid_uid.uid != session_uid)) {
-+            syslog(LOG_ERR, "UID mismatch: UID=%u PID=%u suid=%u", pid_uid.uid,
-+                   pid_uid.pid, session_uid);
-             agent_data_destroy(agent_data);
++    if (!agent_data || !agent_data->session ||
++        strcmp(agent_data->session, session) != 0) {
++        return 0;
++    }
++
++    return 1;
++}
++
+ /* Check a given process has a given UID */
+ static bool check_uid_of_pid(pid_t pid, uid_t uid)
+ {
+@@ -1006,6 +1020,16 @@ static void agent_connect(UdscsConnection *conn)
              udscs_server_destroy_connection(server, conn);
              return;
+         }
++
++        // Check there are no other connection for this session
++        // Note that "conn" is not counted as "agent_data" is still not attached to it
++        if (udscs_server_for_all_clients(server, connection_matches_session,
++                                         agent_data->session) > 0) {
++            syslog(LOG_ERR, "An agent is already connected for this session");
++            agent_data_destroy(agent_data);
++            udscs_server_destroy_connection(server, conn);
++            return;
++        }
+     }
+ 
+     g_object_set_data_full(G_OBJECT(conn), "agent_data", agent_data,
 -- 
 2.26.2
 
