@@ -1,61 +1,62 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74E792A5EE4
-	for <lists+spice-devel@lfdr.de>; Wed,  4 Nov 2020 08:45:30 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B92982A6690
+	for <lists+spice-devel@lfdr.de>; Wed,  4 Nov 2020 15:41:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6ABE96E956;
-	Wed,  4 Nov 2020 07:45:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D835B6E02E;
+	Wed,  4 Nov 2020 14:41:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BD6476E956
- for <spice-devel@lists.freedesktop.org>; Wed,  4 Nov 2020 07:45:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1604475926;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gMHBEBfWminhbV2rdwxPH2HyLAMTZ2K2zM8Tyznk5eI=;
- b=Aydy0ECsTNBPmQg8S95VBUwQPkeBGkffgT0qJv4Q19imyGU2erCHbPejM8W4ixJ5vPSmlS
- l0LD6hHBU364letQLV5cGIK9xGrESRc6DVEmd9MPS/PcwOSfm+BXa8GNn29LyjQK9qif4Z
- 61DWw/U33lmfi2wW5gzYs9sLgNxAleo=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-425-bcj5nZzQOBCJRe2QAeORTA-1; Wed, 04 Nov 2020 02:45:21 -0500
-X-MC-Unique: bcj5nZzQOBCJRe2QAeORTA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 17A9C80365E;
- Wed,  4 Nov 2020 07:45:20 +0000 (UTC)
-Received: from colo-mx.corp.redhat.com
- (colo-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 0F5246EF55;
- Wed,  4 Nov 2020 07:45:20 +0000 (UTC)
-Received: from zmail25.collab.prod.int.phx2.redhat.com
- (zmail25.collab.prod.int.phx2.redhat.com [10.5.83.31])
- by colo-mx.corp.redhat.com (Postfix) with ESMTP id 07BDD85CD;
- Wed,  4 Nov 2020 07:45:20 +0000 (UTC)
-Date: Wed, 4 Nov 2020 02:45:19 -0500 (EST)
-From: Frediano Ziglio <fziglio@redhat.com>
-To: Ian Pilcher <arequipeno@gmail.com>
-Message-ID: <1537970932.464609.1604475919652.JavaMail.zimbra@redhat.com>
-In-Reply-To: <rnse6m$11ke$1@ciao.gmane.io>
+Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
+ [IPv6:2607:f8b0:4864:20::343])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9786C6E02E
+ for <spice-devel@lists.freedesktop.org>; Wed,  4 Nov 2020 14:41:38 +0000 (UTC)
+Received: by mail-ot1-x343.google.com with SMTP id z16so14318942otq.6
+ for <spice-devel@lists.freedesktop.org>; Wed, 04 Nov 2020 06:41:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=cw2A/AN/qjr1ojck/jXbcBYVuDKYreoRTI4otsEBaDA=;
+ b=l76NbMBpEDzqZgPtHkW1VyNZL21IM84aMmEZPbKoGUrDn8s2sKpFdjvjIhmxZAzZiC
+ d20ldf8keiHicDCNU7coStuyix718zgdob0A1NX2Wh19VolqG7x/Ba95C/NBIHFBUEle
+ EH7WFOaCijEoQP2B1IDxZci0QwU34Wyohbn7w6Gll7xciOaI2JJ2uOmmO9jvtJO1N8aI
+ S1BBy7+ioFM0P8CxywknKYI3LIPdB9cyI2LdTCBxl3Eg0lcwGnG4M5Lha961SyxUuX3/
+ 4xTWo2dVcZwRGhssQHiP8J15lxguz3idDHBwbescjeChcKem1MrXqGvp4wTDK1w1j/K5
+ c4gA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=cw2A/AN/qjr1ojck/jXbcBYVuDKYreoRTI4otsEBaDA=;
+ b=BMSR0dyeCireIdoW9UR/5DVTSNYk05goZHUCfYziPWp8mmVK/LydbwJ/XledVPJdIq
+ vrMF0J/kQXCHDDXFoS9Zl5L2mSRleMcyHIX0NBS+yQA0aKDjIhRqfVPVLim4hprmdk3M
+ ZnSETKcLZ1Et7r4gQyDffN0LSWGVG/p/Ax/7Vdk1xPIcWaVmkrgk93fQ6MYinhtdjU5G
+ 6Tdo3ntm8EMAgx5NJIdR48pARqLnA1vSoPnwGHUUngeCYtzo60QlFwHqvqCDqPF9K6/U
+ ZNmmU00JDYKI9/Ix9jCpm9xaFKXNtjFqcOSPiGq7chiH94eYZ+lM5x5oxP6eAFhR0VAg
+ OUsQ==
+X-Gm-Message-State: AOAM533paJ/a7R79xMZdy2qax20Dat2oIRJ82IWlw+zIokQaIs4+s23V
+ tkIoYdabC7/F1tBU1Id2o/IYaIIQy/5BnQ==
+X-Google-Smtp-Source: ABdhPJzE52oL9r5w7ydVyvMib/gClPWz+OQIUOYLgADAucM4qA/ca9SoIlpwkQUU85Or0vBs/hiTew==
+X-Received: by 2002:a9d:7a8b:: with SMTP id l11mr18074125otn.272.1604500897496; 
+ Wed, 04 Nov 2020 06:41:37 -0800 (PST)
+Received: from ian.penurio.us ([47.184.24.231])
+ by smtp.gmail.com with ESMTPSA id r4sm141203otd.66.2020.11.04.06.41.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Nov 2020 06:41:36 -0800 (PST)
+To: Frediano Ziglio <fziglio@redhat.com>
 References: <rnse6m$11ke$1@ciao.gmane.io>
+ <1537970932.464609.1604475919652.JavaMail.zimbra@redhat.com>
+From: Ian Pilcher <arequipeno@gmail.com>
+Message-ID: <3e079fff-404a-85d1-7452-69e7cd3c7fac@gmail.com>
+Date: Wed, 4 Nov 2020 08:41:35 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.33.32.5, 10.4.195.6]
-Thread-Topic: desktop_layout: ignore unconnected video devices
-Thread-Index: p2qLg6taMmo88uswSZeRvSCftUVIaQ==
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=fziglio@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+In-Reply-To: <1537970932.464609.1604475919652.JavaMail.zimbra@redhat.com>
+Content-Language: en-US
 Subject: Re: [Spice-devel] [PATCH] desktop_layout: ignore unconnected video
  devices
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -70,71 +71,28 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> 
-> Currently, the Windows agent does not function properly if it detects a
-> non-QXL video adapter connected to the guest.  See:
-> 
->    https://gitlab.freedesktop.org/spice/win32/vd_agent/-/issues/15
->    https://gitlab.freedesktop.org/spice/win32/vd_agent/-/issues/13
-> 
-> This is true even when the non-QXL adapter does not have any displays
-> attached, such as when a physical GPU is passed through to the guest for
-> AI/ML workloads.
-> 
-> With this patch, the agent ignores the presence of unconnected video
-> outputs and the mouse works as expected.  If a display is connected to
-> a non-QXL adapter, the behavior is unchanged.  (Tested on Windows 10 Pro
-> x64.)
-> 
+On 11/4/20 1:45 AM, Frediano Ziglio wrote:
+> Did you test with multiple monitors, specially with the first(s) QXL disabled?
 
-Did you test with multiple monitors, specially with the first(s) QXL disabled?
+I've tested with multiple QXL displays, which appears to work just fine,
+including when I disable the first QXL display with the display
+settings.  (Disabling the actual QXL device in Device Manager messes us
+the agent, because it causes a non-QXL "Microsoft Basic Display Driver"
+adapter to appear.)
 
-> ---
->   vdagent/desktop_layout.cpp | 13 +++++++++++++
->   1 file changed, 13 insertions(+)
-> 
-> diff --git a/vdagent/desktop_layout.cpp b/vdagent/desktop_layout.cpp
-> index 07074da..8b538a1 100644
-> --- a/vdagent/desktop_layout.cpp
-> +++ b/vdagent/desktop_layout.cpp
-> @@ -48,6 +48,16 @@ DesktopLayout::~DesktopLayout()
->       delete _display_config;
->   }
-> 
-> +static BOOL
-> +dev_has_monitor(DISPLAY_DEVICE &dev_info)
-> +{
-> +    DISPLAY_DEVICE mon_info;
-> +
-> +    ZeroMemory(&mon_info, sizeof(mon_info));
-> +    mon_info.cb = sizeof(mon_info);
-> +    return EnumDisplayDevices(dev_info.DeviceName, 0, &mon_info, 0);
-> +}
-> +
->   static bool
->   get_next_display(DWORD &dev_id, DISPLAY_DEVICE &dev_info)
->   {
-> @@ -64,6 +74,9 @@ get_next_display(DWORD &dev_id, DISPLAY_DEVICE &dev_info)
->           if (wcsstr(dev_info.DeviceString, L"Citrix Indirect Display")) {
->               continue;
->           }
-> +        if (!dev_has_monitor(dev_info)) {
-> +            continue;
-> +        }
->           return true;
->       }
->       return false;
-> --
-> 2.26.2
-> 
+This patch doesn't change the behavior of the agent when a non-QXL
+adapter has a monitor attached.  It's exactly as functional (or not) as
+it is without the patch.
 
-Frediano
-
+-- 
+========================================================================
+                  In Soviet Russia, Google searches you!
+========================================================================
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
