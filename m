@@ -2,61 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DA812A7F9B
-	for <lists+spice-devel@lfdr.de>; Thu,  5 Nov 2020 14:23:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41BB02A881D
+	for <lists+spice-devel@lfdr.de>; Thu,  5 Nov 2020 21:30:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A31286ED20;
-	Thu,  5 Nov 2020 13:23:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C336D6E28B;
+	Thu,  5 Nov 2020 20:30:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [IPv6:2a00:1450:4864:20::342])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE2006EA51
- for <spice-devel@lists.freedesktop.org>; Thu,  5 Nov 2020 12:54:36 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id c16so1512140wmd.2
- for <spice-devel@lists.freedesktop.org>; Thu, 05 Nov 2020 04:54:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=iR+CVMR9Igk+i7q6zQ360QpQoQUWwq9hKMxFO8Y7cGA=;
- b=bPPrnh4BjIGHxssI9in0eI8avIf6lVSA1Fd+jmaHNuJRYj4GLesWwatvAf+cWdJ1Gn
- +T1a9zT5WiAc7uq+YkZ1UAi9uQqINJcLFkN5pbawGR6HDSkkCEunVz0GKT5BPbCo522L
- G94YF8sd+EF3xMH5d9NYF5qFQjmBr4VXc5pXs=
+Received: from mail-pj1-x1043.google.com (mail-pj1-x1043.google.com
+ [IPv6:2607:f8b0:4864:20::1043])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8204F6EDB9;
+ Thu,  5 Nov 2020 18:50:22 +0000 (UTC)
+Received: by mail-pj1-x1043.google.com with SMTP id w20so532155pjh.1;
+ Thu, 05 Nov 2020 10:50:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:mime-version:content-disposition;
+ bh=3EzvkzpYwrLmNMPvXPc/QI49X9jTb6rRy2470fIh6L0=;
+ b=px4MXYdb+PxYPOu6R6lJ55qGhTb3W2vrn4OX0bC8UaPmEk2m0swVzbEI92X33uCDs3
+ ikSsVUu2WHexB7FLTekQEtRSHEsGAW8gPpc0aCEftKCFzY3Pjzm6kSvssYzbZHt6UBEr
+ 2dPRehIpM0hFZNkSeixXIPNKoeIlSoEzWYINzCtBpyXD9VO1vPKN2oQWjDT659Zd+4g6
+ 614LGEka6FIfuFTScqA3rdzoqEPgR7xP5KOakZ7XcFMFD9wjImsMeeaZLlIWv9vhpyNP
+ o2Bnp7BkX0G9T5XQ2ogM/FosRww15fPHSz5+261LaAxEt1M+tLBDxDqXGc39f896t3UB
+ ukRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=iR+CVMR9Igk+i7q6zQ360QpQoQUWwq9hKMxFO8Y7cGA=;
- b=jtLb5o4qHV9gTUnKGu9cf9xbp5L2DBruVK/e5EEB3rDPc0rxmxFiiub1Y4r7gJblbD
- eiop7v3W85TAq6hEHlD/3lQJMABGbZtS0hxClcnyn8UPN7Exlc3ilrx5a1ksnvXSezXz
- 3TFCcWRWowCYnYvw1Wp+jx1uRwogKb4Ah9kGO36Jm1IZqa91i28udL27YHQb+rE8/6F3
- 3skKKnkAygOQZz9XvlYtp/MYS9WHlHXtEwr3bsuKeLZgu5e9FJ4UDUMsGJhMJeHDf8fN
- vzEtnVfiwdn4h/WzfzqSXaCw5kcrPtPbeLoNH7weS919jxizeOVgKTdPBRpaun6qoNG2
- 7gvw==
-X-Gm-Message-State: AOAM5312zzeiuD6BUI8EZf/DIbWb89H9oBL9fzuv7ky/DDZHN9LP/yYY
- FlW0CpHRJ0Y1+yODMzV8aaE6kA==
-X-Google-Smtp-Source: ABdhPJwrW3OjL7kR/bAr74WjxI8azvpsj46DeaIlccjHcQq2wan765xbIbWOOKK6+3jptMrcJuyztQ==
-X-Received: by 2002:a1c:6843:: with SMTP id d64mr2670603wmc.131.1604580875284; 
- Thu, 05 Nov 2020 04:54:35 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id m12sm2468188wrs.92.2020.11.05.04.54.32
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition;
+ bh=3EzvkzpYwrLmNMPvXPc/QI49X9jTb6rRy2470fIh6L0=;
+ b=OnyU2+zD2YsfPhL/kmLhCvsI8DlNXtmK2x3TQYJ6trdiAoUPIhsrZqZkw0X8HOgMyw
+ BmhiOsqT5Lb1gea9KxG48WIM5xdV3+bhePaGR7oAV2rSTWXk+x9ED90TSdgi2PVCZDYp
+ A81/h8qJzL7NbAJPUrEucAjsU/r9g0WYCz3A8mrDdd6CYA9Tz9nIw1LTzPeyNA88YGG3
+ wHNBq7NSRrd2pzFw1Dwf8QHzmEL3aE04oBri/ETtf+lxLnIdtEJa+AFLuPbRWDfXTzUi
+ PMD01h+q3ADiDX6LrQvk2DgOtrRPlJd82cXtmfEiDL7sMLjET/bUg59vvLzWVwDh4ddD
+ L1ew==
+X-Gm-Message-State: AOAM531CjlTlD60orEPisdSJznvjcOf55sD3uoszdNGGvs6itnYgqLNo
+ J5JLb2vZUBxGvGBDNj1xss4=
+X-Google-Smtp-Source: ABdhPJwwvyRuSz/E7DAjDgbpBdsUcgYjDXTOIfRrRB8ZJ6lAWfdKVRsyPz4fAUeDGF1TPKzwfMIuJQ==
+X-Received: by 2002:a17:90a:d584:: with SMTP id
+ v4mr3909143pju.194.1604602222134; 
+ Thu, 05 Nov 2020 10:50:22 -0800 (PST)
+Received: from localhost ([160.202.157.3])
+ by smtp.gmail.com with ESMTPSA id e24sm1862787pfl.149.2020.11.05.10.50.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2020 04:54:34 -0800 (PST)
-Date: Thu, 5 Nov 2020 13:54:31 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20201105125431.GW401619@phenom.ffwll.local>
-References: <20201020122046.31167-1-tzimmermann@suse.de>
- <20201020122046.31167-10-tzimmermann@suse.de>
- <CACRpkdbvGWKo8y323actUJn9xXmxpgDw1EKLiPH4RqB_kFx=XQ@mail.gmail.com>
- <27acbd7e-d72e-4e05-c147-b50f56e21589@suse.de>
+ Thu, 05 Nov 2020 10:50:21 -0800 (PST)
+Date: Fri, 6 Nov 2020 00:20:16 +0530
+From: Deepak R Varma <mh12gx2825@gmail.com>
+To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ virtualization@lists.linux-foundation.org,
+ spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Message-ID: <20201105185016.GA71797@localhost>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <27acbd7e-d72e-4e05-c147-b50f56e21589@suse.de>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-X-Mailman-Approved-At: Thu, 05 Nov 2020 13:23:37 +0000
-Subject: Re: [Spice-devel] [PATCH v5 09/10] dma-buf-map: Add memcpy and
- pointer-increment interfaces
+X-Mailman-Approved-At: Thu, 05 Nov 2020 20:30:02 +0000
+Subject: [Spice-devel] [PATCH] drm/qxl: replace idr_init() by idr_init_base()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,134 +68,46 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: luben.tuikov@amd.com, Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
- Dave Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Linus Walleij <linus.walleij@linaro.org>,
- "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
- Chris Wilson <chris@chris-wilson.co.uk>, melissa.srw@gmail.com,
- Eric Anholt <eric@anholt.net>, ray.huang@amd.com,
- Gerd Hoffmann <kraxel@redhat.com>, Sam Ravnborg <sam@ravnborg.org>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Emil Velikov <emil.velikov@collabora.com>, Rob Herring <robh@kernel.org>,
- linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
- Joonyoung Shim <jy0922.shim@samsung.com>, lima@lists.freedesktop.org,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, steven.price@arm.com,
- "open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>,
- Kukjin Kim <kgene@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- linux+etnaviv@armlinux.org.uk, spice-devel@lists.freedesktop.org,
- alyssa.rosenzweig@collabora.com,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- etnaviv@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>,
- Inki Dae <inki.dae@samsung.com>, Hans de Goede <hdegoede@redhat.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- xen-devel@lists.xenproject.org, virtualization@lists.linux-foundation.org,
- Sean Paul <sean@poorly.run>, apaneers@amd.com,
- Linux ARM <linux-arm-kernel@lists.infradead.org>,
- linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>, Sandy Huang <hjc@rock-chips.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Qinglang Miao <miaoqinglang@huawei.com>, yuq825@gmail.com,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Lucas Stach <l.stach@pengutronix.de>
+Cc: mh12gx2825@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Thu, Nov 05, 2020 at 11:37:08AM +0100, Thomas Zimmermann wrote:
-> Hi
-> 
-> Am 05.11.20 um 11:07 schrieb Linus Walleij:
-> > Overall I like this, just an inline question:
-> > 
-> > On Tue, Oct 20, 2020 at 2:20 PM Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> > 
-> >> To do framebuffer updates, one needs memcpy from system memory and a
-> >> pointer-increment function. Add both interfaces with documentation.
-> > 
-> > (...)
-> >> +/**
-> >> + * dma_buf_map_memcpy_to - Memcpy into dma-buf mapping
-> >> + * @dst:       The dma-buf mapping structure
-> >> + * @src:       The source buffer
-> >> + * @len:       The number of byte in src
-> >> + *
-> >> + * Copies data into a dma-buf mapping. The source buffer is in system
-> >> + * memory. Depending on the buffer's location, the helper picks the correct
-> >> + * method of accessing the memory.
-> >> + */
-> >> +static inline void dma_buf_map_memcpy_to(struct dma_buf_map *dst, const void *src, size_t len)
-> >> +{
-> >> +       if (dst->is_iomem)
-> >> +               memcpy_toio(dst->vaddr_iomem, src, len);
-> >> +       else
-> >> +               memcpy(dst->vaddr, src, len);
-> >> +}
-> > 
-> > Are these going to be really big memcpy() operations?
-> 
-> Individually, each could be a scanline, so a few KiB. (4 bytes *
-> horizontal resolution). Updating a full framebuffer can sum up to
-> several MiB.
-> 
-> > 
-> > Some platforms have DMA offload engines that can perform memcpy(),They could be
-> > drivers/dma, include/linux/dmaengine.h
-> > especially if the CPU doesn't really need to touch the contents
-> > and flush caches etc.
-> > An example exist in some MTD drivers that move large quantities of
-> > data off flash memory like this:
-> > drivers/mtd/nand/raw/cadence-nand-controller.c
-> > 
-> > Notice that DMAengine and DMAbuf does not have much in common,
-> > the names can be deceiving.
-> > 
-> > The value of this varies with the system architecture. It is not just
-> > a question about performance but also about power and the CPU
-> > being able to do other stuff in parallel for large transfers. So *when*
-> > to use this facility to accelerate memcpy() is a delicate question.
-> > 
-> > What I'm after here is if these can be really big, do we want
-> > (in the long run, not now) open up to the idea to slot in
-> > hardware-accelerated memcpy() here?
-> 
-> We currently use this functionality for the graphical framebuffer
-> console that most DRM drivers provide. It's non-accelerated and slow,
-> but this has not been much of a problem so far.
-> 
-> Within DRM, we're more interested in removing console code from drivers
-> and going for the generic implementation.
-> 
-> Most of the graphics HW allocates framebuffers from video RAM, system
-> memory or CMA pools and does not really need these memcpys. Only a few
-> systems with small video RAM require a shadow buffer, which we flush
-> into VRAM as needed. Those might benefit.
-> 
-> OTOH, off-loading memcpys to hardware sounds reasonable if we can hide
-> it from the DRM code. I think it all depends on how invasive that change
-> would be.
+idr_init() uses base 0 which is an invalid identifier for this driver.
+The idr_alloc for this driver uses 1 as start value for ID range. The
+new function idr_init_base allows IDR to set the ID lookup from base 1.
+This avoids all lookups that otherwise starts from 0 since 0 is always
+unused / available.
 
-I wouldn't, all the additional locks this would pull in sound like
-nightmare. And when an oops happens, this might be the only thing that
-manages to get the oops to the user.
+References: commit 6ce711f27500 ("idr: Make 1-based IDRs more efficient")
 
-Unless someone really starts caring about fbcon acceleration I really
-wouldn't bother. Ok maybe it also matters for fbdev, but the problem is
-that the page fault intercepting alone is already expensive, so the only
-real solution if you care about performance in that case is to use kms
-natively, and use a dirty rectangle flip (or the DIRTY syscall).
+Signed-off-by: Deepak R Varma <mh12gx2825@gmail.com>
+---
+ drivers/gpu/drm/qxl/qxl_kms.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-And in there drivers should (and do) use any dma engines they have to
-upload the frames already.
--Daniel
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index dc5b3850a4d4..228e2b9198f1 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -231,11 +231,11 @@ int qxl_device_init(struct qxl_device *qdev,
+ 		goto cursor_ring_free;
+ 	}
+ 
+-	idr_init(&qdev->release_idr);
++	idr_init_base(&qdev->release_idr, 1);
+ 	spin_lock_init(&qdev->release_idr_lock);
+ 	spin_lock_init(&qdev->release_lock);
+ 
+-	idr_init(&qdev->surf_id_idr);
++	idr_init_base(&qdev->surf_id_idr, 1);
+ 	spin_lock_init(&qdev->surf_id_idr_lock);
+ 
+ 	mutex_init(&qdev->async_io_mutex);
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.25.1
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
