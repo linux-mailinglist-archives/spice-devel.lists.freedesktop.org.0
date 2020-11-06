@@ -2,61 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41BB02A881D
-	for <lists+spice-devel@lfdr.de>; Thu,  5 Nov 2020 21:30:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F9562A9133
+	for <lists+spice-devel@lfdr.de>; Fri,  6 Nov 2020 09:24:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C336D6E28B;
-	Thu,  5 Nov 2020 20:30:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A3136E195;
+	Fri,  6 Nov 2020 08:24:52 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-x1043.google.com (mail-pj1-x1043.google.com
- [IPv6:2607:f8b0:4864:20::1043])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8204F6EDB9;
- Thu,  5 Nov 2020 18:50:22 +0000 (UTC)
-Received: by mail-pj1-x1043.google.com with SMTP id w20so532155pjh.1;
- Thu, 05 Nov 2020 10:50:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:mime-version:content-disposition;
- bh=3EzvkzpYwrLmNMPvXPc/QI49X9jTb6rRy2470fIh6L0=;
- b=px4MXYdb+PxYPOu6R6lJ55qGhTb3W2vrn4OX0bC8UaPmEk2m0swVzbEI92X33uCDs3
- ikSsVUu2WHexB7FLTekQEtRSHEsGAW8gPpc0aCEftKCFzY3Pjzm6kSvssYzbZHt6UBEr
- 2dPRehIpM0hFZNkSeixXIPNKoeIlSoEzWYINzCtBpyXD9VO1vPKN2oQWjDT659Zd+4g6
- 614LGEka6FIfuFTScqA3rdzoqEPgR7xP5KOakZ7XcFMFD9wjImsMeeaZLlIWv9vhpyNP
- o2Bnp7BkX0G9T5XQ2ogM/FosRww15fPHSz5+261LaAxEt1M+tLBDxDqXGc39f896t3UB
- ukRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=3EzvkzpYwrLmNMPvXPc/QI49X9jTb6rRy2470fIh6L0=;
- b=OnyU2+zD2YsfPhL/kmLhCvsI8DlNXtmK2x3TQYJ6trdiAoUPIhsrZqZkw0X8HOgMyw
- BmhiOsqT5Lb1gea9KxG48WIM5xdV3+bhePaGR7oAV2rSTWXk+x9ED90TSdgi2PVCZDYp
- A81/h8qJzL7NbAJPUrEucAjsU/r9g0WYCz3A8mrDdd6CYA9Tz9nIw1LTzPeyNA88YGG3
- wHNBq7NSRrd2pzFw1Dwf8QHzmEL3aE04oBri/ETtf+lxLnIdtEJa+AFLuPbRWDfXTzUi
- PMD01h+q3ADiDX6LrQvk2DgOtrRPlJd82cXtmfEiDL7sMLjET/bUg59vvLzWVwDh4ddD
- L1ew==
-X-Gm-Message-State: AOAM531CjlTlD60orEPisdSJznvjcOf55sD3uoszdNGGvs6itnYgqLNo
- J5JLb2vZUBxGvGBDNj1xss4=
-X-Google-Smtp-Source: ABdhPJwwvyRuSz/E7DAjDgbpBdsUcgYjDXTOIfRrRB8ZJ6lAWfdKVRsyPz4fAUeDGF1TPKzwfMIuJQ==
-X-Received: by 2002:a17:90a:d584:: with SMTP id
- v4mr3909143pju.194.1604602222134; 
- Thu, 05 Nov 2020 10:50:22 -0800 (PST)
-Received: from localhost ([160.202.157.3])
- by smtp.gmail.com with ESMTPSA id e24sm1862787pfl.149.2020.11.05.10.50.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2020 10:50:21 -0800 (PST)
-Date: Fri, 6 Nov 2020 00:20:16 +0530
-From: Deepak R Varma <mh12gx2825@gmail.com>
-To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
- virtualization@lists.linux-foundation.org,
- spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Message-ID: <20201105185016.GA71797@localhost>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7AE8B6E199
+ for <spice-devel@lists.freedesktop.org>; Fri,  6 Nov 2020 08:24:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1604651089;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=29qfegGrh7AruURuvpgC8HtdchFL+7zQsPXILi0X3v4=;
+ b=FCHUmHutk7tqqp2D4qbQCkgvjlf8s0aR9YLRGc74R7/Qb+SRZ9yd05bAlhpROlvxNmwykO
+ RRIlsjmMRGxBsk8UGjMvMHgi4oEd7+QJPIKYIUGlOpUF9fokfpTb2rxnvr2neHi1qIwlRk
+ fQ2BDgi2EeokT5iRQii4uEIpJHZ7H/s=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-155-ah-6QZFOO9-4DqOVgv1XMw-1; Fri, 06 Nov 2020 03:24:46 -0500
+X-MC-Unique: ah-6QZFOO9-4DqOVgv1XMw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A301B1009E39;
+ Fri,  6 Nov 2020 08:24:44 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-114-66.ams2.redhat.com
+ [10.36.114.66])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 055505578B;
+ Fri,  6 Nov 2020 08:24:42 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id D5F6A11AB5; Fri,  6 Nov 2020 09:24:41 +0100 (CET)
+Date: Fri, 6 Nov 2020 09:24:41 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Deepak R Varma <mh12gx2825@gmail.com>
+Message-ID: <20201106082441.x2e5mmycikwd22pj@sirius.home.kraxel.org>
+References: <20201105185016.GA71797@localhost>
 MIME-Version: 1.0
 Content-Disposition: inline
-X-Mailman-Approved-At: Thu, 05 Nov 2020 20:30:02 +0000
-Subject: [Spice-devel] [PATCH] drm/qxl: replace idr_init() by idr_init_base()
+In-Reply-To: <20201105185016.GA71797@localhost>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Subject: Re: [Spice-devel] [PATCH] drm/qxl: replace idr_init() by
+ idr_init_base()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,45 +60,30 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: mh12gx2825@gmail.com
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-idr_init() uses base 0 which is an invalid identifier for this driver.
-The idr_alloc for this driver uses 1 as start value for ID range. The
-new function idr_init_base allows IDR to set the ID lookup from base 1.
-This avoids all lookups that otherwise starts from 0 since 0 is always
-unused / available.
+On Fri, Nov 06, 2020 at 12:20:16AM +0530, Deepak R Varma wrote:
+> idr_init() uses base 0 which is an invalid identifier for this driver.
+> The idr_alloc for this driver uses 1 as start value for ID range. The
+> new function idr_init_base allows IDR to set the ID lookup from base 1.
+> This avoids all lookups that otherwise starts from 0 since 0 is always
+> unused / available.
+> 
+> References: commit 6ce711f27500 ("idr: Make 1-based IDRs more efficient")
+> 
+> Signed-off-by: Deepak R Varma <mh12gx2825@gmail.com>
 
-References: commit 6ce711f27500 ("idr: Make 1-based IDRs more efficient")
+Pushed to drm-misc-next.
 
-Signed-off-by: Deepak R Varma <mh12gx2825@gmail.com>
----
- drivers/gpu/drm/qxl/qxl_kms.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
-index dc5b3850a4d4..228e2b9198f1 100644
---- a/drivers/gpu/drm/qxl/qxl_kms.c
-+++ b/drivers/gpu/drm/qxl/qxl_kms.c
-@@ -231,11 +231,11 @@ int qxl_device_init(struct qxl_device *qdev,
- 		goto cursor_ring_free;
- 	}
- 
--	idr_init(&qdev->release_idr);
-+	idr_init_base(&qdev->release_idr, 1);
- 	spin_lock_init(&qdev->release_idr_lock);
- 	spin_lock_init(&qdev->release_lock);
- 
--	idr_init(&qdev->surf_id_idr);
-+	idr_init_base(&qdev->surf_id_idr, 1);
- 	spin_lock_init(&qdev->surf_id_idr_lock);
- 
- 	mutex_init(&qdev->async_io_mutex);
--- 
-2.25.1
+thanks,
+  Gerd
 
 _______________________________________________
 Spice-devel mailing list
