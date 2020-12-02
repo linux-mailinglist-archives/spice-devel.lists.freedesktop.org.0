@@ -1,33 +1,39 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2EDC2CA878
-	for <lists+spice-devel@lfdr.de>; Tue,  1 Dec 2020 17:44:29 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D5F32CB6FA
+	for <lists+spice-devel@lfdr.de>; Wed,  2 Dec 2020 09:23:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA50F6E85E;
-	Tue,  1 Dec 2020 16:44:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B62476EA4A;
+	Wed,  2 Dec 2020 08:23:33 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5620A6E832;
- Tue,  1 Dec 2020 10:36:05 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id EE17FACF4;
- Tue,  1 Dec 2020 10:36:03 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: airlied@linux.ie,
-	daniel@ffwll.ch
-Date: Tue,  1 Dec 2020 11:35:42 +0100
-Message-Id: <20201201103542.2182-21-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201201103542.2182-1-tzimmermann@suse.de>
+Received: from szxga05-in.huawei.com (szxga05-in.huawei.com [45.249.212.191])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D63E6E9A7;
+ Wed,  2 Dec 2020 00:42:39 +0000 (UTC)
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4Cm0Xr5Q2nzhl1X;
+ Wed,  2 Dec 2020 08:42:04 +0800 (CST)
+Received: from [127.0.0.1] (10.57.60.129) by DGGEMS411-HUB.china.huawei.com
+ (10.3.19.211) with Microsoft SMTP Server id 14.3.487.0; Wed, 2 Dec 2020
+ 08:42:22 +0800
+To: Thomas Zimmermann <tzimmermann@suse.de>, "airlied@linux.ie"
+ <airlied@linux.ie>, "daniel@ffwll.ch" <daniel@ffwll.ch>
 References: <20201201103542.2182-1-tzimmermann@suse.de>
+ <20201201103542.2182-9-tzimmermann@suse.de>
+From: "tiantao (H)" <tiantao6@huawei.com>
+Message-ID: <3f57e8d5-3a2a-f677-e3d6-997d5d9f8389@huawei.com>
+Date: Wed, 2 Dec 2020 08:42:21 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-X-Mailman-Approved-At: Tue, 01 Dec 2020 16:44:12 +0000
-Subject: [Spice-devel] [PATCH v2 20/20] drm: Upcast struct drm_device.dev to
- struct pci_device; replace pdev
+In-Reply-To: <20201201103542.2182-9-tzimmermann@suse.de>
+X-Originating-IP: [10.57.60.129]
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Wed, 02 Dec 2020 08:23:32 +0000
+Subject: Re: [Spice-devel] [PATCH v2 08/20] drm/hibmc: Remove references to
+ struct drm_device.pdev
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,307 +45,95 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sam Ravnborg <sam@ravnborg.org>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, amd-gfx@lists.freedesktop.org,
- Thomas Zimmermann <tzimmermann@suse.de>, spice-devel@lists.freedesktop.org,
- intel-gvt-dev@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Sam Ravnborg <sam@ravnborg.org>, Xinliang Liu <xinliang.liu@linaro.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "kongxinwei \(A\)" <kong.kongxinwei@hisilicon.com>,
+ John Stultz <john.stultz@linaro.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "tiantao \(H\)" <tiantao6@hisilicon.com>,
+ "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>,
+ "Chenfeng \(puck\)" <puck.chen@hisilicon.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="gbk"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-We have DRM drivers based on USB, SPI and platform devices. All of them
-are fine with storing their device reference in struct drm_device.dev.
-PCI devices should be no exception. Therefore struct drm_device.pdev is
-deprecated.
-
-Instead upcast from struct drm_device.dev with to_pci_dev(). PCI-specific
-code can use dev_is_pci() to test for a PCI device. This patch changes
-the DRM core code and documentation accordingly. Struct drm_device.pdev
-is being moved to legacy status.
-
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Acked-by: Sam Ravnborg <sam@ravnborg.org>
----
- drivers/gpu/drm/drm_agpsupport.c |  9 ++++++---
- drivers/gpu/drm/drm_bufs.c       |  4 ++--
- drivers/gpu/drm/drm_edid.c       |  7 ++++++-
- drivers/gpu/drm/drm_irq.c        | 12 +++++++-----
- drivers/gpu/drm/drm_pci.c        | 26 +++++++++++++++-----------
- drivers/gpu/drm/drm_vm.c         |  2 +-
- include/drm/drm_device.h         | 12 +++++++++---
- 7 files changed, 46 insertions(+), 26 deletions(-)
-
-diff --git a/drivers/gpu/drm/drm_agpsupport.c b/drivers/gpu/drm/drm_agpsupport.c
-index 4c7ad46fdd21..a4040fe4f4ba 100644
---- a/drivers/gpu/drm/drm_agpsupport.c
-+++ b/drivers/gpu/drm/drm_agpsupport.c
-@@ -103,11 +103,13 @@ int drm_agp_info_ioctl(struct drm_device *dev, void *data,
-  */
- int drm_agp_acquire(struct drm_device *dev)
- {
-+	struct pci_dev *pdev = to_pci_dev(dev->dev);
-+
- 	if (!dev->agp)
- 		return -ENODEV;
- 	if (dev->agp->acquired)
- 		return -EBUSY;
--	dev->agp->bridge = agp_backend_acquire(dev->pdev);
-+	dev->agp->bridge = agp_backend_acquire(pdev);
- 	if (!dev->agp->bridge)
- 		return -ENODEV;
- 	dev->agp->acquired = 1;
-@@ -402,14 +404,15 @@ int drm_agp_free_ioctl(struct drm_device *dev, void *data,
-  */
- struct drm_agp_head *drm_agp_init(struct drm_device *dev)
- {
-+	struct pci_dev *pdev = to_pci_dev(dev->dev);
- 	struct drm_agp_head *head = NULL;
- 
- 	head = kzalloc(sizeof(*head), GFP_KERNEL);
- 	if (!head)
- 		return NULL;
--	head->bridge = agp_find_bridge(dev->pdev);
-+	head->bridge = agp_find_bridge(pdev);
- 	if (!head->bridge) {
--		head->bridge = agp_backend_acquire(dev->pdev);
-+		head->bridge = agp_backend_acquire(pdev);
- 		if (!head->bridge) {
- 			kfree(head);
- 			return NULL;
-diff --git a/drivers/gpu/drm/drm_bufs.c b/drivers/gpu/drm/drm_bufs.c
-index aeb1327e3077..e3d77dfefb0a 100644
---- a/drivers/gpu/drm/drm_bufs.c
-+++ b/drivers/gpu/drm/drm_bufs.c
-@@ -326,7 +326,7 @@ static int drm_addmap_core(struct drm_device *dev, resource_size_t offset,
- 		 * As we're limiting the address to 2^32-1 (or less),
- 		 * casting it down to 32 bits is no problem, but we
- 		 * need to point to a 64bit variable first. */
--		map->handle = dma_alloc_coherent(&dev->pdev->dev,
-+		map->handle = dma_alloc_coherent(dev->dev,
- 						 map->size,
- 						 &map->offset,
- 						 GFP_KERNEL);
-@@ -556,7 +556,7 @@ int drm_legacy_rmmap_locked(struct drm_device *dev, struct drm_local_map *map)
- 	case _DRM_SCATTER_GATHER:
- 		break;
- 	case _DRM_CONSISTENT:
--		dma_free_coherent(&dev->pdev->dev,
-+		dma_free_coherent(dev->dev,
- 				  map->size,
- 				  map->handle,
- 				  map->offset);
-diff --git a/drivers/gpu/drm/drm_edid.c b/drivers/gpu/drm/drm_edid.c
-index 74f5a3197214..555a04ce2179 100644
---- a/drivers/gpu/drm/drm_edid.c
-+++ b/drivers/gpu/drm/drm_edid.c
-@@ -32,6 +32,7 @@
- #include <linux/i2c.h>
- #include <linux/kernel.h>
- #include <linux/module.h>
-+#include <linux/pci.h>
- #include <linux/slab.h>
- #include <linux/vga_switcheroo.h>
- 
-@@ -2075,9 +2076,13 @@ EXPORT_SYMBOL(drm_get_edid);
- struct edid *drm_get_edid_switcheroo(struct drm_connector *connector,
- 				     struct i2c_adapter *adapter)
- {
--	struct pci_dev *pdev = connector->dev->pdev;
-+	struct drm_device *dev = connector->dev;
-+	struct pci_dev *pdev = to_pci_dev(dev->dev);
- 	struct edid *edid;
- 
-+	if (drm_WARN_ON_ONCE(dev, !dev_is_pci(dev->dev)))
-+		return NULL;
-+
- 	vga_switcheroo_lock_ddc(pdev);
- 	edid = drm_get_edid(connector, adapter);
- 	vga_switcheroo_unlock_ddc(pdev);
-diff --git a/drivers/gpu/drm/drm_irq.c b/drivers/gpu/drm/drm_irq.c
-index 09d6e9e2e075..22986a9a593b 100644
---- a/drivers/gpu/drm/drm_irq.c
-+++ b/drivers/gpu/drm/drm_irq.c
-@@ -122,7 +122,7 @@ int drm_irq_install(struct drm_device *dev, int irq)
- 		dev->driver->irq_preinstall(dev);
- 
- 	/* PCI devices require shared interrupts. */
--	if (dev->pdev)
-+	if (dev_is_pci(dev->dev))
- 		sh_flags = IRQF_SHARED;
- 
- 	ret = request_irq(irq, dev->driver->irq_handler,
-@@ -140,7 +140,7 @@ int drm_irq_install(struct drm_device *dev, int irq)
- 	if (ret < 0) {
- 		dev->irq_enabled = false;
- 		if (drm_core_check_feature(dev, DRIVER_LEGACY))
--			vga_client_register(dev->pdev, NULL, NULL, NULL);
-+			vga_client_register(to_pci_dev(dev->dev), NULL, NULL, NULL);
- 		free_irq(irq, dev);
- 	} else {
- 		dev->irq = irq;
-@@ -203,7 +203,7 @@ int drm_irq_uninstall(struct drm_device *dev)
- 	DRM_DEBUG("irq=%d\n", dev->irq);
- 
- 	if (drm_core_check_feature(dev, DRIVER_LEGACY))
--		vga_client_register(dev->pdev, NULL, NULL, NULL);
-+		vga_client_register(to_pci_dev(dev->dev), NULL, NULL, NULL);
- 
- 	if (dev->driver->irq_uninstall)
- 		dev->driver->irq_uninstall(dev);
-@@ -220,6 +220,7 @@ int drm_legacy_irq_control(struct drm_device *dev, void *data,
- {
- 	struct drm_control *ctl = data;
- 	int ret = 0, irq;
-+	struct pci_dev *pdev;
- 
- 	/* if we haven't irq we fallback for compatibility reasons -
- 	 * this used to be a separate function in drm_dma.h
-@@ -230,12 +231,13 @@ int drm_legacy_irq_control(struct drm_device *dev, void *data,
- 	if (!drm_core_check_feature(dev, DRIVER_LEGACY))
- 		return 0;
- 	/* UMS was only ever supported on pci devices. */
--	if (WARN_ON(!dev->pdev))
-+	if (WARN_ON(!dev_is_pci(dev->dev)))
- 		return -EINVAL;
- 
- 	switch (ctl->func) {
- 	case DRM_INST_HANDLER:
--		irq = dev->pdev->irq;
-+		pdev = to_pci_dev(dev->dev);
-+		irq = pdev->irq;
- 
- 		if (dev->if_version < DRM_IF_VERSION(1, 2) &&
- 		    ctl->irq != irq)
-diff --git a/drivers/gpu/drm/drm_pci.c b/drivers/gpu/drm/drm_pci.c
-index 6dba4b8ce4fe..c7868418e36d 100644
---- a/drivers/gpu/drm/drm_pci.c
-+++ b/drivers/gpu/drm/drm_pci.c
-@@ -65,7 +65,7 @@ drm_dma_handle_t *drm_pci_alloc(struct drm_device * dev, size_t size, size_t ali
- 		return NULL;
- 
- 	dmah->size = size;
--	dmah->vaddr = dma_alloc_coherent(&dev->pdev->dev, size,
-+	dmah->vaddr = dma_alloc_coherent(dev->dev, size,
- 					 &dmah->busaddr,
- 					 GFP_KERNEL);
- 
-@@ -88,7 +88,7 @@ EXPORT_SYMBOL(drm_pci_alloc);
-  */
- void drm_pci_free(struct drm_device * dev, drm_dma_handle_t * dmah)
- {
--	dma_free_coherent(&dev->pdev->dev, dmah->size, dmah->vaddr,
-+	dma_free_coherent(dev->dev, dmah->size, dmah->vaddr,
- 			  dmah->busaddr);
- 	kfree(dmah);
- }
-@@ -107,16 +107,18 @@ static int drm_get_pci_domain(struct drm_device *dev)
- 		return 0;
- #endif /* __alpha__ */
- 
--	return pci_domain_nr(dev->pdev->bus);
-+	return pci_domain_nr(to_pci_dev(dev->dev)->bus);
- }
- 
- int drm_pci_set_busid(struct drm_device *dev, struct drm_master *master)
- {
-+	struct pci_dev *pdev = to_pci_dev(dev->dev);
-+
- 	master->unique = kasprintf(GFP_KERNEL, "pci:%04x:%02x:%02x.%d",
- 					drm_get_pci_domain(dev),
--					dev->pdev->bus->number,
--					PCI_SLOT(dev->pdev->devfn),
--					PCI_FUNC(dev->pdev->devfn));
-+					pdev->bus->number,
-+					PCI_SLOT(pdev->devfn),
-+					PCI_FUNC(pdev->devfn));
- 	if (!master->unique)
- 		return -ENOMEM;
- 
-@@ -126,12 +128,14 @@ int drm_pci_set_busid(struct drm_device *dev, struct drm_master *master)
- 
- static int drm_pci_irq_by_busid(struct drm_device *dev, struct drm_irq_busid *p)
- {
-+	struct pci_dev *pdev = to_pci_dev(dev->dev);
-+
- 	if ((p->busnum >> 8) != drm_get_pci_domain(dev) ||
--	    (p->busnum & 0xff) != dev->pdev->bus->number ||
--	    p->devnum != PCI_SLOT(dev->pdev->devfn) || p->funcnum != PCI_FUNC(dev->pdev->devfn))
-+	    (p->busnum & 0xff) != pdev->bus->number ||
-+	    p->devnum != PCI_SLOT(pdev->devfn) || p->funcnum != PCI_FUNC(pdev->devfn))
- 		return -EINVAL;
- 
--	p->irq = dev->pdev->irq;
-+	p->irq = pdev->irq;
- 
- 	DRM_DEBUG("%d:%d:%d => IRQ %d\n", p->busnum, p->devnum, p->funcnum,
- 		  p->irq);
-@@ -159,7 +163,7 @@ int drm_legacy_irq_by_busid(struct drm_device *dev, void *data,
- 		return -EOPNOTSUPP;
- 
- 	/* UMS was only ever support on PCI devices. */
--	if (WARN_ON(!dev->pdev))
-+	if (WARN_ON(!dev_is_pci(dev->dev)))
- 		return -EINVAL;
- 
- 	if (!drm_core_check_feature(dev, DRIVER_HAVE_IRQ))
-@@ -183,7 +187,7 @@ void drm_pci_agp_destroy(struct drm_device *dev)
- static void drm_pci_agp_init(struct drm_device *dev)
- {
- 	if (drm_core_check_feature(dev, DRIVER_USE_AGP)) {
--		if (pci_find_capability(dev->pdev, PCI_CAP_ID_AGP))
-+		if (pci_find_capability(to_pci_dev(dev->dev), PCI_CAP_ID_AGP))
- 			dev->agp = drm_agp_init(dev);
- 		if (dev->agp) {
- 			dev->agp->agp_mtrr = arch_phys_wc_add(
-diff --git a/drivers/gpu/drm/drm_vm.c b/drivers/gpu/drm/drm_vm.c
-index 6d5a03b32238..9b3b989d7cad 100644
---- a/drivers/gpu/drm/drm_vm.c
-+++ b/drivers/gpu/drm/drm_vm.c
-@@ -278,7 +278,7 @@ static void drm_vm_shm_close(struct vm_area_struct *vma)
- 			case _DRM_SCATTER_GATHER:
- 				break;
- 			case _DRM_CONSISTENT:
--				dma_free_coherent(&dev->pdev->dev,
-+				dma_free_coherent(dev->dev,
- 						  map->size,
- 						  map->handle,
- 						  map->offset);
-diff --git a/include/drm/drm_device.h b/include/drm/drm_device.h
-index 283a93ce4617..9d9db178119a 100644
---- a/include/drm/drm_device.h
-+++ b/include/drm/drm_device.h
-@@ -290,9 +290,6 @@ struct drm_device {
- 	/** @agp: AGP data */
- 	struct drm_agp_head *agp;
- 
--	/** @pdev: PCI device structure */
--	struct pci_dev *pdev;
--
- #ifdef __alpha__
- 	/** @hose: PCI hose, only used on ALPHA platforms. */
- 	struct pci_controller *hose;
-@@ -336,6 +333,15 @@ struct drm_device {
- 	/* Everything below here is for legacy driver, never use! */
- 	/* private: */
- #if IS_ENABLED(CONFIG_DRM_LEGACY)
-+	/**
-+	 * @pdev: PCI device structure
-+	 *
-+	 * This is deprecated. to get the PCI device, upcast from @dev
-+	 * with to_pci_dev(). To test if the hardware is a PCI device,
-+	 * use dev_is_pci() with @dev.
-+	 */
-+	struct pci_dev *pdev;
-+
- 	/* Context handle management - linked list of context handles */
- 	struct list_head ctxlist;
- 
--- 
-2.29.2
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+CgrU2iAyMDIwLzEyLzEgMTg6MzUsIFRob21hcyBaaW1tZXJtYW5uINC0tcA6Cj4gVXNpbmcgc3Ry
+dWN0IGRybV9kZXZpY2UucGRldiBpcyBkZXByZWNhdGVkLiBDb252ZXJ0IGhpYm1jIHRvIHN0cnVj
+dAo+IGRybV9kZXZpY2UuZGV2LiBObyBmdW5jdGlvbmFsIGNoYW5nZXMuCj4gCj4gU2lnbmVkLW9m
+Zi1ieTogVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+Cj4gQWNrZWQtYnk6
+IFNhbSBSYXZuYm9yZyA8c2FtQHJhdm5ib3JnLm9yZz4KPiBDYzogWGlubGlhbmcgTGl1IDx4aW5s
+aWFuZy5saXVAbGluYXJvLm9yZz4KPiBDYzogVGlhbiBUYW8gIDx0aWFudGFvNkBoaXNpbGljb24u
+Y29tPgo+IENjOiBKb2huIFN0dWx0eiA8am9obi5zdHVsdHpAbGluYXJvLm9yZz4KPiBDYzogWGlu
+d2VpIEtvbmcgPGtvbmcua29uZ3hpbndlaUBoaXNpbGljb24uY29tPgo+IENjOiBDaGVuIEZlbmcg
+PHB1Y2suY2hlbkBoaXNpbGljb24uY29tPgo+IC0tLQo+ICAgZHJpdmVycy9ncHUvZHJtL2hpc2ls
+aWNvbi9oaWJtYy9oaWJtY19kcm1fZHJ2LmMgfCAxMCArKysrKy0tLS0tCj4gICBkcml2ZXJzL2dw
+dS9kcm0vaGlzaWxpY29uL2hpYm1jL2hpYm1jX2RybV9pMmMuYyB8ICAyICstCj4gICBkcml2ZXJz
+L2dwdS9kcm0vaGlzaWxpY29uL2hpYm1jL2hpYm1jX3R0bS5jICAgICB8ICA0ICsrLS0KPiAgIDMg
+ZmlsZXMgY2hhbmdlZCwgOCBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYg
+LS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vaGlzaWxpY29uL2hpYm1jL2hpYm1jX2RybV9kcnYuYyBi
+L2RyaXZlcnMvZ3B1L2RybS9oaXNpbGljb24vaGlibWMvaGlibWNfZHJtX2Rydi5jCj4gaW5kZXgg
+ZDg0NTY1N2ZkOTljLi5hYzU4NjgzNDNkMGMgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJt
+L2hpc2lsaWNvbi9oaWJtYy9oaWJtY19kcm1fZHJ2LmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0v
+aGlzaWxpY29uL2hpYm1jL2hpYm1jX2RybV9kcnYuYwo+IEBAIC0yMDMsNyArMjAzLDcgQEAgc3Rh
+dGljIHZvaWQgaGlibWNfaHdfY29uZmlnKHN0cnVjdCBoaWJtY19kcm1fcHJpdmF0ZSAqcHJpdikK
+PiAgIHN0YXRpYyBpbnQgaGlibWNfaHdfbWFwKHN0cnVjdCBoaWJtY19kcm1fcHJpdmF0ZSAqcHJp
+dikKPiAgIHsKPiAgIAlzdHJ1Y3QgZHJtX2RldmljZSAqZGV2ID0gcHJpdi0+ZGV2Owo+IC0Jc3Ry
+dWN0IHBjaV9kZXYgKnBkZXYgPSBkZXYtPnBkZXY7Cj4gKwlzdHJ1Y3QgcGNpX2RldiAqcGRldiA9
+IHRvX3BjaV9kZXYoZGV2LT5kZXYpOwo+ICAgCXJlc291cmNlX3NpemVfdCBhZGRyLCBzaXplLCBp
+b2FkZHIsIGlvc2l6ZTsKPiAgIAo+ICAgCWlvYWRkciA9IHBjaV9yZXNvdXJjZV9zdGFydChwZGV2
+LCAxKTsKPiBAQCAtMjQ5LDcgKzI0OSw3IEBAIHN0YXRpYyBpbnQgaGlibWNfdW5sb2FkKHN0cnVj
+dCBkcm1fZGV2aWNlICpkZXYpCj4gICAJaWYgKGRldi0+aXJxX2VuYWJsZWQpCj4gICAJCWRybV9p
+cnFfdW5pbnN0YWxsKGRldik7Cj4gICAKPiAtCXBjaV9kaXNhYmxlX21zaShkZXYtPnBkZXYpOwo+
+ICsJcGNpX2Rpc2FibGVfbXNpKHRvX3BjaV9kZXYoZGV2LT5kZXYpKTsKPiAgIAloaWJtY19rbXNf
+ZmluaShwcml2KTsKPiAgIAloaWJtY19tbV9maW5pKHByaXYpOwo+ICAgCWRldi0+ZGV2X3ByaXZh
+dGUgPSBOVUxMOwo+IEBAIC0yNTgsNiArMjU4LDcgQEAgc3RhdGljIGludCBoaWJtY191bmxvYWQo
+c3RydWN0IGRybV9kZXZpY2UgKmRldikKPiAgIAo+ICAgc3RhdGljIGludCBoaWJtY19sb2FkKHN0
+cnVjdCBkcm1fZGV2aWNlICpkZXYpCj4gICB7Cj4gKwlzdHJ1Y3QgcGNpX2RldiAqcGRldiA9IHRv
+X3BjaV9kZXYoZGV2LT5kZXYpOwo+ICAgCXN0cnVjdCBoaWJtY19kcm1fcHJpdmF0ZSAqcHJpdjsK
+PiAgIAlpbnQgcmV0Owo+ICAgCj4gQEAgLTI4NywxMSArMjg4LDExIEBAIHN0YXRpYyBpbnQgaGli
+bWNfbG9hZChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2KQo+ICAgCQlnb3RvIGVycjsKPiAgIAl9Cj4g
+ICAKPiAtCXJldCA9IHBjaV9lbmFibGVfbXNpKGRldi0+cGRldik7Cj4gKwlyZXQgPSBwY2lfZW5h
+YmxlX21zaShwZGV2KTsKPiAgIAlpZiAocmV0KSB7Cj4gICAJCWRybV93YXJuKGRldiwgImVuYWJs
+aW5nIE1TSSBmYWlsZWQ6ICVkXG4iLCByZXQpOwo+ICAgCX0gZWxzZSB7Cj4gLQkJcmV0ID0gZHJt
+X2lycV9pbnN0YWxsKGRldiwgZGV2LT5wZGV2LT5pcnEpOwo+ICsJCXJldCA9IGRybV9pcnFfaW5z
+dGFsbChkZXYsIHBkZXYtPmlycSk7Cj4gICAJCWlmIChyZXQpCj4gICAJCQlkcm1fd2FybihkZXYs
+ICJpbnN0YWxsIGlycSBmYWlsZWQ6ICVkXG4iLCByZXQpOwo+ICAgCX0KPiBAQCAtMzI0LDcgKzMy
+NSw2IEBAIHN0YXRpYyBpbnQgaGlibWNfcGNpX3Byb2JlKHN0cnVjdCBwY2lfZGV2ICpwZGV2LAo+
+ICAgCQlyZXR1cm4gUFRSX0VSUihkZXYpOwo+ICAgCX0KPiAgIAo+IC0JZGV2LT5wZGV2ID0gcGRl
+djsKPiAgIAlwY2lfc2V0X2RydmRhdGEocGRldiwgZGV2KTsKPiAgIAo+ICAgCXJldCA9IHBjaV9l
+bmFibGVfZGV2aWNlKHBkZXYpOwo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vaGlzaWxp
+Y29uL2hpYm1jL2hpYm1jX2RybV9pMmMuYyBiL2RyaXZlcnMvZ3B1L2RybS9oaXNpbGljb24vaGli
+bWMvaGlibWNfZHJtX2kyYy5jCj4gaW5kZXggODZkNzEyMDkwZDg3Li40MTBiZDAxOWJiMzUgMTAw
+NjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2hpc2lsaWNvbi9oaWJtYy9oaWJtY19kcm1faTJj
+LmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vaGlzaWxpY29uL2hpYm1jL2hpYm1jX2RybV9pMmMu
+Ywo+IEBAIC04Myw3ICs4Myw3IEBAIGludCBoaWJtY19kZGNfY3JlYXRlKHN0cnVjdCBkcm1fZGV2
+aWNlICpkcm1fZGV2LAo+ICAgCWNvbm5lY3Rvci0+YWRhcHRlci5vd25lciA9IFRISVNfTU9EVUxF
+Owo+ICAgCWNvbm5lY3Rvci0+YWRhcHRlci5jbGFzcyA9IEkyQ19DTEFTU19EREM7Cj4gICAJc25w
+cmludGYoY29ubmVjdG9yLT5hZGFwdGVyLm5hbWUsIEkyQ19OQU1FX1NJWkUsICJISVMgaTJjIGJp
+dCBidXMiKTsKPiAtCWNvbm5lY3Rvci0+YWRhcHRlci5kZXYucGFyZW50ID0gJmRybV9kZXYtPnBk
+ZXYtPmRldjsKPiArCWNvbm5lY3Rvci0+YWRhcHRlci5kZXYucGFyZW50ID0gZHJtX2Rldi0+ZGV2
+Owo+ICAgCWkyY19zZXRfYWRhcGRhdGEoJmNvbm5lY3Rvci0+YWRhcHRlciwgY29ubmVjdG9yKTsK
+PiAgIAljb25uZWN0b3ItPmFkYXB0ZXIuYWxnb19kYXRhID0gJmNvbm5lY3Rvci0+Yml0X2RhdGE7
+Cj4gICAKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2hpc2lsaWNvbi9oaWJtYy9oaWJt
+Y190dG0uYyBiL2RyaXZlcnMvZ3B1L2RybS9oaXNpbGljb24vaGlibWMvaGlibWNfdHRtLmMKPiBp
+bmRleCA2MDJlY2UxMWJiNGEuLjc3ZjA3NTA3NWRiMiAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dw
+dS9kcm0vaGlzaWxpY29uL2hpYm1jL2hpYm1jX3R0bS5jCj4gKysrIGIvZHJpdmVycy9ncHUvZHJt
+L2hpc2lsaWNvbi9oaWJtYy9oaWJtY190dG0uYwo+IEBAIC0yNiw5ICsyNiw5IEBAIGludCBoaWJt
+Y19tbV9pbml0KHN0cnVjdCBoaWJtY19kcm1fcHJpdmF0ZSAqaGlibWMpCj4gICAJc3RydWN0IGRy
+bV92cmFtX21tICp2bW07Cj4gICAJaW50IHJldDsKPiAgIAlzdHJ1Y3QgZHJtX2RldmljZSAqZGV2
+ID0gaGlibWMtPmRldjsKPiArCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gdG9fcGNpX2RldihkZXYt
+PmRldik7Cj4gICAKPiAtCXZtbSA9IGRybV92cmFtX2hlbHBlcl9hbGxvY19tbShkZXYsCj4gLQkJ
+CQkgICAgICAgcGNpX3Jlc291cmNlX3N0YXJ0KGRldi0+cGRldiwgMCksCj4gKwl2bW0gPSBkcm1f
+dnJhbV9oZWxwZXJfYWxsb2NfbW0oZGV2LCBwY2lfcmVzb3VyY2Vfc3RhcnQocGRldiwgMCksCj4g
+ICAJCQkJICAgICAgIGhpYm1jLT5mYl9zaXplKTsKPiAgIAlpZiAoSVNfRVJSKHZtbSkpIHsKPiAg
+IAkJcmV0ID0gUFRSX0VSUih2bW0pOwo+IApSZXZpZXdlZC1ieTogVGlhbiBUYW8gPHRpYW50YW82
+QGhpc2lsaWNvbi5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
+c3BpY2UtZGV2ZWwK
