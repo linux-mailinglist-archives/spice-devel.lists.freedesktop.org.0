@@ -1,58 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF0E42CC8D3
-	for <lists+spice-devel@lfdr.de>; Wed,  2 Dec 2020 22:22:24 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BE332CD4EB
+	for <lists+spice-devel@lfdr.de>; Thu,  3 Dec 2020 12:52:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 571476EAC1;
-	Wed,  2 Dec 2020 21:22:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1ACF6E9AD;
+	Thu,  3 Dec 2020 11:52:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x243.google.com (mail-oi1-x243.google.com
- [IPv6:2607:f8b0:4864:20::243])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2FED36EA5D
- for <spice-devel@lists.freedesktop.org>; Wed,  2 Dec 2020 16:13:07 +0000 (UTC)
-Received: by mail-oi1-x243.google.com with SMTP id k26so2124618oiw.0
- for <spice-devel@lists.freedesktop.org>; Wed, 02 Dec 2020 08:13:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=b7U+AtH3sHJCwULgF3Ak2zaylddojTI/suVTwKzdZWQ=;
- b=ErkznRm8nwyDwIv/teBX3kIGhYer5ymPEKwvJsdCdOtk8J4E7h/F3yCSi6j6g1DF16
- QNktpzqHai+xd8PZl1R6oZG5x85KWxlLqDYBViXHEnNi/P+B0na/wfRKGm44ZG5N/O9f
- iuVGC/9e8BeIhC2ONpm4mwzqHxjarImNxVGjo=
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 94C7B6E9AF
+ for <spice-devel@lists.freedesktop.org>; Thu,  3 Dec 2020 11:24:13 +0000 (UTC)
+Received: by mail-wr1-x42e.google.com with SMTP id t4so1473503wrr.12
+ for <spice-devel@lists.freedesktop.org>; Thu, 03 Dec 2020 03:24:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=to:from:subject:message-id:date:user-agent:mime-version
+ :content-transfer-encoding:content-language;
+ bh=2e+PTlzplbT5vWQ3nq46E80j1DV313pOw5qnZcWodM8=;
+ b=FjA18SqvqlJb9bIyKOBI8OlC7Job0TZKLLpmv7SiZAdqyhz82SrVTyGBPqtL0m5KjU
+ IjZnVH5psWgGbD/W4YNLNd6eNQVi0r4dLFlWhWQjsrQLZc5yv35uLdqZaEorAZjAFJlQ
+ UmVUMig5AhZuBl6yHKP2ItA9Qb8rRfSzuQo08HhEd2biXcXv0FxPWW8cJi2UDUbbg9i9
+ KTXGI4B2fGqbXB5QyIk95SE5+iLoWfW0CSYM0y/G/8vhcVcM4tUAtzZAFD63UkrcYFYk
+ jlrrk8rM3AWjWmfzQTJCt+cxoWTds4rjA4ffDVxrmFW62zexb/CG3wiVfaYTlP53rM1I
+ IoOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=b7U+AtH3sHJCwULgF3Ak2zaylddojTI/suVTwKzdZWQ=;
- b=nYoGJTo7KtXlmFSnkt7mlp9jp5pq1dT68NOKbiavyK8+zAa6jAUIvB2MX0Q9U6pcZW
- DPtdk6dkokKRIw3NnWcBGvXmp488WCHM5Q9Z3K4eleiq1wCjYFd48+dkFP9QnuwTeKUW
- 0LtsdUwP2AZvwyUySWKsCwf7Ts2FgP5Zbhbldc6XA0UFeMFfiS/ifloWb3VZZlQbBvkn
- 4zskyBW1PSJLoMXMQ3Ixq2qVdLduuW4fnkQjKndc4cqj1aL5k5dihtNTyxYnmwkOKLOj
- vrDB38oE3zWPZNbg5h+TTc8nD4a5gb44Nx9fK/ZqavYgZqJ+RimplKLrpGXbrAMdV/WY
- vVWQ==
-X-Gm-Message-State: AOAM533SKxuGipH6ZGGtBTVlZuEBAaEEwn6BG5Xiit4Hxww9z5XQ6c/e
- 2cyhiScBryB6SMpJKz3qfJk9+GWeSEYiBlJUdDbEViTx6AsRew==
-X-Google-Smtp-Source: ABdhPJx9RB1NjUkHWVxMa5djDpF+EBlvksgp+1DOxJnboQAoZm7YjyEK65yCvt1oK3P9tLuw+YHUz+WWcB0lD2pn7Hg=
-X-Received: by 2002:aca:1713:: with SMTP id j19mr2044644oii.101.1606925003642; 
- Wed, 02 Dec 2020 08:03:23 -0800 (PST)
+ h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+ :mime-version:content-transfer-encoding:content-language;
+ bh=2e+PTlzplbT5vWQ3nq46E80j1DV313pOw5qnZcWodM8=;
+ b=cWev8dn0ev1k9W5oz5acmJEYwfQv7nrIUAfuxhjBUaLHDw96UQx7sQgUMhebJxWbGw
+ mHhTa3gySUAzpssFJ3XPiGOjoEMVtvY4g2ju/r+9sMdTdeFLtUPFIAVjiZhQzPNu0U0d
+ NqXIN+yJOjjmXfvpK8RKueROfEKsk3eGG7YHXc56/23PaETCZGEDaK4gZwBoKFUEqUHg
+ 1GTGPCmTgxQDZvVQQmmk3vbT2psD8d8V7JYe78fzpmfEW00SBeAgoBM/dytvWLHKClW4
+ U2B9WNdrpoYiKEy+LjTdutofoNJeOmNtslZuB4UzEHKyM3nlVtP9mwQqJnndAPdsN5Ar
+ ak6A==
+X-Gm-Message-State: AOAM533Oy/hotFt4txhwm4dagljcOckM4Lge4lhGej1sggRLpzO8DCSW
+ 0qVHLcqdkxo5BDgwpkkG0XXkKjguRtA=
+X-Google-Smtp-Source: ABdhPJzzBfQIdd0D0SYvnI0s5olAnsuXeLJJJPlKNMKRhFhdbp6pxKFBcVxnIA1z9+GkWIAvi6ahpw==
+X-Received: by 2002:adf:c452:: with SMTP id a18mr3260355wrg.189.1606994651871; 
+ Thu, 03 Dec 2020 03:24:11 -0800 (PST)
+Received: from [172.16.93.28] ([95.38.67.203])
+ by smtp.gmail.com with ESMTPSA id n189sm1097126wmf.20.2020.12.03.03.24.10
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Dec 2020 03:24:11 -0800 (PST)
+To: spice-devel@lists.freedesktop.org
+From: mnavahan <mnavahan@gmail.com>
+Message-ID: <7ee27b40-9dac-959b-e4ec-aa72f217b5d8@gmail.com>
+Date: Thu, 3 Dec 2020 14:54:07 +0330
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20201124113824.19994-1-tzimmermann@suse.de>
- <20201124113824.19994-15-tzimmermann@suse.de>
- <31E75B1A-AAC0-49E3-985E-2DF5B59CD883@vmware.com>
- <e8102216-edd0-bec3-79af-3925e9668e95@suse.de>
- <d43d06e6-d13c-ef9b-b372-8d30d9494417@suse.de>
- <FBC4840D-C1A8-4492-9E2E-D31E00B8D61A@vmware.com>
-In-Reply-To: <FBC4840D-C1A8-4492-9E2E-D31E00B8D61A@vmware.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Wed, 2 Dec 2020 17:03:11 +0100
-Message-ID: <CAKMK7uFaCVLu9GWR0Jkvf8iXP4RdcG3TmMsLmFVDoERBOk1ZOQ@mail.gmail.com>
-To: Zack Rusin <zackr@vmware.com>
-X-Mailman-Approved-At: Wed, 02 Dec 2020 21:22:21 +0000
-Subject: Re: [Spice-devel] [PATCH 14/15] drm/vmwgfx: Remove references to
- struct drm_device.pdev
+Content-Language: en-US
+X-Mailman-Approved-At: Thu, 03 Dec 2020 11:52:52 +0000
+Subject: [Spice-devel] Set mouse point always visible
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,51 +67,14 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "airlied@linux.ie" <airlied@linux.ie>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- Roland Scheidegger <sroland@vmware.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBEZWMgMiwgMjAyMCBhdCA0OjM3IFBNIFphY2sgUnVzaW4gPHphY2tyQHZtd2FyZS5j
-b20+IHdyb3RlOgo+Cj4KPgo+ID4gT24gRGVjIDIsIDIwMjAsIGF0IDA5OjI3LCBUaG9tYXMgWmlt
-bWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4gd3JvdGU6Cj4gPgo+ID4gSGkKPiA+Cj4gPiBB
-bSAwMi4xMi4yMCB1bSAwOTowMSBzY2hyaWViIFRob21hcyBaaW1tZXJtYW5uOgo+ID4+IEhpCj4g
-Pj4gQW0gMzAuMTEuMjAgdW0gMjE6NTkgc2NocmllYiBaYWNrIFJ1c2luOgo+ID4+Pgo+ID4+Pgo+
-ID4+Pj4gT24gTm92IDI0LCAyMDIwLCBhdCAwNjozOCwgVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1t
-ZXJtYW5uQHN1c2UuZGU+IHdyb3RlOgo+ID4+Pj4KPiA+Pj4+IFVzaW5nIHN0cnVjdCBkcm1fZGV2
-aWNlLnBkZXYgaXMgZGVwcmVjYXRlZC4gQ29udmVydCB2bXdnZnggdG8gc3RydWN0Cj4gPj4+PiBk
-cm1fZGV2aWNlLmRldi4gTm8gZnVuY3Rpb25hbCBjaGFuZ2VzLgo+ID4+Pj4KPiA+Pj4+IFNpZ25l
-ZC1vZmYtYnk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPgo+ID4+Pj4g
-Q2M6IFJvbGFuZCBTY2hlaWRlZ2dlciA8c3JvbGFuZEB2bXdhcmUuY29tPgo+ID4+Pj4gLS0tCj4g
-Pj4+PiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9jbWRidWYuYyB8ICA4ICsrKystLS0t
-Cj4gPj4+PiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9kcnYuYyAgICB8IDI3ICsrKysr
-KysrKysrKystLS0tLS0tLS0tLS0tCj4gPj4+PiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dm
-eF9mYi5jICAgICB8ICAyICstCj4gPj4+Cj4gPj4+IFJldmlld2VkLWJ5OiBaYWNrIFJ1c2luIDx6
-YWNrckB2bXdhcmUuY29tPgo+ID4+IENvdWxkIHlvdSBhZGQgdGhpcyBwYXRjaCB0byB0aGUgdm13
-Z2Z4IHRyZWU/Cj4gPgo+ID4gQU1EIGRldnMgaW5kaWNhdGVkIHRoYXQgdGhleSdkIHByZWZlciB0
-byBtZXJnZSB0aGUgcGF0Y2hzZXQgdHJvdWdoIGRybS1taXNjLW5leHQuIElmIHlvdSdyZSBPSyB3
-aXRoIHRoYXQsIEknZCBtZXJnZSB0aGUgdm13Z2Z4IHBhdGNoIHRocm91Z2ggZHJtLW1pc2MtbmV4
-dCBhcyB3ZWxsLgo+Cj4gU291bmRzIGdvb2QuIEnigJlsbCBtYWtlIHN1cmUgdG8gcmViYXNlIG91
-ciBsYXRlc3QgcGF0Y2ggc2V0IG9uIHRvcCBvZiBpdCB3aGVuIGl04oCZcyBpbi4gVGhhbmtzIQoK
-YnR3IGlmIHlvdSB3YW50IHRvIGF2b2lkIG11bHRpLXRyZWUgY29vcmRpbmF0aW9uIGhlYWRhY2hl
-cywgd2UgY2FuCmFsc28gbWFuYWdlIHZtd2dmeCBpbiBkcm0tbWlzYyBhbmQgZ2l2ZSB5b3UgJiBS
-b2xhbmQgY29tbWl0IHJpZ2h0cwp0aGVyZS4gVXAgdG8geW91LiBUaGVyZSBpcyBzb21lIHNjcmlw
-dGluZyBpbnZvbHZlZCBmb3Igbm93IChidXQgSSBob3BlCndoZW5ldmVyIHdlIG1vdmUgdG8gZ2l0
-bGFiIHdlIGNvdWxkIGRvIHRoZSBjaGVja3Mgc2VydmVyLXNpZGUpOgoKaHR0cHM6Ly9kcm0ucGFn
-ZXMuZnJlZWRlc2t0b3Aub3JnL21haW50YWluZXItdG9vbHMvZ2V0dGluZy1zdGFydGVkLmh0bWwK
-CkNoZWVycywgRGFuaWVsCi0tIApEYW5pZWwgVmV0dGVyClNvZnR3YXJlIEVuZ2luZWVyLCBJbnRl
-bCBDb3Jwb3JhdGlvbgpodHRwOi8vYmxvZy5mZndsbC5jaApfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2Ut
-ZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-L21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2ZWwK
+SGkKCkkgTmVlZCBzb21lIHRpbWVzIHNldCBtb3VzZSBwb2ludGVyIGFsd2F5cyB2aXNpYmxlINmN
+RXZlbiBpbiBjbGllbnQgCnBvaW50ZXIgbGl2ZSBndWVzdCBzY3JlZW4gaGF2ZSBhbnkgZG8gaXQg
+PwoKClRoeAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+U3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9y
+ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRl
+dmVsCg==
