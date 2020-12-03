@@ -2,60 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BE332CD4EB
-	for <lists+spice-devel@lfdr.de>; Thu,  3 Dec 2020 12:52:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE6C52CD54D
+	for <lists+spice-devel@lfdr.de>; Thu,  3 Dec 2020 13:19:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B1ACF6E9AD;
-	Thu,  3 Dec 2020 11:52:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F1A06E9BF;
+	Thu,  3 Dec 2020 12:19:53 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 94C7B6E9AF
- for <spice-devel@lists.freedesktop.org>; Thu,  3 Dec 2020 11:24:13 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id t4so1473503wrr.12
- for <spice-devel@lists.freedesktop.org>; Thu, 03 Dec 2020 03:24:13 -0800 (PST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 547B36EB6B
+ for <spice-devel@lists.freedesktop.org>; Thu,  3 Dec 2020 12:19:52 +0000 (UTC)
+Received: by mail-pl1-x636.google.com with SMTP id x4so1049629pln.8
+ for <spice-devel@lists.freedesktop.org>; Thu, 03 Dec 2020 04:19:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=to:from:subject:message-id:date:user-agent:mime-version
- :content-transfer-encoding:content-language;
- bh=2e+PTlzplbT5vWQ3nq46E80j1DV313pOw5qnZcWodM8=;
- b=FjA18SqvqlJb9bIyKOBI8OlC7Job0TZKLLpmv7SiZAdqyhz82SrVTyGBPqtL0m5KjU
- IjZnVH5psWgGbD/W4YNLNd6eNQVi0r4dLFlWhWQjsrQLZc5yv35uLdqZaEorAZjAFJlQ
- UmVUMig5AhZuBl6yHKP2ItA9Qb8rRfSzuQo08HhEd2biXcXv0FxPWW8cJi2UDUbbg9i9
- KTXGI4B2fGqbXB5QyIk95SE5+iLoWfW0CSYM0y/G/8vhcVcM4tUAtzZAFD63UkrcYFYk
- jlrrk8rM3AWjWmfzQTJCt+cxoWTds4rjA4ffDVxrmFW62zexb/CG3wiVfaYTlP53rM1I
- IoOg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=zUpm+bIbJh2gLopoZaIsjk5aJ1XcQB6Q1PrXNKjxRf0=;
+ b=Gd/Y3a87ayyVw/u8gFrODh4mdvoyBMmLj4X3ro6eMm3bIDLsav1kSQmj21aYu6+Kuc
+ JFMjEup9skoqPaIZ+TfX9m90KJeV2UUKeln4UuvoNGEPwKzFNek4LPUAJyDYWlNBTBKq
+ VktQmyiFgq0zRJ3fubNLXlR3k4pxFyQirFp5jKq1UTszzW1bS4RkBnb8pGfyO4bzS6af
+ QAjVr3xG2Pt3diJ+rGRa9rA9eCZTTQL+P4QAiK+MBXyk9wjbdZrhmSDbnjcVcod14sN0
+ QtHr8KlmH3NUSHzV4q9oSEWtQr3rn4ouFZGecm3fC7RpHCwECNdq6f6JT7/dFGKR53j/
+ Ncaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:to:from:subject:message-id:date:user-agent
- :mime-version:content-transfer-encoding:content-language;
- bh=2e+PTlzplbT5vWQ3nq46E80j1DV313pOw5qnZcWodM8=;
- b=cWev8dn0ev1k9W5oz5acmJEYwfQv7nrIUAfuxhjBUaLHDw96UQx7sQgUMhebJxWbGw
- mHhTa3gySUAzpssFJ3XPiGOjoEMVtvY4g2ju/r+9sMdTdeFLtUPFIAVjiZhQzPNu0U0d
- NqXIN+yJOjjmXfvpK8RKueROfEKsk3eGG7YHXc56/23PaETCZGEDaK4gZwBoKFUEqUHg
- 1GTGPCmTgxQDZvVQQmmk3vbT2psD8d8V7JYe78fzpmfEW00SBeAgoBM/dytvWLHKClW4
- U2B9WNdrpoYiKEy+LjTdutofoNJeOmNtslZuB4UzEHKyM3nlVtP9mwQqJnndAPdsN5Ar
- ak6A==
-X-Gm-Message-State: AOAM533Oy/hotFt4txhwm4dagljcOckM4Lge4lhGej1sggRLpzO8DCSW
- 0qVHLcqdkxo5BDgwpkkG0XXkKjguRtA=
-X-Google-Smtp-Source: ABdhPJzzBfQIdd0D0SYvnI0s5olAnsuXeLJJJPlKNMKRhFhdbp6pxKFBcVxnIA1z9+GkWIAvi6ahpw==
-X-Received: by 2002:adf:c452:: with SMTP id a18mr3260355wrg.189.1606994651871; 
- Thu, 03 Dec 2020 03:24:11 -0800 (PST)
-Received: from [172.16.93.28] ([95.38.67.203])
- by smtp.gmail.com with ESMTPSA id n189sm1097126wmf.20.2020.12.03.03.24.10
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Dec 2020 03:24:11 -0800 (PST)
-To: spice-devel@lists.freedesktop.org
-From: mnavahan <mnavahan@gmail.com>
-Message-ID: <7ee27b40-9dac-959b-e4ec-aa72f217b5d8@gmail.com>
-Date: Thu, 3 Dec 2020 14:54:07 +0330
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zUpm+bIbJh2gLopoZaIsjk5aJ1XcQB6Q1PrXNKjxRf0=;
+ b=mnEBBQhFpZB4jI2MGAf0QiMjWVQvCFayEFVaF4W+sRB1LunGBvomAgxLoZMCKHI6kp
+ WeS4w0dVW0Ndq5q07l/9e2AWhKfy9CmFhNDYCO+rZFfh0ldZ/da8Riy+nXZkVbLCvBpS
+ /7ESxOT/sZ5shNMtOZGK2p7zcfuhiG3zZjwx/pJnd1/0K7fRagTvqYGRJXM5rNHJ9CfK
+ FNIgGPJEay2Dz4pFcQa3V0sT6cOnHtXwMITj7Tbt4S8+172jAqVE/AUbJMLaP1z2hmxz
+ OFs9muv7zIV1fl2U2ACRHupjIxLd/1c+6DsP62CyisgR5bZOPY1ArH3amo3cGsDDfrkA
+ cdDg==
+X-Gm-Message-State: AOAM533h55VV/KEmBMa2BfgsMGa7ajUAi1MbSzqW/vyeUGSN24jtv2+U
+ jkEYMn5b1dlP3s7rtyn0N0GdwvlcGbGQiJam95IXeNYaPgU=
+X-Google-Smtp-Source: ABdhPJzjqVj3aglTIg9JNqBkoW1OsgEBpUAp25e8vhll7R/uzUH3h1RnA8P9o0rldvSM44DUXBFU9LbrIW9wZBpmqaA=
+X-Received: by 2002:a17:90a:a608:: with SMTP id
+ c8mr2860402pjq.161.1606997991980; 
+ Thu, 03 Dec 2020 04:19:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Language: en-US
-X-Mailman-Approved-At: Thu, 03 Dec 2020 11:52:52 +0000
-Subject: [Spice-devel] Set mouse point always visible
+References: <002201d6c8ae$01052f30$030f8d90$@nurudinov.ru>
+In-Reply-To: <002201d6c8ae$01052f30$030f8d90$@nurudinov.ru>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 3 Dec 2020 12:19:40 +0000
+Message-ID: <CAHt6W4d7k1ox=Ro3YYwECPw=5wuFLYP4TAmJrNu=dqZXP7pR8w@mail.gmail.com>
+To: islam@nurudinov.ru
+Subject: Re: [Spice-devel] about printer and scanner redirection
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,14 +60,38 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGkKCkkgTmVlZCBzb21lIHRpbWVzIHNldCBtb3VzZSBwb2ludGVyIGFsd2F5cyB2aXNpYmxlINmN
-RXZlbiBpbiBjbGllbnQgCnBvaW50ZXIgbGl2ZSBndWVzdCBzY3JlZW4gaGF2ZSBhbnkgZG8gaXQg
-PwoKClRoeAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-U3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9y
-ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRl
-dmVsCg==
+Il giorno mer 2 dic 2020 alle ore 15:20 <islam@nurudinov.ru> ha scritto:
+>
+> Hello.
+>
+> we are planning to use ovirt in our company using spice protocol.
+>
+> successfully tested usb forwarding to virtual desktop.
+>
+> we have a question, how can we forward a printer and a scanner to a virtual desktop, which are connected via LAN to a physical computer.
+>
+> Thank you.
+>
+> Best regards,
+> Islam Nurudinov.
+> +79258098889
+
+Hi,
+  it's not directly supported by SPICE.
+I suppose it depends on the LAN configuration. Is there a VPN to
+access from the virtual machine? Can you connect to
+the physical computer directly?
+Which OSes are the virtual and physical computer?
+
+Regards,
+   Frediano
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
