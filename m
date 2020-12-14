@@ -1,52 +1,59 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3B752D8AA1
-	for <lists+spice-devel@lfdr.de>; Sun, 13 Dec 2020 00:29:58 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id F34722D9699
+	for <lists+spice-devel@lfdr.de>; Mon, 14 Dec 2020 11:51:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0EE0089263;
-	Sat, 12 Dec 2020 23:29:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 274356E141;
+	Mon, 14 Dec 2020 10:51:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 159FA6E871
- for <spice-devel@lists.freedesktop.org>; Sat, 12 Dec 2020 21:08:16 +0000 (UTC)
-Received: by mail-pf1-x432.google.com with SMTP id 131so9434885pfb.9
- for <spice-devel@lists.freedesktop.org>; Sat, 12 Dec 2020 13:08:16 -0800 (PST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 59C2D6E141
+ for <spice-devel@lists.freedesktop.org>; Mon, 14 Dec 2020 10:51:15 +0000 (UTC)
+Received: by mail-pg1-x532.google.com with SMTP id v29so12201282pgk.12
+ for <spice-devel@lists.freedesktop.org>; Mon, 14 Dec 2020 02:51:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shells-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:from:date:message-id:subject:to;
- bh=Y+zd256IWKlb1h1csvcwiSvmIUMfhhdtzRWQGZSbJuk=;
- b=joNkZla80wT9OsCDe+cZSwhENXERZdYIlGSx7oivlXiUdAtB3/T2JwoG8RWUITHxik
- 8tg89WKRco0QuYLGmtiqWoeJuD7StqNT1l6WK6aQJvhs6/dgvtSxbRxW4n6JqN4ENeif
- eibfeBvvRlAps34JllTw+LDeckEros/5VZwbCKzffk9mp4IuBe8N+6yPLuayCXjbi/T1
- uhNQHmvt7wtXvDMjhF2kL21jlT7dXkRyiYmhoMrW8Hw7DmZUNObeQE9NqDty+W2Vk3WU
- 9GeJvhPQ5MBzOQg3japRfUF1lLIdFynn/ALEhuKEfvtW0fDLEuAIrIF0R4an6AqOIfJu
- i+BA==
+ d=oldum-net.20150623.gappssmtp.com; s=20150623;
+ h=message-id:subject:from:to:date:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=/jO1ETdUGaeXR6e4/Pe8ST8f37hAfL5a0XrTctcve5Q=;
+ b=SK1zayb+qp+b0nCf90mCdkLfo/1pCkgXlpu+1YPyx2bGnjvx2kxZ9RUCRRiK7xeqRd
+ 2wq87jHDanAFd5NmVGZn94tfZoN9yeXXWHUSDklHe4q3mESK2w2tN0bUBh+zcx7iNnqf
+ iit0e+ZFRnD8JeInw14p4d5sGWqt1U2LlE9uXn0mx4gOk17XhITddYfuektzDE9Cn1Fm
+ DmpV1FlgrdN1EOmEI2NpIcfzXD1tDDnd8IcGriLxcTGvegjv5RLJ+g+w9pJVBSfB4SqS
+ OPAf8d4kpkcpjjGbKYrAiCir05zbJXRpW18/4jOU2freNYnh6P+8b/5VP5GU/avERx1I
+ Ywtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=Y+zd256IWKlb1h1csvcwiSvmIUMfhhdtzRWQGZSbJuk=;
- b=QD1ALxeXgN131NbxHce6l9Dx2JM5ZvkOQCtfKtb83bkcBtHqwn1rfoGjWcbSiuOWw1
- dY7KSJKabFtt/yTDMJX7iS2ynp9n+SJ+gbHxwBFqZRyqMa1VyombQO2suazsOF60nTqP
- tKRS3T4HWiP3YnTMk5aqtosHtZZIQY5c3+8rA6Z1DfH3nf1RaLRsraN59QlXubNeeIZg
- wjIb0D0U6b+dBITFqSQMf9WvzZ+VWd701wC2QY/mstcNsv9RStx1+dCu+cMllTA/NT7l
- qwzeIrK7IdXOoB3ZRubmGGu0xFcz2l9cyVHAPPL8kEvXyBxq5rX3NSQqFeInrWaMcnJr
- Xfvw==
-X-Gm-Message-State: AOAM532IDr6PN5vLijLo1YziddoAR2/ipOWU60c71g8kPcaV8B0OUq9J
- +RwCO84kUBveXRs/6T/CXClL7jcoBKRryNHTeXIf6jHi6NItsg==
-X-Google-Smtp-Source: ABdhPJzb0fZ9XixY3AQrM8aATPihz80B9kxL4B4hCiQpzNSH1N7PkVrPaCU0HxmyROMqDENT7lb1lovsX1r6MEyB5j0=
-X-Received: by 2002:a63:591c:: with SMTP id n28mr17648663pgb.230.1607807296190; 
- Sat, 12 Dec 2020 13:08:16 -0800 (PST)
-MIME-Version: 1.0
-From: Mark Karpeles <mark@shells.com>
-Date: Sun, 13 Dec 2020 06:08:05 +0900
-Message-ID: <CABCrBR1CBK4nHobqi-w_YTzw_yehDDK=7irZ6qp1ZB7faEGc4w@mail.gmail.com>
+ h=x-gm-message-state:message-id:subject:from:to:date:user-agent
+ :mime-version:content-transfer-encoding;
+ bh=/jO1ETdUGaeXR6e4/Pe8ST8f37hAfL5a0XrTctcve5Q=;
+ b=lGxpX0nJMV7TiG+yMyANR69gyXlbyrxgtYeltnZIvWg3PxB4F0O8CeFjEJqR8NhcDH
+ c+hRaTWeHtqCb3OugQT58FSFn8wAKXspmnvWQMM5SCtX8PYX1nVOvuXAOMqtSPQXb9TV
+ dJKQxiPiV0/jInjrd7na+11hLRgcQjji2fnewZD+dgNUK+Pgl/PmozK5uy7T6Q1FOe/r
+ bsprKTMOwk7yZHPxisuHlEJpsdRjL9sg6qMpb5hJ6p0HedpJRZf8/Vw8AMuPAUo0hlml
+ +VUEPPk3Op42GA6ss9uDw31ZskaR6zdvhcS444xB+3T9s8TbKIAHXFoNRr9W7TCwPd3L
+ c6Ig==
+X-Gm-Message-State: AOAM533fQCiG+dkld9HDVc8I5mSIQGWClBLGPjj7ofxnK1ppgqemeXPH
+ 0zjvcEbsx3VZbbxoXoxM/0azTYxwDfJAToyi
+X-Google-Smtp-Source: ABdhPJzUV8pEn6FCOemJ8KYw1xlCtbmQqpNaQDxX0kanr68IPc+2P11Cj4hYs/RNVVkGSLCpQ6AYsQ==
+X-Received: by 2002:a63:5023:: with SMTP id e35mr1078863pgb.56.1607943074630; 
+ Mon, 14 Dec 2020 02:51:14 -0800 (PST)
+Received: from [10.98.7.21] ([149.235.255.6])
+ by smtp.googlemail.com with ESMTPSA id o2sm20620735pgq.63.2020.12.14.02.51.13
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Dec 2020 02:51:14 -0800 (PST)
+Message-ID: <a410fd79c66ecbd949a51130baa3bbf79791813a.camel@oldum.net>
+From: Nikolay Kichukov <hjckr@oldum.net>
 To: spice-devel@lists.freedesktop.org
-X-Mailman-Approved-At: Sat, 12 Dec 2020 23:29:53 +0000
-Subject: [Spice-devel] Spice features and status
+Date: Mon, 14 Dec 2020 11:51:12 +0100
+User-Agent: Evolution 3.38.2 
+MIME-Version: 1.0
+Subject: [Spice-devel] vdagent fix for citrix workspace - new spice release
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,80 +65,27 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0548657873=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0548657873==
-Content-Type: multipart/alternative; boundary="000000000000c1d2d305b64ace8d"
+Hi folks,
 
---000000000000c1d2d305b64ace8d
-Content-Type: text/plain; charset="UTF-8"
+There is a new fix that allows citrix workspace on windows to not
+interfere with vdagent:
 
-Hello
+https://github.com/virtio-win/kvm-guest-drivers-windows/issues/368#issuecomment-744013662
 
-I've been working on software related to spice for a few months now and
-have been wondering about a number of things I was hoping could get
-clarified
+Do you know when we can have a precompiled release that incorporates it
+for windows guests?
 
-The website seems to be quite outdated. It points to Bugzilla, the
-documentation has a lot of missing parts, etc. Is there any source for up
-to date documentation on Spice?
+Thanks,
+-Nikolay
 
-Specifically I've been trying to understand the QUIC image format, however
-the source code makes heavy use of defines used in a way similar to C++'s
-templates, I was hoping there'd be some documentation somewhere.
 
-The site also lists a number of upcoming features on
-https://www.spice-space.org/features.html - is this an authoritative
-source? Where are features tracked for Spice?
-
-For example this is two years old and would be nice to see:
-https://gitlab.freedesktop.org/spice/spice-protocol/-/issues/4
-
-It seems there's still updates done to spice seeing all the PATCH mails,
-but where is this coordinated?
-
-Thanks
-M.
-
---000000000000c1d2d305b64ace8d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hello<div dir=3D"auto"><br></div><div dir=3D"auto">I&#39;ve been working on=
- software related to spice for a few months now and have been wondering abo=
-ut a number of things I was hoping could get clarified</div><div dir=3D"aut=
-o"><br></div><div dir=3D"auto">The website seems to be quite outdated. It p=
-oints to Bugzilla, the documentation has a lot of missing parts, etc. Is th=
-ere any source for up to date documentation on Spice?</div><div dir=3D"auto=
-"><br></div><div dir=3D"auto">Specifically I&#39;ve been trying to understa=
-nd the QUIC image format, however the source code makes heavy use of define=
-s used in a way similar to C++&#39;s templates, I was hoping there&#39;d be=
- some documentation somewhere.=C2=A0</div><div dir=3D"auto"><br></div><div =
-dir=3D"auto">The site also lists a number of upcoming features on=C2=A0<div=
- dir=3D"auto"><a href=3D"https://www.spice-space.org/features.html">https:/=
-/www.spice-space.org/features.html</a> - is this an authoritative source? W=
-here are features tracked for Spice?</div><div dir=3D"auto"><br></div><div =
-dir=3D"auto">For example this is two years old and would be nice to see:</d=
-iv><div dir=3D"auto"><div><a href=3D"https://gitlab.freedesktop.org/spice/s=
-pice-protocol/-/issues/4">https://gitlab.freedesktop.org/spice/spice-protoc=
-ol/-/issues/4</a></div><div dir=3D"auto"><br></div><div dir=3D"auto">It see=
-ms there&#39;s still updates done to spice seeing all the PATCH mails, but =
-where is this coordinated?</div><br></div><div dir=3D"auto">Thanks</div><di=
-v dir=3D"auto">M.</div><div dir=3D"auto"><br></div></div>
-
---000000000000c1d2d305b64ace8d--
-
---===============0548657873==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0548657873==--
