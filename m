@@ -2,56 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 301902F3513
-	for <lists+spice-devel@lfdr.de>; Tue, 12 Jan 2021 17:08:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C3092F5C7A
+	for <lists+spice-devel@lfdr.de>; Thu, 14 Jan 2021 09:33:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A36286E2E3;
-	Tue, 12 Jan 2021 16:08:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A99BD89FD3;
+	Thu, 14 Jan 2021 08:33:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 801DD6E2E3
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jan 2021 16:08:50 +0000 (UTC)
-Received: by mail-pl1-x62e.google.com with SMTP id b8so1146789plh.12
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jan 2021 08:08:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=EDHxo5YGobtGuRu7nahiE4bYe2AsYYMmqQzbh9+s/I4=;
- b=oyPS/3D5mMk+Atk72cSVSI6+qZc/fYI0TPqtxVv2kfqzz97kpUkmCQhJ39Gv4sUD/l
- FFJ++nmWH1/EH7Hm3cOXzYNhJBETt73bRMie256Zj7QgNNNgFVGysoflJ7BBufpxV9nw
- b6vjC3VqWLDSRTpJ8U1x6OsmEBBaItNYpyFcX7GeVbQpxkvu+vlQILccjzj8Fz/mJzZm
- 7cIbjrdPEPB0/NGYO2yXh6D8zidhHRG1IUf4M8YeeNzQJavkFVyDs3Sg2o/5WEWbFq0A
- 1+WYDtYwEABMpX0HscqXir6137OrCaJz9sr8Kyvcvr9l9+RF+HKWbeEp/ASlSlmV2VsE
- 9w3w==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0E39E89FD3
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 Jan 2021 08:33:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1610613232;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=W2WIqKARqnQyzPT0UxGj1oj6YBr6TAgFDibLPIGg82E=;
+ b=ZV6DyojOj6MvLXwb66j6R33G2z2wAJxXX/AbqBD+a1CenC4Kq0VTLEBktSrYO1jAnEZfHc
+ vTVcriOGUBjk6yEl/5YSdwjMKQGTnAhKH1Spj2MymIFYe042rLcDZi5QARn0eLu9uXEKwX
+ 2YbPg1gkOTALBrkQW7Wb3LuJGdOuX1o=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-421-O4UcYgHHMbO0ljsrXfSrHw-1; Thu, 14 Jan 2021 03:33:48 -0500
+X-MC-Unique: O4UcYgHHMbO0ljsrXfSrHw-1
+Received: by mail-qv1-f69.google.com with SMTP id u8so3843695qvm.5
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 Jan 2021 00:33:47 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=EDHxo5YGobtGuRu7nahiE4bYe2AsYYMmqQzbh9+s/I4=;
- b=Kz3BuvbzjGKJNoxDzAjIU/XMEMIf4SWXZCSG4NSk1VbYzvOLT/5Dat6jcuHY5qZRP9
- DreG578OcOWW0PdavhPBUq7lVc3/8CA8tbpofHGJqY3o3SRVr4jjFB1M5GrE5nZ/FDuG
- Ss//wpk2oHBIrwYqcUF1yo1OnzKx6jhME3SYVU8tkcruOIxTW56bMN9aDjFnIPG/otMa
- D5dXA8jkX+MJwRqqrQcGUcvRViZaV6CvsROcCw5/Z6AvIiTGvFiFgknknMGQIVFZkMgc
- Lze9BOzNBVk5rRuheUVt2RyUk1FrsNAmC2qowWu5k9c7cnuzMBmpMpukJs/f9FfsmPf0
- YOZA==
-X-Gm-Message-State: AOAM532WRtnQfFXpCbyroJRUPe8RYMCo7rwX9/ycZU32rc7WTvcXtaAo
- ZRJkeVUfN6ypdybdRmoqKAwsAIyz2NMuYRDunH7wvFIfbuA=
-X-Google-Smtp-Source: ABdhPJyHafMUVmXWNCd+x8G1xRziX7NGuZ+yq0RMB/gfj1roLOUK1nZFkeZfJ64MuFrfKJovZsFTmrSocTq7lAKySis=
-X-Received: by 2002:a17:902:fe87:b029:da:5d3b:4a84 with SMTP id
- x7-20020a170902fe87b02900da5d3b4a84mr81257plm.51.1610467730051; Tue, 12 Jan
- 2021 08:08:50 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=W2WIqKARqnQyzPT0UxGj1oj6YBr6TAgFDibLPIGg82E=;
+ b=VxuyoyQ+a27zvyp74d9kyO0WoLXYXX6J+wjuEIqB2Ubq17wUEuNhufdtgB3RIGtyoo
+ fORlTmsTQ3+mVQsPMa5qUOtUytVlTTeQUvShqDM/7k3Sxp04DvwgUKrdnceQBJhDUktp
+ qH+VXBR9UJsBy2w5dW6CkUa/ilqiUKSaZaeLZNOIcENIAhEIfu8zFemlrpd4ZBsQr9HQ
+ bZ7CAgnpPlqYjRraXc7/lHSTNwAUFK9aA06Y6lqbJsDSr5/O8iNRIx+D59MLj95vOwMJ
+ bvEgHO1vC7M3JXSHPumiMAghwI9qZL7BLpMq8IlZJ2JEBHGmwNlJIZFnV8O2ajlrd99c
+ ll3Q==
+X-Gm-Message-State: AOAM533MX77N4xguXZfCWyACXV8GjFx/r+mRZCM7PiKZBY7NchrQ2nt/
+ OZkpV+lpaMftU5CuY6k85E5sU1NXRO63Kl7/c93Oa7KAqUNNxGhxyeptyY9hNrmv4foFJIAnEJW
+ KMx6OtrQwZgh5A2H9v2fWwIr+ALkzYlmYyisql+MNxdA5zHg=
+X-Received: by 2002:a5b:410:: with SMTP id m16mr9029798ybp.451.1610613227351; 
+ Thu, 14 Jan 2021 00:33:47 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJx3uI2GRjxGSfb2wr21wMA5Sp7Av7y/m7eKhI+IYHsdGnGHqkan0KUcEHfxbo4x+mZpkt8NORnFpKjXsk6El8Y=
+X-Received: by 2002:a5b:410:: with SMTP id m16mr9029765ybp.451.1610613226978; 
+ Thu, 14 Jan 2021 00:33:46 -0800 (PST)
 MIME-Version: 1.0
-References: <HK0PR02MB31238306CBBD428A2E7EABFDA1AF0@HK0PR02MB3123.apcprd02.prod.outlook.com>
-In-Reply-To: <HK0PR02MB31238306CBBD428A2E7EABFDA1AF0@HK0PR02MB3123.apcprd02.prod.outlook.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 12 Jan 2021 16:08:38 +0000
-Message-ID: <CAHt6W4duY6L+CFvq_X-HE3h2KeDjxF7dE95k898vL9vL_N-Hxw@mail.gmail.com>
-To: =?UTF-8?B?5YiY546J6ZuqKHl1IHh1ZSBMaXUp?= <liuyuxue@oppo.com>
-Subject: Re: [Spice-devel] 
-	=?utf-8?q?Hi=EF=BC=8CGL_acceleration_=28virgl=29_C?=
-	=?utf-8?q?an_use_it_on_windons=EF=BC=9F?=
+From: Julien Rope <jrope@redhat.com>
+Date: Thu, 14 Jan 2021 09:33:36 +0100
+Message-ID: <CAD5yKqzjVwvnH+J64cDdgQfqn12s4DHE6_DWANQwwqOBHtN2mA@mail.gmail.com>
+To: Spice devel <spice-devel@lists.freedesktop.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jrope@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: [Spice-devel] ANNOUNCE spice-vdagent 0.21.0 release
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,38 +66,129 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1791827063=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SGksDQogIEkgc3VwcG9zZSBieSB3aW5kb25zIHlvdSBtZWFuIFdpbmRvd3MuIFRoaXMgcmVxdWly
-ZXMgV2luZG93cyBkcml2ZXJzDQpmb3IgM2QgdmlydGlvLXZnYSB3aGljaCBpcyBub3QgY3VycmVu
-dGx5IHBsYW5uZWQuDQoNClJlZ2FyZHMsDQogIEZyZWRpYW5vDQoNCklsIGdpb3JubyBnaW8gNyBn
-ZW4gMjAyMSBhbGxlIG9yZSAwNzo0MCDliJjnjonpm6ooeXXigIZ4dWUgTGl1KQ0KPGxpdXl1eHVl
-QG9wcG8uY29tPiBoYSBzY3JpdHRvOg0KPg0KPiAgSGnvvIwNCj4gICAgM0QgZ3JhcGhpY3MgYWNj
-ZWxlcmF0aW9uIHVzaW5nIHZpcmdsIGFuZCBsb2NhbCBzcGljZSBpcyAgRmVhdHVyZXMgQ2FuIHVz
-ZSBpdCBvbiB3aW5kb25z77yfDQo+ICAgaHR0cHM6Ly93d3cuc3BpY2Utc3BhY2Uub3JnL3NwaWNl
-LXVzZXItbWFudWFsLmh0bWwgIGludHJvZHVjZSB2aXJnbCBPbmx5IGluIExpbnV477yfDQo+DQo+
-IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+IE9QUE8NCj4NCj4g5pys55S15a2Q
-6YKu5Lu25Y+K5YW26ZmE5Lu25ZCr5pyJT1BQT+WFrOWPuOeahOS/neWvhuS/oeaBr++8jOS7hemZ
-kOS6jumCruS7tuaMh+aYjueahOaUtuS7tuS6uuS9v+eUqO+8iOWMheWQq+S4quS6uuWPiue+pOe7
-hO+8ieOAguemgeatouS7u+S9leS6uuWcqOacque7j+aOiOadg+eahOaDheWGteS4i+S7peS7u+S9
-leW9ouW8j+S9v+eUqOOAguWmguaenOaCqOmUmeaUtuS6huacrOmCruS7tu+8jOivt+eri+WNs+S7
-peeUteWtkOmCruS7tumAmuefpeWPkeS7tuS6uuW5tuWIoOmZpOacrOmCruS7tuWPiuWFtumZhOS7
-tuOAgg0KPg0KPiBUaGlzIGUtbWFpbCBhbmQgaXRzIGF0dGFjaG1lbnRzIGNvbnRhaW4gY29uZmlk
-ZW50aWFsIGluZm9ybWF0aW9uIGZyb20gT1BQTywgd2hpY2ggaXMgaW50ZW5kZWQgb25seSBmb3Ig
-dGhlIHBlcnNvbiBvciBlbnRpdHkgd2hvc2UgYWRkcmVzcyBpcyBsaXN0ZWQgYWJvdmUuIEFueSB1
-c2Ugb2YgdGhlIGluZm9ybWF0aW9uIGNvbnRhaW5lZCBoZXJlaW4gaW4gYW55IHdheSAoaW5jbHVk
-aW5nLCBidXQgbm90IGxpbWl0ZWQgdG8sIHRvdGFsIG9yIHBhcnRpYWwgZGlzY2xvc3VyZSwgcmVw
-cm9kdWN0aW9uLCBvciBkaXNzZW1pbmF0aW9uKSBieSBwZXJzb25zIG90aGVyIHRoYW4gdGhlIGlu
-dGVuZGVkIHJlY2lwaWVudChzKSBpcyBwcm9oaWJpdGVkLiBJZiB5b3UgcmVjZWl2ZSB0aGlzIGUt
-bWFpbCBpbiBlcnJvciwgcGxlYXNlIG5vdGlmeSB0aGUgc2VuZGVyIGJ5IHBob25lIG9yIGVtYWls
-IGltbWVkaWF0ZWx5IGFuZCBkZWxldGUgaXQhDQo+DQo+IF9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fDQo+IFNwaWNlLWRldmVsIG1haWxpbmcgbGlzdA0KPiBT
-cGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVz
-a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbA0KX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNw
-aWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
+--===============1791827063==
+Content-Type: multipart/alternative; boundary="00000000000043d6dc05b8d81d48"
+
+--00000000000043d6dc05b8d81d48
+Content-Type: text/plain; charset="UTF-8"
+
+Hi all,
+
+spice-vdagent 0.21.0 is now available.
+
+In case of bugs or requests, please file them at our issue
+tracker:
+
+  https://gitlab.freedesktop.org/groups/spice/-/issues
+
+Release:
+   https://www.spice-space.org/download/releases/spice-vdagent-0.21.0.tar.bz2
+   https://www.spice-space.org/download/releases/spice-vdagent-0.21.0.tar.bz2.sha256sum
+   https://www.spice-space.org/download/releases/spice-vdagent-0.21.0.tar.bz2.sig
+
+And also:
+    https://gitlab.freedesktop.org/spice/linux/vd_agent/-/tags/spice-vdagent-0.21.0
+
+These releases are signed with GPG key:
+
+ 3D01 51CD 86CB 514B A776  7EDA 72A9 CCB6 7FDA B9AF
+
+Major changes in 0.20.0
+=======================
+
+* Security fixes:  CVE-2020-25650, CVE-2020-25651, CVE-2020-25652,
+CVE-2020-25653* Fix shutdown issue due to incompatible thread/fork
+uses with GLib* Fix mouse pointer issues under Wayland* Fix a crash
+when running without dbus (e.g: within containers)* !9  - Introduce
+optional GTK4 support for monitor management* !13 - Enable copying
+files from client using webdav* Bump spice-protocol dependency to
+v0.14.3
+
+Best regards,
+
+Julien
+
+--00000000000043d6dc05b8d81d48
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br clear=3D"all"><div><pre style=3D"white-space:pre-wrap;=
+color:rgb(0,0,0)">Hi all,
+
+spice-vdagent 0.21.0 is now available.</pre><pre style=3D"white-space:pre-w=
+rap;color:rgb(0,0,0)">In case of bugs or requests, please file them at our =
+issue
+tracker:
+
+  <a href=3D"https://gitlab.freedesktop.org/groups/spice/-/issues">https://=
+gitlab.freedesktop.org/groups/spice/-/issues</a>
+
+Release:
+   <a href=3D"https://www.spice-space.org/download/releases/spice-vdagent-0=
+.21.0.tar.bz2">https://www.spice-space.org/download/releases/spice-vdagent-=
+0.21.0.tar.bz2</a>
+   <a href=3D"https://www.spice-space.org/download/releases/spice-vdagent-0=
+.21.0.tar.bz2.sha256sum">https://www.spice-space.org/download/releases/spic=
+e-vdagent-0.21.0.tar.bz2.sha256sum</a>
+   <a href=3D"https://www.spice-space.org/download/releases/spice-vdagent-0=
+.21.0.tar.bz2.sig">https://www.spice-space.org/download/releases/spice-vdag=
+ent-0.21.0.tar.bz2.sig</a>
+
+And also:
+    <a href=3D"https://gitlab.freedesktop.org/spice/linux/vd_agent/-/tags/s=
+pice-vdagent-0.21.0">https://gitlab.freedesktop.org/spice/linux/vd_agent/-/=
+tags/spice-vdagent-0.21.0</a>=20
+
+These releases are signed with GPG key:
+
+ 3D01 51CD 86CB 514B A776  7EDA 72A9 CCB6 7FDA B9AF<br>
+Major changes in 0.20.0
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+<pre class=3D"gmail-code gmail-highlight" lang=3D"markdown"><span id=3D"gma=
+il-LC7" class=3D"gmail-line" lang=3D"markdown"><span class=3D"gmail-p">*</s=
+pan> Security fixes:</span>
+<span id=3D"gmail-LC8" class=3D"gmail-line" lang=3D"markdown">  CVE-2020-25=
+650, CVE-2020-25651, CVE-2020-25652, CVE-2020-25653</span>
+<span id=3D"gmail-LC9" class=3D"gmail-line" lang=3D"markdown"><span class=
+=3D"gmail-p">*</span> Fix shutdown issue due to incompatible thread/fork us=
+es with GLib</span>
+<span id=3D"gmail-LC10" class=3D"gmail-line" lang=3D"markdown"><span class=
+=3D"gmail-p">*</span> Fix mouse pointer issues under Wayland</span>
+<span id=3D"gmail-LC11" class=3D"gmail-line" lang=3D"markdown"><span class=
+=3D"gmail-p">*</span> Fix a crash when running without dbus (e.g: within co=
+ntainers)</span>
+<span id=3D"gmail-LC12" class=3D"gmail-line" lang=3D"markdown"><span class=
+=3D"gmail-p">*</span> !9  - Introduce optional GTK4 support for monitor man=
+agement</span>
+<span id=3D"gmail-LC13" class=3D"gmail-line" lang=3D"markdown"><span class=
+=3D"gmail-p">*</span> !13 - Enable copying files from client using webdav</=
+span>
+<span id=3D"gmail-LC14" class=3D"gmail-line" lang=3D"markdown"><span class=
+=3D"gmail-p">*</span> Bump spice-protocol dependency to v0.14.3</span>
+</pre>
+Best regards,</pre><pre style=3D"white-space:pre-wrap;color:rgb(0,0,0)">Jul=
+ien</pre><pre style=3D"white-space:pre-wrap;color:rgb(0,0,0)"><br></pre></d=
+iv><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signa=
+ture"><div dir=3D"ltr"><div><div dir=3D"ltr"><div></div></div></div></div><=
+/div></div>
+
+--00000000000043d6dc05b8d81d48--
+
+
+--===============1791827063==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============1791827063==--
+
