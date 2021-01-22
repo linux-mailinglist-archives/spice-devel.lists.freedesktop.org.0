@@ -2,40 +2,31 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CB812FFDBB
-	for <lists+spice-devel@lfdr.de>; Fri, 22 Jan 2021 08:58:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1ED82FFDDA
+	for <lists+spice-devel@lfdr.de>; Fri, 22 Jan 2021 09:06:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7822E6E9B2;
-	Fri, 22 Jan 2021 07:58:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 09F7B89F4F;
+	Fri, 22 Jan 2021 08:06:13 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F222D6E979;
- Thu, 21 Jan 2021 23:04:03 +0000 (UTC)
-Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
- [62.78.145.57])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 2451050E;
- Fri, 22 Jan 2021 00:04:01 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1611270241;
- bh=T5NVDr46xcwrXL27T8VCCkqqocibkcaVgjkVgGiO8ZY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Y8cyClLX8kCaKU5wMc7DQBaagAtpgNWmTZ3+p386BcnpRP0PMgaNeQ9iuSFglc0Sw
- yxD8mSPCVAnyIXOWj5xsNFm7Htaoj3caG3DKUBN0MGRlEjztlQ48iKJbFja/DHFBKL
- ztANltlmDf+im+ixzdUmFqsBKC+TOLRQSVr+juDg=
-Date: Fri, 22 Jan 2021 01:03:42 +0200
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Maxime Ripard <maxime@cerno.tech>
-Message-ID: <YAoITqHbG1UeiAHV@pendragon.ideasonboard.com>
-References: <20210121163537.1466118-1-maxime@cerno.tech>
- <20210121163537.1466118-9-maxime@cerno.tech>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7049F89E65;
+ Fri, 22 Jan 2021 08:06:11 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 086F7AB9F;
+ Fri, 22 Jan 2021 08:06:10 +0000 (UTC)
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+References: <20210120111240.2509679-1-kraxel@redhat.com>
+ <20210120111240.2509679-2-kraxel@redhat.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <8988c58f-6ee1-60b7-58dd-a402040e3bce@suse.de>
+Date: Fri, 22 Jan 2021 09:06:08 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210121163537.1466118-9-maxime@cerno.tech>
-X-Mailman-Approved-At: Fri, 22 Jan 2021 07:58:35 +0000
-Subject: Re: [Spice-devel] [PATCH v2 09/11] drm/atomic: Pass the full state
- to planes atomic disable and update
+In-Reply-To: <20210120111240.2509679-2-kraxel@redhat.com>
+Subject: Re: [Spice-devel] [PATCH v3 1/4] drm/qxl: use drmm_mode_config_init
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,257 +38,124 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- Xinliang Liu <xinliang.liu@linaro.org>, dri-devel@lists.freedesktop.org,
- Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
- linux-stm32@st-md-mailman.stormreply.com, Jerome Brunet <jbrunet@baylibre.com>,
- linux-samsung-soc@vger.kernel.org, Vincent Abriou <vincent.abriou@st.com>,
- Michal Simek <michal.simek@xilinx.com>,
- Ludovic Desroches <ludovic.desroches@microchip.com>,
- NXP Linux Team <linux-imx@nxp.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Sascha Hauer <s.hauer@pengutronix.de>, Roland Scheidegger <sroland@vmware.com>,
- Inki Dae <inki.dae@samsung.com>, Sean Paul <sean@poorly.run>,
- Hyun Kwon <hyun.kwon@xilinx.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- linux-kernel@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>,
- freedreno@lists.freedesktop.org, Zack Rusin <zackr@vmware.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- David Airlie <airlied@linux.ie>, Edmund Dea <edmund.j.dea@intel.com>,
- virtualization@lists.linux-foundation.org, Eric Anholt <eric@anholt.net>,
- Thierry Reding <thierry.reding@gmail.com>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Mihail Atanassov <mihail.atanassov@arm.com>,
- Fabio Estevam <festevam@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
- Jonathan Hunter <jonathanh@nvidia.com>, linux-rockchip@lists.infradead.org,
- "James \(Qian\) Wang" <james.qian.wang@arm.com>,
- Dave Airlie <airlied@redhat.com>, Alexandre Torgue <alexandre.torgue@st.com>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- linux-arm-msm@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
- John Stultz <john.stultz@linaro.org>, linux-amlogic@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org,
- Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
- Boris Brezillon <bbrezillon@kernel.org>, Sandy Huang <hjc@rock-chips.com>,
- Yannick Fertre <yannick.fertre@st.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Kevin Hilman <khilman@baylibre.com>, Brian Starkey <brian.starkey@arm.com>,
- Haneen Mohammed <hamohammed.sa@gmail.com>,
- Neil Armstrong <narmstrong@baylibre.com>, Stefan Agner <stefan@agner.ch>,
- Melissa Wen <melissa.srw@gmail.com>, linux-tegra@vger.kernel.org,
- Gerd Hoffmann <kraxel@redhat.com>,
- Benjamin Gaignard <benjamin.gaignard@linaro.org>,
- Sam Ravnborg <sam@ravnborg.org>, Xinwei Kong <kong.kongxinwei@hisilicon.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, Chen Feng <puck.chen@hisilicon.com>,
- Alison Wang <alison.wang@nxp.com>, spice-devel@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Tomi Valkeinen <tomba@kernel.org>,
- Philippe Cornu <philippe.cornu@st.com>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
- Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
- Liviu Dudau <liviu.dudau@arm.com>, Nicolas Ferre <nicolas.ferre@microchip.com>,
- Paul Cercueil <paul@crapouillou.net>, Marek Vasut <marex@denx.de>,
- linux-renesas-soc@vger.kernel.org, Joonyoung Shim <jy0922.shim@samsung.com>,
- Russell King <linux@armlinux.org.uk>, Thomas Zimmermann <tzimmermann@suse.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Hans de Goede <hdegoede@redhat.com>, linux-mediatek@lists.infradead.org,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Jernej Skrabec <jernej.skrabec@siol.net>, linux-mips@vger.kernel.org,
- Rob Clark <robdclark@gmail.com>, Philipp Zabel <p.zabel@pengutronix.de>,
- Jyri Sarha <jyri.sarha@iki.fi>, Lucas Stach <l.stach@pengutronix.de>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: multipart/mixed; boundary="===============0883975149=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Maxime,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0883975149==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="L5u4lsu2LyjYt2nFvFiZz28cTTZkO1L4F"
 
-Thank you for the patch.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--L5u4lsu2LyjYt2nFvFiZz28cTTZkO1L4F
+Content-Type: multipart/mixed; boundary="8WbsdIL5Uw82v3Wn0JToA9byK1kZ0oGHP";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+Message-ID: <8988c58f-6ee1-60b7-58dd-a402040e3bce@suse.de>
+Subject: Re: [PATCH v3 1/4] drm/qxl: use drmm_mode_config_init
+References: <20210120111240.2509679-1-kraxel@redhat.com>
+ <20210120111240.2509679-2-kraxel@redhat.com>
+In-Reply-To: <20210120111240.2509679-2-kraxel@redhat.com>
 
-On Thu, Jan 21, 2021 at 05:35:34PM +0100, Maxime Ripard wrote:
-> The current atomic helpers have either their object state being passed as
-> an argument or the full atomic state.
-> 
-> The former is the pattern that was done at first, before switching to the
-> latter for new hooks or when it was needed.
-> 
-> Let's convert the remaining helpers to provide a consistent interface,
-> this time with the planes atomic_update and atomic_disable.
-> 
-> The conversion was done using the coccinelle script below, built tested on
-> all the drivers.
-> 
-> @@
-> identifier plane, plane_state;
-> symbol state;
-> @@
-> 
->  struct drm_plane_helper_funcs {
->  	...
-> 	void (*atomic_update)(struct drm_plane *plane,
-> -			      struct drm_plane_state *plane_state);
-> +			      struct drm_atomic_state *state);
->  	...
->  }
-> 
-> @@
-> identifier plane, plane_state;
-> symbol state;
-> @@
-> 
->  struct drm_plane_helper_funcs {
-> 	...
-> 	void (*atomic_disable)(struct drm_plane *plane,
-> -			       struct drm_plane_state *plane_state);
-> +			       struct drm_atomic_state *state);
-> 	...
->  }
-> 
-> @ plane_atomic_func @
-> identifier helpers;
-> identifier func;
-> @@
-> 
-> (
->  static const struct drm_plane_helper_funcs helpers = {
->  	...,
->  	.atomic_update = func,
-> 	...,
->  };
-> |
->  static const struct drm_plane_helper_funcs helpers = {
->  	...,
->  	.atomic_disable = func,
-> 	...,
->  };
-> )
-> 
-> @@
-> struct drm_plane_helper_funcs *FUNCS;
-> identifier f;
-> identifier crtc_state;
-> identifier plane, plane_state, state;
-> expression e;
-> @@
-> 
->  f(struct drm_crtc_state *crtc_state)
->  {
->  	...
->  	struct drm_atomic_state *state = e;
->  	<+...
-> (
-> -	FUNCS->atomic_disable(plane, plane_state)
-> +	FUNCS->atomic_disable(plane, state)
-> |
-> -	FUNCS->atomic_update(plane, plane_state)
-> +	FUNCS->atomic_update(plane, state)
-> )
->  	...+>
->  }
-> 
-> @@
-> identifier plane_atomic_func.func;
-> identifier plane;
-> symbol state;
-> @@
-> 
->  func(struct drm_plane *plane,
-> -    struct drm_plane_state *state)
-> +    struct drm_plane_state *old_plane_state)
->  {
-> 	<...
-> -	state
-> +	old_plane_state
-> 	...>
->  }
-> 
-> @ ignores_old_state @
-> identifier plane_atomic_func.func;
-> identifier plane, old_state;
-> @@
-> 
->  func(struct drm_plane *plane, struct drm_plane_state *old_state)
->  {
-> 	... when != old_state
->  }
-> 
-> @ adds_old_state depends on plane_atomic_func && !ignores_old_state @
-> identifier plane_atomic_func.func;
-> identifier plane, plane_state;
-> @@
-> 
->  func(struct drm_plane *plane, struct drm_plane_state *plane_state)
->  {
-> +	struct drm_plane_state *plane_state = drm_atomic_get_old_plane_state(state, plane);
->  	...
->  }
-> 
-> @ depends on plane_atomic_func @
-> identifier plane_atomic_func.func;
-> identifier plane, plane_state;
-> @@
-> 
->  func(struct drm_plane *plane,
-> -     struct drm_plane_state *plane_state
-> +     struct drm_atomic_state *state
->      )
->  { ... }
-> 
-> @ include depends on adds_old_state @
-> @@
-> 
->  #include <drm/drm_atomic.h>
-> 
-> @ no_include depends on !include && adds_old_state @
-> @@
-> 
-> + #include <drm/drm_atomic.h>
->   #include <drm/...>
-> 
-> @@
-> identifier plane_atomic_func.func;
-> identifier plane, state;
-> identifier plane_state;
-> @@
-> 
->  func(struct drm_plane *plane, struct drm_atomic_state *state) {
->  	...
->  	struct drm_plane_state *plane_state = drm_atomic_get_old_plane_state(state, plane);
->  	<+...
-> -	plane_state->state
-> +	state
->  	...+>
->  }
-> 
-> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> 
+--8WbsdIL5Uw82v3Wn0JToA9byK1kZ0oGHP
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Am 20.01.21 um 12:12 schrieb Gerd Hoffmann:
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+
 > ---
-> 
-> Changes from v1:
->   - Reintroduce the old_plane_state check in zynqmp_disp_crtc_atomic_disable
-> ---
->  drivers/gpu/drm/drm_atomic_helper.c               |  8 ++++----
->  drivers/gpu/drm/drm_simple_kms_helper.c           |  4 +++-
->  drivers/gpu/drm/mxsfb/mxsfb_kms.c                 |  6 ++++--
->  drivers/gpu/drm/omapdrm/omap_plane.c              |  4 ++--
->  drivers/gpu/drm/rcar-du/rcar_du_plane.c           |  4 +++-
->  drivers/gpu/drm/rcar-du/rcar_du_vsp.c             |  4 +++-
->  drivers/gpu/drm/tidss/tidss_plane.c               |  4 ++--
->  drivers/gpu/drm/tilcdc/tilcdc_plane.c             |  2 +-
->  drivers/gpu/drm/xlnx/zynqmp_disp.c                | 15 ++++++++-------
->  include/drm/drm_modeset_helper_vtables.h          |  4 ++--
+>   drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qx=
+l_display.c
+> index 012bce0cdb65..38d6b596094d 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -1195,7 +1195,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+>   	int i;
+>   	int ret;
+>  =20
+> -	drm_mode_config_init(&qdev->ddev);
+> +	ret =3D drmm_mode_config_init(&qdev->ddev);
+> +	if (ret)
+> +		return ret;
+>  =20
+>   	ret =3D qxl_create_monitors_object(qdev);
+>   	if (ret)
+> @@ -1228,5 +1230,4 @@ int qxl_modeset_init(struct qxl_device *qdev)
+>   void qxl_modeset_fini(struct qxl_device *qdev)
+>   {
+>   	qxl_destroy_monitors_object(qdev);
+> -	drm_mode_config_cleanup(&qdev->ddev);
+>   }
+>=20
 
-For these,
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 
->  58 files changed, 211 insertions(+), 123 deletions(-)
+--8WbsdIL5Uw82v3Wn0JToA9byK1kZ0oGHP--
 
--- 
-Regards,
+--L5u4lsu2LyjYt2nFvFiZz28cTTZkO1L4F
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-Laurent Pinchart
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAKh3AFAwAAAAAACgkQlh/E3EQov+Cj
+rxAAiqNcLRt/tMMPI7b9KfBqOr7G+fMePF7aVUMfgQmjciB0GV9ScIkclwElPluhFSfG8MRU8zXK
+9FwuFFCny0msMQE620P1fe9gLmh1AG8koraebgXyOqYuKnY9BwgUbueOv8sJkeiQt5mjIN0McYRx
+GdLVoRO27f2pDv4eBvQbT1FlnV9J7E4D/VMiA6ZayDHwTxN2tw06XEj0J1MQsBagb1cypBy9WbN2
+ql1R5AsHKTm4bwhT/+C91qJcCCJB1J7Gg1zX6lOH7pBSQF7JL8a1qvhwQ8+fVKtsIdrvNzj4heja
++HzzyLo+Wq9liMPtzoCKvf2MXEZsSrO/bboSI7lJ9KoH9o3D1QaxbIqaWhHBj0vfxYVfpt3Bxhms
+VARBhKRffVTv50K22NQFDwXldIo7jh9mC9NT15Q/ljjdV7cfdMFFKAVqedXqAirgx8JnXSqQW+jX
+gctBygpRXK8BlL07XVl2U0v6PR/adrHAXSZcAY57sjWpJmHY8zK8YLqsKLHO6bgrj87wlUSs/CiE
+pE63WaorEGMt3kV3sNrjvq7v90WviQjgiw8SiHJaeE4Bnby2jd6Iirrup9sc0/Lw+VsTIcYb7fmh
+AF/Fk2E3HhNXLhip1ydVVjMVF3iS+lv4pciAdSMU1SQErAPf+y5WEEiVzH2vfTDpKUz20OyvEkMN
+Ljs=
+=cNm8
+-----END PGP SIGNATURE-----
+
+--L5u4lsu2LyjYt2nFvFiZz28cTTZkO1L4F--
+
+--===============0883975149==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0883975149==--
