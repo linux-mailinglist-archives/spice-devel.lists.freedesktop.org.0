@@ -1,62 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BF2A301BBF
-	for <lists+spice-devel@lfdr.de>; Sun, 24 Jan 2021 13:07:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DE3D3024DE
+	for <lists+spice-devel@lfdr.de>; Mon, 25 Jan 2021 13:26:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EFA0B89D64;
-	Sun, 24 Jan 2021 12:07:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6489E6E0A1;
+	Mon, 25 Jan 2021 12:16:28 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A79826E218
- for <spice-devel@lists.freedesktop.org>; Sat, 23 Jan 2021 19:10:37 +0000 (UTC)
-Received: by mail-lf1-x135.google.com with SMTP id f1so2393222lfu.3
- for <spice-devel@lists.freedesktop.org>; Sat, 23 Jan 2021 11:10:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=to:from:subject:message-id:date:user-agent:mime-version
- :content-transfer-encoding:content-language;
- bh=klL3NedjXN1uE9rS2JYHejONldUP9ENfDBsmwEkOI7o=;
- b=ftyRgQq7fqa9jqz1acOI5UM7SgwVV8+WC4ZSgRO0G5AburmYJ2JkrP06mzmXFRNqmk
- kffGWRwu5vrmiAQ1UOfr7Za+O2ZPO2RBEDs08wdq09bURf9gxafBWeebJklJbcY6wpSt
- Jzys8FWkhWku5IOVBWvittCcjmJLVWVIW9aYf4PIQhUc3UPHXQj6uuJ0D6Wh7Km89aTd
- dWzobWL/J4R26EoKZvvq/4imMBFWcRwACz2xPynLDQG534wy18hVjpHGVQDY+LuVI18t
- h78++uKp3FXHmCWJdBjlQkmtJ0EJlwF4a+Nkjzqr4nsVDNQJmOnNcjUL7cnkDGln3pKG
- touA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:to:from:subject:message-id:date:user-agent
- :mime-version:content-transfer-encoding:content-language;
- bh=klL3NedjXN1uE9rS2JYHejONldUP9ENfDBsmwEkOI7o=;
- b=ijE/HORMSsN6w7f1Wt+jG4J/m5SjFq4VMcUPrYIwpfx+HPBSQPN20UB4hdIjwf5yWX
- uScqx8xolUDlUo+Oh2blkGDZUuQSZw1hsQ0v1yVdKkYj/vaMRy3+DaMOKtBF58XjQ49y
- MVBBrbzjmoWNGeERK+UPD2X/tnOPNdTgMfRUss6QmYx7Ri+hjf6UAGWR8xJSkhoecUTW
- mBeiqOvEOPXjv7FzBRnYqV7KOVOqLFVvm/e+ZN3j1ZOp6qyKEsnxX23KgX1L5YktweV6
- 9LsWUZH5jxlos40JPQVB0YJzXOnAavy2pcbSpYHy71ZDvjArGXyVnvCVgMo0PnUfy9w7
- 9Xuw==
-X-Gm-Message-State: AOAM530gjHcHQZVGP1ARKuAj1/NDM5CYdrx/NFcUlrtGZ0Yf8TClt0M8
- t9e4xmbOonNEMI0tumUnti3ujnTOwZodww==
-X-Google-Smtp-Source: ABdhPJyU+Wt0o/5JgRhjsnpIVyJ0xtqo80CSEcMWYA+d1MXhpFHLDuO/2B2wN+SFOUWMwB3+Av3J+g==
-X-Received: by 2002:ac2:551e:: with SMTP id j30mr454290lfk.595.1611429035582; 
- Sat, 23 Jan 2021 11:10:35 -0800 (PST)
-Received: from ?IPv6:2a03:1ac0:6dc3:311::1? ([2a03:1ac0:6dc3:311::1])
- by smtp.gmail.com with ESMTPSA id z8sm1293043ljk.88.2021.01.23.11.10.34
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 23 Jan 2021 11:10:35 -0800 (PST)
-To: spice-devel@lists.freedesktop.org
-From: =?UTF-8?B?0LjQu9GM0Y8g0L/QsNGJ0YPQug==?= <ilusha.paschuk@gmail.com>
-Message-ID: <515db8c9-723a-8211-05d1-b6e49386e666@gmail.com>
-Date: Sat, 23 Jan 2021 22:10:27 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E9C9C6E0AF
+ for <spice-devel@lists.freedesktop.org>; Mon, 25 Jan 2021 12:16:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1611576985;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=OcdVLRRdgBx5PAA8S6DFEnpuC3aQxaux8RhxdrxChZA=;
+ b=d0AfgLg4RG5XB15JcslpoIar5n1wnyfm/IUqNfYOdDUoW8ME+47cZrePaNGMAIFHy2QMC6
+ dGa7Dz0S6DjeghgqY/zkIfQpYRIammDICymQWFYSnBHd+6D4Br0uqAAvtT4Q4yzDaLwOjU
+ Of50KVB2nuqudnNhW9XI63F7qWXr/3E=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-198-8YSlVxJtP4G0aOtk8Y-r5w-1; Mon, 25 Jan 2021 07:16:23 -0500
+X-MC-Unique: 8YSlVxJtP4G0aOtk8Y-r5w-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 263341934101;
+ Mon, 25 Jan 2021 12:16:22 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-113-27.ams2.redhat.com
+ [10.36.113.27])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 6D51210013BD;
+ Mon, 25 Jan 2021 12:16:21 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 84FB31800393; Mon, 25 Jan 2021 13:16:19 +0100 (CET)
+Date: Mon, 25 Jan 2021 13:16:19 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+Message-ID: <20210125121619.7w3flilhe5juiuyf@sirius.home.kraxel.org>
+References: <20210120111240.2509679-1-kraxel@redhat.com>
+ <20210120111240.2509679-3-kraxel@redhat.com>
+ <a4187459-1dbd-e799-fba4-bf7021de831b@suse.de>
+ <20210122133545.acloe4ytgp6r4iql@sirius.home.kraxel.org>
+ <CAKMK7uHeQt6VPkm0ufuVVxdGQkmq3+1vrDERzZS54rtcVhJRAw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Language: en-US
-X-Mailman-Approved-At: Sun, 24 Jan 2021 12:07:01 +0000
-Subject: [Spice-devel] disable atspi keystrokes capturing when keyboard is
- grapped
+Content-Disposition: inline
+In-Reply-To: <CAKMK7uHeQt6VPkm0ufuVVxdGQkmq3+1vrDERzZS54rtcVhJRAw@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Subject: Re: [Spice-devel] [PATCH v3 2/4] drm/qxl: unpin release objects
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,18 +63,58 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-please sea the details in the following github issue:
+> > Just calling ttm_bo_unpin() here makes lockdep unhappy.
+> 
+> How does that one splat? But yeah if that's a problem should be
+> explained in the comment. I'd then also only do a pin_count--; to make
+> sure you can still catch other pin leaks if you have them. Setting it
+> to 0 kinda defeats the warning.
 
-https://github.com/virt-manager/virt-manager/issues/206
+Figured the unpin is at the completely wrong place while trying to
+reproduce the lockdep splat ...
 
+take care,
+  Gerd
 
-they refered to this library as a target to implement feature about i'm 
-asking.
+From 43befab4a935114e8620af62781666fa81288255 Mon Sep 17 00:00:00 2001
+From: Gerd Hoffmann <kraxel@redhat.com>
+Date: Mon, 25 Jan 2021 13:10:50 +0100
+Subject: [PATCH] drm/qxl: unpin release objects
+
+Balances the qxl_create_bo(..., pinned=true, ...);
+call in qxl_release_bo_alloc().
+
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_release.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
+index c52412724c26..28013fd1f8ea 100644
+--- a/drivers/gpu/drm/qxl/qxl_release.c
++++ b/drivers/gpu/drm/qxl/qxl_release.c
+@@ -347,6 +347,7 @@ int qxl_alloc_release_reserved(struct qxl_device *qdev, unsigned long size,
+ 
+ 	mutex_lock(&qdev->release_mutex);
+ 	if (qdev->current_release_bo_offset[cur_idx] + 1 >= releases_per_bo[cur_idx]) {
++		qxl_bo_unpin(qdev->current_release_bo[cur_idx]);
+ 		qxl_bo_unref(&qdev->current_release_bo[cur_idx]);
+ 		qdev->current_release_bo_offset[cur_idx] = 0;
+ 		qdev->current_release_bo[cur_idx] = NULL;
+-- 
+2.29.2
 
 _______________________________________________
 Spice-devel mailing list
