@@ -1,82 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB581306E95
-	for <lists+spice-devel@lfdr.de>; Thu, 28 Jan 2021 08:18:36 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 20D80307F70
+	for <lists+spice-devel@lfdr.de>; Thu, 28 Jan 2021 21:21:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3478D89994;
-	Thu, 28 Jan 2021 07:18:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 765256EA10;
+	Thu, 28 Jan 2021 20:21:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from EUR06-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur06olkn2015.outbound.protection.outlook.com [40.92.51.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BC15B89994
- for <spice-devel@lists.freedesktop.org>; Thu, 28 Jan 2021 07:18:33 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ur8wuARwUlc8xRjQJ9IjPVR4pFy21mnGSNg5O9CFxxamYFFGtqYnTsqv22YRcsEdpCCZCZSvG6HDFZN7SzyGQWMUdd30Zhf8xCIjLXow43eQzwmGhAK+9rJnhFKUmV+65fyKRBHD7aHTwqxNlMu6LfNu5mXvCbTrLfYcFLj8h9yihskM9CQeiaKZUSIxsXRAB7qlKer7dFg03UZayVh/Qwe0/3BeCAl14cMTT2Ow6L0HcUOr2mT+qcxqjB1FTJYbonv2i/5/gw4c2jAFyN0FmZJLbSSpFNZ4cgSZSHNegIrHaZSLyE21SUOGZrDIlbYtX8msoQtgcuBvKTTIAG6JwQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sSczrHmJYfWuMLbusVv5flMQW8AVN1vC3F0LEjaarso=;
- b=MU87gcxbqFFXAc2sq2AfoDzSLtk6u7UkgqMIk79d8gMptZXSm8loFNOMI2HiBZyzCY/DJbGwFXXw1TIx1uD9ee8Kw34hTGNaPhD+0S6458TJe7iw+IZyXY6XHhdHwWKFI8XgqRy6pLSjdtrce9aXfljmjp8yl/hleOK525HO0+0dLqKi6cW0d4k8eqmtf/8XiNG2oFjeZV1RJB5IeGQJhtBWHGBiwFsIl9LqI5FDmlgRyUZjYYexULJSrQne3K1XRRxcBdUGa+2MXLGB9G8eJlUE1SMGvQUeajSR3SxWGbBZcAI7m8kT/3hs9lFem2/dgUGULFb3RaCLHiIPudK/UA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sSczrHmJYfWuMLbusVv5flMQW8AVN1vC3F0LEjaarso=;
- b=W+b2Ec3vwg8jXwoDNp48WgUWxa1u1orRbl5MS6mpW/ZP+icwVO1DunEs8FfP/sjf76HaRCDugn4EmJVp623lHQaAIZd06O2luru5rd7WUSSF4Xu8QCxMVg1HSDx6ADNnUgRDz13f19wfmHmeqU5IwdxDYBZmSXzD9npjtOggRjrsAgO2CIVN3jod07ORrhupMLFh0ebig8kBuBXJcUW/XZfU8B7VKlSXrshVDPqDnJuMTlwF5rQ2Ro0tQxIcJ/JO1m6UM1p3v1GdcSOv568oUbIeSGDGXk/cM2g2L9FlkNncPakvqqwVnB4dwchUSPe0ki8LLkfijO0KVWWTWJA5vA==
-Received: from VI1EUR06FT061.eop-eur06.prod.protection.outlook.com
- (2a01:111:e400:fc37::40) by
- VI1EUR06HT213.eop-eur06.prod.protection.outlook.com (2a01:111:e400:fc37::296)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.11; Thu, 28 Jan
- 2021 07:18:27 +0000
-Received: from AS8P190MB1255.EURP190.PROD.OUTLOOK.COM (2a01:111:e400:fc37::46)
- by VI1EUR06FT061.mail.protection.outlook.com
- (2a01:111:e400:fc37::101) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.11 via Frontend
- Transport; Thu, 28 Jan 2021 07:18:27 +0000
-Received: from AS8P190MB1255.EURP190.PROD.OUTLOOK.COM
- ([fe80::d51f:dfd:a058:387a]) by AS8P190MB1255.EURP190.PROD.OUTLOOK.COM
- ([fe80::d51f:dfd:a058:387a%4]) with mapi id 15.20.3784.019; Thu, 28 Jan 2021
- 07:18:27 +0000
-From: alireza kahdoyee <alireza.kahdooee@hotmail.com>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Thread-Topic: Activate the spice console password when vm is on
-Thread-Index: AQHW9UWENj7TDaKn3kyKL6pBTixjCA==
-Date: Thu, 28 Jan 2021 07:18:27 +0000
-Message-ID: <AS8P190MB12557CD1CE3EEA6D1D1AA2778FBA9@AS8P190MB1255.EURP190.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-incomingtopheadermarker: OriginalChecksum:6A6EBB06ABE67EA4818391A40CBB81B29791745471D3E2235D83A13A6A5449F4;
- UpperCasedChecksum:8FD95D1A549C25E100875C1857121561F6230B8C3D1A19329F818CEA8A72C817;
- SizeAsReceived:6667; Count:41
-x-tmn: [1gU1fI+VdPiAGKyGSJ1hJXbtRVvedB8F]
-x-ms-publictraffictype: Email
-x-incomingheadercount: 41
-x-eopattributedmessage: 0
-x-ms-office365-filtering-correlation-id: 22a90d9c-7358-41db-43f4-08d8c35ce864
-x-ms-traffictypediagnostic: VI1EUR06HT213:
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: DX4z1s4+ezzj6ufjYkav38G9Mk54B23C0PKxxpl+Jg1TfuzDZxUUuTAEddJGs2en2kTnttZAKYQbxzcSbAcUglWr5l6bbo4vDdsJ1nHzFw7fa55rOvaWEPCfb+9eCkMHnghIexTEw4GUNfFANpe6RJbO3VYdfuuCcv2Ll9ah8Cuq9uX8NjItlj55Gzjez+E3V4hziQalre1hagYdKdDNmmF0eyGPdKliHN1EYjsSprMK/VsKX9Ja/0DSKjfqAk3AKfYy5he7/fb99E0d/A/ysLMCf/HiliuuDopXF5Uzh2+vBvRRL9ASd+Vepq2x8NOs51wLGaMtXBcGONmhZ1UmFXqbOfCFkIPALsb8IfjvG3FTNFNVnlzNVw0gewnBVVjLGRQCJtNbXfqf/dgORXfT0Q==
-x-ms-exchange-antispam-messagedata: LxDnVuujhzVTz6LNqXD6SzWp1ySjuac9kXLLFPlg2oLj/fSHFGGJncLyBefY2nUuYbU5m5fQgTIbHJSdvIKsEGq7Lpc64ivuqdTTpIDyRHMd46RO0mPAplN6SJK7DxmQwyajG+UaSUsO04RNnmqmuw==
-x-ms-exchange-transport-forked: True
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 254A06EA10
+ for <spice-devel@lists.freedesktop.org>; Thu, 28 Jan 2021 20:21:35 +0000 (UTC)
+Received: by mail-pl1-x62b.google.com with SMTP id d4so3985086plh.5
+ for <spice-devel@lists.freedesktop.org>; Thu, 28 Jan 2021 12:21:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=eoQYDPybAIcillnmAGMZfbKeaGa0yj+EiJXkM7Jo2Mw=;
+ b=fAmNynw+6gV5e9CsUH1QGuPUfzQDyuxqcpldnOroGYQZ3gu11dfhXn0QUrgdAJuOl+
+ 4VLNdZcuBEwY1OXyX5ulzqLK/vPoruZ+hAM5zGZitXjoO+CFEUNmcL8tdG1qfRbFFm0U
+ j/ezFGa7MJiuhX4J3WtQUTF6/zAGYSoqeWs+qgn7cntI0YBoANmWwY2f4+SP3JSr7izy
+ tx0VPQNTU77dVn2YpW1ulE299pxYW0qIf1qgIl22obDjYQWB5foMkaBKXNx4GLUwJVHe
+ YV4czqJ983di87yj2JATO2DSSlZEpCKFEYwtlGkTXvVYNuo8TBQUgjCZtjLLelSxUjHB
+ TL1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=eoQYDPybAIcillnmAGMZfbKeaGa0yj+EiJXkM7Jo2Mw=;
+ b=cuPTk0vJAKsd0SArnrVgleeSWvSSb8tJJZQ7swFtHMdhEoiqRUf3/1HvzDKWQTn7Ru
+ 0zI36Zc8QB9NaYOUTNq+ghtoYEppuqJ0SsuKDkflUs+XyISBPZIQuRF1KdLshhQgt0Eb
+ ueooAOZmZDWfJJLb29VgvIRuHggLKwKP4o2fAsehLTmqVmky5O1iEbB/jdpAE3UPa0uo
+ NzSdBkY4IV7RawRpb/1UZj/ugZcjmnTEnpHhTDmbXMh6cmddx070UsY2AEfLnxOjva76
+ CohRMc6cQvxo6Udb5LHehIRmD7svjl55NF01Zkqzp2OSW+MVEjm6aDsm+M3E7FcUTOub
+ bJRQ==
+X-Gm-Message-State: AOAM530XMUuwxnE8tJjCP5Qyk39ndnVVziEpzqX7AkdGxV4W6G4dvxou
+ 4KkKk7BQg92PDvz2Jdhc4rXDsj2gzLY5FOjb/YM=
+X-Google-Smtp-Source: ABdhPJwHrZiGC7YW9VId1Jna1OMmFu1YGNtmNZk7PSMNHCKqH6Vrl+sk66eeT8OjVvMmqfV1GSdN7t1VIYX+lca8o/0=
+X-Received: by 2002:a17:90b:370d:: with SMTP id
+ mg13mr1032825pjb.161.1611865294730; 
+ Thu, 28 Jan 2021 12:21:34 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: hotmail.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-AuthSource: VI1EUR06FT061.eop-eur06.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22a90d9c-7358-41db-43f4-08d8c35ce864
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jan 2021 07:18:27.5212 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Internet
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1EUR06HT213
-Subject: [Spice-devel] Activate the spice console password when vm is on
+References: <CA+5jrfnNQLRPxJneD_mYA1kB8fio97Doce4ZXe_ZX18hfkQ37A@mail.gmail.com>
+In-Reply-To: <CA+5jrfnNQLRPxJneD_mYA1kB8fio97Doce4ZXe_ZX18hfkQ37A@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 28 Jan 2021 20:21:23 +0000
+Message-ID: <CAHt6W4fgSB-5uBmfGgw2SWraRF+kp6PZpoZPQRuUwwm0w=MhFw@mail.gmail.com>
+To: lx <lxlenovostar@gmail.com>
+Subject: Re: [Spice-devel] [spice-devel]Sounds abnormal
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,56 +60,76 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1554788534=="
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1554788534==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_AS8P190MB12557CD1CE3EEA6D1D1AA2778FBA9AS8P190MB1255EURP_"
+Il giorno gio 28 gen 2021 alle ore 06:28 lx <lxlenovostar@gmail.com> ha scritto:
+>
+> Hi:
+>    I play audio in the virtual machine, and the local sound sounds abnormal. How to debug it ?
+>
 
---_000_AS8P190MB12557CD1CE3EEA6D1D1AA2778FBA9AS8P190MB1255EURP_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Enabling messages is a good way to start debugging.
+But what do you mean by abnormal? Have glitches? Interruptions?
+Different frequency?
 
-SGVsbG8gdG8gYWxsDQoNCkRlYXIgZnJpZW5kcywgaXMgaXQgcG9zc2libGUgdG8gYWN0aXZhdGUg
-YW5kIHNldCBhIHBhc3N3b3JkIGZvciBpdHMgc3BpY2UgY29uc29sZSB3aGVuIHZtIGlzIG9uPw0K
-DQp0aGFuayB5b3Ug8J+Zgg0K
+Frediano
 
---_000_AS8P190MB12557CD1CE3EEA6D1D1AA2778FBA9AS8P190MB1255EURP_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
-
-PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
-dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyIgc3R5bGU9
-ImRpc3BsYXk6bm9uZTsiPiBQIHttYXJnaW4tdG9wOjA7bWFyZ2luLWJvdHRvbTowO30gPC9zdHls
-ZT4NCjwvaGVhZD4NCjxib2R5IGRpcj0ibHRyIj4NCjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBD
-YWxpYnJpLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTJwdDsgY29sb3I6IHJn
-YigwLCAwLCAwKTsiPg0KSGVsbG8gdG8gYWxsPC9kaXY+DQo8ZGl2IHN0eWxlPSJmb250LWZhbWls
-eTogQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9y
-OiByZ2IoMCwgMCwgMCk7Ij4NCjxicj4NCjwvZGl2Pg0KPGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6
-IENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjog
-cmdiKDAsIDAsIDApOyI+DQpEZWFyIGZyaWVuZHMsIGlzIGl0IHBvc3NpYmxlIHRvIGFjdGl2YXRl
-IGFuZCBzZXQgYSBwYXNzd29yZCBmb3IgaXRzIHNwaWNlIGNvbnNvbGUgd2hlbiB2bSBpcyBvbj88
-L2Rpdj4NCjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBDYWxpYnJpLCBIZWx2ZXRpY2EsIHNhbnMt
-c2VyaWY7IGZvbnQtc2l6ZTogMTJwdDsgY29sb3I6IHJnYigwLCAwLCAwKTsiPg0KPGJyPg0KPC9k
-aXY+DQo8ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNl
-cmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij4NCnRoYW5rIHlvdSA8
-c3BhbiBpZD0i8J+ZgiI+8J+Zgjwvc3Bhbj48YnI+DQo8L2Rpdj4NCjwvYm9keT4NCjwvaHRtbD4N
-Cg==
-
---_000_AS8P190MB12557CD1CE3EEA6D1D1AA2778FBA9AS8P190MB1255EURP_--
-
---===============1554788534==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+> Additionally info:
+> libvirt-5.2.0, qemu-3.1.0, spice-0.14.0, spice-protocol-0.12.15, usbredir-0.8.0,spice-guest-tools-latest.exe
+> virtual Machine Viewer 9.0-256
+>
+> I run the virtViewer in this way:
+> #############################################################
+> C:\Program Files\VirtViewer v9.0-256\bin>set G_MESSAGES_DEBUG=all
+>
+> C:\Program Files\VirtViewer v9.0-256\bin>remote-viewer.exe --spice-debug
+> #############################################################
+>
+> The log is:
+> #############################################################
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.261: ../src/decode-glz.c:349 decode_header: 256x256, id 325, ref 278
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.343: ../src/decode-glz.c:349 decode_header: 256x256, id 326, ref 278
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.402: ../src/decode-glz.c:349 decode_header: 256x256, id 327, ref 278
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.452: ../src/decode-glz.c:349 decode_header: 256x256, id 328, ref 278
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.517: ../src/decode-glz.c:349 decode_header: 256x256, id 329, ref 278
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.560: ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.600725624, live 1
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.562: ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.565: ../src/spice-session.c:2413 set mm time: 1220884055
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.560: ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.600725624, live 1
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.562: ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.563: ../src/spice-session.c:2413 set mm time: 1220885051
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.564: ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220885053, new 1220885051
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.564: ../src/channel-display.c:1532 display-2:0: display_session_mm_time_reset_cb
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.559: ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.600725624, live 1
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.563: ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.567: ../src/spice-session.c:2413 set mm time: 1220886053
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.570: ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220886054, new 1220886053
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.576: ../src/channel-display.c:1532 display-2:0: display_session_mm_time_reset_cb
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.560: ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.600725624, live 1
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.570: ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.574: ../src/spice-session.c:2413 set mm time: 1220887049
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.579: ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220887059, new 1220887049
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.584: ../src/channel-display.c:1532 display-2:0: display_session_mm_time_reset_cb
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.560: ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.600725624, live 1
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.562: ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.562: ../src/spice-session.c:2413 set mm time: 1220888051
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.560: ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.600725624, live 1
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.560: ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.562: ../src/spice-session.c:2413 set mm time: 1220889053
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.560: ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.600725624, live 1
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.562: ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.565: ../src/spice-session.c:2413 set mm time: 1220890055
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.568: ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220890056, new 1220890055
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.571: ../src/channel-display.c:1532 display-2:0: display_session_mm_time_reset_cb
+> (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:39.469: ../src/spice-session.c:2413 set mm time: 1220891167
+> #############################################################
+>
+> Thank you
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============1554788534==--
