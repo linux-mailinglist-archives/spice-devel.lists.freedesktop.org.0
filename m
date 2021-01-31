@@ -2,55 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E33F3094B5
-	for <lists+spice-devel@lfdr.de>; Sat, 30 Jan 2021 12:26:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 623F2309C69
+	for <lists+spice-devel@lfdr.de>; Sun, 31 Jan 2021 14:48:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 56ED16E9CC;
-	Sat, 30 Jan 2021 11:26:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 664C36E091;
+	Sun, 31 Jan 2021 13:48:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CC4B96E9CC
- for <spice-devel@lists.freedesktop.org>; Sat, 30 Jan 2021 11:26:08 +0000 (UTC)
-Received: by mail-il1-x129.google.com with SMTP id m20so3410987ilj.13
- for <spice-devel@lists.freedesktop.org>; Sat, 30 Jan 2021 03:26:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gpcNfyDtdebeNK+gYB8FjdacuBUP4+MnL25py2298XI=;
- b=XzuHuII6mSS+xmHLEddRHvuUJBXhyLVEDq0Xs6kC63Y0A6v1Xzx1mPy4xgJtRRiQ0E
- OwE/ggf+7zufjQ3t7L9vBk8+HSvXfhrl8UxwBPsOpbPL7V57EHKGOD/vkquKT1v+cY/s
- v1K7JVahJDfzzNPTdlXDnZrx5zuD202vMDtiwPdxT+BnKWpDuRezpve/69/E+unmyfql
- 7rmY/NT31dBjezfhGHWEYlOFGFJSzvc4aYZ3zyoTk9WvjorteQVgtXJHgEftg20+6puX
- s0Wv/icpbxfwpsFFeeOQ4jAtB147+KLbKZC9ji9pTUBmVRv43vzStjgu+9AbkwzU00X5
- oFTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gpcNfyDtdebeNK+gYB8FjdacuBUP4+MnL25py2298XI=;
- b=RLv6k0CbFzVvz1Yqpp/DlJzIYbnQ1H3G563oPwFFgZNsNIHQKFDoYKqgv1lWrg2vrN
- vr90geCbkMJweb0HJV4IX83zM8/tYAJvKWVTyVb8FeIyPh+KnMcPXhlWBDJ9uKcPxINA
- Fu+u7unQ3FuwKSF0/vHtpw01zV9yjOj5UzPTSMn2qVJ+eOKILw5H0ldl0ftVq45w5cRe
- EmPYPdxJW/fLnUILGYthasJhnSdOuLwkRMwByN6gBK0hEIjyVhwbGLuToHFZff5j5lTd
- RVQbSWwfEUYCNGDNe3Md5eKS4TfsCyMu0fIgFb94YoZkXE7iDMvVvPYFccIg9r/s7yGW
- TnOQ==
-X-Gm-Message-State: AOAM532VQXxDuoK/sYOHqBfzFqmNvejYV6FHbNSNdOXl60Xy2m3/QwI9
- kGSQiR78/kl8WugFa4nxOqsbsLudPrBeNziI4Lg=
-X-Google-Smtp-Source: ABdhPJwQ+TphwhnAbC9PbCH10YDEwq8TeD0E3oQ2aPKP9OTl3fyhT2BviLzmDRJPtLIyvhEnlgJTrnaBnwAIc4xsmPw=
-X-Received: by 2002:a05:6e02:20ee:: with SMTP id
- q14mr6575960ilv.259.1612005968272; 
- Sat, 30 Jan 2021 03:26:08 -0800 (PST)
-MIME-Version: 1.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C35896E091
+ for <spice-devel@lists.freedesktop.org>; Sun, 31 Jan 2021 13:48:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612100922;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=V5cLAVNDM68CfyB2S1J1j159aw4Qxs3HuOD8R/lBOuk=;
+ b=X27oy7S+jTWbyZbouDQPR4h6bKsLhZgTpKou7MpI7Kj9e/Cu5c9/eMMpuPDkiPA2rgLPuS
+ yEytRomLr+rAcH7FdGm6kCvioAt8Ya0Yad3O6zW4gyTdMcpnvOPJhdLefJ5qxzRr5XztbG
+ lEUFgW2xHkQGGVhyEkxpNm2sLOv+x9o=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-577-eAeEPGzwNHq4Iw-cEoPM6Q-1; Sun, 31 Jan 2021 08:48:40 -0500
+X-MC-Unique: eAeEPGzwNHq4Iw-cEoPM6Q-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D22CF1842141;
+ Sun, 31 Jan 2021 13:48:38 +0000 (UTC)
+Received: from [10.35.206.117] (unknown [10.35.206.117])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 95BEA60D43;
+ Sun, 31 Jan 2021 13:48:37 +0000 (UTC)
+To: lx <lxlenovostar@gmail.com>
 References: <CA+5jrfnjJnAi+FSCcHxNsyX=fnRF4RGFBOsH-+CHUbdNxeT-Fg@mail.gmail.com>
  <16e2b237-ffad-6bf0-d714-0c00fb658030@redhat.com>
  <CA+5jrfn5GHRLN2RUu=OSBz6fjVjXHVHHxLqhdezVzxTXb2NMLQ@mail.gmail.com>
  <CAHt6W4fZfzsh5QBejxBa1m35AKN6XmZ=L3-4OnMs5X+M6J1rMw@mail.gmail.com>
-In-Reply-To: <CAHt6W4fZfzsh5QBejxBa1m35AKN6XmZ=L3-4OnMs5X+M6J1rMw@mail.gmail.com>
-From: lx <lxlenovostar@gmail.com>
-Date: Sat, 30 Jan 2021 19:25:57 +0800
-Message-ID: <CA+5jrfkzL3sGE0g+06aNEKYug2Dfa2njG3WjmVMK6WPJUedTxQ@mail.gmail.com>
-To: Frediano Ziglio <freddy77@gmail.com>
+ <CA+5jrfkzL3sGE0g+06aNEKYug2Dfa2njG3WjmVMK6WPJUedTxQ@mail.gmail.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <c2bb34de-0c44-ed62-6712-140c138e0286@redhat.com>
+Date: Sun, 31 Jan 2021 15:48:34 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
+MIME-Version: 1.0
+In-Reply-To: <CA+5jrfkzL3sGE0g+06aNEKYug2Dfa2njG3WjmVMK6WPJUedTxQ@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=uril@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Subject: Re: [Spice-devel] Is the data after USB camera redirection
  compressed?
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -64,140 +70,40 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: uril@redhat.com
 Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============0361329651=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============0361329651==
-Content-Type: multipart/alternative; boundary="0000000000001d605705ba1c63b8"
-
---0000000000001d605705ba1c63b8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Frediano Ziglio <freddy77@gmail.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8829=E6=
-=97=A5=E5=91=A8=E4=BA=94 =E4=B8=8B=E5=8D=886:39=E5=86=99=E9=81=93=EF=BC=9A
-
-> Il giorno gio 28 gen 2021 alle ore 01:45 lx <lxlenovostar@gmail.com> ha
-> scritto:
-> >
-> >
-> > Uri Lublin <uril@redhat.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8827=E6=97=
-=A5=E5=91=A8=E4=B8=89 =E4=B8=8B=E5=8D=8811:47=E5=86=99=E9=81=93=EF=BC=9A
-> >>
-> >> On 1/27/21 4:22 AM, lx wrote:
-> >> > Hi all:
-> >> >         If I redirect USB camera to virtual machine, I think we send
-> >> > original URB to virtual machine by USB channel.
-> >> > Is this understanding correct? If we want to improve the user
-> experience,
-> >> > we need to compress URB data?
-> >>
-> >> Hi,
-> >>
-> >> If you build with lz4 enabled (both client and server),
-> >> then it should use lz4 to compress the data.
-> >>
-> >> There is no functionality to create
-> >> a video stream out of raw data.
-> >>
-> >> Can the USB camera be configured to send a compress stream?
-> >>
-> >> Uri.
-> >>
-> >
-> >   Hi:
-> >    USB camera can support MJPG and YUV.   I think H264 is better than
-> MJPG. So Can we
-> > let spice support H264 ? Is this feasible?
-> >
->
-> This is independent from SPICE, if the camera send compressed data
-> already SPICE will just
-> forward compressed data in whatever format is in USB.
-> If the camera supports MJPEG and YUV choose MJPEG, YUV is not
-> compressed (just a different color
-> space than RGB, often taking less bits but still not compressed).
->
-> Frediano
->
-
-If the camera chooses YUV, can we encode it to H264 in SPICE? Is this
-feasible?
-
-Thank you.
-
---0000000000001d605705ba1c63b8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Frediano Ziglio &lt;<a href=3D"mailto=
-:freddy77@gmail.com">freddy77@gmail.com</a>&gt; =E4=BA=8E2021=E5=B9=B41=E6=
-=9C=8829=E6=97=A5=E5=91=A8=E4=BA=94 =E4=B8=8B=E5=8D=886:39=E5=86=99=E9=81=
-=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
- 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Il =
-giorno gio 28 gen 2021 alle ore 01:45 lx &lt;<a href=3D"mailto:lxlenovostar=
-@gmail.com" target=3D"_blank">lxlenovostar@gmail.com</a>&gt; ha scritto:<br=
->
-&gt;<br>
-&gt;<br>
-&gt; Uri Lublin &lt;<a href=3D"mailto:uril@redhat.com" target=3D"_blank">ur=
-il@redhat.com</a>&gt; =E4=BA=8E2021=E5=B9=B41=E6=9C=8827=E6=97=A5=E5=91=A8=
-=E4=B8=89 =E4=B8=8B=E5=8D=8811:47=E5=86=99=E9=81=93=EF=BC=9A<br>
-&gt;&gt;<br>
-&gt;&gt; On 1/27/21 4:22 AM, lx wrote:<br>
-&gt;&gt; &gt; Hi all:<br>
-&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0If I redirect USB camera to =
-virtual machine, I think we send<br>
-&gt;&gt; &gt; original URB to virtual machine by USB channel.<br>
-&gt;&gt; &gt; Is this understanding correct? If we want to improve the user=
- experience,<br>
-&gt;&gt; &gt; we need to compress URB data?<br>
-&gt;&gt;<br>
-&gt;&gt; Hi,<br>
-&gt;&gt;<br>
-&gt;&gt; If you build with lz4 enabled (both client and server),<br>
-&gt;&gt; then it should use lz4 to compress the data.<br>
-&gt;&gt;<br>
-&gt;&gt; There is no functionality to create<br>
-&gt;&gt; a video stream out of raw data.<br>
-&gt;&gt;<br>
-&gt;&gt; Can the USB camera be configured to send a compress stream?<br>
-&gt;&gt;<br>
-&gt;&gt; Uri.<br>
-&gt;&gt;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0Hi:<br>
-&gt;=C2=A0 =C2=A0 USB camera can support MJPG and YUV.=C2=A0 =C2=A0I think =
-H264 is better than MJPG. So Can we<br>
-&gt; let spice support H264 ? Is this feasible?<br>
-&gt;<br>
-<br>
-This is independent from SPICE, if the camera send compressed data<br>
-already SPICE will just<br>
-forward compressed data in whatever format is in USB.<br>
-If the camera supports MJPEG and YUV choose MJPEG, YUV is not<br>
-compressed (just a different color<br>
-space than RGB, often taking less bits but still not compressed).<br>
-<br>
-Frediano<br></blockquote><div><br></div><div>If the camera chooses YUV, can=
- we encode it to H264 in SPICE?=C2=A0Is this feasible?</div><div><br></div>=
-<div>Thank you.</div><div><br></div><div><br></div><div><br></div><div>=C2=
-=A0</div></div></div>
-
---0000000000001d605705ba1c63b8--
-
---===============0361329651==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0361329651==--
+T24gMS8zMC8yMSAxOjI1IFBNLCBseCB3cm90ZToKPiBGcmVkaWFubyBaaWdsaW8gPGZyZWRkeTc3
+QGdtYWlsLmNvbT4g5LqOMjAyMeW5tDHmnIgyOeaXpeWRqOS6lCDkuIvljYg2OjM55YaZ6YGT77ya
+Cj4gCj4+IElsIGdpb3JubyBnaW8gMjggZ2VuIDIwMjEgYWxsZSBvcmUgMDE6NDUgbHggPGx4bGVu
+b3Zvc3RhckBnbWFpbC5jb20+IGhhCj4+IHNjcml0dG86Cj4+Pgo+Pj4KPj4+IFVyaSBMdWJsaW4g
+PHVyaWxAcmVkaGF0LmNvbT4g5LqOMjAyMeW5tDHmnIgyN+aXpeWRqOS4iSDkuIvljYgxMTo0N+WG
+memBk++8mgo+Pj4+Cj4+Pj4gT24gMS8yNy8yMSA0OjIyIEFNLCBseCB3cm90ZToKPj4+Pj4gSGkg
+YWxsOgo+Pj4+PiAgICAgICAgICBJZiBJIHJlZGlyZWN0IFVTQiBjYW1lcmEgdG8gdmlydHVhbCBt
+YWNoaW5lLCBJIHRoaW5rIHdlIHNlbmQKPj4+Pj4gb3JpZ2luYWwgVVJCIHRvIHZpcnR1YWwgbWFj
+aGluZSBieSBVU0IgY2hhbm5lbC4KPj4+Pj4gSXMgdGhpcyB1bmRlcnN0YW5kaW5nIGNvcnJlY3Q/
+IElmIHdlIHdhbnQgdG8gaW1wcm92ZSB0aGUgdXNlcgo+PiBleHBlcmllbmNlLAo+Pj4+PiB3ZSBu
+ZWVkIHRvIGNvbXByZXNzIFVSQiBkYXRhPwo+Pj4+Cj4+Pj4gSGksCj4+Pj4KPj4+PiBJZiB5b3Ug
+YnVpbGQgd2l0aCBsejQgZW5hYmxlZCAoYm90aCBjbGllbnQgYW5kIHNlcnZlciksCj4+Pj4gdGhl
+biBpdCBzaG91bGQgdXNlIGx6NCB0byBjb21wcmVzcyB0aGUgZGF0YS4KPj4+Pgo+Pj4+IFRoZXJl
+IGlzIG5vIGZ1bmN0aW9uYWxpdHkgdG8gY3JlYXRlCj4+Pj4gYSB2aWRlbyBzdHJlYW0gb3V0IG9m
+IHJhdyBkYXRhLgo+Pj4+Cj4+Pj4gQ2FuIHRoZSBVU0IgY2FtZXJhIGJlIGNvbmZpZ3VyZWQgdG8g
+c2VuZCBhIGNvbXByZXNzIHN0cmVhbT8KPj4+Pgo+Pj4+IFVyaS4KPj4+Pgo+Pj4KPj4+ICAgIEhp
+Ogo+Pj4gICAgIFVTQiBjYW1lcmEgY2FuIHN1cHBvcnQgTUpQRyBhbmQgWVVWLiAgIEkgdGhpbmsg
+SDI2NCBpcyBiZXR0ZXIgdGhhbgo+PiBNSlBHLiBTbyBDYW4gd2UKPj4+IGxldCBzcGljZSBzdXBw
+b3J0IEgyNjQgPyBJcyB0aGlzIGZlYXNpYmxlPwo+Pj4KPj4KPj4gVGhpcyBpcyBpbmRlcGVuZGVu
+dCBmcm9tIFNQSUNFLCBpZiB0aGUgY2FtZXJhIHNlbmQgY29tcHJlc3NlZCBkYXRhCj4+IGFscmVh
+ZHkgU1BJQ0Ugd2lsbCBqdXN0Cj4+IGZvcndhcmQgY29tcHJlc3NlZCBkYXRhIGluIHdoYXRldmVy
+IGZvcm1hdCBpcyBpbiBVU0IuCj4+IElmIHRoZSBjYW1lcmEgc3VwcG9ydHMgTUpQRUcgYW5kIFlV
+ViBjaG9vc2UgTUpQRUcsIFlVViBpcyBub3QKPj4gY29tcHJlc3NlZCAoanVzdCBhIGRpZmZlcmVu
+dCBjb2xvcgo+PiBzcGFjZSB0aGFuIFJHQiwgb2Z0ZW4gdGFraW5nIGxlc3MgYml0cyBidXQgc3Rp
+bGwgbm90IGNvbXByZXNzZWQpLgo+Pgo+PiBGcmVkaWFubwo+Pgo+IAo+IElmIHRoZSBjYW1lcmEg
+Y2hvb3NlcyBZVVYsIGNhbiB3ZSBlbmNvZGUgaXQgdG8gSDI2NCBpbiBTUElDRT8gSXMgdGhpcwo+
+IGZlYXNpYmxlPwoKQ3VycmVudGx5LCBTUElDRSBkb2VzIG5vdCBkbyBsb29rIGF0IFVTQiBkYXRh
+LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2Ut
+ZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRw
+czovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
