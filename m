@@ -2,55 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73E9030A340
-	for <lists+spice-devel@lfdr.de>; Mon,  1 Feb 2021 09:25:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7363230BEB0
+	for <lists+spice-devel@lfdr.de>; Tue,  2 Feb 2021 13:51:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA1CD6E488;
-	Mon,  1 Feb 2021 08:24:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8A0FD6E17C;
+	Tue,  2 Feb 2021 12:51:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BA9966E483
- for <spice-devel@lists.freedesktop.org>; Mon,  1 Feb 2021 08:24:57 +0000 (UTC)
-Received: by mail-io1-xd31.google.com with SMTP id u8so11355651ior.13
- for <spice-devel@lists.freedesktop.org>; Mon, 01 Feb 2021 00:24:57 -0800 (PST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 389B26E17A
+ for <spice-devel@lists.freedesktop.org>; Tue,  2 Feb 2021 12:51:03 +0000 (UTC)
+Received: by mail-io1-xd2a.google.com with SMTP id u8so16004444ior.13
+ for <spice-devel@lists.freedesktop.org>; Tue, 02 Feb 2021 04:51:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cHlJmXZAjYNrcga+NMnmBrUNnFIqnvdpHYQYpM0HMrs=;
- b=GSnm9EMk2ZN4ZyJTkXN1Xg6vJ3FewjgUd6yd4Wpn83h2pHhuvZg4f4WMO1/EXE6YOA
- tyvOWNxnKKkm+9jcK0ZqNmE9w1GYTzKX6vTdynlaOW4RnNr/GhI1XtChSawk05mgM4Qh
- vGEa6EUbYbPdlHmaBgR/DQd+WkAIwBrCKOx68ibzNoyahDZf/r2i67WXVYf1fLCRxXHt
- uf152woq1IauDpINOPN/RZzZ5y4eH/Xi4n3ryT3d1O3ubOxgpxBQDLckw0g+BvFVVp47
- To3YE5GBp+hHma13Wb9yie9YbsO4Ot++gnA1z3R5yAr9B+PvpMGTful7iHRxdpfsAi6i
- wGHw==
+ :cc; bh=Xn94tRO+jN5UjPeth47W7myZYsvahPqKLdD81nLSvYs=;
+ b=UcN9VEUv5Jj8OaJL0r1h0EeEHvkbLPg62LC5CAg/d96LKBS4LpIX4nAMWGII1mb98J
+ WQcvEEpKxo5iFn+nya9IQ6KUYB/07ZT9MrBLOVJwUGVPvqin3Gcf7sZmRxt9MJ0ZzXEN
+ g5421iFnX3dmYOO++KLmDk41bxNegHFnwBciNOFaZYdVdqwqSn8VszOkFAa5hmYih7qJ
+ 5X4dFwfz2MyZEMh8uVpw4pcve06MDOKMsPavFhVDoG3/THfuZ8e5pFse1ArOScLb5Uje
+ OVt0jjhBsqsM7VdAH8y+hrWb5bIZMRsD9FHlXpwWaL1qYCmHlD4aZZd8Ikd0oxQTyxaf
+ jmBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=cHlJmXZAjYNrcga+NMnmBrUNnFIqnvdpHYQYpM0HMrs=;
- b=MxQOm0gmYiaehthQb6T6Z5i+rl28Ifg3QqUSWd5mudwNs3TZLWkCYYpKsuZXbEKrGF
- f22TMcMFL37Ne+Nj82oho8RLJDt0Ww4GCCw6bHYfc54imHX+taPali1fVsAXvM3XWFra
- DhTUswppLR9NfDdM+rsbLq5JIPyPLljYDJPFMgD/b7SOQhNLu98I2OdY1aYxYg3zZ/50
- Vvp6A+1gpPi0A8plRG2BABP5mMYCn2xm8PAS0dM8lSohtMk3es3he1vdqnfpXasha/hs
- 1Iuiv5qZMl1fjuFUg98Q04azPVzfrvKL1eLk434zvNIXTLePc117ENaRHtaMfayTFENK
- E/Ng==
-X-Gm-Message-State: AOAM533ZzGN60Fjs6nufpL8j8uB6M6IuVJCJIKcBgNLx+yirmDhDa+eq
- wcDlpynPA7qN1LWGV49Jdoc7UgFKqX+klJza6cY=
-X-Google-Smtp-Source: ABdhPJwfEfpd4AdNKk2fPJyAtzxrW/LPnt3PES9XONwX3bqaTMGmF7UL0h97fRd/jpNks6ooE6m2H2ApsAXUbtXkDpw=
-X-Received: by 2002:a5d:8ac8:: with SMTP id e8mr12444047iot.163.1612167897156; 
- Mon, 01 Feb 2021 00:24:57 -0800 (PST)
+ bh=Xn94tRO+jN5UjPeth47W7myZYsvahPqKLdD81nLSvYs=;
+ b=rdbhRHJAIQBCfL18grC/uC0FwNe5q7WqTkMQPYE6ljsSJJ+4+itkY7+loBIHerDFI6
+ YJRij7u1iZI+/k+NGuA7pF9BLJaSz9iP0EgLQmu3FVM59+Sm5DZg4xSQ0PtnDa0PFY2F
+ rEDBVCj8r4E1o4HutcPbpmtwK39Aaku6yutaKpRztIyIBaseDMkGEQ4CxN7nNHQSq+2O
+ 1hFqkD3r1BOxdbPMGsnwaDqxopYXyrdUsGOdVxGt9xXNqoI7PZIF9/+ctWZyTMFAumff
+ zX93apaEAqdcegDaipcq9cr7So+im+see4OvFoFlKU6HgRlBNY2n09Fv9HAmrpWihDK9
+ S0rw==
+X-Gm-Message-State: AOAM533ng6POhcluYJovmAJfK0IbRs2vc9GYy+2PBugWe5sWts6I6m/l
+ ncGE4pDZoU90Wb8DLBAnESiN2vMDUqm5KISSieQ=
+X-Google-Smtp-Source: ABdhPJwPdCjLk3c0LdlTrFwqtMbCQ3X7xBIcVs6R84TJYNfE3Z60tsKruf8mDrd9MHivMYZdyheVrp48+IGcj6RsyOA=
+X-Received: by 2002:a5d:8ac8:: with SMTP id e8mr17749757iot.163.1612270262666; 
+ Tue, 02 Feb 2021 04:51:02 -0800 (PST)
 MIME-Version: 1.0
-References: <CA+5jrfnNQLRPxJneD_mYA1kB8fio97Doce4ZXe_ZX18hfkQ37A@mail.gmail.com>
- <CAHt6W4fgSB-5uBmfGgw2SWraRF+kp6PZpoZPQRuUwwm0w=MhFw@mail.gmail.com>
- <CA+5jrfnPKk3e_44EgUspZbRGw-+biWk8YAmmJKXo+OLZDCefPQ@mail.gmail.com>
- <CA+5jrfkktTa-fkQanL0D-iuw7RuSrWFttNoAivzjqLf1hwLzcA@mail.gmail.com>
-In-Reply-To: <CA+5jrfkktTa-fkQanL0D-iuw7RuSrWFttNoAivzjqLf1hwLzcA@mail.gmail.com>
+References: <CA+5jrfnjJnAi+FSCcHxNsyX=fnRF4RGFBOsH-+CHUbdNxeT-Fg@mail.gmail.com>
+ <16e2b237-ffad-6bf0-d714-0c00fb658030@redhat.com>
+ <CA+5jrfn5GHRLN2RUu=OSBz6fjVjXHVHHxLqhdezVzxTXb2NMLQ@mail.gmail.com>
+ <CAHt6W4fZfzsh5QBejxBa1m35AKN6XmZ=L3-4OnMs5X+M6J1rMw@mail.gmail.com>
+ <CA+5jrfkzL3sGE0g+06aNEKYug2Dfa2njG3WjmVMK6WPJUedTxQ@mail.gmail.com>
+ <c2bb34de-0c44-ed62-6712-140c138e0286@redhat.com>
+In-Reply-To: <c2bb34de-0c44-ed62-6712-140c138e0286@redhat.com>
 From: lx <lxlenovostar@gmail.com>
-Date: Mon, 1 Feb 2021 16:24:46 +0800
-Message-ID: <CA+5jrfkmTX4DgjoD86WnbXwqmct8kfiG-YzH+um6XwoqBZ=vLA@mail.gmail.com>
-To: Frediano Ziglio <freddy77@gmail.com>
-Subject: Re: [Spice-devel] [spice-devel]Sounds abnormal
+Date: Tue, 2 Feb 2021 20:50:51 +0800
+Message-ID: <CA+5jrf=8Y1P2rK+LHfkvJC-kBpDjGTgf3TbWa7wcEcyiuRDUAQ@mail.gmail.com>
+To: uril@redhat.com
+Subject: Re: [Spice-devel] Is the data after USB camera redirection
+ compressed?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,321 +66,165 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1693704757=="
+Content-Type: multipart/mixed; boundary="===============1096484316=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1693704757==
-Content-Type: multipart/alternative; boundary="000000000000d40dd305ba42161e"
+--===============1096484316==
+Content-Type: multipart/alternative; boundary="00000000000049caaf05ba59ec41"
 
---000000000000d40dd305ba42161e
+--00000000000049caaf05ba59ec41
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-It's ok on Virtual Machine Viewer 8.0-256, but It's not ok on 9.0-256.
+Uri Lublin <uril@redhat.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8831=E6=97=A5=E5=
+=91=A8=E6=97=A5 =E4=B8=8B=E5=8D=889:48=E5=86=99=E9=81=93=EF=BC=9A
 
-lx <lxlenovostar@gmail.com> =E4=BA=8E2021=E5=B9=B42=E6=9C=881=E6=97=A5=E5=
-=91=A8=E4=B8=80 =E4=B8=8A=E5=8D=8811:09=E5=86=99=E9=81=93=EF=BC=9A
-
-> I use Remote Viewer on Ubuntu. Everything is ok.
->
-> lx <lxlenovostar@gmail.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8830=E6=97=A5=
-=E5=91=A8=E5=85=AD =E4=B8=8B=E5=8D=887:22=E5=86=99=E9=81=93=EF=BC=9A
->
->>
->>
->> Frediano Ziglio <freddy77@gmail.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8829=
-=E6=97=A5=E5=91=A8=E4=BA=94 =E4=B8=8A=E5=8D=884:21=E5=86=99=E9=81=93=EF=BC=
+> On 1/30/21 1:25 PM, lx wrote:
+> > Frediano Ziglio <freddy77@gmail.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8829=
+=E6=97=A5=E5=91=A8=E4=BA=94 =E4=B8=8B=E5=8D=886:39=E5=86=99=E9=81=93=EF=BC=
 =9A
->>
->>> Il giorno gio 28 gen 2021 alle ore 06:28 lx <lxlenovostar@gmail.com> ha
->>> scritto:
->>> >
->>> > Hi:
->>> >    I play audio in the virtual machine, and the local sound sounds
->>> abnormal. How to debug it ?
->>> >
->>>
->>> Enabling messages is a good way to start debugging.
->>> But what do you mean by abnormal? Have glitches? Interruptions?
->>> Different frequency?
->>>
->>> Frediano
->>>
->> Hi :
->>
->> It's all noise, and the original sound cannot be heard.
->>
->> Thank you
->>
->>
->>>
->>> > Additionally info:
->>> > libvirt-5.2.0, qemu-3.1.0, spice-0.14.0, spice-protocol-0.12.15,
->>> usbredir-0.8.0,spice-guest-tools-latest.exe
->>> > virtual Machine Viewer 9.0-256
->>> >
->>> > I run the virtViewer in this way:
->>> > #############################################################
->>> > C:\Program Files\VirtViewer v9.0-256\bin>set G_MESSAGES_DEBUG=3Dall
->>> >
->>> > C:\Program Files\VirtViewer v9.0-256\bin>remote-viewer.exe
->>> --spice-debug
->>> > #############################################################
->>> >
->>> > The log is:
->>> > #############################################################
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.261:
->>> ../src/decode-glz.c:349 decode_header: 256x256, id 325, ref 278
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.343:
->>> ../src/decode-glz.c:349 decode_header: 256x256, id 326, ref 278
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.402:
->>> ../src/decode-glz.c:349 decode_header: 256x256, id 327, ref 278
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.452:
->>> ../src/decode-glz.c:349 decode_header: 256x256, id 328, ref 278
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.517:
->>> ../src/decode-glz.c:349 decode_header: 256x256, id 329, ref 278
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.560:
->>> ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max late=
-ncy
->>> 0:00:01.600725624, live 1
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.562:
->>> ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.565:
->>> ../src/spice-session.c:2413 set mm time: 1220884055
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.560:
->>> ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max late=
-ncy
->>> 0:00:01.600725624, live 1
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.562:
->>> ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.563:
->>> ../src/spice-session.c:2413 set mm time: 1220885051
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.564:
->>> ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, o=
-ld
->>> 1220885053, new 1220885051
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.564:
->>> ../src/channel-display.c:1532 display-2:0: display_session_mm_time_rese=
-t_cb
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.559:
->>> ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max late=
-ncy
->>> 0:00:01.600725624, live 1
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.563:
->>> ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.567:
->>> ../src/spice-session.c:2413 set mm time: 1220886053
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.570:
->>> ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, o=
-ld
->>> 1220886054, new 1220886053
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.576:
->>> ../src/channel-display.c:1532 display-2:0: display_session_mm_time_rese=
-t_cb
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.560:
->>> ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max late=
-ncy
->>> 0:00:01.600725624, live 1
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.570:
->>> ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.574:
->>> ../src/spice-session.c:2413 set mm time: 1220887049
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.579:
->>> ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, o=
-ld
->>> 1220887059, new 1220887049
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.584:
->>> ../src/channel-display.c:1532 display-2:0: display_session_mm_time_rese=
-t_cb
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.560:
->>> ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max late=
-ncy
->>> 0:00:01.600725624, live 1
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.562:
->>> ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.562:
->>> ../src/spice-session.c:2413 set mm time: 1220888051
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.560:
->>> ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max late=
-ncy
->>> 0:00:01.600725624, live 1
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.560:
->>> ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.562:
->>> ../src/spice-session.c:2413 set mm time: 1220889053
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.560:
->>> ../src/spice-gstaudio.c:264 got min latency 0:00:00.600725624, max late=
-ncy
->>> 0:00:01.600725624, live 1
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.562:
->>> ../src/channel-playback.c:462 playback-5:0: playback set_delay 600 ms
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.565:
->>> ../src/spice-session.c:2413 set mm time: 1220890055
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.568:
->>> ../src/spice-session.c:2416 spice_session_set_mm_time: mm-time-reset, o=
-ld
->>> 1220890056, new 1220890055
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.571:
->>> ../src/channel-display.c:1532 display-2:0: display_session_mm_time_rese=
-t_cb
->>> > (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:39.469:
->>> ../src/spice-session.c:2413 set mm time: 1220891167
->>> > #############################################################
->>> >
->>> > Thank you
->>>
->>
+> >
+> >> Il giorno gio 28 gen 2021 alle ore 01:45 lx <lxlenovostar@gmail.com> h=
+a
+> >> scritto:
+> >>>
+> >>>
+> >>> Uri Lublin <uril@redhat.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8827=E6=97=
+=A5=E5=91=A8=E4=B8=89 =E4=B8=8B=E5=8D=8811:47=E5=86=99=E9=81=93=EF=BC=9A
+> >>>>
+> >>>> On 1/27/21 4:22 AM, lx wrote:
+> >>>>> Hi all:
+> >>>>>          If I redirect USB camera to virtual machine, I think we se=
+nd
+> >>>>> original URB to virtual machine by USB channel.
+> >>>>> Is this understanding correct? If we want to improve the user
+> >> experience,
+> >>>>> we need to compress URB data?
+> >>>>
+> >>>> Hi,
+> >>>>
+> >>>> If you build with lz4 enabled (both client and server),
+> >>>> then it should use lz4 to compress the data.
+> >>>>
+> >>>> There is no functionality to create
+> >>>> a video stream out of raw data.
+> >>>>
+> >>>> Can the USB camera be configured to send a compress stream?
+> >>>>
+> >>>> Uri.
+> >>>>
+> >>>
+> >>>    Hi:
+> >>>     USB camera can support MJPG and YUV.   I think H264 is better tha=
+n
+> >> MJPG. So Can we
+> >>> let spice support H264 ? Is this feasible?
+> >>>
+> >>
+> >> This is independent from SPICE, if the camera send compressed data
+> >> already SPICE will just
+> >> forward compressed data in whatever format is in USB.
+> >> If the camera supports MJPEG and YUV choose MJPEG, YUV is not
+> >> compressed (just a different color
+> >> space than RGB, often taking less bits but still not compressed).
+> >>
+> >> Frediano
+> >>
+> >
+> > If the camera chooses YUV, can we encode it to H264 in SPICE? Is this
+> > feasible?
+>
+> Currently, SPICE does not do look at USB data.
+>
 
---000000000000d40dd305ba42161e
+Hi:
+
+What do you mean spice just forward USB protocol data?
+
+Thank you
+
+--00000000000049caaf05ba59ec41
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">It&#39;s ok on Virtual Machine Viewer 8.0-256, but It&#39;=
-s not ok on 9.0-256.=C2=A0</div><br><div class=3D"gmail_quote"><div dir=3D"=
-ltr" class=3D"gmail_attr">lx &lt;<a href=3D"mailto:lxlenovostar@gmail.com">=
-lxlenovostar@gmail.com</a>&gt; =E4=BA=8E2021=E5=B9=B42=E6=9C=881=E6=97=A5=
-=E5=91=A8=E4=B8=80 =E4=B8=8A=E5=8D=8811:09=E5=86=99=E9=81=93=EF=BC=9A<br></=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr">I us=
-e Remote Viewer on Ubuntu. Everything is ok.</div><br><div class=3D"gmail_q=
-uote"><div dir=3D"ltr" class=3D"gmail_attr">lx &lt;<a href=3D"mailto:lxleno=
-vostar@gmail.com" target=3D"_blank">lxlenovostar@gmail.com</a>&gt; =E4=BA=
-=8E2021=E5=B9=B41=E6=9C=8830=E6=97=A5=E5=91=A8=E5=85=AD =E4=B8=8B=E5=8D=887=
-:22=E5=86=99=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" s=
-tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
-ding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=
-=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Frediano Ziglio &lt;=
-<a href=3D"mailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com<=
-/a>&gt; =E4=BA=8E2021=E5=B9=B41=E6=9C=8829=E6=97=A5=E5=91=A8=E4=BA=94 =E4=
-=B8=8A=E5=8D=884:21=E5=86=99=E9=81=93=EF=BC=9A<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">Il giorno gio 28 gen 2021 alle ore 06:28 l=
-x &lt;<a href=3D"mailto:lxlenovostar@gmail.com" target=3D"_blank">lxlenovos=
-tar@gmail.com</a>&gt; ha scritto:<br>
-&gt;<br>
-&gt; Hi:<br>
-&gt;=C2=A0 =C2=A0 I play audio in the virtual machine, and the local sound =
-sounds abnormal. How to debug it ?<br>
-&gt;<br>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">Uri Lublin &lt;<a href=3D"mailto:uril=
+@redhat.com">uril@redhat.com</a>&gt; =E4=BA=8E2021=E5=B9=B41=E6=9C=8831=E6=
+=97=A5=E5=91=A8=E6=97=A5 =E4=B8=8B=E5=8D=889:48=E5=86=99=E9=81=93=EF=BC=9A<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 1/30/21 1:25 =
+PM, lx wrote:<br>
+&gt; Frediano Ziglio &lt;<a href=3D"mailto:freddy77@gmail.com" target=3D"_b=
+lank">freddy77@gmail.com</a>&gt; =E4=BA=8E2021=E5=B9=B41=E6=9C=8829=E6=97=
+=A5=E5=91=A8=E4=BA=94 =E4=B8=8B=E5=8D=886:39=E5=86=99=E9=81=93=EF=BC=9A<br>
+&gt; <br>
+&gt;&gt; Il giorno gio 28 gen 2021 alle ore 01:45 lx &lt;<a href=3D"mailto:=
+lxlenovostar@gmail.com" target=3D"_blank">lxlenovostar@gmail.com</a>&gt; ha=
 <br>
-Enabling messages is a good way to start debugging.<br>
-But what do you mean by abnormal? Have glitches? Interruptions?<br>
-Different frequency?<br>
+&gt;&gt; scritto:<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; Uri Lublin &lt;<a href=3D"mailto:uril@redhat.com" target=3D"_b=
+lank">uril@redhat.com</a>&gt; =E4=BA=8E2021=E5=B9=B41=E6=9C=8827=E6=97=A5=
+=E5=91=A8=E4=B8=89 =E4=B8=8B=E5=8D=8811:47=E5=86=99=E9=81=93=EF=BC=9A<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; On 1/27/21 4:22 AM, lx wrote:<br>
+&gt;&gt;&gt;&gt;&gt; Hi all:<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 If I redirect USB ca=
+mera to virtual machine, I think we send<br>
+&gt;&gt;&gt;&gt;&gt; original URB to virtual machine by USB channel.<br>
+&gt;&gt;&gt;&gt;&gt; Is this understanding correct? If we want to improve t=
+he user<br>
+&gt;&gt; experience,<br>
+&gt;&gt;&gt;&gt;&gt; we need to compress URB data?<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; Hi,<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; If you build with lz4 enabled (both client and server),<br=
+>
+&gt;&gt;&gt;&gt; then it should use lz4 to compress the data.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; There is no functionality to create<br>
+&gt;&gt;&gt;&gt; a video stream out of raw data.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; Can the USB camera be configured to send a compress stream=
+?<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; Uri.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 Hi:<br>
+&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0USB camera can support MJPG and YUV.=C2=A0 =
+=C2=A0I think H264 is better than<br>
+&gt;&gt; MJPG. So Can we<br>
+&gt;&gt;&gt; let spice support H264 ? Is this feasible?<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;&gt; This is independent from SPICE, if the camera send compressed data=
 <br>
-Frediano<br></blockquote><div>Hi :</div><div><br></div><div>It&#39;s all no=
-ise, and the original sound cannot be heard.<br></div><div><br></div><div>T=
-hank you</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex">
+&gt;&gt; already SPICE will just<br>
+&gt;&gt; forward compressed data in whatever format is in USB.<br>
+&gt;&gt; If the camera supports MJPEG and YUV choose MJPEG, YUV is not<br>
+&gt;&gt; compressed (just a different color<br>
+&gt;&gt; space than RGB, often taking less bits but still not compressed).<=
+br>
+&gt;&gt;<br>
+&gt;&gt; Frediano<br>
+&gt;&gt;<br>
+&gt; <br>
+&gt; If the camera chooses YUV, can we encode it to H264 in SPICE? Is this<=
+br>
+&gt; feasible?<br>
 <br>
-&gt; Additionally info:<br>
-&gt; libvirt-5.2.0, qemu-3.1.0, spice-0.14.0, spice-protocol-0.12.15, usbre=
-dir-0.8.0,spice-guest-tools-latest.exe<br>
-&gt; virtual Machine Viewer 9.0-256<br>
-&gt;<br>
-&gt; I run the virtViewer in this way:<br>
-&gt; #############################################################<br>
-&gt; C:\Program Files\VirtViewer v9.0-256\bin&gt;set G_MESSAGES_DEBUG=3Dall=
-<br>
-&gt;<br>
-&gt; C:\Program Files\VirtViewer v9.0-256\bin&gt;remote-viewer.exe --spice-=
-debug<br>
-&gt; #############################################################<br>
-&gt;<br>
-&gt; The log is:<br>
-&gt; #############################################################<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.261: ../src/decode-g=
-lz.c:349 decode_header: 256x256, id 325, ref 278<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.343: ../src/decode-g=
-lz.c:349 decode_header: 256x256, id 326, ref 278<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.402: ../src/decode-g=
-lz.c:349 decode_header: 256x256, id 327, ref 278<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.452: ../src/decode-g=
-lz.c:349 decode_header: 256x256, id 328, ref 278<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.517: ../src/decode-g=
-lz.c:349 decode_header: 256x256, id 329, ref 278<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.560: ../src/spice-gs=
-taudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.6007256=
-24, live 1<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.562: ../src/channel-=
-playback.c:462 playback-5:0: playback set_delay 600 ms<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:32.565: ../src/spice-se=
-ssion.c:2413 set mm time: 1220884055<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.560: ../src/spice-gs=
-taudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.6007256=
-24, live 1<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.562: ../src/channel-=
-playback.c:462 playback-5:0: playback set_delay 600 ms<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.563: ../src/spice-se=
-ssion.c:2413 set mm time: 1220885051<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.564: ../src/spice-se=
-ssion.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220885053, new =
-1220885051<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:33.564: ../src/channel-=
-display.c:1532 display-2:0: display_session_mm_time_reset_cb<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.559: ../src/spice-gs=
-taudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.6007256=
-24, live 1<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.563: ../src/channel-=
-playback.c:462 playback-5:0: playback set_delay 600 ms<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.567: ../src/spice-se=
-ssion.c:2413 set mm time: 1220886053<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.570: ../src/spice-se=
-ssion.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220886054, new =
-1220886053<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:34.576: ../src/channel-=
-display.c:1532 display-2:0: display_session_mm_time_reset_cb<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.560: ../src/spice-gs=
-taudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.6007256=
-24, live 1<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.570: ../src/channel-=
-playback.c:462 playback-5:0: playback set_delay 600 ms<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.574: ../src/spice-se=
-ssion.c:2413 set mm time: 1220887049<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.579: ../src/spice-se=
-ssion.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220887059, new =
-1220887049<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:35.584: ../src/channel-=
-display.c:1532 display-2:0: display_session_mm_time_reset_cb<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.560: ../src/spice-gs=
-taudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.6007256=
-24, live 1<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.562: ../src/channel-=
-playback.c:462 playback-5:0: playback set_delay 600 ms<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:36.562: ../src/spice-se=
-ssion.c:2413 set mm time: 1220888051<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.560: ../src/spice-gs=
-taudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.6007256=
-24, live 1<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.560: ../src/channel-=
-playback.c:462 playback-5:0: playback set_delay 600 ms<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:37.562: ../src/spice-se=
-ssion.c:2413 set mm time: 1220889053<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.560: ../src/spice-gs=
-taudio.c:264 got min latency 0:00:00.600725624, max latency 0:00:01.6007256=
-24, live 1<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.562: ../src/channel-=
-playback.c:462 playback-5:0: playback set_delay 600 ms<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.565: ../src/spice-se=
-ssion.c:2413 set mm time: 1220890055<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.568: ../src/spice-se=
-ssion.c:2416 spice_session_set_mm_time: mm-time-reset, old 1220890056, new =
-1220890055<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:38.571: ../src/channel-=
-display.c:1532 display-2:0: display_session_mm_time_reset_cb<br>
-&gt; (remote-viewer.exe:47940): GSpice-DEBUG: 14:22:39.469: ../src/spice-se=
-ssion.c:2413 set mm time: 1220891167<br>
-&gt; #############################################################<br>
-&gt;<br>
-&gt; Thank you<br>
-</blockquote></div></div>
-</blockquote></div>
-</blockquote></div>
+Currently, SPICE does not do look at USB data.<br></blockquote><div><br></d=
+iv><div>Hi:</div><div><br></div><div>What do you mean spice just forward US=
+B protocol data?=C2=A0<br></div><div><br></div><div>Thank you</div><div>=C2=
+=A0</div></div></div>
 
---000000000000d40dd305ba42161e--
+--00000000000049caaf05ba59ec41--
 
---===============1693704757==
+--===============1096484316==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -388,4 +235,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============1693704757==--
+--===============1096484316==--
