@@ -2,58 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179F830DA8E
-	for <lists+spice-devel@lfdr.de>; Wed,  3 Feb 2021 14:05:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E48F30DB52
+	for <lists+spice-devel@lfdr.de>; Wed,  3 Feb 2021 14:32:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 50D646E13C;
-	Wed,  3 Feb 2021 13:04:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EE3856EA7C;
+	Wed,  3 Feb 2021 13:32:22 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 784B36E865
- for <spice-devel@lists.freedesktop.org>; Wed,  3 Feb 2021 13:04:58 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 543BA6EAAC
+ for <spice-devel@lists.freedesktop.org>; Wed,  3 Feb 2021 13:16:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612357497;
+ s=mimecast20190719; t=1612358183;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CZ/PnSF/Mht9gW5p6NbEzpwutRMrm7ZYBx9Q4GGL4MY=;
- b=QQ2Qa+ZuwswM1X4XXGL+WplSnZEY9ffVBtAE9wiVxxEebQVyvCY+1EgYsVH/kg7+iH9WnJ
- poKW1JEKu1tcNH9OAwFdgSnHLNPgxIDjKo9jnHFrYRiBaD2GOkNQSjlLgMB2QcHpkJZkZj
- lU2E/Up92jcoh8Dn6zQdAQfu1+pALaI=
+ bh=1oIZf7f/oo6PVRncKORJAVfkEWNMyNF7ALcrFfX4auY=;
+ b=REkkBzWUuAzBTsUD7A4P2gnAdbd4q5JQBQCqdyC+ntZ1Y0bMP4oktTpn3rQAuePZDl9Xgf
+ CMgHRBkoaKqKMgI06fpF/f3uYBy8wvzvaBQ8tY3/97YaIylZh3cO9r7JZ25+6iGmR8tWRY
+ iaLhP3aTiIoZT3nytWBLLkuZpB645tE=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-83-57E2bRiFNniJb7CUzZH3Gg-1; Wed, 03 Feb 2021 08:04:55 -0500
-X-MC-Unique: 57E2bRiFNniJb7CUzZH3Gg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-327-JFJDJwHVPEiCvFEyGgQmkQ-1; Wed, 03 Feb 2021 08:16:21 -0500
+X-MC-Unique: JFJDJwHVPEiCvFEyGgQmkQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B5D80BBEE4;
- Wed,  3 Feb 2021 13:04:18 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4C06A80196F;
+ Wed,  3 Feb 2021 13:16:20 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-113-27.ams2.redhat.com
  [10.36.113.27])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 650865D9E8;
- Wed,  3 Feb 2021 13:04:18 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 238724D;
+ Wed,  3 Feb 2021 13:16:16 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2E517180063E; Wed,  3 Feb 2021 14:04:15 +0100 (CET)
-Date: Wed, 3 Feb 2021 14:04:15 +0100
+ id 442921800853; Wed,  3 Feb 2021 14:16:15 +0100 (CET)
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, 
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>
-Message-ID: <20210203130415.rqokinkpy6ivixmu@sirius.home.kraxel.org>
-References: <20210126165812.1661512-1-kraxel@redhat.com>
- <20210126165812.1661512-6-kraxel@redhat.com>
- <YBp3zQqomQziZbPT@phenom.ffwll.local>
+To: dri-devel@lists.freedesktop.org
+Date: Wed,  3 Feb 2021 14:16:10 +0100
+Message-Id: <20210203131615.1714021-2-kraxel@redhat.com>
+In-Reply-To: <20210203131615.1714021-1-kraxel@redhat.com>
+References: <20210203131615.1714021-1-kraxel@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YBp3zQqomQziZbPT@phenom.ffwll.local>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Subject: Re: [Spice-devel] [PATCH v4 5/5] drm/qxl: properly free qxl releases
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Mailman-Approved-At: Wed, 03 Feb 2021 13:32:21 +0000
+Subject: [Spice-devel] [PATCH v5 1/6] drm/qxl: use drmm_mode_config_init
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,34 +60,49 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel.vetter@ffwll.ch>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> > +	/*
-> > +	 * Ask host to release resources (+fill release ring),
-> > +	 * then wait for the release actually happening.
-> > +	 */
-> > +	qxl_io_notify_oom(qdev);
-> > +	for (try = 0; try < 20 && atomic_read(&qdev->release_count) > 0; try++)
-> > +		msleep(20);
-> 
-> A bit icky, why not use a wait queue or something like that instead of
-> hand-rolling this? Not for perf reasons, just so it's a bit clear who
-> waits for whom and why.
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/qxl/qxl_display.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-There isn't one ready for use, and adding a new one (to wait for the
-garbage collection having released something) just for a clean shutdown
-looked a bit like overkill.
-
-But after digging a bit more and looking at the qxl_fence_wait() mess I
-think adding a wait queue looks like a good idea ...
-
-v5 coming soon ...
-
-take care,
-  Gerd
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index 012bce0cdb65..38d6b596094d 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1195,7 +1195,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+ 	int i;
+ 	int ret;
+ 
+-	drm_mode_config_init(&qdev->ddev);
++	ret = drmm_mode_config_init(&qdev->ddev);
++	if (ret)
++		return ret;
+ 
+ 	ret = qxl_create_monitors_object(qdev);
+ 	if (ret)
+@@ -1228,5 +1230,4 @@ int qxl_modeset_init(struct qxl_device *qdev)
+ void qxl_modeset_fini(struct qxl_device *qdev)
+ {
+ 	qxl_destroy_monitors_object(qdev);
+-	drm_mode_config_cleanup(&qdev->ddev);
+ }
+-- 
+2.29.2
 
 _______________________________________________
 Spice-devel mailing list
