@@ -2,62 +2,65 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91DBD30D375
-	for <lists+spice-devel@lfdr.de>; Wed,  3 Feb 2021 07:41:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDA9E30D72C
+	for <lists+spice-devel@lfdr.de>; Wed,  3 Feb 2021 11:15:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A2EB6E02F;
-	Wed,  3 Feb 2021 06:41:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 607C26EA41;
+	Wed,  3 Feb 2021 10:15:46 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 48D186E23B;
- Wed,  3 Feb 2021 04:08:18 +0000 (UTC)
-Received: by mail-qk1-x72c.google.com with SMTP id a7so22164087qkb.13;
- Tue, 02 Feb 2021 20:08:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=KiuK79Plnan4/eQkqKREp9OPSNSvuNT4ViEONuYpstE=;
- b=LAZuf82wYt+ahAS6wx+JxLjZzoFu2y/tdF74dlecgKwNFKPgxJKpT+orSt4eTTPfEr
- Fd8FYbHbjbb1i/LSmyM56dO/8oKo+kZpA3OSWGESZoiBD5cgYYTc8NW8vaWvZak6GInh
- E1qb0PNAQvbm/0LuoSvhE+tr2piow8kC3i0VDPFeNZO0Hs/tF59X/4SWXlD9++13A4Qe
- ewUytMJkfYuxVNknMJXaC9DY9QVax1GDoRJrJjWuZHxiChEcPpiQ17Die7cGoyLBBDCV
- QOypivsgJ7JQonbnzARdtrCS/2ZBCVPBCwbqKc11tJsxaiy02MSJTcNmJFRKlPQ/XYm1
- BtSA==
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 56E656EA41
+ for <spice-devel@lists.freedesktop.org>; Wed,  3 Feb 2021 10:15:45 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id q7so23468983wre.13
+ for <spice-devel@lists.freedesktop.org>; Wed, 03 Feb 2021 02:15:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=a321zpi9EYFPKrHa/w5wiDf7FzXZmd2yWZ5PnRvh2oY=;
+ b=RCZYqjo8I8AawXH9nn6NQo2bQR2kzFkM3XePpRANJJFh+lczMkaDb319tOYYIL1zXa
+ yxn6aF18WkJpG3iAp/H1LKgx52iDyHPIS7MGdZknlRvHXfaNZJXshs8+A0/iv6kNsVrB
+ JXrIIwgJ+TTIv7ID15/NbNfrIDf5JA+9CfuIY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=KiuK79Plnan4/eQkqKREp9OPSNSvuNT4ViEONuYpstE=;
- b=kM4eHlnyJUSxeNJ5fUZqEznV7BWECX5kqk6BGLVOUNyTlfQupvloNwOPJf8c542vH0
- sWJ4S3ojsC7c7IK8g7qcIuhwSJKGR1YH8Nvz8hvk1IqA/Av8Im2Mwi4WerHZAfSNP2fi
- 984ZlPWgBwxpJsKAzKuOZtR/meYS+JMb1VWRdj3Xj1u/2KpJNzUXv71D9Fx4XjDiBIhl
- tiDDDc4DYGX5U8xQLvZFd/lA+Is5omG72DBD13xAaMHWH3JcZztSXk6aq8HKy9tsX3ic
- TUKwuIs7nCEaT5B6lOP0a0w/A5h4Lm6S7UZMDCJ2fKHknLJKw2UHsTC/5K7ibGv+CAiW
- Xc9A==
-X-Gm-Message-State: AOAM532G8vE2idFEgN0D6kBNaB/5ZLq3MNgC5KCwYfVTg/dv1EPLfmE7
- G7pUM4ukoe1j+kefsY5Ghgo=
-X-Google-Smtp-Source: ABdhPJz5UyytgomPntjDvwsAntwQ5emYwik0rS6cosQWACxURKWwyvmdbGbMzSj1rLVpmUWpCt6v2w==
-X-Received: by 2002:a37:62cf:: with SMTP id w198mr940221qkb.146.1612325296351; 
- Tue, 02 Feb 2021 20:08:16 -0800 (PST)
-Received: from tong-desktop.local ([2601:5c0:c200:27c6:a44:9c5b:687e:b2f9])
- by smtp.googlemail.com with ESMTPSA id h144sm798239qke.95.2021.02.02.20.08.15
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=a321zpi9EYFPKrHa/w5wiDf7FzXZmd2yWZ5PnRvh2oY=;
+ b=kElG5reaSpd4dJhVyaf7e1gzTMHtHIfVmBkJ4qr+OZFY3C8LdGqN9Tc3xAAArHaOc4
+ udKnYZ9nDu1KAd55gDnpjMkUep+dRvAUObsR3X8cYtw5lLT6xfSAM4WgpFu35Hp+R8tT
+ KyyXofVJx3ujt9ZmccYr3DLTpHxpcIGZiBTYYa1vyusdGi2OTGZLIj4PGQll7Nd8NoYF
+ 0hv+XcpXCTwEHLEaSacT40JgEsK5CwLMSOQQb0GOHTX8+NK0FggMqo5FTaf/RKNOHiwa
+ 5gE3JMKRsJhJ9dHIBCcE811XTGNjHYh8oY9kinPbasREuf2/3tGS4AYfi4AEmrwJQynR
+ ruFg==
+X-Gm-Message-State: AOAM531qrt5o3UfX1D8ZmUjmdUsjAsyhA+IhWFtEeAw7u56xPWxEEBJ9
+ qCipjyg/VQpv+KAxJATHWLqCDw==
+X-Google-Smtp-Source: ABdhPJzHB+ffvr9s3UM8FPaGZKcUXhORlDn7t4V0qu+UbQAlINgveENCa31EtHjKs1ycCeGI9sFg6g==
+X-Received: by 2002:adf:f743:: with SMTP id z3mr2655431wrp.165.1612347344092; 
+ Wed, 03 Feb 2021 02:15:44 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id f4sm2825617wrs.34.2021.02.03.02.15.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Feb 2021 20:08:15 -0800 (PST)
-From: Tong Zhang <ztong0001@gmail.com>
-To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
- virtualization@lists.linux-foundation.org,
- spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Date: Tue,  2 Feb 2021 23:07:27 -0500
-Message-Id: <20210203040727.868921-1-ztong0001@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ Wed, 03 Feb 2021 02:15:43 -0800 (PST)
+Date: Wed, 3 Feb 2021 11:15:41 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Message-ID: <YBp3zQqomQziZbPT@phenom.ffwll.local>
+Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
+ dri-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, 
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20210126165812.1661512-1-kraxel@redhat.com>
+ <20210126165812.1661512-6-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 03 Feb 2021 06:41:24 +0000
-Subject: [Spice-devel] [PATCH v1] drm/qxl: do not run release if qxl failed
- to init
+Content-Disposition: inline
+In-Reply-To: <20210126165812.1661512-6-kraxel@redhat.com>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
+Subject: Re: [Spice-devel] [PATCH v4 5/5] drm/qxl: properly free qxl releases
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,94 +72,110 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: ztong0001@gmail.com
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-if qxl_device_init() fail, drm device will not be registered,
-in this case, do not run qxl_drm_release()
+On Tue, Jan 26, 2021 at 05:58:12PM +0100, Gerd Hoffmann wrote:
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>  drivers/gpu/drm/qxl/qxl_drv.h     |  1 +
+>  drivers/gpu/drm/qxl/qxl_kms.c     | 22 ++++++++++++++++++++--
+>  drivers/gpu/drm/qxl/qxl_release.c |  2 ++
+>  3 files changed, 23 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+> index 01354b43c413..1c57b587b6a7 100644
+> --- a/drivers/gpu/drm/qxl/qxl_drv.h
+> +++ b/drivers/gpu/drm/qxl/qxl_drv.h
+> @@ -214,6 +214,7 @@ struct qxl_device {
+>  	spinlock_t	release_lock;
+>  	struct idr	release_idr;
+>  	uint32_t	release_seqno;
+> +	atomic_t	release_count;
+>  	spinlock_t release_idr_lock;
+>  	struct mutex	async_io_mutex;
+>  	unsigned int last_sent_io_cmd;
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+> index 4a60a52ab62e..f177f72bfc12 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -25,6 +25,7 @@
+>  
+>  #include <linux/io-mapping.h>
+>  #include <linux/pci.h>
+> +#include <linux/delay.h>
+>  
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_managed.h>
+> @@ -286,8 +287,25 @@ int qxl_device_init(struct qxl_device *qdev,
+>  
+>  void qxl_device_fini(struct qxl_device *qdev)
+>  {
+> -	qxl_bo_unref(&qdev->current_release_bo[0]);
+> -	qxl_bo_unref(&qdev->current_release_bo[1]);
+> +	int cur_idx, try;
+> +
+> +	for (cur_idx = 0; cur_idx < 3; cur_idx++) {
+> +		if (!qdev->current_release_bo[cur_idx])
+> +			continue;
+> +		qxl_bo_unpin(qdev->current_release_bo[cur_idx]);
+> +		qxl_bo_unref(&qdev->current_release_bo[cur_idx]);
+> +		qdev->current_release_bo_offset[cur_idx] = 0;
+> +		qdev->current_release_bo[cur_idx] = NULL;
+> +	}
+> +
+> +	/*
+> +	 * Ask host to release resources (+fill release ring),
+> +	 * then wait for the release actually happening.
+> +	 */
+> +	qxl_io_notify_oom(qdev);
+> +	for (try = 0; try < 20 && atomic_read(&qdev->release_count) > 0; try++)
+> +		msleep(20);
 
-[    5.258534] ==================================================================
-[    5.258931] BUG: KASAN: user-memory-access in qxl_destroy_monitors_object+0x42/0xa0 [qxl]
-[    5.259388] Write of size 8 at addr 00000000000014dc by task modprobe/95
-[    5.259754]
-[    5.259842] CPU: 0 PID: 95 Comm: modprobe Not tainted 5.11.0-rc6-00007-g88bb507a74ea #62
-[    5.260309] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.13.0-48-gd9c812dda54
-[    5.260917] Call Trace:
-[    5.261056]  dump_stack+0x7d/0xa3
-[    5.261245]  kasan_report.cold+0x10c/0x10e
-[    5.261475]  ? qxl_destroy_monitors_object+0x42/0xa0 [qxl]
-[    5.261789]  check_memory_region+0x17c/0x1e0
-[    5.262029]  qxl_destroy_monitors_object+0x42/0xa0 [qxl]
-[    5.262332]  qxl_modeset_fini+0x9/0x20 [qxl]
-[    5.262595]  qxl_drm_release+0x22/0x30 [qxl]
-[    5.262841]  drm_dev_release+0x32/0x50
-[    5.263047]  release_nodes+0x39e/0x410
-[    5.263253]  ? devres_release+0x40/0x40
-[    5.263462]  really_probe+0x2ea/0x420
-[    5.263664]  driver_probe_device+0x6d/0xd0
-[    5.263888]  device_driver_attach+0x82/0x90
-[    5.264116]  ? device_driver_attach+0x90/0x90
-[    5.264353]  __driver_attach+0x60/0x100
-[    5.264563]  ? device_driver_attach+0x90/0x90
-[    5.264801]  bus_for_each_dev+0xe1/0x140
-[    5.265014]  ? subsys_dev_iter_exit+0x10/0x10
-[    5.265251]  ? klist_node_init+0x61/0x80
-[    5.265464]  bus_add_driver+0x254/0x2a0
-[    5.265673]  driver_register+0xd3/0x150
-[    5.265882]  ? 0xffffffffc0048000
-[    5.266064]  do_one_initcall+0x84/0x250
-[    5.266274]  ? trace_event_raw_event_initcall_finish+0x150/0x150
-[    5.266596]  ? unpoison_range+0xf/0x30
-[    5.266801]  ? ____kasan_kmalloc.constprop.0+0x84/0xa0
-[    5.267082]  ? unpoison_range+0xf/0x30
-[    5.267287]  ? unpoison_range+0xf/0x30
-[    5.267491]  do_init_module+0xf8/0x350
-[    5.267697]  load_module+0x3fe6/0x4340
-[    5.267902]  ? vm_unmap_ram+0x1d0/0x1d0
-[    5.268115]  ? module_frob_arch_sections+0x20/0x20
-[    5.268375]  ? __do_sys_finit_module+0x108/0x170
-[    5.268624]  __do_sys_finit_module+0x108/0x170
-[    5.268865]  ? __ia32_sys_init_module+0x40/0x40
-[    5.269111]  ? file_open_root+0x200/0x200
-[    5.269330]  ? do_sys_open+0x85/0xe0
-[    5.269527]  ? filp_open+0x50/0x50
-[    5.269714]  ? exit_to_user_mode_prepare+0xfc/0x130
-[    5.269978]  do_syscall_64+0x33/0x40
-[    5.270176]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-[    5.270450] RIP: 0033:0x7fa3f685bcf7
-[    5.270646] Code: 48 89 57 30 48 8b 04 24 48 89 47 38 e9 1d a0 02 00 48 89 f8 48 89 f7 48 89 d1
-[    5.271634] RSP: 002b:00007ffca83048d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
-[    5.272037] RAX: ffffffffffffffda RBX: 0000000001e94a70 RCX: 00007fa3f685bcf7
-[    5.272416] RDX: 0000000000000000 RSI: 0000000001e939e0 RDI: 0000000000000003
-[    5.272794] RBP: 0000000000000003 R08: 0000000000000000 R09: 0000000000000001
-[    5.273171] R10: 00007fa3f68bf300 R11: 0000000000000246 R12: 0000000001e939e0
-[    5.273550] R13: 0000000000000000 R14: 0000000001e93bd0 R15: 0000000000000001
-[    5.273928] ==================================================================
+A bit icky, why not use a wait queue or something like that instead of
+hand-rolling this? Not for perf reasons, just so it's a bit clear who
+waits for whom and why.
+-Daniel
 
-Signed-off-by: Tong Zhang <ztong0001@gmail.com>
----
- drivers/gpu/drm/qxl/qxl_drv.c | 2 ++
- 1 file changed, 2 insertions(+)
+> +
+>  	qxl_gem_fini(qdev);
+>  	qxl_bo_fini(qdev);
+>  	flush_work(&qdev->gc_work);
+> diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
+> index 28013fd1f8ea..43a5436853b7 100644
+> --- a/drivers/gpu/drm/qxl/qxl_release.c
+> +++ b/drivers/gpu/drm/qxl/qxl_release.c
+> @@ -196,6 +196,7 @@ qxl_release_free(struct qxl_device *qdev,
+>  		qxl_release_free_list(release);
+>  		kfree(release);
+>  	}
+> +	atomic_dec(&qdev->release_count);
+>  }
+>  
+>  static int qxl_release_bo_alloc(struct qxl_device *qdev,
+> @@ -344,6 +345,7 @@ int qxl_alloc_release_reserved(struct qxl_device *qdev, unsigned long size,
+>  			*rbo = NULL;
+>  		return idr_ret;
+>  	}
+> +	atomic_inc(&qdev->release_count);
+>  
+>  	mutex_lock(&qdev->release_mutex);
+>  	if (qdev->current_release_bo_offset[cur_idx] + 1 >= releases_per_bo[cur_idx]) {
+> -- 
+> 2.29.2
+> 
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 6e7f16f4cec7..41cdf9d1e59d 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -144,6 +144,8 @@ static void qxl_drm_release(struct drm_device *dev)
- 	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
- 	 * non-trivial though.
- 	 */
-+	if (!dev->registered)
-+		return;
- 	qxl_modeset_fini(qdev);
- 	qxl_device_fini(qdev);
- }
 -- 
-2.25.1
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
