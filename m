@@ -2,32 +2,32 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EF1630FB19
-	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 19:18:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 940B230FB23
+	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 19:22:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C81A16EE27;
-	Thu,  4 Feb 2021 18:18:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F29388947A;
+	Thu,  4 Feb 2021 18:22:28 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 148086EE24;
- Thu,  4 Feb 2021 18:18:51 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5352D8947A;
+ Thu,  4 Feb 2021 18:22:27 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9DC79AC45;
- Thu,  4 Feb 2021 18:18:49 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id DEA59AE95;
+ Thu,  4 Feb 2021 18:22:25 +0000 (UTC)
 To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
 References: <20210204145712.1531203-1-kraxel@redhat.com>
- <20210204145712.1531203-7-kraxel@redhat.com>
+ <20210204145712.1531203-11-kraxel@redhat.com>
 From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <26e46352-9804-f7bd-416e-9304de839e22@suse.de>
-Date: Thu, 4 Feb 2021 19:18:48 +0100
+Message-ID: <494099f2-01d7-fa62-9101-eb09765d7b98@suse.de>
+Date: Thu, 4 Feb 2021 19:22:24 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <20210204145712.1531203-7-kraxel@redhat.com>
-Subject: Re: [Spice-devel] [PATCH v6 06/10] drm/qxl: properly pin/unpin
- shadow
+In-Reply-To: <20210204145712.1531203-11-kraxel@redhat.com>
+Subject: Re: [Spice-devel] [PATCH v6 10/10] drm/qxl: allocate dumb buffers
+ in ram
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,40 +39,40 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+Cc: David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>,
+ open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: multipart/mixed; boundary="===============0453203287=="
+ <virtualization@lists.linux-foundation.org>
+Content-Type: multipart/mixed; boundary="===============0156742609=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0453203287==
+--===============0156742609==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl"
+ boundary="pyZR8drgja7WQpmkmetYozYATek7dMo4p"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl
-Content-Type: multipart/mixed; boundary="bVdDgZUP1a5PNggIVo8wmhttgCyoTsyiI";
+--pyZR8drgja7WQpmkmetYozYATek7dMo4p
+Content-Type: multipart/mixed; boundary="9hodCVcSmlM4NSTMnLoweg2r3f8cZ8USb";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
-Cc: Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>,
+Cc: David Airlie <airlied@linux.ie>, open list
+ <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <spice-devel@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>
-Message-ID: <26e46352-9804-f7bd-416e-9304de839e22@suse.de>
-Subject: Re: [PATCH v6 06/10] drm/qxl: properly pin/unpin shadow
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+Message-ID: <494099f2-01d7-fa62-9101-eb09765d7b98@suse.de>
+Subject: Re: [PATCH v6 10/10] drm/qxl: allocate dumb buffers in ram
 References: <20210204145712.1531203-1-kraxel@redhat.com>
- <20210204145712.1531203-7-kraxel@redhat.com>
-In-Reply-To: <20210204145712.1531203-7-kraxel@redhat.com>
+ <20210204145712.1531203-11-kraxel@redhat.com>
+In-Reply-To: <20210204145712.1531203-11-kraxel@redhat.com>
 
---bVdDgZUP1a5PNggIVo8wmhttgCyoTsyiI
+--9hodCVcSmlM4NSTMnLoweg2r3f8cZ8USb
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
@@ -80,56 +80,37 @@ Content-Transfer-Encoding: quoted-printable
 
 
 Am 04.02.21 um 15:57 schrieb Gerd Hoffmann:
-> Suggested-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> dumb buffers are shadowed anyway, so there is no need to store them
+> in device memory.  Use QXL_GEM_DOMAIN_CPU (TTM_PL_SYSTEM) instead.
 
-Thanks for this.
+Makes sense. I had similar issues in other drivers about the placement=20
+of buffers. For them, all new buffers now go into system ram by default, =
+
+and only move into device memory when they have to.
+
+>=20
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 
 Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-
 > ---
->   drivers/gpu/drm/qxl/qxl_display.c | 4 ++++
->   1 file changed, 4 insertions(+)
+>   drivers/gpu/drm/qxl/qxl_dumb.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qx=
-l_display.c
-> index 60331e31861a..d25fd3acc891 100644
-> --- a/drivers/gpu/drm/qxl/qxl_display.c
-> +++ b/drivers/gpu/drm/qxl/qxl_display.c
-> @@ -802,12 +802,14 @@ static int qxl_plane_prepare_fb(struct drm_plane =
-*plane,
->   		}
->   		if (user_bo->shadow !=3D qdev->dumb_shadow_bo) {
->   			if (user_bo->shadow) {
-> +				qxl_bo_unpin(user_bo->shadow);
->   				drm_gem_object_put
->   					(&user_bo->shadow->tbo.base);
->   				user_bo->shadow =3D NULL;
->   			}
->   			drm_gem_object_get(&qdev->dumb_shadow_bo->tbo.base);
->   			user_bo->shadow =3D qdev->dumb_shadow_bo;
-> +			qxl_bo_pin(user_bo->shadow);
->   		}
->   	}
->  =20
-> @@ -833,6 +835,7 @@ static void qxl_plane_cleanup_fb(struct drm_plane *=
-plane,
->   	qxl_bo_unpin(user_bo);
->  =20
->   	if (old_state->fb !=3D plane->state->fb && user_bo->shadow) {
-> +		qxl_bo_unpin(user_bo->shadow);
->   		drm_gem_object_put(&user_bo->shadow->tbo.base);
->   		user_bo->shadow =3D NULL;
->   	}
-> @@ -1230,6 +1233,7 @@ int qxl_modeset_init(struct qxl_device *qdev)
->   void qxl_modeset_fini(struct qxl_device *qdev)
->   {
->   	if (qdev->dumb_shadow_bo) {
-> +		qxl_bo_unpin(qdev->dumb_shadow_bo);
->   		drm_gem_object_put(&qdev->dumb_shadow_bo->tbo.base);
->   		qdev->dumb_shadow_bo =3D NULL;
->   	}
+> diff --git a/drivers/gpu/drm/qxl/qxl_dumb.c b/drivers/gpu/drm/qxl/qxl_d=
+umb.c
+> index c04cd5a2553c..48a58ba1db96 100644
+> --- a/drivers/gpu/drm/qxl/qxl_dumb.c
+> +++ b/drivers/gpu/drm/qxl/qxl_dumb.c
+> @@ -59,7 +59,7 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
+>   	surf.stride =3D pitch;
+>   	surf.format =3D format;
+>   	r =3D qxl_gem_object_create_with_handle(qdev, file_priv,
+> -					      QXL_GEM_DOMAIN_SURFACE,
+> +					      QXL_GEM_DOMAIN_CPU,
+>   					      args->size, &surf, &qobj,
+>   					      &handle);
+>   	if (r)
 >=20
 
 --=20
@@ -141,32 +122,32 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---bVdDgZUP1a5PNggIVo8wmhttgCyoTsyiI--
+--9hodCVcSmlM4NSTMnLoweg2r3f8cZ8USb--
 
---puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl
+--pyZR8drgja7WQpmkmetYozYATek7dMo4p
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcOogFAwAAAAAACgkQlh/E3EQov+Dg
-Vg/+MUInIKH8GpLCOyMWjazU0ZyjdPK+V/ovGgU1m6paa5rIQo2By75Mk2CBWYoEX5C3jVg8BAq7
-CuULKTn6Qzy58+h5vJhK8qdQfzCRPN6a3OBycUHiuwaZWLBbr39QbJYIMYl2gz2GAR7wdx051ZnP
-h+3PwY6fMUQbklPO34p7IneF19eOspTehL6wmirOv7njTu74VJpkDIpaJEC2VTOJl6L13uYYlFg+
-p6ukjInHCkR/+4Uc0SnSR64+Ts71FrNtKoWcE4Vu1KQprd7OUVOGbn/BYl3qQP9auhGXW9NhXpmS
-b/vueXUfzHk0VuPjMPcp7/LJvA9wG1DBn1Cddm+FMoiGYoH7vPOOY/yH4A+NnGjiyFH+Jo4Ug2yU
-eGwQyXdnmzQyj6OXMrD6FaxyCx0Y7HdefvmM/5/dSX/qWoy2YqjVb9bFfRMRHIPGc6nEaEKo7s1o
-ESwZCkHBsn+aPCatdhrLbySrZjtI0pdTdBUBsHOFCtgh523GP24jtn7KZe0h5vbhPUPtT5zq0yNc
-Ix367RqSVvS2J9r0C0eg748FyufuQEKib37D+qIcW68u8xWe2xx1gpeDIv5VfHq1Z5eSEVuuv5mA
-osWrF0qYo4TVnIOX2bTqtTW8V2/5orsYkXp5jNgAxz/NbdCSyt/8JASh9aXdFsweHe+CL1yXGQxo
-+FA=
-=ReK/
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcO2AFAwAAAAAACgkQlh/E3EQov+Dq
+Tw//Ss7qrE339QgFvgUo6KSyLaTR9reuXmew3gm2M+w7BM02VQBDcHJ6uEWDOHTQpxcki4wApp40
+/UQ5tZ6lRKqSPdYcz9CVNAwj0gYIqREeNIubHQd08Lzzx/kGv4Y/8xQ1Q1GrjIVejJvXOYe9KJhR
+dtAklxDPn1pRe8reSY5NRHuijsxX3RPIgUYgwPn1AwxS3faEIM1801ylnXdfdcgk7l4NvoXgt3D4
+dZSltupfezt3qIsQHmZX3f1BmYj8mvJDi9cGYhl4ij8LVcTlePQCV52wkW5aQiajpGJPxbVOIbMv
+G8jOx66aV2A92ZdO010Rfhz8kWL/StnjqvOhzYmmhoXeHrqUQNd28LGqgEbA8KMRVf9cYv5co9PW
+ouaNVKV1wzeuGSqYzWcDQ/7zirLjqh2Al+OvweNkG+5MGazdcjH/LMSH00PCJRIsUXZFt/obw6P6
+SPFmMpQARcaR/s2X5i9Aq8/mm9RPLzDLF35fs/pB+t4ZuJU5DM8o0+70GUpw4jF3f5ExLLhbQ13g
+7yrkjQkaavTeUAuk7TXmyDc0rKPrTr9KghpS0qxPT5OKHLsOIXiH5Er3RLo2JLGs76itxag0Scyo
+qh2icQZMUuPJP3MAXP5YL6oxB65ZoJbTB3VYBR9/1Y1AYrCX2qQJlBDKr0Xi/0zjnFrr1KE/3HVk
+dno=
+=OQ9o
 -----END PGP SIGNATURE-----
 
---puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl--
+--pyZR8drgja7WQpmkmetYozYATek7dMo4p--
 
---===============0453203287==
+--===============0156742609==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -177,4 +158,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0453203287==--
+--===============0156742609==--
