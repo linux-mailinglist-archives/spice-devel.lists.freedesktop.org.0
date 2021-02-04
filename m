@@ -2,63 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E835D30F41B
-	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 14:47:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D16A30F59D
+	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 15:57:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E1D2589FC5;
-	Thu,  4 Feb 2021 13:47:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 166DF6EDB2;
+	Thu,  4 Feb 2021 14:57:28 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 00CE989FC5
- for <spice-devel@lists.freedesktop.org>; Thu,  4 Feb 2021 13:47:06 +0000 (UTC)
-Received: by mail-pj1-x102d.google.com with SMTP id m12so1732901pjs.4
- for <spice-devel@lists.freedesktop.org>; Thu, 04 Feb 2021 05:47:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=N5v1imd9nvqbc2sxY2ZGxzbEfL064mLwdyLejqmynTI=;
- b=ct4iDqkAy1cj+S2b36Z6RXmoCywkDbh1ipJQwATql1VV9i4CHb6//LPQwvgVce/mhM
- 1rCu9XwgxEpyThuDLGWcQrVS58BFi6qTWP3ltYQb8aM5jmNrRpVDk1zhyl4DDr5+7wDo
- wM7A033acFw6Oj69jkKCO+sXRhhrCiZiypXrBjk6qEAZZShhkWKEpvT7AAujX4lCP3DJ
- Acwc/8xtzjvS/A1WMpPtjw4iM167xz2ORapt24ShvC2SIDBvqF9VI8MFVSruj8Ytk7AL
- WRmVnkEB2C6UHrGMQ7+Dg7tzbNumK3yoHIeVGzEs3Ps2JoaSXw2lGlvLUYnq4Jr4YXN0
- wKmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=N5v1imd9nvqbc2sxY2ZGxzbEfL064mLwdyLejqmynTI=;
- b=qGf7zTo49G7KFxpwHdNuELncD2RZO3/gnVXYdTJwBDIf3+Ce9vAS8GWZEV7pvaN/eX
- KBWbbGkZnd+Jcam5ader7lUKr9rwTOKsAlCXAyLbf+2EBe5C2k58shlighmBSShlpmXj
- ijXfjmmaxStXHof8YEc25pDCJ6tj/uNzzPnvOPdhfPMIIYhwZmvj3A1OorI2AP0Ku54U
- +RWpWEvSrleNr4KhVhlrm7Pinj7QtvPK8DF4F/u6HeWkSZ6GxDNw3zYyZUdpnzacdeJx
- TQxDbFfgiCnqLn7oVZnycbR4cKaJN/2+6Jo+3JuOO3Ft+1SMzgItdHwJB9EIMgwZ8qXz
- qWOA==
-X-Gm-Message-State: AOAM530RhTutAPeqC7QirMZ4iqAMUzsw3BrbETVfmM+5ikesN4Y1yTCl
- hIPr/HVY6MZcqy3cZVguIEKGmYr8m2p8Awk01MS3TCjB1mRFbQ==
-X-Google-Smtp-Source: ABdhPJyxN3uVfeYqZXg/zipVLYOoGcDztJtWzak/K37dY6Oj7zdggHzUWhmu27YUKjwq9XWpa1hLbXrtEPEZtGpuBhs=
-X-Received: by 2002:a17:90a:fd0f:: with SMTP id
- cv15mr8862258pjb.36.1612446426597; 
- Thu, 04 Feb 2021 05:47:06 -0800 (PST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9D7BA6ED9F
+ for <spice-devel@lists.freedesktop.org>; Thu,  4 Feb 2021 14:57:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612450643;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GdOsrHPBHpzCoKPhsGidEPHdkXQSBSq9IJGbWdAMQ5c=;
+ b=OMqJEsASaN0XxMYJ2DULMpZxv4Im10vD2RWdsoWq7OM/v6UQf7Ng6HldGMASorbT4cCjR0
+ h7dwdO1PU/p7phw8WGIZZAsYN+QYfAWBBj2Ue2hOxxdNvLZH9ZH8G9r7ETR9vW60TpXY7h
+ FJGNkSRKth79rxe97On986n+j0TF6Po=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-176-VcPF9jfTPi2m7pUl7zkNMw-1; Thu, 04 Feb 2021 09:57:19 -0500
+X-MC-Unique: VcPF9jfTPi2m7pUl7zkNMw-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C2CF091271;
+ Thu,  4 Feb 2021 14:57:17 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-113-108.ams2.redhat.com
+ [10.36.113.108])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 183B4722CF;
+ Thu,  4 Feb 2021 14:57:13 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 4474F180101E; Thu,  4 Feb 2021 15:57:12 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Date: Thu,  4 Feb 2021 15:57:03 +0100
+Message-Id: <20210204145712.1531203-3-kraxel@redhat.com>
+In-Reply-To: <20210204145712.1531203-1-kraxel@redhat.com>
+References: <20210204145712.1531203-1-kraxel@redhat.com>
 MIME-Version: 1.0
-References: <CA+5jrfnjJnAi+FSCcHxNsyX=fnRF4RGFBOsH-+CHUbdNxeT-Fg@mail.gmail.com>
- <16e2b237-ffad-6bf0-d714-0c00fb658030@redhat.com>
- <CA+5jrfn5GHRLN2RUu=OSBz6fjVjXHVHHxLqhdezVzxTXb2NMLQ@mail.gmail.com>
- <CAHt6W4fZfzsh5QBejxBa1m35AKN6XmZ=L3-4OnMs5X+M6J1rMw@mail.gmail.com>
- <CA+5jrfkzL3sGE0g+06aNEKYug2Dfa2njG3WjmVMK6WPJUedTxQ@mail.gmail.com>
- <c2bb34de-0c44-ed62-6712-140c138e0286@redhat.com>
- <CA+5jrf=8Y1P2rK+LHfkvJC-kBpDjGTgf3TbWa7wcEcyiuRDUAQ@mail.gmail.com>
- <b8defe56-5bb6-de64-169f-7be47db71599@redhat.com>
- <CA+5jrfke2Kb0PwtBR1YFuT6nVGfo36L5VC8FyS9ctpniBQpDOQ@mail.gmail.com>
-In-Reply-To: <CA+5jrfke2Kb0PwtBR1YFuT6nVGfo36L5VC8FyS9ctpniBQpDOQ@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 4 Feb 2021 13:46:55 +0000
-Message-ID: <CAHt6W4deZvYL-4SYedk+=QWhEhQ6_EUvvLOQPwNiebVG5C9X3g@mail.gmail.com>
-To: lx <lxlenovostar@gmail.com>
-Subject: Re: [Spice-devel] Is the data after USB camera redirection
- compressed?
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Subject: [Spice-devel] [PATCH v6 02/10] Revert "drm/qxl: do not run release
+ if qxl failed to init"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,90 +60,47 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, Tong Zhang <ztong0001@gmail.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SWwgZ2lvcm5vIGdpbyA0IGZlYiAyMDIxIGFsbGUgb3JlIDEyOjU2IGx4IDxseGxlbm92b3N0YXJA
-Z21haWwuY29tPiBoYSBzY3JpdHRvOgo+Cj4KPgo+IFVyaSBMdWJsaW4gPHVyaWxAcmVkaGF0LmNv
-bT4g5LqOMjAyMeW5tDLmnIgy5pel5ZGo5LqMIOS4i+WNiDEwOjMy5YaZ6YGT77yaCj4+Cj4+IE9u
-IDIvMi8yMSAyOjUwIFBNLCBseCB3cm90ZToKPj4gPgo+PiA+Cj4+ID4gVXJpIEx1YmxpbiA8dXJp
-bEByZWRoYXQuY29tIDxtYWlsdG86dXJpbEByZWRoYXQuY29tPj4g5LqOMjAyMeW5tDHmnIgzMeaX
-peWRqAo+PiA+IOaXpSDkuIvljYg5OjQ45YaZ6YGT77yaCj4+ID4KPj4gPiAgICAgT24gMS8zMC8y
-MSAxOjI1IFBNLCBseCB3cm90ZToKPj4gPiAgICAgID4gRnJlZGlhbm8gWmlnbGlvIDxmcmVkZHk3
-N0BnbWFpbC5jb20gPG1haWx0bzpmcmVkZHk3N0BnbWFpbC5jb20+Pgo+PiA+ICAgICDkuo4yMDIx
-5bm0MeaciDI55pel5ZGo5LqUIOS4i+WNiDY6MznlhpnpgZPvvJoKPj4gPiAgICAgID4KPj4gPiAg
-ICAgID4+IElsIGdpb3JubyBnaW8gMjggZ2VuIDIwMjEgYWxsZSBvcmUgMDE6NDUgbHgKPj4gPiAg
-ICAgPGx4bGVub3Zvc3RhckBnbWFpbC5jb20gPG1haWx0bzpseGxlbm92b3N0YXJAZ21haWwuY29t
-Pj4gaGEKPj4gPiAgICAgID4+IHNjcml0dG86Cj4+ID4gICAgICA+Pj4KPj4gPiAgICAgID4+Pgo+
-PiA+ICAgICAgPj4+IFVyaSBMdWJsaW4gPHVyaWxAcmVkaGF0LmNvbSA8bWFpbHRvOnVyaWxAcmVk
-aGF0LmNvbT4+IOS6jjIwMjHlubQxCj4+ID4gICAgIOaciDI35pel5ZGo5LiJIOS4i+WNiDExOjQ3
-5YaZ6YGT77yaCj4+ID4gICAgICA+Pj4+Cj4+ID4gICAgICA+Pj4+IE9uIDEvMjcvMjEgNDoyMiBB
-TSwgbHggd3JvdGU6Cj4+ID4gICAgICA+Pj4+PiBIaSBhbGw6Cj4+ID4gICAgICA+Pj4+PiAgICAg
-ICAgICBJZiBJIHJlZGlyZWN0IFVTQiBjYW1lcmEgdG8gdmlydHVhbCBtYWNoaW5lLCBJIHRoaW5r
-Cj4+ID4gICAgIHdlIHNlbmQKPj4gPiAgICAgID4+Pj4+IG9yaWdpbmFsIFVSQiB0byB2aXJ0dWFs
-IG1hY2hpbmUgYnkgVVNCIGNoYW5uZWwuCj4+ID4gICAgICA+Pj4+PiBJcyB0aGlzIHVuZGVyc3Rh
-bmRpbmcgY29ycmVjdD8gSWYgd2Ugd2FudCB0byBpbXByb3ZlIHRoZSB1c2VyCj4+ID4gICAgICA+
-PiBleHBlcmllbmNlLAo+PiA+ICAgICAgPj4+Pj4gd2UgbmVlZCB0byBjb21wcmVzcyBVUkIgZGF0
-YT8KPj4gPiAgICAgID4+Pj4KPj4gPiAgICAgID4+Pj4gSGksCj4+ID4gICAgICA+Pj4+Cj4+ID4g
-ICAgICA+Pj4+IElmIHlvdSBidWlsZCB3aXRoIGx6NCBlbmFibGVkIChib3RoIGNsaWVudCBhbmQg
-c2VydmVyKSwKPj4gPiAgICAgID4+Pj4gdGhlbiBpdCBzaG91bGQgdXNlIGx6NCB0byBjb21wcmVz
-cyB0aGUgZGF0YS4KPj4gPiAgICAgID4+Pj4KPj4gPiAgICAgID4+Pj4gVGhlcmUgaXMgbm8gZnVu
-Y3Rpb25hbGl0eSB0byBjcmVhdGUKPj4gPiAgICAgID4+Pj4gYSB2aWRlbyBzdHJlYW0gb3V0IG9m
-IHJhdyBkYXRhLgo+PiA+ICAgICAgPj4+Pgo+PiA+ICAgICAgPj4+PiBDYW4gdGhlIFVTQiBjYW1l
-cmEgYmUgY29uZmlndXJlZCB0byBzZW5kIGEgY29tcHJlc3Mgc3RyZWFtPwo+PiA+ICAgICAgPj4+
-Pgo+PiA+ICAgICAgPj4+PiBVcmkuCj4+ID4gICAgICA+Pj4+Cj4+ID4gICAgICA+Pj4KPj4gPiAg
-ICAgID4+PiAgICBIaToKPj4gPiAgICAgID4+PiAgICAgVVNCIGNhbWVyYSBjYW4gc3VwcG9ydCBN
-SlBHIGFuZCBZVVYuICAgSSB0aGluayBIMjY0IGlzCj4+ID4gICAgIGJldHRlciB0aGFuCj4+ID4g
-ICAgICA+PiBNSlBHLiBTbyBDYW4gd2UKPj4gPiAgICAgID4+PiBsZXQgc3BpY2Ugc3VwcG9ydCBI
-MjY0ID8gSXMgdGhpcyBmZWFzaWJsZT8KPj4gPiAgICAgID4+Pgo+PiA+ICAgICAgPj4KPj4gPiAg
-ICAgID4+IFRoaXMgaXMgaW5kZXBlbmRlbnQgZnJvbSBTUElDRSwgaWYgdGhlIGNhbWVyYSBzZW5k
-IGNvbXByZXNzZWQgZGF0YQo+PiA+ICAgICAgPj4gYWxyZWFkeSBTUElDRSB3aWxsIGp1c3QKPj4g
-PiAgICAgID4+IGZvcndhcmQgY29tcHJlc3NlZCBkYXRhIGluIHdoYXRldmVyIGZvcm1hdCBpcyBp
-biBVU0IuCj4+ID4gICAgICA+PiBJZiB0aGUgY2FtZXJhIHN1cHBvcnRzIE1KUEVHIGFuZCBZVVYg
-Y2hvb3NlIE1KUEVHLCBZVVYgaXMgbm90Cj4+ID4gICAgICA+PiBjb21wcmVzc2VkIChqdXN0IGEg
-ZGlmZmVyZW50IGNvbG9yCj4+ID4gICAgICA+PiBzcGFjZSB0aGFuIFJHQiwgb2Z0ZW4gdGFraW5n
-IGxlc3MgYml0cyBidXQgc3RpbGwgbm90IGNvbXByZXNzZWQpLgo+PiA+ICAgICAgPj4KPj4gPiAg
-ICAgID4+IEZyZWRpYW5vCj4+ID4gICAgICA+Pgo+PiA+ICAgICAgPgo+PiA+ICAgICAgPiBJZiB0
-aGUgY2FtZXJhIGNob29zZXMgWVVWLCBjYW4gd2UgZW5jb2RlIGl0IHRvIEgyNjQgaW4gU1BJQ0U/
-IElzIHRoaXMKPj4gPiAgICAgID4gZmVhc2libGU/Cj4+ID4KPj4gPiAgICAgQ3VycmVudGx5LCBT
-UElDRSBkb2VzIG5vdCBkbyBsb29rIGF0IFVTQiBkYXRhLgo+PiA+Cj4+ID4KPj4gPiBIaToKPj4g
-Pgo+PiA+IFdoYXQgZG8geW91IG1lYW4gc3BpY2UganVzdCBmb3J3YXJkIFVTQiBwcm90b2NvbCBk
-YXRhPwo+Pgo+PiBTUElDRSBkb2VzIGxvb2sgYXQgVVNCIGhlYWRlcnMsIGNvbmZpZ3VyYXRpb25z
-LCBldGMuCj4+Cj4+IEkgbWVhbnQgdGhhdCBTUElDRSBkb2VzIG5vdCBsb29rIGF0IGRhdGEgdGhh
-dCBpcwo+PiBiZWluZyB0cmFuc2ZlcnJlZC4gU28gZm9yIGV4YW1wbGUsIGl0IGRvZXMKPj4gbm90
-IGtub3cgaWYgdGhlIGRhdGEgY29taW5nIGZyb20gdGhlIGNhbWVyYSBpcyBZVVYsCj4+IFJHQiwg
-TUpQRUcgb3Igb3RoZXIuCj4+Cj4+IFRvIGFuc3dlciB5b3VyIHF1ZXN0aW9uIGFib3ZlIG1vcmUg
-Y2xlYXJseToKPj4gQ3VycmVudGx5IGl0J3Mgbm90IHBvc3NpYmxlIHRvIEgyNjQtZW5jb2RlIHRo
-ZQo+PiBZVVYgZGF0YSBjb21pbmcgZnJvbSB0aGUgY2FtZXJhLgo+PiBJdCBpcyBmZWFzaWJsZSB0
-byBhZGQgY29kZSB0aGF0IGRvZXMgaXQuCj4+IElmIHBvc3NpYmxlLCBpdCdzIGJlc3QgaWYgdGhl
-IGNhbWVyYSBzZW5kcyBhbiBlbmNvZGVkIHZpZGVvIHN0cmVhbS4KPj4KPj4gVXJpLgo+Pgo+IEhp
-IGFsbDoKPiAgICAgICAgIEkga25vdyBJQ0EvUkRQIGlzIGJldHRlciB0aGFuIHNwaWNlLCB3aGVu
-IHRoZXkgcmVkaXJlY3QgdGhlIFVTQiAgY2FtZXJhIGRldmljZXMuIFRoaXMgaXMgYmVhY3VzZQo+
-ICBJQ0EvUkRQIGVuY29kZSB2aWRlbyBzdHJlYW0sIHNvIHRoZSBlZmZlY3QgaXMgc28gZ29vZD8g
-T3IgaG93IGNhbiB3ZSBvcHRpbWl6ZSBzcGljZSB0byBhY2hpZXZlIHRoZWlyIHJlc3VsdHM/Cj4K
-PiBUaGFuayB5b3UKPgo+IGJ0dzogSSBrbm93IElDQS9SRFAgc3VwcG9ydCBmZXcgZGV2aWNlcy4K
-PgoKSGksCiAgIHdoYXQgZXhhY3RseSBkbyB5b3UgbWVhbiBieSAiSSBrbm93IElDQS9SRFAgaXMg
-YmV0dGVyIHRoYW4gc3BpY2UiLApJIG1lYW4sIGRpZCB5b3UKcGVyc29uYWxseSB0cnkgYW5kIHdv
-cmtzIGJldHRlcj8gRGlkIHlvdSBkbyBzb21lIG1lYXN1cmVtZW50PyBJcyBqdXN0CnNvbWUgY29t
-bWVudHMKb24gSW50ZXJuZXQ/CgpJIGRpZG4ndCB0cnkgcGVyc29uYWxseSAoSSBkb24ndCBoYXZl
-IElDQSBzb2x1dGlvbiBpbnN0YWxsZWQpIGJ1dCB5b3UKY291bGQgcnVuIGEgdGVzdCB0byBjaGVj
-ayBmb3IKY29tcHJlc3Npb246Ci0gcnVuIGEgcHJvZ3JhbSBpbiB0aGUgVk0gdG8gcmVjb3JkIGNh
-bWVyYSB2aWRlbyB3aXRob3V0IHNob3dpbmcgb24gdGhlIHNjcmVlbgotIHN0YXJ0IG1vbml0b3Jp
-bmcgdHJhZmZpYyAobGlrZSB0Y3BkdW1wLCBvciBqdXN0IHNvbWUgbmV0d29yawpzdGF0aXN0aWMg
-cHJvZ3JhbSkKLSBsZXQgdGhlIHJlY29yZGluZyBnb2VzIGZvciBhIHByZWRlZmluZWQgYW1vdW50
-IG9mIHRpbWUKLSBzdG9wIG1vbml0b3JpbmcuCi0gbG9vayBhdCB0aGUgYW1vdW50IG9mIHRyYWZm
-aWMgZ2VuZXJhdGVkLgpJZiB0aGUgYW1vdW50IG9mIHRyYWZmaWMgaXMgbGVzcyB0aGV5IGFyZSBj
-b21wcmVzc2luZyAobm90IHNhaWQgdGhleQphcmUgdmlkZW8gY29tcHJlc3NpbmcsCm1heWJlIG9u
-bHkgYXMgcmF3IGRhdGEgYmV0dGVyIHRoYW4gdXMpLiBJZiB0aGV5IGFyZSBjb21wcmVzc2luZyBB
-IExPVAoobGlrZSA1IHRpbWVzKQpwcm9iYWJseSB0aGV5IGFyZSB1c2luZyB2aWRlbyBjb21wcmVz
-c2lvbiAodW5sZXNzIHRoZXkgZm91bmQgYSB3YXkgdG8KcmVkdWNlIGZyYW1lIHJhdGUpLgoKSXQg
-Y291bGQgYmUgdGhhdCB0aGV5IGRldGVjdCBjYW1lcmEgYW5kIG9wdGltaXplIHNwZWNpZmljYWxs
-eSB0aGUKZGlhbG9nIHdpdGggdGhlIFZNLgoKT3RoZXIgcmVhc29ucyBjb3VsZCBiZSBsZXNzIHBp
-cGVsaW5lIGhhdmluZyBhIGxvd2VyIGxhdGVuY3kgb3Igc29tZQpzb3J0IG9mIFFvUyBmb3IgdGhl
-Cm5ldHdvcmsuCgpGcmVkaWFubwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGlu
-Zm8vc3BpY2UtZGV2ZWwK
+This reverts commit b91907a6241193465ca92e357adf16822242296d.
+
+Patch is broken, it effectively makes qxl_drm_release() a nop
+because on normal driver shutdown qxl_drm_release() is called
+*after* drm_dev_unregister().
+
+Cc: Tong Zhang <ztong0001@gmail.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 34c8b25b5780..fb5f6a5e81d7 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
+ 	 * non-trivial though.
+ 	 */
+-	if (!dev->registered)
+-		return;
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+ }
+-- 
+2.29.2
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
