@@ -2,32 +2,32 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4391E30FB07
-	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 19:17:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EF1630FB19
+	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 19:18:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AC71E6EE22;
-	Thu,  4 Feb 2021 18:17:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C81A16EE27;
+	Thu,  4 Feb 2021 18:18:52 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4B5186EE1C;
- Thu,  4 Feb 2021 18:17:52 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 148086EE24;
+ Thu,  4 Feb 2021 18:18:51 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9FFB2AF19;
- Thu,  4 Feb 2021 18:17:50 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9DC79AC45;
+ Thu,  4 Feb 2021 18:18:49 +0000 (UTC)
 To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
 References: <20210204145712.1531203-1-kraxel@redhat.com>
- <20210204145712.1531203-6-kraxel@redhat.com>
+ <20210204145712.1531203-7-kraxel@redhat.com>
 From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <bcb00728-5798-aa19-0bf2-b52829916353@suse.de>
-Date: Thu, 4 Feb 2021 19:17:49 +0100
+Message-ID: <26e46352-9804-f7bd-416e-9304de839e22@suse.de>
+Date: Thu, 4 Feb 2021 19:18:48 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <20210204145712.1531203-6-kraxel@redhat.com>
-Subject: Re: [Spice-devel] [PATCH v6 05/10] drm/qxl: release shadow on
- shutdown
+In-Reply-To: <20210204145712.1531203-7-kraxel@redhat.com>
+Subject: Re: [Spice-devel] [PATCH v6 06/10] drm/qxl: properly pin/unpin
+ shadow
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,40 +39,40 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>,
- open list <linux-kernel@vger.kernel.org>,
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>
-Content-Type: multipart/mixed; boundary="===============0642558505=="
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: multipart/mixed; boundary="===============0453203287=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0642558505==
+--===============0453203287==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf"
+ boundary="puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf
-Content-Type: multipart/mixed; boundary="Pt9hD2fxGYr4bNM5i7RjcBEacqKwJegvC";
+--puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl
+Content-Type: multipart/mixed; boundary="bVdDgZUP1a5PNggIVo8wmhttgCyoTsyiI";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
-Cc: David Airlie <airlied@linux.ie>, open list
- <linux-kernel@vger.kernel.org>,
+Cc: Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
-Message-ID: <bcb00728-5798-aa19-0bf2-b52829916353@suse.de>
-Subject: Re: [PATCH v6 05/10] drm/qxl: release shadow on shutdown
+ <spice-devel@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>
+Message-ID: <26e46352-9804-f7bd-416e-9304de839e22@suse.de>
+Subject: Re: [PATCH v6 06/10] drm/qxl: properly pin/unpin shadow
 References: <20210204145712.1531203-1-kraxel@redhat.com>
- <20210204145712.1531203-6-kraxel@redhat.com>
-In-Reply-To: <20210204145712.1531203-6-kraxel@redhat.com>
+ <20210204145712.1531203-7-kraxel@redhat.com>
+In-Reply-To: <20210204145712.1531203-7-kraxel@redhat.com>
 
---Pt9hD2fxGYr4bNM5i7RjcBEacqKwJegvC
+--bVdDgZUP1a5PNggIVo8wmhttgCyoTsyiI
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
@@ -80,12 +80,13 @@ Content-Transfer-Encoding: quoted-printable
 
 
 Am 04.02.21 um 15:57 schrieb Gerd Hoffmann:
-> In case we have a shadow surface on shutdown release
-> it so it doesn't leak.
->=20
+> Suggested-by: Thomas Zimmermann <tzimmermann@suse.de>
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 
+Thanks for this.
+
 Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+
 
 > ---
 >   drivers/gpu/drm/qxl/qxl_display.c | 4 ++++
@@ -93,19 +94,42 @@ Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
 >=20
 > diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qx=
 l_display.c
-> index 38d6b596094d..60331e31861a 100644
+> index 60331e31861a..d25fd3acc891 100644
 > --- a/drivers/gpu/drm/qxl/qxl_display.c
 > +++ b/drivers/gpu/drm/qxl/qxl_display.c
-> @@ -1229,5 +1229,9 @@ int qxl_modeset_init(struct qxl_device *qdev)
+> @@ -802,12 +802,14 @@ static int qxl_plane_prepare_fb(struct drm_plane =
+*plane,
+>   		}
+>   		if (user_bo->shadow !=3D qdev->dumb_shadow_bo) {
+>   			if (user_bo->shadow) {
+> +				qxl_bo_unpin(user_bo->shadow);
+>   				drm_gem_object_put
+>   					(&user_bo->shadow->tbo.base);
+>   				user_bo->shadow =3D NULL;
+>   			}
+>   			drm_gem_object_get(&qdev->dumb_shadow_bo->tbo.base);
+>   			user_bo->shadow =3D qdev->dumb_shadow_bo;
+> +			qxl_bo_pin(user_bo->shadow);
+>   		}
+>   	}
 >  =20
+> @@ -833,6 +835,7 @@ static void qxl_plane_cleanup_fb(struct drm_plane *=
+plane,
+>   	qxl_bo_unpin(user_bo);
+>  =20
+>   	if (old_state->fb !=3D plane->state->fb && user_bo->shadow) {
+> +		qxl_bo_unpin(user_bo->shadow);
+>   		drm_gem_object_put(&user_bo->shadow->tbo.base);
+>   		user_bo->shadow =3D NULL;
+>   	}
+> @@ -1230,6 +1233,7 @@ int qxl_modeset_init(struct qxl_device *qdev)
 >   void qxl_modeset_fini(struct qxl_device *qdev)
 >   {
-> +	if (qdev->dumb_shadow_bo) {
-> +		drm_gem_object_put(&qdev->dumb_shadow_bo->tbo.base);
-> +		qdev->dumb_shadow_bo =3D NULL;
-> +	}
->   	qxl_destroy_monitors_object(qdev);
->   }
+>   	if (qdev->dumb_shadow_bo) {
+> +		qxl_bo_unpin(qdev->dumb_shadow_bo);
+>   		drm_gem_object_put(&qdev->dumb_shadow_bo->tbo.base);
+>   		qdev->dumb_shadow_bo =3D NULL;
+>   	}
 >=20
 
 --=20
@@ -117,32 +141,32 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---Pt9hD2fxGYr4bNM5i7RjcBEacqKwJegvC--
+--bVdDgZUP1a5PNggIVo8wmhttgCyoTsyiI--
 
---7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf
+--puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcOk0FAwAAAAAACgkQlh/E3EQov+Bf
-pxAAzhS9yhz/7odXPF65ASlBgs72y2q/jr9c8XrWtKuF+dnkmjfzmTs57Mb1tt2uLEJezZliNmhd
-Tk6Pz22ASPfstmuLFw3gRbwT1gjjwMIzZJzH5FqSFNHFGMhwtMWY8kNbDNGPTkjc/4ON+DTQ4Hj1
-AM6TLilIZVzM/uNZ04oOnpllo1Zpe7mntkS0/hL20vK5HXb0IuEiRLCowCGTu+4zqZJtGxcqaa0/
-IckeSfvu9BDGKI3MNZvxRMZGkjZpPZX7r/yN7qy6TbsNraGX22jNAPgEx3E0eIJR9NGwC+qxm3J3
-CAcd6IGMHhNPtkb/28Vg6+UsBYb5wL0d3PdXUjsAgZ94R/dc21bBb7+9cF+NqkovM/M44ieISjJr
-aqUJj5M3mtw02bXdTZUtSfdbdWAtpGnCQFTQgQtzOn8G19hc2rHDmcUSbqCYuipmyhLIQQAN43Jt
-XBJ9c9LvgLCQUYeGsROLUpTBS8YcCO/pYd0jSLrpNpGzokrXuiJC+Z24+QMWNULtUSukAASKMgnH
-mi3QEIkULGM8A447WcSYG+IiK0AEaLyhal9xaI1nR1Ie5dH10sOZmdUYKhZZqKuiQvy3wCg+b78U
-b6Ll7UXhqLSbi4en9av9ZABOWSXdSWZ4npX3HbYiAhDXsx4/rDCTq0u9ZQqkdVxTSlVZl7QMo1kn
-nFw=
-=qOcx
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcOogFAwAAAAAACgkQlh/E3EQov+Dg
+Vg/+MUInIKH8GpLCOyMWjazU0ZyjdPK+V/ovGgU1m6paa5rIQo2By75Mk2CBWYoEX5C3jVg8BAq7
+CuULKTn6Qzy58+h5vJhK8qdQfzCRPN6a3OBycUHiuwaZWLBbr39QbJYIMYl2gz2GAR7wdx051ZnP
+h+3PwY6fMUQbklPO34p7IneF19eOspTehL6wmirOv7njTu74VJpkDIpaJEC2VTOJl6L13uYYlFg+
+p6ukjInHCkR/+4Uc0SnSR64+Ts71FrNtKoWcE4Vu1KQprd7OUVOGbn/BYl3qQP9auhGXW9NhXpmS
+b/vueXUfzHk0VuPjMPcp7/LJvA9wG1DBn1Cddm+FMoiGYoH7vPOOY/yH4A+NnGjiyFH+Jo4Ug2yU
+eGwQyXdnmzQyj6OXMrD6FaxyCx0Y7HdefvmM/5/dSX/qWoy2YqjVb9bFfRMRHIPGc6nEaEKo7s1o
+ESwZCkHBsn+aPCatdhrLbySrZjtI0pdTdBUBsHOFCtgh523GP24jtn7KZe0h5vbhPUPtT5zq0yNc
+Ix367RqSVvS2J9r0C0eg748FyufuQEKib37D+qIcW68u8xWe2xx1gpeDIv5VfHq1Z5eSEVuuv5mA
+osWrF0qYo4TVnIOX2bTqtTW8V2/5orsYkXp5jNgAxz/NbdCSyt/8JASh9aXdFsweHe+CL1yXGQxo
++FA=
+=ReK/
 -----END PGP SIGNATURE-----
 
---7IZlZjBb9k90ggGG1jTaJcJnFpkLl9eRf--
+--puhXiUl0yb9wyvcqleNQ0FC5PygyaUJjl--
 
---===============0642558505==
+--===============0453203287==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -153,4 +177,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0642558505==--
+--===============0453203287==--
