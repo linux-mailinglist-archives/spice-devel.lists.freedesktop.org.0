@@ -2,30 +2,32 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EF6130FB87
-	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 19:34:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B810330FC36
+	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 20:07:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9B5746EE2E;
-	Thu,  4 Feb 2021 18:34:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5F4C089D4D;
+	Thu,  4 Feb 2021 19:06:58 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6C9096EE2E;
- Thu,  4 Feb 2021 18:34:33 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9052589D30;
+ Thu,  4 Feb 2021 19:06:56 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F2FE0AC45;
- Thu,  4 Feb 2021 18:34:31 +0000 (UTC)
-To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+ by mx2.suse.de (Postfix) with ESMTP id 255D8AC45;
+ Thu,  4 Feb 2021 19:06:55 +0000 (UTC)
+To: Tong Zhang <ztong0001@gmail.com>
 References: <20210204145712.1531203-1-kraxel@redhat.com>
  <20210204145712.1531203-3-kraxel@redhat.com>
+ <d217112e-e49d-bd1f-0c39-3eac2dd721fd@suse.de>
+ <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
 From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <d217112e-e49d-bd1f-0c39-3eac2dd721fd@suse.de>
-Date: Thu, 4 Feb 2021 19:34:30 +0100
+Message-ID: <3feaeb62-fd50-5cca-26f7-42f6167ef77a@suse.de>
+Date: Thu, 4 Feb 2021 20:06:53 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <20210204145712.1531203-3-kraxel@redhat.com>
+In-Reply-To: <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
 Subject: Re: [Spice-devel] [PATCH v6 02/10] Revert "drm/qxl: do not run
  release if qxl failed to init"
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -39,92 +41,138 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Tong Zhang <ztong0001@gmail.com>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: multipart/mixed; boundary="===============0868673677=="
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Dave Airlie <airlied@redhat.com>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============0605812490=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0868673677==
+--===============0605812490==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="fUCwg7Kcf5XhUz7W2mxvD8yfyNdVSH3DV"
+ boundary="sugShVuXIKVOGqdiIRIR03GxisZfIG58Q"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---fUCwg7Kcf5XhUz7W2mxvD8yfyNdVSH3DV
-Content-Type: multipart/mixed; boundary="4nf4HqZJIJd5ZZmzyylTjIkZZmnhoKFoz";
+--sugShVuXIKVOGqdiIRIR03GxisZfIG58Q
+Content-Type: multipart/mixed; boundary="qbjhu3JTxQsoO1DR3tZmYIYIeQBYPtQYO";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
-Cc: David Airlie <airlied@linux.ie>, Tong Zhang <ztong0001@gmail.com>,
- open list <linux-kernel@vger.kernel.org>,
+To: Tong Zhang <ztong0001@gmail.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org,
+ David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
-Message-ID: <d217112e-e49d-bd1f-0c39-3eac2dd721fd@suse.de>
+Message-ID: <3feaeb62-fd50-5cca-26f7-42f6167ef77a@suse.de>
 Subject: Re: [PATCH v6 02/10] Revert "drm/qxl: do not run release if qxl
  failed to init"
 References: <20210204145712.1531203-1-kraxel@redhat.com>
  <20210204145712.1531203-3-kraxel@redhat.com>
-In-Reply-To: <20210204145712.1531203-3-kraxel@redhat.com>
+ <d217112e-e49d-bd1f-0c39-3eac2dd721fd@suse.de>
+ <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
+In-Reply-To: <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
 
---4nf4HqZJIJd5ZZmzyylTjIkZZmnhoKFoz
+--qbjhu3JTxQsoO1DR3tZmYIYIeQBYPtQYO
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Hi
+Hi Tong
 
-Am 04.02.21 um 15:57 schrieb Gerd Hoffmann:
-> This reverts commit b91907a6241193465ca92e357adf16822242296d.
+Am 04.02.21 um 19:52 schrieb Tong Zhang:
+> Hi Thomas,
+>=20
+> The original problem was qxl_device_init() can fail,
+> when it fails there is no need to call
+> 	qxl_modeset_fini(qdev);
+> 	qxl_device_fini(qdev);
+> But those two functions are otherwise called in the qxl_drm_release() -=
 
-This should be in the correct format, as given by 'dim cite'.
 
-  dim cite b91907a6241193465ca92e357adf16822242296d
-b91907a62411 ("drm/qxl: do not run release if qxl failed to init")
+OK, makes sense. Thanks for the explanation.
 
 >=20
-> Patch is broken, it effectively makes qxl_drm_release() a nop
-> because on normal driver shutdown qxl_drm_release() is called
-> *after* drm_dev_unregister().
+> I have posted an updated patch.
+> The new patch use the following logic
 >=20
-> Cc: Tong Zhang <ztong0001@gmail.com>
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->   drivers/gpu/drm/qxl/qxl_drv.c | 2 --
->   1 file changed, 2 deletions(-)
+> +	if (!qdev->ddev.mode_config.funcs)
+> +	  return;
+
+This is again just papering over the issue. Better don't call=20
+qxl_drm_release() in the error path if qxl_device_init() fails.
+
+I see two solutions: either roll-back manually, or use our new managed=20
+DRM interfaces. This is what the other drivers do.
+
+Best regards
+Thomas
+
+> 	qxl_modeset_fini(qdev);
+> 	qxl_device_fini(qdev);
 >=20
-> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_dr=
-v.c
-> index 34c8b25b5780..fb5f6a5e81d7 100644
-> --- a/drivers/gpu/drm/qxl/qxl_drv.c
-> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-> @@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *dev)=
-
->   	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
->   	 * non-trivial though.
->   	 */
-> -	if (!dev->registered)
-> -		return;
-
-I'm not sure what the original problem was, but I'm sure that this isn't =
-
-the fix for it. If there's a problem with shutdown, the operations=20
-rather have to be reordered correctly.
-
-With the citation style address:
-
-Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
-
->   	qxl_modeset_fini(qdev);
->   	qxl_device_fini(qdev);
->   }
+> Thanks,
+> - Tong
+>=20
+>=20
+>> On Feb 4, 2021, at 1:34 PM, Thomas Zimmermann <tzimmermann@suse.de> wr=
+ote:
+>>
+>> Hi
+>>
+>> Am 04.02.21 um 15:57 schrieb Gerd Hoffmann:
+>>> This reverts commit b91907a6241193465ca92e357adf16822242296d.
+>>
+>> This should be in the correct format, as given by 'dim cite'.
+>>
+>> dim cite b91907a6241193465ca92e357adf16822242296d
+>> b91907a62411 ("drm/qxl: do not run release if qxl failed to init")
+>>
+>>> Patch is broken, it effectively makes qxl_drm_release() a nop
+>>> because on normal driver shutdown qxl_drm_release() is called
+>>> *after* drm_dev_unregister().
+>>> Cc: Tong Zhang <ztong0001@gmail.com>
+>>> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+>>> ---
+>>>   drivers/gpu/drm/qxl/qxl_drv.c | 2 --
+>>>   1 file changed, 2 deletions(-)
+>>> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_=
+drv.c
+>>> index 34c8b25b5780..fb5f6a5e81d7 100644
+>>> --- a/drivers/gpu/drm/qxl/qxl_drv.c
+>>> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+>>> @@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *de=
+v)
+>>>   	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
+>>>   	 * non-trivial though.
+>>>   	 */
+>>> -	if (!dev->registered)
+>>> -		return;
+>>
+>> I'm not sure what the original problem was, but I'm sure that this isn=
+'t the fix for it. If there's a problem with shutdown, the operations rat=
+her have to be reordered correctly.
+>>
+>> With the citation style address:
+>>
+>> Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+>>
+>>>   	qxl_modeset_fini(qdev);
+>>>   	qxl_device_fini(qdev);
+>>>   }
+>>
+>> --=20
+>> Thomas Zimmermann
+>> Graphics Driver Developer
+>> SUSE Software Solutions Germany GmbH
+>> Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+>> (HRB 36809, AG N=C3=BCrnberg)
+>> Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+>>
 >=20
 
 --=20
@@ -136,32 +184,32 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---4nf4HqZJIJd5ZZmzyylTjIkZZmnhoKFoz--
+--qbjhu3JTxQsoO1DR3tZmYIYIeQBYPtQYO--
 
---fUCwg7Kcf5XhUz7W2mxvD8yfyNdVSH3DV
+--sugShVuXIKVOGqdiIRIR03GxisZfIG58Q
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcPjYFAwAAAAAACgkQlh/E3EQov+Ci
-Cg//ZZKtx6YvhV4s/9QZ4Jb7GrH79ZKQGgATuoR0elTnN2QOyUA6Zvo33IQzsQ4sBsWIsystjEQu
-wNcvAebdbIj8Hiu87T8+1xfVRrzTo8p0gTo7yqtOs4L3mFA3NAqPkoY82USp+R4vk2szyh5CMHeZ
-L9wbNiDcMBXerPz/vpQbLQs0WmhLAG0EBCDz26cnNhQVkn7t0gM76qXRFQzzqSFmkmLIgRtflHFV
-7WNu8AAh0gIpCIN8re829yAIEvul4AaoeFIsGDOGnZu+E47m6sj2VEpiQM83/GVarZXGm7UljMQc
-yVBnACDlK+uYEyXZIK8vYv1lVZmjg/T0XPBP/n7K00noJORqeXx5qYNuPP9wt60tZfOQVQF2Y6f6
-lA6tCp/Din72pvQ4JxRgd3/TTuMI/wM5pHEzO61fFp60rMoBtgDMpWP6O6rT/2+lx1Vfm3ukxzCp
-2xzqMKnvlFiH+4Texw067JiZIjfJcXk0dwXjZuevLvilVDFPIkPhGiuSi1dyaxP/T24TxFh/uLjM
-lroeQWyPcBhg9tVAyeMZNvqC2GGCo9SH/Sv4sT90F6lu9+9GkZXTgMgg7gnAt1SHTOYiNDTlZ+F2
-lSNKqF20h4zJFcsSGtWbD459zb8hlqDsc/pE+y0LbkFjqcR6ExKDUVcM/p/PnT8K3hE+x8G195AQ
-gf8=
-=Vk0W
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcRc0FAwAAAAAACgkQlh/E3EQov+Cv
+zBAAt+AajrDpzr+ENbzKQ1EFljU7ebL45uSdlooyn8Q2PenAq6PffmdqW/MdbTZ+9bUsUb33Z6xi
+tZVdCEnp41Hi9FdcIwnfM+oSck5Gi6QTJxLd7GH0rtTGXvz83xngZZzlxAVYEpstLozEDgqucuQ4
+2aLUPeZx3E/A2OSBK1gVg3Yyqm78IlNLeMzfjgodJbABBBVdND2FF7MT4fsFxfsLWi4RrdCyJ6+d
+LHXLXxnqYrjfZ2mfmmKJZUEV5AGo/nNJ0D+LIe9x1pTu37UtQpcgXUeeyECD+zrVdMjOpMfJgvS2
+G4mVNWOa3UzJAeZ4YBGK/YTpknYa8l8eGXNGdeqSt96OYTWb/XgkFfMfMJKXl9ArkpjI5D9MlvM6
+xWqZFGvaG1lExlIbCuyffjYp+sHJyRpN6jCiWdEcakrZHwoZM+gc9SIt2EeN1BTVKXkoKznoERX5
+ddxXZAKLorqs7qHE4rfJ/pEOP5SiqOcgP2bBvfQRQ9mBiIY2bVJVpQxFSgc/wE7FGNrmUIWwk+UU
+QB31SHD9BMSUbvnndgjqnoIlAKjNWpmbIf5k/d7aE43Z99EeGNlQIG2FomQLiEoMRIBTCDmuzVnX
+Epcd0EgdSwab7aLjhnzN1d8DRn7vESe/u67wBDAeqt6zEZUDp5PTjOZOA5zkEcGmDycBte6is1Y8
+G64=
+=bdv9
 -----END PGP SIGNATURE-----
 
---fUCwg7Kcf5XhUz7W2mxvD8yfyNdVSH3DV--
+--sugShVuXIKVOGqdiIRIR03GxisZfIG58Q--
 
---===============0868673677==
+--===============0605812490==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -172,4 +220,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0868673677==--
+--===============0605812490==--
