@@ -1,46 +1,47 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A972B30F37E
-	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 13:56:08 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E835D30F41B
+	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 14:47:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 778D26ECAC;
-	Thu,  4 Feb 2021 12:56:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E1D2589FC5;
+	Thu,  4 Feb 2021 13:47:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 15C116ECAC
- for <spice-devel@lists.freedesktop.org>; Thu,  4 Feb 2021 12:56:04 +0000 (UTC)
-Received: by mail-il1-x136.google.com with SMTP id q5so2432960ilc.10
- for <spice-devel@lists.freedesktop.org>; Thu, 04 Feb 2021 04:56:04 -0800 (PST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 00CE989FC5
+ for <spice-devel@lists.freedesktop.org>; Thu,  4 Feb 2021 13:47:06 +0000 (UTC)
+Received: by mail-pj1-x102d.google.com with SMTP id m12so1732901pjs.4
+ for <spice-devel@lists.freedesktop.org>; Thu, 04 Feb 2021 05:47:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Vs3McRZW+KbKck71HqdxygqpO/dM3f21CZ/6/LNdjas=;
- b=Ibvi5JHNE+F4/lTaYfRGKvhMZDJHPM0vuP0koIbnoSsyGBMOR42O5mS1VHOcOCYnXH
- VtotNJr8/XQTdI396aAI95NLmaJGiL0UHJmSiV7jbXmAAINI4rHh27e+paPsK8yZUmoK
- PRcdXWnkuDS0Sm+ZOONvik7VHgeMdua2hMb/k0WSq2Arwx6+E+u+UZ0JGm/WOEL66MhS
- 1YRetlMQ/oq9oIt5FiXzc4jE+PfybL4hpIAe8duDf4AQXfJpxme4Be6j6QjDB+ccTLRm
- TM4jwJ3OpwzsZ2HIKoX41u3eBe0CrzCN0octjQM3cn26E5X9t1WOD9BbzCfrEEAD7XNp
- 8Xuw==
+ :cc:content-transfer-encoding;
+ bh=N5v1imd9nvqbc2sxY2ZGxzbEfL064mLwdyLejqmynTI=;
+ b=ct4iDqkAy1cj+S2b36Z6RXmoCywkDbh1ipJQwATql1VV9i4CHb6//LPQwvgVce/mhM
+ 1rCu9XwgxEpyThuDLGWcQrVS58BFi6qTWP3ltYQb8aM5jmNrRpVDk1zhyl4DDr5+7wDo
+ wM7A033acFw6Oj69jkKCO+sXRhhrCiZiypXrBjk6qEAZZShhkWKEpvT7AAujX4lCP3DJ
+ Acwc/8xtzjvS/A1WMpPtjw4iM167xz2ORapt24ShvC2SIDBvqF9VI8MFVSruj8Ytk7AL
+ WRmVnkEB2C6UHrGMQ7+Dg7tzbNumK3yoHIeVGzEs3Ps2JoaSXw2lGlvLUYnq4Jr4YXN0
+ wKmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Vs3McRZW+KbKck71HqdxygqpO/dM3f21CZ/6/LNdjas=;
- b=Rh51ndUeyzEWxtjNZy3cfgTi6lg+kPPmVl7yDikjAJqve7BiXgvet2GFrmcAPbnlMn
- pU2pmNK1t5fubA/T3Tk7oYMSqkK7aIpa2gPO/B1UsjXFg/i3DwfQHAcgamZ5DcS6NJgU
- GCevxcbA940uHLL3y2hMWVt7LkfCdJwjjSKyfHlx5lMiRSY6eXC++Fzd/X50mBD78V0O
- pp9GyJtk65x4DXdEAZ9nxAoIwiw+7GVpPJPBLosJ3l2wZD1IVdfuVx+yI+tNNmCV72OE
- vVjtHxxkhq6K1lTgslro9GCCy4jY/J9whTRWj0uY/zkJ316j1jkD5S8otzujJ1bj4EDo
- RjPQ==
-X-Gm-Message-State: AOAM532blUXe0/lhK5PbEeDlGCObx9BYOacFS1CFR/2DYD0VJseSQS5+
- 1Punu20MzK+UY1zUlWy/yuIIOqBhWfD3Lma7Yng=
-X-Google-Smtp-Source: ABdhPJxleWQLAYsS60a4nqYWj6r2u9u3VTd4gOjSui7/i/Wrt2CvIs+fYmETLlOmikkJd461X5EX3+/itFqqtniE+9E=
-X-Received: by 2002:a05:6e02:20ee:: with SMTP id
- q14mr6485018ilv.259.1612443362844; 
- Thu, 04 Feb 2021 04:56:02 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=N5v1imd9nvqbc2sxY2ZGxzbEfL064mLwdyLejqmynTI=;
+ b=qGf7zTo49G7KFxpwHdNuELncD2RZO3/gnVXYdTJwBDIf3+Ce9vAS8GWZEV7pvaN/eX
+ KBWbbGkZnd+Jcam5ader7lUKr9rwTOKsAlCXAyLbf+2EBe5C2k58shlighmBSShlpmXj
+ ijXfjmmaxStXHof8YEc25pDCJ6tj/uNzzPnvOPdhfPMIIYhwZmvj3A1OorI2AP0Ku54U
+ +RWpWEvSrleNr4KhVhlrm7Pinj7QtvPK8DF4F/u6HeWkSZ6GxDNw3zYyZUdpnzacdeJx
+ TQxDbFfgiCnqLn7oVZnycbR4cKaJN/2+6Jo+3JuOO3Ft+1SMzgItdHwJB9EIMgwZ8qXz
+ qWOA==
+X-Gm-Message-State: AOAM530RhTutAPeqC7QirMZ4iqAMUzsw3BrbETVfmM+5ikesN4Y1yTCl
+ hIPr/HVY6MZcqy3cZVguIEKGmYr8m2p8Awk01MS3TCjB1mRFbQ==
+X-Google-Smtp-Source: ABdhPJyxN3uVfeYqZXg/zipVLYOoGcDztJtWzak/K37dY6Oj7zdggHzUWhmu27YUKjwq9XWpa1hLbXrtEPEZtGpuBhs=
+X-Received: by 2002:a17:90a:fd0f:: with SMTP id
+ cv15mr8862258pjb.36.1612446426597; 
+ Thu, 04 Feb 2021 05:47:06 -0800 (PST)
 MIME-Version: 1.0
 References: <CA+5jrfnjJnAi+FSCcHxNsyX=fnRF4RGFBOsH-+CHUbdNxeT-Fg@mail.gmail.com>
  <16e2b237-ffad-6bf0-d714-0c00fb658030@redhat.com>
@@ -50,11 +51,12 @@ References: <CA+5jrfnjJnAi+FSCcHxNsyX=fnRF4RGFBOsH-+CHUbdNxeT-Fg@mail.gmail.com>
  <c2bb34de-0c44-ed62-6712-140c138e0286@redhat.com>
  <CA+5jrf=8Y1P2rK+LHfkvJC-kBpDjGTgf3TbWa7wcEcyiuRDUAQ@mail.gmail.com>
  <b8defe56-5bb6-de64-169f-7be47db71599@redhat.com>
-In-Reply-To: <b8defe56-5bb6-de64-169f-7be47db71599@redhat.com>
-From: lx <lxlenovostar@gmail.com>
-Date: Thu, 4 Feb 2021 20:55:52 +0800
-Message-ID: <CA+5jrfke2Kb0PwtBR1YFuT6nVGfo36L5VC8FyS9ctpniBQpDOQ@mail.gmail.com>
-To: uril@redhat.com
+ <CA+5jrfke2Kb0PwtBR1YFuT6nVGfo36L5VC8FyS9ctpniBQpDOQ@mail.gmail.com>
+In-Reply-To: <CA+5jrfke2Kb0PwtBR1YFuT6nVGfo36L5VC8FyS9ctpniBQpDOQ@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 4 Feb 2021 13:46:55 +0000
+Message-ID: <CAHt6W4deZvYL-4SYedk+=QWhEhQ6_EUvvLOQPwNiebVG5C9X3g@mail.gmail.com>
+To: lx <lxlenovostar@gmail.com>
 Subject: Re: [Spice-devel] Is the data after USB camera redirection
  compressed?
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -69,262 +71,89 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============2028443191=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============2028443191==
-Content-Type: multipart/alternative; boundary="000000000000dce77b05ba8239c3"
-
---000000000000dce77b05ba8239c3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Uri Lublin <uril@redhat.com> =E4=BA=8E2021=E5=B9=B42=E6=9C=882=E6=97=A5=E5=
-=91=A8=E4=BA=8C =E4=B8=8B=E5=8D=8810:32=E5=86=99=E9=81=93=EF=BC=9A
-
-> On 2/2/21 2:50 PM, lx wrote:
-> >
-> >
-> > Uri Lublin <uril@redhat.com <mailto:uril@redhat.com>> =E4=BA=8E2021=E5=
-=B9=B41=E6=9C=8831=E6=97=A5=E5=91=A8
-> > =E6=97=A5 =E4=B8=8B=E5=8D=889:48=E5=86=99=E9=81=93=EF=BC=9A
-> >
-> >     On 1/30/21 1:25 PM, lx wrote:
-> >      > Frediano Ziglio <freddy77@gmail.com <mailto:freddy77@gmail.com>>
-> >     =E4=BA=8E2021=E5=B9=B41=E6=9C=8829=E6=97=A5=E5=91=A8=E4=BA=94 =E4=
-=B8=8B=E5=8D=886:39=E5=86=99=E9=81=93=EF=BC=9A
-> >      >
-> >      >> Il giorno gio 28 gen 2021 alle ore 01:45 lx
-> >     <lxlenovostar@gmail.com <mailto:lxlenovostar@gmail.com>> ha
-> >      >> scritto:
-> >      >>>
-> >      >>>
-> >      >>> Uri Lublin <uril@redhat.com <mailto:uril@redhat.com>> =E4=BA=
-=8E2021=E5=B9=B41
-> >     =E6=9C=8827=E6=97=A5=E5=91=A8=E4=B8=89 =E4=B8=8B=E5=8D=8811:47=E5=
-=86=99=E9=81=93=EF=BC=9A
-> >      >>>>
-> >      >>>> On 1/27/21 4:22 AM, lx wrote:
-> >      >>>>> Hi all:
-> >      >>>>>          If I redirect USB camera to virtual machine, I thin=
-k
-> >     we send
-> >      >>>>> original URB to virtual machine by USB channel.
-> >      >>>>> Is this understanding correct? If we want to improve the use=
-r
-> >      >> experience,
-> >      >>>>> we need to compress URB data?
-> >      >>>>
-> >      >>>> Hi,
-> >      >>>>
-> >      >>>> If you build with lz4 enabled (both client and server),
-> >      >>>> then it should use lz4 to compress the data.
-> >      >>>>
-> >      >>>> There is no functionality to create
-> >      >>>> a video stream out of raw data.
-> >      >>>>
-> >      >>>> Can the USB camera be configured to send a compress stream?
-> >      >>>>
-> >      >>>> Uri.
-> >      >>>>
-> >      >>>
-> >      >>>    Hi:
-> >      >>>     USB camera can support MJPG and YUV.   I think H264 is
-> >     better than
-> >      >> MJPG. So Can we
-> >      >>> let spice support H264 ? Is this feasible?
-> >      >>>
-> >      >>
-> >      >> This is independent from SPICE, if the camera send compressed
-> data
-> >      >> already SPICE will just
-> >      >> forward compressed data in whatever format is in USB.
-> >      >> If the camera supports MJPEG and YUV choose MJPEG, YUV is not
-> >      >> compressed (just a different color
-> >      >> space than RGB, often taking less bits but still not compressed=
-).
-> >      >>
-> >      >> Frediano
-> >      >>
-> >      >
-> >      > If the camera chooses YUV, can we encode it to H264 in SPICE? Is
-> this
-> >      > feasible?
-> >
-> >     Currently, SPICE does not do look at USB data.
-> >
-> >
-> > Hi:
-> >
-> > What do you mean spice just forward USB protocol data?
->
-> SPICE does look at USB headers, configurations, etc.
->
-> I meant that SPICE does not look at data that is
-> being transferred. So for example, it does
-> not know if the data coming from the camera is YUV,
-> RGB, MJPEG or other.
->
-> To answer your question above more clearly:
-> Currently it's not possible to H264-encode the
-> YUV data coming from the camera.
-> It is feasible to add code that does it.
-> If possible, it's best if the camera sends an encoded video stream.
->
-> Uri.
->
-> Hi all:
-        I know ICA/RDP is better than spice, when they redirect the USB
-camera devices. This is beacuse
- ICA/RDP encode video stream, so the effect is so good? Or how can we
-optimize spice to achieve their results?
-
-Thank you
-
-btw: I know ICA/RDP support few devices.
-
---000000000000dce77b05ba8239c3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Uri Lublin &lt;<a href=3D"mailto:uril=
-@redhat.com">uril@redhat.com</a>&gt; =E4=BA=8E2021=E5=B9=B42=E6=9C=882=E6=
-=97=A5=E5=91=A8=E4=BA=8C =E4=B8=8B=E5=8D=8810:32=E5=86=99=E9=81=93=EF=BC=9A=
-<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 2/2/21 2:50 =
-PM, lx wrote:<br>
-&gt; <br>
-&gt; <br>
-&gt; Uri Lublin &lt;<a href=3D"mailto:uril@redhat.com" target=3D"_blank">ur=
-il@redhat.com</a> &lt;mailto:<a href=3D"mailto:uril@redhat.com" target=3D"_=
-blank">uril@redhat.com</a>&gt;&gt; =E4=BA=8E2021=E5=B9=B41=E6=9C=8831=E6=97=
-=A5=E5=91=A8 <br>
-&gt; =E6=97=A5 =E4=B8=8B=E5=8D=889:48=E5=86=99=E9=81=93=EF=BC=9A<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0On 1/30/21 1:25 PM, lx wrote:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; Frediano Ziglio &lt;<a href=3D"mailto:freddy7=
-7@gmail.com" target=3D"_blank">freddy77@gmail.com</a> &lt;mailto:<a href=3D=
-"mailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt;&gt=
-;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=E4=BA=8E2021=E5=B9=B41=E6=9C=8829=E6=97=A5=E5=91=
-=A8=E4=BA=94 =E4=B8=8B=E5=8D=886:39=E5=86=99=E9=81=93=EF=BC=9A<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; Il giorno gio 28 gen 2021 alle ore 01:45 =
-lx<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"mailto:lxlenovostar@gmail.com" targe=
-t=3D"_blank">lxlenovostar@gmail.com</a> &lt;mailto:<a href=3D"mailto:lxleno=
-vostar@gmail.com" target=3D"_blank">lxlenovostar@gmail.com</a>&gt;&gt; ha<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; scritto:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt; Uri Lublin &lt;<a href=3D"mailto:uril=
-@redhat.com" target=3D"_blank">uril@redhat.com</a> &lt;mailto:<a href=3D"ma=
-ilto:uril@redhat.com" target=3D"_blank">uril@redhat.com</a>&gt;&gt; =E4=BA=
-=8E2021=E5=B9=B41<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=E6=9C=8827=E6=97=A5=E5=91=A8=E4=B8=89 =E4=B8=8B=E5=
-=8D=8811:47=E5=86=99=E9=81=93=EF=BC=9A<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; On 1/27/21 4:22 AM, lx wrote:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;&gt; Hi all:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 If I redirect USB camera to virtual machine, I think<br>
-&gt;=C2=A0 =C2=A0 =C2=A0we send<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;&gt; original URB to virtual machi=
-ne by USB channel.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;&gt; Is this understanding correct=
-? If we want to improve the user<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; experience,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;&gt; we need to compress URB data?=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; Hi,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; If you build with lz4 enabled (bo=
-th client and server),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; then it should use lz4 to compres=
-s the data.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; There is no functionality to crea=
-te<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; a video stream out of raw data.<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; Can the USB camera be configured =
-to send a compress stream?<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt; Uri.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;=C2=A0 =C2=A0 Hi:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0USB camera can sup=
-port MJPG and YUV.=C2=A0 =C2=A0I think H264 is<br>
-&gt;=C2=A0 =C2=A0 =C2=A0better than<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; MJPG. So Can we<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt; let spice support H264 ? Is this feas=
-ible?<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; This is independent from SPICE, if the ca=
-mera send compressed data<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; already SPICE will just<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; forward compressed data in whatever forma=
-t is in USB.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; If the camera supports MJPEG and YUV choo=
-se MJPEG, YUV is not<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; compressed (just a different color<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; space than RGB, often taking less bits bu=
-t still not compressed).<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt; Frediano<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; If the camera chooses YUV, can we encode it t=
-o H264 in SPICE? Is this<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; feasible?<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Currently, SPICE does not do look at USB data.<br>
-&gt; <br>
-&gt; <br>
-&gt; Hi:<br>
-&gt; <br>
-&gt; What do you mean spice just forward USB protocol data?<br>
-<br>
-SPICE does look at USB headers, configurations, etc.<br>
-<br>
-I meant that SPICE does not look at data that is<br>
-being transferred. So for example, it does<br>
-not know if the data coming from the camera is YUV,<br>
-RGB, MJPEG or other.<br>
-<br>
-To answer your question above more clearly:<br>
-Currently it&#39;s not possible to H264-encode the<br>
-YUV data coming from the camera.<br>
-It is feasible to add code that does it.<br>
-If possible, it&#39;s best if the camera sends an encoded video stream.<br>
-<br>
-Uri.<br>
-<br></blockquote><div>Hi all:=C2=A0=C2=A0</div><div>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 I know ICA/RDP is better than spice, when they redirect the USB=C2=
-=A0 camera devices. This is beacuse</div><div>=C2=A0ICA/RDP encode video st=
-ream, so the effect is so good? Or how can we optimize spice to achieve the=
-ir results?</div><div><br></div><div>Thank you</div><div><br></div><div>btw=
-: I know ICA/RDP support few devices.=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0</di=
-v><div><br></div><div><br></div><div>=C2=A0</div></div></div>
-
---000000000000dce77b05ba8239c3--
-
---===============2028443191==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============2028443191==--
+SWwgZ2lvcm5vIGdpbyA0IGZlYiAyMDIxIGFsbGUgb3JlIDEyOjU2IGx4IDxseGxlbm92b3N0YXJA
+Z21haWwuY29tPiBoYSBzY3JpdHRvOgo+Cj4KPgo+IFVyaSBMdWJsaW4gPHVyaWxAcmVkaGF0LmNv
+bT4g5LqOMjAyMeW5tDLmnIgy5pel5ZGo5LqMIOS4i+WNiDEwOjMy5YaZ6YGT77yaCj4+Cj4+IE9u
+IDIvMi8yMSAyOjUwIFBNLCBseCB3cm90ZToKPj4gPgo+PiA+Cj4+ID4gVXJpIEx1YmxpbiA8dXJp
+bEByZWRoYXQuY29tIDxtYWlsdG86dXJpbEByZWRoYXQuY29tPj4g5LqOMjAyMeW5tDHmnIgzMeaX
+peWRqAo+PiA+IOaXpSDkuIvljYg5OjQ45YaZ6YGT77yaCj4+ID4KPj4gPiAgICAgT24gMS8zMC8y
+MSAxOjI1IFBNLCBseCB3cm90ZToKPj4gPiAgICAgID4gRnJlZGlhbm8gWmlnbGlvIDxmcmVkZHk3
+N0BnbWFpbC5jb20gPG1haWx0bzpmcmVkZHk3N0BnbWFpbC5jb20+Pgo+PiA+ICAgICDkuo4yMDIx
+5bm0MeaciDI55pel5ZGo5LqUIOS4i+WNiDY6MznlhpnpgZPvvJoKPj4gPiAgICAgID4KPj4gPiAg
+ICAgID4+IElsIGdpb3JubyBnaW8gMjggZ2VuIDIwMjEgYWxsZSBvcmUgMDE6NDUgbHgKPj4gPiAg
+ICAgPGx4bGVub3Zvc3RhckBnbWFpbC5jb20gPG1haWx0bzpseGxlbm92b3N0YXJAZ21haWwuY29t
+Pj4gaGEKPj4gPiAgICAgID4+IHNjcml0dG86Cj4+ID4gICAgICA+Pj4KPj4gPiAgICAgID4+Pgo+
+PiA+ICAgICAgPj4+IFVyaSBMdWJsaW4gPHVyaWxAcmVkaGF0LmNvbSA8bWFpbHRvOnVyaWxAcmVk
+aGF0LmNvbT4+IOS6jjIwMjHlubQxCj4+ID4gICAgIOaciDI35pel5ZGo5LiJIOS4i+WNiDExOjQ3
+5YaZ6YGT77yaCj4+ID4gICAgICA+Pj4+Cj4+ID4gICAgICA+Pj4+IE9uIDEvMjcvMjEgNDoyMiBB
+TSwgbHggd3JvdGU6Cj4+ID4gICAgICA+Pj4+PiBIaSBhbGw6Cj4+ID4gICAgICA+Pj4+PiAgICAg
+ICAgICBJZiBJIHJlZGlyZWN0IFVTQiBjYW1lcmEgdG8gdmlydHVhbCBtYWNoaW5lLCBJIHRoaW5r
+Cj4+ID4gICAgIHdlIHNlbmQKPj4gPiAgICAgID4+Pj4+IG9yaWdpbmFsIFVSQiB0byB2aXJ0dWFs
+IG1hY2hpbmUgYnkgVVNCIGNoYW5uZWwuCj4+ID4gICAgICA+Pj4+PiBJcyB0aGlzIHVuZGVyc3Rh
+bmRpbmcgY29ycmVjdD8gSWYgd2Ugd2FudCB0byBpbXByb3ZlIHRoZSB1c2VyCj4+ID4gICAgICA+
+PiBleHBlcmllbmNlLAo+PiA+ICAgICAgPj4+Pj4gd2UgbmVlZCB0byBjb21wcmVzcyBVUkIgZGF0
+YT8KPj4gPiAgICAgID4+Pj4KPj4gPiAgICAgID4+Pj4gSGksCj4+ID4gICAgICA+Pj4+Cj4+ID4g
+ICAgICA+Pj4+IElmIHlvdSBidWlsZCB3aXRoIGx6NCBlbmFibGVkIChib3RoIGNsaWVudCBhbmQg
+c2VydmVyKSwKPj4gPiAgICAgID4+Pj4gdGhlbiBpdCBzaG91bGQgdXNlIGx6NCB0byBjb21wcmVz
+cyB0aGUgZGF0YS4KPj4gPiAgICAgID4+Pj4KPj4gPiAgICAgID4+Pj4gVGhlcmUgaXMgbm8gZnVu
+Y3Rpb25hbGl0eSB0byBjcmVhdGUKPj4gPiAgICAgID4+Pj4gYSB2aWRlbyBzdHJlYW0gb3V0IG9m
+IHJhdyBkYXRhLgo+PiA+ICAgICAgPj4+Pgo+PiA+ICAgICAgPj4+PiBDYW4gdGhlIFVTQiBjYW1l
+cmEgYmUgY29uZmlndXJlZCB0byBzZW5kIGEgY29tcHJlc3Mgc3RyZWFtPwo+PiA+ICAgICAgPj4+
+Pgo+PiA+ICAgICAgPj4+PiBVcmkuCj4+ID4gICAgICA+Pj4+Cj4+ID4gICAgICA+Pj4KPj4gPiAg
+ICAgID4+PiAgICBIaToKPj4gPiAgICAgID4+PiAgICAgVVNCIGNhbWVyYSBjYW4gc3VwcG9ydCBN
+SlBHIGFuZCBZVVYuICAgSSB0aGluayBIMjY0IGlzCj4+ID4gICAgIGJldHRlciB0aGFuCj4+ID4g
+ICAgICA+PiBNSlBHLiBTbyBDYW4gd2UKPj4gPiAgICAgID4+PiBsZXQgc3BpY2Ugc3VwcG9ydCBI
+MjY0ID8gSXMgdGhpcyBmZWFzaWJsZT8KPj4gPiAgICAgID4+Pgo+PiA+ICAgICAgPj4KPj4gPiAg
+ICAgID4+IFRoaXMgaXMgaW5kZXBlbmRlbnQgZnJvbSBTUElDRSwgaWYgdGhlIGNhbWVyYSBzZW5k
+IGNvbXByZXNzZWQgZGF0YQo+PiA+ICAgICAgPj4gYWxyZWFkeSBTUElDRSB3aWxsIGp1c3QKPj4g
+PiAgICAgID4+IGZvcndhcmQgY29tcHJlc3NlZCBkYXRhIGluIHdoYXRldmVyIGZvcm1hdCBpcyBp
+biBVU0IuCj4+ID4gICAgICA+PiBJZiB0aGUgY2FtZXJhIHN1cHBvcnRzIE1KUEVHIGFuZCBZVVYg
+Y2hvb3NlIE1KUEVHLCBZVVYgaXMgbm90Cj4+ID4gICAgICA+PiBjb21wcmVzc2VkIChqdXN0IGEg
+ZGlmZmVyZW50IGNvbG9yCj4+ID4gICAgICA+PiBzcGFjZSB0aGFuIFJHQiwgb2Z0ZW4gdGFraW5n
+IGxlc3MgYml0cyBidXQgc3RpbGwgbm90IGNvbXByZXNzZWQpLgo+PiA+ICAgICAgPj4KPj4gPiAg
+ICAgID4+IEZyZWRpYW5vCj4+ID4gICAgICA+Pgo+PiA+ICAgICAgPgo+PiA+ICAgICAgPiBJZiB0
+aGUgY2FtZXJhIGNob29zZXMgWVVWLCBjYW4gd2UgZW5jb2RlIGl0IHRvIEgyNjQgaW4gU1BJQ0U/
+IElzIHRoaXMKPj4gPiAgICAgID4gZmVhc2libGU/Cj4+ID4KPj4gPiAgICAgQ3VycmVudGx5LCBT
+UElDRSBkb2VzIG5vdCBkbyBsb29rIGF0IFVTQiBkYXRhLgo+PiA+Cj4+ID4KPj4gPiBIaToKPj4g
+Pgo+PiA+IFdoYXQgZG8geW91IG1lYW4gc3BpY2UganVzdCBmb3J3YXJkIFVTQiBwcm90b2NvbCBk
+YXRhPwo+Pgo+PiBTUElDRSBkb2VzIGxvb2sgYXQgVVNCIGhlYWRlcnMsIGNvbmZpZ3VyYXRpb25z
+LCBldGMuCj4+Cj4+IEkgbWVhbnQgdGhhdCBTUElDRSBkb2VzIG5vdCBsb29rIGF0IGRhdGEgdGhh
+dCBpcwo+PiBiZWluZyB0cmFuc2ZlcnJlZC4gU28gZm9yIGV4YW1wbGUsIGl0IGRvZXMKPj4gbm90
+IGtub3cgaWYgdGhlIGRhdGEgY29taW5nIGZyb20gdGhlIGNhbWVyYSBpcyBZVVYsCj4+IFJHQiwg
+TUpQRUcgb3Igb3RoZXIuCj4+Cj4+IFRvIGFuc3dlciB5b3VyIHF1ZXN0aW9uIGFib3ZlIG1vcmUg
+Y2xlYXJseToKPj4gQ3VycmVudGx5IGl0J3Mgbm90IHBvc3NpYmxlIHRvIEgyNjQtZW5jb2RlIHRo
+ZQo+PiBZVVYgZGF0YSBjb21pbmcgZnJvbSB0aGUgY2FtZXJhLgo+PiBJdCBpcyBmZWFzaWJsZSB0
+byBhZGQgY29kZSB0aGF0IGRvZXMgaXQuCj4+IElmIHBvc3NpYmxlLCBpdCdzIGJlc3QgaWYgdGhl
+IGNhbWVyYSBzZW5kcyBhbiBlbmNvZGVkIHZpZGVvIHN0cmVhbS4KPj4KPj4gVXJpLgo+Pgo+IEhp
+IGFsbDoKPiAgICAgICAgIEkga25vdyBJQ0EvUkRQIGlzIGJldHRlciB0aGFuIHNwaWNlLCB3aGVu
+IHRoZXkgcmVkaXJlY3QgdGhlIFVTQiAgY2FtZXJhIGRldmljZXMuIFRoaXMgaXMgYmVhY3VzZQo+
+ICBJQ0EvUkRQIGVuY29kZSB2aWRlbyBzdHJlYW0sIHNvIHRoZSBlZmZlY3QgaXMgc28gZ29vZD8g
+T3IgaG93IGNhbiB3ZSBvcHRpbWl6ZSBzcGljZSB0byBhY2hpZXZlIHRoZWlyIHJlc3VsdHM/Cj4K
+PiBUaGFuayB5b3UKPgo+IGJ0dzogSSBrbm93IElDQS9SRFAgc3VwcG9ydCBmZXcgZGV2aWNlcy4K
+PgoKSGksCiAgIHdoYXQgZXhhY3RseSBkbyB5b3UgbWVhbiBieSAiSSBrbm93IElDQS9SRFAgaXMg
+YmV0dGVyIHRoYW4gc3BpY2UiLApJIG1lYW4sIGRpZCB5b3UKcGVyc29uYWxseSB0cnkgYW5kIHdv
+cmtzIGJldHRlcj8gRGlkIHlvdSBkbyBzb21lIG1lYXN1cmVtZW50PyBJcyBqdXN0CnNvbWUgY29t
+bWVudHMKb24gSW50ZXJuZXQ/CgpJIGRpZG4ndCB0cnkgcGVyc29uYWxseSAoSSBkb24ndCBoYXZl
+IElDQSBzb2x1dGlvbiBpbnN0YWxsZWQpIGJ1dCB5b3UKY291bGQgcnVuIGEgdGVzdCB0byBjaGVj
+ayBmb3IKY29tcHJlc3Npb246Ci0gcnVuIGEgcHJvZ3JhbSBpbiB0aGUgVk0gdG8gcmVjb3JkIGNh
+bWVyYSB2aWRlbyB3aXRob3V0IHNob3dpbmcgb24gdGhlIHNjcmVlbgotIHN0YXJ0IG1vbml0b3Jp
+bmcgdHJhZmZpYyAobGlrZSB0Y3BkdW1wLCBvciBqdXN0IHNvbWUgbmV0d29yawpzdGF0aXN0aWMg
+cHJvZ3JhbSkKLSBsZXQgdGhlIHJlY29yZGluZyBnb2VzIGZvciBhIHByZWRlZmluZWQgYW1vdW50
+IG9mIHRpbWUKLSBzdG9wIG1vbml0b3JpbmcuCi0gbG9vayBhdCB0aGUgYW1vdW50IG9mIHRyYWZm
+aWMgZ2VuZXJhdGVkLgpJZiB0aGUgYW1vdW50IG9mIHRyYWZmaWMgaXMgbGVzcyB0aGV5IGFyZSBj
+b21wcmVzc2luZyAobm90IHNhaWQgdGhleQphcmUgdmlkZW8gY29tcHJlc3NpbmcsCm1heWJlIG9u
+bHkgYXMgcmF3IGRhdGEgYmV0dGVyIHRoYW4gdXMpLiBJZiB0aGV5IGFyZSBjb21wcmVzc2luZyBB
+IExPVAoobGlrZSA1IHRpbWVzKQpwcm9iYWJseSB0aGV5IGFyZSB1c2luZyB2aWRlbyBjb21wcmVz
+c2lvbiAodW5sZXNzIHRoZXkgZm91bmQgYSB3YXkgdG8KcmVkdWNlIGZyYW1lIHJhdGUpLgoKSXQg
+Y291bGQgYmUgdGhhdCB0aGV5IGRldGVjdCBjYW1lcmEgYW5kIG9wdGltaXplIHNwZWNpZmljYWxs
+eSB0aGUKZGlhbG9nIHdpdGggdGhlIFZNLgoKT3RoZXIgcmVhc29ucyBjb3VsZCBiZSBsZXNzIHBp
+cGVsaW5lIGhhdmluZyBhIGxvd2VyIGxhdGVuY3kgb3Igc29tZQpzb3J0IG9mIFFvUyBmb3IgdGhl
+Cm5ldHdvcmsuCgpGcmVkaWFubwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpTcGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGlu
+Zm8vc3BpY2UtZGV2ZWwK
