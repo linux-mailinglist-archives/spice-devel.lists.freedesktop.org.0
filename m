@@ -1,66 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ED48312747
-	for <lists+spice-devel@lfdr.de>; Sun,  7 Feb 2021 20:49:33 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D913D312748
+	for <lists+spice-devel@lfdr.de>; Sun,  7 Feb 2021 20:49:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 83BFB6E210;
-	Sun,  7 Feb 2021 19:49:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 22B9E6E212;
+	Sun,  7 Feb 2021 19:49:31 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 699916EE69;
- Thu,  4 Feb 2021 20:21:11 +0000 (UTC)
-Received: by mail-qt1-x836.google.com with SMTP id o18so3375300qtp.10;
- Thu, 04 Feb 2021 12:21:11 -0800 (PST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B3E176E088;
+ Fri,  5 Feb 2021 15:32:01 +0000 (UTC)
+Received: by mail-qk1-x72a.google.com with SMTP id 19so7243891qkh.3;
+ Fri, 05 Feb 2021 07:32:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:subject:from:in-reply-to:date:cc
  :content-transfer-encoding:message-id:references:to;
- bh=Hhif/dUTQoXIIfPryG61RWRP0ankk75APYX7Blt1AJc=;
- b=haoSoMndXJyCLmaDCr53ziw/bvLuMoI9unlpsbh/BUpbXrj1nGZiWpW82ApiDt85YT
- zjc8KccPKk0vuNeP6Sne6tBJPjZ40DMTlhDjsjT196sbSfnRlhlJ6PGnZqxqlkeHuEuf
- VpChiqH+dHfH7AFmWAqD/RPGHmFAEHm8P3sxBh4w64p1yWRPfLwDJt2RmpKPNLZxjLry
- mOAYgjoCtTXc239wCqmALk9/TBwOmTcSDYQE2bqkwj8cRPkirOFrT+CUEkO3IDyz6dal
- fpbywg/NNJGdBVP13aklMdHtqD08rxAjhFHXHGIt3A/B96iEfVQN+UMZwvTTaNFGXcob
- 13Vg==
+ bh=fyZHi+qNcCJFhy3f12cLYE4u8DUIJvZ551G3y8KcPgQ=;
+ b=oOcqz9sQcA4+vwEinnFCNUxLwxvmuqJZ3sHLgQdbD+TR9pIaAJUwFv21C5X0Ia9UW8
+ zvkRXc6MmPy5rBPC2+afgNbSvfQTloAc2jr5muoRI8W1XoRnlB9So1j0zt6jn0Pn3Mhf
+ ybioSruJQ+8ftb9fVvAoL/vi3KSLRTvpNUgf36UG7qlULBgyMNSg8KEMegLkMICCm8n7
+ XSZW6DZ4MkWeT2Dfb8Xarkht2Bc6aM2ZjfdQAGRzsjvhqWmOmQz73EyBJiDwR0+y9lwu
+ f1fIpGQ1PDqIl6VnaWRGNuv/OT1XPfR2TCqwRmH8Xg6HiwyyjTh8y6VO4bppBuXStePQ
+ Feag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
  :content-transfer-encoding:message-id:references:to;
- bh=Hhif/dUTQoXIIfPryG61RWRP0ankk75APYX7Blt1AJc=;
- b=sr/bQrla6Q4UqyNmSAJ42PIDsZn6vzqvrl1vtVeHWN42oFWT9hSTU5y4xdIvDYW41j
- msTqlGlhmx5y26mB9Bs59DjW9iCBTl2LOijyquWj4x/DW7w9dim78sr5OqksMxpZfP9F
- As0a4pqWQ5FuO5NhMz/QEpm+QH2xy4GvamRLsdwWTOf8QLkx2dVxk5Fyp15CiLArQkGx
- K+Vl43hoEaYKl7cVICEBzxNgibLoOXO1a6rVZ/0a41TMYhSDlhjhcQkozYYCQrd3fb98
- o3mL88wONocLKULcRj+SyQpw0OX6/aI17KcjTzwBpqPBiC9QLsTQ9N3deCluBggUTVcC
- ollg==
-X-Gm-Message-State: AOAM533MFISOOjycfnAvpKGL/2jD2lAFcKAidzi7BvP15LKGTiKqwuOo
- gMhzFyyBLGWOxr7KEB6/j2M=
-X-Google-Smtp-Source: ABdhPJzBtWcnl6xe8wj4gW7Fj9w/IksQfuh2DmG51kZHLsHu9r/mNRRmRjkIIJig96HztTbqxgyqBg==
-X-Received: by 2002:ac8:5c44:: with SMTP id j4mr1341125qtj.124.1612470070278; 
- Thu, 04 Feb 2021 12:21:10 -0800 (PST)
-Received: from ?IPv6:2601:5c0:c200:27c6:cd86:137:1075:f377?
- ([2601:5c0:c200:27c6:cd86:137:1075:f377])
- by smtp.gmail.com with ESMTPSA id l38sm5434750qte.88.2021.02.04.12.21.09
+ bh=fyZHi+qNcCJFhy3f12cLYE4u8DUIJvZ551G3y8KcPgQ=;
+ b=Ah1OVyzxKx9orH58KQYcyyI3mJiUkyFuB54Vpx19n3EouHGkAm5cSUPTfomdh51ZNi
+ CzKlqtTOSEzhPRqrYiBknonQ2cva9XJKtLxq/SIQ52nIuJ9SHtqYZL1R+psDCz9hU+aS
+ DMP4ZVqYDmBV89pw72chttD52INcLe5XtrxKebo1xDXx00aI1fRuhvyxS5tJk96d5h32
+ SIIt47g6tkXLczx5RcpCiHVBgsoDKCiVNgzn+Qkoc1xCxkRdLSzNSaxhEokK3GAg6vGg
+ tOKM8EJa7oKcjvyzMYJSqbzUGM4cYJdGhov/2VahZ0dlJW2mQsqPJ7GYD6Nh/x4cYaiN
+ NZ2w==
+X-Gm-Message-State: AOAM53348RiIrj/xJUdBMNLbZosToUNE12rhaHdkEB7cl/73jA05g4s7
+ sn0Dzr7hjnSfCjNxQOwT4KSXCoWSY1scCg==
+X-Google-Smtp-Source: ABdhPJx+vXVYz+w8d1jPUuepDy67zXnbL7pNZG0nXJb8Lux9Rhopwszg/P5svbt7vQhYoPPshoMESg==
+X-Received: by 2002:a05:620a:15d0:: with SMTP id
+ o16mr5180121qkm.222.1612539120730; 
+ Fri, 05 Feb 2021 07:32:00 -0800 (PST)
+Received: from ?IPv6:2601:5c0:c200:27c6:4172:c957:b7de:3481?
+ ([2601:5c0:c200:27c6:4172:c957:b7de:3481])
+ by smtp.gmail.com with ESMTPSA id q6sm9477022qkq.34.2021.02.05.07.31.59
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 04 Feb 2021 12:21:09 -0800 (PST)
+ Fri, 05 Feb 2021 07:32:00 -0800 (PST)
 Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.60.0.2.21\))
 From: Tong Zhang <ztong0001@gmail.com>
-In-Reply-To: <3feaeb62-fd50-5cca-26f7-42f6167ef77a@suse.de>
-Date: Thu, 4 Feb 2021 15:21:08 -0500
-Message-Id: <D78EE3A8-C7A8-4694-86E9-2E2278703A62@gmail.com>
-References: <20210204145712.1531203-1-kraxel@redhat.com>
- <20210204145712.1531203-3-kraxel@redhat.com>
- <d217112e-e49d-bd1f-0c39-3eac2dd721fd@suse.de>
- <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
- <3feaeb62-fd50-5cca-26f7-42f6167ef77a@suse.de>
-To: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20210205074330.zsb2lg5umgkxh2p3@sirius.home.kraxel.org>
+Date: Fri, 5 Feb 2021 10:31:58 -0500
+Message-Id: <BCB24CD0-FD0F-4202-AD93-02A7EDC229C9@gmail.com>
+References: <20210204163050.1232756-1-ztong0001@gmail.com>
+ <20210205074330.zsb2lg5umgkxh2p3@sirius.home.kraxel.org>
+To: Gerd Hoffmann <kraxel@redhat.com>
 X-Mailer: Apple Mail (2.3654.60.0.2.21)
 X-Mailman-Approved-At: Sun, 07 Feb 2021 19:49:29 +0000
-Subject: Re: [Spice-devel] [PATCH v6 02/10] Revert "drm/qxl: do not run
- release if qxl failed to init"
+Subject: Re: [Spice-devel] [PATCH v2] drm/qxl: do not run release if qxl
+ failed to init
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,29 +72,35 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
  dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Dave Airlie <airlied@redhat.com>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Cgo+IE9uIEZlYiA0LCAyMDIxLCBhdCAyOjA2IFBNLCBUaG9tYXMgWmltbWVybWFubiA8dHppbW1l
-cm1hbm5Ac3VzZS5kZT4gd3JvdGU6Cj4gCj4gSGkgVG9uZwo+IAo+PiBJIGhhdmUgcG9zdGVkIGFu
-IHVwZGF0ZWQgcGF0Y2guCj4+IFRoZSBuZXcgcGF0Y2ggdXNlIHRoZSBmb2xsb3dpbmcgbG9naWMK
-Pj4gKwlpZiAoIXFkZXYtPmRkZXYubW9kZV9jb25maWcuZnVuY3MpCj4+ICsJICByZXR1cm47Cj4g
-Cj4gVGhpcyBpcyBhZ2FpbiBqdXN0IHBhcGVyaW5nIG92ZXIgdGhlIGlzc3VlLiBCZXR0ZXIgZG9u
-J3QgY2FsbCBxeGxfZHJtX3JlbGVhc2UoKSBpbiB0aGUgZXJyb3IgcGF0aCBpZiBxeGxfZGV2aWNl
-X2luaXQoKSBmYWlscy4KPiAKPiBJIHNlZSB0d28gc29sdXRpb25zOiBlaXRoZXIgcm9sbC1iYWNr
-IG1hbnVhbGx5LCBvciB1c2Ugb3VyIG5ldyBtYW5hZ2VkIERSTSBpbnRlcmZhY2VzLiBUaGlzIGlz
-IHdoYXQgdGhlIG90aGVyIGRyaXZlcnMgZG8uCj4gCj4gQmVzdCByZWdhcmRzCj4gVGhvbWFzCgoK
-SU1ITyAtIHFkZXYtPmRkZXYubW9kZV9jb25maWcuZnVuY3MgaXMgc2V0IG9ubHkgaWYgdGhlIGlu
-aXRpYWxpemF0aW9uIGlzIHN1Y2Nlc3NmdWwsCnNvIHVzaW5nIHRoaXMgYXMgYW4gaW5kaWNhdG9y
-IG9mIGVycm9yIGNhc2UgbG9va3Mgb2sgdG8gbWUuCgpUaGUgb3RoZXIgdHdvIG9wdGlvbnMgeW91
-IHN1Z2dlc3RlZCB3b3VsZCByZXF1aXJlIHNvbWUgc2VyaW91cyBzaWduaWZpY2FudCBhbW91bnQg
-b2Ygd29yayB0byBiZSBkb25lLAp3aGljaCBJIGRvbuKAmXQgdGhpbmsgSSBjdXJyZW50bHkgaGF2
-ZSBzdWNoIGFiaWxpdHkgdG8gZG8uCgpUaGFua3MsCi0gVG9uZwoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNw
-aWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
+On Feb 5, 2021, at 2:43 AM, Gerd Hoffmann <kraxel@redhat.com> wrote:
+> 
+> On Thu, Feb 04, 2021 at 11:30:50AM -0500, Tong Zhang wrote:
+>> if qxl_device_init() fail, drm device will not be registered,
+>> in this case, do not run qxl_drm_release()
+> 
+> How do you trigger this?
+> 
+
+This can be triggered by changing the QXL VGA rom magic value.
+
+In the QEMU source code ./hw/display/qxl.c
+or change the QXL_ROM_MAGIC in spice header file
+
+- Tong
+
+> take care,
+>  Gerd
+> 
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
