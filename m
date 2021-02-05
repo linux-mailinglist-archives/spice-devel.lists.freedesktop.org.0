@@ -2,34 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B810330FC36
-	for <lists+spice-devel@lfdr.de>; Thu,  4 Feb 2021 20:07:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 482563105FF
+	for <lists+spice-devel@lfdr.de>; Fri,  5 Feb 2021 08:43:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F4C089D4D;
-	Thu,  4 Feb 2021 19:06:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A67766F3F0;
+	Fri,  5 Feb 2021 07:43:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9052589D30;
- Thu,  4 Feb 2021 19:06:56 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 255D8AC45;
- Thu,  4 Feb 2021 19:06:55 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9F6A86F3F0
+ for <spice-devel@lists.freedesktop.org>; Fri,  5 Feb 2021 07:43:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612511014;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QkctUj4JntN0l9IjN3mm31aWsWyPBr920PgHhtiFxa4=;
+ b=jIHjqct8vvtsEKz2jiOqCETdPVKVPT/rFYm6R5Vy4UQtX/v4Wf3uhl5DOUS+d1wXyG6Vsc
+ nggpaD1ADHTHjWnDDAl2L+mwsKMlqYQnqV+yHYH4NrF5zh7r5cx1c5ytTSBtgmzmJKZ6uL
+ FGbZQUlYNTtPWlAl4/MAxSzfvU1guy0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-502-Id3HAsG6MuSpw28xyN0ZAw-1; Fri, 05 Feb 2021 02:43:33 -0500
+X-MC-Unique: Id3HAsG6MuSpw28xyN0ZAw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EECD5192CC41;
+ Fri,  5 Feb 2021 07:43:31 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-113-108.ams2.redhat.com
+ [10.36.113.108])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AF35C5C1B4;
+ Fri,  5 Feb 2021 07:43:31 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 35D6918000B6; Fri,  5 Feb 2021 08:43:30 +0100 (CET)
+Date: Fri, 5 Feb 2021 08:43:30 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
 To: Tong Zhang <ztong0001@gmail.com>
-References: <20210204145712.1531203-1-kraxel@redhat.com>
- <20210204145712.1531203-3-kraxel@redhat.com>
- <d217112e-e49d-bd1f-0c39-3eac2dd721fd@suse.de>
- <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <3feaeb62-fd50-5cca-26f7-42f6167ef77a@suse.de>
-Date: Thu, 4 Feb 2021 20:06:53 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+Message-ID: <20210205074330.zsb2lg5umgkxh2p3@sirius.home.kraxel.org>
+References: <20210204163050.1232756-1-ztong0001@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
-Subject: Re: [Spice-devel] [PATCH v6 02/10] Revert "drm/qxl: do not run
- release if qxl failed to init"
+Content-Disposition: inline
+In-Reply-To: <20210204163050.1232756-1-ztong0001@gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Subject: Re: [Spice-devel] [PATCH v2] drm/qxl: do not run release if qxl
+ failed to init
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -41,183 +60,25 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Dave Airlie <airlied@redhat.com>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============0605812490=="
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0605812490==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="sugShVuXIKVOGqdiIRIR03GxisZfIG58Q"
+On Thu, Feb 04, 2021 at 11:30:50AM -0500, Tong Zhang wrote:
+> if qxl_device_init() fail, drm device will not be registered,
+> in this case, do not run qxl_drm_release()
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---sugShVuXIKVOGqdiIRIR03GxisZfIG58Q
-Content-Type: multipart/mixed; boundary="qbjhu3JTxQsoO1DR3tZmYIYIeQBYPtQYO";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Tong Zhang <ztong0001@gmail.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org,
- David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
-Message-ID: <3feaeb62-fd50-5cca-26f7-42f6167ef77a@suse.de>
-Subject: Re: [PATCH v6 02/10] Revert "drm/qxl: do not run release if qxl
- failed to init"
-References: <20210204145712.1531203-1-kraxel@redhat.com>
- <20210204145712.1531203-3-kraxel@redhat.com>
- <d217112e-e49d-bd1f-0c39-3eac2dd721fd@suse.de>
- <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
-In-Reply-To: <60B8023C-78C9-441D-AA21-A13C4445F666@gmail.com>
+How do you trigger this?
 
---qbjhu3JTxQsoO1DR3tZmYIYIeQBYPtQYO
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi Tong
-
-Am 04.02.21 um 19:52 schrieb Tong Zhang:
-> Hi Thomas,
->=20
-> The original problem was qxl_device_init() can fail,
-> when it fails there is no need to call
-> 	qxl_modeset_fini(qdev);
-> 	qxl_device_fini(qdev);
-> But those two functions are otherwise called in the qxl_drm_release() -=
-
-
-OK, makes sense. Thanks for the explanation.
-
->=20
-> I have posted an updated patch.
-> The new patch use the following logic
->=20
-> +	if (!qdev->ddev.mode_config.funcs)
-> +	  return;
-
-This is again just papering over the issue. Better don't call=20
-qxl_drm_release() in the error path if qxl_device_init() fails.
-
-I see two solutions: either roll-back manually, or use our new managed=20
-DRM interfaces. This is what the other drivers do.
-
-Best regards
-Thomas
-
-> 	qxl_modeset_fini(qdev);
-> 	qxl_device_fini(qdev);
->=20
-> Thanks,
-> - Tong
->=20
->=20
->> On Feb 4, 2021, at 1:34 PM, Thomas Zimmermann <tzimmermann@suse.de> wr=
-ote:
->>
->> Hi
->>
->> Am 04.02.21 um 15:57 schrieb Gerd Hoffmann:
->>> This reverts commit b91907a6241193465ca92e357adf16822242296d.
->>
->> This should be in the correct format, as given by 'dim cite'.
->>
->> dim cite b91907a6241193465ca92e357adf16822242296d
->> b91907a62411 ("drm/qxl: do not run release if qxl failed to init")
->>
->>> Patch is broken, it effectively makes qxl_drm_release() a nop
->>> because on normal driver shutdown qxl_drm_release() is called
->>> *after* drm_dev_unregister().
->>> Cc: Tong Zhang <ztong0001@gmail.com>
->>> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
->>> ---
->>>   drivers/gpu/drm/qxl/qxl_drv.c | 2 --
->>>   1 file changed, 2 deletions(-)
->>> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_=
-drv.c
->>> index 34c8b25b5780..fb5f6a5e81d7 100644
->>> --- a/drivers/gpu/drm/qxl/qxl_drv.c
->>> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
->>> @@ -144,8 +144,6 @@ static void qxl_drm_release(struct drm_device *de=
-v)
->>>   	 * reodering qxl_modeset_fini() + qxl_device_fini() calls is
->>>   	 * non-trivial though.
->>>   	 */
->>> -	if (!dev->registered)
->>> -		return;
->>
->> I'm not sure what the original problem was, but I'm sure that this isn=
-'t the fix for it. If there's a problem with shutdown, the operations rat=
-her have to be reordered correctly.
->>
->> With the citation style address:
->>
->> Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
->>
->>>   	qxl_modeset_fini(qdev);
->>>   	qxl_device_fini(qdev);
->>>   }
->>
->> --=20
->> Thomas Zimmermann
->> Graphics Driver Developer
->> SUSE Software Solutions Germany GmbH
->> Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
->> (HRB 36809, AG N=C3=BCrnberg)
->> Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
->>
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---qbjhu3JTxQsoO1DR3tZmYIYIeQBYPtQYO--
-
---sugShVuXIKVOGqdiIRIR03GxisZfIG58Q
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAcRc0FAwAAAAAACgkQlh/E3EQov+Cv
-zBAAt+AajrDpzr+ENbzKQ1EFljU7ebL45uSdlooyn8Q2PenAq6PffmdqW/MdbTZ+9bUsUb33Z6xi
-tZVdCEnp41Hi9FdcIwnfM+oSck5Gi6QTJxLd7GH0rtTGXvz83xngZZzlxAVYEpstLozEDgqucuQ4
-2aLUPeZx3E/A2OSBK1gVg3Yyqm78IlNLeMzfjgodJbABBBVdND2FF7MT4fsFxfsLWi4RrdCyJ6+d
-LHXLXxnqYrjfZ2mfmmKJZUEV5AGo/nNJ0D+LIe9x1pTu37UtQpcgXUeeyECD+zrVdMjOpMfJgvS2
-G4mVNWOa3UzJAeZ4YBGK/YTpknYa8l8eGXNGdeqSt96OYTWb/XgkFfMfMJKXl9ArkpjI5D9MlvM6
-xWqZFGvaG1lExlIbCuyffjYp+sHJyRpN6jCiWdEcakrZHwoZM+gc9SIt2EeN1BTVKXkoKznoERX5
-ddxXZAKLorqs7qHE4rfJ/pEOP5SiqOcgP2bBvfQRQ9mBiIY2bVJVpQxFSgc/wE7FGNrmUIWwk+UU
-QB31SHD9BMSUbvnndgjqnoIlAKjNWpmbIf5k/d7aE43Z99EeGNlQIG2FomQLiEoMRIBTCDmuzVnX
-Epcd0EgdSwab7aLjhnzN1d8DRn7vESe/u67wBDAeqt6zEZUDp5PTjOZOA5zkEcGmDycBte6is1Y8
-G64=
-=bdv9
------END PGP SIGNATURE-----
-
---sugShVuXIKVOGqdiIRIR03GxisZfIG58Q--
-
---===============0605812490==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+take care,
+  Gerd
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0605812490==--
