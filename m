@@ -1,64 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D913D312748
-	for <lists+spice-devel@lfdr.de>; Sun,  7 Feb 2021 20:49:35 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E3BAB312756
+	for <lists+spice-devel@lfdr.de>; Sun,  7 Feb 2021 20:58:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22B9E6E212;
-	Sun,  7 Feb 2021 19:49:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 48C266E811;
+	Sun,  7 Feb 2021 19:58:43 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B3E176E088;
- Fri,  5 Feb 2021 15:32:01 +0000 (UTC)
-Received: by mail-qk1-x72a.google.com with SMTP id 19so7243891qkh.3;
- Fri, 05 Feb 2021 07:32:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=fyZHi+qNcCJFhy3f12cLYE4u8DUIJvZ551G3y8KcPgQ=;
- b=oOcqz9sQcA4+vwEinnFCNUxLwxvmuqJZ3sHLgQdbD+TR9pIaAJUwFv21C5X0Ia9UW8
- zvkRXc6MmPy5rBPC2+afgNbSvfQTloAc2jr5muoRI8W1XoRnlB9So1j0zt6jn0Pn3Mhf
- ybioSruJQ+8ftb9fVvAoL/vi3KSLRTvpNUgf36UG7qlULBgyMNSg8KEMegLkMICCm8n7
- XSZW6DZ4MkWeT2Dfb8Xarkht2Bc6aM2ZjfdQAGRzsjvhqWmOmQz73EyBJiDwR0+y9lwu
- f1fIpGQ1PDqIl6VnaWRGNuv/OT1XPfR2TCqwRmH8Xg6HiwyyjTh8y6VO4bppBuXStePQ
- Feag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=fyZHi+qNcCJFhy3f12cLYE4u8DUIJvZ551G3y8KcPgQ=;
- b=Ah1OVyzxKx9orH58KQYcyyI3mJiUkyFuB54Vpx19n3EouHGkAm5cSUPTfomdh51ZNi
- CzKlqtTOSEzhPRqrYiBknonQ2cva9XJKtLxq/SIQ52nIuJ9SHtqYZL1R+psDCz9hU+aS
- DMP4ZVqYDmBV89pw72chttD52INcLe5XtrxKebo1xDXx00aI1fRuhvyxS5tJk96d5h32
- SIIt47g6tkXLczx5RcpCiHVBgsoDKCiVNgzn+Qkoc1xCxkRdLSzNSaxhEokK3GAg6vGg
- tOKM8EJa7oKcjvyzMYJSqbzUGM4cYJdGhov/2VahZ0dlJW2mQsqPJ7GYD6Nh/x4cYaiN
- NZ2w==
-X-Gm-Message-State: AOAM53348RiIrj/xJUdBMNLbZosToUNE12rhaHdkEB7cl/73jA05g4s7
- sn0Dzr7hjnSfCjNxQOwT4KSXCoWSY1scCg==
-X-Google-Smtp-Source: ABdhPJx+vXVYz+w8d1jPUuepDy67zXnbL7pNZG0nXJb8Lux9Rhopwszg/P5svbt7vQhYoPPshoMESg==
-X-Received: by 2002:a05:620a:15d0:: with SMTP id
- o16mr5180121qkm.222.1612539120730; 
- Fri, 05 Feb 2021 07:32:00 -0800 (PST)
-Received: from ?IPv6:2601:5c0:c200:27c6:4172:c957:b7de:3481?
- ([2601:5c0:c200:27c6:4172:c957:b7de:3481])
- by smtp.gmail.com with ESMTPSA id q6sm9477022qkq.34.2021.02.05.07.31.59
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 05 Feb 2021 07:32:00 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.60.0.2.21\))
-From: Tong Zhang <ztong0001@gmail.com>
-In-Reply-To: <20210205074330.zsb2lg5umgkxh2p3@sirius.home.kraxel.org>
-Date: Fri, 5 Feb 2021 10:31:58 -0500
-Message-Id: <BCB24CD0-FD0F-4202-AD93-02A7EDC229C9@gmail.com>
-References: <20210204163050.1232756-1-ztong0001@gmail.com>
- <20210205074330.zsb2lg5umgkxh2p3@sirius.home.kraxel.org>
-To: Gerd Hoffmann <kraxel@redhat.com>
-X-Mailer: Apple Mail (2.3654.60.0.2.21)
-X-Mailman-Approved-At: Sun, 07 Feb 2021 19:49:29 +0000
-Subject: Re: [Spice-devel] [PATCH v2] drm/qxl: do not run release if qxl
- failed to init
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 55F666E811
+ for <spice-devel@lists.freedesktop.org>; Sun,  7 Feb 2021 19:58:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612727921;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=BKppUbQ+VKYYdfalxeYFQfcQfGlnw+wcyOVcMuMX11I=;
+ b=OzDzcbEsGQhk/DHB/eMVRsKkPFaMus7wBgBEPIZu9D3oY4+W3/gut0o+ax1pF4LNzixXoz
+ Vm2+2mCrNCWgzSG3FRHiX5e+sMGJ0e459Dm1e6cmBnw+aAEG3vw/qgdwrM/nSGRqoSxzYC
+ gyRISdM6PTcLw672Uof6Tq9c7jpc3Tw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-161-d6-78mOLMmaCU94PfzMsaQ-1; Sun, 07 Feb 2021 14:58:38 -0500
+X-MC-Unique: d6-78mOLMmaCU94PfzMsaQ-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9DA27107ACC7;
+ Sun,  7 Feb 2021 19:58:37 +0000 (UTC)
+Received: from [10.35.206.211] (unknown [10.35.206.211])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C969460C05;
+ Sun,  7 Feb 2021 19:58:36 +0000 (UTC)
+To: =?UTF-8?B?5oiR5piv5Z2P55ee5a2Q?= <759302636@qq.com>,
+ spice-devel <spice-devel@lists.freedesktop.org>
+References: <tencent_2B8A9D04EE7251B09E6B51B589B329D30507@qq.com>
+From: Uri Lublin <uril@redhat.com>
+Organization: Red Hat
+Message-ID: <44a4fff7-7805-bea6-d46d-2a63d91865a1@redhat.com>
+Date: Sun, 7 Feb 2021 21:58:34 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
+MIME-Version: 1.0
+In-Reply-To: <tencent_2B8A9D04EE7251B09E6B51B589B329D30507@qq.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=uril@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Subject: Re: [Spice-devel] Problems encountered during development
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,37 +66,21 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: uril@redhat.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="gb18030"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Feb 5, 2021, at 2:43 AM, Gerd Hoffmann <kraxel@redhat.com> wrote:
-> 
-> On Thu, Feb 04, 2021 at 11:30:50AM -0500, Tong Zhang wrote:
->> if qxl_device_init() fail, drm device will not be registered,
->> in this case, do not run qxl_drm_release()
-> 
-> How do you trigger this?
-> 
-
-This can be triggered by changing the QXL VGA rom magic value.
-
-In the QEMU source code ./hw/display/qxl.c
-or change the QXL_ROM_MAGIC in spice header file
-
-- Tong
-
-> take care,
->  Gerd
-> 
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+T24gMi80LzIxIDQ6NDUgQU0sIM7Syse7tcam19Mgd3JvdGU6Cj4gRGVhciBmcmllbmQ6Cj4gSSdt
+IGhhdmluZyBzb21lIHByb2JsZW1zIGNvbXBpbGluZyBTcGljZSAtIFNlcnZlciwgdGhpcyB2ZXJz
+aW9uIGlzIAo+IDAuMTQuOTEsIHNwaWNlLXByb3RvY29sIHZlcnNpb24gaXMgMC4xNC4zLCBjb21w
+aWxpbmcgYWx3YXlzIGZhaWxzLiBJIAo+IGNhbid0IHRoaW5rIG9mIGEgc29sdXRpb24uIEkgaG9w
+ZSB5b3UgY2FuIGhlbHAgbWUsIHRoYW5rIHlvdSEKCldoYXQgT1MgYXJlIHlvdSBydW5uaW5nIG9u
+ID8KSXQgc2VlbXMgeW91ciBDKysgY29tcGlsZXIgdmVyc2lvbiBpcyAgNS40LjAsIGNhbiB5b3Ug
+dXNlIGEgbmV3ZXIgb25lID8KCkFsc28gdGhlIGNvbXBpbGVyIHVzZWQgaXMgbG9jYXRlZCB1bmRl
+ciAvdXNyL2xvY2FsLiBJdCBtYXkgaGVscCBpZgp5b3UgdXNlIHRoZSBzeXN0ZW0gQysrIGNvbXBp
+bGVyID8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNw
+aWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
+aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZl
+bAo=
