@@ -1,60 +1,50 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3BAB312756
-	for <lists+spice-devel@lfdr.de>; Sun,  7 Feb 2021 20:58:44 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D1F53312F43
+	for <lists+spice-devel@lfdr.de>; Mon,  8 Feb 2021 11:42:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 48C266E811;
-	Sun,  7 Feb 2021 19:58:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5B65D6E860;
+	Mon,  8 Feb 2021 10:42:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 55F666E811
- for <spice-devel@lists.freedesktop.org>; Sun,  7 Feb 2021 19:58:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F11346E2E1
+ for <spice-devel@lists.freedesktop.org>; Mon,  8 Feb 2021 10:42:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612727921;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BKppUbQ+VKYYdfalxeYFQfcQfGlnw+wcyOVcMuMX11I=;
- b=OzDzcbEsGQhk/DHB/eMVRsKkPFaMus7wBgBEPIZu9D3oY4+W3/gut0o+ax1pF4LNzixXoz
- Vm2+2mCrNCWgzSG3FRHiX5e+sMGJ0e459Dm1e6cmBnw+aAEG3vw/qgdwrM/nSGRqoSxzYC
- gyRISdM6PTcLw672Uof6Tq9c7jpc3Tw=
+ s=mimecast20190719; t=1612780932;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=yx6OCfShF0609v+W3vjhiUcxaTTyjoM+WtY0G5Wv7+4=;
+ b=YDiM/Lr9rtNRxheFB3XMs910TNN1G04VvSNTQAhXPD+OGzwsKNhM+NX449NRjZlbuQwhux
+ VQjRAIBIBCtZOIamUnydM9jh3Ddy9ZAM5qLit8p37wspbGAO3bFR48hVGPs+osa6gq/aDG
+ NW9cppjrYlEl6kcYji6BBVDruD3S+7Y=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-161-d6-78mOLMmaCU94PfzMsaQ-1; Sun, 07 Feb 2021 14:58:38 -0500
-X-MC-Unique: d6-78mOLMmaCU94PfzMsaQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ us-mta-205-6-5c_2iNNOiCQ_Xc4LVApQ-1; Mon, 08 Feb 2021 05:42:11 -0500
+X-MC-Unique: 6-5c_2iNNOiCQ_Xc4LVApQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9DA27107ACC7;
- Sun,  7 Feb 2021 19:58:37 +0000 (UTC)
-Received: from [10.35.206.211] (unknown [10.35.206.211])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id C969460C05;
- Sun,  7 Feb 2021 19:58:36 +0000 (UTC)
-To: =?UTF-8?B?5oiR5piv5Z2P55ee5a2Q?= <759302636@qq.com>,
- spice-devel <spice-devel@lists.freedesktop.org>
-References: <tencent_2B8A9D04EE7251B09E6B51B589B329D30507@qq.com>
-From: Uri Lublin <uril@redhat.com>
-Organization: Red Hat
-Message-ID: <44a4fff7-7805-bea6-d46d-2a63d91865a1@redhat.com>
-Date: Sun, 7 Feb 2021 21:58:34 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2AE4CC7407;
+ Mon,  8 Feb 2021 10:42:09 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-112-170.ams2.redhat.com
+ [10.36.112.170])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id ED29072163;
+ Mon,  8 Feb 2021 10:42:02 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 0F1BB18000AF; Mon,  8 Feb 2021 11:42:01 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Date: Mon,  8 Feb 2021 11:41:49 +0100
+Message-Id: <20210208104149.423758-1-kraxel@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <tencent_2B8A9D04EE7251B09E6B51B589B329D30507@qq.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=uril@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Subject: Re: [Spice-devel] Problems encountered during development
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Subject: [Spice-devel] [PATCH] drm/qxl: properly handle device init failures
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,21 +56,61 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: uril@redhat.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="gb18030"; Format="flowed"
+Cc: David Airlie <airlied@linux.ie>, Tong Zhang <ztong0001@gmail.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gMi80LzIxIDQ6NDUgQU0sIM7Syse7tcam19Mgd3JvdGU6Cj4gRGVhciBmcmllbmQ6Cj4gSSdt
-IGhhdmluZyBzb21lIHByb2JsZW1zIGNvbXBpbGluZyBTcGljZSAtIFNlcnZlciwgdGhpcyB2ZXJz
-aW9uIGlzIAo+IDAuMTQuOTEsIHNwaWNlLXByb3RvY29sIHZlcnNpb24gaXMgMC4xNC4zLCBjb21w
-aWxpbmcgYWx3YXlzIGZhaWxzLiBJIAo+IGNhbid0IHRoaW5rIG9mIGEgc29sdXRpb24uIEkgaG9w
-ZSB5b3UgY2FuIGhlbHAgbWUsIHRoYW5rIHlvdSEKCldoYXQgT1MgYXJlIHlvdSBydW5uaW5nIG9u
-ID8KSXQgc2VlbXMgeW91ciBDKysgY29tcGlsZXIgdmVyc2lvbiBpcyAgNS40LjAsIGNhbiB5b3Ug
-dXNlIGEgbmV3ZXIgb25lID8KCkFsc28gdGhlIGNvbXBpbGVyIHVzZWQgaXMgbG9jYXRlZCB1bmRl
-ciAvdXNyL2xvY2FsLiBJdCBtYXkgaGVscCBpZgp5b3UgdXNlIHRoZSBzeXN0ZW0gQysrIGNvbXBp
-bGVyID8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNw
-aWNlLWRldmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
-aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZl
-bAo=
+Specifically do not try release resources which where
+not allocated in the first place.
+
+Cc: Tong Zhang <ztong0001@gmail.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_display.c | 3 +++
+ drivers/gpu/drm/qxl/qxl_kms.c     | 4 ++++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index c326412136c5..ec50d2cfd4e1 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1183,6 +1183,9 @@ int qxl_destroy_monitors_object(struct qxl_device *qdev)
+ {
+ 	int ret;
+ 
++	if (!qdev->monitors_config_bo)
++		return 0;
++
+ 	qdev->monitors_config = NULL;
+ 	qdev->ram_header->monitors_config = 0;
+ 
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 66d74aaaee06..4dc5ad13f12c 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -288,6 +288,10 @@ void qxl_device_fini(struct qxl_device *qdev)
+ {
+ 	int cur_idx;
+ 
++	/* check if qxl_device_init() was successful (gc_work is initialized last) */
++	if (!qdev->gc_work.func)
++		return;
++
+ 	for (cur_idx = 0; cur_idx < 3; cur_idx++) {
+ 		if (!qdev->current_release_bo[cur_idx])
+ 			continue;
+-- 
+2.29.2
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
