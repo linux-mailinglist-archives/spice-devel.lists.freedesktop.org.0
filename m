@@ -2,53 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45E9A314ECC
-	for <lists+spice-devel@lfdr.de>; Tue,  9 Feb 2021 13:16:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64F4B3153DF
+	for <lists+spice-devel@lfdr.de>; Tue,  9 Feb 2021 17:29:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 25E7A6E823;
-	Tue,  9 Feb 2021 12:16:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D68BE6EB7B;
+	Tue,  9 Feb 2021 16:29:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DE3986E823
- for <spice-devel@lists.freedesktop.org>; Tue,  9 Feb 2021 12:16:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612872995;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ByUjskTTLoPD2OajNMiA8UoGsbWTnUgXFSxuqEGtMYU=;
- b=LjQ21l8+g965qkfYqorGpywS9dBVqbpVtqapWWClGPuTy0Ywk/5AYZmzIw0skfi9eQmuja
- ngZgM3fuTSl40Bw07o8wfemeu1KOerpeoMUe9PV0vwR4iZaY9hlszlYMbgm1FkNmktBjYz
- vF3r7q9aRVCReNGn0QHN34DkQ5qkM8g=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-469-MIC4sTsyMaC8ql-oRLNTXg-1; Tue, 09 Feb 2021 07:16:33 -0500
-X-MC-Unique: MIC4sTsyMaC8ql-oRLNTXg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E7FB01005501;
- Tue,  9 Feb 2021 12:16:31 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-170.ams2.redhat.com
- [10.36.112.170])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 7A965171F4;
- Tue,  9 Feb 2021 12:16:31 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 737F41800395; Tue,  9 Feb 2021 13:16:29 +0100 (CET)
-Date: Tue, 9 Feb 2021 13:16:29 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Tong Zhang <ztong0001@gmail.com>
-Message-ID: <20210209121629.vb3yu6zkr4npnskz@sirius.home.kraxel.org>
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 85B5F6EB6D;
+ Tue,  9 Feb 2021 16:24:49 +0000 (UTC)
+Received: by mail-qt1-x836.google.com with SMTP id z32so13314994qtd.8;
+ Tue, 09 Feb 2021 08:24:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=WAvcbe90u/Sk2hKwNc4NT+yMPbtvqWizeUPK15paqhE=;
+ b=o3su8ZUKZnc93qTfjkoIhgkFZB6+E/ONif1lXzM7/H5up7fG74+TRVf9LbJ5FdWoUV
+ UCDlzgwJ7/nPBqfHoK5S5zZX1LufjBmC7NaVt6hcJ1Om0wHa8qedk5bVU2CEo7CWZPTG
+ +UPJQEiDLN1pA6Eodk8s8AU7Bzt/5iy0fAYH9zZb/dOcwwCSE8UE8dIn8WT8b4ajSD8e
+ 99STx9n8SABe411AWSarJioVXmERaupHCGyuXHCi6lRzuFt1lHBIDvQMPwOt6CmJo122
+ 7x1bW8iVmFiCZ0Ps2WHn8dQLjiG+WOIdvuWVnHFEf5C2LY8FLUFQaVqmDCMGIUD4GvsT
+ fuLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=WAvcbe90u/Sk2hKwNc4NT+yMPbtvqWizeUPK15paqhE=;
+ b=PzxXFSpHuOLz5IOu0e5EPcDRrIr0BRjkn+0+2e49sUcEfHFBK9UE+Y0Q3/3PjsqK5S
+ 6UUo7uXJfO7F0XYpwEfw2OzMdMcsBXfwJASls4nYT6stTxzZifKjNIE5VLLB8ZqRnoTT
+ 0bxwVLo0FoQWkjsMFPclKE4xabIPXRGvsxsfTiUhS1ZKzq+Ij5Zym4O+TNeOiZy+QwcJ
+ GFk4An2HQ6g2MszDiethWvVHK/S5iFUt6xPjjnbO4NtVBYtkNyUuEgKoS1xxLQvSsiD3
+ Bw+qX53EU6p+6kgzk6qVrpWCqrviuxzIuF207TVCcIc8S6VhUQY59jS1qK/qtudCe4no
+ rBXw==
+X-Gm-Message-State: AOAM532G6Iv3ccs4DModVT+p4Yypf20y6fHlNNNMwY5gyCd6hio62C5G
+ UwnAmt+5K5eUryRYtu2MyAWXITx5jUnJmQ==
+X-Google-Smtp-Source: ABdhPJy157lVLQqlscIEGVM7nSm1diSussGJ8QKoOqtK8ib/sPtGN86HtLgQnt7VgOEOw7L6vqPE3g==
+X-Received: by 2002:ac8:4e14:: with SMTP id c20mr10841148qtw.206.1612887888676; 
+ Tue, 09 Feb 2021 08:24:48 -0800 (PST)
+Received: from ?IPv6:2601:5c0:c200:27c6:a82e:f46a:9884:895d?
+ ([2601:5c0:c200:27c6:a82e:f46a:9884:895d])
+ by smtp.gmail.com with ESMTPSA id j5sm16641832qth.80.2021.02.09.08.24.47
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 09 Feb 2021 08:24:48 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.60.0.2.21\))
+From: Tong Zhang <ztong0001@gmail.com>
+In-Reply-To: <20210209121629.vb3yu6zkr4npnskz@sirius.home.kraxel.org>
+Date: Tue, 9 Feb 2021 11:24:47 -0500
+Message-Id: <6FB53E26-5686-410F-B92F-5658BAF411C1@gmail.com>
 References: <20210208104149.423758-1-kraxel@redhat.com>
  <E07153A4-9B42-4050-903E-8BBB99D8ED8E@gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <E07153A4-9B42-4050-903E-8BBB99D8ED8E@gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+ <20210209121629.vb3yu6zkr4npnskz@sirius.home.kraxel.org>
+To: Gerd Hoffmann <kraxel@redhat.com>
+X-Mailer: Apple Mail (2.3654.60.0.2.21)
+X-Mailman-Approved-At: Tue, 09 Feb 2021 16:29:50 +0000
 Subject: Re: [Spice-devel] [PATCH] drm/qxl: properly handle device init
  failures
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -72,13 +80,17 @@ Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBGZWIgMDgsIDIwMjEgYXQgMTI6MDc6MDFQTSAtMDUwMCwgVG9uZyBaaGFuZyB3cm90
-ZToKPiBEb2VzIHRoaXMgcGF0Y2ggZml4IGFuIGlzc3VlIHJhaXNlZCBwcmV2aW91c2x5PyBPciBz
-aG91bGQgdGhleSBiZSB1c2VkIHRvZ2V0aGVyPwo+IGh0dHBzOi8vd3d3Lm1haWwtYXJjaGl2ZS5j
-b20vbGludXgta2VybmVsQHZnZXIua2VybmVsLm9yZy9tc2cyNDY2NTQxLmh0bWwgCj4gCj4gSU1I
-TyB1c2luZyB0aGlzIHBhdGNoIGFsb25lIHdvbuKAmXQgZml4IHRoZSBpc3N1ZQoKVGhpcyBwYXRj
-aCBvbiB0b3Agb2YgZHJtLW1pc2MtbmV4dCBmaXhlcyB0aGUgaW5pdGlhbGl6YXRpb24gZXJyb3Ig
-aXNzdWUKcmVwb3J0ZWQgYnkgeW91IGluIG15IHRlc3RpbmcuCgp0YWtlIGNhcmUsCiAgR2VyZAoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3BpY2UtZGV2
-ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3NwaWNlLWRldmVsCg==
+SGkgR2VyZCwKSSB0ZXN0ZWQgdGhlIHBhdGNoIG9uIGRybS1taXNjLW5leHQgYW5kIGl0IGZpeGVk
+IHRoZSBpc3N1ZS4KVGhhbmtzLAotIFRvbmcKCj4gT24gRmViIDksIDIwMjEsIGF0IDc6MTYgQU0s
+IEdlcmQgSG9mZm1hbm4gPGtyYXhlbEByZWRoYXQuY29tPiB3cm90ZToKPiAKPiBPbiBNb24sIEZl
+YiAwOCwgMjAyMSBhdCAxMjowNzowMVBNIC0wNTAwLCBUb25nIFpoYW5nIHdyb3RlOgo+PiBEb2Vz
+IHRoaXMgcGF0Y2ggZml4IGFuIGlzc3VlIHJhaXNlZCBwcmV2aW91c2x5PyBPciBzaG91bGQgdGhl
+eSBiZSB1c2VkIHRvZ2V0aGVyPwo+PiBodHRwczovL3d3dy5tYWlsLWFyY2hpdmUuY29tL2xpbnV4
+LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmcvbXNnMjQ2NjU0MS5odG1sIAo+PiAKPj4gSU1ITyB1c2lu
+ZyB0aGlzIHBhdGNoIGFsb25lIHdvbuKAmXQgZml4IHRoZSBpc3N1ZQo+IAo+IFRoaXMgcGF0Y2gg
+b24gdG9wIG9mIGRybS1taXNjLW5leHQgZml4ZXMgdGhlIGluaXRpYWxpemF0aW9uIGVycm9yIGlz
+c3VlCj4gcmVwb3J0ZWQgYnkgeW91IGluIG15IHRlc3RpbmcuCj4gCj4gdGFrZSBjYXJlLAo+ICBH
+ZXJkCj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpT
+cGljZS1kZXZlbCBtYWlsaW5nIGxpc3QKU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
+Cmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vc3BpY2UtZGV2
+ZWwK
