@@ -2,52 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A16C31C9D9
-	for <lists+spice-devel@lfdr.de>; Tue, 16 Feb 2021 12:37:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0279631C9DB
+	for <lists+spice-devel@lfdr.de>; Tue, 16 Feb 2021 12:37:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 007626E884;
-	Tue, 16 Feb 2021 11:37:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E8D7C6E471;
+	Tue, 16 Feb 2021 11:37:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B8936E416
- for <spice-devel@lists.freedesktop.org>; Tue, 16 Feb 2021 11:37:29 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7650989F5B
+ for <spice-devel@lists.freedesktop.org>; Tue, 16 Feb 2021 11:37:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613475448;
+ s=mimecast20190719; t=1613475454;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1BNcwAgY2lWfqJewfJz+Q3AkCPMKcBiYlzER8aYP8gc=;
- b=F5yrq66hVJKQSnsZYO4dDL6cp2sxCiYiwLIMgdX7Cbt2vG3wSXUfH2kNw4GZgY99J6oBTV
- QB8SsqqVQ6iZmIrbEkJWxq0ZCorfFlz3LYvpkXVyZDRvx5qIHlI6ZugbU/5Lq9+HfjEamV
- kMm1E55+gvRJ476zXBJXe5UYh/2/7YA=
+ bh=IeMuz+PjENRbBtRPL4YeHFDqiXu98t0Ozh6QE5njAVg=;
+ b=dhGi2wnVBHrcU0KSJPVkH6JN6S/8K5hZUVmo1M/VxH9ADwi/2r/qRsUV+GEMrlD5CBltk1
+ 1L1VUFfT1+R/m6WLnGwctNbYaLzroZpU70H+oXskDGYowfgu+BlnEibYREOJUAg19NiSQ+
+ n4BuEkOPqdqVvWMfrFLF0Z6JkG3sADk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-374-JoG8JbKEOXqO0suKiZDyqw-1; Tue, 16 Feb 2021 06:37:26 -0500
-X-MC-Unique: JoG8JbKEOXqO0suKiZDyqw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-477-5PZJWJp-PRe2Ssa8s8TOIw-1; Tue, 16 Feb 2021 06:37:30 -0500
+X-MC-Unique: 5PZJWJp-PRe2Ssa8s8TOIw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6DFEA195D564;
- Tue, 16 Feb 2021 11:37:25 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 31497100A8EA;
+ Tue, 16 Feb 2021 11:37:29 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-114-184.ams2.redhat.com
  [10.36.114.184])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 1C7D61002382;
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 296211975F;
  Tue, 16 Feb 2021 11:37:25 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 47B3F1800634; Tue, 16 Feb 2021 12:37:18 +0100 (CET)
+ id 6AB6F180086E; Tue, 16 Feb 2021 12:37:18 +0100 (CET)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Date: Tue, 16 Feb 2021 12:37:13 +0100
-Message-Id: <20210216113716.716996-8-kraxel@redhat.com>
+Date: Tue, 16 Feb 2021 12:37:14 +0100
+Message-Id: <20210216113716.716996-9-kraxel@redhat.com>
 In-Reply-To: <20210216113716.716996-1-kraxel@redhat.com>
 References: <20210216113716.716996-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Subject: [Spice-devel] [PATCH 07/10] drm/qxl: fix prime kmap
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Subject: [Spice-devel] [PATCH 08/10] drm/qxl: fix monitors object kmap
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,36 +70,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Use the correct kmap variant.  We don't have a reservation here,
-so we can't use the _locked version.
+Use the correct kmap variant.  We don't hold a reservation here,
+so we can't use the _locked variant.  We can drop the pin because
+qxl_bo_kmap will do that for us.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- drivers/gpu/drm/qxl/qxl_prime.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/qxl/qxl_display.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_prime.c b/drivers/gpu/drm/qxl/qxl_prime.c
-index dc295b2e2b52..4aa949799446 100644
---- a/drivers/gpu/drm/qxl/qxl_prime.c
-+++ b/drivers/gpu/drm/qxl/qxl_prime.c
-@@ -59,7 +59,7 @@ int qxl_gem_prime_vmap(struct drm_gem_object *obj, struct dma_buf_map *map)
- 	struct qxl_bo *bo = gem_to_qxl_bo(obj);
- 	int ret;
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index 8672385a1caf..7500560db8e4 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1159,12 +1159,10 @@ int qxl_create_monitors_object(struct qxl_device *qdev)
+ 	}
+ 	qdev->monitors_config_bo = gem_to_qxl_bo(gobj);
  
--	ret = qxl_bo_kmap_locked(bo, map);
-+	ret = qxl_bo_kmap(bo, map);
- 	if (ret < 0)
+-	ret = qxl_bo_pin(qdev->monitors_config_bo);
++	ret = qxl_bo_kmap(qdev->monitors_config_bo, &map);
+ 	if (ret)
  		return ret;
  
-@@ -71,7 +71,7 @@ void qxl_gem_prime_vunmap(struct drm_gem_object *obj,
- {
- 	struct qxl_bo *bo = gem_to_qxl_bo(obj);
+-	qxl_bo_kmap_locked(qdev->monitors_config_bo, &map);
+-
+ 	qdev->monitors_config = qdev->monitors_config_bo->kptr;
+ 	qdev->ram_header->monitors_config =
+ 		qxl_bo_physical_address(qdev, qdev->monitors_config_bo, 0);
+@@ -1189,8 +1187,7 @@ int qxl_destroy_monitors_object(struct qxl_device *qdev)
+ 	qdev->monitors_config = NULL;
+ 	qdev->ram_header->monitors_config = 0;
  
--	qxl_bo_kunmap_locked(bo);
-+	qxl_bo_kunmap(bo);
- }
+-	qxl_bo_kunmap_locked(qdev->monitors_config_bo);
+-	ret = qxl_bo_unpin(qdev->monitors_config_bo);
++	ret = qxl_bo_kunmap(qdev->monitors_config_bo);
+ 	if (ret)
+ 		return ret;
  
- int qxl_gem_prime_mmap(struct drm_gem_object *obj,
 -- 
 2.29.2
 
