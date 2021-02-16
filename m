@@ -2,53 +2,32 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E474E31C9D6
-	for <lists+spice-devel@lfdr.de>; Tue, 16 Feb 2021 12:37:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C933031CAE1
+	for <lists+spice-devel@lfdr.de>; Tue, 16 Feb 2021 14:08:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 277FE6E5B2;
-	Tue, 16 Feb 2021 11:37:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 182776E94D;
+	Tue, 16 Feb 2021 13:08:30 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5F8C6E418
- for <spice-devel@lists.freedesktop.org>; Tue, 16 Feb 2021 11:37:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613475448;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LddbWRXDOdoIRx26pBviJhLeOTNZA/vNgqOHA0L1BFU=;
- b=R14jUIzc9o0zca1RlA+RWuTPqQhM/Y+jYf3Hd+DKrMky6EJmtdE/Kwyi5BfU5ryOY/6nbX
- rNINsP3RVNwcqQBnnU1I7Y0rHb7d/WRNSiNbB3SK6VyshfKWBcxYWtyIsXI4jWng6ruDn6
- bA/ye8gU/BcOtjDX2/OBfV39xeTjaXU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-145-f_YqtW_wO-iKbDjaR3aryA-1; Tue, 16 Feb 2021 06:37:27 -0500
-X-MC-Unique: f_YqtW_wO-iKbDjaR3aryA-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D6713835E22;
- Tue, 16 Feb 2021 11:37:25 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-114-184.ams2.redhat.com
- [10.36.114.184])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 8D3EA5B698;
- Tue, 16 Feb 2021 11:37:25 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id A492A1800870; Tue, 16 Feb 2021 12:37:18 +0100 (CET)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Date: Tue, 16 Feb 2021 12:37:16 +0100
-Message-Id: <20210216113716.716996-11-kraxel@redhat.com>
-In-Reply-To: <20210216113716.716996-1-kraxel@redhat.com>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A34D86E94C;
+ Tue, 16 Feb 2021 13:08:28 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 00D0FAF2C;
+ Tue, 16 Feb 2021 13:08:27 +0000 (UTC)
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
 References: <20210216113716.716996-1-kraxel@redhat.com>
+ <20210216113716.716996-2-kraxel@redhat.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <c9451a9a-b8b4-9393-4397-624df4eba3ff@suse.de>
+Date: Tue, 16 Feb 2021 14:08:25 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Subject: [Spice-devel] [PATCH 10/10] drm/qxl: add lock asserts to
- qxl_bo_kmap_locked + qxl_bo_kunmap_locked
+In-Reply-To: <20210216113716.716996-2-kraxel@redhat.com>
+Subject: Re: [Spice-devel] [PATCH 01/10] drm/qxl: properly handle device
+ init failures
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,50 +39,143 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+Cc: David Airlie <airlied@linux.ie>, Tong Zhang <ztong0001@gmail.com>,
+ open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>,
+ <virtualization@lists.linux-foundation.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
  Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0385254613=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Try avoid re-introducing locking bugs.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0385254613==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="lnl5ZartAQhJsKAaL1FzuGkzuhW2eJapG"
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/qxl/qxl_object.c | 4 ++++
- 1 file changed, 4 insertions(+)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--lnl5ZartAQhJsKAaL1FzuGkzuhW2eJapG
+Content-Type: multipart/mixed; boundary="v3YlMpUxeDNS2gAiEYBJgOuJKw4QJpk4f";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>, Tong Zhang <ztong0001@gmail.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
+Message-ID: <c9451a9a-b8b4-9393-4397-624df4eba3ff@suse.de>
+Subject: Re: [PATCH 01/10] drm/qxl: properly handle device init failures
+References: <20210216113716.716996-1-kraxel@redhat.com>
+ <20210216113716.716996-2-kraxel@redhat.com>
+In-Reply-To: <20210216113716.716996-2-kraxel@redhat.com>
 
-diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-index 22748b9566af..90d5e5b7f927 100644
---- a/drivers/gpu/drm/qxl/qxl_object.c
-+++ b/drivers/gpu/drm/qxl/qxl_object.c
-@@ -162,6 +162,8 @@ int qxl_bo_kmap_locked(struct qxl_bo *bo, struct dma_buf_map *map)
- {
- 	int r;
- 
-+	dma_resv_assert_held(bo->tbo.base.resv);
-+
- 	if (bo->kptr) {
- 		bo->map_count++;
- 		goto out;
-@@ -236,6 +238,8 @@ void *qxl_bo_kmap_atomic_page(struct qxl_device *qdev,
- 
- void qxl_bo_kunmap_locked(struct qxl_bo *bo)
- {
-+	dma_resv_assert_held(bo->tbo.base.resv);
-+
- 	if (bo->kptr == NULL)
- 		return;
- 	bo->map_count--;
--- 
-2.29.2
+--v3YlMpUxeDNS2gAiEYBJgOuJKw4QJpk4f
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Am 16.02.21 um 12:37 schrieb Gerd Hoffmann:
+> Specifically do not try release resources which where
+> not allocated in the first place.
+
+I still think this should eventually be resolved by using managed code.=20
+But for now
+
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+
+>=20
+> Cc: Tong Zhang <ztong0001@gmail.com>
+> Tested-by: Tong Zhang <ztong0001@gmail.com>
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+> ---
+>   drivers/gpu/drm/qxl/qxl_display.c | 3 +++
+>   drivers/gpu/drm/qxl/qxl_kms.c     | 4 ++++
+>   2 files changed, 7 insertions(+)
+>=20
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qx=
+l_display.c
+> index c326412136c5..ec50d2cfd4e1 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -1183,6 +1183,9 @@ int qxl_destroy_monitors_object(struct qxl_device=
+ *qdev)
+>   {
+>   	int ret;
+>  =20
+> +	if (!qdev->monitors_config_bo)
+> +		return 0;
+> +
+>   	qdev->monitors_config =3D NULL;
+>   	qdev->ram_header->monitors_config =3D 0;
+>  =20
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_km=
+s.c
+> index 66d74aaaee06..4dc5ad13f12c 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -288,6 +288,10 @@ void qxl_device_fini(struct qxl_device *qdev)
+>   {
+>   	int cur_idx;
+>  =20
+> +	/* check if qxl_device_init() was successful (gc_work is initialized =
+last) */
+> +	if (!qdev->gc_work.func)
+> +		return;
+> +
+>   	for (cur_idx =3D 0; cur_idx < 3; cur_idx++) {
+>   		if (!qdev->current_release_bo[cur_idx])
+>   			continue;
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--v3YlMpUxeDNS2gAiEYBJgOuJKw4QJpk4f--
+
+--lnl5ZartAQhJsKAaL1FzuGkzuhW2eJapG
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmArw8kFAwAAAAAACgkQlh/E3EQov+AS
+yw/9HQv+slrvfu2KApiw6CP4w+/qHpWmhrAjamB7sY5PzEy8uPw6IkWHn2OOeP0T3wO/43MujjqW
+2DfNZNZh9Yvsl+OmtFUu/ABbmrN5H2YbMd89EFnFwrTewf8AjW5aELMRiazpwDZmiF9t4zY8Zbgg
+kFD6vckqqHcN6/7svmAuQi4XVxjq7+ULrar3JThqpCwlb38bK4BaGF0sfOaknBfO9qE9J1Yjdzqr
+Mw62KXPUM6sghE1smDOg+qAW6WuSdpnD3eEDW0Dg7xyFDeywcizAVAMHMBz9nMsCKl14QMzg+P5a
+zEwvucnXKFcEbvIhcCbcTal13EwW1nrPc0QlhrE/Xml+LYoMI3mSI0YtwsR4CiudLbgpSQxBggvi
+VsRx7vv874ARwop79x6HpmTnx4GX+fJ9EJa4KFAfuPmqvZr46KczplxqP2kB5im99LW7o9tZ3kdv
+vfGKo2BT8UI0Yc1rkrIEx/nXiYkco+VO9Sf6wbq29+WHcs5EVsPkC8Yz0NIXsQ3/m06Nwugy1Tx9
+b5DdhJWuFnNgc0ThnmcsCcPxfBh3X4txOetY3rf7Foc2qGdO/7D/v5osEDvlHNcynQvq1N1PKqaN
+g37G2NS2lnzYJKasEDnBIaTxy1hEHJs++9TCgdGbWa1WJ8a98NTCGQw5TsdBA9S1uBEmG59xY8/O
+tP4=
+=Wtgq
+-----END PGP SIGNATURE-----
+
+--lnl5ZartAQhJsKAaL1FzuGkzuhW2eJapG--
+
+--===============0385254613==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0385254613==--
