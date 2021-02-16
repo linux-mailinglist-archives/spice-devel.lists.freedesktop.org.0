@@ -1,32 +1,33 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D70A31CAFA
-	for <lists+spice-devel@lfdr.de>; Tue, 16 Feb 2021 14:18:34 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B6DE31CB15
+	for <lists+spice-devel@lfdr.de>; Tue, 16 Feb 2021 14:27:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C372E6E95A;
-	Tue, 16 Feb 2021 13:18:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1B9F6E2EF;
+	Tue, 16 Feb 2021 13:27:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 250D06E959;
- Tue, 16 Feb 2021 13:18:31 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C018B89E15;
+ Tue, 16 Feb 2021 13:27:43 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A96ECACBF;
- Tue, 16 Feb 2021 13:18:29 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 4DDE0ACBF;
+ Tue, 16 Feb 2021 13:27:42 +0000 (UTC)
 To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
 References: <20210216113716.716996-1-kraxel@redhat.com>
- <20210216113716.716996-9-kraxel@redhat.com>
+ <20210216113716.716996-10-kraxel@redhat.com>
 From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <47d20b11-5e9e-df5d-f5d7-eeabad0fba51@suse.de>
-Date: Tue, 16 Feb 2021 14:18:28 +0100
+Message-ID: <5baf096f-b1ee-46ba-5ee9-1c829b96e088@suse.de>
+Date: Tue, 16 Feb 2021 14:27:40 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.0
 MIME-Version: 1.0
-In-Reply-To: <20210216113716.716996-9-kraxel@redhat.com>
-Subject: Re: [Spice-devel] [PATCH 08/10] drm/qxl: fix monitors object kmap
+In-Reply-To: <20210216113716.716996-10-kraxel@redhat.com>
+Subject: Re: [Spice-devel] [PATCH 09/10] drm/qxl: map/unmap framebuffers in
+ prepare_fb+cleanup_fb callbacks.
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -43,19 +44,19 @@ Cc: David Airlie <airlied@linux.ie>, "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>
-Content-Type: multipart/mixed; boundary="===============0653084778=="
+Content-Type: multipart/mixed; boundary="===============0445736724=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0653084778==
+--===============0445736724==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="dAy6DIFwPM7P209nF5nzfBpzm4IqotlFM"
+ boundary="t6ObCfqeNje5PVm1VdE1lp9lo3sqV3OU7"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---dAy6DIFwPM7P209nF5nzfBpzm4IqotlFM
-Content-Type: multipart/mixed; boundary="pwM01gIs21csFcuVNF3Jw0rrOyqXUFxfO";
+--t6ObCfqeNje5PVm1VdE1lp9lo3sqV3OU7
+Content-Type: multipart/mixed; boundary="1gO4pp0ZAZQBFWSJwOpmGsR9livlUNtlm";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: Gerd Hoffmann <kraxel@redhat.com>, dri-devel@lists.freedesktop.org
@@ -65,63 +66,114 @@ Cc: David Airlie <airlied@linux.ie>, open list
  <virtualization@lists.linux-foundation.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <spice-devel@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
-Message-ID: <47d20b11-5e9e-df5d-f5d7-eeabad0fba51@suse.de>
-Subject: Re: [PATCH 08/10] drm/qxl: fix monitors object kmap
+Message-ID: <5baf096f-b1ee-46ba-5ee9-1c829b96e088@suse.de>
+Subject: Re: [PATCH 09/10] drm/qxl: map/unmap framebuffers in
+ prepare_fb+cleanup_fb callbacks.
 References: <20210216113716.716996-1-kraxel@redhat.com>
- <20210216113716.716996-9-kraxel@redhat.com>
-In-Reply-To: <20210216113716.716996-9-kraxel@redhat.com>
+ <20210216113716.716996-10-kraxel@redhat.com>
+In-Reply-To: <20210216113716.716996-10-kraxel@redhat.com>
 
---pwM01gIs21csFcuVNF3Jw0rrOyqXUFxfO
+--1gO4pp0ZAZQBFWSJwOpmGsR9livlUNtlm
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
+Hi
+
+this is a shadow-buffered plane. Did you consider using the new helpers=20
+for shadow-buffered planes? They will map the user BO for you and=20
+provide the mapping in the plane state.
+
+ From there, you should implement your own plane state on top of struct=20
+drm_shadow_plane_state, and also move all the other allocations and=20
+vmaps into prepare_fb and cleanup_fb. Most of this is not actually=20
+allowed in commit tails. All we'd have to do is to export the reset,=20
+duplicate and destroy code; similar to what=20
+__drm_atomic_helper_plane_reset() does.
+
+Best regards
+Thomas
 
 
 Am 16.02.21 um 12:37 schrieb Gerd Hoffmann:
-> Use the correct kmap variant.  We don't hold a reservation here,
-> so we can't use the _locked variant.  We can drop the pin because
-> qxl_bo_kmap will do that for us.
+> We don't have to map in atomic_update callback then,
+> making locking a bit less complicated.
 >=20
 > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-
-Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
-
 > ---
->   drivers/gpu/drm/qxl/qxl_display.c | 7 ++-----
->   1 file changed, 2 insertions(+), 5 deletions(-)
+>   drivers/gpu/drm/qxl/qxl_display.c | 14 +++++---------
+>   1 file changed, 5 insertions(+), 9 deletions(-)
 >=20
 > diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qx=
 l_display.c
-> index 8672385a1caf..7500560db8e4 100644
+> index 7500560db8e4..39b8c5116d34 100644
 > --- a/drivers/gpu/drm/qxl/qxl_display.c
 > +++ b/drivers/gpu/drm/qxl/qxl_display.c
-> @@ -1159,12 +1159,10 @@ int qxl_create_monitors_object(struct qxl_devic=
-e *qdev)
+> @@ -584,7 +584,6 @@ static void qxl_cursor_atomic_update(struct drm_pla=
+ne *plane,
+>   	struct drm_gem_object *obj;
+>   	struct qxl_bo *cursor_bo =3D NULL, *user_bo =3D NULL, *old_cursor_bo=
+ =3D NULL;
+>   	int ret;
+> -	struct dma_buf_map user_map;
+>   	struct dma_buf_map cursor_map;
+>   	void *user_ptr;
+>   	int size =3D 64*64*4;
+> @@ -599,11 +598,8 @@ static void qxl_cursor_atomic_update(struct drm_pl=
+ane *plane,
+>   		obj =3D fb->obj[0];
+>   		user_bo =3D gem_to_qxl_bo(obj);
+>  =20
+> -		/* pinning is done in the prepare/cleanup framevbuffer */
+> -		ret =3D qxl_bo_kmap_locked(user_bo, &user_map);
+> -		if (ret)
+> -			goto out_free_release;
+> -		user_ptr =3D user_map.vaddr; /* TODO: Use mapping abstraction proper=
+ly */
+> +		/* mapping is done in the prepare/cleanup framevbuffer */
+> +		user_ptr =3D user_bo->map.vaddr; /* TODO: Use mapping abstraction pr=
+operly */
+>  =20
+>   		ret =3D qxl_alloc_bo_reserved(qdev, release,
+>   					    sizeof(struct qxl_cursor) + size,
+> @@ -639,7 +635,6 @@ static void qxl_cursor_atomic_update(struct drm_pla=
+ne *plane,
+>   		cursor->chunk.data_size =3D size;
+>   		memcpy(cursor->chunk.data, user_ptr, size);
+>   		qxl_bo_kunmap_locked(cursor_bo);
+> -		qxl_bo_kunmap_locked(user_bo);
+>  =20
+>   		cmd =3D (struct qxl_cursor_cmd *) qxl_release_map(qdev, release);
+>   		cmd->u.set.visible =3D 1;
+> @@ -778,6 +773,7 @@ static int qxl_plane_prepare_fb(struct drm_plane *p=
+lane,
+>   	struct drm_gem_object *obj;
+>   	struct qxl_bo *user_bo;
+>   	struct qxl_surface surf;
+> +	struct dma_buf_map unused;
+>  =20
+>   	if (!new_state->fb)
+>   		return 0;
+> @@ -815,7 +811,7 @@ static int qxl_plane_prepare_fb(struct drm_plane *p=
+lane,
+>   		}
 >   	}
->   	qdev->monitors_config_bo =3D gem_to_qxl_bo(gobj);
 >  =20
-> -	ret =3D qxl_bo_pin(qdev->monitors_config_bo);
-> +	ret =3D qxl_bo_kmap(qdev->monitors_config_bo, &map);
->   	if (ret)
->   		return ret;
+> -	return qxl_bo_pin(user_bo);
+> +	return qxl_bo_kmap(user_bo, &unused);
+>   }
 >  =20
-> -	qxl_bo_kmap_locked(qdev->monitors_config_bo, &map);
-> -
->   	qdev->monitors_config =3D qdev->monitors_config_bo->kptr;
->   	qdev->ram_header->monitors_config =3D
->   		qxl_bo_physical_address(qdev, qdev->monitors_config_bo, 0);
-> @@ -1189,8 +1187,7 @@ int qxl_destroy_monitors_object(struct qxl_device=
- *qdev)
->   	qdev->monitors_config =3D NULL;
->   	qdev->ram_header->monitors_config =3D 0;
+>   static void qxl_plane_cleanup_fb(struct drm_plane *plane,
+> @@ -834,7 +830,7 @@ static void qxl_plane_cleanup_fb(struct drm_plane *=
+plane,
 >  =20
-> -	qxl_bo_kunmap_locked(qdev->monitors_config_bo);
-> -	ret =3D qxl_bo_unpin(qdev->monitors_config_bo);
-> +	ret =3D qxl_bo_kunmap(qdev->monitors_config_bo);
->   	if (ret)
->   		return ret;
+>   	obj =3D old_state->fb->obj[0];
+>   	user_bo =3D gem_to_qxl_bo(obj);
+> -	qxl_bo_unpin(user_bo);
+> +	qxl_bo_kunmap(user_bo);
 >  =20
+>   	if (old_state->fb !=3D plane->state->fb && user_bo->shadow) {
+>   		qxl_bo_unpin(user_bo->shadow);
 >=20
 
 --=20
@@ -133,32 +185,32 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---pwM01gIs21csFcuVNF3Jw0rrOyqXUFxfO--
+--1gO4pp0ZAZQBFWSJwOpmGsR9livlUNtlm--
 
---dAy6DIFwPM7P209nF5nzfBpzm4IqotlFM
+--t6ObCfqeNje5PVm1VdE1lp9lo3sqV3OU7
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmArxiQFAwAAAAAACgkQlh/E3EQov+DX
-pBAA0W9z+geNfjAswRgfoft+rrjdUHqknO2XhhcUtrtmzjXgj4PKfssqO5BWqbUv8Y6k886730Oo
-I98cJ2BMs41j6s7Y/WJ0Z2N7pk/o+lSzPxcG4SDWuCWQVSFS9pa2vESADr5CSlc0FnSPdPQhUvOv
-WZdZtIGAbny6Ga+6Xf/CRY3BElARaYaPV9xDgR50upLrkPDUR9kvoIbwXK+hT4CxKFgMFdZz3Vh+
-CqLB0aX/0GYZ+GfHhlWYvNY/S1Q6MXmMT8AfchNVyDPMSt0grMnHvRkA8ZVxual3FCUUKK5S+8PD
-NuX3sdcbfl6pDrXj4vFAGUzPAapnkvjCfxAsozfVbr/b28NrufKIiilKphOy0raCbpYQ/0GwtyTH
-UPXOQdywe7+GJce5tbHTExvGmLJ+r7ce2VROllfqPWk/JeLR1Z72SwtRU9HDk34/s8DASjFy4aSv
-XjbeSC9lqsdxVFtLlygqAu+VkhcuNUGy+tX4uBz0Xm6TvSCrSWYg4cXdEu9G2/gujkknCcQEE/qb
-N7pB8oLc+nG5pwcWMMLHPxSWMtrREmSWSq53cdo9WfS69EWilpn2blAMrO/Yz9ImtABZ8GAS9KFM
-4PjnDQqFM6gEl+AWhEYBDwG5fg53dR6XjZzqVshmAS23pYvUuEzGvQJ4OsNCeQwpaFjXg/yhwjgM
-85M=
-=SKuG
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAryEwFAwAAAAAACgkQlh/E3EQov+Dg
+TA//dRXUg0MLOw9b81xM6nt0HJ9RLw46bRhb4XCqoLhICz7Pg97Fyx2JaE8yf3hioB9rmTSV675Z
+BJStK9iol7BnxcpVcZEnVo7KJUPCANiMiFefVid694ycHsIulct4yieM1UyBv+b1Kyz1reOHw6a8
+lhinyf1hBf7DeU7FPxTJkcVc7LQQmLN7s8Vvgr0cnRync+YgDEv+4KXwyseVcIPwvYWk8hEUXNpJ
+TqafUD1yWZjFzIyn2h3Ud9iTuOe/dAFvo79yuOZC16XoqXO4go/JToEbrt3QpXt0Jd9tk1GZS7Mq
+4Yn+AsHNH+7bh5UWku1s5d2NIx+OFI3V8tkSOdmjT442QOFffxaYJzOsW2pJMvdu3/zbLz73bg3V
+QoVhHvIcyfWltLBLUgnQBURZu6P1/G4u61nTMQ1hxl99Zt+ENcv0DWoQ5WtS9M/6TCwi6jolvqqn
+s3IGA+wgJdAoUBR4PCCaD4vb32iMehkSUSNh7/Zc88a5ijmtryB6yjN4Gih5/B9OiLyDmUN7YcMD
+GMwsE13FnPzUxieh0QVgR4L05Uu06gFSRKamWgHOmwqtm9HIwB2E+/zwJxYvhrkY6YmzavkUy2eP
+X+zOz43MKLoDiNYo1RVrhGnHZdD6MaqPTxP8gnzFGjH2+GIApvj5wNmvlnyeCn2Eth6NwCVJ19cH
+xT4=
+=clOc
 -----END PGP SIGNATURE-----
 
---dAy6DIFwPM7P209nF5nzfBpzm4IqotlFM--
+--t6ObCfqeNje5PVm1VdE1lp9lo3sqV3OU7--
 
---===============0653084778==
+--===============0445736724==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -169,4 +221,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============0653084778==--
+--===============0445736724==--
