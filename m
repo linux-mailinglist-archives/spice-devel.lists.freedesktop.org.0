@@ -1,74 +1,73 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 188A631FD7D
-	for <lists+spice-devel@lfdr.de>; Fri, 19 Feb 2021 17:59:00 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3742320934
+	for <lists+spice-devel@lfdr.de>; Sun, 21 Feb 2021 09:37:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4D6D66EB7D;
-	Fri, 19 Feb 2021 16:58:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A2C0F6E441;
+	Sun, 21 Feb 2021 08:37:26 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from new3-smtp.messagingengine.com (new3-smtp.messagingengine.com
- [66.111.4.229])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6695B6EB52;
- Fri, 19 Feb 2021 15:12:45 +0000 (UTC)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
- by mailnew.nyi.internal (Postfix) with ESMTP id AD8085801DB;
- Fri, 19 Feb 2021 10:12:42 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Fri, 19 Feb 2021 10:12:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=
- date:from:to:cc:subject:message-id:references:mime-version
- :content-type:in-reply-to; s=fm2; bh=Emd+iGXCpjhCIuGJ6kINzMtdOjP
- Vb1dtj8cLvd3w9uQ=; b=NGfSf1xCTv59Q/62lzFrQUe3OfzHicY7PdlXFseZ+fo
- CXaps5k96MCo/y6dXa/ePCUiVr/+yd+bY0z6zZBYrTTK2YzzxM1J8iqD3y6W62cZ
- rXBdZ7f2+aX04uHfX4St/hRD2mvVDoQ+/wu5mb+Q5x907WZ9caEJ8KHfdT1nr2yD
- JLP64gaaabo7m5fSkBVWV9SDIr/uh0mJgEZZlhBIJuPlE67fksWmT4qsGXSXnPqG
- CKVo2kTnbLrkMB9P1EmlLJdgH0orL2bJxv6jphPeJpe+zESq+2OJKnDQBxs0UL06
- x/1RFeKzSAsBixLgniCd+pZnvp+IstVDQldHmokucVA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=Emd+iG
- XCpjhCIuGJ6kINzMtdOjPVb1dtj8cLvd3w9uQ=; b=XHY4s+8UfwXqR/mdORv9Po
- /1XBss0CQ+zb9weVPOMHgXllan4j3WpFbVV45/9KrKa8MoIeEvYETWxoJEslqrHX
- dgZiBw3LQr6qqQlGIBwp1fvzIM7wmsmSMRJPN7pcx26eaJLu1vWzJASxkht3qzL3
- 37VmmRlkN0y8eQqZLlN/zwcOCVJd/dAR7AO7Ow7IidsN98Kpbi2SAccAvvgtzrBA
- EiUnoHogcZxTVCcrP0XuoyWqE6afFOSiKBq5jnT866hfWHZ0ogtOVppzLv3xFa4D
- ZcfX/iJsRv2yUob032ohIQetrwvo9hbKn/V9+26kTFBw827c/q1tZPTIXDWIjtdw
- ==
-X-ME-Sender: <xms:ZtUvYBx0bbDfFxXAdIHbkwjyvuzqdT-sP0wW9H9sCZbunWFhSVeH5A>
- <xme:ZtUvYBS0sQ6QEVz6WG3a70zRD-4BgpSmOJyrrc2EtwoHD16lfAP7faThFVF-v5MpL
- QCvAHvC0jqlMXPKtqg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrjeeigdejfecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihimhgv
- ucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrghtth
- gvrhhnpeelkeeghefhuddtleejgfeljeffheffgfeijefhgfeufefhtdevteegheeiheeg
- udenucfkphepledtrdekledrieekrdejieenucevlhhushhtvghrufhiiigvpedtnecurf
- grrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:ZtUvYLX8QzsLvkGEKzfhD1XAcBYkntU7dfwxve0WGgWt7bV-3lf-DA>
- <xmx:ZtUvYDijvIJAeW3OBrs-WZlrOHqA6KeHcimnKMIktl8ihFDtqDEDKg>
- <xmx:ZtUvYDCT2WhDglx11hvthCAHwH62SLuW3JZFEW_w4IwkPoV0cR1NIA>
- <xmx:atUvYNrOPVJ5tO9BLZs9QptUd2msh0xMIaKSYRV9WMfTEsqgsuaOXQ>
-Received: from localhost (lfbn-tou-1-1502-76.w90-89.abo.wanadoo.fr
- [90.89.68.76])
- by mail.messagingengine.com (Postfix) with ESMTPA id C72DF1080057;
- Fri, 19 Feb 2021 10:12:37 -0500 (EST)
-Date: Fri, 19 Feb 2021 16:12:35 +0100
-From: Maxime Ripard <maxime@cerno.tech>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20210219151235.dsv4mujqyrzndhsn@gilmour>
-References: <20210219120032.260676-1-maxime@cerno.tech>
- <20210219120032.260676-2-maxime@cerno.tech>
- <51bb5aaf-f771-020b-9a48-77d8679de6a2@suse.de>
+Received: from sonic314-21.consmr.mail.ne1.yahoo.com
+ (sonic314-21.consmr.mail.ne1.yahoo.com [66.163.189.147])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1DFDF6E8E3
+ for <spice-devel@lists.freedesktop.org>; Sun, 21 Feb 2021 00:31:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1613867459; bh=7/RB2e2sw5H+3SoLdoBVFnsQG9husOn4AdkujjEU38Y=;
+ h=Date:From:To:Subject:References:From:Subject:Reply-To;
+ b=OgZ5fDaCgv82t73pno2pk274fQ7R9FKOAVhEOGcN+do+NA8Qz/BADuBK8bcFnPp2+Gzu8Dsv3dpQrjl8Jj3vOTzVZYmIOYrszB/JGJ7mcCM23NqaOBrL7wIDMedfos6U9UO3ougFohMICj/LJgdm5afeMTtCDWL5m+UNhOQO8vzL/k4Hzs0af/RQjLtLhlx5LxWS16DRGVGmRJ5T0kB8cIfLC30c/sR3J56+y8nRjBSubVfexxcody/JmYWEP2BSj69Wr+5q/x29oKf/POi59PYQcIqco1+u1mP9UKRcYmrCDzIuyyL44gwNLB6MmcUjjxlhK5yCfijn9c4wA7pVbw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1613867459; bh=eH3dwQfUePdrrhMA8Ktxl8yZF4mpz98AamKEfCsbokf=;
+ h=X-Sonic-MF:Date:From:To:Subject:From:Subject;
+ b=X4DnRcaC4QSGbd9By3Noarwp1Otez5RuAemir8j/6gCgFuTvLRYJCVAJtnGsKNsAQQQkcpOxmjYw0nAc5lRP1JZi7cchzEk8GCzI6lSgNJw7jE94445wNryFgRejruKaVSS301qKk9BpD6VHGn+dQN2g6j6+dKI39wZNFo/kij63J1erAVYuaVHQkoxYz/qPcs9QcMFvWB8Ck+QXAOTp8TnwVwjhEGDc1IJNHr8mmE7K5ebcZ+S8GVqIemxWwj8S1LCuW9HAQPKswbRKIQQvMCuD9mD3hrtizq7U962FLBIssKXPl7DLEINHyMvVKXSwFqfqUknQx4efIGXEEgbjzQ==
+X-YMail-OSG: 3384P_QVM1kbkgCWWAU16U7hHFGIAZx5r.susq6jTszDOHNt.q3tj2FDgEEHIQu
+ ltk0JreLG0zZuokM50iSU8mH9JIpzGNrITipMUSMc6DMLbMYlInfDsYpc2EvIIEKCG28Y4JqfEPU
+ 7vjfCZVfvfx6nvOAHhBdLnkvFyJivQxqvnSVyvWBSMP6IeCs6BPDZY7g6.7bZrfIEeITnwRUj6VU
+ nxr93e_HuAHOJqcfusIy1w96eF0lUmq.VGnvhTeoN6cnEO2m5RL_79XORpKvqlmdt_JhXkVjV9Nc
+ ejwSo_5phpNzDpsXc_2ysehFdtq3h8k3ZxN_lP.PcBSwZbmLsy2fTaKAnx4mrq.PDHeOEa0gqInV
+ mmBipijewulS9bRcVfKxuhKP4L5rOTdH7AqwqSRM1rp6ZmsKmRIDTRIxDFbhWsOF8I2707RIp33H
+ vtyxZgPWN999S8mRWk79Vl7I.OJqie2fcleRpyiTnabkzBttf9V90w0KngtNjGOLq0gQOfLjDG4m
+ egmm1_swyTpgGbQtI7Xkrz5PbnMgpXy0pu.kgnv3CM.Y4ACajEmnMkUYBokI7lpvof5OgPyl1.J7
+ B.9or4z_d9StgwakZp0ef4UipeGFbpGUoVb5_hM5p0.UCMjqdMX2UJOJvbxm1c.M240AInxzPPpi
+ ANQfKZ2fLGkHVL_7M.oOQzFVIA.AKV7pvIDSP9EzJ2OtlCWbro9MT.XtyRtgr_myNB3KbkrOVJA9
+ l.0V0_zmlZ4WgCW4.Vy4Oqf2U0YgtHnshO.Zx3dhcNpRt4lsthTzTXsQtpzEe8iu6GNeIS7bObq_
+ FlT9MnR7hADes0Aw2f8DdgPLFeZ_eVXqUsHTGoADBIa3DyBfSQFKJFkfwGX05gqJd9Y1MEmqN5Co
+ QN24E9YtcgAPcKm81vLmoiVRP4evgJ6TWPemW1nf8_5_JDnJP_Ijj9xX2tNE4EfTNbk44gvNuZPK
+ jDFD4okOI0uu_DtL8djpc3IoCSEKiB5OyK6_RXPWHVZYwInO6XYLuJtMlraxHzQkYHdYlJ1FAE.x
+ lVGqvkajdVDeGw4wgW41N_PfsCni7OY5ln5VewFcA8VMEf_VlTv2.CYrZZosqK917U.7HhLmqKln
+ roSxk7Wdegb.mpaMChyqwLDgV4b0cXcnSIZ26XYTsCSyVhztBvtlLagwBE0C0mxb6zBZqDAejsao
+ w5DfCgRVFHPuQJnSv_id5rIMFeJQlvmcpmmBqX3.SBburLTHOhuOtN.YmG9YBRiVp4Rc36IJDor5
+ vlPSnlvXE6wwR.3lUNEt4UkMNMrBNoBHki1iUsiO2m9EMUsjIZOxlh0C2OR4xqmZH8_aJVKzUuPM
+ 7FDsib4_KrmTf8uLOhUDTWKtNBW0nhXD3x5VCAs.m9Wvya5NAWkNCgcc3b9CVcrgt0oq4O6W2Uw_
+ Q5a2nGY3W6DQRR1TeOa4grbWCMQfgcr04UP3SIYgZSax6WOlRT9bDHtq7eBC897gPAYT4H0Ijkrb
+ MwWtC7LAkZDY54aw6lukMRHzmBGWHzVGMc7SB0ehCr6tSoTIZ5V2YBJxMrvaOSx9CKHJmfmr3PBy
+ NTIc94yCZU0pOJJ7qpWFEISzY9gA36TQndRKrOFiiNNlWeinF163WZuiotw1fItUypPo8h53vBTu
+ Cm4dXRzBr0WmeY7Trf98XxYGotkQz6pNnnQSqFwsNyiZokUHkSK4pQIyCH214rTH2QLV9YnUHvD6
+ T_2RXHXy_zRMANAc9RXCk5PsRCdnqDoQ_p4qvxQD8SLyENBrDMXKuect1t7UNCbIPbog1M2rqiwd
+ FFfFEfaj7wClrNixberUBVI8FrxrekThuuEamu1p8tyV_b4dzu2NmDev48pLwkZdBDjLEGo_hGQj
+ _7SQFX221..iPSQgSJ6zlnc.x.g92_tm7wpH3sjwIr1uZgEWDAeg7b_BO_xyL6_ttSvQPQ1RzAwV
+ ISBw._ADrH3_Kn3VI4bYWNJWVBbeG8wEFxME_NNo8Qnnv5w01vUTXKIIcDrRjDtNY9_lmU_pkMtW
+ 9NilP_Sqo5DX02owB9khTwvGh5nNXN20pY74StQSuPQUwjQwPFCFJabRYJU5tG8I5MZ2KA1YfMs_
+ mpc7rW074BsmxywmFpRn_UMizGaQpHBKn_.RB2Ku_Voi9zruQGoWw9Y2jYAXqUv7bprktzqw3Po_
+ J5OaGGNSLFVCXWzFyQamKt4WNLSXZ2cNSRNVgGgAixxRXEYtkx_S4z23_g1TB23p7DGwqtBsWCJ.
+ qTqdBHgwjW3_2289p7iyQeZrg.NJWjp5SndeiJjhqY6FFygBnrhaB4ZaoXV9bX4RZlIeE9pd_x8C
+ YeUiA4ARKg7Nim7Ws.AeTIJPy63R9FoyglDntfKw0ywptTjJCB3ICD4VavNikvsNyQqP3fIjjVKw
+ SduEi3_QNs2kBhjRDPVModoX0Zkl_5_VDk1ResZukFPt8MLonr6jB3fofIGRZBVzMY2PjnuXxg6P
+ JKUJFgKvGWEX3dMufeWCn_GkGCrvIjgQOPOHZZhXppw--
+X-Sonic-MF: <matt_sienko@yahoo.com>
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic314.consmr.mail.ne1.yahoo.com with HTTP; Sun, 21 Feb 2021 00:30:59 +0000
+Date: Sun, 21 Feb 2021 00:30:48 +0000 (UTC)
+From: Matthew Sienko <matt_sienko@yahoo.com>
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Message-ID: <924666743.685487.1613867448052@mail.yahoo.com>
 MIME-Version: 1.0
-In-Reply-To: <51bb5aaf-f771-020b-9a48-77d8679de6a2@suse.de>
-X-Mailman-Approved-At: Fri, 19 Feb 2021 16:58:55 +0000
-Subject: Re: [Spice-devel] [PATCH v3 02/11] drm: Rename plane atomic_check
- state names
+References: <924666743.685487.1613867448052.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.17712 YMailNorrin Mozilla/5.0 (Macintosh;
+ Intel Mac OS X 10.0; rv:72.0) Gecko/20100101 Firefox/72.0
+X-Mailman-Approved-At: Sun, 21 Feb 2021 08:37:25 +0000
+Subject: [Spice-devel] No Sound with RemoteViewer on OSX Client
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,127 +79,65 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- Xinliang Liu <xinliang.liu@linaro.org>, dri-devel@lists.freedesktop.org,
- Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
- linux-stm32@st-md-mailman.stormreply.com, Jerome Brunet <jbrunet@baylibre.com>,
- linux-samsung-soc@vger.kernel.org, Kevin Hilman <khilman@baylibre.com>,
- Michal Simek <michal.simek@xilinx.com>, NXP Linux Team <linux-imx@nxp.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Leo Li <sunpeng.li@amd.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- Roland Scheidegger <sroland@vmware.com>, Inki Dae <inki.dae@samsung.com>,
- Sean Paul <sean@poorly.run>, Hyun Kwon <hyun.kwon@xilinx.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>, linux-kernel@vger.kernel.org,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
- Zack Rusin <zackr@vmware.com>, Gerd Hoffmann <kraxel@redhat.com>,
- David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Edmund Dea <edmund.j.dea@intel.com>, virtualization@lists.linux-foundation.org,
- Eric Anholt <eric@anholt.net>, Thierry Reding <thierry.reding@gmail.com>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Mihail Atanassov <mihail.atanassov@arm.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>,
- linux-rockchip@lists.infradead.org,
- "James \(Qian\) Wang" <james.qian.wang@arm.com>,
- Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
- Alexandre Torgue <alexandre.torgue@st.com>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- linux-arm-msm@vger.kernel.org, John Stultz <john.stultz@linaro.org>,
- linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
- Sandy Huang <hjc@rock-chips.com>, Yannick Fertre <yannick.fertre@st.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Brian Starkey <brian.starkey@arm.com>,
- Haneen Mohammed <hamohammed.sa@gmail.com>,
- Neil Armstrong <narmstrong@baylibre.com>, Stefan Agner <stefan@agner.ch>,
- Melissa Wen <melissa.srw@gmail.com>, linux-tegra@vger.kernel.org,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Benjamin Gaignard <benjamin.gaignard@linaro.org>,
- Fabio Estevam <festevam@gmail.com>,
- Xinwei Kong <kong.kongxinwei@hisilicon.com>, amd-gfx@lists.freedesktop.org,
- Chen-Yu Tsai <wens@csie.org>, Harry Wentland <harry.wentland@amd.com>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, Chen Feng <puck.chen@hisilicon.com>,
- Alison Wang <alison.wang@nxp.com>, spice-devel@lists.freedesktop.org,
- Tomi Valkeinen <tomba@kernel.org>, Philippe Cornu <philippe.cornu@st.com>,
- Vincent Abriou <vincent.abriou@st.com>,
- Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
- Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- Liviu Dudau <liviu.dudau@arm.com>, Paul Cercueil <paul@crapouillou.net>,
- linux-renesas-soc@vger.kernel.org, Joonyoung Shim <jy0922.shim@samsung.com>,
- Russell King <linux@armlinux.org.uk>, Daniel Vetter <daniel@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- linux-mediatek@lists.infradead.org,
- Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Jernej Skrabec <jernej.skrabec@siol.net>, linux-mips@vger.kernel.org,
- Rob Clark <robdclark@gmail.com>, Philipp Zabel <p.zabel@pengutronix.de>,
- Jyri Sarha <jyri.sarha@iki.fi>, Lucas Stach <l.stach@pengutronix.de>
-Content-Type: multipart/mixed; boundary="===============1357912445=="
+Content-Type: multipart/mixed; boundary="===============1666205274=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+--===============1666205274==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_685486_547296150.1613867448051"
 
---===============1357912445==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="x6inkztb7pnxs2gu"
-Content-Disposition: inline
-
-
---x6inkztb7pnxs2gu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+------=_Part_685486_547296150.1613867448051
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Thomas,
+Hello,
+When connecting to a VM running on a Linux server from a client on OSX, the=
+ connection works but without sound. I am using the RemoteViewer bundle ver=
+sion 0.5.7 on OS X 11.2.1. When the guest OS sends audio, I get the followi=
+ng errors in verbose mode:
 
-Thanks for your review!
+(RemoteViewer-bin:6323): GStreamer-CRITICAL **: gst_element_query: assertio=
+n `GST_IS_ELEMENT (element)' failed
 
-On Fri, Feb 19, 2021 at 03:49:22PM +0100, Thomas Zimmermann wrote:
-> > diff --git a/drivers/gpu/drm/imx/ipuv3-plane.c b/drivers/gpu/drm/imx/ip=
-uv3-plane.c
-> > index 075508051b5f..1873a155bb26 100644
-> > --- a/drivers/gpu/drm/imx/ipuv3-plane.c
-> > +++ b/drivers/gpu/drm/imx/ipuv3-plane.c
-> > @@ -337,12 +337,12 @@ static const struct drm_plane_funcs ipu_plane_fun=
-cs =3D {
-> >   };
-> >   static int ipu_plane_atomic_check(struct drm_plane *plane,
-> > -				  struct drm_plane_state *state)
-> > +				  struct drm_plane_state *new_state)
->=20
-> This function uses a different naming convention then the others?
->=20
-> >   {
-> >   	struct drm_plane_state *old_state =3D plane->state;
+** (RemoteViewer-bin:6323): CRITICAL **: gst_app_src_push_buffer_full: asse=
+rtion `GST_IS_APP_SRC (appsrc)' failed
 
-So, the function already had a variable named old_state, so I was
-actually trying to make the drivers consistent here: having one variable
-with old_state and new_plane_state felt weird.
+** (RemoteViewer-bin:6323): CRITICAL **: gst_app_src_push_buffer_full: asse=
+rtion `GST_IS_APP_SRC (appsrc)' failed
 
-The heuristic is thus to use the convention of the driver if one exists
-already, and if there's none pick new_plane_state.
+Does anybody have any tips as to what could be going wrong and how to fix i=
+t?
+Thanks,=C2=A0-Matt
 
-It makes it indeed inconsistent across drivers, but it felt more natural
-to be consistent within a single driver.
 
-Maxime
 
---x6inkztb7pnxs2gu
-Content-Type: application/pgp-signature; name="signature.asc"
+------=_Part_685486_547296150.1613867448051
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNATURE-----
+<html><head></head><body><div class=3D"yahoo-style-wrap" style=3D"font-fami=
+ly:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;"><div dir=
+=3D"ltr" data-setdir=3D"false">Hello,</div><div dir=3D"ltr" data-setdir=3D"=
+false"><br></div><div dir=3D"ltr" data-setdir=3D"false">When connecting to =
+a VM running on a Linux server from a client on OSX, the connection works b=
+ut without sound. I am using the RemoteViewer bundle version 0.5.7 on OS X =
+11.2.1. When the guest OS sends audio, I get the following errors in verbos=
+e mode:</div><div dir=3D"ltr" data-setdir=3D"false"><br></div><div dir=3D"l=
+tr" data-setdir=3D"false"><div><br>(RemoteViewer-bin:6323): GStreamer-CRITI=
+CAL **: gst_element_query: assertion `GST_IS_ELEMENT (element)' failed<br><=
+br>** (RemoteViewer-bin:6323): CRITICAL **: gst_app_src_push_buffer_full: a=
+ssertion `GST_IS_APP_SRC (appsrc)' failed<br><br>** (RemoteViewer-bin:6323)=
+: CRITICAL **: gst_app_src_push_buffer_full: assertion `GST_IS_APP_SRC (app=
+src)' failed<br><div><br></div><div dir=3D"ltr" data-setdir=3D"false">Does =
+anybody have any tips as to what could be going wrong and how to fix it?</d=
+iv><div dir=3D"ltr" data-setdir=3D"false"><br></div><div dir=3D"ltr" data-s=
+etdir=3D"false">Thanks,</div><div dir=3D"ltr" data-setdir=3D"false">&nbsp;-=
+Matt<br></div></div><div><br></div><div><br></div></div></div></body></html=
+>
+------=_Part_685486_547296150.1613867448051--
 
-iHUEABYIAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYC/VYwAKCRDj7w1vZxhR
-xXb7AP9dLYZ0ol4FnTyS9ndvGPPXpijdNPtrfZDs40BKL//eEgEA8HMiYKjgufNK
-Zn4QIsaErGpt9UM9/IC6ZwJ7lvoIrQ0=
-=ygPX
------END PGP SIGNATURE-----
-
---x6inkztb7pnxs2gu--
-
---===============1357912445==
+--===============1666205274==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -211,4 +148,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============1357912445==--
+--===============1666205274==--
