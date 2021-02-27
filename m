@@ -2,68 +2,85 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84897323BA3
-	for <lists+spice-devel@lfdr.de>; Wed, 24 Feb 2021 12:56:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 562703272AC
+	for <lists+spice-devel@lfdr.de>; Sun, 28 Feb 2021 16:01:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A78776EA84;
-	Wed, 24 Feb 2021 11:56:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 712F76E20F;
+	Sun, 28 Feb 2021 15:01:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7A14B6EA84
- for <spice-devel@lists.freedesktop.org>; Wed, 24 Feb 2021 11:56:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1614167765;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kyVCdf+1fTbvrQHVoRsBuDvArXaCmPOXL4WXdM8oMpc=;
- b=W1opmNwkaPxFs/w8//rbCgt37ukOSBs1yE955iPBK3eAiQljzd2RSXX5d+xDMHZBSia5Ut
- TUDVyAOuluGtuDZ1UHu0BfjA5bPs3oNGEVV91g+LseTXdj0thkx54Fw9s1RTzkt1RO5uhl
- /hVMC80Sa2C1c9614Lhqf31gL/utptw=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-587-mVoS8djwOP-PD1hsFMphNw-1; Wed, 24 Feb 2021 06:56:04 -0500
-X-MC-Unique: mVoS8djwOP-PD1hsFMphNw-1
-Received: by mail-qv1-f69.google.com with SMTP id j3so495577qvo.1
- for <spice-devel@lists.freedesktop.org>; Wed, 24 Feb 2021 03:56:04 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:content-transfer-encoding;
- bh=kyVCdf+1fTbvrQHVoRsBuDvArXaCmPOXL4WXdM8oMpc=;
- b=jVMfxfKhQo+JvSZqBZ7/R/Tk7GSAbS5AcskGvmnqZoiqETpaMKeK7Ni4IZ4gY48Sul
- aLwf69MwgCGkTs2bBljdTGPKekOe/bB3rt8hZnCD2GXNWlHsyMQse7pzK1msc7sDK4Is
- tfVjY20Z2NWvOfwJgFn2d97eyNgkpE7GO8nd7JfIRfmSDw5QoNkQKr2IkaZfgKImyuBM
- hK5BipxYyJJ3omyah5/6+rWwXZAwDd2CpZMWgT15qO4x3UvAvGcWfSIZTHijxMZjts5/
- mBx2KAALH7e2h+J9ILg+jmzE+V39NGnhefB7WTyK4ZNyW8KYYkT34IwfFtrKJptYAQuM
- emAg==
-X-Gm-Message-State: AOAM532KiImt6dbWAjvsiOWmW7zMAuPDl+xVSLp74uWuSN+DpNd9Q5/f
- Xd45q1wQXBKPFG/fDvcdDWBYz7f25ACN2numWYdY9niWT4EbyZ9magyQ7xgVVWGL4E72uYaO+0x
- DOsVu01QJW0wS7ED1VnaMGuEQDj9uv8+InHWlNZzXu7Kw+DI=
-X-Received: by 2002:ac8:6d38:: with SMTP id r24mr27670879qtu.285.1614167763896; 
- Wed, 24 Feb 2021 03:56:03 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwH5YV5WWJOADkYj/hJqNeJ4MixjI76miF9oDwsNRjt+QREr/TRZAJiqcGihQob2nVX3thaaCGtJiB3NmJvhWQ=
-X-Received: by 2002:ac8:6d38:: with SMTP id r24mr27670863qtu.285.1614167763703; 
- Wed, 24 Feb 2021 03:56:03 -0800 (PST)
-MIME-Version: 1.0
+Received: from sonic308-55.consmr.mail.gq1.yahoo.com
+ (sonic308-55.consmr.mail.gq1.yahoo.com [98.137.68.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6130F6E194
+ for <spice-devel@lists.freedesktop.org>; Sat, 27 Feb 2021 16:14:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1614442486; bh=G5nepVC/DXwRWJ9Dsks/4IwUd0ODw8tswbXVuGuOYaE=;
+ h=Subject:To:References:From:Date:In-Reply-To:From:Subject:Reply-To;
+ b=WFBKOLObiCPCCED434zWU2FJmsrJ+2n7KqrbUvv9QoGNMx60TJNTBiEhlDkf2/2ggKTst/ggDb406XjzSRqVrN6W654a2NUHkYv0OLCBPXBo2YMMZJ+cqA1p+7zcI6RPf12XQY0al+HOCPVhq7UtxJYIVbW/6arcLgUqgcpXYTrUh90+soPDDfer4wYNnmAa/owqB2rCElmausDYHHFc6wt02pSuAqDGi5EKwietciJ/5z739vkACFzwoNATDn7WPQShZYKKKKWjRtFPq9LYNgYFI9LA4zBX2ogZAlMZw8OMEQlgLy/kN0+lAH0TgOJApj/6MxsOXjml5Zn4M1dbDw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1614442486; bh=gOXZ8v3sBO8Nh8wENWyDGMjOlhvydVUC+ASPDNTvWPl=;
+ h=X-Sonic-MF:Subject:To:From:Date:From:Subject;
+ b=QM5koRwyH63f6dAEw+ULf+0OZIfh0gcyNK+sC7YZse0bGMOmAyYTdo7ARi1Fz4D+ZQx5iaaMmulbYLbIKqQGRy8RYkVB3xyzQv0i9EVb8dY54gsbtyxARLMB/6+CEMR2HsM6EyCB4uMzEM+mQxzU/W9NRBJxOXHORIMSO5ulBx9M73mVHWipU2gvvrygo1KaMiTWAOk7Lrz/vljnI+xZ0UhC2wXg62/zpEoHC2Wrktmv53cRrS+w2u8nqJBEMOA2IuzdRKrW5QnLNjq2cc7+/Q/sUp24nX3RAE+1YStbISXB3BAqzKpo9uFB09oVvtpOvqyZwYLK3PWobyfusB5fRw==
+X-YMail-OSG: eBkPDFcVM1mZJJn.Uav5wyiKp6v7999d7pSDiyFiZOzLOAb4dkL1Vo7REjcTZvO
+ i4I5BB7DZ4r2oImDV5hwJiOvNR3IfehsT7N3IOp02npy7IzlwSaygNNWBuQ9ioGrVfm2wGGs8ljs
+ aM7jAtCrKWIz99lXnyQJYfLtDPtpn8xc3n03gnxrSiHjMUVRHW5C2gTnnQaUM0SHoe6fT24iTpvs
+ ofrnm59tBrFiZox_RcVLaelAFNyMAWHu.osZv.MGv.XJAD6z5Uvqj7mpBT7xNTOsfJjp1fgvS7jQ
+ 5eJ3Fi5VgFPh6eATegvTAWyxfsEqhBE.JG6y5tRrijk8Lppdn6aXREPI7UODZBCcLoWkP.HeqnTp
+ FQgbCaniI3w8fhvdhTCUUWBoY_1QsqCZcVLj3XoLnECBGTicytqtLe425Z8ybQY39x1fQ5lg6Dqr
+ q80.NDE1VbOjkUxwg4wPwUKJUcyglH7HnEtijAsDOMXEQES3NdYHcPirfncZL8x9kmr9m4npW4Qc
+ pM4ooZZ9Y8RcRU6Ui9CUjB7cR5AFlA7XdGHwssWeRrlJpGL4YnV8YT0CSvDgOmmau0VM6kKEEcod
+ 647W2EBVXMnSylXGrMqJdFVjz_yd9ETzN99dE_4qiOowHc2sOhllr3Ejf0wdsDv1n5nRQt1BdzfL
+ F08pVw3tIQm0az6fe4gv45rb49bgfzAgNTH5FzFA7g0JPlDcUWPMemgF1bNTeEmdwU4N7bXsBPiy
+ LTM7_c2YO4w7c9UYZir0xKF1RoVVb1vJrAYw_6MKTo2W6BYVKKqEW5I5iPJjV5Y0QtG3xjXIzF9A
+ cPnXZok6alXlOQruoKFwEpDo6SNii9xrCmkSfzJBOewcZHNW.Uv6PczHTBVGUXVKHkckXEq64lLj
+ lgCWNCf8qPIlybeaVJ.1ijcj8ZBsT1GvNGcEoggCJGtFSU6y8zZHRHwerifKuBcJmiu3oNaBqWBO
+ X0DKbd0QtQAD1iO3UCahdVc8ddaTYhrmSByXmMvcH1OgAbIq2TVOrX1ySSuicugUYRKUpWr5uL3i
+ TgvBckJKn4QXwlQwLgbccSXEts6uYZ4_bMMvlOWzl4cjkNCIPmhGuMZpfivuIN.ZNQx23ClE5RrJ
+ Ij4OrUJQ6jpiUz1P.Edwep051SkoCd9fOVNKWcStFBKmZQl58Zsn8IsO6Glkf7vPVLheIxe9gNea
+ ycN67yjbfr5YpzThjOvJ8aClgawaLKBhmcCSAdkZzw3jfXyTPz52CWlVZ7PfVHPgQdxL959JkS.e
+ _HfJNM0kk12DSynTlNFpm3ZQZeBo8QYgq2GXl1Aw3FSn5m2zZuvr02GY5nCBjYt4_UstaIYwmrQL
+ wjqKPizDApZXJKnqhIRu583Bj.sGFTi5l_DOV9hvok3PqllHzsx0Pw7l7IQMmZnLZw4jUkRey11Z
+ cSrRffFQZnKGl_kisKAeKx_hYV4WqTr_XwdgrlM3rPzCTbxS_.1aSXSE3HvoxJnuNMmRnwKYe7fp
+ 4uO1Zasz.AzQco4aNbfDXQENNtToFOL2c_g3KwsVu7W7bc6XO3Sb2Eapg_8Yt9k20fWN_hgwsfwv
+ uIyRYhq8uFVNzQVAVg0c_wG5j2E8u2KwEfWUwjslekDJJRQQu5LyRl7NbxQ0VVj0SYz2cf.rBVCF
+ oPW7oGowWTdSmpkfxp1Ff5OiQoo0BNGg3OZ1Up6x1ZVg22Dkr4dklvi4Hp_6MrbpKt0DbW_7KsFe
+ G34I4Tbv58I4XhovVFAwiD5iV5LOLe4R8DuOHxfQGzl5x3qbWPEJqSQvXHKCsKF_4SlXoru6hWOz
+ fzQgFB5GGSIi9v7nZPEzxoFpDon1Jj.ZdlzG8wymFOtW0jBhx.ByouNvSVvzQz1Q5LmK_ImqNzDg
+ gkC_Qp2BDSbvpJ3aGcoF5mNjTMSdQ1JqU7rWeL3mASoh9IwOvW8Es8fBVM9aHsvVbCFYrVdbR42p
+ l3l8826mZf2MDyX105BSefzqbpD.VzsW6obRfQPX0mo8uKgkHYzSgmP5W...CSRE8GABESROWGew
+ H0mj_axOl0q0lgwO._VjEvWsm5HokTKoLLGkAr6BT.wJY3dI4ZYpjUqqYKCLLipYzmjLCjdG4nYr
+ oXDNNB8jk3lfdy9HIIP7JKeO7av2teEVQT9.OwRhAERxO4JUmXjHTaq.3r1Xnh_KWdLG64nCrqSZ
+ 3TSjMqj_80KkmcX7Hy6uA443CyOURVNyUYXJ3I6vz9kzu96ufvptw384mxD8oDKWHbN2Bot8bujZ
+ mDD9_IaWq2zonsTIMekynvreIHEG7QboC1oeKIHXzCeBM8AbKG.1OoF_o6T2vjs1yGAXl5uuF1rh
+ 3dVYxpDDctXBgGxWEHu8XOK0_SfWGZ_iGHG.UA603Omunt5ha4CR2MunI.diTr7J9aD241JaLg4y
+ mhku5aleBYZ_GeYFoRuOm7AcrNZ24AmQH7PZIgJa5G.YATLb3wFEUGIWDgunyE62_f7_aFaFz3HY
+ 8ic2AiaoW_K1fINFLzwrDradrwu8WqseCvtXZ6RfWJ6ydMfSRh28-
+X-Sonic-MF: <matt_sienko@yahoo.com>
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic308.consmr.mail.gq1.yahoo.com with HTTP; Sat, 27 Feb 2021 16:14:46 +0000
+Received: by smtp410.mail.bf1.yahoo.com (VZM Hermes SMTP Server) with ESMTPA
+ ID 538f649957fa6be40f45f280d3396557; 
+ Sat, 27 Feb 2021 16:14:40 +0000 (UTC)
+To: Jakub Janku <jjanku@redhat.com>,
+ spice-devel <spice-devel@lists.freedesktop.org>
 References: <924666743.685487.1613867448052.ref@mail.yahoo.com>
  <924666743.685487.1613867448052@mail.yahoo.com>
  <CAH=CeiBFYoYVjiEjBKF1D1NgZ7o3RrakLS_HXP-5QeCrTp9vDQ@mail.gmail.com>
  <624986406.1802527.1614120363577@mail.yahoo.com>
  <CAH=CeiBbqa9LwO9m5q+mzxM-nDKshxQ7P2H7NvEZwnr=StRPyA@mail.gmail.com>
-In-Reply-To: <CAH=CeiBbqa9LwO9m5q+mzxM-nDKshxQ7P2H7NvEZwnr=StRPyA@mail.gmail.com>
-From: Jakub Janku <jjanku@redhat.com>
-Date: Wed, 24 Feb 2021 12:55:52 +0100
-Message-ID: <CAH=CeiC+-QR9LYEjH-PhdgN0BSyG0dgczhw7hvPeUw4CwjOe8A@mail.gmail.com>
-To: Matthew Sienko <matt_sienko@yahoo.com>,
- spice-devel <spice-devel@lists.freedesktop.org>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jjanku@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+ <CAH=CeiC+-QR9LYEjH-PhdgN0BSyG0dgczhw7hvPeUw4CwjOe8A@mail.gmail.com>
+From: Matt <matt_sienko@yahoo.com>
+Message-ID: <d91d3895-3181-a986-41c7-472a18fcce56@yahoo.com>
+Date: Sat, 27 Feb 2021 08:14:38 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
+MIME-Version: 1.0
+In-Reply-To: <CAH=CeiC+-QR9LYEjH-PhdgN0BSyG0dgczhw7hvPeUw4CwjOe8A@mail.gmail.com>
+Content-Language: en-US
+X-Mailer: WebService/1.1.17828
+ mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.yahoo
+ Apache-HttpAsyncClient/4.1.4 (Java/11.0.9.1)
+X-Mailman-Approved-At: Sun, 28 Feb 2021 15:01:44 +0000
 Subject: Re: [Spice-devel] No Sound with RemoteViewer on OSX Client
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -76,92 +93,71 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Forgot to include the mailing list, so I'm replying again, sorry.
-Jakub
-
-On Wed, Feb 24, 2021 at 12:49 PM Jakub Janku <jjanku@redhat.com> wrote:
->
-> On Tue, Feb 23, 2021 at 11:47 PM Matthew Sienko <matt_sienko@yahoo.com> wrote:
-> >
-> > Thanks for the reply. I installed gst-plugins-good using brew and I still can't get the sound to work. I attached the output of remote viewer with the --spice-debug flag. I connected to a running windows guest, tried to play a sound, then disconnected.
->
-> Thanks for the log. I thought there might be a problem with the plugin
-> installation, but appsrc should be one of the base plugins and that's
-> already in the bundle.
->
-> The remote-viewer in brew is pretty outdated, I see. So I'd suggest
-> you install the spice-gtk package instead, [0], it should contain all
-> the necessary gstreamer dependencies. The package should include a
-> tool called spicy which you can use instead of remote viewer, although
-> it is meant primarily for testing.
->
-> There's also a formula for a newer version of virt-viewer, [1]. Not
-> sure why it's not in brew though.
->
-> [0] https://formulae.brew.sh/formula/spice-gtk
-> [1] https://github.com/jeffreywildman/homebrew-virt-manager
->
-> Cheers,
-> Jakub
->
-> >
-> > Thanks,
-> >  -Matt
-> >
-> > On Sunday, February 21, 2021, 8:52:10 AM PST, Jakub Janku <jjanku@redhat.com> wrote:
-> >
-> >
-> > Hi,
-> >
-> > On Sun, Feb 21, 2021 at 9:37 AM Matthew Sienko <matt_sienko@yahoo.com> wrote:
-> > >
-> > > Hello,
-> > >
-> > > When connecting to a VM running on a Linux server from a client on OSX, the connection works but without sound. I am using the RemoteViewer bundle version 0.5.7 on OS X 11.2.1. When the guest OS sends audio, I get the following errors in verbose mode:
-> > >
-> > >
-> > > (RemoteViewer-bin:6323): GStreamer-CRITICAL **: gst_element_query: assertion `GST_IS_ELEMENT (element)' failed
-> > >
-> > > ** (RemoteViewer-bin:6323): CRITICAL **: gst_app_src_push_buffer_full: assertion `GST_IS_APP_SRC (appsrc)' failed
-> > >
-> > > ** (RemoteViewer-bin:6323): CRITICAL **: gst_app_src_push_buffer_full: assertion `GST_IS_APP_SRC (appsrc)' failed
-> >
-> >
-> > This looks very similar to the following issue:
-> > https://gitlab.freedesktop.org/spice/spice-gtk/-/merge_requests/7
-> > So I'd guess that you don't have the gst-plugins-good package installed.
-> >
-> > Apart from these errors, I think that you should also see a warning
-> > starting with "Failed to create a pipeline...", correct?
-> >
-> > If installing the mentioned package doesn't help, please run remote
-> > viewer with the --spice-debug option and send the log here.
-> >
-> > Thanks,
-> > Jakub
-> >
-> > >
-> > >
-> > > Does anybody have any tips as to what could be going wrong and how to fix it?
-> > >
-> > > Thanks,
-> > >  -Matt
-> >
-> > >
-> > >
-> > > _______________________________________________
-> > > Spice-devel mailing list
-> > > Spice-devel@lists.freedesktop.org
-> > > https://lists.freedesktop.org/mailman/listinfo/spice-devel
-> >
-> >
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+VGhhbmtzIGZvciB0aGUgcmVmZXJlbmNlcy4gQWZ0ZXIgaW5zdGFsbGluZyB0aGUgc3BpY2UtZ3Rr
+IHBhY2thZ2UsIApyZW1vdGUtdmlld2VyIHN0aWxsIGhhZCB0aGUgc2FtZSBlcnJvcnMgYnV0IHNw
+aWN5IHdvcmtlZCBhbmQgcGxheWVkIHRoZSAKc291bmQuIFNvLCBwZXJoYXBzIHRoZXJlIGlzIGFu
+IGlzc3VlIHdpdGggdGhlIHJlbW90ZS12aWV3ZXIgYnVuZGxlLgoKSSBhbHNvIGluc3RhbGxlZCB2
+aXJ0LW1hbmFnZXIgYW5kIGl0IHdvcmtzIGdyZWF0IGFmdGVyIHNldHRpbmcgdXAgbXkgVExTIApj
+ZXJ0aWZpY2F0ZXMuIEluIGhpbmRzaWdodCwgdGhpcyBpcyB3aGF0IEkgc2hvdWxkIGhhdmUgdHJp
+ZWQgZnJvbSB0aGUgCmJlZ2lubmluZy4KClRoYW5rcyBhZ2FpbiBmb3IgdGhlIGhlbHAsCgogwqAt
+TWF0dAoKT24gMi8yNC8yMSAzOjU1IEFNLCBKYWt1YiBKYW5rdSB3cm90ZToKPiBGb3Jnb3QgdG8g
+aW5jbHVkZSB0aGUgbWFpbGluZyBsaXN0LCBzbyBJJ20gcmVwbHlpbmcgYWdhaW4sIHNvcnJ5Lgo+
+IEpha3ViCj4KPiBPbiBXZWQsIEZlYiAyNCwgMjAyMSBhdCAxMjo0OSBQTSBKYWt1YiBKYW5rdSA8
+amphbmt1QHJlZGhhdC5jb20+IHdyb3RlOgo+PiBPbiBUdWUsIEZlYiAyMywgMjAyMSBhdCAxMTo0
+NyBQTSBNYXR0aGV3IFNpZW5rbyA8bWF0dF9zaWVua29AeWFob28uY29tPiB3cm90ZToKPj4+IFRo
+YW5rcyBmb3IgdGhlIHJlcGx5LiBJIGluc3RhbGxlZCBnc3QtcGx1Z2lucy1nb29kIHVzaW5nIGJy
+ZXcgYW5kIEkgc3RpbGwgY2FuJ3QgZ2V0IHRoZSBzb3VuZCB0byB3b3JrLiBJIGF0dGFjaGVkIHRo
+ZSBvdXRwdXQgb2YgcmVtb3RlIHZpZXdlciB3aXRoIHRoZSAtLXNwaWNlLWRlYnVnIGZsYWcuIEkg
+Y29ubmVjdGVkIHRvIGEgcnVubmluZyB3aW5kb3dzIGd1ZXN0LCB0cmllZCB0byBwbGF5IGEgc291
+bmQsIHRoZW4gZGlzY29ubmVjdGVkLgo+PiBUaGFua3MgZm9yIHRoZSBsb2cuIEkgdGhvdWdodCB0
+aGVyZSBtaWdodCBiZSBhIHByb2JsZW0gd2l0aCB0aGUgcGx1Z2luCj4+IGluc3RhbGxhdGlvbiwg
+YnV0IGFwcHNyYyBzaG91bGQgYmUgb25lIG9mIHRoZSBiYXNlIHBsdWdpbnMgYW5kIHRoYXQncwo+
+PiBhbHJlYWR5IGluIHRoZSBidW5kbGUuCj4+Cj4+IFRoZSByZW1vdGUtdmlld2VyIGluIGJyZXcg
+aXMgcHJldHR5IG91dGRhdGVkLCBJIHNlZS4gU28gSSdkIHN1Z2dlc3QKPj4geW91IGluc3RhbGwg
+dGhlIHNwaWNlLWd0ayBwYWNrYWdlIGluc3RlYWQsIFswXSwgaXQgc2hvdWxkIGNvbnRhaW4gYWxs
+Cj4+IHRoZSBuZWNlc3NhcnkgZ3N0cmVhbWVyIGRlcGVuZGVuY2llcy4gVGhlIHBhY2thZ2Ugc2hv
+dWxkIGluY2x1ZGUgYQo+PiB0b29sIGNhbGxlZCBzcGljeSB3aGljaCB5b3UgY2FuIHVzZSBpbnN0
+ZWFkIG9mIHJlbW90ZSB2aWV3ZXIsIGFsdGhvdWdoCj4+IGl0IGlzIG1lYW50IHByaW1hcmlseSBm
+b3IgdGVzdGluZy4KPj4KPj4gVGhlcmUncyBhbHNvIGEgZm9ybXVsYSBmb3IgYSBuZXdlciB2ZXJz
+aW9uIG9mIHZpcnQtdmlld2VyLCBbMV0uIE5vdAo+PiBzdXJlIHdoeSBpdCdzIG5vdCBpbiBicmV3
+IHRob3VnaC4KPj4KPj4gWzBdIGh0dHBzOi8vZm9ybXVsYWUuYnJldy5zaC9mb3JtdWxhL3NwaWNl
+LWd0awo+PiBbMV0gaHR0cHM6Ly9naXRodWIuY29tL2plZmZyZXl3aWxkbWFuL2hvbWVicmV3LXZp
+cnQtbWFuYWdlcgo+Pgo+PiBDaGVlcnMsCj4+IEpha3ViCj4+Cj4+PiBUaGFua3MsCj4+PiAgIC1N
+YXR0Cj4+Pgo+Pj4gT24gU3VuZGF5LCBGZWJydWFyeSAyMSwgMjAyMSwgODo1MjoxMCBBTSBQU1Qs
+IEpha3ViIEphbmt1IDxqamFua3VAcmVkaGF0LmNvbT4gd3JvdGU6Cj4+Pgo+Pj4KPj4+IEhpLAo+
+Pj4KPj4+IE9uIFN1biwgRmViIDIxLCAyMDIxIGF0IDk6MzcgQU0gTWF0dGhldyBTaWVua28gPG1h
+dHRfc2llbmtvQHlhaG9vLmNvbT4gd3JvdGU6Cj4+Pj4gSGVsbG8sCj4+Pj4KPj4+PiBXaGVuIGNv
+bm5lY3RpbmcgdG8gYSBWTSBydW5uaW5nIG9uIGEgTGludXggc2VydmVyIGZyb20gYSBjbGllbnQg
+b24gT1NYLCB0aGUgY29ubmVjdGlvbiB3b3JrcyBidXQgd2l0aG91dCBzb3VuZC4gSSBhbSB1c2lu
+ZyB0aGUgUmVtb3RlVmlld2VyIGJ1bmRsZSB2ZXJzaW9uIDAuNS43IG9uIE9TIFggMTEuMi4xLiBX
+aGVuIHRoZSBndWVzdCBPUyBzZW5kcyBhdWRpbywgSSBnZXQgdGhlIGZvbGxvd2luZyBlcnJvcnMg
+aW4gdmVyYm9zZSBtb2RlOgo+Pj4+Cj4+Pj4KPj4+PiAoUmVtb3RlVmlld2VyLWJpbjo2MzIzKTog
+R1N0cmVhbWVyLUNSSVRJQ0FMICoqOiBnc3RfZWxlbWVudF9xdWVyeTogYXNzZXJ0aW9uIGBHU1Rf
+SVNfRUxFTUVOVCAoZWxlbWVudCknIGZhaWxlZAo+Pj4+Cj4+Pj4gKiogKFJlbW90ZVZpZXdlci1i
+aW46NjMyMyk6IENSSVRJQ0FMICoqOiBnc3RfYXBwX3NyY19wdXNoX2J1ZmZlcl9mdWxsOiBhc3Nl
+cnRpb24gYEdTVF9JU19BUFBfU1JDIChhcHBzcmMpJyBmYWlsZWQKPj4+Pgo+Pj4+ICoqIChSZW1v
+dGVWaWV3ZXItYmluOjYzMjMpOiBDUklUSUNBTCAqKjogZ3N0X2FwcF9zcmNfcHVzaF9idWZmZXJf
+ZnVsbDogYXNzZXJ0aW9uIGBHU1RfSVNfQVBQX1NSQyAoYXBwc3JjKScgZmFpbGVkCj4+Pgo+Pj4g
+VGhpcyBsb29rcyB2ZXJ5IHNpbWlsYXIgdG8gdGhlIGZvbGxvd2luZyBpc3N1ZToKPj4+IGh0dHBz
+Oi8vZ2l0bGFiLmZyZWVkZXNrdG9wLm9yZy9zcGljZS9zcGljZS1ndGsvLS9tZXJnZV9yZXF1ZXN0
+cy83Cj4+PiBTbyBJJ2QgZ3Vlc3MgdGhhdCB5b3UgZG9uJ3QgaGF2ZSB0aGUgZ3N0LXBsdWdpbnMt
+Z29vZCBwYWNrYWdlIGluc3RhbGxlZC4KPj4+Cj4+PiBBcGFydCBmcm9tIHRoZXNlIGVycm9ycywg
+SSB0aGluayB0aGF0IHlvdSBzaG91bGQgYWxzbyBzZWUgYSB3YXJuaW5nCj4+PiBzdGFydGluZyB3
+aXRoICJGYWlsZWQgdG8gY3JlYXRlIGEgcGlwZWxpbmUuLi4iLCBjb3JyZWN0Pwo+Pj4KPj4+IElm
+IGluc3RhbGxpbmcgdGhlIG1lbnRpb25lZCBwYWNrYWdlIGRvZXNuJ3QgaGVscCwgcGxlYXNlIHJ1
+biByZW1vdGUKPj4+IHZpZXdlciB3aXRoIHRoZSAtLXNwaWNlLWRlYnVnIG9wdGlvbiBhbmQgc2Vu
+ZCB0aGUgbG9nIGhlcmUuCj4+Pgo+Pj4gVGhhbmtzLAo+Pj4gSmFrdWIKPj4+Cj4+Pj4KPj4+PiBE
+b2VzIGFueWJvZHkgaGF2ZSBhbnkgdGlwcyBhcyB0byB3aGF0IGNvdWxkIGJlIGdvaW5nIHdyb25n
+IGFuZCBob3cgdG8gZml4IGl0Pwo+Pj4+Cj4+Pj4gVGhhbmtzLAo+Pj4+ICAgLU1hdHQKPj4+Pgo+
+Pj4+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4+Pj4g
+U3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0Cj4+Pj4gU3BpY2UtZGV2ZWxAbGlzdHMuZnJlZWRlc2t0
+b3Aub3JnCj4+Pj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5m
+by9zcGljZS1kZXZlbAo+Pj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KU3BpY2UtZGV2ZWwgbWFpbGluZyBsaXN0ClNwaWNlLWRldmVsQGxpc3RzLmZyZWVk
+ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3NwaWNlLWRldmVsCg==
