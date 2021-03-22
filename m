@@ -1,121 +1,74 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CCC332EF82
-	for <lists+spice-devel@lfdr.de>; Fri,  5 Mar 2021 17:00:46 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50629344625
+	for <lists+spice-devel@lfdr.de>; Mon, 22 Mar 2021 14:46:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F24966E20F;
-	Fri,  5 Mar 2021 16:00:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 97D9B6E48E;
+	Mon, 22 Mar 2021 13:46:43 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2050.outbound.protection.outlook.com [40.107.94.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D04E6EC03;
- Fri,  5 Mar 2021 15:35:55 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZJSaqcO5vRbeiwOgiMrqLNxcU3un2pgu56TivVCOqIAJw2v4zg4GcPZW/AlWUhlJeNv7Yb4MwXVd++TfKcRE9S3klaWKbkI1RC++LSCK/KYBl8CSP/Y38FakpuLM2ABrHsaEi8WGSoWajGIUEpiLz2Yfs6M8XFjucbMGL6h6wkHi4qzrsuADmYFIqLgLlaiVvQrhQnpvIh2sLFixccCHNfXA2VjFBUi8KU13xuL1UI+mkuU7kMKai02xrUrVPN3lOx8GlLjVxxp6+AwJFXLA30zJz0VyB8+fzzuugWQtL2XhZ6d0ld2b5Fyz22Pl3ZrrSEqTMoNTeBVfPjObQzg/AQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NO+U6nYbDCh7eZLDdcFjLaKVE47rBO77ruo/hFRD7bA=;
- b=YRrOTMAClGLDDODxF6N9XKoaLtwwxRteayN/+710/x3ugrouDtwQiv/qRcAjiUh7XEM0qgzn3LqOMwZeGnyxw3vLrhkMu7Cua/3d5Z84WWFWynXWJQTJ7eYGbS38SZytAEbbuNunc7HBbKHk+FHHNporXxqz3BTsnTTtBtFBIYG7dLZW1yAPrRrbvhqT1HIfewipJBPq4PBavLtGeNWDmNWQjQLqQwc/AZi8eZPqfsxeV4q18ljxh2eIzR/szvlYoFQZQ8oStSMIcQ+m/ctjP//pjNcH1tWdmR/9Pc7XGQFRFERSIqAogKZ8/gPPPPMyOuw7PMQp9uJPQPa4AZUb/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
- dkim=pass header.d=vmware.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NO+U6nYbDCh7eZLDdcFjLaKVE47rBO77ruo/hFRD7bA=;
- b=PTBiJWfr6hUzMEungzHLD+PzUp2lwbzdugWmzM4kvqDrCfPPqPOda4YOW7oGwCfDAnHldTgnHyyslMEvjyZeLSGm8rFjFFe3ESz86SU4V7n2ZaFREm0hNfKAqFex65JswHMwrqOUGS57/FbBYnqknEkNOcn+zF7R8zuaB/Rspi8=
-Authentication-Results: lists.freedesktop.org; dkim=none (message not signed)
- header.d=none; lists.freedesktop.org;
- dmarc=none action=none header.from=vmware.com;
-Received: from SN6PR05MB5759.namprd05.prod.outlook.com (2603:10b6:805:103::19)
- by SN7PR05MB7776.namprd05.prod.outlook.com (2603:10b6:806:10e::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.13; Fri, 5 Mar
- 2021 15:35:51 +0000
-Received: from SN6PR05MB5759.namprd05.prod.outlook.com
- ([fe80::24ea:f168:e288:980a]) by SN6PR05MB5759.namprd05.prod.outlook.com
- ([fe80::24ea:f168:e288:980a%5]) with mapi id 15.20.3912.023; Fri, 5 Mar 2021
- 15:35:51 +0000
-To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
-References: <20210303132023.077167457@linutronix.de>
- <20210303132711.487711828@linutronix.de>
-From: Roland Scheidegger <sroland@vmware.com>
-Message-ID: <5ea9de05-31a1-855f-ab28-49c0cb6b724c@vmware.com>
-Date: Fri, 5 Mar 2021 16:35:42 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Firefox/78.0 Thunderbird/78.7.0
-In-Reply-To: <20210303132711.487711828@linutronix.de>
-Content-Language: de-DE
-X-Originating-IP: [46.126.183.173]
-X-ClientProxiedBy: GVAP278CA0006.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:710:20::16) To SN6PR05MB5759.namprd05.prod.outlook.com
- (2603:10b6:805:103::19)
+Received: from sonic311-23.consmr.mail.gq1.yahoo.com
+ (sonic311-23.consmr.mail.gq1.yahoo.com [98.137.65.204])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 08E7E6E48F
+ for <spice-devel@lists.freedesktop.org>; Mon, 22 Mar 2021 13:46:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1616420769; bh=2RxjbWkIFTNWt2clnJ+MsXTFn65Fcc0KzMyWSeXsuZ0=;
+ h=Date:From:To:Subject:References:From:Subject:Reply-To;
+ b=UU+vLNEuJf0P/A75TjyW947pIOiPSZwzGpnTDwc9SUgd4VRYiDtFSQAjZN8mnA7YA1v7n1TSw6wPNimFcSK2EH4esvoKf2uPHPEL4Hsl9f6nBio/msOOvDm95Lr1GRl4kFzxkd7gc4tJjGGCEnnsIWefC29EdRW5dMRTztg0iyreOj6BgY6Gl5E/dog+KEprHdv7n2zutQQ3f1NKGKQiaZD2SEu9kJWpvGyRawMJonW6Jjp9G5UprGmkm3rAkUOKDDEyGltA0VHDs3vS3hLkK2QRE+cvBAOsemJiMGj1orO2n3czq9Sd/eaBH+NV2gTA5kS7Y0E8TpNGX3LwW0crgw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1616420769; bh=QtbgLvPg3DLnu0rYl8Zeqj3eMOv0mIvCuBg9p/OlEqh=;
+ h=X-Sonic-MF:Date:From:To:Subject:From:Subject;
+ b=Ff1eI5a3EvZOnjRbk6PuHAs1MSezhZWAcpt8AQxu/6BcZMaD6sETvDxCh9+siZDzY9/IqvBou/hhJDfI4NZvLkZ7Jo2DUQTpLl3EwMas/024nrXX9Iv5ymO7jD1MDWd1Pt/lmEVBgwD7zPQm5LxPqKw9X57vS0Fybi2nvP2e+MStWP1RKZyTtiHs+0qCsnwOzMsr1Xu4RdWwf2ZCpQJRXPrlpxa5Knu760zIOMIJD/rINwiytAPFVWc3rYRRKlLkfgxy/EAf+H6YAOrF9guRHKIID6WXgClPV7QwYOcXlm0v3sg5ORnJoKpfKWD8eqbeNY4FTl9DEG5gb4BRV5pugA==
+X-YMail-OSG: P2V60N4VM1narYORO_3_Z3d5hf809QnY5l9VmKAp2xlJVa7OWk__Dq9D9nvU.x1
+ 6soVU9L88fX3e55Rn_vPWbzYFVr51NeM.NuTTBBdxBIOtvEp4tf_Vqw5Nl5UXp9eZyt959Mg.QZg
+ tgrqKjjUOklZF1pxCF_5bvFLipad7lN8lvVBDthw2Mh5v2.alPakGMpziebxV15bUqpmqc0xRMTB
+ w7ZM.vsMh025ST5ycnD69Ym.ZCf8WUe9mtUcfIQngzed4tTZBge0r7WYxBfLZcP04YEsdIkDQfL2
+ b3dm.MhQIk5gu1Z6UFWB3vSI4uqGGDu_E38btztiUZ_kCUvyLmyCSLB2SIeYkuLk8wjwNU_Kf2iv
+ uREOl1n9rFCFqEobSieE0330tr45w4t97c_RSnSkPlewuM.WehfTgioHYzaaIblcnXx05Irio1X7
+ 7pWg7BQAdiSTLOiOKNtJqUHPy98WyHY6hpWolp3j4Y65QYHDzJL2hBazB0S6uNJdMRPXQhxG1SKK
+ cY5.AV6v1cdXBBeH6DzqgLFZS6mrPeeVPJcRb72DmC1WUlQq0m1Zuys8sz.qDO90_npmGNK4nUDn
+ DNytMRPGSiz8gGnwq4QBTb4CjRvRt0k.kM8aIBXLSUFUi0Wh70e1iRtX5_W60jIsUdcSUlWaD1N.
+ CsHghAAMyuHsrk_0xzFjyF78pSQGZzfPzIK1CfeOKsYpj28DOV4kn.9_0iOlI2ENwD20EGvkQq_9
+ chQ.FF5G6krnTELH6LcAEDlXcno6SG6I71JtqyrdPhERyCRyIuNToKB9vd4uBqxtOWaxu0OsbOf_
+ aQVEz0RTYv8eE71zDAS9NgezL_gz9hjv1fBpmuzhIEngVuczj6h9ErRV2I0Vi_J6euY695rpXnK_
+ nSQvIpkO3KkqAiX3ELtKSozyBxGOz0qPQYXVwcdqDFq.8gZFquTjm0dk1raERqUR1WZqO9eXWa8L
+ zBjiBlHZguCgLhyfaEwZxllwdTZs4Vg8QrUa31py0c9634YBmDY7Hva7sCamD72IgrSPV3_Yp8xQ
+ NCk8IdWQIGlmfxGMDMlxjMiSGZWWKFQtEUkK97pI_WX0MJxP.eFrnFjp1Z_eTbFFPZb7Np1ninUw
+ dx0pzNcKS5PbBsRBpaFov3987.RKr.gb_cQz5PrDHbtYldsffpESV5SA3Lm0_w2DlVkRo3LRPeTI
+ Ol0qI4I77lb5Gz1HeMlPiYF37VFgIB2xOqubGlFlCMOoVfPDxfHAws4YB0CeYgyBc26croz2WaCC
+ i1Odov.eNCN5M99zuUypw36r9GLhcTgzbFPsaQc74bxTp4N1Z4gS4mmkuakRuJJxyEC85Ozmmw_6
+ jmMTnoJdWSFJdCAkDKm2tRR52WQCsd6QRQ2uLY3p4s9c4WyzmnOhnJu3qaDTEbytpQto1uOrsJL8
+ OTUnc25WRJ3IM1fDAEDxDkunEsMz352aA27TbqN_vYyG9AKXO1oOSXYPqhoZy3hPmA3KTuTLpE.W
+ 6suQnyIKgqwocMH10_cGUS.u2hjyf6lLJhsqeNDiJ_3lRdADfZV3I_jp9Z8z0pbgR0ZSypnOFRI2
+ GzfXG9alJinoMxKuhxJGa3Oh7kqASmnwhNyuck0psW5oJyzjUzcZF6PJVoy_hQe.o.d64w0yQeUC
+ 4thztiMviwVYiOOVpA36GgxVcZhUEH.O82ymveQsaGXOpLuEbI8hki0nKKFqQOf19M1RpWNxLWlF
+ LOQAe5QxyN8lBKZ4aa4_8siJenQm5fNS7plj_YfQ7VQ3IZWEVesYZTKOd1MK5gKvMsqqkKipiBte
+ Kw038B47CMALTahdz.AfniBFlpceDjW_5Lf3HG_TZ3ifMvxvXnuJGFPbmwZ9EOoHqlI0SenrD.s7
+ YXhivJCHb7mVlx47rjYUT89ebmUrzxbzUuOvidJbo_SHamYxGW4SyboeF6rzZY_ECB1w.FM9_5wS
+ hVxsE_ALwmeeapy7f6JFfVI12pOqR3Kh4LDk7OV9j7SQZVgOVOILXbY1oOmsIbhgxgwYg508HWBC
+ LLL76R84sb2r6qQcT885IsGdk3V0IScKnH8yRINhhZOUhKt.6tzap_NHwI_pGYwkTupSo8d3zIR9
+ fecD7M4IF_ZUzKv.FAgcBF4V2_psGvEkF8qOvy6QQswhuJK3zjzxCGtAiZiLOaH7ZrCRE6x46bjf
+ dJYhNlJTcwdhwiDolkmUAhhuXs0_wCSzo97JaDYnmlWcWxrL5lNKV64hw_wMsVMggoeJp9eaiU5f
+ gIq4QhgFYP8._5b9d3fcy15dQeDzxvFwG0PlgycDTCa71ZAFtGrLNVfOPnz4Vg9YNDAg8BRBmySr
+ XIZ_iNU6.88Ga_srR6HXRtn38lDHFHwHiXv5g5fOfBFvYLKKBxlZXZN67IlCsrPWnmfgtU5kmqb0
+ 8qgehtLX0g54UmFUSfPMxD.r7DO59t9KKx7DjOYbON_2XXlhnQzKcODhPYDNB6t.FCf.ddRHw0I1
+ giScCjtunj5k_fG09ejk0cwVALLJQxWTztZE6_hBl
+X-Sonic-MF: <bg271828@yahoo.com>
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic311.consmr.mail.gq1.yahoo.com with HTTP; Mon, 22 Mar 2021 13:46:09 +0000
+Date: Mon, 22 Mar 2021 13:46:08 +0000 (UTC)
+From: "Dr. Jennifer Nussbaum" <bg271828@yahoo.com>
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Message-ID: <1460907569.2869086.1616420768731@mail.yahoo.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.1.125] (46.126.183.173) by
- GVAP278CA0006.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:20::16) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3912.17 via Frontend Transport; Fri, 5 Mar 2021 15:35:47 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 56c967c0-4a56-49a8-4a18-08d8dfec5b14
-X-MS-TrafficTypeDiagnostic: SN7PR05MB7776:
-X-LD-Processed: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0,ExtAddr
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <SN7PR05MB777677942214BB2CB9209A4BC6969@SN7PR05MB7776.namprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: NofJGWdatcpXpusWZDcrXHRCinDXEfmJlN1kKEUlO5jOhXVIQ2lJS7huuJssfv1NqExPR7IXGPBH2KFVqEucTrumVDvsyfYrB5Usbc66kFHp9mWEgMTII2nqTLYWWginOPYFFTObp8k76my9R6CZ39B7hMvYND+plW8RhSNilVBZdlszlNbnehKmWzkHeG20r8AkPAxC8owa0dJeY/UCmES3PxA5VSeRiuzA2WK7vMcqghWGjQqA+/1XyY6bT8ctlZYveGmIcN5HmZGX+SLrhgZLe8yHbU5VI8LmAWlApXIOLGuZaoT2RT2PaUph7eheI5v833ey8wQgepeV0aWrN4GcQTwE6iKyrSxL8egn8PAHRqsYDWuYgUKKBiqn6ek+GzCYOg/c5UQ3wBXtbYWa2mgqSwsOloZbw++O/q0YxBnWI/r5tCEedOOJs1/0fjCD7SqxFb3Q8r+eHGVnH/hLD3F9ZjR9fCxpUsjSI5+6oIJ+WuN8XSQ48Bcub31FnPy37EQJpMzdmqc6yHdkC4ZCgrClYkhW++yf9XAKe3PJU/gNoXHAgzXbEnCTDzmcVSBXRONTOYexmWJFbzfdyIvT6y4l/7HL87EFl/tlXzOdoFABOK97IdQIshO5OlammF/IRHWB3fkNnq2vT9MtKRzD4A==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN6PR05MB5759.namprd05.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(346002)(136003)(396003)(39860400002)(366004)(376002)(478600001)(5660300002)(2906002)(316002)(956004)(2616005)(26005)(6666004)(186003)(53546011)(8936002)(86362001)(8676002)(36756003)(6486002)(83380400001)(31686004)(16576012)(4326008)(54906003)(7416002)(66476007)(31696002)(110136005)(16526019)(66946007)(66556008)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?U1lSSXRrS0c3eDV6aytYb1NDd1k1NDVNb3U4NzlDbEVSSG5RRFUvbXZnaklU?=
- =?utf-8?B?SW1QbEZTTVNaWE1CMVIzQk82WjVsRnBuZDg3MDVXQTZYbkZUWUptRXZDSDdQ?=
- =?utf-8?B?U2U5Z2oyMzBseGZlR0t2MmZQWEhUQjFpSjBNQ2w5UmlPZkxmUGwwdGNVeUI2?=
- =?utf-8?B?K3dScVo4VlRoN2FJOXFkSnJxcE1haDVUQ3ZZcktYUjhaaWRQZE1WTHRBYnZj?=
- =?utf-8?B?OXFhc1ZBeHdpenNiNGZucTJaT2EyelJXWms5aDI1cVlZNWFkR0c4YUgrTjhQ?=
- =?utf-8?B?TVZqVEhqaEhpWEczbTYvd0FQSDZuVDBpUG5ib0h1dkhmNjVpZDF0RjY0MmVU?=
- =?utf-8?B?VW02QXNGWGsxQ25BbHZjWUMzVlN0bW5zSlRLallkZUVZTFNzQTg4d0IrS2xx?=
- =?utf-8?B?ZHN6QTNmNm5BM2JId0Z0TWt4ckROSXpKdkk3T1NXdW85YmMvQ0MyVFNyYTd3?=
- =?utf-8?B?U1RBbUdodDRJOGhURXpxbFYxNUZHSUZWdXZ2bUJyZ21TUGJSZmNCcEpMM2pu?=
- =?utf-8?B?NGVsVTFWdGxrbUJzSnQvQUhSamVabEQxdld2THd0RzJBVi9tZmQwRkUwcnc5?=
- =?utf-8?B?MWl4Z1IzTzVkUUNhNlYzeFRxN0h6QjJ4U1JCVmZuQXE0a1U0bHByNW9QMW5h?=
- =?utf-8?B?OXNlQ3V0OEErU2pCY3lvZFpaVnZzd2R0ZjV6RUtkclRuQzV1dEk2UlNlRVMx?=
- =?utf-8?B?THBpelRzZS9CbnRtbnpTSnUrQ3Qvd1Jpc1l1RGV1R3ErQzJyNUxQZWxvUUor?=
- =?utf-8?B?ZkFqRXJhc1FPM3VIcWwzUVFpb2lIcVJ5YnFaaVRWN1R1SURwUDl3Y3BWV2tZ?=
- =?utf-8?B?aVJEZWplUkdObTZTK0dvYlVOSVhQcEdsbytlMWV0TklKS1pRalBWSU1xdHpU?=
- =?utf-8?B?Yk1INDA4aFRDMjMrZnFZTFRJVFM1aVFkZ1VLVmtmbXZVZWZxa1ZpcGFwaEU2?=
- =?utf-8?B?WGJHMUtzeWpmekI4U2xNSzZiTkhQREdMR21WTU1yS09vTWFPL1FyVTZlWTB0?=
- =?utf-8?B?QVY0WTI0TWRCa045bWpXUzFZREFkbHI3RnRadlFEMTRZTER3NldQcHFiZGJx?=
- =?utf-8?B?UHZ4UHpMUGxYSUFsZ3ZpMmJ0VmxWMHFLck5PTkpHN2VuU09xOVJ0SmtzTU9X?=
- =?utf-8?B?UDh4T1haNUVQb0VwYko5cFZVd3g1YmtSbnUxQkFIWjhWLzlzSzEvbVVHTXly?=
- =?utf-8?B?b29sR1dOZlY3RjhkSWRvSlVpU1dzZGtnZUwyakY2YjM0OVpiUlI0Wm9UK2Rq?=
- =?utf-8?B?cUZ5V3YxeTZMWlVvNkpmU2JNb1dlcUlpMnR4RzBOUEFtdE1IcjNlMjVzZ1Iz?=
- =?utf-8?B?b1owdjRYa2t3Wk0wbVIrQXk3WEZHME81bFNyV0NxdzRybUUxajRic2pYazNo?=
- =?utf-8?B?bDFQMTRDOTlUanF2V3FSVU5CWWprdWZubkhKQ2FIRVRzWWJ5YUZzUzRIUkl5?=
- =?utf-8?B?blFjS1RVU1JDWjY4UkVFN0RUVDB2U21ZUDhCNmlGVUtUR0tsTlMwUGczNk1s?=
- =?utf-8?B?SkM5V1FYc3F4Uy9TbWJGekFpRFJ4a1c4UHZ0eVEyZjJlbUF5YnU2NW1IelRO?=
- =?utf-8?B?cC9kNlRIdFpQblNhWjhxa0ljQTBtMjVCQUVRdjJqWEFJdWhxdTZJL3laTlUz?=
- =?utf-8?B?RWFBTUlwb2g1WEYwbDhmejY2VXVvbC9LZlVXT1pmakcrSy9VTlNnVERpcitU?=
- =?utf-8?B?NnBKUDV2MEhaZ3BoTGo4SmNCL1VKdkdMd1hsMTE1d0E2L3A4TER3Ni9PVUlE?=
- =?utf-8?Q?hYuyaS3lRrd9+hdM/XkzwS/3h/KM4kVs+/4kxR8?=
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 56c967c0-4a56-49a8-4a18-08d8dfec5b14
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR05MB5759.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2021 15:35:51.0505 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OkYcfP3kGmfcdbbLoc4DFutXVefiF7ZRu+JYoHaI0hvP8HvObkU+7ujbp6eYzeiVciIWfHtZJezMYD1uUZlEpQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR05MB7776
-X-Mailman-Approved-At: Fri, 05 Mar 2021 16:00:44 +0000
-Subject: Re: [Spice-devel] [patch 2/7] drm/vmgfx: Replace kmap_atomic()
+References: <1460907569.2869086.1616420768731.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.17936 YMailNorrin Mozilla/5.0 (X11;
+ Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+ Chrome/88.0.4324.192 Safari/537.36
+X-Mailman-Approved-At: Mon, 22 Mar 2021 13:46:42 +0000
+Subject: [Spice-devel] Multiple monitors at 4K, in virt-manager?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -127,126 +80,81 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, Huang Rui <ray.huang@amd.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, spice-devel@lists.freedesktop.org,
- Andrew Morton <akpm@linux-foundation.org>,
- Chris Wilson <chris@chris-wilson.co.uk>,
- Christian Koenig <christian.koenig@amd.com>, Zack Rusin <zackr@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0469474116=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 03.03.21 14:20, Thomas Gleixner wrote:
-> From: Thomas Gleixner <tglx@linutronix.de>
-> 
-> There is no reason to disable pagefaults and preemption as a side effect of
-> kmap_atomic_prot().
-> 
-> Use kmap_local_page_prot() instead and document the reasoning for the
-> mapping usage with the given pgprot.
-> 
-> Remove the NULL pointer check for the map. These functions return a valid
-> address for valid pages and the return was bogus anyway as it would have
-> left preemption and pagefaults disabled.
-> 
-> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> Cc: VMware Graphics <linux-graphics-maintainer@vmware.com>
-> Cc: Roland Scheidegger <sroland@vmware.com>
-> Cc: Zack Rusin <zackr@vmware.com>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: dri-devel@lists.freedesktop.org
-> ---
->  drivers/gpu/drm/vmwgfx/vmwgfx_blit.c |   30 ++++++++++++------------------
->  1 file changed, 12 insertions(+), 18 deletions(-)
-> 
-> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_blit.c
-> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_blit.c
-> @@ -375,12 +375,12 @@ static int vmw_bo_cpu_blit_line(struct v
->  		copy_size = min_t(u32, copy_size, PAGE_SIZE - src_page_offset);
->  
->  		if (unmap_src) {
-> -			kunmap_atomic(d->src_addr);
-> +			kunmap_local(d->src_addr);
->  			d->src_addr = NULL;
->  		}
->  
->  		if (unmap_dst) {
-> -			kunmap_atomic(d->dst_addr);
-> +			kunmap_local(d->dst_addr);
->  			d->dst_addr = NULL;
->  		}
->  
-> @@ -388,12 +388,8 @@ static int vmw_bo_cpu_blit_line(struct v
->  			if (WARN_ON_ONCE(dst_page >= d->dst_num_pages))
->  				return -EINVAL;
->  
-> -			d->dst_addr =
-> -				kmap_atomic_prot(d->dst_pages[dst_page],
-> -						 d->dst_prot);
-> -			if (!d->dst_addr)
-> -				return -ENOMEM;
-> -
-> +			d->dst_addr = kmap_local_page_prot(d->dst_pages[dst_page],
-> +							   d->dst_prot);
->  			d->mapped_dst = dst_page;
->  		}
->  
-> @@ -401,12 +397,8 @@ static int vmw_bo_cpu_blit_line(struct v
->  			if (WARN_ON_ONCE(src_page >= d->src_num_pages))
->  				return -EINVAL;
->  
-> -			d->src_addr =
-> -				kmap_atomic_prot(d->src_pages[src_page],
-> -						 d->src_prot);
-> -			if (!d->src_addr)
-> -				return -ENOMEM;
-> -
-> +			d->src_addr = kmap_local_page_prot(d->src_pages[src_page],
-> +							   d->src_prot);
->  			d->mapped_src = src_page;
->  		}
->  		diff->do_cpy(diff, d->dst_addr + dst_page_offset,
-> @@ -436,8 +428,10 @@ static int vmw_bo_cpu_blit_line(struct v
->   *
->   * Performs a CPU blit from one buffer object to another avoiding a full
->   * bo vmap which may exhaust- or fragment vmalloc space.
-> - * On supported architectures (x86), we're using kmap_atomic which avoids
-> - * cross-processor TLB- and cache flushes and may, on non-HIGHMEM systems
-> + *
-> + * On supported architectures (x86), we're using kmap_local_prot() which
-> + * avoids cross-processor TLB- and cache flushes. kmap_local_prot() will
-> + * either map a highmem page with the proper pgprot on HIGHMEM=y systems or
->   * reference already set-up mappings.
->   *
->   * Neither of the buffer objects may be placed in PCI memory
-> @@ -500,9 +494,9 @@ int vmw_bo_cpu_blit(struct ttm_buffer_ob
->  	}
->  out:
->  	if (d.src_addr)
-> -		kunmap_atomic(d.src_addr);
-> +		kunmap_local(d.src_addr);
->  	if (d.dst_addr)
-> -		kunmap_atomic(d.dst_addr);
-> +		kunmap_local(d.dst_addr);
->  
->  	return ret;
->  }
-> 
-> 
+--===============0469474116==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_2869085_1655793383.1616420768729"
 
-Seems reasonable to me.
-Reviewed-by: Roland Scheidegger <sroland@vmware.com>
+------=_Part_2869085_1655793383.1616420768729
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+I hope it's OK to ask a basic question on the -devel list, but this is what=
+ was listed in the Support section....
+I'm using virt-manger, and its related suite of stuff, to run KVM/QEMU VM's=
+ on a Debian Bullseye host, which has two 4K monitors. I am unable to get d=
+ual-head working at all, and I can't get 4K resolution working in the way I=
+'m apparently supposed to.
+I have a Debian Bullseye guest, with spice-vdagent and the QXL video driver=
+s installed in it. The Spice user manual suggests that multiple-monitor sup=
+port is easy; you're supposed to use a Video QXL device and then everything=
+ should just work. But it doesn't. Even when I increase the video memory in=
+ the XML file (vgamem, I assume) to 64MB I am unable to get 4K on even a si=
+ngle monitor using Settings -> Display on the guest; it maxes out at some a=
+rbitrary-seeming thing a bit over 1980 x 1200. And regardless of resolution=
+, I also do not have a second monitor available in the guest.
+If I have a video device set to Virtio, then 4K works perfectly on the gues=
+t machine; if I go to Settings -> Display there, I can select 4096 x 2160, =
+and I get lovely 4K video. However, dual-head does not work. If I try to ed=
+it the XML for the video device to 'heads=3D"2"', there is no effect--at le=
+ast, when I restart the guest and go to Settings -> Display, there isn't an=
+ option for selecting another monitor.
+Could someone tell me what I'm supposed to be doing?=C2=A0 Thank you.
+
+
+------=_Part_2869085_1655793383.1616420768729
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head></head><body><div class=3D"yahoo-style-wrap" style=3D"font-fami=
+ly:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;"><div dir=
+=3D"ltr" data-setdir=3D"false"><div><div dir=3D"ltr" data-setdir=3D"false">=
+I hope it's OK to ask a basic question on the -devel list, but this is what=
+ was listed in the Support section....</div><div><br></div><div>I'm using v=
+irt-manger, and its related suite of stuff, to run KVM/QEMU VM's on a Debia=
+n Bullseye host, which has two 4K monitors. I am unable to get dual-head wo=
+rking at all, and I can't get 4K resolution working in the way I'm apparent=
+ly supposed to.</div><div><br></div><div dir=3D"ltr" data-setdir=3D"false">=
+I have a Debian Bullseye guest, with spice-vdagent and the QXL video driver=
+s installed in it. The Spice user manual suggests that multiple-monitor sup=
+port is easy; you're supposed to use a Video QXL device and then everything=
+ should just work. But it doesn't. Even when I increase the video memory in=
+ the XML file (vgamem, I assume) to 64MB I am unable to get 4K on even a si=
+ngle monitor using Settings -&gt; Display on the guest; it maxes out at som=
+e arbitrary-seeming thing a bit over 1980 x 1200. And regardless of resolut=
+ion, I also do not have a second monitor available in the guest.</div><div>=
+<br></div><div>If I have a video device set to Virtio, then 4K works perfec=
+tly on the guest machine; if I go to Settings -&gt; Display there, I can se=
+lect 4096 x 2160, and I get lovely 4K video. However, dual-head does not wo=
+rk. If I try to edit the XML for the video device to 'heads=3D"2"', there i=
+s no effect--at least, when I restart the guest and go to Settings -&gt; Di=
+splay, there isn't an option for selecting another monitor.</div><div><br><=
+/div><div>Could someone tell me what I'm supposed to be doing?&nbsp; Thank =
+you.</div><div><br></div></div><br></div></div></body></html>
+------=_Part_2869085_1655793383.1616420768729--
+
+--===============0469474116==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0469474116==--
