@@ -2,59 +2,48 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 071E1345C81
-	for <lists+spice-devel@lfdr.de>; Tue, 23 Mar 2021 12:12:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBA043461AA
+	for <lists+spice-devel@lfdr.de>; Tue, 23 Mar 2021 15:42:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4FAAE6E8A4;
-	Tue, 23 Mar 2021 11:12:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 494306E905;
+	Tue, 23 Mar 2021 14:42:13 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A1A826E8A4
- for <spice-devel@lists.freedesktop.org>; Tue, 23 Mar 2021 11:12:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1616497919;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=7W2ZRlYAQoIXLtSatHcmhsK11LkQviOxkEwp0PRsEl0=;
- b=RcrduxBCZq8dzRXtpKcURY54h2lp5lksAsg63U5SSDHK18EhysQJQTPYxQwJkDrb2k7OCM
- n3mzjzWGBVX6QhCnFt978O+VkwKsViIQaY0N7U12KVc3ONn05m962uDfV37A1iTVgJMOgK
- xrZ505G2jAl5b+cy218TC60wDLwQPYc=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-545-ZXb45nYPM1qNnB22wCjltw-1; Tue, 23 Mar 2021 07:11:55 -0400
-X-MC-Unique: ZXb45nYPM1qNnB22wCjltw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EA9551084D6B;
- Tue, 23 Mar 2021 11:11:53 +0000 (UTC)
-Received: from localhost (unknown [10.40.195.32])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B9FE960BE5;
- Tue, 23 Mar 2021 11:11:50 +0000 (UTC)
-Date: Tue, 23 Mar 2021 12:11:49 +0100
-From: Victor Toso <victortoso@redhat.com>
-To: "Dr. Jennifer Nussbaum" <bg271828@yahoo.com>
-Message-ID: <20210323111149.d64uowl3pmbfxhmo@wingsuit>
-References: <1460907569.2869086.1616420768731.ref@mail.yahoo.com>
- <1460907569.2869086.1616420768731@mail.yahoo.com>
- <20210322145139.kuigwqkyjdkby35r@wingsuit>
- <2044021456.514716.1616426838206@mail.yahoo.com>
- <b734810e-8bba-7afd-b104-5b48a06659f7@redhat.com>
- <749011737.954954.1616435403564@mail.yahoo.com>
- <CAD5yKqwRzPD5Pp4N1W9V1=weDFLy6mdcg5JoBFARh9o+VxOMUQ@mail.gmail.com>
- <965619202.3203082.1616496608587@mail.yahoo.com>
+X-Greylist: delayed 3353 seconds by postgrey-1.36 at gabe;
+ Tue, 23 Mar 2021 14:42:11 UTC
+Received: from server.thinsia.com (server.thinsia.com [94.124.92.232])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7359A6E905
+ for <spice-devel@lists.freedesktop.org>; Tue, 23 Mar 2021 14:42:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=thinsia.com
+ ; s=x;
+ h=Content-Type:MIME-Version:Date:Message-ID:Subject:From:To:Sender:
+ Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0OL712vlVZ69mKKhAnyWmuwGOFPVOMYgFCFT2Fm/svw=; b=Rcgu63twA7bk1AInCBNyn8n0yl
+ SAdiPnOTLe4EZ2xs2CoOttnINyl5pXYd1laxFM5HdbmHPssQIAmAeB3rW0KXF7F51SZIiHmPvj4AT
+ t/AORRWM89GS6F6EL9DlCharTXv1BHx8DMFDFhzkW+a7r1nrAwSFzgKpoWmki8txI7KHEOKV3vYM2
+ YaDD7e0e5MYmxdpnAT5zPOt1PnSGfBOOhJ80yhaNXMdwboD26es9PtsfVv86DrH8mwNKolDQbgDsm
+ Ph9RZkgn3EQBazRzx2p/Bb/hjAjsBnZwMw5K0qxvu2mIUi0G8ZsUGlIRZowlxXRWZ20/yZ502Y99x
+ +oqORHqQ==;
+Received: from d57e265a.static.ziggozakelijk.nl ([213.126.38.90]
+ helo=[192.168.14.15]) by server.thinsia.com with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94)
+ (envelope-from <sassen@thinsia.com>) id 1lOhMQ-00GQsf-CV
+ for spice-devel@lists.freedesktop.org; Tue, 23 Mar 2021 14:46:18 +0100
+To: spice-devel@lists.freedesktop.org
+From: Roland <sassen@thinsia.com>
+Message-ID: <b189b7e4-d23a-cfba-8253-8a799c951d72@thinsia.com>
+Date: Tue, 23 Mar 2021 14:46:14 +0100
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <965619202.3203082.1616496608587@mail.yahoo.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=victortoso@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] Multiple monitors at 4K, in virt-manager?
+Content-Language: en-GB
+X-Antivirus: AVG (VPS 210323-0, 23-03-2021), Outbound message
+X-Antivirus-Status: Clean
+X-Authenticated-Id: sassen@thinsia.com
+Subject: [Spice-devel] Spice for CI
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,107 +55,113 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1704127401=="
+Content-Type: multipart/mixed; boundary="===============1754723184=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1704127401==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="vkjvfuk4g5eccqrh"
-Content-Disposition: inline
+This is a multi-part message in MIME format.
+--===============1754723184==
+Content-Type: multipart/alternative;
+ boundary="------------CA65E2F13678D2C96D9444E8"
+Content-Language: en-GB
 
---vkjvfuk4g5eccqrh
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is a multi-part message in MIME format.
+--------------CA65E2F13678D2C96D9444E8
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Hello, for our project Citizen"s Island <https://citizensisland.com/> I 
+want to provide a "remote desktop" from a mobile phone with aSpice 
+<https://play.google.com/store/apps/details?id=com.iiordanov.freeaSPICE> 
+to a linux server.
 
-On Tue, Mar 23, 2021 at 10:50:08AM +0000, Dr. Jennifer Nussbaum wrote:
->  On Tuesday, March 23, 2021, 04:04:27 AM EDT, Julien Rope <jrope@redhat.c=
-om> wrote:
-> =20
-> =20
->  > I still am offered only 2952 x 1781 in the guest. With those
->  > settings except 'heads=3D"2"', it is exactly>=A0> the same--that
->  > resolution, and only one display, "Virtual-0".>=A0>=A0>=A0> As
->  > mentioned in my original message, when I use the Virtio
->  > instead of the QXL device, I do get 4K,>=A0> though again
->  > choosing 'heads=3D"2"' doesn't give me an additional display
->  > in the guest. (Curiously>=A0> the one display I get is
->  > "Virtual-1" rather than "Virtual-0".) With this device
->  > there's no option for>=A0> changing the video memory in the
->  > XML.>=A0
->  >=A0
-> >=A0The numbering (Virtual-0 vs Virtual-1) is expected - this is
-> >not an issue.>=A0 =A0Do you actually get the choice of
-> >additional=A0displays in virt-viewer (not in the guest) ?>=A0Under
-> >the top menu "View -> Displays" you should have a list of
-> >available displays. Do you see them ? Are they enabled or
-> >grayed out ?
+On the remote desktop there should be a browser (Brave?), and a place to 
+store data.
 
-> Ah, that is some kind of progress!
-> This is not visible in the integrated viewer in virt-manager,
-> but when I launch virt-viewer on itsown, yes, I do get the
-> option of two displays.
+The "place to store data" will be exchanged later by pointers to 
+decentralized data repositories.
 
-Although they might share some code, they are different
-applications. Virt manager, AFAIK, never supported multi-monitor
+Question 1    Is it ok to start with Ubuntu, (link 
+<https://www.server-world.info/en/note?os=Ubuntu_20.04&p=kvm&f=6>)
+
+Question 2    what is the smallest os I can use (ubuntu light?)
+
+Question 3    I have to connect 3000 users to their personal virtual 
+desktop, any recommendations?
+
+Thank you in advance!
 
 
-> And enabling them both does allow me to launcha second display.
-> I cannot then launch the display settings in the guest,
-> however; it segfaults right away. I'll look into=A0that.
+Thinsia Research <https://www.thinsia.com/>
 
-The sefault happens ins virt-viewer? You can run with
---spice-debug to know what's going on and a backtrace and help
-too.
+Roland Sassen
 
-> But xrandr does report two displays; the second one is=A02135 x
-> 1647, though. Not clear why Istill don't get a 4K option with
-> QXL.
+Eeserstr. 14
 
-The whole multi-monitor + QXL works from the guest kernel
-perspective as if another monitor is being plugged in (by QEMU) ~
-so, what are you running in your Guest? The kernel version +
-Desktop enviroment
+9531 CM Borger
 
-> If I try this with the virtio device (instead of QXL) with two
-> heads, it's similar: a separate virt-viewer=A0instance allows=A0me
-> to launch two displays; in this case xrandr reports 4K
-> displays. But as before,=A0the display settings manager segfaults
-> right away.  Exploring further.  Jen
+tel.: 0599 820288
 
-Ah, it is the guest's display settings that segfaults. Quite odd!
+m: 06 40223112
 
-Cheers,
-Victor
-
---vkjvfuk4g5eccqrh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmBZzPUACgkQl9kSPeN6
-SE+bZw/+OB0uwfmzmzmogfgyPGisMxcqtmh5nV9YU5oXPKk9SNM1RH2lDroaE+kd
-fiDHw3+jJ7I8J5iebVshHDivReiZ7qfMgR676CEgh/Gho+OAWJZbvhcIO9gMzifY
-9BM6VZN2C1ZsWwq/6WyNPo6BhuYsznK7in3VQzCAbGBbihI3yq4NCn6UE22IVNF8
-LQioB5EEjSjTO5BT7lv9Usfv8qrP55TFJcJk1lIjQ0Fxf/po1o920bPUIj+COeo3
-wrugnY6LYOkhJ9ZlM4m2Tex7DuVlnrMb93sisZ7KQQuB2Q9j+ag6jSkhcEWw6Uvk
-JZyACOw0EJggZfeMEG/TzzGLF4rOnZRWIgSCpvDOO/IokWf0BXJNJplTfXTT1blt
-/ZVKWXFlF9c7EJzA7zp6pph1f6xMz/BUwO8+ME+pcRBU5eSgQiN8gFvq/2eZtdrn
-3HCVoI7tlfj9HqgiMrM56tIXsRb57lU9CZDAynzBIn7hxoK5PlhXTb+yRFi6LYRF
-BYWEBugQiXGANEWstTw+50E4tLFCtN3I2jFbyjPW3F29pO1x4+q/mlx8dYF51QTM
-6ORotAATmpIv3iaMrmAPuZ0x0mpocjoJX3gKFC35OnJPgcMcZILAdoIlDHIdjuHZ
-ScLGQLn5qSaoUUnuVF4CWSTHjUhYmjZVFyr3vA+M/euYCCnBnhk=
-=7Y3H
------END PGP SIGNATURE-----
-
---vkjvfuk4g5eccqrh--
+email sassen@thinsia.com
 
 
---===============1704127401==
+
+-- 
+Deze e-mail is gecontroleerd op virussen door AVG.
+http://www.avg.com
+
+--------------CA65E2F13678D2C96D9444E8
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p>Hello, for our project <a moz-do-not-send="true"
+        href="https://citizensisland.com/">Citizen"s Island</a> I want
+      to provide a "remote desktop" from a mobile phone with <a
+        moz-do-not-send="true"
+href="https://play.google.com/store/apps/details?id=com.iiordanov.freeaSPICE">aSpice</a>
+      to a linux server.</p>
+    <p>On the remote desktop there should be a browser (Brave?), and a
+      place to store data.</p>
+    <p>The "place to store data" will be exchanged later by pointers to
+      decentralized data repositories.</p>
+    <p>Question 1    Is it ok to start with Ubuntu, (<a
+        moz-do-not-send="true"
+href="https://www.server-world.info/en/note?os=Ubuntu_20.04&amp;p=kvm&amp;f=6">link</a>)</p>
+    <p>Question 2    what is the smallest os I can use (ubuntu light?)</p>
+    <p>Question 3    I have to connect 3000 users to their personal
+      virtual desktop, any recommendations?</p>
+    <p>Thank you in advance!</p>
+    <p><br>
+    </p>
+    <p><a moz-do-not-send="true" href="https://www.thinsia.com/">Thinsia
+        Research</a></p>
+    <p>Roland Sassen</p>
+    <p>Eeserstr. 14</p>
+    <p>9531 CM Borger</p>
+    <p>tel.: 0599 820288</p>
+    <p>m: 06 40223112</p>
+    <p>email <a class="moz-txt-link-abbreviated" href="mailto:sassen@thinsia.com">sassen@thinsia.com</a><br>
+    </p>
+  <div id="DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br /> <table style="border-top: 1px solid #D3D4DE;">
+	<tr>
+      <td style="width: 55px; padding-top: 18px;"><a href="http://www.avg.com/email-signature?utm_medium=email&utm_source=link&utm_campaign=sig-email&utm_content=emailclient" target="_blank"><img src="https://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=""  width="46" height="29" style="width: 46px; height: 29px;" /></a></td>
+		<td style="width: 470px; padding-top: 17px; color: #41424e; font-size: 13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virusvrij. <a href="http://www.avg.com/email-signature?utm_medium=email&utm_source=link&utm_campaign=sig-email&utm_content=emailclient" target="_blank" style="color: #4453ea;">www.avg.com</a> 		</td>
+	</tr>
+</table>
+<a href="#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width="1" height="1"> </a></div></body>
+</html>
+
+--------------CA65E2F13678D2C96D9444E8--
+
+--===============1754723184==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -177,5 +172,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============1704127401==--
-
+--===============1754723184==--
