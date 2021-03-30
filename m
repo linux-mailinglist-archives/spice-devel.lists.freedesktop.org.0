@@ -1,71 +1,52 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BA42349984
-	for <lists+spice-devel@lfdr.de>; Thu, 25 Mar 2021 19:32:25 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DC7434ECC6
+	for <lists+spice-devel@lfdr.de>; Tue, 30 Mar 2021 17:42:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DF4606EE05;
-	Thu, 25 Mar 2021 18:32:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A15FA6E92F;
+	Tue, 30 Mar 2021 15:42:11 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 342 seconds by postgrey-1.36 at gabe;
- Thu, 25 Mar 2021 18:32:21 UTC
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
- [188.68.61.103])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EDA146EE05
- for <spice-devel@lists.freedesktop.org>; Thu, 25 Mar 2021 18:32:21 +0000 (UTC)
-Received: from mors-relay-8403.netcup.net (localhost [127.0.0.1])
- by mors-relay-8403.netcup.net (Postfix) with ESMTPS id 4F5tq014Mkz8hHD;
- Thu, 25 Mar 2021 19:26:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=konetzka.de; s=key2;
- t=1616696796; bh=Z5EEQSNuAmUWodYxfOfeVScmPFedReLNB7tDkkSZGYY=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=V8TeVb06UsnYfFLZuRw6ye6xts7aHSBCUUkyGCJbMWKLBexO6NsJcR/whzlPxaeAI
- +UkuwpAfA3olXKP/Y4Vu44C6dK4Wqfqi+WipaCCRQOlb7cdiPaL+19Co1SvdDAMy/R
- GMLXLofUGbs6No9NLYb7dQ/5x0TC8PsFzBnRgjAaCRKvRUhcuYkaKpMx5SHGLlcRFA
- 4gsO6s4V8uJIRdnIHb720FKmO9D6GB5v0LT23bskLf86kEomisM8glOArBt7AqyYbq
- K309w6MIZct3iKZ2w06uVBcgWkhxwfToTT/GwefxZZ4kMIIdGbXH2QArOy8LwVxdDX
- fWXnIuCVqenfg==
-Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
- by mors-relay-8403.netcup.net (Postfix) with ESMTPS id 4F5tq00h48z8hH9;
- Thu, 25 Mar 2021 19:26:36 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at policy02-mors.netcup.net
-X-Spam-Flag: NO
-X-Spam-Score: -2.9
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=6.31 tests=[ALL_TRUSTED=-1,
- BAYES_00=-1.9, SPF_PASS=-0.001, URIBL_BLOCKED=0.001]
- autolearn=ham autolearn_force=no
-Received: from mx2f6e.netcup.net (unknown [10.243.12.53])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by policy02-mors.netcup.net (Postfix) with ESMTPS id 4F5tpy1Q3gz8sWr;
- Thu, 25 Mar 2021 19:26:34 +0100 (CET)
-Received: from [192.168.54.9] (ip-88-152-10-47.hsi03.unitymediagroup.de
- [88.152.10.47])
- by mx2f6e.netcup.net (Postfix) with ESMTPSA id 5572365E41;
- Thu, 25 Mar 2021 19:26:33 +0100 (CET)
-Authentication-Results: mx2f6e;
- spf=pass (sender IP is 88.152.10.47) smtp.mailfrom=helge@konetzka.de
- smtp.helo=[192.168.54.9]
-Received-SPF: pass (mx2f6e: connection is authenticated)
-To: Frediano Ziglio <freddy77@gmail.com>
-References: <ae975f23-85d9-5390-54fc-6afe0f6ab4d0@konetzka.de>
- <CAHt6W4eRPm9AHn+cuZPGfM8kYnjGz1gbfW4yGSD6F226=gegvA@mail.gmail.com>
-From: Helge Konetzka <helge@konetzka.de>
-Message-ID: <87c981de-2ad7-73ae-37a0-81e59229b405@konetzka.de>
-Date: Thu, 25 Mar 2021 19:26:32 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 749FE6E92F
+ for <spice-devel@lists.freedesktop.org>; Tue, 30 Mar 2021 15:42:10 +0000 (UTC)
+Received: by mail-pl1-x62a.google.com with SMTP id d8so6371087plh.11
+ for <spice-devel@lists.freedesktop.org>; Tue, 30 Mar 2021 08:42:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=sVFq/kA43bJmOF4/b3HOKrc7NqQfMQB9mXr2EZ3TeiA=;
+ b=sUHm/zdRiWVyNmiCtqHFhcDGBi6IFgLQm4+PElcHwZGb/8BMw8AIEza6jDomjqVIla
+ BLoPCxydxMy/rKudTufZINr2wTNuuuUr+98vHdre148ifMYjV+M6RGuphXQqXz+FYesd
+ UW8378VJfbZUP0yOzOvH5pzm1aumK4efNuXYCyMvAedsg3CN9yM/1nmNbgjQu+D6ZHMm
+ zbD3zYSQ0XjTFSuteF5e7Nx6lmWuofb7rqQlyNCYXShjjJ4ixiybUAuR1Ebjr0Ij6v09
+ eTN4F9prCi6vIPhTBikQPGzgzMF0CEV18opFasJr8gvPGmrL/v0ZusQSIDlkk1nZoGUz
+ Jt4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=sVFq/kA43bJmOF4/b3HOKrc7NqQfMQB9mXr2EZ3TeiA=;
+ b=kLNv4EMl2KTA1Xh3CzNTWtAGt7hUFj4t7txW+Iw9fErqnsLP2UZy+FXoQAQKvFGELf
+ C/beQH7r/EVi4ewIBNI0hazdjXE4SWyF9VnwJc0gHt90/UOddwyw6og6eI9E3bj+h7b8
+ KGg35wIrHZ9kar9qKYMU0/nj+59uvh0z3vE+mSQUmWidrY2yOcnwSetLcy0WyXhfEzWf
+ OHeIF/uLE75d+o4s4DiF+9/OA+RQ+YT+ONxk9GSztY40NSgUlFvnJZCDhZguika+DgeG
+ r5E9RNae1SgSIFqmIelDi4tKpXSViPg9oEg6TjFKT1l1fm3i6VFUSyVKr5xuRbdYiBbD
+ g6Cw==
+X-Gm-Message-State: AOAM5308xYlTbVxSAn65QrxNk6SJn5lfHlaHPLLUoBbcGGvWf6+CHysP
+ jTPbSE5K/D6qqHRZWmES49ZY7TqO1abtcJbKI4dAjAlw
+X-Google-Smtp-Source: ABdhPJzq9pQH8AIzabd8XIXg9IX9eU5NRfXccgFuLFzpyXwLMZsNCk8WeZG8bF0hdqk1ph5u0h+R+Cu06w1hMFuf7h4=
+X-Received: by 2002:a17:90a:a4cb:: with SMTP id
+ l11mr4791609pjw.144.1617118929873; 
+ Tue, 30 Mar 2021 08:42:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAHt6W4eRPm9AHn+cuZPGfM8kYnjGz1gbfW4yGSD6F226=gegvA@mail.gmail.com>
-Content-Language: en-US
-X-PPP-Message-ID: <161669679353.21594.5714841869896488727@mx2f6e.netcup.net>
-X-PPP-Vhost: konetzka.de
-X-NC-CID: tb3cK290egBDzYs9TG/qgGlSEDtoWd7nmRHg45/kgUB6
-Subject: Re: [Spice-devel] Qemu with Spice support on Windows10 host: a
- report
+From: James Harvey <jamespharvey20@gmail.com>
+Date: Tue, 30 Mar 2021 11:41:59 -0400
+Message-ID: <CA+X5Wn5k173Z+i2vcW1nXuP1SjCNhUM104iCRMJODrbfGB5Y1A@mail.gmail.com>
+To: spice-devel <spice-devel@lists.freedesktop.org>
+Subject: [Spice-devel] spice-gtk: Synchronized/duplicated input across
+ multiple widgets
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,151 +58,76 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Am 24.03.21 um 14:05 schrieb Frediano Ziglio:
-> Il giorno mar 23 mar 2021 alle ore 20:33 Helge Konetzka ha scritto:
->> I deployed spice-protocol and spice-server this way:
->>
->> spice-protocol-0.14.3$ meson setup builddir
->> spice-protocol-0.14.3$ meson configure --prefix
->> /usr/x86_64-w64-mingw32/sys-root/mingw builddir
->> spice-protocol-0.14.3$ meson install -C builddir
->>
->> # Add -fstack-protector to automatically added FLAGS
->> spice-0.14.91$ export CFLAGS="-g -O2 -fstack-protector"
->> spice-0.14.91$ export CXXFLAGS="-g -O2 -fno-exceptions -fno-check-new
->> -fstack-protector"
->> # Patch to include red-common.h before jpeglib.h
->> spice-0.14.91$ patch -p1 < ../spice-0.14.3-cygwin64.patch
->> spice-0.14.91$ ./configure --host=x86_64-w64-mingw32
->> --prefix=/usr/x86_64-w64-mingw32/sys-root/mingw \
->>                   --without-sasl --enable-extra-checks --disable-silent-rules
-> Surely you don't want --enable-extra-checks for the final product, but
-> good to test with.
-I must admit that I wasn't aware of the impact on the resulting libraries.
->> spice-0.14.91$ make -j4
->> spice-0.14.91$ make install
->>
->> --------------------------
->>
->> Patch is necessary, because INT32 is defined twice - in
->> /usr/x86_64-w64-mingw32/sys-root/mingw/include/basetsd.h
->> and /usr/x86_64-w64-mingw32/sys-root/mingw/include/jmorecfg.h
->>
-> We  use CI to check that always compile for Windows using MingW, which
-> distro are you using?
-Cygwin64. I had no header problems compiling because of INT32 with 
-Msys2. Didn't know MingW-Distribution yet.
->> $ cat spice-0.14.3-cygwin64.patch
->> diff -Naur spice-0.14.91.orig/server/jpeg-encoder.c
->> spice-0.14.91.patched/server/jpeg-encoder.c
->> --- spice-0.14.91.orig/server/jpeg-encoder.c    2020-10-26
->> 13:18:53.000000000 +0100
->> +++ spice-0.14.91.patched/server/jpeg-encoder.c    2021-03-23
->> 12:27:18.696134500 +0100
->> @@ -17,9 +17,9 @@
->>    #include <config.h>
->>
->>    #include <stdio.h>
->> +#include "red-common.h"
->>    #include <jpeglib.h>
->>
->> -#include "red-common.h"
->>    #include "jpeg-encoder.h"
->>
->>    struct JpegEncoderContext {
->> diff -Naur spice-0.14.91.orig/server/mjpeg-encoder.c
->> spice-0.14.91.patched/server/mjpeg-encoder.c
->> --- spice-0.14.91.orig/server/mjpeg-encoder.c    2020-10-26
->> 13:18:53.000000000 +0100
->> +++ spice-0.14.91.patched/server/mjpeg-encoder.c    2021-03-23
->> 12:27:22.501484000 +0100
->> @@ -20,9 +20,9 @@
->>    #include <stdio.h>
->>    #include <inttypes.h>
->>    #include <jerror.h>
->> +#include "red-common.h"
->>    #include <jpeglib.h>
->>
->> -#include "red-common.h"
->>    #include "video-encoder.h"
->>    #include "utils.h"
->>
->> ---------------------------
-> I think it would be better to move Jpeg includes at the end and add a
-> comment instead.
+I think a very useful addition to spice would be
+synchronized/duplicated input, so one physical input can be given
+simultaneously to multiple spice servers.
 
-I just wanted to drop a helpful patch, in case anyone wants to build 
-spice-server in cygwin64 environment.
+The most common use for this might be system administration.  An admin
+would be able to connect to multiple machines, and perform common
+tasks on all of them at once, such as upgrading software, manual
+malware scans, changing settings, etc.
 
-But because cygwin64's glib package is too old to support using qemu 
-with spice, I guess this patch is obsolete. With Msys2 I was able to 
-create a working integration.
+This exists in a few other programs.  There are ssh clients that do
+this, but personally I use tmux's synchronized panes feature for this
+after I've started different ssh connections in them.  I'm not aware
+of any linux GUI remote clients with this feature, and the only
+Windows GUI remote clients I'm aware of with it are BlueStacks and
+Nox, which are android emulators built upon VM software.
 
+Obviously, it is on the user to ensure input works as intended.  If
+servers have different resolutions, layouts, icon placements, if one
+hasn't finished a previous task, etc, identical input may not have
+identical behavior in all clients.
 
->> Additional Compiler-Flag -fstack-protector is necessary in CFLAGS and
->> CXXFLAGS to get rid of linker errors
->> see
->> https://sourceforge.net/p/mingw-w64/mailman/message/36764708/
->> https://github.com/msys2/MINGW-packages/issues/5803
->>
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(sys-socket.o): in function `socket_newpair':
->> /mnt/d/Qemu/src/spice-0.14.91/server/sys-socket.c:284: undefined
->> reference to `__stack_chk_fail'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(sys-socket.o): in function `socket_win32_init':
->> /mnt/d/Qemu/src/spice-0.14.91/server/sys-socket.c:209: undefined
->> reference to `__stack_chk_fail'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(sys-socket.o):sys-socket.c:(.rdata$.refptr.__stack_chk_guard[.refptr.__stack_chk_guard]+0x0):
->> undefined reference to `__stack_chk_guard'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(tree.o):/usr/x86_64-w64-mingw32/sys-root/mingw/include/string.h:208:
->> undefined reference to `__memset_chk'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(utils.o): in function `red_dump_openssl_errors':
->> /mnt/d/Qemu/src/spice-0.14.91/server/utils.c:128: undefined reference to
->> `__stack_chk_fail'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(websocket.o): in function `websocket_read':
->> /mnt/d/Qemu/src/spice-0.14.91/server/websocket.c:447: undefined
->> reference to `__stack_chk_fail'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(websocket.o): in function `memcpy':
->> /usr/x86_64-w64-mingw32/sys-root/mingw/include/string.h:202: undefined
->> reference to `__memcpy_chk'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(websocket.o): in function `sprintf':
->> /usr/x86_64-w64-mingw32/sys-root/mingw/include/stdio.h:372: undefined
->> reference to `__chk_fail'
->> /usr/lib/gcc/x86_64-w64-mingw32/10/../../../../x86_64-w64-mingw32/bin/ld:
->> ./.libs/libserver.a(websocket.o): in function `websocket_new':
->> /mnt/d/Qemu/src/spice-0.14.91/server/websocket.c:792: undefined
->> reference to `__stack_chk_fail'
->> collect2: error: ld returned 1 exit status
->> make[4]: *** [Makefile:790: libspice-server.la] Error 1
->> make[4]: Leaving directory '/cygdrive/d/Qemu/src/spice-0.14.91/server'
->> make[3]: *** [Makefile:942: all-recursive] Error 1
->> make[3]: Leaving directory '/cygdrive/d/Qemu/src/spice-0.14.91/server'
->> make[2]: *** [Makefile:704: all] Error 2
->> make[2]: Leaving directory '/cygdrive/d/Qemu/src/spice-0.14.91/server'
->> make[1]: *** [Makefile:539: all-recursive] Error 1
->> make[1]: Leaving directory '/cygdrive/d/Qemu/src/spice
-> I suppose the FORTIFY definition requires -fstack-protector ito get
-> the right libraries.
+Before understanding the extent of what spice-gtk handles, I
+approached the remmina developers, largely because one instance of
+their client can already handle multiple connections in tabs or
+separate windows.  Now understanding that spice-gtk receives the
+physical mouse input and sends it to the spice server, it looks to me
+by far that the easiest way to do this is make a chance in spice-gtk
+and then have the clients do whatever is necessary to inform the
+widgets to enter/exit this mode.
 
-It turned out mandatory for successful builds in both, Cygwin64 and Msys2.
+In tmux, the "setw synchronize-panes" command toggles synchronizing
+input among all panes in a window, so giving input to any of them is
+duplicated in the others.  There's no master pane that has to be typed
+into.
 
-Thanks for your remarks and hints.
+In the Windows android emulators BlueStacks and Nox, their
+synchronized input feature allows you on a remote connection window to
+select other running connections to receive synchronized input from
+that window.  The one you start from is the master window, which you
+have to give input to for it to be duplicated.  If you give input into
+one of the other windows you've selected to receive synchronization,
+the input is only given to that window, which is useful if a window
+becomes unsynchronized to easily bring it back to where the others are
+without needing to toggle the overall synchronization or turn
+including that window off.
 
-Helge Konetzka.
+I think it would be nice if a spice client could tell spice-gtk to
+enter/exit either of these modes: synchronized input among a group of
+spice-gtk widgets; or synchronized input made in a master spice-gtk
+widget to be given to a number of spice-gtk widgets.
 
+I think a restriction that spice-gtk widgets can only synchronize with
+other widgets running on the same machine would simplify
+implementation and security concerns.  Perhaps the spice developers
+would want only widgets running within the same process to be able to
+synchronize.  In that case, remmina might be most easily able to
+implement this feature, but other clients could add the ability to run
+multiple connections within a single process to be able to implement
+it as well.
+
+Is this something someone would like to implement?  If not, is it
+something that someone would be willing to mentor, giving me locations
+of existing code that likely need changes, etc?  And if I could get it
+working, that the feature would likely be accepted as a pull request
+rather than denied as an unwanted feature?
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
