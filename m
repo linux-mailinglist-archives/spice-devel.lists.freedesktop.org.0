@@ -1,54 +1,105 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E1F434EDBA
-	for <lists+spice-devel@lfdr.de>; Tue, 30 Mar 2021 18:25:48 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 03D9A34F955
+	for <lists+spice-devel@lfdr.de>; Wed, 31 Mar 2021 08:56:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 063426E938;
-	Tue, 30 Mar 2021 16:25:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 76D2F6E9F9;
+	Wed, 31 Mar 2021 06:56:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B00F36E938
- for <spice-devel@lists.freedesktop.org>; Tue, 30 Mar 2021 16:25:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1617121544;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=jdqhW2iGGDFikOridKkLkAsmGzaXRpdpE/eEajtdWn8=;
- b=V08nJYPurUwtwnYAscZd7p8KCs5MYNzQrhZ3hAeC1QhALwVflY6QFoiqa09ciAtKmc3mT0
- ZZCT7tgipd7Aaf2muf4+ajbTMj+88fJzt9rmtCOlckzWKyCsMHHaUQ8bXpgFhRD6QcLyyC
- hov1iT/veNpfCUjQolm+a7IKJn4bNXc=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-39-6NyHoFjPOtydwHriWxY7Xg-1; Tue, 30 Mar 2021 12:25:40 -0400
-X-MC-Unique: 6NyHoFjPOtydwHriWxY7Xg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8217110059D2;
- Tue, 30 Mar 2021 16:25:39 +0000 (UTC)
-Received: from localhost (unknown [10.40.195.207])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 174A75C1D1;
- Tue, 30 Mar 2021 16:25:38 +0000 (UTC)
-Date: Tue, 30 Mar 2021 18:25:37 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: James Harvey <jamespharvey20@gmail.com>
-Message-ID: <20210330162537.ynxvlvaipgapvlj3@wingsuit>
-References: <CA+X5Wn5k173Z+i2vcW1nXuP1SjCNhUM104iCRMJODrbfGB5Y1A@mail.gmail.com>
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2122.outbound.protection.outlook.com [40.107.93.122])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D1ABF6E9D0
+ for <spice-devel@lists.freedesktop.org>; Wed, 31 Mar 2021 03:11:50 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QXVNhn26JuqqaqOvaI/L5cU2f8EjPi8391JMRcsr3zu9q4kGCRuatv+h7OopG5Llli1pF7UvNQFeS3uS83r8L2w2ZVj6MDk8p/L8PuvcMOIMSzHCFwl1M7wbo7/vc2OmH/c7CBbuwAi4t/5GkGyAXsh9xxS0PJQygCGDKHX9A3C3jvkjCUFsaMSMOUoGr+XJTcCfMoa68LkZMJanwkIF8e/NQ2kAWFge0rN7f/lcywkBv53G6mMfC8re+wlaRpgZMxKFTX2C4BBydZerJ6Js17uxejBp3yYczn7Vlx751DWHqIhAwg9IR8NhGaAZTMrP2F+7EIZiT1kN5hx97AWTvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=teKWP/Sit4ialxDj+kHTYaadYlbQfDoOHd/DkMAeikw=;
+ b=AN0A+nLbqv2PUlOfI32ObKv6OjmcjRS+F4C0oYOamJw9udMVzVltplZJ298OOEpALlh+sUNz3XGvP5AkHl0FkAXmiiQrppswXR+GBdSXbCWr5/I85Z5TtCjtBrk+nCnCq02PIIEegAHq2m9ElJwyaUWNTX3yeJ4YnCZnJaBB7hh1D0nhC1E+R78nyfbILVOLwSX1bNwHChCtV7ZUlpmFcnqRxZtTsgzrn3ehecPPxsLVBl9TOieyn6qiJ3bwDgoG0knmIjZ8BWSuDYxVWYUqpYHNai6KeM8oXc71CBp4UtkvDW5L/6zWcl7FWRD23ikBTRMCY4LeE9JOcAKh838PLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=augusta.edu; dmarc=pass action=none header.from=augusta.edu;
+ dkim=pass header.d=augusta.edu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=augusta.edu;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=teKWP/Sit4ialxDj+kHTYaadYlbQfDoOHd/DkMAeikw=;
+ b=MGT9GpTawwFUwN6A9UBtm23itRcDcZiZwqdVIviihv1bUJZklivvpDpTx+IvkJE/Hy2CyiZ+nO+p3A3lTozCI9yrEIQC9BRDbi+XZO8dJ35wOu5PY+Pb3e7dDPIQgS0tRqz1Dr+MK/WZbxwmpOmjAYncoKfiwdijPUwpHJoEmow=
+Received: from CH2PR03MB5237.namprd03.prod.outlook.com (2603:10b6:610:9c::17)
+ by CH0PR03MB6049.namprd03.prod.outlook.com (2603:10b6:610:bc::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.27; Wed, 31 Mar
+ 2021 03:11:44 +0000
+Received: from CH2PR03MB5237.namprd03.prod.outlook.com
+ ([fe80::edcb:8daa:914b:ee66]) by CH2PR03MB5237.namprd03.prod.outlook.com
+ ([fe80::edcb:8daa:914b:ee66%4]) with mapi id 15.20.3955.033; Wed, 31 Mar 2021
+ 03:11:44 +0000
+From: "Browning, Peter" <PEBROWNING@augusta.edu>
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Thread-Topic: FIXME advice
+Thread-Index: AQHXJdqmXA2bi0cVYk6MWWX8TMh0Ig==
+Date: Wed, 31 Mar 2021 03:11:44 +0000
+Message-ID: <CH2PR03MB52379A6D5EB225218C5E6B6FD37C9@CH2PR03MB5237.namprd03.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: lists.freedesktop.org; dkim=none (message not signed)
+ header.d=none; lists.freedesktop.org;
+ dmarc=none action=none header.from=augusta.edu;
+x-originating-ip: [24.42.128.191]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 0fd4ec3e-e91d-4ab5-a7e3-08d8f3f2b687
+x-ms-traffictypediagnostic: CH0PR03MB6049:
+x-microsoft-antispam-prvs: <CH0PR03MB60493E23AD0EF90D89688432D37C9@CH0PR03MB6049.namprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: ILGXHftVhdY6cRFl+dGosqZLfwrRlo9cgjJ1HkwNcQnDmgBFlK4VzMTTs5xZIL5eERExpcCWWjStBMwU7D/tSq0GU78gQ55/Zwxn7vltR5SwLq13NTQHgMt8p6WZZE9MlA9/EB9nqUadhveVDF8UeJGenik/NbW9jAhPXNS6XwajLWDRzNy5UoISUwzENpOY4InB6pg+GsC5+XHes+Jwn5wVSwHKd5R+vkOnxGJHWctXe2s31gW8TJg/iQEQjZEYKN2dqY5Jxjgh3f/Op/mlXASN5sdwSU18d4pqANtZ7j6xJLhzVu4tzXJkOftJAsLuUrnzcteL+kfD5wU8iAkSKXZiv+qRDYY5mR/lipPLh+ayE9yoUyjlOjUWr8OrVLqCBB6yaq91ADfmeIIymebpo8Focn9VyFcqvGsdIQLtueiOFCZEzaR/0fEJ1yiEz0U3dBA8aUeXpiL37jD7SpJQYx6BRv1p2h4LV3gRogQ2i3/KX/cujhRXIt8nDGaeFDuww9fD2BwXRDY1K4vQiEg8zPosMNHpxAI/FyR3Am7lWdY3FdnXa4wo0FoMviyNktZzTdPFBJpLXz28y3qnxp84+66AYyB7SwD/ZzITdlaWvZI=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH2PR03MB5237.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(396003)(39860400002)(366004)(136003)(376002)(346002)(7696005)(75432002)(316002)(786003)(2906002)(478600001)(86362001)(76116006)(52536014)(66476007)(66556008)(64756008)(66446008)(66946007)(55016002)(6506007)(19627405001)(71200400001)(186003)(26005)(33656002)(8936002)(9686003)(8676002)(3480700007)(7116003)(6916009)(5660300002)(4744005);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata: =?iso-8859-1?Q?CUC1y5LMJUddof5HKJvAe/TUmQ+M7WfikbgFXAPNxFNJZjq519dKsdIT3h?=
+ =?iso-8859-1?Q?U0UHyRAonAWX5S8oKHWSWkhXD2NkA1NRw8sNEz9kqzE917Hh4KanKcCOFR?=
+ =?iso-8859-1?Q?cSiXXEbH0sbmplvUbAorJwxQ4Husn6H8YS+PccAXxX4IKBgpVjw+mS/uaM?=
+ =?iso-8859-1?Q?pRbH3jJ+mTvGqM6rn74cZPkkvNb//4a8I1FkKwTzBsRMaGrsv/FJtkYa2O?=
+ =?iso-8859-1?Q?DYGBFOQNZqzV/Q+NgisHdhdFrbsjNNepCF2C7cMVy0xt3SNXfJjl1l/KiW?=
+ =?iso-8859-1?Q?mWEIkC7GfRxIJavQfE5va+C16ZvpxFjlx6aqGkS9KvrdXnQRUqxEzaUGBF?=
+ =?iso-8859-1?Q?DnCX93BGkriuddNRPci9ajRqCHf+6YrtcW7tHF4d7ks+41u2h+LRfD5lQS?=
+ =?iso-8859-1?Q?hlM8PCH4wzAocwoZWAwy1VzHW09Ky7/PJIed9YvKDRP0/40tES5OkHRn09?=
+ =?iso-8859-1?Q?QFxLWN3j6b9erTK+Fa/KypwZBydcfRFx0lT9X/dhpubMKaxBnUaQkypReN?=
+ =?iso-8859-1?Q?n6Oef2xTcNs0PtFWju5+p9kgrlfA2mobta243K4FTsDr7cDnzLOWcp6NXN?=
+ =?iso-8859-1?Q?lAU02YFYZY+SXcrNjBvSoZ0+WgbN2QDAAE+os9DVz2a/q4QK9L67Cguzoy?=
+ =?iso-8859-1?Q?HqHwTDYxZ3aAo102+7AMCQS+CuRxZkGusf6qAj1/qi4JmY256s1OA1h1Qf?=
+ =?iso-8859-1?Q?38sQAgcLxg4e5gHrUxyztbFZJfFbG1IGGD86nCwu0oKotmFs+8RLAk/V53?=
+ =?iso-8859-1?Q?XqHHMBA4Fj2byAKRgwFgF4BxTk4cQ8kxqBpTiUoWoWMiLuY3hJhMOIbh6z?=
+ =?iso-8859-1?Q?cKD6kfND5uA8r7AxtHC5SOLHOgW+5TyQx0nhNvm8YDpxpDHyvYUXdJUECz?=
+ =?iso-8859-1?Q?7DJqne2aTwdlGbB6mTmhSf9kzhB9TNRozqAYcz5dDsEQJn5FzjKk2jfk1V?=
+ =?iso-8859-1?Q?msnl/AprCZMwrnj5Rasv8sMlwWqVng+0427cfb621KwvfS95sKGUu485Kh?=
+ =?iso-8859-1?Q?zd8ZcAUh+6OGYmeEM1BEbrskwnertiw8n0QmeD9M7NIlnJ5NEvOpqQ5Yna?=
+ =?iso-8859-1?Q?K6635r7yTIO25dWNIGJ2ibtJtYI1U2oxvvZFKcI6aWZCJkYPfp6HcROarH?=
+ =?iso-8859-1?Q?+nYHsL2dONmmobCgvCzem2Ljal52ntbuwuFy0hqMtI0jrGmMM5rrUPYyKZ?=
+ =?iso-8859-1?Q?U7Y/uUPnOD0KSTUm1LDKASONN8Tg2542qXv6TqhiV2wIHLx9ZWI3wUOn/K?=
+ =?iso-8859-1?Q?XeqpHO7hewJ4alO049+sP1BtSJ4ZRDwN3EwEbWrV4fDQO8ZwhTUWVHPD6o?=
+ =?iso-8859-1?Q?t7+rHo346c/7N8PgcCyMuOBVl9jLTTjvvQU1XYfG4M1sXvM=3D?=
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-In-Reply-To: <CA+X5Wn5k173Z+i2vcW1nXuP1SjCNhUM104iCRMJODrbfGB5Y1A@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=victortoso@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Spice-devel] spice-gtk: Synchronized/duplicated input across
- multiple widgets
+X-OriginatorOrg: augusta.edu
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH2PR03MB5237.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0fd4ec3e-e91d-4ab5-a7e3-08d8f3f2b687
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Mar 2021 03:11:44.1350 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8783ac6b-d05b-4292-b483-e65f1fdfee91
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: m0uiLWhymengFhxwq07/vK4YAbNxR3qW10z7mSV4BQ9dh9XTEi048toRKRfpbCF6ozLMSI6OGd/5BcNjVXeMqg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR03MB6049
+X-Mailman-Approved-At: Wed, 31 Mar 2021 06:56:55 +0000
+Subject: [Spice-devel] FIXME advice
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,154 +111,119 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1540906546=="
+Content-Type: multipart/mixed; boundary="===============0587598929=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1540906546==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="tifcl2iktws4dlia"
-Content-Disposition: inline
+--===============0587598929==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_CH2PR03MB52379A6D5EB225218C5E6B6FD37C9CH2PR03MB5237namp_"
 
---tifcl2iktws4dlia
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--_000_CH2PR03MB52379A6D5EB225218C5E6B6FD37C9CH2PR03MB5237namp_
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Good evening,
 
-On Tue, Mar 30, 2021 at 11:41:59AM -0400, James Harvey wrote:
-> I think a very useful addition to spice would be
-> synchronized/duplicated input, so one physical input can be given
-> simultaneously to multiple spice servers.
->=20
-> The most common use for this might be system administration.  An admin
-> would be able to connect to multiple machines, and perform common
-> tasks on all of them at once, such as upgrading software, manual
-> malware scans, changing settings, etc.
+I am attempting to address the FIXME in the spice-html5 wire.js class:
 
-That means that all VMs should be very similar, in the same
-state... seems a bit error prone to me.
+/*  FIXME - it would be faster to revise the processing code to handle
+        **          multiple fragments directly.  Essentially, we should be
+        **          able to do this without any slice() or combine_array_bu=
+ffers() calls */
 
-> This exists in a few other programs.  There are ssh clients that do
-> this, but personally I use tmux's synchronized panes feature for this
-> after I've started different ssh connections in them.  I'm not aware
-> of any linux GUI remote clients with this feature, and the only
-> Windows GUI remote clients I'm aware of with it are BlueStacks and
-> Nox, which are android emulators built upon VM software.
+I am having difficulties understanding the code surrounding this however. I=
+ was hoping that I could get some advice or insight into the way the buffer=
+ and callback structure works. Specifically, how the process_message functi=
+on processes data and how the requesting and needed functions interact. I a=
+m working to make optimizations to improve client side performance on low-e=
+nd machines. Any insight or advice you can offer me would be of great help.
 
-ssh is a shell in the remote machine. It can have different
-failures but the scope is smaller than spice, I think.
+Best regards,
 
-> Obviously, it is on the user to ensure input works as intended.
-> If servers have different resolutions, layouts, icon
-> placements, if one hasn't finished a previous task, etc,
-> identical input may not have identical behavior in all clients.
->=20
-> Before understanding the extent of what spice-gtk handles, I
-> approached the remmina developers, largely because one instance
-> of their client can already handle multiple connections in tabs
-> or separate windows.  Now understanding that spice-gtk receives
-> the physical mouse input and sends it to the spice server, it
-> looks to me by far that the easiest way to do this is make a
-> chance in spice-gtk and then have the clients do whatever is
-> necessary to inform the widgets to enter/exit this mode.
->=20
-> In tmux, the "setw synchronize-panes" command toggles
-> synchronizing input among all panes in a window, so giving
-> input to any of them is duplicated in the others.  There's no
-> master pane that has to be typed into.
->=20
-> In the Windows android emulators BlueStacks and Nox, their
-> synchronized input feature allows you on a remote connection
-> window to select other running connections to receive
-> synchronized input from that window.  The one you start from is
-> the master window, which you have to give input to for it to be
-> duplicated.  If you give input into one of the other windows
-> you've selected to receive synchronization,
-> the input is only given to that window, which is useful if a window
-> becomes unsynchronized to easily bring it back to where the others are
-> without needing to toggle the overall synchronization or turn
-> including that window off.
->=20
-> I think it would be nice if a spice client could tell spice-gtk
-> to enter/exit either of these modes: synchronized input among a
-> group of spice-gtk widgets; or synchronized input made in a
-> master spice-gtk widget to be given to a number of spice-gtk
-> widgets.
->=20
-> I think a restriction that spice-gtk widgets can only
-> synchronize with other widgets running on the same machine
-> would simplify implementation and security concerns.  Perhaps
-> the spice developers would want only widgets running within the
-> same process to be able to synchronize.  In that case, remmina
-> might be most easily able to implement this feature, but other
-> clients could add the ability to run multiple connections
-> within a single process to be able to implement it as well.
->=20
-> Is this something someone would like to implement?  If not, is
-> it something that someone would be willing to mentor, giving me
-> locations of existing code that likely need changes, etc?  And
-> if I could get it working, that the feature would likely be
-> accepted as a pull request rather than denied as an unwanted
-> feature?
+Peter Browning
 
-IMHO a better approach would be a guest component that handles
-the operations that you are looking for. It might seem a bit
-bigger project but spice already has a port channel that can make
-client <-> guest communication such as we do with shared folder
-feature.
+--_000_CH2PR03MB52379A6D5EB225218C5E6B6FD37C9CH2PR03MB5237namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Actually, I recall that this kind of project was explored before
-by Fleet commander developers [0], not sure if that's what they
-have done.
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Good evening,</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+I am attempting to address the FIXME in the spice-html5 wire.js class:</div=
+>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<blockquote itemscope=3D"" itemtype=3D"https://schemas.microsoft.com/Quoted=
+Text" style=3D"border-left: 3px solid rgb(200, 200, 200); border-top-color:=
+ rgb(200, 200, 200); border-right-color: rgb(200, 200, 200); border-bottom-=
+color: rgb(200, 200, 200); padding-left: 1ex; margin-left: 0.8ex; color: rg=
+b(102, 102, 102);">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<div style=3D"color:#d4d4d4;background-color:#1e1e1e;font-family:'Droid San=
+s Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight:normal;f=
+ont-size:14px;line-height:19px">
+<span><span style=3D"color:#6a9955">/* &nbsp;FIXME - it would be faster to =
+revise the processing code to handle</span></span>
+<div><span style=3D"color:#6a9955">&nbsp; &nbsp; &nbsp; &nbsp; ** &nbsp; &n=
+bsp; &nbsp; &nbsp; &nbsp;multiple fragments directly. &nbsp;Essentially, we=
+ should be</span></div>
+<span><span style=3D"color:#6a9955">&nbsp; &nbsp; &nbsp; &nbsp; ** &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp;able to do this without any slice() or combine_ar=
+ray_buffers() calls */</span></span></div>
+</div>
+</blockquote>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+I am having difficulties understanding the code surrounding this however. I=
+ was hoping that I could get some advice or insight into the way the buffer=
+ and callback structure works. Specifically, how the process_message functi=
+on processes data and how the requesting
+ and needed functions interact. I am working to make optimizations to impro=
+ve client side performance on low-end machines. Any insight or advice you c=
+an offer me would be of great help.</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Best regards,</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+Peter Browning</div>
+</body>
+</html>
 
-Anyway, spice-gtk tries to keep the same approach as any other
-desktop application so that means spice-gtk only receive input
-when the widget has the keyboard grabbed (like when you click on
-it). Working around this would be bad in general, from security
-POV or simply too hard (e.g: in Wayland).
+--_000_CH2PR03MB52379A6D5EB225218C5E6B6FD37C9CH2PR03MB5237namp_--
 
-I think the best way forward with your idea would be some sort of
-multicast with usb redirection, so you can connect a usb keyboard
-to multiple vms. You probably can work on some POC without spice,
-by having two QEMU configured with usb-redir over tcp and connect
-to them with usbredirect [1]. After you get that working (most
-patches here would be in usbredir I think) it would be much
-easier or even trival (no changes) in spice-gtk to do what you
-want.
-
-[0] https://fleet-commander.org/documentation.html
-[1] https://gitlab.freedesktop.org/spice/usbredir/-/merge_requests/2
-
-Cheers,
-Victor
-
---tifcl2iktws4dlia
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmBjUQEACgkQl9kSPeN6
-SE8XpA//avcxiODHv0S4hoPX7H/7DJBH5GxAsWF4jqh5qTZHux/8jHJIanQrYSzq
-ovQHK9zsU2C9RrHCtUX516YTH7bb6TrjPHyAgJZJb47ojgzHcpMYLg6hbrOZ21iB
-pqcb9GF4URCLszH+aGI/6FZzLFgn1WZmrupfbvxop4lOb6K1U4/nuHUtnG/umsbu
-oOchWKiYV1CA41EuVb1x9yJYn/orr4D9eRUuhS0//vjI/uUXTe/JkaVBQRQoAALR
-n1a8kmb0KAl/2wjoflaLE/2hdgbbBsCJJ0jPMdbu290En16gvYK7tVDTN9tr5Z70
-SufsSAVyvuw+KImG8FTPjookkfmOP84Zcg/cWni/c0bi3Hjgu7IQM4AKRQBBHrOy
-63R0afcXL15AY8UWSKe8HGvJ1wWskeTWxnelPHn2qTwOpDS9JHu/6wPFtiBrMODL
-7h1x2SRVHcObrHCxgWS7bRpII65/IcBzEoYbrQ3O2KCpSE3wHYW+s7HE9rquXclG
-NE4si35k3A6gKat3CKXLAju4k+dMt2zp/mA26CIbyWvl0nFBIdJVqrpnQzd9C+z4
-SE+D5PVzuFshJpGtHYLWfmqr9BE7n1tbMlc8E+KyVWvTqkHwdwAHJ2ljzmWHQZiO
-uIIbJXndickkGv8ptEAZBRUt+L48wozHUgPgP3a8jAkKy9lcNCo=
-=zfYz
------END PGP SIGNATURE-----
-
---tifcl2iktws4dlia--
-
-
---===============1540906546==
+--===============0587598929==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -218,5 +234,4 @@ Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
 
---===============1540906546==--
-
+--===============0587598929==--
