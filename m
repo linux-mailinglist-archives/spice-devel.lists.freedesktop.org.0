@@ -1,31 +1,59 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76CE03581F5
-	for <lists+spice-devel@lfdr.de>; Thu,  8 Apr 2021 13:34:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50BFF358217
+	for <lists+spice-devel@lfdr.de>; Thu,  8 Apr 2021 13:39:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 624566EAA1;
-	Thu,  8 Apr 2021 11:34:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CA01C6EAB8;
+	Thu,  8 Apr 2021 11:39:22 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 524746EAA3;
- Thu,  8 Apr 2021 11:34:06 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id CF712B229;
- Thu,  8 Apr 2021 11:34:04 +0000 (UTC)
-To: Daniel Vetter <daniel@ffwll.ch>
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6B9AE6EAB0
+ for <spice-devel@lists.freedesktop.org>; Thu,  8 Apr 2021 11:39:22 +0000 (UTC)
+Received: by mail-wr1-x429.google.com with SMTP id 12so1777812wrz.7
+ for <spice-devel@lists.freedesktop.org>; Thu, 08 Apr 2021 04:39:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=3KNkyx85LPCD228SCseTYxmoSL60uBwuVlcm/wUgEOA=;
+ b=fHGvn4RtOh030q1DAmBBWDlKqWYLlxDGmURjTv7oVbTa5wMtYSFRpbek/G42R0PKpV
+ aE0TKiuldac6kmvfVsttDQeduCm7/kh7ppKbQ0OqqEOcC7bQsGh95+j0VPHH6dfpbXtI
+ 7Frxo16mo7e2jtV4VAoUmPi9ONL3w7YDQ9Thg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=3KNkyx85LPCD228SCseTYxmoSL60uBwuVlcm/wUgEOA=;
+ b=jeeKUxnELbbslUbcvPfbyXBXZW2Y4fe5W3pDQau/vsbD7dLPDNsoE5vM1T5QkmHZqw
+ ysayyndhR/80jpN8oQktY7mDyHaZpFcIfiNfaE5oZ3CkGVnt0GikzpcMAofZ0jyxrIQd
+ TIrc5KDGZt8JYeQnNcnd2ACyVseDpK5Cgw/BO5kmSdPcATVw3mbnB8zXK2GPqoDz4UCW
+ Go8pnBXyRvY4B6500eqzfoLMgKS7RrlpTi7W8n9W9ygJYwzJcSFVyyplS8KP2Vv0No07
+ lwuBUk1KdZLS6zz2pxgXDSzjcKA4VARsSeFKJzARCyz4papMRS2jbVDnX/N1+RPlVj4l
+ Mwvw==
+X-Gm-Message-State: AOAM533RIeuHrb7CKJcOtgbUZNAltHEf2XQyniKreUoeBRc46YeG4IZf
+ wiovhn8Bxqo1sfBqVUj59zlQig==
+X-Google-Smtp-Source: ABdhPJzUf3HqHqqyVAN4SVwOvO1MafejNTLSa8pbE71k+GrvSgkhvWynSqpxLaLkX8Qygt5PkZkkjA==
+X-Received: by 2002:a5d:6443:: with SMTP id d3mr10783874wrw.292.1617881961181; 
+ Thu, 08 Apr 2021 04:39:21 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id k131sm11817858wmf.39.2021.04.08.04.39.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Apr 2021 04:39:20 -0700 (PDT)
+Date: Thu, 8 Apr 2021 13:39:18 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <YG7rZiF0IgbTDVPM@phenom.ffwll.local>
 References: <20210406082942.24049-1-tzimmermann@suse.de>
  <YG7mHvmhPZIPA37B@phenom.ffwll.local>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <52dd3e3f-a893-3d90-e642-df01a033490a@suse.de>
-Date: Thu, 8 Apr 2021 13:34:03 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ <52dd3e3f-a893-3d90-e642-df01a033490a@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <YG7mHvmhPZIPA37B@phenom.ffwll.local>
+Content-Disposition: inline
+In-Reply-To: <52dd3e3f-a893-3d90-e642-df01a033490a@suse.de>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
 Subject: Re: [Spice-devel] [PATCH 0/4] drm: Generic dumb_map_offset for
  TTM-based drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -41,131 +69,103 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- kraxel@redhat.com, spice-devel@lists.freedesktop.org, bskeggs@redhat.com
-Content-Type: multipart/mixed; boundary="===============0214182255=="
+ kraxel@redhat.com, Daniel Vetter <daniel@ffwll.ch>,
+ spice-devel@lists.freedesktop.org, bskeggs@redhat.com
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0214182255==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl"
+On Thu, Apr 08, 2021 at 01:34:03PM +0200, Thomas Zimmermann wrote:
+> Hi
+> =
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl
-Content-Type: multipart/mixed; boundary="qHPZSfiFLTcaOfLLakODrcFJUrLuyNz8z";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel@ffwll.ch>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- kraxel@redhat.com, spice-devel@lists.freedesktop.org, bskeggs@redhat.com
-Message-ID: <52dd3e3f-a893-3d90-e642-df01a033490a@suse.de>
-Subject: Re: [PATCH 0/4] drm: Generic dumb_map_offset for TTM-based drivers
-References: <20210406082942.24049-1-tzimmermann@suse.de>
- <YG7mHvmhPZIPA37B@phenom.ffwll.local>
-In-Reply-To: <YG7mHvmhPZIPA37B@phenom.ffwll.local>
+> Am 08.04.21 um 13:16 schrieb Daniel Vetter:
+> > On Tue, Apr 06, 2021 at 10:29:38AM +0200, Thomas Zimmermann wrote:
+> > > The implementation of drm_driver.dumb_map_offset is the same for seve=
+ral
+> > > TTM-based drivers. Provide a common function in GEM-TTM helpers.
+> > =
 
---qHPZSfiFLTcaOfLLakODrcFJUrLuyNz8z
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+> > Out of curiosity, why does this not fit for radeon/amdgpu?
+> =
 
-Hi
-
-Am 08.04.21 um 13:16 schrieb Daniel Vetter:
-> On Tue, Apr 06, 2021 at 10:29:38AM +0200, Thomas Zimmermann wrote:
->> The implementation of drm_driver.dumb_map_offset is the same for sever=
-al
->> TTM-based drivers. Provide a common function in GEM-TTM helpers.
->=20
-> Out of curiosity, why does this not fit for radeon/amdgpu?
-
-These drivers perform additional permission checks in their implementatio=
+> These drivers perform additional permission checks in their implementatio=
 ns.
+> =
 
-But those checks are also part of the actual mmap code. I want to=20
-propose a patch to use the generic drm_gem_ttm_map_offset in=20
-amdgpu/radeon, and then rely on mmap to fail if necessary. It might=20
-result in a longer discussion, so that's for another patchset.
+> But those checks are also part of the actual mmap code. I want to propose=
+ a
+> patch to use the generic drm_gem_ttm_map_offset in amdgpu/radeon, and then
+> rely on mmap to fail if necessary. It might result in a longer discussion,
+> so that's for another patchset.
 
-Best regards
-Thomas
+Ah cool, makes sense.
+-Daniel
 
-> -Daniel
->=20
->>
->> Thomas Zimmermann (4):
->>    drm/gem-ttm-helper: Provide helper for struct
->>      drm_driver.dumb_map_offset
->>    drm/vram-helper: Use drm_gem_ttm_dumb_map_offset()
->>    drm/nouveau: Use drm_gem_ttm_dumb_map_offset()
->>    drm/qxl: Use drm_gem_ttm_dumb_map_offset()
->>
->>   drivers/gpu/drm/drm_gem_ttm_helper.c      | 33 ++++++++++++++++
->>   drivers/gpu/drm/drm_gem_vram_helper.c     | 48 ---------------------=
---
->>   drivers/gpu/drm/nouveau/nouveau_display.c | 18 ---------
->>   drivers/gpu/drm/nouveau/nouveau_display.h |  2 -
->>   drivers/gpu/drm/nouveau/nouveau_drm.c     |  3 +-
->>   drivers/gpu/drm/qxl/qxl_drv.c             |  3 +-
->>   drivers/gpu/drm/qxl/qxl_drv.h             |  3 --
->>   drivers/gpu/drm/qxl/qxl_dumb.c            | 17 --------
->>   drivers/gpu/drm/qxl/qxl_ioctl.c           |  4 +-
->>   drivers/gpu/drm/qxl/qxl_object.h          |  5 ---
->>   include/drm/drm_gem_ttm_helper.h          |  5 ++-
->>   include/drm/drm_gem_vram_helper.h         |  7 +---
->>   12 files changed, 45 insertions(+), 103 deletions(-)
->>
->> --
->> 2.30.2
->>
->=20
+> =
 
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+> Best regards
+> Thomas
+> =
+
+> > -Daniel
+> > =
+
+> > > =
+
+> > > Thomas Zimmermann (4):
+> > >    drm/gem-ttm-helper: Provide helper for struct
+> > >      drm_driver.dumb_map_offset
+> > >    drm/vram-helper: Use drm_gem_ttm_dumb_map_offset()
+> > >    drm/nouveau: Use drm_gem_ttm_dumb_map_offset()
+> > >    drm/qxl: Use drm_gem_ttm_dumb_map_offset()
+> > > =
+
+> > >   drivers/gpu/drm/drm_gem_ttm_helper.c      | 33 ++++++++++++++++
+> > >   drivers/gpu/drm/drm_gem_vram_helper.c     | 48 --------------------=
+---
+> > >   drivers/gpu/drm/nouveau/nouveau_display.c | 18 ---------
+> > >   drivers/gpu/drm/nouveau/nouveau_display.h |  2 -
+> > >   drivers/gpu/drm/nouveau/nouveau_drm.c     |  3 +-
+> > >   drivers/gpu/drm/qxl/qxl_drv.c             |  3 +-
+> > >   drivers/gpu/drm/qxl/qxl_drv.h             |  3 --
+> > >   drivers/gpu/drm/qxl/qxl_dumb.c            | 17 --------
+> > >   drivers/gpu/drm/qxl/qxl_ioctl.c           |  4 +-
+> > >   drivers/gpu/drm/qxl/qxl_object.h          |  5 ---
+> > >   include/drm/drm_gem_ttm_helper.h          |  5 ++-
+> > >   include/drm/drm_gem_vram_helper.h         |  7 +---
+> > >   12 files changed, 45 insertions(+), 103 deletions(-)
+> > > =
+
+> > > --
+> > > 2.30.2
+> > > =
+
+> > =
+
+> =
+
+> -- =
+
+> Thomas Zimmermann
+> Graphics Driver Developer
+> SUSE Software Solutions Germany GmbH
+> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
+> (HRB 36809, AG N=FCrnberg)
+> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
+> =
 
 
---qHPZSfiFLTcaOfLLakODrcFJUrLuyNz8z--
 
---wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
 
------BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmBu6iwFAwAAAAAACgkQlh/E3EQov+Bo
-xA/+N/inEFG7DAxEuVBieUUeYry0VZLHkDhsuHDNCkbAxyPqlhO/SSDCCESlPAsm7FgzLYuklbhm
-aB7wxekjdILBNWFLV0l6ymkF7lzTxdEZi2pi/Or8iJxEhOohWNyahKXsLfzgfqeN7sqjHNi/5h3B
-HZnfLn24dQmOs767YvshMRDMkP7t4jIp5UM2XCHs/sDlOC6fevqOJCgVSZ65gj/WvvpfopbsLKnT
-xibHhMyRlFxYwuAvamzcP6j364nN5yaVWDYBX2XYrTGCRV8BcN5IIvhq3464xOfwyFLUp/TSynL1
-tm+AoFDJEJJBkDUjeBsqryu3ZcL+7fWaiYDY5vMTXb7nO/wh7mChfatnTiw2XlKHJ40ERuPRJ7iW
-hQ+FyJdpx9HSTjLqgvJxROnmOa2zix+eO4ORtnqrDMCUpmDaeHkuRGadwcZR73/pA53hBiEKjvan
-4XbhDa+njjUEtLLkAoFl0NaAfd+ezN2xFwv4iYA0NnGxDvzStWjOWxZphqunDTMMufu3p1e1/IZE
-1E+4p9s8GSXsp0tPH+pGns5tt2HKBzaLuS+Cbbwu4nJLNuLTn8PKGhvFvjR82Fi6jUBzrV5Gs3yx
-PlFhk+sWo1qm0yJWjSvW/civrO64AdAl8jGcMcPU6dLY92TfFksZwkXeq7SL7+FSKolX4GK93lBi
-aBE=
-=bGEM
------END PGP SIGNATURE-----
+-- =
 
---wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl--
-
---===============0214182255==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0214182255==--
