@@ -1,51 +1,72 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C9CE357526
-	for <lists+spice-devel@lfdr.de>; Wed,  7 Apr 2021 21:49:22 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CEF5357E0F
+	for <lists+spice-devel@lfdr.de>; Thu,  8 Apr 2021 10:30:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E029C6E980;
-	Wed,  7 Apr 2021 19:49:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 97F876EA26;
+	Thu,  8 Apr 2021 08:30:53 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 306 seconds by postgrey-1.36 at gabe;
- Wed, 07 Apr 2021 17:01:08 UTC
-Received: from o1.3nn.shared.sendgrid.net (o1.3nn.shared.sendgrid.net
- [167.89.100.129])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 619906E0EE
- for <spice-devel@lists.freedesktop.org>; Wed,  7 Apr 2021 17:01:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.net;
- h=from:subject:mime-version:to:content-type:content-transfer-encoding;
- s=smtpapi; bh=flku4k7KKl3vMncirpp/683XvNasHYQkE2IYZ/J0L/M=;
- b=LnFoZlurFI/JMa/uqfwLuCRuQ14wNX58G+3PjK1+GBv+TZW/+9yDN+J/vUqC8nSBrfaj
- hJlpUUxynC/68/Of5+mMktcz1BtNmRnk08/zrBj2rWVes3DNNdWZ7SKds1SU8QAAyoMlXs
- bOimLjfoCHxjsmyqWDiVB7wBRN83aerjU=
-Received: by filterdrecv-747b54644c-g7kx2 with SMTP id
- filterdrecv-747b54644c-g7kx2-14-606DE41F-13
- 2021-04-07 16:55:59.298466285 +0000 UTC m=+1122719.237370794
-Received: from [192.168.0.125] (unknown)
- by ismtpd0179p1mdw1.sendgrid.net (SG) with ESMTP id yitck2s7R8qxVNYD0b8VYA
- for <spice-devel@lists.freedesktop.org>;
- Wed, 07 Apr 2021 16:55:59.137 +0000 (UTC)
-From: Bob Britton <bob@robertbritton.com>
-Message-ID: <63dfcd57-5240-9400-b12d-3060da2048dd@robertbritton.com>
-Date: Wed, 07 Apr 2021 16:55:59 +0000 (UTC)
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
+ [66.111.4.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DFA4F6E9E9;
+ Thu,  8 Apr 2021 07:58:31 +0000 (UTC)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 153465C0158;
+ Thu,  8 Apr 2021 03:58:26 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute6.internal (MEProxy); Thu, 08 Apr 2021 03:58:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=
+ date:from:to:cc:subject:message-id:references:mime-version
+ :content-type:in-reply-to; s=fm2; bh=ivSego4I7bZ5eKPvELmNaata1GV
+ NDZ6LFRSh0KXK3/s=; b=QYYGFdH44pO2Brvkt6h7KBB2+iF3JvIxNLLyLozZSNq
+ 0/9i8XWoehGstw8qZj4OneximALk8Al3bZjWkd/x7EVOmrkdddsI/C1tLCMGwm+s
+ v7ZZ3seD+zsnDZGQomRHyY7IgHF8FkF2pKUVZxHKHT3NXu/49Lir+1yUNLYN0OSc
+ fYNRvFb00vS+EQqnuPT4KLvUZkp5EWI27727ZvHsMhECm5lGXiudgbjot60Xkgdb
+ nUTldisoOBfS9YHyEDAFLpuof1ATnFKoiXTDOzpxHi3fgXhfwuDcIz1nUObUdd5R
+ 8EuFEV6M12FCH0fCGxXFPGuxQo6aJxBgPPbqzGAwX1w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=ivSego
+ 4I7bZ5eKPvELmNaata1GVNDZ6LFRSh0KXK3/s=; b=rnsqcrBJjqOEY/S7Xh5oeQ
+ MBRGIS4lT5HcFM4R6cURTEKooZzLu3I3DYttwlHow+VpTgYDNRGBvBojuiubp8c3
+ BLpBmhf/pgPwmw2Y5DNHfEE/T0SRFLI0dqpclqV3k44HvKLkVGP9ll8WGP4qG0zZ
+ ETb7yjLoQomCgoj+zAVK8Z7DvKBQPwsZl3ARm06uH8IhBOKQWl45BGwdnf/MRGqd
+ r7TmIsbPhELd8x08nGa2wasS3/2Isqu+V3RwVvyStv1KpQtk16mbhu05VcDs1EFk
+ Ynogcpgt6MaIRtVp0WEheuzN7+LVNIsySF/OniDf0CDqJel9QrjzuNSOrlPmpM1g
+ ==
+X-ME-Sender: <xms:oLduYDHcmnIMqNmYCWPZuTEZfIYXjkhDfEA6iKLjVHKmV10Zfqo22g>
+ <xme:oLduYAXj5bB9ftt8RZsN316A6HmRUWlk_EDIu-Hl8231IxEbAMt61GvyPglIAZhkS
+ qV9Ut-DJ19ocxDWvIs>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudejkedguddviecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+ enucfjughrpeffhffvuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
+ mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
+ htthgvrhhnpeelkeeghefhuddtleejgfeljeffheffgfeijefhgfeufefhtdevteegheei
+ heegudenucfkphepledtrdekledrieekrdejieenucevlhhushhtvghrufhiiigvpedtne
+ curfgrrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggvrhhnohdrthgvtghh
+X-ME-Proxy: <xmx:oLduYFJ_1HEAfAiNW9uKySDw2WoWoU-7C_Ns6N8_BgFXkQvtCOMF8A>
+ <xmx:oLduYBFOWSIpgaDU658cXNdjYlQ3FRm2u1PWP_OpDtMGyfS-olBBqA>
+ <xmx:oLduYJVHGc5W6knP_Hxkh4FxppzptGc5Vl23fn7OK0QoZ09zpaRjaw>
+ <xmx:orduYIE40mZx-jQjW4zFb_irlF7oDY06Vvke2o2XCWSiHQjdI7uRAQ>
+Received: from localhost (lfbn-tou-1-1502-76.w90-89.abo.wanadoo.fr
+ [90.89.68.76])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 04150108005F;
+ Thu,  8 Apr 2021 03:58:23 -0400 (EDT)
+Date: Thu, 8 Apr 2021 09:58:21 +0200
+From: Maxime Ripard <maxime@cerno.tech>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20210408075821.bbmxlurmihd4ghpx@gilmour>
+References: <20210406082942.24049-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-X-SG-EID: =?us-ascii?Q?jLMcMf1AkzjvdIafHXBz4mlG9tc1GXutMso97OfpGhp02L8vPdLWt+ZNE3R7lo?=
- =?us-ascii?Q?c4NT+TgFEHmESo40whH5PwrXkN+Fuyd4htrsWxh?=
- =?us-ascii?Q?kNg4E9X1uj20g7tAOsBpKf5RCktyEBzPF+bY0Ft?=
- =?us-ascii?Q?piGSuK24wacxXqyJaSA+8rZyDtSvpIdtcYAHjRK?=
- =?us-ascii?Q?GMEW0lTte2id75pLlHA6XHZIu4lDejXs6vnm0kd?=
- =?us-ascii?Q?SJXJo8tpT7+ss=2F+l3LMtNclUPNZ2+qIBNIEyKrm?=
- =?us-ascii?Q?P8X1mKp8YrP0KoQ6VRswA=3D=3D?=
-To: spice-devel@lists.freedesktop.org
-X-Entity-ID: vRnUm+PqaJPxRTq8n1yo1w==
-Content-Language: en-US
-X-Mailman-Approved-At: Wed, 07 Apr 2021 19:49:19 +0000
-Subject: [Spice-devel] Helping with development...
+In-Reply-To: <20210406082942.24049-1-tzimmermann@suse.de>
+X-Mailman-Approved-At: Thu, 08 Apr 2021 08:30:52 +0000
+Subject: Re: [Spice-devel] [PATCH 0/4] drm: Generic dumb_map_offset for
+ TTM-based drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,67 +78,56 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, bskeggs@redhat.com, daniel@ffwll.ch,
+ spice-devel@lists.freedesktop.org, kraxel@redhat.com
+Content-Type: multipart/mixed; boundary="===============0524795319=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Spice team,
 
- =A0Thank you for all your hard work creating Spice.
+--===============0524795319==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="nhsoqxufqmlyazgx"
+Content-Disposition: inline
 
- =A0I'm running a company where I provide virtual desktops to my =
 
-customers. Most of my customers want their virtual desktops to have =
+--nhsoqxufqmlyazgx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-hardware GPU acceleration for smooth video playback, games, and such. So =
+On Tue, Apr 06, 2021 at 10:29:38AM +0200, Thomas Zimmermann wrote:
+> The implementation of drm_driver.dumb_map_offset is the same for several
+> TTM-based drivers. Provide a common function in GEM-TTM helpers.
 
-the experience would be much more like being on a native machine.
+For the series:
+Acked-by: Maxime Ripard <maxime@cerno.tech>
 
- =A0I've looked at many different options out there, and there really =
+Maxime
 
-isn't one that fits the bill.
+--nhsoqxufqmlyazgx
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I have some questions for you all on how I can put my resources into =
+-----BEGIN PGP SIGNATURE-----
 
-helping spice add hardware encode/decode to it's streaming.
+iHUEABYIAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYG63nQAKCRDj7w1vZxhR
+xRYHAQCB5YdMvJQCmZrSZdd7iTzptJmugGwvmitemDPO09KmEwD+MN5lN6korTN4
+2ZX4gbC41r49DjVpw79WiUzkQ4ReUg8=
+=KBmF
+-----END PGP SIGNATURE-----
 
- From what I've read, it seems that it's possible to add a plugin such =
+--nhsoqxufqmlyazgx--
 
-as virgil to allow for 3d acceleration. While that project is aiming at =
-
-creating a full virtual 3d graphics device, is it possible or maybe even =
-
-easier to create a plugin that does hardware encode/decode on the host =
-
-gpu(s)?
-
-And that leads me to my next question, would that be the best place to =
-
-add hardware acceleration? Or should the focus be elsewhere?
-
-I've played with Parsec quite a bit, and it's streaming abilities are =
-
-amazing, allowing for 3d games to be played remotely with very little =
-
-latency.
-
-Obviously nothing here is simple, but I'd like to get my developer =
-
-resources aimed in the right place, and any thoughts/feedback from your =
-
-team would be greatly appreciated.
-
-Thanks in advance, and I look forward to having my team help with the =
-
-project.
-
-Best,
-
-- Bob
-
+--===============0524795319==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0524795319==--
