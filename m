@@ -2,69 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CEF5357E0F
-	for <lists+spice-devel@lfdr.de>; Thu,  8 Apr 2021 10:30:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2676358286
+	for <lists+spice-devel@lfdr.de>; Thu,  8 Apr 2021 13:54:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 97F876EA26;
-	Thu,  8 Apr 2021 08:30:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E46676EABB;
+	Thu,  8 Apr 2021 11:54:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DFA4F6E9E9;
- Thu,  8 Apr 2021 07:58:31 +0000 (UTC)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 153465C0158;
- Thu,  8 Apr 2021 03:58:26 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Thu, 08 Apr 2021 03:58:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=
- date:from:to:cc:subject:message-id:references:mime-version
- :content-type:in-reply-to; s=fm2; bh=ivSego4I7bZ5eKPvELmNaata1GV
- NDZ6LFRSh0KXK3/s=; b=QYYGFdH44pO2Brvkt6h7KBB2+iF3JvIxNLLyLozZSNq
- 0/9i8XWoehGstw8qZj4OneximALk8Al3bZjWkd/x7EVOmrkdddsI/C1tLCMGwm+s
- v7ZZ3seD+zsnDZGQomRHyY7IgHF8FkF2pKUVZxHKHT3NXu/49Lir+1yUNLYN0OSc
- fYNRvFb00vS+EQqnuPT4KLvUZkp5EWI27727ZvHsMhECm5lGXiudgbjot60Xkgdb
- nUTldisoOBfS9YHyEDAFLpuof1ATnFKoiXTDOzpxHi3fgXhfwuDcIz1nUObUdd5R
- 8EuFEV6M12FCH0fCGxXFPGuxQo6aJxBgPPbqzGAwX1w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=ivSego
- 4I7bZ5eKPvELmNaata1GVNDZ6LFRSh0KXK3/s=; b=rnsqcrBJjqOEY/S7Xh5oeQ
- MBRGIS4lT5HcFM4R6cURTEKooZzLu3I3DYttwlHow+VpTgYDNRGBvBojuiubp8c3
- BLpBmhf/pgPwmw2Y5DNHfEE/T0SRFLI0dqpclqV3k44HvKLkVGP9ll8WGP4qG0zZ
- ETb7yjLoQomCgoj+zAVK8Z7DvKBQPwsZl3ARm06uH8IhBOKQWl45BGwdnf/MRGqd
- r7TmIsbPhELd8x08nGa2wasS3/2Isqu+V3RwVvyStv1KpQtk16mbhu05VcDs1EFk
- Ynogcpgt6MaIRtVp0WEheuzN7+LVNIsySF/OniDf0CDqJel9QrjzuNSOrlPmpM1g
- ==
-X-ME-Sender: <xms:oLduYDHcmnIMqNmYCWPZuTEZfIYXjkhDfEA6iKLjVHKmV10Zfqo22g>
- <xme:oLduYAXj5bB9ftt8RZsN316A6HmRUWlk_EDIu-Hl8231IxEbAMt61GvyPglIAZhkS
- qV9Ut-DJ19ocxDWvIs>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudejkedguddviecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeelkeeghefhuddtleejgfeljeffheffgfeijefhgfeufefhtdevteegheei
- heegudenucfkphepledtrdekledrieekrdejieenucevlhhushhtvghrufhiiigvpedtne
- curfgrrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:oLduYFJ_1HEAfAiNW9uKySDw2WoWoU-7C_Ns6N8_BgFXkQvtCOMF8A>
- <xmx:oLduYBFOWSIpgaDU658cXNdjYlQ3FRm2u1PWP_OpDtMGyfS-olBBqA>
- <xmx:oLduYJVHGc5W6knP_Hxkh4FxppzptGc5Vl23fn7OK0QoZ09zpaRjaw>
- <xmx:orduYIE40mZx-jQjW4zFb_irlF7oDY06Vvke2o2XCWSiHQjdI7uRAQ>
-Received: from localhost (lfbn-tou-1-1502-76.w90-89.abo.wanadoo.fr
- [90.89.68.76])
- by mail.messagingengine.com (Postfix) with ESMTPA id 04150108005F;
- Thu,  8 Apr 2021 03:58:23 -0400 (EDT)
-Date: Thu, 8 Apr 2021 09:58:21 +0200
-From: Maxime Ripard <maxime@cerno.tech>
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 75F676EA95
+ for <spice-devel@lists.freedesktop.org>; Thu,  8 Apr 2021 11:16:50 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id k128so1001740wmk.4
+ for <spice-devel@lists.freedesktop.org>; Thu, 08 Apr 2021 04:16:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=2rGXrZ6/Y1EiQNPy9lkbFWL4CJZGqYO2LJVNvjD1io4=;
+ b=OHopb0BGApE+w2iQb+y029BFxSz9rLKFQjmM26EOnFqolAo53AqcdxDPcgH4GGshsx
+ BDo2R1Ngn8YhwFfhU1bRXkxhUkC8+CvFuLK4r/rDY/d45eKlxh8hkZKuhBPd4fzNvmq9
+ 9HQn1Z6vWXn5rxmfhIbP53Ja69zxlwtLV+/WQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=2rGXrZ6/Y1EiQNPy9lkbFWL4CJZGqYO2LJVNvjD1io4=;
+ b=FOjNc+L29+tV8B5MEwJKZ+SSNU/x3h51VB4ruSLmPeU290qzucEx1zRph2FpYi3lcn
+ KFiR3tFkMHNphLQfjGLNRJpYViFP8tZdOOMeq3yKqgHIm4m+vG6FABkoP3dfZfmdWuuE
+ heNj4RWRQkqoU5DyclsHaXYYKTo6lYxzhyi/wTsAc+oRoxAKvixMelv1RM1Ehn8RGesi
+ VZ8eWEg/lle8uAobiE9kLM4j6NPd90k6veN8xBup+WU+eyaVOcfWQRk+HNlN1alMv+4I
+ wc7sQ9KPWHizWC6cUO+umDpqkgXRRszYJOtnSHA0rMLQy+3fq3Dm/I/VDnYb+IVixeRn
+ qt7Q==
+X-Gm-Message-State: AOAM533VMSDPxZCcOoHcHHppRVhM0jbJyiMBYEmVJbx886OF2rigi+Nh
+ QYIzcaZOzUSQMLIYGqonSds0/g==
+X-Google-Smtp-Source: ABdhPJxQtEIMNNWiroexEm/m5G85YkQS1wiT3VlgjBBAAWlukovDIO0E7vB7vyBxMtzOmujVy8JS4g==
+X-Received: by 2002:a05:600c:89a:: with SMTP id
+ l26mr7826257wmp.179.1617880609163; 
+ Thu, 08 Apr 2021 04:16:49 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id b6sm9577334wrv.12.2021.04.08.04.16.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Apr 2021 04:16:48 -0700 (PDT)
+Date: Thu, 8 Apr 2021 13:16:46 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20210408075821.bbmxlurmihd4ghpx@gilmour>
+Message-ID: <YG7mHvmhPZIPA37B@phenom.ffwll.local>
 References: <20210406082942.24049-1-tzimmermann@suse.de>
 MIME-Version: 1.0
+Content-Disposition: inline
 In-Reply-To: <20210406082942.24049-1-tzimmermann@suse.de>
-X-Mailman-Approved-At: Thu, 08 Apr 2021 08:30:52 +0000
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
+X-Mailman-Approved-At: Thu, 08 Apr 2021 11:54:53 +0000
 Subject: Re: [Spice-devel] [PATCH 0/4] drm: Generic dumb_map_offset for
  TTM-based drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -79,55 +67,53 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- maarten.lankhorst@linux.intel.com, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, bskeggs@redhat.com, daniel@ffwll.ch,
- spice-devel@lists.freedesktop.org, kraxel@redhat.com
-Content-Type: multipart/mixed; boundary="===============0524795319=="
+ dri-devel@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, virtualization@lists.linux-foundation.org,
+ kraxel@redhat.com, daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
+ bskeggs@redhat.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
-
-
---===============0524795319==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="nhsoqxufqmlyazgx"
-Content-Disposition: inline
-
-
---nhsoqxufqmlyazgx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 
 On Tue, Apr 06, 2021 at 10:29:38AM +0200, Thomas Zimmermann wrote:
 > The implementation of drm_driver.dumb_map_offset is the same for several
 > TTM-based drivers. Provide a common function in GEM-TTM helpers.
 
-For the series:
-Acked-by: Maxime Ripard <maxime@cerno.tech>
+Out of curiosity, why does this not fit for radeon/amdgpu?
+-Daniel
 
-Maxime
+> 
+> Thomas Zimmermann (4):
+>   drm/gem-ttm-helper: Provide helper for struct
+>     drm_driver.dumb_map_offset
+>   drm/vram-helper: Use drm_gem_ttm_dumb_map_offset()
+>   drm/nouveau: Use drm_gem_ttm_dumb_map_offset()
+>   drm/qxl: Use drm_gem_ttm_dumb_map_offset()
+> 
+>  drivers/gpu/drm/drm_gem_ttm_helper.c      | 33 ++++++++++++++++
+>  drivers/gpu/drm/drm_gem_vram_helper.c     | 48 -----------------------
+>  drivers/gpu/drm/nouveau/nouveau_display.c | 18 ---------
+>  drivers/gpu/drm/nouveau/nouveau_display.h |  2 -
+>  drivers/gpu/drm/nouveau/nouveau_drm.c     |  3 +-
+>  drivers/gpu/drm/qxl/qxl_drv.c             |  3 +-
+>  drivers/gpu/drm/qxl/qxl_drv.h             |  3 --
+>  drivers/gpu/drm/qxl/qxl_dumb.c            | 17 --------
+>  drivers/gpu/drm/qxl/qxl_ioctl.c           |  4 +-
+>  drivers/gpu/drm/qxl/qxl_object.h          |  5 ---
+>  include/drm/drm_gem_ttm_helper.h          |  5 ++-
+>  include/drm/drm_gem_vram_helper.h         |  7 +---
+>  12 files changed, 45 insertions(+), 103 deletions(-)
+> 
+> --
+> 2.30.2
+> 
 
---nhsoqxufqmlyazgx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYG63nQAKCRDj7w1vZxhR
-xRYHAQCB5YdMvJQCmZrSZdd7iTzptJmugGwvmitemDPO09KmEwD+MN5lN6korTN4
-2ZX4gbC41r49DjVpw79WiUzkQ4ReUg8=
-=KBmF
------END PGP SIGNATURE-----
-
---nhsoqxufqmlyazgx--
-
---===============0524795319==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============0524795319==--
