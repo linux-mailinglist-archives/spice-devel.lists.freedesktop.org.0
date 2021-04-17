@@ -1,58 +1,59 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66C75362EA5
-	for <lists+spice-devel@lfdr.de>; Sat, 17 Apr 2021 10:52:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E2305362EA7
+	for <lists+spice-devel@lfdr.de>; Sat, 17 Apr 2021 10:52:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C954E6E06B;
-	Sat, 17 Apr 2021 08:52:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DAF5B6E147;
+	Sat, 17 Apr 2021 08:52:30 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 516496E06B
- for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 08:52:28 +0000 (UTC)
-Received: by mail-lj1-x235.google.com with SMTP id u4so33628181ljo.6
- for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 01:52:28 -0700 (PDT)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA0B46E06B
+ for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 08:52:27 +0000 (UTC)
+Received: by mail-lf1-x132.google.com with SMTP id j4so8927753lfp.0
+ for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 01:52:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ZyG1xrPbyt1IZfPC6kqVQzMN9iRCaLbkgKS4lCLvE7w=;
- b=fn9A4ZVzvvtX/TSsoFMFooibTDUquPjZ3/iKU9KRKkLBRgNQPnF96R96jAbEqJo6/E
- r5UM7BPMPaM9ATYsPZWd9Onev+OSMslh6EoZk212z/MdmRoYpM0IrjgmgbcSKd6r1bxU
- UzUJ9/NAK62aybxFxAoZgDpFEW/ArjIYLFk9cGTTwxyqsA0WneTOndSdoOSSn9fdbL6R
- DAdCWEijsBm9iuV4th9jvuW6bZEPWNpMMyOAJEAFVTM1J46nRi7kuuxooxIFPxXhw+Wl
- zj6eWBujJ7WHpwXsZIVJNtxqRv+X5dBHJFrtZFFTup7YB5UTYtI6/Jg6EB0XYV8Js8Yw
- +27g==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=5or7lXVgCNuoEO6aawBLrGYMq3O+SspJxybJ9rcsdgU=;
+ b=Bw1x7K9wUS3/2VgNqRwaNcqQhC7ozZOvASUcrgnepNi9cvaihT0DX0A0a/uL8+SXmV
+ uZNXXbdWaAW0YKT3ZssLGI5pkNUik02OTfxNGfzC9KTfmbIx8Wxd5O/Z5Y2spVtUUH/+
+ YnRAknPVJt4+saIasBYMqvhKMwTJYRHRzDywlfteyqwfkG8gRw/6AA4IZq23G882cZTT
+ a+I/LR6GV9mDbEiTj6rXo1+nxB3ZrvICwuolr6xox/L2RruM35bPVnn0xxTnvqQo2OdE
+ 5ig6uV+D9HN5/A7bmYLPAqfL94P1/TchpLHqsm+Ol2JjNq/sQVW3XMxaRVjaRp1gXwTs
+ 54oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ZyG1xrPbyt1IZfPC6kqVQzMN9iRCaLbkgKS4lCLvE7w=;
- b=gA9cvWESOyBuWxBpd9dpNPGY0l8nPPB8yYAbQq056FipiAl1BI+XkI/o1w89gQrUhP
- yEiBGm+4B9jp8U/RgxGTpzh9G2VcvdIvVfpJuy/moZ68/r89kSofE6KE2Jlr/y/YL5Lc
- w8qiDFJEJE7Jn2t/A2WeoDGsajNSSL3n23Wh/5eMXWPbXSMPbEaLia5v8/FwapwMet/8
- RPVOPHdtO8I5jZPbo0U3D69iLE8HyRvXa+N44MhVQVrmCKsYiX68/ow3nXnAhKeHYn8i
- /9wKycId1z9yBwqGByy16ThVLE+GazkQ5rl0pzubWbLHR6i+3gwFFG/xp11gm8ru2RqZ
- aAoQ==
-X-Gm-Message-State: AOAM533K7qcU3ZXHWxyO1KcuJBVfirXorQe7VGea3qcgRWJEaFUJC+MF
- 1LuIu2zGUZ7aDqnGQ3ux+RgsxHwulnRUEzVq
-X-Google-Smtp-Source: ABdhPJxu2OGYmxWUU73JABmI9RcwosL4FfthRBGm108rrePzE2t992rVPYRzpzL2yOiA9+22WPIfxQ==
-X-Received: by 2002:a05:651c:2005:: with SMTP id
- s5mr5168285ljo.491.1618649545239; 
- Sat, 17 Apr 2021 01:52:25 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=5or7lXVgCNuoEO6aawBLrGYMq3O+SspJxybJ9rcsdgU=;
+ b=BvC1jXKskZmXUrQVCuf9opBiehaeDI5+Avh8g1ac7f/m72Mie7Jy4FeFbsRijJQ0I1
+ NANLHthQ5l/JTQT8O1vp5YrnSLr+IIMseJJ2nAUUb8dCFjToaHgPaTDnyj6rM2KlnE60
+ QEJOJNZBDZ1CEZLBMhUZkWpOHH+HHXfqTYluMaiOXdVtgSmxiZefNWBIbzme7Sy3SMFy
+ kW40mG6ZUwgzL8BqmNHVw68n+m5qcqEmr9g59U7w9C9WF+KUuPDOqNA7TR5O6E7knLxG
+ fIVOiGbdo0uofM2jyYxmG0Q7Mu8atTeDJlBeyk+ScrL+XD8oXWf4rdVS6+wQyK0GiXjJ
+ koQw==
+X-Gm-Message-State: AOAM5312SoeaoRCYLnlN3y/uZ2Nae4vWv7w4CQW311vfSZ7n6mUaluA5
+ P47SiaPoJRmcqmA2Zjqk5vb2sV2o3AXOYGk6
+X-Google-Smtp-Source: ABdhPJxZaP+k0PnoMjADH8tE7543lmr7Q9/0vm2dT1un/IsuwkfSg3UEoiwpjU+rVBbj3nDeZfeK5Q==
+X-Received: by 2002:ac2:46ed:: with SMTP id q13mr5696020lfo.543.1618649546151; 
+ Sat, 17 Apr 2021 01:52:26 -0700 (PDT)
 Received: from kloomba.my.domain ([31.29.254.98])
- by smtp.gmail.com with ESMTPSA id e18sm1165621ljl.92.2021.04.17.01.52.24
+ by smtp.gmail.com with ESMTPSA id e18sm1165621ljl.92.2021.04.17.01.52.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Apr 2021 01:52:24 -0700 (PDT)
+ Sat, 17 Apr 2021 01:52:25 -0700 (PDT)
 From: Roman Bogorodskiy <bogorodskiy@gmail.com>
 To: spice-devel@lists.freedesktop.org
-Date: Sat, 17 Apr 2021 12:52:08 +0400
-Message-Id: <20210417085211.88977-1-bogorodskiy@gmail.com>
+Date: Sat, 17 Apr 2021 12:52:09 +0400
+Message-Id: <20210417085211.88977-2-bogorodskiy@gmail.com>
 X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210417085211.88977-1-bogorodskiy@gmail.com>
+References: <20210417085211.88977-1-bogorodskiy@gmail.com>
 MIME-Version: 1.0
-Subject: [Spice-devel] [PATCH 0/3] Assorted FreeBSD fixes
+Subject: [Spice-devel] [PATCH 1/3] build-sys: more version related fixups
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,16 +70,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Roman Bogorodskiy (3):
-  build-sys: more version related fixups
-  red-stream: add missing include
-  Fix setsockopt on FreeBSD
+- Drop "-dirty" suffix before processing version info
+- Don't fail on versions without 'minor' specified (e.g. v0.15)
 
- server/meson.build    | 9 +++++++--
- server/net-utils.c    | 2 +-
- server/red-stream.cpp | 1 +
- 3 files changed, 9 insertions(+), 3 deletions(-)
+Signed-off-by: Roman Bogorodskiy <bogorodskiy@gmail.com>
+---
+ server/meson.build | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
+diff --git a/server/meson.build b/server/meson.build
+index 4a670635..4fadb6e4 100644
+--- a/server/meson.build
++++ b/server/meson.build
+@@ -8,10 +8,15 @@ if meson.project_version().startswith('UNKNOWN')
+   minor = '0'
+   micro = '1'
+ else
+-  version_info = meson.project_version().split('.')
++  version_str = meson.project_version()
++  # drop "-dirty" suffix
++  if version_str.contains('-')
++    version_str = version_str.split('-')[0]
++  endif
++  version_info = version_str.split('.')
+   major = '@0@'.format(version_info[0])
+   minor = '@0@'.format(version_info[1])
+-  micro = version_info[2].to_int()
++  micro = version_info.get(2, '0').to_int()
+   if version_info.length() >= 4
+     micro += 1
+   endif
 -- 
 2.30.1
 
