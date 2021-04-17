@@ -1,55 +1,55 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BC6A362F16
-	for <lists+spice-devel@lfdr.de>; Sat, 17 Apr 2021 12:01:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BF3F362F17
+	for <lists+spice-devel@lfdr.de>; Sat, 17 Apr 2021 12:08:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C6B206E05D;
-	Sat, 17 Apr 2021 10:01:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 104996E093;
+	Sat, 17 Apr 2021 10:08:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1A1A76E05D
- for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 10:01:08 +0000 (UTC)
-Received: by mail-pl1-x62f.google.com with SMTP id z22so10108460plo.3
- for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 03:01:08 -0700 (PDT)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AF7AF6E093
+ for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 10:08:08 +0000 (UTC)
+Received: by mail-pg1-x533.google.com with SMTP id q10so20843852pgj.2
+ for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 03:08:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4o14fiDb3K/Eb8kQaybLSzxB+iLXMRVuL4QIIEBlY6k=;
- b=dtef9DqZu6QP2CCpsZYTPzFN/YNZ30scG68k9DnlD/u/4MaAjfQSUsHl52Ko2t3By+
- pMAVmivE1YGCyN6I9F/MYBWxZqllvCCNXqfpgCgqhVkNtX30Nj4jLzHtQHwgx46oNaTY
- F8pAp0uN+rAlUUZTGK2SpmELobfzBAAmDDpFZu76TWNrlV717jjjdSL8uDFjmGBxczBq
- B89NiOM73DkKdI9mcJj5SDY4tm/r8tXq/ggXGQxNm+CTea/krv6VUN+YGScXfucIcO+i
- Oc/Ml0b6YNP1wvZDxu6i40NFlvbuxo2PqTxg/6jG3paqU20OyllXoxFhfgFHetc+FMdm
- SM1g==
+ :cc; bh=b0NzKbs2lWw1ijlKa2Z0h4s2jcI8+6Ei8rXJnh9/7Xs=;
+ b=E93PQHCDuGApV7sHiEs5pL5ng/SAFd3yYPIJAC6auvIbWYPeBa9ALyBpNIes4P9/y1
+ Cd9MbcrwSRBHt/m9T1vN8WDQswJeffC0jD7HPk2lMgUL9+kg9olJ0PsJDuMDPBpkSE5D
+ AV/RKi6kFLg9yA+lzJSazgGhWhopOccVLL57EaPrkuW56WzVDLbdWU86eaSxjiRvGnLL
+ PqiyoVd14s4T36Q18E973lVjmDIEJ2vKIhFuKjCS326XgC0CefgHPRvJRGsM6G/qu3Lk
+ nYDGB6foYfGEHcnutR3uT4MEkI6bVvpVLJW7EThWpShVb+mlC2+tHIapyn6as0Zpvhlh
+ gCCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=4o14fiDb3K/Eb8kQaybLSzxB+iLXMRVuL4QIIEBlY6k=;
- b=t94XKlqdQanD3xeYEIHPjCDUVAdPIho20ZpjfgWJlC3/BRxguBtYns0uDrZptO92jk
- GBKEHMYuoQuKF2zCM5XN7YRHQE6sX/zqf6zY/2D+SYxqBYR1lrYHDBjKGbTUnUas8MGK
- 0SrJP25RxaZ3Qf9Sl5C0kATJn+oR9Ct0tOfFZocPqR7sk01GuqtJhPhZE0etsX1Zfczx
- V9osscJbNvotGjtp33eRGqoNcN2ccxEanMgRAudKbS/yCuJJljpPOG9jqLP8aOqoLyFM
- 92WZ19PZK+NMvTeadTQAlgQRNdtZ7llzGD+gIhsBHfRt7SvU4O7UcAUwz0ErHy1qAGut
- 3UQg==
-X-Gm-Message-State: AOAM531GvRkF+rYIjVekciKBpczYMx1Yo7nGJE03fiOJnZiOzoEgcnST
- KmcUP0c1TBKlZZqsFU4p1S+2A/+xctKAIfpROvo=
-X-Google-Smtp-Source: ABdhPJxA4eznorLDog4ag2JVzJ/YtJlpMBLW1vFMma7e2avaToq08Aq3lt8UvGWYpk5lAX9W5cRgzlt0p0P1fWhBUR8=
-X-Received: by 2002:a17:902:7886:b029:e7:1052:adad with SMTP id
- q6-20020a1709027886b02900e71052adadmr13495887pll.75.1618653667803; Sat, 17
- Apr 2021 03:01:07 -0700 (PDT)
+ bh=b0NzKbs2lWw1ijlKa2Z0h4s2jcI8+6Ei8rXJnh9/7Xs=;
+ b=jmSjoet0qNqjq2F0mMg6ucryZIVN1evZiK9muuMqafFZS4lFK60NrRamNSNJpl7oQ4
+ ujjpKswbLSiYNqhlqH0GK/IzRVVcskC1+153C8UBCooDM7n7ViFrDJ8ZDC6FqnR/dtTB
+ 4Sf9nXZMz7zVB3sFrJZCE4Mu+WtVuVc5DIfEaY5Jq3Xgc20Mp0GX39hvOQUZG9GY6L7s
+ fPzlk7Y4F9ZsbiSewhdsfymarLGKTlmdDYCvG6YJdUwZAGCkgNU/4CkQdfcQPm/2USXc
+ /XdWWOZpTsAbgMbVpjBvRdU/lwdZs0UhPFD9/lwBY+pAJ3jJyn3XwDP9FNZf+s7+ZvV6
+ KA0Q==
+X-Gm-Message-State: AOAM531Er/L+AEzHRENK7G5Dp7Hg63pECAlYEYmDBRcf+5dqlYEG5hrs
+ JwJvCjT5iJ/6sBHD44Y50n899AOOf9mHpwJNWnM=
+X-Google-Smtp-Source: ABdhPJwg1dKBqA4JlqC7ryw8RKSU0x163trevv01ZU9TNmAeS5cDjTymImUInBRunyM1hYbheedDAylQnY2HtDewh/g=
+X-Received: by 2002:aa7:9f08:0:b029:25b:70c0:a31b with SMTP id
+ g8-20020aa79f080000b029025b70c0a31bmr3790763pfr.61.1618654088371; Sat, 17 Apr
+ 2021 03:08:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210417085211.88977-1-bogorodskiy@gmail.com>
- <20210417085211.88977-2-bogorodskiy@gmail.com>
-In-Reply-To: <20210417085211.88977-2-bogorodskiy@gmail.com>
+ <20210417085211.88977-3-bogorodskiy@gmail.com>
+In-Reply-To: <20210417085211.88977-3-bogorodskiy@gmail.com>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sat, 17 Apr 2021 11:00:56 +0100
-Message-ID: <CAHt6W4cBs7RDpeLpgj5noSkd_1mONat1o+rYcZ=Vq1_S6dUchQ@mail.gmail.com>
+Date: Sat, 17 Apr 2021 11:07:57 +0100
+Message-ID: <CAHt6W4drXjbXUDBfyWBaiVtbODtQfCSmHaZ+hrJPiC_iTo4p6w@mail.gmail.com>
 To: Roman Bogorodskiy <bogorodskiy@gmail.com>
-Subject: Re: [Spice-devel] [PATCH 1/3] build-sys: more version related fixups
+Subject: Re: [Spice-devel] [PATCH 2/3] red-stream: add missing include
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,58 +70,27 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 Il giorno sab 17 apr 2021 alle ore 09:52 Roman Bogorodskiy
 <bogorodskiy@gmail.com> ha scritto:
 >
-> - Drop "-dirty" suffix before processing version info
-> - Don't fail on versions without 'minor' specified (e.g. v0.15)
-
-This is due to my fault, I didn't realize that version tags must
-contain the micro version,
-even if 0. Fixed (removed v0.15, added v0.15.0)
-
+> On FreeBSD, netinet/in.h needs to be included to use IPPROTO_TCP.
 >
 > Signed-off-by: Roman Bogorodskiy <bogorodskiy@gmail.com>
 > ---
->  server/meson.build | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
+>  server/red-stream.cpp | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/server/meson.build b/server/meson.build
-> index 4a670635..4fadb6e4 100644
-> --- a/server/meson.build
-> +++ b/server/meson.build
-> @@ -8,10 +8,15 @@ if meson.project_version().startswith('UNKNOWN')
->    minor = '0'
->    micro = '1'
->  else
-> -  version_info = meson.project_version().split('.')
-> +  version_str = meson.project_version()
-> +  # drop "-dirty" suffix
+> diff --git a/server/red-stream.cpp b/server/red-stream.cpp
+> index fee45f30..090883f3 100644
+> --- a/server/red-stream.cpp
+> +++ b/server/red-stream.cpp
+> @@ -24,6 +24,7 @@
+>  #include <netdb.h>
+>  #include <sys/socket.h>
+>  #include <netinet/tcp.h>
+> +#include <netinet/in.h>
+>  #else
+>  #include <ws2tcpip.h>
+>  #endif
 
-This is not actually entirely true, to code below removes everything
-after the dash, if you have changes the version
-can be something like 0.1.2.3-abcd-dirty where 3 is the number of
-commits after the release, acbd is the last commit
-hash and -dirty means additional changes.
-
-> +  if version_str.contains('-')
-> +    version_str = version_str.split('-')[0]
-> +  endif
-
-Even easier:
-
-version_str = version_str.split('-')[0]
-
-(no need for the if)
-
-> +  version_info = version_str.split('.')
->    major = '@0@'.format(version_info[0])
->    minor = '@0@'.format(version_info[1])
-> -  micro = version_info[2].to_int()
-> +  micro = version_info.get(2, '0').to_int()
-
-Not necessary (actually wrong), version tags should have the micro version.
-
->    if version_info.length() >= 4
->      micro += 1
->    endif
+Nice.
 
 Frediano
 _______________________________________________
