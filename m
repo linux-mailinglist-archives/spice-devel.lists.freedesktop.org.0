@@ -1,55 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BF3F362F17
-	for <lists+spice-devel@lfdr.de>; Sat, 17 Apr 2021 12:08:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67795363087
+	for <lists+spice-devel@lfdr.de>; Sat, 17 Apr 2021 16:07:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 104996E093;
-	Sat, 17 Apr 2021 10:08:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F8096E0E3;
+	Sat, 17 Apr 2021 14:07:11 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AF7AF6E093
- for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 10:08:08 +0000 (UTC)
-Received: by mail-pg1-x533.google.com with SMTP id q10so20843852pgj.2
- for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 03:08:08 -0700 (PDT)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 344B46E0E3
+ for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 14:07:09 +0000 (UTC)
+Received: by mail-lf1-x12e.google.com with SMTP id r128so22139047lff.4
+ for <spice-devel@lists.freedesktop.org>; Sat, 17 Apr 2021 07:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=b0NzKbs2lWw1ijlKa2Z0h4s2jcI8+6Ei8rXJnh9/7Xs=;
- b=E93PQHCDuGApV7sHiEs5pL5ng/SAFd3yYPIJAC6auvIbWYPeBa9ALyBpNIes4P9/y1
- Cd9MbcrwSRBHt/m9T1vN8WDQswJeffC0jD7HPk2lMgUL9+kg9olJ0PsJDuMDPBpkSE5D
- AV/RKi6kFLg9yA+lzJSazgGhWhopOccVLL57EaPrkuW56WzVDLbdWU86eaSxjiRvGnLL
- PqiyoVd14s4T36Q18E973lVjmDIEJ2vKIhFuKjCS326XgC0CefgHPRvJRGsM6G/qu3Lk
- nYDGB6foYfGEHcnutR3uT4MEkI6bVvpVLJW7EThWpShVb+mlC2+tHIapyn6as0Zpvhlh
- gCCQ==
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=up9PgIKjy3XjVRs/0IfQ1qfEu6UiUJ/m3U46hzaHnXI=;
+ b=pl07aqTUf3wdTDxiWVcjIUmf1GqGhun/CdvNHqx8C3diJTA6SlJ7fGeUHLLKumHZox
+ OxTD3+OX9mU49cO7tuiwQ+mZ3aRUuGnqNed2sSF7TwQjAG+D3b3CUIUubP/8E/Jn+wTz
+ A0r7GD8jzffjRgLtsNSX+qrya0rmFf066+rQYSYS2o6i/VTCcxP3yQXiFhGStmSEdO/W
+ X8yRsBilYg5UwlooZhpUQEWyV0o5h8Lr9NqHLeCs5x2mHLEDVhkl9vv6uGMhiN2UIJqb
+ 0dVL8xkbCsvHkey/Ry55u0i7lELQhMoT9LBdn3+dA+gIGZFtDMm+7S91N931FGCVdQGZ
+ 7Bug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=b0NzKbs2lWw1ijlKa2Z0h4s2jcI8+6Ei8rXJnh9/7Xs=;
- b=jmSjoet0qNqjq2F0mMg6ucryZIVN1evZiK9muuMqafFZS4lFK60NrRamNSNJpl7oQ4
- ujjpKswbLSiYNqhlqH0GK/IzRVVcskC1+153C8UBCooDM7n7ViFrDJ8ZDC6FqnR/dtTB
- 4Sf9nXZMz7zVB3sFrJZCE4Mu+WtVuVc5DIfEaY5Jq3Xgc20Mp0GX39hvOQUZG9GY6L7s
- fPzlk7Y4F9ZsbiSewhdsfymarLGKTlmdDYCvG6YJdUwZAGCkgNU/4CkQdfcQPm/2USXc
- /XdWWOZpTsAbgMbVpjBvRdU/lwdZs0UhPFD9/lwBY+pAJ3jJyn3XwDP9FNZf+s7+ZvV6
- KA0Q==
-X-Gm-Message-State: AOAM531Er/L+AEzHRENK7G5Dp7Hg63pECAlYEYmDBRcf+5dqlYEG5hrs
- JwJvCjT5iJ/6sBHD44Y50n899AOOf9mHpwJNWnM=
-X-Google-Smtp-Source: ABdhPJwg1dKBqA4JlqC7ryw8RKSU0x163trevv01ZU9TNmAeS5cDjTymImUInBRunyM1hYbheedDAylQnY2HtDewh/g=
-X-Received: by 2002:aa7:9f08:0:b029:25b:70c0:a31b with SMTP id
- g8-20020aa79f080000b029025b70c0a31bmr3790763pfr.61.1618654088371; Sat, 17 Apr
- 2021 03:08:08 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=up9PgIKjy3XjVRs/0IfQ1qfEu6UiUJ/m3U46hzaHnXI=;
+ b=QlJZVoeSWr9rCDkEPg4EHdBJ7pi4RAuDIrgiD813hIDkagyRqAjs02HIRvXhCTMn+f
+ /k+YKI2/QySI0P5m/+SM4BWVO+Oeg7CAt8b4zZvf9k5IC8qiF4TQjiVAnxRNzyweHt/r
+ E9kuTpLucwgThd1IRqZV8rjCzD7C7mhbjLwK5jHmtEGmxaWt47yrBA1o1o6f3pCt2jy5
+ ucOFGX4/ioD+XURrjqN32Rm2zOmDTZRfWtSvytaC4ceeWWOuGFrffcefJ0AIu9UVfuWE
+ LeBqfaOQtDjkLp08tZEyhAiQETaNz2tqCi1saQEeKYj3XUN3KMm5bpNse6+0hqTDQiqF
+ ywqQ==
+X-Gm-Message-State: AOAM533yi7U7LKgxmEcCklMWuHSh+ivJbDEqOYbb35TpelS0uh5cc/nE
+ vbQN1C2SbTTWG+ihLVCxa6xg0fXjzmv+SjeA
+X-Google-Smtp-Source: ABdhPJxYLwOcgxeZYC5cUEzm+SNouHLAKwYSU5i3EhY95a4kYzVwXHbbOFQ91bQHcqvHYMdenETtfg==
+X-Received: by 2002:a05:6512:34d4:: with SMTP id
+ w20mr6450063lfr.281.1618668427540; 
+ Sat, 17 Apr 2021 07:07:07 -0700 (PDT)
+Received: from kloomba ([31.29.254.98])
+ by smtp.gmail.com with ESMTPSA id v23sm157212ljk.42.2021.04.17.07.07.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 17 Apr 2021 07:07:06 -0700 (PDT)
+Date: Sat, 17 Apr 2021 18:06:59 +0400
+From: Roman Bogorodskiy <bogorodskiy@gmail.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Message-ID: <YHrrgxgWN84emypP@kloomba>
 References: <20210417085211.88977-1-bogorodskiy@gmail.com>
- <20210417085211.88977-3-bogorodskiy@gmail.com>
-In-Reply-To: <20210417085211.88977-3-bogorodskiy@gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sat, 17 Apr 2021 11:07:57 +0100
-Message-ID: <CAHt6W4drXjbXUDBfyWBaiVtbODtQfCSmHaZ+hrJPiC_iTo4p6w@mail.gmail.com>
-To: Roman Bogorodskiy <bogorodskiy@gmail.com>
-Subject: Re: [Spice-devel] [PATCH 2/3] red-stream: add missing include
+ <20210417085211.88977-2-bogorodskiy@gmail.com>
+ <CAHt6W4cBs7RDpeLpgj5noSkd_1mONat1o+rYcZ=Vq1_S6dUchQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAHt6W4cBs7RDpeLpgj5noSkd_1mONat1o+rYcZ=Vq1_S6dUchQ@mail.gmail.com>
+Subject: Re: [Spice-devel] [PATCH 1/3] build-sys: more version related fixups
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,38 +68,64 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0102730416=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno sab 17 apr 2021 alle ore 09:52 Roman Bogorodskiy
-<bogorodskiy@gmail.com> ha scritto:
->
-> On FreeBSD, netinet/in.h needs to be included to use IPPROTO_TCP.
->
-> Signed-off-by: Roman Bogorodskiy <bogorodskiy@gmail.com>
-> ---
->  server/red-stream.cpp | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/server/red-stream.cpp b/server/red-stream.cpp
-> index fee45f30..090883f3 100644
-> --- a/server/red-stream.cpp
-> +++ b/server/red-stream.cpp
-> @@ -24,6 +24,7 @@
->  #include <netdb.h>
->  #include <sys/socket.h>
->  #include <netinet/tcp.h>
-> +#include <netinet/in.h>
->  #else
->  #include <ws2tcpip.h>
->  #endif
 
-Nice.
+--===============0102730416==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="k5LR8+ySNLlGNWan"
+Content-Disposition: inline
 
-Frediano
+
+--k5LR8+ySNLlGNWan
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+  Frediano Ziglio wrote:
+
+> Il giorno sab 17 apr 2021 alle ore 09:52 Roman Bogorodskiy
+> <bogorodskiy@gmail.com> ha scritto:
+> >
+> > - Drop "-dirty" suffix before processing version info
+> > - Don't fail on versions without 'minor' specified (e.g. v0.15)
+>=20
+> This is due to my fault, I didn't realize that version tags must
+> contain the micro version,
+> even if 0. Fixed (removed v0.15, added v0.15.0)
+
+Thanks for clarification and the fix.
+
+Roman Bogorodskiy
+
+--k5LR8+ySNLlGNWan
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCAAdFiEEi6TfKtFPmbY34ABwyW1f/gjCImoFAmB664AACgkQyW1f/gjC
+ImqXdAgAgVpuZ/OLj6pLF0RBbbM4SXFDL1zaI+SOsVoa4mR+ppvUe1IgnhUTeXux
+nxwvnqDlGJ1HzY+SjohVOZ+LmSHAG+VHLzRuAGmz6sBiuw87xrH5zlBOoPeI6w0A
+kDKCsUQsCuGflQWVTthrS6/pGMxxTPvdw++AAnBuxzzvPo0CWdNqcC5Xhyi2DNPj
+BIJ31l5T64yHWdYNddROujPMDFkIAUaJAJexQ3fvYVgwuKjl2G69OM/GCFAi/4nS
+cXIZI6V9qdamx5AHtB/4OcNuMJC1tVlZndum36u2sOGK5u/dxWWRoEUQOrB+Do1k
+cNF1cb3QRkosxI72NZFmPX8ulmjE5g==
+=iytk
+-----END PGP SIGNATURE-----
+
+--k5LR8+ySNLlGNWan--
+
+--===============0102730416==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0102730416==--
