@@ -2,53 +2,63 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F85C36579F
-	for <lists+spice-devel@lfdr.de>; Tue, 20 Apr 2021 13:35:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E8A836593B
+	for <lists+spice-devel@lfdr.de>; Tue, 20 Apr 2021 14:49:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EBF276E7EF;
-	Tue, 20 Apr 2021 11:35:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 88DDC6E0B7;
+	Tue, 20 Apr 2021 12:49:42 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 090CE6E7EF
- for <spice-devel@lists.freedesktop.org>; Tue, 20 Apr 2021 11:35:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618918539;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=dAUTPz8ZEWizYxcNJA1fs2ausdiGpHf1vKhT0HbxWZg=;
- b=L7nahFkMvac62bJ3X6M+ESygnZQAbU6flhWzNOV/aKFq3jfaasuZyL5iM8yTQlxug2Gxtk
- 7ampHyvxpEAggTcv+Zh8V5Es3Ae1NOuTPUo0Kor7M0+IF4Qxl9zi5EdsUEpg6jIjPHecAb
- zwaNHUugzCXB7PXJK6Jxa8Eo9AWQZ/s=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-228-YlQGGZm4OxSjx4z5lPiO4w-1; Tue, 20 Apr 2021 07:35:35 -0400
-X-MC-Unique: YlQGGZm4OxSjx4z5lPiO4w-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D7EB61923791;
- Tue, 20 Apr 2021 11:35:34 +0000 (UTC)
-Received: from redhat.com (ovpn-114-178.ams2.redhat.com [10.36.114.178])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 338011B5C0;
- Tue, 20 Apr 2021 11:35:34 +0000 (UTC)
-Date: Tue, 20 Apr 2021 12:35:30 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Germano Massullo <germano.massullo@gmail.com>
-Message-ID: <YH68grWhEqF4lINL@redhat.com>
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2F34D6E0B7
+ for <spice-devel@lists.freedesktop.org>; Tue, 20 Apr 2021 12:49:41 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id r9so58078296ejj.3
+ for <spice-devel@lists.freedesktop.org>; Tue, 20 Apr 2021 05:49:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=55kRKdxYcfFw6M9M7O7RVHx37yUYOQHqxx7hvaWcroo=;
+ b=fK7mVf4S+3lLERARr94IsqxwMEGd8MHrpJFRZgJFW09nqkHT745QUZKpYJGGkth9BS
+ P6G8+GhIriNjgeJafZsqulleshBZA+IwAa64Tmh9iTLKHrilyj7TjZO9xxyo1zEy+wkj
+ rwZueM+9a7SadIy/lIyzu+gT1wIQeP353b3f7deuUWw+Fab82oQk2730qrzTHNuPF8mY
+ HoiIIP1Mzjq35+M0cuBhyklNfC8VavTX1WPZk3VlmVpNCxbczOGu6TpgmZ5NHOVaRyGi
+ /d/5wNWfWRunj9+lqp+0xmFOUlnEACernmKVJkvGHn2p9+2I8qZWdZ2cOEduwTz0p1rg
+ LQ/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=55kRKdxYcfFw6M9M7O7RVHx37yUYOQHqxx7hvaWcroo=;
+ b=P+6QkKtpNfv1HA4aFu9Nu+WG0pWBEg4TjlMg5kfOqIIvWgTPGywfee0oSun/Eazqo1
+ HIHTDqy3mE2ebz8oXhWYxW+dbqWtlvmnb40/BijL3MhzznQjSoaheWVjIw3M7EPVLB54
+ sih0QTZABwOIpbsSSBdu78/FRCsXKGRFhneJHcfSfwRT/JPmszrDXHlMTyZVjIvqedfm
+ L5p8uN3djheEbAOsYBoIa4V0OolcAS1bfJ2J9HdR88PVFjqSnuXnjY4R8cpLlgubpp6O
+ NQRRn/jm7ba5DEqrG3ftbPAeH4y90gQ9ZQ9vlqviPF4IJqc9y4IENonTkS8j010sOvzV
+ 3Rjg==
+X-Gm-Message-State: AOAM532kL3s2H8dnzyJggZKCSgK4D8cUaySwhkAY6WbNA2cFZU96L+X7
+ v56/ZwkRH+Qix1sI3lg2v6LMjrQdhaI=
+X-Google-Smtp-Source: ABdhPJw+IupCeeCQQ/WdoyleIldYG32BXL+F0AiPEZ4kUpFKidTSoMuwNXnP4ZK7ilB34Z/YSOMSOA==
+X-Received: by 2002:a17:906:4d10:: with SMTP id
+ r16mr26974182eju.169.1618922979826; 
+ Tue, 20 Apr 2021 05:49:39 -0700 (PDT)
+Received: from [192.168.1.3] (93-48-172-72.ip258.fastwebnet.it. [93.48.172.72])
+ by smtp.googlemail.com with ESMTPSA id
+ kj24sm12739180ejc.49.2021.04.20.05.49.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Apr 2021 05:49:39 -0700 (PDT)
+To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>
 References: <5861b1c3-a4f5-2faf-4dc7-dd8167ec3ea5@gmail.com>
+ <YH68grWhEqF4lINL@redhat.com>
+From: Germano Massullo <germano.massullo@gmail.com>
+Message-ID: <ec4c7b10-28dd-cfc8-3f68-96248352ae00@gmail.com>
+Date: Tue, 20 Apr 2021 14:49:38 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <5861b1c3-a4f5-2faf-4dc7-dd8167ec3ea5@gmail.com>
-User-Agent: Mutt/2.0.5 (2021-01-21)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=berrange@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
+In-Reply-To: <YH68grWhEqF4lINL@redhat.com>
+Content-Language: en-US
 Subject: Re: [Spice-devel] Fedora 34 guests can no longer paste from host
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -61,46 +71,35 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, Apr 20, 2021 at 11:56:23AM +0200, Germano Massullo wrote:
-> Good day, I always used with success a Fedora 33 KDE host (qemu/kvm/libvirt+virt-manager) and a F33 KDE guest, and I have always been to copy paste from host to guest and viceversa
-> 
-> Now I tested two Fedora 34 Beta guests:
-> - KDE spin
-> - Workstation (GNOME)
-> and both of them fail to paste text and files from the host. spice-vdagent version is the same on both F33 and F34 guests: 0.21.0. Host machine has spice-gtk3-0.39-1.fc33.x86_64
-> All machines mentioned in this bugreport are Xorg based.
-> 
-> Hereunder I attach output of
-> $ SPICE_DEBUG=1 virt-viewer --connect qemu:///system
-> https://germano.fedorapeople.org/bugreport/spice/spice_debug.txt
-> 
-> # virsh dumpxml fedora34gnome
-> https://germano.fedorapeople.org/bugreport/spice/virsh_dumpxml.txt
-
-That seems to be the inactive guest XML.
-
-If you provide the active XML (ie virsh dump when the guest is running),
-then the <channel> should confirm whether or not the agent is connected.
-
-Given what Marc-Andre pointed out from the spice debug, I presume it
-is going to be marked as not connected
-
-
-Regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
-
-_______________________________________________
-Spice-devel mailing list
-Spice-devel@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/spice-devel
+SWwgMjAvMDQvMjEgMTM6MzUsIERhbmllbCBQLiBCZXJyYW5nw6kgaGEgc2NyaXR0bzoKPiBPbiBU
+dWUsIEFwciAyMCwgMjAyMSBhdCAxMTo1NjoyM0FNICswMjAwLCBHZXJtYW5vIE1hc3N1bGxvIHdy
+b3RlOgo+PiBHb29kIGRheSwgSSBhbHdheXMgdXNlZCB3aXRoIHN1Y2Nlc3MgYSBGZWRvcmEgMzMg
+S0RFIGhvc3QgKHFlbXUva3ZtL2xpYnZpcnQrdmlydC1tYW5hZ2VyKSBhbmQgYSBGMzMgS0RFIGd1
+ZXN0LCBhbmQgSSBoYXZlIGFsd2F5cyBiZWVuIHRvIGNvcHkgcGFzdGUgZnJvbSBob3N0IHRvIGd1
+ZXN0IGFuZCB2aWNldmVyc2EKPj4KPj4gTm93IEkgdGVzdGVkIHR3byBGZWRvcmEgMzQgQmV0YSBn
+dWVzdHM6Cj4+IC0gS0RFIHNwaW4KPj4gLSBXb3Jrc3RhdGlvbiAoR05PTUUpCj4+IGFuZCBib3Ro
+IG9mIHRoZW0gZmFpbCB0byBwYXN0ZSB0ZXh0IGFuZCBmaWxlcyBmcm9tIHRoZSBob3N0LiBzcGlj
+ZS12ZGFnZW50IHZlcnNpb24gaXMgdGhlIHNhbWUgb24gYm90aCBGMzMgYW5kIEYzNCBndWVzdHM6
+IDAuMjEuMC4gSG9zdCBtYWNoaW5lIGhhcyBzcGljZS1ndGszLTAuMzktMS5mYzMzLng4Nl82NAo+
+PiBBbGwgbWFjaGluZXMgbWVudGlvbmVkIGluIHRoaXMgYnVncmVwb3J0IGFyZSBYb3JnIGJhc2Vk
+Lgo+Pgo+PiBIZXJldW5kZXIgSSBhdHRhY2ggb3V0cHV0IG9mCj4+ICQgU1BJQ0VfREVCVUc9MSB2
+aXJ0LXZpZXdlciAtLWNvbm5lY3QgcWVtdTovLy9zeXN0ZW0KPj4gaHR0cHM6Ly9nZXJtYW5vLmZl
+ZG9yYXBlb3BsZS5vcmcvYnVncmVwb3J0L3NwaWNlL3NwaWNlX2RlYnVnLnR4dAo+Pgo+PiAjIHZp
+cnNoIGR1bXB4bWwgZmVkb3JhMzRnbm9tZQo+PiBodHRwczovL2dlcm1hbm8uZmVkb3JhcGVvcGxl
+Lm9yZy9idWdyZXBvcnQvc3BpY2Uvdmlyc2hfZHVtcHhtbC50eHQKPiBUaGF0IHNlZW1zIHRvIGJl
+IHRoZSBpbmFjdGl2ZSBndWVzdCBYTUwuCj4KPiBJZiB5b3UgcHJvdmlkZSB0aGUgYWN0aXZlIFhN
+TCAoaWUgdmlyc2ggZHVtcCB3aGVuIHRoZSBndWVzdCBpcyBydW5uaW5nKSwKPiB0aGVuIHRoZSA8
+Y2hhbm5lbD4gc2hvdWxkIGNvbmZpcm0gd2hldGhlciBvciBub3QgdGhlIGFnZW50IGlzIGNvbm5l
+Y3RlZC4KCkkgc3RhcnRlZCB0d28gZ3Vlc3RzIGFuZCByZXRyaWV2ZWQgdGhlaXIgWE1MCmh0dHBz
+Oi8vZ2VybWFuby5mZWRvcmFwZW9wbGUub3JnL2J1Z3JlcG9ydC9zcGljZS92aXJzaF9kdW1wX2Zl
+ZG9yYS1rZGUtZjM0LnR4dApodHRwczovL2dlcm1hbm8uZmVkb3JhcGVvcGxlLm9yZy9idWdyZXBv
+cnQvc3BpY2Uvdmlyc2hfZHVtcF9mZWRvcmEzNGdub21lXzIudHh0CgpUaGFuayB5b3UhCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRldmVsIG1h
+aWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
+cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo=
