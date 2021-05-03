@@ -2,42 +2,42 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E8F53726F7
-	for <lists+spice-devel@lfdr.de>; Tue,  4 May 2021 10:11:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA3273726FC
+	for <lists+spice-devel@lfdr.de>; Tue,  4 May 2021 10:11:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA30A6EAA4;
-	Tue,  4 May 2021 08:11:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 80C146EAB0;
+	Tue,  4 May 2021 08:11:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 226596E976;
- Mon,  3 May 2021 16:38:35 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C92DF613EC;
- Mon,  3 May 2021 16:38:33 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F341D6E993;
+ Mon,  3 May 2021 16:39:45 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C5C446191B;
+ Mon,  3 May 2021 16:39:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1620059914;
- bh=FQ95+PVS9jyQVavZhWJcRl4uzYy8iOsxHCq9oDkNd8E=;
+ s=k20201202; t=1620059985;
+ bh=R4z/pEi3GiFfFhP0w1RPPxuvznQ43s/lLLRKX6g9rGQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=EcCjSIycO2uEQuwYqFWYT9cuN4PhBp9SXiS0kZLnqrtM1uMw03+nc5Y4kOxAwo0FA
- jrYnk4y2aOOw6A2gBo+aUcE6Q7cFYp/eWIzQkboDaoJwNi9SWkEHB+38lICr4If+mu
- b6r5SnewyJzYWEfXnqUvNvrZw4eppPKbzrN9lQ5IJCx8qfwfc9deUWYW7QZbfJbvJq
- jNtd1+mmzdsuKn5wJCofeUBu5HbAsfSYWHti6/OduSgakYK6Dezdp7c0K4kV5P79Ef
- WjJd9R8XnbfR3I5TpgRmIbRb39puTVC7oErq0h90/nzSWQPRMmqRkgDcMiGyLMVdT2
- 9ZRIQCxcq6bQw==
+ b=EvGNet3hHD8tr5J9b2NzSEtcknokLKkBpQ/IVES8DptEwku+T15ISbjW+7dFJc/F+
+ 6xK75NfWQEPyO15MbEHrNtTxiNCLUQaPHeXXuwYjnYAULEb+MjedcA7paLGCUxqbM0
+ qvTRveQvMvwEVXinLfxlrPPOuq2ta462OboCpPeH4te5bp+Hh4MMpwbLy+/t6nd118
+ BeFhVJ4easOuqoUYZKwA+us7ZALCwG6MYRQD9OA8hrMKhqrkMu7gy+hTxSPyNxzFMb
+ JFYePWsurtZ/jaDmjWHQkE62oKg5THKTuhXNOFEoctXE3VOr38ppd/Da6/gXhbPqxL
+ 7KYshRl686zzw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon,  3 May 2021 12:36:52 -0400
-Message-Id: <20210503163829.2852775-3-sashal@kernel.org>
+Date: Mon,  3 May 2021 12:38:46 -0400
+Message-Id: <20210503163941.2853291-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210503163829.2852775-1-sashal@kernel.org>
-References: <20210503163829.2852775-1-sashal@kernel.org>
+In-Reply-To: <20210503163941.2853291-1-sashal@kernel.org>
+References: <20210503163941.2853291-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Mailman-Approved-At: Tue, 04 May 2021 08:11:34 +0000
-Subject: [Spice-devel] [PATCH AUTOSEL 5.10 003/100] drm/qxl: release shadow
- on shutdown
+Subject: [Spice-devel] [PATCH AUTOSEL 5.4 02/57] drm/qxl: release shadow on
+ shutdown
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,10 +73,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+)
 
 diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 862ef59d4d03..1f0802f5d84e 100644
+index 9abf3dc5ef99..a6ee10cbcfdd 100644
 --- a/drivers/gpu/drm/qxl/qxl_display.c
 +++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -1224,6 +1224,10 @@ int qxl_modeset_init(struct qxl_device *qdev)
+@@ -1237,6 +1237,10 @@ int qxl_modeset_init(struct qxl_device *qdev)
  
  void qxl_modeset_fini(struct qxl_device *qdev)
  {
