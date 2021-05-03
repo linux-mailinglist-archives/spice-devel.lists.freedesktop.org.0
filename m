@@ -1,67 +1,43 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14DD5365A9D
-	for <lists+spice-devel@lfdr.de>; Tue, 20 Apr 2021 15:56:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48EF13726F9
+	for <lists+spice-devel@lfdr.de>; Tue,  4 May 2021 10:11:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 11B586E508;
-	Tue, 20 Apr 2021 13:56:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 90B566EAAC;
+	Tue,  4 May 2021 08:11:35 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D92B46E508
- for <spice-devel@lists.freedesktop.org>; Tue, 20 Apr 2021 13:56:49 +0000 (UTC)
-Received: by mail-ed1-x52d.google.com with SMTP id k17so5691488edr.7
- for <spice-devel@lists.freedesktop.org>; Tue, 20 Apr 2021 06:56:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=mQJViqF0g9lZL+gCCddYIf9lcJpV0DB4lZ3rEVjNwms=;
- b=p+NMMeT+XMVxKbXSyk4K7k0uYK/2lqu7761X6cGSwuG7U8JPBvzf6sZjLzJsHJOsLa
- MExyiOpSrhbzCFY4FZBDtimCPr6v0yrbvfJ0uCPnZEmcNKZruLqpLabFxinQLxH7RMJ7
- suHg+13q72UuWGZWzURNJJkZg0I3UVC2AE9bGy/wJOcegHrSTCcAkCk+4gCBVRnCHVxh
- xzGNuSVyOvjIXi8GyjtLyOcUlVWt4VBtWri/LiS11W+DGqq6J0a4E80xqUkE/BNXk5eD
- Tt/7ciJDFzSFlAULH9Oho5v+GLh7fQXGw6U+ZAJbn0oThYkPcgG0pxIPSGm1slWA+ctE
- dhTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=mQJViqF0g9lZL+gCCddYIf9lcJpV0DB4lZ3rEVjNwms=;
- b=gPF1J4jIuKJJSJdTbQXAO2bgUv+KQe5dyAHRe6tAJpg22c2Bw7c5BdqccUQB9jAMhK
- O+sZb2/RyUoGeBKPJbND2fvtcFbSo/mwE1YhmN/C20/2hV7mu46CarzD1cLnXz4ppiij
- 4MeGWumSqQGuLqh1hv1+QeTd9IJQIpsU1iGABTehqYvOgwLMoo7YJ2Ot6B8QtnJuJTvy
- mjyxKgbQCuAU+pLvKmrC0QURKSopHka7uv/T1KB8QvGYxSiV++2yE7K7iF7YWlr3OUOp
- OepldH9KER9P/Czwvk4ZP/T538OO79MoNMYJ4VlzhnsIMwnALk6MCnvdt+vtjmyT3k+G
- oCMg==
-X-Gm-Message-State: AOAM532gdtjq2+QXr/bH2fELt12yJTemc2dylrW7L9IXaKU5TrB/1Kx6
- F1IAnUrnqiKJUfnt3lFOKDb21e2m2rM=
-X-Google-Smtp-Source: ABdhPJy5Hi6JFborx4MA1EFFjjg8znCOR5xHYelSm2mXIMlGc4KQwDwk3Q1145aAWBU2tQO43Y1rKw==
-X-Received: by 2002:aa7:cc15:: with SMTP id q21mr33343354edt.140.1618927008486; 
- Tue, 20 Apr 2021 06:56:48 -0700 (PDT)
-Received: from [192.168.1.3] (93-48-172-72.ip258.fastwebnet.it. [93.48.172.72])
- by smtp.googlemail.com with ESMTPSA id u23sm2147841eds.8.2021.04.20.06.56.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Apr 2021 06:56:47 -0700 (PDT)
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>
-References: <5861b1c3-a4f5-2faf-4dc7-dd8167ec3ea5@gmail.com>
- <YH68grWhEqF4lINL@redhat.com>
- <ec4c7b10-28dd-cfc8-3f68-96248352ae00@gmail.com>
- <YH7PBECpLUGLiOFN@redhat.com>
- <c1961ee5-6177-4358-f790-b05fcc12e299@gmail.com>
- <YH7bhgSp1+wZWX5e@redhat.com>
-From: Germano Massullo <germano.massullo@gmail.com>
-Message-ID: <b7a4522c-0b50-1e9e-784e-a048229f6c95@gmail.com>
-Date: Tue, 20 Apr 2021 15:56:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A3D7C6E106;
+ Mon,  3 May 2021 16:35:17 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 62A67611CB;
+ Mon,  3 May 2021 16:35:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1620059717;
+ bh=gdFLCCOAI1gxnFlxay9AiPC4qFLH70l2OOQvbtAUULY=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=s0mlu5iGYlh+SEQIP9SNbyAavsjrk6XShzmeimsOdzXHkPzOrZWi1OKwCs0aB5mH/
+ A4aLokaaw2mnxr6veQTlxbpWwaMJwKqX7oyixUehHOFj53UyibzTBkWp5pTg1KeAcT
+ L9RzkyEBa1AMoXB+qK8n+VHZLffQCw/rTE7xDeMYPeXdG8bH+gUCwJYO2vk+3GZgY3
+ xvhUa5iyY2YgCyWChQcPLCl9FxSciDm5oL19cGBb7yLyySpVGgPkNiwhg6HNdOEZ01
+ VvHa3F2YsD6bPqsL9KZgYz2R8DCXssqkOLnlPigo6m0G1eCrqsO9BL2G03/gOQ/LJS
+ u4pIdfsOfDY5g==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Mon,  3 May 2021 12:33:01 -0400
+Message-Id: <20210503163513.2851510-2-sashal@kernel.org>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210503163513.2851510-1-sashal@kernel.org>
+References: <20210503163513.2851510-1-sashal@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <YH7bhgSp1+wZWX5e@redhat.com>
-Content-Language: en-US
-Subject: Re: [Spice-devel] Fedora 34 guests can no longer paste from host
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Mailman-Approved-At: Tue, 04 May 2021 08:11:34 +0000
+Subject: [Spice-devel] [PATCH AUTOSEL 5.12 002/134] drm/qxl: do not run
+ release if qxl failed to init
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,15 +49,104 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Sasha Levin <sashal@kernel.org>, Tong Zhang <ztong0001@gmail.com>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Gerd Hoffmann <kraxel@redhat.com>, spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-SWwgMjAvMDQvMjEgMTU6NDcsIERhbmllbCBQLiBCZXJyYW5nw6kgaGEgc2NyaXR0bzoKPiBJJ2Qg
-c3VnZ2VzdCBmaWxpbmcgYSBCWiBhZ2FpbnN0IHNwaWNlLXZkYWdlbnQgcGFja2FnZQoKaHR0cHM6
-Ly9idWd6aWxsYS5yZWRoYXQuY29tL3Nob3dfYnVnLmNnaT9pZD0xOTUxNTgwCgpUaGFuayB5b3Uh
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClNwaWNlLWRl
-dmVsIG1haWxpbmcgbGlzdApTcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6
-Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9zcGljZS1kZXZlbAo=
+From: Tong Zhang <ztong0001@gmail.com>
+
+[ Upstream commit b91907a6241193465ca92e357adf16822242296d ]
+
+if qxl_device_init() fail, drm device will not be registered,
+in this case, do not run qxl_drm_release()
+
+[    5.258534] ==================================================================
+[    5.258931] BUG: KASAN: user-memory-access in qxl_destroy_monitors_object+0x42/0xa0 [qxl]
+[    5.259388] Write of size 8 at addr 00000000000014dc by task modprobe/95
+[    5.259754]
+[    5.259842] CPU: 0 PID: 95 Comm: modprobe Not tainted 5.11.0-rc6-00007-g88bb507a74ea #62
+[    5.260309] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.13.0-48-gd9c812dda54
+[    5.260917] Call Trace:
+[    5.261056]  dump_stack+0x7d/0xa3
+[    5.261245]  kasan_report.cold+0x10c/0x10e
+[    5.261475]  ? qxl_destroy_monitors_object+0x42/0xa0 [qxl]
+[    5.261789]  check_memory_region+0x17c/0x1e0
+[    5.262029]  qxl_destroy_monitors_object+0x42/0xa0 [qxl]
+[    5.262332]  qxl_modeset_fini+0x9/0x20 [qxl]
+[    5.262595]  qxl_drm_release+0x22/0x30 [qxl]
+[    5.262841]  drm_dev_release+0x32/0x50
+[    5.263047]  release_nodes+0x39e/0x410
+[    5.263253]  ? devres_release+0x40/0x40
+[    5.263462]  really_probe+0x2ea/0x420
+[    5.263664]  driver_probe_device+0x6d/0xd0
+[    5.263888]  device_driver_attach+0x82/0x90
+[    5.264116]  ? device_driver_attach+0x90/0x90
+[    5.264353]  __driver_attach+0x60/0x100
+[    5.264563]  ? device_driver_attach+0x90/0x90
+[    5.264801]  bus_for_each_dev+0xe1/0x140
+[    5.265014]  ? subsys_dev_iter_exit+0x10/0x10
+[    5.265251]  ? klist_node_init+0x61/0x80
+[    5.265464]  bus_add_driver+0x254/0x2a0
+[    5.265673]  driver_register+0xd3/0x150
+[    5.265882]  ? 0xffffffffc0048000
+[    5.266064]  do_one_initcall+0x84/0x250
+[    5.266274]  ? trace_event_raw_event_initcall_finish+0x150/0x150
+[    5.266596]  ? unpoison_range+0xf/0x30
+[    5.266801]  ? ____kasan_kmalloc.constprop.0+0x84/0xa0
+[    5.267082]  ? unpoison_range+0xf/0x30
+[    5.267287]  ? unpoison_range+0xf/0x30
+[    5.267491]  do_init_module+0xf8/0x350
+[    5.267697]  load_module+0x3fe6/0x4340
+[    5.267902]  ? vm_unmap_ram+0x1d0/0x1d0
+[    5.268115]  ? module_frob_arch_sections+0x20/0x20
+[    5.268375]  ? __do_sys_finit_module+0x108/0x170
+[    5.268624]  __do_sys_finit_module+0x108/0x170
+[    5.268865]  ? __ia32_sys_init_module+0x40/0x40
+[    5.269111]  ? file_open_root+0x200/0x200
+[    5.269330]  ? do_sys_open+0x85/0xe0
+[    5.269527]  ? filp_open+0x50/0x50
+[    5.269714]  ? exit_to_user_mode_prepare+0xfc/0x130
+[    5.269978]  do_syscall_64+0x33/0x40
+[    5.270176]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+[    5.270450] RIP: 0033:0x7fa3f685bcf7
+[    5.270646] Code: 48 89 57 30 48 8b 04 24 48 89 47 38 e9 1d a0 02 00 48 89 f8 48 89 f7 48 89 d1
+[    5.271634] RSP: 002b:00007ffca83048d8 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[    5.272037] RAX: ffffffffffffffda RBX: 0000000001e94a70 RCX: 00007fa3f685bcf7
+[    5.272416] RDX: 0000000000000000 RSI: 0000000001e939e0 RDI: 0000000000000003
+[    5.272794] RBP: 0000000000000003 R08: 0000000000000000 R09: 0000000000000001
+[    5.273171] R10: 00007fa3f68bf300 R11: 0000000000000246 R12: 0000000001e939e0
+[    5.273550] R13: 0000000000000000 R14: 0000000001e93bd0 R15: 0000000000000001
+[    5.273928] ==================================================================
+
+Signed-off-by: Tong Zhang <ztong0001@gmail.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/20210203040727.868921-1-ztong0001@gmail.com
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/qxl/qxl_drv.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 1864467f1063..1b09bbe98055 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -144,6 +144,8 @@ static void qxl_drm_release(struct drm_device *dev)
+ 	 * reordering qxl_modeset_fini() + qxl_device_fini() calls is
+ 	 * non-trivial though.
+ 	 */
++	if (!dev->registered)
++		return;
+ 	qxl_modeset_fini(qdev);
+ 	qxl_device_fini(qdev);
+ }
+-- 
+2.30.2
+
+_______________________________________________
+Spice-devel mailing list
+Spice-devel@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/spice-devel
