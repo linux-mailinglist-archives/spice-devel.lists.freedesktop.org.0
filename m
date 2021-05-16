@@ -2,53 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A06C37A50C
-	for <lists+spice-devel@lfdr.de>; Tue, 11 May 2021 12:52:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8C8C3820A8
+	for <lists+spice-devel@lfdr.de>; Sun, 16 May 2021 21:29:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 21CA06EA19;
-	Tue, 11 May 2021 10:52:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 33B526E862;
+	Sun, 16 May 2021 19:29:13 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B1EA96EA17
- for <spice-devel@lists.freedesktop.org>; Tue, 11 May 2021 10:45:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1620729934;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fz6APZgVVSzyZ2NvuvgdrfUOBc1EEiPUznfJ8AorQ6Y=;
- b=P1IyKn2kq6O4SYE9rvB/v9k7toqO+g5gtnaNC6srUHipr87TovfFarZXfhTXdX/xrfAKgH
- dTAcxd/dv1VUDtsQswILCQFylVd1YuVkqz01vWEoFgfgqhW1bbU+adO9e+0ljP8J80tUU0
- omJDtp2MnfFbFef5kvUVTibe6ik0SvU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-46-_56KFLUAMf2Yly7CyqlIag-1; Tue, 11 May 2021 06:45:33 -0400
-X-MC-Unique: _56KFLUAMf2Yly7CyqlIag-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9C0F5100670E;
- Tue, 11 May 2021 10:45:31 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-11.ams2.redhat.com
- [10.36.112.11])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 0BA3462499;
- Tue, 11 May 2021 10:45:29 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 577201800904; Tue, 11 May 2021 12:45:22 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Date: Tue, 11 May 2021 12:45:22 +0200
-Message-Id: <20210511104522.2694803-3-kraxel@redhat.com>
-In-Reply-To: <20210511104522.2694803-1-kraxel@redhat.com>
-References: <20210511104522.2694803-1-kraxel@redhat.com>
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BC92F6E838
+ for <spice-devel@lists.freedesktop.org>; Sun, 16 May 2021 17:19:45 +0000 (UTC)
+Received: by mail-qt1-x833.google.com with SMTP id 1so3368297qtb.0
+ for <spice-devel@lists.freedesktop.org>; Sun, 16 May 2021 10:19:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=to:from:subject:message-id:date:user-agent:mime-version
+ :content-transfer-encoding:content-language;
+ bh=U+6+wz+HfwWm/MGmqfm6TE9u1SjJrBbBdvMbxWHDJ/s=;
+ b=oUqQ6LFlA4/B/NQMzr4qNigfX1dcaGE8mJV9t11JTleUkKiGyYebi8P6mVCmPRhQtO
+ 9zG298r1J9W+zr5bEcHINlULub/3WyRFuEy2D/FAzlTL7JM/lVQmcEHqxTvLSTS7Guqk
+ iERMkON5usXsvyNqIuH0VevitFL3WTx2ReokcZT3xwoA/K9nIvNcoWj1YavcsZwHUOOd
+ P/cwQ147wfes2WjOHD86jznoJ//8ETrjGT4ZnRY9Sn43X/Hk5tn/dnvQcY+KuHa+ykjK
+ kbpLNs/buYZNkaW7sC443vf16ByMI09ovR38Y4YrHd7nfPCGsISD0oDGsIKxzqXp/TDe
+ 27+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+ :mime-version:content-transfer-encoding:content-language;
+ bh=U+6+wz+HfwWm/MGmqfm6TE9u1SjJrBbBdvMbxWHDJ/s=;
+ b=bKIBbOdg4MHs81Pv6UYTXt7ndiLm1odTcXPkPuFlc2TonZgzom3TaDMaXMHWgf2G3C
+ 22kWQ9xP6vYxapks2ddosjGCQRT788GXv+KNgkr1J6whn7SaUujSJmUR0Wub6rtY5s5i
+ 7mL5i2rnQyRln+YaDKcg80Hr8LQurXmKBn8/bQcZ8+4OZcjuwrAYgEs1LeWbuf8KFi8/
+ lXCNILVHny3hm4ZXNiMYDhNnbCNOCgAzO+UG+Wff3vATDIYNUZnr+46igKxSD3WCv3so
+ nXvvnQsTiS1dsOSw7lp9q5k3L4ERQt8Cr4kXm8UpY/A2F0US0gGWG03LzeGbFpdV9ZzC
+ G/jQ==
+X-Gm-Message-State: AOAM532jmttwQSWLh+h61UzEiYHyy9YLbKkaHXA1kCzeC33JFRGjQVLv
+ 06qZqyCX4u/WXVCb/KN+d8P9MViwZJBb7Q==
+X-Google-Smtp-Source: ABdhPJwtGjd3PwjZjnXAInosoGhHqUWZHUf5F9xp7R2uJQeMFEW9xavn4ljtKtJyqDmRcTI3elw10Q==
+X-Received: by 2002:ac8:744b:: with SMTP id h11mr54139121qtr.199.1621185584641; 
+ Sun, 16 May 2021 10:19:44 -0700 (PDT)
+Received: from ?IPv6:2607:fea8:44e3:8000:2a1d:e8e8:abdc:a63c?
+ ([2607:fea8:44e3:8000:2a1d:e8e8:abdc:a63c])
+ by smtp.gmail.com with ESMTPSA id v66sm8542337qkd.113.2021.05.16.10.19.43
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 16 May 2021 10:19:44 -0700 (PDT)
+To: spice-devel@lists.freedesktop.org
+From: Siva Prasad <sivaprasad.ucc@gmail.com>
+Message-ID: <ae112e79-ad32-fc00-31d3-ff489d8e5586@gmail.com>
+Date: Sun, 16 May 2021 13:19:43 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Mailman-Approved-At: Tue, 11 May 2021 10:52:05 +0000
-Subject: [Spice-devel] [PATCH 2/2] drm/qxl: balance dumb_shadow_bo pin
+Content-Language: en-US
+X-Mailman-Approved-At: Sun, 16 May 2021 19:29:12 +0000
+Subject: [Spice-devel] Inquiry
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,40 +68,22 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
- <virtualization@lists.linux-foundation.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-The shadow bo is created in pinned state, so we have to unpin it when
-dropping the reference.  Otherwise ttm is unhappy and throws a WARN()
-on release.
+Dear Sir/Madam,
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- drivers/gpu/drm/qxl/qxl_display.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index be5183733c1b..9e0a1e836011 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -801,6 +801,7 @@ static void qxl_prepare_shadow(struct qxl_device *qdev, struct qxl_bo *user_bo,
- 	    qdev->dumb_shadow_bo->surf.width  != surf.width ||
- 	    qdev->dumb_shadow_bo->surf.height != surf.height) {
- 		if (qdev->dumb_shadow_bo) {
-+			qxl_bo_unpin(qdev->dumb_shadow_bo);
- 			drm_gem_object_put
- 				(&qdev->dumb_shadow_bo->tbo.base);
- 			qdev->dumb_shadow_bo = NULL;
--- 
-2.31.1
+I have installed gnome boxes in ubuntu 20.04 and have been accessing 
+windows 10 from there. I tried install spice tools but still not able to 
+share folders. Any help is much appreciated.
+
+
+Thanks and Regards
+
+Siva
 
 _______________________________________________
 Spice-devel mailing list
