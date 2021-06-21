@@ -1,51 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67F083AE6B5
-	for <lists+spice-devel@lfdr.de>; Mon, 21 Jun 2021 12:05:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD06F3AE8BE
+	for <lists+spice-devel@lfdr.de>; Mon, 21 Jun 2021 14:07:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8DCFA89CDB;
-	Mon, 21 Jun 2021 10:05:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6625C89C09;
+	Mon, 21 Jun 2021 12:07:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9111789CDB
- for <spice-devel@lists.freedesktop.org>; Mon, 21 Jun 2021 10:05:17 +0000 (UTC)
-Received: by mail-pl1-x62b.google.com with SMTP id y13so2153036plc.8
- for <spice-devel@lists.freedesktop.org>; Mon, 21 Jun 2021 03:05:17 -0700 (PDT)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 96FE889C09
+ for <spice-devel@lists.freedesktop.org>; Mon, 21 Jun 2021 12:07:13 +0000 (UTC)
+Received: by mail-lf1-x134.google.com with SMTP id x24so29768491lfr.10
+ for <spice-devel@lists.freedesktop.org>; Mon, 21 Jun 2021 05:07:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=okmgyKly3MJvIP/UUTBYEJDskDZZjcGjT9iOmzDzfek=;
- b=OlgV1xxJbTKVoVPp7zFfjODkUV5F4YigAmIMC68W8FC7+cvtm83Y/0DqUCI5Di0kHO
- q1lsjkiwqHIiWFkzFMvn+Z23MkqSatu114MuuXYcUwNeuYfzX4rKjhWco6/M5neW0XQP
- nnW0hpBVPu2J1YFjqcvEkUWJQKtDYRviDssPXQNkTDezZxCQ7FgSaSMfpa3weWfNbjC4
- NuEOY4OH9eKfI8bO5dFqhA+kD2PckAJ7F9+Dsrm4mD0aht80MD+tL83ECwsucmGuleaD
- xfGWthCZIyeeXCSrogP4kPcCTEiMyIdNIvA3DAdUhY3qP+vqHClgvD12LX+brHI9TxxW
- NB9g==
+ h=to:from:subject:message-id:date:user-agent:mime-version
+ :content-transfer-encoding:content-language;
+ bh=clAx6dktktDgPFusVslppD9QS3QE39BywOx3ehd+9as=;
+ b=MA+Bskf9ZV9jXxjhzV/fEF/PKeYRetng/eF5shs07GEtWNWMvW+qgcRzsqicJjYxAP
+ XboxQ6lFsP1fLOYQ3gQlcWE4XRuIwKyGNo7Pb63NDWGvWjg4wSwGN0jn0DoY1UlQfv+T
+ 7bPKTtDaJf3ThiixlvfanY+t3n4VAgDcHavmt95vQL4V5RFraWOSmNa4n2sTvgH8ey0E
+ cC/6Nlyir/N+aqOnvva3LZIAuqHRWQ9KNvFuNoj+JTpOZ8+ysdOxKWMvTBQ4sr+NZ96k
+ elUl0bLOzMUpP5vxf4sB3eIXBCOY1fEd7YSqMOWG9+KGN6+HLwxXo8G1rPcsQTcCAxX0
+ 8scg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=okmgyKly3MJvIP/UUTBYEJDskDZZjcGjT9iOmzDzfek=;
- b=VUgfYzzrh/rHaD2/bLrBdFNjPX6OmqaT0rroxisGTtKAEv6jLVPxRivpVi6jRFsUak
- Z2jHMcHjVb0v4FFjGkZseVhORjjrGHkCJwvh/DCqCHWLhnVX11CsFbqq7NyGs6AbGsVk
- dXEQlQ/b61tu6LwtbX8/Oi0K8VSqg64FebGbVpxSieHD6GuypHveGdYxfRxpmsZNilQA
- pAjUddg9csIDAlS1E/NGLeQlmIYMAS0Xm14mzsob6ZvTV9vfKwKLdiDOgLea8b7zBU2/
- JsDKsnfXV1wKD3YnnVj9YbRyOo5/oFSGS6PIE+rcHVc4GwqSV7UjxiRsG/9ksBvt3MD0
- Hwmw==
-X-Gm-Message-State: AOAM532+cqLjFs3pdpi19Pb44k2RaWbe2tMbbQNNTkX0nasO+9SOZmJu
- Eg6OFsor/oQ6Pqjjmop1TDE2CmSxh6oBtiq2tjTGimtiWlqOQw==
-X-Google-Smtp-Source: ABdhPJzZsCtMSiiKUkmPNGMHi/vMngfhQP/l3Wk9rPkvqtUslbc7aO1KadvVJrbo4DYlqSfGZI8aMZo/4xQ9RSaDjsA=
-X-Received: by 2002:a17:90b:23d5:: with SMTP id
- md21mr7918399pjb.203.1624269916738; 
- Mon, 21 Jun 2021 03:05:16 -0700 (PDT)
-MIME-Version: 1.0
-From: "Noah O'Donoghue" <noah.odonoghue@gmail.com>
-Date: Mon, 21 Jun 2021 17:04:59 +0700
-Message-ID: <CANVktGPb3s2rEiOu+SmRtegN65tu4w+wDmxPgLNv5_Kgm3+hyQ@mail.gmail.com>
+ h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+ :mime-version:content-transfer-encoding:content-language;
+ bh=clAx6dktktDgPFusVslppD9QS3QE39BywOx3ehd+9as=;
+ b=a5ezJmx4zPBUAIPh2l56YZMrh2/5aicwgrlzzkOVn4aIPqdafESiQ0BdXPuQMJ0fvL
+ IhKCeB7Jh9bZRmuYMlznAdPd3f6+OCN7A6JRzqTBhMWfcewCM9EbnnMVr3fDFpdF+avA
+ 9pfIzogwn80cNarM6mkIq7a3kmG4TngMkwZfmCyFERajNfmoRsheyEHQt4hHWOL548SC
+ dHwNEqmLlFrb3EcP7Xn60pn7PtSx9woL+HnHAM7N9hvDk4qVnTY4lA6yEK0keJTN45bZ
+ Koa3EA0TgdQHkhKRiubyFxbRvCZxC1S+MrC+FSEQFDRHi7snFwmNv3TVVJwXYVJUCqx/
+ oXXQ==
+X-Gm-Message-State: AOAM530PcifRybu+Jikf1FaLENjGkeMIi/UrNEPzCgmM9IgGKruY5IYv
+ yvQ3wWldlZjfzzdF4pty3DZXzkTqyBQ=
+X-Google-Smtp-Source: ABdhPJxA/xRQLtxRz3LB3t5e6A+4PW356cnNcMeYeG55SP38l1IYMnzuTWk6yXYwzSfYe8pPrZYDBg==
+X-Received: by 2002:a05:6512:1683:: with SMTP id
+ bu3mr14521273lfb.520.1624277231580; 
+ Mon, 21 Jun 2021 05:07:11 -0700 (PDT)
+Received: from ?IPv6:2a03:1ac0:6dc3:311::1? ([2a03:1ac0:6dc3:311::1])
+ by smtp.gmail.com with ESMTPSA id y22sm1858274lfa.145.2021.06.21.05.07.10
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Jun 2021 05:07:11 -0700 (PDT)
 To: spice-devel@lists.freedesktop.org
-Subject: [Spice-devel] Spice with H264/5
+From: =?UTF-8?B?0LjQu9GM0Y8g0L/QsNGJ0YPQug==?= <ilusha.paschuk@gmail.com>
+Message-ID: <a5a9bd65-778e-a6c0-1994-5a03ee224353@gmail.com>
+Date: Mon, 21 Jun 2021 15:07:02 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+MIME-Version: 1.0
+Content-Language: en-US
+Subject: [Spice-devel] about key grabbing and screenreader accessibility
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,61 +67,27 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1861699936=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---===============1861699936==
-Content-Type: multipart/alternative; boundary="000000000000681de605c543cfc8"
+hello.
 
---000000000000681de605c543cfc8
-Content-Type: text/plain; charset="UTF-8"
 
-Hi all,
+when working in linux in virt-manager, if I enable key grabbing feature, 
+keys are anyway captured by the atspi subsystem and my screen reader.
 
-I'm trying to use gstreamer with spice to encode/decode video, as I think
-it will be much faster and smoother than MJPEG,
 
-I've installed these packages on both client and server (Ubuntu 20.04)
-gstreamer1.0-plugins-base
-gstreamer1.0-plugins-good,
+details can be found in this github issue:
 
-And with remote-viewer --spice-debug I can see that my client/server are
-advertising a range of protocols (including H264)..
 
-But for some reason it only uses MJPEG..?
+https://github.com/virt-manager/virt-manager/issues/206
 
-Any ideas?
 
-Cheers,
-Noah
-
---000000000000681de605c543cfc8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi all, <br></div><div><br></div><div>I&#39;m trying =
-to use gstreamer with spice to encode/decode video, as I think it will be m=
-uch faster and smoother than MJPEG, <br></div><div><br></div><div>I&#39;ve =
-installed these packages on both client and server (Ubuntu 20.04)<br></div>=
-<div>gstreamer1.0-plugins-base <br></div><div>gstreamer1.0-plugins-good, <b=
-r></div><div><br></div><div>And with=C2=A0remote-viewer --spice-debug I can=
- see that my client/server are advertising a range of protocols (including =
-H264).. <br></div><div><br></div><div>But for some reason it only uses MJPE=
-G..?</div><div><br></div><div>Any ideas?</div><div><br></div><div>Cheers,</=
-div><div>Noah<br></div></div>
-
---000000000000681de605c543cfc8--
-
---===============1861699936==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+they had refused to do this change on their side.
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
-
---===============1861699936==--
