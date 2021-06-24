@@ -1,61 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD06F3AE8BE
-	for <lists+spice-devel@lfdr.de>; Mon, 21 Jun 2021 14:07:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id DE6AA3B2B09
+	for <lists+spice-devel@lfdr.de>; Thu, 24 Jun 2021 11:05:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6625C89C09;
-	Mon, 21 Jun 2021 12:07:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 54D746EA8D;
+	Thu, 24 Jun 2021 09:05:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 96FE889C09
- for <spice-devel@lists.freedesktop.org>; Mon, 21 Jun 2021 12:07:13 +0000 (UTC)
-Received: by mail-lf1-x134.google.com with SMTP id x24so29768491lfr.10
- for <spice-devel@lists.freedesktop.org>; Mon, 21 Jun 2021 05:07:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=to:from:subject:message-id:date:user-agent:mime-version
- :content-transfer-encoding:content-language;
- bh=clAx6dktktDgPFusVslppD9QS3QE39BywOx3ehd+9as=;
- b=MA+Bskf9ZV9jXxjhzV/fEF/PKeYRetng/eF5shs07GEtWNWMvW+qgcRzsqicJjYxAP
- XboxQ6lFsP1fLOYQ3gQlcWE4XRuIwKyGNo7Pb63NDWGvWjg4wSwGN0jn0DoY1UlQfv+T
- 7bPKTtDaJf3ThiixlvfanY+t3n4VAgDcHavmt95vQL4V5RFraWOSmNa4n2sTvgH8ey0E
- cC/6Nlyir/N+aqOnvva3LZIAuqHRWQ9KNvFuNoj+JTpOZ8+ysdOxKWMvTBQ4sr+NZ96k
- elUl0bLOzMUpP5vxf4sB3eIXBCOY1fEd7YSqMOWG9+KGN6+HLwxXo8G1rPcsQTcCAxX0
- 8scg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:to:from:subject:message-id:date:user-agent
- :mime-version:content-transfer-encoding:content-language;
- bh=clAx6dktktDgPFusVslppD9QS3QE39BywOx3ehd+9as=;
- b=a5ezJmx4zPBUAIPh2l56YZMrh2/5aicwgrlzzkOVn4aIPqdafESiQ0BdXPuQMJ0fvL
- IhKCeB7Jh9bZRmuYMlznAdPd3f6+OCN7A6JRzqTBhMWfcewCM9EbnnMVr3fDFpdF+avA
- 9pfIzogwn80cNarM6mkIq7a3kmG4TngMkwZfmCyFERajNfmoRsheyEHQt4hHWOL548SC
- dHwNEqmLlFrb3EcP7Xn60pn7PtSx9woL+HnHAM7N9hvDk4qVnTY4lA6yEK0keJTN45bZ
- Koa3EA0TgdQHkhKRiubyFxbRvCZxC1S+MrC+FSEQFDRHi7snFwmNv3TVVJwXYVJUCqx/
- oXXQ==
-X-Gm-Message-State: AOAM530PcifRybu+Jikf1FaLENjGkeMIi/UrNEPzCgmM9IgGKruY5IYv
- yvQ3wWldlZjfzzdF4pty3DZXzkTqyBQ=
-X-Google-Smtp-Source: ABdhPJxA/xRQLtxRz3LB3t5e6A+4PW356cnNcMeYeG55SP38l1IYMnzuTWk6yXYwzSfYe8pPrZYDBg==
-X-Received: by 2002:a05:6512:1683:: with SMTP id
- bu3mr14521273lfb.520.1624277231580; 
- Mon, 21 Jun 2021 05:07:11 -0700 (PDT)
-Received: from ?IPv6:2a03:1ac0:6dc3:311::1? ([2a03:1ac0:6dc3:311::1])
- by smtp.gmail.com with ESMTPSA id y22sm1858274lfa.145.2021.06.21.05.07.10
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Jun 2021 05:07:11 -0700 (PDT)
-To: spice-devel@lists.freedesktop.org
-From: =?UTF-8?B?0LjQu9GM0Y8g0L/QsNGJ0YPQug==?= <ilusha.paschuk@gmail.com>
-Message-ID: <a5a9bd65-778e-a6c0-1994-5a03ee224353@gmail.com>
-Date: Mon, 21 Jun 2021 15:07:02 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BAD056EA8D;
+ Thu, 24 Jun 2021 09:05:03 +0000 (UTC)
+Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 6ABE52197D;
+ Thu, 24 Jun 2021 09:05:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1624525502; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=T5Qe+XA5tUEIi39mYqUowu6I4/Ub2Rn/PDDgcGNwwIY=;
+ b=A2vOlXQ7JcR73UdNs8+O0k6o10MNtB8iCnZj2yC43VTG4HgQALN4R4nNsYqsGieP79xA93
+ aJ7pxi9TpiC/+5UAi209i698VwlKlIyskhIRkPQa6Yz07h0Y+eq019drKVbTnEhgtA7NuO
+ gnGTGGG1t7tVzw5M2cW7UEA0LkDEd7s=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1624525502;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=T5Qe+XA5tUEIi39mYqUowu6I4/Ub2Rn/PDDgcGNwwIY=;
+ b=qjdg5zwY0tPij6ffuVV2eAKh9LKxQIX8mhMVZLebPpWColU0kCK0HLK0FKSq0I+AvJNloq
+ YQ2eHq1Qi03lLDAQ==
+Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ by imap.suse.de (Postfix) with ESMTP id 43AA911A97;
+ Thu, 24 Jun 2021 09:05:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1624525502; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=T5Qe+XA5tUEIi39mYqUowu6I4/Ub2Rn/PDDgcGNwwIY=;
+ b=A2vOlXQ7JcR73UdNs8+O0k6o10MNtB8iCnZj2yC43VTG4HgQALN4R4nNsYqsGieP79xA93
+ aJ7pxi9TpiC/+5UAi209i698VwlKlIyskhIRkPQa6Yz07h0Y+eq019drKVbTnEhgtA7NuO
+ gnGTGGG1t7tVzw5M2cW7UEA0LkDEd7s=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1624525502;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=T5Qe+XA5tUEIi39mYqUowu6I4/Ub2Rn/PDDgcGNwwIY=;
+ b=qjdg5zwY0tPij6ffuVV2eAKh9LKxQIX8mhMVZLebPpWColU0kCK0HLK0FKSq0I+AvJNloq
+ YQ2eHq1Qi03lLDAQ==
+Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
+ id /RmrD75K1GCFNQAALh3uQQ
+ (envelope-from <tzimmermann@suse.de>); Thu, 24 Jun 2021 09:05:02 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@redhat.com,
+	kraxel@redhat.com,
+	daniel@ffwll.ch
+Date: Thu, 24 Jun 2021 11:05:00 +0200
+Message-Id: <20210624090500.8320-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Content-Language: en-US
-Subject: [Spice-devel] about key grabbing and screenreader accessibility
+Subject: [Spice-devel] [PATCH] drm/qxl: Remove empty qxl_gem_prime_mmap()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,25 +71,66 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-hello.
+The function qxl_gem_prime_mmap() returns an error. The two callers
+of gem_prime_mmap are drm_fbdev_fb_mmap() and drm_gem_dmabuf_mmap(),
+which both already handle NULL-callbacks with an error code. So clear
+gem_prime_mmap in qxl and remove qxl_gem_prime_mmap().
 
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/qxl/qxl_drv.c   | 1 -
+ drivers/gpu/drm/qxl/qxl_drv.h   | 2 --
+ drivers/gpu/drm/qxl/qxl_prime.c | 6 ------
+ 3 files changed, 9 deletions(-)
 
-when working in linux in virt-manager, if I enable key grabbing feature, 
-keys are anyway captured by the atspi subsystem and my screen reader.
-
-
-details can be found in this github issue:
-
-
-https://github.com/virt-manager/virt-manager/issues/206
-
-
-they had refused to do this change on their side.
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 854e6c5a563f..b3d75ea7e6b3 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -281,7 +281,6 @@ static struct drm_driver qxl_driver = {
+ 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
+ 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+ 	.gem_prime_import_sg_table = qxl_gem_prime_import_sg_table,
+-	.gem_prime_mmap = qxl_gem_prime_mmap,
+ 	.fops = &qxl_fops,
+ 	.ioctls = qxl_ioctls,
+ 	.irq_handler = qxl_irq_handler,
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+index dd6abee55f56..f95885a8bd2b 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.h
++++ b/drivers/gpu/drm/qxl/qxl_drv.h
+@@ -434,8 +434,6 @@ struct drm_gem_object *qxl_gem_prime_import_sg_table(
+ int qxl_gem_prime_vmap(struct drm_gem_object *obj, struct dma_buf_map *map);
+ void qxl_gem_prime_vunmap(struct drm_gem_object *obj,
+ 			  struct dma_buf_map *map);
+-int qxl_gem_prime_mmap(struct drm_gem_object *obj,
+-				struct vm_area_struct *vma);
+ 
+ /* qxl_irq.c */
+ int qxl_irq_init(struct qxl_device *qdev);
+diff --git a/drivers/gpu/drm/qxl/qxl_prime.c b/drivers/gpu/drm/qxl/qxl_prime.c
+index 0628d1cc91fe..4a10cb0a413b 100644
+--- a/drivers/gpu/drm/qxl/qxl_prime.c
++++ b/drivers/gpu/drm/qxl/qxl_prime.c
+@@ -73,9 +73,3 @@ void qxl_gem_prime_vunmap(struct drm_gem_object *obj,
+ 
+ 	qxl_bo_vunmap(bo);
+ }
+-
+-int qxl_gem_prime_mmap(struct drm_gem_object *obj,
+-		       struct vm_area_struct *area)
+-{
+-	return -ENOSYS;
+-}
+-- 
+2.32.0
 
 _______________________________________________
 Spice-devel mailing list
