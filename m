@@ -1,69 +1,53 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B44083B7E6E
-	for <lists+spice-devel@lfdr.de>; Wed, 30 Jun 2021 09:59:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71CDD3BC770
+	for <lists+spice-devel@lfdr.de>; Tue,  6 Jul 2021 09:47:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D955C6E946;
-	Wed, 30 Jun 2021 07:59:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9498C89A76;
+	Tue,  6 Jul 2021 07:47:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1DC6A89CDF
- for <spice-devel@lists.freedesktop.org>; Tue, 29 Jun 2021 17:03:44 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id u8so37683wrq.8
- for <spice-devel@lists.freedesktop.org>; Tue, 29 Jun 2021 10:03:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20150623.gappssmtp.com; s=20150623;
- h=subject:to:cc:references:from:organization:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=1mzwo7wjAUa0IJEbXNRwxkpgdnTr5r+kaQt26hfpS9Q=;
- b=QmmxT28DkHNzpao9vOpgiqd/+dJLsDibGQbrStNZ7JbAn0dorBqHkDj0WWKEfZk7OQ
- FNxBzNYYbYzgKsCZ0j18iEU1KtSxaIL4Fyk8uM4HCQ67154O4rhEmH9kLiuRXoOrC5q7
- S624F07BLgYEYsvGXAHARz0QA4dg1CTiaNym2G/4ZRiWeANMPe2N15L3MveDp/WgRSYk
- IJA2nKKslgAsYg8dbGq8sMAXlDTQQYlDUbjGPAMWzEYVYvDRIOTDYXncAhpesbhqxL40
- 4Pb94hp2YdPRJ2JAMke+tMLiLTqa8JIZadNCDJ75yRoh9swK/MMMGXHQQBoAwR42SkSD
- djPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:organization
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=1mzwo7wjAUa0IJEbXNRwxkpgdnTr5r+kaQt26hfpS9Q=;
- b=W1f7tSNPtI73q+WlVE/CWEDSRA8BHB7i+KrKoPF0ockaNK8aswYN0KRAThYyPPaIJv
- tBezBlQYfQZLEveOFBnAttpVsV9xZXQvil5xTj6dXpYzcwZV98pcqRBjFLJcUplt7W66
- e2+g//nHYjVForXKzcta3MCM8nyfzZ/bkst6ih8fIPQ0Vkx2gbHcMJnbuYrV/OpT4SSW
- d6BMpGT/ZfP91A+TNQ79JKs1oZMwn+2NTMX0ZHQ7q5qVWI4kVPBd6wBJZX6l5VmY8Mqb
- qaeS32mt1JQ1fqnOJ+VFzb4zOVDFRk6UjvZH37n8xErCMVoO2Jvvmgyahy/V/siMkwvV
- QTdw==
-X-Gm-Message-State: AOAM532zr6M9JgGWuZoypGzufZaJBWUEg6DDx4vcJVnYOXcAoHPvVy/h
- jYskB2+C+UZcCEYP5RBWHALGjw==
-X-Google-Smtp-Source: ABdhPJw9BHdV2PhR+4EY9fQcITZ83GZhxsD5N3hVP1Z53THaNgNupwsLwr8mtFaReraEAQtYUI3qaQ==
-X-Received: by 2002:adf:ff8e:: with SMTP id j14mr34485328wrr.374.1624986222594; 
- Tue, 29 Jun 2021 10:03:42 -0700 (PDT)
-Received: from ?IPv6:2001:861:44c0:66c0:9ed5:b63d:622c:fb4e?
- ([2001:861:44c0:66c0:9ed5:b63d:622c:fb4e])
- by smtp.gmail.com with ESMTPSA id h10sm3399285wmb.40.2021.06.29.10.03.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Jun 2021 10:03:37 -0700 (PDT)
-To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
- airlied@redhat.com
-References: <20210629135833.22679-1-tzimmermann@suse.de>
-From: Neil Armstrong <narmstrong@baylibre.com>
-Organization: Baylibre
-Message-ID: <32c2b8f1-e8e5-c161-ed87-f80190173552@baylibre.com>
-Date: Tue, 29 Jun 2021 19:03:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A822789A76;
+ Tue,  6 Jul 2021 07:47:38 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5F85E2267D;
+ Tue,  6 Jul 2021 07:47:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1625557657; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=OOEMKHLnj2v83lJXaqLqWz0H+CjzlLXgAV1dW0vTbUE=;
+ b=G2NPq8A1JJaK0+DxLpT7Dt1N9kXw8lx7j6c0zpxrnmwLgSF3K8QNBiMaSqxeyJlObOt3px
+ DvCzQX6Kcgtn0VmFOh+zcq6UgtaHBmrcKxqtlhiefW0da9OerHr+ZjOS4J/6pXMSTeBAnb
+ kZ6uu5vEln+p9a1Lc6fRKQAqwRzkueI=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1625557657;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=OOEMKHLnj2v83lJXaqLqWz0H+CjzlLXgAV1dW0vTbUE=;
+ b=qQd6fR4u28ij0kuXXJz40CZYpDw0kax5OmpO6YnFUmAn9JKVuSckaf3iqSeeqq+sAvz5/Q
+ K9bYBYVKR8WlWsAQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 25A4913A42;
+ Tue,  6 Jul 2021 07:47:37 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id YYXfB5kK5GAYbgAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Tue, 06 Jul 2021 07:47:37 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@redhat.com, kraxel@redhat.com, airlied@linux.ie, daniel@ffwll.ch
+Date: Tue,  6 Jul 2021 09:47:35 +0200
+Message-Id: <20210706074735.8849-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-In-Reply-To: <20210629135833.22679-1-tzimmermann@suse.de>
-Content-Language: en-US
-X-Mailman-Approved-At: Wed, 30 Jun 2021 07:59:53 +0000
-Subject: Re: [Spice-devel] [PATCH] drm/aperture: Pass DRM driver structure
- instead of driver name
+Subject: [Spice-devel] [PATCH] drm/qxl: Convert to Linux IRQ interfaces
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,53 +59,88 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-hyperv@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, linux-rockchip@lists.infradead.org,
- amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- linux-tegra@vger.kernel.org, spice-devel@lists.freedesktop.org,
- linux-amlogic@lists.infradead.org, freedreno@lists.freedesktop.org,
- linux-sunxi@lists.linux.dev, linux-arm-kernel@lists.infradead.org
+Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+Drop the DRM IRQ midlayer in favor of Linux IRQ interfaces. DRM's
+IRQ helpers are mostly useful for UMS drivers. Modern KMS drivers
+don't benefit from using it.
 
-On 29/06/2021 15:58, Thomas Zimmermann wrote:
-> Print the name of the DRM driver when taking over fbdev devices. Makes
-> the output to dmesg more consistent. Note that the driver name is only
-> used for printing a string to the kernel log. No UAPI is affected by this
-> change.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> ---
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/qxl/qxl_drv.c | 1 -
+ drivers/gpu/drm/qxl/qxl_drv.h | 1 -
+ drivers/gpu/drm/qxl/qxl_irq.c | 9 +++++----
+ 3 files changed, 5 insertions(+), 6 deletions(-)
 
-...
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index 31f4c86ceb99..cfd3fbda6df6 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -284,7 +284,6 @@ static struct drm_driver qxl_driver = {
+ 	.gem_prime_mmap = qxl_gem_prime_mmap,
+ 	.fops = &qxl_fops,
+ 	.ioctls = qxl_ioctls,
+-	.irq_handler = qxl_irq_handler,
+ 	.name = DRIVER_NAME,
+ 	.desc = DRIVER_DESC,
+ 	.date = DRIVER_DATE,
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+index dd6abee55f56..717c2d270f04 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.h
++++ b/drivers/gpu/drm/qxl/qxl_drv.h
+@@ -439,7 +439,6 @@ int qxl_gem_prime_mmap(struct drm_gem_object *obj,
+ 
+ /* qxl_irq.c */
+ int qxl_irq_init(struct qxl_device *qdev);
+-irqreturn_t qxl_irq_handler(int irq, void *arg);
+ 
+ void qxl_debugfs_add_files(struct qxl_device *qdev,
+ 			   struct drm_info_list *files,
+diff --git a/drivers/gpu/drm/qxl/qxl_irq.c b/drivers/gpu/drm/qxl/qxl_irq.c
+index d312322cacd1..665278ee3b6d 100644
+--- a/drivers/gpu/drm/qxl/qxl_irq.c
++++ b/drivers/gpu/drm/qxl/qxl_irq.c
+@@ -25,11 +25,11 @@
+ 
+ #include <linux/pci.h>
+ 
+-#include <drm/drm_irq.h>
++#include <drm/drm_drv.h>
+ 
+ #include "qxl_drv.h"
+ 
+-irqreturn_t qxl_irq_handler(int irq, void *arg)
++static irqreturn_t qxl_irq_handler(int irq, void *arg)
+ {
+ 	struct drm_device *dev = (struct drm_device *) arg;
+ 	struct qxl_device *qdev = to_qxl(dev);
+@@ -81,7 +81,8 @@ static void qxl_client_monitors_config_work_func(struct work_struct *work)
+ 
+ int qxl_irq_init(struct qxl_device *qdev)
+ {
+-	struct pci_dev *pdev = to_pci_dev(qdev->ddev.dev);
++	struct drm_device *ddev = &qdev->ddev;
++	struct pci_dev *pdev = to_pci_dev(ddev->dev);
+ 	int ret;
+ 
+ 	init_waitqueue_head(&qdev->display_event);
+@@ -95,7 +96,7 @@ int qxl_irq_init(struct qxl_device *qdev)
+ 	atomic_set(&qdev->irq_received_cursor, 0);
+ 	atomic_set(&qdev->irq_received_io_cmd, 0);
+ 	qdev->irq_received_error = 0;
+-	ret = drm_irq_install(&qdev->ddev, pdev->irq);
++	ret = request_irq(pdev->irq, qxl_irq_handler, IRQF_SHARED, ddev->driver->name, ddev);
+ 	qdev->ram_header->int_mask = QXL_INTERRUPT_MASK;
+ 	if (unlikely(ret != 0)) {
+ 		DRM_ERROR("Failed installing irq: %d\n", ret);
+-- 
+2.32.0
 
->  drivers/gpu/drm/meson/meson_drv.c             |  2 +-
-
-Acked-by: Neil Armstrong <narmstrong@baylibre.com>
-
-...
-
->  
-> diff --git a/drivers/gpu/drm/meson/meson_drv.c b/drivers/gpu/drm/meson/meson_drv.c
-> index a7388bf7c838..3d0ccc7eef1b 100644
-> --- a/drivers/gpu/drm/meson/meson_drv.c
-> +++ b/drivers/gpu/drm/meson/meson_drv.c
-> @@ -285,7 +285,7 @@ static int meson_drv_bind_master(struct device *dev, bool has_components)
->  	 * Remove early framebuffers (ie. simplefb). The framebuffer can be
->  	 * located anywhere in RAM
->  	 */
-> -	ret = drm_aperture_remove_framebuffers(false, "meson-drm-fb");
-> +	ret = drm_aperture_remove_framebuffers(false, &meson_driver);
->  	if (ret)
->  		goto free_drm;
->  
-
-...
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
