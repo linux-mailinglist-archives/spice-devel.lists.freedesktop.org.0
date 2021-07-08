@@ -1,53 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71CDD3BC770
-	for <lists+spice-devel@lfdr.de>; Tue,  6 Jul 2021 09:47:42 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 331E83BF7DE
+	for <lists+spice-devel@lfdr.de>; Thu,  8 Jul 2021 11:59:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9498C89A76;
-	Tue,  6 Jul 2021 07:47:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1675B6E8AB;
+	Thu,  8 Jul 2021 09:59:40 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A822789A76;
- Tue,  6 Jul 2021 07:47:38 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 5F85E2267D;
- Tue,  6 Jul 2021 07:47:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1625557657; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=OOEMKHLnj2v83lJXaqLqWz0H+CjzlLXgAV1dW0vTbUE=;
- b=G2NPq8A1JJaK0+DxLpT7Dt1N9kXw8lx7j6c0zpxrnmwLgSF3K8QNBiMaSqxeyJlObOt3px
- DvCzQX6Kcgtn0VmFOh+zcq6UgtaHBmrcKxqtlhiefW0da9OerHr+ZjOS4J/6pXMSTeBAnb
- kZ6uu5vEln+p9a1Lc6fRKQAqwRzkueI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1625557657;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=OOEMKHLnj2v83lJXaqLqWz0H+CjzlLXgAV1dW0vTbUE=;
- b=qQd6fR4u28ij0kuXXJz40CZYpDw0kax5OmpO6YnFUmAn9JKVuSckaf3iqSeeqq+sAvz5/Q
- K9bYBYVKR8WlWsAQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 25A4913A42;
- Tue,  6 Jul 2021 07:47:37 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id YYXfB5kK5GAYbgAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Tue, 06 Jul 2021 07:47:37 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: airlied@redhat.com, kraxel@redhat.com, airlied@linux.ie, daniel@ffwll.ch
-Date: Tue,  6 Jul 2021 09:47:35 +0200
-Message-Id: <20210706074735.8849-1-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.32.0
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1A63F6E8A3
+ for <spice-devel@lists.freedesktop.org>; Thu,  8 Jul 2021 09:55:51 +0000 (UTC)
+Received: by mail-il1-x129.google.com with SMTP id g3so6056703ilj.7
+ for <spice-devel@lists.freedesktop.org>; Thu, 08 Jul 2021 02:55:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=ijr79wV8xXw1xxpR/5hlJbg6SDwWl4ysMy9GslbNYe0=;
+ b=DUEMOm9K9+D40gpRjJqwpKBMlDep4lxXq3IRp0fplq8PM2myUxoiY4c6P4o4oac0EV
+ T2o1Uno2dqwR19BV6BdG/mNt8MlEAkosqTiP4dUFjC6Xu4QWmglAwk/cvGfpK4+6PPRq
+ SwrcXINXeTxqdBr+hT7lHzBxf4POWLO6aN4Q7PuWebgPfRP3dVfysux+oHQHqBK95aaG
+ Y3gouEBu8P+NRQ1+QxpN2tBwnNIFlpff7y6BCRJ/Zn9pL3XuuwjSLfjnOb0N8j2iVP+6
+ Hw8E4uKUIPobWDwD8ucl49xvTdX3ON9znrqjdsqaM8vj40J+lGs87ggVVz534TsSDxT0
+ dVbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=ijr79wV8xXw1xxpR/5hlJbg6SDwWl4ysMy9GslbNYe0=;
+ b=uAxMe4dB9NJDxaq440vZNSRtAVpqXQ/lwjXJlDUrlYXlwzDrSUucPe+3FqqntYYD7p
+ pazVOkDNmKsndKautdygRKMwnzRI67B1LLNJV7l6gNPYDqosRofMZd4KDw6dNe0qLmG6
+ RWYV/6+ycJzxtGjpwo5br5jPqOfye6BTBWzzjh3Nbc82zyVesqzrWVBfk5eGrLIheSaB
+ Sa3laniMyPI26oI6XTM0hBn6bJ7KDWyaZE//JabQw+wyzasa9HUgBjqQxIO2CYjfbHhE
+ eaDFlIT3avUSCYCdN/OINXGfUQnd2TGnTW4/kQ6pX9HFDEAkZ0p+a2ZQg4ELjgHoM2lP
+ bl0Q==
+X-Gm-Message-State: AOAM533Q7kWYwxe/HjMRYFAjPHhBmuzJAfQMXqTXp27kWl6wBhPEssjI
+ o/aFGjvcZl5rYJ5sOHff/7S7CDxdH+o9ln1EEhDYcFy7r5SI
+X-Google-Smtp-Source: ABdhPJycQahwUU8ieJxw2QNon6KNjMXbVnorxKzBSwsO1jB8fJZkMpZaKFuuEqbbX4yrOsMxOPaKRSl5x8TLkSet/mY=
+X-Received: by 2002:a92:c952:: with SMTP id i18mr21558010ilq.218.1625738150274; 
+ Thu, 08 Jul 2021 02:55:50 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Spice-devel] [PATCH] drm/qxl: Convert to Linux IRQ interfaces
+From: Sofia Son <admjral3@gmail.com>
+Date: Thu, 8 Jul 2021 16:55:39 +0700
+Message-ID: <CAEZZRpSyMhA9QUq8EnW5CYK0F56VvFgkquqS8318C_AaqV6rNg@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+X-Mailman-Approved-At: Thu, 08 Jul 2021 09:59:39 +0000
+Subject: [Spice-devel] Speed of file transfers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,89 +57,43 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0600662389=="
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Drop the DRM IRQ midlayer in favor of Linux IRQ interfaces. DRM's
-IRQ helpers are mostly useful for UMS drivers. Modern KMS drivers
-don't benefit from using it.
+--===============0600662389==
+Content-Type: multipart/alternative; boundary="000000000000f1eaaa05c699a84f"
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/qxl/qxl_drv.c | 1 -
- drivers/gpu/drm/qxl/qxl_drv.h | 1 -
- drivers/gpu/drm/qxl/qxl_irq.c | 9 +++++----
- 3 files changed, 5 insertions(+), 6 deletions(-)
+--000000000000f1eaaa05c699a84f
+Content-Type: text/plain; charset="UTF-8"
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 31f4c86ceb99..cfd3fbda6df6 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -284,7 +284,6 @@ static struct drm_driver qxl_driver = {
- 	.gem_prime_mmap = qxl_gem_prime_mmap,
- 	.fops = &qxl_fops,
- 	.ioctls = qxl_ioctls,
--	.irq_handler = qxl_irq_handler,
- 	.name = DRIVER_NAME,
- 	.desc = DRIVER_DESC,
- 	.date = DRIVER_DATE,
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index dd6abee55f56..717c2d270f04 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -439,7 +439,6 @@ int qxl_gem_prime_mmap(struct drm_gem_object *obj,
- 
- /* qxl_irq.c */
- int qxl_irq_init(struct qxl_device *qdev);
--irqreturn_t qxl_irq_handler(int irq, void *arg);
- 
- void qxl_debugfs_add_files(struct qxl_device *qdev,
- 			   struct drm_info_list *files,
-diff --git a/drivers/gpu/drm/qxl/qxl_irq.c b/drivers/gpu/drm/qxl/qxl_irq.c
-index d312322cacd1..665278ee3b6d 100644
---- a/drivers/gpu/drm/qxl/qxl_irq.c
-+++ b/drivers/gpu/drm/qxl/qxl_irq.c
-@@ -25,11 +25,11 @@
- 
- #include <linux/pci.h>
- 
--#include <drm/drm_irq.h>
-+#include <drm/drm_drv.h>
- 
- #include "qxl_drv.h"
- 
--irqreturn_t qxl_irq_handler(int irq, void *arg)
-+static irqreturn_t qxl_irq_handler(int irq, void *arg)
- {
- 	struct drm_device *dev = (struct drm_device *) arg;
- 	struct qxl_device *qdev = to_qxl(dev);
-@@ -81,7 +81,8 @@ static void qxl_client_monitors_config_work_func(struct work_struct *work)
- 
- int qxl_irq_init(struct qxl_device *qdev)
- {
--	struct pci_dev *pdev = to_pci_dev(qdev->ddev.dev);
-+	struct drm_device *ddev = &qdev->ddev;
-+	struct pci_dev *pdev = to_pci_dev(ddev->dev);
- 	int ret;
- 
- 	init_waitqueue_head(&qdev->display_event);
-@@ -95,7 +96,7 @@ int qxl_irq_init(struct qxl_device *qdev)
- 	atomic_set(&qdev->irq_received_cursor, 0);
- 	atomic_set(&qdev->irq_received_io_cmd, 0);
- 	qdev->irq_received_error = 0;
--	ret = drm_irq_install(&qdev->ddev, pdev->irq);
-+	ret = request_irq(pdev->irq, qxl_irq_handler, IRQF_SHARED, ddev->driver->name, ddev);
- 	qdev->ram_header->int_mask = QXL_INTERRUPT_MASK;
- 	if (unlikely(ret != 0)) {
- 		DRM_ERROR("Failed installing irq: %d\n", ret);
--- 
-2.32.0
+ hello,i use proxmox host, and remote vms by spice, and why speed file
+transfers through drag and drop is slowly,only 150kb -230kb/s ,how can i
+improve this speed ?although in LAN but when i drag and drop file i have to
+compress file,cant be transfer folder
+
+--000000000000f1eaaa05c699a84f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span style=3D"color:rgb(51,51,51);font-family:Helvetica,A=
+rial,sans-serif;font-size:14px">=C2=A0hello,i use proxmox host, and remote =
+vms by spice, and why speed file transfers through drag and drop is slowly,=
+only 150kb -230kb/s ,how can i improve this speed ?although in LAN but when=
+ i drag and drop file i have to compress file,cant=C2=A0be transfer folder<=
+/span><br></div>
+
+--000000000000f1eaaa05c699a84f--
+
+--===============0600662389==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Spice-devel mailing list
 Spice-devel@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/spice-devel
+
+--===============0600662389==--
