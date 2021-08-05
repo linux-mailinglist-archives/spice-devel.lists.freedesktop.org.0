@@ -1,57 +1,58 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55B083E0160
-	for <lists+spice-devel@lfdr.de>; Wed,  4 Aug 2021 14:45:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EB9D3E129A
+	for <lists+spice-devel@lfdr.de>; Thu,  5 Aug 2021 12:25:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8F8FA6E3AC;
-	Wed,  4 Aug 2021 12:45:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F30D36E51A;
+	Thu,  5 Aug 2021 10:25:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B78596E3AC
- for <spice-devel@lists.freedesktop.org>; Wed,  4 Aug 2021 12:45:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1628081123;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=X381XifqoFV9pel25bqZwc8e1Biu49e3D2gkbMLqKfQ=;
- b=IMYZ56Q9+CyrtnPUkADcxc0uL6bhkvB/HTPsnHYMbEB7eUmxDOTgXZmXiXKFyHy9RB/K2a
- NcqhI+QeyKcgVSxldinJ3j600LjDVkZKpfrkklY9gLXHtYYzVQ9Dg7WLcDILmrGHYMCjYQ
- yMW7sx8fUtdscr2VDfAUyDE9ePT8X+w=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-314-5xOUwaZmPkuBknS6UdMm1g-1; Wed, 04 Aug 2021 08:45:19 -0400
-X-MC-Unique: 5xOUwaZmPkuBknS6UdMm1g-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9AC011853025;
- Wed,  4 Aug 2021 12:45:18 +0000 (UTC)
-Received: from localhost (unknown [10.40.192.252])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0F82660BF4;
- Wed,  4 Aug 2021 12:45:17 +0000 (UTC)
-Date: Wed, 4 Aug 2021 14:45:16 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@gmail.com>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
-Message-ID: <20210804124516.c4tnflura3mtqldd@tapioca>
-References: <CAJ+F1CK8nrKw7r82uPr7MZrL7WhDzpAkO_stz8EHg_6Rc__Jog@mail.gmail.com>
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8D92C6E51A
+ for <spice-devel@lists.freedesktop.org>; Thu,  5 Aug 2021 10:25:53 +0000 (UTC)
+Received: by mail-lf1-x12b.google.com with SMTP id u3so10054511lff.9
+ for <spice-devel@lists.freedesktop.org>; Thu, 05 Aug 2021 03:25:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=wnsb47YAxFgegvVgxCEbhc76aci0K1RmFkM4TtNO/Mk=;
+ b=qjIw6GkCQY+mB7TU3fyjLuSiOYhniOmWz5zGOxCMmmmRbna413hEC4MNOsLUELI6JU
+ tm4x4ENexlk/chSUSnUzPpOvrKYn85Bu99+E4bL4VQt+FJIMV3+8DkmiN3aOWek1nPK+
+ 7XZ7ZEkoq4paCt6F74a/79okMgaKGjyA+PqpiuicDGq/mQqTgeg7kc9Royi8B0XOtIeJ
+ uJYVMuwKCDVDlkaSzaRIckHSibqdWdI2IuoAUCjur4uJe9f6mttmKQhz5oQVi1LYMx41
+ 5q3xl8bwsQ+4tlNsJb9e+9cGV4UBgFBLd6OICE4rzNnQPIpDiI2O6+AOedICyHT75NCz
+ ownw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=wnsb47YAxFgegvVgxCEbhc76aci0K1RmFkM4TtNO/Mk=;
+ b=YtKfJzfdR4O8QHC9Wjn4L6lyKmm5ujyS2JWlsa2PxhWg0DQCOUfwHUEVYy++SE/2Np
+ 1yYLR/H3sNmJ3PiDqjtwoSMmINU5qsChkhr41er3YB8SmOJrYQUO+1ERIUeFDTHdmoOP
+ 0VK9L/IWnYz7OA41O0aGBvGmfrINCft86wNwrwiTYhjLUsKj7OCmYY4ZNPuJWTJrqm3r
+ Xn6lWklg8ShnzkDP0uPdYZePJ6xupHFfcf5iBbLYs/0hywKRU+yrP1RlsJULIAsYFH1i
+ roUPVEbUlLhi9pKhItLj6GMR7Axd60hUiRZYLi1MW+ESkY+GkmYrbtgQIYnIxTzZfszO
+ zbTw==
+X-Gm-Message-State: AOAM5308dgxNoGhh/H8kVvUZINsbOm6My97Hic3iKUZuaWc5BM8RenNF
+ 6fUwNQsCX0HgXoCJOE4BC7Qtu5VwV/QM/vDnDDs=
+X-Google-Smtp-Source: ABdhPJx+Onk2ALoNn8l5u5WfSWokg98WmVAVgngVgsi+H58rB4R7zgJv8LZxLUiqGkSLtNh+bgGuLLrbTMk4DJTwodU=
+X-Received: by 2002:ac2:46fb:: with SMTP id q27mr2975259lfo.209.1628159151600; 
+ Thu, 05 Aug 2021 03:25:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAJ+F1CK8nrKw7r82uPr7MZrL7WhDzpAkO_stz8EHg_6Rc__Jog@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=victortoso@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="pyi2xhq54tsagdul"
-Content-Disposition: inline
-Subject: Re: [Spice-devel] WIP: usbredir rust bindings
+References: <CAOZVR5b9jnEY60tHyY5KBiZDyh7SG1z+RHrYfe3mWsFoDebWcg@mail.gmail.com>
+ <CAHt6W4dfBC0iP3BbJy7_DaT_uczV9=HL4U4d4JO+WsLo1qOjpQ@mail.gmail.com>
+ <CAOZVR5ZjgwCon380AYNBfjaUCQLg=1DaLPFDKSMEZU8KSjo9cQ@mail.gmail.com>
+In-Reply-To: <CAOZVR5ZjgwCon380AYNBfjaUCQLg=1DaLPFDKSMEZU8KSjo9cQ@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 5 Aug 2021 11:25:40 +0100
+Message-ID: <CAHt6W4eAEjwD_snU15pVY78BeOAKoJ1yWwt-zh7bXVX_cXo8Pg@mail.gmail.com>
+To: Dunrong Huang <riegamaths@gmail.com>
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="000000000000de765e05c8cd5783"
+Subject: Re: [Spice-devel] winspice: a windows spice server similar to
+ x11spice
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,71 +67,128 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---pyi2xhq54tsagdul
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+--000000000000de765e05c8cd5783
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Tue, Aug 03, 2021 at 02:46:51PM +0400, Marc-Andr=E9 Lureau wrote:
-> Hi
->=20
-> Just to let you know that I started a usbredir binding to Rust:
-> https://gitlab.freedesktop.org/elmarco/usbredir-rs
->=20
-> Atm, it compiles with a custom rusb. I have some MR there (
-> https://github.com/a1ien/rusb/pull/97 &
-> https://github.com/a1ien/rusb/pull/101)
->=20
-> See the example:
-> https://gitlab.freedesktop.org/elmarco/usbredir-rs/-/blob/main/usbredirho=
-st/examples/usbredir.rs
+Il giorno lun 2 ago 2021 alle ore 15:22 Dunrong Huang <riegamaths@gmail.com=
+>
+ha scritto:
 
-Awesome work!
+> Hi Frediano, thanks for you reply
+>
+> On Mon, Aug 2, 2021 at 8:14 PM Frediano Ziglio <freddy77@gmail.com> wrote=
+:
+>
+>> Il giorno dom 1 ago 2021 alle ore 16:07 Dunrong Huang <
+>> riegamaths@gmail.com> ha scritto:
+>>
+>>> Hello everyone,
+>>>
+>>>
+>> Hi Dunrong,
+>>
+>> Inspired by x11spice, i developed winspice, which provides windows remot=
+e
+>>> desktop access using the spice protocol.
+>>>
+>>>
+>> It sounds great!
+>>
+>> The source code is here:
+>>>   https://github.com/mathslinux/winspice
+>>>
+>>> Compiled binary file and related dll dependencies are here:
+>>>
+>>> https://github.com/mathslinux/winspice/releases/download/0.0.1-pre/wins=
+pice.zip
+>>>
+>>> The README file introduces some details of compiling and running.
+>>>
+>>> Because i use windows DXGI interface to get the display data, winspice
+>>> currently only supports windows 8 and above.
+>>>
+>>>
+>> Not much of an issue considering even Microsoft does not support Windows
+>> 7 anymore.
+>>
+>>
+>>> I have just started this project, and there are still many
+>>> imperfections, such as no configurable ui interface, no sound support, =
+and
+>>> so on. If anyone can try this project and give me some feedback, I will=
+ be
+>>> very happy.
+>>>
+>>>
+>> I'll give it a try.
+>> Do you want space on our gitlab ?
+>>
+> Yes, if you agree, I am very happy to put it on gitlab=E3=80=82I just reg=
+istered a
+> gitlab account on freenode using my email,  is there anything I need to d=
+o?
+>
 
-I'm actually in favor of moving usbredir codebase to Rust in the
-future as it is not that big ~ 6k lines of code (usbredirhost and
-usbredirparser).
+Created https://gitlab.freedesktop.org/spice/win32/winspice. Which
+e-mail/handle did you use to register so I can add you as a member?
 
-> Atm, I pass an open fd with bash for testing, ex:
-> exec 3<>/dev/tcp/localhost/7777
-> target/debug/examples/usbredir '1050:0407' --fd 3
->=20
-> Next, it could be extended this with [--tcp host:port], [--unix path],
-> [-l|--listen]. Then I suppose it will be close to
-> https://gitlab.freedesktop.org/spice/usbredir/-/blob/master/tools/usbredi=
-rect.c
->=20
-> (Note that the Rust code doesn't use poll(), since it isn't portable. See
-> https://libusb.sourceforge.io/api-1.0/group__libusb__poll.html#libusb_pol=
-lmain.
-> The libusb/usbredir APIs don't make it easy to handle events..)
+Regards,
+  Frediano
 
-Yes and I think it is fine.
+--000000000000de765e05c8cd5783
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Cheers,
-Victor
+<div dir=3D"ltr"><div>Hi,<br></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">Il giorno lun 2 ago 2021 alle ore 15:22 Dunro=
+ng Huang &lt;<a href=3D"mailto:riegamaths@gmail.com">riegamaths@gmail.com</=
+a>&gt; ha scritto:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
+in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
+x"><div dir=3D"ltr"><div>Hi Frediano, thanks for you reply</div><br><div cl=
+ass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 2, 20=
+21 at 8:14 PM Frediano Ziglio &lt;<a href=3D"mailto:freddy77@gmail.com" tar=
+get=3D"_blank">freddy77@gmail.com</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">Il giorno dom 1 ago 2021 alle ore 1=
+6:07 Dunrong Huang &lt;<a href=3D"mailto:riegamaths@gmail.com" target=3D"_b=
+lank">riegamaths@gmail.com</a>&gt; ha scritto:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>Hello everyone,<br><=
+br></div></div></blockquote><div><br></div><div>Hi Dunrong, <br></div><div>=
+<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr=
+"><div>Inspired by x11spice, i developed winspice, which provides windows r=
+emote desktop access using the spice protocol. <br><br></div></div></blockq=
+uote><div><br></div><div>It sounds great!</div><div> <br></div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div>The source code=
+ is here:<br>=C2=A0 <a href=3D"https://github.com/mathslinux/winspice" targ=
+et=3D"_blank">https://github.com/mathslinux/winspice</a><br><br>Compiled bi=
+nary file and related dll dependencies are here:<br><a href=3D"https://gith=
+ub.com/mathslinux/winspice/releases/download/0.0.1-pre/winspice.zip" target=
+=3D"_blank">https://github.com/mathslinux/winspice/releases/download/0.0.1-=
+pre/winspice.zip</a><br><br>The README file introduces some details of comp=
+iling and running.<br><br>Because i use windows DXGI interface to get the d=
+isplay data, winspice currently only supports windows 8 and above.<br><br><=
+/div></div></blockquote><div><br></div><div>Not much of an issue considerin=
+g even Microsoft does not support Windows 7 anymore.<br></div><div>=C2=A0</=
+div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div=
+>I have just started this project, and there are still many imperfections, =
+such as no configurable ui interface, no sound support, and so on. If anyon=
+e can try this project and give me some feedback, I will be very happy.<br>=
+<br></div></div></blockquote><div><br></div><div>I&#39;ll give it a try.<br=
+></div><div>Do you want space on our gitlab ?</div></div></div></blockquote=
+><div>Yes, if you agree, I am very happy to put it on gitlab=E3=80=82I just=
+ registered a gitlab account on freenode using my email,=C2=A0 is there any=
+thing I need to do?</div></div></div></blockquote><div><br></div><div>Creat=
+ed <a href=3D"https://gitlab.freedesktop.org/spice/win32/winspice">https://=
+gitlab.freedesktop.org/spice/win32/winspice</a>. Which e-mail/handle did yo=
+u use to register so I can add you as a member?<br></div><div><br></div><di=
+v>Regards,<br></div><div>=C2=A0 Frediano <br></div></div></div>
 
---pyi2xhq54tsagdul
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmEKi9wACgkQl9kSPeN6
-SE9/qQ/+Px1g7XIDXSgHGmX6JAz1XZ/d08cRd+Gol9VxV5sSUxmq3dG5GAK9IWm3
-D/a0j+mcgIHzZALVzvZ5RhvmjPVH2amhDnPGaSrQaww4+OSWialL6g6etH3hEdQl
-fzs94dcvCRKP6exSCKwWW10ARwT+Zt9MExxrImImAOZDbFLCBpH7w5x6l06TKXD7
-L/tpPe/4CwMWL87Id8kBEjG/HeoayS652Y7vhFQYbXescfaahyJO5re+ZIfOLqJK
-tJ8gL24G2VlriXXJwHOp0n7eCf2hSCtEILLhNOilAbYbm/sn5VtgDLcG2rUnicjp
-2+3ofTclIp4aU9r+LkDIgng5OhoLGLZd8k3v12illtPa7YbyXsyrRZJL09ofyCbx
-/jxpoO3Jb2KUy9PSGl4P6pOiRzy6YO5YPwysAsOXqtjO64qaqK1FnVff0JEkGp/B
-STewnBdQr/svpTsQyFchZE3oIeVNaHKxvTS2tnmIOZTv01MfYq7jxGj3qPbHwQNf
-7zsNG023Yn/Z8WVHiOUc4ll5idXJDk7vwmINf4NPKDutSW45UEap/lYJFgR7/29r
-jQWV2HD7pP+oLRvoHHhj07GO2RAGGKZVASBPF09kCfeMCbAhCnberGTbTUZOKOg7
-W0o2hTZHNrA+OqABsdaESszM4nVeDWWdnVnKejYrI6rDmSX4AEM=
-=V9FN
------END PGP SIGNATURE-----
-
---pyi2xhq54tsagdul--
-
+--000000000000de765e05c8cd5783--
