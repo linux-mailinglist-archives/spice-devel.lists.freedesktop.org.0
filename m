@@ -1,56 +1,48 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A2553F4D91
-	for <lists+spice-devel@lfdr.de>; Mon, 23 Aug 2021 17:34:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D3283F4F76
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Aug 2021 19:25:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 34BA989AC6;
-	Mon, 23 Aug 2021 15:34:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E888689E9B;
+	Mon, 23 Aug 2021 17:25:35 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC75589AC6
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Aug 2021 15:34:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1629732877;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oBGrMu9pgNxyRdMM6CE9sqXb/V/DJUuNZstVRo8AEgg=;
- b=HgzGfp5KEPYDNAUYbwv7xcKAtRSf06CWNBnp6Dw1phZsqp5tpXEEgoD8+V5cZwV7nBr1/G
- Alfw9Y48nk8KM2KrZ7amlphsxty2fnOpoKqxizHdXx0juY8IWyxN/31batiuDVBoyf63Jn
- bjLb/6dHpoULF76qEj565rGFMpCLJEU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-529-HXh9wHeNPICKVPRuWMBArg-1; Mon, 23 Aug 2021 11:34:35 -0400
-X-MC-Unique: HXh9wHeNPICKVPRuWMBArg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 733B33E743;
- Mon, 23 Aug 2021 15:34:34 +0000 (UTC)
-Received: from localhost (unknown [10.40.194.98])
- by smtp.corp.redhat.com (Postfix) with ESMTP id F2FA45D9D3;
- Mon, 23 Aug 2021 15:34:33 +0000 (UTC)
-Date: Mon, 23 Aug 2021 17:34:32 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: ole-krutov@yandex.ru
+Received: from forward500o.mail.yandex.net (forward500o.mail.yandex.net
+ [37.140.190.195])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 619E889E9B
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Aug 2021 17:25:34 +0000 (UTC)
+Received: from sas1-43b74f7725b7.qloud-c.yandex.net
+ (sas1-43b74f7725b7.qloud-c.yandex.net
+ [IPv6:2a02:6b8:c14:391a:0:640:43b7:4f77])
+ by forward500o.mail.yandex.net (Yandex) with ESMTP id 66D47601DA;
+ Mon, 23 Aug 2021 20:25:31 +0300 (MSK)
+Received: from mail.yandex.ru (mail.yandex.ru [188.170.74.191])
+ by sas1-43b74f7725b7.qloud-c.yandex.net (mxback/Yandex) with HTTP id
+ QPhuFs0IfiE1-PUIieP7f; Mon, 23 Aug 2021 20:25:31 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
+ t=1629739531; bh=ToNtK1ovwMRTVYkEXyFQ9ozMJYnPjRWxLvMp5UsVtsY=;
+ h=Message-Id:Cc:Subject:In-Reply-To:Date:References:To:From;
+ b=sdbHOkn+mXChnqVV0dM68oQIMB1+cUvSkuw0oGJj2Y1dhzjAHviFpSCSld35xKmhC
+ ueTlpIaDazr3KXYzPZMTw8OqhDiHnUvZoFgB4R14KXOYVSQocZCsC1jIWtLeMBujsw
+ YTGhDba7HJvJ8u70EnnfYbLfhbNVEsCeZqCD24ZQ=
+Authentication-Results: sas1-43b74f7725b7.qloud-c.yandex.net;
+ dkim=pass header.i=@yandex.ru
+Received: by sas1-55829ddbd171.qloud-c.yandex.net with HTTP;
+ Mon, 23 Aug 2021 20:25:30 +0300
+From: "ole-krutov@yandex.ru" <ole-krutov@yandex.ru>
+To: Victor Toso <victortoso@redhat.com>
 Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Message-ID: <20210823153432.3nuxkasg7tr5zz23@tapioca>
+In-Reply-To: <20210823153432.3nuxkasg7tr5zz23@tapioca>
 References: <260041629725350@mail.yandex.ru>
+ <20210823153432.3nuxkasg7tr5zz23@tapioca>
 MIME-Version: 1.0
-In-Reply-To: <260041629725350@mail.yandex.ru>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=victortoso@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="hjpdqiyfv6xysyas"
-Content-Disposition: inline
+X-Mailer: Yamail [ http://yandex.ru ] 5.0
+Date: Mon, 23 Aug 2021 20:25:30 +0300
+Message-Id: <10389951629739530@sas1-55829ddbd171.qloud-c.yandex.net>
+Content-Transfer-Encoding: base64
+Content-Type: text/html; charset=utf-8
 Subject: Re: [Spice-devel] No mouse with nvidia driver (spice-vdagent not
  working)
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -67,57 +59,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---hjpdqiyfv6xysyas
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-Hi,
-
-On Mon, Aug 23, 2021 at 05:14:00PM +0300, ole-krutov@yandex.ru wrote:
-> - nvidia vGPU with proprietary driver is the only video
-> adapter.
-
-This is a know issue. NVIDIA driver does not provide a guest
-cursor. You can probably verify it with VNC too.
-
-The proper fix is to NVIDIA implement this feature, otherwise all
-we have is workarounds.
-
-You can try running a spice-gtk based client like remote-viewer
-with SPICE_DEBUG_CURSOR=1 as that might give you something
-rendered in the client side.
-
-You could also try to set "HWCursor" "off" in the xorg
-configuration file.
-
-> - spice-vdagent v.0.20 and qemu-guest-agent are installed.
-
-You should try v0.21 as I recall people were doing work around
-testing NVDIA and Wayland based systems, although I can't
-pinpoint something that would fix the logs I see.
-
-Cheers,
-Victor
-
---hjpdqiyfv6xysyas
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmEjwAgACgkQl9kSPeN6
-SE8SXg//XDiQsCc/WxjZ28E3i/AAJz9TYnbgxxEv7D/eW9txKCaPBOBY7P7KXDYX
-y0r+TymAc+HaQXVWFFXqyLXKjCSUofguuQj+e8he3eqWIMRByEISVYXOKcUtiwR7
-Jk76sQWl6NNxhmivGUBlMGUw/KKUbgkIOYbWydgyDvjMZdEldPpO6JoU+NNMDFnf
-ngR8IUeGQ7gl0G/ETAV0qqB8WRNvqZv84KTLiFasBd3hb+Hw1zmIXFg3MHqZEu1f
-W6+duAzcrNNv49Cn6RGNmUSuNS5cKlN7u1rnnlXY5kFnc1u55yImTTmdCOdr2/uW
-T835+X/HunZ/6GUNHAaAdoySCVC+xebWS8lmucVRwn30foFcXfrRt0VxZ5lW/Gfb
-OukS1mEQUOJHXKD52zrd500SSzFgpyhCM0Lgq4j5XfAxFBSDRZkEhrNwDVNmilmK
-ITJD/mafXQKPjkh7myQnMchkmGBONOwckSmXOtInrMuWVg0xOIUEt1bfrT39LG5t
-JWDEoZ687AS9cACLggxgVGwsERfoVFz9GgjTHtwaFeEB+HL2Fm6bNdHunIcP1N6j
-FWMz895naXSjB7CglQtj3GtneZil+hHA6MZKLmzYGAbUNe4sRbpUI6u7DFPrj/iJ
-eLfPjiso6srMw81+qFxUjywScS/h9HCFTR9NG1MfVDrOvarZFjQ=
-=eix+
------END PGP SIGNATURE-----
-
---hjpdqiyfv6xysyas--
-
+T2gsIHRoYW5rcyBhIGxvdCEgSSBzZWUgY3Vyc29yIG5vdyEgKHN3Y3Vyc29yIG9uLCBod2N1cnNv
+ciBvZmYpPGRpdj48YnIgLz48L2Rpdj48ZGl2PkJ1dCBob3cgY2FuIGl0IGJlIGRyYXduIG9uIGNs
+aWVudCBzaWRlPyBOb3cgaXQgaXMgZHJhd24gb24gdG9wIG9mIHNvbWUga2luZCBvZiBzcXVhcmUg
+d2hpY2ggaGFzIHRvIGJlIHBhcnQgb2YgYW4gaW1hZ2UgYnV0IGlzICJsYXRlIiBpbiByZWxhdGlv
+biBvZiBpbWFnZSBzdGF0ZS4gSXQgc2VlbXMgdGhhdCBpdCBhbGwgaXMgb24gc2VydmVyIHNpZGUu
+IEJ1dCB0aGVyZSBpcyAiY2xpZW50IGN1cnNvciJvcHRpb24gc2V0Li4uPGJyIC8+PGJyIC8+PC9k
+aXY+MTg6MzQsIDIzINCw0LLQs9GD0YHRgtCwIDIwMjEg0LMuLCBWaWN0b3IgVG9zbyAmbHQ7dmlj
+dG9ydG9zb0ByZWRoYXQuY29tJmd0Ozo8YnIgLz48YmxvY2txdW90ZSBjbGFzcz0iMjEwZTdhODQ4
+ZThmY2I0NXdtaS1xdW90ZSI+PHA+SGksPGJyIC8+PGJyIC8+T24gTW9uLCBBdWcgMjMsIDIwMjEg
+YXQgMDU6MTQ6MDBQTSArMDMwMCwgPGEgaHJlZj0ibWFpbHRvOm9sZS1rcnV0b3ZAeWFuZGV4LnJ1
+Ij5vbGUta3J1dG92QHlhbmRleC5ydTwvYT4gd3JvdGU6PGJyIC8+PC9wPjxibG9ja3F1b3RlIGNs
+YXNzPSIyMTBlN2E4NDhlOGZjYjQ1d21pLXF1b3RlIj7CoC0gbnZpZGlhIHZHUFUgd2l0aCBwcm9w
+cmlldGFyeSBkcml2ZXIgaXMgdGhlIG9ubHkgdmlkZW88YnIgLz7CoGFkYXB0ZXIuPGJyIC8+PC9i
+bG9ja3F1b3RlPjxwPjxiciAvPlRoaXMgaXMgYSBrbm93IGlzc3VlLiBOVklESUEgZHJpdmVyIGRv
+ZXMgbm90IHByb3ZpZGUgYSBndWVzdDxiciAvPmN1cnNvci4gWW91IGNhbiBwcm9iYWJseSB2ZXJp
+ZnkgaXQgd2l0aCBWTkMgdG9vLjxiciAvPjxiciAvPlRoZSBwcm9wZXIgZml4IGlzIHRvIE5WSURJ
+QSBpbXBsZW1lbnQgdGhpcyBmZWF0dXJlLCBvdGhlcndpc2UgYWxsPGJyIC8+d2UgaGF2ZSBpcyB3
+b3JrYXJvdW5kcy48YnIgLz48YnIgLz5Zb3UgY2FuIHRyeSBydW5uaW5nIGEgc3BpY2UtZ3RrIGJh
+c2VkIGNsaWVudCBsaWtlIHJlbW90ZS12aWV3ZXI8YnIgLz53aXRoIFNQSUNFX0RFQlVHX0NVUlNP
+Uj0xIGFzIHRoYXQgbWlnaHQgZ2l2ZSB5b3Ugc29tZXRoaW5nPGJyIC8+cmVuZGVyZWQgaW4gdGhl
+IGNsaWVudCBzaWRlLjxiciAvPjxiciAvPllvdSBjb3VsZCBhbHNvIHRyeSB0byBzZXQgIkhXQ3Vy
+c29yIiAib2ZmIiBpbiB0aGUgeG9yZzxiciAvPmNvbmZpZ3VyYXRpb24gZmlsZS48YnIgLz48YnIg
+Lz48L3A+PGJsb2NrcXVvdGUgY2xhc3M9IjIxMGU3YTg0OGU4ZmNiNDV3bWktcXVvdGUiPsKgLSBz
+cGljZS12ZGFnZW50IHYuMC4yMCBhbmQgcWVtdS1ndWVzdC1hZ2VudCBhcmUgaW5zdGFsbGVkLjxi
+ciAvPjwvYmxvY2txdW90ZT48cD48YnIgLz5Zb3Ugc2hvdWxkIHRyeSB2MC4yMSBhcyBJIHJlY2Fs
+bCBwZW9wbGUgd2VyZSBkb2luZyB3b3JrIGFyb3VuZDxiciAvPnRlc3RpbmcgTlZESUEgYW5kIFdh
+eWxhbmQgYmFzZWQgc3lzdGVtcywgYWx0aG91Z2ggSSBjYW4ndDxiciAvPnBpbnBvaW50IHNvbWV0
+aGluZyB0aGF0IHdvdWxkIGZpeCB0aGUgbG9ncyBJIHNlZS48YnIgLz48YnIgLz5DaGVlcnMsPGJy
+IC8+VmljdG9yPGJyIC8+PC9wPjwvYmxvY2txdW90ZT48YnIgLz48YnIgLz4tLSA8YnIgLz7QntGC
+0L/RgNCw0LLQu9C10L3QviDQuNC3INC80L7QsdC40LvRjNC90L7Qs9C+INC/0YDQuNC70L7QttC1
+0L3QuNGPINCv0L3QtNC10LrRgS7Qn9C+0YfRgtGL
