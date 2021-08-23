@@ -1,48 +1,68 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D3283F4F76
-	for <lists+spice-devel@lfdr.de>; Mon, 23 Aug 2021 19:25:39 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 396063F4FAF
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Aug 2021 19:39:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E888689E9B;
-	Mon, 23 Aug 2021 17:25:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A91BD89BAB;
+	Mon, 23 Aug 2021 17:39:11 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from forward500o.mail.yandex.net (forward500o.mail.yandex.net
- [37.140.190.195])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 619E889E9B
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Aug 2021 17:25:34 +0000 (UTC)
-Received: from sas1-43b74f7725b7.qloud-c.yandex.net
- (sas1-43b74f7725b7.qloud-c.yandex.net
- [IPv6:2a02:6b8:c14:391a:0:640:43b7:4f77])
- by forward500o.mail.yandex.net (Yandex) with ESMTP id 66D47601DA;
- Mon, 23 Aug 2021 20:25:31 +0300 (MSK)
-Received: from mail.yandex.ru (mail.yandex.ru [188.170.74.191])
- by sas1-43b74f7725b7.qloud-c.yandex.net (mxback/Yandex) with HTTP id
- QPhuFs0IfiE1-PUIieP7f; Mon, 23 Aug 2021 20:25:31 +0300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.ru; s=mail;
- t=1629739531; bh=ToNtK1ovwMRTVYkEXyFQ9ozMJYnPjRWxLvMp5UsVtsY=;
- h=Message-Id:Cc:Subject:In-Reply-To:Date:References:To:From;
- b=sdbHOkn+mXChnqVV0dM68oQIMB1+cUvSkuw0oGJj2Y1dhzjAHviFpSCSld35xKmhC
- ueTlpIaDazr3KXYzPZMTw8OqhDiHnUvZoFgB4R14KXOYVSQocZCsC1jIWtLeMBujsw
- YTGhDba7HJvJ8u70EnnfYbLfhbNVEsCeZqCD24ZQ=
-Authentication-Results: sas1-43b74f7725b7.qloud-c.yandex.net;
- dkim=pass header.i=@yandex.ru
-Received: by sas1-55829ddbd171.qloud-c.yandex.net with HTTP;
- Mon, 23 Aug 2021 20:25:30 +0300
-From: "ole-krutov@yandex.ru" <ole-krutov@yandex.ru>
-To: Victor Toso <victortoso@redhat.com>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-In-Reply-To: <20210823153432.3nuxkasg7tr5zz23@tapioca>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4978589BAB
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Aug 2021 17:39:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1629740349;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=1BuBMC8Nihbs/BkunkUdKZPWZt5Ktlcw0fN7/oMbFL0=;
+ b=IwYxUojqRsAnwM2c9E5shprXLBhi+wfLcBRZFqKjKjAuVIB+8wtEBVQUbtIoGQ6ePwZR8p
+ 0a9K8FVGj1CpTDSNhT0Ll+T+LIwcNk7i0oyUn41Ihydzu5EvwP+iR+SgAwH0xRMVfVEFbp
+ Lg+a0LMdxeOEiTNpnIE/2R85N5DvvGI=
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-41-aJejb_95P8iVtrZNmi3A2Q-1; Mon, 23 Aug 2021 13:39:06 -0400
+X-MC-Unique: aJejb_95P8iVtrZNmi3A2Q-1
+Received: by mail-lj1-f197.google.com with SMTP id
+ q9-20020a2e9689000000b001b964fa10b3so6621616lji.18
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Aug 2021 10:39:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1BuBMC8Nihbs/BkunkUdKZPWZt5Ktlcw0fN7/oMbFL0=;
+ b=JRwQt40TXBBKGivQ8eX3C45J3DUXVookoobyORFvTYsPQ9NS/SXooEtTQI/bqMqeYj
+ Q83cgkbkRxdqYQpMwJjTe6yTtlnzX5D/TPBcYmEZhwd5WkPQQr03P5N+43+VtSomqHd3
+ UnpMfh9BqNKiSZn7jhRYF86xpaa5SuvKgtoaEYEgc7Mo/Dm+zY9uz/Nh517mUoiNnrfd
+ QUdj0L4lh3tTniFYO/bJ5SuOaPBY33ME6Jfb8INarSiAPoCZVFDgFKUkgQp7FsTaWtqE
+ Tzya0hv/PuJGX0p9JUvEr+VHFd6LIL73gHWpXG80mfkbYkS7MfMkQaWMe7y9MaZV+v2d
+ 6KMw==
+X-Gm-Message-State: AOAM533jH29RnhiJHPoMwkTRvX2rmvVzBCXXu3ZuYhGEbSV3lvsYn/7P
+ eIwt8MXO+kxA9myiLyL1pbQLr1sLiXw2uwyTXMaLkbBjslj1A4H/TLRssP99OtXQ+7OJv+domuj
+ bYciVIw0wy/OMadsna0A6vhhuutoGMcc6AL54D3cR1Ykppkg=
+X-Received: by 2002:a2e:2417:: with SMTP id k23mr28596328ljk.256.1629740345320; 
+ Mon, 23 Aug 2021 10:39:05 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyk9KezJWuVgAzbihSv9fKgWGry6Kj+DWZ1L7IHEISLHGOH4o0pbcawC0Ct0HYUKTsnCNPtsSxTcuoPE+XFe/Q=
+X-Received: by 2002:a2e:2417:: with SMTP id k23mr28596318ljk.256.1629740345102; 
+ Mon, 23 Aug 2021 10:39:05 -0700 (PDT)
+MIME-Version: 1.0
 References: <260041629725350@mail.yandex.ru>
  <20210823153432.3nuxkasg7tr5zz23@tapioca>
-MIME-Version: 1.0
-X-Mailer: Yamail [ http://yandex.ru ] 5.0
-Date: Mon, 23 Aug 2021 20:25:30 +0300
-Message-Id: <10389951629739530@sas1-55829ddbd171.qloud-c.yandex.net>
-Content-Transfer-Encoding: base64
-Content-Type: text/html; charset=utf-8
+In-Reply-To: <20210823153432.3nuxkasg7tr5zz23@tapioca>
+From: Uri Lublin <uril@redhat.com>
+Date: Mon, 23 Aug 2021 20:38:54 +0300
+Message-ID: <CAAg9qJ0-ez3X-KoMCEUOJU9eXx=ZgdjdTEQThD4ovFjy0ZH22Q@mail.gmail.com>
+To: ole-krutov@yandex.ru, 
+ "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: Victor Toso <victortoso@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ulublin@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="00000000000058a58805ca3d7e87"
 Subject: Re: [Spice-devel] No mouse with nvidia driver (spice-vdagent not
  working)
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -59,34 +79,107 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T2gsIHRoYW5rcyBhIGxvdCEgSSBzZWUgY3Vyc29yIG5vdyEgKHN3Y3Vyc29yIG9uLCBod2N1cnNv
-ciBvZmYpPGRpdj48YnIgLz48L2Rpdj48ZGl2PkJ1dCBob3cgY2FuIGl0IGJlIGRyYXduIG9uIGNs
-aWVudCBzaWRlPyBOb3cgaXQgaXMgZHJhd24gb24gdG9wIG9mIHNvbWUga2luZCBvZiBzcXVhcmUg
-d2hpY2ggaGFzIHRvIGJlIHBhcnQgb2YgYW4gaW1hZ2UgYnV0IGlzICJsYXRlIiBpbiByZWxhdGlv
-biBvZiBpbWFnZSBzdGF0ZS4gSXQgc2VlbXMgdGhhdCBpdCBhbGwgaXMgb24gc2VydmVyIHNpZGUu
-IEJ1dCB0aGVyZSBpcyAiY2xpZW50IGN1cnNvciJvcHRpb24gc2V0Li4uPGJyIC8+PGJyIC8+PC9k
-aXY+MTg6MzQsIDIzINCw0LLQs9GD0YHRgtCwIDIwMjEg0LMuLCBWaWN0b3IgVG9zbyAmbHQ7dmlj
-dG9ydG9zb0ByZWRoYXQuY29tJmd0Ozo8YnIgLz48YmxvY2txdW90ZSBjbGFzcz0iMjEwZTdhODQ4
-ZThmY2I0NXdtaS1xdW90ZSI+PHA+SGksPGJyIC8+PGJyIC8+T24gTW9uLCBBdWcgMjMsIDIwMjEg
-YXQgMDU6MTQ6MDBQTSArMDMwMCwgPGEgaHJlZj0ibWFpbHRvOm9sZS1rcnV0b3ZAeWFuZGV4LnJ1
-Ij5vbGUta3J1dG92QHlhbmRleC5ydTwvYT4gd3JvdGU6PGJyIC8+PC9wPjxibG9ja3F1b3RlIGNs
-YXNzPSIyMTBlN2E4NDhlOGZjYjQ1d21pLXF1b3RlIj7CoC0gbnZpZGlhIHZHUFUgd2l0aCBwcm9w
-cmlldGFyeSBkcml2ZXIgaXMgdGhlIG9ubHkgdmlkZW88YnIgLz7CoGFkYXB0ZXIuPGJyIC8+PC9i
-bG9ja3F1b3RlPjxwPjxiciAvPlRoaXMgaXMgYSBrbm93IGlzc3VlLiBOVklESUEgZHJpdmVyIGRv
-ZXMgbm90IHByb3ZpZGUgYSBndWVzdDxiciAvPmN1cnNvci4gWW91IGNhbiBwcm9iYWJseSB2ZXJp
-ZnkgaXQgd2l0aCBWTkMgdG9vLjxiciAvPjxiciAvPlRoZSBwcm9wZXIgZml4IGlzIHRvIE5WSURJ
-QSBpbXBsZW1lbnQgdGhpcyBmZWF0dXJlLCBvdGhlcndpc2UgYWxsPGJyIC8+d2UgaGF2ZSBpcyB3
-b3JrYXJvdW5kcy48YnIgLz48YnIgLz5Zb3UgY2FuIHRyeSBydW5uaW5nIGEgc3BpY2UtZ3RrIGJh
-c2VkIGNsaWVudCBsaWtlIHJlbW90ZS12aWV3ZXI8YnIgLz53aXRoIFNQSUNFX0RFQlVHX0NVUlNP
-Uj0xIGFzIHRoYXQgbWlnaHQgZ2l2ZSB5b3Ugc29tZXRoaW5nPGJyIC8+cmVuZGVyZWQgaW4gdGhl
-IGNsaWVudCBzaWRlLjxiciAvPjxiciAvPllvdSBjb3VsZCBhbHNvIHRyeSB0byBzZXQgIkhXQ3Vy
-c29yIiAib2ZmIiBpbiB0aGUgeG9yZzxiciAvPmNvbmZpZ3VyYXRpb24gZmlsZS48YnIgLz48YnIg
-Lz48L3A+PGJsb2NrcXVvdGUgY2xhc3M9IjIxMGU3YTg0OGU4ZmNiNDV3bWktcXVvdGUiPsKgLSBz
-cGljZS12ZGFnZW50IHYuMC4yMCBhbmQgcWVtdS1ndWVzdC1hZ2VudCBhcmUgaW5zdGFsbGVkLjxi
-ciAvPjwvYmxvY2txdW90ZT48cD48YnIgLz5Zb3Ugc2hvdWxkIHRyeSB2MC4yMSBhcyBJIHJlY2Fs
-bCBwZW9wbGUgd2VyZSBkb2luZyB3b3JrIGFyb3VuZDxiciAvPnRlc3RpbmcgTlZESUEgYW5kIFdh
-eWxhbmQgYmFzZWQgc3lzdGVtcywgYWx0aG91Z2ggSSBjYW4ndDxiciAvPnBpbnBvaW50IHNvbWV0
-aGluZyB0aGF0IHdvdWxkIGZpeCB0aGUgbG9ncyBJIHNlZS48YnIgLz48YnIgLz5DaGVlcnMsPGJy
-IC8+VmljdG9yPGJyIC8+PC9wPjwvYmxvY2txdW90ZT48YnIgLz48YnIgLz4tLSA8YnIgLz7QntGC
-0L/RgNCw0LLQu9C10L3QviDQuNC3INC80L7QsdC40LvRjNC90L7Qs9C+INC/0YDQuNC70L7QttC1
-0L3QuNGPINCv0L3QtNC10LrRgS7Qn9C+0YfRgtGL
+--00000000000058a58805ca3d7e87
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+What Victor said but also more below.
+
+
+On Mon, Aug 23, 2021 at 6:34 PM Victor Toso <victortoso@redhat.com> wrote:
+
+> Hi,
+>
+> On Mon, Aug 23, 2021 at 05:14:00PM +0300, ole-krutov@yandex.ru wrote:
+> > - nvidia vGPU with proprietary driver is the only video
+> > adapter.
+>
+> This is a know issue. NVIDIA driver does not provide a guest
+> cursor. You can probably verify it with VNC too.
+>
+
+> The proper fix is to NVIDIA implement this feature, otherwise all
+> we have is workarounds.
+>
+> You can try running a spice-gtk based client like remote-viewer
+> with SPICE_DEBUG_CURSOR=1 as that might give you something
+> rendered in the client side.
+>
+
+Yeah, it's the same for VNC.
+Recently a command line option was added to virt-viewer/remote-viewer for
+VNC.
+https://gitlab.com/virt-viewer/virt-viewer/-/merge_requests/78
+
+
+>
+> You could also try to set "HWCursor" "off" in the xorg
+> configuration file.
+>
+> > - spice-vdagent v.0.20 and qemu-guest-agent are installed.
+>
+> You should try v0.21 as I recall people were doing work around
+> testing NVDIA and Wayland based systems, although I can't
+> pinpoint something that would fix the logs I see.
+>
+>
+I think the problem is not with spice-vdagent, but that SPICE gets no
+cursor data from NVIDIA.
+
+What qemu-kvm command line option do you use for connecting with the NVIDIA
+GPU ?
+
+Uri
+
+--00000000000058a58805ca3d7e87
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi,</div><div><br></div><div>What Victor said but als=
+o more below.</div><div><br></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Mon, Aug 23, 2021 at 6:34 PM Victor Toso &=
+lt;<a href=3D"mailto:victortoso@redhat.com">victortoso@redhat.com</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
+x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<br>
+<br>
+On Mon, Aug 23, 2021 at 05:14:00PM +0300, <a href=3D"mailto:ole-krutov@yand=
+ex.ru" target=3D"_blank">ole-krutov@yandex.ru</a> wrote:<br>
+&gt; - nvidia vGPU with proprietary driver is the only video<br>
+&gt; adapter.<br>
+<br>
+This is a know issue. NVIDIA driver does not provide a guest<br>
+cursor. You can probably verify it with VNC too.<br></blockquote><blockquot=
+e class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px s=
+olid rgb(204,204,204);padding-left:1ex">
+<br>
+The proper fix is to NVIDIA implement this feature, otherwise all<br>
+we have is workarounds.<br>
+<br>
+You can try running a spice-gtk based client like remote-viewer<br>
+with SPICE_DEBUG_CURSOR=3D1 as that might give you something<br>
+rendered in the client side.<br></blockquote><div><br></div><div><div>Yeah,=
+ it&#39;s the same for VNC.</div><div>Recently a command line option was ad=
+ded to virt-viewer/remote-viewer for VNC.</div><div><a href=3D"https://gitl=
+ab.com/virt-viewer/virt-viewer/-/merge_requests/78">https://gitlab.com/virt=
+-viewer/virt-viewer/-/merge_requests/78</a></div></div><div>=C2=A0</div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+You could also try to set &quot;HWCursor&quot; &quot;off&quot; in the xorg<=
+br>
+configuration file.<br>
+<br>
+&gt; - spice-vdagent v.0.20 and qemu-guest-agent are installed.<br>
+<br>
+You should try v0.21 as I recall people were doing work around<br>
+testing NVDIA and Wayland based systems, although I can&#39;t<br>
+pinpoint something that would fix the logs I see.<br>
+<br></blockquote><div><br></div><div>I think the problem is not with spice-=
+vdagent, but that SPICE gets no</div><div> cursor data from NVIDIA.</div><d=
+iv><br></div><div>What qemu-kvm command line option do you use for connecti=
+ng with the NVIDIA GPU ? <br></div><div><br></div><div>Uri<br></div></div><=
+/div>
+
+--00000000000058a58805ca3d7e87--
+
