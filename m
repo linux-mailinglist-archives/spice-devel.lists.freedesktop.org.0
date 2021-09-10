@@ -1,57 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECCE5406978
-	for <lists+spice-devel@lfdr.de>; Fri, 10 Sep 2021 12:06:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 151CE406A18
+	for <lists+spice-devel@lfdr.de>; Fri, 10 Sep 2021 12:23:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4060E6E9B2;
-	Fri, 10 Sep 2021 10:06:22 +0000 (UTC)
-X-Original-To: Spice-devel@lists.freedesktop.org
-Delivered-To: Spice-devel@lists.freedesktop.org
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3AC826E9B2
- for <Spice-devel@lists.freedesktop.org>; Fri, 10 Sep 2021 10:06:21 +0000 (UTC)
-Received: by mail-pj1-x102e.google.com with SMTP id
- gp20-20020a17090adf1400b00196b761920aso1091942pjb.3
- for <Spice-devel@lists.freedesktop.org>; Fri, 10 Sep 2021 03:06:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OHYtTmEO2p11EX2TUhEkQFRDfTNz32ypnUTmo3PJP0Y=;
- b=I9uY3Sns/VmY2Yj1xqu9faIo2Qrb2qOkVGtUVwEf134JkzFlxoV5Mx82aTn5sWs4NP
- z7C/DuAytnSGsh2RksC05KFgeW4TDJgl/s8ba47H3We0Bi8cU1ZstzvfOqPagqUkqSnL
- G/KVvPdaEwqr0EIIiQz/DBAcbBqQg6XXwTw5e4avx9BQm6rnaR9s4wh1VApCndXWupAj
- qMAiZepWMhI8gpSl8UB059v5GIcLOGExlYAxXChqrCZTjK7h7RhUlawMJjmPnr2K52ui
- oY1SgPywGLvU8rxQZScnijs5Kj6m3axWu4K++Qn68ptvzYzTIvmqu6rg0gczpWfjskYV
- UvTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=OHYtTmEO2p11EX2TUhEkQFRDfTNz32ypnUTmo3PJP0Y=;
- b=euVa1podEXgYhR4Ir6bWoYvdEktlBTuK75qoCSrhDN5Hn4bvonD3zyeWml5zL504WO
- 5R7G+KK6bhtxqGzOZawJubWOeCVXILsQFsEfbIR6GKAHUiRf2nSM25O7DpByk225eDLN
- PRJjX6L9eJIcI5WHQGWb7sSfuhxPB5V3iYEvvcGcS0gQgS5ECaEJsgNlOJNgoBM9YYlj
- PrXuuSnrqvG4Viav4++AX8csdF3wCNsdRoVdVbeiu5udxs6/xFqwcMNqlULa6dhZgS52
- 1qbeV/8UxeL9KiV0KlQPEODkEG37DRim+y+koDed4WQdGuy0f0yMbDwcE3dBuPT+c00d
- CK5A==
-X-Gm-Message-State: AOAM531Epg6otj4tWPHwsaV3dSls+yEJ4E2utrD8JJAHneF4rFgWtJ4F
- lFvYYLgM9vxB6bFplWT5Xl37Nm+uIa/wooOHlhV2UwMP
-X-Google-Smtp-Source: ABdhPJxxEMvUBkl2/0WogK81iFwhunArerY3yE+54WwZEvAUVioCrh/RaJo+hrDTXIadVyHwKfCzUjDr8kMSRqdTHX4=
-X-Received: by 2002:a17:90a:4592:: with SMTP id
- v18mr8728644pjg.197.1631268380768; 
- Fri, 10 Sep 2021 03:06:20 -0700 (PDT)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4D05A6E9D8;
+	Fri, 10 Sep 2021 10:23:19 +0000 (UTC)
+X-Original-To: spice-devel@lists.freedesktop.org
+Delivered-To: spice-devel@lists.freedesktop.org
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 65CA96E9D8
+ for <spice-devel@lists.freedesktop.org>; Fri, 10 Sep 2021 10:23:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1631269396;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+ag4CGOUsvBkQgrmVQ+J7deGzzOZbOwnH45Z6Czhfps=;
+ b=bsaj+rXsJjjJedmGScaEKxthEONcg0pDX6t7zz49YztvS0YZpv6RrBfOVZWPZMHO62jeeQ
+ TZjuh/FCYy2v1DemgSw+bQ5Qe2vcI/acaC4k5I3g3U/Rth7R/lndf0i9vwSAGXyBGQz2YK
+ GDMbSx1kvlaF58lSHXKScLP6orC271Q=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-288-A5OJ3mSuPaOfjX0BceaaxA-1; Fri, 10 Sep 2021 06:23:07 -0400
+X-MC-Unique: A5OJ3mSuPaOfjX0BceaaxA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 013A21006AA2;
+ Fri, 10 Sep 2021 10:23:07 +0000 (UTC)
+Received: from redhat.com (unknown [10.39.194.181])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 4EFCD5D9C6;
+ Fri, 10 Sep 2021 10:23:06 +0000 (UTC)
+Date: Fri, 10 Sep 2021 11:23:03 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: insodus@web.de
+Cc: spice-devel@lists.freedesktop.org
+Message-ID: <YTsyBxzvGJEz1N4k@redhat.com>
+References: <trinity-697d35c4-6479-4924-a2e4-20506bff949c-1631200848204@3c-app-webde-bap22>
 MIME-Version: 1.0
-References: <CAGusqHLAmqD6HgJ5ebUoOOt4sgdJhvvaLn+X5AtJjDTY7=q=Cw@mail.gmail.com>
-In-Reply-To: <CAGusqHLAmqD6HgJ5ebUoOOt4sgdJhvvaLn+X5AtJjDTY7=q=Cw@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 10 Sep 2021 11:06:09 +0100
-Message-ID: <CAHt6W4djE+VawG7PQyrbOLVPZ0TOrVwo7WuZ3N4-UUJyTx7hUg@mail.gmail.com>
-To: Andrey Af <public.irkutsk@gmail.com>
-Cc: "spice-devel@lists.freedesktop.org" <Spice-devel@lists.freedesktop.org>
-Content-Type: multipart/alternative; boundary="0000000000005e7e5405cba1445d"
-Subject: Re: [Spice-devel] spice protocol 11.5 encrypted password
+In-Reply-To: <trinity-697d35c4-6479-4924-a2e4-20506bff949c-1631200848204@3c-app-webde-bap22>
+User-Agent: Mutt/2.0.7 (2021-05-04)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=berrange@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Spice-devel] Has SPICE devlopment stopped?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,52 +66,43 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000005e7e5405cba1445d
-Content-Type: text/plain; charset="UTF-8"
+On Thu, Sep 09, 2021 at 05:20:48PM +0200, insodus@web.de wrote:
+>    Hi,
+>     
+>    as stated in [1] SPICE has become deprecated in RHEL. Because it seems
+>    that SPICE was mainly devloped by Red Hat I wanted to ask if this means
+>    that the development has stopped.
 
-Hi,
-  there's no protocol 11.5.
-There's no data length markeR, password is zero terminated and encrypted,
-if you refer to the default password schema (no SASL).
-Can you explain what you are trying to do?
+The link you referenced is the only official Red Hat statement.
+Unofficially my suggestion is to interpret it as follows...
 
-Regards,
-  Frediano
+It is not likely that Red Hat engineers will invest any more time in
+developing SPICE features as part of their official responsibilities.
 
+Some limited bug fix work may continue as needed, for as long as
+there are non-EOL versions of RHEL that include SPICE.
 
-Il giorno ven 10 set 2021 alle ore 06:51 Andrey Af <public.irkutsk@gmail.com>
-ha scritto:
+One caveat is that the spice guest agent is still useful as QEMU
+gained the ability to use the spice guest agent to enable clipboard
+support with its VNC server.
 
-> Hi,
->
-> For encrypted password, there is definitely no data length market?
-> For example, I don't need a password, authentication is verified by
-> another part of the code, how can I skip this?
->
+Finally note that the official statement in that link referenced
+only refers to RHEL. SPICE is still shipped in Fedora and there
+are not any plans to remove it there. Fedora policy is to enable
+all available QEMU features that can be successfully built & used.
 
---0000000000005e7e5405cba1445d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Overall I would say that any future feature development will be
+dependant on resources invested from other interested SPICE
+community members. 
 
-<div dir=3D"ltr"><div>Hi,</div><div>=C2=A0 there&#39;s no protocol 11.5.</d=
-iv><div>There&#39;s no data length markeR, password is zero terminated and =
-encrypted, if you refer to the default password schema (no SASL).<br></div>=
-<div>Can you explain what you are trying to do?<br></div><div><br></div><di=
-v>Regards,<br></div><div><div><div dir=3D"ltr" class=3D"gmail_signature" da=
-ta-smartmail=3D"gmail_signature"><div dir=3D"ltr">=C2=A0 Frediano</div></di=
-v></div><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
-ss=3D"gmail_attr">Il giorno ven 10 set 2021 alle ore 06:51 Andrey Af &lt;<a=
- href=3D"mailto:public.irkutsk@gmail.com">public.irkutsk@gmail.com</a>&gt; =
-ha scritto:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<=
-br>
-<br>
-For encrypted password, there is definitely no data length market?<br>
-For example, I don&#39;t need a password, authentication is verified by<br>
-another part of the code, how can I skip this?<br>
-</blockquote></div>
+With regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
---0000000000005e7e5405cba1445d--
