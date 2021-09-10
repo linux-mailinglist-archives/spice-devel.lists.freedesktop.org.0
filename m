@@ -2,52 +2,56 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39E844066EB
-	for <lists+spice-devel@lfdr.de>; Fri, 10 Sep 2021 07:51:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECCE5406978
+	for <lists+spice-devel@lfdr.de>; Fri, 10 Sep 2021 12:06:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 11CA26E96D;
-	Fri, 10 Sep 2021 05:51:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4060E6E9B2;
+	Fri, 10 Sep 2021 10:06:22 +0000 (UTC)
 X-Original-To: Spice-devel@lists.freedesktop.org
 Delivered-To: Spice-devel@lists.freedesktop.org
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3BAAB6E96D
- for <Spice-devel@lists.freedesktop.org>; Fri, 10 Sep 2021 05:51:26 +0000 (UTC)
-Received: by mail-pg1-x536.google.com with SMTP id k24so854196pgh.8
- for <Spice-devel@lists.freedesktop.org>; Thu, 09 Sep 2021 22:51:26 -0700 (PDT)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3AC826E9B2
+ for <Spice-devel@lists.freedesktop.org>; Fri, 10 Sep 2021 10:06:21 +0000 (UTC)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ gp20-20020a17090adf1400b00196b761920aso1091942pjb.3
+ for <Spice-devel@lists.freedesktop.org>; Fri, 10 Sep 2021 03:06:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=f5rhZM5Z+XQw4Z9QPt5NbwYiaE6MpoyB2j2N6spo5vU=;
- b=qkIhtZOwCIN2qQ0LxfLSZsW7krk6xdt1AgSPvrZaMX6UfVVCa+/H3I5Ki7UgzglTV7
- Pr1evVx7399/RU51I2gKTQnfxFkSZSZehaZ+TRKGNID6xuRV90y5RPGNT88Ni40ZOuVX
- iasSCoxr09aP48NEAnv9dmTUqf0qxPHgo6FihEqwxFe7Sy/OcQvBhURfs4NqGQY+pD5O
- a2gnF+YIhMOhGZmmBbobIUYR8HiP1yapJYpG1vTRl5kF3WYxtuWiTh6qydvE7rJqA6uN
- eb2TD59SmfMDzsgJHfWgao/Qw/YtYhezqdLxX66tOUI944UekSmO5FBf6j2XJSCSEMtk
- HvYg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=OHYtTmEO2p11EX2TUhEkQFRDfTNz32ypnUTmo3PJP0Y=;
+ b=I9uY3Sns/VmY2Yj1xqu9faIo2Qrb2qOkVGtUVwEf134JkzFlxoV5Mx82aTn5sWs4NP
+ z7C/DuAytnSGsh2RksC05KFgeW4TDJgl/s8ba47H3We0Bi8cU1ZstzvfOqPagqUkqSnL
+ G/KVvPdaEwqr0EIIiQz/DBAcbBqQg6XXwTw5e4avx9BQm6rnaR9s4wh1VApCndXWupAj
+ qMAiZepWMhI8gpSl8UB059v5GIcLOGExlYAxXChqrCZTjK7h7RhUlawMJjmPnr2K52ui
+ oY1SgPywGLvU8rxQZScnijs5Kj6m3axWu4K++Qn68ptvzYzTIvmqu6rg0gczpWfjskYV
+ UvTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=f5rhZM5Z+XQw4Z9QPt5NbwYiaE6MpoyB2j2N6spo5vU=;
- b=yTiMnc86szvErVAGsTJYSJAPszQBDorPtJcNgcL2bpewuXXOFGD17ZI2CzcheJVKDH
- ffwHVQjxzgM7U/R9z/0Q5C9u9KGPtnHXJr6TCKZHsvaei6CSeNIf8wTL33FRo1TEjWt5
- k9vtBB6PbWU06sJJagT4fe7KBUgqHlE3GNDExJMwiPcN+k6GHoqIEzI9AujGEQ9/xWQw
- ihDBtL1AnxyO7z8ft8v+EqYylpBjBQh3MNW2+lgX2cwFctybej3o/W2f7WXjhlhAvRJM
- 6ILt1cNSF9/k0PKd2BlBN1YY+3Z11E/kTaNzJvp68UjIxYKUF6YfOV4v6Kzp8kJam1It
- aMYQ==
-X-Gm-Message-State: AOAM532vh/nsN3QpU51C2+IxbMPYWi73BEbvVg03j2zVDfr94b9bhZL7
- aVRdL9IEX/Xuu6myRucy1Fau1quBTQe0mWt9GSskDDuZc64=
-X-Google-Smtp-Source: ABdhPJxOugPn8DlqhTOOhFBnlNn7EAZouyqlHH7HbtN2nT8Bs4+fyI04+Kj8AXTTmiyxC+I5nhL63IlGivgL9MsO+qM=
-X-Received: by 2002:a63:9d44:: with SMTP id i65mr5880625pgd.69.1631253085549; 
- Thu, 09 Sep 2021 22:51:25 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=OHYtTmEO2p11EX2TUhEkQFRDfTNz32ypnUTmo3PJP0Y=;
+ b=euVa1podEXgYhR4Ir6bWoYvdEktlBTuK75qoCSrhDN5Hn4bvonD3zyeWml5zL504WO
+ 5R7G+KK6bhtxqGzOZawJubWOeCVXILsQFsEfbIR6GKAHUiRf2nSM25O7DpByk225eDLN
+ PRJjX6L9eJIcI5WHQGWb7sSfuhxPB5V3iYEvvcGcS0gQgS5ECaEJsgNlOJNgoBM9YYlj
+ PrXuuSnrqvG4Viav4++AX8csdF3wCNsdRoVdVbeiu5udxs6/xFqwcMNqlULa6dhZgS52
+ 1qbeV/8UxeL9KiV0KlQPEODkEG37DRim+y+koDed4WQdGuy0f0yMbDwcE3dBuPT+c00d
+ CK5A==
+X-Gm-Message-State: AOAM531Epg6otj4tWPHwsaV3dSls+yEJ4E2utrD8JJAHneF4rFgWtJ4F
+ lFvYYLgM9vxB6bFplWT5Xl37Nm+uIa/wooOHlhV2UwMP
+X-Google-Smtp-Source: ABdhPJxxEMvUBkl2/0WogK81iFwhunArerY3yE+54WwZEvAUVioCrh/RaJo+hrDTXIadVyHwKfCzUjDr8kMSRqdTHX4=
+X-Received: by 2002:a17:90a:4592:: with SMTP id
+ v18mr8728644pjg.197.1631268380768; 
+ Fri, 10 Sep 2021 03:06:20 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:6e8d:0:0:0:0 with HTTP; Thu, 9 Sep 2021 22:51:25
- -0700 (PDT)
-From: Andrey Af <public.irkutsk@gmail.com>
-Date: Fri, 10 Sep 2021 05:51:25 +0000
-Message-ID: <CAGusqHLAmqD6HgJ5ebUoOOt4sgdJhvvaLn+X5AtJjDTY7=q=Cw@mail.gmail.com>
-To: Spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Subject: [Spice-devel] spice protocol 11.5 encrypted password
+References: <CAGusqHLAmqD6HgJ5ebUoOOt4sgdJhvvaLn+X5AtJjDTY7=q=Cw@mail.gmail.com>
+In-Reply-To: <CAGusqHLAmqD6HgJ5ebUoOOt4sgdJhvvaLn+X5AtJjDTY7=q=Cw@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Fri, 10 Sep 2021 11:06:09 +0100
+Message-ID: <CAHt6W4djE+VawG7PQyrbOLVPZ0TOrVwo7WuZ3N4-UUJyTx7hUg@mail.gmail.com>
+To: Andrey Af <public.irkutsk@gmail.com>
+Cc: "spice-devel@lists.freedesktop.org" <Spice-devel@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="0000000000005e7e5405cba1445d"
+Subject: Re: [Spice-devel] spice protocol 11.5 encrypted password
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,8 +66,49 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+--0000000000005e7e5405cba1445d
+Content-Type: text/plain; charset="UTF-8"
 
-For encrypted password, there is definitely no data length market?
-For example, I don't need a password, authentication is verified by
-another part of the code, how can I skip this?
+Hi,
+  there's no protocol 11.5.
+There's no data length markeR, password is zero terminated and encrypted,
+if you refer to the default password schema (no SASL).
+Can you explain what you are trying to do?
+
+Regards,
+  Frediano
+
+
+Il giorno ven 10 set 2021 alle ore 06:51 Andrey Af <public.irkutsk@gmail.com>
+ha scritto:
+
+> Hi,
+>
+> For encrypted password, there is definitely no data length market?
+> For example, I don't need a password, authentication is verified by
+> another part of the code, how can I skip this?
+>
+
+--0000000000005e7e5405cba1445d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi,</div><div>=C2=A0 there&#39;s no protocol 11.5.</d=
+iv><div>There&#39;s no data length markeR, password is zero terminated and =
+encrypted, if you refer to the default password schema (no SASL).<br></div>=
+<div>Can you explain what you are trying to do?<br></div><div><br></div><di=
+v>Regards,<br></div><div><div><div dir=3D"ltr" class=3D"gmail_signature" da=
+ta-smartmail=3D"gmail_signature"><div dir=3D"ltr">=C2=A0 Frediano</div></di=
+v></div><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
+ss=3D"gmail_attr">Il giorno ven 10 set 2021 alle ore 06:51 Andrey Af &lt;<a=
+ href=3D"mailto:public.irkutsk@gmail.com">public.irkutsk@gmail.com</a>&gt; =
+ha scritto:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<=
+br>
+<br>
+For encrypted password, there is definitely no data length market?<br>
+For example, I don&#39;t need a password, authentication is verified by<br>
+another part of the code, how can I skip this?<br>
+</blockquote></div>
+
+--0000000000005e7e5405cba1445d--
