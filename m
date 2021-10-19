@@ -1,49 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16E69432724
-	for <lists+spice-devel@lfdr.de>; Mon, 18 Oct 2021 21:10:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B6060432CC6
+	for <lists+spice-devel@lfdr.de>; Tue, 19 Oct 2021 06:29:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B429C6E0FB;
-	Mon, 18 Oct 2021 19:10:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 84AF06E072;
+	Tue, 19 Oct 2021 04:29:26 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D2446E114
- for <spice-devel@lists.freedesktop.org>; Mon, 18 Oct 2021 18:41:11 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id o24so2168552wms.0
- for <spice-devel@lists.freedesktop.org>; Mon, 18 Oct 2021 11:41:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bogomips.com; s=google;
- h=mime-version:from:date:message-id:subject:to;
- bh=8Y8DT67zsEKYkAfvH+Zjh4a9g3bjtZGkkkhjdr6fPk0=;
- b=N6xI50orA4kqyrRLaLwtQmrhOi3W2rmpGMAotl3UAYYskHzXerXPygmA1zxy9ZnY1g
- cLb+dXi2f++0Xl4ijlmPJFh+Q++RgEi71YnxK4rIagh0EQhi5eesK1VGEJoym0TCnLXJ
- P/Oqe3RiQrakaLb1A0h5CAOeWDS5VbkYu3bEY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=8Y8DT67zsEKYkAfvH+Zjh4a9g3bjtZGkkkhjdr6fPk0=;
- b=MDLRwI3i5aOJKL/fpDIpv6k3IQyCjwS24SHzglSwcxPbopCWSpTsYkXnuuSFt/Z1go
- cf67Levi6SnwO516uerExDxV+dwd9/vkKpmH97w7kqWtdGURz295wlyek6WWO7r5Y5m0
- v5KWEBLS0XrEsMj1iybLh7IVZG66n1/Ye1WRt0ELA+FH50AN8nzh5boY7ydiWemOZ3dT
- KlePfJkGbsodjez3uTFO7Id2s2i415//jX+rez9BG7AOj+2UV2jj2H9Ml6YRn7OnijDu
- iQB6SaFOCJNbSbt3wW95K+C+EYScsShf5agQ+DXq2ybAOzurNz3LmsdC+dadRe2yurjx
- VfgA==
-X-Gm-Message-State: AOAM533fCeUQPkN8ANN0fw98JnN9CZXKmTj4ZiWwxHAkq6dWwzOF8box
- 6+gMxQ5WIPDJwGviVV3/TKkLC5Z+Qyk3cWvDeUijrO8FnJDbgfTH
-X-Google-Smtp-Source: ABdhPJxIT/npTa/BczOTbmDfmPhYrrtcSslmpY43Ui3jsZ51FNTkEqrjb2J7vv3/V6Rnxj6VFPw2A9rMMs5Pmb5N5O4=
-X-Received: by 2002:a7b:c005:: with SMTP id c5mr609958wmb.155.1634582469487;
- Mon, 18 Oct 2021 11:41:09 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2119C6E072
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Oct 2021 04:29:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634617763;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=0bCcQWl3Ij2uAWAqcPEkP5BRcHzgFwLrPJsy5OXduG4=;
+ b=BXxQJBl+oooOGJrH7Ebkbnv4r4UaEl+0uRi7gleHqZXDV1mVL99WksNsJzMak00zGN0haf
+ szDp3Xr4wF+1cDlm60bRcDQNX1CqFueZgTQixIFdeISrnZBCtq7JYQbO48MF0Nea97Otif
+ I+L5V6LmTaFIX671n+C4J+5bmfvT+/E=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-176-5qRLIt3LNDem3C8Np_sA4Q-1; Tue, 19 Oct 2021 00:29:19 -0400
+X-MC-Unique: 5qRLIt3LNDem3C8Np_sA4Q-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A12578066F0;
+ Tue, 19 Oct 2021 04:29:18 +0000 (UTC)
+Received: from localhost (unknown [10.40.192.11])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1F33B101E58D;
+ Tue, 19 Oct 2021 04:29:17 +0000 (UTC)
+Date: Tue, 19 Oct 2021 06:29:16 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: John Paul Morrison <jmorrison@bogomips.com>
+Cc: spice-devel@lists.freedesktop.org
+Message-ID: <20211019042916.oirr77itnfmmtqw4@tapioca>
+References: <CAO-kYtFhG-cNWAUvTh-r48wAhvXBZoKQPa3SQTS=3S+VnEB8OA@mail.gmail.com>
 MIME-Version: 1.0
-From: John Paul Morrison <jmorrison@bogomips.com>
-Date: Mon, 18 Oct 2021 11:40:49 -0700
-Message-ID: <CAO-kYtFhG-cNWAUvTh-r48wAhvXBZoKQPa3SQTS=3S+VnEB8OA@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="000000000000733fd305cea4e3dc"
-X-Mailman-Approved-At: Mon, 18 Oct 2021 19:10:05 +0000
-Subject: [Spice-devel] vdagent, pho-dav for Darwin/OSX?
+In-Reply-To: <CAO-kYtFhG-cNWAUvTh-r48wAhvXBZoKQPa3SQTS=3S+VnEB8OA@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=victortoso@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="4k3jbn3dvybgiufo"
+Content-Disposition: inline
+Subject: Re: [Spice-devel] vdagent, pho-dav for Darwin/OSX?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,56 +66,67 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000733fd305cea4e3dc
-Content-Type: text/plain; charset="UTF-8"
-
-Hi
-
-I'm looking into vdagent and pho-dave for OSX and was wondering if anyone
-had started anything.
-
-I have virtio serial interfaces passed through to the qemu OSX guest:
-
-crw-rw-rw-  1 root  wheel   18,   4 Oct 18 04:10 /dev/tty.com.redhat.spice.0
-crw-rw-rw-  1 root  wheel   18,   2 Oct 18 04:10
-/dev/tty.org.qemu.guest_agent.0
-crw-rw-rw-  1 root  wheel   18,   0 Oct 18 04:10
-/dev/tty.org.spice-space.webdav.0
-
-/usr/libexec/AppleQEMUGuestAgent opens /dev/tty.org.qemu.guest_agent.0 by
-default.
-
-There's activity on the other ttys. When tty.com.redhat.spice.0 is opened,
-remote-viewer releases the mouse and sends data with mouse activity.
-
-I'm not sure where to get started - I thought maybe I could test some
-things in XQuartz first.  Hoping this can be done in user space.
-
-thanks
-
-John Paul
-
---000000000000733fd305cea4e3dc
-Content-Type: text/html; charset="UTF-8"
+--4k3jbn3dvybgiufo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div di=
-r=3D"ltr"><div dir=3D"ltr">Hi<div><br></div><div>I&#39;m looking=C2=A0into =
-vdagent and pho-dave for OSX and was wondering if anyone had started anythi=
-ng.</div><div><br></div><div>I have virtio serial interfaces passed through=
- to the qemu OSX guest:</div><div><br></div><div><div>crw-rw-rw-=C2=A0 1 ro=
-ot=C2=A0 wheel=C2=A0 =C2=A018,=C2=A0 =C2=A04 Oct 18 04:10 /dev/tty.com.redh=
-at.spice.0</div><div>crw-rw-rw-=C2=A0 1 root=C2=A0 wheel=C2=A0 =C2=A018,=C2=
-=A0 =C2=A02 Oct 18 04:10 /dev/tty.org.qemu.guest_agent.0</div><div>crw-rw-r=
-w-=C2=A0 1 root=C2=A0 wheel=C2=A0 =C2=A018,=C2=A0 =C2=A00 Oct 18 04:10 /dev=
-/tty.org.spice-space.webdav.0</div></div><div><br></div><div>/usr/libexec/A=
-ppleQEMUGuestAgent opens=C2=A0/dev/tty.org.qemu.guest_agent.0 by default.</=
-div><div><br></div><div>There&#39;s activity on the other ttys. When tty.co=
-m.redhat.spice.0 is opened, remote-viewer releases the mouse and sends data=
- with mouse activity.</div><div><br></div><div>I&#39;m not sure where to ge=
-t started - I thought maybe I could test some things in XQuartz first.=C2=
-=A0 Hoping this can be done in user space.</div><div><br></div><div>thanks<=
-/div><div><br></div><div>John Paul</div><div><br></div><div><br></div><div>=
-<br></div><div><br></div></div></div></div></div></div></div>
+Hi,
 
---000000000000733fd305cea4e3dc--
+On Mon, Oct 18, 2021 at 11:40:49AM -0700, John Paul Morrison wrote:
+> Hi
+>=20
+> I'm looking into vdagent and pho-dave for OSX and was wondering
+> if anyone had started anything.
+
+Not that I'm aware of.
+
+> I have virtio serial interfaces passed through to the qemu OSX
+> guest:
+>=20
+> crw-rw-rw-  1 root  wheel   18,   4 Oct 18 04:10 /dev/tty.com.redhat.spic=
+e.0
+> crw-rw-rw-  1 root  wheel   18,   2 Oct 18 04:10
+> /dev/tty.org.qemu.guest_agent.0
+> crw-rw-rw-  1 root  wheel   18,   0 Oct 18 04:10
+> /dev/tty.org.spice-space.webdav.0
+>=20
+> /usr/libexec/AppleQEMUGuestAgent opens /dev/tty.org.qemu.guest_agent.0 by
+> default.
+>=20
+> There's activity on the other ttys. When tty.com.redhat.spice.0
+> is opened, remote-viewer releases the mouse and sends data with
+> mouse activity.
+>=20
+> I'm not sure where to get started - I thought maybe I could
+> test some things in XQuartz first.  Hoping this can be done in
+> user space.
+
+Are you building vdagent with gtk? With gtk, we might be able to
+get some features like clipboard, I hope.
+
+Cheers,
+Victor
+
+--4k3jbn3dvybgiufo
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmFuSZwACgkQl9kSPeN6
+SE+GuQ/8C01q8gjkII9ZVd1f1Hf7GmAKeI7GI7G+cjrdTK6hx3j5d9sEDVr/etUV
+aXRz4/zr3Ptf6M/9MhCORx2SlSoOX1aOfwDiu4FEiXLMun7cLWGR39ey0uM2o3rr
+22zxddpy0oBAOsHgsEX9mY3tur1rRlRpPWuGK52tMDKrweDhWUuJ2lkrjOh4qxwd
+CBWkIIfICGcU8qW4nP2TVNcvOUGjILle9B5ArCQwo4OUfqGw9AXVSZzpdlbbWmzA
+4w6SWZYwd0mfbbkNySb3Px337BZDhajAJJCirqqTXOyAIc+2EUPjqZu7BPAcVIE5
+H466HOLI/IiZ8aglsMXDlwxkaua9Z8Gk4FMxAWYvr3mb+Qg9XUNdZwkvEyoRi2Tg
+2Gc9K1hsOR7iesLPlGITGFuaJv5C9sxiI/vmDZ8LWHJb6JX1EZB8EwURotRlKLdK
+9JcTDelA1K8/FWA6QoSabJV9CUqf8eOG6a1jNdm3lrFRM9ZGBGV5CvcHtMlVQwTw
+zqp9kBuJP0iHIUXrgrKfbWfkBFebITSp/6j6tNBBza4dHFUjluCHt6avo+PnSTB0
+ZVjBrSXdHr/KTuu7KqtoaQ8m8gAwFzbMR4EmDPKYiBkhY/x98cIbNBN8oa6ebRNu
+O7PY+YEfVJ/8L1nC3XB2/NmvrDZdkCuiR5+quP2V25O9uTJ2y7M=
+=G6Y+
+-----END PGP SIGNATURE-----
+
+--4k3jbn3dvybgiufo--
+
