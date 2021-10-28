@@ -1,57 +1,68 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E69043C860
-	for <lists+spice-devel@lfdr.de>; Wed, 27 Oct 2021 13:16:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CAFED43DD44
+	for <lists+spice-devel@lfdr.de>; Thu, 28 Oct 2021 10:58:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 770B46E883;
-	Wed, 27 Oct 2021 11:16:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 987496E5BB;
+	Thu, 28 Oct 2021 08:58:33 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CADF16E883
- for <spice-devel@lists.freedesktop.org>; Wed, 27 Oct 2021 11:16:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635333362;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=nJHpwhDeAEq4dvUiDDMEAdoTUNKWDSMJDj0HZ5kC9cM=;
- b=dWtojThnol1ZJ+7k5KAzfUN8kdoA4xZYvFY4DSmOuFEgOmr6QVTQtZ/44w8/NR2GVyEbhm
- UA2WL09qFC3eFDyAiE4V86Cgw1zeumI6qT+W6m3kBkcbE9L07uuH1DgmgJJo/FQDLH1GSG
- BnRhzEerLUW8uTPe7md1CLkBkuVXCpE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-45-QqQ4a1A7PCmS9ksiLqi_Xw-1; Wed, 27 Oct 2021 07:14:38 -0400
-X-MC-Unique: QqQ4a1A7PCmS9ksiLqi_Xw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 06C9C9126B;
- Wed, 27 Oct 2021 11:14:37 +0000 (UTC)
-Received: from localhost (unknown [10.40.193.21])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8F59D100E12D;
- Wed, 27 Oct 2021 11:14:36 +0000 (UTC)
-Date: Wed, 27 Oct 2021 13:14:35 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: John Paul Morrison <jmorrison@bogomips.com>
-Cc: spice-devel@lists.freedesktop.org
-Message-ID: <20211027111435.a2nyooujxu7pczci@tapioca>
-References: <CAO-kYtH=j7gCQVn0P5-UtZog93v1cxvM+dNW43Yow9Ms51BeBw@mail.gmail.com>
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C3EE96E5BB;
+ Thu, 28 Oct 2021 08:58:32 +0000 (UTC)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ o4-20020a1c7504000000b0032cab7473caso4258386wmc.1; 
+ Thu, 28 Oct 2021 01:58:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8pRnJQmmB+/kCdjQaACOoqogylSvktqG3v7tsX861XU=;
+ b=hQr+RlB7nQ0kBfkch66CVzLGjeTDfB3+Y0hgwSAS2sIF7Etfjcn1XcPfLlpIGUHMg2
+ ypErUzIrTp2LgbVFx1p0RhBKHqX4iSF0rouLa5lDo9WLKNJu5AZk0uauZWo/LjxYVWAW
+ aSMx3vpPwRqidL6Xl4o1ByaNIE8eaf8bv2KzlC0APlc21nIIu6d5wba1ZN3krvZY4MD1
+ gggPyRk+vDHQ5Y+S265L1eTwGOQaVUykfdsVPiEXgwTGPROcAdj3Q3kpqW4RqfMEDxcq
+ vt9x97Bck2Zw8CGbRYDnZp3YcQgWD0+At0VlfPOEj8Pjs6MGvRQUd0a3A+7SmC4qCIFU
+ DPJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8pRnJQmmB+/kCdjQaACOoqogylSvktqG3v7tsX861XU=;
+ b=IMn1AiorXzJThs357Kw727fLOIg4u5ExtDzUeDB52H5cITFdQqmSEh9/TDxDEatD7b
+ QGFpq82XmeIIcislsTGy4vVEUJcg1ZNrROdszJvMejTPiWR56Y+wF6kMqVxd8zdHHEYr
+ ppPR7rU9kilQu5OkPFAnBQK2Jm05NBcOxSSOoy2SNqu0Os1QUmKMM27gCXyHH5hlS34Q
+ fzZ7UbwtpfDhWgsxwY9xALFevtbr1kgDGo0xH0Hp0HDVsyXpJrgJxzKvu/vBx7KpoO2+
+ bs6AZzukbfAEgqIsm6YdPUoI8BsXRJYWTbQ/g7AITX/Byvm4lkzBWT9+omkGHXZhvryd
+ paog==
+X-Gm-Message-State: AOAM53170Kjd2WTkg7SSRpeJPgHuKrOVSqz9kNM5JZSmNVOLcWMnM7ws
+ syAmDsKCo4g361MK64QXMwp+VcIJeEQ=
+X-Google-Smtp-Source: ABdhPJz8YhMDtgUIgGgUYWl+alCbM4WTONsbnjfCXo4Ut5lcjRZxATOVrz1OmZRT4kcVrUlDv3UamA==
+X-Received: by 2002:a7b:cd9a:: with SMTP id y26mr11110448wmj.107.1635411511382; 
+ Thu, 28 Oct 2021 01:58:31 -0700 (PDT)
+Received: from abel.fritz.box (p5b0ea1b5.dip0.t-ipconnect.de. [91.14.161.181])
+ by smtp.gmail.com with ESMTPSA id
+ k22sm2412143wrd.59.2021.10.28.01.58.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Oct 2021 01:58:30 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: dri-devel@lists.freedesktop.org,
+	linux-media@vger.kernel.org
+Cc: etnaviv@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ spice-devel@lists.freedesktop.org
+Date: Thu, 28 Oct 2021 10:58:26 +0200
+Message-Id: <20211028085829.1726-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <CAO-kYtH=j7gCQVn0P5-UtZog93v1cxvM+dNW43Yow9Ms51BeBw@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=victortoso@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="6bokarkgn5cevw5w"
-Content-Disposition: inline
-Subject: Re: [Spice-devel] phodav build/run on OSX
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Spice-devel] [PATCH 1/4] dma-buf: add dma_fence_describe and
+ dma_resv_describe
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,63 +77,139 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---6bokarkgn5cevw5w
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add functions to dump dma_fence and dma_resv objects into a seq_file and
+use them for printing the debugfs informations.
 
-Hi,
+Signed-off-by: Christian König <christian.koenig@amd.com>
+Reviewed-by: Rob Clark <robdclark@gmail.com>
+---
+ drivers/dma-buf/dma-buf.c   | 11 +----------
+ drivers/dma-buf/dma-fence.c | 16 ++++++++++++++++
+ drivers/dma-buf/dma-resv.c  | 23 +++++++++++++++++++++++
+ include/linux/dma-fence.h   |  1 +
+ include/linux/dma-resv.h    |  1 +
+ 5 files changed, 42 insertions(+), 10 deletions(-)
 
-On Tue, Oct 26, 2021 at 02:45:23PM -0700, John Paul Morrison wrote:
-> Hi
->=20
-> This change is for building phodav on OSX/Darwin
->=20
-> I am able to build and run spice-webdavd on Catalina/Xcode using brew for
-> meson, glib etc.
->=20
-> - meson defaults to clang and it builds with a warning. Clang
-> spice-webdav runs but there are more warnings with G_MESSAGES_DEBUG=3Dall=
-.
-> After a few file/folder operations my Spice client  (Fedora 34,
-> remote-viewer 9.0) crashed
->=20
-> - Using CC=3Dgcc-11 (homebrew) for meson builds without warnings.
-> gcc spice-webdav logs fewer warnings at runtime and also works better.  I
-> can copy files, extract archives etc.  It seems more robust than the clan=
-g
-> build but I got a timeout trying to clone a repository into the webdav
-> folder.
->=20
-> John Paul
->=20
->=20
-> https://gitlab.gnome.org/jpmorrison/phodav/-/commit/ae9ac98c1b3db26070111=
-661aba02594c62d2cef
-
-Thanks for the updates John!
-
-Cheers,
-
---6bokarkgn5cevw5w
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmF5NJsACgkQl9kSPeN6
-SE/CKA/9FIxKJ7hL8mSwN6iJJlKhNAtxdQRbQadLfEfrq4eopAiZTNKDn7Nweis1
-6bwPkhZlJyJnS0y/eriUypxlDhYsECRJHHDLZqgwfJn887lkA5QlEpxUb4P7JxzG
-6lU1tXlgNlMTYVmPGEM5vHg0ULGn8ov6DjPgoRpCeP1HyTiTgpzr/FKSYZTXSPKa
-QHfdDm7+gfzWqh3WPypundiivjGoqJcPJZ9n021W3CyxWl3OnLrtjxhSkxxBjv3X
-1yTH09TpWP2aS3s8F/JCTCM8qPf7H+d0bEllAMIMctbYUTJUUEZM8JdCHkHIO2Vf
-HW2fEnzVFl0IOdJKe1Mnz3EpVx8+IBURFBk5Qdf1KgJeg2LYfCuuQNo1qAqqjnKo
-hTRHY7fyRx7Ha5kLVGL9ZuvYwlNwiDEL9TMo6kkrjC1vByzhl+apRlAyLeEcWZMm
-cHZSQ2Z9LfhtyAl18FBfBZVHoPqnmYJ6H8zyDHM45bPjBP9++UnRfzOgtX8loxn+
-zKeCqEuPpkHerg+xWW2urmU4Gal4J5t5HAhW3oKXorBW0Z+wdGaLr3y0uVJm9U4I
-iYCRyCQaIebAvhUOszSqrsfvh3UdFg2ipWMB15IXw865+DxP5XiiQVdjw6Xxph55
-wuNUeRc2/Xo5qRrKiJSkYisq/f1E0kUoFB2n+oixxcDDVaZnRIg=
-=mGWV
------END PGP SIGNATURE-----
-
---6bokarkgn5cevw5w--
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 7b619998f03a..1d6f6c6a0b09 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -1332,8 +1332,6 @@ static int dma_buf_debug_show(struct seq_file *s, void *unused)
+ {
+ 	struct dma_buf *buf_obj;
+ 	struct dma_buf_attachment *attach_obj;
+-	struct dma_resv_iter cursor;
+-	struct dma_fence *fence;
+ 	int count = 0, attach_count;
+ 	size_t size = 0;
+ 	int ret;
+@@ -1361,14 +1359,7 @@ static int dma_buf_debug_show(struct seq_file *s, void *unused)
+ 				file_inode(buf_obj->file)->i_ino,
+ 				buf_obj->name ?: "");
+ 
+-		dma_resv_for_each_fence(&cursor, buf_obj->resv, true, fence) {
+-			seq_printf(s, "\t%s fence: %s %s %ssignalled\n",
+-				   dma_resv_iter_is_exclusive(&cursor) ?
+-					"Exclusive" : "Shared",
+-				   fence->ops->get_driver_name(fence),
+-				   fence->ops->get_timeline_name(fence),
+-				   dma_fence_is_signaled(fence) ? "" : "un");
+-		}
++		dma_resv_describe(buf_obj->resv, s);
+ 
+ 		seq_puts(s, "\tAttached Devices:\n");
+ 		attach_count = 0;
+diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
+index 1e82ecd443fa..5175adf58644 100644
+--- a/drivers/dma-buf/dma-fence.c
++++ b/drivers/dma-buf/dma-fence.c
+@@ -907,6 +907,22 @@ dma_fence_wait_any_timeout(struct dma_fence **fences, uint32_t count,
+ }
+ EXPORT_SYMBOL(dma_fence_wait_any_timeout);
+ 
++/**
++ * dma_fence_describe - Dump fence describtion into seq_file
++ * @fence: the 6fence to describe
++ * @seq: the seq_file to put the textual description into
++ *
++ * Dump a textual description of the fence and it's state into the seq_file.
++ */
++void dma_fence_describe(struct dma_fence *fence, struct seq_file *seq)
++{
++	seq_printf(seq, "%s %s seq %llu %ssignalled\n",
++		   fence->ops->get_driver_name(fence),
++		   fence->ops->get_timeline_name(fence), fence->seqno,
++		   dma_fence_is_signaled(fence) ? "" : "un");
++}
++EXPORT_SYMBOL(dma_fence_describe);
++
+ /**
+  * dma_fence_init - Initialize a custom fence.
+  * @fence: the fence to initialize
+diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
+index 9eb2baa387d4..ff3c0558b3b8 100644
+--- a/drivers/dma-buf/dma-resv.c
++++ b/drivers/dma-buf/dma-resv.c
+@@ -38,6 +38,7 @@
+ #include <linux/mm.h>
+ #include <linux/sched/mm.h>
+ #include <linux/mmu_notifier.h>
++#include <linux/seq_file.h>
+ 
+ /**
+  * DOC: Reservation Object Overview
+@@ -666,6 +667,28 @@ bool dma_resv_test_signaled(struct dma_resv *obj, bool test_all)
+ }
+ EXPORT_SYMBOL_GPL(dma_resv_test_signaled);
+ 
++/**
++ * dma_resv_describe - Dump description of the resv object into seq_file
++ * @obj: the reservation object
++ * @seq: the seq_file to dump the description into
++ *
++ * Dump a textual description of the fences inside an dma_resv object into the
++ * seq_file.
++ */
++void dma_resv_describe(struct dma_resv *obj, struct seq_file *seq)
++{
++	struct dma_resv_iter cursor;
++	struct dma_fence *fence;
++
++	dma_resv_for_each_fence(&cursor, obj, true, fence) {
++		seq_printf(seq, "\t%s fence:",
++			   dma_resv_iter_is_exclusive(&cursor) ?
++				"Exclusive" : "Shared");
++		dma_fence_describe(fence, seq);
++	}
++}
++EXPORT_SYMBOL_GPL(dma_resv_describe);
++
+ #if IS_ENABLED(CONFIG_LOCKDEP)
+ static int __init dma_resv_lockdep(void)
+ {
+diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
+index a706b7bf51d7..1ea691753bd3 100644
+--- a/include/linux/dma-fence.h
++++ b/include/linux/dma-fence.h
+@@ -264,6 +264,7 @@ void dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops *ops,
+ 
+ void dma_fence_release(struct kref *kref);
+ void dma_fence_free(struct dma_fence *fence);
++void dma_fence_describe(struct dma_fence *fence, struct seq_file *seq);
+ 
+ /**
+  * dma_fence_put - decreases refcount of the fence
+diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
+index dbd235ab447f..09c6063b199a 100644
+--- a/include/linux/dma-resv.h
++++ b/include/linux/dma-resv.h
+@@ -490,5 +490,6 @@ int dma_resv_copy_fences(struct dma_resv *dst, struct dma_resv *src);
+ long dma_resv_wait_timeout(struct dma_resv *obj, bool wait_all, bool intr,
+ 			   unsigned long timeout);
+ bool dma_resv_test_signaled(struct dma_resv *obj, bool test_all);
++void dma_resv_describe(struct dma_resv *obj, struct seq_file *seq);
+ 
+ #endif /* _LINUX_RESERVATION_H */
+-- 
+2.25.1
 
