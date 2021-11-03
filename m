@@ -1,67 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B4DC442BCE
-	for <lists+spice-devel@lfdr.de>; Tue,  2 Nov 2021 11:47:12 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB884443E18
+	for <lists+spice-devel@lfdr.de>; Wed,  3 Nov 2021 09:12:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AC2586FCDA;
-	Tue,  2 Nov 2021 10:47:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6E081734B6;
+	Wed,  3 Nov 2021 08:12:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from fallback14.mail.ru (fallback14.mail.ru [94.100.179.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 76F5B6E93D
- for <spice-devel@lists.freedesktop.org>; Tue,  2 Nov 2021 10:45:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=bk.ru;
- s=mail3; 
- h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=L6qMaVgN0Che8/EDlAMhwQOCGoPnikPXF4nc/Aum4xc=; 
- t=1635849911;x=1636455311; 
- b=skh/VBm5d2n6crEtrXXrlCrHE1b884vAoWxOr3nVZ08OrGcTqEFxuGwxQ+ZTHu10UND0V5cwUbgTBSxXdVYO0E61YnT8PPnfV555LuD/hnP3bhl7RAP6DchDFsSiHkwLxa4HJRQCrrI6zxPOTOxbpyMbSiXoGg4Ol3dtuwwkWZc=;
-Received: from [10.161.63.31] (port=34244 helo=f408.i.mail.ru)
- by fallback14.m.smailru.net with esmtp (envelope-from <ppqb@bk.ru>)
- id 1mhrHw-0006cy-IH
- for spice-devel@lists.freedesktop.org; Tue, 02 Nov 2021 13:45:08 +0300
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=bk.ru;
- s=mail3; 
- h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=L6qMaVgN0Che8/EDlAMhwQOCGoPnikPXF4nc/Aum4xc=; 
- t=1635849908;x=1636455308; 
- b=34jQWReajFfjPR9pp72XjD73HEfGKdluZaLFkTRJYUsZ7iN79+jIIHUSaRtezj9y8PqZHzRSjZEQXJH+QoGdcvRidoWvPldb37iR35uCuzOod4NgT1uLPwXsGitzc13LQfs7nTMiebQ1fVNP0wq6y7UiUJVtdh4yVx/+2SwbmPs=;
-Received: by f408.i.mail.ru with local (envelope-from <ppqb@bk.ru>)
- id 1mhrHq-0002Cp-Gv
- for spice-devel@lists.freedesktop.org; Tue, 02 Nov 2021 13:45:02 +0300
-Received: by e.mail.ru with HTTP;
-	Tue, 02 Nov 2021 13:45:02 +0300
-From: =?UTF-8?B?cHFicHFi?= <ppqb@bk.ru>
-To: spice-devel@lists.freedesktop.org
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 13E39734B6;
+ Wed,  3 Nov 2021 08:12:36 +0000 (UTC)
+Received: by mail-wr1-x42d.google.com with SMTP id t30so2203357wra.10;
+ Wed, 03 Nov 2021 01:12:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Uh0NRCclsAKfVxkerpNkq71adkos81CcdIhWKjRw+6Y=;
+ b=mr5PnPgRO8OzuCvJMvW5hnrKT6fvInL0UAalZ989hyaB3jvVYItDW8ou3liJfIJoNr
+ hvWaf54dIpbnxdcc373Xcvqh9M6HM18knXjMfLH8s9y9SqdcLaOWvj2x7DpcCaGzVFbZ
+ lRKQhbmITsNkhjsS4nGlQr7p3Lx9KbhcIkcbZuEMqIiRnZFQq9nQAgmb7jI6kyyIYGVr
+ 8DuN2xfiamK0PB5ZXxLNCXVJmkxa0CufWXYNL8NcvGDnhKDuJsd3OrctTS27BMaV18TM
+ rng6LYJfdT4RIcJrOUvee5IGHT8G8Pg1qV1oMpUStS5iXhzHspZdxG0dOEiTdyYrycJK
+ yKSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Uh0NRCclsAKfVxkerpNkq71adkos81CcdIhWKjRw+6Y=;
+ b=HGJvOrpwED7SiLPwF7BLyqzA+9qhiptUlsz0Icl+z5M1wM6sImchOzL3SrUgMWYd2J
+ s0cSaLWBU5ZarHKuQ0U2zef6b7rqVSgxOTtXxXXcUoUzxkkjjfU4kzvM0+Eb8nNjUqMv
+ y0GiKb48ue91kiM06AiZGnykZgFABvP73QzC+j4/2VEd/4fe0vlodnchcgbJnWB2B6hc
+ +IatfmlMSY5No94nMPKxu/yC4bX0Dv1drD+/C+JGz0ehVgpFfDu7YKSEEcuF6mFjUqin
+ U6WYbxAYDmhLskR6ZIV+LcCYvn8MWSb4flZkfxpXvaGTe35mVaR2Vd4yXmNQxbRIa9DD
+ vVsw==
+X-Gm-Message-State: AOAM533RSXoEaQ+SqqKuQCKr7gAwfNhLT+ajn1v7O4o9L2YwTrhIjTJu
+ SB6OlfMKyocGmFmcpWtURqo=
+X-Google-Smtp-Source: ABdhPJw1BshvZSVxZm2e89H/8z2XLrQccFGIz7m0oW1jDggouT+C66c3Yi239msG+Ek/pKeY2cfj0A==
+X-Received: by 2002:adf:fe88:: with SMTP id l8mr33010703wrr.208.1635927154697; 
+ Wed, 03 Nov 2021 01:12:34 -0700 (PDT)
+Received: from abel.fritz.box (p5b0ea1b5.dip0.t-ipconnect.de. [91.14.161.181])
+ by smtp.gmail.com with ESMTPSA id
+ l7sm1450088wry.86.2021.11.03.01.12.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Nov 2021 01:12:34 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: linux-media@vger.kernel.org, etnaviv@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org,
+ spice-devel@lists.freedesktop.org
+Date: Wed,  3 Nov 2021 09:12:27 +0100
+Message-Id: <20211103081231.18578-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Mailer: Mail.Ru Mailer 1.0
-X-SenderField-Remind: 0
-Date: Tue, 02 Nov 2021 13:45:02 +0300
-X-Priority: 3 (Normal)
-Message-ID: <1635849902.813987420@f408.i.mail.ru>
-Content-Type: multipart/alternative;
- boundary="--ALT--18652237E1f2290547EccD4f80B4d0351635849902"
-X-7564579A: EEAE043A70213CC8
-X-77F55803: 119C1F4DF6A9251CF15FB8EDEAB527CC2CA98620AA5F57297A29CFF409241352ABF6EAE57C0FACE98582A84366EFDFB3C07439F2B7050C3D0487A1873E87FB690C4FDA321CD2EEF9
-X-7FA49CB5: 70AAF3C13DB7016878DA827A17800CE7AB9C4DF6AA48EECFD82A6BABE6F325AC08BE7437D75B48FABCF491FFA38154B613377AFFFEAFD269176DF2183F8FC7C0922FDBD9EBA3C5B4B287FD4696A6DC2FA8DF7F3B2552694A4E2F5AFA99E116B42401471946AA11AF1661749BA6B9773581C4E570E9C9D5568F08D7030A58E5AD1A62830130A00468AEEEE3FBA3A834EE7353EFBB553375662EF5425C000D22583290BBB1604C299E2EF4DA8EE5162AA41DF9E95F17B0083B26EA987F6312C9EC33AC447995A7AD18E5D25F19253116ADD2E47CDBA5A96583C09775C1D3CA48CF17B107DEF921CE79117882F4460429724CE54428C33FAD30A8DF7F3B2552694AC26CFBAC0749D213D2E47CDBA5A9658378DA827A17800CE70F3DDF2BBF19B93A9FA2833FD35BB23DF004C906525384302BEBFE083D3B9BA71A620F70A64A45A98AA50765F79006372E808ACE2090B5E1725E5C173C3A84C3C5EA940A35A165FF2DBA43225CD8A89F6228E2C7F8077EAB6D8C47C27EEC5E9FB5C8C57E37DE458BEDA766A37F9254B7
-X-C1DE0DAB: 0D63561A33F958A5DC7D4EB4903D1E52F85C9131204B0DD81747FDBBD0E81610BDC6A1CF3F042BAD6DF99611D93F60EF8BFD6B1B042489AC699F904B3F4130E343918A1A30D5E7FCCB5012B2E24CD356
-X-C8649E89: 4E36BF7865823D7055A7F0CF078B5EC49A30900B95165D341C998A3771F0415339067F1838E3F6442D4AA603E63C35F2EFD8792FD4EC89D28DC08E1BF723045B1D7E09C32AA3244CCCF4141CF1C3DC4AB954E07FC66238BE60759606DA2E136A3EB3F6AD6EA9203E
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5+wYjsrrSY/u8Y3PrTqANeitKFiSd6Yd7yPpbiiZ/d5BsxIjK0jGQgCHUM3Ry2Lt2G3MDkMauH3h0dBdQGj+BB/iPzQYh7XS3xyn40EmMxrmzGyQ9/nTnF3/+uui8YxPSQyxHfUpwjuv
-X-Mailru-Sender: 2141B907B79720A87B1F4B9A8ECB8223F3FAD3608DD3D941BB67E09830780BB26D335297FFEED5FD416B23E089C969321E81E83A97E50A52E7170656605737075C42E55482C24A5F0BCBDEB905068A3E83CE97D6EC8C31C5D15D850753C4FAF1EAB4BC95F72C04283CDA0F3B3F5B9367
-X-Mras: Ok
-X-Spam: undefined
-X-7564579A: 646B95376F6C166E
-X-77F55803: 6242723A09DB00B44A878384BCC081935794777D2B3AB3BA3A0CEFB5D6B96F5D049FFFDB7839CE9E6AF9FA82C147F9B3D87BE10C057E4554F0A6158B54024E627FF06630428BA909
-X-7FA49CB5: 0D63561A33F958A55E0EC56FAC584E88A2855E6C5C344AA565C823D1B52D7173CACD7DF95DA8FC8BD5E8D9A59859A8B64071617579528AACCC7F00164DA146DAFE8445B8C89999728AA50765F79006376B023E84F73EF47C389733CBF5DBD5E9C8A9BA7A39EFB766F5D81C698A659EA7CC7F00164DA146DA9985D098DBDEAEC8093C2F12201C912AF6B57BC7E6449061A352F6E88A58FB86F5D81C698A659EA775ECD9A6C639B01B78DA827A17800CE77C66B60D41E21108731C566533BA786AA5CC5B56E945C8DA
-X-C1DE0DAB: 0D63561A33F958A55E0EC56FAC584E88A2855E6C5C344AA5FAE47928CCB553838E8E86DC7131B365E7726E8460B7C23C
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5+wYjsrrSY/u8Y3PrTqANeitKFiSd6Yd7yPpbiiZ/d5BsxIjK0jGQgCHUM3Ry2Lt2G3MDkMauH3h0dBdQGj+BB/iPzQYh7XS329fgu+/vnDh86h2/qyIGyA95J2A7qfc9Q==
-X-Mailru-MI: 800
-X-Mras: Ok
-X-Mailman-Approved-At: Tue, 02 Nov 2021 10:47:09 +0000
-Subject: [Spice-devel] =?utf-8?q?Required_software_python-spice-clicent-g?=
- =?utf-8?q?tk_and_spice-vdagent_for_ubuntu_and_BSD?=
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Spice-devel] DMA-buf debugfs cleanups
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,37 +71,17 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: =?UTF-8?B?cHFicHFi?= <ppqb@bk.ru>
+Cc: sumit.semwal@linaro.org, daniel@ffwll.ch, l.stach@pengutronix.de
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+Hi guys,
 
-----ALT--18652237E1f2290547EccD4f80B4d0351635849902
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+second round for those four patches adding some simple yet useful DMA-buf helper functions for debugfs prints.
 
-Ckdvb2QgbW9ybmluZyBTUElDRSBkZXZlbG9wZXJzCsKgCkkgd291bGQgbGlrZSB0byBrbm93IHdo
-eSB5b3UgZG8gbm90IHByb3ZpZGUgdGhlIHB5dGhvbi1zcGljZS1jbGllbnQtZ3RrIHBhY2thZ2Ug
-Zm9yIFVidW50dSwgbmVjZXNzYXJ5IGZvciB0aGUgY29uZmlndXJhdGlvbiBvZiB2aXJ0dWFsaXpl
-ZCBzeXN0ZW1zIG9uIGt2bS9xZW11IG1hY2hpbmVzLCBhcyB3ZWxsIGFzIGl0cyBkZXBlbmRlbmNp
-ZXMgc3BpY2UtdmRhZ2VudCB0byBpbnN0YWxsIG9uIEJTRCBzeXN0ZW1zIGFzIGEgZ3Vlc3QsIHNv
-IHRoYXQgdGhlIHR3byBtYWNoaW5lcyBhcmUgZnVsbHkgc2hhcmVkIGxpYnJhcmllcywgZmlsZXMs
-IGZvbGRlciBhbmQgZGV2aWNlcy4KCkJlc3QgcmVnYXJkcwrCoAotLQpwcWJwcWI=
+Fixed some missing includes and typos in commit messages.
 
-----ALT--18652237E1f2290547EccD4f80B4d0351635849902
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
+Please review and/or comment,
+Christian.
 
-CjxIVE1MPjxCT0RZPjxkaXY+R29vZCBtb3JuaW5nIFNQSUNFIGRldmVsb3BlcnM8L2Rpdj48ZGl2
-PiZuYnNwOzwvZGl2PjxkaXY+SSB3b3VsZCBsaWtlIHRvIGtub3cgd2h5IHlvdSBkbyBub3QgcHJv
-dmlkZSB0aGUgcHl0aG9uLXNwaWNlLWNsaWVudC1ndGsgcGFja2FnZSBmb3IgVWJ1bnR1LCBuZWNl
-c3NhcnkgZm9yIHRoZSBjb25maWd1cmF0aW9uIG9mIHZpcnR1YWxpemVkIHN5c3RlbXMgb24ga3Zt
-L3FlbXUgbWFjaGluZXMsIGFzIHdlbGwgYXMgaXRzIGRlcGVuZGVuY2llcyBzcGljZS12ZGFnZW50
-IHRvIGluc3RhbGwgb24gQlNEIHN5c3RlbXMgYXMgYSBndWVzdCwgc28gdGhhdCB0aGUgdHdvIG1h
-Y2hpbmVzIGFyZSBmdWxseSBzaGFyZWQgbGlicmFyaWVzLCBmaWxlcywgZm9sZGVyIGFuZCBkZXZp
-Y2VzLjxicj48YnI+QmVzdCByZWdhcmRzPC9kaXY+PGRpdj4mbmJzcDs8L2Rpdj48ZGl2IGRhdGEt
-c2lnbmF0dXJlLXdpZGdldD0iY29udGFpbmVyIj48ZGl2IGRhdGEtc2lnbmF0dXJlLXdpZGdldD0i
-Y29udGVudCI+PGRpdj4tLTxicj5wcWJwcWI8L2Rpdj48L2Rpdj48L2Rpdj48L0JPRFk+PC9IVE1M
-Pgo=
 
-----ALT--18652237E1f2290547EccD4f80B4d0351635849902--
