@@ -1,76 +1,42 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57A37446049
-	for <lists+spice-devel@lfdr.de>; Fri,  5 Nov 2021 08:52:00 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A87C4446045
+	for <lists+spice-devel@lfdr.de>; Fri,  5 Nov 2021 08:51:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 61B6C6E1D5;
-	Fri,  5 Nov 2021 07:51:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DA9F6E09C;
+	Fri,  5 Nov 2021 07:51:42 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 515C973305
- for <spice-devel@lists.freedesktop.org>; Thu,  4 Nov 2021 16:44:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1636044253;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GBeSNSo+VR936LBuXFto2HVzfx/uW1FgtYIk1y3q3ig=;
- b=CBVY3wAoy78upQNbKAT1HVlHDBpW4oEl0NbOHqlw8hz+XAM45IIsqMx9wT6FBTHERDHg6I
- h207V7GgFIdF5o0vj424y1hfbUtdxmpIm3EE1+0uJwpm1eT+0mXEEd/T7hq/7E1t++v9zk
- HkSLJ2SgiK0VMUli6JbyzWmnaRWXtWQ=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-225-Y7P6EzfZO6eJQM-UdFjLWQ-1; Thu, 04 Nov 2021 12:44:11 -0400
-X-MC-Unique: Y7P6EzfZO6eJQM-UdFjLWQ-1
-Received: by mail-wm1-f72.google.com with SMTP id
- k6-20020a7bc306000000b0030d92a6bdc7so2780450wmj.3
- for <spice-devel@lists.freedesktop.org>; Thu, 04 Nov 2021 09:44:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=GBeSNSo+VR936LBuXFto2HVzfx/uW1FgtYIk1y3q3ig=;
- b=jAl4VKh0MxI66p4I+JwlEv6WxIYu5ZpL/pRiml9AnEnYX5j2c62m2Wwcf15IUeFaoI
- q6XYWnKWYYl+tkKGVGG5JqNtaYguv5i/yJvv6ItDWEQWrH4UkVjXUn2zKmj0i4lxERs2
- o4ElG+NkyFMJ5lGmgRIfVRDKwhMJ7+mV6q/cz3YNpLJqpZRQ+6tA00JttPPsBuwKiDrF
- 48xxYKzSgK7Gvmu1Oa9wxcOJGxFSSkFzeQaAv3xTm/HkkbEWRVIP70lt/jDriYzK/Y3R
- UddYV7a7LzaBP8t49sZ/vBvYCGGFGOdDwJHLp5kCtudgVKufzaRYiLMuGfF1awM5f01A
- f6PA==
-X-Gm-Message-State: AOAM533TmoRtFsBzwGjXI3Gdp7JiL3JDrYKAR+RE4ygYaB8FFG0LyNb1
- beeNRz/6fQN6JOTA5C9syj58NXPZN1ptGgk3CKfYQDgZjMq7DeGxEuy2BiDF/GQuVwQKhthSk+n
- j5FZY62lr+3Mu4fC/yJrzFk2tRtJ0HkY=
-X-Received: by 2002:a5d:4e52:: with SMTP id r18mr39525105wrt.224.1636044250773; 
- Thu, 04 Nov 2021 09:44:10 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwnATpWRYfiqKo492+/czqTIzFCv7HIX437cz1EV9eI7R7UChO4l+utit2RLduHTmaqMKEFNQ==
-X-Received: by 2002:a5d:4e52:: with SMTP id r18mr39525075wrt.224.1636044250590; 
- Thu, 04 Nov 2021 09:44:10 -0700 (PDT)
-Received: from [192.168.1.128] ([92.176.231.106])
- by smtp.gmail.com with ESMTPSA id o4sm6636216wry.80.2021.11.04.09.44.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Nov 2021 09:44:10 -0700 (PDT)
-Message-ID: <3ff9fe95-9bc7-a043-78c6-d52d0ff02e23@redhat.com>
-Date: Thu, 4 Nov 2021 17:44:08 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-To: Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
+X-Greylist: delayed 964 seconds by postgrey-1.36 at gabe;
+ Thu, 04 Nov 2021 17:53:53 UTC
+Received: from mx2.smtp.larsendata.com (mx2.smtp.larsendata.com
+ [91.221.196.228])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 60B2E7376D
+ for <spice-devel@lists.freedesktop.org>; Thu,  4 Nov 2021 17:53:53 +0000 (UTC)
+Received: from mail01.mxhotel.dk (mail01.mxhotel.dk [91.221.196.236])
+ by mx2.smtp.larsendata.com (Halon) with ESMTPS
+ id f930fe11-3d95-11ec-ac3c-0050568cd888;
+ Thu, 04 Nov 2021 17:38:08 +0000 (UTC)
+Received: from ravnborg.org (80-162-45-141-cable.dk.customer.tdc.net
+ [80.162.45.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: sam@ravnborg.org)
+ by mail01.mxhotel.dk (Postfix) with ESMTPSA id 0354C194B43;
+ Thu,  4 Nov 2021 18:37:40 +0100 (CET)
+Date: Thu, 4 Nov 2021 18:37:38 +0100
+X-Report-Abuse-To: abuse@mxhotel.dk
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Javier Martinez Canillas <javierm@redhat.com>
+Message-ID: <YYQaYsCr+piMlRpS@ravnborg.org>
 References: <20211104160707.1407052-1-javierm@redhat.com>
- <20211104160707.1407052-2-javierm@redhat.com> <87zgqjanz2.fsf@intel.com>
-From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <87zgqjanz2.fsf@intel.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=javierm@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20211104160707.1407052-2-javierm@redhat.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20211104160707.1407052-2-javierm@redhat.com>
 X-Mailman-Approved-At: Fri, 05 Nov 2021 07:51:41 +0000
 Subject: Re: [Spice-devel] [PATCH v2 1/2] drm: Add a drm_drv_enabled() to
  check if drivers should be enabled
@@ -86,53 +52,111 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel.vetter@ffwll.ch>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
  Gerd Hoffmann <kraxel@redhat.com>, amd-gfx@lists.freedesktop.org,
  VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Peter Robinson <pbrobinson@gmail.com>, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, Chia-I Wu <olvaffe@gmail.com>,
- Ben Skeggs <bskeggs@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
- =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, intel-gfx@lists.freedesktop.org,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <michel@daenzer.net>,
+ Hans de Goede <hdegoede@redhat.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
  virtualization@lists.linux-foundation.org,
  Pekka Paalanen <pekka.paalanen@collabora.com>, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, spice-devel@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- intel-gfx@lists.freedesktop.org,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Zack Rusin <zackr@vmware.com>
+ Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
+ spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 11/4/21 17:24, Jani Nikula wrote:
+Hi Javier,
 
-[snip]
-
->> index ab2295dd4500..45cb3e540eff 100644
->> --- a/drivers/gpu/drm/i915/i915_module.c
->> +++ b/drivers/gpu/drm/i915/i915_module.c
->> @@ -18,9 +18,12 @@
->>  #include "i915_selftest.h"
->>  #include "i915_vma.h"
->>  
->> +static const struct drm_driver driver;
->> +
+On Thu, Nov 04, 2021 at 05:07:06PM +0100, Javier Martinez Canillas wrote:
+> Some DRM drivers check the vgacon_text_force() function return value as an
+> indication on whether they should be allowed to be enabled or not.
 > 
-> No, this makes absolutely no sense, and will also oops on nomodeset.
->
-
-Ups, sorry about that. For some reason I thought that it was defined in
-the same compilation unit, but I noticed now that it is in i915_drv.c.
- 
-> BR,
-> Jani.
+> This function returns true if the nomodeset kernel command line parameter
+> was set. But there may be other conditions besides this to determine if a
+> driver should be enabled.
 > 
-Best regards,
--- 
-Javier Martinez Canillas
-Linux Engineering
-Red Hat
+> Let's add a drm_drv_enabled() helper function to encapsulate that logic so
+> can be later extended if needed, without having to modify all the drivers.
+> 
+> Also, while being there do some cleanup. The vgacon_text_force() function
+> is guarded by CONFIG_VGA_CONSOLE and there's no need for callers to do it.
+> 
+> Suggested-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+> ---
+> 
+> diff --git a/drivers/gpu/drm/drm_drv.c b/drivers/gpu/drm/drm_drv.c
+> index 8214a0b1ab7f..3fb567d62881 100644
+> --- a/drivers/gpu/drm/drm_drv.c
+> +++ b/drivers/gpu/drm/drm_drv.c
+> @@ -975,6 +975,26 @@ int drm_dev_set_unique(struct drm_device *dev, const char *name)
+>  }
+>  EXPORT_SYMBOL(drm_dev_set_unique);
+>  
+> +/**
+> + * drm_drv_enabled - Checks if a DRM driver can be enabled
+> + * @driver: DRM driver to check
+> + *
+> + * Checks whether a DRM driver can be enabled or not. This may be the case
+> + * if the "nomodeset" kernel command line parameter is used.
+> + *
+> + * Return: 0 on success or a negative error code on failure.
+> + */
+> +int drm_drv_enabled(const struct drm_driver *driver)
+> +{
+> +	if (vgacon_text_force()) {
+> +		DRM_INFO("%s driver is disabled\n", driver->name);
 
+DRM_INFO is deprecated, please do not use it in new code.
+Also other users had an error message and not just info - is info
+enough?
+
+
+> +		return -ENODEV;
+> +	}
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL(drm_drv_enabled);
+> +
+>  /*
+>   * DRM Core
+>   * The DRM core module initializes all global DRM objects and makes them
+> diff --git a/drivers/gpu/drm/i915/i915_module.c b/drivers/gpu/drm/i915/i915_module.c
+> index ab2295dd4500..45cb3e540eff 100644
+> --- a/drivers/gpu/drm/i915/i915_module.c
+> +++ b/drivers/gpu/drm/i915/i915_module.c
+> @@ -18,9 +18,12 @@
+>  #include "i915_selftest.h"
+>  #include "i915_vma.h"
+>  
+> +static const struct drm_driver driver;
+Hmmm...
+
+> +
+>  static int i915_check_nomodeset(void)
+>  {
+>  	bool use_kms = true;
+> +	int ret;
+>  
+>  	/*
+>  	 * Enable KMS by default, unless explicitly overriden by
+> @@ -31,7 +34,8 @@ static int i915_check_nomodeset(void)
+>  	if (i915_modparams.modeset == 0)
+>  		use_kms = false;
+>  
+> -	if (vgacon_text_force() && i915_modparams.modeset == -1)
+> +	ret = drm_drv_enabled(&driver);
+
+You pass the local driver variable here - which looks wrong as this is
+not the same as the driver variable declared in another file.
+
+Maybe move the check to new function you can add to init_funcs,
+and locate the new function in i915_drv - so it has access to driver?
+
+
+	Sam
