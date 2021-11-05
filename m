@@ -2,81 +2,66 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B23044644C
-	for <lists+spice-devel@lfdr.de>; Fri,  5 Nov 2021 14:42:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16CDF44644B
+	for <lists+spice-devel@lfdr.de>; Fri,  5 Nov 2021 14:42:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 420586E593;
-	Fri,  5 Nov 2021 13:42:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA3A26E584;
+	Fri,  5 Nov 2021 13:42:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EED3C89D2E
- for <spice-devel@lists.freedesktop.org>; Fri,  5 Nov 2021 12:01:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1636113674;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DE9286E1A3;
+ Fri,  5 Nov 2021 13:00:25 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 3B7DA1FD37;
+ Fri,  5 Nov 2021 13:00:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1636117224; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=d6mnjEfsvPWlmw0Dlsyl+1vpuoyclHqeKNkGqPRjBhA=;
- b=blUsf+DphCkAa2HzUFHJk6+P+VzzwtzOxDAyn5bgR5WNRZGlPXWs1j2BdkXG88YOnqg8Ay
- TO/sHz4yO/A7M742m4XkmdR1n4lr3z2kNopkY2ejELFhcmmoazFDDpNlPudMu7hH2+8kb4
- SaT2zuHLgAHlqMsJYaQk3CKa5l7A+fk=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-501-wu_p0-hfPTufxGLoa_-ZnA-1; Fri, 05 Nov 2021 08:00:53 -0400
-X-MC-Unique: wu_p0-hfPTufxGLoa_-ZnA-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 67-20020a1c0046000000b0032cd88916e5so3199363wma.6
- for <spice-devel@lists.freedesktop.org>; Fri, 05 Nov 2021 05:00:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=d6mnjEfsvPWlmw0Dlsyl+1vpuoyclHqeKNkGqPRjBhA=;
- b=Xv1TmnxOrX6pDYeUxj0XftPiEA4xNMVPENwSpk5FvfH+jJ2QSmUKkNsneXH2OK/Ako
- B54OutnQDuXUu+PoGpF89xi0QCN6o3vRf7fj4jwZ0mX0kEs10BZNf3y8CtQZxw0xa6sJ
- bkwn8/6mju9hKz/ScC0l2crCXV7wwMInMPL5TJqJ/5kJcfbeHDAiExrE2JjYwTihhjve
- Ptdbp9rTpTKnRdJBPqugj/I7dafFdsN2i7iRJ2hKdvggndeS5EYqWjUhuWyY+I8PcKR/
- YfXYJJpsqUbI4uNnDaE/eDoZH8T9FaOnrN2rHq49+ImXaeFyE/Z1y7KGNEsWiRTY5jCX
- DYoA==
-X-Gm-Message-State: AOAM533xOYAhE/tlYo4t2xksKMml9r8Qv87oFDfquDSDL86ANGM6TV9Y
- ZfY693RcXv+9T5FMEK63BntBZsFeVNd2esb2ZfinFrYL2WsTru7yPXf5FwqkmoYKwi54q8evYPm
- eFfSFtX2QzwRgMEx+Q/Q5l3OaZpUV7gE=
-X-Received: by 2002:a05:6000:1868:: with SMTP id
- d8mr36559141wri.285.1636113651760; 
- Fri, 05 Nov 2021 05:00:51 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwxlHaNU9FU6Qy+ImAOwcqW/sLneLxZOG0rukxfbYjqJBdrwuSz7fg+xp3pWIymRwt/FJOPRA==
-X-Received: by 2002:a05:6000:1868:: with SMTP id
- d8mr36559073wri.285.1636113651479; 
- Fri, 05 Nov 2021 05:00:51 -0700 (PDT)
-Received: from [192.168.1.128] ([92.176.231.106])
- by smtp.gmail.com with ESMTPSA id m21sm7590336wrb.2.2021.11.05.05.00.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Nov 2021 05:00:51 -0700 (PDT)
-Message-ID: <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
-Date: Fri, 5 Nov 2021 13:00:49 +0100
+ bh=tjnWxrfIUbkoahv7XQ0mkb34rkKEwu9iva4UCkL/Uzg=;
+ b=bPiprZL7ZmOGy19QX38+b3CTSqukbvtVs7Vm/0Nri2gFsnOe7o3J1Fm5G0ZxkoWXWnUTWg
+ IhzcWTycRQuQUd0P6DORk4mL9rUqPZrEplLxKBsgiGVNco+WljjyXrf0iUoA9YvZ9fDFrY
+ iS7hYeOotlWPV9Ci6pdRs3fSdRO/QPY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1636117224;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=tjnWxrfIUbkoahv7XQ0mkb34rkKEwu9iva4UCkL/Uzg=;
+ b=IfMsFqCr6sUCPSpglCxZkkSTgHKZvB1Ud/VZGbn0cgD9RbqCNc+1ibpn5U3rQtcn3n2apN
+ z++YZEXDZCUBU+Dw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AEE0914004;
+ Fri,  5 Nov 2021 13:00:23 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 6AK1KecqhWF4WAAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Fri, 05 Nov 2021 13:00:23 +0000
+Message-ID: <7de8c495-7e01-98f9-71c7-9168d51733c3@suse.de>
+Date: Fri, 5 Nov 2021 14:00:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-To: Jani Nikula <jani.nikula@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, linux-kernel@vger.kernel.org
+ Thunderbird/91.2.1
+Content-Language: en-US
+To: Javier Martinez Canillas <javierm@redhat.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
 References: <20211104160707.1407052-1-javierm@redhat.com>
  <20211104160707.1407052-2-javierm@redhat.com> <87ilx7ae3v.fsf@intel.com>
  <0c07f121-42d3-9f37-1e14-842fb685b501@redhat.com>
  <d4a64906-69e5-3250-2362-79f2afac0a23@suse.de>
  <38dbcc8f-2f95-6846-537f-9b85468bfa87@redhat.com> <877ddmapfj.fsf@intel.com>
-From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <877ddmapfj.fsf@intel.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=javierm@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------amYHNBfM0Vfmgj2bbPw0MP1t"
 X-Mailman-Approved-At: Fri, 05 Nov 2021 13:42:15 +0000
 Subject: Re: [Spice-devel] [PATCH v2 1/2] drm: Add a drm_drv_enabled() to
  check if drivers should be enabled
@@ -91,54 +76,107 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: Gerd Hoffmann <kraxel@redhat.com>,
+ Pekka Paalanen <pekka.paalanen@collabora.com>,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel.vetter@ffwll.ch>, intel-gfx@lists.freedesktop.org, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, Alex Deucher <alexander.deucher@amd.com>,
+ dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
+ =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
+ Hans de Goede <hdegoede@redhat.com>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ amd-gfx@lists.freedesktop.org, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ben Skeggs <bskeggs@redhat.com>
+Errors-To: spice-devel-bounces@lists.freedesktop.org
+Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------amYHNBfM0Vfmgj2bbPw0MP1t
+Content-Type: multipart/mixed; boundary="------------NVDuFp0u3pp2xWcJiJ7yN6Es";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Javier Martinez Canillas <javierm@redhat.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
 Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>,
  Pekka Paalanen <pekka.paalanen@collabora.com>,
  Hans de Goede <hdegoede@redhat.com>, David Airlie <airlied@linux.ie>,
  Daniel Vetter <daniel.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, amd-gfx@lists.freedesktop.org,
- Gurchetan Singh <gurchetansingh@chromium.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Ben Skeggs <bskeggs@redhat.com>,
  VMware Graphics <linux-graphics-maintainer@vmware.com>,
  Gerd Hoffmann <kraxel@redhat.com>, spice-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
- Dave Airlie <airlied@redhat.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- virtualization@lists.linux-foundation.org, intel-gfx@lists.freedesktop.org,
- =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
- Peter Robinson <pbrobinson@gmail.com>
-Errors-To: spice-devel-bounces@lists.freedesktop.org
-Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
+ Dave Airlie <airlied@redhat.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
+ <christian.koenig@amd.com>, virtualization@lists.linux-foundation.org,
+ intel-gfx@lists.freedesktop.org, =?UTF-8?Q?Michel_D=c3=a4nzer?=
+ <michel@daenzer.net>, Peter Robinson <pbrobinson@gmail.com>
+Message-ID: <7de8c495-7e01-98f9-71c7-9168d51733c3@suse.de>
+Subject: Re: [PATCH v2 1/2] drm: Add a drm_drv_enabled() to check if drivers
+ should be enabled
+References: <20211104160707.1407052-1-javierm@redhat.com>
+ <20211104160707.1407052-2-javierm@redhat.com> <87ilx7ae3v.fsf@intel.com>
+ <0c07f121-42d3-9f37-1e14-842fb685b501@redhat.com>
+ <d4a64906-69e5-3250-2362-79f2afac0a23@suse.de>
+ <38dbcc8f-2f95-6846-537f-9b85468bfa87@redhat.com> <877ddmapfj.fsf@intel.com>
+ <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
+In-Reply-To: <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
 
-On 11/5/21 11:04, Jani Nikula wrote:
-> On Fri, 05 Nov 2021, Javier Martinez Canillas <javierm@redhat.com> wrote:
+--------------NVDuFp0u3pp2xWcJiJ7yN6Es
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-[snip]
+SGkNCg0KQW0gMDUuMTEuMjEgdW0gMTM6MDAgc2NocmllYiBKYXZpZXIgTWFydGluZXogQ2Fu
+aWxsYXM6DQo+IE9uIDExLzUvMjEgMTE6MDQsIEphbmkgTmlrdWxhIHdyb3RlOg0KPj4gT24g
+RnJpLCAwNSBOb3YgMjAyMSwgSmF2aWVyIE1hcnRpbmV6IENhbmlsbGFzIDxqYXZpZXJtQHJl
+ZGhhdC5jb20+IHdyb3RlOg0KPiANCj4gW3NuaXBdDQo+IA0KPj4+DQo+Pj4gRG8geW91IGVu
+dmlzaW9uIG90aGVyIGNvbmRpdGlvbiB0aGF0IGNvdWxkIGJlIGFkZGVkIGxhdGVyIHRvIGRp
+c2FibGUgYQ0KPj4+IERSTSBkcml2ZXIgPyBPciBkbyB5b3UgdGhpbmsgdGhhdCBqdXN0IGZy
+b20gYSBjb2RlIHJlYWRhYmlsaXR5IHBvaW50IG9mDQo+Pj4gdmlldyBtYWtlcyB3b3J0aCBp
+dCA/DQo+Pg0KPj4gVGFraW5nIGEgc3RlcCBiYWNrIGZvciBwZXJzcGVjdGl2ZS4NCj4+DQo+
+PiBJIHRoaW5rIHRoZXJlJ3MgYnJvYWQgY29uc2Vuc3VzIGluIG1vdmluZyB0aGUgcGFyYW1l
+dGVyIHRvIGRybSwgbmFtaW5nDQo+PiB0aGUgY2hlY2sgZnVuY3Rpb24gdG8gZHJtX3NvbWV0
+aGluZ19zb21ldGhpbmcoKSwgYW5kIGJyZWFraW5nIHRoZSB0aWVzDQo+PiB0byBDT05GSUdf
+VkdBX0NPTlNPTEUuIEkgYXBwcmVjaWF0ZSB0aGUgd29yayB5b3UncmUgZG9pbmcgdG8gdGhh
+dA0KPj4gZWZmZWN0Lg0KPj4NCj4gDQo+IFRoYW5rcywgSSBhcHByZWNpYXRlIHlvdXIgZmVl
+ZGJhY2sgYW5kIGNvbW1lbnRzLg0KPiAgIA0KPj4gSSB0aGluayBldmVyeXRoaW5nIGJleW9u
+ZCB0aGF0IGlzIHN0aWxsIGEgYml0IHZhZ3VlIGFuZC9vcg0KPj4gY29udGVudGlvdXMuIFNv
+IGhvdyBhYm91dCBtYWtpbmcgdGhlIGZpcnN0IDItMyBwYXRjaGVzIGp1c3QgdGhhdD8NCj4+
+IFNvbWV0aGluZyB3ZSBjYW4gYWxsIGFncmVlIG9uLCBtYWtlcyBnb29kIHByb2dyZXNzLCBp
+bXByb3ZlcyB0aGUga2VybmVsLA0KPj4gYW5kIGdpdmVzIHVzIHNvbWV0aGluZyB0byBidWls
+ZCBvbj8NCj4+DQo+IA0KPiBUaGF0IHdvcmtzIGZvciBtZS4gVGhvbWFzLCBkbyB5b3UgYWdy
+ZWUgd2l0aCB0aGF0IGFwcHJvYWNoID8NCg0KU3VyZS4gSSB0aGluayB0aGF0J3MgbW9yZSBv
+ciBsZXNzIHdoYXQgSSBwcm9wb3NlZCBpbiBteSByZXBseSB0byB0aGF0IG1haWwuDQoNCkJl
+c3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gICANCj4gQmVzdCByZWdhcmRzLA0KPiANCg0KLS0g
+DQpUaG9tYXMgWmltbWVybWFubg0KR3JhcGhpY3MgRHJpdmVyIERldmVsb3Blcg0KU1VTRSBT
+b2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJIDQpNYXhmZWxkc3RyLiA1LCA5MDQwOSBO
+w7xybmJlcmcsIEdlcm1hbnkNCihIUkIgMzY4MDksIEFHIE7DvHJuYmVyZykNCkdlc2Now6Rm
+dHNmw7xocmVyOiBJdm8gVG90ZXYNCg==
 
->>
->> Do you envision other condition that could be added later to disable a
->> DRM driver ? Or do you think that just from a code readability point of
->> view makes worth it ?
-> 
-> Taking a step back for perspective.
-> 
-> I think there's broad consensus in moving the parameter to drm, naming
-> the check function to drm_something_something(), and breaking the ties
-> to CONFIG_VGA_CONSOLE. I appreciate the work you're doing to that
-> effect.
->
+--------------NVDuFp0u3pp2xWcJiJ7yN6Es--
 
-Thanks, I appreciate your feedback and comments.
- 
-> I think everything beyond that is still a bit vague and/or
-> contentious. So how about making the first 2-3 patches just that?
-> Something we can all agree on, makes good progress, improves the kernel,
-> and gives us something to build on?
->
+--------------amYHNBfM0Vfmgj2bbPw0MP1t
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-That works for me. Thomas, do you agree with that approach ?
- 
-Best regards,
--- 
-Javier Martinez Canillas
-Linux Engineering
-Red Hat
+-----BEGIN PGP SIGNATURE-----
 
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmGFKucFAwAAAAAACgkQlh/E3EQov+D0
+uhAA0c8ZNQjbRr9n35QT+n1kfE+lZxXxUOp1XdNRH0W7s0yH8txdHGLC53BqYEf4ZZ6cM8gKXu3X
+KRnWqhQ88nbFRkEuoC0oHXbzl4er1Y5Fnu/4HsxVBLHTNqAEIFnaN/K0xc2WFRFju9IvyQtiVkq4
+gW327uTSQVJ8Fuhy9Ry5Uf4+qSGFhYtb0+W0WvQvejYpyZT7BaXiQdxIk5avSLFF6imFGdS5RRgA
+rUUE0xCBday57ZrDMviBfayQybH0ErVyKDE21EgFmSp7ny2I+Ra5XNkKjPrn0BR+SCGmlV8bKfeC
+WfUJCOhiDPC2Z2sPnDGoh5ItyCaEO4NtCpTRAh+yoS8BdpTLyTd3wp1NqdA9jc9xPRAAE5ghfbkQ
+Z4OvLJYlezxwzTR/FC5gPL1YJQsEolhVW4iOGGspCWx1VzJAkY6PQV47s8GHuH/f/oedcuyDQzNn
+GJbk9ZPNuJfw09KGl0BtpAVALVV0xYsnkxUr8RFW8qsJv5RJfZHwLwWrS/+3un8UEsgjL91bXJ8q
+zyCTj79SFduvJyIHyihlZFa5NWPwsY+qSb0yic9968LvKlY7OI1JnLZ5/UokVtbXPizSFJGS1tsz
+sFk1ZB+FP63bCOxw+wgoOij6E486p90t9BMHSI0V/RMjT6eqG1/nbyDPqGXZNg95xodHrqH/dS5+
+tlA=
+=R/av
+-----END PGP SIGNATURE-----
+
+--------------amYHNBfM0Vfmgj2bbPw0MP1t--
