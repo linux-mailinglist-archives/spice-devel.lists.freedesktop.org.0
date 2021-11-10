@@ -2,69 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16CDF44644B
-	for <lists+spice-devel@lfdr.de>; Fri,  5 Nov 2021 14:42:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5680C44BE57
+	for <lists+spice-devel@lfdr.de>; Wed, 10 Nov 2021 11:15:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA3A26E584;
-	Fri,  5 Nov 2021 13:42:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5E02F6EDED;
+	Wed, 10 Nov 2021 10:15:44 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DE9286E1A3;
- Fri,  5 Nov 2021 13:00:25 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3B7DA1FD37;
- Fri,  5 Nov 2021 13:00:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1636117224; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 995A06E466
+ for <spice-devel@lists.freedesktop.org>; Wed, 10 Nov 2021 09:37:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1636537060;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=tjnWxrfIUbkoahv7XQ0mkb34rkKEwu9iva4UCkL/Uzg=;
- b=bPiprZL7ZmOGy19QX38+b3CTSqukbvtVs7Vm/0Nri2gFsnOe7o3J1Fm5G0ZxkoWXWnUTWg
- IhzcWTycRQuQUd0P6DORk4mL9rUqPZrEplLxKBsgiGVNco+WljjyXrf0iUoA9YvZ9fDFrY
- iS7hYeOotlWPV9Ci6pdRs3fSdRO/QPY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1636117224;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tjnWxrfIUbkoahv7XQ0mkb34rkKEwu9iva4UCkL/Uzg=;
- b=IfMsFqCr6sUCPSpglCxZkkSTgHKZvB1Ud/VZGbn0cgD9RbqCNc+1ibpn5U3rQtcn3n2apN
- z++YZEXDZCUBU+Dw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ bh=Iqtrn92VfIk3PkYzjtnyBwwOT+PsjC2/aSzGhqaT8zs=;
+ b=h5mUxe7Wvl7f7JcIg+/UXz8LsRlwm/stjaKaP3R9P2uwZlcxtBsCrCDeNddgB5PCoz0JIG
+ JjIvkehTYgNLmkwkgEFgI/JXPK2SBAq0getYDu3mu+SofoSERmPDJqm0qX3FHl2oms7tti
+ qrBEntOZwujAIS0iLDmDAIaY3zMfvXM=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-540-BFn_MsQtPOyiQIsBZyrDqw-1; Wed, 10 Nov 2021 04:37:37 -0500
+X-MC-Unique: BFn_MsQtPOyiQIsBZyrDqw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AEE0914004;
- Fri,  5 Nov 2021 13:00:23 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 6AK1KecqhWF4WAAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Fri, 05 Nov 2021 13:00:23 +0000
-Message-ID: <7de8c495-7e01-98f9-71c7-9168d51733c3@suse.de>
-Date: Fri, 5 Nov 2021 14:00:23 +0100
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C98479F946;
+ Wed, 10 Nov 2021 09:37:34 +0000 (UTC)
+Received: from localhost (unknown [10.39.193.9])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5D8051ACBB;
+ Wed, 10 Nov 2021 09:37:03 +0000 (UTC)
+From: Cornelia Huck <cohuck@redhat.com>
+To: Alexandre Courbot <acourbot@chromium.org>, virtio-dev@lists.oasis-open.org
+In-Reply-To: <20210120083143.766189-1-acourbot@chromium.org>
+Organization: Red Hat GmbH
+References: <20210120083143.766189-1-acourbot@chromium.org>
+User-Agent: Notmuch/0.33.1 (https://notmuchmail.org)
+Date: Wed, 10 Nov 2021 10:37:01 +0100
+Message-ID: <874k8k9wsi.fsf@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Content-Language: en-US
-To: Javier Martinez Canillas <javierm@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
-References: <20211104160707.1407052-1-javierm@redhat.com>
- <20211104160707.1407052-2-javierm@redhat.com> <87ilx7ae3v.fsf@intel.com>
- <0c07f121-42d3-9f37-1e14-842fb685b501@redhat.com>
- <d4a64906-69e5-3250-2362-79f2afac0a23@suse.de>
- <38dbcc8f-2f95-6846-537f-9b85468bfa87@redhat.com> <877ddmapfj.fsf@intel.com>
- <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------amYHNBfM0Vfmgj2bbPw0MP1t"
-X-Mailman-Approved-At: Fri, 05 Nov 2021 13:42:15 +0000
-Subject: Re: [Spice-devel] [PATCH v2 1/2] drm: Add a drm_drv_enabled() to
- check if drivers should be enabled
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Mailman-Approved-At: Wed, 10 Nov 2021 10:15:43 +0000
+Subject: Re: [Spice-devel] [virtio-dev] [RFC PATCH v5] virtio-video: Add
+ virtio video device specification
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,107 +60,283 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Gerd Hoffmann <kraxel@redhat.com>,
- Pekka Paalanen <pekka.paalanen@collabora.com>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel.vetter@ffwll.ch>, intel-gfx@lists.freedesktop.org, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, Alex Deucher <alexander.deucher@amd.com>,
- dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
- =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
- Hans de Goede <hdegoede@redhat.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- amd-gfx@lists.freedesktop.org, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Peter Robinson <pbrobinson@gmail.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: alexlau@chromium.org, kiran.pawar@opensynergy.com,
+ Alexandre Courbot <acourbot@chromium.org>, Matti.Moell@opensynergy.com,
+ alex.bennee@linaro.org, dstaessens@chromium.org, tfiga@chromium.org,
+ Dmitry Sepp <dmitry.sepp@opensynergy.com>, stevensd@chromium.org,
+ kraxel@redhat.com, daniel@ffwll.ch, enric.balletbo@collabora.com,
+ spice-devel@lists.freedesktop.org, dgreid@chromium.org, egranata@google.com,
+ posciak@chromium.org, linux-media@vger.kernel.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------amYHNBfM0Vfmgj2bbPw0MP1t
-Content-Type: multipart/mixed; boundary="------------NVDuFp0u3pp2xWcJiJ7yN6Es";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Javier Martinez Canillas <javierm@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
-Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- Pekka Paalanen <pekka.paalanen@collabora.com>,
- Hans de Goede <hdegoede@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, amd-gfx@lists.freedesktop.org,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Ben Skeggs <bskeggs@redhat.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Gerd Hoffmann <kraxel@redhat.com>, spice-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
- Dave Airlie <airlied@redhat.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
- <christian.koenig@amd.com>, virtualization@lists.linux-foundation.org,
- intel-gfx@lists.freedesktop.org, =?UTF-8?Q?Michel_D=c3=a4nzer?=
- <michel@daenzer.net>, Peter Robinson <pbrobinson@gmail.com>
-Message-ID: <7de8c495-7e01-98f9-71c7-9168d51733c3@suse.de>
-Subject: Re: [PATCH v2 1/2] drm: Add a drm_drv_enabled() to check if drivers
- should be enabled
-References: <20211104160707.1407052-1-javierm@redhat.com>
- <20211104160707.1407052-2-javierm@redhat.com> <87ilx7ae3v.fsf@intel.com>
- <0c07f121-42d3-9f37-1e14-842fb685b501@redhat.com>
- <d4a64906-69e5-3250-2362-79f2afac0a23@suse.de>
- <38dbcc8f-2f95-6846-537f-9b85468bfa87@redhat.com> <877ddmapfj.fsf@intel.com>
- <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
-In-Reply-To: <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
+On Wed, Jan 20 2021, Alexandre Courbot <acourbot@chromium.org> wrote:
 
---------------NVDuFp0u3pp2xWcJiJ7yN6Es
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+> From: Keiichi Watanabe <keiichiw@chromium.org>
+>
+> The virtio video encoder and decoder devices are virtual devices that
+> support video encoding and decoding respectively. Although they are
+> different devices, they use the same protocol.
+>
+> Signed-off-by: Dmitry Sepp <dmitry.sepp@opensynergy.com>
+> Signed-off-by: Keiichi Watanabe <keiichiw@chromium.org>
+> Signed-off-by: Alexandre Courbot <acourbot@chromium.org>
+> ---
+> Here is the new revision of the virtio-video specification. Compared to
+> v4 some extra simplification work has been performed, and all stream
+> settings are now consolidated under the parameters. Hopefully this can
+> be used as the basis to write a new version of the Linux driver and
+> virtual device, or maybe even to drop that RFC tag! :)
 
-SGkNCg0KQW0gMDUuMTEuMjEgdW0gMTM6MDAgc2NocmllYiBKYXZpZXIgTWFydGluZXogQ2Fu
-aWxsYXM6DQo+IE9uIDExLzUvMjEgMTE6MDQsIEphbmkgTmlrdWxhIHdyb3RlOg0KPj4gT24g
-RnJpLCAwNSBOb3YgMjAyMSwgSmF2aWVyIE1hcnRpbmV6IENhbmlsbGFzIDxqYXZpZXJtQHJl
-ZGhhdC5jb20+IHdyb3RlOg0KPiANCj4gW3NuaXBdDQo+IA0KPj4+DQo+Pj4gRG8geW91IGVu
-dmlzaW9uIG90aGVyIGNvbmRpdGlvbiB0aGF0IGNvdWxkIGJlIGFkZGVkIGxhdGVyIHRvIGRp
-c2FibGUgYQ0KPj4+IERSTSBkcml2ZXIgPyBPciBkbyB5b3UgdGhpbmsgdGhhdCBqdXN0IGZy
-b20gYSBjb2RlIHJlYWRhYmlsaXR5IHBvaW50IG9mDQo+Pj4gdmlldyBtYWtlcyB3b3J0aCBp
-dCA/DQo+Pg0KPj4gVGFraW5nIGEgc3RlcCBiYWNrIGZvciBwZXJzcGVjdGl2ZS4NCj4+DQo+
-PiBJIHRoaW5rIHRoZXJlJ3MgYnJvYWQgY29uc2Vuc3VzIGluIG1vdmluZyB0aGUgcGFyYW1l
-dGVyIHRvIGRybSwgbmFtaW5nDQo+PiB0aGUgY2hlY2sgZnVuY3Rpb24gdG8gZHJtX3NvbWV0
-aGluZ19zb21ldGhpbmcoKSwgYW5kIGJyZWFraW5nIHRoZSB0aWVzDQo+PiB0byBDT05GSUdf
-VkdBX0NPTlNPTEUuIEkgYXBwcmVjaWF0ZSB0aGUgd29yayB5b3UncmUgZG9pbmcgdG8gdGhh
-dA0KPj4gZWZmZWN0Lg0KPj4NCj4gDQo+IFRoYW5rcywgSSBhcHByZWNpYXRlIHlvdXIgZmVl
-ZGJhY2sgYW5kIGNvbW1lbnRzLg0KPiAgIA0KPj4gSSB0aGluayBldmVyeXRoaW5nIGJleW9u
-ZCB0aGF0IGlzIHN0aWxsIGEgYml0IHZhZ3VlIGFuZC9vcg0KPj4gY29udGVudGlvdXMuIFNv
-IGhvdyBhYm91dCBtYWtpbmcgdGhlIGZpcnN0IDItMyBwYXRjaGVzIGp1c3QgdGhhdD8NCj4+
-IFNvbWV0aGluZyB3ZSBjYW4gYWxsIGFncmVlIG9uLCBtYWtlcyBnb29kIHByb2dyZXNzLCBp
-bXByb3ZlcyB0aGUga2VybmVsLA0KPj4gYW5kIGdpdmVzIHVzIHNvbWV0aGluZyB0byBidWls
-ZCBvbj8NCj4+DQo+IA0KPiBUaGF0IHdvcmtzIGZvciBtZS4gVGhvbWFzLCBkbyB5b3UgYWdy
-ZWUgd2l0aCB0aGF0IGFwcHJvYWNoID8NCg0KU3VyZS4gSSB0aGluayB0aGF0J3MgbW9yZSBv
-ciBsZXNzIHdoYXQgSSBwcm9wb3NlZCBpbiBteSByZXBseSB0byB0aGF0IG1haWwuDQoNCkJl
-c3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gICANCj4gQmVzdCByZWdhcmRzLA0KPiANCg0KLS0g
-DQpUaG9tYXMgWmltbWVybWFubg0KR3JhcGhpY3MgRHJpdmVyIERldmVsb3Blcg0KU1VTRSBT
-b2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJIDQpNYXhmZWxkc3RyLiA1LCA5MDQwOSBO
-w7xybmJlcmcsIEdlcm1hbnkNCihIUkIgMzY4MDksIEFHIE7DvHJuYmVyZykNCkdlc2Now6Rm
-dHNmw7xocmVyOiBJdm8gVG90ZXYNCg==
+It seems that there has not been any followup on this, has there?
 
---------------NVDuFp0u3pp2xWcJiJ7yN6Es--
+I assume that there is still interest (after all, the ids have already
+been reservered); let me add some quick comments from the spec pov (I
+don't really know anything about how video is supposed to work here.)
 
---------------amYHNBfM0Vfmgj2bbPw0MP1t
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+>
+> Full PDF: https://drive.google.com/file/d/1Lqjpcntj6ydLtrHPhbMbvq0oVIevGatj/view?usp=sharing
+> Only video section: https://drive.google.com/file/d/1dGzYGCV-xrO-AYqMbMsHBrJh_CvLDLMA/view?usp=sharing
+>
+>  content.tex                       |    1 +
+>  images/video-buffer-lifecycle.dot |   15 +
+>  make-setup-generated.sh           |    9 +
+>  virtio-video.tex                  | 1308 +++++++++++++++++++++++++++++
+>  4 files changed, 1333 insertions(+)
+>  create mode 100644 images/video-buffer-lifecycle.dot
+>  create mode 100644 virtio-video.tex
+>
 
------BEGIN PGP SIGNATURE-----
+(...)
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmGFKucFAwAAAAAACgkQlh/E3EQov+D0
-uhAA0c8ZNQjbRr9n35QT+n1kfE+lZxXxUOp1XdNRH0W7s0yH8txdHGLC53BqYEf4ZZ6cM8gKXu3X
-KRnWqhQ88nbFRkEuoC0oHXbzl4er1Y5Fnu/4HsxVBLHTNqAEIFnaN/K0xc2WFRFju9IvyQtiVkq4
-gW327uTSQVJ8Fuhy9Ry5Uf4+qSGFhYtb0+W0WvQvejYpyZT7BaXiQdxIk5avSLFF6imFGdS5RRgA
-rUUE0xCBday57ZrDMviBfayQybH0ErVyKDE21EgFmSp7ny2I+Ra5XNkKjPrn0BR+SCGmlV8bKfeC
-WfUJCOhiDPC2Z2sPnDGoh5ItyCaEO4NtCpTRAh+yoS8BdpTLyTd3wp1NqdA9jc9xPRAAE5ghfbkQ
-Z4OvLJYlezxwzTR/FC5gPL1YJQsEolhVW4iOGGspCWx1VzJAkY6PQV47s8GHuH/f/oedcuyDQzNn
-GJbk9ZPNuJfw09KGl0BtpAVALVV0xYsnkxUr8RFW8qsJv5RJfZHwLwWrS/+3un8UEsgjL91bXJ8q
-zyCTj79SFduvJyIHyihlZFa5NWPwsY+qSb0yic9968LvKlY7OI1JnLZ5/UokVtbXPizSFJGS1tsz
-sFk1ZB+FP63bCOxw+wgoOij6E486p90t9BMHSI0V/RMjT6eqG1/nbyDPqGXZNg95xodHrqH/dS5+
-tlA=
-=R/av
------END PGP SIGNATURE-----
+> diff --git a/virtio-video.tex b/virtio-video.tex
+> new file mode 100644
+> index 0000000..9adac0d
+> --- /dev/null
+> +++ b/virtio-video.tex
+> @@ -0,0 +1,1308 @@
+> +\section{Video Device}\label{sec:Device Types / Video Device}
+> +
+> +The virtio video encoder and decoder devices are virtual devices that support
+> +video encoding and decoding, respectively. Despite being different devices, they
+> +use the same protocol.
+> +
+> +% TODO: be more precise about the sync or async nature of commands/responses.
 
---------------amYHNBfM0Vfmgj2bbPw0MP1t--
+Should that go into this section, or rather into the operation section below?
+
+> +
+> +\subsection{Device ID}
+> +\label{sec:Device Types / Video Device / Device ID}
+> +
+> +\begin{description}
+> +\item[30] encoder device
+> +\item[31] decoder device
+> +\end{description}
+> +
+> +\subsection{Virtqueues}
+> +\label{sec:Device Types / Video Device / Virtqueues}
+> +
+> +\begin{description}
+> +\item[0] commandq - queue for driver commands and device responses to these
+> +  commands.
+> +\item[1] eventq - queue for events sent by the device to the driver.
+> +\end{description}
+> +
+> +\subsection{Feature bits}
+> +\label{sec:Device Types / Video Device / Feature bits}
+> +
+> +\begin{description}
+> +\item[VIRTIO_VIDEO_F_RESOURCE_GUEST_PAGES (0)] Guest pages can be used as the
+> +  backing memory of video buffers.
+> +\item[VIRTIO_VIDEO_F_RESOURCE_NON_CONTIG (1)] The device can use non-contiguous
+> +  memory for video buffers. Without this flag, the driver and device MUST use
+> +  video buffers that are contiguous for the device.
+
+MUST and friends are not supposed to be used outside of normative
+sections; statements that the driver and the device MUST use contiguous
+buffers need to go into a driver and a device normative section,
+respectively.
+
+Also, any normative statements need to be referenced in conformance.tex.
+
+> +\item[VIRTIO_VIDEO_F_RESOURCE_VIRTIO_OBJECT (2)] Objects exported by another
+> +  virtio device can be used as the backing memory of video buffers.
+> +\end{description}
+> +
+> +The device MUST present at least one of VIRTIO_VIDEO_F_RESOURCE_GUEST_PAGES or
+> +VIRTIO_VIDEO_F_RESOURCE_VIRTIO_OBJECT, since the absence of both bits would mean
+> +that no memory can be used at all for buffers.
+
+This should go into a device normative section for device
+intitialization; there probably also should be a driver normative
+statement that the driver needs to negotiate at least one of those
+features (I assume they are not mutually exclusive?)
+
+> +
+> +\subsection{Device configuration layout}
+> +\label{sec:Device Types / Video Device / Device configuration layout}
+> +
+> +Video device configuration uses the following layout structure:
+> +
+> +\begin{lstlisting}
+> +struct virtio_video_config {
+> +        le32 version;
+> +        le32 caps_length;
+> +};
+> +\end{lstlisting}
+> +\begin{description}
+> +\item[\field{version}] is the protocol version that the device understands. The
+> +  device MUST set this to 0.
+
+The MUST statement needs to go into a device normative section.
+
+Also, is this supposed to be read-only by the driver?
+
+> +\item[\field{caps_length}] is the length in bytes of a device-writable
+> +  descriptor that can receive the response of
+> +  VIRTIO_VIDEO_CMD_DEVICE_QUERY_CAPS. The device MUST set it to a sufficiently
+> +  large value.
+
+Same here.
+
+> +\end{description}
+> +
+> +\subsection{Device Initialization}
+> +\label{sec:Device Types / Video Device / Device Initialization}
+> +
+> +\devicenormative{\subsubsection}{Device Initialization}{Device Types /
+> +  Video Device / Device Initialization}
+> +
+> +The driver SHOULD query the device capabilities using the
+> +VIRTIO_VIDEO_CMD_DEVICE_QUERY_CAPS command.
+
+The device initialization section should probably be a bit more detailed
+(i.e. negotiate features -> set up commandq/eventq -> read caps length
+from config space -> query capabilities) outside of the normantive
+section.
+
+> +
+> +\subsection{General Device Operation}
+> +\label{sec:Device Types / Video Device / Device Operation}
+
+Maybe start with a sentence that the driver sends commands via the
+commandq, just to be a bit more explicit?
+
+> +
+> +The driver requests a new stream to be created using
+> +VIRTIO_VIDEO_CMD_STREAM_CREATE.
+> +
+> +It then invokes VIRTIO_VIDEO_CMD_STREAM_GET_PARAMS to retrieve the default
+> +parameters of the stream, modifies them to fit its needs using the device
+> +capabilities information queried during initialization, and calls
+> +VIRTIO_VIDEO_CMD_STREAM_SET_PARAMS to apply them. The device might change the
+> +requested parameters to suit its own limitation, so the driver MUST check that
+> +the applied parameters are still acceptable, and keep adjusting them with
+> +subsequent calls to VIRTIO_VIDEO_CMD_STREAM_SET_PARAMS until a mutually
+> +satisfying configuration is found.
+> +
+> +Each stream has one input and one output queue. The input queue accepts buffers
+> +in the configured input format (e.g. bitstream format for a decoder) and returns
+> +them once they are done being processed. The output queue accepts buffers in the
+> +configured output format (e.g. image format for a decoder) and will write the
+> +result of the decoding or encoding operation to them, i.e. a frame for a
+> +decoder, or a chunk of encoded stream for an encoder. There is no direct 1:1
+> +relationship between input and output buffers, meaning that queueing one input
+> +buffer can result in zero, one, or more output buffers to be emitted. The driver
+> +can think of the queues as operating independently from each other.
+> +
+> +Once the stream is configured, the driver attaches backing memory to buffer
+> +resources using VIRTIO_VIDEO_CMD_RESOURCE_ATTACH, and queues them using
+> +VIRTIO_VIDEO_CMD_RESOURCE_QUEUE. The device will respond once the buffer is
+> +processed, which then allows the driver to queue that buffer again.
+> +
+> +The driver has control over the stream: it can request for all queued input
+> +buffers so far to be processed and receive a notification when they are (useful
+> +at the end of a stream) using VIRTIO_VIDEO_CMD_STREAM_DRAIN, or abandon all
+> +pending operations (in order to, say, seek to a different point) with
+> +VIRTIO_VIDEO_CMD_STREAM_QUEUE_CLEAR.
+> +
+> +Sometimes the device will detect events that require intervention from the
+> +driver and signal them. One such event is
+
+"signal them via the eventq." ?
+
+> +VIRTIO_VIDEO_EVENT_DECODER_RESOLUTION_CHANGED for a decoder, meaning that the
+> +resolution of the stream has changed, and that the driver might need to
+> +reallocate the backing memory for its buffers.
+> +
+> +Once a stream is completed, it can be closed using
+> +VIRTIO_VIDEO_CMD_STREAM_DESTROY.
+> +
+> +The remainder of this section describes all the commands and events mentioned
+> +above.
+> +
+> +\subsubsection{Command Virtqueue}
+> +
+> +The command virtqueue is used for the driver to send commands to the device, and
+> +receive the device's response. Commands MUST be written by the driver and their
+> +responses MUST be written by the device in the next device-writable descriptor.
+
+Ah, here is the statement I had been looking for. Maybe reorder this a
+bit?
+
+Also, the MUST statement needs to be in a normative section.
+
+> +
+> +Different structure layouts are used for each command and response. A command
+> +structure starts with the requested command code, defined as follows:
+> +\begin{lstlisting}
+> +enum virtio_video_cmd_type {
+> +        /* Global */
+> +        VIRTIO_VIDEO_CMD_DEVICE_QUERY_CAPS = 0x100,
+> +
+> +        /* Stream */
+> +        VIRTIO_VIDEO_CMD_STREAM_CREATE = 0x200,
+> +        VIRTIO_VIDEO_CMD_STREAM_DESTROY,
+> +        VIRTIO_VIDEO_CMD_STREAM_GET_PARAMS,
+> +        VIRTIO_VIDEO_CMD_STREAM_SET_PARAMS,
+> +        VIRTIO_VIDEO_CMD_STREAM_DRAIN,
+> +
+> +        /* Queue */
+> +        VIRTIO_VIDEO_CMD_QUEUE_CLEAR = 0x300,
+> +
+> +        /* Resource*/
+> +        VIRTIO_VIDEO_CMD_RESOURCE_ATTACH = 0x400,
+> +        VIRTIO_VIDEO_CMD_RESOURCE_QUEUE,
+> +};
+> +\end{lstlisting}
+
+I think all those enums need to be explicit #defines (we don't define
+what 'enum's are supposed to look like).
+
+> +
+> +A response structure starts with the result of the requested command, defined as
+> +follows:
+> +\begin{lstlisting}
+> +enum virtio_video_result {
+> +         /* Success */
+> +         VIRTIO_VIDEO_RESULT_OK = 0x000,
+> +
+> +         /* Error */
+> +         VIRTIO_VIDEO_RESULT_ERR_INVALID_OPERATION = 0x100,
+> +         VIRTIO_VIDEO_RESULT_ERR_INVALID_STREAM_ID,
+> +         VIRTIO_VIDEO_RESULT_ERR_INVALID_RESOURCE_ID,
+> +         VIRTIO_VIDEO_RESULT_ERR_INVALID_ARGUMENT,
+> +         VIRTIO_VIDEO_RESULT_ERR_CANCELED,
+> +         VIRTIO_VIDEO_RESULT_ERR_OUT_OF_MEMORY,
+> +};
+> +\end{lstlisting}
+
+Same here.
+
+> +
+> +For response structures carrying an error code, the rest of the structure is
+> +considered invalid and must be ignored by the driver. Only response structures
+> +carrying VIRTIO_VIDEO_RESULT_OK shall be examined further.
+> +
+
+(...)
+
+I'll stop here for now.
+
