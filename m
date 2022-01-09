@@ -1,65 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85D5C486610
-	for <lists+spice-devel@lfdr.de>; Thu,  6 Jan 2022 15:30:22 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 91EEC488BA1
+	for <lists+spice-devel@lfdr.de>; Sun,  9 Jan 2022 19:30:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CC2621126D9;
-	Thu,  6 Jan 2022 14:30:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E059210E47F;
+	Sun,  9 Jan 2022 18:30:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 812 seconds by postgrey-1.36 at gabe;
- Thu, 06 Jan 2022 13:55:10 UTC
-Received: from fallback17.mail.ru (fallback17.m.smailru.net [94.100.176.130])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0BE8010FFD1
- for <spice-devel@lists.freedesktop.org>; Thu,  6 Jan 2022 13:55:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail3; 
- h=Content-Transfer-Encoding:Content-Type:Subject:From:To:MIME-Version:Date:Message-ID:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=Fjy0o1vSRv/2ElhSDg/lNEg4pHfjqcSS6RlFxaj8kvA=; 
- t=1641477310;x=1642082710; 
- b=EIx1CIiluO0yA/w/Pv259KjnRWj5r89QL7QUr1kgAajsz1zOl2GZ11h9HHkj2FuydxzAPFlgWMWut7ZNVeOEIUxH+i1Z2WIA+9Phn2Dm8cXI0+flo+7ZPq0T3kWw6n5nH4ZDsc7ney7itETP0DfQli5i1u8PP51F0P0HJAhFJoY=;
-Received: from [10.161.64.60] (port=36018 helo=smtp52.i.mail.ru)
- by fallback17.m.smailru.net with esmtp (envelope-from <zwezda-11@mail.ru>)
- id 1n5T1M-0000SG-IM
- for spice-devel@lists.freedesktop.org; Thu, 06 Jan 2022 16:41:36 +0300
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; 
- h=Content-Transfer-Encoding:Content-Type:Subject:From:To:MIME-Version:Date:Message-ID:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=Fjy0o1vSRv/2ElhSDg/lNEg4pHfjqcSS6RlFxaj8kvA=; 
- t=1641476496;x=1642081896; 
- b=AakdnKm2rnwrZKbM6R0RnUbUgb+4LuVrmqUigKR6MjD/MW8tLwI/jua39+QxEnZEdQcyorVkyRHS7etZqE/skAEWbMaTbUVjTrUilRAEaYC7KxKMQhGwjLK+Eq5+JTOzHKaptbZO8olbdcRNWaCfo0ZXJBHxYzdEPZbZCP4lhHP9J7n85/y4eojwU3VijyBglb/f2xFagievkaEjTnTvgupZ9xdtzIu5oi3OPVw/r/hxK75AO5ZbLmX+Oq68J4AO7LfYgCKjUN/kH1d0fL/QCoyZB5SVQXKjCKm178pS3rgSI36FoTfdquIJKuA/qbj+lg/8oMQQQEq9k2ngP51NTw==;
-Received: by smtp52.i.mail.ru with esmtpa (envelope-from <zwezda-11@mail.ru>)
- id 1n5T1J-0007Ec-Vw
- for spice-devel@lists.freedesktop.org; Thu, 06 Jan 2022 16:41:34 +0300
-Message-ID: <dfdfa418-34f9-deaf-3032-4db864c1de71@mail.ru>
-Date: Thu, 6 Jan 2022 15:40:53 +0200
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E8B8410E47F
+ for <spice-devel@lists.freedesktop.org>; Sun,  9 Jan 2022 18:30:33 +0000 (UTC)
+Received: by mail-ed1-x535.google.com with SMTP id b7so15644010edj.9
+ for <spice-devel@lists.freedesktop.org>; Sun, 09 Jan 2022 10:30:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=r2O6mT6xyG2aPk2JExLSh66TEMmXQHikimIrK3Qib1M=;
+ b=WfPvlWTaLWq1ikiqDptvOJIjo7A/zSzUUNeMzVXDv+VoISRJShlIEibMhHjbQUg9Rj
+ K4XZ0oNaL9pdZKwZpJzW9PRw5i2yjiaGhfuA349gd2gemx9PSZspe6LbNA241fdZIQwc
+ Xs608pTeuK75saz2Amfoozb7T8PyZPWzO83tsjS+k3kzLEZ7DpCf7gQsju3TI9Z/XFf/
+ 0hgZeINuc8UqNBQD8B4orMXefqYBqvzn9rWscSBDB8tMNKYHKwE7u/oTEtFOtUcyb9Za
+ Ofj6/uC0WIgXYF12oAQYQlSqbN4B1Y+Mm1SfS9RbbYcepnCCYevVStxr7vaZvXHhCMzK
+ Lszw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=r2O6mT6xyG2aPk2JExLSh66TEMmXQHikimIrK3Qib1M=;
+ b=TT0fF8a8gpl/RfBNmQL20VIYQOQfgpvOL7INQyvvx8c4KbK1q9q/dQ0rr/2xl4kg+N
+ dX93vNg4uiY4pMEmqX5dtA/pWEGlcb5lCWYOlEUrWmqHwSnkAyNNkdnzKCkM67ZZhtkX
+ 0jZha/eydM8GJPZKOH5jVHTV+mkWWophBHFt8hl7Gjay4kHYI8zfiM4eFGyEuoW5Eq3S
+ 6BdT5Er/C7d9geL4k9GqHCFpCC1v7lJIQ7EDjsf6fUSmfaPI35eC5KDSb2f7SQSFC7Cb
+ pByLzJXgO6bASMV8R3sSAt65dTSSmOeN8DGnWdCU4fgax+VI84YAGEaxb+tyXI28agS3
+ M0pQ==
+X-Gm-Message-State: AOAM533jJvDMlzuxwTkpIdmMCQOX1ujTHYm6tSRF2CACfU/09hP+Xqx0
+ MX+cP4msS0PubBCSJpI8nFYVtxyvyk2TE2udpaQ=
+X-Google-Smtp-Source: ABdhPJx33vE1/vtz9jdj8jbaJPCGyV0RnYxED6jAzeQCwCHaZd2HIaHB4n7KWmzBtvjulQ6pdV1f9dk9dMzuJaR34yM=
+X-Received: by 2002:a05:6402:2550:: with SMTP id
+ l16mr70434589edb.83.1641753032430; 
+ Sun, 09 Jan 2022 10:30:32 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.1
-Content-Language: en-US
-To: spice-devel@lists.freedesktop.org
-From: "zwezda-11@mail.ru" <zwezda-11@mail.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-7564579A: EEAE043A70213CC8
-X-77F55803: 4F1203BC0FB41BD9059F52CFE4D0B70A3182EAA8D6D52E873A1994A0A58B3679182A05F5380850404C228DA9ACA6FE27478DF302679823E69D739D73E443BF08B0BAFD04724A9969CD9CC3BD8A60881E
-X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE73A0E02362971E860EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F790063727BBC20C3D5F36038638F802B75D45FF36EB9D2243A4F8B5A6FCA7DBDB1FC311F39EFFDF887939037866D6147AF826D8EAADFCC40D6AED9C9B1063B4E248DC1E6F9789CCF6C18C3F8528715B7D10C86878DA827A17800CE767883B903EA3BAEA9FA2833FD35BB23D9E625A9149C048EE1E561CDFBCA1751F6FD1C55BDD38FC3FD2E47CDBA5A96583BD4B6F7A4D31EC0BC014FD901B82EE079FA2833FD35BB23D27C277FBC8AE2E8BAE9A1BBD95851C5BA471835C12D1D977C4224003CC836476EB9C4185024447017B076A6E789B0E975F5C1EE8F4F765FC169B5D3C615B14F93AA81AA40904B5D9CF19DD082D7633A078D18283394535A93AA81AA40904B5D98AA50765F7900637A53B4B23EEA66FD2D81D268191BDAD3D698AB9A7B718F8C4D1B931868CE1C5781A620F70A64A45A98AA50765F79006372E808ACE2090B5E1725E5C173C3A84C3C5EA940A35A165FF2DBA43225CD8A89F1FC58B5115ECA9A25E1C53F199C2BB95B5C8C57E37DE458BEDA766A37F9254B7
-X-C1DE0DAB: C20DE7B7AB408E4181F030C43753B8186998911F362727C414F749A5E30D975C6B6B4532568824D8272660D8711A87BC93C5176E773F49679C2B6934AE262D3EE7EAB7254005DCED722383FBE7D0D3A71E0A4E2319210D9B64D260DF9561598F01A9E91200F654B0F19FF8B1531DFD348E8E86DC7131B365E7726E8460B7C23C
-X-C8649E89: 4E36BF7865823D7055A7F0CF078B5EC49A30900B95165D342F9EE325F82A28A82D8C5E5C804B845D3D41273DF8FC1CDA7B85E65A988D8CC47E3A26B2A57E24AD1D7E09C32AA3244C8F611B9F0C6FD389F29D7B7D6FC75DFEE8FBBEFAE1C4874C3EB3F6AD6EA9203E
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5ycPtXkTV4k65bRjmOUUP8cvGozZ33TWg5HZplvhhXbhDGzqmQDTd6OAevLeAnq3Ra9uf7zvY2zzsIhlcp/Y7m53TZgf2aB4JOg4gkr2biojbL9S8ysBdXgUTv06m8EVw95YjyDJNsWR
-X-Mailru-Sender: E5A9E99BCE1656BC5970C13C3B4530B5D780F4432ADFF304BF0F44862C1227F7A7F5F57E84946CC8D970480F2A68F3721458020726E2BC9F414F9F6D25D78FEBBA43CA56483BE2C65FEEDEB644C299C0ED14614B50AE0675
-X-Mras: Ok
-X-7564579A: 646B95376F6C166E
-X-77F55803: 6242723A09DB00B458EAA7E4B0EE0F09E17E9F3906B11922EE4D70694A97BD7A68F3CF0E9FE49B690D7E94577E2997207890ECD2E5B7D819C63AF7661E83A6755D17BCD46EED70D2
-X-7FA49CB5: 0D63561A33F958A577F356B876604AE09A9A879199BC865DE7E5631018AFDFFECACD7DF95DA8FC8BD5E8D9A59859A8B64071617579528AACCC7F00164DA146DAFE8445B8C89999728AA50765F790063724E6BD2DEDD071E5389733CBF5DBD5E9C8A9BA7A39EFB766F5D81C698A659EA7CC7F00164DA146DA9985D098DBDEAEC890C54E7630BEBFC1F6B57BC7E6449061A352F6E88A58FB86F5D81C698A659EA73AA81AA40904B5D9A18204E546F3947C6FF1B927F95F33162D242C3BD2E3F4C64AD6D5ED66289B52698AB9A7B718F8C442539A7722CA490CD5E8D9A59859A8B62DCBD8FD08DE7922089D37D7C0E48F6C5571747095F342E88FB05168BE4CE3AF
-X-C1DE0DAB: C20DE7B7AB408E4181F030C43753B8186998911F362727C414F749A5E30D975C6B6B4532568824D84D9DB9780D1CE7904D8FA84537AD2A889C2B6934AE262D3EE7EAB7254005DCED722383FBE7D0D3A7699F904B3F4130E343918A1A30D5E7FCCB5012B2E24CD356
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5ycPtXkTV4k65bRjmOUUP8cvGozZ33TWg5HZplvhhXbhDGzqmQDTd6OAevLeAnq3Ra9uf7zvY2zzsIhlcp/Y7m53TZgf2aB4JOg4gkr2biojH8WdiQSTb1FnbxPxv7cwhQ==
-X-Mailru-MI: 800
-X-Mras: Ok
-X-Mailman-Approved-At: Thu, 06 Jan 2022 14:30:20 +0000
-Subject: [Spice-devel] Spice client
+References: <CAMS0tn14OvBAL3u-0WfnD0DpJFv1HNnq9GVX=oQRgOH0o2678A@mail.gmail.com>
+ <CAHt6W4e2_AyX_G6xe=c=_7-gABb9m=yJJsfm5XYs=JbiuYPDiQ@mail.gmail.com>
+ <CAMS0tn1OMgQJP92aix6F1QwM+RuyN6=rVRu-WuO9BDy-UuzDvg@mail.gmail.com>
+ <CAAg9qJ3L5o=eN0jPcfwdBfaFKMkLo9UAYUzoyay6or91dtKXzQ@mail.gmail.com>
+In-Reply-To: <CAAg9qJ3L5o=eN0jPcfwdBfaFKMkLo9UAYUzoyay6or91dtKXzQ@mail.gmail.com>
+From: i iordanov <iiordanov@gmail.com>
+Date: Sun, 9 Jan 2022 13:29:54 -0500
+Message-ID: <CAMS0tn2NHztzBRu1PW=jRNFUHp8Fh6heEN4ufENRZehQhM37_w@mail.gmail.com>
+To: Uri Lublin <ulublin@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] error: No free USB channel
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,10 +66,115 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-How do I disable Super (win) key interception?
+Hi Uri,
 
-Do not work hotkeys in the operating system.
+Thanks for the clarifications!
 
+iordan
+
+On Sun, Dec 26, 2021 at 6:20 AM Uri Lublin <ulublin@redhat.com> wrote:
+>
+> Hi iordan,
+>
+> On Sat, Dec 25, 2021 at 11:49 PM i iordanov <iiordanov@gmail.com> wrote:
+> >
+> > Hey Frediano,
+> >
+> > Thanks for responding - so I take it this is a server-side setting
+> > (how many channels are attached to the VM)?
+>
+> Yes, the USB (usbredir) devices are defined in the VM configuration
+> (likely via a libvirt domxml file).
+> If you need more than 2 USB devices connected to the guest at the same
+> time, add more
+> such devices to your VM.
+>
+> >
+> > Also, is there a spice-gtk API that may be used to obtain the number
+> > of available USB channels at any given time? I.e. the UI of any client
+> > application should have a way to inform the user how many "ports" are
+> > still available at any point, right?
+>
+> Both remote-viewer (virt-viewer) and the spicy test tool use
+> spice-gtk's usb device widget
+> which has this information.
+>
+> Alternatively, you can get "free-channels" from spice-gtk's usb device ma=
+nager
+>
+> Uri.
+>
+> >
+> > Thanks!
+> > iordan
+> >
+> > On Fri, Dec 24, 2021 at 4:05 AM Frediano Ziglio <freddy77@gmail.com> wr=
+ote:
+> > >
+> > > Il giorno gio 23 dic 2021 alle ore 23:38 i iordanov <iiordanov@gmail.=
+com> ha scritto:
+> > >>
+> > >> Hi guys,
+> > >>
+> > >> During my testing I've been unable to connect more than 2 USB device=
+s
+> > >> at a time - could you please help me figure out why that's happening=
+?
+> > >>
+> > >> The backend starts returning error with message "No free USB channel=
+",
+> > >> but I can't see how to tune the number of USB channels available!
+> > >>
+> > >> 2021-12-23 15:27:52.608 29721-29760/com.iiordanov.aSPICE
+> > >> D/android-service: connect_cb: start
+> > >> 2021-12-23 15:27:52.608 29721-29760/com.iiordanov.aSPICE
+> > >> I/android-service: connect_cb: successfully redirected device
+> > >> 2021-12-23 15:28:00.499 29721-29760/com.iiordanov.aSPICE
+> > >> D/android-service: connect_cb: start
+> > >> 2021-12-23 15:28:00.499 29721-29760/com.iiordanov.aSPICE
+> > >> I/android-service: connect_cb: successfully redirected device
+> > >> 2021-12-23 15:28:03.582 29721-29760/com.iiordanov.aSPICE
+> > >> D/android-service: connect_cb: start
+> > >> 2021-12-23 15:28:03.582 29721-29760/com.iiordanov.aSPICE
+> > >> E/android-service: connect_cb: failed to redirect device, error: No
+> > >> free USB channel
+> > >> 2021-12-23 15:28:06.385 29721-29760/com.iiordanov.aSPICE
+> > >> D/android-service: connect_cb: start
+> > >> 2021-12-23 15:28:06.385 29721-29760/com.iiordanov.aSPICE
+> > >> E/android-service: connect_cb: failed to redirect device, error: No
+> > >> free USB channel
+> > >> 2021-12-23 15:28:08.634 29721-29760/com.iiordanov.aSPICE
+> > >> D/android-service: connect_cb: start
+> > >> 2021-12-23 15:28:08.634 29721-29760/com.iiordanov.aSPICE
+> > >> E/android-service: connect_cb: failed to redirect device, error: No
+> > >> free USB channel
+> > >>
+> > >> Your help is very appreciated.
+> > >>
+> > >> Thanks!
+> > >> iordan
+> > >>
+> > >
+> > > Hi,
+> > >   this is expected. Every USB channel allow to attach one USB device.=
+ Is like having 2 physical USB ports on your computer. If you don't use an =
+HUB you can attach only 2 USB physical devices. Currently there's no softwa=
+re USB hub so one USB device takes one USB channel and by default only 2 US=
+B channels are attached to the VM.
+> > >
+> > > Frediano
+> >
+> >
+> >
+> > --
+> > The conscious mind has only one thread of execution.
+> >
+>
+
+
+--=20
+The conscious mind has only one thread of execution.
