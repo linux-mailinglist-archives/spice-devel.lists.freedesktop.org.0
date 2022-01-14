@@ -1,66 +1,59 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B095F48E7C3
-	for <lists+spice-devel@lfdr.de>; Fri, 14 Jan 2022 10:46:13 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76EA748EB32
+	for <lists+spice-devel@lfdr.de>; Fri, 14 Jan 2022 15:05:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EAF1210E177;
-	Fri, 14 Jan 2022 09:46:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9F15710E3BF;
+	Fri, 14 Jan 2022 14:05:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 26D2710E2E0
- for <spice-devel@lists.freedesktop.org>; Fri, 14 Jan 2022 09:35:25 +0000 (UTC)
-Received: by mail-pj1-x1031.google.com with SMTP id
- a1-20020a17090a688100b001b3fd52338eso12505231pjd.1
- for <spice-devel@lists.freedesktop.org>; Fri, 14 Jan 2022 01:35:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance-com.20210112.gappssmtp.com; s=20210112;
- h=from:subject:to:cc:message-id:date:user-agent:mime-version
- :content-language:content-transfer-encoding;
- bh=6raSPnkgc2IM0IXaiABD9jvDSDngxT0MwxKNrIspSE8=;
- b=LdfuA90zsKyD1fZVYRgYK0ZybOCSevV+NzdDzpQ/jL06Ta3z+zAWp229L8Hf6COly6
- LuUxmd1Y5WxfQyv4J2TE8EEk7qsj3WO5K5mSZvvWR7SSk5BXeAheunevA4u8AsWdTxad
- XFt/io9hxA42m1KFq5V+W2an+r7ekWgBa3WhuRvUnX+jn+GHcCqjPlObEpquOdVeJmhE
- rmkg5yZEJznej04/8IFflhNRgiegJfX3zCxjN0Duv2E7/59FIIznCDrPWHoIzhgbQiWW
- l6UYUFnnw3PtgZvwoutmXAFxlm4S4K2EWXJhtKrzi7nhr9rReQR6+tckNMBT22/dWZFO
- sLPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:subject:to:cc:message-id:date:user-agent
- :mime-version:content-language:content-transfer-encoding;
- bh=6raSPnkgc2IM0IXaiABD9jvDSDngxT0MwxKNrIspSE8=;
- b=WmJPWsXE3nYjw8qiIVWYDCPApMr/FVKKLkVoHWc62qVS3o8E14s9RxwjgYc3rIGRvD
- bE2nuvqOeGMGKuvkO+BCgEFRV7Oe+1KR4sjIqd60pylT+8J4xn3B1hcj+n7y3dYCfBxl
- oXL8zSa99KT08jys+7J1K23+j2vIIFn2I7K+adwqoMz0XfIb1JpuxF9RpHrmz6NI66PO
- qUIR+sbAQfvft5HBNCM1YY+RPhKkrm2+JlWdDXbxQT3q0VHC9ejUClqOWdiRGoKIibxy
- T1PtY8P24ZJdVtHMUBORHoKmnFkAyjB9e40XT2+B12CTJVmoWWLiT14gNFyVIp6hTIYy
- EhlA==
-X-Gm-Message-State: AOAM532uPWzs5CpZl3XFcYvOJo32WUc88hixsStaQ6OyZaHsR8N1d7ot
- /II6AIhhu4AfSg0MHdOEITQRIg==
-X-Google-Smtp-Source: ABdhPJw2XxRIG+CbZSchLAEUG0Gjlc3/skiWDA3ORFTUdIJ+ftzt9q5gFAbldtBMOCMaVYuLWXTOaQ==
-X-Received: by 2002:a17:903:124b:b0:149:b7bf:a2ad with SMTP id
- u11-20020a170903124b00b00149b7bfa2admr8624678plh.53.1642152925628; 
- Fri, 14 Jan 2022 01:35:25 -0800 (PST)
-Received: from [10.76.15.169] ([61.120.150.76])
- by smtp.gmail.com with ESMTPSA id m13sm4151888pga.38.2022.01.14.01.35.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Jan 2022 01:35:25 -0800 (PST)
-From: zhenwei pi <pizhenwei@bytedance.com>
-To: cfergeau@redhat.com, fziglio@redhat.com, jjongsma@redhat.com,
- uril@redhat.com
-Message-ID: <9cc67242-9c34-6b2a-d200-abf9394305eb@bytedance.com>
-Date: Fri, 14 Jan 2022 17:32:41 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D0F7510E21E
+ for <spice-devel@lists.freedesktop.org>; Fri, 14 Jan 2022 12:52:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1642164754;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=wfo3ma2QLM5EMm/FLVUjOjsLRgwM4R9NQ/6UZW96+1Y=;
+ b=PXtUGIPw/msoN/NLIT5FnF/gIVpZdyBZ1Ml2D8O/yDOWMY3SeaZ5nJILtxZ6lebYG8n7bM
+ 63QQ0Xj40bT7okNzMkiLqxptaU/ENXqzMuHkmwDGsT5ifPZmyZV8E8VrhQVYJFEu8Yg10O
+ Tjwdyyv5t/GFs/8zV2KfOu1imhg08eA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-226-Rmmb7Iv0OYa9OtbhaAdieA-1; Fri, 14 Jan 2022 07:52:31 -0500
+X-MC-Unique: Rmmb7Iv0OYa9OtbhaAdieA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C1EE21023F4D;
+ Fri, 14 Jan 2022 12:52:30 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.193.24])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id E45FE798AB;
+ Fri, 14 Jan 2022 12:51:57 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id A91B11800624; Fri, 14 Jan 2022 13:51:55 +0100 (CET)
+Date: Fri, 14 Jan 2022 13:51:55 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: zhenwei pi <pizhenwei@bytedance.com>
+Message-ID: <20220114125155.umjm6mykfnnh6pmr@sirius.home.kraxel.org>
+References: <9cc67242-9c34-6b2a-d200-abf9394305eb@bytedance.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Fri, 14 Jan 2022 09:46:10 +0000
-Subject: [Spice-devel] Discuss about camera redirection in SPICE
+In-Reply-To: <9cc67242-9c34-6b2a-d200-abf9394305eb@bytedance.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailman-Approved-At: Fri, 14 Jan 2022 14:05:04 +0000
+Subject: Re: [Spice-devel] Discuss about camera redirection in SPICE
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,49 +65,30 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: lixiang.byte@bytedance.com, spice-devel@lists.freedesktop.org,
- kraxel@redhat.com
+Cc: cfergeau@redhat.com, lixiang.byte@bytedance.com,
+ spice-devel@lists.freedesktop.org, fziglio@redhat.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+  Hi,
 
-Recently I sent patch set(still in pending state) to QEMU community to 
-introduce camera subsystem and USB video class emulation. The framework 
-looks like following:
+> Although USB redirection has already provided a solution to use a remote
+> webcam, I notice that it uses a heavy network(1280*720@30FPS in MJPEG uses
+> 5MB/s+). I have tested several webcam, and all of them don't support h264.
+> So I'd like to develop camera redirection in SPICE with h264 support, and
+> expect to reduce the network bandwidth(300K/s may be enough).
 
-    +---------+       +------------+     +---------------+
-    |UVC(done)|       |virtio(TODO)|     |other HW device|
-    +---------+       +------------+     +---------------+
-          |                 |                     |
-          |            +------------+             |
-	 +------------+camera(done)+-------------+
-                       +----+-------+
-                            |
-          +-----------------+---------------------+
-          |                 |                     |
-   +------+------+     +----+-----+        +------+------+
-   |builtin(done)|     |v4l2(done)|        |other drivers|
-   +-------------+     +----------+        +-------------+
+Well, one option would be to add usb webcam emulation to the spice client,
+simliar to cdrom redirection (which emulates an usb cdrom drive under
+the hood).  Advantage: works without spice protocol changes as you can
+simply tunnel everything through the usb redirection protocol.
 
-With these changes, we can emulate a UVC webcam for guest, it works 
-without additional guest driver. And use local v4l2 video capture device 
-or draw something into UVC device on host side.
+I'd also recommend to look for another video codec (if possible, not
+sure what the usb webcam spec allows).  H.264 is a patent minefield,
+which makes it rather difficult to use in open source projects.  You'll
+end up with a lot of legal problems when it comes to software
+distribution.  vp8/9 would be a much better choice.
 
-And I have a plan to develop a new channel and relevant API for camera 
-redirection in SPICE, then a desktop instance could use remote webcam.
+take care,
+  Gerd
 
-Although USB redirection has already provided a solution to use a remote 
-webcam, I notice that it uses a heavy network(1280*720@30FPS in MJPEG 
-uses 5MB/s+). I have tested several webcam, and all of them don't 
-support h264. So I'd like to develop camera redirection in SPICE with 
-h264 support, and expect to reduce the network bandwidth(300K/s may be 
-enough).
-
-Could you please give me any suggestion about this?
-
-Patch link:
-https://patchwork.kernel.org/project/qemu-devel/cover/20211227142734.691900-1-pizhenwei@bytedance.com/
-
--- 
-zhenwei pi
