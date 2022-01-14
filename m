@@ -1,63 +1,66 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04C19488BA5
-	for <lists+spice-devel@lfdr.de>; Sun,  9 Jan 2022 19:32:49 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B095F48E7C3
+	for <lists+spice-devel@lfdr.de>; Fri, 14 Jan 2022 10:46:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1866A10E4AA;
-	Sun,  9 Jan 2022 18:32:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EAF1210E177;
+	Fri, 14 Jan 2022 09:46:11 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EEA7010E4AA
- for <spice-devel@lists.freedesktop.org>; Sun,  9 Jan 2022 18:32:44 +0000 (UTC)
-Received: by mail-ed1-x531.google.com with SMTP id u21so22206041edd.5
- for <spice-devel@lists.freedesktop.org>; Sun, 09 Jan 2022 10:32:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=iNcG1Cpw8yF/XUQZ9Jrc8vYbOSNO5bq1B/uIwF9xMgo=;
- b=qDIEU6AkYUMVjoZDvZUnaknFIGb3XodIXwSc3DXgtgkJ7RGLLxhQscB6wWoeYpxfPi
- +piiXnXEUAtr3yW9SPG7lYbPV3rCQXzyHoMku0zaSZ6/aCixcX+anPocTQ/WlGf7hEF/
- y5lBTXCygQ6TD35l0PTebf1f26L9cyx3rDTnnG3FIfyj7Sz/A7zn+x92xM2pRb/3H2+1
- zfDucG1Av3m9LUHZhpYpW7W7oXhlRm5Pd4pF9c7to0ljG8i0ANeD6LazwIzcniYen7/9
- R2IUbdH2ma6p3P46m2Tnru+/DCRbKWo5TFwBua4aocyAP9ulTMFhHlpy6wOJ1gDVd6jL
- MsIw==
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 26D2710E2E0
+ for <spice-devel@lists.freedesktop.org>; Fri, 14 Jan 2022 09:35:25 +0000 (UTC)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ a1-20020a17090a688100b001b3fd52338eso12505231pjd.1
+ for <spice-devel@lists.freedesktop.org>; Fri, 14 Jan 2022 01:35:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+ h=from:subject:to:cc:message-id:date:user-agent:mime-version
+ :content-language:content-transfer-encoding;
+ bh=6raSPnkgc2IM0IXaiABD9jvDSDngxT0MwxKNrIspSE8=;
+ b=LdfuA90zsKyD1fZVYRgYK0ZybOCSevV+NzdDzpQ/jL06Ta3z+zAWp229L8Hf6COly6
+ LuUxmd1Y5WxfQyv4J2TE8EEk7qsj3WO5K5mSZvvWR7SSk5BXeAheunevA4u8AsWdTxad
+ XFt/io9hxA42m1KFq5V+W2an+r7ekWgBa3WhuRvUnX+jn+GHcCqjPlObEpquOdVeJmhE
+ rmkg5yZEJznej04/8IFflhNRgiegJfX3zCxjN0Duv2E7/59FIIznCDrPWHoIzhgbQiWW
+ l6UYUFnnw3PtgZvwoutmXAFxlm4S4K2EWXJhtKrzi7nhr9rReQR6+tckNMBT22/dWZFO
+ sLPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=iNcG1Cpw8yF/XUQZ9Jrc8vYbOSNO5bq1B/uIwF9xMgo=;
- b=Hnqc3VBOOA2CxYzWwpDY4eEZ+HnHeGKDljucv3IvE93gndP7TqkUfpgW+WR59j3vwB
- GNb4XIOsE7yLdpxOzAXVUHH/FWvFw51vdZ5BvKnswR7QgQuPpvkallw+VCwyLdo4etSC
- ud1RUXDFKde9lp+k9FI/kqJy6/lEOI2L/xlPI6vFuoWpLOjo8ZgzNS5Ss20CnT0k3/nC
- 89JAcR7rh1cHiud5K6GbgeaokY9UfJsZh9jQ84Zgu0rtgMFZ1c0rge/+/RW8AcLPRqEl
- bE0lnOX/eBF7mfE9m1MH2VzPFSrWEKn87musU7XD9BRzkMq9wBG1Rlt5kS+Aj6gVvlb5
- lbkw==
-X-Gm-Message-State: AOAM532jkTMHtvLj4HMcfwa1XaasLw/XiTAuRY0+g3aEragH+TmkGzuq
- /4lVQ9xE3ULZkIBfPjgcioj3xKI4CYxqtmDV/ho=
-X-Google-Smtp-Source: ABdhPJyywq8gSIRagX0oqT3YYOPLZtWkVlvpBquURRdxE6eB913gtHzDctoGhE9YDtphIFhzSFQELTTBvwzT/r5i/uw=
-X-Received: by 2002:a50:eb90:: with SMTP id y16mr6148062edr.161.1641753163476; 
- Sun, 09 Jan 2022 10:32:43 -0800 (PST)
+ h=x-gm-message-state:from:subject:to:cc:message-id:date:user-agent
+ :mime-version:content-language:content-transfer-encoding;
+ bh=6raSPnkgc2IM0IXaiABD9jvDSDngxT0MwxKNrIspSE8=;
+ b=WmJPWsXE3nYjw8qiIVWYDCPApMr/FVKKLkVoHWc62qVS3o8E14s9RxwjgYc3rIGRvD
+ bE2nuvqOeGMGKuvkO+BCgEFRV7Oe+1KR4sjIqd60pylT+8J4xn3B1hcj+n7y3dYCfBxl
+ oXL8zSa99KT08jys+7J1K23+j2vIIFn2I7K+adwqoMz0XfIb1JpuxF9RpHrmz6NI66PO
+ qUIR+sbAQfvft5HBNCM1YY+RPhKkrm2+JlWdDXbxQT3q0VHC9ejUClqOWdiRGoKIibxy
+ T1PtY8P24ZJdVtHMUBORHoKmnFkAyjB9e40XT2+B12CTJVmoWWLiT14gNFyVIp6hTIYy
+ EhlA==
+X-Gm-Message-State: AOAM532uPWzs5CpZl3XFcYvOJo32WUc88hixsStaQ6OyZaHsR8N1d7ot
+ /II6AIhhu4AfSg0MHdOEITQRIg==
+X-Google-Smtp-Source: ABdhPJw2XxRIG+CbZSchLAEUG0Gjlc3/skiWDA3ORFTUdIJ+ftzt9q5gFAbldtBMOCMaVYuLWXTOaQ==
+X-Received: by 2002:a17:903:124b:b0:149:b7bf:a2ad with SMTP id
+ u11-20020a170903124b00b00149b7bfa2admr8624678plh.53.1642152925628; 
+ Fri, 14 Jan 2022 01:35:25 -0800 (PST)
+Received: from [10.76.15.169] ([61.120.150.76])
+ by smtp.gmail.com with ESMTPSA id m13sm4151888pga.38.2022.01.14.01.35.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Jan 2022 01:35:25 -0800 (PST)
+From: zhenwei pi <pizhenwei@bytedance.com>
+To: cfergeau@redhat.com, fziglio@redhat.com, jjongsma@redhat.com,
+ uril@redhat.com
+Message-ID: <9cc67242-9c34-6b2a-d200-abf9394305eb@bytedance.com>
+Date: Fri, 14 Jan 2022 17:32:41 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <CAMS0tn2RYzqoFQhYXaGRSnOXe9t_Lnz9t2kBah7VL+2H0R57hQ@mail.gmail.com>
- <CAAg9qJ0DKP8Ki7352yp9-iXuRvY13fHfVi4bUuyy-3pGi4xEUg@mail.gmail.com>
- <CAMS0tn2BosyXYQjR9zLvZF+DNCHB2TWR0Zuzw8hMQHc7o_X1Fw@mail.gmail.com>
- <CAAg9qJ3CnPLNedyh+uy4Lk1rLK=bosft70GD7NDx-eAVDODz8w@mail.gmail.com>
- <CAMS0tn1cSZPaDCjzpXh6xnU2yk=PDshOVM8z-Tasc33crg=boQ@mail.gmail.com>
- <CAHt6W4cKt-LkBwueG1yWL3_F8jUw_rfirOFDRXSR23FQJQm6Zw@mail.gmail.com>
- <CAMS0tn3FF_xwTNzqXxouN6f6GOHmD5k-rU6QyZYBozo-n81Gfg@mail.gmail.com>
-In-Reply-To: <CAMS0tn3FF_xwTNzqXxouN6f6GOHmD5k-rU6QyZYBozo-n81Gfg@mail.gmail.com>
-From: i iordanov <iiordanov@gmail.com>
-Date: Sun, 9 Jan 2022 13:32:06 -0500
-Message-ID: <CAMS0tn3cE2g7LTiqnAQonjth928O4ifwuP+NoSu405G_93q+cw@mail.gmail.com>
-To: Frediano Ziglio <freddy77@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] attaching a USB device by libusb_device or
- libusb_device_handle on Android
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 14 Jan 2022 09:46:10 +0000
+Subject: [Spice-devel] Discuss about camera redirection in SPICE
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,73 +72,49 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>, support@morpheusly.com
+Cc: lixiang.byte@bytedance.com, spice-devel@lists.freedesktop.org,
+ kraxel@redhat.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Frediano, Uri, and Marc-Andre,
+Hi,
 
-Just wanted to revive the discussion on this topic and see whether you
-need anything more for this merge request:
+Recently I sent patch set(still in pending state) to QEMU community to 
+introduce camera subsystem and USB video class emulation. The framework 
+looks like following:
 
-https://gitlab.freedesktop.org/spice/spice-gtk/-/merge_requests/95
+    +---------+       +------------+     +---------------+
+    |UVC(done)|       |virtio(TODO)|     |other HW device|
+    +---------+       +------------+     +---------------+
+          |                 |                     |
+          |            +------------+             |
+	 +------------+camera(done)+-------------+
+                       +----+-------+
+                            |
+          +-----------------+---------------------+
+          |                 |                     |
+   +------+------+     +----+-----+        +------+------+
+   |builtin(done)|     |v4l2(done)|        |other drivers|
+   +-------------+     +----------+        +-------------+
 
-Thanks!
-iordan
+With these changes, we can emulate a UVC webcam for guest, it works 
+without additional guest driver. And use local v4l2 video capture device 
+or draw something into UVC device on host side.
 
-On Thu, Dec 23, 2021 at 3:19 PM i iordanov <iiordanov@gmail.com> wrote:
->
-> Hi Frediano,
->
-> Thanks for your feedback, that's exactly what I was looking for ahead
-> of opening a MR.
->
-> On Thu, Dec 23, 2021 at 4:21 AM Frediano Ziglio <freddy77@gmail.com> wrot=
-e:
-> >   could you open a MR?
->
-> Is this the right copy of the repo to make an MR against?
-> https://gitlab.freedesktop.org/spice/spice-gtk
->
-> > I suppose you are speaking about allocate_device_for_file_descriptor. I=
-t's not called anywhere in the code so I suppose it is a public API. In thi=
-s case it should start with something like spice_. Also it should have a bi=
-t more documentation and be listed in src/spice-glib-sym-file. But src/usb-=
-backend.h is not a public header and we don't want it to be so it does not =
-seem a good idea to declare there.
->
-> That makes sense. However, if in a new implementation it would make
-> sense for UsbDeviceManager to use some functionality from UsbBackend,
-> I'd still need to declare it in usb-backend.h, right? Just as an
-> aside, is there a way to make a method available to UsbDeviceManager
-> but unavailable publicly?
->
-> > This seems like a bad idea. It exposes something internal. Why not havi=
-ng just one additional function in device manager like
-> >
-> > gboolean
-> > spice_usb_device_manager_add_device_from_fd(SpiceUsbDeviceManager *mana=
-ger, GError **err);
->
-> This is a good suggestion. You're essentially proposing for
-> UsbDeviceManager (which is public) to be the one exposing the
-> functionality and for it to potentially use some functionality left in
-> UsbBackend (which is private) internally. I'll refactor.
->
-> > The device could be communicated using device_added signal (if results =
-if not FALSE), error can be returned, no additional interface to expose.
-> > Or returning directory a SpiceUsbDevice* instead of a gboolean (but in =
-this case interface will have to be blocking).
->
-> Any pros / cons with either one? Any preference? If I return
-> SpiceUsbDevice * directly, there is no need for the err, parameter and
-> I could just return NULL device if something went wrong. Is there any
-> preference or rule of thumb that the project generally follows?
->
-> Thanks!
-> iordan
+And I have a plan to develop a new channel and relevant API for camera 
+redirection in SPICE, then a desktop instance could use remote webcam.
 
+Although USB redirection has already provided a solution to use a remote 
+webcam, I notice that it uses a heavy network(1280*720@30FPS in MJPEG 
+uses 5MB/s+). I have tested several webcam, and all of them don't 
+support h264. So I'd like to develop camera redirection in SPICE with 
+h264 support, and expect to reduce the network bandwidth(300K/s may be 
+enough).
 
+Could you please give me any suggestion about this?
 
---=20
-The conscious mind has only one thread of execution.
+Patch link:
+https://patchwork.kernel.org/project/qemu-devel/cover/20211227142734.691900-1-pizhenwei@bytedance.com/
+
+-- 
+zhenwei pi
