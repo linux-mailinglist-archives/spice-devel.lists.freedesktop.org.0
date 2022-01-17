@@ -2,68 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 123DE49043D
-	for <lists+spice-devel@lfdr.de>; Mon, 17 Jan 2022 09:46:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17508492455
+	for <lists+spice-devel@lfdr.de>; Tue, 18 Jan 2022 12:09:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6001710E417;
-	Mon, 17 Jan 2022 08:46:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0752A10E21B;
+	Tue, 18 Jan 2022 11:09:42 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 82D3810E9D5
- for <spice-devel@lists.freedesktop.org>; Mon, 17 Jan 2022 07:30:47 +0000 (UTC)
-Received: by mail-pg1-x52c.google.com with SMTP id f8so10107791pgf.8
- for <spice-devel@lists.freedesktop.org>; Sun, 16 Jan 2022 23:30:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance-com.20210112.gappssmtp.com; s=20210112;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=UMw/O06iP+cboeWr3YAy/AbyWdcghN63NDmaZVr2Q8M=;
- b=Y+W0AP/K2nqlYbBR10KPHzr3H2ctYky0ZNKUJtXeofYo24xXoXVUjcNvSJPvwYjlfP
- 49+bY/TRlIpCMqJfmRVxQCL97BtEYwOh7xOFcbYmQaRd0ZFTkDcFiK+B/u+Oroi1/Vcr
- YOJOWYz0YF4ZArhQ9LaynyRwilUceRcJKMEyvjfre2mOkLJUqRj5QfH5X0VmLQjruThG
- yWs6TM68aUp3C/nViodB5HeTbXns7fdO+gM+WrNgpYsWyq9xh4lvgJNzn7NCmIR+Be64
- 7Gc6G+TbtVQTVyLNwnQ2GYI7xnBLj3VqJTSWYJFzpkLU8deZca76mur5H7Vgilr1vWSM
- +hHg==
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A5DD810F9CA
+ for <spice-devel@lists.freedesktop.org>; Mon, 17 Jan 2022 19:11:17 +0000 (UTC)
+Received: by mail-qt1-x82e.google.com with SMTP id 14so12685066qty.2
+ for <spice-devel@lists.freedesktop.org>; Mon, 17 Jan 2022 11:11:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=n5WK52BSbbTZZeEc1Ey4TrCvQyFPFgrPFxeiOnAQWRI=;
+ b=EJYUbojE5KL80Wmad+yC2EzRq4W2O5z2IsaI64QuLc5wNaIlgX+/GvtjxmKQUs1yBX
+ uP9b/Vn9DHJpx6VzOWRSouumTNchraF7KxKFIMltQqnBTcm5OkDRx8EuMjObjEgh6VdE
+ qnRbhxSTIP0yJENqFERwgp14IMkDW/NjKeXLL5rtOhk4LBlA9hv6h3koyO36ntuAKqvO
+ ANWj+ye2C8GpFnjvoAZoWPEoVAH6qD+An2OapHhOMwsYuywMzcn+bb40teQxO3aZogT/
+ mZpzAly0d07iMVNwGlZ1OhH6zzHv9+h+/mkN6u6Wuk8bTGfgQjk5LSklq8FGdyhhiNzE
+ xeGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=UMw/O06iP+cboeWr3YAy/AbyWdcghN63NDmaZVr2Q8M=;
- b=wnxnQAz1KNb4INrIPnHUC8EMfxYXvjfA0tT+duizCpO0cTQV1+/TIjuvGvnqAlRQxm
- BcAoJBmfX2AtqRB6FItIec5NBVSpn7ih69I6QNTXjC9QAbpphX/oTbwcXdiU2uWTcjPI
- /FdgtHyzHSoReVa/CQTeTn49ZHuiGICXHh7UAA0s/Byx+EYohoWOY6CHB/TMaetQ9UaC
- WaexcIDtoZ4mBMKgosrVu/jKB7MtanOkwn1UGlqtElXJJm/CpzQFg4KSePMGvbMvi0mI
- YP4Grsmco87FOHJREk5xbHTwomcwW4YGdNiDw3BtK5acXXwfdK0uy9Ttn1YwbrGfKPQV
- FRpQ==
-X-Gm-Message-State: AOAM5317EWH1ikGxB0n2HmqclzAA8cr5nJU/pHB9NNYXeVRJ7ahyJTtz
- znAwLVZZwvlRNhCVRCzoBKNFxA==
-X-Google-Smtp-Source: ABdhPJxOitB0MHxmRcKpjxPZr1yZCo8mZKLjlA5/wD0M5NAVY86f78ZPQipT4GI2v1zQwkK05IUxCA==
-X-Received: by 2002:a63:5a51:: with SMTP id k17mr2917925pgm.129.1642404646907; 
- Sun, 16 Jan 2022 23:30:46 -0800 (PST)
-Received: from [10.76.15.169] ([153.254.110.109])
- by smtp.gmail.com with ESMTPSA id t6sm11161295pgk.31.2022.01.16.23.30.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 16 Jan 2022 23:30:46 -0800 (PST)
-To: Gerd Hoffmann <kraxel@redhat.com>
-References: <9cc67242-9c34-6b2a-d200-abf9394305eb@bytedance.com>
- <20220114125155.umjm6mykfnnh6pmr@sirius.home.kraxel.org>
- <93d761a8-5d1e-055f-560b-bd123ba2fdb4@bytedance.com>
- <20220117062949.dz6c5beqxd3m2bq3@sirius.home.kraxel.org>
-From: zhenwei pi <pizhenwei@bytedance.com>
-Message-ID: <63371ce2-1236-a2a4-022a-629034f2d772@bytedance.com>
-Date: Mon, 17 Jan 2022 15:28:05 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=n5WK52BSbbTZZeEc1Ey4TrCvQyFPFgrPFxeiOnAQWRI=;
+ b=09yF8g9Bu9gvyDOAKfOvG1awWEXLVHgVT5NL4dl1mPGTl1VUgbZvYGZ67Sndl9IJdj
+ DSG8nQyDHJEKv1b3b5zfKSzZKTJNk4BQhkVHEPOiiCdoIc4mf0Rgg/YwKl89mNzBTtiD
+ Pq0P5tfBJ3x4nJ2lddVeXNIeIAPeDPOKcIHESb45+I541KSmPnNMMLucRVNTKFNewaST
+ JdgZNiI5ukqwQ4e4z8zdNPUb+oc/y1b2xBY9H2TF8HYw+3lTkvuzPfQKdQAD2OjyTbu2
+ syPyHIhgObQ7oryazzzmpYX1siBNhbDs0TCOw7rfgwdQEGrmKotKsr/glsgxpH1tczTx
+ Hu4w==
+X-Gm-Message-State: AOAM531/IZkCuRWBy7el+JS0/aXjNIx/Eyqq9S1eMm5O/YS0HWg2VHVu
+ bZkSuTGKuCld9phsiUbWZW73QP8vv10X1JsnQEqwucgMF8E=
+X-Google-Smtp-Source: ABdhPJzXPDLhTh5rpzugRnn1oMSjMmmFE4QkBbYF0ngKMa8yq771ZW2+PXuCUlUW0MWHtjwIpohJGYSONJVwRDiF/GY=
+X-Received: by 2002:ac8:5f13:: with SMTP id x19mr5154246qta.575.1642446676661; 
+ Mon, 17 Jan 2022 11:11:16 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20220117062949.dz6c5beqxd3m2bq3@sirius.home.kraxel.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Mon, 17 Jan 2022 08:46:48 +0000
-Subject: Re: [Spice-devel] Discuss about camera redirection in SPICE
+From: Ahmad Ismail <ismail783@gmail.com>
+Date: Tue, 18 Jan 2022 01:11:04 +0600
+Message-ID: <CAHAhJwJGu2W=GJNnm-qTLYnWh1z5vb55XuKMv2O6i47eL9-ovQ@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000b9997305d5cbea94"
+X-Mailman-Approved-At: Tue, 18 Jan 2022 11:09:41 +0000
+Subject: [Spice-devel] How to mount webdav inside QEMU
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,57 +58,69 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: cfergeau@redhat.com, lixiang.byte@bytedance.com,
- spice-devel@lists.freedesktop.org, fziglio@redhat.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 1/17/22 2:29 PM, Gerd Hoffmann wrote:
->    Hi,
-> 
->> Camera redirection through the USB redirection protocol seems feasible. But
->> I have several concerns:
->> 1, UVC started to support H.264 and VP8 since version 1.5, old version OS
->> has no support(Link https://en.wikipedia.org/wiki/USB_video_device_class).
->>
->> 2, Even guest side supports UVC 1.5, the camera App still has a chance to
->> select which format to use. We can control this from hypervisor side.
-> 
-> The camera could offer vp8 as only supported codec ...
-> 
-> But, yes, using usb redirection will loose some flexibility because you
-> can't recode the video frames then.
-> 
->> 3, I noticed that USB emulation uses a lot of CPU, so I also have a plan to
->> introduce virtio camera to reduce the CPU utilization.
-> 
-> uhci and ehci are pretty bad indeed.  xhci should behave noticeable better.
-> 
->> So from the point of my view, I prefer a common camera redirection
->> protocol(event a hard work to do, but I can support it for a long time).
-> 
-> I think you can take some ideas from the audio protocol (start/stop
-> stream, ...).  Define controls (brighness etc), probably best to follow
-> uvc or v4l2 here.  Negotiate video format capabilities, so there is the
-> option that server and client agree on some future codec when supported
-> on both ends.
-> 
-> take care,
->    Gerd
->
+--000000000000b9997305d5cbea94
+Content-Type: text/plain; charset="UTF-8"
 
+I run the VM using
 
-Hi,
+qemu-system-x86_64 -accel kvm,thread=multi -cpu host -smp 2 -m 4096
+-drive file=mint20.3.qcow2,if=virtio \
+-machine vmport=off \
+-vga qxl -usb -device usb-tablet \
+-spice port=5900,addr=127.0.0.1,disable-ticketing \
+-device virtio-serial-pci \
+-chardev spicevmc,id=spicechannel0,debug=0,name=vdagent \
+-device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 \
+-device virtserialport,chardev=charchannel1,id=channel1,name=org.spice-space.webdav.0
+\
+-chardev spiceport,name=org.spice-space.webdav.0,id=charchannel1
 
-Actually, during I developed the QEMU camera subsystem and UVC 
-emulation, I referred to both UVC and v4l2.
+The access the VM using remote-viewer spice://127.0.0.1:5900
 
-Detailed type definition and function declaration in 
-include/camera/camera.h of this patch:
-https://patchwork.kernel.org/project/qemu-devel/patch/20211227142734.691900-2-pizhenwei@bytedance.com/
+Then in the remote viewer I click:
 
-I suppose the API may looks like this(of cause, detailed implementation 
-  needs take some ideas from audio). Could you please take a look at it?
+File > Preference > Share folder > Choose a folder from the Host
 
--- 
-zhenwei pi
+Then In the host I click: Nemo > Network > Spice client folder
+
+Then the directory is mounted and I can share files between guest and host.
+
+I want to get rid of the clicks.
+
+I think to mount a drive I have to use something like
+
+mount -t davfs https://cs10.cloud.com:2078 /mnt/webdav
+
+But I am not understanding what URL shall i use after mount -t davfs
+
+--000000000000b9997305d5cbea94
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr"><div class="gmail-s-prose gmail-js-post-body">
+                
+<p>I run the VM using</p>
+<pre><code>qemu-system-x86_64 -accel kvm,thread=multi -cpu host -smp 2 -m 4096 -drive file=mint20.3.qcow2,if=virtio \
+-machine vmport=off \
+-vga qxl -usb -device usb-tablet \
+-spice port=5900,addr=127.0.0.1,disable-ticketing \
+-device virtio-serial-pci \
+-chardev spicevmc,id=spicechannel0,debug=0,name=vdagent \
+-device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 \
+-device virtserialport,chardev=charchannel1,id=channel1,name=org.spice-space.webdav.0 \
+-chardev spiceport,name=org.spice-space.webdav.0,id=charchannel1
+</code></pre>
+<p>The access the VM using <code>remote-viewer spice://<a href="http://127.0.0.1:5900">127.0.0.1:5900</a></code></p>
+<p>Then in the remote viewer I click:</p>
+<p>File &gt; Preference &gt; Share folder &gt; Choose a folder from the Host</p>
+<p>Then In the host I click:
+Nemo &gt;  Network &gt; Spice client folder</p>
+<p>Then the directory is mounted and I can share files between guest and host.</p>
+<p>I want to get rid of the clicks.</p>
+<p>I think to mount a drive I have to use something like</p>
+<p>mount -t davfs <a href="https://cs10.cloud.com:2078" rel="nofollow noreferrer">https://cs10.cloud.com:2078</a> /mnt/webdav</p>
+<p>But I am not understanding what URL shall i use after <code>mount -t davfs</code></p></div></div>
+
+--000000000000b9997305d5cbea94--
