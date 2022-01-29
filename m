@@ -1,52 +1,55 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16EEF4A2E2C
-	for <lists+spice-devel@lfdr.de>; Sat, 29 Jan 2022 12:23:58 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AFA324A3013
+	for <lists+spice-devel@lfdr.de>; Sat, 29 Jan 2022 15:45:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BD022898D9;
-	Sat, 29 Jan 2022 11:23:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 011C810E226;
+	Sat, 29 Jan 2022 14:45:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1B2AC10F417
- for <spice-devel@lists.freedesktop.org>; Sat, 29 Jan 2022 11:23:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1643455428;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ZEgc6utgmuE8VxjkpFaTgGk5aPx10/eaKSc394JBfUg=;
- b=Fz4OjijYLIxIVvo5CHril8aYFNmYcH66R00247EmGa6hYiXS3d49+ARbyEB6f3wSbJUj12
- RWDFUZTS6KXh0Li6RQ+ouIOIrtFqeYZWJAVHZMSL7EVwtnNsRr3oOVEjulF+If3teT/0Q1
- 48o5IxBxCEfd9DAEF7VmXbEhN+Tyxtk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-257-PrYPTcrbN1ShU4mgTrTbeA-1; Sat, 29 Jan 2022 06:23:45 -0500
-X-MC-Unique: PrYPTcrbN1ShU4mgTrTbeA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 44B75809CD9;
- Sat, 29 Jan 2022 11:23:44 +0000 (UTC)
-Received: from localhost (unknown [10.40.192.90])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B666F78DD2;
- Sat, 29 Jan 2022 11:23:43 +0000 (UTC)
-Date: Sat, 29 Jan 2022 12:23:42 +0100
-From: Victor Toso <victortoso@redhat.com>
-To: Neal Piche <phirestalker@gmail.com>
-Message-ID: <20220129112342.tryfzbmvqqygrzgd@tapioca>
-References: <CANkOWoyorOVg6GfqN=LJSqY=Km7TYo686T+PSWpXKTvi2TAz4g@mail.gmail.com>
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6BAD610E29A
+ for <spice-devel@lists.freedesktop.org>; Sat, 29 Jan 2022 14:22:00 +0000 (UTC)
+Received: by mail-lj1-x231.google.com with SMTP id t7so13025155ljc.10
+ for <spice-devel@lists.freedesktop.org>; Sat, 29 Jan 2022 06:22:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=kkPLCOLS52/TYZPYrQsUfeaeK4txsEx7Cv9t1ajo9bo=;
+ b=PlNox2dyvayhKnKhah/07QOhgl4m5aFwJCAIyHa5aBmuG5WAW0z/sB9ITfbbxu+l0L
+ PYqtTbF6EgNd+V9jC6F/j6SV+PGnPH1X7b9xCuI71IJSBncsWjkvbfx+5OU4wdudRIgS
+ cpdc3tFy3S9qVpp49TYuNYq4hooWamdS63uYBqyCjmcuCt6DwsLEHGQvRvGiI9nHqj9J
+ yec8KYjiiobqzgALJB3TN+rgs5LSknVeKRnDinq13nd3wW4b3aYc8PxRVvOhz+/CYtT2
+ bMuMbBZWkFQsXHf1ORSlS7rbtRmASOk+U7wPBFaCceJYe3upKB0Vp+Rzj/9kDMU13lNA
+ XR8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=kkPLCOLS52/TYZPYrQsUfeaeK4txsEx7Cv9t1ajo9bo=;
+ b=iVhpMS4sl7A/zT0SuyrlmHT3GSo6myWOKGy80TkmvGZvQNGt9vHr4tY+dpmriyvbZy
+ EnHYM/cIOZdBwAYYxWo7AqmOVEeFzrdvT+PZfZ5HPItifE6kcVrHC25G733L0lFCK9HO
+ EG3B8S52FQm+Vrp+HnlyZ9qSmUQRmVnwOWddYTOlv0BBYxKO4p6mKE3OUpmbzE7hp6Yj
+ y7VCdYJgw80cwvzu/j3t3lSFoBsjTwgA+a1Q3nJTxJf77UkL0URTbVSdW8HP4OGr70Hc
+ s6LqeFD8cj+xV+pythh5L+nKJsKYqdQRs513R2U2kgtyXzXMqvoQpoiWo4piPFY0asGi
+ CsVQ==
+X-Gm-Message-State: AOAM532+Z3XnR82H3t2p2DgQ42fe2ZCtxHJocGJrjP35nofuDYchdIyj
+ SbxFT08fHwZ9qHZAgWJJDiqo8EhinLTEtC0AWg==
+X-Google-Smtp-Source: ABdhPJxUyEY1mJrfJEk+FF7onmeH8NrmrRuPUwGqK5njdOVSHOH3XOg2Sz9Xho9dEUgnnkbMGXUXehO5gsrdw2Sd/M8=
+X-Received: by 2002:a2e:bd8a:: with SMTP id o10mr3537199ljq.189.1643466118397; 
+ Sat, 29 Jan 2022 06:21:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="5c7gecsyhwecn6u7"
-Content-Disposition: inline
-In-Reply-To: <CANkOWoyorOVg6GfqN=LJSqY=Km7TYo686T+PSWpXKTvi2TAz4g@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+References: <CANkOWoyorOVg6GfqN=LJSqY=Km7TYo686T+PSWpXKTvi2TAz4g@mail.gmail.com>
+ <CAHt6W4fLEDCKDDoF4aRT9199cY3v+mxBp10Ax9+fKpwpoc-rGA@mail.gmail.com>
+In-Reply-To: <CAHt6W4fLEDCKDDoF4aRT9199cY3v+mxBp10Ax9+fKpwpoc-rGA@mail.gmail.com>
+From: Neal Piche <phirestalker@gmail.com>
+Date: Sat, 29 Jan 2022 07:21:46 -0700
+Message-ID: <CANkOWowXy1B=opndR15wwjhRFoKTXrQeUTh+bNcvmp+Rjv5n=Q@mail.gmail.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000003001a305d6b94694"
+X-Mailman-Approved-At: Sat, 29 Jan 2022 14:45:35 +0000
 Subject: Re: [Spice-devel] Following audio device changes
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -59,71 +62,101 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+--0000000000003001a305d6b94694
+Content-Type: text/plain; charset="UTF-8"
 
---5c7gecsyhwecn6u7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Yes, it is local, and the scenario is how you explained. I ran the QEMU
+only test with QEMU installed from homebrew, but spice does not work on
+that QEMU for M1 macs, so I normally use UTM. I filed a bug there, but he
+is just launching QEMU as far as I can tell. Although, I don't know what
+version he is using.
+
+On Sat, Jan 29, 2022 at 2:53 AM Frediano Ziglio <freddy77@gmail.com> wrote:
+
+> Hi Neal,
+>    what is the exact environment? Is it everything local and are you using
+> the default Qemu interface? Or are you running Qemu and attacking with
+> spice-gtk, remote-viewer, virt-manager or any other remote desktop
+> application? If I understood correctly the desktop application, running on
+> Mac, is not following the system changes to the audio output device, right?
+> So for instance you attach an external bluetooth speaker to your Mac, set
+> the output to the bluetooth speaker, all applications are now using the
+> bluetooth speaker beside the spice desktop application.
+>
+> Regards,
+>   Frediano
+>
+>
+> Il giorno sab 29 gen 2022 alle ore 05:32 Neal Piche <
+> phirestalker@gmail.com> ha scritto:
+>
+>> I am on macOS. Most applications are able to accept changes to the audio
+>> device from the system and output sound to that device.
+>>
+>> I use QEMU, and if I leave spice extensions disabled, the guest OS is
+>> able to accept changes to the audio device multiple times. When I turn on
+>> spice extensions, QEMU will try to continue outputting sound to the
+>> original device. No matter what I change the output device to, it will keep
+>> whatever it had originally. I don't know if it is QEMU using spice
+>> incorrectly, a misconfiguration, or a bug in one of the spice packages.
+>>
+>> Oh, I have tried with a Debian bullseye and Whonix guest with the same
+>> results.
+>>
+>> Has anyone found a workaround? Should I file a bug, and if so where?
+>>
+>
+
+--0000000000003001a305d6b94694
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Neal,
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-size:large">Yes=
+, it is local, and the scenario is how you explained. I ran the QEMU only t=
+est with QEMU installed from homebrew, but spice does not work on that QEMU=
+ for M1 macs, so I normally use UTM. I filed a bug there, but he is just la=
+unching QEMU as far=C2=A0as I can tell. Although, I don&#39;t know what ver=
+sion he is using.</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
+" class=3D"gmail_attr">On Sat, Jan 29, 2022 at 2:53 AM Frediano Ziglio &lt;=
+<a href=3D"mailto:freddy77@gmail.com">freddy77@gmail.com</a>&gt; wrote:<br>=
+</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
+order-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><d=
+iv>Hi Neal,</div><div>=C2=A0=C2=A0 what is the exact environment? Is it eve=
+rything local and are you using the default Qemu interface? Or are you runn=
+ing Qemu and attacking with spice-gtk, remote-viewer, virt-manager or any o=
+ther remote desktop application? If I understood correctly the desktop appl=
+ication, running on Mac, is not following the system changes to the audio o=
+utput device, right? So for instance you attach an external bluetooth speak=
+er to your Mac, set the output to the bluetooth speaker, all applications a=
+re now using the bluetooth speaker beside the spice desktop application.<br=
+></div><div><br></div><div>Regards,<br></div><div><div><div dir=3D"ltr"><di=
+v dir=3D"ltr">=C2=A0 Frediano</div></div></div><br></div></div><br><div cla=
+ss=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Il giorno sab 29 g=
+en 2022 alle ore 05:32 Neal Piche &lt;<a href=3D"mailto:phirestalker@gmail.=
+com" target=3D"_blank">phirestalker@gmail.com</a>&gt; ha scritto:<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div cla=
+ss=3D"gmail_default" style=3D"font-size:large">I am on macOS. Most applicat=
+ions are able to accept changes to the audio device from the system and out=
+put sound to that device.</div><div class=3D"gmail_default" style=3D"font-s=
+ize:large"><br></div><div class=3D"gmail_default" style=3D"font-size:large"=
+>I use QEMU, and if I leave spice extensions disabled, the guest OS is able=
+ to accept changes to the audio device multiple times. When I turn on spice=
+ extensions, QEMU will try to continue outputting sound to the original dev=
+ice. No matter what I change the output device to, it will keep whatever it=
+ had originally. I don&#39;t know if it is QEMU using spice incorrectly, a =
+misconfiguration, or a bug in one of the spice packages.</div><div class=3D=
+"gmail_default" style=3D"font-size:large"><br></div><div class=3D"gmail_def=
+ault" style=3D"font-size:large">Oh, I have tried with a Debian bullseye and=
+ Whonix guest with the same results.</div><div class=3D"gmail_default" styl=
+e=3D"font-size:large"><br></div><div class=3D"gmail_default" style=3D"font-=
+size:large">Has anyone found a workaround? Should I file a bug, and if so w=
+here?</div></div>
+</blockquote></div>
+</blockquote></div>
 
-On Fri, Jan 28, 2022 at 01:48:17PM -0700, Neal Piche wrote:
-> I am on macOS. Most applications are able to accept changes to
-> the audio device from the system and output sound to that
-> device.
->=20
-> I use QEMU, and if I leave spice extensions disabled, the guest
-> OS is able to accept changes to the audio device multiple
-> times. When I turn on spice extensions, QEMU will try to
-> continue outputting sound to the original device. No matter
-> what I change the output device to, it will keep whatever it
-> had originally. I don't know if it is QEMU using spice
-> incorrectly, a misconfiguration, or a bug in one of the spice
-> packages.
-
-I'm not sure I understood either. It is either what Frediano
-asked or you are saying that QEMU is ignoring the preference to
-redirect audio through Spice.
-
-Note that, as far as I know, this kind of setting needs a
-shutdown + start again to the VM, in order to change the audio
-driver.
-
-Either way, it should help if you provide the qemu command line
-(of the setting you think there is a bug) and information on
-which spice client are you using.
-
-> Oh, I have tried with a Debian bullseye and Whonix guest with
-> the same results.
->=20
-> Has anyone found a workaround? Should I file a bug, and if so where?
-
-Cheers,
-Victor
-
---5c7gecsyhwecn6u7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmH1I74ACgkQl9kSPeN6
-SE+bMhAAujBekOz2dGX9wPfHfGGBlt3x8PDrxiiCJBdZ0wy+W2v07xDoFGMbZdUZ
-63FA2LIqI9W7u2VvnyCh+QSTCUT78HzXAl1K7m/MgATrMiLI1ZUSsEGXd1iwjPuh
-SeS1GXqWrTJd2/dLdxnwIfGR+ORmwyEf8nCk7fwd1XF59+Wm/IwYr4QgszW0Xon7
-oH0NSzcTB6dF51/1C6xY9udowwbz+iIyDllOSXYu388jRY6aT/0LhFmwkwaTKUj8
-P00g0kuCAI0N/5DfPNulnGlA9oyrssHTDgLPq0mSS+mHgTq6nJINql9RKWQ7Q6O6
-N/2DGMwHNYXRVZ5z0vaSJkrk0VqqjMi61TE+3G6qZl9ljz6McLz7Kg6A+tnILd05
-HFLj32KIFwssj0d+CjQ5vDx8M4O/PSLjlLUHMfIMgNbN7LZ5JFHGENCZZxcavkmJ
-AW0LPd2e0TZCaWw68ftZ3AdOG0PqCTq9t8QdIZR5cW8mY+FHRipLRhSeuo2mlt4i
-mIYmoX/ULlQaA/H9NZF8+HCPYznNfmvsaMfWeN1TIn7sBeiiYC2JYaLhqAgP6Yuo
-k+kvNgChYxs3ryOVW9Kk1qqux69K/+vOSag/V9GnAJPnyCMTwE/UGONXbISzw1Tr
-QfKHBCMzPklkA87WEy9vulUlXdlQfZ88YiBeYT0EREr///kvWuY=
-=Tfgf
------END PGP SIGNATURE-----
-
---5c7gecsyhwecn6u7--
-
+--0000000000003001a305d6b94694--
