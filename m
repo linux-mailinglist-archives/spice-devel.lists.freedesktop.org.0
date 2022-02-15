@@ -1,59 +1,60 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8221E4A3508
-	for <lists+spice-devel@lfdr.de>; Sun, 30 Jan 2022 09:00:36 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF0714B6E12
+	for <lists+spice-devel@lfdr.de>; Tue, 15 Feb 2022 14:51:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D1D5710F79A;
-	Sun, 30 Jan 2022 08:00:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4890D10E50A;
+	Tue, 15 Feb 2022 13:51:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6932F10F79A
- for <spice-devel@lists.freedesktop.org>; Sun, 30 Jan 2022 08:00:33 +0000 (UTC)
-Received: by mail-pj1-x1029.google.com with SMTP id r59so10681630pjg.4
- for <spice-devel@lists.freedesktop.org>; Sun, 30 Jan 2022 00:00:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:content-transfer-encoding:date:message-id:subject:from
- :to; bh=ioPbgZfBscA4ABEk1HxvqyERnXFi/jm+xgxyx7tLI9E=;
- b=L82ILaA4qFRy2VtnipArfp5nnyD4AE+G94b1wioq77GedvqE4iEtsF9aiI7v6Y+9iS
- hd3UnloqPH9dK6x8cLWg/ICJXGGF+fW1289BJ8CcwliKCqY811v5nNdhir3Se5mjFJcF
- Cwq6cHAlXtT1f3xhZyGcCoSAlwoSQ1Mh6L5cJ5H8rViDbw/GqyBQr/BrOB+ryxs2qfP8
- LT67+ab699AwPUw4ZgakI4KOPC3bPlEjjsk5ss+IoLy8bnv44KLpXwpjMKrZb0LL9Q34
- WYId/g/PMMJoiX8EXEADsqJ41NPe4azWL+eTf6fWjf1UIv+TFS9t5G8INBn8HLtw+aPH
- jSDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:content-transfer-encoding:date
- :message-id:subject:from:to;
- bh=ioPbgZfBscA4ABEk1HxvqyERnXFi/jm+xgxyx7tLI9E=;
- b=MZ4fIE+xQ5WEz3to36i1kJCA57joPxtdJpNurymLaz5s/MOHABZ2+dXR6nH6lgXnfC
- 8Ro5gp0rwUVtRGPGx1011zmfhW0wws8R9vPflxkxPYO1ZzhB62tLtgt3zaOcipmQYnzH
- 6oBWCm/OmM1HARhxW+08m6eVDBaJQwPTQMu4AJjHAW3ONiMTKEBAgbEggOdUvmGS3GN1
- Czgc064586Il99OiixQNLGmjxdR64fLIrvEHqooxJJvB2tDDOTi072bEUZjwn2BvgCIL
- s1szkG4V/WPE4ymFEv4wHwpagy9ZWUsQERkUA3LzrYrEgm6mlu1Um2+6d/WBxQW9Q1mv
- VeuA==
-X-Gm-Message-State: AOAM532NIZxube+XhXjF45AQ9jfscE5jMcUS+hA56tP3HxwGpByo4dDq
- 2jnTLdZOTAfc6ASClYxAPCZVgUuUIJM=
-X-Google-Smtp-Source: ABdhPJz65mhLEdlFl8E47VuFTYiLom+KolQbNRV0Pi6I56Omd+9VEujOLEMyEegeK/prUc0VHd+LDg==
-X-Received: by 2002:a17:902:c7ca:: with SMTP id
- r10mr15807809pla.158.1643529632749; 
- Sun, 30 Jan 2022 00:00:32 -0800 (PST)
-Received: from localhost ([14.192.223.50])
- by smtp.gmail.com with ESMTPSA id c20sm13649090pfn.190.2022.01.30.00.00.31
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 30 Jan 2022 00:00:32 -0800 (PST)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sun, 30 Jan 2022 16:00:30 +0800
-Message-Id: <CHIUMOY81J6O.1W9U2H0PL15XP@MacBook-Air.local>
-From: "kt programs" <ktprograms@gmail.com>
+X-Greylist: delayed 604 seconds by postgrey-1.36 at gabe;
+ Tue, 15 Feb 2022 13:51:53 UTC
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 8A87A10E509
+ for <spice-devel@lists.freedesktop.org>; Tue, 15 Feb 2022 13:51:53 +0000 (UTC)
+IronPort-Data: =?us-ascii?q?A9a23=3AeXRBIa1G9ax6Xp5h1PbD5fdzkn2cJEfYwER7XOP?=
+ =?us-ascii?q?LsXnJ1T1z0TRSnWNLX2yGOv2CMWL2e4xzb4S0pE4OscPXydA2QQE+nZ1PZygU8?=
+ =?us-ascii?q?JKaX7x1DatR0xu6d5SFFAQ+hyknQoGowPscEzmM9n9BDpC79SMmjfvQH+KlYAL?=
+ =?us-ascii?q?5EnsZqTFMGX5JZS1Ly7ZRbr5A2bBVMivV0T/Ai5S31GyNh1aYBlkpB5er83uDi?=
+ =?us-ascii?q?hhdVAQw5TTSbdgT1LPXeuJ84Jg3fcldJFOgKmVY83LTegrN8F251juxExYFAdX?=
+ =?us-ascii?q?jnKv5c1ERX/jZOg3mZnh+AvDk20Yd4HdplPtT2Pk0MC+7jx2NnsJxyddMvJqYR?=
+ =?us-ascii?q?xorP7HXhaIWVBww/yRWZPcfpeGbfSbk2SCU5wicG5f2+N11FEA9MMgU9/h6BUl?=
+ =?us-ascii?q?K9OcEM3YDdB2Oi++tw668Uq9rnMtLESVBFOvzoVk5lXeAU6lgGsuFHs33CRZj9?=
+ =?us-ascii?q?G9Yrqhz8Tz2PaL1sQZSUSk=3D?=
+IronPort-HdrOrdr: =?us-ascii?q?A9a23=3AbJLXGaMK7Ey9ssBcTv2jsMiBIKoaSvp037BL?=
+ =?us-ascii?q?7TEUdfUxSKGlfq+V8sjzqiWftN98YhAdcLO7Scy9qBHnhP1ICOAqVN/MYOCMgh?=
+ =?us-ascii?q?rLEGgN1+vf6gylMyj/28oY7q14bpV5YeeaMXFKyer8/ym0euxN/OW6?=
+X-IronPort-AV: E=Sophos;i="5.88,333,1635177600"; d="scan'208";a="121564463"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+ by heian.cn.fujitsu.com with ESMTP; 15 Feb 2022 21:41:46 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+ by cn.fujitsu.com (Postfix) with ESMTP id 6051D4D15A57
+ for <spice-devel@lists.freedesktop.org>; Tue, 15 Feb 2022 21:41:43 +0800 (CST)
+Received: from G08CNEXJMPEKD02.g08.fujitsu.local (10.167.33.202) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.23; Tue, 15 Feb 2022 21:41:43 +0800
+Received: from G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.80) by
+ G08CNEXJMPEKD02.g08.fujitsu.local (10.167.33.202) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.23; Tue, 15 Feb 2022 21:41:43 +0800
+Received: from [192.168.122.212] (10.167.226.45) by
+ G08CNEXCHPEKD07.g08.fujitsu.local (10.167.33.209) with Microsoft SMTP Server
+ id 15.0.1497.23 via Frontend Transport; Tue, 15 Feb 2022 21:41:43 +0800
 To: <spice-devel@lists.freedesktop.org>
-Subject: [Spice-devel] "Expect: 100-continue" not handled properly in PUT
+From: "Li, Zhijian" <lizhijian@cn.fujitsu.com>
+Message-ID: <676eae2b-bb7c-2e89-6d0d-9a1cbc03ffa8@cn.fujitsu.com>
+Date: Tue, 15 Feb 2022 21:41:42 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset="gbk"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-yoursite-MailScanner-ID: 6051D4D15A57.AA041
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: lizhijian@fujitsu.com
+X-Spam-Status: No
+Subject: [Spice-devel] usbredir doesn't hide/filter specific usb devices
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,94 +69,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi, I'm having a small problem with trying to use curl to upload files
-to a shared folder that uses spice-webdavd. (I'm not mounting the
-webdav, just trying to use curl to upload a single file).
+Hi guys
 
-In libphodav/phodav-method-put.c, lines 77 to 78, if the "Expect" header
-if present, a warning is created, but no special handling is done.
-Instead, "status" is set to either "SOUP_STATUS_CREATED" or
-"SOUP_STATUS_OK".
+I intended to not allow redirecting some of my usb devices(HID) to the guest, i thought https://www.spice-space.org/usbredir.html
+could help on this.
 
-As per the SoupServer documentation, if "status" if set and the "Expect"
-header if present, the status will be returned and no further processing
-will be done:
+My host has below usb devices
 
-> (At this point, if the request headers contain "Expect: 100-continue",
-> and a status code has been set, then SoupServer will skip the
-> remaining steps and return the response. If the request headers
-> contain "Expect: 100-continue" and no status code has been set,
-> SoupServer will return a SOUP_STATUS_CONTINUE status before
-> continuing.)
+lizj@FNSTPC:~/workspace/vgt/virt-viewer/src$ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 006: ID 04d8:0b2a Microchip Technology, Inc.
+Bus 001 Device 021: ID 046d:c534 Logitech, Inc. Unifying Receiver
+Bus 001 Device 004: ID 0424:2137 Standard Microsystems Corp.
+Bus 001 Device 003: ID 0bda:8176 Realtek Semiconductor Corp. RTL8188CUS 
+802.11n WLAN Adapter
+Bus 001 Device 002: ID 0bda:8771 Realtek Semiconductor Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
-This is a problem because "curl --upload-file" will send a "PUT" request
-with a "Expect: 100-continue" header, and instead of phodav sending a
-"100" response and waiting for the body, it sends either "200" or "201".
+$ remote-viewer 
+--spice-usbredir-auto-redirect-filter="-1,0x0bda,-1,-1,0" --spice-debug 
+spice://localhost:5900
 
-Here is the output of "curl -T test.txt http://localhost:9843 -o
-/dev/stdout -vvv", with "spice-webdavd" running on port 9843:
+For testing, i just want to hide produce id 0x0bda from remote-viewer 
+with above command line. But acutally
 
-    *   Trying 127.0.0.1:9843...
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time =
- Current
-                                     Dload  Upload   Total   Spent    Left =
- Speed
-      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:-=
--     0* Connected to localhost (127.0.0.1) port 9843 (#0)
-    > PUT /test.txt HTTP/1.1
-    > Host: localhost:9843
-    > User-Agent: curl/7.81.0
-    > Accept: */*
-    > Content-Length: 14
-    > Expect: 100-continue
-    >=20
-    * Mark bundle as not supporting multiuse
-    < HTTP/1.1 201 Created
-    < Server: PhodavServer libsoup/2.65.1
-    < Date: Wed, 26 Jan 2022 03:10:06 GMT
-    < Content-Length: 0
-    <=20
-      0    14    0     0    0     0      0      0 --:--:-- --:--:-- --:--:-=
--     0
-    * Connection #0 to host localhost left intact
+i am still able to redirec both Realtek device to the guest through 
+remote-viewer.
 
-In contrast, when running the "simple-httpd" file from the libsoup
-examples, with it listening on port "33467", and running "curl -T
-test.txt http://localhost:33467 -o /dev/stdout -vvv", the output is:
+So is there something with my usage ? Feel free to let me know if there 
+is something wrong.
 
-    *   Trying 127.0.0.1:33467...
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time =
- Current
-                                     Dload  Upload   Total   Spent    Left =
- Speed
-      0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:-=
--     0* Connected to localhost (127.0.0.1) port 33467 (#0)
-    > PUT /test.txt HTTP/1.1
-    > Host: localhost:33467
-    > User-Agent: curl/7.81.0
-    > Accept: */*
-    > Content-Length: 14
-    > Expect: 100-continue
-    >=20
-    * Mark bundle as not supporting multiuse
-    < HTTP/1.1 100 Continue
-    < Server: simple-httpd libsoup/3.0.4
-    < Date: Wed, 26 Jan 2022 03:14:19 GMT
-    } [14 bytes data]
-    * We are completely uploaded and fine
-    * Mark bundle as not supporting multiuse
-    < HTTP/1.1 201 Created
-    < Content-Length: 0
-    <=20
-    100    14    0     0  100    14      0  11137 --:--:-- --:--:-- --:--:-=
-- 14000
-    * Connection #0 to host localhost left intact
+Thanks
 
-I have looked at the code, but I'm not sure how it would be possible to
-handle this properly, because handling 100-continue needs a two step
-process, which the current structure doesn't allow easily.
+Zhijian
 
-I'm doing this on an Alpine Linux aarch64 VM
-Versions of packages used:
- - spice-webdavd: 2.5
- - curl 7.81.0
+
+
