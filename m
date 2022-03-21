@@ -1,95 +1,69 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF2224DE73B
-	for <lists+spice-devel@lfdr.de>; Sat, 19 Mar 2022 10:25:56 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B0404E3B58
+	for <lists+spice-devel@lfdr.de>; Tue, 22 Mar 2022 10:01:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 529F210F139;
-	Sat, 19 Mar 2022 09:25:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 339CC10E532;
+	Tue, 22 Mar 2022 09:01:33 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from AUS01-SY4-obe.outbound.protection.outlook.com
- (mail-sy4aus01olkn2185.outbound.protection.outlook.com [40.92.62.185])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1905110E9C5
- for <spice-devel@lists.freedesktop.org>; Fri, 18 Mar 2022 14:40:04 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TduTMgzvHhkjpYB4VkTdSj2NyFNNkYnjLRkC8kXFoJuEy8lVwlx/Rh+L/l/XNBANQXhU8Lv7D2zIwmM4tIlkkk50V8rEIuSTv08GslMzAvcMteMfjyXirrlmWh3pb/AFmzDnFZk6YkH2Z3SM4nhUGBmdR/IXtOmz6m3c3YWtA3Dc7MXHjDZjt0UDsMhAn9KEhUndMcgRffkmSzmx4NflakYmPNWsBfxIrNeD6DXdWNiYJwhXnL19OfnEI8V7gcuNo3ptB796WmVO665cex/qR1ltwueJiBSNMg59lmKW/VksyBssicHsKdbaSQ2alRCP+4NZpol2Il1kqxNYrR/CuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kEl1QOZs9keKLCN/lsxMLZM9DVZCIc3aLZ+s3aHQ/WU=;
- b=Dp1BOvaTlJjr86XATWbZdkX9OWOpZ95gHetToKdeiru2EECc8pdi/vk8hcZdTsVtTqtDFZbP/Pets4KJGYa5fFk8x1TGlGuDiCQc4NRBGJ+zX5KJXd7GE5GpQGFDW2JhqIyVKCdjeb0PD2XQzUFk76f/gewgRBdomOIBjoYgdC3J3Ovrm6cGqNT7g2uYzxbdL9XLj6d5y/xdWXYOm78omHypGZNCX/8u4p/xbWY3vx5nxrM6Nup2cjr4GN+xlGzn7XqcuNTvN+mVUExsICEvO1gRPMEd+B26h3Je4BeXLTej+cYiZpM3n+exzLOF6Y+iL1bHk69cwbbzjyLK/3g6vQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kEl1QOZs9keKLCN/lsxMLZM9DVZCIc3aLZ+s3aHQ/WU=;
- b=WHk/gFkZFtleC4Xm26MfggDsfs1jM9DXRbfDT75q6o55tZwfONiJFLyHQ45rcHDat9UdVDb6gEL12vQ55TxjIBIs6+zKUMgtCus2vRu0sWh9oww9W1a3U4u1OUPCMklLM8QJpUx868oOp5m2Y+cehXuZKP67mbiIrnUwEELNT1ike++saJ1LC+amY8aNp3CkTguURFvyU6ZxtUt2HECxXTo2jt/y8tEF/vGnTKUSqQjt9TQJVtTRpDQj9eaOyt7V9YhXAQe5rGJQwu7QMtx9ADkzHTchH6qjkDnvSw5Oz/y/5ya22dRiIhjt/ILZRTUXeqbit/HVIe2lAhJyndHy6g==
-Received: from MEXPR01MB2197.ausprd01.prod.outlook.com (2603:10c6:200:32::13)
- by MEYPR01MB7072.ausprd01.prod.outlook.com (2603:10c6:220:143::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.14; Fri, 18 Mar
- 2022 14:40:00 +0000
-Received: from MEXPR01MB2197.ausprd01.prod.outlook.com
- ([fe80::fc27:1a4b:a35d:870]) by MEXPR01MB2197.ausprd01.prod.outlook.com
- ([fe80::fc27:1a4b:a35d:870%8]) with mapi id 15.20.5081.018; Fri, 18 Mar 2022
- 14:40:00 +0000
-From: Michael Toulson <jole169@outlook.com>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Thread-Topic: RE:SPICE support
-Thread-Index: AQHYOtYJTIYbDWEfQk+dLgj4q/UXlg==
-Date: Fri, 18 Mar 2022 14:40:00 +0000
-Message-ID: <MEXPR01MB21973E4C450805E44396BBE3EE139@MEXPR01MB2197.ausprd01.prod.outlook.com>
-Accept-Language: en-AU, en-US
-Content-Language: en-AU
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-tmn: [/XkIF2EjDFhqm//FY1uoczn5qkaQksYT1d+DnPiaMzU=]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: a92fd21f-0962-4d6c-2389-08da08ed2e9e
-x-ms-traffictypediagnostic: MEYPR01MB7072:EE_
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: myKrStM4CnXT5eDvRXK+11SuQnlJ5cM/zRCvQfqKv4pZdTIOaYjekWdld3SgR4cqaU8r+pFIHswYxOVNIMpnPBDXklgXqXtUs+EWuBBlJeK1G9q0/+3Tegq/AbXZ8vxlZvCe8I2yBp1d4qNMYb2JsEEuAveZqm0DLLoU4TOBm9vtqvxa97ojYvq6DWUuZXM05dpXdQEXitzWVDIi/7BDsZZLUoybbB2a7rbne0oTy8uhvfmH/dTrC/JIbc8+WjaTBvKrgULOP8oaatEARJGnFdLDaSYuMO/IaAXMWKa4UCMq+jLVeE0y0ruw3nELBRrP44jOY2OmnsIxlfK9km8WI6PfdOXX1uTI26exau3A1YRQCxZELzMMg8mRKjID6UQc3AZTGkuRpbXmtWa/GZY5SN3JjIACPWEHlO+QL24ELELoQaTrY0oecowCfTw7ni8AqW0XnGvbi+FNhtaWafrux1Y+5QkZF6pFO9fh2udozeTj888uq9qENIQwaLBleO74kg1434r5AkCVHOgALxZAoiaH//21wvCmML45H6lKATkusyf9PDuDA1Gc4bderSN/eIdTgrY0nucefYAAWYwe6HC0GnBkwzocdCn8VjCPcwvojbIRXTbw4Elv6StGwWZe
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?RaK7PJHJqNaigHme+z/KxRTD9iUjYoCwc4qnPVLNxS0vnP1T1kDcitft?=
- =?Windows-1252?Q?B0AjOvk1rMwUtqFeW+v1J5w4Qw+MMiOtyWOQLBzAbqdIPPGFKJINpwLa?=
- =?Windows-1252?Q?P1tjccFvOg/eSkRFBkbcclz6tC4irt1+l/BUJqcSRLss7aygAnhH0L1q?=
- =?Windows-1252?Q?6BVWBEWv0FgXtZpogM08zq/UnmBTqL2RpwA+tbvdwS/ZIriQD4vNGswA?=
- =?Windows-1252?Q?aSOmjLXRlzzdCoBbWjugcj0LyHEWJL9/d5epvE2lYbSGO6b6ksR5h+JJ?=
- =?Windows-1252?Q?zo3VH60JTGHiYpq6jE4KeI4fb4B1Ez6axrcqtD+cwWj61jWwXXtO+W0+?=
- =?Windows-1252?Q?xqispXe7ZDp5eETTrCXCRQEF6IbmZaaVcGkD+xAB4XfyQgr8k/VrOSbH?=
- =?Windows-1252?Q?jQl8qDvzDuz/wmRGNs9J1h6QDwfW6jXr/OEHa8CDGpfc7a5OcVZKGkCV?=
- =?Windows-1252?Q?RwVQHL2XoaYOG5YHqPxxWHFm5d0N/cXQl85maOngaiLSueP7gRGfuZNU?=
- =?Windows-1252?Q?8paTtgIwjv3BBGf++CP3Q4YyRuVFI2eZ1fM7Qr5o9LtEZJW1kafoZ+E+?=
- =?Windows-1252?Q?AGr+89vEagQU2DfiAag6qpkHA3y71pR5dGig9IFcv19YLQoD4tAHJ7Ie?=
- =?Windows-1252?Q?JR4jyYlXpuQofDYQTyd7B5g4aLPZlLZk8RMk340RKItP2WyI0OXrQmLK?=
- =?Windows-1252?Q?MjIls7k+Ne+IXj7FwSSe1UCSTFWBgoTV/fHiHa+87yU3gvkUxU5/Mjvc?=
- =?Windows-1252?Q?WMNooB8bCzNpjPv83FVheW77rKkQNji0lY/xyICE5hX218fjiLa53JMG?=
- =?Windows-1252?Q?52nEi3Gkqr98nqO68o34fCZVhXatzgAmaRBgOYyS9M5RAlou5CIeOeei?=
- =?Windows-1252?Q?JxHQxvJSya/8YI+qhVPCishSNx9CqpD00fN7rT3TzRghJphRaUXXsVHk?=
- =?Windows-1252?Q?9zJSArp32E9CZWr1J584rc47msHCxmAjaG215kUaYtJ4R5JtzhuU6JmW?=
- =?Windows-1252?Q?J9xukqJ1OglahLMxlb5+gmMCTwbtqbS9VjTVAH77e2BEeDQXSHf4pd6c?=
- =?Windows-1252?Q?RofI834aVUDFnpf8vr8QDgs6K3Xj04DMdPT5cCEXt1hbY8gzSRjwn+ce?=
- =?Windows-1252?Q?+kn83RqdETngjvaDPYHq/Q21GYONdR4yXTs466DL4xqbyxhC0R3P5/iu?=
- =?Windows-1252?Q?mySGrcKGOJeZo3BFOApdDKNu4riOzBs+HlBRHHYFbj96/cLwyYlHDlUR?=
- =?Windows-1252?Q?S7wG8GsQWdXC8vs65fs=3D?=
-Content-Type: multipart/related;
- boundary="_004_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_";
- type="multipart/alternative"
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DF6AA10E0CE
+ for <spice-devel@lists.freedesktop.org>; Mon, 21 Mar 2022 16:41:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1647880884;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=RpbWAGWi2LB8NSYTzrqz6I7UIAhZowbHgoEYDumMANY=;
+ b=ZpOWKUXdO6EJwDLSoZ6DWzbfx58mtFsI4rpTbBFV98fcU28u6YR2kRXpml0xaFWEDskgoP
+ IEuhvBPW6AczcOhftjAAe0ezU19E0MBGeyd0pDOd9zbRBk7SSzweJmW/tWN8refX2EH/2k
+ f8WMngOOb9/2InhE/Ly6fYQ4BLBPoSE=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-633-a4EFu0mHPL6RMe3bwUC5GA-1; Mon, 21 Mar 2022 12:41:22 -0400
+X-MC-Unique: a4EFu0mHPL6RMe3bwUC5GA-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ o16-20020ac24c50000000b004484c4815e3so3831168lfk.9
+ for <spice-devel@lists.freedesktop.org>; Mon, 21 Mar 2022 09:41:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Awr8P5OIqxSRK9YmrAMsz3fhcb2SU2tW0vxsUveBP7o=;
+ b=WZejmrGAy4T5TUlrlbfXR5bLCQEaZ98ZPw4nmOMh6Melt3VSKuH76AtO4VLZGc8qXI
+ ZSBt7MeWv6bIbkpaIftQoZrn1V9/iXo98ctFRXcUrARZxmE88YA37+5wiJ/T5inKYI2c
+ tYxW0krqy2g13j3Axk/wVZEuTJQoKRBwLIIWMhF4Vu5EXLr58uH84/sC8hZV3Vt6SrPa
+ glKhZaYXfw+P2k2vpW3ZIe74+K5AYBHal8awrX5RkGzpo57+rMREZ2qOhlrGZIGp5Kob
+ LBZpj7sBJBKfj/+YVq1+KAEbx5Q8b9gbRbxBKLUyn/DXYMV3l4bxBbak1U8Ud7snrSQd
+ xz6A==
+X-Gm-Message-State: AOAM530/GcIu4QtcGTgX7/0rF9xZMgaT+t0VGbbGfq0F4lVADe6741bF
+ UcrSUmGAwGVI14NJYBZIwqx2gC1cV8n4LI2kjlzKliGvzBPYPHQjCZ6UHEM4KIznuoOctN6MU7Z
+ D/lsLzQ5KEVj/fxDJ93Xe/RlUC3r2GSt7QkTNql1jCvy3nBE=
+X-Received: by 2002:a05:6512:31c1:b0:448:36de:d2f1 with SMTP id
+ j1-20020a05651231c100b0044836ded2f1mr15016318lfe.549.1647880880100; 
+ Mon, 21 Mar 2022 09:41:20 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwErZJUJQ17aQv+tNEdA2MN6JA8MOqnJD/abf2FZulx/bycc7l6+3u/R3wnjAQSsdRtO4w/8iREcyuav/JS2ZE=
+X-Received: by 2002:a05:6512:31c1:b0:448:36de:d2f1 with SMTP id
+ j1-20020a05651231c100b0044836ded2f1mr15016286lfe.549.1647880879351; Mon, 21
+ Mar 2022 09:41:19 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MEXPR01MB2197.ausprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: a92fd21f-0962-4d6c-2389-08da08ed2e9e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Mar 2022 14:40:00.7796 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MEYPR01MB7072
-X-Mailman-Approved-At: Sat, 19 Mar 2022 09:25:54 +0000
+References: <MEXPR01MB21973E4C450805E44396BBE3EE139@MEXPR01MB2197.ausprd01.prod.outlook.com>
+In-Reply-To: <MEXPR01MB21973E4C450805E44396BBE3EE139@MEXPR01MB2197.ausprd01.prod.outlook.com>
+From: Uri Lublin <ulublin@redhat.com>
+Date: Mon, 21 Mar 2022 18:41:08 +0200
+Message-ID: <CAAg9qJ0QUsn1kPb8F8Gz5rFQJ9jNH4NMk9Gu=iJRyqn33sZpQA@mail.gmail.com>
+To: Michael Toulson <jole169@outlook.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ulublin@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/related; boundary="000000000000748b9c05dabd2aee"
+X-Mailman-Approved-At: Tue, 22 Mar 2022 09:01:32 +0000
 Subject: Re: [Spice-devel] SPICE support
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -102,96 +76,93 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---_004_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_
-Content-Type: multipart/alternative;
-	boundary="_000_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_"
+--000000000000748b9c05dabd2aee
+Content-Type: multipart/alternative; boundary="000000000000748b9a05dabd2aed"
 
---_000_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_
-Content-Type: text/plain; charset="Windows-1252"
+--000000000000748b9a05dabd2aed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello Spice team
+Hi Michael,
 
-I been trying to work out what I=92m missing
-I have Spice running fine for some time on my main windows pc
-after some time it start having problem
-I did a clean install of windows 10
-I have been trying to trouble shot this for the pass week
-as I have backup and restored backup
-I run a windows 10 VM within Proxmox witch is fine
-but when I try and open the console it download a file when it should of ha=
-d a pop up to open console
+On Sat, Mar 19, 2022 at 11:26 AM Michael Toulson <jole169@outlook.com>
+wrote:
 
-could you help me as well show me what I should be downloading to get this =
-running i=92m so lost at this point on my knows that I did get it running l=
-ast time I had the following
+> Hello Spice team
+>
+> I been trying to work out what I=E2=80=99m missing
+> I have Spice running fine for some time on my main windows pc
+> after some time it start having problem
+> I did a clean install of windows 10
+> I have been trying to trouble shot this for the pass week
+> as I have backup and restored backup
+> I run a windows 10 VM within Proxmox witch is fine
+> but when I try and open the console it download a file when it should of
+> had a pop up to open console
+>
 
-[cid:image003.png@01D8370E.E54B8070]
+It seems you are missing a vv-file mime type binding (and possibly
+virt-viewer itself).
+On what OS does your remote-viewer run (aka, the client machine)?
+Try to re/install virt-viewer (uninstall if it's already installed).
+
+Also, you can try the following and see if it works:
+- Download the vv file
+- Run remote-viewer <downloaded-vv-file>
+
+Hope that helps,
+    Uri.
 
 
-please help me I tried the IRC with is new for me I have no idea what I was=
- doing i=92m also on Discord @ EQUALITY_CG#2842
-I really enjoy SPICE when it was working because of the speed was so fast t=
-hen VNC but not sure what to do now as I installed the win x86 as well and =
-did not work on the clean install of windows
-
-
-
-Sent from Mail<https://go.microsoft.com/fwlink/?LinkId=3D550986> for Window=
+> could you help me as well show me what I should be downloading to get thi=
 s
+> running i=E2=80=99m so lost at this point on my knows that I did get it r=
+unning
+> last time I had the following
+>
+>
+>
+>
+> please help me I tried the IRC with is new for me I have no idea what I
+> was doing i=E2=80=99m also on Discord @ EQUALITY_CG#2842
+> I really enjoy SPICE when it was working because of the speed was so fast
+> then VNC but not sure what to do now as I installed the win x86 as well a=
+nd
+> did not work on the clean install of windows
+>
+>
+>
+>
+>
+> Sent from Mail <https://go.microsoft.com/fwlink/?LinkId=3D550986> for
+> Windows
+>
+>
+>
 
-
---_000_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_
-Content-Type: text/html; charset="Windows-1252"
+--000000000000748b9a05dabd2aed
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
-252">
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
-o\:* {behavior:url(#default#VML);}
-w\:* {behavior:url(#default#VML);}
-.shape {behavior:url(#default#VML);}
-</style><![endif]--><style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:blue;
-	text-decoration:underline;}
-.MsoChpDefault
-	{mso-style-type:export-only;}
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style>
-</head>
-<body lang=3D"EN-AU" link=3D"blue" vlink=3D"#954F72" style=3D"word-wrap:bre=
-ak-word">
-<div class=3D"WordSection1">
+<div dir=3D"ltr"><div>Hi Michael,<br></div><br><div class=3D"gmail_quote"><=
+div dir=3D"ltr" class=3D"gmail_attr">On Sat, Mar 19, 2022 at 11:26 AM Micha=
+el Toulson &lt;<a href=3D"mailto:jole169@outlook.com">jole169@outlook.com</=
+a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+
+
+
+
+
+<div style=3D"overflow-wrap: break-word;" lang=3D"EN-AU">
+<div class=3D"gmail-m_6705265717342499382WordSection1">
 <p class=3D"MsoNormal">Hello Spice team<br>
 <br>
-I been trying to work out what I=92m missing<br>
+I been trying to work out what I=E2=80=99m missing<br>
 I have Spice running fine for some time on my main windows pc <br>
 after some time it start having problem<br>
 I did a clean install of windows 10<br>
@@ -199,44 +170,55 @@ I have been trying to trouble shot this for the pass week<br>
 as I have backup and restored backup<br>
 I run a windows 10 VM within Proxmox witch is fine <br>
 but when I try and open the console it download a file when it should of ha=
-d a pop up to open console<br>
+d a pop up to open console<br></p></div></div></blockquote><div><br></div><=
+div>It seems you are missing a vv-file mime type binding (and possibly virt=
+-viewer itself).</div><div>On what OS does your remote-viewer run (aka, the=
+ client machine)?</div><div>Try to re/install virt-viewer (uninstall if it&=
+#39;s already installed).</div><div><br></div><div>Also, you can try the fo=
+llowing and see if it works:</div><div>- Download the vv file</div><div>- R=
+un remote-viewer &lt;downloaded-vv-file&gt;<br></div><div><br></div><div>Ho=
+pe that helps,</div><div>=C2=A0=C2=A0=C2=A0 Uri.</div><div><br></div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex"><div style=3D"overflow-wrap: br=
+eak-word;" lang=3D"EN-AU"><div class=3D"gmail-m_6705265717342499382WordSect=
+ion1"><p class=3D"MsoNormal">
 <br>
 could you help me as well show me what I should be downloading to get this =
-running i=92m so lost at this point on my knows that I did get it running l=
-ast time I had the following<br>
+running i=E2=80=99m so lost at this point on my knows that I did get it run=
+ning last time I had the following<br>
 <br>
-<img width=3D"1199" height=3D"368" style=3D"width:12.4895in;height:3.8333in=
-" id=3D"Picture_x0020_3" src=3D"cid:image003.png@01D8370E.E54B8070">
+<img style=3D"width: 12.4895in; height: 3.8333in;" id=3D"gmail-m_6705265717=
+342499382Picture_x0020_3" src=3D"cid:17fad538a4dd5aef1b81" width=3D"1199" h=
+eight=3D"368">
 <br>
 <br>
 <br>
 please help me I tried the IRC with is new for me I have no idea what I was=
- doing i=92m also on Discord @ EQUALITY_CG#2842<br>
+ doing i=E2=80=99m also on Discord @ EQUALITY_CG#2842<br>
 I really enjoy SPICE when it was working because of the speed was so fast t=
 hen VNC but not sure what to do now as I installed the win x86 as well and =
 did not work on the clean install of windows</p>
 <p class=3D"MsoNormal"><br>
 <br>
 </p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
 <p class=3D"MsoNormal">Sent from <a href=3D"https://go.microsoft.com/fwlink=
-/?LinkId=3D550986">
+/?LinkId=3D550986" target=3D"_blank">
 Mail</a> for Windows</p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
 </div>
-</body>
-</html>
+</div>
 
---_000_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_--
+</blockquote></div></div>
 
---_004_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_
+--000000000000748b9a05dabd2aed--
+
+--000000000000748b9c05dabd2aee
 Content-Type: image/png; name="D828DDAB8AAF406C9477CE609D7BDEDA.png"
-Content-Description: D828DDAB8AAF406C9477CE609D7BDEDA.png
-Content-Disposition: inline; filename="D828DDAB8AAF406C9477CE609D7BDEDA.png";
-	size=52244; creation-date="Fri, 18 Mar 2022 14:39:57 GMT";
-	modification-date="Fri, 18 Mar 2022 14:39:57 GMT"
-Content-ID: <image003.png@01D8370E.E54B8070>
+Content-Disposition: inline; filename="D828DDAB8AAF406C9477CE609D7BDEDA.png"
 Content-Transfer-Encoding: base64
+Content-ID: <17fad538a4dd5aef1b81>
+X-Attachment-Id: 17fad538a4dd5aef1b81
 
 iVBORw0KGgoAAAANSUhEUgAABK8AAAFwCAYAAAB+VFi5AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
 jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAMupSURBVHhe7L0FeF1ndq+f/217e3tvL0xvb9vp
@@ -1155,5 +1137,5 @@ vGpoWGh4JUmSJEmSpGZXN7xatKjB8EqSJEmSJEnNrm54tXjxIsMrSZIkSZIkNbu64dX7S5caXkmS
 JEmSJKnZbSG8WpLWrFkTD0iSJEmSJEnNZf369fFzp5122hRerVi+LH28alVau3ZtWrdunZubm5ub
 m5ubm5ubm5ubm5ub2zbf6AyMfKryc8cdd9wUXv3whz9MbDvssIObm5ubm5ubm5ubm5ubm5ubm1uz
 bz/4wQ+q4dV/pf8F3EQM1w9azagAAAAASUVORK5CYII=
+--000000000000748b9c05dabd2aee--
 
---_004_MEXPR01MB21973E4C450805E44396BBE3EE139MEXPR01MB2197ausp_--
