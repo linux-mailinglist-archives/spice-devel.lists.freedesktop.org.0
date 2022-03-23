@@ -2,44 +2,119 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A6564E4C4B
-	for <lists+spice-devel@lfdr.de>; Wed, 23 Mar 2022 06:32:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B3384E4E47
+	for <lists+spice-devel@lfdr.de>; Wed, 23 Mar 2022 09:32:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C4CC810E5F2;
-	Wed, 23 Mar 2022 05:32:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 90BC910E647;
+	Wed, 23 Mar 2022 08:31:58 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from nksmu.kylinos.cn (mailgw.kylinos.cn [123.150.8.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0F49A10E132;
- Wed, 23 Mar 2022 01:40:54 +0000 (UTC)
-X-UUID: 960d29f9923b4af39f5484ce89d4bd1e-20220322
-X-Spam-Fingerprint: 0
-X-GW-Reason: 11101
-X-Policy-Incident: 5pS25Lu25Lq66LaF6L+HNeS6uumcgOimgeWuoeaguA==
-X-Content-Feature: ica/max.line-size 90 audit/email.address 1 meta/cnt.alert 1
-X-UUID: 960d29f9923b4af39f5484ce89d4bd1e-20220322
-Received: from cs2c.com.cn [(172.17.111.24)] by nksmu.kylinos.cn
- (envelope-from <liucong2@kylinos.cn>) (Generic MTA)
- with ESMTP id 1249335721; Tue, 22 Mar 2022 17:35:30 +0800
-X-ns-mid: postfix-6239988C-8900507457
-Received: from localhost.localdomain (unknown [172.20.12.219])
- by cs2c.com.cn (NSMail) with ESMTPA id 9DE5B383C640;
- Tue, 22 Mar 2022 09:36:12 +0000 (UTC)
-From: Cong Liu <liucong2@kylinos.cn>
-To: airlied@redhat.com, kraxel@redhat.com, airlied@linux.ie, daniel@ffwll.ch,
- christian.koenig@amd.com, ray.huang@amd.com,
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2082.outbound.protection.outlook.com [40.107.93.82])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C08D210E071;
+ Wed, 23 Mar 2022 07:15:41 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BdGA6WWX9o7vt3d3Uc+F3K3nKueYb8nFFcO9VQ51xB1n5ldQ+1zCftCUkeKT8uZbZiBv4hTmu9xz8tgzU9H/1Lpl9H16zdooXLcxo0baPpQ17c21wY6HY7JsIYUZQLg77u6hbpzMs+96wp9peE/YpezXP4G6YplLvimjNBxdvztpdpX1DNFT3II1esA3+tKr5VtpPfGjjaB4TzXsppJx2QABIjbmix/gpcAyev69FMC1gOy1HxaX3EFBhH0BSZVvQoA1dkNw1N8BSnt0jWlZrpRXL+hBA7UxAOvpFzeA6EoJfPvnF4l2rc10NPIHSunqyaC1PsKKyug8rwXHF25R3w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=t3yMgg/1dlk+WpXuOXBKTBfWOKCuVOFBUMXy4Pl5r+Y=;
+ b=To0aBMVZpqV89SK4462I2ACvPLggNlujTtrPTvsJHoliRVp466QsF+57/O5jjRAJGp3WeOTiX8vRg7yGrJWNTyQQg/JHOBNOLMFMp73rVVqxOBcPK0eMXSr4Y9HmLgbZSL/0QkkOs50knZ5ZvFfQIp4IC9Ald77Ug87AC772L5QnfWs4tAdPqpcYCdfrixt8B/HWJx9XJzn7ZEivMTHqxecXQaxwt/Ze4qsfqfGn2fiRkk5m1XosKwGI/Js6pao8zdknVSG42TYGeyJlduP3nXOQ3oWLR6k0c/LK822NU3sF1Hru5XKlMIdWjxDmam5G1P2XVW3mNfCEf6gWPqDHlg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t3yMgg/1dlk+WpXuOXBKTBfWOKCuVOFBUMXy4Pl5r+Y=;
+ b=nsO45w2ebXQhp/h5ScP2dKtVOm+syTVANoJgrj2oJWW2jVqLIBub+7Q35TnAtL1Sx9E+HbZ/ausLdg3NcqNiBu/1ZwMBh+zP/S1tHehnRi/FHB7xbHUWL5JxDfG4QOTLZncQjLvDU6OedMvqb4uIoDaF445fknxDGKTTGYQx8NQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by MN2PR12MB4517.namprd12.prod.outlook.com (2603:10b6:208:267::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.15; Wed, 23 Mar
+ 2022 07:15:39 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::404f:1fc8:9f4c:f185]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::404f:1fc8:9f4c:f185%6]) with mapi id 15.20.5081.024; Wed, 23 Mar 2022
+ 07:15:34 +0000
+Message-ID: <e2bc20e4-41e1-7162-257c-f2ad3309f1cb@amd.com>
+Date: Wed, 23 Mar 2022 08:15:10 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-US
+To: Cong Liu <liucong2@kylinos.cn>, airlied@redhat.com, kraxel@redhat.com,
+ airlied@linux.ie, daniel@ffwll.ch, ray.huang@amd.com,
  virtualization@lists.linux-foundation.org,
  spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Date: Tue, 22 Mar 2022 17:34:44 +0800
-Message-Id: <20220322093444.1236582-2-liucong2@kylinos.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220322093444.1236582-1-liucong2@kylinos.cn>
 References: <20220322093444.1236582-1-liucong2@kylinos.cn>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20220322093444.1236582-1-liucong2@kylinos.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM5PR0202CA0005.eurprd02.prod.outlook.com
+ (2603:10a6:203:69::15) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 23 Mar 2022 05:32:16 +0000
-Subject: [Spice-devel] [PATCH v1 2/2] drm/ttm: enable ioremap buffer
- according to TTM mem caching setting for arm64
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 635901c9-9a00-43be-c974-08da0c9ce246
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4517:EE_
+X-Microsoft-Antispam-PRVS: <MN2PR12MB45174B1FCEF1D7FB9F1C7B0583189@MN2PR12MB4517.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: dAUl8rVvS6H3a/J4fPJycCepbASDO4vOSc1ddtAS32iCoRI6g6duFuUultwM2U5mUb/PI4tjy4O2HkwcaoDF8i+qUxxoDfjzXflPNsNpTO8lCthO4vDo9u7BT2a9mm7ntZrLTCMeXAJps5ykrOi6aMWBRNZF/B1Wp4BADSS2wExpjX/xp/sTpoZNidaDTHvpQgW6/qaiRk6owo0SMmw7QbisPIGF1lpLEy5z5Oa6hTMX147dSo+t5oMGN6erYtxfpXoi/ngSliWl3ugaqLJF/wjDrBf9Ots9NU3VbYsE7gAIyLVTLQLxqGRS9BNtntrh4WLroAZ62AmaNGPH/xaaFPL01QevuimHY+1iU9KSMu4U6HZKyUr1usC9n2WKybeBHl10l4RbvgO/wE1DwG5wvPLyMmLUh/TpJNZSu+YXcs4ck5aT7qBWvPiNogKlEEV7XA851ZgnEU3GgqWRFq91YZO0Fvk/yPdoYyl9ft7g8BIbcncFs9nKgQH5D2gVOSzM+hfMJyrCmoM6/Rqjn7NsmlCAf1wMOWURWvsVFCkxke2w0Ww+0hqnqFTFZqoRMx96Yrhl+RJfbV4mdfAIKBHTo88BZRBwP+BYmSRKJA8d9QoaMb6PTOkfUSd4E77inz6oG2iUseWbO8SiuMlhN/76r9KtUDYa+PAvqxvLbU5nNrDzRrm4br5XUkzCQGWFEosq5bTW1VAaWvzwrkcG0jEoumsgfRsWm6+QVo0JEUYLACs=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(4636009)(366004)(83380400001)(38100700002)(316002)(26005)(186003)(8676002)(66476007)(66556008)(6666004)(66946007)(86362001)(31696002)(508600001)(2616005)(6512007)(5660300002)(6486002)(6506007)(8936002)(36756003)(2906002)(31686004)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bWN5MGoyRWVjUzEvcEdQTFBrUnFGYW4raTdzbmJ5d2tvZ3J2WU1xYjNuOExB?=
+ =?utf-8?B?VVkvUWdmSlZoVFlmaW4wdVZWOHZmMlBLazhaemM2engrNXpGNE91OEpIdFJE?=
+ =?utf-8?B?MGpUdzRiQUpJSHRiMHhyTUFXUmZpN1p2NjJXQ0lTcERMc3NrQ05Ra0EyK0Ru?=
+ =?utf-8?B?ME1lOTVCUUc4QjY4dThYNGM0cG1SK0lyK3MxQTZlL3lEc0lLOUNBcHIwWElh?=
+ =?utf-8?B?Q0ZTVUZ6a3FlbU5OSVJaNXpkcGtrWDIrVEtlMncwMzZXUEEzekJ0QjU0MDZt?=
+ =?utf-8?B?WHI0QWZ3QWFiemUzallhOWhoSnFQanRKTTFEQkFrc2c4R1AwbVdrWkxUUlgr?=
+ =?utf-8?B?dnZWRWYzUzd0dWRURXlVNkN2anZ0cjYrUTdqWUdNMUl3dU1vODVQbHNqQ2tn?=
+ =?utf-8?B?MFFGbzVNWVhSdjFBQVNxUVRWZnVyUm1XZ2M0YTBzRDN6RVpiKzRwemZUUDJ6?=
+ =?utf-8?B?MGZTWjYxRFZXT1BKTG1PcElkVEVqQkpSUUMyWFRUOGxoeUpNL1ZhWDJTd2Fs?=
+ =?utf-8?B?eTVLOTV6WmVTZmx0NXpSU3NwU0x4ZUpHUVRMVUF3VU4wZmRKTG85UVZIaVBa?=
+ =?utf-8?B?N0dFRHVOUno2SFZramhVbTU3Y0xiZ0dQQWFKbUcwdVoxRldTR0hGamZzUnVx?=
+ =?utf-8?B?MGhHOGdvR3pGaEM3bkMwNWdQV2w4WDJBV2dCSWtYb0J1NVVDM3hYNUlsLytE?=
+ =?utf-8?B?UGIrd1NzNXRvSVd6UlQ5eGd5Z2M5L0ZFRlhaTHhMRTJBRldiNkh6dlZnY0Q4?=
+ =?utf-8?B?RUhWYkZ3cVJMS0FHTGtFSkVlQTRGSDZGVVZwSnd6MDV6RWd3WWtHUlpOUThW?=
+ =?utf-8?B?djhsNkhLSWpsWjJLUnZJMGxDd1lYcmVyWmlqdzR3M2dBVDdBdUp6eWRKSmlr?=
+ =?utf-8?B?WDdLRFRoekxVZm4ydXpjNlBHYU9pWHQ2MEdTL0ExQndqV20rT2taZUo4elJ1?=
+ =?utf-8?B?d0NtMHBZR1I1Q1JpNzZFcVZzK1hwY25MbGpMMG5NSEc4T2hjSVo2Z0toaWNa?=
+ =?utf-8?B?MVlVNWtXU0paZFI5VmdXbmpkRVIwRXI3Wk5MR0VPbWdjM0RDckh3UHYxWjhX?=
+ =?utf-8?B?K3dYaEpHbkdQZC9OMkZNSkR5ZTN3VEtmeUUyelVzc3YxR05JbmIwU00vcHh1?=
+ =?utf-8?B?eFMwd1dHaXBETHY5WDIrMXAzMy80T0VXaHRHUlAxVGFGcWJCdVlrNWFveU9x?=
+ =?utf-8?B?UTRFNlFjN3NPd3ZTRE9aV1p3NDZJdE9sWURWRHNYcFFleWZPUlJrVkh0VlZX?=
+ =?utf-8?B?bTl0SGhYQXFyV29UOTJYcm95ZTBGR29Gckp3U09rck43c25VanBUUGtwQlRC?=
+ =?utf-8?B?L3g0VVJzR1R2RmR5eTRkblloM3grQXYxVEo4NDJySEhac1AxcXBqOFBhUVFF?=
+ =?utf-8?B?aE5CeDJCR1RLcFFiclh3RjVhcXZnMk9LeW52VVZMZC9DVnR4TUVkcmFUNGxU?=
+ =?utf-8?B?cFdmOGxUS3VCNENZT3dXb0FtVmJZSlJ6aFdSRFM2aHBQd1hCVnRva0kzeERQ?=
+ =?utf-8?B?cmZ5MWI3dlUrTk4yTTEwQ0VtT2FWVVYvSlpvRDdWU2cwd1JVY2N3WmNvNHhx?=
+ =?utf-8?B?MDgxWDZuMjZSTlNMWStxQ0V4T25PcVB6RC9qZi9CNmNyUDByek01NngrdHIx?=
+ =?utf-8?B?cmx5YS9hK01VUUNiSnVOcjVxZjh3UDU2TTlzL2l1TzFKOWdUbGF6dkZ0ZU1R?=
+ =?utf-8?B?eW1QYlJWUlRIZDJaU2ZPTVl0ZEhVT0hFYjkvYnJnNWlJVjJQVTdSQk5iYW1w?=
+ =?utf-8?B?UFJGaTFxOExCNEpkWFBXdXpud0ZVdVdxZ001c0p0dEhuYmNlOHY3TnN6allO?=
+ =?utf-8?B?VnJ6c004ck9UcEljZHlwbE5mU3hBZ1NtNG1LQVhoMnRLUUlpcllSbHM2djhh?=
+ =?utf-8?B?VzhHRHkxSEFDQ3pyUXRzMDdkdjRnMnh0ckkxMzd4REYwYUI4c0t4d3NzazlL?=
+ =?utf-8?Q?M4pSjFI0NLppeim/jN0Vjv/2FpGmbHy9?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 635901c9-9a00-43be-c974-08da0c9ce246
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2022 07:15:33.7212 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WnNpwi32qEZnllr5QmuCac2aIzHQSK4NPLUFpUuY3ZqdX86tIjQQ39CFNdzNukoo
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4517
+X-Mailman-Approved-At: Wed, 23 Mar 2022 08:31:56 +0000
+Subject: Re: [Spice-devel] [PATCH v1 1/2] drm/qxl: replace ioremap by
+ ioremap_cache on arm64
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,86 +126,102 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Cong Liu <liucong2@kylinos.cn>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Arm64 also need the function in commit b849bec29a99 ("drm/ttm:
-ioremap buffer according to TTM mem caching setting"), so enable
-it. The following Call Trace captured in arm64 with qxl card.
+Am 22.03.22 um 10:34 schrieb Cong Liu:
+> qxl use ioremap to map ram_header and rom, in the arm64 implementation,
+> the device is mapped as DEVICE_nGnRE, it can not support unaligned
+> access.
 
-[    5.609923] Hardware name: QEMU KVM Virtual Machine, BIOS 0.0.0 02/06/2015
-[    5.610592] pstate: 00400005 (nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-[    5.611271] pc : __memset+0x90/0x188
-[    5.611641] lr : qxl_create_monitors_object+0xe0/0x180 [qxl]
-[    5.612208] sp : ffff800012cd37a0
-[    5.612533] x29: ffff800012cd37a0 x28: 0000000000000000 x27: 0000000000000001
-[    5.613228] x26: ffff800012cd3d30 x25: ffffb70116ef5f10 x24: ffffb70116ef5ed8
-[    5.613953] x23: ffffb70116ef5000 x22: 0000000000000000 x21: ffff000300020000
-[    5.614645] x20: ffff0003008e4000 x19: 0000000000000074 x18: 0000000000000014
-[    5.615331] x17: 0000000038ca76f1 x16: ffffb70138fd0600 x15: ffffb7013b1a9950
-[    5.616018] x14: ffff800010000000 x13: ffffb7013a8a2d78 x12: ffffb7013a8a2d78
-[    5.616709] x11: ffffb7013a8aa767 x10: 0000000000000000 x9 : ffffb701398fc5bc
-[    5.617409] x8 : ffff8000100ad074 x7 : 0000000000000000 x6 : 0000000000000002
-[    5.618206] x5 : ffff0003008e50b0 x4 : 0000000000000000 x3 : 0000000000000030
-[    5.618933] x2 : 0000000000000004 x1 : 0000000000000000 x0 : ffff8000100ad000
-[    5.619624] Call trace:
-[    5.619872]  __memset+0x90/0x188
-[    5.620188]  qxl_modeset_init+0x4c/0x320 [qxl]
-[    5.620627]  qxl_pci_probe+0x11c/0x1d0 [qxl]
-[    5.621029]  local_pci_probe+0x48/0xb8
-[    5.621390]  pci_device_probe+0x194/0x208
-[    5.621762]  really_probe+0xd0/0x458
-[    5.622122]  __driver_probe_device+0x124/0x1c0
-[    5.622534]  driver_probe_device+0x48/0x130
-[    5.622923]  __driver_attach+0xc4/0x1a8
-[    5.623280]  bus_for_each_dev+0x78/0xd0
-[    5.623636]  driver_attach+0x2c/0x38
-[    5.623969]  bus_add_driver+0x154/0x248
-[    5.624324]  driver_register+0x6c/0x128
-[    5.624678]  __pci_register_driver+0x4c/0x58
-[    5.625072]  qxl_init+0x48/0x1000 [qxl]
-[    5.625439]  do_one_initcall+0x50/0x240
-[    5.625825]  do_init_module+0x60/0x238
-[    5.626189]  load_module+0x2458/0x2900
-[    5.626543]  __do_sys_finit_module+0xbc/0x128
-[    5.626952]  __arm64_sys_finit_module+0x28/0x38
-[    5.627384]  invoke_syscall+0x74/0xf0
-[    5.627732]  el0_svc_common.constprop.0+0x58/0x1a8
-[    5.628190]  do_el0_svc+0x2c/0x90
-[    5.628503]  el0_svc+0x40/0x190
-[    5.628811]  el0t_64_sync_handler+0xb0/0xb8
-[    5.629206]  el0t_64_sync+0x1a4/0x1a8
-[    5.629552] Code: a8811d07 f2400c42 b4000062 8b020108 (a93f1d07)
-[    5.630152] ---[ end trace 35a380fcdcd5b8f7 ]---
+Well that some ARM boards doesn't allow unaligned access to MMIO space 
+is a well known bug of those ARM boards.
 
-Signed-off-by: Cong Liu <liucong2@kylinos.cn>
----
- drivers/gpu/drm/ttm/ttm_bo_util.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+So as far as I know this is a hardware bug you are trying to workaround 
+here and I'm not 100% sure that this is correct.
 
-diff --git a/drivers/gpu/drm/ttm/ttm_bo_util.c b/drivers/gpu/drm/ttm/ttm_bo_util.c
-index 72a94301bc95..3df96e76c424 100644
---- a/drivers/gpu/drm/ttm/ttm_bo_util.c
-+++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
-@@ -281,7 +281,7 @@ static int ttm_bo_ioremap(struct ttm_buffer_object *bo,
- 		map->bo_kmap_type = ttm_bo_map_iomap;
- 		if (mem->bus.caching == ttm_write_combined)
- 			map->virtual = ioremap_wc(res, size);
--#ifdef CONFIG_X86
-+#if (defined CONFIG_X86) || (defined CONFIG_ARM64)
- 		else if (mem->bus.caching == ttm_cached)
- 			map->virtual = ioremap_cache(res, size);
- #endif
-@@ -402,7 +402,7 @@ int ttm_bo_vmap(struct ttm_buffer_object *bo, struct dma_buf_map *map)
- 		else if (mem->bus.caching == ttm_write_combined)
- 			vaddr_iomem = ioremap_wc(mem->bus.offset,
- 						 bo->base.size);
--#ifdef CONFIG_X86
-+#if (defined CONFIG_X86) || (defined CONFIG_ARM64)
- 		else if (mem->bus.caching == ttm_cached)
- 			vaddr_iomem = ioremap_cache(mem->bus.offset,
- 						  bo->base.size);
--- 
-2.25.1
+Christian.
+
+>
+>    6.620515] pc : setup_hw_slot+0x24/0x60 [qxl]
+> [    6.620961] lr : setup_slot+0x34/0xf0 [qxl]
+> [    6.621376] sp : ffff800012b73760
+> [    6.621701] x29: ffff800012b73760 x28: 0000000000000001 x27: 0000000010000000
+> [    6.622400] x26: 0000000000000001 x25: 0000000004000000 x24: ffffcf376848c000
+> [    6.623099] x23: ffff0000c4087400 x22: ffffcf3718e17140 x21: 0000000000000000
+> [    6.623823] x20: ffff0000c4086000 x19: ffff0000c40870b0 x18: 0000000000000014
+> [    6.624519] x17: 000000004d3605ab x16: 00000000bb3b6129 x15: 000000006e771809
+> [    6.625214] x14: 0000000000000001 x13: 007473696c5f7974 x12: 696e696666615f65
+> [    6.625909] x11: 00000000d543656a x10: 0000000000000000 x9 : ffffcf3718e085a4
+> [    6.626616] x8 : 00000000006c7871 x7 : 000000000000000a x6 : 0000000000000017
+> [    6.627343] x5 : 0000000000001400 x4 : ffff800011f63400 x3 : 0000000014000000
+> [    6.628047] x2 : 0000000000000000 x1 : ffff0000c40870b0 x0 : ffff0000c4086000
+> [    6.628751] Call trace:
+> [    6.628994]  setup_hw_slot+0x24/0x60 [qxl]
+> [    6.629404]  setup_slot+0x34/0xf0 [qxl]
+> [    6.629790]  qxl_device_init+0x6f0/0x7f0 [qxl]
+> [    6.630235]  qxl_pci_probe+0xdc/0x1d0 [qxl]
+> [    6.630654]  local_pci_probe+0x48/0xb8
+> [    6.631027]  pci_device_probe+0x194/0x208
+> [    6.631464]  really_probe+0xd0/0x458
+> [    6.631818]  __driver_probe_device+0x124/0x1c0
+> [    6.632256]  driver_probe_device+0x48/0x130
+> [    6.632669]  __driver_attach+0xc4/0x1a8
+> [    6.633049]  bus_for_each_dev+0x78/0xd0
+> [    6.633437]  driver_attach+0x2c/0x38
+> [    6.633789]  bus_add_driver+0x154/0x248
+> [    6.634168]  driver_register+0x6c/0x128
+> [    6.635205]  __pci_register_driver+0x4c/0x58
+> [    6.635628]  qxl_init+0x48/0x1000 [qxl]
+> [    6.636013]  do_one_initcall+0x50/0x240
+> [    6.636390]  do_init_module+0x60/0x238
+> [    6.636768]  load_module+0x2458/0x2900
+> [    6.637136]  __do_sys_finit_module+0xbc/0x128
+> [    6.637561]  __arm64_sys_finit_module+0x28/0x38
+> [    6.638004]  invoke_syscall+0x74/0xf0
+> [    6.638366]  el0_svc_common.constprop.0+0x58/0x1a8
+> [    6.638836]  do_el0_svc+0x2c/0x90
+> [    6.639216]  el0_svc+0x40/0x190
+> [    6.639526]  el0t_64_sync_handler+0xb0/0xb8
+> [    6.639934]  el0t_64_sync+0x1a4/0x1a8
+> [    6.640294] Code: 910003fd f9484804 f9400c23 8b050084 (f809c083)
+> [    6.640889] ---[ end trace 95615d89b7c87f95 ]---
+>
+> Signed-off-by: Cong Liu <liucong2@kylinos.cn>
+> ---
+>   drivers/gpu/drm/qxl/qxl_kms.c | 10 ++++++++++
+>   1 file changed, 10 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+> index 4dc5ad13f12c..0e61ac04d8ad 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -165,7 +165,11 @@ int qxl_device_init(struct qxl_device *qdev,
+>   		 (int)qdev->surfaceram_size / 1024,
+>   		 (sb == 4) ? "64bit" : "32bit");
+>   
+> +#ifdef CONFIG_ARM64
+> +	qdev->rom = ioremap_cache(qdev->rom_base, qdev->rom_size);
+> +#else
+>   	qdev->rom = ioremap(qdev->rom_base, qdev->rom_size);
+> +#endif
+>   	if (!qdev->rom) {
+>   		pr_err("Unable to ioremap ROM\n");
+>   		r = -ENOMEM;
+> @@ -183,9 +187,15 @@ int qxl_device_init(struct qxl_device *qdev,
+>   		goto rom_unmap;
+>   	}
+>   
+> +#ifdef CONFIG_ARM64
+> +	qdev->ram_header = ioremap_cache(qdev->vram_base +
+> +				   qdev->rom->ram_header_offset,
+> +				   sizeof(*qdev->ram_header));
+> +#else
+>   	qdev->ram_header = ioremap(qdev->vram_base +
+>   				   qdev->rom->ram_header_offset,
+>   				   sizeof(*qdev->ram_header));
+> +#endif
+>   	if (!qdev->ram_header) {
+>   		DRM_ERROR("Unable to ioremap RAM header\n");
+>   		r = -ENOMEM;
 
