@@ -1,57 +1,48 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B06864E9071
-	for <lists+spice-devel@lfdr.de>; Mon, 28 Mar 2022 10:48:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CEF34EC40E
+	for <lists+spice-devel@lfdr.de>; Wed, 30 Mar 2022 14:30:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CE4C610E640;
-	Mon, 28 Mar 2022 08:48:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5456C10E5E3;
+	Wed, 30 Mar 2022 12:30:23 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D79DD10E0B7
- for <spice-devel@lists.freedesktop.org>; Mon, 28 Mar 2022 08:48:07 +0000 (UTC)
-Received: by mail-pg1-x52c.google.com with SMTP id o8so11720525pgf.9
- for <spice-devel@lists.freedesktop.org>; Mon, 28 Mar 2022 01:48:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=bUwkuKJkHhAyVBADrT3moNy2L0/CJkkX4O+oVLaSAt0=;
- b=n3F9198JCtjNHwW/Y1rIkNCytTWbzZ+1k6eH5qKyqi1ROWAags1nVVJJTkgys72MLC
- I20GySCQBErn1sXmtc8erWOJ7PSBpLaHPO6BYlqvz8X7+w0Pa8+iBXm4bHliLzhyzJm+
- R2OuOzrbBtKwertoEKe+cj7a4RpvOklMQpzZx5tf9/IR/QzpxBKbFgPrAroFqdgyXiuV
- w4x4jAcvrsSVACBEWxx20vDiwhmOPq/XDKlqI13WhNrEtCaKIs5H0+kYVDkuWzEjLEsn
- 5uGi6QWaMbLSs5JyMeI5aKXIO1np+71BWh/7WC2avjzhqF65dG3Aml+KkczDKRGedmEx
- mqyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=bUwkuKJkHhAyVBADrT3moNy2L0/CJkkX4O+oVLaSAt0=;
- b=2GzuHzoNsF3T1UwewuqEZR80hPYxvqACmVBZPIUe+vZ5XsQVxEfaN6hei41m8pdCLm
- cSzW21LpzCxmYLZaVNvUcybatRcE4YXF8n5isOH//miJ3iUHUt7x+DIyuSMhqVkON978
- 42YyneMwjQdus230rpNjf2zKQPrFcDG3g8sN9tgVSRNvZLWeT68JdNqy9R+priONQlg7
- jd+L96qHk3tD4poZX5TLuFrryX8rDrsQyv7L5Mb+tzkk6i8+Iz6S4t/Yl3dHMNVS0JNR
- rpOxsVE/eg3nJklLCFiTp0RK95ei0p4h9/6/IXr1T08gcpCwZiJiuDTjVyVp+Zm96LLt
- HasA==
-X-Gm-Message-State: AOAM532NbEf45afxSiEKvPCPpnXVbMU7Kc8tH5N5cA4VKq/lymHwwFWB
- cRz/hzJ/eY/U9uY+5yC+d6Y9HbWm1/JP3l0k+JdnNJQs
-X-Google-Smtp-Source: ABdhPJzoZLhT2V5JrmgqbqQAX23gnJzb9nVUWyz+fEwWfQt/I0sFyCZwCIBJQXy1e01VGy08dmWCDTMdWJC28IAwNc4=
-X-Received: by 2002:a65:6943:0:b0:376:333b:1025 with SMTP id
- w3-20020a656943000000b00376333b1025mr9562667pgq.164.1648457287457; Mon, 28
- Mar 2022 01:48:07 -0700 (PDT)
+Received: from nksmu.kylinos.cn (mailgw.kylinos.cn [123.150.8.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CEF0D10E1DC;
+ Wed, 30 Mar 2022 10:20:22 +0000 (UTC)
+X-UUID: 89f0138a04c342f1b10e571f5d544420-20220330
+X-Spam-Fingerprint: 0
+X-GW-Reason: 11101
+X-Policy-Incident: 5pS25Lu25Lq66LaF6L+HNeS6uumcgOimgeWuoeaguA==
+X-Content-Feature: ica/max.line-size 85
+	audit/email.address 2
+X-UUID: 89f0138a04c342f1b10e571f5d544420-20220330
+Received: from cs2c.com.cn [(172.17.111.24)] by nksmu.kylinos.cn
+ (envelope-from <liucong2@kylinos.cn>) (Generic MTA)
+ with ESMTP id 888474854; Wed, 30 Mar 2022 14:45:11 +0800
+X-ns-mid: postfix-6243FCAB-7174744375
+Received: from [172.20.12.219] (unknown [172.20.12.219])
+ by cs2c.com.cn (NSMail) with ESMTPSA id 686C7383C640;
+ Wed, 30 Mar 2022 06:46:03 +0000 (UTC)
+Message-ID: <a1ceefb7-32d8-9ce3-e56f-7684e6d3ee58@kylinos.cn>
+Date: Wed, 30 Mar 2022 14:46:02 +0800
 MIME-Version: 1.0
-References: <095C03F4-EA2B-4F17-AB4F-E24A4EBB0BE1@gmail.com>
- <CAHt6W4cgChD_X+u=g69Hn3c+HW3egG0C=2uh6OuO3=AP4Y4Uxw@mail.gmail.com>
- <84F3A6D7-5E72-45EC-B449-CF4B68A3CB68@gmail.com>
-In-Reply-To: <84F3A6D7-5E72-45EC-B449-CF4B68A3CB68@gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Mon, 28 Mar 2022 09:47:56 +0100
-Message-ID: <CAHt6W4dX7BzL4ZaXs-Y4FAJ8FLbJv9OtUdbqiPNKXAO+ksA1VA@mail.gmail.com>
-To: Walter Mitty <waltermitty121906@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000000bde4105db435f50"
-Subject: Re: [Spice-devel] Combine JPEG-XL with spice
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Content-Language: en-US
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ airlied@linux.ie, airlied@redhat.com, kraxel@redhat.com, robin.murphy@arm.com
+References: <12eba824-ee80-0aac-56ed-e13084c9cae7@amd.com>
+ <20220324104928.2959545-1-liucong2@kylinos.cn>
+ <982d233d-7e30-f44e-f49d-473c3c41721e@amd.com>
+From: Cong Liu <liucong2@kylinos.cn>
+In-Reply-To: <982d233d-7e30-f44e-f49d-473c3c41721e@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 30 Mar 2022 12:30:23 +0000
+Subject: Re: [Spice-devel] [PATCH v2] drm/qxl: fix qxl can't use in arm64
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,93 +54,75 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, ray.huang@amd.com, daniel@ffwll.ch,
+ spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000000bde4105db435f50
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi Walter,
-   which kind of improvement are you looking for exactly? Bandwidth?
-Latency? CPU?
+any suggestions or extra test I can do now?
 
 Regards,
-  Frediano
+Cong
 
-
-Il giorno lun 28 mar 2022 alle ore 03:25 Walter Mitty <
-waltermitty121906@gmail.com> ha scritto:
-
-> Hello
-> Thanks for your reply. Recently I=E2=80=99m working on a VDI project and =
-trying to
-> improve SPICE performance. It=E2=80=99s not easy. If I may, I=E2=80=99m t=
-hinking if RedHat
-> or some other entity can provide commercial tech service to help someone
-> like me? I=E2=80=99m willing to pay for this.
->
-> Regards,
-> Walter.
->
->
-> On Mar 28, 2022, at 01:43, Frediano Ziglio <freddy77@gmail.com> wrote:
->
-> Hi,
->   sorry for the late reply.
-> More than replacing, which would cause a regression, an idea would be to
-> add support for that new JPEG "dialect".
-> It seems to have some advantages and the features added would help (they
-> reduce network usage with similar processing costs).
->
-> Regards,
->   Frediano
->
->
-> Il giorno mer 23 feb 2022 alle ore 05:57 Walter Mitty <
-> waltermitty121906@gmail.com> ha scritto:
->
->> Is it a good idea to replace JPEG image compress with JPEG-XL?
+On 2022/3/25 15:45, Christian König wrote:
+> Am 24.03.22 um 11:49 schrieb Cong Liu:
+>> qxl use ioremap to map ram_header and rom, in the arm64 implementation,
+>> the device is mapped as DEVICE_nGnRE, it can not support unaligned
+>> access. and qxl is a virtual device, it can be treated more like RAM
+>> than actual MMIO registers. use ioremap_wc() replace it.
 >>
->
->
-
---0000000000000bde4105db435f50
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Walter,</div><div>=C2=A0=C2=A0 which kind of impro=
-vement are you looking for exactly? Bandwidth? Latency? CPU?<br></div><div>=
-<br></div><div>Regards,<br clear=3D"all"></div><div dir=3D"ltr"><div><div d=
-ir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><di=
-v dir=3D"ltr">=C2=A0 Frediano</div></div></div><br></div><br><div class=3D"=
-gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Il giorno lun 28 mar 202=
-2 alle ore 03:25 Walter Mitty &lt;<a href=3D"mailto:waltermitty121906@gmail=
-.com">waltermitty121906@gmail.com</a>&gt; ha scritto:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex"><div style=3D"overflow-wrap: break-wo=
-rd;">Hello<div>Thanks for your reply. Recently I=E2=80=99m working on a VDI=
- project and trying to improve SPICE performance. It=E2=80=99s not easy. If=
- I may, I=E2=80=99m thinking if RedHat or some other entity can provide com=
-mercial tech service to help someone like me? I=E2=80=99m willing to pay fo=
-r this.</div><div><br></div><div>Regards,</div><div>Walter.</div><div><br><=
-div><div><br><blockquote type=3D"cite"><div>On Mar 28, 2022, at 01:43, Fred=
-iano Ziglio &lt;<a href=3D"mailto:freddy77@gmail.com" target=3D"_blank">fre=
-ddy77@gmail.com</a>&gt; wrote:</div><br><div><div dir=3D"ltr"><div>Hi,</div=
-><div>=C2=A0 sorry for the late reply.</div><div>More than replacing, which=
- would cause a regression, an idea would be to add support for that new JPE=
-G &quot;dialect&quot;.</div><div>It seems to have some advantages and the f=
-eatures added would help (they reduce network usage with similar processing=
- costs).<br></div><div><br></div><div>Regards,<br></div><div><div><div dir=
-=3D"ltr"><div dir=3D"ltr">=C2=A0 Frediano</div></div></div><br></div></div>=
-<br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Il gio=
-rno mer 23 feb 2022 alle ore 05:57 Walter Mitty &lt;<a href=3D"mailto:walte=
-rmitty121906@gmail.com" target=3D"_blank">waltermitty121906@gmail.com</a>&g=
-t; ha scritto:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">I=
-s it a good idea to replace JPEG image compress with JPEG-XL? <br>
-</blockquote></div>
-</div></blockquote></div><br></div></div></div></blockquote></div></div>
-
---0000000000000bde4105db435f50--
+>> Signed-off-by: Cong Liu <liucong2@kylinos.cn>
+> 
+> Looks sane to me, but I'm really not involved enough to fully judge.
+> 
+> Acked-by: Christian König <christian.koenig@amd.com>
+> 
+>> ---
+>>   drivers/gpu/drm/qxl/qxl_kms.c | 4 ++--
+>>   drivers/gpu/drm/qxl/qxl_ttm.c | 4 ++--
+>>   2 files changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c 
+>> b/drivers/gpu/drm/qxl/qxl_kms.c
+>> index 4dc5ad13f12c..a054e4a00fe8 100644
+>> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+>> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+>> @@ -165,7 +165,7 @@ int qxl_device_init(struct qxl_device *qdev,
+>>            (int)qdev->surfaceram_size / 1024,
+>>            (sb == 4) ? "64bit" : "32bit");
+>> -    qdev->rom = ioremap(qdev->rom_base, qdev->rom_size);
+>> +    qdev->rom = ioremap_wc(qdev->rom_base, qdev->rom_size);
+>>       if (!qdev->rom) {
+>>           pr_err("Unable to ioremap ROM\n");
+>>           r = -ENOMEM;
+>> @@ -183,7 +183,7 @@ int qxl_device_init(struct qxl_device *qdev,
+>>           goto rom_unmap;
+>>       }
+>> -    qdev->ram_header = ioremap(qdev->vram_base +
+>> +    qdev->ram_header = ioremap_wc(qdev->vram_base +
+>>                      qdev->rom->ram_header_offset,
+>>                      sizeof(*qdev->ram_header));
+>>       if (!qdev->ram_header) {
+>> diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c 
+>> b/drivers/gpu/drm/qxl/qxl_ttm.c
+>> index b2e33d5ba5d0..95df5750f47f 100644
+>> --- a/drivers/gpu/drm/qxl/qxl_ttm.c
+>> +++ b/drivers/gpu/drm/qxl/qxl_ttm.c
+>> @@ -82,13 +82,13 @@ int qxl_ttm_io_mem_reserve(struct ttm_device *bdev,
+>>       case TTM_PL_VRAM:
+>>           mem->bus.is_iomem = true;
+>>           mem->bus.offset = (mem->start << PAGE_SHIFT) + qdev->vram_base;
+>> -        mem->bus.caching = ttm_cached;
+>> +        mem->bus.caching = ttm_write_combined;
+>>           break;
+>>       case TTM_PL_PRIV:
+>>           mem->bus.is_iomem = true;
+>>           mem->bus.offset = (mem->start << PAGE_SHIFT) +
+>>               qdev->surfaceram_base;
+>> -        mem->bus.caching = ttm_cached;
+>> +        mem->bus.caching = ttm_write_combined;
+>>           break;
+>>       default:
+>>           return -EINVAL;
+> 
