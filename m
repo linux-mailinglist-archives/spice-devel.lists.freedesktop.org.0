@@ -2,74 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 094174EC40F
-	for <lists+spice-devel@lfdr.de>; Wed, 30 Mar 2022 14:30:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99BB94F7481
+	for <lists+spice-devel@lfdr.de>; Thu,  7 Apr 2022 06:20:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A8A0B10E190;
-	Wed, 30 Mar 2022 12:30:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 647E610EE67;
+	Thu,  7 Apr 2022 04:20:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E5B4010E1DC
- for <spice-devel@lists.freedesktop.org>; Wed, 30 Mar 2022 10:43:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1648637012;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BF3xhFCyLrxCQP5ABQE0ta5feJB/SrzL4G5wThcA57E=;
- b=LCD3xQnUBlqIyvEO9zgpvw8EisvQDBeHIlk74ACHOJER7OGlU/ZwDUgCmZn8OtGbEu9oIp
- 2mILL6qlG3h/EZPebhg8DTXeibmDpe4C/vP1ayTyxR0cJdEg/YH2JnNN8ts1ilbcDRcu1i
- zvg3/OUuupCo0OR99EVxYPlVUeVv+6k=
-Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com
- [209.85.160.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-187-UVKfQtktOBeMA9YdmOmLHg-1; Wed, 30 Mar 2022 06:43:30 -0400
-X-MC-Unique: UVKfQtktOBeMA9YdmOmLHg-1
-Received: by mail-oa1-f70.google.com with SMTP id
- 586e51a60fabf-ddaeb6d47eso5387678fac.13
- for <spice-devel@lists.freedesktop.org>; Wed, 30 Mar 2022 03:43:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=BF3xhFCyLrxCQP5ABQE0ta5feJB/SrzL4G5wThcA57E=;
- b=BHuvx7SpEcAiMC87OVvrqoVww1oJnVpafmVvkHkmzRu9PUsodYsx62VdppwYdzQOZv
- D4PY4GdQVgQVxkA1t5Ea4w6A3V/CAmHaPTNAFoMXa8iIWrRJ/ZpunMEAxshyhb7GnviZ
- 0qrgChctfz2QY1o795TaQT1daWymXd9hyNQAn7mbjSbyoq1MvK0n0RcMfkpF0b+5WvFh
- Onuslyt+lsyLqqRbaeyN7RR4Lw6itawYABSY/uFNj5nCzZGYmEPee2g7y5SffWOvpy2p
- kx+RzDY56Oorht38v17x1xC5HQpqPcX33ohLf5ATM0QKlTLpiQXXqSBBb5tKFmKTv2a3
- rr0g==
-X-Gm-Message-State: AOAM533Tew/UMt3OPup272XrNW7Mew2BEEG75to4syCjL7Sz55s7nlFw
- /gOPFEPWAkmFXkY6JBykWoFJHjIAlrvcZBloz4Ts2BszuTxwLaQSXCkG43Woc1+JFZXolSW3sL/
- vA6+P39hzXxImKX7nLOOWqzZgIuw+lx/jwbnDMz5WZxOyqSA=
-X-Received: by 2002:a05:6870:1714:b0:dd:a30e:d23e with SMTP id
- h20-20020a056870171400b000dda30ed23emr1742737oae.85.1648637009392; 
- Wed, 30 Mar 2022 03:43:29 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxaEBKXl6GGXGtVuocZYplGp6rtO1QKwBVCHAaEWlTJ5cnjGCD6V7uPD2eiQ9au5HJ6l3QhAGAyP9E6jI3nR6A=
-X-Received: by 2002:a05:6870:1714:b0:dd:a30e:d23e with SMTP id
- h20-20020a056870171400b000dda30ed23emr1742723oae.85.1648637009168; Wed, 30
- Mar 2022 03:43:29 -0700 (PDT)
+Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0431010E6BE;
+ Thu,  7 Apr 2022 02:57:06 +0000 (UTC)
+Received: from vertex.vmware.com (pool-108-36-85-85.phlapa.fios.verizon.net
+ [108.36.85.85]) (Authenticated sender: zack)
+ by letterbox.kde.org (Postfix) with ESMTPSA id B80A928A5A9;
+ Thu,  7 Apr 2022 03:57:03 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
+ t=1649300224; bh=NV0Yn7cdHu6fJ9Gbs3jziR1myA+JbmRSPOMuY7MsD5w=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Cz6+qMMHxVVEW49pVgxbs7Zj/Zrh76KOf2yC6fy93sEa9OY/MG9yqQWJ9Pz0bCdnc
+ mGGUxdIOuxQREKP5ChgE23JzS7P/+izLhzvRLTdOvcpcFV3PzEZZZtHTAMCjVdbZpU
+ U1uScfz7cWbspzfXceBYVAdozUXStPCgR4tCLjji1vM+7lhXmZFUElsKCYAzw36FuN
+ kgvAkmWoWIEtfHNlwd36XXg6DBcn4Ebdnj0uoGbee9B37oLlKWAUdOYt53ItRUKDHm
+ /QInuRBiAL+etNRfLXhy0ttTrb2EbpO7zx4Erew2dwuKBR4QkTZaFfshGWGk2qtPk8
+ s9IyzKkRTmbZQ==
+From: Zack Rusin <zack@kde.org>
+To: dri-devel@lists.freedesktop.org
+Date: Wed,  6 Apr 2022 22:56:50 -0400
+Message-Id: <20220407025652.146426-5-zack@kde.org>
+X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20220407025652.146426-1-zack@kde.org>
+References: <20220407025652.146426-1-zack@kde.org>
 MIME-Version: 1.0
-References: <12eba824-ee80-0aac-56ed-e13084c9cae7@amd.com>
- <20220324104928.2959545-1-liucong2@kylinos.cn>
- <982d233d-7e30-f44e-f49d-473c3c41721e@amd.com>
- <a1ceefb7-32d8-9ce3-e56f-7684e6d3ee58@kylinos.cn>
-In-Reply-To: <a1ceefb7-32d8-9ce3-e56f-7684e6d3ee58@kylinos.cn>
-From: David Airlie <airlied@redhat.com>
-Date: Wed, 30 Mar 2022 20:43:18 +1000
-Message-ID: <CAMwc25r3ER2Mi4jo2W=VtZcusNhpsyhQ0Mjx+qHhmZAK-fSjZQ@mail.gmail.com>
-To: Cong Liu <liucong2@kylinos.cn>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=airlied@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 30 Mar 2022 12:30:23 +0000
-Subject: Re: [Spice-devel] [PATCH v2] drm/qxl: fix qxl can't use in arm64
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 07 Apr 2022 04:20:49 +0000
+Subject: [Spice-devel] [PATCH 4/5] drm/qxl: Use TTM builtin resource manager
+ debugfs code
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,93 +48,85 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied <airlied@linux.ie>, linux-kernel <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- "open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
- <virtualization@lists.linux-foundation.org>, ray.huang@amd.com, "Hoffmann,
- Gerd" <kraxel@redhat.com>, "Vetter, Daniel" <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
- robin.murphy@arm.com,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Reply-To: Zack Rusin <zackr@vmware.com>
+Cc: David Airlie <airlied@linux.ie>, virtualization@lists.linux-foundation.org,
+ krastevm@vmware.com, Huang Rui <ray.huang@amd.com>,
+ Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
+ spice-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ Christian Koenig <christian.koenig@amd.com>, mombasawalam@vmware.com,
+ Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-I'd like to make sure this has no side effects on x86 guests, it
-probably is safe, but keep an eye for regression reports.
+From: Zack Rusin <zackr@vmware.com>
 
-Reviewed-by: Dave Airlie <airlied@redhat.com>
-Dave.
+Switch to using the TTM resource manager debugfs helpers. The
+functionality is largely the same, except that the entries live under
+/sys/kernel/debug/ttm/ and their lifetimes are managed by TTM.
 
-On Wed, Mar 30, 2022 at 8:20 PM Cong Liu <liucong2@kylinos.cn> wrote:
->
-> any suggestions or extra test I can do now?
->
-> Regards,
-> Cong
->
-> On 2022/3/25 15:45, Christian K=C3=B6nig wrote:
-> > Am 24.03.22 um 11:49 schrieb Cong Liu:
-> >> qxl use ioremap to map ram_header and rom, in the arm64 implementation=
-,
-> >> the device is mapped as DEVICE_nGnRE, it can not support unaligned
-> >> access. and qxl is a virtual device, it can be treated more like RAM
-> >> than actual MMIO registers. use ioremap_wc() replace it.
-> >>
-> >> Signed-off-by: Cong Liu <liucong2@kylinos.cn>
-> >
-> > Looks sane to me, but I'm really not involved enough to fully judge.
-> >
-> > Acked-by: Christian K=C3=B6nig <christian.koenig@amd.com>
-> >
-> >> ---
-> >>   drivers/gpu/drm/qxl/qxl_kms.c | 4 ++--
-> >>   drivers/gpu/drm/qxl/qxl_ttm.c | 4 ++--
-> >>   2 files changed, 4 insertions(+), 4 deletions(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c
-> >> b/drivers/gpu/drm/qxl/qxl_kms.c
-> >> index 4dc5ad13f12c..a054e4a00fe8 100644
-> >> --- a/drivers/gpu/drm/qxl/qxl_kms.c
-> >> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
-> >> @@ -165,7 +165,7 @@ int qxl_device_init(struct qxl_device *qdev,
-> >>            (int)qdev->surfaceram_size / 1024,
-> >>            (sb =3D=3D 4) ? "64bit" : "32bit");
-> >> -    qdev->rom =3D ioremap(qdev->rom_base, qdev->rom_size);
-> >> +    qdev->rom =3D ioremap_wc(qdev->rom_base, qdev->rom_size);
-> >>       if (!qdev->rom) {
-> >>           pr_err("Unable to ioremap ROM\n");
-> >>           r =3D -ENOMEM;
-> >> @@ -183,7 +183,7 @@ int qxl_device_init(struct qxl_device *qdev,
-> >>           goto rom_unmap;
-> >>       }
-> >> -    qdev->ram_header =3D ioremap(qdev->vram_base +
-> >> +    qdev->ram_header =3D ioremap_wc(qdev->vram_base +
-> >>                      qdev->rom->ram_header_offset,
-> >>                      sizeof(*qdev->ram_header));
-> >>       if (!qdev->ram_header) {
-> >> diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c
-> >> b/drivers/gpu/drm/qxl/qxl_ttm.c
-> >> index b2e33d5ba5d0..95df5750f47f 100644
-> >> --- a/drivers/gpu/drm/qxl/qxl_ttm.c
-> >> +++ b/drivers/gpu/drm/qxl/qxl_ttm.c
-> >> @@ -82,13 +82,13 @@ int qxl_ttm_io_mem_reserve(struct ttm_device *bdev=
-,
-> >>       case TTM_PL_VRAM:
-> >>           mem->bus.is_iomem =3D true;
-> >>           mem->bus.offset =3D (mem->start << PAGE_SHIFT) + qdev->vram_=
-base;
-> >> -        mem->bus.caching =3D ttm_cached;
-> >> +        mem->bus.caching =3D ttm_write_combined;
-> >>           break;
-> >>       case TTM_PL_PRIV:
-> >>           mem->bus.is_iomem =3D true;
-> >>           mem->bus.offset =3D (mem->start << PAGE_SHIFT) +
-> >>               qdev->surfaceram_base;
-> >> -        mem->bus.caching =3D ttm_cached;
-> >> +        mem->bus.caching =3D ttm_write_combined;
-> >>           break;
-> >>       default:
-> >>           return -EINVAL;
-> >
->
+Signed-off-by: Zack Rusin <zackr@vmware.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+---
+ drivers/gpu/drm/qxl/qxl_ttm.c | 40 ++++++-----------------------------
+ 1 file changed, 7 insertions(+), 33 deletions(-)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c b/drivers/gpu/drm/qxl/qxl_ttm.c
+index 95df5750f47f..c31d4d751dc4 100644
+--- a/drivers/gpu/drm/qxl/qxl_ttm.c
++++ b/drivers/gpu/drm/qxl/qxl_ttm.c
+@@ -222,41 +222,15 @@ void qxl_ttm_fini(struct qxl_device *qdev)
+ 	DRM_INFO("qxl: ttm finalized\n");
+ }
+ 
+-#define QXL_DEBUGFS_MEM_TYPES 2
+-
+-#if defined(CONFIG_DEBUG_FS)
+-static int qxl_mm_dump_table(struct seq_file *m, void *data)
+-{
+-	struct drm_info_node *node = (struct drm_info_node *)m->private;
+-	struct ttm_resource_manager *man = (struct ttm_resource_manager *)node->info_ent->data;
+-	struct drm_printer p = drm_seq_file_printer(m);
+-
+-	ttm_resource_manager_debug(man, &p);
+-	return 0;
+-}
+-#endif
+-
+ void qxl_ttm_debugfs_init(struct qxl_device *qdev)
+ {
+ #if defined(CONFIG_DEBUG_FS)
+-	static struct drm_info_list qxl_mem_types_list[QXL_DEBUGFS_MEM_TYPES];
+-	static char qxl_mem_types_names[QXL_DEBUGFS_MEM_TYPES][32];
+-	unsigned int i;
+-
+-	for (i = 0; i < QXL_DEBUGFS_MEM_TYPES; i++) {
+-		if (i == 0)
+-			sprintf(qxl_mem_types_names[i], "qxl_mem_mm");
+-		else
+-			sprintf(qxl_mem_types_names[i], "qxl_surf_mm");
+-		qxl_mem_types_list[i].name = qxl_mem_types_names[i];
+-		qxl_mem_types_list[i].show = &qxl_mm_dump_table;
+-		qxl_mem_types_list[i].driver_features = 0;
+-		if (i == 0)
+-			qxl_mem_types_list[i].data = ttm_manager_type(&qdev->mman.bdev, TTM_PL_VRAM);
+-		else
+-			qxl_mem_types_list[i].data = ttm_manager_type(&qdev->mman.bdev, TTM_PL_PRIV);
+-
+-	}
+-	qxl_debugfs_add_files(qdev, qxl_mem_types_list, i);
++	const char * const ttm_placement_names[] = {
++		[TTM_PL_VRAM] = "qxl_mem_mm",
++		[TTM_PL_PRIV] = "qxl_surf_mm",
++	};
++	ttm_resource_manager_debugfs_init(&qdev->mman.bdev,
++					  ttm_placement_names,
++					  ARRAY_SIZE(ttm_placement_names));
+ #endif
+ }
+-- 
+2.32.0
 
