@@ -1,42 +1,42 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99BB94F7481
-	for <lists+spice-devel@lfdr.de>; Thu,  7 Apr 2022 06:20:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B7564FD2AD
+	for <lists+spice-devel@lfdr.de>; Tue, 12 Apr 2022 09:37:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 647E610EE67;
-	Thu,  7 Apr 2022 04:20:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AC3E410E98A;
+	Tue, 12 Apr 2022 07:37:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0431010E6BE;
- Thu,  7 Apr 2022 02:57:06 +0000 (UTC)
-Received: from vertex.vmware.com (pool-108-36-85-85.phlapa.fios.verizon.net
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A450610FB4A;
+ Tue, 12 Apr 2022 03:35:37 +0000 (UTC)
+Received: from vertex.localdomain (pool-108-36-85-85.phlapa.fios.verizon.net
  [108.36.85.85]) (Authenticated sender: zack)
- by letterbox.kde.org (Postfix) with ESMTPSA id B80A928A5A9;
- Thu,  7 Apr 2022 03:57:03 +0100 (BST)
+ by letterbox.kde.org (Postfix) with ESMTPSA id 65429283884;
+ Tue, 12 Apr 2022 04:35:35 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
- t=1649300224; bh=NV0Yn7cdHu6fJ9Gbs3jziR1myA+JbmRSPOMuY7MsD5w=;
+ t=1649734536; bh=EMav8tC5+SYVEEBmZtmVZXFia3Bz7qzOggBZLqun0Xw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Cz6+qMMHxVVEW49pVgxbs7Zj/Zrh76KOf2yC6fy93sEa9OY/MG9yqQWJ9Pz0bCdnc
- mGGUxdIOuxQREKP5ChgE23JzS7P/+izLhzvRLTdOvcpcFV3PzEZZZtHTAMCjVdbZpU
- U1uScfz7cWbspzfXceBYVAdozUXStPCgR4tCLjji1vM+7lhXmZFUElsKCYAzw36FuN
- kgvAkmWoWIEtfHNlwd36XXg6DBcn4Ebdnj0uoGbee9B37oLlKWAUdOYt53ItRUKDHm
- /QInuRBiAL+etNRfLXhy0ttTrb2EbpO7zx4Erew2dwuKBR4QkTZaFfshGWGk2qtPk8
- s9IyzKkRTmbZQ==
+ b=fXS/BGr1gmTLBue2OJ6ze0qgzMa/Wa0xoVqulfkDUQkAdXySlUZJUVYKlrP6Hpczs
+ gdw6KBWFo9cRMMEp6Jt8imrNzfwK4ZAFauTmI7liAZ7vsbezIfSbyulTw6Rep5YKo5
+ EWLyy2QcZL2m9kjEi2IJShWH7pHEgKW+wMGs/6DkeXMPI0WnPmyOp21n00K6SMIWLt
+ wF7YczJC0OOyC+oWKC2taNT+RrrZ4Ka5uqmZikXLNVgbZKZ6RYOLx1O+bUuLPRhPzd
+ S/pd/AalJjIdKFH/sQ5I/+PsQY/VWCOZuxO9EUdrrd1SYWVyR7uvnApkCwVdvH9yGx
+ N5m5XdwvRaCEw==
 From: Zack Rusin <zack@kde.org>
 To: dri-devel@lists.freedesktop.org
-Date: Wed,  6 Apr 2022 22:56:50 -0400
-Message-Id: <20220407025652.146426-5-zack@kde.org>
+Date: Mon, 11 Apr 2022 23:35:25 -0400
+Message-Id: <20220412033526.369115-5-zack@kde.org>
 X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20220407025652.146426-1-zack@kde.org>
-References: <20220407025652.146426-1-zack@kde.org>
+In-Reply-To: <20220412033526.369115-1-zack@kde.org>
+References: <20220412033526.369115-1-zack@kde.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 07 Apr 2022 04:20:49 +0000
-Subject: [Spice-devel] [PATCH 4/5] drm/qxl: Use TTM builtin resource manager
- debugfs code
+X-Mailman-Approved-At: Tue, 12 Apr 2022 07:37:47 +0000
+Subject: [Spice-devel] [PATCH v2 4/5] drm/qxl: Use TTM builtin resource
+ manager debugfs code
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,8 +61,9 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 From: Zack Rusin <zackr@vmware.com>
 
 Switch to using the TTM resource manager debugfs helpers. The
-functionality is largely the same, except that the entries live under
-/sys/kernel/debug/ttm/ and their lifetimes are managed by TTM.
+functionality is largely the same.
+The TTM resource managers need to stay valid for as long as the
+drm debugfs_root is valid.
 
 Signed-off-by: Zack Rusin <zackr@vmware.com>
 Cc: Dave Airlie <airlied@redhat.com>
@@ -71,14 +72,14 @@ Cc: Daniel Vetter <daniel@ffwll.ch>
 Cc: virtualization@lists.linux-foundation.org
 Cc: spice-devel@lists.freedesktop.org
 ---
- drivers/gpu/drm/qxl/qxl_ttm.c | 40 ++++++-----------------------------
- 1 file changed, 7 insertions(+), 33 deletions(-)
+ drivers/gpu/drm/qxl/qxl_ttm.c | 39 ++++++-----------------------------
+ 1 file changed, 6 insertions(+), 33 deletions(-)
 
 diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c b/drivers/gpu/drm/qxl/qxl_ttm.c
-index 95df5750f47f..c31d4d751dc4 100644
+index 95df5750f47f..0dfdbfc8f6af 100644
 --- a/drivers/gpu/drm/qxl/qxl_ttm.c
 +++ b/drivers/gpu/drm/qxl/qxl_ttm.c
-@@ -222,41 +222,15 @@ void qxl_ttm_fini(struct qxl_device *qdev)
+@@ -222,41 +222,14 @@ void qxl_ttm_fini(struct qxl_device *qdev)
  	DRM_INFO("qxl: ttm finalized\n");
  }
  
@@ -118,13 +119,12 @@ index 95df5750f47f..c31d4d751dc4 100644
 -
 -	}
 -	qxl_debugfs_add_files(qdev, qxl_mem_types_list, i);
-+	const char * const ttm_placement_names[] = {
-+		[TTM_PL_VRAM] = "qxl_mem_mm",
-+		[TTM_PL_PRIV] = "qxl_surf_mm",
-+	};
-+	ttm_resource_manager_debugfs_init(&qdev->mman.bdev,
-+					  ttm_placement_names,
-+					  ARRAY_SIZE(ttm_placement_names));
++	ttm_resource_manager_create_debugfs(ttm_manager_type(&qdev->mman.bdev,
++							     TTM_PL_VRAM),
++					    qdev->ddev.primary->debugfs_root, "qxl_mem_mm");
++	ttm_resource_manager_create_debugfs(ttm_manager_type(&qdev->mman.bdev,
++							     TTM_PL_PRIV),
++					    qdev->ddev.primary->debugfs_root, "qxl_surf_mm");
  #endif
  }
 -- 
