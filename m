@@ -1,42 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B7564FD2AD
-	for <lists+spice-devel@lfdr.de>; Tue, 12 Apr 2022 09:37:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DE094FFE70
+	for <lists+spice-devel@lfdr.de>; Wed, 13 Apr 2022 21:06:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AC3E410E98A;
-	Tue, 12 Apr 2022 07:37:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C73210E205;
+	Wed, 13 Apr 2022 19:06:50 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A450610FB4A;
- Tue, 12 Apr 2022 03:35:37 +0000 (UTC)
-Received: from vertex.localdomain (pool-108-36-85-85.phlapa.fios.verizon.net
- [108.36.85.85]) (Authenticated sender: zack)
- by letterbox.kde.org (Postfix) with ESMTPSA id 65429283884;
- Tue, 12 Apr 2022 04:35:35 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
- t=1649734536; bh=EMav8tC5+SYVEEBmZtmVZXFia3Bz7qzOggBZLqun0Xw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fXS/BGr1gmTLBue2OJ6ze0qgzMa/Wa0xoVqulfkDUQkAdXySlUZJUVYKlrP6Hpczs
- gdw6KBWFo9cRMMEp6Jt8imrNzfwK4ZAFauTmI7liAZ7vsbezIfSbyulTw6Rep5YKo5
- EWLyy2QcZL2m9kjEi2IJShWH7pHEgKW+wMGs/6DkeXMPI0WnPmyOp21n00K6SMIWLt
- wF7YczJC0OOyC+oWKC2taNT+RrrZ4Ka5uqmZikXLNVgbZKZ6RYOLx1O+bUuLPRhPzd
- S/pd/AalJjIdKFH/sQ5I/+PsQY/VWCOZuxO9EUdrrd1SYWVyR7uvnApkCwVdvH9yGx
- N5m5XdwvRaCEw==
-From: Zack Rusin <zack@kde.org>
-To: dri-devel@lists.freedesktop.org
-Date: Mon, 11 Apr 2022 23:35:25 -0400
-Message-Id: <20220412033526.369115-5-zack@kde.org>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20220412033526.369115-1-zack@kde.org>
-References: <20220412033526.369115-1-zack@kde.org>
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4985610FBA5
+ for <spice-devel@lists.freedesktop.org>; Wed, 13 Apr 2022 07:06:38 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id lc2so1969365ejb.12
+ for <spice-devel@lists.freedesktop.org>; Wed, 13 Apr 2022 00:06:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=q4KbE6pe7QqYX5zXw3cpuzeuM4lAqutY7p6wvTnxXNE=;
+ b=nHPF8rVI4lLhFth2zurNxA2ObQ1pxYDC1XuXITkhPI9F2AMcT2av+Rbh5Jwj9vtngv
+ tKmzwvh7JG8NW5B50QprkyjAIudOZBVVsV1+1K4CblEggjYJe3/A2HwpnTcaaqyJnx77
+ PpK5jDOxChiliW2IijZvtnBFO58ZrzRZ+N/tZ/oImdeBs33+ByIeTdziIDalOx7FR5g0
+ C0BnRT0UL5SOgGUL2zx47el57fE97JtVQVlu8uO6hqdqpX/Hteb3/6/gR2X5QXAi1Fw6
+ LmWrArxgUmvE50LES7sWJZoqCf6scViz9umGVTcbVPkRsiIoTzAHZpS+mxgrpMWhtWBV
+ +pFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=q4KbE6pe7QqYX5zXw3cpuzeuM4lAqutY7p6wvTnxXNE=;
+ b=1shV20RfpcQ7hh54ZPS5zn43BItb1+bCgE8vzQrtmjnBkGZnv3FrnOLhDwVMIHsFfe
+ yjmwk7v1G2lOYeQM4oBDkIwSWFmRHxVdzq8T322K8ADTafyUb8wT+qfABzdrlsAoZelQ
+ NNNSyOsenLF38hpkCx6D8iUtyVOHxch44Fge5elXHDzwhIyC42TvAXSnco6U8PVY9lfJ
+ DGsXo6jh7kGkRtpP9ZMZR8trw1pwQumhxY4mS4/t41wjtxq/zWfImOiLcTwqCAbq8ReE
+ IGqCVkNUOAs64zPYXR4PJS63wE5oVWJN4eDtoHP7oS+FiIDAhTZ6vFtIPlmokDOgCLQQ
+ Uaow==
+X-Gm-Message-State: AOAM531JYo11PU/3YMTGca6i2wuGJeFbiDcyqoR5xIp0LqCn5hHK+Hgp
+ RK6UCYgM5m0ZKwGyQYSCsEYMGCwThG+bqRhhoxC8ChEuabhD0mnxm7E=
+X-Google-Smtp-Source: ABdhPJwWPNBTt4rNpUfjRTG/OjTNGbyDGCL3ABqQGlPJqzzpt7LWR1NYoAjpf2j0qaDkNg/ssJzRE8F4obytSJyNbDM=
+X-Received: by 2002:a17:906:5796:b0:6e8:81b8:d709 with SMTP id
+ k22-20020a170906579600b006e881b8d709mr13700525ejq.442.1649833596280; Wed, 13
+ Apr 2022 00:06:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 12 Apr 2022 07:37:47 +0000
-Subject: [Spice-devel] [PATCH v2 4/5] drm/qxl: Use TTM builtin resource
- manager debugfs code
+From: Walter Mitty <waltermitty121906@gmail.com>
+Date: Wed, 13 Apr 2022 15:06:24 +0800
+Message-ID: <CAOgZG1z9a38rO71avvKvdbtpNBxxOBZQsVz4jiNFUMKrCFPELQ@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="00000000000071e3ed05dc83d119"
+X-Mailman-Approved-At: Wed, 13 Apr 2022 19:06:49 +0000
+Subject: [Spice-devel] Code confusion: the difference between
+ video_stream_trace_update() and video_stream_maintenance()
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,85 +60,31 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Zack Rusin <zackr@vmware.com>
-Cc: David Airlie <airlied@linux.ie>, virtualization@lists.linux-foundation.org,
- krastevm@vmware.com, Huang Rui <ray.huang@amd.com>,
- Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- Christian Koenig <christian.koenig@amd.com>, mombasawalam@vmware.com,
- Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-From: Zack Rusin <zackr@vmware.com>
+--00000000000071e3ed05dc83d119
+Content-Type: text/plain; charset="UTF-8"
 
-Switch to using the TTM resource manager debugfs helpers. The
-functionality is largely the same.
-The TTM resource managers need to stay valid for as long as the
-drm debugfs_root is valid.
+Hello,
+I am learning spice-server source code. And i'm confusing the 2 functions
+in `video-stream.cpp`: video_stream_trace_update / video_stream_maintenance.
 
-Signed-off-by: Zack Rusin <zackr@vmware.com>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: virtualization@lists.linux-foundation.org
-Cc: spice-devel@lists.freedesktop.org
----
- drivers/gpu/drm/qxl/qxl_ttm.c | 39 ++++++-----------------------------
- 1 file changed, 6 insertions(+), 33 deletions(-)
+There is a todo about it.
+Any suggestions please?
 
-diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c b/drivers/gpu/drm/qxl/qxl_ttm.c
-index 95df5750f47f..0dfdbfc8f6af 100644
---- a/drivers/gpu/drm/qxl/qxl_ttm.c
-+++ b/drivers/gpu/drm/qxl/qxl_ttm.c
-@@ -222,41 +222,14 @@ void qxl_ttm_fini(struct qxl_device *qdev)
- 	DRM_INFO("qxl: ttm finalized\n");
- }
- 
--#define QXL_DEBUGFS_MEM_TYPES 2
--
--#if defined(CONFIG_DEBUG_FS)
--static int qxl_mm_dump_table(struct seq_file *m, void *data)
--{
--	struct drm_info_node *node = (struct drm_info_node *)m->private;
--	struct ttm_resource_manager *man = (struct ttm_resource_manager *)node->info_ent->data;
--	struct drm_printer p = drm_seq_file_printer(m);
--
--	ttm_resource_manager_debug(man, &p);
--	return 0;
--}
--#endif
--
- void qxl_ttm_debugfs_init(struct qxl_device *qdev)
- {
- #if defined(CONFIG_DEBUG_FS)
--	static struct drm_info_list qxl_mem_types_list[QXL_DEBUGFS_MEM_TYPES];
--	static char qxl_mem_types_names[QXL_DEBUGFS_MEM_TYPES][32];
--	unsigned int i;
--
--	for (i = 0; i < QXL_DEBUGFS_MEM_TYPES; i++) {
--		if (i == 0)
--			sprintf(qxl_mem_types_names[i], "qxl_mem_mm");
--		else
--			sprintf(qxl_mem_types_names[i], "qxl_surf_mm");
--		qxl_mem_types_list[i].name = qxl_mem_types_names[i];
--		qxl_mem_types_list[i].show = &qxl_mm_dump_table;
--		qxl_mem_types_list[i].driver_features = 0;
--		if (i == 0)
--			qxl_mem_types_list[i].data = ttm_manager_type(&qdev->mman.bdev, TTM_PL_VRAM);
--		else
--			qxl_mem_types_list[i].data = ttm_manager_type(&qdev->mman.bdev, TTM_PL_PRIV);
--
--	}
--	qxl_debugfs_add_files(qdev, qxl_mem_types_list, i);
-+	ttm_resource_manager_create_debugfs(ttm_manager_type(&qdev->mman.bdev,
-+							     TTM_PL_VRAM),
-+					    qdev->ddev.primary->debugfs_root, "qxl_mem_mm");
-+	ttm_resource_manager_create_debugfs(ttm_manager_type(&qdev->mman.bdev,
-+							     TTM_PL_PRIV),
-+					    qdev->ddev.primary->debugfs_root, "qxl_surf_mm");
- #endif
- }
--- 
-2.32.0
+--00000000000071e3ed05dc83d119
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">Hello,<div>I am learning spice-server source code. And i&#=
+39;m confusing the 2 functions in `video-stream.cpp`:=C2=A0<span style=3D"c=
+olor:rgb(111,66,193);font-family:Menlo,Monaco,&quot;Courier New&quot;,monos=
+pace;font-size:12px;white-space:pre">video_stream_trace_update / </span><sp=
+an style=3D"color:rgb(111,66,193);font-family:Menlo,Monaco,&quot;Courier Ne=
+w&quot;,monospace;font-size:12px;white-space:pre">video_stream_maintenance.=
+ </span></div><div><font color=3D"#6f42c1" face=3D"Menlo, Monaco, Courier N=
+ew, monospace"><span style=3D"font-size:12px;white-space:pre">There is a to=
+do about it.</span></font></div><div>Any suggestions please?</div></div>
+
+--00000000000071e3ed05dc83d119--
