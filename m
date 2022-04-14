@@ -2,53 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DE094FFE70
-	for <lists+spice-devel@lfdr.de>; Wed, 13 Apr 2022 21:06:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCC0D500A66
+	for <lists+spice-devel@lfdr.de>; Thu, 14 Apr 2022 11:48:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C73210E205;
-	Wed, 13 Apr 2022 19:06:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BA21310FDE3;
+	Thu, 14 Apr 2022 09:48:18 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4985610FBA5
- for <spice-devel@lists.freedesktop.org>; Wed, 13 Apr 2022 07:06:38 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id lc2so1969365ejb.12
- for <spice-devel@lists.freedesktop.org>; Wed, 13 Apr 2022 00:06:38 -0700 (PDT)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BEE1310E1B6
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 Apr 2022 09:09:00 +0000 (UTC)
+Received: by mail-ej1-x62d.google.com with SMTP id t11so8750218eju.13
+ for <spice-devel@lists.freedesktop.org>; Thu, 14 Apr 2022 02:09:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:from:date:message-id:subject:to;
- bh=q4KbE6pe7QqYX5zXw3cpuzeuM4lAqutY7p6wvTnxXNE=;
- b=nHPF8rVI4lLhFth2zurNxA2ObQ1pxYDC1XuXITkhPI9F2AMcT2av+Rbh5Jwj9vtngv
- tKmzwvh7JG8NW5B50QprkyjAIudOZBVVsV1+1K4CblEggjYJe3/A2HwpnTcaaqyJnx77
- PpK5jDOxChiliW2IijZvtnBFO58ZrzRZ+N/tZ/oImdeBs33+ByIeTdziIDalOx7FR5g0
- C0BnRT0UL5SOgGUL2zx47el57fE97JtVQVlu8uO6hqdqpX/Hteb3/6/gR2X5QXAi1Fw6
- LmWrArxgUmvE50LES7sWJZoqCf6scViz9umGVTcbVPkRsiIoTzAHZpS+mxgrpMWhtWBV
- +pFQ==
+ bh=QjhkFTP82IpDF4y3+tM3JTQTSCwijtztmT+mxAgWsvU=;
+ b=clxZM9SJ5JYJVdLCem0DWQ5orYh4hHBxpvhEUIPNfYSRabCcdYKJPNU8g7u0Gh5qvE
+ UDVwK72fk5goK8trIONxVfhuDLWMxX6GEi0nnd25k/P1TQk5Bx0NjGj4yfcNJO37EgXM
+ yhFjR+5zBFmRFVvaK6y5+S2S+oIEB7eSTCFXTSy46+sFv0iOaBVqX1+WONoZdVOqfZVz
+ Gg6xLwsJnkSVvofBNfNmqN3BqVOvvuFOTbciYfayUmGpRgegCce4XVuG8lfp8ySvbkHu
+ o8l6L2+8XMb0YcTQN6W1fQvbdNFN1kpS1dWHZ64NnI7oOz+wNq2JCOL0852ams4roY85
+ 4HqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=q4KbE6pe7QqYX5zXw3cpuzeuM4lAqutY7p6wvTnxXNE=;
- b=1shV20RfpcQ7hh54ZPS5zn43BItb1+bCgE8vzQrtmjnBkGZnv3FrnOLhDwVMIHsFfe
- yjmwk7v1G2lOYeQM4oBDkIwSWFmRHxVdzq8T322K8ADTafyUb8wT+qfABzdrlsAoZelQ
- NNNSyOsenLF38hpkCx6D8iUtyVOHxch44Fge5elXHDzwhIyC42TvAXSnco6U8PVY9lfJ
- DGsXo6jh7kGkRtpP9ZMZR8trw1pwQumhxY4mS4/t41wjtxq/zWfImOiLcTwqCAbq8ReE
- IGqCVkNUOAs64zPYXR4PJS63wE5oVWJN4eDtoHP7oS+FiIDAhTZ6vFtIPlmokDOgCLQQ
- Uaow==
-X-Gm-Message-State: AOAM531JYo11PU/3YMTGca6i2wuGJeFbiDcyqoR5xIp0LqCn5hHK+Hgp
- RK6UCYgM5m0ZKwGyQYSCsEYMGCwThG+bqRhhoxC8ChEuabhD0mnxm7E=
-X-Google-Smtp-Source: ABdhPJwWPNBTt4rNpUfjRTG/OjTNGbyDGCL3ABqQGlPJqzzpt7LWR1NYoAjpf2j0qaDkNg/ssJzRE8F4obytSJyNbDM=
-X-Received: by 2002:a17:906:5796:b0:6e8:81b8:d709 with SMTP id
- k22-20020a170906579600b006e881b8d709mr13700525ejq.442.1649833596280; Wed, 13
- Apr 2022 00:06:36 -0700 (PDT)
+ bh=QjhkFTP82IpDF4y3+tM3JTQTSCwijtztmT+mxAgWsvU=;
+ b=IiNJOZl49gws95QajHfdwDalgWZOJXyJkKx2afzxTSNvPPAfgXbRxc9NKuix+PFr4p
+ SEAPx+nWSkHrqK4rsNUjls46JujLJlrBwxyGH0lWTRNa9X2J+udg3M0jHYOtbCnn5A7T
+ uJjEk/ufjEaZHiNaFoFwQBnloWpyipXjQJr0KeDuETlYE/JYGOA/yU9esSRmBZLXuYVB
+ CoO9T6JY1xNwABZHwMP2tYNouXwSBdiyZK1IEj2bAMaJt4M2bVCoa9tOMjU6ojlVhTpZ
+ vN2RH7rPsQP80lUkTkwlClTXEfmaj6G7CsHgXLXvEvhpaRIgM4U2nGp2ABXNTE0ZVMPr
+ eqQQ==
+X-Gm-Message-State: AOAM531TUYPXaZQpXFIaCuj+wdVe+24bHg6pGZGjQG5kmkRh7ZprIi5X
+ SrFuZSLovxLQ26vgif0Hak+H0HTXkogoVtnlrr60HgB0QNQnJ6GT
+X-Google-Smtp-Source: ABdhPJwvnmP6hi6tK6rfsJi/xeBOOAm86y+6EIuZKM2p6KFWtYQMlaG4CaDEZ8U90zRnq01FaFQTLcr4fPy8rCBTfsk=
+X-Received: by 2002:a17:907:3e0c:b0:6e8:be59:9901 with SMTP id
+ hp12-20020a1709073e0c00b006e8be599901mr1501492ejc.358.1649927339008; Thu, 14
+ Apr 2022 02:08:59 -0700 (PDT)
 MIME-Version: 1.0
 From: Walter Mitty <waltermitty121906@gmail.com>
-Date: Wed, 13 Apr 2022 15:06:24 +0800
-Message-ID: <CAOgZG1z9a38rO71avvKvdbtpNBxxOBZQsVz4jiNFUMKrCFPELQ@mail.gmail.com>
+Date: Thu, 14 Apr 2022 17:08:47 +0800
+Message-ID: <CAOgZG1wmkfd29NL_dk4uugz=BgCeG2HCvT1vV-u8iKM=K=0goQ@mail.gmail.com>
 To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000071e3ed05dc83d119"
-X-Mailman-Approved-At: Wed, 13 Apr 2022 19:06:49 +0000
-Subject: [Spice-devel] Code confusion: the difference between
- video_stream_trace_update() and video_stream_maintenance()
+Content-Type: multipart/alternative; boundary="000000000000f2661205dc99a4f5"
+X-Mailman-Approved-At: Thu, 14 Apr 2022 09:48:17 +0000
+Subject: [Spice-devel] Is there a good way to estimate the latency of spice?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,28 +62,27 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000071e3ed05dc83d119
+--000000000000f2661205dc99a4f5
 Content-Type: text/plain; charset="UTF-8"
 
-Hello,
-I am learning spice-server source code. And i'm confusing the 2 functions
-in `video-stream.cpp`: video_stream_trace_update / video_stream_maintenance.
+Hello everyone,
+During my experience of SPICE, I feel it is not fluent. So I wanna know the
+latency about interactivity and rendering. From my understanding, It may be
+the time from the moment draging an app-window to the moment that client
+rendering changes.
+Any suggestions will be appreciated.
+Regards,
+Walter.
 
-There is a todo about it.
-Any suggestions please?
-
---00000000000071e3ed05dc83d119
+--000000000000f2661205dc99a4f5
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hello,<div>I am learning spice-server source code. And i&#=
-39;m confusing the 2 functions in `video-stream.cpp`:=C2=A0<span style=3D"c=
-olor:rgb(111,66,193);font-family:Menlo,Monaco,&quot;Courier New&quot;,monos=
-pace;font-size:12px;white-space:pre">video_stream_trace_update / </span><sp=
-an style=3D"color:rgb(111,66,193);font-family:Menlo,Monaco,&quot;Courier Ne=
-w&quot;,monospace;font-size:12px;white-space:pre">video_stream_maintenance.=
- </span></div><div><font color=3D"#6f42c1" face=3D"Menlo, Monaco, Courier N=
-ew, monospace"><span style=3D"font-size:12px;white-space:pre">There is a to=
-do about it.</span></font></div><div>Any suggestions please?</div></div>
+<div dir=3D"ltr">Hello everyone,<div>During my experience of SPICE, I feel =
+it is not fluent. So I wanna know the latency about interactivity and rende=
+ring. From my understanding, It may be the time from the moment draging=C2=
+=A0an app-window to the moment that client rendering changes.</div><div>Any=
+ suggestions will be=C2=A0appreciated.</div><div>Regards,</div><div>Walter.=
+</div></div>
 
---00000000000071e3ed05dc83d119--
+--000000000000f2661205dc99a4f5--
