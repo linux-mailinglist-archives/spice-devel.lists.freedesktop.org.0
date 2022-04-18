@@ -1,53 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCC0D500A66
-	for <lists+spice-devel@lfdr.de>; Thu, 14 Apr 2022 11:48:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05CE3504C19
+	for <lists+spice-devel@lfdr.de>; Mon, 18 Apr 2022 07:03:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BA21310FDE3;
-	Thu, 14 Apr 2022 09:48:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7B55F10E0A3;
+	Mon, 18 Apr 2022 05:03:06 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BEE1310E1B6
- for <spice-devel@lists.freedesktop.org>; Thu, 14 Apr 2022 09:09:00 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id t11so8750218eju.13
- for <spice-devel@lists.freedesktop.org>; Thu, 14 Apr 2022 02:09:00 -0700 (PDT)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6508B10EC3D
+ for <spice-devel@lists.freedesktop.org>; Mon, 18 Apr 2022 03:32:30 +0000 (UTC)
+Received: by mail-pg1-x52d.google.com with SMTP id s137so16560277pgs.5
+ for <spice-devel@lists.freedesktop.org>; Sun, 17 Apr 2022 20:32:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=QjhkFTP82IpDF4y3+tM3JTQTSCwijtztmT+mxAgWsvU=;
- b=clxZM9SJ5JYJVdLCem0DWQ5orYh4hHBxpvhEUIPNfYSRabCcdYKJPNU8g7u0Gh5qvE
- UDVwK72fk5goK8trIONxVfhuDLWMxX6GEi0nnd25k/P1TQk5Bx0NjGj4yfcNJO37EgXM
- yhFjR+5zBFmRFVvaK6y5+S2S+oIEB7eSTCFXTSy46+sFv0iOaBVqX1+WONoZdVOqfZVz
- Gg6xLwsJnkSVvofBNfNmqN3BqVOvvuFOTbciYfayUmGpRgegCce4XVuG8lfp8ySvbkHu
- o8l6L2+8XMb0YcTQN6W1fQvbdNFN1kpS1dWHZ64NnI7oOz+wNq2JCOL0852ams4roY85
- 4HqA==
+ h=from:content-transfer-encoding:mime-version:subject:message-id:date
+ :to; bh=uf0vdwNl5Pn7tcXxhQs5c+nus56iuVWXEMTB+Ad/RXM=;
+ b=j53IDV5v3T8uS5qJcuDuc/lWC/BPz1D2445cZ68pEcmSZwROieMTmXtzFcBfj6ftf2
+ ZoP2oGV9DvCNai+j86wd8VEqlTQWAfxAYWANSpoo8G8g5Uga8h3l3/+4fE+N3R0VjXpX
+ L6R+RsHIr9MjXKRRWn6Fjhqc1/yXcuzaU4VCg5KyZJbsrPaBrYjQwHn6XJ2qBHIJ3xQu
+ 0eltXJNdyrCuKBXTHBG0Pn8JUBetwzF2wXGmYj1iwnje/rE6Xg5G26EEpcxffER/TnKV
+ 4EJj7pJ5n1OeDS7xnNq2mzM1ndwxmakY9SOOc+hIdxx8O7CmkKkNvEnDkOvJtggD1CfR
+ u8mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=QjhkFTP82IpDF4y3+tM3JTQTSCwijtztmT+mxAgWsvU=;
- b=IiNJOZl49gws95QajHfdwDalgWZOJXyJkKx2afzxTSNvPPAfgXbRxc9NKuix+PFr4p
- SEAPx+nWSkHrqK4rsNUjls46JujLJlrBwxyGH0lWTRNa9X2J+udg3M0jHYOtbCnn5A7T
- uJjEk/ufjEaZHiNaFoFwQBnloWpyipXjQJr0KeDuETlYE/JYGOA/yU9esSRmBZLXuYVB
- CoO9T6JY1xNwABZHwMP2tYNouXwSBdiyZK1IEj2bAMaJt4M2bVCoa9tOMjU6ojlVhTpZ
- vN2RH7rPsQP80lUkTkwlClTXEfmaj6G7CsHgXLXvEvhpaRIgM4U2nGp2ABXNTE0ZVMPr
- eqQQ==
-X-Gm-Message-State: AOAM531TUYPXaZQpXFIaCuj+wdVe+24bHg6pGZGjQG5kmkRh7ZprIi5X
- SrFuZSLovxLQ26vgif0Hak+H0HTXkogoVtnlrr60HgB0QNQnJ6GT
-X-Google-Smtp-Source: ABdhPJwvnmP6hi6tK6rfsJi/xeBOOAm86y+6EIuZKM2p6KFWtYQMlaG4CaDEZ8U90zRnq01FaFQTLcr4fPy8rCBTfsk=
-X-Received: by 2002:a17:907:3e0c:b0:6e8:be59:9901 with SMTP id
- hp12-20020a1709073e0c00b006e8be599901mr1501492ejc.358.1649927339008; Thu, 14
- Apr 2022 02:08:59 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:from:content-transfer-encoding:mime-version
+ :subject:message-id:date:to;
+ bh=uf0vdwNl5Pn7tcXxhQs5c+nus56iuVWXEMTB+Ad/RXM=;
+ b=zvKHMMAcwFA0wflQBSxGkamQF9GLX1cDK79Oquax3rUfanw4aOd06Bwd4A4P/vjXIJ
+ vM8LST0h7rXzfFQdDmKwThJZm5hNIEnYOVzbSbtHE3KFYjeGArEi//3tl+qkaLd6DPDz
+ AKTpT1vWy5YV3Wpd5lMuGX9zVR0W8mLeVnu0FkNswyOs4TOOWHLciYmJ5WJ0PKaTkoMQ
+ KKptvMM6Ci67SPTEYab3elaCiOIqn4mYGd2B+f2PFJnl4wcAT+ra6YDTP2iPY6geAlhy
+ hMeYGyZGbuq5hAPbEy7pipuNovr/ksGEtknkLOcZHic9V0G4HfYOo/uJfgwww0+0KWqo
+ vUCw==
+X-Gm-Message-State: AOAM532z8dcZ3LssvvCs4ZBBrbv1lEdwiexH3kKcnK9y5KXpU39jUyNX
+ qVzfbc0kYDYodmkFQWew8DCNJw5NUg1uhFJR
+X-Google-Smtp-Source: ABdhPJzO8REDZZcreYaUJHiwGqdZeMNTpYmonInZ3MJxjC+pxdFj9oH4j5DjeBZ2RtTgpIfNJNPl6g==
+X-Received: by 2002:a63:5020:0:b0:39e:5d26:4316 with SMTP id
+ e32-20020a635020000000b0039e5d264316mr8406474pgb.294.1650252749387; 
+ Sun, 17 Apr 2022 20:32:29 -0700 (PDT)
+Received: from smtpclient.apple ([203.90.233.36])
+ by smtp.gmail.com with ESMTPSA id
+ c6-20020aa78806000000b00505fd6423b2sm10249549pfo.95.2022.04.17.20.32.28
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Sun, 17 Apr 2022 20:32:28 -0700 (PDT)
 From: Walter Mitty <waltermitty121906@gmail.com>
-Date: Thu, 14 Apr 2022 17:08:47 +0800
-Message-ID: <CAOgZG1wmkfd29NL_dk4uugz=BgCeG2HCvT1vV-u8iKM=K=0goQ@mail.gmail.com>
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0 (Mac OS X Mail 15.0 \(3693.40.0.1.81\))
+Message-Id: <BE152BD8-547B-497C-AB2C-CCF553D3AEA5@gmail.com>
+Date: Mon, 18 Apr 2022 11:32:26 +0800
 To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="000000000000f2661205dc99a4f5"
-X-Mailman-Approved-At: Thu, 14 Apr 2022 09:48:17 +0000
-Subject: [Spice-devel] Is there a good way to estimate the latency of spice?
+X-Mailer: Apple Mail (2.3693.40.0.1.81)
+X-Mailman-Approved-At: Mon, 18 Apr 2022 05:03:05 +0000
+Subject: [Spice-devel] Does SPICE support long time single touch to trigger
+ right click action?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,27 +73,12 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000f2661205dc99a4f5
-Content-Type: text/plain; charset="UTF-8"
+As we all know, on windows 10 touch device, user can long touch to =
+trigger right click. I found that it does not work on SPICE. My question =
+is:
+Is this a SPICE BUG or some hidden features that enabled by some params?=20=
 
-Hello everyone,
-During my experience of SPICE, I feel it is not fluent. So I wanna know the
-latency about interactivity and rendering. From my understanding, It may be
-the time from the moment draging an app-window to the moment that client
-rendering changes.
-Any suggestions will be appreciated.
+Thanks in advance.
+
 Regards,
-Walter.
-
---000000000000f2661205dc99a4f5
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hello everyone,<div>During my experience of SPICE, I feel =
-it is not fluent. So I wanna know the latency about interactivity and rende=
-ring. From my understanding, It may be the time from the moment draging=C2=
-=A0an app-window to the moment that client rendering changes.</div><div>Any=
- suggestions will be=C2=A0appreciated.</div><div>Regards,</div><div>Walter.=
-</div></div>
-
---000000000000f2661205dc99a4f5--
+Walter.=
