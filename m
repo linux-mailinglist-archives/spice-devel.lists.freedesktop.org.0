@@ -1,54 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABB615068EC
-	for <lists+spice-devel@lfdr.de>; Tue, 19 Apr 2022 12:42:32 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66BCA5069BC
+	for <lists+spice-devel@lfdr.de>; Tue, 19 Apr 2022 13:21:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4899810E77E;
-	Tue, 19 Apr 2022 10:42:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3976E10F0F1;
+	Tue, 19 Apr 2022 11:21:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3E22010E240
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 10:42:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1650364947;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Nebluk/18IOJE7zAEMMVF9T4XsKiVQTbmCUW1xEAo40=;
- b=iL1wJOzbiNMi3B8wXxhsRdRsDpDqilojWUpn+7qmTQuuM+SiDo7pBpjNWPKs+zqiByWua4
- bKNBDYKU1IV23qkQGycWrju9efa0Rg+OAtIkdnoOIh0UZ6E9L3xC3dpzw8M6ROUnc+nz+T
- IFRFsU8Mne/1dEhT2nF9qW+saMhCxXU=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-348-kQADS0cZOraLDxA-jD9w2w-1; Tue, 19 Apr 2022 06:42:23 -0400
-X-MC-Unique: kQADS0cZOraLDxA-jD9w2w-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1B5361C0E348;
- Tue, 19 Apr 2022 10:42:23 +0000 (UTC)
-Received: from localhost (unknown [10.40.192.233])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B5F9B403367;
- Tue, 19 Apr 2022 10:42:22 +0000 (UTC)
-Date: Tue, 19 Apr 2022 12:42:21 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Walter Mitty <waltermitty121906@gmail.com>
-Message-ID: <20220419104221.yysms2qpvwzsslgr@tapioca>
-References: <CAOgZG1z9a38rO71avvKvdbtpNBxxOBZQsVz4jiNFUMKrCFPELQ@mail.gmail.com>
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 93E1B10F0F1
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 11:21:02 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id o2so28735529lfu.13
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 04:21:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZxTOQX5N9gdqd476pLCaOVX5l+NjOwqS0x+/3DpKm4M=;
+ b=CEgW6jUqOdhGkmy/SSggq78pEdZFgJAXWhbT5FkdlxDTeCIclX4fFlMeKPe58z6S0m
+ XutOrzXwAjz0UJnhKU8ww8ZPJeM1ruaYDfYGJy2/RhRMNyhT7B0aYu6zIw/uFSqZeq+q
+ s0ce5konvc/rtrFLKVXnH7PrG/xHKdy9QBKYdSxNcYry2V8NYUB3MRl77hePhIwkThPx
+ 5lJx1jG0wjHi2XxHSa7utR9R17lytWirIE7HBw98cCWYfgX5ndRCZrQAem4+Q6u9HKlE
+ TEerkIyLO6Ae8oQVpXMZA6nRge8NrcJVDlyV5+P3xhbNmKLVuFp0npPH6pKZMzMV2CJ1
+ 0BMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZxTOQX5N9gdqd476pLCaOVX5l+NjOwqS0x+/3DpKm4M=;
+ b=HVmSgWDpW7U3jy5+cvLDWwNmiUk30qmfyVGEsIVV7bwQJMOp7bTI+PqDvkFExLTUqN
+ 9uasrmjongw/AuyPGnfqkRqSF3b8epaZ3Mr4CVqOGJJxrLQaDUW1+D8gScUy35IoMre1
+ eMG7sgTAqM1sn9X1VfzDzk+Nu3NhryZcxp+QoZAr5vEmHe4b17gSFNMR0xj8CdFeplEM
+ p308is/524xRbJOSO6ENmZNp4sCL0Y0jF+GO8QRj8gWIPfUrHSkTlXdNRNSSo46fXRah
+ pMNVh9Dt9BFOqhMbbBiCd99dju9D/MuCK0cs6gRYwRv2YhFzQi+iC9FOjVrEtqkZNUQe
+ wgjQ==
+X-Gm-Message-State: AOAM530sYqSdluQGfZs5Ck0DqL4KQt2c6JXqeBUOLMJT7pMLD9GR1GzG
+ cQIUalsiEz8W1bN8rytB4kB9l7ilyuYNvlBlyos=
+X-Google-Smtp-Source: ABdhPJzqHuelMekehqd1X+TdmoDgNc3snumzdRnL9dxwEe4H7vrR0746DVytXZtrv36HpTQuSlxpvyqhbO/ftTFKXhA=
+X-Received: by 2002:a05:6512:c21:b0:471:9935:f8f2 with SMTP id
+ z33-20020a0565120c2100b004719935f8f2mr5128221lfu.650.1650367260637; Tue, 19
+ Apr 2022 04:21:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="jdausbrdbgbwg5bv"
-Content-Disposition: inline
-In-Reply-To: <CAOgZG1z9a38rO71avvKvdbtpNBxxOBZQsVz4jiNFUMKrCFPELQ@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
-Subject: Re: [Spice-devel] Code confusion: the difference between
- video_stream_trace_update() and video_stream_maintenance()
+References: <BE152BD8-547B-497C-AB2C-CCF553D3AEA5@gmail.com>
+ <20220419102949.wjainq7icd3fhpnj@tapioca>
+In-Reply-To: <20220419102949.wjainq7icd3fhpnj@tapioca>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Tue, 19 Apr 2022 12:20:49 +0100
+Message-ID: <CAHt6W4ctGReKD4m2pMm2AVrbnghAa628CiLMW=iqAbp0=yV+FQ@mail.gmail.com>
+To: Victor Toso <victortoso@redhat.com>
+Content-Type: multipart/alternative; boundary="00000000000051bfb905dd0012f5"
+Subject: Re: [Spice-devel] Does SPICE support long time single touch to
+ trigger right click action?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,55 +63,90 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: Walter Mitty <waltermitty121906@gmail.com>,
+ "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+--00000000000051bfb905dd0012f5
+Content-Type: text/plain; charset="UTF-8"
 
---jdausbrdbgbwg5bv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Il giorno mar 19 apr 2022 alle ore 11:29 Victor Toso <victortoso@redhat.com>
+ha scritto:
+
+> Hi,
+>
+> On Mon, Apr 18, 2022 at 11:32:26AM +0800, Walter Mitty wrote:
+> > As we all know, on windows 10 touch device, user can long touch
+> > to trigger right click. I found that it does not work on SPICE.
+> > My question is: Is this a SPICE BUG or some hidden features
+> > that enabled by some params?
+> > Thanks in advance.
+>
+> Spice client sends the events to Spice sever which handles it out
+> to QEMU to do the emulation part on the guest. That is, client
+> sends mouse_press and eventually mouse_release.
+>
+> If this is not working, you can consider it a bug. Needs to track
+> it down in which component it'd be.
+>
+> > Regards,
+> > Walter.
+>
+> Sorry long delays on replying here.
+>
+> Cheers,
+> Victor
+>
 
 Hi,
+  I would test if this is only the behaviour of the touch or also of the
+mouse.
+Technically a long tap on the touch is not the same as a long click of the
+mouse.
+I would test with a physical Windows machine with the mouse. Does it
+present the same behaviour of the touch? In this case SPICE should work too.
+If not, the issue is that we support the mouse and not a touch device.
 
-On Wed, Apr 13, 2022 at 03:06:24PM +0800, Walter Mitty wrote:
-> Hello,
-> I am learning spice-server source code. And i'm confusing the 2
-> functions in `video-stream.cpp`: video_stream_trace_update /
-> video_stream_maintenance.
->=20
-> There is a todo about it.
-> Any suggestions please?
+Frediano
 
-I think the TODO is also to clarify if and when functions were
-needed and how to properly use them. I'd need to dive into it to
-check. If you understand them, I'd appreciate if you submit a
-documentation patch about it, I'd be happy to review your
-findings.
+--00000000000051bfb905dd0012f5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Cheers,
-Victor
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">Il giorno mar 19 apr 2022 alle ore 11:29 Victor Toso &lt;<a href=3D"=
+mailto:victortoso@redhat.com">victortoso@redhat.com</a>&gt; ha scritto:<br>=
+</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
+order-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<br>
+<br>
+On Mon, Apr 18, 2022 at 11:32:26AM +0800, Walter Mitty wrote:<br>
+&gt; As we all know, on windows 10 touch device, user can long touch<br>
+&gt; to trigger right click. I found that it does not work on SPICE.<br>
+&gt; My question is: Is this a SPICE BUG or some hidden features<br>
+&gt; that enabled by some params? <br>
+&gt; Thanks in advance.<br>
+<br>
+Spice client sends the events to Spice sever which handles it out<br>
+to QEMU to do the emulation part on the guest. That is, client<br>
+sends mouse_press and eventually mouse_release.<br>
+<br>
+If this is not working, you can consider it a bug. Needs to track<br>
+it down in which component it&#39;d be.<br>
+<br>
+&gt; Regards,<br>
+&gt; Walter.<br>
+<br>
+Sorry long delays on replying here.<br>
+<br>
+Cheers,<br>
+Victor<br></blockquote><div><br></div><div>Hi,</div><div>=C2=A0 I would tes=
+t if this is only the behaviour of the touch or also of the mouse.</div><di=
+v>Technically a long tap on the touch is not the same as a long click of th=
+e mouse.</div><div>I would test with a physical Windows machine with the mo=
+use. Does it present the same behaviour of the touch? In this case SPICE sh=
+ould work too.</div><div>If not, the issue is that we support the mouse and=
+ not a touch device.<br></div><div><br></div><div>Frediano<br></div></div><=
+/div>
 
---jdausbrdbgbwg5bv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmJekg0ACgkQl9kSPeN6
-SE8OJA/+OrhEQwT2jDcEKQO4y67YEZc67A5EFhJynBMs3+B5LFZThJab/qrRWt8G
-ZU+pby8FB2yaZUvwA/SelljoO4pyZ+7pAEfGa2ykkOCZxtGU0/5O+/OqU+Xu2kVh
-0HvryJ5r8nVig2Kdmpr/VlVv0VbWNEPjET6xIo/+DFVTSjQNkgGq3AKS0R2gYxnq
-acpRwU1+SRGD43waCCwEVwxzFKXmaNYcUFhoZ4BL69mXBuFDr+Jdysxyp5pnEUhG
-OlZ9TDsuIn7D/d/V8a3AriuP1BQXMeXU3ktH0/3EnyqgZrzWOiUN1ELliDpWY1oc
-ULx8EcesRgkJyPag3hy+3Y+SnDe8ePCYIHwwLzusaNCT8z0CeYsBoJtA+rksBFL0
-hQhTOAiUNspSClE6SIt6dnm9DxX5QaQgt5oLroI3XJW+EmNf9msptH1XjhErjRh1
-gwBaD9wa/zpHcjipqetrWDAx1fO8sEwbgSroP1Tn8XvQyEymQdINi4cEMzEvYwo7
-9R5j/wO+wHrgoxfM+a9IJs8s+kM3kKSdZcdPTOmFtvqBWo2IqKuGeFEJweyXByZx
-EoIHvpvs1x3zQ4rVigVJKoBdfN71mYC2A7exdnSi3EpVSIRaYw/F8aTVjVZ/BEok
-6ud2v/Ax1FgKyX7MM4bX3687Bs85JlREy20lpFpVVfNdRkzBdA4=
-=s40F
------END PGP SIGNATURE-----
-
---jdausbrdbgbwg5bv--
-
+--00000000000051bfb905dd0012f5--
