@@ -1,57 +1,52 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D5CF507228
-	for <lists+spice-devel@lfdr.de>; Tue, 19 Apr 2022 17:53:07 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9828507D63
+	for <lists+spice-devel@lfdr.de>; Wed, 20 Apr 2022 01:53:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1964410EEBC;
-	Tue, 19 Apr 2022 15:53:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6314510E3A2;
+	Tue, 19 Apr 2022 23:53:08 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D9E3110EEBC
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 15:53:04 +0000 (UTC)
-Received: by mail-lj1-x234.google.com with SMTP id bn33so21058610ljb.6
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 08:53:04 -0700 (PDT)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 230F210E3A2
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 23:53:06 +0000 (UTC)
+Received: by mail-oi1-x22a.google.com with SMTP id w194so292904oiw.11
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 16:53:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MttdahTq2hrKqvduqFFQRsiSmCScyd3DAy3QKt/dhKU=;
- b=QMO/29xC0EqsNwpn1p/6sEzsJRa7XNoRNigNuOYhYKPR06O/UsW9Hi1r5g4hNnTE5J
- +96F7ptx02XM2pbXsLjma+UurZ77TwcAUVLANBsHDNhI454AUXrdh4vzX26StlSmtU4g
- 1zlt/q5elqAZJ19vmsg1R1oLY9l1vKtZIDRy9EvUrutEjLMpRhW7trO9AKlNp7u/vXUb
- jDisdSQJ4NabZFRgnCmikiKv3B8Z13fxxl19COtjqz5k9I4US3KUtuY3+haWCf7MOJt8
- XRZEOBWkpgx08G3aGiRKz3dOMjMp1WKYJ+wI7pOvcLYZiaxMzs8vQze7N9kAwCIYdwFc
- Mt/A==
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=1Ei89UDE0yVEUvyqO2c+3Gnfux+v/LYKI/ee8EIua/A=;
+ b=Qm9S5ffUEaaU6qpVV7eLLTAhje3psHQOHkM3PYUSzZ55+mVmASgMMZshELVeoEnK1Q
+ ojvvfZavbAQseZ0fhg6gh++zobeQr1Eiph3c6QN5N2Wx3ktPSc2QjBAylpklcI0n358p
+ kKYZCqWbYYwwkwIyJK5doXqLBMqnwjnO2hYIUlUr5fUxzh0u1G8vk8gOjzUPyG56tQbg
+ PaQjAJtve9DbOi5RS30xtxTqaRu6IfDCUrN1RCu3nSbQGT2FHscV0QoG3waPlSQasTmw
+ Wzi6F6L8t39w84G3yNLtDp+TxAOmohDkZXG9lNG0tc6Idb3j/C8MhffWGSDO3ffdccyn
+ KV4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=MttdahTq2hrKqvduqFFQRsiSmCScyd3DAy3QKt/dhKU=;
- b=MAjTs0tRFh1nNCjM+hbgoY603Or4zOoeFfSKgmj7KifcGmmvacoME3NzDDxMk4Ernj
- BK8kUQambU4/Emv7eP0MNpdK97x261RYUhpn4hD0J66JbciO4agWm9CoPCOf3Mq0zGDk
- T3ctTsbZxlEVjlNQ4iLp7cWG6zIOSEv22iOKXQgmHzSbB7aDEkr6jRy4G2kxCutAPt+4
- XFpBaX1iztUt4Ieyb5z3+50PQS/xoo4EMLEWOPbSfH3JMzEqchpmJaHOvm3IkIQGYiFz
- 35DpwHVaD8Bh3Nibo5FQBzIFq4lNwFE2IUeDZBCJVJdzBwg4JOoK3B06e8/4hoHyaU/y
- CU/w==
-X-Gm-Message-State: AOAM531K5FvszdT8mygvx5xa3WXMizZEy5/k+bgh8pz74QaAYUtZvcdF
- Ns0EkV/NN0DG4PWJig84c0RvCJKjMnFhtZF+SpA=
-X-Google-Smtp-Source: ABdhPJxkecQliEWsxV71y/lbNUJ9zcheK7mHTICUPJwhMH21aWW2MH/hYVOTDZ7zB2rO0oC8U9QzuYl+bonbNoWNDws=
-X-Received: by 2002:a2e:8184:0:b0:24d:b11f:484f with SMTP id
- e4-20020a2e8184000000b0024db11f484fmr9585181ljg.240.1650383583043; Tue, 19
- Apr 2022 08:53:03 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=1Ei89UDE0yVEUvyqO2c+3Gnfux+v/LYKI/ee8EIua/A=;
+ b=o6nc9fncg63wHC1PSOUG2avwF4872Y+HzeumG6228Q7y1MxcAnDSjPTKlC/UPWTy/9
+ KzyTlqdMagZZ4Yv7F5dW+dWwHr6T48rt+wcM4T5I9tF2MfMwk84vR/sQx+HXISvi8XV0
+ 3FQGtfq4lKmFzDMevK9K7CrIoaCSNg3p1bKqKyqLF8DPCKbK1dv633xYTJRLl44ttItK
+ yMLr1kmRRq1qvAGxHHwjtqda0rr/CMoQVjwakJ/DfNhAgx0rxbxNb89iiV71+yUtU/ri
+ rDiyZnRJaa7ceYS8ZBwuYD5cjuWILvpcce9NUrBHeT0IMIQfY4wWjRaU2d55ESWC3oFO
+ hC/w==
+X-Gm-Message-State: AOAM533CXsVRwHAplhdoy9pJan3rd7Do67127iXxVuOpkIoS+aIuGR99
+ 0hW/bXeha9qrhcq0XbYWJxnSW5uvvmXM2ijgVkbeEr9AGTY=
+X-Google-Smtp-Source: ABdhPJy7KQOK9/y9RHzilN4Mv5Nk1yCOwBmoiqV86m9ETPukSyNWOKlGQd1+cjPBHFtuXiJ8NawKffH8JQNV41HoVTk=
+X-Received: by 2002:a05:6808:85:b0:322:3a36:8a45 with SMTP id
+ s5-20020a056808008500b003223a368a45mr495806oic.279.1650412386102; Tue, 19 Apr
+ 2022 16:53:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAOgZG1z9a38rO71avvKvdbtpNBxxOBZQsVz4jiNFUMKrCFPELQ@mail.gmail.com>
- <20220419104221.yysms2qpvwzsslgr@tapioca>
-In-Reply-To: <20220419104221.yysms2qpvwzsslgr@tapioca>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 19 Apr 2022 16:52:51 +0100
-Message-ID: <CAHt6W4cM3wX_tWu79eWCA8CN-MGwBagnkNaX01RJaFJeEDrhSA@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>
-Content-Type: multipart/alternative; boundary="00000000000035e50105dd03df97"
-Subject: Re: [Spice-devel] Code confusion: the difference between
- video_stream_trace_update() and video_stream_maintenance()
+From: i iordanov <iiordanov@gmail.com>
+Date: Tue, 19 Apr 2022 19:52:29 -0400
+Message-ID: <CAMS0tn0O3=trQ=cGHDQgKYrvXs3v5RS-v0KQkDk=c-tR=9jQqg@mail.gmail.com>
+To: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
+Subject: [Spice-devel] New native SPICE and VNC Clients for iOS and Mac OS X
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,83 +58,35 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Walter Mitty <waltermitty121906@gmail.com>,
- "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000035e50105dd03df97
-Content-Type: text/plain; charset="UTF-8"
+Hello,
 
-Il giorno mar 19 apr 2022 alle ore 11:42 Victor Toso <victortoso@redhat.com>
-ha scritto:
+I wanted to let you all know that I've released a new native SPICE
+(and VNC) Clients for iOS and Mac OS X written in Swift. aSPICE comes
+with console.vv and audio support. I've open-sourced them under the
+GPLv3 license and put up the source code here:
 
-> Hi,
->
-> On Wed, Apr 13, 2022 at 03:06:24PM +0800, Walter Mitty wrote:
-> > Hello,
-> > I am learning spice-server source code. And i'm confusing the 2
-> > functions in `video-stream.cpp`: video_stream_trace_update /
-> > video_stream_maintenance.
-> >
-> > There is a todo about it.
-> > Any suggestions please?
->
-> I think the TODO is also to clarify if and when functions were
-> needed and how to properly use them. I'd need to dive into it to
-> check. If you understand them, I'd appreciate if you submit a
-> documentation patch about it, I'd be happy to review your
-> findings.
->
-> Cheers,
-> Victor
->
+https://gitlab.com/iiordanov/remote-desktop-clients-ios
 
-Hi,
-   I wish I had a better reply but not much.
-From a quick glance one is more "focused", the other less.
-video_stream_trace_update is scanning all possible streams and traces
-looking for matches while video_stream_maintenance is looking for a single
-stream. Looking at callers one of the callers of video_stream_maintenance
-is current_add_equal which is called if another Drawable matches exactly
-(same position and size).
+From the above-mentioned iOS code repository are built bVNC and aSPICE
+for iOS/Mac OS X. An RDP client for iOS called aRDP is also in the
+works.
 
-Frediano
+This approach to build out multiple apps from a single repository is
+similar to my Android clients bVNC and aSPICE, aRDP, and Opaque which
+you may be familiar with (code at
+https://github.com/iiordanov/remote-desktop-clients).
 
---00000000000035e50105dd03df97
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The new apps are available at the following links if you want to try them out:
+aSPICE: https://apps.apple.com/ca/app/aspice-pro/id1560593107
+bVNC: https://apps.apple.com/ca/app/bvnc-pro/id1506461202
 
-<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
-_attr">Il giorno mar 19 apr 2022 alle ore 11:42 Victor Toso &lt;<a href=3D"=
-mailto:victortoso@redhat.com">victortoso@redhat.com</a>&gt; ha scritto:<br>=
-</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
-order-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<br>
-<br>
-On Wed, Apr 13, 2022 at 03:06:24PM +0800, Walter Mitty wrote:<br>
-&gt; Hello,<br>
-&gt; I am learning spice-server source code. And i&#39;m confusing the 2<br=
->
-&gt; functions in `video-stream.cpp`: video_stream_trace_update /<br>
-&gt; video_stream_maintenance.<br>
-&gt; <br>
-&gt; There is a todo about it.<br>
-&gt; Any suggestions please?<br>
-<br>
-I think the TODO is also to clarify if and when functions were<br>
-needed and how to properly use them. I&#39;d need to dive into it to<br>
-check. If you understand them, I&#39;d appreciate if you submit a<br>
-documentation patch about it, I&#39;d be happy to review your<br>
-findings.<br>
-<br>
-Cheers,<br>
-Victor<br></blockquote><div><br></div><div>Hi,</div><div>=C2=A0=C2=A0 I wis=
-h I had a better reply but not much.</div><div>From a quick glance one is m=
-ore &quot;focused&quot;, the other less. video_stream_trace_update is scann=
-ing all possible streams and traces looking for matches while video_stream_=
-maintenance is looking for a single stream. Looking at callers one of the c=
-allers of video_stream_maintenance is current_add_equal which is called if =
-another Drawable matches exactly (same position and size).<br></div><div><b=
-r></div><div>Frediano<br></div></div></div>
+I hope you find them useful!
 
---00000000000035e50105dd03df97--
+Sincerely,
+iordan
+
+-- 
+The conscious mind has only one thread of execution.
