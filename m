@@ -1,64 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05CE3504C19
-	for <lists+spice-devel@lfdr.de>; Mon, 18 Apr 2022 07:03:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A448C5068C9
+	for <lists+spice-devel@lfdr.de>; Tue, 19 Apr 2022 12:29:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B55F10E0A3;
-	Mon, 18 Apr 2022 05:03:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1D6C510E7C1;
+	Tue, 19 Apr 2022 10:29:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6508B10EC3D
- for <spice-devel@lists.freedesktop.org>; Mon, 18 Apr 2022 03:32:30 +0000 (UTC)
-Received: by mail-pg1-x52d.google.com with SMTP id s137so16560277pgs.5
- for <spice-devel@lists.freedesktop.org>; Sun, 17 Apr 2022 20:32:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:content-transfer-encoding:mime-version:subject:message-id:date
- :to; bh=uf0vdwNl5Pn7tcXxhQs5c+nus56iuVWXEMTB+Ad/RXM=;
- b=j53IDV5v3T8uS5qJcuDuc/lWC/BPz1D2445cZ68pEcmSZwROieMTmXtzFcBfj6ftf2
- ZoP2oGV9DvCNai+j86wd8VEqlTQWAfxAYWANSpoo8G8g5Uga8h3l3/+4fE+N3R0VjXpX
- L6R+RsHIr9MjXKRRWn6Fjhqc1/yXcuzaU4VCg5KyZJbsrPaBrYjQwHn6XJ2qBHIJ3xQu
- 0eltXJNdyrCuKBXTHBG0Pn8JUBetwzF2wXGmYj1iwnje/rE6Xg5G26EEpcxffER/TnKV
- 4EJj7pJ5n1OeDS7xnNq2mzM1ndwxmakY9SOOc+hIdxx8O7CmkKkNvEnDkOvJtggD1CfR
- u8mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:content-transfer-encoding:mime-version
- :subject:message-id:date:to;
- bh=uf0vdwNl5Pn7tcXxhQs5c+nus56iuVWXEMTB+Ad/RXM=;
- b=zvKHMMAcwFA0wflQBSxGkamQF9GLX1cDK79Oquax3rUfanw4aOd06Bwd4A4P/vjXIJ
- vM8LST0h7rXzfFQdDmKwThJZm5hNIEnYOVzbSbtHE3KFYjeGArEi//3tl+qkaLd6DPDz
- AKTpT1vWy5YV3Wpd5lMuGX9zVR0W8mLeVnu0FkNswyOs4TOOWHLciYmJ5WJ0PKaTkoMQ
- KKptvMM6Ci67SPTEYab3elaCiOIqn4mYGd2B+f2PFJnl4wcAT+ra6YDTP2iPY6geAlhy
- hMeYGyZGbuq5hAPbEy7pipuNovr/ksGEtknkLOcZHic9V0G4HfYOo/uJfgwww0+0KWqo
- vUCw==
-X-Gm-Message-State: AOAM532z8dcZ3LssvvCs4ZBBrbv1lEdwiexH3kKcnK9y5KXpU39jUyNX
- qVzfbc0kYDYodmkFQWew8DCNJw5NUg1uhFJR
-X-Google-Smtp-Source: ABdhPJzO8REDZZcreYaUJHiwGqdZeMNTpYmonInZ3MJxjC+pxdFj9oH4j5DjeBZ2RtTgpIfNJNPl6g==
-X-Received: by 2002:a63:5020:0:b0:39e:5d26:4316 with SMTP id
- e32-20020a635020000000b0039e5d264316mr8406474pgb.294.1650252749387; 
- Sun, 17 Apr 2022 20:32:29 -0700 (PDT)
-Received: from smtpclient.apple ([203.90.233.36])
- by smtp.gmail.com with ESMTPSA id
- c6-20020aa78806000000b00505fd6423b2sm10249549pfo.95.2022.04.17.20.32.28
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 17 Apr 2022 20:32:28 -0700 (PDT)
-From: Walter Mitty <waltermitty121906@gmail.com>
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 15.0 \(3693.40.0.1.81\))
-Message-Id: <BE152BD8-547B-497C-AB2C-CCF553D3AEA5@gmail.com>
-Date: Mon, 18 Apr 2022 11:32:26 +0800
-To: spice-devel@lists.freedesktop.org
-X-Mailer: Apple Mail (2.3693.40.0.1.81)
-X-Mailman-Approved-At: Mon, 18 Apr 2022 05:03:05 +0000
-Subject: [Spice-devel] Does SPICE support long time single touch to trigger
- right click action?
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8BA4010E7C1
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 10:29:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1650364192;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=O+PJbA3EceqSL1G3cfE1OKg7oJweXkT0Po1d9KBRHw0=;
+ b=Ia0+lVbatfqgExaJHsB98m3ZvN+e4gGSA2RiE7nwnPOowIRzcdBTDXO4oQ+CdlGX2Vnf10
+ boVLUzB3be3OPnpPEGMBjG/PO5ZYKJ+64hj1zTZvItkzMQUKZD6k5gaX8hm5ZXhHjQfXvZ
+ xaCO7h5rSiml2JSDzIAlFW0ls7ckyb0=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-670-tDK1Th6WM9Ogxl3MLVGk9Q-1; Tue, 19 Apr 2022 06:29:51 -0400
+X-MC-Unique: tDK1Th6WM9Ogxl3MLVGk9Q-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B19941014A61;
+ Tue, 19 Apr 2022 10:29:50 +0000 (UTC)
+Received: from localhost (unknown [10.40.192.233])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 433E6C53526;
+ Tue, 19 Apr 2022 10:29:50 +0000 (UTC)
+Date: Tue, 19 Apr 2022 12:29:49 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Walter Mitty <waltermitty121906@gmail.com>
+Message-ID: <20220419102949.wjainq7icd3fhpnj@tapioca>
+References: <BE152BD8-547B-497C-AB2C-CCF553D3AEA5@gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="yiwkrvnnlnz7bain"
+Content-Disposition: inline
+In-Reply-To: <BE152BD8-547B-497C-AB2C-CCF553D3AEA5@gmail.com>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
+Subject: Re: [Spice-devel] Does SPICE support long time single touch to
+ trigger right click action?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,15 +60,59 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-As we all know, on windows 10 touch device, user can long touch to =
-trigger right click. I found that it does not work on SPICE. My question =
-is:
-Is this a SPICE BUG or some hidden features that enabled by some params?=20=
 
-Thanks in advance.
+--yiwkrvnnlnz7bain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Walter.=
+Hi,
+
+On Mon, Apr 18, 2022 at 11:32:26AM +0800, Walter Mitty wrote:
+> As we all know, on windows 10 touch device, user can long touch
+> to trigger right click. I found that it does not work on SPICE.
+> My question is: Is this a SPICE BUG or some hidden features
+> that enabled by some params?=20
+> Thanks in advance.
+
+Spice client sends the events to Spice sever which handles it out
+to QEMU to do the emulation part on the guest. That is, client
+sends mouse_press and eventually mouse_release.
+
+If this is not working, you can consider it a bug. Needs to track
+it down in which component it'd be.
+
+> Regards,
+> Walter.
+
+Sorry long delays on replying here.
+
+Cheers,
+Victor
+
+--yiwkrvnnlnz7bain
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmJejxwACgkQl9kSPeN6
+SE8+iQ/+PUVccohilnxMW7Cu1LICeYWj1QL/Y4b52RXC4CL2m0fDhRR9hD4k97l3
+kAT+uQfIRQ2gxPVwsG7zBnCTHjR7l8EvQ+N23JP80WHeXtHCrHY9uY8b/0u/4TCw
+4sfGMGLaGg7RbuuxZmRMQtD+/aXa60qCb10mi45GFkP6dHKk8I4EVtI9upLufbyJ
+H+JKBga7ngh4HT8+2hOXYUffZrECVyCt5ANHo3AASd6rwK11p/95rpQKtEFF8h7g
+7LZsU045kMhKWjrdb4rx+BL7YmXNoC6rjJezDeVsWUXWN0okF3OYBfchGhKWhOYn
+f3puuPx1gs6AaalkHH7Fpw0fNQfezKPnieOwXEb1BkKHehdZSwHBYXT4oP2gPz0h
+vmWepnZr/YxN2xpucEJs1SqvCz5Jy1KhprwjDCAMWOw8lhj5rZSHSZRZ5pcEZJU/
+qNrrMbbPzJeXtdk+39QiZTEfJQMIaf7HBh8u6VPFPRvJphQEeAYz2HC8cKi8AGWi
+YV8oythgyZ0E4WunP1FRNrFYvpioxL3rGKEnQ3MqMnLGPVq5EIQEFJ1tRemLuC9B
+yoVJyEYTZhGPu9JtoFOzc780SWzN2aZGNRPq58J56jgUsatopb+aOHJGmsG3N2f7
+ua9Nw9YxzjGvmXPt8rWmCEDKdlaX0XseYXJQBeVfQZOXKLMA9T0=
+=xl/f
+-----END PGP SIGNATURE-----
+
+--yiwkrvnnlnz7bain--
+
