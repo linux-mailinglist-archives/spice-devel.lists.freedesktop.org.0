@@ -2,51 +2,56 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9828507D63
-	for <lists+spice-devel@lfdr.de>; Wed, 20 Apr 2022 01:53:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A69E750844C
+	for <lists+spice-devel@lfdr.de>; Wed, 20 Apr 2022 10:59:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6314510E3A2;
-	Tue, 19 Apr 2022 23:53:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1B9DA10F272;
+	Wed, 20 Apr 2022 08:59:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 230F210E3A2
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 23:53:06 +0000 (UTC)
-Received: by mail-oi1-x22a.google.com with SMTP id w194so292904oiw.11
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Apr 2022 16:53:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=1Ei89UDE0yVEUvyqO2c+3Gnfux+v/LYKI/ee8EIua/A=;
- b=Qm9S5ffUEaaU6qpVV7eLLTAhje3psHQOHkM3PYUSzZ55+mVmASgMMZshELVeoEnK1Q
- ojvvfZavbAQseZ0fhg6gh++zobeQr1Eiph3c6QN5N2Wx3ktPSc2QjBAylpklcI0n358p
- kKYZCqWbYYwwkwIyJK5doXqLBMqnwjnO2hYIUlUr5fUxzh0u1G8vk8gOjzUPyG56tQbg
- PaQjAJtve9DbOi5RS30xtxTqaRu6IfDCUrN1RCu3nSbQGT2FHscV0QoG3waPlSQasTmw
- Wzi6F6L8t39w84G3yNLtDp+TxAOmohDkZXG9lNG0tc6Idb3j/C8MhffWGSDO3ffdccyn
- KV4g==
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D6F56892CD
+ for <spice-devel@lists.freedesktop.org>; Wed, 20 Apr 2022 08:59:05 +0000 (UTC)
+Received: by mail-ed1-x52b.google.com with SMTP id u18so1402493eda.3
+ for <spice-devel@lists.freedesktop.org>; Wed, 20 Apr 2022 01:59:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=selfip.ru; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=qvVjf5ye2LJWlmI7fINgJshc4Y9906spOFxD9V4mnzE=;
+ b=Wa/H/eNCJXXlPOdXxcZEGKwQf/y8fUXpY4ApYfDIp/MhGM0hoiGAviHPOMacm0E2iq
+ oYmCYym5ekaybu7S7AbU43d8gOT4u4znKR+RtZDRu7HCcrZGmXFFmzEM05i76yWl9Al3
+ OlicOqZemjZn/Y8vY7+ClKPxCyg0l8VhuzChs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=1Ei89UDE0yVEUvyqO2c+3Gnfux+v/LYKI/ee8EIua/A=;
- b=o6nc9fncg63wHC1PSOUG2avwF4872Y+HzeumG6228Q7y1MxcAnDSjPTKlC/UPWTy/9
- KzyTlqdMagZZ4Yv7F5dW+dWwHr6T48rt+wcM4T5I9tF2MfMwk84vR/sQx+HXISvi8XV0
- 3FQGtfq4lKmFzDMevK9K7CrIoaCSNg3p1bKqKyqLF8DPCKbK1dv633xYTJRLl44ttItK
- yMLr1kmRRq1qvAGxHHwjtqda0rr/CMoQVjwakJ/DfNhAgx0rxbxNb89iiV71+yUtU/ri
- rDiyZnRJaa7ceYS8ZBwuYD5cjuWILvpcce9NUrBHeT0IMIQfY4wWjRaU2d55ESWC3oFO
- hC/w==
-X-Gm-Message-State: AOAM533CXsVRwHAplhdoy9pJan3rd7Do67127iXxVuOpkIoS+aIuGR99
- 0hW/bXeha9qrhcq0XbYWJxnSW5uvvmXM2ijgVkbeEr9AGTY=
-X-Google-Smtp-Source: ABdhPJy7KQOK9/y9RHzilN4Mv5Nk1yCOwBmoiqV86m9ETPukSyNWOKlGQd1+cjPBHFtuXiJ8NawKffH8JQNV41HoVTk=
-X-Received: by 2002:a05:6808:85:b0:322:3a36:8a45 with SMTP id
- s5-20020a056808008500b003223a368a45mr495806oic.279.1650412386102; Tue, 19 Apr
- 2022 16:53:06 -0700 (PDT)
-MIME-Version: 1.0
-From: i iordanov <iiordanov@gmail.com>
-Date: Tue, 19 Apr 2022 19:52:29 -0400
-Message-ID: <CAMS0tn0O3=trQ=cGHDQgKYrvXs3v5RS-v0KQkDk=c-tR=9jQqg@mail.gmail.com>
-To: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
-Subject: [Spice-devel] New native SPICE and VNC Clients for iOS and Mac OS X
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=qvVjf5ye2LJWlmI7fINgJshc4Y9906spOFxD9V4mnzE=;
+ b=rudATtsUEN0WIWLkvfKBjJJLT4OHPAwNhc2k3SrdA8NJtDUtv4B+dBix4hzGbtRhTX
+ gKm+GXWhOji2PJ8CHDObbWBN2DhJdMJdGQp/z/pT024AxV53kJFAkCCGJX9UUh7/8lfE
+ RbHfOM/F+0y71tl+qrSFS60JdGAxhKVZjcmI4j7wD/0hD0tStKHkIcMECOyhMAlTQe19
+ YRo/fE8Dgtxqej5Zy1de/836D3CsYsQy3ugXcNZRbdfxBJN6RE3AfNgkgpbb3wjoADBJ
+ pBxtnKE8mfCTMbl5eKkmM/YjygrKanXHs+/sgt/Wbq9SQtf7K0I6GDH82txEjYLO43YT
+ t9xQ==
+X-Gm-Message-State: AOAM533VEFDB2SqzROz69gMKukduEB3Oy01VnvnbJ3IPH6yVNnNBrfMd
+ TDyTsvvhdkEQcX3hTw0vSQpJJr1xHGfSKkx8rcQVEmrG4LlXsA==
+X-Google-Smtp-Source: ABdhPJxe5JdqSMe3x8lvYln5BhgU7AEmLgpIl+lYSge0IRN/Qy5cHRjd1MUFKjBuCHyuFTg4jaPodQhfM6yur/vKiro=
+X-Received: by 2002:aa7:d543:0:b0:416:13eb:6fec with SMTP id
+ u3-20020aa7d543000000b0041613eb6fecmr22451671edr.348.1650445144146; Wed, 20
+ Apr 2022 01:59:04 -0700 (PDT)
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 20 Apr 2022 01:59:03 -0700
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 20 Apr 2022 01:58:54 -0700
+Mime-Version: 1.0 (Mimestream 0.34.2)
+References: <CAMS0tn0O3=trQ=cGHDQgKYrvXs3v5RS-v0KQkDk=c-tR=9jQqg@mail.gmail.com>
+In-Reply-To: <CAMS0tn0O3=trQ=cGHDQgKYrvXs3v5RS-v0KQkDk=c-tR=9jQqg@mail.gmail.com>
+From: Vasiliy Tolstov <v.tolstov@selfip.ru>
+Date: Wed, 20 Apr 2022 01:59:03 -0700
+Message-ID: <CACaajQvqVoO+QynpnoBAbMA=LSjXyUVxcy49WkjjtjJeX9DTpA@mail.gmail.com>
+To: i iordanov <iiordanov@gmail.com>
+Content-Type: multipart/alternative; boundary="00000000000089d56905dd123468"
+Subject: Re: [Spice-devel] New native SPICE and VNC Clients for iOS and Mac
+ OS X
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,35 +63,97 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hello,
+--00000000000089d56905dd123468
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I wanted to let you all know that I've released a new native SPICE
-(and VNC) Clients for iOS and Mac OS X written in Swift. aSPICE comes
-with console.vv and audio support. I've open-sourced them under the
-GPLv3 license and put up the source code here:
+Hi! Very good news. Do you have free version available via homebrew?
+--=20
+Vasiliy Tolstov,
+e-mail: v.tolstov@selfip.ru
 
-https://gitlab.com/iiordanov/remote-desktop-clients-ios
 
-From the above-mentioned iOS code repository are built bVNC and aSPICE
-for iOS/Mac OS X. An RDP client for iOS called aRDP is also in the
-works.
+=D0=9D=D0=B0 20 =D0=B0=D0=BF=D1=80. 2022 =D0=B3., 02:52:29, i iordanov <iio=
+rdanov@gmail.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB=D0=B8:
 
-This approach to build out multiple apps from a single repository is
-similar to my Android clients bVNC and aSPICE, aRDP, and Opaque which
-you may be familiar with (code at
-https://github.com/iiordanov/remote-desktop-clients).
+> Hello,
+>
+> I wanted to let you all know that I've released a new native SPICE
+> (and VNC) Clients for iOS and Mac OS X written in Swift. aSPICE comes
+> with console.vv and audio support. I've open-sourced them under the
+> GPLv3 license and put up the source code here:
+>
+> https://gitlab.com/iiordanov/remote-desktop-clients-ios
+>
+> From the above-mentioned iOS code repository are built bVNC and aSPICE
+> for iOS/Mac OS X. An RDP client for iOS called aRDP is also in the
+> works.
+>
+> This approach to build out multiple apps from a single repository is
+> similar to my Android clients bVNC and aSPICE, aRDP, and Opaque which
+> you may be familiar with (code at
+> https://github.com/iiordanov/remote-desktop-clients).
+>
+> The new apps are available at the following links if you want to try them
+> out:
+> aSPICE: https://apps.apple.com/ca/app/aspice-pro/id1560593107
+> bVNC: https://apps.apple.com/ca/app/bvnc-pro/id1506461202
+>
+> I hope you find them useful!
+>
+> Sincerely,
+> iordan
+>
+> --
+> The conscious mind has only one thread of execution.
+>
 
-The new apps are available at the following links if you want to try them out:
-aSPICE: https://apps.apple.com/ca/app/aspice-pro/id1560593107
-bVNC: https://apps.apple.com/ca/app/bvnc-pro/id1506461202
+--00000000000089d56905dd123468
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I hope you find them useful!
+<html><body><div dir=3D"ltr">Hi! Very good news. Do you have free version a=
+vailable via homebrew?<br><div><div class=3D"gmail_signature" data-smartmai=
+l=3D"gmail_signature"><div dir=3D"ltr"><div>--=C2=A0</div>Vasiliy Tolstov,<=
+br>e-mail: <a href=3D"mailto:v.tolstov@selfip.ru" target=3D"_blank">v.tolst=
+ov@selfip.ru</a></div></div></div><br clear=3D"all"><br>
+    <div class=3D"gmail_quote">
+        <div dir=3D"ltr" class=3D"gmail_attr">=D0=9D=D0=B0 20 =D0=B0=D0=BF=
+=D1=80. 2022=C2=A0=D0=B3., 02:52:29, i iordanov &lt;<a href=3D"mailto:iiord=
+anov@gmail.com">iiordanov@gmail.com</a>&gt; =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=
+=D0=B0=D0=BB=D0=B8:<br></div>
+        <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex" type=3D"cite">
+           =20
+<div>
+<div>
+    Hello,<br><br>I wanted to let you all know that I&#39;ve released a new=
+ native SPICE<br>(and VNC) Clients for iOS and Mac OS X written in Swift. a=
+SPICE comes<br>with console.vv and audio support. I&#39;ve open-sourced the=
+m under the<br>GPLv3 license and put up the source code here:<br><br><a hre=
+f=3D"https://gitlab.com/iiordanov/remote-desktop-clients-ios">https://gitla=
+b.com/iiordanov/remote-desktop-clients-ios</a><br><br>From the above-mentio=
+ned iOS code repository are built bVNC and aSPICE<br>for iOS/Mac OS X. An R=
+DP client for iOS called aRDP is also in the<br>works.<br><br>This approach=
+ to build out multiple apps from a single repository is<br>similar to my An=
+droid clients bVNC and aSPICE, aRDP, and Opaque which<br>you may be familia=
+r with (code at<br><a href=3D"https://github.com/iiordanov/remote-desktop-c=
+lients">https://github.com/iiordanov/remote-desktop-clients</a>).<br><br>Th=
+e new apps are available at the following links if you want to try them out=
+:<br>aSPICE: <a href=3D"https://apps.apple.com/ca/app/aspice-pro/id15605931=
+07">https://apps.apple.com/ca/app/aspice-pro/id1560593107</a><br>bVNC: <a h=
+ref=3D"https://apps.apple.com/ca/app/bvnc-pro/id1506461202">https://apps.ap=
+ple.com/ca/app/bvnc-pro/id1506461202</a><br><br>I hope you find them useful=
+!<br><br>Sincerely,<br>iordan<br><br>-- <br>The conscious mind has only one=
+ thread of execution.<br>
+</div>
+</div>
+        </blockquote>
+    </div>
+</div></body></html>
 
-Sincerely,
-iordan
-
--- 
-The conscious mind has only one thread of execution.
+--00000000000089d56905dd123468--
