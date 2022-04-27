@@ -2,54 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BECF350DF1C
-	for <lists+spice-devel@lfdr.de>; Mon, 25 Apr 2022 13:44:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 394E55113F4
+	for <lists+spice-devel@lfdr.de>; Wed, 27 Apr 2022 10:59:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E1A7310E4E4;
-	Mon, 25 Apr 2022 11:44:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 203DD10E3F9;
+	Wed, 27 Apr 2022 08:59:20 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E7CEF10E4E6
- for <spice-devel@lists.freedesktop.org>; Mon, 25 Apr 2022 11:44:46 +0000 (UTC)
-Received: by mail-lf1-x131.google.com with SMTP id w19so25637422lfu.11
- for <spice-devel@lists.freedesktop.org>; Mon, 25 Apr 2022 04:44:46 -0700 (PDT)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44BA610E403
+ for <spice-devel@lists.freedesktop.org>; Wed, 27 Apr 2022 08:59:19 +0000 (UTC)
+Received: by mail-qt1-x82b.google.com with SMTP id ay11so677319qtb.4
+ for <spice-devel@lists.freedesktop.org>; Wed, 27 Apr 2022 01:59:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=kMH1apIf0by8fCrHIdrn+7zyUhr9k7fO2OxGw8G9nNU=;
- b=C/in6FpDB/2CbqB+OS/rl0Qqi56ipjtkal/ajnErQ9fQWF5zNTJBIgJQ5YKUdLkOaF
- 0HFoc4rrRR60nBzigowm0QFs0Awo8IgtWzbl+JG4dF67sLRapaiTIXLWbO8+8IanxXpo
- WGiepR5mwtVZ1T/G0ahRS0c1ZwOAtLudThFKeEoOLl8zeb7TT7Eqlc1FKdbqBtC321wC
- /ZSK5PRduOC9xaf+CBmG/2NDVpPIxlx2qFakLbcstgYjbWy+BJwod4SnYJWK62D36UV2
- yn1kjdwdbtmHowzcTv+eT3Is6E3sn4/445fvy9qYlNDlOol7mMnqcPlqaQwzyP3TEuUA
- yIdQ==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=8jziubB9BLq0NySG65ddUdc8EFWuO+uYBqHxaULNtyI=;
+ b=grviNatZT+VQ35W49v2Pq9Rmh8HogDWDiTUCioYecYJ376OnA3JTorsqRMW6GoA5ne
+ mWFyIVdZw3F213TSJqtNnv8JM9namBalsoyzTLorYpL6fqGLq3uDBSlBCEuc7lOUTwzr
+ hKALXac11NyAfSdkTKDCkRpgc9uBhWKqUsC06YDXYtmmGzbyBuzcY38OZHPS4OJP1yaS
+ av+f/x0JMUqZ+frmDnbKKeKP33SvXH5Lz4Y3LAfU1oAk5ea4O6IJA0zyRbuDTyHIek/K
+ 4BLhlNmdt0GAFb/9+HnWuHKQNbtm36O0kLAOza1D/jNcyL0xGGqNBJ/06fRX4+158qtR
+ xpCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=kMH1apIf0by8fCrHIdrn+7zyUhr9k7fO2OxGw8G9nNU=;
- b=n2OH2zfH5mpR8GHLtHxFwUD1zD/LD8XL/zWSCAnt96l0yaJ9p3tprtgILNprvtektI
- 9IFK6QL++ecq0JQMDdBRCnZbdhiDL0ZQnUhDdPEa4S4/eVKY+EdtyyvIrZ+rnkmjoCPm
- MLiNi6gJm/n2K3TVWzJ6eHpaiD0tGzdXc+Eo2lekVp/SxCMDOSgbQMZpyB1OCg/fQkw1
- 7LY2REF58O5J2wnyuDeqkX3CuUo9pK0rwsFtaSkaRGePhtKEwA17w0hqNmY8gDDwvGRd
- LExL/HWV3x3eOXiz0iYq/IXJ+yNPci46bioawG/Iwf8Y8iNpo9CjN5cAUArGtleybE3X
- 4imw==
-X-Gm-Message-State: AOAM531wdsR3YlYtQOSaV+VuseQcTEd+jvOuwBB+CM0vGyubAm8qR3+T
- 6z7FMuPy3iNTil0i22JPsqW0bxZ4FWtZwixgs0U=
-X-Google-Smtp-Source: ABdhPJx60CfOsF+Z+0jSKgQtvpK6gJtaJqxwZ7l5sGh27O6aKYKCWItg2ETfh3R4VfTXfSxVGg6rUJOCxoGN5sdgzlE=
-X-Received: by 2002:a05:6512:32ca:b0:472:921:a806 with SMTP id
- f10-20020a05651232ca00b004720921a806mr2764825lfg.135.1650887085095; Mon, 25
- Apr 2022 04:44:45 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=8jziubB9BLq0NySG65ddUdc8EFWuO+uYBqHxaULNtyI=;
+ b=rqND+XTVWD/mHiFVzs8uh2Leyr6h8xe+mSGpgTgxc1R4S0G231J9y74SHxbDRG0xSU
+ Jl7PH9fOYB6ZFM3A/EMEjN7EJvRHt0Tol80z60fyO4F0z3+wCd+i6vZqtnoHqRvcHXMX
+ JjIEV6W5rp1rjNK4/RTaJ06bWztpG0WeBgEN6H1uQf7piMR0g5arTV3wvWbyMWdRq0nO
+ SpePpg+Cwln+lowg3jNS9SLRkB0l8FQluQNvng2uvsmgqFjj1JB8RzvvRED5I6HTt3O0
+ V22MTgk5hJPABeQ0oeAGN0/u899QYvJ20G43UFp3vnb96ADY85zhjynWUJlDNy3uKhti
+ tRfw==
+X-Gm-Message-State: AOAM533cib2OjQh5pFd2CwiNRpiTdxUIZo4+k5e1kOyYTCqWFqvu2sZT
+ vVlo8Rjj6rB/iiVghe4ZYXhlemRLPj+IoPN8MnG+3ZuBt5w=
+X-Google-Smtp-Source: ABdhPJzuw/JfuHHryPbVlyNZR+qb23ormYJE90xZtBG4M5rzbFuXMTZShSCgh84XDY7gSWVN0wXGYR689VoH+bip38w=
+X-Received: by 2002:a05:622a:143:b0:2e0:b7c8:3057 with SMTP id
+ v3-20020a05622a014300b002e0b7c83057mr18447213qtw.179.1651049958207; Wed, 27
+ Apr 2022 01:59:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAOgZG1waEgPVdBR=+nMb2ROZh0jCnoaqvfSJtSs+AFppxSVCjw@mail.gmail.com>
-In-Reply-To: <CAOgZG1waEgPVdBR=+nMb2ROZh0jCnoaqvfSJtSs+AFppxSVCjw@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Mon, 25 Apr 2022 12:44:33 +0100
-Message-ID: <CAHt6W4eoY_oKMznijoNSeKBNFHE1RkSAH4-GP0uLb7bKpC7Tgg@mail.gmail.com>
-To: Walter Mitty <waltermitty121906@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000457ef905dd791aa5"
-Subject: Re: [Spice-devel] Problem with mouse input
+From: Ahmad Ismail <ismail783@gmail.com>
+Date: Wed, 27 Apr 2022 14:59:10 +0600
+Message-ID: <CAHAhJwJ0Zag6P4Y8GfxDOi9ApQ5f-YbZ1uj-rQJ3Rh5FUvN26w@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="00000000000043f50005dd9f064c"
+Subject: [Spice-devel] spice-devel@lists.freedesktop.org
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,124 +58,128 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000457ef905dd791aa5
+--00000000000043f50005dd9f064c
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
-   the intention is clear, collapse the movements (sum up relative
-movements) to avoid a queue getting too big. If you need a larger queue you
-can simply change the check on spice-gtk.
-One question is however why you want all events. About naming and
-readability I think a "unacked_motion_count" instead of just "motion_count"
-here would be more appropriate.
+When I run VM with the following command:
 
-Regards,
-  Frediano
+qemu-system-x86_64 -accel kvm,thread=multi -cpu host -smp 2 -m 4096 \
+-drive file=/media/blueray/WDPurple8TB/QEMU_Backup/ubuntu.qcow2,if=virtio \
+-vga virtio -display gtk,gl=on
 
+I get the following screen:
 
-Il giorno lun 25 apr 2022 alle ore 07:46 Walter Mitty <
-waltermitty121906@gmail.com> ha scritto:
+https://i.stack.imgur.com/HofCx.png
 
-> Hi,
-> I=E2=80=99m learning spice source code. And recently, when I used a drawi=
-ng app I
-> found some mouse input events were dropped. I tried to understand it from
-> the code.
-> From code perspective, In inputs-channel.c, spice-gtk will check if
-> *motion_count* is smaller than SPICE_INPUT_MOTION_ACK_BUNCH((which is 4))
-> * 2. On spice-server, at on_mouse_motion(), on every
-> SPICE_INPUT_MOTION_ACK_BUNCHmouse motion events, server side sends a RED_=
-PIPE_ITEM_MOUSE_MOTION_ACK
-> event to client. And in
-> response, the client reduces *motion_count *by 4 and continues event
-> sending. It seems that before the client response finishes, some events a=
-re
-> dropped.
-> I wanna avoid event dropping, my idea is taking advantage of the event
-> queue to store all events. And the server retrieves events from the queue
-> to write to the virtual device .
->
-> My question is: Is the event dropping reasonable?  Could you please give
-> some advice about how to avoid it?  Thanks very much~
->
-> Regards,
-> Walter.
->
->
+But I do not see this screen when I use spice using:
 
---000000000000457ef905dd791aa5
+#!/bin/bash
+
+QEMU_AUDIO_DRV=spice
+
+qemu-system-x86_64 -accel kvm,thread=multi -cpu host -smp 2 -m 8192 \
+-drive file=/media/blueray/WDPurple8TB/QEMU_Backup/ubuntu.qcow2,if=virtio \
+-machine vmport=off \
+-vga qxl -usb -device qemu-xhci -device usb-tablet \
+-soundhw hda \
+-spice port=5911,addr=127.0.0.1,disable-ticketing \
+-device virtio-serial-pci \
+-chardev spicevmc,id=spicechannel0,debug=0,name=vdagent \
+-device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 \
+-device virtserialport,chardev=charchannel1,id=channel1,name=org.spice-space.webdav.0
+\
+-chardev spiceport,name=org.spice-space.webdav.0,id=charchannel1 \
+-daemonize
+
+remote-viewer --spice-shared-dir=/media/blueray/WDPurple8TB/QEMU_Backup/Ubuntu_Share
+spice://127.0.0.1:5911 > /dev/null 2>&1 &
+
+The problem is I need to use spice for other features.
+
+What can I do?
+
+--00000000000043f50005dd9f064c
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Hi,</div><div>=C2=A0=C2=A0 the intention is clear, co=
-llapse the movements (sum up relative movements) to avoid a queue getting t=
-oo big. If you need a larger queue you can simply change the check on spice=
--gtk.</div><div>One question is however why you want all events. About nami=
-ng and readability I think a &quot;unacked_motion_count&quot; instead of ju=
-st &quot;motion_count&quot; here would be more=C2=A0appropriate.<br></div><=
-div><br></div><div>Regards,<br></div><div><div><div dir=3D"ltr" class=3D"gm=
-ail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr">=C2=A0 F=
-rediano</div></div></div><br></div></div><br><div class=3D"gmail_quote"><di=
-v dir=3D"ltr" class=3D"gmail_attr">Il giorno lun 25 apr 2022 alle ore 07:46=
- Walter Mitty &lt;<a href=3D"mailto:waltermitty121906@gmail.com">waltermitt=
-y121906@gmail.com</a>&gt; ha scritto:<br></div><blockquote class=3D"gmail_q=
-uote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,2=
-04);padding-left:1ex"><div dir=3D"ltr"><font style=3D"color:rgb(0,0,0);font=
--family:Helvetica" size=3D"4">Hi,</font><div style=3D"color:rgb(0,0,0);font=
--family:Helvetica;font-size:12px"><font size=3D"4">I=E2=80=99m learning spi=
-ce source code. And recently, when I used=C2=A0a drawing app I found some m=
-ouse input=C2=A0events were dropped. I tried to understand it=C2=A0from the=
- code.</font></div><div style=3D"color:rgb(0,0,0);font-family:Helvetica;fon=
-t-size:12px"><font size=3D"4">From code perspective, In inputs-channel.c, s=
-pice-gtk will check if<span>=C2=A0</span><b>motion_count</b><span>=C2=A0</s=
-pan>is smaller than=C2=A0<span style=3D"color:rgb(3,47,98);font-family:Menl=
-o,Monaco,&quot;Courier New&quot;,monospace;white-space:pre-wrap">SPICE_INPU=
-T_MOTION_ACK_BUNCH(</span><span style=3D"color:rgb(3,47,98);font-family:Men=
-lo,Monaco,&quot;Courier New&quot;,monospace;white-space:pre-wrap">(</span><=
-span style=3D"color:rgb(3,47,98);font-family:Menlo,Monaco,&quot;Courier New=
-&quot;,monospace;white-space:pre-wrap">which is 4</span><span style=3D"colo=
-r:rgb(3,47,98);font-family:Menlo,Monaco,&quot;Courier New&quot;,monospace;w=
-hite-space:pre-wrap">)</span><span style=3D"color:rgb(3,47,98);font-family:=
-Menlo,Monaco,&quot;Courier New&quot;,monospace;white-space:pre-wrap">) * 2.=
- On spice-server, at=C2=A0</span><span style=3D"color:rgb(111,66,193);font-=
-family:Menlo,Monaco,&quot;Courier New&quot;,monospace;white-space:pre-wrap"=
->on_mouse_motion()</span><span style=3D"color:rgb(3,47,98);font-family:Menl=
-o,Monaco,&quot;Courier New&quot;,monospace;white-space:pre-wrap">,=C2=A0</s=
-pan></font><font style=3D"font-size:large" face=3D"Menlo, Monaco, Courier N=
-ew, monospace" color=3D"#032f62"><span style=3D"white-space:pre-wrap">on </=
-span><span style=3D"white-space:pre-wrap">every </span></font><span style=
-=3D"font-size:large;color:rgb(3,47,98);font-family:Menlo,Monaco,&quot;Couri=
-er New&quot;,monospace;white-space:pre-wrap">SPICE_INPUT_MOTION_ACK_BUNCH</=
-span><span style=3D"font-size:large;color:rgb(3,47,98);font-family:Menlo,Mo=
-naco,&quot;Courier New&quot;,monospace;white-space:pre-wrap">mouse motion e=
-vents, server side sends a </span><font style=3D"font-size:large" face=3D"M=
-enlo, Monaco, Courier New, monospace" color=3D"#24292e"><span style=3D"whit=
-e-space:pre-wrap">RED_PIPE_ITEM_MOUSE_MOTION_ACK event to client. </span><s=
-pan style=3D"white-space:pre-wrap">And in</span></font></div><div style=3D"=
-color:rgb(0,0,0);font-family:Helvetica;font-size:12px"><font size=3D"4" fac=
-e=3D"Menlo, Monaco, Courier New, monospace" color=3D"#24292e"><span style=
-=3D"white-space:pre-wrap">response, the client reduces <b>motion_count </b>=
-by 4 and continues event sending. It seems that before the client response =
-finishes, some events are dropped.</span></font></div><div style=3D"color:r=
-gb(0,0,0);font-family:Helvetica;font-size:12px"><font size=3D"4">I wanna av=
-oid event dropping, my idea is taking advantage of the event queue to=C2=A0=
-store all=C2=A0events. And the server retrieves=C2=A0events from the queue =
-to write to the virtual device .=C2=A0</font></div><div style=3D"color:rgb(=
-0,0,0);font-family:Helvetica;font-size:12px"><font size=3D"4"><br></font></=
-div><div style=3D"color:rgb(0,0,0);font-family:Helvetica;font-size:12px"><s=
-pan style=3D"font-size:large">My question is: Is the event dropping reasona=
-ble?</span><span style=3D"font-size:large">=C2=A0=C2=A0</span><font size=3D=
-"4">Could you please give some advice about how to avoid=C2=A0it?=C2=A0 Tha=
-nks very much~</font></div><div style=3D"color:rgb(0,0,0);font-family:Helve=
-tica;font-size:12px"><font size=3D"4"><br></font></div><div style=3D"color:=
-rgb(0,0,0);font-family:Helvetica;font-size:12px"><font size=3D"4">Regards,<=
-/font></div><div style=3D"color:rgb(0,0,0);font-family:Helvetica;font-size:=
-12px"><font size=3D"4">Walter.</font></div><br></div>
-</blockquote></div>
+<div dir=3D"ltr"><p style=3D"margin-top:0px;margin-right:0px;margin-left:0p=
+x;padding:0px;border:0px;font-variant-numeric:inherit;font-variant-east-asi=
+an:inherit;font-stretch:inherit;line-height:inherit;font-family:-apple-syst=
+em,BlinkMacSystemFont,&quot;Segoe UI Adjusted&quot;,&quot;Segoe UI&quot;,&q=
+uot;Liberation Sans&quot;,sans-serif;font-size:15px;vertical-align:baseline=
+;box-sizing:inherit;clear:both;color:rgb(35,38,41)">When I run VM with the =
+following command:</p><pre style=3D"margin-top:0px;border:0px;font-variant-=
+numeric:inherit;font-variant-east-asian:inherit;font-stretch:inherit;vertic=
+al-align:baseline;box-sizing:inherit;width:auto;max-height:600px;overflow:a=
+uto"><code style=3D"margin:0px;padding:0px;border:0px;font-style:inherit;fo=
+nt-variant:inherit;font-weight:inherit;font-stretch:inherit;line-height:inh=
+erit;vertical-align:baseline;box-sizing:inherit;background-color:transparen=
+t;white-space:inherit;border-radius:0px">qemu-system-x86_64 -accel kvm,thre=
+ad=3Dmulti -cpu host -smp 2 -m 4096 \
+-drive file=3D/media/blueray/WDPurple8TB/QEMU_Backup/ubuntu.qcow2,if=3Dvirt=
+io \
+-vga virtio -display gtk,gl=3Don
+</code></pre><p style=3D"margin-top:0px;margin-right:0px;margin-left:0px;pa=
+dding:0px;border:0px;font-variant-numeric:inherit;font-variant-east-asian:i=
+nherit;font-stretch:inherit;line-height:inherit;font-family:-apple-system,B=
+linkMacSystemFont,&quot;Segoe UI Adjusted&quot;,&quot;Segoe UI&quot;,&quot;=
+Liberation Sans&quot;,sans-serif;font-size:15px;vertical-align:baseline;box=
+-sizing:inherit;clear:both;color:rgb(35,38,41)">I get the following screen:=
+</p><p style=3D"margin-top:0px;margin-right:0px;margin-left:0px;padding:0px=
+;border:0px;font-variant-numeric:inherit;font-variant-east-asian:inherit;fo=
+nt-stretch:inherit;line-height:inherit;font-family:-apple-system,BlinkMacSy=
+stemFont,&quot;Segoe UI Adjusted&quot;,&quot;Segoe UI&quot;,&quot;Liberatio=
+n Sans&quot;,sans-serif;font-size:15px;vertical-align:baseline;box-sizing:i=
+nherit;clear:both;color:rgb(35,38,41)"><a href=3D"https://i.stack.imgur.com=
+/HofCx.png">https://i.stack.imgur.com/HofCx.png</a><br></p><p style=3D"marg=
+in-top:0px;margin-right:0px;margin-left:0px;padding:0px;border:0px;font-var=
+iant-numeric:inherit;font-variant-east-asian:inherit;font-stretch:inherit;l=
+ine-height:inherit;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe=
+ UI Adjusted&quot;,&quot;Segoe UI&quot;,&quot;Liberation Sans&quot;,sans-se=
+rif;font-size:15px;vertical-align:baseline;box-sizing:inherit;clear:both;co=
+lor:rgb(35,38,41)">But I do not see this screen when I use spice using:</p>=
+<pre style=3D"margin-top:0px;border:0px;font-variant-numeric:inherit;font-v=
+ariant-east-asian:inherit;font-stretch:inherit;vertical-align:baseline;box-=
+sizing:inherit;width:auto;max-height:600px;overflow:auto"><code style=3D"ma=
+rgin:0px;padding:0px;border:0px;font-style:inherit;font-variant:inherit;fon=
+t-weight:inherit;font-stretch:inherit;line-height:inherit;vertical-align:ba=
+seline;box-sizing:inherit;background-color:transparent;white-space:inherit;=
+border-radius:0px">#!/bin/bash
 
---000000000000457ef905dd791aa5--
+QEMU_AUDIO_DRV=3Dspice
+
+qemu-system-x86_64 -accel kvm,thread=3Dmulti -cpu host -smp 2 -m 8192 \
+-drive file=3D/media/blueray/WDPurple8TB/QEMU_Backup/ubuntu.qcow2,if=3Dvirt=
+io \
+-machine vmport=3Doff \
+-vga qxl -usb -device qemu-xhci -device usb-tablet \
+-soundhw hda \
+-spice port=3D5911,addr=3D127.0.0.1,disable-ticketing \
+-device virtio-serial-pci \
+-chardev spicevmc,id=3Dspicechannel0,debug=3D0,name=3Dvdagent \
+-device virtserialport,chardev=3Dspicechannel0,name=3Dcom.redhat.spice.0 \
+-device virtserialport,chardev=3Dcharchannel1,id=3Dchannel1,name=3Dorg.spic=
+e-space.webdav.0 \
+-chardev spiceport,name=3Dorg.spice-space.webdav.0,id=3Dcharchannel1 \
+-daemonize
+
+remote-viewer --spice-shared-dir=3D/media/blueray/WDPurple8TB/QEMU_Backup/U=
+buntu_Share spice://<a href=3D"http://127.0.0.1:5911">127.0.0.1:5911</a> &g=
+t; /dev/null 2&gt;&amp;1 &amp;
+</code></pre><p style=3D"margin-top:0px;margin-right:0px;margin-left:0px;pa=
+dding:0px;border:0px;font-variant-numeric:inherit;font-variant-east-asian:i=
+nherit;font-stretch:inherit;line-height:inherit;font-family:-apple-system,B=
+linkMacSystemFont,&quot;Segoe UI Adjusted&quot;,&quot;Segoe UI&quot;,&quot;=
+Liberation Sans&quot;,sans-serif;font-size:15px;vertical-align:baseline;box=
+-sizing:inherit;clear:both;color:rgb(35,38,41)">The problem is I need to us=
+e spice for other features.</p><p style=3D"margin:0px;padding:0px;border:0p=
+x;font-variant-numeric:inherit;font-variant-east-asian:inherit;font-stretch=
+:inherit;line-height:inherit;font-family:-apple-system,BlinkMacSystemFont,&=
+quot;Segoe UI Adjusted&quot;,&quot;Segoe UI&quot;,&quot;Liberation Sans&quo=
+t;,sans-serif;font-size:15px;vertical-align:baseline;box-sizing:inherit;cle=
+ar:both;color:rgb(35,38,41)">What can I do?</p></div>
+
+--00000000000043f50005dd9f064c--
