@@ -1,91 +1,91 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62DC55154CC
-	for <lists+spice-devel@lfdr.de>; Fri, 29 Apr 2022 21:39:41 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C22BF5154CB
+	for <lists+spice-devel@lfdr.de>; Fri, 29 Apr 2022 21:39:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A125610E9BD;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 374D410E720;
 	Fri, 29 Apr 2022 19:39:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 2264 seconds by postgrey-1.36 at gabe;
- Fri, 29 Apr 2022 14:29:14 UTC
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DFB6110ED62;
- Fri, 29 Apr 2022 14:29:14 +0000 (UTC)
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23TBZSqW029789;
- Fri, 29 Apr 2022 13:51:25 GMT
+X-Greylist: delayed 2400 seconds by postgrey-1.36 at gabe;
+ Fri, 29 Apr 2022 14:31:52 UTC
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CB4FF10EDB9;
+ Fri, 29 Apr 2022 14:31:52 +0000 (UTC)
+Received: from pps.filterd (m0127361.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23TDYhSl008429;
+ Fri, 29 Apr 2022 13:51:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=pp1;
- bh=JsP9DZ13GY9p4Te/4OhuyLur42PMbft/qLBbv9gdVfA=;
- b=NdBt+3oWgMAh6kkB5ONjj6VT9226CnPF3qib/HpQq0itE/3j34BjXwWM5FT6Ri6Ob4Eg
- pn9x+wVa57SeWNcXePpggb2jaoFu2r463WXTlBY/ycXqyQdgWD6DAweWjdfGwvHHLcZ4
- 0BELjPDh2ikuzvNHGlgfWPu6yMBFNX073G7yzY25Bcn7gcZPR+GB66j2hfmXoZUMtn6D
- 03zaAaVsCxCRP24JO38Ldtq0xJFFZa7JoHLu59iMa8vi+lR0tsQqecuKMCprks0W0qi4
- 3Llkk2yFvVhDIASkWVZs+XT9/c41zqI9nHmIeO//3VK8NM1MYLngreFg61Ftcqjk7q9H NA== 
+ bh=tOl03ECMEn4YtYdNKQOLjABy+3U2mCnQjDfJteHnEJE=;
+ b=j7Pmz35WyQRuo8W4Jv8jTL/s6ga4cYNzB191f21SnmzbeCDozXjZWok1S2wqsoArywKV
+ YX/fA7WlUfzwX2ikQP9vN62z51+E1eHLITaLhqnujDsZrrDdErwClKjbn/6J5iUQKrRo
+ zCjKr4iXoqWD5ildcqxcmGm3/NZ81oynpOfgfZyNHuLOHAIWlsvtwkhntdb4C6JBvb73
+ VFp8RdMhz4ukezenQtZRfqLaqzkgTplb4546RcfAJRXFpdMjmeXaCUI7+56p+giND56Y
+ Zgj0nHmSEQZ4Dy/OTd5fAuF8k0g8c6PmNDUkwT5EsI7EHbYMGDw/QLnZCs3KGKPqVRMI sg== 
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3fqv5rjk2f-1
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3fqu6p511r-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 29 Apr 2022 13:51:24 +0000
-Received: from m0098399.ppops.net (m0098399.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 23TDVxnB015749;
- Fri, 29 Apr 2022 13:51:24 GMT
-Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.99])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3fqv5rjk1c-1
+ Fri, 29 Apr 2022 13:51:47 +0000
+Received: from m0127361.ppops.net (m0127361.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 23TDEqGJ010914;
+ Fri, 29 Apr 2022 13:51:46 GMT
+Received: from ppma03fra.de.ibm.com (6b.4a.5195.ip4.static.sl-reverse.com
+ [149.81.74.107])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3fqu6p5111-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 29 Apr 2022 13:51:24 +0000
-Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
- by ppma04ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 23TDQlvl014243;
- Fri, 29 Apr 2022 13:51:21 GMT
-Received: from b06cxnps3074.portsmouth.uk.ibm.com
- (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
- by ppma04ams.nl.ibm.com with ESMTP id 3fm93916w4-1
+ Fri, 29 Apr 2022 13:51:46 +0000
+Received: from pps.filterd (ppma03fra.de.ibm.com [127.0.0.1])
+ by ppma03fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 23TDRowh013390;
+ Fri, 29 Apr 2022 13:51:44 GMT
+Received: from b06cxnps4074.portsmouth.uk.ibm.com
+ (d06relay11.portsmouth.uk.ibm.com [9.149.109.196])
+ by ppma03fra.de.ibm.com with ESMTP id 3fm938yatn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 29 Apr 2022 13:51:21 +0000
+ Fri, 29 Apr 2022 13:51:44 +0000
 Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com
  [9.149.105.58])
- by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 23TDpJ9F38273394
+ by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 23TDpg4726345980
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 29 Apr 2022 13:51:19 GMT
+ Fri, 29 Apr 2022 13:51:42 GMT
 Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 17FDA4C040;
- Fri, 29 Apr 2022 13:51:19 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id EB8964C040;
+ Fri, 29 Apr 2022 13:51:41 +0000 (GMT)
 Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A8D314C044;
- Fri, 29 Apr 2022 13:51:18 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id 88B5F4C044;
+ Fri, 29 Apr 2022 13:51:41 +0000 (GMT)
 Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
  by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Fri, 29 Apr 2022 13:51:18 +0000 (GMT)
+ Fri, 29 Apr 2022 13:51:41 +0000 (GMT)
 From: Niklas Schnelle <schnelle@linux.ibm.com>
 To: Arnd Bergmann <arnd@arndb.de>
-Date: Fri, 29 Apr 2022 15:50:13 +0200
-Message-Id: <20220429135108.2781579-16-schnelle@linux.ibm.com>
+Date: Fri, 29 Apr 2022 15:50:53 +0200
+Message-Id: <20220429135108.2781579-56-schnelle@linux.ibm.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220429135108.2781579-1-schnelle@linux.ibm.com>
 References: <20220429135108.2781579-1-schnelle@linux.ibm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: Z2_b3Ep6jzQYlZLubaqzG5wd29WjJfWI
-X-Proofpoint-ORIG-GUID: 2dZ9-j-Mnz9uF8ZFVdGA_r1MSqumR5yW
+X-Proofpoint-GUID: T5f3POypuR3DXhIqnVvnwVD5pm7bTljv
+X-Proofpoint-ORIG-GUID: 88UZj_djQHbMNnuH__xJuymd1-WRkzX0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
  definitions=2022-04-29_06,2022-04-28_01,2022-02-23_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0
- clxscore=1011 malwarescore=0 impostorscore=0 bulkscore=0
- lowpriorityscore=0 priorityscore=1501 mlxscore=0 adultscore=0 spamscore=0
- mlxlogscore=708 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2202240000 definitions=main-2204290078
+ impostorscore=0 bulkscore=0
+ spamscore=0 malwarescore=0 adultscore=0 mlxlogscore=567 priorityscore=1501
+ suspectscore=0 phishscore=0 clxscore=1015 mlxscore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2202240000
+ definitions=main-2204290078
 X-Mailman-Approved-At: Fri, 29 Apr 2022 19:39:38 +0000
-Subject: [Spice-devel] [RFC v2 08/39] drm: handle HAS_IOPORT dependencies
+Subject: [Spice-devel] [PATCH 31/37] drm: handle HAS_IOPORT dependencies
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,22 +111,18 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 In a future patch HAS_IOPORT=n will result in inb()/outb() and friends
 not being declared. We thus need to add HAS_IOPORT as dependency for
-those drivers using them. In the bochs driver there is optional MMIO
-support detected at runtime, warn if this isn't taken when
-HAS_IOPORT is not defined.
-
-There is also a direct and hard coded use in cirrus.c which according to
-the comment is only necessary during resume.  Let's just skip this as
-for example s390 which doesn't have I/O port support also doesen't
-support suspend/resume.
+those drivers using them. There is also a direct and hard coded use in
+cirrus.c which according to the comment is only necessary during resume.
+Let's just skip this as for example s390 which doesn't have I/O port
+support also doesen't support suspend/resume.
 
 Co-developed-by: Arnd Bergmann <arnd@kernel.org>
 Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
 ---
- drivers/gpu/drm/qxl/Kconfig   |  1 +
- drivers/gpu/drm/tiny/bochs.c  | 19 +++++++++++++++++++
- drivers/gpu/drm/tiny/cirrus.c |  2 ++
- 3 files changed, 22 insertions(+)
+ drivers/gpu/drm/qxl/Kconfig   | 1 +
+ drivers/gpu/drm/tiny/Kconfig  | 1 +
+ drivers/gpu/drm/tiny/cirrus.c | 2 ++
+ 3 files changed, 4 insertions(+)
 
 diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
 index ca3f51c2a8fe..d0e0d440c8d9 100644
@@ -140,69 +136,18 @@ index ca3f51c2a8fe..d0e0d440c8d9 100644
  	select DRM_KMS_HELPER
  	select DRM_TTM
  	select DRM_TTM_HELPER
-diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
-index ed971c8bb446..9acc726d99ec 100644
---- a/drivers/gpu/drm/tiny/bochs.c
-+++ b/drivers/gpu/drm/tiny/bochs.c
-@@ -1,5 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0-or-later
- 
-+#include <asm/bug.h>
- #include <linux/pci.h>
- 
- #include <drm/drm_aperture.h>
-@@ -102,7 +103,11 @@ static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
- 
- 		writeb(val, bochs->mmio + offset);
- 	} else {
-+#ifdef HAS_IOPORT
- 		outb(val, ioport);
-+#else
-+		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-+#endif
- 	}
- }
- 
-@@ -116,7 +121,12 @@ static u8 bochs_vga_readb(struct bochs_device *bochs, u16 ioport)
- 
- 		return readb(bochs->mmio + offset);
- 	} else {
-+#ifdef HAS_IOPORT
- 		return inb(ioport);
-+#else
-+		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-+		return 0xff;
-+#endif
- 	}
- }
- 
-@@ -129,8 +139,13 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
- 
- 		ret = readw(bochs->mmio + offset);
- 	} else {
-+#ifdef HAS_IOPORT
- 		outw(reg, VBE_DISPI_IOPORT_INDEX);
- 		ret = inw(VBE_DISPI_IOPORT_DATA);
-+#else
-+		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-+		ret = 0xffff;
-+#endif
- 	}
- 	return ret;
- }
-@@ -142,8 +157,12 @@ static void bochs_dispi_write(struct bochs_device *bochs, u16 reg, u16 val)
- 
- 		writew(val, bochs->mmio + offset);
- 	} else {
-+#ifdef HAS_IOPORT
- 		outw(reg, VBE_DISPI_IOPORT_INDEX);
- 		outw(val, VBE_DISPI_IOPORT_DATA);
-+#else
-+		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-+#endif
- 	}
- }
- 
+diff --git a/drivers/gpu/drm/tiny/Kconfig b/drivers/gpu/drm/tiny/Kconfig
+index 627d637a1e7e..7102783809c3 100644
+--- a/drivers/gpu/drm/tiny/Kconfig
++++ b/drivers/gpu/drm/tiny/Kconfig
+@@ -13,6 +13,7 @@ config DRM_ARCPGU
+ config DRM_BOCHS
+ 	tristate "DRM Support for bochs dispi vga interface (qemu stdvga)"
+ 	depends on DRM && PCI && MMU
++	depends on HAS_IOPORT
+ 	select DRM_KMS_HELPER
+ 	select DRM_VRAM_HELPER
+ 	select DRM_TTM
 diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
 index c8e791840862..0dc4788c5399 100644
 --- a/drivers/gpu/drm/tiny/cirrus.c
