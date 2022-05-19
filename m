@@ -1,68 +1,47 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A791A52DE80
-	for <lists+spice-devel@lfdr.de>; Thu, 19 May 2022 22:39:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32A2C52E64E
+	for <lists+spice-devel@lfdr.de>; Fri, 20 May 2022 09:33:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D81D611A874;
-	Thu, 19 May 2022 20:39:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9083D11B68D;
+	Fri, 20 May 2022 07:33:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 618CD11A874
- for <spice-devel@lists.freedesktop.org>; Thu, 19 May 2022 20:39:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652992749;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=QNWaYHcrbMLYvpBw0sw9PBuWVj+RIQWLx9QPRQ1Dly4=;
- b=cbP29yh6JIIusry9C0uJgO7V0oyAtlpAAvLuTUx2sSqbsmi2lcdhx/FUxFs20gUehSh2IN
- 3f1C8YtCuzny3FTBoVCgS7sv+IiO+9YUoXBdM98/pwEZpBZ7r1j47838jwZW2ye/ydF1bh
- GOMokKoyc9sevuY8s5qsKgK7utZeV2I=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-237-z7h9OG0aO-WD6EQ-I2F5MA-1; Thu, 19 May 2022 16:39:07 -0400
-X-MC-Unique: z7h9OG0aO-WD6EQ-I2F5MA-1
-Received: by mail-lf1-f69.google.com with SMTP id
- c6-20020a056512104600b00477b25bfdf8so3167394lfb.9
- for <spice-devel@lists.freedesktop.org>; Thu, 19 May 2022 13:39:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=QNWaYHcrbMLYvpBw0sw9PBuWVj+RIQWLx9QPRQ1Dly4=;
- b=uvIq58I8Mw7ou0ZH3q3r2XqFU3NaOci4DsU9z9bvnp9/0aUo3M7XmZFKfzjHfEh55C
- BzWnQtiDaK85UMo8/A6n5Qs4M3qU89a87I/LaI/MM0aWfWLdo5eM7JzZHsF/hLJPzEwx
- 0wYeWQqF/51GPVJ/6NVZiB8xfrtbRivYF9DYrTsEMDI1iHLaAxDWLOWSB8Y+ZYl6DcbI
- ex+4wV6PgH+Trzg8ibHV20ET/yZjIqqm29s/QLGB30O3yvd7IYBUYi1U9F98BZbrLeTB
- K/aHC/HkeAyrTGOOp0EZ3UlrKeF7CVj47/Qjns+aU/IiJjhv2RVolVRNDTG5/YR/9Byo
- lBgA==
-X-Gm-Message-State: AOAM531JqCoCegmFg8JvqCpdKsGzfMNET7jR0xM/jJi2nwRr80Wmm6Nf
- G6SAlkKW/0xY9Td2llWpOfFlZ7UUi+eU9/hLMI14DjzUJnLjpNe7KcZOcZS3Iy1XdUXrb0KRFWv
- bB8Q69TsthKZEJ7kCUZABSW14GekHpJ6p6sqTykQZp0a85Kc=
-X-Received: by 2002:a2e:94ce:0:b0:24b:3811:b242 with SMTP id
- r14-20020a2e94ce000000b0024b3811b242mr3636048ljh.197.1652992746355; 
- Thu, 19 May 2022 13:39:06 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJy487DR2i4vpMerux2bTyxVf2737gjjV9dNT0vz8gHjihjxYK707OMpsAfR2r2mrm/F8cdXajnaYT2X/hOFlxU=
-X-Received: by 2002:a2e:94ce:0:b0:24b:3811:b242 with SMTP id
- r14-20020a2e94ce000000b0024b3811b242mr3636042ljh.197.1652992746021; Thu, 19
- May 2022 13:39:06 -0700 (PDT)
-MIME-Version: 1.0
+X-Greylist: delayed 911 seconds by postgrey-1.36 at gabe;
+ Thu, 19 May 2022 23:07:11 UTC
+Received: from m1224.mail.163.com (m12-24.163.com [220.181.12.24])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 094C610E3DF
+ for <spice-devel@lists.freedesktop.org>; Thu, 19 May 2022 23:07:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=oehHD
+ F05w5LCikDmVOss2kAtXZEBDeEVHV68RFMbv0w=; b=e2T0Qh2ZIYrX9mQrsZC52
+ GLWf3J4qAUg+4A9xzLb0vOs+5JJ25KLx8Hk7eXjzLJgIx2E/KyPh0/rfhBFB5u3G
+ zcn00Ll0RH65tg/B2w4oJyUQO+ZlLE/4iDkNjjoWtQJGa7Ey++r/QvZpkHvHLlb3
+ x5YpXhXFmU029klTRp6aYA=
+Received: from 15529316683$163.com ( [240e:454:13d:c72c:58e3:37b6:afff:de02]
+ ) by ajax-webmail-wmsvr213 (Coremail) ; Fri, 20 May 2022 06:51:59 +0800
+ (GMT+08:00)
+X-Originating-IP: [240e:454:13d:c72c:58e3:37b6:afff:de02]
+Date: Fri, 20 May 2022 06:51:59 +0800 (GMT+08:00)
+From: 15529316683@163.com
+To: "Uri Lublin" <uril@redhat.com>
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20210622(1d4788a8)
+ Copyright (c) 2002-2022 www.mailtech.cn 163com
+In-Reply-To: <CAAg9qJ30Pmmx9_Ygtfo=qXrD_bzDByo8fh7P=_L5z6NMVN2RGg@mail.gmail.com>
 References: <3e898483.6d06.180dbbcb650.Coremail.15529316683@163.com>
-In-Reply-To: <3e898483.6d06.180dbbcb650.Coremail.15529316683@163.com>
-From: Uri Lublin <uril@redhat.com>
-Date: Thu, 19 May 2022 23:38:55 +0300
-Message-ID: <CAAg9qJ30Pmmx9_Ygtfo=qXrD_bzDByo8fh7P=_L5z6NMVN2RGg@mail.gmail.com>
-To: =?UTF-8?B?5byg5Lyf5Y2O?= <15529316683@163.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ulublin@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="000000000000717e4405df635d2a"
+ <CAAg9qJ30Pmmx9_Ygtfo=qXrD_bzDByo8fh7P=_L5z6NMVN2RGg@mail.gmail.com>
+Content-Type: multipart/alternative; 
+ boundary="----=_Part_1292_1576123538.1653000719058"
+MIME-Version: 1.0
+Message-ID: <26024a0b.1be.180de854ad2.Coremail.15529316683@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: lMeowAAXGtcPyoZivx0GAA--.46702W
+X-CM-SenderInfo: jprvkjaztrlliyt6il2tof0z/xtbBLxEGnGHmmw866AACsn
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Mailman-Approved-At: Fri, 20 May 2022 07:33:44 +0000
 Subject: Re: [Spice-devel] centos+kvm+nvidia vgpu+win10(guest) spice remote
  4K bad perform.
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -80,117 +59,111 @@ Cc: spice-devel <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000717e4405df635d2a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+------=_Part_1292_1576123538.1653000719058
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
 
-Hi Leo,
+SGkgVXJpClRoYW5rcyBmb3IgeW91ciByZXBseSBhbmQgeW91ciBub3RlcyBpcyByaWdodCBvbmx5
+IHRoYXQgClZ3IGlzIHdyb25nIHNwZWxsLiBJIG1lYW5zIHZtIGZvciB2aXJ0dWFsIG1hY2hpbmUu
+CiBJIGhhdmUgZGVwbG95IHRoZSBzdHJlYW1pbmcgYWdlbnQgYW5kIEkgd2lsbCB0cnkgaDI2NC4K
+NGsgdmRpZW8gaXMgb25lIG9mIHJlcXVpcmVtZW50cyBvZiBvdXIgcHJvamVjdC4KU28gcGxzIGhl
+bHAgdXMgd2l0aCB0aGlzLgoKCmJlc3Qgd2lzaHMKbGVvIHpoYW5nCgpPbiAwNS8yMC8yMDIyIDA0
+OjM4LCBVcmkgTHVibGluIHdyb3RlOgpIaSBMZW8sCgoKCk9uIFRodSwgTWF5IDE5LCAyMDIyIGF0
+IDE6NDMgUE0g5byg5Lyf5Y2OIDwxNTUyOTMxNjY4M0AxNjMuY29tPiB3cm90ZToKCkhpIDoKSSBh
+bSBhIHBoZCBzdHVkZW50IG9mIFhpYW4gSmlhb3RvbmcgdW5pdmVyc2l0eSBpbiBDaGluYS4KCldl
+IGhhdmUgYSBwcm9qZWN0IHRvIGFjY29tcGxpc2ggYSByZW1vdGUtZGVzayBzb2x1dGlvbiB3aXRo
+IE52aWRpYSB2Z3B1LgpXZSB1c2Ugc3BpY2UgbGF0ZXN0IHZlcnNpb24gIGFuZCBoYXZlIGEgYmFk
+IDRLIGRpc3BsYXkgcXVhbGl0eS4KT3VyIGVudmlyb25tZW50IGlzIGxpa2U6CjEuVDQgY2FyZCB3
+aXRoIGluc3B1cmUgc2VydmVyIGluIG52aWRpYSBzdXBwb3J0IGxpc3QKTlZJRElBIFRlc2xhIFQ0
+ICBHUFUgY2FyZAoKCgoyLnJlZGhhdCA4LjIgZW50ZXJwcmlzZSAgd2l0aCBrdm0gcWVtdQogCgoz
+LnZncHUgc29mdHdhcmUgcGFja2FnZSBpcyAxMy54Ck5WSURJQSBkcml2ZXIgKyB0b29scyAoR1JJ
+RCkKCiAKNC52dyBmbGF2b3IgaXMgOHUgMTZHLiB3aXRoIDQwIHN0b3JhZ2UuICAgdmdwdSBsaWNl
+bnNlIGlzIHZwYyAsYW5kIHZncHUgaXMgQi0yYi4KInZ3IiA9PSBWaXJ0dWFsIFdvcmtzdGF0aW9u
+CgpCLTJiIGlzIHRoZSB2R1BVIHR5cGU/IG1lYW5pbmcgVDQtMkIgPwpEb2VzIGl0IGhlbHAgaWYg
+eW91IGNvbmZpZ3VyZSBpdCB3aXRoIFQ0LTJRIChtYXkgcmVxdWlyZSBhIGRpZmZlcmVudCBsaWNl
+bnNlKT8KCgpPbmx5IGEgc2luZ2xlIERpc3BsYXksIHJpZ2h0ID8KCgpBcmUgeW91IHJ1bm5pbmcg
+c3BpY2Utc3RyZWFtaW5nLWFnZW50IG9uIHRoZSBndWVzdCA/ClRyeSB0byBzdHJlYW0gd2l0aCBI
+MjY0LCBpZiB5b3UgZG8gbm90IGFscmVhZHkgZG8gaXQKKG1heSByZXF1aXJlIHBheWluZyBmZWVz
+IGZvciB1c2luZyBIMjY0KS4KCgoKSXMgNGsgcmVzb2x1dGlvbiBhIHJlcXVpcmVtZW50PyBJZiBu
+b3QsIHRyeSB3aXRoIGUuZy4gMmsuCgoKCkhvcGUgdGhhdCBoZWxwcywKICAgIFVyaQoKCiAKQW5k
+IG91ciBpc3N1ZSBpcyBhdHRhY2hlZCBpbiBhcHBlbmRpeC4KUGxlYXNlIGdpdmUgdXMgc29tZSBo
+ZWxwIHRvIHNvbHZlIHRoaXMuCgoKYmVzdCB3aXNoczsKbGVvIHpoYW5nCgoKCgoKCiA=
+------=_Part_1292_1576123538.1653000719058
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: base64
 
-On Thu, May 19, 2022 at 1:43 PM =E5=BC=A0=E4=BC=9F=E5=8D=8E <15529316683@16=
-3.com> wrote:
-
-> Hi :
-> I am a phd student of Xian Jiaotong university in China.
-> We have a project to accomplish a remote-desk solution with Nvidia vgpu.
-> We use spice latest version  and have a bad 4K display quality.
-> Our environment is like:
-> 1.T4 card with inspure server in nvidia support list
->
-NVIDIA Tesla T4  GPU card
-
-2.redhat 8.2 enterprise  with kvm qemu
->
-
-
-> 3.vgpu software package is 13.x
->
-NVIDIA driver + tools (GRID)
-
-
-> 4.vw flavor is 8u 16G. with 40 storage.   vgpu license is vpc ,and vgpu i=
-s
-> B-2b.
->
-"vw" =3D=3D Virtual Workstation
-B-2b is the vGPU type? meaning T4-2B ?
-Does it help if you configure it with T4-2Q (may require a different
-license)?
-
-Only a single Display, right ?
-
-Are you running spice-streaming-agent on the guest ?
-Try to stream with H264, if you do not already do it
-(may require paying fees for using H264).
-
-Is 4k resolution a requirement? If not, try with e.g. 2k.
-
-Hope that helps,
-    Uri
-
-
-
-> And our issue is attached in appendix.
-> Please give us some help to solve this.
->
-> best wishs;
-> leo zhang
->
->
->
->
->
-
---000000000000717e4405df635d2a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Leo,<br></div><br><div class=3D"gmail_quote"><div =
-dir=3D"ltr" class=3D"gmail_attr">On Thu, May 19, 2022 at 1:43 PM =E5=BC=A0=
-=E4=BC=9F=E5=8D=8E &lt;<a href=3D"mailto:15529316683@163.com">15529316683@1=
-63.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex"><div style=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-fa=
-mily:Arial"><div style=3D"margin:0px">Hi :</div><div style=3D"margin:0px">I=
- am a phd student of Xian Jiaotong university in China. <br></div><div styl=
-e=3D"margin:0px">We have a project to accomplish a remote-desk solution wit=
-h Nvidia vgpu.</div><div style=3D"margin:0px">We use spice latest version=
-=C2=A0 and have a bad 4K display quality.</div><div style=3D"margin:0px">Ou=
-r environment is like:</div><div style=3D"margin:0px"><div>1.T4 card with i=
-nspure server in nvidia support list</div></div></div></blockquote><div>NVI=
-DIA Tesla T4=C2=A0 GPU card<br></div><div><br></div><blockquote class=3D"gm=
-ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
-204,204);padding-left:1ex"><div style=3D"line-height:1.7;color:rgb(0,0,0);f=
-ont-size:14px;font-family:Arial"><div style=3D"margin:0px">
-
-<div>2.redhat 8.2 enterprise=C2=A0 with kvm qemu</div></div></div></blockqu=
-ote><div>=C2=A0<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-<div style=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:A=
-rial"><div style=3D"margin:0px">
-
-<div>3.vgpu software package is 13.x</div></div></div></blockquote><div>NVI=
-DIA driver=C2=A0+ tools (GRID)<br></div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex"><div style=3D"line-height:1.7;color:rgb(0,=
-0,0);font-size:14px;font-family:Arial"><div style=3D"margin:0px">
-
-<div>4.vw flavor is 8u 16G. with 40 storage.=C2=A0 =C2=A0vgpu license is vp=
-c ,and vgpu is B-2b.</div></div></div></blockquote><div>&quot;vw&quot; =3D=
-=3D Virtual Workstation<br></div><div>B-2b is the vGPU type? meaning T4-2B =
-?</div><div>Does it help if you configure it with T4-2Q (may require a diff=
-erent license)?</div><div><br></div><div>Only a single Display, right ?</di=
-v><div><br></div><div>Are you running spice-streaming-agent on the guest ?<=
-/div><div>Try to stream with H264, if you do not already do it</div><div>(m=
-ay require paying fees for using H264).<br></div><div><br></div><div>Is 4k =
-resolution a requirement? If not, try with e.g. 2k.<br></div><div><br></div=
-><div>Hope that helps,</div><div>=C2=A0=C2=A0=C2=A0 Uri</div><div><br></div=
-><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div st=
-yle=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:Arial"><=
-div style=3D"margin:0px"><div>And our issue is attached in appendix.</div><=
-div>Please give us some help to solve this.</div><div><br></div><div>best w=
-ishs;</div><div>leo zhang<br></div></div></div><br><br><span title=3D"netea=
-sefooter"><p><br>=C2=A0</p></span></blockquote></div></div>
-
---000000000000717e4405df635d2a--
+PGRpdj4KICAgICAgICAgICAgSGkgVXJpPC9kaXY+PGRpdj5UaGFua3MgZm9yIHlvdXIgcmVwbHkg
+YW5kIHlvdXIgbm90ZXMgaXMgcmlnaHQgb25seSB0aGF0Jm5ic3A7PC9kaXY+PGRpdj5WdyBpcyB3
+cm9uZyBzcGVsbC4gSSBtZWFucyB2bSBmb3IgdmlydHVhbCBtYWNoaW5lLjwvZGl2PjxkaXY+Jm5i
+c3A7SSBoYXZlIGRlcGxveSB0aGUgc3RyZWFtaW5nIGFnZW50IGFuZCBJIHdpbGwgdHJ5IGgyNjQu
+PC9kaXY+PGRpdj40ayB2ZGllbyBpcyBvbmUgb2YgcmVxdWlyZW1lbnRzIG9mIG91ciBwcm9qZWN0
+LjwvZGl2PjxkaXY+U28gcGxzIGhlbHAgdXMgd2l0aCB0aGlzLjwvZGl2PjxkaXY+PGJyPjwvZGl2
+PjxkaXY+YmVzdCB3aXNoczwvZGl2PjxkaXY+bGVvIHpoYW5nPGJyPiA8ZGl2IGlkPSJpbWFpbF9z
+aWduYXR1cmUiPjwvZGl2PjxkaXYgY2xhc3M9IkotcmVwbHkiIHN0eWxlPSJiYWNrZ3JvdW5kLWNv
+bG9yOiNmMmYyZjI7Y29sb3I6YmxhY2s7cGFkZGluZy10b3A6NnB4O3BhZGRpbmctYm90dG9tOjZw
+eDtib3JkZXItcmFkaXVzOjNweDstbW96LWJvcmRlci1yYWRpdXM6M3B4Oy13ZWJraXQtYm9yZGVy
+LXJhZGl1czozcHg7bWFyZ2luLXRvcDo0NXB4O21hcmdpbi1ib3R0b206MjBweDsiPjxkaXYgc3R5
+bGU9ImZvbnQtc2l6ZToxNHB4O2xpbmUtaGVpZ2h0OjEuNTt3b3JkLWJyZWFrOmJyZWFrLWFsbDtt
+YXJnaW4tbGVmdDoxMHB4O21hcmdpbi1yaWdodDoxMHB4Ij5PbiA8c3BhbiBjbGFzcz0ibWFpbC1k
+YXRlIj4wNS8yMC8yMDIyIDA0OjM4PC9zcGFuPiwgPGEgY2xhc3M9Im1haWwtdG8iIHN0eWxlPSJ0
+ZXh0LWRlY29yYXRpb246bm9uZTtjb2xvcjojMmE5N2ZmOyIgaHJlZj0ibWFpbHRvOnVyaWxAcmVk
+aGF0LmNvbSI+VXJpIEx1YmxpbjwvYT4gd3JvdGU6IDwvZGl2PjwvZGl2PjxibG9ja3F1b3RlIGlk
+PSJudGVzLWlvc21haWwtcXVvdGUiIHN0eWxlPSJtYXJnaW46MCI+PGRpdiBkaXI9Imx0ciI+PGRp
+dj5IaSBMZW8sPGJyPjwvZGl2Pjxicj48ZGl2IGNsYXNzPSJnbWFpbF9xdW90ZSI+PGRpdiBkaXI9
+Imx0ciIgY2xhc3M9ImdtYWlsX2F0dHIiPk9uIFRodSwgTWF5IDE5LCAyMDIyIGF0IDE6NDMgUE0g
+5byg5Lyf5Y2OICZsdDs8YSBocmVmPSJtYWlsdG86MTU1MjkzMTY2ODNAMTYzLmNvbSI+MTU1Mjkz
+MTY2ODNAMTYzLmNvbTwvYT4mZ3Q7IHdyb3RlOjxicj48L2Rpdj48YmxvY2txdW90ZSBjbGFzcz0i
+Z21haWxfcXVvdGUiIHN0eWxlPSJtYXJnaW46MHB4IDBweCAwcHggMC44ZXg7Ym9yZGVyLWxlZnQ6
+MXB4IHNvbGlkIHJnYigyMDQsMjA0LDIwNCk7cGFkZGluZy1sZWZ0OjFleCI+PGRpdiBzdHlsZT0i
+bGluZS1oZWlnaHQ6MS43O2NvbG9yOnJnYigwLDAsMCk7Zm9udC1zaXplOjE0cHg7Zm9udC1mYW1p
+bHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiPkhpIDo8L2Rpdj48ZGl2IHN0eWxlPSJt
+YXJnaW46MHB4Ij5JIGFtIGEgcGhkIHN0dWRlbnQgb2YgWGlhbiBKaWFvdG9uZyB1bml2ZXJzaXR5
+IGluIENoaW5hLiA8YnI+PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+V2UgaGF2ZSBhIHBy
+b2plY3QgdG8gYWNjb21wbGlzaCBhIHJlbW90ZS1kZXNrIHNvbHV0aW9uIHdpdGggTnZpZGlhIHZn
+cHUuPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+V2UgdXNlIHNwaWNlIGxhdGVzdCB2ZXJz
+aW9uJm5ic3A7IGFuZCBoYXZlIGEgYmFkIDRLIGRpc3BsYXkgcXVhbGl0eS48L2Rpdj48ZGl2IHN0
+eWxlPSJtYXJnaW46MHB4Ij5PdXIgZW52aXJvbm1lbnQgaXMgbGlrZTo8L2Rpdj48ZGl2IHN0eWxl
+PSJtYXJnaW46MHB4Ij48ZGl2PjEuVDQgY2FyZCB3aXRoIGluc3B1cmUgc2VydmVyIGluIG52aWRp
+YSBzdXBwb3J0IGxpc3Q8L2Rpdj48L2Rpdj48L2Rpdj48L2Jsb2NrcXVvdGU+PGRpdj5OVklESUEg
+VGVzbGEgVDQmbmJzcDsgR1BVIGNhcmQ8YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGJsb2NrcXVv
+dGUgY2xhc3M9ImdtYWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4IDAuOGV4O2Jv
+cmRlci1sZWZ0OjFweCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpO3BhZGRpbmctbGVmdDoxZXgiPjxk
+aXYgc3R5bGU9ImxpbmUtaGVpZ2h0OjEuNztjb2xvcjpyZ2IoMCwwLDApO2ZvbnQtc2l6ZToxNHB4
+O2ZvbnQtZmFtaWx5OkFyaWFsIj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij4KCjxkaXY+Mi5yZWRo
+YXQgOC4yIGVudGVycHJpc2UmbmJzcDsgd2l0aCBrdm0gcWVtdTwvZGl2PjwvZGl2PjwvZGl2Pjwv
+YmxvY2txdW90ZT48ZGl2PiZuYnNwOzxicj48L2Rpdj48YmxvY2txdW90ZSBjbGFzcz0iZ21haWxf
+cXVvdGUiIHN0eWxlPSJtYXJnaW46MHB4IDBweCAwcHggMC44ZXg7Ym9yZGVyLWxlZnQ6MXB4IHNv
+bGlkIHJnYigyMDQsMjA0LDIwNCk7cGFkZGluZy1sZWZ0OjFleCI+PGRpdiBzdHlsZT0ibGluZS1o
+ZWlnaHQ6MS43O2NvbG9yOnJnYigwLDAsMCk7Zm9udC1zaXplOjE0cHg7Zm9udC1mYW1pbHk6QXJp
+YWwiPjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiPgoKPGRpdj4zLnZncHUgc29mdHdhcmUgcGFja2Fn
+ZSBpcyAxMy54PC9kaXY+PC9kaXY+PC9kaXY+PC9ibG9ja3F1b3RlPjxkaXY+TlZJRElBIGRyaXZl
+ciZuYnNwOysgdG9vbHMgKEdSSUQpPGJyPjwvZGl2PjxkaXY+Jm5ic3A7PC9kaXY+PGJsb2NrcXVv
+dGUgY2xhc3M9ImdtYWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4IDAuOGV4O2Jv
+cmRlci1sZWZ0OjFweCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpO3BhZGRpbmctbGVmdDoxZXgiPjxk
+aXYgc3R5bGU9ImxpbmUtaGVpZ2h0OjEuNztjb2xvcjpyZ2IoMCwwLDApO2ZvbnQtc2l6ZToxNHB4
+O2ZvbnQtZmFtaWx5OkFyaWFsIj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij4KCjxkaXY+NC52dyBm
+bGF2b3IgaXMgOHUgMTZHLiB3aXRoIDQwIHN0b3JhZ2UuJm5ic3A7ICZuYnNwO3ZncHUgbGljZW5z
+ZSBpcyB2cGMgLGFuZCB2Z3B1IGlzIEItMmIuPC9kaXY+PC9kaXY+PC9kaXY+PC9ibG9ja3F1b3Rl
+PjxkaXY+InZ3IiA9PSBWaXJ0dWFsIFdvcmtzdGF0aW9uPGJyPjwvZGl2PjxkaXY+Qi0yYiBpcyB0
+aGUgdkdQVSB0eXBlPyBtZWFuaW5nIFQ0LTJCID88L2Rpdj48ZGl2PkRvZXMgaXQgaGVscCBpZiB5
+b3UgY29uZmlndXJlIGl0IHdpdGggVDQtMlEgKG1heSByZXF1aXJlIGEgZGlmZmVyZW50IGxpY2Vu
+c2UpPzwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+T25seSBhIHNpbmdsZSBEaXNwbGF5LCByaWdo
+dCA/PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5BcmUgeW91IHJ1bm5pbmcgc3BpY2Utc3RyZWFt
+aW5nLWFnZW50IG9uIHRoZSBndWVzdCA/PC9kaXY+PGRpdj5UcnkgdG8gc3RyZWFtIHdpdGggSDI2
+NCwgaWYgeW91IGRvIG5vdCBhbHJlYWR5IGRvIGl0PC9kaXY+PGRpdj4obWF5IHJlcXVpcmUgcGF5
+aW5nIGZlZXMgZm9yIHVzaW5nIEgyNjQpLjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2Pklz
+IDRrIHJlc29sdXRpb24gYSByZXF1aXJlbWVudD8gSWYgbm90LCB0cnkgd2l0aCBlLmcuIDJrLjxi
+cj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PkhvcGUgdGhhdCBoZWxwcyw8L2Rpdj48ZGl2PiZu
+YnNwOyZuYnNwOyZuYnNwOyBVcmk8L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PiZuYnNwOzwvZGl2
+PjxibG9ja3F1b3RlIGNsYXNzPSJnbWFpbF9xdW90ZSIgc3R5bGU9Im1hcmdpbjowcHggMHB4IDBw
+eCAwLjhleDtib3JkZXItbGVmdDoxcHggc29saWQgcmdiKDIwNCwyMDQsMjA0KTtwYWRkaW5nLWxl
+ZnQ6MWV4Ij48ZGl2IHN0eWxlPSJsaW5lLWhlaWdodDoxLjc7Y29sb3I6cmdiKDAsMCwwKTtmb250
+LXNpemU6MTRweDtmb250LWZhbWlseTpBcmlhbCI+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+PGRp
+dj5BbmQgb3VyIGlzc3VlIGlzIGF0dGFjaGVkIGluIGFwcGVuZGl4LjwvZGl2PjxkaXY+UGxlYXNl
+IGdpdmUgdXMgc29tZSBoZWxwIHRvIHNvbHZlIHRoaXMuPC9kaXY+PGRpdj48YnI+PC9kaXY+PGRp
+dj5iZXN0IHdpc2hzOzwvZGl2PjxkaXY+bGVvIHpoYW5nPGJyPjwvZGl2PjwvZGl2PjwvZGl2Pjxi
+cj48YnI+PHNwYW4gdGl0bGU9Im5ldGVhc2Vmb290ZXIiPjxwPjxicj4mbmJzcDs8L3A+PC9zcGFu
+PjwvYmxvY2txdW90ZT48L2Rpdj48L2Rpdj4KPC9ibG9ja3F1b3RlPgogICAgICAgIDwvZGl2Pgog
+ICAg
+------=_Part_1292_1576123538.1653000719058--
 
