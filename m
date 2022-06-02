@@ -1,72 +1,49 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7A5753705B
-	for <lists+spice-devel@lfdr.de>; Sun, 29 May 2022 10:38:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D22F753B3FB
+	for <lists+spice-devel@lfdr.de>; Thu,  2 Jun 2022 08:59:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3976F10E988;
-	Sun, 29 May 2022 08:38:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 93AA510F1C0;
+	Thu,  2 Jun 2022 06:59:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0081B10E988
- for <spice-devel@lists.freedesktop.org>; Sun, 29 May 2022 08:38:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1653813529;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=zounPJgsX8yvh1RJrN50rzdBypf/OuS+LbTJFPgTDB8=;
- b=F17NmrO/K4pKUEEHpkev6Wi7nbv7wMYu2qJVusKSW6YuMM7VIYx1/axUGNCdLdvVPgHwnF
- XFSOAFAx6bsilqesYeAvl9QCOM7SnEvi9AQIEFJJVbp9xQOFv9ouqJPFML2Z1+Mi7wNkG5
- VYIQmt1/6ibuhq+8Dm1tJQp7Qi0+T1U=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-322-Q3oSxoPROX2u3F1y4v27cw-1; Sun, 29 May 2022 04:38:42 -0400
-X-MC-Unique: Q3oSxoPROX2u3F1y4v27cw-1
-Received: by mail-lf1-f69.google.com with SMTP id
- p36-20020a05651213a400b004779d806c13so3891394lfa.10
- for <spice-devel@lists.freedesktop.org>; Sun, 29 May 2022 01:38:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zounPJgsX8yvh1RJrN50rzdBypf/OuS+LbTJFPgTDB8=;
- b=BLAo7zSuKwg3B5D1DGzfoljnibRg408yIBONdG8dbBI9rsi8SIgPMO3mqkhZyHBH+j
- TgvsUiXIpMJEPKjodv38z86HfA/irwxONc+J/ZPXOxxbZdt60FiyptghIRgZ0xAPB6OI
- emHzwmV1qarv7oEdEnsU/5v7eJdcXvfjhrkOj/Dm2/AWYpBqNnQ1QpBXfWYVAZTMFftL
- yTjm2VVqIrH5BGaXCD7LoInrTIcBqJ9evuAyIju1TngjXeLkCRxi8PBF1SgYHRSz9d1z
- 7MfbI4Z9Wa6RjSjOdwiWPND571bB3I7vTBbmixEfGd6n9q7pD0qV9Zhjmbhux9NTCfWz
- USEg==
-X-Gm-Message-State: AOAM531u/A+38a8rsOkhI6RbCOLsiwUgHnpa064sTFPfHpLe1zLhX65F
- EozTvC0hHeVXGNyUDICktrX9g3Go2s8BxTHBNuUZQepmdEEJR82nvx/sT7G/mk4W4Dkhnd7AUlJ
- BiS7T7KutYor2NjVgqDK1EHzlLIHIXq2IViOfjHz8l5yTEBc=
-X-Received: by 2002:a2e:84c8:0:b0:24b:50bb:de7d with SMTP id
- q8-20020a2e84c8000000b0024b50bbde7dmr28565334ljh.40.1653813521029; 
- Sun, 29 May 2022 01:38:41 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJybM6hX1sAuCMYeBF62uNvM7hfK/PBUVvEORUYdXxWwIX9BmM+CCnLqpK1syKnP4V3aM7b+UR010xhMgQn1EoA=
-X-Received: by 2002:a2e:84c8:0:b0:24b:50bb:de7d with SMTP id
- q8-20020a2e84c8000000b0024b50bbde7dmr28565325ljh.40.1653813520738; Sun, 29
- May 2022 01:38:40 -0700 (PDT)
-MIME-Version: 1.0
+Received: from m1382.mail.163.com (m1382.mail.163.com [220.181.13.82])
+ by gabe.freedesktop.org (Postfix) with ESMTP id CF9C210E4B5
+ for <spice-devel@lists.freedesktop.org>; Thu,  2 Jun 2022 00:02:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=v8py4
+ VGW/JGrHRe8oJxKr2wEgPYMCQPheJ4EWdeXNF4=; b=egVPYhNhMQAD5I1yjc3pu
+ Z8Nv21ggVybqnuU3vpKGFyf5BOCFPgP8CVmul3hd5zr6hEYMtGPiA9cTv0Ry3Efu
+ WyRT04LIkzkgfmhi/xGe2gdOwKDmqy2lE5gUuoORvGAgtO7jCKJIMx/6Fpc7u85T
+ spU0guQSeA8sWLme11m7xI=
+Received: from 15529316683$163.com ( [222.90.115.232] ) by
+ ajax-webmail-wmsvr82 (Coremail) ; Thu, 2 Jun 2022 08:02:14 +0800 (CST)
+X-Originating-IP: [222.90.115.232]
+Date: Thu, 2 Jun 2022 08:02:14 +0800 (CST)
+From: =?GBK?B?1cXOsLuq?= <15529316683@163.com>
+To: "Uri Lublin" <uril@redhat.com>
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20220113(9671e152)
+ Copyright (c) 2002-2022 www.mailtech.cn 163com
+In-Reply-To: <CAAg9qJ2OzaqS+H0d4XNAhhhU8fCgs9vd8W75qOSQVJuJziu5OQ@mail.gmail.com>
 References: <3e898483.6d06.180dbbcb650.Coremail.15529316683@163.com>
  <CAAg9qJ30Pmmx9_Ygtfo=qXrD_bzDByo8fh7P=_L5z6NMVN2RGg@mail.gmail.com>
  <43b4e143.79c7.181008cff03.Coremail.15529316683@163.com>
  <CAAg9qJ1JRXWfor2KBorbfHCMZ15U9LAndnRjLm4DgLEA_kL2xg@mail.gmail.com>
  <6a75cda3.25b7.1810a8e01a1.Coremail.15529316683@163.com>
-In-Reply-To: <6a75cda3.25b7.1810a8e01a1.Coremail.15529316683@163.com>
-From: Uri Lublin <uril@redhat.com>
-Date: Sun, 29 May 2022 11:38:29 +0300
-Message-ID: <CAAg9qJ2OzaqS+H0d4XNAhhhU8fCgs9vd8W75qOSQVJuJziu5OQ@mail.gmail.com>
-To: =?UTF-8?B?5byg5Lyf5Y2O?= <15529316683@163.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ulublin@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="0000000000006dc20205e0227705"
+ <CAAg9qJ2OzaqS+H0d4XNAhhhU8fCgs9vd8W75qOSQVJuJziu5OQ@mail.gmail.com>
+X-CM-CTRLDATA: dQWyYWZvb3Rlcl9odG09MTA2MTI6NjE=
+Content-Type: multipart/alternative; 
+ boundary="----=_Part_2073_516363906.1654128134088"
+MIME-Version: 1.0
+Message-ID: <731f924b.22e.18121b847c9.Coremail.15529316683@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: UsGowADn4+QG_pdidJ0TAA--.34705W
+X-CM-SenderInfo: jprvkjaztrlliyt6il2tof0z/1tbiTwITnFsGbSQSGgACsc
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Mailman-Approved-At: Thu, 02 Jun 2022 06:59:10 +0000
 Subject: Re: [Spice-devel] centos+kvm+nvidia vgpu+win10(guest) spice remote
  4K bad perform.
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -81,335 +58,285 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: spice-devel <spice-devel@lists.freedesktop.org>,
- =?UTF-8?B?5aKe5Z6j?= <1348580378@qq.com>,
- =?UTF-8?B?546L5pak57695biI5YWE?= <327119232@qq.com>
+ =?GBK?B?1PbUqw==?= <1348580378@qq.com>,
+ =?GBK?B?zfW979PwyqbQ1g==?= <327119232@qq.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000006dc20205e0227705
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+------=_Part_2073_516363906.1654128134088
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
 
-Hi Leo,
+SGkgVXJpOgpUaGFua3MgeW91ciBhbnN3ZXIgYW5kIGhlbHAhCldlIGFyZSB0cnlpbmcgdG8gZG8g
+dGhlc2UgYWR2aXNlIHRvIGltcHJvdmUgdGhlIGlzc3VlLgpUaGFua3Mgc28gbXVjaCEKYmVzdCB3
+aXNoZXMKCmxlbyB6aGFuZwoKCgoKCgoKCgoKCgoKCgoKCkF0IDIwMjItMDUtMjkgMTY6Mzg6Mjks
+ICJVcmkgTHVibGluIiA8dXJpbEByZWRoYXQuY29tPiB3cm90ZToKCkhpIExlbywKCgpGb3IgYSBn
+dWVzdCB0aGF0IGhhcyBOVklESUEgKG9yIEludGVsL290aGVyKSB2Z3B1IGFzIGFuIG1kZXYgZGV2
+aWNlIChkaXJlY3QgYWNjZXNzIHRvIE5WSURJQSBoYXJkd2FyZSksIGFsbCBndWVzdCBncmFwaGlj
+cyBjb21tYW5kcyBhcmUgZG9uZSBvbiB0aGUgTlZJRElBIGRldmljZS4KSW4gdGhpcyBjYXNlLCBv
+bmUgY2FuIHJ1biBzcGljZS1zdHJlYW1pbmctYWdlbnQsIG9uIHRoZSBndWVzdCwgYW5kIHVzZSBO
+VklESUEgdG8gZW5jb2RlIChlLmcuIHVzaW5nIHRoZSBnc3RyZWFtZXIgb3Igb3RoZXIgcGx1Z2lu
+KSBhIHZpZGVvIHN0cmVhbSAoYXNzdW1pbmcgYW4gTlZJRElBL290aGVyIGhhcmR3YXJlIGVuY29k
+ZXIgaXMgaW5zdGFsbGVkIG9uIHRoZSBndWVzdCB0b28pLiBUaGUgc3BpY2Utc3RyZWFtaW5nLWFn
+ZW50IHNlbmRzIHRoZSB2aWRlbyBzdHJlYW0gdG8gc3BpY2Utc2VydmVyIHZpYSBhIHZpcnRpby1z
+ZXJpYWwgZGV2aWNlLiBUaGUgc3BpY2Utc2VydmVyIG5lZWRzIG5vdCByZS1lbmNvZGUgdGhlIHN0
+cmVhbSwgYnV0IGp1c3Qgc2VuZHMgaXQgYXMgaXMgdG8gdGhlIGNsaWVudCB0aGF0IChkZWNvZGVz
+IGl0IGFuZCkgZGlzcGxheXMgaXQgdG8gdGhlIHVzZXIuCgoKSG9wZSB0aGF0IGhlbHBzLAogICAg
+VXJpLgoKCgoKT24gU2F0LCBNYXkgMjgsIDIwMjIgYXQgMzowNSBQTSDVxc6wu6ogPDE1NTI5MzE2
+NjgzQDE2My5jb20+IHdyb3RlOgoKCgoKCkhpIFVyaaO6ClRoYW5rcyBmb3IgeW91ciBsYXN0IGVt
+YWlsIGFuZCB3ZSBkaWQgc29tZSBleHBlcmltZW50LCBoZXJlIGFyZSBzb21lIHF1ZXN0aW9ucyBy
+ZW1haW46CldoZXRoZXIgb25seSB1c2UgdGhlIFFYTCBkZXZpY2UgYXMgdGhlIGRpc3BsYXkgZGV2
+aWNlIGNhbiBhY3RpdmF0ZSB0aGUgdmlkZW8gc3RyZWFtaW5nIGVuY29kZSwgd2hpY2ggdHJlYXRz
+IHRoZSB2aWRlbyBhcyBzdHJlYW0gZGF0YSBhbmQgZW5jb2RlcyBieSBNSlBFRyBvciBvdGhlciBH
+U3RyZWFtZXIgc3VwcG9ydGVkIGVuY29kaW5nIG1ldGhvZHMuCldlIGhhdmUgYWJvdmUgcHJvYmxl
+bXMgaXMgYmVjYXVzZSB3aGVuIGEgTnZpZGlhIHZncHUgaXMgc2V0IGFzIHRoZSBtZGV2IGRldmlj
+ZSh0aGUgZGVmYXVsdCB2YWx1ZSChsHF4bKGxIG9mIHRoZSB2aXJ0dWFsIG1hY2hpbmUgaXMgcmVw
+bGFjZWQgd2l0aCChsG5vbmWhsSwgdXNpbmcgdGhlIKGwLXZnYSBub25lobEgY29tbWFuZCksIHdl
+IGZpbmQgaW4gbG9ncyB0aGF0IHNwaWNlIHVzZXMgaW1hZ2UgY29tcHJlc3Npb24gaW5zdGVhZCBv
+ZiB0aGUgc3BpY2UgdmlkZW8gc3RyZWFtaW5nIHRvIGVuY29kZSB0aGUgd2hvbGUgZGlzcGxheSBk
+YXRhKGluY2x1ZGUgdGhlIHZpZGVvIHdpbmRvdykuCkRvZXMgc3BpY2Ugc3VwcG9ydCBhIHZncHUg
+bWRldiBkZXZpY2UgdG8gYWNjZWxlcmF0ZSB0aGUgcmVuZGVyaW5nIGFuZCB1c2luZyB0aGUgc3Bp
+Y2UgdmlkZW8gc3RyZWFtaW5nIGVuY29kZSB0byBjb21wcmVzcyBhIHZpZGVvIGF0IHRoZSBtZWFu
+dGltZS4KCgoKCgpwbHMgaGVscCB1cyB3aXRoIHRoYXQKCnRoYW5rcyBhIGxvdApiZXN0IHdpc2hl
+cwpsZW8gemhhbmcKCgoKCgoKCgpBdCAyMDIyLTA1LTI3IDAzOjI4OjIwLCAiVXJpIEx1YmxpbiIg
+PHVyaWxAcmVkaGF0LmNvbT4gd3JvdGU6CgpIaSBMZW8sCgoKT24gVGh1LCBNYXkgMjYsIDIwMjIg
+YXQgNDoyOCBQTSDVxc6wu6ogPDE1NTI5MzE2NjgzQDE2My5jb20+IHdyb3RlOgoKCgoKCkhpIFVy
+aToKVGhhbmtzIGZvciB5b3VyIGFkdmlzZSBvZiBvdXIgcHJvamVjdC5XZSBoYXZlIHRyeSBpdCBh
+bmQgaGVyZSBpcyBzb21ldGhpbmcgd2UgZmluZDoKMS53ZSBoYXZlIGRlcGxveSB0aGUgc3BpY2Ut
+c3RyZWFtaW5nLWFnZW50IGluIHRoZSBjbGllbnQgYW5kIHNldCBIMjU0IGluIGxpYnZlcnQgeG1s
+ICwgYXBwbGljZSByZXBvcnQgZXJyb3IgYW5kIGRvbid0IHdvcmsuCmJ1dCB2cDgvdnA5IHdvcmtz
+LgogCk5vdGUgdGhhdCBzcGljZS1zdHJlYW1pbmctYWdlbnQgbmVlZHMgdG8gcnVuIG9uIHRoZSBn
+dWVzdC4KCgogCjIuV2hlbiB3ZSB1c2UgTnZpZGlhIHZncHUgYXMgYSBtZGV2IGRldmljZSBhdHRh
+Y2ggdG8gdGhlIHZpcnR1YWwgbWF0aGluZSx3ZSBmaW5kIGluIGxvZ3MgdGhhdCBzcGljZSB1c2Ug
+cGljdHVyZSBjb21wcmVzcyAoZ2x6KSBpbnN0ZWFkIG9mIHZlZGlvIGNvbXByZXNzIGgyNTQuCgpT
+byB3ZSBoYXZlIHR3byBxdWVzdGlvbiB0byBhc2s6CjEud2hhdCB3ZSBuZWVkIHRvIGRvIGluIGxp
+YnZlcnQgeG1sIHRvIGhhdmUgYSBiZXR0ZXIgdmVkaW8gcXVhbGl0eSB3aXRIIE5WSURJQSBWR1BV
+IGF0dGFjaCBhcyBhIG1kZXYgZGl2aWNlPwoKIApUaGlzIGlzIG5vdCBkb25lIGluIGxpYnZpcnQg
+ZG9teG1sLCBidXQgbmVlZHMgdG8gYmUgY29uZmlndXJlZCBvbiB0aGUgZ3Vlc3QuCihvZiBjb3Vy
+c2UgeW91IG5lZWQgdG8gaGF2ZSBvcmcuc3BpY2Utc3BhY2Uuc3RyZWFtLjAgdmlhIGxpYnZpcnQp
+CgoKCk1ha2Ugc3VyZSB0aGF0IHRoZSBndWVzdCdzIGdzdHJlYW1lcjEgImtub3dzIiB0aGUgY29k
+ZWMuCkl0IHdvcmtzIG11Y2ggYmV0dGVyIHdoZW4gdGhlIGVuY29kZXIgdXNlcyB0aGUgaGFyZHdh
+cmUgdG8gZW5jb2RlLgoKCmdzdC1pbnNwZWN0LTEuMCB8IGdyZXAgMjY0ICB8IGdyZXAgLWkgZW5j
+Cgpnc3QtaW5zcGVjdC0xLjAgfCBncmVwIC1pIHZwICB8IGdyZXAgLWkgZW5jCiAKMi5XZSBkaWRu
+J3QgZmluZCBzcGljZS1zdHJlYW1pbmctYWdlbnQgZm9yIHdpbmRvd3MgaW4gU3BpY2Ugb2ZmaWNl
+IHNpdGUuIERvZXMgc3BpY2Utc3RyZWFtaW5nLWFnZW50IG9ubHkgc3VwcG9ydCBsaW51eCBhbmQg
+b25seSBoYXZlIGxpbnV4IHZlcnNpb24/CgoKClllcywgY3VycmVudGx5IHRoZXJlIGlzIG9ubHkg
+YSBsaW51eCB2ZXJzaW9uLgoKClJlZ2FyZHMsCiAgICBVcmkuCgoKCnBzOiBPbmUgc2luZ2xlIGRp
+c3BsYXkgIGFuZCA0ayB2aWRlbyBpcyByZXF1aXJlZCBhcyBvbmUgb2YgdGhlIG1haW4gZ29hbHMg
+IGluIG91ciBwcm9qZWN0LgoKUGxzIGhlbHAgdXMgd2l0aCB0aG9zZSBxdWVzdGlvbnMuCkJlc3Qg
+d2lzaGVzICEKbGVvIHpoYW5nCgoKCgoKCgoKCgoKCgoKQXQgMjAyMi0wNS0yMCAwNDozODo1NSwg
+IlVyaSBMdWJsaW4iIDx1cmlsQHJlZGhhdC5jb20+IHdyb3RlOgoKSGkgTGVvLAoKCgpPbiBUaHUs
+IE1heSAxOSwgMjAyMiBhdCAxOjQzIFBNINXFzrC7qiA8MTU1MjkzMTY2ODNAMTYzLmNvbT4gd3Jv
+dGU6CgpIaSA6CkkgYW0gYSBwaGQgc3R1ZGVudCBvZiBYaWFuIEppYW90b25nIHVuaXZlcnNpdHkg
+aW4gQ2hpbmEuCgpXZSBoYXZlIGEgcHJvamVjdCB0byBhY2NvbXBsaXNoIGEgcmVtb3RlLWRlc2sg
+c29sdXRpb24gd2l0aCBOdmlkaWEgdmdwdS4KV2UgdXNlIHNwaWNlIGxhdGVzdCB2ZXJzaW9uICBh
+bmQgaGF2ZSBhIGJhZCA0SyBkaXNwbGF5IHF1YWxpdHkuCk91ciBlbnZpcm9ubWVudCBpcyBsaWtl
+OgoxLlQ0IGNhcmQgd2l0aCBpbnNwdXJlIHNlcnZlciBpbiBudmlkaWEgc3VwcG9ydCBsaXN0Ck5W
+SURJQSBUZXNsYSBUNCAgR1BVIGNhcmQKCgoKMi5yZWRoYXQgOC4yIGVudGVycHJpc2UgIHdpdGgg
+a3ZtIHFlbXUKIAoKMy52Z3B1IHNvZnR3YXJlIHBhY2thZ2UgaXMgMTMueApOVklESUEgZHJpdmVy
+ICsgdG9vbHMgKEdSSUQpCgogCjQudncgZmxhdm9yIGlzIDh1IDE2Ry4gd2l0aCA0MCBzdG9yYWdl
+LiAgIHZncHUgbGljZW5zZSBpcyB2cGMgLGFuZCB2Z3B1IGlzIEItMmIuCiJ2dyIgPT0gVmlydHVh
+bCBXb3Jrc3RhdGlvbgoKQi0yYiBpcyB0aGUgdkdQVSB0eXBlPyBtZWFuaW5nIFQ0LTJCID8KRG9l
+cyBpdCBoZWxwIGlmIHlvdSBjb25maWd1cmUgaXQgd2l0aCBUNC0yUSAobWF5IHJlcXVpcmUgYSBk
+aWZmZXJlbnQgbGljZW5zZSk/CgoKT25seSBhIHNpbmdsZSBEaXNwbGF5LCByaWdodCA/CgoKQXJl
+IHlvdSBydW5uaW5nIHNwaWNlLXN0cmVhbWluZy1hZ2VudCBvbiB0aGUgZ3Vlc3QgPwpUcnkgdG8g
+c3RyZWFtIHdpdGggSDI2NCwgaWYgeW91IGRvIG5vdCBhbHJlYWR5IGRvIGl0CihtYXkgcmVxdWly
+ZSBwYXlpbmcgZmVlcyBmb3IgdXNpbmcgSDI2NCkuCgoKCklzIDRrIHJlc29sdXRpb24gYSByZXF1
+aXJlbWVudD8gSWYgbm90LCB0cnkgd2l0aCBlLmcuIDJrLgoKCgpIb3BlIHRoYXQgaGVscHMsCiAg
+ICBVcmkKCgogCkFuZCBvdXIgaXNzdWUgaXMgYXR0YWNoZWQgaW4gYXBwZW5kaXguClBsZWFzZSBn
+aXZlIHVzIHNvbWUgaGVscCB0byBzb2x2ZSB0aGlzLgoKCmJlc3Qgd2lzaHM7CmxlbyB6aGFuZwoK
+CgoKCgogCgoKCgoKCiAKCgoKCgoKIA==
+------=_Part_2073_516363906.1654128134088
+Content-Type: text/html; charset=GBK
+Content-Transfer-Encoding: base64
 
-For a guest that has NVIDIA (or Intel/other) vgpu as an mdev device (direct
-access to NVIDIA hardware), all guest graphics commands are done on the
-NVIDIA device.
-In this case, one can run spice-streaming-agent, on the guest, and use
-NVIDIA to encode (e.g. using the gstreamer or other plugin) a video stream
-(assuming an NVIDIA/other hardware encoder is installed on the guest too).
-The spice-streaming-agent sends the video stream to spice-server via a
-virtio-serial device. The spice-server needs not re-encode the stream, but
-just sends it as is to the client that (decodes it and) displays it to the
-user.
-
-Hope that helps,
-    Uri.
-
-
-On Sat, May 28, 2022 at 3:05 PM =E5=BC=A0=E4=BC=9F=E5=8D=8E <15529316683@16=
-3.com> wrote:
-
->
-> Hi Uri=EF=BC=9A
-> Thanks for your last email and we did some experiment, here are some
-> questions remain:
-> Whether only use the QXL device as the display device can activate the
-> video streaming encode, which treats the video as stream data and encodes
-> by MJPEG or other GStreamer supported encoding methods.
-> We have above problems is because when a Nvidia vgpu is set as the mdev
-> device(the default value =E2=80=9Cqxl=E2=80=9D of the virtual machine is =
-replaced with
-> =E2=80=9Cnone=E2=80=9D, using the =E2=80=9C-vga none=E2=80=9D command), w=
-e find in logs that spice uses
-> image compression instead of the spice video streaming to encode the whol=
-e
-> display data(include the video window).
-> Does spice support a vgpu mdev device to accelerate the rendering and
-> using the spice video streaming encode to compress a video at the meantim=
-e.
->
->
-> pls help us with that
-> thanks a lot
-> best wishes
-> leo zhang
->
->
->
-> At 2022-05-27 03:28:20, "Uri Lublin" <uril@redhat.com> wrote:
->
-> Hi Leo,
->
-> On Thu, May 26, 2022 at 4:28 PM =E5=BC=A0=E4=BC=9F=E5=8D=8E <15529316683@=
-163.com> wrote:
->
->>
->> Hi Uri:
->> Thanks for your advise of our project.We have try it and here is
->> something we find:
->> 1.we have deploy the spice-streaming-agent in the client and set H254 in
->> libvert xml , applice report error and don't work.
->> but vp8/vp9 works.
->>
->
-> Note that spice-streaming-agent needs to run on the guest.
->
->
->
->> 2.When we use Nvidia vgpu as a mdev device attach to the virtual mathine=
-, *we
->> find in logs that spice use picture compress (glz) instead of vedio
->> compress h254.*
->> So we have two question to ask:
->> 1.what we need to do in libvert xml to have a better vedio quality witH
->> NVIDIA VGPU attach as a mdev divice?
->>
->
-> This is not done in libvirt domxml, but needs to be configured on the
-> guest.
-> (of course you need to have org.spice-space.stream.0 via libvirt)
->
-> Make sure that the guest's gstreamer1 "knows" the codec.
-> It works much better when the encoder uses the hardware to encode.
->
-> gst-inspect-1.0 | grep 264  | grep -i enc
-> gst-inspect-1.0 | grep -i vp  | grep -i enc
->
->
->> 2.We didn't find spice-streaming-agent for windows in Spice office site.
->> Does spice-streaming-agent only support linux and only have linux versio=
-n?
->>
->
-> Yes, currently there is only a linux version.
->
-> Regards,
->     Uri.
->
-> ps: One single display  and 4k video is required as one of the main goals
->> in our project.
->> Pls help us with those questions.
->> Best wishes !
->> leo zhang
->>
->>
->>
->>
->>
->> At 2022-05-20 04:38:55, "Uri Lublin" <uril@redhat.com> wrote:
->>
->> Hi Leo,
->>
->> On Thu, May 19, 2022 at 1:43 PM =E5=BC=A0=E4=BC=9F=E5=8D=8E <15529316683=
-@163.com> wrote:
->>
->>> Hi :
->>> I am a phd student of Xian Jiaotong university in China.
->>> We have a project to accomplish a remote-desk solution with Nvidia vgpu=
-.
->>> We use spice latest version  and have a bad 4K display quality.
->>> Our environment is like:
->>> 1.T4 card with inspure server in nvidia support list
->>>
->> NVIDIA Tesla T4  GPU card
->>
->> 2.redhat 8.2 enterprise  with kvm qemu
->>>
->>
->>
->>> 3.vgpu software package is 13.x
->>>
->> NVIDIA driver + tools (GRID)
->>
->>
->>> 4.vw flavor is 8u 16G. with 40 storage.   vgpu license is vpc ,and vgpu
->>> is B-2b.
->>>
->> "vw" =3D=3D Virtual Workstation
->> B-2b is the vGPU type? meaning T4-2B ?
->> Does it help if you configure it with T4-2Q (may require a different
->> license)?
->>
->> Only a single Display, right ?
->>
->> Are you running spice-streaming-agent on the guest ?
->> Try to stream with H264, if you do not already do it
->> (may require paying fees for using H264).
->>
->> Is 4k resolution a requirement? If not, try with e.g. 2k.
->>
->> Hope that helps,
->>     Uri
->>
->>
->>
->>> And our issue is attached in appendix.
->>> Please give us some help to solve this.
->>>
->>> best wishs;
->>> leo zhang
->>>
->>>
->>>
->>>
->>>
->>
->>
->>
->>
->>
->
->
->
->
->
-
---0000000000006dc20205e0227705
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Leo,</div><div><br></div><div>For a guest that has=
- NVIDIA (or Intel/other) vgpu as an mdev device (direct access to NVIDIA ha=
-rdware), all guest graphics commands are done on the NVIDIA device.</div><d=
-iv>In this case, one can run spice-streaming-agent, on the guest, and use N=
-VIDIA to encode (e.g. using the gstreamer or other plugin) a video stream (=
-assuming an NVIDIA/other hardware encoder is installed on the guest too). T=
-he spice-streaming-agent sends the video stream to spice-server via a virti=
-o-serial device. The spice-server needs not re-encode the stream, but just =
-sends it as is to the client that (decodes it and) displays it to the user.=
-</div><div><br></div><div>Hope that helps,</div><div>=C2=A0=C2=A0=C2=A0 Uri=
-.</div><div><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr"=
- class=3D"gmail_attr">On Sat, May 28, 2022 at 3:05 PM =E5=BC=A0=E4=BC=9F=E5=
-=8D=8E &lt;<a href=3D"mailto:15529316683@163.com">15529316683@163.com</a>&g=
-t; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
-x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div s=
-tyle=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:Arial">=
-<p style=3D"margin:0px"><br></p><div style=3D"margin:0px">Hi Uri=EF=BC=9A</=
-div><div style=3D"margin:0px">Thanks for your last email and we did some ex=
-periment, here are some questions remain:</div><div style=3D"margin:0px">Wh=
-ether only use the QXL device as the display device can activate the video =
-streaming encode, which treats the video as stream data and encodes by MJPE=
-G or other GStreamer supported encoding methods.<br>We have above problems =
-is because when a Nvidia vgpu is set as the mdev device(the default value =
-=E2=80=9Cqxl=E2=80=9D of the virtual machine is replaced with =E2=80=9Cnone=
-=E2=80=9D, using the =E2=80=9C-vga none=E2=80=9D command), we find in logs =
-that spice uses image compression instead of the spice video streaming to e=
-ncode the whole display data(include the video window).<br>Does spice suppo=
-rt a vgpu mdev device to accelerate the rendering and using the spice video=
- streaming encode to compress a video at the meantime.<br></div><p style=3D=
-"margin:0px"><br></p><div style=3D"margin:0px">pls help us with that <br></=
-div><div style=3D"margin:0px">thanks a lot</div><div style=3D"margin:0px">b=
-est wishes</div><div style=3D"margin:0px">leo zhang<br></div><p style=3D"ma=
-rgin:0px"><br></p><div></div><div id=3D"gmail-m_3783324040751096874divNetea=
-seMailCard"></div><p style=3D"margin:0px"><br></p><p>At 2022-05-27 03:28:20=
-, &quot;Uri Lublin&quot; &lt;<a href=3D"mailto:uril@redhat.com" target=3D"_=
-blank">uril@redhat.com</a>&gt; wrote:</p><blockquote id=3D"gmail-m_37833240=
-40751096874isReplyContent" style=3D"padding-left:1ex;margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204)"><div dir=3D"ltr"><div>Hi Leo,</d=
-iv><div><br></div><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmai=
-l_attr">On Thu, May 26, 2022 at 4:28 PM =E5=BC=A0=E4=BC=9F=E5=8D=8E &lt;<a =
-href=3D"mailto:15529316683@163.com" target=3D"_blank">15529316683@163.com</=
-a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><d=
-iv style=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:Ari=
-al"><p style=3D"margin:0px"><br></p><div style=3D"margin:0px">Hi Uri:</div>=
-<div style=3D"margin:0px">Thanks for your advise of our project.We have try=
- it and here is something we find:</div><div style=3D"margin:0px">1.we have=
- deploy the spice-streaming-agent in the client and set H254 in libvert xml=
- , applice report error and don&#39;t work.</div><div style=3D"margin:0px">=
-but vp8/vp9 works.</div></div></blockquote><div>=C2=A0</div><div><div>Note =
-that spice-streaming-agent needs to run on the guest.</div><br></div><div>=
-=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div style=3D=
-"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:Arial"><div st=
-yle=3D"margin:0px">2.When we use Nvidia vgpu as a mdev device attach to the=
- virtual mathine,<span style=3D"background-color:rgb(255,255,255)"> <b>we f=
-ind in logs that spice use picture compress (glz) instead of vedio compress=
- h254.</b></span><br></div><div style=3D"margin:0px">So we have two questio=
-n to ask:</div><div style=3D"margin:0px">1.what we need to do in libvert xm=
-l to have a better vedio quality witH NVIDIA VGPU attach as a mdev divice?<=
-br></div></div></blockquote><div>=C2=A0</div><div><div>This is not done in =
-libvirt domxml, but needs to be configured on the guest.</div><div>(of cour=
-se you need to have org.spice-space.stream.0 via libvirt)<br></div><div><br=
-></div><div>Make sure that the guest&#39;s gstreamer1 &quot;knows&quot; the=
- codec.</div><div>It works much better when the encoder uses the hardware t=
-o encode.</div><div><br></div><div>gst-inspect-1.0 | grep 264=C2=A0 | grep =
--i enc<br></div><div><div>gst-inspect-1.0 | grep -i vp=C2=A0 | grep -i enc<=
-/div></div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><d=
-iv style=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:Ari=
-al"><div style=3D"margin:0px"></div><div style=3D"margin:0px">2.We didn&#39=
-;t find spice-streaming-agent for windows in Spice office site. Does spice-=
-streaming-agent only support linux and only have linux version?<br></div></=
-div></blockquote><div><br></div><div>Yes, currently there is only a linux v=
-ersion.</div><div><br></div><div>Regards,</div><div>=C2=A0=C2=A0=C2=A0 Uri.=
-<br></div><div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-<div style=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:A=
-rial"><div style=3D"margin:0px"></div><div style=3D"margin:0px">ps: One sin=
-gle display=C2=A0 and 4k video is required as one of the main goals=C2=A0 i=
-n our project. <br></div><div style=3D"margin:0px">Pls help us with those q=
-uestions.</div><div style=3D"margin:0px">Best wishes !</div><div style=3D"m=
-argin:0px">leo zhang<br></div><p style=3D"margin:0px"><br></p><p style=3D"m=
-argin:0px"><br></p><p style=3D"margin:0px"><br></p><div></div><div id=3D"gm=
-ail-m_3783324040751096874gmail-m_-4145722423521360633divNeteaseMailCard"></=
-div><p style=3D"margin:0px"><br></p><p>At 2022-05-20 04:38:55, &quot;Uri Lu=
-blin&quot; &lt;<a href=3D"mailto:uril@redhat.com" target=3D"_blank">uril@re=
-dhat.com</a>&gt; wrote:</p><blockquote id=3D"gmail-m_3783324040751096874gma=
-il-m_-4145722423521360633isReplyContent" style=3D"padding-left:1ex;margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)"><div dir=3D"ltr"><=
-div>Hi Leo,<br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Thu, May 19, 2022 at 1:43 PM =E5=BC=A0=E4=BC=9F=E5=8D=8E=
- &lt;<a href=3D"mailto:15529316683@163.com" target=3D"_blank">15529316683@1=
-63.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex"><div style=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-fa=
-mily:Arial"><div style=3D"margin:0px">Hi :</div><div style=3D"margin:0px">I=
- am a phd student of Xian Jiaotong university in China. <br></div><div styl=
-e=3D"margin:0px">We have a project to accomplish a remote-desk solution wit=
-h Nvidia vgpu.</div><div style=3D"margin:0px">We use spice latest version=
-=C2=A0 and have a bad 4K display quality.</div><div style=3D"margin:0px">Ou=
-r environment is like:</div><div style=3D"margin:0px"><div>1.T4 card with i=
-nspure server in nvidia support list</div></div></div></blockquote><div>NVI=
-DIA Tesla T4=C2=A0 GPU card<br></div><div><br></div><blockquote class=3D"gm=
-ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
-204,204);padding-left:1ex"><div style=3D"line-height:1.7;color:rgb(0,0,0);f=
-ont-size:14px;font-family:Arial"><div style=3D"margin:0px">
-
-<div>2.redhat 8.2 enterprise=C2=A0 with kvm qemu</div></div></div></blockqu=
-ote><div>=C2=A0<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-<div style=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:A=
-rial"><div style=3D"margin:0px">
-
-<div>3.vgpu software package is 13.x</div></div></div></blockquote><div>NVI=
-DIA driver=C2=A0+ tools (GRID)<br></div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex"><div style=3D"line-height:1.7;color:rgb(0,=
-0,0);font-size:14px;font-family:Arial"><div style=3D"margin:0px">
-
-<div>4.vw flavor is 8u 16G. with 40 storage.=C2=A0 =C2=A0vgpu license is vp=
-c ,and vgpu is B-2b.</div></div></div></blockquote><div>&quot;vw&quot; =3D=
-=3D Virtual Workstation<br></div><div>B-2b is the vGPU type? meaning T4-2B =
-?</div><div>Does it help if you configure it with T4-2Q (may require a diff=
-erent license)?</div><div><br></div><div>Only a single Display, right ?</di=
-v><div><br></div><div>Are you running spice-streaming-agent on the guest ?<=
-/div><div>Try to stream with H264, if you do not already do it</div><div>(m=
-ay require paying fees for using H264).<br></div><div><br></div><div>Is 4k =
-resolution a requirement? If not, try with e.g. 2k.<br></div><div><br></div=
-><div>Hope that helps,</div><div>=C2=A0=C2=A0=C2=A0 Uri</div><div><br></div=
-><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div st=
-yle=3D"line-height:1.7;color:rgb(0,0,0);font-size:14px;font-family:Arial"><=
-div style=3D"margin:0px"><div>And our issue is attached in appendix.</div><=
-div>Please give us some help to solve this.</div><div><br></div><div>best w=
-ishs;</div><div>leo zhang<br></div></div></div><br><br><span title=3D"netea=
-sefooter"><p><br>=C2=A0</p></span></blockquote></div></div>
-</blockquote></div><br><br><span title=3D"neteasefooter"><p><br>=C2=A0</p><=
-/span></blockquote></div></div>
-</blockquote></div><br><br><span title=3D"neteasefooter"><p><br>=C2=A0</p><=
-/span></blockquote></div>
-
---0000000000006dc20205e0227705--
+PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOiMwMDAwMDA7Zm9udC1zaXplOjE0cHg7
+Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjogMDsiPkhpIFVyaTo8L2Rpdj48
+ZGl2IHN0eWxlPSJtYXJnaW46IDA7Ij5UaGFua3MgeW91ciBhbnN3ZXIgYW5kIGhlbHAhPC9kaXY+
+PGRpdiBzdHlsZT0ibWFyZ2luOiAwOyI+V2UgYXJlIHRyeWluZyB0byBkbyB0aGVzZSBhZHZpc2Ug
+dG8gaW1wcm92ZSB0aGUgaXNzdWUuPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOiAwOyI+VGhhbmtz
+IHNvIG11Y2ghPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOiAwOyI+YmVzdCB3aXNoZXMgPGJyPjwv
+ZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjogMDsiPmxlbyB6aGFuZzxicj48L2Rpdj48cCBzdHlsZT0i
+bWFyZ2luOiAwOyI+PGJyPjwvcD48cCBzdHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48cCBzdHls
+ZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48cCBzdHlsZT0ibWFyZ2luOiAwOyI+PGJyPjwvcD48ZGl2
+IHN0eWxlPSJwb3NpdGlvbjpyZWxhdGl2ZTt6b29tOjEiPjwvZGl2PjxkaXYgaWQ9ImRpdk5ldGVh
+c2VNYWlsQ2FyZCI+PC9kaXY+PHAgc3R5bGU9Im1hcmdpbjogMDsiPjxicj48L3A+PHA+QXQgMjAy
+Mi0wNS0yOSAxNjozODoyOSwgIlVyaSBMdWJsaW4iICZsdDt1cmlsQHJlZGhhdC5jb20mZ3Q7IHdy
+b3RlOjwvcD48YmxvY2txdW90ZSBpZD0iaXNSZXBseUNvbnRlbnQiIHN0eWxlPSJQQURESU5HLUxF
+RlQ6IDFleDsgTUFSR0lOOiAwcHggMHB4IDBweCAwLjhleDsgQk9SREVSLUxFRlQ6ICNjY2MgMXB4
+IHNvbGlkIj48ZGl2IGRpcj0ibHRyIj48ZGl2PkhpIExlbyw8L2Rpdj48ZGl2Pjxicj48L2Rpdj48
+ZGl2PkZvciBhIGd1ZXN0IHRoYXQgaGFzIE5WSURJQSAob3IgSW50ZWwvb3RoZXIpIHZncHUgYXMg
+YW4gbWRldiBkZXZpY2UgKGRpcmVjdCBhY2Nlc3MgdG8gTlZJRElBIGhhcmR3YXJlKSwgYWxsIGd1
+ZXN0IGdyYXBoaWNzIGNvbW1hbmRzIGFyZSBkb25lIG9uIHRoZSBOVklESUEgZGV2aWNlLjwvZGl2
+PjxkaXY+SW4gdGhpcyBjYXNlLCBvbmUgY2FuIHJ1biBzcGljZS1zdHJlYW1pbmctYWdlbnQsIG9u
+IHRoZSBndWVzdCwgYW5kIHVzZSBOVklESUEgdG8gZW5jb2RlIChlLmcuIHVzaW5nIHRoZSBnc3Ry
+ZWFtZXIgb3Igb3RoZXIgcGx1Z2luKSBhIHZpZGVvIHN0cmVhbSAoYXNzdW1pbmcgYW4gTlZJRElB
+L290aGVyIGhhcmR3YXJlIGVuY29kZXIgaXMgaW5zdGFsbGVkIG9uIHRoZSBndWVzdCB0b28pLiBU
+aGUgc3BpY2Utc3RyZWFtaW5nLWFnZW50IHNlbmRzIHRoZSB2aWRlbyBzdHJlYW0gdG8gc3BpY2Ut
+c2VydmVyIHZpYSBhIHZpcnRpby1zZXJpYWwgZGV2aWNlLiBUaGUgc3BpY2Utc2VydmVyIG5lZWRz
+IG5vdCByZS1lbmNvZGUgdGhlIHN0cmVhbSwgYnV0IGp1c3Qgc2VuZHMgaXQgYXMgaXMgdG8gdGhl
+IGNsaWVudCB0aGF0IChkZWNvZGVzIGl0IGFuZCkgZGlzcGxheXMgaXQgdG8gdGhlIHVzZXIuPC9k
+aXY+PGRpdj48YnI+PC9kaXY+PGRpdj5Ib3BlIHRoYXQgaGVscHMsPC9kaXY+PGRpdj4mbmJzcDsm
+bmJzcDsmbmJzcDsgVXJpLjwvZGl2PjxkaXY+PGJyPjwvZGl2PjwvZGl2Pjxicj48ZGl2IGNsYXNz
+PSJnbWFpbF9xdW90ZSI+PGRpdiBkaXI9Imx0ciIgY2xhc3M9ImdtYWlsX2F0dHIiPk9uIFNhdCwg
+TWF5IDI4LCAyMDIyIGF0IDM6MDUgUE0g1cXOsLuqICZsdDs8YSBocmVmPSJtYWlsdG86MTU1Mjkz
+MTY2ODNAMTYzLmNvbSI+MTU1MjkzMTY2ODNAMTYzLmNvbTwvYT4mZ3Q7IHdyb3RlOjxicj48L2Rp
+dj48YmxvY2txdW90ZSBjbGFzcz0iZ21haWxfcXVvdGUiIHN0eWxlPSJtYXJnaW46MHB4IDBweCAw
+cHggMC44ZXg7Ym9yZGVyLWxlZnQ6MXB4IHNvbGlkIHJnYigyMDQsMjA0LDIwNCk7cGFkZGluZy1s
+ZWZ0OjFleCI+PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOnJnYigwLDAsMCk7Zm9u
+dC1zaXplOjE0cHg7Zm9udC1mYW1pbHk6QXJpYWwiPjxwIHN0eWxlPSJtYXJnaW46MHB4Ij48YnI+
+PC9wPjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiPkhpIFVyaaO6PC9kaXY+PGRpdiBzdHlsZT0ibWFy
+Z2luOjBweCI+VGhhbmtzIGZvciB5b3VyIGxhc3QgZW1haWwgYW5kIHdlIGRpZCBzb21lIGV4cGVy
+aW1lbnQsIGhlcmUgYXJlIHNvbWUgcXVlc3Rpb25zIHJlbWFpbjo8L2Rpdj48ZGl2IHN0eWxlPSJt
+YXJnaW46MHB4Ij5XaGV0aGVyIG9ubHkgdXNlIHRoZSBRWEwgZGV2aWNlIGFzIHRoZSBkaXNwbGF5
+IGRldmljZSBjYW4gYWN0aXZhdGUgdGhlIHZpZGVvIHN0cmVhbWluZyBlbmNvZGUsIHdoaWNoIHRy
+ZWF0cyB0aGUgdmlkZW8gYXMgc3RyZWFtIGRhdGEgYW5kIGVuY29kZXMgYnkgTUpQRUcgb3Igb3Ro
+ZXIgR1N0cmVhbWVyIHN1cHBvcnRlZCBlbmNvZGluZyBtZXRob2RzLjxicj5XZSBoYXZlIGFib3Zl
+IHByb2JsZW1zIGlzIGJlY2F1c2Ugd2hlbiBhIE52aWRpYSB2Z3B1IGlzIHNldCBhcyB0aGUgbWRl
+diBkZXZpY2UodGhlIGRlZmF1bHQgdmFsdWUgobBxeGyhsSBvZiB0aGUgdmlydHVhbCBtYWNoaW5l
+IGlzIHJlcGxhY2VkIHdpdGggobBub25lobEsIHVzaW5nIHRoZSChsC12Z2Egbm9uZaGxIGNvbW1h
+bmQpLCB3ZSBmaW5kIGluIGxvZ3MgdGhhdCBzcGljZSB1c2VzIGltYWdlIGNvbXByZXNzaW9uIGlu
+c3RlYWQgb2YgdGhlIHNwaWNlIHZpZGVvIHN0cmVhbWluZyB0byBlbmNvZGUgdGhlIHdob2xlIGRp
+c3BsYXkgZGF0YShpbmNsdWRlIHRoZSB2aWRlbyB3aW5kb3cpLjxicj5Eb2VzIHNwaWNlIHN1cHBv
+cnQgYSB2Z3B1IG1kZXYgZGV2aWNlIHRvIGFjY2VsZXJhdGUgdGhlIHJlbmRlcmluZyBhbmQgdXNp
+bmcgdGhlIHNwaWNlIHZpZGVvIHN0cmVhbWluZyBlbmNvZGUgdG8gY29tcHJlc3MgYSB2aWRlbyBh
+dCB0aGUgbWVhbnRpbWUuPGJyPjwvZGl2PjxwIHN0eWxlPSJtYXJnaW46MHB4Ij48YnI+PC9wPjxk
+aXYgc3R5bGU9Im1hcmdpbjowcHgiPnBscyBoZWxwIHVzIHdpdGggdGhhdCA8YnI+PC9kaXY+PGRp
+diBzdHlsZT0ibWFyZ2luOjBweCI+dGhhbmtzIGEgbG90PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2lu
+OjBweCI+YmVzdCB3aXNoZXM8L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij5sZW8gemhhbmc8
+YnI+PC9kaXY+PHAgc3R5bGU9Im1hcmdpbjowcHgiPjxicj48L3A+PGRpdj48L2Rpdj48ZGl2IGlk
+PSJnbWFpbC1tXzM3ODMzMjQwNDA3NTEwOTY4NzRkaXZOZXRlYXNlTWFpbENhcmQiPjwvZGl2Pjxw
+IHN0eWxlPSJtYXJnaW46MHB4Ij48YnI+PC9wPjxwPkF0IDIwMjItMDUtMjcgMDM6Mjg6MjAsICJV
+cmkgTHVibGluIiAmbHQ7PGEgaHJlZj0ibWFpbHRvOnVyaWxAcmVkaGF0LmNvbSIgdGFyZ2V0PSJf
+YmxhbmsiPnVyaWxAcmVkaGF0LmNvbTwvYT4mZ3Q7IHdyb3RlOjwvcD48YmxvY2txdW90ZSBpZD0i
+Z21haWwtbV8zNzgzMzI0MDQwNzUxMDk2ODc0aXNSZXBseUNvbnRlbnQiIHN0eWxlPSJwYWRkaW5n
+LWxlZnQ6MWV4O21hcmdpbjowcHggMHB4IDBweCAwLjhleDtib3JkZXItbGVmdDoxcHggc29saWQg
+cmdiKDIwNCwyMDQsMjA0KSI+PGRpdiBkaXI9Imx0ciI+PGRpdj5IaSBMZW8sPC9kaXY+PGRpdj48
+YnI+PC9kaXY+PGRpdiBjbGFzcz0iZ21haWxfcXVvdGUiPjxkaXYgZGlyPSJsdHIiIGNsYXNzPSJn
+bWFpbF9hdHRyIj5PbiBUaHUsIE1heSAyNiwgMjAyMiBhdCA0OjI4IFBNINXFzrC7qiAmbHQ7PGEg
+aHJlZj0ibWFpbHRvOjE1NTI5MzE2NjgzQDE2My5jb20iIHRhcmdldD0iX2JsYW5rIj4xNTUyOTMx
+NjY4M0AxNjMuY29tPC9hPiZndDsgd3JvdGU6PGJyPjwvZGl2PjxibG9ja3F1b3RlIGNsYXNzPSJn
+bWFpbF9xdW90ZSIgc3R5bGU9Im1hcmdpbjowcHggMHB4IDBweCAwLjhleDtib3JkZXItbGVmdDox
+cHggc29saWQgcmdiKDIwNCwyMDQsMjA0KTtwYWRkaW5nLWxlZnQ6MWV4Ij48ZGl2IHN0eWxlPSJs
+aW5lLWhlaWdodDoxLjc7Y29sb3I6cmdiKDAsMCwwKTtmb250LXNpemU6MTRweDtmb250LWZhbWls
+eTpBcmlhbCI+PHAgc3R5bGU9Im1hcmdpbjowcHgiPjxicj48L3A+PGRpdiBzdHlsZT0ibWFyZ2lu
+OjBweCI+SGkgVXJpOjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiPlRoYW5rcyBmb3IgeW91
+ciBhZHZpc2Ugb2Ygb3VyIHByb2plY3QuV2UgaGF2ZSB0cnkgaXQgYW5kIGhlcmUgaXMgc29tZXRo
+aW5nIHdlIGZpbmQ6PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+MS53ZSBoYXZlIGRlcGxv
+eSB0aGUgc3BpY2Utc3RyZWFtaW5nLWFnZW50IGluIHRoZSBjbGllbnQgYW5kIHNldCBIMjU0IGlu
+IGxpYnZlcnQgeG1sICwgYXBwbGljZSByZXBvcnQgZXJyb3IgYW5kIGRvbid0IHdvcmsuPC9kaXY+
+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+YnV0IHZwOC92cDkgd29ya3MuPC9kaXY+PC9kaXY+PC9i
+bG9ja3F1b3RlPjxkaXY+Jm5ic3A7PC9kaXY+PGRpdj48ZGl2Pk5vdGUgdGhhdCBzcGljZS1zdHJl
+YW1pbmctYWdlbnQgbmVlZHMgdG8gcnVuIG9uIHRoZSBndWVzdC48L2Rpdj48YnI+PC9kaXY+PGRp
+dj4mbmJzcDs8L2Rpdj48YmxvY2txdW90ZSBjbGFzcz0iZ21haWxfcXVvdGUiIHN0eWxlPSJtYXJn
+aW46MHB4IDBweCAwcHggMC44ZXg7Ym9yZGVyLWxlZnQ6MXB4IHNvbGlkIHJnYigyMDQsMjA0LDIw
+NCk7cGFkZGluZy1sZWZ0OjFleCI+PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOnJn
+YigwLDAsMCk7Zm9udC1zaXplOjE0cHg7Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1h
+cmdpbjowcHgiPjIuV2hlbiB3ZSB1c2UgTnZpZGlhIHZncHUgYXMgYSBtZGV2IGRldmljZSBhdHRh
+Y2ggdG8gdGhlIHZpcnR1YWwgbWF0aGluZSw8c3BhbiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjpy
+Z2IoMjU1LDI1NSwyNTUpIj4gPGI+d2UgZmluZCBpbiBsb2dzIHRoYXQgc3BpY2UgdXNlIHBpY3R1
+cmUgY29tcHJlc3MgKGdseikgaW5zdGVhZCBvZiB2ZWRpbyBjb21wcmVzcyBoMjU0LjwvYj48L3Nw
+YW4+PGJyPjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiPlNvIHdlIGhhdmUgdHdvIHF1ZXN0
+aW9uIHRvIGFzazo8L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij4xLndoYXQgd2UgbmVlZCB0
+byBkbyBpbiBsaWJ2ZXJ0IHhtbCB0byBoYXZlIGEgYmV0dGVyIHZlZGlvIHF1YWxpdHkgd2l0SCBO
+VklESUEgVkdQVSBhdHRhY2ggYXMgYSBtZGV2IGRpdmljZT88YnI+PC9kaXY+PC9kaXY+PC9ibG9j
+a3F1b3RlPjxkaXY+Jm5ic3A7PC9kaXY+PGRpdj48ZGl2PlRoaXMgaXMgbm90IGRvbmUgaW4gbGli
+dmlydCBkb214bWwsIGJ1dCBuZWVkcyB0byBiZSBjb25maWd1cmVkIG9uIHRoZSBndWVzdC48L2Rp
+dj48ZGl2PihvZiBjb3Vyc2UgeW91IG5lZWQgdG8gaGF2ZSBvcmcuc3BpY2Utc3BhY2Uuc3RyZWFt
+LjAgdmlhIGxpYnZpcnQpPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+TWFrZSBzdXJlIHRo
+YXQgdGhlIGd1ZXN0J3MgZ3N0cmVhbWVyMSAia25vd3MiIHRoZSBjb2RlYy48L2Rpdj48ZGl2Pkl0
+IHdvcmtzIG11Y2ggYmV0dGVyIHdoZW4gdGhlIGVuY29kZXIgdXNlcyB0aGUgaGFyZHdhcmUgdG8g
+ZW5jb2RlLjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+Z3N0LWluc3BlY3QtMS4wIHwgZ3JlcCAy
+NjQmbmJzcDsgfCBncmVwIC1pIGVuYzxicj48L2Rpdj48ZGl2PjxkaXY+Z3N0LWluc3BlY3QtMS4w
+IHwgZ3JlcCAtaSB2cCZuYnNwOyB8IGdyZXAgLWkgZW5jPC9kaXY+PC9kaXY+Jm5ic3A7PC9kaXY+
+PGJsb2NrcXVvdGUgY2xhc3M9ImdtYWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4
+IDAuOGV4O2JvcmRlci1sZWZ0OjFweCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpO3BhZGRpbmctbGVm
+dDoxZXgiPjxkaXYgc3R5bGU9ImxpbmUtaGVpZ2h0OjEuNztjb2xvcjpyZ2IoMCwwLDApO2ZvbnQt
+c2l6ZToxNHB4O2ZvbnQtZmFtaWx5OkFyaWFsIj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij48L2Rp
+dj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij4yLldlIGRpZG4ndCBmaW5kIHNwaWNlLXN0cmVhbWlu
+Zy1hZ2VudCBmb3Igd2luZG93cyBpbiBTcGljZSBvZmZpY2Ugc2l0ZS4gRG9lcyBzcGljZS1zdHJl
+YW1pbmctYWdlbnQgb25seSBzdXBwb3J0IGxpbnV4IGFuZCBvbmx5IGhhdmUgbGludXggdmVyc2lv
+bj88YnI+PC9kaXY+PC9kaXY+PC9ibG9ja3F1b3RlPjxkaXY+PGJyPjwvZGl2PjxkaXY+WWVzLCBj
+dXJyZW50bHkgdGhlcmUgaXMgb25seSBhIGxpbnV4IHZlcnNpb24uPC9kaXY+PGRpdj48YnI+PC9k
+aXY+PGRpdj5SZWdhcmRzLDwvZGl2PjxkaXY+Jm5ic3A7Jm5ic3A7Jm5ic3A7IFVyaS48YnI+PC9k
+aXY+PGRpdj48YnI+PC9kaXY+PGJsb2NrcXVvdGUgY2xhc3M9ImdtYWlsX3F1b3RlIiBzdHlsZT0i
+bWFyZ2luOjBweCAwcHggMHB4IDAuOGV4O2JvcmRlci1sZWZ0OjFweCBzb2xpZCByZ2IoMjA0LDIw
+NCwyMDQpO3BhZGRpbmctbGVmdDoxZXgiPjxkaXYgc3R5bGU9ImxpbmUtaGVpZ2h0OjEuNztjb2xv
+cjpyZ2IoMCwwLDApO2ZvbnQtc2l6ZToxNHB4O2ZvbnQtZmFtaWx5OkFyaWFsIj48ZGl2IHN0eWxl
+PSJtYXJnaW46MHB4Ij48L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij5wczogT25lIHNpbmds
+ZSBkaXNwbGF5Jm5ic3A7IGFuZCA0ayB2aWRlbyBpcyByZXF1aXJlZCBhcyBvbmUgb2YgdGhlIG1h
+aW4gZ29hbHMmbmJzcDsgaW4gb3VyIHByb2plY3QuIDxicj48L2Rpdj48ZGl2IHN0eWxlPSJtYXJn
+aW46MHB4Ij5QbHMgaGVscCB1cyB3aXRoIHRob3NlIHF1ZXN0aW9ucy48L2Rpdj48ZGl2IHN0eWxl
+PSJtYXJnaW46MHB4Ij5CZXN0IHdpc2hlcyAhPC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+
+bGVvIHpoYW5nPGJyPjwvZGl2PjxwIHN0eWxlPSJtYXJnaW46MHB4Ij48YnI+PC9wPjxwIHN0eWxl
+PSJtYXJnaW46MHB4Ij48YnI+PC9wPjxwIHN0eWxlPSJtYXJnaW46MHB4Ij48YnI+PC9wPjxkaXY+
+PC9kaXY+PGRpdiBpZD0iZ21haWwtbV8zNzgzMzI0MDQwNzUxMDk2ODc0Z21haWwtbV8tNDE0NTcy
+MjQyMzUyMTM2MDYzM2Rpdk5ldGVhc2VNYWlsQ2FyZCI+PC9kaXY+PHAgc3R5bGU9Im1hcmdpbjow
+cHgiPjxicj48L3A+PHA+QXQgMjAyMi0wNS0yMCAwNDozODo1NSwgIlVyaSBMdWJsaW4iICZsdDs8
+YSBocmVmPSJtYWlsdG86dXJpbEByZWRoYXQuY29tIiB0YXJnZXQ9Il9ibGFuayI+dXJpbEByZWRo
+YXQuY29tPC9hPiZndDsgd3JvdGU6PC9wPjxibG9ja3F1b3RlIGlkPSJnbWFpbC1tXzM3ODMzMjQw
+NDA3NTEwOTY4NzRnbWFpbC1tXy00MTQ1NzIyNDIzNTIxMzYwNjMzaXNSZXBseUNvbnRlbnQiIHN0
+eWxlPSJwYWRkaW5nLWxlZnQ6MWV4O21hcmdpbjowcHggMHB4IDBweCAwLjhleDtib3JkZXItbGVm
+dDoxcHggc29saWQgcmdiKDIwNCwyMDQsMjA0KSI+PGRpdiBkaXI9Imx0ciI+PGRpdj5IaSBMZW8s
+PGJyPjwvZGl2Pjxicj48ZGl2IGNsYXNzPSJnbWFpbF9xdW90ZSI+PGRpdiBkaXI9Imx0ciIgY2xh
+c3M9ImdtYWlsX2F0dHIiPk9uIFRodSwgTWF5IDE5LCAyMDIyIGF0IDE6NDMgUE0g1cXOsLuqICZs
+dDs8YSBocmVmPSJtYWlsdG86MTU1MjkzMTY2ODNAMTYzLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPjE1
+NTI5MzE2NjgzQDE2My5jb208L2E+Jmd0OyB3cm90ZTo8YnI+PC9kaXY+PGJsb2NrcXVvdGUgY2xh
+c3M9ImdtYWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4IDAuOGV4O2JvcmRlci1s
+ZWZ0OjFweCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpO3BhZGRpbmctbGVmdDoxZXgiPjxkaXYgc3R5
+bGU9ImxpbmUtaGVpZ2h0OjEuNztjb2xvcjpyZ2IoMCwwLDApO2ZvbnQtc2l6ZToxNHB4O2ZvbnQt
+ZmFtaWx5OkFyaWFsIj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij5IaSA6PC9kaXY+PGRpdiBzdHls
+ZT0ibWFyZ2luOjBweCI+SSBhbSBhIHBoZCBzdHVkZW50IG9mIFhpYW4gSmlhb3RvbmcgdW5pdmVy
+c2l0eSBpbiBDaGluYS4gPGJyPjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiPldlIGhhdmUg
+YSBwcm9qZWN0IHRvIGFjY29tcGxpc2ggYSByZW1vdGUtZGVzayBzb2x1dGlvbiB3aXRoIE52aWRp
+YSB2Z3B1LjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowcHgiPldlIHVzZSBzcGljZSBsYXRlc3Qg
+dmVyc2lvbiZuYnNwOyBhbmQgaGF2ZSBhIGJhZCA0SyBkaXNwbGF5IHF1YWxpdHkuPC9kaXY+PGRp
+diBzdHlsZT0ibWFyZ2luOjBweCI+T3VyIGVudmlyb25tZW50IGlzIGxpa2U6PC9kaXY+PGRpdiBz
+dHlsZT0ibWFyZ2luOjBweCI+PGRpdj4xLlQ0IGNhcmQgd2l0aCBpbnNwdXJlIHNlcnZlciBpbiBu
+dmlkaWEgc3VwcG9ydCBsaXN0PC9kaXY+PC9kaXY+PC9kaXY+PC9ibG9ja3F1b3RlPjxkaXY+TlZJ
+RElBIFRlc2xhIFQ0Jm5ic3A7IEdQVSBjYXJkPGJyPjwvZGl2PjxkaXY+PGJyPjwvZGl2PjxibG9j
+a3F1b3RlIGNsYXNzPSJnbWFpbF9xdW90ZSIgc3R5bGU9Im1hcmdpbjowcHggMHB4IDBweCAwLjhl
+eDtib3JkZXItbGVmdDoxcHggc29saWQgcmdiKDIwNCwyMDQsMjA0KTtwYWRkaW5nLWxlZnQ6MWV4
+Ij48ZGl2IHN0eWxlPSJsaW5lLWhlaWdodDoxLjc7Y29sb3I6cmdiKDAsMCwwKTtmb250LXNpemU6
+MTRweDtmb250LWZhbWlseTpBcmlhbCI+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+Cgo8ZGl2PjIu
+cmVkaGF0IDguMiBlbnRlcnByaXNlJm5ic3A7IHdpdGgga3ZtIHFlbXU8L2Rpdj48L2Rpdj48L2Rp
+dj48L2Jsb2NrcXVvdGU+PGRpdj4mbmJzcDs8YnI+PC9kaXY+PGJsb2NrcXVvdGUgY2xhc3M9Imdt
+YWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4IDAuOGV4O2JvcmRlci1sZWZ0OjFw
+eCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpO3BhZGRpbmctbGVmdDoxZXgiPjxkaXYgc3R5bGU9Imxp
+bmUtaGVpZ2h0OjEuNztjb2xvcjpyZ2IoMCwwLDApO2ZvbnQtc2l6ZToxNHB4O2ZvbnQtZmFtaWx5
+OkFyaWFsIj48ZGl2IHN0eWxlPSJtYXJnaW46MHB4Ij4KCjxkaXY+My52Z3B1IHNvZnR3YXJlIHBh
+Y2thZ2UgaXMgMTMueDwvZGl2PjwvZGl2PjwvZGl2PjwvYmxvY2txdW90ZT48ZGl2Pk5WSURJQSBk
+cml2ZXImbmJzcDsrIHRvb2xzIChHUklEKTxicj48L2Rpdj48ZGl2PiZuYnNwOzwvZGl2PjxibG9j
+a3F1b3RlIGNsYXNzPSJnbWFpbF9xdW90ZSIgc3R5bGU9Im1hcmdpbjowcHggMHB4IDBweCAwLjhl
+eDtib3JkZXItbGVmdDoxcHggc29saWQgcmdiKDIwNCwyMDQsMjA0KTtwYWRkaW5nLWxlZnQ6MWV4
+Ij48ZGl2IHN0eWxlPSJsaW5lLWhlaWdodDoxLjc7Y29sb3I6cmdiKDAsMCwwKTtmb250LXNpemU6
+MTRweDtmb250LWZhbWlseTpBcmlhbCI+PGRpdiBzdHlsZT0ibWFyZ2luOjBweCI+Cgo8ZGl2PjQu
+dncgZmxhdm9yIGlzIDh1IDE2Ry4gd2l0aCA0MCBzdG9yYWdlLiZuYnNwOyAmbmJzcDt2Z3B1IGxp
+Y2Vuc2UgaXMgdnBjICxhbmQgdmdwdSBpcyBCLTJiLjwvZGl2PjwvZGl2PjwvZGl2PjwvYmxvY2tx
+dW90ZT48ZGl2PiJ2dyIgPT0gVmlydHVhbCBXb3Jrc3RhdGlvbjxicj48L2Rpdj48ZGl2PkItMmIg
+aXMgdGhlIHZHUFUgdHlwZT8gbWVhbmluZyBUNC0yQiA/PC9kaXY+PGRpdj5Eb2VzIGl0IGhlbHAg
+aWYgeW91IGNvbmZpZ3VyZSBpdCB3aXRoIFQ0LTJRIChtYXkgcmVxdWlyZSBhIGRpZmZlcmVudCBs
+aWNlbnNlKT88L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2Pk9ubHkgYSBzaW5nbGUgRGlzcGxheSwg
+cmlnaHQgPzwvZGl2PjxkaXY+PGJyPjwvZGl2PjxkaXY+QXJlIHlvdSBydW5uaW5nIHNwaWNlLXN0
+cmVhbWluZy1hZ2VudCBvbiB0aGUgZ3Vlc3QgPzwvZGl2PjxkaXY+VHJ5IHRvIHN0cmVhbSB3aXRo
+IEgyNjQsIGlmIHlvdSBkbyBub3QgYWxyZWFkeSBkbyBpdDwvZGl2PjxkaXY+KG1heSByZXF1aXJl
+IHBheWluZyBmZWVzIGZvciB1c2luZyBIMjY0KS48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRp
+dj5JcyA0ayByZXNvbHV0aW9uIGEgcmVxdWlyZW1lbnQ/IElmIG5vdCwgdHJ5IHdpdGggZS5nLiAy
+ay48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5Ib3BlIHRoYXQgaGVscHMsPC9kaXY+PGRp
+dj4mbmJzcDsmbmJzcDsmbmJzcDsgVXJpPC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj4mbmJzcDs8
+L2Rpdj48YmxvY2txdW90ZSBjbGFzcz0iZ21haWxfcXVvdGUiIHN0eWxlPSJtYXJnaW46MHB4IDBw
+eCAwcHggMC44ZXg7Ym9yZGVyLWxlZnQ6MXB4IHNvbGlkIHJnYigyMDQsMjA0LDIwNCk7cGFkZGlu
+Zy1sZWZ0OjFleCI+PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOnJnYigwLDAsMCk7
+Zm9udC1zaXplOjE0cHg7Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjowcHgi
+PjxkaXY+QW5kIG91ciBpc3N1ZSBpcyBhdHRhY2hlZCBpbiBhcHBlbmRpeC48L2Rpdj48ZGl2PlBs
+ZWFzZSBnaXZlIHVzIHNvbWUgaGVscCB0byBzb2x2ZSB0aGlzLjwvZGl2PjxkaXY+PGJyPjwvZGl2
+PjxkaXY+YmVzdCB3aXNoczs8L2Rpdj48ZGl2PmxlbyB6aGFuZzxicj48L2Rpdj48L2Rpdj48L2Rp
+dj48YnI+PGJyPjxzcGFuIHRpdGxlPSJuZXRlYXNlZm9vdGVyIj48cD48YnI+Jm5ic3A7PC9wPjwv
+c3Bhbj48L2Jsb2NrcXVvdGU+PC9kaXY+PC9kaXY+CjwvYmxvY2txdW90ZT48L2Rpdj48YnI+PGJy
+PjxzcGFuIHRpdGxlPSJuZXRlYXNlZm9vdGVyIj48cD48YnI+Jm5ic3A7PC9wPjwvc3Bhbj48L2Js
+b2NrcXVvdGU+PC9kaXY+PC9kaXY+CjwvYmxvY2txdW90ZT48L2Rpdj48YnI+PGJyPjxzcGFuIHRp
+dGxlPSJuZXRlYXNlZm9vdGVyIj48cD48YnI+Jm5ic3A7PC9wPjwvc3Bhbj48L2Jsb2NrcXVvdGU+
+PC9kaXY+CjwvYmxvY2txdW90ZT48L2Rpdj48YnI+PGJyPjxzcGFuIHRpdGxlPSJuZXRlYXNlZm9v
+dGVyIj48cD48YnIvPiZuYnNwOzwvcD48L3NwYW4+
+------=_Part_2073_516363906.1654128134088--
 
