@@ -1,50 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB28653C096
-	for <lists+spice-devel@lfdr.de>; Fri,  3 Jun 2022 00:06:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E2EC53D22D
+	for <lists+spice-devel@lfdr.de>; Fri,  3 Jun 2022 21:07:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ADEA610F9B3;
-	Thu,  2 Jun 2022 22:06:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8B1F7112416;
+	Fri,  3 Jun 2022 19:07:01 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7D3BE10F9BB;
- Thu,  2 Jun 2022 22:06:03 +0000 (UTC)
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2701A113CDD;
+ Thu,  2 Jun 2022 23:26:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1654207563; x=1685743563;
+ t=1654212419; x=1685748419;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=AKU2IG+YtECdmg0JbSDlVYGZXgmDcaF6I/51w4mVsVM=;
- b=Z9DEdE2adRjxqO52Yf5ivZniSLphLTgH23gw3g020GLPpXJUX5z6qdg7
- HXJ21Hn8k01vFX6lzrSnQ4Fn+umWF03fyYkS/HYbZU+/8EiISSaGi5lYT
- w4kOZlHDNyZtAZSsKZbLweHpwGqxKPOe6AEaP9a+tEpUlCFG0mAgm56+F
- u7BnY7MNvYATtwUpCsEuZf1+M+7jsgzOvgdatQk0akiQHpg4X7Rcz8HXS
- TMOOp3nyBSnjp8C7USryPX9CNBxiTUbHOD1NFkPAYTqUT4Z3RZuWNYKv7
- aUr8b24Wq4k7xeACi2zd7/ooA20les17QWUw80gj2bWG8DpJAI7v52hDt Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10366"; a="339140038"
-X-IronPort-AV: E=Sophos;i="5.91,272,1647327600"; d="scan'208";a="339140038"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Jun 2022 15:05:56 -0700
+ bh=GRhPAQ2CU2PMb7oMPFXlMaxADdhIAO/5kxDqAOm3iB0=;
+ b=j170YE8dLFLzJxzXhKuYYb3iSeSZLaC5ef0dWbutWaE3wyaCN4WoiiY8
+ L92cpzGXfGfE5hODcI5Wrhzr/CS2o+pq8Zviy9Ya0SdWOo1NoHPksUyro
+ KnqBUgUXmshmXOCWsXnyXLP49ycgB564l5ce6YPvLOqym/DuJnFCl6K7v
+ e/ANb7biJuyh3xbKfkLjj4ccgZf6iRTGWqAtHgdfqQqCxOkthoE6iQKgM
+ +GpQl48ZSC3+2XvPZ/EmvuoadLB4giXeumsysxnLb7Ncb6gzi6B5i+Bql
+ aKa+ZSAgEI2Bk9QRKUjbmDvL+EQbRmEyod1+YXEnR2cQFjzDvGISmlRZB w==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10366"; a="301482842"
+X-IronPort-AV: E=Sophos;i="5.91,272,1647327600"; d="scan'208";a="301482842"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Jun 2022 16:26:58 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.91,272,1647327600"; d="scan'208";a="553049411"
+X-IronPort-AV: E=Sophos;i="5.91,272,1647327600"; d="scan'208";a="563544713"
 Received: from lkp-server01.sh.intel.com (HELO 60dabacc1df6) ([10.239.97.150])
- by orsmga006.jf.intel.com with ESMTP; 02 Jun 2022 15:05:53 -0700
+ by orsmga002.jf.intel.com with ESMTP; 02 Jun 2022 16:26:54 -0700
 Received: from kbuild by 60dabacc1df6 with local (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1nwswy-0005Tw-Fl;
- Thu, 02 Jun 2022 22:05:52 +0000
-Date: Fri, 3 Jun 2022 06:05:15 +0800
+ (envelope-from <lkp@intel.com>) id 1nwuDN-0005WF-L0;
+ Thu, 02 Jun 2022 23:26:53 +0000
+Date: Fri, 3 Jun 2022 07:26:44 +0800
 From: kernel test robot <lkp@intel.com>
 To: Zack Rusin <zack@kde.org>, dri-devel@lists.freedesktop.org
-Message-ID: <202206030624.TdMaRYS5-lkp@intel.com>
+Message-ID: <202206030750.8hv8vdBA-lkp@intel.com>
 References: <20220602154243.1015688-4-zack@kde.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <20220602154243.1015688-4-zack@kde.org>
+X-Mailman-Approved-At: Fri, 03 Jun 2022 19:07:01 +0000
 Subject: Re: [Spice-devel] [PATCH 3/6] drm/qxl: Create mouse hotspot
  properties on cursor planes
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -58,10 +59,10 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: kbuild-all@lists.01.org, virtualization@lists.linux-foundation.org,
- krastevm@vmware.com, Gerd Hoffmann <kraxel@redhat.com>,
- Dave Airlie <airlied@redhat.com>, spice-devel@lists.freedesktop.org,
- mombasawalam@vmware.com
+Cc: kbuild-all@lists.01.org, llvm@lists.linux.dev,
+ virtualization@lists.linux-foundation.org, krastevm@vmware.com,
+ Gerd Hoffmann <kraxel@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ spice-devel@lists.freedesktop.org, mombasawalam@vmware.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
@@ -78,30 +79,31 @@ https://git-scm.com/docs/git-format-patch]
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Zack-Rusin/drm-Add-mouse-cursor-hotspot-support-to-atomic-KMS/20220602-234633
 base:   git://anongit.freedesktop.org/drm/drm drm-next
-config: x86_64-randconfig-a011 (https://download.01.org/0day-ci/archive/20220603/202206030624.TdMaRYS5-lkp@intel.com/config)
-compiler: gcc-11 (Debian 11.3.0-1) 11.3.0
+config: i386-randconfig-a013 (https://download.01.org/0day-ci/archive/20220603/202206030750.8hv8vdBA-lkp@intel.com/config)
+compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project b364c76683f8ef241025a9556300778c07b590c2)
 reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
         # https://github.com/intel-lab-lkp/linux/commit/0bf2395ee17bd25ae6411c560de883496256195d
         git remote add linux-review https://github.com/intel-lab-lkp/linux
         git fetch --no-tags linux-review Zack-Rusin/drm-Add-mouse-cursor-hotspot-support-to-atomic-KMS/20220602-234633
         git checkout 0bf2395ee17bd25ae6411c560de883496256195d
         # save the config file
         mkdir build_dir && cp config build_dir/.config
-        make W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash drivers/gpu/drm/qxl/
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 SHELL=/bin/bash drivers/gpu/drm/qxl/
 
 If you fix the issue, kindly add following tag where applicable
 Reported-by: kernel test robot <lkp@intel.com>
 
 All warnings (new ones prefixed by >>):
 
-   drivers/gpu/drm/qxl/qxl_display.c: In function 'qxl_primary_apply_cursor':
->> drivers/gpu/drm/qxl/qxl_display.c:486:33: warning: unused variable 'fb' [-Wunused-variable]
-     486 |         struct drm_framebuffer *fb = plane_state->fb;
-         |                                 ^~
-   drivers/gpu/drm/qxl/qxl_display.c: In function 'qxl_primary_move_cursor':
-   drivers/gpu/drm/qxl/qxl_display.c:532:33: warning: unused variable 'fb' [-Wunused-variable]
-     532 |         struct drm_framebuffer *fb = plane_state->fb;
-         |                                 ^~
+>> drivers/gpu/drm/qxl/qxl_display.c:486:26: warning: unused variable 'fb' [-Wunused-variable]
+           struct drm_framebuffer *fb = plane_state->fb;
+                                   ^
+   drivers/gpu/drm/qxl/qxl_display.c:532:26: warning: unused variable 'fb' [-Wunused-variable]
+           struct drm_framebuffer *fb = plane_state->fb;
+                                   ^
+   2 warnings generated.
 
 
 vim +/fb +486 drivers/gpu/drm/qxl/qxl_display.c
