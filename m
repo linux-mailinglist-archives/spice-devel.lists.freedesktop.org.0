@@ -1,54 +1,48 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA99153FE3E
-	for <lists+spice-devel@lfdr.de>; Tue,  7 Jun 2022 14:03:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D6F0551D76
+	for <lists+spice-devel@lfdr.de>; Mon, 20 Jun 2022 16:08:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2DA1B10E1E3;
-	Tue,  7 Jun 2022 12:03:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D915B10E2FC;
+	Mon, 20 Jun 2022 14:08:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1D6FA112D86
- for <spice-devel@lists.freedesktop.org>; Tue,  7 Jun 2022 10:39:52 +0000 (UTC)
-Received: by mail-lj1-x231.google.com with SMTP id g25so18675712ljm.2
- for <spice-devel@lists.freedesktop.org>; Tue, 07 Jun 2022 03:39:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=3x2JvfYrPBzzjWNg2oPZ/+iyKsoBM1CvKVxa65GHFG4=;
- b=MuqV7qbf043nrQGMZlzXMyEu7l6+ShJtvVWdQhds9gpu4piVbPAI2uKG31J2KQCLvF
- B1dcrGbLP1U8vOz7ipmjHPw8NZ6QuQybjQV4mdTMY5MHjOKzJJD3Wz0SNINLQZJ49+dS
- 1PjKAlu8eN2/NwICP5TgUW9KhixxSaQjbhgco4y3yDdTOzRKcbRLKLt4HxIDQjdSYMSd
- CN9Sx/UNJDjDKT8xb6APeJCcFXW4UxAD+lHpbOnSC9zX1StUvqhui/VgnCOaOGI6OwN3
- jQD850n1dV/S40/E0+pvVpQ1xHCX956OyD6AtyMiYLtOilS+Yf6esAK7r1mPh7dggTw7
- mTLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=3x2JvfYrPBzzjWNg2oPZ/+iyKsoBM1CvKVxa65GHFG4=;
- b=26H4MseeJ9UIQ06WJb/S9BIt8qcDqcVM5nqNBxgSrjCCgel/1EhidCml1JUMZHz62g
- kaM0iwqUjvBTQpjQsZtdBhkq1xTZBQkgjjsHlItVXvaG1c8ypjYAbw+tsfAEqewaWVms
- VYGkTS97QWh6ypmRAeDEDbwTJYVUS56vo4X3jOcov+/Q17XPUG6NqIcOKCuz7aQwAQhE
- jrliPmyd1i90daCbkXNwCw/4Xr9PoF32UIQ4CfpT9MoYPwrQrTV8JBYwYPTByTJC0q4m
- TfocWPTmeVjx1tJNeBBBKdT2HT8RtuAdDizr8VWqqEAuRsiSbsCXWDAnIpZI77/5ibXi
- 8s7A==
-X-Gm-Message-State: AOAM530YOSFMIM+uh2nBKO/wwccF4eWKpT5viQgNMqYpLUA0+xK3IfDQ
- qqwxNZe8tJP9b8LHC02vGf+PSL4xtnSXQwfDrBQQzRkDcG0fvUcb2YI=
-X-Google-Smtp-Source: ABdhPJyY+7P8A0DUW6wTttBQkV6K9CASDZfO4k/ijSh/hwd8Hki+/XRBM/uz6codC4LyNcwYNIYCuEjvvrGLJnTnwoo=
-X-Received: by 2002:a2e:81ca:0:b0:255:78c0:cb21 with SMTP id
- s10-20020a2e81ca000000b0025578c0cb21mr13219477ljg.240.1654598389969; Tue, 07
- Jun 2022 03:39:49 -0700 (PDT)
+X-Greylist: delayed 552 seconds by postgrey-1.36 at gabe;
+ Mon, 20 Jun 2022 14:08:53 UTC
+Received: from mxout1-ec2-va.apache.org (mxout1-ec2-va.apache.org
+ [3.227.148.255])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8C37810E13C
+ for <spice-devel@lists.freedesktop.org>; Mon, 20 Jun 2022 14:08:53 +0000 (UTC)
+Received: from mail.apache.org (mailroute1-lw-us.apache.org [207.244.88.153])
+ by mxout1-ec2-va.apache.org (ASF Mail Server at
+ mxout1-ec2-va.apache.org) with SMTP id 9A2C43E991
+ for <spice-devel@lists.freedesktop.org>; Mon, 20 Jun 2022 13:59:34 +0000 (UTC)
+Received: (qmail 48324 invoked by uid 99); 20 Jun 2022 13:59:34 -0000
+Received: from ec2-52-204-25-47.compute-1.amazonaws.com (HELO
+ mailrelay1-ec2-va.apache.org) (52.204.25.47)
+ by apache.org (qpsmtpd/0.29) with ESMTP; Mon, 20 Jun 2022 13:59:34 +0000
+Received: from mail-vs1-f50.google.com (mail-vs1-f50.google.com
+ [209.85.217.50]) by mailrelay1-ec2-va.apache.org (ASF Mail Server at
+ mailrelay1-ec2-va.apache.org) with ESMTPSA id 68F4A3E8F1
+ for <spice-devel@lists.freedesktop.org>; Mon, 20 Jun 2022 13:59:34 +0000 (UTC)
+Received: by mail-vs1-f50.google.com with SMTP id k25so2967203vso.6
+ for <spice-devel@lists.freedesktop.org>; Mon, 20 Jun 2022 06:59:34 -0700 (PDT)
+X-Gm-Message-State: AJIora+n8tLjttRbChg8mOVcCnP9fUjohnx2TvRP/elO4NJFci4TH/Pv
+ YYUjJXjxOQit6MQvmoIRASiEEZJkIXQoEqqG4z0=
+X-Google-Smtp-Source: AGRyM1u6IDdd5iY/LAYU4mnc31k3RJgKlmOk+C0HPzMq+EQHijA+AUMRS8fNjvZRPc3VEMKb1dYq92MrTOZLbcsM1yY=
+X-Received: by 2002:a05:6102:30a8:b0:34b:95a7:6feb with SMTP id
+ y8-20020a05610230a800b0034b95a76febmr8400067vsd.32.1655733573948; Mon, 20 Jun
+ 2022 06:59:33 -0700 (PDT)
 MIME-Version: 1.0
-From: Walter Mitty <waltermitty121906@gmail.com>
-Date: Tue, 7 Jun 2022 18:39:37 +0800
-Message-ID: <CAOgZG1y8zz4hkw-FPO4rcccveG8NUx4D73_A3Y9j3sW30NYBjw@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000047b7b505e0d93598"
-X-Mailman-Approved-At: Tue, 07 Jun 2022 12:03:12 +0000
-Subject: [Spice-devel] MOUSE rate down to 1/4 compare with bare metal PC,
- how to explain?
+From: Nick Couchman <vnick@apache.org>
+Date: Mon, 20 Jun 2022 09:59:23 -0400
+X-Gmail-Original-Message-ID: <CAFjj602+NQwJF-QB6V=9ELfc9qgqBdvhSr5_VSAdy6-LZCoPbA@mail.gmail.com>
+Message-ID: <CAFjj602+NQwJF-QB6V=9ELfc9qgqBdvhSr5_VSAdy6-LZCoPbA@mail.gmail.com>
+To: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="000000000000849e3605e1e1837d"
+Subject: [Spice-devel] Issues with Clipboard Grab/Release Callbacks
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,40 +57,170 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000047b7b505e0d93598
+--000000000000849e3605e1e1837d
 Content-Type: text/plain; charset="UTF-8"
 
-Hello guys,
+Hello, everyone,
+I've posted here, before, with some questions during my journey of trying
+to add support for the SPICE protocol to the Guacamole project. The good
+news is that I've actually made measurable progress in the implementation -
+I can now connect to a SPICE server, and the basics work (mouse and
+keyboard - mostly anyway), so I'm moving on to the extra stuff - clipboard,
+audio, file transfer, etc.
 
-I'm using SPICE + QEMU as a solution for remote desktop. My guest OS is
-running on the server side, not locally. And there is a thin-client to
-access the guest OS. What makes me confused is, the mouse report rate is
-down to *32hz , *which is *125hz* on a bare metal PC.
+In working on the clipboard integration, I'm currently running into an
+issue with a couple of the callback functions, specifically the clipboard
+grab/release functions, where the number of arguments seems to be
+mismatched. According to the documentation, these callbacks should be
+called with the following arguments:
 
-I looked up the source code and I found that SPICE will call some API of
-QEMU to replay the mouse events. But I haven't found the reason for this
-issue. By the way, if I redirect the mouse device to the guest OS, the
-mouse rate will be *125hz* , which is identical with a bare metal PC.
+gboolean
+user_function (SpiceMainChannel *main,
+               guint             selection,
+               gpointer          types,
+               guint             ntypes,
+               gpointer          user_data)
 
-Could anyone please give some advice? Thanks in advance.
+void
+user_function (SpiceMainChannel *main,
+               guint             selection,
+               gpointer          user_data)
 
-Regards,
-Walter
+I've implemented the callbacks with those arguments, as follows:
 
---00000000000047b7b505e0d93598
+void guac_spice_clipboard_selection_grab_handler(SpiceMainChannel channel,
+        guint selection, gpointer types, guint ntypes, guac_client* client)
+
+void guac_spice_clipboard_selection_release_handler(SpiceMainChannel
+channel,
+        guint selection, guac_client* client)
+
+and registered them appropriately. However, if I use them as implemented
+above, when the callbacks are triggered, the application segfaults when I
+try to access the "guac_client* client" data structure. I used GDB to try
+to help track this down, and I noticed that the value of "client" was 0x1,
+which looks less like a pointer to a memory location and more like the
+number 1.
+
+So, I decided to add another argument to the callback functions, just
+before the client argument:
+
+void guac_spice_clipboard_selection_grab_handler(SpiceMainChannel channel,
+        guint selection, gpointer types, guint ntypes, guint extra,
+guac_client* client)
+
+void guac_spice_clipboard_selection_release_handler(SpiceMainChannel
+channel,
+        guint selection, guint extra, guac_client* client)
+
+Strangely, this works - the client data structure can be referenced, there
+are no segfaults (yet), etc. So, I decided to print the values that are
+being passed for all of these parameters, and I get the following:
+
+guacd[100252]: DEBUG: Notifying client of clipboard grab in the guest.
+guacd[100252]: DEBUG: Arg: channel: 0x00000000
+guacd[100252]: DEBUG: Arg: selection: 1275303536
+guacd[100252]: DEBUG: Arg: types: 0x00000001
+guacd[100252]: DEBUG: Arg: ntypes: 1276022924
+guacd[100252]: DEBUG: Arg: extra: 1
+
+I printed them in the format I thought they should be in based on what the
+arguments are supposed to be - I probably should have just done all hex.
+But, it seems like maybe the "extra" parameter being passed is in front of
+the channel, since the channel is showing up as all zeros?
+
+I was trying to find the code where the callbacks are actually called - I'm
+guessing, since this is clipboard integration, it'll be in the vdagent code
+somewhere - but I was having trouble tracking that down.
+
+If anyone has any ideas, I'd appreciate the insight into this - I'm puzzled
+by this apparent mismatch in the number of arguments. Also, if it matters,
+I'm running CentOS 8 Stream, using Xspice to provide a test SPICE server,
+and running spice-vdagentd/spice-vdagent within my X session. Yes, I know
+Xspice is unmaintained, but I just needed something simple and that I
+didn't have to spend a bunch of time building in order to give me a spice
+server to point at, and, so far, this has been pretty reliable. Also, at
+its core, it appears to use the same spice-qxl X driver that x11spice uses,
+just with a simple Python wrapper script for generating an X config file
+and starting the X server/display. So, I think it's still pretty "safe" for
+attempting to develop this Guacamole integration - if for some reason you
+believe me to be wrong about that, please let me know.
+
+Thanks,
+Nick
+
+--000000000000849e3605e1e1837d
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hello guys,<div><br><div>I&#39;m using SPICE=C2=A0+ QEMU a=
-s a solution for remote desktop. My guest OS is running on the server side,=
- not locally. And there is a thin-client to access the guest OS. What makes=
- me confused is, the mouse report rate is down to <b>32hz , </b>which is <b=
->125hz</b> on a bare metal PC.=C2=A0</div><div><br></div><div>I looked up t=
-he source code and I found that SPICE will call some API of QEMU to replay =
-the mouse events. But I haven&#39;t found the reason for this issue. By=C2=
-=A0the way, if I redirect the mouse device to the guest OS, the mouse rate =
-will be <b>125hz</b>=C2=A0, which is identical with a bare metal PC.</div><=
-div><br></div><div>Could anyone please give some advice? Thanks in advance.=
-</div><div><br></div><div>Regards,</div><div>Walter</div></div></div>
+<div dir=3D"ltr">Hello, everyone,<div>I&#39;ve posted here, before, with so=
+me questions during my journey of trying to add support for the SPICE proto=
+col to the Guacamole project. The good news is that I&#39;ve actually made =
+measurable progress in the implementation - I can now connect to a SPICE se=
+rver, and the basics work (mouse and keyboard - mostly anyway), so I&#39;m =
+moving on to the extra stuff - clipboard, audio, file transfer, etc.</div><=
+div><br></div><div>In working on the clipboard integration, I&#39;m current=
+ly running into an issue with a couple of the callback=C2=A0functions, spec=
+ifically the clipboard grab/release functions, where the number of argument=
+s seems to be mismatched. According to the documentation, these callbacks s=
+hould be called with the following arguments:</div><div><br></div><div>gboo=
+lean<br>user_function (SpiceMainChannel *main,<br>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0guint =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 selection,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gp=
+ointer =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0types,<br>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0guint =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 ntypes,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gpoin=
+ter =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0user_data)<br></div><div><br></div><d=
+iv>void<br>user_function (SpiceMainChannel *main,<br>=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0guint =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 selection,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0gpointer =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0user_data)<br></div><div><br>=
+</div><div>I&#39;ve implemented the callbacks with those arguments, as foll=
+ows:<br><br>void guac_spice_clipboard_selection_grab_handler(SpiceMainChann=
+el channel,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 guint selection, gpointer types,=
+ guint ntypes, guac_client* client)<br></div><div><br></div><div>void guac_=
+spice_clipboard_selection_release_handler(SpiceMainChannel channel,<br>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 guint selection, guac_client* client)<br></div><di=
+v><br></div><div>and registered them appropriately. However, if I use them =
+as implemented above, when the callbacks are triggered, the application seg=
+faults when I try to access the &quot;guac_client* client&quot; data struct=
+ure. I used GDB to try to help track this down, and I noticed that the valu=
+e of &quot;client&quot; was 0x1, which looks less like a pointer to a memor=
+y location and more like the number 1.</div><div><br></div><div>So, I decid=
+ed to add another argument to the callback functions, just before the clien=
+t argument:</div><div><br></div><div>void guac_spice_clipboard_selection_gr=
+ab_handler(SpiceMainChannel channel,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 guint s=
+election, gpointer types, guint ntypes, guint extra, guac_client* client)<b=
+r></div><div><br></div><div>void guac_spice_clipboard_selection_release_han=
+dler(SpiceMainChannel channel,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 guint selecti=
+on, guint extra, guac_client* client)<br></div><div><br></div><div>Strangel=
+y, this works - the client data structure can be referenced, there are no s=
+egfaults (yet), etc. So, I decided to print the values that are being passe=
+d for all of these parameters, and I get the following:</div><div><br></div=
+><div>guacd[100252]: DEBUG:	Notifying client of clipboard grab in the guest=
+.<br>guacd[100252]: DEBUG:	Arg: channel: 0x00000000<br>guacd[100252]: DEBUG=
+:	Arg: selection: 1275303536<br>guacd[100252]: DEBUG:	Arg: types: 0x0000000=
+1<br>guacd[100252]: DEBUG:	Arg: ntypes: 1276022924<br>guacd[100252]: DEBUG:=
+	Arg: extra: 1<br></div><div><br></div><div>I printed them in the format I =
+thought they should be in based on what the arguments are supposed to be - =
+I probably should have just done all hex. But, it seems like maybe the &quo=
+t;extra&quot; parameter being passed is in front of the channel, since the =
+channel is showing up as all zeros?</div><div><br></div><div>I was trying t=
+o find the code where the callbacks are actually called - I&#39;m guessing,=
+ since this is clipboard integration, it&#39;ll be in the vdagent code some=
+where - but I was having trouble tracking that down.</div><div><br></div><d=
+iv>If anyone has any ideas, I&#39;d appreciate the insight into this - I&#3=
+9;m puzzled by this apparent mismatch in the number of arguments. Also, if =
+it matters, I&#39;m running CentOS 8 Stream, using Xspice to provide a test=
+ SPICE server, and running spice-vdagentd/spice-vdagent within my X session=
+. Yes, I know Xspice is unmaintained, but I just needed something simple an=
+d that I didn&#39;t have to spend a bunch of time building in order to give=
+ me a spice server to point at, and, so far, this has been pretty reliable.=
+ Also, at its core, it appears to use the same spice-qxl X driver that x11s=
+pice=C2=A0uses, just with a simple Python wrapper script for generating an =
+X config file and starting the X server/display. So, I think it&#39;s still=
+ pretty &quot;safe&quot; for attempting to develop this Guacamole integrati=
+on - if for some reason you believe me to be wrong about that, please let m=
+e know.</div><div><br></div><div>Thanks,</div><div>Nick</div></div>
 
---00000000000047b7b505e0d93598--
+--000000000000849e3605e1e1837d--
