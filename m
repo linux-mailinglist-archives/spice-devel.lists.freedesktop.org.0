@@ -2,54 +2,45 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71B2B55E5D4
-	for <lists+spice-devel@lfdr.de>; Tue, 28 Jun 2022 17:55:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5138D565AD0
+	for <lists+spice-devel@lfdr.de>; Mon,  4 Jul 2022 18:16:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CD505112D76;
-	Tue, 28 Jun 2022 15:55:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 37A0D10E4BB;
+	Mon,  4 Jul 2022 16:14:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B2A37113CA0
- for <spice-devel@lists.freedesktop.org>; Tue, 28 Jun 2022 15:55:19 +0000 (UTC)
-Received: by mail-oi1-x22b.google.com with SMTP id s124so17846400oia.0
- for <spice-devel@lists.freedesktop.org>; Tue, 28 Jun 2022 08:55:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=a00GEu4iPh3wtt9WW+hLP8FcjcoDoYsCE+iJWUlBkSg=;
- b=SpD1ZBZuO0j7H4+uRblg8DO/GQCuy5idkDVM1PUTPzULHQAONzTWstP1qBOPqhHrAK
- Ni512DIJtgiPNJh2rNbto1umfvRiuYNQHGGU93uof8SkCsDCFS5C8O5asoQCCyCPHIoH
- B4Pz+EG6VEgk0fwPNLpPoIbuPgIz7XXXn8eHr9v237Mjo3HaL9kQ9skYgTWSypd+ZGnZ
- kZox9H3YNyiXmYSbtsEVNrtNqx9Ist2kvGSjS7vs/GvXlyZlABpn0KWNIt7s12/L3MZG
- mqEscn9tT6b1drhGRRfE8m01i3qNSWq8tgmxvgYE+dxOF7EcN6WTjddtTKk3MGnrJ8Pc
- oP3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=a00GEu4iPh3wtt9WW+hLP8FcjcoDoYsCE+iJWUlBkSg=;
- b=5G1KVMlxPAFZCNvEzcGkZwBJdOkio333O46pF6ocZsDRRkctr3uCawvbIopoJB9MPg
- F4w14RCY8VVyTTg1spbDxrDCuu08uSVvpQ91UpG9Lkt2LuIVaDyLxyPcFpWkWp9PH0VT
- fvxR2uBB4M6IEyeH0CiAbkYaYAK59Rhptl0YNGXxBXQBUCKKlvttJtX3bcUQs1tyIsH7
- 7B6xe7RjxwAPQkiad7gs71msIIGcNa7KroDCCc4r0OOTEgayBeRgAm+GeYVDF/byyi3C
- HsnwhXzKi/VRhZqUu0Xw4q9wqDc1I0UfLVnZvgZm7CQ0phpuv9rT3+PK5B6zGZiir/X9
- 3WHw==
-X-Gm-Message-State: AJIora8cCqCC7jsZMC+0CELJYTkaOaKMEJPyyS39VBYZlyWPrHQRd4Xc
- qgZ67wLpVNOP/Z9xPI8T/KWNSB9snXunLUrOO0g=
-X-Google-Smtp-Source: AGRyM1s4LzWp4BYXd1ehXvLJfG5CvITyONZBff44iCkQ8n8wQDWy2byHhlwbrDVWaFAExsEvCGL0tMiojbyWvPcih0Y=
-X-Received: by 2002:a05:6808:2122:b0:32e:f740:3369 with SMTP id
- r34-20020a056808212200b0032ef7403369mr195675oiw.1.1656431719035; Tue, 28 Jun
- 2022 08:55:19 -0700 (PDT)
+Received: from mxout1-he-de.apache.org (mxout1-he-de.apache.org
+ [95.216.194.37])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E512910E103
+ for <spice-devel@lists.freedesktop.org>; Sun,  3 Jul 2022 18:40:57 +0000 (UTC)
+Received: from mail.apache.org (mailroute1-lw-us.apache.org [207.244.88.153])
+ by mxout1-he-de.apache.org (ASF Mail Server at
+ mxout1-he-de.apache.org) with SMTP id 41A675FE01
+ for <spice-devel@lists.freedesktop.org>; Sun,  3 Jul 2022 18:40:55 +0000 (UTC)
+Received: (qmail 48985 invoked by uid 99); 3 Jul 2022 18:40:54 -0000
+Received: from mailrelay1-he-de.apache.org (HELO mailrelay1-he-de.apache.org)
+ (116.203.21.61)
+ by apache.org (qpsmtpd/0.29) with ESMTP; Sun, 03 Jul 2022 18:40:54 +0000
+Received: from mail-vs1-f54.google.com (mail-vs1-f54.google.com
+ [209.85.217.54]) by mailrelay1-he-de.apache.org (ASF Mail Server at
+ mailrelay1-he-de.apache.org) with ESMTPSA id AA38E3F4F7
+ for <spice-devel@lists.freedesktop.org>; Sun,  3 Jul 2022 18:40:53 +0000 (UTC)
+Received: by mail-vs1-f54.google.com with SMTP id k25so7134146vso.6
+ for <spice-devel@lists.freedesktop.org>; Sun, 03 Jul 2022 11:40:53 -0700 (PDT)
+X-Gm-Message-State: AJIora+i6ViW2X1aJD2cbmJ1784fvmNIAMIs98YJfWSQCGQ3tFeEcPVe
+ nr2EZeQpW3+O3wR1UZB22lUX1m8ZITASwMmJHUo=
+X-Google-Smtp-Source: AGRyM1uQcK2t5fK/CD5DZDQ4p4LmIVu+cpHYLc8iylrTXcFJuxNzWydxBgIjIVX3eXix3t/wJ26ZjcAHCHOw7nUnd7w=
+X-Received: by 2002:a05:6102:5789:b0:354:3f0c:7379 with SMTP id
+ dh9-20020a056102578900b003543f0c7379mr14432783vsb.20.1656873652423; Sun, 03
+ Jul 2022 11:40:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <web-14586916@be1.uni-freiburg.de>
-In-Reply-To: <web-14586916@be1.uni-freiburg.de>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 28 Jun 2022 16:55:07 +0100
-Message-ID: <CAHt6W4dy+UnJ9jjSfqKisZzF2Ob3acVJOu_4Mz3+T4aGANqPAA@mail.gmail.com>
-To: Brian Michelson <brian.michelson@students.uni-freiburg.de>
-Content-Type: multipart/alternative; boundary="0000000000003537e405e28410bd"
-Subject: Re: [Spice-devel] Spice HTML 5 problems
+From: Nick Couchman <vnick@apache.org>
+Date: Sun, 3 Jul 2022 14:40:41 -0400
+X-Gmail-Original-Message-ID: <CAFjj601s+L1mXUOk4r5p6KshAf5Ae5+6z7MauQ-sUcKuSX-BCA@mail.gmail.com>
+Message-ID: <CAFjj601s+L1mXUOk4r5p6KshAf5Ae5+6z7MauQ-sUcKuSX-BCA@mail.gmail.com>
+To: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="0000000000007d917605e2eaf581"
+Subject: [Spice-devel] Spice, VDAgent, and Clipboard
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,106 +52,149 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000003537e405e28410bd
+--0000000000007d917605e2eaf581
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+I'm back with my next question regarding clipboard integration with Spice
+(and vdagent). For Guacamole, I've managed to get the Spice callbacks
+working to the point where data copied within the guest is available to the
+Guacamole Client. Now I'm trying to get it to work the other way around,
+where data copied on the client side is sent through to the Spice server,
+more specifically to vdagent running within the Spice session.
 
-Il giorno mar 28 giu 2022 alle ore 16:25 Brian Michelson <
-brian.michelson@students.uni-freiburg.de> ha scritto:
+As a quick recap, I'm running CentOS Stream 8, and using the Xspice script
+to launch a Spice server (xorg spice qxl) that I can use for developing
+Guacamole's Spice protocol support. Within this X session I'm running the
+Xfce window/session manager, and I'm launching both spice-vdagentd and
+spice-vdagent within this session to get support for things like clipboard
+synchronization.
 
-> Hello dear spice team,
->
-> we have a problem with connection via your html 5 client.
->
-> We set a spice server in qemu and the connection via virt manager
-> works, both locally and from outside.
-> Now we started the websockify server and pointed the browser to the
-> html client,
-> but we had no success connecting yet.
->
-> Our first question is, is it normal that we dont get any response in
-> the debug log of the html 5 spice client.
->
-> We start websockify by using: websockify 5959 10.21.9.235:5900 is this
-> alright?
->
-> Is this proxy running on the Qemu machine?
+While the outbound (Spice -> Client) clipboard works fine, something is not
+working correctly getting the clipboard data to go the other direction
+(Client -> Spice).The code is here:
 
+https://github.com/necouchman/guacamole-server/tree/working/spice-basic/src/protocols/spice
 
-> In the attatchments you find will find a picture of how we connect.
->
->
-From the image you are trying to connect to the same IP where Qemu
-(spice-server) is listening. So I'm assuming websockify is running on the
-same machine. By the way you have to connect to  the machine running
-websockify. Try to check if there's no firewall between websockify and Qemu
-and from your HTML client and websockify (I usually check with telnet).
-Recent versions of spice-server has websocket support integrated so you
-could try directly to connect to Qemu without websockify.
+with the clipboard-specific functions, here:
 
+https://github.com/necouchman/guacamole-server/blob/working/spice-basic/src/protocols/spice/channels/clipboard.c
 
-> Greetings from
->
-> Tibor & Brian
->
->
->
->
-Regards,
-  Frediano
+Essentially what I'm doing when clipboard data is available on the client
+side is calling the spice_main_channel_clipboard_selection_grab() function
+to let the Spice server/vdagent know that clipboard data is available:
 
---0000000000003537e405e28410bd
+--
+    guac_client_log(user->client, GUAC_LOG_DEBUG, "Calling SPICE clipboard
+handler for MIME type: %s", mimetype);
+    guac_common_clipboard_reset(spice_client->clipboard, mimetype);
+    guint32 clipboard_types[] = { VD_AGENT_CLIPBOARD_UTF8_TEXT };
+    spice_main_channel_clipboard_selection_grab(spice_client->main_channel,
+VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD, clipboard_types, 1);
+--
+
+Then, once the clipboard is settled on the client side, I call
+guac_main_channel_clipboard_selection_notify() to send the data along,
+followed by guac_main_channel_clipboard_selection_release() to release the
+previously-called grab:
+
+--
+    /* Send via VNC only if finished connecting */
+    if (spice_client->main_channel != NULL) {
+
+spice_main_channel_clipboard_selection_notify(spice_client->main_channel,
+            VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD,
+            VD_AGENT_CLIPBOARD_UTF8_TEXT,
+            (const unsigned char*) input,
+            spice_client->clipboard->length);
+
+spice_main_channel_clipboard_selection_release(spice_client->main_channel,
+            VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD);
+    }
+--
+
+In the vdagent debug logs, I see the following:
+
+spice-vdagentd: 0x55d56f3455e0 sent clipboard grab, arg1: 0, arg2: 0, size 4
+spice-vdagentd: 0x55d56f3455e0 sent clipboard data, arg1: 0, arg2: 1, size
+14
+spice-vdagentd: 0x55d56f3455e0 sent clipboard release, arg1: 0, arg2: 0,
+size 0
+
+The problem is that the clipboard within my window manager (Xfce) never
+receives this data - if I try to paste what I've copied on the client-side
+in a Notepad or Terminal application within the Spice session, it's
+completely empty.
+
+Anything obviously wrong with this approach that anyone can spot, or any
+hints as to where to look next?
+
+Thanks,
+Nick
+
+--0000000000007d917605e2eaf581
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div class=3D"gmail_quote"><div class=3D"gmail_attr">Hi,</=
-div><div class=3D"gmail_attr"><br></div><div dir=3D"ltr" class=3D"gmail_att=
-r">Il giorno mar 28 giu 2022 alle ore 16:25 Brian Michelson &lt;<a href=3D"=
-mailto:brian.michelson@students.uni-freiburg.de">brian.michelson@students.u=
-ni-freiburg.de</a>&gt; ha scritto:<br></div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex">Hello dear spice team,<br>
-<br>
-we have a problem with connection via your html 5 client.<br>
-<br>
-We set a spice server in qemu and the connection via virt manager<br>
-works, both locally and from outside.<br>
-Now we started the websockify server and pointed the browser to the<br>
-html client,<br>
-but we had no success connecting yet.<br>
-<br>
-Our first question is, is it normal that we dont get any response in<br>
-the debug log of the html 5 spice client.<br>
-<br>
-We start websockify by using: websockify 5959 <a href=3D"http://10.21.9.235=
-:5900" rel=3D"noreferrer" target=3D"_blank">10.21.9.235:5900</a> is this<br=
->
-alright?<br>
-<br></blockquote><div>Is this proxy running on the Qemu machine?<br></div><=
-div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
-px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-In the attatchments you find will find a picture of how we connect.<br>
-<br></blockquote><div><br></div><div>From the image you are trying to conne=
-ct to the same IP where Qemu (spice-server) is listening. So I&#39;m assumi=
-ng websockify is running on the same machine. By the way you have to connec=
-t to=C2=A0 the machine running websockify. Try to check if there&#39;s no f=
-irewall between websockify and Qemu and from your HTML client and websockif=
-y (I usually check with telnet).</div><div>Recent versions of spice-server =
-has websocket support integrated so you could try directly to connect to Qe=
-mu without websockify.<br></div><div>=C2=A0</div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex">
-Greetings from<br>
-<br>
-Tibor &amp; Brian<br>
-<br>
-<br>
-<br></blockquote><div><br></div><div>Regards,</div><div>=C2=A0 Frediano</di=
-v><div>=C2=A0<br></div></div></div>
+<div dir=3D"ltr">I&#39;m back with my next question regarding clipboard int=
+egration with Spice (and vdagent). For Guacamole, I&#39;ve managed to get t=
+he Spice callbacks working to the point where data copied within the guest =
+is available to the Guacamole Client. Now I&#39;m trying to get it to work =
+the other way around, where data copied on the client side is sent through =
+to the Spice server, more specifically to vdagent running within the Spice =
+session.<div><br></div><div>As a quick recap, I&#39;m running CentOS Stream=
+ 8, and using the Xspice script to launch a Spice server (xorg spice qxl) t=
+hat I can use for developing Guacamole&#39;s Spice protocol support. Within=
+ this X session I&#39;m running the Xfce window/session manager, and I&#39;=
+m launching both spice-vdagentd and spice-vdagent within this session to ge=
+t support for things like clipboard synchronization.</div><div><br></div><d=
+iv>While the outbound (Spice -&gt; Client) clipboard works fine, something =
+is not working correctly getting the clipboard data to go the other directi=
+on (Client -&gt; Spice).The code is here:<br><br></div><div><a href=3D"http=
+s://github.com/necouchman/guacamole-server/tree/working/spice-basic/src/pro=
+tocols/spice">https://github.com/necouchman/guacamole-server/tree/working/s=
+pice-basic/src/protocols/spice</a><br></div><div><br></div><div>with the cl=
+ipboard-specific functions, here:</div><div><br></div><div><a href=3D"https=
+://github.com/necouchman/guacamole-server/blob/working/spice-basic/src/prot=
+ocols/spice/channels/clipboard.c">https://github.com/necouchman/guacamole-s=
+erver/blob/working/spice-basic/src/protocols/spice/channels/clipboard.c</a>=
+<br></div><div><br></div><div>Essentially what I&#39;m doing when clipboard=
+ data is available on the client side is calling the spice_main_channel_cli=
+pboard_selection_grab() function to let the Spice server/vdagent know that =
+clipboard data is available:</div><div><br></div><div>--</div><div>=C2=A0 =
+=C2=A0 guac_client_log(user-&gt;client, GUAC_LOG_DEBUG, &quot;Calling SPICE=
+ clipboard handler for MIME type: %s&quot;, mimetype);<br>=C2=A0 =C2=A0 gua=
+c_common_clipboard_reset(spice_client-&gt;clipboard, mimetype);<br>=C2=A0 =
+=C2=A0 guint32 clipboard_types[] =3D { VD_AGENT_CLIPBOARD_UTF8_TEXT };<br>=
+=C2=A0 =C2=A0 spice_main_channel_clipboard_selection_grab(spice_client-&gt;=
+main_channel, VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD, clipboard_types, 1);<=
+br></div><div>--</div><div><br></div><div>Then, once the clipboard is settl=
+ed on the client side, I call guac_main_channel_clipboard_selection_notify(=
+) to send the data along, followed by guac_main_channel_clipboard_selection=
+_release() to release the previously-called grab:</div><div><br></div><div>=
+--</div><div>=C2=A0 =C2=A0 /* Send via VNC only if finished connecting */<b=
+r>=C2=A0 =C2=A0 if (spice_client-&gt;main_channel !=3D NULL) {<br>=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 spice_main_channel_clipboard_selection_notify(spice_cl=
+ient-&gt;main_channel,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VD_AGEN=
+T_CLIPBOARD_SELECTION_CLIPBOARD,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 VD_AGENT_CLIPBOARD_UTF8_TEXT,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 (const unsigned char*) input,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 spice_client-&gt;clipboard-&gt;length);<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+spice_main_channel_clipboard_selection_release(spice_client-&gt;main_channe=
+l,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VD_AGENT_CLIPBOARD_SELECTIO=
+N_CLIPBOARD);<br>=C2=A0 =C2=A0 }<br></div><div>--</div><div><br></div><div>=
+In the vdagent debug logs, I see the following:</div><div><br></div><div>sp=
+ice-vdagentd: 0x55d56f3455e0 sent clipboard grab, arg1: 0, arg2: 0, size 4<=
+br>spice-vdagentd: 0x55d56f3455e0 sent clipboard data, arg1: 0, arg2: 1, si=
+ze 14<br>spice-vdagentd: 0x55d56f3455e0 sent clipboard release, arg1: 0, ar=
+g2: 0, size 0<br></div><div><br></div><div>The problem is that the clipboar=
+d within my window manager (Xfce) never receives this data - if I try to pa=
+ste what I&#39;ve copied on the client-side in a Notepad or Terminal applic=
+ation within the Spice session, it&#39;s completely empty.</div><div><br></=
+div><div>Anything obviously wrong with this approach that anyone can spot, =
+or any hints as to where to look next?</div><div><br></div><div>Thanks,</di=
+v><div>Nick</div><div><br></div></div>
 
---0000000000003537e405e28410bd--
+--0000000000007d917605e2eaf581--
