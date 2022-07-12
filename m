@@ -2,53 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4A815711E7
-	for <lists+spice-devel@lfdr.de>; Tue, 12 Jul 2022 07:43:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1124E5711EB
+	for <lists+spice-devel@lfdr.de>; Tue, 12 Jul 2022 07:47:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0154710FE48;
-	Tue, 12 Jul 2022 05:43:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1256010F353;
+	Tue, 12 Jul 2022 05:47:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8E00E10FF10
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 05:42:59 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7D92110FBF9
+ for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 05:47:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657604578;
+ s=mimecast20190719; t=1657604820;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=UAUsOEfuw9O1mWeEieRBZt0cuwwDOxtcG2wJrx5IFSE=;
- b=HisgiCOuOIRhbF55k0MR02/xb2ssyFCtJ6sKrteODqPoimJFuQ9BHnM6XT/MtT7NlkQEIY
- euUXyg1gKhtdM09MuSUtYnhuRdBADPesp+dYEbFgp/Ck4CvyACUofwEFCS9aKw3Q+/rbVf
- r8vJH1rcPbYuy1niHTvINTfnBGkmvzM=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Yfh/zgnEl1e2HSM++8K00lpUztxwhkfq6kcihP11T64=;
+ b=TvgSS/8HkP1x5PVOSf8MU9Xwx/y7BJ5Qv6IxFSuUyJzrn9QE1yTxmQX9jSkgbMciZRrIDt
+ KGMAYry+jyic6Ut+UnryHX/anya6AJOPs1dKyvXsfRwi4zarQ5Dhk0jHyknxkTXcc5J3j8
+ CNU+S/bIfvGIPu8df3qzedmNd8Mu8mY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-154-3cC5ET8CMG-nTeu3obGODA-1; Tue, 12 Jul 2022 01:42:53 -0400
-X-MC-Unique: 3cC5ET8CMG-nTeu3obGODA-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ us-mta-619-ZhAXgyfgOuiSlVfJ-rd7YA-1; Tue, 12 Jul 2022 01:46:57 -0400
+X-MC-Unique: ZhAXgyfgOuiSlVfJ-rd7YA-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5A59C1C1BD24;
- Tue, 12 Jul 2022 05:42:53 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5E627802D2C;
+ Tue, 12 Jul 2022 05:46:57 +0000 (UTC)
 Received: from localhost (unknown [10.40.192.54])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E404E18EB7;
- Tue, 12 Jul 2022 05:42:52 +0000 (UTC)
-Date: Tue, 12 Jul 2022 07:42:51 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0EB37492C3B;
+ Tue, 12 Jul 2022 05:46:56 +0000 (UTC)
+Date: Tue, 12 Jul 2022 07:46:56 +0200
 From: Victor Toso <victortoso@redhat.com>
-To: "yuyang247@163.com" <yuyang247@163.com>
-Message-ID: <20220712054251.e7qvryjreebvsoue@tapioca>
-References: <2022070517070230029125@163.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Message-ID: <20220712054656.hbdcphers6qowuav@tapioca>
+References: <CAOgZG1yOB2CZbMRRO+c05eC2zG5M9YiuZv6WF7unw88uUSvf-Q@mail.gmail.com>
+ <CAHt6W4eyOyvfrztFaJ=163sajq=X7A5RY1POakacwhy0POcQbQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="wryx5hr24dx73c4j"
+ protocol="application/pgp-signature"; boundary="zzki32yharvzmjxx"
 Content-Disposition: inline
-In-Reply-To: <2022070517070230029125@163.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.11.54.5
-Subject: Re: [Spice-devel] Issue: About how to config the resolution of
- monitor in spice-server
+In-Reply-To: <CAHt6W4eyOyvfrztFaJ=163sajq=X7A5RY1POakacwhy0POcQbQ@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+Subject: Re: [Spice-devel] How to make QXL capture the whole desktop area?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,68 +60,69 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: Walter Mitty <waltermitty121906@gmail.com>,
+ "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---wryx5hr24dx73c4j
-Content-Type: text/plain; charset=utf-8
+--zzki32yharvzmjxx
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Tue, Jul 05, 2022 at 05:07:03PM +0800, yuyang247@163.com wrote:
+On Tue, Jul 05, 2022 at 02:42:23PM +0100, Frediano Ziglio wrote:
+> Il giorno lun 4 lug 2022 alle ore 18:35 Walter Mitty
+> <waltermitty121906@gmail.com> ha scritto:
+> >
+> > Hi guys,
+> >
+> > QXL generates bitmap data which is the updated area. If I wanna  make i=
+t capture the whole desktop area, is it possible?
+> >
+> > Yours,
+> > Walter
 >=20
-> HI,
 >=20
-> I am a user of spice,  I have a issue  to request your help.
-> that,  when debuging spice-server, I want to dynamic config the resolutio=
-n of monitor=E3=80=82
-> I debug it in  fuction  reds_on_main_agent_monitors_config  of
-> red.c,   and   operated  some  sentence as
-> monitors_config->monitors[0].height =3D 600; but this
-> configuration  was  changed  at the next time.=20
-> =20
-> so ,which function  in  spice-server  could help to  solve this
-> problem , or how  operating the fuction in spice-server , I
-> cloud  adjust the  resolution of monitor at will.
+> Hi,
+>   it's not clear which component you are talking about. Usually data
+> is generated by some userspace tool, passed to QXL driver (OS one)
+> which potentially creates a bitmap and passes to Qemu/SPICE QXL. Yes,
+> you can use QXL also to capture but usually you just ask the desktop
+> manager of your OS to do the capture in a system-independent way, you
+> don't need to use QXL specific requests.
 >=20
-> thank you, very much!=20
+> Regards,
+>   Frediano
 
-Why do you want to hard code this on host side? Wouldn't it be
-fine if you set the Display size from the Guest and disabling
-SPICE Client's auto-resizing?
-
-What usually happens is that auto-resizing is enabled
-("resize-guest" property of spice-gtk's spice-widget) and every
-time client's widget changes its size, it sends the new monitor
-message with new display size/state. Disabling this (which is the
-default for spice-gtk), should be enough.
+=46rom the host side you can also use "screendump" from QEMU over
+QMP or even simpler, virsh screenshot <domain> if you use
+libvirt.
 
 Cheers,
 Victor
 
---wryx5hr24dx73c4j
+--zzki32yharvzmjxx
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmLNCdsACgkQl9kSPeN6
-SE8mLQ//bYd32nyn4+eVubaPUXm7pwyuNns25V4n+CaPyIi/EC6A4Iz61KtRGuI3
-H4Bo6/5lpkdcGw6R43Cbz3QeIZd6BJ/hZHjy5KyyWLDknfGrSw7Uzp37dv55Hx42
-7LNmijtlhxJEG6L1o0G5GQP98NzTUBIBnYa5dWcWijdOItUSZzqxBY5cFR9cihD7
-fR0qet0nry4/Og03u+yA5cDx5mMSt/5syLlwe7y3AtfIRPYILG4H/360XBtoiCEF
-OdpQMIsYmlXP6Lh6cDsBxdvaPKgl/lq3aU/RrDcfRxia8iIRK+AcrA+ZKjH/nfu/
-FPYzdJ5Rs0slE1zuSXtFH5rcWKDJY90tUp9IYWa/rDTXRIXloX6Egs57lYp8MtLk
-loomWs7SePPqE7Iu/UrMrMojlfTjZ5afBYfneS+Yi3jPNFRD3MvLzPBKB9TuLbcX
-/W2E2q9RNFyo8Rtj/UCcbVLK6mbpVC0BR4C8DSgq/7h5lVYHLtEjX208MEYNgVRp
-Gkfd3eCoArgXhvFJjRfe2g7XNe52QaxJVKQ453zYC1SvI1nvwZlAQln+ZupOC6gZ
-SkcuWHtaekVaYE6bEv9J3NldiVPqESOUEB6hb6mI8IVsCyDfhQSPfuERty1C6K47
-aFtuG/xIF65r0yCgWPjiIaSyqelYQGl8aL4+ViUyg1KHoVmUYxM=
-=uI1Q
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmLNCtAACgkQl9kSPeN6
+SE9A0xAAwD4IUZ5pC2PrDKBSoOZzHQJ4fe2nla29JQ6LtLbBKSx2HxtBJXCIR8N7
+LlMj3niXjQ/tIyzkKKzBPPei46TKmImJzn+NinvXutJZHFcU4BpGAfY2Flg/ONZ4
+w+V1P9YIwHvcXj+ep3R89js+57zChmoxg7te5sDIXdfiNde8pp0rVQDBTVwGu+Az
+Pwj3KwHbb9Wn/CV8LwEPHMEMfeAKFEpEq9hn11ri30V7TrJlY9bhFdUoRdWnSVe2
+Jukd/h1c7C7JJLCNJtrU0HWBOkkZUGt1HVNwL3gtpn1caVxSsmfeMpqsYbxr4uFp
+rNWcDCZ2tPJbE9nMSP9VDUEiRCgS21YSf8qOSPJExW5FiWrFX1WW0gO1MZH1/LW6
+LXsKNgcvkttNDM57JmGwf6tzg0KvaCVQx4oqxeMALJ932+4UD4dqBqZdIMDfFsLZ
+O/5QOtXLsmanqTnDANaTjkzxoKTK2LEcscOxkr/vhR6GvvH5HOkM1m55x22BxjZx
+K6pfLhjNZYH2QZk9qiThA71rRMO8VKHH4gQhtDVAObd0PaUBVM+7Gi+uLo3GaF0y
+b5JDWOGk2qSnriZFSdNkTdtn1VGRE6rI+ipCKyShY5nw9cOT3Pl4LAX8wA6iVafS
+sKCyLhsnIfj/lPn4BugbmpjSoPlOPwX6Y9qBiEAkMZLSjsnNltM=
+=13+X
 -----END PGP SIGNATURE-----
 
---wryx5hr24dx73c4j--
+--zzki32yharvzmjxx--
 
