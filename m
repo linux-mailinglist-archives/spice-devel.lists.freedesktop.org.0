@@ -1,48 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB7915677E0
-	for <lists+spice-devel@lfdr.de>; Tue,  5 Jul 2022 21:33:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4A815711E7
+	for <lists+spice-devel@lfdr.de>; Tue, 12 Jul 2022 07:43:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 31E1E8FF34;
-	Tue,  5 Jul 2022 19:33:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0154710FE48;
+	Tue, 12 Jul 2022 05:43:00 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mxout1-he-de.apache.org (mxout1-he-de.apache.org
- [95.216.194.37])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B7C898FE1E
- for <spice-devel@lists.freedesktop.org>; Tue,  5 Jul 2022 19:33:51 +0000 (UTC)
-Received: from mail.apache.org (mailroute1-lw-us.apache.org [207.244.88.153])
- by mxout1-he-de.apache.org (ASF Mail Server at
- mxout1-he-de.apache.org) with SMTP id 4A6E05FE34
- for <spice-devel@lists.freedesktop.org>; Tue,  5 Jul 2022 19:33:47 +0000 (UTC)
-Received: (qmail 38941 invoked by uid 99); 5 Jul 2022 19:33:46 -0000
-Received: from mailrelay1-he-de.apache.org (HELO mailrelay1-he-de.apache.org)
- (116.203.21.61)
- by apache.org (qpsmtpd/0.29) with ESMTP; Tue, 05 Jul 2022 19:33:46 +0000
-Received: from mail-vs1-f44.google.com (mail-vs1-f44.google.com
- [209.85.217.44]) by mailrelay1-he-de.apache.org (ASF Mail Server at
- mailrelay1-he-de.apache.org) with ESMTPSA id A60763F4F7
- for <spice-devel@lists.freedesktop.org>; Tue,  5 Jul 2022 19:33:45 +0000 (UTC)
-Received: by mail-vs1-f44.google.com with SMTP id k2so3375580vsc.5
- for <spice-devel@lists.freedesktop.org>; Tue, 05 Jul 2022 12:33:45 -0700 (PDT)
-X-Gm-Message-State: AJIora/2DjpURN069S1fxc29rvmQAf3p194r0Fn03Eo8FEAbwSxF6Sjc
- veOd77aRKOzrX3LyYyBiYa7HSz33viigCSeYalQ=
-X-Google-Smtp-Source: AGRyM1ukgnWbp+qbGYvT8i/T0f2BBfXHeYlo6ptMO3sfgzfQK20tF9r5yRoAb5RSi1Bn+UWqxh1HQBu+kyVUD5v90ss=
-X-Received: by 2002:a05:6102:5789:b0:354:3f0c:7379 with SMTP id
- dh9-20020a056102578900b003543f0c7379mr19640429vsb.20.1657049624440; Tue, 05
- Jul 2022 12:33:44 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E00E10FF10
+ for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 05:42:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1657604578;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=UAUsOEfuw9O1mWeEieRBZt0cuwwDOxtcG2wJrx5IFSE=;
+ b=HisgiCOuOIRhbF55k0MR02/xb2ssyFCtJ6sKrteODqPoimJFuQ9BHnM6XT/MtT7NlkQEIY
+ euUXyg1gKhtdM09MuSUtYnhuRdBADPesp+dYEbFgp/Ck4CvyACUofwEFCS9aKw3Q+/rbVf
+ r8vJH1rcPbYuy1niHTvINTfnBGkmvzM=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-154-3cC5ET8CMG-nTeu3obGODA-1; Tue, 12 Jul 2022 01:42:53 -0400
+X-MC-Unique: 3cC5ET8CMG-nTeu3obGODA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5A59C1C1BD24;
+ Tue, 12 Jul 2022 05:42:53 +0000 (UTC)
+Received: from localhost (unknown [10.40.192.54])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E404E18EB7;
+ Tue, 12 Jul 2022 05:42:52 +0000 (UTC)
+Date: Tue, 12 Jul 2022 07:42:51 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: "yuyang247@163.com" <yuyang247@163.com>
+Message-ID: <20220712054251.e7qvryjreebvsoue@tapioca>
+References: <2022070517070230029125@163.com>
 MIME-Version: 1.0
-References: <CAFjj601s+L1mXUOk4r5p6KshAf5Ae5+6z7MauQ-sUcKuSX-BCA@mail.gmail.com>
-In-Reply-To: <CAFjj601s+L1mXUOk4r5p6KshAf5Ae5+6z7MauQ-sUcKuSX-BCA@mail.gmail.com>
-From: Nick Couchman <vnick@apache.org>
-Date: Tue, 5 Jul 2022 15:33:33 -0400
-X-Gmail-Original-Message-ID: <CAFjj602NVft5gTTPTCiwAmDvou=3BUdAiLjwZmPTF9=J8Luwzw@mail.gmail.com>
-Message-ID: <CAFjj602NVft5gTTPTCiwAmDvou=3BUdAiLjwZmPTF9=J8Luwzw@mail.gmail.com>
-To: spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/alternative; boundary="0000000000003d78d805e313ee0e"
-Subject: Re: [Spice-devel] Spice, VDAgent, and Clipboard
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="wryx5hr24dx73c4j"
+Content-Disposition: inline
+In-Reply-To: <2022070517070230029125@163.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.11.54.5
+Subject: Re: [Spice-devel] Issue: About how to config the resolution of
+ monitor in spice-server
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,73 +60,68 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000003d78d805e313ee0e
-Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Jul 3, 2022 at 2:40 PM Nick Couchman <vnick@apache.org> wrote:
-
-> Then, once the clipboard is settled on the client side, I call
-> guac_main_channel_clipboard_selection_notify() to send the data along,
-> followed by guac_main_channel_clipboard_selection_release() to release the
-> previously-called grab:
->
-> --
->     /* Send via VNC only if finished connecting */
->     if (spice_client->main_channel != NULL) {
->
-> spice_main_channel_clipboard_selection_notify(spice_client->main_channel,
->             VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD,
->             VD_AGENT_CLIPBOARD_UTF8_TEXT,
->             (const unsigned char*) input,
->             spice_client->clipboard->length);
->
-> spice_main_channel_clipboard_selection_release(spice_client->main_channel,
->             VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD);
->     }
-> --
->
->
-To answer my own question, this was the issue - apparently the call to
-spice_main_channel_clipboard_selection_release() actually clears the
-clipboard. Removing this call allows the clipboard from client (Guacamole)
-to Spice server to function properly. I'm not sure if there's anything that
-needs to be done to "ungrab" the clipboard after sending the data, or if it
-is done automatically?
-
--Nick
-
---0000000000003d78d805e313ee0e
-Content-Type: text/html; charset="UTF-8"
+--wryx5hr24dx73c4j
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Sun, Jul 3, 2022 at 2:40 PM Nick Couch=
-man &lt;<a href=3D"mailto:vnick@apache.org">vnick@apache.org</a>&gt; wrote:=
-<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex"><div dir=3D"ltr"><div>Then, once the clipboard is settled on th=
-e client side, I call guac_main_channel_clipboard_selection_notify() to sen=
-d the data along, followed by guac_main_channel_clipboard_selection_release=
-() to release the previously-called grab:<br></div><div><br></div><div>--</=
-div><div>=C2=A0 =C2=A0 /* Send via VNC only if finished connecting */<br>=
-=C2=A0 =C2=A0 if (spice_client-&gt;main_channel !=3D NULL) {<br>=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 spice_main_channel_clipboard_selection_notify(spice_clien=
-t-&gt;main_channel,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VD_AGENT_C=
-LIPBOARD_SELECTION_CLIPBOARD,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-VD_AGENT_CLIPBOARD_UTF8_TEXT,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-(const unsigned char*) input,<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-spice_client-&gt;clipboard-&gt;length);<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 spic=
-e_main_channel_clipboard_selection_release(spice_client-&gt;main_channel,<b=
-r>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VD_AGENT_CLIPBOARD_SELECTION_CL=
-IPBOARD);<br>=C2=A0 =C2=A0 }<br></div><div>--</div><div><br></div></div></b=
-lockquote><div><br></div><div>To answer my own question, this was the issue=
- - apparently the call to spice_main_channel_clipboard_selection_release() =
-actually clears the clipboard. Removing this call allows the clipboard from=
- client (Guacamole) to Spice server to function properly. I&#39;m not sure =
-if there&#39;s anything that needs to be done to &quot;ungrab&quot; the cli=
-pboard after sending the data, or if it is done automatically?</div><div><b=
-r></div><div>-Nick</div></div></div>
+Hi,
 
---0000000000003d78d805e313ee0e--
+On Tue, Jul 05, 2022 at 05:07:03PM +0800, yuyang247@163.com wrote:
+>=20
+> HI,
+>=20
+> I am a user of spice,  I have a issue  to request your help.
+> that,  when debuging spice-server, I want to dynamic config the resolutio=
+n of monitor=E3=80=82
+> I debug it in  fuction  reds_on_main_agent_monitors_config  of
+> red.c,   and   operated  some  sentence as
+> monitors_config->monitors[0].height =3D 600; but this
+> configuration  was  changed  at the next time.=20
+> =20
+> so ,which function  in  spice-server  could help to  solve this
+> problem , or how  operating the fuction in spice-server , I
+> cloud  adjust the  resolution of monitor at will.
+>=20
+> thank you, very much!=20
+
+Why do you want to hard code this on host side? Wouldn't it be
+fine if you set the Display size from the Guest and disabling
+SPICE Client's auto-resizing?
+
+What usually happens is that auto-resizing is enabled
+("resize-guest" property of spice-gtk's spice-widget) and every
+time client's widget changes its size, it sends the new monitor
+message with new display size/state. Disabling this (which is the
+default for spice-gtk), should be enough.
+
+Cheers,
+Victor
+
+--wryx5hr24dx73c4j
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmLNCdsACgkQl9kSPeN6
+SE8mLQ//bYd32nyn4+eVubaPUXm7pwyuNns25V4n+CaPyIi/EC6A4Iz61KtRGuI3
+H4Bo6/5lpkdcGw6R43Cbz3QeIZd6BJ/hZHjy5KyyWLDknfGrSw7Uzp37dv55Hx42
+7LNmijtlhxJEG6L1o0G5GQP98NzTUBIBnYa5dWcWijdOItUSZzqxBY5cFR9cihD7
+fR0qet0nry4/Og03u+yA5cDx5mMSt/5syLlwe7y3AtfIRPYILG4H/360XBtoiCEF
+OdpQMIsYmlXP6Lh6cDsBxdvaPKgl/lq3aU/RrDcfRxia8iIRK+AcrA+ZKjH/nfu/
+FPYzdJ5Rs0slE1zuSXtFH5rcWKDJY90tUp9IYWa/rDTXRIXloX6Egs57lYp8MtLk
+loomWs7SePPqE7Iu/UrMrMojlfTjZ5afBYfneS+Yi3jPNFRD3MvLzPBKB9TuLbcX
+/W2E2q9RNFyo8Rtj/UCcbVLK6mbpVC0BR4C8DSgq/7h5lVYHLtEjX208MEYNgVRp
+Gkfd3eCoArgXhvFJjRfe2g7XNe52QaxJVKQ453zYC1SvI1nvwZlAQln+ZupOC6gZ
+SkcuWHtaekVaYE6bEv9J3NldiVPqESOUEB6hb6mI8IVsCyDfhQSPfuERty1C6K47
+aFtuG/xIF65r0yCgWPjiIaSyqelYQGl8aL4+ViUyg1KHoVmUYxM=
+=uI1Q
+-----END PGP SIGNATURE-----
+
+--wryx5hr24dx73c4j--
+
