@@ -2,53 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45AAF57123A
-	for <lists+spice-devel@lfdr.de>; Tue, 12 Jul 2022 08:28:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1EC65713AA
+	for <lists+spice-devel@lfdr.de>; Tue, 12 Jul 2022 09:58:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 003C314B182;
-	Tue, 12 Jul 2022 06:27:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2BB3A8B401;
+	Tue, 12 Jul 2022 07:58:28 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9D74F12B4A7
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 06:27:48 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D3A0A9116B
+ for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 07:58:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657607267;
+ s=mimecast20190719; t=1657612705;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=De8dg0vpjY85Cmr9qnDWwsJ2ERBC05K1NgM5HFqwiu8=;
- b=SqVzez2U8RUdqpd4VgnNwbFPDbJe+PpiuDYOd0w0T1sEF8B4kJ2MFEN/PZMGgUQez3bdU2
- hfGni35z1K+f0T3pBOiwmPhS1OvwtNrM/0+AGMoTU+HOytAbsnkF+l2SXPB1ii6CssgJVA
- 70eeY84JzelcCEmUNGNO2QUzIrgvLME=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=6y5QO8QLMxjrAPHgVqEqjiyLqZrGBzA2B37SGd8Ms8s=;
+ b=Xy4FPvisxKEC0DnY+pbHICbQpvAo1HWHs4rEOWvgz5N5Vr6EWRUjVbKWtvFkdJkUcOOvXc
+ wk1NGU715B3kjGGjwSs6TVCnpD+HsTERUzij6Aw0tf03gUlR9kEQ/IlQPm6cLJSoqbqlgP
+ TtlLo3QAVgE3IF3lR0YxSu9UHCOU/cE=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-644-lVgxJ4XjNTa5aQxEg5ozqw-1; Tue, 12 Jul 2022 02:27:43 -0400
-X-MC-Unique: lVgxJ4XjNTa5aQxEg5ozqw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
+ us-mta-10-Wc8yF6l3NPGMouKmjDudWw-1; Tue, 12 Jul 2022 03:58:22 -0400
+X-MC-Unique: Wc8yF6l3NPGMouKmjDudWw-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 555D1811E81;
- Tue, 12 Jul 2022 06:27:43 +0000 (UTC)
-Received: from localhost (unknown [10.40.192.54])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E3F3F2166B2A;
- Tue, 12 Jul 2022 06:27:42 +0000 (UTC)
-Date: Tue, 12 Jul 2022 08:27:41 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Nick Couchman <vnick@apache.org>
-Message-ID: <20220712062741.nlpexan4kh3gicwv@tapioca>
-References: <CAFjj601s+L1mXUOk4r5p6KshAf5Ae5+6z7MauQ-sUcKuSX-BCA@mail.gmail.com>
- <CAFjj602NVft5gTTPTCiwAmDvou=3BUdAiLjwZmPTF9=J8Luwzw@mail.gmail.com>
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 322F4280F2A2;
+ Tue, 12 Jul 2022 07:58:22 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.192.39])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id F0F13492C3B;
+ Tue, 12 Jul 2022 07:58:21 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 6C50118000A9; Tue, 12 Jul 2022 09:58:20 +0200 (CEST)
+Date: Tue, 12 Jul 2022 09:58:20 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Zack Rusin <zackr@vmware.com>
+Message-ID: <20220712075820.fpouky7uovabujvt@sirius.home.kraxel.org>
+References: <20220712033246.1148476-1-zack@kde.org>
+ <20220712033246.1148476-5-zack@kde.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="5iwirhjh4dqoycgv"
+In-Reply-To: <20220712033246.1148476-5-zack@kde.org>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFjj602NVft5gTTPTCiwAmDvou=3BUdAiLjwZmPTF9=J8Luwzw@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.6
-Subject: Re: [Spice-devel] Spice, VDAgent, and Clipboard
+Subject: Re: [Spice-devel] [PATCH v2 4/8] drm/qxl: Use the hotspot
+ properties from cursor planes
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,95 +66,25 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ krastevm@vmware.com, ppaalanen@gmail.com, Dave Airlie <airlied@redhat.com>,
+ spice-devel@lists.freedesktop.org, mombasawalam@vmware.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+On Mon, Jul 11, 2022 at 11:32:42PM -0400, Zack Rusin wrote:
+> From: Zack Rusin <zackr@vmware.com>
+> 
+> Atomic modesetting got support for mouse hotspots via the hotspot
+> properties. Port the legacy kms hotspot handling to the new properties
+> on cursor planes.
+> 
+> Signed-off-by: Zack Rusin <zackr@vmware.com>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: spice-devel@lists.freedesktop.org
 
---5iwirhjh4dqoycgv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi Nick,
-
-On Tue, Jul 05, 2022 at 03:33:33PM -0400, Nick Couchman wrote:
-> On Sun, Jul 3, 2022 at 2:40 PM Nick Couchman <vnick@apache.org> wrote:
->=20
-> > Then, once the clipboard is settled on the client side, I call
-> > guac_main_channel_clipboard_selection_notify() to send the data along,
-> > followed by guac_main_channel_clipboard_selection_release() to release =
-the
-> > previously-called grab:
-> >
-> > --
-> >     /* Send via VNC only if finished connecting */
-> >     if (spice_client->main_channel !=3D NULL) {
-> >
-> > spice_main_channel_clipboard_selection_notify(spice_client->main_channe=
-l,
-> >             VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD,
-> >             VD_AGENT_CLIPBOARD_UTF8_TEXT,
-> >             (const unsigned char*) input,
-> >             spice_client->clipboard->length);
-> >
-> > spice_main_channel_clipboard_selection_release(spice_client->main_chann=
-el,
-> >             VD_AGENT_CLIPBOARD_SELECTION_CLIPBOARD);
-> >     }
-> > --
-> >
-> >
-> To answer my own question, this was the issue - apparently the
-> call to spice_main_channel_clipboard_selection_release()
-> actually clears the clipboard. Removing this call allows the
-> clipboard from client (Guacamole) to Spice server to function
-> properly. I'm not sure if there's anything that needs to be
-> done to "ungrab" the clipboard after sending the data, or if it
-> is done automatically?
-
-IIRC, the "ungrab" on client-side should happen when the Widget
-is not on focus anymore. I think it is fine to keep the "grab"
-while the widget has focus.
-
-There are several scenarios around this, so it can be a bit
-tricky to understand/debug, specially the differences between X11
-and Wayland. For example, the comment in owner_change's callback:
-
-    https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/spice-=
-gtk-session.c#L721
-
-In the past, we used to have some race conditions that I'd bet
-you should be hitting with your dev environment but, if you are
-not, it should be thanks to the fixes for=20
-   =20
-    https://gitlab.freedesktop.org/spice/spice-gtk/-/issues/82
-
-Thanks for your interest in SPICE, I'm looking forward to testing
-Guacamole (the food I already love!) :)
-
-Cheers,
-Victor
-
---5iwirhjh4dqoycgv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmLNFF0ACgkQl9kSPeN6
-SE+4dxAAksCciavhENZe0WorB4FOP6qrN3zoQVeOn+b7GiAcZSzMrbBUwhgCDqfh
-eFD9Gb6k7j4rH0xmLOBMci2I9I0j+F0IfCijQoj+AjYzPMZfUfg+Jj8+eIkxkkrK
-aq7rDHVX85bFy8yNu+E9mSVanCN8JWtVXJIqqbC+R+59MpwM+xdeHYOc6gu9c/Vj
-cReP4mgkqbr2Wih8jKfrim7R1cnuPhzfytjeIR49O8clRjXKgdYtoSAeEjQTaR7q
-JrkrXdS1L1QHQsLoi0mukVvlYGUrLLf8yEBqp6NuZ2l0T9n2pagTQ+bdvGTmp/Zf
-YAZU0iJDsQepJQLSCRQbuhWRgkoG4gOfdDnDHfQj2Pwg2i008ejckJ0b3oPl0VDC
-zbiI16oqQ3xwjg+JTM+g5XIuK1cD+g4f79VqxaYLEekfVYDr7wVAD63mm19mt9BT
-cyXvhWJG55r9AF7ZayWunug67dIUArRM+6TwOaSlMk4k3Ko0nBTolzoBtUpAgn5J
-mtlkDAwOX9pJL2eu8rLIIbyzTiZSwoQD8jWEBaw60nuKNcYrdLKwD1bUs/fSSAgk
-7EH7eqRc/6OFTB39Y0MAYT+V2iA/vjtPdDlPa2m3kf+nAbPO+NJXXIVwcqYdMj7y
-hHcUAzPGQDFLv2BUXfHVHvFdBym4vT4FCA5VN4xC3GC+ZdMXIT8=
-=kEbI
------END PGP SIGNATURE-----
-
---5iwirhjh4dqoycgv--
+Reviewed-by: Gerd Hoffmann <kraxel@redhat.com>
 
