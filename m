@@ -2,41 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B72865713D8
+	by mail.lfdr.de (Postfix) with ESMTPS id 281485713D7
 	for <lists+spice-devel@lfdr.de>; Tue, 12 Jul 2022 10:01:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E7B76927CF;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 73A0F927C3;
 	Tue, 12 Jul 2022 08:01:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7A95F10F4EC;
- Tue, 12 Jul 2022 03:33:03 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A365D10F52B;
+ Tue, 12 Jul 2022 03:33:06 +0000 (UTC)
 Received: from vertex.vmware.com (pool-173-49-113-140.phlapa.fios.verizon.net
  [173.49.113.140]) (Authenticated sender: zack)
- by letterbox.kde.org (Postfix) with ESMTPSA id 42EAF321FA2;
- Tue, 12 Jul 2022 04:33:00 +0100 (BST)
+ by letterbox.kde.org (Postfix) with ESMTPSA id 80779321FD7;
+ Tue, 12 Jul 2022 04:33:04 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
- t=1657596782; bh=gyNLcj4ELhzBjDJJ5m7Bz5HfLLbDtYPbkm7RlEy4jFM=;
+ t=1657596785; bh=/aAxHLW9l8QQXIo2Y4YhE+1Z7jJRQc8YK1YXuuq1ILs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=HQNWmH8w4Oz3bzPfr++u++CqT4yLSMRUPtYfTO85x0TLoONvN0yPQ9kLpWcgSqgfC
- VGqbD6v4n6ZWbt/UUfplpf6gUNaUTWkt89IWLuu2Ih3uATCIZOX1UhkVCETC7s8pcy
- 6c3FDfzWCy37rz04VebhJ+1Odmkc4/gw1ERo5lycUyR+VKvXET1pepx/jma2jqYPyz
- Ra4JXTZM3nbnVF1nTD4dWzGVEY/llsiHUQ2kKi0AW6pnPsySiYB2YfCnNZJwVPrK3h
- n782gvh3dzWKLJvopHFuDmcQh8J/bymcodU/eWyXw+sHx6OxIwO9hI+OODF/xZUgxf
- 4j9L6zWbdsvRg==
+ b=AwVNHx8rnjnba8T6aVPshg/y3MBbmUzWg4cl0sAKUgX+l49uZ3nNwQ8jYKdqNdxH2
+ +Ygo71e8i2D4t8683f5pGQ+vOtbuaYlJomV+ECiyJlM921DeUMBlOWyKw15nVsRzKd
+ hGDY+hdxMq88NsgeP1cntf3uxQuy6tI/cyOwq3b7nWTG1ufZffHbZGteEX8sOFtBRo
+ LBrRWb2U+Vnq4Sp/hyLaP7zUz674GHs/iJTG272ilCJ1JneANHn1LHrfx1ynNR3tl+
+ xY/TQAnwdZkjxwdKl3CrT+Yyv7Px+Rm3BupVwOq/v2HQoQudzqlOwatyxeJfrTCoqq
+ TCWf83e6jg5sQ==
 From: Zack Rusin <zack@kde.org>
 To: dri-devel@lists.freedesktop.org
-Date: Mon, 11 Jul 2022 23:32:39 -0400
-Message-Id: <20220712033246.1148476-2-zack@kde.org>
+Date: Mon, 11 Jul 2022 23:32:42 -0400
+Message-Id: <20220712033246.1148476-5-zack@kde.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220712033246.1148476-1-zack@kde.org>
 References: <20220712033246.1148476-1-zack@kde.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 12 Jul 2022 08:01:54 +0000
-Subject: [Spice-devel] [PATCH v2 1/8] drm: Disable the cursor plane on
- atomic contexts with virtualized drivers
+Subject: [Spice-devel] [PATCH v2 4/8] drm/qxl: Use the hotspot properties
+ from cursor planes
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,182 +49,83 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Reply-To: Zack Rusin <zackr@vmware.com>
-Cc: Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- Hans de Goede <hdegoede@redhat.com>, David Airlie <airlied@linux.ie>,
- contact@emersion.fr, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- stable@vger.kernel.org, Gurchetan Singh <gurchetansingh@chromium.org>,
+Cc: contact@emersion.fr, virtualization@lists.linux-foundation.org,
  krastevm@vmware.com, ppaalanen@gmail.com, mombasawalam@vmware.com,
- Thomas Zimmermann <tzimmermann@suse.de>, spice-devel@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, virtualization@lists.linux-foundation.org,
- Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zackr@vmware.com>,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, Zack Rusin <zackr@vmware.com>,
  Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 From: Zack Rusin <zackr@vmware.com>
 
-Cursor planes on virtualized drivers have special meaning and require
-that the clients handle them in specific ways, e.g. the cursor plane
-should react to the mouse movement the way a mouse cursor would be
-expected to and the client is required to set hotspot properties on it
-in order for the mouse events to be routed correctly.
-
-This breaks the contract as specified by the "universal planes". Fix it
-by disabling the cursor planes on virtualized drivers while adding
-a foundation on top of which it's possible to special case mouse cursor
-planes for clients that want it.
-
-Disabling the cursor planes makes some kms compositors which were broken,
-e.g. Weston, fallback to software cursor which works fine or at least
-better than currently while having no effect on others, e.g. gnome-shell
-or kwin, which put virtualized drivers on a deny-list when running in
-atomic context to make them fallback to legacy kms and avoid this issue.
+Atomic modesetting got support for mouse hotspots via the hotspot
+properties. Port the legacy kms hotspot handling to the new properties
+on cursor planes.
 
 Signed-off-by: Zack Rusin <zackr@vmware.com>
-Fixes: 681e7ec73044 ("drm: Allow userspace to ask for universal plane list (v2)")
-Cc: <stable@vger.kernel.org> # v5.4+
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-Cc: Maxime Ripard <mripard@kernel.org>
-Cc: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: David Airlie <airlied@linux.ie>
-Cc: Daniel Vetter <daniel@ffwll.ch>
 Cc: Dave Airlie <airlied@redhat.com>
 Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Hans de Goede <hdegoede@redhat.com>
-Cc: Gurchetan Singh <gurchetansingh@chromium.org>
-Cc: Chia-I Wu <olvaffe@gmail.com>
-Cc: dri-devel@lists.freedesktop.org
+Cc: Daniel Vetter <daniel@ffwll.ch>
 Cc: virtualization@lists.linux-foundation.org
 Cc: spice-devel@lists.freedesktop.org
 ---
- drivers/gpu/drm/drm_plane.c          | 11 +++++++++++
- drivers/gpu/drm/qxl/qxl_drv.c        |  2 +-
- drivers/gpu/drm/vboxvideo/vbox_drv.c |  2 +-
- drivers/gpu/drm/virtio/virtgpu_drv.c |  3 ++-
- drivers/gpu/drm/vmwgfx/vmwgfx_drv.c  |  2 +-
- include/drm/drm_drv.h                | 10 ++++++++++
- include/drm/drm_file.h               | 12 ++++++++++++
- 7 files changed, 38 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/qxl/qxl_display.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
-index 726f2f163c26..e1e2a65c7119 100644
---- a/drivers/gpu/drm/drm_plane.c
-+++ b/drivers/gpu/drm/drm_plane.c
-@@ -667,6 +667,17 @@ int drm_mode_getplane_res(struct drm_device *dev, void *data,
- 		    !file_priv->universal_planes)
- 			continue;
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index 2e8949863d6b..f5a90be84e93 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -485,7 +485,6 @@ static int qxl_primary_atomic_check(struct drm_plane *plane,
+ static int qxl_primary_apply_cursor(struct qxl_device *qdev,
+ 				    struct drm_plane_state *plane_state)
+ {
+-	struct drm_framebuffer *fb = plane_state->fb;
+ 	struct qxl_crtc *qcrtc = to_qxl_crtc(plane_state->crtc);
+ 	struct qxl_cursor_cmd *cmd;
+ 	struct qxl_release *release;
+@@ -510,8 +509,8 @@ static int qxl_primary_apply_cursor(struct qxl_device *qdev,
  
-+		/*
-+		 * Unless userspace supports virtual cursor plane
-+		 * then if we're running on virtual driver do not
-+		 * advertise cursor planes because they'll be broken
-+		 */
-+		if (plane->type == DRM_PLANE_TYPE_CURSOR &&
-+		    drm_core_check_feature(dev, DRIVER_VIRTUAL)	&&
-+		    file_priv->atomic &&
-+		    !file_priv->supports_virtual_cursor_plane)
-+			continue;
-+
- 		if (drm_lease_held(file_priv, plane->base.id)) {
- 			if (count < plane_resp->count_planes &&
- 			    put_user(plane->base.id, plane_ptr + count))
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 1cb6f0c224bb..0e4212e05caa 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -281,7 +281,7 @@ static const struct drm_ioctl_desc qxl_ioctls[] = {
- };
+ 	cmd = (struct qxl_cursor_cmd *)qxl_release_map(qdev, release);
+ 	cmd->type = QXL_CURSOR_SET;
+-	cmd->u.set.position.x = plane_state->crtc_x + fb->hot_x;
+-	cmd->u.set.position.y = plane_state->crtc_y + fb->hot_y;
++	cmd->u.set.position.x = plane_state->crtc_x + plane_state->hotspot_x;
++	cmd->u.set.position.y = plane_state->crtc_y + plane_state->hotspot_y;
  
- static struct drm_driver qxl_driver = {
--	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
-+	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC | DRIVER_VIRTUAL,
+ 	cmd->u.set.shape = qxl_bo_physical_address(qdev, qcrtc->cursor_bo, 0);
  
- 	.dumb_create = qxl_mode_dumb_create,
- 	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
-diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
-index f4f2bd79a7cb..84e75bcc3384 100644
---- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
-+++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
-@@ -176,7 +176,7 @@ DEFINE_DRM_GEM_FOPS(vbox_fops);
+@@ -531,7 +530,6 @@ static int qxl_primary_apply_cursor(struct qxl_device *qdev,
+ static int qxl_primary_move_cursor(struct qxl_device *qdev,
+ 				   struct drm_plane_state *plane_state)
+ {
+-	struct drm_framebuffer *fb = plane_state->fb;
+ 	struct qxl_crtc *qcrtc = to_qxl_crtc(plane_state->crtc);
+ 	struct qxl_cursor_cmd *cmd;
+ 	struct qxl_release *release;
+@@ -554,8 +552,8 @@ static int qxl_primary_move_cursor(struct qxl_device *qdev,
  
- static const struct drm_driver driver = {
- 	.driver_features =
--	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
-+	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC | DRIVER_VIRTUAL,
+ 	cmd = (struct qxl_cursor_cmd *)qxl_release_map(qdev, release);
+ 	cmd->type = QXL_CURSOR_MOVE;
+-	cmd->u.position.x = plane_state->crtc_x + fb->hot_x;
+-	cmd->u.position.y = plane_state->crtc_y + fb->hot_y;
++	cmd->u.position.x = plane_state->crtc_x + plane_state->hotspot_x;
++	cmd->u.position.y = plane_state->crtc_y + plane_state->hotspot_y;
+ 	qxl_release_unmap(qdev, release, &cmd->release_info);
  
- 	.lastclose = drm_fb_helper_lastclose,
+ 	qxl_release_fence_buffer_objects(release);
+@@ -851,8 +849,8 @@ static int qxl_plane_prepare_fb(struct drm_plane *plane,
+ 		struct qxl_bo *old_cursor_bo = qcrtc->cursor_bo;
  
-diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
-index 5f25a8d15464..3c5bb006159a 100644
---- a/drivers/gpu/drm/virtio/virtgpu_drv.c
-+++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
-@@ -198,7 +198,8 @@ MODULE_AUTHOR("Alon Levy");
- DEFINE_DRM_GEM_FOPS(virtio_gpu_driver_fops);
+ 		qcrtc->cursor_bo = qxl_create_cursor(qdev, user_bo,
+-						     new_state->fb->hot_x,
+-						     new_state->fb->hot_y);
++						     new_state->hotspot_x,
++						     new_state->hotspot_y);
+ 		qxl_free_cursor(old_cursor_bo);
+ 	}
  
- static const struct drm_driver driver = {
--	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC,
-+	.driver_features =
-+		DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_VIRTUAL,
- 	.open = virtio_gpu_driver_open,
- 	.postclose = virtio_gpu_driver_postclose,
- 
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-index 01a5b47e95f9..712f6ad0b014 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-@@ -1581,7 +1581,7 @@ static const struct file_operations vmwgfx_driver_fops = {
- 
- static const struct drm_driver driver = {
- 	.driver_features =
--	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM,
-+	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM | DRIVER_VIRTUAL,
- 	.ioctls = vmw_ioctls,
- 	.num_ioctls = ARRAY_SIZE(vmw_ioctls),
- 	.master_set = vmw_master_set,
-diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
-index f6159acb8856..c4cd7fc350d9 100644
---- a/include/drm/drm_drv.h
-+++ b/include/drm/drm_drv.h
-@@ -94,6 +94,16 @@ enum drm_driver_feature {
- 	 * synchronization of command submission.
- 	 */
- 	DRIVER_SYNCOBJ_TIMELINE         = BIT(6),
-+	/**
-+	 * @DRIVER_VIRTUAL:
-+	 *
-+	 * Driver is running on top of virtual hardware. The most significant
-+	 * implication of this is a requirement of special handling of the
-+	 * cursor plane (e.g. cursor plane has to actually track the mouse
-+	 * cursor and the clients are required to set hotspot in order for
-+	 * the cursor planes to work correctly).
-+	 */
-+	DRIVER_VIRTUAL                  = BIT(7),
- 
- 	/* IMPORTANT: Below are all the legacy flags, add new ones above. */
- 
-diff --git a/include/drm/drm_file.h b/include/drm/drm_file.h
-index e0a73a1e2df7..3e5c36891161 100644
---- a/include/drm/drm_file.h
-+++ b/include/drm/drm_file.h
-@@ -223,6 +223,18 @@ struct drm_file {
- 	 */
- 	bool is_master;
- 
-+	/**
-+	 * @supports_virtual_cursor_plane:
-+	 *
-+	 * This client is capable of handling the cursor plane with the
-+	 * restrictions imposed on it by the virtualized drivers.
-+	 *
-+	 * The implies that the cursor plane has to behave like a cursor
-+	 * i.e. track cursor movement. It also requires setting of the
-+	 * hotspot properties by the client on the cursor plane.
-+	 */
-+	bool supports_virtual_cursor_plane;
-+
- 	/**
- 	 * @master:
- 	 *
 -- 
 2.34.1
 
