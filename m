@@ -2,54 +2,67 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5F355726B4
-	for <lists+spice-devel@lfdr.de>; Tue, 12 Jul 2022 21:53:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F40A575B89
+	for <lists+spice-devel@lfdr.de>; Fri, 15 Jul 2022 08:30:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9042812B1C5;
-	Tue, 12 Jul 2022 19:53:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2866B10F29B;
+	Fri, 15 Jul 2022 06:30:13 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mxout1-he-de.apache.org (mxout1-he-de.apache.org
- [95.216.194.37])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2044A12AC4F
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 19:53:08 +0000 (UTC)
-Received: from mail.apache.org (mailroute1-lw-us.apache.org [207.244.88.153])
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9749A10E5AB;
+ Fri, 15 Jul 2022 00:53:19 +0000 (UTC)
+Received: from dimapc.. (109-252-119-232.nat.spd-mgts.ru [109.252.119.232])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mxout1-he-de.apache.org (ASF Mail Server at mxout1-he-de.apache.org) with
- ESMTPS id D54AB61A87
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 19:53:03 +0000 (UTC)
-Received: (qmail 495787 invoked by uid 116); 12 Jul 2022 19:50:51 -0000
-Received: from mailrelay1-he-de.apache.org (HELO mailrelay1-he-de.apache.org)
- (116.203.21.61)
- by apache.org (qpsmtpd/0.94) with ESMTP; Tue, 12 Jul 2022 19:50:50 +0000
-Authentication-Results: apache.org; auth=none
-Received: from mail-vs1-f47.google.com (mail-vs1-f47.google.com
- [209.85.217.47]) by mailrelay1-he-de.apache.org (ASF Mail Server at
- mailrelay1-he-de.apache.org) with ESMTPSA id E598D47E51
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 11:40:47 +0000 (UTC)
-Received: by mail-vs1-f47.google.com with SMTP id t127so7523781vsb.8
- for <spice-devel@lists.freedesktop.org>; Tue, 12 Jul 2022 04:40:47 -0700 (PDT)
-X-Gm-Message-State: AJIora/rozAPMNYXFMFZkW0q1yHBf1AQ5UjyBfxE3Q78iXI3qZ910Cb2
- oicE+eWRSiKFZ0tuizGGUq6ppKCZJXw0bD+q7JY=
-X-Google-Smtp-Source: AGRyM1vexG/IiA5Tc8fwFL6OqzSm5tI4OZKqWYY7E3Y3TuSIqGgADHhQKYI5wmRjp+BuXv484Jd4EdwDoEgzQHRkaBM=
-X-Received: by 2002:a67:e18d:0:b0:357:25fb:702c with SMTP id
- e13-20020a67e18d000000b0035725fb702cmr8437830vsl.50.1657626046847; Tue, 12
- Jul 2022 04:40:46 -0700 (PDT)
+ (Authenticated sender: dmitry.osipenko)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 56DEA6601A44;
+ Fri, 15 Jul 2022 01:53:15 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1657846397;
+ bh=08a2nboQlEuWwlfAHFXkuoQn5obKyHZ/ZVFgCHrEt8s=;
+ h=From:To:Cc:Subject:Date:From;
+ b=VsAEIkbATEnA4Nbk3aERHQn8fLTLVUHNv8kWnssP/Qm3YXMVzWlFtWtdiMoahCGPS
+ Kme2EsYIfptxjyFqr0HTYnhHM2YDrmur5rK32XO50Iv7OJMG9x+bqrwazS7dy309Hr
+ 1b+7CYfqa5NrdY/U09oRNR6aOmNsc2mF6BOnsa/ZBo+gnufnonFAu467YUDfXNnyVT
+ 2+7CcdCl1nQYdMBehjDmpbmWcCdsqMJ0HzNITuntSQayJH8o68ShuNneWHuMz+ft9f
+ zsNlizMtyEmX65xBz2nEMDvbw5Q3Bpj+6ANqTt35ZjsRdjlP7HA6II7WWUrvegljIb
+ rs2/bpj1V1R9Q==
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+To: David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Chia-I Wu <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>,
+ Gustavo Padovan <gustavo.padovan@collabora.com>,
+ Daniel Stone <daniel@fooishbar.org>,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Tomasz Figa <tfiga@chromium.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas_os@shipmail.org>
+Date: Fri, 15 Jul 2022 03:52:38 +0300
+Message-Id: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <CAFjj601s+L1mXUOk4r5p6KshAf5Ae5+6z7MauQ-sUcKuSX-BCA@mail.gmail.com>
- <CAFjj602NVft5gTTPTCiwAmDvou=3BUdAiLjwZmPTF9=J8Luwzw@mail.gmail.com>
- <20220712062741.nlpexan4kh3gicwv@tapioca>
-In-Reply-To: <20220712062741.nlpexan4kh3gicwv@tapioca>
-From: Nick Couchman <vnick@apache.org>
-Date: Tue, 12 Jul 2022 07:40:36 -0400
-X-Gmail-Original-Message-ID: <CAFjj603jUK47FBidT0N8ymvy62mWXMeYiP808Tdk0RRrt6K_zQ@mail.gmail.com>
-Message-ID: <CAFjj603jUK47FBidT0N8ymvy62mWXMeYiP808Tdk0RRrt6K_zQ@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>,
- spice-devel <spice-devel@lists.freedesktop.org>
-Content-Type: multipart/alternative; boundary="000000000000b1625105e39a23ae"
-Subject: Re: [Spice-devel] Spice, VDAgent, and Clipboard
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 15 Jul 2022 06:30:10 +0000
+Subject: [Spice-devel] [PATCH v1 0/6] Move all drivers to a common dma-buf
+ locking convention
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,136 +74,75 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ spice-devel@lists.freedesktop.org, Dmitry Osipenko <digetx@gmail.com>,
+ kernel@collabora.com, linux-media@vger.kernel.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000b1625105e39a23ae
-Content-Type: text/plain; charset="UTF-8"
+Hello,
 
-On Tue, Jul 12, 2022 at 2:27 AM Victor Toso <victortoso@redhat.com> wrote:
+This series moves all drivers to a dynamic dma-buf locking specification.
+From now on all dma-buf importers are made responsible for holding
+dma-buf's reservation lock around all operations performed over dma-bufs.
+This common locking convention allows us to utilize reservation lock more
+broadly around kernel without fearing of potential dead locks.
 
-> Hi Nick,
->
-> > To answer my own question, this was the issue - apparently the
-> > call to spice_main_channel_clipboard_selection_release()
-> > actually clears the clipboard. Removing this call allows the
-> > clipboard from client (Guacamole) to Spice server to function
-> > properly. I'm not sure if there's anything that needs to be
-> > done to "ungrab" the clipboard after sending the data, or if it
-> > is done automatically?
->
-> IIRC, the "ungrab" on client-side should happen when the Widget
-> is not on focus anymore. I think it is fine to keep the "grab"
-> while the widget has focus.
->
->
-Ah, okay - I'll have to take a look at that and see if there's another
-place where I should be triggering the release when things go out-of-focus.
+This patchset passes all i915 selftests. It was also tested using VirtIO,
+Panfrost, Lima and Tegra drivers. I tested cases of display+GPU,
+display+V4L and GPU+V4L dma-buf sharing, which covers majority of kernel
+drivers since rest of the drivers share same or similar code paths.
 
+This is a continuation of [1] where Christian König asked to factor out
+the dma-buf locking changes into separate series.
 
-> There are several scenarios around this, so it can be a bit
-> tricky to understand/debug, specially the differences between X11
-> and Wayland. For example, the comment in owner_change's callback:
->
->
-> https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/spice-gtk-session.c#L721
->
-> In the past, we used to have some race conditions that I'd bet
-> you should be hitting with your dev environment but, if you are
-> not, it should be thanks to the fixes for
->
->     https://gitlab.freedesktop.org/spice/spice-gtk/-/issues/82
->
->
-Right now things seem to be working as expected, and I'm not seeing any odd
-behaviors that would indicate race conditions, but maybe I just haven't hit
-it, yet :-).
+[1] https://lore.kernel.org/dri-devel/20220526235040.678984-1-dmitry.osipenko@collabora.com/
 
+Dmitry Osipenko (6):
+  dma-buf: Add _unlocked postfix to function names
+  drm/gem: Take reservation lock for vmap/vunmap operations
+  dma-buf: Move all dma-bufs to dynamic locking specification
+  dma-buf: Acquire wait-wound context on attachment
+  media: videobuf2: Stop using internal dma-buf lock
+  dma-buf: Remove internal lock
 
-> Thanks for your interest in SPICE, I'm looking forward to testing
-> Guacamole (the food I already love!) :)
->
->
-Always happy to have more users and testers. If you're at all interested in
-testing it, or just looking at my code to see what I'm doing wrong, here
-are the branches:
+ drivers/dma-buf/dma-buf.c                     | 198 +++++++++++-------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c   |   4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |   4 +-
+ drivers/gpu/drm/armada/armada_gem.c           |  14 +-
+ drivers/gpu/drm/drm_client.c                  |   4 +-
+ drivers/gpu/drm/drm_gem.c                     |  28 +++
+ drivers/gpu/drm/drm_gem_cma_helper.c          |   6 +-
+ drivers/gpu/drm/drm_gem_framebuffer_helper.c  |   6 +-
+ drivers/gpu/drm/drm_gem_shmem_helper.c        |   6 +-
+ drivers/gpu/drm/drm_prime.c                   |  12 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   6 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.c       |   2 +-
+ drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |  20 +-
+ .../gpu/drm/i915/gem/i915_gem_execbuffer.c    |   2 +-
+ drivers/gpu/drm/i915/gem/i915_gem_object.h    |   6 +-
+ .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |  20 +-
+ drivers/gpu/drm/i915/i915_gem_evict.c         |   2 +-
+ drivers/gpu/drm/i915/i915_gem_ww.c            |  26 ++-
+ drivers/gpu/drm/i915/i915_gem_ww.h            |  15 +-
+ drivers/gpu/drm/omapdrm/omap_gem_dmabuf.c     |   8 +-
+ drivers/gpu/drm/qxl/qxl_object.c              |  17 +-
+ drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
+ drivers/gpu/drm/tegra/gem.c                   |  27 +--
+ drivers/infiniband/core/umem_dmabuf.c         |  11 +-
+ .../common/videobuf2/videobuf2-dma-contig.c   |  26 +--
+ .../media/common/videobuf2/videobuf2-dma-sg.c |  23 +-
+ .../common/videobuf2/videobuf2-vmalloc.c      |  17 +-
+ .../platform/nvidia/tegra-vde/dmabuf-cache.c  |  12 +-
+ drivers/misc/fastrpc.c                        |  12 +-
+ drivers/xen/gntdev-dmabuf.c                   |  14 +-
+ include/drm/drm_gem.h                         |   3 +
+ include/linux/dma-buf.h                       |  49 ++---
+ 32 files changed, 347 insertions(+), 257 deletions(-)
 
-https://github.com/necouchman/guacamole-server/tree/working/spice-basic
- (in the src/protocols/spice directory)
+-- 
+2.36.1
 
-https://github.com/necouchman/guacamole-client/tree/working/spice-protocol
- (just basic stuff for adding the protocol to the client - most of the
-"real" work is done in guacamole-server).
-
-Right now I'm working on getting audio input going, then on to file
-transfers.
-
--NIck
-
---000000000000b1625105e39a23ae
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Jul 12, 2022 at 2:27 AM Victor To=
-so &lt;<a href=3D"mailto:victortoso@redhat.com">victortoso@redhat.com</a>&g=
-t; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">Hi Nick,<br>
-<br>&gt; To answer my own question, this was the issue - apparently the<br>
-&gt; call to spice_main_channel_clipboard_selection_release()<br>
-&gt; actually clears the clipboard. Removing this call allows the<br>
-&gt; clipboard from client (Guacamole) to Spice server to function<br>
-&gt; properly. I&#39;m not sure if there&#39;s anything that needs to be<br=
->
-&gt; done to &quot;ungrab&quot; the clipboard after sending the data, or if=
- it<br>
-&gt; is done automatically?<br>
-<br>
-IIRC, the &quot;ungrab&quot; on client-side should happen when the Widget<b=
-r>
-is not on focus anymore. I think it is fine to keep the &quot;grab&quot;<br=
->
-while the widget has focus.<br>
-<br></blockquote><div><br></div><div>Ah, okay - I&#39;ll have to take a loo=
-k at that and see if there&#39;s another place where I should be triggering=
- the release when things go out-of-focus.</div><div>=C2=A0</div><blockquote=
- class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
-lid rgb(204,204,204);padding-left:1ex">
-There are several scenarios around this, so it can be a bit<br>
-tricky to understand/debug, specially the differences between X11<br>
-and Wayland. For example, the comment in owner_change&#39;s callback:<br>
-<br>
-=C2=A0 =C2=A0 <a href=3D"https://gitlab.freedesktop.org/spice/spice-gtk/-/b=
-lob/master/src/spice-gtk-session.c#L721" rel=3D"noreferrer" target=3D"_blan=
-k">https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/spice-g=
-tk-session.c#L721</a><br>
-<br>
-In the past, we used to have some race conditions that I&#39;d bet<br>
-you should be hitting with your dev environment but, if you are<br>
-not, it should be thanks to the fixes for <br>
-<br>
-=C2=A0 =C2=A0 <a href=3D"https://gitlab.freedesktop.org/spice/spice-gtk/-/i=
-ssues/82" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop.o=
-rg/spice/spice-gtk/-/issues/82</a><br>
-<br></blockquote><div><br></div><div>Right now things seem to be working as=
- expected, and I&#39;m not seeing any odd behaviors that would indicate rac=
-e conditions, but maybe I just haven&#39;t hit it, yet :-).</div><div>=C2=
-=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-Thanks for your interest in SPICE, I&#39;m looking forward to testing<br>
-Guacamole (the food I already love!) :)<br>
-<br></blockquote><div><br></div><div>Always happy to have more users and te=
-sters. If you&#39;re at all interested in testing it, or just looking at my=
- code to see what I&#39;m doing wrong, here are the branches:</div><div><br=
-></div><div><a href=3D"https://github.com/necouchman/guacamole-server/tree/=
-working/spice-basic">https://github.com/necouchman/guacamole-server/tree/wo=
-rking/spice-basic</a><br></div><div>=C2=A0(in the src/protocols/spice direc=
-tory)</div><div><br></div><div><a href=3D"https://github.com/necouchman/gua=
-camole-client/tree/working/spice-protocol">https://github.com/necouchman/gu=
-acamole-client/tree/working/spice-protocol</a><br></div><div>=C2=A0(just ba=
-sic stuff for adding the protocol to the client - most of the &quot;real&qu=
-ot; work is done in guacamole-server).</div><div><br></div><div>Right now I=
-&#39;m working on getting audio input going, then on to file transfers.</di=
-v><div><br></div><div>-NIck</div></div></div>
-
---000000000000b1625105e39a23ae--
