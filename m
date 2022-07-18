@@ -2,40 +2,55 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C5D9577CE9
-	for <lists+spice-devel@lfdr.de>; Mon, 18 Jul 2022 09:56:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E24C577D26
+	for <lists+spice-devel@lfdr.de>; Mon, 18 Jul 2022 10:07:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 08D4410F20E;
-	Mon, 18 Jul 2022 07:56:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1F30AC599;
+	Mon, 18 Jul 2022 08:07:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 326 seconds by postgrey-1.36 at gabe;
- Sun, 17 Jul 2022 18:21:07 UTC
-Received: from chwww1.confidesk.com (chwww1.confidesk.com [5.148.173.215])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 341FA91AAC
- for <spice-devel@lists.freedesktop.org>; Sun, 17 Jul 2022 18:21:07 +0000 (UTC)
-Received: by chwww1.confidesk.com (Postfix, from userid 33)
- id BBFC030B86B74; Sun, 17 Jul 2022 20:15:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=confidesk.com;
- s=confidesk; t=1658081738;
- bh=2mJsWNn5gcjJCcokKeZcmA2ji68FCsB40BQ6zS4iQjQ=;
- h=To:Subject:From:Reply-To:Date:From;
- b=Tavq2M1DVN6FKRnvJSSBuCEJ5VPdQgo+9T3XSFNmc6P4y09OO4BETznFtZv1yYe1C
- z6RtqsE+lFyTjvWtBzvazROBypBxyXIRPScZmadDh73R9N3BARLfBZblxwtI7GqHje
- z/wBrPjO1RTiOUgrzf9Hut9zcHBH+IZHwFNihCSxEsseX+LCVVhJFNrk01C+AawY+3
- tfEbsAy5ca5Vs+FV2YodWMdcqWLBu2txMdHuUWaTsfu+3wv6mwfI6BqpA78Rtf9beL
- 85Wdrz1eC1dX6dC5kwgFzjn2l8KzW0Pbesamja4/yVLlwKqPC8ExjlbWejznv+xaQ/
- nl1VQ9jzyCKgQ==
-To: spice-devel@lists.freedesktop.org
-X-PHP-Originating-Script: 33:Sendmail.php
-From: bob cantor <bobc@confidesk.com>
-Date: Sun, 17 Jul 2022 18:15:38 +0000
-Content-Type: multipart/alternative;
- boundary="=_547162743074b226b1e4f743e261add1"
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2D97DAC594
+ for <spice-devel@lists.freedesktop.org>; Mon, 18 Jul 2022 08:07:09 +0000 (UTC)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-10c0119dd16so21892312fac.6
+ for <spice-devel@lists.freedesktop.org>; Mon, 18 Jul 2022 01:07:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=uYfX0zYzaGWMPWMUr3vCuniCEUpyPKTt20fqSqRV4k8=;
+ b=b+QZRekHMil7aM1WxjV5QL/eyL5HT9nDb+NuyFoQRaZ/GTglgXIs4rkoT04TlqbQ3K
+ vcKe4HtOYaCFD0poc2HFWEaJD1wqTLu5BQpYNMcockQJByFt1vSvyyfrucc13XJTPBU9
+ neUedRlIXSUiLwmbTH7UGzu1IsjLnNv4eyEJ/VujprKwaV/QlloPydOTxPdotXNl3jn2
+ mzCVsn09M1YeF+gXZacGPT5U//OrjlvvtwhTkjdZzTkYO0PKsS1cpb1OkctwdXLsUHAq
+ JssJLmDNu96hnyky3nh0iHC0/w+oUzBBHpIzVBQOwk9VT1LVXFm79A36RFzHbRMmTvK6
+ Gkcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=uYfX0zYzaGWMPWMUr3vCuniCEUpyPKTt20fqSqRV4k8=;
+ b=jxXeJeLEK2/Xs38DydFuF8Xk1tcVobPdu2w/JXf8nJ+u+TSDhMV+PLX3qnOdFVA4I+
+ +rr+5cvPCyAuFJAUZsptWl9uP5f9hxir4tNOtzEzGyeSoiyvD4H4SOuVGJTU7gXux8j5
+ rBIBt6If84bBVsNjzL57dbBhDzC/aBx3gDKsVDzObI3TitNDYWdu18V2zfIxZ3NUhxCB
+ KWlgjVi2gk5vUDcjgVewVW4b+vz6CnS/0h8jIhnyPUd42tGSgNFoQ20O3K0y6OE4KwW5
+ l0e/Sf5YxMrBISgV76VheVQhEqyPwMNKJ8XhoW88ip3+rhs3qIKw7qQPtG4KMu3wEhxj
+ 1UzQ==
+X-Gm-Message-State: AJIora9NdRWu37BdyDgJecpdBy9DX81eSmCczvGkvkY6Jwv80B9++o9c
+ W2pPx3p1+aBxKnUl69euHjvvMNx7yphSyHAJ8Q4WC05f
+X-Google-Smtp-Source: AGRyM1tbNLgGPtBTY3hsgouFXhrs22i7rxfFTTwhTtU5ZCaY9WA9ca7WUCVEys6mpjzXHRpM+KsQt2rryuWUO+IwRSo=
+X-Received: by 2002:a05:6870:1c8:b0:10c:275c:33e1 with SMTP id
+ n8-20020a05687001c800b0010c275c33e1mr14411072oad.179.1658131628433; Mon, 18
+ Jul 2022 01:07:08 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <20220717181538.BBFC030B86B74@chwww1.confidesk.com>
-X-Mailman-Approved-At: Mon, 18 Jul 2022 07:56:01 +0000
-Subject: [Spice-devel] connect to xspice via a unix-socket
+References: <20220717181538.BBFC030B86B74@chwww1.confidesk.com>
+In-Reply-To: <20220717181538.BBFC030B86B74@chwww1.confidesk.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Mon, 18 Jul 2022 09:06:57 +0100
+Message-ID: <CAHt6W4fiG=u4Pf6semLHeQyTT=sHkzLQrSvbx2-YFP-SrVq5hA@mail.gmail.com>
+To: bobc@confidesk.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Spice-devel] connect to xspice via a unix-socket
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,35 +62,17 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: bobc@confidesk.com
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---=_547162743074b226b1e4f743e261add1
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+Il giorno lun 18 lug 2022 alle ore 08:56 bob cantor
+<bobc@confidesk.com> ha scritto:
+>
+> Is it possible to connect to xspice via a unix-socket rather than a tcp-port?  (I would like to connect to xspice running in a LXC comtainer.  The container and host are on the same machine, but there is no network connection between them).
+>
 
-ICAgICAgICBJcyBpdCBwb3NzaWJsZSB0byBjb25uZWN0IHRvIHhzcGljZSB2aWEgYSB1bml4
-LXNvY2tldCByYXRoZXIgdGhhbiBhIHRjcC1wb3J0P8KgIChJIHdvdWxkIGxpa2UgdG8gY29u
-bmVjdCB0byB4c3BpY2UgcnVubmluZyBpbiBhIExYQyBjb210YWluZXIuwqAgVGhlIGNvbnRh
-aW5lciBhbmQgaG9zdCBhcmUgb24gdGhlIHNhbWUgICAgIG1hY2hpbmUsIGJ1dCB0aGVyZSBp
-cyBubyBuZXR3b3JrIGNvbm5lY3Rpb24gYmV0d2VlbiB0aGVtKS4gICAgCgotLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KVGhpcyBtYWlsIHdhcyBzZW50IGJ5
-IENvbmZpZGVzayBzZWN1cmUgbWFpbCBzZXJ2aWNlLiBDaGVjayBpdCBvbiBodHRwczovL3d3
-dy5jb25maWRlc2suY29t
+Hi,
+  currently only TCP is supported but the change should not be that difficult.
 
---=_547162743074b226b1e4f743e261add1
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
-
-CiAgPHA+CiAgICBJcyBpdCBwb3NzaWJsZSB0byBjb25uZWN0IHRvIHhzcGljZSB2aWEgYSB1
-bml4LXNvY2tldCByYXRoZXIgdGhhbiBhIHRjcC1wb3J0P8KgIChJIHdvdWxkIGxpa2UgdG8g
-Y29ubmVjdCB0byB4c3BpY2UgcnVubmluZyBpbiBhIExYQyBjb210YWluZXIuwqAgVGhlIGNv
-bnRhaW5lciBhbmQgaG9zdCBhcmUgb24gdGhlIHNhbWUKICAgIG1hY2hpbmUsIGJ1dCB0aGVy
-ZSBpcyBubyBuZXR3b3JrIGNvbm5lY3Rpb24gYmV0d2VlbiB0aGVtKS4KICA8L3A+Cjxicj48
-YnI+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tPGJyPlRoaXMg
-bWFpbCB3YXMgc2VudCBieSBDb25maWRlc2sgc2VjdXJlIG1haWwgc2VydmljZS4gQ2hlY2sg
-aXQgb24gPGEgaHJlZj0naHR0cHM6Ly93d3cuY29uZmlkZXNrLmNvbSc+aHR0cHM6Ly93d3cu
-Y29uZmlkZXNrLmNvbTwvYT4=
-
---=_547162743074b226b1e4f743e261add1--
+Frediano
