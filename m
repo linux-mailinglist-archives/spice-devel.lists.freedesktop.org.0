@@ -1,57 +1,68 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AACF577DBC
-	for <lists+spice-devel@lfdr.de>; Mon, 18 Jul 2022 10:40:45 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D22D5795F1
+	for <lists+spice-devel@lfdr.de>; Tue, 19 Jul 2022 11:17:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D142FA5A5C;
-	Mon, 18 Jul 2022 08:40:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0525514AC1B;
+	Tue, 19 Jul 2022 09:17:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 909B891E01
- for <spice-devel@lists.freedesktop.org>; Mon, 18 Jul 2022 08:40:39 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- k8-20020a9d4b88000000b0061c7f8c4f77so7735108otf.10
- for <spice-devel@lists.freedesktop.org>; Mon, 18 Jul 2022 01:40:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C094F14AB6A
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Jul 2022 09:14:03 +0000 (UTC)
+Received: by mail-ua1-x92d.google.com with SMTP id s3so6529598uaq.2
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Jul 2022 02:14:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Hxys89CQP4rOjtje+HQkUMf8Xvg6BRnQQ9njtP/k7DM=;
- b=UIpKpT4x+pC5HVvPxGD3OXlO9h5l3bMnKqDZ/8qtU8YxAedLxP2kKX0cM1Q5Yw5p97
- yieK67D1YABEihZN9rjfLZTMkdJWOXUbRLlqeoSJJ1yf+leijeG837EfpIhn2c/5oK4l
- T7f8YEfGmNrgmK/o8OnuW2v3IiQIQqwTJpTiznHjzOVaHeAr1R3HzN6JchYUyy1qz91w
- tUBYGxfu1yOF1I52cOIITx54VwwboQkSCpK1dV+bTSD7ShFdQTA70UOnItYHH0HS5i0S
- dipm8FmMFJuJKTCUNksNFnKm+sidCaXjN58iIgXtMMHQi84uUGdnnE8UvFIS0Vk8GCXO
- jdhQ==
+ :cc:content-transfer-encoding;
+ bh=USiHEWO3jenD+4D67wgYkGKlAcIRmi0lfoN5PdFyKzQ=;
+ b=dFYdzZzeGTwRc0FPEgBG5fRwMWNVjXZzxLxwtIHOW4IyAUtC1iJhL8ze0h/ntk8Iq4
+ lKlrAFaVxT4/pV4802tsmPOfXqrd/5krNwAeme2Ty0hfRzSXMQ2O+C/Kf1izAeM/mOcz
+ 8LysLHAdaCtPPppxeQNBi2EL1ZGV/VNGij1I4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Hxys89CQP4rOjtje+HQkUMf8Xvg6BRnQQ9njtP/k7DM=;
- b=DBrp+tSoxV9MOYzexm0v9RdZpoAOMn4RBk920mljdLp0fhsdu2ka5DyuJKzR6P5A9m
- rdCCGQU/AkyhbkHpHB8jsmQTdgt5mr9Tl55EO8gt/VOs+a/SxySTF+HS2j7KUGlSf95S
- CRysGiAeDzLp2TsbIssHGb18xTfCvW5vW5ztFzO+wIV/eQ9b3YOPvbTHPLRD/eCikF93
- n53m7/RFt2+tdWuABlqPyOHm+k88UR+jrtOOrDIo38ZMfsTGSfRN3L/BQXuR1aXrihnE
- RAsq+R3OURgd2NG35biNU5sKW/FWTESc9kZBZZmIIrQ43wsdxT0oE0aAWZ7TtWTA1JRa
- jxyg==
-X-Gm-Message-State: AJIora/4l/LXIG/WmENgmzcZ9rWnQMN8Z44JcDDHZY6lVOSboB49oUVM
- zQfUEPrdiyVeJ4uUy5cJhIRanPG8Rmp1wPpkQaI=
-X-Google-Smtp-Source: AGRyM1u7tN3OFAIBt9CBr+zomUHIJwvuICAYpd52Cbe7cDeE81N/CSC5kRLAvIGKuHCOiU/42DG7slXxUcrA2qq9B4w=
-X-Received: by 2002:a05:6830:25d0:b0:617:95f:9f5a with SMTP id
- d16-20020a05683025d000b00617095f9f5amr10913723otu.369.1658133638704; Mon, 18
- Jul 2022 01:40:38 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=USiHEWO3jenD+4D67wgYkGKlAcIRmi0lfoN5PdFyKzQ=;
+ b=oEyWrimbXhjfFRsAqy41REX3oUl4TG2Aqv3PM0vLq1APi4Mic4Goxvd4SatFqp45gR
+ 06VO4D8KqQUIZaoCzi+WFMXylw2F4TJSrgt2MFTic24IYG0+4HHe/SZ5VuB1ryx+Mk4h
+ O6bYuqNaCGoUpLLvMay7Lg2a5hB+QvX+gMFBF4dakI+uJt2nti5H7dKBwKh64tDS7CQd
+ EHmt+EE1RoTBcnphfP/N6ly1ZydP8Yy5pLsm70LZPel7JYAH2h43kupdfEQmVNeXu44R
+ ueqGe3/sZRbvY8ko3ShWq1mshqWxuFQpS0RemoqIiZo0Hd+CWthwfp/j5yN0fT1IYE7F
+ TTHg==
+X-Gm-Message-State: AJIora8A0rx7LNSuSo/jHvPD9AVM1Nyj4lcN/asUFOvCyTWhEhhNQbeQ
+ pydxNAXUjv89+/9EEa5zHJu6SCdNz6P4FA==
+X-Google-Smtp-Source: AGRyM1u9yCg0YzU1Sm2d3yNpDfVWX9wGZIARwdJbWL52Hp4qMtfD8c6jeNzquJPDMzSKLlLvk3P3Cg==
+X-Received: by 2002:ab0:7085:0:b0:382:9454:962 with SMTP id
+ m5-20020ab07085000000b0038294540962mr11227334ual.113.1658222042528; 
+ Tue, 19 Jul 2022 02:14:02 -0700 (PDT)
+Received: from mail-ua1-f46.google.com (mail-ua1-f46.google.com.
+ [209.85.222.46]) by smtp.gmail.com with ESMTPSA id
+ r17-20020a056122009100b003689df4f372sm2305537vka.27.2022.07.19.02.14.01
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Jul 2022 02:14:02 -0700 (PDT)
+Received: by mail-ua1-f46.google.com with SMTP id s7so6522453uao.4
+ for <spice-devel@lists.freedesktop.org>; Tue, 19 Jul 2022 02:14:01 -0700 (PDT)
+X-Received: by 2002:a81:6ccd:0:b0:31d:c77:73e5 with SMTP id
+ h196-20020a816ccd000000b0031d0c7773e5mr33706265ywc.314.1658222030025; Tue, 19
+ Jul 2022 02:13:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220717181538.BBFC030B86B74@chwww1.confidesk.com>
- <CAHt6W4fiG=u4Pf6semLHeQyTT=sHkzLQrSvbx2-YFP-SrVq5hA@mail.gmail.com>
-In-Reply-To: <CAHt6W4fiG=u4Pf6semLHeQyTT=sHkzLQrSvbx2-YFP-SrVq5hA@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Mon, 18 Jul 2022 09:40:27 +0100
-Message-ID: <CAHt6W4f9b5enorPx=DSqN1Tt8gXuBtKQhSSHaVZi25ytn6u1JA@mail.gmail.com>
-To: bobc@confidesk.com
+References: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
+In-Reply-To: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
+From: Tomasz Figa <tfiga@chromium.org>
+Date: Tue, 19 Jul 2022 18:13:39 +0900
+X-Gmail-Original-Message-ID: <CAAFQd5C0dx5X=VEqXDyj22fbxs1jhOQLLid3vSNfAc9vataPhg@mail.gmail.com>
+Message-ID: <CAAFQd5C0dx5X=VEqXDyj22fbxs1jhOQLLid3vSNfAc9vataPhg@mail.gmail.com>
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] connect to xspice via a unix-socket
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 19 Jul 2022 09:17:08 +0000
+Subject: Re: [Spice-devel] [PATCH v1 0/6] Move all drivers to a common
+ dma-buf locking convention
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,105 +74,98 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
+ Thierry Reding <thierry.reding@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Dmitry Osipenko <digetx@gmail.com>, kernel@collabora.com,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>, linux-rdma@vger.kernel.org,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas_os@shipmail.org>,
+ Daniel Stone <daniel@fooishbar.org>,
+ Gustavo Padovan <gustavo.padovan@collabora.com>,
+ spice-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Chia-I Wu <olvaffe@gmail.com>, linux-media@vger.kernel.org,
+ Daniel Vetter <daniel@ffwll.ch>, linux-arm-msm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, linaro-mm-sig@lists.linaro.org,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Daniel Almeida <daniel.almeida@collabora.com>, amd-gfx@lists.freedesktop.org,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno lun 18 lug 2022 alle ore 09:06 Frediano Ziglio
-<freddy77@gmail.com> ha scritto:
+On Fri, Jul 15, 2022 at 9:53 AM Dmitry Osipenko
+<dmitry.osipenko@collabora.com> wrote:
 >
-> Il giorno lun 18 lug 2022 alle ore 08:56 bob cantor
-> <bobc@confidesk.com> ha scritto:
-> >
-> > Is it possible to connect to xspice via a unix-socket rather than a tcp-port?  (I would like to connect to xspice running in a LXC comtainer.  The container and host are on the same machine, but there is no network connection between them).
-> >
+> Hello,
 >
-> Hi,
->   currently only TCP is supported but the change should not be that difficult.
+> This series moves all drivers to a dynamic dma-buf locking specification.
+> From now on all dma-buf importers are made responsible for holding
+> dma-buf's reservation lock around all operations performed over dma-bufs.
+> This common locking convention allows us to utilize reservation lock more
+> broadly around kernel without fearing of potential dead locks.
 >
+> This patchset passes all i915 selftests. It was also tested using VirtIO,
+> Panfrost, Lima and Tegra drivers. I tested cases of display+GPU,
+> display+V4L and GPU+V4L dma-buf sharing, which covers majority of kernel
+> drivers since rest of the drivers share same or similar code paths.
+>
+> This is a continuation of [1] where Christian K=C3=B6nig asked to factor =
+out
+> the dma-buf locking changes into separate series.
+>
+> [1] https://lore.kernel.org/dri-devel/20220526235040.678984-1-dmitry.osip=
+enko@collabora.com/
+>
+> Dmitry Osipenko (6):
+>   dma-buf: Add _unlocked postfix to function names
+>   drm/gem: Take reservation lock for vmap/vunmap operations
+>   dma-buf: Move all dma-bufs to dynamic locking specification
+>   dma-buf: Acquire wait-wound context on attachment
+>   media: videobuf2: Stop using internal dma-buf lock
+>   dma-buf: Remove internal lock
+>
+>  drivers/dma-buf/dma-buf.c                     | 198 +++++++++++-------
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c   |   4 +-
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |   4 +-
+>  drivers/gpu/drm/armada/armada_gem.c           |  14 +-
+>  drivers/gpu/drm/drm_client.c                  |   4 +-
+>  drivers/gpu/drm/drm_gem.c                     |  28 +++
+>  drivers/gpu/drm/drm_gem_cma_helper.c          |   6 +-
+>  drivers/gpu/drm/drm_gem_framebuffer_helper.c  |   6 +-
+>  drivers/gpu/drm/drm_gem_shmem_helper.c        |   6 +-
+>  drivers/gpu/drm/drm_prime.c                   |  12 +-
+>  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   6 +-
+>  drivers/gpu/drm/exynos/exynos_drm_gem.c       |   2 +-
+>  drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |  20 +-
+>  .../gpu/drm/i915/gem/i915_gem_execbuffer.c    |   2 +-
+>  drivers/gpu/drm/i915/gem/i915_gem_object.h    |   6 +-
+>  .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |  20 +-
+>  drivers/gpu/drm/i915/i915_gem_evict.c         |   2 +-
+>  drivers/gpu/drm/i915/i915_gem_ww.c            |  26 ++-
+>  drivers/gpu/drm/i915/i915_gem_ww.h            |  15 +-
+>  drivers/gpu/drm/omapdrm/omap_gem_dmabuf.c     |   8 +-
+>  drivers/gpu/drm/qxl/qxl_object.c              |  17 +-
+>  drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
+>  drivers/gpu/drm/tegra/gem.c                   |  27 +--
+>  drivers/infiniband/core/umem_dmabuf.c         |  11 +-
+>  .../common/videobuf2/videobuf2-dma-contig.c   |  26 +--
+>  .../media/common/videobuf2/videobuf2-dma-sg.c |  23 +-
+>  .../common/videobuf2/videobuf2-vmalloc.c      |  17 +-
 
-Hi,
-   something like this should do (not tested):
+For the videobuf2 changes:
 
-diff --git a/src/listen.c b/src/listen.c
-index d00358d..292b20a 100644
---- a/src/listen.c
-+++ b/src/listen.c
-@@ -39,12 +39,15 @@
- #include <arpa/inet.h>
- #include <errno.h>
+Acked-by: Tomasz Figa <tfiga@chromium.org>
 
-+#include <spice.h>
-+
- #include "listen.h"
- #include "x11spice.h"
-
- #define SPICE_URI_PREFIX    "spice://"
-+#define SPICE_UNIX_URI_PREFIX    "spice+unix://"
-
--int listen_parse(const char *listen_spec, char **addr, int
-*port_start, int *port_end)
-+int listen_parse(const char *listen_spec, char **addr, int
-*port_start, int *port_end, int *flags)
- {
-     int leading = 0;
-     int trailing = 0;
-@@ -54,6 +57,15 @@ int listen_parse(const char *listen_spec, char
-**addr, int *port_start, int *por
-
-     *port_start = *port_end = -1;
-     *addr = NULL;
-+    *flags = 0;
-+
-+    if (strncmp(listen_spec, SPICE_UNIX_URI_PREFIX,
-strlen(SPICE_UNIX_URI_PREFIX)) == 0) {
-+        listen_spec += strlen(SPICE_UNIX_URI_PREFIX);
-+
-+        *flags = SPICE_ADDR_FLAG_UNIX_ONLY;
-+        *addr = strdup(listen_spec);
-+        return 0;
-+    }
-
-     /* Allow form of spice:// */
-     if (strlen(listen_spec) > strlen(SPICE_URI_PREFIX))
-diff --git a/src/listen.h b/src/listen.h
-index 78f8792..86d5594 100644
---- a/src/listen.h
-+++ b/src/listen.h
-@@ -25,7 +25,7 @@
- /*----------------------------------------------------------------------------
- **  Prototypes
- **--------------------------------------------------------------------------*/
--int listen_parse(const char *listen_spec, char **addr, int
-*port_start, int *port_end);
-+int listen_parse(const char *listen_spec, char **addr, int
-*port_start, int *port_end, int *flags);
- int listen_find_open_port(const char *addr, int start, int end, int *port);
-
- #endif
-diff --git a/src/spice.c b/src/spice.c
-index 0c6c610..fe5be17 100644
---- a/src/spice.c
-+++ b/src/spice.c
-@@ -582,9 +582,10 @@ static int try_listen(spice_t *s, options_t *options)
-     char *addr = NULL;
-     int start;
-     int rc;
-+    int flags;
-
-
--    rc = listen_parse(options->listen, &addr, &start, &port);
-+    rc = listen_parse(options->listen, &addr, &start, &port, &flags);
-     if (rc)
-         return rc;
-
-@@ -599,7 +600,7 @@ static int try_listen(spice_t *s, options_t *options)
-     }
-
-     if (addr) {
--        spice_server_set_addr(s->server, addr, 0);
-+        spice_server_set_addr(s->server, addr, flags);
-         free(addr);
-     }
-
-Frediano
+Best regards,
+Tomasz
