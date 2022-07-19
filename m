@@ -1,68 +1,74 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D22D5795F1
-	for <lists+spice-devel@lfdr.de>; Tue, 19 Jul 2022 11:17:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A648257B023
+	for <lists+spice-devel@lfdr.de>; Wed, 20 Jul 2022 07:01:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0525514AC1B;
-	Tue, 19 Jul 2022 09:17:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E45EB10EB79;
+	Wed, 20 Jul 2022 05:01:14 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
- [IPv6:2607:f8b0:4864:20::92d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C094F14AB6A
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Jul 2022 09:14:03 +0000 (UTC)
-Received: by mail-ua1-x92d.google.com with SMTP id s3so6529598uaq.2
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Jul 2022 02:14:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=USiHEWO3jenD+4D67wgYkGKlAcIRmi0lfoN5PdFyKzQ=;
- b=dFYdzZzeGTwRc0FPEgBG5fRwMWNVjXZzxLxwtIHOW4IyAUtC1iJhL8ze0h/ntk8Iq4
- lKlrAFaVxT4/pV4802tsmPOfXqrd/5krNwAeme2Ty0hfRzSXMQ2O+C/Kf1izAeM/mOcz
- 8LysLHAdaCtPPppxeQNBi2EL1ZGV/VNGij1I4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=USiHEWO3jenD+4D67wgYkGKlAcIRmi0lfoN5PdFyKzQ=;
- b=oEyWrimbXhjfFRsAqy41REX3oUl4TG2Aqv3PM0vLq1APi4Mic4Goxvd4SatFqp45gR
- 06VO4D8KqQUIZaoCzi+WFMXylw2F4TJSrgt2MFTic24IYG0+4HHe/SZ5VuB1ryx+Mk4h
- O6bYuqNaCGoUpLLvMay7Lg2a5hB+QvX+gMFBF4dakI+uJt2nti5H7dKBwKh64tDS7CQd
- EHmt+EE1RoTBcnphfP/N6ly1ZydP8Yy5pLsm70LZPel7JYAH2h43kupdfEQmVNeXu44R
- ueqGe3/sZRbvY8ko3ShWq1mshqWxuFQpS0RemoqIiZo0Hd+CWthwfp/j5yN0fT1IYE7F
- TTHg==
-X-Gm-Message-State: AJIora8A0rx7LNSuSo/jHvPD9AVM1Nyj4lcN/asUFOvCyTWhEhhNQbeQ
- pydxNAXUjv89+/9EEa5zHJu6SCdNz6P4FA==
-X-Google-Smtp-Source: AGRyM1u9yCg0YzU1Sm2d3yNpDfVWX9wGZIARwdJbWL52Hp4qMtfD8c6jeNzquJPDMzSKLlLvk3P3Cg==
-X-Received: by 2002:ab0:7085:0:b0:382:9454:962 with SMTP id
- m5-20020ab07085000000b0038294540962mr11227334ual.113.1658222042528; 
- Tue, 19 Jul 2022 02:14:02 -0700 (PDT)
-Received: from mail-ua1-f46.google.com (mail-ua1-f46.google.com.
- [209.85.222.46]) by smtp.gmail.com with ESMTPSA id
- r17-20020a056122009100b003689df4f372sm2305537vka.27.2022.07.19.02.14.01
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Jul 2022 02:14:02 -0700 (PDT)
-Received: by mail-ua1-f46.google.com with SMTP id s7so6522453uao.4
- for <spice-devel@lists.freedesktop.org>; Tue, 19 Jul 2022 02:14:01 -0700 (PDT)
-X-Received: by 2002:a81:6ccd:0:b0:31d:c77:73e5 with SMTP id
- h196-20020a816ccd000000b0031d0c7773e5mr33706265ywc.314.1658222030025; Tue, 19
- Jul 2022 02:13:50 -0700 (PDT)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AD1E5112639;
+ Tue, 19 Jul 2022 20:05:38 +0000 (UTC)
+Received: from [192.168.2.145] (109-252-119-232.nat.spd-mgts.ru
+ [109.252.119.232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: dmitry.osipenko)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 8773166019F4;
+ Tue, 19 Jul 2022 21:05:34 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1658261136;
+ bh=87heNz60iY2xXlfWeCdMcHlfvOyIp4RDnOqiE+7EyOg=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=klOb5xsgl6l9ubftW1+ax0k9cZtkpR2szLSY0RrNAUUhC80j9cYIvyx7gq8L/l4sQ
+ sCPxodFYLm8cs6LJuLmCgfGJsD8BX8RJ0cpaixj0UjYBDHsXPcXAJbLfScrWaMUl5X
+ p/wkh4kyop0Xmmtp+8262aY0Wor62j5jd4HSYKZ370A48M7D5QrqJnsIscNmaC3Eia
+ 0j8c8rYOSxeZEg/93bpTWiR3rdmQr/8qej0g5rWxZsP9s0FIXV53EAVH1lMqfFhgYw
+ HuVA4WjPXUPCS8++l3ROc0LKS5ut6fthJb9IwFqa8va09T/4H3uZb2AiQ7A5DufA3O
+ IE4FiFlv7vybg==
+Message-ID: <43446124-b99a-32d8-f797-7ec0cdca9ee4@collabora.com>
+Date: Tue, 19 Jul 2022 23:05:30 +0300
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Content-Language: en-US
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
+ <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>,
+ Gustavo Padovan <gustavo.padovan@collabora.com>,
+ Daniel Stone <daniel@fooishbar.org>,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding
+ <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas_os@shipmail.org>
 References: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
-In-Reply-To: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Tue, 19 Jul 2022 18:13:39 +0900
-X-Gmail-Original-Message-ID: <CAAFQd5C0dx5X=VEqXDyj22fbxs1jhOQLLid3vSNfAc9vataPhg@mail.gmail.com>
-Message-ID: <CAAFQd5C0dx5X=VEqXDyj22fbxs1jhOQLLid3vSNfAc9vataPhg@mail.gmail.com>
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 19 Jul 2022 09:17:08 +0000
-Subject: Re: [Spice-devel] [PATCH v1 0/6] Move all drivers to a common
- dma-buf locking convention
+ <20220715005244.42198-5-dmitry.osipenko@collabora.com>
+ <5ec9313e-8498-2838-0320-331c347ce905@amd.com>
+ <1ce233a2-36c9-3698-59f0-c4ff902bec60@collabora.com>
+In-Reply-To: <1ce233a2-36c9-3698-59f0-c4ff902bec60@collabora.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 20 Jul 2022 05:01:13 +0000
+Subject: Re: [Spice-devel] [PATCH v1 4/6] dma-buf: Acquire wait-wound
+ context on attachment
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,98 +80,91 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
- Thierry Reding <thierry.reding@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Dmitry Osipenko <digetx@gmail.com>, kernel@collabora.com,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>, linux-rdma@vger.kernel.org,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas_os@shipmail.org>,
- Daniel Stone <daniel@fooishbar.org>,
- Gustavo Padovan <gustavo.padovan@collabora.com>,
- spice-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Chia-I Wu <olvaffe@gmail.com>, linux-media@vger.kernel.org,
- Daniel Vetter <daniel@ffwll.ch>, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, linaro-mm-sig@lists.linaro.org,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Daniel Almeida <daniel.almeida@collabora.com>, amd-gfx@lists.freedesktop.org,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Gert Wollny <gert.wollny@collabora.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ spice-devel@lists.freedesktop.org, Dmitry Osipenko <digetx@gmail.com>,
+ kernel@collabora.com, linux-media@vger.kernel.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, Jul 15, 2022 at 9:53 AM Dmitry Osipenko
-<dmitry.osipenko@collabora.com> wrote:
->
-> Hello,
->
-> This series moves all drivers to a dynamic dma-buf locking specification.
-> From now on all dma-buf importers are made responsible for holding
-> dma-buf's reservation lock around all operations performed over dma-bufs.
-> This common locking convention allows us to utilize reservation lock more
-> broadly around kernel without fearing of potential dead locks.
->
-> This patchset passes all i915 selftests. It was also tested using VirtIO,
-> Panfrost, Lima and Tegra drivers. I tested cases of display+GPU,
-> display+V4L and GPU+V4L dma-buf sharing, which covers majority of kernel
-> drivers since rest of the drivers share same or similar code paths.
->
-> This is a continuation of [1] where Christian K=C3=B6nig asked to factor =
-out
-> the dma-buf locking changes into separate series.
->
-> [1] https://lore.kernel.org/dri-devel/20220526235040.678984-1-dmitry.osip=
-enko@collabora.com/
->
-> Dmitry Osipenko (6):
->   dma-buf: Add _unlocked postfix to function names
->   drm/gem: Take reservation lock for vmap/vunmap operations
->   dma-buf: Move all dma-bufs to dynamic locking specification
->   dma-buf: Acquire wait-wound context on attachment
->   media: videobuf2: Stop using internal dma-buf lock
->   dma-buf: Remove internal lock
->
->  drivers/dma-buf/dma-buf.c                     | 198 +++++++++++-------
->  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c   |   4 +-
->  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |   4 +-
->  drivers/gpu/drm/armada/armada_gem.c           |  14 +-
->  drivers/gpu/drm/drm_client.c                  |   4 +-
->  drivers/gpu/drm/drm_gem.c                     |  28 +++
->  drivers/gpu/drm/drm_gem_cma_helper.c          |   6 +-
->  drivers/gpu/drm/drm_gem_framebuffer_helper.c  |   6 +-
->  drivers/gpu/drm/drm_gem_shmem_helper.c        |   6 +-
->  drivers/gpu/drm/drm_prime.c                   |  12 +-
->  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   6 +-
->  drivers/gpu/drm/exynos/exynos_drm_gem.c       |   2 +-
->  drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |  20 +-
->  .../gpu/drm/i915/gem/i915_gem_execbuffer.c    |   2 +-
->  drivers/gpu/drm/i915/gem/i915_gem_object.h    |   6 +-
->  .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |  20 +-
->  drivers/gpu/drm/i915/i915_gem_evict.c         |   2 +-
->  drivers/gpu/drm/i915/i915_gem_ww.c            |  26 ++-
->  drivers/gpu/drm/i915/i915_gem_ww.h            |  15 +-
->  drivers/gpu/drm/omapdrm/omap_gem_dmabuf.c     |   8 +-
->  drivers/gpu/drm/qxl/qxl_object.c              |  17 +-
->  drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
->  drivers/gpu/drm/tegra/gem.c                   |  27 +--
->  drivers/infiniband/core/umem_dmabuf.c         |  11 +-
->  .../common/videobuf2/videobuf2-dma-contig.c   |  26 +--
->  .../media/common/videobuf2/videobuf2-dma-sg.c |  23 +-
->  .../common/videobuf2/videobuf2-vmalloc.c      |  17 +-
+On 7/15/22 09:59, Dmitry Osipenko wrote:
+> On 7/15/22 09:50, Christian König wrote:
+>> Am 15.07.22 um 02:52 schrieb Dmitry Osipenko:
+>>> Intel i915 GPU driver uses wait-wound mutex to lock multiple GEMs on the
+>>> attachment to the i915 dma-buf. In order to let all drivers utilize
+>>> shared
+>>> wait-wound context during attachment in a general way, make dma-buf
+>>> core to
+>>> acquire the ww context internally for the attachment operation and update
+>>> i915 driver to use the importer's ww context instead of the internal one.
+>>>
+>>>  From now on all dma-buf exporters shall use the importer's ww context
+>>> for
+>>> the attachment operation.
+>>>
+>>> Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+>>> ---
+>>>   drivers/dma-buf/dma-buf.c                     |  8 +++++-
+>>>   drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |  2 +-
+>>>   .../gpu/drm/i915/gem/i915_gem_execbuffer.c    |  2 +-
+>>>   drivers/gpu/drm/i915/gem/i915_gem_object.h    |  6 ++---
+>>>   drivers/gpu/drm/i915/i915_gem_evict.c         |  2 +-
+>>>   drivers/gpu/drm/i915/i915_gem_ww.c            | 26 +++++++++++++++----
+>>>   drivers/gpu/drm/i915/i915_gem_ww.h            | 15 +++++++++--
+>>>   7 files changed, 47 insertions(+), 14 deletions(-)
+>>>
+>>> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+>>> index 0ee588276534..37545ecb845a 100644
+>>> --- a/drivers/dma-buf/dma-buf.c
+>>> +++ b/drivers/dma-buf/dma-buf.c
+>>> @@ -807,6 +807,8 @@ static struct sg_table * __map_dma_buf(struct
+>>> dma_buf_attachment *attach,
+>>>    * Optionally this calls &dma_buf_ops.attach to allow
+>>> device-specific attach
+>>>    * functionality.
+>>>    *
+>>> + * Exporters shall use ww_ctx acquired by this function.
+>>> + *
+>>>    * Returns:
+>>>    *
+>>>    * A pointer to newly created &dma_buf_attachment on success, or a
+>>> negative
+>>> @@ -822,6 +824,7 @@ dma_buf_dynamic_attach_unlocked(struct dma_buf
+>>> *dmabuf, struct device *dev,
+>>>                   void *importer_priv)
+>>>   {
+>>>       struct dma_buf_attachment *attach;
+>>> +    struct ww_acquire_ctx ww_ctx;
+>>>       int ret;
+>>>         if (WARN_ON(!dmabuf || !dev))
+>>> @@ -841,7 +844,8 @@ dma_buf_dynamic_attach_unlocked(struct dma_buf
+>>> *dmabuf, struct device *dev,
+>>>       attach->importer_ops = importer_ops;
+>>>       attach->importer_priv = importer_priv;
+>>>   -    dma_resv_lock(dmabuf->resv, NULL);
+>>> +    ww_acquire_init(&ww_ctx, &reservation_ww_class);
+>>> +    dma_resv_lock(dmabuf->resv, &ww_ctx);
+>>
+>> That won't work like this. The core property of a WW context is that you
+>> need to unwind all the locks and re-quire them with the contended one
+>> first.
+>>
+>> When you statically lock the imported one here you can't do that any more.
+> 
+> You're right. I felt that something is missing here, but couldn't
+> notice. I'll think more about this and enable
+> CONFIG_DEBUG_WW_MUTEX_SLOWPATH. Thank you!
+> 
 
-For the videobuf2 changes:
+Christian, do you think we could make an excuse for the attach()
+callback and make the exporter responsible for taking the resv lock? It
+will be inconsistent with the rest of the callbacks, where importer
+takes the lock, but it will be the simplest and least invasive solution.
+It's very messy to do a cross-driver ww locking, I don't think it's the
+right approach.
 
-Acked-by: Tomasz Figa <tfiga@chromium.org>
-
+-- 
 Best regards,
-Tomasz
+Dmitry
