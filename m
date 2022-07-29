@@ -1,69 +1,53 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96E3A5801D9
-	for <lists+spice-devel@lfdr.de>; Mon, 25 Jul 2022 17:26:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EE12584DEA
+	for <lists+spice-devel@lfdr.de>; Fri, 29 Jul 2022 11:14:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2B47EC05C0;
-	Mon, 25 Jul 2022 15:26:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F26DC10E58D;
+	Fri, 29 Jul 2022 09:14:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AC4C614AAE1;
- Mon, 25 Jul 2022 15:21:03 +0000 (UTC)
-Received: from dimapc.. (109-252-119-232.nat.spd-mgts.ru [109.252.119.232])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: dmitry.osipenko)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 2E5EC6601B0E;
- Mon, 25 Jul 2022 16:21:00 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1658762462;
- bh=va+2N1U6jZR9UG67k72ODpvUReFCq9AoJW3EC29fAyY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hF7ZR01ny2d7o7bYE+Z5dQKruldBmtrcJcYzRtqjWpjWhPHejJuJ8SbR06SZM2aPy
- PtNrndiN/nQSiU3QbPd3ctnZp4AsfylceLBLgZg1oSvV4c3Zv419RY/B4awMy5ey1W
- JdPdffAe80sYcNuJxp42Aie3X8uYUumDehJZnxPU9KVd3D21F8VXhUQFK+8ZkB1DWc
- KmrEP/xKl94kuJKiRYwnCEIPYClTew820OvW7bvO7YKu8UcodMFHHx5wzl7sk4al/K
- i0Wxa4jPFMqEzxfcD4BoG6SAy54UxKHYee5eOgxPvwHkUvoNdjeuL8fEHON/BKLhvt
- 80xKjVSm5X6kA==
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-To: David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Chia-I Wu <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Gert Wollny <gert.wollny@collabora.com>,
- Gustavo Padovan <gustavo.padovan@collabora.com>,
- Daniel Stone <daniel@fooishbar.org>,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- Thierry Reding <thierry.reding@gmail.com>,
- Tomasz Figa <tfiga@chromium.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas_os@shipmail.org>
-Date: Mon, 25 Jul 2022 18:18:39 +0300
-Message-Id: <20220725151839.31622-6-dmitry.osipenko@collabora.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220725151839.31622-1-dmitry.osipenko@collabora.com>
-References: <20220725151839.31622-1-dmitry.osipenko@collabora.com>
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F0C4910E929
+ for <spice-devel@lists.freedesktop.org>; Fri, 29 Jul 2022 08:56:34 +0000 (UTC)
+Received: by mail-oi1-x234.google.com with SMTP id w72so840098oiw.6
+ for <spice-devel@lists.freedesktop.org>; Fri, 29 Jul 2022 01:56:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=kwb5u/ZEuLH7o0KZ/wy4fp1GR6n2JOy30uJuBdih6n8=;
+ b=IHju1oJ16jHjlXfuoXBMRSkgkFyU38znIITufiudtZ5CU/I4IVp4Zu1nqwKXb/UASb
+ ZJvI5VGHWj4gnXWoprywqpxpQYsJZWPOe+hmWcfoKoNSqGh7XKgnEVxifKw61D3jtSPH
+ H+1/lA/K+VE71ddRomXBmh7JACvSWKyhkDEN8sjU7cnAHp7i9/Bdx/KJHcERHtSNNnjl
+ qyl8ANZYreeLBJnSVy4JchzYIJrqjWd6xGWILCsS4SJEjyGJawMxMPQZOji2YvC6uO4T
+ mdXSOYuRyj3mnJgjhxb9POx4LCRCy8eWhgWGvVAZ6K977kpCga70WY5Law1iaPyB40H7
+ xx8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=kwb5u/ZEuLH7o0KZ/wy4fp1GR6n2JOy30uJuBdih6n8=;
+ b=hmw7WWiHMEXU724jt2+cWc1ivGIXTpLd3ovF4A7qg+ibjAyjtBi/bOhgKilCVtYqa+
+ nQwtR9xb+NrJIecFVmA1DFyfpVnF9ql0C6fnmqAGBcP0avSgRw1/FhlcgJlzsaWWbwSZ
+ G6eVu9741PMdSZjBPIO/ZG6R9cadz4e2/NRQZfVT7rZh74s8SuMttPhCxPc6dAaXOWBC
+ obsG669JC2dbTK6bEb3rm9p/DhbIFHmIloNYKJO3cOz8qs94Fbp3OJ5vmOKji/taPyJT
+ 36SAOinVZl+vHaS9PGJgBKnpD2/u/dl+dICd69yBCwZ7SKc3qPQBiSupglOsOI/Nlh2N
+ lxiw==
+X-Gm-Message-State: AJIora97ICejWwTm+ze4HVOgmITQ+pqAznkJuFzYw8HJc6AZOzxIibdC
+ 0LhK/Pec1fgIbCP5OiTwTG8pYugnnpm8L40hqSzfJR+2Gpg=
+X-Google-Smtp-Source: AGRyM1vOHqH6oQSc6h4vWRjhwupZnrO7A/jeavsEjI3S9B0XTaB7TWsm/e38xeN450XGn5tQxUdnv2SwwnDiR33udLY=
+X-Received: by 2002:a05:6808:1204:b0:325:73cc:867c with SMTP id
+ a4-20020a056808120400b0032573cc867cmr1097623oil.95.1659084992498; Fri, 29 Jul
+ 2022 01:56:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 25 Jul 2022 15:26:39 +0000
-Subject: [Spice-devel] [PATCH v2 5/5] dma-buf: Remove internal lock
+From: James Miller <jamesstewartmiller@gmail.com>
+Date: Fri, 29 Jul 2022 09:56:21 +0100
+Message-ID: <CAKJvYZHs-ZZHq0py8BT5ae=EMUdghywz5WzNvuZzTYKvc5cJWA@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000a14eb505e4edd3d2"
+X-Mailman-Approved-At: Fri, 29 Jul 2022 09:13:41 +0000
+Subject: [Spice-devel] irc
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,89 +59,55 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- spice-devel@lists.freedesktop.org, Dmitry Osipenko <digetx@gmail.com>,
- kernel@collabora.com, linux-media@vger.kernel.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-The internal dma-buf lock isn't needed anymore because the updated
-locking specification claims that dma-buf reservation must be locked
-by importers, and thus, the internal data is already protected by the
-reservation lock. Remove the obsoleted internal lock.
+--000000000000a14eb505e4edd3d2
+Content-Type: text/plain; charset="UTF-8"
 
-Acked-by: Tomasz Figa <tfiga@chromium.org>
-Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
----
- drivers/dma-buf/dma-buf.c | 5 -----
- include/linux/dma-buf.h   | 9 ---------
- 2 files changed, 14 deletions(-)
+Hi,  I wonder if the irc address on the website contact page (
+https://www.spice-space.org/contact.html) needs updating?
 
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index bfdd551c7571..1d211ab400a1 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -656,7 +656,6 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
- 
- 	dmabuf->file = file;
- 
--	mutex_init(&dmabuf->lock);
- 	INIT_LIST_HEAD(&dmabuf->attachments);
- 
- 	mutex_lock(&db_list.lock);
-@@ -1508,7 +1507,6 @@ int dma_buf_vmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map)
- 		return -EINVAL;
- 
- 	dma_resv_lock(dmabuf->resv, NULL);
--	mutex_lock(&dmabuf->lock);
- 	if (dmabuf->vmapping_counter) {
- 		dmabuf->vmapping_counter++;
- 		BUG_ON(iosys_map_is_null(&dmabuf->vmap_ptr));
-@@ -1528,7 +1526,6 @@ int dma_buf_vmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map)
- 	*map = dmabuf->vmap_ptr;
- 
- out_unlock:
--	mutex_unlock(&dmabuf->lock);
- 	dma_resv_unlock(dmabuf->resv);
- 	return ret;
- }
-@@ -1549,13 +1546,11 @@ void dma_buf_vunmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map)
- 	BUG_ON(!iosys_map_is_equal(&dmabuf->vmap_ptr, map));
- 
- 	dma_resv_lock(dmabuf->resv, NULL);
--	mutex_lock(&dmabuf->lock);
- 	if (--dmabuf->vmapping_counter == 0) {
- 		if (dmabuf->ops->vunmap)
- 			dmabuf->ops->vunmap(dmabuf, map);
- 		iosys_map_clear(&dmabuf->vmap_ptr);
- 	}
--	mutex_unlock(&dmabuf->lock);
- 	dma_resv_unlock(dmabuf->resv);
- }
- EXPORT_SYMBOL_NS_GPL(dma_buf_vunmap_unlocked, DMA_BUF);
-diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-index e7a6a8d28862..2f9fb7f3c835 100644
---- a/include/linux/dma-buf.h
-+++ b/include/linux/dma-buf.h
-@@ -326,15 +326,6 @@ struct dma_buf {
- 	/** @ops: dma_buf_ops associated with this buffer object. */
- 	const struct dma_buf_ops *ops;
- 
--	/**
--	 * @lock:
--	 *
--	 * Used internally to serialize list manipulation, attach/detach and
--	 * vmap/unmap. Note that in many cases this is superseeded by
--	 * dma_resv_lock() on @resv.
--	 */
--	struct mutex lock;
--
- 	/**
- 	 * @vmapping_counter:
- 	 *
+I can't find irc.gnome.org - I think they now use matrix.
+
+I want to know if there is anyway to manage usb-redirection to a libvirt
+kvm vm from the command line.  In particular, I want to redirect a usb key
+(yubikey) to the virt-manager managed vm, from the command line, as I need
+to deauthorise the key (echoing 0 to a file under a path below sys) before
+redirecting it.
+
+Many thanks in advance for any help you can offer.
+
+Cheers
+
+James
+
 -- 
-2.36.1
+James Stewart Miller Bsc(hons) Psych.
 
+--000000000000a14eb505e4edd3d2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi,=C2=A0 I wonder if the irc address on the website =
+contact page (<a href=3D"https://www.spice-space.org/contact.html">https://=
+www.spice-space.org/contact.html</a>) needs updating?</div><div><br></div><=
+div>I can&#39;t find <a href=3D"http://irc.gnome.org">irc.gnome.org</a> - I=
+ think they now use matrix.</div><div><br></div><div>I want to know if ther=
+e is anyway to manage usb-redirection to a libvirt kvm vm from the command =
+line.=C2=A0 In particular, I want to redirect a usb key (yubikey) to the vi=
+rt-manager managed vm, from the command line, as I need to deauthorise the =
+key (echoing 0 to a file under a path below sys) before redirecting it.</di=
+v><div><br></div><div>Many thanks in advance for any help you can offer.</d=
+iv><div><br></div><div>Cheers</div><div><br></div><div>James<br></div><div>=
+<br>-- <br><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gma=
+il_signature">James Stewart Miller Bsc(hons) Psych.<br><div style=3D"paddin=
+g:0px;margin-left:0px;margin-top:0px;overflow:hidden;word-wrap:break-word;c=
+olor:black;font-size:10px;text-align:left;line-height:130%"></div><div styl=
+e=3D"padding:0px;margin-left:0px;margin-top:0px;overflow:hidden;word-wrap:b=
+reak-word;color:black;font-size:10px;text-align:left;line-height:130%"></di=
+v><div style=3D"padding:0px;margin-left:0px;margin-top:0px;overflow:hidden;=
+word-wrap:break-word;color:black;font-size:10px;text-align:left;line-height=
+:130%"></div></div></div></div>
+
+--000000000000a14eb505e4edd3d2--
