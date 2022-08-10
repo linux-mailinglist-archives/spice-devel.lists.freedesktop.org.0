@@ -1,39 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B517358F189
-	for <lists+spice-devel@lfdr.de>; Wed, 10 Aug 2022 19:26:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 273E658F187
+	for <lists+spice-devel@lfdr.de>; Wed, 10 Aug 2022 19:25:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1A4E811B486;
-	Wed, 10 Aug 2022 17:26:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 46F2D11AFE3;
+	Wed, 10 Aug 2022 17:25:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from chwww1.confidesk.com (chwww1.confidesk.com [5.148.173.215])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6888810FBBE
- for <spice-devel@lists.freedesktop.org>; Wed, 10 Aug 2022 15:29:26 +0000 (UTC)
-Received: by chwww1.confidesk.com (Postfix, from userid 33)
- id A80AC3063AF09; Wed, 10 Aug 2022 17:29:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=confidesk.com;
- s=confidesk; t=1660145362;
- bh=ClPPKpbl+sWWudEJsM9xUq95XqYqX6olalqxiiV64VE=;
- h=To:Subject:From:Cc:Reply-To:Date:From;
- b=I/OZLjE6g+cu87Nmss2frIiWq+ut+EH/nygBOxxc6bJrnupGSBGBfGs+yKmrhl0/f
- dMGqz6lIi64jR9uFvG4J3y67+/WCoWWsyZTyFImqKZcxsjtme494wT44Q8ofh2MT/y
- Ie0+y2MymBb57GZ+Rz5/13OqFvmnzsCuu+RfE/bXtiaaevS/eylEeMwzRHRxiu+rVj
- ZY5hfXLL9kBrCaoB+D0Zi9XecPrZHSUlHk3kIQmgdU3A5/RXMMXCMhLa45zTm9O+Kg
- oPiuvP0sWIxnoLaFu21aUHehMRKtrZIXFDnfW63LTDQwY2oNQXPgRxlHii+1LJfLWW
- grragrroscVog==
-To: freddy77@gmail.com,spice-devel@lists.freedesktop.org
-X-PHP-Originating-Script: 33:Sendmail.php
-From: bob cantor <bobc@confidesk.com>
-Date: Wed, 10 Aug 2022 15:29:22 +0000
-Content-Type: multipart/alternative;
- boundary="=_80d9461c8f5fe4838f48ae264e63923b"
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8F05F14A78D
+ for <spice-devel@lists.freedesktop.org>; Wed, 10 Aug 2022 16:40:31 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id
+ c187-20020a1c35c4000000b003a30d88fe8eso1303311wma.2
+ for <spice-devel@lists.freedesktop.org>; Wed, 10 Aug 2022 09:40:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc;
+ bh=KbtX/yuBejcio58S+wA08Oms/h9KupDVKtGMajir+nI=;
+ b=bFZVxwML6mJ3CaDiAs9wOS/e9YwKjLEAUCUxScTXUw6F4xTgGbQyc3H64MGuPB/LKL
+ yYe3gpoolXAbjnr/G7PT8nvgLnOYr7GkZ6vN/Kqt4wz+7XIuBIbwZXFToF78XtxpGXt4
+ buGP/phsMI9Zcp9iPALfZ+I3HEGo6oRnrIMFQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
+ bh=KbtX/yuBejcio58S+wA08Oms/h9KupDVKtGMajir+nI=;
+ b=2oJ5LuTQFThWgukN4Qha5EgJV+Ef7l/v8oEnjUFc4PPKuMDXRuqtfFVuQjIrtecPzB
+ ICy1Xes8DLKaO008EtMbAiawnb4rw096cSu+thgM5FKjLz4ECsXttK1u60FOOdsdnjAQ
+ 9JiLdEoSxCUhjH31wN+JnrSbZm9WELCVaWlMJ79ZfVgVduEHhFpFWza1IGh2tFbd02Ls
+ 14Oq9L0RhaXKGQLfrqld1tA1LXlOMhMsf8jiN2yu7nGfgyOeSUbIpd+bewCfCdNC5spa
+ NMUlIeZ3XaqRKnm4ip2cBfkxzKmEgsK7ux8mQ6ByeEjxzt5TVmawOedU8LDIyJkFbVCv
+ yQyQ==
+X-Gm-Message-State: ACgBeo3mRAyf4pWSrr/HS79wCfwA2bE8gEcBJckDw+/602BsS7O5QyuN
+ miZrnwYz4Dc/bFFqUVU6Qza7sg==
+X-Google-Smtp-Source: AA6agR7OR5/6haEXj6Lu6d3vuxWkNY4kjEAXIlDMT8rqpnv17ZQu4lO/cHbzlO/KWtmhX8LvlvXJAQ==
+X-Received: by 2002:a1c:7508:0:b0:3a5:923:3994 with SMTP id
+ o8-20020a1c7508000000b003a509233994mr2991924wmc.173.1660149628232; 
+ Wed, 10 Aug 2022 09:40:28 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id
+ e3-20020adf9bc3000000b0020e6ce4dabdsm16817466wrc.103.2022.08.10.09.40.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Aug 2022 09:40:27 -0700 (PDT)
+Date: Wed, 10 Aug 2022 18:40:25 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Zack Rusin <zackr@vmware.com>
+Message-ID: <YvPfedG/uLQNFG7e@phenom.ffwll.local>
+References: <20220712033246.1148476-1-zack@kde.org>
+ <20220712033246.1148476-2-zack@kde.org>
 MIME-Version: 1.0
-Message-Id: <20220810152922.A80AC3063AF09@chwww1.confidesk.com>
-X-Mailman-Approved-At: Wed, 10 Aug 2022 17:26:04 +0000
-Subject: Re: [Spice-devel] connect to xspice via a unix-socket
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220712033246.1148476-2-zack@kde.org>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+X-Mailman-Approved-At: Wed, 10 Aug 2022 17:25:29 +0000
+Subject: Re: [Spice-devel] [PATCH v2 1/8] drm: Disable the cursor plane on
+ atomic contexts with virtualized drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -45,183 +70,200 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: bobc@confidesk.com
+Cc: Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Hans de Goede <hdegoede@redhat.com>, David Airlie <airlied@linux.ie>,
+ contact@emersion.fr, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ stable@vger.kernel.org, Gurchetan Singh <gurchetansingh@chromium.org>,
+ krastevm@vmware.com, ppaalanen@gmail.com, dri-devel@lists.freedesktop.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, virtualization@lists.linux-foundation.org,
+ Chia-I Wu <olvaffe@gmail.com>, mombasawalam@vmware.com,
+ Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---=_80d9461c8f5fe4838f48ae264e63923b
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+On Mon, Jul 11, 2022 at 11:32:39PM -0400, Zack Rusin wrote:
+> From: Zack Rusin <zackr@vmware.com>
+> 
+> Cursor planes on virtualized drivers have special meaning and require
+> that the clients handle them in specific ways, e.g. the cursor plane
+> should react to the mouse movement the way a mouse cursor would be
+> expected to and the client is required to set hotspot properties on it
+> in order for the mouse events to be routed correctly.
+> 
+> This breaks the contract as specified by the "universal planes". Fix it
+> by disabling the cursor planes on virtualized drivers while adding
+> a foundation on top of which it's possible to special case mouse cursor
+> planes for clients that want it.
+> 
+> Disabling the cursor planes makes some kms compositors which were broken,
+> e.g. Weston, fallback to software cursor which works fine or at least
+> better than currently while having no effect on others, e.g. gnome-shell
+> or kwin, which put virtualized drivers on a deny-list when running in
+> atomic context to make them fallback to legacy kms and avoid this issue.
+> 
+> Signed-off-by: Zack Rusin <zackr@vmware.com>
+> Fixes: 681e7ec73044 ("drm: Allow userspace to ask for universal plane list (v2)")
+> Cc: <stable@vger.kernel.org> # v5.4+
+> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> Cc: Maxime Ripard <mripard@kernel.org>
+> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: Dave Airlie <airlied@redhat.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Hans de Goede <hdegoede@redhat.com>
+> Cc: Gurchetan Singh <gurchetansingh@chromium.org>
+> Cc: Chia-I Wu <olvaffe@gmail.com>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: virtualization@lists.linux-foundation.org
+> Cc: spice-devel@lists.freedesktop.org
+> ---
+>  drivers/gpu/drm/drm_plane.c          | 11 +++++++++++
+>  drivers/gpu/drm/qxl/qxl_drv.c        |  2 +-
+>  drivers/gpu/drm/vboxvideo/vbox_drv.c |  2 +-
+>  drivers/gpu/drm/virtio/virtgpu_drv.c |  3 ++-
+>  drivers/gpu/drm/vmwgfx/vmwgfx_drv.c  |  2 +-
+>  include/drm/drm_drv.h                | 10 ++++++++++
+>  include/drm/drm_file.h               | 12 ++++++++++++
+>  7 files changed, 38 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
+> index 726f2f163c26..e1e2a65c7119 100644
+> --- a/drivers/gpu/drm/drm_plane.c
+> +++ b/drivers/gpu/drm/drm_plane.c
+> @@ -667,6 +667,17 @@ int drm_mode_getplane_res(struct drm_device *dev, void *data,
+>  		    !file_priv->universal_planes)
+>  			continue;
+>  
+> +		/*
+> +		 * Unless userspace supports virtual cursor plane
+> +		 * then if we're running on virtual driver do not
+> +		 * advertise cursor planes because they'll be broken
+> +		 */
+> +		if (plane->type == DRM_PLANE_TYPE_CURSOR &&
+> +		    drm_core_check_feature(dev, DRIVER_VIRTUAL)	&&
+> +		    file_priv->atomic &&
+> +		    !file_priv->supports_virtual_cursor_plane)
+> +			continue;
+> +
+>  		if (drm_lease_held(file_priv, plane->base.id)) {
+>  			if (count < plane_resp->count_planes &&
+>  			    put_user(plane->base.id, plane_ptr + count))
+> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+> index 1cb6f0c224bb..0e4212e05caa 100644
+> --- a/drivers/gpu/drm/qxl/qxl_drv.c
+> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
+> @@ -281,7 +281,7 @@ static const struct drm_ioctl_desc qxl_ioctls[] = {
+>  };
+>  
+>  static struct drm_driver qxl_driver = {
+> -	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
+> +	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC | DRIVER_VIRTUAL,
+>  
+>  	.dumb_create = qxl_mode_dumb_create,
+>  	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
+> diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+> index f4f2bd79a7cb..84e75bcc3384 100644
+> --- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
+> +++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+> @@ -176,7 +176,7 @@ DEFINE_DRM_GEM_FOPS(vbox_fops);
+>  
+>  static const struct drm_driver driver = {
+>  	.driver_features =
+> -	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
+> +	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC | DRIVER_VIRTUAL,
+>  
+>  	.lastclose = drm_fb_helper_lastclose,
+>  
+> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+> index 5f25a8d15464..3c5bb006159a 100644
+> --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
+> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
+> @@ -198,7 +198,8 @@ MODULE_AUTHOR("Alon Levy");
+>  DEFINE_DRM_GEM_FOPS(virtio_gpu_driver_fops);
+>  
+>  static const struct drm_driver driver = {
+> -	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC,
+> +	.driver_features =
+> +		DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_VIRTUAL,
+>  	.open = virtio_gpu_driver_open,
+>  	.postclose = virtio_gpu_driver_postclose,
+>  
+> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+> index 01a5b47e95f9..712f6ad0b014 100644
+> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+> @@ -1581,7 +1581,7 @@ static const struct file_operations vmwgfx_driver_fops = {
+>  
+>  static const struct drm_driver driver = {
+>  	.driver_features =
+> -	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM,
+> +	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM | DRIVER_VIRTUAL,
+>  	.ioctls = vmw_ioctls,
+>  	.num_ioctls = ARRAY_SIZE(vmw_ioctls),
+>  	.master_set = vmw_master_set,
+> diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
+> index f6159acb8856..c4cd7fc350d9 100644
+> --- a/include/drm/drm_drv.h
+> +++ b/include/drm/drm_drv.h
+> @@ -94,6 +94,16 @@ enum drm_driver_feature {
+>  	 * synchronization of command submission.
+>  	 */
+>  	DRIVER_SYNCOBJ_TIMELINE         = BIT(6),
+> +	/**
+> +	 * @DRIVER_VIRTUAL:
+> +	 *
+> +	 * Driver is running on top of virtual hardware. The most significant
+> +	 * implication of this is a requirement of special handling of the
+> +	 * cursor plane (e.g. cursor plane has to actually track the mouse
+> +	 * cursor and the clients are required to set hotspot in order for
+> +	 * the cursor planes to work correctly).
+> +	 */
+> +	DRIVER_VIRTUAL                  = BIT(7),
 
-ICAgICAgICBGcmVkaWFubywgVGhhbmsgeW91IGZvciB0aGUgdW5peC1zb2NrZXQgcGF0Y2gg
-Zm9yIHgxMXNwaWNlIcKgIEkgaGF2ZSB0cmllZCBpdCBhbmQgaXQgd29ya3MgcGVyZmVjdGx5
-LsKgIChJIGRpZCBub3QgZW5jb3VudGVyIGFueSBwcm9ibGVtcy9pc3N1ZXMpLsKgwqAgICAg
-ICAgICAgIMKgICAgICAgICAgICBJbmNpZGVudGFsbHkswqAgSSBzdHVtYmxlZCB1cG9uIGEg
-c2ltaWxhciB1bml4LXNvY2tldCBwYXRjaCBmb3IgeHNwaWNlLsKgwqAgU2VhcmNoIGZvciAi
-cGF0Y2ggeHNlcnZlci14c3BpY2UiIGluIHRoZSBmb2xsb3dpbmcgZ2lzdCzCoCBodHRwczov
-L2dpc3QuZ2l0aHViLmNvbS90YXJydWRhLzI1YmNhOWFhMTkyYTJhOWVlNjkwMDU0YzBiMjNh
-YTA4IC7CoCBUaGVyZSBpcyBhIHJlbGF0ZWQgdGhyZWFkIGF0IGh0dHBzOi8vZGlzY3Vzcy5s
-aW51eGNvbnRhaW5lcnMub3JnL3QvdHV0b3JpYWwtaG93LXRvLXJ1bi1hLWZ1bGwtZGVza3Rv
-cC1lbnZpcm9ubWVudC1vbi1seGQvMTQ2NDQgICAgIC7CoCBJIGhhdmUgdHJpZWQgdGhlIHhz
-cGljZSBwYXRjaCBhbmQgaXQgYWxzbyB3b3JrcyBwZXJmZWN0bHkuICAgICAgICAgICDCoCAg
-ICAgICAgICAgT24gMjAyMi0wOC0wMSwgZnJlZGR5NzdAZ21haWwuY29tIHdyb3RlOiAgICAg
-ICAgICAgSGksIGRpZCB5b3UgbWFuYWdlIHRvIHRlc3QgdGhpcz8gSXNzdWVzPyBSZWdhcmRz
-LCBGcmVkaWFubyBJbCBnaW9ybm8gbHVuIDE4IGx1ZyAyMDIyIGFsbGUgb3JlIDA5OjQwIEZy
-ZWRpYW5vIFppZ2xpbyBoYSBzY3JpdHRvOiAmZ3Q7ICZndDsgSWwgZ2lvcm5vIGx1biAxOCBs
-dWcgMjAyMiBhbGxlIG9yZSAwOTowNiBGcmVkaWFubyBaaWdsaW8gICAgICZndDsgaGEgc2Ny
-aXR0bzogJmd0OyAmZ3Q7ICZndDsgJmd0OyBJbCBnaW9ybm8gbHVuIDE4IGx1ZyAyMDIyIGFs
-bGUgb3JlIDA4OjU2IGJvYiBjYW50b3IgJmd0OyAmZ3Q7IGhhIHNjcml0dG86ICZndDsgJmd0
-OyAmZ3Q7ICZndDsgJmd0OyAmZ3Q7IElzIGl0IHBvc3NpYmxlIHRvIGNvbm5lY3QgdG8geHNw
-aWNlIHZpYSBhIHVuaXgtc29ja2V0ICAgICByYXRoZXIgdGhhbiBhIHRjcC1wb3J0PyAoSSB3
-b3VsZCBsaWtlIHRvIGNvbm5lY3QgdG8geHNwaWNlIHJ1bm5pbmcgaW4gYSBMWEMgY29tdGFp
-bmVyLiBUaGUgY29udGFpbmVyIGFuZCBob3N0IGFyZSBvbiB0aGUgc2FtZSBtYWNoaW5lLCBi
-dXQgdGhlcmUgaXMgbm8gbmV0d29yayBjb25uZWN0aW9uIGJldHdlZW4gdGhlbSkuICZndDsg
-Jmd0OyAgICAgJmd0OyAmZ3Q7ICZndDsgJmd0OyAmZ3Q7IEhpLCAmZ3Q7ICZndDsgY3VycmVu
-dGx5IG9ubHkgVENQIGlzIHN1cHBvcnRlZCBidXQgdGhlIGNoYW5nZSBzaG91bGQgbm90IGJl
-IHRoYXQgZGlmZmljdWx0LiAmZ3Q7ICZndDsgJmd0OyAmZ3Q7IEhpLCAmZ3Q7IHNvbWV0aGlu
-ZyBsaWtlIHRoaXMgc2hvdWxkIGRvIChub3QgdGVzdGVkKTogJmd0OyAgICAgJmd0OyBkaWZm
-IC0tZ2l0IGEvc3JjL2xpc3Rlbi5jIGIvc3JjL2xpc3Rlbi5jICZndDsgaW5kZXggZDAwMzU4
-ZC4uMjkyYjIwYSAxMDA2NDQgJmd0OyAtLS0gYS9zcmMvbGlzdGVuLmMgJmd0OyArKysgYi9z
-cmMvbGlzdGVuLmMgJmd0OyBAQCAtMzksMTIgKzM5LDE1IEBAICZndDsgI2luY2x1ZGUgJmd0
-OyAjaW5jbHVkZSAmZ3Q7ICZndDsgICAgICsjaW5jbHVkZSAmZ3Q7ICsgJmd0OyAjaW5jbHVk
-ZSAibGlzdGVuLmgiICZndDsgI2luY2x1ZGUgIngxMXNwaWNlLmgiICZndDsgJmd0OyAjZGVm
-aW5lIFNQSUNFX1VSSV9QUkVGSVggInNwaWNlOi8vIiAmZ3Q7ICsjZGVmaW5lIFNQSUNFX1VO
-SVhfVVJJX1BSRUZJWCAic3BpY2UrdW5peDovLyIgJmd0OyAmZ3Q7IC1pbnQgICAgIGxpc3Rl
-bl9wYXJzZShjb25zdCBjaGFyICpsaXN0ZW5fc3BlYywgY2hhciAqKmFkZHIsIGludCAmZ3Q7
-ICpwb3J0X3N0YXJ0LCBpbnQgKnBvcnRfZW5kKSAmZ3Q7ICtpbnQgbGlzdGVuX3BhcnNlKGNv
-bnN0IGNoYXIgKmxpc3Rlbl9zcGVjLCBjaGFyICoqYWRkciwgaW50ICZndDsgKnBvcnRfc3Rh
-cnQsIGludCAqcG9ydF9lbmQsIGludCAgICAgKmZsYWdzKSAmZ3Q7IHsgJmd0OyBpbnQgbGVh
-ZGluZyA9IDA7ICZndDsgaW50IHRyYWlsaW5nID0gMDsgJmd0OyBAQCAtNTQsNiArNTcsMTUg
-QEAgaW50IGxpc3Rlbl9wYXJzZShjb25zdCBjaGFyICpsaXN0ZW5fc3BlYywgY2hhciAmZ3Q7
-ICoqYWRkciwgaW50ICpwb3J0X3N0YXJ0LCBpbnQgKnBvciAmZ3Q7ICZndDsgKnBvcnRfc3Rh
-cnQgPSAgICAgKnBvcnRfZW5kID0gLTE7ICZndDsgKmFkZHIgPSBOVUxMOyAmZ3Q7ICsgKmZs
-YWdzID0gMDsgJmd0OyArICZndDsgKyBpZiAoc3RybmNtcChsaXN0ZW5fc3BlYywgU1BJQ0Vf
-VU5JWF9VUklfUFJFRklYLCAmZ3Q7IHN0cmxlbihTUElDRV9VTklYX1VSSV9QUkVGSVgpKSA9
-PSAwKSB7ICZndDsgKyBsaXN0ZW5fc3BlYyArPSAgICAgc3RybGVuKFNQSUNFX1VOSVhfVVJJ
-X1BSRUZJWCk7ICZndDsgKyAmZ3Q7ICsgKmZsYWdzID0gU1BJQ0VfQUREUl9GTEFHX1VOSVhf
-T05MWTsgJmd0OyArICphZGRyID0gc3RyZHVwKGxpc3Rlbl9zcGVjKTsgJmd0OyArIHJldHVy
-biAwOyAmZ3Q7ICsgfSAmZ3Q7ICZndDsgLyogQWxsb3cgZm9ybSBvZiBzcGljZTovLyAqLyAm
-Z3Q7IGlmICAgICAoc3RybGVuKGxpc3Rlbl9zcGVjKSAmZ3Q7IHN0cmxlbihTUElDRV9VUklf
-UFJFRklYKSkgJmd0OyBkaWZmIC0tZ2l0IGEvc3JjL2xpc3Rlbi5oIGIvc3JjL2xpc3Rlbi5o
-ICZndDsgaW5kZXggNzhmODc5Mi4uODZkNTU5NCAxMDA2NDQgJmd0OyAtLS0gYS9zcmMvbGlz
-dGVuLmggJmd0OyArKysgYi9zcmMvbGlzdGVuLmggJmd0OyBAQCAtMjUsNyAgICAgKzI1LDcg
-QEAgJmd0OyAvKi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gJmd0OyAqKiBQcm90b3R5cGVzICZn
-dDsgKiotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSovICAgICAmZ3Q7IC1pbnQgbGlzdGVuX3BhcnNl
-KGNvbnN0IGNoYXIgKmxpc3Rlbl9zcGVjLCBjaGFyICoqYWRkciwgaW50ICZndDsgKnBvcnRf
-c3RhcnQsIGludCAqcG9ydF9lbmQpOyAmZ3Q7ICtpbnQgbGlzdGVuX3BhcnNlKGNvbnN0IGNo
-YXIgKmxpc3Rlbl9zcGVjLCBjaGFyICoqYWRkciwgaW50ICZndDsgKnBvcnRfc3RhcnQsIGlu
-dCAgICAgKnBvcnRfZW5kLCBpbnQgKmZsYWdzKTsgJmd0OyBpbnQgbGlzdGVuX2ZpbmRfb3Bl
-bl9wb3J0KGNvbnN0IGNoYXIgKmFkZHIsIGludCBzdGFydCwgaW50IGVuZCwgaW50ICpwb3J0
-KTsgJmd0OyAmZ3Q7ICNlbmRpZiAmZ3Q7IGRpZmYgLS1naXQgYS9zcmMvc3BpY2UuYyBiL3Ny
-Yy9zcGljZS5jICZndDsgaW5kZXggMGM2YzYxMC4uZmU1YmUxNyAgICAgMTAwNjQ0ICZndDsg
-LS0tIGEvc3JjL3NwaWNlLmMgJmd0OyArKysgYi9zcmMvc3BpY2UuYyAmZ3Q7IEBAIC01ODIs
-OSArNTgyLDEwIEBAIHN0YXRpYyBpbnQgdHJ5X2xpc3RlbihzcGljZV90ICpzLCBvcHRpb25z
-X3QgKm9wdGlvbnMpICZndDsgY2hhciAqYWRkciA9IE5VTEw7ICZndDsgaW50IHN0YXJ0OyAm
-Z3Q7IGludCByYzsgJmd0OyArICAgICBpbnQgZmxhZ3M7ICZndDsgJmd0OyAmZ3Q7IC0gcmMg
-PSBsaXN0ZW5fcGFyc2Uob3B0aW9ucy0mZ3Q7bGlzdGVuLCAmYW1wO2FkZHIsICZhbXA7c3Rh
-cnQsICZhbXA7cG9ydCk7ICZndDsgKyByYyA9IGxpc3Rlbl9wYXJzZShvcHRpb25zLSZndDts
-aXN0ZW4sICZhbXA7YWRkciwgJmFtcDtzdGFydCwgJmFtcDtwb3J0LCAmYW1wO2ZsYWdzKTsg
-ICAgICZndDsgaWYgKHJjKSAmZ3Q7IHJldHVybiByYzsgJmd0OyAmZ3Q7IEBAIC01OTksNyAr
-NjAwLDcgQEAgc3RhdGljIGludCB0cnlfbGlzdGVuKHNwaWNlX3QgKnMsIG9wdGlvbnNfdCAq
-b3B0aW9ucykgJmd0OyB9ICZndDsgJmd0OyBpZiAoYWRkcikgeyAmZ3Q7IC0gc3BpY2Vfc2Vy
-dmVyX3NldF9hZGRyKHMtJmd0O3NlcnZlciwgYWRkciwgMCk7ICAgICAmZ3Q7ICsgc3BpY2Vf
-c2VydmVyX3NldF9hZGRyKHMtJmd0O3NlcnZlciwgYWRkciwgZmxhZ3MpOyAmZ3Q7IGZyZWUo
-YWRkcik7ICZndDsgfSAmZ3Q7ICZndDsgRnJlZGlhbm8gICAgCgotLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KVGhpcyBtYWlsIHdhcyBzZW50IGJ5IENvbmZp
-ZGVzayBzZWN1cmUgbWFpbCBzZXJ2aWNlLiBDaGVjayBpdCBvbiBodHRwczovL3d3dy5jb25m
-aWRlc2suY29t
+I think the naming here is unfortunate, because people will vonder why
+e.g. vkms doesn't set this, and then add it, and confuse stuff completely.
 
---=_80d9461c8f5fe4838f48ae264e63923b
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
+Also it feels a bit wrong to put this onto the driver, when really it's a
+cursor flag. I guess you can make it some kind of flag in the drm_plane
+structure, or a new plane type, but putting it there instead of into the
+"random pile of midlayer-mistake driver flags" would be a lot better.
 
-CiAgPHA+CiAgICBGcmVkaWFubywgVGhhbmsgeW91IGZvciB0aGUgdW5peC1zb2NrZXQgcGF0
-Y2ggZm9yIHgxMXNwaWNlIcKgIEkgaGF2ZSB0cmllZCBpdCBhbmQgaXQgd29ya3MgcGVyZmVj
-dGx5LsKgIChJIGRpZCBub3QgZW5jb3VudGVyIGFueSBwcm9ibGVtcy9pc3N1ZXMpLsKgwqAK
-ICA8L3A+CiAgPHA+CiAgICDCoAogIDwvcD4KICA8cD4KICAgIEluY2lkZW50YWxseSzCoCBJ
-IHN0dW1ibGVkIHVwb24gYSBzaW1pbGFyIHVuaXgtc29ja2V0IHBhdGNoIGZvciB4c3BpY2Uu
-wqDCoCBTZWFyY2ggZm9yICJwYXRjaCB4c2VydmVyLXhzcGljZSIgaW4gdGhlIGZvbGxvd2lu
-ZyBnaXN0LMKgIDxhIGhyZWY9Imh0dHBzOi8vZ2lzdC5naXRodWIuY29tL3RhcnJ1ZGEvMjVi
-Y2E5YWExOTJhMmE5ZWU2OTAwNTRjMGIyM2FhMDgiPmh0dHBzOi8vZ2lzdC5naXRodWIuY29t
-L3RhcnJ1ZGEvMjViY2E5YWExOTJhMmE5ZWU2OTAwNTRjMGIyM2FhMDg8L2E+IC7CoCBUaGVy
-ZSBpcyBhIHJlbGF0ZWQgdGhyZWFkIGF0IDxhIGhyZWY9Imh0dHBzOi8vZGlzY3Vzcy5saW51
-eGNvbnRhaW5lcnMub3JnL3QvdHV0b3JpYWwtaG93LXRvLXJ1bi1hLWZ1bGwtZGVza3RvcC1l
-bnZpcm9ubWVudC1vbi1seGQvMTQ2NDQiPmh0dHBzOi8vZGlzY3Vzcy5saW51eGNvbnRhaW5l
-cnMub3JnL3QvdHV0b3JpYWwtaG93LXRvLXJ1bi1hLWZ1bGwtZGVza3RvcC1lbnZpcm9ubWVu
-dC1vbi1seGQvMTQ2NDQ8L2E+CiAgICAuwqAgSSBoYXZlIHRyaWVkIHRoZSB4c3BpY2UgcGF0
-Y2ggYW5kIGl0IGFsc28gd29ya3MgcGVyZmVjdGx5LgogIDwvcD4KICA8cD4KICAgIMKgCiAg
-PC9wPgogIDxwPgogICAgT24gMjAyMi0wOC0wMSwgZnJlZGR5NzdAZ21haWwuY29tIHdyb3Rl
-OgogIDwvcD4KICA8ZGl2IGNsYXNzPSJjb25maWRlc2tfbWFpbF9yZXBseV9ibG9ja19jbGFz
-cyIgc3R5bGU9ImJvcmRlci1sZWZ0OjJweCAjN2FmIHNvbGlkO3BhZGRpbmc6MTFweDsiPgog
-ICAgSGksIGRpZCB5b3UgbWFuYWdlIHRvIHRlc3QgdGhpcz8gSXNzdWVzPyBSZWdhcmRzLCBG
-cmVkaWFubyBJbCBnaW9ybm8gbHVuIDE4IGx1ZyAyMDIyIGFsbGUgb3JlIDA5OjQwIEZyZWRp
-YW5vIFppZ2xpbyBoYSBzY3JpdHRvOiAmZ3Q7ICZndDsgSWwgZ2lvcm5vIGx1biAxOCBsdWcg
-MjAyMiBhbGxlIG9yZSAwOTowNiBGcmVkaWFubyBaaWdsaW8KICAgICZndDsgaGEgc2NyaXR0
-bzogJmd0OyAmZ3Q7ICZndDsgJmd0OyBJbCBnaW9ybm8gbHVuIDE4IGx1ZyAyMDIyIGFsbGUg
-b3JlIDA4OjU2IGJvYiBjYW50b3IgJmd0OyAmZ3Q7IGhhIHNjcml0dG86ICZndDsgJmd0OyAm
-Z3Q7ICZndDsgJmd0OyAmZ3Q7IElzIGl0IHBvc3NpYmxlIHRvIGNvbm5lY3QgdG8geHNwaWNl
-IHZpYSBhIHVuaXgtc29ja2V0CiAgICByYXRoZXIgdGhhbiBhIHRjcC1wb3J0PyAoSSB3b3Vs
-ZCBsaWtlIHRvIGNvbm5lY3QgdG8geHNwaWNlIHJ1bm5pbmcgaW4gYSBMWEMgY29tdGFpbmVy
-LiBUaGUgY29udGFpbmVyIGFuZCBob3N0IGFyZSBvbiB0aGUgc2FtZSBtYWNoaW5lLCBidXQg
-dGhlcmUgaXMgbm8gbmV0d29yayBjb25uZWN0aW9uIGJldHdlZW4gdGhlbSkuICZndDsgJmd0
-OwogICAgJmd0OyAmZ3Q7ICZndDsgJmd0OyAmZ3Q7IEhpLCAmZ3Q7ICZndDsgY3VycmVudGx5
-IG9ubHkgVENQIGlzIHN1cHBvcnRlZCBidXQgdGhlIGNoYW5nZSBzaG91bGQgbm90IGJlIHRo
-YXQgZGlmZmljdWx0LiAmZ3Q7ICZndDsgJmd0OyAmZ3Q7IEhpLCAmZ3Q7IHNvbWV0aGluZyBs
-aWtlIHRoaXMgc2hvdWxkIGRvIChub3QgdGVzdGVkKTogJmd0OwogICAgJmd0OyBkaWZmIC0t
-Z2l0IGEvc3JjL2xpc3Rlbi5jIGIvc3JjL2xpc3Rlbi5jICZndDsgaW5kZXggZDAwMzU4ZC4u
-MjkyYjIwYSAxMDA2NDQgJmd0OyAtLS0gYS9zcmMvbGlzdGVuLmMgJmd0OyArKysgYi9zcmMv
-bGlzdGVuLmMgJmd0OyBAQCAtMzksMTIgKzM5LDE1IEBAICZndDsgI2luY2x1ZGUgJmd0OyAj
-aW5jbHVkZSAmZ3Q7ICZndDsKICAgICsjaW5jbHVkZSAmZ3Q7ICsgJmd0OyAjaW5jbHVkZSAi
-bGlzdGVuLmgiICZndDsgI2luY2x1ZGUgIngxMXNwaWNlLmgiICZndDsgJmd0OyAjZGVmaW5l
-IFNQSUNFX1VSSV9QUkVGSVggInNwaWNlOi8vIiAmZ3Q7ICsjZGVmaW5lIFNQSUNFX1VOSVhf
-VVJJX1BSRUZJWCAic3BpY2UrdW5peDovLyIgJmd0OyAmZ3Q7IC1pbnQKICAgIGxpc3Rlbl9w
-YXJzZShjb25zdCBjaGFyICpsaXN0ZW5fc3BlYywgY2hhciAqKmFkZHIsIGludCAmZ3Q7ICpw
-b3J0X3N0YXJ0LCBpbnQgKnBvcnRfZW5kKSAmZ3Q7ICtpbnQgbGlzdGVuX3BhcnNlKGNvbnN0
-IGNoYXIgKmxpc3Rlbl9zcGVjLCBjaGFyICoqYWRkciwgaW50ICZndDsgKnBvcnRfc3RhcnQs
-IGludCAqcG9ydF9lbmQsIGludAogICAgKmZsYWdzKSAmZ3Q7IHsgJmd0OyBpbnQgbGVhZGlu
-ZyA9IDA7ICZndDsgaW50IHRyYWlsaW5nID0gMDsgJmd0OyBAQCAtNTQsNiArNTcsMTUgQEAg
-aW50IGxpc3Rlbl9wYXJzZShjb25zdCBjaGFyICpsaXN0ZW5fc3BlYywgY2hhciAmZ3Q7ICoq
-YWRkciwgaW50ICpwb3J0X3N0YXJ0LCBpbnQgKnBvciAmZ3Q7ICZndDsgKnBvcnRfc3RhcnQg
-PQogICAgKnBvcnRfZW5kID0gLTE7ICZndDsgKmFkZHIgPSBOVUxMOyAmZ3Q7ICsgKmZsYWdz
-ID0gMDsgJmd0OyArICZndDsgKyBpZiAoc3RybmNtcChsaXN0ZW5fc3BlYywgU1BJQ0VfVU5J
-WF9VUklfUFJFRklYLCAmZ3Q7IHN0cmxlbihTUElDRV9VTklYX1VSSV9QUkVGSVgpKSA9PSAw
-KSB7ICZndDsgKyBsaXN0ZW5fc3BlYyArPQogICAgc3RybGVuKFNQSUNFX1VOSVhfVVJJX1BS
-RUZJWCk7ICZndDsgKyAmZ3Q7ICsgKmZsYWdzID0gU1BJQ0VfQUREUl9GTEFHX1VOSVhfT05M
-WTsgJmd0OyArICphZGRyID0gc3RyZHVwKGxpc3Rlbl9zcGVjKTsgJmd0OyArIHJldHVybiAw
-OyAmZ3Q7ICsgfSAmZ3Q7ICZndDsgLyogQWxsb3cgZm9ybSBvZiBzcGljZTovLyAqLyAmZ3Q7
-IGlmCiAgICAoc3RybGVuKGxpc3Rlbl9zcGVjKSAmZ3Q7IHN0cmxlbihTUElDRV9VUklfUFJF
-RklYKSkgJmd0OyBkaWZmIC0tZ2l0IGEvc3JjL2xpc3Rlbi5oIGIvc3JjL2xpc3Rlbi5oICZn
-dDsgaW5kZXggNzhmODc5Mi4uODZkNTU5NCAxMDA2NDQgJmd0OyAtLS0gYS9zcmMvbGlzdGVu
-LmggJmd0OyArKysgYi9zcmMvbGlzdGVuLmggJmd0OyBAQCAtMjUsNwogICAgKzI1LDcgQEAg
-Jmd0OyAvKi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gJmd0OyAqKiBQcm90b3R5cGVzICZndDsg
-KiotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLSovCiAgICAmZ3Q7IC1pbnQgbGlzdGVuX3BhcnNlKGNv
-bnN0IGNoYXIgKmxpc3Rlbl9zcGVjLCBjaGFyICoqYWRkciwgaW50ICZndDsgKnBvcnRfc3Rh
-cnQsIGludCAqcG9ydF9lbmQpOyAmZ3Q7ICtpbnQgbGlzdGVuX3BhcnNlKGNvbnN0IGNoYXIg
-Kmxpc3Rlbl9zcGVjLCBjaGFyICoqYWRkciwgaW50ICZndDsgKnBvcnRfc3RhcnQsIGludAog
-ICAgKnBvcnRfZW5kLCBpbnQgKmZsYWdzKTsgJmd0OyBpbnQgbGlzdGVuX2ZpbmRfb3Blbl9w
-b3J0KGNvbnN0IGNoYXIgKmFkZHIsIGludCBzdGFydCwgaW50IGVuZCwgaW50ICpwb3J0KTsg
-Jmd0OyAmZ3Q7ICNlbmRpZiAmZ3Q7IGRpZmYgLS1naXQgYS9zcmMvc3BpY2UuYyBiL3NyYy9z
-cGljZS5jICZndDsgaW5kZXggMGM2YzYxMC4uZmU1YmUxNwogICAgMTAwNjQ0ICZndDsgLS0t
-IGEvc3JjL3NwaWNlLmMgJmd0OyArKysgYi9zcmMvc3BpY2UuYyAmZ3Q7IEBAIC01ODIsOSAr
-NTgyLDEwIEBAIHN0YXRpYyBpbnQgdHJ5X2xpc3RlbihzcGljZV90ICpzLCBvcHRpb25zX3Qg
-Km9wdGlvbnMpICZndDsgY2hhciAqYWRkciA9IE5VTEw7ICZndDsgaW50IHN0YXJ0OyAmZ3Q7
-IGludCByYzsgJmd0OyArCiAgICBpbnQgZmxhZ3M7ICZndDsgJmd0OyAmZ3Q7IC0gcmMgPSBs
-aXN0ZW5fcGFyc2Uob3B0aW9ucy0mZ3Q7bGlzdGVuLCAmYW1wO2FkZHIsICZhbXA7c3RhcnQs
-ICZhbXA7cG9ydCk7ICZndDsgKyByYyA9IGxpc3Rlbl9wYXJzZShvcHRpb25zLSZndDtsaXN0
-ZW4sICZhbXA7YWRkciwgJmFtcDtzdGFydCwgJmFtcDtwb3J0LCAmYW1wO2ZsYWdzKTsKICAg
-ICZndDsgaWYgKHJjKSAmZ3Q7IHJldHVybiByYzsgJmd0OyAmZ3Q7IEBAIC01OTksNyArNjAw
-LDcgQEAgc3RhdGljIGludCB0cnlfbGlzdGVuKHNwaWNlX3QgKnMsIG9wdGlvbnNfdCAqb3B0
-aW9ucykgJmd0OyB9ICZndDsgJmd0OyBpZiAoYWRkcikgeyAmZ3Q7IC0gc3BpY2Vfc2VydmVy
-X3NldF9hZGRyKHMtJmd0O3NlcnZlciwgYWRkciwgMCk7CiAgICAmZ3Q7ICsgc3BpY2Vfc2Vy
-dmVyX3NldF9hZGRyKHMtJmd0O3NlcnZlciwgYWRkciwgZmxhZ3MpOyAmZ3Q7IGZyZWUoYWRk
-cik7ICZndDsgfSAmZ3Q7ICZndDsgRnJlZGlhbm8KICA8L2Rpdj4KPGJyPjxicj4tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS08YnI+VGhpcyBtYWlsIHdhcyBz
-ZW50IGJ5IENvbmZpZGVzayBzZWN1cmUgbWFpbCBzZXJ2aWNlLiBDaGVjayBpdCBvbiA8YSBo
-cmVmPSdodHRwczovL3d3dy5jb25maWRlc2suY29tJz5odHRwczovL3d3dy5jb25maWRlc2su
-Y29tPC9hPg==
+Otherwise I think the series looks roughly how I'd expect it to look.
+-Daniel
 
---=_80d9461c8f5fe4838f48ae264e63923b--
+>  
+>  	/* IMPORTANT: Below are all the legacy flags, add new ones above. */
+>  
+> diff --git a/include/drm/drm_file.h b/include/drm/drm_file.h
+> index e0a73a1e2df7..3e5c36891161 100644
+> --- a/include/drm/drm_file.h
+> +++ b/include/drm/drm_file.h
+> @@ -223,6 +223,18 @@ struct drm_file {
+>  	 */
+>  	bool is_master;
+>  
+> +	/**
+> +	 * @supports_virtual_cursor_plane:
+> +	 *
+> +	 * This client is capable of handling the cursor plane with the
+> +	 * restrictions imposed on it by the virtualized drivers.
+> +	 *
+> +	 * The implies that the cursor plane has to behave like a cursor
+> +	 * i.e. track cursor movement. It also requires setting of the
+> +	 * hotspot properties by the client on the cursor plane.
+> +	 */
+> +	bool supports_virtual_cursor_plane;
+> +
+>  	/**
+>  	 * @master:
+>  	 *
+> -- 
+> 2.34.1
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
