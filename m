@@ -1,53 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6836259B2BF
-	for <lists+spice-devel@lfdr.de>; Sun, 21 Aug 2022 10:26:29 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFC1B59B315
+	for <lists+spice-devel@lfdr.de>; Sun, 21 Aug 2022 12:14:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DD0E14AEF5;
-	Sun, 21 Aug 2022 08:26:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4A08118A1CA;
+	Sun, 21 Aug 2022 10:14:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E7ED514AEF4
- for <spice-devel@lists.freedesktop.org>; Sun, 21 Aug 2022 08:26:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1661070378;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=XcpvOS/U4GdHPLBpvJzByg5Ov95fOXSlwWPqaiQLKz4=;
- b=caoQlawjbTrqHq2W13URcLMRRlMsnH0zF0aJ1F3r8Qo1LOLfJ+433ZcubF9QhhrSz6nqtK
- ufmH+2XN84xmVN509wAx5bjnfO98aWPuppefH0E+iB56Qiszi6HiFBhjyK8xMYd6ovfbaV
- KvNRzim+GIUIbmPq1w0JNLizalWgjM8=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-446-SD2ZHb1QPF60vXV2V3OdVw-1; Sun, 21 Aug 2022 04:26:17 -0400
-X-MC-Unique: SD2ZHb1QPF60vXV2V3OdVw-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CE081811E75;
- Sun, 21 Aug 2022 08:26:16 +0000 (UTC)
-Received: from localhost (unknown [10.40.192.43])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6A053492C3B;
- Sun, 21 Aug 2022 08:26:16 +0000 (UTC)
-Date: Sun, 21 Aug 2022 10:26:15 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: Jonathon Bauer <jbauer@firelandsit.com>
-Message-ID: <20220821082615.vs6fpimm3gai36oq@tapioca>
-References: <DM4PR17MB587332F4914A9864684C628BCF6C9@DM4PR17MB5873.namprd17.prod.outlook.com>
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0F83618A198
+ for <spice-devel@lists.freedesktop.org>; Sun, 21 Aug 2022 10:14:38 +0000 (UTC)
+Received: by mail-oi1-x232.google.com with SMTP id w197so9281050oie.5
+ for <spice-devel@lists.freedesktop.org>; Sun, 21 Aug 2022 03:14:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=WJ4kjsMGi6KQF6NNmJoXVurwYpyM/ffglQlwRHDor3M=;
+ b=kALutf8rw/gd9QcIm8mMEQpZZbpESDynS6EfMqpZJXujrUvgSc2COvNXLXPDfd08+n
+ A9FMkeDTz6FZEFz+/89wbdoUvAy9w1krpj3TEdoztYNiD/PUvN/VgsRZHk4Z0H3aDZLT
+ 1s2d08AsWqHWTt5ecoS8ABGDqF4SrcDlLtGsKyGa7irAa6TTB12H90BeP47lvVP+GD3c
+ EFXhMb/ul/sJYumSxV2sqBvc70SEch5wZSDhitcYWcpj1wOQTqxQSfrkdMTn91CdOSOB
+ geyTB5xMYXr+vgiLzMn8N8i8feeBpkJzOCNLOK04Qufi48RFB4ulq4nni4PY2fYk9YsV
+ O/EQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=WJ4kjsMGi6KQF6NNmJoXVurwYpyM/ffglQlwRHDor3M=;
+ b=4Vpp2oMSUL1hj1RrYeYNy5lfZngordSUYzjkS61/e3NiLEl/ZjQl9gDn2lDtVUOIq6
+ S8e3FwlmfFzOKjN9TF13GVrHGSzsWFylUHCX43pPIvsSPFL1Z58loZaSzjkLoJFKeOpE
+ rG4t+9y9lD+AOE7AmAYVKCBdTzrjlquC4wAGaV3sfnlSHoQpMlNvg9e7RXrhSva3671U
+ OC4h8G/YnUX+NhX8ZrPD+OrEkeaXnz85t3NTqvwU8DApeYbGvxM2E88oz2Kmrz/Udufc
+ DtqZcU+T4Gof2o1iJpA4j5shG6H+pAMMQ2GJH6OcnauGA9hgb7bUKB0+h0dYl2p1NZtE
+ DHjA==
+X-Gm-Message-State: ACgBeo2Wndv7bIgnxXLDPzJrlEYKqnRC91gyaahwz9wVlbTJkP+2cU7G
+ +re4u3rIc4C/Kaft36dNV5713SZFYCenXZwgm/c=
+X-Google-Smtp-Source: AA6agR4TuL+D8dYwbGXZK91vqcYukFvwxLB5QZ0kqVMvdWtm4ryBrCDSrVuWaf6lpaKbia8MIRxTjVC6sziCFcbPuSw=
+X-Received: by 2002:a05:6808:181e:b0:344:c8a8:c30c with SMTP id
+ bh30-20020a056808181e00b00344c8a8c30cmr7076857oib.179.1661076877310; Sun, 21
+ Aug 2022 03:14:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="rxigklphq5m7yiwd"
-Content-Disposition: inline
-In-Reply-To: <DM4PR17MB587332F4914A9864684C628BCF6C9@DM4PR17MB5873.namprd17.prod.outlook.com>
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
-Subject: Re: [Spice-devel] Windows Spice Guest Tools Silent Install Found
+References: <76c675b0-8955-82b7-9c32-1f7fb18bebe9@diateam.net>
+ <20220821081942.rtfdwntvlmu6kqfk@tapioca>
+In-Reply-To: <20220821081942.rtfdwntvlmu6kqfk@tapioca>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Sun, 21 Aug 2022 11:14:25 +0100
+Message-ID: <CAHt6W4diTuY=F0bsP=Rh2ikisGNaTegHUbdw-Q4c-uLCHPCXeA@mail.gmail.com>
+To: Victor Toso <victortoso@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Spice-devel] x11-spice equivalent for Windows
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,59 +63,35 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ Jonathan Winterflood <jonathan.winterflood@diateam.net>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---rxigklphq5m7yiwd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-Hi,
-
-On Fri, Aug 19, 2022 at 07:16:04PM +0000, Jonathon Bauer wrote:
-> Hi Spice Devs,
+Il giorno dom 21 ago 2022 alle ore 09:20 Victor Toso
+<victortoso@redhat.com> ha scritto:
 >
-> I figured out a way to run the Windows spice guest tools
-> installer silently, enabling automated deployment. Just run the
-> installer as System, and add the /S switch (case sensitive). I
-> posted more details on Reddit here:
-> https://www.reddit.com/r/qemu_kvm/comments/9ivlkp/spice_windows_guest_tools_silent_install/
+> Hi Jonathan,
 >
-> Please consider adding this to your documentation, so it's not
-> so hard to find. Adding it to the Spice-Space download page,
-> under the "Windows binaries" section may be a good place.
+> On Fri, Aug 19, 2022 at 06:33:18PM +0200, Jonathan Winterflood wrote:
+> > Hello,
+> >
+> > We are using SPICE with Qemu with much success, but were
+> > wondering whether a solution similar to x11-spice exists for
+> > sharing an existing Windows system via SPICE (rather than then
+> > usual RDP/VNC, etc.), for use on e.g. bare metal, VirtualBox,
+> > Vmware, etc. that do not provide "normal" spice servers like
+> > Qemu does.
+>
+> I'm not aware of anyone that has started such project. I think
+> that should be possible as spice-sever does build on windows and
+> can be enabled for windows build of QEMU.
+>
+> Cheers,
+> Victor
 
-I think this is more useful when script unattended installations,
-correct?
+There's a project at https://github.com/mathslinux/winspice or
+https://gitlab.freedesktop.org/spice/win32/winspice.
+The status is "as it is". I personally still have to test it in any way.
 
-Feel free to drop a patch to our website's repo :)
-
-    https://gitlab.freedesktop.org/spice/spice-space-pages
-
-Thanks,
-Victor
-
---rxigklphq5m7yiwd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmMB7CcACgkQl9kSPeN6
-SE9J9xAAuyywZM0GJa0RKykU9ugAJslJcnii6eHFQs155WhLkPxNK57n/wzfUR4S
-fb7DI6d3nq3Bg3nX060c8hgmIcBclf6/lg2alNq0qSb8JNMzpy1HwhrB12ZhmzkE
-X3FQrBKaJXLKCl68t63atKPfhhtemavBh+OYbUutQ7/2aaF1g8WKJ/luBvKu+EUg
-AQ1zLCu4r1oEJhx7EFWoOJvuKBPmH9TxCq6jDh0kvKEMpwGIYKzj9yKiGC0Vg8nB
-9NcXLH38QuKzB2yY2jfBUcEfNI2HsyjzJfOSjfSp6odwTKG7tJofdRfcvvpgdoBF
-1V1Z/aTo4R5Ex4qrjTzBFosWvkj3Kqhb5+WQWLWKtfEGMbPVYC9wZC/1UBtBpA3Q
-FtbTWE1N7SP4iI9Sr6PWoWDaJMpyRhMy6pxYcZzD2DCycoEuosqsLptdPZdxiy4c
-W1Edz4WOXeRGULjzwdzti0TWaGxjJ4YVPSh15lATkoYkbqXEE43NlGEJkhL6H43g
-pe1wo9qLOMGHO2MM9vYteUL1JMPCbpzp/IZDx1HwiMqUB6amz4Pu5RKDNN5Jl1h0
-vbdgCGJfrh35Fx2SoR1YVXMugZ4dMjMHTjVyglGFqsJ+twcbiKRdOezqj2Q7RYc4
-kAHcU61VfnrW7AKxgLtjSnALQhRXgORBNbcYFGa7RidysGc2KnM=
-=c7hm
------END PGP SIGNATURE-----
-
---rxigklphq5m7yiwd--
-
+Frediano
