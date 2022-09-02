@@ -2,52 +2,52 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 534175AA418
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Sep 2022 02:08:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 841135AA85E
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Sep 2022 08:53:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0053D10E3B8;
-	Fri,  2 Sep 2022 00:08:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AF0A710E770;
+	Fri,  2 Sep 2022 06:53:34 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B85110E3B8
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Sep 2022 00:08:18 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id j26so342644wms.0
- for <spice-devel@lists.freedesktop.org>; Thu, 01 Sep 2022 17:08:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date; bh=iEBuEU5KUTXH/PaiYk/GiPBb+TjRKSAa8f4JB/rAWl0=;
- b=K6Vp/ZOx+pjyWI718oR4I1lQynVam4mVyEcVC6Z06dZoa4KUm65Ld6r77PdyDsq2V3
- PrpmmYxKXHq1uB0O2gwut/Iz68mEjjAbAk9wFg7m2icr7LODUXVAg/fP2cSL5EW7Gbgg
- Yi7/BD8x4lTQREInYpbtN/4k8A40fNyHmd9mUlfdwsP0HRkmfX4Nzl5LRAKpRJbhzZFz
- oud0lrHAjBpckEyjP0Bw9h4Nfx0+NehJ4hMUry8RZKJeOFtYhrv0uuuH5rVtyLvvUP31
- 40fpeLFhwARZkmK89rY/W3z5/UfQ5HyOxf2VZJygii4pFhVyZAq3UorMnh623GBQqXfF
- d0xQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date;
- bh=iEBuEU5KUTXH/PaiYk/GiPBb+TjRKSAa8f4JB/rAWl0=;
- b=6q1WfTYJKxQLkeQQFCpPpKEWsbyEHsLxJcNSYc232WQmkuWAUPP0JenFwOoYNlftyg
- Wj9VeY1XTr8UXytyepR9nkQm223WwoSOvGnEj0LuuW2Mkh2aEW5MkVUrbvv9qGk3luAo
- PxKiqM6XcX/KBtk7SkuUUQrqCtd3BenK76XQuDt5BVDEgVAK+J54Gpl89FJgJQScGQkj
- UI9q3OR/28q62MQ38xsR2eHQAIpxMD9p8ITZvfOikdI91rklcqdm2ecsp+ONj7NnoTp0
- 7YsA/NG5oLLgIKQ9ul17fsMX8wPaSGzD38LBDCmqWV2XP0/ZBuY1RjZtyklF7/dNxAgG
- mksg==
-X-Gm-Message-State: ACgBeo25MhKQUDgyIue4t736dHvh9Du7F32Ora4ACbmDzlxePByKtJs5
- cUWD6j7HqtbSru6N4z7rTDO6AeCU4CHwqDVtrZuMkdF8ZIw=
-X-Google-Smtp-Source: AA6agR4afPtbBcGBIWiiwltaSwkZCqW+yVoyi4HJga0LwtNdq/IzgasfN69ZHoyPemgWAuDbP0KXuyfAkREflk3c9e0=
-X-Received: by 2002:a05:600c:5105:b0:3a8:3f3c:ca90 with SMTP id
- o5-20020a05600c510500b003a83f3cca90mr874506wms.81.1662077296378; Thu, 01 Sep
- 2022 17:08:16 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D6EEA10E770
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Sep 2022 06:53:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1662101610;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=VMalhr/p924f6PR2MQd6gW3dqlxVqXYxRPS5Gny8ghE=;
+ b=VSgNgD40yWQjDACFK/fvtDF1oX+rtdt66yQX73JkqxcOp/NdwLWUywFvXiJl+NByOfFp73
+ RiLu2sO9xYQ1bNpGVdK+e8VBAliK6YoobKriQSVouldS0OGIlAdchr7c4owvYP+/uhCvRz
+ TEq/6gZyv9zYJhr0pT5N0lhhBWpZNkQ=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-445-o9rdz4IzP5SGk5qooHp1ZQ-1; Fri, 02 Sep 2022 02:53:26 -0400
+X-MC-Unique: o9rdz4IzP5SGk5qooHp1ZQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0767B29AA3AC;
+ Fri,  2 Sep 2022 06:53:26 +0000 (UTC)
+Received: from localhost (unknown [10.40.193.90])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 930CC40B40C7;
+ Fri,  2 Sep 2022 06:53:25 +0000 (UTC)
+Date: Fri, 2 Sep 2022 08:53:24 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Carlos =?utf-8?B?R29uesOhbGV6?= <piteccelaya@gmail.com>
+Message-ID: <20220902065324.kqoezlbkidndyx4m@tapioca>
+References: <CAGeBE=yhPCXNeR72Oiy83yS+gC+P82_tSX59XQ4dSvUMDHJGRA@mail.gmail.com>
 MIME-Version: 1.0
-From: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
-Date: Fri, 2 Sep 2022 00:08:04 +0000
-Message-ID: <CAGeBE=yhPCXNeR72Oiy83yS+gC+P82_tSX59XQ4dSvUMDHJGRA@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="000000000000d708d505e7a6860a"
-Subject: [Spice-devel] qxldod driver for Windows 11
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="oay3tbox73fmgzrv"
+Content-Disposition: inline
+In-Reply-To: <CAGeBE=yhPCXNeR72Oiy83yS+gC+P82_tSX59XQ4dSvUMDHJGRA@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
+Subject: Re: [Spice-devel] qxldod driver for Windows 11
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,30 +59,66 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000d708d505e7a6860a
-Content-Type: text/plain; charset="UTF-8"
 
-I downloaded latest virtio-win ISO, and by browsing it I noticed that,
-unlike the other drivers, for the qxldod one there's only up to win10, and
-no explicit win11 versions.
-
-Does this mean that there are no drivers for Windows 11, and no possibility
-of setting up a VM with full SPICE support?
-
-Thanks beforehand.
-
---000000000000d708d505e7a6860a
-Content-Type: text/html; charset="UTF-8"
+--oay3tbox73fmgzrv
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>I downloaded latest virtio-win ISO, and by browsing i=
-t I noticed that, unlike the other drivers, for the qxldod one there&#39;s =
-only up to win10, and no explicit win11 versions.</div><div><br></div><div>=
-Does this mean that there are no drivers for Windows 11, and no possibility=
- of setting up a VM with full SPICE support?</div><div><br></div><div>Thank=
-s beforehand.<br></div></div>
+Hi Carlos,
 
---000000000000d708d505e7a6860a--
+On Fri, Sep 02, 2022 at 12:08:04AM +0000, Carlos Gonz=E1lez wrote:
+> I downloaded latest virtio-win ISO, and by browsing it I
+> noticed that, unlike the other drivers, for the qxldod one
+> there's only up to win10, and no explicit win11 versions.
+>
+> Does this mean that there are no drivers for Windows 11, and no
+> possibility of setting up a VM with full SPICE support?
+>
+> Thanks beforehand.
+
+You are correct, the last cycle of development was focused for
+windows 10.
+
+I expect windows 11 to maintain some compatibility with windows
+10 so the drivers should work to some extent but I did not test
+it.
+
+I'd not hope for further development on qxl unless there is
+someone interested in investing time on it (and it would take
+some time).
+
+I'd instead switch to virtio-vga / virtio-gpu as this seems to
+have an active community.
+
+    https://github.com/virtio-win/kvm-guest-drivers-windows
+
+Cheers,
+Victor
+
+--oay3tbox73fmgzrv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmMRqGMACgkQl9kSPeN6
+SE9YURAAqx8WKZXCyWqYIAwD/8FIPtWIlU0wyGbpI6rMJz+bPnU+JSYYFMVxV9qd
+CMexcqkJhUVjJ7Wfd7svkfSJQpgf+nE1GBDFohlYOjA4HB2WJGEzCms1ELjbWZG1
+/0xeUJLPCTMCQRk7wIJA35tCQkwLFSCXQYE2Wlj4cETU5sTpuePUA/thmCLlUsRS
+Ojh1J+q9D/6n3ewYEhFIw6gjnxxF7jsr/Z0A1LAfGghZBA5cydOku5sBjUlRaX2i
+CUxfy2toV4Qms92F4NzhU1lOAcaMHuO5LiIfxcJd5bWOMJaTSGOC3EENEnElPohh
+P6d9OtqE23gJBuogTR/qrjcqZVJUqitRx9T/y9He1MAb3f4UUD80MY/xXUbYDD+I
+oDdXXTG/2Lf9ZFqmVPJq+w3t9K84D0dFaY08OgCfBatwHOw2Ii9mzSA8KdA/L9dN
+kW67OFnMr1MaBnovet/nOx28gsPUozTys5GbH/otiH7lx52rNXOL99eLgZ6s+aqm
+SzsNZLE25AvN7UT6QYDhVBweJNvU8U178hlKE0I9yv9UkNlHufqOvWB8bg2R3Mjl
+XVtq92turYD6ZTa8YW300U9e6b96BWwkbD9OI4jh07o5I9a/f6sWMoKXpr/U6n6w
+vPbhFgAQftMsTy87d+QSdOfYD17SR9tx51q0xq1U3qLxwDOVpNQ=
+=gTug
+-----END PGP SIGNATURE-----
+
+--oay3tbox73fmgzrv--
+
