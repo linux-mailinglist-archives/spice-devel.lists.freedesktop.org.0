@@ -2,57 +2,96 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 606365AC1AF
-	for <lists+spice-devel@lfdr.de>; Sun,  4 Sep 2022 01:05:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A43A5ADEB9
+	for <lists+spice-devel@lfdr.de>; Tue,  6 Sep 2022 07:03:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F25710E3C8;
-	Sat,  3 Sep 2022 23:05:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8190210E2F9;
+	Tue,  6 Sep 2022 05:03:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ABA5210E3C8
- for <spice-devel@lists.freedesktop.org>; Sat,  3 Sep 2022 23:05:18 +0000 (UTC)
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-32a09b909f6so44729507b3.0
- for <spice-devel@lists.freedesktop.org>; Sat, 03 Sep 2022 16:05:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bogomips.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=ZMp7F/yoh/Z73fzjYdrpVuyByLLVDXY/TFzfTDGIfmM=;
- b=HLKhqZCv/1wQP/5ULm+5msskumBmyXINwF2V1Kyp21Gx3EZyV3QQlkeckCDkS32tzN
- 8qvPzmb0rXIE+wCbhdtUi2ojgwPbtJKO0Th5GVksn61tpnLX3fJbnT3ItJFf+4h0lNZl
- qt/KQtLry/3kyqqqwKU334yJWUFr9z1joK+RY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=ZMp7F/yoh/Z73fzjYdrpVuyByLLVDXY/TFzfTDGIfmM=;
- b=Hnl2GdBgAeOfl9ldg8yUZLz86Bhn0YOiGVQnoYE6pGDj5DG8L6OdcYpcNLVOX4iJ5e
- Anf+eio6lhJNNH1HIpQ6/9EylDYPj9GImhwmfPi4BWstLCKFVbNaN2ueP4nyEsuzbieV
- 8f7up1OiipsX+keIJea+3uRKv0wPsLU7d8gNcHLGJ+d0eS7MNASyKiejOuhJOpG5u0cs
- UBECVhchw4BQnyny2yBRnq0flSdfDk02ZRZ49WXPPcgqZpz3Cn6HnxNCqurOgXZHXGIQ
- VFYAkkpuUmSbLvqVwMbVV3yDLL8veYdh7HzBFvT+1agmxuNZcNXooeqewzBVIKTdeFvh
- cY7A==
-X-Gm-Message-State: ACgBeo1nHiSEKxLtT9k3L13/0S/1NiVy9zQQZtKH7tjUunqYFE2+wtdO
- tLFQfxvrH3m/9lPDkkcWvYMO4YuQcXxjRc3BAsQ6pw==
-X-Google-Smtp-Source: AA6agR5c+7suxBblMCwaRX9ag1d6wXXNk2a58vXT6wiacg+oZVUojyRdCMAoShlxfAo3dcbbdK3FVgj0hn4fYkIsNpc=
-X-Received: by 2002:a0d:cd43:0:b0:329:febf:8c25 with SMTP id
- p64-20020a0dcd43000000b00329febf8c25mr32329143ywd.90.1662246317100; Sat, 03
- Sep 2022 16:05:17 -0700 (PDT)
+Received: from AUS01-ME3-obe.outbound.protection.outlook.com
+ (mail-me3aus01olkn2149.outbound.protection.outlook.com [40.92.63.149])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9919910E2F9
+ for <spice-devel@lists.freedesktop.org>; Tue,  6 Sep 2022 05:03:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WOMiGLr0F14/NH08TyGyDUMeE0ioHc4uQWOqQjJWHv0renT4hnHh1NISJboJhPEaS39IIcRQXCY80B2r9NGYLNHiTS0wq6sYQsH9K6A3hOAOmoCTybblVq9atUc1dsn3VshgKv5pmWRa6Uh/KBOFu7SLiobnDjAqJaBblV2HLIZAsr6RaZ8HRHOskTEpBj/gdcfrMEuLodTp6RrtoFCNoraMiJcxYwJpdmogUvTi8Bl9jKVOYUqzWICKTAJwPhCbiOuYn00kaRK3yqpaWfaOuYWEn2Or2k3K5maylm9vS0ROvX2RD3Hin10bfVLDnoIj2xhfHsLyF39cqC+T6dpppA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qzNpD+rMLM6Ht11KzD46d5S1/dST07UAtj3PsvzeyrA=;
+ b=MBLiVxT8lKczYaYx/8mNzk+npz3yQOuvwK7m5igZJ2M02L1u9/WobylGpEXBq4g76A1ODSJrhU65gAs4rJhNnxJpSaOVmDnH0ChsfdXAutLgyL1X4z7n7P/9fNPAg9ws3hYNOh6hN6hBVEt6xEgoGTHk0D3HoWfXd0l6GfQVqvJRYvy7nDJuIHv5F4IvXRXcMB66pYgFc1Z75v5qHvi+qMhVSF50C7+zlui30L0l3Gd3zb4Hu9SxCZNieS+57nD/PL/k86XcYSgmf1V10qQ0izkNP90GYdvdXUSax1v6fHptNE3ZaZdwDMPDUj+ByObZRNuz1sTUH6q2POxPhBCQDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qzNpD+rMLM6Ht11KzD46d5S1/dST07UAtj3PsvzeyrA=;
+ b=UCTsRVIb5alOYrA7MHgMSx2t54PDXSpNDV6QU1pHhZuVtjjjckM0OPu8/Zl73uZvOF78CIKLc+cSgxGCYASwmZnzSfWeoSMt1yhp+aYDwFQVZrDCE5vtzN6BfqmyuCGK4CB63u8m/WgEOgpl2Vp+jAu5A/vL5xoilo1M62ujmtiD5Buy256v++Hlpd5zjkXmMKHK1I5ENLjkppO/w3vJ0V5qBSTPzuCBEBLJ9zPGB0ghI5ZMhlKRlAMqS9PLeuFL1HlIEhdVPHNjZcsAavJ8J6mhs6kCWnhcB8RvF5DKoH5X9bLgWBm2O2Mgo0QDlRFTXfXYo2izSHCHwYneiIokeg==
+Received: from SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:169::6) by
+ MEYP282MB1991.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:b5::16) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5588.10; Tue, 6 Sep 2022 05:02:57 +0000
+Received: from SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM
+ ([fe80::45a5:eb4e:4045:7c49]) by SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM
+ ([fe80::45a5:eb4e:4045:7c49%7]) with mapi id 15.20.5588.018; Tue, 6 Sep 2022
+ 05:02:57 +0000
+From: qi zhou <atmgnd@outlook.com>
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Thread-Topic: [PATCH] unhide cursor if pos_x is negative
+Thread-Index: AQHYwatVE65mb9rpNEyAXLFA8MgFwA==
+Date: Tue, 6 Sep 2022 05:02:57 +0000
+Message-ID: <SYZP282MB3252EF544B06AD8AAF2E7746C97E9@SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM>
+Accept-Language: en-US, zh-CN
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [MLEkUcmCqE0Go2lxlxQLcoCZdsQu9VI8]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: be0747fc-dc69-459a-27eb-08da8fc5105c
+x-ms-traffictypediagnostic: MEYP282MB1991:EE_
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 6rkCaNXVUXy/xQLi3zcm2YdE/akPV1BhSbaLIZSjrrkZ5d0HziakWmY2Zx0RqxsaPk9079IXRf8ipiiKD7xAgA0Vx+RZ7yxyjqkGbO5bUOTUOD6EqFYqNUcBSayvNTjVJ7snfp3JXYVr3M15MMkwa1p0q/n7w9AJ0qEZxZcCWPb+Pqna8p7LgNIbHnxCpvuM09a7B9LBWRW/KRMRKvZzdKEiPti60jZ/XNYACA2TP69TeMLOWOvNzmGumEaAKKyUTZ5Fijc28PtalgnFC2gP6qqWHnb8hduSpEKO9GJIwgJzVM4diSJOvXmfZcx6ZQasMUoWdpcKdya5HzHK1aniIC2foU8J567rsD0xpyNxwVDbyEB15Qww2tBMohNPUl06T86n78bYHcKDLnejvHeR76r8EkCn5EYdvBktgheRjK/6yoAevuXOdweXQwUTjIohc5UUcPWHb0oCZniGLjJVjlvdafG8u/wkVPnFefQPsSvsHEyvtSm7QVkNjILptmgbryLz3snHSf/2PkfmyCFkwQ11zSal6QXi8rAWNq3XHub/lDijQxiH08xoAhbGAUDiD2uP7UxMTbOfKEnwzT9JZ5WW82ple6A5qly+Q0zIgX5lJzqzOf5tOYiyOiBEJ42dSYU+6tVM3j4G699PK+6y1Q==
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?jyxjEH8hxLWdvDig9Ywd4NCjrNnt0w6QU825VZrVnqDpzA7vvUyCI51Gkn?=
+ =?iso-8859-1?Q?nyc3vLnOyen4iyPcQZBLQwGIZNjhYxS4jkMmATW2IiV1M4D0rr7IyorCfD?=
+ =?iso-8859-1?Q?FB0WnbfJJONxYG+bpmRVb922p2BtzcGdO30B2I5Kz44YKPEJ4u1prEG2Y7?=
+ =?iso-8859-1?Q?Q7p6s2t1yk6VMNoDi0gkDmMs4rLdulEEFgL2E3f50i4j7sjKFd3xsydNM9?=
+ =?iso-8859-1?Q?HdM1b5wCdwD14kWDteljk/e4W+H9j8Ai6tzXnwjl6nSdfJnZizZ9VHrduR?=
+ =?iso-8859-1?Q?aibd/KreprkiS/+/lP88b2O4rHrh5qIcDYPz0suHPiqss6P7mToXOw0vPH?=
+ =?iso-8859-1?Q?u8hPnYn+gay9sEF4VTEcPo8gyThnfqsvtDr3qI6OpDtp74VYcCjJlb0Lt5?=
+ =?iso-8859-1?Q?0OHkpcspLj/Lixyp3MKE7sfgjruTwvgNxWlQLw0DvdNY97pxpbbcMf1x9m?=
+ =?iso-8859-1?Q?3dTOHqughmR1jFnViOyLrxfQCC3McFr3EqFQ5oF8kIWuEbFjahe3iYJ2G7?=
+ =?iso-8859-1?Q?s5v0TTaus/nyS9XZYk5QLvBnNZB+RVqSitQ6rUALflgbqC5Jlcr8499dzX?=
+ =?iso-8859-1?Q?eCgDXO1Week9AYZg//qxSIwYwR7REABE2w2YQHgriubRfDT8VLi4gRxjIp?=
+ =?iso-8859-1?Q?h5auogeJ3sOSWhLX/NkBRl+AUoNJyvKnnXcfIGVHsMOZVCH5MzPdqdJHuo?=
+ =?iso-8859-1?Q?j/m5MNv38lc88aoQ28CuPKncJJHkeGyxcyIC1Ar318eSu5+YLlR6SpjHx6?=
+ =?iso-8859-1?Q?fPlIOkKSwuDcSBkLvBnjvbkb4EtghvDqTbUuIaLmGs/KwUCW0jvZ4YT25d?=
+ =?iso-8859-1?Q?fbQheBcrEuGlL7rIpKTIEIqatZcW3X9LJMiFau01xRHOv8SjMN9TIjg7kk?=
+ =?iso-8859-1?Q?LeJzxiW9Alf8S9tyoEXmoY+l+59UwOsV9BhCM8niwU3rJ1mL84o3TK3Vnf?=
+ =?iso-8859-1?Q?Y+PapYUDSMa+eRYJagT/yvXi0Vcdl6j9CgjPWr3rgozeRuQkGvQtWAqhhc?=
+ =?iso-8859-1?Q?+pqpMc26sRY5L6EKHgxA0aKaU4cPjzxZjIDjuUEB/0mBITcWGhIE3NK5FA?=
+ =?iso-8859-1?Q?JItIOWbOgATjgK/SY27nn/XK9S2NdEh5AGzqljYuZUd1SQ1orUy+MGGSzW?=
+ =?iso-8859-1?Q?O+CykVZEnnF+Plihb5nU39O8BsKsPi85BKfYFVFmVrzSnXhWRdxl3pC0LF?=
+ =?iso-8859-1?Q?0NLorHlprjcfyYEfyxLHQ08NJor+jvicperkOcLhOV4k9B6ctsIuFpBm6T?=
+ =?iso-8859-1?Q?SF8HIAvk/KxyaVq7k4EUNZpSifrZmRdcvxY5oJA2F2mRbH+lCYEwQ4DNCx?=
+ =?iso-8859-1?Q?EGI2?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <CAGeBE=yhPCXNeR72Oiy83yS+gC+P82_tSX59XQ4dSvUMDHJGRA@mail.gmail.com>
- <20220902065324.kqoezlbkidndyx4m@tapioca>
- <CAGeBE=z8ee5V4_fT7rxOnaE_6g5idXke3UMLeQw3G-DGSADwfw@mail.gmail.com>
- <CAHt6W4cbdzRuo1Fkvi7fY+xrVSMf3HxP=F3-Z7Ej=R=mgZGFgg@mail.gmail.com>
- <CAGeBE=xEXafWkdBfL8Qn+ynx3eP1a5W1Rg9D68DfZsJ9Rj9wuA@mail.gmail.com>
-In-Reply-To: <CAGeBE=xEXafWkdBfL8Qn+ynx3eP1a5W1Rg9D68DfZsJ9Rj9wuA@mail.gmail.com>
-From: John Paul Morrison <jmorrison@bogomips.com>
-Date: Sat, 3 Sep 2022 16:05:06 -0700
-Message-ID: <CAO-kYtHsm4b328MRgVx_5zAMkMpvWm2wj3WweBDWhBT4UiW1iA@mail.gmail.com>
-To: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
-Content-Type: multipart/alternative; boundary="00000000000042aba605e7cde15a"
-Subject: Re: [Spice-devel] qxldod driver for Windows 11
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: be0747fc-dc69-459a-27eb-08da8fc5105c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Sep 2022 05:02:57.1369 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MEYP282MB1991
+Subject: [Spice-devel] [PATCH] unhide cursor if pos_x is negative
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,316 +103,38 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000042aba605e7cde15a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-The quickemu scripts (GitHub) seemed to work well with Win11 and swtpm.
-
-That=E2=80=99s too bad about Spice - so development is stopped?
-
-On Sat, Sep 3, 2022 at 8:30 AM Carlos Gonz=C3=A1lez <piteccelaya@gmail.com>
-wrote:
-
-> First, thanks *very* much for your complete explanations, and at the same
-> time offering apologies. Not justifiable, but I was kind of anxious and a
-> bit desperate of finally setting up a win11 VM with SPICE just the way I
-> did with win10.
->
-> I think this is already well known but, why SPICE? For me, because of all
-> the following features:
-> ---Graphic acceleration --even if just 2D, QXL worked *far* better than
-> any other available virtual driver
-> ---All the paravirtualized drivers, which are still offering the best
-> performance
-> ---Easy USB and sound redirection
-> ---Clipboard sharing
-> ---Copy-and-paste --even if just files and only from host to guest
-> ---Automatic resolution resizing with SPICE window
-> And perhaps other ones I may be already forgetting...
->
-> I already know what's said about software in general, that it's big enoug=
-h
-> and *always* comes and goes. But now that SPICE in general is dead, or in
-> the process of, it'll take many years for another entire solution offerin=
-g
-> *all* these features to appear.
->
-> I no longer want to set up windows VMs with generic virtualized drivers,
-> and all what you just explained further supports this way of thinking.
->
-> So, humbly trying to ask here, what else can I do? Or where else to try
-> asking?
->
-> Thanks very much and apologies again.
->
-> P.S.: small offtopic: I'm also having problems trying to set up TPM2
-> emulation for win11 VM, using swtpm package. I think the author, user
-> "stefanb", is an IBM employee, but employees never offer free support...
-> Where could I ask for support with this? Thanks again.
->
-> El s=C3=A1b, 3 sept 2022 a las 6:38, Frediano Ziglio (<freddy77@gmail.com=
->)
-> escribi=C3=B3:
->
->> Il giorno ven 2 set 2022 alle ore 22:23 Carlos Gonz=C3=A1lez
->> <piteccelaya@gmail.com> ha scritto:
->> >
->> > So the "rumors" are true: you (in general) really did discontinue/kill
->> the qxl drivers, if not the entire SPICE project soon. Was it because IB=
-M?
->> Since being sold to them the first one to die was Centos, now this...
->> >
->>
->> Hi Carlos,
->>    In Italy we use the expression "=C3=88 come sparare sulla Croce Rossa=
-"
->> (more or less "it's like shooting at the Red Cross").
->> It's like accusing a doctor trying to save a life that it's trying to
->> kill somebody.
->> As Victor is actively contributing to SPICE as a developer (you can
->> find multiple recent emails and commits in this ML and related
->> projects without much effort) is not kind to point fingers.
->>
->> > FYI:
->> >
->> https://gist.github.com/pojntfx/b860e123e649504bcd298aa6e92c4043#file-ma=
-in-sh-L32
->> >
->> https://lists.freedesktop.org/archives/virglrenderer-devel/2021-January/=
-001897.html
->> > virtio-gpu implies virgl, and currently only works on Linux guests;
->> RedHat people explicitly deemed the Windows work "not worthy".
->> >
->>
->> Let's get back to the technical side of this thread.
->> That's not entirely true. Virgl it's an "option" to virtio-gpu. By
->> default Virgl is not enabled. Virgl adds 3D support to Qemu virtual
->> cards, as far as I know it's the only virtual GPU (bypass are not
->> virtual) in Qemu supporting 3D. Although QXL was born alongside SPICE
->> while Virgl is more related to Qemu directly, efforts were made to
->> support all features QXL provides using virtio-gpu. So the technical
->> suggestion Victor gave is not against SPICE. You have also to consider
->> the way QXL works and how the graphics software stacks evolved in
->> time. QXL design it's 2D only, supporting a lot of specific commands
->> and options for Windows 95/98/XP. Yes, you read well, Windows XP...
->> which was declared unsupported 12 years ago! At that time OSes relay
->> to the GPU plenty of complex 2D commands. Nowadays most OSes (if not
->> all but surely Linux, Windows and Mac) use 3D commands for everything,
->> and many brushes, raster operations and similars are long since gone.
->> Taken all that into account, with a modern OS the commands QXL and
->> virtio-gpu use are basically the same.
->>
->> > Thanks for killing the project.
->> >
->>
->> Now let's get back to the less technical.
->> Beside reiterating that pointing fingers to Victor is not fair nor kind.=
-..
->> Yes, SPICE was, company wise, well founded and supported by Red Hat
->> (which _had_ a specific team for it). After RedHat was acquired by IBM
->> some investments were moved from desktop side to the cloud. More or
->> less RedHat/IBM thinks that spending money on Linux desktop is not
->> worth much. That includes SPICE, Virgl and Windows drivers but others.
->>
->> Regards,
->>   Frediano
->>
->> > El vie, 2 sept 2022 a las 6:53, Victor Toso (<victortoso@redhat.com>)
->> escribi=C3=B3:
->> >>
->> >> Hi Carlos,
->> >>
->> >> On Fri, Sep 02, 2022 at 12:08:04AM +0000, Carlos Gonz=C3=A1lez wrote:
->> >> > I downloaded latest virtio-win ISO, and by browsing it I
->> >> > noticed that, unlike the other drivers, for the qxldod one
->> >> > there's only up to win10, and no explicit win11 versions.
->> >> >
->> >> > Does this mean that there are no drivers for Windows 11, and no
->> >> > possibility of setting up a VM with full SPICE support?
->> >> >
->> >> > Thanks beforehand.
->> >>
->> >> You are correct, the last cycle of development was focused for
->> >> windows 10.
->> >>
->> >> I expect windows 11 to maintain some compatibility with windows
->> >> 10 so the drivers should work to some extent but I did not test
->> >> it.
->> >>
->> >> I'd not hope for further development on qxl unless there is
->> >> someone interested in investing time on it (and it would take
->> >> some time).
->> >>
->> >> I'd instead switch to virtio-vga / virtio-gpu as this seems to
->> >> have an active community.
->> >>
->> >>     https://github.com/virtio-win/kvm-guest-drivers-windows
->> >>
->> >> Cheers,
->> >> Victor
->>
->
-
---00000000000042aba605e7cde15a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">The quickemu scripts (GitHub) seemed to work well with Wi=
-n11 and swtpm.=C2=A0</div><div dir=3D"auto"><br></div><div dir=3D"auto">Tha=
-t=E2=80=99s too bad about Spice - so development is stopped?</div><div><br>=
-<div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Se=
-p 3, 2022 at 8:30 AM Carlos Gonz=C3=A1lez &lt;<a href=3D"mailto:piteccelaya=
-@gmail.com">piteccelaya@gmail.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;bo=
-rder-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)">=
-<div dir=3D"ltr"><div>First, thanks *very* much for your complete explanati=
-ons, and at the same time offering apologies. Not justifiable, but I was ki=
-nd of anxious and a bit desperate of finally setting up a win11 VM with SPI=
-CE just the way I did with win10.</div><div><br></div><div>I think this is =
-already well known but, why SPICE? For me, because of all the following fea=
-tures:</div><div>---Graphic acceleration --even if just 2D, QXL worked *far=
-* better than any other available virtual driver</div><div>---All the parav=
-irtualized drivers, which are still offering the best performance<br></div>=
-<div>---Easy USB and sound redirection</div><div>---Clipboard sharing</div>=
-<div>---Copy-and-paste --even if just files and only from host to guest</di=
-v><div>---Automatic resolution resizing with SPICE window</div><div>And per=
-haps other ones I may be already forgetting...</div><div><br></div><div>I a=
-lready know what&#39;s said about software in general, that it&#39;s big en=
-ough and *always* comes and goes. But now that SPICE in general is dead, or=
- in the process of, it&#39;ll take many years for another entire solution o=
-ffering *all* these features to appear.</div><div><br></div><div>I no longe=
-r want to set up windows VMs with generic virtualized drivers, and all what=
- you just explained further supports this way of thinking.</div><div><br></=
-div><div>So, humbly trying to ask here, what else can I do? Or where else t=
-o try asking?</div><div><br></div><div>Thanks very much and apologies again=
-.</div><div><br></div><div>P.S.: small offtopic: I&#39;m also having proble=
-ms trying to set up TPM2 emulation for win11 VM, using swtpm package. I thi=
-nk the author, user &quot;stefanb&quot;, is an IBM employee, but employees =
-never offer free support... Where could I ask for support with this? Thanks=
- again.<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" clas=
-s=3D"gmail_attr">El s=C3=A1b, 3 sept 2022 a las 6:38, Frediano Ziglio (&lt;=
-<a href=3D"mailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com<=
-/a>&gt;) escribi=C3=B3:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;pad=
-ding-left:1ex;border-left-color:rgb(204,204,204)">Il giorno ven 2 set 2022 =
-alle ore 22:23 Carlos Gonz=C3=A1lez<br>
-&lt;<a href=3D"mailto:piteccelaya@gmail.com" target=3D"_blank">piteccelaya@=
-gmail.com</a>&gt; ha scritto:<br>
-&gt;<br>
-&gt; So the &quot;rumors&quot; are true: you (in general) really did discon=
-tinue/kill the qxl drivers, if not the entire SPICE project soon. Was it be=
-cause IBM? Since being sold to them the first one to die was Centos, now th=
-is...<br>
-&gt;<br>
-<br>
-Hi Carlos,<br>
-=C2=A0 =C2=A0In Italy we use the expression &quot;=C3=88 come sparare sulla=
- Croce Rossa&quot;<br>
-(more or less &quot;it&#39;s like shooting at the Red Cross&quot;).<br>
-It&#39;s like accusing a doctor trying to save a life that it&#39;s trying =
-to<br>
-kill somebody.<br>
-As Victor is actively contributing to SPICE as a developer (you can<br>
-find multiple recent emails and commits in this ML and related<br>
-projects without much effort) is not kind to point fingers.<br>
-<br>
-&gt; FYI:<br>
-&gt; <a href=3D"https://gist.github.com/pojntfx/b860e123e649504bcd298aa6e92=
-c4043#file-main-sh-L32" rel=3D"noreferrer" target=3D"_blank">https://gist.g=
-ithub.com/pojntfx/b860e123e649504bcd298aa6e92c4043#file-main-sh-L32</a><br>
-&gt; <a href=3D"https://lists.freedesktop.org/archives/virglrenderer-devel/=
-2021-January/001897.html" rel=3D"noreferrer" target=3D"_blank">https://list=
-s.freedesktop.org/archives/virglrenderer-devel/2021-January/001897.html</a>=
-<br>
-&gt; virtio-gpu implies virgl, and currently only works on Linux guests; Re=
-dHat people explicitly deemed the Windows work &quot;not worthy&quot;.<br>
-&gt;<br>
-<br>
-Let&#39;s get back to the technical side of this thread.<br>
-That&#39;s not entirely true. Virgl it&#39;s an &quot;option&quot; to virti=
-o-gpu. By<br>
-default Virgl is not enabled. Virgl adds 3D support to Qemu virtual<br>
-cards, as far as I know it&#39;s the only virtual GPU (bypass are not<br>
-virtual) in Qemu supporting 3D. Although QXL was born alongside SPICE<br>
-while Virgl is more related to Qemu directly, efforts were made to<br>
-support all features QXL provides using virtio-gpu. So the technical<br>
-suggestion Victor gave is not against SPICE. You have also to consider<br>
-the way QXL works and how the graphics software stacks evolved in<br>
-time. QXL design it&#39;s 2D only, supporting a lot of specific commands<br=
->
-and options for Windows 95/98/XP. Yes, you read well, Windows XP...<br>
-which was declared unsupported 12 years ago! At that time OSes relay<br>
-to the GPU plenty of complex 2D commands. Nowadays most OSes (if not<br>
-all but surely Linux, Windows and Mac) use 3D commands for everything,<br>
-and many brushes, raster operations and similars are long since gone.<br>
-Taken all that into account, with a modern OS the commands QXL and<br>
-virtio-gpu use are basically the same.<br>
-<br>
-&gt; Thanks for killing the project.<br>
-&gt;<br>
-<br>
-Now let&#39;s get back to the less technical.<br>
-Beside reiterating that pointing fingers to Victor is not fair nor kind...<=
-br>
-Yes, SPICE was, company wise, well founded and supported by Red Hat<br>
-(which _had_ a specific team for it). After RedHat was acquired by IBM<br>
-some investments were moved from desktop side to the cloud. More or<br>
-less RedHat/IBM thinks that spending money on Linux desktop is not<br>
-worth much. That includes SPICE, Virgl and Windows drivers but others.<br>
-<br>
-Regards,<br>
-=C2=A0 Frediano<br>
-<br>
-&gt; El vie, 2 sept 2022 a las 6:53, Victor Toso (&lt;<a href=3D"mailto:vic=
-tortoso@redhat.com" target=3D"_blank">victortoso@redhat.com</a>&gt;) escrib=
-i=C3=B3:<br>
-&gt;&gt;<br>
-&gt;&gt; Hi Carlos,<br>
-&gt;&gt;<br>
-&gt;&gt; On Fri, Sep 02, 2022 at 12:08:04AM +0000, Carlos Gonz=C3=A1lez wro=
-te:<br>
-&gt;&gt; &gt; I downloaded latest virtio-win ISO, and by browsing it I<br>
-&gt;&gt; &gt; noticed that, unlike the other drivers, for the qxldod one<br=
->
-&gt;&gt; &gt; there&#39;s only up to win10, and no explicit win11 versions.=
-<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Does this mean that there are no drivers for Windows 11, and =
-no<br>
-&gt;&gt; &gt; possibility of setting up a VM with full SPICE support?<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Thanks beforehand.<br>
-&gt;&gt;<br>
-&gt;&gt; You are correct, the last cycle of development was focused for<br>
-&gt;&gt; windows 10.<br>
-&gt;&gt;<br>
-&gt;&gt; I expect windows 11 to maintain some compatibility with windows<br=
->
-&gt;&gt; 10 so the drivers should work to some extent but I did not test<br=
->
-&gt;&gt; it.<br>
-&gt;&gt;<br>
-&gt;&gt; I&#39;d not hope for further development on qxl unless there is<br=
->
-&gt;&gt; someone interested in investing time on it (and it would take<br>
-&gt;&gt; some time).<br>
-&gt;&gt;<br>
-&gt;&gt; I&#39;d instead switch to virtio-vga / virtio-gpu as this seems to=
-<br>
-&gt;&gt; have an active community.<br>
-&gt;&gt;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"https://github.com/virtio-win/kvm-gu=
-est-drivers-windows" rel=3D"noreferrer" target=3D"_blank">https://github.co=
-m/virtio-win/kvm-guest-drivers-windows</a><br>
-&gt;&gt;<br>
-&gt;&gt; Cheers,<br>
-&gt;&gt; Victor<br>
-</blockquote></div>
-</blockquote></div></div>
-
---00000000000042aba605e7cde15a--
+From e1cb184f71e698509c5ae50c20c687130325da52 Mon Sep 17 00:00:00 2001=0A=
+From: Qi Zhou <atmgnd@outlook.com>=0A=
+Date: Tue, 6 Sep 2022 12:14:49 +0800=0A=
+Subject: [PATCH] unhide cursor if pos_x is negative=0A=
+=0A=
+It is valid if position of cursor is negative(not hotspot coordinates). for=
+=0A=
+example: precision section, resize, move, north east arrow...=0A=
+=0A=
+Signed-off-by: Qi Zhou <atmgnd@outlook.com>=0A=
+---=0A=
+ qxldod/QxlDod.cpp | 2 +-=0A=
+ 1 file changed, 1 insertion(+), 1 deletion(-)=0A=
+=0A=
+diff --git a/qxldod/QxlDod.cpp b/qxldod/QxlDod.cpp=0A=
+index 341518e..f498115 100755=0A=
+--- a/qxldod/QxlDod.cpp=0A=
++++ b/qxldod/QxlDod.cpp=0A=
+@@ -4920,7 +4920,7 @@ NTSTATUS QxlDevice::SetPointerPosition(_In_ CONST DXG=
+KARG_SETPOINTERPOSITION* pS=0A=
+         return STATUS_INSUFFICIENT_RESOURCES;=0A=
+     }=0A=
+ =0A=
+-    if (pSetPointerPosition->X < 0 || !pSetPointerPosition->Flags.Visible)=
+ {=0A=
++    if (!pSetPointerPosition->Flags.Visible) {=0A=
+         cursor_cmd->type =3D QXL_CURSOR_HIDE;=0A=
+     } else {=0A=
+         cursor_cmd->type =3D QXL_CURSOR_MOVE;=0A=
+-- =0A=
+2.32.0.windows.2=0A=
+=0A=
