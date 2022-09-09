@@ -1,33 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF0E55B2F0A
-	for <lists+spice-devel@lfdr.de>; Fri,  9 Sep 2022 08:32:59 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B4245B3F64
+	for <lists+spice-devel@lfdr.de>; Fri,  9 Sep 2022 21:20:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CD8E510EBE1;
-	Fri,  9 Sep 2022 06:32:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC1DA10EDE0;
+	Fri,  9 Sep 2022 19:20:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mailgw.kylinos.cn (unknown [124.126.103.232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 59DB410E088;
- Fri,  9 Sep 2022 02:35:30 +0000 (UTC)
-X-UUID: 2a3fe2328cdd469ab8af3e1a811a87e4-20220909
-X-UUID: 2a3fe2328cdd469ab8af3e1a811a87e4-20220909
-X-User: zhouzongmin@kylinos.cn
-Received: from localhost.localdomain [(116.128.244.169)] by mailgw
- (envelope-from <zhouzongmin@kylinos.cn>) (Generic MTA)
- with ESMTP id 1395227217; Fri, 09 Sep 2022 10:35:55 +0800
-From: Zongmin Zhou <zhouzongmin@kylinos.cn>
-To: airlied@redhat.com, kraxel@redhat.com, airlied@linux.ie, daniel@ffwll.ch
-Date: Fri,  9 Sep 2022 10:35:03 +0800
-Message-Id: <20220909023503.1886148-1-zhouzongmin@kylinos.cn>
-X-Mailer: git-send-email 2.25.1
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 695CA10EDE0
+ for <spice-devel@lists.freedesktop.org>; Fri,  9 Sep 2022 19:20:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1662751251;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=E1Vh1WCUwOEG12P8mWUZChyJR2HoUvuALMumKwmGd1g=;
+ b=cXqxn430qOgi456741q3qw2e5nJIsA//+V0FU6ATuOG4MT8f4NBFEVBYbsGfezMLVouP1X
+ zaUq+H8TPZRx7D9zCF7X5f5G8vTfnYIU9cLr37POdzVbqRv7rHvY/30VnQkr2Wo5vagZj9
+ mkM1g8UU+QlHcVvoXRDL3eA5ANl3STY=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-304-75dIHbBgNq6f7gPrU8M41Q-1; Fri, 09 Sep 2022 15:20:48 -0400
+X-MC-Unique: 75dIHbBgNq6f7gPrU8M41Q-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 97F531C07540;
+ Fri,  9 Sep 2022 19:20:47 +0000 (UTC)
+Received: from localhost (unknown [10.40.194.248])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 41A5540E80E3;
+ Fri,  9 Sep 2022 19:20:47 +0000 (UTC)
+Date: Fri, 9 Sep 2022 21:20:45 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Message-ID: <20220909192045.axn7rp26g7thpkpb@tapioca>
+References: <SYZP282MB3252EF544B06AD8AAF2E7746C97E9@SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM>
+ <CAHt6W4epn7RK3-etaz+BKR5w+svWLhQKeLSkjE4XODQ0a3OiRg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 09 Sep 2022 06:32:53 +0000
-Subject: [Spice-devel] [PATCH] drm/qxl: drop set_prod_notify parameter from
- qxl_ring_create
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="tq45xo4p567qhekn"
+Content-Disposition: inline
+In-Reply-To: <CAHt6W4epn7RK3-etaz+BKR5w+svWLhQKeLSkjE4XODQ0a3OiRg@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
+Subject: Re: [Spice-devel] [PATCH] unhide cursor if pos_x is negative
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,104 +60,81 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org,
- Zongmin Zhou <zhouzongmin@kylinos.cn>, Ming Xie <xieming@kylinos.cn>,
- spice-devel@lists.freedesktop.org
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ "Lublin, Uri" <ulublin@redhat.com>, qi zhou <atmgnd@outlook.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Since qxl_io_reset(qdev) will be called immediately
-after qxl_ring_create() been called,
-and parameter like notify_on_prod will be set to default value.
-So the call to qxl_ring_init_hdr() before becomes meaningless.
 
-Signed-off-by: Zongmin Zhou<zhouzongmin@kylinos.cn>
-Suggested-by: Ming Xie<xieming@kylinos.cn>
----
- drivers/gpu/drm/qxl/qxl_cmd.c | 8 --------
- drivers/gpu/drm/qxl/qxl_drv.h | 2 --
- drivers/gpu/drm/qxl/qxl_kms.c | 4 +---
- 3 files changed, 1 insertion(+), 13 deletions(-)
+--tq45xo4p567qhekn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
-index 7b00c955cd82..63aa96a69752 100644
---- a/drivers/gpu/drm/qxl/qxl_cmd.c
-+++ b/drivers/gpu/drm/qxl/qxl_cmd.c
-@@ -53,17 +53,11 @@ void qxl_ring_free(struct qxl_ring *ring)
- 	kfree(ring);
- }
- 
--void qxl_ring_init_hdr(struct qxl_ring *ring)
--{
--	ring->ring->header.notify_on_prod = ring->n_elements;
--}
--
- struct qxl_ring *
- qxl_ring_create(struct qxl_ring_header *header,
- 		int element_size,
- 		int n_elements,
- 		int prod_notify,
--		bool set_prod_notify,
- 		wait_queue_head_t *push_event)
- {
- 	struct qxl_ring *ring;
-@@ -77,8 +71,6 @@ qxl_ring_create(struct qxl_ring_header *header,
- 	ring->n_elements = n_elements;
- 	ring->prod_notify = prod_notify;
- 	ring->push_event = push_event;
--	if (set_prod_notify)
--		qxl_ring_init_hdr(ring);
- 	spin_lock_init(&ring->lock);
- 	return ring;
- }
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index 47c169673088..432758ad39a3 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -277,10 +277,8 @@ struct qxl_ring *qxl_ring_create(struct qxl_ring_header *header,
- 				 int element_size,
- 				 int n_elements,
- 				 int prod_notify,
--				 bool set_prod_notify,
- 				 wait_queue_head_t *push_event);
- void qxl_ring_free(struct qxl_ring *ring);
--void qxl_ring_init_hdr(struct qxl_ring *ring);
- int qxl_check_idle(struct qxl_ring *ring);
- 
- static inline uint64_t
-diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
-index 9bf6d4cc98d4..dc3828db1991 100644
---- a/drivers/gpu/drm/qxl/qxl_kms.c
-+++ b/drivers/gpu/drm/qxl/qxl_kms.c
-@@ -194,7 +194,6 @@ int qxl_device_init(struct qxl_device *qdev,
- 					     sizeof(struct qxl_command),
- 					     QXL_COMMAND_RING_SIZE,
- 					     qdev->io_base + QXL_IO_NOTIFY_CMD,
--					     false,
- 					     &qdev->display_event);
- 	if (!qdev->command_ring) {
- 		DRM_ERROR("Unable to create command ring\n");
-@@ -207,7 +206,6 @@ int qxl_device_init(struct qxl_device *qdev,
- 				sizeof(struct qxl_command),
- 				QXL_CURSOR_RING_SIZE,
- 				qdev->io_base + QXL_IO_NOTIFY_CURSOR,
--				false,
- 				&qdev->cursor_event);
- 
- 	if (!qdev->cursor_ring) {
-@@ -219,7 +217,7 @@ int qxl_device_init(struct qxl_device *qdev,
- 	qdev->release_ring = qxl_ring_create(
- 				&(qdev->ram_header->release_ring_hdr),
- 				sizeof(uint64_t),
--				QXL_RELEASE_RING_SIZE, 0, true,
-+				QXL_RELEASE_RING_SIZE, 0,
- 				NULL);
- 
- 	if (!qdev->release_ring) {
--- 
-2.25.1
+Hi,
 
+On Tue, Sep 06, 2022 at 08:37:15AM +0100, Frediano Ziglio wrote:
+> Il giorno mar 6 set 2022 alle ore 06:03 qi zhou <atmgnd@outlook.com> ha scritto:
+> >
+> > From e1cb184f71e698509c5ae50c20c687130325da52 Mon Sep 17 00:00:00 2001
+> > From: Qi Zhou <atmgnd@outlook.com>
+> > Date: Tue, 6 Sep 2022 12:14:49 +0800
+> > Subject: [PATCH] unhide cursor if pos_x is negative
+> >
+> > It is valid if position of cursor is negative(not hotspot coordinates). for
+> > example: precision section, resize, move, north east arrow...
+> >
+> > Signed-off-by: Qi Zhou <atmgnd@outlook.com>
+> > ---
+> >  qxldod/QxlDod.cpp | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/qxldod/QxlDod.cpp b/qxldod/QxlDod.cpp
+> > index 341518e..f498115 100755
+> > --- a/qxldod/QxlDod.cpp
+> > +++ b/qxldod/QxlDod.cpp
+> > @@ -4920,7 +4920,7 @@ NTSTATUS QxlDevice::SetPointerPosition(_In_ CONST DXGKARG_SETPOINTERPOSITION* pS
+> >          return STATUS_INSUFFICIENT_RESOURCES;
+> >      }
+> >
+> > -    if (pSetPointerPosition->X < 0 || !pSetPointerPosition->Flags.Visible) {
+> > +    if (!pSetPointerPosition->Flags.Visible) {
+> >          cursor_cmd->type = QXL_CURSOR_HIDE;
+> >      } else {
+> >          cursor_cmd->type = QXL_CURSOR_MOVE;
+> > --
+> > 2.32.0.windows.2
+> >
+> Hi,
+>    merged.
+>
+> Now the issue is getting it compiled and signed. Uri, Victor,
+> can somebody do it?
 
-No virus found
-		Checked by Hillstone Network AntiVirus
+Sorry, I don't know the process but I hope it is still doable (to
+get it signed).
+
+Cheers,
+Victor
+
+--tq45xo4p567qhekn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmMbkg0ACgkQl9kSPeN6
+SE+IDQ//T64rOXKTb7814jd/G5+YbKPoultvtMDkYhyHzBOAZQcd7MukuxKZ60x2
+2pMRDmboqRbWEghyEJgV/Yk8IsmEQR7OBPs+PlfNToXEgRHeftCSGLuisoY1AJs9
+NdNfMhrFJcLnaMJQzvtHJkMcTmeWm4kwFIqdCpPQ97zeR1OIGnUYiaI5b0JSK6IG
+WJfC6qkzYMIpVcp8K0ziWtC0AJPqVRH/4Q3Q8bU9gUFAAXCKV9sRtHSAss0CQRbI
+CfFv9Cp20i5ybyWwF3iYqSh/+n8XvunvEpl5p9kx3FC5Fnprkmtb3nGN7jqPUh8h
+QU6egLppQORPhiF04rnSxfMnO+nmzqP/wZMjCRAkYw0krPAGQx+MMRkWz+qqRR/V
+DTEFPTk6NNx4lwl4UylNZqQUE61o67ejIQhqVo0Ta61CCkB10b1GKVpxKa+VaDtv
+iYFLnBJIYDx+6rb8bytg7uAS++dh/qusDO1YHKuIoSeT9gJfGSkl/lfnq6tHvflt
+F2RqFyJr116W5hFxeTOUOfkkD6D1jLB77y9suHp7dTsUKsLIjsqaZbcWHQHetzh9
+0hkFCNNs4sItO0LBvHJNrCarOVw3lz2uwvZtuYnChBRW8QXqDSetWPz4zoI5g99y
+Dv5t7pDBV0xfhANwDQj+v2ntkKBFIYnS0ExWYtK+oigUcduz7cM=
+=BA21
+-----END PGP SIGNATURE-----
+
+--tq45xo4p567qhekn--
+
