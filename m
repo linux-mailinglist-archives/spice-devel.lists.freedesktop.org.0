@@ -2,56 +2,55 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 638EC5F3F80
-	for <lists+spice-devel@lfdr.de>; Tue,  4 Oct 2022 11:26:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B477B5F46A6
+	for <lists+spice-devel@lfdr.de>; Tue,  4 Oct 2022 17:27:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 25DEA10E336;
-	Tue,  4 Oct 2022 09:26:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ECD8010E70F;
+	Tue,  4 Oct 2022 15:27:31 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0D46610E336
- for <spice-devel@lists.freedesktop.org>; Tue,  4 Oct 2022 09:26:41 +0000 (UTC)
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-127dca21a7dso15815905fac.12
- for <spice-devel@lists.freedesktop.org>; Tue, 04 Oct 2022 02:26:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=MpkDTJaaqyhejs5bJOTU+C5/YUXr72be0vT/fxYECUE=;
- b=OzxD4hqYOL3e+jIy/bqlov5ZNyYxkmbWLwEQXrMQiX06XMqyx/CVrczsbyAWuIsUF8
- gRSNyrQsSM3+8EOvzhss3ooc6a9rfK6YzzJd3xvZCBznUkyYQ3nQbtBQAXlzWuShRj52
- 02zWSQA19GqERub354f1PImlR8PtGIwgo9lngYsmr8fMWSFYvxNYAwNmqILs3hrmkRLC
- Pvh0yg55nMJVI2iZfXVNl/cvHv8FuJAfFPch72tSlysG+dALSE0GcijsLuiC/O4EFRz2
- V+w7nW33g3ir3t3jnL5XqrsMKsPfpdG4oQEJlBWIwk5Paqo9qBholxBSOrlPMA5PK+35
- KKlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=MpkDTJaaqyhejs5bJOTU+C5/YUXr72be0vT/fxYECUE=;
- b=AOnNK5my/jPA/za2L13FXW1gxfd07vDgJ6gUXGEPxGTXUAt/jZJkQpXL6IX22fH6fZ
- LjU+x3HEuyU1nzlgdM5p2MQN4EvoS49apNYsAcflUsvoM3J56reSL2RcxUzYChEYOpmJ
- wRiSmsppTJM39nD+mvCkmT1mKsjGvtbBiytcgkD8hjuUAO3zJKOup951+lOuGPffBVIB
- HGsX3vyCqUxTAak2DYoMs6NN/SF658dr02aNqbyKqR6KBKFZxpblr8/NyJISZRibAclP
- wfXUze3Mh8Sy6gycawNUR2ycq4vhZiu0g161dh8+4nQIUCWcXU7czM82/JpE29QiUw0/
- vURQ==
-X-Gm-Message-State: ACrzQf2ufvJ0kn23FsasnbouunkTwFWG+KnZfmdflb70nbohPzszK8Cv
- WTpPFKAyRFDb7nKElSlMFXxxcoWNd+thCATN3vKAUBpNqOQ=
-X-Google-Smtp-Source: AMsMyM5skdLaneHSZdnlqni96h8+z/BpAG/1L37IrmBn1Gp/LI1BCazkLcYQCOsXcPexCDC2ayYrXFe7Fod+NKpmIy0=
-X-Received: by 2002:a05:6870:b608:b0:131:cbbd:e75d with SMTP id
- cm8-20020a056870b60800b00131cbbde75dmr7546697oab.1.1664875600115; Tue, 04 Oct
- 2022 02:26:40 -0700 (PDT)
-MIME-Version: 1.0
+Received: from outbound04.rosatom.ru (outbound04.rosatom.ru [93.187.73.83])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4CBC610E5AE
+ for <spice-devel@lists.freedesktop.org>; Tue,  4 Oct 2022 12:05:30 +0000 (UTC)
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <AB56C574832DF749A782191BEDC6A04E@rosatom.local>
+Content-Transfer-Encoding: base64
+DKIM-Signature: v=1; a=rsa-sha256; d=greenatom.ru; s=key2021ga;
+ c=relaxed/relaxed; t=1664885124; h=from:subject:to:date:message-id;
+ bh=c7SZjRQS9j+MdL3iqNc4ismKNdx00XkuIjiruPtNvGA=;
+ b=NKzdYmWBaKrhBUhHbrdNwdZ2FGxZom1v0uKcEytEABPBLeyGUvfFgoNb89/LSPBlbCHZh1rQ8p4
+ gTtKNrvCQ5Nenk97LWgxmc/bhdz5abMkd5xBkmwv0fRrCjNXd8p6AMafIFkD+JMTg7OmWsUoTD/yk
+ A0xGHPXTvKFDY7rijco=
+Received: from CORE-S-EXD02N11.gk.rosatom.local (10.124.26.90) by
+ CORE-S-EXE03N02.ROSATOM.RU (10.120.28.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 4 Oct 2022 15:05:24 +0300
+Received: from CORE-S-EXD02N03.gk.rosatom.local (10.124.26.82) by
+ CORE-S-EXD02N11.gk.rosatom.local (10.124.26.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Tue, 4 Oct 2022 15:05:25 +0300
+Received: from CORE-S-EXD02N03.gk.rosatom.local ([fe80::d4fa:496b:2a2a:4d99])
+ by CORE-S-EXD02N03.gk.rosatom.local ([fe80::d4fa:496b:2a2a:4d99%8])
+ with mapi id 15.01.2375.024; Tue, 4 Oct 2022 15:05:25 +0300
+From: "Yury A. Produnov" <YAProdunov@Greenatom.ru>
+To: "freddy77@gmail.com" <freddy77@gmail.com>, "victortoso@redhat.com"
+ <victortoso@redhat.com>
+Thread-Topic: [Spice-devel] spice webdav proxy
+Thread-Index: AdjUv8/ZCokAUS6cSJK1aLOsGp9nvgC9rKYAAADuawAABY0ggA==
+Date: Tue, 4 Oct 2022 12:05:25 +0000
+Message-ID: <9b595468facbe76545720380340fb6b8f2216c05.camel@greenatom.ru>
 References: <9d1283403bde42b39b6db664a9dee1fd@Greenatom.ru>
  <20221004085948.y3m2kvq3m27if7q7@tapioca>
-In-Reply-To: <20221004085948.y3m2kvq3m27if7q7@tapioca>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 4 Oct 2022 10:26:28 +0100
-Message-ID: <CAHt6W4cp_zC54sRsw+NxKVMRQep+j3k5gU6iM0ey-15f0PUY2g@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
+ <CAHt6W4cp_zC54sRsw+NxKVMRQep+j3k5gU6iM0ey-15f0PUY2g@mail.gmail.com>
+In-Reply-To: <CAHt6W4cp_zC54sRsw+NxKVMRQep+j3k5gU6iM0ey-15f0PUY2g@mail.gmail.com>
+Accept-Language: ru-RU, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.44.4 (3.44.4-1.module_f36+15386+a24ad1a3) 
+x-originating-ip: [10.124.26.101]
+MIME-Version: 1.0
+X-Mailman-Approved-At: Tue, 04 Oct 2022 15:27:28 +0000
 Subject: Re: [Spice-devel] spice webdav proxy
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -64,49 +63,46 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- "Yury A. Produnov" <YAProdunov@greenatom.ru>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Frediano
-
-Il giorno mar 4 ott 2022 alle ore 10:00 Victor Toso
-<victortoso@redhat.com> ha scritto:
->
-> Hi,
->
-> On Fri, Sep 30, 2022 at 11:38:12AM +0000, Yury A. Produnov wrote:
-> > Hello.
-> > I installed spice-webdavd-latest inside the guest.
-> > Everything works and the drive connects with the letter Z:/
-> > But I need to change the letter to W:/
-> > If I use the map-drive.bat script I get two identical drives with different letters.
-> > Please help me to configure it.
-> >
-> > Best regards,
-> > Yuriy Produnov
->
-> If I recall correctly [0], the latest spice-webdavd should map to the
-> next letter available (since v2.1).
->
-> Looking briefly at `REG ADD` [1] of map-drive.bat, not sure what
-> is the correct argument to chose a target driver name, if
-> possible... I think you would need another command to map "Spice
-> client" to a "W:/".
->
-> [0] https://gitlab.gnome.org/GNOME/phodav/-/commit/13151735cb97bc4e95deb72597c1024d139504e3
-> [1] https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/reg-add
->
-> Cheers,
-> Victor
-
-Hi,
-   I suppose that if the user is using the script to map the driver
-you can use a
-
-net use W: http://localhost:9843/
-
-to map to the specific "W" drive.
-
-Frediano
+Qm90aCBvcHRpb25zIHdpbGwgd29yayBpbmRpdmlkdWFsbHkKVGhlIHByb2JsZW0gaXMgdGhhdCB0
+aGUgWiBkcml2ZSBtYXBwZWQgYnkgR3JvdXAgUG9saWN5IGFmdGVyIHRoZQpzZXJ2aWNlKHNwaWNl
+IHByb3h5IHdlYmRhdikgaXMgc3RhcnRlZCwgc28gdGhlIHRhcmdldCBaIGRyaXZlIGlzIG5vdApj
+b25uZWN0ZWQgYW5kIFogdGFrZW4gdG8gIlNwaWNlIGRyaXZlIi4KLS0gCkJlc3QgcmVnYXJkcywK
+WXVyaXkgUHJvZHVub3YKCgrQkiDQktGCLCAwNC8xMC8yMDIyINCyIDEwOjI2ICswMTAwLCBGcmVk
+aWFubyBaaWdsaW8g0L/QuNGI0LXRgjoKPiDQktCd0JXQqNCd0K/QryDQn9Ce0KfQotCQOiDQldGB
+0LvQuCDQvtGC0L/RgNCw0LLQuNGC0LXQu9GMINC90LXQuNC30LLQtdGB0YLQtdC9LCDQvdC1INC+
+0YLQutGA0YvQstCw0LnRgtC1INCy0LvQvtC20LXQvdC40Y8g0LgKPiDQvdC1INC/0LXRgNC10YXQ
+vtC00LjRgtC1INC/0L4g0YHRgdGL0LvQutCw0LwuINCd0LjQutC+0LPQtNCwINC90LUg0L/QtdGA
+0LXRgdGL0LvQsNC50YLQtSDQutC+0L3RhNC40LTQtdC90YbQuNCw0LvRjNC90YPRjgo+INC40L3R
+hNC+0YDQvNCw0YbQuNGOINC4INC90LUg0L/QtdGA0LXQtNCw0LLQsNC50YLQtSDRgdCy0L7RjiDQ
+utC+0YDQv9C+0YDQsNGC0LjQstC90YPRjiDRg9GH0LXRgtC90YPRjiDQt9Cw0L/QuNGB0Ywg0LgK
+PiDQv9Cw0YDQvtC70YwuINCf0L7QttCw0LvRg9C50YHRgtCwLCDRgdC+0L7QsdGJ0LDQudGC0LUg
+0L4g0L/QvtC00L7Qt9GA0LjRgtC10LvRjNC90YvRhSDQv9C40YHRjNC80LDRhSDQvdCwINCw0LTR
+gNC10YEKPiBzb2NAZ3JlZW5hdG9tLnJ1PG1haWx0bzpzb2NAZ3JlZW5hdG9tLnJ1Pgo+IAo+IEZy
+ZWRpYW5vCj4gCj4gSWwgZ2lvcm5vIG1hciA0IG90dCAyMDIyIGFsbGUgb3JlIDEwOjAwIFZpY3Rv
+ciBUb3NvCj4gPHZpY3RvcnRvc29AcmVkaGF0LmNvbT4gaGEgc2NyaXR0bzoKPiA+IAo+ID4gSGks
+Cj4gPiAKPiA+IE9uIEZyaSwgU2VwIDMwLCAyMDIyIGF0IDExOjM4OjEyQU0gKzAwMDAsIFl1cnkg
+QS4gUHJvZHVub3Ygd3JvdGU6Cj4gPiA+IEhlbGxvLgo+ID4gPiBJIGluc3RhbGxlZCBzcGljZS13
+ZWJkYXZkLWxhdGVzdCBpbnNpZGUgdGhlIGd1ZXN0Lgo+ID4gPiBFdmVyeXRoaW5nIHdvcmtzIGFu
+ZCB0aGUgZHJpdmUgY29ubmVjdHMgd2l0aCB0aGUgbGV0dGVyIFo6Lwo+ID4gPiBCdXQgSSBuZWVk
+IHRvIGNoYW5nZSB0aGUgbGV0dGVyIHRvIFc6Lwo+ID4gPiBJZiBJIHVzZSB0aGUgbWFwLWRyaXZl
+LmJhdCBzY3JpcHQgSSBnZXQgdHdvIGlkZW50aWNhbCBkcml2ZXMgd2l0aAo+ID4gPiBkaWZmZXJl
+bnQgbGV0dGVycy4KPiA+ID4gUGxlYXNlIGhlbHAgbWUgdG8gY29uZmlndXJlIGl0Lgo+ID4gPiAK
+PiA+ID4gQmVzdCByZWdhcmRzLAo+ID4gPiBZdXJpeSBQcm9kdW5vdgo+ID4gCj4gPiBJZiBJIHJl
+Y2FsbCBjb3JyZWN0bHkgWzBdLCB0aGUgbGF0ZXN0IHNwaWNlLXdlYmRhdmQgc2hvdWxkIG1hcCB0
+bwo+ID4gdGhlCj4gPiBuZXh0IGxldHRlciBhdmFpbGFibGUgKHNpbmNlIHYyLjEpLgo+ID4gCj4g
+PiBMb29raW5nIGJyaWVmbHkgYXQgYFJFRyBBRERgIFsxXSBvZiBtYXAtZHJpdmUuYmF0LCBub3Qg
+c3VyZSB3aGF0Cj4gPiBpcyB0aGUgY29ycmVjdCBhcmd1bWVudCB0byBjaG9zZSBhIHRhcmdldCBk
+cml2ZXIgbmFtZSwgaWYKPiA+IHBvc3NpYmxlLi4uIEkgdGhpbmsgeW91IHdvdWxkIG5lZWQgYW5v
+dGhlciBjb21tYW5kIHRvIG1hcCAiU3BpY2UKPiA+IGNsaWVudCIgdG8gYSAiVzovIi4KPiA+IAo+
+ID4gWzBdCj4gPiBodHRwczovL2dpdGxhYi5nbm9tZS5vcmcvR05PTUUvcGhvZGF2Ly0vY29tbWl0
+LzEzMTUxNzM1Y2I5N2JjNGU5NWRlYjcyNTk3YzEwMjRkMTM5NTA0ZTMKPiA+IFsxXQo+ID4gaHR0
+cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3dpbmRvd3Mtc2VydmVyL2FkbWluaXN0cmF0
+aW9uL3dpbmRvd3MtY29tbWFuZHMvcmVnLWFkZAo+ID4gCj4gPiBDaGVlcnMsCj4gPiBWaWN0b3IK
+PiAKPiBIaSwKPiDCoMKgIEkgc3VwcG9zZSB0aGF0IGlmIHRoZSB1c2VyIGlzIHVzaW5nIHRoZSBz
+Y3JpcHQgdG8gbWFwIHRoZSBkcml2ZXIKPiB5b3UgY2FuIHVzZSBhCj4gCj4gbmV0IHVzZSBXOiBo
+dHRwOi8vbG9jYWxob3N0Ojk4NDMvCj4gCj4gdG8gbWFwIHRvIHRoZSBzcGVjaWZpYyAiVyIgZHJp
+dmUuCj4gCj4gRnJlZGlhbm8K
