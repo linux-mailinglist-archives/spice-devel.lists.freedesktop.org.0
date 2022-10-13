@@ -1,58 +1,55 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD26A5FB10E
-	for <lists+spice-devel@lfdr.de>; Tue, 11 Oct 2022 13:09:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 476F05FDDC9
+	for <lists+spice-devel@lfdr.de>; Thu, 13 Oct 2022 17:58:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA5CA10E090;
-	Tue, 11 Oct 2022 11:09:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6EEF510E8CE;
+	Thu, 13 Oct 2022 15:58:00 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5E8210E090
- for <spice-devel@lists.freedesktop.org>; Tue, 11 Oct 2022 11:09:44 +0000 (UTC)
-Received: by mail-oi1-x230.google.com with SMTP id g130so15441140oia.13
- for <spice-devel@lists.freedesktop.org>; Tue, 11 Oct 2022 04:09:44 -0700 (PDT)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7636C10E8CE
+ for <spice-devel@lists.freedesktop.org>; Thu, 13 Oct 2022 15:57:55 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ c9-20020a05600c100900b003c6da0f9b62so1632083wmc.1
+ for <spice-devel@lists.freedesktop.org>; Thu, 13 Oct 2022 08:57:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yzliSAliMmyn1sOUCReGBnsz0ZHTlIuO5dbpLvLUOOE=;
- b=XAvZZgeVPKirr7ZYsictitXl1Qf4QDbg7hH6sdMzWh2qhbLB93DPFWOO3hHlUeDUSf
- 1N1YKWeVGmOFx8162pynzRX223HdS5drsPdYfqVb84tHTSGQZ4fYTjDHGzDjEer5m6fr
- jHNFVJ5kl8LM2HM251uXN2yhsmVfkROQPukDtMOzZWZpTUzDCgnxg+o2Zk+8HF6jH8/B
- w7yDEi36FakMpCDmXy9Bs3TMLzl05e9TjPtvg+wJk/zc2TeFqDH616Sz9IR5Wb6WxmGM
- WK9VRj2vb0hAW0UU0KPQZiubVpuNGR/NfD+/Bz61XHC+8obQbxhr71UYABvd0Go8j13n
- zQ9g==
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=NsOvTeffnotqas4avqUFSvX9Ft/lMadpWIBoaxoxtdY=;
+ b=iU6DO6OzpKIGBUbJOwj2+NTlax4UTqn2du93ukukhuU48ocFd9mx6GhAXezlqAQi7n
+ odK99AZECb3rqb3E5swtNzC1lR+rtwiMT5eizg0mpSrRBCv+UudaZgHA9glqopyMDFKK
+ R1APMR3+VMG6XZTaHxx7MEf3P8VuEOhRLV5ELQ2zwBlE8eOe5Ia+4O3EzANVGKljhY/V
+ SqMspQE+RTWT9qRXwN3gh7f8yj80/LWJv1dKqdD1SKyOnNbyU+tiHubIBZoIOzH5Ff4a
+ 8djDjXYRB+r1Ksbnd4U++HXtJK+LoWZ8V82uhw3kMM8TxtqRZSWuOrsnUcU3GYkkIDiI
+ xPcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yzliSAliMmyn1sOUCReGBnsz0ZHTlIuO5dbpLvLUOOE=;
- b=0HiWRzKzHJj6kIYFgIcXF/keYCGe8KgFFVPtBMyE0vvm8QGsJa6o4qabXc59nNgSb+
- XpnFE91bQQcoyUsAlfco1aTvOwmN7niHwLvHE3HjAD0XNV1fQIsftyd8wCGHwDvNmvB1
- VbpAcZBc0AHS3G7fsTAQ10t2qObao19Sz91WxwDpUDusgSJp2ckPr46XZ4x9RHcL0+ga
- ZYMHyyEov12yKYhvGA1cqdFQvey/BZit85uyp4cB6B0KE0iDcbG8llaiiZq95rL3DUJh
- zwr1KU/7zmY8LBnegKzWFBzdi4NYxZ661Wa7EqRxa9hjqdpLey4JrYhodFEux1qHBEGT
- IVNw==
-X-Gm-Message-State: ACrzQf0BmLWIwd3ftgujnFdk+Lym/TANbBrW8yUZ5UbqY2PSSELm9h3h
- lHS9f0l4CM+SCc72Hg9Pr7jATAqRH8IloquQ9NmBC/NM
-X-Google-Smtp-Source: AMsMyM44lw5JnbQjaad7znEzoWnifZ7hmUScTSFMFSf4aLGkwuauxmbZD/Fq1aRapykmSb4XG6belTv4M16yBbM6TmU=
-X-Received: by 2002:a05:6808:1507:b0:350:7653:2351 with SMTP id
- u7-20020a056808150700b0035076532351mr11619298oiw.179.1665486583889; Tue, 11
- Oct 2022 04:09:43 -0700 (PDT)
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NsOvTeffnotqas4avqUFSvX9Ft/lMadpWIBoaxoxtdY=;
+ b=Q6BfzVplby+Iwbp4PaXf4jPzD49P1evjBJF6S2D5xho6SLndQBs1b6yxPACEjuXwwQ
+ kf7XCAbHlgh9aU5WV5Hu6eLJ5XEq3QBKg8nNm9RAtLarJWcRfh1pcwl6K6q0FxvQGG1r
+ 3rnr5iqnnE5RAOW53OSYi11Ma4lbpR67vZJoPCzTcwiauoScB/gWgJfJR5X//0QFMcj1
+ Qk81UlpvFe9tNbcL5SP5ceNzmwtdXi9vZb9a99R5MEG1cFkKbJzQSjSpxhopoW2Uj+dn
+ p418eIxzRi4+FAfNvOdR9nq47/5WkmHQW7aspH9g/TROrsE5yzloFWjIh8uEfKgZW2JG
+ dXkA==
+X-Gm-Message-State: ACrzQf3WYWAYCFg7UAPLEsDk3LhOkk2SV6HI2vSwsr/MXQkaUwnYQt3z
+ 9cPb7fDg69JbibVHbFQ5Zxw65RQXPgnz7hcrCwiUJI1edmvVzQ==
+X-Google-Smtp-Source: AMsMyM7fZiy5oWO/SI20y0yNqtN/yrhxx2NoWavQVpysoKevfLnv46dgkvMMjjyrkUCj/ZRJcLo+Vqtk2M+6VvrZ9/M=
+X-Received: by 2002:a05:600c:474a:b0:3b4:cb3f:2f5f with SMTP id
+ w10-20020a05600c474a00b003b4cb3f2f5fmr7204964wmo.8.1665676673519; Thu, 13 Oct
+ 2022 08:57:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20221011101837.2580079-1-festevam@gmail.com>
-In-Reply-To: <20221011101837.2580079-1-festevam@gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 11 Oct 2022 12:09:32 +0100
-Message-ID: <CAHt6W4eRp8pX4vkJq86sH=fotJABEnjvZUNXji=E6ibk9R7TNQ@mail.gmail.com>
-To: Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] [PATCH v2] meson: Allow building on a
- Wayland-only environment
+From: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
+Date: Thu, 13 Oct 2022 15:57:42 +0000
+Message-ID: <CAGeBE=w-KZXVACD6xeeqfoo03K5BZxzA8O2U5x-8=NLsR=ZQKw@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="0000000000006f9d0905eaec9294"
+Subject: [Spice-devel] Vdagent not working on a Debian guest
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,51 +61,66 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Fabio Estevam <festevam@denx.de>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Merged.
+--0000000000006f9d0905eaec9294
+Content-Type: text/plain; charset="UTF-8"
 
-Thanks,
-   Frediano
+Hello.
 
-Il giorno mar 11 ott 2022 alle ore 11:18 Fabio Estevam
-<festevam@gmail.com> ha scritto:
->
-> From: Fabio Estevam <festevam@denx.de>
->
-> Currently, it is not possible to build spice-gtk on a Wayland-only
-> environment due to the x11 dependency in meson.
->
-> Since commit a7381b0864b7 ("Allow to build without X11 gdk backend)
-> it is possible to build spice-gtk without X11 GDK backend, so make
-> the x11 dependency in meson optional.
->
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> ---
-> Changes since v1:
-> - Make the x11 dependency optional instead of removing it (Frediano).
->
->  meson.build | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/meson.build b/meson.build
-> index dd46294085b0..c163a44f2d60 100644
-> --- a/meson.build
-> +++ b/meson.build
-> @@ -152,7 +152,10 @@ if d.found()
->    spice_gtk_deps += d
->    if host_machine.system() != 'windows'
->      spice_gtk_deps += dependency('epoxy')
-> -    spice_gtk_deps += dependency('x11')
-> +    d = dependency('x11', required: false)
-> +    if d.found()
-> +      spice_gtk_deps += d
-> +    endif
->      d = dependency('libva-x11', required: false)
->      if d.found()
->        spice_gtk_deps += d
-> --
-> 2.25.1
->
+I'm trying a virtual machine with a live CD distribution called AntiX
+Linux, which is directly based on Debian.
+
+I'm using direct QEMU commands.
+In the VM configuration I have this for SPICE configuration:
+"-vga qxl -device virtio-serial-pci -spice
+unix=on,addr=path/to/vm_spice.socket,disable-ticketing=on -chardev
+spicevmc,id=spicechannel0,name=vdagent -device
+virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 \"
+Then I boot the live ISO, double check that QXL driver is installed -which
+normally always is-, and install spice-vdagent package (version 20 here).
+I'm using remote-viewer (virt-viewer) to visualize the VM.
+
+Up to this point, clipboard sharing with host still doesn't work, and
+trying to drag a file from host to guest results in an error "The agent is
+not connected".
+
+So I manually run "spice-vdagent" command, and clipboard sharing now works,
+but trying to drag file from host to guest gives "File transfer is
+disabled". Also, automatic resolution change with window resizing doesn't
+work either.
+
+Certainly, this live distro doesn't come with any spice-related packages
+installed by default, except for the QXL package.
+
+Am I missing something here? Could someone help please?
+Thanks beforehand.
+
+--0000000000006f9d0905eaec9294
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hello.</div><div><br></div><div>I&#39;m trying a virt=
+ual machine with a live CD distribution called AntiX Linux, which is direct=
+ly based on Debian.</div><div><br></div><div>I&#39;m using direct QEMU comm=
+ands.</div><div>In the VM configuration I have this for SPICE configuration=
+:</div><div>&quot;-vga qxl -device virtio-serial-pci -spice unix=3Don,addr=
+=3Dpath/to/vm_spice.socket,disable-ticketing=3Don -chardev spicevmc,id=3Dsp=
+icechannel0,name=3Dvdagent -device virtserialport,chardev=3Dspicechannel0,n=
+ame=3Dcom.redhat.spice.0 \&quot;</div><div>Then I boot the live ISO, double=
+ check that QXL driver is installed -which normally always is-, and install=
+ spice-vdagent package (version 20 here). I&#39;m using remote-viewer (virt=
+-viewer) to visualize the VM.<br></div><div><br></div><div>Up to this point=
+, clipboard sharing with host still doesn&#39;t work, and trying to drag a =
+file from host to guest results in an error &quot;The agent is not connecte=
+d&quot;.</div><div><br></div><div>So I manually run &quot;spice-vdagent&quo=
+t; command, and clipboard sharing now works, but trying to drag file from h=
+ost to guest gives &quot;File transfer is disabled&quot;. Also, automatic r=
+esolution change with window resizing doesn&#39;t work either.</div><div><b=
+r></div><div>Certainly, this live distro doesn&#39;t come with any spice-re=
+lated packages installed by default, except for the QXL package.</div><div>=
+<br></div><div>Am I missing something here? Could someone help please?</div=
+><div>Thanks beforehand.<br></div></div>
+
+--0000000000006f9d0905eaec9294--
