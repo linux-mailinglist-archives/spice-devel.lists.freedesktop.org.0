@@ -2,69 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03EB05FFB0F
-	for <lists+spice-devel@lfdr.de>; Sat, 15 Oct 2022 17:38:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08ABE601E12
+	for <lists+spice-devel@lfdr.de>; Tue, 18 Oct 2022 02:04:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ECAF510E524;
-	Sat, 15 Oct 2022 15:37:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8128E89A72;
+	Tue, 18 Oct 2022 00:04:29 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0934410E51B
- for <spice-devel@lists.freedesktop.org>; Sat, 15 Oct 2022 15:37:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1665848274;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=nm7NkbT2WR8ChaZXsRWHqbJD2sFjbLtniUrmo6i/RWI=;
- b=HYlI2S6iP5onwND0Rf1XhFJ5BpJv75OCsJSCXI/f0soomfewGFmN2OJPFmGlFySXIRzso+
- mzfT67NLdNjifXFrZ204fmSOzAV537HV5CyxsZ6blu456gtH3BZW9A2vCMU+ksgXlZidfO
- LrMhUB4fXbovn4X/44tonSusKu/aTeA=
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-624-0JEtEfh3NhirUvV89OFilg-1; Sat, 15 Oct 2022 11:37:52 -0400
-X-MC-Unique: 0JEtEfh3NhirUvV89OFilg-1
-Received: by mail-pg1-f198.google.com with SMTP id
- p18-20020a63e652000000b0046b27534651so2600849pgj.17
- for <spice-devel@lists.freedesktop.org>; Sat, 15 Oct 2022 08:37:52 -0700 (PDT)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 287E289A72
+ for <spice-devel@lists.freedesktop.org>; Tue, 18 Oct 2022 00:04:25 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ c3-20020a1c3503000000b003bd21e3dd7aso13903507wma.1
+ for <spice-devel@lists.freedesktop.org>; Mon, 17 Oct 2022 17:04:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=s1cepHDAfxp7ObykesH/6aR+hRLp+Ff3IYwJLKA+GW0=;
+ b=F1Lnc7nTtXasdCALQk8dYg22ZJC/jxq5rzFcpkVpYCFk2rGAo/DmWh/rcYuYbvnH9A
+ G5GiH8MxXvf82x2hOqmVCecRuNAtaD+M8hzthcBbD8zR1uOPyWeZAFslk/As8LwvHjsK
+ Ggr9siEcRNGI4lttZrEBLdKhp958Ac3mAcE3FejzBM35vaHwJMWMWtLnOdI91QgJRnNF
+ Lt6p4AW+tBuDgNmSAJ/+cL8tXQiGgajXiVFqZFvNJ3hRwuvuDk1JoM8sqc3XhsWKHgRM
+ flffqhyajHvNVwUKCUsm92Z7uFnM84V+SaoEywu6jm0UapXxWv/f7PPWhcn/H4d3diSY
+ pW5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nm7NkbT2WR8ChaZXsRWHqbJD2sFjbLtniUrmo6i/RWI=;
- b=EHi3X/QFD6fQ6G2Llv/n9HuvozGCx8lkIviulVq6GBors0D4OSNc8hrAhFVBIRNEUC
- gakjdZ0hWhcU+yqU1TKYZUjOGx7K43bBeOijQj8twTk7X5mh78oRhl2XnuNLDi0ZMlnV
- xYpsfLszvOlbqkj0Dklfkkeo0+uiYie69Tj4u74aDdOh1SaUept83fAQfCCvTExrssCT
- xX7Ut6sNnJRI/fBYeYFS3MwciidOMnnmcQkKVzbKBkuCMgmYeH7vMdzotSoS9u2C8pJE
- FtbHmThdbD8YRQmjDBRFjxMaCg1nN49zDfsXYaNVGrM/+K1Fq5eMwyj33JGrY98e3eQL
- g9nw==
-X-Gm-Message-State: ACrzQf1DnvTSYqWgMZ2LgHPhTAN8cvUCkjDPJGHJU7qr+XVTLlUkdf3b
- 6ku7uP2NU0X+nGUwzm1EUdWGiLXSJse4JkTqYmZbCEzmVc9qwwEfh5mECDCPtZlJIMOBSSvimzd
- 4SGFZ/qQN3PToBSkACdYjV/vLJcHSwe/6Ifd0fF3/0pIRjBM=
-X-Received: by 2002:a17:90b:3c8f:b0:20d:959b:26f4 with SMTP id
- pv15-20020a17090b3c8f00b0020d959b26f4mr4033019pjb.104.1665848271703; 
- Sat, 15 Oct 2022 08:37:51 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM5OkBQtPbjdNVRJYsoh/G48R4sdNyScLV7Hzu3lQSH5pNRpETm9J/+Monp+uIrg0gRf5iTCbtvwbML+VhWsOjU=
-X-Received: by 2002:a17:90b:3c8f:b0:20d:959b:26f4 with SMTP id
- pv15-20020a17090b3c8f00b0020d959b26f4mr4032994pjb.104.1665848271393; Sat, 15
- Oct 2022 08:37:51 -0700 (PDT)
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=s1cepHDAfxp7ObykesH/6aR+hRLp+Ff3IYwJLKA+GW0=;
+ b=t+/B1K4Rz/tn5bk1piARAbtt30RQbqNnUIsatvvtpQ+XWYSP+0cfUQRJfj2DQKNzXx
+ m9GbIDJ39dV/Q/q84XNtxsLveXo6Oe2bhmAIfQECnUqXGNVci7gIAS3a4scTZyI2DPzr
+ EVszJ7hUKyEUf8CSDzKkcJyBM/2Gn2Z4yyhsqNft3+hL1WaYUyizuEjRTbHDcK0xFsvq
+ 5lP1qmujRe0VEnyahD6ACXAFZXWSdzCISPmX1XjAq3wIuYfsskPJy/7hO+EYM2q96cFe
+ mC53eIL6KOwMNq0NkwOh5act4sXMkBrEhyDKVvxysIvTnq+Vw+tEkvmeCcid34nFiMR1
+ mdKw==
+X-Gm-Message-State: ACrzQf2sBIvWb2ujr5smgUn+9139ON+heucfjG+3SUOPJjsVvl63gRvQ
+ V4qHUeUm8qFPTuT60DWkuLjhRrLCeUw3m3GLsfqwhkfA
+X-Google-Smtp-Source: AMsMyM4ClCAUeT3imk/1rTwXMFVQX2j6BDODaRN1VM61CMTGfAi40xjZJlQ9d/GsI3tFoXV2TEzSmb0jsb1wvP2NIxA=
+X-Received: by 2002:a05:600c:258:b0:3c6:fe18:b45 with SMTP id
+ 24-20020a05600c025800b003c6fe180b45mr88550wmj.8.1666051463253; Mon, 17 Oct
+ 2022 17:04:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <feda950daa6d43c9bd709fa86b6f9a67@MAIL.cloos.locl>
- <CAHt6W4caeUasBsXfAwkhX7oohQum9pV5zzJn+PmkXmdZYam2qw@mail.gmail.com>
- <0290ddf130a74dbf84b3b9b41901bf8b@MAIL.cloos.locl>
-In-Reply-To: <0290ddf130a74dbf84b3b9b41901bf8b@MAIL.cloos.locl>
-From: David Jasa <djasa@redhat.com>
-Date: Sat, 15 Oct 2022 17:37:40 +0200
-Message-ID: <CAO+CumqhMgLc8-PF1AVBZDmyM7PAPCQa1ZwwQPoHb0A6mDis-g@mail.gmail.com>
-To: "Eibach, Dirk" <Dirk.Eibach@cloos.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="0000000000007773ce05eb1486f0"
-Subject: Re: [Spice-devel] Running without qemu
+References: <CAGeBE=w-KZXVACD6xeeqfoo03K5BZxzA8O2U5x-8=NLsR=ZQKw@mail.gmail.com>
+ <CAHt6W4dkGkFVDBQbMFN0+AD24OB18uxhhQC5n4u51PiJGnAi8g@mail.gmail.com>
+ <CAGeBE=y4HKusjFMYez9uGEzEMm_9uhgDeW5uakB-bErUWcPoJQ@mail.gmail.com>
+ <CAHt6W4eysYyfv-9_W6n5YRv5qSd0rU46=vGf25fAO5s342a3aw@mail.gmail.com>
+In-Reply-To: <CAHt6W4eysYyfv-9_W6n5YRv5qSd0rU46=vGf25fAO5s342a3aw@mail.gmail.com>
+From: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
+Date: Tue, 18 Oct 2022 00:04:09 +0000
+Message-ID: <CAGeBE=xYOdDo40ec=T=auNhj-nq8nHXuOWZ6Tt+HT-gniu=YcQ@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000a5118505eb43d553"
+Subject: Re: [Spice-devel] Vdagent not working on a Debian guest
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,138 +66,213 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000007773ce05eb1486f0
+--000000000000a5118505eb43d553
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Dirk,
+Were you able to find something by chance? Thanks.
 
-For such a use, I suggest that you connect with CodeWeavers and
-particularly directly with Jeremy White (CCd) who actually developed
-x11spice. I'd expect that they would be happy to offer you the
-collaboration, tweaking and support you could need. :)
+El s=C3=A1b, 15 oct 2022 a las 9:22, Frediano Ziglio (<freddy77@gmail.com>)
+escribi=C3=B3:
 
-Cheers,
+> Il giorno ven 14 ott 2022 alle ore 16:11 Carlos Gonz=C3=A1lez
+> <piteccelaya@gmail.com> ha scritto:
+> >
+> > As soon as spice-vdagent package is installed, so is the spice-vdagentd
+> daemon and it also starts running. Yet I always need to manually run
+> spice-vdagent command...
+> >
+>
+> Maybe you would need to logout and login again from the graphic
+> session. Or manually start it, not sure.
+>
+> > How do I specify an output directory for the agent to file transfer?
+> >
+>
+> See "spice-vdagent --help", specifically -f and -o options.
+>
+> > I don't think it's remote-viewer's fault, because I also tested with a
+> Windows guest. With all SPICE stuff properly installed, everything works
+> out of the box: clipboard, resizing, file transfer from host to guest. Wi=
+th
+> "properly installed" I mean: installed SPICE drivers manually from
+> virtio-win ISO by loading them since the Windows installation beforehand,
+> then once booted into Windows downloaded the vdagent ZIP from spice-space
+> website and manually installed the service according to instructions.
+> >
+>
+> I'll check, maybe is not handled by driver but agent
+>
+> > As additional detail, in QEMU I use the option "-display spice-app",
+> which automatically starts remote-viewer; though curiously it doesn't see=
+m
+> to create a virt-viewer directory inside ~/.config unlike when running
+> remote-viewer manually...
+> >
+> > Thanks again.
+> >
+> > El vie, 14 oct 2022 a las 12:41, Frediano Ziglio (<freddy77@gmail.com>)
+> escribi=C3=B3:
+> >>
+> >> Il giorno gio 13 ott 2022 alle ore 16:58 Carlos Gonz=C3=A1lez
+> >> <piteccelaya@gmail.com> ha scritto:
+> >> >
+> >> > Hello.
+> >> >
+> >> > I'm trying a virtual machine with a live CD distribution called Anti=
+X
+> Linux, which is directly based on Debian.
+> >> >
+> >> > I'm using direct QEMU commands.
+> >> > In the VM configuration I have this for SPICE configuration:
+> >> > "-vga qxl -device virtio-serial-pci -spice
+> unix=3Don,addr=3Dpath/to/vm_spice.socket,disable-ticketing=3Don -chardev
+> spicevmc,id=3Dspicechannel0,name=3Dvdagent -device
+> virtserialport,chardev=3Dspicechannel0,name=3Dcom.redhat.spice.0 \"
+> >> > Then I boot the live ISO, double check that QXL driver is installed
+> -which normally always is-, and install spice-vdagent package (version 20
+> here). I'm using remote-viewer (virt-viewer) to visualize the VM.
+> >> >
+> >> > Up to this point, clipboard sharing with host still doesn't work, an=
+d
+> trying to drag a file from host to guest results in an error "The agent i=
+s
+> not connected".
+> >> >
+> >>
+> >> This error is normal if the agent is stopped.
+> >>
+> >> > So I manually run "spice-vdagent" command, and clipboard sharing now
+> works, but trying to drag file from host to guest gives "File transfer is
+> disabled". Also, automatic resolution change with window resizing doesn't
+> work either.
+> >> >
+> >>
+> >> The fact that in this way the clipboard is running indicates that the
+> >> agent is now working. You need to specify an output directory to the
+> >> agent in order to get file transfer working.
+> >> About the resolution change that's weird, I think that feature on
+> >> Linux does not even require the agent running. Is it possible that the
+> >> client (remove-viewer) is not set up to send resize to the guest
+> >> automatically, there are some options on the menu.
+> >>
+> >> > Certainly, this live distro doesn't come with any spice-related
+> packages installed by default, except for the QXL package.
+> >> >
+> >> > Am I missing something here? Could someone help please?
+> >> > Thanks beforehand.
+> >>
+> >> Frediano
+>
 
-David
-
-On Sat, Oct 15, 2022 at 12:19 PM Eibach, Dirk <Dirk.Eibach@cloos.de> wrote:
-
-> Hi Frediano,
->
-> thanks for having a look into this.
-> > ...
-> >    Did you mean something like
-> https://gitlab.freedesktop.org/spice/x11spice
-> > ?
->
-> Maybe, thanks. I will have a closer look. We are on windows though.
->
-> > Which OS and why not VNC and RDP if you are not using Qemu?
->
-> Long story. We have a Windows base robot controller that will be Linux
-> based in the next controller generation. The controller is rendering the
-> GUI and it is transferred from the Display-Port output to the operator
-> panel with a proprietary hardware over fiber.
-> Now we are designing a new operator panel that should display the GUI and
-> get it from the controller with a remote desktop protocol. For our
-> prototype we are using VNC and it works alright but the performance is
-> limited. There is also no option to connect USB-drives from the ope rator
-> panel to the controller via VNC.
-> RDP might work, but a  showstopper is, that the local console gets locked=
-.
-> We are using the local console to connect a second display.
-> Spice looks extremely promising because it is really cross platform, has
-> no local console lock, offer USB forwarding and seems to perform nicely.
->
-> Mit freundlichen Gr=C3=BC=C3=9Fen / Best Regards
-> Dirk Eibach
-> _________________________________
-> CARL CLOOS SCHWEISSTECHNIK GMBH
-> Softwareentwickler / AU-EW
-> Softwaredeveloper / AU-EW
-> Hauptverwaltung/Headquarters: Carl-Cloos-Strasse 1
-> Zentrallager/Central Warehouse: Carl-Cloos-Strasse 6
-> 35708 Haiger
-> Germany
-> Tel:      +49 2773 85-888
-> E-Mail:  mailto:dirk.eibach@cloos.de
-> Internet: http://www.cloos.de/
->
-> Sitz der Firma/Headquarters: 35708 Haiger, Germany
-> Amtsgericht/Lower district court: Wetzlar HR B 3052
-> Gesch=C3=A4ftsf=C3=BChrer/Management: Stephan Pittner (CEO), Alexander Ve=
-idt (CFO)
->
->
-
---0000000000007773ce05eb1486f0
+--000000000000a5118505eb43d553
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Hi Dirk,</div><div><br></div><div>For such a use, I s=
-uggest that you connect with CodeWeavers and particularly directly with Jer=
-emy White (CCd) who actually developed x11spice. I&#39;d expect that they w=
-ould be happy to offer you the collaboration, tweaking and support you coul=
-d need. :)</div><div><br></div><div>Cheers,</div><div><br></div><div>David<=
-br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gma=
-il_attr">On Sat, Oct 15, 2022 at 12:19 PM Eibach, Dirk &lt;<a href=3D"mailt=
-o:Dirk.Eibach@cloos.de" target=3D"_blank">Dirk.Eibach@cloos.de</a>&gt; wrot=
-e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi Frediano,<=
+<div dir=3D"ltr">Were you able to find something by chance? Thanks.<br></di=
+v><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">El s=
+=C3=A1b, 15 oct 2022 a las 9:22, Frediano Ziglio (&lt;<a href=3D"mailto:fre=
+ddy77@gmail.com">freddy77@gmail.com</a>&gt;) escribi=C3=B3:<br></div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex">Il giorno ven 14 ott 2022 alle =
+ore 16:11 Carlos Gonz=C3=A1lez<br>
+&lt;<a href=3D"mailto:piteccelaya@gmail.com" target=3D"_blank">piteccelaya@=
+gmail.com</a>&gt; ha scritto:<br>
+&gt;<br>
+&gt; As soon as spice-vdagent package is installed, so is the spice-vdagent=
+d daemon and it also starts running. Yet I always need to manually run spic=
+e-vdagent command...<br>
+&gt;<br>
+<br>
+Maybe you would need to logout and login again from the graphic<br>
+session. Or manually start it, not sure.<br>
+<br>
+&gt; How do I specify an output directory for the agent to file transfer?<b=
+r>
+&gt;<br>
+<br>
+See &quot;spice-vdagent --help&quot;, specifically -f and -o options.<br>
+<br>
+&gt; I don&#39;t think it&#39;s remote-viewer&#39;s fault, because I also t=
+ested with a Windows guest. With all SPICE stuff properly installed, everyt=
+hing works out of the box: clipboard, resizing, file transfer from host to =
+guest. With &quot;properly installed&quot; I mean: installed SPICE drivers =
+manually from virtio-win ISO by loading them since the Windows installation=
+ beforehand, then once booted into Windows downloaded the vdagent ZIP from =
+spice-space website and manually installed the service according to instruc=
+tions.<br>
+&gt;<br>
+<br>
+I&#39;ll check, maybe is not handled by driver but agent<br>
+<br>
+&gt; As additional detail, in QEMU I use the option &quot;-display spice-ap=
+p&quot;, which automatically starts remote-viewer; though curiously it does=
+n&#39;t seem to create a virt-viewer directory inside ~/.config unlike when=
+ running remote-viewer manually...<br>
+&gt;<br>
+&gt; Thanks again.<br>
+&gt;<br>
+&gt; El vie, 14 oct 2022 a las 12:41, Frediano Ziglio (&lt;<a href=3D"mailt=
+o:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt;) escribi=
+=C3=B3:<br>
+&gt;&gt;<br>
+&gt;&gt; Il giorno gio 13 ott 2022 alle ore 16:58 Carlos Gonz=C3=A1lez<br>
+&gt;&gt; &lt;<a href=3D"mailto:piteccelaya@gmail.com" target=3D"_blank">pit=
+eccelaya@gmail.com</a>&gt; ha scritto:<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Hello.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; I&#39;m trying a virtual machine with a live CD distribution =
+called AntiX Linux, which is directly based on Debian.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; I&#39;m using direct QEMU commands.<br>
+&gt;&gt; &gt; In the VM configuration I have this for SPICE configuration:<=
 br>
+&gt;&gt; &gt; &quot;-vga qxl -device virtio-serial-pci -spice unix=3Don,add=
+r=3Dpath/to/vm_spice.socket,disable-ticketing=3Don -chardev spicevmc,id=3Ds=
+picechannel0,name=3Dvdagent -device virtserialport,chardev=3Dspicechannel0,=
+name=3Dcom.redhat.spice.0 \&quot;<br>
+&gt;&gt; &gt; Then I boot the live ISO, double check that QXL driver is ins=
+talled -which normally always is-, and install spice-vdagent package (versi=
+on 20 here). I&#39;m using remote-viewer (virt-viewer) to visualize the VM.=
 <br>
-thanks for having a look into this.<br>
-&gt; ...<br>
-&gt;=C2=A0 =C2=A0 Did you mean something like <a href=3D"https://gitlab.fre=
-edesktop.org/spice/x11spice" rel=3D"noreferrer" target=3D"_blank">https://g=
-itlab.freedesktop.org/spice/x11spice</a><br>
-&gt; ?<br>
-<br>
-Maybe, thanks. I will have a closer look. We are on windows though.<br>
-<br>
-&gt; Which OS and why not VNC and RDP if you are not using Qemu?<br>
-<br>
-Long story. We have a Windows base robot controller that will be Linux base=
-d in the next controller generation. The controller is rendering the GUI an=
-d it is transferred from the Display-Port output to the operator panel with=
- a proprietary hardware over fiber.<br>
-Now we are designing a new operator panel that should display the GUI and g=
-et it from the controller with a remote desktop protocol. For our prototype=
- we are using VNC and it works alright but the performance is limited. Ther=
-e is also no option to connect USB-drives from the ope rator panel to the c=
-ontroller via VNC.<br>
-RDP might work, but a=C2=A0 showstopper is, that the local console gets loc=
-ked. We are using the local console to connect a second display.<br>
-Spice looks extremely promising because it is really cross platform, has no=
- local console lock, offer USB forwarding and seems to perform nicely.<br>
-<br>
-Mit freundlichen Gr=C3=BC=C3=9Fen / Best Regards<br>
-Dirk Eibach<br>
-_________________________________<br>
-CARL CLOOS SCHWEISSTECHNIK GMBH<br>
-Softwareentwickler / AU-EW<br>
-Softwaredeveloper / AU-EW<br>
-Hauptverwaltung/Headquarters: Carl-Cloos-Strasse 1<br>
-Zentrallager/Central Warehouse: Carl-Cloos-Strasse 6<br>
-35708 Haiger<br>
-Germany<br>
-Tel:=C2=A0 =C2=A0 =C2=A0 +49 2773 85-888<br>
-E-Mail:=C2=A0 mailto:<a href=3D"mailto:dirk.eibach@cloos.de" target=3D"_bla=
-nk">dirk.eibach@cloos.de</a><br>
-Internet: <a href=3D"http://www.cloos.de/" rel=3D"noreferrer" target=3D"_bl=
-ank">http://www.cloos.de/</a><br>
-<br>
-Sitz der Firma/Headquarters: 35708 Haiger, Germany<br>
-Amtsgericht/Lower district court: Wetzlar HR B 3052<br>
-Gesch=C3=A4ftsf=C3=BChrer/Management: Stephan Pittner (CEO), Alexander Veid=
-t (CFO)<br>
-<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Up to this point, clipboard sharing with host still doesn&#39=
+;t work, and trying to drag a file from host to guest results in an error &=
+quot;The agent is not connected&quot;.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt;<br>
+&gt;&gt; This error is normal if the agent is stopped.<br>
+&gt;&gt;<br>
+&gt;&gt; &gt; So I manually run &quot;spice-vdagent&quot; command, and clip=
+board sharing now works, but trying to drag file from host to guest gives &=
+quot;File transfer is disabled&quot;. Also, automatic resolution change wit=
+h window resizing doesn&#39;t work either.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt;<br>
+&gt;&gt; The fact that in this way the clipboard is running indicates that =
+the<br>
+&gt;&gt; agent is now working. You need to specify an output directory to t=
+he<br>
+&gt;&gt; agent in order to get file transfer working.<br>
+&gt;&gt; About the resolution change that&#39;s weird, I think that feature=
+ on<br>
+&gt;&gt; Linux does not even require the agent running. Is it possible that=
+ the<br>
+&gt;&gt; client (remove-viewer) is not set up to send resize to the guest<b=
+r>
+&gt;&gt; automatically, there are some options on the menu.<br>
+&gt;&gt;<br>
+&gt;&gt; &gt; Certainly, this live distro doesn&#39;t come with any spice-r=
+elated packages installed by default, except for the QXL package.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Am I missing something here? Could someone help please?<br>
+&gt;&gt; &gt; Thanks beforehand.<br>
+&gt;&gt;<br>
+&gt;&gt; Frediano<br>
 </blockquote></div>
 
---0000000000007773ce05eb1486f0--
-
+--000000000000a5118505eb43d553--
