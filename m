@@ -2,62 +2,105 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 767E26069E4
-	for <lists+spice-devel@lfdr.de>; Thu, 20 Oct 2022 22:52:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 073A0607349
+	for <lists+spice-devel@lfdr.de>; Fri, 21 Oct 2022 11:08:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9B89D10E155;
-	Thu, 20 Oct 2022 20:52:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3726610E64C;
+	Fri, 21 Oct 2022 09:08:49 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B021B10E09E
- for <spice-devel@lists.freedesktop.org>; Thu, 20 Oct 2022 20:51:59 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id f11so990891wrm.6
- for <spice-devel@lists.freedesktop.org>; Thu, 20 Oct 2022 13:51:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cvoeK8c16/GcTyn+NMghEBJ+gWt4byePsTjvljFcjPs=;
- b=XnUHDyN+CVyg3t6+lwexoKWQly7NRtQHt0gJwi7MYfobJbRX+ZAfTLQoEQUTS/WnpO
- NiCuylGH0TjowLjyMZ0xcbvaBHVhB5G8Q5TPp5mzUGfuzS7Yj2RngbiAqAxNzqslWGkM
- +GPcUUq0AtA1RxQhldxr5V48XdfP/9sdeJDtsX4DwexPzWjBjbYco4spkf491gAFesHC
- 5Cm0WkbiKeu6e8OxmDePlLmH+epaXK9NuPwiQxqZV8nb5BveQPSrcRQD0Qa2luyAUUgx
- 8RxZkx0BC3vRcLR9H1vPlpRgZMqwYmfzbt9Lj6ChI0unWralsHu2UuDHRGy1rbA7dwlY
- V9Ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cvoeK8c16/GcTyn+NMghEBJ+gWt4byePsTjvljFcjPs=;
- b=GCOoDHyiApABO8qVLuistSP9aYeCb24z+Bk/2sv3SYNx21fjRSpIgpc/tec7zMeG7y
- KVIsL1UVwlnQXU0o5A/sCesrdLvBzrrYxXhJiSy3oXV++S6FWRHsrIb60C+mMgXoS9NB
- XDSt6pWMxXYmHidZnETzI1sMojylJb2qqXc+U2lyY0ryJz26jTNHEu8Sdd8sUUxjTITP
- VEAFGsbvHrQWmrAcsOhLizGSfLJvmEpa3hT77PeLMB7A4IDiufA8bgd2znmIXJxrAdbo
- 1Lzg+lr+gsCarKmWFc6lROCQfzQe9qbo4PZ6OL7QyHuuytzcwDOsq3U14LNqgdMvyQz1
- hfzg==
-X-Gm-Message-State: ACrzQf34lCgsPwIj2WocWb23q57EMDEfeaxT9y1fKFq2qPEzZDoR6I+o
- Stgh27/NeaHPME7bXXQ8Dj/makf/i3rYbvvzmlY=
-X-Google-Smtp-Source: AMsMyM4W75DdUkFMGG/G/X4/YwfbPrFqrSCQWPswJWWIjXC+gW5iR58Ai7sVriE+pnLvN6fxc/Xh8t8KL3LyDxBUqEQ=
-X-Received: by 2002:a5d:4f10:0:b0:231:1c7b:e42 with SMTP id
- c16-20020a5d4f10000000b002311c7b0e42mr9892221wru.568.1666299117953; Thu, 20
- Oct 2022 13:51:57 -0700 (PDT)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03olkn2099.outbound.protection.outlook.com [40.92.57.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 01B3710E648
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Oct 2022 09:06:37 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=M3r/LA0KAO5AWVuQZ87Ot4JrzPpy1hhRTt57iQw0iHOQg/4va72XgtG/BYZonAfD5BS8NGBBgseehlCpAJleu4h2fyAU3CRe4Y79fKWOYzeQ1V+x6OTcPyHwJuJQkyiq4vZ6TwAEJ5MbDh24D5WXdft79NuBNcgYxvNBu3HdMTomRwQnvC1fO+lwH/gxO9gWz2vulvEa3d5YX5Ag51tra7uKzcQpAXjkSD0lJ1+V66cLD4FM+RQJ4RkXuKFurvMiJPQ+vcGs9vZgenTqNqXJbjaFm2Ip1QGbghGeaAxOKFBIWBP8f8QZB5KqHQxd1sWftYMM8TCHLvp5oLzJdh6qqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YXgcIH1LfgSg+DqiY+yxcu4R65yzYTbFKLBlrh0S+Yc=;
+ b=f+s5QkxWjsvRAzrjj+Bs+x2S5vQPtEC7J6294O8/a3RFoH+HwfuMYb2xtNYSeoptCS4T+Ggv777TVuIrWcPc1BgRkds4gxFCOklIlTNp+arUMDsUR2MwvO01goYe5SUGvVi8CSRo0W8VPte6V629Sa8KfdHzgHJIRTdt6C0aDfLFbSBxvlRdFfcm5bVlQ6Y+6EFBF+gSACSIt5PAmxVip/1ZI9pA1e+2/KHwQOxrAYm5TIG5NDDHRmb6DCiC4nYAw0dg0Eep9FO42YPb1o+iBCGQEMgvAYiOMOqGQpotSN1VpohryqcVumnfTV0pPpuwd7VF/giIBE56PFVY+XlAwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YXgcIH1LfgSg+DqiY+yxcu4R65yzYTbFKLBlrh0S+Yc=;
+ b=cpVSiDH3DgROkR1pv0V7JGJG/LwazH554OCkrFtlZGJdSReZCwiyxuoqgWmZa5/FLayagcrf189nzTM5WWclBA0HcMnkCekVwKY5cbIocZSRBNcRlp3CdARyYWx5jONxwF1xBLN5s0sWIwj10QZ0Fg6QxHvgc48WnO9oxXE+DrFW6kgHt8QBQCKYYhsltetVdlkip/CqESx+m2E97cl+01+hzc6Z2PNUOebIeYxJcdKB8SboW/5aXwYl7oqYAI5ZEzmcmrjb2rNEyTkT+cla0XG6g2a7aMAC6F4HpgUyZ2rOXu6CvfkD9N0xqgzL4ih+v6gOzkU35OvpBdt3rxFk4A==
+Received: from PR3P195MB0926.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:a3::13)
+ by DU0P195MB1884.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:3e0::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34; Fri, 21 Oct
+ 2022 09:06:35 +0000
+Received: from PR3P195MB0926.EURP195.PROD.OUTLOOK.COM
+ ([fe80::f7ab:71c1:d516:62a2]) by PR3P195MB0926.EURP195.PROD.OUTLOOK.COM
+ ([fe80::f7ab:71c1:d516:62a2%3]) with mapi id 15.20.5723.035; Fri, 21 Oct 2022
+ 09:06:17 +0000
+Content-Type: multipart/alternative;
+ boundary="------------uToo12a82O91iCJKRN1eoNxP"
+Message-ID: <PR3P195MB0926FB4F790A29D8F44852309E2D9@PR3P195MB0926.EURP195.PROD.OUTLOOK.COM>
+Date: Fri, 21 Oct 2022 10:06:15 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+From: Frantz Honegger <frantz_honegger@hotmail.com>
+To: spice-devel@lists.freedesktop.org
+References: <89b5b380-2130-4853-c3e7-793f99cd6d61@hotmail.com>
+Content-Language: fr, en-US
+In-Reply-To: <89b5b380-2130-4853-c3e7-793f99cd6d61@hotmail.com>
+X-TMN: [SPlVw7NFokk2p7F/vCqi/hJeLZuNsyeZLhDvoggrpUY=]
+X-ClientProxiedBy: MR1P264CA0175.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:58::7) To PR3P195MB0926.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:102:a3::13)
+X-Microsoft-Original-Message-ID: <29cd8a81-2599-a008-8a38-5dd8c4155509@hotmail.com>
 MIME-Version: 1.0
-References: <CAGeBE=w-KZXVACD6xeeqfoo03K5BZxzA8O2U5x-8=NLsR=ZQKw@mail.gmail.com>
- <CAHt6W4dkGkFVDBQbMFN0+AD24OB18uxhhQC5n4u51PiJGnAi8g@mail.gmail.com>
- <CAGeBE=y4HKusjFMYez9uGEzEMm_9uhgDeW5uakB-bErUWcPoJQ@mail.gmail.com>
- <CAHt6W4eysYyfv-9_W6n5YRv5qSd0rU46=vGf25fAO5s342a3aw@mail.gmail.com>
- <CAGeBE=xYOdDo40ec=T=auNhj-nq8nHXuOWZ6Tt+HT-gniu=YcQ@mail.gmail.com>
- <CAHt6W4cJW-Lj_rE+c9YqrDSft5f0t4RJ41z4bv4y2gVYyyfwNQ@mail.gmail.com>
- <CAAg9qJ3bMd=3_YD4UJ1rHDmm3s7L5NG047eioeuJ209s50MAKg@mail.gmail.com>
-In-Reply-To: <CAAg9qJ3bMd=3_YD4UJ1rHDmm3s7L5NG047eioeuJ209s50MAKg@mail.gmail.com>
-From: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
-Date: Thu, 20 Oct 2022 20:51:46 +0000
-Message-ID: <CAGeBE=w5OVLoKD_E72HdacqCivp=ZS2tuaDoHMJTB82-68W0-A@mail.gmail.com>
-To: Uri Lublin <uril@redhat.com>, "freddy77@gmail.com" <freddy77@gmail.com>, 
- spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000003e77c05eb7d7f92"
-Subject: Re: [Spice-devel] Vdagent not working on a Debian guest
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PR3P195MB0926:EE_|DU0P195MB1884:EE_
+X-MS-Office365-Filtering-Correlation-Id: f15f5f32-28ec-488f-cf29-08dab343830c
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: M0hfRRd0J2F3dJDF4nZJ9FGaZmbAYDGNG0U+jLLyUoxgv6BbUwoUKVkbAG7uqtSvLeS6Zq0lcCIUBHDhOePQaaxHrxVtFtiEVZvx11bFiRWME8au7lEKVDL5Pq+col8mlmEo5UxBxayidli5mQDVJQIIKA39ETZ6P/2M5xSQ/b+Qz7ay7TCBocxiLVpmYpK8Ps7E3CimIvj3VQ6qOS5Y7QEPXx2/sxJncp8pcQYZMciPWyyk1ZW7fX+MJhVDnncJhAcaMyAM4Vc54kteAZt9SG9zlYfpSa1hMgdnB79R+3qJHuUNFvJb8eoeF6i4jQibiOaQSUbm4IH0IgUZadBhPk+jT+g7/aioa2W3uRuTMCrvj0IEVwtkFmEjxDdK3hi9Ebfmx9iGOAHFC5wiWv0ZYUN0oY7+7Lx29z084Q0pV0vP0wZe9jz/87cUvg0HuPzt7EGWl9+MEdZO7qwr88BiwTkJaZHSxsv1MadZkVWsym7iawZsGQe6rX9YKEyilVNqfoRwJ6arcKvT0sO6lvDTVK+udLp4Vjee5uBu+1IKbgrAEoNbOsFlwFHAW06XEk7DkqPVrIOkKhT0dZQRrQS+CXFYyjYKjwU47ad0N39E0CFWTV+hpLdCAwcVes2WdnUddK79z5GbSwtNFj1H2DRsIfeOwWp8+brsiPyfr8BIqMUOGcICAU2jTce1GO3ESkfg
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UTNVK05JaFBrajZKV0JwdmpxNVZpU0trZWhpZllNRFl5clAyYVRqOFEzRC9W?=
+ =?utf-8?B?cXRhbkxESU1SN1BXc0sxNm83UkhSUEVDbEhqQXV3SDJGSmsxS2FlTnR3N3R2?=
+ =?utf-8?B?dFo5ZzZaZElvRGNxTkxySGF4SFpYbVEvZWc5Q2xJSDNLU1JBTVdxcmQwcG8v?=
+ =?utf-8?B?WnpraUZSeEpMQzR4V1BlaHBtMXRCR3dKZWRwZDlELzBqTC9GVGp3WnN4RjZG?=
+ =?utf-8?B?NFJmbW1Nd3FoeEV4UVRpVnVPYktiMTZseXB3TjFXZHpZdHg5SW9uTnRyQjVD?=
+ =?utf-8?B?UG13eVFYdUR4QTJwaFpFODJvUkVPaEVNZlV1WElOY201dUQzTE1XdlNuYXlV?=
+ =?utf-8?B?MlFRb3JoN0hKUWpsN0FrTExhVEpRYW9mUlBza2kzM3k2eTU2aDJHTldIUTg1?=
+ =?utf-8?B?U1lTL1VRcEFvV1M4dlZ4VjlZMERwcG8wMjU1ci9zOXgxZnExemVwZi96TVU5?=
+ =?utf-8?B?S1JtMjRTK3FVQU5DSXRLQnhJV2tBcUhnRHhXcDlEMEg1RlZLQXAxNTkvQ0dz?=
+ =?utf-8?B?U2JXVy9vQjdjZDhvd3dmaWZTbDFTUWZNTXhrSzlPeFJmY2wrSEU3aHU5SFpv?=
+ =?utf-8?B?V0VkYVAzVUl1Z1BxUFQ3Z3BWMnZDcStLSXY3QnpxT1JQK1g0TzAyaW1QaXRo?=
+ =?utf-8?B?UW9sanlhRTJuSy91azJVaUNYV05ZdnhSbW9yci9JM3NHZnBpbzFVK1VNWkJZ?=
+ =?utf-8?B?Q0pXOUIxYzJMRmJ1VERkNFZEVVU4THFPK2RiZmtDUlEwMnNsOWdtTVBXdmdz?=
+ =?utf-8?B?OWpQUUl6aFp0bEFIcnBDWHJyRm1TOHZHUUlEcFFSWFY2Q0xUYlVGa0E0NFlk?=
+ =?utf-8?B?K3BPZDRVYzJCb25NQk83SEkxSUovblZZUGRDcXdsTktBbEVxQklFVTgybmg5?=
+ =?utf-8?B?cWxESkEzNHoxVjRTQVFYVzJ6L21ncGZraDgyTUdDVXAxdHplVGEyUmJWSCto?=
+ =?utf-8?B?ek1teXl6WXFwY1FCRm1Bc0hjN0hIT0VjOVhIdVRzTGIzRFVXdWpqaEU1TG1t?=
+ =?utf-8?B?WkVCQmFxcUxCTTBSQjFRdjVxTjBBMXRBdTc4MGJtTTRqTS9SWlpGdXJJQWRy?=
+ =?utf-8?B?R2pWclRlc0s2UlNrbXdBZWdEdFFIVHZBL09yMkNPUnhOZk83VWR4b2xqSkQ2?=
+ =?utf-8?B?RndGSU5mZjdrQTUzMk1GcUxGbE9qbFhpUmV2c09kdzBYcVpnekE3UHVDN3Fx?=
+ =?utf-8?B?NEpFNEhCN3VSYUpTbEtlVEo5Y0dLQTFSZjFjRms3SU9oM0tFLzZoV0NDWTJ4?=
+ =?utf-8?B?RFlLVWVwYXNRVHhCRnlaejhGUnZEclptOC96bWoxM1ZGa0ludkxGN3g3Ulgz?=
+ =?utf-8?B?MGQxNVRnMFJCa0U4S3VXQlRETnBCM1MrYmhBZ1NNdThxTnp0MkY0VC9MZ1Rx?=
+ =?utf-8?B?UklQMVJQQ0w1NURhYTdqdHdBejMrdFhZNHlyZ3pqNWVMWnBweVc5LzFGZk5J?=
+ =?utf-8?B?elc4YlFoeGpJSjIxdVpnS0x2aDhNb21uUGR5UlVwNXYzczZVakgwSzczT01K?=
+ =?utf-8?B?VFRsY1QzS01VUkZ0THk3WGF0MFdoWEJ0d3dqV3dVdldOdEJyZmgvTDNidG13?=
+ =?utf-8?B?R1ZyUUZ3aGU3ZVRJREhYUUx5MkFpY0s3cjlDYUZ3dkVRd29wbHZ0ckt5NHVx?=
+ =?utf-8?B?Wk1CcE8xV3M3RGNuNktHaVhaR0JSbWFNeWJqQ1NIUzZ0eS9mK3lrUnMralpV?=
+ =?utf-8?B?LzVnOGd2anZ5aDRvZ20rVTVzZFNOQ3FUMHVBbG1GUGljSzNBS2ZSY3huY2xo?=
+ =?utf-8?Q?fziPlr9Ey08pAQaQXE=3D?=
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-49ed2.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: f15f5f32-28ec-488f-cf29-08dab343830c
+X-MS-Exchange-CrossTenant-AuthSource: PR3P195MB0926.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2022 09:06:17.2150 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1884
+X-Mailman-Approved-At: Fri, 21 Oct 2022 09:08:42 +0000
+Subject: Re: [Spice-devel] spice-webdav - change default shared directory
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,346 +115,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000003e77c05eb7d7f92
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--------------uToo12a82O91iCJKRN1eoNxP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-So I did more tests.
+Dear Mr,
 
-First, AntiX Linux by default doesn't use "desktop environments" but
-"window managers", being the default IceWM. Also, it doesn't use SystemD at
-all; SysV instead. Regarding Xorg or Wayland, it's Xorg.
+Please disregard my previous email as I finally found the answer:
 
-> I did some tests and with both Windows and Linux it appears that the
-> agent is needed.
+//usr/bin/virt-viewer -w --spice-shared-dir=/home/user VM/
 
-Well, of course it's needed! That's per basic instructions...
+If you don't mind, I have one remaining question: is it possible to 
+enable folder sharing by default, so that we don't have to go to the 
+File" → "Preferences" menu of virt-viewer to enable it each time we 
+start the VM?
 
-Since there's no SystemD here, neither journalctl command. So tried running
-both spice-vdagentd and spice-vdagent with debugging:
-sudo /usr/sbin/spice-vdagentd -x -d -d
-spice-vdagent -f /path/to/folder -x -d -d
+Again, thank you very much for your work and your help.
 
-When resizing the remote-viewer window, no logs whatsoever, and of course
-neither resolution update. Also, using the -f option served of nothing;
-exact same error mentioned before...
-Neither anything at all related in /var/log/Xorg.0.log
-*Only* clipboard sharing seems to work
+Have a very nice day,
 
-By chance, do you think you could give the live ISO a try? It's a live
-system, and the "Base" version is a CD size, not even a DVD...
+Best regards,
 
-Thanks again for your attention.
+Frantz Honegger
 
-El mi=C3=A9, 19 oct 2022 a las 15:00, Uri Lublin (<uril@redhat.com>) escrib=
-i=C3=B3:
-
-> Hi,
+Le 20/10/2022 à 19:19, Frantz Honegger a écrit :
 >
-> On Tue, Oct 18, 2022 at 8:40 PM Frediano Ziglio <freddy77@gmail.com>
-> wrote:
+> Dear Mr,
 >
->> Il giorno mar 18 ott 2022 alle ore 01:04 Carlos Gonz=C3=A1lez
->> <piteccelaya@gmail.com> ha scritto:
->> >
->> > Were you able to find something by chance? Thanks.
->> >
->>
->> Hi Carlos,
->>    my main curiosity was about the need of the agent for resize.
->> I did some tests and with both Windows and Linux it appears that the
->> agent is needed.
->> At this point I would try looking at the agent logs.
->> Is your system using Xorg or Wayland ?
->>
->> Regards,
->>    Frediano
->>
->>
-> I agree with Frediano that (with a recent QXL device) the arbitrary
-> resolution update is done via QXL.
-> Note that it does not work for all Desktop Environments, and I apparently
-> it doesn't work for AntiX Linux (default DE).
-> If you can, try to run with GNOME/X11 and see if that works.
+> Thank you very much for your time.
 >
-> Related bug: https://bugzilla.redhat.com/show_bug.cgi?id=3D1290586
+> Could you please provide me with additional information about the 
+> necessary settings to modify the spice-webdav default shared directory 
+> (the directory is ~/Public by default, but I would like it to be 
+> /home/user for example).
 >
-> Regards,
->     Uri.
+> I did a lot of research on the net but could only find the below 
+> information from https://github.com/lofyer/spice-webdav :
 >
+> */In your virt-viewer client/*/
+> //
+> //The Spice client can share a folder with the remote guest. By 
+> default folder sharing is disabled. Use the remote-viewer "File" → 
+> "Preferences" menu to enable it. The default shared directory is the 
+> XDG Public Share directory (ie ~/Public if you use a regular system). 
+> You may specify a different folder with --spice-share-dir client option./
 >
-> > El s=C3=A1b, 15 oct 2022 a las 9:22, Frediano Ziglio (<freddy77@gmail.c=
-om>)
->> escribi=C3=B3:
->> >>
->> >> Il giorno ven 14 ott 2022 alle ore 16:11 Carlos Gonz=C3=A1lez
->> >> <piteccelaya@gmail.com> ha scritto:
->> >> >
->> >> > As soon as spice-vdagent package is installed, so is the
->> spice-vdagentd daemon and it also starts running. Yet I always need to
->> manually run spice-vdagent command...
->> >> >
->> >>
->> >> Maybe you would need to logout and login again from the graphic
->> >> session. Or manually start it, not sure.
->> >>
->> >> > How do I specify an output directory for the agent to file transfer=
-?
->> >> >
->> >>
->> >> See "spice-vdagent --help", specifically -f and -o options.
->> >>
->> >> > I don't think it's remote-viewer's fault, because I also tested wit=
-h
->> a Windows guest. With all SPICE stuff properly installed, everything wor=
-ks
->> out of the box: clipboard, resizing, file transfer from host to guest. W=
-ith
->> "properly installed" I mean: installed SPICE drivers manually from
->> virtio-win ISO by loading them since the Windows installation beforehand=
-,
->> then once booted into Windows downloaded the vdagent ZIP from spice-spac=
-e
->> website and manually installed the service according to instructions.
->> >> >
->> >>
->> >> I'll check, maybe is not handled by driver but agent
->> >>
->> >> > As additional detail, in QEMU I use the option "-display spice-app"=
-,
->> which automatically starts remote-viewer; though curiously it doesn't se=
-em
->> to create a virt-viewer directory inside ~/.config unlike when running
->> remote-viewer manually...
->> >> >
->> >> > Thanks again.
->> >> >
->> >> > El vie, 14 oct 2022 a las 12:41, Frediano Ziglio (<
->> freddy77@gmail.com>) escribi=C3=B3:
->> >> >>
->> >> >> Il giorno gio 13 ott 2022 alle ore 16:58 Carlos Gonz=C3=A1lez
->> >> >> <piteccelaya@gmail.com> ha scritto:
->> >> >> >
->> >> >> > Hello.
->> >> >> >
->> >> >> > I'm trying a virtual machine with a live CD distribution called
->> AntiX Linux, which is directly based on Debian.
->> >> >> >
->> >> >> > I'm using direct QEMU commands.
->> >> >> > In the VM configuration I have this for SPICE configuration:
->> >> >> > "-vga qxl -device virtio-serial-pci -spice
->> unix=3Don,addr=3Dpath/to/vm_spice.socket,disable-ticketing=3Don -chardev
->> spicevmc,id=3Dspicechannel0,name=3Dvdagent -device
->> virtserialport,chardev=3Dspicechannel0,name=3Dcom.redhat.spice.0 \"
->> >> >> > Then I boot the live ISO, double check that QXL driver is
->> installed -which normally always is-, and install spice-vdagent package
->> (version 20 here). I'm using remote-viewer (virt-viewer) to visualize th=
-e
->> VM.
->> >> >> >
->> >> >> > Up to this point, clipboard sharing with host still doesn't work=
-,
->> and trying to drag a file from host to guest results in an error "The ag=
-ent
->> is not connected".
->> >> >> >
->> >> >>
->> >> >> This error is normal if the agent is stopped.
->> >> >>
->> >> >> > So I manually run "spice-vdagent" command, and clipboard sharing
->> now works, but trying to drag file from host to guest gives "File transf=
-er
->> is disabled". Also, automatic resolution change with window resizing
->> doesn't work either.
->> >> >> >
->> >> >>
->> >> >> The fact that in this way the clipboard is running indicates that
->> the
->> >> >> agent is now working. You need to specify an output directory to t=
-he
->> >> >> agent in order to get file transfer working.
->> >> >> About the resolution change that's weird, I think that feature on
->> >> >> Linux does not even require the agent running. Is it possible that
->> the
->> >> >> client (remove-viewer) is not set up to send resize to the guest
->> >> >> automatically, there are some options on the menu.
->> >> >>
->> >> >> > Certainly, this live distro doesn't come with any spice-related
->> packages installed by default, except for the QXL package.
->> >> >> >
->> >> >> > Am I missing something here? Could someone help please?
->> >> >> > Thanks beforehand.
->> >> >>
->> >> >> Frediano
->>
->>
+> The problem is that I don't know where the "--spice-share-dir client 
+> option" should be set (I am using virt-viewer). Could you please 
+> provide me with a concrete example or more information?
+>
+> Thank you very much for your work and your help.
+>
+> Have a very nice day,
+>
+> Best regards,
+>
+> Frantz Honegger
+>
+--------------uToo12a82O91iCJKRN1eoNxP
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---00000000000003e77c05eb7d7f92
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <p>Dear Mr,</p>
+    <p>Please disregard my previous email as I finally found the answer:</p>
+    <p><i>/usr/bin/virt-viewer -w --spice-shared-dir=/home/user VM</i><br>
+    </p>
+    <p>If you don't mind, I have one remaining question: is it possible
+      to enable folder sharing by default, so that we don't have to go
+      to the File&quot; → &quot;Preferences&quot; menu of virt-viewer to enable it each
+      time we start the VM?</p>
+    <p>Again, thank you very much for your work and your help.</p>
+    <p>Have a very nice day,</p>
+    <p>Best regards,</p>
+    <p>Frantz Honegger</p>
+    <p></p>
+    <div class="moz-cite-prefix">Le 20/10/2022 à 19:19, Frantz Honegger
+      a écrit&nbsp;:<br>
+    </div>
+    <blockquote type="cite" cite="mid:89b5b380-2130-4853-c3e7-793f99cd6d61@hotmail.com">
+      
+      <p>Dear Mr,</p>
+      <p>Thank you very much for your time.<br>
+      </p>
+      <p>Could you please provide me with additional information about
+        the necessary settings to modify the spice-webdav default shared
+        directory (the directory is ~/Public by default, but I would
+        like it to be /home/user for example).</p>
+      <p>I did a lot of research on the net but could only find the
+        below information from <a class="moz-txt-link-freetext" href="https://github.com/lofyer/spice-webdav" moz-do-not-send="true">https://github.com/lofyer/spice-webdav</a>
+        :<br>
+      </p>
+      <p><b><i>In your virt-viewer client</i></b><i><br>
+        </i><i><br>
+        </i><i>The Spice client can share a folder with the remote
+          guest. By default folder sharing is disabled. Use the
+          remote-viewer &quot;File&quot; → &quot;Preferences&quot; menu to enable it. The
+          default shared directory is the XDG Public Share directory (ie
+          ~/Public if you use a regular system). You may specify a
+          different folder with --spice-share-dir client option.</i></p>
+      <p>The problem is that I don't know where the &quot;--spice-share-dir
+        client option&quot; should be set (I am using virt-viewer). Could you
+        please provide me with a concrete example or more information?<br>
+      </p>
+      <p>Thank you very much for your work and your help.</p>
+      <p>Have a very nice day,</p>
+      <p>Best regards,</p>
+      <p>Frantz Honegger<br>
+      </p>
+    </blockquote>
+  </body>
+</html>
 
-<div dir=3D"ltr"><div>So I did more tests.</div><div><br></div><div>First, =
-AntiX Linux by default doesn&#39;t use &quot;desktop environments&quot; but=
- &quot;window managers&quot;, being the default IceWM. Also, it doesn&#39;t=
- use SystemD at all; SysV instead. Regarding Xorg or Wayland, it&#39;s Xorg=
-.</div><div><br></div><div><span class=3D"gmail-im">&gt; I did some tests a=
-nd with both Windows and Linux it appears that the<br>
-&gt; agent is needed.</span></div><div><br></div><div>Well, of course it&#3=
-9;s needed! That&#39;s per basic instructions...<br></div><div><br></div><d=
-iv>Since there&#39;s no SystemD here, neither journalctl command. So tried =
-running both spice-vdagentd and spice-vdagent with debugging:</div><div>sud=
-o /usr/sbin/spice-vdagentd -x -d -d</div><div>spice-vdagent -f /path/to/fol=
-der -x -d -d</div><div><br></div><div>When resizing the remote-viewer windo=
-w, no logs whatsoever, and of course neither resolution update. Also, using=
- the -f option served of nothing; exact same error mentioned before...<br><=
-/div><div>Neither anything at all related in /var/log/Xorg.0.log</div><div>=
-*Only* clipboard sharing seems to work<br></div><div><br></div><div>By chan=
-ce, do you think you could give the live ISO a try? It&#39;s a live system,=
- and the &quot;Base&quot; version is a CD size, not even a DVD...</div><div=
-><br></div><div>Thanks again for your attention.<br></div></div><br><div cl=
-ass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">El mi=C3=A9, 19 o=
-ct 2022 a las 15:00, Uri Lublin (&lt;<a href=3D"mailto:uril@redhat.com">uri=
-l@redhat.com</a>&gt;) escribi=C3=B3:<br></div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex"><div dir=3D"ltr"><div>Hi,<br></div><br><div class=3D"g=
-mail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Oct 18, 2022 at 8=
-:40 PM Frediano Ziglio &lt;<a href=3D"mailto:freddy77@gmail.com" target=3D"=
-_blank">freddy77@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gma=
-il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
-04,204);padding-left:1ex">Il giorno mar 18 ott 2022 alle ore 01:04 Carlos G=
-onz=C3=A1lez<br>
-&lt;<a href=3D"mailto:piteccelaya@gmail.com" target=3D"_blank">piteccelaya@=
-gmail.com</a>&gt; ha scritto:<br>
-&gt;<br>
-&gt; Were you able to find something by chance? Thanks.<br>
-&gt;<br>
-<br>
-Hi Carlos,<br>
-=C2=A0 =C2=A0my main curiosity was about the need of the agent for resize.<=
-br>
-I did some tests and with both Windows and Linux it appears that the<br>
-agent is needed.<br>
-At this point I would try looking at the agent logs.<br>
-Is your system using Xorg or Wayland ?<br>
-<br>
-Regards,<br>
-=C2=A0 =C2=A0Frediano<br>
-<br></blockquote><br><div>I agree with Frediano that (with a recent QXL dev=
-ice) the arbitrary resolution update is done via QXL.<br></div><div>Note th=
-at it does not work for all Desktop Environments, and I apparently it doesn=
-&#39;t work for AntiX Linux (default DE).</div><div>If you can, try to run =
-with GNOME/X11 and see if that works.<br></div><div><br></div><div>Related =
-bug: <a href=3D"https://bugzilla.redhat.com/show_bug.cgi?id=3D1290586" targ=
-et=3D"_blank">https://bugzilla.redhat.com/show_bug.cgi?id=3D1290586</a></di=
-v><div><br></div><div>Regards,</div><div>=C2=A0=C2=A0=C2=A0 Uri.</div><div>=
-<br></div><div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-&gt; El s=C3=A1b, 15 oct 2022 a las 9:22, Frediano Ziglio (&lt;<a href=3D"m=
-ailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt;) esc=
-ribi=C3=B3:<br>
-&gt;&gt;<br>
-&gt;&gt; Il giorno ven 14 ott 2022 alle ore 16:11 Carlos Gonz=C3=A1lez<br>
-&gt;&gt; &lt;<a href=3D"mailto:piteccelaya@gmail.com" target=3D"_blank">pit=
-eccelaya@gmail.com</a>&gt; ha scritto:<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; As soon as spice-vdagent package is installed, so is the spic=
-e-vdagentd daemon and it also starts running. Yet I always need to manually=
- run spice-vdagent command...<br>
-&gt;&gt; &gt;<br>
-&gt;&gt;<br>
-&gt;&gt; Maybe you would need to logout and login again from the graphic<br=
->
-&gt;&gt; session. Or manually start it, not sure.<br>
-&gt;&gt;<br>
-&gt;&gt; &gt; How do I specify an output directory for the agent to file tr=
-ansfer?<br>
-&gt;&gt; &gt;<br>
-&gt;&gt;<br>
-&gt;&gt; See &quot;spice-vdagent --help&quot;, specifically -f and -o optio=
-ns.<br>
-&gt;&gt;<br>
-&gt;&gt; &gt; I don&#39;t think it&#39;s remote-viewer&#39;s fault, because=
- I also tested with a Windows guest. With all SPICE stuff properly installe=
-d, everything works out of the box: clipboard, resizing, file transfer from=
- host to guest. With &quot;properly installed&quot; I mean: installed SPICE=
- drivers manually from virtio-win ISO by loading them since the Windows ins=
-tallation beforehand, then once booted into Windows downloaded the vdagent =
-ZIP from spice-space website and manually installed the service according t=
-o instructions.<br>
-&gt;&gt; &gt;<br>
-&gt;&gt;<br>
-&gt;&gt; I&#39;ll check, maybe is not handled by driver but agent<br>
-&gt;&gt;<br>
-&gt;&gt; &gt; As additional detail, in QEMU I use the option &quot;-display=
- spice-app&quot;, which automatically starts remote-viewer; though curiousl=
-y it doesn&#39;t seem to create a virt-viewer directory inside ~/.config un=
-like when running remote-viewer manually...<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Thanks again.<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; El vie, 14 oct 2022 a las 12:41, Frediano Ziglio (&lt;<a href=
-=3D"mailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt;=
-) escribi=C3=B3:<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; Il giorno gio 13 ott 2022 alle ore 16:58 Carlos Gonz=C3=
-=A1lez<br>
-&gt;&gt; &gt;&gt; &lt;<a href=3D"mailto:piteccelaya@gmail.com" target=3D"_b=
-lank">piteccelaya@gmail.com</a>&gt; ha scritto:<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt; &gt; Hello.<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt; &gt; I&#39;m trying a virtual machine with a live CD dist=
-ribution called AntiX Linux, which is directly based on Debian.<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt; &gt; I&#39;m using direct QEMU commands.<br>
-&gt;&gt; &gt;&gt; &gt; In the VM configuration I have this for SPICE config=
-uration:<br>
-&gt;&gt; &gt;&gt; &gt; &quot;-vga qxl -device virtio-serial-pci -spice unix=
-=3Don,addr=3Dpath/to/vm_spice.socket,disable-ticketing=3Don -chardev spicev=
-mc,id=3Dspicechannel0,name=3Dvdagent -device virtserialport,chardev=3Dspice=
-channel0,name=3Dcom.redhat.spice.0 \&quot;<br>
-&gt;&gt; &gt;&gt; &gt; Then I boot the live ISO, double check that QXL driv=
-er is installed -which normally always is-, and install spice-vdagent packa=
-ge (version 20 here). I&#39;m using remote-viewer (virt-viewer) to visualiz=
-e the VM.<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt; &gt; Up to this point, clipboard sharing with host still =
-doesn&#39;t work, and trying to drag a file from host to guest results in a=
-n error &quot;The agent is not connected&quot;.<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; This error is normal if the agent is stopped.<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; &gt; So I manually run &quot;spice-vdagent&quot; command,=
- and clipboard sharing now works, but trying to drag file from host to gues=
-t gives &quot;File transfer is disabled&quot;. Also, automatic resolution c=
-hange with window resizing doesn&#39;t work either.<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; The fact that in this way the clipboard is running indica=
-tes that the<br>
-&gt;&gt; &gt;&gt; agent is now working. You need to specify an output direc=
-tory to the<br>
-&gt;&gt; &gt;&gt; agent in order to get file transfer working.<br>
-&gt;&gt; &gt;&gt; About the resolution change that&#39;s weird, I think tha=
-t feature on<br>
-&gt;&gt; &gt;&gt; Linux does not even require the agent running. Is it poss=
-ible that the<br>
-&gt;&gt; &gt;&gt; client (remove-viewer) is not set up to send resize to th=
-e guest<br>
-&gt;&gt; &gt;&gt; automatically, there are some options on the menu.<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; &gt; Certainly, this live distro doesn&#39;t come with an=
-y spice-related packages installed by default, except for the QXL package.<=
-br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt; &gt; Am I missing something here? Could someone help plea=
-se?<br>
-&gt;&gt; &gt;&gt; &gt; Thanks beforehand.<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; Frediano<br>
-<br>
-</blockquote></div></div>
-</blockquote></div>
-
---00000000000003e77c05eb7d7f92--
+--------------uToo12a82O91iCJKRN1eoNxP--
