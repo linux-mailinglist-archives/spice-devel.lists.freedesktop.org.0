@@ -2,64 +2,64 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6A9E61391F
-	for <lists+spice-devel@lfdr.de>; Mon, 31 Oct 2022 15:36:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88140613918
+	for <lists+spice-devel@lfdr.de>; Mon, 31 Oct 2022 15:35:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CE28010E2E9;
-	Mon, 31 Oct 2022 14:35:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0BC1C10E2DF;
+	Mon, 31 Oct 2022 14:35:42 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 54F0B10E20F
- for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 12:21:55 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 16D0510E23E
+ for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 12:22:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667218914;
+ s=mimecast20190719; t=1667218949;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Sz8PAZx0cLc5RAaRO0sQR4MZQyCy7VtrjJT7yq4jHuw=;
- b=ZzE8H/e1Rtq/tBnevIYxkAHR3g+VsdKbJ9XOh7IqG07hsVf+2z/hN41aI5SPH//8iwPFLh
- HZjmkzfj/I4VS1ru0c+CdMfv6bqNL+kNIftfkOXDOscOmjgaIVP3u79/sa3JlXanOvLaCJ
- VcRwmm8yg81c5Cg1mXmPWMskWk5qk+o=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=xVJodACOlUyVw6jJB0o/QffeIPQi24/sF6MmyMfBvgg=;
+ b=AD3YqiH6p2ttr44BpYQxrxqMRTPybN7R/b6HdOO7WVOug/Q1OjwZu85lR+0dhw9vB0ZNLp
+ v7HafG6DmjwvnlLt3brJJxuyUzEl6cdvpUV5fqKr5ZAt+IBZq1/R/Xx18Uo02XSc4VOIrG
+ Mu6cRHxrbzkM8L0aY3CeC+LMDI6BwZY=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-5-GYj5rAVbO5a_vorzjzwPCQ-1; Mon, 31 Oct 2022 08:21:51 -0400
-X-MC-Unique: GYj5rAVbO5a_vorzjzwPCQ-1
-Received: by mail-wm1-f70.google.com with SMTP id
- i128-20020a1c3b86000000b003cf4ff1b917so5239299wma.2
- for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 05:21:51 -0700 (PDT)
+ us-mta-375-GI6vSfxDNAGlzyoZb0Si5g-1; Mon, 31 Oct 2022 08:22:28 -0400
+X-MC-Unique: GI6vSfxDNAGlzyoZb0Si5g-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ m34-20020a05600c3b2200b003cf549cb32bso6172980wms.1
+ for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 05:22:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Sz8PAZx0cLc5RAaRO0sQR4MZQyCy7VtrjJT7yq4jHuw=;
- b=VFq+Kef1lSDrwu8SMWdi8qfXCu233YwfZbkpmJOSA7wZAU/KIgD90U+n3vz1iAFUSI
- 5pKy/vapunGpduMyn/EsbTvjmIR/u4DM0kifGJQZbUOM8urm2PpJ43Oo6b3nSheWKntZ
- 6mfTGn/GzdzewA4Y3yEZSA08atzGyij8xUMbmNaolngYo3PCh7gCXnbv6+3Q5oVKV99a
- 0BAmbpvyJqKQOfV0JOsK5PEjJIQmfaa7+p7yWks5UEjAKsHBg1cF7gKEkpopsNdAY5t+
- STK9ibv6gzSu/FrYsisDNntspO38GmLQqewLSzyAoZhhydfBgm6In2uZ6fsH24VDX3l8
- +1iA==
-X-Gm-Message-State: ACrzQf2+5NqUJ2I+t1L4MeOhKYr2+H8p1tb82KtVLe79IzswjSldk9La
- JMD+pqqIFWjusV26RaO7HiouxoVv9bNRFcQvD7jFDm187FpJots9fFvzxO9RT3Pm2s+Ft8gBX3l
- R0QElEpka/119UQyCwDpELxVZ7rjJcKs=
-X-Received: by 2002:a05:600c:3c8e:b0:3b4:d224:ae27 with SMTP id
- bg14-20020a05600c3c8e00b003b4d224ae27mr7935993wmb.187.1667218910341; 
- Mon, 31 Oct 2022 05:21:50 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM7kQh5/EvsJvI9K3W2EFLXezwgTMZr8BgFr4Dt+IxgUiTtboeKKAu1FK4Es/7ETyez8XSTV6g==
-X-Received: by 2002:a05:600c:3c8e:b0:3b4:d224:ae27 with SMTP id
- bg14-20020a05600c3c8e00b003b4d224ae27mr7935971wmb.187.1667218910155; 
- Mon, 31 Oct 2022 05:21:50 -0700 (PDT)
+ bh=xVJodACOlUyVw6jJB0o/QffeIPQi24/sF6MmyMfBvgg=;
+ b=C/FNSx7s1/YrZzDj9GJvdtbFQt0DNrYRpjvrvWMUQ6TrNL7GSG5sw0yaorXm028qFT
+ tppf1vpC6bC/IzkGYTkwI+5hLk3m21/UyrEgbDciR9sSlj3ck0Kqr5waXFOOunFFeuvq
+ IrlmlXA6Ve+7c1vOvA48KSO/r0jNzd9A4JFcKUPy9UB50Vi1dZvZTOMiqp4la7Axe2ap
+ b8w/ugVwHMxZbJdlbS6gg77NZABSEtBexQEG7y1MTU+kx6JVp6CdTu7JBwi7fCw1LH2x
+ AMgoda+ffnoU0nq5A+yKDdNQI0BPK7eYOeGDulZsldYWJutBhqBHoUsrLmEOs6+RvBqD
+ +93w==
+X-Gm-Message-State: ACrzQf2RudU5wjwUyi48M4Vitt5XuVu+6GH427+E2RBDTYWcSmsvJ67u
+ i+zeQFQJX/hvMIJFCD2+EXJvIg8ny8kKhZ++ZHDfVW+y66LC5fHVzNH7cbqzgQyaIz33pqslHop
+ LIQrHHxcjpZtEVFWFP1ZErKDmuPBU4Bw=
+X-Received: by 2002:a05:600c:46ce:b0:3c6:f274:33b2 with SMTP id
+ q14-20020a05600c46ce00b003c6f27433b2mr7860182wmo.27.1667218947037; 
+ Mon, 31 Oct 2022 05:22:27 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4zVdpLNc1mYDp74XAWVtjpPddzcwMDONTh4D+G0X15w3fKqsphKr/pP9hn5PrcknLAkhJ5Mg==
+X-Received: by 2002:a05:600c:46ce:b0:3c6:f274:33b2 with SMTP id
+ q14-20020a05600c46ce00b003c6f27433b2mr7860165wmo.27.1667218946788; 
+ Mon, 31 Oct 2022 05:22:26 -0700 (PDT)
 Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
  [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- i4-20020a05600c354400b003cf4c1e211fsm7421692wmq.38.2022.10.31.05.21.48
+ f16-20020a05600c4e9000b003cf568a736csm5157904wmq.20.2022.10.31.05.22.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Oct 2022 05:21:49 -0700 (PDT)
-Message-ID: <e9192382-f04c-4ebd-ca1c-b2fceaa29f86@redhat.com>
-Date: Mon, 31 Oct 2022 13:21:48 +0100
+ Mon, 31 Oct 2022 05:22:26 -0700 (PDT)
+Message-ID: <ea046b06-fb0e-b7c2-8f70-b299401d9adf@redhat.com>
+Date: Mon, 31 Oct 2022 13:22:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
@@ -67,17 +67,16 @@ To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com
 References: <20221024111953.24307-1-tzimmermann@suse.de>
- <20221024111953.24307-10-tzimmermann@suse.de>
+ <20221024111953.24307-11-tzimmermann@suse.de>
 From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <20221024111953.24307-10-tzimmermann@suse.de>
+In-Reply-To: <20221024111953.24307-11-tzimmermann@suse.de>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Mon, 31 Oct 2022 14:35:30 +0000
-Subject: Re: [Spice-devel] [PATCH v2 09/21] drm/panel-ili9341: Include
- <linux/backlight.h>
+Subject: Re: [Spice-devel] [PATCH v2 10/21] drm/tve200: Include <linux/of.h>
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,7 +104,7 @@ Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 On 10/24/22 13:19, Thomas Zimmermann wrote:
-> Include <linux/backlight.h> for devm_of_find_backlight().
+> Include <linux/of.h> for of_match_ptr().
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 > ---
