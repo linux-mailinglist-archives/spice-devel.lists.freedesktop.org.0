@@ -1,65 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 699B2613915
-	for <lists+spice-devel@lfdr.de>; Mon, 31 Oct 2022 15:35:53 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19258613914
+	for <lists+spice-devel@lfdr.de>; Mon, 31 Oct 2022 15:35:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C1AFB10E2D6;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 70AD510E1D8;
 	Mon, 31 Oct 2022 14:35:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE80310E248
- for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 12:25:30 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4A7B210E261
+ for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 12:26:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667219129;
+ s=mimecast20190719; t=1667219211;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=G3lFqSUva8cf7eu6ekgojQtwZeR44+C1N0qDI7SjLRc=;
- b=FokqE+OawLhTjp7iVH+q3xV5qU+owxbjGYpygfYYbZilLPOWQS+Uk06vGCqWKa5Zg61x7L
- KCsidB+Mn9zm2uZnf0vRptgX9YPuFnLxLSh6Vf32dmbdyEZCSdg2Dup14duyFQymj0gh5B
- wqZkX+UaWVQlOkjtLaQulkamOJmfsPg=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=/x9mAjb8LNYXXK+HVNHKFir+j3ZwIeSko/dKjp9YLmY=;
+ b=AkQsTEKR1y9Fem7oTJ0E3dmo3tSyUuX34g7YcIEBfU/OXBSKRL/QiVX4biNYbj4VOFhn4W
+ OCYtrt/Yx9m3DzmtnpA8LOacAJbORJ9GshIUa4dxrFXoxCS8kBtwGlqp6K0QEQc7VI3zeI
+ 6gqkmpi5G0SI5+1pENUOav6Ir2O/Na4=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-322-2aAVD9jLPqSPGlDx1z64gw-1; Mon, 31 Oct 2022 08:25:28 -0400
-X-MC-Unique: 2aAVD9jLPqSPGlDx1z64gw-1
-Received: by mail-wm1-f72.google.com with SMTP id
- bg21-20020a05600c3c9500b003c2acbff422so5683079wmb.0
- for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 05:25:28 -0700 (PDT)
+ us-mta-135-RNFj5HWxMoOqIQTTs6v8xA-1; Mon, 31 Oct 2022 08:26:50 -0400
+X-MC-Unique: RNFj5HWxMoOqIQTTs6v8xA-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ f26-20020a7bcc1a000000b003c03db14864so2547714wmh.6
+ for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 05:26:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=G3lFqSUva8cf7eu6ekgojQtwZeR44+C1N0qDI7SjLRc=;
- b=L3pw27a/4fX8O9bdpUDAifsWLtR9rfjY5YPhVsK/yxyddalm2xqfdjjijPJ6cvZgjO
- 9EIQs8CxVWGtflAOQfmJFlHFVdKrYrDM9fHdpAvIibhulmguXywiaPGW8mYQLekqGJiH
- dpBbdVyv34txPLuvxT9Vr7hZ3zhLkzjJvjHkSSlayQWaNP91BJWlb2o8ETNl1wnYiuj4
- dmuyvJNF5SZPUqHqlEsUlq9mY6NN3GdUubu+/W7uJtq04NHD5zA9TYz+3FQAWkk9ds/o
- tKDl/K8CbwrSyR+V0lirF3IY7USCroYD6v7V96Ta0zhBtuvqJ7OfmsIFMirtwThJ0V4x
- k2RA==
-X-Gm-Message-State: ACrzQf3Xxm2blkDvHTy1+dVQmJ71kDwSwfTXpWymubu7BjEsimSml0Ou
- apkIUhi1jDzSAaoa0PASrjYN2vVvCBMSZ899Df2mBbpXOCo0jkWmgHrblAMFdbYvj/uh8NFPugc
- fb1x7immGk2NxqhR9qrfTTxxWiAJxIOA=
-X-Received: by 2002:a5d:498a:0:b0:236:58ef:6796 with SMTP id
- r10-20020a5d498a000000b0023658ef6796mr8133537wrq.399.1667219127468; 
- Mon, 31 Oct 2022 05:25:27 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM5OaQ4lCdeJx0P85vXeCC9ohI1f8Am/sl3oDUbbTCyW5S09EQhBnmsKMGoGzObNL20EAzLquw==
-X-Received: by 2002:a5d:498a:0:b0:236:58ef:6796 with SMTP id
- r10-20020a5d498a000000b0023658ef6796mr8133518wrq.399.1667219127226; 
- Mon, 31 Oct 2022 05:25:27 -0700 (PDT)
+ bh=/x9mAjb8LNYXXK+HVNHKFir+j3ZwIeSko/dKjp9YLmY=;
+ b=ygj4/LTEJi0HEq3N5X/4hDHwLNC4bUCkpK95tI8ejZq7PO+DTVcxnCRcoL9Fr4Wl9A
+ sZLUHs6tnt39QGO0Il7csKE1HGap8mnYQDlT+GwsHbZqhvVqO/Dz1zGtHUIkV6vEhmWS
+ ZamQXJ+ef1GDcKKR1GcLMfaSxgddkpzslc+Rff4UnNfXbExWAh5CgeTU7Nmlwc0qZXgT
+ Ga9v0UcoNZMEuI3ZGSL1hp8lVbmbitxR6yGWlDVCRPw2NCrNcsnyHKuiIn7jx8GuFRRo
+ Le1NpwupmY2wGQeU1ng462OYcxSl8Vog/hB91UdyHkejHqRTQEgIOdzlOudcgvoKTAEI
+ zOlA==
+X-Gm-Message-State: ACrzQf2apSZxYAQ8PFVJJn1xQuAr9FtEKfPhEgxe88hH4lXMh3ihVSgW
+ NIcEIJogEC2fYPBGTrKUjhYMHcoRTUzWX2WNVbrn1DJ9agcThrzLQ9TnFw+jPCPlrVQff7Z3ofa
+ V4E1AThvmvb8rUqtnrqcKY+wfhfGp5ds=
+X-Received: by 2002:a05:600c:4f10:b0:3c6:dcc6:51d7 with SMTP id
+ l16-20020a05600c4f1000b003c6dcc651d7mr7887424wmq.91.1667219208977; 
+ Mon, 31 Oct 2022 05:26:48 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4eCY6FaPESRi0FBsuwSJAU0ypknopcItEy1BimghpIISJ8Db9xrgTY3spCPjOXKZ6zCgaGzA==
+X-Received: by 2002:a05:600c:4f10:b0:3c6:dcc6:51d7 with SMTP id
+ l16-20020a05600c4f1000b003c6dcc651d7mr7887399wmq.91.1667219208796; 
+ Mon, 31 Oct 2022 05:26:48 -0700 (PDT)
 Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
  [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- m13-20020a05600c3b0d00b003bfaba19a8fsm7382582wms.35.2022.10.31.05.25.25
+ q1-20020a1ce901000000b003b476cabf1csm4889352wmc.26.2022.10.31.05.26.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Oct 2022 05:25:26 -0700 (PDT)
-Message-ID: <53f341ad-4b72-5546-f752-ca705d62d63c@redhat.com>
-Date: Mon, 31 Oct 2022 13:25:25 +0100
+ Mon, 31 Oct 2022 05:26:48 -0700 (PDT)
+Message-ID: <0d2250e4-dc26-2fc9-e429-0d43ef280e5b@redhat.com>
+Date: Mon, 31 Oct 2022 13:26:46 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
@@ -67,17 +67,17 @@ To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com
 References: <20221024111953.24307-1-tzimmermann@suse.de>
- <20221024111953.24307-13-tzimmermann@suse.de>
+ <20221024111953.24307-14-tzimmermann@suse.de>
 From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <20221024111953.24307-13-tzimmermann@suse.de>
+In-Reply-To: <20221024111953.24307-14-tzimmermann@suse.de>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Mon, 31 Oct 2022 14:35:30 +0000
-Subject: Re: [Spice-devel] [PATCH v2 12/21] drm/fb_helper: Rename field
- fbdev to info in struct drm_fb_helper
+Subject: Re: [Spice-devel] [PATCH v2 13/21] drm/fb-helper: Rename
+ drm_fb_helper_alloc_fbi() to use _info postfix
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,15 +105,12 @@ Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 On 10/24/22 13:19, Thomas Zimmermann wrote:
-> Rename struct drm_fb_helper.fbdev to info. The current name is
-> misleading as it overlaps with generic fbdev naming conventions.
-> Adapt to the usual naming in fbdev drivers by calling the field
-> 'info'. No functional changes.
+> Rename drm_fb_helper_alloc_fbi() to drm_fb_helper_alloc_info() as
+> part of unifying the naming within fbdev helpers. Adapt drivers. No
+> functional changes.
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 > ---
-
-Agreed. I got confused by this naming in the past.
 
 Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
