@@ -1,65 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E66D361391A
-	for <lists+spice-devel@lfdr.de>; Mon, 31 Oct 2022 15:36:00 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52B76613917
+	for <lists+spice-devel@lfdr.de>; Mon, 31 Oct 2022 15:35:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5D13310E2E3;
-	Mon, 31 Oct 2022 14:35:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A55E310E2D9;
+	Mon, 31 Oct 2022 14:35:41 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1912010E1CB
- for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 12:00:29 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E2B5810E1BF
+ for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 12:08:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667217628;
+ s=mimecast20190719; t=1667218101;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HRPxwW2zKPepuA8PR9mUAwCAVRj8pp1PiT5CedYG760=;
- b=QYoj37pjD4OKm5l/ZtMj/CC0h07tkgzFrb4uynnnsVwgLjaZIbCisyMVyutrW4bOQwNp3+
- y2f25Okt0hEEuBprfDzSBegF2yZQt/M/12xzkLwU7PTL206v3hgNTYCNtDPtkKP2j1rhNB
- NXZfXtIWSrmfeYUIOlBxb6KNXwRywaE=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=UzviKTRQBMSKwIl6kvNWZgMaFQwic4ec30sKv7m652k=;
+ b=HVwgxIFnTQWShJIbAp+p3yMHeOQrB6J5obh03OwUqlJlXbm90w49w/nPJiu98HKGScM9Uj
+ vcR2K1W6wwdh1fa05SHdk+3fuL31eun9CsHTnQBBPzXgM2GVsUWvjC59Qd/0aT4EbN9Vql
+ WRS4q8gCbvbwjjBXqhS0GpswFgCgaLQ=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-98-6uwhHpb2NTaGFFnF_56PQg-1; Mon, 31 Oct 2022 08:00:25 -0400
-X-MC-Unique: 6uwhHpb2NTaGFFnF_56PQg-1
-Received: by mail-wm1-f71.google.com with SMTP id
- c5-20020a1c3505000000b003c56da8e894so8268896wma.0
- for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 05:00:24 -0700 (PDT)
+ us-mta-318-peROmZ_vOga92Q3Q2D2Nxw-1; Mon, 31 Oct 2022 08:08:20 -0400
+X-MC-Unique: peROmZ_vOga92Q3Q2D2Nxw-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ t20-20020a7bc3d4000000b003c6bfea856aso2537213wmj.1
+ for <spice-devel@lists.freedesktop.org>; Mon, 31 Oct 2022 05:08:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HRPxwW2zKPepuA8PR9mUAwCAVRj8pp1PiT5CedYG760=;
- b=E7wlbv56yEwEICtdsf1PB4H8FUTCMTydwo0sCQ/CyzyXdmlyQEeXwUG1c92Q0atGKp
- juhblya/RNeIYwe4+zmao2MqQem0/dWsLMcdd2UXwGkxyJq5/eIEUAnG8APQCYR3c8o4
- scouSW+YOouluZXChqE7chG6nZR7G98GBs5mU6N+Eh5INZA++mM2CEPvjuZZyqA+KrO6
- csUiN7e9lBNMW3aBt9DY9UErWG13XW1ohVaJt6wfikhhxkflIPQLJw3ldgFmmrMV6ppP
- OEiiDX0qZ1X5NICukjzB8n1Js+e/2mafkCSD/GatuIkafOQHQfONFhQzrSm3unV4VDgD
- gm6A==
-X-Gm-Message-State: ACrzQf3oM+NdOkz+spcjxkTZ8JgCRMxjVmhexePDO7x2hixOdfceY8oS
- vQy1EchCLIB8x6qd0IBiY0TMU/9jCsV5GW24E+gDnL8PmN+oyNN0u2Ii04dmQ+EL3iQWydk1KOB
- McPsvp3Vhy5WIOwRB8/tDkfDuFDUMFRo=
-X-Received: by 2002:a5d:560e:0:b0:236:c325:4858 with SMTP id
- l14-20020a5d560e000000b00236c3254858mr4606552wrv.259.1667217623900; 
- Mon, 31 Oct 2022 05:00:23 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM7SGo+SId6me5X0r4rljOgpSC8TPNcKC+21wfNb2F4dclcZs6G1cIUREq2tk/ot5/dgyLJVEQ==
-X-Received: by 2002:a5d:560e:0:b0:236:c325:4858 with SMTP id
- l14-20020a5d560e000000b00236c3254858mr4606520wrv.259.1667217623655; 
- Mon, 31 Oct 2022 05:00:23 -0700 (PDT)
+ bh=UzviKTRQBMSKwIl6kvNWZgMaFQwic4ec30sKv7m652k=;
+ b=zjrnvNwMajY+UkplylSt7aDrzNrsEClgCHXKKrHkMReGp+XCCu3CF0C+ULqt2tzoMQ
+ DciPglUAawMpqlcp4JRzKagc2ZRsKVlFXP8q0DcIaqZ2oY5J6KdutJFmZTzZc2g++F4m
+ oXeCQyWR9wS8YgBUrWUNaJWqyFRZnILODyWZRYiN5qNE0VrkfNjhUI1EmEPqXaQrpDN+
+ K28T1cDcfIgtyNRrWjJQ4/fcs4mSckaUT6lWYRkUJFzI0CfiIHeuR0hHJjLR9g8uJN5/
+ 2vb0nODSF2u5V5454XXXldRIoujsU7r8lokvBIbZMXbKpEaEz0JzD8XN4KjxgNS5JXfi
+ Icmw==
+X-Gm-Message-State: ACrzQf0gkP8KRf12KsypMBzww3/9lXKEQBCBijNMh9muMM8HCA94Gvc6
+ 8CGGOragp2f3qJw+pE1T87ZT6nCwehnN7qZfA3rBI3P3EvPafs5WXnkFw6r5XVEmPEXKQtMhEvT
+ M1G6sRHxItJzqVhAJqsH8Vagj/THVCvg=
+X-Received: by 2002:a05:6000:15cd:b0:236:9701:7939 with SMTP id
+ y13-20020a05600015cd00b0023697017939mr7691197wry.248.1667218098874; 
+ Mon, 31 Oct 2022 05:08:18 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6Xfc/ao13H30KX93ABjLq4iUJ6oQF+1EOXF8gvz+3LvWSBMjjIijdjEWsEsBBK0GpYNHL8UA==
+X-Received: by 2002:a05:6000:15cd:b0:236:9701:7939 with SMTP id
+ y13-20020a05600015cd00b0023697017939mr7691171wry.248.1667218098682; 
+ Mon, 31 Oct 2022 05:08:18 -0700 (PDT)
 Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
  [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- bi19-20020a05600c3d9300b003c6c1686b10sm5388458wmb.7.2022.10.31.05.00.21
+ bn26-20020a056000061a00b0022cd0c8c696sm6948033wrb.103.2022.10.31.05.08.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Oct 2022 05:00:23 -0700 (PDT)
-Message-ID: <2e2e3915-a7b2-d030-2ffd-117b12deedb2@redhat.com>
-Date: Mon, 31 Oct 2022 13:00:21 +0100
+ Mon, 31 Oct 2022 05:08:18 -0700 (PDT)
+Message-ID: <fd53a4f9-34a8-f5f3-1b1f-baf4a456bcc9@redhat.com>
+Date: Mon, 31 Oct 2022 13:08:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
@@ -67,17 +67,17 @@ To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com
 References: <20221024111953.24307-1-tzimmermann@suse.de>
- <20221024111953.24307-4-tzimmermann@suse.de>
+ <20221024111953.24307-5-tzimmermann@suse.de>
 From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <20221024111953.24307-4-tzimmermann@suse.de>
+In-Reply-To: <20221024111953.24307-5-tzimmermann@suse.de>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Mon, 31 Oct 2022 14:35:30 +0000
-Subject: Re: [Spice-devel] [PATCH v2 03/21] drm/vboxvideo: Don't set struct
- drm_driver.lastclose
+Subject: Re: [Spice-devel] [PATCH v2 04/21] drm/amdgpu: Don't set struct
+ drm_driver.output_poll_changed
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,15 +105,26 @@ Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 On 10/24/22 13:19, Thomas Zimmermann wrote:
-> Don't set struct drm_driver.lastclose. It's used to restore the
-> fbdev console. But as vboxvideo uses generic fbdev emulation, the
-> console is being restored by the DRM client helpers already. See
-> the call to drm_client_dev_restore() in drm_lastclose().
+> Don't set struct drm_driver.output_poll_changed. It's used to restore
+> the fbdev console. But as amdgpu uses generic fbdev emulation, the
+> console is being restored by the DRM client helpers already. See the
+> functions drm_kms_helper_hotplug_event() and
+> drm_kms_helper_connector_hotplug_event() in drm_probe_helper.c.
+> 
+> v2:
+> 	* fix commit description (Christian)
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 > ---
 
 Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+
+Do you think that the fbdev helpers kernel doc has to be updated to mention
+that drm_fb_helper_lastclose() and drm_fb_helper_output_poll_changed() are
+not needed when generic fbdev emulation is used? Because by reading that is
+not clear that's the case:
+
+https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/drm_fb_helper.c#L86
 
 -- 
 Best regards,
