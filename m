@@ -1,65 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4993615FE8
-	for <lists+spice-devel@lfdr.de>; Wed,  2 Nov 2022 10:35:22 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB773615FEA
+	for <lists+spice-devel@lfdr.de>; Wed,  2 Nov 2022 10:35:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B5E4C10E0AA;
-	Wed,  2 Nov 2022 09:35:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7791310E1BB;
+	Wed,  2 Nov 2022 09:35:22 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A9D6D10E452
- for <spice-devel@lists.freedesktop.org>; Wed,  2 Nov 2022 09:04:05 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DCA1610E458
+ for <spice-devel@lists.freedesktop.org>; Wed,  2 Nov 2022 09:05:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667379844;
+ s=mimecast20190719; t=1667379906;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XBlp2DOijU5hXQ9AriUwp9vEVLgfxcCQxHX+sSZSvOs=;
- b=foE1tqMnN1euVXsjwdlyPW1Y4BTMlfQxIBqnZz2eDUgMOJ3r8Zu+tBZQX0GkNtDL2D+9Aj
- flWcioqcZUsIaIG4L65T3zBd/pzbd1EQRgPn+MZdj0iMkyKMJis4wJ5Qwuj07kEsp7CYEk
- jHcVQV9OGuPi3hRfiynfov54IpOv5aE=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=LpYqcUNkPgIA1fAPwB+EiO+Z9dq0ENSiM+RajxMrldI=;
+ b=WvDAXhrxk3GfKKBlUDB6Tzma1uxqlntRK6qLRDswyPGiYR+zTAHeZXUpHkCXzM6AYrCCO/
+ 8Rhjgexrdpeu/Rp19UnprEcKJfM990He1EdFC5wXawSsl6wC/AcA19tBTUuPC6CX/2x2Bs
+ z2ifoN+fLi9FkktGjdfFYUN1DbM309o=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-103-nHFh12x5NQOzBwsfWGuWnQ-1; Wed, 02 Nov 2022 05:04:01 -0400
-X-MC-Unique: nHFh12x5NQOzBwsfWGuWnQ-1
-Received: by mail-wm1-f71.google.com with SMTP id
- v188-20020a1cacc5000000b003cf76c4ae66so793545wme.7
- for <spice-devel@lists.freedesktop.org>; Wed, 02 Nov 2022 02:04:01 -0700 (PDT)
+ us-mta-515-vX15bHB2N06cmfJ5PQCENQ-1; Wed, 02 Nov 2022 05:05:05 -0400
+X-MC-Unique: vX15bHB2N06cmfJ5PQCENQ-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ z15-20020a1c4c0f000000b003cf6f80007cso245647wmf.3
+ for <spice-devel@lists.freedesktop.org>; Wed, 02 Nov 2022 02:05:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XBlp2DOijU5hXQ9AriUwp9vEVLgfxcCQxHX+sSZSvOs=;
- b=Bp1jxCnoiu40/WHLWxCu399O40GNl3yejKjh21KSJBBvr3/Q2Rx6qpqvC01+aHV3i0
- hvt47oGaTZUSecKyOAjihIrHDwQcTV2LpwJbBE2LPUzPcnAs4+Ca3UZCbiWVQoWZNw10
- 8+vgdfUJVOAcc0i3sIAdNH2N0ZMOotL4L9ABH+62JrZnVKK4zb8wELVSidc62LMNmrFd
- FKY+CCWCdZQRJxYflv+6f37cG+oIpDxUc5RuEgWzCVaw5e95WSGXY6edM98PJsIYxDMe
- n/SP3f/z9nIUmgXqLr0vPwL6yqxiQJAewy9GRRGkGkN/onlpfvKpIxbi8KO4A0WEpQKx
- wtPg==
-X-Gm-Message-State: ACrzQf16pmnq528cRMlOkfeCXZpGwANrEQZE7XOZuGkyUsMuOTkFYBGW
- nYTL0gv6O7ogWnZu7mdc63ONmqPU2Xah+ZajOtQGEwD3Ql3BcD5zQl+VifMxv0TkrdF7CwABLGK
- PGyP4kNJvzgWegOllsBANF6zp++UEejI=
-X-Received: by 2002:a7b:c409:0:b0:3cf:4c81:8936 with SMTP id
- k9-20020a7bc409000000b003cf4c818936mr24380826wmi.38.1667379840280; 
- Wed, 02 Nov 2022 02:04:00 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM72ckpdUoZR+NwXtu1sv2+7NmgS+YMIWWHB7QdeKnWTKduGDRl7tg4bkpenTZv0mX1kFf34kw==
-X-Received: by 2002:a7b:c409:0:b0:3cf:4c81:8936 with SMTP id
- k9-20020a7bc409000000b003cf4c818936mr24380784wmi.38.1667379840046; 
- Wed, 02 Nov 2022 02:04:00 -0700 (PDT)
+ bh=LpYqcUNkPgIA1fAPwB+EiO+Z9dq0ENSiM+RajxMrldI=;
+ b=VQyqamzpvo5LkWfS2lhQIULJVtwV9q1qvAMSJ7wF+8f2gO1OhjIV2VL9W7HflOl0+C
+ iih6X5s8yPRVeyEQXKpqQ7xUwBmAJqh5js9A8Jjozt9MOrCAh+PJNEyWrWvPE0CynRvQ
+ JAqEHKdlpaGxNr4KadchKICP7A9BORKRDHJi0RbR0nMWm4m0gyUlegIaaXP0zxQszpBr
+ hibOuDdOLOT0VjEDjFahxP1TbyImXyps9irfjmX0Il0MNbS/XJU7Rdtx7gOHXgHHdBdD
+ C/lYQNGV9SUQDfKCyjp5IgUf4PHZ+szkY0MUuRPnWGBRZuxG4Fg4nu8EJr97q5S65GBo
+ BhTw==
+X-Gm-Message-State: ACrzQf09IQyQ5KoQ1U4do6zKvK+u9NBvMLBT9FoQQIGsCPFdSRpbWXzS
+ oPCAsEhrE8fXYvKZw3zoY8PqZkPSzAsE3kZ7Au0auQRZ43hWTiu6Jc3Gjk+quxgLV7nmOoh5uts
+ x6E/TiFZWafDkLKURRCO5DhYsthRpbq0=
+X-Received: by 2002:a5d:6488:0:b0:22b:3b0b:5e72 with SMTP id
+ o8-20020a5d6488000000b0022b3b0b5e72mr14464165wri.138.1667379904743; 
+ Wed, 02 Nov 2022 02:05:04 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM6Ug/7BR+PMLuqwC0wiYVRKEgerXkzKho5yFNKIDT0bC26SnYKpkqpAn1quqQ9FNF9E1JGkLg==
+X-Received: by 2002:a5d:6488:0:b0:22b:3b0b:5e72 with SMTP id
+ o8-20020a5d6488000000b0022b3b0b5e72mr14464139wri.138.1667379904487; 
+ Wed, 02 Nov 2022 02:05:04 -0700 (PDT)
 Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
  [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- b13-20020a5d550d000000b002366b17ca8bsm14083933wrv.108.2022.11.02.02.03.58
+ p2-20020a5d4582000000b00228d52b935asm12402687wrq.71.2022.11.02.02.05.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Nov 2022 02:03:59 -0700 (PDT)
-Message-ID: <87284e5e-859e-3b1c-7142-28d4fa7a7939@redhat.com>
-Date: Wed, 2 Nov 2022 10:03:57 +0100
+ Wed, 02 Nov 2022 02:05:04 -0700 (PDT)
+Message-ID: <a96d57d8-486d-5a48-a00a-39df6275cbb5@redhat.com>
+Date: Wed, 2 Nov 2022 10:05:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
@@ -67,17 +67,17 @@ To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
  airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com
 References: <20221024111953.24307-1-tzimmermann@suse.de>
- <20221024111953.24307-16-tzimmermann@suse.de>
+ <20221024111953.24307-17-tzimmermann@suse.de>
 From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <20221024111953.24307-16-tzimmermann@suse.de>
+In-Reply-To: <20221024111953.24307-17-tzimmermann@suse.de>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Wed, 02 Nov 2022 09:35:15 +0000
-Subject: Re: [Spice-devel] [PATCH v2 15/21] drm/fb-helper: Disconnect damage
- worker from update logic
+Subject: Re: [Spice-devel] [PATCH v2 16/21] drm/fb-helper: Call fb_sync in
+ I/O functions
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,33 +105,14 @@ Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 On 10/24/22 13:19, Thomas Zimmermann wrote:
-> The fbdev helpers implement a damage worker that forwards fbdev
-> updates to the DRM driver. The worker's update logic depends on
-> the generic fbdev emulation. Separate the two via function pointer.
-> 
-> The generic fbdev emulation sets struct drm_fb_helper_funcs.fb_dirty,
-> a new callback that hides the update logic from the damage worker.
-> It's not possible to use the generic logic with other fbdev emulation,
-> because it contains additional code for the shadow buffering that
-> the generic emulation employs.
-> 
-> DRM drivers with internal fbdev emulation can set fb_dirty to their
-> own implementation if they require damage handling; although no such
-> drivers currently exist.
+> Call struct fb_ops.fb_sync in drm_fbdev_{read,write}() to mimic the
+> behavior of fbdev. Fbdev implementations of fb_read and fb_write in
+> struct fb_ops invoke fb_sync to synchronize with outstanding operations
+> before I/O. Doing the same in DRM implementations will allow us to use
+> them throughout DRM drivers.
 > 
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 > ---
-
-[...]
-
->  static void drm_fb_helper_damage_work(struct work_struct *work)
->  {
-> -	struct drm_fb_helper *helper = container_of(work, struct drm_fb_helper,
-> -						    damage_work);
-> -	struct drm_device *dev = helper->dev;
-> +	struct drm_fb_helper *helper = container_of(work, struct drm_fb_helper, damage_work);
-
-This line is an unrelated code style change. But I guess it's OK.
 
 Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
