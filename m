@@ -2,47 +2,49 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80BBB6167A3
-	for <lists+spice-devel@lfdr.de>; Wed,  2 Nov 2022 17:12:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DBDF6170D8
+	for <lists+spice-devel@lfdr.de>; Wed,  2 Nov 2022 23:48:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A09610E4F4;
-	Wed,  2 Nov 2022 16:11:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7E11010E224;
+	Wed,  2 Nov 2022 22:48:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1507610E4F4
- for <spice-devel@lists.freedesktop.org>; Wed,  2 Nov 2022 16:11:57 +0000 (UTC)
-Received: by mail-wm1-x333.google.com with SMTP id
- p13-20020a05600c468d00b003cf8859ed1bso1116282wmo.1
- for <spice-devel@lists.freedesktop.org>; Wed, 02 Nov 2022 09:11:57 -0700 (PDT)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 78A2810E224
+ for <spice-devel@lists.freedesktop.org>; Wed,  2 Nov 2022 22:48:46 +0000 (UTC)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ s125-20020a4a5183000000b0047fbaf2fcbcso49338ooa.11
+ for <spice-devel@lists.freedesktop.org>; Wed, 02 Nov 2022 15:48:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=BXtQ+7WQKv89RCeBWRAU3l1/pRrjcXkPweKMkPqfV7o=;
- b=GroublbaTRZi9FOhock8dVCS/Pw27+vW52Qk27nVyRgTmBeNN4iPcV9GlUbkQqG4IC
- XhBGC4DXDWu4fndJnTKF9cg1EN7J+HyAwMT3vLz/gPhYUBCcsRBBiggOmsEhcgtojR5U
- IaO0Yh9XRrqDtImG/M15Hh9Y9r8gPYnhhl7TFzr9zOveHcdoPYiU2tX1aw5qLA7fHqVE
- MQvUZ11jAfm2LGZvGpneO5HfbWNZlhU8zj3uujhsvn6dLWzB265b2Mn0FhfQS5FsyjUK
- FOEs2t3BlW2TTV37e+icMZnnrfP3SADoHHk8qFv+4vZcRI9/U67VwBagWauI18Y9VsUj
- ri4g==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JfRpBKXfFi0hUduJiRviGJ7YUYkQhrPT+T1ntp7gIRg=;
+ b=qfFCwPHCIoe6Zb2a013Fw20LMq2j+kljEHbnbRRX6gm7/jrNhR++rxTnYtEzwLR+Fk
+ tuPbGq+fFCew/UYbVDXbMN8CjqtrWsS2ZHHb8hyGtXHm9lHVmlSZETIbEViibKP+2ja5
+ NZiRbpSONU2iPcqStYrihcDc5bnCad2UovdgGKhmB6LVQZbu8UYbFuaKZDa/JniDkRgx
+ tBp039+7dAM0zDIRUaSvWgOpkoxjKG5KLtPfPbRwSkhMvD+9pkl5wqOagMT43xJby3hs
+ endJ40nd7GxP/bDLweVQ5P3F5RsC4tQJLWddLKrM3cGA6bqBcCwi2Cw8DZROfGPuJGLP
+ 9gPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=BXtQ+7WQKv89RCeBWRAU3l1/pRrjcXkPweKMkPqfV7o=;
- b=OFonQsl1aHbj2H16PEmnS8IWiXOivlvA1aKJ17EfU9Him/9yH9p06pZuD6ww75DbQH
- EPMpPazryfB4oyozbzy/Ppa8+cb+KmIC8/Q14gcCiLEOkAmmC2h7/R47NAbY50UzBDvj
- xBrLJPq56MArs/whNpz9/JMtNZ6xz3jxNbNgBKKOGT9YQBYYHlohpw2J5DwW9nf9OMwi
- 1xX9iTNbtqvdvF7SL4N1VDLLLyoSI4YZ0O9ldU9sf/Da+Zk+x9Y8fX0Irh7/fEPmdQ3S
- tbhJVLnmh+zrGDGvExfzZvuEW3AI+1hVK9TkxFjNO6m8QmFBLt9rxTJh+u+x5rfG3rmD
- AQ7w==
-X-Gm-Message-State: ACrzQf2VgTLX6lsi5g7hjI4yDaTmkdKXqS3Vwd8zKqjrmRZaENQ5jthT
- LDxIvQsU+3ojTvlVqb/IeHLP7A34to5Q/8rvNEs=
-X-Google-Smtp-Source: AMsMyM6kWfRHgUAB3qTb/awsw7s1Um+fixf6EvRIh6N2OhFXHq65AmhaaQaSM+ZXafpueLdtBiB3/lF5hKFNw7o18Ro=
-X-Received: by 2002:a05:600c:310c:b0:3c6:f7c6:c7b6 with SMTP id
- g12-20020a05600c310c00b003c6f7c6c7b6mr15931334wmo.81.1667405515473; Wed, 02
- Nov 2022 09:11:55 -0700 (PDT)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JfRpBKXfFi0hUduJiRviGJ7YUYkQhrPT+T1ntp7gIRg=;
+ b=3zo5LgOq1rgi278BXsbXlcHsLwZJgZeA8tTX5JTWeCcGWVCnaxJB6VG2xtTd1EStKh
+ xhG+11HaKEBXQsy9MIDINueal3hnWu8aFtajUqlhV7Su90qLtN5La+MRXiGkLCUFPA5j
+ /E0z/FXI8X01QQo2T7yaoygTyy5i+8wZYICnVOe+4wXPFP3sgQvp++6akWU8nhW3Lrpq
+ vTWaXPXEu5A9xxWISZevVp6EGUHnSqwOQzRpa4PBt/KdpNVX/F4oYpfvwZMGHuJMIhJp
+ JPnl9A3BpLkErrgs93zRJNRTdEXe+RPi4ShJ07REG0JqvoJPecsvFQZFId7U/0i1CJzb
+ oqSg==
+X-Gm-Message-State: ACrzQf1HZ4Pp9sHvxeiNbFy7Fen3MDriW4UhSpXBgd+uQqUGmkSNMQUh
+ g19lzSW4e+aPxPHfN0a5cwtacFiNTiPhg4S998D5TgDL
+X-Google-Smtp-Source: AMsMyM76d1cDETrJlo446MDfC7fJEMvsNElc6GK1MPeAwFmIhle4QtLSM4o5l1Izg0+IC3enaWkFEijw5hHgwhoVKPw=
+X-Received: by 2002:a4a:c20e:0:b0:476:59ad:b02b with SMTP id
+ z14-20020a4ac20e000000b0047659adb02bmr11502572oop.65.1667429325643; Wed, 02
+ Nov 2022 15:48:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAGeBE=w-KZXVACD6xeeqfoo03K5BZxzA8O2U5x-8=NLsR=ZQKw@mail.gmail.com>
  <CAHt6W4dkGkFVDBQbMFN0+AD24OB18uxhhQC5n4u51PiJGnAi8g@mail.gmail.com>
@@ -58,13 +60,14 @@ References: <CAGeBE=w-KZXVACD6xeeqfoo03K5BZxzA8O2U5x-8=NLsR=ZQKw@mail.gmail.com>
  <CAAg9qJ1uLht3--b4OwQpiGPj2q=8FZvSF19VG+pQPWTPKz_RzA@mail.gmail.com>
  <CAGeBE=zqf-yb56MWYuok1ych_hsJAWsbwXB0zuFF834Vs2hDRw@mail.gmail.com>
  <CAHt6W4e2c266UKZ+3fLFzc8qBcsjbkXWFwdoDj4k7UKdP2dVpg@mail.gmail.com>
-In-Reply-To: <CAHt6W4e2c266UKZ+3fLFzc8qBcsjbkXWFwdoDj4k7UKdP2dVpg@mail.gmail.com>
-From: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
-Date: Wed, 2 Nov 2022 16:11:43 +0000
-Message-ID: <CAGeBE=wGrgden2JkNq9qcOryap-PKeGM3AeQ0dVfq-LxRgzFvg@mail.gmail.com>
-To: Frediano Ziglio <freddy77@gmail.com>, Uri Lublin <uril@redhat.com>, 
- spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000072489e05ec7f1928"
+ <CAGeBE=wGrgden2JkNq9qcOryap-PKeGM3AeQ0dVfq-LxRgzFvg@mail.gmail.com>
+In-Reply-To: <CAGeBE=wGrgden2JkNq9qcOryap-PKeGM3AeQ0dVfq-LxRgzFvg@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Wed, 2 Nov 2022 22:48:33 +0000
+Message-ID: <CAHt6W4cg4ALKavoBRCWR397gfqtW7daLuP=3eTOrnUzxU7wa2w@mail.gmail.com>
+To: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Subject: Re: [Spice-devel] Vdagent not working on a Debian guest
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -77,58 +80,45 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000072489e05ec7f1928
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-It is verbose indeed, but says *nothing* about file transfer errors.
-
-I think you really could give the live CD a try to see it for yourself, or
-just close this thread if you just want to say "not interested" once and
+Il giorno mer 2 nov 2022 alle ore 16:11 Carlos Gonz=C3=A1lez
+<piteccelaya@gmail.com> ha scritto:
+>
+> It is verbose indeed, but says *nothing* about file transfer errors.
+>
+> I think you really could give the live CD a try to see it for yourself, o=
+r just close this thread if you just want to say "not interested" once and =
 for all.
-But I think we should reach a conclusion, whatever it may be.
-
-El mar, 1 nov 2022 a las 8:38, Frediano Ziglio (<freddy77@gmail.com>)
-escribi=C3=B3:
-
-> Okay, let's get back to the basics. On a VM I have spice installed and
-> working. If I run "ps awx | grep spice" I got both spice-vdgentd and
-> spice-vdagent running.
-> If I kill (from a graphic terminal console) spice-agent I can launch
-> manually with something like "spice-agent -d -x -f $HOME/Desktop -o
-> 1". This should be pretty verbose.
->
-> Frediano
+> But I think we should reach a conclusion, whatever it may be.
 >
 
---00000000000072489e05ec7f1928
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I didn't think about it, being a live it's easy.
+I easily manage to copy a file,
+- downloaded an ISO (full version, x64)
+- created a VM with such ISO
+- started
+- opened a console
+- "sudo -i"
+- "apt-get update"
+- "apt-get install spice-vdagent"
+- "ps awx | grep spice", agent was already started
+- exited from root user, stayed on the console
+- "spice-agent -d -x -f $HOME/Desktop -o 1"
+- dragged a file, a file manager window opened with the file inside
 
-<div dir=3D"ltr"><div>It is verbose indeed, but says *nothing* about file t=
-ransfer errors.</div><div><br></div><div>I think you really could give the =
-live CD a try to see it for yourself, or just close this thread if you just=
- want to say &quot;not interested&quot; once and for all.</div><div>But I t=
-hink we should reach a conclusion, whatever it may be.<br></div><br><div cl=
-ass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">El mar, 1 nov 202=
-2 a las 8:38, Frediano Ziglio (&lt;<a href=3D"mailto:freddy77@gmail.com">fr=
-eddy77@gmail.com</a>&gt;) escribi=C3=B3:<br></div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
-4,204);padding-left:1ex">
-Okay, let&#39;s get back to the basics. On a VM I have spice installed and<=
-br>
-working. If I run &quot;ps awx | grep spice&quot; I got both spice-vdgentd =
-and<br>
-spice-vdagent running.<br>
-If I kill (from a graphic terminal console) spice-agent I can launch<br>
-manually with something like &quot;spice-agent -d -x -f $HOME/Desktop -o<br=
->
-1&quot;. This should be pretty verbose.<br>
-<br>
-Frediano<br>
-</blockquote></div></div>
+Frediano
 
---00000000000072489e05ec7f1928--
+> El mar, 1 nov 2022 a las 8:38, Frediano Ziglio (<freddy77@gmail.com>) esc=
+ribi=C3=B3:
+>>
+>> Okay, let's get back to the basics. On a VM I have spice installed and
+>> working. If I run "ps awx | grep spice" I got both spice-vdgentd and
+>> spice-vdagent running.
+>> If I kill (from a graphic terminal console) spice-agent I can launch
+>> manually with something like "spice-agent -d -x -f $HOME/Desktop -o
+>> 1". This should be pretty verbose.
+>>
+>> Frediano
