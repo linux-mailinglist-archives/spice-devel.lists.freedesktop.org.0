@@ -2,73 +2,56 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DBDF6170D8
-	for <lists+spice-devel@lfdr.de>; Wed,  2 Nov 2022 23:48:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84BF961826C
+	for <lists+spice-devel@lfdr.de>; Thu,  3 Nov 2022 16:20:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E11010E224;
-	Wed,  2 Nov 2022 22:48:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D765B10E69D;
+	Thu,  3 Nov 2022 15:20:23 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 78A2810E224
- for <spice-devel@lists.freedesktop.org>; Wed,  2 Nov 2022 22:48:46 +0000 (UTC)
-Received: by mail-oo1-xc29.google.com with SMTP id
- s125-20020a4a5183000000b0047fbaf2fcbcso49338ooa.11
- for <spice-devel@lists.freedesktop.org>; Wed, 02 Nov 2022 15:48:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JfRpBKXfFi0hUduJiRviGJ7YUYkQhrPT+T1ntp7gIRg=;
- b=qfFCwPHCIoe6Zb2a013Fw20LMq2j+kljEHbnbRRX6gm7/jrNhR++rxTnYtEzwLR+Fk
- tuPbGq+fFCew/UYbVDXbMN8CjqtrWsS2ZHHb8hyGtXHm9lHVmlSZETIbEViibKP+2ja5
- NZiRbpSONU2iPcqStYrihcDc5bnCad2UovdgGKhmB6LVQZbu8UYbFuaKZDa/JniDkRgx
- tBp039+7dAM0zDIRUaSvWgOpkoxjKG5KLtPfPbRwSkhMvD+9pkl5wqOagMT43xJby3hs
- endJ40nd7GxP/bDLweVQ5P3F5RsC4tQJLWddLKrM3cGA6bqBcCwi2Cw8DZROfGPuJGLP
- 9gPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JfRpBKXfFi0hUduJiRviGJ7YUYkQhrPT+T1ntp7gIRg=;
- b=3zo5LgOq1rgi278BXsbXlcHsLwZJgZeA8tTX5JTWeCcGWVCnaxJB6VG2xtTd1EStKh
- xhG+11HaKEBXQsy9MIDINueal3hnWu8aFtajUqlhV7Su90qLtN5La+MRXiGkLCUFPA5j
- /E0z/FXI8X01QQo2T7yaoygTyy5i+8wZYICnVOe+4wXPFP3sgQvp++6akWU8nhW3Lrpq
- vTWaXPXEu5A9xxWISZevVp6EGUHnSqwOQzRpa4PBt/KdpNVX/F4oYpfvwZMGHuJMIhJp
- JPnl9A3BpLkErrgs93zRJNRTdEXe+RPi4ShJ07REG0JqvoJPecsvFQZFId7U/0i1CJzb
- oqSg==
-X-Gm-Message-State: ACrzQf1HZ4Pp9sHvxeiNbFy7Fen3MDriW4UhSpXBgd+uQqUGmkSNMQUh
- g19lzSW4e+aPxPHfN0a5cwtacFiNTiPhg4S998D5TgDL
-X-Google-Smtp-Source: AMsMyM76d1cDETrJlo446MDfC7fJEMvsNElc6GK1MPeAwFmIhle4QtLSM4o5l1Izg0+IC3enaWkFEijw5hHgwhoVKPw=
-X-Received: by 2002:a4a:c20e:0:b0:476:59ad:b02b with SMTP id
- z14-20020a4ac20e000000b0047659adb02bmr11502572oop.65.1667429325643; Wed, 02
- Nov 2022 15:48:45 -0700 (PDT)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F171E10E3C4;
+ Thu,  3 Nov 2022 15:14:50 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 77F601F88C;
+ Thu,  3 Nov 2022 15:14:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1667488489; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=HedAlrS8erHkRoHUc/nk9PZPahT98wWins1TZNQ+myo=;
+ b=ts+mFZqzw7nt496UOWxsBj/xG6sJKPY/ZWmHdFZxUG6ONqcbseLnVXu/wXRLAFn+VGn/YR
+ Rqass7K9e5Tf8KqeYY+gKZRv+JgfpuuYK6ggxjkZHiOpS0V3LO8NFAUASBN8QOA44nud45
+ u9o1mCiJIX4XReB+zkbZ4HbcduFUihs=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1667488489;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=HedAlrS8erHkRoHUc/nk9PZPahT98wWins1TZNQ+myo=;
+ b=lsvt5cpyVTNQvpmzx5qsqs1XtiL2L/Eibv9TPCR/dY0Qky34DmnJAVBCZYMH6j2JOe7LS2
+ KLgvNS9ctlteh0Cg==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E34DA13AAF;
+ Thu,  3 Nov 2022 15:14:48 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id oqOUNujaY2PBGgAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Thu, 03 Nov 2022 15:14:48 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: daniel@ffwll.ch, airlied@gmail.com, sam@ravnborg.org, javierm@redhat.com,
+ mripard@kernel.org, maarten.lankhorst@linux.intel.com
+Date: Thu,  3 Nov 2022 16:14:23 +0100
+Message-Id: <20221103151446.2638-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.38.0
 MIME-Version: 1.0
-References: <CAGeBE=w-KZXVACD6xeeqfoo03K5BZxzA8O2U5x-8=NLsR=ZQKw@mail.gmail.com>
- <CAHt6W4dkGkFVDBQbMFN0+AD24OB18uxhhQC5n4u51PiJGnAi8g@mail.gmail.com>
- <CAGeBE=y4HKusjFMYez9uGEzEMm_9uhgDeW5uakB-bErUWcPoJQ@mail.gmail.com>
- <CAHt6W4eysYyfv-9_W6n5YRv5qSd0rU46=vGf25fAO5s342a3aw@mail.gmail.com>
- <CAGeBE=xYOdDo40ec=T=auNhj-nq8nHXuOWZ6Tt+HT-gniu=YcQ@mail.gmail.com>
- <CAHt6W4cJW-Lj_rE+c9YqrDSft5f0t4RJ41z4bv4y2gVYyyfwNQ@mail.gmail.com>
- <CAAg9qJ3bMd=3_YD4UJ1rHDmm3s7L5NG047eioeuJ209s50MAKg@mail.gmail.com>
- <CAGeBE=w5OVLoKD_E72HdacqCivp=ZS2tuaDoHMJTB82-68W0-A@mail.gmail.com>
- <CAAg9qJ20nfDLfx_8Hboyw-GZpU5t4mrKH7+4L_Ne-wOrqbzEZg@mail.gmail.com>
- <CAGeBE=zLNuypqM296NKHbiVXf-u4hcK3MbTxXG34eOeDSgG_cg@mail.gmail.com>
- <CAGeBE=wNsck1_L88kV=oAVVe5LThruT4SZEJwuZPXrEVds-6tQ@mail.gmail.com>
- <CAAg9qJ1uLht3--b4OwQpiGPj2q=8FZvSF19VG+pQPWTPKz_RzA@mail.gmail.com>
- <CAGeBE=zqf-yb56MWYuok1ych_hsJAWsbwXB0zuFF834Vs2hDRw@mail.gmail.com>
- <CAHt6W4e2c266UKZ+3fLFzc8qBcsjbkXWFwdoDj4k7UKdP2dVpg@mail.gmail.com>
- <CAGeBE=wGrgden2JkNq9qcOryap-PKeGM3AeQ0dVfq-LxRgzFvg@mail.gmail.com>
-In-Reply-To: <CAGeBE=wGrgden2JkNq9qcOryap-PKeGM3AeQ0dVfq-LxRgzFvg@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Wed, 2 Nov 2022 22:48:33 +0000
-Message-ID: <CAHt6W4cg4ALKavoBRCWR397gfqtW7daLuP=3eTOrnUzxU7wa2w@mail.gmail.com>
-To: =?UTF-8?Q?Carlos_Gonz=C3=A1lez?= <piteccelaya@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] Vdagent not working on a Debian guest
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 03 Nov 2022 15:20:14 +0000
+Subject: [Spice-devel] [PATCH v3 00/23] drm/fb-helper: Untangle fbdev
+ emulation and helpers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,45 +63,220 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linux-stm32@st-md-mailman.stormreply.com, linux-samsung-soc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+ spice-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
+ xen-devel@lists.xenproject.org, linux-tegra@vger.kernel.org,
+ linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ "linux-hyperv@vger.kernel.orglinux-hyperv"@vger.kernel.org,
+ linux-mips@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, freedreno@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno mer 2 nov 2022 alle ore 16:11 Carlos Gonz=C3=A1lez
-<piteccelaya@gmail.com> ha scritto:
->
-> It is verbose indeed, but says *nothing* about file transfer errors.
->
-> I think you really could give the live CD a try to see it for yourself, o=
-r just close this thread if you just want to say "not interested" once and =
-for all.
-> But I think we should reach a conclusion, whatever it may be.
->
+Separate generic fbdev emulation from the helper code that is shared
+among the various fbdev implementations within DRM. Affects many drivers.
 
-I didn't think about it, being a live it's easy.
-I easily manage to copy a file,
-- downloaded an ISO (full version, x64)
-- created a VM with such ISO
-- started
-- opened a console
-- "sudo -i"
-- "apt-get update"
-- "apt-get install spice-vdagent"
-- "ps awx | grep spice", agent was already started
-- exited from root user, stayed on the console
-- "spice-agent -d -x -f $HOME/Desktop -o 1"
-- dragged a file, a file manager window opened with the file inside
+It has become apparent that our fully generic fbdev emulation will
+never produce optimal results for all drivers. In its current form,
+it is also hard to maintain. The goal of this patchset is to improve
+readability and streamline the fbdev helper code within DRM. In the
+long term, we want to get to a point where drivers or memory managers
+can pick and combine the various helpers for optimal fbdev support.
 
-Frediano
+Patches 1 to 8 start by preparing drivers. Setting struct drm_driver's
+lastclose and output_poll_changed is not required by generic fbdev
+emulation.
 
-> El mar, 1 nov 2022 a las 8:38, Frediano Ziglio (<freddy77@gmail.com>) esc=
-ribi=C3=B3:
->>
->> Okay, let's get back to the basics. On a VM I have spice installed and
->> working. If I run "ps awx | grep spice" I got both spice-vdgentd and
->> spice-vdagent running.
->> If I kill (from a graphic terminal console) spice-agent I can launch
->> manually with something like "spice-agent -d -x -f $HOME/Desktop -o
->> 1". This should be pretty verbose.
->>
->> Frediano
+Two drivers depend on fb helpers implicitly including other Linux header
+files. Fixing this in patches 9 and 10 allows to remove unnecesary include
+statements from the fb-helper header in patch 11.
+
+Do some renaming in patches 12 to 14.
+
+There are currently various implementation of the fbdev I/O helpers
+with varying feature sets. The fb helpers for fbdev I/O should all call
+fb_sync, which is what fbdev's internal implementation does. For DRM,
+damage handling needs to be performed after updating a framebuffer. The
+damage worker is part of the fb helpers, but the actual update logic only
+works with generic fbdev emulation. Separate the two, which also gives
+other drivers an option to set their own damage handling if neccessary.
+The full-featured I/O helpers can be moved under a shared implementation
+and called by all drivers. Patches 15 to 18 resolve these issues.
+
+Patch 19 changes fbdev disablement to work at the level of display
+detection. If disabled, generic fbdev emulation will be initialized,
+but no display will be detected. It can later be enabled by changing
+the parameter in sysfs and plugging in a connector.
+
+Patches 20 to 22 move the generic fbdev emulation into their own source
+and header files and clean up the include statements throughout DRM. Many
+drivers only call drm_fbdev_generic_setup() and can avoid including other
+Linux header files.
+
+Patch 23 is a documentation update.
+
+Built on x86-64, aarch64, arm, ppc64le. Tested with various combinations
+of bochs, i915, simpledrm.
+
+v3:
+	* documentation fixes (Javier)
+	* rename drm_fbdev.{c,h} to drm_fbdev_generic.{c,h}
+	* keep drm_leak_fbdev_smem in drm_fb_helper.c
+	* fix several include statements
+	* rebases
+v2:
+      	* fixed commit descriptions (Christian, Sergey)
+
+Thomas Zimmermann (23):
+  drm/komeda: Don't set struct drm_driver.lastclose
+  drm/mcde: Don't set struct drm_driver.lastclose
+  drm/vboxvideo: Don't set struct drm_driver.lastclose
+  drm/amdgpu: Don't set struct drm_driver.output_poll_changed
+  drm/imx/dcss: Don't set struct drm_driver.output_poll_changed
+  drm/ingenic: Don't set struct drm_driver.output_poll_changed
+  drm/logicvc: Don't set struct drm_driver.output_poll_changed
+  drm/rockchip: Don't set struct drm_driver.output_poll_changed
+  drm/panel-ili9341: Include <linux/backlight.h>
+  drm/tve200: Include <linux/of.h>
+  drm/fb-helper: Cleanup include statements in header file
+  drm/fb_helper: Rename field fbdev to info in struct drm_fb_helper
+  drm/fb-helper: Rename drm_fb_helper_alloc_fbi() to use _info postfix
+  drm/fb-helper: Rename drm_fb_helper_unregister_fbi() to use _info
+    postfix
+  drm/fb-helper: Disconnect damage worker from update logic
+  drm/fb-helper: Call fb_sync in I/O functions
+  drm/fb-helper: Perform all fbdev I/O with the same implementation
+  drm/fb_helper: Minimize damage-helper overhead
+  drm/fb-helper: Always initialize generic fbdev emulation
+  drm/fb-helper: Set flag in struct drm_fb_helper for leaking physical
+    addresses
+  drm/fb-helper: Move generic fbdev emulation into separate source file
+  drm/fb-helper: Remove unnecessary include statements
+  drm/fb-helper: Clarify use of last_close and output_poll_changed
+
+ drivers/gpu/drm/Makefile                      |    4 +-
+ .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    |    1 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    |    1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |    3 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |    1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c       |    1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h      |    1 -
+ drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        |    1 +
+ drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        |    1 +
+ drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         |    1 +
+ drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         |    1 +
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |    2 -
+ .../gpu/drm/arm/display/komeda/komeda_drv.c   |    2 +-
+ .../gpu/drm/arm/display/komeda/komeda_kms.c   |    2 -
+ drivers/gpu/drm/arm/hdlcd_crtc.c              |    1 -
+ drivers/gpu/drm/arm/hdlcd_drv.c               |    2 +-
+ drivers/gpu/drm/arm/malidp_drv.c              |    2 +-
+ drivers/gpu/drm/armada/armada_fbdev.c         |    6 +-
+ drivers/gpu/drm/aspeed/aspeed_gfx_drv.c       |    2 +-
+ drivers/gpu/drm/ast/ast_drv.c                 |    1 +
+ drivers/gpu/drm/ast/ast_drv.h                 |    1 -
+ drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_dc.c  |    2 +-
+ drivers/gpu/drm/bridge/tc358762.c             |    2 +-
+ drivers/gpu/drm/drm_crtc_helper.c             |    1 -
+ drivers/gpu/drm/drm_fb_helper.c               | 1008 ++++++-----------
+ drivers/gpu/drm/drm_fbdev_generic.c           |  493 ++++++++
+ drivers/gpu/drm/drm_gem_framebuffer_helper.c  |    1 -
+ drivers/gpu/drm/drm_probe_helper.c            |    1 -
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h         |    3 +-
+ drivers/gpu/drm/exynos/exynos_drm_fbdev.c     |    6 +-
+ drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c     |    2 +-
+ drivers/gpu/drm/gma500/framebuffer.c          |    6 +-
+ drivers/gpu/drm/gud/gud_drv.c                 |    2 +-
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   |    1 +
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.h   |    1 -
+ .../gpu/drm/hisilicon/kirin/kirin_drm_drv.c   |    2 +-
+ drivers/gpu/drm/hyperv/hyperv_drm_drv.c       |    2 +-
+ drivers/gpu/drm/hyperv/hyperv_drm_modeset.c   |    1 -
+ drivers/gpu/drm/i915/display/intel_fbdev.c    |    8 +-
+ drivers/gpu/drm/imx/dcss/dcss-kms.c           |    3 +-
+ drivers/gpu/drm/imx/imx-drm-core.c            |    2 +-
+ drivers/gpu/drm/imx/imx-ldb.c                 |    2 +-
+ drivers/gpu/drm/imx/imx-tve.c                 |    1 -
+ drivers/gpu/drm/imx/parallel-display.c        |    2 +-
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c     |    3 +-
+ drivers/gpu/drm/kmb/kmb_drv.c                 |    2 +-
+ drivers/gpu/drm/kmb/kmb_plane.c               |    1 -
+ drivers/gpu/drm/logicvc/logicvc_drm.c         |    2 +-
+ drivers/gpu/drm/logicvc/logicvc_mode.c        |    2 -
+ drivers/gpu/drm/mcde/mcde_drv.c               |    3 +-
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c        |    2 +-
+ drivers/gpu/drm/meson/meson_drv.c             |    2 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.c         |    1 +
+ drivers/gpu/drm/mgag200/mgag200_drv.h         |    1 -
+ drivers/gpu/drm/msm/msm_fbdev.c               |    4 +-
+ drivers/gpu/drm/mxsfb/lcdif_drv.c             |    2 +-
+ drivers/gpu/drm/mxsfb/mxsfb_drv.c             |    2 +-
+ drivers/gpu/drm/nouveau/nouveau_fbcon.c       |   27 +-
+ drivers/gpu/drm/omapdrm/omap_fbdev.c          |    6 +-
+ drivers/gpu/drm/panel/panel-ilitek-ili9341.c  |    3 +-
+ drivers/gpu/drm/pl111/pl111_drv.c             |    2 +-
+ drivers/gpu/drm/qxl/qxl_drv.c                 |    1 +
+ drivers/gpu/drm/qxl/qxl_drv.h                 |    1 -
+ drivers/gpu/drm/radeon/radeon_fb.c            |    6 +-
+ drivers/gpu/drm/rcar-du/rcar_du_drv.c         |    2 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c   |    2 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.h   |    2 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_fb.c    |    2 -
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |    1 +
+ drivers/gpu/drm/solomon/ssd130x.c             |    2 +-
+ drivers/gpu/drm/sti/sti_drv.c                 |    2 +-
+ drivers/gpu/drm/stm/drv.c                     |    2 +-
+ drivers/gpu/drm/sun4i/sun4i_drv.c             |    2 +-
+ drivers/gpu/drm/tegra/fb.c                    |    8 +-
+ drivers/gpu/drm/tidss/tidss_drv.c             |    2 +-
+ drivers/gpu/drm/tidss/tidss_kms.c             |    1 -
+ drivers/gpu/drm/tilcdc/tilcdc_drv.c           |    2 +-
+ drivers/gpu/drm/tiny/arcpgu.c                 |    2 +-
+ drivers/gpu/drm/tiny/bochs.c                  |    2 +-
+ drivers/gpu/drm/tiny/cirrus.c                 |    2 +-
+ drivers/gpu/drm/tiny/gm12u320.c               |    2 +-
+ drivers/gpu/drm/tiny/hx8357d.c                |    2 +-
+ drivers/gpu/drm/tiny/ili9163.c                |    2 +-
+ drivers/gpu/drm/tiny/ili9225.c                |    2 +-
+ drivers/gpu/drm/tiny/ili9341.c                |    2 +-
+ drivers/gpu/drm/tiny/ili9486.c                |    2 +-
+ drivers/gpu/drm/tiny/mi0283qt.c               |    2 +-
+ drivers/gpu/drm/tiny/ofdrm.c                  |    2 +-
+ drivers/gpu/drm/tiny/panel-mipi-dbi.c         |    2 +-
+ drivers/gpu/drm/tiny/repaper.c                |    2 +-
+ drivers/gpu/drm/tiny/simpledrm.c              |    2 +-
+ drivers/gpu/drm/tiny/st7586.c                 |    2 +-
+ drivers/gpu/drm/tiny/st7735r.c                |    2 +-
+ drivers/gpu/drm/tve200/tve200_drv.c           |    3 +-
+ drivers/gpu/drm/udl/udl_drv.c                 |    2 +-
+ drivers/gpu/drm/v3d/v3d_drv.c                 |    1 -
+ drivers/gpu/drm/vboxvideo/vbox_drv.c          |    4 +-
+ drivers/gpu/drm/vboxvideo/vbox_main.c         |    1 -
+ drivers/gpu/drm/vc4/vc4_drv.c                 |    2 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.c          |    1 +
+ drivers/gpu/drm/virtio/virtgpu_drv.h          |    1 -
+ drivers/gpu/drm/vkms/vkms_drv.c               |    2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           |    2 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.c       |    1 -
+ drivers/gpu/drm/xlnx/zynqmp_kms.c             |    2 +-
+ include/drm/drm_fb_helper.h                   |   61 +-
+ include/drm/drm_fbdev_generic.h               |   15 +
+ 107 files changed, 987 insertions(+), 835 deletions(-)
+ create mode 100644 drivers/gpu/drm/drm_fbdev_generic.c
+ create mode 100644 include/drm/drm_fbdev_generic.h
+
+
+base-commit: f5a9fb2d688dfc6efa1fd779a2d225048bfb10f9
+prerequisite-patch-id: c2b2f08f0eccc9f5df0c0da49fa1d36267deb11d
+prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
+prerequisite-patch-id: 3f204510fcbf9530d6540bd8e6128cce598988b6
+prerequisite-patch-id: db1c43fc253bf3b55cfa09128a2d83d960599ead
+prerequisite-patch-id: 007fca7c89f5fe0e5279021fcac49fb621bf5708
+-- 
+2.38.0
+
