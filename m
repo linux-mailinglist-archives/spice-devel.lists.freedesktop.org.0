@@ -1,63 +1,83 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B04461827C
-	for <lists+spice-devel@lfdr.de>; Thu,  3 Nov 2022 16:20:52 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93D55619B26
+	for <lists+spice-devel@lfdr.de>; Fri,  4 Nov 2022 16:14:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D590410E6A3;
-	Thu,  3 Nov 2022 15:20:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D32D710E871;
+	Fri,  4 Nov 2022 15:13:59 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 912CD10E621;
- Thu,  3 Nov 2022 15:15:03 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 426EA1F900;
- Thu,  3 Nov 2022 15:15:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1667488502; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C1B4A10E72A
+ for <spice-devel@lists.freedesktop.org>; Fri,  4 Nov 2022 10:37:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1667558241;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HgxG97nmydzNCVipkHzgPf3aCI1grjy0cqRB+0/Ck74=;
- b=kcgtu9PKiyMKUj8GxwYh+/ORcWz7+UhaRslLpGT/0EYXH4EiaVWbRO1rXX+RnuBF5OjTj2
- Xec3+JBI90xwvAliyOtjTY3B94F0kq3muNjviJe52VZzz9N0Nd9Yc6Mfuv+xD0GBg/lfBm
- F9ORYgDvXcxRapg5A3YBRJRoUxxeEtI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1667488502;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HgxG97nmydzNCVipkHzgPf3aCI1grjy0cqRB+0/Ck74=;
- b=BTICG+mmiOcUdGuFYoU4C0nyEBYhfhmngf4Ev9loTA8Jed/wbNJaxvDDbye+EQL4FS5m+K
- t/wO99a1pUjQkKCQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B325D13AAF;
- Thu,  3 Nov 2022 15:15:01 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 8LVrKvXaY2PBGgAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Thu, 03 Nov 2022 15:15:01 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@gmail.com, sam@ravnborg.org, javierm@redhat.com,
- mripard@kernel.org, maarten.lankhorst@linux.intel.com
-Date: Thu,  3 Nov 2022 16:14:46 +0100
-Message-Id: <20221103151446.2638-24-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.38.0
-In-Reply-To: <20221103151446.2638-1-tzimmermann@suse.de>
-References: <20221103151446.2638-1-tzimmermann@suse.de>
+ bh=FvcSXdbTIY6j0RtoeMW2Oyvbsf0knEKyh2vmjeJsi+Y=;
+ b=R2yQImMcAfIj5GEELIWTBsuK8hgSQmFxwHONeKVvbLNsoPnUuIooQaMHVa/KhRLCIH7r5a
+ SCaPWvfexiteqzwdGc6NcedILUoKqMLUZ0NXk2nAw9stXpgMK2U85P+Z3QKQx3TEQy8gHF
+ 8m7WD5rw4DsgVTBWqQrCcuIJkg3C6Eo=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-480-T1ddrGf0PVy5byk057hf5A-1; Fri, 04 Nov 2022 06:37:20 -0400
+X-MC-Unique: T1ddrGf0PVy5byk057hf5A-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ h8-20020a1c2108000000b003cf550bfc8dso4052088wmh.2
+ for <spice-devel@lists.freedesktop.org>; Fri, 04 Nov 2022 03:37:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FvcSXdbTIY6j0RtoeMW2Oyvbsf0knEKyh2vmjeJsi+Y=;
+ b=JZJQhzwt2m+2RQE5Fdswgo1HSoqEvvq5eZXaA5QCcacR0a+jgI44oo+dG5q7dyDTdz
+ cNT/Vbe00KpdXamYLdogO5GdqaTgMKFxsPJ7esf3oPvnXhR5uODHew7lwzTRdXkAbN9x
+ OW80VT5yO022xXIbJPu5ufNfRkzoRQGj4DVIlVXYcqIDHYkS412pEfSVaYj5BfW1mIYD
+ TdRq3HecRVA8gDcTWgEdqQO5lIyPbek2EZEu5dQcdgLv7CYeSFZkYWdvN9Va6SnatIHd
+ fWHj+tT8l3yb/6mS2jHHpb4XLEhOM8jWkbqvKC2Tlyhq9G4RAqMpur27My4e5LKCAjBq
+ Smeg==
+X-Gm-Message-State: ACrzQf2iU21gKvCvUPxkFSZB15u4Xh2F2Ztzgk5wgubdzTl2Arh2NoPB
+ 6naFishMqlk6B+ICF/xrf3V3h7kCwdJWFbj90J6yQNuT89XqiW0N2Il1dd+Afoxz4IYqlGn3sCv
+ VHRm9+ZoFg/UOtmswLoXh9d707iKXBQo=
+X-Received: by 2002:a05:600c:1e2a:b0:3c3:d770:1756 with SMTP id
+ ay42-20020a05600c1e2a00b003c3d7701756mr23539589wmb.134.1667558239644; 
+ Fri, 04 Nov 2022 03:37:19 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4LKXhwK5qh8ieFEkCSZgi7mblk9sJOfnr0awtpFbS+pIQGNE9IUSRaCOrs9CG3VpGFJY/xjQ==
+X-Received: by 2002:a05:600c:1e2a:b0:3c3:d770:1756 with SMTP id
+ ay42-20020a05600c1e2a00b003c3d7701756mr23539569wmb.134.1667558239379; 
+ Fri, 04 Nov 2022 03:37:19 -0700 (PDT)
+Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es.
+ [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
+ f15-20020a5d50cf000000b0022e36c1113fsm3031008wrt.13.2022.11.04.03.37.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Nov 2022 03:37:18 -0700 (PDT)
+Message-ID: <ab8358a9-8450-0d49-627f-26afe7ba4f9d@redhat.com>
+Date: Fri, 4 Nov 2022 11:37:17 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 03 Nov 2022 15:20:14 +0000
-Subject: [Spice-devel] [PATCH v3 23/23] drm/fb-helper: Clarify use of
- last_close and output_poll_changed
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, sam@ravnborg.org, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com
+References: <20221103151446.2638-1-tzimmermann@suse.de>
+ <20221103151446.2638-21-tzimmermann@suse.de>
+From: Javier Martinez Canillas <javierm@redhat.com>
+In-Reply-To: <20221103151446.2638-21-tzimmermann@suse.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 04 Nov 2022 15:13:52 +0000
+Subject: Re: [Spice-devel] [PATCH v3 20/23] drm/fb-helper: Set flag in
+ struct drm_fb_helper for leaking physical addresses
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,50 +89,35 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- linux-stm32@st-md-mailman.stormreply.com, linux-samsung-soc@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- spice-devel@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- xen-devel@lists.xenproject.org, linux-tegra@vger.kernel.org,
- linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- "linux-hyperv@vger.kernel.orglinux-hyperv"@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
- Thomas Zimmermann <tzimmermann@suse.de>, freedreno@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org, linux-samsung-soc@vger.kernel.org,
+ linux-aspeed@lists.ozlabs.org, spice-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-mediatek@lists.infradead.org,
+ amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ linux-tegra@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-amlogic@lists.infradead.org, linux-mips@vger.kernel.org,
+ linux-sunxi@lists.linux.dev, linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Clarify documentation in the use of struct drm_driver.last_close and
-struct drm_mode_config_funcs.output_poll_changed. Those callbacks should
-not be said for fbdev implementations on top of struct drm_client_funcs.
+On 11/3/22 16:14, Thomas Zimmermann wrote:
+> Uncouple the parameter drm_leak_fbdev_smem from the implementation by
+> setting a flag in struct drm_fb_helper. This will help to move the
+> generic fbdev emulation into its own source file, while keeping the
+> parameter in drm_fb_helper.c. No functional changes.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/drm_fb_helper.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 5eb2f0d4bf8d4..e0384f967c0b3 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -89,11 +89,13 @@ static DEFINE_MUTEX(kernel_fb_helper_lock);
-  * It will automatically set up deferred I/O if the driver requires a shadow
-  * buffer.
-  *
-- * At runtime drivers should restore the fbdev console by using
-+ * Existing fbdev implementations should restore the fbdev console by using
-  * drm_fb_helper_lastclose() as their &drm_driver.lastclose callback.
-  * They should also notify the fb helper code from updates to the output
-  * configuration by using drm_fb_helper_output_poll_changed() as their
-- * &drm_mode_config_funcs.output_poll_changed callback.
-+ * &drm_mode_config_funcs.output_poll_changed callback. New implementations
-+ * of fbdev should be build on top of struct &drm_client_funcs, which handles
-+ * this automatically. Setting the old callbacks should be avoided.
-  *
-  * For suspend/resume consider using drm_mode_config_helper_suspend() and
-  * drm_mode_config_helper_resume() which takes care of fbdev as well.
 -- 
-2.38.0
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
