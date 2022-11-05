@@ -2,55 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D930961D89F
-	for <lists+spice-devel@lfdr.de>; Sat,  5 Nov 2022 09:09:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6877261D9CE
+	for <lists+spice-devel@lfdr.de>; Sat,  5 Nov 2022 13:03:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4BC5510E0DC;
-	Sat,  5 Nov 2022 08:09:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ECA8E10E066;
+	Sat,  5 Nov 2022 12:03:22 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D751410E84F
- for <spice-devel@lists.freedesktop.org>; Fri,  4 Nov 2022 21:16:10 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id bj12so16357021ejb.13
- for <spice-devel@lists.freedesktop.org>; Fri, 04 Nov 2022 14:16:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20210112;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=V43wG8H3m/uP1dbXoSkZ+Rc4dnkcC6l4E5VG//XOG5s=;
- b=YiSTKRrAKRUw8MgIRg3aKbp0O3TW1mOisiehlMriZv63T4bk/iX87OrWRIxCY7UGtI
- z++DNFMkjlgRY2VEhkR3+dFt3XUVbfCK7B+MT2In1/jM+8QHIU3qq+EyhuUfXCOYcpqX
- ulH08yzRiWIbgyAPKAdAPuBHm0vVxoJGSWgSBqM2Wwzw5pi788GalsQs9YnUkLu1H8Yn
- VK53NcFmYXGUpZPh53CmnCy72qEQhMNnYcLkq3TL506C8I4W6X/hnPdTjPprwspmV367
- AHQ8ixGgwY9Gpu6ekuWTBD9vOQxSwMazfS8vv70P8qePrLyXCazHW/GW9DFKdG1T89q+
- TlRA==
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 95AA210E066
+ for <spice-devel@lists.freedesktop.org>; Sat,  5 Nov 2022 12:03:20 +0000 (UTC)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-13d9a3bb27aso7369652fac.11
+ for <spice-devel@lists.freedesktop.org>; Sat, 05 Nov 2022 05:03:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=29hcpFGRlozbP2dK3rj9b9RKlCFsoTj/sK4D98w8ntM=;
+ b=bAunv9mhM0jraYl+fVWttumnyWlB3x4KvgcshUw0wd2UEY/jvHJ0P9J5h8SGUZexjI
+ Hwnmh80LRIxSRdv53nCH953Xosd+CnWjD7d47FNvhUGQ7CiYUGC9QBhufvB6xA7Y8CoM
+ brKluvTUkApHQ3dk8JRO6mq8mKXB61G0xVD6fJNGy1BfNzEx7c68EYQZ5FFNOFQbQ8dN
+ gAOakzMqrisbKDqhFo2Fx3GSLr/jAeIxCKxgP9uUZOLjotmdkl7iIhmJVOGH7b0BTtw/
+ 1azaGiKBruE0LK1T2FKbt7asonb4DWl+6WAyflVqOkBOF/2TRK53VbzoBJkRdUnreyv2
+ 088g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=V43wG8H3m/uP1dbXoSkZ+Rc4dnkcC6l4E5VG//XOG5s=;
- b=Su9q3wnMaXIkK66xhRCMKaH/UmdIe+Z7xW3ucPd/WeA8/6YSTMxTw75PP/CslJe1ax
- V88qCkvLWOx17AVWeHtR9Gmz3LkLe+4P6r50f+GrT67NloYnwKFAfQuxoruHojJWyGQe
- oXwW8YBCLMLGurtzV/siGXokqJQuW91p7v1AeLfwyvE/PhPwVw7cnCEPFz1GwadDsZSk
- yRyO5FLMLOxq0E5iGKvI2Z/1iQwmzMU0Xa/TTgdFcAf2urfip6vZyEKQBj4PQh/K6knD
- +NcKA213DQvJQH0lrKU6oI8utZ4pMoKT4JKij3/gsEdZQOubblIRg+3M+vVByZZS+A9g
- bNNA==
-X-Gm-Message-State: ACrzQf3qX8vnqBc8G+h6nHPG8CWmOZ7pgztD0gmkNMiIpxgRSMtRqTQD
- +6XbzWoKBY0EXothanouwEJ08WQDTDAltjaEy/Baf/3sN3c=
-X-Google-Smtp-Source: AMsMyM4g60WAF4tz/FiwRKIMsTjrqCzUjIO4tlrpKB7gZFcrQfOEi1870ObN1/y4AL/R+xYqPhLC9DMRYHKuQrnzbJo=
-X-Received: by 2002:a17:906:4e18:b0:7ab:777:a7d7 with SMTP id
- z24-20020a1709064e1800b007ab0777a7d7mr381228eju.757.1667596568985; Fri, 04
- Nov 2022 14:16:08 -0700 (PDT)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=29hcpFGRlozbP2dK3rj9b9RKlCFsoTj/sK4D98w8ntM=;
+ b=gD0xR9N6ryA1kIKCqraO0qsBoNaqxL2CvUFv2Ig/p/ztVk7YFR1IPB5r5Sfwhafhml
+ kLBshRa59fJj75na+liI0440Hm63IEbtZGpv6TKXcbdn98U2u3uYajDrJUPB/eI9CI6N
+ nY+YO2HKjfcxcIoklsTiRcNn//dqU+LbmNFX3AgNcpav3hB3KSee/coeOusDD9kkYP2P
+ xhpQiHnw5/EwL7wyryPkj/ISmZ1N+Y9iYwQV8Qpv6WPHGU4dnedaQrtduF5Ms0IH1wWS
+ CYAkuZy60zPENGkhY9590Hwgzmd4MRbi6Ghv1FWStSHJAC6wyaZm1LqeqbYg81XEwSLc
+ /yYw==
+X-Gm-Message-State: ACrzQf2wHxKMgG45rFQ9QM/JwtwSXlRPfMmUGeeecYhzb6QzhpqsN86j
+ YSFUxhAvhZW8VGv+9cbBzGnPZ1ord2oS/87u1hg=
+X-Google-Smtp-Source: AMsMyM6AchAzAF0EVCx6/rl+n+2AnxzTqwz9vl+LizvhY36fJazjq7fnV3ZSPWe3rtUHu1YaNor+rDHwFdIlehm5hog=
+X-Received: by 2002:a05:6870:e6d3:b0:13d:7209:a3d7 with SMTP id
+ s19-20020a056870e6d300b0013d7209a3d7mr11088131oak.1.1667649799696; Sat, 05
+ Nov 2022 05:03:19 -0700 (PDT)
 MIME-Version: 1.0
-From: Dirk Eibach <dirk.eibach@googlemail.com>
-Date: Fri, 4 Nov 2022 22:15:58 +0100
-Message-ID: <CANVMif+rXZBMvZ3Ww+mWC7TpViGwJSzvmn7VvU08hMf=G4ENsQ@mail.gmail.com>
-To: spice-devel@lists.freedesktop.org
+References: <CANVMif+rXZBMvZ3Ww+mWC7TpViGwJSzvmn7VvU08hMf=G4ENsQ@mail.gmail.com>
+In-Reply-To: <CANVMif+rXZBMvZ3Ww+mWC7TpViGwJSzvmn7VvU08hMf=G4ENsQ@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Sat, 5 Nov 2022 12:03:08 +0000
+Message-ID: <CAHt6W4etN1Br9-mseZnV+T2BSj4Hrq=d92mFxNbx2WpNNwNhwg@mail.gmail.com>
+To: Dirk Eibach <dirk.eibach@googlemail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Sat, 05 Nov 2022 08:09:37 +0000
-Subject: [Spice-devel] Standalone (non-virtual) windows server
+Subject: Re: [Spice-devel] Standalone (non-virtual) windows server
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,20 +64,41 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+Il giorno sab 5 nov 2022 alle ore 08:09 Dirk Eibach
+<dirk.eibach@googlemail.com> ha scritto:
+>
+> Hi,
+>
+> I have started developing a standalone (non-virtual) windows server
+> application. It is based on the Desktop Duplication API, available
+> since Windows 8.
+>
+> A proof of concept is already working nicely. It still has some rough
+> edges though. If you like, join the fun at
+> https://github.com/ZeroMips/kuemmel.
+>
+> Comments welcome.
+>
+> Cheers
+> Dirk
 
-I have started developing a standalone (non-virtual) windows server
-application. It is based on the Desktop Duplication API, available
-since Windows 8.
+Hi Dirk,
+   I had to moderate this email and I had some doubts about accepting it or not.
+I had to go and look at the GitHub link to understand what it was.
+More or less is a project to use SPICE on a bare metal machine,
+something like x11spice or winspice (see
+https://gitlab.freedesktop.org/spice/win32/winspice).
 
-A proof of concept is already working nicely. It still has some rough
-edges though. If you like, join the fun at
-https://github.com/ZeroMips/kuemmel.
+About licensing. it seems you want to post your code under GPL however
+your project is distributing some file copyrighted by Microsoft. Did
+you check if you can do it? Also, having multiple licensed files it
+would be good to put the licences header on each of your files. Sorry
+if this seems pedantic but better to get licenses right from the
+beginning.
 
-Comments welcome.
-
-Cheers
-Dirk
+Regards,
+  Frediano
