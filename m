@@ -2,58 +2,46 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1888861E0E4
-	for <lists+spice-devel@lfdr.de>; Sun,  6 Nov 2022 09:38:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D343961E1B6
+	for <lists+spice-devel@lfdr.de>; Sun,  6 Nov 2022 11:44:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 71D5A10E16F;
-	Sun,  6 Nov 2022 08:38:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0A75610E087;
+	Sun,  6 Nov 2022 10:44:43 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9076E10E16F
- for <spice-devel@lists.freedesktop.org>; Sun,  6 Nov 2022 08:38:06 +0000 (UTC)
-Received: by mail-ej1-x631.google.com with SMTP id n12so22967920eja.11
- for <spice-devel@lists.freedesktop.org>; Sun, 06 Nov 2022 01:38:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=C3Ii6RFwpk+RLuSIB4EUzQ0LyaW3m0ELwrkYh2hu4ek=;
- b=Odzxyo+3onYKXNjc+T0m8CGHiXbrSblFwzIklT6pw1CPVMBv0wY1ig3ITHccr1+sEy
- uWosSXGOPF0el0WFB1wPRzB1lkeflHrIihdBH5MSL+9OWlncsd0+G0lKFA3e06Fu6G5G
- RQKofY3CZd1UpItfJ3oKrjA4zcwYTGtOgbrQGQCEzNNgrLSSDoJDoNpQHFfQVSb9wK7Q
- pHlwrzJNftWlKthjGuIcHlgr6NMGP+U/P7YvOWqjLWIsszshiMxUtdmj2Dc3/PcXq40I
- acQcQYWHJLB1rEQBrOteVm6TAS94u1+Zt8OKzRJKCiADUtJO4xfKrb/5N3H8w3LwDkck
- +GHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=C3Ii6RFwpk+RLuSIB4EUzQ0LyaW3m0ELwrkYh2hu4ek=;
- b=VM6lw27S8IEF4tyS1qabrLapoYEB3+YeX1mxGB/jE1lQ3e2GtDy6omYkZLjYuGxPzs
- pbnoSrYCJxxdNkqPqDlny3POdkf+d0jvwqZjWsnogQp6hLjp9XqIer8JS5D27tCcexvu
- CvWK1gBs7vokN7Iqpoke7HcVoXEEjnjOqEoXt/BIXp5z66kQjnxrR0gl9EI0W7twMFuB
- wJFoZ6YfStfIOcdDhL4mMpb5G7H3hr41PMDEaci1qda05u3dZmSc055NBjcDpZtuqd0a
- lIkCcwk1vTaV0qKE1qCJNigYzpBS2GzPkg9VCATjZrGmpeiore+epKJ4wATnlOakjohO
- 2iKw==
-X-Gm-Message-State: ACrzQf2fmDgS5ZeEvBELn1COMiSPaYjhclwyRJncNuEs2sui36odf6qW
- c9MODBo5ImjVMjvR3hsZkFBEq7uswlgayPIXnlXZ35En
-X-Google-Smtp-Source: AMsMyM5jC0mxOKCoQyEN+/KRYw8vGqAl6a1BrdF/ZJrSXDHs+J2cARbHgQMAorWX3aAGRu8QtiSESHxJAt09KIukkxg=
-X-Received: by 2002:a17:906:847c:b0:7ad:d6c8:35d7 with SMTP id
- hx28-20020a170906847c00b007add6c835d7mr32863983ejc.170.1667723884954; Sun, 06
- Nov 2022 01:38:04 -0700 (PDT)
-MIME-Version: 1.0
-References: <CANVMif+rXZBMvZ3Ww+mWC7TpViGwJSzvmn7VvU08hMf=G4ENsQ@mail.gmail.com>
- <CAHt6W4etN1Br9-mseZnV+T2BSj4Hrq=d92mFxNbx2WpNNwNhwg@mail.gmail.com>
-In-Reply-To: <CAHt6W4etN1Br9-mseZnV+T2BSj4Hrq=d92mFxNbx2WpNNwNhwg@mail.gmail.com>
-From: Dirk Eibach <dirk.eibach@googlemail.com>
-Date: Sun, 6 Nov 2022 09:37:54 +0100
-Message-ID: <CANVMifKK4Xd7QKW0yWAxx80tUJLDJC9MuBiDnvbeL=FSWFLfgQ@mail.gmail.com>
+Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
+ [185.70.41.103])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 671B910E084
+ for <spice-devel@lists.freedesktop.org>; Sun,  6 Nov 2022 10:14:32 +0000 (UTC)
+Date: Sun, 06 Nov 2022 10:14:08 +0000
+Authentication-Results: mail-41103.protonmail.ch;
+ dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me
+ header.b="EwWqfFG/"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail; t=1667729659; x=1667988859;
+ bh=Cu8Ib0E/ezfNaxZD5lD6nnDCy/XHl1Sa8ESGLZhixnc=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=EwWqfFG/U16D1OcE6tf0ipdJeyANYtX1SZaTZJeEsDjJk3Xc2Ar0Erw5QBrognXta
+ AjiZIyhNbVjzsxXZypAOIAcV4sVc1dwQmXeorfyhbfMzSUKUBtgl5w+WzmISvzg9KH
+ n9EZfRCdFKl15KSmZCDN6QFCuQjdkyiK3jPRiH8XpgqSA5rZK86+60tTneNXdItVI6
+ OJ2skd23SQp/xX1L6w7JF3/9Ikat+JALHMFGAaUl0PNK+yy2pJKrwWYMGhRInKRt05
+ Wh4hxhgjz8AK1L7BOwp3WftF/9VQ/LHdUcK4P/2yvWuwtb6DfnS3EI/AZHr6pv3lqk
+ 0ERa3lE4TgxpA==
 To: Frediano Ziglio <freddy77@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] Standalone (non-virtual) windows server
+From: let-me-use-copy-and-paste <let-me-use-copy-and-paste@proton.me>
+Message-ID: <_IOcomilYrKnDYwcgFSumvVAHvOUoBBRx8KIhZfnagkZHAw38DUD9k2l85bFnAAwCTR01CRpKV_JF2qFF26IQxVkdzBRvP4iQp7kHG5qOY0=@proton.me>
+In-Reply-To: <CAHt6W4cwaOzAaRVxg6uOET5PNA3i80OVedPu0=r4WTh+8M+CGA@mail.gmail.com>
+References: <PYPGGnYoyG-Z7cu7sTB5CUQnfLogiolh-k4lRx8ajo4vNyZDFnkqPNzftiZIDVzziqXf6LxYpAQt3kw5rnHWNdOrao_ObxBN58ZAM_IHGCY=@proton.me>
+ <CAHt6W4cwaOzAaRVxg6uOET5PNA3i80OVedPu0=r4WTh+8M+CGA@mail.gmail.com>
+Feedback-ID: 60728310:user:proton
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 06 Nov 2022 10:44:38 +0000
+Subject: Re: [Spice-devel] Agent crashes on Alpine Linux guest due to lack
+ of /dev/uinput
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,17 +53,51 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Frediano,
+> > I installed Alpine Linux 3.16 virtual machine edition on QEMU/KVM using=
+ Virt-Manager. I installed XFCE on it. I wanted to enable copy-and-paste, s=
+o I tried to install spice-vdagent on it, but it kept crashing. I checked t=
+he output using the "-x" parameter, and basically, it crashed due to the la=
+ck of /dev/uinput. The screenshot is at https://i.imgur.com/9WKaVG8.png
+> >=20
+> > I do not know Linux much, so I am not sure if /dev/uinput is not presen=
+t due to the settings of the virtual machine or because I have not installe=
+d something on Alpine Linux. I tried the standard edition of Alpine, and ri=
+ght after the installation, /dev/uinput was not present.
+> >=20
+> > In case that Alpine Linux indeed does not support /dev/uinput, can't th=
+e spice service run anyway? All I want is text copy-and-paste between the h=
+ost and the guest, and does that feature need /dev/uinput?
+>=20
+>=20
+> Hi,
+> try to add "-f -u /dev/null" to the parameters (that is
+> "--fake-uinput --uinput-device /dev/null").
+>=20
+> Frediano
 
-> More or less is a project to use SPICE on a bare metal machine,
-> something like x11spice or winspice (see
-> https://gitlab.freedesktop.org/spice/win32/winspice).
+In Alpine Linux, if I install the "spice-vdagent" package, there seem to be=
+ two executables: spice-vdagentd and spice-vdagent. I ran spice-vdagentd wi=
+th "-x -d -d -f -u /dev/null" and this time, it did not crash. But as soon =
+as I ran "spice-vdagent -x -d", the virtual machine's mouse stopped working=
+. With the debug messages from spice-vdagentd, I knew that the daemon was r=
+eceiving the mouse pointer movements and button clicks, but somehow the XFC=
+E desktop did not get it, so I could not do things like clicking a window. =
+Keyboard was working, though. Also, probably copy-and-paste also would work=
+, because in the debug message from spice-vdagent, it seemed to have receiv=
+ed the event, when I copied some text on the host OS. How can I fix this mo=
+use not moving problem?
 
-By the way, do you know of any spice server implementation for wayland?
+Also, there is another problem. It seems that after running "spice-vdagentd=
+ -x -f -u /dev/null", any subsequent execution of it fails with "Fatal coul=
+d not create the server socket /run/spice-vdagentd/spice-agent-sock: Error =
+binding to address (GUnixSocketAddress): No such file or directory. Rebooti=
+ng the guest OS did not solve the problem. Here is the screenshot: https://=
+i.imgur.com/pKtD8BH.png
 
-Regards
-Dirk
+Luckily, I had created a snapshot right after installing Alpine Linux and X=
+FCE, so I can revert it and keep testing. If there is anything more I can d=
+o, please let me know.
