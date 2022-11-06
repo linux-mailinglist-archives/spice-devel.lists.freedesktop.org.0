@@ -1,60 +1,59 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21A2C61E0D4
-	for <lists+spice-devel@lfdr.de>; Sun,  6 Nov 2022 09:22:00 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1888861E0E4
+	for <lists+spice-devel@lfdr.de>; Sun,  6 Nov 2022 09:38:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3522D10E16C;
-	Sun,  6 Nov 2022 08:21:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 71D5A10E16F;
+	Sun,  6 Nov 2022 08:38:08 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B157310E16C
- for <spice-devel@lists.freedesktop.org>; Sun,  6 Nov 2022 08:21:49 +0000 (UTC)
-Received: by mail-oi1-x22f.google.com with SMTP id c129so9407117oia.0
- for <spice-devel@lists.freedesktop.org>; Sun, 06 Nov 2022 01:21:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4icn5DCP2PtGmZB2dX5bEbtQWIUnLHDAgnwIxRuRUDU=;
- b=o/ESGNcfykwu2bNp7Bb8HAwPOWrnr7WlkybaGUP37HKCr2Vz8x6UlR37psBICtbOUT
- /KReE6+6hZCOx+p24IHktaq+3aWEIg2zrQw1Gywq9wZghQNPlDSGg2we/FOll7R3raWz
- TqvKf+hrUPBrh7SLLlIjpNWaks3OMK/E8qWEuLVAac7UNqPWCCdoBMDI9Gibzomvy2f6
- x953MhydB22O3lwcnhgBMsh/tWGqguvGJC+rbsfXYG7sTgrIoyCbVESTP4ffm8aaIH/F
- SJhuti3gdQHAbWcF6HcDuGkRYm6ZGsFHroo8fb68NUCLO98n3yKMg2GpgCX8zbdb9MgB
- Pm8Q==
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9076E10E16F
+ for <spice-devel@lists.freedesktop.org>; Sun,  6 Nov 2022 08:38:06 +0000 (UTC)
+Received: by mail-ej1-x631.google.com with SMTP id n12so22967920eja.11
+ for <spice-devel@lists.freedesktop.org>; Sun, 06 Nov 2022 01:38:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=C3Ii6RFwpk+RLuSIB4EUzQ0LyaW3m0ELwrkYh2hu4ek=;
+ b=Odzxyo+3onYKXNjc+T0m8CGHiXbrSblFwzIklT6pw1CPVMBv0wY1ig3ITHccr1+sEy
+ uWosSXGOPF0el0WFB1wPRzB1lkeflHrIihdBH5MSL+9OWlncsd0+G0lKFA3e06Fu6G5G
+ RQKofY3CZd1UpItfJ3oKrjA4zcwYTGtOgbrQGQCEzNNgrLSSDoJDoNpQHFfQVSb9wK7Q
+ pHlwrzJNftWlKthjGuIcHlgr6NMGP+U/P7YvOWqjLWIsszshiMxUtdmj2Dc3/PcXq40I
+ acQcQYWHJLB1rEQBrOteVm6TAS94u1+Zt8OKzRJKCiADUtJO4xfKrb/5N3H8w3LwDkck
+ +GHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4icn5DCP2PtGmZB2dX5bEbtQWIUnLHDAgnwIxRuRUDU=;
- b=j0xQ4JXz+X974t0km+cm4q2hZ/+Fee71+cw1TAKK7XrVlJkL5KlTVBAAoBu/0qlNaf
- jbugQsz10qqY6ukT6r74chv7ywOjyU/0vZte8WMBol/TPsc57Sq8eQD5ruVyWHAXxBXa
- RC2rXZEakinHrjRu1RISRfCMgkfWPbUqBpfCzT7MKegiqmDFbQd6XBcxFBK5W7cB2o12
- L78TCHQvpXk9G8mRynxlxiCx/wEuSCTx1Fw56SZI6q6a+HX/GkMi1YLaeXSVJ/H5262K
- S8GDrEJGaGgEa9v7boA74slJSi/K9l5oICKjv3rSYLhFU25g2+GdF/232J10cDIv+Fvf
- 4cZg==
-X-Gm-Message-State: ACrzQf2B95tbac+s7lAqI+OMe5XEgrEVVkji2jFZf3fINdOkaKusfqHj
- GEMgq2GMEuOdGY2lRazsE/U5Jr9rR2DWh+Hi0Z0=
-X-Google-Smtp-Source: AMsMyM4t52bucw3wSf+X2zrdeFZ/n0C4H0A10DFVuHizv6C86HLMZNoxbEI6bVfLDIx+YQocmsEhkh+mGtkiHIrH2zY=
-X-Received: by 2002:a05:6808:1992:b0:35a:6005:3dc6 with SMTP id
- bj18-20020a056808199200b0035a60053dc6mr6204938oib.1.1667722908905; Sun, 06
- Nov 2022 01:21:48 -0700 (PDT)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=C3Ii6RFwpk+RLuSIB4EUzQ0LyaW3m0ELwrkYh2hu4ek=;
+ b=VM6lw27S8IEF4tyS1qabrLapoYEB3+YeX1mxGB/jE1lQ3e2GtDy6omYkZLjYuGxPzs
+ pbnoSrYCJxxdNkqPqDlny3POdkf+d0jvwqZjWsnogQp6hLjp9XqIer8JS5D27tCcexvu
+ CvWK1gBs7vokN7Iqpoke7HcVoXEEjnjOqEoXt/BIXp5z66kQjnxrR0gl9EI0W7twMFuB
+ wJFoZ6YfStfIOcdDhL4mMpb5G7H3hr41PMDEaci1qda05u3dZmSc055NBjcDpZtuqd0a
+ lIkCcwk1vTaV0qKE1qCJNigYzpBS2GzPkg9VCATjZrGmpeiore+epKJ4wATnlOakjohO
+ 2iKw==
+X-Gm-Message-State: ACrzQf2fmDgS5ZeEvBELn1COMiSPaYjhclwyRJncNuEs2sui36odf6qW
+ c9MODBo5ImjVMjvR3hsZkFBEq7uswlgayPIXnlXZ35En
+X-Google-Smtp-Source: AMsMyM5jC0mxOKCoQyEN+/KRYw8vGqAl6a1BrdF/ZJrSXDHs+J2cARbHgQMAorWX3aAGRu8QtiSESHxJAt09KIukkxg=
+X-Received: by 2002:a17:906:847c:b0:7ad:d6c8:35d7 with SMTP id
+ hx28-20020a170906847c00b007add6c835d7mr32863983ejc.170.1667723884954; Sun, 06
+ Nov 2022 01:38:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <PYPGGnYoyG-Z7cu7sTB5CUQnfLogiolh-k4lRx8ajo4vNyZDFnkqPNzftiZIDVzziqXf6LxYpAQt3kw5rnHWNdOrao_ObxBN58ZAM_IHGCY=@proton.me>
-In-Reply-To: <PYPGGnYoyG-Z7cu7sTB5CUQnfLogiolh-k4lRx8ajo4vNyZDFnkqPNzftiZIDVzziqXf6LxYpAQt3kw5rnHWNdOrao_ObxBN58ZAM_IHGCY=@proton.me>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sun, 6 Nov 2022 08:21:37 +0000
-Message-ID: <CAHt6W4cwaOzAaRVxg6uOET5PNA3i80OVedPu0=r4WTh+8M+CGA@mail.gmail.com>
-To: let-me-use-copy-and-paste <let-me-use-copy-and-paste@proton.me>
+References: <CANVMif+rXZBMvZ3Ww+mWC7TpViGwJSzvmn7VvU08hMf=G4ENsQ@mail.gmail.com>
+ <CAHt6W4etN1Br9-mseZnV+T2BSj4Hrq=d92mFxNbx2WpNNwNhwg@mail.gmail.com>
+In-Reply-To: <CAHt6W4etN1Br9-mseZnV+T2BSj4Hrq=d92mFxNbx2WpNNwNhwg@mail.gmail.com>
+From: Dirk Eibach <dirk.eibach@googlemail.com>
+Date: Sun, 6 Nov 2022 09:37:54 +0100
+Message-ID: <CANVMifKK4Xd7QKW0yWAxx80tUJLDJC9MuBiDnvbeL=FSWFLfgQ@mail.gmail.com>
+To: Frediano Ziglio <freddy77@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] Agent crashes on Alpine Linux guest due to lack
- of /dev/uinput
+Subject: Re: [Spice-devel] Standalone (non-virtual) windows server
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,30 +65,17 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno dom 6 nov 2022 alle ore 08:10 let-me-use-copy-and-paste
-<let-me-use-copy-and-paste@proton.me> ha scritto:
->
-> I installed Alpine Linux 3.16 virtual machine edition on QEMU/KVM using V=
-irt-Manager. I installed XFCE on it. I wanted to enable copy-and-paste, so =
-I tried to install spice-vdagent on it, but it kept crashing. I checked the=
- output using the "-x" parameter, and basically, it crashed due to the lack=
- of /dev/uinput. The screenshot is at https://i.imgur.com/9WKaVG8.png
->
-> I do not know Linux much, so I am not sure if /dev/uinput is not present =
-due to the settings of the virtual machine or because I have not installed =
-something on Alpine Linux. I tried the standard edition of Alpine, and righ=
-t after the installation, /dev/uinput was not present.
->
-> In case that Alpine Linux indeed does not support /dev/uinput, can't the =
-spice service run anyway? All I want is text copy-and-paste between the hos=
-t and the guest, and does that feature need /dev/uinput?
+Hi Frediano,
 
-Hi,
-   try to add "-f -u /dev/null" to the parameters (that is
-"--fake-uinput --uinput-device /dev/null").
+> More or less is a project to use SPICE on a bare metal machine,
+> something like x11spice or winspice (see
+> https://gitlab.freedesktop.org/spice/win32/winspice).
 
-Frediano
+By the way, do you know of any spice server implementation for wayland?
+
+Regards
+Dirk
