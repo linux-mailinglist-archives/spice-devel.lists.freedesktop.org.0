@@ -1,39 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 692DF6217FB
-	for <lists+spice-devel@lfdr.de>; Tue,  8 Nov 2022 16:22:06 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65D6062190C
+	for <lists+spice-devel@lfdr.de>; Tue,  8 Nov 2022 17:06:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F84789819;
-	Tue,  8 Nov 2022 15:22:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A294F10E4B0;
+	Tue,  8 Nov 2022 16:06:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F19FE10E2B4;
- Tue,  8 Nov 2022 15:17:23 +0000 (UTC)
-Received: from canpemm500002.china.huawei.com (unknown [172.30.72.56])
- by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4N6BXj50b1z15MPd;
- Tue,  8 Nov 2022 23:17:09 +0800 (CST)
-Received: from localhost.localdomain (10.175.103.91) by
- canpemm500002.china.huawei.com (7.192.104.244) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Tue, 8 Nov 2022 23:17:20 +0800
-From: Wei Li <liwei391@huawei.com>
-To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, David
- Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
-Date: Tue, 8 Nov 2022 23:16:01 +0800
-Message-ID: <20221108151601.1235068-1-liwei391@huawei.com>
-X-Mailer: git-send-email 2.25.1
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9364B10E4B2
+ for <spice-devel@lists.freedesktop.org>; Tue,  8 Nov 2022 16:06:12 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id a13so23263101edj.0
+ for <spice-devel@lists.freedesktop.org>; Tue, 08 Nov 2022 08:06:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=m2T406pNI28bUQQ3A8W9bWn2Shz/lyjLe+O2Y6ispPQ=;
+ b=Jnq9oeTcCH1Tpj98lVXml/65WBw0EfpMCLzrPX5Uv/C9mQrr+UBh6elYHApQKSqTF8
+ CIj4E6pjroTzehWmf+7h6B9JvXy8VswPgDWeE+lT9kg0v2zTIf3k4V2BbyKAX0nz7SFT
+ XUbUApCo+hcouoOOIuOpVKZyUBu4/O0SIbrt0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m2T406pNI28bUQQ3A8W9bWn2Shz/lyjLe+O2Y6ispPQ=;
+ b=iW8hGO7eXO15W3yYdoJH+P6jJd4mBGLb5BToJvNLp9WXSizZDb/yobiLT77ntOrxRs
+ YgqQYFjm8LKPReD3knJtBIy9PVlzQT+o+cfiSnpj9n4naYiZxcVzVrkk6K7jvszyvTiJ
+ V6jzDG/7U6YvH32ep59KXjpXTHMub91M2Bwpg0PhM2hkI5vqn1d0BWDGCZd6vgY4ou9s
+ Flk0umsZZnj9RyrSOM0JPdSX5016a0XjgLDMsvDE69+w3t4U7F7zqPCrrxoYmm4ruBIb
+ ST5JF71V+MHFK2TZ9GDQdlTM47cWOYjmELDc8LhCmhWjMsICdeCSvqMkRQlp1HpPRzKX
+ Wj4A==
+X-Gm-Message-State: ACrzQf1Q7Aq8ub3Gd3uuAyIBrixNNeKFyfTqYxEpRZ8RmS+PVuq+mzqd
+ Dh2o9kDMUG/P0UmFWhDzf26Diw==
+X-Google-Smtp-Source: AMsMyM6dnVHElWKLyrbfuNXD/0++t2xSFzbDjnTaaTFaY+Hx11m/ofNA5kgjg+irRsB99rFyzo/naA==
+X-Received: by 2002:a05:6402:1f84:b0:455:27b8:27aa with SMTP id
+ c4-20020a0564021f8400b0045527b827aamr55492446edc.243.1667923570986; 
+ Tue, 08 Nov 2022 08:06:10 -0800 (PST)
+Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net.
+ [212.51.149.33]) by smtp.gmail.com with ESMTPSA id
+ ta19-20020a1709078c1300b0073d796a1043sm4799058ejc.123.2022.11.08.08.06.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Nov 2022 08:06:10 -0800 (PST)
+Date: Tue, 8 Nov 2022 17:06:08 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Wei Li <liwei391@huawei.com>
+Message-ID: <Y2p+cFEgvJZMUpoS@phenom.ffwll.local>
+References: <20221108151601.1235068-1-liwei391@huawei.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.175.103.91]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- canpemm500002.china.huawei.com (7.192.104.244)
-X-CFilter-Loop: Reflected
-X-Mailman-Approved-At: Tue, 08 Nov 2022 15:21:56 +0000
-Subject: [Spice-devel] [PATCH] drm/qxl: Fix missing free_irq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20221108151601.1235068-1-liwei391@huawei.com>
+X-Operating-System: Linux phenom 5.19.0-2-amd64 
+Subject: Re: [Spice-devel] [PATCH] drm/qxl: Fix missing free_irq
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -45,91 +67,103 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, liwei391@huawei.com,
- huawei.libin@huawei.com, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org
+Cc: huawei.libin@huawei.com, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+ spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-When doing "cat /proc/interrupts" after qxl.ko is unloaded, an oops occurs:
+On Tue, Nov 08, 2022 at 11:16:01PM +0800, Wei Li wrote:
+> When doing "cat /proc/interrupts" after qxl.ko is unloaded, an oops occurs:
+> 
+> BUG: unable to handle page fault for address: ffffffffc0274769
+> PGD 2a0d067 P4D 2a0d067 PUD 2a0f067 PMD 103f39067 PTE 0
+> Oops: 0000 [#1] PREEMPT SMP PTI
+> CPU: 6 PID: 246 Comm: cat Not tainted 6.1.0-rc2 #24
+> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
+> RIP: 0010:string_nocheck+0x34/0x50
+> Code: 66 85 c0 74 3c 83 e8 01 4c 8d 5c 07 01 31 c0 eb 19 49 39 fa 76 03 44 88 07 48 83 c7
+> RSP: 0018:ffffc90000893bb8 EFLAGS: 00010046
+> RAX: 0000000000000000 RBX: ffffc90000893c50 RCX: ffff0a00ffffff04
+> RDX: ffffffffc0274769 RSI: ffff888102812000 RDI: ffff88810281133e
+> RBP: ffff888102812000 R08: ffffffff823fa5e6 R09: 0000000000000007
+> R10: ffff888102812000 R11: ffff88820281133d R12: ffffffffc0274769
+> R13: ffff0a00ffffff04 R14: 0000000000000cc4 R15: ffffffff823276b4
+> FS:  000000000214f8c0(0000) GS:ffff88842fd80000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: ffffffffc0274769 CR3: 00000001025c4005 CR4: 0000000000770ee0
+> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+> PKRU: 55555554
+> Call Trace:
+>  <TASK>
+>  string+0x46/0x60
+>  vsnprintf+0x27a/0x4f0
+>  seq_vprintf+0x34/0x50
+>  seq_printf+0x53/0x70
+>  ? seq_read_iter+0x365/0x450
+>  show_interrupts+0x259/0x330
+>  seq_read_iter+0x2a3/0x450
+>  proc_reg_read_iter+0x47/0x70
+>  generic_file_splice_read+0x94/0x160
+>  splice_direct_to_actor+0xb0/0x230
+>  ? do_splice_direct+0xd0/0xd0
+>  do_splice_direct+0x8b/0xd0
+>  do_sendfile+0x345/0x4f0
+>  __x64_sys_sendfile64+0xa1/0xc0
+>  do_syscall_64+0x38/0x90
+>  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+> RIP: 0033:0x4bb0ce
+> Code: c3 0f 1f 00 4c 89 d2 4c 89 c6 e9 bd fd ff ff 0f 1f 44 00 00 31 c0 c3 0f 1f 44 00 00
+> RSP: 002b:00007ffd99dc3fb8 EFLAGS: 00000246 ORIG_RAX: 0000000000000028
+> RAX: ffffffffffffffda RBX: 0000000001000000 RCX: 00000000004bb0ce
+> RDX: 0000000000000000 RSI: 0000000000000003 RDI: 0000000000000001
+> RBP: 0000000000000001 R08: 000000000068f240 R09: 0000000001000000
+> R10: 0000000001000000 R11: 0000000000000246 R12: 0000000000000003
+> R13: 0000000000000001 R14: 0000000000000000 R15: 0000000000000000
+>  </TASK>
+> 
+> It seems that qxl doesn't free the interrupt it requests during unload,
+> fix this by adding the missing free_irq().
+> 
+> Fixes: f64122c1f6ad ("drm: add new QXL driver. (v1.4)")
+> Signed-off-by: Wei Li <liwei391@huawei.com>
 
-BUG: unable to handle page fault for address: ffffffffc0274769
-PGD 2a0d067 P4D 2a0d067 PUD 2a0f067 PMD 103f39067 PTE 0
-Oops: 0000 [#1] PREEMPT SMP PTI
-CPU: 6 PID: 246 Comm: cat Not tainted 6.1.0-rc2 #24
-Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-RIP: 0010:string_nocheck+0x34/0x50
-Code: 66 85 c0 74 3c 83 e8 01 4c 8d 5c 07 01 31 c0 eb 19 49 39 fa 76 03 44 88 07 48 83 c7
-RSP: 0018:ffffc90000893bb8 EFLAGS: 00010046
-RAX: 0000000000000000 RBX: ffffc90000893c50 RCX: ffff0a00ffffff04
-RDX: ffffffffc0274769 RSI: ffff888102812000 RDI: ffff88810281133e
-RBP: ffff888102812000 R08: ffffffff823fa5e6 R09: 0000000000000007
-R10: ffff888102812000 R11: ffff88820281133d R12: ffffffffc0274769
-R13: ffff0a00ffffff04 R14: 0000000000000cc4 R15: ffffffff823276b4
-FS:  000000000214f8c0(0000) GS:ffff88842fd80000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: ffffffffc0274769 CR3: 00000001025c4005 CR4: 0000000000770ee0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-PKRU: 55555554
-Call Trace:
- <TASK>
- string+0x46/0x60
- vsnprintf+0x27a/0x4f0
- seq_vprintf+0x34/0x50
- seq_printf+0x53/0x70
- ? seq_read_iter+0x365/0x450
- show_interrupts+0x259/0x330
- seq_read_iter+0x2a3/0x450
- proc_reg_read_iter+0x47/0x70
- generic_file_splice_read+0x94/0x160
- splice_direct_to_actor+0xb0/0x230
- ? do_splice_direct+0xd0/0xd0
- do_splice_direct+0x8b/0xd0
- do_sendfile+0x345/0x4f0
- __x64_sys_sendfile64+0xa1/0xc0
- do_syscall_64+0x38/0x90
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x4bb0ce
-Code: c3 0f 1f 00 4c 89 d2 4c 89 c6 e9 bd fd ff ff 0f 1f 44 00 00 31 c0 c3 0f 1f 44 00 00
-RSP: 002b:00007ffd99dc3fb8 EFLAGS: 00000246 ORIG_RAX: 0000000000000028
-RAX: ffffffffffffffda RBX: 0000000001000000 RCX: 00000000004bb0ce
-RDX: 0000000000000000 RSI: 0000000000000003 RDI: 0000000000000001
-RBP: 0000000000000001 R08: 000000000068f240 R09: 0000000001000000
-R10: 0000000001000000 R11: 0000000000000246 R12: 0000000000000003
-R13: 0000000000000001 R14: 0000000000000000 R15: 0000000000000000
- </TASK>
+Could we go right ahead and switch over to devm_request_irq? Or does that
+not quite do the right thing here?
+-Daniel
 
-It seems that qxl doesn't free the interrupt it requests during unload,
-fix this by adding the missing free_irq().
+> ---
+>  drivers/gpu/drm/qxl/qxl_kms.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+> index dc3828db1991..d591084824de 100644
+> --- a/drivers/gpu/drm/qxl/qxl_kms.c
+> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
+> @@ -283,6 +283,8 @@ int qxl_device_init(struct qxl_device *qdev,
+>  void qxl_device_fini(struct qxl_device *qdev)
+>  {
+>  	int cur_idx;
+> +	struct drm_device *ddev = &qdev->ddev;
+> +	struct pci_dev *pdev = to_pci_dev(ddev->dev);
+>  
+>  	/* check if qxl_device_init() was successful (gc_work is initialized last) */
+>  	if (!qdev->gc_work.func)
+> @@ -305,6 +307,7 @@ void qxl_device_fini(struct qxl_device *qdev)
+>  	wait_event_timeout(qdev->release_event,
+>  			   atomic_read(&qdev->release_count) == 0,
+>  			   HZ);
+> +	free_irq(pdev->irq, ddev);
+>  	flush_work(&qdev->gc_work);
+>  	qxl_surf_evict(qdev);
+>  	qxl_vram_evict(qdev);
+> -- 
+> 2.25.1
+> 
 
-Fixes: f64122c1f6ad ("drm: add new QXL driver. (v1.4)")
-Signed-off-by: Wei Li <liwei391@huawei.com>
----
- drivers/gpu/drm/qxl/qxl_kms.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
-index dc3828db1991..d591084824de 100644
---- a/drivers/gpu/drm/qxl/qxl_kms.c
-+++ b/drivers/gpu/drm/qxl/qxl_kms.c
-@@ -283,6 +283,8 @@ int qxl_device_init(struct qxl_device *qdev,
- void qxl_device_fini(struct qxl_device *qdev)
- {
- 	int cur_idx;
-+	struct drm_device *ddev = &qdev->ddev;
-+	struct pci_dev *pdev = to_pci_dev(ddev->dev);
- 
- 	/* check if qxl_device_init() was successful (gc_work is initialized last) */
- 	if (!qdev->gc_work.func)
-@@ -305,6 +307,7 @@ void qxl_device_fini(struct qxl_device *qdev)
- 	wait_event_timeout(qdev->release_event,
- 			   atomic_read(&qdev->release_count) == 0,
- 			   HZ);
-+	free_irq(pdev->irq, ddev);
- 	flush_work(&qdev->gc_work);
- 	qxl_surf_evict(qdev);
- 	qxl_vram_evict(qdev);
 -- 
-2.25.1
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
