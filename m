@@ -2,41 +2,43 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A20F6236DB
-	for <lists+spice-devel@lfdr.de>; Wed,  9 Nov 2022 23:57:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8287623C53
+	for <lists+spice-devel@lfdr.de>; Thu, 10 Nov 2022 08:06:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CF7E810E59F;
-	Wed,  9 Nov 2022 22:57:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DB67610E5B0;
+	Thu, 10 Nov 2022 07:06:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7ACC910E5B2;
- Wed,  9 Nov 2022 12:17:53 +0000 (UTC)
-Received: from canpemm500002.china.huawei.com (unknown [172.30.72.57])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4N6kW94wflzRp2X;
- Wed,  9 Nov 2022 20:17:41 +0800 (CST)
-Received: from [10.174.179.211] (10.174.179.211) by
- canpemm500002.china.huawei.com (7.192.104.244) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Wed, 9 Nov 2022 20:17:50 +0800
-Message-ID: <325e0a3a-cbc6-fb50-0466-08f899fa9139@huawei.com>
-Date: Wed, 9 Nov 2022 20:17:49 +0800
+Received: from mail-4318.protonmail.ch (mail-4318.protonmail.ch [185.70.43.18])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 03E3410E656
+ for <spice-devel@lists.freedesktop.org>; Thu, 10 Nov 2022 03:14:23 +0000 (UTC)
+Date: Thu, 10 Nov 2022 03:14:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=lp3tkmjsrvfophudjpxcwmbzda.protonmail; t=1668050062; x=1668309262;
+ bh=twBwq5Ys7wS5Rk3wU9KyrbtPt2OUbu7L8LhaEMC9gZg=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=BBnPAxHUO9NoYyvJnvynSZtHmS2c7tI+bc23UWrww9iTIzEwIPJbpruyMYbjjASl/
+ xO9r6vEmEi5ZkoAFz/8I0Oaa7uqYypsa1cnWn/qajZ3mTLbCOMzU+mefIc5xrmCxCh
+ 0cyqHcAc0VLRqC8CXPwkS5D6FuEYIwFXNdkgwT1/Rc7Q9SyCNGbCCqlxeBGh22JgJH
+ 3cgEiUyFqPTZ9htwiXZov4oC2Dr29pr1PlwfQQCnnSOZppCmdkXFQk+gHyy95D3uag
+ eQFhvk90hzpvLVrtu93OTbJOJ9lfjCTZP8zEPpeETXOSRcYE7bcERJz6ZndDFPXU//
+ Cb8C0Hp50h8Vw==
+To: Frediano Ziglio <freddy77@gmail.com>
+From: let-me-use-copy-and-paste <let-me-use-copy-and-paste@proton.me>
+Message-ID: <ILS8VUxFQEXg03bcavjZEhC9OdcZX2RCw3LezcmA6vdYFYdmIu6aGEqSSs5G0VwffNxLpidD5hGc9qR7Xw_mrL_EtI-vhUELN-FFXVS0hNQ=@proton.me>
+In-Reply-To: <_IOcomilYrKnDYwcgFSumvVAHvOUoBBRx8KIhZfnagkZHAw38DUD9k2l85bFnAAwCTR01CRpKV_JF2qFF26IQxVkdzBRvP4iQp7kHG5qOY0=@proton.me>
+References: <PYPGGnYoyG-Z7cu7sTB5CUQnfLogiolh-k4lRx8ajo4vNyZDFnkqPNzftiZIDVzziqXf6LxYpAQt3kw5rnHWNdOrao_ObxBN58ZAM_IHGCY=@proton.me>
+ <CAHt6W4cwaOzAaRVxg6uOET5PNA3i80OVedPu0=r4WTh+8M+CGA@mail.gmail.com>
+ <_IOcomilYrKnDYwcgFSumvVAHvOUoBBRx8KIhZfnagkZHAw38DUD9k2l85bFnAAwCTR01CRpKV_JF2qFF26IQxVkdzBRvP4iQp7kHG5qOY0=@proton.me>
+Feedback-ID: 60728310:user:proton
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.0.2
-To: Daniel Vetter <daniel@ffwll.ch>
-References: <20221108151601.1235068-1-liwei391@huawei.com>
- <Y2p+cFEgvJZMUpoS@phenom.ffwll.local>
-From: "liwei (GF)" <liwei391@huawei.com>
-In-Reply-To: <Y2p+cFEgvJZMUpoS@phenom.ffwll.local>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.179.211]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- canpemm500002.china.huawei.com (7.192.104.244)
-X-CFilter-Loop: Reflected
-X-Mailman-Approved-At: Wed, 09 Nov 2022 22:57:00 +0000
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: Fix missing free_irq
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Thu, 10 Nov 2022 07:06:43 +0000
+Subject: Re: [Spice-devel] Agent crashes on Alpine Linux guest due to lack
+ of /dev/uinput
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,115 +50,56 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Gerd Hoffmann <kraxel@redhat.com>, huawei.libin@huawei.com,
- Dave Airlie <airlied@redhat.com>, spice-devel@lists.freedesktop.org
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+> > > I installed Alpine Linux 3.16 virtual machine edition on QEMU/KVM usi=
+ng Virt-Manager. I installed XFCE on it. I wanted to enable copy-and-paste,=
+ so I tried to install spice-vdagent on it, but it kept crashing. I checked=
+ the output using the "-x" parameter, and basically, it crashed due to the =
+lack of /dev/uinput. The screenshot is at https://i.imgur.com/9WKaVG8.png
+> > >=20
+> > > I do not know Linux much, so I am not sure if /dev/uinput is not pres=
+ent due to the settings of the virtual machine or because I have not instal=
+led something on Alpine Linux. I tried the standard edition of Alpine, and =
+right after the installation, /dev/uinput was not present.
+> > >=20
+> > > In case that Alpine Linux indeed does not support /dev/uinput, can't =
+the spice service run anyway? All I want is text copy-and-paste between the=
+ host and the guest, and does that feature need /dev/uinput?
+> >=20
+> > Hi,
+> > try to add "-f -u /dev/null" to the parameters (that is
+> > "--fake-uinput --uinput-device /dev/null").
+> >=20
+> > Frediano
+>=20
+>=20
+> In Alpine Linux, if I install the "spice-vdagent" package, there seem to =
+be two executables: spice-vdagentd and spice-vdagent. I ran spice-vdagentd =
+with "-x -d -d -f -u /dev/null" and this time, it did not crash. But as soo=
+n as I ran "spice-vdagent -x -d", the virtual machine's mouse stopped worki=
+ng. With the debug messages from spice-vdagentd, I knew that the daemon was=
+ receiving the mouse pointer movements and button clicks, but somehow the X=
+FCE desktop did not get it, so I could not do things like clicking a window=
+. Keyboard was working, though. Also, probably copy-and-paste also would wo=
+rk, because in the debug message from spice-vdagent, it seemed to have rece=
+ived the event, when I copied some text on the host OS. How can I fix this =
+mouse not moving problem?
+>=20
+> Also, there is another problem. It seems that after running "spice-vdagen=
+td -x -f -u /dev/null", any subsequent execution of it fails with "Fatal co=
+uld not create the server socket /run/spice-vdagentd/spice-agent-sock: Erro=
+r binding to address (GUnixSocketAddress): No such file or directory. Reboo=
+ting the guest OS did not solve the problem. Here is the screenshot: https:=
+//i.imgur.com/pKtD8BH.png
+>=20
+> Luckily, I had created a snapshot right after installing Alpine Linux and=
+ XFCE, so I can revert it and keep testing. If there is anything more I can=
+ do, please let me know.
 
-
-On 2022/11/9 0:06, Daniel Vetter wrote:
-> On Tue, Nov 08, 2022 at 11:16:01PM +0800, Wei Li wrote:
->> When doing "cat /proc/interrupts" after qxl.ko is unloaded, an oops occurs:
->>
->> BUG: unable to handle page fault for address: ffffffffc0274769
->> PGD 2a0d067 P4D 2a0d067 PUD 2a0f067 PMD 103f39067 PTE 0
->> Oops: 0000 [#1] PREEMPT SMP PTI
->> CPU: 6 PID: 246 Comm: cat Not tainted 6.1.0-rc2 #24
->> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
->> RIP: 0010:string_nocheck+0x34/0x50
->> Code: 66 85 c0 74 3c 83 e8 01 4c 8d 5c 07 01 31 c0 eb 19 49 39 fa 76 03 44 88 07 48 83 c7
->> RSP: 0018:ffffc90000893bb8 EFLAGS: 00010046
->> RAX: 0000000000000000 RBX: ffffc90000893c50 RCX: ffff0a00ffffff04
->> RDX: ffffffffc0274769 RSI: ffff888102812000 RDI: ffff88810281133e
->> RBP: ffff888102812000 R08: ffffffff823fa5e6 R09: 0000000000000007
->> R10: ffff888102812000 R11: ffff88820281133d R12: ffffffffc0274769
->> R13: ffff0a00ffffff04 R14: 0000000000000cc4 R15: ffffffff823276b4
->> FS:  000000000214f8c0(0000) GS:ffff88842fd80000(0000) knlGS:0000000000000000
->> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
->> CR2: ffffffffc0274769 CR3: 00000001025c4005 CR4: 0000000000770ee0
->> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
->> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
->> PKRU: 55555554
->> Call Trace:
->>  <TASK>
->>  string+0x46/0x60
->>  vsnprintf+0x27a/0x4f0
->>  seq_vprintf+0x34/0x50
->>  seq_printf+0x53/0x70
->>  ? seq_read_iter+0x365/0x450
->>  show_interrupts+0x259/0x330
->>  seq_read_iter+0x2a3/0x450
->>  proc_reg_read_iter+0x47/0x70
->>  generic_file_splice_read+0x94/0x160
->>  splice_direct_to_actor+0xb0/0x230
->>  ? do_splice_direct+0xd0/0xd0
->>  do_splice_direct+0x8b/0xd0
->>  do_sendfile+0x345/0x4f0
->>  __x64_sys_sendfile64+0xa1/0xc0
->>  do_syscall_64+0x38/0x90
->>  entry_SYSCALL_64_after_hwframe+0x63/0xcd
->> RIP: 0033:0x4bb0ce
->> Code: c3 0f 1f 00 4c 89 d2 4c 89 c6 e9 bd fd ff ff 0f 1f 44 00 00 31 c0 c3 0f 1f 44 00 00
->> RSP: 002b:00007ffd99dc3fb8 EFLAGS: 00000246 ORIG_RAX: 0000000000000028
->> RAX: ffffffffffffffda RBX: 0000000001000000 RCX: 00000000004bb0ce
->> RDX: 0000000000000000 RSI: 0000000000000003 RDI: 0000000000000001
->> RBP: 0000000000000001 R08: 000000000068f240 R09: 0000000001000000
->> R10: 0000000001000000 R11: 0000000000000246 R12: 0000000000000003
->> R13: 0000000000000001 R14: 0000000000000000 R15: 0000000000000000
->>  </TASK>
->>
->> It seems that qxl doesn't free the interrupt it requests during unload,
->> fix this by adding the missing free_irq().
->>
->> Fixes: f64122c1f6ad ("drm: add new QXL driver. (v1.4)")
->> Signed-off-by: Wei Li <liwei391@huawei.com>
-> 
-> Could we go right ahead and switch over to devm_request_irq? Or does that
-> not quite do the right thing here?
-
-
-I tried to use devm_request_irq() to free the irq automatically, but find lots of memory
-leak reported by qxl_bo_fini() when CONFIG_DRM_DEBUG_MM=y.
-
-I found that qxl_io_notify_oom() in qxl_device_fini() trigerred an interrupt with
-QXL_INTERRUPT_DISPLAY pending and then queued a garbage collect, while devm_irq_release()
-is called before drm_dev_release(), if we use devm_request_irq() then we will miss
-the interrupt.
-
-So i choose to free irq here, should we enforce a garbage collect here to fix this? then we
-can just use devm_request_irq.
-
-Thanks,
-Wei
-
->> ---
->>  drivers/gpu/drm/qxl/qxl_kms.c | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
->> index dc3828db1991..d591084824de 100644
->> --- a/drivers/gpu/drm/qxl/qxl_kms.c
->> +++ b/drivers/gpu/drm/qxl/qxl_kms.c
->> @@ -283,6 +283,8 @@ int qxl_device_init(struct qxl_device *qdev,
->>  void qxl_device_fini(struct qxl_device *qdev)
->>  {
->>  	int cur_idx;
->> +	struct drm_device *ddev = &qdev->ddev;
->> +	struct pci_dev *pdev = to_pci_dev(ddev->dev);
->>  
->>  	/* check if qxl_device_init() was successful (gc_work is initialized last) */
->>  	if (!qdev->gc_work.func)
->> @@ -305,6 +307,7 @@ void qxl_device_fini(struct qxl_device *qdev)
->>  	wait_event_timeout(qdev->release_event,
->>  			   atomic_read(&qdev->release_count) == 0,
->>  			   HZ);
->> +	free_irq(pdev->irq, ddev);
->>  	flush_work(&qdev->gc_work);
->>  	qxl_surf_evict(qdev);
->>  	qxl_vram_evict(qdev);
->> -- 
->> 2.25.1
->>
-> 
+If there currently is no way to solve this problem, can't the agent be upda=
+ted so that it would not crash when /dev/uinput is not present, and continu=
+e to do what it can do without /dev/uinput? I mean, all I want is copy-and-=
+paste, and I am not sure why that cannot function without /dev/uinput.
