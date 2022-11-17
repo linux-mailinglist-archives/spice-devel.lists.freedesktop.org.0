@@ -2,53 +2,64 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7C3962D550
-	for <lists+spice-devel@lfdr.de>; Thu, 17 Nov 2022 09:44:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDEFA62D5E9
+	for <lists+spice-devel@lfdr.de>; Thu, 17 Nov 2022 10:08:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BC1D610E1E5;
-	Thu, 17 Nov 2022 08:44:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E05BF10E577;
+	Thu, 17 Nov 2022 09:08:44 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 133FD10E1E5
- for <spice-devel@lists.freedesktop.org>; Thu, 17 Nov 2022 08:44:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1668674663;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=EukYW8gXnJeRfiC+8EFWIznH0yhk4M15dv13ZNKcbW4=;
- b=caYDXPCmTu14MfzwDuRYGbxHp2lmFydQwOedBJRlznl31XEMtp3a3cs6E+tiyS8w40tqLq
- IoAx6B0Y2YYQJrK3FeaSwNb89YkaT4wIbuMJQjcP1zP5P0IltcprlBMXtfmnjv69UdIgoE
- RksjEAvyaNnVb8iwBtJ98K+bP2rgA+Q=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-497-LvyucbsLMLO6ZEcyLQ2f1Q-1; Thu, 17 Nov 2022 03:44:19 -0500
-X-MC-Unique: LvyucbsLMLO6ZEcyLQ2f1Q-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
- [10.11.54.1])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CB2D7185A78B;
- Thu, 17 Nov 2022 08:44:18 +0000 (UTC)
-Received: from localhost (ovpn-192-7.brq.redhat.com [10.40.192.7])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 766D440C83EB;
- Thu, 17 Nov 2022 08:44:18 +0000 (UTC)
-Date: Thu, 17 Nov 2022 09:44:17 +0100
-From: Victor Toso <victortoso@redhat.com>
-To: let-me-use-copy-and-paste <let-me-use-copy-and-paste@proton.me>
-Message-ID: <20221117084417.6lzclrstp7ljwneq@tapioca>
-References: <PYPGGnYoyG-Z7cu7sTB5CUQnfLogiolh-k4lRx8ajo4vNyZDFnkqPNzftiZIDVzziqXf6LxYpAQt3kw5rnHWNdOrao_ObxBN58ZAM_IHGCY=@proton.me>
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 51FE910E577
+ for <spice-devel@lists.freedesktop.org>; Thu, 17 Nov 2022 09:08:39 +0000 (UTC)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-142612a5454so846925fac.2
+ for <spice-devel@lists.freedesktop.org>; Thu, 17 Nov 2022 01:08:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SjPM+rloJAJw4g1uA+lbrQU8g0ceZBlsOWf5iPVwqPw=;
+ b=b5d72MnGtYzWT4rzFA9Pxd6Iec1KGFD/vbgTGfnHrEHT4AKqlSImhupCrNF/GPuW6r
+ pc4HacdBad5NSrnQhaBhVIO3u+5/MvVd/j/dPcXGGJJKOW9sFCLd+1iviYOn55GZR2QG
+ UbMgnkMHzTS8nFJm6YMFyhspvhjngSlSapfGPvic1eM5lBn/OqS0jVLVnUGSM03sWDMg
+ l4OYFDeZSBoQq52sSqNUpl7vg2Wja9Gylx3Op/O0h6KGWOWtCfKSid5BB9mbOepzlBTG
+ Kt7Yyohxc1VltugrV1qJoOffEvbs5vyMH6bwII3gd7wH/3VBUeDgdxv+u0l60KevmqnL
+ fHVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SjPM+rloJAJw4g1uA+lbrQU8g0ceZBlsOWf5iPVwqPw=;
+ b=Lv3qO+52a5AVu/B7FERBM0b+5EanDaSQ3gmLMpYojsS9WsWLixeGDC+hXpgh5kbKw4
+ JexsXPA+Rdft+nSao1QntR2TGGKsa47amuDtV/UV2rdoxIBZJhtcdSCgUp8DiP1GS0el
+ OACF47F/unz9Evxirr+bU5TL9VsiEW3UdrxgtPvqx2d5/sUpGLKY143i1HZPO1Jf4hNK
+ ynQH/wSNZOKOmGQh1zsol53SkPMV+pw+ho8KDigv373us11zk9/2oXHhRUOfqGL8ewLI
+ hEwrD1qriYr+ruDp4kbL48rozxFgMlZ/xcjDWb/of8JlSbY4fh1Yo7RFOMp0C3fo7EOT
+ Grsg==
+X-Gm-Message-State: ANoB5pmkvmR3MIx26kiqP04JE+PFxNoxB4tZZwZIPbf6J8pWdX3hO3St
+ 3GHj+LCa8GHveuFNmKWukWMxHrbxRy2WwaLkGiI=
+X-Google-Smtp-Source: AA0mqf7LWoN5kq7fBKr6h+tNm/wv2A2rOOzY6s/awEM4wvJZ8hZsUtoEqX7ucPel/rd32wkbrzIOnghMTjfAGClYekI=
+X-Received: by 2002:a05:6870:8324:b0:131:ae7c:c92f with SMTP id
+ p36-20020a056870832400b00131ae7cc92fmr780174oae.179.1668676118448; Thu, 17
+ Nov 2022 01:08:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="lgkqk6rvj2r5mkq2"
-Content-Disposition: inline
-In-Reply-To: <PYPGGnYoyG-Z7cu7sTB5CUQnfLogiolh-k4lRx8ajo4vNyZDFnkqPNzftiZIDVzziqXf6LxYpAQt3kw5rnHWNdOrao_ObxBN58ZAM_IHGCY=@proton.me>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
-Subject: Re: [Spice-devel] Agent crashes on Alpine Linux guest due to lack
- of /dev/uinput
+References: <CADiWsK9fxPnCdAYUek0nkWgY476-svZ78d=Pqm_RQoV4FfCSKA@mail.gmail.com>
+ <20221116082102.uasas3k4whcjcbqv@tapioca>
+ <CADiWsK-Mv1rR8yWmaSfYp5d9kU9tfrSqkvC_zor9hKYhA51+CA@mail.gmail.com>
+ <20221116083733.yal5hdblbefrewjj@tapioca>
+ <CADiWsK8NizZeSeQCrbZ-PU1Vjufmnt0exTOhJ5jFaRfnWo+aVA@mail.gmail.com>
+In-Reply-To: <CADiWsK8NizZeSeQCrbZ-PU1Vjufmnt0exTOhJ5jFaRfnWo+aVA@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 17 Nov 2022 09:08:27 +0000
+Message-ID: <CAHt6W4cmvcxagPeCMv1WsShT7BnMHGXMyzpp7BT=6wT+wBYFxw@mail.gmail.com>
+To: Stefan Silberstein <linuxstony@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] Userquestion - remote-viewer connection fails
+ with "Connection type could not be determined by URI"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,71 +71,170 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---lgkqk6rvj2r5mkq2
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Il giorno gio 17 nov 2022 alle ore 07:57 Stefan Silberstein
+<linuxstony@gmail.com> ha scritto:
+>
+> Hello again,
+>
+> so - yesterday I worked from home - as I wrote I was able to connect by s=
+pecifying the user root with "remote-viewer spice://root@192.168.178.51:590=
+0"
+>
+> Today I want to connect the exact same way (yesterday i simply closed the=
+ remote-viewer window and the server keept on running so the windows-VM was=
+ running the whole night) - and I can not connect.
+>
+> Error Message on the console  "** (remote-viewer:6146): CRITICAL **: 07:5=
+5:52.853: virt_viewer_util_extract_host: assertion 'uri !=3D NULL' failed"
+> Error Message on the popup says translated: Connectiontype could not be d=
+etermined by URI.
+>
 
 Hi,
+   That means that the code was not able to parse the URI.
 
-Sorry the delay, I've been away :)
-
-On Sun, Nov 06, 2022 at 07:02:12AM +0000, let-me-use-copy-and-paste wrote:
-> I installed Alpine Linux 3.16 virtual machine edition on
-> QEMU/KVM using Virt-Manager. I installed XFCE on it. I wanted
-> to enable copy-and-paste, so I tried to install spice-vdagent
-> on it, but it kept crashing. I checked the output using the
-> "-x" parameter, and basically, it crashed due to the lack of
-> /dev/uinput. The screenshot is
-> at=A0https://i.imgur.com/9WKaVG8.png
+> IP of the server itself is 192.168.178.51
+> IP of the Virtual Machine is 192.168.178.64 and i pingable
+> Port 5900 on the server is open: 5900/tcp open  vnc
+> remote-viewer --spice-debug spice:=E2=81=84=E2=81=84192.168.178.51:5900 d=
+oes not produce a more verbose output :(
 >
-> I do not know Linux much, so I am not sure if /dev/uinput is
-> not present due to the settings of the virtual machine or
-> because I have not installed something on Alpine Linux. I tried
-> the standard edition of Alpine, and right after the
-> installation, /dev/uinput was not present.
+
+In this example you are not using ASCII slashes (//), maybe that's the prob=
+lem.
+
+> Update in the meantime
+> But maybe this is helpful to you:
 >
-> In case that Alpine Linux indeed does not support /dev/uinput,
-> can't the spice service run anyway? All I want is text
-> copy-and-paste between the host and the guest, and does that
-> feature need /dev/uinput?
+> I simply started "remote-viewer --spice-debug"
+> Then i got the GUI (which i wasnt even aware it existed).
+>
+> When I choose the same entry on that list - I AM able to connect.
+>
+> So the error only exists only when I try to connect via command line?! (T=
+his is when I am able to connect tomorrow via GUI ;) )
+>
+> Shouldn't this be the same ?
+>
+> I mabe I can help - maybe this is indeed a bug?
+>
+> Stefan
+>
 
+Frediano
 
-Well, seems that they do build uinput.ko
-
-    https://pkgs.alpinelinux.org/contents?file=3Duinput.ko&path=3D&name=3Dl=
-inux-vanilla&branch=3Dv3.4&repo=3Dmain&arch=3Dx86_64
-
-It might be a matter of installing the right package and/or
-modprobe uinput
-
-Cheers,
-Victor
-
---lgkqk6rvj2r5mkq2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmN19GEACgkQl9kSPeN6
-SE/sbxAAhpujRii/9M8ejn9Xp20I+WsA/IFbURniSCVjGfzaWHLJQuBTn6wxzCEp
-Tq+lm7JwUX3GkNHN3f5sWBikcR/JCyZ2PAPN7DzhhlluJPss7+rsgJTnoFUW3Fh0
-B9q9u0SBl8TNML/BME90J9KEitotrqZI1aPgYgKt/+QMVxprkjEAtc3NxsaM+5jS
-VRYWS9dytMBSF8pPc9Frfo0cTN2qSnXFeZ4kGmkt9ckpxUm+4DM//xLfYvfrmF4x
-Vfck4OG2jTAA2tPXqVITfpWyvUMQ71SoxAtl1d+pC8NfTTppts6MPGFKP/Cg/hNb
-ctC5b84eQGfG6e/ayRLnFR2UGcyWNobVL3jco9nmG2QWY9LaAiQEmC0zsH8s2Iko
-zSsqXXk3msgbbiLcd2i607U6+PxJgHikPkRn9aWeDqtlkdnmNuhHuCuoxUA+ioMJ
-yy9eFI7hnik8hKjG/3vxifon8WcvDnDlthukyWbZNki/WCRHXKJEJjHH5NTibRVN
-cPlswHWwNZu/2Jx/EBYgpHz94P8AcDmcxbUWOzaT5V5E5CMfWMzlcRRq2zpiBCsh
-Au5hFzlJeBgp9ims6GXFAniIeoVmiTHUbdcv/ZQPb4Lm8QWk3/MtYehGCT1lXnvH
-4vSQbKVffrYKn3SJiTNdfXj+1iNINON/PIHSxq8Jlnpjz+H47oU=
-=w21w
------END PGP SIGNATURE-----
-
---lgkqk6rvj2r5mkq2--
-
+> Am Mi., 16. Nov. 2022 um 09:37 Uhr schrieb Victor Toso <victortoso@redhat=
+.com>:
+>>
+>> On Wed, Nov 16, 2022 at 09:27:21AM +0100, Stefan Silberstein wrote:
+>> > I appreciate the time to answer me.
+>> >
+>> > In the meantime (out of desperation because i needed the virtualmachin=
+e for
+>> > work) I gave it a go with specifying root as user and not the servers
+>> > username "server".
+>> >
+>> > I was able to connect to the virtual Windows10 installation with
+>> >
+>> > remote-viewer spice://root@192.168.178.51:5900
+>>
+>> Cool
+>>
+>> > But again - then I dont unterstand why it worked as user and
+>> > later on with specifying the user later on (which doesn't work
+>> > right now anymore)
+>> >
+>> > So it is a permissions problem on my side and I successfully
+>> > wasted your time. :/
+>> >
+>> > Sorry about that.
+>>
+>> Don't worry about that. Happy to hear it worked.
+>>
+>> >
+>> > This happens when "users" try to play with the big boys toys :D
+>> >
+>> > Have a nice day you all and thanks for your time.
+>>
+>> You too.
+>> Cheers,
+>>
+>> >
+>> > Stefan
+>> >
+>> > Am Mi., 16. Nov. 2022 um 09:21 Uhr schrieb Victor Toso <
+>> > victortoso@redhat.com>:
+>> >
+>> > > Hi Stefan,
+>> > >
+>> > > On Tue, Nov 15, 2022 at 09:53:05PM +0100, Stefan Silberstein wrote:
+>> > > > Hello developers,
+>> > > >
+>> > > > I can imagine that this will be an annoying question for you -
+>> > > > so I apologize in advance.
+>> > > >
+>> > > > I am a user - with a longer history with linux BUT i am
+>> > > > completely new to virtualization.
+>> > > > Due to the fact that I got a server donated to me I wanted to
+>> > > > give it a go and it worked like a charm.
+>> > > >
+>> > > > Installed virt-manager, installed Windows10  connected with
+>> > > > virt-manager - absolutely no problem.
+>> > > >
+>> > > > Due to the fact that I need dual monitors I learned that I
+>> > > > could add another display and connect with spice - and it
+>> > > > worked immediately.
+>> > > >
+>> > > > BUT - without me changing anything (consciously) I wasn't able
+>> > > > to connect to the virtual machine the next week.
+>> > > >
+>> > > > It refuses with "Verbindungstyp konnte nicht von URI ermittelt wer=
+den"
+>> > > > (Connection type could not be determined by URI)
+>> > > >
+>> > > > Then i tried to connect with sudo and specifying the user in
+>> > > > the command line and it once again connected:
+>> > > >
+>> > > > sudo remote-viewer  spice:=E2=81=84=E2=81=84server@192.168.178.51:=
+5900
+>> > >
+>> > > Perhaps the URL is the problem. If the IP is 192.168.178.51 and
+>> > > the port for the VM is 5900, then try
+>> > >
+>> > >     remote-viewer spice://192.168.178.51:5900
+>> > >
+>> > > If server is a dns that can be resolved, should be fine to use it
+>> > > instead of ip address
+>> > >
+>> > >     remote-viewer spice://server:5900
+>> > >
+>> > >
+>> > > > And now - again without changing anything - it doesn't connect
+>> > > > with that command as well.
+>> > > >
+>> > > > I have sadly NO clue whatsoever where to even search for a
+>> > > > solution - the internet didn't help me here...
+>> > > >
+>> > > > Do you have any hint at all what I might do wrong here?
+>> > > >
+>> > > > The machine is available - the port is open and visible
+>> > > > PORT     STATE SERVICE
+>> > > > 22/tcp   open  ssh
+>> > > > 80/tcp   open  http
+>> > > > 3389/tcp open  ms-wbt-server
+>> > > > 5900/tcp open  vnc
+>> > > >
+>> > > > ufw on the server is shut down.
+>> > > >
+>> > > > ANY help would be greatly appreciated.
+>> > >
+>> > > You can get more verbose information of issues with --spice-debug
+>> > > command line option too.
+>> > >
+>> > > Cheers,
+>> > > Victor
+>> > >
