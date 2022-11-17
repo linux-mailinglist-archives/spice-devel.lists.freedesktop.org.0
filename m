@@ -2,49 +2,47 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FDD562D64A
-	for <lists+spice-devel@lfdr.de>; Thu, 17 Nov 2022 10:18:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9EAC62D70E
+	for <lists+spice-devel@lfdr.de>; Thu, 17 Nov 2022 10:31:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3278510E586;
-	Thu, 17 Nov 2022 09:18:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A6F7310E5DE;
+	Thu, 17 Nov 2022 09:31:18 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E0CB710E586
- for <spice-devel@lists.freedesktop.org>; Thu, 17 Nov 2022 09:18:37 +0000 (UTC)
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-14263779059so675052fac.1
- for <spice-devel@lists.freedesktop.org>; Thu, 17 Nov 2022 01:18:37 -0800 (PST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7221010E5D6
+ for <spice-devel@lists.freedesktop.org>; Thu, 17 Nov 2022 09:31:12 +0000 (UTC)
+Received: by mail-lf1-x134.google.com with SMTP id a29so1845534lfj.9
+ for <spice-devel@lists.freedesktop.org>; Thu, 17 Nov 2022 01:31:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DQ+Phaq8NWP2mqvKQhYxUHhR6bcZZdS/qv3HbghDnsY=;
- b=UQCMJUvlvccIZE7suqCBH+NjiBwDXHXMRTCE60Eny4LD70lfp6k1EVDaYHkkMdziaN
- PK/biZZwliX0/TmMgZvqYJY/GeP5vnmXKOM9viteY6bYbsSbB+SibBxtF75IQTllU6r9
- PzL5SRTm5Edgmw8lAZTQnDA7mgFjl1gpk7Vfh3TCIk6Ojc/DI6ZLm+h71QDrh5dpFMOY
- 6sQe2kalqloc3shUcXq9irEB+mi+fdFqfi4ALbsyljMjvbP9CDusb6+YW4T3e8tbBGQL
- v87+IHAJQiOohckZ5Abwd/shFCfolzSrWW2KFq+st7yhsJfLymWKHXXOQB9IGCL7ME7s
- n3xg==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AotH0s9mk4ChXxRC95G261EEEtFCVSQxn4vF2naq0w0=;
+ b=nS2bFlHtOJnr5zvU/417fyl38ifn4zqgSbn8bXuis0AlQ08l55dtKg1GqZrAMTGtZs
+ mmPp3ij0/Vi6HllrX2etiQ/FnRqjzE2HUIE1/zAIX/2+G1LLsz6X8tPIJzJw97JuxRKz
+ 0LQQUo96xZChhmMbfbS+Aej8tXyglspgPt2dUzOYZX/YM6gNWrJGTa0Pm5cePEjMFlXy
+ wGfxJ28Np6SKaGRsGbBbQRh7QQTrwg1qdzHRulLW7385O7+Xev4tgAHVuV4zBgZSivHW
+ nFQA0hRLcYaUimIJy+XS3aLSkrRKyqtXS3Tao7TTs8JQFYql18Cu0HM770vEL62bYLYS
+ x7gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DQ+Phaq8NWP2mqvKQhYxUHhR6bcZZdS/qv3HbghDnsY=;
- b=an14iV4XdauELdzuZz12gDHLhkFl2pit6jvs3niY1Zl/iCuI15E0jDGq7H38ZPBRRu
- 2Pqwnp3Ukb72RxiZMlXH6HG5GnXbRcl996BwMd0nhtjIVeKk9pVPjabbYrvyZAoNbZFl
- Wdse+pXxilApG2eUAmtqn7p/SqUHPxBpaoBZluQjeewDIBn53V8R/6vFEE87GT8WU3ZJ
- N8jnSOV26aBH3gocY3CIMiy/NsNsvD4UX3nlFmToiOvMK0OBWI98kesSoBrKXh0m8Xcm
- CrwbmWAtzlYVx1G3UbVz+SDnHiTZRIPgAPQe3NbUsbO1QazF6IWSQjNdZZKxsbFS/09d
- mEJg==
-X-Gm-Message-State: ANoB5pli92PyCUmoSKiPtli4R3z7MYgOQFW7No8G8oV9nByErf3IVemh
- tU+WPHXuQLfPktIN1meiGHqPAoPaeZuL4aZCwNC69DXf
-X-Google-Smtp-Source: AA0mqf5zegPnBJOE/FjQStHSg/8Vw/QAQKsmy5XahbLPphZBfjOAqtIiFHXJTQLFV2CMNa3+OO9opB+jSlPkFa+uVCU=
-X-Received: by 2002:a05:6870:c908:b0:141:e619:169 with SMTP id
- hj8-20020a056870c90800b00141e6190169mr3939721oab.1.1668676717101; Thu, 17 Nov
- 2022 01:18:37 -0800 (PST)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AotH0s9mk4ChXxRC95G261EEEtFCVSQxn4vF2naq0w0=;
+ b=lArXxI7f3eDyxAMtawtSxvKbRnQb5fV4VA/7MQKjMrOBC6invgRMHTOg3EbbezA9HU
+ Bfpw6my3tQtRrT7urXL9/aFkyMmxjTxDkFzXEUmhSvxovn/XEcUtyQyqO5PYdwz0TSoF
+ zu1iMFTsRyB86KvlApQvaaEmsoKnh+Fg2wuItBexECytKPdwmv2NYNiuXXWIquL6ArZM
+ ej/GVySiwdgz1hThL77kz9+fyiSNUbwrimXGKrLFmB3akC10bx1tQRHAMEoqVpVz3UHm
+ b5lp0Wc27If5NhHTSGXAjsthlphWq/oFbPbwVhx8pPAH6cAKNwX7C+ugDqIdDpRTO6iB
+ 3j3A==
+X-Gm-Message-State: ANoB5pknuY4nATmw9l2anX4DgD+I3bs2RgK36cs9GoyICOeKX8vggYnR
+ jRdcBX1yESG6z895SE7PWv0U4uUaO1UL+Js8x9s=
+X-Google-Smtp-Source: AA0mqf6xQGWcadAy89R74r8ZK/IUoMSafmN8HGoUBSZDgR7ZZy2HFoeW9xZD74mC6L96wpAjytxcMOj6vVXcqeqrhUs=
+X-Received: by 2002:a05:6512:3f89:b0:4ac:660b:1f02 with SMTP id
+ x9-20020a0565123f8900b004ac660b1f02mr615927lfa.9.1668677470535; Thu, 17 Nov
+ 2022 01:31:10 -0800 (PST)
 MIME-Version: 1.0
 References: <CADiWsK9fxPnCdAYUek0nkWgY476-svZ78d=Pqm_RQoV4FfCSKA@mail.gmail.com>
  <20221116082102.uasas3k4whcjcbqv@tapioca>
@@ -53,13 +51,13 @@ References: <CADiWsK9fxPnCdAYUek0nkWgY476-svZ78d=Pqm_RQoV4FfCSKA@mail.gmail.com>
  <CADiWsK8NizZeSeQCrbZ-PU1Vjufmnt0exTOhJ5jFaRfnWo+aVA@mail.gmail.com>
  <CAHt6W4cmvcxagPeCMv1WsShT7BnMHGXMyzpp7BT=6wT+wBYFxw@mail.gmail.com>
  <CADiWsK9CunRBfzbazm9FqFw3t3vqRf58rR2uW8Erxns9r3xxPw@mail.gmail.com>
-In-Reply-To: <CADiWsK9CunRBfzbazm9FqFw3t3vqRf58rR2uW8Erxns9r3xxPw@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 17 Nov 2022 09:18:25 +0000
-Message-ID: <CAHt6W4eb2Mu1kCxh1wQy1pUsJkeamq1KhgH29B+r7V-8KDMWdQ@mail.gmail.com>
-To: Stefan Silberstein <linuxstony@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAHt6W4eb2Mu1kCxh1wQy1pUsJkeamq1KhgH29B+r7V-8KDMWdQ@mail.gmail.com>
+In-Reply-To: <CAHt6W4eb2Mu1kCxh1wQy1pUsJkeamq1KhgH29B+r7V-8KDMWdQ@mail.gmail.com>
+From: Stefan Silberstein <linuxstony@gmail.com>
+Date: Thu, 17 Nov 2022 10:30:59 +0100
+Message-ID: <CADiWsK_5Oeof94_gU6fUXoMh9rapZgAcmaXkcM2Rg3TQdSyo5g@mail.gmail.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000e042ae05eda73fe1"
 Subject: Re: [Spice-devel] Userquestion - remote-viewer connection fails
  with "Connection type could not be determined by URI"
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -77,196 +75,546 @@ Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno gio 17 nov 2022 alle ore 09:13 Stefan Silberstein
-<linuxstony@gmail.com> ha scritto:
+--000000000000e042ae05eda73fe1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Some details:
+Operating System: Kubuntu 22.04
+KDE Plasma Version: 5.24.6
+KDE Frameworks Version: 5.92.0
+Qt Version: 5.15.3
+Kernel Version: 5.15.0-53-generic (64-bit)
+Graphics Platform: X11
+Processors: 8 =C3=97 AMD Ryzen 5 1500X Quad-Core Processor
+Memory: 15.6 GiB of RAM
+Graphics Processor: NVIDIA GeForce GTX 1050 Ti/PCIe/SSE2
+
+Opening a Konsole "bash":
+
+Konsole
+Version 21.12.3
+
+
+Locale:
+
+stony@Aperture-Science:~$ locale LANG=3Dde_DE.UTF-8 LANGUAGE=3D
+LC_CTYPE=3D"de_DE.UTF-8" LC_NUMERIC=3D"de_DE.UTF-8" LC_TIME=3D"de_DE.UTF-8"
+LC_COLLATE=3D"de_DE.UTF-8" LC_MONETARY=3D"de_DE.UTF-8"
+LC_MESSAGES=3D"de_DE.UTF-8" LC_PAPER=3D"de_DE.UTF-8" LC_NAME=3D"de_DE.UTF-8=
+"
+LC_ADDRESS=3D"de_DE.UTF-8" LC_TELEPHONE=3D"de_DE.UTF-8"
+LC_MEASUREMENT=3D"de_DE.UTF-8" LC_IDENTIFICATION=3D"de_DE.UTF-8" LC_ALL=3D
+
+I will try to open it today at noon - during my lunch break.
+(ATM I am glad it works because i gotta work from home and this
+windows-machine is the only way to connect to the Server in my company for
+me)
+
+I will get back to you in approximately two hours.
+
+Stefan
+
+Am Do., 17. Nov. 2022 um 10:18 Uhr schrieb Frediano Ziglio <
+freddy77@gmail.com>:
+
+> Il giorno gio 17 nov 2022 alle ore 09:13 Stefan Silberstein
+> <linuxstony@gmail.com> ha scritto:
+> >
+> > Hi,
+> >
+> > no this is the normal forward-slash with "shift+7" on the german
+> keyboard - googlemail messed it up translating it to something else.
+> > The URL  is normally typed.
+> >
+> > This is really weird and I will try to help you as much as I can to get
+> to the bottom of it.
+> >
+> > Stefan
+> >
 >
-> Hi,
+> That's pretty weird. That code has been there for ages. I tried but no
+> problems for me.
+> This operating system and version are you using?
+> Which shell?
+> Maybe it's the locale? Try launching something like "LANG=3DC
+> remote-viewer spice://192.168.178.51:5900" (LANG environment change)
 >
-> no this is the normal forward-slash with "shift+7" on the german keyboard=
- - googlemail messed it up translating it to something else.
-> The URL  is normally typed.
+> Frediano
 >
-> This is really weird and I will try to help you as much as I can to get t=
-o the bottom of it.
->
-> Stefan
+> > Am Do., 17. Nov. 2022 um 10:08 Uhr schrieb Frediano Ziglio <
+> freddy77@gmail.com>:
+> >>
+> >> Il giorno gio 17 nov 2022 alle ore 07:57 Stefan Silberstein
+> >> <linuxstony@gmail.com> ha scritto:
+> >> >
+> >> > Hello again,
+> >> >
+> >> > so - yesterday I worked from home - as I wrote I was able to connect
+> by specifying the user root with "remote-viewer spice://
+> root@192.168.178.51:5900"
+> >> >
+> >> > Today I want to connect the exact same way (yesterday i simply close=
+d
+> the remote-viewer window and the server keept on running so the windows-V=
+M
+> was running the whole night) - and I can not connect.
+> >> >
+> >> > Error Message on the console  "** (remote-viewer:6146): CRITICAL **:
+> 07:55:52.853: virt_viewer_util_extract_host: assertion 'uri !=3D NULL' fa=
+iled"
+> >> > Error Message on the popup says translated: Connectiontype could not
+> be determined by URI.
+> >> >
+> >>
+> >> Hi,
+> >>    That means that the code was not able to parse the URI.
+> >>
+> >> > IP of the server itself is 192.168.178.51
+> >> > IP of the Virtual Machine is 192.168.178.64 and i pingable
+> >> > Port 5900 on the server is open: 5900/tcp open  vnc
+> >> > remote-viewer --spice-debug spice:=E2=81=84=E2=81=84192.168.178.51:5=
+900 does not
+> produce a more verbose output :(
+> >> >
+> >>
+> >> In this example you are not using ASCII slashes (//), maybe that's the
+> problem.
+> >>
+> >> > Update in the meantime
+> >> > But maybe this is helpful to you:
+> >> >
+> >> > I simply started "remote-viewer --spice-debug"
+> >> > Then i got the GUI (which i wasnt even aware it existed).
+> >> >
+> >> > When I choose the same entry on that list - I AM able to connect.
+> >> >
+> >> > So the error only exists only when I try to connect via command
+> line?! (This is when I am able to connect tomorrow via GUI ;) )
+> >> >
+> >> > Shouldn't this be the same ?
+> >> >
+> >> > I mabe I can help - maybe this is indeed a bug?
+> >> >
+> >> > Stefan
+> >> >
+> >>
+> >> Frediano
+> >>
+> >> > Am Mi., 16. Nov. 2022 um 09:37 Uhr schrieb Victor Toso <
+> victortoso@redhat.com>:
+> >> >>
+> >> >> On Wed, Nov 16, 2022 at 09:27:21AM +0100, Stefan Silberstein wrote:
+> >> >> > I appreciate the time to answer me.
+> >> >> >
+> >> >> > In the meantime (out of desperation because i needed the
+> virtualmachine for
+> >> >> > work) I gave it a go with specifying root as user and not the
+> servers
+> >> >> > username "server".
+> >> >> >
+> >> >> > I was able to connect to the virtual Windows10 installation with
+> >> >> >
+> >> >> > remote-viewer spice://root@192.168.178.51:5900
+> >> >>
+> >> >> Cool
+> >> >>
+> >> >> > But again - then I dont unterstand why it worked as user and
+> >> >> > later on with specifying the user later on (which doesn't work
+> >> >> > right now anymore)
+> >> >> >
+> >> >> > So it is a permissions problem on my side and I successfully
+> >> >> > wasted your time. :/
+> >> >> >
+> >> >> > Sorry about that.
+> >> >>
+> >> >> Don't worry about that. Happy to hear it worked.
+> >> >>
+> >> >> >
+> >> >> > This happens when "users" try to play with the big boys toys :D
+> >> >> >
+> >> >> > Have a nice day you all and thanks for your time.
+> >> >>
+> >> >> You too.
+> >> >> Cheers,
+> >> >>
+> >> >> >
+> >> >> > Stefan
+> >> >> >
+> >> >> > Am Mi., 16. Nov. 2022 um 09:21 Uhr schrieb Victor Toso <
+> >> >> > victortoso@redhat.com>:
+> >> >> >
+> >> >> > > Hi Stefan,
+> >> >> > >
+> >> >> > > On Tue, Nov 15, 2022 at 09:53:05PM +0100, Stefan Silberstein
+> wrote:
+> >> >> > > > Hello developers,
+> >> >> > > >
+> >> >> > > > I can imagine that this will be an annoying question for you =
+-
+> >> >> > > > so I apologize in advance.
+> >> >> > > >
+> >> >> > > > I am a user - with a longer history with linux BUT i am
+> >> >> > > > completely new to virtualization.
+> >> >> > > > Due to the fact that I got a server donated to me I wanted to
+> >> >> > > > give it a go and it worked like a charm.
+> >> >> > > >
+> >> >> > > > Installed virt-manager, installed Windows10  connected with
+> >> >> > > > virt-manager - absolutely no problem.
+> >> >> > > >
+> >> >> > > > Due to the fact that I need dual monitors I learned that I
+> >> >> > > > could add another display and connect with spice - and it
+> >> >> > > > worked immediately.
+> >> >> > > >
+> >> >> > > > BUT - without me changing anything (consciously) I wasn't abl=
+e
+> >> >> > > > to connect to the virtual machine the next week.
+> >> >> > > >
+> >> >> > > > It refuses with "Verbindungstyp konnte nicht von URI ermittel=
+t
+> werden"
+> >> >> > > > (Connection type could not be determined by URI)
+> >> >> > > >
+> >> >> > > > Then i tried to connect with sudo and specifying the user in
+> >> >> > > > the command line and it once again connected:
+> >> >> > > >
+> >> >> > > > sudo remote-viewer  spice:=E2=81=84=E2=81=84server@192.168.17=
+8.51:5900
+> >> >> > >
+> >> >> > > Perhaps the URL is the problem. If the IP is 192.168.178.51 and
+> >> >> > > the port for the VM is 5900, then try
+> >> >> > >
+> >> >> > >     remote-viewer spice://192.168.178.51:5900
+> >> >> > >
+> >> >> > > If server is a dns that can be resolved, should be fine to use =
+it
+> >> >> > > instead of ip address
+> >> >> > >
+> >> >> > >     remote-viewer spice://server:5900
+> >> >> > >
+> >> >> > >
+> >> >> > > > And now - again without changing anything - it doesn't connec=
+t
+> >> >> > > > with that command as well.
+> >> >> > > >
+> >> >> > > > I have sadly NO clue whatsoever where to even search for a
+> >> >> > > > solution - the internet didn't help me here...
+> >> >> > > >
+> >> >> > > > Do you have any hint at all what I might do wrong here?
+> >> >> > > >
+> >> >> > > > The machine is available - the port is open and visible
+> >> >> > > > PORT     STATE SERVICE
+> >> >> > > > 22/tcp   open  ssh
+> >> >> > > > 80/tcp   open  http
+> >> >> > > > 3389/tcp open  ms-wbt-server
+> >> >> > > > 5900/tcp open  vnc
+> >> >> > > >
+> >> >> > > > ufw on the server is shut down.
+> >> >> > > >
+> >> >> > > > ANY help would be greatly appreciated.
+> >> >> > >
+> >> >> > > You can get more verbose information of issues with --spice-deb=
+ug
+> >> >> > > command line option too.
+> >> >> > >
+> >> >> > > Cheers,
+> >> >> > > Victor
+> >> >> > >
 >
 
-That's pretty weird. That code has been there for ages. I tried but no
-problems for me.
-This operating system and version are you using?
-Which shell?
-Maybe it's the locale? Try launching something like "LANG=3DC
-remote-viewer spice://192.168.178.51:5900" (LANG environment change)
+--000000000000e042ae05eda73fe1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Frediano
+<div dir=3D"ltr"><div>Some details: <br></div><div>Operating System: Kubunt=
+u 22.04<br>KDE Plasma Version: 5.24.6<br>KDE Frameworks Version: 5.92.0<br>=
+Qt Version: 5.15.3<br>Kernel Version: 5.15.0-53-generic (64-bit)<br>Graphic=
+s Platform: X11<br>Processors: 8 =C3=97 AMD Ryzen 5 1500X Quad-Core Process=
+or<br>Memory: 15.6 GiB of RAM<br>Graphics Processor: NVIDIA GeForce GTX 105=
+0 Ti/PCIe/SSE2</div><div><font size=3D"2"><span style=3D"font-family:arial,=
+sans-serif"><br></span></font></div><div><font size=3D"2"><span style=3D"fo=
+nt-family:arial,sans-serif">Opening a Konsole &quot;bash&quot;:=20
 
-> Am Do., 17. Nov. 2022 um 10:08 Uhr schrieb Frediano Ziglio <freddy77@gmai=
-l.com>:
->>
->> Il giorno gio 17 nov 2022 alle ore 07:57 Stefan Silberstein
->> <linuxstony@gmail.com> ha scritto:
->> >
->> > Hello again,
->> >
->> > so - yesterday I worked from home - as I wrote I was able to connect b=
-y specifying the user root with "remote-viewer spice://root@192.168.178.51:=
-5900"
->> >
->> > Today I want to connect the exact same way (yesterday i simply closed =
-the remote-viewer window and the server keept on running so the windows-VM =
-was running the whole night) - and I can not connect.
->> >
->> > Error Message on the console  "** (remote-viewer:6146): CRITICAL **: 0=
-7:55:52.853: virt_viewer_util_extract_host: assertion 'uri !=3D NULL' faile=
-d"
->> > Error Message on the popup says translated: Connectiontype could not b=
-e determined by URI.
->> >
->>
->> Hi,
->>    That means that the code was not able to parse the URI.
->>
->> > IP of the server itself is 192.168.178.51
->> > IP of the Virtual Machine is 192.168.178.64 and i pingable
->> > Port 5900 on the server is open: 5900/tcp open  vnc
->> > remote-viewer --spice-debug spice:=E2=81=84=E2=81=84192.168.178.51:590=
-0 does not produce a more verbose output :(
->> >
->>
->> In this example you are not using ASCII slashes (//), maybe that's the p=
-roblem.
->>
->> > Update in the meantime
->> > But maybe this is helpful to you:
->> >
->> > I simply started "remote-viewer --spice-debug"
->> > Then i got the GUI (which i wasnt even aware it existed).
->> >
->> > When I choose the same entry on that list - I AM able to connect.
->> >
->> > So the error only exists only when I try to connect via command line?!=
- (This is when I am able to connect tomorrow via GUI ;) )
->> >
->> > Shouldn't this be the same ?
->> >
->> > I mabe I can help - maybe this is indeed a bug?
->> >
->> > Stefan
->> >
->>
->> Frediano
->>
->> > Am Mi., 16. Nov. 2022 um 09:37 Uhr schrieb Victor Toso <victortoso@red=
-hat.com>:
->> >>
->> >> On Wed, Nov 16, 2022 at 09:27:21AM +0100, Stefan Silberstein wrote:
->> >> > I appreciate the time to answer me.
->> >> >
->> >> > In the meantime (out of desperation because i needed the virtualmac=
-hine for
->> >> > work) I gave it a go with specifying root as user and not the serve=
-rs
->> >> > username "server".
->> >> >
->> >> > I was able to connect to the virtual Windows10 installation with
->> >> >
->> >> > remote-viewer spice://root@192.168.178.51:5900
->> >>
->> >> Cool
->> >>
->> >> > But again - then I dont unterstand why it worked as user and
->> >> > later on with specifying the user later on (which doesn't work
->> >> > right now anymore)
->> >> >
->> >> > So it is a permissions problem on my side and I successfully
->> >> > wasted your time. :/
->> >> >
->> >> > Sorry about that.
->> >>
->> >> Don't worry about that. Happy to hear it worked.
->> >>
->> >> >
->> >> > This happens when "users" try to play with the big boys toys :D
->> >> >
->> >> > Have a nice day you all and thanks for your time.
->> >>
->> >> You too.
->> >> Cheers,
->> >>
->> >> >
->> >> > Stefan
->> >> >
->> >> > Am Mi., 16. Nov. 2022 um 09:21 Uhr schrieb Victor Toso <
->> >> > victortoso@redhat.com>:
->> >> >
->> >> > > Hi Stefan,
->> >> > >
->> >> > > On Tue, Nov 15, 2022 at 09:53:05PM +0100, Stefan Silberstein wrot=
-e:
->> >> > > > Hello developers,
->> >> > > >
->> >> > > > I can imagine that this will be an annoying question for you -
->> >> > > > so I apologize in advance.
->> >> > > >
->> >> > > > I am a user - with a longer history with linux BUT i am
->> >> > > > completely new to virtualization.
->> >> > > > Due to the fact that I got a server donated to me I wanted to
->> >> > > > give it a go and it worked like a charm.
->> >> > > >
->> >> > > > Installed virt-manager, installed Windows10  connected with
->> >> > > > virt-manager - absolutely no problem.
->> >> > > >
->> >> > > > Due to the fact that I need dual monitors I learned that I
->> >> > > > could add another display and connect with spice - and it
->> >> > > > worked immediately.
->> >> > > >
->> >> > > > BUT - without me changing anything (consciously) I wasn't able
->> >> > > > to connect to the virtual machine the next week.
->> >> > > >
->> >> > > > It refuses with "Verbindungstyp konnte nicht von URI ermittelt =
-werden"
->> >> > > > (Connection type could not be determined by URI)
->> >> > > >
->> >> > > > Then i tried to connect with sudo and specifying the user in
->> >> > > > the command line and it once again connected:
->> >> > > >
->> >> > > > sudo remote-viewer  spice:=E2=81=84=E2=81=84server@192.168.178.=
-51:5900
->> >> > >
->> >> > > Perhaps the URL is the problem. If the IP is 192.168.178.51 and
->> >> > > the port for the VM is 5900, then try
->> >> > >
->> >> > >     remote-viewer spice://192.168.178.51:5900
->> >> > >
->> >> > > If server is a dns that can be resolved, should be fine to use it
->> >> > > instead of ip address
->> >> > >
->> >> > >     remote-viewer spice://server:5900
->> >> > >
->> >> > >
->> >> > > > And now - again without changing anything - it doesn't connect
->> >> > > > with that command as well.
->> >> > > >
->> >> > > > I have sadly NO clue whatsoever where to even search for a
->> >> > > > solution - the internet didn't help me here...
->> >> > > >
->> >> > > > Do you have any hint at all what I might do wrong here?
->> >> > > >
->> >> > > > The machine is available - the port is open and visible
->> >> > > > PORT     STATE SERVICE
->> >> > > > 22/tcp   open  ssh
->> >> > > > 80/tcp   open  http
->> >> > > > 3389/tcp open  ms-wbt-server
->> >> > > > 5900/tcp open  vnc
->> >> > > >
->> >> > > > ufw on the server is shut down.
->> >> > > >
->> >> > > > ANY help would be greatly appreciated.
->> >> > >
->> >> > > You can get more verbose information of issues with --spice-debug
->> >> > > command line option too.
->> >> > >
->> >> > > Cheers,
->> >> > > Victor
->> >> > >
+</span></font><p style=3D"margin:0px;text-indent:0px;white-space:pre-wrap">=
+<font size=3D"2"><span style=3D"font-family:arial,sans-serif"><span>Konsole=
+</span><br>Version 21.12.3</span></font></p><p style=3D"margin:0px;text-ind=
+ent:0px;white-space:pre-wrap"><font size=3D"2"><span style=3D"font-family:a=
+rial,sans-serif"><br></span></font></p><p style=3D"margin:0px;text-indent:0=
+px;white-space:pre-wrap"><font size=3D"2"><span style=3D"font-family:arial,=
+sans-serif">Locale:</span></font></p><p style=3D"margin:0px;text-indent:0px=
+;white-space:pre-wrap"><span style=3D"font-family:monospace"><font size=3D"=
+2"><span style=3D"font-family:arial,sans-serif"><span style=3D"font-weight:=
+bold;color:rgb(84,255,84);background-color:rgb(255,255,255)">stony@Aperture=
+-Science</span><span style=3D"color:rgb(0,0,0);background-color:rgb(255,255=
+,255)">:</span><span style=3D"font-weight:bold;color:rgb(84,84,255);backgro=
+und-color:rgb(255,255,255)">~</span><span style=3D"color:rgb(0,0,0);backgro=
+und-color:rgb(255,255,255)">$ locale
+</span>LANG=3Dde_DE.UTF-8
+LANGUAGE=3D
+LC_CTYPE=3D&quot;de_DE.UTF-8&quot;
+LC_NUMERIC=3D&quot;de_DE.UTF-8&quot;
+LC_TIME=3D&quot;de_DE.UTF-8&quot;
+LC_COLLATE=3D&quot;de_DE.UTF-8&quot;
+LC_MONETARY=3D&quot;de_DE.UTF-8&quot;
+LC_MESSAGES=3D&quot;de_DE.UTF-8&quot;
+LC_PAPER=3D&quot;de_DE.UTF-8&quot;
+LC_NAME=3D&quot;de_DE.UTF-8&quot;
+LC_ADDRESS=3D&quot;de_DE.UTF-8&quot;
+LC_TELEPHONE=3D&quot;de_DE.UTF-8&quot;
+LC_MEASUREMENT=3D&quot;de_DE.UTF-8&quot;
+LC_IDENTIFICATION=3D&quot;de_DE.UTF-8&quot;
+LC_ALL=3D</span></font><br>
+<br></span></p></div><div>I will try to open it today at noon - during my l=
+unch break. <br></div><div>(ATM I am glad it works because i gotta work fro=
+m home and this windows-machine is the only way to connect to the Server in=
+ my company for me)</div><div><br></div><div>I will get back to you in appr=
+oximately two hours. <br></div><div><br></div><div>Stefan<br></div></div><b=
+r><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Am Do., =
+17. Nov. 2022 um 10:18=C2=A0Uhr schrieb Frediano Ziglio &lt;<a href=3D"mail=
+to:freddy77@gmail.com">freddy77@gmail.com</a>&gt;:<br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">Il giorno gio 17 nov 2022 alle ore 09:13=
+ Stefan Silberstein<br>
+&lt;<a href=3D"mailto:linuxstony@gmail.com" target=3D"_blank">linuxstony@gm=
+ail.com</a>&gt; ha scritto:<br>
+&gt;<br>
+&gt; Hi,<br>
+&gt;<br>
+&gt; no this is the normal forward-slash with &quot;shift+7&quot; on the ge=
+rman keyboard - googlemail messed it up translating it to something else.<b=
+r>
+&gt; The URL=C2=A0 is normally typed.<br>
+&gt;<br>
+&gt; This is really weird and I will try to help you as much as I can to ge=
+t to the bottom of it.<br>
+&gt;<br>
+&gt; Stefan<br>
+&gt;<br>
+<br>
+That&#39;s pretty weird. That code has been there for ages. I tried but no<=
+br>
+problems for me.<br>
+This operating system and version are you using?<br>
+Which shell?<br>
+Maybe it&#39;s the locale? Try launching something like &quot;LANG=3DC<br>
+remote-viewer spice://<a href=3D"http://192.168.178.51:5900" rel=3D"norefer=
+rer" target=3D"_blank">192.168.178.51:5900</a>&quot; (LANG environment chan=
+ge)<br>
+<br>
+Frediano<br>
+<br>
+&gt; Am Do., 17. Nov. 2022 um 10:08 Uhr schrieb Frediano Ziglio &lt;<a href=
+=3D"mailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt;=
+:<br>
+&gt;&gt;<br>
+&gt;&gt; Il giorno gio 17 nov 2022 alle ore 07:57 Stefan Silberstein<br>
+&gt;&gt; &lt;<a href=3D"mailto:linuxstony@gmail.com" target=3D"_blank">linu=
+xstony@gmail.com</a>&gt; ha scritto:<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Hello again,<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; so - yesterday I worked from home - as I wrote I was able to =
+connect by specifying the user root with &quot;remote-viewer spice://<a hre=
+f=3D"http://root@192.168.178.51:5900" rel=3D"noreferrer" target=3D"_blank">=
+root@192.168.178.51:5900</a>&quot;<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Today I want to connect the exact same way (yesterday i simpl=
+y closed the remote-viewer window and the server keept on running so the wi=
+ndows-VM was running the whole night) - and I can not connect.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Error Message on the console=C2=A0 &quot;** (remote-viewer:61=
+46): CRITICAL **: 07:55:52.853: virt_viewer_util_extract_host: assertion &#=
+39;uri !=3D NULL&#39; failed&quot;<br>
+&gt;&gt; &gt; Error Message on the popup says translated: Connectiontype co=
+uld not be determined by URI.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt;<br>
+&gt;&gt; Hi,<br>
+&gt;&gt;=C2=A0 =C2=A0 That means that the code was not able to parse the UR=
+I.<br>
+&gt;&gt;<br>
+&gt;&gt; &gt; IP of the server itself is 192.168.178.51<br>
+&gt;&gt; &gt; IP of the Virtual Machine is 192.168.178.64 and i pingable<br=
+>
+&gt;&gt; &gt; Port 5900 on the server is open: 5900/tcp open=C2=A0 vnc<br>
+&gt;&gt; &gt; remote-viewer --spice-debug spice:=E2=81=84=E2=81=84<a href=
+=3D"http://192.168.178.51:5900" rel=3D"noreferrer" target=3D"_blank">192.16=
+8.178.51:5900</a> does not produce a more verbose output :(<br>
+&gt;&gt; &gt;<br>
+&gt;&gt;<br>
+&gt;&gt; In this example you are not using ASCII slashes (//), maybe that&#=
+39;s the problem.<br>
+&gt;&gt;<br>
+&gt;&gt; &gt; Update in the meantime<br>
+&gt;&gt; &gt; But maybe this is helpful to you:<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; I simply started &quot;remote-viewer --spice-debug&quot;<br>
+&gt;&gt; &gt; Then i got the GUI (which i wasnt even aware it existed).<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; When I choose the same entry on that list - I AM able to conn=
+ect.<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; So the error only exists only when I try to connect via comma=
+nd line?! (This is when I am able to connect tomorrow via GUI ;) )<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Shouldn&#39;t this be the same ?<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; I mabe I can help - maybe this is indeed a bug?<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Stefan<br>
+&gt;&gt; &gt;<br>
+&gt;&gt;<br>
+&gt;&gt; Frediano<br>
+&gt;&gt;<br>
+&gt;&gt; &gt; Am Mi., 16. Nov. 2022 um 09:37 Uhr schrieb Victor Toso &lt;<a=
+ href=3D"mailto:victortoso@redhat.com" target=3D"_blank">victortoso@redhat.=
+com</a>&gt;:<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; On Wed, Nov 16, 2022 at 09:27:21AM +0100, Stefan Silberst=
+ein wrote:<br>
+&gt;&gt; &gt;&gt; &gt; I appreciate the time to answer me.<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; In the meantime (out of desperation because i needed=
+ the virtualmachine for<br>
+&gt;&gt; &gt;&gt; &gt; work) I gave it a go with specifying root as user an=
+d not the servers<br>
+&gt;&gt; &gt;&gt; &gt; username &quot;server&quot;.<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; I was able to connect to the virtual Windows10 insta=
+llation with<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; remote-viewer spice://<a href=3D"http://root@192.168=
+.178.51:5900" rel=3D"noreferrer" target=3D"_blank">root@192.168.178.51:5900=
+</a><br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; Cool<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; &gt; But again - then I dont unterstand why it worked as =
+user and<br>
+&gt;&gt; &gt;&gt; &gt; later on with specifying the user later on (which do=
+esn&#39;t work<br>
+&gt;&gt; &gt;&gt; &gt; right now anymore)<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; So it is a permissions problem on my side and I succ=
+essfully<br>
+&gt;&gt; &gt;&gt; &gt; wasted your time. :/<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; Sorry about that.<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; Don&#39;t worry about that. Happy to hear it worked.<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; This happens when &quot;users&quot; try to play with=
+ the big boys toys :D<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; Have a nice day you all and thanks for your time.<br=
+>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; You too.<br>
+&gt;&gt; &gt;&gt; Cheers,<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; Stefan<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; Am Mi., 16. Nov. 2022 um 09:21 Uhr schrieb Victor To=
+so &lt;<br>
+&gt;&gt; &gt;&gt; &gt; <a href=3D"mailto:victortoso@redhat.com" target=3D"_=
+blank">victortoso@redhat.com</a>&gt;:<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; Hi Stefan,<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; On Tue, Nov 15, 2022 at 09:53:05PM +0100, Stefa=
+n Silberstein wrote:<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; Hello developers,<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; I can imagine that this will be an annoyin=
+g question for you -<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; so I apologize in advance.<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; I am a user - with a longer history with l=
+inux BUT i am<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; completely new to virtualization.<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; Due to the fact that I got a server donate=
+d to me I wanted to<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; give it a go and it worked like a charm.<b=
+r>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; Installed virt-manager, installed Windows1=
+0=C2=A0 connected with<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; virt-manager - absolutely no problem.<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; Due to the fact that I need dual monitors =
+I learned that I<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; could add another display and connect with=
+ spice - and it<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; worked immediately.<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; BUT - without me changing anything (consci=
+ously) I wasn&#39;t able<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; to connect to the virtual machine the next=
+ week.<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; It refuses with &quot;Verbindungstyp konnt=
+e nicht von URI ermittelt werden&quot;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; (Connection type could not be determined b=
+y URI)<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; Then i tried to connect with sudo and spec=
+ifying the user in<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; the command line and it once again connect=
+ed:<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; sudo remote-viewer=C2=A0 spice:=E2=81=84=
+=E2=81=84<a href=3D"http://server@192.168.178.51:5900" rel=3D"noreferrer" t=
+arget=3D"_blank">server@192.168.178.51:5900</a><br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; Perhaps the URL is the problem. If the IP is 19=
+2.168.178.51 and<br>
+&gt;&gt; &gt;&gt; &gt; &gt; the port for the VM is 5900, then try<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0remote-viewer spice://<a hre=
+f=3D"http://192.168.178.51:5900" rel=3D"noreferrer" target=3D"_blank">192.1=
+68.178.51:5900</a><br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; If server is a dns that can be resolved, should=
+ be fine to use it<br>
+&gt;&gt; &gt;&gt; &gt; &gt; instead of ip address<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0remote-viewer spice://server=
+:5900<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; And now - again without changing anything =
+- it doesn&#39;t connect<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; with that command as well.<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; I have sadly NO clue whatsoever where to e=
+ven search for a<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; solution - the internet didn&#39;t help me=
+ here...<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; Do you have any hint at all what I might d=
+o wrong here?<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; The machine is available - the port is ope=
+n and visible<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; PORT=C2=A0 =C2=A0 =C2=A0STATE SERVICE<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; 22/tcp=C2=A0 =C2=A0open=C2=A0 ssh<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; 80/tcp=C2=A0 =C2=A0open=C2=A0 http<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; 3389/tcp open=C2=A0 ms-wbt-server<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; 5900/tcp open=C2=A0 vnc<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; ufw on the server is shut down.<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; &gt; ANY help would be greatly appreciated.<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; You can get more verbose information of issues =
+with --spice-debug<br>
+&gt;&gt; &gt;&gt; &gt; &gt; command line option too.<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; &gt; Cheers,<br>
+&gt;&gt; &gt;&gt; &gt; &gt; Victor<br>
+&gt;&gt; &gt;&gt; &gt; &gt;<br>
+</blockquote></div>
+
+--000000000000e042ae05eda73fe1--
