@@ -2,49 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0C51631D42
-	for <lists+spice-devel@lfdr.de>; Mon, 21 Nov 2022 10:48:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 362456322D0
+	for <lists+spice-devel@lfdr.de>; Mon, 21 Nov 2022 13:47:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E7DA10E19B;
-	Mon, 21 Nov 2022 09:48:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5938410E2C6;
+	Mon, 21 Nov 2022 12:47:05 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.corp.qihoo.net (bjyt-esg-p01.qihoo.net [36.110.232.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8072310E16A
- for <spice-devel@lists.freedesktop.org>; Mon, 21 Nov 2022 08:44:56 +0000 (UTC)
-Received: from bjyt-exmbx04.corp.qihoo.net (unknown [36.110.235.125])
- (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by Forcepoint Email with ESMTPS id 5AA0B740FA6B10602B61;
- Mon, 21 Nov 2022 16:44:50 +0800 (CST)
-Received: from bjyt-exmbx04.corp.qihoo.net (36.110.235.125) by
- bjyt-exmbx04.corp.qihoo.net (36.110.235.125) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.34; Mon, 21 Nov 2022 16:44:50 +0800
-Received: from bjyt-exmbx04.corp.qihoo.net ([fe80::4543:aa62:80cd:89c6]) by
- bjyt-exmbx04.corp.qihoo.net ([fe80::4543:aa62:80cd:89c6%3]) with mapi id
- 15.01.2375.034; Mon, 21 Nov 2022 16:44:50 +0800
-From: =?utf-8?B?6Z+p6Zuq5bOw?= <hanxuefeng@360.cn>
-To: Frediano Ziglio <freddy77@gmail.com>
-Thread-Topic: [Spice-devel] The second client cannot redirect USB
-Thread-Index: Adj7IbVCxM1qTNKBTRy1rXGWouKeOP//z6SA//sMk7A=
-Date: Mon, 21 Nov 2022 08:44:49 +0000
-Message-ID: <4eb04086e700409e8ff9f2bc3dc18c55@360.cn>
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0743610E2C4
+ for <spice-devel@lists.freedesktop.org>; Mon, 21 Nov 2022 12:47:01 +0000 (UTC)
+Received: by mail-oi1-x232.google.com with SMTP id v81so12387138oie.5
+ for <spice-devel@lists.freedesktop.org>; Mon, 21 Nov 2022 04:47:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lWfDEWGMuAgv3FzZeJnjLcVNeC1oirGR1IGJYiDuoWo=;
+ b=Rx04K9UKDsaZsysOGZIh7SMM7sQ5awiZYl13bVP1fXsrWDrKVkNKPnWRvZBxWhhm7A
+ 31NLd5tke7B+SSK6wE/1ElUvA3KUvZVAoK+4/ailjIWQzpRrTkW+6h8B35H1dlBRoBcS
+ r/9AxLdirI3RCyUAvV4QnzP4WKpsOnoHHKLzS9UZUJtHx6WCq9lsmvTtM1wYBCUrFR9z
+ e5dyltaljLOQB6MtzVVsyC+MXeYg4XVsX+/OhLYR/w1O3Kz5UkEfDFpZAE26jxcTyhNt
+ JhHeC/pXexUZFh7WUcSfqQqkHzm8sSmGEewZstwNqG/vfAcniy/gFKWENXgYuKbOXNqY
+ beaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lWfDEWGMuAgv3FzZeJnjLcVNeC1oirGR1IGJYiDuoWo=;
+ b=j9a7XbxyM7wNSni2wwfkEMxpsxujPoQ1DKH/Kh8Z214PZKJ3S7INLlkHYOcVYogbmb
+ Xbl3rHhUlCuA78MB3SvOeHDMYsFr4VyU64ORUot9qeW3Mgyyn8RUOA2DV/TbbQ/kQTE6
+ c3kmaeM/j8yfNJQXzTD4EGbmPhZSBQAgqEnNF0QK1WJlpiS/W0xe6g7JDrPHd6D5y66Q
+ 4ARPOq8hdd23/ytFziSpE4/Lj51NlaAVBHlffBq4sakEGzxp9F0qUIKtf3o2MMbdqrqj
+ QIgiYJMltN03Y8cBt/6vK+gZi5kylisfCEFHmSiMQn4kPzHT4QiUoDQCi9H3PN4zz5lo
+ K4IQ==
+X-Gm-Message-State: ANoB5plsNzxSXokiEKPzu4NH+AQr6GLXj416rKClJFJGBkz8Je+NXpND
+ FUUTG0bNpo6OuqChyPWxMl/P5W1pVYo0p4krSBo=
+X-Google-Smtp-Source: AA0mqf59DI60jMFFJBlWBzST6rmWbAhZde9NxBfnK/o8hLvGNkRTfmmQVxLzJBOaCsHYs4x+Ri348/lIg7mz56zNOkM=
+X-Received: by 2002:a54:4009:0:b0:35a:3bb8:da5e with SMTP id
+ x9-20020a544009000000b0035a3bb8da5emr11846431oie.1.1669034820009; Mon, 21 Nov
+ 2022 04:47:00 -0800 (PST)
+MIME-Version: 1.0
 References: <3d27841837ae439d91300c2d5b7056b0@360.cn>
  <CAHt6W4fRZoR5+E3rptGzcQ9R_DfdZ3g=G2rmhqY7Y4s6ZRBx1w@mail.gmail.com>
-In-Reply-To: <CAHt6W4fRZoR5+E3rptGzcQ9R_DfdZ3g=G2rmhqY7Y4s6ZRBx1w@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.18.30.37]
-Content-Type: multipart/related;
- boundary="_004_4eb04086e700409e8ff9f2bc3dc18c55360cn_";
- type="multipart/alternative"
-MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 21 Nov 2022 09:48:41 +0000
-Subject: [Spice-devel] =?utf-8?b?562U5aSNOiAgVGhlIHNlY29uZCBjbGllbnQgY2Fu?=
- =?utf-8?q?not_redirect_USB?=
+ <4eb04086e700409e8ff9f2bc3dc18c55@360.cn>
+In-Reply-To: <4eb04086e700409e8ff9f2bc3dc18c55@360.cn>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Mon, 21 Nov 2022 12:46:48 +0000
+Message-ID: <CAHt6W4forb4oCc+2EvCBLpCGwtnO8MrfyysDFx0Hi6EG9bJY2g@mail.gmail.com>
+To: =?UTF-8?B?6Z+p6Zuq5bOw?= <hanxuefeng@360.cn>
+Content-Type: multipart/related; boundary="000000000000909abd05edfa7320"
+Subject: Re: [Spice-devel] The second client cannot redirect USB
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,182 +69,254 @@ Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---_004_4eb04086e700409e8ff9f2bc3dc18c55360cn_
-Content-Type: multipart/alternative;
-	boundary="_000_4eb04086e700409e8ff9f2bc3dc18c55360cn_"
+--000000000000909abd05edfa7320
+Content-Type: multipart/alternative; boundary="000000000000909abb05edfa731f"
 
---_000_4eb04086e700409e8ff9f2bc3dc18c55360cn_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+--000000000000909abb05edfa731f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-SGksDQpUaGFua3MgZm9yIHlvdXIgcmVwbHkuIEJ1dCBJZiBJIHdhbnQgdG8gc3VwcG9ydCBtdWx0
-aXBsZSBjaGFubmVscyBmb3IgVVNCIHJlZGlyZWN0aW9uIHdoZW4gbXVsdGlwbGUgY2xpZW50cyBj
-b25uZWN0IHRvIGEgc2FtZSBWTSwgIGRvIHlvdSBrbm93IHdoaWNoIHByb2plY3QgaW5jbHVkZXMg
-dGhlIGNvZGUgYWJvdXQgVVNCIGNoYW5uZWxzID8gICBTcGljZSA/IG9yIFFFTVU/DQoNClRoYW5r
-cyBhbmQgUmVnYXJkcywNClh1ZWZlbmcNCg0K5Y+R5Lu25Lq6OiBGcmVkaWFubyBaaWdsaW8gPGZy
-ZWRkeTc3QGdtYWlsLmNvbT4NCuWPkemAgeaXtumXtDogMjAyMuW5tDEx5pyIMTjml6UgMjA6NTIN
-CuaUtuS7tuS6ujog6Z+p6Zuq5bOwIDxoYW54dWVmZW5nQDM2MC5jbj4NCuaKhOmAgTogc3BpY2Ut
-ZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnDQrkuLvpopg6IFJlOiBbU3BpY2UtZGV2ZWxdIFRo
-ZSBzZWNvbmQgY2xpZW50IGNhbm5vdCByZWRpcmVjdCBVU0INCg0KSWwgZ2lvcm5vIHZlbiAxOCBu
-b3YgMjAyMiBhbGxlIG9yZSAxMDoyMSDpn6npm6rls7AgPGhhbnh1ZWZlbmdAMzYwLmNuPG1haWx0
-bzpoYW54dWVmZW5nQDM2MC5jbj4+IGhhIHNjcml0dG86DQpIZWxsbywNCg0KICAgV2hlbiBJIHVz
-ZWQgdHdvIGNsaWVudCB0byBjb25uZWN0IHRvIGEgc2FtZSBvbmUgVk0gYnkgc3BpY2Ugd2l0aCBz
-ZXR0aW5nIOKAnFNQSUNFX0RFQlVHX0FMTE9XX01DPTHigJ0sIHRoZSB0d28gY2xpZW50cyB3b3Jr
-ZWQsIGFuZCB0aGUgZmlyc3QgY2xpZW50IGNvdWxkIHJlZGlyZWN0IFVTQi4gSG93ZXZlciwgdGhl
-IHNlY29uZCBjbGllbnQgY291bGQgbm90IHJlZGlyZWN0IFVTQiBkZXZpY2UsIEl0IHNob3dzIGxp
-a2UgdGhlIHBpY3R1cmU6DQpbY2lkOmltYWdlMDAxLnBuZ0AwMUQ4RkRDNi5DNEQ4MjA4MF0NCg0K
-SeKAmW0gc3VyZSB0aGF0IHRoZXJl4oCZcmUgZW5vdWdoIGNoYW5uZWxzIGZvciBVU0IgcmVkaXJl
-Y3Rpb24uDQoNCklzIHRoaXMgYSBwcm9ibGVtPyBPciBJcyB0aGVyZSBhbnkgd2F5IHRoYXQgY291
-bGQgcmVzb2x2ZSB0aGUgc2Vjb25kIGNsaWVudOKAmXMgVVNCIHJlZGlyZWN0aW9uIHByb2JsZW0/
-DQoNClRoYW5rcyBhbmQgUmVnYXJkcywNCg0KWHVlZmVuZw0KDQpDdXJyZW50bHkgYWxsIGNoYXJh
-Y3RlciBkZXZpY2UgY2hhbm5lbHMgKGluY2x1ZGluZyBVU0Igb25lKSBkbyBub3Qgc3VwcG9ydCBt
-dWx0aXBsZSBjaGFubmVscywgc28gdGhlIGZpcnN0IGNsaWVudCB0YWtlcyB0aGVtIGFsbC4NCg0K
-RnJlZGlhbm8NCg==
+Il giorno lun 21 nov 2022 alle ore 08:44 =E9=9F=A9=E9=9B=AA=E5=B3=B0 <hanxu=
+efeng@360.cn> ha scritto:
 
---_000_4eb04086e700409e8ff9f2bc3dc18c55360cn_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+> Hi,
+>
+> Thanks for your reply. But If I want to support multiple channels for USB
+> redirection when multiple clients connect to a same VM,  do you know whic=
+h
+> project includes the code about USB channels ?   Spice ? or QEMU?
+>
+>
+>
+> Thanks and Regards,
+>
+> Xuefeng
+>
+>
+Channels are a SPICE thing. But you will find surprisingly few code in
+SPICE (at least the server). The reason is that SPICE in this case mostly
+forwards data from/to usbredir (which is another project). In details Qemu
+uses usbredir to handle a USB device for the guest. This device is attached
+to spice-server which handles SPICE channels. A spice client (like
+spice-gtk) connects to SPICE USB channels and forward data from either a
+physical device or an emulated device (currently spice-gtk handles an
+emulated CD/DVD device).
+Currently each SPICE USB channel is bound to a single Qemu device (I doubt
+it makes sense to bind it to multiple devices but it could in theory not be
+bound to a device).
+Note that spice-server currently only forward data (presented like a
+pipe/stream) to/from client to the device, the hard lifting is made by
+Qemu/usbredir.
 
-PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
-bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
-YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
-cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
-Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
-ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPCEtLVtp
-ZiAhbXNvXT48c3R5bGU+dlw6KiB7YmVoYXZpb3I6dXJsKCNkZWZhdWx0I1ZNTCk7fQ0Kb1w6KiB7
-YmVoYXZpb3I6dXJsKCNkZWZhdWx0I1ZNTCk7fQ0Kd1w6KiB7YmVoYXZpb3I6dXJsKCNkZWZhdWx0
-I1ZNTCk7fQ0KLnNoYXBlIHtiZWhhdmlvcjp1cmwoI2RlZmF1bHQjVk1MKTt9DQo8L3N0eWxlPjwh
-W2VuZGlmXS0tPjxzdHlsZT48IS0tDQovKiBGb250IERlZmluaXRpb25zICovDQpAZm9udC1mYWNl
-DQoJe2ZvbnQtZmFtaWx5OuWui+S9kzsNCglwYW5vc2UtMToyIDEgNiAwIDMgMSAxIDEgMSAxO30N
-CkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0
-IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1mYWNlDQoJe2ZvbnQtZmFtaWx5Ouetiee6vzsNCglw
-YW5vc2UtMToyIDEgNiAwIDMgMSAxIDEgMSAxO30NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
-IlxA562J57q/IjsNCglwYW5vc2UtMToyIDEgNiAwIDMgMSAxIDEgMSAxO30NCkBmb250LWZhY2UN
-Cgl7Zm9udC1mYW1pbHk6IlxA5a6L5L2TIjsNCglwYW5vc2UtMToyIDEgNiAwIDMgMSAxIDEgMSAx
-O30NCi8qIFN0eWxlIERlZmluaXRpb25zICovDQpwLk1zb05vcm1hbCwgbGkuTXNvTm9ybWFsLCBk
-aXYuTXNvTm9ybWFsDQoJe21hcmdpbjowY207DQoJbWFyZ2luLWJvdHRvbTouMDAwMXB0Ow0KCWZv
-bnQtc2l6ZToxMi4wcHQ7DQoJZm9udC1mYW1pbHk65a6L5L2TO30NCmE6bGluaywgc3Bhbi5Nc29I
-eXBlcmxpbmsNCgl7bXNvLXN0eWxlLXByaW9yaXR5Ojk5Ow0KCWNvbG9yOmJsdWU7DQoJdGV4dC1k
-ZWNvcmF0aW9uOnVuZGVybGluZTt9DQphOnZpc2l0ZWQsIHNwYW4uTXNvSHlwZXJsaW5rRm9sbG93
-ZWQNCgl7bXNvLXN0eWxlLXByaW9yaXR5Ojk5Ow0KCWNvbG9yOnB1cnBsZTsNCgl0ZXh0LWRlY29y
-YXRpb246dW5kZXJsaW5lO30NCnAubXNvbm9ybWFsMCwgbGkubXNvbm9ybWFsMCwgZGl2Lm1zb25v
-cm1hbDANCgl7bXNvLXN0eWxlLW5hbWU6bXNvbm9ybWFsOw0KCW1zby1tYXJnaW4tdG9wLWFsdDph
-dXRvOw0KCW1hcmdpbi1yaWdodDowY207DQoJbXNvLW1hcmdpbi1ib3R0b20tYWx0OmF1dG87DQoJ
-bWFyZ2luLWxlZnQ6MGNtOw0KCWZvbnQtc2l6ZToxMi4wcHQ7DQoJZm9udC1mYW1pbHk65a6L5L2T
-O30NCnNwYW4uRW1haWxTdHlsZTE4DQoJe21zby1zdHlsZS10eXBlOnBlcnNvbmFsLXJlcGx5Ow0K
-CWZvbnQtZmFtaWx5Ouetiee6vzsNCgljb2xvcjojMUY0OTdEO30NCi5Nc29DaHBEZWZhdWx0DQoJ
-e21zby1zdHlsZS10eXBlOmV4cG9ydC1vbmx5Ow0KCWZvbnQtZmFtaWx5Ouetiee6vzt9DQpAcGFn
-ZSBXb3JkU2VjdGlvbjENCgl7c2l6ZTo2MTIuMHB0IDc5Mi4wcHQ7DQoJbWFyZ2luOjcyLjBwdCA5
-MC4wcHQgNzIuMHB0IDkwLjBwdDt9DQpkaXYuV29yZFNlY3Rpb24xDQoJe3BhZ2U6V29yZFNlY3Rp
-b24xO30NCi0tPjwvc3R5bGU+PCEtLVtpZiBndGUgbXNvIDldPjx4bWw+DQo8bzpzaGFwZWRlZmF1
-bHRzIHY6ZXh0PSJlZGl0IiBzcGlkbWF4PSIxMDI2IiAvPg0KPC94bWw+PCFbZW5kaWZdLS0+PCEt
-LVtpZiBndGUgbXNvIDldPjx4bWw+DQo8bzpzaGFwZWxheW91dCB2OmV4dD0iZWRpdCI+DQo8bzpp
-ZG1hcCB2OmV4dD0iZWRpdCIgZGF0YT0iMSIgLz4NCjwvbzpzaGFwZWxheW91dD48L3htbD48IVtl
-bmRpZl0tLT4NCjwvaGVhZD4NCjxib2R5IGxhbmc9IlpILUNOIiBsaW5rPSJibHVlIiB2bGluaz0i
-cHVycGxlIj4NCjxkaXYgY2xhc3M9IldvcmRTZWN0aW9uMSI+DQo8cCBjbGFzcz0iTXNvTm9ybWFs
-Ij48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImZvbnQtc2l6ZToxMC41cHQ7Zm9udC1mYW1pbHk6
-562J57q/Ij5IaSw8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48
-c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9ImZvbnQtc2l6ZToxMC41cHQ7Zm9udC1mYW1pbHk6562J
-57q/Ij5UaGFua3MgZm9yIHlvdXIgcmVwbHkuIEJ1dCBJZiBJIHdhbnQgdG8gc3VwcG9ydCBtdWx0
-aXBsZSBjaGFubmVscyBmb3IgVVNCIHJlZGlyZWN0aW9uIHdoZW4gbXVsdGlwbGUgY2xpZW50cyBj
-b25uZWN0IHRvIGEgc2FtZSBWTSwgJm5ic3A7ZG8geW91IGtub3cgd2hpY2ggcHJvamVjdCBpbmNs
-dWRlcyB0aGUgY29kZSBhYm91dA0KIFVTQiBjaGFubmVscyA/Jm5ic3A7Jm5ic3A7IFNwaWNlID8g
-b3IgUUVNVT88bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3Bh
-biBsYW5nPSJFTi1VUyIgc3R5bGU9ImZvbnQtc2l6ZToxMC41cHQ7Zm9udC1mYW1pbHk6562J57q/
-Ij48bzpwPiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIiBzdHls
-ZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdpbi1ib3R0b20tYWx0OmF1dG8iPjxz
-cGFuIGxhbmc9IkVOLVVTIj5UaGFua3MgYW5kIFJlZ2FyZHMsPG86cD48L286cD48L3NwYW4+PC9w
-Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LXNp
-emU6MTAuNXB0O2ZvbnQtZmFtaWx5Ouetiee6vyI+WHVlZmVuZzxvOnA+PC9vOnA+PC9zcGFuPjwv
-cD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1z
-aXplOjEwLjVwdDtmb250LWZhbWlseTrnrYnnur87Y29sb3I6IzFGNDk3RCI+PG86cD4mbmJzcDs8
-L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PGI+PHNwYW4gc3R5bGU9ImZv
-bnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6562J57q/Ij7lj5Hku7bkuro8c3BhbiBsYW5nPSJF
-Ti1VUyI+Ojwvc3Bhbj48L3NwYW4+PC9iPjxzcGFuIGxhbmc9IkVOLVVTIiBzdHlsZT0iZm9udC1z
-aXplOjExLjBwdDtmb250LWZhbWlseTrnrYnnur8iPiBGcmVkaWFubyBaaWdsaW8gJmx0O2ZyZWRk
-eTc3QGdtYWlsLmNvbSZndDsNCjxicj4NCjwvc3Bhbj48Yj48c3BhbiBzdHlsZT0iZm9udC1zaXpl
-OjExLjBwdDtmb250LWZhbWlseTrnrYnnur8iPuWPkemAgeaXtumXtDxzcGFuIGxhbmc9IkVOLVVT
-Ij46PC9zcGFuPjwvc3Bhbj48L2I+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LXNpemU6
-MTEuMHB0O2ZvbnQtZmFtaWx5Ouetiee6vyI+IDIwMjI8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQt
-c2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6562J57q/Ij7lubQ8c3BhbiBsYW5nPSJFTi1VUyI+MTE8
-L3NwYW4+5pyIPHNwYW4gbGFuZz0iRU4tVVMiPjE4PC9zcGFuPuaXpTxzcGFuIGxhbmc9IkVOLVVT
-Ij4NCiAyMDo1Mjxicj4NCjwvc3Bhbj48Yj7mlLbku7bkuro8c3BhbiBsYW5nPSJFTi1VUyI+Ojwv
-c3Bhbj48L2I+PHNwYW4gbGFuZz0iRU4tVVMiPiA8L3NwYW4+6Z+p6Zuq5bOwPHNwYW4gbGFuZz0i
-RU4tVVMiPiAmbHQ7aGFueHVlZmVuZ0AzNjAuY24mZ3Q7PGJyPg0KPC9zcGFuPjxiPuaKhOmAgTxz
-cGFuIGxhbmc9IkVOLVVTIj46PC9zcGFuPjwvYj48c3BhbiBsYW5nPSJFTi1VUyI+IHNwaWNlLWRl
-dmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZzxicj4NCjwvc3Bhbj48Yj7kuLvpopg8c3BhbiBsYW5n
-PSJFTi1VUyI+Ojwvc3Bhbj48L2I+PHNwYW4gbGFuZz0iRU4tVVMiPiBSZTogW1NwaWNlLWRldmVs
-XSBUaGUgc2Vjb25kIGNsaWVudCBjYW5ub3QgcmVkaXJlY3QgVVNCPG86cD48L286cD48L3NwYW4+
-PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIj48bzpw
-PiZuYnNwOzwvbzpwPjwvc3Bhbj48L3A+DQo8ZGl2Pg0KPGRpdj4NCjxkaXY+DQo8cCBjbGFzcz0i
-TXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyI+SWwgZ2lvcm5vIHZlbiAxOCBub3YgMjAyMiBh
-bGxlIG9yZSAxMDoyMSA8L3NwYW4+DQrpn6npm6rls7A8c3BhbiBsYW5nPSJFTi1VUyI+ICZsdDs8
-YSBocmVmPSJtYWlsdG86aGFueHVlZmVuZ0AzNjAuY24iPmhhbnh1ZWZlbmdAMzYwLmNuPC9hPiZn
-dDsgaGEgc2NyaXR0bzo8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8L2Rpdj4NCjxibG9ja3F1b3Rl
-IHN0eWxlPSJib3JkZXI6bm9uZTtib3JkZXItbGVmdDpzb2xpZCAjQ0NDQ0NDIDEuMHB0O3BhZGRp
-bmc6MGNtIDBjbSAwY20gNi4wcHQ7bWFyZ2luLWxlZnQ6NC44cHQ7bWFyZ2luLXJpZ2h0OjBjbSI+
-DQo8ZGl2Pg0KPGRpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibXNvLW1h
-cmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdpbi1ib3R0b20tYWx0OmF1dG8iPjxzcGFuIGxhbmc9
-IkVOLVVTIj5IZWxsbyw8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFs
-IiBzdHlsZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdpbi1ib3R0b20tYWx0OmF1
-dG8iPjxzcGFuIGxhbmc9IkVOLVVTIj4mbmJzcDs8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBj
-bGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdp
-bi1ib3R0b20tYWx0OmF1dG8iPjxzcGFuIGxhbmc9IkVOLVVTIj4mbmJzcDsmbmJzcDsgV2hlbiBJ
-IHVzZWQgdHdvIGNsaWVudCB0byBjb25uZWN0IHRvIGEgc2FtZSBvbmUgVk0gYnkgc3BpY2Ugd2l0
-aCBzZXR0aW5nDQo8L3NwYW4+4oCcPHNwYW4gbGFuZz0iRU4tVVMiPlNQSUNFX0RFQlVHX0FMTE9X
-X01DPTE8L3NwYW4+4oCdPHNwYW4gbGFuZz0iRU4tVVMiPiwgdGhlIHR3byBjbGllbnRzIHdvcmtl
-ZCwgYW5kIHRoZSBmaXJzdCBjbGllbnQgY291bGQgcmVkaXJlY3QgVVNCLiBIb3dldmVyLCB0aGUg
-c2Vjb25kIGNsaWVudCBjb3VsZCBub3QgcmVkaXJlY3QgVVNCIGRldmljZSwgSXQgc2hvd3MgbGlr
-ZSB0aGUgcGljdHVyZTo8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFs
-IiBzdHlsZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdpbi1ib3R0b20tYWx0OmF1
-dG8iPjxzcGFuIGxhbmc9IkVOLVVTIj48aW1nIGJvcmRlcj0iMCIgd2lkdGg9IjQ3NSIgaGVpZ2h0
-PSIyNTEiIHN0eWxlPSJ3aWR0aDo0Ljk0NzlpbjtoZWlnaHQ6Mi42MTQ1aW4iIGlkPSJtXzQ4NzQz
-MTU5NzYzMDU1MTYzNjnlm77niYdfeDAwMjBfMSIgc3JjPSJjaWQ6aW1hZ2UwMDEucG5nQDAxRDhG
-REM2LkM0RDgyMDgwIj48bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFs
-IiBzdHlsZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdpbi1ib3R0b20tYWx0OmF1
-dG8iPjxzcGFuIGxhbmc9IkVOLVVTIj4mbmJzcDs8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBj
-bGFzcz0iTXNvTm9ybWFsIiBzdHlsZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdp
-bi1ib3R0b20tYWx0OmF1dG8iPjxzcGFuIGxhbmc9IkVOLVVTIj5JPC9zcGFuPuKAmTxzcGFuIGxh
-bmc9IkVOLVVTIj5tIHN1cmUgdGhhdCB0aGVyZTwvc3Bhbj7igJk8c3BhbiBsYW5nPSJFTi1VUyI+
-cmUgZW5vdWdoIGNoYW5uZWxzIGZvciBVU0IgcmVkaXJlY3Rpb24uPG86cD48L286cD48L3NwYW4+
-PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5bGU9Im1zby1tYXJnaW4tdG9wLWFsdDphdXRv
-O21zby1tYXJnaW4tYm90dG9tLWFsdDphdXRvIj48c3BhbiBsYW5nPSJFTi1VUyI+Jm5ic3A7PG86
-cD48L286cD48L3NwYW4+PC9wPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCIgc3R5bGU9Im1zby1tYXJn
-aW4tdG9wLWFsdDphdXRvO21zby1tYXJnaW4tYm90dG9tLWFsdDphdXRvIj48c3BhbiBsYW5nPSJF
-Ti1VUyI+SXMgdGhpcyBhIHByb2JsZW0/IE9yIElzIHRoZXJlIGFueSB3YXkgdGhhdCBjb3VsZCBy
-ZXNvbHZlIHRoZSBzZWNvbmQgY2xpZW50PC9zcGFuPuKAmTxzcGFuIGxhbmc9IkVOLVVTIj5zIFVT
-QiByZWRpcmVjdGlvbiBwcm9ibGVtPzxvOnA+PC9vOnA+PC9zcGFuPjwvcD4NCjxwIGNsYXNzPSJN
-c29Ob3JtYWwiIHN0eWxlPSJtc28tbWFyZ2luLXRvcC1hbHQ6YXV0bzttc28tbWFyZ2luLWJvdHRv
-bS1hbHQ6YXV0byI+PHNwYW4gbGFuZz0iRU4tVVMiPiZuYnNwOzxvOnA+PC9vOnA+PC9zcGFuPjwv
-cD4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiIHN0eWxlPSJtc28tbWFyZ2luLXRvcC1hbHQ6YXV0bztt
-c28tbWFyZ2luLWJvdHRvbS1hbHQ6YXV0byI+PHNwYW4gbGFuZz0iRU4tVVMiPlRoYW5rcyBhbmQg
-UmVnYXJkcyw8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIiBzdHls
-ZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdpbi1ib3R0b20tYWx0OmF1dG8iPjxz
-cGFuIGxhbmc9IkVOLVVTIj4mbmJzcDs8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0i
-TXNvTm9ybWFsIiBzdHlsZT0ibXNvLW1hcmdpbi10b3AtYWx0OmF1dG87bXNvLW1hcmdpbi1ib3R0
-b20tYWx0OmF1dG8iPjxzcGFuIGxhbmc9IkVOLVVTIj5YdWVmZW5nPG86cD48L286cD48L3NwYW4+
-PC9wPg0KPC9kaXY+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9ibG9ja3F1b3RlPg0KPGRpdj4NCjxwIGNs
-YXNzPSJNc29Ob3JtYWwiPjxzcGFuIGxhbmc9IkVOLVVTIj48bzpwPiZuYnNwOzwvbzpwPjwvc3Bh
-bj48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJF
-Ti1VUyI+Q3VycmVudGx5IGFsbCBjaGFyYWN0ZXIgZGV2aWNlIGNoYW5uZWxzIChpbmNsdWRpbmcg
-VVNCIG9uZSkgZG8gbm90IHN1cHBvcnQgbXVsdGlwbGUgY2hhbm5lbHMsIHNvIHRoZSBmaXJzdCBj
-bGllbnQgdGFrZXMgdGhlbSBhbGwuPG86cD48L286cD48L3NwYW4+PC9wPg0KPC9kaXY+DQo8ZGl2
-Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiPjxvOnA+Jm5ic3A7PC9v
-OnA+PC9zcGFuPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxzcGFu
-IGxhbmc9IkVOLVVTIj5GcmVkaWFubyA8bzpwPjwvbzpwPjwvc3Bhbj48L3A+DQo8L2Rpdj4NCjwv
-ZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjwvYm9keT4NCjwvaHRtbD4NCg==
+Frediano
 
---_000_4eb04086e700409e8ff9f2bc3dc18c55360cn_--
 
---_004_4eb04086e700409e8ff9f2bc3dc18c55360cn_
+>
+> *=E5=8F=91=E4=BB=B6=E4=BA=BA:* Frediano Ziglio <freddy77@gmail.com>
+> *=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:* 2022=E5=B9=B411=E6=9C=8818=E6=97=
+=A5 20:52
+> *=E6=94=B6=E4=BB=B6=E4=BA=BA:* =E9=9F=A9=E9=9B=AA=E5=B3=B0 <hanxuefeng@36=
+0.cn>
+> *=E6=8A=84=E9=80=81:* spice-devel@lists.freedesktop.org
+> *=E4=B8=BB=E9=A2=98:* Re: [Spice-devel] The second client cannot redirect=
+ USB
+>
+>
+>
+> Il giorno ven 18 nov 2022 alle ore 10:21 =E9=9F=A9=E9=9B=AA=E5=B3=B0 <han=
+xuefeng@360.cn> ha
+> scritto:
+>
+> Hello,
+>
+>
+>
+>    When I used two client to connect to a same one VM by spice with
+> setting =E2=80=9CSPICE_DEBUG_ALLOW_MC=3D1=E2=80=9D, the two clients worke=
+d, and the first
+> client could redirect USB. However, the second client could not redirect
+> USB device, It shows like the picture:
+>
+>
+>
+> I=E2=80=99m sure that there=E2=80=99re enough channels for USB redirectio=
+n.
+>
+>
+>
+> Is this a problem? Or Is there any way that could resolve the second clie=
+nt
+> =E2=80=99s USB redirection problem?
+>
+>
+>
+> Thanks and Regards,
+>
+>
+>
+> Xuefeng
+>
+>
+>
+> Currently all character device channels (including USB one) do not suppor=
+t
+> multiple channels, so the first client takes them all.
+>
+>
+>
+> Frediano
+>
+
+--000000000000909abb05edfa731f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">Il giorno lun 21 nov 2022 alle ore 08:44 =E9=9F=A9=E9=9B=AA=E5=B3=B0=
+ &lt;<a href=3D"mailto:hanxuefeng@360.cn">hanxuefeng@360.cn</a>&gt; ha scri=
+tto:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div class=
+=3D"msg7338333656256773154">
+
+
+
+
+
+<div lang=3D"ZH-CN">
+<div class=3D"m_7338333656256773154WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:=E7=AD=
+=89=E7=BA=BF" lang=3D"EN-US">Hi,<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:=E7=AD=
+=89=E7=BA=BF" lang=3D"EN-US">Thanks for your reply. But If I want to suppor=
+t multiple channels for USB redirection when multiple clients connect to a =
+same VM, =C2=A0do you know which project includes the code about
+ USB channels ?=C2=A0=C2=A0 Spice ? or QEMU?<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:=E7=AD=
+=89=E7=BA=BF" lang=3D"EN-US"><u></u>=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Thanks and Regards,<u></u><u></=
+u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:=E7=AD=
+=89=E7=BA=BF" lang=3D"EN-US">Xuefeng<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-family:=E7=AD=
+=89=E7=BA=BF;color:rgb(31,73,125)" lang=3D"EN-US"><u></u></span></p></div><=
+/div></div></blockquote><div><br></div><div>Channels are a SPICE thing. But=
+ you will find surprisingly few code in SPICE (at least the server). The re=
+ason is that SPICE in this case mostly forwards data from/to usbredir (whic=
+h is another project). In details Qemu uses usbredir to handle a USB device=
+ for the guest. This device is attached to spice-server which handles SPICE=
+ channels. A spice client (like spice-gtk) connects to SPICE USB channels a=
+nd forward data from either a physical device or an emulated device (curren=
+tly spice-gtk handles an emulated CD/DVD device).</div><div>Currently each =
+SPICE USB channel is bound to a single Qemu device (I doubt it makes sense =
+to bind it to multiple devices but it could in theory not be bound to a dev=
+ice).</div><div>Note that spice-server currently only forward data (present=
+ed like a pipe/stream) to/from client to the device, the hard lifting is ma=
+de by Qemu/usbredir.<br></div><div><br></div><div>Frediano<br></div><div><b=
+r></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
+;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div class=3D"msg=
+7338333656256773154"><div lang=3D"ZH-CN"><div class=3D"m_733833365625677315=
+4WordSection1"><p class=3D"MsoNormal"><span style=3D"font-size:10.5pt;font-=
+family:=E7=AD=89=E7=BA=BF;color:rgb(31,73,125)" lang=3D"EN-US">=C2=A0<u></u=
+></span></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:11pt;font-family:=E7=AD=
+=89=E7=BA=BF">=E5=8F=91=E4=BB=B6=E4=BA=BA<span lang=3D"EN-US">:</span></spa=
+n></b><span style=3D"font-size:11pt;font-family:=E7=AD=89=E7=BA=BF" lang=3D=
+"EN-US"> Frediano Ziglio &lt;<a href=3D"mailto:freddy77@gmail.com" target=
+=3D"_blank">freddy77@gmail.com</a>&gt;
+<br>
+</span><b><span style=3D"font-size:11pt;font-family:=E7=AD=89=E7=BA=BF">=E5=
+=8F=91=E9=80=81=E6=97=B6=E9=97=B4<span lang=3D"EN-US">:</span></span></b><s=
+pan style=3D"font-size:11pt;font-family:=E7=AD=89=E7=BA=BF" lang=3D"EN-US">=
+ 2022</span><span style=3D"font-size:11pt;font-family:=E7=AD=89=E7=BA=BF">=
+=E5=B9=B4<span lang=3D"EN-US">11</span>=E6=9C=88<span lang=3D"EN-US">18</sp=
+an>=E6=97=A5<span lang=3D"EN-US">
+ 20:52<br>
+</span><b>=E6=94=B6=E4=BB=B6=E4=BA=BA<span lang=3D"EN-US">:</span></b><span=
+ lang=3D"EN-US"> </span>=E9=9F=A9=E9=9B=AA=E5=B3=B0<span lang=3D"EN-US"> &l=
+t;<a href=3D"mailto:hanxuefeng@360.cn" target=3D"_blank">hanxuefeng@360.cn<=
+/a>&gt;<br>
+</span><b>=E6=8A=84=E9=80=81<span lang=3D"EN-US">:</span></b><span lang=3D"=
+EN-US"> <a href=3D"mailto:spice-devel@lists.freedesktop.org" target=3D"_bla=
+nk">spice-devel@lists.freedesktop.org</a><br>
+</span><b>=E4=B8=BB=E9=A2=98<span lang=3D"EN-US">:</span></b><span lang=3D"=
+EN-US"> Re: [Spice-devel] The second client cannot redirect USB<u></u><u></=
+u></span></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><u></u>=C2=A0<u></u></span></p>
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Il giorno ven 18 nov 2022 alle =
+ore 10:21 </span>
+=E9=9F=A9=E9=9B=AA=E5=B3=B0<span lang=3D"EN-US"> &lt;<a href=3D"mailto:hanx=
+uefeng@360.cn" target=3D"_blank">hanxuefeng@360.cn</a>&gt; ha scritto:<u></=
+u><u></u></span></p>
+</div>
+<blockquote style=3D"border-color:currentcolor currentcolor currentcolor rg=
+b(204,204,204);border-style:none none none solid;border-width:medium medium=
+ medium 1pt;padding:0cm 0cm 0cm 6pt;margin-left:4.8pt;margin-right:0cm">
+<div>
+<div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Hello,<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0=C2=A0 When I used two cl=
+ient to connect to a same one VM by spice with setting
+</span>=E2=80=9C<span lang=3D"EN-US">SPICE_DEBUG_ALLOW_MC=3D1</span>=E2=80=
+=9D<span lang=3D"EN-US">, the two clients worked, and the first client coul=
+d redirect USB. However, the second client could not redirect USB device, I=
+t shows like the picture:<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><img style=3D"width: 4.9479in; =
+height: 2.6145in;" id=3D"m_7338333656256773154m_4874315976305516369=E5=9B=
+=BE=E7=89=87_x0020_1" src=3D"cid:1849a2e634a4cff311" width=3D"475" height=
+=3D"251" border=3D"0"><u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">I</span>=E2=80=99<span lang=3D"=
+EN-US">m sure that there</span>=E2=80=99<span lang=3D"EN-US">re enough chan=
+nels for USB redirection.<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Is this a problem? Or Is there =
+any way that could resolve the second client</span>=E2=80=99<span lang=3D"E=
+N-US">s USB redirection problem?<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Thanks and Regards,<u></u><u></=
+u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">=C2=A0<u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Xuefeng<u></u><u></u></span></p=
+>
+</div>
+</div>
+</div>
+</blockquote>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><u></u>=C2=A0<u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Currently all character device =
+channels (including USB one) do not support multiple channels, so the first=
+ client takes them all.<u></u><u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US"><u></u>=C2=A0<u></u></span></p>
+</div>
+<div>
+<p class=3D"MsoNormal"><span lang=3D"EN-US">Frediano <u></u><u></u></span><=
+/p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div></blockquote></div></div>
+
+--000000000000909abb05edfa731f--
+
+--000000000000909abd05edfa7320
 Content-Type: image/png; name="image001.png"
-Content-Description: image001.png
-Content-Disposition: inline; filename="image001.png"; size=29613;
-	creation-date="Mon, 21 Nov 2022 08:44:49 GMT";
-	modification-date="Mon, 21 Nov 2022 08:44:49 GMT"
-Content-ID: <image001.png@01D8FDC6.C4D82080>
+Content-Disposition: inline; filename="image001.png"
 Content-Transfer-Encoding: base64
+Content-ID: <1849a2e634a4cff311>
+X-Attachment-Id: 1849a2e634a4cff311
 
 iVBORw0KGgoAAAANSUhEUgAAAdsAAAD7CAIAAACtw6nhAAAAAXNSR0IArs4c6QAAc2dJREFUeF7t
 fQd8I8X1/+6qWa6ybLn3bp995+uV6xUOjoOjE3pCCQSSEJJ/En6kF0hIgAQIBAi9HHBwcJ3rvdh3
@@ -757,5 +838,4 @@ x2FTo7JBX2Heo3yMeGTT4GrBxeyj4W86a2HUm/6Fr3otph+6L0749oqxemS1Hruqxj6rxz66rKq8
 K/SHxwfvTiVWxEGieKR8+a+nS/SZCaEWj1xzpfmhn/+099xH39RGPHj3hj3vPZ+44vvp6lNvnRm6
 956tScGj8m3s3uygZ3P9ZPLIlZV88YgreeR+nUc1iYj5AAL+Ikwwxod2sSNizkUah7ljH8DATRbG
 YIMWNzW15gT/H6+uj5/VMz/qAAAAAElFTkSuQmCC
-
---_004_4eb04086e700409e8ff9f2bc3dc18c55360cn_--
+--000000000000909abd05edfa7320--
