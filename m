@@ -1,59 +1,62 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 757AD6360BE
-	for <lists+spice-devel@lfdr.de>; Wed, 23 Nov 2022 14:58:18 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7219C6363C1
+	for <lists+spice-devel@lfdr.de>; Wed, 23 Nov 2022 16:31:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EFEE410E559;
-	Wed, 23 Nov 2022 13:58:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC1C610E594;
+	Wed, 23 Nov 2022 15:31:57 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4AF9910E207
- for <spice-devel@lists.freedesktop.org>; Wed, 23 Nov 2022 13:58:08 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C946F10E590
+ for <spice-devel@lists.freedesktop.org>; Wed, 23 Nov 2022 15:31:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1669211887;
+ s=mimecast20190719; t=1669217513;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=9cCD2F03LoGcOp6JhCtnRJaynDQgV/ocyLHmYmcEr/U=;
- b=KYLQXFFG9nqKfcNpmSx5CzrGoa2K9xAyuNb9zSyVB5oH34gT5REnzdlz2A1HhLGt/9Dfbv
- TJwRrLaS7dyT9qFoZK6aaetqv76bYi+sTlcQYEM0PF2M2r8VSufKctlarO/num7iRKHlq5
- ZGWp/OfPdQrfny551NDkjMq/lJq4Cdg=
+ bh=FGpSN2zphFfE7PAqgloC5dd73+J3LWcC/UiRhFbCZBw=;
+ b=WWLkAPQlJB+1mGfnDA8o58TWQ3iMowL2D7ntXfj4fqBeW1C48zG1DkZafu/LKHb6chkszA
+ tkNmOITN/Zb8in/kDYkGPoWH4Rhc41NX6GRN4fMYOPD2n41bMkWoErUB1aHJsuebz5obqX
+ 26P4Hc4+PzZis1PUTthPlRd/YLzzI1k=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-596-KApVrKfaNb6te3vJ8PCFeQ-1; Wed, 23 Nov 2022 08:58:03 -0500
-X-MC-Unique: KApVrKfaNb6te3vJ8PCFeQ-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-19-NP7bLHufMPCJ6klSwA97MQ-1; Wed, 23 Nov 2022 10:31:47 -0500
+X-MC-Unique: NP7bLHufMPCJ6klSwA97MQ-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3BD77101E153;
- Wed, 23 Nov 2022 13:58:03 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C7838811E67;
+ Wed, 23 Nov 2022 15:31:46 +0000 (UTC)
 Received: from localhost (ovpn-194-72.brq.redhat.com [10.40.194.72])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C84FC202279C;
- Wed, 23 Nov 2022 13:58:01 +0000 (UTC)
-Date: Wed, 23 Nov 2022 14:57:59 +0100
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6EF8C40C6EC5;
+ Wed, 23 Nov 2022 15:31:46 +0000 (UTC)
+Date: Wed, 23 Nov 2022 16:31:45 +0100
 From: Victor Toso <victortoso@redhat.com>
-To: =?utf-8?B?6Z+p6Zuq5bOw?= <hanxuefeng@360.cn>
-Message-ID: <20221123135759.5k5otztatk26dmjj@tapioca>
-References: <3d27841837ae439d91300c2d5b7056b0@360.cn>
- <CAHt6W4fRZoR5+E3rptGzcQ9R_DfdZ3g=G2rmhqY7Y4s6ZRBx1w@mail.gmail.com>
- <4eb04086e700409e8ff9f2bc3dc18c55@360.cn>
- <20221122084507.swnuf55txt3ikgz5@tapioca>
- <64df62c2dea54c108503fc0495390e9f@360.cn>
+To: Carlos =?utf-8?B?R29uesOhbGV6?= <piteccelaya@gmail.com>
+Message-ID: <20221123153145.afmmtlqnkymudu7h@tapioca>
+References: <CAHt6W4eysYyfv-9_W6n5YRv5qSd0rU46=vGf25fAO5s342a3aw@mail.gmail.com>
+ <CAGeBE=xYOdDo40ec=T=auNhj-nq8nHXuOWZ6Tt+HT-gniu=YcQ@mail.gmail.com>
+ <CAHt6W4cJW-Lj_rE+c9YqrDSft5f0t4RJ41z4bv4y2gVYyyfwNQ@mail.gmail.com>
+ <CAAg9qJ3bMd=3_YD4UJ1rHDmm3s7L5NG047eioeuJ209s50MAKg@mail.gmail.com>
+ <CAGeBE=w5OVLoKD_E72HdacqCivp=ZS2tuaDoHMJTB82-68W0-A@mail.gmail.com>
+ <CAAg9qJ20nfDLfx_8Hboyw-GZpU5t4mrKH7+4L_Ne-wOrqbzEZg@mail.gmail.com>
+ <CAGeBE=zLNuypqM296NKHbiVXf-u4hcK3MbTxXG34eOeDSgG_cg@mail.gmail.com>
+ <CAGeBE=wNsck1_L88kV=oAVVe5LThruT4SZEJwuZPXrEVds-6tQ@mail.gmail.com>
+ <CAAg9qJ1uLht3--b4OwQpiGPj2q=8FZvSF19VG+pQPWTPKz_RzA@mail.gmail.com>
+ <CAGeBE=zqf-yb56MWYuok1ych_hsJAWsbwXB0zuFF834Vs2hDRw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="6pzdaqrvpifmvb2x"
+ protocol="application/pgp-signature"; boundary="ug3rbyqpxm7eae7c"
 Content-Disposition: inline
-In-Reply-To: <64df62c2dea54c108503fc0495390e9f@360.cn>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
-Subject: Re: [Spice-devel] 
- =?utf-8?b?562U5aSNOiAg562U5aSNOiBUaGUgc2Vjb25kIGNs?=
- =?utf-8?q?ient_cannot_redirect_USB?=
+In-Reply-To: <CAGeBE=zqf-yb56MWYuok1ych_hsJAWsbwXB0zuFF834Vs2hDRw@mail.gmail.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+Subject: Re: [Spice-devel] Vdagent not working on a Debian guest
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,151 +68,88 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 
---6pzdaqrvpifmvb2x
-Content-Type: text/plain; charset=utf-8
+--ug3rbyqpxm7eae7c
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On Wed, Nov 23, 2022 at 01:19:10PM +0000, =E9=9F=A9=E9=9B=AA=E5=B3=B0 wrote:
-> Hi Victor,
+On Mon, Oct 31, 2022 at 11:52:15PM +0000, Carlos Gonz=E1lez wrote:
+> After trying it yet again, quoting myself:
+> >>As already mentioned, the -f and -o options are serving of absolutely
+> nothing
 >
-> Thanks for your solution. I just find 'usbredirtestclient' in
-> usbredir project, the client has the feature connect to
-> server(QEMU),  and it could connect to server successfully, but
-> I cannot find how to redirect usb device from client to VM. It
-> seems that I need to write some code to redirect USB with
-> usbredir, right ?
+> Repeat: *absolutely nothing*
+> Same any other directory
+>
+> Spice-vdagent's logs say nothing at all.
+>
+> The only ones saying something are remote-viewer and qemu-monitor: "file
+> transfer is disabled".
+>
+> Will you ask me to repeat myself some more times?
+> Thanks for that
 
-usbredirtestclient is a testing client, not what you want.
+=2E..
 
-Try usbredirect binary from usbredir-tools package (Fedora 37):
-https://koji.fedoraproject.org/koji/buildinfo?buildID=3D2088721
+> El jue, 27 oct 2022 a las 16:55, Uri Lublin (<uril@redhat.com>) escribi=
+=F3:
+> >>> Now, could we focus on the nasty bug with file
+> >>> transferring? As already mentioned, the -f and -o options
+> >>> are serving of absolutely nothing...
 
-Or just compile usbredir project and test it out:
+Just to clarify, the file transfer process is a client <-> guest
+message, that means that you could be having a problem in your
+client machine and/or in the guest machine.
 
-$ git clone https://gitlab.freedesktop.org/spice/usbredir.git
-$ cd usbredir
-$ meson . build -Dtools=3Denabled
-$ ninja -C build
-$ sudo ./build/tools/usbredirect --to localhost:5550 --device 8644:8003
+I recall reading that you had an agent not connected type of
+error in the client, which means any feature needing the agent
+would not work. I assume that this is been solved, otherwise you
+wouldn't get arbitrary resolution working.
+
+Could you please check what remote-viewer --spice-debug outputs
+when you try to drag a file in the client machine?
+
+At the same time, if you could have both logs from spice-vdagentd
+(which receives spice client's messages) and spice-vdagent (which
+is the one that copies the data to destination, that should
+either be glib's G_USER_DIRECTORY_DESKTOP or
+G_USER_DIRECTORY_DOWNLOAD), that would make it easy to pinpoint
+the issue.
+
+=46rom the other threads, I see that you can run the agent's with
+debug command line option. The only other thing that I'd mention
+is that permissions/paths play their own role in making things
+work, but the logs should point to the right direction.
 
 Cheers,
 Victor
 
->
-> Thanks and Regards,
-> Xuefeng
->=20
->=20
-> -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
-> =E5=8F=91=E4=BB=B6=E4=BA=BA: Victor Toso <victortoso@redhat.com>=20
-> =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2022=E5=B9=B411=E6=9C=8822=E6=97=A5=
- 16:45
-> =E6=94=B6=E4=BB=B6=E4=BA=BA: =E9=9F=A9=E9=9B=AA=E5=B3=B0 <hanxuefeng@360.=
-cn>
-> =E6=8A=84=E9=80=81: Frediano Ziglio <freddy77@gmail.com>; spice-devel@lis=
-ts.freedesktop.org
-> =E4=B8=BB=E9=A2=98: Re: [Spice-devel] =E7=AD=94=E5=A4=8D: The second clie=
-nt cannot redirect USB
->=20
-> Hi,
->=20
-> On Mon, Nov 21, 2022 at 08:44:49AM +0000, =E9=9F=A9=E9=9B=AA=E5=B3=B0 wro=
-te:
-> > Hi,
-> > Thanks for your reply. But If I want to support multiple channels for=
-=20
-> > USB redirection when multiple clients connect to a same VM,  do you=20
-> > know which project includes the code about USB
-> > channels ?   Spice ? or QEMU?
->=20
-> As Frediano pointed out, USB redirection with SPICE is bounded to the fir=
-st connected SPICE client.
->=20
-> You can reconfigure your VM to have a TCP backend for your USB devices, t=
-he libvirt change would look like this:
->=20
->     <redirdev bus=3D'usb' type=3D'tcp'>
->         <source mode=3D'bind' host=3D'localhost' service=3D'5550'/>
->         <protocol type=3D'raw'/>
->         <address type=3D'usb' bus=3D'0' port=3D'3'/>
->     </redirdev>
->=20
-> And then, you can use usbredirect (from usbredir project) to redirect USB=
- devices from multiple clients.
->=20
-> Note that this is will use plain usbredir protocol over TCP, it isn't sec=
-ure channel like what SPICE provides.
->=20
-> Cheers,
-> Victor
->=20
-> > Thanks and Regards,
-> > Xuefeng
-> >
-> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Frediano Ziglio <freddy77@gmail.com>
-> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2022=E5=B9=B411=E6=9C=8818=E6=97=
-=A5 20:52
-> > =E6=94=B6=E4=BB=B6=E4=BA=BA: =E9=9F=A9=E9=9B=AA=E5=B3=B0 <hanxuefeng@36=
-0.cn>
-> > =E6=8A=84=E9=80=81: spice-devel@lists.freedesktop.org
-> > =E4=B8=BB=E9=A2=98: Re: [Spice-devel] The second client cannot redirect=
- USB
-> >
-> > Il giorno ven 18 nov 2022 alle ore 10:21 =E9=9F=A9=E9=9B=AA=E5=B3=B0 <h=
-anxuefeng@360.cn<mailto:hanxuefeng@360.cn>> ha scritto:
-> > Hello,
-> >
-> >    When I used two client to connect to a same one VM by spice
-> >    with setting =E2=80=9CSPICE_DEBUG_ALLOW_MC=3D1=E2=80=9D, the two cli=
-ents
-> >    worked, and the first client could redirect USB. However,
-> >    the second client could not redirect USB device, It shows
-> >    like the picture: [cid:image001.png@01D8FDC6.C4D82080]
-> >=20
-> > I=E2=80=99m sure that there=E2=80=99re enough channels for USB redirect=
-ion.
-> >=20
-> > Is this a problem? Or Is there any way that could resolve the second cl=
-ient=E2=80=99s USB redirection problem?
-> >=20
-> > Thanks and Regards,
-> >=20
-> > Xuefeng
-> >=20
-> > Currently all character device channels (including USB one) do not supp=
-ort multiple channels, so the first client takes them all.
-> >=20
-> > Frediano
->=20
->=20
-
---6pzdaqrvpifmvb2x
+--ug3rbyqpxm7eae7c
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmN+JucACgkQl9kSPeN6
-SE8XDg/9HOfTkxDXs9gLhMDwe2yVEDdKGywMLeUS9i35LDM/7cVAINF0y9eywucl
-QPa9gxIc9cv7K80RtdA0UrAf3/M55ym6fn67JH7kVpXH9ObWgg806q4nGPBJF7dN
-v+A7ran4TDJFUdDPw4vr9rbBXCl+PNnaGwp/T0Mhw/fmlcd3d1/OhPcYY8yWe1jQ
-dsTY+Ryx7WTG06zO66vHhtbOqRRt6OeumlLXHPA0XDQW42xmYtd8JqXx6yv7pWnY
-S3Jj2/GYbV6GGr+7mTufE67CJm+TcDIu8H6DZNvsYRO1QCJUZdgnyyPlWGFORsvx
-nfqLugJIgEbfz5A4+8X6hnuLhX4m2wRCbHJ32zrf0Zvs2Wv+ytTCwjqgsBEW/YWm
-i7uzuqtuYE3zdYWAO1Pk6qV6DzVKmT2DCDJrePtsp7YCyPaUQ9mKFIcjEK+P6spH
-/MCiqwGUqjtHLv+FI2WOAPntO3848kW1O2aptiGXm04f6F1a6ktExq9zDrTjVK67
-dxYK4sJls7ExFIq4xZFqlzdFazWtV64CZnbifk/hlOMeWBkEz2VhVvioua7GKejP
-OeTceNNfAbsVYoB9yxBRVEMlHJ56IByikMvt7MG5rfiSLcFd7YAEszRrOYMG5rcP
-W5q59pMdCmMKqu9OuoJKBnJl0UjBX0biGcm7w5PSjQu8bM/0vwk=
-=8vd9
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmN+POEACgkQl9kSPeN6
+SE+M/Q/+KU6XlsCkf3ZmX/3pLFLpJ7TteUorjd+qXxZCfnNMY4DD+J6J3aJIU7Eq
+I06STKKe+ITpYdBcPAU4Y58NXB76mHcqIXo3WTxwzwt/KMFs/9Bj7RfUafVqaMhD
+KHp59bLJQgDa/e3CAb3GpbpDEwx5+nIdx06gdFya25CisPycBFZbkAEZtTgF72Ld
+xbpLd9fd0CVY6dnpnQruqfO+IWzPFC65vFl4dkklhMUXSzkZyKKvzq+9igPl5/oA
+dkqbObODVoF58bSRhStYCR+0QE0t31YNJ9y+TJI/CmV1Vg6GWEjTc5mQ31Q9Xiz9
+RArEvCMphRHXEnE1LG9TUykvFU2MhEnrJg4x6iPQTs8t4fC1VolkUiHUmNRMPz4q
+4XNE7OSGykoeV+wynLl5GhroXVcD7hjZbsFFp4jg+N5b7TVmx8GUNVemEjvV2owH
+2gTMRAY+DjCYA1sQ/3W8QDxarqJQ3ArNtLkKNeDzpCJIJu/8+PscbDbpt1m3AuCj
+VCXzrqV3KQll0QMv0I1QyUmmAtY/FpZVADAVPN6Q5k+6V+yKrgmjDx/F729nMtJU
+rzEdj+WAt274oUN0/TjPqQgRxFPxOYP86bGUyxBQ0Jl6pKWZ3F2bf+q9EU6Esdf8
+7/GlNImtKvvChdL2k/LjMxx9Uf+XAZYnI3l4aKYChEoQCQ+woM8=
+=2bO7
 -----END PGP SIGNATURE-----
 
---6pzdaqrvpifmvb2x--
+--ug3rbyqpxm7eae7c--
 
