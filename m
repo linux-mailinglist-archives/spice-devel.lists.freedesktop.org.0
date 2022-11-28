@@ -2,52 +2,43 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1550639B39
-	for <lists+spice-devel@lfdr.de>; Sun, 27 Nov 2022 15:04:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FFB263A67D
+	for <lists+spice-devel@lfdr.de>; Mon, 28 Nov 2022 11:58:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7D7DD10E0CD;
-	Sun, 27 Nov 2022 14:04:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F3CE410E208;
+	Mon, 28 Nov 2022 10:58:12 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0316110E086
- for <spice-devel@lists.freedesktop.org>; Sun, 27 Nov 2022 14:01:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1669557693;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=IjGaRzLQZyI0Q+d/b5YliUJtXJzavrWt1N7Qfn0ev7Q=;
- b=eL+vZ3037lIfymV4NBLq3T+ZXyKX9KbVs5/PtKBsX3OXTo9VJ6uXPBM7cy8k80pXpI/72B
- riqYJ6pWLr371AS4bwn71pRt39GUDOBiOV2vOvjMnSG8IKkXRzwWucqMYsxIltNK2HRERU
- xZ+2PCPF5YHxsfWOJS0n6cW9v5PYDVw=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-126-KnC43p21NemWqSmpvoaSTg-1; Sun, 27 Nov 2022 09:01:28 -0500
-X-MC-Unique: KnC43p21NemWqSmpvoaSTg-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D78C1101A54E;
- Sun, 27 Nov 2022 14:01:27 +0000 (UTC)
-Received: from localhost (ovpn-192-44.brq.redhat.com [10.40.192.44])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E0C7E111F3B0;
- Sun, 27 Nov 2022 14:01:25 +0000 (UTC)
-Date: Sun, 27 Nov 2022 15:01:24 +0100
-From: Victor Toso <victortoso@redhat.com>
-To: =?utf-8?B?TMOpdmFpLCBEw6FuaWVs?= <leva@ecentrum.hu>
-Message-ID: <20221127140124.yvtvkwr4i5afbjut@tapioca>
+Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
+ [185.70.41.103])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4600310E208
+ for <spice-devel@lists.freedesktop.org>; Mon, 28 Nov 2022 10:58:07 +0000 (UTC)
+Date: Mon, 28 Nov 2022 10:57:45 +0000
+Authentication-Results: mail-41103.protonmail.ch;
+ dkim=pass (2048-bit key) header.d=ecentrum.hu header.i=@ecentrum.hu
+ header.b="iZaU4eHR"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ecentrum.hu;
+ s=protonmail3; t=1669633077; x=1669892277;
+ bh=H22lB0O9e4MMi3JzIhO8hvkDXPFeDNkG+Co7IxeUhAA=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=iZaU4eHRl/TCx+a5e639MuiU9iIT83P6rJf5xbxZLHumQ1iEb+6SQZd95/r4X4HSU
+ 5J8FIOAbsb0NBeNS488Mg5uTFe1JLr4w1uyFvJAQ91lzeFc3kHw+IwqwGK4kaWSl1U
+ Xw14qHnkdYfM4t/eY10a6qD72J5kTln9Br0vsdkEiOjDLGTmRgUZQw/l4bwpLRvEYw
+ Hk2S/8PhJ5v8Wub4ULBOwLdFLc2oT7FdZU70DnMgXX79jzAfUQMLl3DQYjSPrsfQjJ
+ 0fjWB/5kfWfNejC6M3xjYG3/9BIZqN0ZIBH20ONgfib97nnM9OQxfxnZRC/CdHCGut
+ PKpyEaB9CdPew==
+To: Victor Toso <victortoso@redhat.com>
+From: =?utf-8?Q?L=C3=A9vai=2C_D=C3=A1niel?= <leva@ecentrum.hu>
+Message-ID: <vz0q8-h-Gw5s9K7CTtQyKRv7iwCQFcpa-hBn5tmR4tckJpnqBEnTCqS3Q1Og8JZzB0rywFRbJgwsC0XELEEowLWJV1RPw1-1tWvqf_HJyzg=@ecentrum.hu>
+In-Reply-To: <20221127140124.yvtvkwr4i5afbjut@tapioca>
 References: <WefH0kcTW7ZcEJKoS36RR92aNVDLiXWVT8H27ogg3GaTK84TAGQdrOCZ9bP4URYdLMu4NQaAC1Kk89EX3h_en_QfyiVSR0jVQwAUwb_jOY4=@ecentrum.hu>
+ <20221127140124.yvtvkwr4i5afbjut@tapioca>
+Feedback-ID: 12434366:user:proton
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="3l7dhjxrytj6r6ty"
-Content-Disposition: inline
-In-Reply-To: <WefH0kcTW7ZcEJKoS36RR92aNVDLiXWVT8H27ogg3GaTK84TAGQdrOCZ9bP4URYdLMu4NQaAC1Kk89EX3h_en_QfyiVSR0jVQwAUwb_jOY4=@ecentrum.hu>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
-X-Mailman-Approved-At: Sun, 27 Nov 2022 14:04:17 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 Subject: Re: [Spice-devel] Trying to turn on gstreamer vaapi {en,de}coding
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -64,5102 +55,2944 @@ Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
---3l7dhjxrytj6r6ty
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-On Fri, Nov 25, 2022 at 12:32:57PM +0000, L=C3=A9vai, D=C3=A1niel wrote:
-> Hi all!
+On Sunday, November 27th, 2022 at 15:01, Victor Toso <victortoso@redhat.com=
+> wrote:
+[...]
 >
-> First time here, and was a bit hesitant to post tbh, as this is
-> not a "-devel" sort of thing, but reading through the posts
-> here it seamed there have been some technical questions
-> already, so I'm trying my luck. The post is a bit longwinded,
-> it has a bunch of debug outputs and parameters in-line, please
-> let me know if you prefer sharing these in another way.
-
-It is fine to post it here.
-
-> I'm using a couple of VMs with libvirt/qemu hosted on an Ubuntu
-> 22.04.1 LTS, accessing them via Spice from an Arch system. The
-> connection between Hypevisor and client are via Internet, so
-> despite 'localhost' being the host in the tests/examples below,
-> they don't actually run on the same system, it's just a tunnel
-> via `stunnel`.
-
-> What I wanted to do is speed up the display (drawing) so it
-> won't lag that much when browsing through spreadsheets and
-> using console (with small fonts, admittedly). The resolution
-> also plays a role in this at 2560x1440 (only one spice
-> display).
-
-Note that host video encoding will lag a bit. This is what you
-are trying. It should be better with spice-streaming-agent by
-setting up a video card to the guest, an example:
-
-    https://www.spice-space.org/demos.html#accelerated-spice-streaming-with=
--intel
-
-> What I've tried already is changing the spice section in the domain confi=
-guration in libvirt:
->     <graphics type=3D'spice' port=3D'5912' autoport=3D'no' listen=3D'127.=
-0.0.1'>
->       <listen type=3D'address' address=3D'127.0.0.1'/>
->       <image compression=3D'auto_glz'/>
->       <jpeg compression=3D'never'/>
->       <zlib compression=3D'never'/>
->       <streaming mode=3D'all'/>
->       <filetransfer enable=3D'yes'/>
->       <gl enable=3D'no'/>
->     </graphics>
-
-> Which translates into this -spice qemu parameter:
-> -spice port=3D5912,addr=3D127.0.0.1,disable-ticketing=3Don,image-compress=
-ion=3Dauto_glz,jpeg-wan-compression=3Dnever,zlib-glz-wan-compression=3Dneve=
-r,streaming-video=3Dall,seamless-migration=3Don
-
-> ... with the complete command as follows:
-> /usr/bin/qemu-system-x86_64 -name guest=3Darch,debug-threads=3Don -S -obj=
-ect {"qom-type":"secret","id":"masterKey0","format":"raw","file":"/var/lib/=
-libvirt/qemu/domain-22-arch/master-key.aes"} -machine pc-q35-4.2,usb=3Doff,=
-vmport=3Doff,dump-guest-core=3Doff,memory-backend=3Dpc.ram -accel kvm -cpu =
-Cooperlake,ss=3Don,vmx=3Don,pdcm=3Don,hypervisor=3Don,tsc-adjust=3Don,sha-n=
-i=3Don,umip=3Don,waitpkg=3Don,gfni=3Don,vaes=3Don,vpclmulqdq=3Don,rdpid=3Do=
-n,movdiri=3Don,movdir64b=3Don,fsrm=3Don,md-clear=3Don,avx-vnni=3Don,xsaves=
-=3Don,ibpb=3Don,ibrs=3Don,amd-stibp=3Don,amd-ssbd=3Don,hle=3Doff,rtm=3Doff,=
-avx512f=3Doff,avx512dq=3Doff,avx512cd=3Doff,avx512bw=3Doff,avx512vl=3Doff,a=
-vx512vnni=3Doff,avx512-bf16=3Doff,taa-no=3Doff -m 16384 -object {"qom-type"=
-:"memory-backend-ram","id":"pc.ram","size":17179869184} -overcommit mem-loc=
-k=3Doff -smp 4,sockets=3D4,cores=3D1,threads=3D1 -no-user-config -nodefault=
-s -chardev socket,id=3Dcharmonitor,fd=3D38,server=3Don,wait=3Doff -mon char=
-dev=3Dcharmonitor,id=3Dmonitor,mode=3Dcontrol -rtc base=3Dutc,driftfix=3Dsl=
-ew -global kvm-pit.lost_tick_policy=3Ddelay -no-hpet -no-shutdown -global I=
-CH9-LPC.disable_s3=3D1 -global ICH9-LPC.disable_s4=3D1 -boot strict=3Don -d=
-evice pcie-root-port,port=3D16,chassis=3D1,id=3Dpci.1,bus=3Dpcie.0,multifun=
-ction=3Don,addr=3D0x2 -device pcie-root-port,port=3D17,chassis=3D2,id=3Dpci=
-=2E2,bus=3Dpcie.0,addr=3D0x2.0x1 -device pcie-root-port,port=3D18,chassis=
-=3D3,id=3Dpci.3,bus=3Dpcie.0,addr=3D0x2.0x2 -device pcie-root-port,port=3D1=
-9,chassis=3D4,id=3Dpci.4,bus=3Dpcie.0,addr=3D0x2.0x3 -device pcie-root-port=
-,port=3D20,chassis=3D5,id=3Dpci.5,bus=3Dpcie.0,addr=3D0x2.0x4 -device pcie-=
-root-port,port=3D21,chassis=3D6,id=3Dpci.6,bus=3Dpcie.0,addr=3D0x2.0x5 -dev=
-ice pcie-root-port,port=3D22,chassis=3D7,id=3Dpci.7,bus=3Dpcie.0,addr=3D0x2=
-=2E0x6 -device pcie-root-port,port=3D23,chassis=3D8,id=3Dpci.8,bus=3Dpcie.0=
-,addr=3D0x2.0x7 -device qemu-xhci,p2=3D15,p3=3D15,id=3Dusb,bus=3Dpci.2,addr=
-=3D0x0 -device virtio-serial-pci,id=3Dvirtio-serial0,bus=3Dpci.3,addr=3D0x0=
- -blockdev {"driver":"file","filename":"/var/lib/libvirt/images/archlinux.q=
-cow2","node-name":"libvirt-2-storage","auto-read-only":true,"discard":"unma=
-p"} -blockdev {"node-name":"libvirt-2-format","read-only":false,"driver":"q=
-cow2","file":"libvirt-2-storage","backing":null} -device virtio-blk-pci,bus=
-=3Dpci.4,addr=3D0x0,drive=3Dlibvirt-2-format,id=3Dvirtio-disk0,bootindex=3D=
-1 -device ide-cd,bus=3Dide.0,id=3Dsata0-0-0 -netdev tap,fd=3D39,id=3Dhostne=
-t0,vhost=3Don,vhostfd=3D41 -device virtio-net-pci,netdev=3Dhostnet0,id=3Dne=
-t0,bus=3Dpci.1,addr=3D0x0 -chardev pty,id=3Dcharserial0 -device isa-serial,=
-chardev=3Dcharserial0,id=3Dserial0 -chardev socket,id=3Dcharchannel0,fd=3D3=
-5,server=3Don,wait=3Doff -device virtserialport,bus=3Dvirtio-serial0.0,nr=
-=3D1,chardev=3Dcharchannel0,id=3Dchannel0,name=3Dorg.qemu.guest_agent.0 -ch=
-ardev spicevmc,id=3Dcharchannel1,name=3Dvdagent -device virtserialport,bus=
-=3Dvirtio-serial0.0,nr=3D2,chardev=3Dcharchannel1,id=3Dchannel1,name=3Dcom.=
-redhat.spice.0 -device usb-tablet,id=3Dinput0,bus=3Dusb.0,port=3D1 -device =
-virtio-keyboard-pci,id=3Dinput2,bus=3Dpci.7,addr=3D0x0 -device usb-mouse,id=
-=3Dinput3,bus=3Dusb.0,port=3D4 -audiodev {"id":"audio1","driver":"spice"} -=
-spice port=3D5912,addr=3D127.0.0.1,disable-ticketing=3Don,image-compression=
-=3Dauto_glz,jpeg-wan-compression=3Dnever,zlib-glz-wan-compression=3Dnever,s=
-treaming-video=3Dall,seamless-migration=3Don -device virtio-vga,id=3Dvideo0=
-,max_outputs=3D1,bus=3Dpcie.0,addr=3D0x1 -device ich9-intel-hda,id=3Dsound0=
-,bus=3Dpcie.0,addr=3D0x1b -device hda-duplex,id=3Dsound0-codec0,bus=3Dsound=
-0.0,cad=3D0,audiodev=3Daudio1 -chardev spicevmc,id=3Dcharredir0,name=3Dusbr=
-edir -device usb-redir,chardev=3Dcharredir0,id=3Dredir0,bus=3Dusb.0,port=3D=
-2 -chardev spicevmc,id=3Dcharredir1,name=3Dusbredir -device usb-redir,chard=
-ev=3Dcharredir1,id=3Dredir1,bus=3Dusb.0,port=3D3 -device virtio-balloon-pci=
-,id=3Dballoon0,bus=3Dpci.5,addr=3D0x0 -object {"qom-type":"rng-random","id"=
-:"objrng0","filename":"/dev/urandom"} -device virtio-rng-pci,rng=3Dobjrng0,=
-id=3Drng0,bus=3Dpci.6,addr=3D0x0 -sandbox on,obsolete=3Ddeny,elevateprivile=
-ges=3Ddeny,spawn=3Ddeny,resourcecontrol=3Ddeny -msg timestamp=3Don
-
-> Basically, I thought turning 'streaming mode'/'streaming-video'
-> to 'all' would make spice think it needs to stream the whole
-> screen content regardless of its heuristics detecting a video
-> stream.
-
-I'm replying by memory here, so I might be a little off. But just
-to add a bit more info. The streaming mode set to 'all' means
-that all regions being updated too often in the Display are
-included in one video stream that encapsulate those regions. The
-'filter' mode, iirc, would split the different regions in
-different video streams.
-
-The whole screen streaming only happens if needed, even with
-mode set to 'all'.
-
-> I thought if I could enable HW encoding/decoding with
-> these options, I'd get better performance out of it.
-
-Yeah, that's a fair assumption. The main issue in general is with
-latency that video encoding adds, be it software or hardware.
-
-> Version details:
-> Hypervisor host:
-> gstreamer1.0-plugins-bad:amd64 1.20.3-0ubuntu1
-> gstreamer1.0-plugins-bad-apps 1.20.3-0ubuntu1
-> gstreamer1.0-plugins-base:amd64 1.20.1-1
-> gstreamer1.0-plugins-base-apps 1.20.1-1
-> gstreamer1.0-plugins-good:amd64 1.20.3-0ubuntu1
-> gstreamer1.0-plugins-ugly:amd64 1.20.1-1
-> gstreamer1.0-vaapi:amd64 1.20.1-1ubuntu1
-> libgstreamer-plugins-bad1.0-0:amd64 1.20.3-0ubuntu1
-> libgstreamer-plugins-base1.0-0:amd64 1.20.1-1
-> libgstreamer-plugins-good1.0-0:amd64 1.20.3-0ubuntu1
-> libgstreamer1.0-0:amd64 1.20.3-0ubuntu1
-> libvirt-daemon 8.0.0-1ubuntu7.3
-> qemu-system-x86 1:6.2+dfsg-2ubuntu6.5
-> intel-media-va-driver-non-free:amd64  22.3.1+ds1-1
+> From what I could see, you have set the h264 video-codec
+> preference at 13:06:46 and terminated spicy around 13:06:49.
 >
-> Client:
-> gst-plugins-bad 1.20.4-3
-> gst-plugins-bad-libs 1.20.4-3
-> gst-plugins-base 1.20.4-3
-> gst-plugins-base-libs 1.20.4-3
-> gst-plugins-good 1.20.4-3
-> gst-plugins-ugly 1.20.4-3
-> gstreamer 1.20.4-3
-> gstreamer-vaapi 1.20.4-3
-> spice 0.15.1-1
-> virt-viewer 11.0-2
-> intel-media-driver 22.4.4-2
+> So, perhaps the first issue is the assumption that as soon as you
+> set the video-codec preference, that the stream will start. It'll
+> not. The streaming will happen based on update frequency on the
+> display. For example, a clock updating the seconds, once every
+> second, will not create a video streaming. You should try running
+> an App that has high update frequency or just a video.
 >
-> As part of troubleshooting here, I checked if I have the
-> necessary codecs/encoders/decoders with gstreamer on the
-> different systems:
+> GStreamer needs to be enabled in spice-server at build time too.
+> You can check with ldd in libspice-server.so...
 >
-> On the hypervisor host (with Intel Alderlake (12th gen) graphics):
+> So, the logs from spice-server would be useful to know what issue
+> might have happened at encoding if it doesn't work.
 >
-> As my unrpivileged user:
-> $ gst-inspect-1.0 |grep -F -i vaapi
-> vaapi:  vaapiav1dec: VA-API AV1 decoder
-> vaapi:  vaapidecodebin: VA-API Decode Bin
-> vaapi:  vaapih264dec: VA-API H264 decoder
-> vaapi:  vaapih264enc: VA-API H264 encoder
-> vaapi:  vaapih265dec: VA-API H265 decoder
-> vaapi:  vaapih265enc: VA-API H265 encoder
-> vaapi:  vaapijpegdec: VA-API JPEG decoder
-> vaapi:  vaapijpegenc: VA-API JPEG encoder
-> vaapi:  vaapimpeg2dec: VA-API MPEG2 decoder
-> vaapi:  vaapimpeg2enc: VA-API MPEG-2 encoder
-> vaapi:  vaapioverlay: VA-API overlay
-> vaapi:  vaapipostproc: VA-API video postprocessing
-> vaapi:  vaapisink: VA-API sink
-> vaapi:  vaapivc1dec: VA-API VC1 decoder
-> vaapi:  vaapivp9dec: VA-API VP9 decoder
-> vaapi:  vaapivp9enc: VA-API VP9 encoder
+> Just trying to give you some ideas and directions to go.
 >
-> As the libvirt user that runs qemu:
-> # sudo -u libvirt-qemu gst-inspect-1.0 |grep -F -i vaapi
-> vaapi:  vaapiav1dec: VA-API AV1 decoder
-> vaapi:  vaapidecodebin: VA-API Decode Bin
-> vaapi:  vaapih264dec: VA-API H264 decoder
-> vaapi:  vaapih264enc: VA-API H264 encoder
-> vaapi:  vaapih265dec: VA-API H265 decoder
-> vaapi:  vaapih265enc: VA-API H265 encoder
-> vaapi:  vaapijpegdec: VA-API JPEG decoder
-> vaapi:  vaapijpegenc: VA-API JPEG encoder
-> vaapi:  vaapimpeg2dec: VA-API MPEG2 decoder
-> vaapi:  vaapimpeg2enc: VA-API MPEG-2 encoder
-> vaapi:  vaapioverlay: VA-API overlay
-> vaapi:  vaapipostproc: VA-API video postprocessing
-> vaapi:  vaapisink: VA-API sink
-> vaapi:  vaapivc1dec: VA-API VC1 decoder
-> vaapi:  vaapivp9dec: VA-API VP9 decoder
-> vaapi:  vaapivp9enc: VA-API VP9 encoder
->
-> On the client (with Intel CometLake (10th gen) graphics):
-> As my user running the client (spicy/remote-viewer):
-> $ gst-inspect-1.0 |grep -F -i vaapi
-> vaapi:  vaapidecodebin: VA-API Decode Bin
-> vaapi:  vaapih264dec: VA-API H264 decoder
-> vaapi:  vaapih264enc: VA-API H264 encoder
-> vaapi:  vaapih265dec: VA-API H265 decoder
-> vaapi:  vaapih265enc: VA-API H265 encoder
-> vaapi:  vaapijpegdec: VA-API JPEG decoder
-> vaapi:  vaapijpegenc: VA-API JPEG encoder
-> vaapi:  vaapimpeg2dec: VA-API MPEG2 decoder
-> vaapi:  vaapimpeg2enc: VA-API MPEG-2 encoder
-> vaapi:  vaapioverlay: VA-API overlay
-> vaapi:  vaapipostproc: VA-API video postprocessing
-> vaapi:  vaapisink: VA-API sink
-> vaapi:  vaapivc1dec: VA-API VC1 decoder
-> vaapi:  vaapivp8dec: VA-API VP8 decoder
-> vaapi:  vaapivp8enc: VA-API VP8 encoder
-> vaapi:  vaapivp9dec: VA-API VP9 decoder
->
-> (a good common ground could be VP9 as the host can encode and
-> the client can decode, or h264/h265 as both can encode/decode)
 
-There are a lot of settings that you'll likely need to tweak in
-spice server (host) for good optimization and even hardware
-encoding. You can see at [0] that the plugin for video encoding
-is hardcoded with x264enc. I can't see if you have it or not in
-your host because of the grep, but that could be another reason
-for not being able to encode in h264 (edit: seems to be present
-in the logs)
+Thank you Victor for taking the time, I do appreciate it!
 
-[0] https://gitlab.freedesktop.org/spice/spice/-/blob/master/server/gstream=
-er-encoder.c#L887
 
-The spice-gtk (client) uses GStreamer's most generic elements to
-give it the possibility to setup a video decoding in the best way
-possible, preferably with hardware encoded although that was not
-guaranteed when I implemented that logic.
+Sorry for the grep of gst-inspect, here's the full output:
+Host:
+1394:  dv1394src: Firewire (1394) DV video source
+1394:  hdv1394src: Firewire (1394) HDV video source
+a52dec:  a52dec: ATSC A/52 audio decoder
+aasink:  aasink: ASCII art video sink
+aasink:  aatv: aaTV effect
+accurip:  accurip: AccurateRip(TM) CRC element
+adder:  adder: Adder
+adpcmdec:  adpcmdec: ADPCM decoder
+adpcmenc:  adpcmenc: ADPCM encoder
+aes:  aesdec: aesdec
+aes:  aesenc: aesenc
+aiff:  aiffmux: AIFF audio muxer
+aiff:  aiffparse: AIFF audio demuxer
+alaw:  alawdec: A Law audio decoder
+alaw:  alawenc: A Law audio encoder
+alpha:  alpha: Alpha filter
+alphacolor:  alphacolor: Alpha color filter
+amrnb:  amrnbdec: AMR-NB audio decoder
+amrnb:  amrnbenc: AMR-NB audio encoder
+amrwbdec:  amrwbdec: AMR-WB audio decoder
+aom:  av1dec: AV1 Decoder
+aom:  av1enc: AV1 Encoder
+apetag:  apedemux: APE tag demuxer
+app:  appsink: AppSink
+app:  appsrc: AppSrc
+asf:  asfdemux: ASF Demuxer
+asf:  rtpasfdepay: RTP ASF packet depayloader
+asf:  rtspwms: WMS RTSP Extension
+asfmux:  asfmux: ASF muxer
+asfmux:  asfparse: ASF parser
+asfmux:  rtpasfpay: RTP ASF payloader
+assrender:  assrender: ASS/SSA Render
+audiobuffersplit:  audiobuffersplit: Audio Buffer Split
+audioconvert:  audioconvert: Audio converter
+audiofx:  audioamplify: Audio amplifier
+audiofx:  audiochebband: Band pass & band reject filter
+audiofx:  audiocheblimit: Low pass & high pass filter
+audiofx:  audiodynamic: Dynamic range controller
+audiofx:  audioecho: Audio echo
+audiofx:  audiofirfilter: Audio FIR filter
+audiofx:  audioiirfilter: Audio IIR filter
+audiofx:  audioinvert: Audio inversion
+audiofx:  audiokaraoke: AudioKaraoke
+audiofx:  audiopanorama: Stereo positioning
+audiofx:  audiowsincband: Band pass & band reject filter
+audiofx:  audiowsinclimit: Low pass & high pass filter
+audiofx:  scaletempo: Scaletempo
+audiofx:  stereo: Stereo effect
+audiofxbad:  audiochannelmix: Simple stereo audio mixer
+audiolatency:  audiolatency: AudioLatency
+audiomixer:  audiointerleave: AudioInterleave
+audiomixer:  audiomixer: AudioMixer
+audiomixer:  liveadder: AudioMixer
+audiomixmatrix:  audiomixmatrix: Matrix audio mix
+audioparsers:  aacparse: AAC audio stream parser
+audioparsers:  ac3parse: AC3 audio stream parser
+audioparsers:  amrparse: AMR audio stream parser
+audioparsers:  dcaparse: DTS Coherent Acoustics audio stream parser
+audioparsers:  flacparse: FLAC audio parser
+audioparsers:  mpegaudioparse: MPEG1 Audio Parser
+audioparsers:  sbcparse: SBC audio parser
+audioparsers:  wavpackparse: Wavpack audio stream parser
+audiorate:  audiorate: Audio rate adjuster
+audioresample:  audioresample: Audio resampler
+audiotestsrc:  audiotestsrc: Audio test source
+audiovisualizers:  spacescope: Stereo visualizer
+audiovisualizers:  spectrascope: Frequency spectrum scope
+audiovisualizers:  synaescope: Synaescope
+audiovisualizers:  wavescope: Waveform oscilloscope
+auparse:  auparse: AU audio demuxer
+autoconvert:  autoconvert: Select converter based on caps
+autoconvert:  autovideoconvert: Select color space converter based on caps
+autodetect:  autoaudiosink: Auto audio sink
+autodetect:  autoaudiosrc: Auto audio source
+autodetect:  autovideosink: Auto video sink
+autodetect:  autovideosrc: Auto video source
+avi:  avidemux: Avi demuxer
+avi:  avimux: Avi muxer
+avi:  avisubtitle: Avi subtitle parser
+bayer:  bayer2rgb: Bayer to RGB decoder for cameras
+bayer:  rgb2bayer: RGB to Bayer converter
+bluez:  a2dpsink: Bluetooth A2DP sink
+bluez:  avdtpsink: Bluetooth AVDTP sink
+bluez:  avdtpsrc: Bluetooth AVDTP Source
+bs2b:  bs2b: Crossfeed effect
+bz2:  bz2dec: BZ2 decoder
+bz2:  bz2enc: BZ2 encoder
+cacasink:  cacasink: A colored ASCII art video sink
+cacasink:  cacatv: CacaTV effect
+cairo:  cairooverlay: Cairo overlay
+camerabin:  camerabin: Camera Bin
+camerabin:  viewfinderbin: Viewfinder Bin
+camerabin:  wrappercamerabinsrc: Wrapper camera src element for camerabin2
+cdio:  cdiocddasrc: CD audio source (CDDA)
+cdparanoia:  cdparanoiasrc: CD Audio (cdda) Source, Paranoia IV
+chromaprint:  chromaprint: Chromaprint fingerprinting element
+closedcaption:  cc708overlay: Closed Caption overlay
+closedcaption:  cccombiner: Closed Caption Combiner
+closedcaption:  ccconverter: Closed Caption Converter
+closedcaption:  ccextractor: Closed Caption Extractor
+closedcaption:  line21decoder: Line 21 CC Decoder
+closedcaption:  line21encoder: Line 21 CC Encoder
+codecalpha:  alphacombine: Alpha Combiner
+codecalpha:  codecalphademux: CODEC Alpha Demuxer
+codecalpha:  vp8alphadecodebin: VP8 Alpha Decoder
+codecalpha:  vp9alphadecodebin: VP9 Alpha Decoder
+coloreffects:  chromahold: Chroma hold filter
+coloreffects:  coloreffects: Color Look-up Table filter
+colormanagement:  lcms: LCMS2 ICC correction
+compositor:  compositor: Compositor
+coreelements:  capsfilter: CapsFilter
+coreelements:  clocksync: ClockSync
+coreelements:  concat: Concat
+coreelements:  dataurisrc: data: URI source element
+coreelements:  downloadbuffer: DownloadBuffer
+coreelements:  fakesink: Fake Sink
+coreelements:  fakesrc: Fake Source
+coreelements:  fdsink: Filedescriptor Sink
+coreelements:  fdsrc: Filedescriptor Source
+coreelements:  filesink: File Sink
+coreelements:  filesrc: File Source
+coreelements:  funnel: Funnel pipe fitting
+coreelements:  identity: Identity
+coreelements:  input-selector: Input selector
+coreelements:  multiqueue: MultiQueue
+coreelements:  output-selector: Output selector
+coreelements:  queue: Queue
+coreelements:  queue2: Queue 2
+coreelements:  streamiddemux: Streamid Demux
+coreelements:  tee: Tee pipe fitting
+coreelements:  typefind: TypeFind
+coreelements:  valve: Valve element
+coretracers:  factories (GstTracerFactory)
+coretracers:  latency (GstTracerFactory)
+coretracers:  leaks (GstTracerFactory)
+coretracers:  log (GstTracerFactory)
+coretracers:  rusage (GstTracerFactory)
+coretracers:  stats (GstTracerFactory)
+curl:  curlfilesink: Curl file sink
+curl:  curlftpsink: Curl ftp sink
+curl:  curlhttpsink: Curl http sink
+curl:  curlhttpsrc: HTTP Client Source using libcURL
+curl:  curlsftpsink: Curl sftp sink
+curl:  curlsmtpsink: Curl smtp sink
+cutter:  cutter: Audio cutter
+dash:  dashdemux: DASH Demuxer
+dash:  dashsink: DASH Sink
+dc1394:  dc1394src: 1394 IIDC Video Source
+de265:  libde265dec: HEVC/H.265 decoder
+debug:  breakmydata: Break my data
+debug:  capssetter: CapsSetter
+debug:  cpureport: CPU report
+debug:  navseek: Seek based on left-right arrows
+debug:  progressreport: Progress report
+debug:  pushfilesrc: Push File Source
+debug:  rndbuffersize: Random buffer size
+debug:  taginject: TagInject
+debug:  testsink: Test plugin
+debugutilsbad:  checksumsink: Checksum sink
+debugutilsbad:  chopmydata: Chop my data
+debugutilsbad:  clockselect: Clock select
+debugutilsbad:  compare: Compare buffers
+debugutilsbad:  debugspy: DebugSpy
+debugutilsbad:  errorignore: Convert some GstFlowReturn types into others
+debugutilsbad:  fakeaudiosink: Fake Audio Sink
+debugutilsbad:  fakevideosink: Fake Video Sink
+debugutilsbad:  fpsdisplaysink: Measure and show framerate on videosink
+debugutilsbad:  testsrcbin: Generic bin
+debugutilsbad:  videocodectestsink: Video CODEC Test Sink
+debugutilsbad:  watchdog: Watchdog
+decklink:  decklinkaudiosink: Decklink Audio Sink
+decklink:  decklinkaudiosrc: Decklink Audio Source
+decklink:  decklinkdeviceprovider (GstDeviceProviderFactory)
+decklink:  decklinkvideosink: Decklink Video Sink
+decklink:  decklinkvideosrc: Decklink Video Source
+deinterlace:  deinterlace: Deinterlacer
+dtls:  dtlsdec: DTLS Decoder
+dtls:  dtlsenc: DTLS Encoder
+dtls:  dtlssrtpdec: DTLS-SRTP Decoder
+dtls:  dtlssrtpdemux: DTLS SRTP Demultiplexer
+dtls:  dtlssrtpenc: DTLS-SRTP Encoder
+dtmf:  dtmfsrc: DTMF tone generator
+dtmf:  rtpdtmfdepay: RTP DTMF packet depayloader
+dtmf:  rtpdtmfsrc: RTP DTMF packet generator
+dtsdec:  dtsdec: DTS audio decoder
+dv:  dvdec: DV video decoder
+dv:  dvdemux: DV system stream demuxer
+dvb:  dvbbasebin: DVB bin
+dvb:  dvbsrc: DVB Source
+dvbsubenc:  dvbsubenc: DVB subtitle encoder
+dvbsuboverlay:  dvbsuboverlay: DVB Subtitles Overlay
+dvdlpcmdec:  dvdlpcmdec: DVD LPCM Audio decoder
+dvdread:  dvdreadsrc: DVD Source
+dvdspu:  dvdspu: Sub-picture Overlay
+dvdsub:  dvdsubdec: DVD subtitle decoder
+dvdsub:  dvdsubparse: DVD subtitle parser
+effectv:  agingtv: AgingTV effect
+effectv:  dicetv: DiceTV effect
+effectv:  edgetv: EdgeTV effect
+effectv:  optv: OpTV effect
+effectv:  quarktv: QuarkTV effect
+effectv:  radioactv: RadioacTV effect
+effectv:  revtv: RevTV effect
+effectv:  rippletv: RippleTV effect
+effectv:  shagadelictv: ShagadelicTV
+effectv:  streaktv: StreakTV effect
+effectv:  vertigotv: VertigoTV effect
+effectv:  warptv: WarpTV effect
+encoding:  encodebin: Encoder Bin
+encoding:  encodebin2: Encoder Bin
+equalizer:  equalizer-10bands: 10 Band Equalizer
+equalizer:  equalizer-3bands: 3 Band Equalizer
+equalizer:  equalizer-nbands: N Band Equalizer
+faad:  faad: AAC audio decoder
+faceoverlay:  faceoverlay: faceoverlay
+fbdevsink:  fbdevsink: fbdev video sink
+festival:  festival: Festival Text-to-Speech synthesizer
+fieldanalysis:  fieldanalysis: Video field analysis
+flac:  flacdec: FLAC audio decoder
+flac:  flacenc: FLAC audio encoder
+flac:  flactag: FLAC tagger
+flite:  flitetestsrc: Flite speech test source
+fluidsynthmidi:  fluiddec: Fluidsynth
+flv:  flvdemux: FLV Demuxer
+flv:  flvmux: FLV muxer
+flxdec:  flxdec: FLX video decoder
+freeverb:  freeverb: Reverberation/room effect
+gaudieffects:  burn: Burn
+gaudieffects:  chromium: Chromium
+gaudieffects:  dilate: Dilate
+gaudieffects:  dodge: Dodge
+gaudieffects:  exclusion: Exclusion
+gaudieffects:  gaussianblur: GstGaussianBlur
+gaudieffects:  solarize: Solarize
+gdkpixbuf:  gdkpixbufdec: GdkPixbuf image decoder
+gdkpixbuf:  gdkpixbufoverlay: GdkPixbuf Overlay
+gdkpixbuf:  gdkpixbufsink: GdkPixbuf sink
+gdp:  gdpdepay: GDP Depayloader
+gdp:  gdppay: GDP Payloader
+geometrictransform:  bulge: bulge
+geometrictransform:  circle: circle
+geometrictransform:  diffuse: diffuse
+geometrictransform:  fisheye: fisheye
+geometrictransform:  kaleidoscope: kaleidoscope
+geometrictransform:  marble: marble
+geometrictransform:  mirror: mirror
+geometrictransform:  perspective: perspective
+geometrictransform:  pinch: pinch
+geometrictransform:  rotate: rotate
+geometrictransform:  sphere: sphere
+geometrictransform:  square: square
+geometrictransform:  stretch: stretch
+geometrictransform:  tunnel: tunnel
+geometrictransform:  twirl: twirl
+geometrictransform:  waterripple: waterripple
+gio:  giosink: GIO sink
+gio:  giosrc: GIO source
+gio:  giostreamsink: GIO stream sink
+gio:  giostreamsrc: GIO stream source
+gme:  gmedec: Gaming console music file decoder
+goom:  goom: GOOM: what a GOOM!
+goom2k1:  goom2k1: GOOM: what a GOOM! 2k1 edition
+gsm:  gsmdec: GSM audio decoder
+gsm:  gsmenc: GSM audio encoder
+hls:  hlsdemux: HLS Demuxer
+hls:  hlssink: HTTP Live Streaming sink
+hls:  hlssink2: HTTP Live Streaming sink
+icydemux:  icydemux: ICY tag demuxer
+id3demux:  id3demux: ID3 tag demuxer
+id3tag:  id3mux: ID3 v1 and v2 Muxer
+imagefreeze:  imagefreeze: Still frame stream generator
+inter:  interaudiosink: Internal audio sink
+inter:  interaudiosrc: Internal audio source
+inter:  intersubsink: Internal subtitle sink
+inter:  intersubsrc: Internal subtitle source
+inter:  intervideosink: Internal video sink
+inter:  intervideosrc: Internal video source
+interlace:  interlace: Interlace filter
+interleave:  deinterleave: Audio deinterleaver
+interleave:  interleave: Audio interleaver
+ipcpipeline:  ipcpipelinesink: Inter-process Pipeline Sink
+ipcpipeline:  ipcpipelinesrc: Inter-process Pipeline Source
+ipcpipeline:  ipcslavepipeline: Inter-process slave pipeline
+isomp4:  3gppmux: 3GPP Muxer
+isomp4:  ismlmux: ISML Muxer
+isomp4:  mj2mux: MJ2 Muxer
+isomp4:  mp4mux: MP4 Muxer
+isomp4:  qtdemux: QuickTime demuxer
+isomp4:  qtmoovrecover: QT Moov Recover
+isomp4:  qtmux: QuickTime Muxer
+isomp4:  rtpxqtdepay: RTP packet depayloader
+ivfparse:  ivfparse: IVF parser
+ivtc:  combdetect: Comb Detect
+ivtc:  ivtc: Inverse Telecine
+jack:  jackaudiosink: Audio Sink (Jack)
+jack:  jackaudiosrc: Audio Source (Jack)
+jp2kdecimator:  jp2kdecimator: JPEG2000 decimator
+jpeg:  jpegdec: JPEG image decoder
+jpeg:  jpegenc: JPEG image encoder
+jpegformat:  jifmux: JPEG stream muxer
+jpegformat:  jpegparse: JPEG stream parser
+kate:  katedec: Kate stream text decoder
+kate:  kateenc: Kate stream encoder
+kate:  kateparse: Kate stream parser
+kate:  katetag: Kate stream tagger
+kms:  kmssink: KMS video sink
+lame:  lamemp3enc: L.A.M.E. mp3 encoder
+ldac:  ldacenc: Bluetooth LDAC audio encoder
+legacyrawparse:  audioparse: Audio Parse
+legacyrawparse:  videoparse: Video Parse
+level:  level: Level
+matroska:  matroskademux: Matroska demuxer
+matroska:  matroskamux: Matroska muxer
+matroska:  matroskaparse: Matroska parser
+matroska:  webmmux: WebM muxer
+midi:  midiparse: MidiParse
+modplug:  modplug: ModPlug
+monoscope:  monoscope: Monoscope
+mpeg2dec:  mpeg2dec: mpeg1 and mpeg2 video decoder
+mpeg2enc:  mpeg2enc: mpeg2enc video encoder
+mpegpsdemux:  mpegpsdemux: MPEG Program Stream Demuxer
+mpegpsmux:  mpegpsmux: MPEG Program Stream Muxer
+mpegtsdemux:  tsdemux: MPEG transport stream demuxer
+mpegtsdemux:  tsparse: MPEG transport stream parser
+mpegtsmux:  atscmux: ATSC Transport Stream Muxer
+mpegtsmux:  mpegtsmux: MPEG Transport Stream Muxer
+mpg123:  mpg123audiodec: mpg123 mp3 decoder
+mplex:  mplex: mplex video multiplexer
+mulaw:  mulawdec: Mu Law audio decoder
+mulaw:  mulawenc: Mu Law audio encoder
+multifile:  imagesequencesrc: Image Sequence Source
+multifile:  multifilesink: Multi-File Sink
+multifile:  multifilesrc: Multi-File Source
+multifile:  splitfilesrc: Split-File Source
+multifile:  splitmuxsink: Split Muxing Bin
+multifile:  splitmuxsrc: Split File Demuxing Bin
+multipart:  multipartdemux: Multipart demuxer
+multipart:  multipartmux: Multipart muxer
+musepack:  musepackdec: Musepack decoder
+mxf:  mxfdemux: MXF Demuxer
+mxf:  mxfmux: MXF muxer
+navigationtest:  navigationtest: Video navigation test
+netsim:  netsim: Network Simulator
+ogg:  oggaviparse: Ogg AVI parser
+ogg:  oggdemux: Ogg demuxer
+ogg:  oggmux: Ogg muxer
+ogg:  oggparse: Ogg parser
+ogg:  ogmaudioparse: OGM audio stream parser
+ogg:  ogmtextparse: OGM text stream parser
+ogg:  ogmvideoparse: OGM video stream parser
+openal:  openalsink: OpenAL Audio Sink
+openal:  openalsrc: OpenAL Audio Source
+openaptx:  openaptxdec: Bluetooth aptX/aptX-HD audio decoder using libopena=
+ptx
+openaptx:  openaptxenc: Bluetooth aptX/aptX-HD audio encoder using libopena=
+ptx
+openexr:  openexrdec: OpenEXR decoder
+opengl:  glalpha: OpenGL Alpha Filter
+opengl:  glcolorbalance: Video balance
+opengl:  glcolorconvert: OpenGL color converter
+opengl:  glcolorscale: OpenGL color scale
+opengl:  gldeinterlace: OpenGL deinterlacing filter
+opengl:  gldifferencematte: Gstreamer OpenGL DifferenceMatte
+opengl:  gldownload: OpenGL downloader
+opengl:  gleffects: Gstreamer OpenGL Effects
+opengl:  gleffects_blur: Blur with 9x9 separable convolution Effect
+opengl:  gleffects_bulge: Bulge Effect
+opengl:  gleffects_fisheye: FishEye Effect
+opengl:  gleffects_glow: Glow Lighting Effect
+opengl:  gleffects_heat: Heat Signature Effect
+opengl:  gleffects_identity: Do nothing Effect
+opengl:  gleffects_laplacian: Laplacian Convolution Demo Effect
+opengl:  gleffects_lumaxpro: Luma Cross Processing Effect
+opengl:  gleffects_mirror: Mirror Effect
+opengl:  gleffects_sepia: Sepia Toning Effect
+opengl:  gleffects_sin: All Grey but Red Effect
+opengl:  gleffects_sobel: Sobel edge detection Effect
+opengl:  gleffects_square: Square Effect
+opengl:  gleffects_squeeze: Squeeze Effect
+opengl:  gleffects_stretch: Stretch Effect
+opengl:  gleffects_tunnel: Light Tunnel Effect
+opengl:  gleffects_twirl: Twirl Effect
+opengl:  gleffects_xpro: Cross Processing Effect
+opengl:  gleffects_xray: Glowing negative effect
+opengl:  glfilterapp: OpenGL application filter
+opengl:  glfilterbin: GL Filter Bin
+opengl:  glfiltercube: OpenGL cube filter
+opengl:  glfilterglass: OpenGL glass filter
+opengl:  glimagesink: GL Sink Bin
+opengl:  glimagesinkelement: OpenGL video sink
+opengl:  glmixerbin: OpenGL video_mixer empty bin
+opengl:  glmosaic: OpenGL mosaic
+opengl:  gloverlay: Gstreamer OpenGL Overlay
+opengl:  gloverlaycompositor: OpenGL overlaying filter
+opengl:  glshader: OpenGL fragment shader filter
+opengl:  glsinkbin: GL Sink Bin
+opengl:  glsrcbin: GL Src Bin
+opengl:  glstereomix: OpenGL stereo video combiner
+opengl:  glstereosplit: GLStereoSplit
+opengl:  gltestsrc: Video test source
+opengl:  gltransformation: OpenGL transformation filter
+opengl:  glupload: OpenGL uploader
+opengl:  glvideoflip: OpenGL video flip filter
+opengl:  glvideomixer: OpenGL video_mixer bin
+opengl:  glvideomixerelement: OpenGL video_mixer
+opengl:  glviewconvert: OpenGL Multiview/3D conversion filter
+openh264:  openh264dec: OpenH264 video decoder
+openh264:  openh264enc: OpenH264 video encoder
+openjpeg:  openjpegdec: OpenJPEG JPEG2000 decoder
+openjpeg:  openjpegenc: OpenJPEG JPEG2000 encoder
+openmpt:  openmptdec: OpenMPT-based module music decoder
+openni2:  openni2src: Openni2 client source
+opus:  opusdec: Opus audio decoder
+opus:  opusenc: Opus audio encoder
+opusparse:  opusparse: Opus audio parser
+oss4:  oss4sink: OSS v4 Audio Sink
+oss4:  oss4src: OSS v4 Audio Source
+ossaudio:  osssink: Audio Sink (OSS)
+ossaudio:  osssrc: Audio Source (OSS)
+overlaycomposition:  overlaycomposition: Overlay Composition
+pango:  clockoverlay: Clock overlay
+pango:  textoverlay: Text overlay
+pango:  textrender: Text renderer
+pango:  timeoverlay: Time overlay
+pbtypes:  GstVideoMultiviewFlagsSet (GstDynamicTypeFactory)
+pcapparse:  irtspparse: IRTSPParse
+pcapparse:  pcapparse: PCapParse
+playback:  decodebin: Decoder Bin
+playback:  decodebin3: Decoder Bin 3
+playback:  parsebin: Parse Bin
+playback:  playbin: Player Bin 2
+playback:  playbin3: Player Bin 3
+playback:  playsink: Player Sink
+playback:  streamsynchronizer: Stream Synchronizer
+playback:  subtitleoverlay: Subtitle Overlay
+playback:  uridecodebin: URI Decoder
+playback:  uridecodebin3: URI Decoder
+playback:  urisourcebin: URI reader
+png:  pngdec: PNG image decoder
+png:  pngenc: PNG image encoder
+pnm:  pnmdec: PNM image decoder
+pnm:  pnmenc: PNM image encoder
+proxy:  proxysink: Proxy Sink
+proxy:  proxysrc: Proxy source
+pulseaudio:  pulsedeviceprovider (GstDeviceProviderFactory)
+pulseaudio:  pulsesink: PulseAudio Audio Sink
+pulseaudio:  pulsesrc: PulseAudio Audio Source
+qroverlay:  debugqroverlay: qroverlay
+qroverlay:  qroverlay: qroverlay
+rawparse:  rawaudioparse: rawaudioparse
+rawparse:  rawvideoparse: rawvideoparse
+rawparse:  unalignedaudioparse: unalignedaudioparse
+rawparse:  unalignedvideoparse: unalignedvideoparse
+realmedia:  pnmsrc: PNM packet receiver
+realmedia:  rademux: RealAudio Demuxer
+realmedia:  rdtdepay: RDT packet parser
+realmedia:  rdtmanager: RTP Decoder
+realmedia:  rmdemux: RealMedia Demuxer
+realmedia:  rtspreal: RealMedia RTSP Extension
+removesilence:  removesilence: RemoveSilence
+replaygain:  rganalysis: ReplayGain analysis
+replaygain:  rglimiter: ReplayGain limiter
+replaygain:  rgvolume: ReplayGain volume
+resindvd:  rsndvdbin: rsndvdbin
+rfbsrc:  rfbsrc: Rfb source
+rist:  ristrtpdeext: RIST RTP Extension remover
+rist:  ristrtpext: RIST RTP Extension adder
+rist:  ristrtxreceive: RIST Retransmission receiver
+rist:  ristrtxsend: RIST Retransmission Sender
+rist:  ristsink: RIST Sink
+rist:  ristsrc: RIST Source
+rist:  roundrobin: Round Robin
+rsvg:  rsvgdec: SVG image decoder
+rsvg:  rsvgoverlay: RSVG overlay
+rtmp:  rtmpsink: RTMP output sink
+rtmp:  rtmpsrc: RTMP Source
+rtmp2:  rtmp2sink: RTMP sink element
+rtmp2:  rtmp2src: RTMP source element
+rtp:  asteriskh263: RTP Asterisk H263 depayloader
+rtp:  rtpL16depay: RTP audio depayloader
+rtp:  rtpL16pay: RTP audio payloader
+rtp:  rtpL24depay: RTP audio depayloader
+rtp:  rtpL24pay: RTP audio payloader
+rtp:  rtpL8depay: RTP audio depayloader
+rtp:  rtpL8pay: RTP audio payloader
+rtp:  rtpac3depay: RTP AC3 depayloader
+rtp:  rtpac3pay: RTP AC3 audio payloader
+rtp:  rtpamrdepay: RTP AMR depayloader
+rtp:  rtpamrpay: RTP AMR payloader
+rtp:  rtpbvdepay: RTP BroadcomVoice depayloader
+rtp:  rtpbvpay: RTP BV Payloader
+rtp:  rtpceltdepay: RTP CELT depayloader
+rtp:  rtpceltpay: RTP CELT payloader
+rtp:  rtpdvdepay: RTP DV Depayloader
+rtp:  rtpdvpay: RTP DV Payloader
+rtp:  rtpg722depay: RTP audio depayloader
+rtp:  rtpg722pay: RTP audio payloader
+rtp:  rtpg723depay: RTP G.723 depayloader
+rtp:  rtpg723pay: RTP G.723 payloader
+rtp:  rtpg726depay: RTP G.726 depayloader
+rtp:  rtpg726pay: RTP G.726 payloader
+rtp:  rtpg729depay: RTP G.729 depayloader
+rtp:  rtpg729pay: RTP G.729 payloader
+rtp:  rtpgsmdepay: RTP GSM depayloader
+rtp:  rtpgsmpay: RTP GSM payloader
+rtp:  rtpgstdepay: GStreamer depayloader
+rtp:  rtpgstpay: RTP GStreamer payloader
+rtp:  rtph261depay: RTP H261 depayloader
+rtp:  rtph261pay: RTP H261 packet payloader
+rtp:  rtph263depay: RTP H263 depayloader
+rtp:  rtph263pay: RTP H263 packet payloader
+rtp:  rtph263pdepay: RTP H263 depayloader
+rtp:  rtph263ppay: RTP H263 payloader
+rtp:  rtph264depay: RTP H264 depayloader
+rtp:  rtph264pay: RTP H264 payloader
+rtp:  rtph265depay: RTP H265 depayloader
+rtp:  rtph265pay: RTP H265 payloader
+rtp:  rtphdrextcolorspace: Color Space
+rtp:  rtpilbcdepay: RTP iLBC depayloader
+rtp:  rtpilbcpay: RTP iLBC Payloader
+rtp:  rtpisacdepay: RTP iSAC depayloader
+rtp:  rtpisacpay: RTP iSAC payloader
+rtp:  rtpj2kdepay: RTP JPEG 2000 depayloader
+rtp:  rtpj2kpay: RTP JPEG 2000 payloader
+rtp:  rtpjpegdepay: RTP JPEG depayloader
+rtp:  rtpjpegpay: RTP JPEG payloader
+rtp:  rtpklvdepay: RTP KLV Depayloader
+rtp:  rtpklvpay: RTP KLV Payloader
+rtp:  rtpldacpay: RTP packet payloader
+rtp:  rtpmp1sdepay: RTP MPEG1 System Stream depayloader
+rtp:  rtpmp2tdepay: RTP MPEG Transport Stream depayloader
+rtp:  rtpmp2tpay: RTP MPEG2 Transport Stream payloader
+rtp:  rtpmp4adepay: RTP MPEG4 audio depayloader
+rtp:  rtpmp4apay: RTP MPEG4 audio payloader
+rtp:  rtpmp4gdepay: RTP MPEG4 ES depayloader
+rtp:  rtpmp4gpay: RTP MPEG4 ES payloader
+rtp:  rtpmp4vdepay: RTP MPEG4 video depayloader
+rtp:  rtpmp4vpay: RTP MPEG4 Video payloader
+rtp:  rtpmpadepay: RTP MPEG audio depayloader
+rtp:  rtpmpapay: RTP MPEG audio payloader
+rtp:  rtpmparobustdepay: RTP MPEG audio depayloader
+rtp:  rtpmpvdepay: RTP MPEG video depayloader
+rtp:  rtpmpvpay: RTP MPEG2 ES video payloader
+rtp:  rtpopusdepay: RTP Opus packet depayloader
+rtp:  rtpopuspay: RTP Opus payloader
+rtp:  rtppcmadepay: RTP PCMA depayloader
+rtp:  rtppcmapay: RTP PCMA payloader
+rtp:  rtppcmudepay: RTP PCMU depayloader
+rtp:  rtppcmupay: RTP PCMU payloader
+rtp:  rtpqcelpdepay: RTP QCELP depayloader
+rtp:  rtpqdm2depay: RTP QDM2 depayloader
+rtp:  rtpreddec: Redundant Audio Data (RED) Decoder
+rtp:  rtpredenc: Redundant Audio Data (RED) Encoder
+rtp:  rtpsbcdepay: RTP SBC audio depayloader
+rtp:  rtpsbcpay: RTP packet payloader
+rtp:  rtpsirendepay: RTP Siren packet depayloader
+rtp:  rtpsirenpay: RTP Payloader for Siren Audio
+rtp:  rtpspeexdepay: RTP Speex depayloader
+rtp:  rtpspeexpay: RTP Speex payloader
+rtp:  rtpstorage: RTP storage
+rtp:  rtpstreamdepay: RTP Stream Depayloading
+rtp:  rtpstreampay: RTP Stream Payloading
+rtp:  rtpsv3vdepay: RTP SVQ3 depayloader
+rtp:  rtptheoradepay: RTP Theora depayloader
+rtp:  rtptheorapay: RTP Theora payloader
+rtp:  rtpulpfecdec: RTP FEC Decoder
+rtp:  rtpulpfecenc: RTP FEC Encoder
+rtp:  rtpvorbisdepay: RTP Vorbis depayloader
+rtp:  rtpvorbispay: RTP Vorbis payloader
+rtp:  rtpvp8depay: RTP VP8 depayloader
+rtp:  rtpvp8pay: RTP VP8 payloader
+rtp:  rtpvp9depay: RTP VP9 depayloader
+rtp:  rtpvp9pay: RTP VP9 payloader
+rtp:  rtpvrawdepay: RTP Raw Video depayloader
+rtp:  rtpvrawpay: RTP Raw Video payloader
+rtpmanager:  rtpbin: RTP Bin
+rtpmanager:  rtpdtmfmux: RTP muxer
+rtpmanager:  rtpfunnel: RTP funnel
+rtpmanager:  rtphdrextclientaudiolevel: Client-to-Mixer Audio Level Indicat=
+ion (RFC6464) RTP Header Extension
+rtpmanager:  rtphdrexttwcc: Transport Wide Congestion Control
+rtpmanager:  rtpjitterbuffer: RTP packet jitter-buffer
+rtpmanager:  rtpmux: RTP muxer
+rtpmanager:  rtpptdemux: RTP Demux
+rtpmanager:  rtprtxqueue: RTP Retransmission Queue
+rtpmanager:  rtprtxreceive: RTP Retransmission receiver
+rtpmanager:  rtprtxsend: RTP Retransmission Sender
+rtpmanager:  rtpsession: RTP Session
+rtpmanager:  rtpssrcdemux: RTP SSRC Demux
+rtpmanager:  rtpst2022-1-fecdec: SMPTE 2022-1 FEC decoder
+rtpmanager:  rtpst2022-1-fecenc: SMPTE 2022-1 FEC encoder
+rtpmanagerbad:  rtpsink: RTP Sink element
+rtpmanagerbad:  rtpsrc: RTP Source element
+rtponvif:  rtponvifparse: ONVIF NTP timestamps RTP extension
+rtponvif:  rtponviftimestamp: ONVIF NTP timestamps RTP extension
+rtsp:  rtpdec: RTP Decoder
+rtsp:  rtspsrc: RTSP packet receiver
+sbc:  sbcdec: Bluetooth SBC audio decoder
+sbc:  sbcenc: Bluetooth SBC audio encoder
+sctp:  sctpdec: SCTP Decoder
+sctp:  sctpenc: SCTP Encoder
+sdpelem:  sdpdemux: SDP session setup
+sdpelem:  sdpsrc: SDP Source
+segmentclip:  audiosegmentclip: Audio buffer segment clipper
+segmentclip:  videosegmentclip: Video buffer segment clipper
+shapewipe:  shapewipe: Shape Wipe transition filter
+shm:  shmsink: Shared Memory Sink
+shm:  shmsrc: Shared Memory Source
+shout2:  shout2send: Icecast network sink
+sid:  siddec: Sid decoder
+siren:  sirendec: Siren Decoder element
+siren:  sirenenc: Siren Encoder element
+smooth:  smooth: Smooth effect
+smoothstreaming:  mssdemux: Smooth Streaming demuxer
+smpte:  smpte: SMPTE transitions
+smpte:  smptealpha: SMPTE transitions
+sndfile:  sfdec: Sndfile decoder
+soundtouch:  bpmdetect: BPM Detector
+soundtouch:  pitch: Pitch controller
+soup:  souphttpclientsink: HTTP client sink
+soup:  souphttpsrc: HTTP client source
+spandsp:  dtmfdetect: DTMF detector element
+spandsp:  spanplc: SpanDSP PLC
+spandsp:  tonegeneratesrc: Telephony Tone  Generator source
+spectrum:  spectrum: Spectrum analyzer
+speed:  speed: Speed
+speex:  speexdec: Speex audio decoder
+speex:  speexenc: Speex audio encoder
+srt:  srtclientsink: SRT sink
+srt:  srtclientsrc: SRT source
+srt:  srtserversink: SRT sink
+srt:  srtserversrc: SRT source
+srt:  srtsink: SRT sink
+srt:  srtsrc: SRT source
+srtp:  srtpdec: SRTP decoder
+srtp:  srtpenc: SRTP encoder
+staticelements:  bin: Generic bin
+staticelements:  pipeline: Pipeline object
+subenc:  srtenc: Srt encoder
+subenc:  webvttenc: WebVTT encoder
+subparse:  ssaparse: SSA Subtitle Parser
+subparse:  subparse: Subtitle parser
+subparse: subparse_typefind: srt, sub, mpsub, mdvd, smi, txt, dks, vtt
+switchbin:  switchbin: switchbin
+taglib:  apev2mux: TagLib-based APEv2 Muxer
+taglib:  id3v2mux: TagLib-based ID3v2 Muxer
+tcp:  multifdsink: Multi filedescriptor sink
+tcp:  multisocketsink: Multi socket sink
+tcp:  socketsrc: socket source
+tcp:  tcpclientsink: TCP client sink
+tcp:  tcpclientsrc: TCP client source
+tcp:  tcpserversink: TCP server sink
+tcp:  tcpserversrc: TCP server source
+teletext:  teletextdec: Teletext decoder
+theora:  theoradec: Theora video decoder
+theora:  theoraenc: Theora video encoder
+theora:  theoraparse: Theora video parser
+timecode:  avwait: Timecode Wait
+timecode:  timecodestamper: Timecode stamper
+transcode:  transcodebin: Transcode Bin
+transcode:  uritranscodebin: URITranscode Bin
+ttmlsubs:  ttmlparse: TTML subtitle parser
+ttmlsubs:  ttmlrender: TTML subtitle renderer
+twolame:  twolamemp2enc: TwoLAME mp2 encoder
+typefindfunctions: application/dash+xml: mpd, MPD
+typefindfunctions: application/itc: itc
+typefindfunctions: application/msword: doc
+typefindfunctions: application/mxf: mxf
+typefindfunctions: application/octet-stream: no extensions
+typefindfunctions: application/ogg: ogg, oga, ogv, ogm, ogx, spx, anx, axa,=
+ axv
+typefindfunctions: application/pdf: pdf
+typefindfunctions: application/postscript: ps
+typefindfunctions: application/sdp: sdp
+typefindfunctions: application/smil: smil
+typefindfunctions: application/ttml+xml: ttml+xml
+typefindfunctions: application/vnd.apple-fcp+xml: fcpxml
+typefindfunctions: application/vnd.apple-xmeml+xml: xmeml
+typefindfunctions: application/vnd.ms-sstr+xml: no extensions
+typefindfunctions: application/vnd.pixar.opentimelineio+json: otio
+typefindfunctions: application/vnd.rn-realmedia: ra, ram, rm, rmvb
+typefindfunctions: application/x-3gp: 3gp
+typefindfunctions: application/x-ape: ape
+typefindfunctions: application/x-apetag: mp3, ape, mpc, wv
+typefindfunctions: application/x-ar: a
+typefindfunctions: application/x-bzip: bz2
+typefindfunctions: application/x-compress: Z
+typefindfunctions: application/x-executable: no extensions
+typefindfunctions: application/x-gzip: gz
+typefindfunctions: application/x-hls: m3u8
+typefindfunctions: application/x-id3v1: mp3, mp2, mp1, mpga, ogg, flac, tta
+typefindfunctions: application/x-id3v2: mp3, mp2, mp1, mpga, ogg, flac, tta
+typefindfunctions: application/x-mcc: mcc
+typefindfunctions: application/x-mmsh: no extensions
+typefindfunctions: application/x-ms-dos-executable: dll, exe, ocx, sys, scr=
+, msstyles, cpl
+typefindfunctions: application/x-ogg-skeleton: no extensions
+typefindfunctions: application/x-ogm-audio: no extensions
+typefindfunctions: application/x-ogm-text: no extensions
+typefindfunctions: application/x-ogm-video: no extensions
+typefindfunctions: application/x-pn-realaudio: ra, ram, rm, rmvb
+typefindfunctions: application/x-rar: rar
+typefindfunctions: application/x-scc: scc
+typefindfunctions: application/x-shockwave-flash: swf, swfl
+typefindfunctions: application/x-ssa: ssa, ass
+typefindfunctions: application/x-subtitle-vtt: vtt
+typefindfunctions: application/x-tar: tar
+typefindfunctions: application/x-yuv4mpeg: no extensions
+typefindfunctions: application/xges: xges
+typefindfunctions: application/xml: xml
+typefindfunctions: application/zip: zip
+typefindfunctions: audio/aac: aac, adts, adif, loas
+typefindfunctions: audio/audible: aa, aax
+typefindfunctions: audio/iLBC-sh: ilbc
+typefindfunctions: audio/midi: mid, midi
+typefindfunctions: audio/mobile-xmf: mxmf
+typefindfunctions: audio/mpeg: mp3, mp2, mp1, mpga
+typefindfunctions: audio/qcelp: qcp
+typefindfunctions: audio/riff-midi: mid, midi
+typefindfunctions: audio/x-ac3: ac3, eac3
+typefindfunctions: audio/x-aiff: aiff, aif, aifc
+typefindfunctions: audio/x-amr-nb-sh: amr
+typefindfunctions: audio/x-amr-wb-sh: amr
+typefindfunctions: audio/x-au: au, snd
+typefindfunctions: audio/x-ay: ay
+typefindfunctions: audio/x-caf: caf
+typefindfunctions: audio/x-celt: no extensions
+typefindfunctions: audio/x-dts: dts
+typefindfunctions: audio/x-flac: flac
+typefindfunctions: audio/x-gbs: gbs
+typefindfunctions: audio/x-gsm: gsm
+typefindfunctions: audio/x-gym: gym
+typefindfunctions: audio/x-imelody: imy, ime, imelody
+typefindfunctions: audio/x-ircam: sf
+typefindfunctions: audio/x-kss: kss
+typefindfunctions: audio/x-m4a: m4a
+typefindfunctions: audio/x-mod: 669, amf, ams, dbm, digi, dmf, dsm, gdm, fa=
+r, imf, it, j2b, mdl, med, mod, mt2, mtm, okt, psm, ptm, sam, s3m, stm, stx=
+, ult, umx, xm
+typefindfunctions: audio/x-musepack: mpc, mpp, mp+
+typefindfunctions: audio/x-nist: nist
+typefindfunctions: audio/x-nsf: nsf
+typefindfunctions: audio/x-paris: paf
+typefindfunctions: audio/x-rf64: rf64
+typefindfunctions: audio/x-sap: sap
+typefindfunctions: audio/x-sbc: sbc
+typefindfunctions: audio/x-sds: sds
+typefindfunctions: audio/x-shorten: shn
+typefindfunctions: audio/x-sid: sid
+typefindfunctions: audio/x-spc: spc
+typefindfunctions: audio/x-speex: no extensions
+typefindfunctions: audio/x-svx: iff, svx
+typefindfunctions: audio/x-tap-dmp: dmp
+typefindfunctions: audio/x-tap-tap: tap
+typefindfunctions: audio/x-ttafile: tta
+typefindfunctions: audio/x-vgm: vgm
+typefindfunctions: audio/x-voc: voc
+typefindfunctions: audio/x-vorbis: no extensions
+typefindfunctions: audio/x-w64: w64
+typefindfunctions: audio/x-wav: wav
+typefindfunctions: audio/x-wavpack: wv, wvp
+typefindfunctions: audio/x-wavpack-correction: wvc
+typefindfunctions: audio/x-xi: xi
+typefindfunctions: image/bmp: bmp
+typefindfunctions: image/gif: gif
+typefindfunctions: image/jp2: jp2
+typefindfunctions: image/jpeg: jpg, jpe, jpeg
+typefindfunctions: image/png: png
+typefindfunctions: image/svg+xml: svg
+typefindfunctions: image/tiff: tif, tiff
+typefindfunctions: image/vnd.adobe.photoshop: psd
+typefindfunctions: image/vnd.wap.wbmp: no extensions
+typefindfunctions: image/webp: webp
+typefindfunctions: image/x-degas: no extensions
+typefindfunctions: image/x-exr: exr
+typefindfunctions: image/x-icon: no extensions
+typefindfunctions: image/x-jng: jng
+typefindfunctions: image/x-jpc: jpc, j2k
+typefindfunctions: image/x-portable-pixmap: pnm, ppm, pgm, pbm
+typefindfunctions: image/x-quicktime: qif, qtif, qti
+typefindfunctions: image/x-sun-raster: ras
+typefindfunctions: image/x-xcf: xcf
+typefindfunctions: image/x-xpixmap: xpm
+typefindfunctions: multipart/x-mixed-replace: no extensions
+typefindfunctions: subtitle/x-kate: no extensions
+typefindfunctions: text/html: htm, html
+typefindfunctions: text/plain: txt
+typefindfunctions: text/uri-list: ram
+typefindfunctions: text/utf-16: txt
+typefindfunctions: text/utf-32: txt
+typefindfunctions: text/x-cmml: no extensions
+typefindfunctions: video/mj2: mj2
+typefindfunctions: video/mpeg-elementary: mpv, mpeg, mpg
+typefindfunctions: video/mpeg-sys: mpe, mpeg, mpg
+typefindfunctions: video/mpeg4: m4v
+typefindfunctions: video/mpegts: ts, mts
+typefindfunctions: video/quicktime: mov, mp4
+typefindfunctions: video/vivo: viv
+typefindfunctions: video/x-cdxa: dat
+typefindfunctions: video/x-dirac: no extensions
+typefindfunctions: video/x-dv: dv, dif
+typefindfunctions: video/x-fli: flc, fli
+typefindfunctions: video/x-flv: flv
+typefindfunctions: video/x-h263: h263, 263
+typefindfunctions: video/x-h264: h264, x264, 264
+typefindfunctions: video/x-h265: h265, x265, 265
+typefindfunctions: video/x-ivf: ivf
+typefindfunctions: video/x-matroska: mkv, mka, mk3d, webm
+typefindfunctions: video/x-mng: mng
+typefindfunctions: video/x-ms-asf: asf, wm, wma, wmv
+typefindfunctions: video/x-msvideo: avi
+typefindfunctions: video/x-mve: mve
+typefindfunctions: video/x-nuv: nuv
+typefindfunctions: video/x-pva: pva
+typefindfunctions: video/x-theora: no extensions
+typefindfunctions: video/x-vcd: dat
+udp:  dynudpsink: UDP packet sender
+udp:  multiudpsink: UDP packet sender
+udp:  udpsink: UDP packet sender
+udp:  udpsrc: UDP packet receiver
+uvch264:  uvch264deviceprovider (GstDeviceProviderFactory)
+uvch264:  uvch264mjpgdemux: UVC H264 MJPG Demuxer
+uvch264:  uvch264src: UVC H264 Source
+va:  vaav1dec: VA-API AV1 Decoder
+va:  vadeinterlace: VA-API Deinterlacer
+va:  vah264dec: VA-API H.264 Decoder
+va:  vah265dec: VA-API H.265 Decoder
+va:  vampeg2dec: VA-API Mpeg2 Decoder
+va:  vapostproc: VA-API Video Postprocessor
+va:  vavp9dec: VA-API VP9 Decoder
+vaapi:  vaapiav1dec: VA-API AV1 decoder
+vaapi:  vaapidecodebin: VA-API Decode Bin
+vaapi:  vaapih264dec: VA-API H264 decoder
+vaapi:  vaapih264enc: VA-API H264 encoder
+vaapi:  vaapih265dec: VA-API H265 decoder
+vaapi:  vaapih265enc: VA-API H265 encoder
+vaapi:  vaapijpegdec: VA-API JPEG decoder
+vaapi:  vaapijpegenc: VA-API JPEG encoder
+vaapi:  vaapimpeg2dec: VA-API MPEG2 decoder
+vaapi:  vaapimpeg2enc: VA-API MPEG-2 encoder
+vaapi:  vaapioverlay: VA-API overlay
+vaapi:  vaapipostproc: VA-API video postprocessing
+vaapi:  vaapisink: VA-API sink
+vaapi:  vaapivc1dec: VA-API VC1 decoder
+vaapi:  vaapivp9dec: VA-API VP9 decoder
+vaapi:  vaapivp9enc: VA-API VP9 encoder
+video4linux2:  v4l2deviceprovider (GstDeviceProviderFactory)
+video4linux2:  v4l2radio: Radio (video4linux2) Tuner
+video4linux2:  v4l2sink: Video (video4linux2) Sink
+video4linux2:  v4l2src: Video (video4linux2) Source
+videobox:  videobox: Video box filter
+videoconvert:  videoconvert: Colorspace converter
+videocrop:  aspectratiocrop: aspectratiocrop
+videocrop:  videocrop: Crop
+videofilter:  gamma: Video gamma correction
+videofilter:  videobalance: Video balance
+videofilter:  videoflip: Video flipper
+videofilter:  videomedian: Median effect
+videofiltersbad:  scenechange: Scene change detector
+videofiltersbad:  videodiff: Video Diff
+videofiltersbad:  zebrastripe: Zebra stripe overlay
+videoframe_audiolevel:  videoframe-audiolevel: Video-frame audio level
+videomixer:  videomixer: Video mixer 2
+videoparsersbad:  av1parse: AV1 parser
+videoparsersbad:  diracparse: Dirac parser
+videoparsersbad:  h263parse: H.263 parser
+videoparsersbad:  h264parse: H.264 parser
+videoparsersbad:  h265parse: H.265 parser
+videoparsersbad:  jpeg2000parse: JPEG 2000 parser
+videoparsersbad:  mpeg4videoparse: MPEG 4 video elementary stream parser
+videoparsersbad:  mpegvideoparse: MPEG video elementary stream parser
+videoparsersbad:  pngparse: PNG parser
+videoparsersbad:  vc1parse: VC1 parser
+videoparsersbad:  vp9parse: VP9 parser
+videorate:  videorate: Video rate adjuster
+videoscale:  videoscale: Video scaler
+videosignal:  simplevideomark: Video marker
+videosignal:  simplevideomarkdetect: Video detecter
+videosignal:  videoanalyse: Video analyser
+videotestsrc:  videotestsrc: Video test source
+vmnc:  vmncdec: VMnc video decoder
+voaacenc:  voaacenc: AAC audio encoder
+voamrwbenc:  voamrwbenc: AMR-WB audio encoder
+volume:  volume: Volume
+vorbis:  vorbisdec: Vorbis audio decoder
+vorbis:  vorbisenc: Vorbis audio encoder
+vorbis:  vorbisparse: VorbisParse
+vorbis:  vorbistag: VorbisTag
+vpx:  vp8dec: On2 VP8 Decoder
+vpx:  vp8enc: On2 VP8 Encoder
+vpx:  vp9dec: On2 VP9 Decoder
+vpx:  vp9enc: On2 VP9 Encoder
+wavenc:  wavenc: WAV audio muxer
+wavpack:  wavpackdec: Wavpack audio decoder
+wavpack:  wavpackenc: Wavpack audio encoder
+wavparse:  wavparse: WAV audio demuxer
+waylandsink:  waylandsink: wayland video sink
+webp:  webpdec: WebP image decoder
+webp:  webpenc: WEBP image encoder
+webrtc:  webrtcbin: WebRTC Bin
+webrtcdsp:  webrtcdsp: Voice Processor (AGC, AEC, filters, etc.)
+webrtcdsp:  webrtcechoprobe: Acoustic Echo Canceller probe
+wildmidi:  wildmididec: WildMidi-based MIDI music decoder
+x264:  x264enc: x264 H.264 Encoder
+x265:  x265enc: x265enc
+ximagesink:  ximagesink: Video sink
+ximagesrc:  ximagesrc: Ximage video source
+xingmux:  xingmux: MP3 Xing muxer
+xvimagesink:  xvimagesink: Video sink
+y4mdec:  y4mdec: YUV4MPEG demuxer/decoder
+y4menc:  y4menc: YUV4MPEG video encoder
+zbar:  zbar: Barcode detector
+zxing:  zxing: Barcode detector
 
-> As an example of using vaapi, tested with mpv (--vo=3Dgpu):
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> [...]
-> [vo/gpu] Probing for best GPU context.
-> [vo/gpu/opengl] Initializing GPU context 'wayland'
-> [vo/gpu/opengl] Initializing GPU context 'x11egl'
-> [vo/gpu/x11] X11 opening display: :0
-> [vo/gpu/x11] Display 0 (DP-1): [2560, 0, 5120, 1440] @ 74.923939 FPS
-> [vo/gpu/x11] Display 1 (DP-2): [0, 0, 2560, 1440] @ 74.968101 FPS
-> [vo/gpu/x11] Current display FPS: 74.923939
-> [vo/gpu/opengl] EGL_VERSION=3D1.5
-> [vo/gpu/opengl] EGL_VENDOR=3DMesa Project
-> [vo/gpu/opengl] EGL_CLIENT_APIS=3DOpenGL OpenGL_ES
-> [vo/gpu/opengl] Trying to create Desktop OpenGL context.
-> [vo/gpu/opengl] Choosing visual EGL config 0x15, visual ID 0x21
-> [vo/gpu/x11] The XPresent extension was found.
-> [vo/gpu/x11] XPresent disabled.
-> [vo/gpu/opengl] GL_VERSION=3D'4.6 (Core Profile) Mesa 22.2.3'
-> [vo/gpu/opengl] Detected desktop OpenGL 4.6.
-> [vo/gpu/opengl] GL_VENDOR=3D'Intel'
-> [vo/gpu/opengl] GL_RENDERER=3D'Mesa Intel(R) UHD Graphics (CML GT2)'
-> [vo/gpu/opengl] GL_SHADING_LANGUAGE_VERSION=3D'4.60'
-> [vo/gpu/opengl] Loaded extension GL_KHR_debug.
-> [vo/gpu] Testing FBO format rgba16f
-> [vo/gpu] Using FBO format rgba16f.
-> [vo/gpu] No advanced processing required. Enabling dumb mode.
-> [vo/gpu] Assuming 74.923939 FPS for display sync.
-> [vd] Container reported FPS: 0.000000
-> [vd] Codec list:
-> [vd]     hevc - HEVC (High Efficiency Video Coding)
-> [vd]     hevc_qsv (hevc) - HEVC video (Intel Quick Sync Video acceleratio=
-n)
-> [vd]     hevc_v4l2m2m (hevc) - V4L2 mem2mem HEVC decoder wrapper
-> [vd]     hevc_cuvid (hevc) - Nvidia CUVID HEVC decoder
-> [vd] Opening decoder hevc
-> [vd] Looking at hwdec hevc-vaapi...
-> [vo/gpu] Loading hwdec drivers for format: 'vaapi'
-> [vo/gpu] Loading hwdec driver 'vaapi'
-> [vo/gpu/vaapi] using EGL dmabuf interop
-> [vo/gpu/vaapi] Trying to open a x11 VA display...
-> [vo/gpu/vaapi/vaapi] Initialized VAAPI: version 1.16
-> [vo/gpu/vaapi] Going to probe surface formats (may log bogus errors)...
-> [vo/gpu/vaapi] Done probing surface formats.
-> [vd] Trying hardware decoding via hevc-vaapi.
-> [vd] Selected codec: hevc (HEVC (High Efficiency Video Coding))
-> [vf] User filter list:
-> [vf]   (empty)
-> [cplayer] Starting playback...
-> [vd] Pixel formats supported by decoder: vaapi vdpau cuda yuvj420p
-> [vd] Codec profile: Main (0x1)
-> [vd] Requesting pixfmt 'vaapi' from decoder.
-> [vd] Using hardware decoding (vaapi).
-> [vd] Decoder format: 1920x1080 [0:1] vaapi[nv12] bt.709/bt.709/bt.1886/fu=
-ll/auto CL=3Dmpeg2/4/h264
-> [vd] Using container aspect ratio.
-> [vf] [in] 1920x1080 vaapi[nv12] bt.709/bt.709/bt.1886/full/display SP=3D1=
-=2E000000 CL=3Dmpeg2/4/h264
-> [vf] [userdeint] 1920x1080 vaapi[nv12] bt.709/bt.709/bt.1886/full/display=
- SP=3D1.000000 CL=3Dmpeg2/4/h264
-> [vf] [userdeint] (disabled)
-> [vf] [autorotate] 1920x1080 vaapi[nv12] bt.709/bt.709/bt.1886/full/displa=
-y SP=3D1.000000 CL=3Dmpeg2/4/h264
-> [vf] [autorotate] (disabled)
-> [vf] [convert] 1920x1080 vaapi[nv12] bt.709/bt.709/bt.1886/full/display S=
-P=3D1.000000 CL=3Dmpeg2/4/h264
-> [vf] [convert] (disabled)
-> [vf] [out] 1920x1080 vaapi[nv12] bt.709/bt.709/bt.1886/full/display SP=3D=
-1.000000 CL=3Dmpeg2/4/h264
-> [cplayer] Set property: shared-script-properties -> 1
-> [cplayer] VO: [gpu] 1920x1080 vaapi[nv12]
-> [cplayer] VO: Description: Shader-based GPU Renderer
-> [vo/gpu] reconfig to 1920x1080 vaapi[nv12] bt.709/bt.709/bt.1886/full/dis=
-play SP=3D1.000000 CL=3Dmpeg2/4/h264
-> [vo/gpu/x11] Current display FPS: 74.968101
-> [vo/gpu/x11] Current display FPS: 74.923939
-> [vo/gpu] Resize: 1920x1080
-> [vo/gpu] Window size: 1920x1080 (Borders: l=3D0 t=3D0 r=3D0 b=3D0)
-> [vo/gpu] Video source: 1920x1080 (1:1)
-> [vo/gpu] Video display: (0, 0) 1920x1080 -> (0, 0) 1920x1080
-> [vo/gpu] Video scale: 1.000000/1.000000
-> [vo/gpu] OSD borders: l=3D0 t=3D0 r=3D0 b=3D0
-> [vo/gpu] Video borders: l=3D0 t=3D0 r=3D0 b=3D0
-> [vo/gpu] Reported display depth: 8
-> [vo/gpu] Testing FBO format rgba16f
-> [vo/gpu] Using FBO format rgba16f.
-> [vo/gpu] No advanced processing required. Enabling dumb mode.
-> [...]
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> This works fine, while also can check the GPU utilization with
-> intel_gpu_top - the /Video/ metric keeps changing during
-> playback.
->
-> So I'm testing with `spicy` first and foremost because it
-> actually has a menu option to switch between video encodings,
-> which I don't know how to do with e.g. remote-viewer or
-> virt-viewer.
->
-> $ GST_DEBUG=3D4 spicy --spice-debug -p 5912 -h localhost
->
-> Long story short, while the client output shows that gstreamer
-> picks up its vaapi plugin, and actually loads the intel iHD DRI
-> driver, it still doesn't use the GPU to decode.
+Total count: 257 plugins (1 blacklist entry not shown), 906 features
 
-> I'm afraid something lies underneath the configuration and the
-> protocol that I don't understand. Maybe the host doesn't even
-> encode its stream into e.g. h264 even though the client
-> (=3Dspicy) requests so, therefore it can't very well decode it
-> with the GPU.
 
-> I imagined something along the lines of Spice encoding the
-> stream on the host with the help of the GPU (gstreamer + vaapi)
-> and then the client could decode it on the other end with its
-> GPU as well - as far as they agree on a codec that both support
-> (more specifically the host supports encoding to it and the
-> client suppports decoding from it).
->
-> I was afraid of posting the full output with --spice-debug,
-> becuase it had a ton of "decode-glz.c:335 decode_header:" and
-> "scroll event" lines, so I snipped these out from it.
+Client:
+1394:  dv1394src: Firewire (1394) DV video source
+1394:  hdv1394src: Firewire (1394) HDV video source
+a52dec:  a52dec: ATSC A/52 audio decoder
+aasink:  aasink: ASCII art video sink
+aasink:  aatv: aaTV effect
+accurip:  accurip: AccurateRip(TM) CRC element
+adder:  adder: Adder
+adpcmdec:  adpcmdec: ADPCM decoder
+adpcmenc:  adpcmenc: ADPCM encoder
+aes:  aesdec: aesdec
+aes:  aesenc: aesenc
+aiff:  aiffmux: AIFF audio muxer
+aiff:  aiffparse: AIFF audio demuxer
+alaw:  alawdec: A Law audio decoder
+alaw:  alawenc: A Law audio encoder
+alpha:  alpha: Alpha filter
+alphacolor:  alphacolor: Alpha color filter
+alsa:  alsadeviceprovider (GstDeviceProviderFactory)
+alsa:  alsamidisrc: AlsaMidi Source
+alsa:  alsasink: Audio sink (ALSA)
+alsa:  alsasrc: Audio source (ALSA)
+amrnb:  amrnbdec: AMR-NB audio decoder
+amrnb:  amrnbenc: AMR-NB audio encoder
+amrwbdec:  amrwbdec: AMR-WB audio decoder
+aom:  av1dec: AV1 Decoder
+aom:  av1enc: AV1 Encoder
+apetag:  apedemux: APE tag demuxer
+app:  appsink: AppSink
+app:  appsrc: AppSrc
+asf:  asfdemux: ASF Demuxer
+asf:  rtpasfdepay: RTP ASF packet depayloader
+asf:  rtspwms: WMS RTSP Extension
+asfmux:  asfmux: ASF muxer
+asfmux:  asfparse: ASF parser
+asfmux:  rtpasfpay: RTP ASF payloader
+assrender:  assrender: ASS/SSA Render
+audiobuffersplit:  audiobuffersplit: Audio Buffer Split
+audioconvert:  audioconvert: Audio converter
+audiofx:  audioamplify: Audio amplifier
+audiofx:  audiochebband: Band pass & band reject filter
+audiofx:  audiocheblimit: Low pass & high pass filter
+audiofx:  audiodynamic: Dynamic range controller
+audiofx:  audioecho: Audio echo
+audiofx:  audiofirfilter: Audio FIR filter
+audiofx:  audioiirfilter: Audio IIR filter
+audiofx:  audioinvert: Audio inversion
+audiofx:  audiokaraoke: AudioKaraoke
+audiofx:  audiopanorama: Stereo positioning
+audiofx:  audiowsincband: Band pass & band reject filter
+audiofx:  audiowsinclimit: Low pass & high pass filter
+audiofx:  scaletempo: Scaletempo
+audiofx:  stereo: Stereo effect
+audiofxbad:  audiochannelmix: Simple stereo audio mixer
+audiolatency:  audiolatency: AudioLatency
+audiomixer:  audiointerleave: AudioInterleave
+audiomixer:  audiomixer: AudioMixer
+audiomixer:  liveadder: AudioMixer
+audiomixmatrix:  audiomixmatrix: Matrix audio mix
+audioparsers:  aacparse: AAC audio stream parser
+audioparsers:  ac3parse: AC3 audio stream parser
+audioparsers:  amrparse: AMR audio stream parser
+audioparsers:  dcaparse: DTS Coherent Acoustics audio stream parser
+audioparsers:  flacparse: FLAC audio parser
+audioparsers:  mpegaudioparse: MPEG1 Audio Parser
+audioparsers:  sbcparse: SBC audio parser
+audioparsers:  wavpackparse: Wavpack audio stream parser
+audiorate:  audiorate: Audio rate adjuster
+audioresample:  audioresample: Audio resampler
+audiotestsrc:  audiotestsrc: Audio test source
+audiovisualizers:  spacescope: Stereo visualizer
+audiovisualizers:  spectrascope: Frequency spectrum scope
+audiovisualizers:  synaescope: Synaescope
+audiovisualizers:  wavescope: Waveform oscilloscope
+auparse:  auparse: AU audio demuxer
+autoconvert:  autoconvert: Select converter based on caps
+autoconvert:  autovideoconvert: Select color space converter based on caps
+autodetect:  autoaudiosink: Auto audio sink
+autodetect:  autoaudiosrc: Auto audio source
+autodetect:  autovideosink: Auto video sink
+autodetect:  autovideosrc: Auto video source
+avi:  avidemux: Avi demuxer
+avi:  avimux: Avi muxer
+avi:  avisubtitle: Avi subtitle parser
+avtp:  avtpaafdepay: AVTP Audio Format (AAF) depayloader
+avtp:  avtpaafpay: AVTP Audio Format (AAF) payloader
+avtp:  avtpcrfcheck: Clock Reference Format (CRF) Checker
+avtp:  avtpcrfsync: Clock Reference Format (CRF) Synchronizer
+avtp:  avtpcvfdepay: AVTP Compressed Video Format (CVF) depayloader
+avtp:  avtpcvfpay: AVTP Compressed Video Format (CVF) payloader
+avtp:  avtpsink: Audio/Video Transport Protocol (AVTP) Sink
+avtp:  avtpsrc: Audio/Video Transport Protocol (AVTP) Source
+bayer:  bayer2rgb: Bayer to RGB decoder for cameras
+bayer:  rgb2bayer: RGB to Bayer converter
+bluez:  a2dpsink: Bluetooth A2DP sink
+bluez:  avdtpsink: Bluetooth AVDTP sink
+bluez:  avdtpsrc: Bluetooth AVDTP Source
+bs2b:  bs2b: Crossfeed effect
+bz2:  bz2dec: BZ2 decoder
+bz2:  bz2enc: BZ2 encoder
+cacasink:  cacasink: A colored ASCII art video sink
+cacasink:  cacatv: CacaTV effect
+cairo:  cairooverlay: Cairo overlay
+camerabin:  camerabin: Camera Bin
+camerabin:  viewfinderbin: Viewfinder Bin
+camerabin:  wrappercamerabinsrc: Wrapper camera src element for camerabin2
+cdio:  cdiocddasrc: CD audio source (CDDA)
+cdparanoia:  cdparanoiasrc: CD Audio (cdda) Source, Paranoia IV
+chromaprint:  chromaprint: Chromaprint fingerprinting element
+closedcaption:  cc708overlay: Closed Caption overlay
+closedcaption:  cccombiner: Closed Caption Combiner
+closedcaption:  ccconverter: Closed Caption Converter
+closedcaption:  ccextractor: Closed Caption Extractor
+closedcaption:  line21decoder: Line 21 CC Decoder
+closedcaption:  line21encoder: Line 21 CC Encoder
+codecalpha:  alphacombine: Alpha Combiner
+codecalpha:  codecalphademux: CODEC Alpha Demuxer
+codecalpha:  vp8alphadecodebin: VP8 Alpha Decoder
+codecalpha:  vp9alphadecodebin: VP9 Alpha Decoder
+coloreffects:  chromahold: Chroma hold filter
+coloreffects:  coloreffects: Color Look-up Table filter
+colormanagement:  lcms: LCMS2 ICC correction
+compositor:  compositor: Compositor
+coreelements:  capsfilter: CapsFilter
+coreelements:  clocksync: ClockSync
+coreelements:  concat: Concat
+coreelements:  dataurisrc: data: URI source element
+coreelements:  downloadbuffer: DownloadBuffer
+coreelements:  fakesink: Fake Sink
+coreelements:  fakesrc: Fake Source
+coreelements:  fdsink: Filedescriptor Sink
+coreelements:  fdsrc: Filedescriptor Source
+coreelements:  filesink: File Sink
+coreelements:  filesrc: File Source
+coreelements:  funnel: Funnel pipe fitting
+coreelements:  identity: Identity
+coreelements:  input-selector: Input selector
+coreelements:  multiqueue: MultiQueue
+coreelements:  output-selector: Output selector
+coreelements:  queue: Queue
+coreelements:  queue2: Queue 2
+coreelements:  streamiddemux: Streamid Demux
+coreelements:  tee: Tee pipe fitting
+coreelements:  typefind: TypeFind
+coreelements:  valve: Valve element
+coretracers:  factories (GstTracerFactory)
+coretracers:  latency (GstTracerFactory)
+coretracers:  leaks (GstTracerFactory)
+coretracers:  log (GstTracerFactory)
+coretracers:  rusage (GstTracerFactory)
+coretracers:  stats (GstTracerFactory)
+curl:  curlfilesink: Curl file sink
+curl:  curlftpsink: Curl ftp sink
+curl:  curlhttpsink: Curl http sink
+curl:  curlhttpsrc: HTTP Client Source using libcURL
+curl:  curlsftpsink: Curl sftp sink
+curl:  curlsmtpsink: Curl smtp sink
+cutter:  cutter: Audio cutter
+dash:  dashdemux: DASH Demuxer
+dash:  dashsink: DASH Sink
+dc1394:  dc1394src: 1394 IIDC Video Source
+de265:  libde265dec: HEVC/H.265 decoder
+debug:  breakmydata: Break my data
+debug:  capssetter: CapsSetter
+debug:  cpureport: CPU report
+debug:  navseek: Seek based on left-right arrows
+debug:  progressreport: Progress report
+debug:  pushfilesrc: Push File Source
+debug:  rndbuffersize: Random buffer size
+debug:  taginject: TagInject
+debug:  testsink: Test plugin
+debugutilsbad:  checksumsink: Checksum sink
+debugutilsbad:  chopmydata: Chop my data
+debugutilsbad:  clockselect: Clock select
+debugutilsbad:  compare: Compare buffers
+debugutilsbad:  debugspy: DebugSpy
+debugutilsbad:  errorignore: Convert some GstFlowReturn types into others
+debugutilsbad:  fakeaudiosink: Fake Audio Sink
+debugutilsbad:  fakevideosink: Fake Video Sink
+debugutilsbad:  fpsdisplaysink: Measure and show framerate on videosink
+debugutilsbad:  testsrcbin: Generic bin
+debugutilsbad:  videocodectestsink: Video CODEC Test Sink
+debugutilsbad:  watchdog: Watchdog
+decklink:  decklinkaudiosink: Decklink Audio Sink
+decklink:  decklinkaudiosrc: Decklink Audio Source
+decklink:  decklinkdeviceprovider (GstDeviceProviderFactory)
+decklink:  decklinkvideosink: Decklink Video Sink
+decklink:  decklinkvideosrc: Decklink Video Source
+deinterlace:  deinterlace: Deinterlacer
+dtls:  dtlsdec: DTLS Decoder
+dtls:  dtlsenc: DTLS Encoder
+dtls:  dtlssrtpdec: DTLS-SRTP Decoder
+dtls:  dtlssrtpdemux: DTLS SRTP Demultiplexer
+dtls:  dtlssrtpenc: DTLS-SRTP Encoder
+dtmf:  dtmfsrc: DTMF tone generator
+dtmf:  rtpdtmfdepay: RTP DTMF packet depayloader
+dtmf:  rtpdtmfsrc: RTP DTMF packet generator
+dtsdec:  dtsdec: DTS audio decoder
+dv:  dvdec: DV video decoder
+dv:  dvdemux: DV system stream demuxer
+dvb:  dvbbasebin: DVB bin
+dvb:  dvbsrc: DVB Source
+dvbsubenc:  dvbsubenc: DVB subtitle encoder
+dvbsuboverlay:  dvbsuboverlay: DVB Subtitles Overlay
+dvdlpcmdec:  dvdlpcmdec: DVD LPCM Audio decoder
+dvdread:  dvdreadsrc: DVD Source
+dvdspu:  dvdspu: Sub-picture Overlay
+dvdsub:  dvdsubdec: DVD subtitle decoder
+dvdsub:  dvdsubparse: DVD subtitle parser
+effectv:  agingtv: AgingTV effect
+effectv:  dicetv: DiceTV effect
+effectv:  edgetv: EdgeTV effect
+effectv:  optv: OpTV effect
+effectv:  quarktv: QuarkTV effect
+effectv:  radioactv: RadioacTV effect
+effectv:  revtv: RevTV effect
+effectv:  rippletv: RippleTV effect
+effectv:  shagadelictv: ShagadelicTV
+effectv:  streaktv: StreakTV effect
+effectv:  vertigotv: VertigoTV effect
+effectv:  warptv: WarpTV effect
+encoding:  encodebin: Encoder Bin
+encoding:  encodebin2: Encoder Bin
+equalizer:  equalizer-10bands: 10 Band Equalizer
+equalizer:  equalizer-3bands: 3 Band Equalizer
+equalizer:  equalizer-nbands: N Band Equalizer
+faac:  faac: AAC audio encoder
+faad:  faad: AAC audio decoder
+faceoverlay:  faceoverlay: faceoverlay
+fbdevsink:  fbdevsink: fbdev video sink
+fdkaac:  fdkaacdec: FDK AAC audio decoder
+fdkaac:  fdkaacenc: FDK AAC audio encoder
+festival:  festival: Festival Text-to-Speech synthesizer
+fieldanalysis:  fieldanalysis: Video field analysis
+flac:  flacdec: FLAC audio decoder
+flac:  flacenc: FLAC audio encoder
+flac:  flactag: FLAC tagger
+fluidsynthmidi:  fluiddec: Fluidsynth
+flv:  flvdemux: FLV Demuxer
+flv:  flvmux: FLV muxer
+flxdec:  flxdec: FLX video decoder
+freeverb:  freeverb: Reverberation/room effect
+gaudieffects:  burn: Burn
+gaudieffects:  chromium: Chromium
+gaudieffects:  dilate: Dilate
+gaudieffects:  dodge: Dodge
+gaudieffects:  exclusion: Exclusion
+gaudieffects:  gaussianblur: GstGaussianBlur
+gaudieffects:  solarize: Solarize
+gdkpixbuf:  gdkpixbufdec: GdkPixbuf image decoder
+gdkpixbuf:  gdkpixbufoverlay: GdkPixbuf Overlay
+gdkpixbuf:  gdkpixbufsink: GdkPixbuf sink
+gdp:  gdpdepay: GDP Depayloader
+gdp:  gdppay: GDP Payloader
+geometrictransform:  bulge: bulge
+geometrictransform:  circle: circle
+geometrictransform:  diffuse: diffuse
+geometrictransform:  fisheye: fisheye
+geometrictransform:  kaleidoscope: kaleidoscope
+geometrictransform:  marble: marble
+geometrictransform:  mirror: mirror
+geometrictransform:  perspective: perspective
+geometrictransform:  pinch: pinch
+geometrictransform:  rotate: rotate
+geometrictransform:  sphere: sphere
+geometrictransform:  square: square
+geometrictransform:  stretch: stretch
+geometrictransform:  tunnel: tunnel
+geometrictransform:  twirl: twirl
+geometrictransform:  waterripple: waterripple
+gio:  giosink: GIO sink
+gio:  giosrc: GIO source
+gio:  giostreamsink: GIO stream sink
+gio:  giostreamsrc: GIO stream source
+gme:  gmedec: Gaming console music file decoder
+goom:  goom: GOOM: what a GOOM!
+goom2k1:  goom2k1: GOOM: what a GOOM! 2k1 edition
+gsm:  gsmdec: GSM audio decoder
+gsm:  gsmenc: GSM audio encoder
+hls:  hlsdemux: HLS Demuxer
+hls:  hlssink: HTTP Live Streaming sink
+hls:  hlssink2: HTTP Live Streaming sink
+icydemux:  icydemux: ICY tag demuxer
+id3demux:  id3demux: ID3 tag demuxer
+id3tag:  id3mux: ID3 v1 and v2 Muxer
+imagefreeze:  imagefreeze: Still frame stream generator
+inter:  interaudiosink: Internal audio sink
+inter:  interaudiosrc: Internal audio source
+inter:  intersubsink: Internal subtitle sink
+inter:  intersubsrc: Internal subtitle source
+inter:  intervideosink: Internal video sink
+inter:  intervideosrc: Internal video source
+interlace:  interlace: Interlace filter
+interleave:  deinterleave: Audio deinterleaver
+interleave:  interleave: Audio interleaver
+ipcpipeline:  ipcpipelinesink: Inter-process Pipeline Sink
+ipcpipeline:  ipcpipelinesrc: Inter-process Pipeline Source
+ipcpipeline:  ipcslavepipeline: Inter-process slave pipeline
+isomp4:  3gppmux: 3GPP Muxer
+isomp4:  ismlmux: ISML Muxer
+isomp4:  mj2mux: MJ2 Muxer
+isomp4:  mp4mux: MP4 Muxer
+isomp4:  qtdemux: QuickTime demuxer
+isomp4:  qtmoovrecover: QT Moov Recover
+isomp4:  qtmux: QuickTime Muxer
+isomp4:  rtpxqtdepay: RTP packet depayloader
+ivfparse:  ivfparse: IVF parser
+ivtc:  combdetect: Comb Detect
+ivtc:  ivtc: Inverse Telecine
+jack:  jackaudiosink: Audio Sink (Jack)
+jack:  jackaudiosrc: Audio Source (Jack)
+jp2kdecimator:  jp2kdecimator: JPEG2000 decimator
+jpeg:  jpegdec: JPEG image decoder
+jpeg:  jpegenc: JPEG image encoder
+jpegformat:  jifmux: JPEG stream muxer
+jpegformat:  jpegparse: JPEG stream parser
+kate:  katedec: Kate stream text decoder
+kate:  kateenc: Kate stream encoder
+kate:  kateparse: Kate stream parser
+kate:  katetag: Kate stream tagger
+kms:  kmssink: KMS video sink
+ladspa:  ladspa-ladspa-rubberband-so-rubberband-pitchshifter-mono: Rubber B=
+and Mono Pitch Shifter
+ladspa:  ladspa-ladspa-rubberband-so-rubberband-pitchshifter-stereo: Rubber=
+ Band Stereo Pitch Shifter
+ladspa:  ladspa-ladspa-rubberband-so-rubberband-r3-pitchshifter-mono: Rubbe=
+r Band R3 Mono Pitch Shifter
+ladspa:  ladspa-ladspa-rubberband-so-rubberband-r3-pitchshifter-stereo: Rub=
+ber Band R3 Stereo Pitch Shifter
+lame:  lamemp3enc: L.A.M.E. mp3 encoder
+ldac:  ldacenc: Bluetooth LDAC audio encoder
+legacyrawparse:  audioparse: Audio Parse
+legacyrawparse:  videoparse: Video Parse
+level:  level: Level
+matroska:  matroskademux: Matroska demuxer
+matroska:  matroskamux: Matroska muxer
+matroska:  matroskaparse: Matroska parser
+matroska:  webmmux: WebM muxer
+microdns:  microdnsdeviceprovider (GstDeviceProviderFactory)
+midi:  midiparse: MidiParse
+modplug:  modplug: ModPlug
+monoscope:  monoscope: Monoscope
+mpeg2dec:  mpeg2dec: mpeg1 and mpeg2 video decoder
+mpeg2enc:  mpeg2enc: mpeg2enc video encoder
+mpegpsdemux:  mpegpsdemux: MPEG Program Stream Demuxer
+mpegpsmux:  mpegpsmux: MPEG Program Stream Muxer
+mpegtsdemux:  tsdemux: MPEG transport stream demuxer
+mpegtsdemux:  tsparse: MPEG transport stream parser
+mpegtsmux:  atscmux: ATSC Transport Stream Muxer
+mpegtsmux:  mpegtsmux: MPEG Transport Stream Muxer
+mpg123:  mpg123audiodec: mpg123 mp3 decoder
+mplex:  mplex: mplex video multiplexer
+mulaw:  mulawdec: Mu Law audio decoder
+mulaw:  mulawenc: Mu Law audio encoder
+multifile:  imagesequencesrc: Image Sequence Source
+multifile:  multifilesink: Multi-File Sink
+multifile:  multifilesrc: Multi-File Source
+multifile:  splitfilesrc: Split-File Source
+multifile:  splitmuxsink: Split Muxing Bin
+multifile:  splitmuxsrc: Split File Demuxing Bin
+multipart:  multipartdemux: Multipart demuxer
+multipart:  multipartmux: Multipart muxer
+musepack:  musepackdec: Musepack decoder
+mxf:  mxfdemux: MXF Demuxer
+mxf:  mxfmux: MXF muxer
+navigationtest:  navigationtest: Video navigation test
+neonhttpsrc:  neonhttpsrc: HTTP client source
+netsim:  netsim: Network Simulator
+nice:  nicesink: ICE sink
+nice:  nicesrc: ICE source
+ogg:  oggaviparse: Ogg AVI parser
+ogg:  oggdemux: Ogg demuxer
+ogg:  oggmux: Ogg muxer
+ogg:  oggparse: Ogg parser
+ogg:  ogmaudioparse: OGM audio stream parser
+ogg:  ogmtextparse: OGM text stream parser
+ogg:  ogmvideoparse: OGM video stream parser
+openal:  openalsink: OpenAL Audio Sink
+openal:  openalsrc: OpenAL Audio Source
+openaptx:  openaptxdec: Bluetooth aptX/aptX-HD audio decoder using libopena=
+ptx
+openaptx:  openaptxenc: Bluetooth aptX/aptX-HD audio encoder using libopena=
+ptx
+openexr:  openexrdec: OpenEXR decoder
+opengl:  glalpha: OpenGL Alpha Filter
+opengl:  glcolorbalance: Video balance
+opengl:  glcolorconvert: OpenGL color converter
+opengl:  glcolorscale: OpenGL color scale
+opengl:  gldeinterlace: OpenGL deinterlacing filter
+opengl:  gldifferencematte: Gstreamer OpenGL DifferenceMatte
+opengl:  gldownload: OpenGL downloader
+opengl:  gleffects: Gstreamer OpenGL Effects
+opengl:  gleffects_blur: Blur with 9x9 separable convolution Effect
+opengl:  gleffects_bulge: Bulge Effect
+opengl:  gleffects_fisheye: FishEye Effect
+opengl:  gleffects_glow: Glow Lighting Effect
+opengl:  gleffects_heat: Heat Signature Effect
+opengl:  gleffects_identity: Do nothing Effect
+opengl:  gleffects_laplacian: Laplacian Convolution Demo Effect
+opengl:  gleffects_lumaxpro: Luma Cross Processing Effect
+opengl:  gleffects_mirror: Mirror Effect
+opengl:  gleffects_sepia: Sepia Toning Effect
+opengl:  gleffects_sin: All Grey but Red Effect
+opengl:  gleffects_sobel: Sobel edge detection Effect
+opengl:  gleffects_square: Square Effect
+opengl:  gleffects_squeeze: Squeeze Effect
+opengl:  gleffects_stretch: Stretch Effect
+opengl:  gleffects_tunnel: Light Tunnel Effect
+opengl:  gleffects_twirl: Twirl Effect
+opengl:  gleffects_xpro: Cross Processing Effect
+opengl:  gleffects_xray: Glowing negative effect
+opengl:  glfilterapp: OpenGL application filter
+opengl:  glfilterbin: GL Filter Bin
+opengl:  glfiltercube: OpenGL cube filter
+opengl:  glfilterglass: OpenGL glass filter
+opengl:  glimagesink: GL Sink Bin
+opengl:  glimagesinkelement: OpenGL video sink
+opengl:  glmixerbin: OpenGL video_mixer empty bin
+opengl:  glmosaic: OpenGL mosaic
+opengl:  gloverlay: Gstreamer OpenGL Overlay
+opengl:  gloverlaycompositor: OpenGL overlaying filter
+opengl:  glshader: OpenGL fragment shader filter
+opengl:  glsinkbin: GL Sink Bin
+opengl:  glsrcbin: GL Src Bin
+opengl:  glstereomix: OpenGL stereo video combiner
+opengl:  glstereosplit: GLStereoSplit
+opengl:  gltestsrc: Video test source
+opengl:  gltransformation: OpenGL transformation filter
+opengl:  glupload: OpenGL uploader
+opengl:  glvideoflip: OpenGL video flip filter
+opengl:  glvideomixer: OpenGL video_mixer bin
+opengl:  glvideomixerelement: OpenGL video_mixer
+opengl:  glviewconvert: OpenGL Multiview/3D conversion filter
+openjpeg:  openjpegdec: OpenJPEG JPEG2000 decoder
+openjpeg:  openjpegenc: OpenJPEG JPEG2000 encoder
+openmpt:  openmptdec: OpenMPT-based module music decoder
+opus:  opusdec: Opus audio decoder
+opus:  opusenc: Opus audio encoder
+opusparse:  opusparse: Opus audio parser
+oss4:  oss4sink: OSS v4 Audio Sink
+oss4:  oss4src: OSS v4 Audio Source
+ossaudio:  osssink: Audio Sink (OSS)
+ossaudio:  osssrc: Audio Source (OSS)
+overlaycomposition:  overlaycomposition: Overlay Composition
+pango:  clockoverlay: Clock overlay
+pango:  textoverlay: Text overlay
+pango:  textrender: Text renderer
+pango:  timeoverlay: Time overlay
+pbtypes:  GstVideoMultiviewFlagsSet (GstDynamicTypeFactory)
+pcapparse:  irtspparse: IRTSPParse
+pcapparse:  pcapparse: PCapParse
+playback:  decodebin: Decoder Bin
+playback:  decodebin3: Decoder Bin 3
+playback:  parsebin: Parse Bin
+playback:  playbin: Player Bin 2
+playback:  playbin3: Player Bin 3
+playback:  playsink: Player Sink
+playback:  streamsynchronizer: Stream Synchronizer
+playback:  subtitleoverlay: Subtitle Overlay
+playback:  uridecodebin: URI Decoder
+playback:  uridecodebin3: URI Decoder
+playback:  urisourcebin: URI reader
+png:  pngdec: PNG image decoder
+png:  pngenc: PNG image encoder
+pnm:  pnmdec: PNM image decoder
+pnm:  pnmenc: PNM image encoder
+proxy:  proxysink: Proxy Sink
+proxy:  proxysrc: Proxy source
+pulseaudio:  pulsedeviceprovider (GstDeviceProviderFactory)
+pulseaudio:  pulsesink: PulseAudio Audio Sink
+pulseaudio:  pulsesrc: PulseAudio Audio Source
+qroverlay:  debugqroverlay: qroverlay
+qroverlay:  qroverlay: qroverlay
+rawparse:  rawaudioparse: rawaudioparse
+rawparse:  rawvideoparse: rawvideoparse
+rawparse:  unalignedaudioparse: unalignedaudioparse
+rawparse:  unalignedvideoparse: unalignedvideoparse
+realmedia:  pnmsrc: PNM packet receiver
+realmedia:  rademux: RealAudio Demuxer
+realmedia:  rdtdepay: RDT packet parser
+realmedia:  rdtmanager: RTP Decoder
+realmedia:  rmdemux: RealMedia Demuxer
+realmedia:  rtspreal: RealMedia RTSP Extension
+removesilence:  removesilence: RemoveSilence
+replaygain:  rganalysis: ReplayGain analysis
+replaygain:  rglimiter: ReplayGain limiter
+replaygain:  rgvolume: ReplayGain volume
+resindvd:  rsndvdbin: rsndvdbin
+rfbsrc:  rfbsrc: Rfb source
+rist:  ristrtpdeext: RIST RTP Extension remover
+rist:  ristrtpext: RIST RTP Extension adder
+rist:  ristrtxreceive: RIST Retransmission receiver
+rist:  ristrtxsend: RIST Retransmission Sender
+rist:  ristsink: RIST Sink
+rist:  ristsrc: RIST Source
+rist:  roundrobin: Round Robin
+rsvg:  rsvgdec: SVG image decoder
+rsvg:  rsvgoverlay: RSVG overlay
+rtmp:  rtmpsink: RTMP output sink
+rtmp:  rtmpsrc: RTMP Source
+rtmp2:  rtmp2sink: RTMP sink element
+rtmp2:  rtmp2src: RTMP source element
+rtp:  asteriskh263: RTP Asterisk H263 depayloader
+rtp:  rtpL16depay: RTP audio depayloader
+rtp:  rtpL16pay: RTP audio payloader
+rtp:  rtpL24depay: RTP audio depayloader
+rtp:  rtpL24pay: RTP audio payloader
+rtp:  rtpL8depay: RTP audio depayloader
+rtp:  rtpL8pay: RTP audio payloader
+rtp:  rtpac3depay: RTP AC3 depayloader
+rtp:  rtpac3pay: RTP AC3 audio payloader
+rtp:  rtpamrdepay: RTP AMR depayloader
+rtp:  rtpamrpay: RTP AMR payloader
+rtp:  rtpbvdepay: RTP BroadcomVoice depayloader
+rtp:  rtpbvpay: RTP BV Payloader
+rtp:  rtpceltdepay: RTP CELT depayloader
+rtp:  rtpceltpay: RTP CELT payloader
+rtp:  rtpdvdepay: RTP DV Depayloader
+rtp:  rtpdvpay: RTP DV Payloader
+rtp:  rtpg722depay: RTP audio depayloader
+rtp:  rtpg722pay: RTP audio payloader
+rtp:  rtpg723depay: RTP G.723 depayloader
+rtp:  rtpg723pay: RTP G.723 payloader
+rtp:  rtpg726depay: RTP G.726 depayloader
+rtp:  rtpg726pay: RTP G.726 payloader
+rtp:  rtpg729depay: RTP G.729 depayloader
+rtp:  rtpg729pay: RTP G.729 payloader
+rtp:  rtpgsmdepay: RTP GSM depayloader
+rtp:  rtpgsmpay: RTP GSM payloader
+rtp:  rtpgstdepay: GStreamer depayloader
+rtp:  rtpgstpay: RTP GStreamer payloader
+rtp:  rtph261depay: RTP H261 depayloader
+rtp:  rtph261pay: RTP H261 packet payloader
+rtp:  rtph263depay: RTP H263 depayloader
+rtp:  rtph263pay: RTP H263 packet payloader
+rtp:  rtph263pdepay: RTP H263 depayloader
+rtp:  rtph263ppay: RTP H263 payloader
+rtp:  rtph264depay: RTP H264 depayloader
+rtp:  rtph264pay: RTP H264 payloader
+rtp:  rtph265depay: RTP H265 depayloader
+rtp:  rtph265pay: RTP H265 payloader
+rtp:  rtphdrextcolorspace: Color Space
+rtp:  rtpilbcdepay: RTP iLBC depayloader
+rtp:  rtpilbcpay: RTP iLBC Payloader
+rtp:  rtpisacdepay: RTP iSAC depayloader
+rtp:  rtpisacpay: RTP iSAC payloader
+rtp:  rtpj2kdepay: RTP JPEG 2000 depayloader
+rtp:  rtpj2kpay: RTP JPEG 2000 payloader
+rtp:  rtpjpegdepay: RTP JPEG depayloader
+rtp:  rtpjpegpay: RTP JPEG payloader
+rtp:  rtpklvdepay: RTP KLV Depayloader
+rtp:  rtpklvpay: RTP KLV Payloader
+rtp:  rtpldacpay: RTP packet payloader
+rtp:  rtpmp1sdepay: RTP MPEG1 System Stream depayloader
+rtp:  rtpmp2tdepay: RTP MPEG Transport Stream depayloader
+rtp:  rtpmp2tpay: RTP MPEG2 Transport Stream payloader
+rtp:  rtpmp4adepay: RTP MPEG4 audio depayloader
+rtp:  rtpmp4apay: RTP MPEG4 audio payloader
+rtp:  rtpmp4gdepay: RTP MPEG4 ES depayloader
+rtp:  rtpmp4gpay: RTP MPEG4 ES payloader
+rtp:  rtpmp4vdepay: RTP MPEG4 video depayloader
+rtp:  rtpmp4vpay: RTP MPEG4 Video payloader
+rtp:  rtpmpadepay: RTP MPEG audio depayloader
+rtp:  rtpmpapay: RTP MPEG audio payloader
+rtp:  rtpmparobustdepay: RTP MPEG audio depayloader
+rtp:  rtpmpvdepay: RTP MPEG video depayloader
+rtp:  rtpmpvpay: RTP MPEG2 ES video payloader
+rtp:  rtpopusdepay: RTP Opus packet depayloader
+rtp:  rtpopuspay: RTP Opus payloader
+rtp:  rtppcmadepay: RTP PCMA depayloader
+rtp:  rtppcmapay: RTP PCMA payloader
+rtp:  rtppcmudepay: RTP PCMU depayloader
+rtp:  rtppcmupay: RTP PCMU payloader
+rtp:  rtpqcelpdepay: RTP QCELP depayloader
+rtp:  rtpqdm2depay: RTP QDM2 depayloader
+rtp:  rtpreddec: Redundant Audio Data (RED) Decoder
+rtp:  rtpredenc: Redundant Audio Data (RED) Encoder
+rtp:  rtpsbcdepay: RTP SBC audio depayloader
+rtp:  rtpsbcpay: RTP packet payloader
+rtp:  rtpsirendepay: RTP Siren packet depayloader
+rtp:  rtpsirenpay: RTP Payloader for Siren Audio
+rtp:  rtpspeexdepay: RTP Speex depayloader
+rtp:  rtpspeexpay: RTP Speex payloader
+rtp:  rtpstorage: RTP storage
+rtp:  rtpstreamdepay: RTP Stream Depayloading
+rtp:  rtpstreampay: RTP Stream Payloading
+rtp:  rtpsv3vdepay: RTP SVQ3 depayloader
+rtp:  rtptheoradepay: RTP Theora depayloader
+rtp:  rtptheorapay: RTP Theora payloader
+rtp:  rtpulpfecdec: RTP FEC Decoder
+rtp:  rtpulpfecenc: RTP FEC Encoder
+rtp:  rtpvorbisdepay: RTP Vorbis depayloader
+rtp:  rtpvorbispay: RTP Vorbis payloader
+rtp:  rtpvp8depay: RTP VP8 depayloader
+rtp:  rtpvp8pay: RTP VP8 payloader
+rtp:  rtpvp9depay: RTP VP9 depayloader
+rtp:  rtpvp9pay: RTP VP9 payloader
+rtp:  rtpvrawdepay: RTP Raw Video depayloader
+rtp:  rtpvrawpay: RTP Raw Video payloader
+rtpmanager:  rtpbin: RTP Bin
+rtpmanager:  rtpdtmfmux: RTP muxer
+rtpmanager:  rtpfunnel: RTP funnel
+rtpmanager:  rtphdrextclientaudiolevel: Client-to-Mixer Audio Level Indicat=
+ion (RFC6464) RTP Header Extension
+rtpmanager:  rtphdrexttwcc: Transport Wide Congestion Control
+rtpmanager:  rtpjitterbuffer: RTP packet jitter-buffer
+rtpmanager:  rtpmux: RTP muxer
+rtpmanager:  rtpptdemux: RTP Demux
+rtpmanager:  rtprtxqueue: RTP Retransmission Queue
+rtpmanager:  rtprtxreceive: RTP Retransmission receiver
+rtpmanager:  rtprtxsend: RTP Retransmission Sender
+rtpmanager:  rtpsession: RTP Session
+rtpmanager:  rtpssrcdemux: RTP SSRC Demux
+rtpmanager:  rtpst2022-1-fecdec: SMPTE 2022-1 FEC decoder
+rtpmanager:  rtpst2022-1-fecenc: SMPTE 2022-1 FEC encoder
+rtpmanagerbad:  rtpsink: RTP Sink element
+rtpmanagerbad:  rtpsrc: RTP Source element
+rtponvif:  rtponvifparse: ONVIF NTP timestamps RTP extension
+rtponvif:  rtponviftimestamp: ONVIF NTP timestamps RTP extension
+rtsp:  rtpdec: RTP Decoder
+rtsp:  rtspsrc: RTSP packet receiver
+sbc:  sbcdec: Bluetooth SBC audio decoder
+sbc:  sbcenc: Bluetooth SBC audio encoder
+sctp:  sctpdec: SCTP Decoder
+sctp:  sctpenc: SCTP Encoder
+sdpelem:  sdpdemux: SDP session setup
+sdpelem:  sdpsrc: SDP Source
+segmentclip:  audiosegmentclip: Audio buffer segment clipper
+segmentclip:  videosegmentclip: Video buffer segment clipper
+shapewipe:  shapewipe: Shape Wipe transition filter
+shm:  shmsink: Shared Memory Sink
+shm:  shmsrc: Shared Memory Source
+shout2:  shout2send: Icecast network sink
+sid:  siddec: Sid decoder
+siren:  sirendec: Siren Decoder element
+siren:  sirenenc: Siren Encoder element
+smooth:  smooth: Smooth effect
+smoothstreaming:  mssdemux: Smooth Streaming demuxer
+smpte:  smpte: SMPTE transitions
+smpte:  smptealpha: SMPTE transitions
+sndfile:  sfdec: Sndfile decoder
+soundtouch:  bpmdetect: BPM Detector
+soundtouch:  pitch: Pitch controller
+soup:  souphttpclientsink: HTTP client sink
+soup:  souphttpsrc: HTTP client source
+spandsp:  dtmfdetect: DTMF detector element
+spandsp:  spanplc: SpanDSP PLC
+spandsp:  tonegeneratesrc: Telephony Tone  Generator source
+spectrum:  spectrum: Spectrum analyzer
+speed:  speed: Speed
+speex:  speexdec: Speex audio decoder
+speex:  speexenc: Speex audio encoder
+srt:  srtclientsink: SRT sink
+srt:  srtclientsrc: SRT source
+srt:  srtserversink: SRT sink
+srt:  srtserversrc: SRT source
+srt:  srtsink: SRT sink
+srt:  srtsrc: SRT source
+srtp:  srtpdec: SRTP decoder
+srtp:  srtpenc: SRTP encoder
+staticelements:  bin: Generic bin
+staticelements:  pipeline: Pipeline object
+subenc:  srtenc: Srt encoder
+subenc:  webvttenc: WebVTT encoder
+subparse:  ssaparse: SSA Subtitle Parser
+subparse:  subparse: Subtitle parser
+subparse: subparse_typefind: srt, sub, mpsub, mdvd, smi, txt, dks, vtt
+svthevcenc:  svthevcenc: svthevcenc
+switchbin:  switchbin: switchbin
+taglib:  apev2mux: TagLib-based APEv2 Muxer
+taglib:  id3v2mux: TagLib-based ID3v2 Muxer
+tcp:  multifdsink: Multi filedescriptor sink
+tcp:  multisocketsink: Multi socket sink
+tcp:  socketsrc: socket source
+tcp:  tcpclientsink: TCP client sink
+tcp:  tcpclientsrc: TCP client source
+tcp:  tcpserversink: TCP server sink
+tcp:  tcpserversrc: TCP server source
+teletext:  teletextdec: Teletext decoder
+theora:  theoradec: Theora video decoder
+theora:  theoraenc: Theora video encoder
+theora:  theoraparse: Theora video parser
+timecode:  avwait: Timecode Wait
+timecode:  timecodestamper: Timecode stamper
+transcode:  transcodebin: Transcode Bin
+transcode:  uritranscodebin: URITranscode Bin
+ttmlsubs:  ttmlparse: TTML subtitle parser
+ttmlsubs:  ttmlrender: TTML subtitle renderer
+twolame:  twolamemp2enc: TwoLAME mp2 encoder
+typefindfunctions: application/dash+xml: mpd, MPD
+typefindfunctions: application/itc: itc
+typefindfunctions: application/msword: doc
+typefindfunctions: application/mxf: mxf
+typefindfunctions: application/octet-stream: no extensions
+typefindfunctions: application/ogg: ogg, oga, ogv, ogm, ogx, spx, anx, axa,=
+ axv
+typefindfunctions: application/pdf: pdf
+typefindfunctions: application/postscript: ps
+typefindfunctions: application/sdp: sdp
+typefindfunctions: application/smil: smil
+typefindfunctions: application/ttml+xml: ttml+xml
+typefindfunctions: application/vnd.apple-fcp+xml: fcpxml
+typefindfunctions: application/vnd.apple-xmeml+xml: xmeml
+typefindfunctions: application/vnd.ms-sstr+xml: no extensions
+typefindfunctions: application/vnd.pixar.opentimelineio+json: otio
+typefindfunctions: application/vnd.rn-realmedia: ra, ram, rm, rmvb
+typefindfunctions: application/x-3gp: 3gp
+typefindfunctions: application/x-ape: ape
+typefindfunctions: application/x-apetag: mp3, ape, mpc, wv
+typefindfunctions: application/x-ar: a
+typefindfunctions: application/x-bzip: bz2
+typefindfunctions: application/x-compress: Z
+typefindfunctions: application/x-executable: no extensions
+typefindfunctions: application/x-gzip: gz
+typefindfunctions: application/x-hls: m3u8
+typefindfunctions: application/x-id3v1: mp3, mp2, mp1, mpga, ogg, flac, tta
+typefindfunctions: application/x-id3v2: mp3, mp2, mp1, mpga, ogg, flac, tta
+typefindfunctions: application/x-mcc: mcc
+typefindfunctions: application/x-mmsh: no extensions
+typefindfunctions: application/x-ms-dos-executable: dll, exe, ocx, sys, scr=
+, msstyles, cpl
+typefindfunctions: application/x-ogg-skeleton: no extensions
+typefindfunctions: application/x-ogm-audio: no extensions
+typefindfunctions: application/x-ogm-text: no extensions
+typefindfunctions: application/x-ogm-video: no extensions
+typefindfunctions: application/x-pn-realaudio: ra, ram, rm, rmvb
+typefindfunctions: application/x-rar: rar
+typefindfunctions: application/x-scc: scc
+typefindfunctions: application/x-shockwave-flash: swf, swfl
+typefindfunctions: application/x-ssa: ssa, ass
+typefindfunctions: application/x-subtitle-vtt: vtt
+typefindfunctions: application/x-tar: tar
+typefindfunctions: application/x-yuv4mpeg: no extensions
+typefindfunctions: application/xges: xges
+typefindfunctions: application/xml: xml
+typefindfunctions: application/zip: zip
+typefindfunctions: audio/aac: aac, adts, adif, loas
+typefindfunctions: audio/audible: aa, aax
+typefindfunctions: audio/iLBC-sh: ilbc
+typefindfunctions: audio/midi: mid, midi
+typefindfunctions: audio/mobile-xmf: mxmf
+typefindfunctions: audio/mpeg: mp3, mp2, mp1, mpga
+typefindfunctions: audio/qcelp: qcp
+typefindfunctions: audio/riff-midi: mid, midi
+typefindfunctions: audio/x-ac3: ac3, eac3
+typefindfunctions: audio/x-aiff: aiff, aif, aifc
+typefindfunctions: audio/x-amr-nb-sh: amr
+typefindfunctions: audio/x-amr-wb-sh: amr
+typefindfunctions: audio/x-au: au, snd
+typefindfunctions: audio/x-ay: ay
+typefindfunctions: audio/x-caf: caf
+typefindfunctions: audio/x-celt: no extensions
+typefindfunctions: audio/x-dts: dts
+typefindfunctions: audio/x-flac: flac
+typefindfunctions: audio/x-gbs: gbs
+typefindfunctions: audio/x-gsm: gsm
+typefindfunctions: audio/x-gym: gym
+typefindfunctions: audio/x-imelody: imy, ime, imelody
+typefindfunctions: audio/x-ircam: sf
+typefindfunctions: audio/x-kss: kss
+typefindfunctions: audio/x-m4a: m4a
+typefindfunctions: audio/x-mod: 669, amf, ams, dbm, digi, dmf, dsm, gdm, fa=
+r, imf, it, j2b, mdl, med, mod, mt2, mtm, okt, psm, ptm, sam, s3m, stm, stx=
+, ult, umx, xm
+typefindfunctions: audio/x-musepack: mpc, mpp, mp+
+typefindfunctions: audio/x-nist: nist
+typefindfunctions: audio/x-nsf: nsf
+typefindfunctions: audio/x-paris: paf
+typefindfunctions: audio/x-rf64: rf64
+typefindfunctions: audio/x-sap: sap
+typefindfunctions: audio/x-sbc: sbc
+typefindfunctions: audio/x-sds: sds
+typefindfunctions: audio/x-shorten: shn
+typefindfunctions: audio/x-sid: sid
+typefindfunctions: audio/x-spc: spc
+typefindfunctions: audio/x-speex: no extensions
+typefindfunctions: audio/x-svx: iff, svx
+typefindfunctions: audio/x-tap-dmp: dmp
+typefindfunctions: audio/x-tap-tap: tap
+typefindfunctions: audio/x-ttafile: tta
+typefindfunctions: audio/x-vgm: vgm
+typefindfunctions: audio/x-voc: voc
+typefindfunctions: audio/x-vorbis: no extensions
+typefindfunctions: audio/x-w64: w64
+typefindfunctions: audio/x-wav: wav
+typefindfunctions: audio/x-wavpack: wv, wvp
+typefindfunctions: audio/x-wavpack-correction: wvc
+typefindfunctions: audio/x-xi: xi
+typefindfunctions: image/bmp: bmp
+typefindfunctions: image/gif: gif
+typefindfunctions: image/jp2: jp2
+typefindfunctions: image/jpeg: jpg, jpe, jpeg
+typefindfunctions: image/png: png
+typefindfunctions: image/svg+xml: svg
+typefindfunctions: image/tiff: tif, tiff
+typefindfunctions: image/vnd.adobe.photoshop: psd
+typefindfunctions: image/vnd.wap.wbmp: no extensions
+typefindfunctions: image/webp: webp
+typefindfunctions: image/x-degas: no extensions
+typefindfunctions: image/x-exr: exr
+typefindfunctions: image/x-icon: no extensions
+typefindfunctions: image/x-jng: jng
+typefindfunctions: image/x-jpc: jpc, j2k
+typefindfunctions: image/x-portable-pixmap: pnm, ppm, pgm, pbm
+typefindfunctions: image/x-quicktime: qif, qtif, qti
+typefindfunctions: image/x-sun-raster: ras
+typefindfunctions: image/x-xcf: xcf
+typefindfunctions: image/x-xpixmap: xpm
+typefindfunctions: multipart/x-mixed-replace: no extensions
+typefindfunctions: subtitle/x-kate: no extensions
+typefindfunctions: text/html: htm, html
+typefindfunctions: text/plain: txt
+typefindfunctions: text/uri-list: ram
+typefindfunctions: text/utf-16: txt
+typefindfunctions: text/utf-32: txt
+typefindfunctions: text/x-cmml: no extensions
+typefindfunctions: video/mj2: mj2
+typefindfunctions: video/mpeg-elementary: mpv, mpeg, mpg
+typefindfunctions: video/mpeg-sys: mpe, mpeg, mpg
+typefindfunctions: video/mpeg4: m4v
+typefindfunctions: video/mpegts: ts, mts
+typefindfunctions: video/quicktime: mov, mp4
+typefindfunctions: video/vivo: viv
+typefindfunctions: video/x-cdxa: dat
+typefindfunctions: video/x-dirac: no extensions
+typefindfunctions: video/x-dv: dv, dif
+typefindfunctions: video/x-fli: flc, fli
+typefindfunctions: video/x-flv: flv
+typefindfunctions: video/x-h263: h263, 263
+typefindfunctions: video/x-h264: h264, x264, 264
+typefindfunctions: video/x-h265: h265, x265, 265
+typefindfunctions: video/x-ivf: ivf
+typefindfunctions: video/x-matroska: mkv, mka, mk3d, webm
+typefindfunctions: video/x-mng: mng
+typefindfunctions: video/x-ms-asf: asf, wm, wma, wmv
+typefindfunctions: video/x-msvideo: avi
+typefindfunctions: video/x-mve: mve
+typefindfunctions: video/x-nuv: nuv
+typefindfunctions: video/x-pva: pva
+typefindfunctions: video/x-theora: no extensions
+typefindfunctions: video/x-vcd: dat
+udp:  dynudpsink: UDP packet sender
+udp:  multiudpsink: UDP packet sender
+udp:  udpsink: UDP packet sender
+udp:  udpsrc: UDP packet receiver
+uvch264:  uvch264deviceprovider (GstDeviceProviderFactory)
+uvch264:  uvch264mjpgdemux: UVC H264 MJPG Demuxer
+uvch264:  uvch264src: UVC H264 Source
+vaapi:  vaapidecodebin: VA-API Decode Bin
+vaapi:  vaapih264dec: VA-API H264 decoder
+vaapi:  vaapih264enc: VA-API H264 encoder
+vaapi:  vaapih265dec: VA-API H265 decoder
+vaapi:  vaapih265enc: VA-API H265 encoder
+vaapi:  vaapijpegdec: VA-API JPEG decoder
+vaapi:  vaapijpegenc: VA-API JPEG encoder
+vaapi:  vaapimpeg2dec: VA-API MPEG2 decoder
+vaapi:  vaapimpeg2enc: VA-API MPEG-2 encoder
+vaapi:  vaapioverlay: VA-API overlay
+vaapi:  vaapipostproc: VA-API video postprocessing
+vaapi:  vaapisink: VA-API sink
+vaapi:  vaapivc1dec: VA-API VC1 decoder
+vaapi:  vaapivp8dec: VA-API VP8 decoder
+vaapi:  vaapivp8enc: VA-API VP8 encoder
+vaapi:  vaapivp9dec: VA-API VP9 decoder
+video4linux2:  v4l2deviceprovider (GstDeviceProviderFactory)
+video4linux2:  v4l2radio: Radio (video4linux2) Tuner
+video4linux2:  v4l2sink: Video (video4linux2) Sink
+video4linux2:  v4l2src: Video (video4linux2) Source
+videobox:  videobox: Video box filter
+videoconvert:  videoconvert: Colorspace converter
+videocrop:  aspectratiocrop: aspectratiocrop
+videocrop:  videocrop: Crop
+videofilter:  gamma: Video gamma correction
+videofilter:  videobalance: Video balance
+videofilter:  videoflip: Video flipper
+videofilter:  videomedian: Median effect
+videofiltersbad:  scenechange: Scene change detector
+videofiltersbad:  videodiff: Video Diff
+videofiltersbad:  zebrastripe: Zebra stripe overlay
+videoframe_audiolevel:  videoframe-audiolevel: Video-frame audio level
+videomixer:  videomixer: Video mixer 2
+videoparsersbad:  av1parse: AV1 parser
+videoparsersbad:  diracparse: Dirac parser
+videoparsersbad:  h263parse: H.263 parser
+videoparsersbad:  h264parse: H.264 parser
+videoparsersbad:  h265parse: H.265 parser
+videoparsersbad:  jpeg2000parse: JPEG 2000 parser
+videoparsersbad:  mpeg4videoparse: MPEG 4 video elementary stream parser
+videoparsersbad:  mpegvideoparse: MPEG video elementary stream parser
+videoparsersbad:  pngparse: PNG parser
+videoparsersbad:  vc1parse: VC1 parser
+videoparsersbad:  vp9parse: VP9 parser
+videorate:  videorate: Video rate adjuster
+videoscale:  videoscale: Video scaler
+videosignal:  simplevideomark: Video marker
+videosignal:  simplevideomarkdetect: Video detecter
+videosignal:  videoanalyse: Video analyser
+videotestsrc:  videotestsrc: Video test source
+vmnc:  vmncdec: VMnc video decoder
+volume:  volume: Volume
+vorbis:  vorbisdec: Vorbis audio decoder
+vorbis:  vorbisenc: Vorbis audio encoder
+vorbis:  vorbisparse: VorbisParse
+vorbis:  vorbistag: VorbisTag
+vpx:  vp8dec: On2 VP8 Decoder
+vpx:  vp8enc: On2 VP8 Encoder
+vpx:  vp9dec: On2 VP9 Decoder
+vpx:  vp9enc: On2 VP9 Encoder
+vulkan:  vulkancolorconvert: Vulkan Color Convert
+vulkan:  vulkandeviceprovider (GstDeviceProviderFactory)
+vulkan:  vulkandownload: Vulkan Downloader
+vulkan:  vulkanimageidentity: Vulkan Image Identity
+vulkan:  vulkansink: Vulkan video sink
+vulkan:  vulkanupload: Vulkan Uploader
+vulkan:  vulkanviewconvert: Vulkan View Convert
+wavenc:  wavenc: WAV audio muxer
+wavpack:  wavpackdec: Wavpack audio decoder
+wavpack:  wavpackenc: Wavpack audio encoder
+wavparse:  wavparse: WAV audio demuxer
+waylandsink:  waylandsink: wayland video sink
+webp:  webpdec: WebP image decoder
+webp:  webpenc: WEBP image encoder
+webrtc:  webrtcbin: WebRTC Bin
+webrtcdsp:  webrtcdsp: Voice Processor (AGC, AEC, filters, etc.)
+webrtcdsp:  webrtcechoprobe: Acoustic Echo Canceller probe
+wildmidi:  wildmididec: WildMidi-based MIDI music decoder
+x264:  x264enc: x264 H.264 Encoder
+x265:  x265enc: x265enc
+ximagesink:  ximagesink: Video sink
+ximagesrc:  ximagesrc: Ximage video source
+xingmux:  xingmux: MP3 Xing muxer
+xvimagesink:  xvimagesink: Video sink
+y4mdec:  y4mdec: YUV4MPEG demuxer/decoder
+y4menc:  y4menc: YUV4MPEG video encoder
+zbar:  zbar: Barcode detector
+zxing:  zxing: Barcode detector
 
->
-> 0:00:00.000026639 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:591:init_pre: Initializing GStreamer Core Library version 1.20.4
-> 0:00:00.000048805 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:592:init_pre: Using library installed in /usr/lib
-> 0:00:00.000055358 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:610:init_pre: Linux serenity 5.15.79-1-lts #1 SMP Wed, 16 Nov 2022 11:03:=
-21 +0000 x86_64
-> 0:00:00.000149422 236125 0x562204e5c670 INFO                GST_INIT gstm=
-essage.c:129:_priv_gst_message_initialize: init messages
-> 0:00:00.000356649 236125 0x562204e5c670 INFO                GST_INIT gstc=
-ontext.c:86:_priv_gst_context_initialize: init contexts
-> 0:00:00.000482810 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:324:_priv_gst_plugin_initialize: registering 0 static plugins
-> 0:00:00.000521933 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:232:gst_plugin_register_static: registered static plugin "staticele=
-ments"
-> 0:00:00.000528524 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:234:gst_plugin_register_static: added static plugin "staticelements=
-", result: 1
-> 0:00:00.000549734 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistry.c:1826:ensure_current_registry: reading registry cache: /home/danie=
-ll/.cache/gstreamer-1.0/registry.x86_64.bin
-> 0:00:00.000613228 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistrybinary.c:601:priv_gst_registry_binary_read_cache: Unable to mmap fil=
-e /home/daniell/.cache/gstreamer-1.0/registry.x86_64.bin : Failed to open f=
-ile =E2=80=9C/home/daniell/.cache/gstreamer-1.0/registry.x86_64.bin=E2=80=
-=9D: open() failed: No such file or directory
-> 0:00:00.000621567 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistrybinary.c:611:priv_gst_registry_binary_read_cache: Unable to read fil=
-e /home/daniell/.cache/gstreamer-1.0/registry.x86_64.bin : Failed to open f=
-ile =E2=80=9C/home/daniell/.cache/gstreamer-1.0/registry.x86_64.bin=E2=80=
-=9D: No such file or directory
-> 0:00:00.000625503 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistry.c:1693:scan_and_update_registry: Validating plugins from registry c=
-ache: /home/daniell/.cache/gstreamer-1.0/registry.x86_64.bin
-> 0:00:00.000030197 236128 0x55ab8871e800 INFO                GST_INIT gst.=
-c:591:init_pre: Initializing GStreamer Core Library version 1.20.4
-> 0:00:00.000046828 236128 0x55ab8871e800 INFO                GST_INIT gst.=
-c:592:init_pre: Using library installed in /usr/lib
-> 0:00:00.000052592 236128 0x55ab8871e800 INFO                GST_INIT gst.=
-c:610:init_pre: Linux serenity 5.15.79-1-lts #1 SMP Wed, 16 Nov 2022 11:03:=
-21 +0000 x86_64
-> 0:00:00.000155912 236128 0x55ab8871e800 INFO                GST_INIT gstm=
-essage.c:129:_priv_gst_message_initialize: init messages
-> 0:00:00.000363105 236128 0x55ab8871e800 INFO                GST_INIT gstc=
-ontext.c:86:_priv_gst_context_initialize: init contexts
-> 0:00:00.000463164 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:324:_priv_gst_plugin_initialize: registering 0 static plugins
-> 0:00:00.000503512 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:232:gst_plugin_register_static: registered static plugin "staticele=
-ments"
-> 0:00:00.000509335 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:234:gst_plugin_register_static: added static plugin "staticelements=
-", result: 1
-> 0:00:00.000525241 236128 0x55ab8871e800 INFO            GST_REGISTRY gstr=
-egistry.c:1861:ensure_current_registry: registry reading and updating done
-> 0:00:00.000537416 236128 0x55ab8871e800 INFO                GST_INIT gst.=
-c:826:init_post: GLib runtime version: 2.74.1
-> 0:00:00.000541245 236128 0x55ab8871e800 INFO                GST_INIT gst.=
-c:828:init_post: GLib headers version: 2.74.1
-> 0:00:00.000543846 236128 0x55ab8871e800 INFO                GST_INIT gst.=
-c:830:init_post: initialized GStreamer successfully
-> 0:00:00.003924830 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstclosedcaption.so" loaded
-> 0:00:00.005164121 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsthls.so" loaded
-> 0:00:00.005688131 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrtpmanagerbad.so" loaded
-> 0:00:00.005936718 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmicrodns.so" loaded
-> 0:00:00.006783974 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstavi.so" loaded
-> 0:00:00.007136697 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstasfmux.so" loaded
-> 0:00:00.007807669 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgoom.so" loaded
-> 0:00:00.008133436 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideoscale.so" loaded
-> 0:00:00.010195038 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopenmpt.so" loaded
-> 0:00:00.010705107 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrawparse.so" loaded
-> 0:00:00.010974252 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopenaptx.so" loaded
-> 0:00:00.011324097 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsttheora.so" loaded
-> 0:00:00.011459721 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for subp=
-arse_typefind
-> 0:00:00.011515988 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsubparse.so" loaded
-> 0:00:00.011779813 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstinterlace.so" loaded
-> 0:00:00.012124376 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopus.so" loaded
-> 0:00:00.012325765 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwildmidi.so" loaded
-> 0:00:00.012560325 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdvdread.so" loaded
-> 0:00:00.012951083 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmpegtsdemux.so" loaded
-> 0:00:00.013202987 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsbc.so" loaded
-> 0:00:00.013359161 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsty4menc.so" loaded
-> 0:00:00.013547512 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideofiltersbad.so" loaded
-> 0:00:00.013804313 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstximagesrc.so" loaded
-> 0:00:00.014116553 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstoss4.so" loaded
-> 0:00:00.018256369 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgio.so" loaded
-> 0:00:00.018850927 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgeometrictransform.so" loaded
-> 0:00:00.022060494 236128 0x55ab8871e800 INFO         curl_multi_loop gstc=
-urlhttpsrc.c:477:gst_curl_http_src_class_init: Testing the curl_multi_loop =
-debugging prints
-> 0:00:00.022099849 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcurl.so" loaded
-> 0:00:00.022525116 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstspeex.so" loaded
-> 0:00:00.022930459 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdtls.so" loaded
-> 0:00:00.024540165 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopenexr.so" loaded
-> 0:00:00.024797424 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsta52dec.so" loaded
-> 0:00:00.026588121 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrtmp.so" loaded
-> 0:00:00.026727848 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstivfparse.so" loaded
-> 0:00:00.027066165 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcdparanoia.so" loaded
-> 0:00:00.027410656 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaom.so" loaded
-> 0:00:00.027562842 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstimagefreeze.so" loaded
-> 0:00:00.027958918 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmultifile.so" loaded
-> 0:00:00.028372990 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstresindvd.so" loaded
-> 0:00:00.028726304 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsdpelem.so" loaded
-> 0:00:00.028890065 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstlevel.so" loaded
-> 0:00:00.029061309 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiotestsrc.so" loaded
-> 0:00:00.029766665 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdc1394.so" loaded
-> 0:00:00.030805447 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdash.so" loaded
-> 0:00:00.031231879 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwaylandsink.so" loaded
-> 0:00:00.031791998 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdv.so" loaded
-> 0:00:00.032333581 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmpeg2enc.so" loaded
-> 0:00:00.032478578 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstremovesilence.so" loaded
-> 0:00:00.033025826 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmatroska.so" loaded
-> 0:00:00.035046237 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwebrtc.so" loaded
-> 0:00:00.035205629 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstautoconvert.so" loaded
-> 0:00:00.035526252 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsttimecode.so" loaded
-> 0:00:00.035666440 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsticydemux.so" loaded
-> 0:00:00.035923956 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcompositor.so" loaded
-> 0:00:00.037935613 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrsvg.so" loaded
-> 0:00:00.038104092 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstadpcmdec.so" loaded
-> 0:00:00.038419154 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideofilter.so" loaded
-> 0:00:00.038591423 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstpcapparse.so" loaded
-> 0:00:00.038903415 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsttcp.so" loaded
-> 0:00:00.039143194 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstjpeg.so" loaded
-> 0:00:00.039335766 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstpng.so" loaded
-> 0:00:00.040426729 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmodplug.so" loaded
-> 0:00:00.040623413 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstamrwbdec.so" loaded
-> 0:00:00.041236367 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaasink.so" loaded
-> 0:00:00.041525791 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwavpack.so" loaded
-> 0:00:00.041838768 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstflv.so" loaded
-> 0:00:00.042107794 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstoverlaycomposition.so" loaded
-> 0:00:00.042279453 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstalpha.so" loaded
-> 0:00:00.042457847 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiobuffersplit.so" loaded
-> 0:00:00.058024467 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsrtp.so" loaded
-> 0:00:00.058214797 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideorate.so" loaded
-> 0:00:00.058442584 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstencoding.so" loaded
-> 0:00:00.058611362 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdvdlpcmdec.so" loaded
-> 0:00:00.058773662 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstswitchbin.so" loaded
-> 0:00:00.058919618 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsmooth.so" loaded
-> 0:00:00.059146119 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideotestsrc.so" loaded
-> 0:00:00.059687259 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstpango.so" loaded
-> 0:00:00.060084537 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstnice.so" loaded
-> 0:00:00.062377983 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrtp.so" loaded
-> 0:00:00.062872907 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideoframe_audiolevel.so" loaded
-> 0:00:00.066214190 236128 0x55ab8871e800 INFO             chromaprint gstc=
-hromaprint.c:305:chromaprint_element_init: libchromaprint 1.5.1
-> 0:00:00.066284058 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstchromaprint.so" loaded
-> 0:00:00.066470011 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-msvideo
-> 0:00:00.066482308 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/qcelp
-> 0:00:00.066488876 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-cdxa
-> 0:00:00.066494730 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/riff-midi
-> 0:00:00.066500560 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-wav
-> 0:00:00.066506218 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/webp
-> 0:00:00.066515483 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-ms-asf
-> 0:00:00.066522793 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-vcd
-> 0:00:00.066528895 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-imelody
-> 0:00:00.066534526 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-scc
-> 0:00:00.066540159 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/vnd.rn-realmedia
-> 0:00:00.066551557 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-pn-realaudio
-> 0:00:00.066558210 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-flv
-> 0:00:00.066563540 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-nist
-> 0:00:00.066570770 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-voc
-> 0:00:00.066576121 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-w64
-> 0:00:00.066581225 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-rf64
-> 0:00:00.066586460 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/gif
-> 0:00:00.066591780 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/png
-> 0:00:00.066596740 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-mve
-> 0:00:00.066602071 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-amr-nb-sh
-> 0:00:00.066609017 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-amr-wb-sh
-> 0:00:00.066614287 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-sid
-> 0:00:00.066619428 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-xcf
-> 0:00:00.066624588 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-mng
-> 0:00:00.066629683 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-jng
-> 0:00:00.066634821 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-xpixmap
-> 0:00:00.066642084 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-sun-raster
-> 0:00:00.066649431 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-bzip
-> 0:00:00.066654754 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-gzip
-> 0:00:00.066659928 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/zip
-> 0:00:00.066665025 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-compress
-> 0:00:00.066670226 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-executable
-> 0:00:00.066677670 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-spc
-> 0:00:00.066682897 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-caf
-> 0:00:00.066690100 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-rar
-> 0:00:00.066695595 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-nsf
-> 0:00:00.066700535 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-gym
-> 0:00:00.066705593 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-ay
-> 0:00:00.066710709 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-gbs
-> 0:00:00.066717856 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-vgm
-> 0:00:00.066723342 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-sap
-> 0:00:00.066730209 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-ivf
-> 0:00:00.066735462 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-kss
-> 0:00:00.066740485 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/pdf
-> 0:00:00.066745736 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/msword
-> 0:00:00.066751070 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/octet-stream
-> 0:00:00.066760011 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/vnd.adobe.photoshop
-> 0:00:00.066765732 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-xi
-> 0:00:00.066771493 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-tap-dmp
-> 0:00:00.066779008 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-musepack
-> 0:00:00.066784887 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-au
-> 0:00:00.066791894 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-mcc
-> 0:00:00.066797345 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/midi
-> 0:00:00.066805307 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/mobile-xmf
-> 0:00:00.066810748 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-fli
-> 0:00:00.066818118 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-id3v2
-> 0:00:00.066823744 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-id3v1
-> 0:00:00.066829769 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-apetag
-> 0:00:00.066835567 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-ttafile
-> 0:00:00.066840978 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-mod
-> 0:00:00.066850275 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/mpeg
-> 0:00:00.066856449 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-ac3
-> 0:00:00.066862095 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-dts
-> 0:00:00.066868156 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-gsm
-> 0:00:00.066874615 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/mpeg-sys
-> 0:00:00.066881428 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/mpegts
-> 0:00:00.066892097 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/ogg
-> 0:00:00.066900286 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/mpeg-elementary
-> 0:00:00.066906962 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/mpeg4
-> 0:00:00.066914938 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-h263
-> 0:00:00.066924855 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-h264
-> 0:00:00.066931709 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-h265
-> 0:00:00.066937672 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-nuv
-> 0:00:00.066943049 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-m4a
-> 0:00:00.066951380 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-3gp
-> 0:00:00.066957909 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/quicktime
-> 0:00:00.066965634 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-quicktime
-> 0:00:00.066971222 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/jp2
-> 0:00:00.066976386 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-jpc
-> 0:00:00.066981900 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/mj2
-> 0:00:00.066987203 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for text=
-/html
-> 0:00:00.066992604 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-shockwave-flash
-> 0:00:00.066998126 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/xges
-> 0:00:00.067005169 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/vnd.apple-xmeml+xml
-> 0:00:00.067011029 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/vnd.apple-fcp+xml
-> 0:00:00.067016592 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/vnd.pixar.opentimelineio+json
-> 0:00:00.067022043 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/dash+xml
-> 0:00:00.067027627 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/vnd.ms-sstr+xml
-> 0:00:00.067034397 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for text=
-/plain
-> 0:00:00.067040257 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for text=
-/utf-16
-> 0:00:00.067047784 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for text=
-/utf-32
-> 0:00:00.067053265 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for text=
-/uri-list
-> 0:00:00.067058422 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/itc
-> 0:00:00.067063691 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-hls
-> 0:00:00.067069269 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/sdp
-> 0:00:00.067076779 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/smil
-> 0:00:00.067082151 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/ttml+xml
-> 0:00:00.067089259 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/xml
-> 0:00:00.067095221 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-aiff
-> 0:00:00.067100919 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-svx
-> 0:00:00.067106536 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-paris
-> 0:00:00.067111957 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-sds
-> 0:00:00.067117590 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-ircam
-> 0:00:00.067125250 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-shorten
-> 0:00:00.067132750 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ape
-> 0:00:00.067138490 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/jpeg
-> 0:00:00.067143956 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/bmp
-> 0:00:00.067150504 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/tiff
-> 0:00:00.067158122 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-exr
-> 0:00:00.067166680 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-portable-pixmap
-> 0:00:00.067173983 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-matroska
-> 0:00:00.067181656 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/mxf
-> 0:00:00.067187998 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-dv
-> 0:00:00.067193459 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/iLBC-sh
-> 0:00:00.067198724 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-sbc
-> 0:00:00.067203282 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for subt=
-itle/x-kate
-> 0:00:00.067209006 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-subtitle-vtt
-> 0:00:00.067216865 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-flac
-> 0:00:00.067222419 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-vorbis
-> 0:00:00.067227295 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-theora
-> 0:00:00.067232285 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ogm-video
-> 0:00:00.067237570 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ogm-audio
-> 0:00:00.067242769 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ogm-text
-> 0:00:00.067249174 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-speex
-> 0:00:00.067254359 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-celt
-> 0:00:00.067261915 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ogg-skeleton
-> 0:00:00.067267318 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for text=
-/x-cmml
-> 0:00:00.067273498 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/aac
-> 0:00:00.067279723 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-wavpack
-> 0:00:00.067287467 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-wavpack-correction
-> 0:00:00.067293271 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/postscript
-> 0:00:00.067298851 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/svg+xml
-> 0:00:00.067305885 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-tar
-> 0:00:00.067311513 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ar
-> 0:00:00.067318342 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ms-dos-executable
-> 0:00:00.067324530 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-dirac
-> 0:00:00.067329652 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for mult=
-ipart/x-mixed-replace
-> 0:00:00.067337313 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-mmsh
-> 0:00:00.067342376 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/vivo
-> 0:00:00.067348888 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/vnd.wap.wbmp
-> 0:00:00.067353545 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-yuv4mpeg
-> 0:00:00.067357998 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-icon
-> 0:00:00.067362363 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for imag=
-e/x-degas
-> 0:00:00.067366711 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/octet-stream
-> 0:00:00.067374326 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for appl=
-ication/x-ssa
-> 0:00:00.067379766 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for vide=
-o/x-pva
-> 0:00:00.067385124 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/audible
-> 0:00:00.067392450 236128 0x55ab8871e800 INFO            GST_TYPEFIND gstt=
-ypefind.c:72:gst_type_find_register: registering typefind function for audi=
-o/x-tap-tap
-> 0:00:00.067398441 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsttypefindfunctions.so" loaded
-> 0:00:00.067721153 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstpnm.so" loaded
-> 0:00:00.067891336 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstspeed.so" loaded
-> 0:00:00.068211472 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmpegtsmux.so" loaded
-> 0:00:00.068569913 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcacasink.so" loaded
-> 0:00:00.069006547 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstttmlsubs.so" loaded
-> 0:00:00.069386025 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsid.so" loaded
-> 0:00:00.069932906 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstqroverlay.so" loaded
-> 0:00:00.070547720 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiofx.so" loaded
-> 0:00:00.070786638 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfrei0r.so" loaded
-> 0:00:00.071125806 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstinter.so" loaded
-> 0:00:00.071915405 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsrt.so" loaded
-> 0:00:00.073970459 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:1609:gst_plugin_ext_dep_extract_env_vars_paths:<plugin92> ignoring =
-environment variable content '': either not an absolute path or not a path =
-at all
-> 0:00:00.073981834 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:1609:gst_plugin_ext_dep_extract_env_vars_paths:<plugin92> ignoring =
-environment variable content '0': either not an absolute path or not a path=
- at all
-> 0:00:00.074302630 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: VA-API version 1.16.0
-> 0:00:00.074319131 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: Trying to open /usr/lib/dri/iHD_drv_video.so
-> 0:00:00.074840176 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: Found init function __vaDriverInit_1_15
-> 0:00:00.075476131 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: va_openDriver() returns 0
-> 0:00:00.075485515 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:122:vaapi_initialize: VA-API version 1.16
-> 0:00:00.075754999 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: VA-API version 1.16.0
-> 0:00:00.075768522 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: Trying to open /usr/lib/dri/iHD_drv_video.so
-> 0:00:00.075800924 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: Found init function __vaDriverInit_1_15
-> 0:00:00.076223520 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:95:gst_vaapi_log: va_openDriver() returns 0
-> 0:00:00.076232012 236128 0x55ab8871e800 INFO                   vaapi gstv=
-aapiutils.c:122:vaapi_initialize: VA-API version 1.16
-> 0:00:00.076237497 236128 0x55ab8871e800 INFO            vaapidisplay gstv=
-aapidisplay.c:983:gst_vaapi_display_create:<vaapidisplaydrm0> new display a=
-ddr=3D0x55ab88aed0b0
-> 0:00:00.076242417 236128 0x55ab8871e800 INFO            vaapidisplay gstv=
-aapidisplay.c:795:ensure_vendor_string:<vaapidisplaydrm0> vendor: Intel iHD=
- driver for Intel(R) Gen Graphics - 22.4.4 ()
-> 0:00:00.076247898 236128 0x55ab8871e800 INFO            vaapidisplay gstv=
-aapidisplay.c:834:set_driver_quirks:<vaapidisplaydrm0> Matched driver strin=
-g "Intel iHD driver for Intel(R) Gen Graphics - 22.4.4 ()", setting quirks =
-(0x30)
-> 0:00:00.081200464 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvaapi.so" loaded
-> 0:00:00.081686392 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgsm.so" loaded
-> 0:00:00.082448702 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstalsa.so" loaded
-> 0:00:00.082695977 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstipcpipeline.so" loaded
-> 0:00:00.082998481 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcdio.so" loaded
-> 0:00:00.083204639 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstossaudio.so" loaded
-> 0:00:00.092549376 236128 0x55ab8871e800 INFO                     lv2 gstl=
-v2.c:338:plugin_init:<plugin98> 0 entries in cache
-> 0:00:00.092560396 236128 0x55ab8871e800 INFO                     lv2 gstl=
-v2.c:343:plugin_init:<plugin98> 0 entries after scanning
-> 0:00:00.092564938 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstlv2.so" loaded
-> 0:00:00.092966173 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvorbis.so" loaded
-> 0:00:00.093393430 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcolormanagement.so" loaded
-> 0:00:00.093584765 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstid3demux.so" loaded
-> 0:00:00.093796077 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsegmentclip.so" loaded
-> 0:00:00.099021284 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfluidsynthmidi.so" loaded
-> 0:00:00.099498828 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmplex.so" loaded
-> 0:00:00.099697764 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdvdsub.so" loaded
-> 0:00:00.099933201 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcairo.so" loaded
-> 0:00:00.100126490 236128 0x55ab8871e800 INFO                   adder gsta=
-dder.c:1586:gst_adder_child_proxy_init: initializing child proxy interface
-> 0:00:00.100185875 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstadder.so" loaded
-> 0:00:00.100365730 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstautodetect.so" loaded
-> 0:00:00.100750873 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgdkpixbuf.so" loaded
-> 0:00:00.100980781 236128 0x55ab8871e800 INFO                 default gsta=
-udiomixer.c:456:gst_audiomixer_child_proxy_init: initializing child proxy i=
-nterface
-> 0:00:00.101087776 236128 0x55ab8871e800 INFO         audiointerleave gsta=
-udiointerleave.c:900:gst_audio_interleave_child_proxy_init: initializing ch=
-ild proxy interface
-> 0:00:00.101127152 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiomixer.so" loaded
-> 0:00:00.102482945 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvulkan.so" loaded
-> 0:00:00.102747992 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstlegacyrawparse.so" loaded
-> 0:00:00.102978732 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsmoothstreaming.so" loaded
-> 0:00:00.103207175 236128 0x55ab8871e800 INFO              videomixer vide=
-omixer2.c:2187:gst_videomixer2_child_proxy_init: initializing child proxy i=
-nterface
-> 0:00:00.103257239 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideomixer.so" loaded
-> 0:00:00.103759220 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsttwolame.so" loaded
-> 0:00:00.104121363 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcodecalpha.so" loaded
-> 0:00:00.104781344 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvpx.so" loaded
-> 0:00:00.105046727 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstbz2.so" loaded
-> 0:00:00.105745415 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstzbar.so" loaded
-> 0:00:00.106013414 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudioresample.so" loaded
-> 0:00:00.106242425 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstalaw.so" loaded
-> 0:00:00.107564211 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstplayback.so" loaded
-> 0:00:00.107835805 236128 0x55ab8871e800 INFO                 x265enc gstx=
-265enc.c:1749:x265enc_element_init: x265 build: 199
-> 0:00:00.107846730 236128 0x55ab8871e800 INFO                 x265enc gstx=
-265enc.c:1753:x265enc_element_init: x265 default bitdepth: 8
-> 0:00:00.107854496 236128 0x55ab8871e800 INFO                 x265enc gstx=
-265enc.c:1774:x265enc_element_init: x265 10bit api available
-> 0:00:00.107859726 236128 0x55ab8871e800 INFO                 x265enc gstx=
-265enc.c:1778:x265enc_element_init: x265 12bit api available
-> 0:00:00.107940764 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstx265.so" loaded
-> 0:00:00.108122152 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaccurip.so" loaded
-> 0:00:00.108306265 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstadpcmenc.so" loaded
-> 0:00:00.108492112 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiomixmatrix.so" loaded
-> 0:00:00.109038504 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideoparsersbad.so" loaded
-> 0:00:00.109959464 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcoreelements.so" loaded
-> 0:00:00.110251716 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstamrnb.so" loaded
-> 0:00:00.110703167 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideoconvert.so" loaded
-> 0:00:00.110916361 236128 0x55ab8871e800 INFO                 x264enc gstx=
-264enc.c:3020:x264_element_init: linked against x264 build: 164
-> 0:00:00.110923350 236128 0x55ab8871e800 INFO                 x264enc gstx=
-264enc.c:337:load_x264_libraries: 8-bit depth and 10-bit depth supported
-> 0:00:00.111062123 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstx264.so" loaded
+Total count: 259 plugins, 924 features
 
-x264enc is here..
 
-> 0:00:00.111478116 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstflac.so" loaded
-> 0:00:00.112112546 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstde265.so" loaded
-> 0:00:00.112850969 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstisomp4.so" loaded
-> 0:00:00.113336911 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstteletext.so" loaded
-> 0:00:00.113602671 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcoretracers.so" loaded
-> 0:00:00.113888171 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmpeg2dec.so" loaded
-> 0:00:00.114177363 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstreplaygain.so" loaded
-> 0:00:00.114741552 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstneonhttpsrc.so" loaded
-> 0:00:00.115151552 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudioparsers.so" loaded
-> 0:00:00.115400715 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfreeverb.so" loaded
-> 0:00:00.116040800 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdebugutilsbad.so" loaded
-> 0:00:00.116268520 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrtponvif.so" loaded
-> 0:00:00.116854031 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsoup.so" loaded
-> 0:00:00.117137089 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfaad.so" loaded
-> 0:00:00.117614106 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstkate.so" loaded
-> 0:00:00.118061652 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdvb.so" loaded
-> 0:00:00.118362467 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideocrop.so" loaded
-> 0:00:00.121227140 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopengl.so" loaded
-> 0:00:00.121572533 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstpbtypes.so" loaded
-> 0:00:00.121784199 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopusparse.so" loaded
-> 0:00:00.122040422 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwavparse.so" loaded
-> 0:00:00.122227480 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstnetsim.so" loaded
-> 0:00:00.122569696 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstbs2b.so" loaded
-> 0:00:00.122878956 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdeinterlace.so" loaded
-> 0:00:00.123064242 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfaceoverlay.so" loaded
-> 0:00:00.123252706 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsubenc.so" loaded
-> 0:00:00.123812020 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcamerabin.so" loaded
-> 0:00:00.124138642 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstequalizer.so" loaded
-> 0:00:00.124538787 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdebug.so" loaded
-> 0:00:00.124820362 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsctp.so" loaded
-> 0:00:00.125061157 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudioconvert.so" loaded
-> 0:00:00.125329775 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstinterleave.so" loaded
-> 0:00:00.125583466 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvolume.so" loaded
-> 0:00:00.126061214 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstlibvisual.so" loaded
-> 0:00:00.128684300 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopenal.so" loaded
-> 0:00:00.128883886 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiolatency.so" loaded
-> 0:00:00.129163992 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdtsdec.so" loaded
-> 0:00:00.130293762 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsttaglib.so" loaded
-> 0:00:00.130605832 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwavenc.so" loaded
-> 0:00:00.131638172 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwebrtcdsp.so" loaded
-> 0:00:00.133479740 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideo4linux2.so" loaded
-> 0:00:00.133810266 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmusepack.so" loaded
-> 0:00:00.134040216 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfieldanalysis.so" loaded
-> 0:00:00.134663761 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrealmedia.so" loaded
-> 0:00:00.134887363 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdvbsubenc.so" loaded
-> 0:00:00.135534917 236128 0x55ab8871e800 WARN                 nvcodec gstc=
-udaloader.c:139:gst_cuda_load_library: Could not open library libcuda.so.1,=
- libcuda.so.1: cannot open shared object file: No such file or directory
-> 0:00:00.135542214 236128 0x55ab8871e800 WARN                 nvcodec plug=
-in.c:73:plugin_init: Failed to load cuda library
-> 0:00:00.135551579 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstnvcodec.so" loaded
-> 0:00:00.135900724 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsoundtouch.so" loaded
-> 0:00:00.136080085 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstjp2kdecimator.so" loaded
-> 0:00:00.136556737 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstassrender.so" loaded
-> 0:00:00.136737348 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfbdevsink.so" loaded
-> 0:00:00.136921778 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstflxdec.so" loaded
-> 0:00:00.137231074 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstjack.so" loaded
-> 0:00:00.137439589 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgoom2k1.so" loaded
-> 0:00:00.137696902 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaiff.so" loaded
-> 0:00:00.138166947 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstudp.so" loaded
-> 0:00:00.138402456 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiorate.so" loaded
-> 0:00:00.138658954 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsttranscode.so" loaded
-> 0:00:00.138855084 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmonoscope.so" loaded
-> 0:00:00.139353639 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrtmp2.so" loaded
-> 0:00:00.139728129 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfdkaac.so" loaded
-> 0:00:00.140218956 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstuvch264.so" loaded
-> 0:00:00.140844661 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrtsp.so" loaded
-> 0:00:00.141266016 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstv4l2codecs.so" loaded
-> 0:00:00.141518720 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmpegpsdemux.so" loaded
-> 0:00:00.141700874 236128 0x55ab8871e800 INFO                  gstspu gstd=
-vdspu.c:1260:dvd_spu_element_init: debug flags : 0x00
-> 0:00:00.141737736 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdvdspu.so" loaded
-> 0:00:00.142560277 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgme.so" loaded
-> 0:00:00.143096316 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstspandsp.so" loaded
-> 0:00:00.143771587 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgst1394.so" loaded
-> 0:00:00.144196727 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstxvimagesink.so" loaded
-> 0:00:00.144433967 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideobox.so" loaded
-> 0:00:00.144651149 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstshapewipe.so" loaded
-> 0:00:00.145785601 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:477:plugin_init:<plugin203> 0 entries in cache
-> 0:00:00.145796625 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:404:ladspa_plugin_path_search: 6 dirs in search paths "/usr/lib/lad=
-spa:/usr/lib64/ladspa:/usr/local/lib/ladspa:/usr/local/lib64/ladspa:/usr/li=
-b/ladspa:/home/daniell/.ladspa"
-> 0:00:00.145801242 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:268:ladspa_rdf_directory_search: scanning directory for rdfs "/usr/=
-share/ladspa/rdf"
-> 0:00:00.146576706 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:278:ladspa_rdf_directory_search: read file:///usr/share/ladspa/rdf/=
-ladspa-rubberband.rdf : 0
-> 0:00:00.147617378 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:278:ladspa_rdf_directory_search: read file:///usr/share/ladspa/rdf/=
-ladspa.rdfs : 0
-> 0:00:00.147627592 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:268:ladspa_rdf_directory_search: scanning directory for rdfs "/usr/=
-local/share/ladspa/rdf"
-> 0:00:00.147636195 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:299:ladspa_plugin_directory_search: scanning directory for plugins =
-"/usr/lib/ladspa"
-> 0:00:00.148288239 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:326:ladspa_plugin_directory_search: Found LADSPA descriptor in /usr=
-/lib/ladspa/ladspa-rubberband.so
-> 0:00:00.148319691 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:299:ladspa_plugin_directory_search: scanning directory for plugins =
-"/usr/lib64/ladspa"
-> 0:00:00.148371136 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:326:ladspa_plugin_directory_search: Found LADSPA descriptor in /usr=
-/lib64/ladspa/ladspa-rubberband.so
-> 0:00:00.148389349 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:299:ladspa_plugin_directory_search: scanning directory for plugins =
-"/usr/local/lib/ladspa"
-> 0:00:00.148395411 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:299:ladspa_plugin_directory_search: scanning directory for plugins =
-"/usr/local/lib64/ladspa"
-> 0:00:00.148407727 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:482:plugin_init:<plugin203> 4 entries after scanning
-> 0:00:00.148411626 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspa.c:494:plugin_init:<plugin203> register types
-> 0:00:00.148472338 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspautils.c:654:gst_ladspa_element_class_set_metadata: tags : Filter/Effec=
-t/Audio/LADSPA
-> 0:00:00.148567656 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspautils.c:654:gst_ladspa_element_class_set_metadata: tags : Filter/Effec=
-t/Audio/LADSPA
-> 0:00:00.148641144 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspautils.c:654:gst_ladspa_element_class_set_metadata: tags : Filter/Effec=
-t/Audio/LADSPA
-> 0:00:00.148710800 236128 0x55ab8871e800 INFO                  ladspa gstl=
-adspautils.c:654:gst_ladspa_element_class_set_metadata: tags : Filter/Effec=
-t/Audio/LADSPA
-> 0:00:00.148741294 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstladspa.so" loaded
-> 0:00:00.149125663 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsmpte.so" loaded
-> 0:00:00.149365388 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgdp.so" loaded
-> 0:00:00.149622402 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0x120000: 'AVR (Aud=
-io Visual Research)' is not mapped
-> 0:00:00.149630328 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0x180000: 'CAF (App=
-le Core Audio File)' is not mapped
-> 0:00:00.149633845 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0x100000: 'HTK (HMM=
- Tool Kit)' is not mapped
-> 0:00:00.149638007 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0xc0000: 'MAT4 (GNU=
- Octave 2.0 / Matlab 4.2)' is not mapped
-> 0:00:00.149641188 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0xd0000: 'MAT5 (GNU=
- Octave 2.1 / Matlab 5.0)' is not mapped
-> 0:00:00.149644134 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0x210000: 'MPC (Aka=
-i MPC 2k)' is not mapped
-> 0:00:00.149647708 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0xe0000: 'PVF (Port=
-able Voice Format)' is not mapped
-> 0:00:00.149651028 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0x160000: 'SD2 (Sou=
-nd Designer II)' is not mapped
-> 0:00:00.149655697 236128 0x55ab8871e800 WARN                 default gsts=
-felement.c:97:gst_sf_create_audio_template_caps: format 0x190000: 'WVE (Psi=
-on Series 3)' is not mapped
-> 0:00:00.149670609 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsndfile.so" loaded
-> 0:00:00.149872248 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvmnc.so" loaded
-> 0:00:00.150235354 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstjpegformat.so" loaded
-> 0:00:00.150980523 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstogg.so" loaded
-> 0:00:00.151209928 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstid3tag.so" loaded
-> 0:00:00.151433716 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstauparse.so" loaded
-> 0:00:00.151643011 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstapetag.so" loaded
-> 0:00:00.151859193 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmpegpsmux.so" loaded
-> 0:00:00.152082380 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstspectrum.so" loaded
-> 0:00:00.152272975 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmidi.so" loaded
-> 0:00:00.152768886 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmxf.so" loaded
-> 0:00:00.153279901 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstavtp.so" loaded
-> 0:00:00.153606800 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmultipart.so" loaded
-> 0:00:00.153817851 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstnavigationtest.so" loaded
-> 0:00:00.154336376 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrist.so" loaded
-> 0:00:00.154724534 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstopenjpeg.so" loaded
-> 0:00:00.154920860 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstxingmux.so" loaded
-> 0:00:00.155537107 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsvthevcenc.so" loaded
-> 0:00:00.155732404 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfestival.so" loaded
-> 0:00:00.156078951 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstapp.so" loaded
-> 0:00:00.156647080 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstzxing.so" loaded
-> 0:00:00.157083448 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstkms.so" loaded
-> 0:00:00.157306346 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiofxbad.so" loaded
-> 0:00:00.157597215 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdtmf.so" loaded
-> 0:00:00.157831132 236128 0x55ab8871e800 INFO                  mpg123 gstm=
-pg123audiodec.c:193:gst_mpg123_audio_dec_class_init: mpg123 library initial=
-ized
-> 0:00:00.157851444 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmpg123.so" loaded
-> 0:00:00.158121516 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstwebp.so" loaded
-> 0:00:00.158329761 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstalphacolor.so" loaded
-> 0:00:00.158566305 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcoloreffects.so" loaded
-> 0:00:00.158810515 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstbayer.so" loaded
-> 0:00:00.159257850 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstasf.so" loaded
-> 0:00:00.159536589 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrfbsrc.so" loaded
-> 0:00:00.159736808 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstproxy.so" loaded
-> 0:00:00.160102275 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstximagesink.so" loaded
-> 0:00:00.160568503 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsteffectv.so" loaded
-> 0:00:00.160963959 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstbluez.so" loaded
-> 0:00:00.161300404 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiovisualizers.so" loaded
-> 0:00:00.161999370 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstpulseaudio.so" loaded
-> 0:00:00.162870892 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstrtpmanager.so" loaded
-> 0:00:00.163586123 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstshout2.so" loaded
-> 0:00:00.163862110 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstsiren.so" loaded
-> 0:00:00.164139693 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstlame.so" loaded
-> 0:00:00.164550874 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstgaudieffects.so" loaded
-> 0:00:00.164787560 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgsty4mdec.so" loaded
-> 0:00:00.165032213 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaes.so" loaded
-> 0:00:00.165349150 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstldac.so" loaded
-> 0:00:00.165567309 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstmulaw.so" loaded
-> 0:00:00.165950478 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstfaac.so" loaded
-> 0:00:00.166293212 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdvbsuboverlay.so" loaded
-> 0:00:00.166595062 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstvideosignal.so" loaded
-> 0:00:00.166824556 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcutter.so" loaded
-> 0:00:00.167063818 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstivtc.so" loaded
-> 0:00:00.169970032 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstdecklink.so" loaded
-> 0:00:00.170264434 236128 0x55ab8871e800 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstshm.so" loaded
-> 0:00:00.179196135 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistry.c:1794:scan_and_update_registry: Registry cache changed. Writing ne=
-w registry cache
-> 0:00:00.179220248 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistrybinary.c:431:priv_gst_registry_binary_write_cache: Building binary r=
-egistry cache image
-> 0:00:00.182597581 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistrybinary.c:463:priv_gst_registry_binary_write_cache: Writing binary re=
-gistry cache
-> 0:00:00.186133042 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistrybinary.c:314:gst_registry_binary_cache_finish: Wrote binary registry=
- cache
-> 0:00:00.186150011 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistry.c:1803:scan_and_update_registry: Registry cache written successfully
-> 0:00:00.186158499 236125 0x562204e5c670 INFO            GST_REGISTRY gstr=
-egistry.c:1861:ensure_current_registry: registry reading and updating done
-> 0:00:00.186164945 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:826:init_post: GLib runtime version: 2.74.1
-> 0:00:00.186169580 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:828:init_post: GLib headers version: 2.74.1
-> 0:00:00.186172306 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:830:init_post: initialized GStreamer successfully
-> (spicy:236125): GSpice-DEBUG: 13:06:40.754: ../spice-gtk-0.41/src/spice-s=
-ession.c:288 New session (compiled from package spice-gtk 0.41)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.754: ../spice-gtk-0.41/src/spice-s=
-ession.c:292 Supported channels: main, display, inputs, cursor, playback, r=
-ecord, smartcard, usbredir, webdav
-> (spicy:236125): GSpice-DEBUG: 13:06:40.754: ../spice-gtk-0.41/src/usb-dev=
-ice-manager.c:393 auto-connect filter set to 0x03,-1,-1,-1,0|-1,-1,-1,-1,1
-> (spicy:236125): GSpice-DEBUG: 13:06:40.754: ../spice-gtk-0.41/src/usb-bac=
-kend.c:438 spice_usb_backend_new >>
-> (spicy:236125): GSpice-DEBUG: 13:06:40.758: ../spice-gtk-0.41/src/usb-bac=
-kend.c:460 spice_usb_backend_new <<
-> (spicy:236125): GSpice-DEBUG: 13:06:40.758: ../spice-gtk-0.41/src/usb-bac=
-kend.c:156 created dev 0x5622050677b0, usblib dev 0x562205367bd0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.758: ../spice-gtk-0.41/src/usb-bac=
-kend.c:156 created dev 0x562205387fa0, usblib dev 0x562204ec61b0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.758: ../spice-gtk-0.41/src/usb-bac=
-kend.c:156 created dev 0x562205387e20, usblib dev 0x562205368830
-> (spicy:236125): GSpice-DEBUG: 13:06:40.758: ../spice-gtk-0.41/src/usb-bac=
-kend.c:467 handle_libusb_events >>
-> (spicy:236125): GSpice-DEBUG: 13:06:40.758: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1881 connection_new (1)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.758: ../spice-gtk-0.41/src/spice-s=
-ession.c:1835 no migration in progress
-> Spice-INFO: 13:06:40.759: ../spice-gtk-0.41/src/channel-main.c:342:spice_=
-main_set_property: SpiceMainChannel::color-depth has been deprecated. Prope=
-rty is ignored
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 main-1:0: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-s=
-ession.c:2330 main-1:0: new main channel, switching
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-g=
-tk-session.c:1565 Changing main channel from (nil) to 0x5622053970f0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1761 new main channel
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/usb-dev=
-ice-manager.c:800 device added 046d:c52b (0x5622050677b0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/usb-dev=
-ice-manager.c:800 device added 1050:0407 (0x562205387fa0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/usb-dev=
-ice-manager.c:800 device added 8087:0aa7 (0x562205387e20)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 main-1:0: Open coroutine starting 0x5622053970f0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 main-1:0: Started background coroutine 0x562205396ec0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 main-1:0: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:40.759: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 main-1:0: connecting 0x7f42127fcf30...
-> (spicy:236125): GSpice-DEBUG: 13:06:40.760: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 main-1:0: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:40.760: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 main-1:0: channel type 1 id 0 num common caps 1 num caps 1
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 main-1:0: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 main-1:0: spice_channel_recv_link_msg: 2 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 main-1:0: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 main-1:0: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0x9
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:40.812: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:40.819: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:40.819: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 main-1:0: use mini header: 1
-> GSpice-Message: 13:06:40.828: main channel: opened
-> (spicy:236125): GSpice-DEBUG: 13:06:40.828: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1280 recent_add: spice://localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:40.830: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 main-1:0: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:40.830: ../spice-gtk-0.41/src/spice-s=
-ession.c:2434 set mm time: 218940548
-> (spicy:236125): GSpice-DEBUG: 13:06:40.830: ../spice-gtk-0.41/src/spice-s=
-ession.c:2437 spice_session_set_mm_time: mm-time-reset, old 16779961, new 2=
-18940548
-> (spicy:236125): GSpice-DEBUG: 13:06:40.830: ../spice-gtk-0.41/src/channel=
--main.c:1590 agent connected: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:40.830: ../spice-gtk-0.41/src/channel=
--main.c:1732 server name: arch
-> (spicy:236125): GSpice-DEBUG: 13:06:40.830: ../spice-gtk-0.41/src/channel=
--main.c:1743 server uuid: 13b22ec2-319a-470c-8e9c-75e19b61313e
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 0 (mouse state)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 1 (monitors config)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 2 (reply)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 5 (clipboard)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 6 (clipboard selection)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 7 (sparse monitors)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 8 (line-end lf)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 10 (max-clipboard)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 11 (volume-sync)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 15 (graphics device info)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 16 (no release on re-grab)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel=
--main.c:2075 main_agent_handle_msg: cap: 17 (clipboard grab serial)
-> (spicy:236125): Spice-DEBUG: 13:06:40.877: ../spice-gtk-0.41/src/channel-=
-display-gst.c:819:gstvideo_debug_available_decoders: From  29 video decoder=
- elements,  2 can handle caps   image/jpeg: jpegdec, vaapijpegdec
-> (spicy:236125): Spice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/channel-=
-display-gst.c:819:gstvideo_debug_available_decoders: From  29 video decoder=
- elements,  4 can handle caps  video/x-vp8: vp8alphadecodebin, vaapidecodeb=
-in, vaapivp8dec, vp8dec
-> (spicy:236125): Spice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/channel-=
-display-gst.c:819:gstvideo_debug_available_decoders: From  29 video decoder=
- elements,  2 can handle caps video/x-h264: vaapidecodebin, vaapih264dec
-> (spicy:236125): Spice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/channel-=
-display-gst.c:819:gstvideo_debug_available_decoders: From  29 video decoder=
- elements,  4 can handle caps  video/x-vp9: vp9alphadecodebin, vaapidecodeb=
-in, vaapivp9dec, vp9dec
-> (spicy:236125): Spice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/channel-=
-display-gst.c:819:gstvideo_debug_available_decoders: From  29 video decoder=
- elements,  3 can handle caps video/x-h265: vaapidecodebin, vaapih265dec, l=
-ibde265dec
+I also turned on verbose logs for libvirtd and debug for spice on the hyper=
+visor host with SPICE_DEBUG_LEVEL=3D5 for qemu, but I'm not /quite/ sure th=
+is is exactly what's needed as far as spice-server logs. If this is not use=
+ful, could you please elaborate which logs are necessary from the server?
 
-All the gstreamer elements that we detected at spice-gtk for
-mjpeg, vp8/vp9, h264/h265
+Logs from qemu/libvirt/spice:
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627399, "microseconds": 848949}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59372", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351a80 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200810d0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627399, "microseconds": 886840}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59372", "family": "ipv=
+4", "channel-type": 1, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351b10 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081170 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 113113}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59376", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351ba0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081210 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 122746}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59382", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351c30 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200812b0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 130924}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59394", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351cc0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081350 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 136821}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59376", "family": "ipv=
+4", "channel-type": 9, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 1, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351d50 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200813f0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 136869}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59410", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351d50 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200813f0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 141876}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59424", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351cc0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081350 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 182292}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59424", "family": "ipv=
+4", "channel-type": 2, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351c30 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200812b0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 182712}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59382", "family": "ipv=
+4", "channel-type": 9, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351ba0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081210 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 184859}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59410", "family": "ipv=
+4", "channel-type": 5, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351b10 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081170 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 186378}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59394", "family": "ipv=
+4", "channel-type": 6, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351a80 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200810d0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 582996}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59440", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220108710 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081030 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 590260}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "59448", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220108710 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016f20 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 624844}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59440", "family": "ipv=
+4", "channel-type": 3, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351a80 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016e80 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627400, "microseconds": 627716}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "59448", "family": "ipv=
+4", "channel-type": 4, "connection-id": 1477171087, "host": "127.0.0.1", "c=
+hannel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351b10 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200168e0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D7 events=3D1 cb=3D0x=
+7f22728cd8d0 opaque=3D0x55ffa18f88e0
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D7 events=3D1 cb=3D0x=
+7f22728cd8d0 opaque=3D0x55ffa18f88e0
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D7 events=3D1 cb=3D0x=
+7f22728cd8d0 opaque=3D0x55ffa18f88e0
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D7 events=3D1 cb=3D0x=
+7f22728cd8d0 opaque=3D0x55ffa18f88e0
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: EVENT_GLIB_DISPATCH_HANDLE: watch=3D8 events=3D1 cb=3D0x=
+7f226c649610 opaque=3D(nil)
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 321434}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59382", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351ba0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200168e0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 321525}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59440", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351c30 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016e80 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 321583}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59376", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351cc0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016f20 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 322781}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59448", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351d50 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081030 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 324358}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59424", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351d50 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200810d0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 324961}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59410", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351cc0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081170 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 325207}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59394", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351c30 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081210 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627541, "microseconds": 329645}, "event": "SPIC=
+E_DISCONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "hos=
+t": "127.0.0.1"}, "client": {"port": "59372", "family": "ipv4", "host": "12=
+7.0.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351ba0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200812b0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627555, "microseconds": 780529}, "event": "RTC_=
+CHANGE", "data": {"offset": 0}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351b10 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f226004ddc0 classname=3DvirDomainEv=
+entRTCChange
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f226004ddc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f226004ddc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 610411}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53656", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351a80 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081350 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 640892}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "53656", "family": "ipv=
+4", "channel-type": 1, "connection-id": 317097467, "host": "127.0.0.1", "ch=
+annel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220108710 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200813f0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 864961}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53666", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220108710 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200813f0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200813f0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 871171}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53682", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351a80 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081350 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081350
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 877297}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53686", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351b10 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200812b0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200812b0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 882004}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53700", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351ba0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081210 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081210
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 886638}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "53666", "family": "ipv=
+4", "channel-type": 5, "connection-id": 317097467, "host": "127.0.0.1", "ch=
+annel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351c30 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081170 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081170
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 886702}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53716", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351cc0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200810d0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200810d0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 897040}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "53682", "family": "ipv=
+4", "channel-type": 9, "connection-id": 317097467, "host": "127.0.0.1", "ch=
+annel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351d50 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081030 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 899906}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "53686", "family": "ipv=
+4", "channel-type": 9, "connection-id": 317097467, "host": "127.0.0.1", "ch=
+annel-id": 1, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351d50 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351d50
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016f20 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 901680}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "53700", "family": "ipv=
+4", "channel-type": 2, "connection-id": 317097467, "host": "127.0.0.1", "ch=
+annel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351cc0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351cc0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016e80 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 950973}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "53716", "family": "ipv=
+4", "channel-type": 6, "connection-id": 317097467, "host": "127.0.0.1", "ch=
+annel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351c30 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351c30
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200168e0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 977581}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53726", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351ba0 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351ba0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f22200168e0 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f22200168e0
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 984079}, "event": "SPIC=
+E_CONNECTED", "data": {"server": {"port": "5912", "family": "ipv4", "host":=
+ "127.0.0.1"}, "client": {"port": "53738", "family": "ipv4", "host": "127.0=
+.0.1"}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351b10 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351b10
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016e80 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016e80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627657, "microseconds": 994740}, "event": "SPIC=
+E_INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family=
+": "ipv4", "host": "127.0.0.1"}, "client": {"port": "53726", "family": "ipv=
+4", "channel-type": 4, "connection-id": 317097467, "host": "127.0.0.1", "ch=
+annel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220351a80 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220351a80
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220016f20 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220016f20
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: QEMU_MONITOR_RECV_EVENT: mon=3D0x7f2220068460 event=3D{"=
+timestamp": {"seconds": 1669627658, "microseconds": 2137}, "event": "SPICE_=
+INITIALIZED", "data": {"server": {"auth": "none", "port": "5912", "family":=
+ "ipv4", "host": "127.0.0.1"}, "client": {"port": "53738", "family": "ipv4"=
+, "channel-type": 3, "connection-id": 317097467, "host": "127.0.0.1", "chan=
+nel-id": 0, "tls": false}}}
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220108710 classname=3DvirDomainQe=
+muMonitorEvent
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220108710
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_NEW: obj=3D0x7f2220081030 classname=3DvirDomainEv=
+entGraphics
+libvirtd[3564672]: OBJECT_DISPOSE: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220081030
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_REF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
+libvirtd[3564672]: OBJECT_UNREF: obj=3D0x7f2220068460
 
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 display-2:0: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1780 new display channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 cursor-4:0: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 usbredir-9:1: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#1)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1303 spice_usb_backend_channel_new >>
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/usb-bac=
-kend.c:697 usbredir_write_callback ch 0x5622053547a0, 80 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1343 spice_usb_backend_channel_new << 0x5622053547a0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 usbredir-9:0: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1303 spice_usb_backend_channel_new >>
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/usb-bac=
-kend.c:697 usbredir_write_callback ch 0x56220536a4c0, 80 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1343 spice_usb_backend_channel_new << 0x56220536a4c0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 record-6:0: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 playback-5:0: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.878: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1793 new audio channel
-> (spicy:236125): GSpice-DEBUG: 13:06:40.879: ../spice-gtk-0.41/src/spice-c=
-hannel.c:142 inputs-3:0: spice_channel_constructed
-> (spicy:236125): GSpice-DEBUG: 13:06:40.879: ../spice-gtk-0.41/src/spice-g=
-tk-session.c:165 inputs-3:0: client_modifiers:0x2, guest_modifiers:0x0
-> (spicy:236125): GSpice-DEBUG: 13:06:40.879: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1758 new channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.879: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1787 new inputs channel
-> (spicy:236125): GSpice-DEBUG: 13:06:40.879: ../spice-gtk-0.41/src/channel=
--main.c:1545 Not sending monitors config, at least one monitor must have di=
-mensions
-> (spicy:236125): GSpice-DEBUG: 13:06:40.879: ../spice-gtk-0.41/src/spice-g=
-staudio.c:640 PlaybackChannel not created yet, force start
-> (spicy:236125): GSpice-DEBUG: 13:06:40.879: ../spice-gtk-0.41/src/spice-g=
-staudio.c:307 audio pipeline: appsrc is-live=3D1 do-timestamp=3D0 format=3D=
-time caps=3D"audio/x-raw,format=3D"S16LE",channels=3D2,rate=3D48000,layout=
-=3Dinterleaved" name=3D"appsrc" ! queue ! audioconvert ! audioresample ! au=
-toaudiosink name=3D"audiosink"
-> 0:00:00.311786666 236125 0x562204e5c670 INFO            GST_PIPELINE gstp=
-arse.c:344:gst_parse_launch_full: parsing pipeline description 'appsrc is-l=
-ive=3D1 do-timestamp=3D0 format=3Dtime caps=3D"audio/x-raw,format=3D"S16LE"=
-,channels=3D2,rate=3D48000,layout=3Dinterleaved" name=3D"appsrc" ! queue ! =
-audioconvert ! audioresample ! autoaudiosink name=3D"audiosink"'
-> 0:00:00.312075621 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstapp.so" loaded
-> 0:00:00.312087372 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "appsrc"
-> 0:00:00.312238096 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSrc@0x5622053f19e0> adding pad 'sr=
-c'
-> 0:00:00.312759863 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstcoreelements.so" loaded
-> 0:00:00.312771343 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "queue"
-> 0:00:00.312830193 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstQueue@0x5622053ea6f0> adding pad 'sink'
-> 0:00:00.312843161 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstQueue@0x5622053ea6f0> adding pad 'src'
-> 0:00:00.313090982 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudioconvert.so" loaded
-> 0:00:00.313100566 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "audioconvert"
-> 0:00:00.313182460 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220540a230> adding p=
-ad 'sink'
-> 0:00:00.313194947 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220540a230> adding p=
-ad 'src'
-> 0:00:00.313427840 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudioresample.so" loaded
-> 0:00:00.313442217 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "audioresample"
-> 0:00:00.313509155 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220540d050> adding p=
-ad 'sink'
-> 0:00:00.313520683 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220540d050> adding p=
-ad 'src'
-> 0:00:00.313730465 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstautodetect.so" loaded
-> 0:00:00.313740194 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "autoaudiosink"
-> 0:00:00.313803655 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<autoaudiosink0> adding pad 'sink'
-> 0:00:00.313886532 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "fakesink"
-> 0:00:00.313900046 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSink@0x562205419290> adding pad 's=
-ink'
-> 0:00:00.313925454 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad fake-audio-sink:sink
-> 0:00:00.313933636 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link sink:proxypad0 and fake-audi=
-o-sink:sink
-> 0:00:00.313940637 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked sink:proxypad0 and fake-audio-sink:sink=
-, successful
-> 0:00:00.313945276 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.313962856 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "pipeline"
-> 0:00:00.314015109 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstAppSrc named appsrc to some pad of GstQueue named queue0 (0/0=
-) with caps "(NULL)"
-> 0:00:00.314024260 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element appsrc:(any)=
- to element queue0:(any)
-> 0:00:00.314031926 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link appsrc:src and queue0:sink
-> 0:00:00.314043338 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<queue0:src> pad has no peer
-> 0:00:00.314052409 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: appsrc and queue0 in same bin, no =
-need for ghost pads
-> 0:00:00.314062411 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link appsrc:src and queue0:sink
-> 0:00:00.314069629 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<queue0:src> pad has no peer
-> 0:00:00.314077281 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked appsrc:src and queue0:sink, successful
-> 0:00:00.314081376 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.314085822 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<appsrc:src> Received event on flush=
-ing pad. Discarding
-> 0:00:00.314098031 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstQueue named queue0 to some pad of GstAudioConvert named audio=
-convert0 (0/0) with caps "(NULL)"
-> 0:00:00.314104658 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element queue0:(any)=
- to element audioconvert0:(any)
-> 0:00:00.314110948 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link queue0:src and audioconvert0=
-:sink
-> 0:00:00.314124235 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioconvert0:src> pad has no peer
-> 0:00:00.314143267 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.314165960 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: queue0 and audioconvert0 in same b=
-in, no need for ghost pads
-> 0:00:00.314174254 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link queue0:src and audioconvert0=
-:sink
-> 0:00:00.314182202 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioconvert0:src> pad has no peer
-> 0:00:00.314195475 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.314214759 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked queue0:src and audioconvert0:sink, succ=
-essful
-> 0:00:00.314218906 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.314223293 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<queue0:src> Received event on flush=
-ing pad. Discarding
-> 0:00:00.314234381 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstAudioConvert named audioconvert0 to some pad of GstAudioResam=
-ple named audioresample0 (0/0) with caps "(NULL)"
-> 0:00:00.314240811 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element audioconvert=
-0:(any) to element audioresample0:(any)
-> 0:00:00.314247458 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link audioconvert0:src and audior=
-esample0:sink
-> 0:00:00.314262474 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.314279696 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioresample0:src> pad has no peer
-> 0:00:00.314308207 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: audioconvert0 and audioresample0 i=
-n same bin, no need for ghost pads
-> 0:00:00.314315754 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link audioconvert0:src and audior=
-esample0:sink
-> 0:00:00.314330418 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.314346962 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioresample0:src> pad has no peer
-> 0:00:00.314378599 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked audioconvert0:src and audioresample0:si=
-nk, successful
-> 0:00:00.314386763 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.314391319 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<audioconvert0:src> Received event o=
-n flushing pad. Discarding
-> 0:00:00.314402930 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstAudioResample named audioresample0 to some pad of GstAutoAudi=
-oSink named audiosink (0/0) with caps "(NULL)"
-> 0:00:00.314409122 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element audioresampl=
-e0:(any) to element audiosink:(any)
-> 0:00:00.314415241 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link audioresample0:src and audio=
-sink:sink
-> 0:00:00.314426780 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: audioresample0 and audiosink in sa=
-me bin, no need for ghost pads
-> 0:00:00.314434109 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link audioresample0:src and audio=
-sink:sink
-> 0:00:00.314443442 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked audioresample0:src and audiosink:sink, =
-successful
-> 0:00:00.314447640 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.314451812 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<audioresample0:src> Received event =
-on flushing pad. Discarding
-> 0:00:00.314460112 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:4377:gst_bin_get_by_name: [pipeline0]: looking up child element appsrc
-> 0:00:00.314468884 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:4377:gst_bin_get_by_name: [pipeline0]: looking up child element audios=
-ink
-> 0:00:00.314486044 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current NULL pending VOID_P=
-ENDING, desired next READY
-> 0:00:00.314493485 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<fake-audio-sink> completed state =
-change to NULL
-> 0:00:00.314502346 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking sink:proxypad0(0x562205414070) and fake=
--audio-sink:sink(0x562205401160)
-> 0:00:00.314508911 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked sink:proxypad0 and fake-audio-sink:sink
-> 0:00:00.314514395 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<audiosink> removed child "fake-audio-sink"
-> 0:00:00.314524049 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<fake-audio-sink> 0x562205419290 dispose
-> 0:00:00.314529118 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<fake-audio-sink> removing pad 'sink'
-> 0:00:00.314537898 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<fake-audio-sink> 0x562205419290 parent c=
-lass dispose
-> 0:00:00.314547445 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<fake-audio-sink> 0x562205419290 finalize
-> 0:00:00.314552368 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<fake-audio-sink> 0x562205419290 finaliz=
-e parent
-> 0:00:00.318138732 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstpulseaudio.so" loaded
-> 0:00:00.318257681 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "pulsesink"
-> 0:00:00.318273884 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSink@0x562205422180> adding pad 's=
-ink'
-> 0:00:00.318295755 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad audiosink-actual-sink-p=
-ulse:sink
-> 0:00:00.318305880 236125 0x562204e5c670 INFO                   pulse puls=
-esink.c:3243:gst_pulsesink_change_state:<audiosink-actual-sink-pulse> new p=
-a main loop thread
-> 0:00:00.318388198 236125 0x562204e5c670 INFO                   pulse puls=
-esink.c:533:gst_pulseringbuffer_open_device:<audiosink-actual-sink-pulse> n=
-ew context with name spicy, pbuf=3D0x562205426000, pctx=3D0x5622051b1970
-> 0:00:00.319443091 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink-actual-sink-pulse> comp=
-leted state change to READY
-> 0:00:00.319453719 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink-actual-sink-pulse>=
- notifying about state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.319590908 236125 0x562204e5c670 INFO                   pulse puls=
-esink.c:3225:gst_pulsesink_release_mainloop:<audiosink-actual-sink-pulse> t=
-erminating pa main loop thread
-> 0:00:00.319635338 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink-actual-sink-pulse> comp=
-leted state change to NULL
-> 0:00:00.319646693 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink-actual-sink-pulse>=
- notifying about state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:00.319686719 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad audiosink-actual-sink-p=
-ulse:sink
-> 0:00:00.319695586 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link sink:proxypad0 and audiosink=
--actual-sink-pulse:sink
-> 0:00:00.319701630 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked sink:proxypad0 and audiosink-actual-sin=
-k-pulse:sink, successful
-> 0:00:00.319705559 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.319719065 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink-actual-sink-pulse> current N=
-ULL pending VOID_PENDING, desired next READY
-> 0:00:00.319724050 236125 0x562204e5c670 INFO                   pulse puls=
-esink.c:3243:gst_pulsesink_change_state:<audiosink-actual-sink-pulse> new p=
-a main loop thread
-> 0:00:00.319764403 236125 0x562204e5c670 INFO                   pulse puls=
-esink.c:533:gst_pulseringbuffer_open_device:<audiosink-actual-sink-pulse> n=
-ew context with name spicy, pbuf=3D0x5622054263e0, pctx=3D0x5622051b18b0
-> 0:00:00.320240161 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink-actual-sink-pulse> comp=
-leted state change to READY
-> 0:00:00.320248811 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink-actual-sink-pulse>=
- notifying about state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.320260168 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosink> child 'audiosink-actual-sin=
-k-pulse' changed state to 2(READY) successfully
-> 0:00:00.320266477 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink> completed state change=
- to READY
-> 0:00:00.320270884 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink> notifying about s=
-tate-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.320277226 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audiosink' changed s=
-tate to 2(READY) successfully
-> 0:00:00.320284284 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current NULL pending V=
-OID_PENDING, desired next READY
-> 0:00:00.320288992 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample0> completed state c=
-hange to READY
-> 0:00:00.320293257 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample0> notifying ab=
-out state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.320298774 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 2(READY) successfully
-> 0:00:00.320304456 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current NULL pending VO=
-ID_PENDING, desired next READY
-> 0:00:00.320308858 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert0> completed state ch=
-ange to READY
-> 0:00:00.320312825 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert0> notifying abo=
-ut state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.320318207 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 2(READY) successfully
-> 0:00:00.320323659 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current NULL pending VOID_PEND=
-ING, desired next READY
-> 0:00:00.320327705 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue0> completed state change to=
- READY
-> 0:00:00.320331867 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue0> notifying about stat=
-e-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.320337244 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 2(READY) successfully
-> 0:00:00.320346095 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsrc> current NULL pending VOID_PEND=
-ING, desired next READY
-> 0:00:00.320350848 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsrc> completed state change to=
- READY
-> 0:00:00.320354934 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsrc> notifying about stat=
-e-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.320360423 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 2(READY) successfully
-> 0:00:00.320366365 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2778:gst_element_continue_state:<pipeline0> committing state from =
-NULL to READY, pending PLAYING, next PAUSED
-> 0:00:00.320370733 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline0> notifying about s=
-tate-changed NULL to READY (PLAYING pending)
-> 0:00:00.320375876 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2786:gst_element_continue_state:<pipeline0> continue state change =
-READY to PAUSED, final PLAYING
-> 0:00:00.320385089 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current READY pending VOID_=
-PENDING, desired next PAUSED
-> 0:00:00.320391914 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink-actual-sink-pulse> current R=
-EADY pending VOID_PENDING, desired next PAUSED
-> 0:00:00.320404825 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2935:gst_bin_change_state_func:<audiosink> child 'audiosink-actual-sin=
-k-pulse' is changing state asynchronously to PAUSED
-> 0:00:00.320412627 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2935:gst_bin_change_state_func:<pipeline0> child 'audiosink' is changi=
-ng state asynchronously to PAUSED
-> 0:00:00.320418046 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current READY pending =
-VOID_PENDING, desired next PAUSED
-> 0:00:00.320425428 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample0> completed state c=
-hange to PAUSED
-> 0:00:00.320429932 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample0> notifying ab=
-out state-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.320435471 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 3(PAUSED) successfully
-> 0:00:00.320440436 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current READY pending V=
-OID_PENDING, desired next PAUSED
-> 0:00:00.320446644 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert0> completed state ch=
-ange to PAUSED
-> 0:00:00.320450918 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert0> notifying abo=
-ut state-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.320456405 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 3(PAUSED) successfully
-> 0:00:00.320464439 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current READY pending VOID_PEN=
-DING, desired next PAUSED
-> 0:00:00.320479826 236125 0x562204e5c670 INFO                    task gstt=
-ask.c:516:gst_task_set_lock: setting stream lock 0x562205400640 on task 0x5=
-62204e4d170
-> 0:00:00.320485174 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:6291:gst_pad_start_task:<queue0:src> created task 0x562204e4d170
-> 0:00:00.320525479 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue0> completed state change to=
- PAUSED
-> 0:00:00.320532447 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue0> notifying about stat=
-e-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.320538986 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 3(PAUSED) successfully
-> 0:00:00.320544096 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsrc> current READY pending VOID_PEN=
-DING, desired next PAUSED
-> 0:00:00.320557222 236125 0x562204e5c670 INFO                 basesrc gstb=
-asesrc.c:1430:gst_base_src_do_seek:<appsrc> seeking: time segment start=3D0=
-:00:00.000000000, offset=3D0:00:00.000000000, stop=3D99:99:99.999999999, ra=
-te=3D1,000000, applied_rate=3D1,000000, flags=3D0x00, time=3D0:00:00.000000=
-000, base=3D0:00:00.000000000, position 0:00:00.000000000, duration 99:99:9=
-9.999999999
-> 0:00:00.320565710 236125 0x562204e5c670 INFO                    task gstt=
-ask.c:516:gst_task_set_lock: setting stream lock 0x5622054001a0 on task 0x5=
-62204e4d290
-> 0:00:00.320569836 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:6291:gst_pad_start_task:<appsrc:src> created task 0x562204e4d290
-> 0:00:00.320604361 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsrc> completed state change to=
- PAUSED
-> 0:00:00.320611597 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsrc> notifying about stat=
-e-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.320618621 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2971:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 3(PAUSED) successfully without preroll
-> 0:00:00.320625114 236125 0x562204e5c670 INFO                pipeline gstp=
-ipeline.c:533:gst_pipeline_change_state:<pipeline0> pipeline is live
-> 0:00:00.320638591 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2778:gst_element_continue_state:<pipeline0> committing state from =
-READY to PAUSED, pending PLAYING, next PLAYING
-> 0:00:00.320633614 236125 0x5622051c82a0 INFO        GST_ELEMENT_PADS gste=
-lement.c:1013:gst_element_get_static_pad: no such pad 'sink' in element "ap=
-psrc"
-> 0:00:00.320644885 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline0> notifying about s=
-tate-changed READY to PAUSED (PLAYING pending)
-> 0:00:00.320661681 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2786:gst_element_continue_state:<pipeline0> continue state change =
-PAUSED to PLAYING, final PLAYING
-> 0:00:00.320661680 236125 0x5622051c82a0 FIXME                default gstu=
-tils.c:4025:gst_pad_create_stream_id_internal:<appsrc:src> Creating random =
-stream-id, consider implementing a deterministic way of creating a stream-id
-> 0:00:00.320707437 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1530:gst_event_new_latency: creating latency event 0:00:00.000000000
-> 0:00:00.320726181 236125 0x562204e5c670 INFO                     bin gstb=
-in.c:2759:gst_bin_do_latency_func:<pipeline0> configured latency of 0:00:00=
-=2E000000000
-> 0:00:00.320741634 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current READY pending PAUSE=
-D, desired next PLAYING
-> 0:00:00.320749623 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2935:gst_bin_change_state_func:<pipeline0> child 'audiosink' is changi=
-ng state asynchronously to PLAYING
-> 0:00:00.320755424 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current PAUSED pending=
- VOID_PENDING, desired next PLAYING
-> 0:00:00.320760208 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample0> completed state c=
-hange to PLAYING
-> 0:00:00.320764827 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample0> notifying ab=
-out state-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.320771560 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 4(PLAYING) successfully
-> 0:00:00.320777094 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current PAUSED pending =
-VOID_PENDING, desired next PLAYING
-> 0:00:00.320781236 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert0> completed state ch=
-ange to PLAYING
-> 0:00:00.320785645 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert0> notifying abo=
-ut state-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.320791478 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 4(PLAYING) successfully
-> 0:00:00.320797048 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current PAUSED pending VOID_PE=
-NDING, desired next PLAYING
-> 0:00:00.320801077 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue0> completed state change to=
- PLAYING
-> 0:00:00.320805591 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue0> notifying about stat=
-e-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.320811273 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 4(PLAYING) successfully
-> 0:00:00.320817349 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsrc> completed state change to=
- PLAYING
-> 0:00:00.320822878 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsrc> notifying about stat=
-e-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.320828751 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 4(PLAYING) successfully
-> 0:00:00.320835544 236125 0x5622051c82a0 INFO               GST_EVENT gste=
-vent.c:892:gst_event_new_caps: creating caps event audio/x-raw, format=3D(s=
-tring)S16LE, channels=3D(int)2, rate=3D(int)48000, layout=3D(string)interle=
-aved
-> (spicy:236125): GSpice-DEBUG: 13:06:40.888: ../spice-gtk-0.41/src/spice-g=
-staudio.c:662 Stop faked PlaybackChannel
-> 0:00:00.320873724 236125 0x5622051c82a0 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, channels=3D(int)2, rate=3D(int)48000;
-> 0:00:00.320878917 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current READY pending PAUSE=
-D, desired next PAUSED
-> 0:00:00.320884704 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2935:gst_bin_change_state_func:<pipeline0> child 'audiosink' is changi=
-ng state asynchronously to PAUSED
-> 0:00:00.320889832 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current PLAYING pendin=
-g VOID_PENDING, desired next PAUSED
-> 0:00:00.320893827 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample0> completed state c=
-hange to PAUSED
-> 0:00:00.320902034 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample0> notifying ab=
-out state-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.320912678 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 3(PAUSED) successfully
-> 0:00:00.320921625 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current PLAYING pending=
- VOID_PENDING, desired next PAUSED
-> 0:00:00.320928985 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert0> completed state ch=
-ange to PAUSED
-> 0:00:00.320932166 236125 0x56220502d2a0 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, channels=3D(int)2, rate=3D(int)48000;
-> 0:00:00.320936627 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert0> notifying abo=
-ut state-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.320960105 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 3(PAUSED) successfully
-> 0:00:00.320970199 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current PLAYING pending VOID_P=
-ENDING, desired next PAUSED
-> 0:00:00.320970190 236125 0x56220502d2a0 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, channels=3D(int)2, rate=3D(int)48000;
-> 0:00:00.320979183 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue0> completed state change to=
- PAUSED
-> 0:00:00.320994899 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue0> notifying about stat=
-e-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.321010454 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 3(PAUSED) successfully
-> 0:00:00.321019671 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsrc> current PLAYING pending VOID_P=
-ENDING, desired next PAUSED
-> 0:00:00.321027811 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsrc> completed state change to=
- PAUSED
-> 0:00:00.321035135 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsrc> notifying about stat=
-e-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.321044629 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2971:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 3(PAUSED) successfully without preroll
-> 0:00:00.321052981 236125 0x562204e5c670 INFO                pipeline gstp=
-ipeline.c:533:gst_pipeline_change_state:<pipeline0> pipeline is live
-> 0:00:00.321061639 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2778:gst_element_continue_state:<pipeline0> committing state from =
-PAUSED to PAUSED, pending READY, next READY
-> 0:00:00.321068991 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline0> notifying about s=
-tate-changed PAUSED to PAUSED (READY pending)
-> 0:00:00.321083839 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2786:gst_element_continue_state:<pipeline0> continue state change =
-PAUSED to READY, final READY
-> 0:00:00.321095587 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current READY pending PAUSE=
-D, desired next READY
-> 0:00:00.321103373 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink-actual-sink-pulse> current R=
-EADY pending PAUSED, desired next READY
-> 0:00:00.347687896 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink-actual-sink-pulse> comp=
-leted state change to READY
-> 0:00:00.347711456 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink-actual-sink-pulse>=
- notifying about state-changed READY to READY (VOID_PENDING pending)
-> 0:00:00.347723105 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosink> child 'audiosink-actual-sin=
-k-pulse' changed state to 2(READY) successfully
-> 0:00:00.347737852 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink> completed state change=
- to READY
-> 0:00:00.347745423 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink> notifying about s=
-tate-changed READY to READY (VOID_PENDING pending)
-> 0:00:00.347755013 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audiosink' changed s=
-tate to 2(READY) successfully
-> 0:00:00.347765754 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current PAUSED pending=
- VOID_PENDING, desired next READY
-> 0:00:00.347777720 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample0> completed state c=
-hange to READY
-> 0:00:00.347791973 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample0> notifying ab=
-out state-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.347800660 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 2(READY) successfully
-> 0:00:00.347808897 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current PAUSED pending =
-VOID_PENDING, desired next READY
-> 0:00:00.347832593 236125 0x56220502d2a0 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, format=3D(string)S16LE, channels=3D(int)2, rate=3D(=
-int)48000, layout=3D(string)interleaved;
-> 0:00:00.347860672 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:1358:gst_audio_converter_new: unitsizes: 4 -> 4
-> 0:00:00.347865577 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:727:chain_unpack: unpack format S16LE to S16LE
-> 0:00:00.347877246 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:869:chain_mix: mix format S16LE, passthrough 1, in_channels 2=
-, out_channels 2
-> 0:00:00.347881484 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:963:chain_quantize: depth in 16, out 16
-> 0:00:00.347884333 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:975:chain_quantize: using no dither and noise shaping
-> 0:00:00.347887452 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:1032:chain_pack: pack format S16LE to S16LE
-> 0:00:00.347890093 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:1386:gst_audio_converter_new: same formats, same layout, no r=
-esampler and passthrough mixing -> passthrough
-> 0:00:00.347897662 236125 0x56220502d2a0 INFO               GST_EVENT gste=
-vent.c:892:gst_event_new_caps: creating caps event audio/x-raw, rate=3D(int=
-)48000, format=3D(string)S16LE, channels=3D(int)2, layout=3D(string)interle=
-aved, channel-mask=3D(bitmask)0x0000000000000003
-> 0:00:00.347915004 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert0> completed state ch=
-ange to READY
-> 0:00:00.347922915 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert0> notifying abo=
-ut state-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.347929396 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 2(READY) successfully
-> 0:00:00.347935430 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current PAUSED pending VOID_PE=
-NDING, desired next READY
-> 0:00:00.347965867 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue0> completed state change to=
- READY
-> 0:00:00.347972235 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue0> notifying about stat=
-e-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.347978229 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 2(READY) successfully
-> 0:00:00.347994923 236125 0x5622051c82a0 INFO                 basesrc gstb=
-asesrc.c:2913:gst_base_src_loop:<appsrc> pausing after gst_base_src_get_ran=
-ge() =3D flushing
-> 0:00:00.348052315 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsrc> completed state change to=
- READY
-> 0:00:00.348058946 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsrc> notifying about stat=
-e-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.348064719 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 2(READY) successfully
-> 0:00:00.348070098 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline0> completed state change=
- to READY
-> 0:00:00.348073845 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline0> notifying about s=
-tate-changed PAUSED to READY (VOID_PENDING pending)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.916: ../spice-gtk-0.41/src/spice-g=
-staudio.c:680 (playback) volume at 0 is 65535 (100,00%)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.916: ../spice-gtk-0.41/src/spice-g=
-staudio.c:680 (playback) volume at 1 is 65535 (100,00%)
-> (spicy:236125): GSpice-DEBUG: 13:06:40.916: ../spice-gtk-0.41/src/channel=
--main.c:1234 audio_playback_volume_info_cb mute=3Dno nchannels=3D2 volume[0=
-]=3D65535
-> (spicy:236125): GSpice-DEBUG: 13:06:40.916: ../spice-gtk-0.41/src/spice-g=
-staudio.c:724 RecordChannel not created yet, force start
 
-> 0:00:00.348137766 236125 0x562204e5c670 INFO            GST_PIPELINE gstp=
-arse.c:344:gst_parse_launch_full: parsing pipeline description 'autoaudiosr=
-c name=3Daudiosrc ! queue ! audioconvert ! audioresample ! appsink caps=3D"=
-audio/x-raw,format=3D"S16LE",channels=3D2,rate=3D48000,layout=3Dinterleaved=
-" name=3Dappsink'
-> 0:00:00.348147069 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "autoaudiosrc"
-> 0:00:00.348177732 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<autoaudiosrc0> adding pad 'src'
-> 0:00:00.348441683 236125 0x562204e5c670 INFO      GST_PLUGIN_LOADING gstp=
-lugin.c:987:_priv_gst_plugin_load_file_for_registry: plugin "/usr/lib/gstre=
-amer-1.0/libgstaudiotestsrc.so" loaded
-> 0:00:00.348496075 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "audiotestsrc"
-> 0:00:00.348510831 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSrc@0x5622054363f0> adding pad 'sr=
-c'
-> 0:00:00.348530304 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad fake-auto-audio-src:src
-> 0:00:00.348538879 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link fake-auto-audio-src:src and =
-src:proxypad1
-> 0:00:00.348543956 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked fake-auto-audio-src:src and src:proxypa=
-d1, successful
-> 0:00:00.348547124 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.348550921 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<fake-auto-audio-src:src> Received e=
-vent on flushing pad. Discarding
-> 0:00:00.348562790 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "queue"
-> 0:00:00.348577634 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstQueue@0x5622053ea9f0> adding pad 'sink'
-> 0:00:00.348585451 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstQueue@0x5622053ea9f0> adding pad 'src'
-> 0:00:00.348596201 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "audioconvert"
-> 0:00:00.348603690 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220543a850> adding p=
-ad 'sink'
-> 0:00:00.348614484 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220543a850> adding p=
-ad 'src'
-> 0:00:00.348621923 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "audioresample"
-> 0:00:00.348628456 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220543af30> adding p=
-ad 'sink'
-> 0:00:00.348633848 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseTransform@0x56220543af30> adding p=
-ad 'src'
-> 0:00:00.348640657 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "appsink"
-> 0:00:00.348700269 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSink@0x5622054188d0> adding pad 's=
-ink'
-> 0:00:00.348727887 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "pipeline"
-> 0:00:00.348764175 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstAutoAudioSrc named audiosrc to some pad of GstQueue named que=
-ue1 (0/0) with caps "(NULL)"
-> 0:00:00.348770584 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element audiosrc:(an=
-y) to element queue1:(any)
-> 0:00:00.348775814 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link audiosrc:src and queue1:sink
-> 0:00:00.348786832 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<queue1:src> pad has no peer
-> 0:00:00.348792667 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: audiosrc and queue1 in same bin, n=
-o need for ghost pads
-> 0:00:00.348798744 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link audiosrc:src and queue1:sink
-> 0:00:00.348804950 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<queue1:src> pad has no peer
-> 0:00:00.348810107 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked audiosrc:src and queue1:sink, successful
-> 0:00:00.348813189 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.348820057 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<audiosrc:src> Received event on flu=
-shing pad. Discarding
-> 0:00:00.348829138 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstQueue named queue1 to some pad of GstAudioConvert named audio=
-convert1 (0/0) with caps "(NULL)"
-> 0:00:00.348833637 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element queue1:(any)=
- to element audioconvert1:(any)
-> 0:00:00.348838293 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link queue1:src and audioconvert1=
-:sink
-> 0:00:00.348845946 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioconvert1:src> pad has no peer
-> 0:00:00.348860091 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.348880586 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: queue1 and audioconvert1 in same b=
-in, no need for ghost pads
-> 0:00:00.348886963 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link queue1:src and audioconvert1=
-:sink
-> 0:00:00.348893980 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioconvert1:src> pad has no peer
-> 0:00:00.348903277 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.348921658 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked queue1:src and audioconvert1:sink, succ=
-essful
-> 0:00:00.348925038 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.348928347 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<queue1:src> Received event on flush=
-ing pad. Discarding
-> 0:00:00.348937496 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstAudioConvert named audioconvert1 to some pad of GstAudioResam=
-ple named audioresample1 (0/0) with caps "(NULL)"
-> 0:00:00.348942155 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element audioconvert=
-1:(any) to element audioresample1:(any)
-> 0:00:00.348946869 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link audioconvert1:src and audior=
-esample1:sink
-> 0:00:00.348969510 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.348991663 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioresample1:src> pad has no peer
-> 0:00:00.349015203 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: audioconvert1 and audioresample1 i=
-n same bin, no need for ghost pads
-> 0:00:00.349023876 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link audioconvert1:src and audior=
-esample1:sink
-> 0:00:00.349045059 236125 0x562204e5c670 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, rate=3D(int)[ 1, 2147483647 ], channels=3D(int)[ 1,=
- 2147483647 ];
-> 0:00:00.349065765 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:4357:gst_pad_peer_query:<audioresample1:src> pad has no peer
-> 0:00:00.349088560 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked audioconvert1:src and audioresample1:si=
-nk, successful
-> 0:00:00.349091926 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.349095106 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<audioconvert1:src> Received event o=
-n flushing pad. Discarding
-> 0:00:00.349103425 236125 0x562204e5c670 INFO            GST_PIPELINE subp=
-rojects/gstreamer/gst/parse/grammar.y:683:gst_parse_perform_link: linking s=
-ome pad of GstAudioResample named audioresample1 to some pad of GstAppSink =
-named appsink (0/0) with caps "(NULL)"
-> 0:00:00.349108166 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstu=
-tils.c:1816:gst_element_link_pads_full: trying to link element audioresampl=
-e1:(any) to element appsink:(any)
-> 0:00:00.349112736 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1079:gst_pad_check_link: trying to link audioresample1:src and appsi=
-nk:sink
-> 0:00:00.349120466 236125 0x562204e5c670 INFO                GST_PADS gstu=
-tils.c:1632:prepare_link_maybe_ghosting: audioresample1 and appsink in same=
- bin, no need for ghost pads
-> 0:00:00.349125635 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link audioresample1:src and appsi=
-nk:sink
-> 0:00:00.349132753 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked audioresample1:src and appsink:sink, su=
-ccessful
-> 0:00:00.349135773 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.349138863 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<audioresample1:src> Received event =
-on flushing pad. Discarding
-> 0:00:00.349148534 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:4377:gst_bin_get_by_name: [pipeline1]: looking up child element audios=
-rc
-> 0:00:00.349154971 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:4377:gst_bin_get_by_name: [pipeline1]: looking up child element appsink
-> 0:00:00.349170611 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current NULL pending VOID_PEN=
-DING, desired next READY
-> 0:00:00.349175858 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsink> completed state change t=
-o READY
-> 0:00:00.349180150 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsink> notifying about sta=
-te-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.349190241 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'appsink' changed sta=
-te to 2(READY) successfully
-> 0:00:00.349198420 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current NULL pending V=
-OID_PENDING, desired next READY
-> 0:00:00.349202251 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample1> completed state c=
-hange to READY
-> 0:00:00.349205933 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample1> notifying ab=
-out state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.349211072 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 2(READY) successfully
-> 0:00:00.349215495 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current NULL pending VO=
-ID_PENDING, desired next READY
-> 0:00:00.349218927 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert1> completed state ch=
-ange to READY
-> 0:00:00.349222477 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert1> notifying abo=
-ut state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.349227397 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 2(READY) successfully
-> 0:00:00.349231876 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current NULL pending VOID_PEND=
-ING, desired next READY
-> 0:00:00.349235265 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue1> completed state change to=
- READY
-> 0:00:00.349238924 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue1> notifying about stat=
-e-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.349243855 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 2(READY) successfully
-> 0:00:00.349247911 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc> current NULL pending VOID_PE=
-NDING, desired next READY
-> 0:00:00.349252151 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<fake-auto-audio-src> completed st=
-ate change to NULL
-> 0:00:00.349258655 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking fake-auto-audio-src:src(0x5622054013b0)=
- and src:proxypad1(0x5622054142d0)
-> 0:00:00.349264482 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked fake-auto-audio-src:src and src:proxypad1
-> 0:00:00.349268990 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<audiosrc> removed child "fake-auto-audio-src"
-> 0:00:00.349275911 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<fake-auto-audio-src> 0x5622054363f0 disp=
-ose
-> 0:00:00.349279506 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<fake-auto-audio-src> removing pad 'src'
-> 0:00:00.349287853 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<fake-auto-audio-src> 0x5622054363f0 pare=
-nt class dispose
-> 0:00:00.349292195 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<fake-auto-audio-src> 0x5622054363f0 fin=
-alize
-> 0:00:00.349295577 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<fake-auto-audio-src> 0x5622054363f0 fin=
-alize parent
-> 0:00:00.349564443 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "pulsesrc"
-> 0:00:00.349575373 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSrc@0x562205437ec0> adding pad 'sr=
-c'
-> 0:00:00.349590308 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad audiosrc-actual-src-pul=
-s:src
-> 0:00:00.350119198 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to READY
-> 0:00:00.350127349 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.350308100 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to NULL
-> 0:00:00.350319184 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:00.350346298 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad audiosrc-actual-src-pul=
-s:src
-> 0:00:00.350355408 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link audiosrc-actual-src-puls:src=
- and src:proxypad1
-> 0:00:00.350360683 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked audiosrc-actual-src-puls:src and src:pr=
-oxypad1, successful
-> 0:00:00.350364016 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:00.350367847 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<audiosrc-actual-src-puls:src> Recei=
-ved event on flushing pad. Discarding
-> 0:00:00.350377440 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc-actual-src-puls> current NULL=
- pending VOID_PENDING, desired next READY
-> 0:00:00.350813329 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to READY
-> 0:00:00.350820935 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.350828524 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 2(READY) successfully
-> 0:00:00.350833655 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to READY
-> 0:00:00.350841894 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc> notifying about st=
-ate-changed NULL to READY (VOID_PENDING pending)
-> 0:00:00.350847771 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 2(READY) successfully
-> 0:00:00.350853018 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2778:gst_element_continue_state:<pipeline1> committing state from =
-NULL to READY, pending PLAYING, next PAUSED
-> 0:00:00.350856814 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline1> notifying about s=
-tate-changed NULL to READY (PLAYING pending)
-> 0:00:00.350861038 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2786:gst_element_continue_state:<pipeline1> continue state change =
-READY to PAUSED, final PLAYING
-> 0:00:00.350870800 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current READY pending VOID_PE=
-NDING, desired next PAUSED
-> 0:00:00.350878601 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2935:gst_bin_change_state_func:<pipeline1> child 'appsink' is changing=
- state asynchronously to PAUSED
-> 0:00:00.350883580 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current READY pending =
-VOID_PENDING, desired next PAUSED
-> 0:00:00.350889790 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample1> completed state c=
-hange to PAUSED
-> 0:00:00.350893573 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample1> notifying ab=
-out state-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.350898499 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 3(PAUSED) successfully
-> 0:00:00.350902928 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current READY pending V=
-OID_PENDING, desired next PAUSED
-> 0:00:00.350907878 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert1> completed state ch=
-ange to PAUSED
-> 0:00:00.350911422 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert1> notifying abo=
-ut state-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.350915834 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 3(PAUSED) successfully
-> 0:00:00.350920240 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current READY pending VOID_PEN=
-DING, desired next PAUSED
-> 0:00:00.350928560 236125 0x562204e5c670 INFO                    task gstt=
-ask.c:516:gst_task_set_lock: setting stream lock 0x5622054018c0 on task 0x5=
-62204e4d3b0
-> 0:00:00.350932492 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:6291:gst_pad_start_task:<queue1:src> created task 0x562204e4d3b0
-> 0:00:00.350942615 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue1> completed state change to=
- PAUSED
-> 0:00:00.350952469 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue1> notifying about stat=
-e-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.350960974 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 3(PAUSED) successfully
-> 0:00:00.350966848 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc> current READY pending VOID_P=
-ENDING, desired next PAUSED
-> 0:00:00.350974499 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc-actual-src-puls> current READ=
-Y pending VOID_PENDING, desired next PAUSED
-> 0:00:00.350989769 236125 0x562204e5c670 INFO                 basesrc gstb=
-asesrc.c:1430:gst_base_src_do_seek:<audiosrc-actual-src-puls> seeking: time=
- segment start=3D0:00:00.000000000, offset=3D0:00:00.000000000, stop=3D99:9=
-9:99.999999999, rate=3D1,000000, applied_rate=3D1,000000, flags=3D0x00, tim=
-e=3D0:00:00.000000000, base=3D0:00:00.000000000, position 0:00:00.000000000=
-, duration 99:99:99.999999999
-> 0:00:00.350997099 236125 0x562204e5c670 INFO                    task gstt=
-ask.c:516:gst_task_set_lock: setting stream lock 0x562205401420 on task 0x5=
-62204e4d4d0
-> 0:00:00.351000764 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:6291:gst_pad_start_task:<audiosrc-actual-src-puls:src> created task 0x=
-562204e4d4d0
-> 0:00:00.351008584 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to PAUSED
-> 0:00:00.351012809 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.351018094 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2971:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 3(PAUSED) successfully without preroll
-> 0:00:00.351022910 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to PAUSED
-> 0:00:00.351026441 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc> notifying about st=
-ate-changed READY to PAUSED (VOID_PENDING pending)
-> 0:00:00.351025598 236125 0x5622051c82a0 INFO        GST_ELEMENT_PADS gste=
-lement.c:1013:gst_element_get_static_pad: no such pad 'sink' in element "au=
-diosrc-actual-src-puls"
-> 0:00:00.351031543 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2971:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 3(PAUSED) successfully without preroll
-> 0:00:00.351039619 236125 0x5622051c82a0 FIXME                default gstu=
-tils.c:4025:gst_pad_create_stream_id_internal:<audiosrc-actual-src-puls:src=
-> Creating random stream-id, consider implementing a deterministic way of c=
-reating a stream-id
-> 0:00:00.351042848 236125 0x562204e5c670 INFO                pipeline gstp=
-ipeline.c:533:gst_pipeline_change_state:<pipeline1> pipeline is live
-> 0:00:00.351047429 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2778:gst_element_continue_state:<pipeline1> committing state from =
-READY to PAUSED, pending PLAYING, next PLAYING
-> 0:00:00.351055953 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline1> notifying about s=
-tate-changed READY to PAUSED (PLAYING pending)
-> 0:00:00.351063242 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2786:gst_element_continue_state:<pipeline1> continue state change =
-PAUSED to PLAYING, final PLAYING
-> 0:00:00.351090735 236125 0x5622051c82a0 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, channels=3D(int)2, rate=3D(int)48000;
-> 0:00:00.351098530 236125 0x5622051c82a0 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, channels=3D(int)2, rate=3D(int)[ 1, 2147483647 ];
-> 0:00:00.351098909 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1530:gst_event_new_latency: creating latency event 0:00:00.000000000
-> 0:00:00.351109574 236125 0x562204e5c670 INFO                     bin gstb=
-in.c:2759:gst_bin_do_latency_func:<pipeline1> configured latency of 0:00:00=
-=2E000000000
-> 0:00:00.351117841 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current READY pending PAUSED,=
- desired next PLAYING
-> 0:00:00.351121827 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2935:gst_bin_change_state_func:<pipeline1> child 'appsink' is changing=
- state asynchronously to PLAYING
-> 0:00:00.351126210 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current PAUSED pending=
- VOID_PENDING, desired next PLAYING
-> 0:00:00.351130211 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample1> completed state c=
-hange to PLAYING
-> 0:00:00.351134039 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample1> notifying ab=
-out state-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.351139322 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 4(PLAYING) successfully
-> 0:00:00.351144108 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current PAUSED pending =
-VOID_PENDING, desired next PLAYING
-> 0:00:00.351147206 236125 0x5622051c82a0 INFO               structure gsts=
-tructure.c:2917:gst_structure_get_valist: Expected field 'channel-mask' in =
-structure: audio/x-raw, format=3D(string)S16LE, layout=3D(string)interleave=
-d, rate=3D(int)48000, channels=3D(int)2;
-> 0:00:00.351147519 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert1> completed state ch=
-ange to PLAYING
-> 0:00:00.351157436 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert1> notifying abo=
-ut state-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.351162720 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 4(PLAYING) successfully
-> 0:00:00.351167465 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current PAUSED pending VOID_PE=
-NDING, desired next PLAYING
-> 0:00:00.351171054 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue1> completed state change to=
- PLAYING
-> 0:00:00.351177670 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue1> notifying about stat=
-e-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.351178352 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1524:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> maxlength: 38400
-> 0:00:00.351182430 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 4(PLAYING) successfully
-> 0:00:00.351184943 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1525:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> tlength:   -1
-> 0:00:00.351189519 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1526:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> prebuf:    0
-> 0:00:00.351193247 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1527:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> minreq:    -1
-> 0:00:00.351197094 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1528:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> fragsize:  1920
-> 0:00:00.351258854 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to PLAYING
-> 0:00:00.351269812 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.351279397 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 4(PLAYING) successfully
-> 0:00:00.351284996 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to PLAYING
-> 0:00:00.351290628 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc> notifying about st=
-ate-changed PAUSED to PLAYING (VOID_PENDING pending)
-> 0:00:00.351298704 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 4(PLAYING) successfully
-> (spicy:236125): GSpice-DEBUG: 13:06:40.919: ../spice-gtk-0.41/src/spice-g=
-staudio.c:746 Stop faked RecordChannel
-> (spicy:236125): GSpice-DEBUG: 13:06:40.919: ../spice-gtk-0.41/src/spice-g=
-staudio.c:136 record_stop
-> 0:00:00.351350378 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current READY pending PAUSED,=
- desired next PAUSED
-> 0:00:00.351357262 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<appsink> skipping transition from READ=
-Y to  PAUSED
-> 0:00:00.351363980 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'appsink' changed sta=
-te to 3(PAUSED) successfully
-> 0:00:00.351371825 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current PLAYING pendin=
-g VOID_PENDING, desired next PAUSED
-> 0:00:00.351378396 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample1> completed state c=
-hange to PAUSED
-> 0:00:00.351385063 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample1> notifying ab=
-out state-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.351400054 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 3(PAUSED) successfully
-> 0:00:00.351409026 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current PLAYING pending=
- VOID_PENDING, desired next PAUSED
-> 0:00:00.351415272 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert1> completed state ch=
-ange to PAUSED
-> 0:00:00.351421687 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert1> notifying abo=
-ut state-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.351430048 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 3(PAUSED) successfully
-> 0:00:00.351438725 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current PLAYING pending VOID_P=
-ENDING, desired next PAUSED
-> 0:00:00.351445231 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue1> completed state change to=
- PAUSED
-> 0:00:00.351450563 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue1> notifying about stat=
-e-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.351460996 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 3(PAUSED) successfully
-> 0:00:00.351466221 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc> current PLAYING pending VOID=
-_PENDING, desired next PAUSED
-> 0:00:00.351471976 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc-actual-src-puls> current PLAY=
-ING pending VOID_PENDING, desired next PAUSED
-> 0:00:00.428607876 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1582:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> maxlength: 38400
-> 0:00:00.428673025 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1583:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> tlength:   -1 (=
-wanted: -1)
-> 0:00:00.428689529 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1585:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> prebuf:    0
-> 0:00:00.428703708 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1586:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> minreq:    -1 (=
-wanted -1)
-> 0:00:00.428717496 236125 0x5622051c82a0 INFO                   pulse puls=
-esrc.c:1588:gst_pulsesrc_prepare:<audiosrc-actual-src-puls> fragsize:  1920=
- (wanted 1920)
-> 0:00:00.431547343 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to PAUSED
-> 0:00:00.431595922 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.431643792 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2971:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 3(PAUSED) successfully without preroll
-> 0:00:00.431656476 236125 0x5622051c82a0 INFO              ringbuffer gsta=
-udioringbuffer.c:634:gst_audio_ring_buffer_acquire:<audiosrcringbuffer1> Al=
-locating an array for 20 timestamps
-> 0:00:00.431719074 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to PAUSED
-> 0:00:00.431752403 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc> notifying about st=
-ate-changed PLAYING to PAUSED (VOID_PENDING pending)
-> 0:00:00.431791447 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2971:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 3(PAUSED) successfully without preroll
-> 0:00:00.431808143 236125 0x5622051c82a0 INFO               GST_EVENT gste=
-vent.c:892:gst_event_new_caps: creating caps event audio/x-raw, format=3D(s=
-tring)S16LE, layout=3D(string)interleaved, rate=3D(int)48000, channels=3D(i=
-nt)2, channel-mask=3D(bitmask)0x0000000000000003
-> 0:00:00.431824852 236125 0x562204e5c670 INFO                pipeline gstp=
-ipeline.c:533:gst_pipeline_change_state:<pipeline1> pipeline is live
-> 0:00:00.431867477 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2778:gst_element_continue_state:<pipeline1> committing state from =
-PAUSED to PAUSED, pending READY, next READY
-> 0:00:00.431896846 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline1> notifying about s=
-tate-changed PAUSED to PAUSED (READY pending)
-> 0:00:00.431929818 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2786:gst_element_continue_state:<pipeline1> continue state change =
-PAUSED to READY, final READY
-> 0:00:00.431992689 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current READY pending PAUSED,=
- desired next READY
-> 0:00:00.432094648 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsink> completed state change t=
-o READY
-> 0:00:00.432132079 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsink> notifying about sta=
-te-changed READY to READY (VOID_PENDING pending)
-> 0:00:00.432170613 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'appsink' changed sta=
-te to 2(READY) successfully
-> 0:00:00.432213522 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current PAUSED pending=
- VOID_PENDING, desired next READY
-> 0:00:00.432264919 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample1> completed state c=
-hange to READY
-> 0:00:00.432295471 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample1> notifying ab=
-out state-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.432331363 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 2(READY) successfully
-> 0:00:00.432354822 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current PAUSED pending =
-VOID_PENDING, desired next READY
-> 0:00:00.432514924 236125 0x56220502d2a0 INFO           basetransform gstb=
-asetransform.c:1326:gst_base_transform_setcaps:<audioconvert1> reuse caps
-> 0:00:00.432605287 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:1358:gst_audio_converter_new: unitsizes: 4 -> 4
-> 0:00:00.432627561 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:727:chain_unpack: unpack format S16LE to S16LE
-> 0:00:00.432667448 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:869:chain_mix: mix format S16LE, passthrough 1, in_channels 2=
-, out_channels 2
-> 0:00:00.432684228 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:963:chain_quantize: depth in 16, out 16
-> 0:00:00.432696018 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:975:chain_quantize: using no dither and noise shaping
-> 0:00:00.432710100 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:1032:chain_pack: pack format S16LE to S16LE
-> 0:00:00.432721078 236125 0x56220502d2a0 INFO         audio-converter audi=
-o-converter.c:1386:gst_audio_converter_new: same formats, same layout, no r=
-esampler and passthrough mixing -> passthrough
-> 0:00:00.432754489 236125 0x56220502d2a0 INFO               GST_EVENT gste=
-vent.c:892:gst_event_new_caps: creating caps event audio/x-raw, format=3D(s=
-tring)S16LE, layout=3D(string)interleaved, rate=3D(int)48000, channels=3D(i=
-nt)2, channel-mask=3D(bitmask)0x0000000000000003
-> 0:00:00.432790074 236125 0x56220502d2a0 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<audioconvert1:sink> Received event =
-on flushing pad. Discarding
-> 0:00:00.432806199 236125 0x56220502d2a0 WARN                GST_PADS gstp=
-ad.c:4351:gst_pad_peer_query:<queue1:src> could not send sticky events
-> 0:00:00.432875645 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert1> completed state ch=
-ange to READY
-> 0:00:00.432934732 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert1> notifying abo=
-ut state-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.432972707 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 2(READY) successfully
-> 0:00:00.433002357 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current PAUSED pending VOID_PE=
-NDING, desired next READY
-> 0:00:00.433092135 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue1> completed state change to=
- READY
-> 0:00:00.433115265 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue1> notifying about stat=
-e-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.433138711 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 2(READY) successfully
-> 0:00:00.433225313 236125 0x5622051c82a0 INFO                 basesrc gstb=
-asesrc.c:2913:gst_base_src_loop:<audiosrc-actual-src-puls> pausing after gs=
-t_base_src_get_range() =3D flushing
-> 0:00:00.433328451 236125 0x562204e5c670 INFO              ringbuffer gsta=
-udioringbuffer.c:728:gst_audio_ring_buffer_release:<audiosrcringbuffer1> Fr=
-eeing timestamp buffer, 20 entries
-> 0:00:00.433641247 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to READY
-> 0:00:00.433709169 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.433746772 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 2(READY) successfully
-> 0:00:00.433777182 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to READY
-> 0:00:00.433794785 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc> notifying about st=
-ate-changed PAUSED to READY (VOID_PENDING pending)
-> 0:00:00.433827385 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 2(READY) successfully
-> 0:00:00.433860062 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline1> completed state change=
- to READY
-> 0:00:00.433887440 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline1> notifying about s=
-tate-changed PAUSED to READY (VOID_PENDING pending)
-> (spicy:236125): GSpice-DEBUG: 13:06:41.001: ../spice-gtk-0.41/src/spice-g=
-staudio.c:763 (record) volume at 0 is 65535 (100,00%)
-> (spicy:236125): GSpice-DEBUG: 13:06:41.002: ../spice-gtk-0.41/src/spice-g=
-staudio.c:763 (record) volume at 1 is 65535 (100,00%)
-> (spicy:236125): GSpice-DEBUG: 13:06:41.002: ../spice-gtk-0.41/src/channel=
--main.c:1290 audio_record_volume_info_cb mute=3Dno nchannels=3D2 volume[0]=
-=3D65535
+As for how quickly I shut down spicy, that's more than fair :D I played aro=
+und with it for quite some time by then and I just wanted to reproduce swit=
+ching to another encoding and quickly scrolling through a dense web page to=
+ trigger streaming. I ran it longer this time and started a video playback =
+on a website, plus scrolled madly through a spreadsheet. Tried vp9, too, ju=
+st for kicks. Also switched back to 'filter' mode for video streaming in th=
+e guest's config. Not much has changed, ostensibly.
 
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 display-2:0: Open coroutine starting 0x5622053e0410
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 display-2:0: Started background coroutine 0x5622053e01e0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 display-2:0: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 usbredir-9:1: Open coroutine starting 0x5622053ec3f0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 usbredir-9:1: Started background coroutine 0x5622053ec1c0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 usbredir-9:1: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 usbredir-9:0: Open coroutine starting 0x5622053ec700
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 usbredir-9:0: Started background coroutine 0x5622053ec4d0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 usbredir-9:0: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 playback-5:0: Open coroutine starting 0x5622053ecd20
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 playback-5:0: Started background coroutine 0x5622053ecaf0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 playback-5:0: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 record-6:0: Open coroutine starting 0x5622053eca10
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 record-6:0: Started background coroutine 0x5622053ec7e0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.003: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 record-6:0: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 display-2:0: connecting 0x7f41f27fcf30...
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 usbredir-9:1: connecting 0x7f41f17fcf30...
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 usbredir-9:0: connecting 0x7f41cfffff30...
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 playback-5:0: connecting 0x7f41ceffff30...
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.004: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 record-6:0: connecting 0x7f41cdffff30...
-> (spicy:236125): GSpice-DEBUG: 13:06:41.006: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 display-2:0: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 display-2:0: channel type 2 id 0 num common caps 1 num caps 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 usbredir-9:1: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 usbredir-9:1: channel type 9 id 1 num common caps 1 num caps 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 usbredir-9:0: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 usbredir-9:0: channel type 9 id 0 num common caps 1 num caps 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 playback-5:0: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 playback-5:0: channel type 5 id 0 num common caps 1 num caps 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 record-6:0: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:41.007: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 record-6:0: channel type 6 id 0 num common caps 1 num caps 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 record-6:0: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 record-6:0: spice_channel_recv_link_msg: 2 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 record-6:0: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 record-6:0: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0x6
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:41.041: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.042: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.042: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 record-6:0: use mini header: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 playback-5:0: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 playback-5:0: spice_channel_recv_link_msg: 2 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 playback-5:0: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 playback-5:0: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xA
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:41.048: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.050: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.050: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 playback-5:0: use mini header: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.053: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 display-2:0: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:41.053: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 display-2:0: spice_channel_recv_link_msg: 2 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:41.053: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 display-2:0: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.053: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:41.053: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 display-2:0: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.053: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0x1052
-> (spicy:236125): GSpice-DEBUG: 13:06:41.054: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.054: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:41.054: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.055: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.055: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 display-2:0: use mini header: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.055: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 record-6:0: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:41.055: ../spice-gtk-0.41/src/spice-g=
-staudio.c:445 record volume changed to 65535 (100,00)
-> (spicy:236125): GSpice-DEBUG: 13:06:41.055: ../spice-gtk-0.41/src/spice-g=
-staudio.c:477 record mute changed to 0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.095: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 usbredir-9:1: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 usbredir-9:1: spice_channel_recv_link_msg: 2 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 usbredir-9:1: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 usbredir-9:1: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0x1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:41.096: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 usbredir-9:1: use mini header: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 usbredir-9:0: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 usbredir-9:0: spice_channel_recv_link_msg: 2 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 usbredir-9:0: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 usbredir-9:0: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0x1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:41.097: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.098: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.098: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 usbredir-9:0: use mini header: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.099: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 playback-5:0: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:41.099: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 display-2:0: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:41.099: ../spice-gtk-0.41/src/channel=
--display.c:1128 display-2:0: spice_display_channel_up: cache_size 83886080,=
- glz_window_size 12582912 (bytes)
-> (spicy:236125): GSpice-DEBUG: 13:06:41.099: ../spice-gtk-0.41/src/channel=
--playback.c:340 playback-5:0: playback_handle_mode: time 218941180 mode 3 d=
-ata 0x56220544e676 size 0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.099: ../spice-gtk-0.41/src/spice-g=
-staudio.c:372 playback volume changed to 65535 (100,00)
-> (spicy:236125): GSpice-DEBUG: 13:06:41.099: ../spice-gtk-0.41/src/spice-g=
-staudio.c:404 playback mute changed to 0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 usbredir-9:1: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1349 spice_usb_backend_channel_flush_writes 0x5622053547a0 is up
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:697 usbredir_write_callback ch 0x5622053547a0, 80 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:833 spice_usb_backend_return_write_data ch 0x5622053547a0 -> parser
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 12 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 64 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 4 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 0 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 12 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 64 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 4 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1064 usbredir_hello 0x5622053547a0 not attached=20
-> (spicy:236125): GSpice-DEBUG: 13:06:41.107: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x5622053547a0, 0 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 usbredir-9:0: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1349 spice_usb_backend_channel_flush_writes 0x56220536a4c0 is up
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:697 usbredir_write_callback ch 0x56220536a4c0, 80 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:833 spice_usb_backend_return_write_data ch 0x56220536a4c0 -> parser
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 12 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 64 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 4 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 0 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 12 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 64 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 4 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1064 usbredir_hello 0x56220536a4c0 not attached=20
-> (spicy:236125): GSpice-DEBUG: 13:06:41.108: ../spice-gtk-0.41/src/usb-bac=
-kend.c:652 usbredir_read_callback ch 0x56220536a4c0, 0 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.139: ../spice-gtk-0.41/src/channel=
--display.c:1969 surface flags: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.139: ../spice-gtk-0.41/src/channel=
--display.c:1007 display-2:0: Create primary canvas
-> (spicy:236125): GSpice-DEBUG: 13:06:41.139: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0x1052: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.244: ../spice-gtk-0.41/src/channel=
--display.c:2039 display-2:0: received new monitors config from guest: n: 1/1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.244: ../spice-gtk-0.41/src/channel=
--display.c:2057 display-2:0: monitor id: 0, surface id: 0, +0+0-2560x1440
+libspice-server.so seems to have been linked with gstreamer on the host:
+# ldd /usr/lib/x86_64-linux-gnu/libspice-server.so.1.14.1
+        linux-vdso.so.1
+        libglib-2.0.so.0 =3D> /lib/x86_64-linux-gnu/libglib-2.0.so.0
+        libpixman-1.so.0 =3D> /lib/x86_64-linux-gnu/libpixman-1.so.0
+        libssl.so.3 =3D> /lib/x86_64-linux-gnu/libssl.so.3
+        libcrypto.so.3 =3D> /lib/x86_64-linux-gnu/libcrypto.so.3
+        libopus.so.0 =3D> /lib/x86_64-linux-gnu/libopus.so.0
+        libjpeg.so.8 =3D> /lib/x86_64-linux-gnu/libjpeg.so.8
+        libz.so.1 =3D> /lib/x86_64-linux-gnu/libz.so.1
+        libgstreamer-1.0.so.0 =3D> /lib/x86_64-linux-gnu/libgstreamer-1.0.s=
+o.0
+        libgobject-2.0.so.0 =3D> /lib/x86_64-linux-gnu/libgobject-2.0.so.0
+        libgstapp-1.0.so.0 =3D> /lib/x86_64-linux-gnu/libgstapp-1.0.so.0
+        liborc-0.4.so.0 =3D> /lib/x86_64-linux-gnu/liborc-0.4.so.0
+        liblz4.so.1 =3D> /lib/x86_64-linux-gnu/liblz4.so.1
+        libsasl2.so.2 =3D> /lib/x86_64-linux-gnu/libsasl2.so.2
+        libstdc++.so.6 =3D> /lib/x86_64-linux-gnu/libstdc++.so.6
+        libm.so.6 =3D> /lib/x86_64-linux-gnu/libm.so.6
+        libc.so.6 =3D> /lib/x86_64-linux-gnu/libc.so.6
+        libpcre.so.3 =3D> /lib/x86_64-linux-gnu/libpcre.so.3
+        /lib64/ld-linux-x86-64.so.2
+        libgmodule-2.0.so.0 =3D> /lib/x86_64-linux-gnu/libgmodule-2.0.so.0
+        libunwind.so.8 =3D> /lib/x86_64-linux-gnu/libunwind.so.8
+        libdw.so.1 =3D> /lib/x86_64-linux-gnu/libdw.so.1
+        libffi.so.8 =3D> /lib/x86_64-linux-gnu/libffi.so.8
+        libgstbase-1.0.so.0 =3D> /lib/x86_64-linux-gnu/libgstbase-1.0.so.0
+        libgcc_s.so.1 =3D> /lib/x86_64-linux-gnu/libgcc_s.so.1
+        liblzma.so.5 =3D> /lib/x86_64-linux-gnu/liblzma.so.5
+        libelf.so.1 =3D> /lib/x86_64-linux-gnu/libelf.so.1
+        libbz2.so.1.0 =3D> /lib/x86_64-linux-gnu/libbz2.so.1.0
 
-One display, all good
 
-> (spicy:236125): GSpice-DEBUG: 13:06:41.256: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 6 in 0x1052: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.256: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 12 in 0x1052: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:0x0, window 0x0, zoom 1, scale 1, =
-dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:0x0, window 0x0, zoom 0, scale 1, =
-dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:0x0, window 0x0, zoom 0, scale 1, =
-dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:0x0, window 0x0, zoom 0, scale 1, =
-dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:0x0, window 0x0, zoom 0, scale 1, =
-dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:372 0:0 keypress-delay is set to 100 ms
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:0x0, window 0x0, zoom 1, scale 1, =
-dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:0x0, window 0x0, zoom 1, scale 1, =
-dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:2670 0:0 mouse mode 2 (client)
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/channel=
--display.c:561 display-2:0: get primary 0x7f41cc1ef010
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:316 0:0 update monitor area
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:2697 0:0 update area +0+0 2560x1440
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:2723 0:0 primary: 2560x1440
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:2560x1440, window 0x0, zoom 1, sca=
-le 1, dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:2994 0:0 widget mark: 0, display 0x562205444d50
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:2560x1440, window 0x0, zoom 1, sca=
-le 1, dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:2560x1440, window 0x0, zoom 1, sca=
-le 1, dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:2560x1440, window 0x0, zoom 1, sca=
-le 1, dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/tools/spicy=
-=2Ec:422 menu_cb_bool_prop: grab-keyboard =3D yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/tools/spicy=
-=2Ec:422 menu_cb_bool_prop: grab-mouse =3D yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/tools/spicy=
-=2Ec:422 menu_cb_bool_prop: resize-guest =3D yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:2560x1440, window 0x0, zoom 1, sca=
-le 1, dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/tools/spicy=
-=2Ec:422 menu_cb_bool_prop: auto-clipboard =3D yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/tools/spicy=
-=2Ec:422 menu_cb_bool_prop: sync-modifiers =3D yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.260: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1451 add display monitor 0:0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.278: ../spice-gtk-0.41/src/spice-w=
-idget.c:1389 0:0 recalc geom: guest +0+0:2560x1440, window 640x480, zoom 1,=
- scale 1, dim 0x0mm
-> (spicy:236125): GSpice-DEBUG: 13:06:41.279: ../spice-gtk-0.41/src/channel=
--display.c:1183 display-2:0: display_handle_mark
-> (spicy:236125): GSpice-DEBUG: 13:06:41.283: ../spice-gtk-0.41/src/spice-w=
-idget.c:1977 0:0 focus_in_event
-> (spicy:236125): GSpice-DEBUG: 13:06:41.283: ../spice-gtk-0.41/src/spice-w=
-idget.c:1636 0:0 release_keys
-> (spicy:236125): GSpice-DEBUG: 13:06:41.283: ../spice-gtk-0.41/src/spice-g=
-tk-session.c:165 inputs-3:0: client_modifiers:0x2, guest_modifiers:0x0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 inputs-3:0: Open coroutine starting 0x5622053ea6c0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 inputs-3:0: Started background coroutine 0x5622053ea490
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 inputs-3:0: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2763 cursor-4:0: Open coroutine starting 0x5622053ea3c0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2587 cursor-4:0: Started background coroutine 0x5622053ea190
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2267 cursor-4:0: Using plain text, port 5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-w=
-idget.c:2994 0:0 widget mark: 1, display 0x562205444d50
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 inputs-3:0: connecting 0x7f41cb12ef30...
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2198 open host localhost:5912
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2120 cursor-4:0: connecting 0x7f41ca12ef30...
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 inputs-3:0: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 inputs-3:0: channel type 3 id 0 num common caps 1 num caps 0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-s=
-ession.c:2104 cursor-4:0: connect ready
-> (spicy:236125): GSpice-DEBUG: 13:06:41.286: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1415 cursor-4:0: channel type 4 id 0 num common caps 1 num caps 0
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 inputs-3:0: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 inputs-3:0: spice_channel_recv_link_msg: 2 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 inputs-3:0: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 inputs-3:0: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0x1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:41.324: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.325: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.325: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 inputs-3:0: use mini header: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1441 cursor-4:0: Peer version: 2:2
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1999 cursor-4:0: spice_channel_recv_link_msg: 1 caps
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2013 cursor-4:0: got remote common caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1949 	0:0xB
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2020 cursor-4:0: got remote channel caps:
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 0 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 2 in 0xB: no
-> (spicy:236125): GSpice-DEBUG: 13:06:41.329: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 1 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.330: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 3 in 0xB: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:41.330: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2052 cursor-4:0: use mini header: 1
-> (spicy:236125): GSpice-DEBUG: 13:06:41.333: ../spice-gtk-0.41/src/channel=
--base.c:77 main-1:0: spice_channel_handle_notify -- warn!!! #0: keyboard ch=
-annel is insecure
-> (spicy:236125): GSpice-DEBUG: 13:06:41.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 inputs-3:0: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:41.340: ../spice-gtk-0.41/src/spice-c=
-hannel.c:1350 cursor-4:0: channel up, state 3
-> (spicy:236125): GSpice-DEBUG: 13:06:41.376: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:41.376: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df001, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:42.810: ../spice-gtk-0.41/src/channel=
--main.c:1148 main-1:0: sending new monitors config to guest
-> (spicy:236125): GSpice-DEBUG: 13:06:42.810: ../spice-gtk-0.41/src/channel=
--main.c:1162 main-1:0: monitor #0: 640x480+0+0 @ 32 bpp
-> (spicy:236125): GSpice-DEBUG: 13:06:42.810: ../spice-gtk-0.41/src/channel=
--main.c:1079 #0 +0+0-640x480
-> (spicy:236125): GSpice-DEBUG: 13:06:43.019: ../spice-gtk-0.41/src/spice-w=
-idget.c:1945 0:0 enter_event
-> (spicy:236125): GSpice-DEBUG: 13:06:43.019: ../spice-gtk-0.41/src/spice-w=
-idget.c:889 0:0 grab keyboard
-> (spicy:236125): GSpice-DEBUG: 13:06:43.020: ../spice-gtk-0.41/src/spice-w=
-idget.c:1945 0:0 enter_event
-> (spicy:236125): GSpice-DEBUG: 13:06:43.053: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:43.053: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df02e, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:43.055: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:43.055: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df02f, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:43.115: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:43.115: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df031, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:43.156: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:43.156: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df032, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:43.199: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 16 -> 32
-> (spicy:236125): GSpice-DEBUG: 13:06:43.235: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:43.235: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df03c, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:43.249: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:43.249: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df03d, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:43.320: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 32 -> 64
-> (spicy:236125): GSpice-DEBUG: 13:06:43.567: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 64 -> 128
-> (spicy:236125): GSpice-DEBUG: 13:06:43.630: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 128 -> 256
-> (spicy:236125): GSpice-DEBUG: 13:06:43.782: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 256 -> 512
-> (spicy:236125): GSpice-DEBUG: 13:06:44.258: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.258: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df1d1, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.315: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.315: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df1d6, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.342: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.342: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df1da, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.438: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 512 -> 1024
-> (spicy:236125): GSpice-DEBUG: 13:06:44.529: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.529: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df30c, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.569: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.569: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df3a5, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.596: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.596: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df3a6, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.629: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.629: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df474, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.653: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 1024 -> 2048
-> (spicy:236125): GSpice-DEBUG: 13:06:44.679: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:44.679: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df50f, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:44.687: ../spice-gtk-0.41/src/spice-w=
-idget.c:1960 0:0 leave_event
-> (spicy:236125): GSpice-DEBUG: 13:06:44.687: ../spice-gtk-0.41/src/spice-w=
-idget.c:967 0:0 ungrab keyboard
-> (spicy:236125): GSpice-DEBUG: 13:06:44.688: ../spice-gtk-0.41/src/spice-w=
-idget.c:1960 0:0 leave_event
-> (spicy:236125): GSpice-DEBUG: 13:06:45.052: ../spice-gtk-0.41/src/spice-w=
-idget.c:599 0:0 grab notify 0
-> (spicy:236125): GSpice-DEBUG: 13:06:45.052: ../spice-gtk-0.41/src/spice-w=
-idget.c:1636 0:0 release_keys
-> (spicy:236125): GSpice-DEBUG: 13:06:46.699: ../spice-gtk-0.41/src/spice-w=
-idget.c:599 0:0 grab notify 1
-> (spicy:236125): GSpice-DEBUG: 13:06:46.702: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2981 test cap 12 in 0x1052: yes
-> (spicy:236125): GSpice-DEBUG: 13:06:46.702: ../spice-gtk-0.41/src/channel=
--display.c:734 display-2:0: changing preferred video codec type to: h264 mj=
-peg vp8 vp9
+You mentioned x264 is hardcoded in gstreamer-encoder.c:887 - that would nev=
+er use hw encoding, right? One would need to recompile spice-server and cha=
+nge that to e.g. 'vaapih264enc' to utilize the GPU? Even if this is correct=
+, the client could still use the GPU to decode the h264 stream when it's ec=
+ountered, but just doesn't seem to. Maybe the server doesn't even encode an=
+ything in h264 (either using the GPU or not)?
 
-Your client is telling spice-server that your preference is h264
-video encoding.
+I get a feeling - but please correct me if I'm wrong - that this video enco=
+ding (plus hw enc/dec) is not meant to be user-configured, it's more of an =
+automatic thing that kicks in when the time's right, is that fair? I kind o=
+f miss the parameters and options to properly configure this both on server=
+ and client.
 
-> (spicy:236125): GSpice-DEBUG: 13:06:46.817: ../spice-gtk-0.41/src/spice-w=
-idget.c:1945 0:0 enter_event
-> (spicy:236125): GSpice-DEBUG: 13:06:46.817: ../spice-gtk-0.41/src/spice-w=
-idget.c:889 0:0 grab keyboard
-> (spicy:236125): GSpice-DEBUG: 13:06:46.822: ../spice-gtk-0.41/src/spice-w=
-idget.c:1945 0:0 enter_event
-> (spicy:236125): GSpice-DEBUG: 13:06:46.844: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:46.844: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df549, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:46.875: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:46.875: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df54a, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.022: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:47.022: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df5fc, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.115: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:47.115: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1df674, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.578: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 2048 -> 4096
-> (spicy:236125): GSpice-DEBUG: 13:06:47.765: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:47.765: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1dff13, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.769: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:47.769: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1dff14, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.821: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:47.821: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1dff15, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.835: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:47.835: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1dff16, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.909: ../spice-gtk-0.41/src/channel=
--cursor.c:385 cursor-4:0: set_cursor: flags 2, size 16384
-> (spicy:236125): GSpice-DEBUG: 13:06:47.909: ../spice-gtk-0.41/src/channel=
--cursor.c:391 cursor-4:0: set_cursor: type alpha(0), 1dff17, 64x64
-> (spicy:236125): GSpice-DEBUG: 13:06:47.913: ../spice-gtk-0.41/src/spice-w=
-idget.c:1960 0:0 leave_event
-> (spicy:236125): GSpice-DEBUG: 13:06:47.913: ../spice-gtk-0.41/src/spice-w=
-idget.c:967 0:0 ungrab keyboard
-> (spicy:236125): GSpice-DEBUG: 13:06:47.914: ../spice-gtk-0.41/src/spice-w=
-idget.c:1960 0:0 leave_event
-> (spicy:236125): GSpice-DEBUG: 13:06:48.280: ../spice-gtk-0.41/src/decode-=
-glz.c:94 glz_decoder_window_resize: array resize 4096 -> 8192
-> (spicy:236125): GSpice-DEBUG: 13:06:49.332: ../spice-gtk-0.41/src/spice-s=
-ession.c:2027 session: disconnecting 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.333: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.333: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 inputs-3:0: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.333: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 inputs-3:0: Coroutine exit inputs-3:0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.333: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 inputs-3:0: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.333: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 inputs-3:0: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1829 zap audio channel
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 playback-5:0: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 playback-5:0: Coroutine exit playback-5:0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 playback-5:0: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 record-6:0: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 record-6:0: Coroutine exit record-6:0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 record-6:0: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 usbredir-9:0: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 usbredir-9:0: Coroutine exit usbredir-9:0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 usbredir-9:0: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1359 spice_usb_backend_channel_delete >> 0x56220536a4c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1375 spice_usb_backend_channel_delete << 0x56220536a4c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1303 spice_usb_backend_channel_new >>
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/usb-bac=
-kend.c:697 usbredir_write_callback ch 0x56220536a4c0, 80 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1343 spice_usb_backend_channel_new << 0x56220536a4c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.334: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 usbredir-9:0: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 1
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 usbredir-9:1: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 usbredir-9:1: Coroutine exit usbredir-9:1
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 usbredir-9:1: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1359 spice_usb_backend_channel_delete >> 0x5622053547a0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1375 spice_usb_backend_channel_delete << 0x5622053547a0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1303 spice_usb_backend_channel_new >>
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/usb-bac=
-kend.c:697 usbredir_write_callback ch 0x562206195a20, 80 bytes
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1343 spice_usb_backend_channel_new << 0x562206195a20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 usbredir-9:1: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 cursor-4:0: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 cursor-4:0: Coroutine exit cursor-4:0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 cursor-4:0: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 cursor-4:0: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1824 zap display channel (#0)
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 display-2:0: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 display-2:0: Coroutine exit display-2:0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 display-2:0: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/channel=
--display.c:1094 display-2:0: keeping existing primary surface, migration or=
- reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.335: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 display-2:0: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-s=
-ession.c:2370 main-1:0: the session lost the main channel
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1817 zap main channel
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-w=
-idget.c:3462 0:0 channel_destroy 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 main-1:0: channel disconnect 0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2736 main-1:0: Coroutine exit main-1:0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2926 main-1:0: reset=20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/channel=
--main.c:1590 agent connected: no
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-s=
-ession.c:1835 no migration in progress
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 inputs-3:0: Delayed unref channel 0x5622053ea6c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 inputs-3:0: spice_channel_dispose 0x5622053ea6c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 inputs-3:0: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 inputs-3:0: spice_channel_finalize 0x5622053ea6c0
-> 0:00:08.768503252 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current READY pending VOID_=
-PENDING, desired next READY
-> 0:00:08.768547755 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink-actual-sink-pulse> current R=
-EADY pending VOID_PENDING, desired next READY
-> 0:00:08.768584735 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audiosink-actual-sink-pulse> skipping =
-transition from READY to  READY
-> 0:00:08.768605143 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosink> child 'audiosink-actual-sin=
-k-pulse' changed state to 2(READY) successfully
-> 0:00:08.768626629 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink> completed state change=
- to READY
-> 0:00:08.768645661 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audiosink' changed s=
-tate to 2(READY) successfully
-> 0:00:08.768665583 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current READY pending =
-VOID_PENDING, desired next READY
-> 0:00:08.768679541 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioresample0> skipping transition fr=
-om READY to  READY
-> 0:00:08.768694966 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 2(READY) successfully
-> 0:00:08.768713291 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current READY pending V=
-OID_PENDING, desired next READY
-> 0:00:08.768726957 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioconvert0> skipping transition fro=
-m READY to  READY
-> 0:00:08.768741554 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 2(READY) successfully
-> 0:00:08.768759123 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current READY pending VOID_PEN=
-DING, desired next READY
-> 0:00:08.768772947 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<queue0> skipping transition from READY=
- to  READY
-> 0:00:08.768787503 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 2(READY) successfully
-> 0:00:08.768803586 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsrc> current READY pending VOID_PEN=
-DING, desired next READY
-> 0:00:08.768817350 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<appsrc> skipping transition from READY=
- to  READY
-> 0:00:08.768832221 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 2(READY) successfully
-> 0:00:08.768847940 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline0> completed state change=
- to READY
-> (spicy:236125): GSpice-DEBUG: 13:06:49.336: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 playback-5:0: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-g=
-staudio.c:136 record_stop
-> 0:00:08.769147531 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current READY pending VOID_PE=
-NDING, desired next READY
-> 0:00:08.769191883 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<appsink> skipping transition from READ=
-Y to  READY
-> 0:00:08.769209871 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'appsink' changed sta=
-te to 2(READY) successfully
-> 0:00:08.769230443 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current READY pending =
-VOID_PENDING, desired next READY
-> 0:00:08.769244277 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioresample1> skipping transition fr=
-om READY to  READY
-> 0:00:08.769259050 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 2(READY) successfully
-> 0:00:08.769276959 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current READY pending V=
-OID_PENDING, desired next READY
-> 0:00:08.769290464 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioconvert1> skipping transition fro=
-m READY to  READY
-> 0:00:08.769305005 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 2(READY) successfully
-> 0:00:08.769323964 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current READY pending VOID_PEN=
-DING, desired next READY
-> 0:00:08.769337769 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<queue1> skipping transition from READY=
- to  READY
-> 0:00:08.769352458 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 2(READY) successfully
-> 0:00:08.769368765 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc> current READY pending VOID_P=
-ENDING, desired next READY
-> 0:00:08.769395942 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc-actual-src-puls> current READ=
-Y pending VOID_PENDING, desired next READY
-> 0:00:08.769410830 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audiosrc-actual-src-puls> skipping tra=
-nsition from READY to  READY
-> 0:00:08.769425986 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 2(READY) successfully
-> 0:00:08.769443669 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to READY
-> 0:00:08.769460952 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 2(READY) successfully
-> 0:00:08.769475778 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline1> completed state change=
- to READY
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 record-6:0: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 usbredir-9:0: Delayed unref channel 0x5622053ec700
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/channel=
--usbredir.c:403 usbredir-9:0: disconnecting device from usb channel 0x56220=
-53ec700
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 usbredir-9:0: spice_channel_dispose 0x5622053ec700
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 usbredir-9:0: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1359 spice_usb_backend_channel_delete >> 0x56220536a4c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1375 spice_usb_backend_channel_delete << 0x56220536a4c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 usbredir-9:0: spice_channel_finalize 0x5622053ec700
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 usbredir-9:1: Delayed unref channel 0x5622053ec3f0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/channel=
--usbredir.c:403 usbredir-9:1: disconnecting device from usb channel 0x56220=
-53ec3f0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 usbredir-9:1: spice_channel_dispose 0x5622053ec3f0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 usbredir-9:1: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.337: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1359 spice_usb_backend_channel_delete >> 0x562206195a20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/usb-bac=
-kend.c:1375 spice_usb_backend_channel_delete << 0x562206195a20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 usbredir-9:1: spice_channel_finalize 0x5622053ec3f0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 cursor-4:0: Delayed unref channel 0x5622053ea3c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 cursor-4:0: spice_channel_dispose 0x5622053ea3c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 cursor-4:0: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 cursor-4:0: spice_channel_finalize 0x5622053ea3c0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 display-2:0: Delayed unref channel 0x5622053e0410
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 display-2:0: spice_channel_dispose 0x5622053e0410
-> (spicy:236125): GSpice-DEBUG: 13:06:49.338: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 display-2:0: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.340: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 display-2:0: spice_channel_finalize 0x5622053e0410
-> (spicy:236125): GSpice-DEBUG: 13:06:49.340: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 playback-5:0: Delayed unref channel 0x5622053ecd20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.340: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 playback-5:0: spice_channel_dispose 0x5622053ecd20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.340: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 playback-5:0: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.340: ../spice-gtk-0.41/src/spice-g=
-staudio.c:506 playback closed
-> 0:00:08.772888089 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current READY pending VOID_=
-PENDING, desired next READY
-> 0:00:08.772922973 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink-actual-sink-pulse> current R=
-EADY pending VOID_PENDING, desired next READY
-> 0:00:08.772939203 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audiosink-actual-sink-pulse> skipping =
-transition from READY to  READY
-> 0:00:08.772956345 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosink> child 'audiosink-actual-sin=
-k-pulse' changed state to 2(READY) successfully
-> 0:00:08.772989564 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink> completed state change=
- to READY
-> 0:00:08.773008101 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audiosink' changed s=
-tate to 2(READY) successfully
-> 0:00:08.773026480 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current READY pending =
-VOID_PENDING, desired next READY
-> 0:00:08.773040304 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioresample0> skipping transition fr=
-om READY to  READY
-> 0:00:08.773054501 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 2(READY) successfully
-> 0:00:08.773071560 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current READY pending V=
-OID_PENDING, desired next READY
-> 0:00:08.773085193 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioconvert0> skipping transition fro=
-m READY to  READY
-> 0:00:08.773099559 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 2(READY) successfully
-> 0:00:08.773116301 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current READY pending VOID_PEN=
-DING, desired next READY
-> 0:00:08.773130063 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<queue0> skipping transition from READY=
- to  READY
-> 0:00:08.773144651 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 2(READY) successfully
-> 0:00:08.773159543 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsrc> current READY pending VOID_PEN=
-DING, desired next READY
-> 0:00:08.773172526 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<appsrc> skipping transition from READY=
- to  READY
-> 0:00:08.773186684 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 2(READY) successfully
-> 0:00:08.773201547 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline0> completed state change=
- to READY
-> (spicy:236125): GSpice-DEBUG: 13:06:49.341: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 playback-5:0: spice_channel_finalize 0x5622053ecd20
-> (spicy:236125): GSpice-DEBUG: 13:06:49.341: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 record-6:0: Delayed unref channel 0x5622053eca10
-> (spicy:236125): GSpice-DEBUG: 13:06:49.341: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 record-6:0: spice_channel_dispose 0x5622053eca10
-> (spicy:236125): GSpice-DEBUG: 13:06:49.341: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 record-6:0: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.341: ../spice-gtk-0.41/src/spice-g=
-staudio.c:510 record closed
-> (spicy:236125): GSpice-DEBUG: 13:06:49.341: ../spice-gtk-0.41/src/spice-g=
-staudio.c:136 record_stop
-> 0:00:08.773392544 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current READY pending VOID_PE=
-NDING, desired next READY
-> 0:00:08.773421690 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<appsink> skipping transition from READ=
-Y to  READY
-> 0:00:08.773438191 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'appsink' changed sta=
-te to 2(READY) successfully
-> 0:00:08.773466222 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current READY pending =
-VOID_PENDING, desired next READY
-> 0:00:08.773481029 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioresample1> skipping transition fr=
-om READY to  READY
-> 0:00:08.773495241 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 2(READY) successfully
-> 0:00:08.773512536 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current READY pending V=
-OID_PENDING, desired next READY
-> 0:00:08.773525795 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audioconvert1> skipping transition fro=
-m READY to  READY
-> 0:00:08.773539675 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 2(READY) successfully
-> 0:00:08.773556931 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current READY pending VOID_PEN=
-DING, desired next READY
-> 0:00:08.773570283 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<queue1> skipping transition from READY=
- to  READY
-> 0:00:08.773584328 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 2(READY) successfully
-> 0:00:08.773599956 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc> current READY pending VOID_P=
-ENDING, desired next READY
-> 0:00:08.773624090 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc-actual-src-puls> current READ=
-Y pending VOID_PENDING, desired next READY
-> 0:00:08.773638343 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2597:gst_bin_element_set_state:<audiosrc-actual-src-puls> skipping tra=
-nsition from READY to  READY
-> 0:00:08.773652587 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 2(READY) successfully
-> 0:00:08.773667921 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to READY
-> 0:00:08.773684894 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 2(READY) successfully
-> 0:00:08.773699904 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline1> completed state change=
- to READY
-> (spicy:236125): GSpice-DEBUG: 13:06:49.341: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 record-6:0: spice_channel_finalize 0x5622053eca10
-> (spicy:236125): GSpice-DEBUG: 13:06:49.342: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2874 main-1:0: channel reset
-> (spicy:236125): GSpice-DEBUG: 13:06:49.342: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2475 main-1:0: Delayed unref channel 0x5622053970f0
-> GSpice-Message: 13:06:49.342: main channel: closed
-> (spicy:236125): GSpice-DEBUG: 13:06:49.342: ../spice-gtk-0.41/src/spice-c=
-hannel.c:160 main-1:0: spice_channel_dispose 0x5622053970f0
-> (spicy:236125): GSpice-DEBUG: 13:06:49.342: ../spice-gtk-0.41/src/spice-c=
-hannel.c:2943 main-1:0: channel disconnect 12
-> (spicy:236125): GSpice-DEBUG: 13:06:49.342: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1260 destroy window (#0:0)
-> (spicy:236125): GSpice-DEBUG: 13:06:49.343: ../spice-gtk-0.41/src/spice-w=
-idget.c:2013 0:0 focus_out_event
-> (spicy:236125): GSpice-DEBUG: 13:06:49.343: ../spice-gtk-0.41/src/spice-w=
-idget.c:1636 0:0 release_keys
-> (spicy:236125): GSpice-DEBUG: 13:06:49.352: ../spice-gtk-0.41/src/spice-w=
-idget.c:461 0:0 spice display dispose
-> (spicy:236125): GSpice-DEBUG: 13:06:49.352: ../spice-gtk-0.41/src/spice-w=
-idget.c:461 0:0 spice display dispose
-> (spicy:236125): GSpice-DEBUG: 13:06:49.353: ../spice-gtk-0.41/src/spice-w=
-idget.c:480 0:0 Finalize spice display
-> (spicy:236125): GSpice-DEBUG: 13:06:49.353: ../spice-gtk-0.41/tools/spicy=
-=2Ec:1910 connection_destroy (0)
-> (spicy:236125): GSpice-DEBUG: 13:06:49.353: ../spice-gtk-0.41/src/spice-s=
-ession.c:332 session dispose
-> (spicy:236125): GSpice-DEBUG: 13:06:49.353: ../spice-gtk-0.41/src/spice-s=
-ession.c:1835 no migration in progress
-> (spicy:236125): GSpice-DEBUG: 13:06:49.353: ../spice-gtk-0.41/src/spice-g=
-staudio.c:77 spice_gstaudio_dispose
-> 0:00:08.785531561 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink> current READY pending VOID_=
-PENDING, desired next NULL
-> 0:00:08.785573133 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosink-actual-sink-pulse> current R=
-EADY pending VOID_PENDING, desired next NULL
-> 0:00:08.786092865 236125 0x562204e5c670 INFO                   pulse puls=
-esink.c:3225:gst_pulsesink_release_mainloop:<audiosink-actual-sink-pulse> t=
-erminating pa main loop thread
-> 0:00:08.786324535 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink-actual-sink-pulse> comp=
-leted state change to NULL
-> 0:00:08.786375381 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink-actual-sink-pulse>=
- notifying about state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.786421623 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosink> child 'audiosink-actual-sin=
-k-pulse' changed state to 1(NULL) successfully
-> 0:00:08.786459737 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink-actual-sink-pulse> comp=
-leted state change to NULL
-> 0:00:08.786491457 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking sink:proxypad0(0x562205414070) and audi=
-osink-actual-sink-pulse:sink(0x562205401160)
-> 0:00:08.786517184 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked sink:proxypad0 and audiosink-actual-sink=
--pulse:sink
-> 0:00:08.786534935 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<audiosink> removed child "audiosink-actual-s=
-ink-pulse"
-> 0:00:08.786595081 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "fakesink"
-> 0:00:08.787087503 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSink@0x562205497410> adding pad 's=
-ink'
-> 0:00:08.787159069 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad fake-audio-sink:sink
-> 0:00:08.787205860 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link sink:proxypad0 and fake-audi=
-o-sink:sink
-> 0:00:08.787227162 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked sink:proxypad0 and fake-audio-sink:sink=
-, successful
-> 0:00:08.787240411 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:08.787255983 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<sink:proxypad0> Received event on f=
-lushing pad. Discarding
-> 0:00:08.787273300 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosink> completed state change=
- to NULL
-> 0:00:08.787291445 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosink> notifying about s=
-tate-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.787319298 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audiosink' changed s=
-tate to 1(NULL) successfully
-> 0:00:08.787346255 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample0> current READY pending =
-VOID_PENDING, desired next NULL
-> 0:00:08.787368319 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample0> completed state c=
-hange to NULL
-> 0:00:08.787383692 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample0> notifying ab=
-out state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.787404410 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioresample0' chan=
-ged state to 1(NULL) successfully
-> 0:00:08.787424635 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert0> current READY pending V=
-OID_PENDING, desired next NULL
-> 0:00:08.787442456 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert0> completed state ch=
-ange to NULL
-> 0:00:08.787456902 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert0> notifying abo=
-ut state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.787476761 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'audioconvert0' chang=
-ed state to 1(NULL) successfully
-> 0:00:08.787495580 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue0> current READY pending VOID_PEN=
-DING, desired next NULL
-> 0:00:08.787513367 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue0> completed state change to=
- NULL
-> 0:00:08.787528501 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue0> notifying about stat=
-e-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.787548136 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'queue0' changed stat=
-e to 1(NULL) successfully
-> 0:00:08.787577860 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsrc> current READY pending VOID_PEN=
-DING, desired next NULL
-> 0:00:08.787597989 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsrc> completed state change to=
- NULL
-> 0:00:08.787613076 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsrc> notifying about stat=
-e-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.787632445 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline0> child 'appsrc' changed stat=
-e to 1(NULL) successfully
-> 0:00:08.787736002 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audiosink-actual-sink-pulse> 0x562205422=
-180 dispose
-> 0:00:08.787755939 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audiosink-actual-sink-pulse> removing =
-pad 'sink'
-> 0:00:08.787781186 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audiosink-actual-sink-pulse> 0x562205422=
-180 parent class dispose
-> 0:00:08.787800356 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audiosink-actual-sink-pulse> 0x56220542=
-2180 finalize
-> 0:00:08.787823149 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audiosink-actual-sink-pulse> 0x56220542=
-2180 finalize parent
-> 0:00:08.787852387 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline0> completed state change=
- to NULL
-> 0:00:08.787879251 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline0> notifying about s=
-tate-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.787936520 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking audioresample0:src(0x562205400f10) and =
-audiosink:sink(0x562205412060)
-> 0:00:08.787981517 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked audioresample0:src and audiosink:sink
-> 0:00:08.788024817 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline0> removed child "audiosink"
-> 0:00:08.788091536 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking audioconvert0:src(0x562205400a70) and a=
-udioresample0:sink(0x562205400cc0)
-> 0:00:08.788136800 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked audioconvert0:src and audioresample0:sink
-> 0:00:08.788178716 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline0> removed child "audioresample0"
-> 0:00:08.788217251 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audioresample0> 0x56220540d050 dispose
-> 0:00:08.788243460 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioresample0> removing pad 'sink'
-> 0:00:08.788282883 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioresample0> removing pad 'src'
-> 0:00:08.788319209 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audioresample0> 0x56220540d050 parent cl=
-ass dispose
-> 0:00:08.788366999 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audioresample0> 0x56220540d050 finalize
-> 0:00:08.788392410 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audioresample0> 0x56220540d050 finalize=
- parent
-> 0:00:08.788432664 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking queue0:src(0x5622054005d0) and audiocon=
-vert0:sink(0x562205400820)
-> 0:00:08.788472834 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked queue0:src and audioconvert0:sink
-> 0:00:08.788511747 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline0> removed child "audioconvert0"
-> 0:00:08.788563273 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audioconvert0> 0x56220540a230 dispose
-> 0:00:08.788589194 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioconvert0> removing pad 'sink'
-> 0:00:08.788622861 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioconvert0> removing pad 'src'
-> 0:00:08.788653823 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audioconvert0> 0x56220540a230 parent cla=
-ss dispose
-> 0:00:08.788679820 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audioconvert0> 0x56220540a230 finalize
-> 0:00:08.788703426 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audioconvert0> 0x56220540a230 finalize =
-parent
-> 0:00:08.788742013 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking appsrc:src(0x562205400130) and queue0:s=
-ink(0x562205400380)
-> 0:00:08.788783683 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked appsrc:src and queue0:sink
-> 0:00:08.788824429 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline0> removed child "queue0"
-> 0:00:08.788866873 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<queue0> 0x5622053ea6f0 dispose
-> 0:00:08.788893037 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<queue0> removing pad 'sink'
-> 0:00:08.788933000 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<queue0> removing pad 'src'
-> 0:00:08.788970587 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<queue0> 0x5622053ea6f0 parent class disp=
-ose
-> 0:00:08.789004736 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<queue0> 0x5622053ea6f0 finalize
-> 0:00:08.789031786 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<queue0> 0x5622053ea6f0 finalize parent
-> 0:00:08.789076129 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline0> removed child "appsrc"
-> 0:00:08.789136560 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<pipeline0> 0x56220541a1c0 dispose
-> 0:00:08.789206281 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<pipeline0> 0x56220541a1c0 parent class d=
-ispose
-> 0:00:08.789237930 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<pipeline0> 0x56220541a1c0 finalize
-> 0:00:08.789262239 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<pipeline0> 0x56220541a1c0 finalize pare=
-nt
-> 0:00:08.789298739 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<appsrc> 0x5622053f19e0 dispose
-> 0:00:08.789325756 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<appsrc> removing pad 'src'
-> 0:00:08.789363087 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<appsrc> 0x5622053f19e0 parent class disp=
-ose
-> 0:00:08.789393963 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<appsrc> 0x5622053f19e0 finalize
-> 0:00:08.789419389 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<appsrc> 0x5622053f19e0 finalize parent
-> 0:00:08.789456431 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<fake-audio-sink> completed state =
-change to NULL
-> 0:00:08.789501544 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking sink:proxypad0(0x562205414070) and fake=
--audio-sink:sink(0x56220543c730)
-> 0:00:08.789535478 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked sink:proxypad0 and fake-audio-sink:sink
-> 0:00:08.789566464 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<audiosink> removed child "fake-audio-sink"
-> 0:00:08.789609676 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<fake-audio-sink> 0x562205497410 dispose
-> 0:00:08.789636932 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<fake-audio-sink> removing pad 'sink'
-> 0:00:08.789678205 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<fake-audio-sink> 0x562205497410 parent c=
-lass dispose
-> 0:00:08.789709969 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<fake-audio-sink> 0x562205497410 finalize
-> 0:00:08.789736021 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<fake-audio-sink> 0x562205497410 finaliz=
-e parent
-> 0:00:08.789771652 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audiosink> 0x562205410020 dispose
-> 0:00:08.789797413 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audiosink> removing pad 'sink'
-> 0:00:08.789841797 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audiosink> 0x562205410020 parent class d=
-ispose
-> 0:00:08.789870706 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audiosink> 0x562205410020 finalize
-> 0:00:08.789917355 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audiosink> 0x562205410020 finalize pare=
-nt
-> 0:00:08.790002721 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<appsink> current READY pending VOID_PE=
-NDING, desired next NULL
-> 0:00:08.790056209 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<appsink> completed state change t=
-o NULL
-> 0:00:08.790089093 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<appsink> notifying about sta=
-te-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.790150346 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'appsink' changed sta=
-te to 1(NULL) successfully
-> 0:00:08.790192220 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioresample1> current READY pending =
-VOID_PENDING, desired next NULL
-> 0:00:08.790230089 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioresample1> completed state c=
-hange to NULL
-> 0:00:08.790259143 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioresample1> notifying ab=
-out state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.790298808 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioresample1' chan=
-ged state to 1(NULL) successfully
-> 0:00:08.790337747 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audioconvert1> current READY pending V=
-OID_PENDING, desired next NULL
-> 0:00:08.790372330 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audioconvert1> completed state ch=
-ange to NULL
-> 0:00:08.790389786 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audioconvert1> notifying abo=
-ut state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.790411786 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audioconvert1' chang=
-ed state to 1(NULL) successfully
-> 0:00:08.790432255 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<queue1> current READY pending VOID_PEN=
-DING, desired next NULL
-> 0:00:08.790450843 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<queue1> completed state change to=
- NULL
-> 0:00:08.790466570 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<queue1> notifying about stat=
-e-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.790486021 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'queue1' changed stat=
-e to 1(NULL) successfully
-> 0:00:08.790503166 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc> current READY pending VOID_P=
-ENDING, desired next NULL
-> 0:00:08.790531135 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2479:gst_bin_element_set_state:<audiosrc-actual-src-puls> current READ=
-Y pending VOID_PENDING, desired next NULL
-> 0:00:08.791194447 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to NULL
-> 0:00:08.791245050 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc-actual-src-puls> no=
-tifying about state-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.791288066 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<audiosrc> child 'audiosrc-actual-src-p=
-uls' changed state to 1(NULL) successfully
-> 0:00:08.791326207 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc-actual-src-puls> complet=
-ed state change to NULL
-> 0:00:08.791357009 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking audiosrc-actual-src-puls:src(0x56220540=
-13b0) and src:proxypad1(0x5622054142d0)
-> 0:00:08.791387431 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked audiosrc-actual-src-puls:src and src:pro=
-xypad1
-> 0:00:08.791408732 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<audiosrc> removed child "audiosrc-actual-src=
--puls"
-> 0:00:08.791466243 236125 0x562204e5c670 INFO     GST_ELEMENT_FACTORY gste=
-lementfactory.c:489:gst_element_factory_create_with_properties: creating el=
-ement "audiotestsrc"
-> 0:00:08.791524621 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:759:gst_element_add_pad:<GstBaseSrc@0x56220587b330> adding pad 'sr=
-c'
-> 0:00:08.791570864 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:1016:gst_element_get_static_pad: found pad fake-auto-audio-src:src
-> 0:00:08.791591096 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2382:gst_pad_link_prepare: trying to link fake-auto-audio-src:src and =
-src:proxypad1
-> 0:00:08.791603599 236125 0x562204e5c670 INFO                GST_PADS gstp=
-ad.c:2590:gst_pad_link_full: linked fake-auto-audio-src:src and src:proxypa=
-d1, successful
-> 0:00:08.791611999 236125 0x562204e5c670 INFO               GST_EVENT gste=
-vent.c:1660:gst_event_new_reconfigure: creating reconfigure event
-> 0:00:08.791622041 236125 0x562204e5c670 INFO               GST_EVENT gstp=
-ad.c:5946:gst_pad_send_event_unchecked:<fake-auto-audio-src:src> Received e=
-vent on flushing pad. Discarding
-> 0:00:08.791636422 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<audiosrc> completed state change =
-to NULL
-> 0:00:08.791648021 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<audiosrc> notifying about st=
-ate-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.791663955 236125 0x562204e5c670 INFO              GST_STATES gstb=
-in.c:2928:gst_bin_change_state_func:<pipeline1> child 'audiosrc' changed st=
-ate to 1(NULL) successfully
-> 0:00:08.791692083 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audiosrc-actual-src-puls> 0x562205437ec0=
- dispose
-> 0:00:08.791703178 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audiosrc-actual-src-puls> removing pad=
- 'src'
-> 0:00:08.791721122 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audiosrc-actual-src-puls> 0x562205437ec0=
- parent class dispose
-> 0:00:08.791745105 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audiosrc-actual-src-puls> 0x562205437ec=
-0 finalize
-> 0:00:08.791755277 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audiosrc-actual-src-puls> 0x562205437ec=
-0 finalize parent
-> 0:00:08.791769137 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<pipeline1> completed state change=
- to NULL
-> 0:00:08.791780079 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2706:_priv_gst_element_state_changed:<pipeline1> notifying about s=
-tate-changed READY to NULL (VOID_PENDING pending)
-> 0:00:08.791801657 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking audioresample1:src(0x56220543c290) and =
-appsink:sink(0x56220543c4e0)
-> 0:00:08.791817500 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked audioresample1:src and appsink:sink
-> 0:00:08.791831061 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline1> removed child "appsink"
-> 0:00:08.791850745 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking audioconvert1:src(0x562205401cf0) and a=
-udioresample1:sink(0x56220543c040)
-> 0:00:08.791865102 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked audioconvert1:src and audioresample1:sink
-> 0:00:08.791878751 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline1> removed child "audioresample1"
-> 0:00:08.791892157 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audioresample1> 0x56220543af30 dispose
-> 0:00:08.791901603 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioresample1> removing pad 'sink'
-> 0:00:08.791915607 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioresample1> removing pad 'src'
-> 0:00:08.791928674 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audioresample1> 0x56220543af30 parent cl=
-ass dispose
-> 0:00:08.791938866 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audioresample1> 0x56220543af30 finalize
-> 0:00:08.791947853 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audioresample1> 0x56220543af30 finalize=
- parent
-> 0:00:08.791962236 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking queue1:src(0x562205401850) and audiocon=
-vert1:sink(0x562205401aa0)
-> 0:00:08.791975378 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked queue1:src and audioconvert1:sink
-> 0:00:08.791988418 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline1> removed child "audioconvert1"
-> 0:00:08.792007351 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audioconvert1> 0x56220543a850 dispose
-> 0:00:08.792017254 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioconvert1> removing pad 'sink'
-> 0:00:08.792036861 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audioconvert1> removing pad 'src'
-> 0:00:08.792050335 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audioconvert1> 0x56220543a850 parent cla=
-ss dispose
-> 0:00:08.792059758 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audioconvert1> 0x56220543a850 finalize
-> 0:00:08.792069283 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audioconvert1> 0x56220543a850 finalize =
-parent
-> 0:00:08.792083627 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking audiosrc:src(0x5622054122d0) and queue1=
-:sink(0x562205401600)
-> 0:00:08.792098066 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked audiosrc:src and queue1:sink
-> 0:00:08.792111255 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline1> removed child "queue1"
-> 0:00:08.792124752 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<queue1> 0x5622053ea9f0 dispose
-> 0:00:08.792133862 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<queue1> removing pad 'sink'
-> 0:00:08.792149785 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<queue1> removing pad 'src'
-> 0:00:08.792163192 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<queue1> 0x5622053ea9f0 parent class disp=
-ose
-> 0:00:08.792174963 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<queue1> 0x5622053ea9f0 finalize
-> 0:00:08.792184315 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<queue1> 0x5622053ea9f0 finalize parent
-> 0:00:08.792201456 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<pipeline1> removed child "audiosrc"
-> 0:00:08.792218624 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<pipeline1> 0x56220541a3e0 dispose
-> 0:00:08.792253534 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<pipeline1> 0x56220541a3e0 parent class d=
-ispose
-> 0:00:08.792264884 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<pipeline1> 0x56220541a3e0 finalize
-> 0:00:08.792274426 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<pipeline1> 0x56220541a3e0 finalize pare=
-nt
-> 0:00:08.792287237 236125 0x562204e5c670 INFO              GST_STATES gste=
-lement.c:2806:gst_element_continue_state:<fake-auto-audio-src> completed st=
-ate change to NULL
-> 0:00:08.792302807 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2137:gst_pad_unlink: unlinking fake-auto-audio-src:src(0x562205400a70)=
- and src:proxypad1(0x5622054142d0)
-> 0:00:08.792318087 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gstp=
-ad.c:2192:gst_pad_unlink: unlinked fake-auto-audio-src:src and src:proxypad1
-> 0:00:08.792330349 236125 0x562204e5c670 INFO           GST_PARENTAGE gstb=
-in.c:1803:gst_bin_remove_func:<audiosrc> removed child "fake-auto-audio-src"
-> 0:00:08.792350801 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<fake-auto-audio-src> 0x56220587b330 disp=
-ose
-> 0:00:08.792360509 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<fake-auto-audio-src> removing pad 'src'
-> 0:00:08.792373446 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<fake-auto-audio-src> 0x56220587b330 pare=
-nt class dispose
-> 0:00:08.792384415 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<fake-auto-audio-src> 0x56220587b330 fin=
-alize
-> 0:00:08.792393961 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<fake-auto-audio-src> 0x56220587b330 fin=
-alize parent
-> 0:00:08.792406878 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<audiosrc> 0x562205410210 dispose
-> 0:00:08.792416062 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<audiosrc> removing pad 'src'
-> 0:00:08.792436493 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<audiosrc> 0x562205410210 parent class di=
-spose
-> 0:00:08.792447081 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<audiosrc> 0x562205410210 finalize
-> 0:00:08.792455910 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<audiosrc> 0x562205410210 finalize parent
-> 0:00:08.792469780 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3382:gst_element_dispose:<appsink> 0x5622054188d0 dispose
-> 0:00:08.792479285 236125 0x562204e5c670 INFO        GST_ELEMENT_PADS gste=
-lement.c:875:gst_element_remove_pad:<appsink> removing pad 'sink'
-> 0:00:08.792492074 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3428:gst_element_dispose:<appsink> 0x5622054188d0 parent class dis=
-pose
-> 0:00:08.792509110 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3460:gst_element_finalize:<appsink> 0x5622054188d0 finalize
-> 0:00:08.792518432 236125 0x562204e5c670 INFO         GST_REFCOUNTING gste=
-lement.c:3465:gst_element_finalize:<appsink> 0x5622054188d0 finalize parent
-> [timestamp] [threadID] facility level [function call] <message>
-> -------------------------------------------------------------------------=
--------
-> [ 8.606136] [00039a5d] libusb: debug [libusb_hotplug_deregister_callback]=
- deregister hotplug cb 1
-> [ 8.606150] [00039a5d] libusb: debug [libusb_interrupt_event_handler] =20
-> [ 8.606199] [00039a65] libusb: debug [usbi_wait_for_events] poll() return=
-ed 1
-> [ 8.606223] [00039a65] libusb: debug [handle_event_trigger] event trigger=
-ed
-> [ 8.606229] [00039a65] libusb: debug [handle_event_trigger] someone purpo=
-sefully interrupted
-> [ 8.606233] [00039a65] libusb: debug [handle_event_trigger] someone unreg=
-istered a hotplug cb
-> [ 8.606239] [00039a65] libusb: debug [usbi_hotplug_process] freeing hotpl=
-ug cb 0x562205265740 with handle 1
-> (spicy:236125): GSpice-DEBUG: 13:06:49.360: ../spice-gtk-0.41/src/usb-bac=
-kend.c:481 handle_libusb_events <<
-> (spicy:236125): GSpice-DEBUG: 13:06:49.360: ../spice-gtk-0.41/src/usb-bac=
-kend.c:538 spice_usb_backend_delete >>
-> [ 8.606451] [00039a5d] libusb: debug [libusb_exit] =20
-> [ 8.606514] [00039a64] libusb: debug [linux_udev_event_thread_main] udev =
-event thread exiting
-> [ 8.606656] [00039a5d] libusb: debug [libusb_unref_device] destroy device=
- 2.100
-> [ 8.606688] [00039a5d] libusb: debug [libusb_unref_device] destroy device=
- 2.1
-> [ 8.606694] [00039a5d] libusb: debug [libusb_unref_device] destroy device=
- 1.3
-> [ 8.606698] [00039a5d] libusb: debug [libusb_unref_device] destroy device=
- 1.4
-> [ 8.606703] [00039a5d] libusb: debug [libusb_unref_device] destroy device=
- 1.2
-> [ 8.606707] [00039a5d] libusb: debug [libusb_unref_device] destroy device=
- 1.5
-> [ 8.606711] [00039a5d] libusb: debug [libusb_unref_device] destroy device=
- 1.1
-> [ 8.606716] [00039a5d] libusb: debug [usbi_remove_event_source] remove fd=
- 12
-> [ 8.606726] [00039a5d] libusb: debug [usbi_remove_event_source] remove fd=
- 11
-> (spicy:236125): GSpice-DEBUG: 13:06:49.361: ../spice-gtk-0.41/src/usb-bac=
-kend.c:551 spice_usb_backend_delete <<
-> (spicy:236125): GSpice-DEBUG: 13:06:49.364: ../spice-gtk-0.41/src/spice-c=
-hannel.c:178 main-1:0: spice_channel_finalize 0x5622053970f0
-> 0:00:08.798930222 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:1116:gst_deinit: deinitializing GStreamer
-> 0:00:08.801243693 236125 0x562204e5c670 INFO                GST_INIT gst.=
-c:1260:gst_deinit: deinitialized GStreamer
->
-> If you have any suggestions as to what I am doing wrong or what
-> I'm missing, I'd be greatful if you'd let me know.
 
-=46rom what I could see, you have set the h264 video-codec
-preference at 13:06:46 and terminated spicy around 13:06:49.
+You mentioned trying spice-streaming-agent, so I wanted to give it a go, ad=
+ded the necessary channel, compiled, started it, and had gotten:
+spice-streaming-agent[1727]: Failed to open the streaming device "/dev/virt=
+io-ports/org.spice-space.stream.0": 13 - Permission denied
+Indeed:
+$ ls -la /dev/virtio-ports/
+total 0
+drwxr-xr-x  2 root root  100 2022-11-28 11:45:50 ./
+drwxr-xr-x 21 root root 3960 2022-11-28 11:45:52 ../
+lrwxrwxrwx  1 root root   11 2022-11-28 11:45:50 com.redhat.spice.0 -> ../v=
+port2p2
+lrwxrwxrwx  1 root root   11 2022-11-28 11:45:50 org.qemu.guest_agent.0 -> =
+../vport2p1
+lrwxrwxrwx  1 root root   11 2022-11-28 11:45:50 org.spice-space.stream.0 -=
+> ../vport2p3
 
-So, perhaps the first issue is the assumption that as soon as you
-set the video-codec preference, that the stream will start. It'll
-not. The streaming will happen based on update frequency on the
-display. For example, a clock updating the seconds, once every
-second, will not create a video streaming. You should try running
-an App that has high update frequency or just a video.
+$ ls -la /dev/vport2p*
+crw------- 1 root root 236, 1 2022-11-28 11:45:50 /dev/vport2p1
+crw------- 1 root root 236, 2 2022-11-28 11:45:50 /dev/vport2p2
+crw------- 1 root root 236, 3 2022-11-28 11:45:50 /dev/vport2p3
 
-GStreamer needs to be enabled in spice-server at build time too.
-You can check with ldd in libspice-server.so...
+For a quick workaround I did:
+$ sudo chmod 666 /dev/vport2p3
+... and started the agent:
+$ ./build/src/spice-streaming-agent
 
-So, the logs from spice-server would be useful to know what issue
-might have happened at encoding if it doesn't work.
+Now I'm not sure what's supposed to happen, I started remote-viewer like in=
+ the video you linked, the performance didn't change, but tried with spicy =
+too, seemingly no difference.
+Btw, is the line "For now, spice-streaming-agent only provides software enc=
+oding to MJPEG." in its README still relevant? In this case I wouldn't expe=
+ct anything else other than the same performance as without the agent.
 
-Just trying to give you some ideas and directions to go.
 
-Cheers,
-Victor
 
---3l7dhjxrytj6r6ty
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmODbbQACgkQl9kSPeN6
-SE97dhAAuUc2ah+m8kCEd17SfN/Wckqi5Dch8Q/Ah6KNbrnmgS4G+NnyVSG5Mwx7
-fBBhd8vw+NG9eyxZMwikGkqUu9Gv/o1atyJRzPO8dXsTdMIxvyQDpUov5QJC9PVu
-tcMEbp1dnH1H0UpFjDYML8LHWX7vX0b3ufacYh8l3wPs5rM9d5HBJdiN9SYrp67y
-Gik6NE2nduIVDwLtnMLc2xoO1Ho4Hh7HXva5R8fGZvBsQA27bPsBns4ETV/91X8K
-E3Iz0Irs4kXOfD+sv1pkam+qO5GVR6Enrhc4aazum4jARIlyOUxkrSFlnw8G7IcT
-df5jv+Piz6YSen4Eht9vsgKNe3z2ETArtxP9sV4XL/br6mMctEeDw6OeJi5wpL4f
-e+i1rx1D9uvtnjkViCQvZ1ab6eUUYGzc7E2vZV3bl/dIwpwLS9uwKT28tbzNl9GJ
-XuV96CWbQZCCA7rfVeA90QVJumLbEYtfflouYLQTl8SRQh7KgP2Tm4y3NHnQgpf0
-9iliTmm8n/vxJubEmy2RA3ZjdV7jZA4Bj5q15VO+tw8oR4zl4O2VluesDPLqqPkn
-KlixzzN9a19HcfKp45Dqz17IFZrBGod7MwLiDPJCF0rXD5HQtPruorxCeb5LgsP7
-ciYxHuH6GyJTivOXYCRP1X90KvgsaJVGhAmAJQb3B2P0h46UtXQ=
-=0/Xk
------END PGP SIGNATURE-----
-
---3l7dhjxrytj6r6ty--
-
+Daniel
