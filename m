@@ -2,66 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B146D65C0F7
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Jan 2023 14:39:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6EE265C63D
+	for <lists+spice-devel@lfdr.de>; Tue,  3 Jan 2023 19:28:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA24F10E0C7;
-	Tue,  3 Jan 2023 13:39:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2E1A510E403;
+	Tue,  3 Jan 2023 18:28:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 84F1910E0C7
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Jan 2023 13:39:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1672753143;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+Received: from mail.tol.fr (mail.tol.fr [82.66.50.48])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 950E710E3FD
+ for <spice-devel@lists.freedesktop.org>; Tue,  3 Jan 2023 18:28:06 +0000 (UTC)
+Message-ID: <168a5f89-f3f6-d274-05b4-80d16e6802c7@couderc.eu>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=couderc.eu; s=2017;
+ t=1672770484; h=from:from:sender:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1vJob57B+//emxWtxyYuMSybVmhGc2/mb3s2MuhQZTw=;
- b=NLUYnPbUKi/cM5mxVft3M//m010Go+euiYhapYlVxmNLPx4XfLseQcqrxEl1G/utsm+Pvt
- xaqA2bjmItKhH0iAEzRCjJfq/DpubT2E8PaoOoPxDSieNT2YqjF4Avh94d/jmswFHN7cSk
- 7V655pbGHcOnCxZCdpaMjOofzNr1iPc=
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
- [209.85.128.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-177-320t-2bQO8CXBTn2mUollw-1; Tue, 03 Jan 2023 08:39:02 -0500
-X-MC-Unique: 320t-2bQO8CXBTn2mUollw-1
-Received: by mail-yw1-f197.google.com with SMTP id
- 00721157ae682-46a518991cfso284204507b3.18
- for <spice-devel@lists.freedesktop.org>; Tue, 03 Jan 2023 05:39:02 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1vJob57B+//emxWtxyYuMSybVmhGc2/mb3s2MuhQZTw=;
- b=Rik1z/+n9iH9HQT//M1NM6KEL0hQYTKgsOdTfs/Dva6ee8McEQPKOs+Gh0k0MPODNI
- s//mayg2H8fYtN2BvfuRbaeanT5Jrq9y9kAWhZQLZPofWi1HbwvYIAwStQ1A+DzAWRlZ
- 4grAP68bDTVJ4Iir211qluMpvtmk8eaPfr5Df+EXkiW/Yk26rTZDNUakoTNKQ9uqVCXP
- Qg42QaZ6lEfSzabgDXi7Y/aI9kIHjf7x3FMqS8i4Bag0V82XWGt61lT6Gag6IL0GyQC0
- MeHuSSa1NiIBjYkADfPyDEOLduLBEgAovu19dHqFmjjAua+c928ZPlRpYoqoVpXAZrmI
- eThw==
-X-Gm-Message-State: AFqh2kqjesGZ1MN6VYQFAuGSaAUT9/xCnuXAw3eQ9xYUb7J1JluRrH/+
- KJ6P3ek9d7AlCQgy5eFYV5BIqOffKNbDekfChn3rhhZqpYgGGM83YSUGfYvViJa2MjHEfgkSzCn
- 5Jjk7nXPiGd0e590vldf15CCp2umi/rolTay/d1gWRKswJw8=
-X-Received: by 2002:a81:7cd6:0:b0:38c:e247:da55 with SMTP id
- x205-20020a817cd6000000b0038ce247da55mr4779937ywc.348.1672753141610; 
- Tue, 03 Jan 2023 05:39:01 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXvYRpHf78ELUsP/EkBQdpVV94cr4yhxZNt41OQVsJgB8Zzper+V4w/l3yABCdYVdLYVlPDbSzLYmdahkDRVgFs=
-X-Received: by 2002:a81:7cd6:0:b0:38c:e247:da55 with SMTP id
- x205-20020a817cd6000000b0038ce247da55mr4779935ywc.348.1672753141385; Tue, 03
- Jan 2023 05:39:01 -0800 (PST)
+ bh=Rf396dAIz28BLOupmVm0p5OkltgWsHK/hYpqL/yTAOg=;
+ b=pRk6IhpsHYfhEY/qK30bIPBbCPsKgxbj/TLQvG9Yc7Q1DgjhODsw7CInw4xihEK114A3uw
+ GRo7QLno36p38a32GAfAH4ohJnohJ0BKslOdoYWOMNgX2O+/EDu/baA4xufcUpDtaU/xZs
+ fHIOiDk0VH4F9Pgyjb2r+RmJnpgHjHtnsvBt7OSUIape/x313gXYdsjK7CnKeOMEMmVPe/
+ ye6d7SF8gWq8eAxVhscTnBa2Ujrrct5L3YAogxW/Da27qO4xyVUR86qskG4UeNqO1heaSW
+ KIdmmDQUn1p5QVv+Zkk/UJ5g7R9TvFgVX1iTVWebBLnPENQtJSq2pq8Vun5m2w==
+Date: Tue, 3 Jan 2023 19:28:03 +0100
 MIME-Version: 1.0
+To: Victor Toso <victortoso@redhat.com>
 References: <a95fc8c4-6384-4b9a-7e09-878dab49c164@couderc.eu>
-In-Reply-To: <a95fc8c4-6384-4b9a-7e09-878dab49c164@couderc.eu>
-From: Uri Lublin <ulublin@redhat.com>
-Date: Tue, 3 Jan 2023 15:38:50 +0200
-Message-ID: <CAAg9qJ0MRKu8RnONLAEum1asJaYerTcCWjPQLt05fk4qbW9JHQ@mail.gmail.com>
-To: Pierre Couderc <pierre@couderc.eu>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="000000000000ca251705f15c3092"
+ <CAMVti-_3iqZqpu=qbq=z+pfSZAEQPmAStFFUMRRseqJn_=UFWg@mail.gmail.com>
+ <d7532e7f-5845-34bf-7ceb-1e47d856be7e@couderc.eu>
+ <20230103133705.jpzra4n63fj4velv@tapioca>
+Content-Language: fr
+From: Pierre Couderc <pierre@couderc.eu>
+In-Reply-To: <20230103133705.jpzra4n63fj4velv@tapioca>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=couderc.eu;
+ s=2017; t=1672770484; h=from:from:sender:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Rf396dAIz28BLOupmVm0p5OkltgWsHK/hYpqL/yTAOg=;
+ b=mf+nznMFo87Q94rbhy/OKwRc0j1zX1Z06qoLvcET1CPPFVbwTCnYzbsqLJFXqZVv/7xvoQ
+ A4X5VRBpMuySIGOPdMezzp6BeNqmz0xbqSRbtX4pI1ySRGJO3+ovK1N03aTHOj/QWkR7Ct
+ IK8z3GX7rL0nMa/vRQA3O1WmSQbzYhniPEnAOl5M+TE5Ea2gw46WVCDDXs4axyAy80QyBE
+ Qyl9kBB9RsYJflY2p6KdXzKbu1FuQ2LWn/x7ZkRr7Z/JsrBF7GTIEhcE2pDvg46eKNhJpb
+ d9TCZTR77ixJRXTWvgOnzONXS65GbtwSS30BeiaPezrjAFnyx0jDcKCkE6upUw==
+ARC-Seal: i=1; s=2017; d=couderc.eu; t=1672770484; a=rsa-sha256; cv=none;
+ b=mOqifjYo85mRYArJQIBIz+OYKGOzcC6oXYXOURkHVjWweThPB9cdRXuqs59xznrbO0HRzGkEMi+oJ8SoyBhf+VM54WI3IlSvfdlTUyKZQGOxfG7RHIoYys39xOZlr9MMVwjn7/GNxS5ms74n4rleMP46jAfN+jWR3LbqPWC0GAqeK9CAWn6szcf24/rj+RA0w6v8Oy/QbwcZkzK5YRmp+uzFbyPCEuqxvF9k/fvXZAe95MCiDpT69s0F/Fbb1l6TW0sBdtHZYEzfq+sw1hpA7H+z+8ffo7Gim7Y8GiNf14Rd5Mk6TMuXMhBXgcNyzzgZRk4QXvyt8X35+PL6KYxb9g==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=tol smtp.mailfrom=pierre@couderc.eu
 Subject: Re: [Spice-devel] In spicy,
  how to change shft-F12 to ungrab the mouse ?
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -79,55 +70,26 @@ Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000ca251705f15c3092
-Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-
-Happy new year everybody.
-
-On Wed, Dec 28, 2022 at 11:11 AM Pierre Couderc <pierre@couderc.eu> wrote:
-
-> Is is possible ? how ?
+Le 1/3/23 à 14:37, Victor Toso a écrit :
+> Hi,
 >
-
-You can try adding the following to spicy configuration file
-(e.g. in $HOME/.config/spicy/settings on my Fedora), under [general]:
-grab-sequence=Alt_L+Control_L
-
-Hope that helps,
-    Uri.
-
-
-> Thanks for any help.
+> On Tue, Jan 03, 2023 at 09:51:42AM +0100, Pierre Couderc wrote:
+>> Thank you very much.
+>>
+>> But it does not work I get :
+>>
+>> option parsing failed: Unknown option --hotkeys=release-cursor=ctrl+alt
+>>
+>> Moreover,I find nowhere a :
+>>
+>> man spicy
+> Spicy is not really meant to be used by final users. It is a
+> testing tool. It works but you should consider using
+> virt-viewer/remote-viewer instead.
+In fact, spicy is enough for me...
 >
-> PC
->
->
-
---000000000000ca251705f15c3092
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div>Hi,</div><div><br><=
-/div><div>Happy new year everybody.</div></div></div><br><div class=3D"gmai=
-l_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Dec 28, 2022 at 11:1=
-1 AM Pierre Couderc &lt;<a href=3D"mailto:pierre@couderc.eu">pierre@couderc=
-.eu</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
-x">Is is possible ? how ?<br></blockquote><div><br></div><div>You can try a=
-dding the following to spicy configuration file</div><div>(e.g. in $HOME/.c=
-onfig/spicy/settings on my Fedora), under [general]:</div><div>grab-sequenc=
-e=3DAlt_L+Control_L</div><div><br></div><div>Hope that helps,</div><div>=C2=
-=A0=C2=A0=C2=A0 Uri.<br></div><div><br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
-);padding-left:1ex">
-<br>
-Thanks for any help.<br>
-<br>
-PC<br>
-<br>
-</blockquote></div></div>
-
---000000000000ca251705f15c3092--
-
+> spicy runs a restore_configuration() function that loads a
+> settings file in $XDG_CONFIG_HOME/spicy/settings -- it might work
+> to just add, under "general" the grab-sequence="ctrl+alt"
+Thank you, see too my answer to Uri lublin
