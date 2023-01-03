@@ -1,69 +1,54 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDF1165BC8E
-	for <lists+spice-devel@lfdr.de>; Tue,  3 Jan 2023 09:57:46 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id ACC2865C0EC
+	for <lists+spice-devel@lfdr.de>; Tue,  3 Jan 2023 14:37:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 694B010E23F;
-	Tue,  3 Jan 2023 08:57:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 569DD10E052;
+	Tue,  3 Jan 2023 13:37:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 39BD610E23F
- for <spice-devel@lists.freedesktop.org>; Tue,  3 Jan 2023 08:57:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 871C710E052
+ for <spice-devel@lists.freedesktop.org>; Tue,  3 Jan 2023 13:37:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1672736261;
+ s=mimecast20190719; t=1672753032;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=5loYVFkTKB/RtxjC5Ugi+Hr/RsHaa4x+6VyJhV0CkNc=;
- b=D6NdrTUEzw8I6nigyksaV0t5g+N5u3G3vdncratgLVLW/sly2CN1x0SEaxn+PuJp8GyBnp
- KkzmC5zD6Cc9ui5UEI8t6NT9keLaOaD38aQpNDmib3k/kFXpzYFMGr4FZTx7AMOySIVKfM
- wpQiPH3i8m3Mp9QX8vS1qhCO16q9SSY=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-173-sWXqbm8kOrWE47VHfPxHMQ-1; Tue, 03 Jan 2023 03:57:39 -0500
-X-MC-Unique: sWXqbm8kOrWE47VHfPxHMQ-1
-Received: by mail-wr1-f71.google.com with SMTP id
- v12-20020adfc5cc000000b0029910b64099so610197wrg.23
- for <spice-devel@lists.freedesktop.org>; Tue, 03 Jan 2023 00:57:39 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5loYVFkTKB/RtxjC5Ugi+Hr/RsHaa4x+6VyJhV0CkNc=;
- b=QSdUmU8tjOUbnKmb6WycTgDHui1qNE7ZSgrbqkgUHLXQiYxlJ+EMuj9dVR2oHShW7R
- U2mbUqnr+UKSfhzzvHJv1p047ewR/g2Wo5B0YBtOhQHsFCUY6p3YnXKEMq24VB3NBjsC
- jru9UWd0c4hjt2zMJKOrH1OL9oygeSETrYUEQ0iUyYJ644IOddBR+zsyeimHggtgNRfU
- 13GYVQD7gYikZjs0kVj41VB69wZL/qqXzlbTEPRxZBVIcgAFf4DpEZGunzsBA+rY/9eJ
- hdVMxKtHm4A4HmhqVM51+Thcyd+QQbLxx3Sj003/57+tL2+qecTixS7ADJOo8T+wae0V
- wRug==
-X-Gm-Message-State: AFqh2kpsgVfYlAh8m+/+PmD6RQpXTsGKuG1G4FsgBKQi/0XEZtmH3IUs
- iD4iOUJiVmEgXdSE5EVav1e82B8JvFvunIMFmh89YH2KEqMMqPjoYLIXgpjEky5/cmT1NACqthm
- qhJY2mJbFT/p32fcEusTQgz/CNVuf79we5JJyE6VN+dvn5W0=
-X-Received: by 2002:a1c:2505:0:b0:3d0:bda:f2c with SMTP id
- l5-20020a1c2505000000b003d00bda0f2cmr2186800wml.117.1672736258207; 
- Tue, 03 Jan 2023 00:57:38 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXtP2oaFToZMm0yp27t6Nr4UzKA5+spAQwd2zJwUCM8uD02fllzADWWoUJtFLGQaORg88QuDjsRUOnqKPtDJLM8=
-X-Received: by 2002:a1c:2505:0:b0:3d0:bda:f2c with SMTP id
- l5-20020a1c2505000000b003d00bda0f2cmr2186797wml.117.1672736257928; 
- Tue, 03 Jan 2023 00:57:37 -0800 (PST)
-MIME-Version: 1.0
+ bh=3wGgWP7w0qy/tksgU96miHOfo1ejBi/lZqc9FksUxDs=;
+ b=ctlbZQOWacVA1E1BvE/PmMnICNMPVX8YTkaS6PaDLXzqQvhzRQF+4RR0bD51BpHVYwL0BZ
+ 1w0n0fokaC8vG67PmWvCEG7UjRddNV+IXVOo0csO78N28VjpLyPUrAO4/M+U0LCgHpUFpG
+ jVLEDGrl5HqUl0ExOQ1NZ+t/ZjaLofM=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-669-M4uyZg96NDqW2puNSokhGQ-1; Tue, 03 Jan 2023 08:37:08 -0500
+X-MC-Unique: M4uyZg96NDqW2puNSokhGQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 721173C0DDB2;
+ Tue,  3 Jan 2023 13:37:08 +0000 (UTC)
+Received: from localhost (ovpn-193-220.brq.redhat.com [10.40.193.220])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0D16BC15BA0;
+ Tue,  3 Jan 2023 13:37:06 +0000 (UTC)
+Date: Tue, 3 Jan 2023 14:37:05 +0100
+From: Victor Toso <victortoso@redhat.com>
+To: Pierre Couderc <pierre@couderc.eu>
+Message-ID: <20230103133705.jpzra4n63fj4velv@tapioca>
 References: <a95fc8c4-6384-4b9a-7e09-878dab49c164@couderc.eu>
  <CAMVti-_3iqZqpu=qbq=z+pfSZAEQPmAStFFUMRRseqJn_=UFWg@mail.gmail.com>
  <d7532e7f-5845-34bf-7ceb-1e47d856be7e@couderc.eu>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="onmiz5bxw6utj35s"
+Content-Disposition: inline
 In-Reply-To: <d7532e7f-5845-34bf-7ceb-1e47d856be7e@couderc.eu>
-From: Xiaodai Wang <xiaodwan@redhat.com>
-Date: Tue, 3 Jan 2023 16:58:24 +0800
-Message-ID: <CAMVti-_eWR8=Y0VN8ug9+E7=taLY6qVdKPRRQDxzB4Es8Wdv3g@mail.gmail.com>
-To: Pierre Couderc <pierre@couderc.eu>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="00000000000075078905f158423b"
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
 Subject: Re: [Spice-devel] In spicy,
  how to change shft-F12 to ungrab the mouse ?
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -81,117 +66,67 @@ Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000075078905f158423b
-Content-Type: text/plain; charset="UTF-8"
+
+--onmiz5bxw6utj35s
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Oh, Sorry. I thought it was virt-viewer.
-Let's wait for others to answer your question.
+Hi,
 
-On Tue, Jan 3, 2023 at 4:51 PM Pierre Couderc <pierre@couderc.eu> wrote:
-
+On Tue, Jan 03, 2023 at 09:51:42AM +0100, Pierre Couderc wrote:
 > Thank you very much.
->
+>=20
 > But it does not work I get :
->
+>=20
 > option parsing failed: Unknown option --hotkeys=3Drelease-cursor=3Dctrl+a=
 lt
->
+>=20
 > Moreover,I find nowhere a :
->
+>=20
 > man spicy
->
-> !!!
->
-> Thanks again
->
->
->
->
-> Le 1/3/23 =C3=A0 09:06, Xiaodai Wang a =C3=A9crit :
->
-> '--hotkeys' could do that. You may see the man page for the usage.
->
-> e.g.
-> --hotkeys=3Drelease-cursor=3Dctrl+alt
->
-> On Wed, Dec 28, 2022 at 5:11 PM Pierre Couderc <pierre@couderc.eu> wrote:
->
->> Is is possible ? how ?
->>
->> Thanks for any help.
->>
->> PC
->>
->>
 
---00000000000075078905f158423b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Spicy is not really meant to be used by final users. It is a
+testing tool. It works but you should consider using
+virt-viewer/remote-viewer instead.
 
-<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-size:small">Oh,=
- Sorry. I thought=C2=A0it was virt-viewer.</div><div class=3D"gmail_default=
-" style=3D"font-size:small">Let&#39;s wait for others to answer your questi=
-on.</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gma=
-il_attr">On Tue, Jan 3, 2023 at 4:51 PM Pierre Couderc &lt;<a href=3D"mailt=
-o:pierre@couderc.eu">pierre@couderc.eu</a>&gt; wrote:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">
- =20
-   =20
- =20
-  <div>
-    <p>Thank you very much.</p>
-    <p>But it does not work I get :</p>
-    <p>option parsing failed: Unknown option
-      --hotkeys=3Drelease-cursor=3Dctrl+alt</p>
-    <p>Moreover,I find nowhere a :</p>
-    <p>man spicy</p>
-    <p>!!!</p>
-    <p>Thanks again</p>
-    <p><br>
-    </p>
-    <p><br>
-    </p>
-    <p><br>
-    </p>
-    <div>Le 1/3/23 =C3=A0 09:06, Xiaodai Wang a
-      =C3=A9crit=C2=A0:<br>
-    </div>
-    <blockquote type=3D"cite">
-     =20
-      <div dir=3D"ltr">
-        <div class=3D"gmail_default" style=3D"font-size:small">&#39;--hotke=
-ys&#39;
-          could do that. You may see the man page for the usage.</div>
-        <div class=3D"gmail_default" style=3D"font-size:small"><br>
-        </div>
-        <div class=3D"gmail_default" style=3D"font-size:small">e.g.</div>
-        <div class=3D"gmail_default" style=3D"font-size:small">--hotkeys=3D=
-release-cursor=3Dctrl+alt<br>
-        </div>
-      </div>
-      <br>
-      <div class=3D"gmail_quote">
-        <div dir=3D"ltr" class=3D"gmail_attr">On Wed, Dec 28, 2022 at 5:11
-          PM Pierre Couderc &lt;<a href=3D"mailto:pierre@couderc.eu" target=
-=3D"_blank">pierre@couderc.eu</a>&gt;
-          wrote:<br>
-        </div>
-        <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
-;border-left:1px solid rgb(204,204,204);padding-left:1ex">Is
-          is possible ? how ?<br>
-          <br>
-          Thanks for any help.<br>
-          <br>
-          PC<br>
-          <br>
-        </blockquote>
-      </div>
-    </blockquote>
-  </div>
+> Le 1/3/23 =E0 09:06, Xiaodai Wang a =E9crit=A0:
+> > '--hotkeys' could do that. You may see the man page for the usage.
+> >=20
+> > e.g.
+> > --hotkeys=3Drelease-cursor=3Dctrl+alt
+> >=20
+> > On Wed, Dec 28, 2022 at 5:11 PM Pierre Couderc <pierre@couderc.eu> wrot=
+e:
+> >=20
+> >     Is is possible ? how ?
 
-</blockquote></div>
+spicy runs a restore_configuration() function that loads a
+settings file in $XDG_CONFIG_HOME/spicy/settings -- it might work
+to just add, under "general" the grab-sequence=3D"ctrl+alt"
 
---00000000000075078905f158423b--
+Cheers,
+Victor
+
+--onmiz5bxw6utj35s
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmO0L4EACgkQl9kSPeN6
+SE9jFhAAloo4R1YHc+yixIWBwOcCUcxA7O7CRM9l8bGJO3J888gsoNAWXS4m97pR
+uRaLFQP4fGQfTc4NOqrrB1I4sEsFVvlPM2ov6qpQtBfvd6ONzEkI2eW5k9hCCYg8
+ygqBtP/scxD4pv9gUND1sd6IQRDDeXPq8W4z1I2sLjP9gBSvJ80mftPYM46wcb/n
+e0hYo5mMVLG4OjNe0DpNxRhC6KJQuiz5HukQt9nnHuQSrCY9Aqt3LnfU3Pus3aLK
++oJJ99BT0bTe9mg0Ts41vG+3/o8sMZNLmeKLN/ufuKgGtTMuKXUeGqNZV/KkEY0L
+NtE+EHYJYKf+erOO23v3znuXhceVCyqfdlddqO+C9AkT2tox2k4A1r8RmBsga0tt
+Aj1yasqkXncLqMRAwUGipm6FAQOz9ZbfTPRV8fTN9+EymwyGJrtuzJEMaculrvz5
+0kuo8BMcpPokQxleQJVUwMTFm2DSpBz2pHjnzBARBvsOH+SHE051Bw97ieHegfH0
+DmT/dtP71bP/fgY09dRj4EwFDwbI5CQwojYzmIhJbGQ4NItdrD5mQ3RdespymqJC
+N/MJ0eiAh/RuC9e36vgIF91ROR6X3JXtlDh0Cb80LWaFQ/w63RuZBvHdj8UhKSMX
+/7n8/LTGaImEtvvMEgJ2pylhsKF9kqLfQcFO1gAYiiSFiGmZnlM=
+=voV7
+-----END PGP SIGNATURE-----
+
+--onmiz5bxw6utj35s--
 
