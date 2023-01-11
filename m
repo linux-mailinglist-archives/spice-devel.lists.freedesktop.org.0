@@ -1,71 +1,49 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7FB465D131
-	for <lists+spice-devel@lfdr.de>; Wed,  4 Jan 2023 12:07:04 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A26D36653E8
+	for <lists+spice-devel@lfdr.de>; Wed, 11 Jan 2023 06:42:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0023F10E097;
-	Wed,  4 Jan 2023 11:07:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D1F610E6E7;
+	Wed, 11 Jan 2023 05:42:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4216C10E097
- for <spice-devel@lists.freedesktop.org>; Wed,  4 Jan 2023 11:07:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1672830420;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=CD3H3xS1p37eDDeBZ6CZcj5aQj5FLd2jX1DvbNwuOvY=;
- b=HxX0nY8jnNGXl1esUS5F9/SAq+rcmrUdKVVACoLlE8fDBAxWPKaKBoihE6E2pYm4s7OVje
- j5CeqWH6cohxTBxj4mP5XZ25Ha4XzXI+vnHWjF4yNI4K0u7uGxqgQSyJkWroDc7mrKZnIj
- SQ/2F651+4e6YSPHuVMEzD34yLmVju0=
-Received: from mail-yb1-f197.google.com (mail-yb1-f197.google.com
- [209.85.219.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-610-isl2xzibM6ybp9QSck8XDg-1; Wed, 04 Jan 2023 06:06:58 -0500
-X-MC-Unique: isl2xzibM6ybp9QSck8XDg-1
-Received: by mail-yb1-f197.google.com with SMTP id
- z17-20020a25e311000000b00719e04e59e1so33534924ybd.10
- for <spice-devel@lists.freedesktop.org>; Wed, 04 Jan 2023 03:06:58 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CD3H3xS1p37eDDeBZ6CZcj5aQj5FLd2jX1DvbNwuOvY=;
- b=x+RrRj4j/4hqGaoU2NTYSsSLmX4ZcIdXaPg9cH/HTPb5FI7/RLALhGkVY2MOTLi4TJ
- rapeKhDxvpHTHu3H+K7Q/fMNcUjJ1c+tgKmS9e0k/emdQsd2rwxVAUoLUu5EnaNjTCtx
- pPUU2+DqCj6WOi2OYXLeB3axqXwbDgcX3yHT8Np9b5jf4XRwbdfSdKup3jPLCQpxCFG2
- WW7CyQOe4h1po+IoKF1QLaPsrY1o1zd23PiLrXZZGwj4F0vACOD72BKXrY53RgXoEtSt
- xRWscMywkvvZhWvWKsuq85WtsKlT4h/letz75GVQT1lz4lOW4JZURg1Wlur11q5iaeNx
- fQBg==
-X-Gm-Message-State: AFqh2kqnvYz+z1vFk4hNnAO/lL8h8SDse2AtUqqS+vlENx9zyADWx/r7
- oURHwF+sQvd/bdrEZBvJlmeTkWyOZFZ6k02MtViGwRQwyl3d8aSWTHnu1bT43cpUnYuWYhW2sLL
- kFgmSkhd54QDiJBqY8zkqGDdMDNzHWD3FHXvLhaAbM+ilLRw=
-X-Received: by 2002:a25:34c6:0:b0:6cf:e761:41ed with SMTP id
- b189-20020a2534c6000000b006cfe76141edmr5112548yba.82.1672830417678; 
- Wed, 04 Jan 2023 03:06:57 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXsquE6jX6u+kSeXsyC7x9ikGorHIML9vZ3cJs6sJAdc1jfFtajlgetVz8GBRrLcbknYbcKWgaA4KdobBH18oPs=
-X-Received: by 2002:a25:34c6:0:b0:6cf:e761:41ed with SMTP id
- b189-20020a2534c6000000b006cfe76141edmr5112546yba.82.1672830417406; Wed, 04
- Jan 2023 03:06:57 -0800 (PST)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AACE710E6E7
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Jan 2023 05:42:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1673415733; x=1704951733;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=ohvmO11ya7nC4GEAelDDnwDO64+UBltPG8ZTLo8ThQA=;
+ b=Dkm9aIKbBuq0rHziiF6Dvf9v6Ai8bexg44dA/LT43CIO24Jf8SXMKJSM
+ DYSwErd5BHfMOIt381y1/wlu35vkZJm9KHnx4oSuMmdVKmeg+hBibietE
+ NYYwz40V1dn/n7dXNlJX7sWCzzwrIA/9bwDwkTIrS/zQI6d5uweJEVCwa
+ bT6Q9DMqvC5Y/KkffMVnaKIa2LELozuGIiuf+YVAPoi9uqjIhx29wpn8w
+ fK+KSwD/j0zXvc011D0/M9+/tJ7lHkFc7Vk36Hu+3Zg1MLb/ksP//sT7U
+ EQsJwEV1f2Z98cmlGMzTdmEdmYp+Vt4E+r7A2YL218dENzqurdRb9Zrqy A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10586"; a="321027222"
+X-IronPort-AV: E=Sophos;i="5.96,315,1665471600"; d="scan'208";a="321027222"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Jan 2023 21:42:13 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10586"; a="634832408"
+X-IronPort-AV: E=Sophos;i="5.96,315,1665471600"; d="scan'208";a="634832408"
+Received: from vkasired-desk2.fm.intel.com ([10.105.128.127])
+ by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Jan 2023 21:42:12 -0800
+From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+To: spice-devel@lists.freedesktop.org
+Date: Tue, 10 Jan 2023 21:22:35 -0800
+Message-Id: <20230111052239.781285-1-vivek.kasireddy@intel.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-References: <a95fc8c4-6384-4b9a-7e09-878dab49c164@couderc.eu>
- <CAAg9qJ0MRKu8RnONLAEum1asJaYerTcCWjPQLt05fk4qbW9JHQ@mail.gmail.com>
- <accf4220-d9ec-e752-9ee3-1c97c232775d@couderc.eu>
-In-Reply-To: <accf4220-d9ec-e752-9ee3-1c97c232775d@couderc.eu>
-From: Uri Lublin <ulublin@redhat.com>
-Date: Wed, 4 Jan 2023 13:06:46 +0200
-Message-ID: <CAAg9qJ0cusgrS77APGyiiFb=cYhObfK3Kz9r+7hT=bbsTdPX3g@mail.gmail.com>
-To: Pierre Couderc <pierre@couderc.eu>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="000000000000cca3b405f16e2e16"
-Subject: Re: [Spice-devel] In spicy,
- how to change shft-F12 to ungrab the mouse ?
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Spice-devel] [RFC v1 0/4] gstreamer-encoder: Use a dmabuf
+ allocator if the drawable has a valid fd
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,119 +55,44 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: Dongwon Kim <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000cca3b405f16e2e16
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This patch series enables creation of Gst memory using a dmabuf fd
+as the source. This ability is useful given that dmabuf is the
+standard mechanism for sharing buffers between various drivers and
+userspace in many Graphics and Media usecases. Currently, this is
+only used/tested with Qemu and remote-viewer using the x264enc/dec
+codec to stream the Guest desktop but it can be extended to other
+plugins and applications.
 
-Hi Pierre,
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
+Cc: Dongwon Kim <dongwon.kim@intel.com>
 
-On Tue, Jan 3, 2023 at 8:30 PM Pierre Couderc <pierre@couderc.eu> wrote:
+Vivek Kasireddy (4):
+  red-parse-qxl: Extract the dmabuf fd from the scanout
+  display-channel: Add the asyncs associated with dmabuf encode
+  gstreamer-encoder: Use a dmabuf allocator if the drawable has a valid
+    fd
+  video-stream: Force stream creation for a valid dmabuf fd
 
->
-> Le 1/3/23 =C3=A0 14:38, Uri Lublin a =C3=A9crit :
->
-> Hi,
->
-> Happy new year everybody.
->
-> On Wed, Dec 28, 2022 at 11:11 AM Pierre Couderc <pierre@couderc.eu> wrote=
-:
->
->> Is is possible ? how ?
->>
->
-> You can try adding the following to spicy configuration file
-> (e.g. in $HOME/.config/spicy/settings on my Fedora), under [general]:
-> grab-sequence=3DAlt_L+Control_L
->
-> Hope that helps,
->     Uri.
->
-> Thnk you, it helps very much...
->
-> It works. But I amsurprised that if I try to change Alt_L+Control_L for
-> exmple Alt_G+Control_G it does not work...
->
-> Aniway, Alt_L+Control_L is enogh for my needs...
->
+ meson.build                |  2 +-
+ server/dcc-send.cpp        | 28 ++++++++++++++++++++++++
+ server/display-channel.cpp |  9 ++++++++
+ server/display-channel.h   |  2 ++
+ server/gstreamer-encoder.c | 44 +++++++++++++++++++++++++++++++++++---
+ server/red-parse-qxl.cpp   |  8 +++++++
+ server/red-parse-qxl.h     |  1 +
+ server/red-qxl.cpp         | 26 ++++++++++++++++++++++
+ server/red-qxl.h           |  1 +
+ server/spice-qxl.h         |  2 ++
+ server/spice-server.syms   |  1 +
+ server/video-encoder.h     |  7 ++++++
+ server/video-stream.cpp    | 14 +++++++++---
+ 13 files changed, 138 insertions(+), 7 deletions(-)
 
-Alt_L is the left Alt key and Alt_R is the right one.
-If you want you can try with Alt_L+Control_L+g or even just ALT_L+g
-
-I agree with Victor, spicy is a testing tool.
-
-Cheers,
-    Uri.
-
---000000000000cca3b405f16e2e16
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Hi Pierre,<br></div><br><div class=3D"gma=
-il_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 3, 2023 at 8:30=
- PM Pierre Couderc &lt;<a href=3D"mailto:pierre@couderc.eu">pierre@couderc.=
-eu</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-">
- =20
-   =20
- =20
-  <div>
-    <p><br>
-    </p>
-    <div>Le 1/3/23 =C3=A0 14:38, Uri Lublin a =C3=A9crit=C2=A0:<br>
-    </div>
-    <blockquote type=3D"cite">
-     =20
-      <div dir=3D"ltr">
-        <div dir=3D"ltr">
-          <div dir=3D"ltr">
-            <div>Hi,</div>
-            <div><br>
-            </div>
-            <div>Happy new year everybody.</div>
-          </div>
-        </div>
-        <br>
-        <div class=3D"gmail_quote">
-          <div dir=3D"ltr" class=3D"gmail_attr">On Wed, Dec 28, 2022 at
-            11:11 AM Pierre Couderc &lt;<a href=3D"mailto:pierre@couderc.eu=
-" target=3D"_blank">pierre@couderc.eu</a>&gt;
-            wrote:<br>
-          </div>
-          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Is is possible =
-? how ?<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>You can try adding the following to spicy configuration
-            file</div>
-          <div>(e.g. in $HOME/.config/spicy/settings on my Fedora),
-            under [general]:</div>
-          <div>grab-sequence=3DAlt_L+Control_L</div>
-          <div><br>
-          </div>
-          <div>Hope that helps,</div>
-          <div>=C2=A0=C2=A0=C2=A0 Uri.<br>
-          </div>
-          <br>
-        </div>
-      </div>
-    </blockquote>
-    <p>Thnk you, it helps very much...</p>
-    <p>It works. But I amsurprised that if I try to change
-      Alt_L+Control_L for exmple Alt_G+Control_G it does not work...</p>
-    <p>Aniway, Alt_L+Control_L is enogh for my needs...<br></p></div></bloc=
-kquote><div><br></div><div>Alt_L is the left Alt key and Alt_R is the right=
- one.</div><div>If you want you can try with Alt_L+Control_L+g or even just=
- ALT_L+g</div><div><br></div><div>I agree with Victor, spicy is a testing t=
-ool.</div><div><br></div><div>Cheers,</div><div>=C2=A0=C2=A0=C2=A0 Uri.<br>=
-</div></div></div>
-
---000000000000cca3b405f16e2e16--
+-- 
+2.37.2
 
