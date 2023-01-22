@@ -1,68 +1,66 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CE6A676DB3
-	for <lists+spice-devel@lfdr.de>; Sun, 22 Jan 2023 15:32:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF6FA676DBF
+	for <lists+spice-devel@lfdr.de>; Sun, 22 Jan 2023 15:41:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 805EA10E03E;
-	Sun, 22 Jan 2023 14:32:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A33E10E0FC;
+	Sun, 22 Jan 2023 14:41:33 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DC4B310E03E
- for <spice-devel@lists.freedesktop.org>; Sun, 22 Jan 2023 14:31:59 +0000 (UTC)
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-1433ef3b61fso11407334fac.10
- for <spice-devel@lists.freedesktop.org>; Sun, 22 Jan 2023 06:31:59 -0800 (PST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DE90810E0FC
+ for <spice-devel@lists.freedesktop.org>; Sun, 22 Jan 2023 14:41:30 +0000 (UTC)
+Received: by mail-ot1-x329.google.com with SMTP id
+ cm26-20020a056830651a00b00684e5c0108dso5911531otb.9
+ for <spice-devel@lists.freedesktop.org>; Sun, 22 Jan 2023 06:41:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ztfR4pfNXkN9GZEUOCOtErq/NZQkClGYk2I15B6C1Ko=;
- b=ieuU5PBowEQ69/PD1DbEzMp3NEwxvnK9MV8pgG7AZoxeQ04ryl9cfFi5X5oG8x6NUg
- xlYaCgJAh5+/AtV6+70qE7rvE0bh1RPTki1pF3OSDq47HsYDvolIdbmdSzUAF6wWS3CD
- Y5PRSC94AlNAjV5IGt5+A+ee5XQ1TZ3VO+cknVqKYYiT5+hYG6J2VIWtqcEcWe85xM4T
- USHjAQqoeg4h70MoDP25qqHPsUhWT71NE27x315Yl+O2vgFzjxOL2jU9sCHQQmqXstF2
- RTZQcd0M4D1LHvh52x8LFfDU2zymSjg6QBa6APd+nw9aEVDXNmxWaC6iJaLPJIsKkCT/
- SaDQ==
+ bh=zTitTwTTlaNRS+R9SBFjbB02QBh9oGh275pgyDUCtAQ=;
+ b=SYV3yIwsvPrN0piHdYcmwumvAGOYWX0l+WG2adaECWzxBHu6bZQbbyfJlgBfdFkda3
+ TplrdCuo4XHISHxeKN7pyjGtrI6dQ2df9M7ya5ZzZHM8WUojdjWBOZyttEjOmz3MUeMG
+ 9x6mm27v1R3O3/FX5/ww/In7J6i2L0biBW66wbHwDDfpnFFrTh2puLD8qA1ZcnGBL28n
+ DJMI39rPnbMuPoD2xM25q8c38xej0d8s/sOBRTEufQR4v7UK7oQuDQF6K6+jiacbQ31U
+ JawKvpQ0Abu2UmZYysyjjilVsKHpg/D0i1E04j0egfUMggD7iTspuomIY0Hv+kAZqdUw
+ QlaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ztfR4pfNXkN9GZEUOCOtErq/NZQkClGYk2I15B6C1Ko=;
- b=BYgbd9QZTOrOpOWmP6uyQoe8uqsFvQ9+gV8WRGsD2BTFgxCzRgLZxO7yowgD8r1Bp0
- phlz8xplZBi6n7AhzCwxmbtZkphuxz/yNnNwfolCaO0YCQ5FaTtmcgHQnQLPEbvQCEnT
- 1IN/qiQdWMmizkw6TH9p8cJEo16/qZxYpR5FbBxLcd3hVfy6GwvHAAt+V2bBdeKnQ3W4
- ePb7l6YwzmxQMu6yUJiX9kJTVJazaAbFnUFvP2DTj8GMH9XJWtbjuCRCOilHRD/U8Fnn
- zH1zZ+LCWKVqYf5XSKiESbjxvbpF7IaNHdB/AOSBje13E/4ldn97uicDwPHNQh1HKwIp
- tpfg==
-X-Gm-Message-State: AFqh2krgxV2g2+1jUzP4y23uBtLrT/o+5oS2QDA+qaLV0h84BeBgApM+
- FmGecPijrybSbBRHK2mfKYe185xCqNTJskCtXcA=
-X-Google-Smtp-Source: AMrXdXu7mQY3UlE6bVNnL1nIDpQ5jmm/Bh2LRxDNaxcDajIuEx6Ydvkzu5sWnuNhBjBf7c93mCXAR0FQwS8zf27S0/g=
-X-Received: by 2002:a05:6870:5aa8:b0:15f:d995:3eb4 with SMTP id
- dt40-20020a0568705aa800b0015fd9953eb4mr463316oab.1.1674397919047; Sun, 22 Jan
- 2023 06:31:59 -0800 (PST)
+ bh=zTitTwTTlaNRS+R9SBFjbB02QBh9oGh275pgyDUCtAQ=;
+ b=O1yWfEK1glSdu+pf+JLfSp7MAZkpMHqdw5d1e4ZqTS9R8+XF+d6/h7QIe6VIg/UKLU
+ 9CUw0hPqChz53YoJZTkWj01avF4FxWHdDE9V/AwtOJGrMI/R39LHtudwQxcjRZr8B1LN
+ 4QtOnuWTpkQWTLJr7JMHv9wM9z3q7dfJ5wKDAJGlV8tHK2K7Bon5S85l2dBvuCoHRqTi
+ 3gwknZn43uEuLCcbvsLkdS5g6PJVktGxyiXHHh2pmdTF7Mys/sNEVtexysvBYZh4mb8z
+ 5+2+KZEZzuknGqvKWTTosOvRyzl/NkGh7/e7qrQnIBXZFc/eCsetUef4y54YXHGAM/KX
+ O4DA==
+X-Gm-Message-State: AFqh2kqT/ASyBjIbk5gubohN1b/+wG82I4aaWr6PLrN/B1wq4PDUiv2k
+ 17bsR1bZq8pEPwkDobzWy9ZDGoAmTg8nwgfYwa8=
+X-Google-Smtp-Source: AMrXdXsi7BPcZ8WH5FURGE9vIAudvvO+knTukUKLBPXVBmdwORDfStrjWsHpK1x9DcPAOVEPCItF838JUks5OBH95Yg=
+X-Received: by 2002:a05:6830:232f:b0:670:6517:a61f with SMTP id
+ q15-20020a056830232f00b006706517a61fmr1250190otg.369.1674398490149; Sun, 22
+ Jan 2023 06:41:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20230111052239.781285-1-vivek.kasireddy@intel.com>
- <20230111052239.781285-2-vivek.kasireddy@intel.com>
- <CAHt6W4cgJcW2+2+A==q6n25FK0T9LV_Q=H6Fh7SEXWogcxfvvg@mail.gmail.com>
- <IA0PR11MB7185E2A4761E1AE80C9ABAC4F8FD9@IA0PR11MB7185.namprd11.prod.outlook.com>
- <CAHt6W4e3V_PeemUYZbiSMBKG2yZX_aZz+8GfSMzSQeVOkzS34w@mail.gmail.com>
- <IA0PR11MB7185354C3DDA03A4AEFCE76EF8C29@IA0PR11MB7185.namprd11.prod.outlook.com>
- <CAHt6W4cuFfknFJecgnpXY2zPf4apiLAUj=kV=-VjTkCYPyXgWQ@mail.gmail.com>
- <IA0PR11MB71856ED6679A4CA79469E871F8C19@IA0PR11MB7185.namprd11.prod.outlook.com>
-In-Reply-To: <IA0PR11MB71856ED6679A4CA79469E871F8C19@IA0PR11MB7185.namprd11.prod.outlook.com>
+ <20230111052239.781285-3-vivek.kasireddy@intel.com>
+ <CAHt6W4cVJP4stB7j0S+ZG3gdgq1NAyRi0EyERcHeOw0ydeapWg@mail.gmail.com>
+ <IA0PR11MB71853B6E9AC8B35FA2026C8CF8FD9@IA0PR11MB7185.namprd11.prod.outlook.com>
+ <CAHt6W4eUsQ2E2Cfs1cBuyQNmEBWEd7j-sGr47hE2RsWFjwTzaw@mail.gmail.com>
+ <IA0PR11MB71857695213EDA1121D274BDF8C29@IA0PR11MB7185.namprd11.prod.outlook.com>
+In-Reply-To: <IA0PR11MB71857695213EDA1121D274BDF8C29@IA0PR11MB7185.namprd11.prod.outlook.com>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sun, 22 Jan 2023 14:31:47 +0000
-Message-ID: <CAHt6W4fhjdK5eG27tCPQCLJaoSUJRPtdAqr+_yhW11JLYctf4A@mail.gmail.com>
+Date: Sun, 22 Jan 2023 14:41:18 +0000
+Message-ID: <CAHt6W4dcvr_ODwkLDEd4zMbJYt6wN0ozwv4dhgEgpbjZU+AERg@mail.gmail.com>
 To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] [RFC v1 1/4] red-parse-qxl: Extract the dmabuf fd
- from the scanout
+Subject: Re: [Spice-devel] [RFC v1 2/4] display-channel: Add the asyncs
+ associated with dmabuf encode
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,211 +77,240 @@ Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno lun 16 gen 2023 alle ore 09:00 Kasireddy, Vivek
+Il giorno ven 13 gen 2023 alle ore 04:08 Kasireddy, Vivek
 <vivek.kasireddy@intel.com> ha scritto:
 >
 > Hi Frediano,
 >
 > >
-> > Il giorno ven 13 gen 2023 alle ore 04:08 Kasireddy, Vivek
+> > Il giorno gio 12 gen 2023 alle ore 07:03 Kasireddy, Vivek
 > > <vivek.kasireddy@intel.com> ha scritto:
 > > >
 > > > Hi Frediano,
 > > >
 > > > >
-> > > > Il giorno gio 12 gen 2023 alle ore 07:03 Kasireddy, Vivek
+> > > > Il giorno mer 11 gen 2023 alle ore 05:42 Vivek Kasireddy
 > > > > <vivek.kasireddy@intel.com> ha scritto:
 > > > > >
-> > > > > Hi Frediano,
-> > > > >
-> > > > > Thank you for taking a look at this patch series.
-> > > > >
-> > > > > >
-> > > > > > Il giorno mer 11 gen 2023 alle ore 05:42 Vivek Kasireddy
-> > > > > > <vivek.kasireddy@intel.com> ha scritto:
-> > > > > > >
-> > > > > > > If the scanout has a valid dmabuf fd, then it is extracted an=
-d a
-> > > > > > > copy (of the fd) is stored in the drawable.
-> > > > > > >
-> > > > > > > Cc: Gerd Hoffmann <kraxel@redhat.com>
-> > > > > > > Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> > > > > > > Cc: Dongwon Kim <dongwon.kim@intel.com>
-> > > > > > > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> > > > > > > ---
-> > > > > > >  server/red-parse-qxl.cpp | 8 ++++++++
-> > > > > > >  server/red-parse-qxl.h   | 1 +
-> > > > > > >  2 files changed, 9 insertions(+)
-> > > > > > >
-> > > > > > > diff --git a/server/red-parse-qxl.cpp b/server/red-parse-qxl.=
-cpp
-> > > > > > > index 68b9759d..8d9b82fb 100644
-> > > > > > > --- a/server/red-parse-qxl.cpp
-> > > > > > > +++ b/server/red-parse-qxl.cpp
-> > > > > > > @@ -1038,6 +1038,7 @@ static bool
-> > red_get_native_drawable(QXLInstance
-> > > > > > *qxl_instance, RedMemSlotInfo *s
-> > > > > > >                                      RedDrawable *red, QXLPHY=
-SICAL addr,
-> > uint32_t
-> > > > flags)
-> > > > > > >  {
-> > > > > > >      QXLDrawable *qxl;
-> > > > > > > +    SpiceMsgDisplayGlScanoutUnix *scanout;
-> > > > > > >      int i;
-> > > > > > >
-> > > > > > >      qxl =3D static_cast<QXLDrawable *>(memslot_get_virt(slot=
-s, addr,
-> > > > > > sizeof(*qxl), group_id));
-> > > > > > > @@ -1059,6 +1060,13 @@ static bool
-> > > > red_get_native_drawable(QXLInstance
-> > > > > > *qxl_instance, RedMemSlotInfo *s
-> > > > > > >          red_get_rect_ptr(&red->surfaces_rects[i], &qxl->surf=
-aces_rects[i]);
-> > > > > > >      }
-> > > > > > >
-> > > > > > > +    red->dmabuf_fd =3D 0;
-> > > > > >
-> > > > > > 0 is a perfectly valid file descriptor, usually invalid file
-> > > > > > descriptors are initialized with -1.
-> > > > > [Kasireddy, Vivek] Ok, I'll initialize it to -1.
-> > > > >
-> > > > > >
-> > > > > > > +    scanout =3D red_qxl_get_gl_scanout(qxl_instance);
-> > > > > > > +    if (scanout !=3D nullptr) {
-> > > > > > > +        red->dmabuf_fd =3D scanout->drm_dma_buf_fd;
-> > > > > > > +    }
-> > > > > > > +    red_qxl_put_gl_scanout(qxl_instance, scanout);
-> > > > > > > +
-> > > > > > >      red->type =3D qxl->type;
-> > > > > > >      switch (red->type) {
-> > > > > > >      case QXL_DRAW_ALPHA_BLEND:
-> > > > > > > diff --git a/server/red-parse-qxl.h b/server/red-parse-qxl.h
-> > > > > > > index 8bf0e2e3..dee50743 100644
-> > > > > > > --- a/server/red-parse-qxl.h
-> > > > > > > +++ b/server/red-parse-qxl.h
-> > > > > > > @@ -67,6 +67,7 @@ struct RedDrawable final: public
-> > > > > > RedQXLResource<RedDrawable> {
-> > > > > > >          SpiceWhiteness whiteness;
-> > > > > > >          SpiceComposite composite;
-> > > > > > >      } u;
-> > > > > > > +    int32_t dmabuf_fd;
-> > > > > > >  };
-> > > > > > >
-> > > > > > >  struct RedUpdateCmd final: public RedQXLResource<RedUpdateCm=
-d>
-> > {
-> > > > > >
-> > > > > > This patch looks pretty error prone, it's easy to generate leak=
-s or
-> > > > > > use after free (of file descriptor).
-> > > > > [Kasireddy, Vivek] At-least with Qemu, we usually hand over a dup=
- of the
-> > > > original
-> > > > > fd to Spice server with the assumption that the server will close=
- it after it is
-> > > > > done using it.
-> > > > >
-> > > > > > Also it adds the assumption that the drawing is always associat=
-ed with
-> > > > > > the DMA surface which is racy.
-> > > > > [Kasireddy, Vivek] I see that access to the scanout and drm_dma_b=
-uf_fd is
-> > > > protected
-> > > > > with a scanout_mutex. Are you suggesting that using
-> > red_qxl_get/put_gl_scanout
-> > > > is
-> > > > > not going to be sufficient to prevent races?
+> > > > > This async is triggered by the encoder indicating that the
+> > > > > encoding process is completed.
 > > > > >
 > > > >
-> > > > No, now you created 3 copies and only one is protected by that mute=
-x.
-> > > > The race is in resource management.
-> > > [Kasireddy, Vivek] My understanding is that applications are supposed=
- to wait
-> > until
-> > > the encoding is done before submitting another frame/fd. I am not sur=
-e if it is
-> > naive
-> > > to assume that. Anyway, what do you suggest needs to happen if they s=
-ubmit
-> > > another fd while the encoding of the previous fd has not been complet=
-ed yet?
+> > > > This description does not make much sense to me.
+> > > > You are adding a public function which, I suppose, should be called=
+ by
+> > > > Qemu but you are stating the encoder is calling it.
+> > > > Unless Qemu is the encoder it does not make sense.
+> > > [Kasireddy, Vivek] Sorry for the poor, misleading description. I orig=
+inally
+> > > had this patch split into two, one for each async function and forgot=
+ to
+> > > update the commit message when I merged them. I'll update the
+> > > commit message in v2 which would probably have the following desc:
+> > > "This patch mainly adds two async functions: a public one and an
+> > > internal one. The public function spice_qxl_dmabuf_encode_async is
+> > > used by applications that would share their fd with the Spice server.
+> >
+> > I don't see a reason for the new API, it's just doing a combination of
+> > spice_qxl_gl_scanout + spice_qxl_gl_draw_async.
+> [Kasireddy, Vivek] I had considered reusing these functions for my use-ca=
+se
+> but decided against cluttering them. Anyway, do you think it is ok to add=
+ a
+> new parameter or a flag to these public APIs to prevent them from doing
+> qxl_state->send_message() because my use-case does not involve sending
+> any messages (neither RedWorkerMessageGlDraw nor
+> RedWorkerMessageGlScanout) to the client.
+>
+
+On the other end you are cluttering public API, Qemu and user usage.
+To use local connection you have to setup the VM in a different way
+than remote connection so you would have either to ask the
+administrator to reconfigure and restart the VM or having a possible
+suboptimal (or not working) connection. Doing inside spice-server
+won't require VM setup change (because spice-server can choose the way
+of handling it).
+About qxl_state->send_message() you need to do it, it has nothing to
+do with client handling but has to do with the way spice-server
+handles threading. If you don't do it you will create thread problems.
+There's a "spice_threading_model.txt" document inside the "docs"
+directory. Basically it's a message for the DisplayChannel thread to
+do something.
+
+> >
+> > > The internal function red_qxl_dmabuf_encode_async_complete is only
+> > > used by the Spice server to indicate completion of the encoding proce=
+ss
+> > > and send the completion cookie to applications."
 > > >
 > >
-> > Hi,
-> >    maybe a step back is helpful here.
+> > That's what red_qxl_gl_draw_async_complete is doing.
+> [Kasireddy, Vivek] Yeah, this one, I can totally reuse.
+>
 > >
-> > What is, from a high level perspective (that is, possibly no code
-> > level) your objective?
-> > What's the setup? virtio-vga? Remote? Local?
-> [Kasireddy, Vivek] My objective (and setup) is described in the associate=
-d Qemu
-> patch series here:
-> https://lists.nongnu.org/archive/html/qemu-devel/2023-01/msg02094.html
->
-> In a nutshell, I'd like to send the fd associated with the Guest desktop =
-Framebuffer
-> (that Qemu obtains) to the Gstreamer encoder (that is part of Spice) to h=
-ave it
-> streamed to a remote client.
->
-
-Good, now it's more clear.
-
-> >
-> > Back a bit on API level and your specific question, there are 2
-> > functions, spice_qxl_gl_scanout
-> > and spice_qxl_gl_draw_async. An application (like Qemu) should set the
-> > current active scanout (as dmabuf)
-> > spice_qxl_gl_scanout. The dmabuf ownership is passed to SPICE (which
-> > will take care of closing
-> > the file descriptor). The application will request to use the current
-> > scanout using spice_qxl_gl_draw_async.
-> > Application should wait to update the current scanout till SPICE
-> > finishes "drawing" (that is using the scanout
-> > content).
-> > Application can request multiple drawings using the same scanout (that
-> > is a single spice_qxl_gl_scanout
-> > can be followed by multiple spice_qxl_gl_draw_async calls).
-> [Kasireddy, Vivek] Thank you for the explanation; however, IIUC, what you
-> described seems relevant for a local client. I suspect most of what you s=
-aid
-> would probably be applicable for a remote client as well given my use-cas=
-e
-> (fd to encoder).
->
-
-What you do with the information you get is implementation detail, not
-interface detail.
-I don't see why such an interface has to forcely deal with local
-clients. It's and should be agnostic to client type.
-
-> >
-> > > Also, my goal is to somehow get the fd from the application (Qemu) to=
- the
-> > encoder.
-> >
-> > SPICE already has the fd so IMHO you just need to forward to the encode=
-r.
-> [Kasireddy, Vivek] This, I think is the crux of the issue. That is, how t=
-o forward
-> the fd (from the scanout object which is a singleton) to the encoder in t=
-he most
-> efficient and race-free way. I chose to use the drawable as a means to ac=
-complish
-> this but I think there might be a better way.
->
-
-Race free and using drawable are IMHO separate things. I wish there
-would be an easier and better way too. But yes, I agree at the moment
-it's the shortest way. To be honest GStreamer uses the drawable
-(technically you are using RedDrawable... the code is a bit weird in
-this respect, there's also a Drawable structure which has a
-RedDrawable structure) but only when that drawable is a simple bitmap.
-So I would say the drawable solution, although a hack, it's a viable
-solution.
-
-> Thanks,
-> Vivek
->
+> > > >
+> > > > > Cc: Gerd Hoffmann <kraxel@redhat.com>
+> > > > > Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> > > > > Cc: Dongwon Kim <dongwon.kim@intel.com>
+> > > > > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+> > > > > ---
+> > > > >  server/display-channel.cpp |  9 +++++++++
+> > > > >  server/display-channel.h   |  2 ++
+> > > > >  server/red-qxl.cpp         | 26 ++++++++++++++++++++++++++
+> > > > >  server/red-qxl.h           |  1 +
+> > > > >  server/spice-qxl.h         |  2 ++
+> > > > >  server/spice-server.syms   |  1 +
+> > > > >  6 files changed, 41 insertions(+)
+> > > > >
+> > > > > diff --git a/server/display-channel.cpp b/server/display-channel.=
+cpp
+> > > > > index 4bd0cf41..81df5420 100644
+> > > > > --- a/server/display-channel.cpp
+> > > > > +++ b/server/display-channel.cpp
+> > > > > @@ -2334,6 +2334,15 @@ void
+> > > > display_channel_gl_draw_done(DisplayChannel *display)
+> > > > >      set_gl_draw_async_count(display, display->priv->gl_draw_asyn=
+c_count -
+> > 1);
+> > > > >  }
+> > > > >
+> > > > > +void display_channel_encode_done(DisplayChannel *display,
+> > > > > +                                 RedDrawable *red_drawable)
+> > > > > +{
+> > > > > +    if (red_drawable->dmabuf_fd > 0) {
+> > > > > +        red_qxl_dmabuf_encode_async_complete(display->priv->qxl)=
+;
+> > > > > +        red_drawable->dmabuf_fd =3D 0;
+> > > > > +    }
+> > > > > +}
+> > > > > +
+> > > > >  int display_channel_get_video_stream_id(DisplayChannel *display,
+> > > > VideoStream *stream)
+> > > > >  {
+> > > > >      return static_cast<int>(stream - display->priv->streams_buf.=
+data());
+> > > > > diff --git a/server/display-channel.h b/server/display-channel.h
+> > > > > index c54df25c..0a1e520c 100644
+> > > > > --- a/server/display-channel.h
+> > > > > +++ b/server/display-channel.h
+> > > > > @@ -127,6 +127,8 @@ void                       display_channel_gl=
+_scanout
+> > > > (DisplayCha
+> > > > >  void                       display_channel_gl_draw              =
+     (DisplayChannel
+> > > > *display,
+> > > > >                                                                  =
+      SpiceMsgDisplayGlDraw *draw);
+> > > > >  void                       display_channel_gl_draw_done         =
+     (DisplayChannel
+> > > > *display);
+> > > > > +void                       display_channel_encode_done          =
+     (DisplayChannel
+> > > > *display,
+> > > > > +                                                                =
+      RedDrawable *drawable);
+> > > > >
+> > > > >  void display_channel_process_draw(DisplayChannel *display,
+> > > > >                                    red::shared_ptr<RedDrawable> &=
+&red_drawable,
+> > > > > diff --git a/server/red-qxl.cpp b/server/red-qxl.cpp
+> > > > > index 48c293ae..42a4029b 100644
+> > > > > --- a/server/red-qxl.cpp
+> > > > > +++ b/server/red-qxl.cpp
+> > > > > @@ -493,6 +493,32 @@ void
+> > red_qxl_gl_draw_async_complete(QXLInstance
+> > > > *qxl)
+> > > > >      red_qxl_async_complete(qxl, cookie);
+> > > > >  }
+> > > > >
+> > > > > +SPICE_GNUC_VISIBLE
+> > > > > +void spice_qxl_dmabuf_encode_async(QXLInstance *qxl,
+> > > > > +                                   int fd, uint64_t cookie)
+> > > > > +{
+> > > > > +    QXLState *qxl_state;
+> > > > > +
+> > > > > +    spice_return_if_fail(qxl !=3D nullptr);
+> > > > > +    qxl_state =3D qxl->st;
+> > > > > +
+> > > > > +    qxl_state->scanout.drm_dma_buf_fd =3D fd;
+> > > > > +    qxl_state->gl_draw_cookie =3D cookie;
+> > > >
+> > > > This behaviour is prone to leak resources.
+> > > [Kasireddy, Vivek] I guess I could do what spice_qxl_gl_scanout does:
+> > > that is, prevent the (Gstreamer) encoder from closing the fd and inst=
+ead
+> > > do the following here:
+> > >     pthread_mutex_lock(&qxl_state->scanout_mutex);
+> > >
+> > >     if (qxl_state->scanout.drm_dma_buf_fd >=3D 0) {
+> > >         close(qxl_state->scanout.drm_dma_buf_fd);
+> > >     }
+> > >
+> > > Do you think this would help?
+> > >
+> > > Thanks,
+> > > Vivek
+> > >
+> > > >
+> > > > > +}
+> > > > > +
+> > > > > +void red_qxl_dmabuf_encode_async_complete(QXLInstance *qxl)
+> > > > > +{
+> > > > > +    QXLState *qxl_state =3D qxl->st;
+> > > > > +    uint64_t cookie =3D qxl->st->gl_draw_cookie;
+> > > > > +
+> > > > > +    if (cookie =3D=3D GL_DRAW_COOKIE_INVALID) {
+> > > > > +        return;
+> > > > > +    }
+> > > > > +    qxl_state->scanout.drm_dma_buf_fd =3D 0;
+> > > > > +    qxl->st->gl_draw_cookie =3D GL_DRAW_COOKIE_INVALID;
+> > > > > +    red_qxl_async_complete(qxl, cookie);
+> > > > > +}
+> > > > > +
+> > > > >  SPICE_GNUC_VISIBLE
+> > > > >  void spice_qxl_set_device_info(QXLInstance *instance,
+> > > > >                                 const char *device_address,
+> > > > > diff --git a/server/red-qxl.h b/server/red-qxl.h
+> > > > > index 2084acb1..e8e7c373 100644
+> > > > > --- a/server/red-qxl.h
+> > > > > +++ b/server/red-qxl.h
+> > > > > @@ -40,6 +40,7 @@ bool red_qxl_get_allow_client_mouse(QXLInstance
+> > *qxl,
+> > > > int *x_res, int *y_res, in
+> > > > >  SpiceMsgDisplayGlScanoutUnix *red_qxl_get_gl_scanout(QXLInstance
+> > *qxl);
+> > > > >  void red_qxl_put_gl_scanout(QXLInstance *qxl,
+> > > > SpiceMsgDisplayGlScanoutUnix *scanout);
+> > > > >  void red_qxl_gl_draw_async_complete(QXLInstance *qxl);
+> > > > > +void red_qxl_dmabuf_encode_async_complete(QXLInstance *qxl);
+> > > > >  int red_qxl_check_qxl_version(QXLInstance *qxl, int major, int m=
+inor);
+> > > > >  SpiceServer* red_qxl_get_server(QXLState *qxl);
+> > > > >  uint32_t red_qxl_marshall_device_display_info(const QXLInstance =
+*qxl,
+> > > > SpiceMarshaller *m);
+> > > > > diff --git a/server/spice-qxl.h b/server/spice-qxl.h
+> > > > > index bf17476b..ca9816ec 100644
+> > > > > --- a/server/spice-qxl.h
+> > > > > +++ b/server/spice-qxl.h
+> > > > > @@ -92,6 +92,8 @@ void spice_qxl_gl_draw_async(QXLInstance *qxl,
+> > > > >                               uint32_t x, uint32_t y,
+> > > > >                               uint32_t w, uint32_t h,
+> > > > >                               uint64_t cookie);
+> > > > > +void spice_qxl_dmabuf_encode_async(QXLInstance *qxl,
+> > > > > +                                   int fd, uint64_t cookie);
+> > > > >
+> > > > >  /* since spice 0.14.2 */
+> > > > >
+> > > > > diff --git a/server/spice-server.syms b/server/spice-server.syms
+> > > > > index 8da46c20..9748cc24 100644
+> > > > > --- a/server/spice-server.syms
+> > > > > +++ b/server/spice-server.syms
+> > > > > @@ -182,4 +182,5 @@ SPICE_SERVER_0.14.3 {
+> > > > >  global:
+> > > > >      spice_server_get_video_codecs;
+> > > > >      spice_server_free_video_codecs;
+> > > > > +    spice_qxl_dmabuf_encode_async;
+> > > > >  } SPICE_SERVER_0.14.2;
+> > > >
+> > > > Frediano
