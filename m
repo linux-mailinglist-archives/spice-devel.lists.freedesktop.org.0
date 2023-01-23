@@ -2,60 +2,60 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF7DD677BB5
-	for <lists+spice-devel@lfdr.de>; Mon, 23 Jan 2023 13:53:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22FA7677C75
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Jan 2023 14:30:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C773710E48D;
-	Mon, 23 Jan 2023 12:53:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1D2E10E493;
+	Mon, 23 Jan 2023 13:30:16 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A5D510E48D
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Jan 2023 12:52:58 +0000 (UTC)
-Received: by mail-oi1-x231.google.com with SMTP id n8so10299466oih.0
- for <spice-devel@lists.freedesktop.org>; Mon, 23 Jan 2023 04:52:58 -0800 (PST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7AB8410E493
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Jan 2023 13:30:15 +0000 (UTC)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-1442977d77dso13882355fac.6
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Jan 2023 05:30:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pcM8CfgPh8I4omGH/YbeVk76IG/ZTtWQwFAVzt98gVY=;
- b=jL+t45BpSyycfcRsfdqdgAs58K7KRk9ClUBvQE6chfnlI5Jtt8vngaxZpepHhPLtJa
- 5+4fwmtDuRodKyQ2+7zssj/munZHQOXyhlkILi9vsoOE+NkL031D+izk8NBxR7AZUjyP
- mQGGmUu1MQcBJDsJwuOaqpyiVTakWBH9mz4rAoCZD+Zkv0dbtZwMj6YT+z0iul6aUN8/
- fd5ornrYm7bjhhd7Av+EimwCJMA+2rhZLK9tgaGDeqkRrRnMz1hvww6B95GBCCuZ8Ytn
- gj3URQ92Kc/yoYFzYmKZot9X38NVYH2ajLNbISYwUKBBxdkpzseZSJAow/0hY+paCdX9
- alEA==
+ bh=hm+P6f0W2tTTfIrsMdGSdcPLkT19+xiV1o6p2SL+qNM=;
+ b=d3Uze1iwGTOFEtlBIGQhAOymEtDpz3Eb5ERjiedf4fSauiLihJlajQZIrOcOFFdJrA
+ EOHyRuspycGz8/FXSZYjH8rHlAPbfFEserVaj+YVmNdNlLuAM366qsxJygeep4Zz1a/O
+ AdNk8Q0Yjr/lKxp/Ots9YqthIU3mWq+P2t46mc5SMX1QLTQBShVVfpu1HmtVW7E/hXlB
+ U9jiKJrYZkiymnabs1VbRuMzl/pBIFEjuVhoelfHSNJWzDfPzo0IjKfH2nUC3RZA8uYA
+ O8dlaxJQzvfnsTavlgUd51HHClh+uQB0QI80PSwd4ekhOIkhsAx5i3YRhJjmh8DVQWVL
+ ULzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pcM8CfgPh8I4omGH/YbeVk76IG/ZTtWQwFAVzt98gVY=;
- b=QLT1AEL6iDuhiAmrbvUhJ94mdAzSl9sBwk2QyRjP2OScrelyYgWaV/K4cpocT4euEW
- bZHEt3aYMTVkXo45nMbge9iOouIRg2MWiixKbvwqzE/Tv+C4IeiCTmR5F/gnuIAjDCvn
- ZkbzBiAIEV/16SozUMn1iuQpTl+W2ewxTfxxD2clDHEN62VJErjLdKGGHeAUwrmOiKJZ
- JU19QxGT10gWjffX5ad3ydu632d8R8RywKnivm0a+beJnm9hppzOTZggf4FUOTFY6C+t
- oPyJI97MT5asfvuIrwDW/c1bt/i6AmNJ+Ibf854xHOVnx6NYgzqaQoX8zPizHgqpagj/
- 3IFQ==
-X-Gm-Message-State: AFqh2kqT6keAgVzmhDw5+tD6ywgvW13BXEWj+myF2zGiEY3zoJTmt03G
- 5KZae9g3CfvM4HFFh9wLuio4XAnF38tMMazvwHA=
-X-Google-Smtp-Source: AMrXdXvSxyuSqaT57ahezFJ0hGVfbvZnxfElFLgUIkWpUps6+iEuQrGm182z/bjUwsfi8ru4hRyKkAYGEhUlmNBttm4=
-X-Received: by 2002:a05:6808:3b1:b0:364:ebf2:735c with SMTP id
- n17-20020a05680803b100b00364ebf2735cmr1622764oie.179.1674478376584; Mon, 23
- Jan 2023 04:52:56 -0800 (PST)
+ bh=hm+P6f0W2tTTfIrsMdGSdcPLkT19+xiV1o6p2SL+qNM=;
+ b=XLrtDMW+LCf12s79JKEATuZepv1PwuYTVcmMiG+Dj+XI3xLUsWE/KQcWb2MZBXIWg0
+ XZdPUgM0A0jnBfo6qU7XGdp9Ym6nkl/xQKvZcsVMWBnZZLEApj96ipcazheUA5Z3VPI2
+ kwHBdxyta2acckJBUyX5lLmGqxuYsY33cSle2cg5H79uaswO+rdWAJADsaNPtW2QvAqR
+ U/cbEcFZnck5B5/EcNlkRJVq31DM7JuKpH3Wu8K17aD1G4oBJWbTH/fMGFOLBx4nLtNA
+ Px9GQZmxV4QkEh8yzR4v/0os3bDgtZx8xPZ11Kcz9yzuEqStWb7qu/hq/3UKnSHMt5FK
+ fw6w==
+X-Gm-Message-State: AFqh2kqfMGbAk/xZUcOgLIf8pQ32py/5c2TaPNqSm3JnWQPjM6QwgU9N
+ ke9jF2eiPX8liwMeJGkgx5CcTv+DO4mQHyxVXMv/q9Zy
+X-Google-Smtp-Source: AMrXdXvqFOi6J5Nz1kTCYYIcMUWlV3SiaztDx/JVfFXzgYbnN9lmnAWDZdYYc0Dhd4aSQ374GcASUvgj8inKd4pBcFU=
+X-Received: by 2002:a05:6870:75ce:b0:15b:d2e:d059 with SMTP id
+ de14-20020a05687075ce00b0015b0d2ed059mr2203749oab.179.1674480614756; Mon, 23
+ Jan 2023 05:30:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20230123084123.1038341-1-vivek.kasireddy@intel.com>
- <20230123084123.1038341-6-vivek.kasireddy@intel.com>
-In-Reply-To: <20230123084123.1038341-6-vivek.kasireddy@intel.com>
+In-Reply-To: <20230123084123.1038341-1-vivek.kasireddy@intel.com>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Mon, 23 Jan 2023 12:52:45 +0000
-Message-ID: <CAHt6W4cp_pmt7FknKLQOierqZYT9uNjQWw91O6tvMnYFvs9vxw@mail.gmail.com>
+Date: Mon, 23 Jan 2023 13:30:03 +0000
+Message-ID: <CAHt6W4cJb7OEhhwdX3ULMC2aox_x+S7QZSeFRguvW4kXVVvhzA@mail.gmail.com>
 To: Vivek Kasireddy <vivek.kasireddy@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] [RFC v2 5/5] red-qxl: Add a new parameter to
- gl_scanout and gl_draw_async
+Subject: Re: [Spice-devel] [RFC v2 0/5] gstreamer-encoder: Use a dmabuf
+ allocator if the drawable has a valid fd (v2)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,91 +75,68 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 Il giorno lun 23 gen 2023 alle ore 09:01 Vivek Kasireddy
 <vivek.kasireddy@intel.com> ha scritto:
 >
-> This new parameter (named local_display) can be used by applications
-> to indicate whether they are dealing with a local or remote client.
-> This can be useful to ensure that gl_draw or other associated
-> messages are only sent to local clients.
+> This patch series enables creation of Gst memory using a dmabuf fd
+> as the source. This ability is useful given that dmabuf is the
+> standard mechanism for sharing buffers between various drivers and
+> userspace in many Graphics and Media usecases. Currently, this is
+> only used/tested with Qemu and remote-viewer using the x264enc/dec
+> codec to stream the Guest desktop but it can be extended to other
+> plugins and applications.
+>
+> Here is the flow of things from the Spice server side:
+> - The application calls gl_scanout (to update the fd) and gl_draw_async
+>   and also sets the flag to indicate whether it is dealing with a local
+>   or remote client.
+
+That's weird, it's spice that knows the clients, not Qemu
+
+> - Create a new drawable and extract the dmabuf fd from the scanout
+>   as a response to QXL_CMD_DRAW cmd sent by the application.
+
+Mumble... There's something I don't understand here. Specifically the
+APIs used by Qemu. As far as I remember when Qemu passes a dmabuf
+scanout there should be no QXL_CMD_DRAW command... has this changed?
+That would mean 2 copies of the frame buffer, one for dmabuf and
+another for memory version.
+
+> - Share the drawable's copy of the fd with the Encoder.
+
+As above, this should be already done by Qemu... unless changed.
+
+> - Send the async completion cookie to the application once the encoder
+>   is done using the fd.
 >
 
-It's spice server that knows if the client are local or remote,
-there's no need to have a configuration in Qemu.
+This should already be there too in spice-server code, just not
+supporting the remote case.
 
+> v2:
+> - Used the already existing gl_scanout and gl_draw_async APIs instead
+>   of adding new ones.
+> - Slightly refactored and improved the commits and their messages.
+>
 > Cc: Gerd Hoffmann <kraxel@redhat.com>
 > Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 > Cc: Dongwon Kim <dongwon.kim@intel.com>
-> Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> ---
->  server/red-qxl.cpp | 14 ++++++++++----
->  server/spice-qxl.h |  4 ++--
->  2 files changed, 12 insertions(+), 6 deletions(-)
 >
-> diff --git a/server/red-qxl.cpp b/server/red-qxl.cpp
-> index 48c293ae..14380a60 100644
-> --- a/server/red-qxl.cpp
-> +++ b/server/red-qxl.cpp
-> @@ -426,7 +426,8 @@ void spice_qxl_gl_scanout(QXLInstance *qxl,
->                            int fd,
->                            uint32_t width, uint32_t height,
->                            uint32_t stride, uint32_t format,
-> -                          int y_0_top)
-> +                          int y_0_top,
-> +                          uint32_t local_display)
->  {
->      RedWorkerMessageGlScanout payload =3D { /* empty */ };
->      spice_return_if_fail(qxl !=3D nullptr);
-> @@ -452,7 +453,9 @@ void spice_qxl_gl_scanout(QXLInstance *qxl,
->      pthread_mutex_unlock(&qxl_state->scanout_mutex);
+> Vivek Kasireddy (5):
+>   gstreamer-encoder: Use a dmabuf allocator for a valid fd
+>   display-channel: Extract the dmabuf fd from the scanout
+>   display-channel: Share the drawable's copy of fd with the encoder
+>   video-stream: Force stream creation for a valid dmabuf fd
+>   red-qxl: Add a new parameter to gl_scanout and gl_draw_async
 >
->      /* FIXME: find a way to coallesce all pending SCANOUTs */
-> -    qxl_state->send_message(payload);
-> +    if (local_display) {
-> +        qxl_state->send_message(payload);
-> +    }
->      reds_update_client_mouse_allowed(qxl_state->reds);
->  }
+>  meson.build                |  2 +-
+>  server/dcc-send.cpp        | 30 ++++++++++++++++++++++++
+>  server/display-channel.cpp | 23 ++++++++++++++++++
+>  server/display-channel.h   |  4 ++++
+>  server/gstreamer-encoder.c | 48 +++++++++++++++++++++++++++++++++++---
+>  server/red-qxl.cpp         | 14 +++++++----
+>  server/spice-qxl.h         |  4 ++--
+>  server/video-encoder.h     |  7 ++++++
+>  server/video-stream.cpp    | 11 ++++++++-
+>  9 files changed, 132 insertions(+), 11 deletions(-)
 >
-> @@ -460,7 +463,8 @@ SPICE_GNUC_VISIBLE
->  void spice_qxl_gl_draw_async(QXLInstance *qxl,
->                               uint32_t x, uint32_t y,
->                               uint32_t w, uint32_t h,
-> -                             uint64_t cookie)
-> +                             uint64_t cookie,
-> +                             uint32_t local_display)
->  {
->      QXLState *qxl_state;
->      RedWorkerMessageGlDraw draw =3D {
-> @@ -482,7 +486,9 @@ void spice_qxl_gl_draw_async(QXLInstance *qxl,
->      spice_return_if_fail(qxl_state->gl_draw_cookie =3D=3D GL_DRAW_COOKIE=
-_INVALID);
+> --
+> 2.37.2
 >
->      qxl_state->gl_draw_cookie =3D cookie;
-> -    qxl_state->send_message(draw);
-> +    if (local_display) {
-> +        qxl_state->send_message(draw);
-> +    }
->  }
->
->  void red_qxl_gl_draw_async_complete(QXLInstance *qxl)
-> diff --git a/server/spice-qxl.h b/server/spice-qxl.h
-> index bf17476b..2749f1c9 100644
-> --- a/server/spice-qxl.h
-> +++ b/server/spice-qxl.h
-> @@ -87,11 +87,11 @@ void spice_qxl_gl_scanout(QXLInstance *qxl,
->                            int fd,
->                            uint32_t width, uint32_t height,
->                            uint32_t stride, uint32_t format,
-> -                          int y_0_top);
-> +                          int y_0_top, uint32_t local_display);
->  void spice_qxl_gl_draw_async(QXLInstance *qxl,
->                               uint32_t x, uint32_t y,
->                               uint32_t w, uint32_t h,
-> -                             uint64_t cookie);
-> +                             uint64_t cookie, uint32_t local_display);
->
-
-You cannot add a parameter, this will break both API and ABI.
-
->  /* since spice 0.14.2 */
->
-
-Frediano
