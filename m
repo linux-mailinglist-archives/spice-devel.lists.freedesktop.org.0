@@ -2,119 +2,71 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 902D56965B7
-	for <lists+spice-devel@lfdr.de>; Tue, 14 Feb 2023 15:05:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB843697222
+	for <lists+spice-devel@lfdr.de>; Wed, 15 Feb 2023 00:53:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C2ED10E8EE;
-	Tue, 14 Feb 2023 14:05:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0976B10E123;
+	Tue, 14 Feb 2023 23:53:48 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060.outbound.protection.outlook.com [40.107.223.60])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E425C10E1CE;
- Tue, 14 Feb 2023 13:59:47 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=n0vuYf8UOaJ1hsTXinVLDnk7BpyFeAO3h0A+iDuVzCO2q8DG4WuwhkqMMJTjseQv7q0EMv6FZx65wne6HTsK3PnbgbT77mmrdMOze2o6TsaPs8S3y61N0hdC3q0qPXXY1/o7+eM48riYNwPnPuOhj7dZSlGb2IYNoIH9774fsWFbFzrIWRJoPnr2mucRIEiPpXUTvFi1S8Hvy/OZ9pp3SNqitPwUeFHXjFR72asMWQMgruvqlAjUNhHtPMCqEhmo07ew4v3qBwm6m0WG4xUJMcThnFen/vl/O0sXYUT7IjauH0gm32ESHaQJJJlAUn3t69YyYMdq6be9AyE+PYvd+A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5J3EwnAfqcroXmVU+6Cy2FNea1vMFGSWLx6pXlj8fPc=;
- b=Ju8JxyqlxQqwYCTlQm/xC8eM3bMOmpr//U0ybnkKtLZRD87B401egog/lNXKe9np0NTH3/xczf1+u6Ji+Lg2frkbYNf9GYmP4Tw01J7h15CxaO7DcriWnmAI8Mn0RZevCV5h28e2GYlfFs/60FHMhv/OF8RL4uSJX4t2Ikr7cUHOrMHsAjdQbUyka/meDm5ZcMB8/yH2+0lJ4LxRSOmEJyGNREgaKXoyMG3Pue7aIHKXuqYhylfP8D3Y8oiH7lTEAZAzGMcMrNwH+t36DS/7Zpda4oIoEoFGK6Vz5XxFRbcgGawNgoKsVfNqlE14cyqlefLLOg5LU00ny39HeocxKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5J3EwnAfqcroXmVU+6Cy2FNea1vMFGSWLx6pXlj8fPc=;
- b=a9hxGbNmSW7MJaTKEuPBpcmw9mut/QbttnqJve0NugeGhnEmSVeP4BSRhiZC3W4jgnz59jvxavUpBZNfcP1iJXvJiujW5iiB1Md2X8x6n9Dj+FIYDzKmYh/DoHw9QH8qwOtOLBkkRFhzdRuBNVx296UzOdWX0GAG0Is9ZBqScvU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by BL1PR12MB5189.namprd12.prod.outlook.com (2603:10b6:208:308::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.24; Tue, 14 Feb
- 2023 13:59:45 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::2e4f:4041:28be:ba7a%6]) with mapi id 15.20.6086.026; Tue, 14 Feb 2023
- 13:59:45 +0000
-Message-ID: <f1256a51-5c4d-ab44-3867-931f7d2c0695@amd.com>
-Date: Tue, 14 Feb 2023 14:59:38 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Content-Language: en-US
-To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- dri-devel@lists.freedesktop.org
-References: <20230214125050.1205394-1-tvrtko.ursulin@linux.intel.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230214125050.1205394-1-tvrtko.ursulin@linux.intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0172.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a0::10) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C253710E123
+ for <spice-devel@lists.freedesktop.org>; Tue, 14 Feb 2023 23:53:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1676418825;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=RRAqMdOrRuhhAPUewYttCu/Ik9SzYmgasaIXFnVmGGk=;
+ b=J1GLX1Q0sGYsT2j+y4smdv2hbOrIdW1fsFGY+0gAyPjdGUn745nftPYTLzXLbfPBGv/XTU
+ BN97BTfRHSZW7dnGMefGhc0JzYIV/4Tf84hWNmfLRVE19w86pWHacbvqpWQ52ZpEuEzBzZ
+ QtRoraFnfAKPkuilEcGU7H9rQpNLzNs=
+Received: from mail-oo1-f71.google.com (mail-oo1-f71.google.com
+ [209.85.161.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-584-D9axcaEpNLCebDbQckWjPA-1; Tue, 14 Feb 2023 18:53:44 -0500
+X-MC-Unique: D9axcaEpNLCebDbQckWjPA-1
+Received: by mail-oo1-f71.google.com with SMTP id
+ 68-20020a4a1547000000b005170f10fc55so5939856oon.10
+ for <spice-devel@lists.freedesktop.org>; Tue, 14 Feb 2023 15:53:44 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RRAqMdOrRuhhAPUewYttCu/Ik9SzYmgasaIXFnVmGGk=;
+ b=vvNYQg1CLeRhAQUnbkGM+NYrtEfFVO8PERUO+mIZfEFxRaFw2BkhdcEs78l0+lwY+A
+ 01JtSNf6JL9cT0BmWHrOttQG6j3yibDLH5ouKahcGAhHtPXjAAO0ORu2qLNanbe5pcG5
+ w6gjleiKNaMHQDaw7FO1cpIsGr/9MOoxFFqtufEFADKpvhvW/RPmsKWPANKhY16IfqGd
+ KWNiUm1G4X7CiigklPwc0qh52Q6j75KUZxXk73Y78uRcuYkAH9CSCpO92agTzn6T0Sno
+ 4m7Mc9ljF9EMQuiSgcaV7lVvdXR/L7S1Xd0lQhzwnu1cA/EEDyjls2JfUj8+VHw8T1Jm
+ iGkA==
+X-Gm-Message-State: AO0yUKWt7kQ//BneU7B3N6/yav0y2AJGbw4RS8o5WwlY8AW8/JJjPQtR
+ Dv3fNezRxhpJlBVdAn8o0MCAdpGh7E8q1wDlqR01LbmQTmQ9Wv0Xx99J+J51QGQODa7YSNyKIaP
+ mHVZdETOqRfn/2/fUlYDzFAE6MptkRYjJVinTZ2vU3wi8jio=
+X-Received: by 2002:a9d:67ce:0:b0:68d:5a2a:2f40 with SMTP id
+ c14-20020a9d67ce000000b0068d5a2a2f40mr4338otn.142.1676418823419; 
+ Tue, 14 Feb 2023 15:53:43 -0800 (PST)
+X-Google-Smtp-Source: AK7set+dK+Ns3fYCSsIhZvpFkOZdV8AaakdgRj1tfCdu+nQ6TAQ0tFaB3V+6hkxZKLvmH07L8uDdIkXcIBOavnR96lM=
+X-Received: by 2002:a9d:67ce:0:b0:68d:5a2a:2f40 with SMTP id
+ c14-20020a9d67ce000000b0068d5a2a2f40mr4335otn.142.1676418823136; Tue, 14 Feb
+ 2023 15:53:43 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|BL1PR12MB5189:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7ec58fab-f6c1-4ac4-6a38-08db0e93ba60
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 8OEbT8BHCKauSFGaRyjwXGMvv8hd2oEXpw7iWfZwFq8PLwJ+gU1DCU5azbPGWht56jn6GMGzmxLIRbxTRQ/IwiEMVsfHKyv8JMaJhqHlMddMjULfrgsKVj2wS6yU9Hn3tn1D2P1CvxhPwxiZPwQ0dSQB2CIlEbk8OyEPiRAHd3FCiZBLAqo8ttAFakW58bUuCDILT2oBfwP0YoHOyR1QBaIBK+B06YQ2slWCKwL+tDzWl8tk4Xtx44boc9i/y48Qp/wGqb0Qr1iGZ+FjDcjVB5eBurpCvW+P3YOGlxIkUqxyzQrc8W6qJomMjKY/5TW//A2shN1DrlEjYooJDCwxkrN/piuq7812Xcl+rpEhy7um9WZR5pi1OimX+QFYzl6tIV4CpvYTAUJ6MQceX5PksBYqa0oG8jJRxD5aVgudLScKBbfjyED2jV+t0tH0nUc/OHGbjvoW8BGiOYnZq4Sv1/hITII8ZCPUy/ZIGP8j82ssPjCzcQ3QHHqSXE34pCy7nOu0AV0W9ZEJiDvvzyPE475wGMwBpZaD7Yyy/exDZySADKpcZWANRDcrwXMvkZRoWgB9j1abhAXyBKVYorj5fk8Mo0P+hwlmIMaxxOoMZEBula/+cky0L7Ya0+2CdKM7Lb+WlvBeVE6m5jDY3XluIJX9F9lDxMwDD3oEyT2Rk6AJ0jz0yww4qBgw1QBhWyAKY689Cg1k2gAhKz9bps9fFugDqCqeJlHRRXEJg/iLiWA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(136003)(346002)(396003)(376002)(366004)(39860400002)(451199018)(2616005)(86362001)(31696002)(26005)(5660300002)(54906003)(6512007)(316002)(36756003)(6666004)(6486002)(478600001)(6506007)(7416002)(186003)(31686004)(38100700002)(66574015)(41300700001)(2906002)(83380400001)(66476007)(66946007)(8936002)(8676002)(4326008)(66556008)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RVdPSkpRM2s4MEg4dGJRRG5URGdUZkI2RldsOWFvVStpVTV1bjI2ZUtzbmZ5?=
- =?utf-8?B?T3h2aUI3QU1sb0g3cTl1ZnpJWVNKMWNOT0tyZTJvQVp3WFl2YlM0cTRPVUJ2?=
- =?utf-8?B?cTZoRDQyQ0x1U3RPSWF6K09rdm0rR1hZNkpFS3RBQUV2Mm40SnloN0ZhbDZr?=
- =?utf-8?B?aDAwRGE1Z1IyQlB2NXVIU2dWZFkyTE4rMGZGVmhCZ3FzN0gzSStsRHVscFFP?=
- =?utf-8?B?OFgrVnpZSHFOYjdDSE16N2IzZHp4SWF6OUozQk9lMzJqdHdtYjhoVTVUdk1v?=
- =?utf-8?B?UnIxc1ljTEM5dk5ibFpTaXR5WGIwb01RWTBGYW9oSUJ3UTQ4Sm9HR3hMUytr?=
- =?utf-8?B?d0VxeS9MUnlwZjhqSkNCNGFWbUhtcW1OOXNjVGc5VkdvelJEdnhkSWtqUEJa?=
- =?utf-8?B?YncycXU1ejNGRTUvVDlZYmxXbTE5Z0RRMEVSVzFMRktKU21Lbk9haHNjWVdz?=
- =?utf-8?B?SEw3RHgySWgzVFZpb3BjZjhXTHdHUjM0VEtyRXdZbkVWeUhYVDdVdXVPQW40?=
- =?utf-8?B?QVpOUTRQL0FTR1lJSWNBK1BxOFZUVkprQW1ZaXh1NzNkZXJCTm1zblFzRm1l?=
- =?utf-8?B?M0JFdmlIeDFlcWdKSGdaZUxndzdmSVlkamd5YThGVzl5MzJYSFhORjRTbTNY?=
- =?utf-8?B?Y0Vnd1c5SysvMjJLZHRrWE54blhEYmwvaVhRbkpkOUxRTFRibmxyUkpYd1k0?=
- =?utf-8?B?RCszR2pKdzdHcEJWRWlqYzVaNVNjTVBGK05OMkZSNU9TeDdyUDlONTFneFBN?=
- =?utf-8?B?VnFSVjNUTEVWT0VXa2doNmJsOVFENXJ1WFo5dkkvS3NlYTNhUkpTeStYR09o?=
- =?utf-8?B?ODNsTDREKzA4VFB0d3NVdkVGRnJvWnN3RjViaDk1aTd2VEhtMlQ3RCtvUTlt?=
- =?utf-8?B?bTNObEgrUHN0TTE4R1k5N2h2YlV0SkxvRnRYUGVOcDcvVzJHQVg1WUZwR09q?=
- =?utf-8?B?SWIwM0Q0TUwydCs5d1psaGZVYXNqNzZDSzQrem1GdDJhQ2hrNUg1cW5NaFhv?=
- =?utf-8?B?ZFlpYTgvdjM1ME1iaGRVYlZxUWs4ZnhoYS9IWkZtb0hva0VJeW1BV3ZTUXJt?=
- =?utf-8?B?MEV5VGpiVDQzM05lbjRXOERyakRpRnYreE1OaXNOdGlyMy9Qc0UxM0NQS1BD?=
- =?utf-8?B?TUNsQTdSVGdUWlBBQkh6WE12SGtWLzRsSEI4YkJHNVVRMDgwWmdrdEVJU1d2?=
- =?utf-8?B?ZmUzOTVRQnpUMGg1dVU0dFUvWW5UeWE3U0tHWXNWWFIwN1pBZEZvcTFuR0Rj?=
- =?utf-8?B?b0NhMkNtWmlqaFg5RXg4K0VsUDBYb0tJUGVlbFM0NlNZaTJzTitxdXpWaWxr?=
- =?utf-8?B?OWJWckJrMUoxNHlJdzhxZlhqdW1xZDBIYjY3TjZJMThEMHN0bmd3aVh2aklz?=
- =?utf-8?B?WkhKTHc1bXpmcm4rRHR3QTdoSnN4bTVlVkNtekVCYm9kREpDNi9kSUdEZnhF?=
- =?utf-8?B?ZWZPdzhoLzB4YXdVSE84Ukx5R3dCVWhCQzlwS3h5eVlMd3RjbWE4S3dXanNM?=
- =?utf-8?B?QlZ1aitjRVM1SmtFNmVWcFcyc1VYQTk4ei9DTWhJeTFLdnVQOWZCVmxYY2w0?=
- =?utf-8?B?bVp6M1puMDlLWkN1UmVnVjdwUUZxb09qOGhzYTJ2bkVXMjdGejVybENZNHVv?=
- =?utf-8?B?cllZMDhSSmRaOWluRU5rdVlKTnFSQ3ROUzFidFg0ZDdrT0U2bUM1bTVackR0?=
- =?utf-8?B?U010UFc4ZVFaY29hM2xjK3ZDaWtJeEc0ZFpjcVFYYmk3S2dVZmNxOTFnS3V5?=
- =?utf-8?B?QXdFc0kvQUdqNjcrK3lnOXYzUVpJQ1lLTHVYWEVaNUwwc3ZyVXVZSks2QW54?=
- =?utf-8?B?SVFmZlJ3RER6dEFUL0xrZ3NMby9ST3llWk03Nlh5alNmWk93WGttUFRKMFpO?=
- =?utf-8?B?dnlBZEpIcURvWGQyMTc3RjYvN0pyQk5xeExmU1ZTYWJmTVlJdjFmUnBoQUJH?=
- =?utf-8?B?T0Iyb0Y0aXVJUFpzdWI1MmFuRmdUOVNacEk4SUFQSGhUcS9pNFlma0lweVBI?=
- =?utf-8?B?N2pORkJxV1lmeWtYT0xzbWwvekVSNGdpM1hubnJHSUdpZk5qc01KUCttc1Q5?=
- =?utf-8?B?WXlKRnIvSUxod0ZVWXIrS1hocFFIVXhhMmlSYmdOdjJReDJaK1hJVDd6QW5s?=
- =?utf-8?Q?XCeZjHTjvI3gnSOZtY0ChEkIF?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ec58fab-f6c1-4ac4-6a38-08db0e93ba60
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2023 13:59:45.5731 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9BDvXdpGLdBK4tCURmduEUW8POFINqmtP3AnU+MMfMCWn/PecwPi+OVI4URtQHZl
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5189
-X-Mailman-Approved-At: Tue, 14 Feb 2023 14:05:08 +0000
-Subject: Re: [Spice-devel] [PATCH] drm/gem: Expose the buffer object handle
- to userspace last
+References: <SYZP282MB3252532513FAB75D92C10DC8C9A29@SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM>
+ <CAHt6W4fwa1r7f4gm5=_p2Q4cYHPdE5Dsk2484=O-9sNC1Wq2sA@mail.gmail.com>
+ <SYZP282MB325243B7EB9CEF5B87E9AF9FC9A29@SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM>
+ <CAHt6W4d+HUBhJzCZGK7GWOampMZ7iVnPzhONyCd8=FjjbvTMYQ@mail.gmail.com>
+ <20230214113216.ll3xhuzpthqdu4lh@tapioca>
+In-Reply-To: <20230214113216.ll3xhuzpthqdu4lh@tapioca>
+From: Vadim Rozenfeld <vrozenfe@redhat.com>
+Date: Wed, 15 Feb 2023 10:53:31 +1100
+Message-ID: <CAKiOO4s9xAWq_54OjgNMxeS_6V5s-b65vtY89GukO2GjjaHbkQ@mail.gmail.com>
+To: Victor Toso <victortoso@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="00000000000072bce005f4b1ace9"
+Subject: Re: [Spice-devel] [PATCH] reset qxl to vga mode
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -126,180 +78,151 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>, lima@lists.freedesktop.org,
- Tvrtko Ursulin <tvrtko.ursulin@intel.com>, nouveau@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, Steven Price <steven.price@arm.com>,
- =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- David Herrmann <dh.herrmann@gmail.com>, spice-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Zack Rusin <zackr@vmware.com>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ admin <admin@atmgnd.cn>, qi zhou <atmgnd@outlook.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Am 14.02.23 um 13:50 schrieb Tvrtko Ursulin:
-> From: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
->
-> Currently drm_gem_handle_create_tail exposes the handle to userspace
-> before the buffer object constructions is complete. This allowing
-> of working against a partially constructed object, which may also be in
-> the process of having its creation fail, can have a range of negative
-> outcomes.
->
-> A lot of those will depend on what the individual drivers are doing in
-> their obj->funcs->open() callbacks, and also with a common failure mode
-> being -ENOMEM from drm_vma_node_allow.
->
-> We can make sure none of this can happen by allocating a handle last,
-> although with a downside that more of the function now runs under the
-> dev->object_name_lock.
->
-> Looking into the individual drivers open() hooks, we have
-> amdgpu_gem_object_open which seems like it could have a potential security
-> issue without this change.
->
-> A couple drivers like qxl_gem_object_open and vmw_gem_object_open
-> implement no-op hooks so no impact for them.
->
-> A bunch of other require a deeper look by individual owners to asses for
-> impact. Those are lima_gem_object_open, nouveau_gem_object_open,
-> panfrost_gem_open, radeon_gem_object_open and virtio_gpu_gem_object_open.
->
-> Putting aside the risk assesment of the above, some common scenarios to
-> think about are along these lines:
->
-> 1)
-> Userspace closes a handle by speculatively "guessing" it from a second
-> thread.
->
-> This results in an unreachable buffer object so, a memory leak.
->
-> 2)
-> Same as 1), but object is in the process of getting closed (failed
-> creation).
->
-> The second thread is then able to re-cycle the handle and idr_remove would
-> in the first thread would then remove the handle it does not own from the
-> idr.
->
-> 3)
-> Going back to the earlier per driver problem space - individual impact
-> assesment of allowing a second thread to access and operate on a partially
-> constructed handle / object. (Can something crash? Leak information?)
->
-> In terms of identifying when the problem started I will tag some patches
-> as references, but not all, if even any, of them actually point to a
-> broken state. I am just identifying points at which more opportunity for
-> issues to arise was added.
+--00000000000072bce005f4b1ace9
+Content-Type: text/plain; charset="UTF-8"
 
-Yes I've looked into this once as well, but couldn't completely solve it 
-for some reason.
+On Tue, Feb 14, 2023 at 10:32 PM Victor Toso <victortoso@redhat.com> wrote:
 
-Give me a day or two to get this tested and all the logic swapped back 
-into my head again.
-
-Christian.
-
+> Hi Freddy,
 >
-> References: 304eda32920b ("drm/gem: add hooks to notify driver when object handle is created/destroyed")
-> References: ca481c9b2a3a ("drm/gem: implement vma access management")
-> References: b39b5394fabc ("drm/gem: Add drm_gem_object_funcs")
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: Rob Clark <robdclark@chromium.org>
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: David Herrmann <dh.herrmann@gmail.com>
-> Cc: Noralf Trønnes <noralf@tronnes.org>
-> Cc: David Airlie <airlied@gmail.com>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: amd-gfx@lists.freedesktop.org
-> Cc: lima@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Cc: Steven Price <steven.price@arm.com>
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: spice-devel@lists.freedesktop.org
-> Cc: Zack Rusin <zackr@vmware.com>
-> ---
->   drivers/gpu/drm/drm_gem.c | 48 +++++++++++++++++++--------------------
->   1 file changed, 24 insertions(+), 24 deletions(-)
+> On Tue, Feb 14, 2023 at 11:08:21AM +0000, Frediano Ziglio wrote:
+> > Il giorno mar 14 feb 2023 alle ore 10:50 qi zhou <atmgnd@outlook.com>
+> > ha scritto:
+> > >
+> > > > Hi,
+> > > >   It looks good to me. Why it was QXL_IO_MEMSLOT_ADD I don't know. On
+> > > > Linux is QXL_IO_RESET too.
+> > >
+> > > May be a typo ?, here you can use sysinternal's notmyfault to test
+> this bug.
+> > > 1. launch qemu use legacy bios mode. make sure qxl driver is active,
+> then open notmyfault64.exe click on crash button. It will trigger a bsod
+> > > 2. without reset/patch, we cannot see bluescreen shown
+> > >
+> > > before qxl revision 5, even DodResetDevice does nothing, the qemu will
+> do reset after detect qxl mode mismatch. see
+> https://github.com/qemu/qemu/blob/ed71c09ffd6fbd01c2a487d47291ae57b08671ea/hw/display/qxl.c#L1315
+> > >
+> > > But qxl revison 5+ requires explicit reset
+> > >
+> > > reference:
+> > > not myfault:
+> https://learn.microsoft.com/en-us/sysinternals/downloads/notmyfault
+> > > DXGKDDI_RESET_DEVICE :
+> https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/dispmprt/nc-dispmprt-dxgkddi_reset_device#remarks
+> >
+> > Merged.
+> >
+> > Now the question is about release and build.
+> >
+> > Uri, Victor, should we pack a new release?
 >
-> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> index aa15c52ae182..e3d897bca0f2 100644
-> --- a/drivers/gpu/drm/drm_gem.c
-> +++ b/drivers/gpu/drm/drm_gem.c
-> @@ -356,52 +356,52 @@ drm_gem_handle_create_tail(struct drm_file *file_priv,
->   			   u32 *handlep)
->   {
->   	struct drm_device *dev = obj->dev;
-> -	u32 handle;
->   	int ret;
->   
->   	WARN_ON(!mutex_is_locked(&dev->object_name_lock));
->   	if (obj->handle_count++ == 0)
->   		drm_gem_object_get(obj);
->   
-> +	ret = drm_vma_node_allow(&obj->vma_node, file_priv);
-> +	if (ret)
-> +		goto err_put;
-> +
-> +	if (obj->funcs->open) {
-> +		ret = obj->funcs->open(obj, file_priv);
-> +		if (ret)
-> +			goto err_revoke;
-> +	}
-> +
->   	/*
-> -	 * Get the user-visible handle using idr.  Preload and perform
-> -	 * allocation under our spinlock.
-> +	 * Get the user-visible handle using idr as the _last_ step.
-> +	 * Preload and perform allocation under our spinlock.
->   	 */
->   	idr_preload(GFP_KERNEL);
->   	spin_lock(&file_priv->table_lock);
-> -
->   	ret = idr_alloc(&file_priv->object_idr, obj, 1, 0, GFP_NOWAIT);
-> -
->   	spin_unlock(&file_priv->table_lock);
->   	idr_preload_end();
->   
-> -	mutex_unlock(&dev->object_name_lock);
->   	if (ret < 0)
-> -		goto err_unref;
-> -
-> -	handle = ret;
-> +		goto err_close;
->   
-> -	ret = drm_vma_node_allow(&obj->vma_node, file_priv);
-> -	if (ret)
-> -		goto err_remove;
-> +	mutex_unlock(&dev->object_name_lock);
->   
-> -	if (obj->funcs->open) {
-> -		ret = obj->funcs->open(obj, file_priv);
-> -		if (ret)
-> -			goto err_revoke;
-> -	}
-> +	*handlep = ret;
->   
-> -	*handlep = handle;
->   	return 0;
->   
-> +err_close:
-> +	if (obj->funcs->close)
-> +		obj->funcs->close(obj, file_priv);
->   err_revoke:
->   	drm_vma_node_revoke(&obj->vma_node, file_priv);
-> -err_remove:
-> -	spin_lock(&file_priv->table_lock);
-> -	idr_remove(&file_priv->object_idr, handle);
-> -	spin_unlock(&file_priv->table_lock);
-> -err_unref:
-> -	drm_gem_object_handle_put_unlocked(obj);
-> +err_put:
-> +	if (--obj->handle_count == 0)
-> +		drm_gem_object_put(obj);
-> +
-> +	mutex_unlock(&dev->object_name_lock);
-> +
->   	return ret;
->   }
->   
+> I'm not sure how to release it. We used to bundle it in
+> spice-guest-tools but there was a signing process too.
+>
+> I see that virtio-win also bundles spice-guest-tools so, they
+> ship our ancient release... I see something in preinst for
+> amd64/w8 on qxldod [0]. Vadim, does virtio-win build/sign qxldod for
+> some Windows releases with fixes?
+>
+>
+Unfortunately qxldod is not a part of the virtio-win drivers build.
+Technically, it should not be a problem to build a new version of qxldod
+driver and submit it to WHQL dashboard for attestation signing. But
+attestation signing works for Win10 drivers only.
+
+Best,
+Vadim.
+
+
+> [0]
+> https://fedorapeople.org/groups/virt/unattended/drivers/preinst/virtio-win/0.1.225/amd64/w8/
+>
+> Cheers,
+> Victor
+>
+
+--00000000000072bce005f4b1ace9
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Feb 14, 2023 at 10:32 PM Vict=
+or Toso &lt;<a href=3D"mailto:victortoso@redhat.com">victortoso@redhat.com<=
+/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">H=
+i Freddy,<br>
+<br>
+On Tue, Feb 14, 2023 at 11:08:21AM +0000, Frediano Ziglio wrote:<br>
+&gt; Il giorno mar 14 feb 2023 alle ore 10:50 qi zhou &lt;<a href=3D"mailto=
+:atmgnd@outlook.com" target=3D"_blank">atmgnd@outlook.com</a>&gt;<br>
+&gt; ha scritto:<br>
+&gt; &gt;<br>
+&gt; &gt; &gt; Hi,<br>
+&gt; &gt; &gt;=C2=A0 =C2=A0It looks good to me. Why it was QXL_IO_MEMSLOT_A=
+DD I don&#39;t know. On<br>
+&gt; &gt; &gt; Linux is QXL_IO_RESET too.<br>
+&gt; &gt;<br>
+&gt; &gt; May be a typo ?, here you can use sysinternal&#39;s notmyfault to=
+ test this bug.<br>
+&gt; &gt; 1. launch qemu use legacy bios mode. make sure qxl driver is acti=
+ve, then open notmyfault64.exe click on crash button. It will trigger a bso=
+d<br>
+&gt; &gt; 2. without reset/patch, we cannot see bluescreen shown<br>
+&gt; &gt;<br>
+&gt; &gt; before qxl revision 5, even DodResetDevice does nothing, the qemu=
+ will do reset after detect qxl mode mismatch. see <a href=3D"https://githu=
+b.com/qemu/qemu/blob/ed71c09ffd6fbd01c2a487d47291ae57b08671ea/hw/display/qx=
+l.c#L1315" rel=3D"noreferrer" target=3D"_blank">https://github.com/qemu/qem=
+u/blob/ed71c09ffd6fbd01c2a487d47291ae57b08671ea/hw/display/qxl.c#L1315</a><=
+br>
+&gt; &gt;<br>
+&gt; &gt; But qxl revison 5+ requires explicit reset<br>
+&gt; &gt;<br>
+&gt; &gt; reference:<br>
+&gt; &gt; not myfault: <a href=3D"https://learn.microsoft.com/en-us/sysinte=
+rnals/downloads/notmyfault" rel=3D"noreferrer" target=3D"_blank">https://le=
+arn.microsoft.com/en-us/sysinternals/downloads/notmyfault</a><br>
+&gt; &gt; DXGKDDI_RESET_DEVICE : <a href=3D"https://learn.microsoft.com/en-=
+us/windows-hardware/drivers/ddi/dispmprt/nc-dispmprt-dxgkddi_reset_device#r=
+emarks" rel=3D"noreferrer" target=3D"_blank">https://learn.microsoft.com/en=
+-us/windows-hardware/drivers/ddi/dispmprt/nc-dispmprt-dxgkddi_reset_device#=
+remarks</a><br>
+&gt; <br>
+&gt; Merged.<br>
+&gt; <br>
+&gt; Now the question is about release and build.<br>
+&gt; <br>
+&gt; Uri, Victor, should we pack a new release?<br>
+<br>
+I&#39;m not sure how to release it. We used to bundle it in<br>
+spice-guest-tools but there was a signing process too.<br>
+<br>
+I see that virtio-win also bundles spice-guest-tools so, they<br>
+ship our ancient release... I see something in preinst for<br>
+amd64/w8 on qxldod [0]. Vadim, does virtio-win build/sign qxldod for<br>
+some Windows releases with fixes?<br>
+<br></blockquote><div><br></div><div>Unfortunately qxldod is not a part of =
+the virtio-win drivers build.=C2=A0</div><div>Technically, it should=C2=A0n=
+ot be a problem to build a new version of qxldod=C2=A0</div><div>driver and=
+ submit it to WHQL dashboard for attestation signing. But=C2=A0</div><div>a=
+ttestation signing works for Win10 drivers only.</div><div><br></div><div>B=
+est,</div><div>Vadim.=C2=A0=C2=A0</div><div>=C2=A0</div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">
+[0] <a href=3D"https://fedorapeople.org/groups/virt/unattended/drivers/prei=
+nst/virtio-win/0.1.225/amd64/w8/" rel=3D"noreferrer" target=3D"_blank">http=
+s://fedorapeople.org/groups/virt/unattended/drivers/preinst/virtio-win/0.1.=
+225/amd64/w8/</a><br>
+<br>
+Cheers,<br>
+Victor<br>
+</blockquote></div></div>
+
+--00000000000072bce005f4b1ace9--
 
