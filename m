@@ -1,56 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C70A269627F
-	for <lists+spice-devel@lfdr.de>; Tue, 14 Feb 2023 12:32:29 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C43AA696438
+	for <lists+spice-devel@lfdr.de>; Tue, 14 Feb 2023 14:06:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E229210E88E;
-	Tue, 14 Feb 2023 11:32:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3C08510E100;
+	Tue, 14 Feb 2023 13:06:35 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B862810E08C
- for <spice-devel@lists.freedesktop.org>; Tue, 14 Feb 2023 11:32:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1676374343;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=G6yiivrBNpBAVBeYM0CcvTh65wfUpc9SGzN5fpnJN5I=;
- b=JjFZwV6HGijjxz1iKevPNp/AShpwPfwbJMOKHL/Z+3ew/YbOtPQ4lJMIDvYEHE54MrOduc
- VRjzH3Y7ovNO2Wyr/vDXd9cLMjys/11pZxj7tIlKpK/FPEGgY2abb+v08niManBbvkhLKL
- 9akpNYeTgMbIhWHH9fsvlqBA1ofTCF0=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-662-SeTvJqzhNhKDAAknWKBrZA-1; Tue, 14 Feb 2023 06:32:19 -0500
-X-MC-Unique: SeTvJqzhNhKDAAknWKBrZA-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B5429858F09;
- Tue, 14 Feb 2023 11:32:18 +0000 (UTC)
-Received: from localhost (ovpn-193-2.brq.redhat.com [10.40.193.2])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5F1D6492B03;
- Tue, 14 Feb 2023 11:32:17 +0000 (UTC)
-Date: Tue, 14 Feb 2023 12:32:16 +0100
-From: Victor Toso <victortoso@redhat.com>
-To: Frediano Ziglio <freddy77@gmail.com>
-Message-ID: <20230214113216.ll3xhuzpthqdu4lh@tapioca>
-References: <SYZP282MB3252532513FAB75D92C10DC8C9A29@SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM>
- <CAHt6W4fwa1r7f4gm5=_p2Q4cYHPdE5Dsk2484=O-9sNC1Wq2sA@mail.gmail.com>
- <SYZP282MB325243B7EB9CEF5B87E9AF9FC9A29@SYZP282MB3252.AUSP282.PROD.OUTLOOK.COM>
- <CAHt6W4d+HUBhJzCZGK7GWOampMZ7iVnPzhONyCd8=FjjbvTMYQ@mail.gmail.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5337510E117;
+ Tue, 14 Feb 2023 12:51:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1676379095; x=1707915095;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=hJu7TZpVPtec73hfeBA/avwcYvPTNTBMYqIl7PC5FV0=;
+ b=WGWgN8d2LF+B7wGAlYZwUTfmHtXQb4JY9vsbTspzAVRxGGnLaBPHWBpT
+ BRYQyyd+7iiu5yg0m+MvnLBGo04TUK7GRVo6k/90FPaHZ1rliv9dZiHNQ
+ uIkT60mv8GLcW/cXOxQ9zy8QO6GXA77qQwdvzFBDR4qWlNm1kYvZDDzGb
+ JsYh4caw/6L8QTyL565iVDilh152pH1eiRHGLqi0Y7nTNIUKuSyLjgwKT
+ lYQXvgQbKGjDFjAYxpC/ufMuz4o7u0tTHDP3Z9MX01JYWuAdTFe6MenVm
+ dPFNGp/ojX3eiRfKaAn3yc9Zypha2zG2IruQx2+G1BcxDJde9DtSZVL/M w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10620"; a="331149529"
+X-IronPort-AV: E=Sophos;i="5.97,296,1669104000"; d="scan'208";a="331149529"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Feb 2023 04:51:33 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10620"; a="669152938"
+X-IronPort-AV: E=Sophos;i="5.97,296,1669104000"; d="scan'208";a="669152938"
+Received: from ahmedm3x-mobl.ger.corp.intel.com (HELO localhost.localdomain)
+ ([10.213.226.130])
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Feb 2023 04:51:10 -0800
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+To: dri-devel@lists.freedesktop.org
+Date: Tue, 14 Feb 2023 12:50:50 +0000
+Message-Id: <20230214125050.1205394-1-tvrtko.ursulin@linux.intel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="lklulibgk3tqp7ux"
-Content-Disposition: inline
-In-Reply-To: <CAHt6W4d+HUBhJzCZGK7GWOampMZ7iVnPzhONyCd8=FjjbvTMYQ@mail.gmail.com>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
-Subject: Re: [Spice-devel] [PATCH] reset qxl to vga mode
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 14 Feb 2023 13:06:34 +0000
+Subject: [Spice-devel] [PATCH] drm/gem: Expose the buffer object handle to
+ userspace last
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,84 +57,172 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- admin <admin@atmgnd.cn>, qi zhou <atmgnd@outlook.com>
+Cc: Rob Clark <robdclark@chromium.org>, lima@lists.freedesktop.org,
+ Tvrtko Ursulin <tvrtko.ursulin@intel.com>, nouveau@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, Steven Price <steven.price@arm.com>,
+ =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ David Herrmann <dh.herrmann@gmail.com>, spice-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, Zack Rusin <zackr@vmware.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+From: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
 
---lklulibgk3tqp7ux
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Currently drm_gem_handle_create_tail exposes the handle to userspace
+before the buffer object constructions is complete. This allowing
+of working against a partially constructed object, which may also be in
+the process of having its creation fail, can have a range of negative
+outcomes.
 
-Hi Freddy,
+A lot of those will depend on what the individual drivers are doing in
+their obj->funcs->open() callbacks, and also with a common failure mode
+being -ENOMEM from drm_vma_node_allow.
 
-On Tue, Feb 14, 2023 at 11:08:21AM +0000, Frediano Ziglio wrote:
-> Il giorno mar 14 feb 2023 alle ore 10:50 qi zhou <atmgnd@outlook.com>
-> ha scritto:
-> >
-> > > Hi,
-> > >   It looks good to me. Why it was QXL_IO_MEMSLOT_ADD I don't know. On
-> > > Linux is QXL_IO_RESET too.
-> >
-> > May be a typo ?, here you can use sysinternal's notmyfault to test this=
- bug.
-> > 1. launch qemu use legacy bios mode. make sure qxl driver is active, th=
-en open notmyfault64.exe click on crash button. It will trigger a bsod
-> > 2. without reset/patch, we cannot see bluescreen shown
-> >
-> > before qxl revision 5, even DodResetDevice does nothing, the qemu will =
-do reset after detect qxl mode mismatch. see https://github.com/qemu/qemu/b=
-lob/ed71c09ffd6fbd01c2a487d47291ae57b08671ea/hw/display/qxl.c#L1315
-> >
-> > But qxl revison 5+ requires explicit reset
-> >
-> > reference:
-> > not myfault: https://learn.microsoft.com/en-us/sysinternals/downloads/n=
-otmyfault
-> > DXGKDDI_RESET_DEVICE : https://learn.microsoft.com/en-us/windows-hardwa=
-re/drivers/ddi/dispmprt/nc-dispmprt-dxgkddi_reset_device#remarks
->=20
-> Merged.
->=20
-> Now the question is about release and build.
->=20
-> Uri, Victor, should we pack a new release?
+We can make sure none of this can happen by allocating a handle last,
+although with a downside that more of the function now runs under the
+dev->object_name_lock.
 
-I'm not sure how to release it. We used to bundle it in
-spice-guest-tools but there was a signing process too.
+Looking into the individual drivers open() hooks, we have
+amdgpu_gem_object_open which seems like it could have a potential security
+issue without this change.
 
-I see that virtio-win also bundles spice-guest-tools so, they
-ship our ancient release... I see something in preinst for
-amd64/w8 on qxldod [0]. Vadim, does virtio-win build/sign qxldod for
-some Windows releases with fixes?
+A couple drivers like qxl_gem_object_open and vmw_gem_object_open
+implement no-op hooks so no impact for them.
 
-[0] https://fedorapeople.org/groups/virt/unattended/drivers/preinst/virtio-=
-win/0.1.225/amd64/w8/
+A bunch of other require a deeper look by individual owners to asses for
+impact. Those are lima_gem_object_open, nouveau_gem_object_open,
+panfrost_gem_open, radeon_gem_object_open and virtio_gpu_gem_object_open.
 
-Cheers,
-Victor
+Putting aside the risk assesment of the above, some common scenarios to
+think about are along these lines:
 
---lklulibgk3tqp7ux
-Content-Type: application/pgp-signature; name="signature.asc"
+1)
+Userspace closes a handle by speculatively "guessing" it from a second
+thread.
 
------BEGIN PGP SIGNATURE-----
+This results in an unreachable buffer object so, a memory leak.
 
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmPrcT8ACgkQl9kSPeN6
-SE+AjA/+LHXGpt3n/KTfKBMvX5odcYEfUy0KP3cNL6M2F3X6cNcra8+dev1OwgEa
-Ycba740NQnwLIgkzHeZlaFTj3ZQC+jISOPzWkiaZDlj8hCjLHyeA68iCau8Uogmm
-rulMFlKtVZoVgM57M8v8iIbrWwsEepbrYutxHY19dQa0SNzWDqrb4RzwuQ3gVTqZ
-/IZUpzGk3wqRbL+7O717xKbyx2NquJL28Ckl9cEaqsUufrLGE4Eyyb1sVHhBopT1
-2r/m2F66gwhA9dkY1m0Y14z+SRmonj+I8xFtEvn2X7Bbqu4kNCDsyXfACHMeel7p
-YW4wzgVUXE3QcoZSo/lhspdX1/9hWMDi11/HS0IiTGeJ7Lf8cs2PSh0uA0/lpqQH
-A2+/I+RJnblw2ceBtF2qh2fxD73JYIVq6sGpOUoMO6GBXudPKakO9zqqlSLsobjN
-6LSC0JN5i42rxmBd3MDYG8CHq1RDmeIBlL2dwAItTepBdyp4FRkAn/CDBYfYuMXA
-U3bYWRKrw79O8/bmGnh0BZiI6bS1N3G5mhirXeoWo/cKtq1+PGzbvzdBCHcGFjNP
-l6CFkWlr+r70H7g9RMizC6N/pYi13kJEXzf/V6JxzuKxVAkGLze12Ujdw49ulRR9
-Ignf2/o/E3r0Sml1cWiDndWiU8ZGI/kN714htw1lylxgT/qPq5k=
-=VMko
------END PGP SIGNATURE-----
+2)
+Same as 1), but object is in the process of getting closed (failed
+creation).
 
---lklulibgk3tqp7ux--
+The second thread is then able to re-cycle the handle and idr_remove would
+in the first thread would then remove the handle it does not own from the
+idr.
+
+3)
+Going back to the earlier per driver problem space - individual impact
+assesment of allowing a second thread to access and operate on a partially
+constructed handle / object. (Can something crash? Leak information?)
+
+In terms of identifying when the problem started I will tag some patches
+as references, but not all, if even any, of them actually point to a
+broken state. I am just identifying points at which more opportunity for
+issues to arise was added.
+
+References: 304eda32920b ("drm/gem: add hooks to notify driver when object handle is created/destroyed")
+References: ca481c9b2a3a ("drm/gem: implement vma access management")
+References: b39b5394fabc ("drm/gem: Add drm_gem_object_funcs")
+Cc: dri-devel@lists.freedesktop.org
+Cc: Rob Clark <robdclark@chromium.org>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: David Herrmann <dh.herrmann@gmail.com>
+Cc: Noralf Trønnes <noralf@tronnes.org>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: amd-gfx@lists.freedesktop.org
+Cc: lima@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: Steven Price <steven.price@arm.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+Cc: Zack Rusin <zackr@vmware.com>
+---
+ drivers/gpu/drm/drm_gem.c | 48 +++++++++++++++++++--------------------
+ 1 file changed, 24 insertions(+), 24 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+index aa15c52ae182..e3d897bca0f2 100644
+--- a/drivers/gpu/drm/drm_gem.c
++++ b/drivers/gpu/drm/drm_gem.c
+@@ -356,52 +356,52 @@ drm_gem_handle_create_tail(struct drm_file *file_priv,
+ 			   u32 *handlep)
+ {
+ 	struct drm_device *dev = obj->dev;
+-	u32 handle;
+ 	int ret;
+ 
+ 	WARN_ON(!mutex_is_locked(&dev->object_name_lock));
+ 	if (obj->handle_count++ == 0)
+ 		drm_gem_object_get(obj);
+ 
++	ret = drm_vma_node_allow(&obj->vma_node, file_priv);
++	if (ret)
++		goto err_put;
++
++	if (obj->funcs->open) {
++		ret = obj->funcs->open(obj, file_priv);
++		if (ret)
++			goto err_revoke;
++	}
++
+ 	/*
+-	 * Get the user-visible handle using idr.  Preload and perform
+-	 * allocation under our spinlock.
++	 * Get the user-visible handle using idr as the _last_ step.
++	 * Preload and perform allocation under our spinlock.
+ 	 */
+ 	idr_preload(GFP_KERNEL);
+ 	spin_lock(&file_priv->table_lock);
+-
+ 	ret = idr_alloc(&file_priv->object_idr, obj, 1, 0, GFP_NOWAIT);
+-
+ 	spin_unlock(&file_priv->table_lock);
+ 	idr_preload_end();
+ 
+-	mutex_unlock(&dev->object_name_lock);
+ 	if (ret < 0)
+-		goto err_unref;
+-
+-	handle = ret;
++		goto err_close;
+ 
+-	ret = drm_vma_node_allow(&obj->vma_node, file_priv);
+-	if (ret)
+-		goto err_remove;
++	mutex_unlock(&dev->object_name_lock);
+ 
+-	if (obj->funcs->open) {
+-		ret = obj->funcs->open(obj, file_priv);
+-		if (ret)
+-			goto err_revoke;
+-	}
++	*handlep = ret;
+ 
+-	*handlep = handle;
+ 	return 0;
+ 
++err_close:
++	if (obj->funcs->close)
++		obj->funcs->close(obj, file_priv);
+ err_revoke:
+ 	drm_vma_node_revoke(&obj->vma_node, file_priv);
+-err_remove:
+-	spin_lock(&file_priv->table_lock);
+-	idr_remove(&file_priv->object_idr, handle);
+-	spin_unlock(&file_priv->table_lock);
+-err_unref:
+-	drm_gem_object_handle_put_unlocked(obj);
++err_put:
++	if (--obj->handle_count == 0)
++		drm_gem_object_put(obj);
++
++	mutex_unlock(&dev->object_name_lock);
++
+ 	return ret;
+ }
+ 
+-- 
+2.34.1
 
