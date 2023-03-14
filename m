@@ -1,46 +1,90 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DEF06B4C78
-	for <lists+spice-devel@lfdr.de>; Fri, 10 Mar 2023 17:14:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 975906B95FD
+	for <lists+spice-devel@lfdr.de>; Tue, 14 Mar 2023 14:21:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 775C810E054;
-	Fri, 10 Mar 2023 16:14:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 79D7410E7DE;
+	Tue, 14 Mar 2023 13:21:57 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 42FC710E074
- for <spice-devel@lists.freedesktop.org>; Thu,  9 Mar 2023 18:12:53 +0000 (UTC)
-Received: from submission (posteo.de [185.67.36.169]) 
- by mout01.posteo.de (Postfix) with ESMTPS id 651AA2402A7
- for <spice-devel@lists.freedesktop.org>; Thu,  9 Mar 2023 19:12:51 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.de; s=2017;
- t=1678385571; bh=V0igG6mYo8yORcXH6s2Ypw9dD7WbB05KW4jT5eDkQ14=;
- h=Subject:From:To:Cc:Date:From;
- b=SkjRPcfyXJHdVUHD7r1AyfvfiHE83RmNDQXMzb3UhG8LDcQyy4NuS7MZ6dIQaGdCe
- KChg0CXJy/F2RcIcTFhPEWmTE8YkzH+cRXnMKs6UhRhgwXPCKxxEtVUTIVzskeumzM
- tDm/wGeOg0SneAGeH+eAlWTHz21imT8xk+sI1UdIXbkZv45xBFIACXzacLdQn+nnL/
- O6jvjNi/wH3N89pkXlNJF58qNudPqK8cfbqlLJM32qjBTwrvMjnL6egbNxvtZ97Zyu
- CRjIEuRJo+POfOlEHklQrGBCGs9NHrc9cCoiqSnJbyU4b0Fmd9b2tgwrpUqjDsNifO
- CYrFpiOyi4TvQ==
-Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4PXcjZ0Ylbz9rxD;
- Thu,  9 Mar 2023 19:12:49 +0100 (CET)
-Message-ID: <7084480780926f23edff32c3d5923270753df6c5.camel@posteo.de>
-From: Thomas Semmler <ddfddf@posteo.de>
-To: =?ISO-8859-1?Q?L=E9vai=2C_D=E1niel?= <leva@ecentrum.hu>, Victor Toso
- <victortoso@redhat.com>
-Date: Thu, 09 Mar 2023 18:12:49 +0000
-In-Reply-To: <V8ilEVa4p-yP4w0gYqd9WTvTf65aWwJExujzZmV1Y9g1yzC8unGP-K1malfuiIzQzVbxs_j_JF96YMij4sGwBud-U1wICWt8-xLulI05hcM=@ecentrum.hu>
-References: <9b0d5ef57a29d6fa8160e62f36140902c24fb0d8.camel@posteo.de>
- <20230306083849.w6bmabtixdphvekm@tapioca>
- <V8ilEVa4p-yP4w0gYqd9WTvTf65aWwJExujzZmV1Y9g1yzC8unGP-K1malfuiIzQzVbxs_j_JF96YMij4sGwBud-U1wICWt8-xLulI05hcM=@ecentrum.hu>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 359AE10E12C;
+ Tue, 14 Mar 2023 12:12:39 +0000 (UTC)
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 32EBv91v021398; Tue, 14 Mar 2023 12:12:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=from : to : cc : subject
+ : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding; s=pp1;
+ bh=NdgmMlIoea7vJyu4oX4UGluHVaQmygSR6zFwM3C2qWw=;
+ b=rugV2xCrbZC2AC3daXfZeZZ4C8YQFuyY1jm9vVzG+pqQxYX5GVR1AZxrtpmXGLKb64sq
+ 2NNWolcnl4Pze2jdOQQrp1cvDaI4e0uuJmQpKb1UXZXxN/npZ9JLmsSJxdwNxe4ecnp4
+ LJq4Bavr/tBBVFb0Ic5LaO6zrBF6ZW5MSrtJq2/frTUcsR6dOaXxkxvnpIXZrYz8O4VO
+ NNU9/lnd6NfmIdEvF7Hn1O0avCSPxnX0dMjBQ5+GoKYlgMPjzeQ5yU2kBMZcEJa33mSY
+ 74GRRQ9iBJ09OettwUNJFqjuDGcpI/p/CbVsa2P3FNW9FsXiMGLMQl5DvtimlxVw55vB rw== 
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3papenbxj8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Mar 2023 12:12:32 +0000
+Received: from m0098420.ppops.net (m0098420.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32E9bfU1027062;
+ Tue, 14 Mar 2023 12:12:31 GMT
+Received: from ppma06fra.de.ibm.com (48.49.7a9f.ip4.static.sl-reverse.com
+ [159.122.73.72])
+ by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3papenbxh4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Mar 2023 12:12:31 +0000
+Received: from pps.filterd (ppma06fra.de.ibm.com [127.0.0.1])
+ by ppma06fra.de.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id 32E8XmM3029496;
+ Tue, 14 Mar 2023 12:12:29 GMT
+Received: from smtprelay04.fra02v.mail.ibm.com ([9.218.2.228])
+ by ppma06fra.de.ibm.com (PPS) with ESMTPS id 3p8gwfks4x-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Mar 2023 12:12:29 +0000
+Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com
+ [10.20.54.104])
+ by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 32ECCQIC17236240
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 14 Mar 2023 12:12:26 GMT
+Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 9FA742007D;
+ Tue, 14 Mar 2023 12:12:26 +0000 (GMT)
+Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 1977F2007C;
+ Tue, 14 Mar 2023 12:12:26 +0000 (GMT)
+Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
+ by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTP;
+ Tue, 14 Mar 2023 12:12:26 +0000 (GMT)
+From: Niklas Schnelle <schnelle@linux.ibm.com>
+To: Arnd Bergmann <arnd@arndb.de>, Dave Airlie <airlied@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Tue, 14 Mar 2023 13:11:45 +0100
+Message-Id: <20230314121216.413434-8-schnelle@linux.ibm.com>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20230314121216.413434-1-schnelle@linux.ibm.com>
+References: <20230314121216.413434-1-schnelle@linux.ibm.com>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Fri, 10 Mar 2023 16:14:42 +0000
-Subject: Re: [Spice-devel] Problem using Spice in combination with SSH tunnel
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: PlSVZJS_jwBDQj_1Psq3uoo-swEz2CGf
+X-Proofpoint-GUID: 75W8jY6oJVtl2VT6uX7aBB4ogE891Uc4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-14_06,2023-03-14_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0
+ mlxlogscore=654 mlxscore=0 adultscore=0 phishscore=0 impostorscore=0
+ lowpriorityscore=0 malwarescore=0 clxscore=1011 priorityscore=1501
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2212070000 definitions=main-2303140103
+X-Mailman-Approved-At: Tue, 14 Mar 2023 13:21:55 +0000
+Subject: [Spice-devel] [PATCH v3 07/38] drm: handle HAS_IOPORT dependencies
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,88 +96,130 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: linux-arch@vger.kernel.org, Arnd Bergmann <arnd@kernel.org>,
+ Albert Ou <aou@eecs.berkeley.edu>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Paul Walmsley <paul.walmsley@sifive.com>, linux-pci@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org,
+ Alan Stern <stern@rowland.harvard.edu>, spice-devel@lists.freedesktop.org,
+ =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
+ Bjorn Helgaas <bhelgaas@google.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Thank you both for your answers and hints. Indeed it seems something
-was afoot with pending updates, not having rebooted for a while it
-seems. After rebooting both the client and the server and having
-applied current updates pending on both devices the issue was resolved.
-Remmina can not establish a ssh tunnel (one connection only) and spice
-is able to connect video, audio, keyboard, mouse, and even usb
-redirection works.
+In a future patch HAS_IOPORT=n will result in inb()/outb() and friends
+not being declared. We thus need to add HAS_IOPORT as dependency for
+those drivers using them. In the bochs driver there is optional MMIO
+support detected at runtime, warn if this isn't taken when
+HAS_IOPORT is not defined.
 
-Certainly not an Spice issue.
+There is also a direct and hard coded use in cirrus.c which according to
+the comment is only necessary during resume.  Let's just skip this as
+for example s390 which doesn't have I/O port support also doesen't
+support suspend/resume.
 
-Thank you.
+Co-developed-by: Arnd Bergmann <arnd@kernel.org>
+Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
+---
+ drivers/gpu/drm/qxl/Kconfig   |  1 +
+ drivers/gpu/drm/tiny/bochs.c  | 19 +++++++++++++++++++
+ drivers/gpu/drm/tiny/cirrus.c |  2 ++
+ 3 files changed, 22 insertions(+)
 
-On Mon, 2023-03-06 at 09:18 +0000, L=C3=A9vai, D=C3=A1niel wrote:
-> FWIW, I managed to make this work in the past with OpenSSH's control
-> socket, so that every subsequent SSH connection could be opened and
-> went through seamlessly.
->=20
-> Daniel
->=20
-> ------- Original Message -------
-> On Monday, March 6th, 2023 at 09:38, Victor Toso
-> <victortoso@redhat.com> wrote:
->=20
->=20
-> >=20
-> >=20
-> >=20
-> > Hi Thomas,
-> >=20
-> > On Thu, Mar 02, 2023 at 01:32:10PM +0000, Thomas Semmler wrote:
-> >=20
-> > > Hello everyone,
-> > >=20
-> > > I encountered a problem I can't make heads or tails of. I have
-> > > a server running KVM/libvirt as a virtualization host. The
-> > > virtual machines on this server are setup to use the spice
-> > > protocol. When using the servers desktop environement I can use
-> > > virt-manager or remmina to connect to the virtual machine's
-> > > spice server(s) without a problem. The spice server is
-> > > listening on localhost only.
-> > >=20
-> > > I wanted to connect from a remote client to the server via a
-> > > ssh tunnel and then connect to spice over the tunnel. I tried
-> > > with both virt- manager (which has an integrates ssh tunnel
-> > > option) and remmina (which also has an integrated setting to
-> > > create a tunnel) on the client to establish a connection, but
-> > > it is not working as intended.
-> > >=20
-> > > While I can see a video output of the desktop, the video output
-> > > does not resize to the window width and hight and none of the
-> > > input methods are working. I can not send keypresses or mouse
-> > > movements the the virtual machine on the server.
-> >=20
-> >=20
-> > I've never tested this so I'm not sure how it should work.
-> >=20
-> > Every SPICE channel is a TCP socket that is established after the
-> > initial handshake. IIRC, the first connection is kept for the
-> > graphics (which you can use) but the connection of others seemed
-> > to fail over your ssh tunnel. I'd guess the proxying over ssh
-> > tunnel needs more tweaks.
-> >=20
-> > I see that oVirt has some how-to with this, perhaps that can be
-> > helpful to you:
-> >=20
-> > https://ovirt-infra-docs.readthedocs.io/en/latest/Phoenix_Lab/Ssh_Spice=
-_Tunnel/index.html
-> >=20
-> > > I started virt-manager on the client with the debug option
-> > > (--dubug) and attached the resulting output, containing a few
-> > > spice errors, to this email.
-> > >=20
-> > > In case you require more information please let me know.
-> > >=20
-> > > Thanks,
-> > > Thomas
-> >=20
-> >=20
-> > Cheers,
-> > Victor
+diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
+index ca3f51c2a8fe..d0e0d440c8d9 100644
+--- a/drivers/gpu/drm/qxl/Kconfig
++++ b/drivers/gpu/drm/qxl/Kconfig
+@@ -2,6 +2,7 @@
+ config DRM_QXL
+ 	tristate "QXL virtual GPU"
+ 	depends on DRM && PCI && MMU
++	depends on HAS_IOPORT
+ 	select DRM_KMS_HELPER
+ 	select DRM_TTM
+ 	select DRM_TTM_HELPER
+diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
+index 024346054c70..da4a5d53b003 100644
+--- a/drivers/gpu/drm/tiny/bochs.c
++++ b/drivers/gpu/drm/tiny/bochs.c
+@@ -2,6 +2,7 @@
+ 
+ #include <linux/module.h>
+ #include <linux/pci.h>
++#include <asm/bug.h>
+ 
+ #include <drm/drm_aperture.h>
+ #include <drm/drm_atomic_helper.h>
+@@ -105,7 +106,11 @@ static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
+ 
+ 		writeb(val, bochs->mmio + offset);
+ 	} else {
++#ifdef HAS_IOPORT
+ 		outb(val, ioport);
++#else
++		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
++#endif
+ 	}
+ }
+ 
+@@ -119,7 +124,12 @@ static u8 bochs_vga_readb(struct bochs_device *bochs, u16 ioport)
+ 
+ 		return readb(bochs->mmio + offset);
+ 	} else {
++#ifdef HAS_IOPORT
+ 		return inb(ioport);
++#else
++		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
++		return 0xff;
++#endif
+ 	}
+ }
+ 
+@@ -132,8 +142,13 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
+ 
+ 		ret = readw(bochs->mmio + offset);
+ 	} else {
++#ifdef HAS_IOPORT
+ 		outw(reg, VBE_DISPI_IOPORT_INDEX);
+ 		ret = inw(VBE_DISPI_IOPORT_DATA);
++#else
++		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
++		ret = 0xffff;
++#endif
+ 	}
+ 	return ret;
+ }
+@@ -145,8 +160,12 @@ static void bochs_dispi_write(struct bochs_device *bochs, u16 reg, u16 val)
+ 
+ 		writew(val, bochs->mmio + offset);
+ 	} else {
++#ifdef HAS_IOPORT
+ 		outw(reg, VBE_DISPI_IOPORT_INDEX);
+ 		outw(val, VBE_DISPI_IOPORT_DATA);
++#else
++		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
++#endif
+ 	}
+ }
+ 
+diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
+index accfa52e78c5..9da89732c5ac 100644
+--- a/drivers/gpu/drm/tiny/cirrus.c
++++ b/drivers/gpu/drm/tiny/cirrus.c
+@@ -308,8 +308,10 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
+ 
+ 	cirrus_set_start_address(cirrus, 0);
+ 
++#ifdef CONFIG_HAS_IOPORT
+ 	/* Unblank (needed on S3 resume, vgabios doesn't do it then) */
+ 	outb(0x20, 0x3c0);
++#endif
+ 
+ 	drm_dev_exit(idx);
+ 	return 0;
+-- 
+2.37.2
 
