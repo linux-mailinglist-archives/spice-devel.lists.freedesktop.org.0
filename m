@@ -2,51 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A58C66BC5EF
-	for <lists+spice-devel@lfdr.de>; Thu, 16 Mar 2023 07:05:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A4866BC5F4
+	for <lists+spice-devel@lfdr.de>; Thu, 16 Mar 2023 07:05:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E18F810E0B1;
-	Thu, 16 Mar 2023 06:05:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5D4CB10EA29;
+	Thu, 16 Mar 2023 06:05:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE25910E0A0
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A409510E06F
  for <spice-devel@lists.freedesktop.org>; Thu, 16 Mar 2023 06:05:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
  t=1678946701; x=1710482701;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=S+B74T7XoAZNUbk3bxl/x7rcG0Gg3/Uc0DhQDw1VUkI=;
- b=c3vD5dGFUr6XvvlQun5ChspMLol02s9p0eTvfl475PNCkOt2xHuHEbMc
- d6O7XVdhQ673E5n8l6ppi6MCeBV/Lc9Th006GK2LVe/1c0qEWENNwdv2v
- 0Yf3K8uCTCNKL12e40AdDMk/PV+ZXMYS7s5iLQPpYfZIV9FQDqLR/E9sY
- dzi7Wl/Jsn1ho0+ndlaVKb7G7M2HmstjPv5xy1MzR9SSQ4twIdGQusLKS
- WxHldDrCVtNbl+U29V8XSt5WcR/9olKw9pv/fn0HXxqvPJqnLQpAxKOjn
- eaHMhLH8glOHkpCoZM8vW1anhaWr/SHqKxQ+ZJpLdKDxhiHsgUZq1NXDC Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="365588952"
-X-IronPort-AV: E=Sophos;i="5.98,265,1673942400"; d="scan'208";a="365588952"
+ bh=89+8lt+FIFPHiVio7W1I0wtUsud64gSMOWaCuOO8IkY=;
+ b=iQQ7T5dQ4fgE8jPh+WtgTf1vc4qRE09hSpBq0kSFMP5lyJ369nT1QJKd
+ ErmNqGUDbeVGyrVV8TuygeKMUvW5HG5MAo25dz5VjgHSnpbl64QWHNXmM
+ ZUmiFXE1q8CVYjNYG/+8+QjlYy7CuVxGif6oaYbglR1mn+zU6BwYU9kCV
+ jmtzew4/tUTiwkILzNJGa24T9dc3c4grFK4/2NXbgkJ4JuK3YXSTs2zTs
+ kt3igs2W3SYZZXJWXrXfa2SX94rpb9xHQDrEjB/cwQ2zl6d9whK0OQghy
+ d5pISYUe1D6Cmyou8sFVL0OEXzjT7Qb85lH7dILhD2hR0fpUAQwYCtkSZ w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="365588954"
+X-IronPort-AV: E=Sophos;i="5.98,265,1673942400"; d="scan'208";a="365588954"
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  15 Mar 2023 23:05:00 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="790141477"
-X-IronPort-AV: E=Sophos;i="5.98,265,1673942400"; d="scan'208";a="790141477"
+X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="790141480"
+X-IronPort-AV: E=Sophos;i="5.98,265,1673942400"; d="scan'208";a="790141480"
 Received: from vkasired-desk2.fm.intel.com ([10.105.128.127])
  by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  15 Mar 2023 23:05:00 -0700
 From: Vivek Kasireddy <vivek.kasireddy@intel.com>
 To: spice-devel@lists.freedesktop.org
-Date: Wed, 15 Mar 2023 22:44:55 -0700
-Message-Id: <20230316054458.1546085-3-vivek.kasireddy@intel.com>
+Date: Wed, 15 Mar 2023 22:44:56 -0700
+Message-Id: <20230316054458.1546085-4-vivek.kasireddy@intel.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20230316054458.1546085-1-vivek.kasireddy@intel.com>
 References: <20230316054458.1546085-1-vivek.kasireddy@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Spice-devel] [PATCH v1 2/5] dcc: Create a stream associated with
- gl_draw for non-gl clients
+Subject: [Spice-devel] [PATCH v1 3/5] dcc-send: Encode and send gl_draw
+ stream data to the remote client
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,135 +62,171 @@ Cc: Dongwon Kim <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-For non-gl/remote clients, if a stream does not exist or if any
-of the key parameters associated with gl_draw such as x/y or
-width/height are changed, then we create a new stream. Otherwise,
-we just update the current stream's timestamp.
+For remote (or non-gl) clients, if a valid gl_draw stream exists,
+then we first extract the dmabuf fd associated with the scanout and
+share it with the encoder along with other key parameters such as
+stride, width and height. Once the encoder finishes creating an
+encoded buffer (using the dmabuf fd as input), we then send it
+over to the client. Also, as soon as the encoder notifies that
+it is no longer using the dmabuf fd, we send a gl_draw_done async
+to the application.
 
 Cc: Gerd Hoffmann <kraxel@redhat.com>
 Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
 Cc: Dongwon Kim <dongwon.kim@intel.com>
 Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
 ---
- server/dcc-private.h    |  2 ++
- server/dcc.cpp          | 14 +++++++++++++
- server/video-stream.cpp | 44 +++++++++++++++++++++++++++++++++++++++++
- server/video-stream.h   |  2 ++
- 4 files changed, 62 insertions(+)
+ server/dcc-send.cpp    | 89 +++++++++++++++++++++++++++++++++++++++++-
+ server/video-encoder.h | 13 ++++++
+ 2 files changed, 100 insertions(+), 2 deletions(-)
 
-diff --git a/server/dcc-private.h b/server/dcc-private.h
-index bf485aec..cd5b76a3 100644
---- a/server/dcc-private.h
-+++ b/server/dcc-private.h
-@@ -69,6 +69,8 @@ struct DisplayChannelClientPrivate
-     uint32_t streams_max_latency;
-     uint64_t streams_max_bit_rate;
-     bool gl_draw_ongoing;
-+
-+    VideoStream *gl_draw_stream;
- };
- 
- #include "pop-visibility.h"
-diff --git a/server/dcc.cpp b/server/dcc.cpp
-index f0b355ca..9d91ca53 100644
---- a/server/dcc.cpp
-+++ b/server/dcc.cpp
-@@ -525,6 +525,20 @@ RedPipeItemPtr dcc_gl_draw_item_new(RedChannelClient *rcc, void *data, int num)
-     auto item = red::make_shared<RedGlDrawItem>();
-     item->draw = *draw;
- 
-+    if (!dcc_is_gl_client(dcc)) {
-+        VideoStream *stream = dcc->priv->gl_draw_stream;
-+
-+        if (!stream ||
-+            stream->dest_area.left != draw->x ||
-+            stream->dest_area.top != draw->y ||
-+            stream->width != draw->w || stream->height != draw->h) {
-+            stream = display_channel_create_gl_draw_stream(dcc, draw);
-+        } else {
-+            stream->last_time = spice_get_monotonic_time_ns();
-+        }
-+        dcc->priv->gl_draw_stream = stream;
-+    }
-+
-     return item;
+diff --git a/server/dcc-send.cpp b/server/dcc-send.cpp
+index 2c40a231..94cbe7e7 100644
+--- a/server/dcc-send.cpp
++++ b/server/dcc-send.cpp
+@@ -1730,6 +1730,82 @@ static bool red_marshall_stream_data(DisplayChannelClient *dcc,
+     return TRUE;
  }
  
-diff --git a/server/video-stream.cpp b/server/video-stream.cpp
-index 056d0c31..03a7d68d 100644
---- a/server/video-stream.cpp
-+++ b/server/video-stream.cpp
-@@ -415,6 +415,47 @@ static void display_channel_create_stream(DisplayChannel *display, Drawable *dra
-                 stream->input_fps);
- }
- 
-+VideoStream *
-+display_channel_create_gl_draw_stream(DisplayChannelClient *dcc,
-+                                      const SpiceMsgDisplayGlDraw *draw)
++static void red_gst_mem_free_cb(void *opaque)
 +{
++    auto dcc = static_cast<DisplayChannelClient *>(opaque);
 +    DisplayChannel *display = DCC_TO_DC(dcc);
-+    VideoStream *stream;
-+    SpiceRect dest_area = {
-+        .left = draw->x,
-+        .top = draw->y,
-+        .right = draw->w,
-+        .bottom = draw->h
-+    };
 +
-+    if (!(stream = display_channel_stream_try_new(display))) {
-+        return nullptr;
-+    }
-+
-+    ring_add(&display->priv->streams, &stream->link);
-+    stream->current = nullptr;
-+    stream->last_time = spice_get_monotonic_time_ns();
-+    stream->width = draw->w;
-+    stream->height = draw->h;
-+    stream->dest_area = dest_area;
-+    stream->refs = 1;
-+    stream->top_down = 1;
-+    stream->input_fps = MAX_FPS;
-+    stream->num_input_frames = 0;
-+    stream->input_fps_start_time = spice_get_monotonic_time_ns();
-+    display->priv->streams_size_total += stream->width * stream->height;
-+    display->priv->stream_count++;
-+
-+    dcc_create_stream(dcc, stream);
-+    spice_debug("stream %d %dx%d (%d, %d) (%d, %d) %u fps",
-+                display_channel_get_video_stream_id(display, stream), stream->width,
-+                stream->height, stream->dest_area.left, stream->dest_area.top,
-+                stream->dest_area.right, stream->dest_area.bottom,
-+                stream->input_fps);
-+
-+    return stream;
++    dcc->priv->gl_draw_ongoing = FALSE;
++    display_channel_gl_draw_done(display);
 +}
 +
- // returns whether a stream was created
- static bool video_stream_add_frame(DisplayChannel *display,
-                              Drawable *frame_drawable,
-@@ -744,6 +785,9 @@ void dcc_create_stream(DisplayChannelClient *dcc, VideoStream *stream)
++static void red_marshall_gl_draw_stream(DisplayChannelClient *dcc,
++                                        SpiceMarshaller *base_marshaller)
++{
++    DisplayChannel *display = DCC_TO_DC(dcc);
++    QXLInstance* qxl = display->priv->qxl;
++    VideoEncoderDmabufData *dmabuf_data = nullptr;
++
++    VideoStream *stream = dcc->priv->gl_draw_stream;
++    SpiceMsgDisplayGlScanoutUnix *scanout = red_qxl_get_gl_scanout(qxl);
++    if (scanout != nullptr) {
++        dmabuf_data = g_new0(VideoEncoderDmabufData, 1);
++        dmabuf_data->drm_dma_buf_fd = scanout->drm_dma_buf_fd;
++        dmabuf_data->width = stream->width;
++        dmabuf_data->height = stream->height;
++        dmabuf_data->stride = scanout->stride;
++        dmabuf_data->opaque = dcc;
++        dmabuf_data->notify_mem_free = red_gst_mem_free_cb;
++    }
++    red_qxl_put_gl_scanout(qxl, scanout);
++    if (!dmabuf_data) {
++        spice_warning("scanout is not valid");
++        return;
++    }
++
++    int stream_id = display_channel_get_video_stream_id(display, stream);
++    VideoStreamAgent *agent = &dcc->priv->stream_agents[stream_id];
++    uint32_t frame_mm_time = reds_get_mm_time();
++    VideoBuffer *outbuf;
++    VideoEncodeResults ret;
++
++    ret = !agent->video_encoder || !agent->video_encoder->encode_dmabuf ?
++          VIDEO_ENCODER_FRAME_UNSUPPORTED :
++          agent->video_encoder->encode_dmabuf(agent->video_encoder,
++                                              frame_mm_time,
++                                              dmabuf_data, &outbuf);
++    switch (ret) {
++    case VIDEO_ENCODER_FRAME_ENCODE_DONE:
++        break;
++    case VIDEO_ENCODER_FRAME_DROP:
++#ifdef STREAM_STATS
++        agent->stats.num_drops_fps++;
++#endif
++    case VIDEO_ENCODER_FRAME_UNSUPPORTED:
++    default:
++        spice_warning("bad return value (%d) from VideoEncoder::encode_dmabuf", ret);
++        display_channel_gl_draw_done(display);
++        g_free(dmabuf_data);
++        return;
++    }
++
++    SpiceMsgDisplayStreamData stream_data;
++
++    dcc->init_send_data(SPICE_MSG_DISPLAY_STREAM_DATA);
++    stream_data.base.id = stream_id;
++    stream_data.base.multi_media_time = frame_mm_time;
++    stream_data.data_size = outbuf->size;
++    spice_marshall_msg_display_stream_data(base_marshaller, &stream_data);
++
++    spice_marshaller_add_by_ref_full(base_marshaller, outbuf->data, outbuf->size,
++                                     &red_release_video_encoder_buffer, outbuf);
++#ifdef STREAM_STATS
++    agent->stats.num_frames_sent++;
++    agent->stats.size_sent += outbuf->size;
++    agent->stats.end = frame_mm_time;
++#endif
++}
++
+ static inline void marshall_inval_palette(RedChannelClient *rcc,
+                                           SpiceMarshaller *base_marshaller,
+                                           RedCachePipeItem *cache_item)
+@@ -2126,6 +2202,8 @@ static void marshall_stream_start(DisplayChannelClient *dcc,
      if (stream->current) {
-         region_clone(&agent->vis_region, &stream->current->tree_item.base.rgn);
-         region_clone(&agent->clip, &agent->vis_region);
+         RedDrawable *red_drawable = stream->current->red_drawable.get();
+         stream_create.clip = red_drawable->clip;
++    } else if (stream == dcc->priv->gl_draw_stream){
++        stream_create.clip.type = SPICE_CLIP_TYPE_NONE;
+     } else {
+         stream_create.clip.type = SPICE_CLIP_TYPE_RECTS;
+         clip_rects.num_rects = 0;
+@@ -2279,10 +2357,17 @@ static void marshall_gl_draw(RedChannelClient *rcc,
+                              SpiceMarshaller *m,
+                              RedPipeItem *item)
+ {
++    DisplayChannelClient *dcc = DISPLAY_CHANNEL_CLIENT(rcc);
+     auto p = static_cast<RedGlDrawItem*>(item);
+ 
+-    rcc->init_send_data(SPICE_MSG_DISPLAY_GL_DRAW);
+-    spice_marshall_msg_display_gl_draw(m, &p->draw);
++    if (dcc_is_gl_client(dcc)) {
++        rcc->init_send_data(SPICE_MSG_DISPLAY_GL_DRAW);
++        spice_marshall_msg_display_gl_draw(m, &p->draw);
++    } else if (dcc->priv->gl_draw_stream) {
++        red_marshall_gl_draw_stream(dcc, m);
 +    } else {
-+        region_add(&agent->vis_region, &stream->dest_area);
-+        region_clone(&agent->clip, &agent->vis_region);
-     }
-     agent->dcc = dcc;
++        spice_warning("nothing to send to the client");
++    }
+ }
  
-diff --git a/server/video-stream.h b/server/video-stream.h
-index 23b44ff5..a8b2c61c 100644
---- a/server/video-stream.h
-+++ b/server/video-stream.h
-@@ -124,6 +124,8 @@ struct VideoStream {
- };
  
- void display_channel_init_video_streams(DisplayChannel *display);
-+VideoStream *display_channel_create_gl_draw_stream(DisplayChannelClient *dcc,
-+                                                   const SpiceMsgDisplayGlDraw *draw);
- void video_stream_stop(DisplayChannel *display, VideoStream *stream);
- void video_stream_trace_update(DisplayChannel *display, Drawable *drawable);
- void video_stream_maintenance(DisplayChannel *display, Drawable *candidate,
+diff --git a/server/video-encoder.h b/server/video-encoder.h
+index d5bc0a68..8eb71ca1 100644
+--- a/server/video-encoder.h
++++ b/server/video-encoder.h
+@@ -56,6 +56,15 @@ typedef struct VideoEncoderStats {
+     double avg_quality;
+ } VideoEncoderStats;
+ 
++typedef struct VideoEncoderDmabufData {
++    int32_t drm_dma_buf_fd;
++    uint32_t width;
++    uint32_t height;
++    uint32_t stride;
++    void *opaque;
++    void (*notify_mem_free)(void *opaque);
++} VideoEncoderDmabufData;
++
+ typedef struct VideoEncoder VideoEncoder;
+ struct VideoEncoder {
+     /* Releases the video encoder's resources */
+@@ -84,6 +93,10 @@ struct VideoEncoder {
+                                        const SpiceRect *src, int top_down,
+                                        gpointer bitmap_opaque, VideoBuffer** outbuf);
+ 
++    VideoEncodeResults (*encode_dmabuf)(VideoEncoder *encoder, uint32_t frame_mm_time,
++                                        VideoEncoderDmabufData *dmabuf_data,
++                                        VideoBuffer** outbuf);
++
+     /*
+      * Bit rate control methods.
+      */
 -- 
 2.37.2
 
