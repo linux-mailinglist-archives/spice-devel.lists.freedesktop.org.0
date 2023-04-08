@@ -1,62 +1,76 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45AB16DB4F4
-	for <lists+spice-devel@lfdr.de>; Fri,  7 Apr 2023 22:14:08 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07E276DC179
+	for <lists+spice-devel@lfdr.de>; Sun,  9 Apr 2023 23:12:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D6FA510E1BC;
-	Fri,  7 Apr 2023 20:14:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 817FD10E037;
+	Sun,  9 Apr 2023 21:12:44 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 00B6C10EE42
- for <spice-devel@lists.freedesktop.org>; Fri,  7 Apr 2023 18:21:43 +0000 (UTC)
-Received: by mail-pj1-x102e.google.com with SMTP id
- d22-20020a17090a111600b0023d1b009f52so2015973pja.2
- for <spice-devel@lists.freedesktop.org>; Fri, 07 Apr 2023 11:21:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20210112; t=1680891703; x=1683483703;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6ZdRaKow9MiJw77AIs6HNE5L6Bt+Axun0Z6165dll/w=;
- b=o3WtKycKtV542XSaicFZz0CZ/dev938aAn+qeeNOY8WRyHVIze4YnJcFgiiCsWaJxV
- Ajd71OA0ng3Iisqa/ZJw1jna4z9PJi5fh7kAxvyGHi1kAoeLTxecd7HJsNnkjtM/ct+x
- emcM3MoywW3r3eCx1wcYy4wWI2bv+DS9v1sL47O7H1elmMk597W7oAgHNauc5/iOBFpH
- 6Wnov6/4+cfjUr6gNj+wyBLCt4+2Xk9D7yEQQESblpkSTIwBCJElhNz6OS5Rj33wpnKO
- cnOUzmdDfEz++ahqDKTY62TN4cPZL+eaoeUJJFSxTblMU2G2LmxcljBt5McsPw1BoSWu
- m72g==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A4AF810E12C
+ for <spice-devel@lists.freedesktop.org>; Sat,  8 Apr 2023 16:50:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1680972628;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=qy6SYd3f0i8ho8eow+vyxJgxXrM08wU7g/SGD1LI0yQ=;
+ b=f+ZWh3uy8XJvEEKDea5clsdVyFF0fCswDbkLaElfeZIyXo3Y6K0ImMK2L30yEeKgUXiPJN
+ bHN8o7VPMx325cAsEaEEceUrPeQSymwS2/VlLXDon2G96LxoldfCGigLyCXpAVsqsqo2my
+ qfjGdRV0ozTF6tl6x6a2IfAYHCFRzso=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-288-gvyCw-ykOIOguvKb9V1i4Q-1; Sat, 08 Apr 2023 12:50:26 -0400
+X-MC-Unique: gvyCw-ykOIOguvKb9V1i4Q-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ w10-20020a0cc24a000000b00583d8e55181so777502qvh.23
+ for <spice-devel@lists.freedesktop.org>; Sat, 08 Apr 2023 09:50:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680891703; x=1683483703;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6ZdRaKow9MiJw77AIs6HNE5L6Bt+Axun0Z6165dll/w=;
- b=PNg8Eh8bAn+P/rl9TVVutyuxSkK0EAUMpGYykauOAPt0VPV6e6MeailSo0WtCnaLeZ
- rlTFoz2ZVb59U1onSryIGB3zDtIsPuREVw9LgMUEV2oSW0DgOCfdNNG9bIYUJMUNhpJF
- BKzs50RRMS1jmqHKfHOfkr57AFSUH11j3pnB6pWY4+7wgwcFz2v2pn/TsGXIXO80evpB
- xLst8Tx34X2HfXF4R+itZtF70arIIpZNUh/NVPGpymDGpzMBVeH/Go5yRHHVnO7SJURK
- sNPMW2qFUwMdhtLulcnQukfTKOSrmpbW5fqLpnvDPrg/4e51KGaQMJREQ5sbe5sP4FT0
- IyCg==
-X-Gm-Message-State: AAQBX9c4A3NrzH2tJott4XHJxHC0JldRJ5/2gtVX1f9OLMRzTLM9TJIW
- X4OjiwfoHgml1MwDsMXxpHDqWOPvrnRtWgBjws8Ppg==
-X-Google-Smtp-Source: AKy350bi6/Eqyz2r683FnPvRwH6NTPyo8wV2nEG2rf8+C/NqkAczhLhuqlNMO7AwVBgrZzZVxiS/kkIt6VR0vqaeXZs=
-X-Received: by 2002:a17:902:da85:b0:19f:2aa4:b1e5 with SMTP id
- j5-20020a170902da8500b0019f2aa4b1e5mr1212280plx.2.1680891702918; Fri, 07 Apr
- 2023 11:21:42 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1680972626;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qy6SYd3f0i8ho8eow+vyxJgxXrM08wU7g/SGD1LI0yQ=;
+ b=1sMeLwQkQVqHld5Og9CCX6ITcTrscwsLhas5HcB8tSEuDLfbYAYTCUv+baRlWR3O10
+ PfkIdLXP+WB01WVe/AsMjqrOCIoel2z17cpDIv9TiirWW5hJYHxuhBKYdy+CKyqPgFWG
+ beverCaVxfk+Kg3FBw9ixsgWCWWO6vVt52Qm1k6Y1zgpm/zryWWCN9Os4yLzcyVORsNP
+ LXwKN3oLCD/GXf9nev9GED/FYGNEN9xoWideuPX5y8sPJWqqjeuc7HyQMPfZwD3DnTKK
+ OmHuHz4Axx950f1RrBUbPwE9NzKooztq70Eku0OGjzh/u/yM6JtiXUcr33uyfVwXXt7T
+ Z3BA==
+X-Gm-Message-State: AAQBX9ccbIcrpsiudpIb+mNQa/uA2mNSQRDDgOXXU8kpcSvlPFPjDxjA
+ rR26/U8ib7SyBgiNAfBUjuv7oQPnklZ5l2ghX3LQbK8aupB1D3T0iKm4TWFE4XHrEuBkhYtQO/n
+ 6ou5kg+eVzHfVHDs4JVZDji3+MHfDc0s=
+X-Received: by 2002:a05:622a:15c3:b0:3e1:b06d:e9e1 with SMTP id
+ d3-20020a05622a15c300b003e1b06de9e1mr3842260qty.57.1680972626209; 
+ Sat, 08 Apr 2023 09:50:26 -0700 (PDT)
+X-Google-Smtp-Source: AKy350a46s9y+/itqppzPjf57cV1ZevRRKIKzqVvsO1UIrG/xBtSg7j5IKxAIQvMkkT/GV64uTG74Q==
+X-Received: by 2002:a05:622a:15c3:b0:3e1:b06d:e9e1 with SMTP id
+ d3-20020a05622a15c300b003e1b06de9e1mr3842236qty.57.1680972625999; 
+ Sat, 08 Apr 2023 09:50:25 -0700 (PDT)
+Received: from dell-per740-01.7a2m.lab.eng.bos.redhat.com
+ (nat-pool-bos-t.redhat.com. [66.187.233.206])
+ by smtp.gmail.com with ESMTPSA id
+ s128-20020a372c86000000b0074688c36facsm2113865qkh.56.2023.04.08.09.50.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Apr 2023 09:50:25 -0700 (PDT)
+From: Tom Rix <trix@redhat.com>
+To: airlied@redhat.com, kraxel@redhat.com, airlied@gmail.com, daniel@ffwll.ch,
+ nathan@kernel.org, ndesaulniers@google.com
+Date: Sat,  8 Apr 2023 12:50:23 -0400
+Message-Id: <20230408165023.2706235-1-trix@redhat.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <20230331172423.1860083-1-trix@redhat.com>
-In-Reply-To: <20230331172423.1860083-1-trix@redhat.com>
-From: Nick Desaulniers <ndesaulniers@google.com>
-Date: Fri, 7 Apr 2023 11:21:31 -0700
-Message-ID: <CAKwvOdkoYTVYeN9G-YB5ADq1Lt35d265pJHCOcy-Ro-22PFM4Q@mail.gmail.com>
-To: Tom Rix <trix@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 07 Apr 2023 20:14:04 +0000
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: remove unused num_relocs variable
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
+X-Mailman-Approved-At: Sun, 09 Apr 2023 21:12:41 +0000
+Subject: [Spice-devel] [PATCH] drm/qxl: remove variable count
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,77 +82,44 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: llvm@lists.linux.dev, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- nathan@kernel.org, kraxel@redhat.com, daniel@ffwll.ch,
- spice-devel@lists.freedesktop.org, airlied@redhat.com, fziglio@redhat.com
+Cc: Tom Rix <trix@redhat.com>, llvm@lists.linux.dev,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, Mar 31, 2023 at 10:24=E2=80=AFAM Tom Rix <trix@redhat.com> wrote:
->
-> clang with W=3D1 reports
-> drivers/gpu/drm/qxl/qxl_ioctl.c:149:14: error: variable
->   'num_relocs' set but not used [-Werror,-Wunused-but-set-variable]
->         int i, ret, num_relocs;
->                     ^
-> This variable is not used so remove it.
->
-> Signed-off-by: Tom Rix <trix@redhat.com>
+clang with W=1 reports
+drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable
+  'count' set but not used [-Werror,-Wunused-but-set-variable]
+        int count = 0;
+            ^
+This variable is not used so remove it.
 
-Thanks for the patch!
-Fixes: 74d9a6335dce ("drm/qxl: Simplify cleaning qxl processing command")
-Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
+Signed-off-by: Tom Rix <trix@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_cmd.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-That commit should also have removed the label out_free_bos IMO since
-having two labels for the same statement is a code smell.  Tom, do you
-mind sending a v2 with that folded in?
+diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
+index 281edab518cd..d6ea01f3797b 100644
+--- a/drivers/gpu/drm/qxl/qxl_cmd.c
++++ b/drivers/gpu/drm/qxl/qxl_cmd.c
+@@ -421,7 +421,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+ {
+ 	uint32_t handle;
+ 	int idr_ret;
+-	int count = 0;
+ again:
+ 	idr_preload(GFP_ATOMIC);
+ 	spin_lock(&qdev->surf_id_idr_lock);
+@@ -433,7 +432,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+ 	handle = idr_ret;
+ 
+ 	if (handle >= qdev->rom->n_surfaces) {
+-		count++;
+ 		spin_lock(&qdev->surf_id_idr_lock);
+ 		idr_remove(&qdev->surf_id_idr, handle);
+ 		spin_unlock(&qdev->surf_id_idr_lock);
+-- 
+2.27.0
 
-> ---
->  drivers/gpu/drm/qxl/qxl_ioctl.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->
-> diff --git a/drivers/gpu/drm/qxl/qxl_ioctl.c b/drivers/gpu/drm/qxl/qxl_io=
-ctl.c
-> index 30f58b21372a..3422206d59d4 100644
-> --- a/drivers/gpu/drm/qxl/qxl_ioctl.c
-> +++ b/drivers/gpu/drm/qxl/qxl_ioctl.c
-> @@ -146,7 +146,7 @@ static int qxl_process_single_command(struct qxl_devi=
-ce *qdev,
->         struct qxl_release *release;
->         struct qxl_bo *cmd_bo;
->         void *fb_cmd;
-> -       int i, ret, num_relocs;
-> +       int i, ret;
->         int unwritten;
->
->         switch (cmd->type) {
-> @@ -201,7 +201,6 @@ static int qxl_process_single_command(struct qxl_devi=
-ce *qdev,
->         }
->
->         /* fill out reloc info structs */
-> -       num_relocs =3D 0;
->         for (i =3D 0; i < cmd->relocs_num; ++i) {
->                 struct drm_qxl_reloc reloc;
->                 struct drm_qxl_reloc __user *u =3D u64_to_user_ptr(cmd->r=
-elocs);
-> @@ -231,7 +230,6 @@ static int qxl_process_single_command(struct qxl_devi=
-ce *qdev,
->                         reloc_info[i].dst_bo =3D cmd_bo;
->                         reloc_info[i].dst_offset =3D reloc.dst_offset + r=
-elease->release_offset;
->                 }
-> -               num_relocs++;
->
->                 /* reserve and validate the reloc dst bo */
->                 if (reloc.reloc_type =3D=3D QXL_RELOC_TYPE_BO || reloc.sr=
-c_handle) {
-> --
-> 2.27.0
->
-
-
---=20
-Thanks,
-~Nick Desaulniers
