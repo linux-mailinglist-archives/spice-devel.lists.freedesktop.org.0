@@ -2,66 +2,109 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0A956E2FAC
-	for <lists+spice-devel@lfdr.de>; Sat, 15 Apr 2023 10:17:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 522126E74BE
+	for <lists+spice-devel@lfdr.de>; Wed, 19 Apr 2023 10:13:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EEA4E10E04C;
-	Sat, 15 Apr 2023 08:17:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BEEB310E0AB;
+	Wed, 19 Apr 2023 08:13:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DDE8610E025
- for <spice-devel@lists.freedesktop.org>; Sat, 15 Apr 2023 08:17:34 +0000 (UTC)
-Received: by mail-oi1-x232.google.com with SMTP id a7so21199oiw.7
- for <spice-devel@lists.freedesktop.org>; Sat, 15 Apr 2023 01:17:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681546653; x=1684138653;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2TY0hDxYNQaPiOuxTf1ND6gRUx5F12NLv5wj/+lCV5w=;
- b=VRxQSoPk8vcquAk2nogSSlk/hJdvo8NVdxpIfPaeyDctvOL7jVsAhNt5XfstD+cfQs
- vnq7l76aKcb5guM85/+ahgBiJLpMw7u8VMQmWLQ/5+/IrIqeTZGS1gcM/lAulMEJKjwT
- w+ks6XkaAgN1uGc9iSxS27x72dsMJCOmgzYu1Zy7WWehWDPot7X1uyJ3TSh79cUDAH/e
- ySjINZnIR2W46bzKl7+/RfyMqX2H6GGSQu2HFgWRCVvGsTAvcKx0HdtKnQeAzt+PuLQ2
- jHdCTcPl3HLwjttvCKoMI/3OCWgC56oOBzrWMAJpki9lHh1sR632AcP/W5rJ79+DWB5m
- uM2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681546653; x=1684138653;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2TY0hDxYNQaPiOuxTf1ND6gRUx5F12NLv5wj/+lCV5w=;
- b=X75YiSpEM91YBE+4x20K11Fe2B2bF07HB030XEL4HgDCaQM0k1XjfxVV8MvNGO8x0T
- EuhgyXukcCJD6MwyswTCeN7f9nexJCSg97TFsutPDwPNPr70qZdJx2aorbmghWRQk1+9
- ImbiZSbE6IU8/bGteXrR/1hXg2H514HUNHoqIy2g4OtmkUvCxLhOleulCWY1M9tHD99u
- eClE64tIedBgPReR9MrKobJm6SeCj/T3hubHKBMR1p8SGNg7TaRVefrkfOiBaozevtnl
- vHvIOgDkRpZRunh4xe7Kb+zxMYzp0n8Zs+UCSN7OFTiUTQiHlDuJdaxVn7k3s06/tIXV
- yHMQ==
-X-Gm-Message-State: AAQBX9euT0TjjD/j46HmHbiR4LdRLRvGqnmA5SLtqt0+NPpo5+MYH8GW
- ONgKrd7H+3goqyD8K6QO8ByAOxLlYvLtmcFY2Mk=
-X-Google-Smtp-Source: AKy350YyKFkvvAZmnhtWehRrUbXdlx8Sesr4k9sFcqJ/8xjMn1TImO+WxLNeLavu+/s4KyGU0tQwnNg53hr2wgXDLBE=
-X-Received: by 2002:a05:6808:1801:b0:38c:98a9:2b28 with SMTP id
- bh1-20020a056808180100b0038c98a92b28mr126359oib.3.1681546653430; Sat, 15 Apr
- 2023 01:17:33 -0700 (PDT)
+Received: from GCC02-BL0-obe.outbound.protection.outlook.com
+ (mail-bl2gcc02lp2108.outbound.protection.outlook.com [104.47.64.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7923510E7EB
+ for <spice-devel@lists.freedesktop.org>; Tue, 18 Apr 2023 14:32:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Zc4wnL9l0aLjDZ2YLkDY/2MFvsSiOsMcFjv2/qDbw1IiE1b5J1NxFpncvAS6MYH50HJJvGTD9QeDC8feHXIu6T9B4AmSBWSFPrgRqRUepTjz3Sam86SsMdb2cBXE6OtXmfOKxnbzmyHOKT9uXHCVR70DYKQ0ZCFnndsDqBZl/8hXJV0fI7sdNHjnXmTI6FazUYoc1wRUAl/qwgTgWLJ7WVh+qrSh2kyCN3QuHtmYV0+vfSd3iOnLB3vuP/c3CggcjAjQ0CzGt9oVHKNp51PhuMsYMu3ln8gNN2WxdecljFxGZz89xuI++KFQobAVl8xsyEKteT/2hXQxdfiaO4lDig==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2Nix8EfJVpogbPEscvZrHwUWsBoGC8BOIMc+MOEgMn4=;
+ b=ek4ZWwNvA62lsSa8dT8P291vJ2UOEcYiBHfmwPcK2O5XGR2o1XK9AVr4ukWQdQz4fXouWUp898n5tBJ/9ZPzPnsvwuQR93on5dbnh57dmw0VTuoDLsbs12ezIdrwnDPOEx0P2kQOSHkCjtPH9AWZ1Sj8ZppinTP9FRQxzsYImHXW0XE49WknJtgnenCDNSoBECz6KHiaLcpv/DrwsOLmpBjTdnVjq4xq+d8zMWMfTEynSzit0ULmPEBvXFUrUWFmAKzVkCYgefpem2P4Q3B0pEdGODJYPGHmhi2lq9xpHxPCUP/kFp+iBTDQz5YnzhUPbuFvB3gPN+t7wDiBzNR1ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nasa.gov; dmarc=pass action=none header.from=nasa.gov;
+ dkim=pass header.d=nasa.gov; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nasa.gov; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2Nix8EfJVpogbPEscvZrHwUWsBoGC8BOIMc+MOEgMn4=;
+ b=FYEVH2jL5olHPrY93Ni92WUD1OposRQJRMDpH/s1P0gZr79FRlx3/L0MLFy+/fAJnf+oFtqB0mZj7Nnsqa5+LrvEQVug0ybqL3HdyBbZwyLSIeNm7xnEkHQYUUoimjKOs7rJ7drmEFNOS9QyOnT+EM/YHI9EWFii5ofbB7KWZF4=
+Received: from SA1PR09MB8398.namprd09.prod.outlook.com (2603:10b6:806:17f::20)
+ by SA1PR09MB10619.namprd09.prod.outlook.com (2603:10b6:806:367::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.45; Tue, 18 Apr
+ 2023 14:31:58 +0000
+Received: from SA1PR09MB8398.namprd09.prod.outlook.com
+ ([fe80::1733:7268:758f:3058]) by SA1PR09MB8398.namprd09.prod.outlook.com
+ ([fe80::1733:7268:758f:3058%6]) with mapi id 15.20.6319.020; Tue, 18 Apr 2023
+ 14:31:58 +0000
+From: "Simmons, Thomas W. (LARC-E301)[STARSS III Affiiate]"
+ <thomas.w.simmons@nasa.gov>
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Thread-Topic: USB redirection fails with latest virt-viewer and UsbDk
+Thread-Index: AdlxYTgKobg03VG2RbmZ9G17gd/ATQ==
+Date: Tue, 18 Apr 2023 14:31:57 +0000
+Message-ID: <SA1PR09MB8398212DA5A87B1F62E4B448A49D9@SA1PR09MB8398.namprd09.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nasa.gov;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA1PR09MB8398:EE_|SA1PR09MB10619:EE_
+x-ms-office365-filtering-correlation-id: 49b1af8c-3f86-4176-0cd7-08db4019aa72
+x-agency-banner-exclusion: 1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: xdUtD6IGpWAACe6W7WvrtjJ1wCgYXpQX5Qo6udk+I4sFnNGx5TsbwUkjqBDQvlfYnSlQ4QhtxdIAr1r2+BrHRuZHxsfXeUvrDCdKudTXKvZCjIggATMYRU6aJ8K0E3p9lM0ilCHG0IwJkmpZdXgsV03HQlPTY3iiwoE2lfp99jD0/9LGKISSBNA0lnwdDp3Ge2WPo8AmCwr5/+8n1vX/hW+WV2VQLGaCMLVULhEkHFBVXa7vMt/gjgf+VR7WpACVEJJa7g+VZYrhMYLXXr2jGOcKWouBFDpuz2Tr7Pf4Yxg+UYzCeecQJtQP26/pvyzCuLhgj2EPm7sX7g3r4BDNAhtMkEKpiMLRssC+lqfbBbjtjTBlvnRgQSvxIXiqu09QHUw+EP8A1nFNzd54707u0vwjlCnXgcU49UTcUoPV/cO5lRgFV4ELOP38QBqQEqA6CrXVk2wQYD+MctkUyC96p2CeZBznrI3HQdiVOFqSebbh6hVHmgaczhvtnL00SMUMOMPwO00vADOoKY0WFoteiBIjscWkzXSUIQ6IiHQq3UzBSjBEZukk0pzFiomNA/WS50ksvBRHdAmXSVsFLZzW6iM3mhynM3XvhbXgI8kw8PDYz/4rg7Y6XnyyW7Ty4erS
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA1PR09MB8398.namprd09.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(366004)(451199021)(66446008)(6916009)(66946007)(76116006)(66476007)(64756008)(66556008)(498600001)(9326002)(71200400001)(55016003)(7696005)(8676002)(8936002)(5660300002)(122000001)(2906002)(52536014)(4744005)(86362001)(33656002)(38070700005)(186003)(38100700002)(9686003)(26005)(6506007)(83380400001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?EIbQa1kWJgzEZzAh4+IsBB/73xrKRL/Y8z+KbpmX0fxMwSnIGNsjFlDrC6m/?=
+ =?us-ascii?Q?NeOzZZw/mQgNDPbcGdM/QF2Lx7HOTvMsjmXhZkq1QuUN246b6Fk3qW86VLPi?=
+ =?us-ascii?Q?X882J7YnHwT0KcMbhQm0rD5hJ1QERTR/5rSiMnUsyUmcphe/z/MhHMCdpjsI?=
+ =?us-ascii?Q?4/n0kzKz57FIY4Lmov1koy4gansCZj1tNGLVKkYJxQjsKtc76OWJG/+R41t4?=
+ =?us-ascii?Q?+YZ0ChzA0rLNM033H49mKcVLqhPfr1YttumZ3iPDQ8g8yQYlHFVuZCmTc/T8?=
+ =?us-ascii?Q?XLkzW7klV74IITvIGxmINv2UFYFfCF4SOT0BGSz6OapDlfoG4T5Jc/7kC3AI?=
+ =?us-ascii?Q?4sB+1SVOBThpdJKf9GJwDdo7imBDJhJ157GrE5TJCZTK72+2OEOtkgVhmuj0?=
+ =?us-ascii?Q?gVnPGe74eaFJs7Ma3dvCLOp6uEZ/g2H37G7ip/5Mje6WzwTHMaLg1IyxuZ40?=
+ =?us-ascii?Q?ne2MN6UbClzQQRRQzU0bi0EWtkawBYy1rez1QreEyDX7SxJWOTaNKN8mNxvK?=
+ =?us-ascii?Q?CX9RGUPXTqQRlnJ8KSceERjBUfQeyBAUqRYXOHkJPVNU9VvAnhoT5Y/9/uMd?=
+ =?us-ascii?Q?sovmY3eVaJL5kcOwqpLRUwOgUGrKpqzoao+CTYNoj+U4Ai9BbPsvf30eA6No?=
+ =?us-ascii?Q?y6+56E8BfHvyy6dR3ZqvL9mnz6sy6Q2IjsmtvKuVkR1ILUNXPQ3Hd8nCs9EF?=
+ =?us-ascii?Q?s2FRh6kgz5TXhwJ/brWLH1GRBzEfkmRh4T63FBRq9HmMVS5BdLzqeTMVUyiC?=
+ =?us-ascii?Q?LBcNfzOG49kDJ3cgxW0BJaFulIdILoa6fyqXHx9sqo9kr4L2TIbEkgDSydIR?=
+ =?us-ascii?Q?j5YLkjmnZigxDWCI8Uz6nLJ3VpyaeqiznBgIdcyEAc9Gkx6aBhwtEKZCs3uW?=
+ =?us-ascii?Q?NZ6F14lEDeNyZ9qI2IxYpaSw0T9GrH6XaHNgdWeAeOzY3ESZsfrvaVTV0+kx?=
+ =?us-ascii?Q?nppsjwFpEGhQJkrAY+5t0yr9aD3seB94PgQGKK+0W2Udyr4JAERbe/o8O2QB?=
+ =?us-ascii?Q?8kMKHlpbhQ9ESni9uUoDu2HoC3XT1QITQ6j+YEV1+WMkAXNRGATVXWFGtpfE?=
+ =?us-ascii?Q?lG4LfQ8l6J3Tb9hfWRZSQsHUlaXGCsmfm+XH0d1DZaCdd/ZlHO+W1jF5rSzW?=
+ =?us-ascii?Q?yeXbzNXq23F0w8y/j21clNb0lbco5zRJLkpQeUP25gQlMxwIi1gLNlrxO2mg?=
+ =?us-ascii?Q?CbE05G2BtwzI6qLyVfjzOVlNWHdMMbIn9aeCd2bGMQo8CYr9orHkoBpq77MZ?=
+ =?us-ascii?Q?GSR17iacr/YU8XaMNLCI9k67XYeA5v6zUOKu8AIas7F1hcwxbWsE3Ex2ERxW?=
+ =?us-ascii?Q?yKCvi54MKC6bjyKIRlCLFmlz8xUkQpvXJ9zjYtJUJvV6K8VrvCzTmOb51i5G?=
+ =?us-ascii?Q?T/Lu8kCgqLNKT2FQSl8P0XV5yZTKcDl+uZqRfuMGsrcFTaBSmO3ju3uxvQzP?=
+ =?us-ascii?Q?QPa4VpaOKKJuxm69ccwj7n1j9YjykS8neiZM5V5dk0P6Sf64pLm5HzbbTg7I?=
+ =?us-ascii?Q?3tJkAnIyRBqdBK5L81SYXQlHTbDaIpY5/mRxrJaRCgg9shE9rX1yE0fSTXWs?=
+ =?us-ascii?Q?iHQJlt+xsNyHiGf4cUkFf/Qi99/n6mGdILbAoia7?=
+Content-Type: multipart/alternative;
+ boundary="_000_SA1PR09MB8398212DA5A87B1F62E4B448A49D9SA1PR09MB8398namp_"
 MIME-Version: 1.0
-References: <20230316054458.1546085-1-vivek.kasireddy@intel.com>
- <CAHt6W4fwABLRLkjsZ584-kaJbJPvn4huNMeXQBnZj+usAs_fyQ@mail.gmail.com>
- <IA0PR11MB7185A086540E06748286F573F88B9@IA0PR11MB7185.namprd11.prod.outlook.com>
- <CAHt6W4cBU7pakwn+nwuUKQj_=BoXDV=Oc5M8fuc3gCA18gK8Qg@mail.gmail.com>
- <IA0PR11MB7185A0BF637E1C676469E04BF88F9@IA0PR11MB7185.namprd11.prod.outlook.com>
- <CAHt6W4d+DkEReW0z97ejQ+UhEWCV3aONgCywY6Vpio=Hqo=4tA@mail.gmail.com>
- <IA0SPRMB0001BC01AC9CE18534BE3A7FF89E9@IA0SPRMB0001.namprd11.prod.outlook.com>
-In-Reply-To: <IA0SPRMB0001BC01AC9CE18534BE3A7FF89E9@IA0SPRMB0001.namprd11.prod.outlook.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sat, 15 Apr 2023 09:17:22 +0100
-Message-ID: <CAHt6W4fO2AA-8SFp-NbwBV0bUXiUBdkn86i8AkmPP4F+YfDVQw@mail.gmail.com>
-To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] [PATCH v1 0/5] dcc: Create a stream for
- non-gl/remote clients that want to use dmabuf
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 2ctRJCD1Fz34WCg5MFLT7Dp1BPExat0Mrtppp2MWbInkHCN/qAa8wZVBFfkY01dMps+TX2vI3XwEzklrtynYg/fp/HYfOWFKnQE1OVAUfh08CPE+UzmzsxC7M1YJbIBHoa+tHtbw96r27moGWwAwXlno0FqIj5vqNqTt/fU/PF1XevMm5GKl6/ZK74BdenH2EC8of3TYZzLqIdWp9/JCkgO70jy9FDtWjbPSDU9UpIIN2nYwA8ibS9MCTsyIZ/1DYR6/AB1x2cyOFiAWWTy+Wzzjt3gOXbpWStZDslXdfE+/48WRQPkkmZnECcPp13c9skG0Md2LPu0alrgkIgI4/lNwTv3ryigNbQIpJqbhmTKu0w8OP+SyzouBrJtwf0uKLYatM1H11TG7FZcqZUxzYl65VyV7zN6Z5QHWhUfe4s185wBh/fdwf4Zd9fUIuP/PHlbGWu48h3GKL+UYTTvu/w1FL6o7otUZTTQ5tSGrV35OEZH8yHPKk2vYTqv+kLpEBRdKdfkG08FmlFb3KwSoOnrzni8eSirz+C3uRlRpDHyp0E67DgYzmt5+iAhg2FX4FQfq/bhCqh9/8hW6lxXmus9u/vnL25Xn94+hRRF9fa/VMKt5kwoOFLB5uKOHV+oeliBqT0vZ/rswjUr7bXl6CamCqyP6kqZmvTcWyZhBLIOmJNYu1SuPQ73zfiwGsNP0Ev08PjOu24txy/C3maaVTlTrDCb0f2HUkpu8UbD/KtQmdj1wdc7zJisF/q2KM5LsnEq3GdFYP7Q2HOsejyawP45JkrH7M9tmQJpL/8iHm+w=
+X-OriginatorOrg: nasa.gov
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR09MB8398.namprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49b1af8c-3f86-4176-0cd7-08db4019aa72
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Apr 2023 14:31:58.0740 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 7005d458-45be-48ae-8140-d43da96dd17b
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR09MB10619
+X-Mailman-Approved-At: Wed, 19 Apr 2023 08:13:54 +0000
+Subject: [Spice-devel] USB redirection fails with latest virt-viewer and
+ UsbDk
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,406 +116,96 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- "Kim, Dongwon" <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno sab 15 apr 2023 alle ore 02:32 Kasireddy, Vivek
-<vivek.kasireddy@intel.com> ha scritto:
+--_000_SA1PR09MB8398212DA5A87B1F62E4B448A49D9SA1PR09MB8398namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Hello,
+When using the latest versions of virt-viewer (11.0) and UsbDk (1.0.22), my=
+ spice console immediately closes when I select any USB device for redirect=
+ion. Reverting to virt-viewer 10.0 resolves the issue and USB redirection w=
+orks as expected. I am running Windows 10 21H2 (build 19044.2728).
+
+
+Thomas W. Simmons Sr.
+Sr. Systems Administrator
+
+NASA Langley Research Center
+Atmospheric Science Data Center
+Science Systems and Applications, Inc
+
+
+--_000_SA1PR09MB8398212DA5A87B1F62E4B448A49D9SA1PR09MB8398namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
 >
-> Hi Frediano,
->
-> > Il giorno ven 31 mar 2023 alle ore 08:52 Kasireddy, Vivek
-> > <vivek.kasireddy@intel.com> ha scritto:
-> > >
-> > > Hi Frediano,
-> > >
-> > > >
-> > > > Il giorno lun 27 mar 2023 alle ore 07:53 Kasireddy, Vivek
-> > > > <vivek.kasireddy@intel.com> ha scritto:
-> > > > >
-> > > > > Hi Frediano,
-> > > > >
-> > > > > >    I was trying the patch series but the client keeps crashing.=
- I
-> > > > > > tried different versions of remote-viewer (from Fedora and from
-> > > > > > Ubuntu) and they both crashed.
-> > > > > > On host I installed Intel VA drivers , Gstreamer VAAPIs and for=
-ced
-> > > > > > gstreamer:h264 as encoder.
-> > > > > [Kasireddy, Vivek] I don't think any of these packages are needed=
- if we
-> > are
-> > > > testing
-> > > > > with a software (i.e, CPU-based) encoder/decoder (i.e, using
-> > x264enc/x264dec
-> > > > plugins).
-> > > >
-> > > > They should allow hardware encoding.
-> > > [Kasireddy, Vivek] IIUC, currently, Spice only uses x264enc/x264dec p=
-lugins
-> > and
-> > > with these only software encoding is possible. We need to use differe=
-nt
-> > plugins to
-> > > enable hardware encoding. For instance we need to use either
-> > vaapih264enc or
-> > > msdkh264enc on Intel hardware. As I mentioned earlier, we are plannin=
-g to
-> > > add this support.
-> > >
-> > > >
-> > > > > On my Fedora 37, these relevant plugins are provided by:
-> > > > > # rpm -q --whatprovides /usr/lib64/gstreamer-1.0/libgstx264.so
-> > > > > gstreamer1-plugins-ugly-1.20.5-1.fc37.x86_64
-> > > > > # rpm -q --whatprovides /usr/lib64/gstreamer-1.0/libgstlibav.so
-> > > > > gstreamer1-plugin-libav-1.20.5-1.fc37.x86_64
-> > > > >
-> > > > > The former provides x264enc and the latter provides x264dec. You =
-can
-> > either
-> > > > choose
-> > > > > the ones provided by your distro or build Gstreamer with -Dgst-pl=
-ugins-
-> > > > ugly:x264=3Denabled
-> > > > > and -Dlibav=3Denabled. However, note that one of our eventual goa=
-ls is to
-> > cleanly
-> > > > add a
-> > > > > new Gstreamer pipeline to Spice to provide users an option for
-> > hardware-based
-> > > > > (i.e, GPU assisted) H.264 encoding/decoding using
-> > msdkh264enc/msdkh264dec
-> > > > plugins:
-> > > > >
-> > https://gstreamer.freedesktop.org/documentation/msdk/msdkh264enc.htm
-> > l?gi-
-> > > > language=3Dc
-> > > > >
-> > > > > > Anything else you need to do?
-> > > > > [Kasireddy, Vivek] Sorry, I was not expecting anyone would test t=
-he
-> > Spice server
-> > > > > patches and therefore did not provide all the required informatio=
-n to
-> > test them.
-> > > > > Anyway, I suspect the reason for your remote-viewer crash is beca=
-use
-> > there is no
-> > > > > (primary) surface created. Here is the tentative Qemu patch that =
-does
-> > just that:
-> > > > >
-> > > >
-> > > > Do you have a branch for Qemu somewhere?
-> > > [Kasireddy, Vivek] Yes, I created one here:
-> > > https://gitlab.freedesktop.org/Vivek/qemu/-/commits/pref_codec1
-> > > https://gitlab.freedesktop.org/Vivek/spice/-/commits/encode_dmabuf1
-> > >
-> > > And, FYI, here is my exact qemu launch cmd (on Fedora 37):
-> > > ./qemu-system-x86_64 -m 4096m -enable-kvm -cpu host -smp cores=3D8 -
-> > drive file=3D./fed30kvm.img,format=3Dqcow2,cache=3Dnone -vga none -devi=
-ce
-> > e1000,netdev=3Dnet0,mac=3DDE:AD:BE:EF:BF:FA -netdev
-> > tap,id=3Dnet0,ifname=3Dtap0,script=3Dno,downscript=3Dno -device virtio-=
-gpu-
-> > pci,max_outputs=3D1,blob=3Dtrue,xres=3D1920,yres=3D1080 -spice
-> > port=3D3001,gl=3Don,disable-ticketing=3Don,preferred-codec=3Dgstreamer:=
-h264 -
-> > object memory-backend-memfd,id=3Dmem1,size=3D4096M -machine memory-
-> > backend=3Dmem1 -usb -device usb-tablet -serial stdio
-> > >
-> > > >
-> > > > >          fd =3D egl_get_fd_for_texture(ssd->ds->texture,
-> > > > >
-> > > > > I did not yet post this patch to the Qemu mailing list because I =
-still need
-> > to
-> > > > implement
-> > > > > feature negotiation between Qemu and Spice to auto-detect this
-> > capability. And,
-> > > > > in addition to this patch, you also need the patch that adds the
-> > "preferred-codec"
-> > > > > option to Qemu, unless you are hardcoding it in Spice:
-> > > > > https://lists.nongnu.org/archive/html/qemu-devel/2023-
-> > 01/msg04999.html
-> > > > >
-> > > >
-> > > > Yes, I hardcoded that in SPICE. Note that I posted a comment in tha=
-t
-> > > > commit, I think it's valid as it is.
-> > > > Also I think it should not change the SPICE default.
-> > > [Kasireddy, Vivek] Yes, I noted your comment; I'll make the change in=
- the
-> > > next version.
-> > >
-> > > Thanks,
-> > > Vivek
-> > >
-> > > >
-> > > > > Lastly, not sure if it makes a difference, but here are the relev=
-ant
-> > options I am
-> > > > > using to launch Qemu:
-> > > > > -device virtio-gpu-pci,max_outputs=3D1,blob=3Dtrue,xres=3D1920,yr=
-es=3D1080
-> > > > > -spice port=3D3001,gl=3Don,disable-ticketing=3Don,preferred-
-> > codec=3Dgstreamer:h264
-> > > > > -object memory-backend-memfd,id=3Dmem1,size=3D4096M
-> > > > > -machine memory-backend=3Dmem1 -usb -device usb-tablet -serial st=
-dio
-> > > > >
-> > > > > Thanks,
-> > > > > Vivek
-> > > > >
-> > > >
-> > > > I will try again.
-> > > >
-> > > > Thanks,
-> > > >   Frediano
-> > > >
-> > > > > >
-> > > > > > On the logs I find:
-> > > > > >
-> > > > > > 2023-03-25T19:31:36.034007Z qemu-system-x86_64: warning: Spice:
-> > > > > > ../server/dcc-send.cpp:1786:red_marshall_gl_draw_stream: bad
-> > return
-> > > > > > value (0) from VideoEncoder::encode_dmabuf
-> > > > > > 2023-03-25T19:31:37.064219Z qemu-system-x86_64: warning: spice:
-> > no
-> > > > > > gl-draw-done within one second
-> > > > > > 2023-03-25T19:31:58.214387Z qemu-system-x86_64: warning: Spice:
-> > > > > > Connection reset by peer
-> > > > > > 2023-03-25T19:31:58.214482Z qemu-system-x86_64: warning: Spice:
-> > > > > > Connection reset by peer
-> > > > > > 2023-03-25T19:31:58.214580Z qemu-system-x86_64: warning: Spice:
-> > > > > > Connection reset by peer
-> > > > > > 2023-03-25T19:31:58.214642Z 2023-03-25T19:31:58.214636Z
-> > > > > > qemu-system-x86_64:qemu-system-x86_64:  warning: Spice:
-> > Connection
-> > > > > > reset by peer
-> > > > > > warning: Spice: display:0 (0x55947e76fd10): Connection reset by=
- peer
-> > > > > > 2023-03-25T19:31:58.214721Z qemu-system-x86_64: warning: Spice:
-> > > > > > Connection reset by peer
-> > > > > > 2023-03-25T19:31:58.214841Z qemu-system-x86_64: warning: Spice:
-> > > > > > Connection reset by peer
-> > > > > > 2023-03-25T19:31:58.215057Z qemu-system-x86_64: warning: Spice:
-> > > > > > Connection reset by peer
-> > > > > >
-> > > > > > 0 value from encode_dmabuf should mean
-> > > > VIDEO_ENCODER_FRAME_DROP.
-> > > > > >
-> > > > > > Regards,
-> > > > > >    Frediano
-> > > > > >
-> >
-> > Hi,
-> >    some updates. I grab your exact versions and compiled them again.
-> > At the beginning I still had some problems with codecs and security
-> > settings (seccomp was enabled causing Qemu to crash on gstreamer code
-> > ,turned off).
-> > However even after solving them the result is not that great. The
-> > video is not fluid and when there are some updates it is almost
-> > "garbage". Which type of GPU are you using? I'm using integrated Intel
-> > and I remember they have a not-linear memory addressing for textures
-> > which lead to these garbaged style images due to trying to interpret
-> > memory as linear.
-> [Vivek] I am using an integrated Intel GPU (Gen 12, codenamed TigerLake/A=
-lderLake)
-> as well. Regardless, IIUC, the memory backing the dmabuf fd is linear as =
-Virtio-gpu
-> does not allow/expose modifier support -- which is needed to allocate
-> non-linear/tiled memory. The video not being fluid issue is probably a sy=
-mptom
-> of the time it (software encoder/x264enc) takes to encode a frame. In my
-> setup, it takes about ~10-12 ms to encode a 1920x1080 BGRX frame -- which
-> obviously drops the FPS to ~25-30. And, the "garbage" behavior could most
-> likely be environmental. In other words, in this use-case, we are heavily
-> relying on the complex Gstreamer stack which includes 100s of libraries a=
-nd
-> plugins; so, any of these could be playing a role. Can you please try bui=
-lding
-> the Gstreamer stack yourself and test to see if it helps? Also, can you f=
-orcefully
-> use only the avdec_h264 decoder (by possibly hiding/removing libgstvaapi.=
-so,
-> libgstva.so, libgstopenh264.so and other h264 decoders) to see if the gar=
-bage
-> goes away?
->
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Calibri Light";
+	panose-1:2 15 3 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:=
+break-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hello,<o:p></o:p></p>
+<p class=3D"MsoNormal">When using the latest versions of virt-viewer (11.0)=
+ and UsbDk (1.0.22), my spice console immediately closes when I select any =
+USB device for redirection. Reverting to virt-viewer 10.0 resolves the issu=
+e and USB redirection works as expected.
+ I am running Windows 10 21H2 (build 19044.2728).<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"font-size:12.0pt;font-family:&quot;Ca=
+libri Light&quot;,sans-serif">Thomas W. Simmons Sr.<br>
+Sr. Systems Administrator<br>
+&nbsp;<br>
+NASA Langley Research Center<br>
+Atmospheric Science Data Center<br>
+Science Systems and Applications, Inc</span><o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
 
-It was more that I see 3/4 changes for half a second then 4/5 seconds
-no changes than not much fluid.
-About not linear I remember that trying to mmap the fd in the past I
-got no-linear image and what I'm getting is pretty similar.
-Can you dump the 2 GStreamer pipelines (Qemu and client side)
-https://gstreamer.freedesktop.org/documentation/tutorials/basic/debugging-t=
-ools.html?gi-language=3Dc#getting-pipeline-graphs
-(probably you know but I never remember the environment).
-
-> Lastly, could you please share details about your setup such as OS versio=
-n,
-> which libraries you have built (decoders?) and installed, Qemu/Spice buil=
-d
-> options, runtime options, etc., so that I can try reproducing this issue =
-in
-> my setup?
->
-
-I tried to not change much the system, it's an Ubuntu 22.04.2 LTS,
-card (integrated)
-
-00:02.0 VGA compatible controller: Intel Corporation CometLake-U GT2
-[UHD Graphics] (rev 02) (prog-if 00 [VGA controller])
-    Subsystem: Lenovo CometLake-U GT2 [UHD Graphics]
-    Flags: bus master, fast devsel, latency 0, IRQ 158, IOMMU group 1
-    Memory at e9000000 (64-bit, non-prefetchable) [size=3D16M]
-    Memory at a0000000 (64-bit, prefetchable) [size=3D512M]
-    I/O ports at 4000 [size=3D64]
-    Expansion ROM at 000c0000 [virtual] [disabled] [size=3D128K]
-    Capabilities: <access denied>
-    Kernel driver in use: i915
-    Kernel modules: i915
-
-gstreamer came from packages, Qemu and SPICE are from your branches.
-I tried different remote-viewer, eventually I found an issue with
-initialization so I had to change a line of code in spice-gtk.
-
-> > I also had to change spice-gtk due to a missing specification in the
-> > encoder. Which client did you use? Which version? Maybe the bug was
-> > introduced later.
-> [Vivek] I am currently using remote-viewer version 11.0-5.fc37 as the
-> client but I have also successfully tested with the remote-viewer version
-> from Fedora 36. In addition, I have also tested with spice-gtk master as =
-well.
->
-
-Maybe the plugin you are using is not having that issue, the graph will hel=
-p.
-
-> > Also I have some warnings in Qemu logs due to attempts to create
-> > primary surfaces multiple times.
-> [Vivek] Yeah, I see them as well. I'll eventually fix them as they seem
-> harmless so far.
->
-
-At least it should cause a memory leak. But it is not good.
-
-> >
-> > By the way, the code looks better than the previous version but as
-> > commented the running behaviour is not that great.
-> [Vivek] As I mentioned above, I think there is not much we can do in Spic=
-e
-> to fix the behavior you are seeing given the heavy reliance on Gstreamer
-> in this use-case. However, we are also actively working on cleanly adding
-> Spice options to enable hardware encoders/decoders for Intel GPUs to
-> reduce the encode time to < 5 ms. In addition, we are also trying to
-> identify and fix all the other performance bottlenecks. We'll post patche=
-s
-> as soon as we clean everything up and fix all the issues we are seeing.
->
-> > The style (well, also the style of spice code I have to admit) is a
-> > bit "messy" but better to fix the big problems first than try to solve
-> [Vivek] Ok, I guess we can fix it incrementally if you can first point ou=
-t
-> the worst style violoations.
->
-
-I'll try to write some fixup commits and post some comments to some
-"code smell".
-
-> Thanks,
-> Vivek
->
-> > everything at once.
-> >
-> > Regards,
-> >   Frediano
-> >
-> > > > > > Il giorno gio 16 mar 2023 alle ore 06:05 Vivek Kasireddy
-> > > > > > <vivek.kasireddy@intel.com> ha scritto:
-> > > > > > >
-> > > > > > > For clients that cannot accept a dmabuf fd directly (such as =
-those
-> > > > > > > running on a remote system), this patch series provides a way=
- for
-> > > > > > > the Spice server to stream the gl/dmabuf data/buffer instead.=
- This
-> > > > > > > is mostly done by enabling the creation of Gst memory using a
-> > dmabuf
-> > > > > > > fd as the source. This ability is useful given that dmabuf is=
- the
-> > > > > > > standard mechanism for sharing buffers between various driver=
-s
-> > and
-> > > > > > > userspace in many Graphics and Media usecases. Currently, thi=
-s is
-> > > > > > > only used/tested with Qemu and remote-viewer using the
-> > x264enc/dec
-> > > > > > > codec to stream the Guest/VM desktop but it can be easily ext=
-ended
-> > > > > > > to other plugins and applications.
-> > > > > > >
-> > > > > > > Here is roughly how things work:
-> > > > > > > - The application (e.g, Qemu) chooses its preferred codec (a
-> > Gstreamer
-> > > > > > >   one) and calls gl_scanout (to update the fd) followed by gl=
-_draw.
-> > > > > > > - In response, the Spice server checks to see if the client i=
-s capable
-> > > > > > >   of accepting a dmabuf fd directly or not. If yes, the fd is=
- forwarded
-> > > > > > >   directly to the client; otherwise, a new stream is created.
-> > > > > > > - The Spice server then sends the dmabuf fd to the Gstreamer
-> > encoder
-> > > > > > >   which uses it as an input for creating an encoded buffer wh=
-ich is
-> > then
-> > > > > > >   sent to the client.
-> > > > > > > - Once the encoding process is done, an async completion cook=
-ie is
-> > sent
-> > > > > > >   to the application.
-> > > > > > >
-> > > > > > > Here is a link to the previous version that used a drawable t=
-o share
-> > > > > > > the dmabuf fd with the Gstreamer encoder:
-> > > > > > > https://lists.freedesktop.org/archives/spice-devel/2023-
-> > January/052948.html
-> > > > > > >
-> > > > > > > Cc: Frediano Ziglio <freddy77@gmail.com>
-> > > > > > > Cc: Gerd Hoffmann <kraxel@redhat.com>
-> > > > > > > Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> > > > > > > Cc: Dongwon Kim <dongwon.kim@intel.com>
-> > > > > > >
-> > > > > > > Vivek Kasireddy (5):
-> > > > > > >   dcc: Check to see if the client supports multiple codecs
-> > > > > > >   dcc: Create a stream associated with gl_draw for non-gl cli=
-ents
-> > > > > > >   dcc-send: Encode and send gl_draw stream data to the remote
-> > client
-> > > > > > >   gstreamer-encoder: Add an encoder function that takes dmabu=
-f fd
-> > as
-> > > > > > >     input
-> > > > > > >   video-stream: Don't stop a stream if a gl_draw operation is
-> > pending
-> > > > > > >
-> > > > > > >  meson.build                      |   2 +-
-> > > > > > >  server/dcc-private.h             |   4 ++
-> > > > > > >  server/dcc-send.cpp              |  89 +++++++++++++++++++++=
-+-
-> > > > > > >  server/dcc.cpp                   |  36 +++++++---
-> > > > > > >  server/display-channel-private.h |   6 ++
-> > > > > > >  server/gstreamer-encoder.c       | 119
-> > > > ++++++++++++++++++++++++++++++-
-> > > > > > >  server/video-encoder.h           |  13 ++++
-> > > > > > >  server/video-stream.cpp          |  65 ++++++++++++++++-
-> > > > > > >  server/video-stream.h            |   2 +
-> > > > > > >  9 files changed, 319 insertions(+), 17 deletions(-)
-> > > > > > >
-> > > > > > > --
-> > > > > > > 2.37.2
-> > > > > > >
+--_000_SA1PR09MB8398212DA5A87B1F62E4B448A49D9SA1PR09MB8398namp_--
