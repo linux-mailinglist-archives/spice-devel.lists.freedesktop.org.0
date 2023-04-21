@@ -2,61 +2,66 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D21E6E74BD
-	for <lists+spice-devel@lfdr.de>; Wed, 19 Apr 2023 10:13:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C1B76EB1A9
+	for <lists+spice-devel@lfdr.de>; Fri, 21 Apr 2023 20:32:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 28C7510E069;
-	Wed, 19 Apr 2023 08:13:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6192410E339;
+	Fri, 21 Apr 2023 18:32:52 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CE73110E00A
- for <spice-devel@lists.freedesktop.org>; Tue, 18 Apr 2023 20:09:51 +0000 (UTC)
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-24756a12ba0so1137246a91.1
- for <spice-devel@lists.freedesktop.org>; Tue, 18 Apr 2023 13:09:51 -0700 (PDT)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BE25910E339
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Apr 2023 18:32:49 +0000 (UTC)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-547299bf5d8so1431954eaf.3
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Apr 2023 11:32:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20221208; t=1681848591; x=1684440591;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rJjRijV5blbjzZLZll3N1JO9eikZc6Mlip365pggL9w=;
- b=RxI8ccMnJU34C26Ht6af/Th3w247gQIO0uQnzRfH2qt11y5bG/KVu1JIv98zlpx4D1
- 6+T+7fm9LFj2LYaDIo2LT8T1Xo9ePq7ThXSPvAlSvNHct8dmTKu+ixGW2MxKCmKPEic5
- 0NMP5HW32YUXzNX6ZAvMzUZ+r7/o+fZqhWAmOZNWEtuGQr2uKAwqdsnDPOcnCQXkusAL
- lEJpFgOxxgNb/wSBQGjXS2rZ5x92nLQ4+hV53yJlZyN8pSO9LtwYDE3KxhzcV0myrIXX
- ZNsRtuRyCHtRAnfOYgVIMLVSDSYy3KfNTnfDpnhlSRuUbePgyG4vh2nQsd84Uc0WGgIG
- AqbQ==
+ d=gmail.com; s=20221208; t=1682101968; x=1684693968;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6gDYZwEz65UuSHh1ZXECR0G8B8F0/5QNFDzHJpOQpg8=;
+ b=DeLuMOiheLnIULpX1ijsiOlj7qdknJJuYtPtbci9oP2lo4DKKV4d3kp3tQy8VqFV3r
+ ytTHCKKXsdh0sbp4Y1JJnmvVzp9Q40aEJj9Sk6gS0VwCpdPhEO0Mp+mloJQSZBPJAYYp
+ vfhz2WUQqPDEDqFXWJCm13/r+lSFyA6BG0TGARONOz8mAb7IMU2JJVMCaR3r6mvUQMpg
+ vOXzW9lk/S3h+px8KOattQE3W1zyNnS4sbfzDw7HDjFyk2HR+5UcSKtlcuLA47+061Y7
+ I8JC5ojUPhSNMBMchgFSHP15BW/T+zOJhaQ3aqZmOR22AV2H63e/RageNzFLQxga6BOU
+ 7kGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681848591; x=1684440591;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rJjRijV5blbjzZLZll3N1JO9eikZc6Mlip365pggL9w=;
- b=kE90vvaKBuWCaFekH2IQsCP4YGgE5BznVn4IVPA3Gx4eRbAVqk4Ego8W4u5/UtehkS
- 8WUWgWiJuLzDsV8hAun9UHzo6FotbDiV68bYbEvL1KKmkx5gJQ5sxBM9TVqnwvVCtaWq
- 7tT7YGqY9MZcaBesHqnewnCoAWZn3qch2aoBweZhP++Jd5fxl8k5fwzzZN6G4W+LCiF6
- TCCSS8VfwlgVff7bpPY6IlaYbsMeWoS0H2LyvadYo9H9tg+dkIC46r1fk9X7BUEiG855
- ZSYjUY7tqy5v/eg5O9csiziXs+ur8HEqG9kU+hZ/0WuInhADqg4yTc012Eh01zUAjWE2
- epDA==
-X-Gm-Message-State: AAQBX9elrfVLEd2aJmPgpaGOhcyqmDcPfWL5xR5RU5qA8RUWTfQtJ/ju
- 592dw/2r3PweiuBG08Wg3lDTrvcuxzrlWMWPGKtARw==
-X-Google-Smtp-Source: AKy350baeGq9wa+UpgsWuLoH1elNcvdt1oOkfqqmaCQpAHbi6Eath+2E2j22ABbywJdPOlHgLe3u3xkeQP5kmoW7nv0=
-X-Received: by 2002:a17:90a:fe8c:b0:246:f73c:3aba with SMTP id
- co12-20020a17090afe8c00b00246f73c3abamr618143pjb.39.1681848590753; Tue, 18
- Apr 2023 13:09:50 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1682101968; x=1684693968;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6gDYZwEz65UuSHh1ZXECR0G8B8F0/5QNFDzHJpOQpg8=;
+ b=jLBbb/gNyNxZXkxAKuJNvgmn3e4HXBgtGkKkD09jUKuubxpvHMKu4yvWy6jG3oLYgU
+ E1xZtl0kO23XRZwehKPKgfNC7J1UHqI1fu6vIVZ1NsTgAIf8urRTA8GjsQlxVOAcUMUb
+ 0hmHn8DSfaCfzrZudcj5nzZdLnk6jlO9wrgq3kLN0fRrdvkpK7A+dbsQq7cxE46SiPlf
+ LrqvDncZqqkm2AAoPC+tQ3qGj/GQPOuUXd8AQis9Ws5kBvKtRUSvHcwl7NBelq98pFNo
+ C/sWTztqzPgs2srhf63MUq6i5PHN70YJrdq3pTY045mcdM7o1pwOIlQdMsg6qawAclxX
+ JN+A==
+X-Gm-Message-State: AAQBX9eKiABY+48/75TNp6h00nBoyVgfHB5KODVEkwIt8m1r/AK1Bbsb
+ 8ZLtidNsnOWY/5TJOqJnmQor9V3094Bvat5G9x8=
+X-Google-Smtp-Source: AKy350bfHJJzRkfZGcySTPKENnX1CJhrjo/rKrX249xhdKHfR7fzlWLFyXyrkvs9mw0ypjuw3gmSi41R5lDMCWr93oo=
+X-Received: by 2002:a05:6820:809:b0:545:5160:3f57 with SMTP id
+ bg9-20020a056820080900b0054551603f57mr2203094oob.0.1682101968142; Fri, 21 Apr
+ 2023 11:32:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230408165023.2706235-1-trix@redhat.com>
-In-Reply-To: <20230408165023.2706235-1-trix@redhat.com>
-From: Nick Desaulniers <ndesaulniers@google.com>
-Date: Tue, 18 Apr 2023 13:09:39 -0700
-Message-ID: <CAKwvOdmFtc0shP45t7S9aoh1+UGXyaX_aodvJd97d-nH5J0HQg@mail.gmail.com>
-To: Tom Rix <trix@redhat.com>
+References: <20230316054458.1546085-1-vivek.kasireddy@intel.com>
+ <CAHt6W4fwABLRLkjsZ584-kaJbJPvn4huNMeXQBnZj+usAs_fyQ@mail.gmail.com>
+ <IA0PR11MB7185A086540E06748286F573F88B9@IA0PR11MB7185.namprd11.prod.outlook.com>
+ <CAHt6W4cBU7pakwn+nwuUKQj_=BoXDV=Oc5M8fuc3gCA18gK8Qg@mail.gmail.com>
+ <IA0PR11MB7185A0BF637E1C676469E04BF88F9@IA0PR11MB7185.namprd11.prod.outlook.com>
+ <CAHt6W4d+DkEReW0z97ejQ+UhEWCV3aONgCywY6Vpio=Hqo=4tA@mail.gmail.com>
+ <IA0SPRMB0001BC01AC9CE18534BE3A7FF89E9@IA0SPRMB0001.namprd11.prod.outlook.com>
+ <CAHt6W4fO2AA-8SFp-NbwBV0bUXiUBdkn86i8AkmPP4F+YfDVQw@mail.gmail.com>
+In-Reply-To: <CAHt6W4fO2AA-8SFp-NbwBV0bUXiUBdkn86i8AkmPP4F+YfDVQw@mail.gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Fri, 21 Apr 2023 19:32:36 +0100
+Message-ID: <CAHt6W4f_UQxj2jKR4eF3QhThDE5Pkjk1=3eQDY4FSkJQJFkiZA@mail.gmail.com>
+To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 19 Apr 2023 08:13:54 +0000
-Subject: Re: [Spice-devel] [PATCH] drm/qxl: remove variable count
+Subject: Re: [Spice-devel] [PATCH v1 0/5] dcc: Create a stream for
+ non-gl/remote clients that want to use dmabuf
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,59 +73,23 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: llvm@lists.linux.dev, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- nathan@kernel.org, kraxel@redhat.com, daniel@ffwll.ch,
- spice-devel@lists.freedesktop.org, airlied@redhat.com
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ "Kim, Dongwon" <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Sat, Apr 8, 2023 at 9:50=E2=80=AFAM Tom Rix <trix@redhat.com> wrote:
+> >
+> > > The style (well, also the style of spice code I have to admit) is a
+> > > bit "messy" but better to fix the big problems first than try to solve
+> > [Vivek] Ok, I guess we can fix it incrementally if you can first point out
+> > the worst style violoations.
+> >
 >
-> clang with W=3D1 reports
-> drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable
->   'count' set but not used [-Werror,-Wunused-but-set-variable]
->         int count =3D 0;
->             ^
-> This variable is not used so remove it.
-
-Thanks for the patch!
-
-Fixes: 64122c1f6ad ("drm: add new QXL driver. (v1.4)")
-Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
-
->
-> Signed-off-by: Tom Rix <trix@redhat.com>
-> ---
->  drivers/gpu/drm/qxl/qxl_cmd.c | 2 --
->  1 file changed, 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.=
-c
-> index 281edab518cd..d6ea01f3797b 100644
-> --- a/drivers/gpu/drm/qxl/qxl_cmd.c
-> +++ b/drivers/gpu/drm/qxl/qxl_cmd.c
-> @@ -421,7 +421,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
->  {
->         uint32_t handle;
->         int idr_ret;
-> -       int count =3D 0;
->  again:
->         idr_preload(GFP_ATOMIC);
->         spin_lock(&qdev->surf_id_idr_lock);
-> @@ -433,7 +432,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
->         handle =3D idr_ret;
->
->         if (handle >=3D qdev->rom->n_surfaces) {
-> -               count++;
->                 spin_lock(&qdev->surf_id_idr_lock);
->                 idr_remove(&qdev->surf_id_idr, handle);
->                 spin_unlock(&qdev->surf_id_idr_lock);
-> --
-> 2.27.0
+> I'll try to write some fixup commits and post some comments to some
+> "code smell".
 >
 
+See https://gitlab.freedesktop.org/fziglio/spice/-/commits/encode_dmabuf1_fixups/
+for minor fixups
 
---=20
-Thanks,
-~Nick Desaulniers
+Frediano
