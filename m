@@ -1,67 +1,63 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C1B76EB1A9
-	for <lists+spice-devel@lfdr.de>; Fri, 21 Apr 2023 20:32:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 141186EB1B8
+	for <lists+spice-devel@lfdr.de>; Fri, 21 Apr 2023 20:37:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6192410E339;
-	Fri, 21 Apr 2023 18:32:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AC37F10EEBC;
+	Fri, 21 Apr 2023 18:37:39 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE25910E339
- for <spice-devel@lists.freedesktop.org>; Fri, 21 Apr 2023 18:32:49 +0000 (UTC)
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-547299bf5d8so1431954eaf.3
- for <spice-devel@lists.freedesktop.org>; Fri, 21 Apr 2023 11:32:49 -0700 (PDT)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F139110EEBC
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Apr 2023 18:37:36 +0000 (UTC)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-38e5c33305cso1731743b6e.3
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Apr 2023 11:37:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1682101968; x=1684693968;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6gDYZwEz65UuSHh1ZXECR0G8B8F0/5QNFDzHJpOQpg8=;
- b=DeLuMOiheLnIULpX1ijsiOlj7qdknJJuYtPtbci9oP2lo4DKKV4d3kp3tQy8VqFV3r
- ytTHCKKXsdh0sbp4Y1JJnmvVzp9Q40aEJj9Sk6gS0VwCpdPhEO0Mp+mloJQSZBPJAYYp
- vfhz2WUQqPDEDqFXWJCm13/r+lSFyA6BG0TGARONOz8mAb7IMU2JJVMCaR3r6mvUQMpg
- vOXzW9lk/S3h+px8KOattQE3W1zyNnS4sbfzDw7HDjFyk2HR+5UcSKtlcuLA47+061Y7
- I8JC5ojUPhSNMBMchgFSHP15BW/T+zOJhaQ3aqZmOR22AV2H63e/RageNzFLQxga6BOU
- 7kGQ==
+ d=gmail.com; s=20221208; t=1682102256; x=1684694256;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2D24IjBzilEueWcPg0OrABjB4ghgLJgz8rbX3hTUvC8=;
+ b=DisNjVJCkIuHvutpUxrCQ3mH1ATs7+sFek+iM/upXTy+dnMSDX0B6Zi04ro31ac87F
+ B/hV1bVQBmruC2h5ezZaspxGObpFr2sUWtOcw1KMQQvqLFum4r3wArJtLDBpL2J8a8kL
+ bi/MnBQHx8xQvZLtK+CEnotfRa8WrLyg/JA3c8kLHYdhwHEX+dm3hQvQ2ntbWbimH9Mm
+ I3RuNNKjbQ1nZPeVHqLV5vFo32D81681vC9eHZgzh6JbjQCZF//YB0o0YLPQdxRRunRa
+ J5zQdrMe1gv0cpGTpYGVkhnxCQUMZ2YYP+CmCM4Bbq4DlQvycJAda0cuZ+LakaLC+PyC
+ vw5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682101968; x=1684693968;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6gDYZwEz65UuSHh1ZXECR0G8B8F0/5QNFDzHJpOQpg8=;
- b=jLBbb/gNyNxZXkxAKuJNvgmn3e4HXBgtGkKkD09jUKuubxpvHMKu4yvWy6jG3oLYgU
- E1xZtl0kO23XRZwehKPKgfNC7J1UHqI1fu6vIVZ1NsTgAIf8urRTA8GjsQlxVOAcUMUb
- 0hmHn8DSfaCfzrZudcj5nzZdLnk6jlO9wrgq3kLN0fRrdvkpK7A+dbsQq7cxE46SiPlf
- LrqvDncZqqkm2AAoPC+tQ3qGj/GQPOuUXd8AQis9Ws5kBvKtRUSvHcwl7NBelq98pFNo
- C/sWTztqzPgs2srhf63MUq6i5PHN70YJrdq3pTY045mcdM7o1pwOIlQdMsg6qawAclxX
- JN+A==
-X-Gm-Message-State: AAQBX9eKiABY+48/75TNp6h00nBoyVgfHB5KODVEkwIt8m1r/AK1Bbsb
- 8ZLtidNsnOWY/5TJOqJnmQor9V3094Bvat5G9x8=
-X-Google-Smtp-Source: AKy350bfHJJzRkfZGcySTPKENnX1CJhrjo/rKrX249xhdKHfR7fzlWLFyXyrkvs9mw0ypjuw3gmSi41R5lDMCWr93oo=
-X-Received: by 2002:a05:6820:809:b0:545:5160:3f57 with SMTP id
- bg9-20020a056820080900b0054551603f57mr2203094oob.0.1682101968142; Fri, 21 Apr
- 2023 11:32:48 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1682102256; x=1684694256;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2D24IjBzilEueWcPg0OrABjB4ghgLJgz8rbX3hTUvC8=;
+ b=jItDWCRdLilHGBgy/IlbhilJvuqcu+43PDM2kfEBzwtTBbQ5Jo7I8h5maaOvGzF/qk
+ 7oZhzHnsHHt4hoNnjJ1MZRRjTWIiULRZ5H4PmDKIwz97kVks99+YOlHAE7pVuFSPEQQH
+ h+JJVnkb0XEuDjzWbbaML4QO4lTh3Bh83VA1hjA+MsVR1C3mXPXaYqz5FyHR59MFIws9
+ A7gLbJRQEPkVhNi2z38gVpBmOh4c806JKZMvT+6S6x3ALMmbFGjhozG9Yvm+BENVAa8A
+ W+Uy3d1J4UaOthpVs/+t1DHIavhtlHocuPdftSc73Elk+A7LZE4i4hslUhrmsvjbxKHE
+ 2/Nw==
+X-Gm-Message-State: AAQBX9fRCN29NDjf+dIHVWZzVZurzCkHRQ0E8uFz55M1i5K0bOjMTSJJ
+ 74eKWxVkISX6Mmthb+husCv+8lVgHplFGNT3bWcv+jAI
+X-Google-Smtp-Source: AKy350Z+VJbWilYX2EAJIlDalXDyzyreJV8q2BEUWhOu1BSyBX3DLBkg9/lVQC4e6eFSjtNvsDrt/SaynxZWFZ6nOCQ=
+X-Received: by 2002:a05:6808:638c:b0:38d:e097:aca1 with SMTP id
+ ec12-20020a056808638c00b0038de097aca1mr3130635oib.15.1682102255735; Fri, 21
+ Apr 2023 11:37:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230316054458.1546085-1-vivek.kasireddy@intel.com>
- <CAHt6W4fwABLRLkjsZ584-kaJbJPvn4huNMeXQBnZj+usAs_fyQ@mail.gmail.com>
- <IA0PR11MB7185A086540E06748286F573F88B9@IA0PR11MB7185.namprd11.prod.outlook.com>
- <CAHt6W4cBU7pakwn+nwuUKQj_=BoXDV=Oc5M8fuc3gCA18gK8Qg@mail.gmail.com>
- <IA0PR11MB7185A0BF637E1C676469E04BF88F9@IA0PR11MB7185.namprd11.prod.outlook.com>
- <CAHt6W4d+DkEReW0z97ejQ+UhEWCV3aONgCywY6Vpio=Hqo=4tA@mail.gmail.com>
- <IA0SPRMB0001BC01AC9CE18534BE3A7FF89E9@IA0SPRMB0001.namprd11.prod.outlook.com>
- <CAHt6W4fO2AA-8SFp-NbwBV0bUXiUBdkn86i8AkmPP4F+YfDVQw@mail.gmail.com>
-In-Reply-To: <CAHt6W4fO2AA-8SFp-NbwBV0bUXiUBdkn86i8AkmPP4F+YfDVQw@mail.gmail.com>
+ <20230316054458.1546085-3-vivek.kasireddy@intel.com>
+In-Reply-To: <20230316054458.1546085-3-vivek.kasireddy@intel.com>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 21 Apr 2023 19:32:36 +0100
-Message-ID: <CAHt6W4f_UQxj2jKR4eF3QhThDE5Pkjk1=3eQDY4FSkJQJFkiZA@mail.gmail.com>
-To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+Date: Fri, 21 Apr 2023 19:37:24 +0100
+Message-ID: <CAHt6W4d+KMGjAi-NPnfN94jZYiVR3Sb4SuT=M-KiuiR5oKvB0g@mail.gmail.com>
+To: Vivek Kasireddy <vivek.kasireddy@intel.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] [PATCH v1 0/5] dcc: Create a stream for
- non-gl/remote clients that want to use dmabuf
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] [PATCH v1 2/5] dcc: Create a stream associated
+ with gl_draw for non-gl clients
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,23 +69,167 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- "Kim, Dongwon" <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
+Cc: spice-devel@lists.freedesktop.org, Dongwon Kim <dongwon.kim@intel.com>,
+ Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-> >
-> > > The style (well, also the style of spice code I have to admit) is a
-> > > bit "messy" but better to fix the big problems first than try to solve
-> > [Vivek] Ok, I guess we can fix it incrementally if you can first point out
-> > the worst style violoations.
-> >
+Il giorno gio 16 mar 2023 alle ore 06:05 Vivek Kasireddy
+<vivek.kasireddy@intel.com> ha scritto:
 >
-> I'll try to write some fixup commits and post some comments to some
-> "code smell".
+> For non-gl/remote clients, if a stream does not exist or if any
+> of the key parameters associated with gl_draw such as x/y or
+> width/height are changed, then we create a new stream. Otherwise,
+> we just update the current stream's timestamp.
 >
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> Cc: Dongwon Kim <dongwon.kim@intel.com>
+> Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+> ---
+>  server/dcc-private.h    |  2 ++
+>  server/dcc.cpp          | 14 +++++++++++++
+>  server/video-stream.cpp | 44 +++++++++++++++++++++++++++++++++++++++++
+>  server/video-stream.h   |  2 ++
+>  4 files changed, 62 insertions(+)
+>
+> diff --git a/server/dcc-private.h b/server/dcc-private.h
+> index bf485aec..cd5b76a3 100644
+> --- a/server/dcc-private.h
+> +++ b/server/dcc-private.h
+> @@ -69,6 +69,8 @@ struct DisplayChannelClientPrivate
+>      uint32_t streams_max_latency;
+>      uint64_t streams_max_bit_rate;
+>      bool gl_draw_ongoing;
+> +
+> +    VideoStream *gl_draw_stream;
 
-See https://gitlab.freedesktop.org/fziglio/spice/-/commits/encode_dmabuf1_fixups/
-for minor fixups
+This raw pointer smells pretty bad. Defined here seems also to
+indicate that every client could have a different draw stream, which
+seems wrong.
 
-Frediano
+>  };
+>
+>  #include "pop-visibility.h"
+> diff --git a/server/dcc.cpp b/server/dcc.cpp
+> index f0b355ca..9d91ca53 100644
+> --- a/server/dcc.cpp
+> +++ b/server/dcc.cpp
+> @@ -525,6 +525,20 @@ RedPipeItemPtr dcc_gl_draw_item_new(RedChannelClient=
+ *rcc, void *data, int num)
+>      auto item =3D red::make_shared<RedGlDrawItem>();
+>      item->draw =3D *draw;
+>
+> +    if (!dcc_is_gl_client(dcc)) {
+> +        VideoStream *stream =3D dcc->priv->gl_draw_stream;
+> +
+> +        if (!stream ||
+> +            stream->dest_area.left !=3D draw->x ||
+> +            stream->dest_area.top !=3D draw->y ||
+> +            stream->width !=3D draw->w || stream->height !=3D draw->h) {
+> +            stream =3D display_channel_create_gl_draw_stream(dcc, draw);
+> +        } else {
+> +            stream->last_time =3D spice_get_monotonic_time_ns();
+> +        }
+> +        dcc->priv->gl_draw_stream =3D stream;
+
+This rewrite with a create and not a destroy looks like a leak.
+Why assign it even if you are not changing it?
+
+> +    }
+> +
+>      return item;
+>  }
+>
+> diff --git a/server/video-stream.cpp b/server/video-stream.cpp
+> index 056d0c31..03a7d68d 100644
+> --- a/server/video-stream.cpp
+> +++ b/server/video-stream.cpp
+> @@ -415,6 +415,47 @@ static void display_channel_create_stream(DisplayCha=
+nnel *display, Drawable *dra
+>                  stream->input_fps);
+>  }
+>
+> +VideoStream *
+> +display_channel_create_gl_draw_stream(DisplayChannelClient *dcc,
+> +                                      const SpiceMsgDisplayGlDraw *draw)
+> +{
+> +    DisplayChannel *display =3D DCC_TO_DC(dcc);
+> +    VideoStream *stream;
+> +    SpiceRect dest_area =3D {
+> +        .left =3D draw->x,
+> +        .top =3D draw->y,
+> +        .right =3D draw->w,
+> +        .bottom =3D draw->h
+> +    };
+> +
+> +    if (!(stream =3D display_channel_stream_try_new(display))) {
+> +        return nullptr;
+> +    }
+> +
+> +    ring_add(&display->priv->streams, &stream->link);
+> +    stream->current =3D nullptr;
+> +    stream->last_time =3D spice_get_monotonic_time_ns();
+> +    stream->width =3D draw->w;
+> +    stream->height =3D draw->h;
+> +    stream->dest_area =3D dest_area;
+> +    stream->refs =3D 1;
+> +    stream->top_down =3D 1;
+> +    stream->input_fps =3D MAX_FPS;
+> +    stream->num_input_frames =3D 0;
+> +    stream->input_fps_start_time =3D spice_get_monotonic_time_ns();
+> +    display->priv->streams_size_total +=3D stream->width * stream->heigh=
+t;
+> +    display->priv->stream_count++;
+> +
+> +    dcc_create_stream(dcc, stream);
+> +    spice_debug("stream %d %dx%d (%d, %d) (%d, %d) %u fps",
+> +                display_channel_get_video_stream_id(display, stream), st=
+ream->width,
+> +                stream->height, stream->dest_area.left, stream->dest_are=
+a.top,
+> +                stream->dest_area.right, stream->dest_area.bottom,
+> +                stream->input_fps);
+> +
+> +    return stream;
+> +}
+> +
+
+This looks like a big copy&paste from another function. Could we not
+reuse some code?
+
+>  // returns whether a stream was created
+>  static bool video_stream_add_frame(DisplayChannel *display,
+>                               Drawable *frame_drawable,
+> @@ -744,6 +785,9 @@ void dcc_create_stream(DisplayChannelClient *dcc, Vid=
+eoStream *stream)
+>      if (stream->current) {
+>          region_clone(&agent->vis_region, &stream->current->tree_item.bas=
+e.rgn);
+>          region_clone(&agent->clip, &agent->vis_region);
+> +    } else {
+> +        region_add(&agent->vis_region, &stream->dest_area);
+> +        region_clone(&agent->clip, &agent->vis_region);
+>      }
+>      agent->dcc =3D dcc;
+>
+> diff --git a/server/video-stream.h b/server/video-stream.h
+> index 23b44ff5..a8b2c61c 100644
+> --- a/server/video-stream.h
+> +++ b/server/video-stream.h
+> @@ -124,6 +124,8 @@ struct VideoStream {
+>  };
+>
+>  void display_channel_init_video_streams(DisplayChannel *display);
+> +VideoStream *display_channel_create_gl_draw_stream(DisplayChannelClient =
+*dcc,
+> +                                                   const SpiceMsgDisplay=
+GlDraw *draw);
+>  void video_stream_stop(DisplayChannel *display, VideoStream *stream);
+>  void video_stream_trace_update(DisplayChannel *display, Drawable *drawab=
+le);
+>  void video_stream_maintenance(DisplayChannel *display, Drawable *candida=
+te,
+> --
+> 2.37.2
+>
