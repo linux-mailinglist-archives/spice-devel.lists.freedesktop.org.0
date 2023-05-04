@@ -2,127 +2,69 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 903376F659B
-	for <lists+spice-devel@lfdr.de>; Thu,  4 May 2023 09:17:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBF606F698C
+	for <lists+spice-devel@lfdr.de>; Thu,  4 May 2023 13:08:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1E16310E3A1;
-	Thu,  4 May 2023 07:16:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3D95210E05E;
+	Thu,  4 May 2023 11:08:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from BL0PR02CU006.outbound.protection.outlook.com
- (mail-eastusazon11013010.outbound.protection.outlook.com [52.101.54.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8354010E1A1;
- Thu,  4 May 2023 01:50:29 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XUbo5s5HXA0oZBmPnolS3s3X50eaZ7zGLqwNyAmW9I3KPzdM5fAIQg/UiRxuQrI7kbmZshl4VGxda+FPqbCnZdBem4FadcyVHdH+2GbE/8HQ8P8ebTANNjjxDVXXla53/jQMKvtiEGOWu8/j0vKPsaFVXdhLC58TkAmnBpoE7Y5iObqJT0/1hR/ByDStsR70L/K/3uzYgkyyunSVjxfL9zJ2XWek+x0F4IFW1pw0lX32VDO2LbpREby7/F62bJ0yMNPXQHSPZJNuoHRKme0ZzIzipn7CNXuIcTY9NfU028t2edDS+BO81gcjTmA3w8HBNNcBBsS5/g5ZM1fv2s5aDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IvLQyJNusryz7IMam8AXn06l0l7xkEJYm7HkAsEEA7Y=;
- b=F+7t0LSXzsa932wyAmW//Ya0O+cFCMADRD9NC/gbmZZM/AEO+BrQSTbg1MNvQO5i3Zp4+AFnXZ/8wPeQp1ocC86UATdoNM6F/ugmU5pvJsetsYFdCpskWKK0Ubgw1pCf69aNtTMSwDI1o5L06A9y42u+4Zta5ajPzszw47mryM+7dVGmGcJyBPhtnayxQp4ica3DHA23AsHAqjU3H3AeABn/SPsdpKLw4sxkD6GFuy+krM7SyhifIqVQfRBrV2d4EYPHHlyI8DLcn8Anq8cMfUT1KyaFzYpFoKpHtUl2UQ0Rronrnbm+VYnEesJf0cByOJJwEX/bFQF3FI3GamdwPA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
- dkim=pass header.d=vmware.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IvLQyJNusryz7IMam8AXn06l0l7xkEJYm7HkAsEEA7Y=;
- b=eZnPoY+C+a9RM6Xcik8TZxujVLzAb+caOmwEaPollsz0Jo9RWJfYhROaUOoOiRWbOEjLiZyEWUghh1giuenx8PNsNu38DjkUt+q7LZAvwkuh7BJO+h4VwJrS1zF5WXCcas7pgNj60KmA2ZHEFT70GFWloA0ijNqwg2sxzgslqRQ=
-Received: from CH3PR05MB10206.namprd05.prod.outlook.com
- (2603:10b6:610:155::10) by DS7PR05MB7350.namprd05.prod.outlook.com
- (2603:10b6:5:2d3::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.26; Thu, 4 May
- 2023 01:50:25 +0000
-Received: from CH3PR05MB10206.namprd05.prod.outlook.com
- ([fe80::b4c3:9441:f0:efb8]) by CH3PR05MB10206.namprd05.prod.outlook.com
- ([fe80::b4c3:9441:f0:efb8%7]) with mapi id 15.20.6340.031; Thu, 4 May 2023
- 01:50:25 +0000
-From: Zack Rusin <zackr@vmware.com>
-To: "daniel@ffwll.ch" <daniel@ffwll.ch>, "javierm@redhat.com"
- <javierm@redhat.com>
-Thread-Topic: [PATCH v2 1/8] drm: Disable the cursor plane on atomic contexts
- with virtualized drivers
-Thread-Index: AQHYlaAcTLxMgQIkC0KZLn5/g6usj62ohIeAgaACNYCAAS6fAIAARs8AgAEuKwA=
-Date: Thu, 4 May 2023 01:50:25 +0000
-Message-ID: <17cc969e9f13fab112827e154495eca28c4bd2b6.camel@vmware.com>
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3C39910E1FE;
+ Thu,  4 May 2023 08:21:57 +0000 (UTC)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2ac80ed7f26so1375251fa.1; 
+ Thu, 04 May 2023 01:21:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1683188514; x=1685780514;
+ h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/IFoudUwMeQJ57cBexYXGLexmZWNO4FcrthqWKMIDJc=;
+ b=EBd+NTuxZBOnuASL1WcfHbzHpvc6+aYlbfCgxLki1QF3MTCjNN1mmqowUv/PLlOS2f
+ vc508tg3YKExyeM9xTBc7l8U2KYbrb0h8LFEwxh6oz98R0btL7uaQg4d3MXtRQ7QXc0U
+ +pEnO7ZsjpsOuOxvyATevMhhZcupC5/JvHueZCR9woHLc8X5lel/LMRWOdTmRwkqmqUf
+ mqJEaz9Ef11HIwY323wZX/8VfC3WyRDdjE69df04gN2UGSPzbsdV5f5reHy50ikX5wRW
+ TzdymgC8TKfn0rYu1ZyQMynH7AYChUE5p9ijP3jDAn2olvxkJsfJBlX8AnUoaTnwBwOs
+ kjDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683188514; x=1685780514;
+ h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/IFoudUwMeQJ57cBexYXGLexmZWNO4FcrthqWKMIDJc=;
+ b=YKehjRunkACtxu6P57ejAxjSlQhAB9TlPkp11M8ySFznuQmP+4OZI7e/fP+gg6eNF2
+ vOqyVkdol+p+mC2fp9oxCKgQs5vAMm0JxPVtRG4oNn+P3rtVqb9yQTk3z0DPxXUC0We6
+ Vxk42+oG0xDHZpl04mGGJA6vw5HjTpN0EZxD1cGxneeeHbxE+k+x1nP7NFHCbgp1pMcL
+ i2fYAfF/r2+OEWH+PEyfdZWNN/iCQ4JIWq8SLsKNsghIgTsWhHahUxPZvYPJFC9VjqJU
+ H1JUuJlNqdXAMm4EUUnCTGw23T7aCx8K6SRjfKCZlpCzrzhqEngLZWlfB1mvH9CpMe5l
+ 8mhA==
+X-Gm-Message-State: AC+VfDyBZqIqfcH4CxHdY0URJbtOW+hRZ0REB7ZPTEpKciBcfSKptnWT
+ mCo4JcO3qwjdmT2b+3WYHV4=
+X-Google-Smtp-Source: ACHHUZ54HpilL5HofAMl/x1wsQdsdfjXDzNvpcka0T/gp2c1tBOsAB0UrAuxMyAy36Pb3L/C/gceEQ==
+X-Received: by 2002:a2e:9881:0:b0:29f:58c6:986e with SMTP id
+ b1-20020a2e9881000000b0029f58c6986emr619815ljj.52.1683188513322; 
+ Thu, 04 May 2023 01:21:53 -0700 (PDT)
+Received: from eldfell ([194.136.85.206]) by smtp.gmail.com with ESMTPSA id
+ y6-20020a2e95c6000000b002a77ab1d73dsm1872985ljh.96.2023.05.04.01.21.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 May 2023 01:21:52 -0700 (PDT)
+Date: Thu, 4 May 2023 11:21:42 +0300
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Zack Rusin <zackr@vmware.com>
+Message-ID: <20230504112142.054e4c9a@eldfell>
+In-Reply-To: <00621684a619329ba758f4a7212a591121633198.camel@vmware.com>
 References: <20220712033246.1148476-1-zack@kde.org>
  <20220712033246.1148476-2-zack@kde.org>
  <YvPfedG/uLQNFG7e@phenom.ffwll.local>
  <87lei7xemy.fsf@minerva.mail-host-address-is-not-set>
  <0dd2fa763aa0e659c8cbae94f283d8101450082a.camel@vmware.com>
- <87y1m5x3bt.fsf@minerva.mail-host-address-is-not-set>
-In-Reply-To: <87y1m5x3bt.fsf@minerva.mail-host-address-is-not-set>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.48.0-1 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vmware.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CH3PR05MB10206:EE_|DS7PR05MB7350:EE_
-x-ms-office365-filtering-correlation-id: 836a6b66-72ce-4cbc-0c65-08db4c41ee4d
-x-ld-processed: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: aXCGvkP6dOOdMuXCxPm5lDW0YxdH0g0fuRKHWPNLFMhLGNDBM1HzJUjlAWFjYJlQgevQ3Zx+syeHX6Rl2zm9u9c8/amDFPFVr+b+1z4FAzJ94UhZkQJQa2PTP9RtFGIqBoqUiqCaMIZgCywkSyaahb636hDgpgXhjauMhZ9uNm8lO7zp9w7twqu3N3VV7Dhac5Jh38hthaGjEX/lV99UFoGJnjxLpa9mpIz+p87nN/+jWBMfD8VMH9are4rJ7zmOFzOIjUXErANHmbaMF4xZU3YfFZujaGxE9LiSS/3D8ZjtvVgDgEBsDsKQs6sLYTkZKMor8Ke+q8w2yywOSzl0/t0DSP8r0kl52+s2kRL3u8ajDtz7n+qXARKUcKr42qXzhJ3OqRRnJCqtnij0MSbkdqC9rAFj5I0y/AEsPJHhcl8s1ZuCYWQZrkKTdXU+D1GviuOUGQevnHKHmdoVaj1MDHrsTMVXiV17dDUJ+0nyewkdjsPN6/i4nsYA3fqxdeB5ICySRlx96FgK6AinCbJqQ5EVmsl7uxqMjrkEzHnkE3RJAx+kjarb8AW4GGAEaOaF2moZ3t0wA6+aoaDKr/J1mSEVwM+mdygA8X+hhxa/Fpy7JK8FQdLGepl5meFF0gEvcQz0/05rTHQ1pDi6//rxnQGAf+KTWx+ClyqLS/KvA3U=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH3PR05MB10206.namprd05.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(4636009)(366004)(39860400002)(136003)(376002)(346002)(396003)(451199021)(316002)(41300700001)(186003)(2906002)(71200400001)(6512007)(6506007)(26005)(36756003)(54906003)(2616005)(110136005)(4326008)(83380400001)(6486002)(76116006)(64756008)(66446008)(66476007)(86362001)(91956017)(66946007)(66556008)(38070700005)(478600001)(7416002)(8676002)(8936002)(5660300002)(122000001)(38100700002);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?MGtjU2xPVkhnSHMya3ZTeVhja2V2cGlBSTE5enBrWUxKR3h6VVEvWDBNVUJE?=
- =?utf-8?B?N2lLeHZzTWxISEZTSU5oTDByNUJOajBTQ1RrV2txTFEwWEdLZVNOS1NrWXZM?=
- =?utf-8?B?bk1qc1JtRVZyWWtndFJ3Wjd6d0p3a0RyeFN5MHExWHI5eW1zdHJVajJSRXhO?=
- =?utf-8?B?QVJqQUpCUjJINDQwTkMyaTFKWit1Z09lZ1dNU3ZmUE0vNTBUQk4yNUlBTWJ4?=
- =?utf-8?B?b1RheDBNanRSL0pUVEtibEpEQW5mMTBqVEJOWE0vbWJGN3JyVnQ4MTlhZEZp?=
- =?utf-8?B?Q1Bta3NlcGdBaTE3d21aZDYxWHR0Nncra0RmcEYvc3l6eWxUbHhreERPQ2FT?=
- =?utf-8?B?UWNFQS9MYVpoYUFaQjRSTVpia2U0SzdHUUd1V2NrWmdyb0J6TmNoNXZuc3pH?=
- =?utf-8?B?MUptNWF3SWpuaGR2eHVOcWh3bGg0S25GR0t1TXJ2ZUpReDZXemMySXVoNlVy?=
- =?utf-8?B?QlY4SEYrckhOREQrd1lrck5KQ2loeGZ5cXNIRmJmM24rVWZsbHY3Znd3TkZs?=
- =?utf-8?B?bFRuNmxhaXF0TXVkTkhTZ3E3M2NIU1BnbFVaUDFBWXpOU3pacVdUMW9pVmdM?=
- =?utf-8?B?dzJpdERoRlZlNnFQV0ZPS3BhK0ZOVHBGT21tcmdSZU1mKy80S2pDQ1BKY2oy?=
- =?utf-8?B?cHdhZjg2WlZrTWsxTE1Fc0YvS3pHWlpKMnBGWVQwcExVOFBwelJUZUdwNTMv?=
- =?utf-8?B?dmhEQ0VPdlpka3Y2NVRwczNPYXJqOXh4RkJDOFRMNk9GVDJjeHQxb2cxaUVt?=
- =?utf-8?B?Rk50RHhjaFphbWZ3bHB4MzF1cEdGUER4TWgxT055MGNpbW5oV0Z5SEpoQkNF?=
- =?utf-8?B?STVVUkprTXRRQjRZMlZPTXhGVWM3aE1TNFloeDh4YWZDa21GZmsyTzVaQ1NN?=
- =?utf-8?B?OW9QZU5jWlRjWVVla3owQjBpdjFHV0VEMlN0VGNibmhQUXpCQXdQRWZKbWxq?=
- =?utf-8?B?d1JCTERnc2c3dkV1RVAwaStuaUsrdFhab2tHMXl2L3EwSXQ3MVFCMFVwMHU5?=
- =?utf-8?B?OTFkdGh3SDcyUStNd0hKUVBZNmFZeklNcGN6bjU4QU5wSWlUWEgzSWRLanZT?=
- =?utf-8?B?YjVGN3ZFTjdmRERFemZQenBUZWxQb3JxdXgxZ05vTDkrUzZpVTllSzhxd3Fu?=
- =?utf-8?B?cTBwR0t2enQ3aVpkRDFSams2dnNrZ3BkQkFDaEpDNkdDUjd0T2NmNHJBYWti?=
- =?utf-8?B?NXNBMUZmZmI0VkFGeEtuclhXSzN0aG1GaGMxenJTRTdGeUpKZkNSYUtoV0N0?=
- =?utf-8?B?WkhXQ3Zwb1NiU0ZCbnVTdDh0RElDdHVoeTNTY2x5Z1Nqall5S2E0R0hhRlRo?=
- =?utf-8?B?Slp2YzA2RFNJRklBMlBzbCtjNGxlTWdxc0xPaFQxcmp4UFBBZEdYL20xVy9o?=
- =?utf-8?B?dDhvbUFkMTRXdmF5UlFzZDF5VENweW5mbzhtMlFSR1lQSTVyaW5Xc040a0tt?=
- =?utf-8?B?YnpuODRPK1M1dEVmY3VIZTE4bklGNmhSckFhV09VaVJka3FsTzh3cTJ3Nk5x?=
- =?utf-8?B?WnRJeGZmY083TU4wVE00RFJNRXljRHlZeTliYWFVZmMyaTdjMmYxbCs5VTZQ?=
- =?utf-8?B?aVpocFlXbTh2QllPSmtWQi9JSDk2WVlLR0ozQ0tEMzJvYTR6Um1YZFBVRTRo?=
- =?utf-8?B?eVF3WFVCcVhXeC9JdXdrakRxOWxaQmF1VTk0bHpyTEtpa1NCRHNTcVV1MHlu?=
- =?utf-8?B?eWpQMzdndVE5a2RteG5oT3F2ckNhdWJNMXBjcTVScUN5eEh0dnZiU1V6R3J0?=
- =?utf-8?B?azdlSENsbGJSOTRsZFlDN3FyRmVSSWxLbHM0ODByc1JrOWNDNHhaU2c0YTJ1?=
- =?utf-8?B?V216Ymk1azZLZzZWK1pOdmZtRkNMVklzWUJ5R1FkNmNzbk0yd1VnSHA2Mm9a?=
- =?utf-8?B?TzM0T250d3RpK0FHRVdQTVR3TnVsZW9UZE5MbUU2c3JPa2JhdU81RVZLdHpa?=
- =?utf-8?B?WGxuQXhwOFdhWFMwN3Uvb0gvMXB2RFFHNUlya29hS21URlJ0MmpuM2lKREcw?=
- =?utf-8?B?Tk8valRydTZRRFlZVFl5SkJ3M2FUREhBYlBzV01leWdZUFJ2QVBydXAwaC9r?=
- =?utf-8?B?UHcvTmxHUmdmTEVTSjNBaExCNjl0M2dlZWc4TmNHRm9rNTNmNU50UkxlcldC?=
- =?utf-8?Q?94ZVAv4LPhFStN2z8QSKQl799?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <2D5403C778170340B92BDB9A56B16359@namprd05.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ <20230503105415.62aa7a8d@eldfell>
+ <00621684a619329ba758f4a7212a591121633198.camel@vmware.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.24; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR05MB10206.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 836a6b66-72ce-4cbc-0c65-08db4c41ee4d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 May 2023 01:50:25.7642 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: grVf3huv5205OtAU3MQksZ5RSgdFmIWCT8duDmo3pSr+sPsHVrkhaMd0rAF4iz2HTP2RqwDA8jFAFThpWA5rLA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR05MB7350
-X-Mailman-Approved-At: Thu, 04 May 2023 07:16:58 +0000
+Content-Type: multipart/signed; boundary="Sig_/WF6CuV3BN9g3x.Wlie/vKwf";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+X-Mailman-Approved-At: Thu, 04 May 2023 11:08:34 +0000
 Subject: Re: [Spice-devel] [PATCH v2 1/8] drm: Disable the cursor plane on
  atomic contexts with virtualized drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -136,14 +78,15 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "jadahl@gmail.com" <jadahl@gmail.com>,
+Cc: "daniel@ffwll.ch" <daniel@ffwll.ch>, "jadahl@gmail.com" <jadahl@gmail.com>,
  "hdegoede@redhat.com" <hdegoede@redhat.com>,
  "airlied@linux.ie" <airlied@linux.ie>,
+ "contact@emersion.fr" <contact@emersion.fr>,
  "belmouss@redhat.com" <belmouss@redhat.com>,
+ "javierm@redhat.com" <javierm@redhat.com>,
  "stable@vger.kernel.org" <stable@vger.kernel.org>,
  "gurchetansingh@chromium.org" <gurchetansingh@chromium.org>,
  Martin Krastev <krastevm@vmware.com>,
- "ppaalanen@gmail.com" <ppaalanen@gmail.com>,
  Linux-graphics-maintainer <Linux-graphics-maintainer@vmware.com>,
  "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
  "tzimmermann@suse.de" <tzimmermann@suse.de>,
@@ -156,102 +99,280 @@ Cc: "jadahl@gmail.com" <jadahl@gmail.com>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-T24gV2VkLCAyMDIzLTA1LTAzIGF0IDA5OjQ4ICswMjAwLCBKYXZpZXIgTWFydGluZXogQ2FuaWxs
-YXMgd3JvdGU6DQo+IFphY2sgUnVzaW4gPHphY2tyQHZtd2FyZS5jb20+IHdyaXRlczoNCj4gDQo+
-ID4gT24gVHVlLCAyMDIzLTA1LTAyIGF0IDExOjMyICswMjAwLCBKYXZpZXIgTWFydGluZXogQ2Fu
-aWxsYXMgd3JvdGU6DQo+ID4gPiAhISBFeHRlcm5hbCBFbWFpbA0KPiA+ID4gDQo+ID4gPiBEYW5p
-ZWwgVmV0dGVyIDxkYW5pZWxAZmZ3bGwuY2g+IHdyaXRlczoNCj4gPiA+IA0KPiA+ID4gPiBPbiBN
-b24sIEp1bCAxMSwgMjAyMiBhdCAxMTozMjozOVBNIC0wNDAwLCBaYWNrIFJ1c2luIHdyb3RlOg0K
-PiA+ID4gPiA+IEZyb206IFphY2sgUnVzaW4gPHphY2tyQHZtd2FyZS5jb20+DQo+ID4gPiA+ID4g
-DQo+ID4gPiA+ID4gQ3Vyc29yIHBsYW5lcyBvbiB2aXJ0dWFsaXplZCBkcml2ZXJzIGhhdmUgc3Bl
-Y2lhbCBtZWFuaW5nIGFuZCByZXF1aXJlDQo+ID4gPiA+ID4gdGhhdCB0aGUgY2xpZW50cyBoYW5k
-bGUgdGhlbSBpbiBzcGVjaWZpYyB3YXlzLCBlLmcuIHRoZSBjdXJzb3IgcGxhbmUNCj4gPiA+ID4g
-PiBzaG91bGQgcmVhY3QgdG8gdGhlIG1vdXNlIG1vdmVtZW50IHRoZSB3YXkgYSBtb3VzZSBjdXJz
-b3Igd291bGQgYmUNCj4gPiA+ID4gPiBleHBlY3RlZCB0byBhbmQgdGhlIGNsaWVudCBpcyByZXF1
-aXJlZCB0byBzZXQgaG90c3BvdCBwcm9wZXJ0aWVzIG9uIGl0DQo+ID4gPiA+ID4gaW4gb3JkZXIg
-Zm9yIHRoZSBtb3VzZSBldmVudHMgdG8gYmUgcm91dGVkIGNvcnJlY3RseS4NCj4gPiA+ID4gPiAN
-Cj4gPiA+ID4gPiBUaGlzIGJyZWFrcyB0aGUgY29udHJhY3QgYXMgc3BlY2lmaWVkIGJ5IHRoZSAi
-dW5pdmVyc2FsIHBsYW5lcyIuIEZpeCBpdA0KPiA+ID4gPiA+IGJ5IGRpc2FibGluZyB0aGUgY3Vy
-c29yIHBsYW5lcyBvbiB2aXJ0dWFsaXplZCBkcml2ZXJzIHdoaWxlIGFkZGluZw0KPiA+ID4gPiA+
-IGEgZm91bmRhdGlvbiBvbiB0b3Agb2Ygd2hpY2ggaXQncyBwb3NzaWJsZSB0byBzcGVjaWFsIGNh
-c2UgbW91c2UgY3Vyc29yDQo+ID4gPiA+ID4gcGxhbmVzIGZvciBjbGllbnRzIHRoYXQgd2FudCBp
-dC4NCj4gPiA+ID4gPiANCj4gPiA+ID4gPiBEaXNhYmxpbmcgdGhlIGN1cnNvciBwbGFuZXMgbWFr
-ZXMgc29tZSBrbXMgY29tcG9zaXRvcnMgd2hpY2ggd2VyZSBicm9rZW4sDQo+ID4gPiA+ID4gZS5n
-LiBXZXN0b24sIGZhbGxiYWNrIHRvIHNvZnR3YXJlIGN1cnNvciB3aGljaCB3b3JrcyBmaW5lIG9y
-IGF0IGxlYXN0DQo+ID4gPiA+ID4gYmV0dGVyIHRoYW4gY3VycmVudGx5IHdoaWxlIGhhdmluZyBu
-byBlZmZlY3Qgb24gb3RoZXJzLCBlLmcuIGdub21lLXNoZWxsDQo+ID4gPiA+ID4gb3Iga3dpbiwg
-d2hpY2ggcHV0IHZpcnR1YWxpemVkIGRyaXZlcnMgb24gYSBkZW55LWxpc3Qgd2hlbiBydW5uaW5n
-IGluDQo+ID4gPiA+ID4gYXRvbWljIGNvbnRleHQgdG8gbWFrZSB0aGVtIGZhbGxiYWNrIHRvIGxl
-Z2FjeSBrbXMgYW5kIGF2b2lkIHRoaXMgaXNzdWUuDQo+ID4gPiA+ID4gDQo+ID4gPiA+ID4gU2ln
-bmVkLW9mZi1ieTogWmFjayBSdXNpbiA8emFja3JAdm13YXJlLmNvbT4NCj4gPiA+ID4gPiBGaXhl
-czogNjgxZTdlYzczMDQ0ICgiZHJtOiBBbGxvdyB1c2Vyc3BhY2UgdG8gYXNrIGZvciB1bml2ZXJz
-YWwgcGxhbmUgbGlzdA0KPiA+ID4gPiA+ICh2MikiKQ0KPiA+ID4gDQo+ID4gPiBbLi4uXQ0KPiA+
-ID4gDQo+ID4gPiA+ID4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9kcnYuaCBiL2luY2x1
-ZGUvZHJtL2RybV9kcnYuaA0KPiA+ID4gPiA+IGluZGV4IGY2MTU5YWNiODg1Ni4uYzRjZDdmYzM1
-MGQ5IDEwMDY0NA0KPiA+ID4gPiA+IC0tLSBhL2luY2x1ZGUvZHJtL2RybV9kcnYuaA0KPiA+ID4g
-PiA+ICsrKyBiL2luY2x1ZGUvZHJtL2RybV9kcnYuaA0KPiA+ID4gPiA+IEBAIC05NCw2ICs5NCwx
-NiBAQCBlbnVtIGRybV9kcml2ZXJfZmVhdHVyZSB7DQo+ID4gPiA+ID4gwqDCoMKgwqDCoCAqIHN5
-bmNocm9uaXphdGlvbiBvZiBjb21tYW5kIHN1Ym1pc3Npb24uDQo+ID4gPiA+ID4gwqDCoMKgwqDC
-oCAqLw0KPiA+ID4gPiA+IMKgwqDCoMKgIERSSVZFUl9TWU5DT0JKX1RJTUVMSU5FwqDCoMKgwqDC
-oMKgwqDCoCA9IEJJVCg2KSwNCj4gPiA+ID4gPiArwqDCoMKgIC8qKg0KPiA+ID4gPiA+ICvCoMKg
-wqDCoCAqIEBEUklWRVJfVklSVFVBTDoNCj4gPiA+ID4gPiArwqDCoMKgwqAgKg0KPiA+ID4gPiA+
-ICvCoMKgwqDCoCAqIERyaXZlciBpcyBydW5uaW5nIG9uIHRvcCBvZiB2aXJ0dWFsIGhhcmR3YXJl
-LiBUaGUgbW9zdCBzaWduaWZpY2FudA0KPiA+ID4gPiA+ICvCoMKgwqDCoCAqIGltcGxpY2F0aW9u
-IG9mIHRoaXMgaXMgYSByZXF1aXJlbWVudCBvZiBzcGVjaWFsIGhhbmRsaW5nIG9mIHRoZQ0KPiA+
-ID4gPiA+ICvCoMKgwqDCoCAqIGN1cnNvciBwbGFuZSAoZS5nLiBjdXJzb3IgcGxhbmUgaGFzIHRv
-IGFjdHVhbGx5IHRyYWNrIHRoZSBtb3VzZQ0KPiA+ID4gPiA+ICvCoMKgwqDCoCAqIGN1cnNvciBh
-bmQgdGhlIGNsaWVudHMgYXJlIHJlcXVpcmVkIHRvIHNldCBob3RzcG90IGluIG9yZGVyIGZvcg0K
-PiA+ID4gPiA+ICvCoMKgwqDCoCAqIHRoZSBjdXJzb3IgcGxhbmVzIHRvIHdvcmsgY29ycmVjdGx5
-KS4NCj4gPiA+ID4gPiArwqDCoMKgwqAgKi8NCj4gPiA+ID4gPiArwqDCoMKgIERSSVZFUl9WSVJU
-VUFMwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCA9IEJJVCg3KSwNCj4gPiA+ID4g
-DQo+ID4gPiA+IEkgdGhpbmsgdGhlIG5hbWluZyBoZXJlIGlzIHVuZm9ydHVuYXRlLCBiZWNhdXNl
-IHBlb3BsZSB3aWxsIHZvbmRlciB3aHkNCj4gPiA+ID4gZS5nLiB2a21zIGRvZXNuJ3Qgc2V0IHRo
-aXMsIGFuZCB0aGVuIGFkZCBpdCwgYW5kIGNvbmZ1c2Ugc3R1ZmYgY29tcGxldGVseS4NCj4gPiA+
-ID4gDQo+ID4gPiA+IEFsc28gaXQgZmVlbHMgYSBiaXQgd3JvbmcgdG8gcHV0IHRoaXMgb250byB0
-aGUgZHJpdmVyLCB3aGVuIHJlYWxseSBpdCdzIGENCj4gPiA+ID4gY3Vyc29yIGZsYWcuIEkgZ3Vl
-c3MgeW91IGNhbiBtYWtlIGl0IHNvbWUga2luZCBvZiBmbGFnIGluIHRoZSBkcm1fcGxhbmUNCj4g
-PiA+ID4gc3RydWN0dXJlLCBvciBhIG5ldyBwbGFuZSB0eXBlLCBidXQgcHV0dGluZyBpdCB0aGVy
-ZSBpbnN0ZWFkIG9mIGludG8gdGhlDQo+ID4gPiA+ICJyYW5kb20gcGlsZSBvZiBtaWRsYXllci1t
-aXN0YWtlIGRyaXZlciBmbGFncyIgd291bGQgYmUgYSBsb3QgYmV0dGVyLg0KPiA+ID4gPiANCj4g
-PiA+ID4gT3RoZXJ3aXNlIEkgdGhpbmsgdGhlIHNlcmllcyBsb29rcyByb3VnaGx5IGhvdyBJJ2Qg
-ZXhwZWN0IGl0IHRvIGxvb2suDQo+ID4gPiA+IC1EYW5pZWwNCj4gPiA+ID4gDQo+ID4gPiANCj4g
-PiA+IEFGQUlDVCB0aGlzIGlzIHRoZSBvbmx5IHJlbWFpbmluZyB0aGluZyB0byBiZSBhZGRyZXNz
-ZWQgZm9yIHRoaXMgc2VyaWVzID8NCj4gPiANCj4gPiBObywgdGhlcmUgd2FzIG1vcmUuIHRiaCBJ
-IGhhdmVuJ3QgaGFkIHRoZSB0aW1lIHRvIHRoaW5rIGFib3V0IHdoZXRoZXIgdGhlIGFib3ZlDQo+
-ID4gbWFrZXMgc2Vuc2UgdG8gbWUsIGUuZy4gSSdtIG5vdCBzdXJlIGlmIGhhdmluZyB2aXJ0dWFs
-aXplZCBkcml2ZXJzIGV4cG9zZQ0KPiA+ICJzdXBwb3J0DQo+ID4gdW5pdmVyc2FsIHBsYW5lcyIg
-YW5kIGFkZGluZyBhbm90aGVyIHBsYW5lIHdoaWNoIGlzIG5vdCB1bml2ZXJzYWwgKHRoZSBvbmx5
-DQo+ID4gInVuaXZlcnNhbCIgcGxhbmUgb24gdGhlbSBiZWluZyB0aGUgZGVmYXVsdCBvbmUpIG1h
-a2VzIG1vcmUgc2Vuc2UgdGhhbiBhIGZsYWcNCj4gPiB0aGF0DQo+ID4gc2F5cyAidGhpcyBkcml2
-ZXIgcmVxdWlyZXMgYSBjdXJzb3IgaW4gdGhlIGN1cnNvciBwbGFuZSIuIFRoZXJlJ3MgY2VydGFp
-bmx5IGENCj4gPiBodWdlDQo+ID4gZGlmZmVyZW5jZSBpbiBob3cgdXNlcnNwYWNlIHdvdWxkIGJl
-IHJlcXVpcmVkIHRvIGhhbmRsZSBpdCBhbmQgaXQncyB3YXkgdWdsaWVyDQo+ID4gd2l0aA0KPiA+
-IHR3byBkaWZmZXJlbnQgY3Vyc29yIHBsYW5lcy4gaS5lLiB0aGVyZSdzIGEgbG90IG9mIHdheXMg
-aW4gd2hpY2ggdGhpcyBjb3VsZCBiZQ0KPiA+IGNsZWFuZXIgaW4gdGhlIGtlcm5lbCBidXQgdGhl
-eSBhbGwgcmVxdWlyZSBzaWduaWZpY2FudCBjaGFuZ2VzIHRvIHVzZXJzcGFjZSwNCj4gPiB0aGF0
-IGdvDQo+ID4gd2F5IGJleW9uZCAiYXR0YWNoIGhvdHNwb3QgaW5mbyB0byB0aGlzIHBsYW5lIi4g
-SSdkIGxpa2UgdG8gYXZvaWQgYXBwcm9hY2hlcw0KPiA+IHRoYXQNCj4gPiBtZWFuIHJ1bm5pbmcg
-d2l0aCBhdG9taWMga21zIHJlcXVpcmVzIGNvbXBsZXRlbHkgc2VwYXJhdGUgcGF0aHMgZm9yIHZp
-cnR1YWxpemVkDQo+ID4gZHJpdmVycyBiZWNhdXNlIG5vIG9uZSB3aWxsIGV2ZXIgc3VwcG9ydCBh
-bmQgbWFpbnRhaW4gaXQuDQo+ID4gDQo+ID4gSXQncyBub3QgYSB0cml2aWFsIHRoaW5nIGJlY2F1
-c2UgaXQncyBmdW5kYW1lbnRhbGx5IGhhcmQgdG8gdW50YW5nbGUgdGhlIGZhY3QNCj4gPiB0aGUN
-Cj4gPiB2aXJ0dWFsaXplZCBkcml2ZXJzIGhhdmUgYmVlbiBhZHZlcnRpc2luZyB1bml2ZXJzYWwg
-cGxhbmUgc3VwcG9ydCB3aXRob3V0IGV2ZXINCj4gPiBzdXBwb3J0aW5nIHVuaXZlcnNhbCBwbGFu
-ZXMuIEVzcGVjaWFsbHkgYmVjYXVzZSBtb3N0IG5ldyB1c2Vyc3BhY2UgaW4gZ2VuZXJhbA0KPiA+
-IGNoZWNrcw0KPiA+IGZvciAidW5pdmVyc2FsIHBsYW5lcyIgdG8gZXhwb3NlIGF0b21pYyBrbXMg
-cGF0aHMuDQo+ID4gDQo+IA0KPiBBZnRlciBzb21lIGRpc2N1c3Npb24gb24gdGhlICNkcmktZGV2
-ZWwsIHlvdXIgYXBwcm9hY2ggbWFrZXMgc2Vuc2UgYW5kIHRoZQ0KPiBvbmx5IGNvbnRlbnRpb24g
-cG9pbnQgaXMgdGhlIG5hbWUgb2YgdGhlIGRyaXZlciBmZWF0dXJlIGZsYWcgbmFtZS4gVGhlIG9u
-ZQ0KPiB5b3UgYXJlIHVzaW5nIChEUklWRVJfVklSVFVBTCkgc2VlbXMgdG8gYmUgdG9vIGJyb2Fk
-IGFuZCBnZW5lcmljICh0aGUgZmFjdA0KPiB0aGF0IHZrbXMgd29uJ3Qgc2V0IGFuZCBpcyBhIHZp
-cnR1YWwgZHJpdmVyIGFzIHdlbGwsIGlzIGEgZ29vZCBleGFtcGxlKS4NCj4gDQo+IE1heWJlIHNv
-bWV0aGluZyBsaWtlIERSSVZFUl9DVVJTT1JfSE9UU1BPVCBvciBEUklWRVJfQ1VSU09SX0NPTU1B
-TkRFRVJJTkcNCj4gd291bGQgYmUgbW9yZSBhY2N1cmF0ZSBhbmQgc2VsZiBleHBsYW5hdG9yeSA/
-DQoNClN1cmUsIG9yIGV2ZW4gbW9yZSB2ZXJib3NlIERSSVZFUl9ORUVEU19DVVJTT1JfUExBTkVf
-SE9UU1BPVCwgYnV0IGl0IHNvdW5kcyBsaWtlDQpQZWtrYSBkb2Vzbid0IGFncmVlIHdpdGggdGhp
-cyBhcHByb2FjaC4gQXMgSSBtZW50aW9uZWQgaW4gbXkgcmVzcG9uc2UgdG8gaGltLCBJJ2QgYmUN
-CmhhcHB5IHdpdGggYW55IGFwcHJvYWNoIHRoYXQgZ2V0cyBwYXJhdmlydHVhbGl6ZWQgZHJpdmVy
-cyB3b3JraW5nIHdpdGggYXRvbWljIGttcywNCmJ1dCBhdG0gSSBkb24ndCBoYXZlIGVub3VnaCB0
-aW1lIHRvIGJlIGNyZWF0aW5nIGEgbmV3IGtlcm5lbCBzdWJzeXN0ZW0gb3IgYSBuZXcgc2V0DQpv
-ZiB1YXBpJ3MgZm9yIHBhcmF2aXJ0dWFsaXplZCBkcml2ZXJzIGFuZCB0aGVuIHBvcnRpbmcgbXV0
-dGVyL2t3aW4gdG8gdGhvc2UuDQoNCnoNCg0K
+--Sig_/WF6CuV3BN9g3x.Wlie/vKwf
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 4 May 2023 01:43:51 +0000
+Zack Rusin <zackr@vmware.com> wrote:
+
+> On Wed, 2023-05-03 at 10:54 +0300, Pekka Paalanen wrote:
+> > On Wed, 3 May 2023 03:35:29 +0000
+> > Zack Rusin <zackr@vmware.com> wrote:
+> >  =20
+> > > On Tue, 2023-05-02 at 11:32 +0200, Javier Martinez Canillas wrote: =20
+> > > > !! External Email
+> > > >=20
+> > > > Daniel Vetter <daniel@ffwll.ch> writes:
+> > > > =C2=A0  =20
+> > > > > On Mon, Jul 11, 2022 at 11:32:39PM -0400, Zack Rusin wrote:=C2=A0=
+  =20
+> > > > > > From: Zack Rusin <zackr@vmware.com>
+> > > > > >=20
+> > > > > > Cursor planes on virtualized drivers have special meaning and r=
+equire
+> > > > > > that the clients handle them in specific ways, e.g. the cursor =
+plane
+> > > > > > should react to the mouse movement the way a mouse cursor would=
+ be
+> > > > > > expected to and the client is required to set hotspot propertie=
+s on it
+> > > > > > in order for the mouse events to be routed correctly.
+> > > > > >=20
+> > > > > > This breaks the contract as specified by the "universal planes"=
+. Fix it
+> > > > > > by disabling the cursor planes on virtualized drivers while add=
+ing
+> > > > > > a foundation on top of which it's possible to special case mous=
+e cursor
+> > > > > > planes for clients that want it.
+> > > > > >=20
+> > > > > > Disabling the cursor planes makes some kms compositors which we=
+re broken,
+> > > > > > e.g. Weston, fallback to software cursor which works fine or at=
+ least
+> > > > > > better than currently while having no effect on others, e.g. gn=
+ome-shell
+> > > > > > or kwin, which put virtualized drivers on a deny-list when runn=
+ing in
+> > > > > > atomic context to make them fallback to legacy kms and avoid th=
+is issue.
+> > > > > >=20
+> > > > > > Signed-off-by: Zack Rusin <zackr@vmware.com>
+> > > > > > Fixes: 681e7ec73044 ("drm: Allow userspace to ask for universal=
+ plane list
+> > > > > > (v2)")=C2=A0  =20
+> > > >=20
+> > > > [...]
+> > > > =C2=A0  =20
+> > > > > > diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
+> > > > > > index f6159acb8856..c4cd7fc350d9 100644
+> > > > > > --- a/include/drm/drm_drv.h
+> > > > > > +++ b/include/drm/drm_drv.h
+> > > > > > @@ -94,6 +94,16 @@ enum drm_driver_feature {
+> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * synchronization of command sub=
+mission.
+> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 DRIVER_SYNCOBJ_TIMELINE=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =3D BIT(6),
+> > > > > > +=C2=A0=C2=A0=C2=A0 /**
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * @DRIVER_VIRTUAL:
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 *
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * Driver is running on top of virtual=
+ hardware. The most significant
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * implication of this is a requiremen=
+t of special handling of the
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * cursor plane (e.g. cursor plane has=
+ to actually track the mouse
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * cursor and the clients are required=
+ to set hotspot in order for
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 * the cursor planes to work correctly=
+).
+> > > > > > +=C2=A0=C2=A0=C2=A0=C2=A0 */
+> > > > > > +=C2=A0=C2=A0=C2=A0 DRIVER_VIRTUAL=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+ =3D BIT(7),=C2=A0  =20
+> > > > >=20
+> > > > > I think the naming here is unfortunate, because people will vonde=
+r why
+> > > > > e.g. vkms doesn't set this, and then add it, and confuse stuff co=
+mpletely.
+> > > > >=20
+> > > > > Also it feels a bit wrong to put this onto the driver, when reall=
+y it's a
+> > > > > cursor flag. I guess you can make it some kind of flag in the drm=
+_plane
+> > > > > structure, or a new plane type, but putting it there instead of i=
+nto the
+> > > > > "random pile of midlayer-mistake driver flags" would be a lot bet=
+ter.
+> > > > >=20
+> > > > > Otherwise I think the series looks roughly how I'd expect it to l=
+ook.
+> > > > > -Daniel
+> > > > > =C2=A0  =20
+> > > >=20
+> > > > AFAICT this is the only remaining thing to be addressed for this se=
+ries ?=C2=A0  =20
+> > >=20
+> > > No, there was more. tbh I haven't had the time to think about whether=
+ the above
+> > > makes sense to me, e.g. I'm not sure if having virtualized drivers ex=
+pose
+> > > "support
+> > > universal planes" and adding another plane which is not universal (th=
+e only
+> > > "universal" plane on them being the default one) makes more sense tha=
+n a flag
+> > > that
+> > > says "this driver requires a cursor in the cursor plane". There's cer=
+tainly a
+> > > huge
+> > > difference in how userspace would be required to handle it and it's w=
+ay uglier
+> > > with
+> > > two different cursor planes. i.e. there's a lot of ways in which this=
+ could be
+> > > cleaner in the kernel but they all require significant changes to use=
+rspace,
+> > > that go
+> > > way beyond "attach hotspot info to this plane". =20
+> >  =20
+> > > I'd like to avoid approaches that
+> > > mean running with atomic kms requires completely separate paths for v=
+irtualized
+> > > drivers because no one will ever support and maintain it. =20
+> >=20
+> > Hi Zack,
+> >=20
+> > you'd like to avoid that, but fundamentally that really is what has to
+> > happen in userspace for *nested* KMS drivers (VKMS is a virtual driver
+> > but not part of the interest group here) to reach optimality.
+> >=20
+> > It really is a different path. I see no way around that. But if you
+> > accept that fact, then you could possibly gain a lot more benefits by
+> > asking userspace to handle nested KMS drivers differently. What those
+> > benefits are exactly I'm not sure, but I have a feeling there should be
+> > some, where the knowledge of running on a nested KMS driver allows for
+> > better decisions that are not possible if the nested KMS driver just
+> > pretends to be like any other KMS hardware driver. =20
+>=20
+> I'm not quite sure I buy the "virtualized drivers return immediately from=
+ a flip and
+> require two extra integers on the cursor plane, so there's no possible wa=
+y drm api
+> could handle that" argument because it seems rather flimsy. If the premis=
+e is that
+> the paravirtualized drivers are so different that drm uapi can not handle=
+ them then
+> why would they stay in drm? What's the benefit if they'll have their own =
+uapi and
+> their own interfaces?
+
+Hi Zack,
+
+I never implied to go that far as you make it sound here.
+
+I only pointed out that there definitely are behavioral differences
+that userspace MUST acknowledge and handle. The cursor plane being
+special is just the start.
+
+It does not invalidate the whole existing KMS UAPI, but *if* you aim
+for optimal performance, you cannot ignore the differences or paper
+over them either.
+
+This NOT a NAK to this patch series in any way!
+
+> I'd flip the argument and say you'd be a lot happier if you accepted that=
+ universal
+> planes aren't really universal no matter what. If weston puts a spreadshe=
+et app in a
+> cursor plane presumably users would be concerned that their mouse cursor =
+disappears
+> when they enter the spreadsheet app and responding to their concerns with=
+ "it's
+> cool, the planes are universal" wouldn't quite work. Something needs to s=
+pecial case
+> cursor plane no matter what. Anyway, I think we went through this argumen=
+t of what
+> exactly "universal" refers to and whatever the definition of it is why I =
+don't see
+> why two extra integers on cursor planes violates any part of it so I'll l=
+et it go.=C2=A0
+
+If you say so.
+
+But then you need userspace to set those two integers. The concept of
+those two integers does not even exist without explicit care in
+userspace. You are already letting go of your goal to not need special
+case code or changes in userspace like you said in (copied from above):
+
+> > > I'd like to avoid approaches that
+> > > mean running with atomic kms requires completely separate paths for v=
+irtualized
+> > > drivers because no one will ever support and maintain it. =20
+
+You want to make cursor planes special and not universal, which means
+userspace needs special code to use them at all. That's a separate code
+path. That is good! That is the way to get more performance through
+better userspace decisions.
+
+> I have nothing against any of those solutions - from creating whole new k=
+ms uapi for
+> paravirtualized drivers, through creating a new subsystem for paravirtual=
+ized
+> drivers. I just have no interest in implementing those myself right now b=
+ut if
+> someone implemented mutter/kwin code on top of either a new subsystem for
+> paravirtualized drivers or implemented atomic kms on top of some new api'=
+s for them,
+> we'll be sure to port vmwgfx to that.=20
+
+Again, I said half a meter, but you are jumping a mile.
+
+I think you are seeing my comments as NAKs towards everything you try
+to do. That's not my intention, and I cannot NAK anything anyway. I am
+only pointing out that you seem too fixed to these details to see the
+rest of the problems that hinder performance of nested KMS drivers.
+
+See for example
+https://gitlab.freedesktop.org/wayland/weston/-/issues/514
+
+It's a nested KMS use case with qemu (would vmwgfx be any different?),
+where the goal is to have zero-copy direct scanout from guest
+application through guest KMS planes, qemu, host Weston onto host KMS
+planes. The direct scanout works, but due to the UAPI design I
+explained in my previous email, the only way to make that actually run
+at ~full framerate is to very carefully manually tune the timings of
+both guest and host Weston instance.
+
+If you deem the cost of gaining that performance too high, that's fine.
+
+However, I do absolutely believe, that if you wanted it, any Wayland
+compositor project that aims to be in any way a performant general
+purpose compositor for desktops or more would be willing to follow you
+in using new UAPI that would make life better with nested KMS drivers.
+You just have to ask, instead of assume that userspace won't hear you.
+After all, working better is in their interest as well.
+
+I *am* trying to push you forward, not stop you.
+
+Sorry, I'll try to keep quiet from now on since I don't have any stakes
+here.
+
+
+Thanks,
+pq
+
+--Sig_/WF6CuV3BN9g3x.Wlie/vKwf
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmRTaxYACgkQI1/ltBGq
+qqc3BBAAqD+lOm+2QLjIxHH8DKOskrQFneGAjryiHbtzCBctzojL4QSFC8yZqyxV
+lqYWEejOlSjoNMvATHY3AfVYydH4PSvbOe4aTJgN6g0FVLlH04bWkqjwHIcdqBfG
+nLlOQXpEadlD1jn2+Z4lO9wgmBR017SarMFmrHgsqF3RwLeyK8jeO1cVBKcuLsYm
+QuO2QFRuURLxkAu/rzBSYRCrdFGnpkhKI6CTF5PaW6wsY2YHtBj9XuTsiVi8xml4
+M53MegwmGrRHoro/2Kn+J7kl8VFcGQ+cD41R2mW6uHC5JcdRyKdN8+tYdPeuzH4q
+EBMsTlEcIFKLRKPVCEFlKGOXf/B8rvSTzeldgALDknMlYfJiJr7C0ToRMM9yysk5
+4PcbOn/vMCc8jPGOZk30V3lIMV5szVx401kHK8PSJz4mby3+U04APw+CmYoRofEL
+s3NlaezFM3YeGPo4MM4LL0ilDdxWmhZJE5CfPorWrVDggiMr7y4Ch9f6Kb6yvSlN
+/izdobEeX6pgf3qfgU+M6a20Mm/oFJL8tBuMJR1T1MdufeoxaIYklvfy1SDVdC8t
+qnr9l9diii9Rfh2nteaJ4IVNur6vadnkEi7pwNFiuw7unAk/dj2qLkb7BZ09pXnw
+OzkLy6gsF4s9s4v1eLXfpa1LrhwIQ7CfA+paYow4sEeGjpzD/do=
+=0O42
+-----END PGP SIGNATURE-----
+
+--Sig_/WF6CuV3BN9g3x.Wlie/vKwf--
