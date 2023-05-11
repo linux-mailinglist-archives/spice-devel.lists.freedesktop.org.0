@@ -1,63 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D16AF6FE497
-	for <lists+spice-devel@lfdr.de>; Wed, 10 May 2023 21:49:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46B9A700438
+	for <lists+spice-devel@lfdr.de>; Fri, 12 May 2023 11:47:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 77A8110E514;
-	Wed, 10 May 2023 19:49:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A77CA10E65D;
+	Fri, 12 May 2023 09:47:15 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 43F4910E514
- for <spice-devel@lists.freedesktop.org>; Wed, 10 May 2023 19:49:45 +0000 (UTC)
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-18f4a6d2822so46537237fac.1
- for <spice-devel@lists.freedesktop.org>; Wed, 10 May 2023 12:49:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1683748184; x=1686340184;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=59eDbr70WFRywsA+6OXfKAayUvrdQ4tb6ZHyMZeWShY=;
- b=CuFYaXtyESmCPNP6RNCSSORuWFPpSDhvo+JkvOFDuFDBhVCvGSnMeeuj+XZsQ8cYZt
- 5kLr4S+/XhNKAmzYVENdmWcjSbl6wxCsNk3PhhzI2DmMzKNub5dxL9AnO0b3X0aW4NHX
- YPJPyUJHifXmUCUWYXsP2NdGqonvDgJcde4BwzP3En5lVQGEaAXPx5n2WqPPOW3I38qc
- wEsFXFa8KDq4sBUt/32OVOr/e1Aj3JVzUWmVHpwlgwtHy1CCUEE0/Lx1ikF+U2cRiNu6
- jUC9C6/CMqIr+EcLK8i0Q1RiUt9cWyc+R7fqyf/IFP2UirHY9dDcWrUz104fcPmfXi6a
- Bebw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683748184; x=1686340184;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=59eDbr70WFRywsA+6OXfKAayUvrdQ4tb6ZHyMZeWShY=;
- b=ABOSei9QPjloWypi3lOM5wdoJY3ry+5MuBLQ+t3EOh2wWIfYqSijFcCjWCRvdxoE6G
- OoTskn2EY5lYqszG3xsKfBbDw1mSKplT5ireNplGFeU8d7uBFmoe6vi+d7IkVIa8eLEp
- htQ+YGh1WTE8sYBiIjBGA2hmKiS3O+Gny1OC7X0EMRCjtbwgpfLltQp8XZNEtRCDMeYn
- hH+WlO0dx6/JETCwrcHO0BITpYILUP0GT3CHgFskQpMhyfpILYRU69PlZj4HP9hMAW1n
- ABFIdAETSCpjY5cxoQo166Ru8cl916+4EZSpmeImiWtS6PzegDHyfxResKAFyUrPndvS
- Hxmw==
-X-Gm-Message-State: AC+VfDyCY3AnVuEPpttFepwCsS1FBZmvjl5hthtb+nX2+OZkKJcDIdtA
- TPKl/We2gA6vqcTZM+Q6sMLg4zYsFmXinQEcYWi20Gj/QKg3Xg==
-X-Google-Smtp-Source: ACHHUZ7rhclyd408VOGtOKa/Tf9d6wnYOcitN2Gw8cuxSKmTEZgb3iWtBSdYH/XcYbKJNTEymrT4ERfQdCRzgBI7lDI=
-X-Received: by 2002:aca:3c82:0:b0:393:fd29:c884 with SMTP id
- j124-20020aca3c82000000b00393fd29c884mr3355740oia.22.1683748184069; Wed, 10
- May 2023 12:49:44 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230427061601.1488225-1-vivek.kasireddy@intel.com>
- <20230427061601.1488225-2-vivek.kasireddy@intel.com>
-In-Reply-To: <20230427061601.1488225-2-vivek.kasireddy@intel.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Wed, 10 May 2023 20:49:33 +0100
-Message-ID: <CAHt6W4cdQ4LR5ArLzw1Ow2UMQ+amwZbnB6gjNMAoiU-xhAyG8Q@mail.gmail.com>
-To: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] [PATCH] channel-display-gst: Use h/w based
- decoders with Intel GPUs if possible
+X-Greylist: delayed 967 seconds by postgrey-1.36 at gabe;
+ Thu, 11 May 2023 12:25:16 UTC
+Received: from out162-62-57-137.mail.qq.com (out162-62-57-137.mail.qq.com
+ [162.62.57.137])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C096D10E09C
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 May 2023 12:25:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1683807909; bh=KatdqQp6yyVywKNxqAL5ZEt4F2CqhLH09yADZJD48xI=;
+ h=From:To:Subject:Date;
+ b=sXAbrG2kouI/VwwsKC76RTfK7E03p7rUjvJCEZVHZ0kK8c+BmLh9eA1z8QXBymwbS
+ kBYlZQOqRr0Cxl/M6VbksojPMelM1LxfsimrBLS/+n1tivIs4iDtIDmhEk5mnZaYKl
+ bIalgEjohydvQuHoSBH/zauBQ9LUiVCB12/gv7qY=
+X-QQ-FEAT: oHWrrGTW1dCGJEu1CuC8+nIWkvSYK6n9
+X-QQ-SSF: 00000000000000F0000000000000
+X-QQ-XMAILINFO: MhvVYtZeQ7htp8bkNfG0iDvB7JGPCgnP54ysH3DLNC+9VOXcE5/FgFr3Aiw3vP
+ x1/gx+Lj1IMKJPusgyDykTtpu1ogxRhSr1f/jSdevQRvn1BbFstZsCA49ve3+/MEKpGTGCfRoJhhp
+ 2cQsSz36NFVxZOvPepZGvCt7rNXN+Y9r3fgX4s7J/IzXyTo4pJyD68Zp/FCdgJb5TTmI9FhhYDekP
+ eYwbM+Ivz/Y2vLzKJ7T5Ap4GNewE9LxDbUuq6rL87qM5xycgsDf7VMY7JlXlWeb2xtqgapphLpGp5
+ zGo9FwMFORSLuNX7i20kRQcqf2StYketrNFYf2MMSlnpaudCuA9y1iuZh60DwWsLEW5C9DWf1XZlM
+ sMF2yQwiRszSuF37fHASRUSkVtCD/zSJpsJeiNnm0tAba96uJ3OVjtUF2kcE58nvCvMN/v83bFdEt
+ 0N/99I8uktmFKRAEsK5IJlmixD51U3VqCD7sJLN6pirvorSts9a3zc7RQez7MGBUta0rGZFIaB4c+
+ J0IcNwSNedlpWjM1mj/KRcfh1Aue/bmIx5Tn0/QvPKemu+SIcBvlOU3YubmHejeQcpdjLSSOBeWDw
+ MYNMwgTT9QIGOWLpRQpFiJDyC9CW6oO1GN1N57xI4GxLQzAHaxwTpg/d5850d5hQlr0uSQS2Exfb/
+ amX1wktAvEWeL+6FDO3fHwTTDR9gMWPpRVtUZ0QCq5mumVfs0PlnVa5uqZa4KAT0dnCkPV27NPnwO
+ D5qDatPjKHIDnUueJRFzwbr7oCBWZ8OWu222F2FUGeiWI2a7OA4wa5zd8Skm7hHmsDW2W8dQfoE9A
+ Jn082eyAS5yih72cb72uM8+mru0vPtuXzIk3s5EGdkbkRpS6fh8VQAQpt/9D7ROCaSVh36FAZFeo8
+ +nbCRqcW8hD6UL20NVfJ6YR5fSveH6rA4AHhyeqXFT1ftxjVNUL2Q==
+X-HAS-ATTACH: no
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 139.227.161.196
+X-QQ-STYLE: 
+X-QQ-mid: webmail218t1683806017t7723316
+From: "=?gb18030?B?MTcxNTQ4MTU2?=" <tangyla@qq.com>
+To: "=?gb18030?B?c3BpY2UtZGV2ZWw=?=" <spice-devel@lists.freedesktop.org>
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_645CD741_12194910_64FE4FF1"
+Content-Transfer-Encoding: 8Bit
+Date: Thu, 11 May 2023 19:53:37 +0800
+X-Priority: 3
+Message-ID: <tencent_0CBC5ED1BF460F6643035478784A9EBB1F05@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-Mailman-Approved-At: Fri, 12 May 2023 09:47:14 +0000
+Subject: [Spice-devel] Does spice protocol (client/server) support serial
+ port redirection
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,314 +67,86 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dongwon Kim <dongwon.kim@intel.com>,
- Hazwan Arif <hazwan.arif.mazlan@intel.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Jin Chung <jin.chung.teng@intel.com>, spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno gio 27 apr 2023 alle ore 07:37 Vivek Kasireddy
-<vivek.kasireddy@intel.com> ha scritto:
->
-> We first try to detect if an Intel GPU is available (by looking into
-> udev's database) and then probe Gstreamer's registry cache to see
-> if there is h/w based decoder (element) available for the incoming
-> video codec format. If both these conditions are satisfied (i.e,
-> Intel Media SDK Gstreamer plugin (libgstmsdk.so) and associated
-> libraries are properly installed), we then create a simple decode
-> pipeline using appropriate h/w based decoder and post-processor
-> elements instead of relying on playbin -- which may not be able to
-> auto-select these elements.
->
-> For example, if the incoming codec format is h264, we then create
-> a pipeline using msdkh264dec and vaapipostproc elements instead of
-> avdec_h264 and videoconvert.
->
-> Cc: Frediano Ziglio <freddy77@gmail.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> Cc: Dongwon Kim <dongwon.kim@intel.com>
-> Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> Signed-off-by: Mazlan, Hazwan Arif <hazwan.arif.mazlan@intel.com>
-> Signed-off-by: Teng, Jin Chung <jin.chung.teng@intel.com>
-> ---
->  meson.build               |   3 +
->  src/channel-display-gst.c | 195 ++++++++++++++++++++++++++++++++++++++
->  2 files changed, 198 insertions(+)
->
-> diff --git a/meson.build b/meson.build
-> index c163a44..e373544 100644
-> --- a/meson.build
-> +++ b/meson.build
-> @@ -216,6 +216,9 @@ foreach dep : deps
->    spice_glib_deps +=3D dependency(dep, version: gstreamer_version_info)
->  endforeach
->
-> +#udev
-> +spice_glib_deps +=3D dependency('libudev', required : true)
-> +
+This is a multi-part message in MIME format.
 
-See comments on other patch. This cannot be required.
+------=_NextPart_645CD741_12194910_64FE4FF1
+Content-Type: text/plain;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
 
->  # builtin-mjpeg
->  spice_gtk_has_builtin_mjpeg =3D false
->  if get_option('builtin-mjpeg')
-> diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
-> index 36db3a3..e7df83a 100644
-> --- a/src/channel-display-gst.c
-> +++ b/src/channel-display-gst.c
-> @@ -27,6 +27,7 @@
->  #include <gst/app/gstappsrc.h>
->  #include <gst/app/gstappsink.h>
->  #include <gst/video/gstvideometa.h>
-> +#include <libudev.h>
->
->
->  typedef struct SpiceGstFrame SpiceGstFrame;
-> @@ -64,6 +65,8 @@ typedef struct SpiceGstDecoder {
->  /* Decoded frames are big so limit how many are queued by GStreamer */
->  #define MAX_DECODED_FRAMES 2
->
-> +#define INTEL_GFX_DRV_NAME "i915"
-> +
->  /* GstPlayFlags enum is in plugin's header which should not be exported.
->   * https://bugzilla.gnome.org/show_bug.cgi?id=3D784279
->   */
-> @@ -489,6 +492,190 @@ deep_element_added_cb(GstBin *pipeline, GstBin *bin=
-, GstElement *element,
->      }
->  }
->
-> +static gboolean detect_intel_gpu()
-> +{
-> +    struct udev *udev;
-> +    struct udev_device *udev_dev;
-> +    struct udev_enumerate *udev_enum;
-> +    struct udev_list_entry *entry, *devices;
-> +    const char *path, *driver;
-> +    gboolean found =3D FALSE;
-> +
-> +    udev =3D udev_new();
-> +    if (!udev) {
-> +        return FALSE;
-> +    }
-> +
-> +    udev_enum =3D udev_enumerate_new(udev);
-> +    if (udev_enum) {
-> +        udev_enumerate_add_match_subsystem(udev_enum, "pci");
-> +        udev_enumerate_scan_devices(udev_enum);
-> +        devices =3D udev_enumerate_get_list_entry(udev_enum);
-> +
-> +        udev_list_entry_foreach(entry, devices) {
-> +            path =3D udev_list_entry_get_name(entry);
-> +            udev_dev =3D udev_device_new_from_syspath(udev, path);
-> +
-> +            driver =3D udev_device_get_driver(udev_dev);
-> +            if (!g_strcmp0(driver, INTEL_GFX_DRV_NAME)) {
-> +                found =3D TRUE;
-> +                udev_device_unref(udev_dev);
-> +                break;
-> +            }
-> +            udev_device_unref(udev_dev);
-> +        }
-> +        udev_enumerate_unref(udev_enum);
-> +    }
-> +    udev_unref(udev);
-> +
-> +    return found;
-> +}
-> +
-> +static gboolean msdk_vaapi_features_lookup(const gchar *dec_name)
-> +{
-> +    GstRegistry *registry =3D NULL;
-> +    GstPluginFeature *msdkdec =3D NULL;
-> +    GstPluginFeature *vaapivpp =3D NULL;
-> +    gchar *msdk_dec_name =3D g_strconcat("msdk", dec_name,"dec", NULL);
-> +
-> +    registry =3D gst_registry_get();
-> +    if (!registry) {
-> +        return FALSE;
-> +    }
-> +    msdkdec =3D gst_registry_lookup_feature(registry, msdk_dec_name);
-> +    g_free(msdk_dec_name);
-> +    if (!msdkdec) {
-> +        return FALSE;
-> +    }
-> +    vaapivpp =3D gst_registry_lookup_feature(registry, "vaapipostproc");
-> +    if (!vaapivpp) {
-> +        gst_object_unref(msdkdec);
-> +        return FALSE;
-> +    }
-> +
-> +    gst_object_unref(msdkdec);
-> +    gst_object_unref(vaapivpp);
-> +    return TRUE;
-> +}
-> +
-> +static gboolean create_msdk_pipeline(SpiceGstDecoder *decoder)
-> +{
+SGVsbG86IA0KDQogICAgICAgICBEb2VzIHNwaWNlIHByb3RvY29sIChjbGllbnQvc2VydmVy
+KSBzdXBwb3J0IHNlcmlhbCBwb3J0IHJlZGlyZWN0aW9uPyANCg0KICAgICAgICAgaWYgc3Vw
+cG9ydGVkLCBjYW4geW91IGdpdmUgbWUgYSBleGFtcGxlPw0KDQoNCg0KDQogICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBM
+b29rIGZvcndhcmQgdG8geW91ciByZXBseS4gVGhhbmsgeW91Lg==
 
-A problem I noted with my testing is that if the server is not using
-msdk encoder this pipeline is failing to decode. Probably this is due
-to an unsupported level, possibly x264 is using some not supported
-format. The problem is that without having the first frame data we
-cannot know if the pipeline is supporting or not. Probably the better
-option would be to create another pipeline if we failed handling first
-compressed data. A future possibility would be to send more encoder
-information opening the stream so we could avoid trying some pipeline.
+------=_NextPart_645CD741_12194910_64FE4FF1
+Content-Type: text/html;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
 
-> +    GstElement *pipeline, *src, *sink, *parser, *msdk_decoder, *vpp;
-> +    GstCaps *src_caps, *sink_caps;
-> +    int codec_type =3D decoder->base.codec_type;
-> +    const gchar *dec_name =3D gst_opts[codec_type].name;
-> +    gchar *msdk_dec_name, *parser_name, *dec_caps;
-> +    gboolean use_parser;
-> +
-> +    use_parser =3D codec_type =3D=3D SPICE_VIDEO_CODEC_TYPE_H264 ||
-> +                 codec_type =3D=3D SPICE_VIDEO_CODEC_TYPE_H265;
-> +
-> +    src =3D gst_element_factory_make("appsrc", NULL);
-> +    if (src =3D=3D NULL) {
-> +        spice_warning("error upon creation of 'appsrc' element");
-> +        return FALSE;
-> +    }
-> +    sink =3D gst_element_factory_make("appsink", NULL);
-> +    if (sink =3D=3D NULL) {
-> +        spice_warning("error upon creation of 'appsink' element");
-> +        goto err_sink;
-> +    }
-> +
-> +    if (use_parser) {
-> +        parser_name =3D g_strconcat(dec_name, "parse", NULL);
-> +        parser =3D gst_element_factory_make(parser_name, NULL);
-> +        g_free(parser_name);
-> +        if (parser =3D=3D NULL) {
-> +            spice_warning("error upon creation of 'parser' element");
-> +            goto err_parser;
-> +        }
-> +    }
-> +
-> +    msdk_dec_name =3D g_strconcat("msdk", dec_name,"dec", NULL);
-> +    msdk_decoder =3D gst_element_factory_make(msdk_dec_name, NULL);
-> +    g_free(msdk_dec_name);
-> +    if (msdk_decoder =3D=3D NULL) {
-> +        spice_warning("error upon creation of 'decoder' element");
-> +        goto err_decoder;
-> +    }
-> +    vpp =3D gst_element_factory_make("vaapipostproc", NULL);
-> +    if (vpp =3D=3D NULL) {
-> +        spice_warning("error upon creation of 'vpp' element");
-> +        goto err_vpp;
-> +    }
-> +    g_object_set(vpp,
-> +                 "format", GST_VIDEO_FORMAT_BGRx,
-> +                 NULL);
-> +
-> +    pipeline =3D gst_pipeline_new(NULL);
-> +    if (pipeline =3D=3D NULL) {
-> +        spice_warning("error upon creation of 'pipeline' element");
-> +        goto err_pipeline;
-> +    }
-> +
-> +    dec_caps =3D g_strconcat(gst_opts[codec_type].dec_caps,
-> +                           ",stream-format=3Dbyte-stream", NULL);
+PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNo
+YXJzZXQ9R0IxODAzMCI+PGRpdj48cCBkYXRhLXNlY3Rpb249IjAiIGNsYXNzPSJ0Z3QgY29s
+b3JfdGV4dF8wIHVuLXN0ZXAtdHJhbnMiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94
+OyBtYXJnaW46IDBweDsgcGFkZGluZzogMHB4OyBjb2xvcjogcmdiKDE2LCAxOCwgMjApOyBm
+b250LXNpemU6IHZhcigtLW1haW4tZm9udC1zaXplKTsgbGluZS1oZWlnaHQ6IDIxcHg7IHdo
+aXRlLXNwYWNlOiBwcmUtd3JhcDsgZm9udC1mYW1pbHk6ICZxdW90O1BpbmdGYW5nIFNDJnF1
+b3Q7LCAmcXVvdDtTZWdvZSBVSSZxdW90OywgQXJpYWwsICZxdW90O01pY3Jvc29mdCBZYUhl
+aSZxdW90OywgzqLI7dHFutosIMvOzOUsICZxdW90O01hbGd1biBHb3RoaWMmcXVvdDssIHNh
+bnMtc2VyaWY7Ij48c3BhbiBkYXRhLXNlY3Rpb249IjAiIGRhdGEtc2VudGVuY2U9IjAiIGRh
+dGEtZ3JvdXA9IjAtMCIgY2xhc3M9InRndCBjb2xvcl90ZXh0XzAiIHN0eWxlPSJib3gtc2l6
+aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IHZhcigtLW1haW4tZm9udC1zaXplKTsgbGlu
+ZS1oZWlnaHQ6IDIxcHg7IGRpc3BsYXk6IGlubGluZTsiPkhlbGxvOgo8L3NwYW4+PC9wPjxw
+IGRhdGEtc2VjdGlvbj0iMSIgY2xhc3M9InRndCBjb2xvcl90ZXh0XzAgdW4tc3RlcC10cmFu
+cyIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdpbjogMHB4OyBwYWRkaW5n
+OiAwcHg7IGNvbG9yOiByZ2IoMTYsIDE4LCAyMCk7IGZvbnQtc2l6ZTogdmFyKC0tbWFpbi1m
+b250LXNpemUpOyBsaW5lLWhlaWdodDogMjFweDsgd2hpdGUtc3BhY2U6IHByZS13cmFwOyBm
+b250LWZhbWlseTogJnF1b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZxdW90O1NlZ29lIFVJJnF1
+b3Q7LCBBcmlhbCwgJnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7LCDOosjt0cW62iwgy87M
+5SwgJnF1b3Q7TWFsZ3VuIEdvdGhpYyZxdW90Oywgc2Fucy1zZXJpZjsiPjxzcGFuIGRhdGEt
+c2VjdGlvbj0iMSIgZGF0YS1zZW50ZW5jZT0iMCIgZGF0YS1ncm91cD0iMS0wIiBjbGFzcz0i
+dGd0IGNvbG9yX3RleHRfMCIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
+c2l6ZTogdmFyKC0tbWFpbi1mb250LXNpemUpOyBsaW5lLWhlaWdodDogMjFweDsgZGlzcGxh
+eTogaW5saW5lOyI+ICAgICAgICAgRG9lcyBzcGljZSBwcm90b2NvbCAoY2xpZW50L3NlcnZl
+cikgc3VwcG9ydCBzZXJpYWwgcG9ydCByZWRpcmVjdGlvbj8KPC9zcGFuPjwvcD48cCBkYXRh
+LXNlY3Rpb249IjEiIGNsYXNzPSJ0Z3QgY29sb3JfdGV4dF8wIHVuLXN0ZXAtdHJhbnMiIHN0
+eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBtYXJnaW46IDBweDsgcGFkZGluZzogMHB4
+OyBjb2xvcjogcmdiKDE2LCAxOCwgMjApOyBmb250LXNpemU6IHZhcigtLW1haW4tZm9udC1z
+aXplKTsgbGluZS1oZWlnaHQ6IDIxcHg7IHdoaXRlLXNwYWNlOiBwcmUtd3JhcDsgZm9udC1m
+YW1pbHk6ICZxdW90O1BpbmdGYW5nIFNDJnF1b3Q7LCAmcXVvdDtTZWdvZSBVSSZxdW90Oywg
+QXJpYWwsICZxdW90O01pY3Jvc29mdCBZYUhlaSZxdW90OywgzqLI7dHFutosIMvOzOUsICZx
+dW90O01hbGd1biBHb3RoaWMmcXVvdDssIHNhbnMtc2VyaWY7Ij48c3BhbiBkYXRhLXNlY3Rp
+b249IjEiIGRhdGEtc2VudGVuY2U9IjAiIGRhdGEtZ3JvdXA9IjEtMCIgY2xhc3M9InRndCBj
+b2xvcl90ZXh0XzAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6
+IHZhcigtLW1haW4tZm9udC1zaXplKTsgbGluZS1oZWlnaHQ6IDIxcHg7IGRpc3BsYXk6IGlu
+bGluZTsiPiAgICAgICAgIGlmIHN1cHBvcnRlZCwgY2FuIHlvdSBnaXZlIG1lIGEgZXhhbXBs
+ZT88L3NwYW4+PC9wPjxwIGRhdGEtc2VjdGlvbj0iMSIgY2xhc3M9InRndCBjb2xvcl90ZXh0
+XzAgdW4tc3RlcC10cmFucyIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdp
+bjogMHB4OyBwYWRkaW5nOiAwcHg7IGNvbG9yOiByZ2IoMTYsIDE4LCAyMCk7IGZvbnQtc2l6
+ZTogdmFyKC0tbWFpbi1mb250LXNpemUpOyBsaW5lLWhlaWdodDogMjFweDsgd2hpdGUtc3Bh
+Y2U6IHByZS13cmFwOyBmb250LWZhbWlseTogJnF1b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZx
+dW90O1NlZ29lIFVJJnF1b3Q7LCBBcmlhbCwgJnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7
+LCDOosjt0cW62iwgy87M5SwgJnF1b3Q7TWFsZ3VuIEdvdGhpYyZxdW90Oywgc2Fucy1zZXJp
+ZjsiPjxzcGFuIGRhdGEtc2VjdGlvbj0iMSIgZGF0YS1zZW50ZW5jZT0iMCIgZGF0YS1ncm91
+cD0iMS0wIiBjbGFzcz0idGd0IGNvbG9yX3RleHRfMCIgc3R5bGU9ImJveC1zaXppbmc6IGJv
+cmRlci1ib3g7IGZvbnQtc2l6ZTogdmFyKC0tbWFpbi1mb250LXNpemUpOyBsaW5lLWhlaWdo
+dDogMjFweDsgZGlzcGxheTogaW5saW5lOyI+PGJyPjwvc3Bhbj48L3A+PHAgZGF0YS1zZWN0
+aW9uPSIyIiBjbGFzcz0idGd0IGNvbG9yX3RleHRfMCB1bi1zdGVwLXRyYW5zIiBzdHlsZT0i
+Ym94LXNpemluZzogYm9yZGVyLWJveDsgbWFyZ2luOiAwcHg7IHBhZGRpbmc6IDBweDsgY29s
+b3I6IHJnYigxNiwgMTgsIDIwKTsgZm9udC1zaXplOiB2YXIoLS1tYWluLWZvbnQtc2l6ZSk7
+IGxpbmUtaGVpZ2h0OiAyMXB4OyB3aGl0ZS1zcGFjZTogcHJlLXdyYXA7IGZvbnQtZmFtaWx5
+OiAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7U2Vnb2UgVUkmcXVvdDssIEFyaWFs
+LCAmcXVvdDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIM6iyO3RxbraLCDLzszlLCAmcXVvdDtN
+YWxndW4gR290aGljJnF1b3Q7LCBzYW5zLXNlcmlmOyI+PHNwYW4gZGF0YS1zZWN0aW9uPSIy
+IiBkYXRhLXNlbnRlbmNlPSIwIiBkYXRhLWdyb3VwPSIyLTAiIGNsYXNzPSJ0Z3QgY29sb3Jf
+dGV4dF8wIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiB2YXIo
+LS1tYWluLWZvbnQtc2l6ZSk7IGxpbmUtaGVpZ2h0OiAyMXB4OyBkaXNwbGF5OiBpbmxpbmU7
+Ij4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBMb29rIGZvcndhcmQgdG8geW91ciByZXBseS4gVGhhbmsgeW91Ljwvc3Bh
+bj48L3A+PC9kaXY+
 
-From my testing the ",stream-format=3Dbyte-stream" is also required for
-x264 (ok, this is a bit OT here).
+------=_NextPart_645CD741_12194910_64FE4FF1--
 
-> +    src_caps =3D gst_caps_from_string(dec_caps);
-> +    g_object_set(src,
-> +                 "caps", src_caps,
-> +                 "is-live", TRUE,
-> +                 "format", GST_FORMAT_TIME,
-> +                 "max-bytes", G_GINT64_CONSTANT(0),
-> +                 "block", TRUE,
-> +                 NULL);
-> +    g_free(dec_caps);
-> +    gst_caps_unref(src_caps);
-> +    decoder->appsrc =3D GST_APP_SRC(gst_object_ref(src));
-> +
-> +    sink_caps =3D gst_caps_from_string("video/x-raw,format=3DBGRx");
-> +    g_object_set(sink,
-> +                 "caps", sink_caps,
-> +                 "sync", FALSE,
-> +                 "drop", FALSE,
-> +                 NULL);
-> +    gst_caps_unref(sink_caps);
-> +    decoder->appsink =3D GST_APP_SINK(sink);
-> +
-> +    if (hand_pipeline_to_widget(decoder->base.stream,
-> +        GST_PIPELINE(pipeline))) {
-> +        spice_warning("error handing pipeline to widget");
-> +        goto err_pipeline;
-> +    }
-> +
-> +    if (use_parser) {
-> +        gst_bin_add_many(GST_BIN(pipeline), src, parser, msdk_decoder,
-> +                         vpp, sink, NULL);
-> +        if (!gst_element_link_many(src, parser, msdk_decoder, vpp,
-> +                                   sink, NULL)) {
-> +            spice_warning("error linking elements");
-> +            goto err_pipeline;
-> +        }
-> +    } else {
-> +        gst_bin_add_many(GST_BIN(pipeline), src, msdk_decoder,
-> +                         vpp, sink, NULL);
-> +        if (!gst_element_link_many(src, msdk_decoder, vpp, sink, NULL)) =
-{
-> +            spice_warning("error linking elements");
-> +            goto err_pipeline;
-> +        }
-> +    }
-> +    decoder->pipeline =3D pipeline;
-> +    return TRUE;
-> +
-> +err_pipeline:
-> +    gst_object_unref(vpp);
-> +err_vpp:
-> +    gst_object_unref(msdk_decoder);
-> +err_decoder:
-> +    if (use_parser) {
-> +        gst_object_unref(parser);
-> +    }
-> +err_parser:
-> +    gst_object_unref(sink);
-> +err_sink:
-> +    gst_object_unref(src);
-> +    return FALSE;
-> +}
-> +
->  static gboolean create_pipeline(SpiceGstDecoder *decoder)
->  {
->      GstBus *bus;
-> @@ -496,6 +683,13 @@ static gboolean create_pipeline(SpiceGstDecoder *dec=
-oder)
->      SpiceGstPlayFlags flags;
->      GstCaps *caps;
->
-> +    if (detect_intel_gpu() &&
-> +        msdk_vaapi_features_lookup(gst_opts[decoder->base.codec_type].na=
-me)) {
-> +        if (create_msdk_pipeline(decoder)) {
-> +            goto end;
-> +        }
-> +    }
-> +
->      playbin =3D gst_element_factory_make("playbin", "playbin");
->      if (playbin =3D=3D NULL) {
->          spice_warning("error upon creation of 'playbin' element");
-> @@ -565,6 +759,7 @@ static gboolean create_pipeline(SpiceGstDecoder *deco=
-der)
->      g_warn_if_fail(decoder->appsrc =3D=3D NULL);
->      decoder->pipeline =3D playbin;
->
-> +end:
->      if (decoder->appsink) {
->          GstAppSinkCallbacks appsink_cbs =3D { NULL };
->          appsink_cbs.new_sample =3D new_sample;
-
-I don't remember which side (server or client) but it seems destroying
-the pipeline gstreamer is giving some CRITICAL messages about the
-order of object destructions.
-
-Frediano
