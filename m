@@ -2,60 +2,55 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46B9A700438
-	for <lists+spice-devel@lfdr.de>; Fri, 12 May 2023 11:47:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE4DA700345
+	for <lists+spice-devel@lfdr.de>; Fri, 12 May 2023 11:04:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A77CA10E65D;
-	Fri, 12 May 2023 09:47:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5635410E647;
+	Fri, 12 May 2023 09:03:59 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 967 seconds by postgrey-1.36 at gabe;
- Thu, 11 May 2023 12:25:16 UTC
-Received: from out162-62-57-137.mail.qq.com (out162-62-57-137.mail.qq.com
- [162.62.57.137])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C096D10E09C
- for <spice-devel@lists.freedesktop.org>; Thu, 11 May 2023 12:25:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1683807909; bh=KatdqQp6yyVywKNxqAL5ZEt4F2CqhLH09yADZJD48xI=;
- h=From:To:Subject:Date;
- b=sXAbrG2kouI/VwwsKC76RTfK7E03p7rUjvJCEZVHZ0kK8c+BmLh9eA1z8QXBymwbS
- kBYlZQOqRr0Cxl/M6VbksojPMelM1LxfsimrBLS/+n1tivIs4iDtIDmhEk5mnZaYKl
- bIalgEjohydvQuHoSBH/zauBQ9LUiVCB12/gv7qY=
-X-QQ-FEAT: oHWrrGTW1dCGJEu1CuC8+nIWkvSYK6n9
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMAILINFO: MhvVYtZeQ7htp8bkNfG0iDvB7JGPCgnP54ysH3DLNC+9VOXcE5/FgFr3Aiw3vP
- x1/gx+Lj1IMKJPusgyDykTtpu1ogxRhSr1f/jSdevQRvn1BbFstZsCA49ve3+/MEKpGTGCfRoJhhp
- 2cQsSz36NFVxZOvPepZGvCt7rNXN+Y9r3fgX4s7J/IzXyTo4pJyD68Zp/FCdgJb5TTmI9FhhYDekP
- eYwbM+Ivz/Y2vLzKJ7T5Ap4GNewE9LxDbUuq6rL87qM5xycgsDf7VMY7JlXlWeb2xtqgapphLpGp5
- zGo9FwMFORSLuNX7i20kRQcqf2StYketrNFYf2MMSlnpaudCuA9y1iuZh60DwWsLEW5C9DWf1XZlM
- sMF2yQwiRszSuF37fHASRUSkVtCD/zSJpsJeiNnm0tAba96uJ3OVjtUF2kcE58nvCvMN/v83bFdEt
- 0N/99I8uktmFKRAEsK5IJlmixD51U3VqCD7sJLN6pirvorSts9a3zc7RQez7MGBUta0rGZFIaB4c+
- J0IcNwSNedlpWjM1mj/KRcfh1Aue/bmIx5Tn0/QvPKemu+SIcBvlOU3YubmHejeQcpdjLSSOBeWDw
- MYNMwgTT9QIGOWLpRQpFiJDyC9CW6oO1GN1N57xI4GxLQzAHaxwTpg/d5850d5hQlr0uSQS2Exfb/
- amX1wktAvEWeL+6FDO3fHwTTDR9gMWPpRVtUZ0QCq5mumVfs0PlnVa5uqZa4KAT0dnCkPV27NPnwO
- D5qDatPjKHIDnUueJRFzwbr7oCBWZ8OWu222F2FUGeiWI2a7OA4wa5zd8Skm7hHmsDW2W8dQfoE9A
- Jn082eyAS5yih72cb72uM8+mru0vPtuXzIk3s5EGdkbkRpS6fh8VQAQpt/9D7ROCaSVh36FAZFeo8
- +nbCRqcW8hD6UL20NVfJ6YR5fSveH6rA4AHhyeqXFT1ftxjVNUL2Q==
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 139.227.161.196
-X-QQ-STYLE: 
-X-QQ-mid: webmail218t1683806017t7723316
-From: "=?gb18030?B?MTcxNTQ4MTU2?=" <tangyla@qq.com>
-To: "=?gb18030?B?c3BpY2UtZGV2ZWw=?=" <spice-devel@lists.freedesktop.org>
-Mime-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="----=_NextPart_645CD741_12194910_64FE4FF1"
-Content-Transfer-Encoding: 8Bit
-Date: Thu, 11 May 2023 19:53:37 +0800
-X-Priority: 3
-Message-ID: <tencent_0CBC5ED1BF460F6643035478784A9EBB1F05@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-X-Mailman-Approved-At: Fri, 12 May 2023 09:47:14 +0000
-Subject: [Spice-devel] Does spice protocol (client/server) support serial
- port redirection
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 98BD310E647
+ for <spice-devel@lists.freedesktop.org>; Fri, 12 May 2023 09:03:57 +0000 (UTC)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-50bcae898b2so17084065a12.0
+ for <spice-devel@lists.freedesktop.org>; Fri, 12 May 2023 02:03:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1683882235; x=1686474235;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=ETocV2n5zq5bRWRIxjtebfzJI2MYIrGUy03lFrG6Sjk=;
+ b=PNNnwo3oeKQ3neg2e2W1PG9cQOCxVt53MFLW/raSBe1PiWLY1OffQuGVCSmKY7CukX
+ XNPLXLlgXeS8gYGB+oWjK650cTIO2faPCRqHlkwN4Q2kvorjunvhXk3pOw16vmKjmyfZ
+ 9gCFEjIY9wWnlFpdknSBZvZCEsYnRkbWCRboXVvtz9el37ZGFL7/oz5T9X7bYds/VHSI
+ q+EyJwysu4ZNOiekrN0HpOm7rseC+X+sldr3Q/Nb3FTVvvMXALK/OuKj3cNeXm83QAfs
+ sFtpEm2OvD5cbkgl+zcv+li7CZQOxw1O8K2XoM/S/PaPcPtO9xc8FBLY3J/tWdlgxdAF
+ RoxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683882235; x=1686474235;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ETocV2n5zq5bRWRIxjtebfzJI2MYIrGUy03lFrG6Sjk=;
+ b=MuHxZbK+84NtzbvMeMTqJHQ1aMZxDCX3Aos7VAlIr/QsEtmoyL8MAWK2ldJJAtEdxn
+ 9gdkQC1Hgt31a8QV9O/Q0tmAAOcdGpyT+OQSk4tHNXlW/dJQlbD0FrL6XFqjXwl+eF/y
+ yR6WvntyghQh6SncUuY5Nhg5p32sxGRVQjnyxVpwHOSr30AoxPXoEEwsqzlov8ZIyDXT
+ 3gQW6wSEA5FBHigyc1o45nKmOy+M/F9pMltCy1UpM3579F+nqjK0sd9qwy+7NOKzNIWD
+ QgursFZL+ANmw+jqj9ALpvCKBcobZgQWkoGEwxKjbhdWAD86xoLtx9woV+yAoeY3J8jl
+ tJXw==
+X-Gm-Message-State: AC+VfDyQcPpQQRH62GMQYZMs5OJKk7SiBWJnCCRhV1CD/2EdVykxdyc4
+ E7zhjcVwJPhDe0lUUHwHBn2cp0kkyZymHBpEjMqqSZMwgo0=
+X-Google-Smtp-Source: ACHHUZ77RVe09qdMoKeOQnW/mnizDXlYKUjEIHvfI9cOEZFf2BNwY/3ASA9ntPRyGgeKTAy6do7Y0HRts/sWt0oCnxQ=
+X-Received: by 2002:a17:906:974d:b0:94f:8aff:c8b3 with SMTP id
+ o13-20020a170906974d00b0094f8affc8b3mr22955271ejy.28.1683882235191; Fri, 12
+ May 2023 02:03:55 -0700 (PDT)
+MIME-Version: 1.0
+From: Ahmad Ismail <ismail783@gmail.com>
+Date: Fri, 12 May 2023 15:03:43 +0600
+Message-ID: <CAHAhJwK1qVwSzCMde7GqXb7jpAEm944ktJbww7Kbp=2k+g7ZOQ@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="00000000000078e65305fb7b62f2"
+Subject: [Spice-devel] open remote-viewer so that "Share folder" is checked
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,83 +65,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
+--00000000000078e65305fb7b62f2
+Content-Type: text/plain; charset="UTF-8"
 
-------=_NextPart_645CD741_12194910_64FE4FF1
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+I run the remote-viewer from a script like
 
-SGVsbG86IA0KDQogICAgICAgICBEb2VzIHNwaWNlIHByb3RvY29sIChjbGllbnQvc2VydmVy
-KSBzdXBwb3J0IHNlcmlhbCBwb3J0IHJlZGlyZWN0aW9uPyANCg0KICAgICAgICAgaWYgc3Vw
-cG9ydGVkLCBjYW4geW91IGdpdmUgbWUgYSBleGFtcGxlPw0KDQoNCg0KDQogICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBM
-b29rIGZvcndhcmQgdG8geW91ciByZXBseS4gVGhhbmsgeW91Lg==
+remote-viewer --spice-shared-dir=/media/ismail/SSDWorking/_QEMU/VM_Share
+spice://127.0.0.1:5911 > /dev/null 2>&1 &
 
-------=_NextPart_645CD741_12194910_64FE4FF1
-Content-Type: text/html;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+After the viewer has opened, i have to go to File > Preferences and then
+click the "Share folder" checkbox. Is there any option I can use so that
+the "Share folder" checkbox will be already checked.
 
-PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNo
-YXJzZXQ9R0IxODAzMCI+PGRpdj48cCBkYXRhLXNlY3Rpb249IjAiIGNsYXNzPSJ0Z3QgY29s
-b3JfdGV4dF8wIHVuLXN0ZXAtdHJhbnMiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94
-OyBtYXJnaW46IDBweDsgcGFkZGluZzogMHB4OyBjb2xvcjogcmdiKDE2LCAxOCwgMjApOyBm
-b250LXNpemU6IHZhcigtLW1haW4tZm9udC1zaXplKTsgbGluZS1oZWlnaHQ6IDIxcHg7IHdo
-aXRlLXNwYWNlOiBwcmUtd3JhcDsgZm9udC1mYW1pbHk6ICZxdW90O1BpbmdGYW5nIFNDJnF1
-b3Q7LCAmcXVvdDtTZWdvZSBVSSZxdW90OywgQXJpYWwsICZxdW90O01pY3Jvc29mdCBZYUhl
-aSZxdW90OywgzqLI7dHFutosIMvOzOUsICZxdW90O01hbGd1biBHb3RoaWMmcXVvdDssIHNh
-bnMtc2VyaWY7Ij48c3BhbiBkYXRhLXNlY3Rpb249IjAiIGRhdGEtc2VudGVuY2U9IjAiIGRh
-dGEtZ3JvdXA9IjAtMCIgY2xhc3M9InRndCBjb2xvcl90ZXh0XzAiIHN0eWxlPSJib3gtc2l6
-aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6IHZhcigtLW1haW4tZm9udC1zaXplKTsgbGlu
-ZS1oZWlnaHQ6IDIxcHg7IGRpc3BsYXk6IGlubGluZTsiPkhlbGxvOgo8L3NwYW4+PC9wPjxw
-IGRhdGEtc2VjdGlvbj0iMSIgY2xhc3M9InRndCBjb2xvcl90ZXh0XzAgdW4tc3RlcC10cmFu
-cyIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdpbjogMHB4OyBwYWRkaW5n
-OiAwcHg7IGNvbG9yOiByZ2IoMTYsIDE4LCAyMCk7IGZvbnQtc2l6ZTogdmFyKC0tbWFpbi1m
-b250LXNpemUpOyBsaW5lLWhlaWdodDogMjFweDsgd2hpdGUtc3BhY2U6IHByZS13cmFwOyBm
-b250LWZhbWlseTogJnF1b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZxdW90O1NlZ29lIFVJJnF1
-b3Q7LCBBcmlhbCwgJnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7LCDOosjt0cW62iwgy87M
-5SwgJnF1b3Q7TWFsZ3VuIEdvdGhpYyZxdW90Oywgc2Fucy1zZXJpZjsiPjxzcGFuIGRhdGEt
-c2VjdGlvbj0iMSIgZGF0YS1zZW50ZW5jZT0iMCIgZGF0YS1ncm91cD0iMS0wIiBjbGFzcz0i
-dGd0IGNvbG9yX3RleHRfMCIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQt
-c2l6ZTogdmFyKC0tbWFpbi1mb250LXNpemUpOyBsaW5lLWhlaWdodDogMjFweDsgZGlzcGxh
-eTogaW5saW5lOyI+ICAgICAgICAgRG9lcyBzcGljZSBwcm90b2NvbCAoY2xpZW50L3NlcnZl
-cikgc3VwcG9ydCBzZXJpYWwgcG9ydCByZWRpcmVjdGlvbj8KPC9zcGFuPjwvcD48cCBkYXRh
-LXNlY3Rpb249IjEiIGNsYXNzPSJ0Z3QgY29sb3JfdGV4dF8wIHVuLXN0ZXAtdHJhbnMiIHN0
-eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBtYXJnaW46IDBweDsgcGFkZGluZzogMHB4
-OyBjb2xvcjogcmdiKDE2LCAxOCwgMjApOyBmb250LXNpemU6IHZhcigtLW1haW4tZm9udC1z
-aXplKTsgbGluZS1oZWlnaHQ6IDIxcHg7IHdoaXRlLXNwYWNlOiBwcmUtd3JhcDsgZm9udC1m
-YW1pbHk6ICZxdW90O1BpbmdGYW5nIFNDJnF1b3Q7LCAmcXVvdDtTZWdvZSBVSSZxdW90Oywg
-QXJpYWwsICZxdW90O01pY3Jvc29mdCBZYUhlaSZxdW90OywgzqLI7dHFutosIMvOzOUsICZx
-dW90O01hbGd1biBHb3RoaWMmcXVvdDssIHNhbnMtc2VyaWY7Ij48c3BhbiBkYXRhLXNlY3Rp
-b249IjEiIGRhdGEtc2VudGVuY2U9IjAiIGRhdGEtZ3JvdXA9IjEtMCIgY2xhc3M9InRndCBj
-b2xvcl90ZXh0XzAiIHN0eWxlPSJib3gtc2l6aW5nOiBib3JkZXItYm94OyBmb250LXNpemU6
-IHZhcigtLW1haW4tZm9udC1zaXplKTsgbGluZS1oZWlnaHQ6IDIxcHg7IGRpc3BsYXk6IGlu
-bGluZTsiPiAgICAgICAgIGlmIHN1cHBvcnRlZCwgY2FuIHlvdSBnaXZlIG1lIGEgZXhhbXBs
-ZT88L3NwYW4+PC9wPjxwIGRhdGEtc2VjdGlvbj0iMSIgY2xhc3M9InRndCBjb2xvcl90ZXh0
-XzAgdW4tc3RlcC10cmFucyIgc3R5bGU9ImJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdp
-bjogMHB4OyBwYWRkaW5nOiAwcHg7IGNvbG9yOiByZ2IoMTYsIDE4LCAyMCk7IGZvbnQtc2l6
-ZTogdmFyKC0tbWFpbi1mb250LXNpemUpOyBsaW5lLWhlaWdodDogMjFweDsgd2hpdGUtc3Bh
-Y2U6IHByZS13cmFwOyBmb250LWZhbWlseTogJnF1b3Q7UGluZ0ZhbmcgU0MmcXVvdDssICZx
-dW90O1NlZ29lIFVJJnF1b3Q7LCBBcmlhbCwgJnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7
-LCDOosjt0cW62iwgy87M5SwgJnF1b3Q7TWFsZ3VuIEdvdGhpYyZxdW90Oywgc2Fucy1zZXJp
-ZjsiPjxzcGFuIGRhdGEtc2VjdGlvbj0iMSIgZGF0YS1zZW50ZW5jZT0iMCIgZGF0YS1ncm91
-cD0iMS0wIiBjbGFzcz0idGd0IGNvbG9yX3RleHRfMCIgc3R5bGU9ImJveC1zaXppbmc6IGJv
-cmRlci1ib3g7IGZvbnQtc2l6ZTogdmFyKC0tbWFpbi1mb250LXNpemUpOyBsaW5lLWhlaWdo
-dDogMjFweDsgZGlzcGxheTogaW5saW5lOyI+PGJyPjwvc3Bhbj48L3A+PHAgZGF0YS1zZWN0
-aW9uPSIyIiBjbGFzcz0idGd0IGNvbG9yX3RleHRfMCB1bi1zdGVwLXRyYW5zIiBzdHlsZT0i
-Ym94LXNpemluZzogYm9yZGVyLWJveDsgbWFyZ2luOiAwcHg7IHBhZGRpbmc6IDBweDsgY29s
-b3I6IHJnYigxNiwgMTgsIDIwKTsgZm9udC1zaXplOiB2YXIoLS1tYWluLWZvbnQtc2l6ZSk7
-IGxpbmUtaGVpZ2h0OiAyMXB4OyB3aGl0ZS1zcGFjZTogcHJlLXdyYXA7IGZvbnQtZmFtaWx5
-OiAmcXVvdDtQaW5nRmFuZyBTQyZxdW90OywgJnF1b3Q7U2Vnb2UgVUkmcXVvdDssIEFyaWFs
-LCAmcXVvdDtNaWNyb3NvZnQgWWFIZWkmcXVvdDssIM6iyO3RxbraLCDLzszlLCAmcXVvdDtN
-YWxndW4gR290aGljJnF1b3Q7LCBzYW5zLXNlcmlmOyI+PHNwYW4gZGF0YS1zZWN0aW9uPSIy
-IiBkYXRhLXNlbnRlbmNlPSIwIiBkYXRhLWdyb3VwPSIyLTAiIGNsYXNzPSJ0Z3QgY29sb3Jf
-dGV4dF8wIiBzdHlsZT0iYm94LXNpemluZzogYm9yZGVyLWJveDsgZm9udC1zaXplOiB2YXIo
-LS1tYWluLWZvbnQtc2l6ZSk7IGxpbmUtaGVpZ2h0OiAyMXB4OyBkaXNwbGF5OiBpbmxpbmU7
-Ij4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBMb29rIGZvcndhcmQgdG8geW91ciByZXBseS4gVGhhbmsgeW91Ljwvc3Bh
-bj48L3A+PC9kaXY+
+*Thanks and Best Regards,Ahmad Ismail*
 
-------=_NextPart_645CD741_12194910_64FE4FF1--
+--00000000000078e65305fb7b62f2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div>I run the remote-viewer from a script like</div><div>=
+<br></div><div>remote-viewer --spice-shared-dir=3D/media/ismail/SSDWorking/=
+_QEMU/VM_Share spice://<a href=3D"http://127.0.0.1:5911">127.0.0.1:5911</a>=
+ &gt; /dev/null 2&gt;&amp;1 &amp;<br></div><div><br></div><div>After the vi=
+ewer has opened, i have to go to File &gt; Preferences and then click the &=
+quot;Share folder&quot; checkbox. Is there any option I can use so that the=
+ &quot;Share folder&quot; checkbox will be already checked.</div><br clear=
+=3D"all"><div><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"=
+gmail_signature"><div dir=3D"ltr"><b style=3D"font-weight:normal"><p dir=3D=
+"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><span sty=
+le=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:tr=
+ansparent;font-weight:400;font-style:normal;font-variant:normal;text-decora=
+tion:none;vertical-align:baseline;white-space:pre-wrap">Thanks and Best Reg=
+ards,</span></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;mar=
+gin-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial;color:rgb(0=
+,0,0);background-color:transparent;font-weight:400;font-style:normal;font-v=
+ariant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-=
+wrap">Ahmad Ismail</span></p></b></div></div></div></div>
+
+--00000000000078e65305fb7b62f2--
