@@ -2,59 +2,55 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FBF77014B3
-	for <lists+spice-devel@lfdr.de>; Sat, 13 May 2023 08:44:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F32EE7015D4
+	for <lists+spice-devel@lfdr.de>; Sat, 13 May 2023 11:38:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 76B5310E03C;
-	Sat, 13 May 2023 06:44:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AC8F810E04E;
+	Sat, 13 May 2023 09:37:58 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 144E310E03C
- for <spice-devel@lists.freedesktop.org>; Sat, 13 May 2023 06:44:06 +0000 (UTC)
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-1929818d7faso61921749fac.0
- for <spice-devel@lists.freedesktop.org>; Fri, 12 May 2023 23:44:06 -0700 (PDT)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B485610E04E
+ for <spice-devel@lists.freedesktop.org>; Sat, 13 May 2023 09:37:56 +0000 (UTC)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-541fb831026so3559047eaf.3
+ for <spice-devel@lists.freedesktop.org>; Sat, 13 May 2023 02:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1683960246; x=1686552246;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n+lDoPP9+h3pb+YVtnypsxL3iy6dJ7IzonvpYKlHiTE=;
- b=i6eO9y4tneW9OEksa36gemy8pCPIBCPei//4A8ch9sHQUqK+t0bNGVZDiFPvMneKcI
- 7sF8/ApsLDkpVnxV993aHZ6p7PpWjt8EUH6DzHMOfD/nb4s+POTOlAm+LY7F16H3iaea
- WFpeYB1zZICQ12X6apwlEFxS68IhT/sgysMGJzOG2KzUt+/QdGc2G+wrITMnFF0EOlr+
- dFflcf+nQJrszMPRt7oMAz9hxNG4qblYh3wxgyghm9gr7BCrM+kHPiN/4s5NjHluLYyL
- hqTskjPEh4I174Dl+jJVkBkh2SSzIJciEXPpiwDk+bnLxSKL4CbzklosqWVrFpa3Yu9t
- eM7w==
+ d=gmail.com; s=20221208; t=1683970675; x=1686562675;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=CPM1zPnxTlITgz/Rbiq0yentk2UaI4kA4JZO8ImRVjM=;
+ b=QUpIUpVf+2WQtBD8BQ3NPE914Zs7plrdj8rEwuXSOWfLPq+iuGsDDtTe+J2bXh2l5Z
+ QzFxQHFbkkoNGbJMdQHRY/UjBCK7Eq7Aw6wIVkJwgxTV7kH78isgWXz3KGmmWcZThFYi
+ BxivfXf8TndGhrvyY1UBLYCMqcacQL02bVe3pY3hr8TyX70gf2YyP8KZhcmAc/wyKp1b
+ 2oVWm9tpAeB1EEYDSSLO+UOS5AJK/wyES9rbinL7UfckKULvdYA5CvyQVa+I1BoukliI
+ RKnRf1TPi+CRtn0dDg61gAebuvbiExzEFEfpYFpdKNXwzQj3xQBYq1G/eeibAlCAGnFM
+ GnhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683960246; x=1686552246;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=n+lDoPP9+h3pb+YVtnypsxL3iy6dJ7IzonvpYKlHiTE=;
- b=XpnZAJK4kOd20XuBrq8evbwrIEGhyHgP+8zTgjBEdOBOG8eT3Ff0+HDUitboS+hPBZ
- KX7t1iRScPgH4r2jFxXgha/xnmnLQjKhYD3+7ARlCzYuq7Y9fiIRMgFW/uzF7j2maWUf
- 7oaELB/jBR2B4X7jgade8aSy5RzoUOhjSFaJ9GP8be0FNAfrnzC5GUOoE+UD3KuRPEQK
- PHB3waeq4wVJsdGhtm4e69v2tNOjv6cBAuuxDi2mM6vyCMvlVeO3pfaAvO1Cw0KzBqth
- E468D4AnwxdxdBDQD+i4BDpJxtWkyid3uozMVciyQN+qTTD9rrKggnVY9/Ww0FqjjH2Q
- +e2Q==
-X-Gm-Message-State: AC+VfDxkR/noJZEp1hN/tjAINy5pkoRRIJanluLGPuW5IpyKFGHwzADv
- KXAzX5cHvFc/UndhA4BN6/B2De/p5x0T47N/bI8=
-X-Google-Smtp-Source: ACHHUZ4oF6bz6I7qO6danHF9WU8/iC+HhCyKNzKbrUp4Xgcq0X1qJWxNZ4syXlkyvZMzAf/XTYuh8y3LjoEW2HNm0+A=
-X-Received: by 2002:aca:3b07:0:b0:394:5dc9:d097 with SMTP id
- i7-20020aca3b07000000b003945dc9d097mr3481980oia.3.1683960245611; Fri, 12 May
- 2023 23:44:05 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1683970675; x=1686562675;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=CPM1zPnxTlITgz/Rbiq0yentk2UaI4kA4JZO8ImRVjM=;
+ b=CVsE2E0DXjg8EID3mhI3Y8ZDewKbVOxWIYue196BU3gp1Mb465lfas634ivQ4I7sIY
+ f6aHwGdUg0rTZMemsflm+qXEVoGphec/jDxsgH6Y9OFiKMSdsDYNGi8hBkgMsIr6xksj
+ CohDr/vgPNf0EN4+bLrxdSfSwA1nqZnEBBYribYxeBveYtuE+VhZcpVxPubaZoZTqZU0
+ 7+zajuYobG7cBL0h9ejBk3S8FtCu9sq/fTKfuJJ4xhrVNYRXiD1Q5kUwAxG1ibUx8JNQ
+ LXwv1dosYAQXniH1q8Ti5L+I4f6qqaI6EQd3fkgpHdosGiOvfGe7y0ABJdCRbkY1FNaV
+ UnWA==
+X-Gm-Message-State: AC+VfDxpkGjioY9KPgPSBqx0PttmmQBxCCdzsJgyV3BVChHDqXZF0IxJ
+ ADZ6wC5YltsOQ+uMe7SseFJfdStruNVA4660zgzROVLMyT0=
+X-Google-Smtp-Source: ACHHUZ463MOka6V7/pIHQ7ZDkyqzmuGUnIB0ZTZj7uUgEAaJbJkkot73xAVRmfZVYFexOgI+C3gYjt3fSwxLA+VfIbw=
+X-Received: by 2002:aca:3cd6:0:b0:395:e29e:b7ec with SMTP id
+ j205-20020aca3cd6000000b00395e29eb7ecmr519324oia.36.1683970674908; Sat, 13
+ May 2023 02:37:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <tencent_0CBC5ED1BF460F6643035478784A9EBB1F05@qq.com>
-In-Reply-To: <tencent_0CBC5ED1BF460F6643035478784A9EBB1F05@qq.com>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sat, 13 May 2023 07:43:55 +0100
-Message-ID: <CAHt6W4djL7cC8Bq=n-CeucTmYwFKMjfSe_87=7_fv3rxerbM0Q@mail.gmail.com>
-To: 171548156 <tangyla@qq.com>
-Content-Type: multipart/alternative; boundary="00000000000041727e05fb8d8cd5"
-Subject: Re: [Spice-devel] Does spice protocol (client/server) support
- serial port redirection
+Date: Sat, 13 May 2023 10:37:43 +0100
+Message-ID: <CAHt6W4dR2mygdyAyL7TaSzev8TfQgqXn2pTdrEdEBmGAMKCg0g@mail.gmail.com>
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
+Subject: [Spice-devel] ANNOUNCE spice-server 0.15.2 release
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,77 +62,27 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000041727e05fb8d8cd5
-Content-Type: text/plain; charset="UTF-8"
+Hey everyone,
 
-On Fri, 12 May 2023, 10:47 171548156, <tangyla@qq.com> wrote:
+I just cut a new release in the 0.15.x stable series, so upgrading to it
+is recommended.
+If you find any bugs or regressions, please report them in our issue
+tracker: https://gitlab.freedesktop.org/groups/spice/-/issues.
+See also https://gitlab.freedesktop.org/spice/spice/-/releases/v0.15.2.
 
-> Hello:
->
-> Does spice protocol (client/server) support serial port redirection?
->
-> if supported, can you give me a example?
->
->
-> Look forward to your reply. Thank you.
->
+Major Changes in 0.15.2:
+========================
 
-No, it does not support serial port redirection. If the serial is usb you
-can redirect the device.
+Really minor fix release, mainly to fix a distribution issue
 
-Regards,
-Frediano
+* Add missing file to distribution
+* Fix sound recording fix in case of buffer wrapping
 
---00000000000041727e05fb8d8cd5
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto"><div><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D=
-"gmail_attr">On Fri, 12 May 2023, 10:47 171548156, &lt;<a href=3D"mailto:ta=
-ngyla@qq.com">tangyla@qq.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-l=
-eft:1ex"><div><p style=3D"box-sizing:border-box;margin:0px;padding:0px;colo=
-r:rgb(16,18,20);font-size:var(--main-font-size);line-height:21px;white-spac=
-e:pre-wrap;font-family:&quot;PingFang SC&quot;,&quot;Segoe UI&quot;,Arial,&=
-quot;Microsoft YaHei&quot;,=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91,=E5=AE=8B=
-=E4=BD=93,&quot;Malgun Gothic&quot;,sans-serif"><span style=3D"box-sizing:b=
-order-box;font-size:var(--main-font-size);line-height:21px;display:inline">=
-Hello:
-</span></p><p style=3D"box-sizing:border-box;margin:0px;padding:0px;color:r=
-gb(16,18,20);font-size:var(--main-font-size);line-height:21px;white-space:p=
-re-wrap;font-family:&quot;PingFang SC&quot;,&quot;Segoe UI&quot;,Arial,&quo=
-t;Microsoft YaHei&quot;,=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91,=E5=AE=8B=E4=
-=BD=93,&quot;Malgun Gothic&quot;,sans-serif"><span style=3D"box-sizing:bord=
-er-box;font-size:var(--main-font-size);line-height:21px;display:inline">   =
-      Does spice protocol (client/server) support serial port redirection?
-</span></p><p style=3D"box-sizing:border-box;margin:0px;padding:0px;color:r=
-gb(16,18,20);font-size:var(--main-font-size);line-height:21px;white-space:p=
-re-wrap;font-family:&quot;PingFang SC&quot;,&quot;Segoe UI&quot;,Arial,&quo=
-t;Microsoft YaHei&quot;,=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91,=E5=AE=8B=E4=
-=BD=93,&quot;Malgun Gothic&quot;,sans-serif"><span style=3D"box-sizing:bord=
-er-box;font-size:var(--main-font-size);line-height:21px;display:inline">   =
-      if supported, can you give me a example?</span></p><p style=3D"box-si=
-zing:border-box;margin:0px;padding:0px;color:rgb(16,18,20);font-size:var(--=
-main-font-size);line-height:21px;white-space:pre-wrap;font-family:&quot;Pin=
-gFang SC&quot;,&quot;Segoe UI&quot;,Arial,&quot;Microsoft YaHei&quot;,=E5=
-=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91,=E5=AE=8B=E4=BD=93,&quot;Malgun Gothic&qu=
-ot;,sans-serif"><span style=3D"box-sizing:border-box;font-size:var(--main-f=
-ont-size);line-height:21px;display:inline"><br></span></p><p style=3D"box-s=
-izing:border-box;margin:0px;padding:0px;color:rgb(16,18,20);font-size:var(-=
--main-font-size);line-height:21px;white-space:pre-wrap;font-family:&quot;Pi=
-ngFang SC&quot;,&quot;Segoe UI&quot;,Arial,&quot;Microsoft YaHei&quot;,=E5=
-=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91,=E5=AE=8B=E4=BD=93,&quot;Malgun Gothic&qu=
-ot;,sans-serif"><span style=3D"box-sizing:border-box;font-size:var(--main-f=
-ont-size);line-height:21px;display:inline">                                =
-                               Look forward to your reply. Thank you.</span=
-></p></div></blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D=
-"auto">No, it does not support serial port redirection. If the serial is us=
-b you can redirect the device.=C2=A0</div><div dir=3D"auto"><br></div><div =
-dir=3D"auto">Regards,</div><div dir=3D"auto">Frediano=C2=A0</div><div dir=
-=3D"auto"></div></div>
+https://www.spice-space.org/download/releases/spice-0.15.2.tar.bz2
 
---00000000000041727e05fb8d8cd5--
+Kind Regards,
+  Frediano
