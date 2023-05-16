@@ -1,92 +1,66 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A58DD704D93
-	for <lists+spice-devel@lfdr.de>; Tue, 16 May 2023 14:15:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78A0B7054C2
+	for <lists+spice-devel@lfdr.de>; Tue, 16 May 2023 19:14:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6BB110E345;
-	Tue, 16 May 2023 12:15:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0733B10E28E;
+	Tue, 16 May 2023 17:14:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 1659 seconds by postgrey-1.36 at gabe;
- Tue, 16 May 2023 11:28:43 UTC
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D2C8910E344;
- Tue, 16 May 2023 11:28:43 +0000 (UTC)
-Received: from pps.filterd (m0353722.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 34GAjFuQ030962; Tue, 16 May 2023 11:00:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=pp1;
- bh=Ev8bpmefO3oAmyABiNql71RTv0bousLYpb/GjqSW9Vk=;
- b=UxsF2ZOJeViMfmseMAISvPUmxMmdAi6A5r5kmwv0n/1Ho26lNsab6l7dV2Y1EjPDwZMz
- ZlC2xOTfwWcQEGBMN2UnjGTkNcMS2VaCaa5O6WH8UVMBS+M2J0kD+kcSj8rTMdpTO7M2
- rfkAbjmshTgP+20caiMoxEFcgzFuQ4bX5r17RK/JCNzZZmIMk2cOzlAPeIC8zC48v7i+
- dSdb0WZOqjnf6IYHIqDJipRr+UcdbqKtvDWery0hy3xx+6YakQ/BHCSUY+EiR63pAk7i
- 7jTlxQkq7KmJ11zufqPK2WbPwOazDh58YwTHS2LfJAgRV5VP8XlBoDVJAdJDVz6ebfMo Ig== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3qm8bn0dw1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 May 2023 11:00:51 +0000
-Received: from m0353722.ppops.net (m0353722.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 34GAksD5004391;
- Tue, 16 May 2023 11:00:50 GMT
-Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.102])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3qm8bn0dut-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 May 2023 11:00:50 +0000
-Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
- by ppma06ams.nl.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id 34G7b9Xs031123;
- Tue, 16 May 2023 11:00:48 GMT
-Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
- by ppma06ams.nl.ibm.com (PPS) with ESMTPS id 3qj1tdsjr0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 May 2023 11:00:48 +0000
-Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com
- [10.20.54.103])
- by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 34GB0jFf8979086
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 16 May 2023 11:00:45 GMT
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 804072004D;
- Tue, 16 May 2023 11:00:45 +0000 (GMT)
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 14EC720043;
- Tue, 16 May 2023 11:00:45 +0000 (GMT)
-Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
- by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 16 May 2023 11:00:45 +0000 (GMT)
-From: Niklas Schnelle <schnelle@linux.ibm.com>
-To: Arnd Bergmann <arnd@arndb.de>, Dave Airlie <airlied@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>
-Date: Tue, 16 May 2023 13:00:03 +0200
-Message-Id: <20230516110038.2413224-8-schnelle@linux.ibm.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230516110038.2413224-1-schnelle@linux.ibm.com>
-References: <20230516110038.2413224-1-schnelle@linux.ibm.com>
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C996710E28E;
+ Tue, 16 May 2023 17:14:01 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id D37C621F00;
+ Tue, 16 May 2023 17:13:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1684257236; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZouM6U98x38wXW9MRAtu8fqxzfXzsAxCRP1ZwPobA+s=;
+ b=Z/LgNkTGQIIdzsGT1Vk/3fXEzO95wk9CEWI0zjDaQMLknNwwhG5RNp0FXFoPJl2Z2pkP/S
+ YI3WbUMyPL1U13sK6BPZ2FiSLXTCuE0rlRMm8EnmN6XQ+66nZkK5PyVR8aqeZfeJwds4+W
+ XJ2b/hfS2w3bqUXlUdK25vNVaJ/D4UE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1684257236;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZouM6U98x38wXW9MRAtu8fqxzfXzsAxCRP1ZwPobA+s=;
+ b=bBlhoq+OSNGpvFmv+es7DgjFLnRufV9RJrC58hwLBaMC8yr8f+Hkh95D0uD7k6SVV/pS6I
+ aOva+qziF3gzNBAA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 525CE138F9;
+ Tue, 16 May 2023 17:13:56 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id iDZVEtS5Y2QgNwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Tue, 16 May 2023 17:13:56 +0000
+Message-ID: <f5c92eb1-83af-4f99-71f5-b7a3e8be1d13@suse.de>
+Date: Tue, 16 May 2023 19:13:55 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: w3sz8-ToMzSokkTdWpKQ8SoNz85SvyXo
-X-Proofpoint-ORIG-GUID: L-Vy2aLAmYx74LeQnJJT49DR7ekQwxg7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-05-16_04,2023-05-16_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- lowpriorityscore=0 mlxlogscore=811 impostorscore=0 mlxscore=0 phishscore=0
- suspectscore=0 spamscore=0 malwarescore=0 clxscore=1011 adultscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2304280000 definitions=main-2305160089
-X-Mailman-Approved-At: Tue, 16 May 2023 12:15:38 +0000
-Subject: [Spice-devel] [PATCH v4 07/41] drm: handle HAS_IOPORT dependencies
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.1
+Content-Language: en-US
+To: Niklas Schnelle <schnelle@linux.ibm.com>, Arnd Bergmann <arnd@arndb.de>,
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
+References: <20230516110038.2413224-1-schnelle@linux.ibm.com>
+ <20230516110038.2413224-8-schnelle@linux.ibm.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20230516110038.2413224-8-schnelle@linux.ibm.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------QLCjstKEr7xwMcJ2f9iBbsPo"
+Subject: Re: [Spice-devel] [PATCH v4 07/41] drm: handle HAS_IOPORT
+ dependencies
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,138 +73,153 @@ List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: linux-arch@vger.kernel.org, Arnd Bergmann <arnd@kernel.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Albert Ou <aou@eecs.berkeley.edu>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ =?UTF-8?Q?Uwe_Kleine-K=c3=b6nig?= <u.kleine-koenig@pengutronix.de>,
+ linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Alan Stern <stern@rowland.harvard.edu>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Bjorn Helgaas <bhelgaas@google.com>,
+ spice-devel@lists.freedesktop.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Errors-To: spice-devel-bounces@lists.freedesktop.org
+Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------QLCjstKEr7xwMcJ2f9iBbsPo
+Content-Type: multipart/mixed; boundary="------------hmIwqHb0OrnDKh0jewsGeijn";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Niklas Schnelle <schnelle@linux.ibm.com>, Arnd Bergmann <arnd@arndb.de>,
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: linux-arch@vger.kernel.org, Arnd Bergmann <arnd@kernel.org>,
  Albert Ou <aou@eecs.berkeley.edu>, "Rafael J. Wysocki" <rafael@kernel.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Paul Walmsley <paul.walmsley@sifive.com>, linux-pci@vger.kernel.org,
  linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
  virtualization@lists.linux-foundation.org,
  Alan Stern <stern@rowland.harvard.edu>, spice-devel@lists.freedesktop.org,
- =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
- Bjorn Helgaas <bhelgaas@google.com>, Geert Uytterhoeven <geert@linux-m68k.org>,
+ =?UTF-8?Q?Uwe_Kleine-K=c3=b6nig?= <u.kleine-koenig@pengutronix.de>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
  Mauro Carvalho Chehab <mchehab@kernel.org>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Errors-To: spice-devel-bounces@lists.freedesktop.org
-Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
+Message-ID: <f5c92eb1-83af-4f99-71f5-b7a3e8be1d13@suse.de>
+Subject: Re: [PATCH v4 07/41] drm: handle HAS_IOPORT dependencies
+References: <20230516110038.2413224-1-schnelle@linux.ibm.com>
+ <20230516110038.2413224-8-schnelle@linux.ibm.com>
+In-Reply-To: <20230516110038.2413224-8-schnelle@linux.ibm.com>
 
-In a future patch HAS_IOPORT=n will result in inb()/outb() and friends
-not being declared. We thus need to add HAS_IOPORT as dependency for
-those drivers using them. In the bochs driver there is optional MMIO
-support detected at runtime, warn if this isn't taken when
-HAS_IOPORT is not defined.
+--------------hmIwqHb0OrnDKh0jewsGeijn
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-There is also a direct and hard coded use in cirrus.c which according to
-the comment is only necessary during resume.  Let's just skip this as
-for example s390 which doesn't have I/O port support also doesen't
-support suspend/resume.
+SGkNCg0KQW0gMTYuMDUuMjMgdW0gMTM6MDAgc2NocmllYiBOaWtsYXMgU2NobmVsbGU6DQo+
+IEluIGEgZnV0dXJlIHBhdGNoIEhBU19JT1BPUlQ9biB3aWxsIHJlc3VsdCBpbiBpbmIoKS9v
+dXRiKCkgYW5kIGZyaWVuZHMNCj4gbm90IGJlaW5nIGRlY2xhcmVkLiBXZSB0aHVzIG5lZWQg
+dG8gYWRkIEhBU19JT1BPUlQgYXMgZGVwZW5kZW5jeSBmb3INCj4gdGhvc2UgZHJpdmVycyB1
+c2luZyB0aGVtLiBJbiB0aGUgYm9jaHMgZHJpdmVyIHRoZXJlIGlzIG9wdGlvbmFsIE1NSU8N
+Cj4gc3VwcG9ydCBkZXRlY3RlZCBhdCBydW50aW1lLCB3YXJuIGlmIHRoaXMgaXNuJ3QgdGFr
+ZW4gd2hlbg0KPiBIQVNfSU9QT1JUIGlzIG5vdCBkZWZpbmVkLg0KPiANCj4gVGhlcmUgaXMg
+YWxzbyBhIGRpcmVjdCBhbmQgaGFyZCBjb2RlZCB1c2UgaW4gY2lycnVzLmMgd2hpY2ggYWNj
+b3JkaW5nIHRvDQo+IHRoZSBjb21tZW50IGlzIG9ubHkgbmVjZXNzYXJ5IGR1cmluZyByZXN1
+bWUuICBMZXQncyBqdXN0IHNraXAgdGhpcyBhcw0KPiBmb3IgZXhhbXBsZSBzMzkwIHdoaWNo
+IGRvZXNuJ3QgaGF2ZSBJL08gcG9ydCBzdXBwb3J0IGFsc28gZG9lc2VuJ3QNCj4gc3VwcG9y
+dCBzdXNwZW5kL3Jlc3VtZS4NCj4gDQo+IENvLWRldmVsb3BlZC1ieTogQXJuZCBCZXJnbWFu
+biA8YXJuZEBrZXJuZWwub3JnPg0KPiBTaWduZWQtb2ZmLWJ5OiBBcm5kIEJlcmdtYW5uIDxh
+cm5kQGtlcm5lbC5vcmc+DQo+IFNpZ25lZC1vZmYtYnk6IE5pa2xhcyBTY2huZWxsZSA8c2No
+bmVsbGVAbGludXguaWJtLmNvbT4NCj4gLS0tDQo+IE5vdGU6IFRoZSBIQVNfSU9QT1JUIEtj
+b25maWcgb3B0aW9uIHdhcyBhZGRlZCBpbiB2Ni40LXJjMSBzbw0KPiAgICAgICAgcGVyLXN1
+YnN5c3RlbSBwYXRjaGVzIG1heSBiZSBhcHBsaWVkIGluZGVwZW5kZW50bHkNCj4gDQo+ICAg
+ZHJpdmVycy9ncHUvZHJtL3F4bC9LY29uZmlnICAgfCAgMSArDQo+ICAgZHJpdmVycy9ncHUv
+ZHJtL3RpbnkvYm9jaHMuYyAgfCAxNyArKysrKysrKysrKysrKysrKw0KPiAgIGRyaXZlcnMv
+Z3B1L2RybS90aW55L2NpcnJ1cy5jIHwgIDIgKysNCg0KVGhlcmUgYXJlIG1vcmUgaW52b2Nh
+dGlvbnMgaW4gZ21hNTAwLiBTZWVbMV0NCg0KWzFdIA0KaHR0cHM6Ly9lbGl4aXIuYm9vdGxp
+bi5jb20vbGludXgvdjYuMy9zb3VyY2UvZHJpdmVycy9ncHUvZHJtL2dtYTUwMC9jZHZfZGV2
+aWNlLmMjTDMwDQoNCj4gICAzIGZpbGVzIGNoYW5nZWQsIDIwIGluc2VydGlvbnMoKykNCj4g
+DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcXhsL0tjb25maWcgYi9kcml2ZXJz
+L2dwdS9kcm0vcXhsL0tjb25maWcNCj4gaW5kZXggY2EzZjUxYzJhOGZlLi5kMGUwZDQ0MGM4
+ZDkgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9xeGwvS2NvbmZpZw0KPiArKysg
+Yi9kcml2ZXJzL2dwdS9kcm0vcXhsL0tjb25maWcNCj4gQEAgLTIsNiArMiw3IEBADQo+ICAg
+Y29uZmlnIERSTV9RWEwNCj4gICAJdHJpc3RhdGUgIlFYTCB2aXJ0dWFsIEdQVSINCj4gICAJ
+ZGVwZW5kcyBvbiBEUk0gJiYgUENJICYmIE1NVQ0KPiArCWRlcGVuZHMgb24gSEFTX0lPUE9S
+VA0KPiAgIAlzZWxlY3QgRFJNX0tNU19IRUxQRVINCj4gICAJc2VsZWN0IERSTV9UVE0NCj4g
+ICAJc2VsZWN0IERSTV9UVE1fSEVMUEVSDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9k
+cm0vdGlueS9ib2Nocy5jIGIvZHJpdmVycy9ncHUvZHJtL3RpbnkvYm9jaHMuYw0KPiBpbmRl
+eCBkMjU0Njc5YTEzNmUuLjM3MTAzMzk0MDdjYyAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9n
+cHUvZHJtL3RpbnkvYm9jaHMuYw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vdGlueS9ib2No
+cy5jDQo+IEBAIC0yLDYgKzIsNyBAQA0KPiAgIA0KPiAgICNpbmNsdWRlIDxsaW51eC9tb2R1
+bGUuaD4NCj4gICAjaW5jbHVkZSA8bGludXgvcGNpLmg+DQo+ICsjaW5jbHVkZSA8YXNtL2J1
+Zy5oPg0KDQo8bGludXgvYnVnLmg+IHBsZWFzZS4NCg0KQmVzdCByZWdhcmRzDQpUaG9tYXMN
+Cg0KPiAgIA0KPiAgICNpbmNsdWRlIDxkcm0vZHJtX2FwZXJ0dXJlLmg+DQo+ICAgI2luY2x1
+ZGUgPGRybS9kcm1fYXRvbWljX2hlbHBlci5oPg0KPiBAQCAtMTA1LDcgKzEwNiw5IEBAIHN0
+YXRpYyB2b2lkIGJvY2hzX3ZnYV93cml0ZWIoc3RydWN0IGJvY2hzX2RldmljZSAqYm9jaHMs
+IHUxNiBpb3BvcnQsIHU4IHZhbCkNCj4gICANCj4gICAJCXdyaXRlYih2YWwsIGJvY2hzLT5t
+bWlvICsgb2Zmc2V0KTsNCj4gICAJfSBlbHNlIHsNCj4gKyNpZmRlZiBDT05GSUdfSEFTX0lP
+UE9SVA0KPiAgIAkJb3V0Yih2YWwsIGlvcG9ydCk7DQo+ICsjZW5kaWYNCj4gICAJfQ0KPiAg
+IH0NCj4gICANCj4gQEAgLTExOSw3ICsxMjIsMTEgQEAgc3RhdGljIHU4IGJvY2hzX3ZnYV9y
+ZWFkYihzdHJ1Y3QgYm9jaHNfZGV2aWNlICpib2NocywgdTE2IGlvcG9ydCkNCj4gICANCj4g
+ICAJCXJldHVybiByZWFkYihib2Nocy0+bW1pbyArIG9mZnNldCk7DQo+ICAgCX0gZWxzZSB7
+DQo+ICsjaWZkZWYgQ09ORklHX0hBU19JT1BPUlQNCj4gICAJCXJldHVybiBpbmIoaW9wb3J0
+KTsNCj4gKyNlbHNlDQo+ICsJCXJldHVybiAweGZmOw0KPiArI2VuZGlmDQo+ICAgCX0NCj4g
+ICB9DQo+ICAgDQo+IEBAIC0xMzIsOCArMTM5LDEyIEBAIHN0YXRpYyB1MTYgYm9jaHNfZGlz
+cGlfcmVhZChzdHJ1Y3QgYm9jaHNfZGV2aWNlICpib2NocywgdTE2IHJlZykNCj4gICANCj4g
+ICAJCXJldCA9IHJlYWR3KGJvY2hzLT5tbWlvICsgb2Zmc2V0KTsNCj4gICAJfSBlbHNlIHsN
+Cj4gKyNpZmRlZiBDT05GSUdfSEFTX0lPUE9SVA0KPiAgIAkJb3V0dyhyZWcsIFZCRV9ESVNQ
+SV9JT1BPUlRfSU5ERVgpOw0KPiAgIAkJcmV0ID0gaW53KFZCRV9ESVNQSV9JT1BPUlRfREFU
+QSk7DQo+ICsjZWxzZQ0KPiArCQlyZXQgPSAweGZmZmY7DQo+ICsjZW5kaWYNCj4gICAJfQ0K
+PiAgIAlyZXR1cm4gcmV0Ow0KPiAgIH0NCj4gQEAgLTE0NSw4ICsxNTYsMTAgQEAgc3RhdGlj
+IHZvaWQgYm9jaHNfZGlzcGlfd3JpdGUoc3RydWN0IGJvY2hzX2RldmljZSAqYm9jaHMsIHUx
+NiByZWcsIHUxNiB2YWwpDQo+ICAgDQo+ICAgCQl3cml0ZXcodmFsLCBib2Nocy0+bW1pbyAr
+IG9mZnNldCk7DQo+ICAgCX0gZWxzZSB7DQo+ICsjaWZkZWYgQ09ORklHX0hBU19JT1BPUlQN
+Cj4gICAJCW91dHcocmVnLCBWQkVfRElTUElfSU9QT1JUX0lOREVYKTsNCj4gICAJCW91dHco
+dmFsLCBWQkVfRElTUElfSU9QT1JUX0RBVEEpOw0KPiArI2VuZGlmDQo+ICAgCX0NCj4gICB9
+DQo+ICAgDQo+IEBAIC0yMjksNiArMjQyLDEwIEBAIHN0YXRpYyBpbnQgYm9jaHNfaHdfaW5p
+dChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2KQ0KPiAgIAkJCXJldHVybiAtRU5PTUVNOw0KPiAg
+IAkJfQ0KPiAgIAl9IGVsc2Ugew0KPiArCQlpZiAoIUlTX0VOQUJMRUQoQ09ORklHX0hBU19J
+T1BPUlQpKSB7DQo+ICsJCQlEUk1fRVJST1IoIkkvTyBwb3J0cyBhcmUgbm90IHN1cHBvcnRl
+ZFxuIik7DQo+ICsJCQlyZXR1cm4gLUVJTzsNCj4gKwkJfQ0KPiAgIAkJaW9hZGRyID0gVkJF
+X0RJU1BJX0lPUE9SVF9JTkRFWDsNCj4gICAJCWlvc2l6ZSA9IDI7DQo+ICAgCQlpZiAoIXJl
+cXVlc3RfcmVnaW9uKGlvYWRkciwgaW9zaXplLCAiYm9jaHMtZHJtIikpIHsNCj4gZGlmZiAt
+LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS90aW55L2NpcnJ1cy5jIGIvZHJpdmVycy9ncHUvZHJt
+L3RpbnkvY2lycnVzLmMNCj4gaW5kZXggNTk0YmM0NzI4NjJmLi5jNjVmZWEwNDliYzcgMTAw
+NjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90aW55L2NpcnJ1cy5jDQo+ICsrKyBiL2Ry
+aXZlcnMvZ3B1L2RybS90aW55L2NpcnJ1cy5jDQo+IEBAIC01MDgsOCArNTA4LDEwIEBAIHN0
+YXRpYyB2b2lkIGNpcnJ1c19jcnRjX2hlbHBlcl9hdG9taWNfZW5hYmxlKHN0cnVjdCBkcm1f
+Y3J0YyAqY3J0YywNCj4gICANCj4gICAJY2lycnVzX21vZGVfc2V0KGNpcnJ1cywgJmNydGNf
+c3RhdGUtPm1vZGUpOw0KPiAgIA0KPiArI2lmZGVmIENPTkZJR19IQVNfSU9QT1JUDQo+ICAg
+CS8qIFVuYmxhbmsgKG5lZWRlZCBvbiBTMyByZXN1bWUsIHZnYWJpb3MgZG9lc24ndCBkbyBp
+dCB0aGVuKSAqLw0KPiAgIAlvdXRiKFZHQV9BUl9FTkFCTEVfRElTUExBWSwgVkdBX0FUVF9X
+KTsNCj4gKyNlbmRpZg0KPiAgIA0KPiAgIAlkcm1fZGV2X2V4aXQoaWR4KTsNCj4gICB9DQoN
+Ci0tIA0KVGhvbWFzIFppbW1lcm1hbm4NCkdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXINClNV
+U0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KRnJhbmtlbnN0cmFzc2UgMTQ2
+LCA5MDQ2MSBOdWVybmJlcmcsIEdlcm1hbnkNCkdGOiBJdm8gVG90ZXYsIEFuZHJldyBNeWVy
+cywgQW5kcmV3IE1jRG9uYWxkLCBCb3VkaWVuIE1vZXJtYW4NCkhSQiAzNjgwOSAoQUcgTnVl
+cm5iZXJnKQ0K
 
-Co-developed-by: Arnd Bergmann <arnd@kernel.org>
-Signed-off-by: Arnd Bergmann <arnd@kernel.org>
-Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
----
-Note: The HAS_IOPORT Kconfig option was added in v6.4-rc1 so
-      per-subsystem patches may be applied independently
+--------------hmIwqHb0OrnDKh0jewsGeijn--
 
- drivers/gpu/drm/qxl/Kconfig   |  1 +
- drivers/gpu/drm/tiny/bochs.c  | 17 +++++++++++++++++
- drivers/gpu/drm/tiny/cirrus.c |  2 ++
- 3 files changed, 20 insertions(+)
+--------------QLCjstKEr7xwMcJ2f9iBbsPo
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
-index ca3f51c2a8fe..d0e0d440c8d9 100644
---- a/drivers/gpu/drm/qxl/Kconfig
-+++ b/drivers/gpu/drm/qxl/Kconfig
-@@ -2,6 +2,7 @@
- config DRM_QXL
- 	tristate "QXL virtual GPU"
- 	depends on DRM && PCI && MMU
-+	depends on HAS_IOPORT
- 	select DRM_KMS_HELPER
- 	select DRM_TTM
- 	select DRM_TTM_HELPER
-diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
-index d254679a136e..3710339407cc 100644
---- a/drivers/gpu/drm/tiny/bochs.c
-+++ b/drivers/gpu/drm/tiny/bochs.c
-@@ -2,6 +2,7 @@
- 
- #include <linux/module.h>
- #include <linux/pci.h>
-+#include <asm/bug.h>
- 
- #include <drm/drm_aperture.h>
- #include <drm/drm_atomic_helper.h>
-@@ -105,7 +106,9 @@ static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
- 
- 		writeb(val, bochs->mmio + offset);
- 	} else {
-+#ifdef CONFIG_HAS_IOPORT
- 		outb(val, ioport);
-+#endif
- 	}
- }
- 
-@@ -119,7 +122,11 @@ static u8 bochs_vga_readb(struct bochs_device *bochs, u16 ioport)
- 
- 		return readb(bochs->mmio + offset);
- 	} else {
-+#ifdef CONFIG_HAS_IOPORT
- 		return inb(ioport);
-+#else
-+		return 0xff;
-+#endif
- 	}
- }
- 
-@@ -132,8 +139,12 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
- 
- 		ret = readw(bochs->mmio + offset);
- 	} else {
-+#ifdef CONFIG_HAS_IOPORT
- 		outw(reg, VBE_DISPI_IOPORT_INDEX);
- 		ret = inw(VBE_DISPI_IOPORT_DATA);
-+#else
-+		ret = 0xffff;
-+#endif
- 	}
- 	return ret;
- }
-@@ -145,8 +156,10 @@ static void bochs_dispi_write(struct bochs_device *bochs, u16 reg, u16 val)
- 
- 		writew(val, bochs->mmio + offset);
- 	} else {
-+#ifdef CONFIG_HAS_IOPORT
- 		outw(reg, VBE_DISPI_IOPORT_INDEX);
- 		outw(val, VBE_DISPI_IOPORT_DATA);
-+#endif
- 	}
- }
- 
-@@ -229,6 +242,10 @@ static int bochs_hw_init(struct drm_device *dev)
- 			return -ENOMEM;
- 		}
- 	} else {
-+		if (!IS_ENABLED(CONFIG_HAS_IOPORT)) {
-+			DRM_ERROR("I/O ports are not supported\n");
-+			return -EIO;
-+		}
- 		ioaddr = VBE_DISPI_IOPORT_INDEX;
- 		iosize = 2;
- 		if (!request_region(ioaddr, iosize, "bochs-drm")) {
-diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
-index 594bc472862f..c65fea049bc7 100644
---- a/drivers/gpu/drm/tiny/cirrus.c
-+++ b/drivers/gpu/drm/tiny/cirrus.c
-@@ -508,8 +508,10 @@ static void cirrus_crtc_helper_atomic_enable(struct drm_crtc *crtc,
- 
- 	cirrus_mode_set(cirrus, &crtc_state->mode);
- 
-+#ifdef CONFIG_HAS_IOPORT
- 	/* Unblank (needed on S3 resume, vgabios doesn't do it then) */
- 	outb(VGA_AR_ENABLE_DISPLAY, VGA_ATT_W);
-+#endif
- 
- 	drm_dev_exit(idx);
- }
--- 
-2.39.2
+-----BEGIN PGP SIGNATURE-----
 
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmRjudMFAwAAAAAACgkQlh/E3EQov+D4
+ihAAnhzlqkL1KYuEQYrYyEGypHC7kvHol+IJuCFLdP8ve6fc2LUV1GzqXQRZSS8+1+6GYtKPI3nL
+zOD7BVzIdFLsJom9FN6xldv8iYqoPIGl94dRBHrscmYCI1gR/ppXIayXZQt2pLt5jlnu1km9Asqf
+rDousPBh8H2QWqb9ES9XbIi7O1b7GWJtnruheYZwRlXQMiHNEwU15NWUEjqGMAXs45cvFoOMVpLD
+UGX6BC7OCq1tGGd5a3ileVY5Y1/lEksv2qZmiWqbExz7WcjkewbnKkfn6v5X0Qdu3L2N3b/59eBU
+r4Peilj63EjwC5fhsQb6xNqeU+YRWepbW/6VH7J03RtB1LL2L6UIgVyErJ3Og8juMK2d3VA6/zBl
+ciZlYTN7OWxCD4rlg/35rjSEV5nbRn4Foev2BfilRPIzt7t7lEMrGmtcyxF4mXT6jeFSw7r/Lwlk
+K3wjb01bVhCq8JQnyCN17vrimbvwnhPBciLU1cL7NUGIIAKJ5QPZ3xmYDfPXzkVtrD1IQgiJuiH0
+pJipxojSl+T0aWZEB9dyxyp2MaKN1rVgt2SiiRYsBW1w5vPGJxQmfSaZjLv8X8ZwhqkG/+u+ZDoT
+WD3Anxjx5bFzwm9TOaZLcptGYzdCM9If2Ee8T/uNaYnuKPp3tupecYed9r8si9rCbCRlXoEIUc1/
+QlU=
+=yF6t
+-----END PGP SIGNATURE-----
+
+--------------QLCjstKEr7xwMcJ2f9iBbsPo--
