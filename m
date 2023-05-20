@@ -2,83 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E9D8706383
-	for <lists+spice-devel@lfdr.de>; Wed, 17 May 2023 11:03:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 902B970AAEE
+	for <lists+spice-devel@lfdr.de>; Sat, 20 May 2023 22:31:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 790D110E131;
-	Wed, 17 May 2023 09:03:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3846410E1A2;
+	Sat, 20 May 2023 20:31:14 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 509 seconds by postgrey-1.36 at gabe;
- Tue, 16 May 2023 17:56:10 UTC
-Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
- [66.111.4.230])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 812B310E354
- for <spice-devel@lists.freedesktop.org>; Tue, 16 May 2023 17:56:10 +0000 (UTC)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailnew.nyi.internal (Postfix) with ESMTP id 9F99D581012;
- Tue, 16 May 2023 13:47:39 -0400 (EDT)
-Received: from imap51 ([10.202.2.101])
- by compute6.internal (MEProxy); Tue, 16 May 2023 13:47:39 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:sender
- :subject:subject:to:to; s=fm3; t=1684259259; x=1684266459; bh=7R
- Tlb4yPLwyEbMekf/kZ3q59ewoUpiiohu1ETmUvaCM=; b=tjSVD2GDDI6vJ83hu2
- J0wG8DQCFOFbtD4wryKKIsm8NrKyYWw9AxEpnAygm+AGD4nEF+j2mlJ4DdXq8T7f
- 5QNxCwjCLFwN4LQVkqurLDF0jW1A9Zzz9wuP8KmJ+dOKMC7ySN2l+XD2DB+vAURd
- 6HwY0kPm0vBIX61vZDEmsG6v4odA+Wveqknzg8HJe84D9+Q/i7EzXkxjhIOGsu4K
- Bn3sr+SEQpMQKfLLbdVTMEAMgMrfED9RHqZwlTkKYfdLgHhBCfQNds8ESPs0wA5+
- 2AzSXtwnhzkb+RBCBVRlsb6shv5c3exsHtDbboEghfnX3UvEDusXCS9pSl0ALX42
- +Xyg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm1; t=1684259259; x=1684266459; bh=7RTlb4yPLwyEb
- Mekf/kZ3q59ewoUpiiohu1ETmUvaCM=; b=ciFx69qJrZA7yv8A1zotpocAWV1mM
- DnUP6xkiq9u2k7Phst28yF9pOYB+p24imZJrUwwQF6DaQRUyeCdMCHTN6yVxU/vW
- Zix27X67pchamsczOqs7J0fQmHu0V5swPms3kpa35adfR5aXURViqtvoRoUWTY5a
- VGrXwUFJRCfHN/YuNMUZDl9wn8yBTKr7VBmb16uia+BCMsXDlQJp7yj7UMvHEfiR
- Ebny8zc51oZx4GRbyjokzwqbrXLiBKtObXTWrW3CD5SJCpHHNRnP+f9Dsand+SZT
- dzhYqpvdJUL8oVoDvA2y4v+/D77Af1UZoXejTAWumnmNa1AN9KFpUQmtQ==
-X-ME-Sender: <xms:usFjZCA3j9sz5nEwWZIq3UmHGzVX3xq8hC-A-CyhlzVMMgSHRPetnQ>
- <xme:usFjZMhU9wDkNkUa9Ko0jRxG-mz1cmyQTN0VunBG3IHeRNAXPCCPbQ8JGk1HmTj-P
- f3ZVSWUacwY2BBQoXA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrfeehledgudduiecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdet
- rhhnugcuuegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusgdruggvqeenucggtffrrg
- htthgvrhhnpeevveeggeffjeeuieduheefhfehgfdujeetjeelueejjeffueeiudefveff
- hffhffenucffohhmrghinhepsghoohhtlhhinhdrtghomhenucevlhhushhtvghrufhiii
- gvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrrhhnugesrghrnhgusgdruggv
-X-ME-Proxy: <xmx:u8FjZFkhOy80RxQ2BWUV-rzLx8Zo0OByuLOXpQ4jyTEMZULNY_5y-w>
- <xmx:u8FjZAyVEm27DrMzOgnM0JctyZqlH4gGlGXk57isUu1T4RYHJk6Jhg>
- <xmx:u8FjZHQCJi6yyLlJWVSjFUgZE57E9obBOYfWMJ-aSBO-TYSVuDEPwA>
- <xmx:u8FjZIQ8wbnEjbEjDbQYJgfmKy2oTUwCRajab8gsJFAROe09ddfnLQ>
-Feedback-ID: i56a14606:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
- id E6956B60086; Tue, 16 May 2023 13:47:38 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.9.0-alpha0-431-g1d6a3ebb56-fm-20230511.001-g1d6a3ebb
-Mime-Version: 1.0
-Message-Id: <0d6d0620-ab14-47ba-90cd-5bce317ac1eb@app.fastmail.com>
-In-Reply-To: <f5c92eb1-83af-4f99-71f5-b7a3e8be1d13@suse.de>
-References: <20230516110038.2413224-1-schnelle@linux.ibm.com>
- <20230516110038.2413224-8-schnelle@linux.ibm.com>
- <f5c92eb1-83af-4f99-71f5-b7a3e8be1d13@suse.de>
-Date: Tue, 16 May 2023 19:47:18 +0200
-From: "Arnd Bergmann" <arnd@arndb.de>
-To: "Thomas Zimmermann" <tzimmermann@suse.de>,
- "Niklas Schnelle" <schnelle@linux.ibm.com>,
- "Dave Airlie" <airlied@redhat.com>, "Gerd Hoffmann" <kraxel@redhat.com>,
- "Dave Airlie" <airlied@gmail.com>, "Daniel Vetter" <daniel@ffwll.ch>
-Content-Type: text/plain
-X-Mailman-Approved-At: Wed, 17 May 2023 09:03:34 +0000
-Subject: Re: [Spice-devel] [PATCH v4 07/41] drm: handle HAS_IOPORT
- dependencies
+Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
+ [185.70.41.103])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 40C5210E1A2
+ for <spice-devel@lists.freedesktop.org>; Sat, 20 May 2023 20:27:48 +0000 (UTC)
+Date: Sat, 20 May 2023 20:27:28 +0000
+Authentication-Results: mail-41103.protonmail.ch;
+ dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com
+ header.b="eTMTSWSH"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1684614459; x=1684873659;
+ bh=nT1AzwDdAxzzkFYO4cAwf9ZLeNf7z9s7CzOppRBBexc=;
+ h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=eTMTSWSHUbKxlZINURHwluLRS1ZCeLAwkg16JOEILqkcRYx/ba+g1DIZ1LWmECE9E
+ /+v96Cg7OhMhe9myuwCdyjrdjUNOXkTPGvE8wr2KAg5Q8w//yYQCIfqZs2jpj/DO9e
+ 4xhbOwZBlhLQUHrltN5/y/Ul011yXGcPidE9dRRiGMthxUb8RqJzcM5wt601OAZEQt
+ Om9i7+kRpoqI6uHhvgSbf7LUBnWdgFMD2+mupRdymtx0yq0UwjTPRn8ZM7h2dTO8Zc
+ OvKqbxdB1gsIKdAcB2ns6rKQJSgdnV4/gjayS2O07T/O4I9MFRvqaAqBTqhuWnvUMn
+ Ga7yDh3KxNAAg==
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+From: J <schnrl@protonmail.com>
+Message-ID: <B6iK_fWf6k29gy_UxX4eCdTzgV8_uEuTAVi-mDEji_rn_MFAYNMoK1VJpnpGLnTMKrtxhl96Gp3JmVKygNqW3b1cwqREhiIWn89QEvTw7HM=@protonmail.com>
+Feedback-ID: 20396031:user:proton
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4"
+X-Mailman-Approved-At: Sat, 20 May 2023 20:31:12 +0000
+Subject: [Spice-devel] [Spice on QEMU] password-secret
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,52 +48,52 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux-Arch <linux-arch@vger.kernel.org>, Arnd Bergmann <arnd@kernel.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Albert Ou <aou@eecs.berkeley.edu>,
- "Rafael J . Wysocki" <rafael@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
- linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Alan Stern <stern@rowland.harvard.edu>,
- Paul Walmsley <paul.walmsley@sifive.com>, Bjorn Helgaas <bhelgaas@google.com>,
- spice-devel@lists.freedesktop.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
- Palmer Dabbelt <palmer@dabbelt.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, May 16, 2023, at 19:13, Thomas Zimmermann wrote:
->
-> Am 16.05.23 um 13:00 schrieb Niklas Schnelle:
->> In a future patch HAS_IOPORT=n will result in inb()/outb() and friends
->> not being declared. We thus need to add HAS_IOPORT as dependency for
->> those drivers using them. In the bochs driver there is optional MMIO
->> support detected at runtime, warn if this isn't taken when
->> HAS_IOPORT is not defined.
->> 
->> There is also a direct and hard coded use in cirrus.c which according to
->> the comment is only necessary during resume.  Let's just skip this as
->> for example s390 which doesn't have I/O port support also doesen't
->> support suspend/resume.
->> 
->> Co-developed-by: Arnd Bergmann <arnd@kernel.org>
->> Signed-off-by: Arnd Bergmann <arnd@kernel.org>
->> Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
->> ---
->> Note: The HAS_IOPORT Kconfig option was added in v6.4-rc1 so
->>        per-subsystem patches may be applied independently
->> 
->>   drivers/gpu/drm/qxl/Kconfig   |  1 +
->>   drivers/gpu/drm/tiny/bochs.c  | 17 +++++++++++++++++
->>   drivers/gpu/drm/tiny/cirrus.c |  2 ++
->
-> There are more invocations in gma500. See[1]
->
-> [1] 
-> https://elixir.bootlin.com/linux/v6.3/source/drivers/gpu/drm/gma500/cdv_device.c#L30
+This is a multi-part message in MIME format.
 
-GMA500 already has "depends on X86", so I don't think
-any changes are needed there -- x86 is already highly dependent
-on I/O ports for a number of reasons.
+--b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
 
-     Arnd
+SGkgdGhlcmUsCkkgaGF2ZSBnb3QgYSBxdWVzdGlvbiBjb25jZXJuaW5nIHRoZSBzcGljZSB0aWNr
+ZXRpbmcgZmVhdHVyZSBpbiBRRU1VIHZpcnR1YWwgbWFjaGluZXMuIFRoZSB1c2VyIG1hbnVhbCBv
+bmx5IGxpc3RzIHRoZSBvcHRpb24gb2YgcGFzc2luZyB0aGUgcGFzc3dvcmQgZGlyZWN0bHkgd2l0
+aCB0aGUgInBhc3N3b3JkPS4uLiIgb3B0aW9uLiBUaGlzIHNlZW1zIHRvIGJlIGluc2VjdXJlIGFu
+ZCBxZW11IGdpdmVzIG1lIHRoZSB3YXJuaW5nICJwYXNzd29yZCBpcyBkZXByZWNhdGVkLiB1c2Ug
+cGFzc3dvcmQtc2VjcmV0IGluc3RlYWQiLiBXaGVuIEkgc2VhcmNoZWQgdGhlIG1hbiBwYWdlIGZv
+ciBzcGljZSB0aWNrZXRpbmcgSSBnb3QgdGhlIGZvbGxvd2luZyByZXN1bHQ6ICJwYXNzd29yZC1z
+ZWNyZXQ9PHNlY3JldC1pZD46IFNldCB0aGUgSUQgb2YgdGhlIHNlY3JldCBvYmplY3QgY29udGFp
+bmluZyB0aGUgcGFzc3dvcmQgeW91IG5lZWQgdG8gYXV0aGVudGljYXRlLiIuIE5vdyBJIHdvbmRl
+ciB3aGF0IHRoaXMgSUQgaXMuIFdoZXJlIGNhbiBJIGZpbmQgaXQ/IEFuZCB3aGF0IGRvIEkgbmVl
+ZCB0byBkbyBpbiBvcmRlciB0byBjcmVhdGUgc3VjaCBhIHNlY3JldCBwYXNzd29yZD8KQ2hlZXJz
+LApKb2hhbm5lcw==
+
+--b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
+
+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0
+cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij5IaSB0aGVyZSw8L2Rpdj48ZGl2IHN0eWxlPSJmb250
+LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigw
+LCAwLCAwKTsiPkkgaGF2ZSBnb3QgYSBxdWVzdGlvbiBjb25jZXJuaW5nIHRoZSBzcGljZSB0aWNr
+ZXRpbmcgZmVhdHVyZSBpbiBRRU1VIHZpcnR1YWwgbWFjaGluZXMuIFRoZSB1c2VyIG1hbnVhbCBv
+bmx5IGxpc3RzIHRoZSBvcHRpb24gb2YgcGFzc2luZyB0aGUgcGFzc3dvcmQgZGlyZWN0bHkgd2l0
+aCB0aGUgInBhc3N3b3JkPS4uLiIgb3B0aW9uLiBUaGlzIHNlZW1zIHRvIGJlIGluc2VjdXJlIGFu
+ZCBxZW11IGdpdmVzIG1lIHRoZSB3YXJuaW5nICJwYXNzd29yZCBpcyBkZXByZWNhdGVkLiB1c2Ug
+cGFzc3dvcmQtc2VjcmV0IGluc3RlYWQiLiBXaGVuIEkgc2VhcmNoZWQgdGhlIG1hbiBwYWdlIGZv
+ciBzcGljZSB0aWNrZXRpbmcgSSBnb3QgdGhlIGZvbGxvd2luZyByZXN1bHQ6ICJwYXNzd29yZC1z
+ZWNyZXQ9Jmx0O3NlY3JldC1pZCZndDs6IDxzcGFuPlNldCB0aGUgSUQgb2YgdGhlIHNlY3JldCBv
+YmplY3QgY29udGFpbmluZyB0aGUgcGFzc3dvcmQ8L3NwYW4+PHNwYW4+IHlvdSBuZWVkIHRvIGF1
+dGhlbnRpY2F0ZS4iLiBOb3cgSSB3b25kZXIgd2hhdCB0aGlzIElEIGlzLiBXaGVyZSBjYW4gSSBm
+aW5kIGl0PyBBbmQgd2hhdCBkbyBJIG5lZWQgdG8gZG8gaW4gb3JkZXIgdG8gY3JlYXRlIHN1Y2gg
+YSBzZWNyZXQgcGFzc3dvcmQ/PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBB
+cmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+
+PHNwYW4+Q2hlZXJzLDwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXJpYWws
+IHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsiPjxzcGFu
+PkpvaGFubmVzPGJyPjwvc3Bhbj48L2Rpdj4=
+
+
+--b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4--
+
