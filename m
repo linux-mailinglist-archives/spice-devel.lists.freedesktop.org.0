@@ -1,42 +1,61 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 902B970AAEE
-	for <lists+spice-devel@lfdr.de>; Sat, 20 May 2023 22:31:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 237E770AB11
+	for <lists+spice-devel@lfdr.de>; Sat, 20 May 2023 23:21:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3846410E1A2;
-	Sat, 20 May 2023 20:31:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A92AE10E070;
+	Sat, 20 May 2023 21:21:33 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
- [185.70.41.103])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 40C5210E1A2
- for <spice-devel@lists.freedesktop.org>; Sat, 20 May 2023 20:27:48 +0000 (UTC)
-Date: Sat, 20 May 2023 20:27:28 +0000
-Authentication-Results: mail-41103.protonmail.ch;
- dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com
- header.b="eTMTSWSH"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1684614459; x=1684873659;
- bh=nT1AzwDdAxzzkFYO4cAwf9ZLeNf7z9s7CzOppRBBexc=;
- h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=eTMTSWSHUbKxlZINURHwluLRS1ZCeLAwkg16JOEILqkcRYx/ba+g1DIZ1LWmECE9E
- /+v96Cg7OhMhe9myuwCdyjrdjUNOXkTPGvE8wr2KAg5Q8w//yYQCIfqZs2jpj/DO9e
- 4xhbOwZBlhLQUHrltN5/y/Ul011yXGcPidE9dRRiGMthxUb8RqJzcM5wt601OAZEQt
- Om9i7+kRpoqI6uHhvgSbf7LUBnWdgFMD2+mupRdymtx0yq0UwjTPRn8ZM7h2dTO8Zc
- OvKqbxdB1gsIKdAcB2ns6rKQJSgdnV4/gjayS2O07T/O4I9MFRvqaAqBTqhuWnvUMn
- Ga7yDh3KxNAAg==
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-From: J <schnrl@protonmail.com>
-Message-ID: <B6iK_fWf6k29gy_UxX4eCdTzgV8_uEuTAVi-mDEji_rn_MFAYNMoK1VJpnpGLnTMKrtxhl96Gp3JmVKygNqW3b1cwqREhiIWn89QEvTw7HM=@protonmail.com>
-Feedback-ID: 20396031:user:proton
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 20AA310E070
+ for <spice-devel@lists.freedesktop.org>; Sat, 20 May 2023 21:21:31 +0000 (UTC)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-397f10f861eso244062b6e.0
+ for <spice-devel@lists.freedesktop.org>; Sat, 20 May 2023 14:21:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1684617690; x=1687209690;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lmmrz3vYZ1tICioaEK5rhFAr90Q3MbapKbZFneiFRjg=;
+ b=BuQ5L7O0l88vdRW8vXVSBZOXyMcyVxPzy7lKCnViJqyklYDkFMdZH+03UEDhpdOse5
+ 6eY33IU4XJgbKnLYdo4TuhemrHFKHAscmeAwr3ayp59CQrMMPy6FdlN/FWF4FjiJERsg
+ QbM8fZNORD06Kx1y5tAhSH3cznhCMj7UuW3Q7OWO9ezGdcseTN4DjblF3m7zXtXXjz5z
+ kDfsqeuJ2qX2UchRidKSMPr1DYhFo9syQGCZLIlN8heZ7dOqYMyEG+uaAWbZxG45v73D
+ zeIuMxQpUPJjnDsRLDRAQCNArtICgWEhHH6VXrFbWlQC2KH+rObu5pAyHlZ0ZFKqtsXU
+ iuQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1684617690; x=1687209690;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lmmrz3vYZ1tICioaEK5rhFAr90Q3MbapKbZFneiFRjg=;
+ b=l/JXk8P3oFKni7L1+D1iz5LJdFSyrE02kAe2uOhrzHzitRDe7PlVt91BF8nIhbGwme
+ /ZGzcmaAgnHnyFglUA0abUIRDk4VYlqOi0BdoIvSX9KcsQHjUstZjt2gWO9bmNHCoC7F
+ HA0LQYDnPYVBMWLGDLtsTf229f3Ll5w/CsmojqAB5wpmkSD/0Sv/ZMWcbHlsFf1fzftQ
+ IRqZlDn5vUpp/xRrkYmkkOSuYTvuPlFJtglHju7rjVjIuALyl1Y9afkGG2NKggptFhbY
+ tV9sKkCDuXESQDd6hbsEN+Ovc1Wl0bM8sYCirg/B67GBmdbooA4EYlE5fa4hTi+tn+X4
+ K3rg==
+X-Gm-Message-State: AC+VfDyIkRYxI1kPubhFCnNfFf3mW+5K/3+cZSUypy7EBc8gtbMhTEfn
+ sj2iSgczJkrzfGgpRiVbfafVaDtc712ejitzlbY=
+X-Google-Smtp-Source: ACHHUZ6khB29b7pQrBsYcg38mK0xQ+on4JV14AJ5kdTsgymyoHfkDxFFsyGAOCb0taDGCRn4kYEJkkMeAONdyIKkLE8=
+X-Received: by 2002:aca:e043:0:b0:38c:1b9f:4dda with SMTP id
+ x64-20020acae043000000b0038c1b9f4ddamr4557544oig.16.1684617689808; Sat, 20
+ May 2023 14:21:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4"
-X-Mailman-Approved-At: Sat, 20 May 2023 20:31:12 +0000
-Subject: [Spice-devel] [Spice on QEMU] password-secret
+References: <B6iK_fWf6k29gy_UxX4eCdTzgV8_uEuTAVi-mDEji_rn_MFAYNMoK1VJpnpGLnTMKrtxhl96Gp3JmVKygNqW3b1cwqREhiIWn89QEvTw7HM=@protonmail.com>
+In-Reply-To: <B6iK_fWf6k29gy_UxX4eCdTzgV8_uEuTAVi-mDEji_rn_MFAYNMoK1VJpnpGLnTMKrtxhl96Gp3JmVKygNqW3b1cwqREhiIWn89QEvTw7HM=@protonmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Sat, 20 May 2023 22:21:19 +0100
+Message-ID: <CAHt6W4ey_9aMb7FK+MkyzBfLj2sAxTddud016014hbpQ4PbnGg@mail.gmail.com>
+To: J <schnrl@protonmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] [Spice on QEMU] password-secret
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,52 +67,30 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
+Il giorno sab 20 mag 2023 alle ore 21:31 J <schnrl@protonmail.com> ha scrit=
+to:
+>
+> Hi there,
+> I have got a question concerning the spice ticketing feature in QEMU virt=
+ual machines. The user manual only lists the option of passing the password=
+ directly with the "password=3D..." option. This seems to be insecure and q=
+emu gives me the warning "password is deprecated. use password-secret inste=
+ad". When I searched the man page for spice ticketing I got the following r=
+esult: "password-secret=3D<secret-id>: Set the ID of the secret object cont=
+aining the password you need to authenticate.". Now I wonder what this ID i=
+s. Where can I find it? And what do I need to do in order to create such a =
+secret password?
+> Cheers,
+> Johannes
 
---b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+Hi Johannes,
+  From the SPICE library nothing changed, the change is about Qemu
+command line options. See
+https://www.qemu.org/docs/master/system/secrets.html.
 
-SGkgdGhlcmUsCkkgaGF2ZSBnb3QgYSBxdWVzdGlvbiBjb25jZXJuaW5nIHRoZSBzcGljZSB0aWNr
-ZXRpbmcgZmVhdHVyZSBpbiBRRU1VIHZpcnR1YWwgbWFjaGluZXMuIFRoZSB1c2VyIG1hbnVhbCBv
-bmx5IGxpc3RzIHRoZSBvcHRpb24gb2YgcGFzc2luZyB0aGUgcGFzc3dvcmQgZGlyZWN0bHkgd2l0
-aCB0aGUgInBhc3N3b3JkPS4uLiIgb3B0aW9uLiBUaGlzIHNlZW1zIHRvIGJlIGluc2VjdXJlIGFu
-ZCBxZW11IGdpdmVzIG1lIHRoZSB3YXJuaW5nICJwYXNzd29yZCBpcyBkZXByZWNhdGVkLiB1c2Ug
-cGFzc3dvcmQtc2VjcmV0IGluc3RlYWQiLiBXaGVuIEkgc2VhcmNoZWQgdGhlIG1hbiBwYWdlIGZv
-ciBzcGljZSB0aWNrZXRpbmcgSSBnb3QgdGhlIGZvbGxvd2luZyByZXN1bHQ6ICJwYXNzd29yZC1z
-ZWNyZXQ9PHNlY3JldC1pZD46IFNldCB0aGUgSUQgb2YgdGhlIHNlY3JldCBvYmplY3QgY29udGFp
-bmluZyB0aGUgcGFzc3dvcmQgeW91IG5lZWQgdG8gYXV0aGVudGljYXRlLiIuIE5vdyBJIHdvbmRl
-ciB3aGF0IHRoaXMgSUQgaXMuIFdoZXJlIGNhbiBJIGZpbmQgaXQ/IEFuZCB3aGF0IGRvIEkgbmVl
-ZCB0byBkbyBpbiBvcmRlciB0byBjcmVhdGUgc3VjaCBhIHNlY3JldCBwYXNzd29yZD8KQ2hlZXJz
-LApKb2hhbm5lcw==
-
---b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
-
-PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0
-cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij5IaSB0aGVyZSw8L2Rpdj48ZGl2IHN0eWxlPSJmb250
-LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigw
-LCAwLCAwKTsiPkkgaGF2ZSBnb3QgYSBxdWVzdGlvbiBjb25jZXJuaW5nIHRoZSBzcGljZSB0aWNr
-ZXRpbmcgZmVhdHVyZSBpbiBRRU1VIHZpcnR1YWwgbWFjaGluZXMuIFRoZSB1c2VyIG1hbnVhbCBv
-bmx5IGxpc3RzIHRoZSBvcHRpb24gb2YgcGFzc2luZyB0aGUgcGFzc3dvcmQgZGlyZWN0bHkgd2l0
-aCB0aGUgInBhc3N3b3JkPS4uLiIgb3B0aW9uLiBUaGlzIHNlZW1zIHRvIGJlIGluc2VjdXJlIGFu
-ZCBxZW11IGdpdmVzIG1lIHRoZSB3YXJuaW5nICJwYXNzd29yZCBpcyBkZXByZWNhdGVkLiB1c2Ug
-cGFzc3dvcmQtc2VjcmV0IGluc3RlYWQiLiBXaGVuIEkgc2VhcmNoZWQgdGhlIG1hbiBwYWdlIGZv
-ciBzcGljZSB0aWNrZXRpbmcgSSBnb3QgdGhlIGZvbGxvd2luZyByZXN1bHQ6ICJwYXNzd29yZC1z
-ZWNyZXQ9Jmx0O3NlY3JldC1pZCZndDs6IDxzcGFuPlNldCB0aGUgSUQgb2YgdGhlIHNlY3JldCBv
-YmplY3QgY29udGFpbmluZyB0aGUgcGFzc3dvcmQ8L3NwYW4+PHNwYW4+IHlvdSBuZWVkIHRvIGF1
-dGhlbnRpY2F0ZS4iLiBOb3cgSSB3b25kZXIgd2hhdCB0aGlzIElEIGlzLiBXaGVyZSBjYW4gSSBm
-aW5kIGl0PyBBbmQgd2hhdCBkbyBJIG5lZWQgdG8gZG8gaW4gb3JkZXIgdG8gY3JlYXRlIHN1Y2gg
-YSBzZWNyZXQgcGFzc3dvcmQ/PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBB
-cmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+
-PHNwYW4+Q2hlZXJzLDwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXJpYWws
-IHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsiPjxzcGFu
-PkpvaGFubmVzPGJyPjwvc3Bhbj48L2Rpdj4=
-
-
---b1_tiBntzgfn4PXd0fl3DxjnVvVWTUjHLucd2xcOrW6MZ4--
-
+Regards,
+  Frediano
