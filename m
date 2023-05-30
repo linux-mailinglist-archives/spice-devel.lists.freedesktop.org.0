@@ -2,62 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 147C6714EAA
-	for <lists+spice-devel@lfdr.de>; Mon, 29 May 2023 18:47:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B34A71566D
+	for <lists+spice-devel@lfdr.de>; Tue, 30 May 2023 09:17:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 89F2410E2E2;
-	Mon, 29 May 2023 16:47:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ACA6910E34B;
+	Tue, 30 May 2023 07:17:29 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 781BE10E068
- for <spice-devel@lists.freedesktop.org>; Mon, 29 May 2023 16:47:29 +0000 (UTC)
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-39855d57240so2168429b6e.2
- for <spice-devel@lists.freedesktop.org>; Mon, 29 May 2023 09:47:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685378848; x=1687970848;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gO0B838Q2rx/5/Cb6LNHWjh1EWjI8/UEZf3dAOoZRBw=;
- b=aE3e+93mPfyyBUZlsHSM5hCcOsM8O+zHXWjl5FX07IwKh55DUNsX7vKA+uPTBKYSsB
- OWhqDl24WZVjdgInh74jnNnoEDWQ4o46xsDBE1CkwXjS9h5NCGa9kih2WmIRi09Nyt1w
- G73sb5oIrDlkfU8Juro535IpT5gW7G9uf+Uz5Cy/TmQsDknZE5ztHKzKH+o495e1k4o5
- hfbRXJJOb+mu3OvQFaqqOfVErJwm4MOda+Vh5iP7mAyrqkogrRfdC6ggspzWTB5nuOgz
- pvCVytcpICE8OrDtBWbF7ClODRTK/4+X24i+nS0VHStgeN25T4w11lrWGe0Lkd6ciijW
- 6JKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685378848; x=1687970848;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gO0B838Q2rx/5/Cb6LNHWjh1EWjI8/UEZf3dAOoZRBw=;
- b=js6Ez5jRdRUJun1HhGhgSjmKagqCg6LQmR+O48PvNVzh8duixFwlLErCBm8FuHXsgn
- 7Ql8EEZAeZQDBtmjaCREFq425xRqZuPa34MZEfmpQrJHj4VscD2Iei/1Q7wQlCIpITEe
- +Sv3piAE1u9v+j5Wcvt1ZOR7MWH5BQ3ixd8g2za2MFJcoILdwZAJqHq+FjZkFIgl2Cjg
- XUSpD0v1zDTtpBiycg/LdfHXpRDek4hyGflCA6bFJ3TUmsJFXfrz60ZDHSPcbyeEpInc
- knBdVclFudK1nCbf3chzUC9D5S4CS8EI8kyjsf03S27GDFrG3p27BbD8FKR1aFNqVXxv
- KIOQ==
-X-Gm-Message-State: AC+VfDzWx1yG4DY9W2hAqBJeFq2pPazBkUGDncD7TMGJaG13hz93tyTm
- RTa7vYnAnbcfEgNQ1QPlVmhV+xqC+NT6dSgJj6jhOqGdxc4=
-X-Google-Smtp-Source: ACHHUZ4WqzOdrxhVHdKkQlGgXfyoJQbK+7HMMigDIVB3XcIhLHpPdIqJ/yiRj4AZSxDoXsa216VcDeP1W18zGfpR9vo=
-X-Received: by 2002:a05:6808:1526:b0:398:2b33:b666 with SMTP id
- u38-20020a056808152600b003982b33b666mr6619282oiw.22.1685378848297; Mon, 29
- May 2023 09:47:28 -0700 (PDT)
-MIME-Version: 1.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9B0D010E34B
+ for <spice-devel@lists.freedesktop.org>; Tue, 30 May 2023 07:17:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1685431047;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Ytr7YN0VgwewRD40XtfIR4C33gToeloURhhfJLakzuo=;
+ b=W/Nj6ReJX8ycF5G/liTvOBmdHQlmOcXhG4v3jErZE/VIr042rsyvj17uz83xt6ypq/Ar+T
+ NxnkLfHlvSbWHsVsvbwMY9BBOy40wolm9663L1qMB+raVzIrOF4Rdk1nzWGZq3a7RCjkin
+ ReQQMK+Wi0l92rI51j8XddOrmDtAYkI=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-653-ptKs2RNlPXKXdcZOL93kYA-1; Tue, 30 May 2023 03:17:25 -0400
+X-MC-Unique: ptKs2RNlPXKXdcZOL93kYA-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CE53F8032E4;
+ Tue, 30 May 2023 07:17:24 +0000 (UTC)
+Received: from localhost (unknown [10.45.226.253])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 357C6492B00;
+ Tue, 30 May 2023 07:17:23 +0000 (UTC)
+Date: Tue, 30 May 2023 09:17:22 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Message-ID: <itf3io2kwurtz2iz7tfssfgvqblzfwr7ajsye6wje4uoxywqdz@vmszqtnibd47>
 References: <tencent_D5878955D45FD159A97AED741F2635A8D50A@qq.com>
  <CAHt6W4cTwoFMvkVYs-VmJp05FXoOTQ=HZM7WvxgN9ks1PfE2WQ@mail.gmail.com>
  <CAHt6W4d1nF_ceWGqVOR-Nmt+kS44jqJaHGTggdUWqQbm+_WqAg@mail.gmail.com>
  <cw6btodzv2qdseyupheevxmspytiatv2d2mzyfjj3asnysjnn4@zl3bnes6pclt>
  <CAHt6W4efRjKatr5TaXareKt16N7Swiufcjdpd88Cx8CmohkEuw@mail.gmail.com>
  <dbaospexta5gz2i2rvvl6q62bc5nz4tntjyv6quwoesv4dcdjq@a7itrvwlcnsu>
-In-Reply-To: <dbaospexta5gz2i2rvvl6q62bc5nz4tntjyv6quwoesv4dcdjq@a7itrvwlcnsu>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Mon, 29 May 2023 17:47:17 +0100
-Message-ID: <CAHt6W4cOWGs1YzqciY-qMYY1MCun5c+9Z56_PsTnXceBzhj3Ag@mail.gmail.com>
-To: Victor Toso <victortoso@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
+ <CAHt6W4cOWGs1YzqciY-qMYY1MCun5c+9Z56_PsTnXceBzhj3Ag@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="xw2o4ly25bx6xfmo"
+Content-Disposition: inline
+In-Reply-To: <CAHt6W4cOWGs1YzqciY-qMYY1MCun5c+9Z56_PsTnXceBzhj3Ag@mail.gmail.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
 Subject: Re: [Spice-devel] About the website download error
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -75,111 +70,59 @@ Cc: 2656017036 <2656017036@qq.com>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno lun 29 mag 2023 alle ore 17:05 Victor Toso
-<victortoso@redhat.com> ha scritto:
->
-> Hi,
->
-> On Mon, May 29, 2023 at 04:40:38PM +0100, Frediano Ziglio wrote:
-> > Il giorno lun 29 mag 2023 alle ore 14:13 Victor Toso
-> > <victortoso@redhat.com> ha scritto:
-> > >
-> > > Hi,
-> > >
-> > > On Sun, May 28, 2023 at 08:15:43AM +0100, Frediano Ziglio wrote:
-> > > > Il giorno dom 28 mag 2023 alle ore 07:38 Frediano Ziglio
-> > > > <freddy77@gmail.com> ha scritto:
-> > > > >
-> > > > > Hi,
-> > > > >    as a workaround click on the link with the right mouse button and click on download.
-> > > > >
-> > > > > It's just a server configuration that sends back the file as something to display instead of something to save.
-> > > > >
-> > > > > But strangely it worked correctly for me. Which browser and version are you using?
-> > > > >
-> > > > > Regards,
-> > > > >    Frediano
-> > > > >
-> > > > >
-> > > >
-> > > > This is the results trying to download the file
-> > > >
-> > > > HTTP/1.1 200 OK
-> > > > Date: Sun, 28 May 2023 07:08:45 GMT
-> > > > Server: Apache
-> > > > X-Content-Type-Options: nosniff
-> > > > X-Frame-Options: SAMEORIGIN
-> > > > Referrer-Policy: same-origin
-> > > > Permissions-Policy: camera=(), fullscreen=(), geolocation=(),
-> > > > microphone=(), payment=(), usb=()
-> > > > Strict-Transport-Security: max-age=2592000; includeSubDomains
-> > > > Last-Modified: Wed, 03 Aug 2022 09:06:09 GMT
-> > > > ETag: "c7c200-5e5528b37f99a"
-> > > > Accept-Ranges: bytes
-> > > > Content-Length: 13091328
-> > > > Keep-Alive: timeout=5, max=100
-> > > > Connection: Keep-Alive
-> > > >
-> > > > It seems the mime type is missing. Now if we want to fix that we need
-> > > > to change mime type configuration on the server. I found this link
-> > > > https://mediatemple.net/community/products/dv/204403964/mime-types
-> > >
-> > > It works here as well. It is not like the browser should try to
-> > > open a content as text if it doesn't know what it is.  Another
-> > > alternative is to use download attribute.
-> > >
-> > >     https://www.w3schools.com/tags/att_a_download.asp
-> > >
-> > > Cheers,
-> > > Victor
+
+--xw2o4ly25bx6xfmo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Mon, May 29, 2023 at 05:47:17PM +0100, Frediano Ziglio wrote:
+> > > I would personally add configuration to the server, MSI files are
+> > > probably used by Windows users.
 > >
-> > Hi,
-> >   I got it reproduced. I should have tried a Windows browser (Edge,
-> > Windows 10), I should have known that on Windows resource extensions
-> > are taken much more into consideration.
-> > I tried with https://releases.pagure.org/virt-viewer/virt-viewer-x86-11.0-1.0.msi
-> > which is downloaded correctly and the reply is (wget -v -nv -d XXX)
-> >
-> > HTTP/1.1 200 OK
-> > Date: Mon, 29 May 2023 15:33:19 GMT
-> > Server: Apache/2.4.37 (Red Hat Enterprise Linux) OpenSSL/1.1.1k
-> > mod_wsgi/4.6.4 Python/3.6
-> > X-Xss-Protection: 1; mode=block
-> > X-Content-Type-Options: nosniff
-> > Referrer-Policy: same-origin
-> > X-Frame-Options: ALLOW-FROM https://pagure.io/
-> > Upgrade: h2,h2c
-> > Connection: Upgrade, Keep-Alive
-> > Last-Modified: Tue, 23 Nov 2021 16:05:18 GMT
-> > ETag: "50e1a00-5d176e85cad62"
-> > Accept-Ranges: bytes
-> > Content-Length: 84810240
-> > Keep-Alive: timeout=5, max=100
-> > Content-Type: application/octet-stream
-> >
-> > I would personally add configuration to the server, MSI files are
-> > probably used by Windows users.
->
-> Could you try adding the download attribute (by changing the html
-> first and then trying to download the file), just to see if that
-> as a workaround works?
->
+> > Could you try adding the download attribute (by changing the html
+> > first and then trying to download the file), just to see if that
+> > as a workaround works?
+>=20
+> I could try to reproduce the issue using another server but our
+> HTML pages are generated so we would need to change the
+> generator, so we will also need to change the system. It would
+> take me some time, I don't use Apache every day. Do you think
+> it's worth doing?
 
-I could try to reproduce the issue using another server but our HTML
-pages are generated so we would need to change the generator, so we
-will also need to change the system. It would take me some time, I
-don't use Apache every day. Do you think it's worth doing?
+What I meant was to edit the html in the browser (e.g: both
+firefox and chrome support right click > inspect plus edit)
 
-> This project is the one running the infrastructure:
->     https://gitlab.com/osci/community-cage-infra-ansible
->
-> I only have sftp access to folder related to SPICE. I'll follow
-> up with someone to see if we can update the mime-types.
->
+If that works out, we might not need to touch the server, only
+the generation of the HTML by adding the download attribute.
 
-I saw the other email, thanks
+By all means, we can wait to see if the mime.types change can be
+done first.
 
-> Cheers,
-> Victor
+Cheers,
+Victor
 
-Frediano
+--xw2o4ly25bx6xfmo
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmR1owIACgkQl9kSPeN6
+SE+ADA/6A4gmgPZ87g0ZE4D622VvNXVTs88hDKEmVja+3ZlvolQ5OoGcppHMa0n9
+KHUQl4n0WazPYOQoGyFn7nCKl0VfQnXDP8VR5v3/6eymEbzveaaCVbhgJPIJskl6
+2oRnRMatXu5+7wE9vZ4duPM1eBC3+lgLfndHYxGpRiypU4g81cDsi8tEuNe4RxiJ
+7mc+o4CoDPfgIGKZzsBACLoIH91Gh3SjvygM4ceXFGsE2iM6sNb/bIuDzb9QJXGS
+WHKO30zVUWkflrtSKxPi0C8tduxdc3ySEOxoXtNmhzLTIPdnn9myFNLdtsefrmYv
+yn1sMcUb334lhpx0QaffYEJgG8WFAo/cvgCothK1M275Vz3ShtmRzuUo/f3GVGGy
+aPLM85zX3zJYG/0rlQ5SyBDCEI9DDixmF3JzntuJnbeVmVMJ9bZApByV3la2t9SF
+rUDD/uLyH6geFTs1fB0N53jLUiKEpyDOpKHN8DR4ThG9unoOAkhEcc1K62HnQ45+
+IuFNx7aY7wAn9lP3lTthpHtHio6KcC4I+pHbskkt+ORBPzGFJU376jS9ujRwM0Nv
+gMDv4SDJgfIhPx0iSn1ecDEFqC5dMMpm5vpHNINIEB4WfqYwDxC85cNfxhPRho2i
+9Ni08cQFcVovGHvvm+RwfaycVZVMttHFvYCOGWAJcWRc7S9T7J4=
+=tdZz
+-----END PGP SIGNATURE-----
+
+--xw2o4ly25bx6xfmo--
+
