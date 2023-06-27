@@ -1,61 +1,42 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C9FF731999
-	for <lists+spice-devel@lfdr.de>; Thu, 15 Jun 2023 15:11:02 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CB5B73F4B7
+	for <lists+spice-devel@lfdr.de>; Tue, 27 Jun 2023 08:40:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C8E2D10E4E3;
-	Thu, 15 Jun 2023 13:10:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7155910E179;
+	Tue, 27 Jun 2023 06:40:51 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A78510E4EC
- for <spice-devel@lists.freedesktop.org>; Thu, 15 Jun 2023 13:10:57 +0000 (UTC)
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-6b2e9c015d3so488259a34.1
- for <spice-devel@lists.freedesktop.org>; Thu, 15 Jun 2023 06:10:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1686834656; x=1689426656;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NrmYCqywtlsmfimd7NRFbHQaHSk7+h6rDf+wTG7HfqQ=;
- b=hoiSIO/NBEeIBh3RywBHUv0LDl8DluMeiDzNKMQbJnzzZJ/ju9PWQA0kx9BFJCMedi
- ne572dQMUYRoaUZl/xgmCHT4syeZwa1OUthcYb7/JxFrbS7e9XW2L9iw8hFnv6qyBcJb
- 5qTCX/uzjDVn6P/tJ981bDmt0V1S/OqKc0+d+/Vj/TbeoslwBpixMFbKK5krwnrgQhu/
- cHMw39fBoez86O6wpX4oCrBO8jwaOzl+53Qs6BFZ6vABvcHmy18rUPH5wDJeBl26nQ+p
- mp8HmajrDsyovwf0JwpKkRew+YAqO7xVjLqs+8qWjtnqE8wywK2022dEzvjwgQWa5FdR
- Dc/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686834656; x=1689426656;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NrmYCqywtlsmfimd7NRFbHQaHSk7+h6rDf+wTG7HfqQ=;
- b=AW7LonKhXyBEj67uhr4ZjUW6qORdtcWylQby7PrdhME5MpMMNU4yn9UZsvFEqnQmOx
- x9vKGFeZH/TVPPxN6otHwQs1ZVuu8s4dW09HgYDCJm9U7d8nbuosVUjF/RsyyyQEMO35
- vKJCh4TvUKg9T2kTXYGOqewzzPFlTtOaWeZzwWRaIhCXi0zT077p12UuIFLArdo2BBvq
- UK3N+tcwcBwaJm8BPZRjMUegiiyFa0ViUsQg0xh8bBz1KiyQGUjz8SdQr9ZoSteiO+0t
- 57upbKEVaBsL5pDnR2tz/1XHuLGVYdxDqFn+H/PKdMybPS95x+o9/xJsEHp3wQvy5oCI
- t6CQ==
-X-Gm-Message-State: AC+VfDzsbXcwxban3vkzl9kFmizN29vdPflaGOPsQjQXCZtm2PaBjcLV
- MUMI7vsfyW9YdUM51V/9zzTmbKtj3xgNC3B5pPQmOQyY81M=
-X-Google-Smtp-Source: ACHHUZ7n7xsDE65N2wnu8zIypua6yjguIiVjr604am/W3XzkzJ8UK9sXSXC/pd77HyPFIheta61ee3RB3a02ampvhGk=
-X-Received: by 2002:a05:6830:4519:b0:6b2:960f:b33a with SMTP id
- i25-20020a056830451900b006b2960fb33amr2270411otv.15.1686834656231; Thu, 15
- Jun 2023 06:10:56 -0700 (PDT)
+Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 07F3110E13B;
+ Tue, 27 Jun 2023 03:58:47 +0000 (UTC)
+Received: from vertex.localdomain (pool-173-49-113-140.phlapa.fios.verizon.net
+ [173.49.113.140]) (Authenticated sender: zack)
+ by letterbox.kde.org (Postfix) with ESMTPSA id 2DFDD32424C;
+ Tue, 27 Jun 2023 04:58:43 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
+ t=1687838325; bh=frHI7wUIaBU/O5fxQ6DxdZFvLGqpm/aliDC6cgzf+PM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=UPSE1Kzs9h6kMoLp9d84qhyDab1BWbMSGC5gpeRRka6cD9NpgJYeUvHUGgCY2wXBd
+ GP+zvZfEtbEwYelOd1xFqtNjnPlr5Do8reQsOtbvsH09KeU2zuhxjx4ZpKHTdg2w9k
+ YLvA3is7dCRLToo8IGHkaLnGgSe+c7QwNpXCYsujji4UNpzIfnpRF7sOM7REqlymaL
+ ZZjdYSLj9R7UdFHhtLUM1zqwPd1dZLi8/vSHWUwJRJ/vezVUvlGQ/UWpzOPzAncBGM
+ TdHpf/mwNBpW35WHjLjA5rRYRBCSZivpxYhS4W8vM25Gsf/Q0XkMG0tav94y7+08Um
+ K8r4jEOE4gVgA==
+From: Zack Rusin <zack@kde.org>
+To: dri-devel@lists.freedesktop.org
+Date: Mon, 26 Jun 2023 23:58:32 -0400
+Message-Id: <20230627035839.496399-2-zack@kde.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230627035839.496399-1-zack@kde.org>
+References: <20230627035839.496399-1-zack@kde.org>
 MIME-Version: 1.0
-References: <D2D390CA-8127-49DE-97D8-73496408EEA6@zenmen.com>
-In-Reply-To: <D2D390CA-8127-49DE-97D8-73496408EEA6@zenmen.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 15 Jun 2023 14:10:45 +0100
-Message-ID: <CAHt6W4f6+9Jc04fH2GeL8=v+ndRykuhyaT_1WWahA_VpY8LT4w@mail.gmail.com>
-To: =?UTF-8?B?6IKW5LmD5YWoKHhpYW9ucSk=?= <xiaonq@zenmen.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] report bugs
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 27 Jun 2023 06:40:50 +0000
+Subject: [Spice-devel] [PATCH v3 1/8] drm: Disable the cursor plane on
+ atomic contexts with virtualized drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,39 +48,184 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Reply-To: Zack Rusin <zackr@vmware.com>
+Cc: Maxime Ripard <mripard@kernel.org>, spice-devel@lists.freedesktop.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, Hans de Goede <hdegoede@redhat.com>,
+ David Airlie <airlied@linux.ie>, contact@emersion.fr,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, javierm@redhat.com,
+ banackm@vmware.com, Gurchetan Singh <gurchetansingh@chromium.org>,
+ krastevm@vmware.com, ppaalanen@gmail.com, Zack Rusin <zackr@vmware.com>,
+ daniel@ffwll.ch, Dave Airlie <airlied@redhat.com>, stable@vger.kernel.org,
+ iforbes@vmware.com, virtualization@lists.linux-foundation.org,
+ Chia-I Wu <olvaffe@gmail.com>, mombasawalam@vmware.com,
+ Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno gio 15 giu 2023 alle ore 10:37 =E8=82=96=E4=B9=83=E5=85=A8(xiaonq=
-)
-<xiaonq@zenmen.com> ha scritto:
->
-> Hello:
->
->        I compile spice-gtk under MocOs, and when I run spicy.
->
->       I right-click copy in the guest machine, and the spicy program cras=
-hes and exits.
->
-> Here's what happens when spicy crashes=E3=80=82
->
-> =E2=80=9CGdk:ERROR:../gdk/quartz/gdkeventloop-quartz.c:585:select_thread_=
-collect_poll: assertion failed: (ufds[i].fd =3D=3D current_pollfds[i].fd)
->
-> Bail out! Gdk:ERROR:../gdk/quartz/gdkeventloop-quartz.c:585:select_thread=
-_collect_poll: assertion failed: (ufds[i].fd =3D=3D current_pollfds[i].fd)=
-=E2=80=9D
->
->
->
-> If you receive a replyPlease reply if you receive.
->
->
->
-Hi,
-   it seems a know issue, see https://gitlab.gnome.org/GNOME/gtk/-/issues/2=
-961.
+From: Zack Rusin <zackr@vmware.com>
 
-Regards,
-   Frediano
+Cursor planes on virtualized drivers have special meaning and require
+that the clients handle them in specific ways, e.g. the cursor plane
+should react to the mouse movement the way a mouse cursor would be
+expected to and the client is required to set hotspot properties on it
+in order for the mouse events to be routed correctly.
+
+This breaks the contract as specified by the "universal planes". Fix it
+by disabling the cursor planes on virtualized drivers while adding
+a foundation on top of which it's possible to special case mouse cursor
+planes for clients that want it.
+
+Disabling the cursor planes makes some kms compositors which were broken,
+e.g. Weston, fallback to software cursor which works fine or at least
+better than currently while having no effect on others, e.g. gnome-shell
+or kwin, which put virtualized drivers on a deny-list when running in
+atomic context to make them fallback to legacy kms and avoid this issue.
+
+Signed-off-by: Zack Rusin <zackr@vmware.com>
+Fixes: 681e7ec73044 ("drm: Allow userspace to ask for universal plane list (v2)")
+Cc: <stable@vger.kernel.org> # v5.4+
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Cc: Gurchetan Singh <gurchetansingh@chromium.org>
+Cc: Chia-I Wu <olvaffe@gmail.com>
+Cc: dri-devel@lists.freedesktop.org
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+---
+ drivers/gpu/drm/drm_plane.c          | 13 +++++++++++++
+ drivers/gpu/drm/qxl/qxl_drv.c        |  2 +-
+ drivers/gpu/drm/vboxvideo/vbox_drv.c |  2 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.c |  2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c  |  2 +-
+ include/drm/drm_drv.h                |  9 +++++++++
+ include/drm/drm_file.h               | 12 ++++++++++++
+ 7 files changed, 38 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
+index 24e7998d1731..a4a39f4834e2 100644
+--- a/drivers/gpu/drm/drm_plane.c
++++ b/drivers/gpu/drm/drm_plane.c
+@@ -678,6 +678,19 @@ int drm_mode_getplane_res(struct drm_device *dev, void *data,
+ 		    !file_priv->universal_planes)
+ 			continue;
+ 
++		/*
++		 * If we're running on a virtualized driver then,
++		 * unless userspace advertizes support for the
++		 * virtualized cursor plane, disable cursor planes
++		 * because they'll be broken due to missing cursor
++		 * hotspot info.
++		 */
++		if (plane->type == DRM_PLANE_TYPE_CURSOR &&
++		    drm_core_check_feature(dev, DRIVER_CURSOR_HOTSPOT)	&&
++		    file_priv->atomic &&
++		    !file_priv->supports_virtualized_cursor_plane)
++			continue;
++
+ 		if (drm_lease_held(file_priv, plane->base.id)) {
+ 			if (count < plane_resp->count_planes &&
+ 			    put_user(plane->base.id, plane_ptr + count))
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index b30ede1cf62d..91930e84a9cd 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -283,7 +283,7 @@ static const struct drm_ioctl_desc qxl_ioctls[] = {
+ };
+ 
+ static struct drm_driver qxl_driver = {
+-	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
++	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC | DRIVER_CURSOR_HOTSPOT,
+ 
+ 	.dumb_create = qxl_mode_dumb_create,
+ 	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
+diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+index 4fee15c97c34..8ecd0863fad7 100644
+--- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
++++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+@@ -172,7 +172,7 @@ DEFINE_DRM_GEM_FOPS(vbox_fops);
+ 
+ static const struct drm_driver driver = {
+ 	.driver_features =
+-	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
++	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC | DRIVER_CURSOR_HOTSPOT,
+ 
+ 	.fops = &vbox_fops,
+ 	.name = DRIVER_NAME,
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+index a7ec5a3770da..8f4bb8a4e952 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.c
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
+@@ -176,7 +176,7 @@ static const struct drm_driver driver = {
+ 	 * If KMS is disabled DRIVER_MODESET and DRIVER_ATOMIC are masked
+ 	 * out via drm_device::driver_features:
+ 	 */
+-	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC,
++	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_CURSOR_HOTSPOT,
+ 	.open = virtio_gpu_driver_open,
+ 	.postclose = virtio_gpu_driver_postclose,
+ 
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+index 8b24ecf60e3e..d3e308fdfd5b 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+@@ -1611,7 +1611,7 @@ static const struct file_operations vmwgfx_driver_fops = {
+ 
+ static const struct drm_driver driver = {
+ 	.driver_features =
+-	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM,
++	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM | DRIVER_CURSOR_HOTSPOT,
+ 	.ioctls = vmw_ioctls,
+ 	.num_ioctls = ARRAY_SIZE(vmw_ioctls),
+ 	.master_set = vmw_master_set,
+diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
+index b77f2c7275b7..8303016665dd 100644
+--- a/include/drm/drm_drv.h
++++ b/include/drm/drm_drv.h
+@@ -104,6 +104,15 @@ enum drm_driver_feature {
+ 	 * acceleration should be handled by two drivers that are connected using auxiliary bus.
+ 	 */
+ 	DRIVER_COMPUTE_ACCEL            = BIT(7),
++	/**
++	 * @DRIVER_CURSOR_HOTSPOT:
++	 *
++	 * Driver supports and requires cursor hotspot information in the
++	 * cursor plane (e.g. cursor plane has to actually track the mouse
++	 * cursor and the clients are required to set hotspot in order for
++	 * the cursor planes to work correctly).
++	 */
++	DRIVER_CURSOR_HOTSPOT           = BIT(8),
+ 
+ 	/* IMPORTANT: Below are all the legacy flags, add new ones above. */
+ 
+diff --git a/include/drm/drm_file.h b/include/drm/drm_file.h
+index 966912053cb0..91cf7f452f86 100644
+--- a/include/drm/drm_file.h
++++ b/include/drm/drm_file.h
+@@ -228,6 +228,18 @@ struct drm_file {
+ 	 */
+ 	bool is_master;
+ 
++	/**
++	 * @supports_virtualized_cursor_plane:
++	 *
++	 * This client is capable of handling the cursor plane with the
++	 * restrictions imposed on it by the virtualized drivers.
++	 *
++	 * This implies that the cursor plane has to behave like a cursor
++	 * i.e. track cursor movement. It also requires setting of the
++	 * hotspot properties by the client on the cursor plane.
++	 */
++	bool supports_virtualized_cursor_plane;
++
+ 	/**
+ 	 * @master:
+ 	 *
+-- 
+2.39.2
+
