@@ -1,66 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC86174C17E
-	for <lists+spice-devel@lfdr.de>; Sun,  9 Jul 2023 09:51:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CE75874CF74
+	for <lists+spice-devel@lfdr.de>; Mon, 10 Jul 2023 10:07:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5626810E087;
-	Sun,  9 Jul 2023 07:51:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6D43710E21A;
+	Mon, 10 Jul 2023 08:07:54 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 140534 seconds by postgrey-1.36 at gabe;
- Sun, 09 Jul 2023 00:45:20 UTC
-Received: from out203-205-221-202.mail.qq.com (out203-205-221-202.mail.qq.com
- [203.205.221.202])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 024EB10E094
- for <spice-devel@lists.freedesktop.org>; Sun,  9 Jul 2023 00:45:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1688863516; bh=aBFGR9JHt1mOwmkuLcjI2RDgDgwCHtL344WJO84Ual8=;
- h=In-Reply-To:References:From:To:Cc:Subject:Date;
- b=mq8ckCeTlv/DSw39TLAG39tPwRwo7Wma4vxV75896vkIrckKOJ0MiYgScHRwmZCXj
- Q9p3s6vzObYwXXoL7KHZGUUbBtVGxfCPw+l2cuYn9UB4Sv+UHFvtylgP7rlY9Esi6i
- I3YQjLbhS+XfwAVCXJasHojgt790Z08xBH8fhgeg=
-X-QQ-FEAT: oHWrrGTW1dCni6VLWI7Xi3lwP5c1dnPf
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
-X-QQ-XMAILINFO: NNy5VkfPTUBBs2kYBN1xMQqvqc4qjuR+/tO1BTkg/auxkTjjUVNLkbdZadWIAv
- 1iAdPaiPT9WycFj99N058oLwFDnjQRThyQjGYqtS+YFHZM9Reo+D3soibDg3u4PDjsm5paVgq2qir
- NpZ2R5AVvJclSTGBX7r4xAYEH2HHFYiGAFjr/4H/lp3el77G1sAB6twMnazMuiHPhxFeNo1nybDDA
- mqep0E8yB+h8IKnF0vS85Q5lPsM7OaB5w2mgMxrDYlKLAlNHoxnH/VHfAp/FgZDa7WrXIFsCCPqEW
- nTbFt43o4+jD5ZwHqFAV+PhiethBcN3kusfFcFhh0a6UAaTxQas20kAUbEtNDYXKghyZFYCHUPDPs
- QXZJq8L3WcIZSpbP0YwVZBq/j8Ia9qwDqKd7b9Yb2l4mwX21D9bJztCyfVONlQuJTrzvTUGvbRuec
- 6ZGVjLjHoJrsLsnyfII07NmdWbSZTkRCo7GMvoV3TYuJSvuu72Hxv+I2LC44x/jsEtZrjj7C965bR
- xNHpl7cCzwGJzqihryNOdAstlUkI3d6Iq/vEN16e1QJ+imOqM3bEWw7wLncDjE4Ul2sMkmP0gHrs2
- NniZw/5Pg3m1ZuQZQOTA2loInLtJujvRTPc8mzqOF8/GPWZm9qOjUv+XrTIpigQ24Z+H9EypMaVVe
- QbLW9+8t1wp8R3bT33zbgiRX8BPsKvb79S88/WzRccImZX6g/7Jz/rTI2y65wPEELzoQPE2K9KM3U
- Hda6zjwlUBWSiP8wwrLS+9btfX+2LYoxlwgs28yoPLogfNJQzjF8zHdXDluK1rtAIMutbWnvxFFKo
- 3gNcAdkHC3oEXtO/u3D2MXn2s80In/5C0bFWUGOK+twBKDOXOQZzfLETf6QIk7bRsZWqO9qUxn264
- eadpdb35fELS9lijyINLOVlDJPFOK6PPMSY2F8c1PMANLwbyM/uy37MdgsFuv4N+FtXg/WS/O+V54
- Z/qggQFg==
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 210.30.178.144
-In-Reply-To: <CAHt6W4esuZwZ6o+CdT2_jo2q+W3P38vrp0ooGA3gY3UUhNkORw@mail.gmail.com>
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D7CDB10E21A
+ for <spice-devel@lists.freedesktop.org>; Mon, 10 Jul 2023 08:07:52 +0000 (UTC)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5658573b1faso2544997eaf.1
+ for <spice-devel@lists.freedesktop.org>; Mon, 10 Jul 2023 01:07:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1688976471; x=1691568471;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s/GA1ZN2QvoNyqTaddiD+n7+bZ6YOXATkq2KYy66wyQ=;
+ b=NI2ViCZ+kJV0rhPjMMuu+UpnwCFhIEyFX+lNPcRjqIC+sC2RanqhQR2m59TVfNS46w
+ CPkw+PVGpIFSJZ6DBzo34bulZjom+EqNvnMYefcvVv3MVcU6Pvh/YBVZ7g1SKetGaijZ
+ LueMUxdDj9c9BGQgQk3hy8MEBNfqgvmqtuF6l+nD2K/yjr4QBf3f2LFz7+GBgkHgXP3o
+ KoDjhgaLRIAje5KJXDrYltR9NH1onru6q4Pwls3/m/uu4fKSqMCxWpcpoMa0R1aY3ZJT
+ AK220Y6YBSGMETqv7r64/VgoF4x1EN6tbgBFuZ4GiRZfLToWdxos335GvXagMjC1VsMq
+ RgqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1688976471; x=1691568471;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=s/GA1ZN2QvoNyqTaddiD+n7+bZ6YOXATkq2KYy66wyQ=;
+ b=TywF1EKfoBLr8+aAYt46436AZTTKRuWbl/xbztbH4Ru656kKj3SJBX+Augm2WrYMsu
+ FC/0tF+8QAUr9qiNQGzt2/3F8PM1xe03uehjV6j7du4aPQlyXD0IskfKZnGbGHxr80oG
+ pxt2Gju6JJONfPGrIhbLFvg7iXD2pbcXhYw1mPYBc3r42gqxlWiHX1x1aVacEFuYkI45
+ X+4YQixGgYoR1bItbE7ec1zDNX+DeuD/c8dgAxzbLpfMQ6fV1wMtpSxrDt4zVNhJatDQ
+ 7L/llPiewHB5rEWl47KlOYSBi1y/NiK31yMck4arWTERQJvlpQg4+rfZstVm7YIEdk9b
+ RLBw==
+X-Gm-Message-State: ABy/qLZbEqp3r8lgaQr5zLBZz7UMhxY5/L2Ff5Sk2Y7Xq/DKDX7RkvRw
+ 7v2WG47hboSKXkfjz7Ztu95LX9Yx6gEd8qnFIN8=
+X-Google-Smtp-Source: APBJJlH94vEokV3ZskKyGEeo/Ey2Nro/qn3Z1fmj7Ll+q7yheh6dwEl/+19wiSWXVFHsyWY9gQcUwuaUIABKdMM5mDU=
+X-Received: by 2002:a4a:d649:0:b0:558:a4cd:8813 with SMTP id
+ y9-20020a4ad649000000b00558a4cd8813mr7601603oos.9.1688976471480; Mon, 10 Jul
+ 2023 01:07:51 -0700 (PDT)
+MIME-Version: 1.0
 References: <tencent_B6679654B7F9B858ACDD19AF01982938DB0A@qq.com>
  <CAHt6W4esuZwZ6o+CdT2_jo2q+W3P38vrp0ooGA3gY3UUhNkORw@mail.gmail.com>
-X-QQ-STYLE: 
-X-QQ-mid: webmail280t1688863516t2385521
-From: "=?gb18030?B?yMvX2rXAytc=?=" <928003896@qq.com>
-To: "=?gb18030?B?RnJlZGlhbm8gWmlnbGlv?=" <freddy77@gmail.com>
-Mime-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="----=_NextPart_64AA031C_11AEEA68_2ABA927E"
-Content-Transfer-Encoding: 8Bit
-Date: Sun, 9 Jul 2023 08:45:16 +0800
-X-Priority: 3
-Message-ID: <tencent_0D2D92EE12D6C0CDFE9C9D32A3AABB7D5809@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-X-Mailman-Approved-At: Sun, 09 Jul 2023 07:51:39 +0000
-Subject: [Spice-devel] =?gb18030?b?u9i4tKO6ICBIb3cgZG9lcyBTUElDRSBkaXNw?=
- =?gb18030?q?lay_the_desktop_data_processed_by_Nvidia_vGPU=3F?=
+ <tencent_0D2D92EE12D6C0CDFE9C9D32A3AABB7D5809@qq.com>
+In-Reply-To: <tencent_0D2D92EE12D6C0CDFE9C9D32A3AABB7D5809@qq.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Mon, 10 Jul 2023 09:07:40 +0100
+Message-ID: <CAHt6W4f6ND+RN6rKTs5JZuERgi1RCK2gz2UTf-Cts2fQs+hn3A@mail.gmail.com>
+To: =?UTF-8?B?5Lq65a6X6YGT6aaW?= <928003896@qq.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] How does SPICE display the desktop data processed
+ by Nvidia vGPU?
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,146 +70,47 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?gb18030?B?c3BpY2UtZGV2ZWw=?= <spice-devel@lists.freedesktop.org>
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
+Il giorno dom 9 lug 2023 alle ore 01:45 =E4=BA=BA=E5=AE=97=E9=81=93=E9=A6=
+=96 <928003896@qq.com> ha scritto:
+>
+> HI,
+> Thank you for your reply .
+> If I use SPICE - Streaming Agent, how do I transfer the captured guest de=
+sktop image to the client through SPICE sever's display channel? Can my mou=
+se clicks or keyboard input from the client side to the guest side operate =
+normally through the SPICE - Streaming Agent?
 
-------=_NextPart_64AA031C_11AEEA68_2ABA927E
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+The streaming agent is responsible to carry video information from
+guest to SPICE server which will then relay them to the clients.
+Client and mouse will continue to work (they use separate SPICE
+channels). The protocol between the streaming agent and the server is
+detailed in https://gitlab.freedesktop.org/spice/spice-protocol/-/blob/mast=
+er/spice/stream-device.h.
+You can also look at the streaming agent code for usage.
 
-SEksDQpUaGFuayB5b3UgZm9yIHlvdXIgcmVwbHkgLg0KSWYgSSB1c2UmbmJzcDtTUElDRSAt
-IFN0cmVhbWluZyBBZ2VudCwgaG93IGRvIEkgdHJhbnNmZXIgdGhlIGNhcHR1cmVkIGd1ZXN0
-IGRlc2t0b3AgaW1hZ2UgdG8gdGhlIGNsaWVudCB0aHJvdWdoIFNQSUNFIHNldmVyJ3MgZGlz
-cGxheSBjaGFubmVsPyBDYW4gbXkgbW91c2UgY2xpY2tzIG9yIGtleWJvYXJkIGlucHV0IGZy
-b20gdGhlIGNsaWVudCBzaWRlIHRvIHRoZSBndWVzdCBzaWRlIG9wZXJhdGUgbm9ybWFsbHkg
-dGhyb3VnaCB0aGUmbmJzcDtTUElDRSAtIFN0cmVhbWluZyBBZ2VudD8NCkFkZGl0aW9uYWxs
-eSwgaWYgdXNpbmcgdGhlIFNQSUNFIC0gU3RyZWFtaW5nIEFnZW50LCB3aWxsIHRoZXJlIGJl
-IHR3byBzY3JlZW5zIGRpc3BsYXllZCBvbiB0aGUgY2xpZW50IHNpZGU/IChTdHJlYW1pbmcg
-QWdlbnQgYW5kIFFYTCBkaXNwbGF5IG9uZSBlYWNoKSBJZiBzbywgY2FuIHdlIG9ubHkgZGlz
-cGxheSBvbmUgc2NyZWVuIGFuZCB1c2UgaXQgbm9ybWFsbHkgbGlrZSBhIHJlbW90ZSBkZXNr
-dG9wPw0KRmluYWxseSwgaXMgdGhlcmUgYSBkZXRhaWxlZCBUZWNobmljYWwgZG9jdW1lbnRh
-dGlvbiBvZiB0aGUgc291cmNlIGNvZGUgb2YgdGhlIFFYTCBkcml2ZXI/IFRoZXJlIGFyZSBm
-ZXcgY29tbWVudHMgaW4gdGhlIHNvdXJjZSBjb2RlLiBJIGNhbid0IHVuZGVyc3RhbmQgdGhl
-IHNwZWNpZmljIG1lYW5pbmcNCg0KDQpJIGhvcGUgeW91IGNhbiBnaXZlIG1lIHNvbWUgaGVs
-cC4gVGhhbmsgeW91IHZlcnkgbXVjaC4NCg0KDQoNCg0KLS0tLS0tLS0tLS0tLS0tLS0tJm5i
-c3A71K3KvNPKvP4mbmJzcDstLS0tLS0tLS0tLS0tLS0tLS0NCreivP7IyzogIkZyZWRpYW5v
-IFppZ2xpbyI8ZnJlZGR5NzdAZ21haWwuY29tJmd0OzsgDQq3osvNyrG85DogMjAyM8TqN9TC
-OMjVKNDHxtrB+Skgz8LO5zU6MzUNCsrVvP7IyzogIsjL19q1wMrXIjw5MjgwMDM4OTZAcXEu
-Y29tJmd0OzsgDQqzrcvNOiAic3BpY2UtZGV2ZWwiPHNwaWNlLWRldmVsQGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZyZndDs7IA0K1vfM4jogUmU6IFtTcGljZS1kZXZlbF0gSG93IGRvZXMgU1BJ
-Q0UgZGlzcGxheSB0aGUgZGVza3RvcCBkYXRhIHByb2Nlc3NlZCBieSBOdmlkaWEgdkdQVT8N
-Cg0KDQoNCklsIGdpb3JubyBzYWIgOCBsdWcgMjAyMyBhbGxlIG9yZSAxMDoyMSDIy9fatcDK
-1yA8OTI4MDAzODk2QHFxLmNvbSZndDsgaGEgc2NyaXR0bzoNCiZndDsNCiZndDsgSGkgOg0K
-Jmd0OyBJIGFtIGEgZ3JhZHVhdGUgc3R1ZGVudCBvZiBEYWxpYW4gVW5pdmVyc2l0eSBvZiBU
-ZWNobm9sb2d5DQomZ3Q7DQomZ3Q7IFdlIGhhdmUgYSBwcm9qZWN0IHRvIGFjY29tcGxpc2gg
-YSByZW1vdGUtZGVzayBzb2x1dGlvbiB3aXRoIE52aWRpYSB2Z3B1Lg0KJmd0OyBJIHdhbnQg
-dG8ga25vdyBob3cgU1BJQ0UgY2FuIGRpc3BsYXkgdmlydHVhbCBkZXNrdG9wIHdpdGggdkdQ
-VS4NCiZndDsNCiZndDsgRG8geW91IG5lZWQgdG8gbW9kaWZ5IHRoZSBRWEwgZHJpdmVyIGFu
-ZCBkZXZpY2U/IFRoZSBvcGVuIHNvdXJjZSBjb2RlIG9mIFFYTCBpcyBoYXJkIHRvIHVuZGVy
-c3RhbmQuIElzIHRoZXJlIGEgZGV0YWlsZWQgVGVjaG5pY2FsIGRvY3VtZW50YXRpb24/DQom
-Z3Q7DQomZ3Q7IE9yIGNhbiBTUElDRSAtIFN0cmVhbWluZyBBZ2VudCBiZSB1c2VkIHRvIHJl
-cGxhY2UgdGhlIGZ1bmN0aW9uYWxpdHkgb2YgUVhMPyBEbyB3ZSBuZWVkIHRvIG1ha2UgYW55
-IGNoYW5nZXM/DQomZ3Q7DQomZ3Q7IEkgaG9wZSB5b3UgY2FuIGdpdmUgbWUgc29tZSBoZWxw
-LiBUaGFuayB5b3UgdmVyeSBtdWNoLg0KJmd0Ow0KJmd0Ow0KDQpIaSwNCiZuYnNwOyB0aGUg
-cXVlc3Rpb24gYWJvdXQgUVhMIG1lYW5zIHRoYXQgdGhlcmUncyBhIGJpdCBvZiBjb25mdXNp
-b24gYWJvdXQNCnRoZSB0ZWNobm9sb2d5IHVzZWQuDQoNCk52aWRpYSB2R1BVIGFsbG93cyB5
-b3UgdG8gZ2l2ZSBhIHBhcnQgb2YgdGhlIGNhcmQgdG8gdGhlIGd1ZXN0IHRoYXQNCndpbGwg
-c2VlIHRoaXMgInBhcnQiIGFzIGEgZ3JhcGhpYyBjYXJkLg0KUVhMIGlzIGEgdmlydHVhbCBp
-bXBsZW1lbnRhdGlvbiBvZiBhIGRpZmZlcmVudCBncmFwaGljIGNhcmQgKHllcywgaXQNCmNh
-biBiZSBjb25mdXNpbmcgdGhhdCB0aGUgZ3JhcGhpYyBBUElzIG9mIFNQSUNFIGFyZSBwcmVm
-aXhlZA0Kc3BpY2VfcXhsXykuDQpTbywgbm90aGluZyBmb3JiaWRzIHRoYXQgb24gdGhlIGd1
-ZXN0IHlvdSBjYW4gaGF2ZSAyIGdyYXBoaWMgY2FyZHMNCihvbmUgTnZpZGlhIHZHUFUgYW5k
-IGFub3RoZXIgUVhMKSBhbmQgdGhpcyBpcyB1c3VhbGx5IHVzZWZ1bCBkdXJpbmcNCnRoZSBz
-ZXR1cCBvZiBwYXNzLXRocm91Z2ggY2FyZHMgYnV0IHdvcmtpbmcgb24gUVhMIGNhcmQgd29u
-J3QgaW1wcm92ZQ0KTnZpZGlhIHZHUFUgc3VwcG9ydC4NClRoZSBzdHJlYW1pbmcgYWdlbnQg
-d2FzIGRlc2lnbmVkIGZvciBzdWNoIGNhc2VzLCB0byBhbGxvdyB0aGUgU1BJQ0UNCnNlcnZl
-ciB0byAic2VlIiB0aGUgZ3Vlc3QgR1BVLiBUaGlzIGFzIHRoZSBHUFUgY29udHJvbCBpcyBt
-YWlubHkgKGlmDQpub3QgY29tcGxldGVseSkgZGVsZWdhdGVkIHRvIHRoZSBndWVzdCBhbmQg
-UWVtdS9TUElDRSBoYXMgbm90IG11Y2gNCmNvbnRyb2wgb24gaXQgKGxpa2UgZ2V0dGluZyBm
-cmFtZXMgb3IgZXZlbiBsZXNzIGVuY29kZSB0aGVtKS4NCg0KUmVnYXJkcywNCiZuYnNwOyBG
-cmVkaWFubw==
+> Additionally, if using the SPICE - Streaming Agent, will there be two scr=
+eens displayed on the client side? (Streaming Agent and QXL display one eac=
+h) If so, can we only display one screen and use it normally like a remote =
+desktop?
 
-------=_NextPart_64AA031C_11AEEA68_2ABA927E
-Content-Type: text/html;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+The idea is not to replace QXL which will work, but to add displays
+for additional cards (like the Nvidia vGPU).
 
-PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNo
-YXJzZXQ9R0IxODAzMCI+PGRpdj5ISSw8L2Rpdj48ZGl2PlRoYW5rIHlvdSBmb3IgeW91ciBy
-ZXBseSAuPC9kaXY+PGRpdj5JZiBJIHVzZSZuYnNwOzxzcGFuIHN0eWxlPSJmb250LWZhbWls
-eTogJnF1b3Q7bHVjaWRhIEdyYW5kZSZxdW90OywgVmVyZGFuYSwgJnF1b3Q7TWljcm9zb2Z0
-IFlhSGVpJnF1b3Q7OyI+U1BJQ0UgLSBTdHJlYW1pbmcgQWdlbnQ8L3NwYW4+LCBob3cgZG8g
-SSB0cmFuc2ZlciB0aGUgY2FwdHVyZWQgZ3Vlc3QgZGVza3RvcCBpbWFnZSB0byB0aGUgY2xp
-ZW50IHRocm91Z2ggU1BJQ0Ugc2V2ZXIncyBkaXNwbGF5IGNoYW5uZWw/IENhbiBteSBtb3Vz
-ZSBjbGlja3Mgb3Iga2V5Ym9hcmQgaW5wdXQgZnJvbSB0aGUgY2xpZW50IHNpZGUgdG8gdGhl
-IGd1ZXN0IHNpZGUgb3BlcmF0ZSBub3JtYWxseSB0aHJvdWdoIHRoZSZuYnNwOzxzcGFuIHN0
-eWxlPSJmb250LWZhbWlseTogJnF1b3Q7bHVjaWRhIEdyYW5kZSZxdW90OywgVmVyZGFuYSwg
-JnF1b3Q7TWljcm9zb2Z0IFlhSGVpJnF1b3Q7OyI+U1BJQ0UgLSBTdHJlYW1pbmcgQWdlbnQ/
-PC9zcGFuPjwvZGl2PjxkaXY+PGZvbnQgZmFjZT0ibHVjaWRhIEdyYW5kZSwgVmVyZGFuYSwg
-TWljcm9zb2Z0IFlhSGVpIj5BZGRpdGlvbmFsbHksIGlmIHVzaW5nIHRoZSBTUElDRSAtIFN0
-cmVhbWluZyBBZ2VudCwgd2lsbCB0aGVyZSBiZSB0d28gc2NyZWVucyBkaXNwbGF5ZWQgb24g
-dGhlIGNsaWVudCBzaWRlPyAoU3RyZWFtaW5nIEFnZW50IGFuZCBRWEwgZGlzcGxheSBvbmUg
-ZWFjaCkgSWYgc28sIGNhbiB3ZSBvbmx5IGRpc3BsYXkgb25lIHNjcmVlbiBhbmQgdXNlIGl0
-IG5vcm1hbGx5IGxpa2UgYSByZW1vdGUgZGVza3RvcD88L2ZvbnQ+PC9kaXY+PGRpdj48Zm9u
-dCBmYWNlPSJsdWNpZGEgR3JhbmRlLCBWZXJkYW5hLCBNaWNyb3NvZnQgWWFIZWkiPkZpbmFs
-bHksIGlzIHRoZXJlIGEgZGV0YWlsZWQgVGVjaG5pY2FsIGRvY3VtZW50YXRpb24gb2YgdGhl
-IHNvdXJjZSBjb2RlIG9mIHRoZSBRWEwgZHJpdmVyPyBUaGVyZSBhcmUgZmV3IGNvbW1lbnRz
-IGluIHRoZSBzb3VyY2UgY29kZS4gSSBjYW4ndCB1bmRlcnN0YW5kIHRoZSBzcGVjaWZpYyBt
-ZWFuaW5nPC9mb250PjwvZGl2PjxkaXY+PGZvbnQgZmFjZT0ibHVjaWRhIEdyYW5kZSwgVmVy
-ZGFuYSwgTWljcm9zb2Z0IFlhSGVpIj48YnI+PC9mb250PjwvZGl2PjxkaXY+PHNwYW4gc3R5
-bGU9ImZvbnQtZmFtaWx5OiAmcXVvdDtsdWNpZGEgR3JhbmRlJnF1b3Q7LCBWZXJkYW5hLCAm
-cXVvdDtNaWNyb3NvZnQgWWFIZWkmcXVvdDs7Ij5JIGhvcGUgeW91IGNhbiBnaXZlIG1lIHNv
-bWUgaGVscC4gVGhhbmsgeW91IHZlcnkgbXVjaC48L3NwYW4+PC9kaXY+PGRpdj48YnI+PC9k
-aXY+PGRpdj48YnI+PC9kaXY+PGRpdiBzdHlsZT0iZm9udC1zaXplOiAxMnB4O2ZvbnQtZmFt
-aWx5OiBBcmlhbCBOYXJyb3c7cGFkZGluZzoycHggMCAycHggMDsiPi0tLS0tLS0tLS0tLS0t
-LS0tLSZuYnNwO9StyrzTyrz+Jm5ic3A7LS0tLS0tLS0tLS0tLS0tLS0tPC9kaXY+PGRpdiBz
-dHlsZT0iZm9udC1zaXplOiAxMnB4O2JhY2tncm91bmQ6I2VmZWZlZjtwYWRkaW5nOjhweDsi
-PjxkaXY+PGI+t6K8/sjLOjwvYj4gIkZyZWRpYW5vIFppZ2xpbyImbHQ7ZnJlZGR5NzdAZ21h
-aWwuY29tJmd0OzsgPC9kaXY+PGRpdj48Yj63osvNyrG85Do8L2I+IDIwMjPE6jfUwjjI1SjQ
-x8bawfkpIM/Czuc1OjM1PC9kaXY+PGRpdj48Yj7K1bz+yMs6PC9iPiAiyMvX2rXAytciJmx0
-OzkyODAwMzg5NkBxcS5jb20mZ3Q7OyA8L2Rpdj48ZGl2PjxiID6zrcvNOjwvYj4gInNwaWNl
-LWRldmVsIiZsdDtzcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcmZ3Q7OyA8L2Rp
-dj48ZGl2PjxiPtb3zOI6PC9iPiBSZTogW1NwaWNlLWRldmVsXSBIb3cgZG9lcyBTUElDRSBk
-aXNwbGF5IHRoZSBkZXNrdG9wIGRhdGEgcHJvY2Vzc2VkIGJ5IE52aWRpYSB2R1BVPzwvZGl2
-PjwvZGl2PjxkaXY+PGJyPjwvZGl2PklsIGdpb3JubyBzYWIgOCBsdWcgMjAyMyBhbGxlIG9y
-ZSAxMDoyMSDIy9fatcDK1yAmbHQ7PGEgaHJlZj0ibWFpbHRvOjkyODAwMzg5NkBxcS5jb20i
-IHJlbD0ibm9vcGVuZXIiIHRhcmdldD0iX2JsYW5rIj45MjgwMDM4OTZAcXEuY29tPC9hPiZn
-dDsgaGEgc2NyaXR0bzo8YnI+Jmd0Ozxicj4mZ3Q7IEhpIDo8YnI+Jmd0OyBJIGFtIGEgZ3Jh
-ZHVhdGUgc3R1ZGVudCBvZiBEYWxpYW4gVW5pdmVyc2l0eSBvZiBUZWNobm9sb2d5PGJyPiZn
-dDs8YnI+Jmd0OyBXZSBoYXZlIGEgcHJvamVjdCB0byBhY2NvbXBsaXNoIGEgcmVtb3RlLWRl
-c2sgc29sdXRpb24gd2l0aCBOdmlkaWEgdmdwdS48YnI+Jmd0OyBJIHdhbnQgdG8ga25vdyBo
-b3cgU1BJQ0UgY2FuIGRpc3BsYXkgdmlydHVhbCBkZXNrdG9wIHdpdGggdkdQVS48YnI+Jmd0
-Ozxicj4mZ3Q7IERvIHlvdSBuZWVkIHRvIG1vZGlmeSB0aGUgUVhMIGRyaXZlciBhbmQgZGV2
-aWNlPyBUaGUgb3BlbiBzb3VyY2UgY29kZSBvZiBRWEwgaXMgaGFyZCB0byB1bmRlcnN0YW5k
-LiBJcyB0aGVyZSBhIGRldGFpbGVkIFRlY2huaWNhbCBkb2N1bWVudGF0aW9uPzxicj4mZ3Q7
-PGJyPiZndDsgT3IgY2FuIFNQSUNFIC0gU3RyZWFtaW5nIEFnZW50IGJlIHVzZWQgdG8gcmVw
-bGFjZSB0aGUgZnVuY3Rpb25hbGl0eSBvZiBRWEw/IERvIHdlIG5lZWQgdG8gbWFrZSBhbnkg
-Y2hhbmdlcz88YnI+Jmd0Ozxicj4mZ3Q7IEkgaG9wZSB5b3UgY2FuIGdpdmUgbWUgc29tZSBo
-ZWxwLiBUaGFuayB5b3UgdmVyeSBtdWNoLjxicj4mZ3Q7PGJyPiZndDs8YnI+PGJyPkhpLDxi
-cj4mbmJzcDsgdGhlIHF1ZXN0aW9uIGFib3V0IFFYTCBtZWFucyB0aGF0IHRoZXJlJ3MgYSBi
-aXQgb2YgY29uZnVzaW9uIGFib3V0PGJyPnRoZSB0ZWNobm9sb2d5IHVzZWQuPGJyPjxicj5O
-dmlkaWEgdkdQVSBhbGxvd3MgeW91IHRvIGdpdmUgYSBwYXJ0IG9mIHRoZSBjYXJkIHRvIHRo
-ZSBndWVzdCB0aGF0PGJyPndpbGwgc2VlIHRoaXMgInBhcnQiIGFzIGEgZ3JhcGhpYyBjYXJk
-Ljxicj5RWEwgaXMgYSB2aXJ0dWFsIGltcGxlbWVudGF0aW9uIG9mIGEgZGlmZmVyZW50IGdy
-YXBoaWMgY2FyZCAoeWVzLCBpdDxicj5jYW4gYmUgY29uZnVzaW5nIHRoYXQgdGhlIGdyYXBo
-aWMgQVBJcyBvZiBTUElDRSBhcmUgcHJlZml4ZWQ8YnI+c3BpY2VfcXhsXykuPGJyPlNvLCBu
-b3RoaW5nIGZvcmJpZHMgdGhhdCBvbiB0aGUgZ3Vlc3QgeW91IGNhbiBoYXZlIDIgZ3JhcGhp
-YyBjYXJkczxicj4ob25lIE52aWRpYSB2R1BVIGFuZCBhbm90aGVyIFFYTCkgYW5kIHRoaXMg
-aXMgdXN1YWxseSB1c2VmdWwgZHVyaW5nPGJyPnRoZSBzZXR1cCBvZiBwYXNzLXRocm91Z2gg
-Y2FyZHMgYnV0IHdvcmtpbmcgb24gUVhMIGNhcmQgd29uJ3QgaW1wcm92ZTxicj5OdmlkaWEg
-dkdQVSBzdXBwb3J0Ljxicj5UaGUgc3RyZWFtaW5nIGFnZW50IHdhcyBkZXNpZ25lZCBmb3Ig
-c3VjaCBjYXNlcywgdG8gYWxsb3cgdGhlIFNQSUNFPGJyPnNlcnZlciB0byAic2VlIiB0aGUg
-Z3Vlc3QgR1BVLiBUaGlzIGFzIHRoZSBHUFUgY29udHJvbCBpcyBtYWlubHkgKGlmPGJyPm5v
-dCBjb21wbGV0ZWx5KSBkZWxlZ2F0ZWQgdG8gdGhlIGd1ZXN0IGFuZCBRZW11L1NQSUNFIGhh
-cyBub3QgbXVjaDxicj5jb250cm9sIG9uIGl0IChsaWtlIGdldHRpbmcgZnJhbWVzIG9yIGV2
-ZW4gbGVzcyBlbmNvZGUgdGhlbSkuPGJyPjxicj5SZWdhcmRzLDxicj4mbmJzcDsgRnJlZGlh
-bm88c3R5bGUgdHlwZT0idGV4dC9jc3MiPi5xbWJveCBzdHlsZSwgLnFtYm94IHNjcmlwdCwg
-LnFtYm94IGhlYWQsIC5xbWJveCBsaW5rLCAucW1ib3ggbWV0YSB7ZGlzcGxheTogbm9uZSAh
-aW1wb3J0YW50O308L3N0eWxlPg==
+> Finally, is there a detailed Technical documentation of the source code o=
+f the QXL driver? There are few comments in the source code. I can't unders=
+tand the specific meaning
+>
 
-------=_NextPart_64AA031C_11AEEA68_2ABA927E--
+Linux one https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/qx=
+l
+or Windows one https://gitlab.freedesktop.org/spice/win32/qxl-wddm-dod
+? I don't think there's much documentation about them.
 
+> I hope you can give me some help. Thank you very much.
+>
+
+Frediano
