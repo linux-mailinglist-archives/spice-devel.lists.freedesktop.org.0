@@ -1,69 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9521F75089F
-	for <lists+spice-devel@lfdr.de>; Wed, 12 Jul 2023 14:47:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BB127509D5
+	for <lists+spice-devel@lfdr.de>; Wed, 12 Jul 2023 15:43:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F16D710E501;
-	Wed, 12 Jul 2023 12:47:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE32A10E52F;
+	Wed, 12 Jul 2023 13:43:17 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CFD9910E501;
- Wed, 12 Jul 2023 12:47:10 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3110ab7110aso7511442f8f.3; 
- Wed, 12 Jul 2023 05:47:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689166029; x=1691758029;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MyjcGW684jqraSNBZ8B7xVADXgFfF/OvzrpaGLGUOqc=;
- b=L0uYEDkUPkUDMI3OPLD9CxQwdAnA3ZPcshnf3sYSx/oONyUzYTpol94z6/pY6zsvZK
- oGxwKsqiQoRaZIKjwaMg2QOlTDOdtDl8yBCfaBEmK86Y34WxdaOwPvvASHCxmpuf5I+n
- U9cMw3vO3QiQ3eDcqT89yOrLtWlXO8YJsM606NSAbfhkHybQZRiIt9iecCa7+JlFfGfx
- 2i8HQmbc4INvJlMjGAIxca31pNTOnJr8vfs/bXgcvnhds/ENY9BJ52cxIb2cpvKk5Ctu
- tzxykmEinkadJt2k2W56pbGxYG42qgsjeamwPV5mGHB0lMp+au0dkkEPZUECGUpYqmJB
- 3vbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689166029; x=1691758029;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MyjcGW684jqraSNBZ8B7xVADXgFfF/OvzrpaGLGUOqc=;
- b=FikfXfm9m4s3XVkgqpXpULKfaKMKqIt2XdA8DWKqdDfkr6Yne1BwLTyzH6pUqz8I74
- sAlcRkhLhVKhELsXn7hSUASuUl8Bp3RH7MxeJwva0n7+wmPJH6v7vFvYIJL+tG5csEgS
- qL43eVJUptmO96TCW6JoXypMz1C0j2P7jpFUgX5/GU5vMMljbLFDmOdg3sIsVHQRefwj
- Z1s2mkcZY15kl+Eo9+OJaQM7aEjwW05x3ZwfMLPV0O9ABETkr+wsK412zVxoJfgQqbJq
- 1jzGwSUOnqbUsKFzgfNRGqnpV408JJXb4Kt1WaD2IZxabgpMhnzMGvD+mqbK5AB7XTPV
- IDKg==
-X-Gm-Message-State: ABy/qLaIrOXIBy0v1Dt0W9dF+lYqv1FvPV+ZOpCqF1duG95Z47lXRbdC
- BU8WCHB89YORPuoZh8WGv+hFDJLQxZI=
-X-Google-Smtp-Source: APBJJlH53nWP6tXBO9qvMZ5Itj/kes9j4QMcFPGjT3TnBVVMQLp0fABfiiW6hCZrDpY446sVVZtT2w==
-X-Received: by 2002:a5d:4608:0:b0:314:3c84:4da2 with SMTP id
- t8-20020a5d4608000000b003143c844da2mr18941166wrq.13.1689166028574; 
- Wed, 12 Jul 2023 05:47:08 -0700 (PDT)
-Received: from EliteBook.fritz.box ([2a00:e180:1557:4100:d4c4:2bb7:77d6:6d86])
- by smtp.gmail.com with ESMTPSA id
- j8-20020adfe508000000b0031424950a99sm4989225wrm.81.2023.07.12.05.47.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Jul 2023 05:47:08 -0700 (PDT)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>
-To: dri-devel@lists.freedesktop.org
-Date: Wed, 12 Jul 2023 14:46:59 +0200
-Message-Id: <20230712124704.333004-3-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230712124704.333004-1-christian.koenig@amd.com>
-References: <20230712124704.333004-1-christian.koenig@amd.com>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 457B610E51B;
+ Wed, 12 Jul 2023 12:52:43 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 90731616E0;
+ Wed, 12 Jul 2023 12:52:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9574CC433C8;
+ Wed, 12 Jul 2023 12:52:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1689166362;
+ bh=VUp4Rlz/Z/tP0fYoIxay7sGXmkE8wNT+g75bK+DZxB0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=VHSSnie62FieoVZOPTFB2Y3BjScn36W/kPCzU0kXJHhE//ue9XPS8m8BWVWuK1JXg
+ ngaOk9HelI7O3aehIp1cvxRX++gsm1/VNXMpJoJ6OKutHO0yat7merxyOCYv6jkNrs
+ mGyIH3jgSgWA0kzfyrXQxBTe5//Y6oX/yFTBbJLfDivqCZcdf4hMsL1M53Yj07fHxc
+ +CFygYRSh/CbU7jjYhXtYXZB2YcAkCjR1J+1GNdgC/BLrzt6gd9aCHwPsxTanKUq+3
+ uBhYtE9f8zj5keX4AmzbR58Pa5L0hvIRHKFAQDBWxlZmRc02OZPz7QiEefmWySfT4X
+ ekkVQHORXTphg==
+Date: Wed, 12 Jul 2023 14:52:38 +0200
+From: Maxime Ripard <mripard@kernel.org>
+To: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+Message-ID: <o3dc4q27ap6rajsvpfwfvs3z3afekkwbhnclvswkaietciy2kc@unjf67gz5tur>
+References: <20230712094702.1770121-1-u.kleine-koenig@pengutronix.de>
+ <94eb6e4d-9384-152f-351b-ebb217411da9@amd.com>
+ <20230712110253.paoyrmcbvlhpfxbf@pengutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: [Spice-devel] [PATCH 2/7] drm/qxl: switch to using drm_exec
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qdsglwcywcjoch6m"
+Content-Disposition: inline
+In-Reply-To: <20230712110253.paoyrmcbvlhpfxbf@pengutronix.de>
+X-Mailman-Approved-At: Wed, 12 Jul 2023 13:43:16 +0000
+Subject: Re: [Spice-devel] [PATCH RFC v1 00/52] drm/crtc: Rename struct
+ drm_crtc::dev to drm_dev
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,213 +57,194 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+Cc: Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ Xinliang Liu <xinliang.liu@linaro.org>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
+ Alexey Kodanev <aleksei.kodanev@bell-sw.com>, dri-devel@lists.freedesktop.org,
+ Vandita Kulkarni <vandita.kulkarni@intel.com>,
+ Alim Akhtar <alim.akhtar@samsung.com>,
+ Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Arun R Murthy <arun.r.murthy@intel.com>, Jerome Brunet <jbrunet@baylibre.com>,
+ Liu Shixin <liushixin2@huawei.com>, linux-samsung-soc@vger.kernel.org,
+ Samuel Holland <samuel@sholland.org>, Matt Roper <matthew.d.roper@intel.com>,
+ Wenjing Liu <wenjing.liu@amd.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Stanislav Lisovskiy <stanislav.lisovskiy@intel.com>,
+ Danilo Krummrich <dakr@redhat.com>, NXP Linux Team <linux-imx@nxp.com>,
+ spice-devel@lists.freedesktop.org,
+ Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
+ linux-sunxi@lists.linux.dev, Stylon Wang <stylon.wang@amd.com>,
+ Tim Huang <Tim.Huang@amd.com>, Suraj Kandpal <suraj.kandpal@intel.com>,
+ =?utf-8?B?QW5kcsOp?= Almeida <andrealmeid@igalia.com>,
+ Andi Shyti <andi.shyti@linux.intel.com>, Yifan Zhang <yifan1.zhang@amd.com>,
+ Jani Nikula <jani.nikula@intel.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+ Lucas De Marchi <lucas.demarchi@intel.com>, Inki Dae <inki.dae@samsung.com>,
+ Hersen Wu <hersenxs.wu@amd.com>, Jessica Zhang <quic_jesszhan@quicinc.com>,
+ Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
+ Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
+ =?utf-8?Q?=C5=81ukasz?= Bartosik <lb@semihalf.com>,
+ Radhakrishna Sripada <radhakrishna.sripada@intel.com>,
+ Andrew Jeffery <andrew@aj.id.au>, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Noralf =?utf-8?Q?Tr=C3=B8nnes?= <noralf@tronnes.org>, kernel@pengutronix.de,
+ Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
+ Claudiu Beznea <claudiu.beznea@microchip.com>, Zack Rusin <zackr@vmware.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ linux-aspeed@lists.ozlabs.org, nouveau@lists.freedesktop.org,
+ Mitul Golani <mitulkumar.ajitkumar.golani@intel.com>,
+ =?utf-8?B?Sm9zw6k=?= Roberto de Souza <jose.souza@intel.com>,
  virtualization@lists.linux-foundation.org,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Gerd Hoffmann <kraxel@redhat.com>
+ Thierry Reding <thierry.reding@gmail.com>,
+ Yongqin Liu <yongqin.liu@linaro.org>,
+ Mario Limonciello <mario.limonciello@amd.com>, Fei Yang <fei.yang@intel.com>,
+ Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
+ David Lechner <david@lechnology.com>, Julia Lawall <Julia.Lawall@inria.fr>,
+ Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
+ "Jiri Slaby \(SUSE\)" <jirislaby@kernel.org>,
+ David Francis <David.Francis@amd.com>, Aaron Liu <aaron.liu@amd.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Vinod Polimera <quic_vpolimer@quicinc.com>, linux-rockchip@lists.infradead.org,
+ Fangzhi Zuo <jerry.zuo@amd.com>, Aurabindo Pillai <aurabindo.pillai@amd.com>,
+ VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ Jouni =?utf-8?B?SMO2Z2FuZGVy?= <jouni.hogander@intel.com>,
+ Dave Airlie <airlied@redhat.com>, linux-mips@vger.kernel.org,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ linux-arm-msm@vger.kernel.org, Animesh Manna <animesh.manna@intel.com>,
+ linux-renesas-soc@vger.kernel.org, Jani Nikula <jani.nikula@linux.intel.com>,
+ Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
+ Biju Das <biju.das.jz@bp.renesas.com>, linux-amlogic@lists.infradead.org,
+ Evan Quan <evan.quan@amd.com>, Michal Simek <michal.simek@amd.com>,
+ linux-arm-kernel@lists.infradead.org, Sean Paul <sean@poorly.run>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Kai Vehmanen <kai.vehmanen@linux.intel.com>,
+ Boris Brezillon <bbrezillon@kernel.org>, Chunyan Zhang <zhang.lyra@gmail.com>,
+ Qingqing Zhuo <qingqing.zhuo@amd.com>, Sandy Huang <hjc@rock-chips.com>,
+ Swati Sharma <swati2.sharma@intel.com>, John Stultz <jstultz@google.com>,
+ Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Drew Davenport <ddavenport@chromium.org>, Kevin Hilman <khilman@baylibre.com>,
+ Hawking Zhang <Hawking.Zhang@amd.com>,
+ Haneen Mohammed <hamohammed.sa@gmail.com>,
+ Anusha Srivatsa <anusha.srivatsa@intel.com>, Dan Carpenter <error27@gmail.com>,
+ Karol Herbst <kherbst@redhat.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ linux-hyperv@vger.kernel.org, Stefan Agner <stefan@agner.ch>,
+ Melissa Wen <melissa.srw@gmail.com>,
+ =?utf-8?B?TWHDrXJh?= Canal <mairacanal@riseup.net>,
+ Luca Coelho <luciano.coelho@intel.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Andrzej Hajda <andrzej.hajda@intel.com>, Likun Gao <Likun.Gao@amd.com>,
+ Sam Ravnborg <sam@ravnborg.org>, Alain Volmat <alain.volmat@foss.st.com>,
+ Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Deepak Rawat <drawat.floss@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Joel Stanley <joel@jms.id.au>, Philipp Zabel <p.zabel@pengutronix.de>,
+ Ankit Nautiyal <ankit.k.nautiyal@intel.com>,
+ Harry Wentland <harry.wentland@amd.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>, Alan Liu <haoping.liu@amd.com>,
+ Philip Yang <Philip.Yang@amd.com>, Lyude Paul <lyude@redhat.com>,
+ intel-gfx@lists.freedesktop.org, Alison Wang <alison.wang@nxp.com>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Gustavo Sousa <gustavo.sousa@intel.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Mikko Perttunen <mperttunen@nvidia.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
+ Tomi Valkeinen <tomba@kernel.org>, Deepak R Varma <drv@mailo.com>, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, Chia-I Wu <olvaffe@gmail.com>,
+ Konrad Dybcio <konrad.dybcio@linaro.org>,
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ Khaled Almahallawy <khaled.almahallawy@intel.com>,
+ linux-stm32@st-md-mailman.stormreply.com, Emma Anholt <emma@anholt.net>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>, Imre Deak <imre.deak@intel.com>,
+ Liviu Dudau <liviu.dudau@arm.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, Roman Li <roman.li@amd.com>,
+ Paul Cercueil <paul@crapouillou.net>, Rob Clark <robdclark@gmail.com>,
+ Hamza Mahfooz <hamza.mahfooz@amd.com>, Marek Vasut <marex@denx.de>,
+ Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
+ xen-devel@lists.xenproject.org, Guchun Chen <guchun.chen@amd.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Russell King <linux@armlinux.org.uk>, Leo Li <sunpeng.li@amd.com>,
+ Uma Shankar <uma.shankar@intel.com>, Mika Kahola <mika.kahola@intel.com>,
+ Jiasheng Jiang <jiasheng@iscas.ac.cn>,
+ Srinivasan Shanmugam <srinivasan.shanmugam@amd.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Vinod Govindapillai <vinod.govindapillai@intel.com>,
+ linux-tegra@vger.kernel.org,
+ Marek =?utf-8?B?T2zFocOhaw==?= <marek.olsak@amd.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ =?utf-8?Q?Joaqu=C3=ADn_Ignacio_Aramend=C3=ADa?= <samsagax@gmail.com>,
+ Melissa Wen <mwen@igalia.com>, Hans de Goede <hdegoede@redhat.com>,
+ linux-mediatek@lists.infradead.org,
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ David Tadokoro <davidbtadokoro@usp.br>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Orson Zhai <orsonzhai@gmail.com>, amd-gfx@lists.freedesktop.org,
+ Jyri Sarha <jyri.sarha@iki.fi>, Yannick Fertre <yannick.fertre@foss.st.com>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Philippe Cornu <philippe.cornu@foss.st.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Wayne Lin <Wayne.Lin@amd.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
+ Lucas Stach <l.stach@pengutronix.de>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Just a straightforward conversion without any optimization.
 
-Only compile tested for now.
+--qdsglwcywcjoch6m
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Christian König <christian.koenig@amd.com>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: virtualization@lists.linux-foundation.org
-Cc: spice-devel@lists.freedesktop.org
----
- drivers/gpu/drm/qxl/Kconfig       |  1 +
- drivers/gpu/drm/qxl/qxl_drv.h     |  7 ++--
- drivers/gpu/drm/qxl/qxl_release.c | 68 ++++++++++++++++---------------
- 3 files changed, 40 insertions(+), 36 deletions(-)
+On Wed, Jul 12, 2023 at 01:02:53PM +0200, Uwe Kleine-K=F6nig wrote:
+> > Background is that this makes merge conflicts easier to handle and dete=
+ct.
+>=20
+> Really?
 
-diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
-index ca3f51c2a8fe..9c8e433be33e 100644
---- a/drivers/gpu/drm/qxl/Kconfig
-+++ b/drivers/gpu/drm/qxl/Kconfig
-@@ -5,6 +5,7 @@ config DRM_QXL
- 	select DRM_KMS_HELPER
- 	select DRM_TTM
- 	select DRM_TTM_HELPER
-+	select DRM_EXEC
- 	select CRC32
- 	help
- 	  QXL virtual GPU for Spice virtualization desktop integration.
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index ea993d7162e8..3e732648b332 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -38,12 +38,12 @@
- 
- #include <drm/drm_crtc.h>
- #include <drm/drm_encoder.h>
-+#include <drm/drm_exec.h>
- #include <drm/drm_gem_ttm_helper.h>
- #include <drm/drm_ioctl.h>
- #include <drm/drm_gem.h>
- #include <drm/qxl_drm.h>
- #include <drm/ttm/ttm_bo.h>
--#include <drm/ttm/ttm_execbuf_util.h>
- #include <drm/ttm/ttm_placement.h>
- 
- #include "qxl_dev.h"
-@@ -101,7 +101,8 @@ struct qxl_gem {
- };
- 
- struct qxl_bo_list {
--	struct ttm_validate_buffer tv;
-+	struct qxl_bo		*bo;
-+	struct list_head	list;
- };
- 
- struct qxl_crtc {
-@@ -151,7 +152,7 @@ struct qxl_release {
- 	struct qxl_bo *release_bo;
- 	uint32_t release_offset;
- 	uint32_t surface_release_id;
--	struct ww_acquire_ctx ticket;
-+	struct drm_exec	exec;
- 	struct list_head bos;
- };
- 
-diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
-index 368d26da0d6a..5953e8ed5f47 100644
---- a/drivers/gpu/drm/qxl/qxl_release.c
-+++ b/drivers/gpu/drm/qxl/qxl_release.c
-@@ -121,13 +121,11 @@ qxl_release_free_list(struct qxl_release *release)
- {
- 	while (!list_empty(&release->bos)) {
- 		struct qxl_bo_list *entry;
--		struct qxl_bo *bo;
- 
- 		entry = container_of(release->bos.next,
--				     struct qxl_bo_list, tv.head);
--		bo = to_qxl_bo(entry->tv.bo);
--		qxl_bo_unref(&bo);
--		list_del(&entry->tv.head);
-+				     struct qxl_bo_list, list);
-+		qxl_bo_unref(&entry->bo);
-+		list_del(&entry->list);
- 		kfree(entry);
- 	}
- 	release->release_bo = NULL;
-@@ -172,8 +170,8 @@ int qxl_release_list_add(struct qxl_release *release, struct qxl_bo *bo)
- {
- 	struct qxl_bo_list *entry;
- 
--	list_for_each_entry(entry, &release->bos, tv.head) {
--		if (entry->tv.bo == &bo->tbo)
-+	list_for_each_entry(entry, &release->bos, list) {
-+		if (entry->bo == bo)
- 			return 0;
- 	}
- 
-@@ -182,9 +180,8 @@ int qxl_release_list_add(struct qxl_release *release, struct qxl_bo *bo)
- 		return -ENOMEM;
- 
- 	qxl_bo_ref(bo);
--	entry->tv.bo = &bo->tbo;
--	entry->tv.num_shared = 0;
--	list_add_tail(&entry->tv.head, &release->bos);
-+	entry->bo = bo;
-+	list_add_tail(&entry->list, &release->bos);
- 	return 0;
- }
- 
-@@ -221,21 +218,28 @@ int qxl_release_reserve_list(struct qxl_release *release, bool no_intr)
- 	if (list_is_singular(&release->bos))
- 		return 0;
- 
--	ret = ttm_eu_reserve_buffers(&release->ticket, &release->bos,
--				     !no_intr, NULL);
--	if (ret)
--		return ret;
--
--	list_for_each_entry(entry, &release->bos, tv.head) {
--		struct qxl_bo *bo = to_qxl_bo(entry->tv.bo);
--
--		ret = qxl_release_validate_bo(bo);
--		if (ret) {
--			ttm_eu_backoff_reservation(&release->ticket, &release->bos);
--			return ret;
-+	drm_exec_init(&release->exec, no_intr ? 0 :
-+		      DRM_EXEC_INTERRUPTIBLE_WAIT);
-+	drm_exec_until_all_locked(&release->exec) {
-+		list_for_each_entry(entry, &release->bos, list) {
-+			ret = drm_exec_prepare_obj(&release->exec,
-+						   &entry->bo->tbo.base,
-+						   1);
-+			drm_exec_retry_on_contention(&release->exec);
-+			if (ret)
-+				goto error;
- 		}
- 	}
-+
-+	list_for_each_entry(entry, &release->bos, list) {
-+		ret = qxl_release_validate_bo(entry->bo);
-+		if (ret)
-+			goto error;
-+	}
- 	return 0;
-+error:
-+	drm_exec_fini(&release->exec);
-+	return ret;
- }
- 
- void qxl_release_backoff_reserve_list(struct qxl_release *release)
-@@ -245,7 +249,7 @@ void qxl_release_backoff_reserve_list(struct qxl_release *release)
- 	if (list_is_singular(&release->bos))
- 		return;
- 
--	ttm_eu_backoff_reservation(&release->ticket, &release->bos);
-+	drm_exec_fini(&release->exec);
- }
- 
- int qxl_alloc_surface_release_reserved(struct qxl_device *qdev,
-@@ -404,18 +408,18 @@ void qxl_release_unmap(struct qxl_device *qdev,
- 
- void qxl_release_fence_buffer_objects(struct qxl_release *release)
- {
--	struct ttm_buffer_object *bo;
- 	struct ttm_device *bdev;
--	struct ttm_validate_buffer *entry;
-+	struct qxl_bo_list *entry;
- 	struct qxl_device *qdev;
-+	struct qxl_bo *bo;
- 
- 	/* if only one object on the release its the release itself
- 	   since these objects are pinned no need to reserve */
- 	if (list_is_singular(&release->bos) || list_empty(&release->bos))
- 		return;
- 
--	bo = list_first_entry(&release->bos, struct ttm_validate_buffer, head)->bo;
--	bdev = bo->bdev;
-+	bo = list_first_entry(&release->bos, struct qxl_bo_list, list)->bo;
-+	bdev = bo->tbo.bdev;
- 	qdev = container_of(bdev, struct qxl_device, mman.bdev);
- 
- 	/*
-@@ -426,14 +430,12 @@ void qxl_release_fence_buffer_objects(struct qxl_release *release)
- 		       release->id | 0xf0000000, release->base.seqno);
- 	trace_dma_fence_emit(&release->base);
- 
--	list_for_each_entry(entry, &release->bos, head) {
-+	list_for_each_entry(entry, &release->bos, list) {
- 		bo = entry->bo;
- 
--		dma_resv_add_fence(bo->base.resv, &release->base,
-+		dma_resv_add_fence(bo->tbo.base.resv, &release->base,
- 				   DMA_RESV_USAGE_READ);
--		ttm_bo_move_to_lru_tail_unlocked(bo);
--		dma_resv_unlock(bo->base.resv);
-+		ttm_bo_move_to_lru_tail_unlocked(&bo->tbo);
- 	}
--	ww_acquire_fini(&release->ticket);
-+	drm_exec_fini(&release->exec);
- }
--
--- 
-2.34.1
+FWIW, I agree with Christian here.
 
+> Each file (apart from include/drm/drm_crtc.h) is only touched once. So
+> unless I'm missing something you don't get less or easier conflicts by
+> doing it all in a single patch. But you gain the freedom to drop a
+> patch for one driver without having to drop the rest with it.
+
+Not really, because the last patch removed the union anyway. So you have
+to revert both the last patch, plus that driver one. And then you need
+to add a TODO to remove that union eventually.
+
+> So I still like the split version better, but I'm open to a more
+> verbose reasoning from your side.
+
+You're doing only one thing here, really: you change the name of a
+structure field. If it was shared between multiple maintainers, then
+sure, splitting that up is easier for everyone, but this will go through
+drm-misc, so I can't see the benefit it brings.
+
+Maxime
+
+--qdsglwcywcjoch6m
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZK6iFgAKCRDj7w1vZxhR
+xRLYAP93B76KgEWcuaOZ/kYDv8XjPHyPciX51vnTJB/XyRmulQD/cDTXF3s/NDy9
+IAy9XkaOSqt5P/YkwqvexkelvA3a6wU=
+=y7ve
+-----END PGP SIGNATURE-----
+
+--qdsglwcywcjoch6m--
