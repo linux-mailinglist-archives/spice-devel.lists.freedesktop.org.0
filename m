@@ -2,67 +2,75 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0DB075601D
-	for <lists+spice-devel@lfdr.de>; Mon, 17 Jul 2023 12:09:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E143756463
+	for <lists+spice-devel@lfdr.de>; Mon, 17 Jul 2023 15:21:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 84D0110E21E;
-	Mon, 17 Jul 2023 10:09:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 36AD510E240;
+	Mon, 17 Jul 2023 13:21:36 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from out203-205-221-149.mail.qq.com (out203-205-221-149.mail.qq.com
- [203.205.221.149])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B2DD010E196
- for <spice-devel@lists.freedesktop.org>; Mon, 17 Jul 2023 02:34:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1689561250; bh=FkaKbZP4DRkOF/vu5zT2eSlZc6vtM1eIRTYWJn+Gbi4=;
- h=In-Reply-To:References:From:To:Cc:Subject:Date;
- b=PBrltihg3IfjQ8UGX9tbSE+PAP+sxivMPKr1FRIVx+S4i7xiZeaVghm8lQErj1mkh
- Gwdn09b4VkMVmtq90GeGW60mIR+BCBom7L1+5w2aQCKIOm69xFmFOBEV0gDEN7mavb
- rhPD9oUnuk27huoRqcIjVNdEFW4Y++9fLwva/N28=
-X-QQ-FEAT: oHWrrGTW1dCni6VLWI7Xi3lwP5c1dnPf
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
-X-QQ-XMAILINFO: M6mqk12bCjNireZucWJRVYURnTszRB9xZZ4FHQ3MXkqaYVkOOYi+KsQSKdaXI+
- d/2o0V+5nS0p5cL+wsUzSB3OTvUUGS1TnvxFLi23bloRhnZjvFel3o9meylLCJcVs3pM7SCP4WFnt
- 0QrA7UM9FIO9LRQp4j+Ewf2v3x3LmIwIMDPts91WKRi+H376p5bYV99fW7F+9YIK6Ss/FSkzOds2H
- 94t08nzCFHyS+3JZacn2q5fukGi+rSt0qPUZxMVGM5PDMcOwJq6WAbTEiCzTVXIPrimkiord3gYUn
- Yow6NynCutR5gWRSTe6y4tOabO94KgdG0IcWpSHeQQZHCeVsbEOXL/zD8PynerP/tCzTNaeF7Kw4J
- rRnBiG0NAwl1watt2+J6H6Ls2gGU3JpSbGdDw+85XSWkk9dP3d+t+g3CXOaRqb+vapsw4OxakL3YV
- En5JjGIuXWZBTKreYNhTRXgJAL9LfzyIzjrZTJFu4NCH/PSmOr8WRzLHt0GsxjEvRKlM2cibbscUq
- 0Q1F/PRV96gzqBSxQIWrRMT37AI9i/JT7DbMgdPzg7ZsmltfZPBBJrYKCviQDSFP+XsaGwQi9pXAy
- Ai2LMGrxfyfnwmfBiVu0ycAcpnlTP7kVGTVPR9mGFTqxegsyCjfzdkAH1diRtaEapRu8mEyrgHSaV
- ZntPwEja58x/TvDGEY9It2Mi8UpNJBQmpufYh1KyPhUSP8Kj6t/OFRCVCucYHsR6+E6e3nKKjXoJW
- xBcN3bHv6DrB02TwR0zlZdW4xe7wLUEGCepYl2KHbkP2C/WyrGe/Ny/vKDRVyw1QACjnErEZTMkUw
- MIm6BZLfT7baJrWO7fze9DyCegFiqyKgnhbUD9WPYcEzeQSlezo3spdhOuSeZxYiIiI5Em1IXg1sS
- ZMqZQLWSdxxWNNiFc4qbrzgJEBuF0WLJEVD4poSYxi3DSzxCZTZSExn/m1cta4CZU7HtdnbugpXkZ
- h8EG2SI/w1sovEijGKDJA+rD8Q/3RCGWh9tTryUAhxriCTWvqP
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 255.138.201.68
-In-Reply-To: <CAHt6W4fAEJvtVWXczBDMBYvS=PkOP54+7_2M8b9UOD4WnCer9w@mail.gmail.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 71BB410E240
+ for <spice-devel@lists.freedesktop.org>; Mon, 17 Jul 2023 13:21:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1689600091;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=/5TnsXA3jKgPIyn2MjrbIqtF333wZm5SNWEJHYukbXc=;
+ b=C5GzP01ZYLgz7jNp82kY3VjKAUrIZIrgeceTbhO9OHbDfpE1FQdG1EpkFiA8znUjR1uPVB
+ vtDt/C7o0/j0Z7A4sav2ichHLyMlr8nC3x4hE301JaDPJN1vylVMjNf0ZIC2WfTqCkc59E
+ BvJMf4ArdwHY1Sj6SBoHlR2moWNgzO0=
+Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com
+ [209.85.161.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-620-sJ6N7X3UOJOv9zKT3_ALXg-1; Mon, 17 Jul 2023 09:21:30 -0400
+X-MC-Unique: sJ6N7X3UOJOv9zKT3_ALXg-1
+Received: by mail-oo1-f70.google.com with SMTP id
+ 006d021491bc7-5667dddaa5cso4728028eaf.2
+ for <spice-devel@lists.freedesktop.org>; Mon, 17 Jul 2023 06:21:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689600089; x=1692192089;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/5TnsXA3jKgPIyn2MjrbIqtF333wZm5SNWEJHYukbXc=;
+ b=DJSWlQ5BS2W4hwBIK3sNvFQPI3Ut+loERtwyiJhLIfmYFY4OvYtjG39d/xaRPdgUNg
+ Ny5OQUdxwjY4EWrfteprfbG9HQmuxvGMtlbxsdIpJxymIWgpvIm63ieDVVp8+hJlyEop
+ TcB0UyiCvrHfPQbZySxMzWKsFAFTsQMzRDrmFCVHZqVWB3SDHWIOPri4wCZ8qqAd0Pvx
+ Vaw/FJldrnHwJVoo3dAbRUSjGZdKsNT72DKDygwyhFyDw1gWn7WjfK8gYGBBWODxCE3+
+ /xRPM3h8OOqxpYl575pV5aSsZUhJXtapAzDnjZsTLUYELDUhOYsqA/YJ2fWw4KUzy94K
+ ZorA==
+X-Gm-Message-State: ABy/qLYLY5N1wOtoeRYLNUTl2dEH8xAyRRfP+jxZfQk+GRcOdhDUzLyh
+ 8dOCpjWTUkJrhBuBePlqmay7G+NIVzqGka+AYFr3Vb265ii/wL6TpJrVkF89vQ/MxhCSJYXiE8T
+ eGjW3aF5iMwQqqMOMfhr3MLqboS2Arj3xoKGtMCMIw0itxZg=
+X-Received: by 2002:a4a:d295:0:b0:566:fc91:857d with SMTP id
+ h21-20020a4ad295000000b00566fc91857dmr3888101oos.5.1689600088840; 
+ Mon, 17 Jul 2023 06:21:28 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlGW2sqgVJHg2OrVqiE0QvfiFCIpoedhfBrbXNYCI3rOnElTnNH5zAXEK6ytEbWxq5RkGa+PL89hCHbWXzD5WMM=
+X-Received: by 2002:a4a:d295:0:b0:566:fc91:857d with SMTP id
+ h21-20020a4ad295000000b00566fc91857dmr3888080oos.5.1689600088430; Mon, 17 Jul
+ 2023 06:21:28 -0700 (PDT)
+MIME-Version: 1.0
 References: <tencent_B6679654B7F9B858ACDD19AF01982938DB0A@qq.com>
  <CAHt6W4esuZwZ6o+CdT2_jo2q+W3P38vrp0ooGA3gY3UUhNkORw@mail.gmail.com>
  <tencent_0D2D92EE12D6C0CDFE9C9D32A3AABB7D5809@qq.com>
  <CAHt6W4f6ND+RN6rKTs5JZuERgi1RCK2gz2UTf-Cts2fQs+hn3A@mail.gmail.com>
  <tencent_AD58C0DC85ACCD98353863670256EBF9A80A@qq.com>
  <CAHt6W4fAEJvtVWXczBDMBYvS=PkOP54+7_2M8b9UOD4WnCer9w@mail.gmail.com>
-X-QQ-STYLE: 
-X-QQ-mid: webmail280t1689561250t2303366
-From: "=?gb18030?B?yMvX2rXAytc=?=" <928003896@qq.com>
-To: "=?gb18030?B?RnJlZGlhbm8gWmlnbGlv?=" <freddy77@gmail.com>
-Mime-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="----=_NextPart_64B4A8A2_10C64360_2F4E88BD"
-Content-Transfer-Encoding: 8Bit
-Date: Mon, 17 Jul 2023 10:34:10 +0800
-X-Priority: 3
-Message-ID: <tencent_267D99E5D57A3EB616DE77666B7E66D2CE08@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-X-Mailman-Approved-At: Mon, 17 Jul 2023 10:09:47 +0000
-Subject: [Spice-devel] =?gb18030?b?u9i4tKO6ICBIb3cgZG9lcyBTUElDRSBkaXNw?=
- =?gb18030?q?lay_the_desktop_data_processed_by_Nvidia_vGPU=3F?=
+ <tencent_267D99E5D57A3EB616DE77666B7E66D2CE08@qq.com>
+In-Reply-To: <tencent_267D99E5D57A3EB616DE77666B7E66D2CE08@qq.com>
+From: Uri Lublin <ulublin@redhat.com>
+Date: Mon, 17 Jul 2023 16:21:17 +0300
+Message-ID: <CAAg9qJ1dbThL+GQG0yDuOc88MrLO+VwZnuBkJWrTpziKSqF-Kw@mail.gmail.com>
+To: =?UTF-8?B?5Lq65a6X6YGT6aaW?= <928003896@qq.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="0000000000001574f30600aeadea"
+Subject: Re: [Spice-devel] 
+	=?utf-8?b?5Zue5aSN77yaIEhvdyBkb2VzIFNQSUNFIGRpc3Bs?=
+	=?utf-8?q?ay_the_desktop_data_processed_by_Nvidia_vGPU=3F?=
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,92 +82,129 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?gb18030?B?c3BpY2UtZGV2ZWw=?= <spice-devel@lists.freedesktop.org>
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
+--0000000000001574f30600aeadea
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-------=_NextPart_64B4A8A2_10C64360_2F4E88BD
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+Hello,
 
-SGVsbG8sJm5ic3A7DQpUaGUgYXR0YWNobWVudCBzaG93cyB0aGUgZWZmZWN0IG9mIGluc3Rh
-bGxpbmcgc3BpY2Utc3RyZWFtaW5nLWFnZW50IG9uIHRoZSBzcGljZSBvZmZpY2lhbCB3ZWJz
-aXRlLiBUaGVyZSBhcmUgdHdvIHNjcmVlbnMsIG9uZSBkaXNwbGF5aW5nIG5vcm1hbCBhbmQg
-dGhlIG90aGVyIGRpc3BsYXlpbmcgYmxhY2suJm5ic3A7DQqjqDGjqVNob3VsZCB0aGUgYmxh
-Y2sgc2NyZWVuIGJlIGNhdXNlZCBieSBzcGljZS1zdHJlYW1pbmctYWdlbnQ/IFdoYXQgaXMg
-dGhlIHJlYXNvbiBmb3IgdGhlIGJsYWNrIHNjcmVlbj8gSXMgdGhlcmUgYSBzb2x1dGlvbj8N
-CqOoMqOpSXMgdGhlcmUgYSB3YXkgdG8gb25seSBkaXNwbGF5IHRoZSBkZXNrdG9wIGdlbmVy
-YXRlZCBieSBzcGljZSBzdHJlYW1pbmcgYWdlbnQgYW5kIHJ1biBpdCBub3JtYWxseSBsaWtl
-IGEgcmVtb3RlIGRlc2t0b3AsIGFsbG93aW5nIGZvciBrZXlib2FyZCBhbmQgbW91c2UgaW50
-ZXJhY3Rpb24/DQoNCg0KSSBob3BlIHlvdSBjYW4gaGVscCBtZSwgdGhhbmsgeW91IQ0KDQoN
-Cg0KDQotLS0tLS0tLS0tLS0tLS0tLS0mbmJzcDvUrcq808q8/iZuYnNwOy0tLS0tLS0tLS0t
-LS0tLS0tLQ0Kt6K8/sjLOiAiRnJlZGlhbm8gWmlnbGlvIjxmcmVkZHk3N0BnbWFpbC5jb20m
-Z3Q7OyANCreiy83KsbzkOiAyMDIzxOo31MIxMsjVKNDHxtrI/Skgze3Jzzc6MjYNCsrVvP7I
-yzogIsjL19q1wMrXIjw5MjgwMDM4OTZAcXEuY29tJmd0OzsgDQqzrcvNOiAic3BpY2UtZGV2
-ZWwiPHNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZyZndDs7IA0K1vfM4jogUmU6
-IFtTcGljZS1kZXZlbF0gSG93IGRvZXMgU1BJQ0UgZGlzcGxheSB0aGUgZGVza3RvcCBkYXRh
-IHByb2Nlc3NlZCBieSBOdmlkaWEgdkdQVT8NCg0KDQoNCklsIGdpb3JubyBtZXIgMTIgbHVn
-IDIwMjMgYWxsZSBvcmUgMDk6MzcgyMvX2rXAytcgPDkyODAwMzg5NkBxcS5jb20mZ3Q7IGhh
-IHNjcml0dG86DQomZ3Q7DQomZ3Q7IEhlbGxvLA0KJmd0OyBUaGUgbGluayB5b3UgcHJvdmlk
-ZWQgaXMgYWxzbyBhdmFpbGFibGUgb24gdGhlIG9mZmljaWFsIHdlYnNpdGUsIGFuZCBJIGhh
-dmUgYWxzbyBmb3VuZCBpdC4gSG93ZXZlciwgdGhlcmUgYXJlIGZldyBjb21tZW50cyBhbmQg
-aXQgaXMgc3RpbGwgZGlmZmljdWx0IHRvIHVuZGVyc3RhbmQuIElzIHRoZXJlIGFueSB0ZWNo
-bmljYWwgbWFudWFsIG9yIGRvY3VtZW50IG90aGVyIHRoYW4gdGhvc2UgcHJvdmlkZWQgb24g
-dGhlIG9mZmljaWFsIHdlYnNpdGUgdGhhdCBjYW4gaGVscCBtZSBtYWtlIGNvZGluZyBtb2Rp
-ZmljYXRpb25zIHRvIFNQSUNFPw0KJmd0Ow0KDQpOb3QgbXVjaCB1cGRhdGVkIGJ1dCB5b3Ug
-Y2FuIGZpbmQgc29tZSBiYXNlIG92ZXJhbGwgYXQNCmh0dHBzOi8vd3d3LnNwaWNlLXNwYWNl
-Lm9yZy9kZXZlbG9wZXJzLmh0bWwsIHByb2JhYmx5IHlvdSBoYXZlIGFscmVhZHkNCnNlZW4g
-dGhlbS4NCg0KRnJlZGlhbm8=
+On Mon, Jul 17, 2023 at 1:10=E2=80=AFPM =E4=BA=BA=E5=AE=97=E9=81=93=E9=A6=
+=96 <928003896@qq.com> wrote:
 
-------=_NextPart_64B4A8A2_10C64360_2F4E88BD
-Content-Type: text/html;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+> Hello,
+> The attachment shows the effect of installing spice-streaming-agent on th=
+e
+> spice official website. There are two screens, one displaying normal and
+> the other displaying black.
+> =EF=BC=881=EF=BC=89Should the black screen be caused by spice-streaming-a=
+gent? What is the
+> reason for the black screen? Is there a solution?
+>
 
-PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNo
-YXJzZXQ9R0IxODAzMCI+PGRpdj5IZWxsbywmbmJzcDs8L2Rpdj48ZGl2PlRoZSBhdHRhY2ht
-ZW50IHNob3dzIHRoZSBlZmZlY3Qgb2YgaW5zdGFsbGluZyBzcGljZS1zdHJlYW1pbmctYWdl
-bnQgb24gdGhlIHNwaWNlIG9mZmljaWFsIHdlYnNpdGUuIFRoZXJlIGFyZSB0d28gc2NyZWVu
-cywgb25lIGRpc3BsYXlpbmcgbm9ybWFsIGFuZCB0aGUgb3RoZXIgZGlzcGxheWluZyBibGFj
-ay4mbmJzcDs8L2Rpdj48ZGl2PqOoMaOpU2hvdWxkIHRoZSBibGFjayBzY3JlZW4gYmUgY2F1
-c2VkIGJ5IHNwaWNlLXN0cmVhbWluZy1hZ2VudD8gV2hhdCBpcyB0aGUgcmVhc29uIGZvciB0
-aGUgYmxhY2sgc2NyZWVuPyBJcyB0aGVyZSBhIHNvbHV0aW9uPzwvZGl2PjxkaXY+o6gyo6lJ
-cyB0aGVyZSBhIHdheSB0byBvbmx5IGRpc3BsYXkgdGhlIGRlc2t0b3AgZ2VuZXJhdGVkIGJ5
-IHNwaWNlIHN0cmVhbWluZyBhZ2VudCBhbmQgcnVuIGl0IG5vcm1hbGx5IGxpa2UgYSByZW1v
-dGUgZGVza3RvcCwgYWxsb3dpbmcgZm9yIGtleWJvYXJkIGFuZCBtb3VzZSBpbnRlcmFjdGlv
-bj88L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2PkkgaG9wZSB5b3UgY2FuIGhlbHAgbWUsIHRo
-YW5rIHlvdSE8L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2IHN0eWxl
-PSJmb250LXNpemU6IDEycHg7Zm9udC1mYW1pbHk6IEFyaWFsIE5hcnJvdztwYWRkaW5nOjJw
-eCAwIDJweCAwOyI+LS0tLS0tLS0tLS0tLS0tLS0tJm5ic3A71K3KvNPKvP4mbmJzcDstLS0t
-LS0tLS0tLS0tLS0tLS08L2Rpdj48ZGl2IHN0eWxlPSJmb250LXNpemU6IDEycHg7YmFja2dy
-b3VuZDojZWZlZmVmO3BhZGRpbmc6OHB4OyI+PGRpdj48Yj63orz+yMs6PC9iPiAiRnJlZGlh
-bm8gWmlnbGlvIiZsdDtmcmVkZHk3N0BnbWFpbC5jb20mZ3Q7OyA8L2Rpdj48ZGl2PjxiPrei
-y83KsbzkOjwvYj4gMjAyM8TqN9TCMTLI1SjQx8bayP0pIM3tyc83OjI2PC9kaXY+PGRpdj48
-Yj7K1bz+yMs6PC9iPiAiyMvX2rXAytciJmx0OzkyODAwMzg5NkBxcS5jb20mZ3Q7OyA8L2Rp
-dj48ZGl2PjxiID6zrcvNOjwvYj4gInNwaWNlLWRldmVsIiZsdDtzcGljZS1kZXZlbEBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcmZ3Q7OyA8L2Rpdj48ZGl2PjxiPtb3zOI6PC9iPiBSZTogW1Nw
-aWNlLWRldmVsXSBIb3cgZG9lcyBTUElDRSBkaXNwbGF5IHRoZSBkZXNrdG9wIGRhdGEgcHJv
-Y2Vzc2VkIGJ5IE52aWRpYSB2R1BVPzwvZGl2PjwvZGl2PjxkaXY+PGJyPjwvZGl2PklsIGdp
-b3JubyBtZXIgMTIgbHVnIDIwMjMgYWxsZSBvcmUgMDk6MzcgyMvX2rXAytcgJmx0OzxhIGhy
-ZWY9Im1haWx0bzo5MjgwMDM4OTZAcXEuY29tIiByZWw9Im5vb3BlbmVyIiB0YXJnZXQ9Il9i
-bGFuayI+OTI4MDAzODk2QHFxLmNvbTwvYT4mZ3Q7IGhhIHNjcml0dG86PGJyPiZndDs8YnI+
-Jmd0OyBIZWxsbyw8YnI+Jmd0OyBUaGUgbGluayB5b3UgcHJvdmlkZWQgaXMgYWxzbyBhdmFp
-bGFibGUgb24gdGhlIG9mZmljaWFsIHdlYnNpdGUsIGFuZCBJIGhhdmUgYWxzbyBmb3VuZCBp
-dC4gSG93ZXZlciwgdGhlcmUgYXJlIGZldyBjb21tZW50cyBhbmQgaXQgaXMgc3RpbGwgZGlm
-ZmljdWx0IHRvIHVuZGVyc3RhbmQuIElzIHRoZXJlIGFueSB0ZWNobmljYWwgbWFudWFsIG9y
-IGRvY3VtZW50IG90aGVyIHRoYW4gdGhvc2UgcHJvdmlkZWQgb24gdGhlIG9mZmljaWFsIHdl
-YnNpdGUgdGhhdCBjYW4gaGVscCBtZSBtYWtlIGNvZGluZyBtb2RpZmljYXRpb25zIHRvIFNQ
-SUNFPzxicj4mZ3Q7PGJyPjxicj5Ob3QgbXVjaCB1cGRhdGVkIGJ1dCB5b3UgY2FuIGZpbmQg
-c29tZSBiYXNlIG92ZXJhbGwgYXQ8YnI+PGEgaHJlZj0iaHR0cHM6Ly93d3cuc3BpY2Utc3Bh
-Y2Uub3JnL2RldmVsb3BlcnMuaHRtbCwiIHJlbD0ibm9vcGVuZXIiIHRhcmdldD0iX2JsYW5r
-Ij5odHRwczovL3d3dy5zcGljZS1zcGFjZS5vcmcvZGV2ZWxvcGVycy5odG1sLDwvYT4gcHJv
-YmFibHkgeW91IGhhdmUgYWxyZWFkeTxicj5zZWVuIHRoZW0uPGJyPjxicj5GcmVkaWFubzxz
-dHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnFtYm94IHN0eWxlLCAucW1ib3ggc2NyaXB0LCAucW1i
-b3ggaGVhZCwgLnFtYm94IGxpbmssIC5xbWJveCBtZXRhIHtkaXNwbGF5OiBub25lICFpbXBv
-cnRhbnQ7fTwvc3R5bGU+
+Are both screens enabled by the OS ?
 
-------=_NextPart_64B4A8A2_10C64360_2F4E88BD--
+
+>
+> =EF=BC=882=EF=BC=89Is there a way to only display the desktop generated b=
+y spice streaming
+> agent and run it normally like a remote desktop, allowing for keyboard an=
+d
+> mouse interaction?
+>
+
+Perhaps you can configure your OS to only enable the NVIDIA card.
+
+Uri
+
+
+>
+> I hope you can help me, thank you!
+>
+>
+> ------------------ =E5=8E=9F=E5=A7=8B=E9=82=AE=E4=BB=B6 -----------------=
+-
+> *=E5=8F=91=E4=BB=B6=E4=BA=BA:* "Frediano Ziglio"<freddy77@gmail.com>;
+> *=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:* 2023=E5=B9=B47=E6=9C=8812=E6=97=
+=A5(=E6=98=9F=E6=9C=9F=E4=B8=89) =E6=99=9A=E4=B8=8A7:26
+> *=E6=94=B6=E4=BB=B6=E4=BA=BA:* "=E4=BA=BA=E5=AE=97=E9=81=93=E9=A6=96"<928=
+003896@qq.com>;
+> *=E6=8A=84=E9=80=81:* "spice-devel"<spice-devel@lists.freedesktop.org>;
+> *=E4=B8=BB=E9=A2=98:* Re: [Spice-devel] How does SPICE display the deskto=
+p data processed
+> by Nvidia vGPU?
+>
+> Il giorno mer 12 lug 2023 alle ore 09:37 =E4=BA=BA=E5=AE=97=E9=81=93=E9=
+=A6=96 <928003896@qq.com> ha
+> scritto:
+> >
+> > Hello,
+> > The link you provided is also available on the official website, and I
+> have also found it. However, there are few comments and it is still
+> difficult to understand. Is there any technical manual or document other
+> than those provided on the official website that can help me make coding
+> modifications to SPICE?
+> >
+>
+> Not much updated but you can find some base overall at
+> https://www.spice-space.org/developers.html, probably you have already
+> seen them.
+>
+> Frediano
+
+--0000000000001574f30600aeadea
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hello,<br></div><br><div class=3D"gmail_quote"><div d=
+ir=3D"ltr" class=3D"gmail_attr">On Mon, Jul 17, 2023 at 1:10=E2=80=AFPM =E4=
+=BA=BA=E5=AE=97=E9=81=93=E9=A6=96 &lt;<a href=3D"mailto:928003896@qq.com">9=
+28003896@qq.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
+ding-left:1ex"><div>Hello,=C2=A0</div><div>The attachment shows the effect =
+of installing spice-streaming-agent on the spice official website. There ar=
+e two screens, one displaying normal and the other displaying black.=C2=A0<=
+/div><div>=EF=BC=881=EF=BC=89Should the black screen be caused by spice-str=
+eaming-agent? What is the reason for the black screen? Is there a solution?=
+</div></blockquote><div><br></div><div>Are both screens enabled by the OS ?=
+</div><br>=C2=A0<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div>=EF=
+=BC=882=EF=BC=89Is there a way to only display the desktop generated by spi=
+ce streaming agent and run it normally like a remote desktop, allowing for =
+keyboard and mouse interaction?</div></blockquote><div><br></div><div><div>=
+Perhaps you can configure your OS to only enable the NVIDIA card.<br></div>=
+<div><br></div><div>Uri<br></div>=C2=A0</div><blockquote class=3D"gmail_quo=
+te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
+);padding-left:1ex"><div><br></div><div>I hope you can help me, thank you!<=
+/div><div><br></div><div><br></div><div style=3D"font-size:12px;font-family=
+:Arial Narrow;padding:2px 0px">------------------=C2=A0=E5=8E=9F=E5=A7=8B=
+=E9=82=AE=E4=BB=B6=C2=A0------------------</div><div style=3D"font-size:12p=
+x;background:rgb(239,239,239);padding:8px"><div><b>=E5=8F=91=E4=BB=B6=E4=BA=
+=BA:</b> &quot;Frediano Ziglio&quot;&lt;<a href=3D"mailto:freddy77@gmail.co=
+m" target=3D"_blank">freddy77@gmail.com</a>&gt;; </div><div><b>=E5=8F=91=E9=
+=80=81=E6=97=B6=E9=97=B4:</b> 2023=E5=B9=B47=E6=9C=8812=E6=97=A5(=E6=98=9F=
+=E6=9C=9F=E4=B8=89) =E6=99=9A=E4=B8=8A7:26</div><div><b>=E6=94=B6=E4=BB=B6=
+=E4=BA=BA:</b> &quot;=E4=BA=BA=E5=AE=97=E9=81=93=E9=A6=96&quot;&lt;<a href=
+=3D"mailto:928003896@qq.com" target=3D"_blank">928003896@qq.com</a>&gt;; </=
+div><div><b>=E6=8A=84=E9=80=81:</b> &quot;spice-devel&quot;&lt;<a href=3D"m=
+ailto:spice-devel@lists.freedesktop.org" target=3D"_blank">spice-devel@list=
+s.freedesktop.org</a>&gt;; </div><div><b>=E4=B8=BB=E9=A2=98:</b> Re: [Spice=
+-devel] How does SPICE display the desktop data processed by Nvidia vGPU?</=
+div></div><div><br></div>Il giorno mer 12 lug 2023 alle ore 09:37 =E4=BA=BA=
+=E5=AE=97=E9=81=93=E9=A6=96 &lt;<a href=3D"mailto:928003896@qq.com" rel=3D"=
+noopener" target=3D"_blank">928003896@qq.com</a>&gt; ha scritto:<br>&gt;<br=
+>&gt; Hello,<br>&gt; The link you provided is also available on the officia=
+l website, and I have also found it. However, there are few comments and it=
+ is still difficult to understand. Is there any technical manual or documen=
+t other than those provided on the official website that can help me make c=
+oding modifications to SPICE?<br>&gt;<br><br>Not much updated but you can f=
+ind some base overall at<br><a href=3D"https://www.spice-space.org/develope=
+rs.html," rel=3D"noopener" target=3D"_blank">https://www.spice-space.org/de=
+velopers.html,</a> probably you have already<br>seen them.<br><br>Frediano<=
+/blockquote></div></div>
+
+--0000000000001574f30600aeadea--
 
