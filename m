@@ -1,68 +1,42 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34825756544
-	for <lists+spice-devel@lfdr.de>; Mon, 17 Jul 2023 15:41:40 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D97A758E30
+	for <lists+spice-devel@lfdr.de>; Wed, 19 Jul 2023 08:57:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F4EE10E24C;
-	Mon, 17 Jul 2023 13:41:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 862ED10E1AA;
+	Wed, 19 Jul 2023 06:56:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31D7410E24C
- for <spice-devel@lists.freedesktop.org>; Mon, 17 Jul 2023 13:41:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1689601294;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=y9YFTrZJUlbwDfNR5hXyDBT4ON9XEsEM0onvrLnsJso=;
- b=gveh3h5rAqB4rwfg+HcEk0xLiJuiJ7Eus9P9hnEcB9lOUZu/kQXkYbhx6AA6QC6kV7H7V6
- XWy9aJvt2cez+Q1cX5YbF3xWiGD7MRmufVRZVy4CIp/loACro9KZyGkzoBU4yqW+d3LdMn
- 29Sw6Xe7h9HAZUrblvZFBxFXaVEIb2g=
-Received: from mail-oo1-f71.google.com (mail-oo1-f71.google.com
- [209.85.161.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-635-lxoSP4p6PamyNnceVpXMsg-1; Mon, 17 Jul 2023 09:41:33 -0400
-X-MC-Unique: lxoSP4p6PamyNnceVpXMsg-1
-Received: by mail-oo1-f71.google.com with SMTP id
- 006d021491bc7-565f0c7c243so5906377eaf.2
- for <spice-devel@lists.freedesktop.org>; Mon, 17 Jul 2023 06:41:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689601292; x=1692193292;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=y9YFTrZJUlbwDfNR5hXyDBT4ON9XEsEM0onvrLnsJso=;
- b=gp9vhmAK5aTJi07gyij5GaUK9OpF0cYTRl7EhUY9/BlimNoMisJ20Vn6lg9sGET8mz
- zhD6q70KQJ1XZ5Lqr9cDt4GQsMkOoqw0vdUCeJDn17wqG2l/YrM9fVFg9NYDdJPVyYlV
- ZJwhQvoP8uV/7Tw8AtRoVVBJn4bLwZgsi08VhGj7VrxIxNTDrhl4zYEzZDxDTnGlyvM/
- QWLmyIacAhWFRZOV72fIP7lvtCPDYP43mZuzKFnZWcWAQfwdqBs2XhA7ZFlvUenOokbp
- lZ8oFRqDJ9WrJZbekkd1UvzI0otXQSjLEE8ZPkzjLo/EEkodJlmuH0aaoMkeRQOaL0p+
- nUaQ==
-X-Gm-Message-State: ABy/qLb+swvuPoHHVfyGQD/GWF/Z1JT1zlLHolMmwGbyt5CdrnDtKWoe
- UURAtv8CZ/MDItVgkFKTl0lslB7T5v1lhkgXBt//Oaqmiz8/4EK4snWbTGeR89ZVZNl/UPWy2x6
- xfN/8kyWJOvt6QVsj9wXaHXAjUeMRHlSkBLvvb+wBEuQAOh5yPbXEhH08og==
-X-Received: by 2002:a4a:928c:0:b0:566:f951:d12 with SMTP id
- i12-20020a4a928c000000b00566f9510d12mr4289373ooh.1.1689601292003; 
- Mon, 17 Jul 2023 06:41:32 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlGFOcOdQ4oofInTvrIIbdEALCxpP1UV5Q6ovTL4+mZyQtNu90G6Z+bsDRM6B3bj+k8UVbwg2Qf1UgxBgIc1Jic=
-X-Received: by 2002:a4a:928c:0:b0:566:f951:d12 with SMTP id
- i12-20020a4a928c000000b00566f9510d12mr4289317ooh.1.1689601290126; Mon, 17 Jul
- 2023 06:41:30 -0700 (PDT)
+Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 736EE10E0B8;
+ Wed, 19 Jul 2023 01:42:29 +0000 (UTC)
+Received: from vertex.vmware.com (pool-173-49-113-140.phlapa.fios.verizon.net
+ [173.49.113.140]) (Authenticated sender: zack)
+ by letterbox.kde.org (Postfix) with ESMTPSA id 0E7653262AA;
+ Wed, 19 Jul 2023 02:42:25 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
+ t=1689730948; bh=GUnUYL12ZLRuDUIED2a9wljCtTLcYkiXjN/0lQdXoAU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=KIDqkIZTjXxgneftZKtkK3UOQe0aeTIZomj8Z1NiapJC17UvwJb8dut68psl+U0Eh
+ pGqGFd5QNOvJgOr6T1I8oRd7Fr5FFBmHfXg8cWSjyqpqimbo+2Nr1H8JBJPCv5gnZg
+ 1ZqLTBGuQ5/9gQxATVH8Ez+wNIzZCpflylba9uHewMYlc77fW+sierFUZJTI2l4vPb
+ WWt6Iu3ndWMQkXfNQzYh/J6CZLbERSb3MddII76jmcQ2haBsBLqMjfurpFRFsyvkyV
+ s1BacWS1knuiSeMhZmsyRS9u7Wv5EdtwGWPyorrq5g04+iOIw+tTn8+aHXNc2fDxmS
+ kBPh6bxjR4wFg==
+From: Zack Rusin <zack@kde.org>
+To: dri-devel@lists.freedesktop.org
+Date: Tue, 18 Jul 2023 21:42:10 -0400
+Message-Id: <20230719014218.1700057-2-zack@kde.org>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230719014218.1700057-1-zack@kde.org>
+References: <20230719014218.1700057-1-zack@kde.org>
 MIME-Version: 1.0
-References: <99e6b141-6aa0-fc47-2ffa-7a94e1a3c079@gmail.com>
-In-Reply-To: <99e6b141-6aa0-fc47-2ffa-7a94e1a3c079@gmail.com>
-From: Uri Lublin <ulublin@redhat.com>
-Date: Mon, 17 Jul 2023 16:41:19 +0300
-Message-ID: <CAAg9qJ0nNhtDoeKdBjVd1r7YwgSorhNeD2f=oFWeFPR3-_aWGg@mail.gmail.com>
-To: =?UTF-8?Q?N=C3=A9fix_Estrada?= <nefixestrada@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="000000000000b5e0bd0600aef434"
-Subject: Re: [Spice-devel] Help with image encoding
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 19 Jul 2023 06:56:53 +0000
+Subject: [Spice-devel] [PATCH v5 1/9] drm: Disable the cursor plane on
+ atomic contexts with virtualized drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,137 +48,188 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Reply-To: Zack Rusin <zackr@vmware.com>
+Cc: David Airlie <airlied@linux.ie>, banackm@vmware.com,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, mombasawalam@vmware.com, javierm@redhat.com,
+ spice-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Chia-I Wu <olvaffe@gmail.com>, daniel@ffwll.ch,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
+ ppaalanen@gmail.com, Dave Airlie <airlied@redhat.com>, iforbes@vmware.com,
+ Pekka Paalanen <pekka.paalanen@collabora.com>, contact@emersion.fr,
+ stable@vger.kernel.org, krastevm@vmware.com,
+ Thomas Zimmermann <tzimmermann@suse.de>, Zack Rusin <zackr@vmware.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000b5e0bd0600aef434
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Zack Rusin <zackr@vmware.com>
 
-Hello,
+Cursor planes on virtualized drivers have special meaning and require
+that the clients handle them in specific ways, e.g. the cursor plane
+should react to the mouse movement the way a mouse cursor would be
+expected to and the client is required to set hotspot properties on it
+in order for the mouse events to be routed correctly.
 
-On Sun, Jul 16, 2023 at 9:58=E2=80=AFAM N=C3=A9fix Estrada <nefixestrada@gm=
-ail.com>
-wrote:
+This breaks the contract as specified by the "universal planes". Fix it
+by disabling the cursor planes on virtualized drivers while adding
+a foundation on top of which it's possible to special case mouse cursor
+planes for clients that want it.
 
-> Hello! I'm currently writting a Spice client in Typescript that makes
-> use of modern browser features (such as WebGPU, WebUSB, Web workers, etc)=
-.
->
->
-> However, I'm struggling with the Image image encoding. I've checked the
-> whole documentation site, but I wasn't able to find how each one of the
-> encoding works. My knowledge in both audio and video encoding is very
-> limited. Specifically:
->
+Disabling the cursor planes makes some kms compositors which were broken,
+e.g. Weston, fallback to software cursor which works fine or at least
+better than currently while having no effect on others, e.g. gnome-shell
+or kwin, which put virtualized drivers on a deny-list when running in
+atomic context to make them fallback to legacy kms and avoid this issue.
 
-There is not much documentation about image encoding.
+Signed-off-by: Zack Rusin <zackr@vmware.com>
+Fixes: 681e7ec73044 ("drm: Allow userspace to ask for universal plane list (v2)")
+Cc: <stable@vger.kernel.org> # v5.4+
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Cc: Gurchetan Singh <gurchetansingh@chromium.org>
+Cc: Chia-I Wu <olvaffe@gmail.com>
+Cc: dri-devel@lists.freedesktop.org
+Cc: virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org
+Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+---
+ drivers/gpu/drm/drm_plane.c          | 13 +++++++++++++
+ drivers/gpu/drm/qxl/qxl_drv.c        |  2 +-
+ drivers/gpu/drm/vboxvideo/vbox_drv.c |  2 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.c |  3 ++-
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c  |  2 +-
+ include/drm/drm_drv.h                |  9 +++++++++
+ include/drm/drm_file.h               | 12 ++++++++++++
+ 7 files changed, 39 insertions(+), 4 deletions(-)
 
-
-
->
-> - QUIC
->
-
-At the top of common/quic.c there are these two lines:
-// Red Hat image compression based on SFALIC by Roman Starosolski
-// http://sun.iinf.polsl.gliwice.pl/~rstaros/sfalic/index.html
-
-
-
-
->
-> - LZ (and all its variants)
->
->
-> I've been trying to understand them from the spice-common project, but
-> it's just the implementation without any type of docs :(
->
-> Another question I had is if there's another way of comunication or a
-> place where I can shoot questions about the implementation
->
-
-I think sending an email to this mailing list is fine.
-There is also an IRC channel.
-
-Kind Regards,
-    Uri.
-
-
-
->
-> Also, I'm planning on gifting the client to the spice project, if you
-> would be interested in! (given that you already have a JS project)
->
->
-> Thanks in advance!
->
->
-> N=C3=A9fix Estrada
->
->
-
---000000000000b5e0bd0600aef434
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div>Hello,</div></div><br><div class=3D"=
-gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Jul 16, 2023 at =
-9:58=E2=80=AFAM N=C3=A9fix Estrada &lt;<a href=3D"mailto:nefixestrada@gmail=
-.com">nefixestrada@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex">Hello! I&#39;m currently writting a Spice clien=
-t in Typescript that makes <br>
-use of modern browser features (such as WebGPU, WebUSB, Web workers, etc).<=
-br>
-<br>
-<br>
-However, I&#39;m struggling with the Image image encoding. I&#39;ve checked=
- the <br>
-whole documentation site, but I wasn&#39;t able to find how each one of the=
- <br>
-encoding works. My knowledge in both audio and video encoding is very <br>
-limited. Specifically:<br></blockquote><div><br></div><div>There is not muc=
-h documentation about image encoding.</div><br><div>=C2=A0<br></div><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
-x solid rgb(204,204,204);padding-left:1ex">
-<br>
-- QUIC<br></blockquote><div><br></div><div><div>At the top of common/quic.c=
- there are these two lines:</div><div>// Red Hat image compression based on=
- SFALIC by Roman Starosolski<br>// <a href=3D"http://sun.iinf.polsl.gliwice=
-.pl/~rstaros/sfalic/index.html">http://sun.iinf.polsl.gliwice.pl/~rstaros/s=
-falic/index.html</a><br></div><div><br><br></div></div><div>=C2=A0</div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-- LZ (and all its variants)<br>
-<br>
-<br>
-I&#39;ve been trying to understand them from the spice-common project, but =
-<br>
-it&#39;s just the implementation without any type of docs :(<br>
-<br>
-Another question I had is if there&#39;s another way of comunication or a <=
-br>
-place where I can shoot questions about the implementation<br></blockquote>=
-<div><br></div><div>I think sending an email to this mailing list is fine.<=
-/div><div>There is also an IRC channel.</div><div><br></div><div>Kind Regar=
-ds,</div><div>=C2=A0=C2=A0=C2=A0 Uri.</div><div><br></div><div>=C2=A0</div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-Also, I&#39;m planning on gifting the client to the spice project, if you <=
-br>
-would be interested in! (given that you already have a JS project)<br>
-<br>
-<br>
-Thanks in advance!<br>
-<br>
-<br>
-N=C3=A9fix Estrada<br>
-<br>
-</blockquote></div></div>
-
---000000000000b5e0bd0600aef434--
+diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
+index 24e7998d1731..c6bbb0c209f4 100644
+--- a/drivers/gpu/drm/drm_plane.c
++++ b/drivers/gpu/drm/drm_plane.c
+@@ -678,6 +678,19 @@ int drm_mode_getplane_res(struct drm_device *dev, void *data,
+ 		    !file_priv->universal_planes)
+ 			continue;
+ 
++		/*
++		 * If we're running on a virtualized driver then,
++		 * unless userspace advertizes support for the
++		 * virtualized cursor plane, disable cursor planes
++		 * because they'll be broken due to missing cursor
++		 * hotspot info.
++		 */
++		if (plane->type == DRM_PLANE_TYPE_CURSOR &&
++		    drm_core_check_feature(dev, DRIVER_CURSOR_HOTSPOT) &&
++		    file_priv->atomic &&
++		    !file_priv->supports_virtualized_cursor_plane)
++			continue;
++
+ 		if (drm_lease_held(file_priv, plane->base.id)) {
+ 			if (count < plane_resp->count_planes &&
+ 			    put_user(plane->base.id, plane_ptr + count))
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
+index b30ede1cf62d..91930e84a9cd 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.c
++++ b/drivers/gpu/drm/qxl/qxl_drv.c
+@@ -283,7 +283,7 @@ static const struct drm_ioctl_desc qxl_ioctls[] = {
+ };
+ 
+ static struct drm_driver qxl_driver = {
+-	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
++	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC | DRIVER_CURSOR_HOTSPOT,
+ 
+ 	.dumb_create = qxl_mode_dumb_create,
+ 	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
+diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+index 4fee15c97c34..8ecd0863fad7 100644
+--- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
++++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+@@ -172,7 +172,7 @@ DEFINE_DRM_GEM_FOPS(vbox_fops);
+ 
+ static const struct drm_driver driver = {
+ 	.driver_features =
+-	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
++	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC | DRIVER_CURSOR_HOTSPOT,
+ 
+ 	.fops = &vbox_fops,
+ 	.name = DRIVER_NAME,
+diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virtio/virtgpu_drv.c
+index a7ec5a3770da..60b1fd23229c 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_drv.c
++++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
+@@ -176,7 +176,8 @@ static const struct drm_driver driver = {
+ 	 * If KMS is disabled DRIVER_MODESET and DRIVER_ATOMIC are masked
+ 	 * out via drm_device::driver_features:
+ 	 */
+-	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC,
++	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC |
++			   DRIVER_CURSOR_HOTSPOT,
+ 	.open = virtio_gpu_driver_open,
+ 	.postclose = virtio_gpu_driver_postclose,
+ 
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+index 8b24ecf60e3e..d3e308fdfd5b 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+@@ -1611,7 +1611,7 @@ static const struct file_operations vmwgfx_driver_fops = {
+ 
+ static const struct drm_driver driver = {
+ 	.driver_features =
+-	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM,
++	DRIVER_MODESET | DRIVER_RENDER | DRIVER_ATOMIC | DRIVER_GEM | DRIVER_CURSOR_HOTSPOT,
+ 	.ioctls = vmw_ioctls,
+ 	.num_ioctls = ARRAY_SIZE(vmw_ioctls),
+ 	.master_set = vmw_master_set,
+diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
+index b77f2c7275b7..8303016665dd 100644
+--- a/include/drm/drm_drv.h
++++ b/include/drm/drm_drv.h
+@@ -104,6 +104,15 @@ enum drm_driver_feature {
+ 	 * acceleration should be handled by two drivers that are connected using auxiliary bus.
+ 	 */
+ 	DRIVER_COMPUTE_ACCEL            = BIT(7),
++	/**
++	 * @DRIVER_CURSOR_HOTSPOT:
++	 *
++	 * Driver supports and requires cursor hotspot information in the
++	 * cursor plane (e.g. cursor plane has to actually track the mouse
++	 * cursor and the clients are required to set hotspot in order for
++	 * the cursor planes to work correctly).
++	 */
++	DRIVER_CURSOR_HOTSPOT           = BIT(8),
+ 
+ 	/* IMPORTANT: Below are all the legacy flags, add new ones above. */
+ 
+diff --git a/include/drm/drm_file.h b/include/drm/drm_file.h
+index 010239392adf..69720ac29c67 100644
+--- a/include/drm/drm_file.h
++++ b/include/drm/drm_file.h
+@@ -228,6 +228,18 @@ struct drm_file {
+ 	 */
+ 	bool is_master;
+ 
++	/**
++	 * @supports_virtualized_cursor_plane:
++	 *
++	 * This client is capable of handling the cursor plane with the
++	 * restrictions imposed on it by the virtualized drivers.
++	 *
++	 * This implies that the cursor plane has to behave like a cursor
++	 * i.e. track cursor movement. It also requires setting of the
++	 * hotspot properties by the client on the cursor plane.
++	 */
++	bool supports_virtualized_cursor_plane;
++
+ 	/**
+ 	 * @master:
+ 	 *
+-- 
+2.39.2
 
