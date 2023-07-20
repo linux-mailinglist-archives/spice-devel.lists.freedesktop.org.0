@@ -1,47 +1,69 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96BFF75ACF6
-	for <lists+spice-devel@lfdr.de>; Thu, 20 Jul 2023 13:29:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E256075B6F1
+	for <lists+spice-devel@lfdr.de>; Thu, 20 Jul 2023 20:38:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19C0110E110;
-	Thu, 20 Jul 2023 11:29:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0C7CD10E1A8;
+	Thu, 20 Jul 2023 18:38:41 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
- [185.70.41.103])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9914010E592
- for <spice-devel@lists.freedesktop.org>; Thu, 20 Jul 2023 09:47:06 +0000 (UTC)
-Date: Thu, 20 Jul 2023 09:46:50 +0000
-Authentication-Results: mail-41103.protonmail.ch;
- dkim=pass (2048-bit key) header.d=emersion.fr header.i=@emersion.fr
- header.b="khEt8NHj"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
- s=protonmail2; t=1689846419; x=1690105619;
- bh=dqMnOVFhwGcutUmZpxIgWHHQX4uB6hVlnaB+uDk+OE4=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=khEt8NHj28Gk5X3RTiPtuHtCurlrsaAlh+SykOxofNgWGGmBw3Afo06sxd0Nxq1ew
- 6R52J9EvgCEUaDo2Ck1E2zPFU7APSPg+zR/f2ENwiPxBLb4lYTQKasgIamCF+IT2AY
- 0o5zu3uZi/rVcmWH2A79teMqWZYejTY9ndV58SFel9lAuTs5T6IvnKqW9RZ49xKHmN
- e69/8ljlGDALk69W/ZjjW7mX4wqa962x+5lQ2PdzrTbeotE96JW2vVtUnXcGVyIkWT
- c/opKcahiEZiNbUYIftJe16mrANEC6keVF2fJAhNFOokFPId0F+IuzJHTOreapDUZu
- K6I2yA1r2OW0g==
-To: Zack Rusin <zackr@vmware.com>
-From: Simon Ser <contact@emersion.fr>
-Message-ID: <xYS3Q2f4tkRhaihB8Y5aOcD8EGj35KDyUgpsiMrexx-vXLulGQRKCc9n7dCtLAsXEOxIv0uk3DIEvLYw-yiSK5c_goUQv04mp2II1cuT4YA=@emersion.fr>
-In-Reply-To: <20230719014218.1700057-2-zack@kde.org>
-References: <20230719014218.1700057-1-zack@kde.org>
- <20230719014218.1700057-2-zack@kde.org>
-Feedback-ID: 1358184:user:proton
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A74D410E1A8
+ for <spice-devel@lists.freedesktop.org>; Thu, 20 Jul 2023 18:38:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1689878317;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=22Vqf21b0iCG3EyQGggRwpXkrZSXdA4Fka1+MxxD2/8=;
+ b=UcRJ48LP1mLfpjl6w5FtOQQiS68tmhYqTS7wN+GyqCFG5KCm/96VJW8pl2nKCV3CiFpLyr
+ RdJI3/aLX77kIytydtVA3Q8lCwNby7JbXHd4S5rEJmdo6UFrX8MljiBiJwyz0oCPv/mqIl
+ Ohsxr4d94o41htjWTIG9NHBiJOFnpk8=
+Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com
+ [209.85.167.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-537-57ejQXsYPFKYF6ZJoduAjg-1; Thu, 20 Jul 2023 14:38:36 -0400
+X-MC-Unique: 57ejQXsYPFKYF6ZJoduAjg-1
+Received: by mail-oi1-f198.google.com with SMTP id
+ 5614622812f47-3a41e98b337so2181420b6e.1
+ for <spice-devel@lists.freedesktop.org>; Thu, 20 Jul 2023 11:38:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689878316; x=1690483116;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=22Vqf21b0iCG3EyQGggRwpXkrZSXdA4Fka1+MxxD2/8=;
+ b=DvcCxahIp0DB+ShNhZzOebNIX/2xoer37M1jX8TZPrKyTG4td6NrRaKg+eV2W7JHYS
+ WpjVmPj5DSZJFA0uFKlhUvKMrkm40D/Js2L3I7c908vwaCfKnE26ZDr3mw2jkqlfr206
+ 0OmOQGrv4TR2Y3a/OMfdFmaUGsGZO+dzNgHn+WQzGosVP5sUuLKw05jas/YMWrHfSMV2
+ 3HiTa5uEBN5IxHYdch5v6YY7iZzT5U8p24Akr5QHujZPz8FgtpPASRUI66oTARMA1JDH
+ lvHYez8wxhh0kjjzwYY3vIhf6b5+bmEdpuDMbAdddg8sn2GXEApDeU8wgwcaxwHZdaS7
+ dNbg==
+X-Gm-Message-State: ABy/qLbNexFRTVFwsThTiCFdqQuXgmB2478Xft1wtahzjV/xAG055HHk
+ buK4tfoATvLJYA5XP5HHRJzdxKPXlZ29Od/2NgFy5Zdns0IveY6e8o+J25V+H3in/7U7IpqaqyU
+ txF3mSJtMDDWZa5zuvvSrWO3wG3XoIOIlmKekexo7kXta38bQYahZvAndzQ==
+X-Received: by 2002:aca:2104:0:b0:396:e3a:9f2f with SMTP id
+ 4-20020aca2104000000b003960e3a9f2fmr339425oiz.5.1689878314870; 
+ Thu, 20 Jul 2023 11:38:34 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlGsFKtP512JfKcDoKuqxt/6pR8u6H6/nEH2Mmmfo80EwIx0w32yszfm6Zs7ArhEUJ3xFmf8v6+lWjYxkKKK+aM=
+X-Received: by 2002:aca:2104:0:b0:396:e3a:9f2f with SMTP id
+ 4-20020aca2104000000b003960e3a9f2fmr339405oiz.5.1689878314406; Thu, 20 Jul
+ 2023 11:38:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 20 Jul 2023 11:29:23 +0000
-Subject: Re: [Spice-devel] [PATCH v5 1/9] drm: Disable the cursor plane on
- atomic contexts with virtualized drivers
+References: <99e6b141-6aa0-fc47-2ffa-7a94e1a3c079@gmail.com>
+ <CAHt6W4cAL9N1yoigxgbqHAnoCU1ZzZUiH3KcW52qaXigCK25ng@mail.gmail.com>
+In-Reply-To: <CAHt6W4cAL9N1yoigxgbqHAnoCU1ZzZUiH3KcW52qaXigCK25ng@mail.gmail.com>
+From: Uri Lublin <ulublin@redhat.com>
+Date: Thu, 20 Jul 2023 21:38:23 +0300
+Message-ID: <CAAg9qJ1DFZr+Hv9O8qJdrr-LUECW9E=Vcbow2qen1WGe+bCKQg@mail.gmail.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="000000000000a4ec070600ef74ee"
+Subject: Re: [Spice-devel] Help with image encoding
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,65 +75,149 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Maxime Ripard <mripard@kernel.org>,
- Pekka Paalanen <pekka.paalanen@collabora.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, Hans de Goede <hdegoede@redhat.com>,
- David Airlie <airlied@linux.ie>, spice-devel@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, javierm@redhat.com,
- banackm@vmware.com, Gurchetan Singh <gurchetansingh@chromium.org>,
- krastevm@vmware.com, ppaalanen@gmail.com, dri-devel@lists.freedesktop.org,
- daniel@ffwll.ch, Dave Airlie <airlied@redhat.com>, stable@vger.kernel.org,
- iforbes@vmware.com, virtualization@lists.linux-foundation.org,
- Chia-I Wu <olvaffe@gmail.com>, mombasawalam@vmware.com,
- Gerd Hoffmann <kraxel@redhat.com>
+Cc: spice-devel@lists.freedesktop.org,
+ =?UTF-8?Q?N=C3=A9fix_Estrada?= <nefixestrada@gmail.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Wednesday, July 19th, 2023 at 03:42, Zack Rusin <zack@kde.org> wrote:
+--000000000000a4ec070600ef74ee
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> From: Zack Rusin <zackr@vmware.com>
->=20
-> Cursor planes on virtualized drivers have special meaning and require
-> that the clients handle them in specific ways, e.g. the cursor plane
-> should react to the mouse movement the way a mouse cursor would be
-> expected to and the client is required to set hotspot properties on it
-> in order for the mouse events to be routed correctly.
->=20
-> This breaks the contract as specified by the "universal planes". Fix it
-> by disabling the cursor planes on virtualized drivers while adding
-> a foundation on top of which it's possible to special case mouse cursor
-> planes for clients that want it.
->=20
-> Disabling the cursor planes makes some kms compositors which were broken,
-> e.g. Weston, fallback to software cursor which works fine or at least
-> better than currently while having no effect on others, e.g. gnome-shell
-> or kwin, which put virtualized drivers on a deny-list when running in
-> atomic context to make them fallback to legacy kms and avoid this issue.
->=20
-> Signed-off-by: Zack Rusin <zackr@vmware.com>
-> Fixes: 681e7ec73044 ("drm: Allow userspace to ask for universal plane lis=
-t (v2)")
-> Cc: <stable@vger.kernel.org> # v5.4+
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Dave Airlie <airlied@redhat.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: Hans de Goede <hdegoede@redhat.com>
-> Cc: Gurchetan Singh <gurchetansingh@chromium.org>
-> Cc: Chia-I Wu <olvaffe@gmail.com>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: spice-devel@lists.freedesktop.org
-> Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
-> Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+On Wed, Jul 19, 2023 at 10:55=E2=80=AFAM Frediano Ziglio <freddy77@gmail.co=
+m> wrote:
 
-Nit: I think it would be better to reflect the name of the DRM client cap i=
-n
-the supports_virtualized_cursor_plane field.
+> Il giorno dom 16 lug 2023 alle ore 07:58 N=C3=A9fix Estrada
+> <nefixestrada@gmail.com> ha scritto:
+> >
+> > Hello! I'm currently writting a Spice client in Typescript that makes
+> > use of modern browser features (such as WebGPU, WebUSB, Web workers,
+> etc).
+> >
+> >
+> > However, I'm struggling with the Image image encoding. I've checked the
+> > whole documentation site, but I wasn't able to find how each one of the
+> > encoding works. My knowledge in both audio and video encoding is very
+> > limited. Specifically:
+> >
+> > - QUIC
+> >
+> > - LZ (and all its variants)
+> >
+> >
+> > I've been trying to understand them from the spice-common project, but
+> > it's just the implementation without any type of docs :(
+> >
+> > Another question I had is if there's another way of comunication or a
+> > place where I can shoot questions about the implementation
+> >
+> >
+> > Also, I'm planning on gifting the client to the spice project, if you
+> > would be interested in! (given that you already have a JS project)
+> >
+> >
+> > Thanks in advance!
+> >
+> >
+> > N=C3=A9fix Estrada
+> >
+>
+> Hi,
+>    why not look at SPICE html client instead? It's already JS code so
+> it  shouldn't be that different.
+> For QUIC you can see Uri's link if you need some notes, LZ is more or
+> less standard on decoding, you have uncompressed sections and
+> references to previous chunks, so it's just a matter of understanding
+> these encodings.
+>
 
-Regardless:
+There is also a link in spice-common/common/lz.h:
+" dictionary compression for images based on fastlz (http://www.fastlz.org/=
+)
+"
 
-Reviewed-by: Simon Ser <contact@emersion.fr>
+Uri.
+
+
+
+>
+> Regards,
+>    Frediano
+>
+>
+
+--000000000000a4ec070600ef74ee
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"g=
+mail_attr">On Wed, Jul 19, 2023 at 10:55=E2=80=AFAM Frediano Ziglio &lt;<a =
+href=3D"mailto:freddy77@gmail.com">freddy77@gmail.com</a>&gt; wrote:<br></d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex">Il giorno dom 16 lug 2=
+023 alle ore 07:58 N=C3=A9fix Estrada<br>
+&lt;<a href=3D"mailto:nefixestrada@gmail.com" target=3D"_blank">nefixestrad=
+a@gmail.com</a>&gt; ha scritto:<br>
+&gt;<br>
+&gt; Hello! I&#39;m currently writting a Spice client in Typescript that ma=
+kes<br>
+&gt; use of modern browser features (such as WebGPU, WebUSB, Web workers, e=
+tc).<br>
+&gt;<br>
+&gt;<br>
+&gt; However, I&#39;m struggling with the Image image encoding. I&#39;ve ch=
+ecked the<br>
+&gt; whole documentation site, but I wasn&#39;t able to find how each one o=
+f the<br>
+&gt; encoding works. My knowledge in both audio and video encoding is very<=
+br>
+&gt; limited. Specifically:<br>
+&gt;<br>
+&gt; - QUIC<br>
+&gt;<br>
+&gt; - LZ (and all its variants)<br>
+&gt;<br>
+&gt;<br>
+&gt; I&#39;ve been trying to understand them from the spice-common project,=
+ but<br>
+&gt; it&#39;s just the implementation without any type of docs :(<br>
+&gt;<br>
+&gt; Another question I had is if there&#39;s another way of comunication o=
+r a<br>
+&gt; place where I can shoot questions about the implementation<br>
+&gt;<br>
+&gt;<br>
+&gt; Also, I&#39;m planning on gifting the client to the spice project, if =
+you<br>
+&gt; would be interested in! (given that you already have a JS project)<br>
+&gt;<br>
+&gt;<br>
+&gt; Thanks in advance!<br>
+&gt;<br>
+&gt;<br>
+&gt; N=C3=A9fix Estrada<br>
+&gt;<br>
+<br>
+Hi,<br>
+=C2=A0 =C2=A0why not look at SPICE html client instead? It&#39;s already JS=
+ code so<br>
+it=C2=A0 shouldn&#39;t be that different.<br>
+For QUIC you can see Uri&#39;s link if you need some notes, LZ is more or<b=
+r>
+less standard on decoding, you have uncompressed sections and<br>
+references to previous chunks, so it&#39;s just a matter of understanding<b=
+r>
+these encodings.<br></blockquote><div><br></div><div>There is also a link i=
+n spice-common/common/lz.h:</div><div>&quot; dictionary compression for ima=
+ges based on fastlz (<a href=3D"http://www.fastlz.org/">http://www.fastlz.o=
+rg/</a>) &quot;</div><div><br></div><div>Uri.<br></div><div><br></div><div>=
+=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+Regards,<br>
+=C2=A0 =C2=A0Frediano<br>
+<br>
+</blockquote></div></div>
+
+--000000000000a4ec070600ef74ee--
+
