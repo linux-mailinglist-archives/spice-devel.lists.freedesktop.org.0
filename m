@@ -1,69 +1,70 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E256075B6F1
-	for <lists+spice-devel@lfdr.de>; Thu, 20 Jul 2023 20:38:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 39C0D762FC3
+	for <lists+spice-devel@lfdr.de>; Wed, 26 Jul 2023 10:24:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C7CD10E1A8;
-	Thu, 20 Jul 2023 18:38:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C498910E447;
+	Wed, 26 Jul 2023 08:24:45 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A74D410E1A8
- for <spice-devel@lists.freedesktop.org>; Thu, 20 Jul 2023 18:38:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1689878317;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=22Vqf21b0iCG3EyQGggRwpXkrZSXdA4Fka1+MxxD2/8=;
- b=UcRJ48LP1mLfpjl6w5FtOQQiS68tmhYqTS7wN+GyqCFG5KCm/96VJW8pl2nKCV3CiFpLyr
- RdJI3/aLX77kIytydtVA3Q8lCwNby7JbXHd4S5rEJmdo6UFrX8MljiBiJwyz0oCPv/mqIl
- Ohsxr4d94o41htjWTIG9NHBiJOFnpk8=
-Received: from mail-oi1-f198.google.com (mail-oi1-f198.google.com
- [209.85.167.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-537-57ejQXsYPFKYF6ZJoduAjg-1; Thu, 20 Jul 2023 14:38:36 -0400
-X-MC-Unique: 57ejQXsYPFKYF6ZJoduAjg-1
-Received: by mail-oi1-f198.google.com with SMTP id
- 5614622812f47-3a41e98b337so2181420b6e.1
- for <spice-devel@lists.freedesktop.org>; Thu, 20 Jul 2023 11:38:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689878316; x=1690483116;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=22Vqf21b0iCG3EyQGggRwpXkrZSXdA4Fka1+MxxD2/8=;
- b=DvcCxahIp0DB+ShNhZzOebNIX/2xoer37M1jX8TZPrKyTG4td6NrRaKg+eV2W7JHYS
- WpjVmPj5DSZJFA0uFKlhUvKMrkm40D/Js2L3I7c908vwaCfKnE26ZDr3mw2jkqlfr206
- 0OmOQGrv4TR2Y3a/OMfdFmaUGsGZO+dzNgHn+WQzGosVP5sUuLKw05jas/YMWrHfSMV2
- 3HiTa5uEBN5IxHYdch5v6YY7iZzT5U8p24Akr5QHujZPz8FgtpPASRUI66oTARMA1JDH
- lvHYez8wxhh0kjjzwYY3vIhf6b5+bmEdpuDMbAdddg8sn2GXEApDeU8wgwcaxwHZdaS7
- dNbg==
-X-Gm-Message-State: ABy/qLbNexFRTVFwsThTiCFdqQuXgmB2478Xft1wtahzjV/xAG055HHk
- buK4tfoATvLJYA5XP5HHRJzdxKPXlZ29Od/2NgFy5Zdns0IveY6e8o+J25V+H3in/7U7IpqaqyU
- txF3mSJtMDDWZa5zuvvSrWO3wG3XoIOIlmKekexo7kXta38bQYahZvAndzQ==
-X-Received: by 2002:aca:2104:0:b0:396:e3a:9f2f with SMTP id
- 4-20020aca2104000000b003960e3a9f2fmr339425oiz.5.1689878314870; 
- Thu, 20 Jul 2023 11:38:34 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlGsFKtP512JfKcDoKuqxt/6pR8u6H6/nEH2Mmmfo80EwIx0w32yszfm6Zs7ArhEUJ3xFmf8v6+lWjYxkKKK+aM=
-X-Received: by 2002:aca:2104:0:b0:396:e3a:9f2f with SMTP id
- 4-20020aca2104000000b003960e3a9f2fmr339405oiz.5.1689878314406; Thu, 20 Jul
- 2023 11:38:34 -0700 (PDT)
-MIME-Version: 1.0
-References: <99e6b141-6aa0-fc47-2ffa-7a94e1a3c079@gmail.com>
- <CAHt6W4cAL9N1yoigxgbqHAnoCU1ZzZUiH3KcW52qaXigCK25ng@mail.gmail.com>
-In-Reply-To: <CAHt6W4cAL9N1yoigxgbqHAnoCU1ZzZUiH3KcW52qaXigCK25ng@mail.gmail.com>
-From: Uri Lublin <ulublin@redhat.com>
-Date: Thu, 20 Jul 2023 21:38:23 +0300
-Message-ID: <CAAg9qJ1DFZr+Hv9O8qJdrr-LUECW9E=Vcbow2qen1WGe+bCKQg@mail.gmail.com>
-To: Frediano Ziglio <freddy77@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="000000000000a4ec070600ef74ee"
-Subject: Re: [Spice-devel] Help with image encoding
+Received: from out203-205-221-191.mail.qq.com (out203-205-221-191.mail.qq.com
+ [203.205.221.191])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 05E9510E0CC
+ for <spice-devel@lists.freedesktop.org>; Wed, 26 Jul 2023 02:21:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1690338106; bh=WLQQ4RUpTvvH1Zxrvj6/6G4CBZn8UJp9Ki3JxHLdp+w=;
+ h=In-Reply-To:References:From:To:Cc:Subject:Date;
+ b=qWxNLxH4Lubfo8QjVJHzbIWy1vv7u+ENJdXx4maS4wE1JTattvsti9IFV1v0mHw5S
+ p+SL7yOR+umjIzZBPO/KHs0qvYBA2Up/3fw/hbmEPjXwMJD31T/xJ7j7jEWQQqZF36
+ TJy+GOt/lvjoxDEmoB/unBDQ+UIh9aOFjmsDviP8=
+X-QQ-FEAT: oHWrrGTW1dCni6VLWI7Xi3lwP5c1dnPf
+X-QQ-SSF: 00000000000000F0000000000000
+X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
+X-QQ-XMAILINFO: M44hTGryyoPCRixaDLILnP4HHARHCkFYxKehV9PVuRWMjct6e2GLUjDnXJx73t
+ ItOLFF0gjiUStmlSpsB5Hbl/s+lGzg8n4lwXPZlvavyiHk6jLqMMcidum7j5+7mRttCYLfK/7CSwK
+ DVG7aOJM5i7ZYJSSXpYtQzmlGAL7huVNnF4JUPoBwZMfwGoslMYSGOliU7GIJSWfZOuiwDC9RfRl8
+ LpiYT3X0jwywBe9FrEz3jhiM40+xi85jW1Pew+KdB7w6d20TMdrwCMYwDEjHDwYGltxBeSXlbuDYP
+ jn9TTKcg0ZScUR7GUmam66p2n+PWiQ4O5PEaQBvS++PmfzBaqKUEiKZU2iGGj3PpLW+og3dPQc/4W
+ J/PMPy2IQNVCyUlJMbrWVgibsS5HrTYuVUNydhZkM+UJOupFT3fI3VtqFpsnZlCXODBUpTay5ExKm
+ eMnqNh5J7GuMUrnwd+3g4taK8gmDKOGH4brEns0bOyv9pmbPeQCuipKq6DL7DfYI9cyABvd6s514Q
+ +2DyVdEbpS2bvUfQA/3961g7Arll5ourQgphoKE4bCStmXELKru4ZfINnuCK2ifJZDToSSB67z5bN
+ vLRo99tjXxePMbXqs0Mpd1j/yPxMKUSBLB7hxOLFQ/DcZb2k+oaFWNr6haXyrM+3zk1I7XMaGfzZ2
+ FQ/bs2nCRG16bl4utdbvgs07pxFaa9W6bg5QD7tEpcuAagka1actmumhXuKAsSmM2LVd0vKnmoagS
+ jT9byO6adbLKIGRYjjHgKBe+92O/eVl9rankJZ624n6rM7lhFkXWkvmgJcJbdCTwtcYtE7HZVYq2h
+ z3YDTuzlZmyCyauju+Whf+Se1aqMtGTTx3Dknsk4u7+jcs/l+i6N1fRlziN0SMM2k+WLYL7i3WT3S
+ Rwl2DQ8iclevg4uIgZdGEIbKvQ6tf+8YA3tqadgK4m3zhoMvDml9ijZxbRRFZQ6a0UVIqAsir1aqa
+ Hf+zL1lQ==
+X-HAS-ATTACH: no
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 210.30.175.148
+In-Reply-To: <CAHt6W4cciFxqCG4Ht6F=3eO1TbynUAt__9X8q3yiPwabLNwpVA@mail.gmail.com>
+References: <tencent_B6679654B7F9B858ACDD19AF01982938DB0A@qq.com>
+ <CAHt6W4esuZwZ6o+CdT2_jo2q+W3P38vrp0ooGA3gY3UUhNkORw@mail.gmail.com>
+ <tencent_0D2D92EE12D6C0CDFE9C9D32A3AABB7D5809@qq.com>
+ <CAHt6W4f6ND+RN6rKTs5JZuERgi1RCK2gz2UTf-Cts2fQs+hn3A@mail.gmail.com>
+ <tencent_AD58C0DC85ACCD98353863670256EBF9A80A@qq.com>
+ <CAHt6W4fAEJvtVWXczBDMBYvS=PkOP54+7_2M8b9UOD4WnCer9w@mail.gmail.com>
+ <tencent_267D99E5D57A3EB616DE77666B7E66D2CE08@qq.com>
+ <CAHt6W4cciFxqCG4Ht6F=3eO1TbynUAt__9X8q3yiPwabLNwpVA@mail.gmail.com>
+X-QQ-STYLE: 
+X-QQ-mid: webmail280t1690338106t2007247
+From: "=?gb18030?B?yMvX2rXAytc=?=" <928003896@qq.com>
+To: "=?gb18030?B?RnJlZGlhbm8gWmlnbGlv?=" <freddy77@gmail.com>
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_64C0833A_1151BD60_47A1B3A2"
+Content-Transfer-Encoding: 8Bit
+Date: Wed, 26 Jul 2023 10:21:46 +0800
+X-Priority: 3
+Message-ID: <tencent_E2A2D9BCF344A66875878FA485D59DC71A06@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-Mailman-Approved-At: Wed, 26 Jul 2023 08:24:44 +0000
+Subject: [Spice-devel] =?gb18030?b?u9i4tKO6ICBIb3cgZG9lcyBTUElDRSBkaXNw?=
+ =?gb18030?q?lay_the_desktop_data_processed_by_Nvidia_vGPU=3F?=
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,149 +76,94 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org,
- =?UTF-8?Q?N=C3=A9fix_Estrada?= <nefixestrada@gmail.com>
+Cc: =?gb18030?B?c3BpY2UtZGV2ZWw=?= <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000a4ec070600ef74ee
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This is a multi-part message in MIME format.
 
-On Wed, Jul 19, 2023 at 10:55=E2=80=AFAM Frediano Ziglio <freddy77@gmail.co=
-m> wrote:
+------=_NextPart_64C0833A_1151BD60_47A1B3A2
+Content-Type: text/plain;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
 
-> Il giorno dom 16 lug 2023 alle ore 07:58 N=C3=A9fix Estrada
-> <nefixestrada@gmail.com> ha scritto:
-> >
-> > Hello! I'm currently writting a Spice client in Typescript that makes
-> > use of modern browser features (such as WebGPU, WebUSB, Web workers,
-> etc).
-> >
-> >
-> > However, I'm struggling with the Image image encoding. I've checked the
-> > whole documentation site, but I wasn't able to find how each one of the
-> > encoding works. My knowledge in both audio and video encoding is very
-> > limited. Specifically:
-> >
-> > - QUIC
-> >
-> > - LZ (and all its variants)
-> >
-> >
-> > I've been trying to understand them from the spice-common project, but
-> > it's just the implementation without any type of docs :(
-> >
-> > Another question I had is if there's another way of comunication or a
-> > place where I can shoot questions about the implementation
-> >
-> >
-> > Also, I'm planning on gifting the client to the spice project, if you
-> > would be interested in! (given that you already have a JS project)
-> >
-> >
-> > Thanks in advance!
-> >
-> >
-> > N=C3=A9fix Estrada
-> >
->
-> Hi,
->    why not look at SPICE html client instead? It's already JS code so
-> it  shouldn't be that different.
-> For QUIC you can see Uri's link if you need some notes, LZ is more or
-> less standard on decoding, you have uncompressed sections and
-> references to previous chunks, so it's just a matter of understanding
-> these encodings.
->
+SSBpbnN0YWxsZWQgU1BJQ0UgdmRhZ2VudCBhbmQgeC5vcmcgUVhMIHZpZGVvIGRyaXZlciBv
+biB0aGUgZ3Vlc3Qgc2lkZSwgU1BJQ0UgLSBTZXJ2ZXIgLSBzcGljZS0wLjE1LjIudGFyLmJ6
+MiBvbiB0aGUgc2VydmVyLCBhbmQgdXNlZCB2aXJ0LXZpZXdlciB0byByZW1vdGVseSBvcGVy
+YXRlIHRoZSBndWVzdCBkZXNrdG9wIG9uIGEgcmVtb3RlIGNvbXB1dGVyLiZuYnNwOw0KSWYg
+SSB1c2UgTnZpZGlhIHZHUFUgb24gdGhlIGd1ZXN0IHNpZGUsIGNhbiBJIHN0aWxsIG9wZXJh
+dGUgcmVtb3RlIGRlc2t0b3BzIG5vcm1hbGx5IG9uIHRoZSBjbGllbnQgc2lkZT8mbmJzcDsN
+CldpbGwgdGhlIHVzZSBvZiBOdmlkaWEgdkdQVSBoYXZlIGFueSBhZHZlcnNlIGVmZmVjdHMg
+b24gU1BJQ0U/IElmIHRoZXJlIGlzIGFuIGltcGFjdCwgd2hhdCBhY3Rpb25zIGRvIEkgbmVl
+ZCB0byBtYWtlIGl0IHdvcmsgcHJvcGVybHk/DQoNCg0KDQoNCi0tLS0tLS0tLS0tLS0tLS0t
+LSZuYnNwO9StyrzTyrz+Jm5ic3A7LS0tLS0tLS0tLS0tLS0tLS0tDQq3orz+yMs6ICJGcmVk
+aWFubyBaaWdsaW8iPGZyZWRkeTc3QGdtYWlsLmNvbSZndDs7IA0Kt6LLzcqxvOQ6IDIwMjPE
+6jfUwjE5yNUo0MfG2sj9KSDPws7nMzo1OQ0KytW8/sjLOiAiyMvX2rXAytciPDkyODAwMzg5
+NkBxcS5jb20mZ3Q7OyANCrOty806ICJzcGljZS1kZXZlbCI8c3BpY2UtZGV2ZWxAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnJmd0OzsgDQrW98ziOiBSZTogW1NwaWNlLWRldmVsXSBIb3cgZG9l
+cyBTUElDRSBkaXNwbGF5IHRoZSBkZXNrdG9wIGRhdGEgcHJvY2Vzc2VkIGJ5IE52aWRpYSB2
+R1BVPw0KDQoNCg0KSWwgZ2lvcm5vIGx1biAxNyBsdWcgMjAyMyBhbGxlIG9yZSAwMzozNCDI
+y9fatcDK1yA8OTI4MDAzODk2QHFxLmNvbSZndDsgaGEgc2NyaXR0bzoNCiZndDsNCiZndDsg
+SGVsbG8sDQomZ3Q7IFRoZSBhdHRhY2htZW50IHNob3dzIHRoZSBlZmZlY3Qgb2YgaW5zdGFs
+bGluZyBzcGljZS1zdHJlYW1pbmctYWdlbnQgb24gdGhlIHNwaWNlIG9mZmljaWFsIHdlYnNp
+dGUuIFRoZXJlIGFyZSB0d28gc2NyZWVucywgb25lIGRpc3BsYXlpbmcgbm9ybWFsIGFuZCB0
+aGUgb3RoZXIgZGlzcGxheWluZyBibGFjay4NCiZndDsgo6gxo6lTaG91bGQgdGhlIGJsYWNr
+IHNjcmVlbiBiZSBjYXVzZWQgYnkgc3BpY2Utc3RyZWFtaW5nLWFnZW50PyBXaGF0IGlzIHRo
+ZSByZWFzb24gZm9yIHRoZSBibGFjayBzY3JlZW4/IElzIHRoZXJlIGEgc29sdXRpb24/DQom
+Z3Q7IKOoMqOpSXMgdGhlcmUgYSB3YXkgdG8gb25seSBkaXNwbGF5IHRoZSBkZXNrdG9wIGdl
+bmVyYXRlZCBieSBzcGljZSBzdHJlYW1pbmcgYWdlbnQgYW5kIHJ1biBpdCBub3JtYWxseSBs
+aWtlIGEgcmVtb3RlIGRlc2t0b3AsIGFsbG93aW5nIGZvciBrZXlib2FyZCBhbmQgbW91c2Ug
+aW50ZXJhY3Rpb24/DQomZ3Q7DQomZ3Q7IEkgaG9wZSB5b3UgY2FuIGhlbHAgbWUsIHRoYW5r
+IHlvdSENCiZndDsNCg0KSSBjYW5ub3Qgc2VlIHRoZSBhdHRhY2htZW50LiBXYXMgaXQgc3Ry
+aXBwZWQ/DQpDYW4geW91IGV4cGxhaW4geW91ciBjb25maWd1cmF0aW9uPyBXaGF0J3MgdGhl
+IFZNIHNldHVwPw0KDQpGcmVkaWFubw==
 
-There is also a link in spice-common/common/lz.h:
-" dictionary compression for images based on fastlz (http://www.fastlz.org/=
-)
-"
+------=_NextPart_64C0833A_1151BD60_47A1B3A2
+Content-Type: text/html;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
 
-Uri.
+PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNo
+YXJzZXQ9R0IxODAzMCI+PGRpdj5JIGluc3RhbGxlZCBTUElDRSB2ZGFnZW50IGFuZCB4Lm9y
+ZyBRWEwgdmlkZW8gZHJpdmVyIG9uIHRoZSBndWVzdCBzaWRlLCBTUElDRSAtIFNlcnZlciAt
+IHNwaWNlLTAuMTUuMi50YXIuYnoyIG9uIHRoZSBzZXJ2ZXIsIGFuZCB1c2VkIHZpcnQtdmll
+d2VyIHRvIHJlbW90ZWx5IG9wZXJhdGUgdGhlIGd1ZXN0IGRlc2t0b3Agb24gYSByZW1vdGUg
+Y29tcHV0ZXIuJm5ic3A7PC9kaXY+PGRpdj5JZiBJIHVzZSBOdmlkaWEgdkdQVSBvbiB0aGUg
+Z3Vlc3Qgc2lkZSwgY2FuIEkgc3RpbGwgb3BlcmF0ZSByZW1vdGUgZGVza3RvcHMgbm9ybWFs
+bHkgb24gdGhlIGNsaWVudCBzaWRlPyZuYnNwOzwvZGl2PjxkaXY+V2lsbCB0aGUgdXNlIG9m
+IE52aWRpYSB2R1BVIGhhdmUgYW55IGFkdmVyc2UgZWZmZWN0cyBvbiBTUElDRT8gSWYgdGhl
+cmUgaXMgYW4gaW1wYWN0LCB3aGF0IGFjdGlvbnMgZG8gSSBuZWVkIHRvIG1ha2UgaXQgd29y
+ayBwcm9wZXJseT88L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2IHN0
+eWxlPSJmb250LXNpemU6IDEycHg7Zm9udC1mYW1pbHk6IEFyaWFsIE5hcnJvdztwYWRkaW5n
+OjJweCAwIDJweCAwOyI+LS0tLS0tLS0tLS0tLS0tLS0tJm5ic3A71K3KvNPKvP4mbmJzcDst
+LS0tLS0tLS0tLS0tLS0tLS08L2Rpdj48ZGl2IHN0eWxlPSJmb250LXNpemU6IDEycHg7YmFj
+a2dyb3VuZDojZWZlZmVmO3BhZGRpbmc6OHB4OyI+PGRpdj48Yj63orz+yMs6PC9iPiAiRnJl
+ZGlhbm8gWmlnbGlvIiZsdDtmcmVkZHk3N0BnbWFpbC5jb20mZ3Q7OyA8L2Rpdj48ZGl2Pjxi
+Preiy83KsbzkOjwvYj4gMjAyM8TqN9TCMTnI1SjQx8bayP0pIM/CzuczOjU5PC9kaXY+PGRp
+dj48Yj7K1bz+yMs6PC9iPiAiyMvX2rXAytciJmx0OzkyODAwMzg5NkBxcS5jb20mZ3Q7OyA8
+L2Rpdj48ZGl2PjxiID6zrcvNOjwvYj4gInNwaWNlLWRldmVsIiZsdDtzcGljZS1kZXZlbEBs
+aXN0cy5mcmVlZGVza3RvcC5vcmcmZ3Q7OyA8L2Rpdj48ZGl2PjxiPtb3zOI6PC9iPiBSZTog
+W1NwaWNlLWRldmVsXSBIb3cgZG9lcyBTUElDRSBkaXNwbGF5IHRoZSBkZXNrdG9wIGRhdGEg
+cHJvY2Vzc2VkIGJ5IE52aWRpYSB2R1BVPzwvZGl2PjwvZGl2PjxkaXY+PGJyPjwvZGl2Pkls
+IGdpb3JubyBsdW4gMTcgbHVnIDIwMjMgYWxsZSBvcmUgMDM6MzQgyMvX2rXAytcgJmx0Ozxh
+IGhyZWY9Im1haWx0bzo5MjgwMDM4OTZAcXEuY29tIiByZWw9Im5vb3BlbmVyIiB0YXJnZXQ9
+Il9ibGFuayI+OTI4MDAzODk2QHFxLmNvbTwvYT4mZ3Q7IGhhIHNjcml0dG86PGJyPiZndDs8
+YnI+Jmd0OyBIZWxsbyw8YnI+Jmd0OyBUaGUgYXR0YWNobWVudCBzaG93cyB0aGUgZWZmZWN0
+IG9mIGluc3RhbGxpbmcgc3BpY2Utc3RyZWFtaW5nLWFnZW50IG9uIHRoZSBzcGljZSBvZmZp
+Y2lhbCB3ZWJzaXRlLiBUaGVyZSBhcmUgdHdvIHNjcmVlbnMsIG9uZSBkaXNwbGF5aW5nIG5v
+cm1hbCBhbmQgdGhlIG90aGVyIGRpc3BsYXlpbmcgYmxhY2suPGJyPiZndDsgo6gxo6lTaG91
+bGQgdGhlIGJsYWNrIHNjcmVlbiBiZSBjYXVzZWQgYnkgc3BpY2Utc3RyZWFtaW5nLWFnZW50
+PyBXaGF0IGlzIHRoZSByZWFzb24gZm9yIHRoZSBibGFjayBzY3JlZW4/IElzIHRoZXJlIGEg
+c29sdXRpb24/PGJyPiZndDsgo6gyo6lJcyB0aGVyZSBhIHdheSB0byBvbmx5IGRpc3BsYXkg
+dGhlIGRlc2t0b3AgZ2VuZXJhdGVkIGJ5IHNwaWNlIHN0cmVhbWluZyBhZ2VudCBhbmQgcnVu
+IGl0IG5vcm1hbGx5IGxpa2UgYSByZW1vdGUgZGVza3RvcCwgYWxsb3dpbmcgZm9yIGtleWJv
+YXJkIGFuZCBtb3VzZSBpbnRlcmFjdGlvbj88YnI+Jmd0Ozxicj4mZ3Q7IEkgaG9wZSB5b3Ug
+Y2FuIGhlbHAgbWUsIHRoYW5rIHlvdSE8YnI+Jmd0Ozxicj48YnI+SSBjYW5ub3Qgc2VlIHRo
+ZSBhdHRhY2htZW50LiBXYXMgaXQgc3RyaXBwZWQ/PGJyPkNhbiB5b3UgZXhwbGFpbiB5b3Vy
+IGNvbmZpZ3VyYXRpb24/IFdoYXQncyB0aGUgVk0gc2V0dXA/PGJyPjxicj5GcmVkaWFubzxz
+dHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnFtYm94IHN0eWxlLCAucW1ib3ggc2NyaXB0LCAucW1i
+b3ggaGVhZCwgLnFtYm94IGxpbmssIC5xbWJveCBtZXRhIHtkaXNwbGF5OiBub25lICFpbXBv
+cnRhbnQ7fTwvc3R5bGU+
 
-
-
->
-> Regards,
->    Frediano
->
->
-
---000000000000a4ec070600ef74ee
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"g=
-mail_attr">On Wed, Jul 19, 2023 at 10:55=E2=80=AFAM Frediano Ziglio &lt;<a =
-href=3D"mailto:freddy77@gmail.com">freddy77@gmail.com</a>&gt; wrote:<br></d=
-iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
-er-left:1px solid rgb(204,204,204);padding-left:1ex">Il giorno dom 16 lug 2=
-023 alle ore 07:58 N=C3=A9fix Estrada<br>
-&lt;<a href=3D"mailto:nefixestrada@gmail.com" target=3D"_blank">nefixestrad=
-a@gmail.com</a>&gt; ha scritto:<br>
-&gt;<br>
-&gt; Hello! I&#39;m currently writting a Spice client in Typescript that ma=
-kes<br>
-&gt; use of modern browser features (such as WebGPU, WebUSB, Web workers, e=
-tc).<br>
-&gt;<br>
-&gt;<br>
-&gt; However, I&#39;m struggling with the Image image encoding. I&#39;ve ch=
-ecked the<br>
-&gt; whole documentation site, but I wasn&#39;t able to find how each one o=
-f the<br>
-&gt; encoding works. My knowledge in both audio and video encoding is very<=
-br>
-&gt; limited. Specifically:<br>
-&gt;<br>
-&gt; - QUIC<br>
-&gt;<br>
-&gt; - LZ (and all its variants)<br>
-&gt;<br>
-&gt;<br>
-&gt; I&#39;ve been trying to understand them from the spice-common project,=
- but<br>
-&gt; it&#39;s just the implementation without any type of docs :(<br>
-&gt;<br>
-&gt; Another question I had is if there&#39;s another way of comunication o=
-r a<br>
-&gt; place where I can shoot questions about the implementation<br>
-&gt;<br>
-&gt;<br>
-&gt; Also, I&#39;m planning on gifting the client to the spice project, if =
-you<br>
-&gt; would be interested in! (given that you already have a JS project)<br>
-&gt;<br>
-&gt;<br>
-&gt; Thanks in advance!<br>
-&gt;<br>
-&gt;<br>
-&gt; N=C3=A9fix Estrada<br>
-&gt;<br>
-<br>
-Hi,<br>
-=C2=A0 =C2=A0why not look at SPICE html client instead? It&#39;s already JS=
- code so<br>
-it=C2=A0 shouldn&#39;t be that different.<br>
-For QUIC you can see Uri&#39;s link if you need some notes, LZ is more or<b=
-r>
-less standard on decoding, you have uncompressed sections and<br>
-references to previous chunks, so it&#39;s just a matter of understanding<b=
-r>
-these encodings.<br></blockquote><div><br></div><div>There is also a link i=
-n spice-common/common/lz.h:</div><div>&quot; dictionary compression for ima=
-ges based on fastlz (<a href=3D"http://www.fastlz.org/">http://www.fastlz.o=
-rg/</a>) &quot;</div><div><br></div><div>Uri.<br></div><div><br></div><div>=
-=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-Regards,<br>
-=C2=A0 =C2=A0Frediano<br>
-<br>
-</blockquote></div></div>
-
---000000000000a4ec070600ef74ee--
+------=_NextPart_64C0833A_1151BD60_47A1B3A2--
 
