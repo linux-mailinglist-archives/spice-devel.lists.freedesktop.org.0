@@ -2,37 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 635FA764FEF
-	for <lists+spice-devel@lfdr.de>; Thu, 27 Jul 2023 11:37:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA94476540D
+	for <lists+spice-devel@lfdr.de>; Thu, 27 Jul 2023 14:34:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 883C110E550;
-	Thu, 27 Jul 2023 09:37:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 089B610E354;
+	Thu, 27 Jul 2023 12:34:18 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from dlut.edu.cn (mx1.dlut.edu.cn [202.118.66.80])
- by gabe.freedesktop.org (Postfix) with ESMTP id 2748110E550
- for <spice-devel@lists.freedesktop.org>; Thu, 27 Jul 2023 09:37:36 +0000 (UTC)
-Received: from 32217118$mail.dlut.edu.cn ( [111.25.232.252] ) by
- ajax-webmail-mx1 (Coremail) ; Thu, 27 Jul 2023 17:36:40 +0800 (GMT+08:00)
-X-Originating-IP: [111.25.232.252]
-Date: Thu, 27 Jul 2023 17:36:40 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: =?UTF-8?B?6ZyN6YeR6bmP?= <32217118@mail.dlut.edu.cn>
-To: spice-devel@lists.freedesktop.org
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20220622(41e5976f)
- Copyright (c) 2002-2023 www.mailtech.cn dlut.edu.cn
-Content-Type: multipart/alternative; 
- boundary="----=_Part_468228_1955449155.1690450600059"
+Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
+ [185.70.41.103])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B9F0110E568
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Jul 2023 10:17:08 +0000 (UTC)
+Date: Thu, 27 Jul 2023 10:16:56 +0000
+Authentication-Results: mail-41103.protonmail.ch;
+ dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com
+ header.b="E1zeNGGX"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1690453022; x=1690712222;
+ bh=JtzFUTxKtdGUAs0f/NuBTs4YE5DxrLNo1KC8JzOglnY=;
+ h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=E1zeNGGXzhaLUc15AmtjlkllSyZXMSt/89E9fswj9lgHB75IlbaS247c64OFXch27
+ SLKUL4DMeqjl2L2hlVxPt9IR/iSPJW7bzynxX9Q8xXt2g1IZueaqJ72UWjCGqw2D4j
+ xStOdORttHVMG23TmWLvvbBxMBhmeRydr12CXoIyPPH/tT07q7tj85LqFfWQxUDM15
+ GWDTv7fQBlAVqwx/5X1+vlQhH+waBmiHZN5cwiISGceJCZW3hpA+N7sacUeCujSKxm
+ 1TAvWJOyeZeyfswJV9NsiOrWTxpZsbVCCWqM7OFBxypaX2kbjJ3fD+TFloLUXw2b/u
+ Q4q4C4f6TaSJQ==
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+From: =?utf-8?B?5rCR55Sf6ZO26KGM?= <KRUranustest@protonmail.com>
+Message-ID: <u8qV-fZ2vM_GWM2POdCo0P5fpICkxnBfOq-hippB-LmzHUDaENQknqf6qz17aAyGBCmCJfuRJSMiH6SLrGSHkUitl-XJdNLNUMKWz3rG8-8=@protonmail.com>
+Feedback-ID: 29125973:user:proton
 MIME-Version: 1.0
-Message-ID: <27e9a136.1f5b8.18996b5207b.Coremail.32217118@mail.dlut.edu.cn>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: UEJ2ygCHCkuoOsJkm98jCg--.18344W
-X-CM-SenderInfo: ytssilqrryqzhdlohvxoxwhvlgxou0/1tbiAgAPMWTBFq88mQACsH
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Subject: [Spice-devel] spice-streaming-agent  display  problem
+Content-Type: multipart/alternative;
+ boundary="b1_N5QKso9pd1rC0tqElFhhBgEZh0KdjFGcPNU5DvbCvoA"
+X-Mailman-Approved-At: Thu, 27 Jul 2023 12:34:17 +0000
+Subject: [Spice-devel] How to Remote Windows without Seeing Tutorial
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,77 +51,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-------=_Part_468228_1955449155.1690450600059
-Content-Type: text/plain; charset=UTF-8
+This is a multi-part message in MIME format.
+
+--b1_N5QKso9pd1rC0tqElFhhBgEZh0KdjFGcPNU5DvbCvoA
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: base64
 
-SGVsbG8gZGVhciBkZXZzLAoKSSBpbnN0YWxsZWQgVk13YXJlIFdvcmtzdGF0aW9uIFBybyBvbiBt
-eSBsYXB0b3AgLCBhbmQgSSBpbnN0YWxsZWQgYSBDZW50T1M4IHZpcnR1YWwgbWFjaGluZSAuIFRo
-ZW4gaW4gQ2VudE9TOCAsIGFub3RoZXIgVWJ1bnR1MTguMDQgdmlydHVhbCBtYWNoaW5lIHdhcyBp
-bnN0YWxsZWQgdmlhIHZpcnQgbWFuYWdlciAuIFNvIENlbnRPczggaXMgaG9zdCAsIFVidW50dTE4
-LjA0IGlzIGd1ZXN0ICwgYW5kIHRoZXJlIGlzIGFub3RoZXIgd2luZG93czcgdmlydHVhbCBtYWNo
-aW5lIGluIFZNd2FyZSBXb3Jrc3RhdGlvbiBQcm8gLCB3aW5kb3dzNyBpcyBjbGllbnQgLiAKCk5v
-dyBJJ20gdXNpbmcgc3BpY2Utc3RyZWFtaW5nLWFnZW50LCBJIGJ1aWx0IGl0IGluIFVidW50dTE4
-LjA0ICwgYW5kIEkgaGFkIGFkZGVkIHRoZSAib3JnLnNwaWNlLXNwYWNlLnN0cmVhbS4wIiBjaGFu
-bmVsIC4gCgpUaGVuIHdoZW4gSSB3YW50IHRvIGFjY2VzcyB0aGlzIFVidW50dTE4LjA0IGluIGFu
-b3RoZXIgIHdpbmRvd3Mgc3lzdGVtIHZpYSByZW1vdGUtdmlld2VyICwgb2xkIHNwaWNlIGRpc3Bs
-YXkgd29ya3Mgd2VsbCBhbmQgdGhlIHNwaWNlLXN0cmVhbWluZy1hZ2VudCBjcmVhdGVzIGEgbmV3
-IHdpbmRvdyBpbiByZW1vdGUtdmlld2VyICwgYnV0IHRoZSBuZXcgZGlzcGxheSB3aW5kb3cgaGFz
-IG5vIHBpY3R1cmUgLCBqdXN0IGJsYWNrIC4gQW5kIGluIFVidW50dTE4LjA0J3MgdGVybWluYWwg
-LCB0aGVyZSBpcyBhIHdhcm5pbmcgOiBzcGljZS1zdHJlYW1pbmctYWdlbnRbOTcxMF06IFdhcm5p
-bmc6IHRoZSBGcmFtZSBDYXB0dXJlIHBsdWdpbiByZXR1cm5lZCBkZXZpY2UgZGlzcGxheSBpbmZv
-IGZvciBtb3JlIHRoYW4gb25lIGRpc3BsYXkgZGV2aWNlLCBidXQgd2UgY3VycmVudGx5IG9ubHkg
-c3VwcG9ydCBhIHNpbmdsZSBkZXZpY2UuIFNlbmRpbmcgaW5mb3JtYXRpb24gZm9yIGZpcnN0IGRl
-dmljZSB0byB0aGUgc2VydmVyLgoKCgoKV2hhdCBzaG91bGQgSSBkbyB0byBzb2x2ZSB0aGlzIHBy
-b2JsZW0gPyAKClRoYW5rcyBpbiBhZHZhbmNlICE=
-------=_Part_468228_1955449155.1690450600059
-Content-Type: text/html; charset=UTF-8
+SG93IHRvIHJlbW90ZWx5IGluc3RhbGwgV2luZG93cyB3aXRob3V0IHNlZWluZyB0aGUgdHV0b3Jp
+YWw/IEkgbmVlZCBXaW5kb3dzIHRvIGluc3RhbGwgdGhlIHNlcnZlci4gUmVtb3RlIFdpbmRvd3Mg
+aXMgcmVxdWlyZWQ=
+
+--b1_N5QKso9pd1rC0tqElFhhBgEZh0KdjFGcPNU5DvbCvoA
+Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: base64
 
-PHAgc3R5bGU9ImZvbnQtZmFtaWx5OlNpbVN1bjsiPgoJPHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5
-OlRpbWVzIE5ldyBSb21hbjsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTpUaW1lcyBOZXcgUm9t
-YW47Ij5IZWxsbyBkZWFyIGRldnMsPC9zcGFuPjwvc3Bhbj4gCjwvcD4KPHAgc3R5bGU9ImZvbnQt
-ZmFtaWx5OlNpbVN1bjsiPgoJPHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OlRpbWVzIE5ldyBSb21h
-bjsiPkkgaW5zdGFsbGVkIDxzcGFuIHN0eWxlPSJmb250LWZhbWlseTomcXVvdDtUaW1lcyBOZXcg
-Um9tYW4mcXVvdDs7Ij5WTXdhcmUgV29ya3N0YXRpb24gUHJvPC9zcGFuPiBvbiBteSBsYXB0b3Ag
-LCBhbmQgSSBpbnN0YWxsZWQgYSBDZW50T1M4IHZpcnR1YWwgbWFjaGluZSAuIFRoZW4gaW4gQ2Vu
-dE9TOCZuYnNwOywgYW5vdGhlciBVYnVudHUxOC4wNCB2aXJ0dWFsIG1hY2hpbmUgd2FzIGluc3Rh
-bGxlZCB2aWEgdmlydCBtYW5hZ2VyIC4gU28gQ2VudE9zOCBpcyBob3N0ICwgVWJ1bnR1MTguMDQg
-aXMgZ3Vlc3QgLCBhbmQgdGhlcmUgaXMgYW5vdGhlciB3aW5kb3dzNyB2aXJ0dWFsIG1hY2hpbmUg
-aW4gPHNwYW4gY2xhc3M9IkNNLVhUNS1TcGVsbCAxNjkwNDMxMzg0OTY5LTM4OCIgaWQ9IjE2OTA0
-MzEzODQ5NjktMzg4IiBzdHlsZT0iZm9udC1mYW1pbHk6JnF1b3Q7VGltZXMgTmV3IFJvbWFuJnF1
-b3Q7O3RleHQtd3JhcDp3cmFwO2N1cnNvcjpwb2ludGVyO2JvcmRlci1ib3R0b206MnB4IGRvdHRl
-ZCByZWQ7Ij5WTXdhcmU8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiZxdW90O1RpbWVz
-IE5ldyBSb21hbiZxdW90Ozt0ZXh0LXdyYXA6d3JhcDsiPiZuYnNwOzwvc3Bhbj48c3BhbiBjbGFz
-cz0iQ00tWFQ1LVNwZWxsIDE2OTA0MzEzODQ5NjktMzk1IiBpZD0iMTY5MDQzMTM4NDk2OS0zOTUi
-IHN0eWxlPSJmb250LWZhbWlseTomcXVvdDtUaW1lcyBOZXcgUm9tYW4mcXVvdDs7dGV4dC13cmFw
-OndyYXA7Ij5Xb3Jrc3RhdGlvbjwvc3Bhbj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6JnF1b3Q7
-VGltZXMgTmV3IFJvbWFuJnF1b3Q7O3RleHQtd3JhcDp3cmFwOyI+Jm5ic3A7PC9zcGFuPjxzcGFu
-IGNsYXNzPSJDTS1YVDUtU3BlbGwgMTY5MDQzMTM4NDk2OS03MTEiIGlkPSIxNjkwNDMxMzg0OTY5
-LTcxMSIgc3R5bGU9ImZvbnQtZmFtaWx5OiZxdW90O1RpbWVzIE5ldyBSb21hbiZxdW90Ozt0ZXh0
-LXdyYXA6d3JhcDsiPlBybzwvc3Bhbj4gLCB3aW5kb3dzNyBpcyBjbGllbnQgLiZuYnNwOzwvc3Bh
-bj4gCjwvcD4KPHAgc3R5bGU9ImZvbnQtZmFtaWx5OlNpbVN1bjsiPgoJPHNwYW4gc3R5bGU9ImZv
-bnQtZmFtaWx5OlRpbWVzIE5ldyBSb21hbjsiPk5vdyBJJ20gdXNpbmcgc3BpY2Utc3RyZWFtaW5n
-LWFnZW50LCBJIGJ1aWx0IGl0IGluIFVidW50dTE4LjA0ICwgYW5kIEkgaGFkIGFkZGVkIHRoZSAi
-b3JnLnNwaWNlLXNwYWNlLnN0cmVhbS4wIiBjaGFubmVsIC4mbmJzcDs8L3NwYW4+IAo8L3A+Cjxw
-IHN0eWxlPSJmb250LWZhbWlseTpTaW1TdW47Ij4KCTxzcGFuIHN0eWxlPSJmb250LWZhbWlseTpU
-aW1lcyBOZXcgUm9tYW47Ij5UaGVuIHdoZW4gSSB3YW50IHRvIGFjY2VzcyB0aGlzIFVidW50dTE4
-LjA0IGluIGFub3RoZXImbmJzcDsgd2luZG93cyBzeXN0ZW0gdmlhIHJlbW90ZS12aWV3ZXIgLCA8
-c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6JnF1b3Q7VGltZXMgTmV3IFJvbWFuJnF1b3Q7O3RleHQt
-d3JhcDp3cmFwOyI+b2xkIHNwaWNlIGRpc3BsYXkgd29ya3Mgd2VsbCBhbmQmbmJzcDs8L3NwYW4+
-dGhlIHNwaWNlLXN0cmVhbWluZy1hZ2VudCBjcmVhdGVzIGEgbmV3IHdpbmRvdyBpbiByZW1vdGUt
-dmlld2VyICwgYnV0IHRoZSBuZXcgZGlzcGxheSB3aW5kb3cgaGFzIG5vIHBpY3R1cmUgLCBqdXN0
-IGJsYWNrIC4gQW5kIGluIFVidW50dTE4LjA0J3MgdGVybWluYWwgLCB0aGVyZSBpcyBhIHdhcm5p
-bmcgOiBzcGljZS1zdHJlYW1pbmctYWdlbnRbOTcxMF06IFdhcm5pbmc6IHRoZSBGcmFtZSBDYXB0
-dXJlIHBsdWdpbiByZXR1cm5lZCBkZXZpY2UgZGlzcGxheSBpbmZvIGZvciBtb3JlIHRoYW4gb25l
-IGRpc3BsYXkgZGV2aWNlLCBidXQgd2UgY3VycmVudGx5IG9ubHkgc3VwcG9ydCBhIHNpbmdsZSBk
-ZXZpY2UuIFNlbmRpbmcgaW5mb3JtYXRpb24gZm9yIGZpcnN0IGRldmljZSB0byB0aGUgc2VydmVy
-Ljwvc3Bhbj4gCjwvcD4KPHAgc3R5bGU9ImZvbnQtZmFtaWx5OlNpbVN1bjsiPgoJPHNwYW4gc3R5
-bGU9ImZvbnQtZmFtaWx5OlRpbWVzIE5ldyBSb21hbjsiPjxicj4KPC9zcGFuPiAKPC9wPgo8cCBz
-dHlsZT0iZm9udC1mYW1pbHk6U2ltU3VuOyI+Cgk8c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6VGlt
-ZXMgTmV3IFJvbWFuOyI+V2hhdCBzaG91bGQgSSBkbyB0byBzb2x2ZSB0aGlzIHByb2JsZW0gPyZu
-YnNwOzwvc3Bhbj4gCjwvcD4KPHAgc3R5bGU9ImZvbnQtZmFtaWx5OlNpbVN1bjsiPgoJPHNwYW4g
-c3R5bGU9ImZvbnQtZmFtaWx5OlRpbWVzIE5ldyBSb21hbjsiPlRoYW5rcyBpbiBhZHZhbmNlICEg
-PC9zcGFuPiAKPC9wPg==
-------=_Part_468228_1955449155.1690450600059--
+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0
+cHg7Ij48L2Rpdj48c3Bhbj5Ib3cgdG8gcmVtb3RlbHkgaW5zdGFsbCBXaW5kb3dzIHdpdGhvdXQg
+c2VlaW5nIHRoZSB0dXRvcmlhbD8gSSBuZWVkIFdpbmRvd3MgdG8gaW5zdGFsbCB0aGUgc2VydmVy
+LiBSZW1vdGUgV2luZG93cyBpcyByZXF1aXJlZDwvc3Bhbj48ZGl2IGNsYXNzPSJwcm90b25tYWls
+X3NpZ25hdHVyZV9ibG9jayIgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsg
+Zm9udC1zaXplOiAxNHB4OyI+PGRpdiBjbGFzcz0icHJvdG9ubWFpbF9zaWduYXR1cmVfYmxvY2st
+cHJvdG9uIj4NCiAgICA8L2Rpdj4NCjwvZGl2Pg0K
+
+
+--b1_N5QKso9pd1rC0tqElFhhBgEZh0KdjFGcPNU5DvbCvoA--
 
