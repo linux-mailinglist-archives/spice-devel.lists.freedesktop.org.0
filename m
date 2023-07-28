@@ -2,37 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B2C17661AC
-	for <lists+spice-devel@lfdr.de>; Fri, 28 Jul 2023 04:10:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECB817671FB
+	for <lists+spice-devel@lfdr.de>; Fri, 28 Jul 2023 18:37:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 461D310E1E4;
-	Fri, 28 Jul 2023 02:10:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 815C410E0E3;
+	Fri, 28 Jul 2023 16:37:12 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from dlut.edu.cn (mx2.dlut.edu.cn [202.118.66.81])
- by gabe.freedesktop.org (Postfix) with ESMTP id 9C9A910E1E4
- for <spice-devel@lists.freedesktop.org>; Fri, 28 Jul 2023 02:10:19 +0000 (UTC)
-Received: from 32217118$mail.dlut.edu.cn ( [111.25.233.237] ) by
- ajax-webmail-mx2 (Coremail) ; Fri, 28 Jul 2023 10:09:27 +0800 (GMT+08:00)
-X-Originating-IP: [111.25.233.237]
-Date: Fri, 28 Jul 2023 10:09:27 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: =?UTF-8?B?6ZyN6YeR6bmP?= <32217118@mail.dlut.edu.cn>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20220622(41e5976f)
- Copyright (c) 2002-2023 www.mailtech.cn dlut.edu.cn
-Content-Type: multipart/alternative; 
- boundary="----=_Part_496359_1678693328.1690510167552"
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0FFCD10E0E3
+ for <spice-devel@lists.freedesktop.org>; Fri, 28 Jul 2023 16:37:10 +0000 (UTC)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5675add2980so1606482eaf.3
+ for <spice-devel@lists.freedesktop.org>; Fri, 28 Jul 2023 09:37:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1690562229; x=1691167029;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KKv1w7dg8mQlsNAkT0vBA16O9vhHrc1kpvvsh4ku/f4=;
+ b=pBtSr98b51C7nGb2gxDXRTULz6Wqh83vR/SeWmoqhx9tIAMvPGbGxMOx06AZP0nWcI
+ tanNTZP18qwXgUBC0XXuIaDkL5Fv8lxXCHV0MlHTI25qrGnYLLIFvVbzTb2g8lc6VpRH
+ un98S68dMnpzRdT/t7bYrqnd7L5yr/XqxjwuZQ+lb2bIyp9jWCq5lyx7dNrWjbUk/bcb
+ LhftGtc1K19KwfQLuEm8eVULllWrTxHbcI39a9ocq01qxBuvg1f9eswBHNtcZ3+ebn+t
+ D2A1OqUjNi7eyxaacUEDmmA//SHf88FCGeVRc0NG6qC6NPP4ciG+d5hIOaLWXvTNZc1x
+ BLXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1690562229; x=1691167029;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KKv1w7dg8mQlsNAkT0vBA16O9vhHrc1kpvvsh4ku/f4=;
+ b=b7o02RYrSYQVchVDWAtbpmBaHHYJ+zpMIIat+iJ7vDm8uGr73bS/dSgV4y1ZWt38DE
+ vXr4p8ixQd7H2X3kdoU/W7eV+g3IroHrnaqPEOf61F6rWBIY4OBbWm/FEPurNEazTlmO
+ 0CaHeCxT0lGGv9ZieYZpgVKZwRQXMjGbI2KMipiD41ziptc1O8zzBqqr1XbePDme5hYO
+ DE81vpRYMkw1Yp0nXas2WfWtxZ91GS2P4/BvIJQLvi9co4u5QOX9nKBaN0XF+AwxWFFC
+ AyJho4aN3EEtIBv4EXKSximX/l8fTabY2dErlHAmMlwInvdmXo77sUL7/+RXoYb5NoXF
+ sqng==
+X-Gm-Message-State: ABy/qLar25wEzvmoSUAkfZF3IPOoP1yWAdxpEmThRDqqDRVe/JBVbLxx
+ UsbYnzx1gf+WAO/XdqyVawpC6MMKRiBzmsvfmk0338JlRZ8=
+X-Google-Smtp-Source: APBJJlGaw3jjRIdSQhPG4EG0sFV2efipWCD8zYlyjE1/lUOZIJly5HDNz0YvUsMuDyVs1aL4x3sopRLvFYpOSl3CT4g=
+X-Received: by 2002:a4a:3452:0:b0:563:49fd:e772 with SMTP id
+ n18-20020a4a3452000000b0056349fde772mr2993736oof.4.1690562229144; Fri, 28 Jul
+ 2023 09:37:09 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <310653f2.21156.1899a420e01.Coremail.32217118@mail.dlut.edu.cn>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: UUJ2ygD32Q1XI8NkKzLICg--.28851W
-X-CM-SenderInfo: ytssilqrryqzhdlohvxoxwhvlgxou0/1tbiAQAPMWTCZ7gAuQACs9
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Subject: [Spice-devel] [spice-streaming-agent]spice-streaming-agent warning
+References: <310653f2.21156.1899a420e01.Coremail.32217118@mail.dlut.edu.cn>
+In-Reply-To: <310653f2.21156.1899a420e01.Coremail.32217118@mail.dlut.edu.cn>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Fri, 28 Jul 2023 17:36:58 +0100
+Message-ID: <CAHt6W4eDZhSz7hk+DXtiecnhT_rwqBvhutB9yS82E2=r5SY-yg@mail.gmail.com>
+To: =?UTF-8?B?6ZyN6YeR6bmP?= <32217118@mail.dlut.edu.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] [spice-streaming-agent]spice-streaming-agent
+ warning
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,42 +68,38 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-------=_Part_496359_1678693328.1690510167552
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+Il giorno ven 28 lug 2023 alle ore 03:10 =E9=9C=8D=E9=87=91=E9=B9=8F
+<32217118@mail.dlut.edu.cn> ha scritto:
+>
+> Hello dear devs,
+>
+> spice-streaming-agent create a new display window but all black on client=
+ , and a message in guest's terminal:
+>
+> spice-streaming-agent[9710]: Warning: the Frame Capture plugin returned d=
+evice display info for more than one display device, but we currently only =
+support a single device. Sending information for first device to the server=
+.
+>
+>
+> what should I do to solve this prooblem?
+>
+> Thanks in advance !
 
-SGVsbG8gZGVhciBkZXZzLAoKc3BpY2Utc3RyZWFtaW5nLWFnZW50IGNyZWF0ZSBhIG5ldyBkaXNw
-bGF5IHdpbmRvdyBidXQgYWxsIGJsYWNrIG9uIGNsaWVudCAsIGFuZCBhIG1lc3NhZ2UgaW4gZ3Vl
-c3QncyB0ZXJtaW5hbDoKCnNwaWNlLXN0cmVhbWluZy1hZ2VudFs5NzEwXTogV2FybmluZzogdGhl
-IEZyYW1lIENhcHR1cmUgcGx1Z2luIHJldHVybmVkIGRldmljZSBkaXNwbGF5IGluZm8gZm9yIG1v
-cmUgdGhhbiBvbmUgZGlzcGxheSBkZXZpY2UsIGJ1dCB3ZSBjdXJyZW50bHkgb25seSBzdXBwb3J0
-IGEgc2luZ2xlIGRldmljZS4gU2VuZGluZyBpbmZvcm1hdGlvbiBmb3IgZmlyc3QgZGV2aWNlIHRv
-IHRoZSBzZXJ2ZXIuCgoKCgp3aGF0IHNob3VsZCBJIGRvIHRvIHNvbHZlIHRoaXMgcHJvb2JsZW0/
-CgpUaGFua3MgaW4gYWR2YW5jZSAhCg==
-------=_Part_496359_1678693328.1690510167552
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
+Hi,
+  I don't remember how the check is exactly done but basically the
+agent is complaining that you have more than 1 cards.
+How many Gpu cards did you assign to the guest and with which types?
+Looking at the code the error string is in
+src/spice-streaming-agent.cpp checking the response of
+get_device_display_info call to the plugin.
+The agent can load multiple plugins and choose the best one based on
+client codecs and other information. By default there's a mjpeg plugin
+(mainly for fallback) and installed a GStreamer plugin. If I remember
+(but maybe I'm wrong) they use Xorg/X11.
 
-PHA+Cgk8c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6VGltZXMgTmV3IFJvbWFuOyI+SGVsbG8gZGVh
-ciBkZXZzLDwvc3Bhbj4KPC9wPgo8cD4KCTxzcGFuIHN0eWxlPSJmb250LWZhbWlseTpUaW1lcyBO
-ZXcgUm9tYW47Ij5zcGljZS1zdHJlYW1pbmctYWdlbnQgY3JlYXRlIGEgbmV3IGRpc3BsYXkgd2lu
-ZG93IGJ1dCBhbGwgYmxhY2sgb24gY2xpZW50ICwgYW5kIGEgbWVzc2FnZSBpbiBndWVzdCdzIHRl
-cm1pbmFsOjwvc3Bhbj4KPC9wPgo8cD4KCTxzcGFuIHN0eWxlPSJmb250LWZhbWlseTpUaW1lcyBO
-ZXcgUm9tYW47Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6JnF1b3Q7VGltZXMgTmV3IFJvbWFu
-JnF1b3Q7O2ZvbnQtc2l6ZToxNHB4O3RleHQtd3JhcDp3cmFwOyI+c3BpY2Utc3RyZWFtaW5nLWFn
-ZW50Wzk3MTBdOiBXYXJuaW5nOiB0aGUgRnJhbWUgQ2FwdHVyZSBwbHVnaW4gcmV0dXJuZWQgZGV2
-aWNlIGRpc3BsYXkgaW5mbyBmb3IgbW9yZSB0aGFuIG9uZSBkaXNwbGF5IGRldmljZSwgYnV0IHdl
-IGN1cnJlbnRseSBvbmx5IHN1cHBvcnQgYSBzaW5nbGUgZGV2aWNlLiBTZW5kaW5nIGluZm9ybWF0
-aW9uIGZvciBmaXJzdCBkZXZpY2UgdG8gdGhlIHNlcnZlci48L3NwYW4+PC9zcGFuPgo8L3A+Cjxw
-PgoJPHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OlRpbWVzIE5ldyBSb21hbjsiPjxicj4KPC9zcGFu
-Pgo8L3A+CjxwPgoJPHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OlRpbWVzIE5ldyBSb21hbjsiPndo
-YXQgc2hvdWxkIEkgZG8gdG8gc29sdmUgdGhpcyBwcm9vYmxlbT88L3NwYW4+CjwvcD4KPHA+Cgk8
-c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6VGltZXMgTmV3IFJvbWFuOyI+PHNwYW4gc3R5bGU9ImZv
-bnQtZmFtaWx5OiZxdW90O1RpbWVzIE5ldyBSb21hbiZxdW90Oztmb250LXNpemU6MTRweDt0ZXh0
-LXdyYXA6d3JhcDsiPlRoYW5rcyBpbiBhZHZhbmNlICE8L3NwYW4+PGJyPgo8L3NwYW4+CjwvcD4=
-
-------=_Part_496359_1678693328.1690510167552--
-
+Frediano
