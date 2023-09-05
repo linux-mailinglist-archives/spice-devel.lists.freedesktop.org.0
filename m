@@ -2,43 +2,67 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A5E8791366
-	for <lists+spice-devel@lfdr.de>; Mon,  4 Sep 2023 10:28:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A804793470
+	for <lists+spice-devel@lfdr.de>; Wed,  6 Sep 2023 06:28:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B73B210E2F0;
-	Mon,  4 Sep 2023 08:27:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DA8B510E030;
+	Wed,  6 Sep 2023 04:28:50 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7C85B10E2D8
- for <spice-devel@lists.freedesktop.org>; Mon,  4 Sep 2023 07:58:34 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 12BE5B80DBC;
- Mon,  4 Sep 2023 07:58:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 303E8C433C8;
- Mon,  4 Sep 2023 07:58:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693814309;
- bh=pKUbMJ7O8Os+Ar2FZmAgeHqSU7CTw0TYRCnkJDIg7I0=;
- h=Date:From:To:Subject:In-Reply-To:References:Cc:From;
- b=LDjgR2toWSyxM6eaNf5MclGQkx8j8Rs9pbSyMxrEwR3b7inYlQ1n2Gzk5SRTcP1/4
- LjJiylmv2BkNCopbGUdOtGxoLEN4vrn9lqUKG9V0taLDeu3PqxiDdWu8nyFZ1Y7kqv
- /iAt1WXEzE7UMIKIx8gaI91nDPNgUln6bX79+pmOgaOyDYjSRRyoaJj5wu4CAlJRaC
- esUVjTO5ScwUV2thH+4kor1+Br+0yl4w0tczWPI/YBxVxc0zTQfka7Ote4t0asnQGm
- 1PT9bT54FwQeUHtbuVe3D+4h7pelxn2r2/TfunUWt+zGq4Ix1UD7O8KKZQWtj+d+xc
- MeKI0z7FqL8eg==
-Message-ID: <37ab52defccfc95d726451853227bd91.mripard@kernel.org>
-Date: Mon, 04 Sep 2023 07:58:27 +0000
-From: "Maxime Ripard" <mripard@kernel.org>
-To: "Douglas Anderson" <dianders@chromium.org>
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A881C10E19D;
+ Tue,  5 Sep 2023 21:06:06 +0000 (UTC)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-986d8332f50so465519466b.0; 
+ Tue, 05 Sep 2023 14:06:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693947965; x=1694552765; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9XU7m3iUIhB2czTwQI5E0tsG1IdXbWVa4A+CGA62kvw=;
+ b=mAzILez8c73bvRlrtPJnZpE9+OfLG+QwexJhs8xlhu6r5WpF55c4JMpX/dfESnMyxR
+ lqmD4RgZlky1kpeq6zM3TcwOfiS7yMxbN1Ff0PKp1VfyNVCYsvhKtks0wJekhBi9i0ro
+ +1q8O4jCTG7hy6alwDQaLoclL65jrbg9byt9HEpr/epDLAb661LLpSRqpE7nVtLkrLZQ
+ 4W9YX/AN5K+axia4tQIW6v5sACqniJZWuDRJ2Es48VxnpbKCIntYmFW5Fe304mZLpH8r
+ oB7D7evQArMVm7AMlGdgP45xEynm/A3gNWtzIQRgyeWAgWrCNvvSBjyLWuVMyupxFuFK
+ WIGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693947965; x=1694552765;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9XU7m3iUIhB2czTwQI5E0tsG1IdXbWVa4A+CGA62kvw=;
+ b=QHs5N8RsnYf7KJVropqe/WvDTH1rWHR7gmhxyCdlbQuicG/JXqdV+41qgnA3Vr5XLw
+ 4C7SlpKLAxMN5/WOyeNB/8+ySs4U4znM1LIZoMSVQT23ShZ8onIBCJs8jXccBQFlVLYX
+ riRnW5xcPcNwlPRlDHtYgZLU7Ymq7K3QF6maeco5In+A9iWt6bM2CZrKBN2ccYrRYvGs
+ j6Xqin7Biko+qV17H+FfdQmX6L2IrjiVhTk8tl4AII2LupddKGVIS2Bo6jb1dDsds9av
+ YBfhk94qsuUkW8jpLNsB6jMqMmzS5m6hw/3PjUjvVPzfRwr3QOI8xtWfB6FPNRiMaI8z
+ DLAQ==
+X-Gm-Message-State: AOJu0Yw6MgEYzSTOvOKagz2pC4pDdsQGFxcg3nH3qXkkpC5dsY0a+Yi5
+ GXXSYJk9wx4z0ySlNMSw7l7fbF5zrOXbg01R
+X-Google-Smtp-Source: AGHT+IGkmh9tp77O9jdKZ4K1pCktyBByW4OQ7/rwivCx3acTMVK4FoRmIlgULCUgqm2i5B0cQ60LGg==
+X-Received: by 2002:a17:907:762a:b0:9a1:bb8f:17d7 with SMTP id
+ jy10-20020a170907762a00b009a1bb8f17d7mr692400ejc.12.1693947964868; 
+ Tue, 05 Sep 2023 14:06:04 -0700 (PDT)
+Received: from jernej-laptop.localnet (82-149-12-148.dynamic.telemach.net.
+ [82.149.12.148]) by smtp.gmail.com with ESMTPSA id
+ kt8-20020a170906aac800b0099df2ddfc37sm8025574ejb.165.2023.09.05.14.06.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Sep 2023 14:06:04 -0700 (PDT)
+From: Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+To: dri-devel@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>,
+ Douglas Anderson <dianders@chromium.org>
+Date: Tue, 05 Sep 2023 23:06:00 +0200
+Message-ID: <5970528.lOV4Wx5bFT@jernej-laptop>
 In-Reply-To: <20230901163944.RFT.2.I9115e5d094a43e687978b0699cc1fe9f2a3452ea@changeid>
-References: <20230901163944.RFT.2.I9115e5d094a43e687978b0699cc1fe9f2a3452ea@changeid>
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Mon, 04 Sep 2023 08:27:56 +0000
+References: <20230901234015.566018-1-dianders@chromium.org>
+ <20230901163944.RFT.2.I9115e5d094a43e687978b0699cc1fe9f2a3452ea@changeid>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
+X-Mailman-Approved-At: Wed, 06 Sep 2023 04:28:50 +0000
 Subject: Re: [Spice-devel] [RFT PATCH 2/6] drm: Call
  drm_atomic_helper_shutdown() at shutdown time for misc drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -54,15 +78,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
 Cc: alexandre.belloni@bootlin.com, xinliang.liu@linaro.org,
  tomi.valkeinen@ideasonboard.com, linus.walleij@linaro.org, liviu.dudau@arm.com,
- linux-hyperv@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nicolas.ferre@microchip.com, wens@csie.org, jstultz@google.com,
+ linux-hyperv@vger.kernel.org, stefan@agner.ch,
+ Douglas Anderson <dianders@chromium.org>, wens@csie.org, jstultz@google.com,
  kraxel@redhat.com, sumit.semwal@linaro.org, yongqin.liu@linaro.org,
  samuel@sholland.org, sam@ravnborg.org, javierm@redhat.com,
- jernej.skrabec@gmail.com, drawat.floss@gmail.com,
- kong.kongxinwei@hisilicon.com, alain.volmat@foss.st.com,
- linux-sunxi@lists.linux.dev, suijingfeng@loongson.cn, tzimmermann@suse.de,
- alison.wang@nxp.com, Maxime
- Ripard <mripard@kernel.org>, stefan@agner.ch, airlied@redhat.com,
+ drawat.floss@gmail.com, kong.kongxinwei@hisilicon.com,
+ alain.volmat@foss.st.com, linux-sunxi@lists.linux.dev,
+ nicolas.ferre@microchip.com, suijingfeng@loongson.cn, tzimmermann@suse.de,
+ alison.wang@nxp.com, airlied@redhat.com,
  virtualization@lists.linux-foundation.org,
  linux-arm-kernel@lists.infradead.org, jfalempe@redhat.com,
  bbrezillon@kernel.org, linux-kernel@vger.kernel.org, christian.koenig@amd.com,
@@ -72,16 +95,69 @@ Cc: alexandre.belloni@bootlin.com, xinliang.liu@linaro.org,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, 1 Sep 2023 16:39:53 -0700, Douglas Anderson wrote:
+Dne sobota, 02. september 2023 ob 01:39:53 CEST je Douglas Anderson 
+napisal(a):
 > Based on grepping through the source code these drivers appear to be
 > missing a call to drm_atomic_helper_shutdown() at system shutdown
 > time. Among other things, this means that if a panel is in use that it
 > won't be cleanly powered off at system shutdown time.
 > 
+> The fact that we should call drm_atomic_helper_shutdown() in the case
+> of OS shutdown/restart comes straight out of the kernel doc "driver
+> instance overview" in drm_drv.c.
 > 
-> [ ... ]
+> All of the drivers in this patch were fairly straightforward to fix
+> since they already had a call to drm_atomic_helper_shutdown() at
+> remove/unbind time but were just lacking one at system shutdown. The
+> only hitch is that some of these drivers use the component model to
+> register/unregister their DRM devices. The shutdown callback is part
+> of the original device. The typical solution here, based on how other
+> DRM drivers do this, is to keep track of whether the device is bound
+> based on drvdata. In most cases the drvdata is the drm_device, so we
+> can just make sure it is NULL when the device is not bound. In some
+> drivers, this required minor code changes. To make things simpler,
+> drm_atomic_helper_shutdown() has been modified to consider a NULL
+> drm_device as a noop in the patch ("drm/atomic-helper:
+> drm_atomic_helper_shutdown(NULL) should be a noop").
+> 
+> Suggested-by: Maxime Ripard <mripard@kernel.org>
+> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> ---
+> This commit is only compile-time tested.
+> 
+> Note that checkpatch yells that "drivers/gpu/drm/tiny/cirrus.c" is
+> marked as 'obsolete', but it seems silly not to include the fix if
+> it's already been written. If someone wants me to take that out,
+> though, I can.
+> 
+>  drivers/gpu/drm/arm/display/komeda/komeda_drv.c | 9 +++++++++
+>  drivers/gpu/drm/arm/display/komeda/komeda_kms.c | 7 +++++++
+>  drivers/gpu/drm/arm/display/komeda/komeda_kms.h | 1 +
+>  drivers/gpu/drm/arm/hdlcd_drv.c                 | 6 ++++++
+>  drivers/gpu/drm/arm/malidp_drv.c                | 6 ++++++
+>  drivers/gpu/drm/ast/ast_drv.c                   | 6 ++++++
+>  drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_dc.c    | 6 ++++++
+>  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c       | 8 ++++++++
+>  drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c | 6 ++++++
+>  drivers/gpu/drm/hyperv/hyperv_drm_drv.c         | 6 ++++++
+>  drivers/gpu/drm/logicvc/logicvc_drm.c           | 9 +++++++++
+>  drivers/gpu/drm/loongson/lsdc_drv.c             | 6 ++++++
+>  drivers/gpu/drm/mcde/mcde_drv.c                 | 9 +++++++++
+>  drivers/gpu/drm/omapdrm/omap_drv.c              | 8 ++++++++
+>  drivers/gpu/drm/qxl/qxl_drv.c                   | 7 +++++++
+>  drivers/gpu/drm/sti/sti_drv.c                   | 7 +++++++
+>  drivers/gpu/drm/sun4i/sun4i_drv.c               | 6 ++++++
 
-Acked-by: Maxime Ripard <mripard@kernel.org>
+For sun4i:
+Tested-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-Thanks!
-Maxime
+Best regards,
+Jernej
+
+>  drivers/gpu/drm/tiny/bochs.c                    | 6 ++++++
+>  drivers/gpu/drm/tiny/cirrus.c                   | 6 ++++++
+>  19 files changed, 125 insertions(+)
+
+
+
