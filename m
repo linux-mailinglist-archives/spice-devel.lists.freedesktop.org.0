@@ -1,69 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B5A8799E8D
-	for <lists+spice-devel@lfdr.de>; Sun, 10 Sep 2023 15:56:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BD8A879C9AB
+	for <lists+spice-devel@lfdr.de>; Tue, 12 Sep 2023 10:19:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EC63D10E047;
-	Sun, 10 Sep 2023 13:56:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4263E10E3B0;
+	Tue, 12 Sep 2023 08:19:58 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 19A318913D
- for <spice-devel@lists.freedesktop.org>; Sun, 10 Sep 2023 13:50:26 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-402ba03c754so10327005e9.0
- for <spice-devel@lists.freedesktop.org>; Sun, 10 Sep 2023 06:50:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694353824; x=1694958624; darn=lists.freedesktop.org;
- h=content-transfer-encoding:subject:content-language:from:to
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cBvKNpoXNJWiLnfy+3d+u9HkZO7JwCGtmmeR8dpYOec=;
- b=V2R5UQoOk3yHhC+/pU6KPaZAhz3QL6bqOoctCCgSd2Id5iy2OljHtdyBPUF4QbDY22
- ZlX3klZeiMfxBUEUrHI7F97wArxe9QvJXYpf2YH4LLzXXOYapfOQq54DkcmGMU4zRXtJ
- lfmASU6cLH6ICFVvH93UgQRImsxm9Y6cUaoues/woc7bIY9TY60k3DfqSQwxDkywQAb/
- z3iBFzabwZZ4R8nlPe1qnPOc1F2yq+AwfIt3AU6wAC/WDj/hJDmU9xeOwfFcbwRN7qOk
- PJiIwAa/c8G6t8M2G10LxpZ6qQrNcTIi4E9s8pFT6Rz0RPp5KlW7yfcxP9NlKfC8jWNf
- 02Ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694353824; x=1694958624;
- h=content-transfer-encoding:subject:content-language:from:to
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=cBvKNpoXNJWiLnfy+3d+u9HkZO7JwCGtmmeR8dpYOec=;
- b=ozfJfXS88E1QULkj44Kfkv9Ez+asoS5KDMzhGR9z4uN79zIkxL9giBto4PSYC2mRZi
- +HOjF211pqDFDi74WzV5kw+qhGG9cL//Gvc+HZ0IpU/fr59v7O78wu9B44ptx9g3aa8d
- wv8TBARSoj7geyjaG4cSt8f9RbwdulE79T4taTOZyxTOphLBm5euQ04oj9rEvvKTiFkK
- uvlK1dC/owfT6OoANAD+pj6ut2JC7QgtRtkqKiRDybBESaDEBUawj61cTTA4bQEACgEY
- e8StcasQRQGuRdORD1V6ZZRa0jFuIuGY1I1c/ELoGKLs+xp5/5MiaeJGUBoRuSARVcSk
- cpeQ==
-X-Gm-Message-State: AOJu0YzuI5eygg/a+0nDXW4SQBjLU6eCUXBPRSqK3VmXE18GToZpc5ca
- yK5sWBhx+bZD43PJnfw+R1V2G6/BJRI=
-X-Google-Smtp-Source: AGHT+IHVIiU3YxQOIqzDG5E5mGIePACn47tZRUaKlIw9SfFhCUYVORaiWDpyp4sG+Hm3B9Ldz9eIqQ==
-X-Received: by 2002:a05:600c:3b07:b0:401:db82:3eda with SMTP id
- m7-20020a05600c3b0700b00401db823edamr6576527wms.1.1694353823613; 
- Sun, 10 Sep 2023 06:50:23 -0700 (PDT)
-Received: from [192.168.1.3] (lfbn-mar-1-113-223.w86-229.abo.wanadoo.fr.
- [86.229.85.223]) by smtp.gmail.com with ESMTPSA id
- gw18-20020a05600c851200b004030c778396sm1425277wmb.4.2023.09.10.06.50.22
- for <spice-devel@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 10 Sep 2023 06:50:23 -0700 (PDT)
-Message-ID: <99cd1b18-a4ce-5d93-62a0-726a64297b4f@gmail.com>
-Date: Sun, 10 Sep 2023 15:51:06 +0200
+X-Greylist: delayed 304 seconds by postgrey-1.36 at gabe;
+ Tue, 12 Sep 2023 07:12:08 UTC
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6045C10E360;
+ Tue, 12 Sep 2023 07:12:08 +0000 (UTC)
+X-UUID: 4c5f962676df41fd88c33b35345abea5-20230912
+X-CID-O-RULE: Release_Ham
+X-CID-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.31, REQID:99d3588d-76c7-47f3-8d5b-9077c3b64bd4, IP:5,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:-9,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-4
+X-CID-INFO: VERSION:1.1.31, REQID:99d3588d-76c7-47f3-8d5b-9077c3b64bd4, IP:5,
+ URL
+ :0,TC:0,Content:0,EDM:0,RT:0,SF:-9,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
+ elease,TS:-4
+X-CID-META: VersionHash:0ad78a4, CLOUDID:17ad98ef-9a6e-4c39-b73e-f2bc08ca3dc5,
+ B
+ ulkID:2309121506533HBDAXDZ,BulkQuantity:0,Recheck:0,SF:19|43|64|38|24|17|1
+ 02,TC:nil,Content:0,EDM:-3,IP:-2,URL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,CO
+ L:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_FSD,TF_CID_SPAM_FSI,TF_CID_SPAM_SNR,TF_CID_SPAM_FAS
+X-UUID: 4c5f962676df41fd88c33b35345abea5-20230912
+X-User: zhouzongmin@kylinos.cn
+Received: from [172.20.12.156] [(111.48.58.12)] by mailgw
+ (envelope-from <zhouzongmin@kylinos.cn>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1882865759; Tue, 12 Sep 2023 15:06:52 +0800
+Message-ID: <0fce832b81d676da8bde28bc7acf4d56932f244d.camel@kylinos.cn>
+From: zongmin zhou <zhouzongmin@kylinos.cn>
+To: airlied@redhat.com, kraxel@redhat.com, airlied@gmail.com, daniel@ffwll.ch
+Date: Tue, 12 Sep 2023 15:06:35 +0800
+In-Reply-To: <20230801025309.4049813-1-zhouzongmin@kylinos.cn>
+References: <20230425014543.3448839-1-zhouzongmin@kylinos.cn>
+ <20230801025309.4049813-1-zhouzongmin@kylinos.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-To: spice-devel@lists.freedesktop.org
-From: "Daerlnaxe (GMail)" <daerlnaxe@gmail.com>
-Content-Language: fr
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 10 Sep 2023 13:56:29 +0000
-Subject: [Spice-devel] A little help to start to develop.
+X-Mailman-Approved-At: Tue, 12 Sep 2023 08:19:56 +0000
+Subject: Re: [Spice-devel] [RESEND PATCH] drm/qxl: prevent memory leak
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,35 +63,48 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+On Tue, 2023-08-01 at 10:53 +0800, Zongmin Zhou wrote:
+> The allocated memory for qdev->dumb_heads should be released
+> in qxl_destroy_monitors_object before qxl suspend.
+> otherwise,qxl_create_monitors_object will be called to
+> reallocate memory for qdev->dumb_heads after qxl resume,
+> it will cause memory leak.
+>=20
+> Signed-off-by: Zongmin Zhou<zhouzongmin@kylinos.cn>
+> ---
+> =C2=A0drivers/gpu/drm/qxl/qxl_display.c | 3 +++
+> =C2=A01 file changed, 3 insertions(+)
+>=20
+> diff --git a/drivers/gpu/drm/qxl/qxl_display.c
+> b/drivers/gpu/drm/qxl/qxl_display.c
+> index 6492a70e3c39..404b0483bb7c 100644
+> --- a/drivers/gpu/drm/qxl/qxl_display.c
+> +++ b/drivers/gpu/drm/qxl/qxl_display.c
+> @@ -1229,6 +1229,9 @@ int qxl_destroy_monitors_object(struct
+> qxl_device *qdev)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (!qdev->monitors_confi=
+g_bo)
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0return 0;
+> =C2=A0
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0kfree(qdev->dumb_heads);
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0qdev->dumb_heads =3D NULL;
+> +
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0qdev->monitors_config =3D=
+ NULL;
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0qdev->ram_header->monitor=
+s_config =3D 0;
+> =C2=A0
+Friendly ping...
 
+Hello, I sent this patch a few months ago.
+Could you please help me review it as well and see if there are any
+issues?
 
-I'm sorry to disturb, i want to try to develop a spice client with some 
-features like adding visual effects. I try to see all possibilities for 
-a projet about retrogaming this is the last part. I found Spice 
-interesting, i have a good render, it's quick, i just want to customize.
-
-
-I don't have really habit to work on c/c++ i worked on ihm with visual 
-c++ there is a lot of time, but the most of time i work with java or 
-c#.  I know it will not be easy but i want to try, i want to make my 
-projet compatible for linux and windows.
-
-
-I need some advices to quick begin, like a basic client sample, i can't 
-find anything on the web. I saw documentation but it's pretty difficult 
-without a basic example, furthermore i'm french and for me english is an 
-additionnal difficulty.
-
-
-
-Thank a lot.
-
-
-Best regards.
-
-
-
+I'm looking forward to your reply.
+Thanks
