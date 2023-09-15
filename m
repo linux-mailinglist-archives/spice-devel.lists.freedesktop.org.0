@@ -1,63 +1,56 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80C097A267F
-	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 20:46:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 568057A27AD
+	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 22:08:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA46E10E021;
-	Fri, 15 Sep 2023 18:46:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A83110E082;
+	Fri, 15 Sep 2023 20:08:23 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8BD8410E673
- for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 18:46:54 +0000 (UTC)
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-57129417cecso1316004eaf.1
- for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 11:46:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1694803613; x=1695408413; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2MaVCgar3ZaIRzSUsRCldh/8JaNk6nmHiDTAyR866GY=;
- b=YhVQ/gGQxs5QuR35EqPPX5F/vW7dth31XM5+IhO22nM8oHTGkNClOMesIvBgr2bw2k
- tcAwZbm2kgCLbPdT6eXC7FYmt0/rdT4pdWNTdWMx/G8A1TWwFdrCjBFp6wo6+qRw7JQz
- xG07PzKkKBj5+TugUUgou/E/ZrDIg51/nN0VPaspC65WDwTrL8s7H7iRxyGtBA5Xa2mp
- t9jUN5x6pQyO06urrQ3Y/qhGROaGavJoj3ZH/8aauxv1S6XGaImmxqQQMUwCUkxvhxKr
- pAce7xTxLxP0Khmm7wonlytE+tQ21pwXRzSTwDkjWRDSrmD93f/mWne7b9KLB+1ayE2d
- 3qZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694803614; x=1695408414;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2MaVCgar3ZaIRzSUsRCldh/8JaNk6nmHiDTAyR866GY=;
- b=Evu9QyKqZZ4UfFJJt8rh0gYdeQYGl6ykf4RApmI54kizUs36p7ZJSo2AejFUe9S1BV
- LghfDI0EjXPloKpMBLBIZ8d6zmiF/rC92LzNVA5SY28C1y/brB7Xf+rxoEhEQHDX2kqI
- JMr++rRUxv7CP4GNJ4Nyi1/T2B47hZ+vo9t03cyB4y3Up1uM6B83p34lyS7f6USXpZrE
- YhhXwq6fJUG0ZjePYUKfk0/DxchqBQcAQAngpi1S+jDP39qeHNSAxRePGLAqd24MBmZW
- iu3QN6TwdhZanRJBd9i6CipkLdgo1FT7VsLbXMA6y3D8O3sXOgFu2H7ScFzYqHUqi39y
- HDgw==
-X-Gm-Message-State: AOJu0YxtszmY3FrdqDRrvpG8fH/0BEZGn/UG/S045iyAcpH6OzXoNT2N
- 64PJZq71E5VB4KHKlVhQ9mj3NshS265Z4+bsgKE=
-X-Google-Smtp-Source: AGHT+IE5ZnRMm1nMl9zSEJBZRBoJZEyXl1Mfm6O8XmGo8bcXsl+IMO7SdMC/FpjdRayBTfLdIW82OfxHguy+vRRIqz4=
-X-Received: by 2002:a4a:df50:0:b0:576:90e1:66c3 with SMTP id
- j16-20020a4adf50000000b0057690e166c3mr3893651oou.1.1694803613645; Fri, 15 Sep
- 2023 11:46:53 -0700 (PDT)
-MIME-Version: 1.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44B8510E082
+ for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 20:08:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1694808500;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=yN2HgjRICufqCOWafHR7MSQPd7Ygu2ms8gpjGEnzPTU=;
+ b=FlD/1pse5u9JYceBRWjzKWApeG53vxX8s5NPeU1ypXi5tamzqHvEErgSJ8hKYKpI38h7xt
+ cyel6DLOgMrf6rpiTAr1aA8fD67jo5+EWJ9tATXSpJJSWftTXEKTLDd/CpZGS1aKqY+lXV
+ QfHqkKeyr2IEXz9lO8tLT6mNf0jftso=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-61-OzEyEW2BM7KY46B2rK-cXA-1; Fri, 15 Sep 2023 16:08:14 -0400
+X-MC-Unique: OzEyEW2BM7KY46B2rK-cXA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A29E881D7A5;
+ Fri, 15 Sep 2023 20:08:13 +0000 (UTC)
+Received: from localhost (unknown [10.45.224.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 31D1740C6EA8;
+ Fri, 15 Sep 2023 20:08:13 +0000 (UTC)
+Date: Fri, 15 Sep 2023 22:08:12 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Message-ID: <yjgvpay3dcfkrtysqmlkjb5jl52it3cozdwapovkdninyjf3ro@akfmfzv7hzob>
 References: <20230915001215.531746-1-vivek.kasireddy@intel.com>
- <20230915001215.531746-6-vivek.kasireddy@intel.com>
-In-Reply-To: <20230915001215.531746-6-vivek.kasireddy@intel.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 15 Sep 2023 19:46:42 +0100
-Message-ID: <CAHt6W4d3MuzB2f610xkSrkVVvSVdePxy8=JJ5x=H8in9uQDKkw@mail.gmail.com>
-To: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] [PATCH 2/2] gstreamer-encoder: Use a h/w based
- encoder with Intel GPUs if possible (v2)
+ <20230915001215.531746-5-vivek.kasireddy@intel.com>
+ <CAHt6W4dgV69Q72u+AvCqSKSXYL8R5s0JC6nAetsR15n4EUR=Qw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="tjee2pmdfufq7cnt"
+Content-Disposition: inline
+In-Reply-To: <CAHt6W4dgV69Q72u+AvCqSKSXYL8R5s0JC6nAetsR15n4EUR=Qw@mail.gmail.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
+Subject: Re: [Spice-devel] [PATCH 2/4] channel-display-gst: Add
+ "byte-stream" as the stream format for h264
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,207 +62,115 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dongwon Kim <dongwon.kim@intel.com>,
- Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Jin Chung Teng <jin.chung.teng@intel.com>,
- spice-devel@lists.freedesktop.org
+Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
+ spice-devel@lists.freedesktop.org, Jin Chung Teng <jin.chung.teng@intel.com>,
+ Dongwon Kim <dongwon.kim@intel.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno ven 15 set 2023 alle ore 01:33 Vivek Kasireddy
-<vivek.kasireddy@intel.com> ha scritto:
->
-> Once it is determined that an Intel GPU is available/active (after
-> looking into udev's database), we try to see if there is a h/w
-> based encoder (element) available (in Gstreamer's registry cache)
-> for the user selected video codec. In other words, if we find that
-> the Intel Media SDK Gstreamer plugin (libgstmsdk.so) and associated
-> libraries (such as va or vaapi) are all installed properly, we add
-> the appropriate h/w based encoder and post-processor/converter
-> elements to the pipeline (along with any relevant options) instead
-> of the s/w based elements.
->
-> For example, if the user selects h264 as the preferred codec format,
-> msdkh264enc and vapostproc will be preferred instead of x264enc
-> and videoconvert.
->
-> v2: (addressed some review comments from Frediano)
-> - Moved the udev helper into spice-common
-> - Refactored the code to choose plugins in order msdk > va > vaapi
->
-> Cc: Frediano Ziglio <freddy77@gmail.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> Cc: Dongwon Kim <dongwon.kim@intel.com>
-> Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> Co-developed-by: Jin Chung Teng <jin.chung.teng@intel.com>
-> Co-developed-by: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
-> ---
->  server/gstreamer-encoder.c | 96 ++++++++++++++++++++++++++++++++++++--
->  1 file changed, 93 insertions(+), 3 deletions(-)
->
-> diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
-> index 057509b5..44666f42 100644
-> --- a/server/gstreamer-encoder.c
-> +++ b/server/gstreamer-encoder.c
-> @@ -31,6 +31,7 @@
->  #include "red-common.h"
->  #include "video-encoder.h"
->  #include "utils.h"
-> +#include "common/udev.h"
->
->
->  #define SPICE_GST_DEFAULT_FPS 30
-> @@ -913,14 +914,94 @@ static const gchar* get_gst_codec_name(const SpiceG=
-stEncoder *encoder)
->      }
->  }
->
-> +static const char video_codecs[][8] =3D {
-> +    { "" },
-> +    { "mjpeg" },
-> +    { "vp8" },
-> +    { "h264" },
-> +    { "vp9" },
-> +    { "h265" },
-> +};
-> +
-> +static bool gst_features_lookup(const gchar *feature_name)
-> +{
-> +    GstRegistry *registry;
-> +    GstPluginFeature *feature;
-> +
-> +    registry =3D gst_registry_get();
-> +    if (!registry) {
-> +        return false;
-> +    }
-> +
-> +    feature =3D gst_registry_lookup_feature(registry, feature_name);
-> +    if (!feature) {
-> +        return false;
-> +    }
-> +
-> +    gst_object_unref(feature);
-> +    return true;
-> +}
-> +
-> +static gchar *find_best_plugin(const gchar *codec_name)
-> +{
-> +    const char *plugins[3] =3D {"msdk", "va", "vaapi"};
-> +    gchar *feature_name;
-> +    int i;
-> +
-> +    for (i =3D 0; i < 3; i++) {
-> +        feature_name =3D !codec_name ? g_strconcat(plugins[i], "postproc=
-", NULL) :
 
-The name for the msdk postproc is msdkvpp, not msdkpostproc.
-Looking at this function and the next one it looks correct to use,
-let's say an encoder from msdk (like msdkvp9enc) and the vaapi post
-processor (like vaapipostproc), but it seems wrong to me.
+--tjee2pmdfufq7cnt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> +                       g_strconcat(plugins[i], codec_name, "enc", NULL);
-> +        if (!gst_features_lookup(feature_name)) {
-> +            g_free(feature_name);
-> +            feature_name =3D NULL;
-> +            continue;
-> +        }
-> +        break;
-> +    }
-> +    return feature_name;
-> +}
-> +
-> +static void try_intel_hw_plugins(const gchar *codec_name, gchar **conver=
-ter,
-> +                                 gchar **gstenc_name, gchar **gstenc_opt=
-s)
-> +{
-> +    gchar *encoder =3D find_best_plugin(codec_name);
-> +    if (!encoder) {
-> +        return;
-> +    }
-> +    gchar *vpp =3D find_best_plugin(NULL);
-> +    if (!vpp) {
-> +        return;
-> +    }
-> +
-> +    g_free(*converter);
-> +    g_free(*gstenc_name);
-> +    g_free(*gstenc_opts);
-> +
-> +    *gstenc_name =3D encoder;
-> +    if (strstr(encoder, "msdk")) {
-> +        *gstenc_opts =3D g_strdup("async-depth=3D1 rate-control=3D3 gop-=
-size=3D1 tune=3D16 b-frames=3D0 target-usage=3D7 min-qp=3D15 max-qp=3D35");
+Hi,
 
-These options are nice for h264 (and probably h265) but are wrong for
-vp9 and probably mjpeg.
+On Fri, Sep 15, 2023 at 05:51:14PM +0100, Frediano Ziglio wrote:
+> Il giorno ven 15 set 2023 alle ore 01:33 Vivek Kasireddy
+> <vivek.kasireddy@intel.com> ha scritto:
+> >
+> > Adding the string "stream-format=3Dbyte-stream" to decoder capabilities
+> > (dec_caps) for h264/h265 codecs stops Gstreamer from complaining
+> > about missing stream format.
+> >
+> > Cc: Frediano Ziglio <freddy77@gmail.com>
+> > Cc: Dongwon Kim <dongwon.kim@intel.com>
+> > Cc: Jin Chung Teng <jin.chung.teng@intel.com>
+> > Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+> > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+> > ---
+> >  src/channel-display-priv.h | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/src/channel-display-priv.h b/src/channel-display-priv.h
+> > index 66c9cff..1a7590a 100644
+> > --- a/src/channel-display-priv.h
+> > +++ b/src/channel-display-priv.h
+> > @@ -177,7 +177,7 @@ static const struct {
+> >       * (hardcoded in spice-server), let's add it here to avoid the war=
+ning.
+> >       */
+> >      { SPICE_DISPLAY_CAP_CODEC_H264, "h264",
+> > -      "h264parse ! avdec_h264", "video/x-h264" },
+> > +      "h264parse ! avdec_h264", "video/x-h264,stream-format=3Dbyte-str=
+eam" },
+> >
+> >      /* SPICE_VIDEO_CODEC_TYPE_VP9 */
+> >      { SPICE_DISPLAY_CAP_CODEC_VP9, "vp9",
+> > @@ -185,7 +185,7 @@ static const struct {
+> >
+> >      /* SPICE_DISPLAY_CAP_CODEC_H265 */
+> >      { SPICE_DISPLAY_CAP_CODEC_H265, "h265",
+> > -      "h265parse ! avdec_h265", "video/x-h265" },
+> > +      "h265parse ! avdec_h265", "video/x-h265,stream-format=3Dbyte-str=
+eam" },
+> >
+> >  };
+> >
+>=20
+> Hi,
+>    I agree with this change. Specifically I'm getting the warning too
+> even if my system is pretty updated.
+>=20
+> This setting was removed by commit
+> https://gitlab.freedesktop.org/spice/spice-gtk/-/commit/c9129ed202b00f4a7=
+4ea7a55de19150194257e77
+> but the explanation about it was removed is not really clear to me.
 
-> +    } else if (strstr(encoder, "vaapi")) {
-> +        *gstenc_opts =3D g_strdup("rate-control=3Dcqp max-bframes=3D0 mi=
-n-qp=3D15 max-qp=3D35");
-> +    } else {
-> +        *gstenc_opts =3D g_strdup("rate-control=3D16 b-frames=3D0 target=
--usage=3D7 min-qp=3D15 max-qp=3D35");
-> +    }
+Yes, I've put the chat with tim and slomo because it was tricky.
 
-Similar comment for these.
+The important point imho could be:
 
-> +
-> +    if (strstr(vpp, "vaapi")) {
-> +        *converter =3D g_strconcat(vpp, " ! video/x-raw(memory:VASurface=
-),format=3DNV12", NULL);
-> +    } else {
-> +        *converter =3D g_strconcat(vpp, " ! video/x-raw(memory:VAMemory)=
-,format=3DNV12", NULL);
-> +    }
+ | toso  slomo: right, my point was that I would like to list the
+ | h264 decoders that are available and I was using `video/x-h264,
+ | stream-format=3D3Dbyte-stream` as input for
+ | gst_element_factory_list_filter() .. and avdec_h264 is the one
+ | not showing because it needs the aligment
 
-From gst-inspect msdkvpp does not support any of these. Is this expected?
+So, the problem I had at that time was exactly that using
+stream-format would prevent loading avdec_h264 as viable option.
 
-> +    g_free(vpp);
-> +}
-> +
->  static gboolean create_pipeline(SpiceGstEncoder *encoder)
->  {
->  #ifdef HAVE_GSTREAMER_0_10
-> -    const gchar *converter =3D "ffmpegcolorspace";
-> +    gchar *converter =3D g_strdup("ffmpegcolorspace");
->  #else
-> -    const gchar *converter =3D "videoconvert ! video/x-raw,format=3DNV12=
-";
-> +    gchar *converter =3D g_strdup("videoconvert ! video/x-raw,format=3DN=
-V12");
->  #endif
-> -    const gchar* gstenc_name =3D get_gst_codec_name(encoder);
-> +    gchar* gstenc_name =3D g_strdup(get_gst_codec_name(encoder));
->      if (!gstenc_name) {
->          return FALSE;
->      }
-> @@ -973,12 +1054,21 @@ static gboolean create_pipeline(SpiceGstEncoder *e=
-ncoder)
->          return FALSE;
->      }
->
-> +    const char *codec_name =3D video_codecs[encoder->base.codec_type];
-> +    GpuVendor vendor =3D spice_udev_detect_gpu();
-> +    if (vendor =3D=3D GPU_VENDOR_INTEL) {
-> +        try_intel_hw_plugins(codec_name, &converter, &gstenc_name,
-> +                             &gstenc_opts);
-> +    }
-> +
->      GError *err =3D NULL;
->      gchar *desc =3D g_strdup_printf("appsrc is-live=3Dtrue format=3Dtime=
- do-timestamp=3Dtrue name=3Dsrc !"
->                                    " %s ! %s name=3Dencoder %s ! appsink =
-name=3Dsink",
->                                    converter, gstenc_name, gstenc_opts);
->      spice_debug("GStreamer pipeline: %s", desc);
->      encoder->pipeline =3D gst_parse_launch_full(desc, NULL, GST_PARSE_FL=
-AG_FATAL_ERRORS, &err);
-> +    g_free(converter);
-> +    g_free(gstenc_name);
->      g_free(gstenc_opts);
->      g_free(desc);
->      if (!encoder->pipeline || err) {
+> Personally I think this commit should be applied in any case, it makes
+> sense independently of the series. Vivek, do you agree?
+>=20
+> Victor, do you agree to this change?
 
-Frediano
+If you test this and it lists & works with avdec_h264, I think it
+is fine too.
+
+Cheers,
+Victor
+
+--tjee2pmdfufq7cnt
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmUEuasACgkQl9kSPeN6
+SE93TQ/8Cl4UbrXlqJMEc6fDfWxA/UNO12v8CFfPtsrl3Ew97mvQOTrURMJ+s6Qk
+ng1KAiRZ0tU/s5UWu2F8DwrCOS84gofnVt3o2ZSDBnh9Qds3hhdAp/IzwdhKGNh1
+uU6QWK6EqVjrlUSpHPWAHg9q+PeH9Ys/2GNJcp7mjw14hLjRcsQR/fjI5KXKG4W3
+3TxTodjXbau5jIZNbQC1XMpkhIzEGxZFOJX1bAcqeJmmtXwokHCV6698vGpxiCVx
+Ff8zwZVSLY7B7+dQo2BBTJgobCOzj845b3cBV54qqUYg2EP9WNfL0bearMBVRqGV
+FjL3ItkKF6WrpT8CY9oHycTJN0O7Ks5mDlPXMU42zR8JZ90Vu1iIa8NmvrNh7Ha/
+wNr9OZ4o2Ml33SbmtaUhIuY5RXTVndNwwAW0xkVQFJKljA4ntb1xD+i0Wg7jMvJa
+2ZtoDBGoX88BejbEVzQ/j6exXJbcuqEB+MOsmZyRN+5wxOqorqeUiDknYWCnret7
+X8sraCa7aX9kjdXGOvf2sob0f/VBDdscnLKMDb8rNB6KyDQSb6v9buxJDfLnXlig
+GU2asoCsgR/Mg8iCG9zhWu4dedr5dtEInkfqNr/Lng4qfWRKErpQcqy7XTuyMofG
+9iPDEBmdfZSfp7SH2zWu13Xmu+x1zFI/1g0PGO0S0o8HJzbKw4M=
+=zvhx
+-----END PGP SIGNATURE-----
+
+--tjee2pmdfufq7cnt--
+
