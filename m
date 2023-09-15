@@ -1,50 +1,51 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09B3E7A124E
-	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 02:33:07 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7B4D7A124F
+	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 02:33:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4537010E14C;
+	by gabe.freedesktop.org (Postfix) with ESMTP id E73B210E2C0;
 	Fri, 15 Sep 2023 00:33:04 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4EB7B10E14C
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C60210E2C0
  for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 00:33:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
  t=1694737982; x=1726273982;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=j52j5ouSkLL1DnFYyV+Cv1WkWR+1cDp8M0/ZMffo/gY=;
- b=cbB1borya1ij1ZopEiYS3x1E2WvstuDGIs733fQwLcizPH96u7EfJM8Z
- G9z3bOdgof4SqG9LpAzc7M7RxswEy8RL2p6ds/XmiujkBzZZOZ7NOvLTW
- rNulcD+0Su3gPeQy2wIsFSro/7LGuuIa2NPl5D7nqSAkv+eoHYRxGGXYV
- VVIoQXcNzYgyXc97ktpH+ZqNDrQmKRkWghOSjiM2MjkD8/quaKlvkoECI
- 0MBmTZcZv7d0umBocgCehLserUbZo2ZVna/BohlwJW9ma5PG333n6cerZ
- LoTU847ktX2QcRy1hiPNVCzzUJ8Z0CKCmpIpFIoDLY8yS7DoNsKMyIHwR A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10833"; a="359378154"
-X-IronPort-AV: E=Sophos;i="6.02,147,1688454000"; d="scan'208";a="359378154"
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=LXTOo036GTHuQM+Wdl5MpdgAmAAGYRz4b2rkJ0KLeIs=;
+ b=TQY0CKbYUloLbQVNV+FpbMbD9ApqgP2+MPCDGiXQrzb+4I8vJHVl0uhI
+ NbTNnkmCjTqqMRPwaIAdD0BckzzwaGwfQYQr6QBdt9WnmpLmqbgpLFMKR
+ 0HtmU2fIMvMx9ZH0r4oq8+9nssvHH9hbY8tvqlaxMEtET/HpPuP041b/4
+ JwTwXNdfopkFdc7Go7HMPGpVJoDLJ9bwU4NdUG5AvdLgIUCukgNel2NDI
+ XtmD83JB4AE8n15rF4B3J+H3xKltBCS7ZEeNQEPCNADjD53EXjtM3gYkM
+ VZkDSCbbvQWM7mP4viDj8/8CROanCqFdFRZ1TUvwUfZUn7oROIWgaQ6IX w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10833"; a="359378155"
+X-IronPort-AV: E=Sophos;i="6.02,147,1688454000"; d="scan'208";a="359378155"
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  14 Sep 2023 17:33:01 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10833"; a="918442344"
-X-IronPort-AV: E=Sophos;i="6.02,147,1688454000"; d="scan'208";a="918442344"
+X-IronPort-AV: E=McAfee;i="6600,9927,10833"; a="918442347"
+X-IronPort-AV: E=Sophos;i="6.02,147,1688454000"; d="scan'208";a="918442347"
 Received: from vkasired-desk2.fm.intel.com ([10.105.128.127])
  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Sep 2023 17:33:00 -0700
+ 14 Sep 2023 17:33:01 -0700
 From: Vivek Kasireddy <vivek.kasireddy@intel.com>
 To: spice-devel@lists.freedesktop.org
-Date: Thu, 14 Sep 2023 17:12:08 -0700
-Message-Id: <20230915001215.531746-1-vivek.kasireddy@intel.com>
+Date: Thu, 14 Sep 2023 17:12:09 -0700
+Message-Id: <20230915001215.531746-2-vivek.kasireddy@intel.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230915001215.531746-1-vivek.kasireddy@intel.com>
+References: <20230915001215.531746-1-vivek.kasireddy@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Spice-devel] [PATCH 0/4] spice/gstreamer: Use h/w based
- encoders/decoders with Intel GPUs if possible (v2)
+Subject: [Spice-devel] [PATCH 1/4] channel-display-gst: Prefer playbin3 to
+ playbin
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,55 +57,48 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dongwon Kim <dongwon.kim@intel.com>,
- Jin Chung Teng <jin.chung.teng@intel.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
+ Dongwon Kim <dongwon.kim@intel.com>, Jin Chung Teng <jin.chung.teng@intel.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This patch series includes a patch for Spice (server) to
-automatically select h/w based encoder elements and another one
-for Spice-gtk (client) to automatically select h/w based decoder
-elements with Intel GPUs when these two conditions are met:
-- An Intel GPU is available and is active (driver loaded)
-- The relevant h/w based encoder/decoder elements are registered
-  (i.e, Intel Media SDK Gstreamer plugin (libgstmsdk.so) and associated
-  libraries (such as va or vaapi) are properly installed).
+From: Jin Chung Teng <jin.chung.teng@intel.com>
 
-When tested on a Gen 12 Intel GPU (codenamed AlderLake/TigerLake)
-with Qemu/Spice + h/w encoder elements, we noticed that the time
-to encode a 1920x1080 BGRx frame was reduced to ~2-3 ms compared
-to ~12-16 ms with a s/w encoder (x264enc). Other advantages
-include reduced overall CPU utilization.
-
-However, once these patches are applied, the only way to force
-Spice/Spice-gtk to fallback to s/w based encoder/decoder is to
-remove the msdk and or vaapi plugins from GST_PLUGIN_PATH. This
-might be desirable for debugging purposes or for other reasons.
-
-v2:
-- Added several bugfix patches to this series
-- Moved udev helper to determine GPU Vendor to spice-common repo
-- Refactored the code to prioritize plugins in the order msdk > va > vaapi
+If playbin3 is available (checked in Gstreamer registry), it
+makes sense to prefer it given the major improvements and
+features it offers including the capability to handle higher
+bitrates.
 
 Cc: Frediano Ziglio <freddy77@gmail.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
 Cc: Dongwon Kim <dongwon.kim@intel.com>
-Cc: Jin Chung Teng <jin.chung.teng@intel.com>
 Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+Signed-off-by: Jin Chung Teng <jin.chung.teng@intel.com>
+Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+---
+ src/channel-display-gst.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-Vivek Kasireddy (4):
-  channel-display-gst: Prefer playbin3 to playbin
-  channel-display-gst: Add "byte-stream" as the stream format for h264
-  channel-display-gst: Don't unref appsink and pipeline objects
-  channel-display-gst: Use h/w based decoders with Intel GPUs if
-    possible (v2)
-
- src/channel-display-gst.c  | 232 ++++++++++++++++++++++++++++++++-----
- src/channel-display-priv.h |   4 +-
- 2 files changed, 205 insertions(+), 31 deletions(-)
-
+diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
+index 36db3a3..3f46a65 100644
+--- a/src/channel-display-gst.c
++++ b/src/channel-display-gst.c
+@@ -496,10 +496,13 @@ static gboolean create_pipeline(SpiceGstDecoder *decoder)
+     SpiceGstPlayFlags flags;
+     GstCaps *caps;
+ 
+-    playbin = gst_element_factory_make("playbin", "playbin");
++    playbin = gst_element_factory_make("playbin3", "playbin3");
+     if (playbin == NULL) {
+-        spice_warning("error upon creation of 'playbin' element");
+-        return FALSE;
++        playbin = gst_element_factory_make("playbin", "playbin");
++        if (playbin == NULL) {
++            spice_warning("error upon creation of 'playbin' element");
++            return FALSE;
++        }
+     }
+ 
+     /* Passing the pipeline to widget, try to get window handle and
 -- 
 2.39.2
 
