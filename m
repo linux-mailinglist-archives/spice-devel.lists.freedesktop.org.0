@@ -2,60 +2,62 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B01857A2455
-	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 19:11:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80C097A267F
+	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 20:46:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7225510E653;
-	Fri, 15 Sep 2023 17:11:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CA46E10E021;
+	Fri, 15 Sep 2023 18:46:56 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EDCBC10E653
- for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 17:11:27 +0000 (UTC)
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6c0d6fef60cso1389137a34.1
- for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 10:11:27 -0700 (PDT)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8BD8410E673
+ for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 18:46:54 +0000 (UTC)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-57129417cecso1316004eaf.1
+ for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 11:46:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1694797887; x=1695402687; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3ufzi6cBKLp/Mti7BxeA+qWxKK1RRUrNBWrmKPs6u0I=;
- b=gbTOGxPNt/lKX5A9cGQVyDQBEsdSNg7pYF5XrZER5hHui7fY1ZuA5VhjidLh9DKNRc
- 7iBRt6bU2E+qOjQsppMIa7dUiv1CPkYUMAmJIqwghNOWp/ECXpTeEKRvJGVdUqWmPjqx
- JAUOwByJVTGSrb9ehYrZst7OvLCfbSDzKQMwWCgIiVv6cLxUavQCWqrEtIplP91i2Q15
- +W/Z3/izjK4ttaMpF4IAvJ9H+dnxvACIeQsbE4TRA/QaFEIUkeyOoXGMCQ9bqgKWa3Ri
- qflo4cnoE3kbUy2dXefriG7N9JEuOxxCCgEqodDKuVSVseHQzpPwIKYlb4maoc7jR+AG
- 2TVA==
+ d=gmail.com; s=20230601; t=1694803613; x=1695408413; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2MaVCgar3ZaIRzSUsRCldh/8JaNk6nmHiDTAyR866GY=;
+ b=YhVQ/gGQxs5QuR35EqPPX5F/vW7dth31XM5+IhO22nM8oHTGkNClOMesIvBgr2bw2k
+ tcAwZbm2kgCLbPdT6eXC7FYmt0/rdT4pdWNTdWMx/G8A1TWwFdrCjBFp6wo6+qRw7JQz
+ xG07PzKkKBj5+TugUUgou/E/ZrDIg51/nN0VPaspC65WDwTrL8s7H7iRxyGtBA5Xa2mp
+ t9jUN5x6pQyO06urrQ3Y/qhGROaGavJoj3ZH/8aauxv1S6XGaImmxqQQMUwCUkxvhxKr
+ pAce7xTxLxP0Khmm7wonlytE+tQ21pwXRzSTwDkjWRDSrmD93f/mWne7b9KLB+1ayE2d
+ 3qZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694797887; x=1695402687;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3ufzi6cBKLp/Mti7BxeA+qWxKK1RRUrNBWrmKPs6u0I=;
- b=VHPB7g1lbs2G0/Fst6FWSNcmwEQJhG2T/+QkU8XIeNLUzouzPPOJ2395KvoB77vuWU
- +XihNyD7HIPjWF+37N/1elQE0FUdUsMCZxOajMqNdxPWYYrKbtmRnc4/cU9zwAZrOCNJ
- i0BgWXvMPeuCQpH0lfjSiQJgvL2M9W/D0x7Mh6AlMF1tE3HQURznRecoc6CDKEbOu33X
- YKEH2xisdq2A0wx4e8ahLy/0h6JpfaswRQcq1Zj2eMcb/6+sdqNGcTj+pR4/XhprXn51
- YdSEpAtE7mj7aJhMqEjX9mS9u19JDBr6kJCAGTCKAHdLYNfONJOoozoBZYhbZWsR61Ji
- ONBw==
-X-Gm-Message-State: AOJu0YzVpcyg+7mKRWnSs46BlY77fTJmUY/hEblTErQRYoOGIaEGxGFs
- OsPHJXsYSsGCQQ1I01kNVG073cySYVxH1Gk5XN6PRFuvi9mILg==
-X-Google-Smtp-Source: AGHT+IED5D0Z1MGZdtY8lEvAkILirgwOQzXbCNgYOrAkZi/Y1pbqefkNtWwWfVj9KtcKHBs/YzCkoG9+hWFIyyRsZjE=
-X-Received: by 2002:a05:6830:18e7:b0:6b9:b1a7:1f92 with SMTP id
- d7-20020a05683018e700b006b9b1a71f92mr2266102otf.8.1694797887137; Fri, 15 Sep
- 2023 10:11:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1694803614; x=1695408414;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2MaVCgar3ZaIRzSUsRCldh/8JaNk6nmHiDTAyR866GY=;
+ b=Evu9QyKqZZ4UfFJJt8rh0gYdeQYGl6ykf4RApmI54kizUs36p7ZJSo2AejFUe9S1BV
+ LghfDI0EjXPloKpMBLBIZ8d6zmiF/rC92LzNVA5SY28C1y/brB7Xf+rxoEhEQHDX2kqI
+ JMr++rRUxv7CP4GNJ4Nyi1/T2B47hZ+vo9t03cyB4y3Up1uM6B83p34lyS7f6USXpZrE
+ YhhXwq6fJUG0ZjePYUKfk0/DxchqBQcAQAngpi1S+jDP39qeHNSAxRePGLAqd24MBmZW
+ iu3QN6TwdhZanRJBd9i6CipkLdgo1FT7VsLbXMA6y3D8O3sXOgFu2H7ScFzYqHUqi39y
+ HDgw==
+X-Gm-Message-State: AOJu0YxtszmY3FrdqDRrvpG8fH/0BEZGn/UG/S045iyAcpH6OzXoNT2N
+ 64PJZq71E5VB4KHKlVhQ9mj3NshS265Z4+bsgKE=
+X-Google-Smtp-Source: AGHT+IE5ZnRMm1nMl9zSEJBZRBoJZEyXl1Mfm6O8XmGo8bcXsl+IMO7SdMC/FpjdRayBTfLdIW82OfxHguy+vRRIqz4=
+X-Received: by 2002:a4a:df50:0:b0:576:90e1:66c3 with SMTP id
+ j16-20020a4adf50000000b0057690e166c3mr3893651oou.1.1694803613645; Fri, 15 Sep
+ 2023 11:46:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230915001215.531746-1-vivek.kasireddy@intel.com>
- <20230915001215.531746-7-vivek.kasireddy@intel.com>
-In-Reply-To: <20230915001215.531746-7-vivek.kasireddy@intel.com>
+ <20230915001215.531746-6-vivek.kasireddy@intel.com>
+In-Reply-To: <20230915001215.531746-6-vivek.kasireddy@intel.com>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 15 Sep 2023 18:11:15 +0100
-Message-ID: <CAHt6W4d073Psf8b3uRZ0xgM1o6k1uk9Q1Z3iRrR4hjbY4W1Pkg@mail.gmail.com>
+Date: Fri, 15 Sep 2023 19:46:42 +0100
+Message-ID: <CAHt6W4d3MuzB2f610xkSrkVVvSVdePxy8=JJ5x=H8in9uQDKkw@mail.gmail.com>
 To: Vivek Kasireddy <vivek.kasireddy@intel.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] [PATCH 3/4] channel-display-gst: Don't unref
- appsink and pipeline objects
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] [PATCH 2/2] gstreamer-encoder: Use a h/w based
+ encoder with Intel GPUs if possible (v2)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,65 +69,207 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
- spice-devel@lists.freedesktop.org, Dongwon Kim <dongwon.kim@intel.com>,
- Jin Chung Teng <jin.chung.teng@intel.com>
+Cc: Dongwon Kim <dongwon.kim@intel.com>,
+ Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Jin Chung Teng <jin.chung.teng@intel.com>,
+ spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 Il giorno ven 15 set 2023 alle ore 01:33 Vivek Kasireddy
 <vivek.kasireddy@intel.com> ha scritto:
 >
-> It looks like setting the Gst pipeline state to GST_STATE_NULL
-> would cause all the references on most of the objects associated
-> with the pipeline to be dropped; therefore, there is no need
-> to explicitly unref them while freeing the pipeline. This patch
-> prevents the following errors from showing up when remote-viewer
-> is closed:
+> Once it is determined that an Intel GPU is available/active (after
+> looking into udev's database), we try to see if there is a h/w
+> based encoder (element) available (in Gstreamer's registry cache)
+> for the user selected video codec. In other words, if we find that
+> the Intel Media SDK Gstreamer plugin (libgstmsdk.so) and associated
+> libraries (such as va or vaapi) are all installed properly, we add
+> the appropriate h/w based encoder and post-processor/converter
+> elements to the pipeline (along with any relevant options) instead
+> of the s/w based elements.
 >
-> (remote-viewer:64344): GStreamer-CRITICAL **: 00:31:04.278:
-> Trying to dispose object "appsink0", but it still has a parent
-> "pipeline0".
-> You need to let the parent manage the object instead of unreffing the
-> object directly.
+> For example, if the user selects h264 as the preferred codec format,
+> msdkh264enc and vapostproc will be preferred instead of x264enc
+> and videoconvert.
 >
-> [MOS]:  CRITICAL - mos_bo_unreference:166: Input null ptr
->
-> [MOS]:  CRITICAL - mos_bo_unreference:166: Input null ptr
+> v2: (addressed some review comments from Frediano)
+> - Moved the udev helper into spice-common
+> - Refactored the code to choose plugins in order msdk > va > vaapi
 >
 > Cc: Frediano Ziglio <freddy77@gmail.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 > Cc: Dongwon Kim <dongwon.kim@intel.com>
-> Cc: Jin Chung Teng <jin.chung.teng@intel.com>
-> Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
 > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+> Co-developed-by: Jin Chung Teng <jin.chung.teng@intel.com>
+> Co-developed-by: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
 > ---
->  src/channel-display-gst.c | 4 ----
->  1 file changed, 4 deletions(-)
+>  server/gstreamer-encoder.c | 96 ++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 93 insertions(+), 3 deletions(-)
 >
-> diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
-> index 3f46a65..ad0ac99 100644
-> --- a/src/channel-display-gst.c
-> +++ b/src/channel-display-gst.c
-> @@ -353,10 +353,6 @@ static void free_pipeline(SpiceGstDecoder *decoder)
+> diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
+> index 057509b5..44666f42 100644
+> --- a/server/gstreamer-encoder.c
+> +++ b/server/gstreamer-encoder.c
+> @@ -31,6 +31,7 @@
+>  #include "red-common.h"
+>  #include "video-encoder.h"
+>  #include "utils.h"
+> +#include "common/udev.h"
 >
->      gst_element_set_state(decoder->pipeline, GST_STATE_NULL);
->      gst_object_unref(decoder->appsrc);
-> -    if (decoder->appsink) {
-> -        gst_object_unref(decoder->appsink);
-> -    }
-> -    gst_object_unref(decoder->pipeline);
-
-That's pretty odd. It looks like we are inserting a leak. Usually if
-you call gst_object_unref once more it causes an error like either a
-double free in glibc or an assert error in gstreamer. I'm sure we used
-this path so this should have happened.
-And to be honest reading the error it seems to suggest a different
-issue, like the appsink is still attached to the pipeline.
-Maybe unrefing pipeline before appsink fix the issue?
-I personally didn't see this error before.
-
->      gst_object_unref(decoder->clock);
->      decoder->pipeline = NULL;
+>
+>  #define SPICE_GST_DEFAULT_FPS 30
+> @@ -913,14 +914,94 @@ static const gchar* get_gst_codec_name(const SpiceG=
+stEncoder *encoder)
+>      }
 >  }
+>
+> +static const char video_codecs[][8] =3D {
+> +    { "" },
+> +    { "mjpeg" },
+> +    { "vp8" },
+> +    { "h264" },
+> +    { "vp9" },
+> +    { "h265" },
+> +};
+> +
+> +static bool gst_features_lookup(const gchar *feature_name)
+> +{
+> +    GstRegistry *registry;
+> +    GstPluginFeature *feature;
+> +
+> +    registry =3D gst_registry_get();
+> +    if (!registry) {
+> +        return false;
+> +    }
+> +
+> +    feature =3D gst_registry_lookup_feature(registry, feature_name);
+> +    if (!feature) {
+> +        return false;
+> +    }
+> +
+> +    gst_object_unref(feature);
+> +    return true;
+> +}
+> +
+> +static gchar *find_best_plugin(const gchar *codec_name)
+> +{
+> +    const char *plugins[3] =3D {"msdk", "va", "vaapi"};
+> +    gchar *feature_name;
+> +    int i;
+> +
+> +    for (i =3D 0; i < 3; i++) {
+> +        feature_name =3D !codec_name ? g_strconcat(plugins[i], "postproc=
+", NULL) :
+
+The name for the msdk postproc is msdkvpp, not msdkpostproc.
+Looking at this function and the next one it looks correct to use,
+let's say an encoder from msdk (like msdkvp9enc) and the vaapi post
+processor (like vaapipostproc), but it seems wrong to me.
+
+> +                       g_strconcat(plugins[i], codec_name, "enc", NULL);
+> +        if (!gst_features_lookup(feature_name)) {
+> +            g_free(feature_name);
+> +            feature_name =3D NULL;
+> +            continue;
+> +        }
+> +        break;
+> +    }
+> +    return feature_name;
+> +}
+> +
+> +static void try_intel_hw_plugins(const gchar *codec_name, gchar **conver=
+ter,
+> +                                 gchar **gstenc_name, gchar **gstenc_opt=
+s)
+> +{
+> +    gchar *encoder =3D find_best_plugin(codec_name);
+> +    if (!encoder) {
+> +        return;
+> +    }
+> +    gchar *vpp =3D find_best_plugin(NULL);
+> +    if (!vpp) {
+> +        return;
+> +    }
+> +
+> +    g_free(*converter);
+> +    g_free(*gstenc_name);
+> +    g_free(*gstenc_opts);
+> +
+> +    *gstenc_name =3D encoder;
+> +    if (strstr(encoder, "msdk")) {
+> +        *gstenc_opts =3D g_strdup("async-depth=3D1 rate-control=3D3 gop-=
+size=3D1 tune=3D16 b-frames=3D0 target-usage=3D7 min-qp=3D15 max-qp=3D35");
+
+These options are nice for h264 (and probably h265) but are wrong for
+vp9 and probably mjpeg.
+
+> +    } else if (strstr(encoder, "vaapi")) {
+> +        *gstenc_opts =3D g_strdup("rate-control=3Dcqp max-bframes=3D0 mi=
+n-qp=3D15 max-qp=3D35");
+> +    } else {
+> +        *gstenc_opts =3D g_strdup("rate-control=3D16 b-frames=3D0 target=
+-usage=3D7 min-qp=3D15 max-qp=3D35");
+> +    }
+
+Similar comment for these.
+
+> +
+> +    if (strstr(vpp, "vaapi")) {
+> +        *converter =3D g_strconcat(vpp, " ! video/x-raw(memory:VASurface=
+),format=3DNV12", NULL);
+> +    } else {
+> +        *converter =3D g_strconcat(vpp, " ! video/x-raw(memory:VAMemory)=
+,format=3DNV12", NULL);
+> +    }
+
+From gst-inspect msdkvpp does not support any of these. Is this expected?
+
+> +    g_free(vpp);
+> +}
+> +
+>  static gboolean create_pipeline(SpiceGstEncoder *encoder)
+>  {
+>  #ifdef HAVE_GSTREAMER_0_10
+> -    const gchar *converter =3D "ffmpegcolorspace";
+> +    gchar *converter =3D g_strdup("ffmpegcolorspace");
+>  #else
+> -    const gchar *converter =3D "videoconvert ! video/x-raw,format=3DNV12=
+";
+> +    gchar *converter =3D g_strdup("videoconvert ! video/x-raw,format=3DN=
+V12");
+>  #endif
+> -    const gchar* gstenc_name =3D get_gst_codec_name(encoder);
+> +    gchar* gstenc_name =3D g_strdup(get_gst_codec_name(encoder));
+>      if (!gstenc_name) {
+>          return FALSE;
+>      }
+> @@ -973,12 +1054,21 @@ static gboolean create_pipeline(SpiceGstEncoder *e=
+ncoder)
+>          return FALSE;
+>      }
+>
+> +    const char *codec_name =3D video_codecs[encoder->base.codec_type];
+> +    GpuVendor vendor =3D spice_udev_detect_gpu();
+> +    if (vendor =3D=3D GPU_VENDOR_INTEL) {
+> +        try_intel_hw_plugins(codec_name, &converter, &gstenc_name,
+> +                             &gstenc_opts);
+> +    }
+> +
+>      GError *err =3D NULL;
+>      gchar *desc =3D g_strdup_printf("appsrc is-live=3Dtrue format=3Dtime=
+ do-timestamp=3Dtrue name=3Dsrc !"
+>                                    " %s ! %s name=3Dencoder %s ! appsink =
+name=3Dsink",
+>                                    converter, gstenc_name, gstenc_opts);
+>      spice_debug("GStreamer pipeline: %s", desc);
+>      encoder->pipeline =3D gst_parse_launch_full(desc, NULL, GST_PARSE_FL=
+AG_FATAL_ERRORS, &err);
+> +    g_free(converter);
+> +    g_free(gstenc_name);
+>      g_free(gstenc_opts);
+>      g_free(desc);
+>      if (!encoder->pipeline || err) {
 
 Frediano
