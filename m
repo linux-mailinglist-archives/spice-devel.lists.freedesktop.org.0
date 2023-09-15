@@ -1,61 +1,63 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4D727A1A42
-	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 11:21:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 774AE7A1A3B
+	for <lists+spice-devel@lfdr.de>; Fri, 15 Sep 2023 11:18:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CA69610E604;
-	Fri, 15 Sep 2023 09:21:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1B3CA10E600;
+	Fri, 15 Sep 2023 09:18:52 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
- by gabe.freedesktop.org (Postfix) with ESMTP id 2DD8610E166;
- Fri, 15 Sep 2023 09:11:28 +0000 (UTC)
-Received: from loongson.cn (unknown [10.20.42.43])
- by gateway (Coremail) with SMTP id _____8AxlPC+HwRllEkoAA--.12203S3;
- Fri, 15 Sep 2023 17:11:26 +0800 (CST)
-Received: from [10.20.42.43] (unknown [10.20.42.43])
- by localhost.localdomain (Coremail) with SMTP id
- AQAAf8DxS9yvHwRlTucGAA--.13502S3; 
- Fri, 15 Sep 2023 17:11:24 +0800 (CST)
-Message-ID: <e7d855b6-327e-8c0c-5913-75bba9b6cfcd@loongson.cn>
-Date: Fri, 15 Sep 2023 17:11:11 +0800
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 50A9010E60E
+ for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 09:18:49 +0000 (UTC)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-57325fcd970so1092463eaf.1
+ for <spice-devel@lists.freedesktop.org>; Fri, 15 Sep 2023 02:18:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1694769528; x=1695374328; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SJaYMV1+RuBX2zf4IwXlRsI573/3AesWFqWH8fgGvvI=;
+ b=IhTQ/lgCsiBTJ+f4rm/w+F65rsTLmTZYUr8/UQb1yZFuiCgB18KH/k7Hl63+qk0teK
+ ZJDp3X+FAizgEXOTZKN7zko3X7YEHJXwJpREfTDRhd0NM2lejTOOZQ8QEvDv10meI5wf
+ 0TkiIaADOWLdbWEpcWw+hXuVdJngZIvCfhbIGI8cQR6sqk4KhjzM5DrpcYzGp9ALGL2X
+ PBMrP+0pVdZaE4yM/5YgY5jIYgKZzurqKw1V2fKBnRy8YLps+t3wDQ2/Q32DkLQXeHgW
+ 3s25F//wm0BLpLxhywB0YTHQKwOuIv/PJG97KE875kCkk/4awHWE4zQcU2izK6K5P19Q
+ 4bZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694769528; x=1695374328;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SJaYMV1+RuBX2zf4IwXlRsI573/3AesWFqWH8fgGvvI=;
+ b=bY9dDZUe2ssbwZQiocn6kpxl0rEw1GAuyTcDNG/4xKdeJgvDJHYa6K+VGNiYvrkpyB
+ 5qcGx/SVI3mJRZUXhcdbmfbloW4XIdNrvh50XJFUoedutEYsHvPfpK0KYr8rgpiRHAFF
+ 24vl4oIbn6nYdoFsYcBlnZyV+23SK2Ia8x48nfzsdjIzbjOhv/Psx1QCvQuNeK8Z/rAG
+ WBC1FvZFuGBD1k9woW6LqWV6eHz6IIRX94MIwhZiXtyiOpDaL1ZwTUEAxBBjXoGEIQvQ
+ q9Juq7RZADV58w+Xte72KZOTpFcBE7NNfscChhN+IolzcMIFBg4vPd6pnaXEojZwLymR
+ rUXg==
+X-Gm-Message-State: AOJu0YyqLNUYBXG/XoeKBdj5JOSjlNwWQglIqIwtoDo7XuVOwBj2Opja
+ TPcXKByEX8bD5nDC8q0hEnXx4LA/lrgpoCf9YSA=
+X-Google-Smtp-Source: AGHT+IFh/vrc9m3+aaekotyDHqA/+mqNs8git/84DqnKLTk8ghhZIh/2SVfFVF2g+oMFLeSBRPLnS3R5F0wiULWcbos=
+X-Received: by 2002:a4a:6b4d:0:b0:56d:e6:21bf with SMTP id
+ h13-20020a4a6b4d000000b0056d00e621bfmr1079780oof.0.1694769528381; 
+ Fri, 15 Sep 2023 02:18:48 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-To: Douglas Anderson <dianders@chromium.org>,
- dri-devel@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>
-References: <20230901234015.566018-1-dianders@chromium.org>
- <20230901163944.RFT.2.I9115e5d094a43e687978b0699cc1fe9f2a3452ea@changeid>
-Content-Language: en-US
-From: suijingfeng <suijingfeng@loongson.cn>
-In-Reply-To: <20230901163944.RFT.2.I9115e5d094a43e687978b0699cc1fe9f2a3452ea@changeid>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8DxS9yvHwRlTucGAA--.13502S3
-X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBj93XoW7Ar1kJFWfKr4kCrWDAFy3WrX_yoW5JF45pr
- WfZ3s0yrs0qrsrtwn3Jw17Wa4fta1fA34aqrsrKw4ruws8GFWIqF4Fqr1Ygw4UW3yvgr47
- tw4avw15C3W5A3XCm3ZEXasCq-sJn29KB7ZKAUJUUUUA529EdanIXcx71UUUUU7KY7ZEXa
- sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
- 0xBIdaVrnRJUUUPSb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
- IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
- e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
- 0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
- xVW8Jr0_Cr1UM2kKe7AKxVWUtVW8ZwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
- AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
- tVWrXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI4
- 8JMxk0xIA0c2IEe2xFo4CEbIxvr21lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vI
- r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_Jw0_GFylx2IqxVAqx4xG67
- AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26rWY6r4UJwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_
- Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IUeVpB3
- UUUUU==
-X-Mailman-Approved-At: Fri, 15 Sep 2023 09:21:09 +0000
-Subject: Re: [Spice-devel] [RFT PATCH 2/6] drm: Call
- drm_atomic_helper_shutdown() at shutdown time for misc drivers
+References: <20230915001215.531746-1-vivek.kasireddy@intel.com>
+ <20230915001215.531746-3-vivek.kasireddy@intel.com>
+In-Reply-To: <20230915001215.531746-3-vivek.kasireddy@intel.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Fri, 15 Sep 2023 10:18:36 +0100
+Message-ID: <CAHt6W4dLq2gaAt5nTJX0CM=QadNa8Z+34RETTYzoEpH6FWZQnw@mail.gmail.com>
+To: Vivek Kasireddy <vivek.kasireddy@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Spice-devel] [PATCH] common: Add a udev helper to identify GPU
+ Vendor
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,78 +69,210 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: alexandre.belloni@bootlin.com, xinliang.liu@linaro.org,
- tomi.valkeinen@ideasonboard.com, linus.walleij@linaro.org, liviu.dudau@arm.com,
- linux-hyperv@vger.kernel.org, stefan@agner.ch, nicolas.ferre@microchip.com,
- wens@csie.org, jstultz@google.com, kraxel@redhat.com, sumit.semwal@linaro.org,
- yongqin.liu@linaro.org, samuel@sholland.org, sam@ravnborg.org,
- javierm@redhat.com, jernej.skrabec@gmail.com, drawat.floss@gmail.com,
- kong.kongxinwei@hisilicon.com, alain.volmat@foss.st.com,
- linux-sunxi@lists.linux.dev, tzimmermann@suse.de, alison.wang@nxp.com,
- airlied@redhat.com, virtualization@lists.linux-foundation.org,
- linux-arm-kernel@lists.infradead.org, jfalempe@redhat.com,
- bbrezillon@kernel.org, linux-kernel@vger.kernel.org, christian.koenig@amd.com,
- paul.kocialkowski@bootlin.com, spice-devel@lists.freedesktop.org,
- daniel@ffwll.ch, alexander.deucher@amd.com, tiantao6@hisilicon.com,
- claudiu.beznea@microchip.com, zackr@vmware.com
+Cc: Dongwon Kim <dongwon.kim@intel.com>,
+ Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Jin Chung Teng <jin.chung.teng@intel.com>,
+ spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+Il giorno ven 15 set 2023 alle ore 01:33 Vivek Kasireddy
+<vivek.kasireddy@intel.com> ha scritto:
+>
+> Given that libudev is widely available on many distros, we can
+> use the relevant APIs to iterate over all the PCI devices on
+> any given system to identify if a GPU is available by looking
+> at the driver name associated with it.
+>
+> This capability (identifying GPU Vendor) is useful to determine
+> whether to launch Gstreamer pipeline using h/w accelerated
+> plugins. On systems where libudev is not available (Windows),
 
+Nor MacOS I think.
 
-On 2023/9/2 07:39, Douglas Anderson wrote:
-> Based on grepping through the source code these drivers appear to be
-> missing a call to drm_atomic_helper_shutdown() at system shutdown
-> time. Among other things, this means that if a panel is in use that it
-> won't be cleanly powered off at system shutdown time.
+> we'd have to make this determination based on the availability
+> of the plugins in Gstreamer registry.
 >
-> The fact that we should call drm_atomic_helper_shutdown() in the case
-> of OS shutdown/restart comes straight out of the kernel doc "driver
-> instance overview" in drm_drv.c.
->
-> All of the drivers in this patch were fairly straightforward to fix
-> since they already had a call to drm_atomic_helper_shutdown() at
-> remove/unbind time but were just lacking one at system shutdown. The
-> only hitch is that some of these drivers use the component model to
-> register/unregister their DRM devices. The shutdown callback is part
-> of the original device. The typical solution here, based on how other
-> DRM drivers do this, is to keep track of whether the device is bound
-> based on drvdata. In most cases the drvdata is the drm_device, so we
-> can just make sure it is NULL when the device is not bound. In some
-> drivers, this required minor code changes. To make things simpler,
-> drm_atomic_helper_shutdown() has been modified to consider a NULL
-> drm_device as a noop in the patch ("drm/atomic-helper:
-> drm_atomic_helper_shutdown(NULL) should be a noop").
->
-> Suggested-by: Maxime Ripard <mripard@kernel.org>
-> Signed-off-by: Douglas Anderson <dianders@chromium.org>
+> Cc: Frediano Ziglio <freddy77@gmail.com>
+> Cc: Gerd Hoffmann <kraxel@redhat.com>
+> Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> Cc: Dongwon Kim <dongwon.kim@intel.com>
+> Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+> Cc: Jin Chung Teng <jin.chung.teng@intel.com>
+> Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
 > ---
+>  common/meson.build |  2 ++
+>  common/udev.c      | 60 ++++++++++++++++++++++++++++++++++++++++++++++
+>  common/udev.h      | 12 ++++++++++
+>  meson.build        |  7 ++++++
+>  4 files changed, 81 insertions(+)
+>  create mode 100644 common/udev.c
+>  create mode 100644 common/udev.h
+>
+> diff --git a/common/meson.build b/common/meson.build
+> index 09e3ea7..63bd2db 100644
+> --- a/common/meson.build
+> +++ b/common/meson.build
+> @@ -39,6 +39,8 @@ spice_common_sources =3D [
+>    'snd_codec.h',
+>    'utils.c',
+>    'utils.h',
+> +  'udev.c',
+> +  'udev.h',
+>    'verify.h',
+>    'recorder.h'
+>  ]
+> diff --git a/common/udev.c b/common/udev.c
+> new file mode 100644
+> index 0000000..995a37e
+> --- /dev/null
+> +++ b/common/udev.c
+> @@ -0,0 +1,60 @@
 
+Can you add license comments?
 
-I have just tested the whole series, thanks for the patch. For drm/loongson only:
+> +#include <config.h>
+> +
+> +#ifdef HAVE_UDEV
+> +#include <libudev.h>
+> +#include <stdbool.h>
+> +#include <string.h>
+> +#include "udev.h"
+> +
+> +#define INTEL_GFX_DRV_NAME "i915"
+> +
+> +static bool is_intel_gpu(const char *drv_name)
+> +{
+> +    return !strcmp(drv_name, INTEL_GFX_DRV_NAME);
+> +}
+> +
+> +GpuVendor spice_udev_detect_gpu()
+> +{
+> +    struct udev *udev;
+> +    struct udev_device *udev_dev;
+> +    struct udev_enumerate *udev_enum;
+> +    struct udev_list_entry *entry, *devices;
+> +    const char *path, *driver;
+> +    GpuVendor vendor =3D GPU_VENDOR_OTHER;
+> +
+> +    udev =3D udev_new();
+> +    if (!udev) {
+> +        return vendor;
+> +    }
+> +
+> +    udev_enum =3D udev_enumerate_new(udev);
+> +    if (udev_enum) {
+> +        udev_enumerate_add_match_subsystem(udev_enum, "pci");
+> +        udev_enumerate_scan_devices(udev_enum);
+> +        devices =3D udev_enumerate_get_list_entry(udev_enum);
+> +
+> +        udev_list_entry_foreach(entry, devices) {
+> +            path =3D udev_list_entry_get_name(entry);
+> +            udev_dev =3D udev_device_new_from_syspath(udev, path);
+> +
+> +            driver =3D udev_device_get_driver(udev_dev);
+> +            if (driver && is_intel_gpu(driver)) {
+> +                vendor =3D GPU_VENDOR_INTEL;
+> +                udev_device_unref(udev_dev);
+> +                break;
+> +            }
+> +            udev_device_unref(udev_dev);
+> +        }
+> +        udev_enumerate_unref(udev_enum);
+> +    }
+> +    udev_unref(udev);
+> +
+> +    return vendor;
+> +}
+> +#else
+> +GpuVendor spice_udev_detect_gpu()
+> +{
+> +    return GPU_VENDOR_UNKNOWN;
+> +}
+> +#endif
+> +
+> diff --git a/common/udev.h b/common/udev.h
+> new file mode 100644
+> index 0000000..f1ba0ec
+> --- /dev/null
+> +++ b/common/udev.h
+> @@ -0,0 +1,12 @@
+> +#ifndef H_SPICE_COMMON_UDEV
+> +#define H_SPICE_COMMON_UDEV
+> +
+> +typedef enum {
+> +    GPU_VENDOR_UNKNOWN,
+> +    GPU_VENDOR_OTHER,
+> +    GPU_VENDOR_INTEL,
+> +} GpuVendor;
+> +
+> +GpuVendor spice_udev_detect_gpu();
+> +
 
+What if the machine has more than one GPU ?
+Maybe a
 
-Reviewed-by: Sui Jingfeng <suijingfeng@loongson.cn>
-Tested-by: Sui Jingfeng <suijingfeng@loongson.cn>
+bool spice_udev_has_intel_gpu(void);
 
+function instead?
 
+Note that in C something like void funcname() is K&R style, something
+you don't want, you need to specify the argument list and types (in
+this case "void").
 
-By the way, I add 'pr_info("lsdc_pci_shutdown\n");' into the lsdc_pci_shutdown() function,
-And seeing that lsdc_pci_shutdown() will be called when reboot and shutdown the machine.
-I did not witness something weird happen at present. As you have said, this is useful for
-drm panels drivers. But for the rest(drm/hibmc, drm/ast, drm/mgag200 and drm/loongson etc)
-drivers, you didn't mention what's the benefit for those drivers. Probably, you can
-mention it with at least one sentence at the next version. I also prefer to alter the
-lsdc_pci_shutdown() function as the following pattern:
+Recently we use "#pragma once" for new headers but it's your call.
 
+I would use something like
 
-static void lsdc_pci_shutdown(struct pci_dev *pdev)
-{
+/* SPDX-License-Identifier: BSD-3-Clause */
 
-     struct drm_device *ddev = pci_get_drvdata(pdev);
+#pragma once
 
-     drm_atomic_helper_shutdown(ddev);
-}
+#include <stdbool.h>
+#include <spice/macros.h>
 
+SPICE_BEGIN_DECLS
 
+bool spice_udev_has_intel_gpu(void);
+
+SPICE_END_DECLS
+
+> +#endif
+> diff --git a/meson.build b/meson.build
+> index eeccecd..cafbf03 100644
+> --- a/meson.build
+> +++ b/meson.build
+> @@ -147,6 +147,13 @@ if smartcard_dep.found()
+>    spice_common_config_data.set('USE_SMARTCARD', '1')
+>  endif
+>
+> +#udev
+> +udev_dep =3D dependency('libudev')
+> +if udev_dep.found()
+> +  spice_common_deps +=3D udev_dep
+> +  spice_common_config_data.set('HAVE_UDEV', '1')
+> +endif
+> +
+>  #
+>  # global C defines
+>  #
+
+Can you add autoconf support?
+
+diff --git a/configure.ac b/configure.ac
+index 0d4c22b..4fc4263 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -65,6 +65,8 @@ SPICE_COMMON_LIBS=3D'$(PIXMAN_LIBS) $(GLIB2_LIBS)
+$(OPUS_LIBS) $(OPENSSL_LIBS)'
+ AC_SUBST(SPICE_COMMON_CFLAGS)
+ AC_SUBST(SPICE_COMMON_LIBS)
+
++PKG_CHECK_MODULES([UDEV], [libudev], AC_DEFINE([HAVE_UDEV], [1],
+[Define if we have libudev support]))
++
+ # The End!
+ AC_CONFIG_FILES([
+   Makefile
+
+Frediano
