@@ -1,41 +1,65 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A09267AAF55
-	for <lists+spice-devel@lfdr.de>; Fri, 22 Sep 2023 12:20:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D9AAF7AC714
+	for <lists+spice-devel@lfdr.de>; Sun, 24 Sep 2023 09:56:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7174C10E649;
-	Fri, 22 Sep 2023 10:20:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 71BED10E0EB;
+	Sun, 24 Sep 2023 07:56:07 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B0D6510E643
- for <spice-devel@lists.freedesktop.org>; Fri, 22 Sep 2023 10:02:52 +0000 (UTC)
-Received: from pendragon.ideasonboard.com (213-243-189-158.bb.dnainternet.fi
- [213.243.189.158])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id C9E0FBC4;
- Fri, 22 Sep 2023 12:01:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1695376873;
- bh=7DJuGSBjgqiikfMDbfWTFQ2gWoEcSHou+PD8obXlPvI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=geogg32EiSJMnuKItsszIHdWEaGHkXxAJTvifpUVeklKEb9otTUsWW/Xd3P/kBzWo
- iOTBbLFJdxyIe9fv2Xp5w/esJ6KI/LD2fHt3TVKtXuOcKKVbdU+1VigqqaKksxFzjl
- ouZ0JzvpT7Klf3pTe27QSZvvNQGoNnYa1Aex2mfs=
-Date: Fri, 22 Sep 2023 13:03:03 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Alexander Gordeev <alexander.gordeev@opensynergy.com>
-Message-ID: <20230922100303.GF19112@pendragon.ideasonboard.com>
-References: <a9235fe7-7448-fa9f-ea52-fd27f4845bc4@opensynergy.com>
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D71F10E0EB
+ for <spice-devel@lists.freedesktop.org>; Sun, 24 Sep 2023 07:56:03 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-6bf298ef1f5so3016275a34.0
+ for <spice-devel@lists.freedesktop.org>; Sun, 24 Sep 2023 00:56:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1695542162; x=1696146962; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TiJWJGWjgtm/6VZ2BpiiBHuZdfoeWyU30s6/sywh5gE=;
+ b=UsihmpjecyZ9ioLLquySX0KHrPEksETJvlGjOa/GbI2yX1dG4PHhV1EPqwrCtRFqqh
+ BYf3eYRdoOleyrCv5cwCwZJtK8yoSpA18h6+wZSobn0ZYASrOI0xqiBVKfy+bMc/x0cE
+ EtxwSRYrZvlZs/CsNNM6k7YrPYwdC1qxwZwvVLDrWErDufg72JHJHgxu6BOEUODWlfqv
+ Mvl5mjKfQjVnGTLrFKhjnhVNzd0eXjgrcQWFWNdvJQegmnVsY45f/fxsVGQBACze1Vpe
+ CQRxROJ12FGCfY5cgQ9MF5+Gh8blUyxlrxWKPmTRu7phNK13T9FjJFbQiQYOLFR/rI/6
+ 4W/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695542162; x=1696146962;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TiJWJGWjgtm/6VZ2BpiiBHuZdfoeWyU30s6/sywh5gE=;
+ b=O4OrzIdkgvJ3DSui5lg/aWzNaewhADsfQN/bZ38lN4NU8Af9mTuFHJZgJcLw97JxY3
+ Oy1ue62P0N/UdndefjOzWYy6vNEvxVqqQpt6CRgJzoMJaXob8TWb0dR6XmB2e+DO6DZp
+ aAEnyNlGWd7EDEuRgLoeuF2u/ODt1ZqygppeDGMAshihz1Etcka7AgDSr0W1D+E4EfzS
+ W5XNvcThR65MOHLrUlI51t0iOA8OH5PuBrxZiK8wnjKJVi5osMc6Fvn+goHarYVZgUnn
+ Dt2EaikXzBYICO6EMRrkz1GRcrYme6BkUpb7iiVEFqKWt5ei/l40AFJcvpjZls2Fp31a
+ /wLA==
+X-Gm-Message-State: AOJu0YzcTPNT9MNdT8hojkud0vlhE/E+7dfAYqZdM01q6R3M641DXG4m
+ cvTmuhQudWPupPk43sAvfldzwEVtrCKBbAsD0G8=
+X-Google-Smtp-Source: AGHT+IEyyZ5HGWA1kI6p0FHLm7oaTDt9FlsgcN8J9TJhQTtqIfY6rVy4D29W3BbCEAvZoxwiUprFIUEYBE/SRx5qxpM=
+X-Received: by 2002:a05:6830:19a:b0:6b9:52cb:3adf with SMTP id
+ q26-20020a056830019a00b006b952cb3adfmr4442970ota.20.1695542162260; Sun, 24
+ Sep 2023 00:56:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <a9235fe7-7448-fa9f-ea52-fd27f4845bc4@opensynergy.com>
-X-Mailman-Approved-At: Fri, 22 Sep 2023 10:20:06 +0000
-Subject: Re: [Spice-devel] Potential ways to describe virtio-video device
- capabilities
+References: <20230915001215.531746-1-vivek.kasireddy@intel.com>
+ <20230915001215.531746-4-vivek.kasireddy@intel.com>
+ <CAHt6W4f+8b0K6XYG+jKg_xSiLUqUhLx28JFdjqLN4j=pT6hJWQ@mail.gmail.com>
+ <IA0PR11MB7185717AE7EDF12BE2C64649F8FBA@IA0PR11MB7185.namprd11.prod.outlook.com>
+ <CAHt6W4eFkVbBPmkzQmafAybHvKVX_=A7oFZ3-Hni=M9KRm=SXQ@mail.gmail.com>
+ <IA0PR11MB71858FFACB9B9E79E8F36DBDF8F8A@IA0PR11MB7185.namprd11.prod.outlook.com>
+In-Reply-To: <IA0PR11MB71858FFACB9B9E79E8F36DBDF8F8A@IA0PR11MB7185.namprd11.prod.outlook.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Sun, 24 Sep 2023 08:55:51 +0100
+Message-ID: <CAHt6W4et5EjRzY8TfP=o1rVpC-6k8SvHFRBauzzdesbE3=2K3w@mail.gmail.com>
+To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Spice-devel] [PATCH 1/2] gstreamer-encoder: Use NV12 as the
+ default vpp conversion format
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,172 +71,99 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: aesteve@redhat.com, hmazur@google.com, mst@redhat.com,
- daniel.almeida@collabora.com, hverkuil@xs4all.nl, bgrzesik@google.com,
- kraxel@redhat.com, posciak@chromium.org, virtio-dev@lists.oasis-open.org,
- mwojtas@google.com, dstaessens@chromium.org, spice-devel@lists.freedesktop.org,
- dgreid@chromium.org, linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- alexlau@chromium.org, bag@semihalf.com, andrew.gazizov@opensynergy.com,
- mikrawczyk@google.com, marcheu@chromium.org, alex.bennee@linaro.org,
- peter.griffin@linaro.org, Matti.Moell@opensynergy.com, acourbot@chromium.org,
- cohuck@redhat.com, tfiga@chromium.org, stevensd@chromium.org, daniel@ffwll.ch,
- srosek@google.com, egranata@google.com, fziglio@redhat.com
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ "Kim, Dongwon" <dongwon.kim@intel.com>, "Mazlan,
+ Hazwan Arif" <hazwan.arif.mazlan@intel.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, Sep 22, 2023 at 07:07:34AM +0200, Alexander Gordeev wrote:
-> Hi,
-> 
-> I'm working on updating virtio-video draft v8 spec [1] and the 
-> virtio-video V4L2 driver [2]. One of the things, that I don't like in 
-> the current spec draft is sharing the device's capabilities with the 
-> guest VM. The main requirement is making these capabilities compatible 
-> with V4L2.
-> 
-> These capabilities could be pretty complex, see [3] and [4]:
-> 1. First there could be several coded video formats. Coded formats have 
-> their specific sets of supported controls.
-> 2. Then for each coded video formats there could be different sets of 
-> raw video formats, that could be used in combination with the selected 
-> encoded format for decoding/encoding.
-> 3. Then for each combination of the coded and raw format there could be 
-> different sets of supported resolutions.
-> 4. (Optional) for each coded format, raw format and resolution there 
-> could be different sets of supported frame rates/intervals.
-> 
-> In the future new formats, controls, flags, etc could be defined. Right 
-> now there is a rather static structure, see section 5.20.7.3.1 
-> (VIRTIO_VIDEO_CMD_DEVICE_QUERY_CAPS) in [5]. It looks too inflexible.
-> 
-> The V4L2 approach with many different ioctl's and complex querying logic 
-> doesn't fit well for virtio-video IMHO. syscall overhead is only a few 
-> hundred nanoseconds, so doing tens or hundreds of them is bearable in 
-> case of video. But a roundtrip over virtio may take hundreds of 
-> microseconds even in the local case. We at OpenSynergy already have 
-> setups where the real hardware is accessed over a network. Then it can 
-> take a millisecond. People already seem to agree, that this amount of 
-> overhead makes V4L2-style discovery process unbearable on a per stream 
-> basis. So all the relevant data has to be obtained during the device 
-> probing. This means, that in many cases there is a complex structure 
-> with all the data on the device side, and we just need to move it to the 
-> driver side. Moving it in one step seems easier to me and better because 
-> of the latency. Boot time matters too sometimes.
+Il giorno gio 21 set 2023 alle ore 22:19 Kasireddy, Vivek
+<vivek.kasireddy@intel.com> ha scritto:
+>
+> Hi Frediano,
+>
+> > >
+> > > > > From: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+> > > > >
+> > > > > Using NV12 as the output format for the videoconvert element would
+> > > > > allow us to pair a s/w based encoder with a h/w based decoder for
+> > > > > decoding the stream as most h/w based decoders only accept NV12 as
+> > > > > the input format given its popularity.
+> > > > >
+> > > >
+> > > > I don't fully understand the rationale.
+> > > Yeah, I should have added more details.
+> > >
+> > > > Yes, the h/w codecs usually
+> > > > would convert this to NV12 however should not this be done by
+> > > > gstreamer instead?
+> > > > Surely YUV conversion is useful but what if a software conversion
+> > > > would like to use Y444 instead? With NV12 you would lose image
+> > > > quality.
+> > > > Isn't gstreamer supposed to come out with the best combination?
+> > > > Maybe it would be easier to have a more complete pipeline string
+> > > > instead specified for each codec?
+> > > My understanding is that the goal with this patch is to ensure uniformity
+> > > of the format and specifically address the case where we use x264enc
+> > > on the encode side and msdkh264dec on the decode side. Since Y444
+> > > is the default input format for x264enc, videoconvert converts the BGRx
+> > > data into Y444. However, on the decode side, msdkh264dec can only work
+> > > with NV12; so this patch is ensuring that we start with NV12 on the encode
+> > > side as well. Jin Chung, feel free to add more details if I missed anything.
+> > >
+> > > Thanks,
+> > > Vivek
+> > >
+> >
+> > The problem is compatibility. A client with h/w h264 support should be
+> > able to talk to a server without any changes.
+> > This patch is not fixing this, unless you use a time machine and you
+> > apply it at the time h264 and x264enc were introduced.
+> > So, basically the client should be able to decode y444 produced by x264enc.
+> > Either keep using x264enc if the server could send it or be able to
+> > detect from the first data frame (it should be possible,
+> > maybe with a fail and try) and use the correct pipeline.
+> What I have learnt is that some Intel h/w cannot decode the default format
+> used by x264enc (h264 (High 4:4:4 Predictive), yuv444p). Therefore, we'd have to
+> use NV12 in these cases. However, I believe this choice has to be left to the user.
+>
+> In order to do this, I think it makes sense to have an environment variable
+> (SPICE_CONVERTER_PREFERRED_FORMAT?) to override the default format used
+> by x264enc.
+>
 
-No disagreement here. For what it's worth, I think V4L2 should also
-evolve and get a way to query capabilities with a single (or a very
-small number of) ioctl.
+That makes sense. What about making the change a bit more detailed, I
+would extent the message
+to something like
 
-> One of the ideas is to replace the mentioned 
-> VIRTIO_VIDEO_CMD_DEVICE_QUERY_CAPS command response with a standalone 
-> Device Tree Blob. It looks the most promising to me right now. I guess, 
-> it may sound crazy to many people, but actually it fits into one of the 
-> device tree usage patterns outlined in [6]. This document is referenced 
-> in the kernel device tree documentation, so I assume it is correct.
+"Using NV12 as the output format for the videoconvert element would
+allow us to pair a s/w based encoder with a h/w based decoder for
+decoding the stream as most h/w based decoders only accept NV12 as
+the input format given its popularity.
 
-If we want to pass flexible structured data we need a binary format, and
-DT provides a binary format. Whether it's the best option or not, I
-don't know, but it doesn't seem too crazy to me.
+Although this restricts the formats used and potentially decrease video
+quality the current capabilities exchange does not allow fine H264 tuning
+so the server is not able to select a format better suitable for the
+client. So use a more compatible, but potentially limited, format."
 
-> A simplified version could look like this, for example:
-> 
-> /dts-v1/;
-> 
-> / {
->      virtio-video {
->          compatible = "virtio,video";
-> 
->          virtio,video-caps {
->              h264 {
->                  profiles-mask = <0x3ffff>;
->                  levels-mask = <0xfffff>;
->                  num-resources-range = <1 32>;
->                  buffer-size = <0x100000>;
->                  bitrates-range = <100000 10000000>;
-> 
->                  yuv420 {
->                      plane-layout-mask = <0x3>;
->                      plane-align = <1>;
->                      stride-align-mask = <0x10>;
->                      widths-range-stepwise = <96 1920 8>;
->                      heights-range-stepwise = <96 1080 1>;
->                      num-resources-range = <4 50>;
->                  };
-> 
->                  nv12 {
->                      /* ... */
->                  };
-> 
->                  rgba {
->                      /* ... */
->                  };
->              };
-> 
->              hevc {
->                  /* ... */
->              };
-> 
->              vp8 {
->                  /* ... */
->              };
-> 
->              vp9 {
->                  /* ... */
->              };
->          };
->      };
-> };
-> 
-> Or maybe the resolutions could be defined separately and linked using 
-> phandles to avoid duplication because they are going to depend on the 
-> raw formats exclusively in most cases, I think.
-> 
-> There are many benefits IMO:
-> 
-> 1. Device tree can be used to describe arbitrary trees (and even 
-> arbitrary graphs with phandles). The underlying data structure is 
-> generic. It looks like it can fit very well here.
-> 2. There is a specification of the format [7]. I hope it could be 
-> referenced in the virtio spec, right?
-> 3. There is already DTS, DTC, libfdt and DTB parsing code in Linux. All 
-> of this can be reused. For example, at the moment we have a custom 
-> configuration file format and a big chunk of code to handle it in our 
-> virtio-video device. These could be replaced by DTS and calls to libfdt 
-> completely, I think. There is also an implementation in Rust [8].
+And in code
 
-How does libfdt fare when it comes to ease of use and performance ?
-License-wise it seems to be dual-licensed under the terms of the GPL v2
-and BSD-2, so it should be fine.
+diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
+index d8af91f1..057509b5 100644
+--- a/server/gstreamer-encoder.c
++++ b/server/gstreamer-encoder.c
+@@ -918,7 +918,8 @@ static gboolean create_pipeline(SpiceGstEncode
+r *encoder)
+ #ifdef HAVE_GSTREAMER_0_10
+     const gchar *converter = "ffmpegcolorspace";
+ #else
+-    const gchar *converter = "videoconvert";
++    // Limit for compatibility, see "gstreamer-encoder: Use NV12 as
+the default vpp conversion format" commit
++    const gchar *converter = "videoconvert ! video/x-raw,format=NV12";
+ #endif
+     const gchar* gstenc_name = get_gst_codec_name(encoder);
+     if (!gstenc_name) {
 
-> 4. I think the standalone DTB could be integrated into a board DTB later 
-> reducing the amount of queries to zero. It is not going to make a big 
-> difference in latency though.
-> 
-> If device trees are used, then we'll need add a binding/schema to the 
-> kernel or to the dt-schema repo [9]. Maybe the schema could be 
-> referenced in the virtio-video spec instead of duplicating it? This 
-> would reduce the spec size.
-> 
-> I don't know if anybody has already done anything like this and I'm not 
-> sure if the device tree maintainers and other involved parties would 
-> approve it. That's why I'm starting this thread. Please share your 
-> opinions about the idea.
-> 
-> An alternative to using device trees would be inventing something 
-> similar and simpler (without phandles and strings) from scratch. That's 
-> fine too, but doesn't allow to reuse the tooling and also is going to 
-> make the virtio-video spec even bigger.
-> 
-> [1] https://lore.kernel.org/virtio-comment/20230629144915.597188-1-Alexander.Gordeev@opensynergy.com/
-> [2] https://lore.kernel.org/linux-media/20200218202753.652093-1-dmitry.sepp@opensynergy.com/
-> [3] https://docs.kernel.org/userspace-api/media/v4l/dev-decoder.html#querying-capabilities
-> [4] https://docs.kernel.org/userspace-api/media/v4l/dev-encoder.html#querying-capabilities
-> [5] https://drive.google.com/file/d/1uPg4kxThlNPBSiC4b5veyFz4OFGytU7v/view
-> [6] https://elinux.org/Device_Tree_Usage#Device_Specific_Data
-> [7] https://www.devicetree.org/specifications/
-> [8] https://github.com/rust-vmm/vm-fdt
-> [9] https://github.com/devicetree-org/dt-schema
 
--- 
-Regards,
-
-Laurent Pinchart
+Frediano
