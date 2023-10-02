@@ -1,52 +1,52 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D33EA7B4B30
-	for <lists+spice-devel@lfdr.de>; Mon,  2 Oct 2023 07:41:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 000447B4B31
+	for <lists+spice-devel@lfdr.de>; Mon,  2 Oct 2023 07:41:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BB08F10E11E;
-	Mon,  2 Oct 2023 05:41:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0071310E120;
+	Mon,  2 Oct 2023 05:41:10 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.20])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31E9A10E120
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5D8BD10E121
  for <spice-devel@lists.freedesktop.org>; Mon,  2 Oct 2023 05:41:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
  t=1696225265; x=1727761265;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=CjKWBtUpWXWgZiP7RVpzUHRLBAtIdCXa4MZt6edbJls=;
- b=YCRp7Ask/oUjWSgcetdxa2fkfnAiYWBZGifo4yJLgWgs2XFRziAi/boX
- 82J80AQos795HKSyVlBxQ1e4p3XxQhC8wlZTRNjsl+lj9aFfbAicS+A0V
- 8asl2oE6fD/VnTTw2YNw23ZG/l9NsttJr3dkf5JpGbiwOUoRk9qj9OikJ
- V/K8KI+6b8Ch5r6sR6vn+xbce4sviRL+Oq0AzXWi0Be6MbUZckyCSb7Iy
- AdH873f/HdxdF9DglwzjYagbn7uFZKRxJxrDQ5wXXU3PChTkesNzir/eD
- SL6iFK363nosjS5cAgoW/62W65cB1yW9kegjgyEM+lEqH0+xHqyhQV67e A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10850"; a="372935854"
-X-IronPort-AV: E=Sophos;i="6.03,193,1694761200"; d="scan'208";a="372935854"
+ bh=lIF6GOqmWdfOf+l//NagoULZASmVyCys5J7geYgeaiQ=;
+ b=QBUncTCaLxBhZoB9Bn1CqItwGli3YzW8uLzDtstvy5IvrTpticab6gEU
+ 4Pl5rJpHO5OayDfg+gRMmYL4dCSzYnmboF6yRCnqJhhq9f2mSb5xbGeT0
+ izeIvfATb3EqDC3iJzW404RAras6hJZkAGsT0lLP/5Ji0q3sfCGqsZbaH
+ BmxCvqYd6Hb43saFbnj3J5UktXQTNgAXvfKNqzG7tUVKcLmCy3/Tmajhn
+ m+OjnBvlRIon05tD2J2jGbWXkud8OGt0SaS700mxvL5cftK3uZaW7pjUN
+ OnQA+vguZka5xtgpZrBzj8+tx6A3fxcEcmkcwM77cyHrVxyi/eoXS6VPm g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10850"; a="372935857"
+X-IronPort-AV: E=Sophos;i="6.03,193,1694761200"; d="scan'208";a="372935857"
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Oct 2023 22:41:02 -0700
+ 01 Oct 2023 22:41:03 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10850"; a="785682739"
-X-IronPort-AV: E=Sophos;i="6.03,193,1694761200"; d="scan'208";a="785682739"
+X-IronPort-AV: E=McAfee;i="6600,9927,10850"; a="785682745"
+X-IronPort-AV: E=Sophos;i="6.03,193,1694761200"; d="scan'208";a="785682745"
 Received: from vkasired-desk2.fm.intel.com ([10.105.128.127])
  by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  01 Oct 2023 22:41:03 -0700
 From: Vivek Kasireddy <vivek.kasireddy@intel.com>
 To: spice-devel@lists.freedesktop.org
-Date: Sun,  1 Oct 2023 22:20:25 -0700
-Message-Id: <20231002052026.2994546-5-vivek.kasireddy@intel.com>
+Date: Sun,  1 Oct 2023 22:20:26 -0700
+Message-Id: <20231002052026.2994546-6-vivek.kasireddy@intel.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231002052026.2994546-1-vivek.kasireddy@intel.com>
 References: <20231002052026.2994546-1-vivek.kasireddy@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Spice-devel] [PATCH 2/2] channel-display-gst: Use h/w based
- decoders with Intel GPUs if possible (v3)
+Subject: [Spice-devel] [PATCH 2/2] gstreamer-encoder: Use a h/w based
+ encoder with Intel GPUs if possible (v3)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,297 +58,202 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dongwon Kim <dongwon.kim@intel.com>,
- Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
- Gerd Hoffmann <kraxel@redhat.com>
+Cc: Dongwon Kim <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-We first try to detect if an Intel GPU is available (by looking into
-udev's database) and then probe Gstreamer's registry cache to see
-if there is h/w based decoder (element) available for the incoming
-video codec format. If both these conditions are satisfied (i.e,
-Intel Media SDK Gstreamer plugin (libgstmsdk.so) and associated
-libraries are properly installed), we then create a simple decode
-pipeline using appropriate h/w based decoder and post-processor
-elements instead of relying on playbin -- which may not be able to
-auto-select these elements.
+Once it is determined that an Intel GPU is available/active (after
+looking into udev's database), we try to see if there is a h/w
+based encoder (element) available (in Gstreamer's registry cache)
+for the user selected video codec. In other words, if we find that
+the Intel Media SDK Gstreamer plugin (libgstmsdk.so) and associated
+libraries (such as va or vaapi) are all installed properly, we add
+the appropriate h/w based encoder and post-processor/converter
+elements to the pipeline (along with any relevant options) instead
+of the s/w based elements.
 
-For example, if the incoming codec format is h264, we then create
-a pipeline using msdkh264dec and vaapipostproc elements instead of
-avdec_h264 and videoconvert.
+For example, if the user selects h264 as the preferred codec format,
+msdkh264enc and vapostproc will be preferred instead of x264enc
+and videoconvert.
 
 v2: (addressed some review comments from Frediano)
-- s/gboolean/bool, s/TRUE/true, s/FALSE/false
-- Used a single cleanup label instead of multiple while instantiating
-  elements
-- Moved the code that launches the Gst pipeline into a helper that
-  is used while trying h/w based plugins
+- Moved the udev helper into spice-common
+- Refactored the code to choose plugins in order msdk > va > vaapi
 
-v3:
-- Updated the patch to reflect the new signature and return value of
-  spice_udev_detect_gpu().
+v3: (Frediano)
+- Added relevant encoder options for mjpeg and vp9 codecs (Jin Chung)
 
 Cc: Frediano Ziglio <freddy77@gmail.com>
 Cc: Gerd Hoffmann <kraxel@redhat.com>
 Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
 Cc: Dongwon Kim <dongwon.kim@intel.com>
 Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Signed-off-by: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
-Signed-off-by: Jin Chung Teng <jin.chung.teng@intel.com>
+Co-developed-by: Jin Chung Teng <jin.chung.teng@intel.com>
+Co-developed-by: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
 ---
- src/channel-display-gst.c | 216 ++++++++++++++++++++++++++++++++++----
- 1 file changed, 194 insertions(+), 22 deletions(-)
+ server/gstreamer-encoder.c | 120 ++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 119 insertions(+), 1 deletion(-)
 
-diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
-index 5c9927b..8dffe86 100644
---- a/src/channel-display-gst.c
-+++ b/src/channel-display-gst.c
-@@ -20,6 +20,7 @@
- #include "spice-common.h"
- #include "spice-channel-priv.h"
- #include "common/recorder.h"
+diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
+index 1619672a..952c2e87 100644
+--- a/server/gstreamer-encoder.c
++++ b/server/gstreamer-encoder.c
+@@ -31,6 +31,7 @@
+ #include "red-common.h"
+ #include "video-encoder.h"
+ #include "utils.h"
 +#include "common/udev.h"
  
- #include "channel-display-priv.h"
  
-@@ -489,13 +490,204 @@ deep_element_added_cb(GstBin *pipeline, GstBin *bin, GstElement *element,
+ #define SPICE_GST_DEFAULT_FPS 30
+@@ -913,6 +914,115 @@ static const gchar* get_gst_codec_name(const SpiceGstEncoder *encoder)
      }
  }
  
--static gboolean create_pipeline(SpiceGstDecoder *decoder)
-+static gchar *find_best_plugin(const gchar *dec_name)
++static const char video_codecs[][8] = {
++    { "" },
++    { "mjpeg" },
++    { "vp8" },
++    { "h264" },
++    { "vp9" },
++    { "h265" },
++};
++
++static bool gst_features_lookup(const gchar *feature_name)
 +{
-+    const char *plugins[3] = {"msdk", "va", "vaapi"};
 +    GstRegistry *registry;
 +    GstPluginFeature *feature;
-+    gchar *feature_name;
-+    int i;
 +
 +    registry = gst_registry_get();
 +    if (!registry) {
-+        return NULL;
++        return false;
 +    }
 +
++    feature = gst_registry_lookup_feature(registry, feature_name);
++    if (!feature) {
++        return false;
++    }
++
++    gst_object_unref(feature);
++    return true;
++}
++
++static gchar *find_best_plugin(const gchar *codec_name)
++{
++    const char *plugins[3] = {"msdk", "va", "vaapi"};
++    gchar *feature_name;
++    int i;
++
 +    for (i = 0; i < 3; i++) {
-+        feature_name = !dec_name ? g_strconcat(plugins[i], "postproc", NULL) :
-+                       g_strconcat(plugins[i], dec_name, "dec", NULL);
-+        feature = gst_registry_lookup_feature(registry, feature_name);
-+        if (!feature) {
++        feature_name = !codec_name ? g_strconcat(plugins[i], "postproc", NULL) :
++                       g_strconcat(plugins[i], codec_name, "enc", NULL);
++        if (!gst_features_lookup(feature_name)) {
 +            g_free(feature_name);
 +            feature_name = NULL;
 +            continue;
 +        }
-+        gst_object_unref(feature);
 +        break;
 +    }
 +    return feature_name;
 +}
 +
-+static bool launch_pipeline(SpiceGstDecoder *decoder)
- {
-     GstBus *bus;
-+
-+    if (decoder->appsink) {
-+        GstAppSinkCallbacks appsink_cbs = { NULL };
-+        appsink_cbs.new_sample = new_sample;
-+        gst_app_sink_set_callbacks(decoder->appsink, &appsink_cbs, decoder, NULL);
-+        gst_app_sink_set_max_buffers(decoder->appsink, MAX_DECODED_FRAMES);
-+        gst_app_sink_set_drop(decoder->appsink, FALSE);
-+    }
-+    bus = gst_pipeline_get_bus(GST_PIPELINE(decoder->pipeline));
-+    gst_bus_add_watch(bus, handle_pipeline_message, decoder);
-+    gst_object_unref(bus);
-+
-+    decoder->clock = gst_pipeline_get_clock(GST_PIPELINE(decoder->pipeline));
-+
-+    if (gst_element_set_state(decoder->pipeline, GST_STATE_PLAYING) == GST_STATE_CHANGE_FAILURE) {
-+        SPICE_DEBUG("GStreamer error: Unable to set the pipeline to the playing state.");
-+        free_pipeline(decoder);
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+static bool try_intel_hw_pipeline(SpiceGstDecoder *decoder)
++static gchar *get_gstenc_opts(gchar *encoder, const gchar *codec_name)
 +{
-+    GstElement *pipeline = NULL, *src = NULL, *sink = NULL;
-+    GstElement *parser = NULL, *hw_decoder = NULL, *vpp = NULL;
-+    GstCaps *src_caps, *sink_caps;
-+    int codec_type = decoder->base.codec_type;
-+    const gchar *dec_name = gst_opts[codec_type].name;
-+    gchar *hw_dec_name, *vpp_name, *parser_name;
-+    gboolean use_parser;
++    gchar *gstenc_opts;
 +
-+    use_parser = codec_type == SPICE_VIDEO_CODEC_TYPE_H264 ||
-+                 codec_type == SPICE_VIDEO_CODEC_TYPE_H265;
-+
-+    src = gst_element_factory_make("appsrc", NULL);
-+    if (!src) {
-+        spice_warning("error upon creation of 'appsrc' element");
-+        return false;
-+    }
-+    sink = gst_element_factory_make("appsink", NULL);
-+    if (!sink) {
-+        spice_warning("error upon creation of 'appsink' element");
-+        goto err;
++    if (strcmp(codec_name, "mjpeg") == 0) {
++        return g_strdup("");
 +    }
 +
-+    if (use_parser) {
-+        parser_name = g_strconcat(dec_name, "parse", NULL);
-+        parser = gst_element_factory_make(parser_name, NULL);
-+        g_free(parser_name);
-+        if (!parser) {
-+            spice_warning("error upon creation of 'parser' element");
-+            goto err;
++    if (strstr(encoder, "msdk")) {
++        if (strcmp(codec_name, "vp9") == 0) {
++            gstenc_opts = g_strdup("async-depth=1 b-frames=0 rate-control=3 target-usage=7");
++        } else {
++            gstenc_opts = g_strdup("async-depth=1 rate-control=3 gop-size=1 tune=16 b-frames=0 target-usage=7 min-qp=15 max-qp=35");
 +        }
-+    }
-+
-+    hw_dec_name = find_best_plugin(dec_name);
-+    if (!hw_dec_name) {
-+        spice_warning("error finding suitable plugin for decode");
-+        goto err;
-+    }
-+    hw_decoder = gst_element_factory_make(hw_dec_name, NULL);
-+    g_free(hw_dec_name);
-+    if (!hw_decoder) {
-+        spice_warning("error upon creation of 'decoder' element");
-+        goto err;
-+    }
-+    vpp_name = find_best_plugin(NULL);
-+    if (!vpp_name) {
-+        spice_warning("error finding suitable plugin for postproc");
-+        goto err;
-+    }
-+    vpp = gst_element_factory_make(vpp_name, NULL);
-+    if (!vpp) {
-+        spice_warning("error upon creation of 'vpp' element");
-+        goto err;
-+    }
-+    g_object_set(vpp,
-+                 "format", GST_VIDEO_FORMAT_BGRx,
-+                 NULL);
-+
-+    pipeline = gst_pipeline_new(NULL);
-+    if (!pipeline) {
-+        spice_warning("error upon creation of 'pipeline' element");
-+        goto err;
-+    }
-+
-+    src_caps = gst_caps_from_string(gst_opts[codec_type].dec_caps);
-+    g_object_set(src,
-+                 "caps", src_caps,
-+                 "is-live", TRUE,
-+                 "format", GST_FORMAT_TIME,
-+                 "max-bytes", G_GINT64_CONSTANT(0),
-+                 "block", TRUE,
-+                 NULL);
-+    gst_caps_unref(src_caps);
-+    decoder->appsrc = GST_APP_SRC(gst_object_ref(src));
-+
-+    sink_caps = gst_caps_from_string("video/x-raw,format=BGRx");
-+    g_object_set(sink,
-+                 "caps", sink_caps,
-+                 "sync", FALSE,
-+                 "drop", FALSE,
-+                 NULL);
-+    gst_caps_unref(sink_caps);
-+    decoder->appsink = GST_APP_SINK(sink);
-+
-+    if (hand_pipeline_to_widget(decoder->base.stream,
-+        GST_PIPELINE(pipeline))) {
-+        spice_warning("error handing pipeline to widget");
-+        goto err;
-+    }
-+
-+    if (use_parser) {
-+        gst_bin_add_many(GST_BIN(pipeline), src, parser, hw_decoder,
-+                         vpp, sink, NULL);
-+        if (!gst_element_link_many(src, parser, hw_decoder, vpp,
-+                                   sink, NULL)) {
-+            spice_warning("error linking elements");
-+            goto err;
++    } else if (strstr(encoder, "vaapi")) {
++        if (strcmp(codec_name, "vp9") == 0) {
++            gstenc_opts = g_strdup("tune=3 rate-control=1");
++        } else {
++            gstenc_opts = g_strdup("rate-control=cqp max-bframes=0 min-qp=15 max-qp=35");
 +        }
 +    } else {
-+        gst_bin_add_many(GST_BIN(pipeline), src, hw_decoder,
-+                         vpp, sink, NULL);
-+        if (!gst_element_link_many(src, hw_decoder, vpp, sink, NULL)) {
-+            spice_warning("error linking elements");
-+            goto err;
++        if (strcmp(codec_name, "vp9") == 0) {
++            gstenc_opts = g_strdup("min-qp=15 max-qp=35 rate-control=16 ref-frames=0 target-usage=7");
++        } else {
++            gstenc_opts = g_strdup("rate-control=16 b-frames=0 target-usage=7 min-qp=15 max-qp=35");
 +        }
 +    }
-+
-+    decoder->pipeline = pipeline;
-+    return launch_pipeline(decoder);
-+
-+err:
-+    if (src) {
-+        gst_object_unref(src);
-+    }
-+    if (sink) {
-+        gst_object_unref(sink);
-+    }
-+    if (use_parser) {
-+        gst_object_unref(parser);
-+    }
-+    if (hw_decoder) {
-+        gst_object_unref(hw_decoder);
-+    }
-+    if (vpp) {
-+        gst_object_unref(vpp);
-+    }
-+    return false;
++    return gstenc_opts;
 +}
 +
-+static gboolean create_pipeline(SpiceGstDecoder *decoder)
++static void try_intel_hw_plugins(const gchar *codec_name, gchar **converter,
++                                 gchar **gstenc_name, gchar **gstenc_opts)
 +{
-     GstElement *playbin, *sink;
-     SpiceGstPlayFlags flags;
-     GstCaps *caps;
-     static bool playbin3_supported = true;
-+    GpuVendor vendor = spice_udev_detect_gpu(INTEL_VENDOR_ID);
++    gchar *encoder, *vpp;
 +
-+    if (vendor == VENDOR_GPU_DETECTED ||
-+        vendor == VENDOR_GPU_UNKNOWN) {
-+        if (try_intel_hw_pipeline(decoder)) {
-+            return TRUE;
-+        }
++    if (strcmp(codec_name, "vp8") == 0) {
++        return;
 +    }
++
++    encoder = find_best_plugin(codec_name);
++    if (!encoder) {
++        return;
++    }
++    vpp = find_best_plugin(NULL);
++    if (!vpp) {
++        return;
++    }
++
++    g_free(*converter);
++    g_free(*gstenc_name);
++    g_free(*gstenc_opts);
++    *gstenc_name = encoder;
++    *gstenc_opts = get_gstenc_opts(encoder, codec_name);
++
++    if (strstr(vpp, "vaapi")) {
++        *converter = g_strconcat(vpp, " ! video/x-raw(memory:VASurface),format=NV12", NULL);
++    } else {
++        *converter = g_strconcat(vpp, " ! video/x-raw(memory:VAMemory),format=NV12", NULL);
++    }
++    g_free(vpp);
++}
++
+ static gchar *get_gst_converter(void)
+ {
+     gchar *converter, *pref_format;
+@@ -932,7 +1042,7 @@ static gchar *get_gst_converter(void)
+ static gboolean create_pipeline(SpiceGstEncoder *encoder)
+ {
+     gchar* converter = get_gst_converter();
+-    const gchar* gstenc_name = get_gst_codec_name(encoder);
++    gchar* gstenc_name = g_strdup(get_gst_codec_name(encoder));
+     if (!gstenc_name) {
+         return FALSE;
+     }
+@@ -985,6 +1095,13 @@ static gboolean create_pipeline(SpiceGstEncoder *encoder)
+         return FALSE;
+     }
  
-     playbin = playbin3_supported ?
-               gst_element_factory_make("playbin3", "playbin") : NULL;
-@@ -571,29 +763,9 @@ static gboolean create_pipeline(SpiceGstDecoder *decoder)
-     g_warn_if_fail(decoder->appsrc == NULL);
-     decoder->pipeline = playbin;
- 
--    if (decoder->appsink) {
--        GstAppSinkCallbacks appsink_cbs = { NULL };
--        appsink_cbs.new_sample = new_sample;
--        gst_app_sink_set_callbacks(decoder->appsink, &appsink_cbs, decoder, NULL);
--        gst_app_sink_set_max_buffers(decoder->appsink, MAX_DECODED_FRAMES);
--        gst_app_sink_set_drop(decoder->appsink, FALSE);
--    }
--    bus = gst_pipeline_get_bus(GST_PIPELINE(decoder->pipeline));
--    gst_bus_add_watch(bus, handle_pipeline_message, decoder);
--    gst_object_unref(bus);
--
--    decoder->clock = gst_pipeline_get_clock(GST_PIPELINE(decoder->pipeline));
--
--    if (gst_element_set_state(decoder->pipeline, GST_STATE_PLAYING) == GST_STATE_CHANGE_FAILURE) {
--        SPICE_DEBUG("GStreamer error: Unable to set the pipeline to the playing state.");
--        free_pipeline(decoder);
--        return FALSE;
--    }
--
--    return TRUE;
-+    return launch_pipeline(decoder);
- }
- 
--
- /* ---------- VideoDecoder's public API ---------- */
- 
- static void spice_gst_decoder_reschedule(VideoDecoder *video_decoder)
++    const char *codec_name = video_codecs[encoder->base.codec_type];
++    GpuVendor vendor = spice_udev_detect_gpu(INTEL_VENDOR_ID);
++    if (vendor == VENDOR_GPU_DETECTED) {
++        try_intel_hw_plugins(codec_name, &converter, &gstenc_name,
++                             &gstenc_opts);
++    }
++
+     GError *err = NULL;
+     gchar *desc = g_strdup_printf("appsrc is-live=true format=time do-timestamp=true name=src !"
+                                   " %s ! %s name=encoder %s ! appsink name=sink",
+@@ -992,6 +1109,7 @@ static gboolean create_pipeline(SpiceGstEncoder *encoder)
+     spice_debug("GStreamer pipeline: %s", desc);
+     encoder->pipeline = gst_parse_launch_full(desc, NULL, GST_PARSE_FLAG_FATAL_ERRORS, &err);
+     g_free(converter);
++    g_free(gstenc_name);
+     g_free(gstenc_opts);
+     g_free(desc);
+     if (!encoder->pipeline || err) {
 -- 
 2.39.2
 
