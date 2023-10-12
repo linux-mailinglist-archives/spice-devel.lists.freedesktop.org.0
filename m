@@ -1,45 +1,53 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2764F7C4E2F
-	for <lists+spice-devel@lfdr.de>; Wed, 11 Oct 2023 11:06:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DB4627C7616
+	for <lists+spice-devel@lfdr.de>; Thu, 12 Oct 2023 20:43:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B48E910E5E1;
-	Wed, 11 Oct 2023 09:06:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C890010E50D;
+	Thu, 12 Oct 2023 18:43:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 903 seconds by postgrey-1.36 at gabe;
- Wed, 11 Oct 2023 08:47:07 UTC
-Received: from m1391.mail.163.com (m1391.mail.163.com [220.181.13.91])
- by gabe.freedesktop.org (Postfix) with ESMTP id 1D4CB10E5C4
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Oct 2023 08:47:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=JcZWY0soQENoMCOvfydq+NREdBfYDYzbNheUB8H0gO8=; b=k
- hPFbXRLRWda6IusI2RI1eG9D+QcxzOxAAnyy3Fqy9No763xqKCeMjf8ifZpSGbI+
- CD1azW3JhmidESAeej7uDJzf0K2bS2ZvMzvN/4xtH/8yhP/eTwokLMLWFoGIIT0r
- fHZthOLlk/6WX3oGkgLFtCpH/sICpH/p//0iXJpZJM=
-Received: from wangxuesonger$163.com ( [119.80.184.49] ) by
- ajax-webmail-wmsvr91 (Coremail) ; Wed, 11 Oct 2023 16:31:56 +0800 (CST)
-X-Originating-IP: [119.80.184.49]
-Date: Wed, 11 Oct 2023 16:31:56 +0800 (CST)
-From: =?GBK?B?zfXRqcvJ?= <wangxuesonger@163.com>
-To: spice-devel@lists.freedesktop.org
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
- Copyright (c) 2002-2023 www.mailtech.cn 163com
-X-NTES-SC: AL_QuySBfyavEkq4CGeZekXnkwVgOw4XMK0vfgg3YFXPp80pir8xx05dHZoDX/y28aUDQOouRGObgJU7vZddptoYqYicQcN2Jy1kDmDMJdY6UVO
-Content-Type: multipart/alternative; 
- boundary="----=_Part_74911_2067564785.1697013116162"
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C932A10E50D
+ for <spice-devel@lists.freedesktop.org>; Thu, 12 Oct 2023 18:43:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1697136202;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=1ZVOs7Qcu/zTb8ELUyOw3/bG+vkHco7bA8TvSxYxV2c=;
+ b=XRBCK0n3aItJxJkuf1VRXhPzfvO8Sc2mPo0ri8Ft3m6KzNpzDphkq87c4tzHgz8+RYIn4y
+ XHXveDIiVMRiqh/JvyQlrcnb4BBUvMUq1tBetO7pO14E6LHxG373WR815sQQ6AgDKbII5u
+ /WTJDpEB9KlwfbQLSbQ5XRA79RWluYo=
+Received: from mimecast-mx02.redhat.com (mx-ext.redhat.com [66.187.233.73])
+ by relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-17-r76wC1YvN3-Sj3LYToMSFw-1; Thu, 12 Oct 2023 14:43:09 -0400
+X-MC-Unique: r76wC1YvN3-Sj3LYToMSFw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B157A1C075A0;
+ Thu, 12 Oct 2023 18:43:08 +0000 (UTC)
+Received: from localhost (unknown [10.45.225.38])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4420040C6F79;
+ Thu, 12 Oct 2023 18:43:08 +0000 (UTC)
+Date: Thu, 12 Oct 2023 20:43:07 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: =?utf-8?B?546L6Zuq5p2+?= <wangxuesonger@163.com>
+Message-ID: <r5blmx6qzxdu42zsl7ks7qargwulhaqqajahamd5jq7f4bmlmi@woczmwr5oyir>
+References: <7330fd29.4eeb.18b1ddd2d02.Coremail.wangxuesonger@163.com>
 MIME-Version: 1.0
-Message-ID: <7330fd29.4eeb.18b1ddd2d02.Coremail.wangxuesonger@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: W8GowAD3f+R8XSZlFRQVAA--.25035W
-X-CM-SenderInfo: pzdqw5pxhv00xjhuqiywtou0bp/1tbiyQEDbWI68WAKzwACso
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-X-Mailman-Approved-At: Wed, 11 Oct 2023 09:06:53 +0000
-Subject: [Spice-devel] spice protocal connection issue
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="hybgfc4ng6rixtxs"
+Content-Disposition: inline
+In-Reply-To: <7330fd29.4eeb.18b1ddd2d02.Coremail.wangxuesonger@163.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.2
+Subject: Re: [Spice-devel] spice protocal connection issue
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,35 +59,64 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: spice-devel@lists.freedesktop.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-------=_Part_74911_2067564785.1697013116162
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: base64
 
-SGk6CkkgaGF2ZSBhIHF1ZXN0aW9uLiBXaXRoaW4gdGhlIHNhbWUgbG9jYWwgYXJlYSBuZXR3b3Jr
-LCBJIGNhbiBmcmVlbHkgYWNjZXNzIHRoZSB2aXJ0dWFsIG1hY2hpbmUgdXNpbmcgU3BpY2UsIGJ1
-dCBvdGhlciBtYWNoaW5lcyBvZnRlbiBmYWlsIHRvIGNvbm5lY3QuIEl0IHRha2VzIGRvemVucyBv
-ZiBhdHRlbXB0cyBzb21ldGltZXMgdG8gc3VjY2Vzc2Z1bGx5IGVzdGFibGlzaCBhIGNvbm5lY3Rp
-b24uIEknZCBsaWtlIHRvIGtub3cgdGhlIHJlYXNvbiBiZWhpbmQgdGhpcy4gQ291bGQgaXQgYmUg
-ZHVlIHRvIGEgY2FjaGluZyBtZWNoYW5pc20gb3Igc29tZSByZXN0cmljdGlvbnMgdGhhdCBsaW1p
-dCBvdGhlciBwZW9wbGUncyBsb2dpbiBhY2Nlc3M/IFRoYW5rIHlvdS4KCgpMb29raW5nIGZvcndh
-cmQgdG8geW91ciByZXBseS4=
-------=_Part_74911_2067564785.1697013116162
-Content-Type: text/html; charset=GBK
-Content-Transfer-Encoding: base64
+--hybgfc4ng6rixtxs
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOiMwMDAwMDA7Zm9udC1zaXplOjE0cHg7
-Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjowOyI+SGk6PC9kaXY+PGRpdiBz
-dHlsZT0ibWFyZ2luOjA7Ij5JIGhhdmUgYSBxdWVzdGlvbi4gV2l0aGluIHRoZSBzYW1lIGxvY2Fs
-IGFyZWEgbmV0d29yaywgSSBjYW4gZnJlZWx5IGFjY2VzcyB0aGUgdmlydHVhbCBtYWNoaW5lIHVz
-aW5nIFNwaWNlLCBidXQgb3RoZXIgbWFjaGluZXMgb2Z0ZW4gZmFpbCB0byBjb25uZWN0LiBJdCB0
-YWtlcyBkb3plbnMgb2YgYXR0ZW1wdHMgc29tZXRpbWVzIHRvIHN1Y2Nlc3NmdWxseSBlc3RhYmxp
-c2ggYSBjb25uZWN0aW9uLiBJJ2QgbGlrZSB0byBrbm93IHRoZSByZWFzb24gYmVoaW5kIHRoaXMu
-IENvdWxkIGl0IGJlIGR1ZSB0byBhIGNhY2hpbmcgbWVjaGFuaXNtIG9yIHNvbWUgcmVzdHJpY3Rp
-b25zIHRoYXQgbGltaXQgb3RoZXIgcGVvcGxlJ3MgbG9naW4gYWNjZXNzPyBUaGFuayB5b3UuPC9k
-aXY+PGRpdiBzdHlsZT0ibWFyZ2luOjA7Ij48YnI+PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjA7
-Ij5Mb29raW5nIGZvcndhcmQgdG8geW91ciByZXBseS48L2Rpdj48L2Rpdj4=
-------=_Part_74911_2067564785.1697013116162--
+On Wed, Oct 11, 2023 at 04:31:56PM +0800, =E7=8E=8B=E9=9B=AA=E6=9D=BE wrote:
+> Hi:
+> I have a question. Within the same local area network, I can
+> freely access the virtual machine using Spice, but other
+> machines often fail to connect.
+
+This should be a matter of can or cannot. You either have access
+to the host:port from where spice server is running, or you
+don't.
+
+> It takes dozens of attempts sometimes to successfully establish
+> a connection. I'd like to know the reason behind this.
+
+Me too. Do you run behind a proxy? Any other devices in between
+that might be doing something with the network?
+
+> Could it be due to a caching mechanism or some restrictions
+> that limit other people's login access? Thank you.
+
+Not really. If a user is logged in and a second one tries to log,
+the second one gets access while the first one is disconnected.
+
+I don't remember any settings that would change that behavior.
+
+> Looking forward to your reply.
+
+Cheers,
+Victor
+
+--hybgfc4ng6rixtxs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmUoPjoACgkQl9kSPeN6
+SE/+8xAArAQoRuuloCWm+6e4FUZNtFE6LxY5px7/GIRVCveC4pGz2YklSbdBKJy3
+1uVl3iVocBw1ePufd/we+JmJwEo9OFyN/gzbXa9WloJR0oNZEnRuOSbHdfQu3LiR
+yy2yXSqQ2rPrjLcSOHlBgLvYoQOH8OBclQICUWHsyU9WyToHNRgyzWdtOkzEM+RC
+YRzoY0tvHWvXGP7m7KFMaDwWkCCIxpRjQTPYHmhVEvi+m0SC2oummsdJB+hKw3Nc
+315XkmxZsH7rVREKxw3nfF7rIW0D+tfHPBe4LqqL/TCrbcWvAAnFSxa+YOMngGlH
+yEHwsElhQ8Vunr/ieVeEeEQb2Bl8CO0VmBs3nKVkwj9qEAjcUGd3XR9EOvXoxqj5
+ji6AXhofl1OxleyEnvvPAtZcff87jKRDtcMP1kAz731UTxZOSUNEfBB3yNtSP2vp
+J4spC3nfa6mvlofabmpd9LZKsS61VcLJqu8lMCF2vRlOrLcYSFCVA/K30NgJZR5/
+JWGzZoTljtonW4qSE5GxIarmR2YATNr26KaJRE0+lT3UXOFgmJHQkxy1RAVAY5Jm
+9hgCGdIYdE8EjmaHqk3pfYZ46G4vXdAF4n6ipRu7ixZ44Jp3njC6EaBxk6QZZEdo
+4IAb6cNaKiqz/5ecR70iHK2QpOYKc4kkYRUCgnv71TOS4I9iJL8=
+=vQLu
+-----END PGP SIGNATURE-----
+
+--hybgfc4ng6rixtxs--
 
