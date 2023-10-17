@@ -2,68 +2,49 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A84F27C9912
-	for <lists+spice-devel@lfdr.de>; Sun, 15 Oct 2023 15:09:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A802B7CBC81
+	for <lists+spice-devel@lfdr.de>; Tue, 17 Oct 2023 09:43:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5D3B410E055;
-	Sun, 15 Oct 2023 13:09:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5C46410E115;
+	Tue, 17 Oct 2023 07:43:47 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4C11D10E055
- for <spice-devel@lists.freedesktop.org>; Sun, 15 Oct 2023 13:09:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1697375369;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=phdCP8bKfYs2WijL4REcCO3opWo9IAev/D3fbVlMsp8=;
- b=iZFAXo5avt+dQCDmF9lEaNDVisZSiT3/2QiC1hiLKPmt0x3TS7z3iRyk5eZhEVoSjOGcSj
- h+YcBZIirznZUvMop/5jnzRjUa4v91MICao1+16WREbEYaKsgm8EUEPwDrrkVWfVru1+8o
- DwHjIkI/yiagVGriY8r+J4AFKkmJ51s=
-Received: from mail-oa1-f71.google.com (mail-oa1-f71.google.com
- [209.85.160.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-318-nCMJSlcQOZq3lOFupSphGw-1; Sun, 15 Oct 2023 09:09:27 -0400
-X-MC-Unique: nCMJSlcQOZq3lOFupSphGw-1
-Received: by mail-oa1-f71.google.com with SMTP id
- 586e51a60fabf-1dd8e6a7a86so4935937fac.1
- for <spice-devel@lists.freedesktop.org>; Sun, 15 Oct 2023 06:09:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697375367; x=1697980167;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=phdCP8bKfYs2WijL4REcCO3opWo9IAev/D3fbVlMsp8=;
- b=YRrbxnMjGG15KGX16wWJLT9Cxpvuz9QDJ7WisTB4GPRc/s8ViAlzX8OxMfEwBfleEQ
- XG6b2vdJ43e8fdUpD+9y5yGjfQrL0Jn/FvKxArpOt+Yzm9Ir7QNxgXNlfzPE7YDfJnIi
- Gis68lKdFTtvuScmxnw2d68DUSeRhVBBgD/yASCufWnuklCXBqRZATrjcVSSZ4I6MAbk
- /z3Pd9Z4FSY/sPoRe0NaTTkvvA1pSWbmAyyyxN1T6IK9DLgEc0M6G5odgH4CdYCy1GhX
- ig0GQFY9WxjfvNx3bDJ4QOrkMLpfbl2NvkWm8OrYeoXU4BI/CqoLq0j2pypdgatVLzas
- 6Smg==
-X-Gm-Message-State: AOJu0Yw/k3t9BZyIwuaaVmy7cBRHxZFifw4fdHH4DS4Lj89t+zwvhn2D
- V+dwcvlqK6E2DT3PoyezdWEriFqYe7TQKXLu+DKruQuSD4x55ZhP2DOXisLpLDzM8xrDOdQRQ5u
- aC1HAUx54DaajXJZhJtzq9+syoxQF+132nMSvN9Z1Zyvm1ZM=
-X-Received: by 2002:a05:6870:8926:b0:1ba:8307:9a13 with SMTP id
- i38-20020a056870892600b001ba83079a13mr37110715oao.11.1697375366967; 
- Sun, 15 Oct 2023 06:09:26 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHf56mExpd5gwTmXc96SwlLzQhbAeaKKRqS8G0gYUbWdmrReBs1z+jEzfyIt7emylzJZKKFg8Z3YjUITUaCDc8=
-X-Received: by 2002:a05:6870:8926:b0:1ba:8307:9a13 with SMTP id
- i38-20020a056870892600b001ba83079a13mr37110699oao.11.1697375366540; Sun, 15
- Oct 2023 06:09:26 -0700 (PDT)
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.88])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 24FE310E115
+ for <spice-devel@lists.freedesktop.org>; Tue, 17 Oct 2023 07:43:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1697528625; x=1729064625;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=q/eQ8vCZm3OEcrl35yS4hbsQRT28ostFjvcktNE49ck=;
+ b=GUqDaqWMbnF7ScnqibyVaXsNlVRPwYiEN0m9s+LOTgSMx2hMHSjddarc
+ rZMdggUZw5GKjKm4ZyIImkXyIqU+SupSniJiMkObiYMNM+92UoWTU1lR5
+ vrlNEYI8IvSt2SAmyqPcf5n45NZU4M8E8nmCA8uE9XlwYigCOP+rtpQ3G
+ bdH1tSCpOkf/hvgvney/+cjujntglGV977oCJICiAGwQTaRRy9EomzOWv
+ 7+oj3PVfqD8Aarp+uPLJJMxc+V3qj7OpvweesEIL7GhGXLf7B1vLQYGGU
+ VCATj3Pjk/qnBGcnVh78EHNqWBeVHcTsz3CIJ+wH0vFFmEUhIoYyTkyvF w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10865"; a="416801206"
+X-IronPort-AV: E=Sophos;i="6.03,231,1694761200"; d="scan'208";a="416801206"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Oct 2023 00:43:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10865"; a="785390493"
+X-IronPort-AV: E=Sophos;i="6.03,231,1694761200"; d="scan'208";a="785390493"
+Received: from vkasired-desk2.fm.intel.com ([10.105.128.127])
+ by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Oct 2023 00:43:43 -0700
+From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+To: spice-devel@lists.freedesktop.org
+Date: Tue, 17 Oct 2023 00:23:12 -0700
+Message-Id: <20231017072312.4013460-1-vivek.kasireddy@intel.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <7330fd29.4eeb.18b1ddd2d02.Coremail.wangxuesonger@163.com>
- <r5blmx6qzxdu42zsl7ks7qargwulhaqqajahamd5jq7f4bmlmi@woczmwr5oyir>
-In-Reply-To: <r5blmx6qzxdu42zsl7ks7qargwulhaqqajahamd5jq7f4bmlmi@woczmwr5oyir>
-From: Uri Lublin <uril@redhat.com>
-Date: Sun, 15 Oct 2023 16:09:15 +0300
-Message-ID: <CAAg9qJ0PBPoVqb3p_KN09Rf49+Ndsf-0P-8MF70hC_HveWf9pA@mail.gmail.com>
-To: =?UTF-8?B?546L6Zuq5p2+?= <wangxuesonger@163.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="000000000000c60ad80607c0ff36"
-Subject: Re: [Spice-devel] spice protocal connection issue
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Spice-devel] [PATCH v3] common: Add a udev helper to identify GPU
+ Vendor (v3)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,96 +56,267 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org
+Cc: Dongwon Kim <dongwon.kim@intel.com>,
+ Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
+ Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000c60ad80607c0ff36
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Given that libudev is widely available on many Linux distros, we
+can use the relevant APIs to iterate over all the devices associated
+with the drm subsystem to figure out if a specific vendor GPU
+is available or not.
 
-Hi,
+This capability (identifying GPU Vendor) is useful to determine
+whether to launch Gstreamer pipeline using h/w accelerated
+plugins. On systems where libudev is not available (Windows,
+MacOS, etc) we'd have to make this determination based on the
+availability of the relevant plugins in the Gstreamer registry.
 
-On Thu, Oct 12, 2023 at 9:43=E2=80=AFPM Victor Toso <victortoso@redhat.com>=
- wrote:
+v2: (Frediano)
+- Add autoconf support
+- Add license text
+- Add pragma once and SPICE_BEGIN/END_DECLS to the header
+- Check the vendor id udev attribute of the pci device to
+  determine a vendor GPU instead of checking the driver name
 
-> On Wed, Oct 11, 2023 at 04:31:56PM +0800, =E7=8E=8B=E9=9B=AA=E6=9D=BE wro=
-te:
-> > Hi:
-> > I have a question. Within the same local area network, I can
-> > freely access the virtual machine using Spice, but other
-> > machines often fail to connect.
->
-> This should be a matter of can or cannot. You either have access
-> to the host:port from where spice server is running, or you
-> don't.
->
-> > It takes dozens of attempts sometimes to successfully establish
-> > a connection. I'd like to know the reason behind this.
->
-> Me too. Do you run behind a proxy? Any other devices in between
-> that might be doing something with the network?
->
+v3: (fixups by Frediano)
+- Fix broken autoconf support added in v2
+- Fix compiler error on systems with no libudev support
+- Return VENDOR_GPU_UNKNOWN if we cannot create udev instance
+- Make libudev dependency optional
+- Change the type of gpu_vendor from long to int as PCI vendor IDs
+  are defined as 16-bit unsigned int
 
-Additionally, the network may be too slow and timeouts occur.
+Cc: Frediano Ziglio <freddy77@gmail.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
+Cc: Dongwon Kim <dongwon.kim@intel.com>
+Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+Cc: Jin Chung Teng <jin.chung.teng@intel.com>
+Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+---
+ common/Makefile.am |  3 ++
+ common/meson.build |  2 ++
+ common/udev.c      | 78 ++++++++++++++++++++++++++++++++++++++++++++++
+ common/udev.h      | 33 ++++++++++++++++++++
+ configure.ac       |  1 +
+ m4/spice-deps.m4   | 12 +++++++
+ meson.build        |  7 +++++
+ 7 files changed, 136 insertions(+)
+ create mode 100644 common/udev.c
+ create mode 100644 common/udev.h
 
-
->
-> > Could it be due to a caching mechanism or some restrictions
-> > that limit other people's login access? Thank you.
-> Regards
-> Not really. If a user is logged in and a second one tries to log,
-> the second one gets access while the first one is disconnected.
->
-> I don't remember any settings that would change that behavior.
->
-
-Probably does not count as "settings", but the monitor-command
-set_password has an option to fail if a client is already connected.
-
-Regards,
-    Uri
-
---000000000000c60ad80607c0ff36
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div>Hi,</div><div><br></div><d=
-iv><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu,=
- Oct 12, 2023 at 9:43=E2=80=AFPM Victor Toso &lt;<a href=3D"mailto:victorto=
-so@redhat.com">victortoso@redhat.com</a>&gt; wrote:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">On Wed, Oct 11, 2023 at 04:31:56PM +080=
-0, =E7=8E=8B=E9=9B=AA=E6=9D=BE wrote:<br>
-&gt; Hi:<br>
-&gt; I have a question. Within the same local area network, I can<br>
-&gt; freely access the virtual machine using Spice, but other<br>
-&gt; machines often fail to connect.<br>
-<br>
-This should be a matter of can or cannot. You either have access<br>
-to the host:port from where spice server is running, or you<br>
-don&#39;t.<br>
-<br>
-&gt; It takes dozens of attempts sometimes to successfully establish<br>
-&gt; a connection. I&#39;d like to know the reason behind this.<br>
-<br>
-Me too. Do you run behind a proxy? Any other devices in between<br>
-that might be doing something with the network?<br></blockquote><div><br></=
-div><div>Additionally, the network may be too slow and timeouts occur.<br><=
-/div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
- 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-&gt; Could it be due to a caching mechanism or some restrictions<br>
-&gt; that limit other people&#39;s login access? Thank you.<br>
-Regards<br>
-Not really. If a user is logged in and a second one tries to log,<br>
-the second one gets access while the first one is disconnected.<br>
-<br>
-I don&#39;t remember any settings that would change that behavior.<br></blo=
-ckquote><div><br></div><div>Probably does not count as &quot;settings&quot;=
-, but the monitor-command</div><div>set_password has an option to fail if a=
- client is already connected.</div><div><br></div><div>Regards,</div><div>=
-=C2=A0=C2=A0=C2=A0 Uri<br></div></div></div></div>
-
---000000000000c60ad80607c0ff36--
+diff --git a/common/Makefile.am b/common/Makefile.am
+index 1318400..ffdd5c9 100644
+--- a/common/Makefile.am
++++ b/common/Makefile.am
+@@ -52,6 +52,8 @@ libspice_common_la_SOURCES =		\
+ 	rop3.h				\
+ 	snd_codec.c			\
+ 	snd_codec.h			\
++	udev.c				\
++	udev.h				\
+ 	utils.c				\
+ 	utils.h				\
+ 	verify.h			\
+@@ -108,6 +110,7 @@ AM_CPPFLAGS =				\
+ 
+ libspice_common_la_LIBADD =				\
+ 	$(SPICE_COMMON_LIBS)				\
++	$(UDEV_LIBS)				        \
+ 	$(NULL)
+ 
+ MARSHALLERS_DEPS =					\
+diff --git a/common/meson.build b/common/meson.build
+index 09e3ea7..63bd2db 100644
+--- a/common/meson.build
++++ b/common/meson.build
+@@ -39,6 +39,8 @@ spice_common_sources = [
+   'snd_codec.h',
+   'utils.c',
+   'utils.h',
++  'udev.c',
++  'udev.h',
+   'verify.h',
+   'recorder.h'
+ ]
+diff --git a/common/udev.c b/common/udev.c
+new file mode 100644
+index 0000000..800a4ab
+--- /dev/null
++++ b/common/udev.c
+@@ -0,0 +1,78 @@
++/*
++   Copyright (C) 2023 Intel Corporation.
++
++   This library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   This library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with this library; if not, see <http://www.gnu.org/licenses/>.
++*/
++
++#include <config.h>
++#include "udev.h"
++
++#ifdef HAVE_UDEV
++#include <libudev.h>
++#include <stdbool.h>
++#include <stdlib.h>
++
++GpuVendor spice_udev_detect_gpu(int gpu_vendor)
++{
++    struct udev *udev;
++    struct udev_device *drm_dev, *pci_dev;
++    struct udev_enumerate *udev_enum;
++    struct udev_list_entry *entry, *devices;
++    const char *path, *vendor_id;
++    GpuVendor vendor = VENDOR_GPU_NOTDETECTED;
++
++    udev = udev_new();
++    if (!udev) {
++        return VENDOR_GPU_UNKNOWN;
++    }
++
++    udev_enum = udev_enumerate_new(udev);
++    if (udev_enum) {
++        udev_enumerate_add_match_subsystem(udev_enum, "drm");
++        udev_enumerate_add_match_sysname(udev_enum, "card[0-9]");
++        udev_enumerate_scan_devices(udev_enum);
++        devices = udev_enumerate_get_list_entry(udev_enum);
++
++        udev_list_entry_foreach(entry, devices) {
++            path = udev_list_entry_get_name(entry);
++            drm_dev = udev_device_new_from_syspath(udev, path);
++            if (!drm_dev) {
++                continue;
++            }
++
++            pci_dev = udev_device_get_parent_with_subsystem_devtype(drm_dev,
++                                                                    "pci", NULL);
++            if (pci_dev) {
++                vendor_id = udev_device_get_sysattr_value(pci_dev, "vendor");
++                if (vendor_id && strtol(vendor_id, NULL, 16) == gpu_vendor) {
++                    vendor = VENDOR_GPU_DETECTED;
++                    udev_device_unref(drm_dev);
++                    break;
++                }
++            }
++            udev_device_unref(drm_dev);
++        }
++        udev_enumerate_unref(udev_enum);
++    }
++    udev_unref(udev);
++
++    return vendor;
++}
++#else
++GpuVendor spice_udev_detect_gpu(int gpu_vendor)
++{
++    return VENDOR_GPU_UNKNOWN;
++}
++#endif
++
+diff --git a/common/udev.h b/common/udev.h
+new file mode 100644
+index 0000000..389bb3f
+--- /dev/null
++++ b/common/udev.h
+@@ -0,0 +1,33 @@
++/*
++   Copyright (C) 2023 Intel Corporation.
++
++   This library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   This library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with this library; if not, see <http://www.gnu.org/licenses/>.
++*/
++
++#pragma once
++#include <spice/macros.h>
++
++#define INTEL_VENDOR_ID 0x8086
++
++typedef enum {
++    VENDOR_GPU_UNKNOWN,
++    VENDOR_GPU_DETECTED,
++    VENDOR_GPU_NOTDETECTED,
++} GpuVendor;
++
++SPICE_BEGIN_DECLS
++
++GpuVendor spice_udev_detect_gpu(int gpu_vendor);
++
++SPICE_END_DECLS
+diff --git a/configure.ac b/configure.ac
+index 0d4c22b..42e873d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -61,6 +61,7 @@ SPICE_CHECK_GLIB2
+ SPICE_CHECK_OPUS
+ SPICE_CHECK_OPENSSL
+ SPICE_CHECK_GDK_PIXBUF
++SPICE_CHECK_UDEV
+ 
+ SPICE_COMMON_CFLAGS='$(PIXMAN_CFLAGS) $(SMARTCARD_CFLAGS) $(GLIB2_CFLAGS) $(OPUS_CFLAGS) $(OPENSSL_CFLAGS)'
+ SPICE_COMMON_CFLAGS="$SPICE_COMMON_CFLAGS -DG_LOG_DOMAIN=\\\"Spice\\\""
+diff --git a/m4/spice-deps.m4 b/m4/spice-deps.m4
+index e11fc4e..6a07ee6 100644
+--- a/m4/spice-deps.m4
++++ b/m4/spice-deps.m4
+@@ -302,6 +302,18 @@ AC_DEFUN([SPICE_CHECK_OPENSSL], [
+     PKG_CHECK_MODULES(OPENSSL, openssl)
+ ])
+ 
++# SPICE_CHECK_UDEV
++# -----------------
++# Check for the availability of libudev. If found, it will help to determine
++# if a given vendor GPU is available or not.
++#------------------
++AC_DEFUN([SPICE_CHECK_UDEV], [
++    PKG_CHECK_MODULES([UDEV], [libudev], [have_udev=yes],[have_udev=no])
++    if test "x$have_udev" = "xyes"; then
++      AC_DEFINE([HAVE_UDEV], 1, [whether libudev is available to identify GPU])
++    fi
++])
++
+ # SPICE_CHECK_INSTRUMENTATION
+ # -----------------
+ # Check for the availability of an instrumentation library.
+diff --git a/meson.build b/meson.build
+index eeccecd..1018769 100644
+--- a/meson.build
++++ b/meson.build
+@@ -147,6 +147,13 @@ if smartcard_dep.found()
+   spice_common_config_data.set('USE_SMARTCARD', '1')
+ endif
+ 
++# udev check
++udev_dep = dependency('libudev', required : false)
++if udev_dep.found()
++  spice_common_deps += udev_dep
++  spice_common_config_data.set('HAVE_UDEV', '1')
++endif
++
+ #
+ # global C defines
+ #
+-- 
+2.39.2
 
