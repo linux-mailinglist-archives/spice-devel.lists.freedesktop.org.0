@@ -2,64 +2,71 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4A3D7D36F3
-	for <lists+spice-devel@lfdr.de>; Mon, 23 Oct 2023 14:37:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BBA67D41B0
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Oct 2023 23:30:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6A3510E1DA;
-	Mon, 23 Oct 2023 12:37:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BB21210E271;
+	Mon, 23 Oct 2023 21:29:57 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-x142.google.com (mail-lf1-x142.google.com
- [IPv6:2a00:1450:4864:20::142])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0DD3310E176;
- Mon, 23 Oct 2023 08:23:06 +0000 (UTC)
-Received: by mail-lf1-x142.google.com with SMTP id
- 2adb3069b0e04-5079eed8bfbso4216289e87.1; 
- Mon, 23 Oct 2023 01:23:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698049384; x=1698654184; darn=lists.freedesktop.org;
- h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=yILl0/y7g1lM4NMlXc0rK5OqjDqsDZrg7ur6TMfehp0=;
- b=ZUA+kwTkhZIOM6Qal24n7WV5YI1EaxHzBRc3cuQS+LiZHXsGgphLrFBL+vngfJ6I3k
- 4N+MNyk4L7IA7zDUwXuf8WeBicsEtAYl86IIespskvtABIhjFDmHKKpcZW1CaJR8D4Qu
- 7Dtfx6Wh6+qyDsnz37if8PCxWYjoit0k4K8rX/gd7LTiHLBnk2P0c+SmFRpv/d+VoUvN
- nPG0A4tA7RbRNZpXEnXbxX6blEiroQhFjlLL4JTpfTFehbBYN7htgvaswzcagBJ2qXJY
- sFjiEPlaeqTC9qir9gbzSUEc4OjhMw+2Q2sRISeUpBSzhTbfz3qlYxnXoCGbTSZGVxIN
- bpdQ==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C070A10E269
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Oct 2023 21:29:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1698096594;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=F1k2Vg92RJrxv+gYLNepXp/tJyAR04nx8wa9wG6p0is=;
+ b=aA72/tCNof/0rDPqBBTCBMTBCuJNd0XgIJ8AyGM4NIR0v11Lf8dJ/Vry4pJTQ9oOrqFul4
+ KbDKjkaeYODkF/CJYTj7IIIMPTK8oIy8yPXIAVxD8oBXXfbdxyNiXj2N0O1pHCNcO4EmKi
+ BcwYDJbRNj7ryKJwU15Te7M/O5qzg7U=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-669-KJShThjINueLbT9dxYIuvA-1; Mon, 23 Oct 2023 17:29:42 -0400
+X-MC-Unique: KJShThjINueLbT9dxYIuvA-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-3f5df65f9f4so23179615e9.2
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Oct 2023 14:29:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698049384; x=1698654184;
- h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yILl0/y7g1lM4NMlXc0rK5OqjDqsDZrg7ur6TMfehp0=;
- b=TkUfZRP4t+fLvqpiNqxeoiu1Ev+T2wUe6enmiQYpEqY0S3cdltme4atoWMfraJHhe2
- 6aKEWqbg3c5FrCnfuRAcT8dSbmBrQMFfb5Q4xZdZi69C6wQAxbfDkj3IthMrn9SCUwgx
- H1JDc9qoFf7uINwbMnJKebRvMneoSdq3Rlxt32sqS8JHs9OGvE7zGdyMrF7XkxcivVQp
- iHQLOzZJ7nUh2oNX+1vCPtpL5znVGW5bADZQe+38yd5DX8kwrob0roiDvakqLbW2vI6m
- ROgQ04thz7u397/rhYvDJcxPfa6qKLl9JSw8ZzNCsyk8GE22rCQsODKRfY5Ce/0/KlAg
- mMrw==
-X-Gm-Message-State: AOJu0YwRTqDw3YrpOMdUOy64+R+MsgS82Jr9iEXUsXgQHBIhGdSrmJXQ
- iwNS3iKGWH113UCztl93PR0=
-X-Google-Smtp-Source: AGHT+IHfLv2FTvbtP+XDfCQMq0/4gQd56gQXMbgJziOzy1KkvTPqQfj0aDzIIvyqse8I9pxQmKfFcw==
-X-Received: by 2002:a05:6512:5c3:b0:500:cb2b:8678 with SMTP id
- o3-20020a05651205c300b00500cb2b8678mr5314280lfo.40.1698049383921; 
- Mon, 23 Oct 2023 01:23:03 -0700 (PDT)
-Received: from eldfell ([194.136.85.206]) by smtp.gmail.com with ESMTPSA id
- u25-20020ac258d9000000b004f85d80ca64sm1608145lfo.221.2023.10.23.01.23.03
+ d=1e100.net; s=20230601; t=1698096580; x=1698701380;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=F1k2Vg92RJrxv+gYLNepXp/tJyAR04nx8wa9wG6p0is=;
+ b=d2tjlbG9M/CDIirz4Bi0sd/4oBWKV/owbuYlkGPKQmDxN8V2jfCWdt2IeWROlH9E3W
+ yPsCgHu/Uq/7qFRJvDAw7DJp99l8V2dPtbn4l5Gem/gcaJre/5xH63+PyKN8+OzJHJtY
+ e+sowDrWsoEHEnCTM43uDdqJQ2tqwTHNdItANfak54kXvJ7axoq1WXjxN4ErPM3vkegt
+ X54sHMeXn+jJbRH5SlivFy5NxKgQ8GNf9HgXahUZjn7Z4kHbVN4hZAZx8Y8S8CATAhX0
+ 0erfdHd4NdJ0bTjRcTLYvRXpWpZGgdbYmVXJE87GNyu8sM0XXqa5AVNmxdP/Ws05XDB/
+ /jPw==
+X-Gm-Message-State: AOJu0YwfdA5BYiatz6JFxKYlyvcYcTDJZf9vTEEeYrF4DwULScgIti2d
+ uxVK+iiGdiCwLiC/V6caP1KKGyVZaGAvl+69A4D1GZLVthXDfsAlCZy8BhPdIR7R4KsgECA+nH9
+ 1f5SSHGtIoUeLn+MdH0Hmw+JwaWwxgEQ=
+X-Received: by 2002:a05:600c:45ca:b0:408:575e:f24f with SMTP id
+ s10-20020a05600c45ca00b00408575ef24fmr5647880wmo.28.1698096580704; 
+ Mon, 23 Oct 2023 14:29:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEwIqmyWxHtLCEV9sJcM7Mm48Qpb+Y1PSoNkRJSeRh4CaGlNviwDWwltxau6u5GNETKD69b9g==
+X-Received: by 2002:a05:600c:45ca:b0:408:575e:f24f with SMTP id
+ s10-20020a05600c45ca00b00408575ef24fmr5647840wmo.28.1698096580275; 
+ Mon, 23 Oct 2023 14:29:40 -0700 (PDT)
+Received: from localhost (205.pool92-176-231.dynamic.orange.es.
+ [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
+ e7-20020a05600c218700b00407efbc4361sm14963606wme.9.2023.10.23.14.29.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 01:23:03 -0700 (PDT)
-Date: Mon, 23 Oct 2023 11:23:00 +0300
-From: Pekka Paalanen <ppaalanen@gmail.com>
-To: Albert Esteve <aesteve@redhat.com>
-Message-ID: <20231023112300.732e18fa@eldfell>
+ Mon, 23 Oct 2023 14:29:39 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Albert Esteve <aesteve@redhat.com>, qemu-devel@nongnu.org
 In-Reply-To: <20231023074613.41327-10-aesteve@redhat.com>
 References: <20231023074613.41327-1-aesteve@redhat.com>
  <20231023074613.41327-10-aesteve@redhat.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+Date: Mon, 23 Oct 2023 23:29:39 +0200
+Message-ID: <87h6mh10zg.fsf@minerva.mail-host-address-is-not-set>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/BqH+LEjYZrs8=tT7kXjXoDd";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-X-Mailman-Approved-At: Mon, 23 Oct 2023 12:37:39 +0000
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 Subject: Re: [Spice-devel] [PATCH v6 9/9] drm: Introduce documentation for
  hotspot properties
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -73,16 +80,16 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-doc@vger.kernel.org, qemu-devel@nongnu.org, banackm@vmware.com,
+Cc: linux-doc@vger.kernel.org, banackm@vmware.com,
  virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
  mombasawalam@vmware.com, iforbes@vmware.com, Jonathan Corbet <corbet@lwn.net>,
- javierm@redhat.com,
  VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
  David Airlie <airlied@redhat.com>, Chia-I Wu <olvaffe@gmail.com>,
  Daniel Vetter <daniel@ffwll.ch>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
- dri-devel@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
+ ppaalanen@gmail.com, dri-devel@lists.freedesktop.org,
+ spice-devel@lists.freedesktop.org,
  Gurchetan Singh <gurchetansingh@chromium.org>,
  Matt Roper <matthew.d.roper@intel.com>, contact@emersion.fr,
  linux-kernel@vger.kernel.org, krastevm@vmware.com,
@@ -91,185 +98,33 @@ Cc: linux-doc@vger.kernel.org, qemu-devel@nongnu.org, banackm@vmware.com,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---Sig_/BqH+LEjYZrs8=tT7kXjXoDd
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 23 Oct 2023 09:46:13 +0200
-Albert Esteve <aesteve@redhat.com> wrote:
+Albert Esteve <aesteve@redhat.com> writes:
 
 > From: Michael Banack <banackm@vmware.com>
->=20
+>
 > To clarify the intent and reasoning behind the hotspot properties
 > introduce userspace documentation that goes over cursor handling
 > in para-virtualized environments.
->=20
+>
 > The documentation is generic enough to not special case for any
 > specific hypervisor and should apply equally to all.
->=20
+>
 > Signed-off-by: Zack Rusin <zackr@vmware.com>
 
+The author is Michael Banack but it's missing a SoB from them.
+I don't think there's a need to resend for this, can be added
+when applying. But either Michael or Zack should confirm that
+is the correct thing to do for this patch.
 
-Hi,
+The doc itself looks great to me and it clarifies a lot about
+cursor hotspots.
 
-the below doc text:
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
-Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+-- 
+Best regards,
 
+Javier Martinez Canillas
+Core Platforms
+Red Hat
 
-Thanks,
-pq
-
-
-> ---
->  Documentation/gpu/drm-kms.rst |  6 ++++
->  drivers/gpu/drm/drm_plane.c   | 58 ++++++++++++++++++++++++++++++++++-
->  2 files changed, 63 insertions(+), 1 deletion(-)
->=20
-> diff --git a/Documentation/gpu/drm-kms.rst b/Documentation/gpu/drm-kms.rst
-> index a0c83fc481264..158cdcc9351f9 100644
-> --- a/Documentation/gpu/drm-kms.rst
-> +++ b/Documentation/gpu/drm-kms.rst
-> @@ -577,6 +577,12 @@ Variable Refresh Properties
->  .. kernel-doc:: drivers/gpu/drm/drm_connector.c
->     :doc: Variable refresh properties
-> =20
-> +Cursor Hotspot Properties
-> +---------------------------
-> +
-> +.. kernel-doc:: drivers/gpu/drm/drm_plane.c
-> +   :doc: hotspot properties
-> +
->  Existing KMS Properties
->  -----------------------
-> =20
-> diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
-> index 1dc00ad4c33c3..f3f2eae83cca8 100644
-> --- a/drivers/gpu/drm/drm_plane.c
-> +++ b/drivers/gpu/drm/drm_plane.c
-> @@ -230,6 +230,61 @@ static int create_in_format_blob(struct drm_device *=
-dev, struct drm_plane *plane
->  	return 0;
->  }
-> =20
-> +/**
-> + * DOC: hotspot properties
-> + *
-> + * HOTSPOT_X: property to set mouse hotspot x offset.
-> + * HOTSPOT_Y: property to set mouse hotspot y offset.
-> + *
-> + * When the plane is being used as a cursor image to display a mouse poi=
-nter,
-> + * the "hotspot" is the offset within the cursor image where mouse events
-> + * are expected to go.
-> + *
-> + * Positive values move the hotspot from the top-left corner of the curs=
-or
-> + * plane towards the right and bottom.
-> + *
-> + * Most display drivers do not need this information because the
-> + * hotspot is not actually connected to anything visible on screen.
-> + * However, this is necessary for display drivers like the para-virtuali=
-zed
-> + * drivers (eg qxl, vbox, virtio, vmwgfx), that are attached to a user c=
-onsole
-> + * with a mouse pointer.  Since these consoles are often being remoted o=
-ver a
-> + * network, they would otherwise have to wait to display the pointer mov=
-ement to
-> + * the user until a full network round-trip has occurred.  New mouse eve=
-nts have
-> + * to be sent from the user's console, over the network to the virtual i=
-nput
-> + * devices, forwarded to the desktop for processing, and then the cursor=
- plane's
-> + * position can be updated and sent back to the user's console over the =
-network.
-> + * Instead, with the hotspot information, the console can anticipate the=
- new
-> + * location, and draw the mouse cursor there before the confirmation com=
-es in.
-> + * To do that correctly, the user's console must be able predict how the
-> + * desktop will process mouse events, which normally requires the deskto=
-p's
-> + * mouse topology information, ie where each CRTC sits in the mouse coor=
-dinate
-> + * space.  This is typically sent to the para-virtualized drivers using =
-some
-> + * driver-specific method, and the driver then forwards it to the consol=
-e by
-> + * way of the virtual display device or hypervisor.
-> + *
-> + * The assumption is generally made that there is only one cursor plane =
-being
-> + * used this way at a time, and that the desktop is feeding all mouse de=
-vices
-> + * into the same global pointer.  Para-virtualized drivers that require =
-this
-> + * should only be exposing a single cursor plane, or find some other way
-> + * to coordinate with a userspace desktop that supports multiple pointer=
-s.
-> + * If the hotspot properties are set, the cursor plane is therefore assu=
-med to be
-> + * used only for displaying a mouse cursor image, and the position of th=
-e combined
-> + * cursor plane + offset can therefore be used for coordinating with inp=
-ut from a
-> + * mouse device.
-> + *
-> + * The cursor will then be drawn either at the location of the plane in =
-the CRTC
-> + * console, or as a free-floating cursor plane on the user's console
-> + * corresponding to their desktop mouse position.
-> + *
-> + * DRM clients which would like to work correctly on drivers which expose
-> + * hotspot properties should advertise DRM_CLIENT_CAP_CURSOR_PLANE_HOTSP=
-OT.
-> + * Setting this property on drivers which do not special case
-> + * cursor planes will return EOPNOTSUPP, which can be used by userspace =
-to
-> + * gauge requirements of the hardware/drivers they're running on. Advert=
-ising
-> + * DRM_CLIENT_CAP_CURSOR_PLANE_HOTSPOT implies that the userspace client=
- will be
-> + * correctly setting the hotspot properties.
-> + */
-> +
->  /**
->   * drm_plane_create_hotspot_properties - creates the mouse hotspot
->   * properties and attaches them to the given cursor plane
-> @@ -237,7 +292,8 @@ static int create_in_format_blob(struct drm_device *d=
-ev, struct drm_plane *plane
->   * @plane: drm cursor plane
->   *
->   * This function enables the mouse hotspot property on a given
-> - * cursor plane.
-> + * cursor plane. Look at the documentation for hotspot properties
-> + * to get a better understanding for what they're used for.
->   *
->   * RETURNS:
->   * Zero for success or -errno
-
-
---Sig_/BqH+LEjYZrs8=tT7kXjXoDd
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmU2LWQACgkQI1/ltBGq
-qqc9jg/+O49j7A2awfs+aCc+PJsIXZzo6/vpt0Axrl++SGV6BNXjwSGNNGddCUQE
-rZNaWJK3+JBbIqpk9fGz+kNUM1G3UJ5HCveIbl1lCetewGdeJGumMV7gB6/VnK32
-zPDon8yBLibA0vHIZHeVp/7ELBNWzPy4XSt3FyOE0dLCen7xukneyZy8bCPpXfR3
-bXr7kJV/N2XgZl7MgLRNOMnj/okbJ4dWzD4qUR7Pe8EC0zZ/pBlk7gMfQWeNk1Yl
-UmFUix99PDTf3x8BaI22sD9hUg7qkSp1Tf4GtndKyrG5atgYJ61t+1HUAEg8oCJ4
-eMH5umZhmm956T7/q7YTv+s3KkyOADQ1tK1ePOSB6I3uM1FF/LqnpzxFQgu11z3O
-cl5q1crqZORm+3Sa6X9J7EAFNZzW8+9WD+qgQeuc1o2/mFplmL/fzs/OzkzhTCik
-cZVkAFnIykWSoZSka9eG/Xt205wTTBgc0wgryr5OpRr50DCdLr+FfklNM4YLmcqU
-ReoL1MWdDPcDtj7t6eaYXTa67kSQaSO/JSbz60cQ9Tt+Rhod6K6MtLFRyTIvFTYj
-rISYdRD8Q4Pr8I96vlFXMUsy5hs8amyx5yrWHPWMp+7arZxUbSwupaaRFmTtAiSr
-pJCgOmQFFHP+nAbRemAx1+TfNde21rdHuu4ud5Nq3p4ZnzY/taQ=
-=75Es
------END PGP SIGNATURE-----
-
---Sig_/BqH+LEjYZrs8=tT7kXjXoDd--
