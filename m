@@ -2,61 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF79B7CBFDC
-	for <lists+spice-devel@lfdr.de>; Tue, 17 Oct 2023 11:48:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 564677D36F2
+	for <lists+spice-devel@lfdr.de>; Mon, 23 Oct 2023 14:37:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B78310E2B5;
-	Tue, 17 Oct 2023 09:48:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 50EA010E1D9;
+	Mon, 23 Oct 2023 12:37:46 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 911F310E2B5
- for <spice-devel@lists.freedesktop.org>; Tue, 17 Oct 2023 09:48:26 +0000 (UTC)
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-57ad95c555eso3128995eaf.3
- for <spice-devel@lists.freedesktop.org>; Tue, 17 Oct 2023 02:48:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697536105; x=1698140905; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AwFM8kFXwCoDVg2FYn5SMAFJymQPyVIeO8MWsxVfwoo=;
- b=Em/t7/f8v9f23OrDJtSJ6HZHd2+rlz7XbN+kq+nC6u4RJnfHNgfzFIcjMn/gAQ61/E
- CbPtcl+HQMXXQ8ReRE99tzxUiMCL+HVW9JQMgRNm5jGHm2Ij2y4bHEJvBDJpQSBxk5sI
- IDD/zETQa6xyCHLVyuxTjhTFx4BLKfe+5GtZxRjBKa1m3EpSw/BiLgEG7/gOuRznhPKl
- mCREGFwVd+x2Jjio1LB3etfZxcFoOPcVEbmnflQTmyr684WwJDZflhrf+iVKwVJhRItd
- DhmoF1AEtrrs51k9jDyiSpxgbksH0fNFZXoPLx7AFNtbmvjd30EDZjTfHIpv/rBgeMHp
- l9BQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697536105; x=1698140905;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AwFM8kFXwCoDVg2FYn5SMAFJymQPyVIeO8MWsxVfwoo=;
- b=q0lAtEi475ryPeTMR9ATYGwJKkY6258K96lGF/EkAmMO3Kr0E439u+0s2fTNrubxHV
- 3QVI9/Uz6cWr2RCNL5mwkRdCGrAoT/TrmI3mxTskvUhYI2TICkz2FRvI6M90P5G873N/
- NcoYSeFu5EeAYy4pl1Mny2xipcXqyHBjTzyntdoNNYcb/xiRNCKwxglaNn1DUOW8M4Ce
- 7Qh8/WYNMtubDG7QUKzdXaXJCXAFt91cKKLH9CwteaDNhSZBzayQXG1YF3/iXzU+9FYe
- LDcQvptjIRGIvwC4z77LqVkEfDF0T4PhenIAN2jUcV9baPmFAF9wsiPRCnOAdW49b0W+
- /FDA==
-X-Gm-Message-State: AOJu0Yx1O7H9GURoXJzgBCEx8NdRi3jB16cg1vHYDH2VG7weofZ4aHhY
- +qIu6P3a1b3gYZMCMI/Wn36HWmwYGbeitMt9Wvv3n20X
-X-Google-Smtp-Source: AGHT+IHO0bY2NuFW5unuegmDWhfRalajgrV00f9ZBGuyODsCZQd9DyorKWmmxgR9gc1MML3a7Csm+AM9uzlIY507QZA=
-X-Received: by 2002:a05:6820:2716:b0:581:dd3e:dbce with SMTP id
- db22-20020a056820271600b00581dd3edbcemr659837oob.0.1697536105639; Tue, 17 Oct
- 2023 02:48:25 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BAAB010E159
+ for <spice-devel@lists.freedesktop.org>; Mon, 23 Oct 2023 07:46:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1698047194;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lNB6/ff+rLs+rmxProTi0SrXX83HkuqfjEdd5Y/zzwM=;
+ b=axkMRVU2hGVRxDNnmFiRnl7BTswV444eMtSXdXupyXwVhxWJMojr/CwZN2clKib8iqaevS
+ 9lUMJ1rOtV5kLS7HNWwkIszxbof8Xde0kxewK/+YE+sWJtKo2rv+uAjlCnOxwtcVyGqrgq
+ i3LoXhsONZL7Aad5Mn+Br3CuiF1tjK4=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-48-NDkQTlfHMPSrvp9XuJ_SMg-1; Mon, 23 Oct 2023 03:46:21 -0400
+X-MC-Unique: NDkQTlfHMPSrvp9XuJ_SMg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 09E4F88B767;
+ Mon, 23 Oct 2023 07:46:20 +0000 (UTC)
+Received: from fedora.redhat.com (unknown [10.45.225.243])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D5A318CEF;
+ Mon, 23 Oct 2023 07:46:14 +0000 (UTC)
+From: Albert Esteve <aesteve@redhat.com>
+To: qemu-devel@nongnu.org
+Date: Mon, 23 Oct 2023 09:46:04 +0200
+Message-ID: <20231023074613.41327-1-aesteve@redhat.com>
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-References: <20231017072312.4013460-1-vivek.kasireddy@intel.com>
-In-Reply-To: <20231017072312.4013460-1-vivek.kasireddy@intel.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 17 Oct 2023 10:48:14 +0100
-Message-ID: <CAHt6W4c16AV2qzNpdw2QKFsx7LgNbt0sEYDMtJ3xD5Po8z8T5w@mail.gmail.com>
-To: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Spice-devel] [PATCH v3] common: Add a udev helper to identify
- GPU Vendor (v3)
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
+X-Mailman-Approved-At: Mon, 23 Oct 2023 12:37:37 +0000
+Subject: [Spice-devel] [PATCH v6 0/9] Fix cursor planes with virtualized
+ drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,61 +58,102 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dongwon Kim <dongwon.kim@intel.com>,
- Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
- Gerd Hoffmann <kraxel@redhat.com>, spice-devel@lists.freedesktop.org
+Cc: Albert Esteve <aesteve@redhat.com>, linux-doc@vger.kernel.org,
+ banackm@vmware.com, virtualization@lists.linux-foundation.org,
+ Gerd Hoffmann <kraxel@redhat.com>, mombasawalam@vmware.com, iforbes@vmware.com,
+ Jonathan Corbet <corbet@lwn.net>, javierm@redhat.com,
+ VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+ David Airlie <airlied@redhat.com>, Chia-I Wu <olvaffe@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
+ ppaalanen@gmail.com, dri-devel@lists.freedesktop.org,
+ spice-devel@lists.freedesktop.org,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Matt Roper <matthew.d.roper@intel.com>, contact@emersion.fr,
+ linux-kernel@vger.kernel.org, krastevm@vmware.com,
+ Rob Clark <robdclark@gmail.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ zackr@vmware.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno mar 17 ott 2023 alle ore 08:43 Vivek Kasireddy
-<vivek.kasireddy@intel.com> ha scritto:
->
-> Given that libudev is widely available on many Linux distros, we
-> can use the relevant APIs to iterate over all the devices associated
-> with the drm subsystem to figure out if a specific vendor GPU
-> is available or not.
->
-> This capability (identifying GPU Vendor) is useful to determine
-> whether to launch Gstreamer pipeline using h/w accelerated
-> plugins. On systems where libudev is not available (Windows,
-> MacOS, etc) we'd have to make this determination based on the
-> availability of the relevant plugins in the Gstreamer registry.
->
-> v2: (Frediano)
-> - Add autoconf support
-> - Add license text
-> - Add pragma once and SPICE_BEGIN/END_DECLS to the header
-> - Check the vendor id udev attribute of the pci device to
->   determine a vendor GPU instead of checking the driver name
->
-> v3: (fixups by Frediano)
-> - Fix broken autoconf support added in v2
-> - Fix compiler error on systems with no libudev support
-> - Return VENDOR_GPU_UNKNOWN if we cannot create udev instance
-> - Make libudev dependency optional
-> - Change the type of gpu_vendor from long to int as PCI vendor IDs
->   are defined as 16-bit unsigned int
->
-> Cc: Frediano Ziglio <freddy77@gmail.com>
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> Cc: Dongwon Kim <dongwon.kim@intel.com>
-> Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
-> Cc: Jin Chung Teng <jin.chung.teng@intel.com>
-> Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> ---
->  common/Makefile.am |  3 ++
->  common/meson.build |  2 ++
->  common/udev.c      | 78 ++++++++++++++++++++++++++++++++++++++++++++++
->  common/udev.h      | 33 ++++++++++++++++++++
->  configure.ac       |  1 +
->  m4/spice-deps.m4   | 12 +++++++
->  meson.build        |  7 +++++
->  7 files changed, 136 insertions(+)
->  create mode 100644 common/udev.c
->  create mode 100644 common/udev.h
->
+v6: Shift DRIVER_CURSOR_HOTSPOT flag bit to BIT(9), since BIT(8)
+was already taken by DRIVER_GEM_GPUVA.
 
-Merged. Minor space change.
+v5: Add a change with documentation from Michael, based on his discussion
+with Pekka and bump the kernel version DRM_CLIENT_CAP_CURSOR_PLANE_HOTSPOT
+might be introduced with to 6.6.
 
-Frediano
+v4: Make drm_plane_create_hotspot_properties static, rename
+DRM_CLIENT_CAP_VIRTUALIZED_CURSOR_PLANE to DRM_CLIENT_CAP_CURSOR_PLANE_HOTSPOT
+and some minor stylistic fixes for things found by Javier and Pekka
+in v3.
+
+v3: Renames, fixes and cleanups suggested by Daniel, Simon and Pekka
+after v2. There's no major changes in functionality. Please let me know
+if I missed anything, it's been a while since v2.
+
+Virtualized drivers have had a lot of issues with cursor support on top
+of atomic modesetting. This set both fixes the long standing problems
+with atomic kms and virtualized drivers and adds code to let userspace
+use atomic kms on virtualized drivers while preserving functioning
+seamless cursors between the host and guest.
+
+The first change in the set is one that should be backported as far as
+possible, likely 5.4 stable, because earlier stable kernels do not have
+virtualbox driver. The change makes virtualized drivers stop exposing
+a cursor plane for atomic clients, this fixes mouse cursor on all well
+formed compositors which will automatically fallback to software cursor.
+
+The rest of the changes until the last one ports the legacy hotspot code
+to atomic plane properties.
+
+Finally the last change introduces userspace API to let userspace
+clients advertise the fact that they are aware of additional restrictions
+placed upon the cursor plane by virtualized drivers and lets them use
+atomic kms with virtualized drivers (the clients are expected to set
+hotspots correctly when advertising support for virtual cursor plane).
+
+Link to the IGT test covering this patch (already merged):
+https://lists.freedesktop.org/archives/igt-dev/2023-July/058427.html
+
+Mutter patch:
+https://lists.freedesktop.org/archives/igt-dev/2023-July/058427.html
+
+Michael Banack (1):
+  drm: Introduce documentation for hotspot properties
+
+Zack Rusin (8):
+  drm: Disable the cursor plane on atomic contexts with virtualized
+    drivers
+  drm/atomic: Add support for mouse hotspots
+  drm/vmwgfx: Use the hotspot properties from cursor planes
+  drm/qxl: Use the hotspot properties from cursor planes
+  drm/vboxvideo: Use the hotspot properties from cursor planes
+  drm/virtio: Use the hotspot properties from cursor planes
+  drm: Remove legacy cursor hotspot code
+  drm: Introduce DRM_CLIENT_CAP_CURSOR_PLANE_HOTSPOT
+
+ Documentation/gpu/drm-kms.rst             |   6 ++
+ drivers/gpu/drm/drm_atomic_state_helper.c |  14 +++
+ drivers/gpu/drm/drm_atomic_uapi.c         |  20 ++++
+ drivers/gpu/drm/drm_ioctl.c               |   9 ++
+ drivers/gpu/drm/drm_plane.c               | 120 +++++++++++++++++++++-
+ drivers/gpu/drm/qxl/qxl_display.c         |  14 ++-
+ drivers/gpu/drm/qxl/qxl_drv.c             |   2 +-
+ drivers/gpu/drm/vboxvideo/vbox_drv.c      |   2 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c     |   4 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.c      |   2 +-
+ drivers/gpu/drm/virtio/virtgpu_plane.c    |   8 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c       |   2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.c       |   9 +-
+ include/drm/drm_drv.h                     |   9 ++
+ include/drm/drm_file.h                    |  12 +++
+ include/drm/drm_framebuffer.h             |  12 ---
+ include/drm/drm_plane.h                   |  14 +++
+ include/uapi/drm/drm.h                    |  25 +++++
+ 18 files changed, 245 insertions(+), 39 deletions(-)
+
+-- 
+2.41.0
+
