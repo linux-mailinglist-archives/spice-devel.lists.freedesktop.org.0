@@ -1,77 +1,58 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08DCA7D61B8
-	for <lists+spice-devel@lfdr.de>; Wed, 25 Oct 2023 08:36:18 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5462C7D83D8
+	for <lists+spice-devel@lfdr.de>; Thu, 26 Oct 2023 15:49:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8228210E557;
-	Wed, 25 Oct 2023 06:36:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0636A10E7E5;
+	Thu, 26 Oct 2023 13:49:25 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8B14E10E554
- for <spice-devel@lists.freedesktop.org>; Wed, 25 Oct 2023 06:36:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1698215766;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=3QCkYDGehxxNqzt09gBv9p4n2vFS1oLTgsSq6IkVxVA=;
- b=Dcn2ybq8W8kmNsiP+tdn+J0Vi4awS7uJcDQGMuUOK7bVJ3oLlxmDtajnpf4Fud1tpdsRSe
- 1aS4OnKyV+i5tnVG7AoemnVakPUoZWFLBlsGh28suQ8Rus3ZAkrcrhj+6fWaMDwWEsv40u
- +gwxq39XjYpR5B6TyKmh5r1XDt0+3zQ=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-382-BGaT4w2lMa2UhvPw37Jamw-1; Wed, 25 Oct 2023 02:36:02 -0400
-X-MC-Unique: BGaT4w2lMa2UhvPw37Jamw-1
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-32dceab634dso2356304f8f.2
- for <spice-devel@lists.freedesktop.org>; Tue, 24 Oct 2023 23:36:02 -0700 (PDT)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8C79A10E7A5
+ for <spice-devel@lists.freedesktop.org>; Thu, 26 Oct 2023 10:39:00 +0000 (UTC)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-778a20df8c3so58846785a.3
+ for <spice-devel@lists.freedesktop.org>; Thu, 26 Oct 2023 03:39:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=birt-eus.20230601.gappssmtp.com; s=20230601; t=1698316739; x=1698921539;
+ darn=lists.freedesktop.org; 
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=PgP1xKWEVB0j1sOjMcQBsVp1vCiTieOdstl2MitqfXc=;
+ b=pMm4x2XcBbcwK0F22U28vYV6qjxLQnQ0cpInrF9xtTbqLm/ZSc/BCRlkHCOLP40k9h
+ dO4Q/snxEw5K63qkpwIVFx8G+36b0o/chpLTxYJxY3wiKMwFa7B9gkaZDskf0VacavTF
+ RJWwthhYXiVsMfUkPt9Nk7HTNA+Qc79hcgDjGctByvR+IAoWvkbBLZNJJ0sixecNkA1L
+ Qz8u5LOjvNM5t7bWyYPwahIyMz9nRz0Na2L08+lyjIClY9ndrtdIow8b51bT4po3W8Cd
+ Hiskj5qMoVraJE2Y/D1HAglgW5XH3/rrg6frbBXa5WdsWF7uaumpsoePwdgTXLbyAV4c
+ XdIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698215761; x=1698820561;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3QCkYDGehxxNqzt09gBv9p4n2vFS1oLTgsSq6IkVxVA=;
- b=JOy8IVk67CfQEMUIICsOnr30PR+cMWAxMOpXxKv9puxzP2MXPxD0PY1NSY+EGbQM4q
- VHUiKCGSgXgqB0NmvZbUINFFiBBpJndt1wdNf6OTIPAw3CI58Ws0f/b1uHWSigkR12Gi
- upxPIuIblFkPB/0WYBzAvn1x3n96pZ7jtGN1sR/Bh/YwlMnmHG9hPPPUYZIpen2F6xLa
- tjjjskeI2EZUMVisVFOIxme1V1/CHtU5hDo4vadb7QxeU5e4TLAw/Bcn+uAhPY2Gymym
- 1YrMJ7WOr6L1QkboX8knl/m/h66p5Q2BC/ioSgjMxhJMX+zBQn+blix8nWDme/3Eq3Mj
- Bj7w==
-X-Gm-Message-State: AOJu0YyDxwsodUETStsdp3Z7n1ZKSOl9cFI3yFgD/bKVJGyYz3DTyC0j
- v/gtggoPeZ3O4/M+AXYGFxdRL8Nb+g6zNdtwb0LC43RqQskM2XMKVwKCT1tvAyOChkwAh+TrkRk
- r9PhMvhoI2xdGxR2gdZ0Pbd9xjQ0RJgM=
-X-Received: by 2002:adf:f64a:0:b0:32d:a49c:dfd0 with SMTP id
- x10-20020adff64a000000b0032da49cdfd0mr9244587wrp.64.1698215761758; 
- Tue, 24 Oct 2023 23:36:01 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF5pjp6+UGcNGf+pR7eCaZquF6TdQK9ic+pGsGfXKq7QOOQ0Jp5pQG5o2Uq/SY5UVuq/3Y74g==
-X-Received: by 2002:adf:f64a:0:b0:32d:a49c:dfd0 with SMTP id
- x10-20020adff64a000000b0032da49cdfd0mr9244562wrp.64.1698215761437; 
- Tue, 24 Oct 2023 23:36:01 -0700 (PDT)
-Received: from localhost (205.pool92-176-231.dynamic.orange.es.
- [92.176.231.205]) by smtp.gmail.com with ESMTPSA id
- t14-20020a5d534e000000b0032710f5584fsm11318664wrv.25.2023.10.24.23.36.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 23:36:00 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Michael Banack <banackm@vmware.com>, Albert Esteve <aesteve@redhat.com>,
- qemu-devel@nongnu.org
-In-Reply-To: <1bbee4ad-79fe-4968-0edc-3eee34ad5972@vmware.com>
-References: <20231023074613.41327-1-aesteve@redhat.com>
- <20231023074613.41327-10-aesteve@redhat.com>
- <87h6mh10zg.fsf@minerva.mail-host-address-is-not-set>
- <1bbee4ad-79fe-4968-0edc-3eee34ad5972@vmware.com>
-Date: Wed, 25 Oct 2023 08:36:00 +0200
-Message-ID: <87a5s79pkf.fsf@minerva.mail-host-address-is-not-set>
+ d=1e100.net; s=20230601; t=1698316739; x=1698921539;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PgP1xKWEVB0j1sOjMcQBsVp1vCiTieOdstl2MitqfXc=;
+ b=RGbckD2eFe1zzV1TTCxefK3DLnzv2te22exRporiCqviuZ4eeBw5QzTS2qirfOsxCX
+ +tAS9QLO/RuRwOmjLVJhKWdbf19oA77SnYbSpb9C3IRx39zm7x14X75CRiYIyQC+1qZR
+ GOXGE4OfC4ZiLgv5OylQQ0lofUBsmBNhq41lAogiP/RhnxkDGajlUN5mA0lrAczT6ZNx
+ pcxJigqc7UwOb9Qx+4Cd4Nob7ZLdz3Rcao58l7faHZDZW7/TuRp/ttAhzNBALyGe6MoE
+ Ps6AdOyAhLplpwCnz/UQ2W2IhNLN9fkvsplGyYhjdHXyGjyAdzmTEYUS5Oi8oSo2R3i1
+ m+ow==
+X-Gm-Message-State: AOJu0YwZyKouzGo3PEi7816gKsCVUVvtIAl5ykbMRD3SQL4t5jt1gsLT
+ ECeBoYZyZbG3iLjLrOxlgPF984gZwSCYhK5VaMlVQfh/RaRPecjB
+X-Google-Smtp-Source: AGHT+IEDPL/LRpMBukWZYf44jvjwmG421Kiq6BOyct/SpdKkPGs7aWe+uWzpZBcR45AXLyogfxpLfRVQmUZbw1ksOu0=
+X-Received: by 2002:a05:620a:4155:b0:778:9be8:274e with SMTP id
+ k21-20020a05620a415500b007789be8274emr21856439qko.1.1698316739213; Thu, 26
+ Oct 2023 03:38:59 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
-Subject: Re: [Spice-devel] [PATCH v6 9/9] drm: Introduce documentation for
- hotspot properties
+From: =?UTF-8?Q?Mikel_Goicoechea_Mart=C3=ADnez?= <migoicoechea@birt.eus>
+Date: Thu, 26 Oct 2023 12:38:49 +0200
+Message-ID: <CABQP8gDsGu_aXc1+=p49rcktHu8MifCijLvu70xrnMvRT4Akog@mail.gmail.com>
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000f5135806089c2d3b"
+X-Mailman-Approved-At: Thu, 26 Oct 2023 13:49:22 +0000
+Subject: [Spice-devel] Bug with MINT Distros
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,38 +64,33 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Maxime Ripard <mripard@kernel.org>,
- Gurchetan Singh <gurchetansingh@chromium.org>, krastevm@vmware.com,
- linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Hans de Goede <hdegoede@redhat.com>,
- ppaalanen@gmail.com,
- VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>,
- spice-devel@lists.freedesktop.org, David Airlie <airlied@redhat.com>,
- iforbes@vmware.com, Matt Roper <matthew.d.roper@intel.com>,
- mombasawalam@vmware.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Michael Banack <banackm@vmware.com> writes:
+--000000000000f5135806089c2d3b
+Content-Type: text/plain; charset="UTF-8"
 
-Hello Michael,
+Hello,
 
-> Yes, that patch should be:
->
-> Signed-off-by: Michael Banack <banackm@vmware.com>
->
+I've experimented a bug when working with Mint distributions. When I open
+the VM in Full Screen the mouse dissapears and I can't see where the
+pointer is.
 
-Great, thanks for the confirmation.
+Do you know something about this bug? Are you going to release a new
+version of spice viewer for windows 11?
 
-> --Michael Banack
->
+Thank you so much in advance,
+Regards
 
--- 
-Best regards,
+--000000000000f5135806089c2d3b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+<div dir=3D"ltr">Hello,<div><br></div><div>I&#39;ve experimented a bug when=
+ working with Mint distributions. When I open the VM in Full Screen the mou=
+se dissapears and I can&#39;t see where the pointer is.</div><div><br></div=
+><div>Do you know something about this bug? Are you going to release a new =
+version of spice viewer for windows 11?=C2=A0<br><br>Thank you so much in a=
+dvance,</div><div>Regards</div></div>
 
+--000000000000f5135806089c2d3b--
