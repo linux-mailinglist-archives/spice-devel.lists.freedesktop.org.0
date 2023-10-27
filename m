@@ -2,57 +2,45 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5462C7D83D8
-	for <lists+spice-devel@lfdr.de>; Thu, 26 Oct 2023 15:49:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCA807D8D58
+	for <lists+spice-devel@lfdr.de>; Fri, 27 Oct 2023 05:14:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0636A10E7E5;
-	Thu, 26 Oct 2023 13:49:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC26910E90C;
+	Fri, 27 Oct 2023 03:13:59 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C79A10E7A5
- for <spice-devel@lists.freedesktop.org>; Thu, 26 Oct 2023 10:39:00 +0000 (UTC)
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-778a20df8c3so58846785a.3
- for <spice-devel@lists.freedesktop.org>; Thu, 26 Oct 2023 03:39:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=birt-eus.20230601.gappssmtp.com; s=20230601; t=1698316739; x=1698921539;
- darn=lists.freedesktop.org; 
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=PgP1xKWEVB0j1sOjMcQBsVp1vCiTieOdstl2MitqfXc=;
- b=pMm4x2XcBbcwK0F22U28vYV6qjxLQnQ0cpInrF9xtTbqLm/ZSc/BCRlkHCOLP40k9h
- dO4Q/snxEw5K63qkpwIVFx8G+36b0o/chpLTxYJxY3wiKMwFa7B9gkaZDskf0VacavTF
- RJWwthhYXiVsMfUkPt9Nk7HTNA+Qc79hcgDjGctByvR+IAoWvkbBLZNJJ0sixecNkA1L
- Qz8u5LOjvNM5t7bWyYPwahIyMz9nRz0Na2L08+lyjIClY9ndrtdIow8b51bT4po3W8Cd
- Hiskj5qMoVraJE2Y/D1HAglgW5XH3/rrg6frbBXa5WdsWF7uaumpsoePwdgTXLbyAV4c
- XdIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698316739; x=1698921539;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=PgP1xKWEVB0j1sOjMcQBsVp1vCiTieOdstl2MitqfXc=;
- b=RGbckD2eFe1zzV1TTCxefK3DLnzv2te22exRporiCqviuZ4eeBw5QzTS2qirfOsxCX
- +tAS9QLO/RuRwOmjLVJhKWdbf19oA77SnYbSpb9C3IRx39zm7x14X75CRiYIyQC+1qZR
- GOXGE4OfC4ZiLgv5OylQQ0lofUBsmBNhq41lAogiP/RhnxkDGajlUN5mA0lrAczT6ZNx
- pcxJigqc7UwOb9Qx+4Cd4Nob7ZLdz3Rcao58l7faHZDZW7/TuRp/ttAhzNBALyGe6MoE
- Ps6AdOyAhLplpwCnz/UQ2W2IhNLN9fkvsplGyYhjdHXyGjyAdzmTEYUS5Oi8oSo2R3i1
- m+ow==
-X-Gm-Message-State: AOJu0YwZyKouzGo3PEi7816gKsCVUVvtIAl5ykbMRD3SQL4t5jt1gsLT
- ECeBoYZyZbG3iLjLrOxlgPF984gZwSCYhK5VaMlVQfh/RaRPecjB
-X-Google-Smtp-Source: AGHT+IEDPL/LRpMBukWZYf44jvjwmG421Kiq6BOyct/SpdKkPGs7aWe+uWzpZBcR45AXLyogfxpLfRVQmUZbw1ksOu0=
-X-Received: by 2002:a05:620a:4155:b0:778:9be8:274e with SMTP id
- k21-20020a05620a415500b007789be8274emr21856439qko.1.1698316739213; Thu, 26
- Oct 2023 03:38:59 -0700 (PDT)
-MIME-Version: 1.0
-From: =?UTF-8?Q?Mikel_Goicoechea_Mart=C3=ADnez?= <migoicoechea@birt.eus>
-Date: Thu, 26 Oct 2023 12:38:49 +0200
-Message-ID: <CABQP8gDsGu_aXc1+=p49rcktHu8MifCijLvu70xrnMvRT4Akog@mail.gmail.com>
+X-Greylist: delayed 903 seconds by postgrey-1.36 at gabe;
+ Fri, 27 Oct 2023 03:09:14 UTC
+Received: from m139.mail.163.com (m139.mail.163.com [220.181.13.9])
+ by gabe.freedesktop.org (Postfix) with ESMTP id D570710E90A
+ for <spice-devel@lists.freedesktop.org>; Fri, 27 Oct 2023 03:09:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=gPTArahNPirO8z+hxoH3hZCf5dFfpMjfsYFDbuk/iTo=; b=W
+ 1jFeqMLLDRYqtNgF31XKJzGsxRVTRNIEHjT+wpWPy4vKLdFPs/hOsRrW1P+2y4/t
+ FFiF2gb8f4bQ7bm2vJagPm6yeA/0wOvyapCrCabeu637V5synKgI+JOi5lDjIvE9
+ 83SVQh9V4qbjFXKlS2W3TFbcYLj9CNGdm2DV/FdzMw=
+Received: from 13883362265$163.com ( [183.17.229.100] ) by
+ ajax-webmail-wmsvr9 (Coremail) ; Fri, 27 Oct 2023 10:54:05 +0800 (CST)
+X-Originating-IP: [183.17.229.100]
+Date: Fri, 27 Oct 2023 10:54:05 +0800 (CST)
+From: hjq <13883362265@163.com>
 To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="000000000000f5135806089c2d3b"
-X-Mailman-Approved-At: Thu, 26 Oct 2023 13:49:22 +0000
-Subject: [Spice-devel] Bug with MINT Distros
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
+ Copyright (c) 2002-2023 www.mailtech.cn 163com
+X-NTES-SC: AL_QuySCv+cukov4yGRbekZk0sQgeo2XcuxufUm1YZQNps0vCnu5AkyXFVqM0bXz/idKiCtmjKMXgRz6NZxQ5NKdZ1xJduVUkznq2bcXRmWH1hF
+Content-Type: multipart/alternative; 
+ boundary="----=_Part_29285_1055920365.1698375245200"
+MIME-Version: 1.0
+Message-ID: <24c02d14.1ef2.18b6f0d9d90.Coremail.13883362265@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: CcGowADnDxJNJjtlovwIAA--.36118W
+X-CM-SenderInfo: bprtmmattwjjiwv6il2tof0z/1tbiVh4VFFqz0SPdegACs3
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Mailman-Approved-At: Fri, 27 Oct 2023 03:13:58 +0000
+Subject: [Spice-devel] Excuse me,
+ I want to ask some question about spice-html5
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,30 +55,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000f5135806089c2d3b
-Content-Type: text/plain; charset="UTF-8"
+------=_Part_29285_1055920365.1698375245200
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
 
-Hello,
+RGVhciBTaXIvTWFkYW0sCk15IHByb2plY3QgdXNlZCBzcGljZS1odG1sNSB0byBjb25uZWN0IHRv
+IHZpcnR1YWwgbWFjaGluZS4gSSBoYXZlIGEgcXVlc3Rpb24gYW5kIEkgYW0gbG9va2luZyBmb3J3
+YXJkIHRvIHlvdXIgYW5zd2VyLgpJIHdpbGwgbWFrZSBhbiBhcHAgdGhhdCBjb25uZWN0cyB0byBh
+IHZpcnR1YWwgbWFjaGluZS4gV2hpbGUgY29ubmVjdGluZyB0byB0aGUgdmlydHVhbCBtYWNoaW5l
+LCBJIHdhbnQgdG8gY2hhbmdlIHRoZSByZXNvbHV0aW9uIG9mIHRoZSB2aXJ0dWFsIG1hY2hpbmUu
+CkNhbiB5b3UgdGVsbCBtZSBpZiBzcGljZS1odG1sNSBwcm92aWRlcyBhIGZ1bmN0aW9uIHRvIGNo
+YW5nZSB0aGUgdmlydHVhbCBtYWNoaW5lIHJlc29sdXRpb24/IChMaWtlIHRoZSBwaWN0dXJlKQoK
+Ck15IEVuZ2xpc2ggaXMgbm90IGdvb2QsIEkgd29uZGVyIGlmIHlvdSBjYW4gdW5kZXJzdGFuZCBt
+eSBxdWVzdGlvbi4gTG9va2luZyBmb3J3YXJkIHRvIHlvdXIgcmVwbHkuClRoYW5rIHlvdSE=
+------=_Part_29285_1055920365.1698375245200
+Content-Type: text/html; charset=GBK
+Content-Transfer-Encoding: base64
 
-I've experimented a bug when working with Mint distributions. When I open
-the VM in Full Screen the mouse dissapears and I can't see where the
-pointer is.
+PGRpdiBzdHlsZT0ibGluZS1oZWlnaHQ6MS43O2NvbG9yOiMwMDAwMDA7Zm9udC1zaXplOjE0cHg7
+Zm9udC1mYW1pbHk6QXJpYWwiPjxkaXYgc3R5bGU9Im1hcmdpbjowOyI+RGVhciBTaXIvTWFkYW0s
+PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjA7Ij5NeSBwcm9qZWN0IHVzZWQgc3BpY2UtaHRtbDUg
+dG8gY29ubmVjdCZuYnNwO3RvIHZpcnR1YWwgbWFjaGluZS4mbmJzcDtJIGhhdmUgYSBxdWVzdGlv
+biBhbmQgSSBhbSBsb29raW5nIGZvcndhcmQgdG8geW91ciBhbnN3ZXIuPC9kaXY+PGRpdiBzdHls
+ZT0ibWFyZ2luOjA7Ij5JIHdpbGwgbWFrZSBhbiBhcHAgdGhhdCBjb25uZWN0cyB0byBhIHZpcnR1
+YWwgbWFjaGluZS4gV2hpbGUgY29ubmVjdGluZyB0byB0aGUgdmlydHVhbCBtYWNoaW5lLCBJIHdh
+bnQgdG8gY2hhbmdlIHRoZSByZXNvbHV0aW9uIG9mIHRoZSB2aXJ0dWFsIG1hY2hpbmUuPC9kaXY+
+PGRpdiBzdHlsZT0ibWFyZ2luOjA7Ij5DYW4geW91IHRlbGwgbWUgaWYgc3BpY2UtaHRtbDUgcHJv
+dmlkZXMgYSBmdW5jdGlvbiB0byBjaGFuZ2UgdGhlIHZpcnR1YWwgbWFjaGluZSByZXNvbHV0aW9u
+PyAoTGlrZSB0aGUgcGljdHVyZSk8L2Rpdj48ZGl2IHN0eWxlPSJtYXJnaW46MDsiPjxpbWcgc3Jj
+PSJodHRwczovL3d3dy5wYXJ0aXRpb253aXphcmQuY29tL2ltYWdlcy91cGxvYWRzLzIwMTkvMDkv
+Y2hlY2stc2NyZWVuLXJlc29sdXRpb24td2luZG93cy0xMC10aHVtYm5haWwucG5nIiBhbHQ9Ikhv
+dyB0byBDaGVjayBhbmQgQ2hhbmdlIFNjcmVlbiBSZXNvbHV0aW9uIFNldHRpbmdzIGluIFdpbmRv
+d3MgMTAgLSBNaW5pVG9vbCAgUGFydGl0aW9uIFdpemFyZCI+PC9kaXY+PGRpdiBzdHlsZT0ibWFy
+Z2luOjA7Ij48YnI+PC9kaXY+PGRpdiBzdHlsZT0ibWFyZ2luOjA7Ij5NeSBFbmdsaXNoIGlzIG5v
+dCBnb29kLCBJIHdvbmRlciBpZiB5b3UgY2FuIHVuZGVyc3RhbmQgbXkgcXVlc3Rpb24uIExvb2tp
+bmcgZm9yd2FyZCB0byB5b3VyIHJlcGx5LjwvZGl2PjxkaXYgc3R5bGU9Im1hcmdpbjowOyI+VGhh
+bmsgeW91ITwvZGl2PjwvZGl2Pg==
+------=_Part_29285_1055920365.1698375245200--
 
-Do you know something about this bug? Are you going to release a new
-version of spice viewer for windows 11?
-
-Thank you so much in advance,
-Regards
-
---000000000000f5135806089c2d3b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hello,<div><br></div><div>I&#39;ve experimented a bug when=
- working with Mint distributions. When I open the VM in Full Screen the mou=
-se dissapears and I can&#39;t see where the pointer is.</div><div><br></div=
-><div>Do you know something about this bug? Are you going to release a new =
-version of spice viewer for windows 11?=C2=A0<br><br>Thank you so much in a=
-dvance,</div><div>Regards</div></div>
-
---000000000000f5135806089c2d3b--
