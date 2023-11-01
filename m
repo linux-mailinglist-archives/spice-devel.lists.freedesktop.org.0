@@ -2,60 +2,153 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0840D7DCF49
-	for <lists+spice-devel@lfdr.de>; Tue, 31 Oct 2023 15:34:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 203A27DDC4C
+	for <lists+spice-devel@lfdr.de>; Wed,  1 Nov 2023 06:27:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A60CD10E510;
-	Tue, 31 Oct 2023 14:34:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C67F910E62E;
+	Wed,  1 Nov 2023 05:27:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 25AB610E510
- for <spice-devel@lists.freedesktop.org>; Tue, 31 Oct 2023 14:34:41 +0000 (UTC)
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3b2df2fb611so3983070b6e.0
- for <spice-devel@lists.freedesktop.org>; Tue, 31 Oct 2023 07:34:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698762880; x=1699367680; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=o83aT2qV5vvGui93BsYFfy0E7/JiERlw+pkUPdck1sk=;
- b=JtGiFF1aillGzwoBywTZHbFFZgsxtaY+s8GCuBpqRlXWwGCj6TJIUrel3li8Mhf+MP
- bVlRsf6/DzE7EaONtXM3qBAEb9E231++RfFgVgM8oD0Tn3OrQ2IluzdjZo+e3z9P8nmX
- g/z1knuGAaBEB7wKhPs3wNjnQJkotZDENU78szX2dxjqJEGc1u9FG5IyfPPyUSEqW6HR
- k1NOoZdcyI8+mWxuh1vOp/qTbw2/9Cj9UPb9w35HEuWECd4KoChxJa0rmxGcG6ims1/4
- 1+Q3hB1j9nMwPNWPcw6taH2lz7eb/0i7KGFFHEvW5+mnHrEi15YuzCILmF1wx6/hlgcr
- gOeg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698762880; x=1699367680;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=o83aT2qV5vvGui93BsYFfy0E7/JiERlw+pkUPdck1sk=;
- b=qGqI21OA6rQfC7PLcMP6A8CFUCRd9+gy4x9cydtTAeZtv5nzM15dSzud7JbP0NpUOJ
- dcYhvSn8pfAMsQbXY2W7ch4xrHfLAYV+KxprPGUQcCHiIvWK6TJRTLnK4t823Tcuutt3
- 4pBEFnXoS8AEC7yEYd5kTkazuwsw6I3PNN4PLxkpLAfEaWPNU7ogDyHDAR1iPk7lh7JA
- oiEQpGhIjECawAENTDhxrFvqAQp3DsZ53qPSRA0M4/f81NBezhPa6zMmZobn2QJn+Oif
- Guk2WjmuCyLxRkY+rKSMgRza1W1FHF6DJMppBwnEK8M7l3y+4roAU3BTdV/PriTnp14t
- Q39A==
-X-Gm-Message-State: AOJu0YxNkj2ahXzQutod14e2si0V3PL29ldTsz+Omd8OrvwYlBBeEeLw
- bwFUspYQNZ6aDM7uBhghbHT4yx8BZaQdeWFaYHg=
-X-Google-Smtp-Source: AGHT+IE7cm/wVSahZYFkSBmLMt0oCZ42+FDcQVLWlXyggIg0dmwyotrngq+SQNtn8lZN/MLjzWgT8jyOqGfxZ3M885c=
-X-Received: by 2002:a05:6808:3083:b0:3b2:e5cb:8e53 with SMTP id
- bl3-20020a056808308300b003b2e5cb8e53mr16965330oib.10.1698762880265; Tue, 31
- Oct 2023 07:34:40 -0700 (PDT)
-MIME-Version: 1.0
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7188B10E048
+ for <spice-devel@lists.freedesktop.org>; Wed,  1 Nov 2023 05:27:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1698816473; x=1730352473;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=3p73NoGAnhmFLO6/ks9HIGBkIShWtPQVhQFg+f5SMWo=;
+ b=WytaxddSOx1buJ0PUjdx5LPtvdEWbZD9dzOk10dfRSlkouGOWHkSLBDp
+ 4xouz08dnto6PVfdPNsLc/MV5nixvzrmCQMAvSHQJk1E9dAFspr+M4Kho
+ J8RMW3XDD5E0bmIoYYnwXtaN/W5jtNZ+0E3ZLgQIvMicAiweXVGTRSY6s
+ dHR+KBgRi0mEsYnWgnTLDIyJT2rgOtiRedBtrS9g6lObIhWFb7O9uT422
+ nzNLx9ZeBRaXGNujyKntk7REwZI9Q49H5myY0vMUnzsO/lzRvSudysgXq
+ 7Y04cnQJgM5EgjIuA/2QjXcD88d8hA4e3amL6Dt4PwxaWdRcu+QafCKiB Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10880"; a="1281649"
+X-IronPort-AV: E=Sophos;i="6.03,267,1694761200"; 
+   d="scan'208";a="1281649"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 31 Oct 2023 22:27:52 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10880"; a="831258566"
+X-IronPort-AV: E=Sophos;i="6.03,267,1694761200"; d="scan'208";a="831258566"
+Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
+ by fmsmga004.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
+ 31 Oct 2023 22:27:51 -0700
+Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Tue, 31 Oct 2023 22:27:51 -0700
+Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Tue, 31 Oct 2023 22:27:50 -0700
+Received: from FMSEDG603.ED.cps.intel.com (10.1.192.133) by
+ fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34 via Frontend Transport; Tue, 31 Oct 2023 22:27:50 -0700
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.100)
+ by edgegateway.intel.com (192.55.55.68) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.34; Tue, 31 Oct 2023 22:27:35 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WosVRnSPPGuOhmdjRg/HUIZOV6t9Etpw+Z2F4t5WL19pAMej2PFi2+wwwVn4hiBecXDJ89Nt3yPv+qjGWnt/RBUZTFUUPL1QISKbAvO6LRpQZzeEFD8GvBgWoF19c7oTu8JRd1tYJqLmT+pYu28/Rhojdf8N418rQhhbyRA2dtGm6Ol69ClxKg50ivG5MrpDHLbUdGjpxs9dq/onvwlatEHH7e0oe08xN1TqYFnupvti62nus+jfJhldw1Dhei0lbUEU7z/xDAbFA/w7v7FPIitmhbu+Z0AfrS1wO5JT4Swzg6fNxquyUFevwkhYiBMaGU/SOzwLo0/AefOqKnEnQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3p73NoGAnhmFLO6/ks9HIGBkIShWtPQVhQFg+f5SMWo=;
+ b=k3aWNutzrBNobqYJKm5aTpMoeSD7aidWAzDKQrPlcue8KPPsXLcMaOe5jAM/GEL8PwKehPMR8YxaMjvviCqxi0DQFj7O3EitqUWJhOfQ9AiKdf1MI36EaabJmhO8wTXDYtkvUxg5lWj3xd8y3XcjrJ1P3sbp5fpMkDV5quiso7A5v+xrby0UzBWnYNXeHKsN03sp9RpBN1cviN7Hq1YjzCDGCRezq9y8eR/GwBw6h9dTzkqYhPtf6vm64mc/rDqz/o6XUQsMRmLwfYIYNxhrU0Qgo+MfBsvY9xyn3vGfSeJL4vyRomoMowPfWwghzwwBs6e4SDc272R11+vOPtfQLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com (2603:10b6:208:432::20)
+ by CY5PR11MB6116.namprd11.prod.outlook.com (2603:10b6:930:2b::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.28; Wed, 1 Nov
+ 2023 05:27:28 +0000
+Received: from IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::b6a:cf27:4d2d:1df4]) by IA0PR11MB7185.namprd11.prod.outlook.com
+ ([fe80::b6a:cf27:4d2d:1df4%4]) with mapi id 15.20.6954.019; Wed, 1 Nov 2023
+ 05:27:28 +0000
+From: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
+To: Frediano Ziglio <freddy77@gmail.com>
+Thread-Topic: [PATCH v4] channel-display-gst: Use h/w based decoders with
+ Intel GPUs if possible (v4)
+Thread-Index: AQHaAM4FQYaMIwY0fE221B8H0H0jr7BhTIAAgALAmYCAAO3xEA==
+Date: Wed, 1 Nov 2023 05:27:27 +0000
+Message-ID: <IA0PR11MB718564F1687C640D4CBF44D1F8A7A@IA0PR11MB7185.namprd11.prod.outlook.com>
 References: <20231017072549.4013564-1-vivek.kasireddy@intel.com>
  <CAHt6W4fHRGUGKX9Vn3xSMqfYFcdsRSeYR73tVDms+53Pp3pd9g@mail.gmail.com>
-In-Reply-To: <CAHt6W4fHRGUGKX9Vn3xSMqfYFcdsRSeYR73tVDms+53Pp3pd9g@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Tue, 31 Oct 2023 14:34:29 +0000
-Message-ID: <CAHt6W4c6TogEpJSn71=73BeT3X14zimB1G3nqj-n5LQOuJ3k5Q@mail.gmail.com>
-To: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAHt6W4c6TogEpJSn71=73BeT3X14zimB1G3nqj-n5LQOuJ3k5Q@mail.gmail.com>
+In-Reply-To: <CAHt6W4c6TogEpJSn71=73BeT3X14zimB1G3nqj-n5LQOuJ3k5Q@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA0PR11MB7185:EE_|CY5PR11MB6116:EE_
+x-ms-office365-filtering-correlation-id: d0e74ea6-69be-4384-6d8e-08dbda9b3cc7
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: ebO5O6s5UVd6c5pRUJEF1CR2Onl6EQ01IpDEoQoRWd1L/CPkYzhIe5MrY1tslxXRDTsrGRlLr9SIEVeW2OHqP6R5U72ryh+QgMrANBsyMA7xB0xXMc0G+3iSthfMvxnRRGnheIEFK1X4u3ZVt9w/aUupQKZGFliWvVDAn1GWquDkPVJUPeR0Rt6ZXN5r4c/K0i+lq2JedlUHJjSkH0kQZ17AnRWpCNxnpXm9Qm9mZ+n1daF2PsqjoinIV3P56ryC3jsZtahad1/M3fIShvsaD8BUjePwk5d3yVjmbtRcWWG4fDggbJnAh7BNMhIFMQgaT2XLP14NBkppF+HGtuRM+uYVRndLv6YM838oUeIUL0wY5SDYyjCTL9gQPrD3WCVemum2vm3Cr9Ew857MiCBhb6xQYGo8miCdubf+arHIvEjR2gFuL8mARcQwhc9onUX9PTc578Nzu7hC/Y8lXCylNL+JeKjA00imPjzJxEKKVA/gp7nXor7GZKCKfFBNETzCfPK8aFMsRkw1f5WTAJeiZG4cEOZZZ//LYOx+/rViTSZmBqvS/Y0sylDIY9QC2W0aOA2zwVAsymhgNvogOvGcux4AVWaHlhie4mfnvPX5waNq1xQrrSX+91WR7KchrAe4RRlyIZP+RQdKyuUw2Xlxw+Pei0aCnW0xSFH4wxbcVB7IQFcCz0XU/3OHrauTaXPv
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:IA0PR11MB7185.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(39860400002)(136003)(366004)(396003)(376002)(230273577357003)(230173577357003)(230922051799003)(1800799009)(451199024)(64100799003)(186009)(30864003)(4326008)(8936002)(8676002)(52536014)(66446008)(5660300002)(83380400001)(66476007)(64756008)(66556008)(66946007)(76116006)(54906003)(71200400001)(966005)(478600001)(2906002)(316002)(41300700001)(6916009)(7696005)(6506007)(55016003)(26005)(107886003)(9686003)(33656002)(38070700009)(122000001)(82960400001)(86362001)(38100700002);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?aElLY1gxNzNrcTB3elJibkVlemE5ekkySjdieDJUaFNkMitrTUFsZmpKdDdh?=
+ =?utf-8?B?R0VwNmtGNVJ4dEErcEVXRVJCdmQrTkh1VTUzK0J5bGY0TTFrVmIyR2pYd01Y?=
+ =?utf-8?B?YUJ2OFlOME5kVVZpQTR6UEg5WFZGdUR3ZUdjemRDN2pVbENNQzl5Si9DY1VM?=
+ =?utf-8?B?QW5OdzhINkhIMkpKMDkwdjBaQlFqTVVPVzZJdlpvZzNqMkFWc3BnYTllanlH?=
+ =?utf-8?B?YVgxdUJ3YW1mREp0b2kra296UnNOTTgrOHlrVVA5S2syMGxjbUQ2dk84MzMy?=
+ =?utf-8?B?d1ZHZ01zYUNORm9nbTBId2hUTUM3NW0raVpUY1RnbUF4MUY0aFlNcTlHak5G?=
+ =?utf-8?B?VmdlckFINmhHUE1iaG13QUJCU2JJTTEvY2U2K0NYOXFIVjJ1TUJZUUZTSTJl?=
+ =?utf-8?B?QU9wbWdLVWwwWlh3WTJDR0ZweXhmcXpCMFpRbThZbTNONkYxaWJ2UVdSUkY5?=
+ =?utf-8?B?SkNnOUdzMjlVSzAvdlhmdGlhN0FJSXdCd09SVVVJaGNna25ObSs3NHpDUXhG?=
+ =?utf-8?B?UlRTSVY1bzNHZkF4ellDTCt5ZCsvcUNrRkRVVExPdnI0UUtodGZOSmlVM2pK?=
+ =?utf-8?B?ck5GZ3ZiZFRLam9KemhBbzVRTTJicXRNSFRLblVVdnE0NXRRWUhhdjVRNXY5?=
+ =?utf-8?B?YXl3NkZBRFdTcVdOUHlvZXJ3QUU2Nzh0Z3VWVDVQekkwU1VqL0MzU3k3QzZa?=
+ =?utf-8?B?T3cxa0FVMDZXalVQd3E1MTRDYTJKVVd6UkZ2L1JXVnhSOFR4TDdESlJyZmVy?=
+ =?utf-8?B?T21nSFlmNFZxVHIyZzFUTGR2WjdiVWxOL1BmZU5udVN6VWhuTDlrWnNKLzh1?=
+ =?utf-8?B?Zmk4cGdVeHRKbmFwUU9VVGZxdUI2ZFJSa1ZUQVZBVlpBREJhb3R4aFRCaG9h?=
+ =?utf-8?B?T1hBN3JYVGJDVStJRndEUHVGcGxXSGkwY1pxcmwyS1o4U3FWR0g2SjRZa2NX?=
+ =?utf-8?B?MW95U3NlY3F5MWhrSHFvVUFrOHM4bE0xZ2xWWUl3OWlQZnFGemFBV3h1MlAv?=
+ =?utf-8?B?cWlyOXZTWVJTT2Y5d3E5NGd4Y1V3dTZ2L2ZRM0RxUHNiQ05FcFduUGJmVllB?=
+ =?utf-8?B?dTJHR0NwQ1VWSXBMTjJHcDhrV2RINzlORXd0czZ5MVlvbHVmL3ZCWkliMk1L?=
+ =?utf-8?B?T2pHYVRGdlcxb3RaVVFxNkxDYjVQSTQ4blFrSDFXRW0xM056M05lZnMwRDNO?=
+ =?utf-8?B?Z1VnV3lXYkVJOU50M2EvaUhacHM0L09SR0hqcFM0UlozMTZwRW9TTTFiUFMw?=
+ =?utf-8?B?VVNXeVVpRDlWZTF3OHU1SjRGTmRUdUVKekN6L1djZjUxa0RhNXlzcUpJOTNv?=
+ =?utf-8?B?NFZpU2drQnhWYmlUSURpaE9hdHRiK0w3TzhYMENFR1cwUXJXbE5lekZvRktT?=
+ =?utf-8?B?akVQWitQbERTTW1ad2t4clB5V3BDQlZxZzZTTFRWbDN4aG9lektBZ2djTUZa?=
+ =?utf-8?B?Z1pBSTUrYkZ6QXNpa3BCeXJSb2dWZzNFdXRiWTZ3SG1zTE1aK2JHVVRyOGJT?=
+ =?utf-8?B?MXZSMCtyYmlMcHRjVURIOXQvZEhHNnp2aWpaaFg2VjlLYmVEMjVHZkZ2WDVi?=
+ =?utf-8?B?MkhBeEpIdXVrYUcxL3lTdGdzc0Z2NFZoa25hYjFpeFVWZmRST0FaanRLNVoy?=
+ =?utf-8?B?MHVmTXFQSWRVaEVaWENSckh0YkROOTE4aTRSSlpnZXlteEhxTTV2THQ2T3Vz?=
+ =?utf-8?B?WUZ5MGt3VUJiOHhXZ0tTUm44bCtabkozR0poWXM2M25TMElZaVBHcXo1ZGYw?=
+ =?utf-8?B?Q3FSYXNSejlqUW9oMTZ1UllMeUhSaWZ5aHhwRisyd3VJSXFhZmo5SmlQODZT?=
+ =?utf-8?B?VWRUVHBybDMrU1daVWIvS3ViV2cwOWdWcnRPVGN2ei9vNFNHem9qQ2Z4THJm?=
+ =?utf-8?B?V1l6Uzh6QThwaFplaytVOWJrQis4UWN2YTJMdFZnTDJhMnRnU0dFeEg1NEZm?=
+ =?utf-8?B?d0hFYmM5ZnhjNmVTMXQvRG5BRVFJb2piaTJMQytRTSsxZXJETVpYWnJxaWs1?=
+ =?utf-8?B?N2FWanU4T1dxS3V5V1FPb2hrZDNzdGtpcE1xUmdWWVd3NW9FU1FNbHUyeVVl?=
+ =?utf-8?B?Y2pONThhUERZaGxmMll0QWlhZkdvN2UzTHdVRzQ1RWhVdzZZWFRDN0crejFp?=
+ =?utf-8?Q?MXCWrPpNSmxbRcoD1zcE3vBc0?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR11MB7185.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0e74ea6-69be-4384-6d8e-08dbda9b3cc7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Nov 2023 05:27:27.7444 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 75Ql0pdr/DAMaF5S5DGQXmbtR8vCw2yGeTVaK08xOwntGm2L5bfmdMcvSMFl2NKLbKKZ1RJ0F3lex8WfGLZLEWbc0NGmkCD8oVLBUO9gs+c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR11MB6116
+X-OriginatorOrg: intel.com
 Subject: Re: [Spice-devel] [PATCH v4] channel-display-gst: Use h/w based
  decoders with Intel GPUs if possible (v4)
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -69,459 +162,317 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dongwon Kim <dongwon.kim@intel.com>,
- Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
- Gerd Hoffmann <kraxel@redhat.com>, spice-devel@lists.freedesktop.org
+Cc: "Kim, Dongwon" <dongwon.kim@intel.com>, "Mazlan,
+ Hazwan Arif" <hazwan.arif.mazlan@intel.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Vivek,
-   I finally came up with something better.
-
-See https://gitlab.freedesktop.org/fziglio/spice-gtk/-/commits/hw_decoding/=
-,
-it contains
-- https://gitlab.freedesktop.org/fziglio/spice-gtk/-/commit/52d8622bf620f2a=
-d47d6f001926ed918d50d30cd,
-fix some leaks, not due to your patch but good for testing, opened a
-reparate PR at https://gitlab.freedesktop.org/spice/spice-gtk/-/merge_reque=
-sts/123;
-- https://gitlab.freedesktop.org/fziglio/spice-gtk/-/commit/de6d228349607d8=
-d0d711f5c2a11f791167c8c25
-required update for spice-common submodule;
-- https://gitlab.freedesktop.org/fziglio/spice-gtk/-/commit/e481a2b84e3d02e=
-5d0c38ee5ae8d268fba15dc77
-fix dangling pointers in free_pipeline (remove some warnings running
-your patch);
-- https://gitlab.freedesktop.org/fziglio/spice-gtk/-/commit/8d59e88e8855349=
-7049a9fc380cac7395225bc75
-(fixup) the proposed change in the previous mail to avoid some leaks
-and memory errors;
-- https://gitlab.freedesktop.org/fziglio/spice-gtk/-/commit/c01fa619b836b41=
-3fecd594a97a03cbf4b655b04
-(fixup) really minor style change;
-- https://gitlab.freedesktop.org/fziglio/spice-gtk/-/commit/22c032c67528e08=
-99b6e2faf56ffa9584c208755
-the fallback patch I described in previous email, turned out it was
-easier than expected.
-
-Regards,
-   Frediano
-
-Il giorno dom 29 ott 2023 alle ore 20:32 Frediano Ziglio
-<freddy77@gmail.com> ha scritto:
->
-> Il giorno mar 17 ott 2023 alle ore 08:46 Vivek Kasireddy
-> <vivek.kasireddy@intel.com> ha scritto:
-> >
-> > We first try to detect if an Intel GPU is available (by looking into
-> > udev's database) and then probe Gstreamer's registry cache to see
-> > if there is h/w based decoder (element) available for the incoming
-> > video codec format. If both these conditions are satisfied (i.e,
-> > Intel Media SDK Gstreamer plugin (libgstmsdk.so) and associated
-> > libraries are properly installed), we then create a simple decode
-> > pipeline using appropriate h/w based decoder and post-processor
-> > elements instead of relying on playbin -- which may not be able to
-> > auto-select these elements.
-> >
-> > For example, if the incoming codec format is h264, we then create
-> > a pipeline using msdkh264dec and vaapipostproc elements instead of
-> > avdec_h264 and videoconvert.
-> >
-> > v2: (addressed some review comments from Frediano)
-> > - s/gboolean/bool, s/TRUE/true, s/FALSE/false
-> > - Used a single cleanup label instead of multiple while instantiating
-> >   elements
-> > - Moved the code that launches the Gst pipeline into a helper that
-> >   is used while trying h/w based plugins
-> >
-> > v3:
-> > - Updated the patch to reflect the new signature and return value of
-> >   spice_udev_detect_gpu().
-> >
-> > v4:
-> > - Include the string "_hw_" in the function that finds best h/w plugins
-> > - Change type and determine plugins array length using G_N_ELEMENTS
-> > - Free vpp_name immediately after using it to prevent leak
-> > - Rebase on master
-> >
-> > Cc: Frediano Ziglio <freddy77@gmail.com>
-> > Cc: Gerd Hoffmann <kraxel@redhat.com>
-> > Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> > Cc: Dongwon Kim <dongwon.kim@intel.com>
-> > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> > Signed-off-by: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
-> > Signed-off-by: Jin Chung Teng <jin.chung.teng@intel.com>
-> > ---
-> >  src/channel-display-gst.c | 217 ++++++++++++++++++++++++++++++++++----
-> >  1 file changed, 195 insertions(+), 22 deletions(-)
-> >
->
-> Hi,
->    the patch seems good.
->
-> Not sure what I did with my system but I'm not able to test it very
-> well. The system keeps complaining about some issue with the format.
-> I wanted to add a patch for compatibility in case the server is
-> sending some profile not supported by H/W decoder (mainly saving first
-> encoded frames till an error or an output frame and try with S/W
-> decoder) but I got stuck with my system errors.
->
-> In the meantime I manage to find the memory issue you had that caused:
->
-> (remote-viewer:2272): GStreamer-CRITICAL **: 18:30:37.263:
-> Trying to dispose object "appsink26", but it still has a parent "pipeline=
-28".
-> You need to let the parent manage the object instead of unreffing the
-> object directly.
->
-> The reason is due to a missing reference to the sink, I fixed it and
-> changed the order of free (reverse of allocations), see
->
-> diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
-> index de606b56..82c500c8 100644
-> --- a/src/channel-display-gst.c
-> +++ b/src/channel-display-gst.c
-> @@ -628,7 +628,7 @@ static bool try_intel_hw_pipeline(SpiceGstDecoder *de=
-coder)
->                   "drop", FALSE,
->                   NULL);
->      gst_caps_unref(sink_caps);
-> -    decoder->appsink =3D GST_APP_SINK(sink);
-> +    decoder->appsink =3D GST_APP_SINK(gst_object_ref(sink));
->
->      if (hand_pipeline_to_widget(decoder->base.stream,
->          GST_PIPELINE(pipeline))) {
-> @@ -642,6 +642,8 @@ static bool try_intel_hw_pipeline(SpiceGstDecoder *de=
-coder)
->          if (!gst_element_link_many(src, parser, hw_decoder, vpp,
->                                     sink, NULL)) {
->              spice_warning("error linking elements");
-> +            /* ownership moved to pipeline, don't unreference these */
-> +            src =3D parser =3D hw_decoder =3D vpp =3D sink =3D NULL;
->              goto err;
->          }
->      } else {
-> @@ -649,6 +651,8 @@ static bool try_intel_hw_pipeline(SpiceGstDecoder *de=
-coder)
->                           vpp, sink, NULL);
->          if (!gst_element_link_many(src, hw_decoder, vpp, sink, NULL)) {
->              spice_warning("error linking elements");
-> +            /* ownership moved to pipeline, don't unreference these */
-> +            src =3D hw_decoder =3D vpp =3D sink =3D NULL;
->              goto err;
->          }
->      }
-> @@ -657,20 +661,31 @@ static bool
-> try_intel_hw_pipeline(SpiceGstDecoder *decoder)
->      return launch_pipeline(decoder);
->
->  err:
-> -    if (src) {
-> -        gst_object_unref(src);
-> +    if (decoder->appsink) {
-> +        gst_object_unref(decoder->appsink);
-> +        decoder->appsink =3D NULL;
->      }
-> -    if (sink) {
-> -        gst_object_unref(sink);
-> +    if (decoder->appsrc) {
-> +        gst_object_unref(decoder->appsrc);
-> +        decoder->appsrc =3D NULL;
->      }
-> -    if (use_parser) {
-> -        gst_object_unref(parser);
-> +    if (pipeline) {
-> +        gst_object_unref(pipeline);
-> +    }
-> +    if (vpp) {
-> +        gst_object_unref(vpp);
->      }
->      if (hw_decoder) {
->          gst_object_unref(hw_decoder);
->      }
-> -    if (vpp) {
-> -        gst_object_unref(vpp);
-> +    if (parser) {
-> +        gst_object_unref(parser);
-> +    }
-> +    if (sink) {
-> +        gst_object_unref(sink);
-> +    }
-> +    if (src) {
-> +        gst_object_unref(src);
->      }
->      return false;
->  }
-> --
->
-> Frediano
->
-> > diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
-> > index 5c9927b..de606b5 100644
-> > --- a/src/channel-display-gst.c
-> > +++ b/src/channel-display-gst.c
-> > @@ -20,6 +20,7 @@
-> >  #include "spice-common.h"
-> >  #include "spice-channel-priv.h"
-> >  #include "common/recorder.h"
-> > +#include "common/udev.h"
-> >
-> >  #include "channel-display-priv.h"
-> >
-> > @@ -489,13 +490,205 @@ deep_element_added_cb(GstBin *pipeline, GstBin *=
-bin, GstElement *element,
-> >      }
-> >  }
-> >
-> > -static gboolean create_pipeline(SpiceGstDecoder *decoder)
-> > +static gchar *find_best_hw_plugin(const gchar *dec_name)
-> > +{
-> > +    static const char plugins[][8] =3D {"msdk", "va", "vaapi"};
-> > +    GstRegistry *registry;
-> > +    GstPluginFeature *feature;
-> > +    gchar *feature_name;
-> > +    int i;
-> > +
-> > +    registry =3D gst_registry_get();
-> > +    if (!registry) {
-> > +        return NULL;
-> > +    }
-> > +
-> > +    for (i =3D 0; i < G_N_ELEMENTS(plugins); i++) {
-> > +        feature_name =3D !dec_name ? g_strconcat(plugins[i], "postproc=
-", NULL) :
-> > +                       g_strconcat(plugins[i], dec_name, "dec", NULL);
-> > +        feature =3D gst_registry_lookup_feature(registry, feature_name=
-);
-> > +        if (!feature) {
-> > +            g_free(feature_name);
-> > +            feature_name =3D NULL;
-> > +            continue;
-> > +        }
-> > +        gst_object_unref(feature);
-> > +        break;
-> > +    }
-> > +    return feature_name;
-> > +}
-> > +
-> > +static bool launch_pipeline(SpiceGstDecoder *decoder)
-> >  {
-> >      GstBus *bus;
-> > +
-> > +    if (decoder->appsink) {
-> > +        GstAppSinkCallbacks appsink_cbs =3D { NULL };
-> > +        appsink_cbs.new_sample =3D new_sample;
-> > +        gst_app_sink_set_callbacks(decoder->appsink, &appsink_cbs, dec=
-oder, NULL);
-> > +        gst_app_sink_set_max_buffers(decoder->appsink, MAX_DECODED_FRA=
-MES);
-> > +        gst_app_sink_set_drop(decoder->appsink, FALSE);
-> > +    }
-> > +    bus =3D gst_pipeline_get_bus(GST_PIPELINE(decoder->pipeline));
-> > +    gst_bus_add_watch(bus, handle_pipeline_message, decoder);
-> > +    gst_object_unref(bus);
-> > +
-> > +    decoder->clock =3D gst_pipeline_get_clock(GST_PIPELINE(decoder->pi=
-peline));
-> > +
-> > +    if (gst_element_set_state(decoder->pipeline, GST_STATE_PLAYING) =
-=3D=3D GST_STATE_CHANGE_FAILURE) {
-> > +        SPICE_DEBUG("GStreamer error: Unable to set the pipeline to th=
-e playing state.");
-> > +        free_pipeline(decoder);
-> > +        return false;
-> > +    }
-> > +
-> > +    return true;
-> > +}
-> > +
-> > +static bool try_intel_hw_pipeline(SpiceGstDecoder *decoder)
-> > +{
-> > +    GstElement *pipeline =3D NULL, *src =3D NULL, *sink =3D NULL;
-> > +    GstElement *parser =3D NULL, *hw_decoder =3D NULL, *vpp =3D NULL;
-> > +    GstCaps *src_caps, *sink_caps;
-> > +    int codec_type =3D decoder->base.codec_type;
-> > +    const gchar *dec_name =3D gst_opts[codec_type].name;
-> > +    gchar *hw_dec_name, *vpp_name, *parser_name;
-> > +    gboolean use_parser;
-> > +
-> > +    use_parser =3D codec_type =3D=3D SPICE_VIDEO_CODEC_TYPE_H264 ||
-> > +                 codec_type =3D=3D SPICE_VIDEO_CODEC_TYPE_H265;
-> > +
-> > +    src =3D gst_element_factory_make("appsrc", NULL);
-> > +    if (!src) {
-> > +        spice_warning("error upon creation of 'appsrc' element");
-> > +        return false;
-> > +    }
-> > +    sink =3D gst_element_factory_make("appsink", NULL);
-> > +    if (!sink) {
-> > +        spice_warning("error upon creation of 'appsink' element");
-> > +        goto err;
-> > +    }
-> > +
-> > +    if (use_parser) {
-> > +        parser_name =3D g_strconcat(dec_name, "parse", NULL);
-> > +        parser =3D gst_element_factory_make(parser_name, NULL);
-> > +        g_free(parser_name);
-> > +        if (!parser) {
-> > +            spice_warning("error upon creation of 'parser' element");
-> > +            goto err;
-> > +        }
-> > +    }
-> > +
-> > +    hw_dec_name =3D find_best_hw_plugin(dec_name);
-> > +    if (!hw_dec_name) {
-> > +        spice_warning("error finding suitable plugin for decode");
-> > +        goto err;
-> > +    }
-> > +    hw_decoder =3D gst_element_factory_make(hw_dec_name, NULL);
-> > +    g_free(hw_dec_name);
-> > +    if (!hw_decoder) {
-> > +        spice_warning("error upon creation of 'decoder' element");
-> > +        goto err;
-> > +    }
-> > +    vpp_name =3D find_best_hw_plugin(NULL);
-> > +    if (!vpp_name) {
-> > +        spice_warning("error finding suitable plugin for postproc");
-> > +        goto err;
-> > +    }
-> > +    vpp =3D gst_element_factory_make(vpp_name, NULL);
-> > +    g_free(vpp_name);
-> > +    if (!vpp) {
-> > +        spice_warning("error upon creation of 'vpp' element");
-> > +        goto err;
-> > +    }
-> > +    g_object_set(vpp,
-> > +                 "format", GST_VIDEO_FORMAT_BGRx,
-> > +                 NULL);
-> > +
-> > +    pipeline =3D gst_pipeline_new(NULL);
-> > +    if (!pipeline) {
-> > +        spice_warning("error upon creation of 'pipeline' element");
-> > +        goto err;
-> > +    }
-> > +
-> > +    src_caps =3D gst_caps_from_string(gst_opts[codec_type].dec_caps);
-> > +    g_object_set(src,
-> > +                 "caps", src_caps,
-> > +                 "is-live", TRUE,
-> > +                 "format", GST_FORMAT_TIME,
-> > +                 "max-bytes", G_GINT64_CONSTANT(0),
-> > +                 "block", TRUE,
-> > +                 NULL);
-> > +    gst_caps_unref(src_caps);
-> > +    decoder->appsrc =3D GST_APP_SRC(gst_object_ref(src));
-> > +
-> > +    sink_caps =3D gst_caps_from_string("video/x-raw,format=3DBGRx");
-> > +    g_object_set(sink,
-> > +                 "caps", sink_caps,
-> > +                 "sync", FALSE,
-> > +                 "drop", FALSE,
-> > +                 NULL);
-> > +    gst_caps_unref(sink_caps);
-> > +    decoder->appsink =3D GST_APP_SINK(sink);
-> > +
-> > +    if (hand_pipeline_to_widget(decoder->base.stream,
-> > +        GST_PIPELINE(pipeline))) {
-> > +        spice_warning("error handing pipeline to widget");
-> > +        goto err;
-> > +    }
-> > +
-> > +    if (use_parser) {
-> > +        gst_bin_add_many(GST_BIN(pipeline), src, parser, hw_decoder,
-> > +                         vpp, sink, NULL);
-> > +        if (!gst_element_link_many(src, parser, hw_decoder, vpp,
-> > +                                   sink, NULL)) {
-> > +            spice_warning("error linking elements");
-> > +            goto err;
-> > +        }
-> > +    } else {
-> > +        gst_bin_add_many(GST_BIN(pipeline), src, hw_decoder,
-> > +                         vpp, sink, NULL);
-> > +        if (!gst_element_link_many(src, hw_decoder, vpp, sink, NULL)) =
-{
-> > +            spice_warning("error linking elements");
-> > +            goto err;
-> > +        }
-> > +    }
-> > +
-> > +    decoder->pipeline =3D pipeline;
-> > +    return launch_pipeline(decoder);
-> > +
-> > +err:
-> > +    if (src) {
-> > +        gst_object_unref(src);
-> > +    }
-> > +    if (sink) {
-> > +        gst_object_unref(sink);
-> > +    }
-> > +    if (use_parser) {
-> > +        gst_object_unref(parser);
-> > +    }
-> > +    if (hw_decoder) {
-> > +        gst_object_unref(hw_decoder);
-> > +    }
-> > +    if (vpp) {
-> > +        gst_object_unref(vpp);
-> > +    }
-> > +    return false;
-> > +}
-> > +
-> > +static gboolean create_pipeline(SpiceGstDecoder *decoder)
-> > +{
-> >      GstElement *playbin, *sink;
-> >      SpiceGstPlayFlags flags;
-> >      GstCaps *caps;
-> >      static bool playbin3_supported =3D true;
-> > +    GpuVendor vendor =3D spice_udev_detect_gpu(INTEL_VENDOR_ID);
-> > +
-> > +    if (vendor =3D=3D VENDOR_GPU_DETECTED ||
-> > +        vendor =3D=3D VENDOR_GPU_UNKNOWN) {
-> > +        if (try_intel_hw_pipeline(decoder)) {
-> > +            return TRUE;
-> > +        }
-> > +    }
-> >
-> >      playbin =3D playbin3_supported ?
-> >                gst_element_factory_make("playbin3", "playbin") : NULL;
-> > @@ -571,29 +764,9 @@ static gboolean create_pipeline(SpiceGstDecoder *d=
-ecoder)
-> >      g_warn_if_fail(decoder->appsrc =3D=3D NULL);
-> >      decoder->pipeline =3D playbin;
-> >
-> > -    if (decoder->appsink) {
-> > -        GstAppSinkCallbacks appsink_cbs =3D { NULL };
-> > -        appsink_cbs.new_sample =3D new_sample;
-> > -        gst_app_sink_set_callbacks(decoder->appsink, &appsink_cbs, dec=
-oder, NULL);
-> > -        gst_app_sink_set_max_buffers(decoder->appsink, MAX_DECODED_FRA=
-MES);
-> > -        gst_app_sink_set_drop(decoder->appsink, FALSE);
-> > -    }
-> > -    bus =3D gst_pipeline_get_bus(GST_PIPELINE(decoder->pipeline));
-> > -    gst_bus_add_watch(bus, handle_pipeline_message, decoder);
-> > -    gst_object_unref(bus);
-> > -
-> > -    decoder->clock =3D gst_pipeline_get_clock(GST_PIPELINE(decoder->pi=
-peline));
-> > -
-> > -    if (gst_element_set_state(decoder->pipeline, GST_STATE_PLAYING) =
-=3D=3D GST_STATE_CHANGE_FAILURE) {
-> > -        SPICE_DEBUG("GStreamer error: Unable to set the pipeline to th=
-e playing state.");
-> > -        free_pipeline(decoder);
-> > -        return FALSE;
-> > -    }
-> > -
-> > -    return TRUE;
-> > +    return launch_pipeline(decoder);
-> >  }
-> >
-> > -
-> >  /* ---------- VideoDecoder's public API ---------- */
-> >
-> >  static void spice_gst_decoder_reschedule(VideoDecoder *video_decoder)
-> > --
-> > 2.39.2
-> >
+SGkgRnJlZGlhbm8sDQoNCj4gDQo+IEhpIFZpdmVrLA0KPiAgICBJIGZpbmFsbHkgY2FtZSB1cCB3
+aXRoIHNvbWV0aGluZyBiZXR0ZXIuDQo+IA0KPiBTZWUgaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0
+b3Aub3JnL2Z6aWdsaW8vc3BpY2UtZ3RrLy0NCj4gL2NvbW1pdHMvaHdfZGVjb2RpbmcvLA0KPiBp
+dCBjb250YWlucw0KPiAtIGh0dHBzOi8vZ2l0bGFiLmZyZWVkZXNrdG9wLm9yZy9memlnbGlvL3Nw
+aWNlLWd0ay8tDQo+IC9jb21taXQvNTJkODYyMmJmNjIwZjJhZDQ3ZDZmMDAxOTI2ZWQ5MThkNTBk
+MzBjZCwNCj4gZml4IHNvbWUgbGVha3MsIG5vdCBkdWUgdG8geW91ciBwYXRjaCBidXQgZ29vZCBm
+b3IgdGVzdGluZywgb3BlbmVkIGENCj4gcmVwYXJhdGUgUFIgYXQgaHR0cHM6Ly9naXRsYWIuZnJl
+ZWRlc2t0b3Aub3JnL3NwaWNlL3NwaWNlLWd0ay8tDQo+IC9tZXJnZV9yZXF1ZXN0cy8xMjM7DQo+
+IC0gaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL2Z6aWdsaW8vc3BpY2UtZ3RrLy0NCj4g
+L2NvbW1pdC9kZTZkMjI4MzQ5NjA3ZDhkMGQ3MTFmNWMyYTExZjc5MTE2N2M4YzI1DQo+IHJlcXVp
+cmVkIHVwZGF0ZSBmb3Igc3BpY2UtY29tbW9uIHN1Ym1vZHVsZTsNCj4gLSBodHRwczovL2dpdGxh
+Yi5mcmVlZGVza3RvcC5vcmcvZnppZ2xpby9zcGljZS1ndGsvLQ0KPiAvY29tbWl0L2U0ODFhMmI4
+NGUzZDAyZTVkMGMzOGVlNWFlOGQyNjhmYmExNWRjNzcNCj4gZml4IGRhbmdsaW5nIHBvaW50ZXJz
+IGluIGZyZWVfcGlwZWxpbmUgKHJlbW92ZSBzb21lIHdhcm5pbmdzIHJ1bm5pbmcNCj4geW91ciBw
+YXRjaCk7DQo+IC0gaHR0cHM6Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL2Z6aWdsaW8vc3BpY2Ut
+Z3RrLy0NCj4gL2NvbW1pdC84ZDU5ZTg4ZTg4NTUzNDk3MDQ5YTlmYzM4MGNhYzczOTUyMjViYzc1
+DQo+IChmaXh1cCkgdGhlIHByb3Bvc2VkIGNoYW5nZSBpbiB0aGUgcHJldmlvdXMgbWFpbCB0byBh
+dm9pZCBzb21lIGxlYWtzDQo+IGFuZCBtZW1vcnkgZXJyb3JzOw0KPiAtIGh0dHBzOi8vZ2l0bGFi
+LmZyZWVkZXNrdG9wLm9yZy9memlnbGlvL3NwaWNlLWd0ay8tDQo+IC9jb21taXQvYzAxZmE2MTli
+ODM2YjQxM2ZlY2Q1OTRhOTdhMDNjYmY0YjY1NWIwNA0KPiAoZml4dXApIHJlYWxseSBtaW5vciBz
+dHlsZSBjaGFuZ2U7DQpJIGxvb2tlZCBhdCB0aGUgY29tbWl0cyBhbmQgdGhleSBpbmRlZWQgbG9v
+ayBiZXR0ZXIuIFRoYW5rIHlvdSBmb3IgdGFraW5nDQp0aGUgdGltZSB0byBhZGQgdGhlc2UgZml4
+dXBzOyBJJ2xsIGluY2x1ZGUgdGhlbSBpbiB0aGUgbmV4dCB2ZXJzaW9uLg0KDQo+IC0gaHR0cHM6
+Ly9naXRsYWIuZnJlZWRlc2t0b3Aub3JnL2Z6aWdsaW8vc3BpY2UtZ3RrLy0NCj4gL2NvbW1pdC8y
+MmMwMzJjNjc1MjhlMDg5OWI2ZTJmYWY1NmZmYTk1ODRjMjA4NzU1DQo+IHRoZSBmYWxsYmFjayBw
+YXRjaCBJIGRlc2NyaWJlZCBpbiBwcmV2aW91cyBlbWFpbCwgdHVybmVkIG91dCBpdCB3YXMNCj4g
+ZWFzaWVyIHRoYW4gZXhwZWN0ZWQuDQpOaWNlISBUaGlzIGRvZXMgbWFrZSB0aGUgZGVjb2Rpbmcg
+cHJvY2VzcyBtb3JlIHJvYnVzdC4gSSBhbSBjdXJpb3VzIGhvdw0KeW91IHRlc3RlZCB0aGlzIGZh
+bGxiYWNrIHNjZW5hcmlvIHRob3VnaD8NCg0KVGhhbmtzLA0KVml2ZWsNCg0KPiANCj4gUmVnYXJk
+cywNCj4gICAgRnJlZGlhbm8NCj4gDQo+IElsIGdpb3JubyBkb20gMjkgb3R0IDIwMjMgYWxsZSBv
+cmUgMjA6MzIgRnJlZGlhbm8gWmlnbGlvDQo+IDxmcmVkZHk3N0BnbWFpbC5jb20+IGhhIHNjcml0
+dG86DQo+ID4NCj4gPiBJbCBnaW9ybm8gbWFyIDE3IG90dCAyMDIzIGFsbGUgb3JlIDA4OjQ2IFZp
+dmVrIEthc2lyZWRkeQ0KPiA+IDx2aXZlay5rYXNpcmVkZHlAaW50ZWwuY29tPiBoYSBzY3JpdHRv
+Og0KPiA+ID4NCj4gPiA+IFdlIGZpcnN0IHRyeSB0byBkZXRlY3QgaWYgYW4gSW50ZWwgR1BVIGlz
+IGF2YWlsYWJsZSAoYnkgbG9va2luZyBpbnRvDQo+ID4gPiB1ZGV2J3MgZGF0YWJhc2UpIGFuZCB0
+aGVuIHByb2JlIEdzdHJlYW1lcidzIHJlZ2lzdHJ5IGNhY2hlIHRvIHNlZQ0KPiA+ID4gaWYgdGhl
+cmUgaXMgaC93IGJhc2VkIGRlY29kZXIgKGVsZW1lbnQpIGF2YWlsYWJsZSBmb3IgdGhlIGluY29t
+aW5nDQo+ID4gPiB2aWRlbyBjb2RlYyBmb3JtYXQuIElmIGJvdGggdGhlc2UgY29uZGl0aW9ucyBh
+cmUgc2F0aXNmaWVkIChpLmUsDQo+ID4gPiBJbnRlbCBNZWRpYSBTREsgR3N0cmVhbWVyIHBsdWdp
+biAobGliZ3N0bXNkay5zbykgYW5kIGFzc29jaWF0ZWQNCj4gPiA+IGxpYnJhcmllcyBhcmUgcHJv
+cGVybHkgaW5zdGFsbGVkKSwgd2UgdGhlbiBjcmVhdGUgYSBzaW1wbGUgZGVjb2RlDQo+ID4gPiBw
+aXBlbGluZSB1c2luZyBhcHByb3ByaWF0ZSBoL3cgYmFzZWQgZGVjb2RlciBhbmQgcG9zdC1wcm9j
+ZXNzb3INCj4gPiA+IGVsZW1lbnRzIGluc3RlYWQgb2YgcmVseWluZyBvbiBwbGF5YmluIC0tIHdo
+aWNoIG1heSBub3QgYmUgYWJsZSB0bw0KPiA+ID4gYXV0by1zZWxlY3QgdGhlc2UgZWxlbWVudHMu
+DQo+ID4gPg0KPiA+ID4gRm9yIGV4YW1wbGUsIGlmIHRoZSBpbmNvbWluZyBjb2RlYyBmb3JtYXQg
+aXMgaDI2NCwgd2UgdGhlbiBjcmVhdGUNCj4gPiA+IGEgcGlwZWxpbmUgdXNpbmcgbXNka2gyNjRk
+ZWMgYW5kIHZhYXBpcG9zdHByb2MgZWxlbWVudHMgaW5zdGVhZCBvZg0KPiA+ID4gYXZkZWNfaDI2
+NCBhbmQgdmlkZW9jb252ZXJ0Lg0KPiA+ID4NCj4gPiA+IHYyOiAoYWRkcmVzc2VkIHNvbWUgcmV2
+aWV3IGNvbW1lbnRzIGZyb20gRnJlZGlhbm8pDQo+ID4gPiAtIHMvZ2Jvb2xlYW4vYm9vbCwgcy9U
+UlVFL3RydWUsIHMvRkFMU0UvZmFsc2UNCj4gPiA+IC0gVXNlZCBhIHNpbmdsZSBjbGVhbnVwIGxh
+YmVsIGluc3RlYWQgb2YgbXVsdGlwbGUgd2hpbGUgaW5zdGFudGlhdGluZw0KPiA+ID4gICBlbGVt
+ZW50cw0KPiA+ID4gLSBNb3ZlZCB0aGUgY29kZSB0aGF0IGxhdW5jaGVzIHRoZSBHc3QgcGlwZWxp
+bmUgaW50byBhIGhlbHBlciB0aGF0DQo+ID4gPiAgIGlzIHVzZWQgd2hpbGUgdHJ5aW5nIGgvdyBi
+YXNlZCBwbHVnaW5zDQo+ID4gPg0KPiA+ID4gdjM6DQo+ID4gPiAtIFVwZGF0ZWQgdGhlIHBhdGNo
+IHRvIHJlZmxlY3QgdGhlIG5ldyBzaWduYXR1cmUgYW5kIHJldHVybiB2YWx1ZSBvZg0KPiA+ID4g
+ICBzcGljZV91ZGV2X2RldGVjdF9ncHUoKS4NCj4gPiA+DQo+ID4gPiB2NDoNCj4gPiA+IC0gSW5j
+bHVkZSB0aGUgc3RyaW5nICJfaHdfIiBpbiB0aGUgZnVuY3Rpb24gdGhhdCBmaW5kcyBiZXN0IGgv
+dyBwbHVnaW5zDQo+ID4gPiAtIENoYW5nZSB0eXBlIGFuZCBkZXRlcm1pbmUgcGx1Z2lucyBhcnJh
+eSBsZW5ndGggdXNpbmcgR19OX0VMRU1FTlRTDQo+ID4gPiAtIEZyZWUgdnBwX25hbWUgaW1tZWRp
+YXRlbHkgYWZ0ZXIgdXNpbmcgaXQgdG8gcHJldmVudCBsZWFrDQo+ID4gPiAtIFJlYmFzZSBvbiBt
+YXN0ZXINCj4gPiA+DQo+ID4gPiBDYzogRnJlZGlhbm8gWmlnbGlvIDxmcmVkZHk3N0BnbWFpbC5j
+b20+DQo+ID4gPiBDYzogR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+DQo+ID4gPiBD
+YzogTWFyYy1BbmRyw6kgTHVyZWF1IDxtYXJjYW5kcmUubHVyZWF1QHJlZGhhdC5jb20+DQo+ID4g
+PiBDYzogRG9uZ3dvbiBLaW0gPGRvbmd3b24ua2ltQGludGVsLmNvbT4NCj4gPiA+IFNpZ25lZC1v
+ZmYtYnk6IFZpdmVrIEthc2lyZWRkeSA8dml2ZWsua2FzaXJlZGR5QGludGVsLmNvbT4NCj4gPiA+
+IFNpZ25lZC1vZmYtYnk6IEhhendhbiBBcmlmIE1hemxhbiA8aGF6d2FuLmFyaWYubWF6bGFuQGlu
+dGVsLmNvbT4NCj4gPiA+IFNpZ25lZC1vZmYtYnk6IEppbiBDaHVuZyBUZW5nIDxqaW4uY2h1bmcu
+dGVuZ0BpbnRlbC5jb20+DQo+ID4gPiAtLS0NCj4gPiA+ICBzcmMvY2hhbm5lbC1kaXNwbGF5LWdz
+dC5jIHwgMjE3ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKystDQo+IC0tLQ0KPiA+
+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxOTUgaW5zZXJ0aW9ucygrKSwgMjIgZGVsZXRpb25zKC0pDQo+
+ID4gPg0KPiA+DQo+ID4gSGksDQo+ID4gICAgdGhlIHBhdGNoIHNlZW1zIGdvb2QuDQo+ID4NCj4g
+PiBOb3Qgc3VyZSB3aGF0IEkgZGlkIHdpdGggbXkgc3lzdGVtIGJ1dCBJJ20gbm90IGFibGUgdG8g
+dGVzdCBpdCB2ZXJ5DQo+ID4gd2VsbC4gVGhlIHN5c3RlbSBrZWVwcyBjb21wbGFpbmluZyBhYm91
+dCBzb21lIGlzc3VlIHdpdGggdGhlIGZvcm1hdC4NCj4gPiBJIHdhbnRlZCB0byBhZGQgYSBwYXRj
+aCBmb3IgY29tcGF0aWJpbGl0eSBpbiBjYXNlIHRoZSBzZXJ2ZXIgaXMNCj4gPiBzZW5kaW5nIHNv
+bWUgcHJvZmlsZSBub3Qgc3VwcG9ydGVkIGJ5IEgvVyBkZWNvZGVyIChtYWlubHkgc2F2aW5nIGZp
+cnN0DQo+ID4gZW5jb2RlZCBmcmFtZXMgdGlsbCBhbiBlcnJvciBvciBhbiBvdXRwdXQgZnJhbWUg
+YW5kIHRyeSB3aXRoIFMvVw0KPiA+IGRlY29kZXIpIGJ1dCBJIGdvdCBzdHVjayB3aXRoIG15IHN5
+c3RlbSBlcnJvcnMuDQo+ID4NCj4gPiBJbiB0aGUgbWVhbnRpbWUgSSBtYW5hZ2UgdG8gZmluZCB0
+aGUgbWVtb3J5IGlzc3VlIHlvdSBoYWQgdGhhdCBjYXVzZWQ6DQo+ID4NCj4gPiAocmVtb3RlLXZp
+ZXdlcjoyMjcyKTogR1N0cmVhbWVyLUNSSVRJQ0FMICoqOiAxODozMDozNy4yNjM6DQo+ID4gVHJ5
+aW5nIHRvIGRpc3Bvc2Ugb2JqZWN0ICJhcHBzaW5rMjYiLCBidXQgaXQgc3RpbGwgaGFzIGEgcGFy
+ZW50ICJwaXBlbGluZTI4Ii4NCj4gPiBZb3UgbmVlZCB0byBsZXQgdGhlIHBhcmVudCBtYW5hZ2Ug
+dGhlIG9iamVjdCBpbnN0ZWFkIG9mIHVucmVmZmluZyB0aGUNCj4gPiBvYmplY3QgZGlyZWN0bHku
+DQo+ID4NCj4gPiBUaGUgcmVhc29uIGlzIGR1ZSB0byBhIG1pc3NpbmcgcmVmZXJlbmNlIHRvIHRo
+ZSBzaW5rLCBJIGZpeGVkIGl0IGFuZA0KPiA+IGNoYW5nZWQgdGhlIG9yZGVyIG9mIGZyZWUgKHJl
+dmVyc2Ugb2YgYWxsb2NhdGlvbnMpLCBzZWUNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9zcmMvY2hh
+bm5lbC1kaXNwbGF5LWdzdC5jIGIvc3JjL2NoYW5uZWwtZGlzcGxheS1nc3QuYw0KPiA+IGluZGV4
+IGRlNjA2YjU2Li44MmM1MDBjOCAxMDA2NDQNCj4gPiAtLS0gYS9zcmMvY2hhbm5lbC1kaXNwbGF5
+LWdzdC5jDQo+ID4gKysrIGIvc3JjL2NoYW5uZWwtZGlzcGxheS1nc3QuYw0KPiA+IEBAIC02Mjgs
+NyArNjI4LDcgQEAgc3RhdGljIGJvb2wgdHJ5X2ludGVsX2h3X3BpcGVsaW5lKFNwaWNlR3N0RGVj
+b2Rlcg0KPiAqZGVjb2RlcikNCj4gPiAgICAgICAgICAgICAgICAgICAiZHJvcCIsIEZBTFNFLA0K
+PiA+ICAgICAgICAgICAgICAgICAgIE5VTEwpOw0KPiA+ICAgICAgZ3N0X2NhcHNfdW5yZWYoc2lu
+a19jYXBzKTsNCj4gPiAtICAgIGRlY29kZXItPmFwcHNpbmsgPSBHU1RfQVBQX1NJTksoc2luayk7
+DQo+ID4gKyAgICBkZWNvZGVyLT5hcHBzaW5rID0gR1NUX0FQUF9TSU5LKGdzdF9vYmplY3RfcmVm
+KHNpbmspKTsNCj4gPg0KPiA+ICAgICAgaWYgKGhhbmRfcGlwZWxpbmVfdG9fd2lkZ2V0KGRlY29k
+ZXItPmJhc2Uuc3RyZWFtLA0KPiA+ICAgICAgICAgIEdTVF9QSVBFTElORShwaXBlbGluZSkpKSB7
+DQo+ID4gQEAgLTY0Miw2ICs2NDIsOCBAQCBzdGF0aWMgYm9vbCB0cnlfaW50ZWxfaHdfcGlwZWxp
+bmUoU3BpY2VHc3REZWNvZGVyDQo+ICpkZWNvZGVyKQ0KPiA+ICAgICAgICAgIGlmICghZ3N0X2Vs
+ZW1lbnRfbGlua19tYW55KHNyYywgcGFyc2VyLCBod19kZWNvZGVyLCB2cHAsDQo+ID4gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2luaywgTlVMTCkpIHsNCj4gPiAgICAgICAg
+ICAgICAgc3BpY2Vfd2FybmluZygiZXJyb3IgbGlua2luZyBlbGVtZW50cyIpOw0KPiA+ICsgICAg
+ICAgICAgICAvKiBvd25lcnNoaXAgbW92ZWQgdG8gcGlwZWxpbmUsIGRvbid0IHVucmVmZXJlbmNl
+IHRoZXNlICovDQo+ID4gKyAgICAgICAgICAgIHNyYyA9IHBhcnNlciA9IGh3X2RlY29kZXIgPSB2
+cHAgPSBzaW5rID0gTlVMTDsNCj4gPiAgICAgICAgICAgICAgZ290byBlcnI7DQo+ID4gICAgICAg
+ICAgfQ0KPiA+ICAgICAgfSBlbHNlIHsNCj4gPiBAQCAtNjQ5LDYgKzY1MSw4IEBAIHN0YXRpYyBi
+b29sIHRyeV9pbnRlbF9od19waXBlbGluZShTcGljZUdzdERlY29kZXINCj4gKmRlY29kZXIpDQo+
+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICB2cHAsIHNpbmssIE5VTEwpOw0KPiA+ICAgICAg
+ICAgIGlmICghZ3N0X2VsZW1lbnRfbGlua19tYW55KHNyYywgaHdfZGVjb2RlciwgdnBwLCBzaW5r
+LCBOVUxMKSkgew0KPiA+ICAgICAgICAgICAgICBzcGljZV93YXJuaW5nKCJlcnJvciBsaW5raW5n
+IGVsZW1lbnRzIik7DQo+ID4gKyAgICAgICAgICAgIC8qIG93bmVyc2hpcCBtb3ZlZCB0byBwaXBl
+bGluZSwgZG9uJ3QgdW5yZWZlcmVuY2UgdGhlc2UgKi8NCj4gPiArICAgICAgICAgICAgc3JjID0g
+aHdfZGVjb2RlciA9IHZwcCA9IHNpbmsgPSBOVUxMOw0KPiA+ICAgICAgICAgICAgICBnb3RvIGVy
+cjsNCj4gPiAgICAgICAgICB9DQo+ID4gICAgICB9DQo+ID4gQEAgLTY1NywyMCArNjYxLDMxIEBA
+IHN0YXRpYyBib29sDQo+ID4gdHJ5X2ludGVsX2h3X3BpcGVsaW5lKFNwaWNlR3N0RGVjb2RlciAq
+ZGVjb2RlcikNCj4gPiAgICAgIHJldHVybiBsYXVuY2hfcGlwZWxpbmUoZGVjb2Rlcik7DQo+ID4N
+Cj4gPiAgZXJyOg0KPiA+IC0gICAgaWYgKHNyYykgew0KPiA+IC0gICAgICAgIGdzdF9vYmplY3Rf
+dW5yZWYoc3JjKTsNCj4gPiArICAgIGlmIChkZWNvZGVyLT5hcHBzaW5rKSB7DQo+ID4gKyAgICAg
+ICAgZ3N0X29iamVjdF91bnJlZihkZWNvZGVyLT5hcHBzaW5rKTsNCj4gPiArICAgICAgICBkZWNv
+ZGVyLT5hcHBzaW5rID0gTlVMTDsNCj4gPiAgICAgIH0NCj4gPiAtICAgIGlmIChzaW5rKSB7DQo+
+ID4gLSAgICAgICAgZ3N0X29iamVjdF91bnJlZihzaW5rKTsNCj4gPiArICAgIGlmIChkZWNvZGVy
+LT5hcHBzcmMpIHsNCj4gPiArICAgICAgICBnc3Rfb2JqZWN0X3VucmVmKGRlY29kZXItPmFwcHNy
+Yyk7DQo+ID4gKyAgICAgICAgZGVjb2Rlci0+YXBwc3JjID0gTlVMTDsNCj4gPiAgICAgIH0NCj4g
+PiAtICAgIGlmICh1c2VfcGFyc2VyKSB7DQo+ID4gLSAgICAgICAgZ3N0X29iamVjdF91bnJlZihw
+YXJzZXIpOw0KPiA+ICsgICAgaWYgKHBpcGVsaW5lKSB7DQo+ID4gKyAgICAgICAgZ3N0X29iamVj
+dF91bnJlZihwaXBlbGluZSk7DQo+ID4gKyAgICB9DQo+ID4gKyAgICBpZiAodnBwKSB7DQo+ID4g
+KyAgICAgICAgZ3N0X29iamVjdF91bnJlZih2cHApOw0KPiA+ICAgICAgfQ0KPiA+ICAgICAgaWYg
+KGh3X2RlY29kZXIpIHsNCj4gPiAgICAgICAgICBnc3Rfb2JqZWN0X3VucmVmKGh3X2RlY29kZXIp
+Ow0KPiA+ICAgICAgfQ0KPiA+IC0gICAgaWYgKHZwcCkgew0KPiA+IC0gICAgICAgIGdzdF9vYmpl
+Y3RfdW5yZWYodnBwKTsNCj4gPiArICAgIGlmIChwYXJzZXIpIHsNCj4gPiArICAgICAgICBnc3Rf
+b2JqZWN0X3VucmVmKHBhcnNlcik7DQo+ID4gKyAgICB9DQo+ID4gKyAgICBpZiAoc2luaykgew0K
+PiA+ICsgICAgICAgIGdzdF9vYmplY3RfdW5yZWYoc2luayk7DQo+ID4gKyAgICB9DQo+ID4gKyAg
+ICBpZiAoc3JjKSB7DQo+ID4gKyAgICAgICAgZ3N0X29iamVjdF91bnJlZihzcmMpOw0KPiA+ICAg
+ICAgfQ0KPiA+ICAgICAgcmV0dXJuIGZhbHNlOw0KPiA+ICB9DQo+ID4gLS0NCj4gPg0KPiA+IEZy
+ZWRpYW5vDQo+ID4NCj4gPiA+IGRpZmYgLS1naXQgYS9zcmMvY2hhbm5lbC1kaXNwbGF5LWdzdC5j
+IGIvc3JjL2NoYW5uZWwtZGlzcGxheS1nc3QuYw0KPiA+ID4gaW5kZXggNWM5OTI3Yi4uZGU2MDZi
+NSAxMDA2NDQNCj4gPiA+IC0tLSBhL3NyYy9jaGFubmVsLWRpc3BsYXktZ3N0LmMNCj4gPiA+ICsr
+KyBiL3NyYy9jaGFubmVsLWRpc3BsYXktZ3N0LmMNCj4gPiA+IEBAIC0yMCw2ICsyMCw3IEBADQo+
+ID4gPiAgI2luY2x1ZGUgInNwaWNlLWNvbW1vbi5oIg0KPiA+ID4gICNpbmNsdWRlICJzcGljZS1j
+aGFubmVsLXByaXYuaCINCj4gPiA+ICAjaW5jbHVkZSAiY29tbW9uL3JlY29yZGVyLmgiDQo+ID4g
+PiArI2luY2x1ZGUgImNvbW1vbi91ZGV2LmgiDQo+ID4gPg0KPiA+ID4gICNpbmNsdWRlICJjaGFu
+bmVsLWRpc3BsYXktcHJpdi5oIg0KPiA+ID4NCj4gPiA+IEBAIC00ODksMTMgKzQ5MCwyMDUgQEAg
+ZGVlcF9lbGVtZW50X2FkZGVkX2NiKEdzdEJpbiAqcGlwZWxpbmUsDQo+IEdzdEJpbiAqYmluLCBH
+c3RFbGVtZW50ICplbGVtZW50LA0KPiA+ID4gICAgICB9DQo+ID4gPiAgfQ0KPiA+ID4NCj4gPiA+
+IC1zdGF0aWMgZ2Jvb2xlYW4gY3JlYXRlX3BpcGVsaW5lKFNwaWNlR3N0RGVjb2RlciAqZGVjb2Rl
+cikNCj4gPiA+ICtzdGF0aWMgZ2NoYXIgKmZpbmRfYmVzdF9od19wbHVnaW4oY29uc3QgZ2NoYXIg
+KmRlY19uYW1lKQ0KPiA+ID4gK3sNCj4gPiA+ICsgICAgc3RhdGljIGNvbnN0IGNoYXIgcGx1Z2lu
+c1tdWzhdID0geyJtc2RrIiwgInZhIiwgInZhYXBpIn07DQo+ID4gPiArICAgIEdzdFJlZ2lzdHJ5
+ICpyZWdpc3RyeTsNCj4gPiA+ICsgICAgR3N0UGx1Z2luRmVhdHVyZSAqZmVhdHVyZTsNCj4gPiA+
+ICsgICAgZ2NoYXIgKmZlYXR1cmVfbmFtZTsNCj4gPiA+ICsgICAgaW50IGk7DQo+ID4gPiArDQo+
+ID4gPiArICAgIHJlZ2lzdHJ5ID0gZ3N0X3JlZ2lzdHJ5X2dldCgpOw0KPiA+ID4gKyAgICBpZiAo
+IXJlZ2lzdHJ5KSB7DQo+ID4gPiArICAgICAgICByZXR1cm4gTlVMTDsNCj4gPiA+ICsgICAgfQ0K
+PiA+ID4gKw0KPiA+ID4gKyAgICBmb3IgKGkgPSAwOyBpIDwgR19OX0VMRU1FTlRTKHBsdWdpbnMp
+OyBpKyspIHsNCj4gPiA+ICsgICAgICAgIGZlYXR1cmVfbmFtZSA9ICFkZWNfbmFtZSA/IGdfc3Ry
+Y29uY2F0KHBsdWdpbnNbaV0sICJwb3N0cHJvYyIsDQo+IE5VTEwpIDoNCj4gPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgIGdfc3RyY29uY2F0KHBsdWdpbnNbaV0sIGRlY19uYW1lLCAiZGVjIiwg
+TlVMTCk7DQo+ID4gPiArICAgICAgICBmZWF0dXJlID0gZ3N0X3JlZ2lzdHJ5X2xvb2t1cF9mZWF0
+dXJlKHJlZ2lzdHJ5LCBmZWF0dXJlX25hbWUpOw0KPiA+ID4gKyAgICAgICAgaWYgKCFmZWF0dXJl
+KSB7DQo+ID4gPiArICAgICAgICAgICAgZ19mcmVlKGZlYXR1cmVfbmFtZSk7DQo+ID4gPiArICAg
+ICAgICAgICAgZmVhdHVyZV9uYW1lID0gTlVMTDsNCj4gPiA+ICsgICAgICAgICAgICBjb250aW51
+ZTsNCj4gPiA+ICsgICAgICAgIH0NCj4gPiA+ICsgICAgICAgIGdzdF9vYmplY3RfdW5yZWYoZmVh
+dHVyZSk7DQo+ID4gPiArICAgICAgICBicmVhazsNCj4gPiA+ICsgICAgfQ0KPiA+ID4gKyAgICBy
+ZXR1cm4gZmVhdHVyZV9uYW1lOw0KPiA+ID4gK30NCj4gPiA+ICsNCj4gPiA+ICtzdGF0aWMgYm9v
+bCBsYXVuY2hfcGlwZWxpbmUoU3BpY2VHc3REZWNvZGVyICpkZWNvZGVyKQ0KPiA+ID4gIHsNCj4g
+PiA+ICAgICAgR3N0QnVzICpidXM7DQo+ID4gPiArDQo+ID4gPiArICAgIGlmIChkZWNvZGVyLT5h
+cHBzaW5rKSB7DQo+ID4gPiArICAgICAgICBHc3RBcHBTaW5rQ2FsbGJhY2tzIGFwcHNpbmtfY2Jz
+ID0geyBOVUxMIH07DQo+ID4gPiArICAgICAgICBhcHBzaW5rX2Nicy5uZXdfc2FtcGxlID0gbmV3
+X3NhbXBsZTsNCj4gPiA+ICsgICAgICAgIGdzdF9hcHBfc2lua19zZXRfY2FsbGJhY2tzKGRlY29k
+ZXItPmFwcHNpbmssICZhcHBzaW5rX2NicywNCj4gZGVjb2RlciwgTlVMTCk7DQo+ID4gPiArICAg
+ICAgICBnc3RfYXBwX3Npbmtfc2V0X21heF9idWZmZXJzKGRlY29kZXItPmFwcHNpbmssDQo+IE1B
+WF9ERUNPREVEX0ZSQU1FUyk7DQo+ID4gPiArICAgICAgICBnc3RfYXBwX3Npbmtfc2V0X2Ryb3Ao
+ZGVjb2Rlci0+YXBwc2luaywgRkFMU0UpOw0KPiA+ID4gKyAgICB9DQo+ID4gPiArICAgIGJ1cyA9
+IGdzdF9waXBlbGluZV9nZXRfYnVzKEdTVF9QSVBFTElORShkZWNvZGVyLT5waXBlbGluZSkpOw0K
+PiA+ID4gKyAgICBnc3RfYnVzX2FkZF93YXRjaChidXMsIGhhbmRsZV9waXBlbGluZV9tZXNzYWdl
+LCBkZWNvZGVyKTsNCj4gPiA+ICsgICAgZ3N0X29iamVjdF91bnJlZihidXMpOw0KPiA+ID4gKw0K
+PiA+ID4gKyAgICBkZWNvZGVyLT5jbG9jayA9IGdzdF9waXBlbGluZV9nZXRfY2xvY2soR1NUX1BJ
+UEVMSU5FKGRlY29kZXItDQo+ID5waXBlbGluZSkpOw0KPiA+ID4gKw0KPiA+ID4gKyAgICBpZiAo
+Z3N0X2VsZW1lbnRfc2V0X3N0YXRlKGRlY29kZXItPnBpcGVsaW5lLCBHU1RfU1RBVEVfUExBWUlO
+RykgPT0NCj4gR1NUX1NUQVRFX0NIQU5HRV9GQUlMVVJFKSB7DQo+ID4gPiArICAgICAgICBTUElD
+RV9ERUJVRygiR1N0cmVhbWVyIGVycm9yOiBVbmFibGUgdG8gc2V0IHRoZSBwaXBlbGluZSB0byB0
+aGUNCj4gcGxheWluZyBzdGF0ZS4iKTsNCj4gPiA+ICsgICAgICAgIGZyZWVfcGlwZWxpbmUoZGVj
+b2Rlcik7DQo+ID4gPiArICAgICAgICByZXR1cm4gZmFsc2U7DQo+ID4gPiArICAgIH0NCj4gPiA+
+ICsNCj4gPiA+ICsgICAgcmV0dXJuIHRydWU7DQo+ID4gPiArfQ0KPiA+ID4gKw0KPiA+ID4gK3N0
+YXRpYyBib29sIHRyeV9pbnRlbF9od19waXBlbGluZShTcGljZUdzdERlY29kZXIgKmRlY29kZXIp
+DQo+ID4gPiArew0KPiA+ID4gKyAgICBHc3RFbGVtZW50ICpwaXBlbGluZSA9IE5VTEwsICpzcmMg
+PSBOVUxMLCAqc2luayA9IE5VTEw7DQo+ID4gPiArICAgIEdzdEVsZW1lbnQgKnBhcnNlciA9IE5V
+TEwsICpod19kZWNvZGVyID0gTlVMTCwgKnZwcCA9IE5VTEw7DQo+ID4gPiArICAgIEdzdENhcHMg
+KnNyY19jYXBzLCAqc2lua19jYXBzOw0KPiA+ID4gKyAgICBpbnQgY29kZWNfdHlwZSA9IGRlY29k
+ZXItPmJhc2UuY29kZWNfdHlwZTsNCj4gPiA+ICsgICAgY29uc3QgZ2NoYXIgKmRlY19uYW1lID0g
+Z3N0X29wdHNbY29kZWNfdHlwZV0ubmFtZTsNCj4gPiA+ICsgICAgZ2NoYXIgKmh3X2RlY19uYW1l
+LCAqdnBwX25hbWUsICpwYXJzZXJfbmFtZTsNCj4gPiA+ICsgICAgZ2Jvb2xlYW4gdXNlX3BhcnNl
+cjsNCj4gPiA+ICsNCj4gPiA+ICsgICAgdXNlX3BhcnNlciA9IGNvZGVjX3R5cGUgPT0gU1BJQ0Vf
+VklERU9fQ09ERUNfVFlQRV9IMjY0IHx8DQo+ID4gPiArICAgICAgICAgICAgICAgICBjb2RlY190
+eXBlID09IFNQSUNFX1ZJREVPX0NPREVDX1RZUEVfSDI2NTsNCj4gPiA+ICsNCj4gPiA+ICsgICAg
+c3JjID0gZ3N0X2VsZW1lbnRfZmFjdG9yeV9tYWtlKCJhcHBzcmMiLCBOVUxMKTsNCj4gPiA+ICsg
+ICAgaWYgKCFzcmMpIHsNCj4gPiA+ICsgICAgICAgIHNwaWNlX3dhcm5pbmcoImVycm9yIHVwb24g
+Y3JlYXRpb24gb2YgJ2FwcHNyYycgZWxlbWVudCIpOw0KPiA+ID4gKyAgICAgICAgcmV0dXJuIGZh
+bHNlOw0KPiA+ID4gKyAgICB9DQo+ID4gPiArICAgIHNpbmsgPSBnc3RfZWxlbWVudF9mYWN0b3J5
+X21ha2UoImFwcHNpbmsiLCBOVUxMKTsNCj4gPiA+ICsgICAgaWYgKCFzaW5rKSB7DQo+ID4gPiAr
+ICAgICAgICBzcGljZV93YXJuaW5nKCJlcnJvciB1cG9uIGNyZWF0aW9uIG9mICdhcHBzaW5rJyBl
+bGVtZW50Iik7DQo+ID4gPiArICAgICAgICBnb3RvIGVycjsNCj4gPiA+ICsgICAgfQ0KPiA+ID4g
+Kw0KPiA+ID4gKyAgICBpZiAodXNlX3BhcnNlcikgew0KPiA+ID4gKyAgICAgICAgcGFyc2VyX25h
+bWUgPSBnX3N0cmNvbmNhdChkZWNfbmFtZSwgInBhcnNlIiwgTlVMTCk7DQo+ID4gPiArICAgICAg
+ICBwYXJzZXIgPSBnc3RfZWxlbWVudF9mYWN0b3J5X21ha2UocGFyc2VyX25hbWUsIE5VTEwpOw0K
+PiA+ID4gKyAgICAgICAgZ19mcmVlKHBhcnNlcl9uYW1lKTsNCj4gPiA+ICsgICAgICAgIGlmICgh
+cGFyc2VyKSB7DQo+ID4gPiArICAgICAgICAgICAgc3BpY2Vfd2FybmluZygiZXJyb3IgdXBvbiBj
+cmVhdGlvbiBvZiAncGFyc2VyJyBlbGVtZW50Iik7DQo+ID4gPiArICAgICAgICAgICAgZ290byBl
+cnI7DQo+ID4gPiArICAgICAgICB9DQo+ID4gPiArICAgIH0NCj4gPiA+ICsNCj4gPiA+ICsgICAg
+aHdfZGVjX25hbWUgPSBmaW5kX2Jlc3RfaHdfcGx1Z2luKGRlY19uYW1lKTsNCj4gPiA+ICsgICAg
+aWYgKCFod19kZWNfbmFtZSkgew0KPiA+ID4gKyAgICAgICAgc3BpY2Vfd2FybmluZygiZXJyb3Ig
+ZmluZGluZyBzdWl0YWJsZSBwbHVnaW4gZm9yIGRlY29kZSIpOw0KPiA+ID4gKyAgICAgICAgZ290
+byBlcnI7DQo+ID4gPiArICAgIH0NCj4gPiA+ICsgICAgaHdfZGVjb2RlciA9IGdzdF9lbGVtZW50
+X2ZhY3RvcnlfbWFrZShod19kZWNfbmFtZSwgTlVMTCk7DQo+ID4gPiArICAgIGdfZnJlZShod19k
+ZWNfbmFtZSk7DQo+ID4gPiArICAgIGlmICghaHdfZGVjb2Rlcikgew0KPiA+ID4gKyAgICAgICAg
+c3BpY2Vfd2FybmluZygiZXJyb3IgdXBvbiBjcmVhdGlvbiBvZiAnZGVjb2RlcicgZWxlbWVudCIp
+Ow0KPiA+ID4gKyAgICAgICAgZ290byBlcnI7DQo+ID4gPiArICAgIH0NCj4gPiA+ICsgICAgdnBw
+X25hbWUgPSBmaW5kX2Jlc3RfaHdfcGx1Z2luKE5VTEwpOw0KPiA+ID4gKyAgICBpZiAoIXZwcF9u
+YW1lKSB7DQo+ID4gPiArICAgICAgICBzcGljZV93YXJuaW5nKCJlcnJvciBmaW5kaW5nIHN1aXRh
+YmxlIHBsdWdpbiBmb3IgcG9zdHByb2MiKTsNCj4gPiA+ICsgICAgICAgIGdvdG8gZXJyOw0KPiA+
+ID4gKyAgICB9DQo+ID4gPiArICAgIHZwcCA9IGdzdF9lbGVtZW50X2ZhY3RvcnlfbWFrZSh2cHBf
+bmFtZSwgTlVMTCk7DQo+ID4gPiArICAgIGdfZnJlZSh2cHBfbmFtZSk7DQo+ID4gPiArICAgIGlm
+ICghdnBwKSB7DQo+ID4gPiArICAgICAgICBzcGljZV93YXJuaW5nKCJlcnJvciB1cG9uIGNyZWF0
+aW9uIG9mICd2cHAnIGVsZW1lbnQiKTsNCj4gPiA+ICsgICAgICAgIGdvdG8gZXJyOw0KPiA+ID4g
+KyAgICB9DQo+ID4gPiArICAgIGdfb2JqZWN0X3NldCh2cHAsDQo+ID4gPiArICAgICAgICAgICAg
+ICAgICAiZm9ybWF0IiwgR1NUX1ZJREVPX0ZPUk1BVF9CR1J4LA0KPiA+ID4gKyAgICAgICAgICAg
+ICAgICAgTlVMTCk7DQo+ID4gPiArDQo+ID4gPiArICAgIHBpcGVsaW5lID0gZ3N0X3BpcGVsaW5l
+X25ldyhOVUxMKTsNCj4gPiA+ICsgICAgaWYgKCFwaXBlbGluZSkgew0KPiA+ID4gKyAgICAgICAg
+c3BpY2Vfd2FybmluZygiZXJyb3IgdXBvbiBjcmVhdGlvbiBvZiAncGlwZWxpbmUnIGVsZW1lbnQi
+KTsNCj4gPiA+ICsgICAgICAgIGdvdG8gZXJyOw0KPiA+ID4gKyAgICB9DQo+ID4gPiArDQo+ID4g
+PiArICAgIHNyY19jYXBzID0gZ3N0X2NhcHNfZnJvbV9zdHJpbmcoZ3N0X29wdHNbY29kZWNfdHlw
+ZV0uZGVjX2NhcHMpOw0KPiA+ID4gKyAgICBnX29iamVjdF9zZXQoc3JjLA0KPiA+ID4gKyAgICAg
+ICAgICAgICAgICAgImNhcHMiLCBzcmNfY2FwcywNCj4gPiA+ICsgICAgICAgICAgICAgICAgICJp
+cy1saXZlIiwgVFJVRSwNCj4gPiA+ICsgICAgICAgICAgICAgICAgICJmb3JtYXQiLCBHU1RfRk9S
+TUFUX1RJTUUsDQo+ID4gPiArICAgICAgICAgICAgICAgICAibWF4LWJ5dGVzIiwgR19HSU5UNjRf
+Q09OU1RBTlQoMCksDQo+ID4gPiArICAgICAgICAgICAgICAgICAiYmxvY2siLCBUUlVFLA0KPiA+
+ID4gKyAgICAgICAgICAgICAgICAgTlVMTCk7DQo+ID4gPiArICAgIGdzdF9jYXBzX3VucmVmKHNy
+Y19jYXBzKTsNCj4gPiA+ICsgICAgZGVjb2Rlci0+YXBwc3JjID0gR1NUX0FQUF9TUkMoZ3N0X29i
+amVjdF9yZWYoc3JjKSk7DQo+ID4gPiArDQo+ID4gPiArICAgIHNpbmtfY2FwcyA9IGdzdF9jYXBz
+X2Zyb21fc3RyaW5nKCJ2aWRlby94LXJhdyxmb3JtYXQ9QkdSeCIpOw0KPiA+ID4gKyAgICBnX29i
+amVjdF9zZXQoc2luaywNCj4gPiA+ICsgICAgICAgICAgICAgICAgICJjYXBzIiwgc2lua19jYXBz
+LA0KPiA+ID4gKyAgICAgICAgICAgICAgICAgInN5bmMiLCBGQUxTRSwNCj4gPiA+ICsgICAgICAg
+ICAgICAgICAgICJkcm9wIiwgRkFMU0UsDQo+ID4gPiArICAgICAgICAgICAgICAgICBOVUxMKTsN
+Cj4gPiA+ICsgICAgZ3N0X2NhcHNfdW5yZWYoc2lua19jYXBzKTsNCj4gPiA+ICsgICAgZGVjb2Rl
+ci0+YXBwc2luayA9IEdTVF9BUFBfU0lOSyhzaW5rKTsNCj4gPiA+ICsNCj4gPiA+ICsgICAgaWYg
+KGhhbmRfcGlwZWxpbmVfdG9fd2lkZ2V0KGRlY29kZXItPmJhc2Uuc3RyZWFtLA0KPiA+ID4gKyAg
+ICAgICAgR1NUX1BJUEVMSU5FKHBpcGVsaW5lKSkpIHsNCj4gPiA+ICsgICAgICAgIHNwaWNlX3dh
+cm5pbmcoImVycm9yIGhhbmRpbmcgcGlwZWxpbmUgdG8gd2lkZ2V0Iik7DQo+ID4gPiArICAgICAg
+ICBnb3RvIGVycjsNCj4gPiA+ICsgICAgfQ0KPiA+ID4gKw0KPiA+ID4gKyAgICBpZiAodXNlX3Bh
+cnNlcikgew0KPiA+ID4gKyAgICAgICAgZ3N0X2Jpbl9hZGRfbWFueShHU1RfQklOKHBpcGVsaW5l
+KSwgc3JjLCBwYXJzZXIsIGh3X2RlY29kZXIsDQo+ID4gPiArICAgICAgICAgICAgICAgICAgICAg
+ICAgIHZwcCwgc2luaywgTlVMTCk7DQo+ID4gPiArICAgICAgICBpZiAoIWdzdF9lbGVtZW50X2xp
+bmtfbWFueShzcmMsIHBhcnNlciwgaHdfZGVjb2RlciwgdnBwLA0KPiA+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgc2luaywgTlVMTCkpIHsNCj4gPiA+ICsgICAgICAgICAg
+ICBzcGljZV93YXJuaW5nKCJlcnJvciBsaW5raW5nIGVsZW1lbnRzIik7DQo+ID4gPiArICAgICAg
+ICAgICAgZ290byBlcnI7DQo+ID4gPiArICAgICAgICB9DQo+ID4gPiArICAgIH0gZWxzZSB7DQo+
+ID4gPiArICAgICAgICBnc3RfYmluX2FkZF9tYW55KEdTVF9CSU4ocGlwZWxpbmUpLCBzcmMsIGh3
+X2RlY29kZXIsDQo+ID4gPiArICAgICAgICAgICAgICAgICAgICAgICAgIHZwcCwgc2luaywgTlVM
+TCk7DQo+ID4gPiArICAgICAgICBpZiAoIWdzdF9lbGVtZW50X2xpbmtfbWFueShzcmMsIGh3X2Rl
+Y29kZXIsIHZwcCwgc2luaywgTlVMTCkpIHsNCj4gPiA+ICsgICAgICAgICAgICBzcGljZV93YXJu
+aW5nKCJlcnJvciBsaW5raW5nIGVsZW1lbnRzIik7DQo+ID4gPiArICAgICAgICAgICAgZ290byBl
+cnI7DQo+ID4gPiArICAgICAgICB9DQo+ID4gPiArICAgIH0NCj4gPiA+ICsNCj4gPiA+ICsgICAg
+ZGVjb2Rlci0+cGlwZWxpbmUgPSBwaXBlbGluZTsNCj4gPiA+ICsgICAgcmV0dXJuIGxhdW5jaF9w
+aXBlbGluZShkZWNvZGVyKTsNCj4gPiA+ICsNCj4gPiA+ICtlcnI6DQo+ID4gPiArICAgIGlmIChz
+cmMpIHsNCj4gPiA+ICsgICAgICAgIGdzdF9vYmplY3RfdW5yZWYoc3JjKTsNCj4gPiA+ICsgICAg
+fQ0KPiA+ID4gKyAgICBpZiAoc2luaykgew0KPiA+ID4gKyAgICAgICAgZ3N0X29iamVjdF91bnJl
+ZihzaW5rKTsNCj4gPiA+ICsgICAgfQ0KPiA+ID4gKyAgICBpZiAodXNlX3BhcnNlcikgew0KPiA+
+ID4gKyAgICAgICAgZ3N0X29iamVjdF91bnJlZihwYXJzZXIpOw0KPiA+ID4gKyAgICB9DQo+ID4g
+PiArICAgIGlmIChod19kZWNvZGVyKSB7DQo+ID4gPiArICAgICAgICBnc3Rfb2JqZWN0X3VucmVm
+KGh3X2RlY29kZXIpOw0KPiA+ID4gKyAgICB9DQo+ID4gPiArICAgIGlmICh2cHApIHsNCj4gPiA+
+ICsgICAgICAgIGdzdF9vYmplY3RfdW5yZWYodnBwKTsNCj4gPiA+ICsgICAgfQ0KPiA+ID4gKyAg
+ICByZXR1cm4gZmFsc2U7DQo+ID4gPiArfQ0KPiA+ID4gKw0KPiA+ID4gK3N0YXRpYyBnYm9vbGVh
+biBjcmVhdGVfcGlwZWxpbmUoU3BpY2VHc3REZWNvZGVyICpkZWNvZGVyKQ0KPiA+ID4gK3sNCj4g
+PiA+ICAgICAgR3N0RWxlbWVudCAqcGxheWJpbiwgKnNpbms7DQo+ID4gPiAgICAgIFNwaWNlR3N0
+UGxheUZsYWdzIGZsYWdzOw0KPiA+ID4gICAgICBHc3RDYXBzICpjYXBzOw0KPiA+ID4gICAgICBz
+dGF0aWMgYm9vbCBwbGF5YmluM19zdXBwb3J0ZWQgPSB0cnVlOw0KPiA+ID4gKyAgICBHcHVWZW5k
+b3IgdmVuZG9yID0gc3BpY2VfdWRldl9kZXRlY3RfZ3B1KElOVEVMX1ZFTkRPUl9JRCk7DQo+ID4g
+PiArDQo+ID4gPiArICAgIGlmICh2ZW5kb3IgPT0gVkVORE9SX0dQVV9ERVRFQ1RFRCB8fA0KPiA+
+ID4gKyAgICAgICAgdmVuZG9yID09IFZFTkRPUl9HUFVfVU5LTk9XTikgew0KPiA+ID4gKyAgICAg
+ICAgaWYgKHRyeV9pbnRlbF9od19waXBlbGluZShkZWNvZGVyKSkgew0KPiA+ID4gKyAgICAgICAg
+ICAgIHJldHVybiBUUlVFOw0KPiA+ID4gKyAgICAgICAgfQ0KPiA+ID4gKyAgICB9DQo+ID4gPg0K
+PiA+ID4gICAgICBwbGF5YmluID0gcGxheWJpbjNfc3VwcG9ydGVkID8NCj4gPiA+ICAgICAgICAg
+ICAgICAgIGdzdF9lbGVtZW50X2ZhY3RvcnlfbWFrZSgicGxheWJpbjMiLCAicGxheWJpbiIpIDog
+TlVMTDsNCj4gPiA+IEBAIC01NzEsMjkgKzc2NCw5IEBAIHN0YXRpYyBnYm9vbGVhbg0KPiBjcmVh
+dGVfcGlwZWxpbmUoU3BpY2VHc3REZWNvZGVyICpkZWNvZGVyKQ0KPiA+ID4gICAgICBnX3dhcm5f
+aWZfZmFpbChkZWNvZGVyLT5hcHBzcmMgPT0gTlVMTCk7DQo+ID4gPiAgICAgIGRlY29kZXItPnBp
+cGVsaW5lID0gcGxheWJpbjsNCj4gPiA+DQo+ID4gPiAtICAgIGlmIChkZWNvZGVyLT5hcHBzaW5r
+KSB7DQo+ID4gPiAtICAgICAgICBHc3RBcHBTaW5rQ2FsbGJhY2tzIGFwcHNpbmtfY2JzID0geyBO
+VUxMIH07DQo+ID4gPiAtICAgICAgICBhcHBzaW5rX2Nicy5uZXdfc2FtcGxlID0gbmV3X3NhbXBs
+ZTsNCj4gPiA+IC0gICAgICAgIGdzdF9hcHBfc2lua19zZXRfY2FsbGJhY2tzKGRlY29kZXItPmFw
+cHNpbmssICZhcHBzaW5rX2NicywNCj4gZGVjb2RlciwgTlVMTCk7DQo+ID4gPiAtICAgICAgICBn
+c3RfYXBwX3Npbmtfc2V0X21heF9idWZmZXJzKGRlY29kZXItPmFwcHNpbmssDQo+IE1BWF9ERUNP
+REVEX0ZSQU1FUyk7DQo+ID4gPiAtICAgICAgICBnc3RfYXBwX3Npbmtfc2V0X2Ryb3AoZGVjb2Rl
+ci0+YXBwc2luaywgRkFMU0UpOw0KPiA+ID4gLSAgICB9DQo+ID4gPiAtICAgIGJ1cyA9IGdzdF9w
+aXBlbGluZV9nZXRfYnVzKEdTVF9QSVBFTElORShkZWNvZGVyLT5waXBlbGluZSkpOw0KPiA+ID4g
+LSAgICBnc3RfYnVzX2FkZF93YXRjaChidXMsIGhhbmRsZV9waXBlbGluZV9tZXNzYWdlLCBkZWNv
+ZGVyKTsNCj4gPiA+IC0gICAgZ3N0X29iamVjdF91bnJlZihidXMpOw0KPiA+ID4gLQ0KPiA+ID4g
+LSAgICBkZWNvZGVyLT5jbG9jayA9IGdzdF9waXBlbGluZV9nZXRfY2xvY2soR1NUX1BJUEVMSU5F
+KGRlY29kZXItDQo+ID5waXBlbGluZSkpOw0KPiA+ID4gLQ0KPiA+ID4gLSAgICBpZiAoZ3N0X2Vs
+ZW1lbnRfc2V0X3N0YXRlKGRlY29kZXItPnBpcGVsaW5lLCBHU1RfU1RBVEVfUExBWUlORykgPT0N
+Cj4gR1NUX1NUQVRFX0NIQU5HRV9GQUlMVVJFKSB7DQo+ID4gPiAtICAgICAgICBTUElDRV9ERUJV
+RygiR1N0cmVhbWVyIGVycm9yOiBVbmFibGUgdG8gc2V0IHRoZSBwaXBlbGluZSB0byB0aGUNCj4g
+cGxheWluZyBzdGF0ZS4iKTsNCj4gPiA+IC0gICAgICAgIGZyZWVfcGlwZWxpbmUoZGVjb2Rlcik7
+DQo+ID4gPiAtICAgICAgICByZXR1cm4gRkFMU0U7DQo+ID4gPiAtICAgIH0NCj4gPiA+IC0NCj4g
+PiA+IC0gICAgcmV0dXJuIFRSVUU7DQo+ID4gPiArICAgIHJldHVybiBsYXVuY2hfcGlwZWxpbmUo
+ZGVjb2Rlcik7DQo+ID4gPiAgfQ0KPiA+ID4NCj4gPiA+IC0NCj4gPiA+ICAvKiAtLS0tLS0tLS0t
+IFZpZGVvRGVjb2RlcidzIHB1YmxpYyBBUEkgLS0tLS0tLS0tLSAqLw0KPiA+ID4NCj4gPiA+ICBz
+dGF0aWMgdm9pZCBzcGljZV9nc3RfZGVjb2Rlcl9yZXNjaGVkdWxlKFZpZGVvRGVjb2Rlcg0KPiAq
+dmlkZW9fZGVjb2RlcikNCj4gPiA+IC0tDQo+ID4gPiAyLjM5LjINCj4gPiA+DQo=
