@@ -1,61 +1,64 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D5A37E10EC
-	for <lists+spice-devel@lfdr.de>; Sat,  4 Nov 2023 21:41:13 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D81C17E10F1
+	for <lists+spice-devel@lfdr.de>; Sat,  4 Nov 2023 21:45:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 18B0F10E0FE;
-	Sat,  4 Nov 2023 20:41:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7101E10E045;
+	Sat,  4 Nov 2023 20:45:20 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 28FDF10E045
- for <spice-devel@lists.freedesktop.org>; Sat,  4 Nov 2023 20:41:08 +0000 (UTC)
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5845a94dae1so1580218eaf.0
- for <spice-devel@lists.freedesktop.org>; Sat, 04 Nov 2023 13:41:08 -0700 (PDT)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA56810E045
+ for <spice-devel@lists.freedesktop.org>; Sat,  4 Nov 2023 20:45:18 +0000 (UTC)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-41cd6e1d4fbso18530401cf.1
+ for <spice-devel@lists.freedesktop.org>; Sat, 04 Nov 2023 13:45:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699130467; x=1699735267; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W3jY/r92qxbQWDQoo61SCeRXlVsRLNBybsNGrWQPiRc=;
- b=DeC/Yzt0GAxfAHLry+orxHWNwdUNh9Keu4D1Y8F4psA+gjA25BCqkLV1DrnrfyzXWD
- pTatoflXWsydNKQoAakjc7qWMbrWxxjVlvWgbQQkwFniT8cvAagpezxIKevkI1z+iiuj
- wEPWAnvY61cKkSLLtYSQn9bq+p7TeoIQpV26oBeMX+dalZiYkPChk2lQWgjzLWOh/Ykg
- 7GucyA5pQloDe+aY8hBqVnZJyjkA1uAVjMrsONWG7hhzsu2/9FYNzY+xYUmhycGVrbP6
- 6l8ULLP3ku6Dgi5zsZ8FNNJeC4AftdCegOq2yBuuonZP5u+nBHpt0hawnPJIVU2D+IQF
- 2mTg==
+ d=gmail.com; s=20230601; t=1699130717; x=1699735517; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8bsRVZ3Vdqstf27q6d0byayi09M/iO/dmvdXY6oRAbY=;
+ b=H5TUXv86IFBSLRKMEGliQmnxA1r4UiX4nHNyme6xAByeSB33iU9BFl7a0s0Omuggo3
+ SWKCRymDagZOsItujYAboGms7Qy3+bWSAjdBrFGr8IF+6EdO8YswvutywmhJ+XAG1ne/
+ TfzWCU17qZ0zXsmXNvarjBwrlO1BJFXQ6oQMzlWhn9Yyx54fAj+g2b0DJ1JXIj5GTKfM
+ PJ/ll/Nec69Zmw2R8HPotaO/7hQkaL+V7YSG//PNH0Eivm1xgfqZ4cl08rj6glmoBdMi
+ fwIZY8P2DLPdTMLiROPAhgVHoMDOQOc35w3ZhA2Bux4M8q8cfHZxAfP7kyAhzbxSv4zu
+ 78xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699130467; x=1699735267;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1699130717; x=1699735517;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=W3jY/r92qxbQWDQoo61SCeRXlVsRLNBybsNGrWQPiRc=;
- b=Ppk/US6B9FW3WpEZiThpIYziMjwhH2PgviXjZZ4CAm/J5CsPilzJyspf00eAMAxNlF
- xidwskiWIR3X2r8SHzrA1Mqyw/JAn1u3BMZHjhktTVMBX9QcVa2BtOtuArsLZkl37ZeG
- XQFJlfI2yQBX6tR5/siGV6NF7BV8PRn0656NFJRcDWTxFspuCBRVT0ZYFVwhbbXc7HwU
- 1/7HvWqE23Is9xe2zJWufLQ0NPaC9FLZoHj7rCG4pDMiAass1WkGxP69fjtdmhHssXYb
- YtSWi5C6M8WaYLtPwDN0J+wVkgIucOLOnpfMN6DWuaWaQKXG0Aws3xua3h4wKrWOlD7+
- 19Tg==
-X-Gm-Message-State: AOJu0Yx4zwz4d9+BizVOFa7DtKOf1uF5bFmeH6Ky6CxiFixFHYGxpg3r
- fQnccWsm5xIzpFdH4bFU35SxJZn//Jg7JTl5OmQ=
-X-Google-Smtp-Source: AGHT+IHEqvVFmTLvr/4PJU4y7TmXK7SKiy0wBAuEDT1g/a38mtj7jGwnRcT8cMcDcQAwKPXRrPJgTUjCmmd8XpSoy4s=
-X-Received: by 2002:a4a:df4c:0:b0:576:bbf6:8a8e with SMTP id
- j12-20020a4adf4c000000b00576bbf68a8emr3654923oou.2.1699130467319; Sat, 04 Nov
- 2023 13:41:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20231103085120.1339-1-freddy77@gmail.com>
- <IA0PR11MB71850E1CB2DF0C71234E0DF5F8A4A@IA0PR11MB7185.namprd11.prod.outlook.com>
-In-Reply-To: <IA0PR11MB71850E1CB2DF0C71234E0DF5F8A4A@IA0PR11MB7185.namprd11.prod.outlook.com>
+ bh=8bsRVZ3Vdqstf27q6d0byayi09M/iO/dmvdXY6oRAbY=;
+ b=L6sSZb2KP/txNKNm2VZJ0rLuhb8LrrBXibmAvGEPLwqPnZEmDRq1lphxzzCcBRUclM
+ lfIEp66JhXvoAZcU/giWc6TdF2Gc96VGyaavj+7jMfdDq4Nj18XEqdsUCfRheegyqTCq
+ /un3nw0llhOZdilVkYcXsqhYF2072AH2+x1itcMwWlEPRBiPCa5rg6qoswUuz9SUccVm
+ 4ZZQ13wITrbBKfe7rP2bZ3qRvRwMcSr4IBivwuiVXQei+U621tJ+f3z+pRaAI+DlIyZh
+ nD2gU6iif4Afm121BIeGOqeRSOcpmYQIYTbOBhD5Pyg07M472j43MQbGxYWhJCSDc1IF
+ FL+A==
+X-Gm-Message-State: AOJu0Yx7cz7h/1sZmPpiNV7d84C9HWfIhqyZlg49MRKnQS+zs8N6K1RP
+ T7iBb65JOhSE1rOl2PC86zmxSi3pMQI=
+X-Google-Smtp-Source: AGHT+IEnlCp6dcr2KrZZ2w/whbFMq3/G8tf/GitRCdpFGcw57ni+juoxboVi9xfqGuB+XsPLIdTs1A==
+X-Received: by 2002:a05:622a:1047:b0:419:4c70:c54e with SMTP id
+ f7-20020a05622a104700b004194c70c54emr25425140qte.52.1699130717499; 
+ Sat, 04 Nov 2023 13:45:17 -0700 (PDT)
+Received: from freddy-fedora.redhat.com ([195.213.141.23])
+ by smtp.gmail.com with ESMTPSA id
+ o24-20020ac86998000000b004166905aa2asm1889037qtq.28.2023.11.04.13.45.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 04 Nov 2023 13:45:17 -0700 (PDT)
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sat, 4 Nov 2023 20:40:56 +0000
-Message-ID: <CAHt6W4fu4_huXxZ2Ew=b_nU=yj-jdvQFT8EFEC38=TXke8=p7A@mail.gmail.com>
-To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] [PATCH spice-gtk 1/2] gstreamer: Fix leak using
- GstBus watch
+To: spice-devel@lists.freedesktop.org
+Date: Sat,  4 Nov 2023 20:45:12 +0000
+Message-ID: <20231104204512.232-1-freddy77@gmail.com>
+X-Mailer: git-send-email 2.41.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: [Spice-devel] [PATCH spice-gtk] gstreamer: Fix leak using GstBus
+ watch (v2)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,95 +70,67 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno sab 4 nov 2023 alle ore 16:22 Kasireddy, Vivek
-<vivek.kasireddy@intel.com> ha scritto:
->
-> Hi Frediano,
->
-> >
-> > This patch fixes a leak due to not freeing GstBus watch.
-> > The watch is attached (as GSource) to the main loop and retains
-> > a pointer to the bus so we need to remove it to release the bus
-> > when we release the pipeline.
-> > This was detected forcibly creating and destroying lot of streams.
-> > After a while the client program consumed all file descriptors
-> > and stopped working. This as GstBus retains a GPoll which,
-> > under Unix, uses 2 file descriptors.
-> > For some reasons using gst_pipeline_get_bus again in free_pipeline
-> > do not fix entirely the leak so keep a pointer to the exact
-> > bus we set our watch on.
-> >
-> > Signed-off-by: Frediano Ziglio <freddy77@gmail.com>
-> > ---
-> >  src/channel-display-gst.c | 10 +++++++++-
-> >  1 file changed, 9 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
-> > index 3b372dc0..6e126000 100644
-> > --- a/src/channel-display-gst.c
-> > +++ b/src/channel-display-gst.c
-> > @@ -47,6 +47,7 @@ typedef struct SpiceGstDecoder {
-> >      GstAppSink *appsink;
-> >      GstElement *pipeline;
-> >      GstClock *clock;
-> > +    GstBus *bus;
-> >
-> >      /* ---------- Decoding and display queues ---------- */
-> >
-> > @@ -352,6 +353,13 @@ static void free_pipeline(SpiceGstDecoder
-> > *decoder)
-> >          return;
-> >      }
-> >
-> > +    GstBus *bus = decoder->bus;
-> > +    if (bus) {
-> > +        gst_bus_remove_watch(bus);
-> > +        gst_object_unref(bus);
-> > +        decoder->bus = NULL;
-> > +    }
-> Looks like the watch can be removed by returning FALSE from the bus
-> func (handle_pipeline_message) as well. Would it make sense to handle
-> it this way?
->
+This patch fixes a leak due to not freeing GstBus watch.
+The watch is attached (as GSource) to the main loop and retains
+a pointer to the bus so we need to remove it to release the bus
+when we release the pipeline.
+This was detected forcibly creating and destroying lot of streams.
+After a while the client program consumed all file descriptors
+and stopped working. This as GstBus retains a GPoll which,
+under Unix, uses 2 file descriptors.
+For some reasons using gst_pipeline_get_bus again in free_pipeline
+do not fix entirely the leak so keep a pointer to the exact
+bus we set our watch on.
 
-The problem is that if we don't get a message we are not sure the
-watch is removed.
-There are many cases where we could release the pipeline but receive
-different events from the bus.
+Signed-off-by: Frediano Ziglio <freddy77@gmail.com>
+---
+Changes since v1:
+- added comment.
+---
+ src/channel-display-gst.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-> > +
-> >      gst_element_set_state(decoder->pipeline, GST_STATE_NULL);
-> >      gst_object_unref(decoder->appsrc);
-> >      decoder->appsrc = NULL;
-> > @@ -534,7 +542,7 @@ static bool launch_pipeline(SpiceGstDecoder
-> > *decoder)
-> >      }
-> >      bus = gst_pipeline_get_bus(GST_PIPELINE(decoder->pipeline));
-> >      gst_bus_add_watch(bus, handle_pipeline_message, decoder);
-> > -    gst_object_unref(bus);
-> But the docs say that it is ok to unref the bus as the watch will take an additional
-> reference on the bus.
->
 
-Yes, it should be safe, but in this case the bus pointer is retained
-to be able to remove the watch.
-Yes, in theory we could store the bus pointer but still have the
-gst_object_unref but nobody would prevent some other code to remove
-the watch and make the pointer a dangling pointer. Keeping the
-reference makes sure the pointer is not dangling.
-Maybe a comment would help. I'll add one.
+diff --git a/src/channel-display-gst.c b/src/channel-display-gst.c
+index 3b372dc0..2734a546 100644
+--- a/src/channel-display-gst.c
++++ b/src/channel-display-gst.c
+@@ -47,6 +47,7 @@ typedef struct SpiceGstDecoder {
+     GstAppSink *appsink;
+     GstElement *pipeline;
+     GstClock *clock;
++    GstBus *bus;
+ 
+     /* ---------- Decoding and display queues ---------- */
+ 
+@@ -352,6 +353,13 @@ static void free_pipeline(SpiceGstDecoder *decoder)
+         return;
+     }
+ 
++    GstBus *bus = decoder->bus;
++    if (bus) {
++        gst_bus_remove_watch(bus);
++        gst_object_unref(bus);
++        decoder->bus = NULL;
++    }
++
+     gst_element_set_state(decoder->pipeline, GST_STATE_NULL);
+     gst_object_unref(decoder->appsrc);
+     decoder->appsrc = NULL;
+@@ -534,7 +542,9 @@ static bool launch_pipeline(SpiceGstDecoder *decoder)
+     }
+     bus = gst_pipeline_get_bus(GST_PIPELINE(decoder->pipeline));
+     gst_bus_add_watch(bus, handle_pipeline_message, decoder);
+-    gst_object_unref(bus);
++    // Retains the bus object to be able to release the watch.
++    // We keep the reference to avoid a dangling pointer.
++    decoder->bus = bus;
+ 
+     decoder->clock = gst_pipeline_get_clock(GST_PIPELINE(decoder->pipeline));
+ 
+-- 
+2.41.0
 
-> Thanks,
-> Vivek
-> > +    decoder->bus = bus;
-> >
-> >      decoder->clock = gst_pipeline_get_clock(GST_PIPELINE(decoder-
-> > >pipeline));
-> >
-
-Regards,
-   Frediano
