@@ -2,46 +2,49 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8702E7E1D77
-	for <lists+spice-devel@lfdr.de>; Mon,  6 Nov 2023 10:51:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F5D07E79C8
+	for <lists+spice-devel@lfdr.de>; Fri, 10 Nov 2023 08:36:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 96F3C10E2A5;
-	Mon,  6 Nov 2023 09:51:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B893110E93B;
+	Fri, 10 Nov 2023 07:36:27 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9577E10E051;
- Mon,  6 Nov 2023 09:48:23 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 55D9FCE0AD4;
- Mon,  6 Nov 2023 09:48:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4153DC433C7;
- Mon,  6 Nov 2023 09:48:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699264100;
- bh=h+NSCPSwlpTiwPS/t/qXHGHCzH25S5Gk5v0x2k5LBkU=;
- h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=UYgfyXoKhcRw7fX2jwEFhlsk36VUopg/olpvjv+aIv6xKPdXk+tD6n6fRDQuEcQI4
- K1rQntb/DrNvBP1wBahGsHLn+QBgq5jyUhlhYI0kHsu+RMWMagZ1OC4ytqNcxzRDS3
- WNSGDxHS9zcPiy8ByzgU2yWBTkvwfwVTWq/kVyxn0KN5/oDD+/VVfKwMeSsAV21u+m
- xy2t9X8+oGMxjStITIzILXu5CwWUYyesF8T2+vbOceRau2lixoz+E24gInZRJPHNoF
- imCR3cW/nbBbRMCLHEaYscmjzrHpy0j4BOMFpE/R5LKcptNp5KLdalL/jOACNbLAg/
- o4W5099wqcK9w==
-From: Maxime Ripard <mripard@kernel.org>
-To: airlied@redhat.com, kraxel@redhat.com, airlied@gmail.com, 
- daniel@ffwll.ch, Zongmin Zhou <zhouzongmin@kylinos.cn>
-In-Reply-To: <20230801025309.4049813-1-zhouzongmin@kylinos.cn>
-References: <20230425014543.3448839-1-zhouzongmin@kylinos.cn>
- <20230801025309.4049813-1-zhouzongmin@kylinos.cn>
-Message-Id: <169926409790.498855.8582421584361847884.b4-ty@kernel.org>
-Date: Mon, 06 Nov 2023 10:48:17 +0100
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 881F310E68D;
+ Fri, 10 Nov 2023 05:51:01 +0000 (UTC)
+X-UUID: 03b1ea3b08bf4a16b3aaf728a042b3d3-20231110
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.32, REQID:e2de9630-3f36-4b47-a4bd-bdb0ec1fda6f, IP:5,
+ U
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:-5,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+ N:release,TS:-5
+X-CID-INFO: VERSION:1.1.32, REQID:e2de9630-3f36-4b47-a4bd-bdb0ec1fda6f, IP:5,
+ URL
+ :0,TC:0,Content:-5,EDM:0,RT:0,SF:-5,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:-5
+X-CID-META: VersionHash:5f78ec9, CLOUDID:4ded3b95-10ce-4e4b-85c2-c9b5229ff92b,
+ B
+ ulkID:231110133836Q67P66PL,BulkQuantity:1,Recheck:0,SF:38|24|17|19|44|66|1
+ 02,TC:nil,Content:0,EDM:-3,IP:-2,URL:0,File:nil,Bulk:40,QS:nil,BEC:nil,COL
+ :0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_FAS,TF_CID_SPAM_FSD,TF_CID_SPAM_FSI
+X-UUID: 03b1ea3b08bf4a16b3aaf728a042b3d3-20231110
+X-User: heminhong@kylinos.cn
+Received: from localhost.localdomain [(116.128.244.169)] by mailgw
+ (envelope-from <heminhong@kylinos.cn>) (Generic MTA)
+ with ESMTP id 1158269534; Fri, 10 Nov 2023 13:50:49 +0800
+From: heminhong <heminhong@kylinos.cn>
+To: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch
+Date: Fri, 10 Nov 2023 13:50:31 +0800
+Message-Id: <20231110055031.57360-1-heminhong@kylinos.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.3
-X-Mailman-Approved-At: Mon, 06 Nov 2023 09:51:53 +0000
-Subject: Re: [Spice-devel] [RESEND PATCH] drm/qxl: prevent memory leak
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 10 Nov 2023 07:36:25 +0000
+Subject: [Spice-devel] [PATCH] drm/qxl: remove unused declaration
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,23 +56,60 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: spice-devel@lists.freedesktop.org, heminhong <heminhong@kylinos.cn>,
+ virtualization@lists.linux.dev, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, 01 Aug 2023 10:53:09 +0800, Zongmin Zhou wrote:
-> The allocated memory for qdev->dumb_heads should be released
-> in qxl_destroy_monitors_object before qxl suspend.
-> otherwise,qxl_create_monitors_object will be called to
-> reallocate memory for qdev->dumb_heads after qxl resume,
-> it will cause memory leak.
-> 
-> 
-> [...]
+Some functions are never used by the driver,
+removing the functions declaration, it can be reducing program size,
+and improving code readability and maintainability.
 
-Applied to drm/drm-misc (drm-misc-fixes).
+Signed-off-by: heminhong <heminhong@kylinos.cn>
+---
+ drivers/gpu/drm/qxl/qxl_drv.h | 7 -------
+ 1 file changed, 7 deletions(-)
 
-Thanks!
-Maxime
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+index 307a890fde13..32069acd93f8 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.h
++++ b/drivers/gpu/drm/qxl/qxl_drv.h
+@@ -119,7 +119,6 @@ struct qxl_output {
+ 
+ #define to_qxl_crtc(x) container_of(x, struct qxl_crtc, base)
+ #define drm_connector_to_qxl_output(x) container_of(x, struct qxl_output, base)
+-#define drm_encoder_to_qxl_output(x) container_of(x, struct qxl_output, enc)
+ 
+ struct qxl_mman {
+ 	struct ttm_device		bdev;
+@@ -256,8 +255,6 @@ struct qxl_device {
+ 
+ #define to_qxl(dev) container_of(dev, struct qxl_device, ddev)
+ 
+-int qxl_debugfs_fence_init(struct qxl_device *rdev);
+-
+ int qxl_device_init(struct qxl_device *qdev, struct pci_dev *pdev);
+ void qxl_device_fini(struct qxl_device *qdev);
+ 
+@@ -344,8 +341,6 @@ qxl_image_alloc_objects(struct qxl_device *qdev,
+ 			int height, int stride);
+ void qxl_image_free_objects(struct qxl_device *qdev, struct qxl_drm_image *dimage);
+ 
+-void qxl_update_screen(struct qxl_device *qxl);
+-
+ /* qxl io operations (qxl_cmd.c) */
+ 
+ void qxl_io_create_primary(struct qxl_device *qdev,
+@@ -445,8 +440,6 @@ int qxl_hw_surface_dealloc(struct qxl_device *qdev,
+ 
+ int qxl_bo_check_id(struct qxl_device *qdev, struct qxl_bo *bo);
+ 
+-struct qxl_drv_surface *
+-qxl_surface_lookup(struct drm_device *dev, int surface_id);
+ void qxl_surface_evict(struct qxl_device *qdev, struct qxl_bo *surf, bool freeing);
+ 
+ /* qxl_ioctl.c */
+-- 
+2.25.1
 
