@@ -1,48 +1,47 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2474B7EBD45
-	for <lists+spice-devel@lfdr.de>; Wed, 15 Nov 2023 07:57:28 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 877AD7EBD46
+	for <lists+spice-devel@lfdr.de>; Wed, 15 Nov 2023 07:57:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EC80F10E4F5;
-	Wed, 15 Nov 2023 06:57:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE66510E4F6;
+	Wed, 15 Nov 2023 06:57:23 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C7F3210E390;
- Wed, 15 Nov 2023 03:34:23 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4204510E406;
+ Wed, 15 Nov 2023 03:35:22 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 1DE34B81853;
- Wed, 15 Nov 2023 03:34:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72144C433C9;
- Wed, 15 Nov 2023 03:34:17 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 0D1E2CE113D;
+ Wed, 15 Nov 2023 03:35:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A931C433C9;
+ Wed, 15 Nov 2023 03:35:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700019261;
+ s=k20201202; t=1700019319;
  bh=BPXcmbIHJIlBqHjEjTXsb/rxW6/LFGR3qAUvhVYpjtQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pYNBYrkEelRPGCp9Mg3v4ld+Tqi3EO7UfJvzOI0ejadhSS9cN0a0FI5+6LxvcviZC
- UDMrRpr7ZSn09UcgP4451ee0/sEe0XFT4wAWlwsUhPfdwIPT3e5MDEaKXRW/SCLeew
- x8MVpxCn95J0Zu/7Tx0K757qzAhioXH+3YAK9D9uO+XOM8fCJ+yRgdrHNF2KTnxE4/
- MdeJEPV5Qb9N0M0wzGnMse8MJp4+u/SYg55gKWB0yxl5Rf0lmo2puJatDa3lnKxtVH
- Zo/EdqPVDTsvykquBgP1mU4T6Uft/+4bAsBDK7LqIWhm92Knbk8Bgxur0kNQku00ua
- qh2Nt8bw254zg==
+ b=biKCh8gMahT5jWRoy1sdaTeudzg3ldSbohqGdGcArd/w+CX65gQAkMeKk7SZWI4Lj
+ 3nipCFMksJEhqLWxmEhRzFVt86tGqbtTDNpE6Pl1xwEaQRtA47LNs1A+kbgPLxnmWz
+ Kajel7/E8bslKSFjedW3ssld6IsImWpaurADmhVOG+CZ6PY9LZ8pvUOvFrbRaustdD
+ I35Cz+l8OTbvLGBI1bs9X7RzGhyNisiv9Sm31Ngn1LtGV7N8/4U1JiACICiWAfDGwL
+ JfzpyaB+4GBv4xTIVmpfAxhcbU7riYlggilp53ObIkDk5Y19GupjTHaBuueMiHrxwi
+ eMd5eh7/bxt/A==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue, 14 Nov 2023 22:33:36 -0500
-Message-ID: <20231115033350.1228588-2-sashal@kernel.org>
+Date: Tue, 14 Nov 2023 22:34:46 -0500
+Message-ID: <20231115033459.1228900-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231115033350.1228588-1-sashal@kernel.org>
-References: <20231115033350.1228588-1-sashal@kernel.org>
+In-Reply-To: <20231115033459.1228900-1-sashal@kernel.org>
+References: <20231115033459.1228900-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.6.1
+X-stable-base: Linux 6.5.11
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 15 Nov 2023 06:57:20 +0000
-Subject: [Spice-devel] [PATCH AUTOSEL 6.6 2/6] drm/qxl: prevent memory leak
+Subject: [Spice-devel] [PATCH AUTOSEL 6.5 2/6] drm/qxl: prevent memory leak
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
