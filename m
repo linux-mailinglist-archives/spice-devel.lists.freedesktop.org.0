@@ -2,60 +2,50 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 489187EBD55
-	for <lists+spice-devel@lfdr.de>; Wed, 15 Nov 2023 08:07:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B19587EBF72
+	for <lists+spice-devel@lfdr.de>; Wed, 15 Nov 2023 10:28:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 35E2E10E4F7;
-	Wed, 15 Nov 2023 07:07:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4B1B210E517;
+	Wed, 15 Nov 2023 09:28:00 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE9F710E4F7;
- Wed, 15 Nov 2023 07:07:14 +0000 (UTC)
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5842c251d7cso3573893eaf.1; 
- Tue, 14 Nov 2023 23:07:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700032034; x=1700636834; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DD6loysLm1if0z26gUfJWR92/8dI2bMs4fySErE1LEY=;
- b=Phc4OPsGPwMua5p9T9v098vNdFUwkK1oU5xDLBeLsEZuWZquYqg7nFAvwmliWvaL//
- LL+0EV+Fa5i9mi8OZdO4rf3QS0GM/FjJazPKA2g1pqFo/z7bxOZVpI5rcHZtenbKBARR
- ryJ4ekHp+nNA5Hp5CPXxQRMpJkg73GV6fPx3bXCQKIi/5KqIA7kkqzdroKqoCX/GmkP2
- RW15azQoeWvmywJtNThEA09ZygFd13Jx3fjJ2zr8MU4w9i61Q1tWIri+gdUsuZVYFduq
- nZsdJlJZYQG6evP5D7rP6YUVCJEevO9jE5QIR/8rpgg1tvOh9m7sWkd6zH2znqy2zNCS
- JPkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700032034; x=1700636834;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DD6loysLm1if0z26gUfJWR92/8dI2bMs4fySErE1LEY=;
- b=Ncuh2P55ybvPXM0hRo79MmJTyAImZMZmyPeBnj5EXkfDH5pYqJgM59hZTtJVUBsasA
- Ip2QSkkb1AK3knGWmxd3VhsP7cCDjIDY0lVnZTDG8Bm8+smN/icu01DX1Ox+pWv1UAlA
- YcCled4XLtmzDr4aJD7DyvyXo4xftUbUkmeZ6rXk6cYHjwjentPlaF8bQImpG2KmLjAG
- dNArzsaKbzAayDuugS8O9beT8ysBBtbnjP58M5KAybiX/DFLmpSw/31pK2hBB0Gm8VW+
- IlBggCzWuJEmjDi2Bj/Xnsii1ijYSfbo04GsD87ejOp0/mwnDvkU/M6YOrzJgJeIbexP
- 8t9w==
-X-Gm-Message-State: AOJu0YwD6pgydBMegdO/jo8Qhe+VUGVKIYW3adfHqovY5B8xt/jH8BPE
- 4Y/EpZjvyVGraMTKXv7UNDqY3JuOLiFqs7BW4BA=
-X-Google-Smtp-Source: AGHT+IGraImbABbVnYg6Ry57RVFnd3IqKf02szE055lgCefoqqyZvE2zfw+kuPwbsXcgZfPjjXz5Afh8lqooVZbQ9JU=
-X-Received: by 2002:a4a:305e:0:b0:58a:211:acf8 with SMTP id
- z30-20020a4a305e000000b0058a0211acf8mr10912431ooz.7.1700032033893; Tue, 14
- Nov 2023 23:07:13 -0800 (PST)
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2B4AA10E517
+ for <spice-devel@lists.freedesktop.org>; Wed, 15 Nov 2023 09:27:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1700040479; x=1731576479;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=4gho/zcBvjHK+CVYyeA8FZ1bHWndqu5Gsxi2dzHotVI=;
+ b=dZcsP8cUkvzGvgpb23ivKU2u58N9ph9cWFBijowy2R8Y/gHdQgq+PJ9U
+ oNLwGz+AGJ2LpOVDf6n59t28RShwndcXXf9EunYN/IzxzAhtHzkwsUZIA
+ faYU34syzC5O3T5iYr5n17ForB8Kj9DCbqU4MPRFwvzAjpe6cDeAEapNL
+ Kw8qClFMp8ypIKjCjckHyOWbv19B5AsjmsHf/VfpCZaJ2vYNtZPY17rgl
+ OBfFhO1cStb7nmOnqa0fZvRui2rWNGWpToWvDqI1LVi+cFtY5h1u2C0UG
+ SPvfjW4xnyywGqFfN+EGTc0Pm/dWjV9FImIkNqsOCjk5YaK9aNO2CTMBt Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10894"; a="477066100"
+X-IronPort-AV: E=Sophos;i="6.03,304,1694761200"; d="scan'208";a="477066100"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Nov 2023 01:27:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10894"; a="794097209"
+X-IronPort-AV: E=Sophos;i="6.03,304,1694761200"; d="scan'208";a="794097209"
+Received: from vkasired-desk2.fm.intel.com ([10.105.128.132])
+ by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Nov 2023 01:27:46 -0800
+From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+To: spice-devel@lists.freedesktop.org
+Date: Wed, 15 Nov 2023 01:04:45 -0800
+Message-Id: <20231115090445.503069-1-vivek.kasireddy@intel.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <CAHt6W4eEaMs-39u4X8x7_S+VQgs4Ks3DQ7fSRKHmtenFoGLRRQ@mail.gmail.com>
+References: <CAHt6W4eEaMs-39u4X8x7_S+VQgs4Ks3DQ7fSRKHmtenFoGLRRQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20231115033459.1228900-1-sashal@kernel.org>
- <20231115033459.1228900-2-sashal@kernel.org>
-In-Reply-To: <20231115033459.1228900-2-sashal@kernel.org>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Wed, 15 Nov 2023 07:07:02 +0000
-Message-ID: <CAHt6W4cdQSXbBf4gO_jR-q-Q8SAonNDoQ0f2cO7LsnT__priWA@mail.gmail.com>
-To: Sasha Levin <sashal@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] [PATCH AUTOSEL 6.5 2/6] drm/qxl: prevent memory
- leak
+Content-Transfer-Encoding: 8bit
+Subject: [Spice-devel] [PATCH v5] gstreamer-encoder: Use an env var to
+ override converter format (v5)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,53 +57,132 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Maxime Ripard <mripard@kernel.org>, tzimmermann@suse.de,
- maarten.lankhorst@linux.intel.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev,
- Zongmin Zhou <zhouzongmin@kylinos.cn>, stable@vger.kernel.org, daniel@ffwll.ch,
- Dave Airlie <airlied@redhat.com>, spice-devel@lists.freedesktop.org,
- kraxel@redhat.com
+Cc: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>,
+ Dongwon Kim <dongwon.kim@intel.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno mer 15 nov 2023 alle ore 06:57 Sasha Levin
-<sashal@kernel.org> ha scritto:
->
-> From: Zongmin Zhou <zhouzongmin@kylinos.cn>
->
-> [ Upstream commit 0e8b9f258baed25f1c5672613699247c76b007b5 ]
->
-> The allocated memory for qdev->dumb_heads should be released
-> in qxl_destroy_monitors_object before qxl suspend.
-> otherwise,qxl_create_monitors_object will be called to
+If we use the x264enc encoder to encode a stream, then videoconvert
+would convert the BGRx data into Y444, which is the preferred format
+for x264enc. However, some decoders particularly the ones that are
+h/w based cannot work with Y444 if it was the format used by the
+encoder. Therefore, to address these situations, we need a way to
+override the format used during the encoding stage which can be
+accomplished by using the environment variable introduced in this
+patch: SPICE_CONVERTER_PREFERRED_FORMAT.
 
-Minor, typo: otherwise -> Otherwise.
+For example, using NV12 as the output format for the videoconvert
+element would allow us to pair a s/w based encoder (such as x264enc)
+with a h/w based decoder (such as msdkh264dec) for decoding the
+stream as most h/w based decoders only work with NV12 format given
+its popularity.
 
-> reallocate memory for qdev->dumb_heads after qxl resume,
-> it will cause memory leak.
->
-> Signed-off-by: Zongmin Zhou <zhouzongmin@kylinos.cn>
-> Link: https://lore.kernel.org/r/20230801025309.4049813-1-zhouzongmin@kylinos.cn
-> Reviewed-by: Dave Airlie <airlied@redhat.com>
-> Signed-off-by: Maxime Ripard <mripard@kernel.org>
-> Signed-off-by: Sasha Levin <sashal@kernel.org>
-> ---
->  drivers/gpu/drm/qxl/qxl_display.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-> index 6492a70e3c396..404b0483bb7cb 100644
-> --- a/drivers/gpu/drm/qxl/qxl_display.c
-> +++ b/drivers/gpu/drm/qxl/qxl_display.c
-> @@ -1229,6 +1229,9 @@ int qxl_destroy_monitors_object(struct qxl_device *qdev)
->         if (!qdev->monitors_config_bo)
->                 return 0;
->
-> +       kfree(qdev->dumb_heads);
-> +       qdev->dumb_heads = NULL;
-> +
->         qdev->monitors_config = NULL;
->         qdev->ram_header->monitors_config = 0;
->
+Note that choosing an encoder format such as NV12 over Y444 would
+probably result in decreased video quality although it would be
+compatible with more decoders. Ideally, the client and server need
+to negotiate a suitable format dynamically but the current
+capabilities do not allow for such exchange.
 
-Frediano
+v2:
+- Add the environment variable to override encoding format
+- Augment the commit message to explain the impact of overriding
+  the default encoding format (Frediano)
+
+v3: (Frediano)
+- Free converter when pipeline creation fails due to invalid codec
+- Rebase on master
+
+v4: (Frediano)
+- Ensure that the preferred format obtained via the environment var
+  SPICE_CONVERTER_PREFERRED_FORMAT is valid
+- Use the g_once mechanism to cache and return the preferred format
+  after validating it
+
+v5: (Frediano)
+- Prevent the double free by doing g_strdup(gst_once.retval) in
+  get_gst_converter().
+
+Cc: Frediano Ziglio <freddy77@gmail.com>
+Cc: Dongwon Kim <dongwon.kim@intel.com>
+Based-on-patch-by: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+Signed-off-by: Jin Chung Teng <jin.chung.teng@intel.com>
+Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+---
+ server/gstreamer-encoder.c | 41 +++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 40 insertions(+), 1 deletion(-)
+
+diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
+index d08de35a..40882f69 100644
+--- a/server/gstreamer-encoder.c
++++ b/server/gstreamer-encoder.c
+@@ -861,13 +861,50 @@ static const gchar* get_gst_codec_name(const SpiceGstEncoder *encoder)
+     }
+ }
+ 
++/* At this time, only the following formats are supported by x264enc. */
++static const char valid_formats[][10] = {
++    { "Y444" },
++    { "Y42B" },
++    { "I420" },
++    { "YV12" },
++    { "NV12" },
++    { "GRAY8" },
++    { "Y444_10LE" },
++    { "I422_10LE" },
++    { "I420_10LE" },
++};
++
++static gpointer get_pref_format_once(gpointer data)
++{
++    const gchar *pref_format = getenv("SPICE_CONVERTER_PREFERRED_FORMAT");
++    int i;
++
++    if (pref_format) {
++        for (i = 0; i < G_N_ELEMENTS(valid_formats); i++) {
++            if (strcmp(valid_formats[i], pref_format) == 0) {
++                return g_strdup_printf("videoconvert ! video/x-raw,format=%s",
++                                       pref_format);
++            }
++        }
++    }
++    return g_strdup("videoconvert");
++}
++
++static gchar *get_gst_converter(void)
++{
++    static GOnce gst_once = G_ONCE_INIT;
++
++    g_once(&gst_once, get_pref_format_once, NULL);
++    return g_strdup(gst_once.retval);
++}
++
+ static gboolean create_pipeline(SpiceGstEncoder *encoder)
+ {
+-    const gchar *converter = "videoconvert";
+     const gchar* gstenc_name = get_gst_codec_name(encoder);
+     if (!gstenc_name) {
+         return FALSE;
+     }
++    gchar* converter = get_gst_converter();
+     gchar* gstenc_opts;
+     switch (encoder->base.codec_type)
+     {
+@@ -910,6 +947,7 @@ static gboolean create_pipeline(SpiceGstEncoder *encoder)
+     default:
+         /* gstreamer_encoder_new() should have rejected this codec type */
+         spice_warning("unsupported codec type %d", encoder->base.codec_type);
++        g_free(converter);
+         return FALSE;
+     }
+ 
+@@ -919,6 +957,7 @@ static gboolean create_pipeline(SpiceGstEncoder *encoder)
+                                   converter, gstenc_name, gstenc_opts);
+     spice_debug("GStreamer pipeline: %s", desc);
+     encoder->pipeline = gst_parse_launch_full(desc, NULL, GST_PARSE_FLAG_FATAL_ERRORS, &err);
++    g_free(converter);
+     g_free(gstenc_opts);
+     g_free(desc);
+     if (!encoder->pipeline || err) {
+-- 
+2.39.2
+
