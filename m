@@ -2,46 +2,46 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 877AD7EBD46
-	for <lists+spice-devel@lfdr.de>; Wed, 15 Nov 2023 07:57:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB9707EBD44
+	for <lists+spice-devel@lfdr.de>; Wed, 15 Nov 2023 07:57:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BE66510E4F6;
-	Wed, 15 Nov 2023 06:57:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9DF1710E4F3;
+	Wed, 15 Nov 2023 06:57:21 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4204510E406;
- Wed, 15 Nov 2023 03:35:22 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 496AF10E40D;
+ Wed, 15 Nov 2023 03:39:02 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 0D1E2CE113D;
- Wed, 15 Nov 2023 03:35:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A931C433C9;
- Wed, 15 Nov 2023 03:35:16 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id F130961518;
+ Wed, 15 Nov 2023 03:39:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDA5BC433C8;
+ Wed, 15 Nov 2023 03:36:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700019319;
- bh=BPXcmbIHJIlBqHjEjTXsb/rxW6/LFGR3qAUvhVYpjtQ=;
+ s=k20201202; t=1700019541;
+ bh=bcUStvzoYBQPxGOjaHvVyWseLm4bdC+hbtjNlPqnaJE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=biKCh8gMahT5jWRoy1sdaTeudzg3ldSbohqGdGcArd/w+CX65gQAkMeKk7SZWI4Lj
- 3nipCFMksJEhqLWxmEhRzFVt86tGqbtTDNpE6Pl1xwEaQRtA47LNs1A+kbgPLxnmWz
- Kajel7/E8bslKSFjedW3ssld6IsImWpaurADmhVOG+CZ6PY9LZ8pvUOvFrbRaustdD
- I35Cz+l8OTbvLGBI1bs9X7RzGhyNisiv9Sm31Ngn1LtGV7N8/4U1JiACICiWAfDGwL
- JfzpyaB+4GBv4xTIVmpfAxhcbU7riYlggilp53ObIkDk5Y19GupjTHaBuueMiHrxwi
- eMd5eh7/bxt/A==
+ b=L4SSRwB7FntGu3sWvBSW4D9+8CJ9niVhjwKTIBQaFsXkMHX7KLaFh5Xx29wZwGHkR
+ TdsVyiookbxlP9M3m7YKE7mQXJiQaSymtzaN8ztIJMSv3x4lIWHETAAReT9jbGmeMC
+ 7+wn8m2/lKWeXx7bDa2/dXVsLaO72skVqFq7njehh+tFRM0SaaMVN63oaXxrv8zfRk
+ DWTGN37HJEHk75yAZac5uxdU6VHGuEkDzAYjjYe0qjjzG1wbGN/CzlzTNoCJq/DLZB
+ iJu6jDubhPzwBgc8feVLzw9XSU/L1ypT6In4Q3fLwqrK8c3fUeSUiMY+WQgjOvht93
+ 7TMxVFUNvPwKA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue, 14 Nov 2023 22:34:46 -0500
-Message-ID: <20231115033459.1228900-2-sashal@kernel.org>
+Date: Tue, 14 Nov 2023 22:35:56 -0500
+Message-ID: <20231115033608.1229058-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231115033459.1228900-1-sashal@kernel.org>
-References: <20231115033459.1228900-1-sashal@kernel.org>
+In-Reply-To: <20231115033608.1229058-1-sashal@kernel.org>
+References: <20231115033608.1229058-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.5.11
+X-stable-base: Linux 6.1.62
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 15 Nov 2023 06:57:20 +0000
-Subject: [Spice-devel] [PATCH AUTOSEL 6.5 2/6] drm/qxl: prevent memory leak
+Subject: [Spice-devel] [PATCH AUTOSEL 6.1 2/6] drm/qxl: prevent memory leak
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,7 +81,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 3 insertions(+)
 
 diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 6492a70e3c396..404b0483bb7cb 100644
+index a152a7c6db215..f91a86225d5e7 100644
 --- a/drivers/gpu/drm/qxl/qxl_display.c
 +++ b/drivers/gpu/drm/qxl/qxl_display.c
 @@ -1229,6 +1229,9 @@ int qxl_destroy_monitors_object(struct qxl_device *qdev)
