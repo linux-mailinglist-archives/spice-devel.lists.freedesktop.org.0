@@ -1,61 +1,74 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0FB1E7EE697
-	for <lists+spice-devel@lfdr.de>; Thu, 16 Nov 2023 19:20:24 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 135AA7F46C9
+	for <lists+spice-devel@lfdr.de>; Wed, 22 Nov 2023 13:50:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 810B610E654;
-	Thu, 16 Nov 2023 18:20:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9B1F410E620;
+	Wed, 22 Nov 2023 12:50:03 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E3D1D10E654
- for <spice-devel@lists.freedesktop.org>; Thu, 16 Nov 2023 18:20:20 +0000 (UTC)
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5872b8323faso547608eaf.1
- for <spice-devel@lists.freedesktop.org>; Thu, 16 Nov 2023 10:20:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700158820; x=1700763620; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3YkD16cv5aKnhZHrWt1hEhHrmfIbR9c/q81ACjv2YNs=;
- b=e4ct4R5cgLIU0cLdLfVOeLd+5zyO6toMr6PJpYim7N9c9qLcD9Ot3xxu/xqFq8KCsT
- Wt4fbZx5PejleVsx6mE1gbOeLd03biMFyae6jHk5mxLatsfFtnZ1wJxEf3B8RYvb8oyQ
- rxVMCLeCEv5ZzjJiM7NI46A4vRo0vF5nd5b1mAb+cqAQeHDgqNUcWizhTm8NsI+WVZPL
- NDhyZZbGShDn47MZkeSmviq3eP6MZ+NxUSS6AZvpeRpH80aqqmncMp86G4ZGf02tr3JC
- OMtAoNjv4QF28YWxQbKO2jyDdN9jXg3FP8Y9EjpYwIJhejuNg9jiRLp1J4VQIYiYojXc
- nvMw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A0A6310E620
+ for <spice-devel@lists.freedesktop.org>; Wed, 22 Nov 2023 12:50:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1700657399;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=t7CwGgnA5jX9Ulr8vRs5/VIijolfgnKW6FNaANq6NMw=;
+ b=LgKniuUK1qMEE26G4bb+UQyvZWVjzjQ+6Ao9XZrVnihGm44Tryt2u1WSXRSRTtBDGWf9Wm
+ cFAV6kWmJPbehkpjIdm5joNSQaTNz2jTc4HklDFbvzKCA0eD2Iq2IjgdbghgGkO436hIxU
+ zMBptiz0w6oa1Or9pwq6TwU11JR1+M0=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-679-1D4NTMJEMDS-zFHlAspV4A-1; Wed, 22 Nov 2023 07:49:58 -0500
+X-MC-Unique: 1D4NTMJEMDS-zFHlAspV4A-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2c6f33ee403so62112801fa.2
+ for <spice-devel@lists.freedesktop.org>; Wed, 22 Nov 2023 04:49:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700158820; x=1700763620;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3YkD16cv5aKnhZHrWt1hEhHrmfIbR9c/q81ACjv2YNs=;
- b=YBJ/qUGyO8MLplK3/XBGmfjJwfvsvH9JMJVI3zDkYjsTp2z5NMp51C00bYG4RD511c
- kU8q0r4Do8fEFI2ci1WF6ZJLe7eXWB4PGO2stbRgc2MtCT6x6kTkjiMhHCvySg3D7iks
- drovz95Iz8Cm8UUArwv0n1ro86WYL4+djgDi3velFjIx26pcEfZRnTnqd8gMkP/Mq0tk
- cI6RUjpXuWayUszR44OZFb9fzK9fKfsKWSeGjX6vEdcaOrM5fUQ6xwQ3+aDWaBkFVrlq
- LIHB09XZBKy37o+DE6Trk7E7kroZiTbcPLwAlFNxRn/Wi2K4osS2mHeIBDqEK13g9DQq
- ROdw==
-X-Gm-Message-State: AOJu0YxJFsYiipZ9gWsxSSvB4R8QaepeG0u2Gr5V655cbBuDQNUZ4XRr
- ezxDONscKHVlaasqCdjWQ262DPNp0Pe4YwL24P0=
-X-Google-Smtp-Source: AGHT+IGsZxVXdgX0F0YPBKdbiLnzTDb1nLUXvRhaxoQZkkP6TpGcjkQojEjHs072fgHbju9rWt1Fz4gAOpLvohucQrc=
-X-Received: by 2002:a05:6820:2c04:b0:58a:67b5:2df2 with SMTP id
- dw4-20020a0568202c0400b0058a67b52df2mr10982304oob.8.1700158819742; Thu, 16
- Nov 2023 10:20:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700657397; x=1701262197;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=t7CwGgnA5jX9Ulr8vRs5/VIijolfgnKW6FNaANq6NMw=;
+ b=pNbYELxZNl70Dzjm5IvXKyjpqUuGfVcRoME983qJhcmp+WvcM+1dDSqkGoU/0Vm493
+ zVRG+Mhzf19pB2ffWTFpZbkjLW5nEpcDZ6zR9PsgprPRtGEupbeqgZ8RX73+2IbhllUk
+ DZS8kgrA0HEk62iNnPwg0fueS22qiOz76CinKRZB0t6iyAhbxZbutg+UKPlEysIFNfRI
+ bLrC+CXaRwbquyJgTkZjhNMiejgvdm5CkmvFv/QJBaWM0dVkNFW05Ovnfq+VTutrbwbY
+ lziTyOEo4EvReGaj5VlxDCnInT0D7BS6GAGcdEZJgqI6DQbGH5WdR5K94OREk2zU8HrF
+ E7jg==
+X-Gm-Message-State: AOJu0YyRkOPh/7b99ZKFnrS6a2At4+A4QvTfOJgBNV+OXO97f0AKfET2
+ lMX3EkP1ecUnuQVfKBzGRRCT6v2OTqz8I9+lqeWaUKxZTtF5ZAS0wGE0Zh9Iu5bqJv82xFi2BOl
+ FMHbC54mkq2PScVJDAYmTNrDLmwmsVDw=
+X-Received: by 2002:a2e:98c2:0:b0:2c5:2132:24f6 with SMTP id
+ s2-20020a2e98c2000000b002c5213224f6mr1644898ljj.12.1700657397040; 
+ Wed, 22 Nov 2023 04:49:57 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHjsqJ2SuGehTUxt/XdTWeav04muk69t7/+AFuoFYCMhKZg56Vp4jkvGQpcnN18Ay8LgHfnHQ==
+X-Received: by 2002:a2e:98c2:0:b0:2c5:2132:24f6 with SMTP id
+ s2-20020a2e98c2000000b002c5213224f6mr1644863ljj.12.1700657396682; 
+ Wed, 22 Nov 2023 04:49:56 -0800 (PST)
+Received: from localhost ([90.167.94.248]) by smtp.gmail.com with ESMTPSA id
+ bg36-20020a05600c3ca400b0040775501256sm2103506wmb.16.2023.11.22.04.49.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Nov 2023 04:49:56 -0800 (PST)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: Albert Esteve <aesteve@redhat.com>, Simon Ser <contact@emersion.fr>
+In-Reply-To: <CADSE00KW4+hpbAbZAusBngq5FYSa067wYJCGeetqngWRJaD9Kg@mail.gmail.com>
+References: <20231023074613.41327-1-aesteve@redhat.com>
+ <-ngmaSLF2S5emYjTBWcLRNzvJRoe_eZ-Nv9HQhE6ZLuK8nIE2ZbfVh2G2O2Z41GoIFIRpts0ukEtFXUx8pNAptmrZBhlXxaQGykx_qCZ_9k=@emersion.fr>
+ <CADSE00KW4+hpbAbZAusBngq5FYSa067wYJCGeetqngWRJaD9Kg@mail.gmail.com>
+Date: Wed, 22 Nov 2023 13:49:55 +0100
+Message-ID: <87y1eqc5qk.fsf@minerva.mail-host-address-is-not-set>
 MIME-Version: 1.0
-References: <CAHt6W4eEaMs-39u4X8x7_S+VQgs4Ks3DQ7fSRKHmtenFoGLRRQ@mail.gmail.com>
- <20231115090445.503069-1-vivek.kasireddy@intel.com>
-In-Reply-To: <20231115090445.503069-1-vivek.kasireddy@intel.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 16 Nov 2023 18:20:08 +0000
-Message-ID: <CAHt6W4eOqFnPSXDeFGhd3epfAMQwqwivu438GGP3dvLFTXBACg@mail.gmail.com>
-To: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Spice-devel] [PATCH v5] gstreamer-encoder: Use an env var to
- override converter format (v5)
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
+Subject: Re: [Spice-devel] [PATCH v6 0/9] Fix cursor planes with virtualized
+ drivers
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,137 +80,46 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: spice-devel@lists.freedesktop.org, Dongwon Kim <dongwon.kim@intel.com>,
- Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
+Cc: linux-doc@vger.kernel.org, qemu-devel@nongnu.org, banackm@vmware.com,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ mombasawalam@vmware.com, iforbes@vmware.com, Jonathan Corbet <corbet@lwn.net>,
+ VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>,
+ David Airlie <airlied@redhat.com>, Chia-I Wu <olvaffe@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
+ ppaalanen@gmail.com, dri-devel@lists.freedesktop.org,
+ spice-devel@lists.freedesktop.org,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Matt Roper <matthew.d.roper@intel.com>, linux-kernel@vger.kernel.org,
+ krastevm@vmware.com, Rob Clark <robdclark@gmail.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, zackr@vmware.com
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno mer 15 nov 2023 alle ore 09:28 Vivek Kasireddy
-<vivek.kasireddy@intel.com> ha scritto:
->
-> If we use the x264enc encoder to encode a stream, then videoconvert
-> would convert the BGRx data into Y444, which is the preferred format
-> for x264enc. However, some decoders particularly the ones that are
-> h/w based cannot work with Y444 if it was the format used by the
-> encoder. Therefore, to address these situations, we need a way to
-> override the format used during the encoding stage which can be
-> accomplished by using the environment variable introduced in this
-> patch: SPICE_CONVERTER_PREFERRED_FORMAT.
->
-> For example, using NV12 as the output format for the videoconvert
-> element would allow us to pair a s/w based encoder (such as x264enc)
-> with a h/w based decoder (such as msdkh264dec) for decoding the
-> stream as most h/w based decoders only work with NV12 format given
-> its popularity.
->
-> Note that choosing an encoder format such as NV12 over Y444 would
-> probably result in decreased video quality although it would be
-> compatible with more decoders. Ideally, the client and server need
-> to negotiate a suitable format dynamically but the current
-> capabilities do not allow for such exchange.
->
-> v2:
-> - Add the environment variable to override encoding format
-> - Augment the commit message to explain the impact of overriding
->   the default encoding format (Frediano)
->
-> v3: (Frediano)
-> - Free converter when pipeline creation fails due to invalid codec
-> - Rebase on master
->
-> v4: (Frediano)
-> - Ensure that the preferred format obtained via the environment var
->   SPICE_CONVERTER_PREFERRED_FORMAT is valid
-> - Use the g_once mechanism to cache and return the preferred format
->   after validating it
->
-> v5: (Frediano)
-> - Prevent the double free by doing g_strdup(gst_once.retval) in
->   get_gst_converter().
->
-> Cc: Frediano Ziglio <freddy77@gmail.com>
-> Cc: Dongwon Kim <dongwon.kim@intel.com>
-> Based-on-patch-by: Hazwan Arif Mazlan <hazwan.arif.mazlan@intel.com>
-> Signed-off-by: Jin Chung Teng <jin.chung.teng@intel.com>
-> Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-> ---
->  server/gstreamer-encoder.c | 41 +++++++++++++++++++++++++++++++++++++-
->  1 file changed, 40 insertions(+), 1 deletion(-)
->
-> diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
-> index d08de35a..40882f69 100644
-> --- a/server/gstreamer-encoder.c
-> +++ b/server/gstreamer-encoder.c
-> @@ -861,13 +861,50 @@ static const gchar* get_gst_codec_name(const SpiceGstEncoder *encoder)
->      }
->  }
->
-> +/* At this time, only the following formats are supported by x264enc. */
-> +static const char valid_formats[][10] = {
-> +    { "Y444" },
-> +    { "Y42B" },
-> +    { "I420" },
-> +    { "YV12" },
-> +    { "NV12" },
-> +    { "GRAY8" },
-> +    { "Y444_10LE" },
-> +    { "I422_10LE" },
-> +    { "I420_10LE" },
-> +};
-> +
-> +static gpointer get_pref_format_once(gpointer data)
-> +{
-> +    const gchar *pref_format = getenv("SPICE_CONVERTER_PREFERRED_FORMAT");
-> +    int i;
-> +
-> +    if (pref_format) {
-> +        for (i = 0; i < G_N_ELEMENTS(valid_formats); i++) {
-> +            if (strcmp(valid_formats[i], pref_format) == 0) {
-> +                return g_strdup_printf("videoconvert ! video/x-raw,format=%s",
-> +                                       pref_format);
-> +            }
-> +        }
-> +    }
-> +    return g_strdup("videoconvert");
-> +}
-> +
-> +static gchar *get_gst_converter(void)
-> +{
-> +    static GOnce gst_once = G_ONCE_INIT;
-> +
-> +    g_once(&gst_once, get_pref_format_once, NULL);
-> +    return g_strdup(gst_once.retval);
-> +}
-> +
->  static gboolean create_pipeline(SpiceGstEncoder *encoder)
->  {
-> -    const gchar *converter = "videoconvert";
->      const gchar* gstenc_name = get_gst_codec_name(encoder);
->      if (!gstenc_name) {
->          return FALSE;
->      }
-> +    gchar* converter = get_gst_converter();
->      gchar* gstenc_opts;
->      switch (encoder->base.codec_type)
->      {
-> @@ -910,6 +947,7 @@ static gboolean create_pipeline(SpiceGstEncoder *encoder)
->      default:
->          /* gstreamer_encoder_new() should have rejected this codec type */
->          spice_warning("unsupported codec type %d", encoder->base.codec_type);
-> +        g_free(converter);
->          return FALSE;
->      }
->
-> @@ -919,6 +957,7 @@ static gboolean create_pipeline(SpiceGstEncoder *encoder)
->                                    converter, gstenc_name, gstenc_opts);
->      spice_debug("GStreamer pipeline: %s", desc);
->      encoder->pipeline = gst_parse_launch_full(desc, NULL, GST_PARSE_FLAG_FATAL_ERRORS, &err);
-> +    g_free(converter);
->      g_free(gstenc_opts);
->      g_free(desc);
->      if (!encoder->pipeline || err) {
+Albert Esteve <aesteve@redhat.com> writes:
 
-Acked and merged.
+Hello,
 
-Thanks,
-   Frediano
+[...]
+
+>
+>> > Mutter patch:
+>> > https://lists.freedesktop.org/archives/igt-dev/2023-July/058427.html
+>>
+>> Seems like this link is same as IGT? Copy-pasta fail maybe?
+>>
+>>
+> Ah yes, my bad, this is the correct link:
+> https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/3337
+
+The mutter chages are already in good shape and the MR has even be
+approved by a mutter developer. Any objections to merge the series ?
+
+-- 
+Best regards,
+
+Javier Martinez Canillas
+Core Platforms
+Red Hat
+
