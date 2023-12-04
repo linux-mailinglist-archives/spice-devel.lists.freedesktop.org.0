@@ -2,51 +2,45 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93D5D804C6F
-	for <lists+spice-devel@lfdr.de>; Tue,  5 Dec 2023 09:32:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB334805B17
+	for <lists+spice-devel@lfdr.de>; Tue,  5 Dec 2023 18:25:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0DE2C10E4C0;
-	Tue,  5 Dec 2023 08:32:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5DA6610E591;
+	Tue,  5 Dec 2023 17:25:55 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D15BB10E4BF
- for <spice-devel@lists.freedesktop.org>; Tue,  5 Dec 2023 08:32:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1701765156; x=1733301156;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=uBsEn/rQ9ElsGmZCcciz7Op7N9RYYrN0ZlleFQlZI5c=;
- b=OaxlCOit0AUuwRb3dqDGUrLbdRQ5gnQzbpYrt2wzqtIB0ih6OJLbBEGO
- Gkm3uJ/wDXpjqs73qFWD9wUloeDQ8MCUT0tpEm6OffHuFEnMiuvqgv3tQ
- 5eR0MYCypE+CWgxzO2yVqhEOikud1TV/B9f0So7IF/GXOGWlVSwNwLDxq
- hc4DkfDmWrXOMar9LAmHC4vihON+LWJsAlZRMdpQqYqbbJbDKxRraNfn6
- 7ba1w+J2Ty9thjaShC7AnqLyNU18+1/oEW9scuJmxUDgIbR/qnE6o6c4i
- WRr6Ko/mHkD+D2ubRfUw2CBppinoYOZwBh2H0D+UffaCxxZMeLrFmhkFw Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="397758894"
-X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; d="scan'208";a="397758894"
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 00:32:36 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="841372001"
-X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; d="scan'208";a="841372001"
-Received: from vkasired-desk2.fm.intel.com ([10.105.128.132])
- by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 00:32:35 -0800
-From: Vivek Kasireddy <vivek.kasireddy@intel.com>
-To: spice-devel@lists.freedesktop.org
-Date: Tue,  5 Dec 2023 00:07:59 -0800
-Message-Id: <20231205080759.2347381-6-vivek.kasireddy@intel.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231205080759.2347381-1-vivek.kasireddy@intel.com>
-References: <20231205080759.2347381-1-vivek.kasireddy@intel.com>
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AA54910E092;
+ Mon,  4 Dec 2023 08:43:51 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 18CA960F54;
+ Mon,  4 Dec 2023 08:43:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DAA6C433C8;
+ Mon,  4 Dec 2023 08:43:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701679430;
+ bh=lDOXjN/W84Vq3sykgf0bUUGkHQwP88whG8TRkS7Nx44=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=WVLjR8vdJwdvEjNXZSMe8Lp1vcM5owgcUib2prYQjTy0EgDp0Om8FIjXQcQ1rbcbQ
+ fQLWWvEOllo3g9AmgI7Gjg7cOagUiRiV7SnKfzGFuNkCuA0rbBz65oBUfqTwreubxD
+ QVQdwh2v5ZRtFRbx9CDxwJN5LNyFBjlU3ciSzYovIt2RuI0hdP0x5KETnIWYCmskBK
+ kKCcVdf6QvWPD3uE8T4h9PdVMciyQjO9UtIlvW6JloR7eQN7kFuAWmV79kmcBkWDKm
+ 5JpF+Qki6Casz1xtMtz5hQ2LSrHqd87jUHqVH8/B2v5Y+VcZgjM+VrCJ9OQeStZJSv
+ CF1MrnJ1MrbRA==
+From: Maxime Ripard <mripard@kernel.org>
+To: airlied@redhat.com, kraxel@redhat.com, 
+ maarten.lankhorst@linux.intel.com, tzimmermann@suse.de, airlied@gmail.com, 
+ daniel@ffwll.ch, heminhong <heminhong@kylinos.cn>
+In-Reply-To: <20231110055031.57360-1-heminhong@kylinos.cn>
+References: <20231110055031.57360-1-heminhong@kylinos.cn>
+Message-Id: <170167942791.3617818.9387915211880062681.b4-ty@kernel.org>
+Date: Mon, 04 Dec 2023 09:43:47 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: [Spice-devel] [PATCH v3 5/5] video-stream: Don't stop a stream
- associated with gl_draw (v2)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.3
+X-Mailman-Approved-At: Tue, 05 Dec 2023 17:25:54 +0000
+Subject: Re: [Spice-devel] [PATCH] drm/qxl: remove unused declaration
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,54 +52,20 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dongwon Kim <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
+Cc: spice-devel@lists.freedesktop.org, virtualization@lists.linux.dev,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-We do not want to stop a stream associated with gl_draw as a result
-of timeout because we may not get another opportunity to create a
-new stream if the current one gets stopped. However, when the
-stream does get stopped for other reasons, we need to clear the
-gl_draw_stream pointer associated with the relevant DC.
+On Fri, 10 Nov 2023 13:50:31 +0800, heminhong wrote:
+> Some functions are never used by the driver,
+> removing the functions declaration, it can be reducing program size,
+> and improving code readability and maintainability.
+> 
+> 
 
-v2: (suggestions from Frediano)
-- Don't stop the stream regardless of whether gl_draw is ongoing
-  or not
+Applied to drm/drm-misc (drm-misc-next).
 
-Cc: Frediano Ziglio <freddy77@gmail.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
-Cc: Dongwon Kim <dongwon.kim@intel.com>
-Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
----
- server/video-stream.cpp | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/server/video-stream.cpp b/server/video-stream.cpp
-index ebd8960f..b0fd1b00 100644
---- a/server/video-stream.cpp
-+++ b/server/video-stream.cpp
-@@ -115,6 +115,10 @@ void video_stream_stop(DisplayChannel *display, VideoStream *stream)
-         }
-         dcc->pipe_add(video_stream_destroy_item_new(stream_agent));
-         video_stream_agent_stats_print(stream_agent);
-+
-+        if (stream == display->priv->gl_draw_stream) {
-+            display->priv->gl_draw_stream = nullptr;
-+        }
-     }
-     display->priv->streams_size_total -= stream->width * stream->height;
-     ring_remove(&stream->link);
-@@ -1003,7 +1007,8 @@ void video_stream_timeout(DisplayChannel *display)
-     while (item) {
-         VideoStream *stream = SPICE_CONTAINEROF(item, VideoStream, link);
-         item = ring_next(ring, item);
--        if (now >= (stream->last_time + RED_STREAM_TIMEOUT)) {
-+        if (now >= (stream->last_time + RED_STREAM_TIMEOUT) &&
-+            stream != display->priv->gl_draw_stream) {
-             detach_video_stream_gracefully(display, stream, nullptr);
-             video_stream_stop(display, stream);
-         }
--- 
-2.39.2
+Thanks!
+Maxime
 
