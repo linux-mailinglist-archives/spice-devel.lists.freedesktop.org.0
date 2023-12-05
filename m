@@ -2,49 +2,51 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F2B2804C6E
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DD7F804C6D
 	for <lists+spice-devel@lfdr.de>; Tue,  5 Dec 2023 09:32:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D2E5210E4B8;
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD40510E4B7;
 	Tue,  5 Dec 2023 08:32:37 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 682E110E4BA
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 759E510E4BD
  for <spice-devel@lists.freedesktop.org>; Tue,  5 Dec 2023 08:32:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
  t=1701765156; x=1733301156;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=ZEMFFRB9M6eSL/8uVp2Iu2sRik8dZG3J6TAlV+7q9fU=;
- b=AWJNaYqaNBSaeWVbXuKRJDWIp2BL+pGUTj16mJ5rSqw/Z0k7ywr4jRrL
- EdVLAVItPe+6z2FvtYbHCzCO/xiCNXf8Cyxc6kSk89BS49XT4F80C38xY
- +WhHed0+f+jS+s2F1hqkOQFNBShsYo7yJ/7T7ICF21G9nlOFP8ykmLPrW
- GNAe7gRQz2altMRCoblDrXfp1/e5Lrn7kgrG4zg1yCnTkpSltSTgozOQd
- Tig9qbSISJiaQzemZNvQSbawwE+iKV8QotfwSSFiaiIeBY6t5q0ju98S9
- UOa5qLcjWWmdswp6kozaRf1WMKfje1EhyNUNc5ddUNsM02hcbUmwuBhRV g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="397758880"
-X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; d="scan'208";a="397758880"
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=cFtsG8/xPUpklQyKiHX+U4P/Xun9kZxXmGvF9lXNbyY=;
+ b=Zgqqe1gk3+qswq74ndUqcOayhH4oH5ywwo/hmT0iQ+fdAa3P8ws6Gc5r
+ qdzpuwUw0bpeiGVPfXCNw2VDYVkVmJDrUjAHD1LKRrHzvJFi5kSl13lNF
+ dP1vRcBUTwOq1zmpuKgUathxfgIjzwIX7oowEinb6/2of5S7vTNKgS0WA
+ AL8IBeiDb/MDr1fbD2MM4J8rD3F+/H+/ddXr3fYP50ux1ApJGesB+bKlo
+ TIX1STUZIzx8cCeRMwX+Yf2UHudW0UUviFtubhAvjQTikPr3HirGUArTi
+ a555rajMsTjLWxXKqAOS17C02kF2evMj7NV/7MXtnWjpx0eGl5vXZ6Xwt A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="397758882"
+X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; d="scan'208";a="397758882"
 Received: from fmsmga004.fm.intel.com ([10.253.24.48])
  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2023 00:32:35 -0800
+ 05 Dec 2023 00:32:36 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="841371987"
-X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; d="scan'208";a="841371987"
+X-IronPort-AV: E=McAfee;i="6600,9927,10914"; a="841371989"
+X-IronPort-AV: E=Sophos;i="6.04,251,1695711600"; d="scan'208";a="841371989"
 Received: from vkasired-desk2.fm.intel.com ([10.105.128.132])
  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  05 Dec 2023 00:32:35 -0800
 From: Vivek Kasireddy <vivek.kasireddy@intel.com>
 To: spice-devel@lists.freedesktop.org
-Date: Tue,  5 Dec 2023 00:07:54 -0800
-Message-Id: <20231205080759.2347381-1-vivek.kasireddy@intel.com>
+Date: Tue,  5 Dec 2023 00:07:55 -0800
+Message-Id: <20231205080759.2347381-2-vivek.kasireddy@intel.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231205080759.2347381-1-vivek.kasireddy@intel.com>
+References: <20231205080759.2347381-1-vivek.kasireddy@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: [Spice-devel] [PATCH v3 0/5] dcc: Create a stream for non-gl/remote
- clients that want to use dmabuf (v3)
+Subject: [Spice-devel] [PATCH v3 1/5] dcc: Check to see if the client
+ supports multiple codecs (v2)
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,70 +62,87 @@ Cc: Dongwon Kim <dongwon.kim@intel.com>, Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-For clients that cannot accept a dmabuf fd directly (such as those
-running on a remote system), this patch series provides a way for
-the Spice server to stream the gl/dmabuf data/buffer instead. This
-is mostly done by enabling the creation of Gst memory using a dmabuf
-fd as the source. This ability is useful given that dmabuf is the
-standard mechanism for sharing buffers between various drivers and
-userspace in many Graphics and Media usecases. Currently, this is
-tested with Qemu and remote-viewer using the x264enc/avdec_h264 
-and msdkh264enc/dec plugins to stream the Guest/VM desktop but it
-can be easily extended to other plugins and applications.
+We need to determine if the client is new enough to support multiple
+codecs -- which might include any of the Gstreamer based ones.
 
-Here is roughly how things work:
-- The application (e.g, Qemu) chooses its preferred codec (a Gstreamer
-  one) and calls gl_scanout (to update the fd) followed by gl_draw.
-- In response, the Spice server checks to see if the client is capable
-  of accepting a dmabuf fd directly or not. If yes, the fd is forwarded
-  directly to the client; otherwise, a new stream is created.
-- The Spice server then sends the dmabuf fd to the Gstreamer encoder
-  which uses it as an input for creating an encoded buffer which is then
-  sent to the client.
-- Once the encoding process is done, an async completion cookie is sent
-  to the application.
-
-Here is a link to the previous version that used a drawable to share
-the dmabuf fd with the Gstreamer encoder:
-https://lists.freedesktop.org/archives/spice-devel/2023-January/052948.html
-
-v2:
-- Update all patches to address review comments from Frediano
-- Tested this series with msdkh264enc/dec plugins that will be added
-  in another patch series
-
-v3:
-- Updated the second patch to have a new primary surface created
-  whenever a new stream gets created. This will avoid having to
-  trigger primary surface creation from Qemu.
-- Rebase all patches on master
+v2: (suggestions and fixups from Frediano)
+- Add is_gl_client() method to DisplayChannelClient instead of a
+  dcc_is_gl_client() function.
+- Avoid the usage of XXX_CAST macro.
 
 Cc: Frediano Ziglio <freddy77@gmail.com>
 Cc: Gerd Hoffmann <kraxel@redhat.com>
 Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
 Cc: Dongwon Kim <dongwon.kim@intel.com>
+Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+---
+ server/dcc.cpp | 22 ++++++++++++----------
+ server/dcc.h   |  6 ++++++
+ 2 files changed, 18 insertions(+), 10 deletions(-)
 
-Vivek Kasireddy (5):
-  dcc: Check to see if the client supports multiple codecs (v2)
-  dcc: Create a stream associated with gl_draw for non-gl clients (v3)
-  dcc-send: Encode and send gl_draw stream data to the remote client
-    (v2)
-  gstreamer-encoder: Add an encoder function that takes dmabuf fd as
-    input (v2)
-  video-stream: Don't stop a stream associated with gl_draw (v2)
-
- meson.build                      |   2 +-
- server/dcc-send.cpp              | 152 ++++++++++++++++++++++------
- server/dcc.cpp                   |  31 ++++--
- server/dcc.h                     |   6 ++
- server/display-channel-private.h |   1 +
- server/display-channel.cpp       |   1 +
- server/gstreamer-encoder.c       | 164 +++++++++++++++++++++++++------
- server/video-encoder.h           |  13 +++
- server/video-stream.cpp          | 134 ++++++++++++++++++-------
- server/video-stream.h            |   2 +
- 10 files changed, 403 insertions(+), 103 deletions(-)
-
+diff --git a/server/dcc.cpp b/server/dcc.cpp
+index 01c16ab7..ca73470a 100644
+--- a/server/dcc.cpp
++++ b/server/dcc.cpp
+@@ -494,29 +494,31 @@ RedSurfaceDestroyItem::RedSurfaceDestroyItem(uint32_t surface_id)
+ 
+ RedPipeItemPtr dcc_gl_scanout_item_new(RedChannelClient *rcc, void *data, int num)
+ {
+-    /* FIXME: on !unix peer, start streaming with a video codec */
+-    if (!red_stream_is_plain_unix(rcc->get_stream()) ||
+-        !rcc->test_remote_cap(SPICE_DISPLAY_CAP_GL_SCANOUT)) {
++    auto dcc = static_cast<DisplayChannelClient *>(rcc);
++
++    if (dcc->is_gl_client()) {
++        return red::make_shared<RedGlScanoutUnixItem>();
++    } else if (rcc->test_remote_cap(SPICE_DISPLAY_CAP_MULTI_CODEC)) {
++        return RedPipeItemPtr();
++    } else {
+         red_channel_warning(rcc->get_channel(),
+-                            "FIXME: client does not support GL scanout");
++                            "Client does not support GL scanout or multiple codecs");
+         rcc->disconnect();
+         return RedPipeItemPtr();
+     }
+-
+-    return red::make_shared<RedGlScanoutUnixItem>();
+ }
+ 
+ XXX_CAST(RedChannelClient, DisplayChannelClient, DISPLAY_CHANNEL_CLIENT);
+ 
+ RedPipeItemPtr dcc_gl_draw_item_new(RedChannelClient *rcc, void *data, int num)
+ {
+-    DisplayChannelClient *dcc = DISPLAY_CHANNEL_CLIENT(rcc);
++    auto dcc = static_cast<DisplayChannelClient *>(rcc);
+     auto draw = static_cast<const SpiceMsgDisplayGlDraw *>(data);
+ 
+-    if (!red_stream_is_plain_unix(rcc->get_stream()) ||
+-        !rcc->test_remote_cap(SPICE_DISPLAY_CAP_GL_SCANOUT)) {
++    if (!dcc->is_gl_client() &&
++        !rcc->test_remote_cap(SPICE_DISPLAY_CAP_MULTI_CODEC)) {
+         red_channel_warning(rcc->get_channel(),
+-                            "FIXME: client does not support GL scanout");
++                            "Client does not support GL scanout or multiple codecs");
+         rcc->disconnect();
+         return RedPipeItemPtr();
+     }
+diff --git a/server/dcc.h b/server/dcc.h
+index a8dd3bef..47f082fe 100644
+--- a/server/dcc.h
++++ b/server/dcc.h
+@@ -47,6 +47,12 @@ public:
+                          spice_wan_compression_t zlib_glz_state);
+     virtual void disconnect() override;
+ 
++    bool is_gl_client()
++    {
++        return red_stream_is_plain_unix(get_stream()) &&
++           test_remote_cap(SPICE_DISPLAY_CAP_GL_SCANOUT);
++    }
++
+ protected:
+     virtual bool handle_message(uint16_t type, uint32_t size, void *msg) override;
+     virtual bool config_socket() override;
 -- 
 2.39.2
 
