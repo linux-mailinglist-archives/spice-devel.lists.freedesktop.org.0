@@ -1,48 +1,42 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82A73805B18
-	for <lists+spice-devel@lfdr.de>; Tue,  5 Dec 2023 18:25:59 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72F8F806FB5
+	for <lists+spice-devel@lfdr.de>; Wed,  6 Dec 2023 13:30:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2CC5910E592;
-	Tue,  5 Dec 2023 17:25:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E980310E710;
+	Wed,  6 Dec 2023 12:30:46 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E97C410E17C;
- Mon,  4 Dec 2023 08:44:18 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id EEB3CCE0E56;
- Mon,  4 Dec 2023 08:44:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6551C433C7;
- Mon,  4 Dec 2023 08:44:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701679454;
- bh=xpgPzulNevCUlsiFp2dMGa9+E23juK/4xiRXU8jbrZI=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gFePe9RdWDFr3EKCrhfUl0e058tQhYJziFpa8yaN3dgBfmjplJZ9qi0/Tc+rwjCLP
- rEMOyKPmOgH8KFEs2421n+fT4vOuF41M7oRIU8vr6XFrytPfdiLcZ3YKhgTePVfkvG
- m7vl5fPtC7j9bqtyHRTQjPJhegtSoLtfVpIucaZO9K6cwPvZD0VT6/b3P13SnH3pfs
- Hs6S4AHl1bumAZBkKWc4nelEpqMCgoqkdVxZGoMQBw90+d1KPfFGT1BpTzNUBwWEs2
- WgoRgUNI9F/fMMuzLJ7dzaS/PDFiPMwqCcpKxHOoRLjvpkD37lYNIoNGhB44JA1ku3
- nr8tAJJzWi+UA==
-Date: Mon, 4 Dec 2023 09:44:11 +0100
-From: mripard <mripard@kernel.org>
-To: =?utf-8?B?5L2V5pWP57qi?= <heminhong@kylinos.cn>
-Message-ID: <kk4xtz2zxe37ner7cl5qvlk6jhciu7hgvpltf7gddphepnxqwg@noe3lrmff3ax>
-References: <1290mcwo8vf-129368jicj0@nsmail7.0.0--kylin--1>
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
+ [80.237.130.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7CF9310E09B;
+ Wed,  6 Dec 2023 09:56:46 +0000 (UTC)
+Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
+ by wp530.webpack.hosteurope.de running ExIM with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ id 1rAoe1-0001Jn-NU; Wed, 06 Dec 2023 10:56:41 +0100
+Message-ID: <fb0fda6a-3750-4e1b-893f-97a3e402b9af@leemhuis.info>
+Date: Wed, 6 Dec 2023 10:56:40 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mrjqp5qcdvleulqp"
-Content-Disposition: inline
-In-Reply-To: <1290mcwo8vf-129368jicj0@nsmail7.0.0--kylin--1>
-X-Mailman-Approved-At: Tue, 05 Dec 2023 17:25:54 +0000
-Subject: Re: [Spice-devel] 
- =?utf-8?q?Friendly_ping=2E_I_think_this_patch_was_?=
- =?utf-8?b?Zm9yZ290dGVuLi8v5Zue5aSNOiBbUEFUQ0hdIGRybS9xeGw6IHJlbW92ZSB1?=
- =?utf-8?q?nused_declaration?=
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: Gerd Hoffmann <kraxel@redhat.com>
+References: <alpine.DEB.2.20.2310242308150.28457@mail.home>
+ <ZTgydqRlK6WX_b29@eldamar.lan>
+ <alpine.DEB.2.20.2310250027230.28685@mail.home>
+From: "Linux regression tracking (Thorsten Leemhuis)"
+ <regressions@leemhuis.info>
+In-Reply-To: <alpine.DEB.2.20.2310250027230.28685@mail.home>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1701856606;
+ 9c73d8ce; 
+X-HE-SMSGID: 1rAoe1-0001Jn-NU
+X-Mailman-Approved-At: Wed, 06 Dec 2023 12:30:45 +0000
+Subject: Re: [Spice-devel] Bug#1054514: linux-image-6.1.0-13-amd64: Debian
+ VM with qxl graphics freezes frequently
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,32 +48,91 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: tzimmermann <tzimmermann@suse.de>,
- "maarten.lankhorst" <maarten.lankhorst@linux.intel.com>,
- virtualization <virtualization@lists.linux.dev>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- linux-kernel <linux-kernel@vger.kernel.org>, kraxel <kraxel@redhat.com>,
- daniel <daniel@ffwll.ch>, spice-devel <spice-devel@lists.freedesktop.org>,
- airlied <airlied@redhat.com>
+Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
+Cc: regressions@lists.linux.dev, Thomas Zimmermann <tzimmermann@suse.de>,
+ 1054514@bugs.debian.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, Salvatore Bonaccorso <carnil@debian.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+Hi, Thorsten here, the Linux kernel's regression tracker. Top-posting
+for once, to make this easily accessible to everyone.
 
---mrjqp5qcdvleulqp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Gerd, it seems this regression[1] fell through the cracks. Could you
+please take a look? Or is there a good reason why this can't be
+addressed? Or was it dealt with and I just missed it?
 
-Applied, thanks for the reminder
+[1] apparently caused by 5a838e5d5825c8 ("drm/qxl: simplify
+qxl_fence_wait") [v5.13-rc1] from Gerd; for details see
+https://lore.kernel.org/regressions/ZTgydqRlK6WX_b29@eldamar.lan/
 
---mrjqp5qcdvleulqp
-Content-Type: application/pgp-signature; name="signature.asc"
+Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+--
+Everything you wanna know about Linux kernel regression tracking:
+https://linux-regtracking.leemhuis.info/about/#tldr
+If I did something stupid, please tell me, as explained on that page.
 
------BEGIN PGP SIGNATURE-----
+#regzbot poke
 
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZW2RWwAKCRDj7w1vZxhR
-xTKFAQClXxO9sDpuh6JQFW2Xg1PnWk1Pz9aynBWEXekfGLIqLgEAh0s5I+A5LU+X
-+S+NsqIYz+28V3nfD/itBaG2c2ON8ws=
-=wUoA
------END PGP SIGNATURE-----
-
---mrjqp5qcdvleulqp--
+On 24.10.23 23:39, Timo Lindfors wrote:
+> Hi,
+> 
+> On Tue, 24 Oct 2023, Salvatore Bonaccorso wrote:
+>> Thanks for the excelent constructed report! I think it's best to
+>> forward this directly to upstream including the people for the
+>> bisected commit to get some idea.
+> 
+> Thanks for the quick reply!
+> 
+>> Can you reproduce the issue with 6.5.8-1 in unstable as well?
+> 
+> Unfortunately yes:
+> 
+> ansible@target:~$ uname -r
+> 6.5.0-3-amd64
+> ansible@target:~$ time sudo ./reproduce.bash
+> Wed 25 Oct 2023 12:27:00 AM EEST starting round 1
+> Wed 25 Oct 2023 12:27:24 AM EEST starting round 2
+> Wed 25 Oct 2023 12:27:48 AM EEST starting round 3
+> bug was reproduced after 3 tries
+> 
+> real    0m48.838s
+> user    0m1.115s
+> sys     0m45.530s
+> 
+> I also tested upstream tag v6.6-rc6:
+> 
+> ...
+> + detected_version=6.6.0-rc6
+> + '[' 6.6.0-rc6 '!=' 6.6.0-rc6 ']'
+> + exec ssh target sudo ./reproduce.bash
+> Wed 25 Oct 2023 12:37:16 AM EEST starting round 1
+> Wed 25 Oct 2023 12:37:42 AM EEST starting round 2
+> Wed 25 Oct 2023 12:38:10 AM EEST starting round 3
+> Wed 25 Oct 2023 12:38:36 AM EEST starting round 4
+> Wed 25 Oct 2023 12:39:01 AM EEST starting round 5
+> Wed 25 Oct 2023 12:39:27 AM EEST starting round 6
+> bug was reproduced after 6 tries
+> 
+> 
+> For completeness, here is also the grub_set_default_version.bash script
+> that I had to write to automate this (maybe these could be in debian
+> wiki?):
+> 
+> #!/bin/bash
+> set -x
+> 
+> version="$1"
+> 
+> idx=$(expr $(grep "menuentry " /boot/grub/grub.cfg | sed 1d |grep -n
+> "'Debian GNU/Linux, with Linux $version'"|cut -d: -f1) - 1)
+> exec sudo grub-set-default "1>$idx"
+> 
+> 
+> 
+> -Timo
+> 
+> 
+> 
