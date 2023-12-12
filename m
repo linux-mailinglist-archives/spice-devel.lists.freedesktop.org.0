@@ -1,42 +1,57 @@
 Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72F8F806FB5
-	for <lists+spice-devel@lfdr.de>; Wed,  6 Dec 2023 13:30:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 544C58119FE
+	for <lists+spice-devel@lfdr.de>; Wed, 13 Dec 2023 17:47:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E980310E710;
-	Wed,  6 Dec 2023 12:30:46 +0000 (UTC)
-X-Original-To: spice-devel@lists.freedesktop.org
-Delivered-To: spice-devel@lists.freedesktop.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [80.237.130.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7CF9310E09B;
- Wed,  6 Dec 2023 09:56:46 +0000 (UTC)
-Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1rAoe1-0001Jn-NU; Wed, 06 Dec 2023 10:56:41 +0100
-Message-ID: <fb0fda6a-3750-4e1b-893f-97a3e402b9af@leemhuis.info>
-Date: Wed, 6 Dec 2023 10:56:40 +0100
+	by gabe.freedesktop.org (Postfix) with ESMTP id F188210E284;
+	Wed, 13 Dec 2023 16:47:35 +0000 (UTC)
+X-Original-To: Spice-devel@lists.freedesktop.org
+Delivered-To: Spice-devel@lists.freedesktop.org
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CB5C510E691
+ for <Spice-devel@lists.freedesktop.org>; Tue, 12 Dec 2023 21:15:04 +0000 (UTC)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6d9e756cf32so3852511a34.2
+ for <Spice-devel@lists.freedesktop.org>; Tue, 12 Dec 2023 13:15:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702415703; x=1703020503; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=VrOb2YHzWKCdLEUMMiEnJrwTcRWP8iKf67fpQCJ8vME=;
+ b=dgRqgKPNPzKCgyt931RkTOgPFivSONavMlAY/NsiURZP/1ZBwlXgCwYrign4Fgi8k7
+ rswhEAPEQm5lIYwFEFe4dA91A+QGhgqWQLaYXD5qMg1NWKz+fe/5s/hc6UcrcXIGs9pB
+ iMam2NuG25xLbJi0DzrWNSxswt638l23QzVBuqfZVwNPKZh5Tu6b2UOSa6YplkSa80iV
+ b3WmGQJorkg8vPZS3VBkMlq1qHl6g60m5m9EAEMPzxw/bjtpatOnWAEjU41DHP8KUxI3
+ LzRyENXjX1R089rQPejaV3U2gtZtkjuUUfcD2nCn0ffscsYmYWknSABGO31B52iTShi3
+ QH0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702415703; x=1703020503;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VrOb2YHzWKCdLEUMMiEnJrwTcRWP8iKf67fpQCJ8vME=;
+ b=VtfDsFfl2x8CoZaTreLqMjP8AgoTlgFY9TnEWbLhhRJalyj0+Aj0Gd+x2nrMK1ACIv
+ izTr3sU82vnZGl92aD/sHO5/A/b2hrEUDokbO4a6HqqX4pYxUrJrkXIwPRKbyBDvS7aS
+ 5tYEOqFSsmCQn1DtSIXl0JCY0gMKk6nY+beXdGRHM3354wGEUVPii2/b9ZdNWqTPlEKa
+ aukvxBRmv2SLv2W8wCHSlCB3J0pr/enweD0V5yLe0bGTN5vSQX+ixdDCfblJLWamMpgf
+ /IbWHdQb4ql5iCxkbde5TWhBRgjsKsyo0AwJA7pgmj2pbSVFlbWSQ81jsdeckZQZzHN9
+ nrWA==
+X-Gm-Message-State: AOJu0Yzhy0TlWKXTdPnIYXWqsUoV0z7QpQl2vEUeSumJ1XSbjQ5QdH+7
+ CrHp9M6HcxEyqIZAr4OmMkmhzmM9DQxoOJuWaovCsulpzyB8pA==
+X-Google-Smtp-Source: AGHT+IFpROErQHWCH8R6GvMhHUrYRfQVKmf5uAQUWcn6g9akWndBWEyFiSIfZd9LwDiq6POoqzwJyqOYFbLEgSIB5uk=
+X-Received: by 2002:a05:6830:1084:b0:6d9:e192:56a4 with SMTP id
+ y4-20020a056830108400b006d9e19256a4mr6039186oto.17.1702415703569; Tue, 12 Dec
+ 2023 13:15:03 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: Gerd Hoffmann <kraxel@redhat.com>
-References: <alpine.DEB.2.20.2310242308150.28457@mail.home>
- <ZTgydqRlK6WX_b29@eldamar.lan>
- <alpine.DEB.2.20.2310250027230.28685@mail.home>
-From: "Linux regression tracking (Thorsten Leemhuis)"
- <regressions@leemhuis.info>
-In-Reply-To: <alpine.DEB.2.20.2310250027230.28685@mail.home>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1701856606;
- 9c73d8ce; 
-X-HE-SMSGID: 1rAoe1-0001Jn-NU
-X-Mailman-Approved-At: Wed, 06 Dec 2023 12:30:45 +0000
-Subject: Re: [Spice-devel] Bug#1054514: linux-image-6.1.0-13-amd64: Debian
- VM with qxl graphics freezes frequently
+From: Fabio <cellulare3@gmail.com>
+Date: Tue, 12 Dec 2023 22:14:55 +0100
+Message-ID: <CAMUN1STk3fxA129c-C3mBFMAL=7_jCaT_EfZ8XazhrdS1DTzpQ@mail.gmail.com>
+Subject: usb passtrough
+To: Spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000457956060c568b47"
+X-Mailman-Approved-At: Wed, 13 Dec 2023 16:47:34 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,91 +63,25 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
-Cc: regressions@lists.linux.dev, Thomas Zimmermann <tzimmermann@suse.de>,
- 1054514@bugs.debian.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, Salvatore Bonaccorso <carnil@debian.org>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi, Thorsten here, the Linux kernel's regression tracker. Top-posting
-for once, to make this easily accessible to everyone.
+--000000000000457956060c568b47
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Gerd, it seems this regression[1] fell through the cracks. Could you
-please take a look? Or is there a good reason why this can't be
-addressed? Or was it dealt with and I just missed it?
+Ciao, scusa se ti disturbo ma la tua guida non mi =C3=A8 chiara.
+Io devo fare collegare una penna USB al client ed usarlo come se fosse
+collegato alla mia macchina virtuale di windows in RDP.
+il tuo software  per=C3=B2 non funziona....
 
-[1] apparently caused by 5a838e5d5825c8 ("drm/qxl: simplify
-qxl_fence_wait") [v5.13-rc1] from Gerd; for details see
-https://lore.kernel.org/regressions/ZTgydqRlK6WX_b29@eldamar.lan/
+--000000000000457956060c568b47
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
---
-Everything you wanna know about Linux kernel regression tracking:
-https://linux-regtracking.leemhuis.info/about/#tldr
-If I did something stupid, please tell me, as explained on that page.
+<div dir=3D"ltr">Ciao, scusa se ti disturbo ma la tua guida non mi =C3=A8 c=
+hiara. <br>Io devo fare collegare una penna USB al client ed usarlo come se=
+ fosse collegato alla mia macchina virtuale di windows in RDP.<br>il tuo so=
+ftware=C2=A0 per=C3=B2 non funziona....</div>
 
-#regzbot poke
-
-On 24.10.23 23:39, Timo Lindfors wrote:
-> Hi,
-> 
-> On Tue, 24 Oct 2023, Salvatore Bonaccorso wrote:
->> Thanks for the excelent constructed report! I think it's best to
->> forward this directly to upstream including the people for the
->> bisected commit to get some idea.
-> 
-> Thanks for the quick reply!
-> 
->> Can you reproduce the issue with 6.5.8-1 in unstable as well?
-> 
-> Unfortunately yes:
-> 
-> ansible@target:~$ uname -r
-> 6.5.0-3-amd64
-> ansible@target:~$ time sudo ./reproduce.bash
-> Wed 25 Oct 2023 12:27:00 AM EEST starting round 1
-> Wed 25 Oct 2023 12:27:24 AM EEST starting round 2
-> Wed 25 Oct 2023 12:27:48 AM EEST starting round 3
-> bug was reproduced after 3 tries
-> 
-> real    0m48.838s
-> user    0m1.115s
-> sys     0m45.530s
-> 
-> I also tested upstream tag v6.6-rc6:
-> 
-> ...
-> + detected_version=6.6.0-rc6
-> + '[' 6.6.0-rc6 '!=' 6.6.0-rc6 ']'
-> + exec ssh target sudo ./reproduce.bash
-> Wed 25 Oct 2023 12:37:16 AM EEST starting round 1
-> Wed 25 Oct 2023 12:37:42 AM EEST starting round 2
-> Wed 25 Oct 2023 12:38:10 AM EEST starting round 3
-> Wed 25 Oct 2023 12:38:36 AM EEST starting round 4
-> Wed 25 Oct 2023 12:39:01 AM EEST starting round 5
-> Wed 25 Oct 2023 12:39:27 AM EEST starting round 6
-> bug was reproduced after 6 tries
-> 
-> 
-> For completeness, here is also the grub_set_default_version.bash script
-> that I had to write to automate this (maybe these could be in debian
-> wiki?):
-> 
-> #!/bin/bash
-> set -x
-> 
-> version="$1"
-> 
-> idx=$(expr $(grep "menuentry " /boot/grub/grub.cfg | sed 1d |grep -n
-> "'Debian GNU/Linux, with Linux $version'"|cut -d: -f1) - 1)
-> exec sudo grub-set-default "1>$idx"
-> 
-> 
-> 
-> -Timo
-> 
-> 
-> 
+--000000000000457956060c568b47--
