@@ -2,55 +2,37 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B77FB820DAC
-	for <lists+spice-devel@lfdr.de>; Sun, 31 Dec 2023 21:29:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AA85828B6D
+	for <lists+spice-devel@lfdr.de>; Tue,  9 Jan 2024 18:46:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F2A1510E05B;
-	Sun, 31 Dec 2023 20:29:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A552610E469;
+	Tue,  9 Jan 2024 17:46:42 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B6D3F10E05B
- for <spice-devel@lists.freedesktop.org>; Sun, 31 Dec 2023 20:29:00 +0000 (UTC)
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-dbdd013c68bso5223326276.2
- for <spice-devel@lists.freedesktop.org>; Sun, 31 Dec 2023 12:29:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704054539; x=1704659339; darn=lists.freedesktop.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=5cyL1KrOKSBG6pVDnoHcIvLSOrbj2BpRJ8PilmjjqgE=;
- b=Pa8DGedz/9KEfkDF0Hdac2pFXqHebWLUAggQSwXcIAHPEv+CtxTiuArlP6+yFm/DD/
- sJtaTjm9ix+LAjea7Ev2xWH96LiSkAShrbZHKNHYQd+hPO5akxwtOZwKXEWa3CG30znw
- wd/Cf+6aYmcg0Q1t7ZDDEprgd7VfFng246TZtzKqIrFypKaqofzP4dkvaRDWSsGNhFo9
- C6ouSfdc8LSfgN1qM5nJ7xUNhJ0RRetb4NcA/FTinDS6EOiumvyByGlYQN3hwJn4nA0G
- ZZFXUkWw1d9kd1KyjhH3Qjj5y59wporHG7IeIFUwj7OyMh9y73e9bDpcfOtsIcz1jHuM
- Kr/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704054539; x=1704659339;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5cyL1KrOKSBG6pVDnoHcIvLSOrbj2BpRJ8PilmjjqgE=;
- b=W2/18FFNSuqv7Hb26mGgO+uZlU/4WvMOn3lUXeVKTj17mu5ugYxLGsdQbHT1OuH0NW
- Mra7f7FdkJkT3l2OZ1arDT8qvNYjk9ZSWnJlytuppZHoqd9R9x2toC+ukYtr8aNfLk+/
- i0eIEXk1rdzS/VBPOe5PJpT/7WjwE9hyKc2umSktRt9Q8aYB0G9m6rwFu2hABFGA+v8v
- d6OZ4Hp1xI4mLLXNd7TvYHkaArE8ZSjFInSiYj5MdxaSapIOJdJzSQfMEKB7ejcremfl
- OLbgx0ay9cn1jUUaub7MBBLL6pLIsEziTeK7ayr1sMvV9UVJ/EFwsG85oAoPsv1yfYw9
- 9HoQ==
-X-Gm-Message-State: AOJu0YzGhCqzMvHrNgeFh39eeRO4Tl/UxhwEgpkcKSLODNgRwX90dZV9
- OyMJHuSmW3MB14czgnKVksJ7TsK9j/BG80Ykrd95srbgfQc=
-X-Google-Smtp-Source: AGHT+IFDRik9Hbhlll2sgiTdr3xWVyOpAWJPcQKZ4LBbPdg7xLz/Y9Bovm8a36XZQ9L4UdL+T72cyWfyy+OR1DuDKqQ=
-X-Received: by 2002:a25:d303:0:b0:db4:355c:e78 with SMTP id
- e3-20020a25d303000000b00db4355c0e78mr7749220ybf.55.1704054539509; Sun, 31 Dec
- 2023 12:28:59 -0800 (PST)
+Received: from mail.ispras.ru (mail.ispras.ru [83.149.199.84])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C8C9810E3E3
+ for <spice-devel@lists.freedesktop.org>; Tue,  9 Jan 2024 11:19:04 +0000 (UTC)
+Received: from localhost.ispras.ru (unknown [10.10.165.2])
+ by mail.ispras.ru (Postfix) with ESMTPSA id EE39540737C4;
+ Tue,  9 Jan 2024 11:09:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.ispras.ru EE39540737C4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ispras.ru;
+ s=default; t=1704798544;
+ bh=dZSYFuprTqfspA6v9+rP8mVuX6czoir5pAkVaXwFN5M=;
+ h=From:To:Cc:Subject:Date:From;
+ b=OU6LGNvOv/bPvRC0J1P8GLE/fLpU47BIoftyNVi4GmcnI9K1URhtFoff4lVqj0Hhh
+ SKbo0piEcmU7EXCN22qQSqrj8cJQdaUcN/UgXpq5UUfTQw2ZAibhGibFNDnlBLBSiy
+ zji+42Z33Eeo8UppEXj+OETCbcZCJBX2CqUId60k=
+From: Fedor Pchelkin <pchelkin@ispras.ru>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	stable@vger.kernel.org
+Subject: [PATCH 5.10 0/1] drm/qxl: fix UAF on handle creation
+Date: Tue,  9 Jan 2024 14:08:24 +0300
+Message-ID: <20240109110827.9458-1-pchelkin@ispras.ru>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-From: Anston Sorensen <ansorensen1118@gmail.com>
-Date: Sun, 31 Dec 2023 14:28:23 -0600
-Message-ID: <CAJ0YB0aWh2nB5dRok49k4C5QXXWwo3di4bPv5+Y0FwDfXREzpA@mail.gmail.com>
-Subject: Does a Java SPICE client library exist?
-To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="0000000000008166d2060dd41d6b"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 09 Jan 2024 17:46:42 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,33 +44,22 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Cc: lvc-project@linuxtesting.org, linux-kernel@vger.kernel.org,
+ Fedor Pchelkin <pchelkin@ispras.ru>, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, Wander Lairson Costa <wander@redhat.com>,
+ Alexey Khoroshilov <khoroshilov@ispras.ru>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000008166d2060dd41d6b
-Content-Type: text/plain; charset="UTF-8"
+The bug `KASAN: slab-use-after-free in qxl_mode_dumb_create` is reproduced
+on 5.10 stable branch.
 
-Not sure if this is the right place to be asking this, but I was wondering
-if there is a Java library that acts as a SPICE client, so I can
-receive graphics output in Java as Java Images and also input
-mouse/keyboard data. I know such a library exists for VNC (called
-Vernacular VNC), but I'm not sure if one exists for SPICE.
+The problem has been fixed by the following patch which can be cleanly
+applied to 5.10. The fix is already included in all stable branches
+starting from 5.15.
 
-If anyone is familiar with something I can use or can point me to a better
-place, please let me know.
+Link to the "failed to apply to 5.10" report [1].
 
-Anston
-
---0000000000008166d2060dd41d6b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Not sure if this is the right place to be asking this, but=
- I was wondering if there is a Java library that acts as a SPICE client, so=
- I can receive=C2=A0graphics output in Java as Java Images and also input m=
-ouse/keyboard data. I know such a library exists for VNC (called Vernacular=
- VNC), but I&#39;m not sure if one exists for SPICE.<div><br></div><div>If =
-anyone is familiar with something I can use or can point me to a better pla=
-ce, please=C2=A0let me know.</div><div><br></div><div>Anston</div></div>
-
---0000000000008166d2060dd41d6b--
+[1]: https://lore.kernel.org/stable/2023082121-mumps-residency-9108@gregkh/
