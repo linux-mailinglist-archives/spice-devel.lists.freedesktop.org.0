@@ -2,30 +2,30 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 589AB83F625
-	for <lists+spice-devel@lfdr.de>; Sun, 28 Jan 2024 16:49:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D35883F626
+	for <lists+spice-devel@lfdr.de>; Sun, 28 Jan 2024 16:49:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A0E2B1126AB;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9CD591126AA;
 	Sun, 28 Jan 2024 15:48:31 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2DFC910F06C;
- Sat, 27 Jan 2024 22:55:40 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8A0AD10EF90;
+ Sat, 27 Jan 2024 22:56:09 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id EBCF561383;
- Sat, 27 Jan 2024 22:55:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 896C0C433F1;
- Sat, 27 Jan 2024 22:55:00 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 69DCDCE37FE;
+ Sat, 27 Jan 2024 22:55:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 970BEC43394;
+ Sat, 27 Jan 2024 22:55:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1706396100;
- bh=vLZCdNFQJnOQTttc+EZzhjcVTLGWZOHDENswMgg+bgQ=;
+ s=korg; t=1706396132;
+ bh=BAyzAtWHbxxSXGrtBKhMIkIHp0OhS8g69+hwB2nxb8k=;
  h=Subject:To:Cc:From:Date:From;
- b=sO4kskzv1mbyCuTmdwwQvT3+wL/0d0/JHr0fcnbFKBgBk/tnGp5zSXbbgyaJEuyo7
- 6Xnp6viu1c6FqBsq7Cej8SdgpSsNSvaZq2RY09nLAgR16zfvq3ckIBSCjey2pDRDJF
- QczIsLSK+eazbSJfeitmrdyOX30kgId6rVyMfwF8=
+ b=c+Kr77bTQzdn5wf8pd1ZpjYW54rJFPLCzgaBAz2P7LrKH7NM7/rsALI2Oz5rPDl93
+ rkb1TL7pMwwcze6gyAMeBUuzQvnjM9ijHMNRBC+QdfP2KyuvnmPfuNhhZlrysue/q7
+ BAcva+0bNuXO1EQGmwKJHUYHQ+xwZtpWaNwKPixw=
 Subject: Patch "drm: Disable the cursor plane on atomic contexts with
- virtualized drivers" has been added to the 6.6-stable tree
+ virtualized drivers" has been added to the 6.7-stable tree
 To: airlied@linux.ie, airlied@redhat.com, contact@emersion.fr, daniel@ffwll.ch,
  dri-devel@lists.freedesktop.org, gregkh@linuxfoundation.org,
  gurchetansingh@chromium.org, hdegoede@redhat.com, javierm@redhat.com,
@@ -34,8 +34,8 @@ To: airlied@linux.ie, airlied@redhat.com, contact@emersion.fr, daniel@ffwll.ch,
  spice-devel@lists.freedesktop.org, tzimmermann@suse.de,
  virtualization@lists.linux-foundation.org, zackr@vmware.com
 From: <gregkh@linuxfoundation.org>
-Date: Sat, 27 Jan 2024 14:54:58 -0800
-Message-ID: <2024012758-blend-luminous-46d4@gregkh>
+Date: Sat, 27 Jan 2024 14:55:31 -0800
+Message-ID: <2024012730-spectator-elderly-60cb@gregkh>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=ANSI_X3.4-1968
 Content-Transfer-Encoding: 8bit
@@ -62,12 +62,12 @@ This is a note to let you know that I've just added the patch titled
 
     drm: Disable the cursor plane on atomic contexts with virtualized drivers
 
-to the 6.6-stable tree which can be found at:
+to the 6.7-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      drm-disable-the-cursor-plane-on-atomic-contexts-with-virtualized-drivers.patch
-and it can be found in the queue-6.6 subdirectory.
+and it can be found in the queue-6.7 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -155,7 +155,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  			    put_user(plane->base.id, plane_ptr + count))
 --- a/drivers/gpu/drm/qxl/qxl_drv.c
 +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -283,7 +283,7 @@ static const struct drm_ioctl_desc qxl_i
+@@ -285,7 +285,7 @@ static const struct drm_ioctl_desc qxl_i
  };
  
  static struct drm_driver qxl_driver = {
@@ -217,7 +217,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  
 --- a/include/drm/drm_file.h
 +++ b/include/drm/drm_file.h
-@@ -229,6 +229,18 @@ struct drm_file {
+@@ -227,6 +227,18 @@ struct drm_file {
  	bool is_master;
  
  	/**
@@ -240,6 +240,6 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from zackr@vmware.com are
 
-queue-6.6/drm-disable-the-cursor-plane-on-atomic-contexts-with-virtualized-drivers.patch
-queue-6.6/drm-allow-drivers-to-indicate-the-damage-helpers-to-ignore-damage-clips.patch
-queue-6.6/drm-virtio-disable-damage-clipping-if-fb-changed-since-last-page-flip.patch
+queue-6.7/drm-disable-the-cursor-plane-on-atomic-contexts-with-virtualized-drivers.patch
+queue-6.7/drm-allow-drivers-to-indicate-the-damage-helpers-to-ignore-damage-clips.patch
+queue-6.7/drm-virtio-disable-damage-clipping-if-fb-changed-since-last-page-flip.patch
