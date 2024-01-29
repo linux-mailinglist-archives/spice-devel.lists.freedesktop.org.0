@@ -2,46 +2,43 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D35883F626
-	for <lists+spice-devel@lfdr.de>; Sun, 28 Jan 2024 16:49:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A41988410E3
+	for <lists+spice-devel@lfdr.de>; Mon, 29 Jan 2024 18:40:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9CD591126AA;
-	Sun, 28 Jan 2024 15:48:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6567910F425;
+	Mon, 29 Jan 2024 17:40:12 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A0AD10EF90;
- Sat, 27 Jan 2024 22:56:09 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 815E8112A04;
+ Mon, 29 Jan 2024 17:11:00 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 69DCDCE37FE;
- Sat, 27 Jan 2024 22:55:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 970BEC43394;
- Sat, 27 Jan 2024 22:55:32 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 58C03CE10F9;
+ Mon, 29 Jan 2024 17:10:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D6C1C433F1;
+ Mon, 29 Jan 2024 17:10:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1706396132;
- bh=BAyzAtWHbxxSXGrtBKhMIkIHp0OhS8g69+hwB2nxb8k=;
- h=Subject:To:Cc:From:Date:From;
- b=c+Kr77bTQzdn5wf8pd1ZpjYW54rJFPLCzgaBAz2P7LrKH7NM7/rsALI2Oz5rPDl93
- rkb1TL7pMwwcze6gyAMeBUuzQvnjM9ijHMNRBC+QdfP2KyuvnmPfuNhhZlrysue/q7
- BAcva+0bNuXO1EQGmwKJHUYHQ+xwZtpWaNwKPixw=
-Subject: Patch "drm: Disable the cursor plane on atomic contexts with
- virtualized drivers" has been added to the 6.7-stable tree
-To: airlied@linux.ie, airlied@redhat.com, contact@emersion.fr, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, gregkh@linuxfoundation.org,
- gurchetansingh@chromium.org, hdegoede@redhat.com, javierm@redhat.com,
- kraxel@redhat.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- olvaffe@gmail.com, pekka.paalanen@collabora.com,
- spice-devel@lists.freedesktop.org, tzimmermann@suse.de,
- virtualization@lists.linux-foundation.org, zackr@vmware.com
-From: <gregkh@linuxfoundation.org>
-Date: Sat, 27 Jan 2024 14:55:31 -0800
-Message-ID: <2024012730-spectator-elderly-60cb@gregkh>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=ANSI_X3.4-1968
-Content-Transfer-Encoding: 8bit
-X-stable: commit
+ s=korg; t=1706548223;
+ bh=qA8iGN3XKJOBwwOYBy9X7jMTB+6ug6Rfjp5pHQPjwNc=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=qfL2AdplyiBLlQef2gy7+y2wQcrEB3phyhIPLs0yDrxLkdspAkNksyTzcRj7z8C1C
+ NBJn421ZfCBpMcMSQ6wKJggfmbhEnTokMgj9/wu9+xKfgpKZ3qXLnU1ZPUskvRW4YV
+ wMjhh9qKIBK5Q2YbDELrMW8yO5TSfFacNCQJ6f54=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: stable@vger.kernel.org
+Subject: [PATCH 6.7 253/346] drm: Disable the cursor plane on atomic contexts
+ with virtualized drivers
+Date: Mon, 29 Jan 2024 09:04:44 -0800
+Message-ID: <20240129170023.851641380@linuxfoundation.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240129170016.356158639@linuxfoundation.org>
+References: <20240129170016.356158639@linuxfoundation.org>
+User-Agent: quilt/0.67
+X-stable: review
 X-Patchwork-Hint: ignore
-X-Mailman-Approved-At: Sun, 28 Jan 2024 15:48:30 +0000
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 29 Jan 2024 17:40:11 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,30 +50,25 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Cc: stable-commits@vger.kernel.org
+Cc: Pekka Paalanen <pekka.paalanen@collabora.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Javier Martinez Canillas <javierm@redhat.com>,
+ David Airlie <airlied@linux.ie>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ dri-devel@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, patches@lists.linux.dev,
+ Maxime Ripard <mripard@kernel.org>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Hans de Goede <hdegoede@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, spice-devel@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, Simon Ser <contact@emersion.fr>,
+ virtualization@lists.linux-foundation.org, Chia-I Wu <olvaffe@gmail.com>,
+ Zack Rusin <zackr@vmware.com>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+6.7-stable review patch.  If anyone has any objections, please let me know.
 
-This is a note to let you know that I've just added the patch titled
-
-    drm: Disable the cursor plane on atomic contexts with virtualized drivers
-
-to the 6.7-stable tree which can be found at:
-    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
-
-The filename of the patch is:
-     drm-disable-the-cursor-plane-on-atomic-contexts-with-virtualized-drivers.patch
-and it can be found in the queue-6.7 subdirectory.
-
-If you, or anyone else, feels it should not be added to the stable tree,
-please let <stable@vger.kernel.org> know about it.
-
-
-From 4e3b70da64a53784683cfcbac2deda5d6e540407 Mon Sep 17 00:00:00 2001
-From: Zack Rusin <zackr@vmware.com>
-Date: Mon, 23 Oct 2023 09:46:05 +0200
-Subject: drm: Disable the cursor plane on atomic contexts with virtualized drivers
+------------------
 
 From: Zack Rusin <zackr@vmware.com>
 
@@ -238,8 +230,3 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  	 * Master this node is currently associated with. Protected by struct
 
 
-Patches currently in stable-queue which might be from zackr@vmware.com are
-
-queue-6.7/drm-disable-the-cursor-plane-on-atomic-contexts-with-virtualized-drivers.patch
-queue-6.7/drm-allow-drivers-to-indicate-the-damage-helpers-to-ignore-damage-clips.patch
-queue-6.7/drm-virtio-disable-damage-clipping-if-fb-changed-since-last-page-flip.patch
