@@ -2,37 +2,37 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A41988410E3
-	for <lists+spice-devel@lfdr.de>; Mon, 29 Jan 2024 18:40:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B4538410E4
+	for <lists+spice-devel@lfdr.de>; Mon, 29 Jan 2024 18:40:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6567910F425;
+	by gabe.freedesktop.org (Postfix) with ESMTP id C378A10F42F;
 	Mon, 29 Jan 2024 17:40:12 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 815E8112A04;
- Mon, 29 Jan 2024 17:11:00 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 33F3A10E65D;
+ Mon, 29 Jan 2024 17:17:09 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 58C03CE10F9;
- Mon, 29 Jan 2024 17:10:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D6C1C433F1;
- Mon, 29 Jan 2024 17:10:23 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8D568623BF;
+ Mon, 29 Jan 2024 17:16:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 252FAC433C7;
+ Mon, 29 Jan 2024 17:16:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1706548223;
- bh=qA8iGN3XKJOBwwOYBy9X7jMTB+6ug6Rfjp5pHQPjwNc=;
+ s=korg; t=1706548598;
+ bh=Bp1dyDO7354wIAEdTjNf7v9p8l29FKqGzHZCwkKLMYY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qfL2AdplyiBLlQef2gy7+y2wQcrEB3phyhIPLs0yDrxLkdspAkNksyTzcRj7z8C1C
- NBJn421ZfCBpMcMSQ6wKJggfmbhEnTokMgj9/wu9+xKfgpKZ3qXLnU1ZPUskvRW4YV
- wMjhh9qKIBK5Q2YbDELrMW8yO5TSfFacNCQJ6f54=
+ b=2kP+o9gonsw3e0+TmGRXRkDfl/YEtbwaZK2mAvUYtPmIh61MCRvztMMz7tiveK9Gk
+ JfxRl2wHXjBG7HLK7SnlbevJIGDq1eLh01fJlfbmDxqKKrILefZthBTI8/Fp3u2DEo
+ rqF+yFH03BAAhcIcVescE36o6AZDvhNm+4a3MUq0=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Subject: [PATCH 6.7 253/346] drm: Disable the cursor plane on atomic contexts
+Subject: [PATCH 6.6 259/331] drm: Disable the cursor plane on atomic contexts
  with virtualized drivers
-Date: Mon, 29 Jan 2024 09:04:44 -0800
-Message-ID: <20240129170023.851641380@linuxfoundation.org>
+Date: Mon, 29 Jan 2024 09:05:23 -0800
+Message-ID: <20240129170022.458985226@linuxfoundation.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240129170016.356158639@linuxfoundation.org>
-References: <20240129170016.356158639@linuxfoundation.org>
+In-Reply-To: <20240129170014.969142961@linuxfoundation.org>
+References: <20240129170014.969142961@linuxfoundation.org>
 User-Agent: quilt/0.67
 X-stable: review
 X-Patchwork-Hint: ignore
@@ -66,7 +66,7 @@ Cc: Pekka Paalanen <pekka.paalanen@collabora.com>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-6.7-stable review patch.  If anyone has any objections, please let me know.
+6.6-stable review patch.  If anyone has any objections, please let me know.
 
 ------------------
 
@@ -147,7 +147,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  			    put_user(plane->base.id, plane_ptr + count))
 --- a/drivers/gpu/drm/qxl/qxl_drv.c
 +++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -285,7 +285,7 @@ static const struct drm_ioctl_desc qxl_i
+@@ -283,7 +283,7 @@ static const struct drm_ioctl_desc qxl_i
  };
  
  static struct drm_driver qxl_driver = {
@@ -209,7 +209,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  
 --- a/include/drm/drm_file.h
 +++ b/include/drm/drm_file.h
-@@ -227,6 +227,18 @@ struct drm_file {
+@@ -229,6 +229,18 @@ struct drm_file {
  	bool is_master;
  
  	/**
