@@ -2,99 +2,60 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BDFA84D128
-	for <lists+spice-devel@lfdr.de>; Wed,  7 Feb 2024 19:26:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99154855D5A
+	for <lists+spice-devel@lfdr.de>; Thu, 15 Feb 2024 10:05:34 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AB49810E5CA;
-	Wed,  7 Feb 2024 18:26:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 11E7D10E43D;
+	Thu, 15 Feb 2024 09:05:33 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="qRQk74rx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XKDVzBAb";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02olkn2066.outbound.protection.outlook.com [40.92.15.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE22910ECD7
- for <spice-devel@lists.freedesktop.org>; Tue,  6 Feb 2024 20:16:47 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JGi7L0+Wt0pv7NNZG63gC9Jt3lflOXYOu9qiPYzHpD+XHn1reLocVilXGRj7KzKXw7xU+jWRRhQ6ocgW/HzCvx43ixPcYm8dMNMSElUIEWcXdS+gtJ4WKhPKIUEHvQztZwiIfhcUd8S/eH+lJU2BAULV3akzvNbKSbtqclTbg+zSnzWezCH+82MytCt6bIzGXyDrVO8HV5tr9bnL81nQvq1BBRmtfNfcBiTGS+YEjY8ZyotGaBerK1QMLa5j8ccgc2XyXGwUcN0qpc2XC67xbN07WhKOLtfm0pXVSeFSzfKfZ/bTi+0/LbnSG41tIr7bckwWxaaM0ZEqUIum2tEEXA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YVtB3PSwChukBpJoeG+8L9Gk0tcz0t2ZzkcL6Pru868=;
- b=bk/wHsyBOJ6JIBS/TMpH3P8kHe0H/gsI2R3y7zPHCajoxSzCASPQyiYQzKEXqpeWGil6tlCejAy4+WCNd7+Qmkl+2uER1NThPKIZKRXRGWxCR2sUbvMLkIalCv+lz00l5b+dvsIlNstL8Ue4ZIqg38rwRmbjGhD8c5vScjOfK1b+hQ0bFwR80mwrLZBesH92xsahv/J1rMt9RRYl8qNnsPicWEVBMh/xmMdCojOUu04NkXX0XX9Fo6WTFunyUXun6ntcWn9w6RxVkB31Bzu2WUR56UN0sbqzjDn7Yb3YWDvHnsV+cSn+rIZOP1FCGYzhUqoxAJco5RlhzXkxUJE/2g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YVtB3PSwChukBpJoeG+8L9Gk0tcz0t2ZzkcL6Pru868=;
- b=qRQk74rxYCBOd0j9I9YNEe4+E2INTy36BfR6wZjGrnVLjE30bL1GxwO5ybCo1TWK7185A4b3WGPtDFv9mqbaaM0HsFJAd3uYw8wYi1j7VhEZNeuBLGRbzwteyfTl6Aw4RutxTsehmiBWhsu/Sea/i5hpcL+y/4Asnbjn+F9QynyGEm8MhpfKpwO1mofZikCAQa75f7a/a5Wo9NVXFbjCh/WuSeKkHim9bU9L8sVYAh/66K04Qkk0BuDyH1ZNDA7FEARVT3oDg5aARZr9TmpPYYNFuT1LRN6R+xabaSTVKqdTZyJpQpfu9Zbh2HiOlfwS4/k030G++PRsFo5d/HpjWg==
-Received: from CY8PR20MB5428.namprd20.prod.outlook.com (2603:10b6:930:5b::5)
- by DS7PR20MB3870.namprd20.prod.outlook.com (2603:10b6:5:3a9::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.36; Tue, 6 Feb
- 2024 20:16:45 +0000
-Received: from CY8PR20MB5428.namprd20.prod.outlook.com
- ([fe80::a807:5d05:2fb6:7465]) by CY8PR20MB5428.namprd20.prod.outlook.com
- ([fe80::a807:5d05:2fb6:7465%5]) with mapi id 15.20.7249.035; Tue, 6 Feb 2024
- 20:16:45 +0000
-From: Jason Chen <jastsai@outlook.com>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Subject: Mouse Back and Forward button
-Thread-Topic: Mouse Back and Forward button
-Thread-Index: AQHaWTj7ZMVtRu4/V0eaQYUt5Pdi9g==
-Date: Tue, 6 Feb 2024 20:16:44 +0000
-Message-ID: <CY8PR20MB5428D720ECDF97FB942AFE33AB462@CY8PR20MB5428.namprd20.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tmn: [B6gdELVR4ONlbPq9D73RG5QZQdRQM8ef]
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CY8PR20MB5428:EE_|DS7PR20MB3870:EE_
-x-ms-office365-filtering-correlation-id: 285dd623-f053-4366-c153-08dc27508a39
-x-ms-exchange-slblob-mailprops: CLk2x5OX5VbQwVe0cZB9QxGP6Bh3YlNNDcN9KV8mMgtlK1w+rbGVJ+NbIXc5U570iEhPBD/epM0tDGROBGaNv/2WV782XRnJaB8bn6qEeT4e/g9cMaxwF3cPLfo3fETy5HlmNwQvwgcTBG0TNQn71trhKjW+a6LBmeO9iOcLh4UQqXlPaPF+4XwYKO50WM7ybx4s7BfCOZVubkj7UgAsTwML/WEQLSAJNNu7vvhmkGXMo1+sZKpWIF6MdcFFgQrZfFbmIsmbGP9HsuHp+6WHeVrupiTGDvOr21mZhJFbnpmdQR3GAZ/w28PtmLQSIr90vZaZhkHpmZaGMxruNQOXuXhlY7UnpFRAQTUHg3l7nBBKfvjG+mxTEOllukeeq7iSWHLCkrLSl+kPikKadWkDNQeEflxOTBdetqEGTdpWuJ9qxgGbHtBg0otBvLQ7jo6pTvM1CQNvVQYQ8xHzu4ry5MVuc/Pgkq+cF8XdRdy6t2jLLDvvO7RxR0fVJSQPkCX7H2EPbY3r2Pt0Gw1XFvAqPB27lnBAMGTffAVS4xVgBhW02XpkCEYd92Jo2VFNIPEhMEDa0gjZ4PqkkJ1BJyDO2FNu1eqLErmvkdqqYb2wwlzDhjE5jmGxn2jJbURBZeqmYKtGk4NiWFFzf5eLMV4jvdGqLMcZZAudgshT8PNczQDwNBnCTtykwZ3ZjLqgMKDOZoByv75MX3++dgTSCIconw==
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: afVraBYivhVMZbOcgCqZq3Fe026TBhUyT8rAYBA7eiIoD1EC+wBJ/YR/s90ZUM8pBS896piq62eslgIqKjFZAmHLt2v9muRx4i4VQoExTQQpwsW9PgFmom8Vsqo16i3TImp2PLP/pn8XJVVVdg93fXKZ0JhWTX8KLJl8ji3rJcivaYK2/EaL9eEkeoXMV6Bgsbfajgr3iiEFuSdEQpq0fZOIwj79i8xZoQk2RGXOv55qMNS0QSuhQHZPC41uIe487YVM7lHNIAf3IS0L83NTxCWsfkG+KluSgzJjAW9Q/XnHcUQfQcZz9tVyBnBFwQSQLVVduMIkZnVaefD6pAtk+KuLjO3JyGZL/k8YfznRdWavXu+H51jPe1ZPgIJ7swcTv/EQkpOlf/q4zHaAlQ6ck2VQpzVpYUfzGaI4Ywn9p12yByDnc5ESsott5LBDOeU0rCP1pF2amd0ARvYWHyv1x+zf8/3DHwfgZjdrieDyoqEN+7veuuI0SZs2JBe9JWyc1n0pLd3CdYoJhHoW0xUTKxBtb4JJ8/1zJ+ILMwpnKn9bMDBC6yNmwKUiO3rQar1x
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?a0BsjDamop/3Y35/tLzPhxST72vzA8BK8jiDq8uIdImSX+DB7cLPjMuM6c?=
- =?iso-8859-1?Q?KERUoBBAe82ER/g9cwliE0Yidygz2eOL4bjPkRRHMFl5R9dW0iO8IV3Z8A?=
- =?iso-8859-1?Q?dsO+s1tcOykIVr0VG3zaLmtSzxOzgcHycJ/r97+rK5yyc7p4iDv59mhUSs?=
- =?iso-8859-1?Q?nWrX01gKX6+epibvzPd5AtKbVzJFuRbH0bQGKF4313195qxt3Ym08ZMB4g?=
- =?iso-8859-1?Q?WrVgPppsvyLkiJZGC6hRp6nIwKtJkpW6UPsnPPBI5aj7j9CjoBBY+i0k7q?=
- =?iso-8859-1?Q?TSm02ll3+3aXgUQ7ZtKR+FKhir/lMtYWbRkylNiMwaTlkI1hPTJeiXeNaX?=
- =?iso-8859-1?Q?KjVPshdQcnFOv9DJIKVElK0uExcqzGVwpFC/HUaBK9KFhObxpNeYUMdpNy?=
- =?iso-8859-1?Q?rj39+QM+x0dP4pq8xerJZlgMOgOLqfR4ILeMqcIlsePqPQBzrX+qFuCDh8?=
- =?iso-8859-1?Q?/OqegiJMMxQJ7lGOapGzP9sVJWfJ5dGdHA74JyhH0mBRpofCS7I29cTGL5?=
- =?iso-8859-1?Q?DZlk0/+nKDl29+KYsAVre8bKBFm4swNQj8gL4+xETqI7r+pJnMccRMUMnu?=
- =?iso-8859-1?Q?fkwqWh6iM9MiAlB6GdIGLo/E3G3Oo9KTMOmEFli9TPCFAAwb3o88xxwpxu?=
- =?iso-8859-1?Q?b+QKBG3L1BzoJdBZaOby7rr78RuWFVQ4EhqvWyWMcFboEy+grJWlkEliFh?=
- =?iso-8859-1?Q?EfemmSHsva3oUrHAsR35iIOvwWjYnjQvgR26b5I79Zcxv/R84pUQS6kiXC?=
- =?iso-8859-1?Q?d18yVwio/d95quguXvMHB1Ctab6Hkg71Mua3DCsOmjbYR5YrUmKwr2lrXs?=
- =?iso-8859-1?Q?89P6TamdymmgbvnDQBJ03T9zWxS5lrYL1tKn+n1Arrkus/tkspkUEZZoFQ?=
- =?iso-8859-1?Q?GbpyTzfaunxQAc/9jvwlCJN4t2TO01TA6DQDcmQxIecUB++tw+BC1GNj8P?=
- =?iso-8859-1?Q?2vkZNM20t7LCvb+S+ThJnDkPRG9oO4vzWy83QjccTe24UCaIfPZEt9nCBu?=
- =?iso-8859-1?Q?rLclNrsGxrS+pRXkUqB/lpuolDj6S8Qv4wykcV/NowetraleJQsuSEpYzx?=
- =?iso-8859-1?Q?EcTdMLjNUwL8oh5Gm/scsTqVjOtBylIPLyQaxjKTSOPbbOpSdLXkp8Z1Su?=
- =?iso-8859-1?Q?k5rN32drmhOdWq0dvHyxv74ZGFr53ZKiMxth1T1HoK8NeVc3CSOyRcRirt?=
- =?iso-8859-1?Q?ievmwS7CAINBk+qXesImakFr6WRGA9LkzEtIIsXhLHGnIC+T9+sGJENh?=
-Content-Type: multipart/alternative;
- boundary="_000_CY8PR20MB5428D720ECDF97FB942AFE33AB462CY8PR20MB5428namp_"
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
+ [209.85.216.47])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2A05410E7E6
+ for <spice-devel@lists.freedesktop.org>; Wed, 14 Feb 2024 18:47:44 +0000 (UTC)
+Received: by mail-pj1-f47.google.com with SMTP id
+ 98e67ed59e1d1-296a79e6295so75139a91.3
+ for <spice-devel@lists.freedesktop.org>; Wed, 14 Feb 2024 10:47:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707936463; x=1708541263; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=7NaF3nXoId0l3iSA+xIxpSP3ZJ9nNmkzB7o1V1w3PtE=;
+ b=XKDVzBAbqPWkFWzqlTp7WBppYakvTkAjvBUCzyJ12tqngU3Qlq8nsr1FUQzmAUpU9L
+ CfOSEMhWHwBhhyixe3GnMrQWbxGeKvJOpEmkZVcFQuBRjRAf5Si2oKdEVO29CbvRtetC
+ 09RZUMd8glfqZ+sczpgvkL3URTnPp852eXIBVh7xVThHXO6vNaCklgmXpYXW63T9uh9S
+ 0lnLHq2RDjSYqSPBgwJ6b67Pv+jPGBjvsolfMop9cn8GkWypTPpWSHu7CnLMi8Z0jpCw
+ TL3ELBfwDRtLyCeixIXEezIKsIDM7L8ElyUqHnzApdd3d5g6S7hPdY6zPDacAZAAPfjQ
+ FOvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707936463; x=1708541263;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7NaF3nXoId0l3iSA+xIxpSP3ZJ9nNmkzB7o1V1w3PtE=;
+ b=udegCiyjTUzPkZqIjNUfr9YsqUQZiTiMRWqGmdmq2MK1ul0yrSG0zQiCi+FpP0WlxE
+ D1lnUtDhXYea4l3n+myhSjbbmY5sYgqElmDclkOTASaczMaz45L/twus6JqrDbGQUmFM
+ mAQxcuLEmy+WQGoJ16jdRZyNQyeWRig0ZNh8o0bpzRprGjTZJ6zuMxpcnjikL718N/SP
+ 0Ww72g+Fgs4kkhiK1Syjl3uShflLUyCR72mh9bvokItRm2NX49qONxREwEd6ZzHMZzak
+ LoDcTzL1o2tiWLDdfUU9heEL2yQyH6HNej7AWvAMyTy2aS7eexcjxu2baL1AGfG+5aK2
+ IkTg==
+X-Gm-Message-State: AOJu0Yw9YPt4JT+KVVxdak0y2UxoGuZmzsJCMq8bNzfSi96NEv9bwyTd
+ XCtA4y2ZPFYY8rHiwawmyAoDZOKf5fibak5qxGAYcQM5kZEzfxZqvhTG8tYF14xK+vWz8jk4I9L
+ yPC+Bha9PMUp7rMhc8Z19h3PSpTU4Ns28yM10lQ==
+X-Google-Smtp-Source: AGHT+IFmsYCmG0AlGz364xl4ugM5TBHT2EpLjIHa4h7hx6Au/FSe8VvGbYsruCJ7g0U7+1SeR6dzxm1pM6zD1l8x6Ls=
+X-Received: by 2002:a17:90a:df14:b0:296:a75e:d1de with SMTP id
+ gp20-20020a17090adf1400b00296a75ed1demr3144646pjb.12.1707936463195; Wed, 14
+ Feb 2024 10:47:43 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CY8PR20MB5428.namprd20.prod.outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 285dd623-f053-4366-c153-08dc27508a39
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Feb 2024 20:16:44.9215 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR20MB3870
-X-Mailman-Approved-At: Wed, 07 Feb 2024 18:26:52 +0000
+From: Ali Dehghan <ali.a.dehghan@gmail.com>
+Date: Wed, 14 Feb 2024 22:17:07 +0330
+Message-ID: <CAD2aPBCbMK2rd4CJpOatn7zE2WVPHhe9PNqSrLadUGkHUfZZCQ@mail.gmail.com>
+Subject: err in dockerfile (for xspice)
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="00000000000030155406115bf2d6"
+X-Mailman-Approved-At: Thu, 15 Feb 2024 09:05:31 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,83 +70,99 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---_000_CY8PR20MB5428D720ECDF97FB942AFE33AB462CY8PR20MB5428namp_
-Content-Type: text/plain; charset="iso-8859-1"
+--00000000000030155406115bf2d6
+Content-Type: text/plain; charset="UTF-8"
+
+Hey,
+
+I followed your instructions in the page Demo of your website (
+https://www.spice-space.org/demos.html) and something went wrong.
+
+When I make a dockerfile and put your text into it
+
+FROM fedora:latestRUN dnf install -y xorg-x11-server-XspiceEXPOSE
+5900/tcpENV DISPLAY=:1.0
+
+CMD Xspice --port 5900 --disable-ticketing $DISPLAY  > /dev/null 2>&1
+&  /usr/bin/bash
+
+
+, it doesn't start X server but if I run your docker image
+quay.io/spice/xspice:latest, everything is ok.
+
+I wanted to use xspice for browser isolation. When I install chrome on your
+docker-image it is okay and xspice works well (but your image fedora is
+outdated). When I use your suggested content in dockerfile, it fails.
+
+Would you please check and correct dockerfile suggested, or send me the
+content of quay.io/spice/xspice:latest?
+
+---------------------------------------
+   Sincerely,
+   Ali Dehghan
+
+--00000000000030155406115bf2d6
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Devs,
+<div dir=3D"ltr">Hey,<div><br></div><div>I followed your instructions in th=
+e page Demo of your website (<a href=3D"https://www.spice-space.org/demos.h=
+tml">https://www.spice-space.org/demos.html</a>) and something went wrong.<=
+/div><div><br></div><div>When I make a dockerfile and put your text into it=
+=C2=A0</div><pre style=3D"box-sizing:border-box;overflow:auto;font-family:M=
+enlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px;paddi=
+ng:9.5px;margin-top:0px;margin-bottom:10px;line-height:1.42857;color:rgb(51=
+,51,51);word-break:break-all;background-color:rgb(245,245,245);border:1px s=
+olid rgb(204,204,204);border-radius:4px"><span class=3D"gmail-k" style=3D"b=
+ox-sizing:border-box;color:rgb(0,112,32);font-weight:bold">FROM</span><span=
+ class=3D"gmail-w" style=3D"box-sizing:border-box;color:rgb(187,187,187)"> =
+</span><span class=3D"gmail-s" style=3D"box-sizing:border-box;color:rgb(64,=
+112,160)">fedora:latest</span>
+<span class=3D"gmail-k" style=3D"box-sizing:border-box;color:rgb(0,112,32);=
+font-weight:bold">RUN</span><span class=3D"gmail-w" style=3D"box-sizing:bor=
+der-box;color:rgb(187,187,187)"> </span>dnf install -y xorg-x11-server-Xspi=
+ce
+<span class=3D"gmail-k" style=3D"box-sizing:border-box;color:rgb(0,112,32);=
+font-weight:bold">EXPOSE</span><span class=3D"gmail-w" style=3D"box-sizing:=
+border-box;color:rgb(187,187,187)"> </span><span class=3D"gmail-s" style=3D=
+"box-sizing:border-box;color:rgb(64,112,160)">5900/tcp</span>
+<span class=3D"gmail-k" style=3D"box-sizing:border-box;color:rgb(0,112,32);=
+font-weight:bold">ENV</span><span class=3D"gmail-w" style=3D"box-sizing:bor=
+der-box;color:rgb(187,187,187)"> </span><span class=3D"gmail-nv" style=3D"b=
+ox-sizing:border-box;color:rgb(187,96,213)">DISPLAY</span><span class=3D"gm=
+ail-o" style=3D"box-sizing:border-box;color:rgb(102,102,102)">=3D</span>:1.=
+0=C2=A0</pre><pre style=3D"box-sizing:border-box;overflow:auto;font-family:=
+Menlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px;padd=
+ing:9.5px;margin-top:0px;margin-bottom:10px;line-height:1.42857;color:rgb(5=
+1,51,51);word-break:break-all;background-color:rgb(245,245,245);border:1px =
+solid rgb(204,204,204);border-radius:4px">CMD<span class=3D"gmail-w" style=
+=3D"background-color:rgb(255,255,255);box-sizing:border-box;color:rgb(187,1=
+87,187)"> </span>Xspice --port <span class=3D"gmail-m" style=3D"background-=
+color:rgb(255,255,255);box-sizing:border-box;color:rgb(32,128,80)">5900</sp=
+an> --disable-ticketing <span class=3D"gmail-nv" style=3D"background-color:=
+rgb(255,255,255);box-sizing:border-box;color:rgb(187,96,213)">$DISPLAY</spa=
+n>  &gt; /dev/null <span class=3D"gmail-m" style=3D"background-color:rgb(25=
+5,255,255);box-sizing:border-box;color:rgb(32,128,80)">2</span>&gt;<span cl=
+ass=3D"gmail-p" style=3D"background-color:rgb(255,255,255);box-sizing:borde=
+r-box">&amp;</span><span class=3D"gmail-m" style=3D"background-color:rgb(25=
+5,255,255);box-sizing:border-box;color:rgb(32,128,80)">1</span> <span class=
+=3D"gmail-p" style=3D"background-color:rgb(255,255,255);box-sizing:border-b=
+ox">&amp;</span>  /usr/bin/bash</pre><div><br></div><div>, it doesn&#39;t s=
+tart X server but if I run your docker image=C2=A0<span style=3D"background=
+-color:rgb(245,245,245);color:rgb(51,51,51);font-family:Menlo,Monaco,Consol=
+as,&quot;Courier New&quot;,monospace;font-size:13px"><a href=3D"http://quay=
+.io/spice/xspice:latest">quay.io/spice/xspice:latest</a>, everything is ok.=
+</span></div><div><br></div><div>I wanted to use xspice for browser isolati=
+on. When I install chrome on your docker-image it is okay and xspice works =
+well (but your image fedora is outdated). When I use your suggested content=
+ in dockerfile, it fails.</div><div><br></div><div>Would you please check a=
+nd correct dockerfile suggested, or send me the content of=C2=A0<span style=
+=3D"background-color:rgb(245,245,245);color:rgb(51,51,51);font-family:Menlo=
+,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px"><a href=
+=3D"http://quay.io/spice/xspice:latest">quay.io/spice/xspice:latest</a>?</s=
+pan></div><div><br clear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_signa=
+ture" data-smartmail=3D"gmail_signature">----------------------------------=
+-----<br>=C2=A0=C2=A0 Sincerely,<br>=C2=A0=C2=A0 Ali Dehghan <br><br></div>=
+</div></div></div>
 
-Thank you very much for making Spice.  It is 100% faster than any other sof=
-tware I have used.
-
-The only problem I have with the software is my mouse.  My back/forward but=
-ton on my mouse (Logitech G502) is registered as a scroll input.  My scroll=
- weeks is working as intended.  Windows RDP works flawlessly in this respec=
-t.
-
-Is there something I'm missing?  I haven't been able to figure it out and t=
-his great affects the way I navigate.
-
-Can you please help?  Thank you very much.
-
-Jason
-
---_000_CY8PR20MB5428D720ECDF97FB942AFE33AB462CY8PR20MB5428namp_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-Hi Devs,</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-Thank you very much for making Spice.&nbsp; It is 100% faster than any othe=
-r software I have used.</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-The only problem I have with the software&nbsp;is my mouse.&nbsp; My back/f=
-orward button on my mouse (Logitech G502) is registered as a scroll input.&=
-nbsp; My scroll weeks is working as intended.&nbsp; Windows RDP works flawl=
-essly in this respect.</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-Is there something I'm&nbsp;missing?&nbsp; I haven't been able to figure it=
- out and this great affects the way I navigate.</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-Can you please help?&nbsp; Thank you very much.</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);" class=3D"elementToProof">
-Jason</div>
-</body>
-</html>
-
---_000_CY8PR20MB5428D720ECDF97FB942AFE33AB462CY8PR20MB5428namp_--
+--00000000000030155406115bf2d6--
