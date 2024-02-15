@@ -2,60 +2,72 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99154855D5A
-	for <lists+spice-devel@lfdr.de>; Thu, 15 Feb 2024 10:05:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61094855E53
+	for <lists+spice-devel@lfdr.de>; Thu, 15 Feb 2024 10:38:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 11E7D10E43D;
-	Thu, 15 Feb 2024 09:05:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C103010E580;
+	Thu, 15 Feb 2024 09:38:27 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XKDVzBAb";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Wq3egiTq";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
- [209.85.216.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2A05410E7E6
- for <spice-devel@lists.freedesktop.org>; Wed, 14 Feb 2024 18:47:44 +0000 (UTC)
-Received: by mail-pj1-f47.google.com with SMTP id
- 98e67ed59e1d1-296a79e6295so75139a91.3
- for <spice-devel@lists.freedesktop.org>; Wed, 14 Feb 2024 10:47:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707936463; x=1708541263; darn=lists.freedesktop.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=7NaF3nXoId0l3iSA+xIxpSP3ZJ9nNmkzB7o1V1w3PtE=;
- b=XKDVzBAbqPWkFWzqlTp7WBppYakvTkAjvBUCzyJ12tqngU3Qlq8nsr1FUQzmAUpU9L
- CfOSEMhWHwBhhyixe3GnMrQWbxGeKvJOpEmkZVcFQuBRjRAf5Si2oKdEVO29CbvRtetC
- 09RZUMd8glfqZ+sczpgvkL3URTnPp852eXIBVh7xVThHXO6vNaCklgmXpYXW63T9uh9S
- 0lnLHq2RDjSYqSPBgwJ6b67Pv+jPGBjvsolfMop9cn8GkWypTPpWSHu7CnLMi8Z0jpCw
- TL3ELBfwDRtLyCeixIXEezIKsIDM7L8ElyUqHnzApdd3d5g6S7hPdY6zPDacAZAAPfjQ
- FOvA==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 256D510E580
+ for <spice-devel@lists.freedesktop.org>; Thu, 15 Feb 2024 09:38:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1707989905;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=tBdbSv2vV64wLZY3a6s+WAkRMaejxhLo4ezKdMN3vsc=;
+ b=Wq3egiTqA5KTCaofw86I4mLMLvQEilgK60bKs85iO/nMptyXq5AH0nGsQQssLP5bKRn2+0
+ 79FUoDNsCXG/flAYChzQRps3cE9sVjBhz4WupU+hgFRVmkxhnzK04+bdgYJ62JHb2DkCPF
+ Ebtp1iHOF0S9+TO5fcgCqP7RGqjES5o=
+Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com
+ [209.85.160.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-369-uAqp4F-uOHeFT04YeDkIrg-1; Thu, 15 Feb 2024 04:38:20 -0500
+X-MC-Unique: uAqp4F-uOHeFT04YeDkIrg-1
+Received: by mail-oa1-f69.google.com with SMTP id
+ 586e51a60fabf-218e3197761so1044283fac.0
+ for <spice-devel@lists.freedesktop.org>; Thu, 15 Feb 2024 01:38:20 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707936463; x=1708541263;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7NaF3nXoId0l3iSA+xIxpSP3ZJ9nNmkzB7o1V1w3PtE=;
- b=udegCiyjTUzPkZqIjNUfr9YsqUQZiTiMRWqGmdmq2MK1ul0yrSG0zQiCi+FpP0WlxE
- D1lnUtDhXYea4l3n+myhSjbbmY5sYgqElmDclkOTASaczMaz45L/twus6JqrDbGQUmFM
- mAQxcuLEmy+WQGoJ16jdRZyNQyeWRig0ZNh8o0bpzRprGjTZJ6zuMxpcnjikL718N/SP
- 0Ww72g+Fgs4kkhiK1Syjl3uShflLUyCR72mh9bvokItRm2NX49qONxREwEd6ZzHMZzak
- LoDcTzL1o2tiWLDdfUU9heEL2yQyH6HNej7AWvAMyTy2aS7eexcjxu2baL1AGfG+5aK2
- IkTg==
-X-Gm-Message-State: AOJu0Yw9YPt4JT+KVVxdak0y2UxoGuZmzsJCMq8bNzfSi96NEv9bwyTd
- XCtA4y2ZPFYY8rHiwawmyAoDZOKf5fibak5qxGAYcQM5kZEzfxZqvhTG8tYF14xK+vWz8jk4I9L
- yPC+Bha9PMUp7rMhc8Z19h3PSpTU4Ns28yM10lQ==
-X-Google-Smtp-Source: AGHT+IFmsYCmG0AlGz364xl4ugM5TBHT2EpLjIHa4h7hx6Au/FSe8VvGbYsruCJ7g0U7+1SeR6dzxm1pM6zD1l8x6Ls=
-X-Received: by 2002:a17:90a:df14:b0:296:a75e:d1de with SMTP id
- gp20-20020a17090adf1400b00296a75ed1demr3144646pjb.12.1707936463195; Wed, 14
- Feb 2024 10:47:43 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707989900; x=1708594700;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tBdbSv2vV64wLZY3a6s+WAkRMaejxhLo4ezKdMN3vsc=;
+ b=iEvx1r8H8WK7PF3/Op+eaRd10cOJsiy79o17uAf4l561pFPzT1nq+9KQ3jR26KMJb7
+ qHXDZ186scI94p4ob4QIA3Mi7rAK2cnYOSv/eYZX0x1kd/6w4rRkyc+QYc5tN2fS02ms
+ Ner2HeOUcDAskAqMbUagYdG6Iihq/SgjlbHQYCxwzGNoybvE9iTF3iVfKBYU0IM+uSYo
+ 8EGNqlj8wbCE7tuhhWKFQ0B1Gn7YQnppJ22KNuC3SGlTceCWvXb+VmSbgiwknV4GXYeW
+ EQxQ1XJ362gIFZYbGUTzPpZ2ac6ZhV21sFawL+iT/oI1x3LFmb/uKPlhx2EpjNtOckMa
+ t4VA==
+X-Gm-Message-State: AOJu0YzecKQZxt9lWV8xVyF438SC1q7D+qatVB+gV9cB96+NpOE8AvZi
+ BOx4U0hE/oQ+BfK7o0TGJJ88E2LiLsSKxp41uWl31zWWjBTMFHQ9/ml6vAscpopr2EGG5fRi/b3
+ jnTY8Z9kdYgW1Dn1kkFKrFmJXIPwZkwdjwR8/P6xmXk/uZimfxPlWcDPBgVK+CZtyJeW2ZZOO3v
+ zpcjKD/2ZMyNb2sLYLqYIIaouIjH4xBhUxbXKa+AtMprg=
+X-Received: by 2002:a05:6870:4c81:b0:21a:17db:91b3 with SMTP id
+ pi1-20020a0568704c8100b0021a17db91b3mr1330383oab.12.1707989900039; 
+ Thu, 15 Feb 2024 01:38:20 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF9zmqXt2/Mmvyxu1rrNGr38Cv0OinT3lPFk3N9srpLuTuT/cfODe13B7qOc8Z+9j3Hx0PEVhJuONTHZoNLxTc=
+X-Received: by 2002:a05:6870:4c81:b0:21a:17db:91b3 with SMTP id
+ pi1-20020a0568704c8100b0021a17db91b3mr1330370oab.12.1707989899692; Thu, 15
+ Feb 2024 01:38:19 -0800 (PST)
 MIME-Version: 1.0
-From: Ali Dehghan <ali.a.dehghan@gmail.com>
-Date: Wed, 14 Feb 2024 22:17:07 +0330
-Message-ID: <CAD2aPBCbMK2rd4CJpOatn7zE2WVPHhe9PNqSrLadUGkHUfZZCQ@mail.gmail.com>
-Subject: err in dockerfile (for xspice)
-To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="00000000000030155406115bf2d6"
-X-Mailman-Approved-At: Thu, 15 Feb 2024 09:05:31 +0000
+References: <CAD2aPBCbMK2rd4CJpOatn7zE2WVPHhe9PNqSrLadUGkHUfZZCQ@mail.gmail.com>
+In-Reply-To: <CAD2aPBCbMK2rd4CJpOatn7zE2WVPHhe9PNqSrLadUGkHUfZZCQ@mail.gmail.com>
+From: Uri Lublin <ulublin@redhat.com>
+Date: Thu, 15 Feb 2024 11:38:08 +0200
+Message-ID: <CAAg9qJ2D+ELCU66UZUZrNJmsJxEPa2TDEZJRy2fJGuoO1mVzwg@mail.gmail.com>
+Subject: Re: err in dockerfile (for xspice)
+To: Ali Dehghan <ali.a.dehghan@gmail.com>
+Cc: spice-devel@lists.freedesktop.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="000000000000405d2b0611686337"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,99 +82,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000030155406115bf2d6
+--000000000000405d2b0611686337
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hey,
+Hi Ali,
 
-I followed your instructions in the page Demo of your website (
-https://www.spice-space.org/demos.html) and something went wrong.
+On Thu, Feb 15, 2024 at 11:05=E2=80=AFAM Ali Dehghan <ali.a.dehghan@gmail.c=
+om>
+wrote:
 
-When I make a dockerfile and put your text into it
+> Hey,
+>
+> I followed your instructions in the page Demo of your website (
+> https://www.spice-space.org/demos.html) and something went wrong.
+>
+> When I make a dockerfile and put your text into it
+>
+> FROM fedora:latestRUN dnf install -y xorg-x11-server-XspiceEXPOSE 5900/tc=
+pENV DISPLAY=3D:1.0
+>
+> CMD Xspice --port 5900 --disable-ticketing $DISPLAY  > /dev/null 2>&1 &  =
+/usr/bin/bash
+>
+>
+> , it doesn't start X server but if I run your docker image
+> quay.io/spice/xspice:latest, everything is ok.
+>
 
-FROM fedora:latestRUN dnf install -y xorg-x11-server-XspiceEXPOSE
-5900/tcpENV DISPLAY=:1.0
+> I wanted to use xspice for browser isolation. When I install chrome on
+> your docker-image it is okay and xspice works well (but your image fedora
+> is outdated). When I use your suggested content in dockerfile, it fails.
+>
+> Would you please check and correct dockerfile suggested, or send me the
+> content of quay.io/spice/xspice:latest?
+>
 
-CMD Xspice --port 5900 --disable-ticketing $DISPLAY  > /dev/null 2>&1
-&  /usr/bin/bash
+The instructions are available with the demo.
+It seems there is a problem running X server with fedora:latest (currently
+f39).
+The demo is running Fedora 31 - replacing "fedora:latest" with "fedora:31"
+works for me.
 
+Regards,
+    Uri.
 
-, it doesn't start X server but if I run your docker image
-quay.io/spice/xspice:latest, everything is ok.
-
-I wanted to use xspice for browser isolation. When I install chrome on your
-docker-image it is okay and xspice works well (but your image fedora is
-outdated). When I use your suggested content in dockerfile, it fails.
-
-Would you please check and correct dockerfile suggested, or send me the
-content of quay.io/spice/xspice:latest?
-
----------------------------------------
-   Sincerely,
-   Ali Dehghan
-
---00000000000030155406115bf2d6
+--000000000000405d2b0611686337
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Hey,<div><br></div><div>I followed your instructions in th=
-e page Demo of your website (<a href=3D"https://www.spice-space.org/demos.h=
-tml">https://www.spice-space.org/demos.html</a>) and something went wrong.<=
-/div><div><br></div><div>When I make a dockerfile and put your text into it=
-=C2=A0</div><pre style=3D"box-sizing:border-box;overflow:auto;font-family:M=
-enlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px;paddi=
-ng:9.5px;margin-top:0px;margin-bottom:10px;line-height:1.42857;color:rgb(51=
-,51,51);word-break:break-all;background-color:rgb(245,245,245);border:1px s=
-olid rgb(204,204,204);border-radius:4px"><span class=3D"gmail-k" style=3D"b=
-ox-sizing:border-box;color:rgb(0,112,32);font-weight:bold">FROM</span><span=
- class=3D"gmail-w" style=3D"box-sizing:border-box;color:rgb(187,187,187)"> =
-</span><span class=3D"gmail-s" style=3D"box-sizing:border-box;color:rgb(64,=
-112,160)">fedora:latest</span>
-<span class=3D"gmail-k" style=3D"box-sizing:border-box;color:rgb(0,112,32);=
-font-weight:bold">RUN</span><span class=3D"gmail-w" style=3D"box-sizing:bor=
-der-box;color:rgb(187,187,187)"> </span>dnf install -y xorg-x11-server-Xspi=
-ce
-<span class=3D"gmail-k" style=3D"box-sizing:border-box;color:rgb(0,112,32);=
-font-weight:bold">EXPOSE</span><span class=3D"gmail-w" style=3D"box-sizing:=
-border-box;color:rgb(187,187,187)"> </span><span class=3D"gmail-s" style=3D=
-"box-sizing:border-box;color:rgb(64,112,160)">5900/tcp</span>
-<span class=3D"gmail-k" style=3D"box-sizing:border-box;color:rgb(0,112,32);=
-font-weight:bold">ENV</span><span class=3D"gmail-w" style=3D"box-sizing:bor=
-der-box;color:rgb(187,187,187)"> </span><span class=3D"gmail-nv" style=3D"b=
-ox-sizing:border-box;color:rgb(187,96,213)">DISPLAY</span><span class=3D"gm=
-ail-o" style=3D"box-sizing:border-box;color:rgb(102,102,102)">=3D</span>:1.=
-0=C2=A0</pre><pre style=3D"box-sizing:border-box;overflow:auto;font-family:=
-Menlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px;padd=
-ing:9.5px;margin-top:0px;margin-bottom:10px;line-height:1.42857;color:rgb(5=
-1,51,51);word-break:break-all;background-color:rgb(245,245,245);border:1px =
-solid rgb(204,204,204);border-radius:4px">CMD<span class=3D"gmail-w" style=
-=3D"background-color:rgb(255,255,255);box-sizing:border-box;color:rgb(187,1=
-87,187)"> </span>Xspice --port <span class=3D"gmail-m" style=3D"background-=
-color:rgb(255,255,255);box-sizing:border-box;color:rgb(32,128,80)">5900</sp=
-an> --disable-ticketing <span class=3D"gmail-nv" style=3D"background-color:=
-rgb(255,255,255);box-sizing:border-box;color:rgb(187,96,213)">$DISPLAY</spa=
-n>  &gt; /dev/null <span class=3D"gmail-m" style=3D"background-color:rgb(25=
-5,255,255);box-sizing:border-box;color:rgb(32,128,80)">2</span>&gt;<span cl=
-ass=3D"gmail-p" style=3D"background-color:rgb(255,255,255);box-sizing:borde=
-r-box">&amp;</span><span class=3D"gmail-m" style=3D"background-color:rgb(25=
-5,255,255);box-sizing:border-box;color:rgb(32,128,80)">1</span> <span class=
-=3D"gmail-p" style=3D"background-color:rgb(255,255,255);box-sizing:border-b=
-ox">&amp;</span>  /usr/bin/bash</pre><div><br></div><div>, it doesn&#39;t s=
-tart X server but if I run your docker image=C2=A0<span style=3D"background=
--color:rgb(245,245,245);color:rgb(51,51,51);font-family:Menlo,Monaco,Consol=
-as,&quot;Courier New&quot;,monospace;font-size:13px"><a href=3D"http://quay=
-.io/spice/xspice:latest">quay.io/spice/xspice:latest</a>, everything is ok.=
-</span></div><div><br></div><div>I wanted to use xspice for browser isolati=
-on. When I install chrome on your docker-image it is okay and xspice works =
-well (but your image fedora is outdated). When I use your suggested content=
- in dockerfile, it fails.</div><div><br></div><div>Would you please check a=
-nd correct dockerfile suggested, or send me the content of=C2=A0<span style=
-=3D"background-color:rgb(245,245,245);color:rgb(51,51,51);font-family:Menlo=
-,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px"><a href=
-=3D"http://quay.io/spice/xspice:latest">quay.io/spice/xspice:latest</a>?</s=
-pan></div><div><br clear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_signa=
-ture" data-smartmail=3D"gmail_signature">----------------------------------=
------<br>=C2=A0=C2=A0 Sincerely,<br>=C2=A0=C2=A0 Ali Dehghan <br><br></div>=
-</div></div></div>
+<div dir=3D"ltr"><div>Hi Ali,<br></div><br><div class=3D"gmail_quote"><div =
+dir=3D"ltr" class=3D"gmail_attr">On Thu, Feb 15, 2024 at 11:05=E2=80=AFAM A=
+li Dehghan &lt;<a href=3D"mailto:ali.a.dehghan@gmail.com">ali.a.dehghan@gma=
+il.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
+:1ex"><div dir=3D"ltr">Hey,<div><br></div><div>I followed your instructions=
+ in the page Demo of your website (<a href=3D"https://www.spice-space.org/d=
+emos.html" target=3D"_blank">https://www.spice-space.org/demos.html</a>) an=
+d something went wrong.</div><div><br></div><div>When I make a dockerfile a=
+nd put your text into it=C2=A0</div><pre style=3D"box-sizing:border-box;ove=
+rflow:auto;font-family:Menlo,Monaco,Consolas,&quot;Courier New&quot;,monosp=
+ace;font-size:13px;padding:9.5px;margin-top:0px;margin-bottom:10px;line-hei=
+ght:1.42857;color:rgb(51,51,51);word-break:break-all;background-color:rgb(2=
+45,245,245);border:1px solid rgb(204,204,204);border-radius:4px"><span styl=
+e=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">FROM</span=
+><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> </span><span=
+ style=3D"box-sizing:border-box;color:rgb(64,112,160)">fedora:latest</span>
+<span style=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">=
+RUN</span><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> </s=
+pan>dnf install -y xorg-x11-server-Xspice
+<span style=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">=
+EXPOSE</span><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> =
+</span><span style=3D"box-sizing:border-box;color:rgb(64,112,160)">5900/tcp=
+</span>
+<span style=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">=
+ENV</span><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> </s=
+pan><span style=3D"box-sizing:border-box;color:rgb(187,96,213)">DISPLAY</sp=
+an><span style=3D"box-sizing:border-box;color:rgb(102,102,102)">=3D</span>:=
+1.0=C2=A0</pre><pre style=3D"box-sizing:border-box;overflow:auto;font-famil=
+y:Menlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px;pa=
+dding:9.5px;margin-top:0px;margin-bottom:10px;line-height:1.42857;color:rgb=
+(51,51,51);word-break:break-all;background-color:rgb(245,245,245);border:1p=
+x solid rgb(204,204,204);border-radius:4px">CMD<span style=3D"background-co=
+lor:rgb(255,255,255);box-sizing:border-box;color:rgb(187,187,187)"> </span>=
+Xspice --port <span style=3D"background-color:rgb(255,255,255);box-sizing:b=
+order-box;color:rgb(32,128,80)">5900</span> --disable-ticketing <span style=
+=3D"background-color:rgb(255,255,255);box-sizing:border-box;color:rgb(187,9=
+6,213)">$DISPLAY</span>  &gt; /dev/null <span style=3D"background-color:rgb=
+(255,255,255);box-sizing:border-box;color:rgb(32,128,80)">2</span>&gt;<span=
+ style=3D"background-color:rgb(255,255,255);box-sizing:border-box">&amp;</s=
+pan><span style=3D"background-color:rgb(255,255,255);box-sizing:border-box;=
+color:rgb(32,128,80)">1</span> <span style=3D"background-color:rgb(255,255,=
+255);box-sizing:border-box">&amp;</span>  /usr/bin/bash</pre><div><br></div=
+><div>, it doesn&#39;t start X server but if I run your docker image=C2=A0<=
+span style=3D"background-color:rgb(245,245,245);color:rgb(51,51,51);font-fa=
+mily:Menlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px=
+"><a href=3D"http://quay.io/spice/xspice:latest" target=3D"_blank">quay.io/=
+spice/xspice:latest</a>, everything is ok.</span> <br></div></div></blockqu=
+ote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div=
+><br></div><div>I wanted to use xspice for browser isolation. When I instal=
+l chrome on your docker-image it is okay and xspice works well (but your im=
+age fedora is outdated). When I use your suggested content in dockerfile, i=
+t fails.</div><div><br></div><div>Would you please check and correct docker=
+file suggested, or send me the content of=C2=A0<span style=3D"background-co=
+lor:rgb(245,245,245);color:rgb(51,51,51);font-family:Menlo,Monaco,Consolas,=
+&quot;Courier New&quot;,monospace;font-size:13px"><a href=3D"http://quay.io=
+/spice/xspice:latest" target=3D"_blank">quay.io/spice/xspice:latest</a>?</s=
+pan></div></div></blockquote><div><br></div><div>The instructions are avail=
+able with the demo.<br></div><div><div>It seems there is a problem running =
+X server with fedora:latest (currently f39).</div><div>The demo is running =
+Fedora 31 - replacing &quot;fedora:latest&quot; with &quot;fedora:31&quot; =
+works for me.<br></div></div><div><br></div><div>Regards,</div><div>=C2=A0=
+=C2=A0=C2=A0 Uri.<br></div></div></div>
 
---00000000000030155406115bf2d6--
+--000000000000405d2b0611686337--
+
