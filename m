@@ -2,72 +2,57 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61094855E53
-	for <lists+spice-devel@lfdr.de>; Thu, 15 Feb 2024 10:38:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A722C857BDF
+	for <lists+spice-devel@lfdr.de>; Fri, 16 Feb 2024 12:40:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C103010E580;
-	Thu, 15 Feb 2024 09:38:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9D99710E616;
+	Fri, 16 Feb 2024 11:40:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Wq3egiTq";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="M7WmklzU";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 256D510E580
- for <spice-devel@lists.freedesktop.org>; Thu, 15 Feb 2024 09:38:26 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E375010E616
+ for <spice-devel@lists.freedesktop.org>; Fri, 16 Feb 2024 11:40:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1707989905;
+ s=mimecast20190719; t=1708083613;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=tBdbSv2vV64wLZY3a6s+WAkRMaejxhLo4ezKdMN3vsc=;
- b=Wq3egiTqA5KTCaofw86I4mLMLvQEilgK60bKs85iO/nMptyXq5AH0nGsQQssLP5bKRn2+0
- 79FUoDNsCXG/flAYChzQRps3cE9sVjBhz4WupU+hgFRVmkxhnzK04+bdgYJ62JHb2DkCPF
- Ebtp1iHOF0S9+TO5fcgCqP7RGqjES5o=
-Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com
- [209.85.160.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=KcJY7SNe0GdYbLO6xaoMgFDA1wHmE5saGd8VhNrR04Q=;
+ b=M7WmklzUCrxSeCt/XIRP4dZyMoun8pExGBiQKrkFH1CiiFD2gdUfwYpxwF3Pu2jDBfX/ZV
+ Lvat+Sl/F55tr4Yl09n0pMT7iUq+0DaFd5Sg1HnQnIR6DZDcS15qTLnTUiyWk0jytXKaAn
+ Un4KQiGBESA9rP9lzBNpxspFkdzsM+0=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-369-uAqp4F-uOHeFT04YeDkIrg-1; Thu, 15 Feb 2024 04:38:20 -0500
-X-MC-Unique: uAqp4F-uOHeFT04YeDkIrg-1
-Received: by mail-oa1-f69.google.com with SMTP id
- 586e51a60fabf-218e3197761so1044283fac.0
- for <spice-devel@lists.freedesktop.org>; Thu, 15 Feb 2024 01:38:20 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707989900; x=1708594700;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tBdbSv2vV64wLZY3a6s+WAkRMaejxhLo4ezKdMN3vsc=;
- b=iEvx1r8H8WK7PF3/Op+eaRd10cOJsiy79o17uAf4l561pFPzT1nq+9KQ3jR26KMJb7
- qHXDZ186scI94p4ob4QIA3Mi7rAK2cnYOSv/eYZX0x1kd/6w4rRkyc+QYc5tN2fS02ms
- Ner2HeOUcDAskAqMbUagYdG6Iihq/SgjlbHQYCxwzGNoybvE9iTF3iVfKBYU0IM+uSYo
- 8EGNqlj8wbCE7tuhhWKFQ0B1Gn7YQnppJ22KNuC3SGlTceCWvXb+VmSbgiwknV4GXYeW
- EQxQ1XJ362gIFZYbGUTzPpZ2ac6ZhV21sFawL+iT/oI1x3LFmb/uKPlhx2EpjNtOckMa
- t4VA==
-X-Gm-Message-State: AOJu0YzecKQZxt9lWV8xVyF438SC1q7D+qatVB+gV9cB96+NpOE8AvZi
- BOx4U0hE/oQ+BfK7o0TGJJ88E2LiLsSKxp41uWl31zWWjBTMFHQ9/ml6vAscpopr2EGG5fRi/b3
- jnTY8Z9kdYgW1Dn1kkFKrFmJXIPwZkwdjwR8/P6xmXk/uZimfxPlWcDPBgVK+CZtyJeW2ZZOO3v
- zpcjKD/2ZMyNb2sLYLqYIIaouIjH4xBhUxbXKa+AtMprg=
-X-Received: by 2002:a05:6870:4c81:b0:21a:17db:91b3 with SMTP id
- pi1-20020a0568704c8100b0021a17db91b3mr1330383oab.12.1707989900039; 
- Thu, 15 Feb 2024 01:38:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF9zmqXt2/Mmvyxu1rrNGr38Cv0OinT3lPFk3N9srpLuTuT/cfODe13B7qOc8Z+9j3Hx0PEVhJuONTHZoNLxTc=
-X-Received: by 2002:a05:6870:4c81:b0:21a:17db:91b3 with SMTP id
- pi1-20020a0568704c8100b0021a17db91b3mr1330370oab.12.1707989899692; Thu, 15
- Feb 2024 01:38:19 -0800 (PST)
+ us-mta-486-0cI_jiquN1yhHO4HZ_Jg5w-1; Fri, 16 Feb 2024 06:40:11 -0500
+X-MC-Unique: 0cI_jiquN1yhHO4HZ_Jg5w-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6AFB1101A52A;
+ Fri, 16 Feb 2024 11:40:10 +0000 (UTC)
+Received: from localhost (unknown [10.45.224.199])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AAF951121337;
+ Fri, 16 Feb 2024 11:40:09 +0000 (UTC)
+Date: Fri, 16 Feb 2024 12:40:08 +0100
+From: Victor Toso <victortoso@redhat.com>
+To: Jason Chen <jastsai@outlook.com>
+Cc: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+Subject: Re: Mouse Back and Forward button
+Message-ID: <mrt5axug6lvnqxinursmztitpgo7yizhue6xlbi4tw24dab3az@77aepu5i7bol>
+References: <CY8PR20MB5428D720ECDF97FB942AFE33AB462@CY8PR20MB5428.namprd20.prod.outlook.com>
 MIME-Version: 1.0
-References: <CAD2aPBCbMK2rd4CJpOatn7zE2WVPHhe9PNqSrLadUGkHUfZZCQ@mail.gmail.com>
-In-Reply-To: <CAD2aPBCbMK2rd4CJpOatn7zE2WVPHhe9PNqSrLadUGkHUfZZCQ@mail.gmail.com>
-From: Uri Lublin <ulublin@redhat.com>
-Date: Thu, 15 Feb 2024 11:38:08 +0200
-Message-ID: <CAAg9qJ2D+ELCU66UZUZrNJmsJxEPa2TDEZJRy2fJGuoO1mVzwg@mail.gmail.com>
-Subject: Re: err in dockerfile (for xspice)
-To: Ali Dehghan <ali.a.dehghan@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="000000000000405d2b0611686337"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="db7p4ahicvw6v7x5"
+Content-Disposition: inline
+In-Reply-To: <CY8PR20MB5428D720ECDF97FB942AFE33AB462@CY8PR20MB5428.namprd20.prod.outlook.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.3
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,119 +67,62 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000405d2b0611686337
-Content-Type: text/plain; charset="UTF-8"
+
+--db7p4ahicvw6v7x5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Ali,
+On Tue, Feb 06, 2024 at 08:16:44PM +0000, Jason Chen wrote:
+> Hi Devs,
+>=20
+> Thank you very much for making Spice.  It is 100% faster than any other
+> software I have used.
+>=20
+> The only problem I have with the software is my mouse.  My back/forward b=
+utton
+> on my mouse (Logitech G502) is registered as a scroll input.  My scroll w=
+eeks
+> is working as intended.  Windows RDP works flawlessly in this respect.
+>=20
+> Is there something I'm missing?  I haven't been able to figure it out and=
+ this
+> great affects the way I navigate.
+>=20
+> Can you please help?  Thank you very much.
 
-On Thu, Feb 15, 2024 at 11:05=E2=80=AFAM Ali Dehghan <ali.a.dehghan@gmail.c=
-om>
-wrote:
+Someone worked on extra mouse buttons in spice-protocol v0.14.3
+https://gitlab.freedesktop.org/spice/spice-protocol/-/merge_requests/22
 
-> Hey,
->
-> I followed your instructions in the page Demo of your website (
-> https://www.spice-space.org/demos.html) and something went wrong.
->
-> When I make a dockerfile and put your text into it
->
-> FROM fedora:latestRUN dnf install -y xorg-x11-server-XspiceEXPOSE 5900/tc=
-pENV DISPLAY=3D:1.0
->
-> CMD Xspice --port 5900 --disable-ticketing $DISPLAY  > /dev/null 2>&1 &  =
-/usr/bin/bash
->
->
-> , it doesn't start X server but if I run your docker image
-> quay.io/spice/xspice:latest, everything is ok.
->
+This seems to be implemented in spice-gtk v0.40 and Linux
+spice-vdagent 0.22.0. It doesn't seem to be implemented in
+Windows agent.
 
-> I wanted to use xspice for browser isolation. When I install chrome on
-> your docker-image it is okay and xspice works well (but your image fedora
-> is outdated). When I use your suggested content in dockerfile, it fails.
->
-> Would you please check and correct dockerfile suggested, or send me the
-> content of quay.io/spice/xspice:latest?
->
+Not much we can help atm. If you have the right components with
+the right versions, it should work otherwise it is a bug.
 
-The instructions are available with the demo.
-It seems there is a problem running X server with fedora:latest (currently
-f39).
-The demo is running Fedora 31 - replacing "fedora:latest" with "fedora:31"
-works for me.
+Cheers,
+Victor
 
-Regards,
-    Uri.
+--db7p4ahicvw6v7x5
+Content-Type: application/pgp-signature; name="signature.asc"
 
---000000000000405d2b0611686337
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNATURE-----
 
-<div dir=3D"ltr"><div>Hi Ali,<br></div><br><div class=3D"gmail_quote"><div =
-dir=3D"ltr" class=3D"gmail_attr">On Thu, Feb 15, 2024 at 11:05=E2=80=AFAM A=
-li Dehghan &lt;<a href=3D"mailto:ali.a.dehghan@gmail.com">ali.a.dehghan@gma=
-il.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex"><div dir=3D"ltr">Hey,<div><br></div><div>I followed your instructions=
- in the page Demo of your website (<a href=3D"https://www.spice-space.org/d=
-emos.html" target=3D"_blank">https://www.spice-space.org/demos.html</a>) an=
-d something went wrong.</div><div><br></div><div>When I make a dockerfile a=
-nd put your text into it=C2=A0</div><pre style=3D"box-sizing:border-box;ove=
-rflow:auto;font-family:Menlo,Monaco,Consolas,&quot;Courier New&quot;,monosp=
-ace;font-size:13px;padding:9.5px;margin-top:0px;margin-bottom:10px;line-hei=
-ght:1.42857;color:rgb(51,51,51);word-break:break-all;background-color:rgb(2=
-45,245,245);border:1px solid rgb(204,204,204);border-radius:4px"><span styl=
-e=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">FROM</span=
-><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> </span><span=
- style=3D"box-sizing:border-box;color:rgb(64,112,160)">fedora:latest</span>
-<span style=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">=
-RUN</span><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> </s=
-pan>dnf install -y xorg-x11-server-Xspice
-<span style=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">=
-EXPOSE</span><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> =
-</span><span style=3D"box-sizing:border-box;color:rgb(64,112,160)">5900/tcp=
-</span>
-<span style=3D"box-sizing:border-box;color:rgb(0,112,32);font-weight:bold">=
-ENV</span><span style=3D"box-sizing:border-box;color:rgb(187,187,187)"> </s=
-pan><span style=3D"box-sizing:border-box;color:rgb(187,96,213)">DISPLAY</sp=
-an><span style=3D"box-sizing:border-box;color:rgb(102,102,102)">=3D</span>:=
-1.0=C2=A0</pre><pre style=3D"box-sizing:border-box;overflow:auto;font-famil=
-y:Menlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px;pa=
-dding:9.5px;margin-top:0px;margin-bottom:10px;line-height:1.42857;color:rgb=
-(51,51,51);word-break:break-all;background-color:rgb(245,245,245);border:1p=
-x solid rgb(204,204,204);border-radius:4px">CMD<span style=3D"background-co=
-lor:rgb(255,255,255);box-sizing:border-box;color:rgb(187,187,187)"> </span>=
-Xspice --port <span style=3D"background-color:rgb(255,255,255);box-sizing:b=
-order-box;color:rgb(32,128,80)">5900</span> --disable-ticketing <span style=
-=3D"background-color:rgb(255,255,255);box-sizing:border-box;color:rgb(187,9=
-6,213)">$DISPLAY</span>  &gt; /dev/null <span style=3D"background-color:rgb=
-(255,255,255);box-sizing:border-box;color:rgb(32,128,80)">2</span>&gt;<span=
- style=3D"background-color:rgb(255,255,255);box-sizing:border-box">&amp;</s=
-pan><span style=3D"background-color:rgb(255,255,255);box-sizing:border-box;=
-color:rgb(32,128,80)">1</span> <span style=3D"background-color:rgb(255,255,=
-255);box-sizing:border-box">&amp;</span>  /usr/bin/bash</pre><div><br></div=
-><div>, it doesn&#39;t start X server but if I run your docker image=C2=A0<=
-span style=3D"background-color:rgb(245,245,245);color:rgb(51,51,51);font-fa=
-mily:Menlo,Monaco,Consolas,&quot;Courier New&quot;,monospace;font-size:13px=
-"><a href=3D"http://quay.io/spice/xspice:latest" target=3D"_blank">quay.io/=
-spice/xspice:latest</a>, everything is ok.</span> <br></div></div></blockqu=
-ote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div=
-><br></div><div>I wanted to use xspice for browser isolation. When I instal=
-l chrome on your docker-image it is okay and xspice works well (but your im=
-age fedora is outdated). When I use your suggested content in dockerfile, i=
-t fails.</div><div><br></div><div>Would you please check and correct docker=
-file suggested, or send me the content of=C2=A0<span style=3D"background-co=
-lor:rgb(245,245,245);color:rgb(51,51,51);font-family:Menlo,Monaco,Consolas,=
-&quot;Courier New&quot;,monospace;font-size:13px"><a href=3D"http://quay.io=
-/spice/xspice:latest" target=3D"_blank">quay.io/spice/xspice:latest</a>?</s=
-pan></div></div></blockquote><div><br></div><div>The instructions are avail=
-able with the demo.<br></div><div><div>It seems there is a problem running =
-X server with fedora:latest (currently f39).</div><div>The demo is running =
-Fedora 31 - replacing &quot;fedora:latest&quot; with &quot;fedora:31&quot; =
-works for me.<br></div></div><div><br></div><div>Regards,</div><div>=C2=A0=
-=C2=A0=C2=A0 Uri.<br></div></div></div>
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmXPSZcACgkQl9kSPeN6
+SE+kIBAAk+/GRgIIE3I9rPlVIqh4lzzHoxR4qqoxI2yjUwIieGALzY2ddceeRDm8
+osi5OHGFewYZqjQX4xMfnwmrv4NWXb1CUZ0YC4PMgrU6mrvc6UC2woplm6QM4cnS
+uABk/JozwWNn4HKx0/RkFEicBXbYBNJH8MoPh5qHaNhnhQANYA0vjUHo25JuW22K
+ufy97zeTZBBHHUVVRDNEBXQrM8juLdchvseFEjq4uIdHtV9jxiB2Z5O9tlc0Y53N
+WyhcDe8edJYbflR2SvwBeXVD41VxvCNSESc2mDTMfwaDa/WowBMX9RYHP+FUe35v
+3unfWzTGVAnPmXX7yO0zk3De+CKCgpScmwCeGTFL9n4UtgL11qLSTnmwKEmmqwbZ
+Q4T1b7//nn76WmESjPBBs9+b4Gtdv3YQalp71VzHxAgYTTwAMLu8NzrGUZ1PVA01
+daevp76UieqvEZm9r9W4a38s4DPPyepXbTtVHi9kgzwVayagbutURiCAN1qON37F
+knWUcYs6qw3tJBHRGZ32bvbJFXAAzwn2RKO31FKrpVkAuQWpFq134ZCPEBz9tfLL
+yxwibVzAH1P9PQjJynmYmLhXFuIdBAXbnn4JOBMg25bwxG2A9YI6vSij+ffaDSOU
+5VqJbhdNVI0vQRzhDgqLL6qfczg21dnV+EruIgrFfoSOk/k35jA=
+=Ajje
+-----END PGP SIGNATURE-----
 
---000000000000405d2b0611686337--
+--db7p4ahicvw6v7x5--
 
