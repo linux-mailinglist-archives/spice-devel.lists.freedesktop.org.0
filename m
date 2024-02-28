@@ -2,53 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9D5B86AA44
-	for <lists+spice-devel@lfdr.de>; Wed, 28 Feb 2024 09:42:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A1F286AA45
+	for <lists+spice-devel@lfdr.de>; Wed, 28 Feb 2024 09:42:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AD32F10E9BE;
+	by gabe.freedesktop.org (Postfix) with ESMTP id EF52210E8BB;
 	Wed, 28 Feb 2024 08:41:57 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="fWhkAvy2";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="bc76m6iR";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 63E9F10E9D1
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D730910E9BE
  for <spice-devel@lists.freedesktop.org>; Wed, 28 Feb 2024 08:41:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
  t=1709109717; x=1740645717;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=tb0iiDr1HUce3FueQNhmhz/d4/1iBuKfd4CaNwPGR0s=;
- b=fWhkAvy2yiXyTiNu0LiAXWfMQ2dB6cYOpdwPY1Q3N7WRBfEK+aMUAaDP
- eK9sX1WC6WSpIRCZrkFv3KwNFpVOAiGwvJixGwMBKL/U6cWmB897KEtkj
- ombiUb9DYAU1EaB8LvFQCW9Vcz2dOXq2CExPXa2MykbptZZ82SdfmnnOQ
- fzGMVpY1lS6r6XsDAcGwlJEyNUe4TiRaXizDwIdxH+9USbUqflLxyT7HE
- yITpTIdUAG+HrL0EwaPkmsnpfNIY6sgLEb7BRafG9MgBfBeaH7hjny7dQ
- oth01paVDGmul01a+FQVbAfaIvPLpokihGS40G7cwhIKqNqx3zmijkEW0 Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10996"; a="3615932"
+ bh=36KUfVF9M7GAbLsg6r6p3PAYw7//S/+PnFqnmaMwP+I=;
+ b=bc76m6iRl2+0LdmXe+rSMaFdP/ZlwTKTRD0S8X78MYgVHM3QdK0nQARH
+ sLAbGUY5GYObLiKasaIsMBP0cm5fLKunHpmNF5ROkEKoqY8gTkIdwEqKy
+ zb8a9emN4Zec36qmpU0YN2yKGgE4bTjoKJy711Xpn2FDMHiMb6plRHT9V
+ X/K1nnOC0Zz5WAYTP/ZfL8KH9xHxNvvC14TEJGM+WC1N+QdwrCy1reApf
+ Bme6T44L5Jmtng4ShTWHc0P63o+vtrtUdHKfG4CruIhTaG3to+VHQYz5J
+ 5mDYS2fH6teQUVNCEtwNO87CHg3XjH4RKvxCePo9zhD4VhN6dIXUq9xCK A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10996"; a="3615940"
 X-IronPort-AV: E=Sophos;i="6.06,190,1705392000"; 
-   d="scan'208";a="3615932"
+   d="scan'208";a="3615940"
 Received: from orviesa008.jf.intel.com ([10.64.159.148])
  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
  28 Feb 2024 00:41:57 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.06,190,1705392000"; 
-   d="scan'208";a="7925977"
+   d="scan'208";a="7925980"
 Received: from vkasired-desk2.fm.intel.com ([10.105.128.132])
  by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Feb 2024 00:41:56 -0800
+ 28 Feb 2024 00:41:57 -0800
 From: Vivek Kasireddy <vivek.kasireddy@intel.com>
 To: spice-devel@lists.freedesktop.org
 Cc: Vivek Kasireddy <vivek.kasireddy@intel.com>,
  Frediano Ziglio <freddy77@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Dongwon Kim <dongwon.kim@intel.com>
-Subject: [PATCH v4 3/5] dcc-send: Encode and send gl_draw stream data to the
- remote client (v2)
-Date: Wed, 28 Feb 2024 00:15:17 -0800
-Message-ID: <20240228081730.1374127-4-vivek.kasireddy@intel.com>
+Subject: [PATCH v4 4/5] gstreamer-encoder: Add an encoder function that takes
+ dmabuf fd as input (v2)
+Date: Wed, 28 Feb 2024 00:15:18 -0800
+Message-ID: <20240228081730.1374127-5-vivek.kasireddy@intel.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240228081730.1374127-1-vivek.kasireddy@intel.com>
 References: <20240228081730.1374127-1-vivek.kasireddy@intel.com>
@@ -69,24 +69,16 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-For remote (or non-gl) clients, if a valid gl_draw stream exists,
-then we first extract the dmabuf fd associated with the scanout and
-share it with the encoder along with other key parameters such as
-stride, width and height. Once the encoder finishes creating an
-encoded buffer (using the dmabuf fd as input), we then send it
-over to the client. And, as soon as the encoder notifies that it
-is no longer using the dmabuf fd, we send a gl_draw_done async to
-the application.
+This patch adds a new function to enable the creation of Gst memory with
+the dmabuf fd as the source by using a dmabuf allocator. And, it also
+adds a mechanism to register and invoke any callbacks once the Gst memory
+object is no longer used by the pipeline.
 
-v2: (suggestions and fixups from Frediano)
-- Moved the DisplayStreamData initialization code from
-  red_marshall_stream_data() into a separate function that is reused
-  when marshalling gl_draw_stream.
-- Used new/delete instead of g_new/g_free for creating and destroying
-  dmabuf_data object
-- s/notify_mem_free/free
-  s/red_gst_mem_free_cb/red_free_fb
-- Removed the usage of opaque from red_free_cb
+This patch also ensures that the source_fps value is always non-zero.
+
+v2: (suggestions from Frediano)
+- Moved the code associated with add_frame() and pipeline configuration
+  into separate functions that are used when encoding dmabuf fd
 
 Cc: Frediano Ziglio <freddy77@gmail.com>
 Cc: Gerd Hoffmann <kraxel@redhat.com>
@@ -94,240 +86,268 @@ Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
 Cc: Dongwon Kim <dongwon.kim@intel.com>
 Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
 ---
- server/dcc-send.cpp    | 153 +++++++++++++++++++++++++++++++++--------
- server/video-encoder.h |  13 ++++
- 2 files changed, 137 insertions(+), 29 deletions(-)
+ meson.build                |   2 +-
+ server/gstreamer-encoder.c | 164 ++++++++++++++++++++++++++++++-------
+ 2 files changed, 135 insertions(+), 31 deletions(-)
 
-diff --git a/server/dcc-send.cpp b/server/dcc-send.cpp
-index 2c40a231..04c3c811 100644
---- a/server/dcc-send.cpp
-+++ b/server/dcc-send.cpp
-@@ -1637,6 +1637,60 @@ static void red_release_video_encoder_buffer(uint8_t *data, void *opaque)
-     buffer->free(buffer);
+diff --git a/meson.build b/meson.build
+index b1237e61..d6aea60a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -131,7 +131,7 @@ endforeach
+ spice_server_has_gstreamer = false
+ spice_server_gst_version = get_option('gstreamer')
+ if spice_server_gst_version != 'no'
+-  gst_deps = ['gstreamer', 'gstreamer-base', 'gstreamer-app', 'gstreamer-video']
++  gst_deps = ['gstreamer', 'gstreamer-base', 'gstreamer-app', 'gstreamer-video', 'gstreamer-allocators']
+   foreach dep : gst_deps
+     dep = '@0@-@1@'.format(dep, spice_server_gst_version)
+     spice_server_deps += dependency(dep)
+diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
+index be8e3111..33e65345 100644
+--- a/server/gstreamer-encoder.c
++++ b/server/gstreamer-encoder.c
+@@ -27,6 +27,7 @@
+ #  pragma GCC diagnostic ignored "-Wunused-const-variable"
+ #endif
+ #include <gst/gst.h>
++#include <gst/allocators/gstdmabuf.h>
+ #include <gst/app/gstappsrc.h>
+ #include <gst/app/gstappsink.h>
+ #include <gst/video/video.h>
+@@ -283,6 +284,7 @@ typedef struct SpiceGstEncoder {
+ 
+     /* How many frames were dropped by the server since the last encoded frame. */
+     uint32_t server_drops;
++    GstAllocator *allocator;
+ } SpiceGstEncoder;
+ 
+ 
+@@ -318,8 +320,12 @@ static inline double get_mbps(uint64_t bit_rate)
+  */
+ static uint32_t get_source_fps(const SpiceGstEncoder *encoder)
+ {
+-    return encoder->cbs.get_source_fps ?
+-        encoder->cbs.get_source_fps(encoder->cbs.opaque) : SPICE_GST_DEFAULT_FPS;
++    uint32_t source_fps = 0;
++
++    if (encoder->cbs.get_source_fps) {
++        source_fps = encoder->cbs.get_source_fps(encoder->cbs.opaque);
++    }
++    return source_fps ? source_fps : SPICE_GST_DEFAULT_FPS;
  }
  
-+static void red_init_display_stream_data(DisplayChannelClient *dcc,
-+                                         SpiceMarshaller *base_marshaller,
-+                                         Drawable *drawable, int stream_id,
-+                                         VideoBuffer *outbuf, int is_sized)
+ static uint32_t get_network_latency(const SpiceGstEncoder *encoder)
+@@ -1523,6 +1529,7 @@ static void spice_gst_encoder_destroy(VideoEncoder *video_encoder)
+ {
+     SpiceGstEncoder *encoder = (SpiceGstEncoder*)video_encoder;
+ 
++    gst_object_unref(encoder->allocator);
+     free_pipeline(encoder);
+     pthread_mutex_destroy(&encoder->outbuf_mutex);
+     pthread_cond_destroy(&encoder->outbuf_cond);
+@@ -1533,35 +1540,45 @@ static void spice_gst_encoder_destroy(VideoEncoder *video_encoder)
+     g_free(encoder);
+ }
+ 
++static void spice_gst_encoder_add_frame(SpiceGstEncoder *encoder,
++                                        VideoBuffer **outbuf,
++                                        uint64_t start,
++                                        uint32_t frame_mm_time)
 +{
-+    SpiceMsgDisplayStreamData stream_data;
-+    SpiceMsgDisplayStreamDataSized stream_data_sized;
-+    SpiceStreamDataHeader *base;
-+    SpiceCopy *copy;
-+    uint32_t frame_mm_time = reds_get_mm_time();
-+    uint16_t msg_type = is_sized ? SPICE_MSG_DISPLAY_STREAM_DATA_SIZED :
-+                        SPICE_MSG_DISPLAY_STREAM_DATA;
++    uint32_t last_mm_time = get_last_frame_mm_time(encoder);
 +
-+    dcc->init_send_data(msg_type);
++    add_frame(encoder, frame_mm_time, spice_get_monotonic_time_ns() - start,
++              (*outbuf)->size);
 +
-+    base = is_sized ? &stream_data_sized.base : &stream_data.base;
-+    base->id = stream_id;
-+    base->multi_media_time = frame_mm_time;
-+    stream_data.data_size = outbuf->size;
++    int32_t refill = encoder->bit_rate * (frame_mm_time - last_mm_time) / MSEC_PER_SEC / 8;
++    encoder->vbuffer_free = MIN(encoder->vbuffer_free + refill,
++                                encoder->vbuffer_size) - (*outbuf)->size;
 +
-+    if (is_sized) {
-+        copy = &drawable->red_drawable->u.copy;
-+        frame_mm_time = drawable->red_drawable->mm_time ?
-+                        drawable->red_drawable->mm_time :
-+                        reds_get_mm_time();
-+
-+        stream_data_sized.base.multi_media_time = frame_mm_time;
-+        stream_data_sized.width = copy->src_area.right - copy->src_area.left;
-+        stream_data_sized.height = copy->src_area.bottom - copy->src_area.top;
-+        stream_data_sized.dest = drawable->red_drawable->bbox;
-+        stream_data_sized.data_size = outbuf->size;
-+
-+        spice_debug("stream %d: sized frame: dest ==> ",
-+                    stream_data_sized.base.id);
-+        rect_debug(&stream_data_sized.dest);
-+        spice_marshall_msg_display_stream_data_sized(base_marshaller,
-+                                                     &stream_data_sized);
-+    } else {
-+        spice_marshall_msg_display_stream_data(base_marshaller, &stream_data);
-+    }
-+
-+    spice_marshaller_add_by_ref_full(base_marshaller, outbuf->data,
-+                                     outbuf->size,
-+                                     &red_release_video_encoder_buffer,
-+                                     outbuf);
-+#ifdef STREAM_STATS
-+    VideoStreamAgent *agent = &dcc->priv->stream_agents[stream_id];
-+
-+    agent->stats.num_frames_sent++;
-+    agent->stats.size_sent += outbuf->size;
-+    agent->stats.end = frame_mm_time;
-+#endif
++    server_increase_bit_rate(encoder, frame_mm_time);
++    update_next_frame_mm_time(encoder);
 +}
 +
- static bool red_marshall_stream_data(DisplayChannelClient *dcc,
-                                      SpiceMarshaller *base_marshaller,
-                                      Drawable *drawable)
-@@ -1693,41 +1747,74 @@ static bool red_marshall_stream_data(DisplayChannelClient *dcc,
-         return FALSE;
+ static VideoEncodeResults
+-spice_gst_encoder_encode_frame(VideoEncoder *video_encoder,
+-                               uint32_t frame_mm_time,
+-                               const SpiceBitmap *bitmap,
+-                               const SpiceRect *src, int top_down,
+-                               gpointer bitmap_opaque,
+-                               VideoBuffer **outbuf)
++spice_gst_encoder_configure_pipeline(SpiceGstEncoder *encoder,
++                                     uint32_t width, uint32_t height,
++                                     const SpiceBitmap *bitmap,
++                                     uint32_t frame_mm_time)
+ {
+-    SpiceGstEncoder *encoder = (SpiceGstEncoder*)video_encoder;
+-    g_return_val_if_fail(outbuf != NULL, VIDEO_ENCODER_FRAME_UNSUPPORTED);
+-    *outbuf = NULL;
++    SpiceBitmapFmt format = bitmap ? (SpiceBitmapFmt) bitmap->format :
++                            SPICE_BITMAP_FMT_32BIT;
+ 
+-    /* Unref the last frame's bitmap_opaque structures if any */
+-    clear_zero_copy_queue(encoder, FALSE);
+-
+-    uint32_t width = src->right - src->left;
+-    uint32_t height = src->bottom - src->top;
+     if (width != encoder->width || height != encoder->height ||
+-        encoder->spice_format != bitmap->format) {
++        encoder->spice_format != format) {
+         spice_debug("video format change: width %d -> %d, height %d -> %d, format %d -> %d",
+                     encoder->width, width, encoder->height, height,
+-                    encoder->spice_format, bitmap->format);
+-        encoder->format = map_format((SpiceBitmapFmt) bitmap->format);
++                    encoder->spice_format, format);
++        encoder->format = map_format(format);
+         if (encoder->format == GSTREAMER_FORMAT_INVALID) {
+-            spice_warning("unable to map format type %d", bitmap->format);
++            spice_warning("unable to map format type %d", format);
+             encoder->errors = 4;
+             return VIDEO_ENCODER_FRAME_UNSUPPORTED;
+         }
+-        encoder->spice_format = (SpiceBitmapFmt) bitmap->format;
++        encoder->spice_format = format;
+         encoder->width = width;
+         encoder->height = height;
+         if (encoder->bit_rate == 0) {
+@@ -1600,8 +1617,36 @@ spice_gst_encoder_encode_frame(VideoEncoder *video_encoder,
+         return VIDEO_ENCODER_FRAME_UNSUPPORTED;
      }
  
--    if (!is_sized) {
--        SpiceMsgDisplayStreamData stream_data;
-+    red_init_display_stream_data(dcc, base_marshaller, drawable,
-+                                 stream_id, outbuf, is_sized);
-+    return TRUE;
++    return VIDEO_ENCODER_FRAME_ENCODE_DONE;
++}
++
++static VideoEncodeResults
++spice_gst_encoder_encode_frame(VideoEncoder *video_encoder,
++                               uint32_t frame_mm_time,
++                               const SpiceBitmap *bitmap,
++                               const SpiceRect *src, int top_down,
++                               gpointer bitmap_opaque,
++                               VideoBuffer **outbuf)
++{
++    SpiceGstEncoder *encoder = (SpiceGstEncoder*)video_encoder;
++    g_return_val_if_fail(outbuf != NULL, VIDEO_ENCODER_FRAME_UNSUPPORTED);
++    VideoEncodeResults rc;
++    *outbuf = NULL;
++
++    /* Unref the last frame's bitmap_opaque structures if any */
++    clear_zero_copy_queue(encoder, FALSE);
++
++    uint32_t width = src->right - src->left;
++    uint32_t height = src->bottom - src->top;
++
++    rc = spice_gst_encoder_configure_pipeline(encoder, width, height,
++                                              bitmap, frame_mm_time);
++    if (rc != VIDEO_ENCODER_FRAME_ENCODE_DONE) {
++        return rc;
++    }
++
+     uint64_t start = spice_get_monotonic_time_ns();
+-    VideoEncodeResults rc = push_raw_frame(encoder, bitmap, src, top_down, bitmap_opaque);
++    rc = push_raw_frame(encoder, bitmap, src, top_down, bitmap_opaque);
+     if (rc == VIDEO_ENCODER_FRAME_ENCODE_DONE) {
+         rc = pull_compressed_buffer(encoder, outbuf);
+         if (rc != VIDEO_ENCODER_FRAME_ENCODE_DONE) {
+@@ -1621,17 +1666,74 @@ spice_gst_encoder_encode_frame(VideoEncoder *video_encoder,
+     if (rc != VIDEO_ENCODER_FRAME_ENCODE_DONE) {
+         return rc;
+     }
+-    uint32_t last_mm_time = get_last_frame_mm_time(encoder);
+-    add_frame(encoder, frame_mm_time, spice_get_monotonic_time_ns() - start,
+-              (*outbuf)->size);
+ 
+-    int32_t refill = encoder->bit_rate * (frame_mm_time - last_mm_time) / MSEC_PER_SEC / 8;
+-    encoder->vbuffer_free = MIN(encoder->vbuffer_free + refill,
+-                                encoder->vbuffer_size) - (*outbuf)->size;
++    spice_gst_encoder_add_frame(encoder, outbuf, start, frame_mm_time);
++    return rc;
 +}
  
--        dcc->init_send_data(SPICE_MSG_DISPLAY_STREAM_DATA);
-+static void red_free_cb(VideoEncoderDmabufData *dmabuf_data)
+-    server_increase_bit_rate(encoder, frame_mm_time);
+-    update_next_frame_mm_time(encoder);
++static void
++spice_gst_mem_free_cb(VideoEncoderDmabufData *dmabuf_data, GstMiniObject *obj)
 +{
-+    auto dcc = static_cast<DisplayChannelClient *>(dmabuf_data->dcc);
-+    DisplayChannel *display = DCC_TO_DC(dcc);
- 
--        stream_data.base.id = stream_id;
--        stream_data.base.multi_media_time = frame_mm_time;
--        stream_data.data_size = outbuf->size;
-+    dcc->priv->gl_draw_ongoing = false;
-+    display_channel_gl_draw_done(display);
-+    delete dmabuf_data;
++    if (dmabuf_data->free) {
++        dmabuf_data->free(dmabuf_data);
++    }
 +}
  
--        spice_marshall_msg_display_stream_data(base_marshaller, &stream_data);
--    } else {
--        SpiceMsgDisplayStreamDataSized stream_data;
-+static void red_marshall_gl_draw_stream(DisplayChannelClient *dcc,
-+                                        SpiceMarshaller *base_marshaller)
++static VideoEncodeResults
++spice_gst_encoder_encode_dmabuf(VideoEncoder *video_encoder,
++                                uint32_t frame_mm_time,
++                                VideoEncoderDmabufData *dmabuf_data,
++                                VideoBuffer **outbuf)
 +{
-+    DisplayChannel *display = DCC_TO_DC(dcc);
-+    QXLInstance* qxl = display->priv->qxl;
-+    VideoEncoderDmabufData *dmabuf_data = nullptr;
- 
--        dcc->init_send_data(SPICE_MSG_DISPLAY_STREAM_DATA_SIZED);
-+    VideoStream *stream = display->priv->gl_draw_stream;
-+    SpiceMsgDisplayGlScanoutUnix *scanout = red_qxl_get_gl_scanout(qxl);
-+    if (scanout) {
-+        dmabuf_data = new VideoEncoderDmabufData;
-+        dmabuf_data->drm_dma_buf_fd = scanout->drm_dma_buf_fd;
-+        dmabuf_data->width = stream->width;
-+        dmabuf_data->height = stream->height;
-+        dmabuf_data->stride = scanout->stride;
-+        dmabuf_data->dcc = dcc;
-+        dmabuf_data->free = red_free_cb;
-+    }
-+    red_qxl_put_gl_scanout(qxl, scanout);
-+    if (!dmabuf_data) {
-+        spice_warning("scanout is not valid");
-+        return;
-+    }
- 
--        stream_data.base.id = stream_id;
--        stream_data.base.multi_media_time = frame_mm_time;
--        stream_data.data_size = outbuf->size;
--        stream_data.width = copy->src_area.right - copy->src_area.left;
--        stream_data.height = copy->src_area.bottom - copy->src_area.top;
--        stream_data.dest = drawable->red_drawable->bbox;
-+    int stream_id = display_channel_get_video_stream_id(display, stream);
-+    VideoStreamAgent *agent = &dcc->priv->stream_agents[stream_id];
-+    VideoBuffer *outbuf;
-+    VideoEncodeResults ret;
- 
--        spice_debug("stream %d: sized frame: dest ==> ", stream_data.base.id);
--        rect_debug(&stream_data.dest);
--        spice_marshall_msg_display_stream_data_sized(base_marshaller, &stream_data);
--    }
--    spice_marshaller_add_by_ref_full(base_marshaller, outbuf->data, outbuf->size,
--                                     &red_release_video_encoder_buffer, outbuf);
-+    ret = !agent->video_encoder || !agent->video_encoder->encode_dmabuf ?
-+          VIDEO_ENCODER_FRAME_UNSUPPORTED :
-+          agent->video_encoder->encode_dmabuf(agent->video_encoder,
-+                                              reds_get_mm_time(),
-+                                              dmabuf_data, &outbuf);
++    SpiceGstEncoder *encoder = (SpiceGstEncoder*)video_encoder;
++    g_return_val_if_fail(outbuf != NULL, VIDEO_ENCODER_FRAME_UNSUPPORTED);
++    g_return_val_if_fail(dmabuf_data != NULL, VIDEO_ENCODER_FRAME_UNSUPPORTED);
++    VideoEncodeResults rc;
 +
-+    if (ret != VIDEO_ENCODER_FRAME_ENCODE_DONE) {
-+        if (ret == VIDEO_ENCODER_FRAME_DROP) {
- #ifdef STREAM_STATS
--    agent->stats.num_frames_sent++;
--    agent->stats.size_sent += outbuf->size;
--    agent->stats.end = frame_mm_time;
-+            agent->stats.num_drops_fps++;
- #endif
-+        } else {
-+            spice_warning("bad ret value (%d) from VideoEncoder::encode_dmabuf",
-+                          ret);
-+        }
- 
--    return TRUE;
-+        dcc->priv->gl_draw_ongoing = false;
-+        display_channel_gl_draw_done(display);
-+        delete dmabuf_data;
-+        return;
++    rc = spice_gst_encoder_configure_pipeline(encoder, dmabuf_data->width,
++                                              dmabuf_data->height, NULL,
++                                              frame_mm_time);
++    if (rc != VIDEO_ENCODER_FRAME_ENCODE_DONE) {
++        return rc;
 +    }
 +
-+    red_init_display_stream_data(dcc, base_marshaller, nullptr,
-+                                 stream_id, outbuf, false);
++    gsize size = dmabuf_data->stride * dmabuf_data->height;
++    uint64_t start = spice_get_monotonic_time_ns();
++    GstBuffer *buffer;
++    GstMemory *mem;
++    *outbuf = NULL;
++
++    mem = gst_dmabuf_allocator_alloc_with_flags(encoder->allocator,
++                                                dmabuf_data->drm_dma_buf_fd,
++                                                size,
++                                                GST_FD_MEMORY_FLAG_DONT_CLOSE);
++    if (!mem) {
++        return rc;
++    }
++    buffer = gst_buffer_new();
++    gst_buffer_append_memory(buffer, mem);
++    gst_mini_object_weak_ref(GST_MINI_OBJECT(mem),
++                             (GstMiniObjectNotify)spice_gst_mem_free_cb,
++                             dmabuf_data);
++    GstFlowReturn ret = gst_app_src_push_buffer(encoder->appsrc, buffer);
++    if (ret != GST_FLOW_OK) {
++        spice_warning("GStreamer error: unable to push source buffer (%d)", ret);
++        return rc;
++    }
++
++    rc = pull_compressed_buffer(encoder, outbuf);
++    if (rc != VIDEO_ENCODER_FRAME_ENCODE_DONE) {
++        /* The input buffer will be stuck in the pipeline, preventing
++         * later ones from being processed. Furthermore something went
++         * wrong with this pipeline, so it may be safer to rebuild it
++         * from scratch.
++         */
++        free_pipeline(encoder);
++        encoder->errors++;
++        return rc;
++    }
++
++    spice_gst_encoder_add_frame(encoder, outbuf, start, frame_mm_time);
+     return rc;
  }
  
- static inline void marshall_inval_palette(RedChannelClient *rcc,
-@@ -2126,6 +2213,8 @@ static void marshall_stream_start(DisplayChannelClient *dcc,
-     if (stream->current) {
-         RedDrawable *red_drawable = stream->current->red_drawable.get();
-         stream_create.clip = red_drawable->clip;
-+    } else if (stream == DCC_TO_DC(dcc)->priv->gl_draw_stream){
-+        stream_create.clip.type = SPICE_CLIP_TYPE_NONE;
-     } else {
-         stream_create.clip.type = SPICE_CLIP_TYPE_RECTS;
-         clip_rects.num_rects = 0;
-@@ -2275,14 +2364,20 @@ static void marshall_gl_scanout(DisplayChannelClient *dcc,
-     red_qxl_put_gl_scanout(qxl, scanout);
- }
+@@ -1825,6 +1927,7 @@ VideoEncoder *gstreamer_encoder_new(SpiceVideoCodecType codec_type,
+     SpiceGstEncoder *encoder = g_new0(SpiceGstEncoder, 1);
+     encoder->base.destroy = spice_gst_encoder_destroy;
+     encoder->base.encode_frame = spice_gst_encoder_encode_frame;
++    encoder->base.encode_dmabuf = spice_gst_encoder_encode_dmabuf;
+     encoder->base.client_stream_report = spice_gst_encoder_client_stream_report;
+     encoder->base.notify_server_frame_drop = spice_gst_encoder_notify_server_frame_drop;
+     encoder->base.get_bit_rate = spice_gst_encoder_get_bit_rate;
+@@ -1837,6 +1940,7 @@ VideoEncoder *gstreamer_encoder_new(SpiceVideoCodecType codec_type,
+     encoder->bitmap_ref = bitmap_ref;
+     encoder->bitmap_unref = bitmap_unref;
+     encoder->format = GSTREAMER_FORMAT_INVALID;
++    encoder->allocator = gst_dmabuf_allocator_new();
+     pthread_mutex_init(&encoder->outbuf_mutex, NULL);
+     pthread_cond_init(&encoder->outbuf_cond, NULL);
  
--static void marshall_gl_draw(RedChannelClient *rcc,
-+static void marshall_gl_draw(DisplayChannelClient *dcc,
-                              SpiceMarshaller *m,
-                              RedPipeItem *item)
- {
-     auto p = static_cast<RedGlDrawItem*>(item);
- 
--    rcc->init_send_data(SPICE_MSG_DISPLAY_GL_DRAW);
--    spice_marshall_msg_display_gl_draw(m, &p->draw);
-+    if (dcc->is_gl_client()) {
-+        dcc->init_send_data(SPICE_MSG_DISPLAY_GL_DRAW);
-+        spice_marshall_msg_display_gl_draw(m, &p->draw);
-+    } else if (DCC_TO_DC(dcc)->priv->gl_draw_stream) {
-+        red_marshall_gl_draw_stream(dcc, m);
-+    } else {
-+        spice_warning("nothing to send to the client");
-+    }
- }
- 
- 
-diff --git a/server/video-encoder.h b/server/video-encoder.h
-index c2bdc811..0261bfca 100644
---- a/server/video-encoder.h
-+++ b/server/video-encoder.h
-@@ -56,6 +56,15 @@ typedef struct VideoEncoderStats {
-     double avg_quality;
- } VideoEncoderStats;
- 
-+typedef struct VideoEncoderDmabufData {
-+    int drm_dma_buf_fd;
-+    uint32_t width;
-+    uint32_t height;
-+    uint32_t stride;
-+    void *dcc;
-+    void (*free)(struct VideoEncoderDmabufData*);
-+} VideoEncoderDmabufData;
-+
- typedef struct VideoEncoder VideoEncoder;
- struct VideoEncoder {
-     /* Releases the video encoder's resources */
-@@ -84,6 +93,10 @@ struct VideoEncoder {
-                                        const SpiceRect *src, int top_down,
-                                        gpointer bitmap_opaque, VideoBuffer** outbuf);
- 
-+    VideoEncodeResults (*encode_dmabuf)(VideoEncoder *encoder, uint32_t frame_mm_time,
-+                                        VideoEncoderDmabufData *dmabuf_data,
-+                                        VideoBuffer** outbuf);
-+
-     /*
-      * Bit rate control methods.
-      */
 -- 
 2.43.0
 
