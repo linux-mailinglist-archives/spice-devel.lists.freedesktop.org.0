@@ -2,63 +2,63 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70E3586D1C7
-	for <lists+spice-devel@lfdr.de>; Thu, 29 Feb 2024 19:14:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1FA586D1E7
+	for <lists+spice-devel@lfdr.de>; Thu, 29 Feb 2024 19:19:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EBBCC10E590;
-	Thu, 29 Feb 2024 18:14:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EAD6910E201;
+	Thu, 29 Feb 2024 18:19:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KshnmgNA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hTshfWXY";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com
- [209.85.219.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B809210E4E0
- for <spice-devel@lists.freedesktop.org>; Thu, 29 Feb 2024 18:14:53 +0000 (UTC)
-Received: by mail-yb1-f169.google.com with SMTP id
- 3f1490d57ef6-dc23bf7e5aaso1443031276.0
- for <spice-devel@lists.freedesktop.org>; Thu, 29 Feb 2024 10:14:53 -0800 (PST)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com
+ [209.85.128.178])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 45CDD10E5B2
+ for <spice-devel@lists.freedesktop.org>; Thu, 29 Feb 2024 18:19:44 +0000 (UTC)
+Received: by mail-yw1-f178.google.com with SMTP id
+ 00721157ae682-60915328139so14483517b3.0
+ for <spice-devel@lists.freedesktop.org>; Thu, 29 Feb 2024 10:19:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709230492; x=1709835292; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1709230783; x=1709835583; darn=lists.freedesktop.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YXBPC93UJ/JmtMfpNLTPfhgj2Tl06J2pmsiW1nJK/rY=;
- b=KshnmgNAuJtHHoImT6YLKyEgqCiejxnc8DqqTWusnfwUE+ryJOo7Fr9HjtCdeyd1Rw
- blLWx2FLFc6hYMWIy3JiG9P1G2PpQlZ/aDCk794Gx2lSPDG7q1sXZitzTY0cToX1iKnq
- uH8GGLMHDOxO1ZQAlGoc/1ORFYdN3EHXcASaTZCkdaTS5IOuGhCeP77Jg8NRG0JnHb9K
- bv/ThJ/beuBPKfHXnpaaPErX2MXPtBIJcwWMe4rht9UtNH+QUZizQABzgMV0vg38IpDc
- Hw3RvKvqJ1jpLwdYCQnRpXsDB2VCcGRkH6fszfaElL/VR6sWs09Yu+KjKDTERkRKJf6R
- Qwzw==
+ bh=ZSVrCmGL4D2n3czY9WGyBiP3BPaYyc3aMgWDBB1PaiE=;
+ b=hTshfWXYLckoVIEDOs65159Y0xMhQbi8TpUISQk5N9Cfq/jryuWmzq/UFnm4/2szXC
+ VVS7vJnG8fidlNJy9yKzh0IaYDuT3KbTNtmVybGtW9DdZH8Tv5dh5hcGoa/3lybGTqL+
+ Ux7fm3Vx4tBbNiSn5/vGrVeBVxi8IAGElBcjWZO0w2ssjp/319MNICjrr7aMqTsbjGSF
+ m3nG77boINyp7YqDGItNYy0zl7AQZxikDond5/hrYpTOzo62t7xfoB3ooM97c2fGTVmL
+ /jbAQmFYyPHqJe0JvI4+VdjB23Pkd9D2XpEeYGwwIquVnrOY3uxo4JWSTpiilF3/r7x6
+ fASw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709230492; x=1709835292;
+ d=1e100.net; s=20230601; t=1709230783; x=1709835583;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YXBPC93UJ/JmtMfpNLTPfhgj2Tl06J2pmsiW1nJK/rY=;
- b=F//68/A8CBesEPGYh1P48uVVWZg2u4Gpg2AnQCVLfRZjBwjxOShlM0lpwXQ+KphkS4
- 9LHnNAlSzcwkgKRvtTaEV6WGRlcCYpsbHjvkFt/HWWWEAecoeY0MlJGszuC2PAVyLOJF
- x3W8WpVvqpkrfwPc4em6jWDSIDBp4LH3gVtniP7gHgBr4LadTrmsk8UeMLNBmk2RAQHP
- bD0h+3bFG3UBL7lkIdGReUrqJ1uEAk8Ogsg2BdEYD9d5E+s83/aWWfpm/l1PVj26sA6f
- j3uUri5V9VU3879qJ6sQSxjdGbxk1DDpR4nOpt+tBj7Yta2yc3HINhpW/NZkmmjBJEFp
- RHGw==
-X-Gm-Message-State: AOJu0Yzb8EytvscALJ9L1F4Cx1dRXV3TJKYlJPZR+55WgaxM9doBfeUm
- nVQMxxw/UZ5mDD/8F/ZVyhPwXfpJslcJrh+GxvUC2y6UX1uFZztRCUSTfrUVWWp8ZWdWI9WMDy/
- JO3Pc2isYgOxaiEU7tbDTZpvsfIo=
-X-Google-Smtp-Source: AGHT+IH7A6c0mqh/Eo5dEkXmzJn3RcFRrZzzzTiPtvbPr6y8S9A8pemsOQE8iDYag/gBmXAkrqSA6AjTBok3K3lLqcQ=
-X-Received: by 2002:a5b:c47:0:b0:dcf:313d:d4ab with SMTP id
- d7-20020a5b0c47000000b00dcf313dd4abmr3401100ybr.54.1709230492434; Thu, 29 Feb
- 2024 10:14:52 -0800 (PST)
+ bh=ZSVrCmGL4D2n3czY9WGyBiP3BPaYyc3aMgWDBB1PaiE=;
+ b=GPaJg0JyayEkEA9Oth7B0G9102g1g3uPOB9Ewvbyw0RpPy8YVCQ44pDdIPH/WbMWVW
+ cMpwAMLJ+R/TgcKsmNAXTZVVPDmbbmwX5srojPxdupVmbdf4GGjjQb8hh0LjInghAb+X
+ C5eAJWy4yz3E6eWUBKM6aY2OnI+vvR1PmxZgfPLaWBfxdHYqZyQ6bKg3tL6Pks1fyCSb
+ CvzPQQAUFySdIKjpm/7NVpfalIYmWsYqn2lyTYpx8L0OneeaCeIIzFSfvfVMTvSK0iau
+ 0CjIU3K6slhhQrdYOtkuIoUcfLdXt7i8g/v7XHquh9lE+6iIFMdTSXF3W/QkcZiQ48ar
+ kx6A==
+X-Gm-Message-State: AOJu0Yzz48gHUC7MmIvIw39EDMW/mO8JI7eAdcB7q8PSc6uB1zP86ndu
+ WTWje7NwKIet3wAJ9ui00lAN2WPEoeOtwWtNVQLL7r+6iQ0m2u4sNvGNNO0716eIdD9d9AF9RRo
+ VG62Zib159X4amSFrdpqMhVAhdhg=
+X-Google-Smtp-Source: AGHT+IGB6Zjt0nh15CgpOBJ6NoJgLx3BvIvGsoaBJO5WcZet9NSN6VSokFVmH1S40SeSTa/B6tGJfkaxsaGrUFU3nV8=
+X-Received: by 2002:a25:8c07:0:b0:dc2:65da:d3af with SMTP id
+ k7-20020a258c07000000b00dc265dad3afmr2777867ybl.65.1709230783027; Thu, 29 Feb
+ 2024 10:19:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20240228081730.1374127-1-vivek.kasireddy@intel.com>
- <20240228081730.1374127-2-vivek.kasireddy@intel.com>
-In-Reply-To: <20240228081730.1374127-2-vivek.kasireddy@intel.com>
+ <20240228081730.1374127-3-vivek.kasireddy@intel.com>
+In-Reply-To: <20240228081730.1374127-3-vivek.kasireddy@intel.com>
 From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 29 Feb 2024 18:14:42 +0000
-Message-ID: <CAHt6W4fN5AzgYaZiyoHMPdR1OnhfEaA6YWuY2k7=Uhxzm4TC8A@mail.gmail.com>
-Subject: Re: [PATCH v4 1/5] dcc: Check to see if the client supports multiple
- codecs (v2)
+Date: Thu, 29 Feb 2024 18:19:32 +0000
+Message-ID: <CAHt6W4cpVSfWf4mABn_pftO0qSr21Jf1L34gd3BfihP=yaDmig@mail.gmail.com>
+Subject: Re: [PATCH v4 2/5] dcc: Create a stream associated with gl_draw for
+ non-gl clients (v3)
 To: Vivek Kasireddy <vivek.kasireddy@intel.com>
 Cc: spice-devel@lists.freedesktop.org, Gerd Hoffmann <kraxel@redhat.com>, 
  =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
@@ -82,96 +82,300 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 Il giorno mer 28 feb 2024 alle ore 08:41 Vivek Kasireddy
 <vivek.kasireddy@intel.com> ha scritto:
 >
-> We need to determine if the client is new enough to support multiple
-> codecs -- which might include any of the Gstreamer based ones.
+> For non-gl/remote clients, if there is no stream associated with
+> the DisplayChannel, then we create a new stream. Otherwise, we
+> just update the current stream's timestamp.
 >
 > v2: (suggestions and fixups from Frediano)
-> - Add is_gl_client() method to DisplayChannelClient instead of a
->   dcc_is_gl_client() function.
-> - Avoid the usage of XXX_CAST macro.
+> - Moved the gl_draw_stream object from DCC to DC
+> - Moved the stream initialization code from display_channel_create_stream=
+()
+>   into a separate function that is reused when creating gl_draw_stream
+>
+> v3:
+> - Create a new primary surface whenever a new stream gets created
 >
 > Cc: Frediano Ziglio <freddy77@gmail.com>
 > Cc: Gerd Hoffmann <kraxel@redhat.com>
 > Cc: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 > Cc: Dongwon Kim <dongwon.kim@intel.com>
 > Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-
-Acked
-
 > ---
->  server/dcc.cpp | 22 ++++++++++++----------
->  server/dcc.h   |  6 ++++++
->  2 files changed, 18 insertions(+), 10 deletions(-)
+>  server/dcc.cpp                   |   9 ++
+>  server/display-channel-private.h |   1 +
+>  server/display-channel.cpp       |   1 +
+>  server/video-stream.cpp          | 140 ++++++++++++++++++++++++-------
+>  server/video-stream.h            |   2 +
+>  5 files changed, 121 insertions(+), 32 deletions(-)
 >
 > diff --git a/server/dcc.cpp b/server/dcc.cpp
-> index 01c16ab7..ca73470a 100644
+> index ca73470a..92e69860 100644
 > --- a/server/dcc.cpp
 > +++ b/server/dcc.cpp
-> @@ -494,29 +494,31 @@ RedSurfaceDestroyItem::RedSurfaceDestroyItem(uint32=
-_t surface_id)
->
->  RedPipeItemPtr dcc_gl_scanout_item_new(RedChannelClient *rcc, void *data=
-, int num)
->  {
-> -    /* FIXME: on !unix peer, start streaming with a video codec */
-> -    if (!red_stream_is_plain_unix(rcc->get_stream()) ||
-> -        !rcc->test_remote_cap(SPICE_DISPLAY_CAP_GL_SCANOUT)) {
-> +    auto dcc =3D static_cast<DisplayChannelClient *>(rcc);
-> +
-> +    if (dcc->is_gl_client()) {
-> +        return red::make_shared<RedGlScanoutUnixItem>();
-> +    } else if (rcc->test_remote_cap(SPICE_DISPLAY_CAP_MULTI_CODEC)) {
-> +        return RedPipeItemPtr();
-> +    } else {
->          red_channel_warning(rcc->get_channel(),
-> -                            "FIXME: client does not support GL scanout")=
-;
-> +                            "Client does not support GL scanout or multi=
-ple codecs");
->          rcc->disconnect();
+> @@ -523,6 +523,15 @@ RedPipeItemPtr dcc_gl_draw_item_new(RedChannelClient=
+ *rcc, void *data, int num)
 >          return RedPipeItemPtr();
 >      }
-> -
-> -    return red::make_shared<RedGlScanoutUnixItem>();
->  }
 >
->  XXX_CAST(RedChannelClient, DisplayChannelClient, DISPLAY_CHANNEL_CLIENT)=
-;
->
->  RedPipeItemPtr dcc_gl_draw_item_new(RedChannelClient *rcc, void *data, i=
-nt num)
->  {
-> -    DisplayChannelClient *dcc =3D DISPLAY_CHANNEL_CLIENT(rcc);
-> +    auto dcc =3D static_cast<DisplayChannelClient *>(rcc);
->      auto draw =3D static_cast<const SpiceMsgDisplayGlDraw *>(data);
->
-> -    if (!red_stream_is_plain_unix(rcc->get_stream()) ||
-> -        !rcc->test_remote_cap(SPICE_DISPLAY_CAP_GL_SCANOUT)) {
-> +    if (!dcc->is_gl_client() &&
-> +        !rcc->test_remote_cap(SPICE_DISPLAY_CAP_MULTI_CODEC)) {
->          red_channel_warning(rcc->get_channel(),
-> -                            "FIXME: client does not support GL scanout")=
-;
-> +                            "Client does not support GL scanout or multi=
-ple codecs");
->          rcc->disconnect();
->          return RedPipeItemPtr();
->      }
-> diff --git a/server/dcc.h b/server/dcc.h
-> index a8dd3bef..47f082fe 100644
-> --- a/server/dcc.h
-> +++ b/server/dcc.h
-> @@ -47,6 +47,12 @@ public:
->                           spice_wan_compression_t zlib_glz_state);
->      virtual void disconnect() override;
->
-> +    bool is_gl_client()
-> +    {
-> +        return red_stream_is_plain_unix(get_stream()) &&
-> +           test_remote_cap(SPICE_DISPLAY_CAP_GL_SCANOUT);
+> +    if (!dcc->is_gl_client()) {
+> +        if (!display_channel_update_gl_draw_stream(dcc, draw)) {
+> +            red_channel_warning(rcc->get_channel(),
+> +                                "Cannot create or update stream");
+> +            rcc->disconnect();
+> +            return RedPipeItemPtr();
+> +        }
 > +    }
 > +
->  protected:
->      virtual bool handle_message(uint16_t type, uint32_t size, void *msg)=
- override;
->      virtual bool config_socket() override;
+>      dcc->priv->gl_draw_ongoing =3D TRUE;
+>      auto item =3D red::make_shared<RedGlDrawItem>();
+>      item->draw =3D *draw;
+> diff --git a/server/display-channel-private.h b/server/display-channel-pr=
+ivate.h
+> index 04ac2c0d..e0693f54 100644
+> --- a/server/display-channel-private.h
+> +++ b/server/display-channel-private.h
+> @@ -110,6 +110,7 @@ struct DisplayChannelPrivate
+>      uint32_t stream_count;
+>      std::array<VideoStream, NUM_STREAMS> streams_buf;
+>      VideoStream *free_streams;
+> +    VideoStream *gl_draw_stream;
+>      Ring streams;
+>      std::array<ItemTrace, NUM_TRACE_ITEMS> items_trace;
+>      uint32_t next_item_trace;
+> diff --git a/server/display-channel.cpp b/server/display-channel.cpp
+> index 4bd0cf41..53a4724d 100644
+> --- a/server/display-channel.cpp
+> +++ b/server/display-channel.cpp
+> @@ -2172,6 +2172,7 @@ display_channel_new(RedsState *reds, QXLInstance *q=
+xl,
+>                                           video_codecs, n_surfaces);
+>      if (display) {
+>          display_channel_set_stream_video(display.get(), stream_video);
+> +        display->priv->gl_draw_stream =3D nullptr;
+>      }
+>      return display;
+>  }
+> diff --git a/server/video-stream.cpp b/server/video-stream.cpp
+> index 056d0c31..5d4e2690 100644
+> --- a/server/video-stream.cpp
+> +++ b/server/video-stream.cpp
+> @@ -20,6 +20,7 @@
+>  #include "display-channel-private.h"
+>  #include "main-channel-client.h"
+>  #include "red-client.h"
+> +#include "red-qxl.h"
+>
+>  #define FPS_TEST_INTERVAL 1
+>  #define FOREACH_STREAMS(display, item)                  \
+> @@ -366,48 +367,46 @@ static VideoStream *display_channel_stream_try_new(=
+DisplayChannel *display)
+>      return stream;
+>  }
+>
+> -static void display_channel_create_stream(DisplayChannel *display, Drawa=
+ble *drawable)
+> +static void display_channel_init_stream(DisplayChannel *display,
+> +                                        VideoStream *stream,
+> +                                        Drawable *drawable,
+> +                                        SpiceRect* src_rect)
+>  {
+> -    DisplayChannelClient *dcc;
+> -    VideoStream *stream;
+> -    SpiceRect* src_rect;
+> -
+> -    spice_assert(!drawable->stream);
+> -
+> -    if (!(stream =3D display_channel_stream_try_new(display))) {
+> -        return;
+> -    }
+> -
+> -    spice_assert(drawable->red_drawable->type =3D=3D QXL_DRAW_COPY);
+> -    src_rect =3D &drawable->red_drawable->u.copy.src_area;
+> +    SpiceBitmap *bitmap;
+> +    uint64_t duration;
+>
+>      ring_add(&display->priv->streams, &stream->link);
+> -    stream->current =3D drawable;
+> -    stream->last_time =3D drawable->creation_time;
+> +    stream->last_time =3D spice_get_monotonic_time_ns();
+>      stream->width =3D src_rect->right - src_rect->left;
+>      stream->height =3D src_rect->bottom - src_rect->top;
+> -    stream->dest_area =3D drawable->red_drawable->bbox;
+> +    stream->dest_area =3D *src_rect;
+>      stream->refs =3D 1;
+> -    SpiceBitmap *bitmap =3D &drawable->red_drawable->u.copy.src_bitmap->=
+u.bitmap;
+> -    stream->top_down =3D !!(bitmap->flags & SPICE_BITMAP_FLAGS_TOP_DOWN)=
+;
+> -    drawable->stream =3D stream;
+> -    /* Provide an fps estimate the video encoder can use when initializi=
+ng
+> -     * based on the frames that lead to the creation of the stream. Roun=
+d to
+> -     * the nearest integer, for instance 24 for 23.976.
+> -     */
+> -    uint64_t duration =3D drawable->creation_time - drawable->first_fram=
+e_time;
+> -    if (duration > NSEC_PER_SEC * drawable->frames_count / MAX_FPS) {
+> -        stream->input_fps =3D (NSEC_PER_SEC * drawable->frames_count + d=
+uration / 2) / duration;
+> -    } else {
+> -        stream->input_fps =3D MAX_FPS;
+> -    }
+> +    stream->input_fps =3D MAX_FPS * 2;
+>      stream->num_input_frames =3D 0;
+> -    stream->input_fps_start_time =3D drawable->creation_time;
+> +    stream->input_fps_start_time =3D stream->last_time;
+>      display->priv->streams_size_total +=3D stream->width * stream->heigh=
+t;
+>      display->priv->stream_count++;
+> -    FOREACH_DCC(display, dcc) {
+> -        dcc_create_stream(dcc, stream);
+> +
+> +    stream->current =3D drawable;
+> +    if (drawable) {
+> +        drawable->stream =3D stream;
+> +        stream->last_time =3D drawable->creation_time;
+> +        stream->dest_area =3D drawable->red_drawable->bbox;
+> +        bitmap =3D &drawable->red_drawable->u.copy.src_bitmap->u.bitmap;
+> +        stream->top_down =3D !!(bitmap->flags & SPICE_BITMAP_FLAGS_TOP_D=
+OWN);
+> +
+> +        /* Provide an fps estimate the video encoder can use when initia=
+lizing
+> +         * based on the frames that lead to the creation of the stream. =
+Round
+> +         * to the nearest integer, for instance 24 for 23.976.
+> +         */
+> +        duration =3D drawable->creation_time - drawable->first_frame_tim=
+e;
+> +        if (duration > NSEC_PER_SEC * drawable->frames_count / MAX_FPS) =
+{
+> +            stream->input_fps =3D (NSEC_PER_SEC * drawable->frames_count=
+ + duration / 2) / duration;
+> +        } else {
+> +            stream->input_fps =3D MAX_FPS;
+> +        }
+>      }
+> +
+>      spice_debug("stream %d %dx%d (%d, %d) (%d, %d) %u fps",
+>                  display_channel_get_video_stream_id(display, stream), st=
+ream->width,
+>                  stream->height, stream->dest_area.left, stream->dest_are=
+a.top,
+> @@ -415,6 +414,83 @@ static void display_channel_create_stream(DisplayCha=
+nnel *display, Drawable *dra
+>                  stream->input_fps);
+>  }
+>
+> +static void display_channel_create_stream(DisplayChannel *display,
+> +                                          Drawable *drawable)
+> +{
+> +    DisplayChannelClient *dcc;
+> +    VideoStream *stream;
+> +    SpiceRect* src_rect;
+> +
+> +    spice_assert(!drawable->stream);
+> +
+> +    if (!(stream =3D display_channel_stream_try_new(display))) {
+> +        return;
+> +    }
+> +
+> +    spice_assert(drawable->red_drawable->type =3D=3D QXL_DRAW_COPY);
+> +    src_rect =3D &drawable->red_drawable->u.copy.src_area;
+> +
+> +    display_channel_init_stream(display, stream, drawable, src_rect);
+> +    FOREACH_DCC(display, dcc) {
+> +        dcc_create_stream(dcc, stream);
+> +    }
+> +}
+> +
+> +bool display_channel_update_gl_draw_stream(DisplayChannelClient *dcc,
+> +                                           const SpiceMsgDisplayGlDraw *=
+draw)
+> +{
+> +    DisplayChannel *display =3D DCC_TO_DC(dcc);
+> +    QXLInstance* qxl =3D display->priv->qxl;
+> +    SpiceMsgDisplayGlScanoutUnix *scanout =3D red_qxl_get_gl_scanout(qxl=
+);
+> +    VideoStream *stream =3D display->priv->gl_draw_stream;
+> +    uint32_t w =3D draw->w, h =3D draw->h, top_down =3D 1;
+> +    SpiceRect dest_area =3D {
+> +        .left =3D draw->x,
+> +        .top =3D draw->y,
+> +        .right =3D draw->w,
+> +        .bottom =3D draw->h
+> +    };
+> +
+> +    if (scanout !=3D nullptr) {
+> +        top_down =3D (scanout->flags & SPICE_GL_SCANOUT_FLAGS_Y0TOP) ? 0=
+ : 1;
+> +        w =3D scanout->width;
+> +        h =3D scanout->height;
+> +    }
+> +    red_qxl_put_gl_scanout(qxl, scanout);
+
+This part changed since last post with no notes. Qemu bug? There
+should be no need to look at scanout, draw should be sync with.
+
+red_qxl_put_gl_scanout could be moved inside the if.
+
+> +
+> +    if (stream) {
+> +        if (stream->dest_area.left =3D=3D draw->x &&
+> +            stream->dest_area.top =3D=3D draw->y &&
+> +            stream->width =3D=3D draw->w &&
+> +            stream->height =3D=3D draw->h &&
+> +            stream->top_down =3D=3D top_down) {
+> +            stream->last_time =3D spice_get_monotonic_time_ns();
+> +            return true;
+> +        }
+> +    }
+> +
+> +    if (display->priv->surfaces[0]) {
+> +        display_channel_surface_id_unref(display, 0);
+> +    }
+> +    display_channel_create_surface(display, 0, w, h, w * 4,
+> +                                   SPICE_SURFACE_FMT_32_xRGB,
+> +                                   NULL, 1, TRUE);
+
+minor: "nullptr, true, true);"
+
+
+> +    display_channel_set_monitors_config_to_primary(display);
+> +    display_channel_push_monitors_config(display);
+> +    display->pipes_add_empty_msg(SPICE_MSG_DISPLAY_MARK);
+> +    display->push();
+> +
+> +    if (!(stream =3D display_channel_stream_try_new(display))) {
+> +        return false;
+> +    }
+> +    stream->top_down =3D top_down;
+> +    display->priv->gl_draw_stream =3D stream;
+> +    display_channel_init_stream(display, stream, nullptr, &dest_area);
+> +    dcc_create_stream(dcc, stream);
+> +
+> +    return true;
+> +}
+> +
+>  // returns whether a stream was created
+>  static bool video_stream_add_frame(DisplayChannel *display,
+>                               Drawable *frame_drawable,
+> diff --git a/server/video-stream.h b/server/video-stream.h
+> index 23b44ff5..a35a00b6 100644
+> --- a/server/video-stream.h
+> +++ b/server/video-stream.h
+> @@ -124,6 +124,8 @@ struct VideoStream {
+>  };
+>
+>  void display_channel_init_video_streams(DisplayChannel *display);
+> +bool display_channel_update_gl_draw_stream(DisplayChannelClient *dcc,
+> +                                           const SpiceMsgDisplayGlDraw *=
+draw);
+>  void video_stream_stop(DisplayChannel *display, VideoStream *stream);
+>  void video_stream_trace_update(DisplayChannel *display, Drawable *drawab=
+le);
+>  void video_stream_maintenance(DisplayChannel *display, Drawable *candida=
+te,
+
+Frediano
