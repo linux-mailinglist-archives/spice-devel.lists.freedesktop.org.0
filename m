@@ -2,61 +2,63 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7E6D86E87F
-	for <lists+spice-devel@lfdr.de>; Fri,  1 Mar 2024 19:33:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2872C86E87E
+	for <lists+spice-devel@lfdr.de>; Fri,  1 Mar 2024 19:33:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4820410E8E3;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0FFDF10E87D;
 	Fri,  1 Mar 2024 18:33:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=rosalinux.ru header.i=@rosalinux.ru header.b="PdctvGqO";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="2+MCDChq";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail.rosalinux.ru (mail.rosalinux.ru [195.19.76.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DD72210ECB2
- for <spice-devel@lists.freedesktop.org>; Fri,  1 Mar 2024 12:26:45 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id AE28ECFF46BCC;
- Fri,  1 Mar 2024 15:26:42 +0300 (MSK)
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id fqAs-W5z0ecx; Fri,  1 Mar 2024 15:26:42 +0300 (MSK)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 84DBFCFF46BD3;
- Fri,  1 Mar 2024 15:26:42 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru 84DBFCFF46BD3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
- s=1D4BB666-A0F1-11EB-A1A2-F53579C7F503; t=1709296002;
- bh=GPmQWvjQuc1pVJSK54+GnJ6cGFBHUxKlE2p3TVblCUs=;
- h=From:To:Date:Message-Id:MIME-Version;
- b=PdctvGqOjq3p2Zi7u3eZmpT/nGJf2zXfxbj9ZZS/6BvPa9WdbccuaQU/a1buAlzaC
- lVQ12ZpwmWjDVedZ0smgilBF8Z9Pe6XTnpIJ6krCG8aId80PRbrOGaVlptqYNZB+Yr
- wSAiQLLqn61BPdFa6L2VO57xPNZseHWfXUpCL19ZXoz4/zXVNFK7qBaSHTzKgPkFoy
- 4wwsxFNmCIXStxhnrXXpp3Vh9fwJDbH6AgIYKG8bDv7Mhw/uP6sQ5KgvDZZJyCZkqW
- farm3lc+/N43U0R7OhXA7dtka1vlBlx1I68xZq6QYF8bhRJ69UMWEhvPE3fOR9L9Wv
- fmVWP3Fdhrk7w==
-X-Virus-Scanned: amavisd-new at rosalinux.ru
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id IDqMVs1C3EXX; Fri,  1 Mar 2024 15:26:42 +0300 (MSK)
-Received: from ubuntu.localdomain (unknown [144.206.93.23])
- by mail.rosalinux.ru (Postfix) with ESMTPSA id 48574CFF46BCC;
- Fri,  1 Mar 2024 15:26:42 +0300 (MSK)
-From: Aleksandr Burakov <a.burakov@rosalinux.ru>
-To: Dave Airlie <airlied@redhat.com>,
-	Gerd Hoffmann <kraxel@redhat.com>
-Cc: Aleksandr Burakov <a.burakov@rosalinux.ru>,
- virtualization@lists.linux-foundation.org,
- spice-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- lvc-project@linuxtesting.org
-Subject: [PATCH v2] drm/qxl: fix NULL dereference in qxl_add_mode
-Date: Fri,  1 Mar 2024 15:26:35 +0300
-Message-Id: <20240301122635.25058-1-a.burakov@rosalinux.ru>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <oprbqmdpjzhjwuqypqfdnirl44drvrhlaiounos44ywdbiustm@myk6llv5chlv>
-References: 
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 31A6310EB34;
+ Fri,  1 Mar 2024 16:44:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1709311456;
+ bh=g8MDAPa9ELVeta78bCU6vupJUIdfsNOxvkK6Oibr55Q=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=2+MCDChq+ExP6DxPQSfTJIUDZbCwv3b0vuXu4KLe76ogMlJsjF3Pf7dlykMkroSlx
+ AbzWFFQUqsZM5iWgOCDb7NH6MED5S594I/D88HxrPCrtj/LQyXI5I8edwRG3iMW4TD
+ kUwXOhQqBznTo/JR0iCccWzlbGt/g5Rm7W80zu/rvUGdwuaWIDI0zANURZWoAWC7Ng
+ 5sdQXPvmGBLR36YOkV6OYEEGjP85ReLsS+EgdwJFSG1oBR3CWnaYsy3qfMTsp2hhLJ
+ 6ljD9wX/Rd7FxUuiFQnkvrzP6sia1wSZm1+zEo53G3VKfnmev8SHDG1EOzbKNeH5KE
+ y9xxRHtmFddPQ==
+Received: from [100.109.49.129] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: dmitry.osipenko)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id CA69837813F2;
+ Fri,  1 Mar 2024 16:44:13 +0000 (UTC)
+Message-ID: <07e10e3f-9e48-4b0d-b320-fffdece23a2c@collabora.com>
+Date: Fri, 1 Mar 2024 19:44:13 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/13] drm: Fix reservation locking for pin/unpin and
+ console
+Content-Language: en-US
+To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
+ airlied@gmail.com, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ christian.koenig@amd.com, sumit.semwal@linaro.org, robdclark@gmail.com,
+ quic_abhinavk@quicinc.com, dmitry.baryshkov@linaro.org, sean@poorly.run,
+ marijn.suijten@somainline.org, suijingfeng@loongson.cn, kherbst@redhat.com,
+ lyude@redhat.com, dakr@redhat.com, airlied@redhat.com, kraxel@redhat.com,
+ alexander.deucher@amd.com, Xinhui.Pan@amd.com, zack.rusin@broadcom.com,
+ bcm-kernel-feedback-list@broadcom.com
+Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+References: <20240227113853.8464-1-tzimmermann@suse.de>
+ <d854f70b-1d62-4da7-bfbd-2184456d1d25@collabora.com>
+ <cd01e963-dd4d-4554-9feb-1750f72cc260@suse.de>
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <cd01e963-dd4d-4554-9feb-1750f72cc260@suse.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 01 Mar 2024 18:33:39 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -72,35 +74,107 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Return value of a function 'drm_cvt_mode' is dereferenced without
-checking for NULL but drm_mode_create() in drm_cvt_mode() may
-return NULL value in case of memory allocation error.
+On 2/28/24 11:19, Thomas Zimmermann wrote:
+> Hi
+> 
+> Am 27.02.24 um 19:14 schrieb Dmitry Osipenko:
+>> Hello,
+>>
+>> Thank you for the patches!
+>>
+>> On 2/27/24 13:14, Thomas Zimmermann wrote:
+>>> Dma-buf locking semantics require the caller of pin and unpin to hold
+>>> the buffer's reservation lock. Fix DRM to adhere to the specs. This
+>>> enables to fix the locking in DRM's console emulation. Similar changes
+>>> for vmap and mmap have been posted at [1][2]
+>>>
+>>> Most DRM drivers and memory managers acquire the buffer object's
+>>> reservation lock within their GEM pin and unpin callbacks. This
+>>> violates dma-buf locking semantics. We get away with it because PRIME
+>>> does not provide pin/unpin, but attach/detach, for which the locking
+>>> semantics is correct.
+>>>
+>>> Patches 1 to 8 rework DRM GEM code in various implementations to
+>>> acquire the reservation lock when entering the pin and unpin callbacks.
+>>> This prepares them for the next patch. Drivers that are not affected
+>>> by these patches either don't acquire the reservation lock (amdgpu)
+>>> or don't need preparation (loongson).
+>>>
+>>> Patch 9 moves reservation locking from the GEM pin/unpin callbacks
+>>> into drm_gem_pin() and drm_gem_unpin(). As PRIME uses these functions
+>>> internally it still gets the reservation lock.
+>>>
+>>> With the updated GEM callbacks, the rest of the patchset fixes the
+>>> fbdev emulation's buffer locking. Fbdev emulation needs to keep its
+>>> GEM buffer object inplace while updating its content. This required
+>>> a implicit pinning and apparently amdgpu didn't do this at all.
+>>>
+>>> Patch 10 introduces drm_client_buffer_vmap_local() and _vunmap_local().
+>>> The former function map a GEM buffer into the kernel's address space
+>>> with regular vmap operations, but keeps holding the reservation lock.
+>>> The _vunmap_local() helper undoes the vmap and releases the lock. The
+>>> updated GEM callbacks make this possible. Between the two calls, the
+>>> fbdev emulation can update the buffer content without have the buffer
+>>> moved or evicted. Update fbdev-generic to use vmap_local helpers,
+>>> which fix amdgpu. The idea of adding a "local vmap" has previously been
+>>> attempted at [3] in a different form.
+>>>
+>>> Patch 11 adds implicit pinning to the DRM client's regular vmap
+>>> helper so that long-term vmap'ed buffers won't be evicted. This only
+>>> affects fbdev-dma, but GEM DMA helpers don't require pinning. So
+>>> there are no practical changes.
+>>>
+>>> Patches 12 and 13 remove implicit pinning from the vmap and vunmap
+>>> operations in gem-vram and qxl. These pin operations are not supposed
+>>> to be part of vmap code, but were required to keep the buffers in place
+>>> for fbdev emulation. With the conversion o ffbdev-generic to to
+>>> vmap_local helpers, that code can finally be removed.
+>> Isn't it a common behaviour for all DRM drivers to implicitly pin BO
+>> while it's vmapped? I was sure it should be common /o\
+> 
+> That's what I originally thought as well, but the intention is for pin
+> and vmap to be distinct operation. So far each driver has been
+> different, as you probably know best from your vmap refactoring. :)
+> 
+>>
+>> Why would you want to kmap BO that isn't pinned?
+> 
+> Pinning places the buffer object for the GPU. As a side effect, the
+> buffer is then kept in place, which enables vmap. So pinning only makes
+> sense for buffer objects that never move (shmem, dma). That's what patch
+> 11 is for.
+> 
+>>
+>> Shouldn't TTM's vmap() be changed to do the pinning?
+> 
+> I don't think so. One problem is that pinning needs a memory area (vram,
+> GTT, system ram, etc) specified, which vmap simply doesn't know about.
+> That has been a problem for fbdev emulation at some point. Our fbdev
+> code tried to pin as part of vmap, but chose the wrong area and suddenly
+> the GPU could not see the buffer object any longer.  So the next best
+> thing for vmap was to pin the buffer object where ever it is currently
+> located. That is what gem-vram and qxl did so far. And of course, the
+> fbdev code needs to unpin and vunmap the buffer object quickly, so that
+> it can be relocated if the GPU needs it.  Hence, the vmap_local
+> interface removes such short-term pinning in favor of holding the
+> reservation lock.
+> 
+>>
+>> I missed that TTM doesn't pin BO on vmap() and now surprised to see it.
+>> It should be a rather serious problem requiring backporting of the
+>> fixes, but I don't see the fixes tags on the patches (?)
+> 
+> No chance TBH. The old code has worked for years and backporting all
+> this would require your vmap patches at a minimum.
+> 
+> Except maybe for amdgpu. It uses fbdev-generic, which requires pinning,
+> but amdgpu doesn't pin. That looks fishy, but I'm not aware of any bug
+> reports either. I guess, a quick workaround could fix older amdgpu if
+> necessary.
 
-Found by Linux Verification Center (linuxtesting.org) with SVACE.
+Thanks! I'll make another pass on the patches on Monday
 
-Fixes: 1b043677d4be ("drm/qxl: add qxl_add_mode helper function")
-Signed-off-by: Aleksandr Burakov <a.burakov@rosalinux.ru>
----
-v2: case with false value of 'preferred' is now taken into account
- drivers/gpu/drm/qxl/qxl_display.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_=
-display.c
-index a152a7c6db21..d6dece7a0ed2 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -236,6 +236,9 @@ static int qxl_add_mode(struct drm_connector *connect=
-or,
- 		return 0;
-=20
- 	mode =3D drm_cvt_mode(dev, width, height, 60, false, false, false);
-+	if (!mode)
-+		return 0;
-+
- 	if (preferred)
- 		mode->type |=3D DRM_MODE_TYPE_PREFERRED;
- 	mode->hdisplay =3D width;
---=20
-2.25.1
+-- 
+Best regards,
+Dmitry
 
