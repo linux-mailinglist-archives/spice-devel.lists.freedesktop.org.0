@@ -2,63 +2,50 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BA1E87DF2F
-	for <lists+spice-devel@lfdr.de>; Sun, 17 Mar 2024 19:16:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8588881447
+	for <lists+spice-devel@lfdr.de>; Wed, 20 Mar 2024 16:13:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A24A10EB5C;
-	Sun, 17 Mar 2024 18:16:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5A8D110E100;
+	Wed, 20 Mar 2024 15:13:56 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LNyVbuuP";
+	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="Iq4IpmfZ";
 	dkim-atps=neutral
-X-Original-To: spice-devel@freedesktop.org
-Delivered-To: spice-devel@freedesktop.org
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com
- [209.85.128.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 663C710EB5C
- for <spice-devel@freedesktop.org>; Sun, 17 Mar 2024 18:16:05 +0000 (UTC)
-Received: by mail-yw1-f169.google.com with SMTP id
- 00721157ae682-60a0599f647so32432547b3.1
- for <spice-devel@freedesktop.org>; Sun, 17 Mar 2024 11:16:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710699364; x=1711304164; darn=freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zb70z7OwFE12+RT5bnYvgAbtdLjYdV3dmx+bl50cvrY=;
- b=LNyVbuuPQl7vNPtsHKedDCOzGSLDId+y+JzOywtGebrdtWJJTkrF9b9JEqp5mw7fT7
- FD3JUrOVdBvL/ebZa8FnaGmghctELy1KuVq/pQXtyJFHieIRrPei5de1rGLY4+3XMB23
- QIKLG+tlAEPflV/B0mz2304ZTpGOyKwi98V/t3qPr1Hji4T+qGa4tkQ0zUkHZ17CWnGD
- +zEp1h1O2GknoG/v2i0tZim9MgqhG5OlfZZPdn6mNNc+i4rXRcXDNXsaMPQhIVOQ69sl
- dRnAs+vxkx9WU+09TwxI9smbQ3fiaIHpsm7YT8Zjm0gAjiMl16TT57VU7UNNCsH3WLo0
- rfuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710699364; x=1711304164;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zb70z7OwFE12+RT5bnYvgAbtdLjYdV3dmx+bl50cvrY=;
- b=tDpMXYKTEbLfl9v90lSxS71m+8IbtkA/PR3JXebhk/NnSTQE8Uldc2ux/8zHM0DOda
- DBi/CAt+k4DOi+9BQGRqCnsvScUUP5EbgKud+re9N5dzESMtU1yH4uiaoxFW/4akJaaZ
- U4B4WdgzD2Dz8J3DdYKplzCgi7wdqqLwz6T+pAiP+UMrGwEA3nAutcJHHzVVt5tsLw+F
- FHQE8a1Bj666eMy2XYfVC/1BWbqNRG75rBr7TFwKh68B1BHKVqegksce9YIbdE09aumk
- 4/HaqlP9qVG6M4Ldgb0TNvV0ChXXxOProi1oGhZonO0pjqZT7ZFKX1HM377c1YBLnbQF
- LSdA==
-X-Gm-Message-State: AOJu0YzWS7pHNUaX5v8B7lrdsLftrb8sOCYSbe+p4n7DiFp55LDktTkI
- Jly14L5kJO+LF3wvBTZ0Z/U94fi5c64e+na4bFmNnCDgo5gSGNUW/iHAdjzsqjlIl5jjb/dVtUb
- tkref7wgOOBEjQacNj+SETvq7leM=
-X-Google-Smtp-Source: AGHT+IFeZ9Tgz3BCiuzsOglxX0wCk1P0zc2GoZPYSQ9/ajl8uIK4eQCHxdSlFs1O/HPw9SqpXl917PVRKAOYaw26Suo=
-X-Received: by 2002:a81:48d2:0:b0:609:ddad:e3df with SMTP id
- v201-20020a8148d2000000b00609ddade3dfmr10777721ywa.12.1710699364037; Sun, 17
- Mar 2024 11:16:04 -0700 (PDT)
+X-Original-To: spice-devel@lists.freedesktop.org
+Delivered-To: spice-devel@lists.freedesktop.org
+Received: from a1422.mx.srv.dfn.de (a1422.mx.srv.dfn.de [194.95.233.70])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2331110FD6D
+ for <spice-devel@lists.freedesktop.org>; Wed, 20 Mar 2024 15:13:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ rz.uni-freiburg.de; h=content-transfer-encoding:content-type
+ :content-type:in-reply-to:references:from:from:content-language
+ :subject:subject:user-agent:mime-version:date:date:message-id
+ :received; s=s1; t=1710947628; x=1712762029; bh=BlIzid+UqG/A/T5n
+ lMPnLYUKOyd6z9P6f3xwSHhrHyE=; b=Iq4IpmfZLk2Hjf7CK7t0Kg6AobuypDne
+ yJX9VC0swBxNunZ2s9aNXfMhYUErXQjPJXzsMk2TV/trWE5vTT3qiAITvYSX3GTR
+ twfEqPhsAwuPHlXOYN/pSnBnxkEh7oAMeDlT2+dQnlzB2IJcd08mUa5HalHs8Kkq
+ E8T5hzqNb44=
+Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
+ by a1422.mx.srv.dfn.de (Postfix) with ESMTP id 7AF791E0105
+ for <spice-devel@lists.freedesktop.org>; Wed, 20 Mar 2024 16:13:48 +0100 (CET)
+Received: from [2001:7c0:2517:a:cca7:e119:2599:1be8] (account
+ michael.scherle@rz.uni-freiburg.de HELO
+ [IPV6:2001:7c0:2517:a:cca7:e119:2599:1be8])
+ by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
+ with ESMTPSA id 40730518; Wed, 20 Mar 2024 16:13:48 +0100
+Message-ID: <03544c6b-b8b4-441a-b0aa-9d6a629c9794@rz.uni-freiburg.de>
+Date: Wed, 20 Mar 2024 16:13:48 +0100
 MIME-Version: 1.0
-References: <CABqkP4gxR3CV-0400rBbzGonT1HFQb7kNK0712k=sdByQLczFg@mail.gmail.com>
-In-Reply-To: <CABqkP4gxR3CV-0400rBbzGonT1HFQb7kNK0712k=sdByQLczFg@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Sun, 17 Mar 2024 18:15:52 +0000
-Message-ID: <CAHt6W4dmHyoKSv1j8c5Nq-0HV2NFLis2LHE60RsQzxfaOaq=gg@mail.gmail.com>
-Subject: Re: Inquiry about @spice Github Username
-To: Santiago Paiva <paiva.santiago@gmail.com>
-Cc: spice-devel@freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: High delay of video-streams
+Content-Language: en-US
+From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
+To: spice-devel@lists.freedesktop.org
+References: <31bdee77-ac54-4da4-bb8f-fbc00882070d@rz.uni-freiburg.de>
+Cc: "dirk.von.suchodoletz@rz.uni-freiburg.de"
+ <dirk.von.suchodoletz@rz.uni-freiburg.de>
+In-Reply-To: <31bdee77-ac54-4da4-bb8f-fbc00882070d@rz.uni-freiburg.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,23 +60,71 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno lun 11 mar 2024 alle ore 18:02 Santiago Paiva
-<paiva.santiago@gmail.com> ha scritto:
->
-> Hello from Canada,
->
-> I was wondering if there is any chance we could use the username @spice on Github for some FOSS?
->
-> Thanks for your time and consideration. All the best
->
-> Santiago.
->
+Hello spice developers,
 
-Hi,
-  I would suggest finding another name.
-But I'm not the owner of that name.
-As a project member I can say that probably we entirely moved to
-gitlab.freedesktop.org a while ago.
+I looked further and found the function get_min_playback_delay( 
+https://gitlab.freedesktop.org/spice/spice/-/blob/fe1c25f530b95d32cc81bc1a395d80ace631d2dd/server/gstreamer-encoder.c#L507)
+which calculates the delay I was looking for. However, some of the 
+calculations do not make sense to me.  net_latency + 
+get_average_encoding_time seems to be reasonable. However send_time 
+seems strange to me. I assume that this is to calculate how long a large 
+(I frame) and a normal frame is encoded. I think that this calculation 
+is not optimal, the more so as the average encoding time has already 
+been added and the gstreamer target bitrate is not accurate (especially 
+for variable bitrates) which makes the calculations less accurate.
 
-Regards,
-   Frediano
+As a result, the delay is unnecessarily increased, if the image size 
+changes rapidly in a short period of time, e.g. due to rapidly changing 
+image content. Which would also work without a delay increase. Also the 
+decoding time of the client is not taken into account here. I'm also not 
+sure how useful it is, to calculate the display delay for the client on 
+the server. But perhaps I have been mistaken and you can enlighten me.
+
+
+On 15.03.24 14:08, Michael Scherle wrote:
+> Hello spice developers,
+> 
+> we are trying to develop an Open Source virtual desktop infrastructure 
+> to be deployed at multiple German universities as described, by my 
+> colleagues, in the paper which I have put in the attachment. The 
+> solution based on openstack, qemu, spice... Our plan is also to have VM 
+> instances with virtual GPUs (SR-IOV). Due to the resulting requirements, 
+> it is necessary to transmit the image data as a video stream.
+> We have seen Vivek Kasireddy recent work on spice which solves exactly 
+> this problem. However, when we tested it, we noticed a very high input 
+> to display delay (400 ms+ but only if the image data is transferred as 
+> video-stream). However, the problem seems to be a more general spice 
+> problem or is there something wrong with our setup or are there special 
+> parameters that we are missing?
+> 
+> Our setup:
+> 
+> QEMU: https://gitlab.freedesktop.org/Vivek/qemu/-/commits/spice_gl_on_v2
+> Spice: 
+> https://gitlab.freedesktop.org/Vivek/spice/-/commits/encode_dmabuf_v6
+> virt-viewer
+> Intel HW decoder/encoder (but same with sw)
+> 
+> I have looked into what is causing the delay and have noticed that 
+> encoding only takes about 3-4ms. In general, the image seems to reach 
+> the client in less than 15ms.
+> The main problem seems to be that gstreamer gets a very high 
+> margin(https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/channel-display.c?ref_type=heads#L1773) and therefore waits a long time before starting decoding. And the reason for the high margin seems to be the bad mm_time_offset https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/spice-session.c?ref_type=heads#L2418 which is used to offset the server time to the client time (with some margin). And this variable is set by the spice server to initially 400 ms https://gitlab.freedesktop.org/spice/spice/-/blob/master/server/reds.cpp?ref_type=heads#L3062 and gets updated with the latency https://gitlab.freedesktop.org/spice/spice/-/blob/master/server/reds.cpp?ref_type=heads#L2614 (but only increased). I still need to see how this latency is calculated.
+> 
+> Am I missing something or is this design not intended for transmitting 
+> interactive content via video stream?
+> Temporarily overwriting the margin and tweaking parameter settings on 
+> the msdkh264dec brought the delay to about 80-100ms, which is not yet 
+> optimal but usable. To see what is technical possible on my setup, I 
+> made a comparison using moonlight/sunshine which resulted in an delay of 
+> 20-40ms.
+> 
+> Our goal is to achieve some round trip time similar to the 
+> moonlight/sunshine scenario to achieve a properly usable desktop 
+> experience.
+> 
+> Greetings
+> Michael
+
+Greetings
+Michael
