@@ -2,50 +2,61 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8588881447
-	for <lists+spice-devel@lfdr.de>; Wed, 20 Mar 2024 16:13:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93CAA889833
+	for <lists+spice-devel@lfdr.de>; Mon, 25 Mar 2024 10:31:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5A8D110E100;
-	Wed, 20 Mar 2024 15:13:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E6DBC10E2F1;
+	Mon, 25 Mar 2024 09:31:16 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="Iq4IpmfZ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=leemhuis.info header.i=@leemhuis.info header.b="iJDk19kQ";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from a1422.mx.srv.dfn.de (a1422.mx.srv.dfn.de [194.95.233.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2331110FD6D
- for <spice-devel@lists.freedesktop.org>; Wed, 20 Mar 2024 15:13:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- rz.uni-freiburg.de; h=content-transfer-encoding:content-type
- :content-type:in-reply-to:references:from:from:content-language
- :subject:subject:user-agent:mime-version:date:date:message-id
- :received; s=s1; t=1710947628; x=1712762029; bh=BlIzid+UqG/A/T5n
- lMPnLYUKOyd6z9P6f3xwSHhrHyE=; b=Iq4IpmfZLk2Hjf7CK7t0Kg6AobuypDne
- yJX9VC0swBxNunZ2s9aNXfMhYUErXQjPJXzsMk2TV/trWE5vTT3qiAITvYSX3GTR
- twfEqPhsAwuPHlXOYN/pSnBnxkEh7oAMeDlT2+dQnlzB2IJcd08mUa5HalHs8Kkq
- E8T5hzqNb44=
-Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
- by a1422.mx.srv.dfn.de (Postfix) with ESMTP id 7AF791E0105
- for <spice-devel@lists.freedesktop.org>; Wed, 20 Mar 2024 16:13:48 +0100 (CET)
-Received: from [2001:7c0:2517:a:cca7:e119:2599:1be8] (account
- michael.scherle@rz.uni-freiburg.de HELO
- [IPV6:2001:7c0:2517:a:cca7:e119:2599:1be8])
- by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
- with ESMTPSA id 40730518; Wed, 20 Mar 2024 16:13:48 +0100
-Message-ID: <03544c6b-b8b4-441a-b0aa-9d6a629c9794@rz.uni-freiburg.de>
-Date: Wed, 20 Mar 2024 16:13:48 +0100
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
+ [80.237.130.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8D82510FD43;
+ Wed, 20 Mar 2024 15:25:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+ Message-ID:From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ In-Reply-To:References; bh=/EpaCQTpGqGU5ULt8qAmE+s8SSReKSogNzvd/au7Mjs=;
+ t=1710948357; x=1711380357; b=iJDk19kQI0h1rWpfWxZMvwGYy4BhFVt0xFqe+K6sL+3pK8c
+ LefGsCHVAm/tLPRhULuODPeD6Lp8Hrge6OrY3k7BE26ER66/hkbtUSLTCtUvy++UbFo7sYgLQdrAB
+ Df+akJCXVUNQ54Ve13A5thZfVBjgH7DCl/+xu3jWFWPJvDksKyO9TniVn/4AOo2/NsCdAmdAyQfY1
+ mnniJzhvSKy2BMq2NQrX33Ebvcjr+I+Zpxd7CCCFpEE/ZW9NX1yuE+22heR/b3TbvWsd5n7MBepsj
+ pu9oMBXbikThZ8ISQftaljIWvCU6AXGxeg4Ql8stH5z3OAo/8Jwd8iOyyzbKnQBQ==;
+Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
+ by wp530.webpack.hosteurope.de running ExIM with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ id 1rmxp7-0004iK-29; Wed, 20 Mar 2024 16:25:49 +0100
+Message-ID: <db4c8e74-5c79-49be-9781-a5d8669eccc1@leemhuis.info>
+Date: Wed, 20 Mar 2024 16:25:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: High delay of video-streams
-Content-Language: en-US
-From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
-To: spice-devel@lists.freedesktop.org
-References: <31bdee77-ac54-4da4-bb8f-fbc00882070d@rz.uni-freiburg.de>
-Cc: "dirk.von.suchodoletz@rz.uni-freiburg.de"
- <dirk.von.suchodoletz@rz.uni-freiburg.de>
-In-Reply-To: <31bdee77-ac54-4da4-bb8f-fbc00882070d@rz.uni-freiburg.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH 1/1] drm/qxl: fixes qxl_fence_wait
+Content-Language: en-US, de-DE
+To: Alex Constantino <dreaming.about.electric.sheep@gmail.com>
+Cc: 1054514@bugs.debian.org, airlied@redhat.com, carnil@debian.org,
+ daniel@ffwll.ch, dri-devel@lists.freedesktop.org, kraxel@redhat.com,
+ linux-kernel@vger.kernel.org, regressions@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, timo.lindfors@iki.fi,
+ tzimmermann@suse.de, virtualization@lists.linux-foundation.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>
+References: <fb0fda6a-3750-4e1b-893f-97a3e402b9af@leemhuis.info>
+ <20240308010851.17104-1-dreaming.about.electric.sheep@gmail.com>
+ <20240308010851.17104-2-dreaming.about.electric.sheep@gmail.com>
+From: "Linux regression tracking (Thorsten Leemhuis)"
+ <regressions@leemhuis.info>
+In-Reply-To: <20240308010851.17104-2-dreaming.about.electric.sheep@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1710948357;
+ 7ebe72a6; 
+X-HE-SMSGID: 1rmxp7-0004iK-29
+X-Mailman-Approved-At: Mon, 25 Mar 2024 09:31:16 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,74 +68,81 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hello spice developers,
+On 08.03.24 02:08, Alex Constantino wrote:
+> Fix OOM scenario by doing multiple notifications to the OOM handler through
+> a busy wait logic.
+> Changes from commit 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait") would
+> result in a '[TTM] Buffer eviction failed' exception whenever it reached a
+> timeout.
+> 
+> Fixes: 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait")
+> Link: https://lore.kernel.org/regressions/fb0fda6a-3750-4e1b-893f-97a3e402b9af@leemhuis.info
+> Reported-by: Timo Lindfors <timo.lindfors@iki.fi>
+> Closes: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1054514
+> Signed-off-by: Alex Constantino <dreaming.about.electric.sheep@gmail.com>
+> ---
+>  drivers/gpu/drm/qxl/qxl_release.c | 20 ++++++++++++++------
+>  1 file changed, 14 insertions(+), 6 deletions(-)
 
-I looked further and found the function get_min_playback_delay( 
-https://gitlab.freedesktop.org/spice/spice/-/blob/fe1c25f530b95d32cc81bc1a395d80ace631d2dd/server/gstreamer-encoder.c#L507)
-which calculates the delay I was looking for. However, some of the 
-calculations do not make sense to me.  net_latency + 
-get_average_encoding_time seems to be reasonable. However send_time 
-seems strange to me. I assume that this is to calculate how long a large 
-(I frame) and a normal frame is encoded. I think that this calculation 
-is not optimal, the more so as the average encoding time has already 
-been added and the gstreamer target bitrate is not accurate (especially 
-for variable bitrates) which makes the calculations less accurate.
+Hey Dave and Gerd as well as Thomas, Maarten and Maxime (the latter two
+I just added to the CC), it seems to me this regression fix did not
+maybe any progress since it was posted. Did I miss something, is it just
+"we are busy with the merge window", or is there some other a reason?
+Just wondering, I just saw someone on a Fedora IRC channel complaining
+about the regression, that's why I'm asking. Would be really good to
+finally get this resolved...
 
-As a result, the delay is unnecessarily increased, if the image size 
-changes rapidly in a short period of time, e.g. due to rapidly changing 
-image content. Which would also work without a delay increase. Also the 
-decoding time of the client is not taken into account here. I'm also not 
-sure how useful it is, to calculate the display delay for the client on 
-the server. But perhaps I have been mistaken and you can enlighten me.
+Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
+--
+Everything you wanna know about Linux kernel regression tracking:
+https://linux-regtracking.leemhuis.info/about/#tldr
+If I did something stupid, please tell me, as explained on that page.
 
+#regzbot poke
 
-On 15.03.24 14:08, Michael Scherle wrote:
-> Hello spice developers,
-> 
-> we are trying to develop an Open Source virtual desktop infrastructure 
-> to be deployed at multiple German universities as described, by my 
-> colleagues, in the paper which I have put in the attachment. The 
-> solution based on openstack, qemu, spice... Our plan is also to have VM 
-> instances with virtual GPUs (SR-IOV). Due to the resulting requirements, 
-> it is necessary to transmit the image data as a video stream.
-> We have seen Vivek Kasireddy recent work on spice which solves exactly 
-> this problem. However, when we tested it, we noticed a very high input 
-> to display delay (400 ms+ but only if the image data is transferred as 
-> video-stream). However, the problem seems to be a more general spice 
-> problem or is there something wrong with our setup or are there special 
-> parameters that we are missing?
-> 
-> Our setup:
-> 
-> QEMU: https://gitlab.freedesktop.org/Vivek/qemu/-/commits/spice_gl_on_v2
-> Spice: 
-> https://gitlab.freedesktop.org/Vivek/spice/-/commits/encode_dmabuf_v6
-> virt-viewer
-> Intel HW decoder/encoder (but same with sw)
-> 
-> I have looked into what is causing the delay and have noticed that 
-> encoding only takes about 3-4ms. In general, the image seems to reach 
-> the client in less than 15ms.
-> The main problem seems to be that gstreamer gets a very high 
-> margin(https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/channel-display.c?ref_type=heads#L1773) and therefore waits a long time before starting decoding. And the reason for the high margin seems to be the bad mm_time_offset https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/src/spice-session.c?ref_type=heads#L2418 which is used to offset the server time to the client time (with some margin). And this variable is set by the spice server to initially 400 ms https://gitlab.freedesktop.org/spice/spice/-/blob/master/server/reds.cpp?ref_type=heads#L3062 and gets updated with the latency https://gitlab.freedesktop.org/spice/spice/-/blob/master/server/reds.cpp?ref_type=heads#L2614 (but only increased). I still need to see how this latency is calculated.
-> 
-> Am I missing something or is this design not intended for transmitting 
-> interactive content via video stream?
-> Temporarily overwriting the margin and tweaking parameter settings on 
-> the msdkh264dec brought the delay to about 80-100ms, which is not yet 
-> optimal but usable. To see what is technical possible on my setup, I 
-> made a comparison using moonlight/sunshine which resulted in an delay of 
-> 20-40ms.
-> 
-> Our goal is to achieve some round trip time similar to the 
-> moonlight/sunshine scenario to achieve a properly usable desktop 
-> experience.
-> 
-> Greetings
-> Michael
-
-Greetings
-Michael
+> diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
+> index 368d26da0d6a..51c22e7f9647 100644
+> --- a/drivers/gpu/drm/qxl/qxl_release.c
+> +++ b/drivers/gpu/drm/qxl/qxl_release.c
+> @@ -20,8 +20,6 @@
+>   * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+>   */
+>  
+> -#include <linux/delay.h>
+> -
+>  #include <trace/events/dma_fence.h>
+>  
+>  #include "qxl_drv.h"
+> @@ -59,14 +57,24 @@ static long qxl_fence_wait(struct dma_fence *fence, bool intr,
+>  {
+>  	struct qxl_device *qdev;
+>  	unsigned long cur, end = jiffies + timeout;
+> +	signed long iterations = 1;
+> +	signed long timeout_fraction = timeout;
+>  
+>  	qdev = container_of(fence->lock, struct qxl_device, release_lock);
+>  
+> -	if (!wait_event_timeout(qdev->release_event,
+> +	// using HZ as a factor since it is used in ttm_bo_wait_ctx too
+> +	if (timeout_fraction > HZ) {
+> +		iterations = timeout_fraction / HZ;
+> +		timeout_fraction = HZ;
+> +	}
+> +	for (int i = 0; i < iterations; i++) {
+> +		if (wait_event_timeout(
+> +				qdev->release_event,
+>  				(dma_fence_is_signaled(fence) ||
+> -				 (qxl_io_notify_oom(qdev), 0)),
+> -				timeout))
+> -		return 0;
+> +					(qxl_io_notify_oom(qdev), 0)),
+> +				timeout_fraction))
+> +			break;
+> +	}
+>  
+>  	cur = jiffies;
+>  	if (time_after(cur, end))
