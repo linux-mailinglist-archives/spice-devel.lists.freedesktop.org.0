@@ -2,60 +2,40 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93CAA889833
-	for <lists+spice-devel@lfdr.de>; Mon, 25 Mar 2024 10:31:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E980D889834
+	for <lists+spice-devel@lfdr.de>; Mon, 25 Mar 2024 10:31:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6DBC10E2F1;
-	Mon, 25 Mar 2024 09:31:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 25F3B10E3D7;
+	Mon, 25 Mar 2024 09:31:18 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=leemhuis.info header.i=@leemhuis.info header.b="iJDk19kQ";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="VJyE1WgV";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [80.237.130.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8D82510FD43;
- Wed, 20 Mar 2024 15:25:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
- Message-ID:From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- In-Reply-To:References; bh=/EpaCQTpGqGU5ULt8qAmE+s8SSReKSogNzvd/au7Mjs=;
- t=1710948357; x=1711380357; b=iJDk19kQI0h1rWpfWxZMvwGYy4BhFVt0xFqe+K6sL+3pK8c
- LefGsCHVAm/tLPRhULuODPeD6Lp8Hrge6OrY3k7BE26ER66/hkbtUSLTCtUvy++UbFo7sYgLQdrAB
- Df+akJCXVUNQ54Ve13A5thZfVBjgH7DCl/+xu3jWFWPJvDksKyO9TniVn/4AOo2/NsCdAmdAyQfY1
- mnniJzhvSKy2BMq2NQrX33Ebvcjr+I+Zpxd7CCCFpEE/ZW9NX1yuE+22heR/b3TbvWsd5n7MBepsj
- pu9oMBXbikThZ8ISQftaljIWvCU6AXGxeg4Ql8stH5z3OAo/8Jwd8iOyyzbKnQBQ==;
-Received: from [2a02:8108:8980:2478:8cde:aa2c:f324:937e]; authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1rmxp7-0004iK-29; Wed, 20 Mar 2024 16:25:49 +0100
-Message-ID: <db4c8e74-5c79-49be-9781-a5d8669eccc1@leemhuis.info>
-Date: Wed, 20 Mar 2024 16:25:48 +0100
+Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
+ [185.70.41.103])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2BB8F10E8B2
+ for <spice-devel@lists.freedesktop.org>; Sat, 23 Mar 2024 17:10:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail; t=1711213803; x=1711473003;
+ bh=ryKEviaNredmFQJXopu4Jc2HY3PQIcS9VfGWBGjlvZA=;
+ h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=VJyE1WgVuU7MIE3CEnOIUmFtVRHNODbyiBXaY418HHcgeVvcLlGbs0zZU+n4RpsEk
+ 5qhms1CxbtFiJ4jT3g/GYi0otSAEVmK9CEw+eFzCbUUgZuI51uFFu6KEOLZ4k99Pev
+ WcEFb/3dNqPK9Rwwtfss4uosEuzIbAhaQagA61bl/3URo1vemCPOmIYgYB/NMoqhgv
+ L1mDedmRgv3eKzbD0uCq3A8mnT4X1erviK7jJKAxuFWw0aOl7LEySo34Eq0N+0e3fh
+ kcfMFqrQ26HK1giSHZBIQ4Uhf7Mlce+fujKvdBvzkZEgAgv+B9eYWRJbmrZ6FDcza2
+ ljzay5ec9symQ==
+Date: Sat, 23 Mar 2024 17:09:50 +0000
+To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
+From: presi300work <presi300work@proton.me>
+Subject: The OSX Spice client is in a horrible state.
+Message-ID: <886Bd_iZ_IAFax3kBixdEnBZlHJ27EU9hxVi4MvWzxMUUyBwMuwSJbEuW3t32uXgpUUf0H_-VeBMQKnF2gSMN82kbA1-9Lkxqqv2n0HJuYc=@proton.me>
+Feedback-ID: 102926166:user:proton
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] drm/qxl: fixes qxl_fence_wait
-Content-Language: en-US, de-DE
-To: Alex Constantino <dreaming.about.electric.sheep@gmail.com>
-Cc: 1054514@bugs.debian.org, airlied@redhat.com, carnil@debian.org,
- daniel@ffwll.ch, dri-devel@lists.freedesktop.org, kraxel@redhat.com,
- linux-kernel@vger.kernel.org, regressions@lists.linux.dev,
- spice-devel@lists.freedesktop.org, timo.lindfors@iki.fi,
- tzimmermann@suse.de, virtualization@lists.linux-foundation.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>
-References: <fb0fda6a-3750-4e1b-893f-97a3e402b9af@leemhuis.info>
- <20240308010851.17104-1-dreaming.about.electric.sheep@gmail.com>
- <20240308010851.17104-2-dreaming.about.electric.sheep@gmail.com>
-From: "Linux regression tracking (Thorsten Leemhuis)"
- <regressions@leemhuis.info>
-In-Reply-To: <20240308010851.17104-2-dreaming.about.electric.sheep@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1710948357;
- 7ebe72a6; 
-X-HE-SMSGID: 1rmxp7-0004iK-29
+Content-Type: multipart/alternative;
+ boundary="b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg"
 X-Mailman-Approved-At: Mon, 25 Mar 2024 09:31:16 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -68,81 +48,58 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: Linux regressions mailing list <regressions@lists.linux.dev>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 08.03.24 02:08, Alex Constantino wrote:
-> Fix OOM scenario by doing multiple notifications to the OOM handler through
-> a busy wait logic.
-> Changes from commit 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait") would
-> result in a '[TTM] Buffer eviction failed' exception whenever it reached a
-> timeout.
-> 
-> Fixes: 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait")
-> Link: https://lore.kernel.org/regressions/fb0fda6a-3750-4e1b-893f-97a3e402b9af@leemhuis.info
-> Reported-by: Timo Lindfors <timo.lindfors@iki.fi>
-> Closes: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1054514
-> Signed-off-by: Alex Constantino <dreaming.about.electric.sheep@gmail.com>
-> ---
->  drivers/gpu/drm/qxl/qxl_release.c | 20 ++++++++++++++------
->  1 file changed, 14 insertions(+), 6 deletions(-)
+This is a multi-part message in MIME format.
 
-Hey Dave and Gerd as well as Thomas, Maarten and Maxime (the latter two
-I just added to the CC), it seems to me this regression fix did not
-maybe any progress since it was posted. Did I miss something, is it just
-"we are busy with the merge window", or is there some other a reason?
-Just wondering, I just saw someone on a Fedora IRC channel complaining
-about the regression, that's why I'm asking. Would be really good to
-finally get this resolved...
+--b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
 
-Ciao, Thorsten (wearing his 'the Linux kernel's regression tracker' hat)
---
-Everything you wanna know about Linux kernel regression tracking:
-https://linux-regtracking.leemhuis.info/about/#tldr
-If I did something stupid, please tell me, as explained on that page.
+SSBhbSBzb3JyeSBpZiB0aGlzIHNvdW5kcyBhIGJpdCBydWRlLCBidXQgaXQgcmVhbGx5IGlzIGlu
+IGEgaG9ycmlibGUgc3RhdGUuIEl0J3MgVUkgaXMgb2xkIGFuZCBzbG93LCBpdCBkb2Vzbid0IHVz
+ZSB0aGUgZ2xvYmFsIG1lbnUgc3lzdGVtIGFuZCBpdCBsZWFrcyBtZW1vcnkgYWxsIG92ZXIgdGhl
+IHBsYWNlLiBJJ20gc2VuZGluZyB0aGlzIGUtbWFpbCB3aXRoIHRoZSBob3BlIG9mIHNvbWVvbmUg
+c2VlaW5nIGl0IGFuZCBlaXRoZXIgdGFraW5nIGEgY2xvc2VyIGxvb2sgYXQgdGhlIE9TWCBzcGlj
+ZSBjbGllbnQgb3IgZ2V0dGluZyBiYWNrIHRvIG1lIHRvIGFzayBmb3IgbW9yZSBkZXRhaWxzLgoK
+QWx0ZXJuYXRpdmVseSwgaWYgaXQncyBubyBsb25nZXIgc3VwcG9ydGVkLCBJIHJlcXVlc3QgdGhh
+dCBzb21lIHNvcnQgb2YgaW5kaWNhdGlvbiBiZSBwdXQgYWJvdXQgaXQgb24gdGhlIHNwaWNlIHdl
+YnNpdGUuCgotIEtpbmQgcmVnYXJkcywgcHJlc2kzMDAu
 
-#regzbot poke
+--b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
 
-> diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
-> index 368d26da0d6a..51c22e7f9647 100644
-> --- a/drivers/gpu/drm/qxl/qxl_release.c
-> +++ b/drivers/gpu/drm/qxl/qxl_release.c
-> @@ -20,8 +20,6 @@
->   * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->   */
->  
-> -#include <linux/delay.h>
-> -
->  #include <trace/events/dma_fence.h>
->  
->  #include "qxl_drv.h"
-> @@ -59,14 +57,24 @@ static long qxl_fence_wait(struct dma_fence *fence, bool intr,
->  {
->  	struct qxl_device *qdev;
->  	unsigned long cur, end = jiffies + timeout;
-> +	signed long iterations = 1;
-> +	signed long timeout_fraction = timeout;
->  
->  	qdev = container_of(fence->lock, struct qxl_device, release_lock);
->  
-> -	if (!wait_event_timeout(qdev->release_event,
-> +	// using HZ as a factor since it is used in ttm_bo_wait_ctx too
-> +	if (timeout_fraction > HZ) {
-> +		iterations = timeout_fraction / HZ;
-> +		timeout_fraction = HZ;
-> +	}
-> +	for (int i = 0; i < iterations; i++) {
-> +		if (wait_event_timeout(
-> +				qdev->release_event,
->  				(dma_fence_is_signaled(fence) ||
-> -				 (qxl_io_notify_oom(qdev), 0)),
-> -				timeout))
-> -		return 0;
-> +					(qxl_io_notify_oom(qdev), 0)),
-> +				timeout_fraction))
-> +			break;
-> +	}
->  
->  	cur = jiffies;
->  	if (time_after(cur, end))
+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0
+cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6IHJnYigyNTUsIDI1NSwg
+MjU1KTsiPkkgYW0gc29ycnkgaWYgdGhpcyBzb3VuZHMgYSBiaXQgcnVkZSwgYnV0IGl0IHJlYWxs
+eSBpcyBpbiBhIGhvcnJpYmxlIHN0YXRlLiBJdCdzIFVJIGlzIG9sZCBhbmQgc2xvdywgaXQgZG9l
+c24ndCB1c2UgdGhlIGdsb2JhbCBtZW51IHN5c3RlbSBhbmQgaXQgbGVha3MgbWVtb3J5IGFsbCBv
+dmVyIHRoZSBwbGFjZS4gSSdtIHNlbmRpbmcgdGhpcyBlLW1haWwgd2l0aCB0aGUgaG9wZSBvZiBz
+b21lb25lIHNlZWluZyBpdCBhbmQgZWl0aGVyIHRha2luZyBhIGNsb3NlciBsb29rIGF0IHRoZSBP
+U1ggc3BpY2UgY2xpZW50IG9yIGdldHRpbmcgYmFjayB0byBtZSB0byBhc2sgZm9yIG1vcmUgZGV0
+YWlscy48YnI+PC9kaXY+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlm
+OyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6
+IHJnYigyNTUsIDI1NSwgMjU1KTsiPjxicj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTog
+QXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsg
+YmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyI+QWx0ZXJuYXRpdmVseSwgaWYg
+aXQncyBubyBsb25nZXIgc3VwcG9ydGVkLCBJIHJlcXVlc3QgdGhhdCBzb21lIHNvcnQgb2YgaW5k
+aWNhdGlvbiBiZSBwdXQgYWJvdXQgaXQgb24gdGhlIHNwaWNlIHdlYnNpdGUuPGJyPjwvZGl2Pjxk
+aXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4
+OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1
+NSk7Ij48c3Bhbj48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlh
+bCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNr
+Z3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSk7Ij48c3Bhbj48YnI+PC9zcGFuPjwvZGl2
+PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAx
+NHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUs
+IDI1NSk7Ij48c3Bhbj48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBB
+cmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBi
+YWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSk7Ij48c3Bhbj4tIEtpbmQgcmVnYXJk
+cywgcHJlc2kzMDAuPGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXJp
+YWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsgYmFj
+a2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyI+PGJyPjwvZGl2Pg==
+
+
+--b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg--
+
