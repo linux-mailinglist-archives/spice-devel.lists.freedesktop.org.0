@@ -2,41 +2,73 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E980D889834
-	for <lists+spice-devel@lfdr.de>; Mon, 25 Mar 2024 10:31:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F7A988AD4B
+	for <lists+spice-devel@lfdr.de>; Mon, 25 Mar 2024 19:13:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 25F3B10E3D7;
-	Mon, 25 Mar 2024 09:31:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A1D5410E362;
+	Mon, 25 Mar 2024 18:13:02 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="VJyE1WgV";
+	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="bPfKekjL";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
- [185.70.41.103])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2BB8F10E8B2
- for <spice-devel@lists.freedesktop.org>; Sat, 23 Mar 2024 17:10:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1711213803; x=1711473003;
- bh=ryKEviaNredmFQJXopu4Jc2HY3PQIcS9VfGWBGjlvZA=;
- h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=VJyE1WgVuU7MIE3CEnOIUmFtVRHNODbyiBXaY418HHcgeVvcLlGbs0zZU+n4RpsEk
- 5qhms1CxbtFiJ4jT3g/GYi0otSAEVmK9CEw+eFzCbUUgZuI51uFFu6KEOLZ4k99Pev
- WcEFb/3dNqPK9Rwwtfss4uosEuzIbAhaQagA61bl/3URo1vemCPOmIYgYB/NMoqhgv
- L1mDedmRgv3eKzbD0uCq3A8mnT4X1erviK7jJKAxuFWw0aOl7LEySo34Eq0N+0e3fh
- kcfMFqrQ26HK1giSHZBIQ4Uhf7Mlce+fujKvdBvzkZEgAgv+B9eYWRJbmrZ6FDcza2
- ljzay5ec9symQ==
-Date: Sat, 23 Mar 2024 17:09:50 +0000
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-From: presi300work <presi300work@proton.me>
-Subject: The OSX Spice client is in a horrible state.
-Message-ID: <886Bd_iZ_IAFax3kBixdEnBZlHJ27EU9hxVi4MvWzxMUUyBwMuwSJbEuW3t32uXgpUUf0H_-VeBMQKnF2gSMN82kbA1-9Lkxqqv2n0HJuYc=@proton.me>
-Feedback-ID: 102926166:user:proton
+X-Greylist: delayed 471 seconds by postgrey-1.36 at gabe;
+ Mon, 25 Mar 2024 18:13:01 UTC
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6792E10E362
+ for <spice-devel@lists.freedesktop.org>; Mon, 25 Mar 2024 18:13:01 +0000 (UTC)
+Received: from mail.home (82-181-196-180.bb.dnainternet.fi [82.181.196.180])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: timo.lindfors)
+ by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4V3LSL5zV3z49PyQ;
+ Mon, 25 Mar 2024 20:05:06 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
+ t=1711389907;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=2gYqttna5RYIWg1ctrXj/JcQYIJNixUHXL4FGMN7Ml0=;
+ b=bPfKekjLPwuBte0CvSEosRdWySHg82tE/q4Hijf6oRCgRbMYEM8jdkobb75glhX4KwQ5pE
+ XJvJ9h9yRgM2IQ/Q3/kaEJoNLzk7VxuDhM/i5oK3FIHdsePWx0USq3WAwify051oAK+Cx9
+ JsdMhEENbpS6A1D/EiV2B2BoFQfKRPyw7pWv97ncds9PW9K3j9iFYzYK3FU3oA3J4CIWE/
+ ygQCrL427qHULimatwsKT1yLOXdroqICX4LuZ360KsOdAYbBjqJkROeDy8QK2f8RLAQW+p
+ YxlDaq3FFJRRyNAKVlTmWux4Q2FwPpV9cpAHg8iR0Aa74eYuX3Ebw8fNSryPNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=lahtoruutu; t=1711389907;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=2gYqttna5RYIWg1ctrXj/JcQYIJNixUHXL4FGMN7Ml0=;
+ b=tqB46P7atTmX3v//GOhFJ7czBMr9iC3nP0UIYXdvMs8hTv3rj79WtCI9BkMddU5ONBm53V
+ rk5uIbds7suk74ivUt0T3Lx3CtjlzFHZzvZcgvCNbcOze5gNlpLzTqGsV0FFLZn+nvLLaN
+ K4PF7xQ5nu5k3vhkIsDw/5/8zGfTHA44HiOzSE+htgf+Ax620Omo+iBMmJepg7L86yK7H9
+ Y3zwFvBPjP45oNO1RWls/gh+Qz+PshS5+p05fwjtVCLu26r1REQoc69C5QhSOGGDmyErm+
+ afocttkv6dbzFR7as4ULb+7Oj/uyEtyQ49fNghywIupRwq/hY1XhwedFCwIpyA==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=timo.lindfors smtp.mailfrom=timo.lindfors@iki.fi
+ARC-Seal: i=1; s=lahtoruutu; d=iki.fi; t=1711389907; a=rsa-sha256; cv=none;
+ b=g72dBHqLPIyg1poemFmZEv1Bz0T1VfpyEith5ZB4k2i1LoVOO4Sd+4QsUdWk4NkXBe7PZX
+ hNibVgaehX7HQdDgxxDLn4pGjrFwbagFpYglcSmQADiHqSZskDldJhXvmkT+DRdxGcbIXv
+ JJUOPrIoJW4hkJQG7AQgwCdqyXN7wglk89keW6uRR498PXpbJIFnPoYNvCFSqv2cIEI5f+
+ YU5RGXF4Ckv11ISEw3oWa9iX0dRXHEId3Je63jd7zNoqoP3j7y5/2Tel6dNnaiyNM7lss3
+ 9/thyr5FNu0hNjwJcjcgYOYYzr1VwzUQmiOrwE0epFqm/hUlZAVyUaSipzJKeQ==
+Received: from gateway2.home ([10.0.9.1] helo=dummy.faircode.eu)
+ by mail.home with esmtp (Exim 4.89)
+ (envelope-from <timo.lindfors@iki.fi>)
+ id 1rooh0-0007j6-Bi; Mon, 25 Mar 2024 20:05:06 +0200
+Date: Mon, 25 Mar 2024 20:05:02 +0200 (GMT+02:00)
+From: Timo Lindfors <timo.lindfors@iki.fi>
+To: presi300work <presi300work@proton.me>
+Cc: spice-devel@lists.freedesktop.org
+Message-ID: <5ef26de4-0c0a-45b8-8b1f-fa78eb39be5b@iki.fi>
+In-Reply-To: <886Bd_iZ_IAFax3kBixdEnBZlHJ27EU9hxVi4MvWzxMUUyBwMuwSJbEuW3t32uXgpUUf0H_-VeBMQKnF2gSMN82kbA1-9Lkxqqv2n0HJuYc=@proton.me>
+References: <886Bd_iZ_IAFax3kBixdEnBZlHJ27EU9hxVi4MvWzxMUUyBwMuwSJbEuW3t32uXgpUUf0H_-VeBMQKnF2gSMN82kbA1-9Lkxqqv2n0HJuYc=@proton.me>
+Subject: Re: The OSX Spice client is in a horrible state.
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg"
-X-Mailman-Approved-At: Mon, 25 Mar 2024 09:31:16 +0000
+Content-Type: multipart/alternative; 
+ boundary="----=_Part_3_34659021.1711389903803"
+X-Correlation-ID: <5ef26de4-0c0a-45b8-8b1f-fa78eb39be5b@iki.fi>
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,55 +83,75 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
+------=_Part_3_34659021.1711389903803
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+Hi,
 
-SSBhbSBzb3JyeSBpZiB0aGlzIHNvdW5kcyBhIGJpdCBydWRlLCBidXQgaXQgcmVhbGx5IGlzIGlu
-IGEgaG9ycmlibGUgc3RhdGUuIEl0J3MgVUkgaXMgb2xkIGFuZCBzbG93LCBpdCBkb2Vzbid0IHVz
-ZSB0aGUgZ2xvYmFsIG1lbnUgc3lzdGVtIGFuZCBpdCBsZWFrcyBtZW1vcnkgYWxsIG92ZXIgdGhl
-IHBsYWNlLiBJJ20gc2VuZGluZyB0aGlzIGUtbWFpbCB3aXRoIHRoZSBob3BlIG9mIHNvbWVvbmUg
-c2VlaW5nIGl0IGFuZCBlaXRoZXIgdGFraW5nIGEgY2xvc2VyIGxvb2sgYXQgdGhlIE9TWCBzcGlj
-ZSBjbGllbnQgb3IgZ2V0dGluZyBiYWNrIHRvIG1lIHRvIGFzayBmb3IgbW9yZSBkZXRhaWxzLgoK
-QWx0ZXJuYXRpdmVseSwgaWYgaXQncyBubyBsb25nZXIgc3VwcG9ydGVkLCBJIHJlcXVlc3QgdGhh
-dCBzb21lIHNvcnQgb2YgaW5kaWNhdGlvbiBiZSBwdXQgYWJvdXQgaXQgb24gdGhlIHNwaWNlIHdl
-YnNpdGUuCgotIEtpbmQgcmVnYXJkcywgcHJlc2kzMDAu
+Do you mean the pre-built bundle? I think the os x users I know are using virt-manager from homebrew instead.
 
---b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
+-Timo
 
-PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE0
-cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6IHJnYigyNTUsIDI1NSwg
-MjU1KTsiPkkgYW0gc29ycnkgaWYgdGhpcyBzb3VuZHMgYSBiaXQgcnVkZSwgYnV0IGl0IHJlYWxs
-eSBpcyBpbiBhIGhvcnJpYmxlIHN0YXRlLiBJdCdzIFVJIGlzIG9sZCBhbmQgc2xvdywgaXQgZG9l
-c24ndCB1c2UgdGhlIGdsb2JhbCBtZW51IHN5c3RlbSBhbmQgaXQgbGVha3MgbWVtb3J5IGFsbCBv
-dmVyIHRoZSBwbGFjZS4gSSdtIHNlbmRpbmcgdGhpcyBlLW1haWwgd2l0aCB0aGUgaG9wZSBvZiBz
-b21lb25lIHNlZWluZyBpdCBhbmQgZWl0aGVyIHRha2luZyBhIGNsb3NlciBsb29rIGF0IHRoZSBP
-U1ggc3BpY2UgY2xpZW50IG9yIGdldHRpbmcgYmFjayB0byBtZSB0byBhc2sgZm9yIG1vcmUgZGV0
-YWlscy48YnI+PC9kaXY+PGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlm
-OyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6
-IHJnYigyNTUsIDI1NSwgMjU1KTsiPjxicj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTog
-QXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsg
-YmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyI+QWx0ZXJuYXRpdmVseSwgaWYg
-aXQncyBubyBsb25nZXIgc3VwcG9ydGVkLCBJIHJlcXVlc3QgdGhhdCBzb21lIHNvcnQgb2YgaW5k
-aWNhdGlvbiBiZSBwdXQgYWJvdXQgaXQgb24gdGhlIHNwaWNlIHdlYnNpdGUuPGJyPjwvZGl2Pjxk
-aXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4
-OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1
-NSk7Ij48c3Bhbj48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlh
-bCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNr
-Z3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSk7Ij48c3Bhbj48YnI+PC9zcGFuPjwvZGl2
-PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAx
-NHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUs
-IDI1NSk7Ij48c3Bhbj48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBB
-cmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDAsIDAsIDApOyBi
-YWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSk7Ij48c3Bhbj4tIEtpbmQgcmVnYXJk
-cywgcHJlc2kzMDAuPGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXJp
-YWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYigwLCAwLCAwKTsgYmFj
-a2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyI+PGJyPjwvZGl2Pg==
+Mar 25, 2024 11:31:38 presi300work <presi300work@proton.me>:
 
+> I am sorry if this sounds a bit rude, but it really is in a horrible state. It's UI is old and slow, it doesn't use the global menu system and it leaks memory all over the place. I'm sending this e-mail with the hope of someone seeing it and either taking a closer look at the OSX spice client or getting back to me to ask for more details.
+> 
+> Alternatively, if it's no longer supported, I request that some sort of indication be put about it on the spice website.
+> 
+> 
+> 
+> - Kind regards, presi300.
+> 
 
---b1_iCSa2G4fCdnUUTwOhaBr6h0En0y77k8JohzNOkg--
+------=_Part_3_34659021.1711389903803
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ </head>
+ <body>
+  <span dir="ltr" style="margin-top:0; margin-bottom:0;">Hi,</span>
+  <br>
+  <br><span dir="ltr" style="margin-top:0; margin-bottom:0;">Do you mean the pre-built bundle? I think the os x users I know are using virt-manager from homebrew instead.</span>
+  <br>
+  <br><span dir="ltr" style="margin-top:0; margin-bottom:0;">-Timo</span>
+  <br>
+  <div>
+   <div dir="ltr">
+    <p>Mar 25, 2024 11:31:38 presi300work &lt;presi300work@proton.me&gt;:</p>
+   </div>
+   <blockquote style="margin:0;border-left:3px solid #ccc; padding-left:10px">
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     I am sorry if this sounds a bit rude, but it really is in a horrible state. It's UI is old and slow, it doesn't use the global menu system and it leaks memory all over the place. I'm sending this e-mail with the hope of someone seeing it and either taking a closer look at the OSX spice client or getting back to me to ask for more details. 
+     <br>
+    </div>
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     <br>
+    </div>
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     Alternatively, if it's no longer supported, I request that some sort of indication be put about it on the spice website. 
+     <br>
+    </div>
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     <span><br></span>
+    </div>
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     <span><br></span>
+    </div>
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     <span><br></span>
+    </div>
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     <span>- Kind regards, presi300.<br></span>
+    </div>
+    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
+     <br>
+    </div>
+   </blockquote>
+  </div>
+ </body>
+</html>
+------=_Part_3_34659021.1711389903803--
