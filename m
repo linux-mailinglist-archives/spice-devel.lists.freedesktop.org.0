@@ -2,73 +2,70 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F7A988AD4B
-	for <lists+spice-devel@lfdr.de>; Mon, 25 Mar 2024 19:13:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30F0D88D97B
+	for <lists+spice-devel@lfdr.de>; Wed, 27 Mar 2024 09:51:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A1D5410E362;
-	Mon, 25 Mar 2024 18:13:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 19A9A10F961;
+	Wed, 27 Mar 2024 08:51:49 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="bPfKekjL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LmBlsOn2";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 471 seconds by postgrey-1.36 at gabe;
- Mon, 25 Mar 2024 18:13:01 UTC
-Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6792E10E362
- for <spice-devel@lists.freedesktop.org>; Mon, 25 Mar 2024 18:13:01 +0000 (UTC)
-Received: from mail.home (82-181-196-180.bb.dnainternet.fi [82.181.196.180])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- (Authenticated sender: timo.lindfors)
- by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4V3LSL5zV3z49PyQ;
- Mon, 25 Mar 2024 20:05:06 +0200 (EET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
- t=1711389907;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2gYqttna5RYIWg1ctrXj/JcQYIJNixUHXL4FGMN7Ml0=;
- b=bPfKekjLPwuBte0CvSEosRdWySHg82tE/q4Hijf6oRCgRbMYEM8jdkobb75glhX4KwQ5pE
- XJvJ9h9yRgM2IQ/Q3/kaEJoNLzk7VxuDhM/i5oK3FIHdsePWx0USq3WAwify051oAK+Cx9
- JsdMhEENbpS6A1D/EiV2B2BoFQfKRPyw7pWv97ncds9PW9K3j9iFYzYK3FU3oA3J4CIWE/
- ygQCrL427qHULimatwsKT1yLOXdroqICX4LuZ360KsOdAYbBjqJkROeDy8QK2f8RLAQW+p
- YxlDaq3FFJRRyNAKVlTmWux4Q2FwPpV9cpAHg8iR0Aa74eYuX3Ebw8fNSryPNQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
- s=lahtoruutu; t=1711389907;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2gYqttna5RYIWg1ctrXj/JcQYIJNixUHXL4FGMN7Ml0=;
- b=tqB46P7atTmX3v//GOhFJ7czBMr9iC3nP0UIYXdvMs8hTv3rj79WtCI9BkMddU5ONBm53V
- rk5uIbds7suk74ivUt0T3Lx3CtjlzFHZzvZcgvCNbcOze5gNlpLzTqGsV0FFLZn+nvLLaN
- K4PF7xQ5nu5k3vhkIsDw/5/8zGfTHA44HiOzSE+htgf+Ax620Omo+iBMmJepg7L86yK7H9
- Y3zwFvBPjP45oNO1RWls/gh+Qz+PshS5+p05fwjtVCLu26r1REQoc69C5QhSOGGDmyErm+
- afocttkv6dbzFR7as4ULb+7Oj/uyEtyQ49fNghywIupRwq/hY1XhwedFCwIpyA==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=timo.lindfors smtp.mailfrom=timo.lindfors@iki.fi
-ARC-Seal: i=1; s=lahtoruutu; d=iki.fi; t=1711389907; a=rsa-sha256; cv=none;
- b=g72dBHqLPIyg1poemFmZEv1Bz0T1VfpyEith5ZB4k2i1LoVOO4Sd+4QsUdWk4NkXBe7PZX
- hNibVgaehX7HQdDgxxDLn4pGjrFwbagFpYglcSmQADiHqSZskDldJhXvmkT+DRdxGcbIXv
- JJUOPrIoJW4hkJQG7AQgwCdqyXN7wglk89keW6uRR498PXpbJIFnPoYNvCFSqv2cIEI5f+
- YU5RGXF4Ckv11ISEw3oWa9iX0dRXHEId3Je63jd7zNoqoP3j7y5/2Tel6dNnaiyNM7lss3
- 9/thyr5FNu0hNjwJcjcgYOYYzr1VwzUQmiOrwE0epFqm/hUlZAVyUaSipzJKeQ==
-Received: from gateway2.home ([10.0.9.1] helo=dummy.faircode.eu)
- by mail.home with esmtp (Exim 4.89)
- (envelope-from <timo.lindfors@iki.fi>)
- id 1rooh0-0007j6-Bi; Mon, 25 Mar 2024 20:05:06 +0200
-Date: Mon, 25 Mar 2024 20:05:02 +0200 (GMT+02:00)
-From: Timo Lindfors <timo.lindfors@iki.fi>
-To: presi300work <presi300work@proton.me>
-Cc: spice-devel@lists.freedesktop.org
-Message-ID: <5ef26de4-0c0a-45b8-8b1f-fa78eb39be5b@iki.fi>
-In-Reply-To: <886Bd_iZ_IAFax3kBixdEnBZlHJ27EU9hxVi4MvWzxMUUyBwMuwSJbEuW3t32uXgpUUf0H_-VeBMQKnF2gSMN82kbA1-9Lkxqqv2n0HJuYc=@proton.me>
-References: <886Bd_iZ_IAFax3kBixdEnBZlHJ27EU9hxVi4MvWzxMUUyBwMuwSJbEuW3t32uXgpUUf0H_-VeBMQKnF2gSMN82kbA1-9Lkxqqv2n0HJuYc=@proton.me>
-Subject: Re: The OSX Spice client is in a horrible state.
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
+ [209.85.216.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D72D10F1AF;
+ Tue, 26 Mar 2024 18:05:04 +0000 (UTC)
+Received: by mail-pj1-f43.google.com with SMTP id
+ 98e67ed59e1d1-29c75e348afso4261573a91.2; 
+ Tue, 26 Mar 2024 11:05:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711476303; x=1712081103; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=InAZ9/C9EDyJhkW+bEV5eavwbh4jrGbQhGajHqMOaXs=;
+ b=LmBlsOn2gBY0xrGi6ldBA079Pg8f6EEUBzFzg+4biGo9Sbk8QwEWOvIKnfyl3E/PXk
+ sC4GXttHVtPXZ9ZDGD1EZfQtEfz6cBxryDNxMWFiwfRH676ZQDbrOjdyvIzvTUozBnPI
+ dgMAjupkNLwq0XWKKSMUTiVoL0mE9HmkaMiGXXzhy13Ixk5Fk9OuIupLLLvffp+HttmT
+ SEFW1C2VewEDnaePKh4orVnO1u4NlAOHfir1mYyyD2QdMVq2+oWeswObi3crWdsioyGQ
+ s57sb4650ueNm2aAUytowtBtQ6QReUSsMFIGJkO0R6K/W5N+FZCiZRphT2+LwQ0pTeRq
+ +Vjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711476303; x=1712081103;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=InAZ9/C9EDyJhkW+bEV5eavwbh4jrGbQhGajHqMOaXs=;
+ b=qm6MOPZOrlIvHYoUxmqeSZ9rZXQq/UQn3xWR8PL0dz5PVcLuNllCldjDIP4IK/fnU1
+ ul6I568JwNHpVnFdiBtlrui/+85U/W9rYIeUCyXZ2kTN34+3NSUPoLIzirf54mO/yy7c
+ dHkgNORYNVdqwEc6YLzJrHnujggkhUyw0Jy8RDULfANjeqQfcapsHbe0GvMwgFQmDouo
+ r6xty8VVaEvePJ4goOVQEQGtgMpKYpiCXpdEvUM+UXIMKhwuygLrhG22b2J8tpQSeLwJ
+ EJEee5uuMzAMRg6oldNj5d1Xvd30B3MYTbJ08Hr6utGrq4q9foehrSk4BUBu+tJm46sP
+ 21SQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWHgQxth0J6ybzv1/NLVZP8OVr7dMVMslD73blA2O4T+RZAshZ9qzJcS+rFveFrYfz+4j55/CvvFc9UFW3XcgPOK54VbME8qdR3ybTsrxD8EBe1PEIPtz25rid8Mwiu8CvVQkzNnDwm7QbEkJipPJdUANo=
+X-Gm-Message-State: AOJu0YxDUqeQGXn2uBhyl45LHndDouXmMuAZlA8YKvl9Cg4yga58PgHb
+ uJ5G9xlRmD+eRvXrOIxjME+jPBquR/TqlZCENgSjXfqnePNn2XonuW7Ro+VezT4XKgwciEAUiBE
+ cZmdgEA1BIelKfAyThoVte+s6c6o=
+X-Google-Smtp-Source: AGHT+IEBhA+WnnRTf8AR2UyUOmIouX8FcColXZqyCdRGDNFO76HxCoWYBYVkcsPJZ6LizCzy9BOlPUU/AKNzLxSVaQ8=
+X-Received: by 2002:a17:90b:380c:b0:29f:e443:204f with SMTP id
+ mq12-20020a17090b380c00b0029fe443204fmr8861033pjb.18.1711476303337; Tue, 26
+ Mar 2024 11:05:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; 
- boundary="----=_Part_3_34659021.1711389903803"
-X-Correlation-ID: <5ef26de4-0c0a-45b8-8b1f-fa78eb39be5b@iki.fi>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Tue, 26 Mar 2024 19:04:34 +0100
+Message-ID: <CANiq72mbsAYmR_dRPpQQ=9-NWhTtp0TWiOz0v=V-0AvwYbWw4A@mail.gmail.com>
+Subject: drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set but
+ not used
+To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, 
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org, 
+ dri-devel <dri-devel@lists.freedesktop.org>, 
+ linux-kernel <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 27 Mar 2024 08:51:45 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,75 +80,38 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-------=_Part_3_34659021.1711389903803
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
 Hi,
 
-Do you mean the pre-built bundle? I think the os x users I know are using virt-manager from homebrew instead.
+In today's next, I got:
 
--Timo
+    drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set
+but not used [-Werror,-Wunused-but-set-variable]
 
-Mar 25, 2024 11:31:38 presi300work <presi300work@proton.me>:
+`count` seems to be there since commit f64122c1f6ad ("drm: add new QXL
+driver. (v1.4)").
 
-> I am sorry if this sounds a bit rude, but it really is in a horrible state. It's UI is old and slow, it doesn't use the global menu system and it leaks memory all over the place. I'm sending this e-mail with the hope of someone seeing it and either taking a closer look at the OSX spice client or getting back to me to ask for more details.
-> 
-> Alternatively, if it's no longer supported, I request that some sort of indication be put about it on the spice website.
-> 
-> 
-> 
-> - Kind regards, presi300.
-> 
+Untested diff below -- if you want a formal patch, please let me know.
 
-------=_Part_3_34659021.1711389903803
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cheers,
+Miguel
 
-<html>
- <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- </head>
- <body>
-  <span dir="ltr" style="margin-top:0; margin-bottom:0;">Hi,</span>
-  <br>
-  <br><span dir="ltr" style="margin-top:0; margin-bottom:0;">Do you mean the pre-built bundle? I think the os x users I know are using virt-manager from homebrew instead.</span>
-  <br>
-  <br><span dir="ltr" style="margin-top:0; margin-bottom:0;">-Timo</span>
-  <br>
-  <div>
-   <div dir="ltr">
-    <p>Mar 25, 2024 11:31:38 presi300work &lt;presi300work@proton.me&gt;:</p>
-   </div>
-   <blockquote style="margin:0;border-left:3px solid #ccc; padding-left:10px">
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     I am sorry if this sounds a bit rude, but it really is in a horrible state. It's UI is old and slow, it doesn't use the global menu system and it leaks memory all over the place. I'm sending this e-mail with the hope of someone seeing it and either taking a closer look at the OSX spice client or getting back to me to ask for more details. 
-     <br>
-    </div>
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     <br>
-    </div>
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     Alternatively, if it's no longer supported, I request that some sort of indication be put about it on the spice website. 
-     <br>
-    </div>
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     <span><br></span>
-    </div>
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     <span><br></span>
-    </div>
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     <span><br></span>
-    </div>
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     <span>- Kind regards, presi300.<br></span>
-    </div>
-    <div style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 14px;font-family: Arial, sans-serif">
-     <br>
-    </div>
-   </blockquote>
-  </div>
- </body>
-</html>
-------=_Part_3_34659021.1711389903803--
+diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
+index 281edab518cd..d6ea01f3797b 100644
+--- a/drivers/gpu/drm/qxl/qxl_cmd.c
++++ b/drivers/gpu/drm/qxl/qxl_cmd.c
+@@ -421,7 +421,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+ {
+        uint32_t handle;
+        int idr_ret;
+-       int count = 0;
+ again:
+        idr_preload(GFP_ATOMIC);
+        spin_lock(&qdev->surf_id_idr_lock);
+@@ -433,7 +432,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+        handle = idr_ret;
+
+        if (handle >= qdev->rom->n_surfaces) {
+-               count++;
+                spin_lock(&qdev->surf_id_idr_lock);
+                idr_remove(&qdev->surf_id_idr, handle);
+                spin_unlock(&qdev->surf_id_idr_lock);
