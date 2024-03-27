@@ -2,69 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30F0D88D97B
-	for <lists+spice-devel@lfdr.de>; Wed, 27 Mar 2024 09:51:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AAB488D97A
+	for <lists+spice-devel@lfdr.de>; Wed, 27 Mar 2024 09:51:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19A9A10F961;
-	Wed, 27 Mar 2024 08:51:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D1A210F07A;
+	Wed, 27 Mar 2024 08:51:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LmBlsOn2";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Di0d0Yt+";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1D72D10F1AF;
- Tue, 26 Mar 2024 18:05:04 +0000 (UTC)
-Received: by mail-pj1-f43.google.com with SMTP id
- 98e67ed59e1d1-29c75e348afso4261573a91.2; 
- Tue, 26 Mar 2024 11:05:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711476303; x=1712081103; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=InAZ9/C9EDyJhkW+bEV5eavwbh4jrGbQhGajHqMOaXs=;
- b=LmBlsOn2gBY0xrGi6ldBA079Pg8f6EEUBzFzg+4biGo9Sbk8QwEWOvIKnfyl3E/PXk
- sC4GXttHVtPXZ9ZDGD1EZfQtEfz6cBxryDNxMWFiwfRH676ZQDbrOjdyvIzvTUozBnPI
- dgMAjupkNLwq0XWKKSMUTiVoL0mE9HmkaMiGXXzhy13Ixk5Fk9OuIupLLLvffp+HttmT
- SEFW1C2VewEDnaePKh4orVnO1u4NlAOHfir1mYyyD2QdMVq2+oWeswObi3crWdsioyGQ
- s57sb4650ueNm2aAUytowtBtQ6QReUSsMFIGJkO0R6K/W5N+FZCiZRphT2+LwQ0pTeRq
- +Vjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711476303; x=1712081103;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=InAZ9/C9EDyJhkW+bEV5eavwbh4jrGbQhGajHqMOaXs=;
- b=qm6MOPZOrlIvHYoUxmqeSZ9rZXQq/UQn3xWR8PL0dz5PVcLuNllCldjDIP4IK/fnU1
- ul6I568JwNHpVnFdiBtlrui/+85U/W9rYIeUCyXZ2kTN34+3NSUPoLIzirf54mO/yy7c
- dHkgNORYNVdqwEc6YLzJrHnujggkhUyw0Jy8RDULfANjeqQfcapsHbe0GvMwgFQmDouo
- r6xty8VVaEvePJ4goOVQEQGtgMpKYpiCXpdEvUM+UXIMKhwuygLrhG22b2J8tpQSeLwJ
- EJEee5uuMzAMRg6oldNj5d1Xvd30B3MYTbJ08Hr6utGrq4q9foehrSk4BUBu+tJm46sP
- 21SQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWHgQxth0J6ybzv1/NLVZP8OVr7dMVMslD73blA2O4T+RZAshZ9qzJcS+rFveFrYfz+4j55/CvvFc9UFW3XcgPOK54VbME8qdR3ybTsrxD8EBe1PEIPtz25rid8Mwiu8CvVQkzNnDwm7QbEkJipPJdUANo=
-X-Gm-Message-State: AOJu0YxDUqeQGXn2uBhyl45LHndDouXmMuAZlA8YKvl9Cg4yga58PgHb
- uJ5G9xlRmD+eRvXrOIxjME+jPBquR/TqlZCENgSjXfqnePNn2XonuW7Ro+VezT4XKgwciEAUiBE
- cZmdgEA1BIelKfAyThoVte+s6c6o=
-X-Google-Smtp-Source: AGHT+IEBhA+WnnRTf8AR2UyUOmIouX8FcColXZqyCdRGDNFO76HxCoWYBYVkcsPJZ6LizCzy9BOlPUU/AKNzLxSVaQ8=
-X-Received: by 2002:a17:90b:380c:b0:29f:e443:204f with SMTP id
- mq12-20020a17090b380c00b0029fe443204fmr8861033pjb.18.1711476303337; Tue, 26
- Mar 2024 11:05:03 -0700 (PDT)
-MIME-Version: 1.0
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Tue, 26 Mar 2024 19:04:34 +0100
-Message-ID: <CANiq72mbsAYmR_dRPpQQ=9-NWhTtp0TWiOz0v=V-0AvwYbWw4A@mail.gmail.com>
-Subject: drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set but
- not used
-To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, 
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org, 
- dri-devel <dri-devel@lists.freedesktop.org>, 
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CAA5910F905;
+ Wed, 27 Mar 2024 07:59:09 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 446C1CE253F;
+ Wed, 27 Mar 2024 07:59:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D0C3C433C7;
+ Wed, 27 Mar 2024 07:59:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711526345;
+ bh=3Vch1QVVKz9oQdQipI2bgreZmQt1j9KfA9zuNaGttL4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Di0d0Yt+kulV0SFZXj34A8yHfdbrIl/RQIlgdOWmOgu0vU93q7/uZcKNfJbM19Owo
+ +BZ42uXnvBbs2aNMWX2zEVxEyEJJPMwojzQAd/oOuGc6hsuzo9sjEfue92kS5s1+tL
+ +X0T/IGlGpYESHZQDwjrSGM0goF1hyFWvEyWXrPg1ad4hI7cP4+ovYoM/hTgx8fCb/
+ EZkqiKMKRqfh12FvgojNrxLdXU0BvomFMfwgXagDQybevdkNVgP/cLwVpzGTfko6us
+ yqkf2Kn+Jp3UowrzesRfAiXd+8e3L1KqUh1f6QDNw2jNEHTy88aStfZfM1dI3aIme8
+ Qz+9AY3eVnZ4w==
+Date: Wed, 27 Mar 2024 08:59:02 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ virtualization@lists.linux.dev, 
+ spice-devel@lists.freedesktop.org, dri-devel <dri-devel@lists.freedesktop.org>,
  linux-kernel <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set
+ but not used
+Message-ID: <20240327-magnetic-nonchalant-hare-bbe8d2@houat>
+References: <CANiq72mbsAYmR_dRPpQQ=9-NWhTtp0TWiOz0v=V-0AvwYbWw4A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha384;
+ protocol="application/pgp-signature"; boundary="6rt63sq2kbvenrzj"
+Content-Disposition: inline
+In-Reply-To: <CANiq72mbsAYmR_dRPpQQ=9-NWhTtp0TWiOz0v=V-0AvwYbWw4A@mail.gmail.com>
 X-Mailman-Approved-At: Wed, 27 Mar 2024 08:51:45 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -80,38 +64,67 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
 
-In today's next, I got:
+--6rt63sq2kbvenrzj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-    drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set
-but not used [-Werror,-Wunused-but-set-variable]
+Hi Miguel,
 
-`count` seems to be there since commit f64122c1f6ad ("drm: add new QXL
-driver. (v1.4)").
+On Tue, Mar 26, 2024 at 07:04:34PM +0100, Miguel Ojeda wrote:
+> Hi,
+>=20
+> In today's next, I got:
+>=20
+>     drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set
+> but not used [-Werror,-Wunused-but-set-variable]
+>=20
+> `count` seems to be there since commit f64122c1f6ad ("drm: add new QXL
+> driver. (v1.4)").
+>=20
+> Untested diff below -- if you want a formal patch, please let me know.
+>=20
+> Cheers,
+> Miguel
+>=20
+> diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
+> index 281edab518cd..d6ea01f3797b 100644
+> --- a/drivers/gpu/drm/qxl/qxl_cmd.c
+> +++ b/drivers/gpu/drm/qxl/qxl_cmd.c
+> @@ -421,7 +421,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+>  {
+>         uint32_t handle;
+>         int idr_ret;
+> -       int count =3D 0;
+>  again:
+>         idr_preload(GFP_ATOMIC);
+>         spin_lock(&qdev->surf_id_idr_lock);
+> @@ -433,7 +432,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+>         handle =3D idr_ret;
+>=20
+>         if (handle >=3D qdev->rom->n_surfaces) {
+> -               count++;
+>                 spin_lock(&qdev->surf_id_idr_lock);
+>                 idr_remove(&qdev->surf_id_idr, handle);
+>                 spin_unlock(&qdev->surf_id_idr_lock);
+>=20
 
-Untested diff below -- if you want a formal patch, please let me know.
+It looks reasonable to me, can you send a formal patch?
 
-Cheers,
-Miguel
+Thanks!
+Maxime
 
-diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
-index 281edab518cd..d6ea01f3797b 100644
---- a/drivers/gpu/drm/qxl/qxl_cmd.c
-+++ b/drivers/gpu/drm/qxl/qxl_cmd.c
-@@ -421,7 +421,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
- {
-        uint32_t handle;
-        int idr_ret;
--       int count = 0;
- again:
-        idr_preload(GFP_ATOMIC);
-        spin_lock(&qdev->surf_id_idr_lock);
-@@ -433,7 +432,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
-        handle = idr_ret;
+--6rt63sq2kbvenrzj
+Content-Type: application/pgp-signature; name="signature.asc"
 
-        if (handle >= qdev->rom->n_surfaces) {
--               count++;
-                spin_lock(&qdev->surf_id_idr_lock);
-                idr_remove(&qdev->surf_id_idr, handle);
-                spin_unlock(&qdev->surf_id_idr_lock);
+-----BEGIN PGP SIGNATURE-----
+
+iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCZgPRxgAKCRAnX84Zoj2+
+duBCAYCkWAxADritRMIdxuo60bi8gMXg3ORzEQ+Re/8bjBZRbnoR6xSqWL/e9li6
+7QpWXHEBewR48AANqEfzQxPcmpLpFROyX8u8HAbDv9hKJuo8mvAnbhPYLB2LBIbR
+B2ivQmRB1A==
+=ZxYE
+-----END PGP SIGNATURE-----
+
+--6rt63sq2kbvenrzj--
