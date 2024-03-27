@@ -2,75 +2,49 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3810388FE98
-	for <lists+spice-devel@lfdr.de>; Thu, 28 Mar 2024 13:05:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 397BF88FE95
+	for <lists+spice-devel@lfdr.de>; Thu, 28 Mar 2024 13:05:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8ECAA1123F1;
-	Thu, 28 Mar 2024 12:05:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B85871123EC;
+	Thu, 28 Mar 2024 12:05:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BNy1IT4n";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oJLaRwV+";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
- [209.85.210.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B751210FD45;
- Wed, 27 Mar 2024 14:44:23 +0000 (UTC)
-Received: by mail-pf1-f169.google.com with SMTP id
- d2e1a72fcca58-6e8f765146fso5257978b3a.0; 
- Wed, 27 Mar 2024 07:44:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711550663; x=1712155463; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7q2C6v07RAOGYu2hu4GY7euXWF8ETU7ffxo3I9AlpmE=;
- b=BNy1IT4n/0Qd9H3hbC1UG28BwzMCo4TmoBGd4wGLjLbg5k80EmHIWhMuLN+3ZNxBY3
- d6cE0XT2MOHvGoZ/rQnNBMO2HriDQKmLb1OCDfT8cXoaMoVOSnAaHFJ1ZEhH2VxppruV
- 7kvqohANIJFvC9GZ2XIPAhicT4lbT/HMGCUoHNaF7BMfiiSPAVSMfpHS7J1zMsEWpzIq
- PE9oBUNndGyNj8kwNAYS7sJugxVRDvgxEKyCjhVqSrl3pea0j7hbJJjcDHd3UetQ9vEJ
- efOGHwe2TFds+urrJDJmfl69bezJoUe9ouZpK7L18xsYFpsx5jOcXd2jQSgwUw44/xsp
- qHrQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711550663; x=1712155463;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7q2C6v07RAOGYu2hu4GY7euXWF8ETU7ffxo3I9AlpmE=;
- b=EbmN33S76omkUXZ4yxylmOBpqsVG8pfToBaXSXIByc+93UKehZXASGfARgQ+aTgFCE
- rAg7cpDUPg8DyUxZ//wb05XXQeGnl0v48BAsU+06PtaqnV2C90Klch9PJpLSW+XKz8p0
- 5Io+id9Dd3zvZTsdpVNZeAss9dFzVkDx/lqTQmm+Qb9xeQX9hpN0MGMIBSc7Efw+iKIG
- rcrOK+OR4rXig/FhBZxKi0CItJ0hNNLL1HyCGRqbeksbd656Z5S99z5js45lCG9uRkgQ
- wz0Co/ajELJ8gaqcMhZ0qmFw7xhM7OjfVs0/KDNBs55ZlASMxk6PFj4SLs1yvvLFWYwp
- uaVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxPlQwT2cLnSJE171ZBTxNCGK0m8pSTBI+3MwEvJdZWONMsUT9wo4NQI6JUfavx3Ce++I3AitWhRGs2HB7nr3k8ZDaqssUfXhp3WXmeexZ0Tjk07XGD7JVEo1B2IJgaUZsSJk8865d6TVKCt8UO5+GnBA=
-X-Gm-Message-State: AOJu0YxDdLHv8V/OlunstyMZ922Atx4iD0ZOc11sUGrJAIbXKgMyVVAt
- vIKjzZmoflPeIflTJDd4yvwGEDbXAHecSa0hVUTeoCU5EA0jqKPc011RU2ptSgoqt1bNC79Tbw/
- zrvWESnpHAEP/lTXzECNxlbLA2bI=
-X-Google-Smtp-Source: AGHT+IE1qaXoQhFdrtV7QT8MND6FcMTo2zAxmPDuHTiYsb86YGvn9Hfou3VfjATjJrHui3jRqwzdKYDjQpt/iPCMqrw=
-X-Received: by 2002:a05:6a20:7a9a:b0:1a3:69e9:63a9 with SMTP id
- u26-20020a056a207a9a00b001a369e963a9mr56558pzh.18.1711550663028; Wed, 27 Mar
- 2024 07:44:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <CANiq72mbsAYmR_dRPpQQ=9-NWhTtp0TWiOz0v=V-0AvwYbWw4A@mail.gmail.com>
- <20240327-magnetic-nonchalant-hare-bbe8d2@houat>
-In-Reply-To: <20240327-magnetic-nonchalant-hare-bbe8d2@houat>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Wed, 27 Mar 2024 15:43:55 +0100
-Message-ID: <CANiq72kqqQfUxLkHJYqeBAhpc6YcX7bfR96gmmbF=j8hEOykqw@mail.gmail.com>
-Subject: Re: drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set
- but not used
-To: Maxime Ripard <mripard@kernel.org>
-Cc: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, 
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6516110FEF8;
+ Wed, 27 Mar 2024 17:56:51 +0000 (UTC)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 00EB7CE2534;
+ Wed, 27 Mar 2024 17:56:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1B8DC433C7;
+ Wed, 27 Mar 2024 17:56:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711562208;
+ bh=pKuISH9h1n83BoSbEk6oIRQvBztb2uVAQCVjoqJHhUw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=oJLaRwV+CJsu2Yrg5VZootPUJY7AFWOEkOAzEDE2SL1OA52sYTmuQOHAfLhSaqRt6
+ yusGg0Ou/c7wyIYWgoBR0mpsEeu5v7DZTINWbk1K7I6jEkagUTx4228++Eh9q6rlcS
+ YHoNiJlhcF/ukHA0WGak2jy44J5O7zCArnXPeEW2Jzf+rdzuKHS2+Twe433TrbNtzg
+ q8mYAkpcY0uT2EBAo1wtbCpr/c934Up7uVIUe6WoWgIDplJbm3j/w4JueLmA+FXTnu
+ xWWYXh6H3An2kqJIVP6QNYrwHMs9T2MYZ4Tq2VRXlCbO9IsT5oBhGg5OGUmjzZHthm
+ X3aIhw7ejkFyQ==
+From: Miguel Ojeda <ojeda@kernel.org>
+To: Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org, 
- dri-devel <dri-devel@lists.freedesktop.org>, 
- linux-kernel <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>
+Cc: David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alon Levy <alevy@redhat.com>, Frediano Ziglio <fziglio@redhat.com>,
+ Miguel Ojeda <ojeda@kernel.org>, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Subject: [PATCH 1/2] drm/qxl: remove unused `count` variable from
+ `qxl_surface_id_alloc()`
+Date: Wed, 27 Mar 2024 18:55:55 +0100
+Message-ID: <20240327175556.233126-1-ojeda@kernel.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 28 Mar 2024 12:05:44 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -86,20 +60,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Wed, Mar 27, 2024 at 8:59=E2=80=AFAM Maxime Ripard <mripard@kernel.org> =
-wrote:
->
-> It looks reasonable to me, can you send a formal patch?
+Clang 14 in an (essentially) defconfig loongarch64 build for next-20240326
+reports [1]:
 
-Will do -- I found another one when running the CI with the above one fixed=
-:
+    drivers/gpu/drm/qxl/qxl_cmd.c:424:6: error: variable 'count' set
+    but not used [-Werror,-Wunused-but-set-variable]
 
-    drivers/gpu/drm/qxl/qxl_ioctl.c:148:14: error: variable
-'num_relocs' set but not used [-Werror,-Wunused-but-set-variable]
+The variable is already unused in the version that got into the tree.
 
-I will send you one for that too then.
+Thus remove the unused variable.
 
-Thanks!
+Fixes: f64122c1f6ad ("drm: add new QXL driver. (v1.4)")
+Closes: https://lore.kernel.org/lkml/CANiq72mjc5t4n25SQvYSrOEhxxpXYPZ4pPzneSJHEnc3qApu2Q@mail.gmail.com/
+Signed-off-by: Miguel Ojeda <ojeda@kernel.org>
+---
+Given there is a loop going on here, it would be good to double-check whether
+this variable was supposed to be used for something useful or if it was just a
+remnant of a version previous to v1.4.
 
-Cheers,
-Miguel
+ drivers/gpu/drm/qxl/qxl_cmd.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
+index 281edab518cd..d6ea01f3797b 100644
+--- a/drivers/gpu/drm/qxl/qxl_cmd.c
++++ b/drivers/gpu/drm/qxl/qxl_cmd.c
+@@ -421,7 +421,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+ {
+ 	uint32_t handle;
+ 	int idr_ret;
+-	int count = 0;
+ again:
+ 	idr_preload(GFP_ATOMIC);
+ 	spin_lock(&qdev->surf_id_idr_lock);
+@@ -433,7 +432,6 @@ int qxl_surface_id_alloc(struct qxl_device *qdev,
+ 	handle = idr_ret;
+
+ 	if (handle >= qdev->rom->n_surfaces) {
+-		count++;
+ 		spin_lock(&qdev->surf_id_idr_lock);
+ 		idr_remove(&qdev->surf_id_idr, handle);
+ 		spin_unlock(&qdev->surf_id_idr_lock);
+
+base-commit: 26074e1be23143b2388cacb36166766c235feb7c
+--
+2.44.0
