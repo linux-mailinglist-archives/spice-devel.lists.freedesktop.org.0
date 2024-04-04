@@ -2,70 +2,78 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 122278978F0
-	for <lists+spice-devel@lfdr.de>; Wed,  3 Apr 2024 21:22:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FF2989A9D3
+	for <lists+spice-devel@lfdr.de>; Sat,  6 Apr 2024 11:14:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9816F112844;
-	Wed,  3 Apr 2024 19:22:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3E7A910ED85;
+	Sat,  6 Apr 2024 09:14:54 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HGpkhoQc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vwwtjqpu";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com
- [209.85.219.170])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9DF17112844
- for <spice-devel@lists.freedesktop.org>; Wed,  3 Apr 2024 19:22:52 +0000 (UTC)
-Received: by mail-yb1-f170.google.com with SMTP id
- 3f1490d57ef6-dcbef31a9dbso197687276.1
- for <spice-devel@lists.freedesktop.org>; Wed, 03 Apr 2024 12:22:52 -0700 (PDT)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
+ [209.85.128.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9AD5B1133B5;
+ Thu,  4 Apr 2024 18:15:14 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4162b016230so6464135e9.3; 
+ Thu, 04 Apr 2024 11:15:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712172171; x=1712776971; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1712254512; x=1712859312; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+SVVOF5cIkIPGz8ihkkeuQxQsxj6ypKxnHUOJEikswU=;
- b=HGpkhoQc+Dy1ICeRofmOhy4Op1klOE2CfhE6JIsJo7+yCPL0oHLRoj4CqcSXnSbyRv
- dPXxrZbeGM3OFZ2KlBRwv90e/pABuJ141YMCNhgvu40ofmqtHEDRZkKvDSEANZRnarwR
- MtFt0x2C6kkr7cpuN3G8k+A5ccg/8EQUNakEs45fZuQZCmT19zyZr64SArVgJZqHDoEy
- 8zNx/ozPq8koFPufFbENz6Fzr6hllwQfBgkS3uXsRNhdo9ZQit+nDOOuKaEBXWsWfTkW
- 00VjKSvrHzkwbUY/zQXr7iURJK5UKUqfSZI9+HmJZs03WEFWWKNPfniNe8d42epHwbAt
- UpJQ==
+ bh=PhXKmsel/QjiG85obJSCvyvZXMQ/jaHgW8CbmNJE+gg=;
+ b=Vwwtjqpus3RhtIOd0DZuSZTOwfw+G89reKzmB8mkgEuydocY1QA0YDmldeRIX5O+Nh
+ gFcbIiNhqAmX2BAvp1Diu07c/HR15SO+gq+kW/0ryB6UtgWvZixKrpXu41YwHw72KkP/
+ bS505O0//K9iYHr8TjYV0UUeE9VYghg1XrzwPJZOCyLk+j+wCE65p+OWVPHShgCi1DNG
+ qQUV/BLmJg649rA/qN8NJvWtpeEHaOJ4WiaG/Sr+DVkaWrWPGAOn2/fbcuuPcKrTvkNo
+ kr9xL1CsrChQWTv7LLU4k/Z/iKqeuNsXvahBZetqLE53I1qdBKnnAiykCNhEQenh2EUy
+ JqVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712172171; x=1712776971;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1712254512; x=1712859312;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+SVVOF5cIkIPGz8ihkkeuQxQsxj6ypKxnHUOJEikswU=;
- b=YEYWlJAc11+sf606A3UjGO9zh/40qZ0D7NdWPAJRi/pQjIvE1pJjiX7jbJYGUYjPVW
- 6Ll5xncWXCEdHBK02yinskSRFvaXGPdYbo+T77DF2421rkFU5kZGEb7cmZOvOaN+oy8a
- fd3cnd1kKloKb0+ecz9S8Ym+32iv9bU7i62u2B8FdIf27Ter82admEIZiLjNFnZ/s6CT
- bczXkq2bs2RMl1JJL6MWJRko5JAeKSGglAejTWonnrQoGqx3WdWWxownSD8zY4UhOC9Y
- ZkFO+YVhGzvEGDujcXdfMvaYxgGLyrZaS3rO3I5Q/AMaWqpKPyhWi4xMMUt8ZD1rB9Pe
- 4vsg==
-X-Gm-Message-State: AOJu0Yy1nytHxf17bTs2Dwoc88nPpNrSbmM5zWiIsereQfWNd3J7Asrb
- +65HfBj1omiWQDTXYR7WG1LEAzRvIAMdXl8dTwTW+Wf4JIJvni0HJaztdtG8Rvz/MiK2WxcJIgV
- d2TYFDyjDq2Uagi7tgSTqEXdZMyuqwPXBywM=
-X-Google-Smtp-Source: AGHT+IE/aXUGc/0vr03I8oLH3WpS+Z/our1HiamFH+G4bAD6paE/K6wgy0qcvlAeuJlV9oUVx0UcFDariaBZAQMEbdw=
-X-Received: by 2002:a25:5f51:0:b0:dc6:9d35:f9aa with SMTP id
- h17-20020a255f51000000b00dc69d35f9aamr504182ybm.19.1712172171473; Wed, 03 Apr
- 2024 12:22:51 -0700 (PDT)
+ bh=PhXKmsel/QjiG85obJSCvyvZXMQ/jaHgW8CbmNJE+gg=;
+ b=op3LhvjW3ADWSaSkx6Y8IVpClC0LQN4fB79uQbek6foVhc+IUx/WdZO/f+/hhIbI5X
+ xWT6jzz4i61ps/JTJd4pyjZr97Xu7jmEp454U93sgiMnB9Ba3oCVEZlWhP7P+9hyBhsW
+ YtVcc3RstMYmKJWQrC7+mE9nsShXd/q4jzguD0UepT7g9IusnxQdONMjxerxNWxRvFry
+ K0EzlEdL6aBtJLs90IFMA1dush+jUrP4aH+unYCkxRmkNvlmPWGWkojUonqwJQEuV39X
+ EMqKUylxZR+zqBsGhR/gud9LAiRH4KDFvmltaW74Eqf3Q7H3v/EQkjfBgdS4emq7rYRN
+ UnWA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5KfIavTZSZu7VQCe3KKd9g5oFSYhm/XE+D5MUuI9CBMuP+H4muhD2i9IMuNIhiFc5AvuthUqa+YDiJ/F2EFbm2B5UCERMTIwoyaO+DUuCkK3kRRDgjCpEQqfelvcgg6RSueVjFCPy+qYp0VejdZRz8Rc=
+X-Gm-Message-State: AOJu0YxQ97U0jm7lqzKnWX5r8pmyz6N/97e/PiREx7x2LS/jWk/yR6tL
+ q1axNB016u37ZgRl7u9LrYNd/jKpTN6WEtWF/e53IqcWGXQQtuIE
+X-Google-Smtp-Source: AGHT+IHdLs3ogk4vydRBQzViBMBQahD8AqpOqJH1vPjKCORYoRd8taYneJRLjybMgXyBK6dUiasMlg==
+X-Received: by 2002:a7b:c34a:0:b0:415:6d1d:6048 with SMTP id
+ l10-20020a7bc34a000000b004156d1d6048mr2407485wmj.14.1712254512072; 
+ Thu, 04 Apr 2024 11:15:12 -0700 (PDT)
+Received: from localhost (ec2-18-175-17-34.eu-west-2.compute.amazonaws.com.
+ [18.175.17.34]) by smtp.gmail.com with ESMTPSA id
+ o20-20020a05600c4fd400b004162d62397dsm272146wmq.9.2024.04.04.11.15.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Apr 2024 11:15:11 -0700 (PDT)
+From: Alex Constantino <dreaming.about.electric.sheep@gmail.com>
+To: mripard@kernel.org
+Cc: 1054514@bugs.debian.org, airlied@redhat.com, carnil@debian.org,
+ daniel@ffwll.ch, dreaming.about.electric.sheep@gmail.com,
+ dri-devel@lists.freedesktop.org, kraxel@redhat.com,
+ linux-kernel@vger.kernel.org, maarten.lankhorst@linux.intel.com,
+ regressions@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ timo.lindfors@iki.fi, tzimmermann@suse.de,
+ virtualization@lists.linux-foundation.org
+Subject: [PATCH v2 0/1] Revert "drm/qxl: simplify qxl_fence_wait"
+Date: Thu,  4 Apr 2024 19:14:47 +0100
+Message-Id: <20240404181448.1643-1-dreaming.about.electric.sheep@gmail.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240327-cuddly-smooth-trogon-59c02d@houat>
+References: <20240327-cuddly-smooth-trogon-59c02d@houat>
 MIME-Version: 1.0
-References: <31bdee77-ac54-4da4-bb8f-fbc00882070d@rz.uni-freiburg.de>
- <03544c6b-b8b4-441a-b0aa-9d6a629c9794@rz.uni-freiburg.de>
- <CAHt6W4cOrnTZhEAjyfQY3Mf5Y93ynNNeM8Y2+3bCLHvDhXLzfw@mail.gmail.com>
- <267f038a-3d8f-4d7f-bb13-e77c4ea69558@rz.uni-freiburg.de>
-In-Reply-To: <267f038a-3d8f-4d7f-bb13-e77c4ea69558@rz.uni-freiburg.de>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Wed, 3 Apr 2024 20:22:40 +0100
-Message-ID: <CAHt6W4eOY0GfTBiVfjC2ksQGxqTBWouxo3Wnfeu5Urtikgu9GQ@mail.gmail.com>
-Subject: Re: [EXTERN] Re: High delay of video-streams
-To: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
-Cc: spice-devel@lists.freedesktop.org, 
- "dirk.von.suchodoletz@rz.uni-freiburg.de"
- <dirk.von.suchodoletz@rz.uni-freiburg.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 06 Apr 2024 09:14:37 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,152 +88,123 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Frediano
+Changes since v1:
+- replace new code logic in v1 with past code version by reverting
+  commit 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait")
+- add missing code dependency from
+  commit d72277b6c37d ("dma-buf: nuke DMA_FENCE_TRACE macros v2")
 
-Il giorno mar 2 apr 2024 alle ore 15:27 Michael Scherle
-<michael.scherle@rz.uni-freiburg.de> ha scritto:
->
-> Hi Frediano,
->
-> thank you very much for your detailed answer.
->
->
-> On 02.04.24 14:13, Frediano Ziglio wrote:
->
-> > Really short explanation: Lipsync.
-> >
-> > Less cryptic explanation: video streaming was added much time ago when
-> > desktops used 2D graphic drawings, like lines, fillings, strings and
-> > so on. At that time networks were more unreliable, latency bigger, and
-> > with high probability a continuous bitblt on the same big area was a
-> > video playing. So the idea of detecting the video playing and
-> > optimizing to sync audio and video was a good idea.
->
-> ok this explains a lot.
->
-> > Now starts my opinionated ideas. The idea of continuous bitblt being
-> > only a video stream is wrong, nowadays desktops do use large bitblt
-> > for everything, or better they use 3D cards a lot and compose the
-> > various windows on the screen which appears to us as just bitblt,
-> > often contiguous. So the delay should just be removed optimizing for
-> > real time video streaming. As you realize the algorithm also keeps
-> > increasing the delay for every glitch found which is not improving the
-> > user experience. I have different changesets removing entirely all
-> > these delays (it's possible to get this just by changing the server
-> > part), the result is much less delay, the audio/video sync (watching a
-> > movie) is, with nowadays networks, acceptable.
->
->
-> Would it be possible to get your changesets, so that I could try them
-> out? I would be interested to know how this can be implemented with only
-> server-side changes. A dirty idea I had (and tried) would be to set the
-> mm_time to the past so that the client displays the image immediately,
-> but that would not be a good fix in my opinion.
->
+---
 
-That's the commit
-https://cgit.freedesktop.org/~fziglio/spice-server/commit/?h=3Dnvidia&id=3D=
-eaaec7be80a9d402f425f7571bb27a082ebf739a.
+Hi,
 
-> I would rather consider it reasonable that the server timestamps the
-> frames (and perhaps the sound) with the encoding time and that the
-> client itself calculates when it wants to display them (from the diffs).
-> So the client could decide if it wants to display the images directly or
-> add some delay to compensate for network jitter (or lipsync) or maybe
-> even implement something like v-sync. These would of course be breaking
-> changes that would require changes to the client and server and would
-> make them incompatible with older versions. If this could not be done
-> directly, due to compatibility reasons, maybe this could be implemented
-> in a separate low latency mode or something like that (which both server
-> and client needs to support).
->
+To clarify, the reason for my original patch, as explained in more detail
+in my previous email, was that it fixed the issue while keeping the code
+simpler (which was the original reason for the commit being reverted here).
+But I perfectly understand opting for previously battle tested code. Makes
+sense.
 
-I suppose the negative time you though is something like
-https://cgit.freedesktop.org/~fziglio/spice-server/commit/?h=3Dnvidia&id=3D=
-4a1a2a20505bc453f30573a0d453a9dfa1d97e7c
-(which improve the previous).
+As requested I've reverted commit 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait")
+and then executed both Timo's and my test cases, and 1h video playback.
+I was unable to reproduce the bug with any of those cases. So the revert
+seems to fix the bug.
+Please note, and as stated in the commit message, due to a dependency to
+DMA_FENCE_WARN this patch also restores the relevant code deleted
+by commit d72277b6c37d ("dma-buf: nuke DMA_FENCE_TRACE macros v2").
 
-> Even with above ideas applied, for spice-gtk, I have noticed a high
-> decode delay. The gstreamer pipeline always seems to keep at least 2
-> frames in the pipeline (regardless of the frame rate) which increases
-> the delay further. Have you also noticed this? I'm currently looking
-> into the reason for this.
->
-> When testing stuff out we saw that Sunshine/Moonlight performed very
-> well in generating  a low delay and high QoE. That is kind of our
-> benchmark for remote access to strive for :)
->
-> Greetings
-> Michael
->
+A couple of things I've observed from dmesg:
+- (1) it always triggers a single warning at boot, this is issued by
+  `WARN_ON(list_empty(&release->bos));` @ qxl_release_free @ qxl_release.c
+  Maybe better for this to be addressed separately from this patch?
+- (2) there are quite a few `failed to wait on release xx after spincount
+  301` messages as printed by the patch v2 code when the test case shell
+  scripts are being executed.
+- (3) there can be a single error message `[drm:qxl_release_from_id_locked
+  [qxl]] *ERROR* failed to find id in release_idr`
+- (4) occasional error messages about `[drm:drm_atomic_helper_commit_planes
+  [drm_kms_helper]] *ERROR* head 9 wrong:`.
 
-Frediano
+Issue (1) relates to this patch v2 and also happened with kernel from
+base-commit 1870cdc0e8de (March 1st).
+Issue (2) also relates to this patch v2 but only happens with kernel from
+base-commit a6bd6c933339 (March 30th).
+Both (3) and (4) are unrelated to this patch as they can occur
+independently of it and I'm guessing these may be related to the recent
+changes discussed in
+https://lore.kernel.org/dri-devel/38d38331-3848-4995-b78e-a87ecae722d5@linux.intel.com/T/#u
 
-> >>
-> >> On 15.03.24 14:08, Michael Scherle wrote:
-> >>> Hello spice developers,
-> >>>
-> >>> we are trying to develop an Open Source virtual desktop infrastructur=
-e
-> >>> to be deployed at multiple German universities as described, by my
-> >>> colleagues, in the paper which I have put in the attachment. The
-> >>> solution based on openstack, qemu, spice... Our plan is also to have =
-VM
-> >>> instances with virtual GPUs (SR-IOV). Due to the resulting requiremen=
-ts,
-> >>> it is necessary to transmit the image data as a video stream.
-> >>> We have seen Vivek Kasireddy recent work on spice which solves exactl=
-y
-> >>> this problem. However, when we tested it, we noticed a very high inpu=
-t
-> >>> to display delay (400 ms+ but only if the image data is transferred a=
-s
-> >>> video-stream). However, the problem seems to be a more general spice
-> >>> problem or is there something wrong with our setup or are there speci=
-al
-> >>> parameters that we are missing?
-> >>>
-> >>> Our setup:
-> >>>
-> >>> QEMU: https://gitlab.freedesktop.org/Vivek/qemu/-/commits/spice_gl_on=
-_v2
-> >>> Spice:
-> >>> https://gitlab.freedesktop.org/Vivek/spice/-/commits/encode_dmabuf_v6
-> >>> virt-viewer
-> >>> Intel HW decoder/encoder (but same with sw)
-> >>>
-> >>> I have looked into what is causing the delay and have noticed that
-> >>> encoding only takes about 3-4ms. In general, the image seems to reach
-> >>> the client in less than 15ms.
-> >>> The main problem seems to be that gstreamer gets a very high
-> >>> margin(https://gitlab.freedesktop.org/spice/spice-gtk/-/blob/master/s=
-rc/channel-display.c?ref_type=3Dheads#L1773) and therefore waits a long tim=
-e before starting decoding. And the reason for the high margin seems to be =
-the bad mm_time_offset https://gitlab.freedesktop.org/spice/spice-gtk/-/blo=
-b/master/src/spice-session.c?ref_type=3Dheads#L2418 which is used to offset=
- the server time to the client time (with some margin). And this variable i=
-s set by the spice server to initially 400 ms https://gitlab.freedesktop.or=
-g/spice/spice/-/blob/master/server/reds.cpp?ref_type=3Dheads#L3062 and gets=
- updated with the latency https://gitlab.freedesktop.org/spice/spice/-/blob=
-/master/server/reds.cpp?ref_type=3Dheads#L2614 (but only increased). I stil=
-l need to see how this latency is calculated.
-> >>>
-> >>> Am I missing something or is this design not intended for transmittin=
-g
-> >>> interactive content via video stream?
-> >>> Temporarily overwriting the margin and tweaking parameter settings on
-> >>> the msdkh264dec brought the delay to about 80-100ms, which is not yet
-> >>> optimal but usable. To see what is technical possible on my setup, I
-> >>> made a comparison using moonlight/sunshine which resulted in an delay=
- of
-> >>> 20-40ms.
-> >>>
-> >>> Our goal is to achieve some round trip time similar to the
-> >>> moonlight/sunshine scenario to achieve a properly usable desktop
-> >>> experience.
-> >>>
-> >>> Greetings
-> >>> Michael
-> >>
-> >> Greetings
-> >> Michael
+
+For reference here is the output of (1):
+```
+[   20.779514] ------------[ cut here ]------------
+[   20.779525] workqueue: WQ_MEM_RECLAIM ttm:ttm_bo_delayed_delete [ttm] is flushing !WQ_MEM_RECLAIM events:qxl_gc_work [qxl]
+[   20.779666] WARNING: CPU: 1 PID: 601 at kernel/workqueue.c:3692 check_flush_dependency+0xfa/0x110
+[   20.779683] Modules linked in: nfsv3 nfs_acl nfs lockd grace intel_rapl_msr intel_rapl_common intel_pmc_core intel_vsec pmt_telemetry pmt_class kvm_intel rfkill kvm snd_hda_codec_generic crct10dif_pclmul crct10dif_common crc32_pclmul ghash_clmulni_intel snd_hda_intel snd_intel_dspcfg sha512_ssse3 sha512_generic snd_hda_codec sha256_ssse3 snd_hwdep sha1_ssse3 snd_hda_core sunrpc binfmt_misc snd_pcm aesni_intel qxl drm_ttm_helper ttm crypto_simd snd_timer cryptd rapl snd virtio_balloon virtio_console drm_kms_helper pcspkr soundcore button evdev joydev serio_raw drm loop fuse efi_pstore dm_mod configfs qemu_fw_cfg virtio_rng autofs4 ext4 crc32c_generic crc16 mbcache jbd2 virtio_net ata_generic net_failover virtio_blk failover uhci_hcd ata_piix ehci_hcd libata scsi_mod usbcore crc32c_intel i2c_piix4 virtio_pci virtio psmouse virtio_pci_legacy_dev virtio_pci_modern_dev virtio_ring floppy scsi_common usb_common
+[   20.779825] CPU: 1 PID: 601 Comm: kworker/u13:1 Not tainted 6.9.0-rc1-next-20240328-amd64-00001-g756220c4615c #81
+[   20.779833] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.14.0-2 04/01/2014
+[   20.779837] Workqueue: ttm ttm_bo_delayed_delete [ttm]
+[   20.779862] RIP: 0010:check_flush_dependency+0xfa/0x110
+[   20.779869] Code: ff ff 49 8b 55 18 48 8d 8b c0 00 00 00 49 89 e8 48 81 c6 c0 00 00 00 48 c7 c7 c0 16 44 8d c6 05 e7 75 b3 01 01 e8 86 97 fd ff <0f> 0b e9 21 ff ff ff 80 3d d5 75 b3 01 00 75 96 e9 4d ff ff ff 90
+[   20.779875] RSP: 0000:ffffb59600dd7cc8 EFLAGS: 00010082
+[   20.779880] RAX: 0000000000000000 RBX: ffff9af88104ee00 RCX: 0000000000000027
+[   20.779902] RDX: ffff9af8fdd21708 RSI: 0000000000000001 RDI: ffff9af8fdd21700
+[   20.779906] RBP: ffffffffc0882570 R08: 0000000000000000 R09: 0000000000000003
+[   20.779910] R10: ffffb59600dd7b58 R11: ffffffff8dcc83e8 R12: ffff9af894498000
+[   20.779914] R13: ffff9af89558d780 R14: ffffb59600dd7cf8 R15: 0000000000000001
+[   20.779918] FS:  0000000000000000(0000) GS:ffff9af8fdd00000(0000) knlGS:0000000000000000
+[   20.779924] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[   20.779928] CR2: 00005574b0bd4148 CR3: 000000001fb40002 CR4: 0000000000370ef0
+[   20.779994] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+[   20.779999] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+[   20.780003] Call Trace:
+[   20.780135]  <TASK>
+[   20.780144]  ? __warn+0x7c/0x120
+[   20.780153]  ? check_flush_dependency+0xfa/0x110
+[   20.780161]  ? report_bug+0x160/0x190
+[   20.780169]  ? prb_read_valid+0x17/0x20
+[   20.780179]  ? handle_bug+0x41/0x70
+[   20.780186]  ? exc_invalid_op+0x13/0x60
+[   20.780193]  ? asm_exc_invalid_op+0x16/0x20
+[   20.780201]  ? __pfx_qxl_gc_work+0x10/0x10 [qxl]
+[   20.780221]  ? check_flush_dependency+0xfa/0x110
+[   20.780228]  ? check_flush_dependency+0xfa/0x110
+[   20.780234]  __flush_work+0xce/0x2c0
+[   20.780244]  qxl_queue_garbage_collect+0x7f/0x90 [qxl]
+[   20.780268]  qxl_fence_wait+0xa0/0x190 [qxl]
+[   20.780287]  dma_fence_wait_timeout+0x5e/0x130
+[   20.780313]  dma_resv_wait_timeout+0x7b/0xe0
+[   20.780327]  ttm_bo_delayed_delete+0x26/0x80 [ttm]
+[   20.780359]  process_one_work+0x184/0x3a0
+[   20.780370]  worker_thread+0x273/0x390
+[   20.780379]  ? __pfx_worker_thread+0x10/0x10
+[   20.780388]  kthread+0xcb/0x100
+[   20.780396]  ? __pfx_kthread+0x10/0x10
+[   20.780404]  ret_from_fork+0x2d/0x50
+[   20.780416]  ? __pfx_kthread+0x10/0x10
+[   20.780421]  ret_from_fork_asm+0x1a/0x30
+[   20.780435]  </TASK>
+[   20.780437] ---[ end trace 0000000000000000 ]---
+```
+
+
+TLDR: this patch fixes the instability issues. But there may be warnings
+in dmesg. Errors in dmesg were observed too but they are unrelated to this
+patch.
+
+
+Thank you for your time.
+
+---
+
+Alex Constantino (1):
+  Revert "drm/qxl: simplify qxl_fence_wait"
+
+ drivers/gpu/drm/qxl/qxl_release.c | 50 +++++++++++++++++++++++++++----
+ include/linux/dma-fence.h         |  7 +++++
+ 2 files changed, 52 insertions(+), 5 deletions(-)
+
+
+base-commit: a6bd6c9333397f5a0e2667d4d82fef8c970108f2
+-- 
+2.39.2
+
