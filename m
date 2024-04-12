@@ -2,54 +2,78 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACA8989A9D6
-	for <lists+spice-devel@lfdr.de>; Sat,  6 Apr 2024 11:15:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6823C8A349E
+	for <lists+spice-devel@lfdr.de>; Fri, 12 Apr 2024 19:21:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22C1910EFA5;
-	Sat,  6 Apr 2024 09:14:58 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tx+q/GGZ";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id B362710F4A4;
+	Fri, 12 Apr 2024 17:21:47 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C67A510EA4A;
- Fri,  5 Apr 2024 13:13:07 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 1EF1D618FF;
- Fri,  5 Apr 2024 13:13:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 925C9C433F1;
- Fri,  5 Apr 2024 13:13:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712322786;
- bh=VEyed/ecHyBqgaA8v+Xe6IFTwm1TtgE9SEoK//nPgEI=;
- h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=tx+q/GGZxrVngkwOS8gFgGmvPhKZBJty9/r0v9W6KxDR4q7LW2DKE/90/6iTg5Lpp
- khAQFoyq/950o5C66xexkrWnwTvP9ODsID+Ue1i2Kg+Mv1j9EcEGzJ0NUdcMlCC0h8
- o0QgSPnKlDtSyjET8kvChwpZfv+mgx7u5mwgGpTq5YV7IWNGuxzVR8RZhrM4WLEYNn
- 48DvvijRxSE+RtmHTq4kDEZGuUhBuKTYG3ORkecEMwB9cUoVgjRDTMewTF6kagtQWR
- n2QLnkWlXXRJlMrflacttX1VbthH0jqld+PFv69b2R3OznwDng65dX6XH6yNARcGo7
- MfNIIZDZbJHzg==
-From: Maxime Ripard <mripard@kernel.org>
-To: Alex Constantino <dreaming.about.electric.sheep@gmail.com>
-Cc: 1054514@bugs.debian.org, airlied@redhat.com, carnil@debian.org, 
- daniel@ffwll.ch, dri-devel@lists.freedesktop.org, kraxel@redhat.com, 
- linux-kernel@vger.kernel.org, maarten.lankhorst@linux.intel.com, 
- regressions@lists.linux.dev, spice-devel@lists.freedesktop.org, 
- timo.lindfors@iki.fi, tzimmermann@suse.de, 
- virtualization@lists.linux-foundation.org
-In-Reply-To: <20240404181448.1643-2-dreaming.about.electric.sheep@gmail.com>
-References: <20240327-cuddly-smooth-trogon-59c02d@houat>
- <20240404181448.1643-1-dreaming.about.electric.sheep@gmail.com>
- <20240404181448.1643-2-dreaming.about.electric.sheep@gmail.com>
-Subject: Re: (subset) [PATCH v2 1/1] Revert "drm/qxl: simplify qxl_fence_wait"
-Message-Id: <171232278434.15085.12649965715947984950.b4-ty@kernel.org>
-Date: Fri, 05 Apr 2024 15:13:04 +0200
+X-Greylist: delayed 3000 seconds by postgrey-1.36 at gabe;
+ Fri, 12 Apr 2024 17:21:45 UTC
+Received: from ms-10.1blu.de (ms-10.1blu.de [178.254.4.101])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 473B110F4A4
+ for <spice-devel@lists.freedesktop.org>; Fri, 12 Apr 2024 17:21:44 +0000 (UTC)
+Received: from [37.201.240.20] (helo=[192.168.179.14])
+ by ms-10.1blu.de with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <mnl@mnl.de>) id 1rvJoU-001Xu5-3g;
+ Fri, 12 Apr 2024 18:31:42 +0200
+Message-ID: <c1fd9e92-2c55-4f15-8f4e-c24ab7bbd523@mnl.de>
+Date: Fri, 12 Apr 2024 18:31:41 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
-X-Mailman-Approved-At: Sat, 06 Apr 2024 09:14:38 +0000
+User-Agent: Mozilla Thunderbird
+To: spice-devel@lists.freedesktop.org
+Content-Language: de-DE
+From: Michael Lipp <mnl@mnl.de>
+Subject: Connect through https proxy
+Autocrypt: addr=mnl@mnl.de; keydata=
+ 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
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Con-Id: 352429
+X-Con-U: 0-mnl
+X-Originating-IP: 37.201.240.20
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,19 +88,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Thu, 04 Apr 2024 19:14:48 +0100, Alex Constantino wrote:
-> This reverts commit 5a838e5d5825c85556011478abde708251cc0776.
-> 
-> Changes from commit 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait") would
-> result in a '[TTM] Buffer eviction failed' exception whenever it reached a
-> timeout.
-> Due to a dependency to DMA_FENCE_WARN this also restores some code deleted
-> by commit d72277b6c37d ("dma-buf: nuke DMA_FENCE_TRACE macros v2").
-> 
-> [...]
+Hi,
 
-Applied to misc/kernel.git (drm-misc-fixes).
+I'm trying to use the remote-viewer with an HTTPS connection to a proxy 
+(proxy=https://...). This does not work. (I've tested my setup with 
+"openssl s_client ...", so I'm quite sure that the proxy is configured 
+properly).
 
-Thanks!
-Maxime
+I searched a bit and found that "the only supported proxy is HTTP 
+CONNECT". Does this mean that a https (tls) connection is not possible? 
+(Even with TLS it's still HTTP protocol and still a CONNECT, so I just 
+want to make sure).
+
+  - Michael
+
 
