@@ -2,77 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDB078B4B46
-	for <lists+spice-devel@lfdr.de>; Sun, 28 Apr 2024 12:41:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 938418B8EF1
+	for <lists+spice-devel@lfdr.de>; Wed,  1 May 2024 19:21:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A3F8B10FB1C;
-	Sun, 28 Apr 2024 10:41:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A3CF510F78D;
+	Wed,  1 May 2024 17:21:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=att.net header.i=@att.net header.b="anxwLahZ";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="Mk/i/Cpo";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from sonic305-23.consmr.mail.gq1.yahoo.com
- (sonic305-23.consmr.mail.gq1.yahoo.com [98.137.64.86])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2BB8E10F177
- for <spice-devel@lists.freedesktop.org>; Sat, 27 Apr 2024 16:57:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=att.net; s=s1024;
- t=1714237075; bh=eNQES2wAhwwmw2BjMnoS03T6t786WgY/N1kWkzyh3vM=;
- h=From:Subject:Date:To:References:From:Subject:Reply-To;
- b=anxwLahZvYBYYJqR1J/kUoTbHy7F31/9oA+1FpW19Al9vwCWG5lwcBDAb0VoOOJ7Ytpb50EvO8YYNZU6OYGFdz7ErP8u6smMAsu1MP7pfSW7dkpc5g1jxxqhLV+EFYHm8fC6XAI/PW28sjOL9l8eiDaDbO8Dev6kEYPnEVwrcco=
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1714237075; bh=nH72GN7DTTVIV4ESiGabhrfk8gMh3h8Bwll/laAXVKc=;
- h=X-Sonic-MF:From:Subject:Date:To:From:Subject;
- b=pWF5L5Se99J479jaITnTYD+WVDdfUjw/54Qq/bRiLdl4UiD2pIJZpopCDoyFwq7oDwgklwY9bD90dcM1moC6NJFnwCPNo0MGuroLmU19INkyOu0iukrxgG3ZeUyiqiVXvGJX2moUjsmNJP89Nkh7qslw4ap0J9ZOIq5zCmStzRn3dPGX9KvNgTk39NwzHftlOY69ipIUBxI0k1SP2hUqz9G909OPTMgNQJwGssQWE1j4c47p77m1M432+THOkaDO2j1hanARQ2iK8D2vWhPXNCPyhOBHAfsfxUzn4URXFGdNjnj6C+Tajxxhz5aJTahtAQ/V/yepBKdgZonk5WXgIQ==
-X-YMail-OSG: m1mpkj0VM1lhlVje9g3Or3amrRgOpmNlocV5KKhc6dcP6GA2SiEOU0frq7DToUT
- TTJ6vtaMxZLyQvsnqiLDbjRQ1fQXWYLdcHUBQXRCpi5SmhD1CLkmT_O0z4YMFPSdrPSRiTAb456f
- gAW9Ho_3SVn999LP2PbJatE2zV0OvNSrIEZzh2AQtU6yNHpw7kNSmbOU42068cNGh8mzWlwSIFVS
- VXXYbbwZ2hM0WpPjJ_yWJGyrp_PjXmEm6Z17eL3H_RYwg2m2r1.Up11QMaM5J_C.ZzFViTiyo5MP
- L90gQbgrVtUqQpglidLH38zdmlXTHb3m9kCK7HHdoRViBtTvRCjXnt4WDslXsKZTNE83g7hIWng_
- gtKFtK9LSTZhhkeBLdB7ATXwzdWmAgvk2h7kA_TELlmZj69bGtOHPhDQluj215JrvlaIE5Xh6iyW
- _Nom62O.K.X258fO7LUzuHvEUkmPL73gUigVtldR1GFawWRqagnABnC4g3dk.L6NRU61sCCO5dIN
- si.BE9NMzltMaG0kclo058UxE3M6Y04ub.r9P91Crvrl9JRTdq4E0AIML2ibktIAnRPkGybZS2i3
- 0ndTsR3jsXTi0LCsg5_1V47UgJ3SWs81JrGYMftwr58fSR7u3KWanrYJcmJb_iwz2y05WWGN3ug3
- PeS7kR627Zkls1hiOatjm05kDpEO1MOApoZ05pLIymj.dofZ1UjATUdErFXa0EjKuDhwHzJgx29V
- d4t.T8UJ.LvF9ZIc5QUj_bKUboBergUG.q7eU2SyQTmv7xRAnEX7XyP1WuPVRCe22NM.3LGMkRuc
- dBtS_plxWPQog8XiC0ll_6_gnsJGQGmCoio6zLWPS5e7pisaT_sL62qN467vA078...BSS32WqCW
- M.uiiiVLtv.k0R7Az0Cg5Kf4ocfCaDSuGjsm1tEwzSFZlMuzJwsodGeIEAx9yvxuMC2Hct4rT6Gm
- 11dQPEC_ktavE22KnWmwvAs2WZARzJZFenCfSpzYqngeGMyfyF4mdS18.UXKzdHyp.fzF_UvR6BQ
- os3nEmuUuU0fVGcNJfIIYWbLE6t5dLI.SIAFBTkVTUBt.ERgZLhFC1329mFLikJ_6EVHQ07WuAAB
- 90V4X7RzHbAk2C4EQ7T4Odgb35.sYgO22OACVmE6EcoTHbz4kHiGuLiK8PMgJniddErro.ZeaGNx
- tDCh6h6tT9tKGZCl39tsVtOyBCDhO1zcWmmccoQA6mIvSg71ePogC.1LpmCLbukmkyn0doO5hAA9
- u6YKN6VOehMcIx9szlwZe6uTx2_Zid5Hs1ZjuK05IZ4bv3iPUPL.zvBzPhKbJxFHvfi5NRbg0mw4
- 1_g7D9tmZ7VX3d9L_dUma4STHQXIW_9NP20Y2E9saTr0tg7eYsn.dStkqsPi94Y3HJDJpRfNSOn_
- u1EhGnjKPev4uiRG8SA6yfnMun3bwKNFqKRXl4lub4pu9UbOV7n8t_KrnC1Fj50OYgOeMnqBKW3m
- eER3YOXyhjr.X5WRCAFPPGcgnZdkB77Ruo16SFdy.FrOklV.Y1rTnXfIAcYF7PC0ppA10SdbVhmr
- VcBkHlwvHOjJebNgsHlWxAISBhJf99qPncxS_rU7NroEZNIQCBrSSxs3Q4MyBqiFSEpCo_IgKCjw
- YSlgdiNmuKPoI.vGhCz7G4VK.Lf3RQeGjuaKqJkecXWnaE2iZ0L9dItZrofA0R9.eCLc150sHdJt
- Eogl_2oCeWIic29.swncT3wP4mnRWnWoRc_uwqxFcbEza26pBvDcpLyCAkDf_fab6Yf5amBq..QQ
- lMDd45iayF90sMRoRTaTYL74hX4t0ppb8qEt2j2aLS1OuuTNS976bPkfcijnXJIdVSxzQGJnDTro
- TJ8.IO5ybCgPAsbsC9CL6Bupkw19T0dE1m7Drluvcwte0C0CEXpWv1LSewMKlO_Y82XAZB1qqnoL
- w8G2LMErwFYBbijB4q8417BS9tIV53BvuQ6FUvsIA9qpewXK94rvTYWTcbx1FJlmQEI_uFPGUKAP
- 97j_RnHJmcXHnmlJVwE.aPQgikt0.dW6nQb5i9rmD0JMLZlLiRdIvrFIQ6yQ5598ch_Ht7S5OBa3
- 0nDkASTR9rP6xPCAE_EJdAZZYRaoiDZqMIyN1LqJbrLys7wiGUINKMuoNuh2cnzohc2UTFUdY9cJ
- w9dn6Zf.015pgsPLx_p.Z46GsDev4OFtrRmwTfC9haAWbRmcOLbZJVnCLUrb3kCNur5_bL10Q80p
- SN2I4OwJ58GCQfDr3
-X-Sonic-MF: <rdservants@att.net>
-X-Sonic-ID: 89fab34d-f61a-40f5-bda0-4191ad8e4b1e
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic305.consmr.mail.gq1.yahoo.com with HTTP; Sat, 27 Apr 2024 16:57:55 +0000
-Received: by hermes--production-ne1-6488576888-w7gv4 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 9caff56049cc8e462f5eaa3c6fbc03a0; 
- Sat, 27 Apr 2024 16:57:52 +0000 (UTC)
-From: Dorothy Calhoon <rdservants@att.net>
-Content-Type: multipart/alternative;
- boundary="Apple-Mail=_FCF91F2D-4DD4-4ED7-943E-DC2BAE526567"
-Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.21\))
-Subject: Audio through spice
-Message-Id: <6B9928C0-3CC8-4F38-8A5D-234142717682@att.net>
-Date: Sat, 27 Apr 2024 12:57:49 -0400
-To: spice-devel@lists.freedesktop.org
-X-Mailer: Apple Mail (2.3445.104.21)
-References: <6B9928C0-3CC8-4F38-8A5D-234142717682.ref@att.net>
-X-Mailman-Approved-At: Sun, 28 Apr 2024 10:41:41 +0000
+X-Greylist: delayed 953 seconds by postgrey-1.36 at gabe;
+ Tue, 30 Apr 2024 06:31:42 UTC
+Received: from m15.mail.163.com (m15.mail.163.com [45.254.50.219])
+ by gabe.freedesktop.org (Postfix) with ESMTP id AE00D10F2BD;
+ Tue, 30 Apr 2024 06:31:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=OykVS
+ bzCv4+d4dPQLDypPadwOtIhxe1BrterZQ+EVfc=; b=Mk/i/CporQhNjM1Pb4Fxn
+ JzDrNc4n/H6i6Uz/6EZ+8yQgmt26tYyrfSqBhYGHAu/ubD170GE/f2+fQ2XzKy8k
+ +t995s0ICyjIoM/UQJktZ4tYUBOt7rgYAcT5UU020DHxF6e+CgfTL2v5iQ8GwkiH
+ TGxBUVX71rndtgrfXtIBus=
+Received: from localhost.localdomain (unknown [111.35.187.227])
+ by gzga-smtp-mta-g0-3 (Coremail) with SMTP id _____wD3v3dtjDBmw0B8Cw--.43676S4;
+ Tue, 30 Apr 2024 14:15:18 +0800 (CST)
+From: David Wang <00107082@163.com>
+To: dreaming.about.electric.sheep@gmail.com, airlied@redhat.com,
+ kraxel@redhat.com, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch
+Cc: virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ regressions@lists.linux.dev, David Wang <00107082@163.com>
+Subject: [Regression] 6.9.0: WARNING: workqueue: WQ_MEM_RECLAIM
+ ttm:ttm_bo_delayed_delete [ttm] is flushing !WQ_MEM_RECLAIM
+ events:qxl_gc_work [qxl]
+Date: Tue, 30 Apr 2024 14:13:37 +0800
+Message-Id: <20240430061337.764633-1-00107082@163.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+X-CM-TRANSID: _____wD3v3dtjDBmw0B8Cw--.43676S4
+X-Coremail-Antispam: 1Uf129KBjvJXoW3JrWkWF4kWry3AFWrKw13CFg_yoWxuF1Dpr
+ yYyF109FWrJw1qya1kJr1Fyws2qFsF9FWUZFyfGr10k3W5XF1rJa13Ga43KrWUCr9rJFW7
+ Awnrta4YyFnrAaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUUhL8UUUUU=
+X-Originating-IP: [111.35.187.227]
+X-CM-SenderInfo: qqqrilqqysqiywtou0bp/1tbiMw7PqmXAk7vy7wABsJ
+X-Mailman-Approved-At: Wed, 01 May 2024 17:21:34 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,94 +63,139 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+Hi,
+I got following kernel WARNING when the my 2-core KVM(6.9.0-rc6) is under h=
+igh cpu load.
 
---Apple-Mail=_FCF91F2D-4DD4-4ED7-943E-DC2BAE526567
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+	[Mon Apr 29 21:36:04 2024] ------------[ cut here ]------------
+	[Mon Apr 29 21:36:04 2024] workqueue: WQ_MEM_RECLAIM ttm:ttm_bo_delayed_de=
+lete [ttm] is flushing !WQ_MEM_RECLAIM events:qxl_gc_work [qxl]
+	[Mon Apr 29 21:36:04 2024] WARNING: CPU: 1 PID: 792 at kernel/workqueue.c:=
+3728 check_flush_dependency+0xfd/0x120
+	[Mon Apr 29 21:36:04 2024] Modules linked in: xt_conntrack(E) nft_chain_na=
+t(E) xt_MASQUERADE(E) nf_nat(E) nf_conntrack_netlink(E) xfrm_user(E) xfrm_a=
+lgo(E) xt_addrtype(E) nft_compat(E) nf_tables(E) br_netfilter(E) bridge(E) =
+stp(E) llc(E) ip_set(E) nfnetlink(E) ip_vs_sh(E) ip_vs_wrr(E) ip_vs_rr(E) i=
+p_vs(E) nf_conntrack(E) nf_defrag_ipv6(E) nf_defrag_ipv4(E) intel_rapl_msr(=
+E) intel_rapl_common(E) crct10dif_pclmul(E) ghash_clmulni_intel(E) snd_hda_=
+codec_generic(E) snd_hda_intel(E) snd_intel_dspcfg(E) sha512_ssse3(E) snd_h=
+da_codec(E) sha512_generic(E) sha256_ssse3(E) overlay(E) sha1_ssse3(E) snd_=
+hda_core(E) snd_hwdep(E) aesni_intel(E) snd_pcm(E) crypto_simd(E) pcspkr(E)=
+ cryptd(E) joydev(E) qxl(E) snd_timer(E) drm_ttm_helper(E) ttm(E) evdev(E) =
+snd(E) iTCO_wdt(E) serio_raw(E) sg(E) virtio_balloon(E) virtio_console(E) i=
+TCO_vendor_support(E) soundcore(E) qemu_fw_cfg(E) drm_kms_helper(E) button(=
+E) binfmt_misc(E) fuse(E) drm(E) configfs(E) virtio_rng(E) rng_core(E) ip_t=
+ables(E) x_tables(E) autofs4(E) ext4(E) crc16(E) mbcache(E) jbd2(E)
+	[Mon Apr 29 21:36:04 2024]  hid_generic(E) usbhid(E) hid(E) sr_mod(E) cdro=
+m(E) ahci(E) libahci(E) virtio_net(E) net_failover(E) failover(E) virtio_bl=
+k(E) libata(E) xhci_pci(E) crc32_pclmul(E) crc32c_intel(E) scsi_mod(E) scsi=
+_common(E) lpc_ich(E) i2c_i801(E) xhci_hcd(E) psmouse(E) i2c_smbus(E) virti=
+o_pci(E) usbcore(E) virtio_pci_legacy_dev(E) virtio_pci_modern_dev(E) usb_c=
+ommon(E) virtio(E) mfd_core(E) virtio_ring(E)
+	[Mon Apr 29 21:36:04 2024] CPU: 1 PID: 792 Comm: kworker/u13:4 Tainted: G =
+           E      6.9.0-rc6-linan-5 #197
+	[Mon Apr 29 21:36:04 2024] Hardware name: QEMU Standard PC (Q35 + ICH9, 20=
+09), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+	[Mon Apr 29 21:36:04 2024] Workqueue: ttm ttm_bo_delayed_delete [ttm]
+	[Mon Apr 29 21:36:04 2024] RIP: 0010:check_flush_dependency+0xfd/0x120
+	[Mon Apr 29 21:36:04 2024] Code: 8b 45 18 48 8d b2 c0 00 00 00 49 89 e8 48=
+ 8d 8b c0 00 00 00 48 c7 c7 68 30 a4 a7 c6 05 9b 12 6e 01 01 48 89 c2 e8 53=
+ b9 fd ff <0f> 0b e9 1e ff ff ff 80 3d 86 12 6e 01 00 75 93 e9 4a ff ff ff =
+66
+	[Mon Apr 29 21:36:04 2024] RSP: 0018:ffff9d31805abce8 EFLAGS: 00010086
+	[Mon Apr 29 21:36:04 2024] RAX: 0000000000000000 RBX: ffff8c8c4004ee00 RCX=
+: 0000000000000000
+	[Mon Apr 29 21:36:04 2024] RDX: 0000000000000003 RSI: 0000000000000027 RDI=
+: 00000000ffffffff
+	[Mon Apr 29 21:36:04 2024] RBP: ffffffffc0b53570 R08: 0000000000000000 R09=
+: 0000000000000003
+	[Mon Apr 29 21:36:04 2024] R10: ffff9d31805abb80 R11: ffffffffa7cc1108 R12=
+: ffff8c8c42eb8000
+	[Mon Apr 29 21:36:04 2024] R13: ffff8c8c48077900 R14: ffff8c8cbbd30b80 R15=
+: 0000000000000001
+	[Mon Apr 29 21:36:04 2024] FS:  0000000000000000(0000) GS:ffff8c8cbbd00000=
+(0000) knlGS:0000000000000000
+	[Mon Apr 29 21:36:04 2024] CS:  0010 DS: 0000 ES: 0000 CR0: 00000000800500=
+33
+	[Mon Apr 29 21:36:04 2024] CR2: 00007ffd38bb3ff8 CR3: 000000010217a000 CR4=
+: 0000000000350ef0
+	[Mon Apr 29 21:36:04 2024] Call Trace:
+	[Mon Apr 29 21:36:04 2024]  <TASK>
+	[Mon Apr 29 21:36:04 2024]  ? __warn+0x7c/0x120
+	[Mon Apr 29 21:36:04 2024]  ? check_flush_dependency+0xfd/0x120
+	[Mon Apr 29 21:36:04 2024]  ? report_bug+0x18d/0x1c0
+	[Mon Apr 29 21:36:04 2024]  ? srso_return_thunk+0x5/0x5f
+	[Mon Apr 29 21:36:04 2024]  ? handle_bug+0x3c/0x80
+	[Mon Apr 29 21:36:04 2024]  ? exc_invalid_op+0x13/0x60
+	[Mon Apr 29 21:36:04 2024]  ? asm_exc_invalid_op+0x16/0x20
+	[Mon Apr 29 21:36:04 2024]  ? __pfx_qxl_gc_work+0x10/0x10 [qxl]
+	[Mon Apr 29 21:36:04 2024]  ? check_flush_dependency+0xfd/0x120
+	[Mon Apr 29 21:36:04 2024]  ? check_flush_dependency+0xfd/0x120
+	[Mon Apr 29 21:36:04 2024]  __flush_work.isra.0+0xc0/0x270
+	[Mon Apr 29 21:36:04 2024]  ? srso_return_thunk+0x5/0x5f
+	[Mon Apr 29 21:36:04 2024]  ? srso_return_thunk+0x5/0x5f
+	[Mon Apr 29 21:36:04 2024]  ? __queue_work.part.0+0x18b/0x3d0
+	[Mon Apr 29 21:36:04 2024]  ? srso_return_thunk+0x5/0x5f
+	[Mon Apr 29 21:36:04 2024]  qxl_queue_garbage_collect+0x7f/0x90 [qxl]
+	[Mon Apr 29 21:36:04 2024]  qxl_fence_wait+0x9c/0x180 [qxl]
+	[Mon Apr 29 21:36:04 2024]  dma_fence_wait_timeout+0x61/0x130
+	[Mon Apr 29 21:36:04 2024]  dma_resv_wait_timeout+0x6d/0xd0
+	[Mon Apr 29 21:36:04 2024]  ttm_bo_delayed_delete+0x26/0x80 [ttm]
+	[Mon Apr 29 21:36:04 2024]  process_one_work+0x18c/0x3b0
+	[Mon Apr 29 21:36:04 2024]  worker_thread+0x273/0x390
+	[Mon Apr 29 21:36:04 2024]  ? __pfx_worker_thread+0x10/0x10
+	[Mon Apr 29 21:36:04 2024]  kthread+0xdd/0x110
+	[Mon Apr 29 21:36:04 2024]  ? __pfx_kthread+0x10/0x10
+	[Mon Apr 29 21:36:04 2024]  ret_from_fork+0x30/0x50
+	[Mon Apr 29 21:36:04 2024]  ? __pfx_kthread+0x10/0x10
+	[Mon Apr 29 21:36:04 2024]  ret_from_fork_asm+0x1a/0x30
+	[Mon Apr 29 21:36:04 2024]  </TASK>
+	[Mon Apr 29 21:36:04 2024] ---[ end trace 0000000000000000 ]---
 
-Hi!
+I find that the exact warning message mentioned in
+ https://lore.kernel.org/lkml/20240404181448.1643-1-dreaming.about.electric=
+.sheep@gmail.com/T/#m8c2ecc83ebba8717b1290ec28d4dc15f2fa595d5
+And confirmed that the warning is caused by 07ed11afb68d94eadd4ffc082b97c23=
+31307c5ea and reverting it can fix.
 
-I use spice to redirect the usb ports from my POPos host to my Mac =
-Catalina operating system in my QEMU virtual machine which was set up =
-using quickemu and now is accessed via quickgui. Spice works fine for =
-redirecting the keyboard, mouse, wifi and printer. Now I need it for =
-audio.
 
-I know that audio has been a problem in virtual machines with Mac =
-operating systems later than Catalina, but it is supposed to work in =
-Catalina.  I have a small speaker that plugs into the guest via a usb =
-port but it is not recognized. I also tried headphones in the audio out =
-ports and still Preferences show nothing for sound and there is none.
+It seems that under heavy load, qxl_queue_garbage_collect would be called w=
+ithin
+a WQ_MEM_RECLAIM worker, and flush qxl_gc_work which is a
+!WQ_MEM_RECLAIM worker. This will trigger the kernel WARNING by
+check_flush_dependency.
 
-I understand that spice can allow the audio sound card from the host to =
-pass through to the guest. How do I implement that feature? Somewhere I =
-read that inputting the following into the host terminal would do it: =
-QEMU_AUDIO_DRV=3Dspice. However, terminal did nothing and just wanted =
-more instructions. The directions I had found said that after this =
-command you could then use -soundhw hda options. However, terminal does =
-not recognize soundhw and I wasn=E2=80=99t sure exactly what the =
-=E2=80=9Coptions" were.
+And I tried following changes, setting flush flag to false.
+The warning is gone, but I am not sure whether there is any other side-effe=
+ct,
+especially the issue mentioned in=20
+https://lore.kernel.org/lkml/20240404181448.1643-2-dreaming.about.electric.=
+sheep@gmail.com/T/#m988ffad2000c794dcfdab7e60b03db93d8726391
 
-I also tried -audiodev spice,id=3Did[,prop[=3Dvalue][,=E2=80=A6.]] and =
-the terminal said that the audiodev command was not found.
+Signed-off-by: David Wang <00107082@163.com>
+---
+ drivers/gpu/drm/qxl/qxl_release.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-It appears that there are just a couple of commands that would allow the =
-audio passthrough feature of spice to work, but I don=E2=80=99t know =
-exactly what they are. I am new to using terminal so I need very precise =
-instructions. I would appreciate your help in this.=20
+diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_re=
+lease.c
+index 9febc8b73f09..f372085c5aad 100644
+--- a/drivers/gpu/drm/qxl/qxl_release.c
++++ b/drivers/gpu/drm/qxl/qxl_release.c
+@@ -76,7 +76,7 @@ static long qxl_fence_wait(struct dma_fence *fence, bool =
+intr,
+ 	qxl_io_notify_oom(qdev);
+=20
+ 	for (count =3D 0; count < 11; count++) {
+-		if (!qxl_queue_garbage_collect(qdev, true))
++		if (!qxl_queue_garbage_collect(qdev, false))
+ 			break;
+=20
+ 		if (dma_fence_is_signaled(fence))
+--=20
+2.39.2
 
-Thanking you in advance.
 
-Dorothy=
 
---Apple-Mail=_FCF91F2D-4DD4-4ED7-943E-DC2BAE526567
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=utf-8
+David
 
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dutf-8"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><span=
- style=3D"font-size: 14px;" class=3D"">Hi!</span><div class=3D""><br =
-class=3D""></div><div class=3D""><span style=3D"font-size: 14px;" =
-class=3D"">I use spice to redirect the usb ports from my POPos host to =
-my Mac Catalina operating system in my QEMU virtual machine which was =
-set up using quickemu and now is accessed via quickgui. Spice works fine =
-for redirecting the keyboard, mouse, wifi and printer. Now I need it for =
-audio.</span></div><div class=3D""><span style=3D"font-size: 14px;" =
-class=3D""><br class=3D""></span></div><div class=3D""><span =
-style=3D"font-size: 14px;" class=3D"">I know that audio has been a =
-problem in virtual machines with Mac operating systems later than =
-Catalina, but it is supposed to work in Catalina. &nbsp;I have a small =
-speaker that plugs into the guest via a usb port but it is not =
-recognized. I also tried headphones in the audio out ports and still =
-Preferences show nothing for sound and there is none.</span></div><div =
-class=3D""><span style=3D"font-size: 14px;" class=3D""><br =
-class=3D""></span></div><div class=3D""><span style=3D"font-size: 14px;" =
-class=3D"">I understand that spice can allow the audio sound card from =
-the host to pass through to the guest.&nbsp;How do I implement that =
-feature? Somewhere I read that inputting the following into the host =
-terminal would do it: QEMU_AUDIO_DRV=3Dspice. However, terminal did =
-nothing and just wanted more instructions. The directions I had found =
-said that after this command you could then use -soundhw&nbsp;hda =
-options. However, terminal does not recognize soundhw and I wasn=E2=80=99t=
- sure exactly what the&nbsp;=E2=80=9Coptions" were.</span></div><div =
-class=3D""><span style=3D"font-size: 14px;" class=3D""><br =
-class=3D""></span></div><div class=3D""><span style=3D"font-size: 14px;" =
-class=3D"">I also tried -audiodev spice,id=3Did[,prop[=3Dvalue][,=E2=80=A6=
-.]] and the terminal said that the audiodev command was not =
-found.</span></div><div class=3D""><span style=3D"font-size: 14px;" =
-class=3D""><br class=3D""></span></div><div class=3D""><span =
-style=3D"font-size: 14px;" class=3D"">It appears that there are just a =
-couple of commands that would allow the audio passthrough feature of =
-spice to work, but I don=E2=80=99t know exactly what they are. I am new =
-to using terminal so I need very precise instructions. I would =
-appreciate your help in this.&nbsp;</span></div><div class=3D""><span =
-style=3D"font-size: 14px;" class=3D""><br class=3D""></span></div><div =
-class=3D""><span style=3D"font-size: 14px;" class=3D"">Thanking you in =
-advance.</span></div><div class=3D""><span style=3D"font-size: 14px;" =
-class=3D""><br class=3D""></span></div><div class=3D""><span =
-style=3D"font-size: 14px;" class=3D"">Dorothy</span></div></body></html>=
-
---Apple-Mail=_FCF91F2D-4DD4-4ED7-943E-DC2BAE526567--
