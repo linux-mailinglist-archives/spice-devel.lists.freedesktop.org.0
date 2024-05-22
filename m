@@ -2,55 +2,54 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA7108CA4CE
-	for <lists+spice-devel@lfdr.de>; Tue, 21 May 2024 00:58:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C16A8CBCB9
+	for <lists+spice-devel@lfdr.de>; Wed, 22 May 2024 10:13:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 27AC310E43E;
-	Mon, 20 May 2024 22:58:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9454910E08B;
+	Wed, 22 May 2024 08:13:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=yank.to header.i=@yank.to header.b="e6Iv/w+9";
+	dkim=pass (1024-bit key; unprotected) header.d=zoho.com header.i=ToddAndMargo@zoho.com header.b="TGKrPHGK";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 321 seconds by postgrey-1.36 at gabe;
- Mon, 20 May 2024 22:58:07 UTC
-Received: from st43p00im-ztbu10063701.me.com (st43p00im-ztbu10063701.me.com
- [17.58.63.178])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F068610E43E
- for <spice-devel@lists.freedesktop.org>; Mon, 20 May 2024 22:58:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yank.to; s=sig1;
- t=1716245565; bh=03eST2wR3RxlGi8Uc5M4/fPKgsoMQpRHGZ3qQLFlzXw=;
- h=From:Content-Type:Mime-Version:Subject:Message-Id:Date:To;
- b=e6Iv/w+95q627OTLEYjvn1tSLklxzRRaBHkpBG1IJWmkiisYG2GsBWGXXzrAW3Npw
- +HOBbAj/Ce+K649drXjo/LONuIRCGzdFscc3bWb2KApwhnp6UvvrNZjwbuw3763r3T
- yhPxtn1SOeNeRHe7699K4gSFONzvhGKmUJR9VKxk2hekslIVQHra62Xt93k+K/dfb3
- g8w4vglpvPYoSNmI4HfYhqWDVIzjaiiJrekkz6rOfh1ypxTGAYxDct6HjFUh8+U1dH
- Uu6G1ZDUYkvVUqhjykT42ew61S3kCOwpT43yw61OfqyV664bv8r8fGR0jFmJfZJ3Ix
- /szHSa1ikm0tg==
-Received: from smtpclient.apple (st43p00im-dlb-asmtp-mailmevip.me.com
- [17.42.251.41])
- by st43p00im-ztbu10063701.me.com (Postfix) with ESMTPSA id CF699D00357
- for <spice-devel@lists.freedesktop.org>; Mon, 20 May 2024 22:52:44 +0000 (UTC)
-From: Andreas Yankopolus <andreas@yank.to>
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.600.62\))
-Subject: USB mouse on MacOS arm64 client
-Message-Id: <867C1A17-6C0B-495D-98E2-BA4EF5667321@yank.to>
-Date: Mon, 20 May 2024 18:52:34 -0400
-To: spice-devel@lists.freedesktop.org
-X-Mailer: Apple Mail (2.3774.600.62)
-X-Proofpoint-ORIG-GUID: VgxgVJawIeaOTYhSgGwWlwxeQJFUP4dW
-X-Proofpoint-GUID: VgxgVJawIeaOTYhSgGwWlwxeQJFUP4dW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
- definitions=2024-05-20_12,2024-05-17_03,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=881
- mlxscore=0
- suspectscore=0 spamscore=0 malwarescore=0 adultscore=0 bulkscore=0
- clxscore=1030 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2405200182
+X-Greylist: delayed 903 seconds by postgrey-1.36 at gabe;
+ Wed, 22 May 2024 08:13:49 UTC
+Received: from sender4-pp-o91.zoho.com (sender4-pp-o91.zoho.com
+ [136.143.188.91])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D85CE10E08B
+ for <spice-devel@lists.freedesktop.org>; Wed, 22 May 2024 08:13:49 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1716364724; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=V0NWSdK6oMruhv2GTNPBgT6uNGzPsH13WPsiJsZv2LitvHp0TYpurDENhwPjy9ue9qo9fiGlCEAGitwEpJt0zrdXsQIuL0hI6CrgRomlKOBc/aWHhKIpdWoVLdb9KQbAxnvoNaLGtvS6HbfJs90TIHw9JKV065BIsD6TXI0IjSE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1716364724;
+ h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
+ bh=o8s8dT8qjuotEsKO0fTHh+6nlC+vCKIqoXJdLmUmy1k=; 
+ b=Eq0NAYiO28q5mS/bw3ze27v2gElx9V68x0W2P/yNij5caamYsMUeGdPYgG0m8FRByKfCBGXYkaDruwp3eExXJyMODzwY8CLHwWeNw7hsSMrc0E2GFBMFlhmP3CD2NUBn20eAZPm6JoUo2+u7rQJCs/6NSHCw0SdWkibo1ZSAE04=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
+ spf=pass  smtp.mailfrom=ToddAndMargo@zoho.com;
+ dmarc=pass header.from=<ToddAndMargo@zoho.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1716364724; 
+ s=zm2022; d=zoho.com; i=ToddAndMargo@zoho.com;
+ h=Message-ID:Date:Date:MIME-Version:From:From:Subject:Subject:To:To:Content-Type:Content-Transfer-Encoding:Feedback-ID:Message-Id:Reply-To:Cc;
+ bh=o8s8dT8qjuotEsKO0fTHh+6nlC+vCKIqoXJdLmUmy1k=;
+ b=TGKrPHGKqft7Lp63iDzRuvRjcgVWGDfAJg08d7RHH4/pcHVw6ET/z56R1zrQ4Vtw
+ 60tfOtUWJufHdO88Nb2nUkbEC3ACyt2Q46HRTJBk2HqJRqoJc7MwzLH9UyspA9wP2NR
+ NDCtFLfIxatFvE+GD99w+1EO82/3AR0AIQOnUBow=
+Received: by mx.zohomail.com with SMTPS id 1716364722659797.9991047192203;
+ Wed, 22 May 2024 00:58:42 -0700 (PDT)
+Message-ID: <e8572889-db80-43c3-aae2-40c2866c5201@zoho.com>
+Date: Wed, 22 May 2024 00:58:41 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: ToddAndMargo <ToddAndMargo@zoho.com>
+Subject: vdagent drag and drop question
+To: Spice Devel <spice-devel@lists.freedesktop.org>
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Feedback-ID: rr08011227af7fe45f941493b4141d8d9a0000d6d006d0f01266bf9d3e8c7fda9dbc91e89003ba8646e33e22:zu08011226b353a2b8a58e5d60cf1ca0660000670185dacf7d821e1c6eb23e07610261a081d52fe177b12d:rf08011226bf598ac7f171ba2cc4ab7117000037df2e2be13fd1908f4fcfbd164497aaddee6938aaa83790:ZohoMail
+X-ZohoMailClient: External
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,20 +64,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-All=E2=80=94
+Hi All,
 
-I=E2=80=99m on an M1 MacBook Pro accessing VMs running on an amd86 Linux =
-server.
+Host:
+    Fedora 39
+    spice-server-0.15.1-3.fc39.x86_64
+    spice-glib-0.42-3.fc39.x86_64
+    spice-gtk3-0.42-3.fc39.x86_64
+    spice-vdagent-0.22.1-6.fc39.x86_64
+    qemu-kvm-8.1.3-5.fc39.x86_64
 
-Is there a way to connect a USB device on the Mac to a VM?
+VM:
+    Windows 11 23H2
+    Virtio-win-driver-installer 0.1.240
+    Virtio-win-guest-tools  0.1.240
 
-I=E2=80=99m not able to install additional software on the VMs and am =
-trying to sort out mouse tracking, which is very laggy using the VirtIO =
-Tablet device. Passing the mouse between MacOS and the VM seemed worth =
-trying.
+I can drag and drop a file from my Linux host to a
+qemu-kvm Windows 11 virtual machine but I can not
+do it in reverse
 
-Maybe there=E2=80=99s another option?
+What am I doing wrong?
 
-Thanks,
+-T
 
-Andreas=
+-- 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Computers are like air conditioners.
+They malfunction when you open windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
