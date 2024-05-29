@@ -2,58 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8E7C8D1522
-	for <lists+spice-devel@lfdr.de>; Tue, 28 May 2024 09:15:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BD7A8D2EAC
+	for <lists+spice-devel@lfdr.de>; Wed, 29 May 2024 09:44:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F74210E12E;
-	Tue, 28 May 2024 07:15:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 98A8E1128EE;
+	Wed, 29 May 2024 07:44:22 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=zoho.com header.i=ToddAndMargo@zoho.com header.b="EH0U//6o";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="AFf1+1WZ";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from sender4-pp-o91.zoho.com (sender4-pp-o91.zoho.com
- [136.143.188.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C3E1710E12E
- for <spice-devel@lists.freedesktop.org>; Tue, 28 May 2024 07:15:49 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1716880546; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=Y+1iGHOoJeUgTHS5AK1ouwddebNC8zmIYDhI9cWOqovETLXBRDEMO8FgaGUP9y13T6mrVKr4p9IJKd+/3sw8yCHKN26ZDsTZ/bVZI0lolZbGjk7SSEhbw6YgMjxpjXufNHnKdR4iss/p6WemQKs0q3rzsy5E6epnitLMRwdSaEc=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1716880546;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=QZeBJE3OQucg4J6YukmsqVQwDtzzq8XsSBit2P+bJXc=; 
- b=l3WBFe5HbrmRsNpWYZswMl/0tCo5J4Y7QE9Z+G0+fc09w5gn53Q3T1MeaMG7qdr1zoXAlA8+w5yX3EkCyIOjUPui/8vzPqkCom9DLg+2fMCikwETNEtxvWS2NoOK/kfsld/3cgARJKBkPYtGPPprAEOLWH7Vp23hN2YL6+mkNnQ=
-ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
- spf=pass  smtp.mailfrom=ToddAndMargo@zoho.com;
- dmarc=pass header.from=<ToddAndMargo@zoho.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1716880546; 
- s=zm2022; d=zoho.com; i=ToddAndMargo@zoho.com;
- h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Feedback-ID:Message-Id:Reply-To;
- bh=QZeBJE3OQucg4J6YukmsqVQwDtzzq8XsSBit2P+bJXc=;
- b=EH0U//6ojOsraeSqWKuMBkPEvo+kWgHVE+RdIOKrTKQi0wd0KOFTUbyiIOYu2LWX
- mRVtzB9Qf+figQDbKO8mzwh3WfwYV5gXzwp2KW/WV2kXvGN/9k2CSJVOa8pzDGX0pRV
- 9du/8lZD4z2KCgG5xJbwkQ8L/y/R3ktxb1W9aXAM=
-Received: by mx.zohomail.com with SMTPS id 1716880544854958.6698078564791;
- Tue, 28 May 2024 00:15:44 -0700 (PDT)
-Message-ID: <4671c4c8-f6b0-49ba-8459-973054f0399b@zoho.com>
-Date: Tue, 28 May 2024 00:15:43 -0700
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AD8551128EE
+ for <spice-devel@lists.freedesktop.org>; Wed, 29 May 2024 07:44:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1716968661; x=1748504661;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=GdHSSmbyCOfGADQo6mJU1waB4qpyXbCpe+6Ow6h5VKg=;
+ b=AFf1+1WZcbdVP+TZSmkGrHWBWWgKfLncFAuNDPIQo7Pt/1ILzgksgcnz
+ zTOw60euYbEoedjqCIRkGmn5Iz4sX3tSR8FmzNlDVLytRRmL9/02FQk9m
+ 3XjsFTEjIOgGcNn+mg93Sqe2Igi80zivWSthiPtvMV/bp3WITw6OE0Ueh
+ MI6Khm9/x9WIQ+pOW8sJlZf8JMHPnmYB3QlnIVbJfHaRnhmddd139/7NY
+ zglsBUso3xIjYfAhUKNR6WaqY+Izy+wwpt6YMofsfeQcB+hO7lbJsmY70
+ cy/yLVd0HRrPhx8w+oS18huQ3b3bleFcptwjr2v8tjWp+r/PW3ggYzl7+ w==;
+X-CSE-ConnectionGUID: NLbN0cBZQp2UiFw0Pc4nbw==
+X-CSE-MsgGUID: PsXmJz94Q4+KHyj6GM9Zqw==
+X-IronPort-AV: E=McAfee;i="6600,9927,11085"; a="13540829"
+X-IronPort-AV: E=Sophos;i="6.08,197,1712646000"; d="scan'208";a="13540829"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+ by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 29 May 2024 00:44:20 -0700
+X-CSE-ConnectionGUID: 0iVe1cWGQLSwAmqGZpsNZg==
+X-CSE-MsgGUID: 4gwly4zFQAmXiiqFI0FAVg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,197,1712646000"; d="scan'208";a="35371501"
+Received: from vkasired-desk2.fm.intel.com ([10.105.128.132])
+ by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 29 May 2024 00:44:20 -0700
+From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+To: spice-devel@lists.freedesktop.org
+Cc: Vivek Kasireddy <vivek.kasireddy@intel.com>,
+ Frediano Ziglio <freddy77@gmail.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Dongwon Kim <dongwon.kim@intel.com>
+Subject: [PATCH v7 0/5] dcc: Create a stream for non-gl/remote clients that
+ want to use dmabuf (v7)
+Date: Wed, 29 May 2024 00:16:34 -0700
+Message-ID: <20240529071832.208908-1-vivek.kasireddy@intel.com>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: vdagent drag and drop question
-To: Victor Toso <victortoso@redhat.com>
-Cc: Spice Devel <spice-devel@lists.freedesktop.org>
-References: <e8572889-db80-43c3-aae2-40c2866c5201@zoho.com>
- <crqqaup72f7wwuig3w5rhjgwqdvwekkiy7mfkk3oyck4dimlq6@blcegm2qm4d2>
- <be5bc126-84c1-4223-9c5f-f35512f847e3@zoho.com>
- <geqsewyaswk233fgk4chhibmftm3h457kej6c7g6v35e3umy2a@2ynwa4tsi5nm>
-Content-Language: en-US
-From: ToddAndMargo <ToddAndMargo@zoho.com>
-In-Reply-To: <geqsewyaswk233fgk4chhibmftm3h457kej6c7g6v35e3umy2a@2ynwa4tsi5nm>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Feedback-ID: rr08011227dc4ac6490aadc0cdafc0fc6a00002bd7b60c2155b6aec7bd92b218fb2d07a7819084db541e3722:zu08011226e087245a5f4fcf663d325bf70000d49c813eb9b93bf219dc41f864bf2000790503d0f217256c:rf080112262e6857de6297d0e57f76507800007718b4de41e01b5cfc83376589529973625e7eb80dd2b125:ZohoMail
-X-ZohoMailClient: External
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,54 +69,97 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 5/28/24 00:01, Victor Toso wrote:
-> Hi,
-> 
-> On Mon, May 27, 2024 at 12:22:54PM GMT, ToddAndMargo wrote:
->> On 5/27/24 08:07, Victor Toso wrote:
->>> On Wed, May 22, 2024 at 12:58:41AM GMT, ToddAndMargo wrote:
->>>> Hi All,
->>>>
->>>> Host:
->>>>      Fedora 39
->>>>      spice-server-0.15.1-3.fc39.x86_64
->>>>      spice-glib-0.42-3.fc39.x86_64
->>>>      spice-gtk3-0.42-3.fc39.x86_64
->>>>      spice-vdagent-0.22.1-6.fc39.x86_64
->>>>      qemu-kvm-8.1.3-5.fc39.x86_64
->>>>
->>>> VM:
->>>>      Windows 11 23H2
->>>>      Virtio-win-driver-installer 0.1.240
->>>>      Virtio-win-guest-tools  0.1.240
->>>>
->>>> I can drag and drop a file from my Linux host to a
->>>> qemu-kvm Windows 11 virtual machine but I can not
->>>> do it in reverse
->>>>
->>>> What am I doing wrong?
->>>
->>>   From Guest to Client, drag-and-drop does not work.
->>>   From Client to Guest, it should. The data of the file is copied
->>> by the client (e.g: spice-gtk) and provided to the guest agent
->>> which creates the file with the contents.
->>
->> That explains it.  Thank you.
->>
->> Is there a file sharing option somewhere (other
->> that Samba)?
-> 
-> In SPICE? We have also webdav channel, it requires spice-webdavd
-> daemon running in the guest plus the client being build with
-> phodav option enabled.
-> 
-> Other than that, it depends on what you are using to manage the
-> VM. QEMU has quite a few options, the most popular nowadays is
-> virtiofs I think
-> 
->      https://libvirt.org/kbase/virtiofs.html
-> 
-> Cheers,
-> Victor
+For clients that cannot accept a dmabuf fd directly (such as those
+running on a remote system), this patch series provides a way for
+the Spice server to stream the gl/dmabuf data/buffer instead. This
+is mostly done by enabling the creation of Gst memory using a dmabuf
+fd as the source. This ability is useful given that dmabuf is the
+standard mechanism for sharing buffers between various drivers and
+userspace in many Graphics and Media usecases. Currently, this is
+tested with Qemu and remote-viewer using the x264enc/avdec_h264 
+and msdkh264enc/dec plugins to stream the Guest/VM desktop but it
+can be easily extended to other plugins and applications.
 
-Thank you!
+Here is roughly how things work:
+- The application (e.g, Qemu) chooses its preferred codec (a Gstreamer
+  one) and calls gl_scanout (to update the fd) followed by gl_draw.
+- In response, the Spice server checks to see if the client is capable
+  of accepting a dmabuf fd directly or not. If yes, the fd is forwarded
+  directly to the client; otherwise, a new stream is created.
+- The Spice server then sends the dmabuf fd to the Gstreamer encoder
+  which uses it as an input for creating an encoded buffer which is then
+  sent to the client.
+- Once the encoding process is done, an async completion cookie is sent
+  to the application.
+
+Here is a link to the previous version that used a drawable to share
+the dmabuf fd with the Gstreamer encoder:
+https://lists.freedesktop.org/archives/spice-devel/2023-January/052948.html
+
+This version is tested together with following (required) patches in qemu:
+https://gitlab.freedesktop.org/Vivek/qemu/-/commits/spice_gl_on_v2
+
+Changelog:
+
+v7:
+- Revert back to the previous design where we do not share fd with the stream
+  and scanout is the sole owner of the fd. This is because share fd ownership
+  opens up a lot of corner cases.
+
+v6: (Frediano)
+- Properly share ownership of the dmabuf fd between stream and scanout
+- Ensure that a newly created stream is associated with all connected clients
+
+v5:
+- Addressed review comments from Frediano mainly regarding adding autoconf
+  support for gstreamer-allocators dependency and not needing to access
+  scanout as part of gl draw operation
+
+v4:
+- Test with Virgl enabled
+- Associate dmabuf's y0_top with stream's top_down variable
+
+v3:
+- Updated the second patch to have a new primary surface created
+  whenever a new stream gets created. This will avoid having to
+  trigger primary surface creation from Qemu. And, this change
+  also fixes the following error seen with v2:
+  ../server/display-channel.cpp:2074:display_channel_create_surface:
+  condition `!display->priv->surfaces[surface_id]' failed
+- Rebase all patches on master
+
+v2:
+- Update all patches to address review comments from Frediano
+- Tested this series with msdkh264enc/dec plugins that will be added
+  in another patch series
+
+Cc: Frediano Ziglio <freddy77@gmail.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
+Cc: Dongwon Kim <dongwon.kim@intel.com>
+
+Vivek Kasireddy (5):
+  dcc: Check to see if the client supports multiple codecs (v2)
+  dcc: Create a stream associated with gl_draw for non-gl clients (v6)
+  dcc-send: Encode and send gl_draw stream data to the remote client
+    (v4)
+  gstreamer-encoder: Add an encoder function that takes dmabuf fd as
+    input (v3)
+  video-stream: Don't stop a stream associated with gl_draw (v2)
+
+ configure.ac                     |   2 +-
+ meson.build                      |   2 +-
+ server/dcc-send.cpp              | 158 +++++++++++++++++++-----
+ server/dcc.cpp                   |  31 +++--
+ server/dcc.h                     |   6 +
+ server/display-channel-private.h |   1 +
+ server/display-channel.cpp       |   1 +
+ server/gstreamer-encoder.c       | 165 ++++++++++++++++++++-----
+ server/video-encoder.h           |  13 ++
+ server/video-stream.cpp          | 205 ++++++++++++++++++++++++++-----
+ server/video-stream.h            |   4 +
+ 11 files changed, 486 insertions(+), 102 deletions(-)
+
+-- 
+2.45.1
+
