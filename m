@@ -2,41 +2,63 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40E9D8FD6BB
-	for <lists+spice-devel@lfdr.de>; Wed,  5 Jun 2024 21:48:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BC938FD70E
+	for <lists+spice-devel@lfdr.de>; Wed,  5 Jun 2024 22:06:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A1FC310E1AC;
-	Wed,  5 Jun 2024 19:47:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6D85F10E0A4;
+	Wed,  5 Jun 2024 20:06:23 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y1NjfrkD";
+	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 908 seconds by postgrey-1.36 at gabe;
- Tue, 04 Jun 2024 08:37:12 UTC
-Received: from fmg.srr.ro (fmg.srr.ro [193.231.72.62])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 06F2210E43E
- for <spice-devel@lists.freedesktop.org>; Tue,  4 Jun 2024 08:37:12 +0000 (UTC)
-Received: from mail0.srr.ro (mail.srr.ro [193.231.72.244])
- by fmg.srr.ro  with ESMTP id 4548Lxh5011864-4548Lxh7011864
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
- for <spice-devel@lists.freedesktop.org>; Tue, 4 Jun 2024 11:21:59 +0300
-Received: from [10.231.74.10] (master.srr.ro [193.231.72.240])
- (authenticated bits=0)
- by mail0.srr.ro (8.14.9/8.14.9) with ESMTP id 4548LxUv022771
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
- for <spice-devel@lists.freedesktop.org>; Tue, 4 Jun 2024 11:21:59 +0300
-To: spice-devel@lists.freedesktop.org
-From: Andrei Boros <andrei@srr.ro>
-Subject: Website error
-Organization: Societatea Romana de Radiodifuziune
-Message-ID: <b4f3a6c8-4fdd-da49-d56e-1590cc6c1766@srr.ro>
-Date: Tue, 4 Jun 2024 11:22:27 +0300
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.1
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com
+ [209.85.219.180])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E246D10E0A4
+ for <spice-devel@lists.freedesktop.org>; Wed,  5 Jun 2024 20:06:20 +0000 (UTC)
+Received: by mail-yb1-f180.google.com with SMTP id
+ 3f1490d57ef6-dfa71ded97bso152705276.1
+ for <spice-devel@lists.freedesktop.org>; Wed, 05 Jun 2024 13:06:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1717617979; x=1718222779; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vBEBrOwYR8A4fhQ2pt35VPv8rPNuq32rlkcjuYDhFPk=;
+ b=Y1NjfrkDNnX49A5DF6yr9tYa3+3eomV7/IpSbCwZ62wZsHnjV4oV4BkdqLnRf6jSSQ
+ rQpprVxb4XD2VktWws8hUyfvbTLiWW9CKiNnedQfrZJbMOq2d2WAa5d2SKuFxIoELA3X
+ 9v391OCJDMbNql+cpBmZDGM2vRpPT3eZx0ITSR+HPRdZyKRuyNq0Y3bncgqN8fL2L0pR
+ Fgc/fzrAFeViqeEilH+JT0ldpoOEG2oCSSWApZmZSFU1j6JOZKmwNnqy7uarHZVUUuBI
+ EfXBrt3qaWtk4UHBgSALtrx2NFDfuKItm/9E76hY4o+3poQeX1VkXr0FxNN4nYHHVmiX
+ qk/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1717617979; x=1718222779;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vBEBrOwYR8A4fhQ2pt35VPv8rPNuq32rlkcjuYDhFPk=;
+ b=P1NYJSJ+QFsGxUlJs/lq8MPBSOwEKe0x09/w6D2lAVqzryboGhE7XDpUVDSj2kyuPQ
+ BqF3VDSXHY4IlOrZL6ONmiKMHhE+xXgivfmLzrGt8NeZfi4olS8g02QntWxXYQzz9Eaf
+ 3hAJR8g1qCbsVFSLdChIRgvFJzNgpfDkLA/OIAqbifrHTSN6wXfpEkVtGf48s8ztoktQ
+ c2Xi0+S9T463WW+IJ3Ab0ymickrinYutUID9LrD2Llxk0CfLe6AqNEO2Uj59rCJnVUQz
+ oDJBPjhzALuGpv/H72RQm2vaKUsYtRJmlmbt30lEjTudtSnEqvjDXKcOHYVfmBONJqTj
+ 4qyQ==
+X-Gm-Message-State: AOJu0YzTFA/Yu11eWSXLJmie4WZfDm+dsdtimGfA//KMiXuNKAiA5t0c
+ o8clUYgWQbkIlW37f5nVmAzdHCWqf08dmu3RJin3Z6ImBPpURlq6Bqy/i2Zk+CelqsK09XEr8kg
+ bieUW6HHxD1+f1iPQTkQtFLcYJrg0ww==
+X-Google-Smtp-Source: AGHT+IEuhCcNnWIlqO30HarH+a/81MS3Qp32Lpzae7j9mD703hUtcAoenqlH6PbTXmApXIe1vrit2XFDg2SmDesZRNI=
+X-Received: by 2002:a25:aa87:0:b0:df4:e1f0:eeda with SMTP id
+ 3f1490d57ef6-dfadeb165eamr625212276.9.1717617979396; Wed, 05 Jun 2024
+ 13:06:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="------------7B2551D07A822984ADA31A04"
-Content-Language: en-US
-X-FE-Policy-ID: 2:4:2:SYSTEM
-X-Mailman-Approved-At: Wed, 05 Jun 2024 19:47:56 +0000
+References: <b4f3a6c8-4fdd-da49-d56e-1590cc6c1766@srr.ro>
+In-Reply-To: <b4f3a6c8-4fdd-da49-d56e-1590cc6c1766@srr.ro>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Wed, 5 Jun 2024 21:06:08 +0100
+Message-ID: <CAHt6W4c3hXnSUe67HgvKDdGhPo_8ubqh_J7_i0qXSMkCKa7y9w@mail.gmail.com>
+Subject: Re: Website error
+To: Andrei Boros <andrei@srr.ro>
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,59 +73,27 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---------------7B2551D07A822984ADA31A04
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Il giorno mer 5 giu 2024 alle ore 20:47 Andrei Boros <andrei@srr.ro> ha scritto:
+>
+> Hi,
+>
+> On your website, on the page https://www.spice-space.org/download.html there is a link under windows binaries to https://gitlab.freedesktop.org/spice/win32/spice-nsis
+> This yields a 404 not found error.
+>
 
 Hi,
+   weird... for me the page opens. But I won't be surprised if it's
+something related to permissions.
 
-On your website, on the page https://www.spice-space.org/download.html
-there is a link under windows binaries to
-https://gitlab.freedesktop.org/spice/win32/spice-nsis
-This yields a 404 not found error.
+Frediano
 
-Thank you.
--- 
-
-*ing. Andrei Boros*
-
-Serviciul IT&C
-*Radio Romania*
-|Tel:   +40-21-303-1870
-       +40-745-115721
-Email: andrei@srr.ro <mailto:andrei@srr.ro>|
-
-
---------------7B2551D07A822984ADA31A04
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    Hi, <br>
-    <br>
-    On your website, on the page
-    <a class="moz-txt-link-freetext" href="https://www.spice-space.org/download.html">https://www.spice-space.org/download.html</a> there is a link under
-    windows binaries to
-    <a class="moz-txt-link-freetext" href="https://gitlab.freedesktop.org/spice/win32/spice-nsis">https://gitlab.freedesktop.org/spice/win32/spice-nsis</a><br>
-    This yields a 404 not found error. <br>
-    <br>
-    Thank you.<br>
-    <div class="moz-signature">-- <br>
-      <p><b>ing. Andrei Boros</b></p>
-      <p>Serviciul IT&amp;C<br>
-        <b>Radio Romania</b><br>
-        <code>
-          Tel:   +40-21-303-1870<br>
-                 +40-745-115721<br>
-          Email: <a href="mailto:andrei@srr.ro">andrei@srr.ro</a></code></p>
-    </div>
-  </body>
-</html>
-
---------------7B2551D07A822984ADA31A04--
+> Thank you.
+> --
+>
+> ing. Andrei Boros
+>
+> Serviciul IT&C
+> Radio Romania
+> Tel:   +40-21-303-1870
+>        +40-745-115721
+> Email: andrei@srr.ro
