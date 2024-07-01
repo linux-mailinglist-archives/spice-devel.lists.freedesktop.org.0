@@ -2,51 +2,39 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7469B91D09F
-	for <lists+spice-devel@lfdr.de>; Sun, 30 Jun 2024 10:39:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3322891DDB7
+	for <lists+spice-devel@lfdr.de>; Mon,  1 Jul 2024 13:21:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 640C810E17A;
-	Sun, 30 Jun 2024 08:39:26 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VpUa90C8";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 71BCE10E10C;
+	Mon,  1 Jul 2024 11:21:08 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6B02110E8B4;
- Wed, 26 Jun 2024 13:35:24 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9100B61A0F;
- Wed, 26 Jun 2024 13:35:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1116AC2BD10;
- Wed, 26 Jun 2024 13:35:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1719408923;
- bh=K19aU+29zeZcJ3frko2cJmIO5k73MSNWKAXAl+XEBc0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VpUa90C8RzRLUXLW75wKPDRjAYdM/dBQCSIJyjSydBxjjLnlUAXwzZQnCqoQbkdZ9
- ioyKJBWtz6Hi7vvOdYssfB4FFJvrm5RtY4/Ji+dIV1zeyxc3doUzJrrgVBqVu7/tjB
- aUMz5HzXIpY9twOKG6tzuFhLhu9ntJF5/uxAE7gZk2oLx9KzMrukvNxsB/9gjjux2o
- lu92igpTDXbVJVHM4+CKE5erX4w//mJzODnYU82pYWHC/VEyqtszPwZu9tJ2YzhtZ5
- MPw1zA5hnIHvqnlukMB1cT7ONRLVJItLb6wwZY7q7xziZiZQuKDxL9qljbCeOFT2d2
- P8CIPjwt9wmgg==
-From: Maxime Ripard <mripard@kernel.org>
-To: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
- tzimmermann@suse.de, airlied@gmail.com, daniel@ffwll.ch,
- noralf@tronnes.org, Chen Ni <nichen@iscas.ac.cn>
-Cc: Maxime Ripard <mripard@kernel.org>, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Subject: Re: (subset) [PATCH] drm/qxl: Add check for drm_cvt_mode
-Date: Wed, 26 Jun 2024 15:35:12 +0200
-Message-ID: <171940890752.2204713.11667399517595004219.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240621071031.1987974-1-nichen@iscas.ac.cn>
-References: <20240621071031.1987974-1-nichen@iscas.ac.cn>
+X-Greylist: delayed 503 seconds by postgrey-1.36 at gabe;
+ Mon, 01 Jul 2024 11:21:07 UTC
+Received: from new-mail.astralinux.ru (new-mail.astralinux.ru [51.250.53.244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 370D010E10C
+ for <spice-devel@lists.freedesktop.org>; Mon,  1 Jul 2024 11:21:07 +0000 (UTC)
+Received: from rbta-msk-lt-106062.astralinux.ru (unknown [10.177.20.58])
+ by new-mail.astralinux.ru (Postfix) with ESMTPA id 4WCNgF4TNQzlW49;
+ Mon,  1 Jul 2024 14:12:41 +0300 (MSK)
+From: Anastasia Belova <abelova@astralinux.ru>
+To: spice-devel@lists.freedesktop.org
+Cc: Anastasia Belova <abelova@astralinux.ru>,
+	sdl.qemu@linuxtesting.org
+Subject: [PATCH] usbredirhost: prevent overflow in
+ usbredirhost_set_iso_threshold
+Date: Mon,  1 Jul 2024 14:11:54 +0300
+Message-Id: <20240701111154.11633-1-abelova@astralinux.ru>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 30 Jun 2024 08:39:25 +0000
+X-DrWeb-SpamScore: 0
+X-DrWeb-SpamState: legit
+X-DrWeb-SpamDetail: gggruggvucftvghtrhhoucdtuddrgedvfedrvdehuddgtddvucetufdoteggodetrfcurfhrohhfihhlvgemucfftfghgfeunecuuegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomheptehnrghsthgrshhirgcuuegvlhhovhgruceorggsvghlohhvrgesrghsthhrrghlihhnuhigrdhruheqnecuggftrfgrthhtvghrnhepfffhffeigfegvdejudfhtdejgfdvhfetiedvgfelveeliefhjefhfeektefhgeehnecukfhppedutddrudejjedrvddtrdehkeenucfrrghrrghmpehhvghloheprhgsthgrqdhmshhkqdhlthdquddtiedtiedvrdgrshhtrhgrlhhinhhugidrrhhupdhinhgvthepuddtrddujeejrddvtddrheekmeegkeefgeekpdhmrghilhhfrhhomheprggsvghlohhvrgesrghsthhrrghlihhnuhigrdhruhdpnhgspghrtghpthhtohepfedprhgtphhtthhopehsphhitggvqdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhgpdhrtghpthhtoheprggsvghlohhvrgesrghsthhrrghlihhnuhigrdhruhdprhgtphhtthhopehsughlrdhqvghmuheslhhinhhugihtvghsthhinhhgrdhorhhgnecuffhrrdghvggsucetnhhtihhsphgrmhemucenucfvrghgshem
+X-DrWeb-SpamVersion: Dr.Web Antispam 1.0.7.202406240#1719828397#02
+X-AntiVirus: Checked by Dr.Web [MailD: 11.1.19.2307031128,
+ SE: 11.1.12.2210241838, Core engine: 7.00.65.05230, Virus records: 12039011,
+ Updated: 2024-Jul-01 08:59:52 UTC]
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,13 +49,31 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, 21 Jun 2024 15:10:31 +0800, Chen Ni wrote:
-> Add check for the return value of drm_cvt_mode() and return the error if
-> it fails in order to avoid NULL pointer dereference.
-> 
-> 
+pkts_per_transfer < MAX_PACKETS_PER_TRANSFER = 32.
+transfer_count < MAX_TRANSFER_COUNT = 16.
+max_packetsize = maxp * mult. mult <= 3.
+maxp <= 0x7ff. If all variables have their max value,
+the result will be bigger that uint16_t.
+Add an explicit cast.
 
-Applied to misc/kernel.git (drm-misc-next).
+Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
+---
+ usbredirhost/usbredirhost.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks!
-Maxime
+diff --git a/usbredirhost/usbredirhost.c b/usbredirhost/usbredirhost.c
+index 03c56e9..ca19473 100644
+--- a/usbredirhost/usbredirhost.c
++++ b/usbredirhost/usbredirhost.c
+@@ -1193,7 +1193,7 @@ static void usbredirhost_stop_stream(struct usbredirhost *host,
+ static void usbredirhost_set_iso_threshold(struct usbredirhost *host,
+     uint8_t pkts_per_transfer, uint8_t transfer_count, uint16_t max_packetsize)
+ {
+-    uint64_t reference = pkts_per_transfer * transfer_count * max_packetsize;
++    uint64_t reference = (uint64_t)pkts_per_transfer * transfer_count * max_packetsize;
+     host->iso_threshold.lower = reference / 2;
+     host->iso_threshold.higher = reference * 3;
+     DEBUG("higher threshold is %" PRIu64 " bytes | lower threshold is %" PRIu64 " bytes",
+-- 
+2.30.2
+
