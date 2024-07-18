@@ -2,52 +2,60 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C2A093767E
-	for <lists+spice-devel@lfdr.de>; Fri, 19 Jul 2024 12:10:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9E4993767F
+	for <lists+spice-devel@lfdr.de>; Fri, 19 Jul 2024 12:10:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1616D10EBAA;
-	Fri, 19 Jul 2024 10:10:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 72F3F10EBAB;
+	Fri, 19 Jul 2024 10:10:51 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F6aF3B5m";
+	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 74C0310E834;
- Thu, 18 Jul 2024 13:20:05 +0000 (UTC)
-Received: from icess-ProLiant-DL380-Gen10.. (unknown [183.174.60.14])
- by APP-01 (Coremail) with SMTP id qwCowABXXMh1Fplm_aoRBA--.954S2;
- Thu, 18 Jul 2024 21:19:59 +0800 (CST)
-From: Ma Ke <make24@iscas.ac.cn>
-To: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
- daniel@ffwll.ch, noralf@tronnes.org
-Cc: virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Ma Ke <make24@iscas.ac.cn>, stable@vger.kernel.org
-Subject: [PATCH v2] drm/qxl: fix null pointer dereference in qxl_add_mode
-Date: Thu, 18 Jul 2024 21:19:46 +0800
-Message-Id: <20240718131946.769560-1-make24@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
+ [209.85.208.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EBD4610EB07
+ for <spice-devel@lists.freedesktop.org>; Thu, 18 Jul 2024 20:06:39 +0000 (UTC)
+Received: by mail-ed1-f42.google.com with SMTP id
+ 4fb4d7f45d1cf-5a1fcb611baso206466a12.1
+ for <spice-devel@lists.freedesktop.org>; Thu, 18 Jul 2024 13:06:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1721333198; x=1721937998; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=SmupnGVJ1rHuBoYGNeC38mrWw/+m5ic1JWGIHZBnwCY=;
+ b=F6aF3B5mYMWbjizEQfQ8mUeSM6GL7YrTfgotLsf1iMt2rFtJeiLPPqvs6Q+GN8pS3h
+ w6xdRc0b/i8SwAWHkJA/gpKOyvoyO4EcgsVqGfuK/3SVY6uKJaUb3cbmOsi/2gpWGqJI
+ HVg7h3nhS8AhPs6VCjbnFDoYl9UDoiGjInckPBvxQH5G+F90pwa6wS96seI5tr3G5AwC
+ p73pULpLN7IrIhuATndpvN8uj8ueBtTEs8MObKW5LIC9IhZU+4ScAPr9iBkqI/ERWK62
+ 8UCD10QNXg3NI5ZRJlV2dfsM01Kw2Y1xCyyJprAhj14d7EXs3J6eXAaJnRU6k2gzF0A6
+ c0QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721333198; x=1721937998;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SmupnGVJ1rHuBoYGNeC38mrWw/+m5ic1JWGIHZBnwCY=;
+ b=a7/8PIGt9T916mhFI6y8HQ7CKE4GvZHvDRVP6wg4ohT+GIu2fp4FmCYlfuDwvxWNMo
+ qalNx5dEwNtepa72Nt02E+NxEVUhoVjEg3P90u9jFYeLWw5WPLHS7tQkiE5VncVOOpMU
+ npEKYTtDLDKb09oFWR6tOSeE07CgYvPDUcY4twnFHGKEPT+2TnskpiqluZPvxPYvGUxt
+ 1/t34KEmXz70zUkwOhoGsahzU4qIWy3KTXvhIiiVEYC8XkrCUm8l5bclgtSnpseXTev4
+ /B6rfdrx1QHyb+xgW7ppmoIpehkhhmAUEUufSwfwzRTZvBkihKCnPlFoyT2r298+7vSX
+ Uqbw==
+X-Gm-Message-State: AOJu0Yw2pjG+Yan2xPImfqSs3MQMQSwEXwD4y7muul84dX72ziKPegPB
+ ikeQFi1pOk6t1v7yONJJGMMadi/QI2wv17P/jcKlHIjtfDK9tj5tnAkOF9SmiIU1QS7wdgA2wEh
+ +dzR1YqNDQ24OkXvX2wybhgYMFrpgUJAvmz9hhQ==
+X-Google-Smtp-Source: AGHT+IHnJRTbXURGJRwV3fVpI5n2AlpHrwCYIhJ10dcDt5D2ARSUxNES1F9pnIli8RrOZ1VGay8DXFpKZXizQ7mwgnU=
+X-Received: by 2002:a17:906:b74d:b0:a72:8c15:c73e with SMTP id
+ a640c23a62f3a-a7a0130e696mr420690866b.55.1721333197674; Thu, 18 Jul 2024
+ 13:06:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABXXMh1Fplm_aoRBA--.954S2
-X-Coremail-Antispam: 1UD129KBjvdXoWruF13Kr4UuryDuw4kurW3Wrg_yoWDXrb_ur
- 18Zrn7WryDuF1v9r47ZryfuF4SvFykZFWxXr1xta4Sq3y8G3ZrXr43Z3Z5Z3y7Z348CFnr
- Aw4UG3Z5Aan7GjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb3xFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6r1S6rWUM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
- 0DM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
- 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVWUJVW8Jw
- Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAG
- YxC7M4IIrI8v6xkF7I0E8cxan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
- AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
- 17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
- IF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4l
- IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvf
- C2KfnxnUUI43ZEXa7VUbZmitUUUUU==
-X-Originating-IP: [183.174.60.14]
-X-CM-SenderInfo: ppdnvj2u6l2u1dvotugofq/
-X-Mailman-Approved-At: Fri, 19 Jul 2024 10:10:01 +0000
+From: Randall Suter <randallsuter@gmail.com>
+Date: Thu, 18 Jul 2024 23:06:26 +0300
+Message-ID: <CA+mZ-_JE5f7qdNFyS-zKzYwx8e22xyzNG9oU4B7cNOyCUFAENQ@mail.gmail.com>
+Subject: Guest Post Request
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000c99ffe061d8b1d14"
+X-Mailman-Approved-At: Fri, 19 Jul 2024 10:10:50 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,35 +70,29 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-In qxl_add_mode(), the return value of drm_cvt_mode() is assigned to mode,
-which will lead to a possible NULL pointer dereference on failure of
-drm_cvt_mode(). Add a check to avoid npd.
+--000000000000c99ffe061d8b1d14
+Content-Type: text/plain; charset="UTF-8"
 
-Cc: stable@vger.kernel.org
-Fixes: 1b043677d4be ("drm/qxl: add qxl_add_mode helper function")
-Signed-off-by: Ma Ke <make24@iscas.ac.cn>
----
-Changes in v2:
-- added a blank line;
-- added Cc line.
----
- drivers/gpu/drm/qxl/qxl_display.c | 3 +++
- 1 file changed, 3 insertions(+)
+Good day! My name is Randall. I would like to contribute to your website (
+spice-space.org <http://www.spice-space.org/>) by submitting a guest post.
+Are there any specific requirements that I need to follow?
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index c6d35c33d5d6..c371ee59ab07 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -236,6 +236,9 @@ static int qxl_add_mode(struct drm_connector *connector,
- 		return 0;
- 
- 	mode = drm_cvt_mode(dev, width, height, 60, false, false, false);
-+	if (!mode)
-+		return -ENOMEM;
-+
- 	if (preferred)
- 		mode->type |= DRM_MODE_TYPE_PREFERRED;
- 	mode->hdisplay = width;
--- 
-2.25.1
+Best Regards,
+Randall Suter
 
+--000000000000c99ffe061d8b1d14
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr">Good day! My name is Ran=
+dall. I would like to contribute to your website (<a href=3D"http://www.spi=
+ce-space.org/" class=3D"gmail-waffle-rich-text-link" style=3D"font-size:13p=
+x;font-family:Arial">spice-space.org</a>)=C2=A0by submitting a guest post. =
+Are there any specific requirements that I need to follow?</div><div dir=3D=
+"ltr"><div><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"ltr"><div=
+><br></div><div><font face=3D"arial, sans-serif">Best Regards,<br></font></=
+div><div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><font face=
+=3D"arial, sans-serif">Randall Suter</font></span><br></div></div></div></d=
+iv></div></div></div>
+
+--000000000000c99ffe061d8b1d14--
