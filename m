@@ -2,63 +2,60 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D53509376BD
-	for <lists+spice-devel@lfdr.de>; Fri, 19 Jul 2024 12:47:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51E0C9380BB
+	for <lists+spice-devel@lfdr.de>; Sat, 20 Jul 2024 12:32:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 80C7710EBCF;
-	Fri, 19 Jul 2024 10:47:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 53C2310E118;
+	Sat, 20 Jul 2024 10:32:43 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SnYBCgYa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TvNWNhRA";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com
- [209.85.219.178])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AB05C10EBCF
- for <spice-devel@lists.freedesktop.org>; Fri, 19 Jul 2024 10:47:08 +0000 (UTC)
-Received: by mail-yb1-f178.google.com with SMTP id
- 3f1490d57ef6-e05d48cf642so1874179276.2
- for <spice-devel@lists.freedesktop.org>; Fri, 19 Jul 2024 03:47:08 -0700 (PDT)
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com
+ [209.85.160.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C895910EC9E
+ for <spice-devel@lists.freedesktop.org>; Fri, 19 Jul 2024 19:04:09 +0000 (UTC)
+Received: by mail-oa1-f50.google.com with SMTP id
+ 586e51a60fabf-260fff38792so903800fac.1
+ for <spice-devel@lists.freedesktop.org>; Fri, 19 Jul 2024 12:04:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1721386027; x=1721990827; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2T3DCnOu13xmzYCc6ROemcXarPYGjc2UawJGnCRjr8g=;
- b=SnYBCgYaUURj/UajmeMzq7qJow7ioj+yEoP5z/J+/VNStAdbIOrc7DmNF4S0pi+j0W
- 14CMr5XuLl0VEJU3Bv7jRzl9q6svxRSQ/PEgatBzV0VM39rGy9WrOaryDG5YyX+iE8Ui
- OWW44ozkkqbIkZNgV2iEWG3LK/WNZYeHEOpn1RL3R6JuZe2cfZAgD0AYdW0wozd5b/47
- czqoOOoEyDEPnIkobIuIE5rbksrLCaCvcoUTjOaO2AYlEyIMvvmDAqUde0uaSJ8pvImg
- 47s7CCvTOglsoxTBtc756j1bHT3uVcoQgpmZs7RiLLDB1IljbMv3/aHLISGx1Z10oYNp
- qoSQ==
+ d=gmail.com; s=20230601; t=1721415848; x=1722020648; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=rnmaqcSEHvOgKekrD/2/0DTHH4qNEp+UlT5L+oep46Y=;
+ b=TvNWNhRAmaYWXIPuwQfM7lX6/f4iTXgDJ/C5XILnpbIFyoRT4EhGsND0mfpkhRWqfU
+ WxzeD49gcN4bQxzxZMzFc+ovwrX7sj8SxP1h2l34ZmgwB84fFJaBVSe83VhBy442iFJo
+ /GwmIH9N4ElynYIMqMytCUftYHU3HmoRQ+yAbpl5xF7SVn2P8wprBdT5XursTZ32oupx
+ HpTSFVuUf/yZOCfUvmZwEQzL82VRMCzFCMoPuaBMiGAMJE71AXKo82usKpzn5gkywmrt
+ aXASxCazllIpJ+n2+t7nal7rXLEAJpuBRtJ4fuCd3ZkVaTlWc4l/7BKJyPIbpIg7lA+R
+ edTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721386027; x=1721990827;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2T3DCnOu13xmzYCc6ROemcXarPYGjc2UawJGnCRjr8g=;
- b=WZ0cR0luPrB/sDMHTLd7myL5/hdkexayH+7aScOJo1sGofDCm0Uy1t3FwfuBYUHipD
- mG8LsKI4pGI71IuqdOujIjCQti0J3DPXrojaYHf1ths81dvx+DRSA+GibhD9s15c/jwh
- rFPjlAIs3gZrzY3kD4tHM60ziAmk2Hw5luEi3NGwELwsBvNLh7yNGcPWJQOK8ybbXE3p
- TToq61NSluz8ZFbdcAdbjfF/PGaO4RuQIvtYxhL0/JvZ7FveqSsZi5ViSkEfOI8XWkKk
- jC1gk11TO+wBU4DqBN8luELOArGh7cOBCROihbCHQ4o3GmRoOdZR1iAo6lCoqf/7K8Et
- m2Fw==
-X-Gm-Message-State: AOJu0YzKj7hwAlzgsrAyXKRkVAoXG/+JfrHTBLAg2JFtDh9pcDANBlLY
- 3JHamT9ccJiHSnRZtUeKlnHPBeSDqPggPvEoCVGrekHMsMicH2iWyPyfzjmKqOYBCvF3eiMFndC
- HZUc930u79d+ZPylY9VrhIldoP1g=
-X-Google-Smtp-Source: AGHT+IFZEwinW3FC63VwIfhvSc6clDgUchJ+0AsUAG3wyCgbxYi1ek09yAh5vVaCUZ2/X/y9uo2MJcRc3/q2jqTisss=
-X-Received: by 2002:a05:6902:70c:b0:e06:5adc:6c56 with SMTP id
- 3f1490d57ef6-e065adc735fmr4148367276.47.1721386027545; Fri, 19 Jul 2024
- 03:47:07 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721415848; x=1722020648;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rnmaqcSEHvOgKekrD/2/0DTHH4qNEp+UlT5L+oep46Y=;
+ b=KrL1KhtczjPa7gOilqvCe7ZAFxw2Wd+8Yp8Iz0373kIfTs4XVAOq0favCfMQs0mDhr
+ 8PuISYKi6jK/xNEu8TdkimGRA3v+JWMOelrbw/4LdKkk/Jb/3aCU1BQ3+WWDscAVCVoq
+ vBtmSIe0A7VvNSH7E8MKw/3rCunAjSjWTG78TBqWvdwGt9wgk7bd1Z4llEKS2TU/EyIo
+ jwET4r2GsC98/Da8CWoE7rDo3QRmPwJlqupEKIy9/zvmXxdT7TcOvCiqDJvyZmF58jhV
+ CeFzm3EL74wmzEtLEsrfTZXvcapd1AnYbNKGbeBkJhQWnncG2vj+fEOvMK2T6VeTJvev
+ UJxg==
+X-Gm-Message-State: AOJu0Yzwpp+RJiR1unh7MHwrxFQsAUAD0lhI+X87fBXCNPUTg8CAVJ5j
+ 4Xm5BYdwzl5e1EOh6XaMLgonAHdcTL4YlJYnt8XKwt87NPVaOZnrxJb5iZ2YpHyAhdEZ+es4+mI
+ SdB7sjT8DkHaz08miZeEU5VI7ScmUew==
+X-Google-Smtp-Source: AGHT+IGS6Al7qQSGrWkOCcIKQTJnFvjQ/w3x4ORfhh0VVZN4/VmPJP4xMR5aNHeIDW9oMiBFZwrZYdVIjKZGUWLlzTI=
+X-Received: by 2002:a05:6871:3a23:b0:261:236c:2bc0 with SMTP id
+ 586e51a60fabf-261236c74e7mr292417fac.13.1721415847928; Fri, 19 Jul 2024
+ 12:04:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <CA+mZ-_JE5f7qdNFyS-zKzYwx8e22xyzNG9oU4B7cNOyCUFAENQ@mail.gmail.com>
-In-Reply-To: <CA+mZ-_JE5f7qdNFyS-zKzYwx8e22xyzNG9oU4B7cNOyCUFAENQ@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Fri, 19 Jul 2024 11:46:56 +0100
-Message-ID: <CAHt6W4eAR8gN6=d9LWH4EOukuWgx76UfBj0QGT0ctdr=UbWF_Q@mail.gmail.com>
-Subject: Re: Guest Post Request
-To: Randall Suter <randallsuter@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+From: David Counter <davidjcounter@gmail.com>
+Date: Fri, 19 Jul 2024 15:03:56 -0400
+Message-ID: <CAAkeHDZcCEOUdJpijZ9HmZFGtDSsGFumUUhLqkzKi2PBTqvKBA@mail.gmail.com>
+Subject: Question regarding suitability of Spice for my workplace
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000206ae6061d9e5c8a"
+X-Mailman-Approved-At: Sat, 20 Jul 2024 10:32:42 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,17 +70,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Il giorno ven 19 lug 2024 alle ore 11:20 Randall Suter
-<randallsuter@gmail.com> ha scritto:
->
-> Good day! My name is Randall. I would like to contribute to your website (spice-space.org) by submitting a guest post. Are there any specific requirements that I need to follow?
->
-> Best Regards,
-> Randall Suter
+--000000000000206ae6061d9e5c8a
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Randall,
-   pages are generated from
-https://gitlab.freedesktop.org/spice/spice-space-pages.
-What'a a "guest post" ?
+Good Afternoon
 
-Frediano
+Quick question - is it possible to stream video from two separate sources
+to two instances of the Spice client program on the desktop of a thin
+client? I'm looking to display Windows and Linux concurrently on two
+monitors attached to my Wyse 5070.
+
+Thanks in advance,
+
+David Counter
+
+Systems Support Technician | Union County Emergency Services
+
+C: (941) 953-6282
+E: davidjcounter@gmail.com
+
+--000000000000206ae6061d9e5c8a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:verdana,=
+sans-serif">Good Afternoon</div><div class=3D"gmail_default" style=3D"font-=
+family:verdana,sans-serif"><br></div><div class=3D"gmail_default" style=3D"=
+font-family:verdana,sans-serif">Quick question - is it possible to stream v=
+ideo from two separate sources to two instances of the Spice client program=
+ on the desktop of a thin client? I&#39;m looking to display Windows and Li=
+nux concurrently on two monitors attached to my Wyse 5070.</div><div class=
+=3D"gmail_default" style=3D"font-family:verdana,sans-serif"><br></div><div =
+class=3D"gmail_default" style=3D"font-family:verdana,sans-serif">Thanks in =
+advance,</div><div class=3D"gmail_default" style=3D"font-family:verdana,san=
+s-serif"><br></div><div><div dir=3D"ltr" class=3D"gmail_signature" data-sma=
+rtmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><div><div><div=
+>David Counter<br></div></div></div><div><br></div><div>Systems Support Tec=
+hnician | Union County Emergency Services=C2=A0</div><div><br></div><div>C:=
+ (941) 953-6282</div><div>E: <a href=3D"mailto:davidjcounter@gmail.com" tar=
+get=3D"_blank">davidjcounter@gmail.com</a></div></div></div></div></div></d=
+iv>
+
+--000000000000206ae6061d9e5c8a--
