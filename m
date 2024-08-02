@@ -2,55 +2,58 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F80E942838
-	for <lists+spice-devel@lfdr.de>; Wed, 31 Jul 2024 09:40:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F2E0945B23
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2024 11:37:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8EA1E10E48C;
-	Wed, 31 Jul 2024 07:40:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B873B10E02E;
+	Fri,  2 Aug 2024 09:37:11 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="Z+slddAI";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="cI19aBy2";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADF1610E2BC
- for <spice-devel@lists.freedesktop.org>; Tue, 30 Jul 2024 16:55:57 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id CEA4C61FF5;
- Tue, 30 Jul 2024 16:55:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E86C7C32782;
- Tue, 30 Jul 2024 16:55:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1722358556;
- bh=zDoE6M5aA2nV72gzQUViUc9h8F7APUuJ1YeR4ejRy94=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Z+slddAIG5KTKovT++K5iyR/u6Gp73yZvT2JGYKEAQ6Gwe/q0zFjtKdBeohqOR/oL
- D7q01L4sbnWlzsQPdWlEI+brb5//NU0lh7R9/aFc1FdMlYDQRvj4eg8BpE1f6Z8sBB
- pPN9nBu7dHtlhs8O9M816yBHnLkzbGXuDLcNjiOA=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: stable@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, patches@lists.linux.dev,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Kaplan <david.kaplan@amd.com>,
- Daniel Vetter <daniel.vetter@ffwll.ch>,
- Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Zack Rusin <zack.rusin@broadcom.com>, Dave Airlie <airlied@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, Sasha Levin <sashal@kernel.org>
-Subject: [PATCH 6.10 373/809] drm/qxl: Pin buffer objects for internal mappings
-Date: Tue, 30 Jul 2024 17:44:09 +0200
-Message-ID: <20240730151739.392917742@linuxfoundation.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240730151724.637682316@linuxfoundation.org>
-References: <20240730151724.637682316@linuxfoundation.org>
-User-Agent: quilt/0.67
-X-stable: review
-X-Patchwork-Hint: ignore
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 498CD10E02E
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2024 09:37:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1722591429;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=HjEaAVHZQfA0N8wpPjJFMtklZDg1n6rRupcIFVyzXUY=;
+ b=cI19aBy2o+X8gipwJ1yefjBq4i9ytei8F05dqZTV9E3lzlbKR4Gp3bSJPm+pvBysDFe7Kx
+ ukbp0v7Ywk+rIEQnd8Ys8dTMN7s3PsJ8ZPWNKC+qwwIylQbuaJjHSP6zKCB/L1RNQmx5lp
+ mN4pSahgpk45xzDMJ8TceDHi6NZzyI8=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-536-iBOsclbJOY6fsoHgPmZ1_Q-1; Fri,
+ 02 Aug 2024 05:37:06 -0400
+X-MC-Unique: iBOsclbJOY6fsoHgPmZ1_Q-1
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 468631955F0D; Fri,  2 Aug 2024 09:37:05 +0000 (UTC)
+Received: from localhost (unknown [10.45.225.117])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 2E839300018D; Fri,  2 Aug 2024 09:37:03 +0000 (UTC)
+Date: Fri, 2 Aug 2024 11:37:02 +0200
+From: Victor Toso <victortoso@redhat.com>
+To: David Counter <davidjcounter@gmail.com>
+Cc: spice-devel@lists.freedesktop.org
+Subject: Re: Question regarding suitability of Spice for my workplace
+Message-ID: <vowcjbkdvxtrtz7sz5b2r2iyfndiutv7neff2zxwly4kcmtxqr@72r4tbxvsict>
+References: <CAAkeHDZcCEOUdJpijZ9HmZFGtDSsGFumUUhLqkzKi2PBTqvKBA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 31 Jul 2024 07:40:00 +0000
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="pjs7eva7gyx5hotn"
+Content-Disposition: inline
+In-Reply-To: <CAAkeHDZcCEOUdJpijZ9HmZFGtDSsGFumUUhLqkzKi2PBTqvKBA@mail.gmail.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,180 +68,54 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-6.10-stable review patch.  If anyone has any objections, please let me know.
 
-------------------
+--pjs7eva7gyx5hotn
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-From: Thomas Zimmermann <tzimmermann@suse.de>
+On Fri, Jul 19, 2024 at 03:03:56PM GMT, David Counter wrote:
+> Good Afternoon
+>=20
+> Quick question - is it possible to stream video from two separate sources=
+ to
+> two instances of the Spice client program on the desktop of a thin client=
+? I'm
+> looking to display Windows and Linux concurrently on two monitors attache=
+d to
+> my Wyse 5070.
 
-[ Upstream commit c537fb4e3d36e7cd1a0837dd577cd30d3d64f1bc ]
+Yes, just by running two spice clients.
 
-Add qxl_bo_pin_and_vmap() that pins and vmaps a buffer object in one
-step. Update callers of the regular qxl_bo_vmap(). Fixes a bug where
-qxl accesses an unpinned buffer object while it is being moved; such
-as with the monitor-description BO. An typical error is shown below.
+>=20
+> Thanks in advance,
+>=20
+> David Counter
+>=20
+> Systems Support Technician | Union County Emergency Services=A0
+>=20
+> C: (941) 953-6282
+> E: davidjcounter@gmail.com
 
-[    4.303586] [drm:drm_atomic_helper_commit_planes] *ERROR* head 1 wrong: 65376256x16777216+0+0
-[    4.586883] [drm:drm_atomic_helper_commit_planes] *ERROR* head 1 wrong: 65376256x16777216+0+0
-[    4.904036] [drm:drm_atomic_helper_commit_planes] *ERROR* head 1 wrong: 65335296x16777216+0+0
-[    5.374347] [drm:qxl_release_from_id_locked] *ERROR* failed to find id in release_idr
+--pjs7eva7gyx5hotn
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Commit b33651a5c98d ("drm/qxl: Do not pin buffer objects for vmap")
-removed the implicit pin operation from qxl's vmap code. This is the
-correct behavior for GEM and PRIME interfaces, but the pin is still
-needed for qxl internal operation.
+-----BEGIN PGP SIGNATURE-----
 
-Also add a corresponding function qxl_bo_vunmap_and_unpin() and remove
-the old qxl_bo_vmap() helpers.
+iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmasqL4ACgkQl9kSPeN6
+SE99Qg/9GhsXJodMDec/LDni7Q60yIdtmGvyz8PZ+ZyALIT+pemvYEUJgwEHwUQx
+Tpe2quIkGreSnCP+OaqMqOcpmNtSV6M4RrGyfGuBj2mWF8DDQHNBMMEG4GadaSeU
+Klbt24lSM6M+OAESzJjVluZIfYnBA7Y6grKn09BJNI1lqo7EmAFTmXE6JXdACral
+RmIF7t6lH5KfRqcaF1fWoU15PQKJhaXV0ZTSBzRIS9FysecJqJ9RW+89T8twyek6
+QUwtv6kGyhLR2vxmaGWUaKIKXKexDcfU6I5GTbODSYCtWjkXW+k5PHQ3jys4/DHv
+Raemm15+agwnhsXX2TVRZ093yn1CfX5ptyzzyt8RO/ZE8HTX+8wXPt1F3L1OhorQ
+5wJrm2Sr7EjJwJaie22irtnjyHHGL3n4lstf0RgJPH7UJ9hBDfs3D7duI68EP4MO
+7fuEPwwaYJhJQd7pnk35IwSFs7QoFsuFkk9wBvJHOUbl40tTcGyRlvPEpDRkqJDp
+VskLeYpDLxpZ2mI8FjddwUnfuxidePXn4LCc2QWvsQZfFB6/AtOUmYAm3cCe31mr
+T4G+vxQz8xeg8h5+3paSCT4VMQpbiye94DycdLQK+w+d7kWaZL22ulf8oT9TOHG3
+WnnDs78QEhwRFBYTa4StyAkukJZh8rO71rhxI0qEeLbKpdK80zI=
+=acjx
+-----END PGP SIGNATURE-----
 
-Future directions: BOs should not be pinned or vmapped unnecessarily.
-The pin-and-vmap operation should be removed from the driver and a
-temporary mapping should be established with a vmap_local-like helper.
-See the client helper drm_client_buffer_vmap_local() for semantics.
-
-v2:
-- unreserve BO on errors in qxl_bo_pin_and_vmap() (Dmitry)
-
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Fixes: b33651a5c98d ("drm/qxl: Do not pin buffer objects for vmap")
-Reported-by: David Kaplan <david.kaplan@amd.com>
-Closes: https://lore.kernel.org/dri-devel/ab0fb17d-0f96-4ee6-8b21-65d02bb02655@suse.de/
-Tested-by: David Kaplan <david.kaplan@amd.com>
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-Cc: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Cc: Christian König <christian.koenig@amd.com>
-Cc: Zack Rusin <zack.rusin@broadcom.com>
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: virtualization@lists.linux.dev
-Cc: spice-devel@lists.freedesktop.org
-Reviewed-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Reviewed-by: Zack Rusin <zack.rusin@broadcom.com>
-Link: https://patchwork.freedesktop.org/patch/msgid/20240708142208.194361-1-tzimmermann@suse.de
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/qxl/qxl_display.c | 14 +++++++-------
- drivers/gpu/drm/qxl/qxl_object.c  | 13 +++++++++++--
- drivers/gpu/drm/qxl/qxl_object.h  |  4 ++--
- 3 files changed, 20 insertions(+), 11 deletions(-)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index 86a5dea710c0f..bc24af08dfcd5 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -584,11 +584,11 @@ static struct qxl_bo *qxl_create_cursor(struct qxl_device *qdev,
- 	if (ret)
- 		goto err;
- 
--	ret = qxl_bo_vmap(cursor_bo, &cursor_map);
-+	ret = qxl_bo_pin_and_vmap(cursor_bo, &cursor_map);
- 	if (ret)
- 		goto err_unref;
- 
--	ret = qxl_bo_vmap(user_bo, &user_map);
-+	ret = qxl_bo_pin_and_vmap(user_bo, &user_map);
- 	if (ret)
- 		goto err_unmap;
- 
-@@ -614,12 +614,12 @@ static struct qxl_bo *qxl_create_cursor(struct qxl_device *qdev,
- 		       user_map.vaddr, size);
- 	}
- 
--	qxl_bo_vunmap(user_bo);
--	qxl_bo_vunmap(cursor_bo);
-+	qxl_bo_vunmap_and_unpin(user_bo);
-+	qxl_bo_vunmap_and_unpin(cursor_bo);
- 	return cursor_bo;
- 
- err_unmap:
--	qxl_bo_vunmap(cursor_bo);
-+	qxl_bo_vunmap_and_unpin(cursor_bo);
- err_unref:
- 	qxl_bo_unpin(cursor_bo);
- 	qxl_bo_unref(&cursor_bo);
-@@ -1205,7 +1205,7 @@ int qxl_create_monitors_object(struct qxl_device *qdev)
- 	}
- 	qdev->monitors_config_bo = gem_to_qxl_bo(gobj);
- 
--	ret = qxl_bo_vmap(qdev->monitors_config_bo, &map);
-+	ret = qxl_bo_pin_and_vmap(qdev->monitors_config_bo, &map);
- 	if (ret)
- 		return ret;
- 
-@@ -1236,7 +1236,7 @@ int qxl_destroy_monitors_object(struct qxl_device *qdev)
- 	qdev->monitors_config = NULL;
- 	qdev->ram_header->monitors_config = 0;
- 
--	ret = qxl_bo_vunmap(qdev->monitors_config_bo);
-+	ret = qxl_bo_vunmap_and_unpin(qdev->monitors_config_bo);
- 	if (ret)
- 		return ret;
- 
-diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-index 5893e27a7ae50..66635c55cf857 100644
---- a/drivers/gpu/drm/qxl/qxl_object.c
-+++ b/drivers/gpu/drm/qxl/qxl_object.c
-@@ -182,7 +182,7 @@ int qxl_bo_vmap_locked(struct qxl_bo *bo, struct iosys_map *map)
- 	return 0;
- }
- 
--int qxl_bo_vmap(struct qxl_bo *bo, struct iosys_map *map)
-+int qxl_bo_pin_and_vmap(struct qxl_bo *bo, struct iosys_map *map)
- {
- 	int r;
- 
-@@ -190,7 +190,15 @@ int qxl_bo_vmap(struct qxl_bo *bo, struct iosys_map *map)
- 	if (r)
- 		return r;
- 
-+	r = qxl_bo_pin_locked(bo);
-+	if (r) {
-+		qxl_bo_unreserve(bo);
-+		return r;
-+	}
-+
- 	r = qxl_bo_vmap_locked(bo, map);
-+	if (r)
-+		qxl_bo_unpin_locked(bo);
- 	qxl_bo_unreserve(bo);
- 	return r;
- }
-@@ -241,7 +249,7 @@ void qxl_bo_vunmap_locked(struct qxl_bo *bo)
- 	ttm_bo_vunmap(&bo->tbo, &bo->map);
- }
- 
--int qxl_bo_vunmap(struct qxl_bo *bo)
-+int qxl_bo_vunmap_and_unpin(struct qxl_bo *bo)
- {
- 	int r;
- 
-@@ -250,6 +258,7 @@ int qxl_bo_vunmap(struct qxl_bo *bo)
- 		return r;
- 
- 	qxl_bo_vunmap_locked(bo);
-+	qxl_bo_unpin_locked(bo);
- 	qxl_bo_unreserve(bo);
- 	return 0;
- }
-diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_object.h
-index 1cf5bc7591016..875f63221074c 100644
---- a/drivers/gpu/drm/qxl/qxl_object.h
-+++ b/drivers/gpu/drm/qxl/qxl_object.h
-@@ -59,9 +59,9 @@ extern int qxl_bo_create(struct qxl_device *qdev,
- 			 u32 priority,
- 			 struct qxl_surface *surf,
- 			 struct qxl_bo **bo_ptr);
--int qxl_bo_vmap(struct qxl_bo *bo, struct iosys_map *map);
-+int qxl_bo_pin_and_vmap(struct qxl_bo *bo, struct iosys_map *map);
- int qxl_bo_vmap_locked(struct qxl_bo *bo, struct iosys_map *map);
--int qxl_bo_vunmap(struct qxl_bo *bo);
-+int qxl_bo_vunmap_and_unpin(struct qxl_bo *bo);
- void qxl_bo_vunmap_locked(struct qxl_bo *bo);
- void *qxl_bo_kmap_atomic_page(struct qxl_device *qdev, struct qxl_bo *bo, int page_offset);
- void qxl_bo_kunmap_atomic_page(struct qxl_device *qdev, struct qxl_bo *bo, void *map);
--- 
-2.43.0
-
-
+--pjs7eva7gyx5hotn--
 
