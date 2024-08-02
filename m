@@ -2,58 +2,78 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F2E0945B23
-	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2024 11:37:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8F9F945E1F
+	for <lists+spice-devel@lfdr.de>; Fri,  2 Aug 2024 14:53:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B873B10E02E;
-	Fri,  2 Aug 2024 09:37:11 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="cI19aBy2";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id E301310E0BC;
+	Fri,  2 Aug 2024 12:53:00 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 498CD10E02E
- for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2024 09:37:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1722591429;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=HjEaAVHZQfA0N8wpPjJFMtklZDg1n6rRupcIFVyzXUY=;
- b=cI19aBy2o+X8gipwJ1yefjBq4i9ytei8F05dqZTV9E3lzlbKR4Gp3bSJPm+pvBysDFe7Kx
- ukbp0v7Ywk+rIEQnd8Ys8dTMN7s3PsJ8ZPWNKC+qwwIylQbuaJjHSP6zKCB/L1RNQmx5lp
- mN4pSahgpk45xzDMJ8TceDHi6NZzyI8=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-536-iBOsclbJOY6fsoHgPmZ1_Q-1; Fri,
- 02 Aug 2024 05:37:06 -0400
-X-MC-Unique: iBOsclbJOY6fsoHgPmZ1_Q-1
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 468631955F0D; Fri,  2 Aug 2024 09:37:05 +0000 (UTC)
-Received: from localhost (unknown [10.45.225.117])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 2E839300018D; Fri,  2 Aug 2024 09:37:03 +0000 (UTC)
-Date: Fri, 2 Aug 2024 11:37:02 +0200
-From: Victor Toso <victortoso@redhat.com>
-To: David Counter <davidjcounter@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-Subject: Re: Question regarding suitability of Spice for my workplace
-Message-ID: <vowcjbkdvxtrtz7sz5b2r2iyfndiutv7neff2zxwly4kcmtxqr@72r4tbxvsict>
-References: <CAAkeHDZcCEOUdJpijZ9HmZFGtDSsGFumUUhLqkzKi2PBTqvKBA@mail.gmail.com>
+X-Greylist: delayed 7390 seconds by postgrey-1.36 at gabe;
+ Fri, 02 Aug 2024 12:53:00 UTC
+Received: from ms-10.1blu.de (ms-10.1blu.de [178.254.4.101])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A8FA310E0BC
+ for <spice-devel@lists.freedesktop.org>; Fri,  2 Aug 2024 12:53:00 +0000 (UTC)
+Received: from [37.201.240.20] (helo=[192.168.179.14])
+ by ms-10.1blu.de with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <mnl@mnl.de>) id 1sZpr1-00FFIO-Ry;
+ Fri, 02 Aug 2024 12:49:47 +0200
+Message-ID: <88627e60-b00d-4002-bc9a-7f9be7e96640@mnl.de>
+Date: Fri, 2 Aug 2024 12:49:47 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="pjs7eva7gyx5hotn"
-Content-Disposition: inline
-In-Reply-To: <CAAkeHDZcCEOUdJpijZ9HmZFGtDSsGFumUUhLqkzKi2PBTqvKBA@mail.gmail.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+User-Agent: Mozilla Thunderbird
+To: spice-devel@lists.freedesktop.org
+Content-Language: de-DE
+From: Michael Lipp <mnl@mnl.de>
+Subject: virtio-vga two monitors and spice
+Autocrypt: addr=mnl@mnl.de; keydata=
+ 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
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Con-Id: 352429
+X-Con-U: 0-mnl
+X-Originating-IP: 37.201.240.20
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,54 +88,17 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+Hi,
 
---pjs7eva7gyx5hotn
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+when I start qemu with "-device virtio-vga,max_outputs=2" and connect 
+using spice, I get two windows representing two monitors as expected.
 
-On Fri, Jul 19, 2024 at 03:03:56PM GMT, David Counter wrote:
-> Good Afternoon
->=20
-> Quick question - is it possible to stream video from two separate sources=
- to
-> two instances of the Spice client program on the desktop of a thin client=
-? I'm
-> looking to display Windows and Linux concurrently on two monitors attache=
-d to
-> my Wyse 5070.
+However, only one of these works. The other shows "Display output is not 
+active.". xrandr says "Virtual-2 disconnected" (consistent but not helpful).
 
-Yes, just by running two spice clients.
+Is this supposed to work? If so, what am I missing? Or do I have to use 
+QXL in order to use two monitors?
 
->=20
-> Thanks in advance,
->=20
-> David Counter
->=20
-> Systems Support Technician | Union County Emergency Services=A0
->=20
-> C: (941) 953-6282
-> E: davidjcounter@gmail.com
+     Michael
 
---pjs7eva7gyx5hotn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEIG07NS9WbzsOZXLpl9kSPeN6SE8FAmasqL4ACgkQl9kSPeN6
-SE99Qg/9GhsXJodMDec/LDni7Q60yIdtmGvyz8PZ+ZyALIT+pemvYEUJgwEHwUQx
-Tpe2quIkGreSnCP+OaqMqOcpmNtSV6M4RrGyfGuBj2mWF8DDQHNBMMEG4GadaSeU
-Klbt24lSM6M+OAESzJjVluZIfYnBA7Y6grKn09BJNI1lqo7EmAFTmXE6JXdACral
-RmIF7t6lH5KfRqcaF1fWoU15PQKJhaXV0ZTSBzRIS9FysecJqJ9RW+89T8twyek6
-QUwtv6kGyhLR2vxmaGWUaKIKXKexDcfU6I5GTbODSYCtWjkXW+k5PHQ3jys4/DHv
-Raemm15+agwnhsXX2TVRZ093yn1CfX5ptyzzyt8RO/ZE8HTX+8wXPt1F3L1OhorQ
-5wJrm2Sr7EjJwJaie22irtnjyHHGL3n4lstf0RgJPH7UJ9hBDfs3D7duI68EP4MO
-7fuEPwwaYJhJQd7pnk35IwSFs7QoFsuFkk9wBvJHOUbl40tTcGyRlvPEpDRkqJDp
-VskLeYpDLxpZ2mI8FjddwUnfuxidePXn4LCc2QWvsQZfFB6/AtOUmYAm3cCe31mr
-T4G+vxQz8xeg8h5+3paSCT4VMQpbiye94DycdLQK+w+d7kWaZL22ulf8oT9TOHG3
-WnnDs78QEhwRFBYTa4StyAkukJZh8rO71rhxI0qEeLbKpdK80zI=
-=acjx
------END PGP SIGNATURE-----
-
---pjs7eva7gyx5hotn--
 
