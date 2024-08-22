@@ -2,75 +2,49 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86AB5958605
-	for <lists+spice-devel@lfdr.de>; Tue, 20 Aug 2024 13:43:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFB9295B43A
+	for <lists+spice-devel@lfdr.de>; Thu, 22 Aug 2024 13:50:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 34D7110E747;
-	Tue, 20 Aug 2024 11:43:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3111710E86D;
+	Thu, 22 Aug 2024 11:50:35 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="U/G5ZWnX";
+	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="JwJ4O3Bp";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 49A8B10E747
- for <spice-devel@lists.freedesktop.org>; Tue, 20 Aug 2024 11:43:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1724154193;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=fQ/VB2IcyZiOcDbxrcFzAZk1hHIk3xWcUkGoEs3ypIc=;
- b=U/G5ZWnXqqVCBll1XYq2w/72fTWa/ch7ltgXmHRbUOb4H2f45kBLbvZxBLSxithxOV5lCz
- V/ppYkOWZLfwIE3WTf6dqI5uJwtTDMb2u686NUZLfOCI/z4toZUKPeLQu69PqiERB4ARDw
- lltZpJZy7hyvG163sbPCogZkNWusxG8=
-Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com
- [209.85.160.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-490-lOt25-2ZOdu3NoRKHZVIaA-1; Tue, 20 Aug 2024 07:43:11 -0400
-X-MC-Unique: lOt25-2ZOdu3NoRKHZVIaA-1
-Received: by mail-oa1-f70.google.com with SMTP id
- 586e51a60fabf-2705e14211dso2804606fac.3
- for <spice-devel@lists.freedesktop.org>; Tue, 20 Aug 2024 04:43:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724154191; x=1724758991;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fQ/VB2IcyZiOcDbxrcFzAZk1hHIk3xWcUkGoEs3ypIc=;
- b=XXhYlY4Gr+YftCGOuoP165VTtdLYyDlxnFxDCD0UTn5bA80/mDj7bzCC6AUSHe3lz2
- bmwojyZ8i730E1LXadZautp+XUrN4Ftje7eppUXl2GAZivraiqGY8rbXbvthhzsISbEZ
- +CY7GZtjYx7F1zCJaIt6d+JPwda2qo0/GPdkUWSqdbldiztIV3Wv+bYS2ppQ+QPnWoXS
- rCMMZaH+myTnvl5i7Iqkd8cpquqzgZXYjbPznVCxfyxtSkM+7e19ySLLSKatLjJLOc1e
- qH0ojr3B9vXrpjyzFX+Lbtj123xLUKnG/kDZh1VzcOFUeG87QVcZNDbwAcHpdIICWqhw
- 1iQA==
-X-Gm-Message-State: AOJu0YzuDspzVqfOJBAvD0DBb8Kw3Oe8wLkDSRbQGgOWaLZCdX78tKmg
- 0snUY2W1mQh+w9lVUsT9A0ycjNgmudN7CPH7BBaUTaa5fUC1OTsHh3tlD3hXjZl8VfKM5gpkFnp
- 2A4K6zdYUhZWbFaRLDzL9Ab4V/O3svp08e9WKrTPFsfnSHWtq5aKgE+t4L71YsUOJwpghhV4w5P
- ligmkZKfPHC+pRDkXUkn6ZX8UWbekAJARbFKUWIvipcE0=
-X-Received: by 2002:a05:6870:289a:b0:270:b0a:cc35 with SMTP id
- 586e51a60fabf-2701c34656dmr14629269fac.8.1724154191167; 
- Tue, 20 Aug 2024 04:43:11 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFJzUArr0n1Gtb1pLn7HMmqgUNdG7MHCxFkkQTejJeGIOhO9B3ZLeBbyXilyWkGA+IEHkmfl8M8NpJ2A/36s28=
-X-Received: by 2002:a05:6870:289a:b0:270:b0a:cc35 with SMTP id
- 586e51a60fabf-2701c34656dmr14629256fac.8.1724154190888; Tue, 20 Aug 2024
- 04:43:10 -0700 (PDT)
+Received: from a1422.mx.srv.dfn.de (a1422.mx.srv.dfn.de [194.95.233.70])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6AEA210E86D
+ for <spice-devel@lists.freedesktop.org>; Thu, 22 Aug 2024 11:50:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ rz.uni-freiburg.de; h=content-transfer-encoding:content-type
+ :content-type:in-reply-to:from:from:content-language:references
+ :subject:subject:user-agent:mime-version:date:date:message-id
+ :received; s=s1; t=1724327429; x=1726141830; bh=EONfEP1R184u+SCA
+ /0Q+GB1RszOmzqRg6lTwX0eNhE8=; b=JwJ4O3BpEPzYjLVjKHbadjoyxf/Z20Mi
+ DbvuuuvnCtVTSlmLbrz/Xq8hCZvclbU5BLDA3brVfkFvNVhwCINXpbHbSIdrAVrn
+ chYLu7bz5bw7xErge2QNRmPiYDbvyILDj4MNGI0E8luGbh15DVThiJe/4u3pHATk
+ x5yl6MffQ8s=
+Received: from fe2.uni-freiburg.de (fe2.uni-freiburg.de [132.230.2.222])
+ by a1422.mx.srv.dfn.de (Postfix) with ESMTP id B34681E02E8
+ for <spice-devel@lists.freedesktop.org>; Thu, 22 Aug 2024 13:50:29 +0200 (CEST)
+Received: from [2001:7c0:2517:11:7d98:4f3e:7a06:24d3] (account
+ michael.scherle@rz.uni-freiburg.de HELO
+ [IPV6:2001:7c0:2517:11:7d98:4f3e:7a06:24d3])
+ by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
+ with ESMTPSA id 133305226 for spice-devel@lists.freedesktop.org;
+ Thu, 22 Aug 2024 13:50:29 +0200
+Message-ID: <f1028cee-a987-485c-9aee-332fe70f5872@rz.uni-freiburg.de>
+Date: Thu, 22 Aug 2024 13:50:29 +0200
 MIME-Version: 1.0
-References: <20240701111154.11633-1-abelova@astralinux.ru>
- <50b0785d-78be-4819-8498-8f4ad3ccab8a@astralinux.ru>
-In-Reply-To: <50b0785d-78be-4819-8498-8f4ad3ccab8a@astralinux.ru>
-From: Uri Lublin <ulublin@redhat.com>
-Date: Tue, 20 Aug 2024 14:42:58 +0300
-Message-ID: <CAAg9qJ0aGnQYiBmYZbG6EWYZcmN3YV-BsKzM66hkfnDKRsPHWw@mail.gmail.com>
-Subject: Re: [PATCH] usbredirhost: prevent overflow in
- usbredirhost_set_iso_threshold
-To: Anastasia Belova <abelova@astralinux.ru>
-Cc: spice-devel@lists.freedesktop.org, sdl.qemu@linuxtesting.org, 
- victortoso@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="00000000000016165706201bee98"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERN] HW de/encoding & Chroma supsampling
+To: spice-devel@lists.freedesktop.org
+References: <d2acb649-da1d-42b1-a7bf-0e25d6911c2b@rz.uni-freiburg.de>
+Content-Language: en-US
+From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
+In-Reply-To: <d2acb649-da1d-42b1-a7bf-0e25d6911c2b@rz.uni-freiburg.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,126 +59,83 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---00000000000016165706201bee98
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi Anastasia,
 
-Thanks for sending a patch.
+On 29.07.24 13:56, Michael Scherle wrote:
+> Hello,
+> 
+> with the hopefully soon merged pull request: “[PATCH v8 0/6] dcc: Create 
+> a stream for non-gl/remote clients that want to use dmabuf (v8)” (which 
+> we urgently need for our project), I have noticed the problem of chroma 
+> supsampling. The problem usually occurs with colored text and thin 
+> lines. Which of course is bad in a remote desktop scenario.
+> 
+> The attached screenshot shows a test image of rtings on chroma 
+> supsampling, whereby it should be noted that the image should either be 
+> viewed at exactly 100% or greatly enlarged, as otherwise artifacts may 
+> occur that are not present in the original.
+> 
+> The left third shows the current hardware encoding implementation, which 
+> uses Chroma Supsampling 4:2:0, and the resulting artifacts that occur 
+> especially in blue and red. In the right third you can see a prototype 
+> implementation of 4:4:4 hardware de/encoding that produces a perfect 
+> image. In the center is a prototype of 4:2:0 encoding, where the image 
+> is upsampled to double before encoding and downsampled after decoding to 
+> remove the artifacts. The picture does not show the artifacts, but it is 
+> a bit blurry due to the interpolation of the up/downsampling of the 
+> Gstreamer plugins. I have modified the Gstreamer plugins so that it is 
+> possible to set the interpolation method to Nearest Neighbor, then the 
+> blurring is gone and the picture is the same as 4:4:4 (but of course it 
+> has the disadvantage of higher bandwidths and en/decoder load). 
+> Nevertheless, in some cases it could be a fallback for hardware that 
+> cannot work with 4:4:4.
+> You can find the original test image here: 
+> https://www.rtings.com/images/test-materials/2017/chroma-444.png if you 
+> want to try it out for yourself.
+> 
+> 
+> Since I would like to submit my implementation after the above merge 
+> request has been merged (since it depends on it), I have a few questions 
+> for a reasonable implementation.
+> 
+> At the moment I have implemented everything as a separate format, e.g. 
+> for h265:
+> 
+>   SPICE_VIDEO_CODEC_TYPE_H265,
+>   SPICE_VIDEO_CODEC_TYPE_H265_444,
+>   SPICE_VIDEO_CODEC_TYPE_H265_U,
+> 
+> and for caps:
+> 
+>   SPICE_DISPLAY_CAP_CODEC_H265,
+>   SPICE_DISPLAY_CAP_CODEC_H265_444,
+>   SPICE_DISPLAY_CAP_CODEC_H265_U,
+> 
+> For caps, I think this makes sense, since a HW de/encoder, for example, 
+> could only do 4:2:0. But what do you think, does it also make sense for 
+> the formats or should it be done via extra parameters?
+> 
+> Where should I place my fork? should it be on the freedesktop gitlab? 
+> then I would have to see how to get the appropriate permissions.
+> 
+> Does anyone know of any other methods of avoiding artifacts on hardware 
+> that can only work with chroma supsamling?
+> 
+> 
+> Greetings
+> Michael
 
-On Tue, Aug 13, 2024 at 12:34=E2=80=AFPM Anastasia Belova <abelova@astralin=
-ux.ru>
-wrote:
 
-> Cc'ing Victor Toso
->
-> 01/07/24 14:11, Anastasia Belova:
-> > pkts_per_transfer < MAX_PACKETS_PER_TRANSFER =3D 32.
-> > transfer_count < MAX_TRANSFER_COUNT =3D 16.
-> > max_packetsize =3D maxp * mult. mult <=3D 3.
-> > maxp <=3D 0x7ff. If all variables have their max value,
-> > the result will be bigger that uint16_t.
-> > Add an explicit cast.
-> >
-> > Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
-> > ---
-> >   usbredirhost/usbredirhost.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/usbredirhost/usbredirhost.c b/usbredirhost/usbredirhost.c
-> > index 03c56e9..ca19473 100644
-> > --- a/usbredirhost/usbredirhost.c
-> > +++ b/usbredirhost/usbredirhost.c
-> > @@ -1193,7 +1193,7 @@ static void usbredirhost_stop_stream(struct
-> usbredirhost *host,
-> >   static void usbredirhost_set_iso_threshold(struct usbredirhost *host,
-> >       uint8_t pkts_per_transfer, uint8_t transfer_count, uint16_t
-> max_packetsize)
-> >   {
-> > -    uint64_t reference =3D pkts_per_transfer * transfer_count *
-> max_packetsize;
-> > +    uint64_t reference =3D (uint64_t)pkts_per_transfer * transfer_coun=
-t *
-> max_packetsize;
->
+Hello,
 
-It feels safer.
-I think it's already not a problem, since all multiplication arguments are
-of
-small integer types, so they are promoted to int, like
-      uint64_t reference =3D (int)pkts_per_transfer * (int)transfer_count *
-(int)max_packetsize
-which is smaller than 32*16*3*2048 < INT_MAX (for a 4 bytes int)
+I got the patches for gstreamer merged for the va and msdk plugin for 
+Nearest Neighbor. With them the upsampling looks flawlessly.
 
-Regards,
-    Uri.
+Regarding merge requests, are these still accepted at all, for example:
+ >dcc: Create a stream for non-gl/remote clients that want to use dmabuf 
+(v8)
+doesn't seem to be handled anymore?
+can you still make merge requestsor are only security vulnerabilities fixed?
 
->       host->iso_threshold.lower =3D reference / 2;
-> >       host->iso_threshold.higher =3D reference * 3;
-> >       DEBUG("higher threshold is %" PRIu64 " bytes | lower threshold is
-> %" PRIu64 " bytes",
->
->
-
---00000000000016165706201bee98
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Hi Anastasia,<br></div><div><br></div><di=
-v>Thanks for sending a patch.</div><div><br></div><div class=3D"gmail_quote=
-"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Aug 13, 2024 at 12:34=E2=80=
-=AFPM Anastasia Belova &lt;<a href=3D"mailto:abelova@astralinux.ru" target=
-=3D"_blank">abelova@astralinux.ru</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">Cc&#39;ing Victor Toso<br>
-<br>
-01/07/24 14:11, Anastasia Belova:<br>
-&gt; pkts_per_transfer &lt; MAX_PACKETS_PER_TRANSFER =3D 32.<br>
-&gt; transfer_count &lt; MAX_TRANSFER_COUNT =3D 16.<br>
-&gt; max_packetsize =3D maxp * mult. mult &lt;=3D 3.<br>
-&gt; maxp &lt;=3D 0x7ff. If all variables have their max value,<br>
-&gt; the result will be bigger that uint16_t.<br>
-&gt; Add an explicit cast.<br>
-&gt;<br>
-&gt; Signed-off-by: Anastasia Belova &lt;<a href=3D"mailto:abelova@astralin=
-ux.ru" target=3D"_blank">abelova@astralinux.ru</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0usbredirhost/usbredirhost.c | 2 +-<br>
-&gt;=C2=A0 =C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt;<br>
-&gt; diff --git a/usbredirhost/usbredirhost.c b/usbredirhost/usbredirhost.c=
-<br>
-&gt; index 03c56e9..ca19473 100644<br>
-&gt; --- a/usbredirhost/usbredirhost.c<br>
-&gt; +++ b/usbredirhost/usbredirhost.c<br>
-&gt; @@ -1193,7 +1193,7 @@ static void usbredirhost_stop_stream(struct usbr=
-edirhost *host,<br>
-&gt;=C2=A0 =C2=A0static void usbredirhost_set_iso_threshold(struct usbredir=
-host *host,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uint8_t pkts_per_transfer, uint8_t transfer_=
-count, uint16_t max_packetsize)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt; -=C2=A0 =C2=A0 uint64_t reference =3D pkts_per_transfer * transfer_cou=
-nt * max_packetsize;<br>
-&gt; +=C2=A0 =C2=A0 uint64_t reference =3D (uint64_t)pkts_per_transfer * tr=
-ansfer_count * max_packetsize;<br></blockquote><div><br></div><div>It feels=
- safer.</div><div>I think it&#39;s already not a problem, since all multipl=
-ication arguments are of</div><div>small integer types, so they are promote=
-d to int, like</div><div>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint64_t reference =
-=3D (int)pkts_per_transfer * (int)transfer_count * (int)max_packetsize</div=
-><div>which is smaller than 32*16*3*2048 &lt; INT_MAX (for a 4 bytes int)</=
-div><div><br></div><div>Regards,</div><div>=C2=A0=C2=A0=C2=A0 Uri.</div><di=
-v><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0host-&gt;iso_threshold.lower =3D reference /=
- 2;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0host-&gt;iso_threshold.higher =3D reference =
-* 3;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0DEBUG(&quot;higher threshold is %&quot; PRIu=
-64 &quot; bytes | lower threshold is %&quot; PRIu64 &quot; bytes&quot;,<br>
-<br>
-</blockquote></div></div>
-
---00000000000016165706201bee98--
-
+Greetings
+Michael
