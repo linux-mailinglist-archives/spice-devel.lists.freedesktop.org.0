@@ -2,53 +2,63 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B35B696F026
-	for <lists+spice-devel@lfdr.de>; Fri,  6 Sep 2024 11:50:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A235096FE59
+	for <lists+spice-devel@lfdr.de>; Sat,  7 Sep 2024 01:15:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 60CC810E9E2;
-	Fri,  6 Sep 2024 09:50:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E80D610E942;
+	Fri,  6 Sep 2024 23:15:15 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="AwHdZHhl";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="TzbEsBxu";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 362 seconds by postgrey-1.36 at gabe;
- Fri, 06 Sep 2024 09:50:04 UTC
-Received: from b1422.mx.srv.dfn.de (b1422.mx.srv.dfn.de [194.95.235.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E84F810E9E2
- for <spice-devel@lists.freedesktop.org>; Fri,  6 Sep 2024 09:50:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- rz.uni-freiburg.de; h=content-transfer-encoding:content-type
- :content-type:in-reply-to:from:from:content-language:references
- :subject:subject:user-agent:mime-version:date:date:message-id
- :received; s=s1; t=1725615839; x=1727430240; bh=+bozFpMeKnWthC12
- Ll9qBOQ+WsxT5IpEu8l104AMyyQ=; b=AwHdZHhlriHPaGZK9BUybv2vQ/H0nuW/
- Cg4EQrLvWh6cz591U2fol0sP0ONQNgGpRTyYbvxlkJFA6fMPEeopItlVIjRsIFj1
- owjbdG77ClWl7efEeM+3CEbHE+EzMXGOqoxilFDteKzAolS7xyFKLxQHaFGt6LDj
- O74pb0rzZfc=
-Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
- by b1422.mx.srv.dfn.de (Postfix) with ESMTP id 43536260322
- for <spice-devel@lists.freedesktop.org>; Fri,  6 Sep 2024 11:43:58 +0200 (CEST)
-Received: from [10.8.8.230] (account michael.scherle@rz.uni-freiburg.de
- [10.8.8.230] verified)
- by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
- with ESMTPSA id 43372454; Fri, 06 Sep 2024 11:43:58 +0200
-Message-ID: <5e8e1d48-2750-4bef-85e8-a8cca25f4de6@rz.uni-freiburg.de>
-Date: Fri, 6 Sep 2024 11:43:58 +0200
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BC92E10E832;
+ Thu,  5 Sep 2024 09:33:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1725528829; x=1757064829;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=pdljWs+jYa99JbSULneYMqlSrY4Ry24sHTLd/ITcgg8=;
+ b=TzbEsBxupMGGPqDEZYJrOD+VoM2IsK4E0cXvHjBUgDKgO1820Bv2ManY
+ 5dYtnE2wSW2wepj1E8cAc3+BDQFJashNPu5ZEBNtl2lWz8nw2RXmDuUJ0
+ iC/lwD22fkq87IA4E5AxzXxMve3l6mEqGEnvtc+NEx9mEnBqbDGEuUaP6
+ 6Les3YSX5zle/M7W7RjXytKo80LJ62eUhsFF4BghShQBkK5L41PUsKoCc
+ Y9OouUo30H7gPKFKVSYpE273s2gN4ygaswJxUXYXiIHMs7x3PPE0o++/H
+ CLxm7elGh44Kx+uw14qaXJv2nJDJzh6Jv+sDuZWg/MvyQnHj3Bg2JSeZd A==;
+X-CSE-ConnectionGUID: 4bmYqYVYTyeBSnG7DxAYIQ==
+X-CSE-MsgGUID: n8bovD74QNeT4icu3kMp6g==
+X-IronPort-AV: E=McAfee;i="6700,10204,11185"; a="24391702"
+X-IronPort-AV: E=Sophos;i="6.10,204,1719903600"; d="scan'208";a="24391702"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+ by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 Sep 2024 02:33:48 -0700
+X-CSE-ConnectionGUID: SMCT81NrTQa+BH5329+BIA==
+X-CSE-MsgGUID: Y1ciEvOxRXCXhpzHd4Ticg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,204,1719903600"; d="scan'208";a="96354370"
+Received: from unknown (HELO fedora..) ([10.245.245.247])
+ by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 Sep 2024 02:33:45 -0700
+From: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
+To: intel-xe@lists.freedesktop.org
+Cc: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Zack Rusin <zack.rusin@broadcom.com>,
+ bcm-kernel-feedback-list@broadcom.com,
+ Sui Jingfeng <suijingfeng@loongson.cn>
+Subject: [PATCH 0/2] drm/ttm: Add an option to report graphics memory OOM
+Date: Thu,  5 Sep 2024 11:33:20 +0200
+Message-ID: <20240905093322.29786-1-thomas.hellstrom@linux.intel.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 0/6] dcc: Create a stream for non-gl/remote clients
- that want to use dmabuf (v8)
-To: Frediano Ziglio <freddy77@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-References: <20240610183703.684420-1-vivek.kasireddy@intel.com>
- <6d61e169-7452-44bd-9e69-66fb3bac1193@rz.uni-freiburg.de>
- <CAHt6W4f2WAdO5nALmfRk8uxc6na111iYf4sSb2O27fBzy-OD=g@mail.gmail.com>
-Content-Language: en-US
-From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
-In-Reply-To: <CAHt6W4f2WAdO5nALmfRk8uxc6na111iYf4sSb2O27fBzy-OD=g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 06 Sep 2024 23:15:14 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,168 +73,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+Some graphics APIs differentiate between out-of-graphics-memory and
+out-of-host-memory (system memory). Add a device init flag to
+have -ENOSPC propagated from the resource managers instead of being
+converted to -ENOMEM, to aid driver stacks in determining what
+error code to return or whether corrective action can be taken at
+the driver level.
 
-thank you very much for your reply. Of course I understand that 
-non-compiling/crashing code should not be merged into main.
-Unfortunately I have not been able to reproduce this so far. Here's a 
-list of the systems I have tested on:
+The first patch deals with a ttm_device_init() interface change,
+The Second patch adds the actual functionality.
 
-- Ubuntu server 20.04 LTS
-   AMD EPYC 7742
-   Intel Flex 140 with SR-IOV passthrough and without passthrough
+A follow-up will be posted for Xe once this is merged / backmerged.
 
-- CentOS Stream 9
-   AMD EPYC 7742
-   Intel Flex 170 (SR-IOV)
+Thomas Hellström (2):
+  drm/ttm: Change ttm_device_init to use a struct instead of multiple
+    bools
+  drm/ttm: Add a device flag to propagate -ENOSPC on OOM
 
-- Ubuntu 22.04
-   8th Gen Intel with GVT-g and without passthrough
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |  6 +++--
+ drivers/gpu/drm/i915/intel_region_ttm.c       |  3 ++-
+ drivers/gpu/drm/loongson/lsdc_ttm.c           |  5 +++-
+ drivers/gpu/drm/nouveau/nouveau_ttm.c         |  7 ++++--
+ drivers/gpu/drm/qxl/qxl_ttm.c                 |  2 +-
+ drivers/gpu/drm/radeon/radeon_ttm.c           |  6 +++--
+ drivers/gpu/drm/ttm/tests/ttm_bo_test.c       | 16 ++++++------
+ .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  3 ++-
+ drivers/gpu/drm/ttm/tests/ttm_device_test.c   | 16 ++++++------
+ drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c | 20 ++++++---------
+ drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h |  6 ++---
+ drivers/gpu/drm/ttm/ttm_bo.c                  |  2 +-
+ drivers/gpu/drm/ttm/ttm_device.c              |  8 +++---
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           |  4 +--
+ drivers/gpu/drm/xe/xe_device.c                |  3 ++-
+ include/drm/ttm/ttm_device.h                  | 25 ++++++++++++++++++-
+ 16 files changed, 82 insertions(+), 50 deletions(-)
 
-- Fedora 39
-   12th Gen Intel (SR-IOV)
+-- 
+2.46.0
 
-Do you have an example system on which it does not compile/crash or what 
-the error messages are? Then I could possibly reproduce it and 
-contribute to a fix.
-
-Greetings,
-Michael
-
-On 05.09.24 08:13, Frediano Ziglio wrote:
-> Hi,
->     I surely should get back to this.
-> 
-> At the moment the series does not even compile on most of the supported systems.
-> I understand that the feature works for some but merging in master not
-> compiling code does not seem really nice to me.
-> I think before merging code should compile and run, maybe with
-> disabled features due to detected limitations but surely not crash if
-> any unwritten and untested dependencies are not met.
-> 
-> Regards,
->    Frediano
-> 
-> Il giorno ven 30 ago 2024 alle ore 12:53 Michael Scherle
-> <michael.scherle@rz.uni-freiburg.de> ha scritto:
->>
->>
->>
->> On 10.06.24 20:34, Vivek Kasireddy wrote:
->>> For clients that cannot accept a dmabuf fd directly (such as those
->>> running on a remote system), this patch series provides a way for
->>> the Spice server to stream the gl/dmabuf data/buffer instead. This
->>> is mostly done by enabling the creation of Gst memory using a dmabuf
->>> fd as the source. This ability is useful given that dmabuf is the
->>> standard mechanism for sharing buffers between various drivers and
->>> userspace in many Graphics and Media usecases. Currently, this is
->>> tested with Qemu and remote-viewer using the x264enc/avdec_h264
->>> and msdkh264enc/dec plugins to stream the Guest/VM desktop but it
->>> can be easily extended to other plugins and applications.
->>>
->>> Here is roughly how things work:
->>> - The application (e.g, Qemu) chooses its preferred codec (a Gstreamer
->>>     one) and calls gl_scanout (to update the fd) followed by gl_draw.
->>> - In response, the Spice server checks to see if the client is capable
->>>     of accepting a dmabuf fd directly or not. If yes, the fd is forwarded
->>>     directly to the client; otherwise, a new stream is created.
->>> - The Spice server then sends the dmabuf fd to the Gstreamer encoder
->>>     which uses it as an input for creating an encoded buffer which is then
->>>     sent to the client.
->>> - Once the encoding process is done, an async completion cookie is sent
->>>     to the application.
->>>
->>> Here is a link to the previous version that used a drawable to share
->>> the dmabuf fd with the Gstreamer encoder:
->>> https://lists.freedesktop.org/archives/spice-devel/2023-January/052948.html
->>>
->>> This version is tested together with following (required) patches in qemu:
->>> https://gitlab.freedesktop.org/Vivek/qemu/-/commits/spice_gl_on_v4
->>>
->>> Changelog:
->>>
->>> v8:
->>> - Added a new gstreamer-encoder patch to this series to convert drm format
->>>     shared by the VMM to the appropriate Gstreamer format.
->>>
->>> v7:
->>> - Revert back to the previous design where we do not share fd with the stream
->>>     and scanout is the sole owner of the fd. This is because sharing fd ownership
->>>     opens up a lot of corner cases.
->>>
->>> v6: (Frediano)
->>> - Properly share ownership of the dmabuf fd between stream and scanout
->>> - Ensure that a newly created stream is associated with all connected clients
->>>
->>> v5:
->>> - Addressed review comments from Frediano mainly regarding adding autoconf
->>>     support for gstreamer-allocators dependency and not needing to access
->>>     scanout as part of gl draw operation
->>>
->>> v4:
->>> - Test with Virgl enabled
->>> - Associate dmabuf's y0_top with stream's top_down variable
->>>
->>> v3:
->>> - Updated the second patch to have a new primary surface created
->>>     whenever a new stream gets created. This will avoid having to
->>>     trigger primary surface creation from Qemu. And, this change
->>>     also fixes the following error seen with v2:
->>>     ../server/display-channel.cpp:2074:display_channel_create_surface:
->>>     condition `!display->priv->surfaces[surface_id]' failed
->>> - Rebase all patches on master
->>>
->>> v2:
->>> - Update all patches to address review comments from Frediano
->>> - Tested this series with msdkh264enc/dec plugins that will be added
->>>     in another patch series
->>>
->>> Cc: Frediano Ziglio <freddy77@gmail.com>
->>> Cc: Gerd Hoffmann <kraxel@redhat.com>
->>> Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
->>> Cc: Dongwon Kim <dongwon.kim@intel.com>
->>>
->>> Vivek Kasireddy (6):
->>>     dcc: Check to see if the client supports multiple codecs (v2)
->>>     dcc: Create a stream associated with gl_draw for non-gl clients (v6)
->>>     dcc-send: Encode and send gl_draw stream data to the remote client
->>>       (v4)
->>>     gstreamer-encoder: Add an encoder function that takes dmabuf fd as
->>>       input (v3)
->>>     gstreamer-encoder: Map the drm format to appropriate Gstreamer format
->>>     video-stream: Don't stop a stream associated with gl_draw (v2)
->>>
->>>    configure.ac                     |   2 +-
->>>    meson.build                      |   2 +-
->>>    server/dcc-send.cpp              | 159 ++++++++++++++++----
->>>    server/dcc.cpp                   |  31 ++--
->>>    server/dcc.h                     |   6 +
->>>    server/display-channel-private.h |   1 +
->>>    server/display-channel.cpp       |   1 +
->>>    server/gstreamer-encoder.c       | 246 ++++++++++++++++++++++++++-----
->>>    server/video-encoder.h           |  14 ++
->>>    server/video-stream.cpp          | 205 ++++++++++++++++++++++----
->>>    server/video-stream.h            |   4 +
->>>    11 files changed, 563 insertions(+), 108 deletions(-)
->>>
->>
->> I tested this patchset with several configurations:
->>
->> - With a passthrough intel gvt-g virtual gpu it works.
->>
->> - With virtio-vga it works.
->>
->> - With some extra patches to qemu and an virtualization driver it even
->> works with an virtual GPU from an SR-IOV-partitioned Intel Flex
->> 140 GPU. Note this extra patches are related to the gpu and not this
->> patchset.
->>
->> This patch is a significant improvement for handling graphically
->> demanding tasks or rapidly changing image content and is crucial for
->> SPICE to be a component of a competitive virtual desktop infrastructure.
->>
->> Tested-by: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
->>
->> Greetings,
->> Michael
->>
