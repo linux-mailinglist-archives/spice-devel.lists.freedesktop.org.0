@@ -2,67 +2,69 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B660996CF81
-	for <lists+spice-devel@lfdr.de>; Thu,  5 Sep 2024 08:39:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E6B196E875
+	for <lists+spice-devel@lfdr.de>; Fri,  6 Sep 2024 05:56:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C6E0B10E6F8;
-	Thu,  5 Sep 2024 06:39:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 678E610E964;
+	Fri,  6 Sep 2024 03:56:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KNM6rVoo";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ej6PVbNh";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com
- [209.85.128.177])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B4FE310E6E8
- for <spice-devel@lists.freedesktop.org>; Thu,  5 Sep 2024 06:39:32 +0000 (UTC)
-Received: by mail-yw1-f177.google.com with SMTP id
- 00721157ae682-6b8d96aa4c3so3368417b3.1
- for <spice-devel@lists.freedesktop.org>; Wed, 04 Sep 2024 23:39:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725518372; x=1726123172; darn=lists.freedesktop.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CHlZ/8PmZbAb8Cdixq4uGyLfAtrh/RkHcT/M6p1o8Ac=;
- b=KNM6rVoo9CCdaUP8u4Hy2Hw+fEv9PfMc+VCsfDCoxNIHxmfd1qEROL8dOiBXPAszkb
- 1hFrb1RP35UawjN/19p1tcJjFuJHuuJZzqOCe7ysOmPfNetJcBV+oBlIcSaxZG3wJhsR
- isyjAncdaMENgJXgKouWQ7mZHq6vYayxUfM2rOrfUCsAEKR6S40Rs0cQgkBeJ0VnF0H3
- iH2FeDq7CKCt/fBG6iVXSS6VYvj98P4RwRT/Xsbueo8gocXsqp+3TiTRQDNM0sO2lCOn
- fE1C9YrxDdJxg0l8g1wz7VUJw/heQ/0nhQ9P5P5zCkbNRdb0j7BvRXpQiymgxXA/hhFX
- RttQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725518372; x=1726123172;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CHlZ/8PmZbAb8Cdixq4uGyLfAtrh/RkHcT/M6p1o8Ac=;
- b=gBdmbhgU2QyepJ7tWW/L6PWHDVoqijalc2I376rEWURvqV32/R3IjhuPzS6zTz38di
- fy8Pjf9b9Qg7YH/9hZb09vb1frroj0MPhWtvzKnEt3LaISMcKuKjRF1K12dghb/Wjv7w
- Wx0RLfExOyifzA8qbB6nGlixBOOSpZUlGbuqcpG4ZH9+Of/UOQ7HT9F6ZPYsVPt2I3s6
- Cf1P0L0Ay1B5MvGBIYU/zC4Qyn0PySxHa+/Fthd4dbFjq4Q7jDEIs+0FO3heaMBL3oGA
- 3fKpSC9QHeAfSs8HkJUpCF8pNtUhVO1qfz/8w2GTPzPAr1lItjFEcfPit/gvncTdY8mu
- Ki/g==
-X-Gm-Message-State: AOJu0YxE20NSjeT6blbdv5AYqoRs45q5a2iortBH1ZvFpPj9uF+xiH1K
- eajz3Q9PQyVVk7K+fGPCOOSh03nQPxHFLeltBcdVTWKA+kFVHVJ6HCWbYTDBtSBmL9hVEeS2Zf4
- 1QYdxN8fMpPRRnF0vZLKsuPo2YZ8HRg==
-X-Google-Smtp-Source: AGHT+IH8ld9SbYptHv9bcH8pdQklptcVgWFvcuTnY1N1kqWfhf6F216JoNNDoFUuZrDO2Vk882OEUJRzshLdWvRENaM=
-X-Received: by 2002:a05:690c:f84:b0:62c:e6c0:e887 with SMTP id
- 00721157ae682-6d40d88eabfmr213416787b3.9.1725518371741; Wed, 04 Sep 2024
- 23:39:31 -0700 (PDT)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 033E010E08F;
+ Fri,  6 Sep 2024 03:56:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1725594966; x=1757130966;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=AOgep25YPfbArNphRZ3FzjXtGgRBjP2wdNuj5+iyhso=;
+ b=ej6PVbNhHWYv53x9OsATjQ5txoXG+gcz2rI+b3B899qEEzlf08fxL+ZY
+ I2JOMsPlYIldvEOcb6uveUU59UopgRRUpPpsCuKra7zHNZNwihRmpdyQW
+ Rfa0LXX2PcUy/x59ZqDd29ZqcBlcDFbFGlUWDUF+P6HkR3ppY7ACO4Vp9
+ CaO3m246JJlqIDwTTkZlUlkssj+nfZs2TSzMhph70MFJeUDUiaMM452Z0
+ jtaOZ1MtFGDlYJIPbfuJA0bOaR2Wmzdc4xLLnTDNUKrTgrdZMho8ImmQp
+ qogC61TyzdtWqax0PIRT0Z55E+KKQtz/B3meWRy1oWvzGDGud0EeYv2Zj A==;
+X-CSE-ConnectionGUID: eHjCGSN8TneiIoUSSmm5Yg==
+X-CSE-MsgGUID: ZIJLL3MJSaOOPprCF9nE5w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11186"; a="23849521"
+X-IronPort-AV: E=Sophos;i="6.10,206,1719903600"; d="scan'208";a="23849521"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+ by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 Sep 2024 20:56:06 -0700
+X-CSE-ConnectionGUID: 6bbdXEE/QD+NC094Jser1Q==
+X-CSE-MsgGUID: El4D01XXR+m56hRhWBK04w==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.10,206,1719903600"; d="scan'208";a="96548787"
+Received: from lkp-server01.sh.intel.com (HELO 9c6b1c7d3b50) ([10.239.97.150])
+ by orviesa002.jf.intel.com with ESMTP; 05 Sep 2024 20:56:02 -0700
+Received: from kbuild by 9c6b1c7d3b50 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1smQ4l-000AaW-24;
+ Fri, 06 Sep 2024 03:55:59 +0000
+Date: Fri, 6 Sep 2024 11:55:02 +0800
+From: kernel test robot <lkp@intel.com>
+To: Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
+ intel-xe@lists.freedesktop.org
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+ Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Zack Rusin <zack.rusin@broadcom.com>,
+ bcm-kernel-feedback-list@broadcom.com,
+ Sui Jingfeng <suijingfeng@loongson.cn>,
+ Matthew Brost <matthew.brost@intel.com>
+Subject: Re: [PATCH 1/2] drm/ttm: Change ttm_device_init to use a struct
+ instead of multiple bools
+Message-ID: <202409061145.AtKjpWFJ-lkp@intel.com>
+References: <20240905093322.29786-2-thomas.hellstrom@linux.intel.com>
 MIME-Version: 1.0
-References: <CA+mZ-_JE5f7qdNFyS-zKzYwx8e22xyzNG9oU4B7cNOyCUFAENQ@mail.gmail.com>
- <CAHt6W4eAR8gN6=d9LWH4EOukuWgx76UfBj0QGT0ctdr=UbWF_Q@mail.gmail.com>
- <CA+mZ-_LwGmvUhFDjqgLzfkc0aMy0SsWXH9U_Ekdsg0rLZKZQdA@mail.gmail.com>
-In-Reply-To: <CA+mZ-_LwGmvUhFDjqgLzfkc0aMy0SsWXH9U_Ekdsg0rLZKZQdA@mail.gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 5 Sep 2024 07:39:20 +0100
-Message-ID: <CAHt6W4egOb+jX=LDLmpTnQ4n1ujkCMF=4e2H+hs+mOPufYXUwQ@mail.gmail.com>
-Subject: Re: Guest Post Request
-To: Randall Suter <randallsuter@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240905093322.29786-2-thomas.hellstrom@linux.intel.com>
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,43 +79,78 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
-   it's not clear what you are trying to achieve.
+Hi Thomas,
 
-Do you want to sponsor our project? Like paying for a developer? Or
-donate some money (I don't think we'll have a nice usage at the moment
-but I may be wrong) ?
+kernel test robot noticed the following build errors:
 
-Regards,
-   Frediano
+[auto build test ERROR on drm-intel/for-linux-next]
+[also build test ERROR on next-20240905]
+[cannot apply to drm-xe/drm-xe-next drm-intel/for-linux-next-fixes drm-tip/drm-tip linus/master v6.11-rc6]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Il giorno ven 19 lug 2024 alle ore 23:14 Randall Suter
-<randallsuter@gmail.com> ha scritto:
->
-> Hi! Thank you for your reply! I'm interested in sponsored posts with a do=
--follow link. I have several projects on different topics. I would like to =
-know the terms of publication and prices on your site to begin with. Please=
- give me more details about it if you accept such posts.
->
-> Best Regards,
-> Randall Suter
->
->
-> On Fri, 19 Jul 2024 at 13:47, Frediano Ziglio <freddy77@gmail.com> wrote:
->>
->> Il giorno ven 19 lug 2024 alle ore 11:20 Randall Suter
->> <randallsuter@gmail.com> ha scritto:
->> >
->> > Good day! My name is Randall. I would like to contribute to your websi=
-te (spice-space.org) by submitting a guest post. Are there any specific req=
-uirements that I need to follow?
->> >
->> > Best Regards,
->> > Randall Suter
->>
->> Hi Randall,
->>    pages are generated from
->> https://gitlab.freedesktop.org/spice/spice-space-pages.
->> What'a a "guest post" ?
->>
->> Frediano
+url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Hellstr-m/drm-ttm-Change-ttm_device_init-to-use-a-struct-instead-of-multiple-bools/20240905-173606
+base:   git://anongit.freedesktop.org/drm-intel for-linux-next
+patch link:    https://lore.kernel.org/r/20240905093322.29786-2-thomas.hellstrom%40linux.intel.com
+patch subject: [PATCH 1/2] drm/ttm: Change ttm_device_init to use a struct instead of multiple bools
+config: i386-randconfig-002-20240906 (https://download.01.org/0day-ci/archive/20240906/202409061145.AtKjpWFJ-lkp@intel.com/config)
+compiler: clang version 18.1.5 (https://github.com/llvm/llvm-project 617a15a9eac96088ae5e9134248d8236e34b91b1)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240906/202409061145.AtKjpWFJ-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202409061145.AtKjpWFJ-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/gpu/drm/drm_gem_vram_helper.c:981:13: error: too many arguments to function call, expected 6, have 7
+     978 |         ret = ttm_device_init(&vmm->bdev, &bo_driver, dev->dev,
+         |               ~~~~~~~~~~~~~~~
+     979 |                                  dev->anon_inode->i_mapping,
+     980 |                                  dev->vma_offset_manager,
+     981 |                                  false, true);
+         |                                         ^~~~
+   include/drm/ttm/ttm_device.h:300:5: note: 'ttm_device_init' declared here
+     300 | int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *funcs,
+         |     ^               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     301 |                     struct device *dev, struct address_space *mapping,
+         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     302 |                     struct drm_vma_offset_manager *vma_manager,
+         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     303 |                     const struct ttm_device_init_flags flags);
+         |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   1 error generated.
+
+
+vim +981 drivers/gpu/drm/drm_gem_vram_helper.c
+
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  969  
+c30b225dba01b4 Thomas Zimmermann 2019-09-11  970  static int drm_vram_mm_init(struct drm_vram_mm *vmm, struct drm_device *dev,
+b0e40e0805221d Thomas Zimmermann 2019-09-11  971  			    uint64_t vram_base, size_t vram_size)
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  972  {
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  973  	int ret;
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  974  
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  975  	vmm->vram_base = vram_base;
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  976  	vmm->vram_size = vram_size;
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  977  
+8af8a109b34fa8 Christian König   2020-10-01  978  	ret = ttm_device_init(&vmm->bdev, &bo_driver, dev->dev,
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  979  				 dev->anon_inode->i_mapping,
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  980  				 dev->vma_offset_manager,
+ee5d2a8e549e90 Christian König   2020-10-24 @981  				 false, true);
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  982  	if (ret)
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  983  		return ret;
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  984  
+37205891d84f92 Dave Airlie       2020-08-04  985  	ret = ttm_range_man_init(&vmm->bdev, TTM_PL_VRAM,
+0fe438cec9e1d2 Christian König   2020-09-11  986  				 false, vram_size >> PAGE_SHIFT);
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  987  	if (ret)
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  988  		return ret;
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  989  
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  990  	return 0;
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  991  }
+6b5ce4a1fb8489 Thomas Zimmermann 2019-09-11  992  
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
