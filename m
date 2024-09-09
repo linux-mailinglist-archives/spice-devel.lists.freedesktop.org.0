@@ -2,53 +2,69 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDAA7971250
-	for <lists+spice-devel@lfdr.de>; Mon,  9 Sep 2024 10:43:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91DF0976C28
+	for <lists+spice-devel@lfdr.de>; Thu, 12 Sep 2024 16:31:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 71E5710E32F;
-	Mon,  9 Sep 2024 08:42:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F65610EB85;
+	Thu, 12 Sep 2024 14:31:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="IM2FZ8W7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yaiji+gc";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from a1422.mx.srv.dfn.de (a1422.mx.srv.dfn.de [194.95.233.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8233C10E32F
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2024 08:42:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- rz.uni-freiburg.de; h=content-transfer-encoding:content-type
- :content-type:in-reply-to:from:from:content-language:references
- :subject:subject:user-agent:mime-version:date:date:message-id
- :received; s=s1; t=1725871374; x=1727685775; bh=0sCgBWITfAImhsx/
- 80Hah4VwC6jAlWZM90ZQq0GGZ/o=; b=IM2FZ8W7GE/LA2N/msD7tROzrHuVcAZ6
- 86ElPRE67IjLajuHXQ8T/uZs2uWWciGGKlUZyX6rvxDFitFuEbLKYtWbN+fsToSt
- iMgjGgmPR1dXrXpDrtv7aKsxZi//VMdq4szcyzw1AYcZC6TxRCF2iEwpQyl1a7zW
- S6yrVepYs3k=
-Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
- by a1422.mx.srv.dfn.de (Postfix) with ESMTP id DB4DA1E0148
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2024 10:42:53 +0200 (CEST)
-Received: from [10.8.8.230] (account michael.scherle@rz.uni-freiburg.de
- [10.8.8.230] verified)
- by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
- with ESMTPSA id 43395913; Mon, 09 Sep 2024 10:42:53 +0200
-Message-ID: <829310c7-6c87-48c7-8ca8-b407a9026ed9@rz.uni-freiburg.de>
-Date: Mon, 9 Sep 2024 10:42:53 +0200
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com
+ [209.85.218.46])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5310510E351
+ for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2024 09:22:00 +0000 (UTC)
+Received: by mail-ej1-f46.google.com with SMTP id
+ a640c23a62f3a-a8d60e23b33so63089766b.0
+ for <spice-devel@lists.freedesktop.org>; Mon, 09 Sep 2024 02:22:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725873718; x=1726478518; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bMuPHsjMKQepFZRfBo+hIpRNIfPKQoY/5szAGidG/Ro=;
+ b=Yaiji+gcLEB9zdiwDL6nsyuLxB1zwFBxTIwRXvoxhYxYqEwnZyg4qC7R4HdsPSlVJM
+ Ynf3smJHCZnteevzY92FsmSdO8dC2eOZ3Ivj2XUP1UGlQvSEg5XmSJqkrwgxwo/mwVRM
+ rJf7zELYmJAqzny3RcPYKcyd21mB/rfR6VkkjsfKQghAPpYupg2oIMVu1TJ/lODrhpkB
+ u9NpS8a/d3wmLnFl/k3W+HnsRld7Q4i5rs3ByTF9ETWXHh+DN4j/l5NUXHTNeCIUaBUk
+ BtbTrf3FJ/fl0lDipfZbeMasQNknQVk4sC0sTFk+oOxhjEqGzzfDLeM7zZ/cH8356k7x
+ 6BHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725873718; x=1726478518;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bMuPHsjMKQepFZRfBo+hIpRNIfPKQoY/5szAGidG/Ro=;
+ b=wdD+KbzCQPNZZL1wtRMWAiPoHVXH9ZgHCTtrRU2j0oKXMvbJF3g7y+LdPjhCWnuOsQ
+ b1rHwxza9m6JzYrxOWBVqTv34WrlUa1btHDYcZcN2NIYotv7iR8FACVMJkMMjJKrUwDB
+ wNTSZM+/L0X9vGucHVwfgEG9rQSWd7zzO6AWMX/ZJmuuoDPUDzJcvovz6twPeJ5wrqs9
+ 09ETiSZIfDHqkhdhzHUV8sVLlpfaR2nwSxXCn0ZfSdon4ArPPKkjcE+Luods+WKRh1hy
+ X21FTRDRamo2cywfoPf5ROwNQcQxh7BGt0K+kCySWAx/wDdauMzwUzRvXCBlDpl19bAy
+ vzjQ==
+X-Gm-Message-State: AOJu0Yw06ctrZKBm+wHEWfMYUMG+z35Ef2r/Hfe1PzHXigU3dRUzpQ8j
+ 3wvaJEY/NGW4ihY5gV5bM8uSYlooa5wLWUSWf3K4N8321tJBudJVL/D9LdX+gtiNhwdo1zHsy/b
+ jj8imuuZFP6KlRmB1bgumNapScPI=
+X-Google-Smtp-Source: AGHT+IEAYkdn5bL3JzDZSzy+WzPPW4jIxO6hNhpVbtKNyigSsgLFbO3EFKBgoUkXgc7VdWzZRki7QTnfm6te7OGvcI8=
+X-Received: by 2002:a17:907:801:b0:a77:b4e3:4fca with SMTP id
+ a640c23a62f3a-a8a885bfbe1mr1118519166b.9.1725873717580; Mon, 09 Sep 2024
+ 02:21:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 0/6] dcc: Create a stream for non-gl/remote clients
- that want to use dmabuf (v8)
+References: <CA+mZ-_JE5f7qdNFyS-zKzYwx8e22xyzNG9oU4B7cNOyCUFAENQ@mail.gmail.com>
+ <CAHt6W4eAR8gN6=d9LWH4EOukuWgx76UfBj0QGT0ctdr=UbWF_Q@mail.gmail.com>
+ <CA+mZ-_LwGmvUhFDjqgLzfkc0aMy0SsWXH9U_Ekdsg0rLZKZQdA@mail.gmail.com>
+ <CAHt6W4egOb+jX=LDLmpTnQ4n1ujkCMF=4e2H+hs+mOPufYXUwQ@mail.gmail.com>
+ <CA+mZ-_+Q7W3zJoyuSX49uxOWq2rpJ81FYndYDeiQG=EfhOPisQ@mail.gmail.com>
+ <CAHt6W4dQT1M-rbtq=Ku8O=1rVjBWToHnww5MyfM-pHA5PTPOWA@mail.gmail.com>
+In-Reply-To: <CAHt6W4dQT1M-rbtq=Ku8O=1rVjBWToHnww5MyfM-pHA5PTPOWA@mail.gmail.com>
+From: Randall Suter <randallsuter@gmail.com>
+Date: Mon, 9 Sep 2024 12:21:45 +0300
+Message-ID: <CA+mZ-_Jd8i6u346W=Ymh47ELoqHhEBuDUz++GUOL9ht4Fc8mFg@mail.gmail.com>
+Subject: Re: Guest Post Request
 To: Frediano Ziglio <freddy77@gmail.com>
 Cc: spice-devel@lists.freedesktop.org
-References: <20240610183703.684420-1-vivek.kasireddy@intel.com>
- <6d61e169-7452-44bd-9e69-66fb3bac1193@rz.uni-freiburg.de>
- <CAHt6W4f2WAdO5nALmfRk8uxc6na111iYf4sSb2O27fBzy-OD=g@mail.gmail.com>
- <5e8e1d48-2750-4bef-85e8-a8cca25f4de6@rz.uni-freiburg.de>
- <CAHt6W4eB_VwE35Z5bwrUJNQ9VX3a0jw7jRcrWrAiwvzFJDyKMQ@mail.gmail.com>
-Content-Language: en-US
-From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
-In-Reply-To: <CAHt6W4eB_VwE35Z5bwrUJNQ9VX3a0jw7jRcrWrAiwvzFJDyKMQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/alternative; boundary="000000000000dd192b0621ac4974"
+X-Mailman-Approved-At: Thu, 12 Sep 2024 14:30:59 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,254 +79,172 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi,
+--000000000000dd192b0621ac4974
+Content-Type: text/plain; charset="UTF-8"
 
- > Hi,
- >    now I start to understand. You are only testing what you want to
- > achieve disregarding any compatibility. For instance you didn't test
- > any system which is not Linux (yes, both Mac and Windows are
- > supported, obviously with different features) or does have a non Intel
- > card.
+I didn't understand your answer.
 
-I am sorry if I have made mistakes here, I am still new to this. To 
-avoid further confusion, I am not the author, I just found the merge 
-request and it is exactly what I need and tested it first as the author 
-described with -device virtio-vga.
-
-Then I tested it the way I needed it, with partitioned gpu's that are 
-passed through to the VM in qemu. I am aware that I have only tested 
-this on Intel GPU's, I thought this would not be bad at first, as I have 
-not seen it tested at all with gpus passed through.
-
-Other reasons were: For AMD I only have the AMD Instinct MI100, which is 
-only an accelerator and has no graphics functionality. For Nvidia I 
-would have an A30 and could possibly get an Nvidia L40S for testing. 
-However, since licenses are required for partitioning, I haven't looked 
-into it yet.
-
-Also I wasn't aware that windows and mac are also supported on the 
-server side, so I should have definitely mentioned that I only tested it 
-under linux.
+Best Regards,
+Randall Suter
 
 
- > If we suppose system S with libraries L1, L2, L3 respectively with
- > versions V1, V2 and V3 provides features  F1 and F2 the same system
- > should continue to provide the same features with these libraries and
- > versions. That does not mean they need to support new features.
+On Sun, 8 Sept 2024 at 13:41, Frediano Ziglio <freddy77@gmail.com> wrote:
 
-Ok I think now it is clear what is stopping the merge request.
-
- > I also bet that to make the code compile you had to update some system
- > libraries. Not an issue but Spice should continue to compile with
- > stuck distro libraries (still, don't need to support new features).
- >
- > To limit the back and forth of series versions I suggest you also set
- > up the CI so you can see some of the failures yourself.
-
-Ok I will do it.
-
- > I already have some patches.
- >
- > Regards,
- >     Frediano
- >
-
-Greetings
-Michael
-
-
-On 08.09.24 18:43, Frediano Ziglio wrote:
-> Il giorno ven 6 set 2024 alle ore 10:43 Michael Scherle
-> <michael.scherle@rz.uni-freiburg.de> ha scritto:
->>
->> Hi,
->>
->> thank you very much for your reply. Of course I understand that
->> non-compiling/crashing code should not be merged into main.
->> Unfortunately I have not been able to reproduce this so far. Here's a
->> list of the systems I have tested on:
->>
->> - Ubuntu server 20.04 LTS
->>     AMD EPYC 7742
->>     Intel Flex 140 with SR-IOV passthrough and without passthrough
->>
->> - CentOS Stream 9
->>     AMD EPYC 7742
->>     Intel Flex 170 (SR-IOV)
->>
->> - Ubuntu 22.04
->>     8th Gen Intel with GVT-g and without passthrough
->>
->> - Fedora 39
->>     12th Gen Intel (SR-IOV)
->>
->> Do you have an example system on which it does not compile/crash or what
->> the error messages are? Then I could possibly reproduce it and
->> contribute to a fix.
->>
->> Greetings,
->> Michael
->>
-> 
+> Il giorno gio 5 set 2024 alle ore 18:56 Randall Suter
+> <randallsuter@gmail.com> ha scritto:
+> >
+> > Hello,
+> >
+> > My clients are willing to pay you to place an advertising article on
+> your site. That's what I'm asking you. Do you accept this or not?
+> >
+> > Best Regards,
+> > Randall Suter
+> >
+> >
+> > On Thu, 5 Sept 2024 at 09:39, Frediano Ziglio <freddy77@gmail.com>
+> wrote:
+> >>
+> >> Hi,
+> >>    it's not clear what you are trying to achieve.
+> >>
+> >> Do you want to sponsor our project? Like paying for a developer? Or
+> >> donate some money (I don't think we'll have a nice usage at the moment
+> >> but I may be wrong) ?
+> >>
+> >> Regards,
+> >>    Frediano
+> >>
+> >> Il giorno ven 19 lug 2024 alle ore 23:14 Randall Suter
+> >> <randallsuter@gmail.com> ha scritto:
+> >> >
+> >> > Hi! Thank you for your reply! I'm interested in sponsored posts with
+> a do-follow link. I have several projects on different topics. I would like
+> to know the terms of publication and prices on your site to begin with.
+> Please give me more details about it if you accept such posts.
+> >> >
+> >> > Best Regards,
+> >> > Randall Suter
+> >> >
+> >> >
+> >> > On Fri, 19 Jul 2024 at 13:47, Frediano Ziglio <freddy77@gmail.com>
+> wrote:
+> >> >>
+> >> >> Il giorno ven 19 lug 2024 alle ore 11:20 Randall Suter
+> >> >> <randallsuter@gmail.com> ha scritto:
+> >> >> >
+> >> >> > Good day! My name is Randall. I would like to contribute to your
+> website (spice-space.org) by submitting a guest post. Are there any
+> specific requirements that I need to follow?
+> >> >> >
+> >> >> > Best Regards,
+> >> >> > Randall Suter
+> >> >>
+> >> >> Hi Randall,
+> >> >>    pages are generated from
+> >> >> https://gitlab.freedesktop.org/spice/spice-space-pages.
+> >> >> What'a a "guest post" ?
+> >> >>
+> >> >> Frediano
+>
 > Hi,
->    now I start to understand. You are only testing what you want to
-> achieve disregarding any compatibility. For instance you didn't test
-> any system which is not Linux (yes, both Mac and Windows are
-> supported, obviously with different features) or does have a non Intel
-> card.
-> 
-> If we suppose system S with libraries L1, L2, L3 respectively with
-> versions V1, V2 and V3 provides features  F1 and F2 the same system
-> should continue to provide the same features with these libraries and
-> versions. That does not mean they need to support new features.
-> 
-> I also bet that to make the code compile you had to update some system
-> libraries. Not an issue but Spice should continue to compile with
-> stuck distro libraries (still, don't need to support new features).
-> 
-> To limit the back and forth of series versions I suggest you also set
-> up the CI so you can see some of the failures yourself.
-> 
-> I already have some patches.
-> 
+>    I don't own the website but I think the reply is no.
+> It's an Open Source project webpage.
+>
 > Regards,
->     Frediano
-> 
-> 
->> On 05.09.24 08:13, Frediano Ziglio wrote:
->>> Hi,
->>>      I surely should get back to this.
->>>
->>> At the moment the series does not even compile on most of the supported systems.
->>> I understand that the feature works for some but merging in master not
->>> compiling code does not seem really nice to me.
->>> I think before merging code should compile and run, maybe with
->>> disabled features due to detected limitations but surely not crash if
->>> any unwritten and untested dependencies are not met.
->>>
->>> Regards,
->>>     Frediano
->>>
->>> Il giorno ven 30 ago 2024 alle ore 12:53 Michael Scherle
->>> <michael.scherle@rz.uni-freiburg.de> ha scritto:
->>>>
->>>>
->>>>
->>>> On 10.06.24 20:34, Vivek Kasireddy wrote:
->>>>> For clients that cannot accept a dmabuf fd directly (such as those
->>>>> running on a remote system), this patch series provides a way for
->>>>> the Spice server to stream the gl/dmabuf data/buffer instead. This
->>>>> is mostly done by enabling the creation of Gst memory using a dmabuf
->>>>> fd as the source. This ability is useful given that dmabuf is the
->>>>> standard mechanism for sharing buffers between various drivers and
->>>>> userspace in many Graphics and Media usecases. Currently, this is
->>>>> tested with Qemu and remote-viewer using the x264enc/avdec_h264
->>>>> and msdkh264enc/dec plugins to stream the Guest/VM desktop but it
->>>>> can be easily extended to other plugins and applications.
->>>>>
->>>>> Here is roughly how things work:
->>>>> - The application (e.g, Qemu) chooses its preferred codec (a Gstreamer
->>>>>      one) and calls gl_scanout (to update the fd) followed by gl_draw.
->>>>> - In response, the Spice server checks to see if the client is capable
->>>>>      of accepting a dmabuf fd directly or not. If yes, the fd is forwarded
->>>>>      directly to the client; otherwise, a new stream is created.
->>>>> - The Spice server then sends the dmabuf fd to the Gstreamer encoder
->>>>>      which uses it as an input for creating an encoded buffer which is then
->>>>>      sent to the client.
->>>>> - Once the encoding process is done, an async completion cookie is sent
->>>>>      to the application.
->>>>>
->>>>> Here is a link to the previous version that used a drawable to share
->>>>> the dmabuf fd with the Gstreamer encoder:
->>>>> https://lists.freedesktop.org/archives/spice-devel/2023-January/052948.html
->>>>>
->>>>> This version is tested together with following (required) patches in qemu:
->>>>> https://gitlab.freedesktop.org/Vivek/qemu/-/commits/spice_gl_on_v4
->>>>>
->>>>> Changelog:
->>>>>
->>>>> v8:
->>>>> - Added a new gstreamer-encoder patch to this series to convert drm format
->>>>>      shared by the VMM to the appropriate Gstreamer format.
->>>>>
->>>>> v7:
->>>>> - Revert back to the previous design where we do not share fd with the stream
->>>>>      and scanout is the sole owner of the fd. This is because sharing fd ownership
->>>>>      opens up a lot of corner cases.
->>>>>
->>>>> v6: (Frediano)
->>>>> - Properly share ownership of the dmabuf fd between stream and scanout
->>>>> - Ensure that a newly created stream is associated with all connected clients
->>>>>
->>>>> v5:
->>>>> - Addressed review comments from Frediano mainly regarding adding autoconf
->>>>>      support for gstreamer-allocators dependency and not needing to access
->>>>>      scanout as part of gl draw operation
->>>>>
->>>>> v4:
->>>>> - Test with Virgl enabled
->>>>> - Associate dmabuf's y0_top with stream's top_down variable
->>>>>
->>>>> v3:
->>>>> - Updated the second patch to have a new primary surface created
->>>>>      whenever a new stream gets created. This will avoid having to
->>>>>      trigger primary surface creation from Qemu. And, this change
->>>>>      also fixes the following error seen with v2:
->>>>>      ../server/display-channel.cpp:2074:display_channel_create_surface:
->>>>>      condition `!display->priv->surfaces[surface_id]' failed
->>>>> - Rebase all patches on master
->>>>>
->>>>> v2:
->>>>> - Update all patches to address review comments from Frediano
->>>>> - Tested this series with msdkh264enc/dec plugins that will be added
->>>>>      in another patch series
->>>>>
->>>>> Cc: Frediano Ziglio <freddy77@gmail.com>
->>>>> Cc: Gerd Hoffmann <kraxel@redhat.com>
->>>>> Cc: Marc-André Lureau <marcandre.lureau@redhat.com>
->>>>> Cc: Dongwon Kim <dongwon.kim@intel.com>
->>>>>
->>>>> Vivek Kasireddy (6):
->>>>>      dcc: Check to see if the client supports multiple codecs (v2)
->>>>>      dcc: Create a stream associated with gl_draw for non-gl clients (v6)
->>>>>      dcc-send: Encode and send gl_draw stream data to the remote client
->>>>>        (v4)
->>>>>      gstreamer-encoder: Add an encoder function that takes dmabuf fd as
->>>>>        input (v3)
->>>>>      gstreamer-encoder: Map the drm format to appropriate Gstreamer format
->>>>>      video-stream: Don't stop a stream associated with gl_draw (v2)
->>>>>
->>>>>     configure.ac                     |   2 +-
->>>>>     meson.build                      |   2 +-
->>>>>     server/dcc-send.cpp              | 159 ++++++++++++++++----
->>>>>     server/dcc.cpp                   |  31 ++--
->>>>>     server/dcc.h                     |   6 +
->>>>>     server/display-channel-private.h |   1 +
->>>>>     server/display-channel.cpp       |   1 +
->>>>>     server/gstreamer-encoder.c       | 246 ++++++++++++++++++++++++++-----
->>>>>     server/video-encoder.h           |  14 ++
->>>>>     server/video-stream.cpp          | 205 ++++++++++++++++++++++----
->>>>>     server/video-stream.h            |   4 +
->>>>>     11 files changed, 563 insertions(+), 108 deletions(-)
->>>>>
->>>>
->>>> I tested this patchset with several configurations:
->>>>
->>>> - With a passthrough intel gvt-g virtual gpu it works.
->>>>
->>>> - With virtio-vga it works.
->>>>
->>>> - With some extra patches to qemu and an virtualization driver it even
->>>> works with an virtual GPU from an SR-IOV-partitioned Intel Flex
->>>> 140 GPU. Note this extra patches are related to the gpu and not this
->>>> patchset.
->>>>
->>>> This patch is a significant improvement for handling graphically
->>>> demanding tasks or rapidly changing image content and is crucial for
->>>> SPICE to be a component of a competitive virtual desktop infrastructure.
->>>>
->>>> Tested-by: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
->>>>
->>>> Greetings,
->>>> Michael
->>>>
+>    Frediano
+>
+
+--000000000000dd192b0621ac4974
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">I didn&#39;t understand your answer.<br c=
+lear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"lt=
+r"><div><br></div><div><font face=3D"arial, sans-serif">Best Regards,<br></=
+font></div><div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><font=
+ face=3D"arial, sans-serif">Randall Suter</font></span><br></div></div></di=
+v></div><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
+ss=3D"gmail_attr">On Sun, 8 Sept 2024 at 13:41, Frediano Ziglio &lt;<a href=
+=3D"mailto:freddy77@gmail.com">freddy77@gmail.com</a>&gt; wrote:<br></div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
+eft:1px solid rgb(204,204,204);padding-left:1ex">Il giorno gio 5 set 2024 a=
+lle ore 18:56 Randall Suter<br>
+&lt;<a href=3D"mailto:randallsuter@gmail.com" target=3D"_blank">randallsute=
+r@gmail.com</a>&gt; ha scritto:<br>
+&gt;<br>
+&gt; Hello,<br>
+&gt;<br>
+&gt; My clients are willing to pay you to place an advertising article on y=
+our site. That&#39;s what I&#39;m asking you. Do you accept this or not?<br=
+>
+&gt;<br>
+&gt; Best Regards,<br>
+&gt; Randall Suter<br>
+&gt;<br>
+&gt;<br>
+&gt; On Thu, 5 Sept 2024 at 09:39, Frediano Ziglio &lt;<a href=3D"mailto:fr=
+eddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt; wrote:<br>
+&gt;&gt;<br>
+&gt;&gt; Hi,<br>
+&gt;&gt;=C2=A0 =C2=A0 it&#39;s not clear what you are trying to achieve.<br=
+>
+&gt;&gt;<br>
+&gt;&gt; Do you want to sponsor our project? Like paying for a developer? O=
+r<br>
+&gt;&gt; donate some money (I don&#39;t think we&#39;ll have a nice usage a=
+t the moment<br>
+&gt;&gt; but I may be wrong) ?<br>
+&gt;&gt;<br>
+&gt;&gt; Regards,<br>
+&gt;&gt;=C2=A0 =C2=A0 Frediano<br>
+&gt;&gt;<br>
+&gt;&gt; Il giorno ven 19 lug 2024 alle ore 23:14 Randall Suter<br>
+&gt;&gt; &lt;<a href=3D"mailto:randallsuter@gmail.com" target=3D"_blank">ra=
+ndallsuter@gmail.com</a>&gt; ha scritto:<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Hi! Thank you for your reply! I&#39;m interested in sponsored=
+ posts with a do-follow link. I have several projects on different topics. =
+I would like to know the terms of publication and prices on your site to be=
+gin with. Please give me more details about it if you accept such posts.<br=
+>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; Best Regards,<br>
+&gt;&gt; &gt; Randall Suter<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt;<br>
+&gt;&gt; &gt; On Fri, 19 Jul 2024 at 13:47, Frediano Ziglio &lt;<a href=3D"=
+mailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt; wro=
+te:<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; Il giorno ven 19 lug 2024 alle ore 11:20 Randall Suter<br=
+>
+&gt;&gt; &gt;&gt; &lt;<a href=3D"mailto:randallsuter@gmail.com" target=3D"_=
+blank">randallsuter@gmail.com</a>&gt; ha scritto:<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; Good day! My name is Randall. I would like to contri=
+bute to your website (<a href=3D"http://spice-space.org" rel=3D"noreferrer"=
+ target=3D"_blank">spice-space.org</a>) by submitting a guest post. Are the=
+re any specific requirements that I need to follow?<br>
+&gt;&gt; &gt;&gt; &gt;<br>
+&gt;&gt; &gt;&gt; &gt; Best Regards,<br>
+&gt;&gt; &gt;&gt; &gt; Randall Suter<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; Hi Randall,<br>
+&gt;&gt; &gt;&gt;=C2=A0 =C2=A0 pages are generated from<br>
+&gt;&gt; &gt;&gt; <a href=3D"https://gitlab.freedesktop.org/spice/spice-spa=
+ce-pages" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop.o=
+rg/spice/spice-space-pages</a>.<br>
+&gt;&gt; &gt;&gt; What&#39;a a &quot;guest post&quot; ?<br>
+&gt;&gt; &gt;&gt;<br>
+&gt;&gt; &gt;&gt; Frediano<br>
+<br>
+Hi,<br>
+=C2=A0 =C2=A0I don&#39;t own the website but I think the reply is no.<br>
+It&#39;s an Open Source project webpage.<br>
+<br>
+Regards,<br>
+=C2=A0 =C2=A0Frediano<br>
+</blockquote></div>
+
+--000000000000dd192b0621ac4974--
