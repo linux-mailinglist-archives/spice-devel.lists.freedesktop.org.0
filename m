@@ -2,74 +2,75 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9062B976C27
+	by mail.lfdr.de (Postfix) with ESMTPS id 563B0976C26
 	for <lists+spice-devel@lfdr.de>; Thu, 12 Sep 2024 16:31:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 322FC10EB86;
-	Thu, 12 Sep 2024 14:31:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E88E510EB84;
+	Thu, 12 Sep 2024 14:31:00 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bCPNZpVN";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="aFmukBEo";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 313E210E98C
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2024 09:47:31 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3923710E114
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2024 10:11:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1726048050;
+ s=mimecast20190719; t=1726049465;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding;
  bh=eOoYKYyfnRpPBr8KlfQTzkefti6SUh7sCC2BboAdplg=;
- b=bCPNZpVNHMwNWs1jEaeIS8wNk7Gdl7ogd+qPHOUjEnIizW3A4c6PPDuqn81e3e9ei41Y01
- eKsrU0sYh1I8X5VdT6Li0JJxB3mdKvwn/JPSRI8U5z/Z+JlNeZBqb7ne6nwDrHqAoCy2Fh
- wahYz7iY9z0ahQ9J641DuW+HL3Oz3oY=
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ b=aFmukBEoP2nkPNiCsLg3Y6yWz40HvN6+ni8NUuTKD6fiPSMfr0ZFFdNxqasCEhs/E/vgX+
+ I+OB2jlNMIHMHvrYZvL/LKbZEGXy59kj4QbR12qwpZZbT6f70f72GH1k70LrULAnU1ThpB
+ Zi0bUWGlugdhdw2sSkKoEkvCBO3XxO8=
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-43--IB0Jas-NZq_5bcrsyTF1A-1; Wed, 11 Sep 2024 05:47:29 -0400
-X-MC-Unique: -IB0Jas-NZq_5bcrsyTF1A-1
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-717912c8f27so7363979b3a.1
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2024 02:47:28 -0700 (PDT)
+ us-mta-267-1YFBewrvO66eGnGZH3OnrQ-1; Wed, 11 Sep 2024 06:11:04 -0400
+X-MC-Unique: 1YFBewrvO66eGnGZH3OnrQ-1
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-1fd9a0efe4eso82330665ad.0
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2024 03:11:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726048048; x=1726652848;
+ d=1e100.net; s=20230601; t=1726049462; x=1726654262;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=eOoYKYyfnRpPBr8KlfQTzkefti6SUh7sCC2BboAdplg=;
- b=cUtEr1KmVS5CP0oBOv9I+kH20vg5fQLNR/8xhUB6m+9NX9oI7avaFTFRbXnBs6wuNH
- RaxBAOnBUU33BnM9naEh3bkynwdEOE6lApyKXMklSrnv923tBTgAsLsqPIqajpi1Vgvt
- tvKv/pUJYbr6oK4UjbENAtm9t2/WYF7UCjqhGCi1VBQ0bNjOPmOKTkTF7fyqi3B3kljU
- PUVmBFA+On8g51zE5uQOThL8ukWvAOIoxVHwo6jyEQ+cHIY8LZKTO+gb8+UQ8UitHUMi
- WG3ZSh2XohBghwJPCnH9VZr8hFeb8ta5GLQMNLwFfpzUlzsP1zZfNefXFR3dKQiEJKg+
- CjgA==
+ b=YWnh7aqscfhv5OVL24K22y81N1xn8pyZRSjKUH8caOBIc8EddykOpYg6chZLJKyc+e
+ 4LWYXnHUCZwmBSEBnLwPot9Q/dTlQSHtt4NUJ4w40LVJ8OId+yct8fJp25l0oqQmhwEE
+ Qfb4pOuL20LVyCQjfu+uYDoxpUFNmzcnhliIrGmYG/89CX4yuUw8BqudTrQui5kOUclA
+ oQqZZ7N8U4if8xuojxZgu5NykHo7lTM+D7bsN2X3FhM45/+SWO55JhmVjMWVGKAEQBQG
+ jE9jrxT8MJoFekenXWNdiWdyiLg9YG6fnLIfBpagte/cb3O84s8f+C2Qs4fT2jDTh0QU
+ E/eg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPGN/dksYvtkU3EjD/goUt2YdON2zz1ZgV7yWMm1YZ+74JbxOEgInN2GinyGkxHPVHfn19AgBkEJexUA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy0Ze1o6Pga5l1rPS3WzCG5h5V8zHnDsPsXmD/gPck/zEzCmkoi
- aeuqEmthm/uP2HB8Xh/gVq8UH1EJN6tMWsObrM4jqZZXKR2Hm5h7zkoTIsADtiUjaOt4W7Or7pp
- Q70IKOiwiN6nz7FJcRLELsCiFLHNawP/rh+0aA/uXGetXAcxl2I+Kfum8iyWOGV0q1nb1
-X-Received: by 2002:a05:6a00:8c4:b0:718:da06:a4bf with SMTP id
- d2e1a72fcca58-718e3f9c931mr20115001b3a.2.1726048047690; 
- Wed, 11 Sep 2024 02:47:27 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHwqQ1OoH9hfSa1ktp4xtIJ7olKsWal0Edr0l7QCfhnfz2UBZpFr6fWHTlAvFzguI1YbMFi+A==
-X-Received: by 2002:a05:6a00:8c4:b0:718:da06:a4bf with SMTP id
- d2e1a72fcca58-718e3f9c931mr20114986b3a.2.1726048047259; 
- Wed, 11 Sep 2024 02:47:27 -0700 (PDT)
+ AJvYcCXDwI30kGs1QjyOAeMg9Md2o/JON+0hVta6sNS9W4F2M9NhBwo6622OHsGP+uu2KxSVTxY6O1cP45w3BQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwEukmm/GMuw48TPUH2Mq4Sf5vCTuJaEN4F0dsDcahIK9nfzLA4
+ Rkqrk+nbLxpvqaQQUur7CH8L1/YeWPbem3blTtIgMZj5RO2JgQqSAeiz02gzkbUdg8WcfyqnXIh
+ t7cGq9Ysf1E69KfemeLdfdyVWzYjIlyd+Agf+eXd5xlpJ2RdwBB0bW+137nqvyvXhpNxKqJ+3/u
+ 7VH73dnA==
+X-Received: by 2002:a17:902:c408:b0:205:951b:563f with SMTP id
+ d9443c01a7336-2074c6fe6b6mr47263185ad.49.1726049462285; 
+ Wed, 11 Sep 2024 03:11:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE51SjtkctOiPmlcascIMnETpprGnlCibVIXwmA9xH5OwxA3uQrfuOc8DV/7IdVbSyQDiwliQ==
+X-Received: by 2002:a17:902:c408:b0:205:951b:563f with SMTP id
+ d9443c01a7336-2074c6fe6b6mr47262785ad.49.1726049461806; 
+ Wed, 11 Sep 2024 03:11:01 -0700 (PDT)
 Received: from zeus.elecom ([240b:10:83a2:bd00:6e35:f2f5:2e21:ae3a])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71908fc84bcsm2624193b3a.39.2024.09.11.02.47.24
+ d9443c01a7336-20710ee1ecesm60376805ad.181.2024.09.11.03.10.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 02:47:26 -0700 (PDT)
+ Wed, 11 Sep 2024 03:11:01 -0700 (PDT)
 From: Ryosuke Yasuoka <ryasuoka@redhat.com>
 To: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
  mripard@kernel.org, tzimmermann@suse.de, daniel@ffwll.ch
 Cc: Ryosuke Yasuoka <ryasuoka@redhat.com>, virtualization@lists.linux.dev,
  spice-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: [RFC] drm/qxl: Add drm_panic support
-Date: Wed, 11 Sep 2024 18:46:30 +0900
-Message-ID: <20240911094644.616280-1-ryasuoka@redhat.com>
+Subject: [PATCH] drm/qxl: Add drm_panic support
+Date: Wed, 11 Sep 2024 19:10:42 +0900
+Message-ID: <20240911101043.618043-1-ryasuoka@redhat.com>
 X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
