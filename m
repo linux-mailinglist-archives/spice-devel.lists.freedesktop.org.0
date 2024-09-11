@@ -2,68 +2,80 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91DF0976C28
-	for <lists+spice-devel@lfdr.de>; Thu, 12 Sep 2024 16:31:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9062B976C27
+	for <lists+spice-devel@lfdr.de>; Thu, 12 Sep 2024 16:31:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F65610EB85;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 322FC10EB86;
 	Thu, 12 Sep 2024 14:31:01 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yaiji+gc";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bCPNZpVN";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com
- [209.85.218.46])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5310510E351
- for <spice-devel@lists.freedesktop.org>; Mon,  9 Sep 2024 09:22:00 +0000 (UTC)
-Received: by mail-ej1-f46.google.com with SMTP id
- a640c23a62f3a-a8d60e23b33so63089766b.0
- for <spice-devel@lists.freedesktop.org>; Mon, 09 Sep 2024 02:22:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725873718; x=1726478518; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bMuPHsjMKQepFZRfBo+hIpRNIfPKQoY/5szAGidG/Ro=;
- b=Yaiji+gcLEB9zdiwDL6nsyuLxB1zwFBxTIwRXvoxhYxYqEwnZyg4qC7R4HdsPSlVJM
- Ynf3smJHCZnteevzY92FsmSdO8dC2eOZ3Ivj2XUP1UGlQvSEg5XmSJqkrwgxwo/mwVRM
- rJf7zELYmJAqzny3RcPYKcyd21mB/rfR6VkkjsfKQghAPpYupg2oIMVu1TJ/lODrhpkB
- u9NpS8a/d3wmLnFl/k3W+HnsRld7Q4i5rs3ByTF9ETWXHh+DN4j/l5NUXHTNeCIUaBUk
- BtbTrf3FJ/fl0lDipfZbeMasQNknQVk4sC0sTFk+oOxhjEqGzzfDLeM7zZ/cH8356k7x
- 6BHw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 313E210E98C
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2024 09:47:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1726048050;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=eOoYKYyfnRpPBr8KlfQTzkefti6SUh7sCC2BboAdplg=;
+ b=bCPNZpVNHMwNWs1jEaeIS8wNk7Gdl7ogd+qPHOUjEnIizW3A4c6PPDuqn81e3e9ei41Y01
+ eKsrU0sYh1I8X5VdT6Li0JJxB3mdKvwn/JPSRI8U5z/Z+JlNeZBqb7ne6nwDrHqAoCy2Fh
+ wahYz7iY9z0ahQ9J641DuW+HL3Oz3oY=
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-43--IB0Jas-NZq_5bcrsyTF1A-1; Wed, 11 Sep 2024 05:47:29 -0400
+X-MC-Unique: -IB0Jas-NZq_5bcrsyTF1A-1
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-717912c8f27so7363979b3a.1
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Sep 2024 02:47:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725873718; x=1726478518;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1726048048; x=1726652848;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bMuPHsjMKQepFZRfBo+hIpRNIfPKQoY/5szAGidG/Ro=;
- b=wdD+KbzCQPNZZL1wtRMWAiPoHVXH9ZgHCTtrRU2j0oKXMvbJF3g7y+LdPjhCWnuOsQ
- b1rHwxza9m6JzYrxOWBVqTv34WrlUa1btHDYcZcN2NIYotv7iR8FACVMJkMMjJKrUwDB
- wNTSZM+/L0X9vGucHVwfgEG9rQSWd7zzO6AWMX/ZJmuuoDPUDzJcvovz6twPeJ5wrqs9
- 09ETiSZIfDHqkhdhzHUV8sVLlpfaR2nwSxXCn0ZfSdon4ArPPKkjcE+Luods+WKRh1hy
- X21FTRDRamo2cywfoPf5ROwNQcQxh7BGt0K+kCySWAx/wDdauMzwUzRvXCBlDpl19bAy
- vzjQ==
-X-Gm-Message-State: AOJu0Yw06ctrZKBm+wHEWfMYUMG+z35Ef2r/Hfe1PzHXigU3dRUzpQ8j
- 3wvaJEY/NGW4ihY5gV5bM8uSYlooa5wLWUSWf3K4N8321tJBudJVL/D9LdX+gtiNhwdo1zHsy/b
- jj8imuuZFP6KlRmB1bgumNapScPI=
-X-Google-Smtp-Source: AGHT+IEAYkdn5bL3JzDZSzy+WzPPW4jIxO6hNhpVbtKNyigSsgLFbO3EFKBgoUkXgc7VdWzZRki7QTnfm6te7OGvcI8=
-X-Received: by 2002:a17:907:801:b0:a77:b4e3:4fca with SMTP id
- a640c23a62f3a-a8a885bfbe1mr1118519166b.9.1725873717580; Mon, 09 Sep 2024
- 02:21:57 -0700 (PDT)
+ bh=eOoYKYyfnRpPBr8KlfQTzkefti6SUh7sCC2BboAdplg=;
+ b=cUtEr1KmVS5CP0oBOv9I+kH20vg5fQLNR/8xhUB6m+9NX9oI7avaFTFRbXnBs6wuNH
+ RaxBAOnBUU33BnM9naEh3bkynwdEOE6lApyKXMklSrnv923tBTgAsLsqPIqajpi1Vgvt
+ tvKv/pUJYbr6oK4UjbENAtm9t2/WYF7UCjqhGCi1VBQ0bNjOPmOKTkTF7fyqi3B3kljU
+ PUVmBFA+On8g51zE5uQOThL8ukWvAOIoxVHwo6jyEQ+cHIY8LZKTO+gb8+UQ8UitHUMi
+ WG3ZSh2XohBghwJPCnH9VZr8hFeb8ta5GLQMNLwFfpzUlzsP1zZfNefXFR3dKQiEJKg+
+ CjgA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPGN/dksYvtkU3EjD/goUt2YdON2zz1ZgV7yWMm1YZ+74JbxOEgInN2GinyGkxHPVHfn19AgBkEJexUA==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yy0Ze1o6Pga5l1rPS3WzCG5h5V8zHnDsPsXmD/gPck/zEzCmkoi
+ aeuqEmthm/uP2HB8Xh/gVq8UH1EJN6tMWsObrM4jqZZXKR2Hm5h7zkoTIsADtiUjaOt4W7Or7pp
+ Q70IKOiwiN6nz7FJcRLELsCiFLHNawP/rh+0aA/uXGetXAcxl2I+Kfum8iyWOGV0q1nb1
+X-Received: by 2002:a05:6a00:8c4:b0:718:da06:a4bf with SMTP id
+ d2e1a72fcca58-718e3f9c931mr20115001b3a.2.1726048047690; 
+ Wed, 11 Sep 2024 02:47:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHwqQ1OoH9hfSa1ktp4xtIJ7olKsWal0Edr0l7QCfhnfz2UBZpFr6fWHTlAvFzguI1YbMFi+A==
+X-Received: by 2002:a05:6a00:8c4:b0:718:da06:a4bf with SMTP id
+ d2e1a72fcca58-718e3f9c931mr20114986b3a.2.1726048047259; 
+ Wed, 11 Sep 2024 02:47:27 -0700 (PDT)
+Received: from zeus.elecom ([240b:10:83a2:bd00:6e35:f2f5:2e21:ae3a])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71908fc84bcsm2624193b3a.39.2024.09.11.02.47.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Sep 2024 02:47:26 -0700 (PDT)
+From: Ryosuke Yasuoka <ryasuoka@redhat.com>
+To: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, tzimmermann@suse.de, daniel@ffwll.ch
+Cc: Ryosuke Yasuoka <ryasuoka@redhat.com>, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Subject: [RFC] drm/qxl: Add drm_panic support
+Date: Wed, 11 Sep 2024 18:46:30 +0900
+Message-ID: <20240911094644.616280-1-ryasuoka@redhat.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
-References: <CA+mZ-_JE5f7qdNFyS-zKzYwx8e22xyzNG9oU4B7cNOyCUFAENQ@mail.gmail.com>
- <CAHt6W4eAR8gN6=d9LWH4EOukuWgx76UfBj0QGT0ctdr=UbWF_Q@mail.gmail.com>
- <CA+mZ-_LwGmvUhFDjqgLzfkc0aMy0SsWXH9U_Ekdsg0rLZKZQdA@mail.gmail.com>
- <CAHt6W4egOb+jX=LDLmpTnQ4n1ujkCMF=4e2H+hs+mOPufYXUwQ@mail.gmail.com>
- <CA+mZ-_+Q7W3zJoyuSX49uxOWq2rpJ81FYndYDeiQG=EfhOPisQ@mail.gmail.com>
- <CAHt6W4dQT1M-rbtq=Ku8O=1rVjBWToHnww5MyfM-pHA5PTPOWA@mail.gmail.com>
-In-Reply-To: <CAHt6W4dQT1M-rbtq=Ku8O=1rVjBWToHnww5MyfM-pHA5PTPOWA@mail.gmail.com>
-From: Randall Suter <randallsuter@gmail.com>
-Date: Mon, 9 Sep 2024 12:21:45 +0300
-Message-ID: <CA+mZ-_Jd8i6u346W=Ymh47ELoqHhEBuDUz++GUOL9ht4Fc8mFg@mail.gmail.com>
-Subject: Re: Guest Post Request
-To: Frediano Ziglio <freddy77@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="000000000000dd192b0621ac4974"
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"; x-default=true
 X-Mailman-Approved-At: Thu, 12 Sep 2024 14:30:59 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -79,172 +91,440 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000dd192b0621ac4974
-Content-Type: text/plain; charset="UTF-8"
+QXL supports the drm_panic module, which displays a message to the
+screen when a kernel panic occurs.
 
-I didn't understand your answer.
+Signed-off-by: Ryosuke Yasuoka <ryasuoka@redhat.com>
+---
+ drivers/gpu/drm/qxl/qxl_cmd.c     | 29 ++++++++++
+ drivers/gpu/drm/qxl/qxl_display.c | 94 +++++++++++++++++++++++++++++++
+ drivers/gpu/drm/qxl/qxl_draw.c    | 57 ++++++++++++++++++-
+ drivers/gpu/drm/qxl/qxl_drv.h     | 21 +++++++
+ drivers/gpu/drm/qxl/qxl_image.c   | 27 +++++++++
+ drivers/gpu/drm/qxl/qxl_object.c  | 62 ++++++++++++++++++++
+ drivers/gpu/drm/qxl/qxl_object.h  |  4 ++
+ 7 files changed, 293 insertions(+), 1 deletion(-)
 
-Best Regards,
-Randall Suter
+diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
+index d6ea01f3797b..c70041ce55c0 100644
+--- a/drivers/gpu/drm/qxl/qxl_cmd.c
++++ b/drivers/gpu/drm/qxl/qxl_cmd.c
+@@ -174,6 +174,35 @@ static bool qxl_ring_pop(struct qxl_ring *ring,
+ 	return true;
+ }
+ 
++/* For drm panic */
++int
++qxl_push_command_ring_without_release(struct qxl_device *qdev,
++		struct qxl_bo *bo, uint32_t type, uint32_t offset)
++{
++	struct qxl_command cmd;
++	struct qxl_ring *ring = qdev->command_ring;
++	struct qxl_ring_header *header = &(ring->ring->header);
++	uint8_t *elt;
++	int idx;
++
++	cmd.type = type;
++	cmd.data = qxl_bo_physical_address(qdev, bo, offset);
++
++	idx = header->prod & (ring->n_elements - 1);
++	elt = ring->ring->elements + idx * ring->element_size;
++
++	memcpy((void *)elt, &cmd, ring->element_size);
++
++	header->prod++;
++
++	mb();
++
++	if (header->prod == header->notify_on_prod)
++		outb(0, ring->prod_notify);
++
++	return 0;
++}
++
+ int
+ qxl_push_command_ring_release(struct qxl_device *qdev, struct qxl_release *release,
+ 			      uint32_t type, bool interruptible)
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index bc24af08dfcd..b5f2ddfe71a9 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -37,6 +37,7 @@
+ #include <drm/drm_probe_helper.h>
+ #include <drm/drm_simple_kms_helper.h>
+ #include <drm/drm_gem_atomic_helper.h>
++#include <drm/drm_panic.h>
+ 
+ #include "qxl_drv.h"
+ #include "qxl_object.h"
+@@ -889,6 +890,97 @@ static void qxl_plane_cleanup_fb(struct drm_plane *plane,
+ 	}
+ }
+ 
++static int qxl_primary_plane_helper_get_scanout_buffer(struct drm_plane *plane,
++							struct drm_scanout_buffer *sb)
++{
++	struct qxl_bo *bo;
++
++	if (!plane->state || !plane->state->fb)
++		return -ENODEV;
++
++	bo = gem_to_qxl_bo(plane->state->fb->obj[0]);
++
++	if (!bo->map.vaddr) {
++		int ret;
++
++		ret = qxl_bo_pin_and_vmap(bo, &sb->map[0]);
++		if (ret)
++			return ret;
++	} else {
++		iosys_map_set_vaddr(&sb->map[0], bo->map.vaddr);
++	}
++
++	sb->format = plane->state->fb->format;
++	sb->height = plane->state->fb->height;
++	sb->width = plane->state->fb->width;
++	sb->pitch[0] = plane->state->fb->pitches[0];
++	return 0;
++}
++
++static void qxl_panic_flush(struct drm_plane *plane)
++{
++	struct qxl_device *qdev = to_qxl(plane->dev);
++	struct qxl_bo *_bo = gem_to_qxl_bo(plane->state->fb->obj[0]);
++	uint8_t *surface_base = _bo->map.vaddr;
++	struct drm_clip_rect rect = {
++		.x1 = 0,
++		.y1 = 0,
++		.x2 = plane->state->fb->width,
++		.y2 = plane->state->fb->height
++	};
++	unsigned int num_clips = 1;
++	struct qxl_bo clips_bo = {};
++	struct qxl_bo image_bo = {};
++	struct qxl_bo chunk_bo = {};
++	struct qxl_drm_image dimage;
++	struct qxl_drm_chunk chunk;
++	int width = rect.x2;
++	int height = rect.y2;
++	int stride = plane->state->fb->pitches[0];
++	int depth = plane->state->fb->format->cpp[0] * 8;
++	struct qxl_rect *rects;
++	struct qxl_rect drawable_rect = {
++		.left = 0,
++		.right = width,
++		.top = 0,
++		.bottom = height,
++	};
++	int cur_idx = 0;
++	int size = 256;
++	struct qxl_bo *bo = qxl_bo_ref(qdev->current_release_bo[cur_idx]);
++	uint32_t offset = qdev->current_release_bo_offset[cur_idx] * size;
++	int ret;
++
++	qxl_panic_bo_create(qdev, sizeof(struct qxl_clip_rects) + sizeof(struct qxl_rect),
++			false, false, QXL_GEM_DOMAIN_VRAM, 0, NULL, &clips_bo);
++
++	ret = qxl_image_alloc_objects_without_release(qdev, &dimage, &chunk, &image_bo, &chunk_bo,
++			surface_base, width, height, depth, stride);
++	if (ret)
++		return;
++
++	ret = make_drawable_without_release(qdev, &drawable_rect, bo, &clips_bo,
++			&dimage, offset, height, width);
++	if (ret)
++		return;
++
++	rects = drawable_set_clipping(qdev, num_clips, &clips_bo);
++	if (!rects)
++		return;
++	rects[0].left = 0;
++	rects[0].right = width;
++	rects[0].top = 0;
++	rects[0].bottom = height;
++
++	qxl_push_command_ring_without_release(qdev, bo, QXL_CMD_DRAW, offset);
++
++	qxl_gem_object_free(&chunk_bo.tbo.base);
++	qxl_gem_object_free(&image_bo.tbo.base);
++
++	qxl_bo_vunmap_locked(&clips_bo);
++	qxl_gem_object_free(&clips_bo.tbo.base);
++}
++
+ static const uint32_t qxl_cursor_plane_formats[] = {
+ 	DRM_FORMAT_ARGB8888,
+ };
+@@ -920,6 +1012,8 @@ static const struct drm_plane_helper_funcs primary_helper_funcs = {
+ 	.atomic_disable = qxl_primary_atomic_disable,
+ 	.prepare_fb = qxl_plane_prepare_fb,
+ 	.cleanup_fb = qxl_plane_cleanup_fb,
++	.get_scanout_buffer = qxl_primary_plane_helper_get_scanout_buffer,
++	.panic_flush = qxl_panic_flush,
+ };
+ 
+ static const struct drm_plane_funcs qxl_primary_plane_funcs = {
+diff --git a/drivers/gpu/drm/qxl/qxl_draw.c b/drivers/gpu/drm/qxl/qxl_draw.c
+index 3a3e127ce297..49fdc0162377 100644
+--- a/drivers/gpu/drm/qxl/qxl_draw.c
++++ b/drivers/gpu/drm/qxl/qxl_draw.c
+@@ -41,7 +41,8 @@ static int alloc_clips(struct qxl_device *qdev,
+ /* returns a pointer to the already allocated qxl_rect array inside
+  * the qxl_clip_rects. This is *not* the same as the memory allocated
+  * on the device, it is offset to qxl_clip_rects.chunk.data */
+-static struct qxl_rect *drawable_set_clipping(struct qxl_device *qdev,
++
++struct qxl_rect *drawable_set_clipping(struct qxl_device *qdev,
+ 					      unsigned int num_clips,
+ 					      struct qxl_bo *clips_bo)
+ {
+@@ -74,6 +75,60 @@ free_drawable(struct qxl_device *qdev, struct qxl_release *release)
+ 	qxl_release_free(qdev, release);
+ }
+ 
++/* For drm panic */
++int
++make_drawable_without_release(struct qxl_device *qdev,
++		struct qxl_rect *drawable_rect,
++		struct qxl_bo *bo,
++		struct qxl_bo *clips_bo,
++		struct qxl_drm_image *dimage,
++		uint32_t offset, int height, int width)
++{
++	struct qxl_drawable *drawable;
++	union qxl_release_info *info;
++	void *ptr;
++	int i;
++
++	ptr = qxl_bo_kmap_atomic_page(qdev, bo, offset & PAGE_MASK);
++	if (!ptr)
++		return -ENOMEM;
++	drawable = ptr + (offset & ~PAGE_MASK);
++
++	drawable->type = QXL_DRAW_COPY;
++	drawable->surface_id = 0;
++	drawable->effect = QXL_EFFECT_OPAQUE;
++	drawable->self_bitmap = 0;
++	drawable->self_bitmap_area.top = 0;
++	drawable->self_bitmap_area.left = 0;
++	drawable->self_bitmap_area.bottom = 0;
++	drawable->self_bitmap_area.right = 0;
++
++	for (i = 0; i < 3; ++i)
++		drawable->surfaces_dest[i] = -1;
++
++	drawable->bbox = *drawable_rect;
++	drawable->mm_time = qdev->rom->mm_clock;
++	drawable->clip.type = SPICE_CLIP_TYPE_RECTS;
++	drawable->clip.data = qxl_bo_physical_address(qdev, clips_bo, 0);
++	drawable->u.copy.src_area.top = 0;
++	drawable->u.copy.src_area.bottom = height;
++	drawable->u.copy.src_area.left = 0;
++	drawable->u.copy.src_area.right = width;
++	drawable->u.copy.rop_descriptor = SPICE_ROPD_OP_PUT;
++	drawable->u.copy.scale_mode = 0;
++	drawable->u.copy.mask.flags = 0;
++	drawable->u.copy.mask.pos.x = 0;
++	drawable->u.copy.mask.pos.y = 0;
++	drawable->u.copy.mask.bitmap = 0;
++	drawable->u.copy.src_bitmap = qxl_bo_physical_address(qdev, dimage->bo, 0);
++
++	info = &drawable->release_info;
++	ptr = ((void *)info) - (offset & ~PAGE_MASK);
++	qxl_bo_kunmap_atomic_page(qdev, bo, ptr);
++
++	return 0;
++}
++
+ /* release needs to be reserved at this point */
+ static int
+ make_drawable(struct qxl_device *qdev, int surface, uint8_t type,
+diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
+index 32069acd93f8..93dd0de06c23 100644
+--- a/drivers/gpu/drm/qxl/qxl_drv.h
++++ b/drivers/gpu/drm/qxl/qxl_drv.h
+@@ -334,6 +334,13 @@ int qxl_image_init(struct qxl_device *qdev,
+ 		   const uint8_t *data,
+ 		   int x, int y, int width, int height,
+ 		   int depth, int stride);
++
++int qxl_image_alloc_objects_without_release(struct qxl_device *qdev,
++		struct qxl_drm_image *image, struct qxl_drm_chunk *chunk,
++		struct qxl_bo *image_bo, struct qxl_bo *chunk_bo,
++		uint8_t *surface_base, int width,
++		int height, int depth, int stride);
++
+ int
+ qxl_image_alloc_objects(struct qxl_device *qdev,
+ 			struct qxl_release *release,
+@@ -376,6 +383,9 @@ int qxl_alloc_release_reserved(struct qxl_device *qdev, unsigned long size,
+ 			       int type, struct qxl_release **release,
+ 			       struct qxl_bo **rbo);
+ 
++int qxl_push_command_ring_without_release(struct qxl_device *qdev,
++		struct qxl_bo *bo, uint32_t type, uint32_t offset);
++
+ int
+ qxl_push_command_ring_release(struct qxl_device *qdev, struct qxl_release *release,
+ 			      uint32_t type, bool interruptible);
+@@ -387,6 +397,9 @@ int qxl_alloc_bo_reserved(struct qxl_device *qdev,
+ 			  unsigned long size,
+ 			  struct qxl_bo **_bo);
+ /* qxl drawing commands */
++struct qxl_rect *drawable_set_clipping(struct qxl_device *qdev,
++					      unsigned int num_clips,
++					      struct qxl_bo *clips_bo);
+ 
+ void qxl_draw_dirty_fb(struct qxl_device *qdev,
+ 		       struct drm_framebuffer *fb,
+@@ -399,6 +412,14 @@ void qxl_draw_dirty_fb(struct qxl_device *qdev,
+ void qxl_release_free(struct qxl_device *qdev,
+ 		      struct qxl_release *release);
+ 
++int
++make_drawable_without_release(struct qxl_device *qdev,
++		struct qxl_rect *drawable_rect,
++		struct qxl_bo *bo,
++		struct qxl_bo *clips_bo,
++		struct qxl_drm_image *dimage,
++		uint32_t offset, int height, int width);
++
+ /* used by qxl_debugfs_release */
+ struct qxl_release *qxl_release_from_id_locked(struct qxl_device *qdev,
+ 						   uint64_t id);
+diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
+index ffff54e5fb31..2efe0cf133a6 100644
+--- a/drivers/gpu/drm/qxl/qxl_image.c
++++ b/drivers/gpu/drm/qxl/qxl_image.c
+@@ -52,6 +52,33 @@ qxl_allocate_chunk(struct qxl_device *qdev,
+ 	return 0;
+ }
+ 
++/* For drm panic */
++int
++qxl_image_alloc_objects_without_release(struct qxl_device *qdev,
++		struct qxl_drm_image *image, struct qxl_drm_chunk *chunk,
++		struct qxl_bo *image_bo, struct qxl_bo *chunk_bo,
++		uint8_t *surface_base, int width, int height,
++		int depth, int stride)
++{
++	int ret;
++	unsigned int chunk_size = sizeof(struct qxl_data_chunk) + stride * height;
++
++	INIT_LIST_HEAD(&image->chunk_list);
++	qxl_panic_bo_create(qdev, sizeof(struct qxl_image), false, false,
++			QXL_GEM_DOMAIN_VRAM, 0, NULL, image_bo);
++	image->bo = image_bo;
++
++	qxl_panic_bo_create(qdev, chunk_size, false, false,
++			QXL_GEM_DOMAIN_VRAM, 0, NULL, chunk_bo);
++	chunk->bo = chunk_bo;
++	list_add_tail(&chunk->head, &image->chunk_list);
++
++	ret = qxl_image_init(qdev, NULL, image, surface_base,
++			     0, 0, width, height, depth, stride);
++	return ret;
++
++}
++
+ int
+ qxl_image_alloc_objects(struct qxl_device *qdev,
+ 			struct qxl_release *release,
+diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
+index 66635c55cf85..9e00700f8f03 100644
+--- a/drivers/gpu/drm/qxl/qxl_object.c
++++ b/drivers/gpu/drm/qxl/qxl_object.c
+@@ -29,6 +29,23 @@
+ #include "qxl_drv.h"
+ #include "qxl_object.h"
+ 
++/* for drm panic */
++static void qxl_panic_ttm_bo_destroy(struct ttm_buffer_object *tbo)
++{
++	struct qxl_bo *bo;
++	struct qxl_device *qdev;
++
++	bo = to_qxl_bo(tbo);
++	qdev = to_qxl(bo->tbo.base.dev);
++
++	qxl_surface_evict(qdev, bo, false);
++	WARN_ON_ONCE(bo->map_count > 0);
++	mutex_lock(&qdev->gem.mutex);
++	list_del_init(&bo->list);
++	mutex_unlock(&qdev->gem.mutex);
++	drm_gem_object_release(&bo->tbo.base);
++}
++
+ static void qxl_ttm_bo_destroy(struct ttm_buffer_object *tbo)
+ {
+ 	struct qxl_bo *bo;
+@@ -101,6 +118,51 @@ static const struct drm_gem_object_funcs qxl_object_funcs = {
+ 	.print_info = drm_gem_ttm_print_info,
+ };
+ 
++/* for drm_panic */
++int qxl_panic_bo_create(struct qxl_device *qdev, unsigned long size,
++		  bool kernel, bool pinned, u32 domain, u32 priority,
++		  struct qxl_surface *surf, struct qxl_bo *bo)
++{
++	struct ttm_operation_ctx ctx = { !kernel, false };
++	enum ttm_bo_type type;
++	int r;
++
++	if (kernel)
++		type = ttm_bo_type_kernel;
++	else
++		type = ttm_bo_type_device;
++
++	size = roundup(size, PAGE_SIZE);
++	r = drm_gem_object_init(&qdev->ddev, &bo->tbo.base, size);
++	if (unlikely(r))
++		return r;
++	bo->tbo.base.funcs = &qxl_object_funcs;
++	bo->type = domain;
++	bo->surface_id = 0;
++	INIT_LIST_HEAD(&bo->list);
++
++	if (surf)
++		bo->surf = *surf;
++
++	qxl_ttm_placement_from_domain(bo, domain);
++
++	bo->tbo.priority = priority;
++	r = ttm_bo_init_reserved(&qdev->mman.bdev, &bo->tbo, type,
++				 &bo->placement, 0, &ctx, NULL, NULL,
++				 &qxl_panic_ttm_bo_destroy);
++	if (unlikely(r != 0)) {
++		if (r != -ERESTARTSYS)
++			dev_err(qdev->ddev.dev,
++				"object_init failed for (%lu, 0x%08X)\n",
++				size, domain);
++		return r;
++	}
++	if (pinned)
++		ttm_bo_pin(&bo->tbo);
++	ttm_bo_unreserve(&bo->tbo);
++	return 0;
++}
++
+ int qxl_bo_create(struct qxl_device *qdev, unsigned long size,
+ 		  bool kernel, bool pinned, u32 domain, u32 priority,
+ 		  struct qxl_surface *surf,
+diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_object.h
+index 875f63221074..4debb8ce6d08 100644
+--- a/drivers/gpu/drm/qxl/qxl_object.h
++++ b/drivers/gpu/drm/qxl/qxl_object.h
+@@ -53,6 +53,10 @@ static inline unsigned long qxl_bo_size(struct qxl_bo *bo)
+ 	return bo->tbo.base.size;
+ }
+ 
++extern int qxl_panic_bo_create(struct qxl_device *qdev, unsigned long size,
++		  bool kernel, bool pinned, u32 domain, u32 priority,
++		  struct qxl_surface *surf,
++		  struct qxl_bo *bo);
+ extern int qxl_bo_create(struct qxl_device *qdev,
+ 			 unsigned long size,
+ 			 bool kernel, bool pinned, u32 domain,
+-- 
+2.46.0
 
-
-On Sun, 8 Sept 2024 at 13:41, Frediano Ziglio <freddy77@gmail.com> wrote:
-
-> Il giorno gio 5 set 2024 alle ore 18:56 Randall Suter
-> <randallsuter@gmail.com> ha scritto:
-> >
-> > Hello,
-> >
-> > My clients are willing to pay you to place an advertising article on
-> your site. That's what I'm asking you. Do you accept this or not?
-> >
-> > Best Regards,
-> > Randall Suter
-> >
-> >
-> > On Thu, 5 Sept 2024 at 09:39, Frediano Ziglio <freddy77@gmail.com>
-> wrote:
-> >>
-> >> Hi,
-> >>    it's not clear what you are trying to achieve.
-> >>
-> >> Do you want to sponsor our project? Like paying for a developer? Or
-> >> donate some money (I don't think we'll have a nice usage at the moment
-> >> but I may be wrong) ?
-> >>
-> >> Regards,
-> >>    Frediano
-> >>
-> >> Il giorno ven 19 lug 2024 alle ore 23:14 Randall Suter
-> >> <randallsuter@gmail.com> ha scritto:
-> >> >
-> >> > Hi! Thank you for your reply! I'm interested in sponsored posts with
-> a do-follow link. I have several projects on different topics. I would like
-> to know the terms of publication and prices on your site to begin with.
-> Please give me more details about it if you accept such posts.
-> >> >
-> >> > Best Regards,
-> >> > Randall Suter
-> >> >
-> >> >
-> >> > On Fri, 19 Jul 2024 at 13:47, Frediano Ziglio <freddy77@gmail.com>
-> wrote:
-> >> >>
-> >> >> Il giorno ven 19 lug 2024 alle ore 11:20 Randall Suter
-> >> >> <randallsuter@gmail.com> ha scritto:
-> >> >> >
-> >> >> > Good day! My name is Randall. I would like to contribute to your
-> website (spice-space.org) by submitting a guest post. Are there any
-> specific requirements that I need to follow?
-> >> >> >
-> >> >> > Best Regards,
-> >> >> > Randall Suter
-> >> >>
-> >> >> Hi Randall,
-> >> >>    pages are generated from
-> >> >> https://gitlab.freedesktop.org/spice/spice-space-pages.
-> >> >> What'a a "guest post" ?
-> >> >>
-> >> >> Frediano
->
-> Hi,
->    I don't own the website but I think the reply is no.
-> It's an Open Source project webpage.
->
-> Regards,
->    Frediano
->
-
---000000000000dd192b0621ac4974
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">I didn&#39;t understand your answer.<br c=
-lear=3D"all"><div><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"lt=
-r"><div><br></div><div><font face=3D"arial, sans-serif">Best Regards,<br></=
-font></div><div><span style=3D"color:rgb(0,0,0);white-space:pre-wrap"><font=
- face=3D"arial, sans-serif">Randall Suter</font></span><br></div></div></di=
-v></div><br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cla=
-ss=3D"gmail_attr">On Sun, 8 Sept 2024 at 13:41, Frediano Ziglio &lt;<a href=
-=3D"mailto:freddy77@gmail.com">freddy77@gmail.com</a>&gt; wrote:<br></div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
-eft:1px solid rgb(204,204,204);padding-left:1ex">Il giorno gio 5 set 2024 a=
-lle ore 18:56 Randall Suter<br>
-&lt;<a href=3D"mailto:randallsuter@gmail.com" target=3D"_blank">randallsute=
-r@gmail.com</a>&gt; ha scritto:<br>
-&gt;<br>
-&gt; Hello,<br>
-&gt;<br>
-&gt; My clients are willing to pay you to place an advertising article on y=
-our site. That&#39;s what I&#39;m asking you. Do you accept this or not?<br=
->
-&gt;<br>
-&gt; Best Regards,<br>
-&gt; Randall Suter<br>
-&gt;<br>
-&gt;<br>
-&gt; On Thu, 5 Sept 2024 at 09:39, Frediano Ziglio &lt;<a href=3D"mailto:fr=
-eddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt; wrote:<br>
-&gt;&gt;<br>
-&gt;&gt; Hi,<br>
-&gt;&gt;=C2=A0 =C2=A0 it&#39;s not clear what you are trying to achieve.<br=
->
-&gt;&gt;<br>
-&gt;&gt; Do you want to sponsor our project? Like paying for a developer? O=
-r<br>
-&gt;&gt; donate some money (I don&#39;t think we&#39;ll have a nice usage a=
-t the moment<br>
-&gt;&gt; but I may be wrong) ?<br>
-&gt;&gt;<br>
-&gt;&gt; Regards,<br>
-&gt;&gt;=C2=A0 =C2=A0 Frediano<br>
-&gt;&gt;<br>
-&gt;&gt; Il giorno ven 19 lug 2024 alle ore 23:14 Randall Suter<br>
-&gt;&gt; &lt;<a href=3D"mailto:randallsuter@gmail.com" target=3D"_blank">ra=
-ndallsuter@gmail.com</a>&gt; ha scritto:<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Hi! Thank you for your reply! I&#39;m interested in sponsored=
- posts with a do-follow link. I have several projects on different topics. =
-I would like to know the terms of publication and prices on your site to be=
-gin with. Please give me more details about it if you accept such posts.<br=
->
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Best Regards,<br>
-&gt;&gt; &gt; Randall Suter<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; On Fri, 19 Jul 2024 at 13:47, Frediano Ziglio &lt;<a href=3D"=
-mailto:freddy77@gmail.com" target=3D"_blank">freddy77@gmail.com</a>&gt; wro=
-te:<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; Il giorno ven 19 lug 2024 alle ore 11:20 Randall Suter<br=
->
-&gt;&gt; &gt;&gt; &lt;<a href=3D"mailto:randallsuter@gmail.com" target=3D"_=
-blank">randallsuter@gmail.com</a>&gt; ha scritto:<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt; &gt; Good day! My name is Randall. I would like to contri=
-bute to your website (<a href=3D"http://spice-space.org" rel=3D"noreferrer"=
- target=3D"_blank">spice-space.org</a>) by submitting a guest post. Are the=
-re any specific requirements that I need to follow?<br>
-&gt;&gt; &gt;&gt; &gt;<br>
-&gt;&gt; &gt;&gt; &gt; Best Regards,<br>
-&gt;&gt; &gt;&gt; &gt; Randall Suter<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; Hi Randall,<br>
-&gt;&gt; &gt;&gt;=C2=A0 =C2=A0 pages are generated from<br>
-&gt;&gt; &gt;&gt; <a href=3D"https://gitlab.freedesktop.org/spice/spice-spa=
-ce-pages" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop.o=
-rg/spice/spice-space-pages</a>.<br>
-&gt;&gt; &gt;&gt; What&#39;a a &quot;guest post&quot; ?<br>
-&gt;&gt; &gt;&gt;<br>
-&gt;&gt; &gt;&gt; Frediano<br>
-<br>
-Hi,<br>
-=C2=A0 =C2=A0I don&#39;t own the website but I think the reply is no.<br>
-It&#39;s an Open Source project webpage.<br>
-<br>
-Regards,<br>
-=C2=A0 =C2=A0Frediano<br>
-</blockquote></div>
-
---000000000000dd192b0621ac4974--
