@@ -2,77 +2,65 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89E9898F292
-	for <lists+spice-devel@lfdr.de>; Thu,  3 Oct 2024 17:29:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BCD998F6C2
+	for <lists+spice-devel@lfdr.de>; Thu,  3 Oct 2024 21:06:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 134B110E87A;
-	Thu,  3 Oct 2024 15:29:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A081C10E8F2;
+	Thu,  3 Oct 2024 19:06:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="kuMVv3oV";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ipdT19hv";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3EFBF10E887;
- Thu,  3 Oct 2024 15:29:18 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C11E10E204;
+ Wed,  2 Oct 2024 12:24:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1727969359; x=1759505359;
- h=date:from:to:subject:message-id:references:mime-version:
- content-transfer-encoding:in-reply-to;
- bh=YvquIwwg5/j4zuorAq7NmB4oxpw4k5D2MxcNq7+7jVA=;
- b=kuMVv3oV8G7edPznipQyHxg75FCx3GOh4uL/DIomV8EC1LroedBsnAxe
- RP3fUHZIo8HskIcqa3ta1Xpg0Atly9UGs1Sr8igfWCyrxRNqXCTJkZQ7n
- peglNbDgp/edKzSttcbyJ4mT6sBFNyiionHVLQDVbrQqMpXieLSohwNAj
- 64G4lqR0tArBBad10HGKHKs8UQjnwDdGNdGabycRlq/4ofE+pLi1KOeLu
- 3kp8pwupgpcWuLE0jxhL6qn3El7GozCWyUadc1H+YbU6FSlghT0wsPmnO
- 3YlQLnp6ydfMybYst1E96AvZgHYAgNElRk0nEvRsBS4568Dh0TleNeAmz A==;
-X-CSE-ConnectionGUID: 3jwtKSkMSB2OqO4gf11OLg==
-X-CSE-MsgGUID: 8lvlOA6OTbK4O5yEuhERqg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11214"; a="26680408"
-X-IronPort-AV: E=Sophos;i="6.11,174,1725346800"; d="scan'208";a="26680408"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
- by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Oct 2024 08:29:18 -0700
-X-CSE-ConnectionGUID: R4ZdAm2cSWCWdcBvo+HW5w==
-X-CSE-MsgGUID: Rg93cpzSR3e/8YcpWOq3jg==
+ t=1727871883; x=1759407883;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=S73w0Dupi7vDTH7lqcJXtf7MvEjQ2efkpDxP9sz4ekM=;
+ b=ipdT19hvmyxN10YavN7qQBw6OvSR+Pn9f01UfWMsmY+8wQouNtfcd8rZ
+ AhKGSrmv5p4CX9AmOCeDhBbCsYdO5kZCXxRYXDAXxJEXyVOT5jOpbetX9
+ j0UvDCab4zhFtDnEb4IhD9M+D4nHsrr/2Sm2BNc5inkXmFN8yoimVBS+7
+ Ph1Hb5ZSjS/qSK8fCPNqB0NKoexsgwKwEDRpX2m7I3QlQzHHZFSNanpli
+ TDTKDhYXunHdrfG4iAdChlztgwIyg8F1nT9YvKRKdMxeSX4TAt0MGUHVe
+ 3s7bNWW5Q8R6pQTLsQVlRh0nkPmVs7W7WZMofHYIG550tyX2V58sXmHCy g==;
+X-CSE-ConnectionGUID: 8+ja7SVOR1iPFFSxY2lnQw==
+X-CSE-MsgGUID: xajXIug1Q66Vn68P9S4zdg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11213"; a="30735377"
+X-IronPort-AV: E=Sophos;i="6.11,171,1725346800"; d="scan'208";a="30735377"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+ by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Oct 2024 05:24:43 -0700
+X-CSE-ConnectionGUID: aXzl/KrASwC3xlNNtsn1DA==
+X-CSE-MsgGUID: 0YP0m1IZRxCW9/L/ZZTVGg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,174,1725346800"; d="scan'208";a="74496623"
-Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
- by fmviesa008.fm.intel.com with SMTP; 03 Oct 2024 08:29:11 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Thu, 03 Oct 2024 18:29:10 +0300
-Date: Thu, 3 Oct 2024 18:29:10 +0300
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Liviu Dudau <liviu.dudau@arm.com>, Russell King <linux@armlinux.org.uk>,
- Inki Dae <inki.dae@samsung.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Alain Volmat <alain.volmat@foss.st.com>,
- Sandy Huang <hjc@rock-chips.com>, Jyri Sarha <jyri.sarha@iki.fi>,
- Alexey Brodkin <abrodkin@synopsys.com>,
- Hans de Goede <hdegoede@redhat.com>,
- =?iso-8859-1?Q?Ma=EDra?= Canal <mairacanal@riseup.net>,
- Zack Rusin <zack.rusin@broadcom.com>, amd-gfx@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org,
- linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- linux-renesas-soc@vger.kernel.org, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 2/2] drm: Move crtc->{x, y, mode, enabled} to legacy
- sub-structure
-Message-ID: <Zv64RktMPv2rpCZf@intel.com>
-References: <20241002182200.15363-1-ville.syrjala@linux.intel.com>
- <20241002182200.15363-3-ville.syrjala@linux.intel.com>
- <Zv6QF2EmIcogtlLA@louis-chauvet-laptop>
- <Zv6gSGMXZZARf3oV@intel.com>
- <Zv6zN7Go_XG44P2-@louis-chauvet-laptop>
+X-IronPort-AV: E=Sophos;i="6.11,171,1725346800"; d="scan'208";a="74221149"
+Received: from oandoniu-mobl3.ger.corp.intel.com (HELO fedora..)
+ ([10.245.244.67])
+ by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Oct 2024 05:24:41 -0700
+From: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>
+To: intel-xe@lists.freedesktop.org
+Cc: =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Zack Rusin <zack.rusin@broadcom.com>,
+ bcm-kernel-feedback-list@broadcom.com,
+ Sui Jingfeng <suijingfeng@loongson.cn>
+Subject: [PATCH v2 0/2] drm/ttm: Add an option to report graphics memory OOM 
+Date: Wed,  2 Oct 2024 14:24:20 +0200
+Message-ID: <20241002122422.287276-1-thomas.hellstrom@linux.intel.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <Zv6zN7Go_XG44P2-@louis-chauvet-laptop>
-X-Patchwork-Hint: comment
+X-Mailman-Approved-At: Thu, 03 Oct 2024 19:06:21 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,65 +75,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Thu, Oct 03, 2024 at 05:07:35PM +0200, Louis Chauvet wrote:
-> 
-> > > > diff --git a/drivers/gpu/drm/vkms/vkms_crtc.c b/drivers/gpu/drm/vkms/vkms_crtc.c
-> > > > index a40295c18b48..780681ea77e4 100644
-> > > > --- a/drivers/gpu/drm/vkms/vkms_crtc.c
-> > > > +++ b/drivers/gpu/drm/vkms/vkms_crtc.c
-> > > > @@ -64,7 +64,7 @@ static int vkms_enable_vblank(struct drm_crtc *crtc)
-> > > >  	struct drm_vblank_crtc *vblank = drm_crtc_vblank_crtc(crtc);
-> > > >  	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
-> > > >  
-> > > > -	drm_calc_timestamping_constants(crtc, &crtc->mode);
-> > > > +	drm_calc_timestamping_constants(crtc, &crtc->legacy.mode);
-> > > 
-> > > 	drm_calc_timestamping_constants(crtc, &crtc->state->mode);
-> > 
-> > This one doesn't look safe. You want to call that during your atomic
-> > commit already.
-> > 
-> 
-> This was already not safe with the previous implementation? Or it is only 
-> unsafe because now I use state->mode instead of legacy.mode?
+Some graphics APIs differentiate between out-of-graphics-memory and
+out-of-host-memory (system memory). Add a device init flag to
+have -ENOSPC propagated from the resource managers instead of being
+converted to -ENOMEM, to aid driver stacks in determining what
+error code to return or whether corrective action can be taken at
+the driver level.
 
-Yeah, if you want to look at obj->state then you need the corresponding
-lock.
+The first patch deals with a ttm_device_init() interface change,
+The Second patch adds the actual functionality.
 
-obj->state is also not necessarily the correct state you want because
-a parallel commit could have already swapped in a new state but the
-hardware is still on the old state.
+A follow-up will be posted for Xe once this is merged / backmerged.
 
-Basically 99.9% of code should never even look at obj->state, and
-instead should always use the for_each_new_<obj>_in_state()
-and drm_atomic_get_new_<obj>_state() stuff. Currently that is a
-pipe dream though because a lot of drivers haven't been fixed to
-do things properly. If we ever manage to fix everything then we
-could remove the stall hacks from drm_atomic_helper_swap_state()
-and allow a commit pipeline of arbitrary length.
+Thomas HellstrÃ¶m (2):
+  drm/ttm: Change ttm_device_init to use a struct instead of multiple
+    bools
+  drm/ttm: Add a device flag to propagate -ENOSPC on OOM
 
-> 
-> After inspecting the code, I think I don't need to call it as:
-> 
-> In `vkms_atomic_commit_tail` (used in 
-> `@vkms_mode_config_helpers.atomic_commit_tail`), we call 
-> `drm_atomic_helper_commit_modeset_disables`, which call 
-> `drm_atomic_helper_calc_timestamping_constants` which call 
-> `drm_calc_timestamping_constants` for every CRTC.
-
-Slightly odd place for it, but I think that's just because it was
-originally part of drm_atomic_helper_update_legacy_modeset_state()
-and I didn't bother looking for a better home for it when I split
-it out. But seems like it should work fine as is.
-
-> 
-> I tested kms_vblank, all of them are SUCCESS/SKIP, do you know other tests 
-> that can trigger bugs?
-
-You would explicitly have to race commits against vblank_enable.
-Could of course sprinkle sleep()s around to widen the race window
-if you're really keen to hit it.
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |  6 +++--
+ drivers/gpu/drm/drm_gem_vram_helper.c         |  7 +++---
+ drivers/gpu/drm/i915/intel_region_ttm.c       |  3 ++-
+ drivers/gpu/drm/loongson/lsdc_ttm.c           |  5 +++-
+ drivers/gpu/drm/nouveau/nouveau_ttm.c         |  7 ++++--
+ drivers/gpu/drm/qxl/qxl_ttm.c                 |  2 +-
+ drivers/gpu/drm/radeon/radeon_ttm.c           |  6 +++--
+ drivers/gpu/drm/ttm/tests/ttm_bo_test.c       | 16 ++++++------
+ .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  3 ++-
+ drivers/gpu/drm/ttm/tests/ttm_device_test.c   | 16 ++++++------
+ drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c | 20 ++++++---------
+ drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h |  6 ++---
+ drivers/gpu/drm/ttm/ttm_bo.c                  |  2 +-
+ drivers/gpu/drm/ttm/ttm_device.c              |  8 +++---
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           |  4 +--
+ drivers/gpu/drm/xe/xe_device.c                |  3 ++-
+ include/drm/ttm/ttm_device.h                  | 25 ++++++++++++++++++-
+ 17 files changed, 86 insertions(+), 53 deletions(-)
 
 -- 
-Ville Syrjälä
-Intel
+2.46.0
+
