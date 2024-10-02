@@ -2,83 +2,154 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF4C3983A91
-	for <lists+spice-devel@lfdr.de>; Tue, 24 Sep 2024 02:12:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60FCC98D391
+	for <lists+spice-devel@lfdr.de>; Wed,  2 Oct 2024 14:46:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF26610E4BC;
-	Tue, 24 Sep 2024 00:12:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CD4810E344;
+	Wed,  2 Oct 2024 12:45:59 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="CToljm8D";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="VCYqg4dw";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF7FB10E223
- for <spice-devel@lists.freedesktop.org>; Sun, 22 Sep 2024 15:20:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1727018441;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=Fet74df+BRXSvLWXFlWi/N/6AQ9SXxD4a2sqHk8YwPQ=;
- b=CToljm8DNVMIQ8sF+mu/OuKQapemHrGPoWTF5i+BWl9zk08sPCBDkgpcd6Q2nOmQyQMilz
- BWJ7GVl9HfE78hNAJo4xb8W6h3xIBBvVShNo340jhpN9t9Rs9RkLmX6afVLKYhfOXVbC1T
- J88/5O1LBOmlHeT38iET0BwNK3f9r38=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-574-P5r2-IJgO6eC1P2Mfhtlkw-1; Sun, 22 Sep 2024 11:20:40 -0400
-X-MC-Unique: P5r2-IJgO6eC1P2Mfhtlkw-1
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-208af432513so34089485ad.1
- for <spice-devel@lists.freedesktop.org>; Sun, 22 Sep 2024 08:20:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727018439; x=1727623239;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Fet74df+BRXSvLWXFlWi/N/6AQ9SXxD4a2sqHk8YwPQ=;
- b=uAVpHlymZFcma7yw5awAuxc779lJ8h5p82n6jt6lm0sSMQJd+MRQKUWm1/TNc5+RRs
- 1iXvPd7utFoqKhNsowQI+jAWnnV4wAJGNneCx6Je/1KZApAx00g3bg5itqI0waKN8sDV
- KS3wlWTdIHyw1wjaxpsKNLqo+FmePk2vS953G6HL/bj/8ihx7xV3Z1biESKncYnEfYmA
- Qxhw0vTHVDqFNFjAsxsLKRtHVr3vpzL+Uf3xmKm5PwigAREL/8GQ4QCEEhyCL82S//kJ
- 52kdtCl3y3jmrG9UPa+VMEb63FNlzRxbqMv5TRoyYG9qA/ArWp6eoaicmj1IxkkB1Yh5
- oPqA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWuCEf8L+sTEERt0mKNgw72iNMdPUIgn900eO8befeXbJUlFnT6Vw38ZojoYY75Bxjl6J4xoo9q2iIqDQ==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwM57uyeOXPKQdfPUUDVNITAJmM9fd/xGRkX9pXtIIQTm9vdcBa
- pkBk3bZH0CQEdNsoXUurugc0BzYkDU51DKkYhbSyYsdG6KhS710paCa72paV5/M3oyAIm7L9esI
- ELfoHwoEmiTEfTjt5R8dqfGPF+b6IoejN0FYThnymdF5+CLTJJP7gggO8ECdDBX3XIpTq
-X-Received: by 2002:a17:902:d2d1:b0:205:40a6:115a with SMTP id
- d9443c01a7336-208d9872fc8mr128169055ad.48.1727018439160; 
- Sun, 22 Sep 2024 08:20:39 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGX5A04ctj2I4L39keFtF+PID3PZyqpYOL+UXRLhr/+GHCMvZV0lMYRHA+g8JTiSEg6Ei5n/Q==
-X-Received: by 2002:a17:902:d2d1:b0:205:40a6:115a with SMTP id
- d9443c01a7336-208d9872fc8mr128168835ad.48.1727018438692; 
- Sun, 22 Sep 2024 08:20:38 -0700 (PDT)
-Received: from zeus.elecom ([240b:10:83a2:bd00:6e35:f2f5:2e21:ae3a])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20794748053sm120389865ad.289.2024.09.22.08.20.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Sep 2024 08:20:37 -0700 (PDT)
-From: Ryosuke Yasuoka <ryasuoka@redhat.com>
-To: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, daniel@ffwll.ch,
- jfalempe@redhat.com, christophe.jaillet@wanadoo.fr
-Cc: Ryosuke Yasuoka <ryasuoka@redhat.com>, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
-Subject: [PATCH v4] drm/qxl: Add drm_panic support
-Date: Mon, 23 Sep 2024 00:20:13 +0900
-Message-ID: <20240922152014.963546-1-ryasuoka@redhat.com>
-X-Mailer: git-send-email 2.46.0
-MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2081.outbound.protection.outlook.com [40.107.243.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 10D5110E1CC;
+ Wed,  2 Oct 2024 12:45:58 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ohsHQEmXYzrmpPAsW/sjDqQtY9o5Ba6BlHllEOh2O2+F26GHokHadcZJ8YWOjU0EGD6ornnVEUul5Z5uyl16UJr5pZc9NpFAoWZ97aRYwHgwrg8jU5Kr89GXxXmKmFN32olmSQAwCYMAV9VS8fdJONZbgPZAUjHcgeqyYrrsS9bBA9nDRIjazaDEu145v/+Fa3bgLBYY/wD6xsK6F208b3SfuS4WRNXoF8erPp+f06SEqqmpxIHXKVOqWqyj9BukNMu9E+lBUXwOFIGKsZG5Iv+KY7zBqBJa25oJo4GNcXUK0HAp/wzTY+YiaTYLg8BWX1BoH6V7ZNSr2DnzIHk7vw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NX4JSFnPhhXKbmBug2agCDKZU/QHR93zVusOyTf3t04=;
+ b=CTO7UBNLPnfa8ACydBPFsUc9Ii1jaWoU2bpIcdJAZOhHyqTCJwRCh+U6RK4ONfif1VTFtczbGW5iGOz7L70Ixz6104/s7JIllNoLygNWJ2mIrGrn8Kx6kU4bxyvtV3ppB7pR7QusvH6QQs902XCRJfpWsAGo3o5Z8+rPHqjwgGo8xB//TAm9A+FpjA+EZUGTipBEJ46aQi3Ui6iyB6OIt2Uir4ZLR6drEH9XWNcJ1CdAdp94CvmC64x1FYBM0oQAVW1fZuGFyKrGPvvaaIy0CB68EMOOJwtB/E2IwmFePvY6HDQtgHcZyYb0TMSLq//4gGp8npSEOPcaiVzFwcbMsw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NX4JSFnPhhXKbmBug2agCDKZU/QHR93zVusOyTf3t04=;
+ b=VCYqg4dwzIGOCJQmV6/WxmGzd94xRTY76gVyDDPXPw+lNUkdXSE6EHwTSCMlnb/V44n0KXTwP1Rj8xaILOlUxEpwsF0JT5gVXaZ0X95XGyTmg/kJEzUUGu/1Fgo9o6fTs0RJSfJHX82mm93CTBPUPGR8ajh9vdzPkjciPH0qPJg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by SJ2PR12MB7961.namprd12.prod.outlook.com (2603:10b6:a03:4c0::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.24; Wed, 2 Oct
+ 2024 12:45:53 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::46fb:96f2:7667:7ca5%2]) with mapi id 15.20.8026.016; Wed, 2 Oct 2024
+ 12:45:53 +0000
+Message-ID: <6c0387d0-1979-48ae-b9ff-49e00a459438@amd.com>
+Date: Wed, 2 Oct 2024 14:45:45 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] drm/ttm: Change ttm_device_init to use a struct
+ instead of multiple bools
+To: =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ intel-xe@lists.freedesktop.org
+Cc: amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Zack Rusin <zack.rusin@broadcom.com>,
+ bcm-kernel-feedback-list@broadcom.com, Sui Jingfeng
+ <suijingfeng@loongson.cn>, Matthew Brost <matthew.brost@intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>
+References: <20241002122422.287276-1-thomas.hellstrom@linux.intel.com>
+ <20241002122422.287276-2-thomas.hellstrom@linux.intel.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20241002122422.287276-2-thomas.hellstrom@linux.intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-X-Mailman-Approved-At: Tue, 24 Sep 2024 00:12:22 +0000
+X-ClientProxiedBy: FR0P281CA0170.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b4::8) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SJ2PR12MB7961:EE_
+X-MS-Office365-Filtering-Correlation-Id: 24b5202e-a846-476b-d944-08dce2e02696
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?L0V6VWpuRkdVemd3MHZOL1FYMHdmd0xyRVppYi9SeXFyc1Y0UG1mM2hFdEo1?=
+ =?utf-8?B?NlJOSGV1RHhrbjA2Y3lTdytpVW1GMjdNOUJUOExLWFJnbEFMeGhrT21yTjhu?=
+ =?utf-8?B?SnFTMmFJWVBUakI0d2JIR2dYa05FdWtKOWFuZ3VkLzNwU2tPRkZ0UDJ6ekRi?=
+ =?utf-8?B?RE5OS3VYMkZrV1lXNHVwYU1yTEloTWRQRTJzVmNaQTNsalA1U1NmaFUwdWF1?=
+ =?utf-8?B?TUhMU2VXK043cGxFeng3VU5kRzlyeFFaSW1TWVZvdTd2NHpWdHRWMXpDWnBu?=
+ =?utf-8?B?YjIvWjRRa1VTSU5iNkl5a0tEUlZvOEZ5Q0NMVjVQSm5Od2ZjUHVxOW45dEdK?=
+ =?utf-8?B?c1VMSVNUcmRwZktEUC9JRWtic2NlZ0pKL3NCZWcvMW5SbkI0U2tPVjM3dnpR?=
+ =?utf-8?B?T0hKUUpCcS9lQjduWFZmNzVnaU93Z2o2ZnFnbE5BQnBHUExzQkNCOWVPY1gv?=
+ =?utf-8?B?c0ZEY2dablVXOTJwQmZYUmZLT3Q5aDhUQ3VpSnh4NzZGZGtNb0lTSE1CK1JM?=
+ =?utf-8?B?VDFKQ1JTR25XdyttRW9wUUY5NE56OWw3NHZMU3ptb2s0MXVNbllpQmNBTiti?=
+ =?utf-8?B?bXNEbUh4eVhVQys5SVgxU0tpV09oTTZmSnpUQVpadXk1Ym5XQWU4ZEVLcUxD?=
+ =?utf-8?B?T3NDb2NVQ2xpVzRQeDFQOG5vdFFLelA1Ujdza0dMUXBEMkpEWG1wZnlmb3dC?=
+ =?utf-8?B?aGZHUTFEcnN1bDlFK1hLemxPUVBoSzlRSFVzQ0YzaHU4ajBMcGovZGZGNW9x?=
+ =?utf-8?B?UTVJcW9jVEVnUTEvRVYrYnQzWjgwL2VlOG1tRVFQaXZ2NGdIVHI4UjhXVmdo?=
+ =?utf-8?B?eEpVYTNSWExrN3RqM1oyUHVETlR4aWswY0ZmVDVtc0M1M1pzVzN6U29HWERo?=
+ =?utf-8?B?WTRQRGs5bVREOHREa3FsTmVjV016c29SNGFoWDF6S3R5TWYrbGs2K0ZuaW1D?=
+ =?utf-8?B?enRubDJvL2l3d2hIOFQ2N21Na2lobm1oc0pMSEdQU3YrODk1NlFrM3JRTUVn?=
+ =?utf-8?B?c25EUkNsbUloR2NUYWwzNkxlVGQ5MjdvWjZURUdUVVZoUmpZWFpTSzE3akxF?=
+ =?utf-8?B?dnc4SEZVZGFPVC9zS2kxUVczU1Z0SVVWNklwMU9MV05mcVVsaXVwM0Rycmxa?=
+ =?utf-8?B?bUVPUEtWS3JzSEVsMmVLbU01d05DeFdZTlV3SDVjT1RMSFhnL1BRUVAxQ2VS?=
+ =?utf-8?B?MXZPRG5Ca3FlRHdiaG9wUWZmR0lNenZ0Z3JtVFd3bEhxYnRKZm95Z2FNNVE3?=
+ =?utf-8?B?WStGQXEwTUl1L2gya2wrbE4xc0tBa1lwdi92ckFxQzFLVGZURktWTFR4bDJC?=
+ =?utf-8?B?NGhwZDJGZlkxZjlKaXpDYXVESkE4dko5SWZtRE9JNklUZDFrQ1JCTk0vMU5j?=
+ =?utf-8?B?M1Q0bE5jWFN1WnJpMzVVVDRRMWxmQldEMGlIMXYrdmZwck9wNkNQV1ByNkZB?=
+ =?utf-8?B?Um1hR3NQamVNb0NlZllubVpsNWIrRXIzVFRCUTVyZ0NONEE4YlE4ME1CZldD?=
+ =?utf-8?B?bFNsaDBsZ0l4VjNabnVheU5IN3JUVHF4TGRWMW5lZk9xVm9ZZ1gxZXFwbDZs?=
+ =?utf-8?B?ZWVJYUk3cFZDUGhkYnZONHk5RktHT2FHcUtSTndFKytrS0h0WlBoT1lLdERk?=
+ =?utf-8?B?dHVJMFVuaGtCV0FDYlBsamxxaC9CNVZzT1hubk55RDhWeGlCTHpaM2ZHNHY3?=
+ =?utf-8?B?OTRCcHNzd2RhYVZRdE5qUEVmRXM0cHNiTWxiTEwvWlFuRWlSWTRXKytRPT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR12MB5685.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZWtwQmt4VDNtRkpLUm8wMXRBM1VIa2ZRRjdLc3QzZHZnWWk0K0MxcjllaVds?=
+ =?utf-8?B?MUFudVNzMEZsei9mc2lzTyt2K2RiWjhwREs4WGlEU2pmb2U1T1l5TXRXZVJO?=
+ =?utf-8?B?L3lrcmRTUlVOdHIxUFlsa3VESWNsb1VXQnh0SmlQOWN2NVhzVFdFN1JTSk1B?=
+ =?utf-8?B?cDV6ZnZuUzRuOHFGaVl0czJ2dzN4bWNlMEJMTndaNDlDMHQwOTJWZEN2MXYz?=
+ =?utf-8?B?OExJdW1tY1N2OXpYQ2dlOTIrMmVUZDE2TUdtVytNaWYyY29wd3BIZ0NxQkdU?=
+ =?utf-8?B?amxrd3NJSDdYa1JSeUlTaUljb2tndWFTRmFHTVNUUTdxNCtyUjRHTE90MmpN?=
+ =?utf-8?B?UlkzclJONy93cGZVS01BZHFtdDdEYUtsajJPMUkvR3EyOFQvSDVWNU5IKzJH?=
+ =?utf-8?B?cmNLSEdXMk95QTE2dDJuMGZrbldQSkNNUHYydEZUOC84cEJIMldFcnhramc0?=
+ =?utf-8?B?ZmZ1SVF0WVFYY0hnKzZZVGpjSjM0NnFEMlQxQWF1VUU0aWM4eW9SMHQwUHEw?=
+ =?utf-8?B?WTBnMDdqN3VyallnbTJyVGs2djhwV0h4RGlsZUhXQ3NBVUFUcFJQMnpPSUhT?=
+ =?utf-8?B?TTlUZit1MnVOSXROdWtjUDY1YW9ONzRkRmF1RkJGUHZBMkNEMXFvWWRxVXZ4?=
+ =?utf-8?B?KzNsa29kQ2pBZmNJalRUY0RaeEtrYVlNMitCQjBOWmJTUFNqcFVvRGJrQnB1?=
+ =?utf-8?B?L0xOVXZhUUR0aHNvT3JZUFN4WWZyT2JpN21xeFh0M1hpRFpPUG5YWkJmS0JY?=
+ =?utf-8?B?VGN2K0tPRmRVUDZVQzlnam9pd1hQb251MkRHU0s1RGVKazNkUGtjdnI3WVRv?=
+ =?utf-8?B?d2xqQXh5eW9TSC9FMlpIK2VhK1YxNHJtL3NSSktmR2pHcUNxTml6eHhKb1pY?=
+ =?utf-8?B?cWxsZjZKYTk0RFdHaWY3bENFZlBwQ3FPdGx1NmZ3cC9RUXlubWFobGQrM3Ew?=
+ =?utf-8?B?ak5CVHBvN0lMeHZaS0JhL2ZLNmUxUEpOcXRoQjJHMkhvM0ozTXhOMWNQSHQ3?=
+ =?utf-8?B?bEE3MVBta21YQXdKNmN1eGpTMDNmUHNtekY2TEZ5OG1QSWxoWXBtdERZSmdG?=
+ =?utf-8?B?UHdCQTBONUlrclNpTEQ3YUU2YXlsNFRaMU4yWUMwSUI4Y0lheHFPUzBQQWhV?=
+ =?utf-8?B?OUhlaG1INE1iQUx3Z0o5MzhEak9MU2cxanFza05DcGx6U2ZUUVFtT2xLamNK?=
+ =?utf-8?B?SVlPRmZ6aVpwT3ZIeVNYZDA0eCtLNytISTdWdmVDY2VyMEJrLy8rMFdkUVVv?=
+ =?utf-8?B?VnNXM24xVm5WVVVRTlcvcytmeXJuZ3hwRzFlR0s5SEtHbWxsWXd1bmpidFZX?=
+ =?utf-8?B?QmRuVGZRdExHRFk1QkxwRDJ0K0dBS2w0ZHJjb2U1VVo4ZTIzcUJSTkFwWmNB?=
+ =?utf-8?B?NDNGNk1XbkJCL3dwRWUxUkcwc0FrR20wMS9QaXhiTm9HdjVYSGZFUEtzekFY?=
+ =?utf-8?B?ZSszNjJQYXpzbVdSWEorWldKd2xJQVk5UFo3Q1I0dWdPSldpSjlBeXo2RXhE?=
+ =?utf-8?B?THU0ako4NUJYZDlTbWIrbG5INE1teWJodDJVdFEzKzh6cGxnMzYxa2NDc2tK?=
+ =?utf-8?B?SUtOeHBTZDJEUG0rc1RDMGR4c04rTjNsMFpWTTJYTGw4Smc5Mk5ueTZiYzF2?=
+ =?utf-8?B?M1BIQlpUUGNXVEZTOW1YekhEbG9nMFhsRERZTll3cGlwUVV4aXBQQU1ZVGFR?=
+ =?utf-8?B?ellKUUhnZlFlRkIwS2g5NytzOFc2ZW1mbUZoNS81MFpzVDNiaWswc1dNY1Jz?=
+ =?utf-8?B?UE84TytHNW90TjdDUGJFUXpVY2RrWUdRNnZDUmJ2OW1yMUNBOHJGY0hGcWRX?=
+ =?utf-8?B?ZVZoa0VmMkdxVVJmRm5rV21VbmdBNTlTYXZRYWw1cWN0MjN4Z3d1WWpYQlBQ?=
+ =?utf-8?B?L1piVFVSYXNrTmdoNFFzbkxhQ09TeEdJamFtbVlsbzhTNmdEZVBCK2VUS2Rp?=
+ =?utf-8?B?N2RQMFZacWlpKzdLYXhZcENBMy93cXJvSDRuMUxhR3RXcUEveVJLcTBlN1lq?=
+ =?utf-8?B?dE0xTFh1dEdXaVFtdEszMlJLeERsbWVhOTlBdEdOWmYvK0pyNG5aNWdTZG1G?=
+ =?utf-8?B?MnNxbGdVNitZdUptL01hUENEajB4WUloeTlsUHFobXlvS2UrRG5Ia3Y4dmZt?=
+ =?utf-8?Q?qcyO+qUp1SiGNcS+j3qHvqakd?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 24b5202e-a846-476b-d944-08dce2e02696
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2024 12:45:53.0504 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: r8hJXTBaS1WPcUlNH33G7VuExJxas4HehKTBi5QcC9VWecAD/d14w2UVybCNXiII
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7961
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,483 +164,482 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-QXL supports the drm_panic module, which displays a message to the
-screen when a kernel panic occurs.
+Am 02.10.24 um 14:24 schrieb Thomas Hellström:
+> The ttm_device_init funcition uses multiple bool arguments. That means
+> readability in the caller becomes poor, and all callers need to change if
+> yet another bool is added.
+>
+> Instead use a struct with multiple single-bit flags. This addresses both
+> problems. Prefer it over using defines or enums with explicit bit shifts,
+> since converting to and from these bit values uses logical operations or
+> tests which are implicit with the struct usage, and ofc type-checking.
 
-Signed-off-by: Ryosuke Yasuoka <ryasuoka@redhat.com>
----
-v4
-1. Remove unnecessary () and empty lines
-2. Remove unlikely() from qxl_panic_bo_create(). This function is
-only called in panic handler and it does not need to get benefit
-by unlikely().
-3. Remove dev_err() debug message from qxl_panic_bo_create(). This
-function is only called in panic handler, so it is not needed.
-4. Check returned value of qxl_panic_bo_create().
+Ok, that style is new to me. I've mostly seen defined parameter flags in 
+the kernel.
 
-v3
-Adjust function's arguments indentation. Discussion v2 patch is in [2]
+It obviously has some advantages, but do we have any precedence in the 
+kernel for using that approach?
 
-[2] https://lore.kernel.org/lkml/20240919071230.840994-1-ryasuoka@redhat.com/T/
+Regards,
+Christian.
 
-v2
-In [1], Jocelyn gives me feedbacks and fix them.
-1. Removing qxl_surface_evict(): It takes a mutex and it possibly
-causes deadlock in panic handler. As the panic handler works
-correctly without it and to make it simple, I remove it.
-2. Update qxl_panic_ttm_bo_destory(): It deleted bo->list with taking
-mutex but it does not need to call because this list is not updated in
-panic handler.
-3. Remove unnecessary args from panic functions: Some panic functions
-always take same values as args (e.g. kernel, pinned, domain etc in
-qxl_panic_bo_create()). So I remove them from panic functions and
-define them in each function.
-
-[1] https://lore.kernel.org/dri-devel/89b55f6f-f462-4e84-b2e2-7f2edc0f1cc4@redhat.com/T/#t
-
- drivers/gpu/drm/qxl/qxl_cmd.c     | 29 ++++++++++
- drivers/gpu/drm/qxl/qxl_display.c | 96 +++++++++++++++++++++++++++++++
- drivers/gpu/drm/qxl/qxl_draw.c    | 61 +++++++++++++++++++-
- drivers/gpu/drm/qxl/qxl_drv.h     | 23 ++++++++
- drivers/gpu/drm/qxl/qxl_gem.c     |  9 +++
- drivers/gpu/drm/qxl/qxl_image.c   | 29 ++++++++++
- drivers/gpu/drm/qxl/qxl_object.c  | 41 +++++++++++++
- drivers/gpu/drm/qxl/qxl_object.h  |  1 +
- 8 files changed, 286 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_cmd.c b/drivers/gpu/drm/qxl/qxl_cmd.c
-index d6ea01f3797b..ca7690ca2c4a 100644
---- a/drivers/gpu/drm/qxl/qxl_cmd.c
-+++ b/drivers/gpu/drm/qxl/qxl_cmd.c
-@@ -174,6 +174,35 @@ static bool qxl_ring_pop(struct qxl_ring *ring,
- 	return true;
- }
- 
-+/* For drm panic */
-+int
-+qxl_push_command_ring_without_release(struct qxl_device *qdev,
-+				      struct qxl_bo *bo, uint32_t offset)
-+{
-+	struct qxl_command cmd;
-+	struct qxl_ring *ring = qdev->command_ring;
-+	struct qxl_ring_header *header = &ring->ring->header;
-+	uint8_t *elt;
-+	int idx;
-+
-+	cmd.type = QXL_CMD_DRAW;
-+	cmd.data = qxl_bo_physical_address(qdev, bo, offset);
-+
-+	idx = header->prod & (ring->n_elements - 1);
-+	elt = ring->ring->elements + idx * ring->element_size;
-+
-+	memcpy((void *)elt, &cmd, ring->element_size);
-+
-+	header->prod++;
-+
-+	mb();
-+
-+	if (header->prod == header->notify_on_prod)
-+		outb(0, ring->prod_notify);
-+
-+	return 0;
-+}
-+
- int
- qxl_push_command_ring_release(struct qxl_device *qdev, struct qxl_release *release,
- 			      uint32_t type, bool interruptible)
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index bc24af08dfcd..e6d4663976b0 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -37,6 +37,7 @@
- #include <drm/drm_probe_helper.h>
- #include <drm/drm_simple_kms_helper.h>
- #include <drm/drm_gem_atomic_helper.h>
-+#include <drm/drm_panic.h>
- 
- #include "qxl_drv.h"
- #include "qxl_object.h"
-@@ -889,6 +890,99 @@ static void qxl_plane_cleanup_fb(struct drm_plane *plane,
- 	}
- }
- 
-+static int qxl_primary_plane_helper_get_scanout_buffer(struct drm_plane *plane,
-+						       struct drm_scanout_buffer *sb)
-+{
-+	struct qxl_bo *bo;
-+
-+	if (!plane->state || !plane->state->fb)
-+		return -ENODEV;
-+
-+	bo = gem_to_qxl_bo(plane->state->fb->obj[0]);
-+
-+	if (!bo->map.vaddr) {
-+		int ret;
-+
-+		ret = qxl_bo_pin_and_vmap(bo, &sb->map[0]);
-+		if (ret)
-+			return ret;
-+	} else {
-+		iosys_map_set_vaddr(&sb->map[0], bo->map.vaddr);
-+	}
-+
-+	sb->format = plane->state->fb->format;
-+	sb->height = plane->state->fb->height;
-+	sb->width = plane->state->fb->width;
-+	sb->pitch[0] = plane->state->fb->pitches[0];
-+	return 0;
-+}
-+
-+static void qxl_panic_flush(struct drm_plane *plane)
-+{
-+	struct qxl_device *qdev = to_qxl(plane->dev);
-+	struct qxl_bo *_bo = gem_to_qxl_bo(plane->state->fb->obj[0]);
-+	uint8_t *surface_base = _bo->map.vaddr;
-+	struct drm_clip_rect rect = {
-+		.x1 = 0,
-+		.y1 = 0,
-+		.x2 = plane->state->fb->width,
-+		.y2 = plane->state->fb->height
-+	};
-+	unsigned int num_clips = 1;
-+	struct qxl_bo clips_bo = {};
-+	struct qxl_bo image_bo = {};
-+	struct qxl_bo chunk_bo = {};
-+	struct qxl_drm_image dimage;
-+	struct qxl_drm_chunk chunk;
-+	int width = rect.x2;
-+	int height = rect.y2;
-+	int stride = plane->state->fb->pitches[0];
-+	int depth = plane->state->fb->format->cpp[0] * 8;
-+	struct qxl_rect *rects;
-+	struct qxl_rect drawable_rect = {
-+		.left = 0,
-+		.right = width,
-+		.top = 0,
-+		.bottom = height,
-+	};
-+	int cur_idx = 0;
-+	int size = 256;
-+	struct qxl_bo *bo = qxl_bo_ref(qdev->current_release_bo[cur_idx]);
-+	uint32_t offset = qdev->current_release_bo_offset[cur_idx] * size;
-+	int ret;
-+
-+	ret = qxl_panic_bo_create(qdev, sizeof(struct qxl_clip_rects) + sizeof(struct qxl_rect),
-+				  &clips_bo);
-+	if (ret)
-+		return;
-+
-+	ret = qxl_image_alloc_objects_without_release(qdev, &dimage, &chunk, &image_bo, &chunk_bo,
-+						      surface_base, width, height, depth, stride);
-+	if (ret)
-+		return;
-+
-+	ret = make_drawable_without_release(qdev, &drawable_rect, bo, &clips_bo,
-+					    &dimage, offset, height, width);
-+	if (ret)
-+		return;
-+
-+	rects = drawable_set_clipping(qdev, num_clips, &clips_bo);
-+	if (!rects)
-+		return;
-+	rects[0].left = 0;
-+	rects[0].right = width;
-+	rects[0].top = 0;
-+	rects[0].bottom = height;
-+
-+	qxl_push_command_ring_without_release(qdev, bo, offset);
-+
-+	qxl_panic_gem_object_free(&chunk_bo.tbo.base);
-+	qxl_panic_gem_object_free(&image_bo.tbo.base);
-+
-+	qxl_bo_vunmap_locked(&clips_bo);
-+	qxl_panic_gem_object_free(&clips_bo.tbo.base);
-+}
-+
- static const uint32_t qxl_cursor_plane_formats[] = {
- 	DRM_FORMAT_ARGB8888,
- };
-@@ -920,6 +1014,8 @@ static const struct drm_plane_helper_funcs primary_helper_funcs = {
- 	.atomic_disable = qxl_primary_atomic_disable,
- 	.prepare_fb = qxl_plane_prepare_fb,
- 	.cleanup_fb = qxl_plane_cleanup_fb,
-+	.get_scanout_buffer = qxl_primary_plane_helper_get_scanout_buffer,
-+	.panic_flush = qxl_panic_flush,
- };
- 
- static const struct drm_plane_funcs qxl_primary_plane_funcs = {
-diff --git a/drivers/gpu/drm/qxl/qxl_draw.c b/drivers/gpu/drm/qxl/qxl_draw.c
-index 3a3e127ce297..cf64db196101 100644
---- a/drivers/gpu/drm/qxl/qxl_draw.c
-+++ b/drivers/gpu/drm/qxl/qxl_draw.c
-@@ -41,9 +41,10 @@ static int alloc_clips(struct qxl_device *qdev,
- /* returns a pointer to the already allocated qxl_rect array inside
-  * the qxl_clip_rects. This is *not* the same as the memory allocated
-  * on the device, it is offset to qxl_clip_rects.chunk.data */
--static struct qxl_rect *drawable_set_clipping(struct qxl_device *qdev,
--					      unsigned int num_clips,
--					      struct qxl_bo *clips_bo)
-+
-+struct qxl_rect *drawable_set_clipping(struct qxl_device *qdev,
-+				       unsigned int num_clips,
-+				       struct qxl_bo *clips_bo)
- {
- 	struct iosys_map map;
- 	struct qxl_clip_rects *dev_clips;
-@@ -74,6 +75,60 @@ free_drawable(struct qxl_device *qdev, struct qxl_release *release)
- 	qxl_release_free(qdev, release);
- }
- 
-+/* For drm panic */
-+int
-+make_drawable_without_release(struct qxl_device *qdev,
-+			      struct qxl_rect *drawable_rect,
-+			      struct qxl_bo *bo,
-+			      struct qxl_bo *clips_bo,
-+			      struct qxl_drm_image *dimage,
-+			      uint32_t offset, int height, int width)
-+{
-+	struct qxl_drawable *drawable;
-+	union qxl_release_info *info;
-+	void *ptr;
-+	int i;
-+
-+	ptr = qxl_bo_kmap_atomic_page(qdev, bo, offset & PAGE_MASK);
-+	if (!ptr)
-+		return -ENOMEM;
-+	drawable = ptr + (offset & ~PAGE_MASK);
-+
-+	drawable->type = QXL_DRAW_COPY;
-+	drawable->surface_id = 0;
-+	drawable->effect = QXL_EFFECT_OPAQUE;
-+	drawable->self_bitmap = 0;
-+	drawable->self_bitmap_area.top = 0;
-+	drawable->self_bitmap_area.left = 0;
-+	drawable->self_bitmap_area.bottom = 0;
-+	drawable->self_bitmap_area.right = 0;
-+
-+	for (i = 0; i < 3; ++i)
-+		drawable->surfaces_dest[i] = -1;
-+
-+	drawable->bbox = *drawable_rect;
-+	drawable->mm_time = qdev->rom->mm_clock;
-+	drawable->clip.type = SPICE_CLIP_TYPE_RECTS;
-+	drawable->clip.data = qxl_bo_physical_address(qdev, clips_bo, 0);
-+	drawable->u.copy.src_area.top = 0;
-+	drawable->u.copy.src_area.bottom = height;
-+	drawable->u.copy.src_area.left = 0;
-+	drawable->u.copy.src_area.right = width;
-+	drawable->u.copy.rop_descriptor = SPICE_ROPD_OP_PUT;
-+	drawable->u.copy.scale_mode = 0;
-+	drawable->u.copy.mask.flags = 0;
-+	drawable->u.copy.mask.pos.x = 0;
-+	drawable->u.copy.mask.pos.y = 0;
-+	drawable->u.copy.mask.bitmap = 0;
-+	drawable->u.copy.src_bitmap = qxl_bo_physical_address(qdev, dimage->bo, 0);
-+
-+	info = &drawable->release_info;
-+	ptr = ((void *)info) - (offset & ~PAGE_MASK);
-+	qxl_bo_kunmap_atomic_page(qdev, bo, ptr);
-+
-+	return 0;
-+}
-+
- /* release needs to be reserved at this point */
- static int
- make_drawable(struct qxl_device *qdev, int surface, uint8_t type,
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index 32069acd93f8..c49ceedfd1c0 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -309,6 +309,7 @@ int qxl_gem_object_create_with_handle(struct qxl_device *qdev,
- 				      struct qxl_surface *surf,
- 				      struct drm_gem_object **gobj,
- 				      uint32_t *handle);
-+void qxl_panic_gem_object_free(struct drm_gem_object *gobj);
- void qxl_gem_object_free(struct drm_gem_object *gobj);
- int qxl_gem_object_open(struct drm_gem_object *obj, struct drm_file *file_priv);
- void qxl_gem_object_close(struct drm_gem_object *obj,
-@@ -334,6 +335,14 @@ int qxl_image_init(struct qxl_device *qdev,
- 		   const uint8_t *data,
- 		   int x, int y, int width, int height,
- 		   int depth, int stride);
-+
-+int qxl_image_alloc_objects_without_release(struct qxl_device *qdev,
-+					    struct qxl_drm_image *image,
-+					    struct qxl_drm_chunk *chunk,
-+					    struct qxl_bo *image_bo, struct qxl_bo *chunk_bo,
-+					    uint8_t *surface_base, int width,
-+					    int height, int depth, int stride);
-+
- int
- qxl_image_alloc_objects(struct qxl_device *qdev,
- 			struct qxl_release *release,
-@@ -376,6 +385,9 @@ int qxl_alloc_release_reserved(struct qxl_device *qdev, unsigned long size,
- 			       int type, struct qxl_release **release,
- 			       struct qxl_bo **rbo);
- 
-+int qxl_push_command_ring_without_release(struct qxl_device *qdev,
-+					  struct qxl_bo *bo, uint32_t offset);
-+
- int
- qxl_push_command_ring_release(struct qxl_device *qdev, struct qxl_release *release,
- 			      uint32_t type, bool interruptible);
-@@ -387,6 +399,9 @@ int qxl_alloc_bo_reserved(struct qxl_device *qdev,
- 			  unsigned long size,
- 			  struct qxl_bo **_bo);
- /* qxl drawing commands */
-+struct qxl_rect *drawable_set_clipping(struct qxl_device *qdev,
-+				       unsigned int num_clips,
-+				       struct qxl_bo *clips_bo);
- 
- void qxl_draw_dirty_fb(struct qxl_device *qdev,
- 		       struct drm_framebuffer *fb,
-@@ -399,6 +414,14 @@ void qxl_draw_dirty_fb(struct qxl_device *qdev,
- void qxl_release_free(struct qxl_device *qdev,
- 		      struct qxl_release *release);
- 
-+int
-+make_drawable_without_release(struct qxl_device *qdev,
-+			      struct qxl_rect *drawable_rect,
-+			      struct qxl_bo *bo,
-+			      struct qxl_bo *clips_bo,
-+			      struct qxl_drm_image *dimage,
-+			      uint32_t offset, int height, int width);
-+
- /* used by qxl_debugfs_release */
- struct qxl_release *qxl_release_from_id_locked(struct qxl_device *qdev,
- 						   uint64_t id);
-diff --git a/drivers/gpu/drm/qxl/qxl_gem.c b/drivers/gpu/drm/qxl/qxl_gem.c
-index fc5e3763c359..f140439c640a 100644
---- a/drivers/gpu/drm/qxl/qxl_gem.c
-+++ b/drivers/gpu/drm/qxl/qxl_gem.c
-@@ -28,6 +28,15 @@
- #include "qxl_drv.h"
- #include "qxl_object.h"
- 
-+void qxl_panic_gem_object_free(struct drm_gem_object *gobj)
-+{
-+	struct qxl_bo *qobj = gem_to_qxl_bo(gobj);
-+	struct ttm_buffer_object *tbo;
-+
-+	tbo = &qobj->tbo;
-+	ttm_bo_put(tbo);
-+}
-+
- void qxl_gem_object_free(struct drm_gem_object *gobj)
- {
- 	struct qxl_bo *qobj = gem_to_qxl_bo(gobj);
-diff --git a/drivers/gpu/drm/qxl/qxl_image.c b/drivers/gpu/drm/qxl/qxl_image.c
-index ffff54e5fb31..cef93df1624e 100644
---- a/drivers/gpu/drm/qxl/qxl_image.c
-+++ b/drivers/gpu/drm/qxl/qxl_image.c
-@@ -52,6 +52,35 @@ qxl_allocate_chunk(struct qxl_device *qdev,
- 	return 0;
- }
- 
-+/* For drm panic */
-+int
-+qxl_image_alloc_objects_without_release(struct qxl_device *qdev,
-+					struct qxl_drm_image *image,
-+					struct qxl_drm_chunk *chunk,
-+					struct qxl_bo *image_bo, struct qxl_bo *chunk_bo,
-+					uint8_t *surface_base, int width, int height,
-+					int depth, int stride)
-+{
-+	int ret;
-+	unsigned int chunk_size = sizeof(struct qxl_data_chunk) + stride * height;
-+
-+	INIT_LIST_HEAD(&image->chunk_list);
-+	ret = qxl_panic_bo_create(qdev, sizeof(struct qxl_image), image_bo);
-+	if (ret)
-+		return ret;
-+	image->bo = image_bo;
-+
-+	ret = qxl_panic_bo_create(qdev, chunk_size, chunk_bo);
-+	if (ret)
-+		return ret;
-+	chunk->bo = chunk_bo;
-+	list_add_tail(&chunk->head, &image->chunk_list);
-+
-+	ret = qxl_image_init(qdev, NULL, image, surface_base,
-+			     0, 0, width, height, depth, stride);
-+	return ret;
-+}
-+
- int
- qxl_image_alloc_objects(struct qxl_device *qdev,
- 			struct qxl_release *release,
-diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-index 66635c55cf85..d6d1be79651f 100644
---- a/drivers/gpu/drm/qxl/qxl_object.c
-+++ b/drivers/gpu/drm/qxl/qxl_object.c
-@@ -29,6 +29,16 @@
- #include "qxl_drv.h"
- #include "qxl_object.h"
- 
-+/* For drm panic */
-+static void qxl_panic_ttm_bo_destroy(struct ttm_buffer_object *tbo)
-+{
-+	struct qxl_bo *bo;
-+
-+	bo = to_qxl_bo(tbo);
-+	WARN_ON_ONCE(bo->map_count > 0);
-+	drm_gem_object_release(&bo->tbo.base);
-+}
-+
- static void qxl_ttm_bo_destroy(struct ttm_buffer_object *tbo)
- {
- 	struct qxl_bo *bo;
-@@ -101,6 +111,37 @@ static const struct drm_gem_object_funcs qxl_object_funcs = {
- 	.print_info = drm_gem_ttm_print_info,
- };
- 
-+/* For drm panic */
-+int qxl_panic_bo_create(struct qxl_device *qdev, unsigned long size, struct qxl_bo *bo)
-+{
-+	u32 domain = QXL_GEM_DOMAIN_VRAM;
-+	struct ttm_operation_ctx ctx = { true, false };
-+	enum ttm_bo_type type;
-+	int r;
-+
-+	type = ttm_bo_type_device;
-+
-+	size = roundup(size, PAGE_SIZE);
-+	r = drm_gem_object_init(&qdev->ddev, &bo->tbo.base, size);
-+	if (r)
-+		return r;
-+	bo->tbo.base.funcs = &qxl_object_funcs;
-+	bo->type = domain;
-+	bo->surface_id = 0;
-+	INIT_LIST_HEAD(&bo->list);
-+
-+	qxl_ttm_placement_from_domain(bo, domain);
-+
-+	bo->tbo.priority = 0;
-+	r = ttm_bo_init_reserved(&qdev->mman.bdev, &bo->tbo, type,
-+				 &bo->placement, 0, &ctx, NULL, NULL,
-+				 &qxl_panic_ttm_bo_destroy);
-+	if (r)
-+		return r;
-+	ttm_bo_unreserve(&bo->tbo);
-+	return 0;
-+}
-+
- int qxl_bo_create(struct qxl_device *qdev, unsigned long size,
- 		  bool kernel, bool pinned, u32 domain, u32 priority,
- 		  struct qxl_surface *surf,
-diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_object.h
-index 875f63221074..d1dbf7a3dd5b 100644
---- a/drivers/gpu/drm/qxl/qxl_object.h
-+++ b/drivers/gpu/drm/qxl/qxl_object.h
-@@ -53,6 +53,7 @@ static inline unsigned long qxl_bo_size(struct qxl_bo *bo)
- 	return bo->tbo.base.size;
- }
- 
-+extern int qxl_panic_bo_create(struct qxl_device *qdev, unsigned long size, struct qxl_bo *bo);
- extern int qxl_bo_create(struct qxl_device *qdev,
- 			 unsigned long size,
- 			 bool kernel, bool pinned, u32 domain,
--- 
-2.46.0
+>
+> This is in preparation of adding yet another bool flag parameter to the
+> function.
+>
+> Cc: Christian König <christian.koenig@amd.com>
+> Cc: amd-gfx@lists.freedesktop.org
+> Cc: intel-gfx@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
+> Cc: spice-devel@lists.freedesktop.org
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: Zack Rusin <zack.rusin@broadcom.com>
+> Cc: <bcm-kernel-feedback-list@broadcom.com>
+> Cc: Sui Jingfeng <suijingfeng@loongson.cn>
+> Cc: <intel-xe@lists.freedesktop.org>
+> Signed-off-by: Thomas Hellström <thomas.hellstrom@linux.intel.com>
+> ---
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |  6 ++++--
+>   drivers/gpu/drm/drm_gem_vram_helper.c         |  7 ++++---
+>   drivers/gpu/drm/i915/intel_region_ttm.c       |  3 ++-
+>   drivers/gpu/drm/loongson/lsdc_ttm.c           |  5 ++++-
+>   drivers/gpu/drm/nouveau/nouveau_ttm.c         |  7 +++++--
+>   drivers/gpu/drm/qxl/qxl_ttm.c                 |  2 +-
+>   drivers/gpu/drm/radeon/radeon_ttm.c           |  6 ++++--
+>   drivers/gpu/drm/ttm/tests/ttm_bo_test.c       | 16 +++++++--------
+>   .../gpu/drm/ttm/tests/ttm_bo_validate_test.c  |  3 ++-
+>   drivers/gpu/drm/ttm/tests/ttm_device_test.c   | 16 ++++++++-------
+>   drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c | 20 ++++++++-----------
+>   drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h |  6 ++----
+>   drivers/gpu/drm/ttm/ttm_device.c              |  7 +++----
+>   drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           |  4 ++--
+>   drivers/gpu/drm/xe/xe_device.c                |  3 ++-
+>   include/drm/ttm/ttm_device.h                  | 12 ++++++++++-
+>   16 files changed, 71 insertions(+), 52 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> index 74adb983ab03..e43635ac54fd 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> @@ -1853,8 +1853,10 @@ int amdgpu_ttm_init(struct amdgpu_device *adev)
+>   	r = ttm_device_init(&adev->mman.bdev, &amdgpu_bo_driver, adev->dev,
+>   			       adev_to_drm(adev)->anon_inode->i_mapping,
+>   			       adev_to_drm(adev)->vma_offset_manager,
+> -			       adev->need_swiotlb,
+> -			       dma_addressing_limited(adev->dev));
+> +			       (struct ttm_device_init_flags){
+> +				       .use_dma_alloc = adev->need_swiotlb,
+> +				       .use_dma32 = dma_addressing_limited(adev->dev)
+> +			       });
+>   	if (r) {
+>   		DRM_ERROR("failed initializing buffer object driver(%d).\n", r);
+>   		return r;
+> diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_gem_vram_helper.c
+> index 22b1fe9c03b8..7c3165b00378 100644
+> --- a/drivers/gpu/drm/drm_gem_vram_helper.c
+> +++ b/drivers/gpu/drm/drm_gem_vram_helper.c
+> @@ -931,9 +931,10 @@ static int drm_vram_mm_init(struct drm_vram_mm *vmm, struct drm_device *dev,
+>   	vmm->vram_size = vram_size;
+>   
+>   	ret = ttm_device_init(&vmm->bdev, &bo_driver, dev->dev,
+> -				 dev->anon_inode->i_mapping,
+> -				 dev->vma_offset_manager,
+> -				 false, true);
+> +			      dev->anon_inode->i_mapping,
+> +			      dev->vma_offset_manager,
+> +			      (struct ttm_device_init_flags)
+> +			      {.use_dma32 = true});
+>   	if (ret)
+>   		return ret;
+>   
+> diff --git a/drivers/gpu/drm/i915/intel_region_ttm.c b/drivers/gpu/drm/i915/intel_region_ttm.c
+> index 04525d92bec5..db34da63814c 100644
+> --- a/drivers/gpu/drm/i915/intel_region_ttm.c
+> +++ b/drivers/gpu/drm/i915/intel_region_ttm.c
+> @@ -34,7 +34,8 @@ int intel_region_ttm_device_init(struct drm_i915_private *dev_priv)
+>   
+>   	return ttm_device_init(&dev_priv->bdev, i915_ttm_driver(),
+>   			       drm->dev, drm->anon_inode->i_mapping,
+> -			       drm->vma_offset_manager, false, false);
+> +			       drm->vma_offset_manager,
+> +			       (struct ttm_device_init_flags){});
+>   }
+>   
+>   /**
+> diff --git a/drivers/gpu/drm/loongson/lsdc_ttm.c b/drivers/gpu/drm/loongson/lsdc_ttm.c
+> index 2e42c6970c9f..c684f1636f3f 100644
+> --- a/drivers/gpu/drm/loongson/lsdc_ttm.c
+> +++ b/drivers/gpu/drm/loongson/lsdc_ttm.c
+> @@ -544,7 +544,10 @@ int lsdc_ttm_init(struct lsdc_device *ldev)
+>   
+>   	ret = ttm_device_init(&ldev->bdev, &lsdc_bo_driver, ddev->dev,
+>   			      ddev->anon_inode->i_mapping,
+> -			      ddev->vma_offset_manager, false, true);
+> +			      ddev->vma_offset_manager,
+> +			      (struct ttm_device_init_flags){
+> +				      .use_dma32 = true
+> +			      });
+>   	if (ret)
+>   		return ret;
+>   
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_ttm.c b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+> index e244927eb5d4..5f89d2b40425 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_ttm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+> @@ -302,8 +302,11 @@ nouveau_ttm_init(struct nouveau_drm *drm)
+>   	ret = ttm_device_init(&drm->ttm.bdev, &nouveau_bo_driver, drm->dev->dev,
+>   				  dev->anon_inode->i_mapping,
+>   				  dev->vma_offset_manager,
+> -				  drm_need_swiotlb(drm->client.mmu.dmabits),
+> -				  drm->client.mmu.dmabits <= 32);
+> +				  (struct ttm_device_init_flags){
+> +					  .use_dma_alloc =
+> +					  drm_need_swiotlb(drm->client.mmu.dmabits),
+> +					  .use_dma32 = (drm->client.mmu.dmabits <= 32)
+> +				  });
+>   	if (ret) {
+>   		NV_ERROR(drm, "error initialising bo driver, %d\n", ret);
+>   		return ret;
+> diff --git a/drivers/gpu/drm/qxl/qxl_ttm.c b/drivers/gpu/drm/qxl/qxl_ttm.c
+> index 765a144cea14..ced4c60c4650 100644
+> --- a/drivers/gpu/drm/qxl/qxl_ttm.c
+> +++ b/drivers/gpu/drm/qxl/qxl_ttm.c
+> @@ -196,7 +196,7 @@ int qxl_ttm_init(struct qxl_device *qdev)
+>   	r = ttm_device_init(&qdev->mman.bdev, &qxl_bo_driver, NULL,
+>   			    qdev->ddev.anon_inode->i_mapping,
+>   			    qdev->ddev.vma_offset_manager,
+> -			    false, false);
+> +			    (struct ttm_device_init_flags){});
+>   	if (r) {
+>   		DRM_ERROR("failed initializing buffer object driver(%d).\n", r);
+>   		return r;
+> diff --git a/drivers/gpu/drm/radeon/radeon_ttm.c b/drivers/gpu/drm/radeon/radeon_ttm.c
+> index 69d0c12fa419..2915473e4956 100644
+> --- a/drivers/gpu/drm/radeon/radeon_ttm.c
+> +++ b/drivers/gpu/drm/radeon/radeon_ttm.c
+> @@ -684,8 +684,10 @@ int radeon_ttm_init(struct radeon_device *rdev)
+>   	r = ttm_device_init(&rdev->mman.bdev, &radeon_bo_driver, rdev->dev,
+>   			       rdev_to_drm(rdev)->anon_inode->i_mapping,
+>   			       rdev_to_drm(rdev)->vma_offset_manager,
+> -			       rdev->need_swiotlb,
+> -			       dma_addressing_limited(&rdev->pdev->dev));
+> +			       (struct ttm_device_init_flags){
+> +					.use_dma_alloc = rdev->need_swiotlb,
+> +					.use_dma32 = dma_addressing_limited(&rdev->pdev->dev)
+> +				});
+>   	if (r) {
+>   		DRM_ERROR("failed initializing buffer object driver(%d).\n", r);
+>   		return r;
+> diff --git a/drivers/gpu/drm/ttm/tests/ttm_bo_test.c b/drivers/gpu/drm/ttm/tests/ttm_bo_test.c
+> index f0a7eb62116c..8a2ab90c6e8f 100644
+> --- a/drivers/gpu/drm/ttm/tests/ttm_bo_test.c
+> +++ b/drivers/gpu/drm/ttm/tests/ttm_bo_test.c
+> @@ -251,7 +251,7 @@ static void ttm_bo_unreserve_basic(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> @@ -290,7 +290,7 @@ static void ttm_bo_unreserve_pinned(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> @@ -342,7 +342,7 @@ static void ttm_bo_unreserve_bulk(struct kunit *test)
+>   	resv = kunit_kzalloc(test, sizeof(*resv), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> @@ -394,7 +394,7 @@ static void ttm_bo_put_basic(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> @@ -437,7 +437,7 @@ static void ttm_bo_put_shared_resv(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> @@ -477,7 +477,7 @@ static void ttm_bo_pin_basic(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> @@ -512,7 +512,7 @@ static void ttm_bo_pin_unpin_resource(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> @@ -563,7 +563,7 @@ static void ttm_bo_multiple_pin_one_unpin(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   	priv->ttm_dev = ttm_dev;
+>   
+> diff --git a/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c b/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
+> index 1adf18481ea0..c69b9707e6d2 100644
+> --- a/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
+> +++ b/drivers/gpu/drm/ttm/tests/ttm_bo_validate_test.c
+> @@ -1044,7 +1044,8 @@ static void ttm_bo_validate_busy_domain_evict(struct kunit *test)
+>   	 */
+>   	ttm_device_fini(priv->ttm_dev);
+>   
+> -	err = ttm_device_kunit_init_bad_evict(test->priv, priv->ttm_dev, false, false);
+> +	err = ttm_device_kunit_init_bad_evict(test->priv, priv->ttm_dev,
+> +					      (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   
+>   	ttm_mock_manager_init(priv->ttm_dev, mem_type, MANAGER_SIZE);
+> diff --git a/drivers/gpu/drm/ttm/tests/ttm_device_test.c b/drivers/gpu/drm/ttm/tests/ttm_device_test.c
+> index 1621903818e5..9415c7b76e3b 100644
+> --- a/drivers/gpu/drm/ttm/tests/ttm_device_test.c
+> +++ b/drivers/gpu/drm/ttm/tests/ttm_device_test.c
+> @@ -25,7 +25,7 @@ static void ttm_device_init_basic(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   
+>   	KUNIT_EXPECT_PTR_EQ(test, ttm_dev->funcs, &ttm_dev_funcs);
+> @@ -55,7 +55,8 @@ static void ttm_device_init_multiple(struct kunit *test)
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_devs);
+>   
+>   	for (i = 0; i < num_dev; i++) {
+> -		err = ttm_device_kunit_init(priv, &ttm_devs[i], false, false);
+> +		err = ttm_device_kunit_init(priv, &ttm_devs[i],
+> +					    (struct ttm_device_init_flags){});
+>   		KUNIT_ASSERT_EQ(test, err, 0);
+>   
+>   		KUNIT_EXPECT_PTR_EQ(test, ttm_devs[i].dev_mapping,
+> @@ -81,7 +82,7 @@ static void ttm_device_fini_basic(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   
+>   	man = ttm_manager_type(ttm_dev, TTM_PL_SYSTEM);
+> @@ -109,7 +110,7 @@ static void ttm_device_init_no_vma_man(struct kunit *test)
+>   	vma_man = drm->vma_offset_manager;
+>   	drm->vma_offset_manager = NULL;
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_EXPECT_EQ(test, err, -EINVAL);
+>   
+>   	/* Bring the manager back for a graceful cleanup */
+> @@ -162,9 +163,10 @@ static void ttm_device_init_pools(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(priv, ttm_dev,
+> -				    params->use_dma_alloc,
+> -				    params->use_dma32);
+> +	err = ttm_device_kunit_init(priv, ttm_dev, (struct ttm_device_init_flags){
+> +			.use_dma_alloc = params->use_dma_alloc,
+> +			.use_dma32 = params->use_dma32
+> +		});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   
+>   	pool = &ttm_dev->pool;
+> diff --git a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c
+> index b91c13f46225..24706fabb1c9 100644
+> --- a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c
+> +++ b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.c
+> @@ -114,8 +114,7 @@ static void bad_evict_flags(struct ttm_buffer_object *bo,
+>   
+>   static int ttm_device_kunit_init_with_funcs(struct ttm_test_devices *priv,
+>   					    struct ttm_device *ttm,
+> -					    bool use_dma_alloc,
+> -					    bool use_dma32,
+> +					    const struct ttm_device_init_flags flags,
+>   					    struct ttm_device_funcs *funcs)
+>   {
+>   	struct drm_device *drm = priv->drm;
+> @@ -124,7 +123,7 @@ static int ttm_device_kunit_init_with_funcs(struct ttm_test_devices *priv,
+>   	err = ttm_device_init(ttm, funcs, drm->dev,
+>   			      drm->anon_inode->i_mapping,
+>   			      drm->vma_offset_manager,
+> -			      use_dma_alloc, use_dma32);
+> +			      flags);
+>   
+>   	return err;
+>   }
+> @@ -140,11 +139,9 @@ EXPORT_SYMBOL_GPL(ttm_dev_funcs);
+>   
+>   int ttm_device_kunit_init(struct ttm_test_devices *priv,
+>   			  struct ttm_device *ttm,
+> -			  bool use_dma_alloc,
+> -			  bool use_dma32)
+> +			  const struct ttm_device_init_flags flags)
+>   {
+> -	return ttm_device_kunit_init_with_funcs(priv, ttm, use_dma_alloc,
+> -						use_dma32, &ttm_dev_funcs);
+> +	return ttm_device_kunit_init_with_funcs(priv, ttm, flags, &ttm_dev_funcs);
+>   }
+>   EXPORT_SYMBOL_GPL(ttm_device_kunit_init);
+>   
+> @@ -159,11 +156,10 @@ EXPORT_SYMBOL_GPL(ttm_dev_funcs_bad_evict);
+>   
+>   int ttm_device_kunit_init_bad_evict(struct ttm_test_devices *priv,
+>   				    struct ttm_device *ttm,
+> -				    bool use_dma_alloc,
+> -				    bool use_dma32)
+> +				    const struct ttm_device_init_flags flags)
+>   {
+> -	return ttm_device_kunit_init_with_funcs(priv, ttm, use_dma_alloc,
+> -						use_dma32, &ttm_dev_funcs_bad_evict);
+> +	return ttm_device_kunit_init_with_funcs(priv, ttm, flags,
+> +						&ttm_dev_funcs_bad_evict);
+>   }
+>   EXPORT_SYMBOL_GPL(ttm_device_kunit_init_bad_evict);
+>   
+> @@ -249,7 +245,7 @@ struct ttm_test_devices *ttm_test_devices_all(struct kunit *test)
+>   	ttm_dev = kunit_kzalloc(test, sizeof(*ttm_dev), GFP_KERNEL);
+>   	KUNIT_ASSERT_NOT_NULL(test, ttm_dev);
+>   
+> -	err = ttm_device_kunit_init(devs, ttm_dev, false, false);
+> +	err = ttm_device_kunit_init(devs, ttm_dev, (struct ttm_device_init_flags){});
+>   	KUNIT_ASSERT_EQ(test, err, 0);
+>   
+>   	devs->ttm_dev = ttm_dev;
+> diff --git a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h
+> index c7da23232ffa..fbf0d3984f25 100644
+> --- a/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h
+> +++ b/drivers/gpu/drm/ttm/tests/ttm_kunit_helpers.h
+> @@ -28,12 +28,10 @@ struct ttm_test_devices {
+>   /* Building blocks for test-specific init functions */
+>   int ttm_device_kunit_init(struct ttm_test_devices *priv,
+>   			  struct ttm_device *ttm,
+> -			  bool use_dma_alloc,
+> -			  bool use_dma32);
+> +			  const struct ttm_device_init_flags flags);
+>   int ttm_device_kunit_init_bad_evict(struct ttm_test_devices *priv,
+>   				    struct ttm_device *ttm,
+> -				    bool use_dma_alloc,
+> -				    bool use_dma32);
+> +				    const struct ttm_device_init_flags flags);
+>   struct ttm_buffer_object *ttm_bo_kunit_init(struct kunit *test,
+>   					    struct ttm_test_devices *devs,
+>   					    size_t size,
+> diff --git a/drivers/gpu/drm/ttm/ttm_device.c b/drivers/gpu/drm/ttm/ttm_device.c
+> index e7cc4954c1bc..0c85d10e5e0b 100644
+> --- a/drivers/gpu/drm/ttm/ttm_device.c
+> +++ b/drivers/gpu/drm/ttm/ttm_device.c
+> @@ -174,8 +174,7 @@ EXPORT_SYMBOL(ttm_device_swapout);
+>    * @dev: The core kernel device pointer for DMA mappings and allocations.
+>    * @mapping: The address space to use for this bo.
+>    * @vma_manager: A pointer to a vma manager.
+> - * @use_dma_alloc: If coherent DMA allocation API should be used.
+> - * @use_dma32: If we should use GFP_DMA32 for device memory allocations.
+> + * @flags: Flags governing the device behaviour.
+>    *
+>    * Initializes a struct ttm_device:
+>    * Returns:
+> @@ -184,7 +183,7 @@ EXPORT_SYMBOL(ttm_device_swapout);
+>   int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *funcs,
+>   		    struct device *dev, struct address_space *mapping,
+>   		    struct drm_vma_offset_manager *vma_manager,
+> -		    bool use_dma_alloc, bool use_dma32)
+> +		    const struct ttm_device_init_flags flags)
+>   {
+>   	struct ttm_global *glob = &ttm_glob;
+>   	int ret, nid;
+> @@ -212,7 +211,7 @@ int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *func
+>   	else
+>   		nid = NUMA_NO_NODE;
+>   
+> -	ttm_pool_init(&bdev->pool, dev, nid, use_dma_alloc, use_dma32);
+> +	ttm_pool_init(&bdev->pool, dev, nid, flags.use_dma_alloc, flags.use_dma32);
+>   
+>   	bdev->vma_manager = vma_manager;
+>   	spin_lock_init(&bdev->lru_lock);
+> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+> index cf7a89d002e4..7ff7e5d7a9f3 100644
+> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
+> @@ -1049,8 +1049,8 @@ static int vmw_driver_load(struct vmw_private *dev_priv, u32 pci_id)
+>   			      dev_priv->drm.dev,
+>   			      dev_priv->drm.anon_inode->i_mapping,
+>   			      dev_priv->drm.vma_offset_manager,
+> -			      dev_priv->map_mode == vmw_dma_alloc_coherent,
+> -			      false);
+> +			      (struct ttm_device_init_flags)
+> +			      {.use_dma_alloc = (dev_priv->map_mode == vmw_dma_alloc_coherent)});
+>   	if (unlikely(ret != 0)) {
+>   		drm_err(&dev_priv->drm,
+>   			"Failed initializing TTM buffer object driver.\n");
+> diff --git a/drivers/gpu/drm/xe/xe_device.c b/drivers/gpu/drm/xe/xe_device.c
+> index 09a7ad830e69..f9317f56ff9c 100644
+> --- a/drivers/gpu/drm/xe/xe_device.c
+> +++ b/drivers/gpu/drm/xe/xe_device.c
+> @@ -320,7 +320,8 @@ struct xe_device *xe_device_create(struct pci_dev *pdev,
+>   
+>   	err = ttm_device_init(&xe->ttm, &xe_ttm_funcs, xe->drm.dev,
+>   			      xe->drm.anon_inode->i_mapping,
+> -			      xe->drm.vma_offset_manager, false, false);
+> +			      xe->drm.vma_offset_manager,
+> +			      (struct ttm_device_init_flags){});
+>   	if (WARN_ON(err))
+>   		goto err;
+>   
+> diff --git a/include/drm/ttm/ttm_device.h b/include/drm/ttm/ttm_device.h
+> index c22f30535c84..1534bd946c78 100644
+> --- a/include/drm/ttm/ttm_device.h
+> +++ b/include/drm/ttm/ttm_device.h
+> @@ -287,10 +287,20 @@ static inline void ttm_set_driver_manager(struct ttm_device *bdev, int type,
+>   	bdev->man_drv[type] = manager;
+>   }
+>   
+> +/**
+> + * struct ttm_device_init_flags - Flags for ttm device creation
+> + */
+> +struct ttm_device_init_flags {
+> +	/** @use_dma_alloc: Whether coherent DMA allocation API should be used. */
+> +	u32 use_dma_alloc : 1;
+> +	/** @use_dma32: If we should use GFP_DMA32 for device memory allocations. */
+> +	u32 use_dma32 : 1;
+> +};
+> +
+>   int ttm_device_init(struct ttm_device *bdev, const struct ttm_device_funcs *funcs,
+>   		    struct device *dev, struct address_space *mapping,
+>   		    struct drm_vma_offset_manager *vma_manager,
+> -		    bool use_dma_alloc, bool use_dma32);
+> +		    const struct ttm_device_init_flags flags);
+>   void ttm_device_fini(struct ttm_device *bdev);
+>   void ttm_device_clear_dma_mappings(struct ttm_device *bdev);
+>   
 
