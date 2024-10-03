@@ -2,39 +2,38 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3408498F6BF
-	for <lists+spice-devel@lfdr.de>; Thu,  3 Oct 2024 21:06:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0C2098F6C3
+	for <lists+spice-devel@lfdr.de>; Thu,  3 Oct 2024 21:06:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9C3D510E8E9;
-	Thu,  3 Oct 2024 19:06:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BB34F10E8F3;
+	Thu,  3 Oct 2024 19:06:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="jaIPWC0X";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="YEH2YnPw";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mslow1.mail.gandi.net (mslow1.mail.gandi.net [217.70.178.240])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 82CE810E833;
- Thu,  3 Oct 2024 12:42:22 +0000 (UTC)
-Received: from relay7-d.mail.gandi.net (unknown [217.70.183.200])
- by mslow1.mail.gandi.net (Postfix) with ESMTP id B8C27C4E25;
- Thu,  3 Oct 2024 12:38:42 +0000 (UTC)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 1429220003;
- Thu,  3 Oct 2024 12:38:36 +0000 (UTC)
+X-Greylist: delayed 8943 seconds by postgrey-1.36 at gabe;
+ Thu, 03 Oct 2024 15:07:44 UTC
+Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
+ [217.70.183.193])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 63EFE10E874;
+ Thu,  3 Oct 2024 15:07:44 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 11E6024000C;
+ Thu,  3 Oct 2024 15:07:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1727959119;
+ t=1727968061;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=G1WWqv8PxjeMLKflSPYmbUe7DeomMcAnSm/A8iMPhzI=;
- b=jaIPWC0Xu79mrXEmZMnQsiXzA9Wr3uoH8MULWQT5IUuNp55G4sX5QevmhszIPLVwNB8KAr
- O3AkPLtQl5yloTMbuyNDdO+X5TRPKMqYEvSTrAQoGgw5IuBAjgFtNYLiG0d10jUZ4bA3FH
- m1e4s8kFAAe17/+QzeW38cun4KUy2aCMbNTrAFDwf/82DfLhx3fqZMuDYE4KWwrNFUQiLe
- EpyU5sN7nS1+Zc1hdPjgaFvbZTVp4v512I9O9Hvnt/yMn7PWEyyffcB8w/4zGq889GcVPI
- rtotQp17FYcj62LrbVAqrFIRzZevDuIvYg4y31zSeUiM6gR48lVIIrxWlvKtpw==
-Date: Thu, 3 Oct 2024 14:38:35 +0200
+ bh=YZElLwQ5mHYReOaSmSvT7278JqqhnnyULQk+/1+1kJk=;
+ b=YEH2YnPwiMskls9hd/gfzbIgYfC1qkcLesGnJNkrsmHEe3zu8VFZWm6BdgmnrnZ2Qgf6Mu
+ rl3svRb/4mCMycfcmpARRBvji7+Ry/w2vzIC3T393ERmy9UbpVYnNhM87rfFxR4CxUfMDQ
+ ksrKmVA99rcw5b1jA2ZNxjOLpTc24XkDfONA9tFeR45nmPl6UkQuJxTG6VYt19wt2k0OWd
+ ly5GPToqHmZiL+uWVlGQozyWeIO9rxeLv5puwAjVLmo/Jys8TaMxMe0xWkBxg30yo2dr0e
+ +qHYoE0Ir3I/BslTW53FebEDYX6GCccBs1oOkCfEqWwDeCFPtxDgi2SkeFavmA==
+Date: Thu, 3 Oct 2024 17:07:35 +0200
 From: Louis Chauvet <louis.chauvet@bootlin.com>
-To: Ville Syrjala <ville.syrjala@linux.intel.com>
+To: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
 Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  Liviu Dudau <liviu.dudau@arm.com>, Russell King <linux@armlinux.org.uk>,
  Inki Dae <inki.dae@samsung.com>,
@@ -52,8 +51,9 @@ Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  linux-renesas-soc@vger.kernel.org, xen-devel@lists.xenproject.org
 Subject: Re: [PATCH 2/2] drm: Move crtc->{x, y, mode, enabled} to legacy
  sub-structure
-Message-ID: <Zv6QF2EmIcogtlLA@louis-chauvet-laptop>
-Mail-Followup-To: Ville Syrjala <ville.syrjala@linux.intel.com>,
+Message-ID: <Zv6zN7Go_XG44P2-@louis-chauvet-laptop>
+Mail-Followup-To: Ville =?iso-8859-1?Q?Syrj=E4l=E4?=
+ <ville.syrjala@linux.intel.com>, 
  dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  Liviu Dudau <liviu.dudau@arm.com>,
  Russell King <linux@armlinux.org.uk>,
@@ -72,11 +72,12 @@ Mail-Followup-To: Ville Syrjala <ville.syrjala@linux.intel.com>,
  linux-renesas-soc@vger.kernel.org, xen-devel@lists.xenproject.org
 References: <20241002182200.15363-1-ville.syrjala@linux.intel.com>
  <20241002182200.15363-3-ville.syrjala@linux.intel.com>
+ <Zv6QF2EmIcogtlLA@louis-chauvet-laptop>
+ <Zv6gSGMXZZARf3oV@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20241002182200.15363-3-ville.syrjala@linux.intel.com>
+In-Reply-To: <Zv6gSGMXZZARf3oV@intel.com>
 X-GND-Sasl: louis.chauvet@bootlin.com
 X-Mailman-Approved-At: Thu, 03 Oct 2024 19:06:21 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -93,97 +94,37 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Le 02/10/24 - 21:22, Ville Syrjala a écrit :
-> From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+> > > diff --git a/drivers/gpu/drm/vkms/vkms_crtc.c b/drivers/gpu/drm/vkms/vkms_crtc.c
+> > > index a40295c18b48..780681ea77e4 100644
+> > > --- a/drivers/gpu/drm/vkms/vkms_crtc.c
+> > > +++ b/drivers/gpu/drm/vkms/vkms_crtc.c
+> > > @@ -64,7 +64,7 @@ static int vkms_enable_vblank(struct drm_crtc *crtc)
+> > >  	struct drm_vblank_crtc *vblank = drm_crtc_vblank_crtc(crtc);
+> > >  	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
+> > >  
+> > > -	drm_calc_timestamping_constants(crtc, &crtc->mode);
+> > > +	drm_calc_timestamping_constants(crtc, &crtc->legacy.mode);
+> > 
+> > 	drm_calc_timestamping_constants(crtc, &crtc->state->mode);
 > 
-> Atomic drivers shouldn't be using the legacy state stored
-> directly under drm_crtc. Move that junk into a 'legacy' sub
-> structure to highlight the offenders, of which there are
-> quite a few unfortunately.
-
-Hi,
-
-Do we need to do something particular in an atomic driver except using
-state content?
-
-I proposed some modifications for VKMS bellow. If you think this is good,
-I can send a patch to avoid being an offender :-) I just tested it, and it
-seems to work.
-
-> I'm hoping we could get all these fixed and then declare
-> the legacy state off limits for atomic drivers (which is
-> what did long ago for plane->fb/etc). And maybe eventually
-> turn crtc->legacy into a pointer and only allocate it on
-> legacy drivers.
+> This one doesn't look safe. You want to call that during your atomic
+> commit already.
 > 
-> TODO: hwmode should probably go there too but it probably
->       needs a closer look, maybe other stuff too...
 
-[...]
+This was already not safe with the previous implementation? Or it is only 
+unsafe because now I use state->mode instead of legacy.mode?
 
-> diff --git a/drivers/gpu/drm/vkms/vkms_composer.c b/drivers/gpu/drm/vkms/vkms_composer.c
-> index 57a5769fc994..a7f8b1da6e85 100644
-> --- a/drivers/gpu/drm/vkms/vkms_composer.c
-> +++ b/drivers/gpu/drm/vkms/vkms_composer.c
-> @@ -187,7 +187,7 @@ static void blend(struct vkms_writeback_job *wb,
->  
->  	const struct pixel_argb_u16 background_color = { .a = 0xffff };
->  
-> -	size_t crtc_y_limit = crtc_state->base.crtc->mode.vdisplay;
-> +	size_t crtc_y_limit = crtc_state->base.crtc->legacy.mode.vdisplay;
+After inspecting the code, I think I don't need to call it as:
 
-	size_t crtc_y_limit = crtc_state->base.mode.vdisplay;
+In `vkms_atomic_commit_tail` (used in 
+`@vkms_mode_config_helpers.atomic_commit_tail`), we call 
+`drm_atomic_helper_commit_modeset_disables`, which call 
+`drm_atomic_helper_calc_timestamping_constants` which call 
+`drm_calc_timestamping_constants` for every CRTC.
 
->  	/*
->  	 * The planes are composed line-by-line to avoid heavy memory usage. It is a necessary
-> @@ -270,7 +270,7 @@ static int compose_active_planes(struct vkms_writeback_job *active_wb,
->  	if (WARN_ON(check_format_funcs(crtc_state, active_wb)))
->  		return -EINVAL;
->  
-> -	line_width = crtc_state->base.crtc->mode.hdisplay;
-> +	line_width = crtc_state->base.crtc->legacy.mode.hdisplay;
-
-	line_width = crtc_state->base.mode.hdisplay;
-
->  	stage_buffer.n_pixels = line_width;
->  	output_buffer.n_pixels = line_width;
->  
-> diff --git a/drivers/gpu/drm/vkms/vkms_crtc.c b/drivers/gpu/drm/vkms/vkms_crtc.c
-> index a40295c18b48..780681ea77e4 100644
-> --- a/drivers/gpu/drm/vkms/vkms_crtc.c
-> +++ b/drivers/gpu/drm/vkms/vkms_crtc.c
-> @@ -64,7 +64,7 @@ static int vkms_enable_vblank(struct drm_crtc *crtc)
->  	struct drm_vblank_crtc *vblank = drm_crtc_vblank_crtc(crtc);
->  	struct vkms_output *out = drm_crtc_to_vkms_output(crtc);
->  
-> -	drm_calc_timestamping_constants(crtc, &crtc->mode);
-> +	drm_calc_timestamping_constants(crtc, &crtc->legacy.mode);
-
-	drm_calc_timestamping_constants(crtc, &crtc->state->mode);
-
->  	hrtimer_init(&out->vblank_hrtimer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
->  	out->vblank_hrtimer.function = &vkms_vblank_simulate;
-> diff --git a/drivers/gpu/drm/vkms/vkms_writeback.c b/drivers/gpu/drm/vkms/vkms_writeback.c
-> index bc724cbd5e3a..27164cddb94d 100644
-> --- a/drivers/gpu/drm/vkms/vkms_writeback.c
-> +++ b/drivers/gpu/drm/vkms/vkms_writeback.c
-> @@ -131,8 +131,8 @@ static void vkms_wb_atomic_commit(struct drm_connector *conn,
->  	struct drm_connector_state *conn_state = wb_conn->base.state;
->  	struct vkms_crtc_state *crtc_state = output->composer_state;
->  	struct drm_framebuffer *fb = connector_state->writeback_job->fb;
-> -	u16 crtc_height = crtc_state->base.crtc->mode.vdisplay;
-> -	u16 crtc_width = crtc_state->base.crtc->mode.hdisplay;
-> +	u16 crtc_height = crtc_state->base.crtc->legacy.mode.vdisplay;
-> +	u16 crtc_width = crtc_state->base.crtc->legacy.mode.hdisplay;
-
-	u16 crtc_height = crtc_state->base.mode.vdisplay;
-	u16 crtc_width = crtc_state->base.mode.hdisplay;
-
->  	struct vkms_writeback_job *active_wb;
->  	struct vkms_frame_info *wb_frame_info;
->  	u32 wb_format = fb->format->format;
-
-[...]
+I tested kms_vblank, all of them are SUCCESS/SKIP, do you know other tests 
+that can trigger bugs?
 
 -- 
 Louis Chauvet, Bootlin
