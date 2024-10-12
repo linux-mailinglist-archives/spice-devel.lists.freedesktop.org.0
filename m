@@ -2,61 +2,59 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4DB699B8DF
-	for <lists+spice-devel@lfdr.de>; Sun, 13 Oct 2024 10:56:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 923BA99B8DE
+	for <lists+spice-devel@lfdr.de>; Sun, 13 Oct 2024 10:56:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2A0D110E347;
-	Sun, 13 Oct 2024 08:56:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F0AE410E08B;
+	Sun, 13 Oct 2024 08:56:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="bF4rdRfG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UdpHYnpT";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BAB4A10EA37;
- Fri, 11 Oct 2024 06:09:25 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 71AF2A4512D;
- Fri, 11 Oct 2024 06:09:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26B52C4CEC3;
- Fri, 11 Oct 2024 06:09:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1728626963;
- bh=i9cYUz3cSkHkjlbjXX2TL+CxfIfYsIh3kS/FujNH0ns=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bF4rdRfGhj7EVWEvLjIfvY+4Raq2vEZe+yssbLN3OZ7fW7bmvDXav08gT+gBmnGSN
- +kmbBAOFkJtlYBrDlPTHGKAwQ7ax+wesMXi2/XL+kUHhYtiJRprpUQREwCqcUwTNpH
- tw+1wq1CQATrSDYV/rW/qsI+U6tk1p7cmzHdYaBs=
-Date: Fri, 11 Oct 2024 08:09:20 +0200
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Niklas Schnelle <schnelle@linux.ibm.com>
-Cc: Brian Cain <bcain@quicinc.com>, Marcel Holtmann <marcel@holtmann.org>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Jiri Slaby <jirislaby@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- "Maciej W. Rozycki" <macro@orcam.me.uk>,
- Heiko Carstens <hca@linux.ibm.com>, linux-kernel@vger.kernel.org,
- linux-hexagon@vger.kernel.org, linux-bluetooth@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- linux-serial@vger.kernel.org, linux-arch@vger.kernel.org,
- Arnd Bergmann <arnd@kernel.org>
-Subject: Re: [PATCH v8 4/5] tty: serial: handle HAS_IOPORT dependencies
-Message-ID: <2024101112-tile-cupping-3431@gregkh>
-References: <20241008-b4-has_ioport-v8-0-793e68aeadda@linux.ibm.com>
- <20241008-b4-has_ioport-v8-4-793e68aeadda@linux.ibm.com>
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
+ [209.85.208.181])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3491410E053
+ for <spice-devel@lists.freedesktop.org>; Sat, 12 Oct 2024 14:57:24 +0000 (UTC)
+Received: by mail-lj1-f181.google.com with SMTP id
+ 38308e7fff4ca-2fad29fcb5bso883171fa.1
+ for <spice-devel@lists.freedesktop.org>; Sat, 12 Oct 2024 07:57:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728745042; x=1729349842; darn=lists.freedesktop.org;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=lxlvoGW48TJnm3wEySIirWdlntcFXS+DUCsvVX5JkS4=;
+ b=UdpHYnpTQsHFZxLjVte4x6qnwNFA5oOW6Sl/Egqri6WT4jjjFt49CNCH6mggQDwjyQ
+ PaTwMB78l9uMmBwKXf1G1WwJ4uiK36kVeyW3IZhUgXGXBPLPCQBks32Br3BCtPxBTDQp
+ L/9tYSDaWDeeUsGSHHOXKvCe2mB1wWMbBIkF2BUPS2Pd2sugUVBGBcfyw78pxqFrWROp
+ ZC+uPEx0S+In2gxdoIyM0qgqWibqvCGTz+9rMtlhA/+OxDveNkd94e2eeJYL6yikRDz9
+ Pk+eHmoqGXU9Np/CxaxVkBCRtD7Ta4TbpntmDWXZroYqSD/C92PrJwsQ+KcV2+JdUJlv
+ 2Nyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728745042; x=1729349842;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lxlvoGW48TJnm3wEySIirWdlntcFXS+DUCsvVX5JkS4=;
+ b=giLOiHg4LNjoTeGBiRPC1qeUlC9CEd9HuRDLMYPCT61zudwGeIbDeaPIxMnb8wSo37
+ /vK5YiP1BpmIjc7aGGT+tzn4T+HiZN8Y5qMssV94p3lTo6uqw1GUPfCPnHBa5Py3LbWP
+ /xDz5Y2PRms4xjdfAUBQpKhZ8LH+8RrWC3+V+8j0S+OHKBnfpzRVTTCW7JhF+cRzWXol
+ WewFlVGmbaHQIh8Nr9MfUe15pTj+ICnhG9DiHXOr0WlFxxld+hMhbrxFDcivEmnTGdfA
+ VYnRvbutHYpjXdKvbplQDTlc22QThbdqbD9B8/9woevzt+WT5SwhitirYiEqqgrpEbxf
+ bq5g==
+X-Gm-Message-State: AOJu0Yy/SAXG8f0KgWxhQPKB9hs+nKbEL5SZQoQv9RLc0InXL9yyyZSt
+ w45XznxLmfVE+qQjHdpS/+Mx0OlyBYGc/scxTeqI1L5wbH+5OBh09vs97k6HdW+06tEhAvmWue0
+ bxvz/5KGEjTkhN4QJeh37MEpJHZSzXcA6
+X-Google-Smtp-Source: AGHT+IEKc7YKLRaaWlCT3d4vjb1w0BLVNX9ciOCNBJtbTLngramhH9JuH/aa8pIY3/hjo87qlECzIwT3aijAGFIhMoo=
+X-Received: by 2002:a2e:a887:0:b0:2fa:ce18:9e4 with SMTP id
+ 38308e7fff4ca-2fb3272aad3mr8231721fa.6.1728745041557; Sat, 12 Oct 2024
+ 07:57:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241008-b4-has_ioport-v8-4-793e68aeadda@linux.ibm.com>
+From: Michele Petrelli <michelepetrelli73@gmail.com>
+Date: Sat, 12 Oct 2024 16:57:10 +0200
+Message-ID: <CAKnFrarcmt3Rekqgb0zdSFJzfuU=7SkFC-wikHGNkRBuseaXUA@mail.gmail.com>
+Subject: How to increase Clipboard size to Windows 10 guest?
+To: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="0000000000001c03d2062448d29a"
 X-Mailman-Approved-At: Sun, 13 Oct 2024 08:56:51 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -72,17 +70,38 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Tue, Oct 08, 2024 at 02:39:45PM +0200, Niklas Schnelle wrote:
-> In a future patch HAS_IOPORT=n will disable inb()/outb() and friends at
-> compile time. We thus need to add HAS_IOPORT as dependency for those
-> drivers using them unconditionally. Some 8250 serial drivers support
-> MMIO only use, so fence only the parts requiring I/O ports and print an
-> error message if a device can't be supported with the current
-> configuration.
-> 
-> Co-developed-by: Arnd Bergmann <arnd@kernel.org>
-> Signed-off-by: Arnd Bergmann <arnd@kernel.org>
-> Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
-> ---
+--0000000000001c03d2062448d29a
+Content-Type: text/plain; charset="UTF-8"
 
-Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Hello I hope you can help me out. My requirement is to use copy and paste
+between linux host and windows 10 guest. The problem is that beyond a
+certain byte limit (I think 1024k) the image will not paste. The host keeps
+loading, but there seems to be a limit on windows. I installed the spice
+guest tools, but I see that they are not confiurable.
+my best
+Michele
+
+-- 
+--------------------------------------------------
+Michele Petrelli Art
+https://michelepetrelliart.com
+https://instagram.com/michelepetrelliart
+
+--0000000000001c03d2062448d29a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hello I hope you can help me out. My requirement is t=
+o use copy and paste between linux host and windows 10 guest. The problem i=
+s that beyond a certain byte limit (I think 1024k) the image will not paste=
+. The host keeps loading, but there seems to be a limit on windows. I insta=
+lled the spice guest tools, but I see that they are not confiurable.</div><=
+div>my best</div><div>Michele<br></div><br><span class=3D"gmail_signature_p=
+refix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smartm=
+ail=3D"gmail_signature">--------------------------------------------------<=
+br>Michele Petrelli Art<br><a href=3D"https://michelepetrelliart.com" targe=
+t=3D"_blank">https://michelepetrelliart.com</a><br><a href=3D"https://insta=
+gram.com/michelepetrelliart" target=3D"_blank">https://instagram.com/michel=
+epetrelliart</a><br><br><br><br><br></div></div>
+
+--0000000000001c03d2062448d29a--
