@@ -2,60 +2,54 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 923BA99B8DE
-	for <lists+spice-devel@lfdr.de>; Sun, 13 Oct 2024 10:56:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CED3899C825
+	for <lists+spice-devel@lfdr.de>; Mon, 14 Oct 2024 13:07:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F0AE410E08B;
-	Sun, 13 Oct 2024 08:56:51 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UdpHYnpT";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 40E1710E1BE;
+	Mon, 14 Oct 2024 11:07:46 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
- [209.85.208.181])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3491410E053
- for <spice-devel@lists.freedesktop.org>; Sat, 12 Oct 2024 14:57:24 +0000 (UTC)
-Received: by mail-lj1-f181.google.com with SMTP id
- 38308e7fff4ca-2fad29fcb5bso883171fa.1
- for <spice-devel@lists.freedesktop.org>; Sat, 12 Oct 2024 07:57:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728745042; x=1729349842; darn=lists.freedesktop.org;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=lxlvoGW48TJnm3wEySIirWdlntcFXS+DUCsvVX5JkS4=;
- b=UdpHYnpTQsHFZxLjVte4x6qnwNFA5oOW6Sl/Egqri6WT4jjjFt49CNCH6mggQDwjyQ
- PaTwMB78l9uMmBwKXf1G1WwJ4uiK36kVeyW3IZhUgXGXBPLPCQBks32Br3BCtPxBTDQp
- L/9tYSDaWDeeUsGSHHOXKvCe2mB1wWMbBIkF2BUPS2Pd2sugUVBGBcfyw78pxqFrWROp
- ZC+uPEx0S+In2gxdoIyM0qgqWibqvCGTz+9rMtlhA/+OxDveNkd94e2eeJYL6yikRDz9
- Pk+eHmoqGXU9Np/CxaxVkBCRtD7Ta4TbpntmDWXZroYqSD/C92PrJwsQ+KcV2+JdUJlv
- 2Nyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728745042; x=1729349842;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lxlvoGW48TJnm3wEySIirWdlntcFXS+DUCsvVX5JkS4=;
- b=giLOiHg4LNjoTeGBiRPC1qeUlC9CEd9HuRDLMYPCT61zudwGeIbDeaPIxMnb8wSo37
- /vK5YiP1BpmIjc7aGGT+tzn4T+HiZN8Y5qMssV94p3lTo6uqw1GUPfCPnHBa5Py3LbWP
- /xDz5Y2PRms4xjdfAUBQpKhZ8LH+8RrWC3+V+8j0S+OHKBnfpzRVTTCW7JhF+cRzWXol
- WewFlVGmbaHQIh8Nr9MfUe15pTj+ICnhG9DiHXOr0WlFxxld+hMhbrxFDcivEmnTGdfA
- VYnRvbutHYpjXdKvbplQDTlc22QThbdqbD9B8/9woevzt+WT5SwhitirYiEqqgrpEbxf
- bq5g==
-X-Gm-Message-State: AOJu0Yy/SAXG8f0KgWxhQPKB9hs+nKbEL5SZQoQv9RLc0InXL9yyyZSt
- w45XznxLmfVE+qQjHdpS/+Mx0OlyBYGc/scxTeqI1L5wbH+5OBh09vs97k6HdW+06tEhAvmWue0
- bxvz/5KGEjTkhN4QJeh37MEpJHZSzXcA6
-X-Google-Smtp-Source: AGHT+IEKc7YKLRaaWlCT3d4vjb1w0BLVNX9ciOCNBJtbTLngramhH9JuH/aa8pIY3/hjo87qlECzIwT3aijAGFIhMoo=
-X-Received: by 2002:a2e:a887:0:b0:2fa:ce18:9e4 with SMTP id
- 38308e7fff4ca-2fb3272aad3mr8231721fa.6.1728745041557; Sat, 12 Oct 2024
- 07:57:21 -0700 (PDT)
+Received: from angie.orcam.me.uk (angie.orcam.me.uk [78.133.224.34])
+ by gabe.freedesktop.org (Postfix) with ESMTP id D53FD10E00E;
+ Sun, 13 Oct 2024 14:53:24 +0000 (UTC)
+Received: by angie.orcam.me.uk (Postfix, from userid 500)
+ id 4DC4292009C; Sun, 13 Oct 2024 16:53:21 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by angie.orcam.me.uk (Postfix) with ESMTP id 45D3F92009B;
+ Sun, 13 Oct 2024 15:53:21 +0100 (BST)
+Date: Sun, 13 Oct 2024 15:53:21 +0100 (BST)
+From: "Maciej W. Rozycki" <macro@orcam.me.uk>
+To: Niklas Schnelle <schnelle@linux.ibm.com>
+cc: Brian Cain <bcain@quicinc.com>, Marcel Holtmann <marcel@holtmann.org>, 
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, Dave Airlie <airlied@redhat.com>, 
+ Gerd Hoffmann <kraxel@redhat.com>, 
+ Lucas De Marchi <lucas.demarchi@intel.com>, 
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Jiri Slaby <jirislaby@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+ Heiko Carstens <hca@linux.ibm.com>, linux-kernel@vger.kernel.org, 
+ linux-hexagon@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux.dev, 
+ spice-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ linux-serial@vger.kernel.org, linux-arch@vger.kernel.org, 
+ Arnd Bergmann <arnd@kernel.org>
+Subject: Re: [PATCH v6 4/5] tty: serial: handle HAS_IOPORT dependencies
+In-Reply-To: <46d81b40dda20ada3b5847353a866172b419c811.camel@linux.ibm.com>
+Message-ID: <alpine.DEB.2.21.2410081606420.30973@angie.orcam.me.uk>
+References: <20241007-b4-has_ioport-v6-0-03f7240da6e5@linux.ibm.com>
+ <20241007-b4-has_ioport-v6-4-03f7240da6e5@linux.ibm.com>
+ <alpine.DEB.2.21.2410072109130.30973@angie.orcam.me.uk>
+ <46d81b40dda20ada3b5847353a866172b419c811.camel@linux.ibm.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-From: Michele Petrelli <michelepetrelli73@gmail.com>
-Date: Sat, 12 Oct 2024 16:57:10 +0200
-Message-ID: <CAKnFrarcmt3Rekqgb0zdSFJzfuU=7SkFC-wikHGNkRBuseaXUA@mail.gmail.com>
-Subject: How to increase Clipboard size to Windows 10 guest?
-To: spice-devel@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="0000000000001c03d2062448d29a"
-X-Mailman-Approved-At: Sun, 13 Oct 2024 08:56:51 +0000
+Content-Type: text/plain; charset=US-ASCII
+X-Mailman-Approved-At: Mon, 14 Oct 2024 11:07:44 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,38 +64,85 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---0000000000001c03d2062448d29a
-Content-Type: text/plain; charset="UTF-8"
+On Tue, 8 Oct 2024, Niklas Schnelle wrote:
 
-Hello I hope you can help me out. My requirement is to use copy and paste
-between linux host and windows 10 guest. The problem is that beyond a
-certain byte limit (I think 1024k) the image will not paste. The host keeps
-loading, but there seems to be a limit on windows. I installed the spice
-guest tools, but I see that they are not confiurable.
-my best
-Michele
+> > > +static __always_inline bool is_upf_fourport(struct uart_port *port)
+> > > +{
+> > > +	if (!IS_ENABLED(CONFIG_HAS_IOPORT))
+> > > +		return false;
+> > > +
+> > > +	return port->flags & UPF_FOURPORT;
+> > > +}
+> > 
+> >  Can we perhaps avoid adding this helper and then tweaking code throughout 
+> > by having:
+> > 
+> > #ifdef CONFIG_SERIAL_8250_FOURPORT
+> > #define UPF_FOURPORT		((__force upf_t) ASYNC_FOURPORT       /* 1  */ )
+> > #else
+> > #define UPF_FOURPORT		0
+> > #endif
+> > 
+> > in include/linux/serial_core.h instead?  I can see the flag is reused by 
+> > drivers/tty/serial/sunsu.c, but from a glance over it seems rubbish to me 
+> > and such a change won't hurt the driver anyway.
+> 
+> I'll look at this, do you think this is okay regarding matching the
+> user-space definitions in include/uapi/linux/tty_flags.h?
 
--- 
---------------------------------------------------
-Michele Petrelli Art
-https://michelepetrelliart.com
-https://instagram.com/michelepetrelliart
+ With this change UAPI stays the same and setting ASYNC_FOURPORT (with 
+`setserial', etc.) will just do nothing with non-port-I/O platforms, as 
+expected.  Arguably being able to set it for any serial port and cause the 
+driver to poke at random I/O locations is already asking for trouble, but 
+that the price of legacy.
 
---0000000000001c03d2062448d29a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+> > > @@ -1174,7 +1201,7 @@ static void autoconfig(struct uart_8250_port *up)
+> > >  		 */
+> > >  		scratch = serial_in(up, UART_IER);
+> > >  		serial_out(up, UART_IER, 0);
+> > > -#ifdef __i386__
+> > > +#if defined(__i386__) && defined(CONFIG_HAS_IOPORT)
+> > >  		outb(0xff, 0x080);
+> > >  #endif
+> > >  		/*
+> > > @@ -1183,7 +1210,7 @@ static void autoconfig(struct uart_8250_port *up)
+> > >  		 */
+> > >  		scratch2 = serial_in(up, UART_IER) & UART_IER_ALL_INTR;
+> > >  		serial_out(up, UART_IER, UART_IER_ALL_INTR);
+> > > -#ifdef __i386__
+> > > +#if defined(__i386__) && defined(CONFIG_HAS_IOPORT)
+> > >  		outb(0, 0x080);
+> > >  #endif
+> > >  		scratch3 = serial_in(up, UART_IER) & UART_IER_ALL_INTR;
+> > 
+> >  Nah, i386 does have machine OUTB instructions, it has the port I/O 
+> > address space in the ISA, so these two changes make no sense to me.  
+> > 
+> >  Though this #ifdef should likely be converted to CONFIG_X86_32 via a 
+> > separate change.
+> 
+> This is needed for Usermode Linux (UM) which sets __i386__ but also
+> doesn't have CONFIG_HAS_IOPORT. This was spotted by the kernel test bot
+> here: https://lore.kernel.org/all/202410031712.BwfGjrQY-lkp@intel.com/
 
-<div dir=3D"ltr"><div>Hello I hope you can help me out. My requirement is t=
-o use copy and paste between linux host and windows 10 guest. The problem i=
-s that beyond a certain byte limit (I think 1024k) the image will not paste=
-. The host keeps loading, but there seems to be a limit on windows. I insta=
-lled the spice guest tools, but I see that they are not confiurable.</div><=
-div>my best</div><div>Michele<br></div><br><span class=3D"gmail_signature_p=
-refix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature" data-smartm=
-ail=3D"gmail_signature">--------------------------------------------------<=
-br>Michele Petrelli Art<br><a href=3D"https://michelepetrelliart.com" targe=
-t=3D"_blank">https://michelepetrelliart.com</a><br><a href=3D"https://insta=
-gram.com/michelepetrelliart" target=3D"_blank">https://instagram.com/michel=
-epetrelliart</a><br><br><br><br><br></div></div>
+ Odd, but I'm not into UML so I need to accept your justification.  My 
+reservation about relying on compiler's __i386__ predefine rather than our 
+CONFIG_X86_32 setting still stands, but that's beyond the scope of your 
+change (as is switching from `#if ...' to `if (...)').  Thanks for your 
+attention to such details.
 
---0000000000001c03d2062448d29a--
+ NB these `outb' calls look to me remarkably like remains of `outb_p' and 
+I wonder if they could be abstracted somehow.  For those who don't know: 
+the port I/O location 0x80 in the IBM PC address space was reserved for 
+use as a diagnostic port.  Despite being in the mainboard's address space 
+its chip select line was left floating and one could obtain an ISA option 
+card that decoded this location and showed data values written to it on a 
+hex display.  As it was a location known to cause no side effect (beyond 
+that optional hex display) it was commonly used to incur a small delay in 
+execution.  It was also used by BIOS POST to indicate progress.
+
+ I've skimmed over v8 and it seems good to go as far as I'm concerned.  
+Any fallout can be dealt with on a case-by-case basis.  Thank you for 
+working on these improvements.
+
+  Maciej
