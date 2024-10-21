@@ -2,149 +2,111 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6298A9B0491
-	for <lists+spice-devel@lfdr.de>; Fri, 25 Oct 2024 15:52:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F7899B1DE6
+	for <lists+spice-devel@lfdr.de>; Sun, 27 Oct 2024 14:50:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 24A8710EAEE;
-	Fri, 25 Oct 2024 13:52:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5059C10E1EE;
+	Sun, 27 Oct 2024 13:50:12 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="I4DKF/WH";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="OcrFsjgS";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="I4DKF/WH";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="OcrFsjgS";
+	dkim=permerror (0-bit key) header.d=arndb.de header.i=@arndb.de header.b="ne/IPE08";
+	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="c+yT9YJV";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E1BCF10EAED;
- Fri, 25 Oct 2024 13:52:53 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 35B3C1FE29;
- Fri, 25 Oct 2024 13:52:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1729864372; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
- b=I4DKF/WHSXYyxn9maUAO0lJ/ctGVP/AYnNxz0kVTglnATwZNEEoSOqTCtbBsc5AaFrsPf9
- VKd6sqG1NM2MeA6E+cN/uWyVww8IMrVIy3nT11nM9Dsa1XBwO4/K0hxFfVjvZDSMCmsait
- pjmtbTrb+J2Qu5FI9v42Wme88r7a9U0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1729864372;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
- b=OcrFsjgS7DaKcptOnqNC2t0mP+LyutfOa+nfevufxH7FlLbS0QTriUFrEo8D8xNd4ruF6r
- o9Fvj97SA+cuslBA==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1729864372; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
- b=I4DKF/WHSXYyxn9maUAO0lJ/ctGVP/AYnNxz0kVTglnATwZNEEoSOqTCtbBsc5AaFrsPf9
- VKd6sqG1NM2MeA6E+cN/uWyVww8IMrVIy3nT11nM9Dsa1XBwO4/K0hxFfVjvZDSMCmsait
- pjmtbTrb+J2Qu5FI9v42Wme88r7a9U0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1729864372;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
- b=OcrFsjgS7DaKcptOnqNC2t0mP+LyutfOa+nfevufxH7FlLbS0QTriUFrEo8D8xNd4ruF6r
- o9Fvj97SA+cuslBA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 76601132D3;
- Fri, 25 Oct 2024 13:52:51 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id GXqhG7OiG2eqTwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 25 Oct 2024 13:52:51 +0000
-Message-ID: <50017007-d2c3-4964-9cc4-ff26961e3809@suse.de>
-Date: Fri, 25 Oct 2024 15:52:51 +0200
+Received: from flow-a6-smtp.messagingengine.com
+ (flow-a6-smtp.messagingengine.com [103.168.172.141])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 72CA210E035;
+ Mon, 21 Oct 2024 10:08:42 +0000 (UTC)
+Received: from phl-compute-10.internal (phl-compute-10.phl.internal
+ [10.202.2.50])
+ by mailflow.phl.internal (Postfix) with ESMTP id BAD6B2001BC;
+ Mon, 21 Oct 2024 06:08:41 -0400 (EDT)
+Received: from phl-imap-11 ([10.202.2.101])
+ by phl-compute-10.internal (MEProxy); Mon, 21 Oct 2024 06:08:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1729505321;
+ x=1729512521; bh=ghSlNe0tmFIbW8pbUYudW/CbWTjZ+S6+ujlr6qqnF/E=; b=
+ ne/IPE08UonRdshCEbTY4eWggIuJdw7ggRLwVWX6T78qDjRqTQRxe8A6YsUhbWkX
+ fIjZUVpDjQEEtkjJlKtRrQ4SzcACH9iXutk4zanQBogR4otxUePp6c6f1IjcMh20
+ EHYmUpptTI/quDvu8UjQi8cNIZ1tO11br17DIeQbvohy5u+KEpGpa69ULQPI/WMV
+ Ci8IqRqEH5xOzjI16MWAtEJ56raEr0Wi5FT44Hr8BoB4dzFA7DgYJhnIpFXC9r6P
+ +yH6cvNHjo3+zsJmhNTDhNzqy9nmPdQ0cC2UY1Be+GpI1+K6KfZQC4IdLuzXGg3s
+ lpgYr94GWBUllJMI63hVxg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1729505321; x=
+ 1729512521; bh=ghSlNe0tmFIbW8pbUYudW/CbWTjZ+S6+ujlr6qqnF/E=; b=c
+ +yT9YJVNdsrrwGaHaBDLiJ9XZ4izTUNteC1asRAHk8AdWfX3WorexOGb71M8j4uC
+ zORjv/TdqGZDpylQB0WryzahKC4T3PQnVwuG1fgtzPPCVzBEpdXnGLxATCsmIig/
+ H96DDBEWYMOty9sHtCLaZ93EKfqIQ9GQUldQShv6EqsRiJ2YyaiOSfUhYdT4UfU7
+ MEZh6q1r48ORtasV2o1IOR+T/D2+qmbYUNoOyJCD12cuIgp1CNyi58VEbLkN3AqD
+ 3i05ArUpxC7CCQcPNoNHHDKliwuCUHAyCxhbku0HVNvpSCwTHglC6p6cDZaamA4N
+ UtpN4HsdEnl6gCT6kEuwQ==
+X-ME-Sender: <xms:KSgWZ6S6R2n1f2T0QCQexTgiV-KSMlaMM2gkoOq12JijmTNZ1Da6pA>
+ <xme:KSgWZ_zrX9SKSefI_hsukUWNkowAAXFNzJVOU5WQN8cskfd-UktwCKcRh5niCSPF9
+ B-wUzhhhk-7zGgwpLQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeftddrvdehledgvdegucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+ rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
+ htshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertdertddt
+ necuhfhrohhmpedftehrnhguuceuvghrghhmrghnnhdfuceorghrnhgusegrrhhnuggsrd
+ guvgeqnecuggftrfgrthhtvghrnhephfdthfdvtdefhedukeetgefggffhjeeggeetfefg
+ gfevudegudevledvkefhvdeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpe
+ hmrghilhhfrhhomheprghrnhgusegrrhhnuggsrdguvgdpnhgspghrtghpthhtohepvdel
+ pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehsihhmohhnrgesfhhffihllhdrtg
+ hhpdhrtghpthhtoheprghirhhlihgvugesghhmrghilhdrtghomhdprhgtphhtthhopehl
+ uhhiiidruggvnhhtiiesghhmrghilhdrtghomhdprhgtphhtthhopehprghtrhhikhdrrh
+ drjhgrkhhosghsshhonhesghhmrghilhdrtghomhdprhgtphhtthhopehmrghrtggvlhes
+ hhholhhtmhgrnhhnrdhorhhgpdhrtghpthhtoheplhhutggrshdruggvmhgrrhgthhhise
+ hinhhtvghlrdgtohhmpdhrtghpthhtoheprhhoughrihhgohdrvhhivhhisehinhhtvghl
+ rdgtohhmpdhrtghpthhtoheprghrnhgusehkvghrnhgvlhdrohhrghdprhgtphhtthhope
+ hjihhrihhslhgrsgihsehkvghrnhgvlhdrohhrgh
+X-ME-Proxy: <xmx:KSgWZ306jKZbZyxIuNn24nj8C_gZvqx8j2vZtEOD83IWkVo0nTYHqw>
+ <xmx:KSgWZ2ChYHyNQtPFROKXIN2jjht4D_m7Shh_6ifCQapVKZZio003WA>
+ <xmx:KSgWZzi65AZ8OiKDEBbUvjM6UWP-jI8InMkFEuc1FbIPK1bIuuD40g>
+ <xmx:KSgWZyo2OCvdSDoNogZ2pNuyd_R1Z-2mydlod75TWuAx6fAolN5qiA>
+ <xmx:KSgWZ05XjI0ejUOeJbkMdLt1Sg5fEKNECBVD0njAWDAczeUufW1V0bbf>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id 003F42220071; Mon, 21 Oct 2024 06:08:40 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 3/5] drm: handle HAS_IOPORT dependencies
-To: Niklas Schnelle <schnelle@linux.ibm.com>, Brian Cain <bcain@quicinc.com>, 
- Marcel Holtmann <marcel@holtmann.org>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Lucas De Marchi
- <lucas.demarchi@intel.com>,
+Date: Mon, 21 Oct 2024 10:08:19 +0000
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Thomas Zimmermann" <tzimmermann@suse.de>,
+ "Niklas Schnelle" <schnelle@linux.ibm.com>, "Brian Cain" <bcain@quicinc.com>, 
+ "Marcel Holtmann" <marcel@holtmann.org>,
+ "Luiz Augusto von Dentz" <luiz.dentz@gmail.com>,
+ "Patrik Jakobsson" <patrik.r.jakobsson@gmail.com>,
+ "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+ "Maxime Ripard" <mripard@kernel.org>, "Dave Airlie" <airlied@gmail.com>,
+ "Simona Vetter" <simona@ffwll.ch>, "Dave Airlie" <airlied@redhat.com>,
+ "Gerd Hoffmann" <kraxel@redhat.com>,
+ "Lucas De Marchi" <lucas.demarchi@intel.com>,
  =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jiri Slaby <jirislaby@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- "Maciej W. Rozycki" <macro@orcam.me.uk>, Heiko Carstens <hca@linux.ibm.com>
+ "Rodrigo Vivi" <rodrigo.vivi@intel.com>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Jiri Slaby" <jirislaby@kernel.org>, "Maciej W. Rozycki" <macro@orcam.me.uk>, 
+ "Heiko Carstens" <hca@linux.ibm.com>
 Cc: linux-kernel@vger.kernel.org, linux-hexagon@vger.kernel.org,
  linux-bluetooth@vger.kernel.org, dri-devel@lists.freedesktop.org,
  virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
  intel-xe@lists.freedesktop.org, linux-serial@vger.kernel.org,
- linux-arch@vger.kernel.org, Arnd Bergmann <arnd@kernel.org>
-References: <20241024-b4-has_ioport-v9-0-6a6668593f71@linux.ibm.com>
- <20241024-b4-has_ioport-v9-3-6a6668593f71@linux.ibm.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20241024-b4-has_ioport-v9-3-6a6668593f71@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Linux-Arch <linux-arch@vger.kernel.org>, "Arnd Bergmann" <arnd@kernel.org>
+Message-Id: <a25086c4-e2fc-4ffc-bc20-afa50e560d96@app.fastmail.com>
+In-Reply-To: <64cc9c8f-fff3-4845-bb32-d7f1046ef619@suse.de>
+References: <20241008-b4-has_ioport-v8-0-793e68aeadda@linux.ibm.com>
+ <20241008-b4-has_ioport-v8-3-793e68aeadda@linux.ibm.com>
+ <64cc9c8f-fff3-4845-bb32-d7f1046ef619@suse.de>
+Subject: Re: [PATCH v8 3/5] drm: handle HAS_IOPORT dependencies
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-X-Spam-Score: -2.80
-X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]; MIME_TRACE(0.00)[0:+];
- TAGGED_RCPT(0.00)[]; TO_DN_SOME(0.00)[];
- RCPT_COUNT_TWELVE(0.00)[29];
- FREEMAIL_TO(0.00)[linux.ibm.com,quicinc.com,holtmann.org,gmail.com,linux.intel.com,kernel.org,ffwll.ch,redhat.com,intel.com,linuxfoundation.org,arndb.de,orcam.me.uk];
- MID_RHS_MATCH_FROM(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- R_RATELIMIT(0.00)[to_ip_from(RLykjg6e7ifkwtw7jmpw7b9yio)];
- RCVD_TLS_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:mid,
- suse.de:email, intel.com:email]
-X-Spam-Flag: NO
-X-Spam-Level: 
+X-Mailman-Approved-At: Sun, 27 Oct 2024 13:50:11 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -159,173 +121,117 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-
-
-Am 24.10.24 um 19:54 schrieb Niklas Schnelle:
-> In a future patch HAS_IOPORT=n will disable inb()/outb() and friends at
-> compile time. We thus need to add HAS_IOPORT as dependency for those
-> drivers using them. In the bochs driver there is optional MMIO support
-> detected at runtime, warn if this isn't taken when HAS_IOPORT is not
-> defined.
+On Mon, Oct 21, 2024, at 07:52, Thomas Zimmermann wrote:
+> Am 08.10.24 um 14:39 schrieb Niklas Schnelle:
+d 100644
+>> --- a/drivers/gpu/drm/qxl/Kconfig
+>> +++ b/drivers/gpu/drm/qxl/Kconfig
+>> @@ -2,6 +2,7 @@
+>>   config DRM_QXL
+>>   	tristate "QXL virtual GPU"
+>>   	depends on DRM && PCI && MMU
+>> +	depends on HAS_IOPORT
 >
-> There is also a direct and hard coded use in cirrus.c which according to
-> the comment is only necessary during resume.  Let's just skip this as
-> for example s390 which doesn't have I/O port support also doesen't
-> support suspend/resume.
+> Is there a difference between this style (multiple 'depends on') and the 
+> one used for gma500 (&& && &&)?
+
+No, it's the same. Doing it in one line is mainly useful
+if you have some '||' as well.
+
+>> @@ -105,7 +106,9 @@ static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
+>>   
+>>   		writeb(val, bochs->mmio + offset);
+>>   	} else {
+>> +#ifdef CONFIG_HAS_IOPORT
+>>   		outb(val, ioport);
+>> +#endif
 >
-> Co-developed-by: Arnd Bergmann <arnd@kernel.org>
-> Signed-off-by: Arnd Bergmann <arnd@kernel.org>
-> Acked-by: Lucas De Marchi <lucas.demarchi@intel.com> # xe
-> Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
+> Could you provide empty defines for the out() interfaces at the top of 
+> the file?
 
-Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+That no longer works since there are now __compiletime_error()
+versions of these funcitons. However we can do it more nicely like:
 
-> ---
->   drivers/gpu/drm/gma500/Kconfig |  2 +-
->   drivers/gpu/drm/qxl/Kconfig    |  2 +-
->   drivers/gpu/drm/tiny/bochs.c   | 19 ++++++++++++++-----
->   drivers/gpu/drm/tiny/cirrus.c  |  2 ++
->   drivers/gpu/drm/xe/Kconfig     |  2 +-
->   5 files changed, 19 insertions(+), 8 deletions(-)
+diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
+index 9b337f948434..034af6e32200 100644
+--- a/drivers/gpu/drm/tiny/bochs.c
++++ b/drivers/gpu/drm/tiny/bochs.c
+@@ -112,14 +112,12 @@ static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
+ 	if (WARN_ON(ioport < 0x3c0 || ioport > 0x3df))
+ 		return;
+ 
+-	if (bochs->mmio) {
++	if (!IS_DEFINED(CONFIG_HAS_IOPORT) || bochs->mmio) {
+ 		int offset = ioport - 0x3c0 + 0x400;
+ 
+ 		writeb(val, bochs->mmio + offset);
+ 	} else {
+-#ifdef CONFIG_HAS_IOPORT
+ 		outb(val, ioport);
+-#endif
+ 	}
+ }
+ 
+@@ -128,16 +126,12 @@ static u8 bochs_vga_readb(struct bochs_device *bochs, u16 ioport)
+ 	if (WARN_ON(ioport < 0x3c0 || ioport > 0x3df))
+ 		return 0xff;
+ 
+-	if (bochs->mmio) {
++	if (!IS_DEFINED(CONFIG_HAS_IOPORT) || bochs->mmio) {
+ 		int offset = ioport - 0x3c0 + 0x400;
+ 
+ 		return readb(bochs->mmio + offset);
+ 	} else {
+-#ifdef CONFIG_HAS_IOPORT
+ 		return inb(ioport);
+-#else
+-		return 0xff;
+-#endif
+ 	}
+ }
+ 
+@@ -145,32 +139,26 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
+ {
+ 	u16 ret = 0;
+ 
+-	if (bochs->mmio) {
++	if (!IS_DEFINED(CONFIG_HAS_IOPORT) || bochs->mmio) {
+ 		int offset = 0x500 + (reg << 1);
+ 
+ 		ret = readw(bochs->mmio + offset);
+ 	} else {
+-#ifdef CONFIG_HAS_IOPORT
+ 		outw(reg, VBE_DISPI_IOPORT_INDEX);
+ 		ret = inw(VBE_DISPI_IOPORT_DATA);
+-#else
+-		ret = 0xffff;
+-#endif
+ 	}
+ 	return ret;
+ }
+ 
+ static void bochs_dispi_write(struct bochs_device *bochs, u16 reg, u16 val)
+ {
+-	if (bochs->mmio) {
++	if (!IS_DEFINED(CONFIG_HAS_IOPORT) || bochs->mmio) {
+ 		int offset = 0x500 + (reg << 1);
+ 
+ 		writew(val, bochs->mmio + offset);
+ 	} else {
+-#ifdef CONFIG_HAS_IOPORT
+ 		outw(reg, VBE_DISPI_IOPORT_INDEX);
+ 		outw(val, VBE_DISPI_IOPORT_DATA);
+-#endif
+ 	}
+ }
+ 
+> And the in() interfaces could be defined to 0xff[ff].
 >
-> diff --git a/drivers/gpu/drm/gma500/Kconfig b/drivers/gpu/drm/gma500/Kconfig
-> index efb4a2dd2f80885cb59c925d09401002278d7d61..23b7c14de5e29238ece939d5822d8a9ffc4675cc 100644
-> --- a/drivers/gpu/drm/gma500/Kconfig
-> +++ b/drivers/gpu/drm/gma500/Kconfig
-> @@ -1,7 +1,7 @@
->   # SPDX-License-Identifier: GPL-2.0-only
->   config DRM_GMA500
->   	tristate "Intel GMA500/600/3600/3650 KMS Framebuffer"
-> -	depends on DRM && PCI && X86 && MMU
-> +	depends on DRM && PCI && X86 && MMU && HAS_IOPORT
->   	select DRM_KMS_HELPER
->   	select FB_IOMEM_HELPERS if DRM_FBDEV_EMULATION
->   	select I2C
-> diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
-> index ca3f51c2a8fe1a383f8a2479f04b5c0b3fb14e44..17d6927e5e23402786117fd0f99186978956c1c2 100644
-> --- a/drivers/gpu/drm/qxl/Kconfig
-> +++ b/drivers/gpu/drm/qxl/Kconfig
-> @@ -1,7 +1,7 @@
->   # SPDX-License-Identifier: GPL-2.0-only
->   config DRM_QXL
->   	tristate "QXL virtual GPU"
-> -	depends on DRM && PCI && MMU
-> +	depends on DRM && PCI && MMU && HAS_IOPORT
->   	select DRM_KMS_HELPER
->   	select DRM_TTM
->   	select DRM_TTM_HELPER
-> diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
-> index 31fc5d839e106ea4d5c8fe42d1bfc3c70291e3fb..e738bb85831667f55c436e21e761435def113b9a 100644
-> --- a/drivers/gpu/drm/tiny/bochs.c
-> +++ b/drivers/gpu/drm/tiny/bochs.c
-> @@ -1,5 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0-or-later
->   
-> +#include <linux/bug.h>
->   #include <linux/module.h>
->   #include <linux/pci.h>
->   
-> @@ -95,12 +96,17 @@ struct bochs_device {
->   
->   /* ---------------------------------------------------------------------- */
->   
-> +static __always_inline bool bochs_uses_mmio(struct bochs_device *bochs)
-> +{
-> +	return !IS_ENABLED(CONFIG_HAS_IOPORT) || bochs->mmio;
-> +}
-> +
->   static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
->   {
->   	if (WARN_ON(ioport < 0x3c0 || ioport > 0x3df))
->   		return;
->   
-> -	if (bochs->mmio) {
-> +	if (bochs_uses_mmio(bochs)) {
->   		int offset = ioport - 0x3c0 + 0x400;
->   
->   		writeb(val, bochs->mmio + offset);
-> @@ -114,7 +120,7 @@ static u8 bochs_vga_readb(struct bochs_device *bochs, u16 ioport)
->   	if (WARN_ON(ioport < 0x3c0 || ioport > 0x3df))
->   		return 0xff;
->   
-> -	if (bochs->mmio) {
-> +	if (bochs_uses_mmio(bochs)) {
->   		int offset = ioport - 0x3c0 + 0x400;
->   
->   		return readb(bochs->mmio + offset);
-> @@ -127,7 +133,7 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
->   {
->   	u16 ret = 0;
->   
-> -	if (bochs->mmio) {
-> +	if (bochs_uses_mmio(bochs)) {
->   		int offset = 0x500 + (reg << 1);
->   
->   		ret = readw(bochs->mmio + offset);
-> @@ -140,7 +146,7 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
->   
->   static void bochs_dispi_write(struct bochs_device *bochs, u16 reg, u16 val)
->   {
-> -	if (bochs->mmio) {
-> +	if (bochs_uses_mmio(bochs)) {
->   		int offset = 0x500 + (reg << 1);
->   
->   		writew(val, bochs->mmio + offset);
-> @@ -228,7 +234,7 @@ static int bochs_hw_init(struct drm_device *dev)
->   			DRM_ERROR("Cannot map mmio region\n");
->   			return -ENOMEM;
->   		}
-> -	} else {
-> +	} else if (IS_ENABLED(CONFIG_HAS_IOPORT)) {
->   		ioaddr = VBE_DISPI_IOPORT_INDEX;
->   		iosize = 2;
->   		if (!request_region(ioaddr, iosize, "bochs-drm")) {
-> @@ -236,6 +242,9 @@ static int bochs_hw_init(struct drm_device *dev)
->   			return -EBUSY;
->   		}
->   		bochs->ioports = 1;
-> +	} else {
-> +		dev_err(dev->dev, "I/O ports are not supported\n");
-> +		return -EIO;
->   	}
->   
->   	id = bochs_dispi_read(bochs, VBE_DISPI_INDEX_ID);
-> diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
-> index 751326e3d9c374baf72115492aeefff2b73869f0..e31e1df029ab0272c4a1ff0ab3eb026ca679b560 100644
-> --- a/drivers/gpu/drm/tiny/cirrus.c
-> +++ b/drivers/gpu/drm/tiny/cirrus.c
-> @@ -509,8 +509,10 @@ static void cirrus_crtc_helper_atomic_enable(struct drm_crtc *crtc,
->   
->   	cirrus_mode_set(cirrus, &crtc_state->mode);
->   
-> +#ifdef CONFIG_HAS_IOPORT
->   	/* Unblank (needed on S3 resume, vgabios doesn't do it then) */
->   	outb(VGA_AR_ENABLE_DISPLAY, VGA_ATT_W);
-> +#endif
->   
->   	drm_dev_exit(idx);
->   }
-> diff --git a/drivers/gpu/drm/xe/Kconfig b/drivers/gpu/drm/xe/Kconfig
-> index 7bbe46a98ff1f449bc2af30686585a00e9e8af93..116f58774135fc3a9f37d6d72d41340f5c812297 100644
-> --- a/drivers/gpu/drm/xe/Kconfig
-> +++ b/drivers/gpu/drm/xe/Kconfig
-> @@ -49,7 +49,7 @@ config DRM_XE
->   
->   config DRM_XE_DISPLAY
->   	bool "Enable display support"
-> -	depends on DRM_XE && DRM_XE=m
-> +	depends on DRM_XE && DRM_XE=m && HAS_IOPORT
->   	select FB_IOMEM_HELPERS
->   	select I2C
->   	select I2C_ALGOBIT
->
+> I assume that you don't want to provide such empty macros in the 
+> kernel's io.h header?
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+That was the original idea many years ago, but Linus rejected
+my pull request for it, so Niklas worked through all drivers
+individually to add the dependencies instead.
 
+     Arnd
