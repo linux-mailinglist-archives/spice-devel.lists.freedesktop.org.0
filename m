@@ -2,120 +2,92 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F93E9B1DE7
-	for <lists+spice-devel@lfdr.de>; Sun, 27 Oct 2024 14:50:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78FCE9B1DF0
+	for <lists+spice-devel@lfdr.de>; Sun, 27 Oct 2024 14:50:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 569E410E1F6;
-	Sun, 27 Oct 2024 13:50:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DCEC010E2ED;
+	Sun, 27 Oct 2024 13:50:13 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="J5KIJnSG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jl/DyNPR";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B8DDB10E984;
- Thu, 24 Oct 2024 17:56:31 +0000 (UTC)
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49OHc4Zr026032;
- Thu, 24 Oct 2024 17:56:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pp1; bh=OpUSHB
- MEwdUyF98w9KKfMMv1aen5S0miB4aePTMDh+c=; b=J5KIJnSGSY4CoaL38tnBR0
- eECCOwFoDOO1plP9pj9gTGTuzy1JFvfrkyet7luu11SeTBf/YI6nlD1QnOCpGbhn
- OnYMJgLqhduS1mlHbDPqaQOutqKnKHCOgH/lGRrfOBB8eR0dXoFG60unHRH9fN1Q
- /lzkfc4AGl7ROXF6P8pa+2+3rUOTb1LbNcB0Gaiwcul98DtnjVXFT8Jw0AaR5B4P
- 8AKRdsG5nmH48Mi4KkyyPm8LZ9B0e5yJFGhaurjTbnpxFG0VbbcDYpexIJT1EXpe
- cVb6RRQmLPS1oJq2JzEU38jMZpOIoxxdAaC0I8EGRvDCXPlGZ4TwUJ40qnCHrDUg
- ==
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42fhxnu2ca-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 24 Oct 2024 17:56:22 +0000 (GMT)
-Received: from m0360083.ppops.net (m0360083.ppops.net [127.0.0.1])
- by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 49OHtJcg001432;
- Thu, 24 Oct 2024 17:56:21 GMT
-Received: from ppma23.wdc07v.mail.ibm.com
- (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42fhxnu2c4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 24 Oct 2024 17:56:21 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 49OHpfIT006862;
- Thu, 24 Oct 2024 17:56:19 GMT
-Received: from smtprelay07.dal12v.mail.ibm.com ([172.16.1.9])
- by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 42emjd1ney-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 24 Oct 2024 17:56:19 +0000
-Received: from smtpav03.wdc07v.mail.ibm.com (smtpav03.wdc07v.mail.ibm.com
- [10.39.53.230])
- by smtprelay07.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 49OHuIFd47251950
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 24 Oct 2024 17:56:18 GMT
-Received: from smtpav03.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 6680358054;
- Thu, 24 Oct 2024 17:56:18 +0000 (GMT)
-Received: from smtpav03.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id B1C025805A;
- Thu, 24 Oct 2024 17:56:13 +0000 (GMT)
-Received: from tuxmaker.boeblingen.de.ibm.com (unknown [9.152.85.9])
- by smtpav03.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 24 Oct 2024 17:56:13 +0000 (GMT)
-From: Niklas Schnelle <schnelle@linux.ibm.com>
-Date: Thu, 24 Oct 2024 19:54:44 +0200
-Subject: [PATCH v9 5/5] asm-generic/io.h: Remove I/O port accessors for
- HAS_IOPORT=n
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20241024-b4-has_ioport-v9-5-6a6668593f71@linux.ibm.com>
-References: <20241024-b4-has_ioport-v9-0-6a6668593f71@linux.ibm.com>
-In-Reply-To: <20241024-b4-has_ioport-v9-0-6a6668593f71@linux.ibm.com>
-To: Brian Cain <bcain@quicinc.com>, Marcel Holtmann <marcel@holtmann.org>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- =?utf-8?q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jiri Slaby <jirislaby@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- "Maciej W. Rozycki" <macro@orcam.me.uk>, Heiko Carstens <hca@linux.ibm.com>
-Cc: linux-kernel@vger.kernel.org, linux-hexagon@vger.kernel.org,
- linux-bluetooth@vger.kernel.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, linux-serial@vger.kernel.org,
- linux-arch@vger.kernel.org, Niklas Schnelle <schnelle@linux.ibm.com>,
- Arnd Bergmann <arnd@kernel.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5763;
- i=schnelle@linux.ibm.com; h=from:subject:message-id;
- bh=9pbUyl42Nhcqma6QZmYcdpbw5sT9z3q1sa7WhPr42iw=;
- b=owGbwMvMwCX2Wz534YHOJ2GMp9WSGNKluqRD5oe6lHZ/Cup7FcEvVHjh5cp1ghWfN6j/UM47f
- +7EqwUxHaUsDGJcDLJiiiyLupz91hVMMd0T1N8BM4eVCWQIAxenAEzkSQ3DP9v/i07uPvviZagZ
- j72b49JrIo8OWVXU3L475+z3dok6tURGhu6y5Nl2wUVHXfotbtUUvd92XS958c81/lOv1TqVWq9
- IYQcA
-X-Developer-Key: i=schnelle@linux.ibm.com; a=openpgp;
- fpr=9DB000B2D2752030A5F72DDCAFE43F15E8C26090
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: BKscxSdustK8FLrIBOPouReXKLg57F74
-X-Proofpoint-GUID: luNKqXQhiDnO6MaN0akZJiYpxhRMSLIC
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-UnRewURL: 0 URL was un-rewritten
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com
+ [209.85.128.180])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DAC9810EA65
+ for <spice-devel@lists.freedesktop.org>; Fri, 25 Oct 2024 09:54:53 +0000 (UTC)
+Received: by mail-yw1-f180.google.com with SMTP id
+ 00721157ae682-6e2e3e4f65dso21271527b3.3
+ for <spice-devel@lists.freedesktop.org>; Fri, 25 Oct 2024 02:54:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729850093; x=1730454893; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ovzUCbOnf8ad3/AG/s6edyQx3Y96JvN5zzmYGNZvn88=;
+ b=Jl/DyNPRX/eoKtpxLAqJf5AOKVzH1SuPyBTwxzNEy0SBCAQxqPJGANZjTxNO6vNBCI
+ K77XrnW5Cc8fsrhchzftfpC/JYeIcp4ZxGBPLpzg0WJDJt0JDoZe8F4Cle+KTjBc70YV
+ mPqlYGPfFhugHkmDk0Uc1Wvwd9Ryt7Mf+aMdI/wKTHBg+NAKk68jVgb4mMHbCmn1Ocjn
+ ubcpmaMTq2W1v5jO9HxP5jVV33FMzgNMiX9jUMh9kGq2WQfoc8TyeGW2VZD5TJ9z/Ac8
+ 4fSVON/7YsATDJwQt74JgP2vNps3JZjnpfhqIjmgZma414XPVqB5l2DRmFZTaosrDIdA
+ eMyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729850093; x=1730454893;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ovzUCbOnf8ad3/AG/s6edyQx3Y96JvN5zzmYGNZvn88=;
+ b=Ee/IwM1rXSmEIAeVKkEq+rQTKntJEehaPaZgWZ2RFkLMDV4BnAvwo4ri+hq6H0NyN6
+ QrP9ZHV1BIB2zYOdbQ+Hsv/yvKaU19WYNH4tClluxBJ6lMyxNMc9WM8cf2fod77jlLlA
+ c+xbKk2+VqlMWFMWAJv9C6SQbi7jm+UGE0bUtubY3oUjztJJWrwd0CmyT2XhjATPYpMP
+ 0jSGZLjzXwWp3hoSfTX6pAqzDPQnX23gv+Cv//aKT3LkIZTuF6VjbjI04YblHggfAKQ4
+ Ft8uN2KfksqdGQ4SvnjTJnvH7iIWtwD1YB2aKTNFNdvPv8wXbgjmi970shEAlj8T2kWY
+ hOEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW90ct02GkejjAb4R57r+K1DPojuXBTlb9I0kLmQbGRVhEBjDApv94z1vYId19JzRuwMCRiBGA6r/3Mdw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YzhnpK7PN2VBN48T6b6c6Cl4OdqVKMPUyn1epUkaWW7Qs3+B5ID
+ exBS2rDtiWUT1uZu9WOLD9rsIvTHJUpI75OyY42TFgm8T7xtO/Cm9mGq6/awZ0ZEyXj9Z6mcmIN
+ blVXUO3Zunfi3coqhPQylxA+gdgy+xL9+jujgHA==
+X-Google-Smtp-Source: AGHT+IFZu/LyAjfpwX5MrN+JVkr0x0xSzSrKk0A5Mdi5tj38z9PJE4G47Yh4NVVkEqgziX0kL7VNUYJrsxipC6JS6p4=
+X-Received: by 2002:a05:690c:fc7:b0:6e7:fb87:7094 with SMTP id
+ 00721157ae682-6e85814d77fmr57343097b3.6.1729850092872; Fri, 25 Oct 2024
+ 02:54:52 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-10-15_01,2024-10-11_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0
- mlxlogscore=999 malwarescore=0 impostorscore=0 bulkscore=0
- priorityscore=1501 mlxscore=0 suspectscore=0 lowpriorityscore=0
- phishscore=0 clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2409260000 definitions=main-2410240145
+References: <20241002182200.15363-1-ville.syrjala@linux.intel.com>
+ <ZxtMz8JP3DbzpMew@intel.com>
+In-Reply-To: <ZxtMz8JP3DbzpMew@intel.com>
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Date: Fri, 25 Oct 2024 12:54:42 +0300
+Message-ID: <CAA8EJprT=BGyMnvkjS4BkRqar1hHn_hpXFaz9gstPL_9u1rAsQ@mail.gmail.com>
+Subject: Re: [PATCH 0/2] drm: Treewide plane/crtc legacy state sweeping
+To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, 
+ Abhinav Kumar <quic_abhinavk@quicinc.com>,
+ Alain Volmat <alain.volmat@foss.st.com>, 
+ Alex Deucher <alexander.deucher@amd.com>,
+ Alexey Brodkin <abrodkin@synopsys.com>, 
+ amd-gfx@lists.freedesktop.org, Andy Yan <andy.yan@rock-chips.com>, 
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ Danilo Krummrich <dakr@redhat.com>, freedreno@lists.freedesktop.org, 
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
+ Inki Dae <inki.dae@samsung.com>, Jyri Sarha <jyri.sarha@iki.fi>, 
+ Karol Herbst <kherbst@redhat.com>, linux-amlogic@lists.infradead.org, 
+ linux-arm-msm@vger.kernel.org, linux-arm-msm@vger.kernel.orga, 
+ linux-mediatek@lists.infradead.org, linux-renesas-soc@vger.kernel.org, 
+ Liviu Dudau <liviu.dudau@arm.com>, Lyude Paul <lyude@redhat.com>, 
+ =?UTF-8?B?TWHDrXJhIENhbmFs?= <mairacanal@riseup.net>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, nouveau@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.orga, 
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Rob Clark <robdclark@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>, Sandy Huang <hjc@rock-chips.com>,
+ Sean Paul <sean@poorly.run>, 
+ spice-devel@lists.freedesktop.org, virtualization@lists.linux.dev, 
+ xen-devel@lists.xenproject.org, Xinhui Pan <Xinhui.Pan@amd.com>, 
+ Zack Rusin <zack.rusin@broadcom.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sun, 27 Oct 2024 13:50:11 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -131,208 +103,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-With all subsystems and drivers either declaring their dependence on
-HAS_IOPORT or fencing I/O port specific code sections we can finally
-make inb()/outb() and friends compile-time dependent on HAS_IOPORT as
-suggested by Linus in the linked mail. The main benefit of this is that
-on platforms such as s390 which have no meaningful way of implementing
-inb()/outb() their use without the proper HAS_IOPORT dependency will
-result in easy to catch and fix compile-time errors instead of compiling
-code that can never work.
+On Fri, 25 Oct 2024 at 10:46, Ville Syrj=C3=A4l=C3=A4
+<ville.syrjala@linux.intel.com> wrote:
+>
+> On Wed, Oct 02, 2024 at 09:21:58PM +0300, Ville Syrjala wrote:
+> > From: Ville Syrj=C3=A4l=C3=A4 <ville.syrjala@linux.intel.com>
+> >
+> > An attempt to hide the drm_plane/crtc legacy state better.
+> >
+> > This also highlights the fact that a lot of supposedly
+> > atomic drivers are poking around in the legacy crtc state,
+> > which is rather questionable. For planes we did force the
+> > legacy state to NULL already to force drivers to behave.
+> > But even then it seems capable of confusing people with
+> > its high profile location directly under drm_plane.
+> >
+> > This might end up as some kind of conflict
+> > galore, but the alternative would involve trying
+> > to wean the atomic drivers off one by one,
+> > which would probably take forever. At least with
+> > this the issue becomes visible and shouldn't be
+> > forgotten as easily.
+>
+> Ping, anyone have thoughts on this? I'd like to get something
+> like this in at some point to make the legacy state (ab)users
+> easily visible...
 
-Link: https://lore.kernel.org/lkml/CAHk-=wg80je=K7madF4e7WrRNp37e3qh6y10Svhdc7O8SZ_-8g@mail.gmail.com/
-Co-developed-by: Arnd Bergmann <arnd@kernel.org>
-Signed-off-by: Arnd Bergmann <arnd@kernel.org>
-Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
----
- include/asm-generic/io.h | 60 ++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 60 insertions(+)
+I think that's a good idea. I hope to find a time slot and check the
+(ab)using of legacy state in drm/msm driver.
 
-diff --git a/include/asm-generic/io.h b/include/asm-generic/io.h
-index 80de699bf6af4b7b77f582c0469c43e978f67a43..1027be6a62bcbcd5f6797e0fa42035208d0ca79f 100644
---- a/include/asm-generic/io.h
-+++ b/include/asm-generic/io.h
-@@ -540,6 +540,7 @@ static inline void writesq(volatile void __iomem *addr, const void *buffer,
- 
- #if !defined(inb) && !defined(_inb)
- #define _inb _inb
-+#ifdef CONFIG_HAS_IOPORT
- static inline u8 _inb(unsigned long addr)
- {
- 	u8 val;
-@@ -549,10 +550,15 @@ static inline u8 _inb(unsigned long addr)
- 	__io_par(val);
- 	return val;
- }
-+#else
-+u8 _inb(unsigned long addr)
-+	__compiletime_error("inb()) requires CONFIG_HAS_IOPORT");
-+#endif
- #endif
- 
- #if !defined(inw) && !defined(_inw)
- #define _inw _inw
-+#ifdef CONFIG_HAS_IOPORT
- static inline u16 _inw(unsigned long addr)
- {
- 	u16 val;
-@@ -562,10 +568,15 @@ static inline u16 _inw(unsigned long addr)
- 	__io_par(val);
- 	return val;
- }
-+#else
-+u16 _inw(unsigned long addr)
-+	__compiletime_error("inw() requires CONFIG_HAS_IOPORT");
-+#endif
- #endif
- 
- #if !defined(inl) && !defined(_inl)
- #define _inl _inl
-+#ifdef CONFIG_HAS_IOPORT
- static inline u32 _inl(unsigned long addr)
- {
- 	u32 val;
-@@ -575,36 +586,55 @@ static inline u32 _inl(unsigned long addr)
- 	__io_par(val);
- 	return val;
- }
-+#else
-+u32 _inl(unsigned long addr)
-+	__compiletime_error("inl() requires CONFIG_HAS_IOPORT");
-+#endif
- #endif
- 
- #if !defined(outb) && !defined(_outb)
- #define _outb _outb
-+#ifdef CONFIG_HAS_IOPORT
- static inline void _outb(u8 value, unsigned long addr)
- {
- 	__io_pbw();
- 	__raw_writeb(value, PCI_IOBASE + addr);
- 	__io_paw();
- }
-+#else
-+void _outb(u8 value, unsigned long addr)
-+	__compiletime_error("outb() requires CONFIG_HAS_IOPORT");
-+#endif
- #endif
- 
- #if !defined(outw) && !defined(_outw)
- #define _outw _outw
-+#ifdef CONFIG_HAS_IOPORT
- static inline void _outw(u16 value, unsigned long addr)
- {
- 	__io_pbw();
- 	__raw_writew((u16 __force)cpu_to_le16(value), PCI_IOBASE + addr);
- 	__io_paw();
- }
-+#else
-+void _outw(u16 value, unsigned long addr)
-+	__compiletime_error("outw() requires CONFIG_HAS_IOPORT");
-+#endif
- #endif
- 
- #if !defined(outl) && !defined(_outl)
- #define _outl _outl
-+#ifdef CONFIG_HAS_IOPORT
- static inline void _outl(u32 value, unsigned long addr)
- {
- 	__io_pbw();
- 	__raw_writel((u32 __force)cpu_to_le32(value), PCI_IOBASE + addr);
- 	__io_paw();
- }
-+#else
-+void _outl(u32 value, unsigned long addr)
-+	__compiletime_error("outl() requires CONFIG_HAS_IOPORT");
-+#endif
- #endif
- 
- #include <linux/logic_pio.h>
-@@ -688,53 +718,83 @@ static inline void outl_p(u32 value, unsigned long addr)
- 
- #ifndef insb
- #define insb insb
-+#ifdef CONFIG_HAS_IOPORT
- static inline void insb(unsigned long addr, void *buffer, unsigned int count)
- {
- 	readsb(PCI_IOBASE + addr, buffer, count);
- }
-+#else
-+void insb(unsigned long addr, void *buffer, unsigned int count)
-+	__compiletime_error("insb() requires HAS_IOPORT");
-+#endif
- #endif
- 
- #ifndef insw
- #define insw insw
-+#ifdef CONFIG_HAS_IOPORT
- static inline void insw(unsigned long addr, void *buffer, unsigned int count)
- {
- 	readsw(PCI_IOBASE + addr, buffer, count);
- }
-+#else
-+void insw(unsigned long addr, void *buffer, unsigned int count)
-+	__compiletime_error("insw() requires HAS_IOPORT");
-+#endif
- #endif
- 
- #ifndef insl
- #define insl insl
-+#ifdef CONFIG_HAS_IOPORT
- static inline void insl(unsigned long addr, void *buffer, unsigned int count)
- {
- 	readsl(PCI_IOBASE + addr, buffer, count);
- }
-+#else
-+void insl(unsigned long addr, void *buffer, unsigned int count)
-+	__compiletime_error("insl() requires HAS_IOPORT");
-+#endif
- #endif
- 
- #ifndef outsb
- #define outsb outsb
-+#ifdef CONFIG_HAS_IOPORT
- static inline void outsb(unsigned long addr, const void *buffer,
- 			 unsigned int count)
- {
- 	writesb(PCI_IOBASE + addr, buffer, count);
- }
-+#else
-+void outsb(unsigned long addr, const void *buffer, unsigned int count)
-+	__compiletime_error("outsb() requires HAS_IOPORT");
-+#endif
- #endif
- 
- #ifndef outsw
- #define outsw outsw
-+#ifdef CONFIG_HAS_IOPORT
- static inline void outsw(unsigned long addr, const void *buffer,
- 			 unsigned int count)
- {
- 	writesw(PCI_IOBASE + addr, buffer, count);
- }
-+#else
-+void outsw(unsigned long addr, const void *buffer, unsigned int count)
-+	__compiletime_error("outsw() requires HAS_IOPORT");
-+#endif
- #endif
- 
- #ifndef outsl
- #define outsl outsl
-+#ifdef CONFIG_HAS_IOPORT
- static inline void outsl(unsigned long addr, const void *buffer,
- 			 unsigned int count)
- {
- 	writesl(PCI_IOBASE + addr, buffer, count);
- }
-+#else
-+void outsl(unsigned long addr, const void *buffer, unsigned int count)
-+	__compiletime_error("outsl() requires HAS_IOPORT");
-+#endif
- #endif
- 
- #ifndef insb_p
+>
+> >
+> > The cc list was getting way out of hand, so I had
+> > to trim it a bit. Hopefully I didn't chop off too
+> > many names...
 
--- 
-2.45.2
 
+
+--=20
+With best wishes
+Dmitry
