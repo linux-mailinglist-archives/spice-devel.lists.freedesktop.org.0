@@ -2,81 +2,149 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DF659AFF34
-	for <lists+spice-devel@lfdr.de>; Fri, 25 Oct 2024 11:59:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6298A9B0491
+	for <lists+spice-devel@lfdr.de>; Fri, 25 Oct 2024 15:52:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9266410EA84;
-	Fri, 25 Oct 2024 09:59:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 24A8710EAEE;
+	Fri, 25 Oct 2024 13:52:55 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="SHGfTg6o";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="I4DKF/WH";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="OcrFsjgS";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="I4DKF/WH";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="OcrFsjgS";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1CDFA10EA60;
- Fri, 25 Oct 2024 09:59:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1729850362; x=1761386362;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version:content-transfer-encoding;
- bh=A0tbIubMUPu1KmNaFfOkWkedtaj9BPGHl5YSsFJzW4A=;
- b=SHGfTg6o08APtG9u5QA5fjsCnGoXzwXtIrXWxZRA6uegLR05yUeISCRG
- zgo9EqNuw47rtHHFRhSQKAnwYvsZWp6uXcwjqluuE7YvRx4VqOshoCgaT
- i411d4LAmr/CE4G7fwaN3nPC64YL/K/jGEKmAN/N8MknVz22Oi9UEMIuL
- dVeyp59a/cOsLYAl4xhf/GS2Qjq8X/AjH96S8W7aAg5mLpJ9SZGjv9cau
- LhiSYACIfHoyaj7jga4Kdhq9rcsGzefMnkjb0xVpAyH0O1xJc6fdM9G9B
- jV/7od4cnYWODu6uhPG1yCg+EkZ7rspfCKUhGpSxrvf1JQwGG0W/3hIPQ Q==;
-X-CSE-ConnectionGUID: UUzp3MEsRNWFZFYJTjyyvQ==
-X-CSE-MsgGUID: 2o5aEHpaSnOGYIpz2ip1YA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11235"; a="17145363"
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="17145363"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
- by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2024 02:59:21 -0700
-X-CSE-ConnectionGUID: J/nzwOZxRuCCiipRaURsrA==
-X-CSE-MsgGUID: 0oumuCcWRtKOGTxyvWihhg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,231,1725346800"; d="scan'208";a="80980898"
-Received: from zzombora-mobl1.ti.intel.com (HELO localhost) ([10.245.246.193])
- by fmviesa008-auth.fm.intel.com with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Oct 2024 02:59:09 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- dri-devel@lists.freedesktop.org
-Cc: intel-gfx@lists.freedesktop.org, Abhinav Kumar
- <quic_abhinavk@quicinc.com>, Alain Volmat <alain.volmat@foss.st.com>, Alex
- Deucher <alexander.deucher@amd.com>, Alexey Brodkin
- <abrodkin@synopsys.com>, amd-gfx@lists.freedesktop.org, Andy Yan
- <andy.yan@rock-chips.com>, Christian =?utf-8?Q?K=C3=B6nig?=
- <christian.koenig@amd.com>,
- Danilo Krummrich <dakr@redhat.com>, Dmitry Baryshkov
- <dmitry.baryshkov@linaro.org>, freedreno@lists.freedesktop.org, Hans de
- Goede <hdegoede@redhat.com>, Heiko =?utf-8?Q?St=C3=BCbner?=
- <heiko@sntech.de>, Inki Dae
- <inki.dae@samsung.com>, Jyri Sarha <jyri.sarha@iki.fi>, Karol Herbst
- <kherbst@redhat.com>, linux-amlogic@lists.infradead.org,
- linux-arm-msm@vger.kernel.org, linux-arm-msm@vger.kernel.orga,
- linux-mediatek@lists.infradead.org, linux-renesas-soc@vger.kernel.org,
- Liviu Dudau <liviu.dudau@arm.com>, Lyude Paul <lyude@redhat.com>,
- =?utf-8?Q?Ma=C3=ADra?= Canal <mairacanal@riseup.net>, Marijn Suijten
- <marijn.suijten@somainline.org>, nouveau@lists.freedesktop.org,
- nouveau@lists.freedesktop.orga, Patrik Jakobsson
- <patrik.r.jakobsson@gmail.com>, Rob Clark <robdclark@gmail.com>, Russell
- King <linux@armlinux.org.uk>, Sandy Huang <hjc@rock-chips.com>, Sean Paul
- <sean@poorly.run>, spice-devel@lists.freedesktop.org,
- virtualization@lists.linux.dev, xen-devel@lists.xenproject.org, Xinhui Pan
- <Xinhui.Pan@amd.com>, Zack Rusin <zack.rusin@broadcom.com>
-Subject: Re: [PATCH 0/2] drm: Treewide plane/crtc legacy state sweeping
-In-Reply-To: <ZxtMz8JP3DbzpMew@intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20241002182200.15363-1-ville.syrjala@linux.intel.com>
- <ZxtMz8JP3DbzpMew@intel.com>
-Date: Fri, 25 Oct 2024 12:59:05 +0300
-Message-ID: <8734kkqz9y.fsf@intel.com>
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E1BCF10EAED;
+ Fri, 25 Oct 2024 13:52:53 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 35B3C1FE29;
+ Fri, 25 Oct 2024 13:52:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1729864372; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
+ b=I4DKF/WHSXYyxn9maUAO0lJ/ctGVP/AYnNxz0kVTglnATwZNEEoSOqTCtbBsc5AaFrsPf9
+ VKd6sqG1NM2MeA6E+cN/uWyVww8IMrVIy3nT11nM9Dsa1XBwO4/K0hxFfVjvZDSMCmsait
+ pjmtbTrb+J2Qu5FI9v42Wme88r7a9U0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1729864372;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
+ b=OcrFsjgS7DaKcptOnqNC2t0mP+LyutfOa+nfevufxH7FlLbS0QTriUFrEo8D8xNd4ruF6r
+ o9Fvj97SA+cuslBA==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1729864372; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
+ b=I4DKF/WHSXYyxn9maUAO0lJ/ctGVP/AYnNxz0kVTglnATwZNEEoSOqTCtbBsc5AaFrsPf9
+ VKd6sqG1NM2MeA6E+cN/uWyVww8IMrVIy3nT11nM9Dsa1XBwO4/K0hxFfVjvZDSMCmsait
+ pjmtbTrb+J2Qu5FI9v42Wme88r7a9U0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1729864372;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=hVp2BM2ZsW3qQ4gbDue0mRie0l4ERoGo2ToJZjkRdfc=;
+ b=OcrFsjgS7DaKcptOnqNC2t0mP+LyutfOa+nfevufxH7FlLbS0QTriUFrEo8D8xNd4ruF6r
+ o9Fvj97SA+cuslBA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 76601132D3;
+ Fri, 25 Oct 2024 13:52:51 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id GXqhG7OiG2eqTwAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Fri, 25 Oct 2024 13:52:51 +0000
+Message-ID: <50017007-d2c3-4964-9cc4-ff26961e3809@suse.de>
+Date: Fri, 25 Oct 2024 15:52:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 3/5] drm: handle HAS_IOPORT dependencies
+To: Niklas Schnelle <schnelle@linux.ibm.com>, Brian Cain <bcain@quicinc.com>, 
+ Marcel Holtmann <marcel@holtmann.org>,
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Dave Airlie <airlied@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Lucas De Marchi
+ <lucas.demarchi@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+ "Maciej W. Rozycki" <macro@orcam.me.uk>, Heiko Carstens <hca@linux.ibm.com>
+Cc: linux-kernel@vger.kernel.org, linux-hexagon@vger.kernel.org,
+ linux-bluetooth@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, linux-serial@vger.kernel.org,
+ linux-arch@vger.kernel.org, Arnd Bergmann <arnd@kernel.org>
+References: <20241024-b4-has_ioport-v9-0-6a6668593f71@linux.ibm.com>
+ <20241024-b4-has_ioport-v9-3-6a6668593f71@linux.ibm.com>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20241024-b4-has_ioport-v9-3-6a6668593f71@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Score: -2.80
+X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]; MIME_TRACE(0.00)[0:+];
+ TAGGED_RCPT(0.00)[]; TO_DN_SOME(0.00)[];
+ RCPT_COUNT_TWELVE(0.00)[29];
+ FREEMAIL_TO(0.00)[linux.ibm.com,quicinc.com,holtmann.org,gmail.com,linux.intel.com,kernel.org,ffwll.ch,redhat.com,intel.com,linuxfoundation.org,arndb.de,orcam.me.uk];
+ MID_RHS_MATCH_FROM(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ R_RATELIMIT(0.00)[to_ip_from(RLykjg6e7ifkwtw7jmpw7b9yio)];
+ RCVD_TLS_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:mid,
+ suse.de:email, intel.com:email]
+X-Spam-Flag: NO
+X-Spam-Level: 
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,188 +159,173 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Fri, 25 Oct 2024, Ville Syrj=C3=A4l=C3=A4 <ville.syrjala@linux.intel.com=
-> wrote:
-> On Wed, Oct 02, 2024 at 09:21:58PM +0300, Ville Syrjala wrote:
->> From: Ville Syrj=C3=A4l=C3=A4 <ville.syrjala@linux.intel.com>
->>=20
->> An attempt to hide the drm_plane/crtc legacy state better.
->>=20
->> This also highlights the fact that a lot of supposedly
->> atomic drivers are poking around in the legacy crtc state,
->> which is rather questionable. For planes we did force the
->> legacy state to NULL already to force drivers to behave.
->> But even then it seems capable of confusing people with
->> its high profile location directly under drm_plane.
->>=20
->> This might end up as some kind of conflict
->> galore, but the alternative would involve trying
->> to wean the atomic drivers off one by one,
->> which would probably take forever. At least with
->> this the issue becomes visible and shouldn't be
->> forgotten as easily.
+
+
+Am 24.10.24 um 19:54 schrieb Niklas Schnelle:
+> In a future patch HAS_IOPORT=n will disable inb()/outb() and friends at
+> compile time. We thus need to add HAS_IOPORT as dependency for those
+> drivers using them. In the bochs driver there is optional MMIO support
+> detected at runtime, warn if this isn't taken when HAS_IOPORT is not
+> defined.
 >
-> Ping, anyone have thoughts on this? I'd like to get something
-> like this in at some point to make the legacy state (ab)users
-> easily visible...
-
-On the approach,
-
-Acked-by: Jani Nikula <jani.nikula@intel.com>
-
-with or without converting legacy into a pointer, up to you.
-
+> There is also a direct and hard coded use in cirrus.c which according to
+> the comment is only necessary during resume.  Let's just skip this as
+> for example s390 which doesn't have I/O port support also doesen't
+> support suspend/resume.
 >
->>=20
->> The cc list was getting way out of hand, so I had
->> to trim it a bit. Hopefully I didn't chop off too
->> many names...
->>=20
->> Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
->> Cc: Alain Volmat <alain.volmat@foss.st.com>
->> Cc: Alex Deucher <alexander.deucher@amd.com>
->> Cc: Alexey Brodkin <abrodkin@synopsys.com>
->> Cc: amd-gfx@lists.freedesktop.org
->> Cc: Andy Yan <andy.yan@rock-chips.com>
->> Cc: "Christian K=C3=B6nig" <christian.koenig@amd.com>
->> Cc: Danilo Krummrich <dakr@redhat.com>
->> Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
->> Cc: freedreno@lists.freedesktop.org
->> Cc: Hans de Goede <hdegoede@redhat.com>
->> Cc: "Heiko St=C3=BCbner" <heiko@sntech.de>
->> Cc: Inki Dae <inki.dae@samsung.com>
->> Cc: Jyri Sarha <jyri.sarha@iki.fi>
->> Cc: Karol Herbst <kherbst@redhat.com>
->> Cc: linux-amlogic@lists.infradead.org
->> Cc: linux-arm-msm@vger.kernel.org
->> Cc: linux-arm-msm@vger.kernel.orga
->> Cc: linux-mediatek@lists.infradead.org
->> Cc: linux-renesas-soc@vger.kernel.org
->> Cc: Liviu Dudau <liviu.dudau@arm.com>
->> Cc: Lyude Paul <lyude@redhat.com>
->> Cc: "Ma=C3=ADra Canal" <mairacanal@riseup.net>
->> Cc: Marijn Suijten <marijn.suijten@somainline.org>
->> Cc: nouveau@lists.freedesktop.org
->> Cc: nouveau@lists.freedesktop.orga
->> Cc: Patrik Jakobsson <patrik.r.jakobsson@gmail.com>
->> Cc: Rob Clark <robdclark@gmail.com>
->> Cc: Russell King <linux@armlinux.org.uk>
->> Cc: Sandy Huang <hjc@rock-chips.com>
->> Cc: Sean Paul <sean@poorly.run>
->> Cc: spice-devel@lists.freedesktop.org
->> Cc: virtualization@lists.linux.dev
->> Cc: xen-devel@lists.xenproject.org
->> Cc: Xinhui Pan <Xinhui.Pan@amd.com>
->> Cc: Zack Rusin <zack.rusin@broadcom.com>
->>=20
->> Ville Syrj=C3=A4l=C3=A4 (2):
->>   drm: Move plane->{fb,old_fb,crtc} to legacy sub-structure
->>   drm: Move crtc->{x,y,mode,enabled} to legacy sub-structure
->>=20
->>  .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    |  7 +-
->>  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   | 20 ++---
->>  drivers/gpu/drm/amd/amdgpu/amdgpu_pll.c       |  2 +-
->>  drivers/gpu/drm/amd/amdgpu/amdgpu_vkms.c      |  2 +-
->>  drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        | 35 ++++----
->>  drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        | 35 ++++----
->>  drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         | 37 ++++-----
->>  drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         | 35 ++++----
->>  .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 14 ++--
->>  .../amd/display/amdgpu_dm/amdgpu_dm_crtc.c    |  2 +-
->>  drivers/gpu/drm/amd/pm/amdgpu_dpm_internal.c  |  4 +-
->>  drivers/gpu/drm/arm/hdlcd_drv.c               |  2 +-
->>  drivers/gpu/drm/arm/malidp_hw.c               |  2 +-
->>  drivers/gpu/drm/armada/armada_crtc.c          | 12 ++-
->>  drivers/gpu/drm/ast/ast_dp.c                  |  8 +-
->>  drivers/gpu/drm/drm_atomic.c                  |  6 +-
->>  drivers/gpu/drm/drm_atomic_helper.c           |  8 +-
->>  drivers/gpu/drm/drm_client_modeset.c          | 10 +--
->>  drivers/gpu/drm/drm_crtc.c                    | 31 +++----
->>  drivers/gpu/drm/drm_crtc_helper.c             | 80 ++++++++++---------
->>  drivers/gpu/drm/drm_fb_helper.c               | 12 +--
->>  drivers/gpu/drm/drm_framebuffer.c             |  4 +-
->>  drivers/gpu/drm/drm_plane.c                   | 69 ++++++++--------
->>  drivers/gpu/drm/drm_plane_helper.c            |  6 +-
->>  drivers/gpu/drm/drm_vblank.c                  |  2 +-
->>  drivers/gpu/drm/exynos/exynos5433_drm_decon.c |  4 +-
->>  drivers/gpu/drm/gma500/cdv_intel_display.c    |  2 +-
->>  drivers/gpu/drm/gma500/cdv_intel_dp.c         |  6 +-
->>  drivers/gpu/drm/gma500/cdv_intel_hdmi.c       |  3 +-
->>  drivers/gpu/drm/gma500/cdv_intel_lvds.c       |  6 +-
->>  drivers/gpu/drm/gma500/gma_display.c          | 22 ++---
->>  drivers/gpu/drm/gma500/oaktrail_crtc.c        |  2 +-
->>  drivers/gpu/drm/gma500/psb_intel_display.c    |  2 +-
->>  drivers/gpu/drm/gma500/psb_intel_lvds.c       |  6 +-
->>  drivers/gpu/drm/gma500/psb_intel_sdvo.c       |  8 +-
->>  drivers/gpu/drm/i2c/ch7006_drv.c              |  7 +-
->>  drivers/gpu/drm/i2c/sil164_drv.c              |  2 +-
->>  .../drm/i915/display/intel_modeset_setup.c    |  4 +-
->>  drivers/gpu/drm/imx/lcdc/imx-lcdc.c           | 31 ++++---
->>  drivers/gpu/drm/mediatek/mtk_crtc.c           |  6 +-
->>  drivers/gpu/drm/meson/meson_overlay.c         |  2 +-
->>  drivers/gpu/drm/meson/meson_plane.c           |  8 +-
->>  drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c | 18 +++--
->>  drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c       |  6 +-
->>  drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c     | 16 ++--
->>  drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c     |  4 +-
->>  drivers/gpu/drm/nouveau/dispnv04/crtc.c       | 25 +++---
->>  drivers/gpu/drm/nouveau/dispnv04/cursor.c     |  2 +-
->>  drivers/gpu/drm/nouveau/dispnv04/dfp.c        |  2 +-
->>  drivers/gpu/drm/nouveau/dispnv04/disp.c       |  4 +-
->>  .../gpu/drm/nouveau/dispnv04/tvmodesnv17.c    |  4 +-
->>  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c     |  7 +-
->>  drivers/gpu/drm/nouveau/nouveau_connector.c   |  6 +-
->>  drivers/gpu/drm/qxl/qxl_display.c             |  6 +-
->>  drivers/gpu/drm/radeon/atombios_crtc.c        | 28 +++----
->>  drivers/gpu/drm/radeon/cik.c                  | 12 +--
->>  drivers/gpu/drm/radeon/evergreen.c            | 16 ++--
->>  drivers/gpu/drm/radeon/r100.c                 | 16 ++--
->>  drivers/gpu/drm/radeon/r600_cs.c              |  2 +-
->>  drivers/gpu/drm/radeon/r600_dpm.c             |  4 +-
->>  drivers/gpu/drm/radeon/radeon_connectors.c    |  7 +-
->>  drivers/gpu/drm/radeon/radeon_cursor.c        | 29 +++----
->>  drivers/gpu/drm/radeon/radeon_device.c        |  2 +-
->>  drivers/gpu/drm/radeon/radeon_display.c       | 26 +++---
->>  drivers/gpu/drm/radeon/radeon_drv.c           |  2 +-
->>  drivers/gpu/drm/radeon/radeon_legacy_crtc.c   | 16 ++--
->>  .../gpu/drm/radeon/radeon_legacy_encoders.c   |  2 +-
->>  drivers/gpu/drm/radeon/radeon_pm.c            |  2 +-
->>  drivers/gpu/drm/radeon/rs600.c                | 10 +--
->>  drivers/gpu/drm/radeon/rs690.c                | 22 ++---
->>  drivers/gpu/drm/radeon/rs780_dpm.c            |  6 +-
->>  drivers/gpu/drm/radeon/rv515.c                | 30 +++----
->>  drivers/gpu/drm/radeon/rv770.c                |  2 +-
->>  drivers/gpu/drm/radeon/si.c                   | 14 ++--
->>  .../gpu/drm/renesas/rcar-du/rcar_du_crtc.c    |  2 +-
->>  .../gpu/drm/renesas/shmobile/shmob_drm_crtc.c |  2 +-
->>  drivers/gpu/drm/rockchip/rockchip_drm_vop.c   |  6 +-
->>  drivers/gpu/drm/sti/sti_crtc.c                |  4 +-
->>  drivers/gpu/drm/sti/sti_cursor.c              |  2 +-
->>  drivers/gpu/drm/sti/sti_gdp.c                 |  2 +-
->>  drivers/gpu/drm/sti/sti_hqvdp.c               |  2 +-
->>  drivers/gpu/drm/sti/sti_tvout.c               |  6 +-
->>  drivers/gpu/drm/sti/sti_vid.c                 |  2 +-
->>  drivers/gpu/drm/tilcdc/tilcdc_crtc.c          | 10 +--
->>  drivers/gpu/drm/tiny/arcpgu.c                 |  2 +-
->>  drivers/gpu/drm/vboxvideo/vbox_mode.c         |  2 +-
->>  drivers/gpu/drm/vc4/vc4_dpi.c                 |  2 +-
->>  drivers/gpu/drm/vc4/vc4_plane.c               |  4 +-
->>  drivers/gpu/drm/virtio/virtgpu_display.c      |  4 +-
->>  drivers/gpu/drm/vkms/vkms_composer.c          |  4 +-
->>  drivers/gpu/drm/vkms/vkms_crtc.c              |  2 +-
->>  drivers/gpu/drm/vkms/vkms_writeback.c         |  4 +-
->>  drivers/gpu/drm/vmwgfx/vmwgfx_kms.c           |  8 +-
->>  drivers/gpu/drm/vmwgfx/vmwgfx_ldu.c           | 18 +++--
->>  drivers/gpu/drm/vmwgfx/vmwgfx_scrn.c          |  9 ++-
->>  drivers/gpu/drm/vmwgfx/vmwgfx_stdu.c          |  4 +-
->>  drivers/gpu/drm/vmwgfx/vmwgfx_vkms.c          |  2 +-
->>  drivers/gpu/drm/xen/xen_drm_front_kms.c       |  2 +-
->>  include/drm/drm_crtc.h                        | 75 ++++++++---------
->>  include/drm/drm_plane.h                       | 52 ++++++------
->>  100 files changed, 599 insertions(+), 547 deletions(-)
->>=20
->> --=20
->> 2.45.2
+> Co-developed-by: Arnd Bergmann <arnd@kernel.org>
+> Signed-off-by: Arnd Bergmann <arnd@kernel.org>
+> Acked-by: Lucas De Marchi <lucas.demarchi@intel.com> # xe
+> Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
 
---=20
-Jani Nikula, Intel
+Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+
+> ---
+>   drivers/gpu/drm/gma500/Kconfig |  2 +-
+>   drivers/gpu/drm/qxl/Kconfig    |  2 +-
+>   drivers/gpu/drm/tiny/bochs.c   | 19 ++++++++++++++-----
+>   drivers/gpu/drm/tiny/cirrus.c  |  2 ++
+>   drivers/gpu/drm/xe/Kconfig     |  2 +-
+>   5 files changed, 19 insertions(+), 8 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/gma500/Kconfig b/drivers/gpu/drm/gma500/Kconfig
+> index efb4a2dd2f80885cb59c925d09401002278d7d61..23b7c14de5e29238ece939d5822d8a9ffc4675cc 100644
+> --- a/drivers/gpu/drm/gma500/Kconfig
+> +++ b/drivers/gpu/drm/gma500/Kconfig
+> @@ -1,7 +1,7 @@
+>   # SPDX-License-Identifier: GPL-2.0-only
+>   config DRM_GMA500
+>   	tristate "Intel GMA500/600/3600/3650 KMS Framebuffer"
+> -	depends on DRM && PCI && X86 && MMU
+> +	depends on DRM && PCI && X86 && MMU && HAS_IOPORT
+>   	select DRM_KMS_HELPER
+>   	select FB_IOMEM_HELPERS if DRM_FBDEV_EMULATION
+>   	select I2C
+> diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
+> index ca3f51c2a8fe1a383f8a2479f04b5c0b3fb14e44..17d6927e5e23402786117fd0f99186978956c1c2 100644
+> --- a/drivers/gpu/drm/qxl/Kconfig
+> +++ b/drivers/gpu/drm/qxl/Kconfig
+> @@ -1,7 +1,7 @@
+>   # SPDX-License-Identifier: GPL-2.0-only
+>   config DRM_QXL
+>   	tristate "QXL virtual GPU"
+> -	depends on DRM && PCI && MMU
+> +	depends on DRM && PCI && MMU && HAS_IOPORT
+>   	select DRM_KMS_HELPER
+>   	select DRM_TTM
+>   	select DRM_TTM_HELPER
+> diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
+> index 31fc5d839e106ea4d5c8fe42d1bfc3c70291e3fb..e738bb85831667f55c436e21e761435def113b9a 100644
+> --- a/drivers/gpu/drm/tiny/bochs.c
+> +++ b/drivers/gpu/drm/tiny/bochs.c
+> @@ -1,5 +1,6 @@
+>   // SPDX-License-Identifier: GPL-2.0-or-later
+>   
+> +#include <linux/bug.h>
+>   #include <linux/module.h>
+>   #include <linux/pci.h>
+>   
+> @@ -95,12 +96,17 @@ struct bochs_device {
+>   
+>   /* ---------------------------------------------------------------------- */
+>   
+> +static __always_inline bool bochs_uses_mmio(struct bochs_device *bochs)
+> +{
+> +	return !IS_ENABLED(CONFIG_HAS_IOPORT) || bochs->mmio;
+> +}
+> +
+>   static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
+>   {
+>   	if (WARN_ON(ioport < 0x3c0 || ioport > 0x3df))
+>   		return;
+>   
+> -	if (bochs->mmio) {
+> +	if (bochs_uses_mmio(bochs)) {
+>   		int offset = ioport - 0x3c0 + 0x400;
+>   
+>   		writeb(val, bochs->mmio + offset);
+> @@ -114,7 +120,7 @@ static u8 bochs_vga_readb(struct bochs_device *bochs, u16 ioport)
+>   	if (WARN_ON(ioport < 0x3c0 || ioport > 0x3df))
+>   		return 0xff;
+>   
+> -	if (bochs->mmio) {
+> +	if (bochs_uses_mmio(bochs)) {
+>   		int offset = ioport - 0x3c0 + 0x400;
+>   
+>   		return readb(bochs->mmio + offset);
+> @@ -127,7 +133,7 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
+>   {
+>   	u16 ret = 0;
+>   
+> -	if (bochs->mmio) {
+> +	if (bochs_uses_mmio(bochs)) {
+>   		int offset = 0x500 + (reg << 1);
+>   
+>   		ret = readw(bochs->mmio + offset);
+> @@ -140,7 +146,7 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
+>   
+>   static void bochs_dispi_write(struct bochs_device *bochs, u16 reg, u16 val)
+>   {
+> -	if (bochs->mmio) {
+> +	if (bochs_uses_mmio(bochs)) {
+>   		int offset = 0x500 + (reg << 1);
+>   
+>   		writew(val, bochs->mmio + offset);
+> @@ -228,7 +234,7 @@ static int bochs_hw_init(struct drm_device *dev)
+>   			DRM_ERROR("Cannot map mmio region\n");
+>   			return -ENOMEM;
+>   		}
+> -	} else {
+> +	} else if (IS_ENABLED(CONFIG_HAS_IOPORT)) {
+>   		ioaddr = VBE_DISPI_IOPORT_INDEX;
+>   		iosize = 2;
+>   		if (!request_region(ioaddr, iosize, "bochs-drm")) {
+> @@ -236,6 +242,9 @@ static int bochs_hw_init(struct drm_device *dev)
+>   			return -EBUSY;
+>   		}
+>   		bochs->ioports = 1;
+> +	} else {
+> +		dev_err(dev->dev, "I/O ports are not supported\n");
+> +		return -EIO;
+>   	}
+>   
+>   	id = bochs_dispi_read(bochs, VBE_DISPI_INDEX_ID);
+> diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
+> index 751326e3d9c374baf72115492aeefff2b73869f0..e31e1df029ab0272c4a1ff0ab3eb026ca679b560 100644
+> --- a/drivers/gpu/drm/tiny/cirrus.c
+> +++ b/drivers/gpu/drm/tiny/cirrus.c
+> @@ -509,8 +509,10 @@ static void cirrus_crtc_helper_atomic_enable(struct drm_crtc *crtc,
+>   
+>   	cirrus_mode_set(cirrus, &crtc_state->mode);
+>   
+> +#ifdef CONFIG_HAS_IOPORT
+>   	/* Unblank (needed on S3 resume, vgabios doesn't do it then) */
+>   	outb(VGA_AR_ENABLE_DISPLAY, VGA_ATT_W);
+> +#endif
+>   
+>   	drm_dev_exit(idx);
+>   }
+> diff --git a/drivers/gpu/drm/xe/Kconfig b/drivers/gpu/drm/xe/Kconfig
+> index 7bbe46a98ff1f449bc2af30686585a00e9e8af93..116f58774135fc3a9f37d6d72d41340f5c812297 100644
+> --- a/drivers/gpu/drm/xe/Kconfig
+> +++ b/drivers/gpu/drm/xe/Kconfig
+> @@ -49,7 +49,7 @@ config DRM_XE
+>   
+>   config DRM_XE_DISPLAY
+>   	bool "Enable display support"
+> -	depends on DRM_XE && DRM_XE=m
+> +	depends on DRM_XE && DRM_XE=m && HAS_IOPORT
+>   	select FB_IOMEM_HELPERS
+>   	select I2C
+>   	select I2C_ALGOBIT
+>
+
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
+
