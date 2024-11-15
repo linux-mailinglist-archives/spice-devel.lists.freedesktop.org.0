@@ -2,66 +2,66 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 059FE9D0298
-	for <lists+spice-devel@lfdr.de>; Sun, 17 Nov 2024 10:22:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87EEF9D0295
+	for <lists+spice-devel@lfdr.de>; Sun, 17 Nov 2024 10:22:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8EF1C10E227;
-	Sun, 17 Nov 2024 09:22:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9A07710E225;
+	Sun, 17 Nov 2024 09:22:25 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rs++cFfw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZOD9PFa1";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com
- [209.85.218.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6D4B110E8C7
- for <spice-devel@lists.freedesktop.org>; Fri, 15 Nov 2024 21:09:41 +0000 (UTC)
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-aa1e87afd31so283550266b.3
- for <spice-devel@lists.freedesktop.org>; Fri, 15 Nov 2024 13:09:41 -0800 (PST)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
+ [209.85.208.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA2D510E8D3
+ for <spice-devel@lists.freedesktop.org>; Fri, 15 Nov 2024 21:09:44 +0000 (UTC)
+Received: by mail-ed1-f43.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9c28c1ecbso3108609a12.0
+ for <spice-devel@lists.freedesktop.org>; Fri, 15 Nov 2024 13:09:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731704980; x=1732309780; darn=lists.freedesktop.org;
+ d=linaro.org; s=google; t=1731704983; x=1732309783; darn=lists.freedesktop.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=6uHMCkPLDPF5XZhqTYsDkYOtTqtnVR38dCpXI61ABZc=;
- b=rs++cFfwn3ghJGZOhdukmWkGS9mEcGQg02iQNW9PG8us+HjRjHJMyboB1Tsj48wYWY
- iHg7ID7DUGfPmdpZus7CZfvYJED9zPwEqpKf3jbuseosuRO/UCBthiI9JnZIm/4Gm98e
- RNRv+rwennsR9OsqLLW/z3DMPUsOZu1g60hwgwJ6YXDwO3uS/HBC7HfT8/gdRP1J8STs
- 0BwWk8CBJKGwHHvonkneS2fNmQbr26ojJhO2DVHpvXhQY1bD+SsQdQxhcVMjCvYAoef6
- KzQiU8FwCR4GmS2BcQhYkwLqXt2hpFjW95Kxhc2CZLnJO8oDUwncNnRqwtp6zcAyFUGr
- XHcA==
+ :reply-to; bh=FriEhyugYOxuqzJsZUFAkaGrF7e8rD4Q/ahhoiQ1cKE=;
+ b=ZOD9PFa1wZePhwZvb/rUHjNHc2rkikZBC2AudlnqcGfXyAkWBDNQhn5CcpW1w5e5ih
+ GLqMY6wbABHPbLT/cjAON8sDitHxX7B2nkApXzcC+fyu1m4gCSgoFeBGqBvJei3sDiyt
+ /XHEVrybtOYGx1fR7gsRn82H6a0J6xrS1YxMV91QBsmvRk2F+/W3kSbrDXeM08HQMXSM
+ hB7hC9Ldt9XEUugwTfA8FPCjNyDPERU/bBX5kxhwPHGbfpaLdqjtlFj/HwI6DyKXvbYF
+ 1gJeaV0fr0Jpj52bWhqnHBvezZarSE1P2462W2s2kkdrquLpD8eOZZqnOkFpFeEDfWIm
+ j8qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731704980; x=1732309780;
+ d=1e100.net; s=20230601; t=1731704983; x=1732309783;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6uHMCkPLDPF5XZhqTYsDkYOtTqtnVR38dCpXI61ABZc=;
- b=llUyflFnUE1VyfMq6iBI3n6nCXibxw7vDjS9YcMUkuEoSGI/PwC4YmdLoQ5af6ee3Z
- lTk3wT+LCJO4m2Ku9faQy87xwVEXoONJbIzo+lsjVdNj8mRf452K2vE6hzgAk+EPqHkh
- blQTqaOBpCYcWP37CAJlpxDguycYn4PWGQyvGoDo4uXIWO0A06nrrpfIMRQjWFvnIBWd
- 3uS9rODAr4tSh/1UMm+C4KmG2RWsEvAasN08bUIYlQIv8D5udc6NhYY4YmZLpU1RAME0
- LL6hPYycargV1/WQzjYsmXruUnOWD2cEdhmbIA0fP6bUQ4KaGBROFTDvW24L2+mSZWMn
- oEHg==
+ bh=FriEhyugYOxuqzJsZUFAkaGrF7e8rD4Q/ahhoiQ1cKE=;
+ b=xL6CN0GUXCUyM67ZsdG3Rlgrpd7J56DcxKxP5+pl/jLF8aB6jGCGKW98B4J51F70dv
+ s6gUIyxEvaptrR2hnu2+RYuCuuUwR1UZYtOiqIFWbomSVKsb3rpFx67SETUrSRuIYf7V
+ ebsVwt/pL9Ypo9ncW+P1UUIRKEbxEFM01vGXYDXJuZ2Fynqq4s8ugDSLAuhs2rNDjHJx
+ NVHjsBZP8QG/yUL/HIJm+CXkK8CfE+HNMt0YxkK8NO7PxEVOhhCgaZp0Be7RyW2xQNpu
+ xhDJsqGO3hvnwe+jzf8WghXpfYFlhGHNszwcFFe6KDosYaSrjLWR6LHgmgkDpb5h7jqa
+ ogCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDZW/fUvxI++v8vhk2khlfJNtGYa50W6jy/q2+tt/hW+FWfeT7hO6OyO/Z+uCHtOYBi4g0qhh/8igB8Q==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yzmq/vEFRDiYIunpnxM0z1QZoPB0jAvQrFF7uH8fJj7UXTLopnl
- 062sxcsTiajFxDeIfkR5RMbwbcfxnTBNYB/JzNjRLgpbPJ8P3VYcO1HMnO23TLY=
-X-Google-Smtp-Source: AGHT+IGxHaf9fcl9XH3Yy4K6OzfNJb+yIGPjb6McxskUEb9IogL1YLwYggNBzkIhim2sOLfufDW+VA==
-X-Received: by 2002:a17:906:ef08:b0:a99:3c32:b538 with SMTP id
- a640c23a62f3a-aa483528a6fmr360455366b.42.1731704979697; 
- Fri, 15 Nov 2024 13:09:39 -0800 (PST)
+ AJvYcCXmC1EA3MbRwdvPdBH8MyGDWLldY53NmXmXYnHISD0nkpEoGf3Q6Qxhfrb+TQGyGSWIrY+5FAgnnf4YYQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YySKrwALszbISCjX0uwhetrHdpBqTgNLtwPaiZvCc0UnigRpB2+
+ 6USGHbccuJFmiPcARFly5pF7VHQ/RQxktSTN2RCmGED2Pc9x0T0S/FEFQcxguGU=
+X-Google-Smtp-Source: AGHT+IGKIQ3xiZstYvdstCjBR8aVG15Cn1mMCwtoW2X8A1GwZn6dftD3n4aChlS1ng3pveIgM00eUw==
+X-Received: by 2002:a17:907:1c29:b0:a9e:df65:3a81 with SMTP id
+ a640c23a62f3a-aa483554f81mr289025866b.59.1731704983120; 
+ Fri, 15 Nov 2024 13:09:43 -0800 (PST)
 Received: from umbar.lan ([192.130.178.90]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df51648sm219626366b.62.2024.11.15.13.09.36
+ a640c23a62f3a-aa20df51648sm219626366b.62.2024.11.15.13.09.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 13:09:39 -0800 (PST)
+ Fri, 15 Nov 2024 13:09:42 -0800 (PST)
 From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Date: Fri, 15 Nov 2024 23:09:27 +0200
-Subject: [PATCH 2/5] drm/amdgpu: don't change mode in
- amdgpu_dm_connector_mode_valid()
+Date: Fri, 15 Nov 2024 23:09:28 +0200
+Subject: [PATCH 3/5] drm/sti: hda: pass const struct drm_display_mode* to
+ hda_get_mode_idx()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-drm-connector-mode-valid-const-v1-2-b1b523156f71@linaro.org>
+Message-Id: <20241115-drm-connector-mode-valid-const-v1-3-b1b523156f71@linaro.org>
 References: <20241115-drm-connector-mode-valid-const-v1-0-b1b523156f71@linaro.org>
 In-Reply-To: <20241115-drm-connector-mode-valid-const-v1-0-b1b523156f71@linaro.org>
 To: Jani Nikula <jani.nikula@linux.intel.com>, 
@@ -119,16 +119,16 @@ Cc: intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
  spice-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org, 
  linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1747;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2152;
  i=dmitry.baryshkov@linaro.org; h=from:subject:message-id;
- bh=8PHqNvYNhd077+yMZGdRVPVQtJwqcuP4Sa84pHByMBM=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBnN7iIkCEBV+I5bR4TS78RU0e2MvivZF+Q9IyXw
- EixhTur0JyJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCZze4iAAKCRCLPIo+Aiko
- 1RrDCACt21MZrMiNUMyxvhABQ0cPHvM9U/AgIbDDO7KsAj2vwEdyLShml6B1R559Jq8voETjEL9
- +078yb1nu6CV+kEVMsCLyWFw6UxeB+cYhzNHLNY0XaEijGUK9+P7bqa1vk5P0ciW3yNlxIBE4bG
- Pbi3ypuJJQOMFd2qx/gt5R3ZNRVS0e/OjOmoRuxABzzNp/GA862gAioxCBoETiqKvawiyBMRFOi
- 2ofeAeyKDJWD0PfvL2vatCO6Dh4kmfG8TJG7CkGnJtYNGqCMpr+WoR8TW/0eoaN+Rs47pTYqp9X
- 88uGqYaDw6lWG+6NGKvhI0epp0XANid8bh3EOloIMBAU71W4
+ bh=7MG/OwsNfTmDVn/mH57oaixvVZgNtOEeYuE42na1NvM=;
+ b=owGbwMvMwMXYbdNlx6SpcZXxtFoSQ7r5jg5+cbXA1P3G+YHK+zSPn1YT5s95n2QvGvrowOXVb
+ 9iWBV7uZDRmYWDkYpAVU2TxKWiZGrMpOezDjqn1MINYmUCmMHBxCsBEPKez/1PR33Ng1s+rcm9z
+ bL6yZ2fqWfuGFpQ4u9z4GVuXumtWcOlGnSMB2qnnxJ4eF9XP/DLX5dEcPpvbW02qHPJYP081f1S
+ R0eTwZ9vjD9tVdf4UhJ7l6Cvf6C+ga+Cju8q9ePq21HD1AwL+wQsaVH81cp99b2P6mWum9Kfbaa
+ rNLEVT5yw5VD2l0TxiqkzHJI/o35q9/R91hRms7Tr10mJvaIdz/n0c56Ym/2BNh5/uMmkV3zy9m
+ c8DtyodM1RMvpkaULjJfcJekUSGSQ3LZiws29kicizgVU7lO5XzB4+4h6u/SIyY4v5ghdNHLoP4
+ +aG20Tznxdbs6GmO6jLMj3/wyWJ70bFLMao7uGWcf3ACAA==
 X-Developer-Key: i=dmitry.baryshkov@linaro.org; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
 X-Mailman-Approved-At: Sun, 17 Nov 2024 09:22:25 +0000
@@ -146,47 +146,62 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Make amdgpu_dm_connector_mode_valid() duplicate the mode during the
-test rather than modifying the passed mode. This is a preparation to
+Make hda_get_mode_idx() accept const struct drm_display_mode pointer
+instead of just raw struct drm_display_mode.  This is a preparation to
 converting the mode_valid() callback of drm_connector to accept const
 struct drm_display_mode argument.
 
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 ---
- drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/sti/sti_hda.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-index 75d6b90104f8fe196df06383b20ee88196a700bf..d0ca905e91eafe6c53f3f2ebdf3f2ae9589d7f89 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-@@ -7381,6 +7381,7 @@ enum drm_mode_status amdgpu_dm_connector_mode_valid(struct drm_connector *connec
+diff --git a/drivers/gpu/drm/sti/sti_hda.c b/drivers/gpu/drm/sti/sti_hda.c
+index f18faad974aa2eda58c1e49537f8337db119d4b7..829dc4b034e8a79a908bda60485c2b94ef96890c 100644
+--- a/drivers/gpu/drm/sti/sti_hda.c
++++ b/drivers/gpu/drm/sti/sti_hda.c
+@@ -280,12 +280,12 @@ static void hda_write(struct sti_hda *hda, u32 val, int offset)
+  *
+  * Return true if mode is found
+  */
+-static bool hda_get_mode_idx(struct drm_display_mode mode, int *idx)
++static bool hda_get_mode_idx(const struct drm_display_mode *mode, int *idx)
  {
- 	int result = MODE_ERROR;
- 	struct dc_sink *dc_sink;
-+	struct drm_display_mode *test_mode;
- 	/* TODO: Unhardcode stream count */
- 	struct dc_stream_state *stream;
- 	struct amdgpu_dm_connector *aconnector = to_amdgpu_dm_connector(connector);
-@@ -7405,11 +7406,16 @@ enum drm_mode_status amdgpu_dm_connector_mode_valid(struct drm_connector *connec
- 		goto fail;
+ 	unsigned int i;
+ 
+ 	for (i = 0; i < ARRAY_SIZE(hda_supported_modes); i++)
+-		if (drm_mode_equal(&hda_supported_modes[i].mode, &mode)) {
++		if (drm_mode_equal(&hda_supported_modes[i].mode, mode)) {
+ 			*idx = i;
+ 			return true;
+ 		}
+@@ -443,7 +443,7 @@ static void sti_hda_pre_enable(struct drm_bridge *bridge)
+ 	if (clk_prepare_enable(hda->clk_hddac))
+ 		DRM_ERROR("Failed to prepare/enable hda_hddac clk\n");
+ 
+-	if (!hda_get_mode_idx(hda->mode, &mode_idx)) {
++	if (!hda_get_mode_idx(&hda->mode, &mode_idx)) {
+ 		DRM_ERROR("Undefined mode\n");
+ 		return;
  	}
+@@ -526,7 +526,7 @@ static void sti_hda_set_mode(struct drm_bridge *bridge,
  
--	drm_mode_set_crtcinfo(mode, 0);
-+	test_mode = drm_mode_duplicate(connector->dev, mode);
-+	if (!test_mode)
-+		goto fail;
-+
-+	drm_mode_set_crtcinfo(test_mode, 0);
+ 	drm_mode_copy(&hda->mode, mode);
  
--	stream = create_validate_stream_for_sink(aconnector, mode,
-+	stream = create_validate_stream_for_sink(aconnector, test_mode,
- 						 to_dm_connector_state(connector->state),
- 						 NULL);
-+	drm_mode_destroy(connector->dev, test_mode);
- 	if (stream) {
- 		dc_stream_release(stream);
- 		result = MODE_OK;
+-	if (!hda_get_mode_idx(hda->mode, &mode_idx)) {
++	if (!hda_get_mode_idx(&hda->mode, &mode_idx)) {
+ 		DRM_ERROR("Undefined mode\n");
+ 		return;
+ 	}
+@@ -614,7 +614,7 @@ sti_hda_connector_mode_valid(struct drm_connector *connector,
+ 		= to_sti_hda_connector(connector);
+ 	struct sti_hda *hda = hda_connector->hda;
+ 
+-	if (!hda_get_mode_idx(*mode, &idx)) {
++	if (!hda_get_mode_idx(mode, &idx)) {
+ 		return MODE_BAD;
+ 	} else {
+ 		result = clk_round_rate(hda->clk_pix, target);
 
 -- 
 2.39.5
