@@ -2,130 +2,132 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C6159D505C
-	for <lists+spice-devel@lfdr.de>; Thu, 21 Nov 2024 17:04:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D9F59D5066
+	for <lists+spice-devel@lfdr.de>; Thu, 21 Nov 2024 17:04:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF77C10E1F2;
-	Thu, 21 Nov 2024 16:04:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0307C10E9C4;
+	Thu, 21 Nov 2024 16:04:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WIcCP9E5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OS/CWLvG";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
- [209.85.167.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5880510E25B
- for <spice-devel@lists.freedesktop.org>; Mon, 18 Nov 2024 13:17:37 +0000 (UTC)
-Received: by mail-lf1-f43.google.com with SMTP id
- 2adb3069b0e04-53d9ff92b14so4307835e87.1
- for <spice-devel@lists.freedesktop.org>; Mon, 18 Nov 2024 05:17:37 -0800 (PST)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+ [209.85.128.46])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7E68D10E276;
+ Mon, 18 Nov 2024 19:25:59 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4316cce103dso34238925e9.3; 
+ Mon, 18 Nov 2024 11:25:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731935855; x=1732540655; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QEQ0UnPHgL8X1IzKLkITrqLzsus1TunLlu+R1N5lrJc=;
- b=WIcCP9E5yB4BhQneZ6ay16LOBRQ1t5RfEyuX9y4RAbRJ4TDwrZoK0Qw/u48eWAbSKQ
- 2I971De8G99/8QX8dBDGXou0lK9X0x0GmoQF+NLMRVWKCuolwga7WsAeeCheBYm6vKHv
- 6sTBMuTH6KszIqAgsE54G0WU1Wu9+KV+wDNxUX6rMHjsTygph4fCpERbhP7ItmGAo70a
- 3M3mGeuSBy17ZL3SK/jPLlFZJCNul3vA05jsPRFrY9baEtZoaVjqMXkqKeQlh7ercMAh
- wjl7+VuWfcOil3JzoEf6lVE/nRcCqKqNqt9lyOFKeMs/7IoU1Z8TqrwWmzrAe1mkvy8p
- +E1A==
+ d=gmail.com; s=20230601; t=1731957958; x=1732562758; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9pD0Ic6pq3x9QjpEUEJLIp8QMqGQFkQZMFW6bkNDgUM=;
+ b=OS/CWLvGwG9nTEACckM5bLUjgEntMcEqkm+tAVDaHsUtTileueOTWAlsZ3nNBshbD4
+ rRsAdVkNEQ6zG8xBEcsmkKfGbzE/TSCFxFDnc8auE/qGOBh2ID7PKmi4UK3whIqoNChQ
+ On9y96anttNLKikxx7ExpfKIAGsjyvy/MxlvdxmNT7Qo+rxJuidIx/FXOeuMXC+kRu7N
+ 8hp8z7yoq4Ot2OGMuWKa/QOPedlPs9mNIux+mom0n5xBXUOtb+BXqy9Tk4g93D5kpf+H
+ seeHUyfAD2chTjgikn4Csj2t6DGbxp/9H9YSAszER8H/wOmVhuqXTFt8ZL5DIVao7iFO
+ Hy0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731935855; x=1732540655;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QEQ0UnPHgL8X1IzKLkITrqLzsus1TunLlu+R1N5lrJc=;
- b=ri4UQm0B7XwBnGVw6ZxFreSaw4wGda2H/iaGZ7FFrNClj+mHj4ioqCfStV+a4S/8Lh
- yNmUrWDfdSlJG+fQFqJbRo0j97q99MD3S/WST0Gv3PFMq8eAayuiVd9M5kOrv8Ofdymd
- XITuZhUegNAxEj2d109MXBT5m2/W3sUYmi5dINXJCzMxblRGE3Z1pfxlVcmMHWAxQa2U
- 5xRsb+u2Uj1iXHIE+RJidFLUM9n0z36TIrhNXc4PgRjLukSKDoad6dcE6kCaLLD8Vyqc
- WeVzWsdvhhOBdQqxAY7ndfsNgXnnro9WX+7llPC7iXuOSVn6g1ni3szouaoaLMRMO8my
- pYbA==
+ d=1e100.net; s=20230601; t=1731957958; x=1732562758;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9pD0Ic6pq3x9QjpEUEJLIp8QMqGQFkQZMFW6bkNDgUM=;
+ b=arjmtdLLPHdn0TqVw0B3YV5lZc+v27eaqI6VrtbyCRbtakIkgNWvT1lw0xBRQE7Rsv
+ +vAVyx9hti1RjPIP6AUBChrCeNrLwM/sHxN+JAJ6Z0H12Jr1jmQjFSdwhfRY/JHVgecQ
+ I+7LQD1G/JqXAUWcnfSgNi+xpVJR26mgQLZnSGP+R88aZ/oKgNVTF9bfnN5cawPNp4aQ
+ ZLjONFTFIzXNK+hJ2FoFVU3wmrkJYWOAlCcKkvUTu+lEL/VEMJG9IE17ji6hjAWlYP8H
+ p3KDcFpKUnpKVWWi8Y3XY4oQBGOsPSkOQD4TCYj9HRl73nlyKiddjCZcsHs14Hj+cDb1
+ FHRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVFaeQHe+sj/TdX6BG28xRbVEoX2mHVUFQwhql6LNZGkUmPfClYEYmMCiYZYpIDoARCw3tMkh4scquojg==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxuVI/PZQ75FSCepZiPHcIzXqXWHAm1AAh7nsGnCGvsCohjMjKv
- 0K9wmRsZewFgc+yBib3TSRYezHxBUs59ZOMlhwAidI96EPM1eC4rUjV5uUic2hU=
-X-Google-Smtp-Source: AGHT+IGdzRCE2acExYOAR/Q1TPJs2CyZISyIMx5j4q3L/H9VxSQ26s/Ffm8H90fecvqfEbJsuGZxrw==
-X-Received: by 2002:a05:6512:3e07:b0:536:55a9:caf0 with SMTP id
- 2adb3069b0e04-53dab25f7c9mr4511337e87.0.1731935855301; 
- Mon, 18 Nov 2024 05:17:35 -0800 (PST)
-Received: from eriador.lumag.spb.ru
- (2001-14ba-a0c3-3a00--7a1.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::7a1])
+ AJvYcCUG3a7fAU0VDhLafgO3ky73oa3mt0jrbq7LaqFSBJHtK8wre7wEP61VI3/O6ktyicAsxKxk5Z0pdmMT@lists.freedesktop.org,
+ AJvYcCUd3uX88EX4Pnj+gE5GohLIdbGAnlXMj6mPlEvdX6YrqDyIIekFESdQkWzY8mOeGoF/uhWdkGJXdg==@lists.freedesktop.org,
+ AJvYcCVZ9DhdOFDsi2wdPRP6/4gJjCnn3jOBXxD94XPbj6wjHME3SCN29SKsfWVvMf3B4BQiFYWG6XqVgdU=@lists.freedesktop.org,
+ AJvYcCVeGGFCmZQRq3Ky1SG1Q+c5hJ9uWesrgM+7LOpTNW7YMj4RJHVAEcRKHkECVZdZAyOup0tSQxvI6X8b@lists.freedesktop.org,
+ AJvYcCWj5+q6q+QVCfQBBiT+Ak12RWlOGQ5UrEwg2zeHNfNsIU5GjPHQZ7k5pir+vK1n2u4pfGbgesDe@lists.freedesktop.org,
+ AJvYcCXBqArqguEIySDx68fFSsioP84xBMWzD+cCRwxFj6tmsN+cybeoOXe1u4dZ4JQH05gnyeBA3gVwKXbY2oM=@lists.freedesktop.org
+X-Gm-Message-State: AOJu0Yz/8ZMWmlyBbIRT4p90lYS6sXE1MkhveMljckpEZQ0d0w6HLf08
+ hIWa9RcT2oytQKczyf2bplMq3bfxboiL3+QgckKDNMQt8+Toz+3W
+X-Google-Smtp-Source: AGHT+IH+lcOQ8Rj8oM11CtrUWBNXK6zZA1wltL3ZBTXjDjqXIpvoTVhgtssacVRTup7RXCuDYGl00g==
+X-Received: by 2002:a05:600c:1d97:b0:426:59fe:ac27 with SMTP id
+ 5b1f17b1804b1-432df78f3demr130180715e9.26.1731957957571; 
+ Mon, 18 Nov 2024 11:25:57 -0800 (PST)
+Received: from ?IPV6:2001:861:3385:e20:6384:4cf:52c5:3194?
+ ([2001:861:3385:e20:6384:4cf:52c5:3194])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53da64f8cafsm1591434e87.54.2024.11.18.05.17.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Nov 2024 05:17:33 -0800 (PST)
-Date: Mon, 18 Nov 2024 15:17:31 +0200
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ 5b1f17b1804b1-432da298c81sm172023915e9.39.2024.11.18.11.25.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Nov 2024 11:25:57 -0800 (PST)
+Message-ID: <8a4f69dd-b393-4e84-be3c-58f8b33bd59d@gmail.com>
+Date: Mon, 18 Nov 2024 20:25:49 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] drm/sti: hda: pass const struct drm_display_mode* to
+ hda_get_mode_idx()
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
- Tvrtko Ursulin <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, 
- Danilo Krummrich <dakr@redhat.com>, Harry Wentland <harry.wentland@amd.com>, 
- Leo Li <sunpeng.li@amd.com>, Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Danilo Krummrich <dakr@redhat.com>, Harry Wentland <harry.wentland@amd.com>,
+ Leo Li <sunpeng.li@amd.com>, Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
  Alex Deucher <alexander.deucher@amd.com>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, 
- Xinhui Pan <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>, 
- Raphael Gallais-Pou <rgallaispou@gmail.com>, Liviu Dudau <liviu.dudau@arm.com>,
- Andrzej Hajda <andrzej.hajda@intel.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Robert Foss <rfoss@kernel.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Peter Senna Tschudin <peter.senna@gmail.com>, 
- Ian Ray <ian.ray@ge.com>, Martyn Welch <martyn.welch@collabora.co.uk>, 
- Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>, 
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Xinhui Pan <Xinhui.Pan@amd.com>, Alain Volmat <alain.volmat@foss.st.com>,
+ Liviu Dudau <liviu.dudau@arm.com>, Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Peter Senna Tschudin <peter.senna@gmail.com>, Ian Ray <ian.ray@ge.com>,
+ Martyn Welch <martyn.welch@collabora.co.uk>, Inki Dae
+ <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
  Kyungmin Park <kyungmin.park@samsung.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, 
- Alim Akhtar <alim.akhtar@samsung.com>, Stefan Agner <stefan@agner.ch>, 
+ Krzysztof Kozlowski <krzk@kernel.org>, Alim Akhtar
+ <alim.akhtar@samsung.com>, Stefan Agner <stefan@agner.ch>,
  Alison Wang <alison.wang@nxp.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
- Philipp Zabel <p.zabel@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>, 
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Shawn Guo <shawnguo@kernel.org>,
  Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>, Rob Clark <robdclark@gmail.com>, 
- Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Rob Clark <robdclark@gmail.com>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>,
  Marijn Suijten <marijn.suijten@somainline.org>,
- Dave Airlie <airlied@redhat.com>, 
- Gerd Hoffmann <kraxel@redhat.com>, Sandy Huang <hjc@rock-chips.com>, 
- Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- Andy Yan <andy.yan@rock-chips.com>, Chen-Yu Tsai <wens@csie.org>, 
- Samuel Holland <samuel@sholland.org>, Thierry Reding <thierry.reding@gmail.com>,
- Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>,
+ Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Sandy Huang <hjc@rock-chips.com>, =?UTF-8?Q?Heiko_St=C3=BCbner?=
+ <heiko@sntech.de>, Andy Yan <andy.yan@rock-chips.com>,
+ Chen-Yu Tsai <wens@csie.org>, Samuel Holland <samuel@sholland.org>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
  Dave Stevenson <dave.stevenson@raspberrypi.com>,
- =?utf-8?B?TWHDrXJh?= Canal <mcanal@igalia.com>, 
+ =?UTF-8?Q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>,
  Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>, 
- Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
- intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
+ <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
+Cc: intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- nouveau@lists.freedesktop.org, 
- amd-gfx@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
- linux-samsung-soc@vger.kernel.org, imx@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, 
- freedreno@lists.freedesktop.org, virtualization@lists.linux.dev, 
+ nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org,
+ imx@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, virtualization@lists.linux.dev,
  spice-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
  linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org
-Subject: Re: [PATCH 1/5] drm/encoder_slave: make mode_valid accept const
- struct drm_display_mode
-Message-ID: <4prwsjl7nhg4u4tgyqdmgt6am5ryewslosmbezkfmyxgh2oket@zglhp7zqhfwe>
 References: <20241115-drm-connector-mode-valid-const-v1-0-b1b523156f71@linaro.org>
- <20241115-drm-connector-mode-valid-const-v1-1-b1b523156f71@linaro.org>
- <20241117205426.GE12409@pendragon.ideasonboard.com>
- <CAA8EJpr=4AQVRKbtR2MaCQfguGW0a=3ay-ttew-mFR4f086Uyg@mail.gmail.com>
- <20241117233250.GK12409@pendragon.ideasonboard.com>
- <CAA8EJpq6Gkp4W=rGbpY6ASPgoDt=64HTFDk4_OZsTmbSUxhhGw@mail.gmail.com>
- <87plms51w4.fsf@intel.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87plms51w4.fsf@intel.com>
+ <20241115-drm-connector-mode-valid-const-v1-3-b1b523156f71@linaro.org>
+Content-Language: en-US, fr
+From: =?UTF-8?Q?Rapha=C3=ABl_Gallais-Pou?= <rgallaispou@gmail.com>
+In-Reply-To: <20241115-drm-connector-mode-valid-const-v1-3-b1b523156f71@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 21 Nov 2024 16:04:17 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -141,48 +143,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Mon, Nov 18, 2024 at 11:26:03AM +0200, Jani Nikula wrote:
-> On Mon, 18 Nov 2024, Dmitry Baryshkov <dmitry.baryshkov@linaro.org> wrote:
-> > On Mon, 18 Nov 2024 at 01:33, Laurent Pinchart
-> > <laurent.pinchart@ideasonboard.com> wrote:
-> >>
-> >> On Mon, Nov 18, 2024 at 01:22:12AM +0200, Dmitry Baryshkov wrote:
-> >> > On Sun, 17 Nov 2024 at 22:54, Laurent Pinchart wrote:
-> >> > > On Fri, Nov 15, 2024 at 11:09:26PM +0200, Dmitry Baryshkov wrote:
-> >> > > > The mode_valid() callbacks of drm_encoder, drm_crtc and drm_bridge
-> >> > > > accept const struct drm_display_mode argument. Change the mode_valid
-> >> > > > callback of drm_encoder_slave to also accept const argument.
-> >> > > >
-> >> > > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> >> > >
-> >> > > Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-> >> > >
-> >> > > On a side note, there's only two I2C slave encoder drivers left... I
-> >> > > wonder if we could so something about them. The ch7006 and sil164
-> >> > > drivers seem to be used by nouveau only, could they be moved to
-> >> > > drivers/gpu/drm/nouveau/ ? We would move the whole drm_encoder_slave
-> >> > > implementation there too, and leave it to die (or get taken out of limbo
-> >> > > and fixed) with dispnv04.
-> >> >
-> >> > Or it might be better to switch to drm_bridge. Currently we also have
-> >> > sil164 (sub)drivers in ast and i915 drivers. I don't know if there is
-> >> > any common code to share or not. If there is some, it might be nice to
-> >> > use common framework.
-> >>
-> >> That would require porting nouveau and i915 to drm_bridge. As much as
-> >> I'd love to see that happening, I won't hold my breath.
-> >
-> > Me neither. Probably moving those two and drm_encoder_slave to nouveau
-> > is really the best course for now.
+
+
+> Make hda_get_mode_idx() accept const struct drm_display_mode pointer
+> instead of just raw struct drm_display_mode.  This is a preparation to
+> converting the mode_valid() callback of drm_connector to accept const
+> struct drm_display_mode argument.
 > 
-> Granted, the dvo part of i915 is ugly, but it's also only relevant for
-> the oldest hardware i915 supports. Like 20 years old. Not sure there's
-> much return on investment in big refactoring, more risk that it breaks
-> without nobody noticing. Just let it be in i915?
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> ---
 
-Agreed
+Hi Dmitry,
+
+Thank you for the patch.
+
+Acked-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
 
 
--- 
-With best wishes
-Dmitry
+Regards,
+Raphaël
