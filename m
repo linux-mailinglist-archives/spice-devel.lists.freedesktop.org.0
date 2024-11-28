@@ -2,79 +2,65 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B4A99D95A2
-	for <lists+spice-devel@lfdr.de>; Tue, 26 Nov 2024 11:36:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95B219DB582
+	for <lists+spice-devel@lfdr.de>; Thu, 28 Nov 2024 11:24:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06ECD10E088;
-	Tue, 26 Nov 2024 10:36:20 +0000 (UTC)
-Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lzc7aCpA";
-	dkim-atps=neutral
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4CCE310E071;
+	Thu, 28 Nov 2024 10:24:02 +0000 (UTC)
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
- [209.85.219.67])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4617D10E0ED;
- Mon, 25 Nov 2024 17:25:43 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id
- 6a1803df08f44-6d40263adbaso36789066d6.0; 
- Mon, 25 Nov 2024 09:25:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732555542; x=1733160342; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UVDQspBi0nK52468djjhcLsHS6suKDvQYTgpSTpGaWI=;
- b=lzc7aCpAIaqD8rI4R/k3DgsipBRbhgooEM6f09wRdGM+eRAyyY63wTay4dp9qedHZo
- OD5EDpmauIkyIE2q4Vbk/NM0KHGymH0v/smq2C3YfGiYlro5ByX6hNS5MmhnkNLmo9pV
- xHKpJDcUUn3zBUsvlAGdU5xnsKJxTPwiEiChtyzAYw/H1HXrYEEoeqrsRwNxUdEHU2u2
- vFdAyYVTEjLXUCjUwNIa4CR2zyZPxW1uoAdiNWsKzSoeRX6MIgXlsSr3IJstw7Rbkews
- PoYeryYbJlxRBfyjMv+kg9v0MDmTm2JSuesY7Ye/2cioUWgwInu1z7YDAsXqxgxblDrE
- 1/fQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732555542; x=1733160342;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UVDQspBi0nK52468djjhcLsHS6suKDvQYTgpSTpGaWI=;
- b=pcuf/YNQz8jlCn44fetbfn4/kbyGoW7ODO8UFnhER5Ef8e6Ype6XpQyJesozMw0XZI
- nloAN2loQ/HpAkwXqxFY+COhA35ga0cUtDX+JNK88Q4oSLmbAzPOv7MaZFWe1/FHloJg
- g9D04PUCp6ST81PO+hc14jcM3vMQX+dQPMFwZ1XMqWCL/ME8RJx0mspjpemNZ02bBASE
- N0bxlXUKWvWz4rVPKkmP96QWqeVefT+7xUSEXwgGva892LLrdi1DL4O4mu94gIpc4Yvh
- 4fxUNMPlFRFx+ghI4D4iA2LrWRxQGeis6Kujh5/0XZhmcrz2a+fFTrPCTk2r2tnybhMp
- /P1Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUVmaQ3TMfYFrEP7z5BUt+C7UGBJWrsfNtEr24FNoFH0rgON02Ulg/Onx0lsCFSzBxLaDn2FOufjPn/Jrk=@lists.freedesktop.org,
- AJvYcCUXOqDVCb/smkSutHTeNZxb74Rxq6oloz8Mr33E7E6k855gmht6e2YrBJOlxE7aB9fT43OyLBCawio=@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YxwrI4dQdzhG6fN7/7DjiKlF6CRV1Y+AD35DsomwT73peqvq8zQ
- 3rJvpSZJQm3hCKDHoeUwHlMKmfVzvipVEoV5v2XYn/1Bw7Pmz/AE
-X-Gm-Gg: ASbGncuCF13nMNJ/RCJqPdvfQrVppvzzJNw2qLL3sAo/MbhCCmGE81h74Q35bVncuTd
- EVwD57e9MxFSX8NQHHca1jr9n3Z2Tawgbj0PYfLlYbbke0bFs0c+F9eDsiGVOftXDbFY2iTb51a
- YXrbuHSi2J9Esqg9yF8ye4IS7VMi8eWtsedAFnkie1jOKRUtZZywagMn2TY7Mm832rVDMiwlSyu
- ZsD/JJqpGty9vWpjKVq4n/ZIufpZ6f3IyPqhEpCapRghaR96I4fMEw2o7jK+QOMH6VQFODid/B7
- A2LrzvDC88I1hI2/dv9bo48fM1OMw5Ktr00o
-X-Google-Smtp-Source: AGHT+IFGvdFBb55MfpIRzxnpds3EDnlB90XnfhZ3sDfgc1tgDF7Qn6XtKH/y7aitBCCp0Ukgox6SIQ==
-X-Received: by 2002:a05:6214:1d0a:b0:6cb:d4e6:2507 with SMTP id
- 6a1803df08f44-6d450e871f7mr221611656d6.22.1732555542124; 
- Mon, 25 Nov 2024 09:25:42 -0800 (PST)
-Received: from localhost.localdomain (mobile-130-126-255-54.near.illinois.edu.
- [130.126.255.54]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451ab4d8esm44702576d6.54.2024.11.25.09.25.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 09:25:41 -0800 (PST)
-From: Gax-c <zichenxie0106@gmail.com>
-To: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com,
- simona@ffwll.ch, matthias.bgg@gmail.com,
- angelogioacchino.delregno@collabora.com
-Cc: virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Zichen Xie <zichenxie0106@gmail.com>
-Subject: [PATCH] drm: cast calculation to __u64 in qxl_mode_dumb_create()
-Date: Mon, 25 Nov 2024 11:25:17 -0600
-Message-Id: <20241125172516.9622-1-zichenxie0106@gmail.com>
-X-Mailer: git-send-email 2.25.1
+X-Greylist: delayed 340 seconds by postgrey-1.36 at gabe;
+ Thu, 28 Nov 2024 10:24:01 UTC
+Received: from mail-gw02.astralinux.ru (mail-gw02.astralinux.ru
+ [195.16.41.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C1F9610E071
+ for <spice-devel@lists.freedesktop.org>; Thu, 28 Nov 2024 10:24:01 +0000 (UTC)
+Received: from gca-msk-a-srv-ksmg01.astralinux.ru (localhost [127.0.0.1])
+ by mail-gw02.astralinux.ru (Postfix) with ESMTP id 6FF5D1F465;
+ Thu, 28 Nov 2024 13:18:18 +0300 (MSK)
+Received: from new-mail.astralinux.ru (gca-yc-ruca-srv-mail05.astralinux.ru
+ [10.177.185.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mail-gw02.astralinux.ru (Postfix) with ESMTPS;
+ Thu, 28 Nov 2024 13:18:17 +0300 (MSK)
+Received: from [10.198.18.73] (unknown [10.198.18.73])
+ by new-mail.astralinux.ru (Postfix) with ESMTPA id 4XzXMD0jHTz1c0sD;
+ Thu, 28 Nov 2024 13:18:14 +0300 (MSK)
+Message-ID: <066aed6d-c66b-4b2c-9e56-86d7e585edb2@astralinux.ru>
+Date: Thu, 28 Nov 2024 13:18:06 +0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usbredirtestclient: fix memory leak
+Content-Language: ru
+To: spice-devel@lists.freedesktop.org
+References: <20241112135900.29365-1-abelova@astralinux.ru>
+Cc: sdl.qemu@linuxtesting.org
+From: Anastasia Belova <abelova@astralinux.ru>
+In-Reply-To: <20241112135900.29365-1-abelova@astralinux.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 26 Nov 2024 10:36:19 +0000
+X-KSMG-AntiPhishing: NotDetected
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Envelope-From: abelova@astralinux.ru
+X-KSMG-AntiSpam-Info: LuaCore: 42 0.3.42
+ bec10d90a7a48fa5da8c590feab6ebd7732fec6b,
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
+ astralinux.ru:7.1.1; new-mail.astralinux.ru:7.1.1, FromAlignment: s
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiSpam-Lua-Profiles: 189476 [Nov 28 2024]
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Version: 6.1.1.7
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.1.0.7854,
+ bases: 2024/11/28 08:54:00 #26904895
+X-KSMG-AntiVirus-Status: NotDetected, skipped
+X-KSMG-LinksScanning: NotDetected
+X-KSMG-Message-Action: skipped
+X-KSMG-Rule-ID: 1
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,30 +75,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-From: Zichen Xie <zichenxie0106@gmail.com>
+Just a friendly reminder.
 
-Like commit b0b0d811eac6 ("drm/mediatek: Fix coverity issue with
-unintentional integer overflow"), directly multiply pitch and
-args->height may lead to integer overflow. Add a cast to avoid it.
-
-Signed-off-by: Zichen Xie <zichenxie0106@gmail.com>
----
- drivers/gpu/drm/qxl/qxl_dumb.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/qxl/qxl_dumb.c b/drivers/gpu/drm/qxl/qxl_dumb.c
-index 17df5c7ccf69..74076c87a002 100644
---- a/drivers/gpu/drm/qxl/qxl_dumb.c
-+++ b/drivers/gpu/drm/qxl/qxl_dumb.c
-@@ -41,7 +41,7 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
- 	uint32_t pitch, format;
- 
- 	pitch = args->width * ((args->bpp + 1) / 8);
--	args->size = pitch * args->height;
-+	args->size = (__u64)pitch * args->height;
- 	args->size = ALIGN(args->size, PAGE_SIZE);
- 
- 	switch (args->bpp) {
--- 
-2.34.1
-
+12.11.2024 16:59, Anastasia Belova пишет:
+> free dynamic memory pointed by data before returning
+> from function.
+>
+> Found by Linux Verification Center (linuxtesting.org) with SVACE.
+>
+> Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
+> ---
+>   usbredirtestclient/usbredirtestclient.c | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/usbredirtestclient/usbredirtestclient.c b/usbredirtestclient/usbredirtestclient.c
+> index 62b72e8..6da87ec 100644
+> --- a/usbredirtestclient/usbredirtestclient.c
+> +++ b/usbredirtestclient/usbredirtestclient.c
+> @@ -409,6 +409,7 @@ static int usbredirtestclient_cmdline_ctrl(void)
+>               }
+>               if (!arg || *endptr != '\0') {
+>                   printf("Missing or invalid data byte(s)\n");
+> +                free(data);
+>                   return 0;
+>               }
+>           }
