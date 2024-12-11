@@ -2,87 +2,64 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DC089EB1EF
-	for <lists+spice-devel@lfdr.de>; Tue, 10 Dec 2024 14:29:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B3DB9EC6DE
+	for <lists+spice-devel@lfdr.de>; Wed, 11 Dec 2024 09:18:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4EF4F10E8CC;
-	Tue, 10 Dec 2024 13:29:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ABAE110EA88;
+	Wed, 11 Dec 2024 08:18:05 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Sfs8oyCm";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="IK5IKWdg";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A576B10E010
- for <spice-devel@lists.freedesktop.org>; Tue, 10 Dec 2024 12:24:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1733833457;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=aSecLXEIEH9VAnhyNAFzRJvrLm7yztvw8Khy2pOpSMo=;
- b=Sfs8oyCmrW7yhWNaM/d8H2372G6wYY4J4OKdM722WbQ3msHbrdGFilVmiOHSQeeCsX+foV
- 3q/GT5/S56yvVb5JlFxJiF/F5psO7uXdOS6Uic5+JG6YxBSN9biQgzlrsxX9NJ6iQTDjmE
- +WqKjhhD+khcd9EyoTygDk+b0ei54Kg=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-422-PSJ9LDB4MluBAb-xlINeiA-1; Tue, 10 Dec 2024 07:24:16 -0500
-X-MC-Unique: PSJ9LDB4MluBAb-xlINeiA-1
-X-Mimecast-MFC-AGG-ID: PSJ9LDB4MluBAb-xlINeiA
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-aa634496f58so89319466b.2
- for <spice-devel@lists.freedesktop.org>; Tue, 10 Dec 2024 04:24:16 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733833455; x=1734438255;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aSecLXEIEH9VAnhyNAFzRJvrLm7yztvw8Khy2pOpSMo=;
- b=qMYWfSZUU3N+8HYsBuIx9Dum96vEH3Yldrt507PLa+3bOHpqckIjtlxJ7ZSEh8/hkD
- B0EMlcupgwlz/Xi2G7egg+NjJ0LLkl+Cm8WPxo291W0rTnxS9FnMnApCzRQaT+trT0+3
- UEBktobkgj6zA+F8EBfmz54GdTgl31YP3Bokw9yrbi7euBqcdSb9yJRTZY34gTmzUQsw
- S+tMA0YsB+TfeAcrU5wyeQny0UlwV5Dj/HQh4rIP5qvmkC5kVnJ63LiqlZOybQXEr77d
- jAkyT2R8d6ek90YbJdpiLe8OU3aJlmc6lhHTiu+RoNutvOYUgBMu/Sphjti1YMK2k57n
- VTkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWPZYVmCP0z7kdY9Y6Gi7qMCUtTWMfbsE9NIkDgwuQ376CdLX538svLNIpZRXx6dq52ZZsgsMizlzMupw==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YynJws5kk0nWZ5zBueKB6BnLISs82zEHZp2pkwV93I3MtqdDb8U
- sqFlesbViZLUFhZM3DfjANctEs0vwoGyBNE0GZpmwb2/li9f05gvjelTQlMQQwH1t8tLIJHR3FH
- 1dCpFtCiNcEn6uuhaxuQdATpE1eCuXope98a9/bUVH7qyLdc++RrSQrxxEGZNyqYEsoBMhkwsnf
- iPYQlGjm46moXfW/dbIWOl+YTiKrUou27jIaqyXKY0EFo=
-X-Gm-Gg: ASbGncvqa1+BrN39P/sBYvZkqM1JCUjlCYalLUzowkiFZElp284wnPCRUzTJZCeVpYA
- 1c9ELUULITgoyqD4ohae5CE2TVsOmad/63kx7F6X/ArrWagTbCE83oFSgO67XzPov2Oc=
-X-Received: by 2002:a17:906:18a9:b0:aa6:8a1b:8b7c with SMTP id
- a640c23a62f3a-aa68a1b8e98mr630992766b.2.1733833455445; 
- Tue, 10 Dec 2024 04:24:15 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEcgyA52HfEjey88Kb6EsuqPIgVlks8Qpk8hL6qKkV1dFhRyyCd5ELr+Iz6VA2G2PWuz4gd34tfvQzS/RzCBTs=
-X-Received: by 2002:a17:906:18a9:b0:aa6:8a1b:8b7c with SMTP id
- a640c23a62f3a-aa68a1b8e98mr630989266b.2.1733833455085; Tue, 10 Dec 2024
- 04:24:15 -0800 (PST)
-MIME-Version: 1.0
-References: <20241129122408.4167150-1-ryasuoka@redhat.com>
- <be01d2f7-8423-4e10-b65b-a84a7bc7c99e@collabora.com>
-In-Reply-To: <be01d2f7-8423-4e10-b65b-a84a7bc7c99e@collabora.com>
-From: Ryosuke Yasuoka <ryasuoka@redhat.com>
-Date: Tue, 10 Dec 2024 21:24:03 +0900
-Message-ID: <CAHpthZrZ6DjsCQ4baQ80b2vOTdkR=vHDx=10W7DTS4ohxb6=pg@mail.gmail.com>
-Subject: Re: [PATCH v5] drm/virtio: Add drm_panic support
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Cc: airlied@redhat.com, kraxel@redhat.com, maarten.lankhorst@linux.intel.com, 
- mripard@kernel.org, tzimmermann@suse.de, daniel@ffwll.ch,
- jfalempe@redhat.com, 
- christophe.jaillet@wanadoo.fr, virtualization@lists.linux.dev, 
- spice-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: t7EhPNX2TuTCacFB2mXGSOyxl6-XRyvvS8y9uYCK2SI_1733833455
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 10 Dec 2024 13:29:11 +0000
+X-Greylist: delayed 918 seconds by postgrey-1.36 at gabe;
+ Wed, 11 Dec 2024 02:38:17 UTC
+Received: from out203-205-221-149.mail.qq.com (out203-205-221-149.mail.qq.com
+ [203.205.221.149])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AD20510EA31
+ for <spice-devel@lists.freedesktop.org>; Wed, 11 Dec 2024 02:38:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1733884695; bh=3EqcVMb9lyBo+vfSPaA7rMux+QGWTDnHa19Et9Um/Q8=;
+ h=From:To:Subject:Date;
+ b=IK5IKWdgO6ZxRUpMfVZmc7xsqV+j+QD0o2nP6djovi7QWj5K6vpzbXAy8y4tL4IsQ
+ TsI86F4AavzCELSKILM9rZOUNBcik5r+eJw7JuPYhR9ihN0ZkQxyY9sYIV+w44sZNA
+ EOjxx+NPpN3qgPpSneBs6P3BHi94gZC95c7LwG/E=
+X-QQ-FEAT: DI46iX4Hri4R143f90xbu7/6WDHch+Vv
+X-QQ-SSF: 00000000000000F1000000000000
+X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
+X-QQ-XMAILINFO: ME8bH3unDDxUTwQy5iEhlT4WisDAQBlJm9tBZ+XgJErxpjlRuSP5UsKcgfG9D5
+ 2166/lZQdvQftrlDUfZ9L8vdYIKouQ/vOHF82Wo1rcfKYog3nF6zPvC8iNbVvrgUxmVy2R1uyXEzh
+ t5HobbGtxiHOdh3ycWuBV4C4wk0/nh7PtI3N2wV/gMk7vpJZbTriZsTl0WeR90oAtj2sR7ywEkZpW
+ rr2Jr7xdmEjrDbeTjuxB4qHMwftk+cu/Mvr/l7EIRdwyy76wf3dP/BOU7U9H5x6pTOHrEJ7+YZnQX
+ A54PsCbyfjd3xD1Ec40QDouKVn684HPlx8vPHQKrxU4LZb+Bg4q8aVitgvUcjnZCVkAOZWG+j+gD+
+ ehfbfzikqKuKBIOoZZQrZMLmoB6DzQiYL/XotSql+xEG077rNxTCTpGNlpMM9Wowp0isxVAsldptS
+ KX2l1eTH5p26CjOPFY8YC7KvMIsB2imOtD2n0xWcCwtA/+sXjHHK4fmk674LpY9eMi6nFPxwXe0Bx
+ XAnxIHt7UxYPLagsSPIqXLwsPsQNX5ngVkGD5awlCCUdCbivbUm/KxTWa2iZwCBwt4BTWYzNNWyP2
+ gjYVE5G10OramGYqF0wrMfyDa8NIpNfOMV8NLIliUoCprcO5X2ghuZz2c2pA4WAgnBqa3CZe1YC8e
+ n04kIfSUtZYgvCr22hMy0druT3dEra4+y2CdSqQ4sWtxjzcOpVWUkc7MdzkLKLrr4+YN5RDbcYuTI
+ +nXvHi5RmzrnHeOwiit7FfiRNrOf3DF8dtXJ+bJou1kgPGEjlpyPOXgEjaP1NJWpABRSrfv0UzbOo
+ +FCwqPhHYkEb6VepE9JXvGyu0t05dhBXWWHQB62UPlMNZvb2JMCYds1UvmcKgYALjntgo+xATInHU
+ XZlZRV5zCGZrzOkFhFAvzyPdWWuIpaLudp71lVGVcLefUUvsYK8OGSV9FC6GfdwZWkSzwg5NqLHgH
+ wdKhb6mq3i50UQpYJ0XA9cazI70tpANPxI0uRhlozqGyLBv+0u/PfZx2TYZ+5x3Lob2HIKzw==
+X-HAS-ATTACH: no
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 39.156.163.124
+X-QQ-STYLE: 
+X-QQ-mid: webmail879t1733883775t5582898
+From: "=?gb18030?B?cGV0ZXI=?=" <522740662@qq.com>
+To: "=?gb18030?B?c3BpY2UtZGV2ZWw=?=" <spice-devel@lists.freedesktop.org>
+Subject: Does SPICE support net printer redirect?
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_6758F77F_1114AC40_0302D251"
+Content-Transfer-Encoding: 8Bit
+Date: Wed, 11 Dec 2024 10:22:55 +0800
+X-Priority: 3
+Message-ID: <tencent_FB9EB366B8349FEFBB374CD9D809B33D6607@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-Mailman-Approved-At: Wed, 11 Dec 2024 08:18:05 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,59 +74,67 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Mon, Dec 2, 2024 at 11:30=E2=80=AFPM Dmitry Osipenko
-<dmitry.osipenko@collabora.com> wrote:
->
-> On 11/29/24 15:24, Ryosuke Yasuoka wrote:
-> ....
-> > +     } else {
-> > +             iosys_map_set_vaddr(&sb->map[0], bo->base.vaddr);
-> > +     }
-> > +
-> > +     sb->format =3D plane->state->fb->format;
-> > +     sb->height =3D plane->state->fb->height;
-> > +     sb->width =3D plane->state->fb->width;
-> > +     sb->pitch[0] =3D plane->state->fb->pitches[0];
-> > +     return 0;
-> > +}
-> ...
-> > +static void virtio_panic_flush(struct drm_plane *plane)
-> > +{
-> > +     struct virtio_gpu_object *bo;
-> > +     struct drm_device *dev =3D plane->dev;
-> > +     struct virtio_gpu_device *vgdev =3D dev->dev_private;
-> > +     struct drm_rect rect;
-> > +     void *p_vbuf =3D vgdev->panic_vbuf;
-> > +     struct virtio_gpu_vbuffer *vbuf_dumb_bo =3D p_vbuf;
-> > +     struct virtio_gpu_vbuffer *vbuf_resource_flush =3D p_vbuf + VBUFF=
-ER_SIZE;
->
-> This p_vbuf + VBUFFER_SIZE looks suspicious. The VBUFFER_SIZE macro
-> isn't guarded with parentheses (), hence this vbuf_resource_flush is
-> pointing at the CMD part of the vbuf_dumb_bo?
+This is a multi-part message in MIME format.
 
-No. I intend vbuf_resource_flush to point to a different vbuf than
-vbuf_dumb_bo. I allocate 2 vbufs in virtio_gpu_plane_init() so that
-vbuf_dumb_bo points to the first vbuf and vbuf_resource_flush points
-to the second one.
+------=_NextPart_6758F77F_1114AC40_0302D251
+Content-Type: text/plain;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
 
-> Won't be using kmem_cache_zalloc(vgdev->vbufs, GFP_ATOMIC) to
-> dynamically allocate both buffers make everything cleaner?
->
-> ...
-> > -#define MAX_INLINE_CMD_SIZE   96
-> > -#define MAX_INLINE_RESP_SIZE  24
-> > -#define VBUFFER_SIZE          (sizeof(struct virtio_gpu_vbuffer) \
-> > -                            + MAX_INLINE_CMD_SIZE             \
-> > -                            + MAX_INLINE_RESP_SIZE)...
->
+SGk6DQombmJzcDsgJm5ic3A7IEkgZGlkIHNwaWNlIGRldmVsb3AgaW4gcWVtdS1rdm0sIHdo
+ZW4gaSB3YW50IHRvIHVzZSBuZXQgcHJpbnRlciBpbiBndWVzdCBob3N0IGkgZW5jb3VudGVy
+IGRpZmZpY3VsdGllcy4gaG93IHRvIHJlZGlyZWN0IG5ldCBwcmludGVyIHRvIGd1ZXN0IGhv
+c3Q/DQombmJzcDsgJm5ic3A7IEkgc2F3IHNwaWNlIG5vIHRoaXMgZmVhdHVyZS4NCiZuYnNw
+OyAmbmJzcDsgcGxlYXNlIGdpdmUgbWUgaGVscCwgdGhhbmtzIQ0KDQoNCnBldGVyDQo1MjI3
+NDA2NjJAcXEuY29tDQoNCg0KDQombmJzcDs=
 
-Yes, it is feasible.
+------=_NextPart_6758F77F_1114AC40_0302D251
+Content-Type: text/html;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
 
-Thank you for your review.
-Ryosuke
+PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNo
+YXJzZXQ9R0IxODAzMCI+PGRpdj5IaTo8L2Rpdj48ZGl2PiZuYnNwOyAmbmJzcDsgSSBkaWQg
+c3BpY2UgZGV2ZWxvcCBpbiBxZW11LWt2bSwgd2hlbiBpIHdhbnQgdG8gdXNlIG5ldCBwcmlu
+dGVyIGluIGd1ZXN0IGhvc3QgaSBlbmNvdW50ZXIgZGlmZmljdWx0aWVzLiBob3cgdG8gcmVk
+aXJlY3QgbmV0IHByaW50ZXIgdG8gZ3Vlc3QgaG9zdD88c3BhbiBzdHlsZT0iYmFja2dyb3Vu
+ZC1jb2xvcjogcmdiKDIzOCwgMjQwLCAyNDIpOyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyBm
+b250LWZhbWlseTogQXJpYWwsICZxdW90O01pY3Jvc29mdCBZYUhlaSZxdW90OywgzqLI7dHF
+utosIMvOzOUsICZxdW90O01hbGd1biBHb3RoaWMmcXVvdDssIE1laXJ5bywgc2Fucy1zZXJp
+ZjsgZm9udC1zaXplOiAxMnB4OyI+PC9zcGFuPjwvZGl2PjxkaXY+Jm5ic3A7ICZuYnNwOyBJ
+IHNhdyBzcGljZSBubyB0aGlzIGZlYXR1cmUuPC9kaXY+PGRpdj4mbmJzcDsgJm5ic3A7IHBs
+ZWFzZSBnaXZlIG1lIGhlbHAsIHRoYW5rcyE8L2Rpdj48ZGl2PjxociBhbGlnbj0ibGVmdCIg
+c3R5bGU9Im1hcmdpbjogMCAwIDEwcHggMDtib3JkZXI6IDA7Ym9yZGVyLWJvdHRvbToxcHgg
+c29saWQgI0U0RTVFNjtoZWlnaHQ6MDtsaW5lLWhlaWdodDowO2ZvbnQtc2l6ZTowO3BhZGRp
+bmc6IDIwcHggMCAwIDA7d2lkdGg6IDUwcHg7Ij48ZGl2IHN0eWxlPSJmb250LXNpemU6MTRw
+eDtmb250LWZhbWlseTpWZXJkYW5hO2NvbG9yOiMwMDA7Ij48YSBjbGFzcz0ieG1fd3JpdGVf
+Y2FyZCIgaWQ9ImluX2FsaWFzIiBzdHlsZT0id2hpdGUtc3BhY2U6IG5vcm1hbDsgZGlzcGxh
+eTogaW5saW5lLWJsb2NrOyB0ZXh0LWRlY29yYXRpb246IG5vbmUgIWltcG9ydGFudDtmb250
+LWZhbWlseTogLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Ms
+TWljcm9zb2Z0IFlhSGVpOyIgaHJlZj0iaHR0cHM6Ly93eC5tYWlsLnFxLmNvbS9ob21lL2lu
+ZGV4P3Q9cmVhZG1haWxfYnVzaW5lc3NjYXJkX21pZHBhZ2UmYW1wO25vY2hlY2s9dHJ1ZSZh
+bXA7bmFtZT1wZXRlciZhbXA7aWNvbj1odHRwJTNBJTJGJTJGdGhpcmRxcS5xbG9nby5jbiUy
+RmclM0ZiJTNEc2RrJTI2ayUzRGpOTmQzQTJMZ2RKbGlhMWljcjMwRU9sUSUyNnMlM0QxMDAl
+MjZ0JTNEMTU1NTkzNDk0OCUzRnJhbmQlM0QxNjQyNTg2MTc3JmFtcDttYWlsPTUyMjc0MDY2
+MiU0MHFxLmNvbSZhbXA7Y29kZT0iIHRhcmdldD0iX2JsYW5rIj48dGFibGUgc3R5bGU9Indo
+aXRlLXNwYWNlOiBub3JtYWw7dGFibGUtbGF5b3V0OiBmaXhlZDsgcGFkZGluZy1yaWdodDog
+MjBweDsiIGNvbnRlbnRlZGl0YWJsZT0iZmFsc2UiIGNlbGxwYWRkaW5nPSIwIiBjZWxsc3Bh
+Y2luZz0iMCI+PHRib2R5Pjx0ciB2YWxpZ249InRvcCI+PHRkIHN0eWxlPSJ3aWR0aDogNDBw
+eDttaW4td2lkdGg6IDQwcHg7IHBhZGRpbmctdG9wOjEwcHgiPjxkaXYgc3R5bGU9IndpZHRo
+OiAzOHB4OyBoZWlnaHQ6IDM4cHg7IGJvcmRlcjogMXB4ICNGRkYgc29saWQ7IGJvcmRlci1y
+YWRpdXM6NTAlOyBtYXJnaW46IDA7dmVydGljYWwtYWxpZ246IHRvcDtib3gtc2hhZG93OiAw
+IDAgMTBweCAwIHJnYmEoMTI3LDE1MiwxNzgsMC4xNCk7Ij48aW1nIHNyYz0iaHR0cDovL3Ro
+aXJkcXEucWxvZ28uY24vZz9iPXNkayZhbXA7az1qTk5kM0EyTGdkSmxpYTFpY3IzMEVPbFEm
+YW1wO3M9MTAwJmFtcDt0PTE1NTU5MzQ5NDg/cmFuZD0xNjQyNTg2MTc3IiBzdHlsZT0id2lk
+dGg6MTAwJTtoZWlnaHQ6MTAwJTtib3JkZXItcmFkaXVzOjUwJTtwb2ludGVyLWV2ZW50czog
+bm9uZTsiPjwvZGl2PjwvdGQ+PHRkIHN0eWxlPSJwYWRkaW5nOiAxMHB4IDAgOHB4IDEwcHg7
+Ij48ZGl2IGNsYXNzPSJidXNpbmVzc0NhcmRfbmFtZSIgc3R5bGU9ImZvbnQtc2l6ZTogMTRw
+eDtjb2xvcjogIzMzMzEyRTtsaW5lLWhlaWdodDogMjBweDsgcGFkZGluZy1ib3R0b206IDJw
+eDsgbWFyZ2luOjA7Zm9udC13ZWlnaHQ6IDUwMDsiPnBldGVyPC9kaXY+PGRpdiBjbGFzcz0i
+YnVzaW5lc3NDYXJkX21haWwiIHN0eWxlPSJmb250LXNpemU6IDEycHg7Y29sb3I6ICM5OTk4
+OTY7bGluZS1oZWlnaHQ6IDE4cHg7IG1hcmdpbjowOyI+NTIyNzQwNjYyQHFxLmNvbTwvZGl2
+PjwvdGQ+PC90cj48L3Rib2R5PjwvdGFibGU+PC9hPjwvZGl2PjwvZGl2PjxkaXY+Jm5ic3A7
+PC9kaXY+
 
-> Best regards,
-> Dmitry
->
-
+------=_NextPart_6758F77F_1114AC40_0302D251--
+ut‘
