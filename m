@@ -2,64 +2,65 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B3DB9EC6DE
-	for <lists+spice-devel@lfdr.de>; Wed, 11 Dec 2024 09:18:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E034C9EFCE7
+	for <lists+spice-devel@lfdr.de>; Thu, 12 Dec 2024 21:01:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ABAE110EA88;
-	Wed, 11 Dec 2024 08:18:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C526A10EE86;
+	Thu, 12 Dec 2024 20:01:45 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="IK5IKWdg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="biU27wrB";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 918 seconds by postgrey-1.36 at gabe;
- Wed, 11 Dec 2024 02:38:17 UTC
-Received: from out203-205-221-149.mail.qq.com (out203-205-221-149.mail.qq.com
- [203.205.221.149])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AD20510EA31
- for <spice-devel@lists.freedesktop.org>; Wed, 11 Dec 2024 02:38:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1733884695; bh=3EqcVMb9lyBo+vfSPaA7rMux+QGWTDnHa19Et9Um/Q8=;
- h=From:To:Subject:Date;
- b=IK5IKWdgO6ZxRUpMfVZmc7xsqV+j+QD0o2nP6djovi7QWj5K6vpzbXAy8y4tL4IsQ
- TsI86F4AavzCELSKILM9rZOUNBcik5r+eJw7JuPYhR9ihN0ZkQxyY9sYIV+w44sZNA
- EOjxx+NPpN3qgPpSneBs6P3BHi94gZC95c7LwG/E=
-X-QQ-FEAT: DI46iX4Hri4R143f90xbu7/6WDHch+Vv
-X-QQ-SSF: 00000000000000F1000000000000
-X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
-X-QQ-XMAILINFO: ME8bH3unDDxUTwQy5iEhlT4WisDAQBlJm9tBZ+XgJErxpjlRuSP5UsKcgfG9D5
- 2166/lZQdvQftrlDUfZ9L8vdYIKouQ/vOHF82Wo1rcfKYog3nF6zPvC8iNbVvrgUxmVy2R1uyXEzh
- t5HobbGtxiHOdh3ycWuBV4C4wk0/nh7PtI3N2wV/gMk7vpJZbTriZsTl0WeR90oAtj2sR7ywEkZpW
- rr2Jr7xdmEjrDbeTjuxB4qHMwftk+cu/Mvr/l7EIRdwyy76wf3dP/BOU7U9H5x6pTOHrEJ7+YZnQX
- A54PsCbyfjd3xD1Ec40QDouKVn684HPlx8vPHQKrxU4LZb+Bg4q8aVitgvUcjnZCVkAOZWG+j+gD+
- ehfbfzikqKuKBIOoZZQrZMLmoB6DzQiYL/XotSql+xEG077rNxTCTpGNlpMM9Wowp0isxVAsldptS
- KX2l1eTH5p26CjOPFY8YC7KvMIsB2imOtD2n0xWcCwtA/+sXjHHK4fmk674LpY9eMi6nFPxwXe0Bx
- XAnxIHt7UxYPLagsSPIqXLwsPsQNX5ngVkGD5awlCCUdCbivbUm/KxTWa2iZwCBwt4BTWYzNNWyP2
- gjYVE5G10OramGYqF0wrMfyDa8NIpNfOMV8NLIliUoCprcO5X2ghuZz2c2pA4WAgnBqa3CZe1YC8e
- n04kIfSUtZYgvCr22hMy0druT3dEra4+y2CdSqQ4sWtxjzcOpVWUkc7MdzkLKLrr4+YN5RDbcYuTI
- +nXvHi5RmzrnHeOwiit7FfiRNrOf3DF8dtXJ+bJou1kgPGEjlpyPOXgEjaP1NJWpABRSrfv0UzbOo
- +FCwqPhHYkEb6VepE9JXvGyu0t05dhBXWWHQB62UPlMNZvb2JMCYds1UvmcKgYALjntgo+xATInHU
- XZlZRV5zCGZrzOkFhFAvzyPdWWuIpaLudp71lVGVcLefUUvsYK8OGSV9FC6GfdwZWkSzwg5NqLHgH
- wdKhb6mq3i50UQpYJ0XA9cazI70tpANPxI0uRhlozqGyLBv+0u/PfZx2TYZ+5x3Lob2HIKzw==
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 39.156.163.124
-X-QQ-STYLE: 
-X-QQ-mid: webmail879t1733883775t5582898
-From: "=?gb18030?B?cGV0ZXI=?=" <522740662@qq.com>
-To: "=?gb18030?B?c3BpY2UtZGV2ZWw=?=" <spice-devel@lists.freedesktop.org>
-Subject: Does SPICE support net printer redirect?
-Mime-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="----=_NextPart_6758F77F_1114AC40_0302D251"
-Content-Transfer-Encoding: 8Bit
-Date: Wed, 11 Dec 2024 10:22:55 +0800
-X-Priority: 3
-Message-ID: <tencent_FB9EB366B8349FEFBB374CD9D809B33D6607@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-X-Mailman-Approved-At: Wed, 11 Dec 2024 08:18:05 +0000
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BB0EB10EE81
+ for <spice-devel@lists.freedesktop.org>; Thu, 12 Dec 2024 20:01:44 +0000 (UTC)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e387ad7abdaso749331276.0
+ for <spice-devel@lists.freedesktop.org>; Thu, 12 Dec 2024 12:01:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734033704; x=1734638504; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=B3MTufdo3N6B4BtpWumGigppTN6IZRND+Z0N22eXwlI=;
+ b=biU27wrBLppMpuVqTZaAB7P0oXfn5v4nGMyZvsZd+6o5BFF3hPolN+e4TpD1TjGi/e
+ yigtdyYd2TgwACPcXXbKDWJC/7yQBLSTE2DZbLJB0qOmkIuU2QuySod0y1zQTR9bPy0n
+ RPldblLO2GuO02CngYGCkNE3EOj6pb9Hx2AdaAkHgwaUM2M0Be2xGEB8yQPDKshZRjoh
+ HV7+5PtvjE5Ta4qPUDjHFdYjXBY/DFEBFsM+6kl3V0CulExINvI2+qw6mNn+g3bgzeTQ
+ pbs4lSrU6OHcWcdOZFD+sHhTfWxzC0LQniliVj+Tp98m0tRGdMuQCRS9Lta5f/L95MAF
+ NENw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734033704; x=1734638504;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B3MTufdo3N6B4BtpWumGigppTN6IZRND+Z0N22eXwlI=;
+ b=EndGPKVyz3+do+ryuYMEAa16nhUQCbbaQxzQj4FxTXxhFhaRAbuS4gcd7Ayn5tvd0J
+ z3uuGnrGcJK42bd3EZ86ErJ5kExd2tUaMowDXmht+/1cje3H+RE0RQDXT4Tsg38dBXLg
+ 6IF+Fz/84ayPTdTOxNKcZ8QoRktVdbQGN0FB8MRf9IaAjU70f9gkIQEOd6oEAmklrmNI
+ Wf77DzBuQOLzvgq577/2wUS7Gnr6rIpYfqZu5DvM5ExI+y1XoUY0mydMqOj048ccgJ8Y
+ /2UJ31ta9xtiQyhEHOyIDIPS+xcbD9a0/hxAMKmE1EDQDhw5/kRg1kvwGagGHj2pXErF
+ q3qg==
+X-Gm-Message-State: AOJu0YyhldRaxW6N/ZqXMPI+uy6+qkB4UjgCpHsgbZaGpsxO/8dzfQov
+ cN6tSbwh+9Wcp9PVO0AVHgwal7wWduPi42+syqKoBVdZtxfmW+T+xExkNdNhldFDKngao1S4OX8
+ yz3Y3BwNA/4eKRRBCUGLuOwopXi0=
+X-Gm-Gg: ASbGncv+/n8Gmd1lo1kJ9+d86txOZE42noGYsCU3UZVbgz7vLPASZ+AKqJAq1sAirjw
+ Zgq3HoFoY1GJDYsglG39GjYEIo9yaRGzF/NoR3A==
+X-Google-Smtp-Source: AGHT+IHxrGVuJ1PgVRMRPw7WtgqhzW3tbOrXRlNLLe2HDpOf79mr5EvMZnRRm7wfP+g9v4csSqlPg1CT1bEI+TWoJgY=
+X-Received: by 2002:a05:690c:6112:b0:6ef:827b:2442 with SMTP id
+ 00721157ae682-6f279b8cf72mr193907b3.35.1734033703737; Thu, 12 Dec 2024
+ 12:01:43 -0800 (PST)
+MIME-Version: 1.0
+References: <tencent_FB9EB366B8349FEFBB374CD9D809B33D6607@qq.com>
+In-Reply-To: <tencent_FB9EB366B8349FEFBB374CD9D809B33D6607@qq.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 12 Dec 2024 20:01:32 +0000
+Message-ID: <CAHt6W4fvyuwAX5CXRfjS7HE2z4s6xyV2j1pGiRhTJbAtK3n-zg@mail.gmail.com>
+Subject: Re: Does SPICE support net printer redirect?
+To: peter <522740662@qq.com>
+Cc: spice-devel <spice-devel@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="000000000000f0a00b0629182ef1"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,67 +75,72 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
+--000000000000f0a00b0629182ef1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-------=_NextPart_6758F77F_1114AC40_0302D251
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+On Wed, Dec 11, 2024 at 8:35=E2=80=AFAM peter <522740662@qq.com> wrote:
 
-SGk6DQombmJzcDsgJm5ic3A7IEkgZGlkIHNwaWNlIGRldmVsb3AgaW4gcWVtdS1rdm0sIHdo
-ZW4gaSB3YW50IHRvIHVzZSBuZXQgcHJpbnRlciBpbiBndWVzdCBob3N0IGkgZW5jb3VudGVy
-IGRpZmZpY3VsdGllcy4gaG93IHRvIHJlZGlyZWN0IG5ldCBwcmludGVyIHRvIGd1ZXN0IGhv
-c3Q/DQombmJzcDsgJm5ic3A7IEkgc2F3IHNwaWNlIG5vIHRoaXMgZmVhdHVyZS4NCiZuYnNw
-OyAmbmJzcDsgcGxlYXNlIGdpdmUgbWUgaGVscCwgdGhhbmtzIQ0KDQoNCnBldGVyDQo1MjI3
-NDA2NjJAcXEuY29tDQoNCg0KDQombmJzcDs=
+> Hi:
+>     I did spice develop in qemu-kvm, when i want to use net printer in
+> guest host i encounter difficulties. how to redirect net printer to guest
+> host?
+>     I saw spice no this feature.
+>     please give me help, thanks!
+> ------------------------------
+> peter
+> 522740662@qq.com
+>
+> <https://wx.mail.qq.com/home/index?t=3Dreadmail_businesscard_midpage&noch=
+eck=3Dtrue&name=3Dpeter&icon=3Dhttp%3A%2F%2Fthirdqq.qlogo.cn%2Fg%3Fb%3Dsdk%=
+26k%3DjNNd3A2LgdJlia1icr30EOlQ%26s%3D100%26t%3D1555934948%3Frand%3D16425861=
+77&mail=3D522740662%40qq.com&code=3D>
+>
+>
 
-------=_NextPart_6758F77F_1114AC40_0302D251
-Content-Type: text/html;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
+There's no such support. If the printer is usb you can use usb redirection.
 
-PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNo
-YXJzZXQ9R0IxODAzMCI+PGRpdj5IaTo8L2Rpdj48ZGl2PiZuYnNwOyAmbmJzcDsgSSBkaWQg
-c3BpY2UgZGV2ZWxvcCBpbiBxZW11LWt2bSwgd2hlbiBpIHdhbnQgdG8gdXNlIG5ldCBwcmlu
-dGVyIGluIGd1ZXN0IGhvc3QgaSBlbmNvdW50ZXIgZGlmZmljdWx0aWVzLiBob3cgdG8gcmVk
-aXJlY3QgbmV0IHByaW50ZXIgdG8gZ3Vlc3QgaG9zdD88c3BhbiBzdHlsZT0iYmFja2dyb3Vu
-ZC1jb2xvcjogcmdiKDIzOCwgMjQwLCAyNDIpOyBjb2xvcjogcmdiKDQ2LCA0OCwgNTEpOyBm
-b250LWZhbWlseTogQXJpYWwsICZxdW90O01pY3Jvc29mdCBZYUhlaSZxdW90OywgzqLI7dHF
-utosIMvOzOUsICZxdW90O01hbGd1biBHb3RoaWMmcXVvdDssIE1laXJ5bywgc2Fucy1zZXJp
-ZjsgZm9udC1zaXplOiAxMnB4OyI+PC9zcGFuPjwvZGl2PjxkaXY+Jm5ic3A7ICZuYnNwOyBJ
-IHNhdyBzcGljZSBubyB0aGlzIGZlYXR1cmUuPC9kaXY+PGRpdj4mbmJzcDsgJm5ic3A7IHBs
-ZWFzZSBnaXZlIG1lIGhlbHAsIHRoYW5rcyE8L2Rpdj48ZGl2PjxociBhbGlnbj0ibGVmdCIg
-c3R5bGU9Im1hcmdpbjogMCAwIDEwcHggMDtib3JkZXI6IDA7Ym9yZGVyLWJvdHRvbToxcHgg
-c29saWQgI0U0RTVFNjtoZWlnaHQ6MDtsaW5lLWhlaWdodDowO2ZvbnQtc2l6ZTowO3BhZGRp
-bmc6IDIwcHggMCAwIDA7d2lkdGg6IDUwcHg7Ij48ZGl2IHN0eWxlPSJmb250LXNpemU6MTRw
-eDtmb250LWZhbWlseTpWZXJkYW5hO2NvbG9yOiMwMDA7Ij48YSBjbGFzcz0ieG1fd3JpdGVf
-Y2FyZCIgaWQ9ImluX2FsaWFzIiBzdHlsZT0id2hpdGUtc3BhY2U6IG5vcm1hbDsgZGlzcGxh
-eTogaW5saW5lLWJsb2NrOyB0ZXh0LWRlY29yYXRpb246IG5vbmUgIWltcG9ydGFudDtmb250
-LWZhbWlseTogLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Ms
-TWljcm9zb2Z0IFlhSGVpOyIgaHJlZj0iaHR0cHM6Ly93eC5tYWlsLnFxLmNvbS9ob21lL2lu
-ZGV4P3Q9cmVhZG1haWxfYnVzaW5lc3NjYXJkX21pZHBhZ2UmYW1wO25vY2hlY2s9dHJ1ZSZh
-bXA7bmFtZT1wZXRlciZhbXA7aWNvbj1odHRwJTNBJTJGJTJGdGhpcmRxcS5xbG9nby5jbiUy
-RmclM0ZiJTNEc2RrJTI2ayUzRGpOTmQzQTJMZ2RKbGlhMWljcjMwRU9sUSUyNnMlM0QxMDAl
-MjZ0JTNEMTU1NTkzNDk0OCUzRnJhbmQlM0QxNjQyNTg2MTc3JmFtcDttYWlsPTUyMjc0MDY2
-MiU0MHFxLmNvbSZhbXA7Y29kZT0iIHRhcmdldD0iX2JsYW5rIj48dGFibGUgc3R5bGU9Indo
-aXRlLXNwYWNlOiBub3JtYWw7dGFibGUtbGF5b3V0OiBmaXhlZDsgcGFkZGluZy1yaWdodDog
-MjBweDsiIGNvbnRlbnRlZGl0YWJsZT0iZmFsc2UiIGNlbGxwYWRkaW5nPSIwIiBjZWxsc3Bh
-Y2luZz0iMCI+PHRib2R5Pjx0ciB2YWxpZ249InRvcCI+PHRkIHN0eWxlPSJ3aWR0aDogNDBw
-eDttaW4td2lkdGg6IDQwcHg7IHBhZGRpbmctdG9wOjEwcHgiPjxkaXYgc3R5bGU9IndpZHRo
-OiAzOHB4OyBoZWlnaHQ6IDM4cHg7IGJvcmRlcjogMXB4ICNGRkYgc29saWQ7IGJvcmRlci1y
-YWRpdXM6NTAlOyBtYXJnaW46IDA7dmVydGljYWwtYWxpZ246IHRvcDtib3gtc2hhZG93OiAw
-IDAgMTBweCAwIHJnYmEoMTI3LDE1MiwxNzgsMC4xNCk7Ij48aW1nIHNyYz0iaHR0cDovL3Ro
-aXJkcXEucWxvZ28uY24vZz9iPXNkayZhbXA7az1qTk5kM0EyTGdkSmxpYTFpY3IzMEVPbFEm
-YW1wO3M9MTAwJmFtcDt0PTE1NTU5MzQ5NDg/cmFuZD0xNjQyNTg2MTc3IiBzdHlsZT0id2lk
-dGg6MTAwJTtoZWlnaHQ6MTAwJTtib3JkZXItcmFkaXVzOjUwJTtwb2ludGVyLWV2ZW50czog
-bm9uZTsiPjwvZGl2PjwvdGQ+PHRkIHN0eWxlPSJwYWRkaW5nOiAxMHB4IDAgOHB4IDEwcHg7
-Ij48ZGl2IGNsYXNzPSJidXNpbmVzc0NhcmRfbmFtZSIgc3R5bGU9ImZvbnQtc2l6ZTogMTRw
-eDtjb2xvcjogIzMzMzEyRTtsaW5lLWhlaWdodDogMjBweDsgcGFkZGluZy1ib3R0b206IDJw
-eDsgbWFyZ2luOjA7Zm9udC13ZWlnaHQ6IDUwMDsiPnBldGVyPC9kaXY+PGRpdiBjbGFzcz0i
-YnVzaW5lc3NDYXJkX21haWwiIHN0eWxlPSJmb250LXNpemU6IDEycHg7Y29sb3I6ICM5OTk4
-OTY7bGluZS1oZWlnaHQ6IDE4cHg7IG1hcmdpbjowOyI+NTIyNzQwNjYyQHFxLmNvbTwvZGl2
-PjwvdGQ+PC90cj48L3Rib2R5PjwvdGFibGU+PC9hPjwvZGl2PjwvZGl2PjxkaXY+Jm5ic3A7
-PC9kaXY+
+Frediano
 
-------=_NextPart_6758F77F_1114AC40_0302D251--
-ut‘
+--000000000000f0a00b0629182ef1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Wed, Dec 11, 2024 at 8:35=E2=80=AFAM peter=
+ &lt;<a href=3D"mailto:522740662@qq.com">522740662@qq.com</a>&gt; wrote:<br=
+></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex"><div>Hi:</div><div=
+>=C2=A0 =C2=A0 I did spice develop in qemu-kvm, when i want to use net prin=
+ter in guest host i encounter difficulties. how to redirect net printer to =
+guest host?<span style=3D"background-color:rgb(238,240,242);color:rgb(46,48=
+,51);font-family:Arial,&quot;Microsoft YaHei&quot;,=E5=BE=AE=E8=BD=AF=E9=9B=
+=85=E9=BB=91,=E5=AE=8B=E4=BD=93,&quot;Malgun Gothic&quot;,Meiryo,sans-serif=
+;font-size:12px"></span></div><div>=C2=A0 =C2=A0 I saw spice no this featur=
+e.</div><div>=C2=A0 =C2=A0 please give me help, thanks!</div><div><hr align=
+=3D"left" style=3D"margin:0px 0px 10px;border-width:0px 0px 1px;border-styl=
+e:none none solid;border-color:currentcolor currentcolor rgb(228,229,230);h=
+eight:0px;line-height:0;font-size:0px;padding:20px 0px 0px;width:50px"><div=
+ style=3D"font-size:14px;font-family:Verdana;color:rgb(0,0,0)"><a id=3D"m_-=
+3895911894682156029in_alias" style=3D"white-space:normal;display:inline-blo=
+ck;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,PingFa=
+ng SC,Microsoft YaHei" href=3D"https://wx.mail.qq.com/home/index?t=3Dreadma=
+il_businesscard_midpage&amp;nocheck=3Dtrue&amp;name=3Dpeter&amp;icon=3Dhttp=
+%3A%2F%2Fthirdqq.qlogo.cn%2Fg%3Fb%3Dsdk%26k%3DjNNd3A2LgdJlia1icr30EOlQ%26s%=
+3D100%26t%3D1555934948%3Frand%3D1642586177&amp;mail=3D522740662%40qq.com&am=
+p;code=3D" target=3D"_blank"><table style=3D"white-space:normal;table-layou=
+t:fixed;padding-right:20px" cellpadding=3D"0" cellspacing=3D"0"><tbody><tr =
+valign=3D"top"><td style=3D"width:40px;min-width:40px;padding-top:10px"><di=
+v style=3D"width:38px;height:38px;border:1px solid rgb(255,255,255);border-=
+radius:50%;margin:0px;vertical-align:top"><img src=3D"http://thirdqq.qlogo.=
+cn/g?b=3Dsdk&amp;k=3DjNNd3A2LgdJlia1icr30EOlQ&amp;s=3D100&amp;t=3D155593494=
+8?rand=3D1642586177" style=3D"width: 100%; height: 100%; border-radius: 50%=
+;"></div></td><td style=3D"padding:10px 0px 8px 10px"><div style=3D"font-si=
+ze:14px;color:rgb(51,49,46);line-height:20px;padding-bottom:2px;margin:0px;=
+font-weight:500">peter</div><div style=3D"font-size:12px;color:rgb(153,152,=
+150);line-height:18px;margin:0px">522740662@qq.com</div></td></tr></tbody><=
+/table></a></div></div><div>=C2=A0</div></blockquote><div><br></div><div>Th=
+ere&#39;s no such support. If the printer is usb you can use usb redirectio=
+n.</div><div><br></div><div>Frediano</div><div>=C2=A0<br></div></div></div>
+
+--000000000000f0a00b0629182ef1--
