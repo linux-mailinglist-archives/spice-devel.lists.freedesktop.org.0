@@ -2,90 +2,97 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 725B8A14AE4
-	for <lists+spice-devel@lfdr.de>; Fri, 17 Jan 2025 09:16:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96593A14AEC
+	for <lists+spice-devel@lfdr.de>; Fri, 17 Jan 2025 09:16:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5454010EA8F;
-	Fri, 17 Jan 2025 08:16:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8369310EA98;
+	Fri, 17 Jan 2025 08:16:46 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hiVqacxi";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="VUmMPz/T";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6BFFC10E27D
- for <spice-devel@lists.freedesktop.org>; Mon, 13 Jan 2025 08:25:14 +0000 (UTC)
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5401bd6cdb4so3753550e87.2
- for <spice-devel@lists.freedesktop.org>; Mon, 13 Jan 2025 00:25:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736756713; x=1737361513; darn=lists.freedesktop.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HsOOejTFjVwFwvDCfWyTG69OVT7YoO10LJVJy5N++GA=;
- b=hiVqacxis646nluQSlcULkOd6N3WEai1ty5erEMJToixb8wsJ7WAfHeN6hYV7JxD5X
- 5GLuhFwJAOfY5r4XQHDJh7nvzf1EXmzTJm4SzNxIkU19BtBdoLApxM+wB7w8NvIeJ5pH
- JT5QxgwX/FKDmuGA6F1d5ZOmpdbyy67hS/E0YCoNg2FwHRi6Rg9gDKRBsEWUJyHkMf4A
- Ch33Ea6ll7StVHNfhY4q1keqv+fwjC04vgmTCLwcmyX2B2Tfa1KQimwDnDExdGP5yV6Z
- +Y+r3jfYr5lwBPuWzYkK8PL7qWA/XSlNkaDjV2hsoMpBRbN86SrmbZJt+yZhrZuiK0E/
- zS/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736756713; x=1737361513;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HsOOejTFjVwFwvDCfWyTG69OVT7YoO10LJVJy5N++GA=;
- b=RUC71MGJBONJtI76caVweNFlfw6sAzFZkMFXPUGjYSSZ+t5beODdOU47iiEf7x4UA1
- 8vmZgm5Q9sMJdUmyBwt+DKZgLsXpTW2xsbe5wu9nmUl5YiwNqYwHZ7FuXXCXg6zgvgnc
- 64f013SVwPamQGybAOysfPhxlZCVlkGh2WCPM+MSBGymMqQ7KWIfWe9bewjn6ssL3JUG
- JMQINOylJQkOYyWM8dlhrYpHkM7oZrXFpNfrq8drV7fpaLjV4gG9+YjJ5LtsLmpJeW7k
- gUW6ggsYq6+MJgXftYMHlrXKs5XV+oWI9Qx5I1dXHHMLGOo7bvoUGSx7nZgJdv+UxZ8e
- yVuQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWn/Btl1ht0Krz0YgFtffv4RZqRcEqnxsuhBsT0SLJ+CSiM6pnf7luAtVMnmBImTHwCskcER1OqkNFkrA==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwphwaO0G55bn3DYOjS+RtnCYr1kyNa11MbcOPb85lc5dU86ZPo
- FBCZG+HdgN8myddwV4dmMMYzDNUpEgGN98YJnQ3VdzKUflYB5HcRuPfXQk4jSfw=
-X-Gm-Gg: ASbGncvs7j5uR1TU24cruN6C47N5KlPRDTSWSwPdt8rM21Zsb3/EDL33wMKX9qF34PW
- IdZAKULsgWyxq9Fw5PXzsahpYM4D8yrb/jq7EvldoFiMp9bd3gLTi74E/DiCcE4KU1JjFy7AkvU
- USV6JiR4mcc72fHmnuyi3Zu0FQEnh3EH8yTgDtt8e0nOynZ8RU+oEM1BnC0MVlMKkOMLWtNk/to
- FCxiQvecNU8Nvbo/86zFN4jLpMKStMheBL2adyUysR2B9cmtOo4IW9rvogniJNyxiqJE+4lAAmH
- vZP3Y7sD+cXohPmixjliWBLJGfePa81jcyDy
-X-Google-Smtp-Source: AGHT+IERZWZtkZrsbkHThnFiBHKfz//tsYW/urMLTgJODZNi9Tp473Grr1NqQ4M0NySCRCOoV5n3Rw==
-X-Received: by 2002:a05:6512:138c:b0:540:2188:763c with SMTP id
- 2adb3069b0e04-542845b0b55mr6338144e87.37.1736756712614; 
- Mon, 13 Jan 2025 00:25:12 -0800 (PST)
-Received: from eriador.lumag.spb.ru
- (2001-14ba-a0c3-3a00--b8c.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::b8c])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5428bec0659sm1286326e87.185.2025.01.13.00.25.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jan 2025 00:25:11 -0800 (PST)
-Date: Mon, 13 Jan 2025 10:25:09 +0200
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org, 
- airlied@gmail.com, simona@ffwll.ch, dri-devel@lists.freedesktop.org, 
- linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, 
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, 
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org, 
- linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
- linux-tegra@vger.kernel.org, 
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Rob Clark <robdclark@gmail.com>, 
- Abhinav Kumar <quic_abhinavk@quicinc.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>
-Subject: Re: [PATCH v2 13/25] drm/msm: Compute dumb-buffer sizes with
- drm_mode_size_dumb()
-Message-ID: <bbw2n4ccn5jlq7q7lsw3xdnbieazgexkwkycrqvk5aoiq5q3wx@nz6gd3unwkg4>
-References: <20250109150310.219442-1-tzimmermann@suse.de>
- <20250109150310.219442-14-tzimmermann@suse.de>
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0B41B10E2BF;
+ Tue, 14 Jan 2025 14:04:06 +0000 (UTC)
+Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
+ [91.158.153.178])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 31F9BD21;
+ Tue, 14 Jan 2025 15:03:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1736863387;
+ bh=jBGGjiAjYD2JOnPDqBA/PIwuCRksQV5KpdLlTR77h4U=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=VUmMPz/TKALedLGdjaIw/OWv6jEHfDPMa8xt4ELJX5I8SbEMhIAPnQ7LMaQ/pxC0d
+ yctQn2J+9Ex5RD5bSpotgdbZkvyy/groI/l05HXur2OCULVTYWkAA3caibRw5fOAxJ
+ rPavCX5KpuNQwwNzE4HXGXO6RbtvlTGy6+Ypgri4=
+Message-ID: <c303dcb4-fee9-45d0-aaff-0f5f1fef07f7@ideasonboard.com>
+Date: Tue, 14 Jan 2025 16:04:00 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250109150310.219442-14-tzimmermann@suse.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 15/25] drm/omapdrm: Compute dumb-buffer sizes with
+ drm_mode_size_dumb()
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
+ freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
+ simona@ffwll.ch
+References: <20250109150310.219442-1-tzimmermann@suse.de>
+ <20250109150310.219442-16-tzimmermann@suse.de>
+Content-Language: en-US
+From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
+ 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
+In-Reply-To: <20250109150310.219442-16-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 17 Jan 2025 08:16:43 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -101,31 +108,56 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Thu, Jan 09, 2025 at 03:57:07PM +0100, Thomas Zimmermann wrote:
+Hi,
+
+On 09/01/2025 16:57, Thomas Zimmermann wrote:
 > Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
-> buffer size. The hardware requires the scnaline pitch to be a multiple
-> of 32 pixels. Therefore compute the byte size of 32 pixels in the given
-> color mode and align the pitch accordingly.
-
-- scanline, not scnaline
-- the statement about 32-pixel alignment needs an explanation that it is
-  being currently handled by align_pitch().
-
-With that in mind:
-
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Rob Clark <robdclark@gmail.com>
-> Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
-> Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> Cc: Sean Paul <sean@poorly.run>
-> Cc: Marijn Suijten <marijn.suijten@somainline.org>
-> ---
->  drivers/gpu/drm/msm/msm_gem.c | 27 +++++++++++++++++++++++++--
->  1 file changed, 25 insertions(+), 2 deletions(-)
+> buffer size. Align the pitch to a multiple of 8.
 > 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+> ---
+>   drivers/gpu/drm/omapdrm/omap_gem.c | 15 +++++++--------
+>   1 file changed, 7 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/omapdrm/omap_gem.c b/drivers/gpu/drm/omapdrm/omap_gem.c
+> index b9c67e4ca360..b8413a2dcdeb 100644
+> --- a/drivers/gpu/drm/omapdrm/omap_gem.c
+> +++ b/drivers/gpu/drm/omapdrm/omap_gem.c
+> @@ -11,6 +11,7 @@
+>   #include <linux/pfn_t.h>
+>   #include <linux/vmalloc.h>
+>   
+> +#include <drm/drm_dumb_buffers.h>
+>   #include <drm/drm_prime.h>
+>   #include <drm/drm_vma_manager.h>
+>   
+> @@ -583,15 +584,13 @@ static int omap_gem_object_mmap(struct drm_gem_object *obj, struct vm_area_struc
+>   int omap_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
+>   		struct drm_mode_create_dumb *args)
+>   {
+> -	union omap_gem_size gsize;
+> -
+> -	args->pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
+> -
+> -	args->size = PAGE_ALIGN(args->pitch * args->height);
+> +	union omap_gem_size gsize = { };
+> +	int ret;
+>   
+> -	gsize = (union omap_gem_size){
+> -		.bytes = args->size,
+> -	};
+> +	ret = drm_mode_size_dumb(dev, args, SZ_8, 0);
+> +	if (ret)
+> +		return ret;
+> +	gsize.bytes = args->size;
+>   
+>   	return omap_gem_new_handle(dev, file, gsize,
+>   			OMAP_BO_SCANOUT | OMAP_BO_WC, &args->handle);
 
--- 
-With best wishes
-Dmitry
+Tested on dra76 evm.
+
+Reviewed-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+
+  Tomi
+
