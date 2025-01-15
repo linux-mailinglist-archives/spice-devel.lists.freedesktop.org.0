@@ -2,33 +2,33 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BA80A14ADE
-	for <lists+spice-devel@lfdr.de>; Fri, 17 Jan 2025 09:16:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C7C5A14AEE
+	for <lists+spice-devel@lfdr.de>; Fri, 17 Jan 2025 09:16:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 59A5A10EA86;
-	Fri, 17 Jan 2025 08:16:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C99CC10EAA1;
+	Fri, 17 Jan 2025 08:16:47 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="lzo3SM0J";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="hIJC7ZXP";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
  [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6EC6410E4F0;
- Wed, 15 Jan 2025 10:58:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C414310E611;
+ Wed, 15 Jan 2025 12:06:27 +0000 (UTC)
 Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi
  [91.158.153.178])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 8E93E4AD;
- Wed, 15 Jan 2025 11:57:54 +0100 (CET)
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 72820526;
+ Wed, 15 Jan 2025 13:05:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1736938675;
- bh=PHvyrlfL90DWijiSoft7XP7rReZoqz0LHMvPolG3eVc=;
+ s=mail; t=1736942728;
+ bh=FuDytT435iHRivsE/G04kLqYkdgsyGU+ZJ0WGc8aFpo=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=lzo3SM0Jh0gt3jMLAaQUsepDmw7eYUBnlka5hbbPJnOVGveG2GsivekYsCC/wVcWM
- Fpv1tfAAWSv7Wahb71B2n7RvzSXmVxJHOI1MGlNmaSR3eC23tKmnhwmEeri17hRi+x
- h9NpTRQ9X4CPbC+pYA0xfkGmK5O2KaoBdQa05y/Q=
-Message-ID: <f3ba05c7-6e49-4641-a3f9-ba418ebdb7c3@ideasonboard.com>
-Date: Wed, 15 Jan 2025 12:58:48 +0200
+ b=hIJC7ZXPZtRflk6LODVFXfISeh41qkSpg6phZpn+jJNh/hs7pxM5vBSXBXByWBzS8
+ LX7kPPllqXqVJXAFomHjs+y2IACUieKV5ZLUGSlreuMdvgLHTwTHVy0dYbnXKnxipV
+ qOeqzpf4NDSnnVcvegNZjPfUH6Ys4KcU5utGuoQo=
+Message-ID: <d67adb03-5cd0-4ac9-af58-cf4446dacee3@ideasonboard.com>
+Date: Wed, 15 Jan 2025 14:06:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 25/25] drm/xlnx: Compute dumb-buffer sizes with
@@ -49,6 +49,8 @@ References: <20250109150310.219442-1-tzimmermann@suse.de>
  <20250109150310.219442-26-tzimmermann@suse.de>
  <cdbe483d-0895-47aa-8c83-1c28220f4a02@ideasonboard.com>
  <bc97b92e-7f8a-4b92-af8a-20fa165ead55@suse.de>
+ <f3ba05c7-6e49-4641-a3f9-ba418ebdb7c3@ideasonboard.com>
+ <c6735280-7c32-4319-8ca9-a7305d8117c3@suse.de>
 Content-Language: en-US
 From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
 Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
@@ -94,9 +96,9 @@ Autocrypt: addr=tomi.valkeinen@ideasonboard.com; keydata=
  ueeIlwJl5CpT5l8RpoZXEOVtXYn8zzOJ7oGZYINRV9Pf8qKGLf3Dft7zKBP832I3PQjeok7F
  yjt+9S+KgSFSHP3Pa4E7lsSdWhSlHYNdG/czhoUkSCN09C0rEK93wxACx3vtxPLjXu6RptBw
  3dRq7n+mQChEB1am0BueV1JZaBboIL0AGlSJkm23kw==
-In-Reply-To: <bc97b92e-7f8a-4b92-af8a-20fa165ead55@suse.de>
+In-Reply-To: <c6735280-7c32-4319-8ca9-a7305d8117c3@suse.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 17 Jan 2025 08:16:43 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -114,132 +116,79 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 Hi,
 
-On 15/01/2025 12:26, Thomas Zimmermann wrote:
+On 15/01/2025 13:37, Thomas Zimmermann wrote:
 > Hi
 > 
 > 
-> Am 15.01.25 um 11:13 schrieb Tomi Valkeinen:
->> Hi!
+> Am 15.01.25 um 11:58 schrieb Tomi Valkeinen:
+> [...]
+>>> These are all good points. Did you read my discussion with Andy on 
+>>> patch 2? I think it resolves all the points you have. The current 
+>>> CREATE_DUMB 
 >>
->> On 09/01/2025 16:57, Thomas Zimmermann wrote:
->>> Call drm_mode_size_dumb() to compute dumb-buffer scanline pitch and
->>> buffer size. Align the pitch according to hardware requirements.
->>>
->>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
->>> Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
->>> ---
->>>   drivers/gpu/drm/xlnx/zynqmp_kms.c | 7 +++++--
->>>   1 file changed, 5 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/drivers/gpu/drm/xlnx/zynqmp_kms.c b/drivers/gpu/drm/ 
->>> xlnx/zynqmp_kms.c
->>> index b47463473472..7ea0cd4f71d3 100644
->>> --- a/drivers/gpu/drm/xlnx/zynqmp_kms.c
->>> +++ b/drivers/gpu/drm/xlnx/zynqmp_kms.c
->>> @@ -19,6 +19,7 @@
->>>   #include <drm/drm_crtc.h>
->>>   #include <drm/drm_device.h>
->>>   #include <drm/drm_drv.h>
->>> +#include <drm/drm_dumb_buffers.h>
->>>   #include <drm/drm_encoder.h>
->>>   #include <drm/drm_fbdev_dma.h>
->>>   #include <drm/drm_fourcc.h>
->>> @@ -363,10 +364,12 @@ static int zynqmp_dpsub_dumb_create(struct 
->>> drm_file *file_priv,
->>>                       struct drm_mode_create_dumb *args)
->>>   {
->>>       struct zynqmp_dpsub *dpsub = to_zynqmp_dpsub(drm);
->>> -    unsigned int pitch = DIV_ROUND_UP(args->width * args->bpp, 8);
->>> +    int ret;
->>>         /* Enforce the alignment constraints of the DMA engine. */
->>> -    args->pitch = ALIGN(pitch, dpsub->dma_align);
->>> +    ret = drm_mode_size_dumb(drm, args, dpsub->dma_align, 0);
->>> +    if (ret)
->>> +        return ret;
->>>         return drm_gem_dma_dumb_create_internal(file_priv, drm, args);
->>>   }
->>
->> I have some trouble with this one.
->>
->> I have sent a series to add some pixel formats:
->>
->> https://lore.kernel.org/all/20250115-xilinx-formats- 
->> v2-0-160327ca652a@ideasonboard.com/
->>
->> Let's look at XV15. It's similar to NV12, but 10 bits per component, 
->> and some packing and padding.
->>
->> First plane: 3 pixels in a 32 bit group
->> Second plane: 3 pixels in a 64 bit group, 2x2 subsampled
->>
->> So, on average, a pixel on the first plane takes 32 / 3 = 10.666... 
->> bits on a line. That's not a usable number for the 
->> DRM_IOCTL_MODE_CREATE_DUMB ioctl.
->>
->> What I did was to use the pixel group size as "bpp" for 
->> DRM_IOCTL_MODE_CREATE_DUMB. So, e.g., for 720 x 576:
->>
->> Stride for first plane: 720 * (32 / 3) / 8 = 960 bytes
->> Stride for second plane: 720 / 2 * (64 / 3) / 8 = 960 bytes
->>
->> First plane: 720 / 3 = 240 pixel groups
->> Second plane: 720 / 2 / 3 = 120 pixel groups
->>
->> So I allocated the two planes with:
->> 240 x 576 with 32 bitspp
->> 120 x 288 with 64 bitspp
->>
->> This worked, and if I look at the DRM_IOCTL_MODE_CREATE_DUMB in the 
->> docs, I can't right away see anything there that says my tactic was 
->> not allowed.
->>
->> The above doesn't work anymore with this patch, as the code calls 
->> drm_driver_color_mode_format(), which fails for 64 bitspp. It feels a 
->> bit odd that DRM_IOCTL_MODE_CREATE_DUMB will try to guess the RGB 
->> fourcc for a dumb buffer allocation.
->>
->> So, what to do here? Am I doing something silly? What's the correct 
->> way to allocate the buffers for XV15? Should I just use 32 bitspp for 
->> the plane 2 too, and double the width (this works)?
->>
->> Is DRM_IOCTL_MODE_CREATE_DUMB only meant for simple RGB formats? The 
->> xilinx driver can, of course, just not use drm_mode_size_dumb(). But 
->> if so, I guess the limitations of drm_mode_size_dumb() should be 
->> documented.
->>
->> Do we need a new dumb-alloc ioctl that takes the format and plane 
->> number as parameters? Or alternatively a simpler dumb-alloc that 
->> doesn't have width and bpp, but instead takes a stride and height as 
->> parameters? I think those would be easier for the userspace to use, 
->> instead of trying to adjust the parameters to be suitable for the kernel.
+>> I had missed the discussion, and, indeed, the patch you attached fixes 
+>> the problem on Xilinx.
 > 
-> These are all good points. Did you read my discussion with Andy on patch 
-> 2? I think it resolves all the points you have. The current CREATE_DUMB 
+> Great. Thanks for testing.
+> 
+>>
+>>> ioctl is unsuited for anything but the simple RGB formats. The bpp 
+>>
+>> It's a bit difficult to use, but is it really unsuited? bitsperpixel, 
+>> width and height do give an exact pitch and size, do they not? It does 
+>> require the userspace to handle the subsampling and planes, though, so 
+>> far from perfect.
+> 
+> The bpp value sets the number of bits per pixel; except for bpp==15 
+> (XRGB1555), where it sets the color depth. OR bpp is the color depth; 
+> except for bpp==32 (XRGB8888), where it is the number of bits per pixel. 
+> It's therefore best to interpret it like a color-mode enum.
 
-I had missed the discussion, and, indeed, the patch you attached fixes 
-the problem on Xilinx.
+Ah, right... That's horrible =).
 
-> ioctl is unsuited for anything but the simple RGB formats. The bpp 
+And I assume it's not really possible to define the bpp to mean bits per 
+pixel, except for a few special cases like 15?
 
-It's a bit difficult to use, but is it really unsuited? bitsperpixel, 
-width and height do give an exact pitch and size, do they not? It does 
-require the userspace to handle the subsampling and planes, though, so 
-far from perfect.
+Why do we even really care about color depth here? We're just allocating 
+memory. Doesn't DIV_ROUND_UP(args->bpp, SZ_8) work fine for XRGB1555 too?
 
-So, I'm all for a new ioctl, but I don't right away see why the current 
-ioctl couldn't be used. Which makes me wonder about the drm_warn() in 
-your patch, and the "userspace throws in arbitrary values for bpp and 
-relies on the kernel to figure it out". Maybe I'm missing something here.
+>> So, I'm all for a new ioctl, but I don't right away see why the 
+>> current ioctl couldn't be used. Which makes me wonder about the 
+>> drm_warn() in your patch, and the "userspace throws in arbitrary 
+>> values for bpp and relies on the kernel to figure it out". Maybe I'm 
+>> missing something here.
+> 
+> I was unsure about the drm_warn() as well. It's not really wrong to have 
+> odd bpp values, but handing in an unknown bpp value might point to a 
+> user-space error. At least there should be a drm_dbg().
+> 
+>>
+>>> parameter is not very precise. The solution would be a new ioctl call 
+>>> that receives the DRM format and returns a buffer for each individual 
+>>> plane.
+>>
+>> Yes, I think that makes sense. That's a long road, though =). So my 
+>> question is, is CREATE_DUMB really unsuitable for other than simple 
+>> RGB formats, or can it be suitable if we just define how the userspace 
+>> should use it for multiplanar, subsampled formats?
+> 
+> That would duplicate format and hardware information in user-space. Some 
 
-> parameter is not very precise. The solution would be a new ioctl call 
-> that receives the DRM format and returns a buffer for each individual 
-> plane.
+But we already have that, don't we? We have drivers and userspace that 
+support, say, NV12 via dumb buffers. But (correct me if I'm wrong) we 
+don't document how CREATE_DUMB has to be used to allocate multiplanar 
+subsampled buffers, so the userspace devs have to "guess".
 
-Yes, I think that makes sense. That's a long road, though =). So my 
-question is, is CREATE_DUMB really unsuitable for other than simple RGB 
-formats, or can it be suitable if we just define how the userspace 
-should use it for multiplanar, subsampled formats?
+> hardware might have odd per-plane limitations that only the driver knows 
+> about. For example, there's another discussion on dri-devel about pitch- 
+> alignment requirements of DRM_FORMAT_MOD_LINEAR on various hardware. 
+> That affects dumb buffers as well. I don't think that there's an 
+> immediate need for a CREATE_DUMB2, but it seems worth to keep in mind.
+
+Yes, the current CREATE_DUMB can't cover all the hardware. We do need 
+CREATE_DUMB2, sooner or later. I just hope we can define and document a 
+set of rules that allows using CREATE_DUMB for the cases where it 
+sensibly works (and is already being used).
 
   Tomi
 
