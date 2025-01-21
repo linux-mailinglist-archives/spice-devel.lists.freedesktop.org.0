@@ -2,82 +2,70 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C246A18545
-	for <lists+spice-devel@lfdr.de>; Tue, 21 Jan 2025 19:33:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8231CA18547
+	for <lists+spice-devel@lfdr.de>; Tue, 21 Jan 2025 19:33:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B185B10E61C;
-	Tue, 21 Jan 2025 18:33:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A819310E61F;
+	Tue, 21 Jan 2025 18:33:49 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="enF4YWVG";
+	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
- [209.85.222.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2D89C10E507;
- Tue, 21 Jan 2025 09:13:04 +0000 (UTC)
-Received: by mail-qk1-f174.google.com with SMTP id
- af79cd13be357-7b6ef047e9bso496089085a.1; 
- Tue, 21 Jan 2025 01:13:04 -0800 (PST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EFF7810E555
+ for <spice-devel@lists.freedesktop.org>; Tue, 21 Jan 2025 10:44:39 +0000 (UTC)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e549b0f8d57so9019566276.3
+ for <spice-devel@lists.freedesktop.org>; Tue, 21 Jan 2025 02:44:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737456279; x=1738061079; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fM4RiAz8x0xBzhbf4AlSqIUYbrQ3SaJ7YEvWtIB73WA=;
+ b=enF4YWVGtyD/lErCLhJEuj4Wrmc26M4NYMvGsRLmY7S5INLBbUgdNl8H69q5QFuNi9
+ rrF2f34B/V4co7llkZKN05raYohWijWuaMgDPKPqcboD8CHw+bIkh64mEbiwE9wvDknL
+ 83fSC60Ro2D2aBASREeV4A19hwXvNlFKEOu9TKdx+iQf+Z3yNhTg8Gh9xkP7ystXq0U/
+ Lu3Y5cpfJIu4oDZZqrdAV8p2Hc7P1RQcSRQIRwLlG1AqBQ09ICSUdGuVbFenZ+rKfyid
+ HG7yaGSoh4iNZzSQIvJkIS9cC+P/5STzDblUZY5vOTi1rkHrYkSxAVjnKFQERfcKJJ9w
+ BvkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737450783; x=1738055583;
+ d=1e100.net; s=20230601; t=1737456279; x=1738061079;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h0F66BpcncnDZq8+yac2PqIUMY5KsLdGVzSelKc0x5s=;
- b=Cc+l1wjin+suCCFHL+z+I1gEu0IuCge7UB11MxXgUMoBBzF0zYjrdF9O+9hwU+uhCd
- C3oLQOgFsYzfmcDTyhEBci7gOL7gdf2XtTq4Vmhr+l2Ya6EsFYDZVZ4kZNv5yA6NrIVp
- nOP0CF1qwkM/FyH3BgsStpD3Wxqld+3EgAvXutLLF44Uawx4LPDrRWVKfH/pNmEffN+w
- wJvM3z5Jmu+bpjA3msJOuMLdr3R73oTz+65oOjkBymXVjM7ODTqWTi4W5G/M32be5yPp
- TMya6Rh2sYxvxCtybr9Bd7hkVUfEOLRGQ5f/ZE4dZzSdZodxIb+oXun7dMO+8UcykMSv
- uijQ==
+ bh=fM4RiAz8x0xBzhbf4AlSqIUYbrQ3SaJ7YEvWtIB73WA=;
+ b=hEWj9W35noIc90h3AMQ7h99x4oFz5TCt8AcSXNk0td48OMb95lNEtrcBBSy9Ut1YsJ
+ Ewexd5hhExnhwYttZR+Xk7JkLOAK0+YtC0BsN+BgKLJ8ZCwkW+TyeQdwCECQfsWTdpe2
+ mMykguQcKo0VqnU8HzmuFBhI+ELrp8z8H/DB1ebUrCOr/8ge48vV3IkoEBo01X8yi8Gd
+ nFbZARbTCTnTrifh2HW4+MFfjF7IuIdY5D9jnBbF54uWanC2d9i2Ilf30kdi5F7rolSd
+ wlJ0iy4oxjqL32NF/wjWxfgNi4oimLwSz4n397FIBbVGYww4vfJ5xuTIXGSK4BImk+lc
+ nlLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFX15iyT0BFJMUKofn0XY8F8Nf60CUyfNKoG6RfVKP3PHygVH5dsFp2E/9ogEJxnH0F6RlN9lhZ5ub@lists.freedesktop.org,
- AJvYcCUo6+Eb/EYwEAhKFpihcaGhggUMxboCqZR0zAqaK2hO0Lf5k3UtIU/IjFBaYxiSZYxx3kvYfNxn6RM=@lists.freedesktop.org,
- AJvYcCUre7AtHKTk3FFjRM+VwbB6AqPniaWjwoGqtEPohLqM1Tw5sRsPgKeXXPiRA8AoVzNAnkSLVCrQ7HHP@lists.freedesktop.org,
- AJvYcCVLZTx7RyMdm1iePYnJedzOjoh4tctAPwCbOSJPHKoikcweZiwGJRpDsaYDu555afbE+j6whDXLRh0yBeY=@lists.freedesktop.org,
- AJvYcCVQbIo6jWusCh93YLTAZ+5w5P7B3HNoZUatt78pasDGyVybUSgoxrDScG3yu3nTgDPzQGLd3egc@lists.freedesktop.org,
- AJvYcCXK28d7MKEW7TXrJYhlAzAQOx6eCysJIcrBg8fs9M3jR7hFLWbT0w719Wb6JjhMxUJwR6tRMPBqdQth@lists.freedesktop.org,
- AJvYcCXzY8iLbtvYB2ZTDeEWu2kzHBPKF55ypcObrmiaekc5J5jCITW0T72fNTtSS5UzJUC+5+acBi4fuw==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YwbPJleWF0OAFcmh38cx7+br942aa5X03313imBQu/kqaiia/Pk
- A95rqfNllJszEFwKn4D0Ly7wfwQbbTRu36Z2S3Lpun1Lv8opqOAIe+pYratc
-X-Gm-Gg: ASbGncu985qL2Y0uyZTUv90FJ7APpHzSIVz/3sblfR4tYYAouTHS2hXhknZcPCG9G/R
- OOmfTGWIygMdRjzCZYSh0MMDt2aHbQEj1m59AtEvGm/MQHRsNcl71HanItf1H2U2HBzetPBj0UT
- tl8xfS3G5zsegzoLEsJzKS4dlfp7xGp7XEHEIRbLqWpfptKt6ZEgoGsvOTVHhy2HYokLz+21suJ
- X/enIUfz4q71ISa8mV3Ta0LjcB27Xe9j2TcUBPXyWYhe5WtBnfCN5TzLc4KiEI1vX3SgYoUOZpr
- D7PDLjYUnAnrV/CuavCZt0ztZDJWmDoIxBUe
-X-Google-Smtp-Source: AGHT+IFOcUPptTQCvOMHiebMmKIO51iRtzt6r6HM+NEQ7x3Abwl+WNcxNE8vKqEDySENGLdt14ukKg==
-X-Received: by 2002:a05:620a:43a2:b0:7b1:7508:9f38 with SMTP id
- af79cd13be357-7be523e2a07mr3876635885a.16.1737450782825; 
- Tue, 21 Jan 2025 01:13:02 -0800 (PST)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com.
- [209.85.222.174]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be614ef1a5sm532894685a.102.2025.01.21.01.13.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jan 2025 01:13:02 -0800 (PST)
-Received: by mail-qk1-f174.google.com with SMTP id
- af79cd13be357-7b6ef047e9bso496088185a.1; 
- Tue, 21 Jan 2025 01:13:02 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVQJWqNelfcLtnJaBP04o7uW2LCL7GrCXS5T7TRGvoqXVGM+/zvO/5xClBIlvNdhVh9GXCPzi/YMEbMGgY=@lists.freedesktop.org,
- AJvYcCVYYfWcsLEVspvqfRAlEaf6Fb8/sOZJcclQYSNb9rBzJcyDumPDlkcG8j2NRuYxvTUgxyMs4kpAuTAD@lists.freedesktop.org,
- AJvYcCW22fC3GKgVtmoBbUOdboA2bkKm1M/Qobm4DJ9o0kNf6ivIif6QCdPJ7tIGYNqbI28149Xn5cjgMWZm@lists.freedesktop.org,
- AJvYcCW6c2SEePq4y4697mOeGlZ0HbYtKZil/yI/BufMykOgMtFGVLMp/KmQ+Yc/2Ug5OYmvvGAVq5DSZV46@lists.freedesktop.org,
- AJvYcCWNCpJJ4QJ8EBFfznn5s+mtKP7vEIH6Q5E/laUT8gE4rkU9ZIJHNbB4eSKvK8Kc9JFY8GHQLJMZ@lists.freedesktop.org,
- AJvYcCXKgArUnzx80sKf5StLAw7gTcyqL+RSpPgoc6pxqQUVQEPjJmqR1iVxUnB7xJNowbEN6jViCj18BA==@lists.freedesktop.org,
- AJvYcCXLoBu21VlAlq90XjxzuKrv11kwx91gwKS+UeqBStgBFhuQbCCLj57S6R7zx/a8kyVqx9BtGjE+Fsk=@lists.freedesktop.org
-X-Received: by 2002:a05:6122:1783:b0:517:e7b7:d04b with SMTP id
- 71dfb90a1353d-51cd983d39emr19246646e0c.5.1737450357663; Tue, 21 Jan 2025
- 01:05:57 -0800 (PST)
+ AJvYcCX/7hckATz/Wj4COfOsGLTUdez4gs2GJdTsShG786T1v1Mj0qRYWZKvjZBLHRguEtEfGKuYODjNSPudHQ==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwUKxXr7PSa/t1FzmoaPBhCuXRzqS14MWlLHX2oyTYOD3nTCPv6
+ uzULLJ9LWaKVd0XIgMN2YRcii6JpM/p3u+q95XQVNPofW8s3jPf5dTGF1WKt48eZsWogyoK1z/I
+ lvsuaLYkeBl/Yinb3TrPKLqoxeCJm/cfr1oG5/Q==
+X-Gm-Gg: ASbGncsiybTuMGR97osT+EVkpPtAE1TPEOGkOAhxm5ahQjMs6OCPDs7Eb4EAXU1i+Sj
+ g5PWjnu2WgYucz3IuSIlhhzpzCfDmxomvW/zv64iLad9HaukAuyFx46hEduSPYmMgbw==
+X-Google-Smtp-Source: AGHT+IHO0V0jurSGd/L1Ymx0QNx/m/A6wTdCul+m+iz6FYx+lOCJoAuF4E4jOdjfH48/SXNUBM+6kJMlTjWcDWiw9yM=
+X-Received: by 2002:a05:690c:3701:b0:6f6:d4bf:d01a with SMTP id
+ 00721157ae682-6f6eb940fb8mr129606697b3.34.1737456278815; Tue, 21 Jan 2025
+ 02:44:38 -0800 (PST)
 MIME-Version: 1.0
 References: <20241214-drm-connector-mode-valid-const-v2-0-4f9498a4c822@linaro.org>
  <173624946815.1500596.321177900833598022.b4-ty@linaro.org>
-In-Reply-To: <173624946815.1500596.321177900833598022.b4-ty@linaro.org>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Tue, 21 Jan 2025 10:05:45 +0100
-X-Gmail-Original-Message-ID: <CAMuHMdVwcaY2Fgpf7GYhBrE5B+AEg=v0BH4OjMXgnp=wqjxmKg@mail.gmail.com>
-X-Gm-Features: AbW1kvaysGolt62WeN4DkS2DNKlSt5oN-0lBeK1j4PwxsWLIrFBPjsQ9bnC7ZcA
-Message-ID: <CAMuHMdVwcaY2Fgpf7GYhBrE5B+AEg=v0BH4OjMXgnp=wqjxmKg@mail.gmail.com>
+ <CAMuHMdVwcaY2Fgpf7GYhBrE5B+AEg=v0BH4OjMXgnp=wqjxmKg@mail.gmail.com>
+In-Reply-To: <CAMuHMdVwcaY2Fgpf7GYhBrE5B+AEg=v0BH4OjMXgnp=wqjxmKg@mail.gmail.com>
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Date: Tue, 21 Jan 2025 12:44:27 +0200
+X-Gm-Features: AbW1kvabZ-in97OiEwfu0vjcyzelZUBMNUaWG-jd-XhigpbETlYrZDr4y_chW2I
+Message-ID: <CAA8EJpos0HQpr9P4XRkto0Jy+Anf1xEH2xhEU8wtCyUQd+XwMg@mail.gmail.com>
 Subject: Re: [PATCH v2 0/5] drm/connector: make mode_valid() callback accept
  const mode pointer
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
 Cc: Jani Nikula <jani.nikula@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, 
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
@@ -151,56 +139,59 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Dmitry,
-
-On Tue, Jan 7, 2025 at 12:31=E2=80=AFPM Dmitry Baryshkov
-<dmitry.baryshkov@linaro.org> wrote:
-> On Sat, 14 Dec 2024 15:37:04 +0200, Dmitry Baryshkov wrote:
-> > While working on the generic mode_valid() implementation for the HDMI
-> > Connector framework I noticed that unlike other DRM objects
-> > drm_connector accepts non-const pointer to struct drm_display_mode,
-> > while obviously mode_valid() isn't expected to modify the argument.
-> >
-> > Mass-change the DRM framework code to pass const argument to that
-> > callback.
-> >
-> > [...]
+On Tue, 21 Jan 2025 at 11:13, Geert Uytterhoeven <geert@linux-m68k.org> wro=
+te:
 >
-> Applied to drm-misc-next, thanks!
+> Hi Dmitry,
 >
-> [1/5] drm/encoder_slave: make mode_valid accept const struct drm_display_=
-mode
->       commit: 7a5cd45fab0a2671aa4ea6d8fb80cea268387176
-> [2/5] drm/amdgpu: don't change mode in amdgpu_dm_connector_mode_valid()
->       commit: b255ce4388e09f14311e7912d0ccd45a14a08d66
-> [3/5] drm/sti: hda: pass const struct drm_display_mode* to hda_get_mode_i=
-dx()
->       commit: 5f011b442006ccb29044263df10843de80fc0b14
-> [4/5] drm/connector: make mode_valid_ctx take a const struct drm_display_=
-mode
->       commit: 66df9debcb29d14802912ed79a9cf9ba721b51a4
-> [5/5] drm/connector: make mode_valid take a const struct drm_display_mode
->       commit: 26d6fd81916e62d2b0568d9756e5f9c33f0f9b7a
+> On Tue, Jan 7, 2025 at 12:31=E2=80=AFPM Dmitry Baryshkov
+> <dmitry.baryshkov@linaro.org> wrote:
+> > On Sat, 14 Dec 2024 15:37:04 +0200, Dmitry Baryshkov wrote:
+> > > While working on the generic mode_valid() implementation for the HDMI
+> > > Connector framework I noticed that unlike other DRM objects
+> > > drm_connector accepts non-const pointer to struct drm_display_mode,
+> > > while obviously mode_valid() isn't expected to modify the argument.
+> > >
+> > > Mass-change the DRM framework code to pass const argument to that
+> > > callback.
+> > >
+> > > [...]
+> >
+> > Applied to drm-misc-next, thanks!
+> >
+> > [1/5] drm/encoder_slave: make mode_valid accept const struct drm_displa=
+y_mode
+> >       commit: 7a5cd45fab0a2671aa4ea6d8fb80cea268387176
+> > [2/5] drm/amdgpu: don't change mode in amdgpu_dm_connector_mode_valid()
+> >       commit: b255ce4388e09f14311e7912d0ccd45a14a08d66
+> > [3/5] drm/sti: hda: pass const struct drm_display_mode* to hda_get_mode=
+_idx()
+> >       commit: 5f011b442006ccb29044263df10843de80fc0b14
+> > [4/5] drm/connector: make mode_valid_ctx take a const struct drm_displa=
+y_mode
+> >       commit: 66df9debcb29d14802912ed79a9cf9ba721b51a4
+> > [5/5] drm/connector: make mode_valid take a const struct drm_display_mo=
+de
+> >       commit: 26d6fd81916e62d2b0568d9756e5f9c33f0f9b7a
+>
+> I cannot find these in drm-misc or drm-next, but they are in drm-tip?
 
-I cannot find these in drm-misc or drm-next, but they are in drm-tip?
-The last one due to commit 2bdc721917cf141f ("Merge remote-tracking
-branch 'drm-misc/drm-misc-next' into drm-tip").
+These are in drm-misc/drm-misc-next, the commit IDs are a part of the
+Git history.
 
-What am I missing?
-Thanks!
+> The last one due to commit 2bdc721917cf141f ("Merge remote-tracking
+> branch 'drm-misc/drm-misc-next' into drm-tip").
+>
+> What am I missing?
+> Thanks!
 
-P.S. Sima: noticed while resolving a merge conflict using drm-tip. Thx!
+It might be some kind of misinteraction between drm-misc-next vs
+drm-misc-next-fixes vs merge window. Let me recheck dim rebuild-tip.
 
-Gr{oetje,eeting}s,
+>
+> P.S. Sima: noticed while resolving a merge conflict using drm-tip. Thx!
 
-                        Geert
 
 --=20
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
-.org
-
-In personal conversations with technical people, I call myself a hacker. Bu=
-t
-when I'm talking to journalists I just say "programmer" or something like t=
-hat.
-                                -- Linus Torvalds
+With best wishes
+Dmitry
