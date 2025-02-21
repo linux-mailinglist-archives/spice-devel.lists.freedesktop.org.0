@@ -2,99 +2,100 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9C55A3EFDA
-	for <lists+spice-devel@lfdr.de>; Fri, 21 Feb 2025 10:19:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A460CA3F168
+	for <lists+spice-devel@lfdr.de>; Fri, 21 Feb 2025 11:08:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 330B510E265;
-	Fri, 21 Feb 2025 09:19:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 368E510E245;
+	Fri, 21 Feb 2025 10:08:24 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="Y5OD0ODW";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="apiGdSL5";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="Ix9uY6zy";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="GXuVcphr";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="LQF5AnVY";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="WLcapchc";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="lKrGFb/s";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Oulub/yC";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A672010E22D
- for <spice-devel@lists.freedesktop.org>; Fri, 21 Feb 2025 09:19:40 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 476E410E233
+ for <spice-devel@lists.freedesktop.org>; Fri, 21 Feb 2025 10:08:22 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 016201F38C;
- Fri, 21 Feb 2025 09:19:38 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id EBE8C1F78A;
+ Fri, 21 Feb 2025 10:08:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1740129579; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1740132501; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=XEszpDYKL3MVEwZqleFHNbIiqH/hiHMJcxYVx498oDU=;
- b=Y5OD0ODW05Ir6K44W9oHAHrgQsGFXLTe2qXLi/jaIBFZ8ei3bph+xdvoGyv2xycuuIUEmU
- lfhDd0FD0MKqUsASX/kbFrYVayo06HxIfkIBglJZ5y6xJsUEh1UQO7cOjfhKiWv2u8LZKu
- ovMgo9SssgX3HXtwBDBEB/mDQQQS6Mk=
+ bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
+ b=LQF5AnVYcLPwoUAaF2Bux+O59hCHAg6pl0zqiienZa7pQ4gvMY1PpgPpjwuZVrF8ZDKKpf
+ LjOteY2AeuwSxMSm1St3s7ejjMGetWwS66KGBEGLl6z5snb3SAsox8bmKkKYu8xbUpOlBJ
+ 13eVsZCCqwC2ZqgfhDzxXWYmlFTZ0zo=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1740129579;
+ s=susede2_ed25519; t=1740132501;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=XEszpDYKL3MVEwZqleFHNbIiqH/hiHMJcxYVx498oDU=;
- b=apiGdSL53jreK8uUb7XtKwQfvrR9lvbOm4fC4bhVEsCnP7K54jIhH0RLvsx+aZh30OOeHO
- abABtQE13t+7TJAg==
+ bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
+ b=WLcapchcQAQV8ZOFP+V3hwPjvdEPgPjJgGK+oZwFKvo+c3s2ayOg9oH8N7jbf3H7oR3eou
+ 4NxoU8q4tY+j4BAA==
 Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Ix9uY6zy;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=GXuVcphr
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1740129578; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1740132499; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=XEszpDYKL3MVEwZqleFHNbIiqH/hiHMJcxYVx498oDU=;
- b=Ix9uY6zyz6ad3maDw2OFPsPm2XBJ85n9s/O4q80iEfN1M4Sjj0LK+j1n5z0I0DOmlcCTU0
- QX+/2L+jPArpkRRDyHTlwd8SaIdpzIX1XprnwUzKPIITRhTlNeFlUdbbne1BuTtAlKMruC
- phhskGETcHdVTLH59sXknrkluxvm0jQ=
+ bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
+ b=lKrGFb/skhwoYPPUVwSDcJW0EBjnr2uy+nfYrcyElx4exsS5CnMWZrAHIeQaS2BxLRzSTH
+ LRhrkqsBRDfwgbOjbZ+zLPS2INLgWtN1L/nPh51l6Cps3I/LPfxVyC6WAPQqpTRm3vrsEp
+ 4gh0h4aiWJXnVu93NI8oLcHmwg2Ypkc=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1740129578;
+ s=susede2_ed25519; t=1740132499;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=XEszpDYKL3MVEwZqleFHNbIiqH/hiHMJcxYVx498oDU=;
- b=GXuVcphrlbiIlthAB83vu/yp4aJDLPDw8m4egDsZDmriwuukeFiXh2qEeTFvm8HWr1Utjp
- 69K/s2r3yTN1o+Bg==
+ bh=M2e6KH/BHcFK6w9SYbHcPx6nqA1qpuxt618HD/sPm9I=;
+ b=Oulub/yCIhXM878lgyw9zPHPgLLNUSxAK7kXdKfRRv6S9EWcIdOxS23F73zZol16noWM+X
+ DGDIsV61UNIiQ5Dw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7780C13806;
- Fri, 21 Feb 2025 09:19:37 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 74CDB136AD;
+ Fri, 21 Feb 2025 10:08:19 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id hlHRGylFuGdGIwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 21 Feb 2025 09:19:37 +0000
-Message-ID: <87ca2b81-a67a-468b-ae2b-30d02a3a64bc@suse.de>
-Date: Fri, 21 Feb 2025 10:19:37 +0100
+ by imap1.dmz-prg2.suse.org with ESMTPSA id sywjG5NQuGd7MwAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Fri, 21 Feb 2025 10:08:19 +0000
+Message-ID: <cde8b955-a846-4be9-942b-64ca05550368@suse.de>
+Date: Fri, 21 Feb 2025 11:08:19 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 02/25] drm/dumb-buffers: Provide helper to set pitch
  and size
-To: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
  maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
- simona@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ simona@ffwll.ch, dri-devel@lists.freedesktop.org,
+ linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
+ linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org,
+ linux-tegra@vger.kernel.org, intel-xe@lists.freedesktop.org,
+ xen-devel@lists.xenproject.org,
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 References: <20250218142542.438557-1-tzimmermann@suse.de>
  <20250218142542.438557-3-tzimmermann@suse.de>
  <dcd59a75-7945-4a2e-99f9-3abbb3e9de14@ideasonboard.com>
  <355ed315-61fa-4a9d-b72b-8d5bc7b5a16c@suse.de>
  <596b960e-71f8-4c2c-9abe-058206df1dfb@ideasonboard.com>
+ <87ca2b81-a67a-468b-ae2b-30d02a3a64bc@suse.de>
+ <CAMuHMdVnZTj-8bqsbbZdhp0H7Bwib8GkEuXPcKNZjdo_jRRXgg@mail.gmail.com>
 Content-Language: en-US
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
@@ -121,35 +122,27 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
  Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
  4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <596b960e-71f8-4c2c-9abe-058206df1dfb@ideasonboard.com>
+In-Reply-To: <CAMuHMdVnZTj-8bqsbbZdhp0H7Bwib8GkEuXPcKNZjdo_jRRXgg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 016201F38C
-X-Spam-Level: 
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[100.00%];
+Content-Transfer-Encoding: 7bit
+X-Spam-Score: -2.80
+X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
  SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-0.998]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_TLS_ALL(0.00)[]; RCPT_COUNT_TWELVE(0.00)[21];
+ MIME_TRACE(0.00)[0:+]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ ARC_NA(0.00)[]; MID_RHS_MATCH_FROM(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com];
  DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- RCPT_COUNT_TWELVE(0.00)[20]; ARC_NA(0.00)[];
+ FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[ideasonboard.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linux.dev,lists.xenproject.org];
+ TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
  FUZZY_BLOCKED(0.00)[rspamd.com];
- FREEMAIL_TO(0.00)[ideasonboard.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch];
- MIME_TRACE(0.00)[0:+];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- FREEMAIL_ENVRCPT(0.00)[gmail.com]; TO_DN_SOME(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- RCVD_TLS_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,
- imap1.dmz-prg2.suse.org:rdns, suse.de:dkim, suse.de:mid, bootlin.com:url]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Score: -3.01
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:mid,
+ suse.de:email]
 X-Spam-Flag: NO
+X-Spam-Level: 
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -166,146 +159,67 @@ Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
 Hi
 
-Am 20.02.25 um 11:53 schrieb Tomi Valkeinen:
-> Hi,
+Am 21.02.25 um 10:57 schrieb Geert Uytterhoeven:
+> Hi Thomas,
 >
-> On 20/02/2025 12:05, Thomas Zimmermann wrote:
->> Hi
+> On Fri, 21 Feb 2025 at 10:19, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+>> Am 20.02.25 um 11:53 schrieb Tomi Valkeinen:
+>>> This change also first calls the drm_driver_color_mode_format(), which
+>>> could change the behavior even more, but afaics at the moment does not.
+>> Because currently each driver does its own thing, it can be hard to
+>> write user space that reliably allocates on all drivers. That's why it's
+>> important that parameters are not just raw numbers, but have
+>> well-defined semantics. The raw bpp is meaningless; it's also important
+>> to know which formats are associated with each value. Otherwise, you
+>> might get a dumb buffer with a bpp of 15, but it will be displayed
+>> incorrectly. This patch series finally implements this and clearly
+>> documents the assumptions behind the interfaces. The assumptions
+>> themselves have always existed.
 >>
->> Am 20.02.25 um 10:18 schrieb Tomi Valkeinen:
->> [...]
->>>> + * Color modes of 10, 12, 15, 30 and 64 are only supported for use by
->>>> + * legacy user space. Please don't use them in new code. Other modes
->>>> + * are not support.
->>>> + *
->>>> + * Do not attempt to allocate anything but linear framebuffer memory
->>>> + * with single-plane RGB data. Allocation of other framebuffer
->>>> + * layouts requires dedicated ioctls in the respective DRM driver.
->>>
->>> According to this, every driver that supports, say, NV12, should 
->>> implement their own custom ioctl to do the exact same thing? And, of 
->>> course, every userspace app that uses, say, NV12, should then add 
->>> code for all these platforms to call the custom ioctls?
+>> The color modes in drm_driver_color_mode_format() are set in stone and
+>> will not change incompatibly. It's already a user interface. I've taken
+>> care that the results do not change incompatibly compared to what the
+>> dumb-buffer ioctl currently assumes. (C1-C4 are special, see below.)
 >>
->> Yes, that's exactly the current status.
+>>> Although, maybe some platform does width * DIV_ROUND_UP(bpp, 8) even
+>>> for bpp < 8, and then this series changes it for 1, 2 and 4 bpps (but
+>>> not for 3, 5, 6, 7, if I'm not mistaken).
+>> True. 1, 2 and 4 would currently over-allocate significantly on some
+>> drivers and the series will reduce this to actual requirements. Yet our
+>> most common memory managers, gem-dma and gem-shmem, compute the sizes
+>> correctly.
 >>
->> There has been discussion about a new dumb-create ioctl that takes a 
->> DRM format as parameter. I'm all for it, but it's out of the scope 
->> for this series.
->>
->>>
->>> As libdrm's modetest currently supports YUV formats with dumb 
->>> buffers, should we remove that code, as it's not correct and I'm 
->>> sure people use libdrm code as a reference?
->>
->> Of course not.
->>
->>>
->>> Well, I'm not serious above, but I think all my points from the 
->>> earlier version are still valid. I don't like this. It changes the 
->>> parameters of the ioctl (bpp used to be bits-per-pixel, not it's 
->>> "color mode"), and the behavior of the ioctl, behavior that we've 
->>> had for a very long time, and we have no idea how many users there 
->>> are that will break (could be none, of course). And the 
->>> documentation changes make the current behavior and uses wrong or 
->>> legacy.
->>
->> Before I go into details about this statement, what use case exactly 
->> are you referring to when you say that behavior changes?
->
-> For every dumb_buffer allocation with bpp that is not divisible by 8, 
-> the result is different, i.e. instead of DIV_ROUND_UP(width * bpp, 8), 
-> we now have width * DIV_ROUND_UP(bpp, 8). This, of course, depends on 
-> the driver implementation. Some already do the latter.
+>> But there are currently no drivers that support C4, C2 or C1 formats;
+>> hence there's likely no user space either. I know that Geert is
+>> interested in making a driver that uses these formats on very low-end
+>> hardware (something Atari or Amiga IIRC). Over-allocating on such
+>> hardware is likely not an option.
+> Note that the gud and ssd130x drivers do support R1, and I believe
+> work is underway to add grayscale formats to ssd130x.
 
-The current dumb-buffer code does a stride computation at [1], which is 
-correct for all cases; although over-allocates sometimes. It's the one 
-you describe as "width * DIV_ROUND_UP(bpp, 8)". It's in the ioctl entry 
-point, so it's somewhat authoritative for all driver's implementations. 
-It's also used by several drivers.
-
-The other variant, "DIV_ROUND_UP(width * bpp, 8)", is used by gem-dma, 
-gem-shmem and others. It can give incorrect results and possibly OOBs. 
-To give a simple example, let's allocate 15-bit XRGB1555. Bpp is 15. 
-With a width of 1024, that would result in 1920 bytes per scanline. But 
-because XRGB1555 has a filler bit, so the pixel is actually 16 bit and a 
-scanline needs to be 2048 bytes. The new code fixes that. This is not 
-just a hypothetical scenario: we do have drivers that support XRGB1555 
-and some of them also export a preferred_depth of 15 to userspace. [2]  
-In the nearby comment, you'll see that this value is meant for dumb buffers.
-
-Rounding up the depth value in user space is possible for RGB, but not 
-for YUV. Here different pixel planes have a different number of bits. 
-Sometimes pixels are sharing bits. The value of bits-per-pixel becomes 
-meaningless. That's why it's also deprecated in struct drm_format_info. 
-The struct instead uses a more complicated per-plane calculation to 
-compute the number of bits per plane. [3] The user-space code currently 
-doing YUV on dumb buffers simply got lucky.
-
-[1] 
-https://elixir.bootlin.com/linux/v6.13.3/source/drivers/gpu/drm/drm_dumb_buffers.c#L77
-[2] 
-https://elixir.bootlin.com/linux/v6.13.3/source/include/drm/drm_mode_config.h#L885
-[3] 
-https://elixir.bootlin.com/linux/v6.13.3/source/include/drm/drm_fourcc.h#L83
+Nice find. Both use gem-shmem, which allocates without much overhead. So 
+any possible userspace should already be prepared for this scenario.
 
 >
-> This change also first calls the drm_driver_color_mode_format(), which 
-> could change the behavior even more, but afaics at the moment does not. 
+>> The other values (3, 5, 6, 7) have no meaning I know of. 6 could be
+>> XRGB2222, but I not aware of anything using that. We don't even have a
+>> format constant for this.
+> Yeah, e.g. Amiga supports 3, 5, 6, and 7 bpp, but that is using
+> bitplanes.  There is already some sort of consensus to not expose
+> bitplanes to userspace in DRM, so limiting to 1, 2, 4, and 8 bpp
+> (which can be converted from C[1248]) is fine.
 
-Because currently each driver does its own thing, it can be hard to 
-write user space that reliably allocates on all drivers. That's why it's 
-important that parameters are not just raw numbers, but have 
-well-defined semantics. The raw bpp is meaningless; it's also important 
-to know which formats are associated with each value. Otherwise, you 
-might get a dumb buffer with a bpp of 15, but it will be displayed 
-incorrectly. This patch series finally implements this and clearly 
-documents the assumptions behind the interfaces. The assumptions 
-themselves have always existed.
-
-The color modes in drm_driver_color_mode_format() are set in stone and 
-will not change incompatibly. It's already a user interface. I've taken 
-care that the results do not change incompatibly compared to what the 
-dumb-buffer ioctl currently assumes. (C1-C4 are special, see below.)
-
-> Although, maybe some platform does width * DIV_ROUND_UP(bpp, 8) even 
-> for bpp < 8, and then this series changes it for 1, 2 and 4 bpps (but 
-> not for 3, 5, 6, 7, if I'm not mistaken).
-
-True. 1, 2 and 4 would currently over-allocate significantly on some 
-drivers and the series will reduce this to actual requirements. Yet our 
-most common memory managers, gem-dma and gem-shmem, compute the sizes 
-correctly.
-
-But there are currently no drivers that support C4, C2 or C1 formats; 
-hence there's likely no user space either. I know that Geert is 
-interested in making a driver that uses these formats on very low-end 
-hardware (something Atari or Amiga IIRC). Over-allocating on such 
-hardware is likely not an option.
-
-The other values (3, 5, 6, 7) have no meaning I know of. 6 could be 
-XRGB2222, but I not aware of anything using that. We don't even have a 
-format constant for this.
-
->
-> However, as the bpp is getting rounded up, this probably won't break 
-> any user. But it _is_ a change in the behavior of a uapi, and every 
-> time we change a uapi that's been out there for a long time, I'm 
-> getting slightly uncomfortable.
-
-As I tried to explain, we currently have both versions in drivers: 
-rounding up bpp and rounding up (bpp*width). User-space code already has 
-to deal with both cases.
+There's been discussion about a new dumb-buffer ioctl that receives a 
+format constant and returns individual buffers for each plane. This 
+would allow for these use cases.
 
 Best regards
 Thomas
 
 >
-> So, as a summary, I have a feeling that nothing will break, but I 
-> can't say for sure. And as I'm having trouble seeing the benefit of 
-> this change for the user, I get even more uncomfortable.
+> Gr{oetje,eeting}s,
 >
->  Tomi
+>                          Geert
 >
 
 -- 
