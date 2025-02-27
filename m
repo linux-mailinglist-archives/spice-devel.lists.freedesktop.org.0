@@ -2,40 +2,41 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E415A47BA0
-	for <lists+spice-devel@lfdr.de>; Thu, 27 Feb 2025 12:15:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5245A47BA7
+	for <lists+spice-devel@lfdr.de>; Thu, 27 Feb 2025 12:15:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BEB0810EA64;
-	Thu, 27 Feb 2025 11:15:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 502E710EAA8;
+	Thu, 27 Feb 2025 11:15:40 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="GJx3TQxV";
+	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="CxQxxkAF";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
 Received: from b1422.mx.srv.dfn.de (b1422.mx.srv.dfn.de [194.95.235.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CC16A10EAB4
- for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2025 11:15:35 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5E4DB10EAA1
+ for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2025 11:15:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
  rz.uni-freiburg.de; h=content-transfer-encoding:mime-version
  :references:in-reply-to:x-mailer:message-id:date:date:subject
- :subject:from:from:received; s=s1; t=1740654482; x=1742468883;
- bh=mZHf/5mA+it8u9rABQpoXpNp2EGQfobBJtDxxa+otXs=; b=GJx3TQxVR+yE
- PGdCgC8E7nqW1y1b1lpAhRzWteijkq7LDmmZbIih22iNz42ARcpjiiKafpf28KWc
- 6AvfunQA//iMNjCR+X3h+GO0Ebl4R0BiSzDFRvBaMVPufCvwVkFAH9pBF2WYmqII
- 6CzpZYMCNht9LHFVhyaB8byfHRNcyf0=
+ :subject:from:from:received; s=s1; t=1740654483; x=1742468884;
+ bh=JqrDFvKMMAgRlPdNufuNTqNV47pR6HSL7IFjhAPJ/+I=; b=CxQxxkAFuMFv
+ a0RQF3FrGSNUwPWkc8zBT6pjSJ2rXopcDM4CVSFm0mT+vWGf+4zoGRbGSzHUWDZ6
+ DXgqjfy5NSD0AzJjR51qtPymFYrDBcARhQ4dQ0bBUqMHyfK2Dv+IOESMNp5oueIE
+ BlZh6LdUQ39Nm4dMH6meKkAt7AAc12k=
 Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
- by b1422.mx.srv.dfn.de (Postfix) with ESMTP id 65A892601EC
+ by b1422.mx.srv.dfn.de (Postfix) with ESMTP id EE33D2601ED
  for <spice-devel@lists.freedesktop.org>; Thu, 27 Feb 2025 12:08:02 +0100 (CET)
 Received: from [2001:7c0:2517:a:4b56:9ec4:d188:b1a0] (account
  michael.scherle@rz.uni-freiburg.de HELO rz-10-126-20-105.eduroam-rz.privat)
  by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
- with ESMTPSA id 46276782; Thu, 27 Feb 2025 12:07:56 +0100
+ with ESMTPSA id 46276791; Thu, 27 Feb 2025 12:07:56 +0100
 From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
 To: spice-devel@lists.freedesktop.org
 Cc: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
-Subject: [PATCH 08/10] Update spice-common submodule
-Date: Thu, 27 Feb 2025 12:07:19 +0100
-Message-ID: <23dcc5422093345fab0b9c8122fc807d5243a41f.1740651328.git.michael.scherle@rz.uni-freiburg.de>
+Subject: [PATCH 09/10] gstreamer-encoder: Include dmabuf encoding
+ conditionally for Linux
+Date: Thu, 27 Feb 2025 12:07:20 +0100
+Message-ID: <036fa70a60bc9f657476280de7494791b5cf2c1c.1740651328.git.michael.scherle@rz.uni-freiburg.de>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1740651328.git.michael.scherle@rz.uni-freiburg.de>
 References: <cover.1740651328.git.michael.scherle@rz.uni-freiburg.de>
@@ -55,25 +56,169 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This brings in the following changes:
-      common: Add a udev helper to identify GPU Vendor
-      build: Avoid Meson warning
-      Drop Python 2 from m4/spice-deps.m4
-      Stop using Python six package
-      codegen: Use context manager when opening files
+add dmabuf encoding if `drm/drm_fourcc.h` is present and
+gstreamer is at least 1.24 due to
+`gst_video_dma_drm_fourcc_to_format()`.
 
 Signed-off-by: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
 ---
- subprojects/spice-common | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meson.build                | 10 +++++++++-
+ server/gstreamer-encoder.c | 34 +++++++++++++++++++++++++++-------
+ 2 files changed, 36 insertions(+), 8 deletions(-)
 
-diff --git a/subprojects/spice-common b/subprojects/spice-common
-index 58d375e5..8c0319e3 160000
---- a/subprojects/spice-common
-+++ b/subprojects/spice-common
-@@ -1 +1 @@
--Subproject commit 58d375e5eadc6fb9e587e99fd81adcb95d01e8d6
-+Subproject commit 8c0319e31df967e41c74f4121cbdb3b785fe114e
+diff --git a/meson.build b/meson.build
+index d6aea60a..d5591d2a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -131,15 +131,23 @@ endforeach
+ spice_server_has_gstreamer = false
+ spice_server_gst_version = get_option('gstreamer')
+ if spice_server_gst_version != 'no'
++  gstreamer_version = ''
+   gst_deps = ['gstreamer', 'gstreamer-base', 'gstreamer-app', 'gstreamer-video', 'gstreamer-allocators']
+   foreach dep : gst_deps
+     dep = '@0@-@1@'.format(dep, spice_server_gst_version)
+-    spice_server_deps += dependency(dep)
++    dep = dependency(dep)
++    if gstreamer_version == '' or  dep.version().version_compare('< ' + gstreamer_version)
++      gstreamer_version = dep.version()
++    endif
++    spice_server_deps += dep
+   endforeach
+   spice_server_deps += dependency('orc-0.4')
+ 
+   gst_def = 'HAVE_GSTREAMER_1_0'
+   spice_server_config_data.set(gst_def, '1')
++  if compiler.has_header('drm/drm_fourcc.h') and gstreamer_version.version_compare('>= 1.24')
++     spice_server_config_data.set('HAVE_GSTREAMER_DMABUF_ENCODING', '1')
++  endif
+   spice_server_has_gstreamer = true
+ endif
+ 
+diff --git a/server/gstreamer-encoder.c b/server/gstreamer-encoder.c
+index 196b27ab..a83cf846 100644
+--- a/server/gstreamer-encoder.c
++++ b/server/gstreamer-encoder.c
+@@ -27,11 +27,13 @@
+ #  pragma GCC diagnostic ignored "-Wunused-const-variable"
+ #endif
+ #include <gst/gst.h>
+-#include <gst/allocators/gstdmabuf.h>
+ #include <gst/app/gstappsrc.h>
+ #include <gst/app/gstappsink.h>
+ #include <gst/video/video.h>
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
+ #include <gst/video/video-info-dma.h>
++#include <gst/allocators/gstdmabuf.h>
++#endif
+ #include <orc/orcprogram.h>
+ #if defined(__GNUC__) && (__GNUC__ >= 6)
+ #  pragma GCC diagnostic pop
+@@ -41,7 +43,12 @@
+ #include "video-encoder.h"
+ #include "utils.h"
+ #include "common/udev.h"
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
+ #include "drm/drm_fourcc.h"
++#endif
++#ifndef DRM_FORMAT_INVALID
++#define DRM_FORMAT_INVALID 0
++#endif
+ 
+ #define SPICE_GST_DEFAULT_FPS 30
+ 
+@@ -793,6 +800,7 @@ static const SpiceFormatForGStreamer *map_format(SpiceBitmapFmt format)
+     return GSTREAMER_FORMAT_INVALID;
+ }
+ 
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
+ static SpiceFormatForGStreamer drm_format_map[] =  {
+     DRM_FMT_DESC(DRM_FORMAT_INVALID,  0),
+     DRM_FMT_DESC(DRM_FORMAT_XRGB8888, 32),
+@@ -822,7 +830,7 @@ static const SpiceFormatForGStreamer *map_drm_format(uint32_t fourcc)
+                 }
+ 
+                 drm_format_map[i].gst_format = gst_format;
+-                strncpy(drm_format_map[i].format,
++                g_strlcpy(drm_format_map[i].format,
+                         gst_video_format_to_string(gst_format),
+                         format_size - 1);
+                 drm_format_map[i].format[format_size - 1] = '\0';
+@@ -833,6 +841,7 @@ static const SpiceFormatForGStreamer *map_drm_format(uint32_t fourcc)
+ 
+     return GSTREAMER_DRM_FORMAT_INVALID;
+ }
++#endif
+ 
+ static void set_appsrc_caps(SpiceGstEncoder *encoder)
+ {
+@@ -1579,7 +1588,9 @@ static void spice_gst_encoder_destroy(VideoEncoder *video_encoder)
+ {
+     SpiceGstEncoder *encoder = (SpiceGstEncoder*)video_encoder;
+ 
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
+     gst_object_unref(encoder->allocator);
++#endif
+     free_pipeline(encoder);
+     pthread_mutex_destroy(&encoder->outbuf_mutex);
+     pthread_cond_destroy(&encoder->outbuf_cond);
+@@ -1619,12 +1630,17 @@ spice_gst_encoder_configure_pipeline(SpiceGstEncoder *encoder,
+ 
+     if (spice_format != SPICE_BITMAP_FMT_INVALID) {
+         format = map_format(spice_format);
+-    } else if (drm_format != DRM_FORMAT_INVALID) {
++    }
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
++    else if (drm_format != DRM_FORMAT_INVALID) {
+         format = map_drm_format(drm_format);
+     }
+-
+-    if (format == GSTREAMER_FORMAT_INVALID ||
+-        format == GSTREAMER_DRM_FORMAT_INVALID) {
++#endif
++    if (format == GSTREAMER_FORMAT_INVALID
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
++        || format == GSTREAMER_DRM_FORMAT_INVALID
++#endif
++        ) {
+         spice_warning("unable to map format type %d or %u",
+                       spice_format, drm_format);
+         encoder->errors = 4;
+@@ -1738,6 +1754,7 @@ spice_gst_encoder_encode_frame(VideoEncoder *video_encoder,
+     return rc;
+ }
+ 
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
+ static void
+ spice_gst_mem_free_cb(VideoEncoderDmabufData *dmabuf_data, GstMiniObject *obj)
+ {
+@@ -1806,6 +1823,7 @@ spice_gst_encoder_encode_dmabuf(VideoEncoder *video_encoder,
+     spice_gst_encoder_add_frame(encoder, outbuf, start, frame_mm_time);
+     return rc;
+ }
++#endif
+ 
+ static void spice_gst_encoder_client_stream_report(VideoEncoder *video_encoder,
+                                              uint32_t num_frames,
+@@ -1997,7 +2015,10 @@ VideoEncoder *gstreamer_encoder_new(SpiceVideoCodecType codec_type,
+     SpiceGstEncoder *encoder = g_new0(SpiceGstEncoder, 1);
+     encoder->base.destroy = spice_gst_encoder_destroy;
+     encoder->base.encode_frame = spice_gst_encoder_encode_frame;
++#ifdef HAVE_GSTREAMER_DMABUF_ENCODING
+     encoder->base.encode_dmabuf = spice_gst_encoder_encode_dmabuf;
++    encoder->allocator = gst_dmabuf_allocator_new();
++#endif
+     encoder->base.client_stream_report = spice_gst_encoder_client_stream_report;
+     encoder->base.notify_server_frame_drop = spice_gst_encoder_notify_server_frame_drop;
+     encoder->base.get_bit_rate = spice_gst_encoder_get_bit_rate;
+@@ -2010,7 +2031,6 @@ VideoEncoder *gstreamer_encoder_new(SpiceVideoCodecType codec_type,
+     encoder->bitmap_ref = bitmap_ref;
+     encoder->bitmap_unref = bitmap_unref;
+     encoder->format = GSTREAMER_FORMAT_INVALID;
+-    encoder->allocator = gst_dmabuf_allocator_new();
+     pthread_mutex_init(&encoder->outbuf_mutex, NULL);
+     pthread_cond_init(&encoder->outbuf_cond, NULL);
+ 
 -- 
 2.48.1
 
