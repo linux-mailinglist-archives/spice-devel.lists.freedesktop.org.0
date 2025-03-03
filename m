@@ -2,50 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B26D0A4B626
-	for <lists+spice-devel@lfdr.de>; Mon,  3 Mar 2025 03:36:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 983D4A4C5FC
+	for <lists+spice-devel@lfdr.de>; Mon,  3 Mar 2025 17:03:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 57CA310E1D2;
-	Mon,  3 Mar 2025 02:36:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B479D10E480;
+	Mon,  3 Mar 2025 16:02:59 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="Ej0bUNbt";
+	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9007810E1D2
- for <spice-devel@lists.freedesktop.org>; Mon,  3 Mar 2025 02:36:16 +0000 (UTC)
-X-UUID: 4346af00f7d811efa216b1d71e6e1362-20250303
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.45, REQID:52ef301b-51a5-4fbf-aca0-e5cdf433cc54, IP:0,
- U
- RL:0,TC:0,Content:-25,EDM:25,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTI
- ON:release,TS:0
-X-CID-META: VersionHash:6493067, CLOUDID:d68a354f2af3f5d6f8e585354f09ac9e,
- BulkI
- D:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:5,IP:nil,URL
- :0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SP
- R:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 4346af00f7d811efa216b1d71e6e1362-20250303
-Received: from mail.kylinos.cn [(10.44.16.175)] by mailgw.kylinos.cn
- (envelope-from <liweishi@kylinos.cn>) (Generic MTA)
- with ESMTP id 693271710; Mon, 03 Mar 2025 10:36:08 +0800
-Received: from mail.kylinos.cn (localhost [127.0.0.1])
- by mail.kylinos.cn (NSMail) with SMTP id 61280E0080FF;
- Mon,  3 Mar 2025 10:36:08 +0800 (CST)
-X-ns-mid: postfix-67C51598-262013614
-Received: from localhost.localdomain (unknown [10.42.12.187])
- by mail.kylinos.cn (NSMail) with ESMTPA id 31528E0080FF;
- Mon,  3 Mar 2025 10:36:07 +0800 (CST)
-From: liweishi@kylinos.cn
-To: spice-devel@lists.freedesktop.org
-Cc: liweishi@kylinos.cn
-Subject: [PATCH v2] jpeg: optimize compression process
-Date: Mon,  3 Mar 2025 10:35:55 +0800
-Message-Id: <20250303023555.60795-1-liweishi@kylinos.cn>
-X-Mailer: git-send-email 2.25.1
+X-Greylist: delayed 484 seconds by postgrey-1.36 at gabe;
+ Mon, 03 Mar 2025 16:02:53 UTC
+Received: from a1422.mx.srv.dfn.de (a1422.mx.srv.dfn.de [194.95.233.70])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3ACAC10E480
+ for <spice-devel@lists.freedesktop.org>; Mon,  3 Mar 2025 16:02:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ rz.uni-freiburg.de; h=content-transfer-encoding:content-type
+ :content-type:in-reply-to:from:from:content-language:references
+ :subject:subject:user-agent:mime-version:date:date:message-id
+ :received; s=s1; t=1741017282; x=1742831683; bh=9+S4nqcD5cNqnm7c
+ ui4P1r6V3LFriP+RE5+lFvpRJ7I=; b=Ej0bUNbt3sCJTjKfmB/N6WRZuCwbHD6r
+ vmLRetXV47Z20Epctl1n4XQO7LrhggzOgpzud5LnC72gAwijZMN0FV8ib/9r2Ahk
+ om7f4W7F/ZIT0iaThg5AmItK2dBT2NkGiPq2ehw/EsmhwGf/vhHNvCZSMXgtXoem
+ 4s+faqVVSDM=
+Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
+ by a1422.mx.srv.dfn.de (Postfix) with ESMTP id A09161E0150
+ for <spice-devel@lists.freedesktop.org>; Mon,  3 Mar 2025 16:54:42 +0100 (CET)
+Received: from [2001:7c0:2517:a:4b56:9ec4:d188:b1a0] (account
+ michael.scherle@rz.uni-freiburg.de HELO
+ [IPV6:2001:7c0:2517:a:4b56:9ec4:d188:b1a0])
+ by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
+ with ESMTPSA id 46330427; Mon, 03 Mar 2025 16:54:42 +0100
+Message-ID: <d31fc94e-2b6f-4462-85b3-56c981a05c39@rz.uni-freiburg.de>
+Date: Mon, 3 Mar 2025 16:54:42 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/10] Update spice-common submodule
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: spice-devel@lists.freedesktop.org
+References: <cover.1740651328.git.michael.scherle@rz.uni-freiburg.de>
+ <23dcc5422093345fab0b9c8122fc807d5243a41f.1740651328.git.michael.scherle@rz.uni-freiburg.de>
+ <CAHt6W4dzLkgJFhjWu9ZkeijTsePrAjd1spRW01-hg3092Ok-hQ@mail.gmail.com>
+Content-Language: en-US
+From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
+In-Reply-To: <CAHt6W4dzLkgJFhjWu9ZkeijTsePrAjd1spRW01-hg3092Ok-hQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,110 +63,42 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-From: Weishi Li <liweishi@kylinos.cn>
+Thank you very much. I apologize for the not quite clean merge request 
+by email, this is my first time. Besides that are there any suggestions 
+for improvements to the other patches?
 
-similiar to mjpeg, when defined JCS_EXTENSIONS, there
-is no need to convert BGR24/BGRX32 to RGB24.
+Thanks Michael
 
-Signed-off-by: Weishi Li <liweishi@kylinos.cn>
----
- server/jpeg-encoder.c | 38 +++++++++++++++++++++++++++++++++++---
- 1 file changed, 35 insertions(+), 3 deletions(-)
-
-diff --git a/server/jpeg-encoder.c b/server/jpeg-encoder.c
-index fee07105..ba9058a2 100644
---- a/server/jpeg-encoder.c
-+++ b/server/jpeg-encoder.c
-@@ -27,6 +27,16 @@
- #include "red-common.h"
- #include "jpeg-encoder.h"
-=20
-+#ifdef JCS_EXTENSIONS
-+#  ifndef WORDS_BIGENDIAN
-+#    define JCS_EXT_LE_BGRX JCS_EXT_BGRX
-+#    define JCS_EXT_LE_BGR JCS_EXT_BGR
-+#  else
-+#    define JCS_EXT_LE_BGRX JCS_EXT_XRGB
-+#    define JCS_EXT_LE_BGR JCS_EXT_RGB
-+#  endif
-+#endif
-+
- struct JpegEncoderContext {
-     JpegEncoderUsrContext *usr;
-=20
-@@ -130,6 +140,7 @@ static void convert_RGB16_to_RGB24(void *line, int wi=
-dth, uint8_t **out_line)
-    }
- }
-=20
-+#ifndef JCS_EXTENSIONS
- static void convert_BGR24_to_RGB24(void *in_line, int width, uint8_t **o=
-ut_line)
- {
-     int x;
-@@ -165,7 +176,7 @@ static void convert_BGRX32_to_RGB24(void *line, int w=
-idth, uint8_t **out_line)
-         *out_pix++ =3D pixel & 0xff;
-     }
- }
--
-+#endif
-=20
- #define FILL_LINES() {                                                  =
-\
-     if (lines =3D=3D lines_end) {                                       =
-    \
-@@ -186,10 +197,21 @@ static void do_jpeg_encode(JpegEncoder *jpeg, uint8=
-_t *lines, unsigned int num_l
-     width =3D jpeg->cur_image.width;
-     stride =3D jpeg->cur_image.stride;
-=20
--    RGB24_line =3D g_new(uint8_t, width*3);
--
-     lines_end =3D lines + (stride * num_lines);
-=20
-+#ifdef JCS_EXTENSIONS
-+    if (enc->cur_image.convert_line_to_RGB24 =3D=3D NULL) {
-+        for (;jpeg->cinfo.next_scanline < jpeg->cinfo.image_height; line=
-s +=3D stride) {
-+            FILL_LINES();
-+            row_pointer[0] =3D lines;
-+            jpeg_write_scanlines(&jpeg->cinfo, row_pointer, 1);
-+        }
-+        return;
-+    }
-+#endif
-+
-+    RGB24_line =3D g_new(uint8_t, width*3);
-+
-     for (;jpeg->cinfo.next_scanline < jpeg->cinfo.image_height; lines +=3D=
- stride) {
-         FILL_LINES();
-         jpeg->cur_image.convert_line_to_RGB24(lines, width, &RGB24_line)=
-;
-@@ -215,10 +237,20 @@ int jpeg_encode(JpegEncoderContext *enc, int qualit=
-y, JpegEncoderImageType type,
-         enc->cur_image.convert_line_to_RGB24 =3D convert_RGB16_to_RGB24;
-         break;
-     case JPEG_IMAGE_TYPE_BGR24:
-+#ifdef JCS_EXTENSIONS
-+        enc->cinfo.in_color_space   =3D JCS_EXT_LE_BGR;
-+        enc->cinfo.input_components =3D 3;
-+#else
-         enc->cur_image.convert_line_to_RGB24 =3D convert_BGR24_to_RGB24;
-+#endif
-         break;
-     case JPEG_IMAGE_TYPE_BGRX32:
-+#ifdef JCS_EXTENSIONS
-+        enc->cinfo.in_color_space =3D JCS_EXT_LE_BGRX;
-+        enc->cinfo.input_components =3D 4;
-+#else
-         enc->cur_image.convert_line_to_RGB24 =3D convert_BGRX32_to_RGB24=
-;
-+#endif
-         break;
-     default:
-         spice_error("bad image type");
---=20
-2.25.1
+On 02.03.25 18:40, Frediano Ziglio wrote:
+> On Fri, Feb 28, 2025 at 9:59 AM Michael Scherle <
+> michael.scherle@rz.uni-freiburg.de> wrote:
+> 
+>> This brings in the following changes:
+>>        common: Add a udev helper to identify GPU Vendor
+>>        build: Avoid Meson warning
+>>        Drop Python 2 from m4/spice-deps.m4
+>>        Stop using Python six package
+>>        codegen: Use context manager when opening files
+>>
+>> Signed-off-by: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
+>> ---
+>>   subprojects/spice-common | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/subprojects/spice-common b/subprojects/spice-common
+>> index 58d375e5..8c0319e3 160000
+>> --- a/subprojects/spice-common
+>> +++ b/subprojects/spice-common
+>> @@ -1 +1 @@
+>> -Subproject commit 58d375e5eadc6fb9e587e99fd81adcb95d01e8d6
+>> +Subproject commit 8c0319e31df967e41c74f4121cbdb3b785fe114e
+>>
+> 
+> Acked-by: Frediano Ziglio <freddy77@gmail.com>
+> 
+> That's surely the easy one
+> 
+> Thanks,
+>    Frediano
+> 
 
