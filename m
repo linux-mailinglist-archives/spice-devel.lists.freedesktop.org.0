@@ -2,71 +2,67 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B6FBA5EA5A
-	for <lists+spice-devel@lfdr.de>; Thu, 13 Mar 2025 04:59:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC255A637A6
+	for <lists+spice-devel@lfdr.de>; Sun, 16 Mar 2025 23:02:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 53B0710E7EB;
-	Thu, 13 Mar 2025 03:59:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 22B4310E103;
+	Sun, 16 Mar 2025 22:02:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="kGiEvRdO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T8ryfs+F";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 104B810E061;
- Thu, 13 Mar 2025 03:59:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1741838358; x=1773374358;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=cYwKWE3qx6aAxxggYpyZsccNMSnGdzKXacMIEiXDO/w=;
- b=kGiEvRdO7ypxyKy9Dq7ERrqi+cRZELn0kZdpKbsZ9OglnTZ44djU0w9U
- rjeUe0OEb+klJuessPL5uKt88muhj50SvsOaN0V2wnozm05W+p53IaV0a
- uPMjbQl9b2Wg4CAEsb+rHQ25D4+EY3Kcb5EWfESAoWiFyVGheoDM4By5P
- pGxliT9RptJ7/9KXDqWxzxRo5rPJYZBFRFLRvjzFf2pvYkgFRVfIYgFZP
- 3ynis5t86WFyYFcm33LJOuri/7AwpZX0p4or3qkgFyNo7gqyMVpXQ2Y/T
- B2xA7uHaZV+RuLH6lzZLfwzcuMwJP+qEWPJKV8zq/4PIF8DjTxuCqN9I0 g==;
-X-CSE-ConnectionGUID: Sg6Bp9MCQ2K7iTHHrKFtfg==
-X-CSE-MsgGUID: twVIn27DTL2xdc4lj8xUQA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11371"; a="68294330"
-X-IronPort-AV: E=Sophos;i="6.14,243,1736841600"; d="scan'208";a="68294330"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Mar 2025 20:59:17 -0700
-X-CSE-ConnectionGUID: Jk/rBPr/R+CE+fsVXvv0Hg==
-X-CSE-MsgGUID: rCVWNuURQ4Kucu2VbRCsgw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,243,1736841600"; d="scan'208";a="121530505"
-Received: from lkp-server02.sh.intel.com (HELO a4747d147074) ([10.239.97.151])
- by fmviesa009.fm.intel.com with ESMTP; 12 Mar 2025 20:59:12 -0700
-Received: from kbuild by a4747d147074 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1tsZij-00096K-1j;
- Thu, 13 Mar 2025 03:59:01 +0000
-Date: Thu, 13 Mar 2025 11:58:50 +0800
-From: kernel test robot <lkp@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, simona@ffwll.ch,
- airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, geert@linux-m68k.org,
- tomi.valkeinen@ideasonboard.com
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
- dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
- freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- imx@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
- nouveau@lists.freedesktop.org, virtualization@lists.linux.dev,
- spice-devel@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Biju Das <biju.das.jz@bp.renesas.com>
-Subject: Re: [PATCH v4 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes
- with drm_mode_size_dumb()
-Message-ID: <202503131309.ZzS9Tova-lkp@intel.com>
-References: <20250311155120.442633-19-tzimmermann@suse.de>
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com
+ [209.85.128.175])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3F10810E103
+ for <spice-devel@lists.freedesktop.org>; Sun, 16 Mar 2025 22:02:02 +0000 (UTC)
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-6ef60e500d7so29282667b3.0
+ for <spice-devel@lists.freedesktop.org>; Sun, 16 Mar 2025 15:02:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742162521; x=1742767321; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xQrF8fNBQVG3hGhI5IMgMpsBrduk7Pg9Z9WOXw207es=;
+ b=T8ryfs+FPFuvktnPcctsuKte0ulLxo5aDq+TzW+Ql87DPUDtNhETn3NgOu7fb2eeFp
+ 1PTrX/eQ7+ZQZsM+goD1j9sYvOnxVU7nrjWDiK4mI54wspxyL2skEQlubNb/xrkchCLO
+ hmODfgkdltFFHa/koEc+AY+y1wLpNS+NWC/ZM9/w1nVX6fkp5g/kxk2boDhJNwym/sUm
+ hoUMV5htD/5ahJAi+qGfJoSDp+a58Q5BiLLZ1G16cfgtwyPn+ovv/xktk0V67kjj5ui9
+ v0C5a48qMS6ZsYB9aIpAn5Zlmyu2jpVXUG7SDFVDw+Dh2AyOTQIDUdSGiJhNJYsSLUL8
+ S5vQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742162521; x=1742767321;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xQrF8fNBQVG3hGhI5IMgMpsBrduk7Pg9Z9WOXw207es=;
+ b=laP37c0FtM6xfwZ5baeNycTMN9f/v78DXDf/SrD4taaRPcRx86fjJE3Hki35nhPjds
+ 5Vm6Tav5ich6F/cbC2tFnclGKIXApYsktAWfA+yNBKECKU4SBn7YDe6tmItjx8wcWpYy
+ d2gfOiZEvrPSpDd6tA7xwpIjuBZgCFXr6ioPn8aYnKLWuQT+NR9QyN1mJ5nnvN+cee9x
+ Y8TaxC5BcwVDO7Ubf8VqU+0I9yGzpHJXT51Rmec5LZ5EielQLhnuaReDje7OszPuba6e
+ 4ONLzHqYAsNKAtPaPqGW1QqZXmcM6JWHEPv7VI+pb8C9fikG5ka4nGgq807PDbm21Q/m
+ +xLg==
+X-Gm-Message-State: AOJu0YzVmvhGDFWiNboe5VU3t8t/oC8k592M+iA6ihesCNldXM+4yRX+
+ xAoVUNS3gmPvlJ+GANDTovCY8TeroqZO/Wo7o4wZoJqbmPPnZ5NJd0HeeWUWKdJCmjHs8WPQ5I8
+ 3ktmcUs6/JyV+XDLiYXLNL5rnz42URxc7
+X-Gm-Gg: ASbGncu45Ahtolah8wRZEH8kefqx1holrWCA1kFKp5wiTpChEPCcYCK/sJSVk+eqOcq
+ U1x+bl1FPDS2dY3gZWLV8bFRPvqMFmwp5Tlg5OkJsKQC8glZMhC4/E3Md80eJOTGaS0iiflDBmj
+ RRCogefik8e8fOeUbWW404jrc=
+X-Google-Smtp-Source: AGHT+IEFAX5aXcb5PnvLCC4g9JNf1+HwWjo7q4dLB10PDnuXq/vSlLo3zV+Xsfz0Sg2zqvvMd2Habqh198JVESLHOVY=
+X-Received: by 2002:a05:690c:88f:b0:6fd:97a7:1474 with SMTP id
+ 00721157ae682-6ff45f43335mr167396117b3.11.1742162521078; Sun, 16 Mar 2025
+ 15:02:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250311155120.442633-19-tzimmermann@suse.de>
+References: <20250303023555.60795-1-liweishi@kylinos.cn>
+In-Reply-To: <20250303023555.60795-1-liweishi@kylinos.cn>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Sun, 16 Mar 2025 22:01:50 +0000
+X-Gm-Features: AQ5f1JqMKUP9z6HERbjRw8qA54l4VPGxT1LGHkAfNYhHRTM41EbQzIqjYMRPDek
+Message-ID: <CAHt6W4frajHHTaZ5cgAYo8MbTeaJ0sKjpa5EWbxdjDyksrSraQ@mail.gmail.com>
+Subject: Re: [PATCH v2] jpeg: optimize compression process
+To: liweishi@kylinos.cn
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="00000000000035c4d506307cd244"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,76 +77,251 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi Thomas,
+--00000000000035c4d506307cd244
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-kernel test robot noticed the following build errors:
+On Mon, Mar 3, 2025 at 2:36=E2=80=AFAM <liweishi@kylinos.cn> wrote:
 
-[auto build test ERROR on next-20250311]
-[also build test ERROR on v6.14-rc6]
-[cannot apply to drm-exynos/exynos-drm-next rockchip/for-next tegra/for-next drm-xe/drm-xe-next linus/master v6.14-rc6 v6.14-rc5 v6.14-rc4]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+> From: Weishi Li <liweishi@kylinos.cn>
+>
+> similiar to mjpeg, when defined JCS_EXTENSIONS, there
+> is no need to convert BGR24/BGRX32 to RGB24.
+>
+> Signed-off-by: Weishi Li <liweishi@kylinos.cn>
+> ---
+>  server/jpeg-encoder.c | 38 +++++++++++++++++++++++++++++++++++---
+>  1 file changed, 35 insertions(+), 3 deletions(-)
+>
+> diff --git a/server/jpeg-encoder.c b/server/jpeg-encoder.c
+> index fee07105..ba9058a2 100644
+> --- a/server/jpeg-encoder.c
+> +++ b/server/jpeg-encoder.c
+> @@ -27,6 +27,16 @@
+>  #include "red-common.h"
+>  #include "jpeg-encoder.h"
+>
+> +#ifdef JCS_EXTENSIONS
+> +#  ifndef WORDS_BIGENDIAN
+> +#    define JCS_EXT_LE_BGRX JCS_EXT_BGRX
+> +#    define JCS_EXT_LE_BGR JCS_EXT_BGR
+> +#  else
+> +#    define JCS_EXT_LE_BGRX JCS_EXT_XRGB
+> +#    define JCS_EXT_LE_BGR JCS_EXT_RGB
+> +#  endif
+> +#endif
+> +
+>  struct JpegEncoderContext {
+>      JpegEncoderUsrContext *usr;
+>
+> @@ -130,6 +140,7 @@ static void convert_RGB16_to_RGB24(void *line, int
+> width, uint8_t **out_line)
+>     }
+>  }
+>
+> +#ifndef JCS_EXTENSIONS
+>  static void convert_BGR24_to_RGB24(void *in_line, int width, uint8_t
+> **out_line)
+>  {
+>      int x;
+> @@ -165,7 +176,7 @@ static void convert_BGRX32_to_RGB24(void *line, int
+> width, uint8_t **out_line)
+>          *out_pix++ =3D pixel & 0xff;
+>      }
+>  }
+> -
+> +#endif
+>
+>  #define FILL_LINES() {                                                  =
+\
+>      if (lines =3D=3D lines_end) {                                       =
+    \
+> @@ -186,10 +197,21 @@ static void do_jpeg_encode(JpegEncoder *jpeg,
+> uint8_t *lines, unsigned int num_l
+>      width =3D jpeg->cur_image.width;
+>      stride =3D jpeg->cur_image.stride;
+>
+> -    RGB24_line =3D g_new(uint8_t, width*3);
+> -
+>      lines_end =3D lines + (stride * num_lines);
+>
+> +#ifdef JCS_EXTENSIONS
+> +    if (enc->cur_image.convert_line_to_RGB24 =3D=3D NULL) {
+> +        for (;jpeg->cinfo.next_scanline < jpeg->cinfo.image_height; line=
+s
+> +=3D stride) {
+> +            FILL_LINES();
+> +            row_pointer[0] =3D lines;
+> +            jpeg_write_scanlines(&jpeg->cinfo, row_pointer, 1);
+> +        }
+> +        return;
+> +    }
+> +#endif
+> +
+> +    RGB24_line =3D g_new(uint8_t, width*3);
+> +
+>      for (;jpeg->cinfo.next_scanline < jpeg->cinfo.image_height; lines +=
+=3D
+> stride) {
+>          FILL_LINES();
+>          jpeg->cur_image.convert_line_to_RGB24(lines, width, &RGB24_line)=
+;
+> @@ -215,10 +237,20 @@ int jpeg_encode(JpegEncoderContext *enc, int
+> quality, JpegEncoderImageType type,
+>          enc->cur_image.convert_line_to_RGB24 =3D convert_RGB16_to_RGB24;
+>          break;
+>      case JPEG_IMAGE_TYPE_BGR24:
+> +#ifdef JCS_EXTENSIONS
+> +        enc->cinfo.in_color_space   =3D JCS_EXT_LE_BGR;
+> +        enc->cinfo.input_components =3D 3;
+> +#else
+>          enc->cur_image.convert_line_to_RGB24 =3D convert_BGR24_to_RGB24;
+> +#endif
+>          break;
+>      case JPEG_IMAGE_TYPE_BGRX32:
+> +#ifdef JCS_EXTENSIONS
+> +        enc->cinfo.in_color_space =3D JCS_EXT_LE_BGRX;
+> +        enc->cinfo.input_components =3D 4;
+> +#else
+>          enc->cur_image.convert_line_to_RGB24 =3D convert_BGRX32_to_RGB24=
+;
+> +#endif
+>          break;
+>      default:
+>          spice_error("bad image type");
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Thomas-Zimmermann/drm-dumb-buffers-Sanitize-output-on-errors/20250311-235818
-base:   next-20250311
-patch link:    https://lore.kernel.org/r/20250311155120.442633-19-tzimmermann%40suse.de
-patch subject: [PATCH v4 18/25] drm/renesas/rz-du: Compute dumb-buffer sizes with drm_mode_size_dumb()
-config: i386-buildonly-randconfig-003-20250313 (https://download.01.org/0day-ci/archive/20250313/202503131309.ZzS9Tova-lkp@intel.com/config)
-compiler: clang version 19.1.7 (https://github.com/llvm/llvm-project cd708029e0b2869e80abe31ddb175f7c35361f90)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250313/202503131309.ZzS9Tova-lkp@intel.com/reproduce)
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202503131309.ZzS9Tova-lkp@intel.com/
+Hi,
+   tested, fixed and merged.
 
-All errors (new ones prefixed by >>):
+Thanks,
+  Frediano
 
-   In file included from drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:10:
-   In file included from include/drm/drm_atomic.h:31:
-   In file included from include/drm/drm_crtc.h:32:
-   In file included from include/drm/drm_modes.h:33:
-   In file included from include/drm/drm_connector.h:32:
-   In file included from include/drm/drm_util.h:36:
-   In file included from include/linux/kgdb.h:19:
-   In file included from include/linux/kprobes.h:28:
-   In file included from include/linux/ftrace.h:13:
-   In file included from include/linux/kallsyms.h:13:
-   In file included from include/linux/mm.h:2296:
-   include/linux/vmstat.h:507:36: warning: arithmetic between different enumeration types ('enum node_stat_item' and 'enum lru_list') [-Wenum-enum-conversion]
-     507 |         return node_stat_name(NR_LRU_BASE + lru) + 3; // skip "nr_"
-         |                               ~~~~~~~~~~~ ^ ~~~
->> drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:80:8: error: call to undeclared function 'drm_mode_size_dumb'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-      80 |         ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
-         |               ^
-   drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c:80:8: note: did you mean 'drm_mode_set_name'?
-   include/drm/drm_modes.h:530:6: note: 'drm_mode_set_name' declared here
-     530 | void drm_mode_set_name(struct drm_display_mode *mode);
-         |      ^
-   1 warning and 1 error generated.
+--00000000000035c4d506307cd244
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Mon, Mar 3, 2025 at 2:36=E2=80=AFAM &lt;<a=
+ href=3D"mailto:liweishi@kylinos.cn">liweishi@kylinos.cn</a>&gt; wrote:<br>=
+</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
+order-left:1px solid rgb(204,204,204);padding-left:1ex">From: Weishi Li &lt=
+;<a href=3D"mailto:liweishi@kylinos.cn" target=3D"_blank">liweishi@kylinos.=
+cn</a>&gt;<br>
+<br>
+similiar to mjpeg, when defined JCS_EXTENSIONS, there<br>
+is no need to convert BGR24/BGRX32 to RGB24.<br>
+<br>
+Signed-off-by: Weishi Li &lt;<a href=3D"mailto:liweishi@kylinos.cn" target=
+=3D"_blank">liweishi@kylinos.cn</a>&gt;<br>
+---<br>
+=C2=A0server/jpeg-encoder.c | 38 +++++++++++++++++++++++++++++++++++---<br>
+=C2=A01 file changed, 35 insertions(+), 3 deletions(-)<br>
+<br>
+diff --git a/server/jpeg-encoder.c b/server/jpeg-encoder.c<br>
+index fee07105..ba9058a2 100644<br>
+--- a/server/jpeg-encoder.c<br>
++++ b/server/jpeg-encoder.c<br>
+@@ -27,6 +27,16 @@<br>
+=C2=A0#include &quot;red-common.h&quot;<br>
+=C2=A0#include &quot;jpeg-encoder.h&quot;<br>
+<br>
++#ifdef JCS_EXTENSIONS<br>
++#=C2=A0 ifndef WORDS_BIGENDIAN<br>
++#=C2=A0 =C2=A0 define JCS_EXT_LE_BGRX JCS_EXT_BGRX<br>
++#=C2=A0 =C2=A0 define JCS_EXT_LE_BGR JCS_EXT_BGR<br>
++#=C2=A0 else<br>
++#=C2=A0 =C2=A0 define JCS_EXT_LE_BGRX JCS_EXT_XRGB<br>
++#=C2=A0 =C2=A0 define JCS_EXT_LE_BGR JCS_EXT_RGB<br>
++#=C2=A0 endif<br>
++#endif<br>
++<br>
+=C2=A0struct JpegEncoderContext {<br>
+=C2=A0 =C2=A0 =C2=A0JpegEncoderUsrContext *usr;<br>
+<br>
+@@ -130,6 +140,7 @@ static void convert_RGB16_to_RGB24(void *line, int widt=
+h, uint8_t **out_line)<br>
+=C2=A0 =C2=A0 }<br>
+=C2=A0}<br>
+<br>
++#ifndef JCS_EXTENSIONS<br>
+=C2=A0static void convert_BGR24_to_RGB24(void *in_line, int width, uint8_t =
+**out_line)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0int x;<br>
+@@ -165,7 +176,7 @@ static void convert_BGRX32_to_RGB24(void *line, int wid=
+th, uint8_t **out_line)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*out_pix++ =3D pixel &amp; 0xff;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0}<br>
+-<br>
++#endif<br>
+<br>
+=C2=A0#define FILL_LINES() {=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
+=C2=A0 =C2=A0 =C2=A0if (lines =3D=3D lines_end) {=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
+@@ -186,10 +197,21 @@ static void do_jpeg_encode(JpegEncoder *jpeg, uint8_t=
+ *lines, unsigned int num_l<br>
+=C2=A0 =C2=A0 =C2=A0width =3D jpeg-&gt;cur_image.width;<br>
+=C2=A0 =C2=A0 =C2=A0stride =3D jpeg-&gt;cur_image.stride;<br>
+<br>
+-=C2=A0 =C2=A0 RGB24_line =3D g_new(uint8_t, width*3);<br>
+-<br>
+=C2=A0 =C2=A0 =C2=A0lines_end =3D lines + (stride * num_lines);<br>
+<br>
++#ifdef JCS_EXTENSIONS<br>
++=C2=A0 =C2=A0 if (enc-&gt;cur_image.convert_line_to_RGB24 =3D=3D NULL) {<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 for (;jpeg-&gt;cinfo.next_scanline &lt; jpeg-&=
+gt;cinfo.image_height; lines +=3D stride) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 FILL_LINES();<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 row_pointer[0] =3D lines;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 jpeg_write_scanlines(&amp;jpeg-&=
+gt;cinfo, row_pointer, 1);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
++=C2=A0 =C2=A0 }<br>
++#endif<br>
++<br>
++=C2=A0 =C2=A0 RGB24_line =3D g_new(uint8_t, width*3);<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0for (;jpeg-&gt;cinfo.next_scanline &lt; jpeg-&gt;cinfo.=
+image_height; lines +=3D stride) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0FILL_LINES();<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0jpeg-&gt;cur_image.convert_line_to_RGB24(=
+lines, width, &amp;RGB24_line);<br>
+@@ -215,10 +237,20 @@ int jpeg_encode(JpegEncoderContext *enc, int quality,=
+ JpegEncoderImageType type,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0enc-&gt;cur_image.convert_line_to_RGB24 =
+=3D convert_RGB16_to_RGB24;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
+=C2=A0 =C2=A0 =C2=A0case JPEG_IMAGE_TYPE_BGR24:<br>
++#ifdef JCS_EXTENSIONS<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 enc-&gt;cinfo.in_color_space=C2=A0 =C2=A0=3D J=
+CS_EXT_LE_BGR;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 enc-&gt;cinfo.input_components =3D 3;<br>
++#else<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0enc-&gt;cur_image.convert_line_to_RGB24 =
+=3D convert_BGR24_to_RGB24;<br>
++#endif<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
+=C2=A0 =C2=A0 =C2=A0case JPEG_IMAGE_TYPE_BGRX32:<br>
++#ifdef JCS_EXTENSIONS<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 enc-&gt;cinfo.in_color_space =3D JCS_EXT_LE_BG=
+RX;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 enc-&gt;cinfo.input_components =3D 4;<br>
++#else<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0enc-&gt;cur_image.convert_line_to_RGB24 =
+=3D convert_BGRX32_to_RGB24;<br>
++#endif<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
+=C2=A0 =C2=A0 =C2=A0default:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0spice_error(&quot;bad image type&quot;);<=
+/blockquote><div><br></div><div>Hi,</div><div>=C2=A0=C2=A0 tested, fixed an=
+d merged.</div><div><br></div><div>Thanks,</div><div>=C2=A0 Frediano</div><=
+div>=C2=A0<br></div></div></div>
 
-vim +/drm_mode_size_dumb +80 drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
-
-    70	
-    71	/* -----------------------------------------------------------------------------
-    72	 * Frame buffer
-    73	 */
-    74	
-    75	int rzg2l_du_dumb_create(struct drm_file *file, struct drm_device *dev,
-    76				 struct drm_mode_create_dumb *args)
-    77	{
-    78		int ret;
-    79	
-  > 80		ret = drm_mode_size_dumb(dev, args, 16 * args->bpp / 8, 0);
-    81		if (ret)
-    82			return ret;
-    83	
-    84		return drm_gem_dma_dumb_create_internal(file, dev, args);
-    85	}
-    86	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+--00000000000035c4d506307cd244--
