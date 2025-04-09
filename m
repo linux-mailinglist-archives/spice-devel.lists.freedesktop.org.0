@@ -2,47 +2,47 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 336DAA825CF
-	for <lists+spice-devel@lfdr.de>; Wed,  9 Apr 2025 15:14:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EDDEA82742
+	for <lists+spice-devel@lfdr.de>; Wed,  9 Apr 2025 16:10:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9C29C10E8B6;
-	Wed,  9 Apr 2025 13:14:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8AD3010E905;
+	Wed,  9 Apr 2025 14:10:52 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Ziuxw+SU";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="E4EBVk4V";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2088.outbound.protection.outlook.com [40.107.92.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0C16310E8A6;
- Wed,  9 Apr 2025 13:14:48 +0000 (UTC)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2087.outbound.protection.outlook.com [40.107.236.87])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D71D610E8D6;
+ Wed,  9 Apr 2025 14:10:50 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yGfxgKvFAGgwkk6gmZOeei1K/SCTzIS9Mt/HWjv901b9OIZWtE+vMdIgVKD9Y1IgYUlC1Ydry+RklR0gwfRGbqg0nFpewAHzRgXpZEFb2ZC156J5BuLnm52tVKzUvi+MxO+3TPd2Fi/bd/OwAgC39YIjlC3MFZ2wALoXs1ZhVwr+lOT6zGF4J5OTGsrZ2Byu4Kj3ZErL1U5oiExTQ2eExGp5AmFrqVBZewWboD97Qr0BlKaBKGMah4KY7GATwOsX6dPiqobG9zP+e+Uiy4bWX/B06HIIbVxnF/9t0Gx/Dp7zWZChG3JD6mHaCt8g1ZyAKPqCvYzi/zluzvx14Ayqmw==
+ b=n5lRKNBT4ze5CBSfVFcsTlPPa7rXk9Nq4RACOQ4A90ZqtLyCRuKk2Uor/FWEt7YoyD2NrlHCLbFWZ3l2O5YShd8ErmLz7rDYIUl/UynEs1Un06zSn5F4ZMVl9jyrAfnkdI4W+F2TLRa6u/HvGsnVzUr7Qaxc1214frvAdL42/s2tgjZwzlYgCDMCuOq1OQS8y2SvMS5K7OP80WgBwdYBVOTKF5Ygxn+rZXpnmINx1deg/06Jm0RbkeeF2bPxUdFiU2FZ9GPLFgcXGxrUsmb2m9gPp0vnvgXsDnwqMdeu/ILLkMmIYvcIYvSiYKqjtXCn/pfq/fNzuqQI+erL+AlTow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZMt8IhWXjfKKNSe/YUAi2Bwdd4Ynu5BMzPeY66KYb7k=;
- b=HRFpmKlgvhIZUEa9iLYZ6oShYvGSyDVm9eLPxl8HtZpge72fXvfskU5BGH18BlANIBOD0Ri/uWGEYFvfxNthi8txeyk7fMrkHr4iT/1/xmoXX+Lswq6cvXPt0+EuR4Gl66ndH4cNq5T5EpZUa5trdPFbgqWy50Up9otlpNVoRVirpLKoNMzkMEtnQhNKTVCWQutmof30S3PfV292KSIrbf0D1Km3mgOVnjoVC1W8OiD3E+U24yaIprBwBiFfMUUVo3ZotdZcK2TIGfulslMhm61nCbz7sBGT9/37XlbEBXUJOk10lS2hMUb1HEUVYSzwXwMVD8tNmF1GbfkLII+vzA==
+ bh=J5gm/pWGj+7ED1yjql1cFf353+H6d1DolAXK/7P2vQM=;
+ b=r0h60jFqQd48CkfPjL7eCDDFwKF7g16Nwvj4N7RgGnJe7Rp3BmvjtN0CB9sHd2ASi6staBFfWsAkLdqpziA35sLpmwLdSD6Tt8Zt7xL4uJEJbSWHjciPGVGTezmdebvuB1WfCFcI1Sc8AgIkEsWxqVIcj1dGoRUgyuBDak31NJavw7Cno4vYK7GSxW77EhSxdEVwAMHmZohlFvPSbuLDLT3HT7W1IrbYxjb1k7ChhoDC2WGc8sdKLv+v5yK4i27r5IYJ5Kngn1omjtd2zveF0s2e9ZXnKdXD/YCQ/iInfUQtmXspToWWxetqhhJrfEKVyZXizHoBRJAKb+yOsNkIYQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZMt8IhWXjfKKNSe/YUAi2Bwdd4Ynu5BMzPeY66KYb7k=;
- b=Ziuxw+SUz6wk9Z0qJxeR2lPXUP81o1XEr+3qKbkvWvZR54vc5Hq/Rw8rltt7Nb+b7BHCGqcz6PAqc7DK3G190hVGnuIXNtEUrSWcLSRH+qfpEqp0mmdc4pMD4vs4s6qeaJQSMigNpbIS0ShVbA3H9gU8eAG8frwyEFfPcGt9O+0=
+ bh=J5gm/pWGj+7ED1yjql1cFf353+H6d1DolAXK/7P2vQM=;
+ b=E4EBVk4VPNNoTU/u7S9QuLBzdaYTEX808PsYYBGU8FG1X4R4QjB2qdLkJ7xrxwN6HzFCyh5XHGFf7aXXuQA1TLoqT1LSpBN2bOBUM/oe7kMqpApmWfz6CKApRccWcY8x6W/qaKz3LdzSpxzsapn9cmlBuUPetFtnCdDiVhQryTE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by IA0PR12MB8352.namprd12.prod.outlook.com (2603:10b6:208:3dd::14)
+ by PH8PR12MB7181.namprd12.prod.outlook.com (2603:10b6:510:22a::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.35; Wed, 9 Apr
- 2025 13:14:42 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.21; Wed, 9 Apr
+ 2025 14:10:46 +0000
 Received: from PH7PR12MB5685.namprd12.prod.outlook.com
  ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
  ([fe80::46fb:96f2:7667:7ca5%5]) with mapi id 15.20.8632.021; Wed, 9 Apr 2025
- 13:14:42 +0000
-Message-ID: <ab7d1937-d0e9-45f8-8f7d-ddd7a1a9d3d5@amd.com>
-Date: Wed, 9 Apr 2025 15:14:17 +0200
+ 14:10:46 +0000
+Message-ID: <334e843c-d7fe-4e33-b4fc-f3d18226465a@amd.com>
+Date: Wed, 9 Apr 2025 16:10:25 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/2] dma-fence: Rename dma_fence_is_signaled()
 To: phasta@kernel.org, Boris Brezillon <boris.brezillon@collabora.com>
@@ -105,106 +105,107 @@ References: <20250409120640.106408-2-phasta@kernel.org>
  <20250409143917.31303d22@collabora.com>
  <73d41cd84c73b296789b654e45125bfce88e0dbf.camel@mailbox.org>
  <72eb974dfea8fa1167cf97e29848672223f6fc5b.camel@mailbox.org>
+ <ab7d1937-d0e9-45f8-8f7d-ddd7a1a9d3d5@amd.com>
+ <9a90f7f14c22c01aa28d89aa91bf4dfa4049c062.camel@mailbox.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <72eb974dfea8fa1167cf97e29848672223f6fc5b.camel@mailbox.org>
+In-Reply-To: <9a90f7f14c22c01aa28d89aa91bf4dfa4049c062.camel@mailbox.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0132.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b9::10) To PH7PR12MB5685.namprd12.prod.outlook.com
+X-ClientProxiedBy: FR3P281CA0154.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a2::7) To PH7PR12MB5685.namprd12.prod.outlook.com
  (2603:10b6:510:13c::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|IA0PR12MB8352:EE_
-X-MS-Office365-Filtering-Correlation-Id: 75da6efb-51ca-475b-8897-08dd77687d4e
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|PH8PR12MB7181:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9cd019ed-815f-482c-1a46-08dd7770525e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UjBqNXgzbkhLaU5rdTVpRFRjQy9KZkhZdHMyRU9EMUxzRWQ3THRiYkRTZkds?=
- =?utf-8?B?LzNNQ1pQS285Wmx6RTVxR1ltSzRVbXhrV3ZxZTdPY0QzcEdlaVVQdld5Qks0?=
- =?utf-8?B?SUFkSk1UYWdOOXNWLzZweFNVQVpzejdyRFFXc05ST1Y0ZWt6UDJneXZQYk4w?=
- =?utf-8?B?STBhaFI0ZjNVUi80ajZWRVFJTXFrMkNkTGQ3ZHhwWUxPb2NoQWN4aE4wV2Z4?=
- =?utf-8?B?NFV4d09GcEVmQk1JdGV1aVl6Z3paM0dta0FHditZbjFXSDN5RVFTUndCWW4r?=
- =?utf-8?B?U0JlaHZ0SHRPZmpLN1pJVVEwSXVqRXRGQzFJTkFOa2ZOWG8zSmFaUWJEUWhi?=
- =?utf-8?B?S0o2OGdUOGtxQi9lbzRZZURsOEdBNkQ3MGZOQWJZMkV1Um1OVENpbjFUZDFm?=
- =?utf-8?B?M0Q1MlJlQ244b2N5MDEwSmZWdHBkYzNpTmgrTUl2NUZyVmFyTmlrM3hzcllB?=
- =?utf-8?B?NXVIcGRWcG1DcGlJQU11VVJzRVQ0V2RHajUzZW1LR2FGMVMvaDJhK05xc3ll?=
- =?utf-8?B?cENIV3dYcUZPckRkaHV1U1JaSG9XbVhJcDF1ZnhqOTh6ZVFPMnV4c1NZU2Js?=
- =?utf-8?B?ZnNWd1pPT3FCR20xR1FTTGdwNitmUWNBSWNKWmgvY3hmOVdzcUFFZHdzRmEv?=
- =?utf-8?B?WGthUmJuL1U4SExTZWNGYmJ4WVp0MzY5U3FIOVNnOVo2cFcwclZOZFB3a29M?=
- =?utf-8?B?L1B1YWFzVVhhcmt3QUxxU2p3SUUrNmt0Y2Zna2VLOVZSbFl1OTRXSVJqSjYy?=
- =?utf-8?B?R1Zwc29aWEdrLzB0RVdxZ2RkeExqSFVyOGF6OXl3ZzVvYVhOKy9rd2VQU0Nw?=
- =?utf-8?B?OGhOZ0VtUTdsOUdHd3V5cUJmZWVTS2VGMG9xL01JWmRJbHRkRklLbFV1UVZP?=
- =?utf-8?B?bk4yWGRDVngxZzViTEs4V1Y0cnNpeXIrb29QL0J6aGtiemxPYjkxRUdrOEov?=
- =?utf-8?B?VmFlVldjUnVUWXdTK2VxVzhlSkZUbjd2eFRraU5FKzl1YjBhRDE0Y0JodG9W?=
- =?utf-8?B?dTFwQlI0L2tINm93NVlEVk8wRGovT1pNOXBHTzBhaTdIMHJDT2pxMFBobGVo?=
- =?utf-8?B?ZXI2eS8zbEtDci9ZVjlxQXY3bXY5YkNjY1RkZXEwOEpDZlRxbXNOTkdvcFVt?=
- =?utf-8?B?SWZZVm5ObHVyeEo3T0tJekZWQi9ITDkya2UvdXF5RWpxeCsrK0Fsa2JiTC9a?=
- =?utf-8?B?Z09CaCt6dlo4NFZLUWVtaitwenhrYU9tVE41QStVY1RHTG81UEsyOGw0T25K?=
- =?utf-8?B?cVl6MGdibVAvbXlTeXNZaUZ0ME5ESk5IQk9LSWU0YzlrSlAyQlpIZytCNm9v?=
- =?utf-8?B?TWZoRmdtcUNCeE5Mb2xINks4MUdNeVpCWDdlS2NmaFNoQWdEZXhWVkI3akJl?=
- =?utf-8?B?L2liYldyYmxvZUZNOHpiRFBuNXRTS0hHSndoeFpwVWpIK0h1QVlXaVRCQjg2?=
- =?utf-8?B?L0dHeVg4RWpIZ2xwb0s2VGlQRmpqKzJIY1Qxd2F0bDhiUEduMk9kTWIzUmRl?=
- =?utf-8?B?WGQrQjd2cnFXUFZCdFExZE1kclFvWTlxZHZvTTN1TTd1WFlRRE4wM09Xc3Z3?=
- =?utf-8?B?Qjg1OWlwNFQ5MEppbkoremNoWk9GT0I5MjdSSjE1S3V1VVhtUDYrL3RGVm9C?=
- =?utf-8?B?QTc1MTdrbkRsS1dlR3RJZ3k2N21BeElxeEdrZEROMVhHa3VIOFpOeVVOdjhk?=
- =?utf-8?B?L2ZrS01SK3VVbGZGSU10dkJUa0QzbE04dE9nTDlCK0N5eGJ2RXRBMGEydGdL?=
- =?utf-8?B?NkJKR1N6UysvMjFSMFQxYk5sbEo4NGR2dTcvcnBhQ0xFMkt0OHFDdHFQajYr?=
- =?utf-8?B?eXpnaGoxUGN1OCtJaEpqd2VucnVudVBaLzk2NHE3OWJlWDAxbytJWHpkSGdN?=
- =?utf-8?B?bFg3T2RQcGpycTltSi9vS1FlYjh4dUMvSDBRL2xqNXVhdm1IbEJWd3J5dEUw?=
- =?utf-8?Q?3zvaB5TSbLY=3D?=
+ ARA:13230040|1800799024|7416014|376014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ekVCK1Z4aUc1R0pmQ0ZYaVlJVmx1UVFheVMycFgyNEh3RVAvdFUycTkzRlJY?=
+ =?utf-8?B?bVR6TDF1KytKUkMyUlVFQzYxTDBUYXg5MHhUUlF1QjE2OGh2bk9MWnJUVHFy?=
+ =?utf-8?B?c1ptbDhsUFp2eS9ndHoxbllaS2hnZUFCV2s3c1BWMFd4aHY1dUdwbGJLVVhq?=
+ =?utf-8?B?Q05zOTlpbEFsTjd1WDhRWHRRUFJVR2pFWkQ2M0l4ZnhjWnNJZnh3aldBUmhM?=
+ =?utf-8?B?d0lJMFdFSVNESWowa1Zoem13MlkvZXhjRVRGajhUcVp2dHZkNE13VFEvakpQ?=
+ =?utf-8?B?cVdQaHBSSjUySktwNmY0Rllxd2htdHR5bWs0ZElhMmNIajl5UGhCOHdGVnVY?=
+ =?utf-8?B?Z1owZ2hZYWZ3bmd4U29kcjZORXEyQ2UvalJrNi9zRzdZUzlIVUxuN05yU3BZ?=
+ =?utf-8?B?R1F0VUloRTdKN0t5MWlFM3diWXg1ZW8vTTVKeEVFeURLK0pEVmN2d3cwVzkr?=
+ =?utf-8?B?d0xHNUhJYzJUdG9mY240RXNBb3pNQWRxSmV1d1lNQ2JlK3JRVi9IUWY4d3Vu?=
+ =?utf-8?B?bDZXdG1ZM0tZd05CN09VaiszUVlKNWQvRXc0NmZTeUs4YWlhMldJb2x3WjdQ?=
+ =?utf-8?B?YXJPOHNIKzdreVpBcEh1UkNkZzAvVGhOWTZPZFFQL3pIRE1xK1Q4ZDR1b0l1?=
+ =?utf-8?B?dUhZK3NqS1dPQ0tXYmdMMWRIRFZSSmFYeFRyN0tWRUxFZ2V3UEFqRHArck9s?=
+ =?utf-8?B?aU1iWUYyTnRMOFlQWDNRbHB0MHBPb29rSW9xQVBWdngrdXJxb1FlNUs2Yk9B?=
+ =?utf-8?B?STE3SHp4MlBVaDZJZkJCZFFsMnVWcnZPdGhxNHM0R3BkVk1ETnFlUHpFSTNI?=
+ =?utf-8?B?QWFLQnNSVGFPa3U4bWR3UGQyL2JxaDhvK05YTHo1UEVTWEhHVk1ad0x4UW12?=
+ =?utf-8?B?TmpiNEg0TTVDd3JVYU9DQnlleXlyVUFhc2hlQ1daTVdXMEFXMWdKaUhkZjBQ?=
+ =?utf-8?B?VDd5VUpJYVVMTHBMdThnaTRTNWJ6MGtMUFV1RlowS2Q3eXIrUFJTMVlFenNO?=
+ =?utf-8?B?M1BLTFBaZGgrb3Z6dk1HL0Ivb01RbitmYmo2Z3Bac09MN1lFcTVlc215ank1?=
+ =?utf-8?B?QndjTFF3bEc0a203Zy96UnNLbHYrTGdoZTlzNDhxTzlrSFBySDVlcGpNbzlt?=
+ =?utf-8?B?RXB0bGZwUjNHdmJldjl3ZkVJcmFlS2NSV012T24vZStLM2pUUGNOUWFkek1O?=
+ =?utf-8?B?ditBV29GNkwzNzNTRGdSOXUvUUFaa0tPZjd0cmZKQ3ltN2VLUWJQUjZwWkdK?=
+ =?utf-8?B?clhIQlZ5QmVJQjFZc29oSlQvNWtVdGVET1FGMjZ1MXVWV1NaZXVMRllHc0dl?=
+ =?utf-8?B?dWthL1FabHJjazRLTk45QWV4Y0JUaWdxcVlwOXJZTnltWXc5VFFoV0lKUFc2?=
+ =?utf-8?B?RXh4UHpRK2paL0h4THJUalFyL3JGSGw2NCt3RTh6WHZTQ3cwaFJESmp0RTFq?=
+ =?utf-8?B?R3kwc2JTaEFHbERwbjkraFk2bURubVIyeGZ1Zjk4c3BMQmgyYzE5MzNpZjAv?=
+ =?utf-8?B?aDBWS3RydWhSNnRaRWp0Vk1pa3RUUll4NzBjN2lRWFZOOWpveTQ0VUFvT3BN?=
+ =?utf-8?B?YmlURTg2dDE1bDEwL1JNZXJZbnl2djdmbGF2Z252OWVJMWVhWkhvUWRCZFhk?=
+ =?utf-8?B?cG5qcVFCcVJBeW9zeG9Td0Zvd3RSd2p2S0xiMWZ6bElQUE4ybVg3VllrdTZ0?=
+ =?utf-8?B?eGxBQmIybStYcStwdHh0MDI3R0ZTVTRNNVh5T0NuOHgzdXRXOWhYeWxINThS?=
+ =?utf-8?B?V1pUS2ZiMnlOaml2ZGhudW41T1BuSFlNek1kRDFZNytIKzZ6TFg3aXVFL052?=
+ =?utf-8?B?eTlGQzhibHkvRWdNQWt2T002R3dvMy8vVDdTZGFHNENWanlGZ0t3RllPWlR3?=
+ =?utf-8?Q?xBo2M35OcowmX?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR12MB5685.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(7053199007); DIR:OUT;
+ SFS:(13230040)(1800799024)(7416014)(376014)(366016)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SFVXQlJLTHpjNzJoYi9mWVhiZmNYaDZFa1RoZS9Jc2FkOFpwWnJHQnNTOVNt?=
- =?utf-8?B?TTRUSGlkZElpcVpIaFFrQ3lrOGFVM0VhUEdhL2NxZ2M5R1ZHMHlxci9iMnpG?=
- =?utf-8?B?cFRSeWh2ekYxdy84Rld4SmFpMDg5aUJMRXNpNHlzWndCbEZnazhURFBnM25z?=
- =?utf-8?B?bEV5N1lpM24yR2Qwd25HS202Yis0MkU3SXJwTFFNNVJteStkS3NoYUh6SzdR?=
- =?utf-8?B?NzlWc05yZ2lPRXBML3ZERW5KUWtnQWt5V1QyRHlVQ2h1VXlGV2RnNUpDRWVI?=
- =?utf-8?B?NWJrRlN5U3p4MytYa2Q4L3ZTZFBNSG9nOUZBZGNLY2hQaG02aG9UUlRSNkJh?=
- =?utf-8?B?cTlYZ3NsTmdvL0prSU4xUXgzYlJBL1cwMW1xVDE2SEEwWDduRGFQYXpORUpE?=
- =?utf-8?B?MSs4ZTZsK0Y2T1FtK0FPQkJzcHlGZDBWa29lcWNJZDNaNFdTVTUxNDkzU1Rn?=
- =?utf-8?B?TGpPd0FKekwvWVNCaWFsVUQyR1cxby94RStHM1djMk5ydUdTdm1FK3N3bkFE?=
- =?utf-8?B?dFBHb1hYZnBvZHRRZWgzTzRzNDB5Z0twM0Y4Y205ZWU1NU9mamFEYmpzaWxL?=
- =?utf-8?B?SkJaSzZ3cFU2Q3F5R3NXaHU3WFdJMnRpbWNFTkl1ODZEb2JmQWxaZkZST2l2?=
- =?utf-8?B?QWJVYktDWDIzc3BZU0krRDd4RVJNQzFqQkoyK1lDb0oxTSs5Qk9xclNkY1pH?=
- =?utf-8?B?cTlmUlNlall4clBnaFRjUC8xRWsxWTRZclFqV2UwUGV2Y0p5NVZxeGNGZG1m?=
- =?utf-8?B?dDQwUVJzWlFIZWhKUmUyYXI0V3lkSU5kc3ZWZGFhNzRZSnUwQmMwZ1hzZWZ0?=
- =?utf-8?B?UzVPSGkyQTNuUkVkUFlUYnh4cGtXU0hsRXEyVnlmM0srMnVpem9YT3B2bWhH?=
- =?utf-8?B?aGVMSGsyYUlkak52UjI2WjdhMndWNTlSNS9wdWZwN1VhVG01clo4WExoNVk5?=
- =?utf-8?B?UmtqaTlxVDhiMUlqa1RPNjZ2cnNxNUVHMmRwalJYWEJTMkpDRmlLTDZqRk03?=
- =?utf-8?B?bUh3M0ZKNjNRN3k3clVuK0V4OFJuNmhBOFRhSWtVY1VZc1NJUVpLQlB2MWRr?=
- =?utf-8?B?ckp2NXR2RmxGZ09ZdlVVdWdTRHpOQ2ltd0I2aE8yU04xYmNNM29GS25XZUxy?=
- =?utf-8?B?NHhLRlNXSFBReGdNbm9mQnlUMEMzUjJHalhKb0hEUGl6bWRkdndjUHFvUHBK?=
- =?utf-8?B?U1VRV2M5WUhDUnVDY0dOeFY4ay94WitjcjhsSFZ3eGhBQ3E0blplNXlVbHg0?=
- =?utf-8?B?NFBIeSs3UVZlTjRheWM1UnIvdzIyZS9BSGVnVE1nY24wdHVLWC9KTWRJMnph?=
- =?utf-8?B?KzFpYithVkl2MFdEdEJLQ1RINDRDZmNjaXVxTDNUTHM4SjFOd1hYbEl0ZWw1?=
- =?utf-8?B?VGQ5RDJFYjFrUlk4ZmVzNlJlYm1pakJLcENKSTU1OTdSQXU0MU9VeGpmdHpu?=
- =?utf-8?B?QjFKTDdhd04ySjZOY3dPaS85RXZwTkZGUmxJczVMdXNlMGZIODMrQ28rZjVs?=
- =?utf-8?B?cVgvQ1FURzc1TFhtbEVkU1ZmdEhEK0plT1hEclhZVUIxYnU2TVp0alh4ZDdr?=
- =?utf-8?B?Q2trclN5eEptSWdwWGMvdWt4amowZWlTYWpENjlSclRvb1BrbEVjZDVRREk2?=
- =?utf-8?B?UGc4RTdLTFExZmV2QzJaQ3VPMVN6RTNGdU9uVnhZMmZnLzhWTlFGbExXclJO?=
- =?utf-8?B?OTBQWWJsc0hKYVUzaG5nbHJqK2g4V0paektwRzRKd2tjaWhsd0RnWmUrT1Fo?=
- =?utf-8?B?VDFjb1JLQ2hHc0YwRW1CMFFOdnVUZ3hpL1BQbElNQlUwcDJVZzRkYU1YZzcv?=
- =?utf-8?B?VXZPZk00bWNhWHBIOFd3WXpvR0ZRQXFRYnBXd1dOOTR0SVd2anRUMVhmMnhy?=
- =?utf-8?B?WXZXaUljY1pLU09nSnh6TDg1NVQ4S2xLN01na3RzQndvYjJmdUpCUEZYZHp3?=
- =?utf-8?B?b0toNStFUXFEL0hKdTgzODFxa3ZwbzhtdmpENnpFS29UeVppRU5xaUc3czVM?=
- =?utf-8?B?VDBNalBIaXF3UUxFNFJrUkMvQXNIZWRQSFU0SHF0cWJlTzNCNFh2TEFiNjB5?=
- =?utf-8?B?aTlkSTRsMW5wSjB0WFl4cWJWeWFHZDlrdU5mODY0WklFZ1lnMHdTa2Ewb1do?=
- =?utf-8?Q?r8gw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RlJOMEttOFh6b29oMDVSdTNBd2Z5bGlCSTNXR3g0cldqenNEUUM0dFBGbkpp?=
+ =?utf-8?B?c3pVcnl4RmhHVDdNUS85L0FvY3BubUo1OFlDV2pOd1NXY2I5bnFtcmdGenMr?=
+ =?utf-8?B?SVllWE1RRGp5a0MraXdMc2Zsa3F4KzV6VFB5YU4yckhvVDNJcFVqR3ZPOHB0?=
+ =?utf-8?B?clY5TTBXKzJMTHBnd0dhT0NrbUZEeFk2d2I5KzJaZTZRNC9zTld4L3kvRHVK?=
+ =?utf-8?B?d1Y3UFA1elIxS0pDVktyVkVSWS9HQXRncjZqSmppQThHVTFCRG9jS2dYZTJW?=
+ =?utf-8?B?aVBuemF3dFdxaU81aURVNTEwV3F3cmVJV096ektSK3pSY2R3MjFlU1RUSlJB?=
+ =?utf-8?B?K1RPQVlodlBWN3l4V29zdnZOWitzd0xUaUlZdUttbnFYQzZaWmdTaGxhQ1Nk?=
+ =?utf-8?B?eGk4NDVaNmphUlV2STN0MkZYenZrQ2pzOFQyMFUxeDRpQk5zWG9EYnBrUTFN?=
+ =?utf-8?B?WVpkUGE4ZDd5QUhOcGJFamFORVZ6NkhudytvT1d6bk1uNkFXNiswenhUMElm?=
+ =?utf-8?B?M0k3bGhMNnNnS3dkYVRrRGtnWTRaZkdHQUQvWGVGQnNkUEpUL1ViakFOTVZW?=
+ =?utf-8?B?TFpwZG5ON0ZZRmhMQU5RS0EyWjVKYlB2ZmpseG5DdnVmNWs0dE5EYmU1SFh3?=
+ =?utf-8?B?T2xlQzVBRG8xZisrREowWExHTWpiVWs2T2Z5bVBRNzNScGRpcWNwUEZrUEpD?=
+ =?utf-8?B?V2xodFl2OFYydFUwbHRRTmxIbjF2VTB5RDRvZm1JbXBFa3lLMk8rWkcxQjk4?=
+ =?utf-8?B?UGNENHJIMmQvN25oT053MVJMbzZwQ0tEd3BrVXRlYXYyRnNFVW82RXBHWDhJ?=
+ =?utf-8?B?MlNEOURNZmI4TFlpY0JXdTJ6Z0hKbXhkNFVidlJvWDRDOVZQenZLbXZWZWZP?=
+ =?utf-8?B?bDJsWmV2MDl2YlNUc1BuYVJ4Rk1YSXljZjJhdDQ1UHNxL09qL3gxbFhKQ0VR?=
+ =?utf-8?B?cmswTTRYQUhNSGMreG9uYStMTjJuWVBrOEFSWjlEM05oQzZzUzhneXd0WmIx?=
+ =?utf-8?B?TzV1eFUvemRzcUZtUHdkU09BeDdBUmhxZ3JYcXpvZW5SRk44cmhpU1JtQWk4?=
+ =?utf-8?B?RnlJdHE2VHg5R1ZxaEFDOGd2dUxaYkROaVZINCtuOEt4SEZmWGhocWQxbksv?=
+ =?utf-8?B?Tk1rYWlWOFZJaVoxM2Ewd0pSL21FTG4wZ0JHL1RPYzlTVFVxTEg0ekRvOXZa?=
+ =?utf-8?B?eXRUYjhaYyszcnRQRGhQR1RpY2dNNG5YaGMyZHlHM1l1YlhxY2ZxOFNGUlE5?=
+ =?utf-8?B?NGpuanp0bXVLbVN6N0hGV3NyRko0VXRWYnhsbENybENVTUdmU2RzUnQ3YlVQ?=
+ =?utf-8?B?blBSREphSEVyTThTUkt5eFVsVkZNZUIzakxDWHI4cTArbDk5MHR3REFtUVdt?=
+ =?utf-8?B?U2toa2YwSVhxbmoxQTVIcjZzM2pWL3lML0IzZUxHOEg2SjBFL1BZQ0krajhy?=
+ =?utf-8?B?bXY1TzBsUm1yTHlHakdkaW9KWGNXVGxCY3dNeHAvc2Y3UkpxcC83NWZKNGli?=
+ =?utf-8?B?T2c2YnF5UFRURXdtOHRvQWEwZWJNQlJpQm9jUytIeGc2cGs3elRNd2JBU08y?=
+ =?utf-8?B?MWI2SVFIbnBxVS9wbEh0Ykh2RFp5eDNiQkdNeS9Eemk4R3J2TGNFOGFMVFdi?=
+ =?utf-8?B?RzFGWnI3emYyRnEvRTV3WTdGbkV1akc3eUVmQkloTUZXSDEzZE9DSnZhNVFj?=
+ =?utf-8?B?My9kZTc5MXU5WW1mZ3czYUN3QlRiQStLL0hwUHk2TUhQcmMxN3FUTVMrYkhB?=
+ =?utf-8?B?bU43ancyYkhNd3doeURsOHo4ZUtwYTdkODdqYllWMStoOGswQ1VBLzRZMDlq?=
+ =?utf-8?B?Y1hnYnZWQWc1azF0L2MyN0VUbHZXc0NmMi9uYWJ4TzJVaWUrYkZCK0ljMFhF?=
+ =?utf-8?B?UHhac1ZtekdrQi9odXBjZ2pHbFQ3blIvMTVRYVNBU2NYTkEzUGZHci9sREJ0?=
+ =?utf-8?B?c2VIeFIzK2RPWi80eC9MRHlGK2JTQzQvc2gxZVZmcGloMCt1TjBGQnJzcE42?=
+ =?utf-8?B?N3NBRHg0TUhRYWdWK0NmZWg1VG1vYllNWGp5MldXd1BwM2dQakNWTmtxWkFK?=
+ =?utf-8?B?ZkhTR243ZERuemxTaTZPM1F6eFJZM0NLUlNMd2prNkhqcEp3VXBkbWltNUJJ?=
+ =?utf-8?Q?tsMzOE4IsmVFn6Tzkqy+AJENV?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75da6efb-51ca-475b-8897-08dd77687d4e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9cd019ed-815f-482c-1a46-08dd7770525e
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2025 13:14:42.2808 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2025 14:10:46.1606 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Cwf+4Ijyeu9sD7MROrsq1lN1XEEQrMsc2l+l2+likNJmA+nXh7J80XOHgLCckfIQ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8352
+X-MS-Exchange-CrossTenant-UserPrincipalName: BqkYUP04hlzALEOAK1ebLVP68+FMla8PSl7i430KrBlKO3HgVv+npQmgci0yszC7
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7181
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -219,82 +220,118 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Am 09.04.25 um 14:56 schrieb Philipp Stanner:
-> On Wed, 2025-04-09 at 14:51 +0200, Philipp Stanner wrote:
->> On Wed, 2025-04-09 at 14:39 +0200, Boris Brezillon wrote:
->>> Hi Philipp,
->>>
->>> On Wed,  9 Apr 2025 14:06:37 +0200
->>> Philipp Stanner <phasta@kernel.org> wrote:
->>>
->>>> dma_fence_is_signaled()'s name strongly reads as if this function
->>>> were
->>>> intended for checking whether a fence is already signaled. Also
->>>> the
->>>> boolean it returns hints at that.
+Am 09.04.25 um 16:01 schrieb Philipp Stanner:
+> On Wed, 2025-04-09 at 15:14 +0200, Christian König wrote:
+>> Am 09.04.25 um 14:56 schrieb Philipp Stanner:
+>>> On Wed, 2025-04-09 at 14:51 +0200, Philipp Stanner wrote:
+>>>> On Wed, 2025-04-09 at 14:39 +0200, Boris Brezillon wrote:
+>>>>> Hi Philipp,
+>>>>>
+>>>>> On Wed,  9 Apr 2025 14:06:37 +0200
+>>>>> Philipp Stanner <phasta@kernel.org> wrote:
+>>>>>
+>>>>>> dma_fence_is_signaled()'s name strongly reads as if this
+>>>>>> function
+>>>>>> were
+>>>>>> intended for checking whether a fence is already signaled.
+>>>>>> Also
+>>>>>> the
+>>>>>> boolean it returns hints at that.
+>>>>>>
+>>>>>> The function's behavior, however, is more complex: it can
+>>>>>> check
+>>>>>> with a
+>>>>>> driver callback whether the hardware's sequence number
+>>>>>> indicates
+>>>>>> that
+>>>>>> the fence can already be treated as signaled, although the
+>>>>>> hardware's /
+>>>>>> driver's interrupt handler has not signaled it yet. If that's
+>>>>>> the
+>>>>>> case,
+>>>>>> the function also signals the fence.
+>>>>>>
+>>>>>> (Presumably) this has caused a bug in Nouveau (unknown
+>>>>>> commit),
+>>>>>> where
+>>>>>> nouveau_fence_done() uses the function to check a fence,
+>>>>>> which
+>>>>>> causes a
+>>>>>> race.
+>>>>>>
+>>>>>> Give the function a more obvious name.
+>>>>> This is just my personal view on this, but I find the new name
+>>>>> just
+>>>>> as
+>>>>> confusing as the old one. It sounds like something is checked,
+>>>>> but
+>>>>> it's
+>>>>> clear what, and then the fence is forcibly signaled like it
+>>>>> would
+>>>>> be
+>>>>> if
+>>>>> you call drm_fence_signal(). Of course, this clarified by the
+>>>>> doc,
+>>>>> but
+>>>>> given the goal was to make the function name clearly reflect
+>>>>> what
+>>>>> it
+>>>>> does, I'm not convinced it's significantly better.
+>>>>>
+>>>>> Maybe dma_fence_check_hw_state_and_propagate(), though it might
+>>>>> be
+>>>>> too long of name. Oh well, feel free to ignore this comments if
+>>>>> a
+>>>>> majority is fine with the new name.
+>>>> Yoa, the name isn't perfect (the perfect name describing the
+>>>> whole
+>>>> behavior would be
+>>>> dma_fence_check_if_already_signaled_then_check_hardware_state_and
+>>>> _pro
+>>>> pa
+>>>> gate() ^^'
 >>>>
->>>> The function's behavior, however, is more complex: it can check
->>>> with a
->>>> driver callback whether the hardware's sequence number indicates
+>>>> My intention here is to have the reader realize "watch out, the
+>>>> fence
+>>>> might get signaled here!", which is probably the most important
+>>>> event
+>>>> regarding fences, which can race, invoke the callbacks and so on.
+>>>>
+>>>> For details readers will then check the documentation.
+>>>>
+>>>> But I'm of course open to see if there's a majority for this or
 >>>> that
->>>> the fence can already be treated as signaled, although the
->>>> hardware's /
->>>> driver's interrupt handler has not signaled it yet. If that's the
->>>> case,
->>>> the function also signals the fence.
->>>>
->>>> (Presumably) this has caused a bug in Nouveau (unknown commit),
->>>> where
->>>> nouveau_fence_done() uses the function to check a fence, which
->>>> causes a
->>>> race.
->>>>
->>>> Give the function a more obvious name.
->>> This is just my personal view on this, but I find the new name just
->>> as
->>> confusing as the old one. It sounds like something is checked, but
->>> it's
->>> clear what, and then the fence is forcibly signaled like it would
->>> be
->>> if
->>> you call drm_fence_signal(). Of course, this clarified by the doc,
->>> but
->>> given the goal was to make the function name clearly reflect what
->>> it
->>> does, I'm not convinced it's significantly better.
+>>>> name.
+>>> how about:
 >>>
->>> Maybe dma_fence_check_hw_state_and_propagate(), though it might be
->>> too long of name. Oh well, feel free to ignore this comments if a
->>> majority is fine with the new name.
->> Yoa, the name isn't perfect (the perfect name describing the whole
->> behavior would be
->> dma_fence_check_if_already_signaled_then_check_hardware_state_and_pro
->> pa
->> gate() ^^'
+>>> dma_fence_check_hw_and_signal() ?
+>> I don't think that renaming the function is a good idea in the first
+>> place.
 >>
->> My intention here is to have the reader realize "watch out, the fence
->> might get signaled here!", which is probably the most important event
->> regarding fences, which can race, invoke the callbacks and so on.
+>> What the function does internally is an implementation detail of the
+>> framework.
 >>
->> For details readers will then check the documentation.
->>
->> But I'm of course open to see if there's a majority for this or that
->> name.
-> how about:
+>> For the code using this function it's completely irrelevant if the
+>> function might also signal the fence, what matters for the caller is
+>> the returned status of the fence. I think this also counts for the
+>> dma_fence_is_signaled() documentation.
+> It does obviously matter. As it's currently implemented, a lot of
+> important things happen implicitly.
+
+Yeah, but that's ok.
+
+The code who calls this is the consumer of the interface and so shouldn't need to know this. That's why we have created the DMA fence framework in the first place.
+
+For the provider side when a driver or similar implements the interface the relevant documentation is the dma_fence_ops structure.
+
+> I only see improvement by making things more obvious.
 >
-> dma_fence_check_hw_and_signal() ?
+> In any case, how would you call a wrapper that just does
+> test_bit(IS_SIGNALED, …) ?
 
-I don't think that renaming the function is a good idea in the first place.
+Broken, that was very intentionally removed quite shortly after we created the framework.
 
-What the function does internally is an implementation detail of the framework.
-
-For the code using this function it's completely irrelevant if the function might also signal the fence, what matters for the caller is the returned status of the fence. I think this also counts for the dma_fence_is_signaled() documentation.
-
-What we should improve is the documentation of the dma_fence_ops->enable_signaling and dma_fence_ops->signaled callbacks.
-
-Especially see the comment about reference counts on enable_signaling which is missing on the signaled callback. That is most likely the root cause why nouveau implemented enable_signaling correctly but not the other one.
-
-But putting that aside I think we should make nails with heads and let the framework guarantee that the fences stay alive until they are signaled (one way or another). This completely removes the burden to keep a reference on unsignaled fences from the drivers / implementations and make things more over all more defensive.
+We have a few cases were implementations do check that for their fences, but consumers should never be allowed to touch such internals.
 
 Regards,
 Christian.
@@ -302,10 +339,28 @@ Christian.
 >
 > P.
 >
->> P.
+>> What we should improve is the documentation of the dma_fence_ops-
+>>> enable_signaling and dma_fence_ops->signaled callbacks.
+>> Especially see the comment about reference counts on enable_signaling
+>> which is missing on the signaled callback. That is most likely the
+>> root cause why nouveau implemented enable_signaling correctly but not
+>> the other one.
 >>
+>> But putting that aside I think we should make nails with heads and
+>> let the framework guarantee that the fences stay alive until they are
+>> signaled (one way or another). This completely removes the burden to
+>> keep a reference on unsignaled fences from the drivers /
+>> implementations and make things more over all more defensive.
 >>
->>> Regards,
+>> Regards,
+>> Christian.
+>>
+>>> P.
 >>>
->>> Boris
+>>>> P.
+>>>>
+>>>>
+>>>>> Regards,
+>>>>>
+>>>>> Boris
 
