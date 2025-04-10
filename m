@@ -2,65 +2,78 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5C4FA849EB
-	for <lists+spice-devel@lfdr.de>; Thu, 10 Apr 2025 18:33:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5904DA84F1A
+	for <lists+spice-devel@lfdr.de>; Thu, 10 Apr 2025 23:16:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 50D4910EA28;
-	Thu, 10 Apr 2025 16:33:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 575E710EA3A;
+	Thu, 10 Apr 2025 21:16:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Frxfg/Ia";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="TZuylZl1";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 816A910EA23;
- Thu, 10 Apr 2025 16:33:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1744302794; x=1775838794;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=Sa2C75K7CTMVJhTRtB3tjcRJD+GhS151hIXgnCktYvU=;
- b=Frxfg/IapSONBp+UlLEXfqkXf9kR1e5+9Hzf3iaWGfXE6w9ce2tbWDOH
- BlIu0EYESlDvCLUvSDfQMSCJKgpm66PEQWn41KyBmt81Vinnp09QaA2IZ
- zeRxtDaWOIQycLd0FV2knydv5rvuef6D3hz6UN17bTeTTQyW6TM28C6xa
- CIZ+aqNlBeWj8kC9YYuSV+PP7/wY2a8qYLMwgckNIRirWNIrlhU/bPstZ
- FZ/DkDnxNUm3OkyDZ6yJqGO89e+v5lH0ZhSo/x81pWveRYdjJtIb7iSiB
- n+3wuBVHN6wgygFE6IJ9u8n30do/SUmGXXm9BDstDw4lsJG9Z+Mp3E4yJ g==;
-X-CSE-ConnectionGUID: yjcW0NChSt2ft53T3FpKbw==
-X-CSE-MsgGUID: 4QNJ/ApXQyqqH3uZRQK8EQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11400"; a="57220070"
-X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="57220070"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
- by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Apr 2025 09:33:14 -0700
-X-CSE-ConnectionGUID: PTWRf+9pQ3izDg2v7jHCYw==
-X-CSE-MsgGUID: MLZlESNhQt6cayGDSQeJ9Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="134129221"
-Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
- by orviesa005.jf.intel.com with SMTP; 10 Apr 2025 09:33:11 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Thu, 10 Apr 2025 19:33:09 +0300
-From: Ville Syrjala <ville.syrjala@linux.intel.com>
-To: dri-devel@lists.freedesktop.org
-Cc: intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Sandy Huang <hjc@rock-chips.com>,
- =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
- Andy Yan <andy.yan@rock-chips.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org
-Subject: [PATCH 07/19] drm/gem: Pass along the format info from .fb_create()
- to drm_helper_mode_fill_fb_struct()
-Date: Thu, 10 Apr 2025 19:32:06 +0300
-Message-ID: <20250410163218.15130-8-ville.syrjala@linux.intel.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250410163218.15130-1-ville.syrjala@linux.intel.com>
-References: <20250410163218.15130-1-ville.syrjala@linux.intel.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8038B10EA3A
+ for <spice-devel@lists.freedesktop.org>; Thu, 10 Apr 2025 21:16:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1744319807;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=i0DBQ/lRjPXkvWejShYbfkRZSxJOk6ovdvmKtDG3yaQ=;
+ b=TZuylZl1TPbG3TyxKuj/k2xWSnTEOg9sdaOUZkOHpwCMYGcOVIQg8yZNiGKzRqvDWkJgni
+ Hz4Eclh2WQqZiPn7O/OTKgru+uzvYQ91JW15aFckbGFR37B1bjnOSggvz87m8e6xDyHM6N
+ C8v6eulI00+jnBDDPQ5w1Rk42LOTuFY=
+Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com
+ [209.85.161.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-689--cY7Dt4mNEGo0ACEHcpFHw-1; Thu, 10 Apr 2025 17:16:44 -0400
+X-MC-Unique: -cY7Dt4mNEGo0ACEHcpFHw-1
+X-Mimecast-MFC-AGG-ID: -cY7Dt4mNEGo0ACEHcpFHw_1744319804
+Received: by mail-oo1-f72.google.com with SMTP id
+ 006d021491bc7-603fbdaaf28so889214eaf.2
+ for <spice-devel@lists.freedesktop.org>; Thu, 10 Apr 2025 14:16:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744319803; x=1744924603;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=i0DBQ/lRjPXkvWejShYbfkRZSxJOk6ovdvmKtDG3yaQ=;
+ b=AvFB4sfiy+xAUKixWOV26Q3qc10cL8/uMCC8V5E2M6KkJ6SGn7VsilQePjXdB0qLmP
+ zJX67Q6r4JI0lhaVMVFAUdMQjrLsvGdSFhLp3cjFaVBdSsrpRGxp7JyRCx70o1P7+lK1
+ PQqkjUTaVDMLvXBvnSUTnV4CZkxhHSCIVyUuJzNMwdbZpItohaZ3Rnb2IIwu+DBb5yEl
+ +rrH1mEd1Z4YvXJPaFZvavbY/1UovXRShlgXe1X79Sod98YNRnGh9iw12cLMu5KhSZSX
+ wk3pO12YPCKTk8Is+1ItSQahfwf0r+2rugn2qTT1euZWB0MnBMM4JKt1BzTBspqDkDdw
+ pWKA==
+X-Gm-Message-State: AOJu0YyaMmsbp33P3cf0Kmmwp0+jPIwgVrkxICOLhlvCkoBl5RpKMw+A
+ S2GUf+ZPyD70yeC0AUPrmRLj5Yea+KvaFmYuW90/BelSt9DMyCY+ekPZQRQ8IENm3QlfmWnuj14
+ ch8qFkn9VkHR5dmqu0WdCRB/3DX/+rmuYOLIvERgebOLzS8EuPuG1tRiWTQB1u6n4yIYjfokPj2
+ V1NfbmCxQxta93cDaapqXCo6ebLY0KRJtYRpSSDXSRF/xB7F6rKJLfwJmQ
+X-Gm-Gg: ASbGnctR5zoDUm3qeM5tOTQr+oUN+z17I16P0pYaUsuJ+UOUJ4gOqWCP0YVT9EotHDp
+ CUrmjel8ADfh47Au3qTmcrDT385fiMHjsXgdvvxq/gXw6jvkbvM9jUCg0plqSLqsXnXhl8M8m/L
+ S3TLuSEv2VC8CK5mwD+vpdgrr+6tY=
+X-Received: by 2002:a05:6820:2d04:b0:603:f820:7be7 with SMTP id
+ 006d021491bc7-6046f5f4b15mr149361eaf.8.1744319803387; 
+ Thu, 10 Apr 2025 14:16:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEhQGUxbbnr4N6Vu4qxVRRRGiPEdZmzEdAkaKVLjI4Qk5sm/tyfPCxlBWHuYwQrfw7CtIhx6aTsbdonp7xYLhM=
+X-Received: by 2002:a05:6820:2d04:b0:603:f820:7be7 with SMTP id
+ 006d021491bc7-6046f5f4b15mr149353eaf.8.1744319802966; Thu, 10 Apr 2025
+ 14:16:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250408130506.522746-1-frolov@swemel.ru>
+In-Reply-To: <20250408130506.522746-1-frolov@swemel.ru>
+From: Uri Lublin <uril@redhat.com>
+Date: Fri, 11 Apr 2025 00:16:31 +0300
+X-Gm-Features: ATxdqUGFELPa-bC9aK02Qu3zf7k3-f_vbbTJ1ahbjl4Ut9QIjaHtP2oAFfoNDBg
+Message-ID: <CAAg9qJ2dHP=70A7WX5vYwOrPYpY_5=YpYaqfduJmsjjRSMUiXg@mail.gmail.com>
+Subject: Re: [PATCH] usbredirhost: fix null dereference
+To: Dmitry Frolov <frolov@swemel.ru>
+Cc: spice-devel@lists.freedesktop.org, sdl.qemu@linuxtesting.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: VpphEoGYmuHSZWO2bQSgxbX5V4GzzWrnzP6VmJxrUJ8_1744319804
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="0000000000003b19490632731a86"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,173 +88,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+--0000000000003b19490632731a86
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Pass along the format info from .fb_create() to aliminate the
-redundant drm_get_format_info() calls from the gem fb code.
+Hi Dmitry,
 
-Cc: Dave Airlie <airlied@redhat.com>
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Sandy Huang <hjc@rock-chips.com>
-Cc: "Heiko Stübner" <heiko@sntech.de>
-Cc: Andy Yan <andy.yan@rock-chips.com>
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: virtualization@lists.linux.dev
-Cc: spice-devel@lists.freedesktop.org
-Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
----
- drivers/gpu/drm/drm_gem_framebuffer_helper.c | 21 ++++++++------------
- drivers/gpu/drm/qxl/qxl_display.c            |  2 +-
- drivers/gpu/drm/rockchip/rockchip_drm_fb.c   |  3 ++-
- drivers/gpu/drm/xen/xen_drm_front_kms.c      |  2 +-
- include/drm/drm_gem_framebuffer_helper.h     |  2 ++
- 5 files changed, 14 insertions(+), 16 deletions(-)
+Thanks for testing and sending this patch.
+One comment below.
 
-diff --git a/drivers/gpu/drm/drm_gem_framebuffer_helper.c b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-index dc9cb6cdcfd6..44016915c8fe 100644
---- a/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-+++ b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-@@ -67,6 +67,7 @@ EXPORT_SYMBOL_GPL(drm_gem_fb_get_obj);
- static int
- drm_gem_fb_init(struct drm_device *dev,
- 		 struct drm_framebuffer *fb,
-+		 const struct drm_format_info *info,
- 		 const struct drm_mode_fb_cmd2 *mode_cmd,
- 		 struct drm_gem_object **obj, unsigned int num_planes,
- 		 const struct drm_framebuffer_funcs *funcs)
-@@ -74,7 +75,7 @@ drm_gem_fb_init(struct drm_device *dev,
- 	unsigned int i;
- 	int ret;
- 
--	drm_helper_mode_fill_fb_struct(dev, fb, NULL, mode_cmd);
-+	drm_helper_mode_fill_fb_struct(dev, fb, info, mode_cmd);
- 
- 	for (i = 0; i < num_planes; i++)
- 		fb->obj[i] = obj[i];
-@@ -151,21 +152,14 @@ EXPORT_SYMBOL(drm_gem_fb_create_handle);
- int drm_gem_fb_init_with_funcs(struct drm_device *dev,
- 			       struct drm_framebuffer *fb,
- 			       struct drm_file *file,
-+			       const struct drm_format_info *info,
- 			       const struct drm_mode_fb_cmd2 *mode_cmd,
- 			       const struct drm_framebuffer_funcs *funcs)
- {
--	const struct drm_format_info *info;
- 	struct drm_gem_object *objs[DRM_FORMAT_MAX_PLANES];
- 	unsigned int i;
- 	int ret;
- 
--	info = drm_get_format_info(dev, mode_cmd->pixel_format,
--				   mode_cmd->modifier[0]);
--	if (!info) {
--		drm_dbg_kms(dev, "Failed to get FB format info\n");
--		return -EINVAL;
--	}
--
- 	if (drm_drv_uses_atomic_modeset(dev) &&
- 	    !drm_any_plane_has_format(dev, mode_cmd->pixel_format,
- 				      mode_cmd->modifier[0])) {
-@@ -200,7 +194,7 @@ int drm_gem_fb_init_with_funcs(struct drm_device *dev,
- 		}
- 	}
- 
--	ret = drm_gem_fb_init(dev, fb, mode_cmd, objs, i, funcs);
-+	ret = drm_gem_fb_init(dev, fb, info, mode_cmd, objs, i, funcs);
- 	if (ret)
- 		goto err_gem_object_put;
- 
-@@ -233,6 +227,7 @@ EXPORT_SYMBOL_GPL(drm_gem_fb_init_with_funcs);
-  */
- struct drm_framebuffer *
- drm_gem_fb_create_with_funcs(struct drm_device *dev, struct drm_file *file,
-+			     const struct drm_format_info *info,
- 			     const struct drm_mode_fb_cmd2 *mode_cmd,
- 			     const struct drm_framebuffer_funcs *funcs)
- {
-@@ -243,7 +238,7 @@ drm_gem_fb_create_with_funcs(struct drm_device *dev, struct drm_file *file,
- 	if (!fb)
- 		return ERR_PTR(-ENOMEM);
- 
--	ret = drm_gem_fb_init_with_funcs(dev, fb, file, mode_cmd, funcs);
-+	ret = drm_gem_fb_init_with_funcs(dev, fb, file, info, mode_cmd, funcs);
- 	if (ret) {
- 		kfree(fb);
- 		return ERR_PTR(ret);
-@@ -285,7 +280,7 @@ drm_gem_fb_create(struct drm_device *dev, struct drm_file *file,
- 		  const struct drm_format_info *info,
- 		  const struct drm_mode_fb_cmd2 *mode_cmd)
- {
--	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
-+	return drm_gem_fb_create_with_funcs(dev, file, info, mode_cmd,
- 					    &drm_gem_fb_funcs);
- }
- EXPORT_SYMBOL_GPL(drm_gem_fb_create);
-@@ -324,7 +319,7 @@ drm_gem_fb_create_with_dirty(struct drm_device *dev, struct drm_file *file,
- 			     const struct drm_format_info *info,
- 			     const struct drm_mode_fb_cmd2 *mode_cmd)
- {
--	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
-+	return drm_gem_fb_create_with_funcs(dev, file, info, mode_cmd,
- 					    &drm_gem_fb_funcs_dirtyfb);
- }
- EXPORT_SYMBOL_GPL(drm_gem_fb_create_with_dirty);
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index f7bc83f2d489..ae7e572b1b4a 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -1179,7 +1179,7 @@ qxl_user_framebuffer_create(struct drm_device *dev,
- 			    const struct drm_format_info *info,
- 			    const struct drm_mode_fb_cmd2 *mode_cmd)
- {
--	return drm_gem_fb_create_with_funcs(dev, file_priv, mode_cmd,
-+	return drm_gem_fb_create_with_funcs(dev, file_priv, info, mode_cmd,
- 					    &qxl_fb_funcs);
- }
- 
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-index d46297bec5f8..1211ca0ffa00 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-@@ -40,7 +40,8 @@ rockchip_fb_create(struct drm_device *dev, struct drm_file *file,
- 	if (!afbc_fb)
- 		return ERR_PTR(-ENOMEM);
- 
--	ret = drm_gem_fb_init_with_funcs(dev, &afbc_fb->base, file, mode_cmd,
-+	ret = drm_gem_fb_init_with_funcs(dev, &afbc_fb->base,
-+					 file, info, mode_cmd,
- 					 &rockchip_drm_fb_funcs);
- 	if (ret) {
- 		kfree(afbc_fb);
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
-index a360003bee47..806ec66ee7f7 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
-@@ -62,7 +62,7 @@ fb_create(struct drm_device *dev, struct drm_file *filp,
- 	struct drm_gem_object *gem_obj;
- 	int ret;
- 
--	fb = drm_gem_fb_create_with_funcs(dev, filp, mode_cmd, &fb_funcs);
-+	fb = drm_gem_fb_create_with_funcs(dev, filp, info, mode_cmd, &fb_funcs);
- 	if (IS_ERR(fb))
- 		return fb;
- 
-diff --git a/include/drm/drm_gem_framebuffer_helper.h b/include/drm/drm_gem_framebuffer_helper.h
-index 4fdf9d3d1863..971d266ab1ba 100644
---- a/include/drm/drm_gem_framebuffer_helper.h
-+++ b/include/drm/drm_gem_framebuffer_helper.h
-@@ -25,10 +25,12 @@ int drm_gem_fb_create_handle(struct drm_framebuffer *fb, struct drm_file *file,
- int drm_gem_fb_init_with_funcs(struct drm_device *dev,
- 			       struct drm_framebuffer *fb,
- 			       struct drm_file *file,
-+			       const struct drm_format_info *info,
- 			       const struct drm_mode_fb_cmd2 *mode_cmd,
- 			       const struct drm_framebuffer_funcs *funcs);
- struct drm_framebuffer *
- drm_gem_fb_create_with_funcs(struct drm_device *dev, struct drm_file *file,
-+			     const struct drm_format_info *info,
- 			     const struct drm_mode_fb_cmd2 *mode_cmd,
- 			     const struct drm_framebuffer_funcs *funcs);
- struct drm_framebuffer *
--- 
-2.49.0
+On Wed, Apr 9, 2025 at 12:07=E2=80=AFAM Dmitry Frolov <frolov@swemel.ru> wr=
+ote:
+
+> In function usbredirhost_open_full(), when host->parser=3D=3DNULL,
+> the call sequence:
+> "usbredirhost_close() --->
+>     usbredirhost_clear_device() --->
+>         usbredirhost_handle_disconnect()"
+> is called, where host->parser is being derefferenced without a check.
+>
+
+Can this really happen ?
+In usbredirhost_open_full() if host->parser is NULL then host->dev
+is NULL -- being set only later in the function, with a call to
+usbredirhost_set_device().
+
+In usbredirhost_clear_device() if host->dev is NULL the function returns
+immediately and does not call usbredirhost_handle_disconnect().
+
+Thanks,
+    Uri.
+
+
+> Found by Linux Verification Center (linuxtesting.org) with SVACE.
+>
+> Signed-off-by: Dmitry Frolov <frolov@swemel.ru>
+> ---
+>  usbredirhost/usbredirhost.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/usbredirhost/usbredirhost.c b/usbredirhost/usbredirhost.c
+> index 03c56e9..ad4c09b 100644
+> --- a/usbredirhost/usbredirhost.c
+> +++ b/usbredirhost/usbredirhost.c
+> @@ -269,6 +269,7 @@ static int usbredirhost_write(void *priv, uint8_t
+> *data, int count)
+>     packet completion callbacks */
+>  static void usbredirhost_handle_disconnect(struct usbredirhost *host)
+>  {
+> +    if(!host->parser) return;
+>      /* Disconnect uses its own lock to avoid needing nesting capable
+> locks */
+>      if (host->disconnect_lock) {
+>          host->parser->lock_func(host->disconnect_lock);
+> --
+> 2.34.1
+>
+>
+
+--0000000000003b19490632731a86
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi Dmitry,</div><div><br></div><div>Thanks for testin=
+g and sending this patch.</div><div>One comment below.</div><div><br></div>=
+<div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"=
+gmail_attr">On Wed, Apr 9, 2025 at 12:07=E2=80=AFAM Dmitry Frolov &lt;<a hr=
+ef=3D"mailto:frolov@swemel.ru">frolov@swemel.ru</a>&gt; wrote:<br></div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">In function usbredirhost_ope=
+n_full(), when host-&gt;parser=3D=3DNULL,<br>
+the call sequence:<br>
+&quot;usbredirhost_close() ---&gt;<br>
+=C2=A0 =C2=A0 usbredirhost_clear_device() ---&gt;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 usbredirhost_handle_disconnect()&quot;<br>
+is called, where host-&gt;parser is being derefferenced without a check.<br=
+></blockquote><div><br></div><div>Can this really happen ?<br>In usbredirho=
+st_open_full() if host-&gt;parser is NULL then host-&gt;dev <br>is NULL -- =
+being set only later in the function, with a call to <br>usbredirhost_set_d=
+evice().<br><br>In usbredirhost_clear_device() if host-&gt;dev is NULL the =
+function returns <br>immediately and does not call usbredirhost_handle_disc=
+onnect().<br><br>Thanks,<br>=C2=A0 =C2=A0 Uri.</div><div><br></div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
+ solid rgb(204,204,204);padding-left:1ex">
+<br>
+Found by Linux Verification Center (<a href=3D"http://linuxtesting.org" rel=
+=3D"noreferrer" target=3D"_blank">linuxtesting.org</a>) with SVACE.<br>
+<br>
+Signed-off-by: Dmitry Frolov &lt;<a href=3D"mailto:frolov@swemel.ru" target=
+=3D"_blank">frolov@swemel.ru</a>&gt;<br>
+---<br>
+=C2=A0usbredirhost/usbredirhost.c | 1 +<br>
+=C2=A01 file changed, 1 insertion(+)<br>
+<br>
+diff --git a/usbredirhost/usbredirhost.c b/usbredirhost/usbredirhost.c<br>
+index 03c56e9..ad4c09b 100644<br>
+--- a/usbredirhost/usbredirhost.c<br>
++++ b/usbredirhost/usbredirhost.c<br>
+@@ -269,6 +269,7 @@ static int usbredirhost_write(void *priv, uint8_t *data=
+, int count)<br>
+=C2=A0 =C2=A0 packet completion callbacks */<br>
+=C2=A0static void usbredirhost_handle_disconnect(struct usbredirhost *host)=
+<br>
+=C2=A0{<br>
++=C2=A0 =C2=A0 if(!host-&gt;parser) return;<br>
+=C2=A0 =C2=A0 =C2=A0/* Disconnect uses its own lock to avoid needing nestin=
+g capable locks */<br>
+=C2=A0 =C2=A0 =C2=A0if (host-&gt;disconnect_lock) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0host-&gt;parser-&gt;lock_func(host-&gt;di=
+sconnect_lock);<br>
+-- <br>
+2.34.1<br>
+<br>
+</blockquote></div></div>
+
+--0000000000003b19490632731a86--
 
