@@ -2,116 +2,53 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB2EBAA8483
-	for <lists+spice-devel@lfdr.de>; Sun,  4 May 2025 09:19:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CB10AA9366
+	for <lists+spice-devel@lfdr.de>; Mon,  5 May 2025 14:40:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1D30610E148;
-	Sun,  4 May 2025 07:19:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 176C510E403;
+	Mon,  5 May 2025 12:40:10 +0000 (UTC)
+Authentication-Results: gabe.freedesktop.org;
+	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="MMYo3ua6";
+	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11olkn2061.outbound.protection.outlook.com [40.92.19.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BB32110E93D
- for <spice-devel@lists.freedesktop.org>; Fri,  2 May 2025 14:08:51 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jqHzWN/OMc486kf3p0Hl/bd60FDQYerC2aHLpDrJ2phNIcyi1QSrqsK7RCtRN+ynO16WeFGUbaN5OYiughd9tY4o86cuAQ7F7EpvqJAMCKlVYVzUf6oOewQoLY9+PmwaO/PqKOKrCFqw7/B+QYw6AdyNzrAQv3ISPtij/cLZFRA4vjUpZLAWwwpUm/kQurXS52AJOSM2QrJRQeIhhHa752SeP4grj5+tXU34+5igVIQb6nWbeSJkl7pCFKGu+LJmVCLMlvE0FbED80SK/4/pigj5pBfvo/toIp6SIkDHABmhMRl1W3UPAqWGF4e91A4r9jp7D8elgJkgYkle8X9L0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iSrUhPIvE7/j5xJTYUrlJNlQjk0Mz69Z/qIrrUkDKHc=;
- b=jXGQXFSzG5ja1bKUEB07p/DvYfpcTHMc1YS1hBheL80fTETKTTZCW/rpLyc1yTrvgdMW6tl5MMMd8hpbxat/XoDOlu+mP/wq6fpn78Tnbrn5la1G1/tdULGCq0RqHXkdCSN8XyJXXAzPR3PCyo7jeR8ANoGdnEPyPufnJR+zowMzFVuGBUSHZHTNNNrpN+B8WfW4fCYKFe6IX94PBJHjYZdRulP6T6mQRpehy2eaMEUYXpiZNf5u3E2WSlm+DjILMWHo4ZKi3ekNMphOxUvk4CSLY6eHZPalaV6/eBe/NVgWfoA7jeJc7hy1xK5ZS1hHgkRhO67WQuew7ZYSvEMejg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iSrUhPIvE7/j5xJTYUrlJNlQjk0Mz69Z/qIrrUkDKHc=;
- b=l9GSOgkiPWdGEFCNNpOE5NfxNSRNAnnGhM4wyZ3GM1ohU1rFz8Z5VndaoBop2SKZ2FsjkH9PIyX6VgrhLVAr3GWZWHz80stgmGoZto9cCYQToUxHKpbkKREuEzlatDQBGkW8XQEczsN95Mat44sRnHqUcY8hyIGBYVJ3oSqeIrfF1kt9VxKW484XTDN8dfbUJCCc1NWxTH1San4ZnRjJ5achZnbY+BX+3KkM+42h5MEaivQ0H7+35EByiRMYwgB9/MOk/tgzXLyHubWyU3EdkGJsuRioaam0tOyAUC8GRiQo+Vht2hjcbKkSkHjtPYNGWalhBAXNsbIiLbmrXDSsRg==
-Received: from DM8P221MB0636.NAMP221.PROD.OUTLOOK.COM (2603:10b6:8:1d::12) by
- MN0P221MB0850.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:3ce::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8699.18; Fri, 2 May 2025 14:08:48 +0000
-Received: from DM8P221MB0636.NAMP221.PROD.OUTLOOK.COM
- ([fe80::f552:d926:cf7d:29b6]) by DM8P221MB0636.NAMP221.PROD.OUTLOOK.COM
- ([fe80::f552:d926:cf7d:29b6%3]) with mapi id 15.20.8699.012; Fri, 2 May 2025
- 14:08:47 +0000
-From: Lee Crawford <l_crawford@hotmail.com>
-To: "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>
-Subject: SPICE: How to disable Ctrl Alt R?
-Thread-Topic: SPICE: How to disable Ctrl Alt R?
-Thread-Index: AQHbu2nL8BBBVmZx20i8K8gAI8LaZQ==
-Date: Fri, 2 May 2025 14:08:47 +0000
-Message-ID: <DM8P221MB06365501CE9B0C38DDF5C22FE48D2@DM8P221MB0636.NAMP221.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM8P221MB0636:EE_|MN0P221MB0850:EE_
-x-ms-office365-filtering-correlation-id: 5d48fced-ca0f-4c58-70f6-08dd8982db7e
-x-microsoft-antispam: BCL:0;
- ARA:14566002|15080799006|7092599003|8060799006|8062599003|15030799003|19110799003|461199028|3412199025|440099028|102099032;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?IymjPjHoD98PbWQNSnHNk9pGv0wWYsMjm2Y1rr4QWQpapQ/9T4Gj47ktda?=
- =?iso-8859-1?Q?KycfylT4n1qgZnv4/a1vdtBwqXrbH2KUPgiOnCtdym+MO7Ai1UXIWUqFpL?=
- =?iso-8859-1?Q?r+Q1HG8v0l8Z81hzNDoJqj7xW1/rdKFbJAN9mgOlGf2+pQSeg1GVqyqrVX?=
- =?iso-8859-1?Q?vaxJl2bX7+hO1Y/ZQLyzWs14gk5Do7La8nu805yA1JlvwDZF5NS2HuD8z0?=
- =?iso-8859-1?Q?PuUbdfytQnu47aaHdjdqDHhkAyq5e6s7mZm7NP/2xj8uPyvjFxpUDEW52w?=
- =?iso-8859-1?Q?iZVPl72So00x6PSLB/L5417tH5JUzAuZ6PJD9dB9lQJMD0w0TnJjSJcQMv?=
- =?iso-8859-1?Q?wR+VZr1mkZt1e6WPwL+qgU9HvzoxC0O1ANrI5dkNMeOEvhoUjjKS5SmJsh?=
- =?iso-8859-1?Q?mbo8SPMW2gGUhIl926N3+NCYKeGCoMbMkB39UmcOM0JHvc0pjzRWOo1X55?=
- =?iso-8859-1?Q?Qx1fjA5C3k+YQJzukNOYDj4+P8bIHyqI9ZEZBZjBv4q8DYkEHMyX1ioPJh?=
- =?iso-8859-1?Q?wxMtQlko+M434/s0hwb4ADw4LWy9ymAEgXrYySsF5gk7GKQ7k8R5fKX9Tq?=
- =?iso-8859-1?Q?muFF+EGtNZ7OGXal8a01CyrXgiKdmCYG586gM7cY4DKMvfG+tZc1PgYFxh?=
- =?iso-8859-1?Q?yeJszkkLeGB2LTQ0cwgOp2hy7dFfk6Kxt2V3w96g7jOvPEamdBgN8WTKmp?=
- =?iso-8859-1?Q?jBqJPDA+DZb+0qmMoDxYHyf/KNdAleJBPSUTq8V7qBNPvM2aLOnBQWjt5W?=
- =?iso-8859-1?Q?F4zTDbQDzpK2ADdLTPu9LTjHarj71UZfhJaij/BMYI8p7FFdFonJuGpTRo?=
- =?iso-8859-1?Q?Msw0aqY6qacZHZdj6ykc5JYkpa1jiM3rfr3La70tKxMJhYCDIK9NPvcTbi?=
- =?iso-8859-1?Q?Bq5NsoErBdM0BGNS+iFpd9HJvF4BDSND/foYZEAsxJu2YMYTAXAppdlqkU?=
- =?iso-8859-1?Q?nnJjG31iw9lLX8+Od0b/nss2QJYH2SQEyE9UEV59cQrnOlyZmYVaxo2g86?=
- =?iso-8859-1?Q?AzGqVKtcuhCdGELfRc448s35wel3MiePVw5KduaZMNyaASTl+gWF0HFxg6?=
- =?iso-8859-1?Q?/WM9OBhXCcAuU4i1xiHqoG8KvfDvSSJlvRuXiiPtxzJ/aE3tnMBIBCKdSO?=
- =?iso-8859-1?Q?81DVIU7biGWval1jrOYc9gBk+mScByYqymxzRy0trQL0IJoYgQ2KSWlbTe?=
- =?iso-8859-1?Q?WJUwWhBz1bFyKg=3D=3D?=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?57ye2Rd3fiK5M+FruIGdqfcQSfn9OugXVkwtEVXX208miq/XA3W0atNU9a?=
- =?iso-8859-1?Q?UndrhiqJisah6Zah5TFXPO71PT7ZFA9sdEeVLKxUl9r40OJ8xYCGmnHmd+?=
- =?iso-8859-1?Q?w1grQf96bPPLYiDGWdnQl2mFopGw7JNqfE2shftsoIe/RhUTSv0vl6OjrF?=
- =?iso-8859-1?Q?55HXiyqOYTvJM/p1u4/HyLIwOn4Km8AqLlVCiHRTLGrE9M/gknKMBtt9gJ?=
- =?iso-8859-1?Q?fHY5Am8V/V9JgrWJ1WgmmGzzn187b/WQp6KArtmQBEpVF8INP9jO8IZG58?=
- =?iso-8859-1?Q?ZjMCMT3lWyRNb4im6HWKi5lkTbsOBeuau/oasd+ITW/9OE3zDcAFdsRa4m?=
- =?iso-8859-1?Q?JJ25wirid/ERoOCwfm86tB8dWuLN7d3sEBAA3vlmu2H9J9JIqr4hJEigaZ?=
- =?iso-8859-1?Q?j7NKoAqDGgk/phUA8uhZ6dL78XXuXWf4Y1eZWx7C7Wmca1R9OfDWgTw7Z0?=
- =?iso-8859-1?Q?6FeDwyc9vPV237mOq0rn30AaWBF7Ja1mZ4cB+p2Df670sgs96fvDzG6Yg9?=
- =?iso-8859-1?Q?TZ3G4gpzdp97brdt8xlO87qLqOGhYGKPiVO92qaV46WiLjTfqp8ZhrwYEs?=
- =?iso-8859-1?Q?jLpFCmaCGfOl67bYsPc3wbliZs4YtntqEieTVhkChN0oU4DMJXecRnsfEk?=
- =?iso-8859-1?Q?WGCGqIhRDVBUVf9ARHsTXlibjkbChUrhyrM3E87B8x64m8Ex3A6XaS6CnC?=
- =?iso-8859-1?Q?urzyUo6aQAA2oUtIcUCIzu7ZCnHK2iacP+SiKfCG8ekqB6N9fyCAt4/gez?=
- =?iso-8859-1?Q?UUoKO1ouQm0YWucHa6A0mPlRwicRFouE+ijduVGbZ7r5mcgQXUtVE7jWGn?=
- =?iso-8859-1?Q?cQZzbZIfpMUF/BIrcGKpKs4MAtAkxO21PaDNlNkzq38gOrO81KqYwa2RY4?=
- =?iso-8859-1?Q?DhSyMnd0imhlL//ynOZnl9skBLeeyHqHKOXGJz6oJBIkN/oWvCZPSl+w75?=
- =?iso-8859-1?Q?CtANZoLMxBWA0LjnrTX/xCNaD2BCWRWqRLz6X54nvmq2JsW8BTctgb794K?=
- =?iso-8859-1?Q?kYdX4HTn6Zn57B19Ciq/dBSE/PJozFlGFNv7HG0suIxt4W4l0h7vNLvGR/?=
- =?iso-8859-1?Q?hJ1nwYYnBjXMvTw+mehoQwJDwo4ANKd1f9kKPjeRlNuwY27EaGoiBS7WbG?=
- =?iso-8859-1?Q?/UHFxtqiW4nMaqYqTg5t6Df+SwJx4lydNw0Qpbz/6GqrcvDvFElHuaxDAa?=
- =?iso-8859-1?Q?1LT5//s9Cqi+CZXY+j85Rldjq4TUOkgJhwOItHxGNrUVzk2DnP+Ed7MFHY?=
- =?iso-8859-1?Q?HLfDahG2bnBomN5a73M2fScQyY6sYPCLun2eHekNk=3D?=
-Content-Type: multipart/alternative;
- boundary="_000_DM8P221MB06365501CE9B0C38DDF5C22FE48D2DM8P221MB0636NAMP_"
+X-Greylist: delayed 388 seconds by postgrey-1.36 at gabe;
+ Mon, 05 May 2025 12:40:03 UTC
+Received: from c1422.mx.srv.dfn.de (c1422.mx.srv.dfn.de [194.95.239.70])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BBE6710E3D8
+ for <spice-devel@lists.freedesktop.org>; Mon,  5 May 2025 12:40:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ rz.uni-freiburg.de; h=content-transfer-encoding:content-type
+ :content-type:in-reply-to:from:from:content-language:references
+ :subject:subject:user-agent:mime-version:date:date:message-id
+ :received; s=s1; t=1746448401; x=1748262802; bh=3qDM8lUJ06oaXHee
+ lTHkzby9FMgjQjP0OKXcwo7Y1K0=; b=MMYo3ua6/ACLuElwBZ+SW6UG07atTxtW
+ c+pgkjIw4Nn7cQxiNsvv8nSZ1wPTAS6VZHjJrh/8jouYFlpZiPxSk2wAS5fOKp91
+ xh6XKkqx7/pL29xuZ8slC1M/9+8gzkaPFXiyiRKAY4unxRXLYKxnyI0J8CkuQjxC
+ dta50RcgPLg=
+Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
+ by c1422.mx.srv.dfn.de (Postfix) with ESMTP id 39F0C2C0154
+ for <spice-devel@lists.freedesktop.org>; Mon,  5 May 2025 14:33:21 +0200 (CEST)
+Received: from [2001:7c0:2517:a:4b56:9ec4:d188:b1a0] (account
+ michael.scherle@rz.uni-freiburg.de HELO
+ [IPV6:2001:7c0:2517:a:4b56:9ec4:d188:b1a0])
+ by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
+ with ESMTPSA id 47366482; Mon, 05 May 2025 14:33:20 +0200
+Message-ID: <8470bed0-5860-40c9-8688-11593b7e1b3b@rz.uni-freiburg.de>
+Date: Mon, 5 May 2025 14:33:20 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: sct-15-20-7762-17-msonline-outlook-7d150.templateTenant
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM8P221MB0636.NAMP221.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d48fced-ca0f-4c58-70f6-08dd8982db7e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 May 2025 14:08:47.7543 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0P221MB0850
-X-Mailman-Approved-At: Sun, 04 May 2025 07:19:09 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: Forcing initial Frame Transmission for dmabuf encoding on SPICE
+ display channel connection
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: spice-devel@lists.freedesktop.org
+References: <760d379f-91b2-4f43-bf22-57d0859977b3@rz.uni-freiburg.de>
+ <CAHt6W4dgigb9P=D99Lv2BxBA530+Os3Bm9dWX4W4gWfHiOW=wg@mail.gmail.com>
+Content-Language: en-US
+From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
+In-Reply-To: <CAHt6W4dgigb9P=D99Lv2BxBA530+Os3Bm9dWX4W4gWfHiOW=wg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -126,89 +63,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---_000_DM8P221MB06365501CE9B0C38DDF5C22FE48D2DM8P221MB0636NAMP_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
 Hello,
 
-I am a VMWare/ESXi/vCenter user of a couple decades, moving over to Proxmox=
- VE as a result of the recent changes to their licensing affecting my custo=
-mers. One feature I really liked in VMWare's platform is the Remote Console=
-, and SPICE has been an excellent equivalent product for Proxmox.
+Sorry for the late reply — I was on vacation. Thank you very much for 
+the detailed explanation; it gave me a clear direction on how to 
+approach the problem.
 
-When I first installed the SPICE client tool I could move my mouse to the S=
-PICE VM console session and type in the window, then move the mouse out and=
- work on a local program on my (Windows) PC. I've been trying to get a Yubi=
-key device on my local PC to connect to a VM (still working on accomplishin=
-g this) and I installed updated SPICE programs on my PC. I immediately noti=
-ced I now have to hit Ctrl Alt R to leave the remote console. I'm able to f=
-ind a config panel that shows the shortcut, but it does not allow me to dis=
-able it. I haven't found a workaround googling, so I wonder if you could te=
-ll me if there is a way to disable this behavior?
+The race condition I was facing involved qemu calling 
+spice_qxl_gl_scanout during the initial frame transmission. This caused 
+the dma-buf to be closed while GStreamer was still using it. I resolved 
+this by giving GStreamer a duplicate of the dma-buf file descriptor and 
+letting it close it once it's done. I'm still keeping the original 
+dma-buf fd in qxl_state so that one is always available for the initial 
+frame transmission. The question now is whether this is an acceptable 
+solution.
 
-Thanks,
-Lee Crawford
-Mobile: (513) 518-5024
+With that, I have a working prototype. However, there are still a few 
+things I need to improve before i can do a MR:
 
---_000_DM8P221MB06365501CE9B0C38DDF5C22FE48D2DM8P221MB0636NAMP_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+1. Callback (async_complete) handling: I obviously don’t want to call 
+this for the initial frame transmission. Implementing a special case for 
+this in the current code structure is a bit tricky. Either by passing a 
+variable through, or perhaps storing it in the qxl_state. For the 
+latter, however, I first need to better understand the thread, worker 
+and pipe system and see if that is possible.
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-Hello,</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Helvetica, san=
-s-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-I am a VMWare/ESXi/vCenter user of a couple decades, moving over to Proxmox=
- VE as a result of the recent changes to their licensing affecting my custo=
-mers. One feature I really liked in VMWare's platform is the Remote Console=
-, and SPICE has been an excellent
- equivalent product for Proxmox.</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Helvetica, san=
-s-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Helvetica, san=
-s-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-When I first installed the SPICE client tool I could move my mouse to the S=
-PICE VM console session and type in the window, then move the mouse out and=
- work on a local program on my (Windows) PC. I've been trying to get a Yubi=
-key device on my local PC to connect
- to a VM (still working on accomplishing this) and I installed updated SPIC=
-E programs on my PC. I immediately noticed I now have to hit Ctrl Alt R to =
-leave the remote console. I'm able to find a config panel that shows the sh=
-ortcut, but it does not allow me
- to disable it. I haven't found a workaround googling, so I wonder if you c=
-ould tell me if there is a way to disable this behavior?</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Helvetica, san=
-s-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Helvetica, san=
-s-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-Thanks,</div>
-<div class=3D"elementToProof" style=3D"font-family: Calibri, Helvetica, san=
-s-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-Lee Crawford</div>
-<div id=3D"Signature" style=3D"color: inherit;">
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-Mobile: (513) 518-5024</div>
-</div>
-</body>
-</html>
+2. I'm not sure whether it's necessary to ensure that, when multiple 
+clients are connected, only the newly connected one receives the new 
+frame. It's also an interesting design choice to encode the frame 
+separately for each connection.
 
---_000_DM8P221MB06365501CE9B0C38DDF5C22FE48D2DM8P221MB0636NAMP_--
+Best regards,
+Michael
+
+
+On 16.04.25 00:00, Frediano Ziglio wrote:
+> On Thu, Apr 10, 2025 at 3:18 PM Michael Scherle <
+> michael.scherle@rz.uni-freiburg.de> wrote:
+> 
+>> Hello,
+>>
+>> I’ve encountered an issue with the new DMA-BUF -> video encoding feature
+>> in SPICE. When connecting, the first frame is only sent once the GPU
+>> renders a new frame. However, this can take quite some time if the VM is
+>> idle (e.g., sitting on the desktop), since the GPU only renders a new
+>> frame when something on the screen changes. To address this, I wanted to
+>> force a frame to be sent when the display channel is connected.
+>>
+>>
+> Which makes sense.
+> 
+> 
+>> My initial, naive attempt was to grab the latest DMA-BUF on the display
+>> channel's connection in the SPICE server, encode it, and send it.
+>> However, this led to race conditions and crashes—particularly when QEMU
+>> happened to perform a scanout at the same time, closing the DMA-BUF in
+>> the process.
+>>
+>> By "closing" do you mean calling close() function? No, we should have
+> ownership.
+> What exact race did you encounter?
+> 
+> 
+>> As a second approach, I modified the QXLInterface to pass the display
+>> channel on_connect event back to QEMU. I couldn’t find any existing
+>> mechanism in QEMU to detect the connection of a display channel. Within
+>> QEMU, I then used qemu_spice_gl_monitor_config, and spice_gl_refresh to
+>> trigger a spice_gl_draw. This solution works, but the downside is that
+>> it requires changes to SPICE, QEMU, and especially the
+>> QXLInterface—which is obviously not ideal.
+>>
+>> Not ideal is a compliment. I would say complicated, hard to maintain,
+> adding too much coupling.
+> 
+> So now I’m wondering: does anyone have a better idea for how to tackle
+>> this problem?
+>>
+>> I would define "the problem" first, currently you mentioned a race
+> condition without describing the details of the race.
+> 
+> 
+>> Best regards,
+>> Michael
+>>
+> 
+> I could suspect the race is more in the current implementation of the
+> interface. Indeed that interface does not fit entirely in the Spice server
+> model.
+> 
+> Externally there are 2 functions, spice_qxl_gl_scanout and
+> spice_qxl_gl_draw_async, the callback async_complete is used to tell Qemu
+> when we finish with the scanout. So, spice_qxl_gl_scanout should set the
+> scanout (or frame if you prefer), while spice_qxl_gl_draw_async tells Spice
+> to use the scanout, till async_complete is called (which should be done in
+> a time fashion, I think Qemu timeout is 1 second). In theory the scanout
+> can be reused for multiple draws (which was never the case, but that's
+> another story). In theory a partial draw of the scanout can be requested.
+> In theory the scanout should not be used after async_complete is called as
+> Qemu could reuse the scanout for next drawings. That last point is a bit of
+> a problem here and to be honest something I think is an issue of the
+> external interface definition. In hardware you set the framebuffer and the
+> video card will continue to use it, no matter what, the computer can freeze
+> or panic and the video card will continue to use the same frame over and
+> over. Also, considering that the maximum that can happen is to get a
+> partial draw that will be fixed, I think it's correct to use the last
+> scanout to solve your initial problem.
+> 
+> Internally Spice server stores the scanout in the RedQxl thread (Qemu I/O
+> one) but uses it in the RedWorker thread. This is pretty uncommon, usually
+> data is passed from a thread to the other, ownership included. This,
+> probably, leads to the race you are facing. If that's the issue I think
+> really the best option is to fix that race.
+> 
+> Regards,
+>    Frediano
+> 
+
