@@ -2,54 +2,47 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79106AB6B48
-	for <lists+spice-devel@lfdr.de>; Wed, 14 May 2025 14:20:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D545AB786D
+	for <lists+spice-devel@lfdr.de>; Thu, 15 May 2025 00:00:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8694F10E623;
-	Wed, 14 May 2025 12:20:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ADCDD10E748;
+	Wed, 14 May 2025 22:00:51 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=rz.uni-freiburg.de header.i=@rz.uni-freiburg.de header.b="aMmqd1Sr";
+	dkim=pass (1024-bit key; unprotected) header.d=zstack.io header.i=@zstack.io header.b="lGUhsWEz";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 534 seconds by postgrey-1.36 at gabe;
- Wed, 14 May 2025 12:20:04 UTC
-Received: from b1422.mx.srv.dfn.de (b1422.mx.srv.dfn.de [194.95.235.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E849A10E623
- for <spice-devel@lists.freedesktop.org>; Wed, 14 May 2025 12:20:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- rz.uni-freiburg.de; h=content-transfer-encoding:content-type
- :content-type:in-reply-to:content-language:references:from:from
- :subject:subject:user-agent:mime-version:date:date:message-id
- :received; s=s1; t=1747224664; x=1749039065; bh=M8KCBdzJIwgAhPBA
- A2VMXBdoZoe8WsRgBoSIA/Lr3/0=; b=aMmqd1SrGf9ScLlvJEYDS22geAXZvTeK
- O8hqJj9DKuxv7nYYuNoQP/PLFH3UGxGfRKqgXYANoL5hwm+eitSKoLx1a2ccHroI
- pNJ8TzdDaKhwba5DDX1lDFHlsXIK56J0KvIztCiyD3qQrrmr1TkHhMaqWdobrpWF
- FrlpgMDqnmY=
-Received: from fe1.uni-freiburg.de (fe1.uni-freiburg.de [132.230.2.221])
- by b1422.mx.srv.dfn.de (Postfix) with ESMTP id 8FB1726015C
- for <spice-devel@lists.freedesktop.org>; Wed, 14 May 2025 14:11:04 +0200 (CEST)
-Received: from [2001:7c0:2517:20:2d65:91f6:f0da:8564] (account
- michael.scherle@rz.uni-freiburg.de HELO
- [IPV6:2001:7c0:2517:20:2d65:91f6:f0da:8564])
- by mail.uni-freiburg.de (CommuniGate Pro SMTP 6.3.19)
- with ESMTPSA id 47515960; Wed, 14 May 2025 14:11:04 +0200
-Message-ID: <71fc7e2c-dec1-4949-943f-257b3710e82b@rz.uni-freiburg.de>
-Date: Wed, 14 May 2025 14:11:03 +0200
+X-Greylist: delayed 301 seconds by postgrey-1.36 at gabe;
+ Tue, 13 May 2025 06:32:17 UTC
+Received: from out28-99.mail.aliyun.com (out28-99.mail.aliyun.com
+ [115.124.28.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F16DC10E160
+ for <spice-devel@lists.freedesktop.org>; Tue, 13 May 2025 06:32:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zstack.io; s=default;
+ t=1747117936; h=Date:From:To:Message-ID:Subject:MIME-Version:Content-Type;
+ bh=7neK3m+9XHmq3Bhjovakz2h5vpRaApB/QUXaWm/jm3A=;
+ b=lGUhsWEzZchYsOR1qvBFAUpFbTu6R6SyCs23r5sSnbxZz9xHkQVS2IrXcLJzVkxhzRnoXE9QPbhSJYrHK8r4PfEOurBlJ7EDvve2R6TpxofQVqejTEJOyyI7uyoCNLRDfEhxAtOOnEocMZLcgUvFq1DVy0DyE16/6gPIeosju40=
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07144199|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_news_journal|0.00388035-0.00024582-0.995874;
+ FP=17044591220535993931|0|0|0|0|-1|-1|-1;
+ HT=maildocker-contentspam033037022110; MF=shan.wu@zstack.io; NM=1; PH=DW; RN=1;
+ RT=1; SR=0; TI=W4_0.2.3_v5ForWebDing_212DF835_1747117340238_o7001c28p; 
+Received: from WS-web
+ (shan.wu@zstack.io[W4_0.2.3_v5ForWebDing_212DF835_1747117340238_o7001c28p]
+ cluster:ay29) at Tue, 13 May 2025 14:27:09 +0800
+Date: Tue, 13 May 2025 14:27:09 +0800
+From: "=?UTF-8?B?5ZC05bGx?=" <shan.wu@zstack.io>
+To: "spice-devel" <spice-devel@lists.freedesktop.org>
+Message-ID: <cc18915a-2fa9-43cd-aacb-507bf3a9765a.shan.wu@zstack.io>
+Subject: =?UTF-8?B?Q29ubmVjdGlvbiBwb3J0IHRpbWVvdXQ=?=
+X-Mailer: [Alimail-Mailagent][W4_0.2.3][v5ForWebDing][Chrome]
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Forcing initial Frame Transmission for dmabuf encoding on SPICE
- display channel connection
-From: Michael Scherle <michael.scherle@rz.uni-freiburg.de>
-To: Frediano Ziglio <freddy77@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-References: <760d379f-91b2-4f43-bf22-57d0859977b3@rz.uni-freiburg.de>
- <CAHt6W4dgigb9P=D99Lv2BxBA530+Os3Bm9dWX4W4gWfHiOW=wg@mail.gmail.com>
- <8470bed0-5860-40c9-8688-11593b7e1b3b@rz.uni-freiburg.de>
-Content-Language: en-US
-In-Reply-To: <8470bed0-5860-40c9-8688-11593b7e1b3b@rz.uni-freiburg.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+x-aliyun-im-through: {"version":"v1.0"}
+x-aliyun-mail-creator: W4_0.2.3_v5ForWebDing_QvNTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfMTVfNykgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNi4wLjAuMCBTYWZhcmkvNTM3LjM2La
+Content-Type: multipart/alternative;
+ boundary="----=ALIBOUNDARY_1759_7f270f213700_6822e63d_19d96f"
+X-Mailman-Approved-At: Wed, 14 May 2025 22:00:50 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,161 +54,306 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: =?UTF-8?B?5ZC05bGx?= <shan.wu@zstack.io>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hello,
+------=ALIBOUNDARY_1759_7f270f213700_6822e63d_19d96f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-ok I have implemented this.
+QWZ0ZXIgZXhlY3V0aW5nIHRoZSBuYyBjb21tYW5kIHR3aWNlLCBleGVjdXRpbmcgdGhlIG5jIGNv
+bW1hbmQgYWdhaW4gdGltZWQgb3V0LCBhbmQgdGhlIG5ldHN0YXQgY29tbWFuZCBzaG93ZWQgdGhh
+dCB0aGUgc2VydmVyIGRpZCBub3QgY2xvc2UgdGhlIHNvY2tldCBjb25uZWN0aW9u77yaCltyb290
+QDE3Mi0yNi01MS0yMDcgfl0jIHN5c3RlbWN0bCBzdGF0dXMgdXNicmVkaXItNDEwMC0wMDMtMDAy
+LnNlcnZpY2UgCuKXjyB1c2JyZWRpci00MTAwLTAwMy0wMDIuc2VydmljZSAtIC9zYmluL3VzYnJl
+ZGlyc2VydmVyIC1wIDQxMDAgMDAzLTAwMgogTG9hZGVkOiBsb2FkZWQgKC9ydW4vc3lzdGVtZC90
+cmFuc2llbnQvdXNicmVkaXItNDEwMC0wMDMtMDAyLnNlcnZpY2U7IHRyYW5zaT4KVHJhbnNpZW50
+OiB5ZXMKIEFjdGl2ZTogYWN0aXZlIChydW5uaW5nKSBzaW5jZSBUdWUgMjAyNS0wNS0xMyAxNDox
+Mzo0MSBDU1Q7IDEybWluIGFnbwogTWFpbiBQSUQ6IDM4NjQyNzcgKHVzYnJlZGlyc2VydmVyKQog
+VGFza3M6IDIgKGxpbWl0OiAxMDEwNjMpCiBNZW1vcnk6IDYwOC4wSwogQ0dyb3VwOiAvc3lzdGVt
+LnNsaWNlL3VzYnJlZGlyLTQxMDAtMDAzLTAwMi5zZXJ2aWNlCiDilJTilIAzODY0Mjc3IC9zYmlu
+L3VzYnJlZGlyc2VydmVyIC1wIDQxMDAgMDAzLTAwMgo15pyIIDEzIDE0OjEzOjQxIDE3Mi0yNi01
+MS0yMDcgc3lzdGVtZFsxXTogU3RhcnRlZCAvc2Jpbi91c2JyZWRpcnNlcnZlciAtcCA0MTAwID4K
+NeaciCAxMyAxNDoxMzo0NSAxNzItMjYtNTEtMjA3IHVzYnJlZGlyc2VydmVyWzM4NjQyNzddOiB1
+c2JyZWRpcnBhcnNlcjogUGVlciB2ZXI+Cltyb290QDE3Mi0yNi01MS0yMDcgfl0jIHJwbSAtcWEg
+fCBncmVwIHVzYgpxZW11LWt2bS1ody11c2JyZWRpci02LjIuMC0yMzIuZzA5MjUyMTYxZDEuZWw4
+Lng4Nl82NAp1c2JyZWRpci0wLjEyLjAtMi5lbDgueDg2XzY0CmxpYnVzYngtMS4wLjIzLTQuZWw4
+Lng4Nl82NAp1c2J1dGlscy0wMTAtMy5lbDgueDg2XzY0CnVzYnJlZGlyLXNlcnZlci0wLjEyLjAt
+Mi5lbDgueDg2XzY0CmxpYmd1c2ItMC4zLjAtMS5lbDgueDg2XzY0Cltyb290QDE3Mi0yNi01MS0y
+MDcgfl0jIG5jIC16diAxNzIuMjYuNTEuMjA3IDQxMDAKTmNhdDogVmVyc2lvbiA3LjcwICggaHR0
+cHM6Ly9ubWFwLm9yZy9uY2F0IDxodHRwczovL25tYXAub3JnL25jYXQgPiApCk5jYXQ6IENvbm5l
+Y3RlZCB0byAxNzIuMjYuNTEuMjA3OjQxMDAuCk5jYXQ6IDAgYnl0ZXMgc2VudCwgMCBieXRlcyBy
+ZWNlaXZlZCBpbiAwLjAxIHNlY29uZHMuCltyb290QDE3Mi0yNi01MS0yMDcgfl0jIG5ldHN0YXQg
+LW5hcCB8IGdyZXAgNDEwMAp0Y3AgMCAwIDE3Mi4yNi41MS4yMDc6NDc5ODggMTcyLjI2LjUxLjIw
+Nzo0MTAwIEZJTl9XQUlUMiAtIAp0Y3A2IDEgMCA6Ojo0MTAwIDo6OiogTElTVEVOIDM4NjQyNzcv
+dXNicmVkaXJzZXIgCnRjcDYgMSAwIDE3Mi4yNi41MS4yMDc6NDEwMCAxNzIuMjYuNTEuMjA3OjQ3
+OTg4IENMT1NFX1dBSVQgLSAKdGNwNiAwIDAgMTcyLjI2LjUxLjIwNzo0MTAwIDE3Mi4yNi41MS4y
+MzA6NTg1NzYgRVNUQUJMSVNIRUQgMzg2NDI3Ny91c2JyZWRpcnNlciAKW3Jvb3RAMTcyLTI2LTUx
+LTIwNyB+XSMgbmMgLXp2IDE3Mi4yNi41MS4yMDcgNDEwMApOY2F0OiBWZXJzaW9uIDcuNzAgKCBo
+dHRwczovL25tYXAub3JnL25jYXQgPGh0dHBzOi8vbm1hcC5vcmcvbmNhdCA+ICkKTmNhdDogQ29u
+bmVjdGVkIHRvIDE3Mi4yNi41MS4yMDc6NDEwMC4KTmNhdDogMCBieXRlcyBzZW50LCAwIGJ5dGVz
+IHJlY2VpdmVkIGluIDAuMDEgc2Vjb25kcy4KW3Jvb3RAMTcyLTI2LTUxLTIwNyB+XSMgbmV0c3Rh
+dCAtbmFwIHwgZ3JlcCA0MTAwCnRjcCAwIDAgMTcyLjI2LjUxLjIwNzo0Nzk4OCAxNzIuMjYuNTEu
+MjA3OjQxMDAgRklOX1dBSVQyIC0gCnRjcCAwIDAgMTcyLjI2LjUxLjIwNzozMzM4NCAxNzIuMjYu
+NTEuMjA3OjQxMDAgRklOX1dBSVQyIC0gCnRjcDYgMiAwIDo6OjQxMDAgOjo6KiBMSVNURU4gMzg2
+NDI3Ny91c2JyZWRpcnNlciAKdGNwNiAxIDAgMTcyLjI2LjUxLjIwNzo0MTAwIDE3Mi4yNi41MS4y
+MDc6MzMzODQgQ0xPU0VfV0FJVCAtIAp0Y3A2IDEgMCAxNzIuMjYuNTEuMjA3OjQxMDAgMTcyLjI2
+LjUxLjIwNzo0Nzk4OCBDTE9TRV9XQUlUIC0gCnRjcDYgMCAwIDE3Mi4yNi41MS4yMDc6NDEwMCAx
+NzIuMjYuNTEuMjMwOjU4NTc2IEVTVEFCTElTSEVEIDM4NjQyNzcvdXNicmVkaXJzZXIgCltyb290
+QDE3Mi0yNi01MS0yMDcgfl0jIG5jIC16diAxNzIuMjYuNTEuMjA3IDQxMDAKTmNhdDogVmVyc2lv
+biA3LjcwICggaHR0cHM6Ly9ubWFwLm9yZy9uY2F0IDxodHRwczovL25tYXAub3JnL25jYXQgPiAp
+Ck5jYXQ6IENvbm5lY3Rpb24gdGltZWQgb3V0Lgo=
+------=ALIBOUNDARY_1759_7f270f213700_6822e63d_19d96f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-Due to the existing code structure, it was difficult to make a draw that 
-does not also trigger the callback. I would have liked to attach the 
-meta data to the draw to be able to identify it at the end, but that 
-would have required major code changes. Now I have ended up with the 
-following:
-
-https://gitlab.freedesktop.org/spice/spice/-/merge_requests/238
-
-Description:
-
-Send initial draw on client connect for DMA-BUF encoder
-
-Ensure an initial draw is sent immediately upon client connection
-if the DMA-BUF video encoder is in use. Without this, a frame would
-only be pushed when the screen content changes and the GPU renders
-a new frame—which could take a while, causing delays for the client.
-GStreamer now receives a duplicated file descriptor (fd) and takes
-responsibility for closing it. This guarantees the buffer remains
-available long enough. The previous fd mechanism is still retained
-to ensure a valid scanout buffer is always available for a new
-client.
-
-Greetings,
-Michael
-
-On 05.05.25 14:33, Michael Scherle wrote:
-> Hello,
-> 
-> Sorry for the late reply — I was on vacation. Thank you very much for 
-> the detailed explanation; it gave me a clear direction on how to 
-> approach the problem.
-> 
-> The race condition I was facing involved qemu calling 
-> spice_qxl_gl_scanout during the initial frame transmission. This caused 
-> the dma-buf to be closed while GStreamer was still using it. I resolved 
-> this by giving GStreamer a duplicate of the dma-buf file descriptor and 
-> letting it close it once it's done. I'm still keeping the original dma- 
-> buf fd in qxl_state so that one is always available for the initial 
-> frame transmission. The question now is whether this is an acceptable 
-> solution.
-> 
-> With that, I have a working prototype. However, there are still a few 
-> things I need to improve before i can do a MR:
-> 
-> 1. Callback (async_complete) handling: I obviously don’t want to call 
-> this for the initial frame transmission. Implementing a special case for 
-> this in the current code structure is a bit tricky. Either by passing a 
-> variable through, or perhaps storing it in the qxl_state. For the 
-> latter, however, I first need to better understand the thread, worker 
-> and pipe system and see if that is possible.
-> 
-> 2. I'm not sure whether it's necessary to ensure that, when multiple 
-> clients are connected, only the newly connected one receives the new 
-> frame. It's also an interesting design choice to encode the frame 
-> separately for each connection.
-> 
-> Best regards,
-> Michael
-> 
-> 
-> On 16.04.25 00:00, Frediano Ziglio wrote:
->> On Thu, Apr 10, 2025 at 3:18 PM Michael Scherle <
->> michael.scherle@rz.uni-freiburg.de> wrote:
->>
->>> Hello,
->>>
->>> I’ve encountered an issue with the new DMA-BUF -> video encoding feature
->>> in SPICE. When connecting, the first frame is only sent once the GPU
->>> renders a new frame. However, this can take quite some time if the VM is
->>> idle (e.g., sitting on the desktop), since the GPU only renders a new
->>> frame when something on the screen changes. To address this, I wanted to
->>> force a frame to be sent when the display channel is connected.
->>>
->>>
->> Which makes sense.
->>
->>
->>> My initial, naive attempt was to grab the latest DMA-BUF on the display
->>> channel's connection in the SPICE server, encode it, and send it.
->>> However, this led to race conditions and crashes—particularly when QEMU
->>> happened to perform a scanout at the same time, closing the DMA-BUF in
->>> the process.
->>>
->>> By "closing" do you mean calling close() function? No, we should have
->> ownership.
->> What exact race did you encounter?
->>
->>
->>> As a second approach, I modified the QXLInterface to pass the display
->>> channel on_connect event back to QEMU. I couldn’t find any existing
->>> mechanism in QEMU to detect the connection of a display channel. Within
->>> QEMU, I then used qemu_spice_gl_monitor_config, and spice_gl_refresh to
->>> trigger a spice_gl_draw. This solution works, but the downside is that
->>> it requires changes to SPICE, QEMU, and especially the
->>> QXLInterface—which is obviously not ideal.
->>>
->>> Not ideal is a compliment. I would say complicated, hard to maintain,
->> adding too much coupling.
->>
->> So now I’m wondering: does anyone have a better idea for how to tackle
->>> this problem?
->>>
->>> I would define "the problem" first, currently you mentioned a race
->> condition without describing the details of the race.
->>
->>
->>> Best regards,
->>> Michael
->>>
->>
->> I could suspect the race is more in the current implementation of the
->> interface. Indeed that interface does not fit entirely in the Spice 
->> server
->> model.
->>
->> Externally there are 2 functions, spice_qxl_gl_scanout and
->> spice_qxl_gl_draw_async, the callback async_complete is used to tell Qemu
->> when we finish with the scanout. So, spice_qxl_gl_scanout should set the
->> scanout (or frame if you prefer), while spice_qxl_gl_draw_async tells 
->> Spice
->> to use the scanout, till async_complete is called (which should be 
->> done in
->> a time fashion, I think Qemu timeout is 1 second). In theory the scanout
->> can be reused for multiple draws (which was never the case, but that's
->> another story). In theory a partial draw of the scanout can be requested.
->> In theory the scanout should not be used after async_complete is 
->> called as
->> Qemu could reuse the scanout for next drawings. That last point is a 
->> bit of
->> a problem here and to be honest something I think is an issue of the
->> external interface definition. In hardware you set the framebuffer and 
->> the
->> video card will continue to use it, no matter what, the computer can 
->> freeze
->> or panic and the video card will continue to use the same frame over and
->> over. Also, considering that the maximum that can happen is to get a
->> partial draw that will be fixed, I think it's correct to use the last
->> scanout to solve your initial problem.
->>
->> Internally Spice server stores the scanout in the RedQxl thread (Qemu I/O
->> one) but uses it in the RedWorker thread. This is pretty uncommon, 
->> usually
->> data is passed from a thread to the other, ownership included. This,
->> probably, leads to the race you are facing. If that's the issue I think
->> really the best option is to fix that race.
->>
->> Regards,
->>    Frediano
->>
-> 
+PGRpdiBjbGFzcz0iX19hbGl5dW5fZW1haWxfYm9keV9ibG9jayI+PGRpdiAgc3R5bGU9ImZvbnQt
+ZmFtaWx5OiBUYWhvbWEsIEFyaWFsLCBTVEhlaXRpU0MtTGlnaHQsIFNpbVN1biI+PGRpdiAgc3R5
+bGU9ImNsZWFyOiBib3RoOyBmb250LWZhbWlseTogVGFob21hLCBBcmlhbCwgU1RIZWl0aVNDLUxp
+Z2h0LCBTaW1TdW47Ij48c3BhbiA+PHNwYW4gPjxiciA+PC9zcGFuPjwvc3Bhbj48L2Rpdj48ZGl2
+ICBzdHlsZT0iY2xlYXI6IGJvdGg7IGZvbnQtZmFtaWx5OiBUYWhvbWEsIEFyaWFsLCBTVEhlaXRp
+U0MtTGlnaHQsIFNpbVN1bjsiPjxzcGFuID48c3BhbiA+QWZ0ZXIgZXhlY3V0aW5nIHRoZSBuYyBj
+b21tYW5kIHR3aWNlLCBleGVjdXRpbmcgdGhlIG5jIGNvbW1hbmQgYWdhaW4gdGltZWQgb3V0LCBh
+bmQgdGhlIG5ldHN0YXQgY29tbWFuZCBzaG93ZWQgdGhhdCB0aGUgc2VydmVyIGRpZCBub3QgY2xv
+c2UgdGhlIHNvY2tldCBjb25uZWN0aW9u77yaPC9zcGFuPjwvc3Bhbj48L2Rpdj48ZGl2ICBzdHls
+ZT0iY2xlYXI6IGJvdGg7IGZvbnQtZmFtaWx5OiBUYWhvbWEsIEFyaWFsLCBTVEhlaXRpU0MtTGln
+aHQsIFNpbVN1bjsiPjxzcGFuID48YnIgPjwvc3Bhbj48L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6
+IGJvdGg7IGZvbnQtZmFtaWx5OiBUYWhvbWEsIEFyaWFsLCBTVEhlaXRpU0MtTGlnaHQsIFNpbVN1
+bjsiPjxzcGFuID48c3BhbiA+W3Jvb3RAMTcyLTI2LTUxLTIwNyB+XSMgc3lzdGVtY3RsIHN0YXR1
+cyB1c2JyZWRpci00MTAwLTAwMy0wMDIuc2VydmljZSA8L3NwYW4+PC9zcGFuPjxkaXYgIHN0eWxl
+PSJjbGVhcjogYm90aDsiPuKXjyB1c2JyZWRpci00MTAwLTAwMy0wMDIuc2VydmljZSAtIC9zYmlu
+L3VzYnJlZGlyc2VydmVyIC1wIDQxMDAgMDAzLTAwMjwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjog
+Ym90aDsiPiAmbmJzcDsgTG9hZGVkOiBsb2FkZWQgKC9ydW4vc3lzdGVtZC90cmFuc2llbnQvdXNi
+cmVkaXItNDEwMC0wMDMtMDAyLnNlcnZpY2U7IHRyYW5zaSZndDs8L2Rpdj48ZGl2ICBzdHlsZT0i
+Y2xlYXI6IGJvdGg7Ij5UcmFuc2llbnQ6IHllczwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjogYm90
+aDsiPiAmbmJzcDsgQWN0aXZlOiBhY3RpdmUgKHJ1bm5pbmcpIHNpbmNlIFR1ZSAyMDI1LTA1LTEz
+IDE0OjEzOjQxIENTVDsgMTJtaW4gYWdvPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+
+IE1haW4gUElEOiAzODY0Mjc3ICh1c2JyZWRpcnNlcnZlcik8L2Rpdj48ZGl2ICBzdHlsZT0iY2xl
+YXI6IGJvdGg7Ij4mbmJzcDsgJm5ic3A7IFRhc2tzOiAyIChsaW1pdDogMTAxMDYzKTwvZGl2Pjxk
+aXYgIHN0eWxlPSJjbGVhcjogYm90aDsiPiAmbmJzcDsgTWVtb3J5OiA2MDguMEs8L2Rpdj48ZGl2
+ICBzdHlsZT0iY2xlYXI6IGJvdGg7Ij4gJm5ic3A7IENHcm91cDogL3N5c3RlbS5zbGljZS91c2Jy
+ZWRpci00MTAwLTAwMy0wMDIuc2VydmljZTwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjogYm90aDsi
+PiAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IOKUlOKUgDM4NjQyNzcgL3NiaW4v
+dXNicmVkaXJzZXJ2ZXIgLXAgNDEwMCAwMDMtMDAyPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBi
+b3RoOyI+NeaciCAxMyAxNDoxMzo0MSAxNzItMjYtNTEtMjA3IHN5c3RlbWRbMV06IFN0YXJ0ZWQg
+L3NiaW4vdXNicmVkaXJzZXJ2ZXIgLXAgNDEwMCAmZ3Q7PC9kaXY+PGRpdiA+PHNwYW4gPjXmnIgg
+MTMgMTQ6MTM6NDUgMTcyLTI2LTUxLTIwNyB1c2JyZWRpcnNlcnZlclszODY0Mjc3XTogdXNicmVk
+aXJwYXJzZXI6IFBlZXIgdmVyJmd0Ozwvc3Bhbj48L2Rpdj48ZGl2ID48c3BhbiA+PGJyID48L3Nw
+YW4+PC9kaXY+PC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyBmb250LWZhbWlseTogVGFo
+b21hLCBBcmlhbCwgU1RIZWl0aVNDLUxpZ2h0LCBTaW1TdW47Ij48c3BhbiA+PHNwYW4gPltyb290
+QDE3Mi0yNi01MS0yMDcgfl0jIHJwbSAtcWEgfCBncmVwIHVzYjwvc3Bhbj48L3NwYW4+PGRpdiAg
+c3R5bGU9ImNsZWFyOiBib3RoOyI+cWVtdS1rdm0taHctdXNicmVkaXItNi4yLjAtMjMyLmcwOTI1
+MjE2MWQxLmVsOC54ODZfNjQ8L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6IGJvdGg7Ij51c2JyZWRp
+ci0wLjEyLjAtMi5lbDgueDg2XzY0PC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+bGli
+dXNieC0xLjAuMjMtNC5lbDgueDg2XzY0PC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+
+dXNidXRpbHMtMDEwLTMuZWw4Lng4Nl82NDwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjogYm90aDsi
+PnVzYnJlZGlyLXNlcnZlci0wLjEyLjAtMi5lbDgueDg2XzY0PC9kaXY+PGRpdiAgc3R5bGU9ImNs
+ZWFyOiBib3RoOyI+bGliZ3VzYi0wLjMuMC0xLmVsOC54ODZfNjQ8L2Rpdj48ZGl2ICBzdHlsZT0i
+Y2xlYXI6IGJvdGg7Ij5bcm9vdEAxNzItMjYtNTEtMjA3IH5dIyBuYyAtenYgMTcyLjI2LjUxLjIw
+NyA0MTAwPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+TmNhdDogVmVyc2lvbiA3Ljcw
+ICggPGEgIGhyZWY9Imh0dHBzOi8vbm1hcC5vcmcvbmNhdCIgdGFyZ2V0PSJfYmxhbmsiPmh0dHBz
+Oi8vbm1hcC5vcmcvbmNhdDwvYT4gKTwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjogYm90aDsiPk5j
+YXQ6IENvbm5lY3RlZCB0byAxNzIuMjYuNTEuMjA3OjQxMDAuPC9kaXY+PGRpdiAgc3R5bGU9ImNs
+ZWFyOiBib3RoOyI+TmNhdDogMCBieXRlcyBzZW50LCAwIGJ5dGVzIHJlY2VpdmVkIGluIDAuMDEg
+c2Vjb25kcy48L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6IGJvdGg7Ij5bcm9vdEAxNzItMjYtNTEt
+MjA3IH5dIyBuZXRzdGF0IC1uYXAgfCBncmVwIDQxMDA8L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6
+IGJvdGg7Ij50Y3AmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgMCZuYnNwOyAmbmJzcDsgJm5i
+c3A7IDAgMTcyLjI2LjUxLjIwNzo0Nzk4OCAmbmJzcDsgJm5ic3A7IDE3Mi4yNi41MS4yMDc6NDEw
+MCZuYnNwOyAmbmJzcDsgJm5ic3A7IEZJTl9XQUlUMiAmbmJzcDsgLSAmbmJzcDsgJm5ic3A7ICZu
+YnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyA8L2Rpdj48ZGl2
+ICBzdHlsZT0iY2xlYXI6IGJvdGg7Ij50Y3A2ICZuYnNwOyAmbmJzcDsgJm5ic3A7IDEmbmJzcDsg
+Jm5ic3A7ICZuYnNwOyAwIDo6OjQxMDAgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNw
+OyAmbmJzcDsgJm5ic3A7ICZuYnNwOyA6OjoqJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZu
+YnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IExJU1RFTiZuYnNwOyAmbmJz
+cDsgJm5ic3A7IDM4NjQyNzcvdXNicmVkaXJzZXIgPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBi
+b3RoOyI+dGNwNiAmbmJzcDsgJm5ic3A7ICZuYnNwOyAxJm5ic3A7ICZuYnNwOyAmbmJzcDsgMCAx
+NzIuMjYuNTEuMjA3OjQxMDAmbmJzcDsgJm5ic3A7ICZuYnNwOyAxNzIuMjYuNTEuMjA3OjQ3OTg4
+ICZuYnNwOyAmbmJzcDsgQ0xPU0VfV0FJVCZuYnNwOyAtICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZu
+YnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IDwvZGl2PjxkaXYgIHN0eWxl
+PSJjbGVhcjogYm90aDsiPnRjcDYgJm5ic3A7ICZuYnNwOyAmbmJzcDsgMCZuYnNwOyAmbmJzcDsg
+Jm5ic3A7IDAgMTcyLjI2LjUxLjIwNzo0MTAwJm5ic3A7ICZuYnNwOyAmbmJzcDsgMTcyLjI2LjUx
+LjIzMDo1ODU3NiAmbmJzcDsgJm5ic3A7IEVTVEFCTElTSEVEIDM4NjQyNzcvdXNicmVkaXJzZXIg
+PC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+W3Jvb3RAMTcyLTI2LTUxLTIwNyB+XSMg
+bmMgLXp2IDE3Mi4yNi41MS4yMDcgNDEwMDwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjogYm90aDsi
+Pk5jYXQ6IFZlcnNpb24gNy43MCAoIDxhICBocmVmPSJodHRwczovL25tYXAub3JnL25jYXQiIHRh
+cmdldD0iX2JsYW5rIj5odHRwczovL25tYXAub3JnL25jYXQ8L2E+ICk8L2Rpdj48ZGl2ICBzdHls
+ZT0iY2xlYXI6IGJvdGg7Ij5OY2F0OiBDb25uZWN0ZWQgdG8gMTcyLjI2LjUxLjIwNzo0MTAwLjwv
+ZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjogYm90aDsiPk5jYXQ6IDAgYnl0ZXMgc2VudCwgMCBieXRl
+cyByZWNlaXZlZCBpbiAwLjAxIHNlY29uZHMuPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3Ro
+OyI+W3Jvb3RAMTcyLTI2LTUxLTIwNyB+XSMgbmV0c3RhdCAtbmFwIHwgZ3JlcCA0MTAwPC9kaXY+
+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+dGNwJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7
+IDAmbmJzcDsgJm5ic3A7ICZuYnNwOyAwIDE3Mi4yNi41MS4yMDc6NDc5ODggJm5ic3A7ICZuYnNw
+OyAxNzIuMjYuNTEuMjA3OjQxMDAmbmJzcDsgJm5ic3A7ICZuYnNwOyBGSU5fV0FJVDIgJm5ic3A7
+IC0gJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNw
+OyAmbmJzcDsgPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+dGNwJm5ic3A7ICZuYnNw
+OyAmbmJzcDsgJm5ic3A7IDAmbmJzcDsgJm5ic3A7ICZuYnNwOyAwIDE3Mi4yNi41MS4yMDc6MzMz
+ODQgJm5ic3A7ICZuYnNwOyAxNzIuMjYuNTEuMjA3OjQxMDAmbmJzcDsgJm5ic3A7ICZuYnNwOyBG
+SU5fV0FJVDIgJm5ic3A7IC0gJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJz
+cDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+
+dGNwNiAmbmJzcDsgJm5ic3A7ICZuYnNwOyAyJm5ic3A7ICZuYnNwOyAmbmJzcDsgMCA6Ojo0MTAw
+ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsg
+Ojo6KiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJz
+cDsgJm5ic3A7ICZuYnNwOyBMSVNURU4mbmJzcDsgJm5ic3A7ICZuYnNwOyAzODY0Mjc3L3VzYnJl
+ZGlyc2VyIDwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjogYm90aDsiPnRjcDYgJm5ic3A7ICZuYnNw
+OyAmbmJzcDsgMSZuYnNwOyAmbmJzcDsgJm5ic3A7IDAgMTcyLjI2LjUxLjIwNzo0MTAwJm5ic3A7
+ICZuYnNwOyAmbmJzcDsgMTcyLjI2LjUxLjIwNzozMzM4NCAmbmJzcDsgJm5ic3A7IENMT1NFX1dB
+SVQmbmJzcDsgLSAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJz
+cDsgJm5ic3A7ICZuYnNwOyA8L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6IGJvdGg7Ij50Y3A2ICZu
+YnNwOyAmbmJzcDsgJm5ic3A7IDEmbmJzcDsgJm5ic3A7ICZuYnNwOyAwIDE3Mi4yNi41MS4yMDc6
+NDEwMCZuYnNwOyAmbmJzcDsgJm5ic3A7IDE3Mi4yNi41MS4yMDc6NDc5ODggJm5ic3A7ICZuYnNw
+OyBDTE9TRV9XQUlUJm5ic3A7IC0gJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAm
+bmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3Ro
+OyI+dGNwNiAmbmJzcDsgJm5ic3A7ICZuYnNwOyAwJm5ic3A7ICZuYnNwOyAmbmJzcDsgMCAxNzIu
+MjYuNTEuMjA3OjQxMDAmbmJzcDsgJm5ic3A7ICZuYnNwOyAxNzIuMjYuNTEuMjMwOjU4NTc2ICZu
+YnNwOyAmbmJzcDsgRVNUQUJMSVNIRUQgMzg2NDI3Ny91c2JyZWRpcnNlciA8L2Rpdj48ZGl2ICBz
+dHlsZT0iY2xlYXI6IGJvdGg7Ij5bcm9vdEAxNzItMjYtNTEtMjA3IH5dIyBuYyAtenYgMTcyLjI2
+LjUxLjIwNyA0MTAwPC9kaXY+PGRpdiAgc3R5bGU9ImNsZWFyOiBib3RoOyI+TmNhdDogVmVyc2lv
+biA3LjcwICggPGEgIGhyZWY9Imh0dHBzOi8vbm1hcC5vcmcvbmNhdCIgdGFyZ2V0PSJfYmxhbmsi
+Pmh0dHBzOi8vbm1hcC5vcmcvbmNhdDwvYT4gKTwvZGl2PjxkaXYgPjxzcGFuID5OY2F0OiBDb25u
+ZWN0aW9uIHRpbWVkIG91dC48L3NwYW4+PC9kaXY+PHNwYW4gPjxiciA+PC9zcGFuPjwvZGl2Pjwv
+ZGl2PjwvZGl2Pg0KPGFydGljbGUgY2xhc3M9IjRldmVyLWFydGljbGUiIGRhdGEtY2xpcGJvYXJk
+LWNhbmdqaWU9IlsmcXVvdDtyb290JnF1b3Q7LHt9LFsmcXVvdDtwJnF1b3Q7LHsmcXVvdDtiZHIm
+cXVvdDs6eyZxdW90O2JvdHRvbSZxdW90Ozp7JnF1b3Q7Y29sb3ImcXVvdDs6JnF1b3Q7IzAwMDAw
+MCZxdW90OywmcXVvdDtzcGFjZSZxdW90OzowLCZxdW90O3N6JnF1b3Q7OjAsJnF1b3Q7dmFsJnF1
+b3Q7OiZxdW90O25vbmUmcXVvdDt9LCZxdW90O2xlZnQmcXVvdDs6eyZxdW90O2NvbG9yJnF1b3Q7
+OiZxdW90OyMwMDAwMDAmcXVvdDssJnF1b3Q7c3BhY2UmcXVvdDs6MCwmcXVvdDtzeiZxdW90Ozow
+LCZxdW90O3ZhbCZxdW90OzomcXVvdDtub25lJnF1b3Q7fSwmcXVvdDtyaWdodCZxdW90Ozp7JnF1
+b3Q7Y29sb3ImcXVvdDs6JnF1b3Q7IzAwMDAwMCZxdW90OywmcXVvdDtzcGFjZSZxdW90OzowLCZx
+dW90O3N6JnF1b3Q7OjAsJnF1b3Q7dmFsJnF1b3Q7OiZxdW90O25vbmUmcXVvdDt9LCZxdW90O3Rv
+cCZxdW90Ozp7JnF1b3Q7Y29sb3ImcXVvdDs6JnF1b3Q7IzAwMDAwMCZxdW90OywmcXVvdDtzcGFj
+ZSZxdW90OzowLCZxdW90O3N6JnF1b3Q7OjAsJnF1b3Q7dmFsJnF1b3Q7OiZxdW90O25vbmUmcXVv
+dDt9fSwmcXVvdDtpbmQmcXVvdDs6eyZxdW90O2ZpcnN0TGluZSZxdW90OzowLCZxdW90O2xlZnQm
+cXVvdDs6MCwmcXVvdDtyaWdodCZxdW90OzowfSwmcXVvdDtqYyZxdW90OzomcXVvdDtsZWZ0JnF1
+b3Q7LCZxdW90O2tlZXBMaW5lcyZxdW90OzpmYWxzZSwmcXVvdDtrZWVwTmV4dCZxdW90OzpmYWxz
+ZSwmcXVvdDtyUHImcXVvdDs6eyZxdW90O2NhcHMmcXVvdDs6ZmFsc2UsJnF1b3Q7Y29sb3ImcXVv
+dDs6JnF1b3Q7I0E1QTVBNSZxdW90OywmcXVvdDtmb250cyZxdW90Ozp7JnF1b3Q7YXNjaWkmcXVv
+dDs6JnF1b3Q7bWljcm9zb2Z0IHlhaGVpJnF1b3Q7LCZxdW90O2NzJnF1b3Q7OiZxdW90O21pY3Jv
+c29mdCB5YWhlaSZxdW90OywmcXVvdDtlYXN0QXNpYSZxdW90OzomcXVvdDttaWNyb3NvZnQgeWFo
+ZWkmcXVvdDssJnF1b3Q7aEFuc2kmcXVvdDs6JnF1b3Q7bWljcm9zb2Z0IHlhaGVpJnF1b3Q7fSwm
+cXVvdDtoaWdobGlnaHQmcXVvdDs6JnF1b3Q7I0ZGRkYwMCZxdW90OywmcXVvdDtpdGFsaWMmcXVv
+dDs6ZmFsc2UsJnF1b3Q7a2VybiZxdW90OzowLCZxdW90O3NwYWNpbmcmcXVvdDs6MCwmcXVvdDtz
+eiZxdW90OzoxMCwmcXVvdDtzelVuaXQmcXVvdDs6JnF1b3Q7cHQmcXVvdDt9LCZxdW90O3NwYWNp
+bmcmcXVvdDs6eyZxdW90O2FmdGVyJnF1b3Q7OiZxdW90OzBwdCZxdW90OywmcXVvdDthZnRlckF1
+dG9zcGFjaW5nJnF1b3Q7OmZhbHNlLCZxdW90O2JlZm9yZSZxdW90OzomcXVvdDswcHQmcXVvdDss
+JnF1b3Q7YmVmb3JlQXV0b3NwYWNpbmcmcXVvdDs6ZmFsc2UsJnF1b3Q7bGluZSZxdW90OzoxLCZx
+dW90O2xpbmVSdWxlJnF1b3Q7OiZxdW90O2F1dG8mcXVvdDt9LCZxdW90O3dpbmRvd0NvbnRyb2wm
+cXVvdDs6dHJ1ZX0sWyZxdW90O3NwYW4mcXVvdDsseyZxdW90O2RhdGEtdHlwZSZxdW90OzomcXVv
+dDt0ZXh0JnF1b3Q7fSxbJnF1b3Q7c3BhbiZxdW90Oyx7JnF1b3Q7Y2FwcyZxdW90OzpmYWxzZSwm
+cXVvdDtjb2xvciZxdW90OzomcXVvdDsjQTVBNUE1JnF1b3Q7LCZxdW90O2ZvbnRzJnF1b3Q7Onsm
+cXVvdDthc2NpaSZxdW90OzomcXVvdDttaWNyb3NvZnQgeWFoZWkmcXVvdDssJnF1b3Q7Y3MmcXVv
+dDs6JnF1b3Q7bWljcm9zb2Z0IHlhaGVpJnF1b3Q7LCZxdW90O2Vhc3RBc2lhJnF1b3Q7OiZxdW90
+O21pY3Jvc29mdCB5YWhlaSZxdW90OywmcXVvdDtoQW5zaSZxdW90OzomcXVvdDttaWNyb3NvZnQg
+eWFoZWkmcXVvdDt9LCZxdW90O2hpZ2hsaWdodCZxdW90OzomcXVvdDsjRkZGRjAwJnF1b3Q7LCZx
+dW90O3NwYWNpbmcmcXVvdDs6MCwmcXVvdDtrZXJuJnF1b3Q7OjAsJnF1b3Q7c3omcXVvdDs6MTAs
+JnF1b3Q7c3pVbml0JnF1b3Q7OiZxdW90O3B0JnF1b3Q7LCZxdW90O2RhdGEtdHlwZSZxdW90Ozom
+cXVvdDtsZWFmJnF1b3Q7fSwmcXVvdDvmraTkv6Hku7bljIXlkKvkv53lr4bkv6Hmga/vvIzor7fm
+lLbku7bkurrkuojku6Xkv53lr4bvvIzmnKrnu4/orrjlj6/vvIzor7fli7/lkJHnrKzkuInkurrm
+iqvpnLLvvIzosKLosKLjgIImcXVvdDtdXV0sWyZxdW90O3AmcXVvdDsseyZxdW90O2JkciZxdW90
+Ozp7JnF1b3Q7Ym90dG9tJnF1b3Q7OnsmcXVvdDtjb2xvciZxdW90OzomcXVvdDsjMDAwMDAwJnF1
+b3Q7LCZxdW90O3NwYWNlJnF1b3Q7OjAsJnF1b3Q7c3omcXVvdDs6MCwmcXVvdDt2YWwmcXVvdDs6
+JnF1b3Q7bm9uZSZxdW90O30sJnF1b3Q7bGVmdCZxdW90Ozp7JnF1b3Q7Y29sb3ImcXVvdDs6JnF1
+b3Q7IzAwMDAwMCZxdW90OywmcXVvdDtzcGFjZSZxdW90OzowLCZxdW90O3N6JnF1b3Q7OjAsJnF1
+b3Q7dmFsJnF1b3Q7OiZxdW90O25vbmUmcXVvdDt9LCZxdW90O3JpZ2h0JnF1b3Q7OnsmcXVvdDtj
+b2xvciZxdW90OzomcXVvdDsjMDAwMDAwJnF1b3Q7LCZxdW90O3NwYWNlJnF1b3Q7OjAsJnF1b3Q7
+c3omcXVvdDs6MCwmcXVvdDt2YWwmcXVvdDs6JnF1b3Q7bm9uZSZxdW90O30sJnF1b3Q7dG9wJnF1
+b3Q7OnsmcXVvdDtjb2xvciZxdW90OzomcXVvdDsjMDAwMDAwJnF1b3Q7LCZxdW90O3NwYWNlJnF1
+b3Q7OjAsJnF1b3Q7c3omcXVvdDs6MCwmcXVvdDt2YWwmcXVvdDs6JnF1b3Q7bm9uZSZxdW90O319
+LCZxdW90O2luZCZxdW90Ozp7JnF1b3Q7Zmlyc3RMaW5lJnF1b3Q7OjAsJnF1b3Q7bGVmdCZxdW90
+OzowLCZxdW90O3JpZ2h0JnF1b3Q7OjB9LCZxdW90O2pjJnF1b3Q7OiZxdW90O2xlZnQmcXVvdDss
+JnF1b3Q7a2VlcExpbmVzJnF1b3Q7OmZhbHNlLCZxdW90O2tlZXBOZXh0JnF1b3Q7OmZhbHNlLCZx
+dW90O3JQciZxdW90Ozp7JnF1b3Q7Y2FwcyZxdW90OzpmYWxzZSwmcXVvdDtjb2xvciZxdW90Ozom
+cXVvdDsjQTVBNUE1JnF1b3Q7LCZxdW90O2ZvbnRzJnF1b3Q7OnsmcXVvdDthc2NpaSZxdW90Ozom
+cXVvdDttaWNyb3NvZnQgeWFoZWkmcXVvdDssJnF1b3Q7Y3MmcXVvdDs6JnF1b3Q7bWljcm9zb2Z0
+IHlhaGVpJnF1b3Q7LCZxdW90O2Vhc3RBc2lhJnF1b3Q7OiZxdW90O21pY3Jvc29mdCB5YWhlaSZx
+dW90OywmcXVvdDtoQW5zaSZxdW90OzomcXVvdDttaWNyb3NvZnQgeWFoZWkmcXVvdDt9LCZxdW90
+O2l0YWxpYyZxdW90OzpmYWxzZSwmcXVvdDtrZXJuJnF1b3Q7OjAsJnF1b3Q7c3BhY2luZyZxdW90
+OzowLCZxdW90O3N6JnF1b3Q7OjEwLCZxdW90O3N6VW5pdCZxdW90OzomcXVvdDtwdCZxdW90O30s
+JnF1b3Q7c3BhY2luZyZxdW90Ozp7JnF1b3Q7YWZ0ZXImcXVvdDs6JnF1b3Q7MHB0JnF1b3Q7LCZx
+dW90O2FmdGVyQXV0b3NwYWNpbmcmcXVvdDs6ZmFsc2UsJnF1b3Q7YmVmb3JlJnF1b3Q7OiZxdW90
+OzBwdCZxdW90OywmcXVvdDtiZWZvcmVBdXRvc3BhY2luZyZxdW90OzpmYWxzZSwmcXVvdDtsaW5l
+JnF1b3Q7OjEsJnF1b3Q7bGluZVJ1bGUmcXVvdDs6JnF1b3Q7YXV0byZxdW90O30sJnF1b3Q7d2lu
+ZG93Q29udHJvbCZxdW90Ozp0cnVlfSxbJnF1b3Q7c3BhbiZxdW90Oyx7JnF1b3Q7ZGF0YS10eXBl
+JnF1b3Q7OiZxdW90O3RleHQmcXVvdDt9LFsmcXVvdDtzcGFuJnF1b3Q7LHsmcXVvdDtjYXBzJnF1
+b3Q7OmZhbHNlLCZxdW90O2NvbG9yJnF1b3Q7OiZxdW90OyNBNUE1QTUmcXVvdDssJnF1b3Q7Zm9u
+dHMmcXVvdDs6eyZxdW90O2FzY2lpJnF1b3Q7OiZxdW90O21pY3Jvc29mdCB5YWhlaSZxdW90Oywm
+cXVvdDtjcyZxdW90OzomcXVvdDttaWNyb3NvZnQgeWFoZWkmcXVvdDssJnF1b3Q7ZWFzdEFzaWEm
+cXVvdDs6JnF1b3Q7bWljcm9zb2Z0IHlhaGVpJnF1b3Q7LCZxdW90O2hBbnNpJnF1b3Q7OiZxdW90
+O21pY3Jvc29mdCB5YWhlaSZxdW90OywmcXVvdDtoaW50JnF1b3Q7OiZxdW90O2Vhc3RBc2lhJnF1
+b3Q7fSwmcXVvdDtzcGFjaW5nJnF1b3Q7OjAsJnF1b3Q7a2VybiZxdW90OzowLCZxdW90O3N6JnF1
+b3Q7OjEwLCZxdW90O3N6VW5pdCZxdW90OzomcXVvdDtwdCZxdW90OywmcXVvdDtkYXRhLXR5cGUm
+cXVvdDs6JnF1b3Q7bGVhZiZxdW90O30sJnF1b3Q777yI5b6u6L2v6ZuF6buR77yMMTQmcXVvdDtd
+LFsmcXVvdDtzcGFuJnF1b3Q7LHsmcXVvdDtjYXBzJnF1b3Q7OmZhbHNlLCZxdW90O2NvbG9yJnF1
+b3Q7OiZxdW90OyNBNUE1QTUmcXVvdDssJnF1b3Q7Zm9udHMmcXVvdDs6eyZxdW90O2FzY2lpJnF1
+b3Q7OiZxdW90O21pY3Jvc29mdCB5YWhlaSZxdW90OywmcXVvdDtjcyZxdW90OzomcXVvdDttaWNy
+b3NvZnQgeWFoZWkmcXVvdDssJnF1b3Q7ZWFzdEFzaWEmcXVvdDs6JnF1b3Q7bWljcm9zb2Z0IHlh
+aGVpJnF1b3Q7LCZxdW90O2hBbnNpJnF1b3Q7OiZxdW90O21pY3Jvc29mdCB5YWhlaSZxdW90Oywm
+cXVvdDtoaW50JnF1b3Q7OiZxdW90O2RlZmF1bHQmcXVvdDt9LCZxdW90O3NwYWNpbmcmcXVvdDs6
+MCwmcXVvdDtrZXJuJnF1b3Q7OjAsJnF1b3Q7c3omcXVvdDs6MTAsJnF1b3Q7c3pVbml0JnF1b3Q7
+OiZxdW90O3B0JnF1b3Q7LCZxdW90O2RhdGEtdHlwZSZxdW90OzomcXVvdDtsZWFmJnF1b3Q7fSwm
+cXVvdDtweCZxdW90O10sWyZxdW90O3NwYW4mcXVvdDsseyZxdW90O2NhcHMmcXVvdDs6ZmFsc2Us
+JnF1b3Q7Y29sb3ImcXVvdDs6JnF1b3Q7I0E1QTVBNSZxdW90OywmcXVvdDtmb250cyZxdW90Ozp7
+JnF1b3Q7YXNjaWkmcXVvdDs6JnF1b3Q7bWljcm9zb2Z0IHlhaGVpJnF1b3Q7LCZxdW90O2NzJnF1
+b3Q7OiZxdW90O21pY3Jvc29mdCB5YWhlaSZxdW90OywmcXVvdDtlYXN0QXNpYSZxdW90OzomcXVv
+dDttaWNyb3NvZnQgeWFoZWkmcXVvdDssJnF1b3Q7aEFuc2kmcXVvdDs6JnF1b3Q7bWljcm9zb2Z0
+IHlhaGVpJnF1b3Q7LCZxdW90O2hpbnQmcXVvdDs6JnF1b3Q7ZWFzdEFzaWEmcXVvdDt9LCZxdW90
+O3NwYWNpbmcmcXVvdDs6MCwmcXVvdDtrZXJuJnF1b3Q7OjAsJnF1b3Q7c3omcXVvdDs6MTAsJnF1
+b3Q7c3pVbml0JnF1b3Q7OiZxdW90O3B0JnF1b3Q7LCZxdW90O2RhdGEtdHlwZSZxdW90OzomcXVv
+dDtsZWFmJnF1b3Q7fSwmcXVvdDvvvIkmcXVvdDtdXV0sWyZxdW90O3AmcXVvdDsseyZxdW90O2Jk
+ciZxdW90Ozp7JnF1b3Q7Ym90dG9tJnF1b3Q7OnsmcXVvdDtjb2xvciZxdW90OzomcXVvdDsjMDAw
+MDAwJnF1b3Q7LCZxdW90O3NwYWNlJnF1b3Q7OjAsJnF1b3Q7c3omcXVvdDs6MCwmcXVvdDt2YWwm
+cXVvdDs6JnF1b3Q7bm9uZSZxdW90O30sJnF1b3Q7bGVmdCZxdW90Ozp7JnF1b3Q7Y29sb3ImcXVv
+dDs6JnF1b3Q7IzAwMDAwMCZxdW90OywmcXVvdDtzcGFjZSZxdW90OzowLCZxdW90O3N6JnF1b3Q7
+OjAsJnF1b3Q7dmFsJnF1b3Q7OiZxdW90O25vbmUmcXVvdDt9LCZxdW90O3JpZ2h0JnF1b3Q7Onsm
+cXVvdDtjb2xvciZxdW90OzomcXVvdDsjMDAwMDAwJnF1b3Q7LCZxdW90O3NwYWNlJnF1b3Q7OjAs
+JnF1b3Q7c3omcXVvdDs6MCwmcXVvdDt2YWwmcXVvdDs6JnF1b3Q7bm9uZSZxdW90O30sJnF1b3Q7
+dG9wJnF1b3Q7OnsmcXVvdDtjb2xvciZxdW90OzomcXVvdDsjMDAwMDAwJnF1b3Q7LCZxdW90O3Nw
+YWNlJnF1b3Q7OjAsJnF1b3Q7c3omcXVvdDs6MCwmcXVvdDt2YWwmcXVvdDs6JnF1b3Q7bm9uZSZx
+dW90O319LCZxdW90O2luZCZxdW90Ozp7JnF1b3Q7Zmlyc3RMaW5lJnF1b3Q7OjAsJnF1b3Q7bGVm
+dCZxdW90OzowLCZxdW90O3JpZ2h0JnF1b3Q7OjB9LCZxdW90O2pjJnF1b3Q7OiZxdW90O2xlZnQm
+cXVvdDssJnF1b3Q7a2VlcExpbmVzJnF1b3Q7OmZhbHNlLCZxdW90O2tlZXBOZXh0JnF1b3Q7OmZh
+bHNlLCZxdW90O3JQciZxdW90Ozp7JnF1b3Q7Y2FwcyZxdW90OzpmYWxzZSwmcXVvdDtjb2xvciZx
+dW90OzomcXVvdDsjMDAwMDAwJnF1b3Q7LCZxdW90O2ZvbnRzJnF1b3Q7OnsmcXVvdDthc2NpaSZx
+dW90OzomcXVvdDtUYWhvbWEmcXVvdDssJnF1b3Q7Y3MmcXVvdDs6JnF1b3Q7VGFob21hJnF1b3Q7
+LCZxdW90O2Vhc3RBc2lhJnF1b3Q7OiZxdW90O1RhaG9tYSZxdW90OywmcXVvdDtoQW5zaSZxdW90
+OzomcXVvdDtUYWhvbWEmcXVvdDssJnF1b3Q7aGludCZxdW90OzomcXVvdDtkZWZhdWx0JnF1b3Q7
+fSwmcXVvdDtoaWdobGlnaHQmcXVvdDs6JnF1b3Q7I0ZGRkYwMCZxdW90OywmcXVvdDtpdGFsaWMm
+cXVvdDs6ZmFsc2UsJnF1b3Q7c3BhY2luZyZxdW90OzowLCZxdW90O3N6JnF1b3Q7OjExLCZxdW90
+O3N6VW5pdCZxdW90OzomcXVvdDtwdCZxdW90O30sJnF1b3Q7c3BhY2luZyZxdW90Ozp7JnF1b3Q7
+YWZ0ZXImcXVvdDs6JnF1b3Q7MHB0JnF1b3Q7LCZxdW90O2FmdGVyQXV0b3NwYWNpbmcmcXVvdDs6
+ZmFsc2UsJnF1b3Q7YmVmb3JlJnF1b3Q7OiZxdW90OzBwdCZxdW90OywmcXVvdDtiZWZvcmVBdXRv
+c3BhY2luZyZxdW90OzpmYWxzZSwmcXVvdDtsaW5lJnF1b3Q7OjEuMzEsJnF1b3Q7bGluZVJ1bGUm
+cXVvdDs6JnF1b3Q7YXRMZWFzdCZxdW90O30sJnF1b3Q7d2luZG93Q29udHJvbCZxdW90Ozp0cnVl
+fSxbJnF1b3Q7c3BhbiZxdW90Oyx7JnF1b3Q7ZGF0YS10eXBlJnF1b3Q7OiZxdW90O3RleHQmcXVv
+dDt9LFsmcXVvdDtzcGFuJnF1b3Q7LHsmcXVvdDtjYXBzJnF1b3Q7OmZhbHNlLCZxdW90O2NvbG9y
+JnF1b3Q7OiZxdW90OyNBNUE1QTUmcXVvdDssJnF1b3Q7Zm9udHMmcXVvdDs6eyZxdW90O2FzY2lp
+JnF1b3Q7OiZxdW90O1RpbWVzIE5ldyBSb21hbiZxdW90OywmcXVvdDtjcyZxdW90OzomcXVvdDtU
+aW1lcyBOZXcgUm9tYW4mcXVvdDssJnF1b3Q7ZWFzdEFzaWEmcXVvdDs6JnF1b3Q7VGFob21hJnF1
+b3Q7LCZxdW90O2hBbnNpJnF1b3Q7OiZxdW90O1RpbWVzIE5ldyBSb21hbiZxdW90O30sJnF1b3Q7
+aGlnaGxpZ2h0JnF1b3Q7OiZxdW90OyNGRkZGMDAmcXVvdDssJnF1b3Q7c3BhY2luZyZxdW90Ozow
+LCZxdW90O2tlcm4mcXVvdDs6MCwmcXVvdDtzeiZxdW90OzoxMSwmcXVvdDtzelVuaXQmcXVvdDs6
+JnF1b3Q7cHQmcXVvdDssJnF1b3Q7ZGF0YS10eXBlJnF1b3Q7OiZxdW90O2xlYWYmcXVvdDt9LCZx
+dW90O1RoaXMgbGV0dGVyIGNvbnRhaW5zIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbiB3aGljaCBp
+cyByZXF1ZXN0ZWQgdG8gYmUga2VwdCBjb25maWRlbnRpYWwgYnkgdGhlIHJlY2lwaWVudCBhbmQg
+c2hhbGwgbm90IGJlIGRpc2Nsb3NlZCB0byBhbnkgdGhpcmQgcGFydHkgd2l0aG91dCBwZXJtaXNz
+aW9uLiBUaGFuayB5b3UuJnF1b3Q7XV1dXSI+PHAgc3R5bGU9InRleHQtYWxpZ246IGxlZnQ7IHRl
+eHQtaW5kZW50OiAwcHg7IG1hcmdpbi1sZWZ0OiAwcHg7IG1hcmdpbi10b3A6IDBweDsgbWFyZ2lu
+LWJvdHRvbTogMHB4OyI+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoMTY1LCAxNjUsIDE2NSk7IGZv
+bnQtZmFtaWx5OiAmcXVvdDttaWNyb3NvZnQgeWFoZWkmcXVvdDssICZxdW90O21pY3Jvc29mdCB5
+YWhlaSZxdW90OywgJnF1b3Q7bWljcm9zb2Z0IHlhaGVpJnF1b3Q7LCAmcXVvdDttaWNyb3NvZnQg
+eWFoZWkmcXVvdDs7Ij7mraTkv6Hku7bljIXlkKvkv53lr4bkv6Hmga/vvIzor7fmlLbku7bkurrk
+uojku6Xkv53lr4bvvIzmnKrnu4/orrjlj6/vvIzor7fli7/lkJHnrKzkuInkurrmiqvpnLLvvIzo
+sKLosKLjgII8L3NwYW4+PGJyPjwvcD48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBsZWZ0OyB0ZXh0
+LWluZGVudDogMHB4OyBtYXJnaW4tbGVmdDogMHB4OyBtYXJnaW4tdG9wOiAwcHg7IG1hcmdpbi1i
+b3R0b206IDBweDsgbGluZS1oZWlnaHQ6IDEuNWVtOyI+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2Io
+MTY1LCAxNjUsIDE2NSk7IGJhY2tncm91bmQtY29sb3I6IHJnYigyNTUsIDI1NSwgMjU1KTsgZm9u
+dC1mYW1pbHk6ICZxdW90O3RpbWVzIG5ldyByb21hbiZxdW90OzsgZm9udC1zaXplOiAxNHB4OyI+
+VGhpcyZuYnNwO2xldHRlciZuYnNwO2NvbnRhaW5zJm5ic3A7Y29uZmlkZW50aWFsJm5ic3A7aW5m
+b3JtYXRpb24mbmJzcDt3aGljaCZuYnNwO2lzJm5ic3A7cmVxdWVzdGVkJm5ic3A7dG8mbmJzcDti
+ZSZuYnNwO2tlcHQmbmJzcDtjb25maWRlbnRpYWwmbmJzcDtieSZuYnNwO3RoZSZuYnNwO3JlY2lw
+aWVudCZuYnNwO2FuZCZuYnNwO3NoYWxsJm5ic3A7bm90Jm5ic3A7YmUmbmJzcDtkaXNjbG9zZWQm
+bmJzcDt0byZuYnNwO2FueSZuYnNwO3RoaXJkJm5ic3A7cGFydHkmbmJzcDt3aXRob3V0Jm5ic3A7
+cGVybWlzc2lvbi4mbmJzcDtUaGFuayZuYnNwO3lvdS48L3NwYW4+PC9kaXY+PC9hcnRpY2xlPjxk
+aXYgc3R5bGU9ImNsZWFyOiBib3RoOyI+PGJyPjwvZGl2Pg==
+------=ALIBOUNDARY_1759_7f270f213700_6822e63d_19d96f--
 
