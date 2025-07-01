@@ -2,62 +2,97 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E8ACADE908
-	for <lists+spice-devel@lfdr.de>; Wed, 18 Jun 2025 12:32:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC996AEF287
+	for <lists+spice-devel@lfdr.de>; Tue,  1 Jul 2025 11:08:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3654710E7F3;
-	Wed, 18 Jun 2025 10:32:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1129410E557;
+	Tue,  1 Jul 2025 09:08:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="otcUhR4M";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="LxhgIsGG";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 956 seconds by postgrey-1.36 at gabe;
- Wed, 18 Jun 2025 08:01:31 UTC
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
- by gabe.freedesktop.org (Postfix) with ESMTP id D440E10E7A0;
- Wed, 18 Jun 2025 08:01:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
- Message-ID; bh=iJe8xguxUKaxBEIyQgGloMLTQZvG1pmxXtuDZXWFdMk=; b=o
- tcUhR4M2NRRiyHXlBSP8R9EjB3C0gNCiY2j/Cxf6MlBoWrnbQ0HI3uC1XcDDqdep
- Vy64Xqnph6RWZOZtTYws5G+AGfJpvS/TzRfXAxCiSzlanYJAu9SU6UEDzLjNBYpK
- dZf2bxBnrt0BDW3/atNvJflluCtwkq+QKmU7FGQFOc=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by
- ajax-webmail-wmsvr-40-103 (Coremail) ; Wed, 18 Jun 2025 15:45:00 +0800
- (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Wed, 18 Jun 2025 15:45:00 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Thomas Zimmermann" <tzimmermann@suse.de>
-Cc: simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, geert@linux-m68k.org,
- tomi.valkeinen@ideasonboard.com, dri-devel@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org, freedreno@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
- linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
- linux-renesas-soc@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org,
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org
-Subject: Re:[PATCH v5 02/25] drm/dumb-buffers: Provide helper to set pitch
- and size
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20240801(9da12a7b)
- Copyright (c) 2002-2025 www.mailtech.cn 163com
-In-Reply-To: <20250613090431.127087-3-tzimmermann@suse.de>
-References: <20250613090431.127087-1-tzimmermann@suse.de>
- <20250613090431.127087-3-tzimmermann@suse.de>
-X-NTES-SC: AL_Qu2eAv6YvU8r5iWeZekfmkcVgOw9UcO5v/Qk3oZXOJF8jC3pxB8AV3NTMGPMwcWDBhmonQiHSjJy8+ZjY5ByWr8wBZ26EkXLbzVmS1V4yXEbfg==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E159F10E54C;
+ Tue,  1 Jul 2025 09:08:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1751360881; x=1782896881;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=o199w96ohM3+4VdIPYszkOUZkP/EUOjqggEXz9s7gG4=;
+ b=LxhgIsGGtLHimeLhYBqowPNWKMDjuXJSnKd+qtMcFo7Z2Y504qgcmuoF
+ 9qbyTkurEDoZLVhfRvyNKNCVXk19gXAe3EnzXQ4U0ZIYfXSKDLCstuhzu
+ F8kxrMAe11oWCg4TPswzBQTBRigEluQ/f2/IcVJqpB+HdRxk1PemwXzOH
+ bz5835k3uoEzIgnBvUzx6Qp0yBIdK5ZGoibjy17YTr4oZuMBgvQE+4BJb
+ 6EVWdIyP7SdF0Q2CaEIdH6BsEhPwvmKJOtMTahTxmuG5PDITyuSEKKEJr
+ Y2JqoD7IF8gbEbToUXDDIQk+TfzgVfFhb4DeCdW3RnurTYlNs505TOzmf A==;
+X-CSE-ConnectionGUID: RDcwBVmEQZOzdOvA+n7/zg==
+X-CSE-MsgGUID: huGKapVKTCyDqLJNwfjsHQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11480"; a="64218360"
+X-IronPort-AV: E=Sophos;i="6.16,279,1744095600"; d="scan'208";a="64218360"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+ by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Jul 2025 02:07:59 -0700
+X-CSE-ConnectionGUID: F1Mthv0KQyuMBfwFRNDXFA==
+X-CSE-MsgGUID: B+uIT/9US/myF2kG2vmHRQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,279,1744095600"; d="scan'208";a="159426908"
+Received: from zzombora-mobl1.ger.corp.intel.com (HELO stinkbox)
+ ([10.245.245.11])
+ by orviesa005.jf.intel.com with SMTP; 01 Jul 2025 02:07:46 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Tue, 01 Jul 2025 12:07:44 +0300
+From: Ville Syrjala <ville.syrjala@linux.intel.com>
+To: dri-devel@lists.freedesktop.org
+Cc: intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Inki Dae <inki.dae@samsung.com>,
+	Seung-Woo Kim <sw0312.kim@samsung.com>,
+	Kyungmin Park <kyungmin.park@samsung.com>,
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+	Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Rob Clark <robdclark@gmail.com>,
+	Abhinav Kumar <quic_abhinavk@quicinc.com>,
+	Dmitry Baryshkov <lumag@kernel.org>, Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Marek Vasut <marex@denx.de>, Stefan Agner <stefan@agner.ch>,
+	Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+	Biju Das <biju.das.jz@bp.renesas.com>,
+	Sandy Huang <hjc@rock-chips.com>,
+	=?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Mikko Perttunen <mperttunen@nvidia.com>,
+	Dave Stevenson <dave.stevenson@raspberrypi.com>,
+	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
+	Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>,
+	Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Chia-I Wu <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+	virtualization@lists.linux.dev, spice-devel@lists.freedesktop.org,
+	linux-renesas-soc@vger.kernel.org, linux-tegra@vger.kernel.org,
+	Laurent@freedesktop.org, "Pinchart <la"@freedesktop.org
+Subject: [PATCH v2 04/19] drm: Pass the format info to .fb_create()
+Date: Tue,  1 Jul 2025 12:07:07 +0300
+Message-ID: <20250701090722.13645-5-ville.syrjala@linux.intel.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250701090722.13645-1-ville.syrjala@linux.intel.com>
+References: <20250701090722.13645-1-ville.syrjala@linux.intel.com>
 MIME-Version: 1.0
-Message-ID: <6d7ec290.6d99.19781ff9696.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: ZygvCgD3n4h8blJoNyQfAA--.23669W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbB0hNwXmhSbBhBTgABsv
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-X-Mailman-Approved-At: Wed, 18 Jun 2025 10:32:25 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,243 +107,824 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-CkhpLCAKCkF0IDIwMjUtMDYtMTMgMTc6MDA6MjEsICJUaG9tYXMgWmltbWVybWFubiIgPHR6aW1t
-ZXJtYW5uQHN1c2UuZGU+IHdyb3RlOgo+QWRkIGRybV9tb2Rlc19zaXplX2R1bWIoKSwgYSBoZWxw
-ZXIgdG8gY2FsY3VsYXRlIHRoZSBkdW1iLWJ1ZmZlcgo+c2NhbmxpbmUgcGl0Y2ggYW5kIGFsbG9j
-YXRpb24gc2l6ZS4gSW1wbGVtZW50YXRpb25zIG9mIHN0cnVjdAo+ZHJtX2RyaXZlci5kdW1iX2Ny
-ZWF0ZSBjYW4gY2FsbCB0aGUgbmV3IGhlbHBlciBmb3IgdGhlaXIgc2l6ZQo+Y29tcHV0YXRpb25z
-Lgo+Cj5UaGVyZSBpcyBjdXJyZW50bHkgcXVpdGUgYSBiaXQgb2YgY29kZSBkdXBsaWNhdGlvbiBh
-bW9uZyBEUk0ncwo+bWVtb3J5IG1hbmFnZXJzLiBFYWNoIGNhbGN1bGF0ZXMgc2NhbmxpbmUgcGl0
-Y2ggYW5kIGJ1ZmZlciBzaXplCj5mcm9tIHRoZSBnaXZlbiBhcmd1bWVudHMsIGJ1dCB0aGUgaW1w
-bGVtZW50YXRpb25zIGFyZSBpbmNvbnNpc3RlbnQKPmluIGhvdyB0aGV5IHRyZWF0IGFsaWdubWVu
-dCBhbmQgZm9ybWF0IHN1cHBvcnQuIExhdGVyIHBhdGNoZXMgd2lsbAo+dW5pZnkgdGhpcyBjb2Rl
-IG9uIHRvcCBvZiBkcm1fbW9kZV9zaXplX2R1bWIoKSBhcyBtdWNoIGFzIHBvc3NpYmxlLgo+Cj5k
-cm1fbW9kZV9zaXplX2R1bWIoKSB1c2VzIGV4aXN0aW5nIDRDQyBmb3JtYXQgaGVscGVycyB0byBp
-bnRlcnByZXQKPnRoZSBnaXZlbiBjb2xvciBtb2RlLiBUaGlzIG1ha2VzIHRoZSBkdW1iLWJ1ZmZl
-ciBpbnRlcmZhY2UgYmVoYXZlCj5zaW1pbGFyIHRoZSBrZXJuZWwncyB2aWRlbz0gcGFyYW1ldGVy
-LiBDdXJyZW50IHBlci1kcml2ZXIgaW1wbGVtZW50YXRpb25zCj5hZ2FpbiBsaWtlbHkgaGF2ZSBz
-dWJ0bGUgZGlmZmVyZW5jZXMgb3IgYnVncyBpbiBob3cgdGhleSBzdXBwb3J0IGNvbG9yCj5tb2Rl
-cy4KPgo+VGhlIGR1bWItYnVmZmVyIFVBUEkgaXMgb25seSBzcGVjaWZpZWQgZm9yIGtub3duIGNv
-bG9yIG1vZGVzLiBUaGVzZQo+dmFsdWVzIGRlc2NyaWJlIGxpbmVhciwgc2luZ2xlLXBsYW5lIFJH
-QiBjb2xvciBmb3JtYXRzIG9yIGxlZ2FjeSBpbmRleAo+Zm9ybWF0cy4gT3RoZXIgdmFsdWVzIHNo
-b3VsZCBub3QgYmUgc3BlY2lmaWVkLiBCdXQgc29tZSB1c2VyIHNwYWNlCj5zdGlsbCBkb2VzLiBT
-byBmb3IgdW5rbm93biBjb2xvciBtb2RlcywgdGhlcmUgYXJlIGEgbnVtYmVyIG9mIGtub3duCj5l
-eGNlcHRpb25zIGZvciB3aGljaCBkcm1fbW9kZV9zaXplX2R1bWIoKSBjYWxjdWxhdGVzIHRoZSBw
-aXRjaCBmcm9tCj50aGUgYnBwIHZhbHVlLCBhcyBiZWZvcmUuIEFsbCBvdGhlciB2YWx1ZXMgd29y
-ayB0aGUgc2FtZSBidXQgcHJpbnQKPmFuIGVycm9yLgo+Cj52NToKPi0gY2hlY2sgZm9yIG92ZXJm
-bG93cyB3aXRoIGNoZWNrX211bF9vdmVyZmxvdygpIChUb21pKQo+djQ6Cj4tIHVzZSAldSBjb252
-ZXJzaW9uIHNwZWNpZmllciAoR2VlcnQpCj4tIGxpc3QgRFJNX0ZPUk1BVF9EbiBpbiBVQVBJIGRv
-Y3MgKEdlZXJ0KQo+LSBhdm9pZCBkbWVzZyBzcGFtbWluZyB3aXRoIGRybV93YXJuX29uY2UoKSAo
-U2ltYSkKPi0gYWRkIG1vcmUgaW5mb3JtYXRpb24gYWJvdXQgYnBwIHNwZWNpYWwgY2FzZSAoU2lt
-YSkKPi0gY2xhcmlmeSBwYXJhbWV0ZXJzIGZvciBoYXJkd2FyZSBhbGlnbm1lbnQKPi0gYWRkIGEg
-VE9ETyBpdGVtIGZvciBEVU1CX0NSRUFURTIKPnYzOgo+LSBkb2N1bWVudCB0aGUgVUFQSSBzZW1h
-bnRpY3MKPi0gY29tcHV0ZSBzY2FubGluZSBwaXRjaCBmcm9tIGZvciB1bmtub3duIGNvbG9yIG1v
-ZGVzIChBbmR5LCBUb21pKQo+Cj5TaWduZWQtb2ZmLWJ5OiBUaG9tYXMgWmltbWVybWFubiA8dHpp
-bW1lcm1hbm5Ac3VzZS5kZT4KPlJldmlld2VkLWJ5OiBUb21pIFZhbGtlaW5lbiA8dG9taS52YWxr
-ZWluZW5AaWRlYXNvbmJvYXJkLmNvbT4KICBSZXZpZXdlZC1ieTogQW5keSBZYW4gPGFuZHlzaHJr
-QDE2My5jb20+Cgo+LS0tCj4gRG9jdW1lbnRhdGlvbi9ncHUvdG9kby5yc3QgICAgICAgICB8ICAy
-NyArKysrKysKPiBkcml2ZXJzL2dwdS9kcm0vZHJtX2R1bWJfYnVmZmVycy5jIHwgMTMwICsrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrCj4gaW5jbHVkZS9kcm0vZHJtX2R1bWJfYnVmZmVycy5o
-ICAgICB8ICAxNCArKysrCj4gaW5jbHVkZS91YXBpL2RybS9kcm1fbW9kZS5oICAgICAgICB8ICA1
-MCArKysrKysrKysrLQo+IDQgZmlsZXMgY2hhbmdlZCwgMjIwIGluc2VydGlvbnMoKyksIDEgZGVs
-ZXRpb24oLSkKPiBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9kcm0vZHJtX2R1bWJfYnVmZmVy
-cy5oCj4KPmRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL2dwdS90b2RvLnJzdCBiL0RvY3VtZW50
-YXRpb24vZ3B1L3RvZG8ucnN0Cj5pbmRleCBiZTg2MzdkYTNmZTkuLmY3MzEyYWZhODdiNSAxMDA2
-NDQKPi0tLSBhL0RvY3VtZW50YXRpb24vZ3B1L3RvZG8ucnN0Cj4rKysgYi9Eb2N1bWVudGF0aW9u
-L2dwdS90b2RvLnJzdAo+QEAgLTY0OCw2ICs2NDgsMzMgQEAgQ29udGFjdDogVGhvbWFzIFppbW1l
-cm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+LCBTaW1vbmEgVmV0dGVyCj4gCj4gTGV2ZWw6IEFk
-dmFuY2VkCj4gCj4rSW1wbGVtZW50IGEgbmV3IERVTUJfQ1JFQVRFMiBpb2N0bAo+Ky0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPisKPitUaGUgY3VycmVudCBEVU1CX0NSRUFURSBp
-b2N0bCBpcyBub3Qgd2VsbCBkZWZpbmVkLiBJbnN0ZWFkIG9mIGEgcGl4ZWwgYW5kCj4rZnJhbWVi
-dWZmZXIgZm9ybWF0LCBpdCBvbmx5IGFjY2VwdHMgYSBjb2xvciBtb2RlIG9mIHZhZ3VlIHNlbWFu
-dGljcy4gQXNzdW1pbmcKPithIGxpbmVhciBmcmFtZWJ1ZmZlciwgdGhlIGNvbG9yIG1vZGUgZ2l2
-ZXMgYW5kIGlkZWEgb2YgdGhlIHN1cHBvcnRlZCBwaXhlbAo+K2Zvcm1hdC4gQnV0IHVzZXJzcGFj
-ZSBlZmZlY3RpdmVseSBoYXMgdG8gZ3Vlc3MgdGhlIGNvcnJlY3QgdmFsdWVzLiBJdCByZWFsbHkK
-Pitvbmx5IHdvcmtzIHJlbGlhYmxlIHdpdGggZnJhbWVidWZmZXJzIGluIFhSR0I4ODg4LiBVc2Vy
-c3BhY2UgaGFzIGJlZ3VuIHRvCj4rd29ya2Fyb3VuZCB0aGVzZSBsaW1pdGF0aW9ucyBieSBjb21w
-dXRpbmcgYXJiaXRyYXJ5IGZvcm1hdCdzIGJ1ZmZlciBzaXplcyBhbmQKPitjYWxjdWxhdGluZyB0
-aGVpciBzaXplcyBpbiB0ZXJtcyBvZiBYUkdCODg4OCBwaXhlbHMuCj4rCj4rT25lIHBvc3NpYmxl
-IHNvbHV0aW9uIGlzIGEgbmV3IGlvY3RsIERVTUJfQ1JFQVRFMi4gSXQgc2hvdWxkIGFjY2VwdCBh
-IERSTQo+K2Zvcm1hdCBhbmQgYSBmb3JtYXQgbW9kaWZpZXIgdG8gcmVzb2x2ZSB0aGUgY29sb3Ig
-bW9kZSdzIGFtYmlndWl0eS4gQXMKPitmcmFtZWJ1ZmZlcnMgY2FuIGJlIG11bHRpLXBsYW5hciwg
-dGhlIG5ldyBpb2N0bCBoYXMgdG8gcmV0dXJuIHRoZSBidWZmZXIgc2l6ZSwKPitwaXRjaCBhbmQg
-R0VNIGhhbmRsZSBmb3IgZWFjaCBpbmRpdmlkdWFsIGNvbG9yIHBsYW5lLgo+Kwo+K0luIHRoZSBm
-aXJzdCBzdGVwLCB0aGUgbmV3IGlvY3RsIGNhbiBiZSBsaW1pdGVkIHRvIHRoZSBjdXJyZW50IGZl
-YXR1cmVzIG9mCj4rdGhlIGV4aXN0aW5nIERVTUJfQ1JFQVRFLiBJbmRpdmlkdWFsIGRyaXZlcnMg
-Y2FuIHRoZW4gYmUgZXh0ZW5kZWQgdG8gc3VwcG9ydAo+K211bHRpLXBsYW5hciBmb3JtYXRzLiBS
-b2NrY2hpcCBtaWdodCByZXF1aXJlIHRoaXMgYW5kIHdvdWxkIGJlIGEgZ29vZCBjYW5kaWRhdGUu
-Cj4rCj4rSW4gYWRkaXRpb24gdG8gdGhlIGtlcm5lbCBpbXBsZW1lbnRhdGlvbiwgdGhlcmUgbXVz
-dCBiZSB1c2VyLXNwYWNlIHN1cHBvcnQKPitmb3IgdGhlIG5ldyBpb2N0bC4gVGhlcmUncyBjb2Rl
-IGluIE1lc2EgdGhhdCBtaWdodCBiZSBhYmxlIHRvIHVzZSB0aGUgbmV3Cj4rY2FsbC4KPisKPitD
-b250YWN0OiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4KPisKPitMZXZl
-bDogQWR2YW5jZWQKPiAKPiBCZXR0ZXIgVGVzdGluZwo+ID09PT09PT09PT09PT09Cj5kaWZmIC0t
-Z2l0IGEvZHJpdmVycy9ncHUvZHJtL2RybV9kdW1iX2J1ZmZlcnMuYyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9kcm1fZHVtYl9idWZmZXJzLmMKPmluZGV4IDk5MTZhYWY1YjNmMi4uZTllZWQ5YTViNzYwIDEw
-MDY0NAo+LS0tIGEvZHJpdmVycy9ncHUvZHJtL2RybV9kdW1iX2J1ZmZlcnMuYwo+KysrIGIvZHJp
-dmVycy9ncHUvZHJtL2RybV9kdW1iX2J1ZmZlcnMuYwo+QEAgLTI1LDYgKzI1LDggQEAKPiAKPiAj
-aW5jbHVkZSA8ZHJtL2RybV9kZXZpY2UuaD4KPiAjaW5jbHVkZSA8ZHJtL2RybV9kcnYuaD4KPisj
-aW5jbHVkZSA8ZHJtL2RybV9kdW1iX2J1ZmZlcnMuaD4KPisjaW5jbHVkZSA8ZHJtL2RybV9mb3Vy
-Y2MuaD4KPiAjaW5jbHVkZSA8ZHJtL2RybV9nZW0uaD4KPiAjaW5jbHVkZSA8ZHJtL2RybV9tb2Rl
-Lmg+Cj4gCj5AQCAtNTcsNiArNTksMTM0IEBACj4gICogYSBoYXJkd2FyZS1zcGVjaWZpYyBpb2N0
-bCB0byBhbGxvY2F0ZSBzdWl0YWJsZSBidWZmZXIgb2JqZWN0cy4KPiAgKi8KPiAKPitzdGF0aWMg
-aW50IGRybV9tb2RlX2FsaWduX2R1bWIoc3RydWN0IGRybV9tb2RlX2NyZWF0ZV9kdW1iICphcmdz
-LAo+KwkJCSAgICAgICB1bnNpZ25lZCBsb25nIGh3X3BpdGNoX2FsaWduLAo+KwkJCSAgICAgICB1
-bnNpZ25lZCBsb25nIGh3X3NpemVfYWxpZ24pCj4rewo+Kwl1MzIgcGl0Y2ggPSBhcmdzLT5waXRj
-aDsKPisJdTMyIHNpemU7Cj4rCj4rCWlmICghcGl0Y2gpCj4rCQlyZXR1cm4gLUVJTlZBTDsKPisK
-PisJaWYgKGh3X3BpdGNoX2FsaWduKQo+KwkJcGl0Y2ggPSByb3VuZHVwKHBpdGNoLCBod19waXRj
-aF9hbGlnbik7Cj4rCj4rCWlmICghaHdfc2l6ZV9hbGlnbikKPisJCWh3X3NpemVfYWxpZ24gPSBQ
-QUdFX1NJWkU7Cj4rCWVsc2UgaWYgKCFJU19BTElHTkVEKGh3X3NpemVfYWxpZ24sIFBBR0VfU0la
-RSkpCj4rCQlyZXR1cm4gLUVJTlZBTDsgLyogVE9ETzogaGFuZGxlIHRoaXMgaWYgbmVjZXNzYXJ5
-ICovCj4rCj4rCWlmIChjaGVja19tdWxfb3ZlcmZsb3coYXJncy0+aGVpZ2h0LCBwaXRjaCwgJnNp
-emUpKQo+KwkJcmV0dXJuIC1FSU5WQUw7Cj4rCXNpemUgPSBBTElHTihzaXplLCBod19zaXplX2Fs
-aWduKTsKPisJaWYgKCFzaXplKQo+KwkJcmV0dXJuIC1FSU5WQUw7Cj4rCj4rCWFyZ3MtPnBpdGNo
-ID0gcGl0Y2g7Cj4rCWFyZ3MtPnNpemUgPSBzaXplOwo+Kwo+KwlyZXR1cm4gMDsKPit9Cj4rCj4r
-LyoqCj4rICogZHJtX21vZGVfc2l6ZV9kdW1iIC0gQ2FsY3VsYXRlcyB0aGUgc2NhbmxpbmUgYW5k
-IGJ1ZmZlciBzaXplcyBmb3IgZHVtYiBidWZmZXJzCj4rICogQGRldjogRFJNIGRldmljZQo+KyAq
-IEBhcmdzOiBQYXJhbWV0ZXJzIGZvciB0aGUgZHVtYiBidWZmZXIKPisgKiBAaHdfcGl0Y2hfYWxp
-Z246IEhhcmR3YXJlIHNjYW5saW5lIGFsaWdubWVudCBpbiBieXRlcwo+KyAqIEBod19zaXplX2Fs
-aWduOiBIYXJkd2FyZSBidWZmZXItc2l6ZSBhbGlnbm1lbnQgaW4gYnl0ZXMKPisgKgo+KyAqIFRo
-ZSBoZWxwZXIgZHJtX21vZGVfc2l6ZV9kdW1iKCkgY2FsY3VsYXRlcyB0aGUgc2l6ZSBvZiB0aGUg
-YnVmZmVyCj4rICogYWxsb2NhdGlvbiBhbmQgdGhlIHNjYW5saW5lIHNpemUgZm9yIGEgZHVtYiBi
-dWZmZXIuIENhbGxlcnMgaGF2ZSB0bwo+KyAqIHNldCB0aGUgYnVmZmVycyB3aWR0aCwgaGVpZ2h0
-IGFuZCBjb2xvciBtb2RlIGluIHRoZSBhcmd1bWVudCBAYXJnLgo+KyAqIFRoZSBoZWxwZXIgdmFs
-aWRhdGVzIHRoZSBjb3JyZWN0bmVzcyBvZiB0aGUgaW5wdXQgYW5kIHRlc3RzIGZvcgo+KyAqIHBv
-c3NpYmxlIG92ZXJmbG93cy4gSWYgc3VjY2Vzc2Z1bCwgaXQgcmV0dXJucyB0aGUgZHVtYiBidWZm
-ZXIncwo+KyAqIHJlcXVpcmVkIHNjYW5saW5lIHBpdGNoIGFuZCBzaXplIGluICZhcmdzLgo+KyAq
-Cj4rICogVGhlIHBhcmFtZXRlciBAaHdfcGl0Y2hfYWxpZ24gYWxsb3dzIHRoZSBkcml2ZXIgdG8g
-c3BlY2lmaWVzIGFuCj4rICogYWxpZ25tZW50IGZvciB0aGUgc2NhbmxpbmUgcGl0Y2gsIGlmIHRo
-ZSBoYXJkd2FyZSByZXF1aXJlcyBhbnkuIFRoZQo+KyAqIGNhbGN1bGF0ZWQgcGl0Y2ggd2lsbCBi
-ZSBhIG11bHRpcGxlIG9mIHRoZSBhbGlnbm1lbnQuIFRoZSBwYXJhbWV0ZXIKPisgKiBAaHdfc2l6
-ZV9hbGlnbiBhbGxvd3MgdG8gc3BlY2lmeSBhbiBhbGlnbm1lbnQgZm9yIGJ1ZmZlciBzaXplcy4g
-VGhlCj4rICogcHJvdmlkZWQgYWxpZ25tZW50IHNob3VsZCByZXByZXNlbnQgcmVxdWlyZW1lbnRz
-IG9mIHRoZSBncmFwaGljcwo+KyAqIGhhcmR3YXJlLiBkcm1fbW9kZV9zaXplX2R1bWIoKSBoYW5k
-bGVzIEdFTS1yZWxhdGVkIGNvbnN0cmFpbnRzCj4rICogYXV0b21hdGljYWxseSBhY3Jvc3MgYWxs
-IGRyaXZlcnMgYW5kIGhhcmR3YXJlLiBGb3IgZXhhbXBsZSwgdGhlCj4rICogcmV0dXJuZWQgYnVm
-ZmVyIHNpemUgaXMgYWx3YXlzIGEgbXVsdGlwbGUgb2YgUEFHRV9TSVpFLCB3aGljaCBpcwo+KyAq
-IHJlcXVpcmVkIGJ5IG1tYXAoKS4KPisgKgo+KyAqIFJldHVybnM6Cj4rICogWmVybyBvbiBzdWNj
-ZXNzLCBvciBhIG5lZ2F0aXZlIGVycm9yIGNvZGUgb3RoZXJ3aXNlLgo+KyAqLwo+K2ludCBkcm1f
-bW9kZV9zaXplX2R1bWIoc3RydWN0IGRybV9kZXZpY2UgKmRldiwKPisJCSAgICAgICBzdHJ1Y3Qg
-ZHJtX21vZGVfY3JlYXRlX2R1bWIgKmFyZ3MsCj4rCQkgICAgICAgdW5zaWduZWQgbG9uZyBod19w
-aXRjaF9hbGlnbiwKPisJCSAgICAgICB1bnNpZ25lZCBsb25nIGh3X3NpemVfYWxpZ24pCj4rewo+
-Kwl1NjQgcGl0Y2ggPSAwOwo+Kwl1MzIgZm91cmNjOwo+Kwo+KwkvKgo+KwkgKiBUaGUgc2Nhbmxp
-bmUgcGl0Y2ggZGVwZW5kcyBvbiB0aGUgYnVmZmVyIHdpZHRoIGFuZCB0aGUgY29sb3IKPisJICog
-Zm9ybWF0LiBUaGUgbGF0dGVyIGlzIHNwZWNpZmllZCBhcyBhIGNvbG9yLW1vZGUgY29uc3RhbnQg
-Zm9yCj4rCSAqIHdoaWNoIHdlIGZpcnN0IGhhdmUgdG8gZmluZCB0aGUgY29ycmVzcG9uZGluZyBj
-b2xvciBmb3JtYXQuCj4rCSAqCj4rCSAqIERpZmZlcmVudCBjb2xvciBmb3JtYXRzIGNhbiBoYXZl
-IHRoZSBzYW1lIGNvbG9yLW1vZGUgY29uc3RhbnQuCj4rCSAqIEZvciBleGFtcGxlIFhSR0I4ODg4
-IGFuZCBCR1JYODg4OCBib3RoIGhhdmUgYSBjb2xvciBtb2RlIG9mIDMyLgo+KwkgKiBJdCBpcyBw
-b3NzaWJsZSB0byB1c2UgZGlmZmVyZW50IGZvcm1hdHMgZm9yIGR1bWItYnVmZmVyIGFsbG9jYXRp
-b24KPisJICogYW5kIHJlbmRlcmluZyBhcyBsb25nIGFzIGFsbCBpbnZvbHZlZCBmb3JtYXRzIHNo
-YXJlIHRoZSBzYW1lCj4rCSAqIGNvbG9yLW1vZGUgY29uc3RhbnQuCj4rCSAqLwo+Kwlmb3VyY2Mg
-PSBkcm1fZHJpdmVyX2NvbG9yX21vZGVfZm9ybWF0KGRldiwgYXJncy0+YnBwKTsKPisJaWYgKGZv
-dXJjYyAhPSBEUk1fRk9STUFUX0lOVkFMSUQpIHsKPisJCWNvbnN0IHN0cnVjdCBkcm1fZm9ybWF0
-X2luZm8gKmluZm8gPSBkcm1fZm9ybWF0X2luZm8oZm91cmNjKTsKPisKPisJCWlmICghaW5mbykK
-PisJCQlyZXR1cm4gLUVJTlZBTDsKPisJCXBpdGNoID0gZHJtX2Zvcm1hdF9pbmZvX21pbl9waXRj
-aChpbmZvLCAwLCBhcmdzLT53aWR0aCk7Cj4rCX0gZWxzZSBpZiAoYXJncy0+YnBwKSB7Cj4rCQkv
-Kgo+KwkJICogU29tZSB1c2Vyc3BhY2UgdGhyb3dzIGluIGFyYml0cmFyeSB2YWx1ZXMgZm9yIGJw
-cCBhbmQKPisJCSAqIHJlbGllcyBvbiB0aGUga2VybmVsIHRvIGZpZ3VyZSBpdCBvdXQuIEluIHRo
-aXMgY2FzZSB3ZQo+KwkJICogZmFsbCBiYWNrIHRvIHRoZSBvbGQgbWV0aG9kIG9mIHVzaW5nIGJw
-cCBkaXJlY3RseS4gVGhlCj4rCQkgKiBvdmVyLWNvbW1pdG1lbnQgb2YgbWVtb3J5IGZyb20gdGhl
-IHJvdW5kaW5nIGlzIGFjY2VwdGFibGUKPisJCSAqIGZvciBjb21wYXRpYmlsaXR5IHdpdGggbGVn
-YWN5IHVzZXJzcGFjZS4gV2UgaGF2ZSBhIG51bWJlcgo+KwkJICogb2YgZGVwcmVjYXRlZCBsZWdh
-Y3kgdmFsdWVzIHRoYXQgYXJlIGV4cGxpY2l0bHkgc3VwcG9ydGVkLgo+KwkJICovCj4rCQlzd2l0
-Y2ggKGFyZ3MtPmJwcCkgewo+KwkJZGVmYXVsdDoKPisJCQlkcm1fd2Fybl9vbmNlKGRldiwKPisJ
-CQkJICAgICAgIlVua25vd24gY29sb3IgbW9kZSAldTsgZ3Vlc3NpbmcgYnVmZmVyIHNpemUuXG4i
-LAo+KwkJCQkgICAgICBhcmdzLT5icHApOwo+KwkJCWZhbGx0aHJvdWdoOwo+KwkJLyoKPisJCSAq
-IFRoZXNlIGNvbnN0YW50cyByZXByZXNlbnQgdmFyaW91cyBZVVYgZm9ybWF0cyBzdXBwb3J0ZWQg
-YnkKPisJCSAqIGRybV9nZW1fYWZiY19nZXRfYnBwKCkuCj4rCQkgKi8KPisJCWNhc2UgMTI6IC8v
-IERSTV9GT1JNQVRfWVVWNDIwXzhCSVQKPisJCWNhc2UgMTU6IC8vIERSTV9GT1JNQVRfWVVWNDIw
-XzEwQklUCj4rCQljYXNlIDMwOiAvLyBEUk1fRk9STUFUX1ZVWTEwMTAxMAo+KwkJCWZhbGx0aHJv
-dWdoOwo+KwkJLyoKPisJCSAqIFVzZWQgYnkgTWVzYSBhbmQgR3N0cmVhbWVyIHRvIGFsbG9jYXRl
-IE5WIGZvcm1hdHMgYW5kIG90aGVycwo+KwkJICogYXMgUkdCIGJ1ZmZlcnMuIFRlY2huaWNhbGx5
-LCBYUkdCMTYxNjE2MTZGIGZvcm1hdHMgYXJlIFJHQiwKPisJCSAqIGJ1dCB0aGUgZHVtYiBidWZm
-ZXJzIGFyZSBub3Qgc3VwcG9zZWQgdG8gYmUgdXNlZCBmb3IgYW55dGhpbmcKPisJCSAqIGJleW9u
-ZCAzMiBiaXRzIHBlciBwaXhlbHMuCj4rCQkgKi8KPisJCWNhc2UgMTA6IC8vIERSTV9GT1JNQVRf
-TlZ7MTUsMjAsMzB9LCBEUk1fRk9STUFUX1AwMTAKPisJCWNhc2UgNjQ6IC8vIERSTV9GT1JNQVRf
-e1hSR0IsWEJHUixBUkdCLEFCR1J9MTYxNjE2MTZGCj4rCQkJcGl0Y2ggPSBhcmdzLT53aWR0aCAq
-IERJVl9ST1VORF9VUChhcmdzLT5icHAsIFNaXzgpOwo+KwkJCWJyZWFrOwo+KwkJfQo+Kwl9Cj4r
-Cj4rCWlmICghcGl0Y2ggfHwgcGl0Y2ggPiBVMzJfTUFYKQo+KwkJcmV0dXJuIC1FSU5WQUw7Cj4r
-Cj4rCWFyZ3MtPnBpdGNoID0gcGl0Y2g7Cj4rCj4rCXJldHVybiBkcm1fbW9kZV9hbGlnbl9kdW1i
-KGFyZ3MsIGh3X3BpdGNoX2FsaWduLCBod19zaXplX2FsaWduKTsKPit9Cj4rRVhQT1JUX1NZTUJP
-TChkcm1fbW9kZV9zaXplX2R1bWIpOwo+Kwo+IGludCBkcm1fbW9kZV9jcmVhdGVfZHVtYihzdHJ1
-Y3QgZHJtX2RldmljZSAqZGV2LAo+IAkJCSBzdHJ1Y3QgZHJtX21vZGVfY3JlYXRlX2R1bWIgKmFy
-Z3MsCj4gCQkJIHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2KQo+ZGlmZiAtLWdpdCBhL2luY2x1
-ZGUvZHJtL2RybV9kdW1iX2J1ZmZlcnMuaCBiL2luY2x1ZGUvZHJtL2RybV9kdW1iX2J1ZmZlcnMu
-aAo+bmV3IGZpbGUgbW9kZSAxMDA2NDQKPmluZGV4IDAwMDAwMDAwMDAwMC4uMWYzYTgyMzZmYjNk
-Cj4tLS0gL2Rldi9udWxsCj4rKysgYi9pbmNsdWRlL2RybS9kcm1fZHVtYl9idWZmZXJzLmgKPkBA
-IC0wLDAgKzEsMTQgQEAKPisvKiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogTUlUICovCj4rCj4r
-I2lmbmRlZiBfX0RSTV9EVU1CX0JVRkZFUlNfSF9fCj4rI2RlZmluZSBfX0RSTV9EVU1CX0JVRkZF
-UlNfSF9fCj4rCj4rc3RydWN0IGRybV9kZXZpY2U7Cj4rc3RydWN0IGRybV9tb2RlX2NyZWF0ZV9k
-dW1iOwo+Kwo+K2ludCBkcm1fbW9kZV9zaXplX2R1bWIoc3RydWN0IGRybV9kZXZpY2UgKmRldiwK
-PisJCSAgICAgICBzdHJ1Y3QgZHJtX21vZGVfY3JlYXRlX2R1bWIgKmFyZ3MsCj4rCQkgICAgICAg
-dW5zaWduZWQgbG9uZyBod19waXRjaF9hbGlnbiwKPisJCSAgICAgICB1bnNpZ25lZCBsb25nIGh3
-X3NpemVfYWxpZ24pOwo+Kwo+KyNlbmRpZgo+ZGlmZiAtLWdpdCBhL2luY2x1ZGUvdWFwaS9kcm0v
-ZHJtX21vZGUuaCBiL2luY2x1ZGUvdWFwaS9kcm0vZHJtX21vZGUuaAo+aW5kZXggYzA4MjgxMGMw
-OGE4Li5lZmU4ZjVhZDM1ZWUgMTAwNjQ0Cj4tLS0gYS9pbmNsdWRlL3VhcGkvZHJtL2RybV9tb2Rl
-LmgKPisrKyBiL2luY2x1ZGUvdWFwaS9kcm0vZHJtX21vZGUuaAo+QEAgLTEwNTgsNyArMTA1OCw3
-IEBAIHN0cnVjdCBkcm1fbW9kZV9jcnRjX3BhZ2VfZmxpcF90YXJnZXQgewo+ICAqIHN0cnVjdCBk
-cm1fbW9kZV9jcmVhdGVfZHVtYiAtIENyZWF0ZSBhIEtNUyBkdW1iIGJ1ZmZlciBmb3Igc2Nhbm91
-dC4KPiAgKiBAaGVpZ2h0OiBidWZmZXIgaGVpZ2h0IGluIHBpeGVscwo+ICAqIEB3aWR0aDogYnVm
-ZmVyIHdpZHRoIGluIHBpeGVscwo+LSAqIEBicHA6IGJpdHMgcGVyIHBpeGVsCj4rICogQGJwcDog
-Y29sb3IgbW9kZQo+ICAqIEBmbGFnczogbXVzdCBiZSB6ZXJvCj4gICogQGhhbmRsZTogYnVmZmVy
-IG9iamVjdCBoYW5kbGUKPiAgKiBAcGl0Y2g6IG51bWJlciBvZiBieXRlcyBiZXR3ZWVuIHR3byBj
-b25zZWN1dGl2ZSBsaW5lcwo+QEAgLTEwNjYsNiArMTA2Niw1NCBAQCBzdHJ1Y3QgZHJtX21vZGVf
-Y3J0Y19wYWdlX2ZsaXBfdGFyZ2V0IHsKPiAgKgo+ICAqIFVzZXItc3BhY2UgZmlsbHMgQGhlaWdo
-dCwgQHdpZHRoLCBAYnBwIGFuZCBAZmxhZ3MuIElmIHRoZSBJT0NUTCBzdWNjZWVkcywKPiAgKiB0
-aGUga2VybmVsIGZpbGxzIEBoYW5kbGUsIEBwaXRjaCBhbmQgQHNpemUuCj4rICoKPisgKiBUaGUg
-dmFsdWUgb2YgQGJwcCBpcyBhIGNvbG9yLW1vZGUgbnVtYmVyIGRlc2NyaWJpbmcgYSBzcGVjaWZp
-YyBmb3JtYXQKPisgKiBvciBhIHZhcmlhbnQgdGhlcmVvZi4gVGhlIHZhbHVlIG9mdGVuIGNvcnJl
-c3BvbmRzIHRvIHRoZSBudW1iZXIgb2YgYml0cwo+KyAqIHBlciBwaXhlbCBmb3IgbW9zdCBtb2Rl
-cywgYWx0aG91Z2ggdGhlcmUgYXJlIGV4Y2VwdGlvbnMuIEVhY2ggY29sb3IgbW9kZQo+KyAqIG1h
-cHMgdG8gYSBEUk0gZm9ybWF0IHBsdXMgYSBudW1iZXIgb2YgbW9kZXMgd2l0aCBzaW1pbGFyIHBp
-eGVsIGxheW91dC4KPisgKiBGcmFtZWJ1ZmZlciBsYXlvdXQgaXMgYWx3YXlzIGxpbmVhci4KPisg
-Kgo+KyAqIFN1cHBvcnQgZm9yIGFsbCBtb2RlcyBhbmQgZm9ybWF0cyBpcyBvcHRpb25hbC4gRXZl
-biBpZiBkdW1iLWJ1ZmZlcgo+KyAqIGNyZWF0aW9uIHdpdGggYSBjZXJ0YWluIGNvbG9yIG1vZGUg
-c3VjY2VlZHMsIGl0IGlzIG5vdCBndWFyYW50ZWVkIHRoYXQKPisgKiB0aGUgRFJNIGRyaXZlciBz
-dXBwb3J0cyBhbnkgb2YgdGhlIHJlbGF0ZWQgZm9ybWF0cy4gTW9zdCBkcml2ZXJzIHN1cHBvcnQK
-PisgKiBhIGNvbG9yIG1vZGUgb2YgMzIgd2l0aCBhIGZvcm1hdCBvZiBEUk1fRk9STUFUX1hSR0I4
-ODg4IG9uIHRoZWlyIHByaW1hcnkKPisgKiBwbGFuZS4KPisgKgo+KyAqICstLS0tLS0tLS0tLS0r
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSsKPisgKiB8
-IENvbG9yIG1vZGUgfCBGcmFtZWJ1ZmZlciBmb3JtYXQgICAgIHwgQ29tcGF0aWJsZSBmb3JtYXRz
-ICAgICB8Cj4rICogKz09PT09PT09PT09PSs9PT09PT09PT09PT09PT09PT09PT09PT0rPT09PT09
-PT09PT09PT09PT09PT09PT09Kwo+KyAqIHwgICAgIDMyICAgICB8ICAqIERSTV9GT1JNQVRfWFJH
-Qjg4ODggfCAgKiBEUk1fRk9STUFUX0JHUlg4ODg4IHwKPisgKiB8ICAgICAgICAgICAgfCAgICAg
-ICAgICAgICAgICAgICAgICAgIHwgICogRFJNX0ZPUk1BVF9SR0JYODg4OCB8Cj4rICogfCAgICAg
-ICAgICAgIHwgICAgICAgICAgICAgICAgICAgICAgICB8ICAqIERSTV9GT1JNQVRfWEJHUjg4ODgg
-fAo+KyAqICstLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLSsKPisgKiB8ICAgICAyNCAgICAgfCAgKiBEUk1fRk9STUFUX1JHQjg4OCAg
-IHwgICogRFJNX0ZPUk1BVF9CR1I4ODggICB8Cj4rICogKy0tLS0tLS0tLS0tLSstLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKwo+KyAqIHwgICAgIDE2ICAg
-ICB8ICAqIERSTV9GT1JNQVRfUkdCNTY1ICAgfCAgKiBEUk1fRk9STUFUX0JHUjU2NSAgIHwKPisg
-KiArLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0rCj4rICogfCAgICAgMTUgICAgIHwgICogRFJNX0ZPUk1BVF9YUkdCMTU1NSB8ICAq
-IERSTV9GT1JNQVRfQkdSWDE1NTUgfAo+KyAqIHwgICAgICAgICAgICB8ICAgICAgICAgICAgICAg
-ICAgICAgICAgfCAgKiBEUk1fRk9STUFUX1JHQlgxNTU1IHwKPisgKiB8ICAgICAgICAgICAgfCAg
-ICAgICAgICAgICAgICAgICAgICAgIHwgICogRFJNX0ZPUk1BVF9YQkdSMTU1NSB8Cj4rICogKy0t
-LS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tKwo+KyAqIHwgICAgICA4ICAgICB8ICAqIERSTV9GT1JNQVRfQzggICAgICAgfCAgKiBEUk1f
-Rk9STUFUX0Q4ICAgICAgIHwKPisgKiB8ICAgICAgICAgICAgfCAgICAgICAgICAgICAgICAgICAg
-ICAgIHwgICogRFJNX0ZPUk1BVF9SOCAgICAgICB8Cj4rICogKy0tLS0tLS0tLS0tLSstLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKwo+KyAqIHwgICAgICA0
-ICAgICB8ICAqIERSTV9GT1JNQVRfQzQgICAgICAgfCAgKiBEUk1fRk9STUFUX0Q0ICAgICAgIHwK
-PisgKiB8ICAgICAgICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgIHwgICogRFJNX0ZPUk1B
-VF9SNCAgICAgICB8Cj4rICogKy0tLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0r
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKwo+KyAqIHwgICAgICAyICAgICB8ICAqIERSTV9GT1JN
-QVRfQzIgICAgICAgfCAgKiBEUk1fRk9STUFUX0QyICAgICAgIHwKPisgKiB8ICAgICAgICAgICAg
-fCAgICAgICAgICAgICAgICAgICAgICAgIHwgICogRFJNX0ZPUk1BVF9SMiAgICAgICB8Cj4rICog
-Ky0tLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tKwo+KyAqIHwgICAgICAxICAgICB8ICAqIERSTV9GT1JNQVRfQzEgICAgICAgfCAgKiBE
-Uk1fRk9STUFUX0QxICAgICAgIHwKPisgKiB8ICAgICAgICAgICAgfCAgICAgICAgICAgICAgICAg
-ICAgICAgIHwgICogRFJNX0ZPUk1BVF9SMSAgICAgICB8Cj4rICogKy0tLS0tLS0tLS0tLSstLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKwo+KyAqCj4rICog
-Q29sb3IgbW9kZXMgb2YgMTAsIDEyLCAxNSwgMzAgYW5kIDY0IGFyZSBvbmx5IHN1cHBvcnRlZCBm
-b3IgdXNlIGJ5Cj4rICogbGVnYWN5IHVzZXIgc3BhY2UuIFBsZWFzZSBkb24ndCB1c2UgdGhlbSBp
-biBuZXcgY29kZS4gT3RoZXIgbW9kZXMKPisgKiBhcmUgbm90IHN1cHBvcnQuCj4rICoKPisgKiBE
-byBub3QgYXR0ZW1wdCB0byBhbGxvY2F0ZSBhbnl0aGluZyBidXQgbGluZWFyIGZyYW1lYnVmZmVy
-IG1lbW9yeQo+KyAqIHdpdGggc2luZ2xlLXBsYW5lIFJHQiBkYXRhLiBBbGxvY2F0aW9uIG9mIG90
-aGVyIGZyYW1lYnVmZmVyCj4rICogbGF5b3V0cyByZXF1aXJlcyBkZWRpY2F0ZWQgaW9jdGxzIGlu
-IHRoZSByZXNwZWN0aXZlIERSTSBkcml2ZXIuCj4gICovCj4gc3RydWN0IGRybV9tb2RlX2NyZWF0
-ZV9kdW1iIHsKPiAJX191MzIgaGVpZ2h0Owo+LS0gCj4yLjQ5LjAKPgo+Cj5fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+TGludXgtcm9ja2NoaXAgbWFpbGlu
-ZyBsaXN0Cj5MaW51eC1yb2NrY2hpcEBsaXN0cy5pbmZyYWRlYWQub3JnCj5odHRwOi8vbGlzdHMu
-aW5mcmFkZWFkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbnV4LXJvY2tjaGlwCg==
+From: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+Pass along the format information from the top to .fb_create()
+so that we can avoid redundant (and somewhat expensive) lookups
+in the drivers.
+
+Done with cocci (with some manual fixups):
+@@
+identifier func =~ ".*create.*";
+identifier dev, file, mode_cmd;
+@@
+struct drm_framebuffer *func(
+       struct drm_device *dev,
+       struct drm_file *file,
++      const struct drm_format_info *info,
+       const struct drm_mode_fb_cmd2 *mode_cmd)
+{
+...
+(
+- const struct drm_format_info *info = drm_get_format_info(...);
+|
+- const struct drm_format_info *info;
+...
+- info = drm_get_format_info(...);
+)
+<...
+- if (!info)
+-    return ...;
+...>
+}
+
+@@
+identifier func =~ ".*create.*";
+identifier dev, file, mode_cmd;
+@@
+struct drm_framebuffer *func(
+       struct drm_device *dev,
+       struct drm_file *file,
++      const struct drm_format_info *info,
+       const struct drm_mode_fb_cmd2 *mode_cmd)
+{
+...
+}
+
+@find@
+identifier fb_create_func =~ ".*create.*";
+identifier dev, file, mode_cmd;
+@@
+struct drm_framebuffer *fb_create_func(
+       struct drm_device *dev,
+       struct drm_file *file,
++      const struct drm_format_info *info,
+       const struct drm_mode_fb_cmd2 *mode_cmd);
+
+@@
+identifier find.fb_create_func;
+expression dev, file, mode_cmd;
+@@
+fb_create_func(dev, file
++	       ,info
+	       ,mode_cmd)
+
+@@
+expression dev, file, mode_cmd;
+@@
+drm_gem_fb_create(dev, file
++	       ,info
+	       ,mode_cmd)
+
+@@
+expression dev, file, mode_cmd;
+@@
+drm_gem_fb_create_with_dirty(dev, file
++	       ,info
+	       ,mode_cmd)
+
+@@
+expression dev, file_priv, mode_cmd;
+identifier info, fb;
+@@
+info = drm_get_format_info(...);
+...
+fb = dev->mode_config.funcs->fb_create(dev, file_priv
++                                      ,info
+                                       ,mode_cmd);
+
+@@
+identifier dev, file_priv, mode_cmd;
+@@
+struct drm_mode_config_funcs {
+...
+struct drm_framebuffer *(*fb_create)(struct drm_device *dev,
+                                     struct drm_file *file_priv,
++                                     const struct drm_format_info *info,
+                                     const struct drm_mode_fb_cmd2 *mode_cmd);
+...
+};
+
+v2: Fix kernel docs (Laurent)
+    Fix commit msg (Geert)
+
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: Liviu Dudau <liviu.dudau@arm.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Russell King <linux@armlinux.org.uk>
+Cc: Inki Dae <inki.dae@samsung.com>
+Cc: Seung-Woo Kim <sw0312.kim@samsung.com>
+Cc: Kyungmin Park <kyungmin.park@samsung.com>
+Cc: Patrik Jakobsson <patrik.r.jakobsson@gmail.com>
+Cc: Chun-Kuang Hu <chunkuang.hu@kernel.org>
+Cc: Philipp Zabel <p.zabel@pengutronix.de>
+Cc: Rob Clark <robdclark@gmail.com>
+Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
+Cc: Dmitry Baryshkov <lumag@kernel.org>
+Cc: Sean Paul <sean@poorly.run>
+Cc: Marijn Suijten <marijn.suijten@somainline.org>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Stefan Agner <stefan@agner.ch>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@kernel.org>
+Cc: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
+Cc: Sandy Huang <hjc@rock-chips.com>
+Cc: "Heiko Stübner" <heiko@sntech.de>
+Cc: Andy Yan <andy.yan@rock-chips.com>
+Cc: Thierry Reding <thierry.reding@gmail.com>
+Cc: Mikko Perttunen <mperttunen@nvidia.com>
+Cc: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Cc: "Maíra Canal" <mcanal@igalia.com>
+Cc: Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>
+Cc: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Cc: Gurchetan Singh <gurchetansingh@chromium.org>
+Cc: Chia-I Wu <olvaffe@gmail.com>
+Cc: Zack Rusin <zack.rusin@broadcom.com>
+Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Cc: amd-gfx@lists.freedesktop.org
+Cc: linux-arm-msm@vger.kernel.org
+Cc: freedreno@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Cc: virtualization@lists.linux.dev
+Cc: spice-devel@lists.freedesktop.org
+Cc: linux-renesas-soc@vger.kernel.org
+Cc: linux-tegra@vger.kernel.org
+Cc: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+Signed-off-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c            |  1 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.h            |  1 +
+ .../gpu/drm/arm/display/komeda/komeda_framebuffer.c    |  1 +
+ .../gpu/drm/arm/display/komeda/komeda_framebuffer.h    |  1 +
+ drivers/gpu/drm/arm/malidp_drv.c                       |  3 ++-
+ drivers/gpu/drm/armada/armada_fb.c                     |  6 ++----
+ drivers/gpu/drm/armada/armada_fb.h                     |  3 ++-
+ drivers/gpu/drm/drm_framebuffer.c                      |  2 +-
+ drivers/gpu/drm/drm_gem_framebuffer_helper.c           |  4 ++++
+ drivers/gpu/drm/exynos/exynos_drm_fb.c                 |  4 +---
+ drivers/gpu/drm/gma500/framebuffer.c                   |  1 +
+ drivers/gpu/drm/i915/display/intel_fb.c                |  1 +
+ drivers/gpu/drm/i915/display/intel_fb.h                |  1 +
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c              |  5 +++--
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c                 |  7 ++-----
+ drivers/gpu/drm/msm/msm_drv.h                          |  3 ++-
+ drivers/gpu/drm/msm/msm_fb.c                           |  6 ++----
+ drivers/gpu/drm/mxsfb/mxsfb_drv.c                      | 10 ++--------
+ drivers/gpu/drm/nouveau/nouveau_display.c              |  1 +
+ drivers/gpu/drm/nouveau/nouveau_display.h              |  1 +
+ drivers/gpu/drm/omapdrm/omap_fb.c                      |  6 ++----
+ drivers/gpu/drm/omapdrm/omap_fb.h                      |  3 ++-
+ drivers/gpu/drm/qxl/qxl_display.c                      |  1 +
+ drivers/gpu/drm/radeon/radeon_display.c                |  1 +
+ drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c          |  3 ++-
+ drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c           |  3 ++-
+ drivers/gpu/drm/renesas/shmobile/shmob_drm_kms.c       |  3 ++-
+ drivers/gpu/drm/rockchip/rockchip_drm_fb.c             |  7 +------
+ drivers/gpu/drm/tegra/drm.h                            |  1 +
+ drivers/gpu/drm/tegra/fb.c                             |  4 +---
+ drivers/gpu/drm/tests/drm_framebuffer_test.c           |  1 +
+ drivers/gpu/drm/vc4/vc4_kms.c                          |  3 ++-
+ drivers/gpu/drm/virtio/virtgpu_display.c               |  1 +
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.c                    |  1 +
+ drivers/gpu/drm/xen/xen_drm_front_kms.c                |  1 +
+ drivers/gpu/drm/xlnx/zynqmp_kms.c                      |  3 ++-
+ include/drm/drm_gem_framebuffer_helper.h               |  3 +++
+ include/drm/drm_mode_config.h                          |  1 +
+ 38 files changed, 59 insertions(+), 49 deletions(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+index 35c778426a7c..10c57ded0e3e 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+@@ -1297,6 +1297,7 @@ static int amdgpu_display_framebuffer_init(struct drm_device *dev,
+ struct drm_framebuffer *
+ amdgpu_display_user_framebuffer_create(struct drm_device *dev,
+ 				       struct drm_file *file_priv,
++				       const struct drm_format_info *info,
+ 				       const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct amdgpu_framebuffer *amdgpu_fb;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.h
+index dfa0d642ac16..930c171473b4 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.h
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.h
+@@ -44,6 +44,7 @@ uint32_t amdgpu_display_supported_domains(struct amdgpu_device *adev,
+ struct drm_framebuffer *
+ amdgpu_display_user_framebuffer_create(struct drm_device *dev,
+ 				       struct drm_file *file_priv,
++				       const struct drm_format_info *info,
+ 				       const struct drm_mode_fb_cmd2 *mode_cmd);
+ const struct drm_format_info *
+ amdgpu_lookup_format_info(u32 format, uint64_t modifier);
+diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c b/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c
+index df5da5a44755..29b05482f713 100644
+--- a/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c
++++ b/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.c
+@@ -157,6 +157,7 @@ komeda_fb_none_afbc_size_check(struct komeda_dev *mdev, struct komeda_fb *kfb,
+ 
+ struct drm_framebuffer *
+ komeda_fb_create(struct drm_device *dev, struct drm_file *file,
++		 const struct drm_format_info *info,
+ 		 const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct komeda_dev *mdev = dev->dev_private;
+diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.h b/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.h
+index c61ca98a3a63..02b2b8ae482a 100644
+--- a/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.h
++++ b/drivers/gpu/drm/arm/display/komeda/komeda_framebuffer.h
+@@ -37,6 +37,7 @@ struct komeda_fb {
+ 
+ struct drm_framebuffer *
+ komeda_fb_create(struct drm_device *dev, struct drm_file *file,
++		const struct drm_format_info *info,
+ 		const struct drm_mode_fb_cmd2 *mode_cmd);
+ int komeda_fb_check_src_coords(const struct komeda_fb *kfb,
+ 			       u32 src_x, u32 src_y, u32 src_w, u32 src_h);
+diff --git a/drivers/gpu/drm/arm/malidp_drv.c b/drivers/gpu/drm/arm/malidp_drv.c
+index 558e44a7e627..8b920566f2e8 100644
+--- a/drivers/gpu/drm/arm/malidp_drv.c
++++ b/drivers/gpu/drm/arm/malidp_drv.c
+@@ -377,6 +377,7 @@ malidp_verify_afbc_framebuffer(struct drm_device *dev, struct drm_file *file,
+ 
+ static struct drm_framebuffer *
+ malidp_fb_create(struct drm_device *dev, struct drm_file *file,
++		 const struct drm_format_info *info,
+ 		 const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	if (mode_cmd->modifier[0]) {
+@@ -384,7 +385,7 @@ malidp_fb_create(struct drm_device *dev, struct drm_file *file,
+ 			return ERR_PTR(-EINVAL);
+ 	}
+ 
+-	return drm_gem_fb_create(dev, file, mode_cmd);
++	return drm_gem_fb_create(dev, file, info, mode_cmd);
+ }
+ 
+ static const struct drm_mode_config_funcs malidp_mode_config_funcs = {
+diff --git a/drivers/gpu/drm/armada/armada_fb.c b/drivers/gpu/drm/armada/armada_fb.c
+index 85fc2cb50544..597720e229c2 100644
+--- a/drivers/gpu/drm/armada/armada_fb.c
++++ b/drivers/gpu/drm/armada/armada_fb.c
+@@ -84,11 +84,9 @@ struct armada_framebuffer *armada_framebuffer_create(struct drm_device *dev,
+ }
+ 
+ struct drm_framebuffer *armada_fb_create(struct drm_device *dev,
+-	struct drm_file *dfile, const struct drm_mode_fb_cmd2 *mode)
++	struct drm_file *dfile, const struct drm_format_info *info,
++	const struct drm_mode_fb_cmd2 *mode)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 mode->pixel_format,
+-								 mode->modifier[0]);
+ 	struct armada_gem_object *obj;
+ 	struct armada_framebuffer *dfb;
+ 	int ret;
+diff --git a/drivers/gpu/drm/armada/armada_fb.h b/drivers/gpu/drm/armada/armada_fb.h
+index c5bc53d7e0c4..41ba76dd80d6 100644
+--- a/drivers/gpu/drm/armada/armada_fb.h
++++ b/drivers/gpu/drm/armada/armada_fb.h
+@@ -19,5 +19,6 @@ struct armada_framebuffer {
+ struct armada_framebuffer *armada_framebuffer_create(struct drm_device *,
+ 	const struct drm_mode_fb_cmd2 *, struct armada_gem_object *);
+ struct drm_framebuffer *armada_fb_create(struct drm_device *dev,
+-	struct drm_file *dfile, const struct drm_mode_fb_cmd2 *mode);
++	struct drm_file *dfile, const struct drm_format_info *info,
++	const struct drm_mode_fb_cmd2 *mode);
+ #endif
+diff --git a/drivers/gpu/drm/drm_framebuffer.c b/drivers/gpu/drm/drm_framebuffer.c
+index ae09ef6977b2..61a7213f2389 100644
+--- a/drivers/gpu/drm/drm_framebuffer.c
++++ b/drivers/gpu/drm/drm_framebuffer.c
+@@ -302,7 +302,7 @@ drm_internal_framebuffer_create(struct drm_device *dev,
+ 	if (ret)
+ 		return ERR_PTR(ret);
+ 
+-	fb = dev->mode_config.funcs->fb_create(dev, file_priv, r);
++	fb = dev->mode_config.funcs->fb_create(dev, file_priv, info, r);
+ 	if (IS_ERR(fb)) {
+ 		drm_dbg_kms(dev, "could not create framebuffer\n");
+ 		return fb;
+diff --git a/drivers/gpu/drm/drm_gem_framebuffer_helper.c b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
+index 62eec0fddc3e..7c0d2174dbc9 100644
+--- a/drivers/gpu/drm/drm_gem_framebuffer_helper.c
++++ b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
+@@ -264,6 +264,7 @@ static const struct drm_framebuffer_funcs drm_gem_fb_funcs = {
+  *                       &drm_mode_config_funcs.fb_create callback
+  * @dev: DRM device
+  * @file: DRM file that holds the GEM handle(s) backing the framebuffer
++ * @info: pixel format information
+  * @mode_cmd: Metadata from the userspace framebuffer creation request
+  *
+  * This function creates a new framebuffer object described by
+@@ -283,6 +284,7 @@ static const struct drm_framebuffer_funcs drm_gem_fb_funcs = {
+  */
+ struct drm_framebuffer *
+ drm_gem_fb_create(struct drm_device *dev, struct drm_file *file,
++		  const struct drm_format_info *info,
+ 		  const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
+@@ -301,6 +303,7 @@ static const struct drm_framebuffer_funcs drm_gem_fb_funcs_dirtyfb = {
+  *                       &drm_mode_config_funcs.fb_create callback
+  * @dev: DRM device
+  * @file: DRM file that holds the GEM handle(s) backing the framebuffer
++ * @info: pixel format information
+  * @mode_cmd: Metadata from the userspace framebuffer creation request
+  *
+  * This function creates a new framebuffer object described by
+@@ -321,6 +324,7 @@ static const struct drm_framebuffer_funcs drm_gem_fb_funcs_dirtyfb = {
+  */
+ struct drm_framebuffer *
+ drm_gem_fb_create_with_dirty(struct drm_device *dev, struct drm_file *file,
++			     const struct drm_format_info *info,
+ 			     const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
+diff --git a/drivers/gpu/drm/exynos/exynos_drm_fb.c b/drivers/gpu/drm/exynos/exynos_drm_fb.c
+index bcf7b534d1f7..9ae526825726 100644
+--- a/drivers/gpu/drm/exynos/exynos_drm_fb.c
++++ b/drivers/gpu/drm/exynos/exynos_drm_fb.c
+@@ -94,11 +94,9 @@ exynos_drm_framebuffer_init(struct drm_device *dev,
+ 
+ static struct drm_framebuffer *
+ exynos_user_fb_create(struct drm_device *dev, struct drm_file *file_priv,
++		      const struct drm_format_info *info,
+ 		      const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 mode_cmd->pixel_format,
+-								 mode_cmd->modifier[0]);
+ 	struct exynos_drm_gem *exynos_gem[MAX_FB_BUFFER];
+ 	struct drm_framebuffer *fb;
+ 	int i;
+diff --git a/drivers/gpu/drm/gma500/framebuffer.c b/drivers/gpu/drm/gma500/framebuffer.c
+index c82e623a2071..a4a18ec2dd56 100644
+--- a/drivers/gpu/drm/gma500/framebuffer.c
++++ b/drivers/gpu/drm/gma500/framebuffer.c
+@@ -97,6 +97,7 @@ struct drm_framebuffer *psb_framebuffer_create(struct drm_device *dev,
+  */
+ static struct drm_framebuffer *psb_user_framebuffer_create
+ 			(struct drm_device *dev, struct drm_file *filp,
++			 const struct drm_format_info *info,
+ 			 const struct drm_mode_fb_cmd2 *cmd)
+ {
+ 	struct drm_gem_object *obj;
+diff --git a/drivers/gpu/drm/i915/display/intel_fb.c b/drivers/gpu/drm/i915/display/intel_fb.c
+index 52c4901dc072..571d2720575b 100644
+--- a/drivers/gpu/drm/i915/display/intel_fb.c
++++ b/drivers/gpu/drm/i915/display/intel_fb.c
+@@ -2324,6 +2324,7 @@ int intel_framebuffer_init(struct intel_framebuffer *intel_fb,
+ struct drm_framebuffer *
+ intel_user_framebuffer_create(struct drm_device *dev,
+ 			      struct drm_file *filp,
++			      const struct drm_format_info *info,
+ 			      const struct drm_mode_fb_cmd2 *user_mode_cmd)
+ {
+ 	struct drm_framebuffer *fb;
+diff --git a/drivers/gpu/drm/i915/display/intel_fb.h b/drivers/gpu/drm/i915/display/intel_fb.h
+index 7d1267fbeee2..00181c4a67dc 100644
+--- a/drivers/gpu/drm/i915/display/intel_fb.h
++++ b/drivers/gpu/drm/i915/display/intel_fb.h
+@@ -109,6 +109,7 @@ intel_framebuffer_create(struct drm_gem_object *obj,
+ struct drm_framebuffer *
+ intel_user_framebuffer_create(struct drm_device *dev,
+ 			      struct drm_file *filp,
++			      const struct drm_format_info *info,
+ 			      const struct drm_mode_fb_cmd2 *user_mode_cmd);
+ 
+ bool intel_fb_modifier_uses_dpt(struct intel_display *display, u64 modifier);
+diff --git a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+index f851e9ffdb28..9db1ceaed518 100644
+--- a/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
++++ b/drivers/gpu/drm/ingenic/ingenic-drm-drv.c
+@@ -901,14 +901,15 @@ static void ingenic_drm_disable_vblank(struct drm_crtc *crtc)
+ 
+ static struct drm_framebuffer *
+ ingenic_drm_gem_fb_create(struct drm_device *drm, struct drm_file *file,
++			  const struct drm_format_info *info,
+ 			  const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct ingenic_drm *priv = drm_device_get_priv(drm);
+ 
+ 	if (priv->soc_info->map_noncoherent)
+-		return drm_gem_fb_create_with_dirty(drm, file, mode_cmd);
++		return drm_gem_fb_create_with_dirty(drm, file, info, mode_cmd);
+ 
+-	return drm_gem_fb_create(drm, file, mode_cmd);
++	return drm_gem_fb_create(drm, file, info, mode_cmd);
+ }
+ 
+ static struct drm_gem_object *
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_drv.c b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+index 0ebcfcbc258b..d5e6bab36414 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+@@ -43,16 +43,13 @@ static const struct drm_mode_config_helper_funcs mtk_drm_mode_config_helpers = {
+ static struct drm_framebuffer *
+ mtk_drm_mode_fb_create(struct drm_device *dev,
+ 		       struct drm_file *file,
++		       const struct drm_format_info *info,
+ 		       const struct drm_mode_fb_cmd2 *cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 cmd->pixel_format,
+-								 cmd->modifier[0]);
+-
+ 	if (info->num_planes != 1)
+ 		return ERR_PTR(-EINVAL);
+ 
+-	return drm_gem_fb_create(dev, file, cmd);
++	return drm_gem_fb_create(dev, file, info, cmd);
+ }
+ 
+ static const struct drm_mode_config_funcs mtk_drm_mode_config_funcs = {
+diff --git a/drivers/gpu/drm/msm/msm_drv.h b/drivers/gpu/drm/msm/msm_drv.h
+index c8afb1ea6040..76f3841db2d7 100644
+--- a/drivers/gpu/drm/msm/msm_drv.h
++++ b/drivers/gpu/drm/msm/msm_drv.h
+@@ -294,7 +294,8 @@ uint32_t msm_framebuffer_iova(struct drm_framebuffer *fb,
+ struct drm_gem_object *msm_framebuffer_bo(struct drm_framebuffer *fb, int plane);
+ const struct msm_format *msm_framebuffer_format(struct drm_framebuffer *fb);
+ struct drm_framebuffer *msm_framebuffer_create(struct drm_device *dev,
+-		struct drm_file *file, const struct drm_mode_fb_cmd2 *mode_cmd);
++		struct drm_file *file, const struct drm_format_info *info,
++		const struct drm_mode_fb_cmd2 *mode_cmd);
+ struct drm_framebuffer * msm_alloc_stolen_fb(struct drm_device *dev,
+ 		int w, int h, int p, uint32_t format);
+ 
+diff --git a/drivers/gpu/drm/msm/msm_fb.c b/drivers/gpu/drm/msm/msm_fb.c
+index df2f85c44d55..4aef51cef3d5 100644
+--- a/drivers/gpu/drm/msm/msm_fb.c
++++ b/drivers/gpu/drm/msm/msm_fb.c
+@@ -134,11 +134,9 @@ const struct msm_format *msm_framebuffer_format(struct drm_framebuffer *fb)
+ }
+ 
+ struct drm_framebuffer *msm_framebuffer_create(struct drm_device *dev,
+-		struct drm_file *file, const struct drm_mode_fb_cmd2 *mode_cmd)
++		struct drm_file *file, const struct drm_format_info *info,
++		const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 mode_cmd->pixel_format,
+-								 mode_cmd->modifier[0]);
+ 	struct drm_gem_object *bos[4] = {0};
+ 	struct drm_framebuffer *fb;
+ 	int ret, i, n = info->num_planes;
+diff --git a/drivers/gpu/drm/mxsfb/mxsfb_drv.c b/drivers/gpu/drm/mxsfb/mxsfb_drv.c
+index 09329af9b01e..0b756da2fec2 100644
+--- a/drivers/gpu/drm/mxsfb/mxsfb_drv.c
++++ b/drivers/gpu/drm/mxsfb/mxsfb_drv.c
+@@ -91,21 +91,15 @@ void mxsfb_disable_axi_clk(struct mxsfb_drm_private *mxsfb)
+ 
+ static struct drm_framebuffer *
+ mxsfb_fb_create(struct drm_device *dev, struct drm_file *file_priv,
++		const struct drm_format_info *info,
+ 		const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+-	const struct drm_format_info *info;
+-
+-	info = drm_get_format_info(dev, mode_cmd->pixel_format,
+-				   mode_cmd->modifier[0]);
+-	if (!info)
+-		return ERR_PTR(-EINVAL);
+-
+ 	if (mode_cmd->width * info->cpp[0] != mode_cmd->pitches[0]) {
+ 		dev_dbg(dev->dev, "Invalid pitch: fb width must match pitch\n");
+ 		return ERR_PTR(-EINVAL);
+ 	}
+ 
+-	return drm_gem_fb_create(dev, file_priv, mode_cmd);
++	return drm_gem_fb_create(dev, file_priv, info, mode_cmd);
+ }
+ 
+ static const struct drm_mode_config_funcs mxsfb_mode_config_funcs = {
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+index bd9a85f4b4fc..1ddd92901526 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -333,6 +333,7 @@ nouveau_framebuffer_new(struct drm_device *dev,
+ struct drm_framebuffer *
+ nouveau_user_framebuffer_create(struct drm_device *dev,
+ 				struct drm_file *file_priv,
++				const struct drm_format_info *info,
+ 				const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct drm_framebuffer *fb;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.h b/drivers/gpu/drm/nouveau/nouveau_display.h
+index 1f506f8b289c..e45f211501f6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.h
++++ b/drivers/gpu/drm/nouveau/nouveau_display.h
+@@ -67,5 +67,6 @@ nouveau_framebuffer_get_layout(struct drm_framebuffer *fb, uint32_t *tile_mode,
+ 
+ struct drm_framebuffer *
+ nouveau_user_framebuffer_create(struct drm_device *, struct drm_file *,
++				const struct drm_format_info *,
+ 				const struct drm_mode_fb_cmd2 *);
+ #endif
+diff --git a/drivers/gpu/drm/omapdrm/omap_fb.c b/drivers/gpu/drm/omapdrm/omap_fb.c
+index e18878068c57..36afcd1c1fd7 100644
+--- a/drivers/gpu/drm/omapdrm/omap_fb.c
++++ b/drivers/gpu/drm/omapdrm/omap_fb.c
+@@ -335,11 +335,9 @@ void omap_framebuffer_describe(struct drm_framebuffer *fb, struct seq_file *m)
+ #endif
+ 
+ struct drm_framebuffer *omap_framebuffer_create(struct drm_device *dev,
+-		struct drm_file *file, const struct drm_mode_fb_cmd2 *mode_cmd)
++		struct drm_file *file, const struct drm_format_info *info,
++		const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(dev,
+-								 mode_cmd->pixel_format,
+-								 mode_cmd->modifier[0]);
+ 	unsigned int num_planes = info->num_planes;
+ 	struct drm_gem_object *bos[4];
+ 	struct drm_framebuffer *fb;
+diff --git a/drivers/gpu/drm/omapdrm/omap_fb.h b/drivers/gpu/drm/omapdrm/omap_fb.h
+index b75f0b5ef1d8..0873f953cf1d 100644
+--- a/drivers/gpu/drm/omapdrm/omap_fb.h
++++ b/drivers/gpu/drm/omapdrm/omap_fb.h
+@@ -20,7 +20,8 @@ struct omap_overlay_info;
+ struct seq_file;
+ 
+ struct drm_framebuffer *omap_framebuffer_create(struct drm_device *dev,
+-		struct drm_file *file, const struct drm_mode_fb_cmd2 *mode_cmd);
++		struct drm_file *file, const struct drm_format_info *info,
++		const struct drm_mode_fb_cmd2 *mode_cmd);
+ struct drm_framebuffer *omap_framebuffer_init(struct drm_device *dev,
+ 		const struct drm_mode_fb_cmd2 *mode_cmd, struct drm_gem_object **bos);
+ int omap_framebuffer_pin(struct drm_framebuffer *fb);
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index 70aff64ced87..f7bc83f2d489 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1176,6 +1176,7 @@ static int qdev_output_init(struct drm_device *dev, int num_output)
+ static struct drm_framebuffer *
+ qxl_user_framebuffer_create(struct drm_device *dev,
+ 			    struct drm_file *file_priv,
++			    const struct drm_format_info *info,
+ 			    const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	return drm_gem_fb_create_with_funcs(dev, file_priv, mode_cmd,
+diff --git a/drivers/gpu/drm/radeon/radeon_display.c b/drivers/gpu/drm/radeon/radeon_display.c
+index 8f5f8abcb1b4..85b714ac9882 100644
+--- a/drivers/gpu/drm/radeon/radeon_display.c
++++ b/drivers/gpu/drm/radeon/radeon_display.c
+@@ -1314,6 +1314,7 @@ radeon_framebuffer_init(struct drm_device *dev,
+ static struct drm_framebuffer *
+ radeon_user_framebuffer_create(struct drm_device *dev,
+ 			       struct drm_file *file_priv,
++			       const struct drm_format_info *info,
+ 			       const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct drm_gem_object *obj;
+diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
+index 4c8fe83dd610..216219accfd9 100644
+--- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
++++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_kms.c
+@@ -426,6 +426,7 @@ int rcar_du_dumb_create(struct drm_file *file, struct drm_device *dev,
+ 
+ static struct drm_framebuffer *
+ rcar_du_fb_create(struct drm_device *dev, struct drm_file *file_priv,
++		  const struct drm_format_info *info,
+ 		  const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct rcar_du_device *rcdu = to_rcar_du_device(dev);
+@@ -490,7 +491,7 @@ rcar_du_fb_create(struct drm_device *dev, struct drm_file *file_priv,
+ 		}
+ 	}
+ 
+-	return drm_gem_fb_create(dev, file_priv, mode_cmd);
++	return drm_gem_fb_create(dev, file_priv, info, mode_cmd);
+ }
+ 
+ /* -----------------------------------------------------------------------------
+diff --git a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c b/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
+index 55a97691e9b2..87f171145a23 100644
+--- a/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
++++ b/drivers/gpu/drm/renesas/rz-du/rzg2l_du_kms.c
+@@ -191,6 +191,7 @@ int rzg2l_du_dumb_create(struct drm_file *file, struct drm_device *dev,
+ 
+ static struct drm_framebuffer *
+ rzg2l_du_fb_create(struct drm_device *dev, struct drm_file *file_priv,
++		   const struct drm_format_info *info,
+ 		   const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	const struct rzg2l_du_format_info *format;
+@@ -214,7 +215,7 @@ rzg2l_du_fb_create(struct drm_device *dev, struct drm_file *file_priv,
+ 		return ERR_PTR(-EINVAL);
+ 	}
+ 
+-	return drm_gem_fb_create(dev, file_priv, mode_cmd);
++	return drm_gem_fb_create(dev, file_priv, info, mode_cmd);
+ }
+ 
+ /* -----------------------------------------------------------------------------
+diff --git a/drivers/gpu/drm/renesas/shmobile/shmob_drm_kms.c b/drivers/gpu/drm/renesas/shmobile/shmob_drm_kms.c
+index 4202ab00fb0c..fd9460da1789 100644
+--- a/drivers/gpu/drm/renesas/shmobile/shmob_drm_kms.c
++++ b/drivers/gpu/drm/renesas/shmobile/shmob_drm_kms.c
+@@ -117,6 +117,7 @@ const struct shmob_drm_format_info *shmob_drm_format_info(u32 fourcc)
+ 
+ static struct drm_framebuffer *
+ shmob_drm_fb_create(struct drm_device *dev, struct drm_file *file_priv,
++		    const struct drm_format_info *info,
+ 		    const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	const struct shmob_drm_format_info *format;
+@@ -144,7 +145,7 @@ shmob_drm_fb_create(struct drm_device *dev, struct drm_file *file_priv,
+ 		}
+ 	}
+ 
+-	return drm_gem_fb_create(dev, file_priv, mode_cmd);
++	return drm_gem_fb_create(dev, file_priv, info, mode_cmd);
+ }
+ 
+ static const struct drm_mode_config_funcs shmob_drm_mode_config_funcs = {
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
+index 66762ca54a98..f19113e5ae8f 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
+@@ -30,17 +30,12 @@ static const struct drm_mode_config_helper_funcs rockchip_mode_config_helpers =
+ 
+ static struct drm_framebuffer *
+ rockchip_fb_create(struct drm_device *dev, struct drm_file *file,
++		   const struct drm_format_info *info,
+ 		   const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct drm_afbc_framebuffer *afbc_fb;
+-	const struct drm_format_info *info;
+ 	int ret;
+ 
+-	info = drm_get_format_info(dev, mode_cmd->pixel_format,
+-				   mode_cmd->modifier[0]);
+-	if (!info)
+-		return ERR_PTR(-ENOMEM);
+-
+ 	afbc_fb = kzalloc(sizeof(*afbc_fb), GFP_KERNEL);
+ 	if (!afbc_fb)
+ 		return ERR_PTR(-ENOMEM);
+diff --git a/drivers/gpu/drm/tegra/drm.h b/drivers/gpu/drm/tegra/drm.h
+index 0b65e69f3a8a..77e520c43f72 100644
+--- a/drivers/gpu/drm/tegra/drm.h
++++ b/drivers/gpu/drm/tegra/drm.h
+@@ -190,6 +190,7 @@ struct drm_framebuffer *tegra_fb_alloc(struct drm_device *drm,
+ 				       unsigned int num_planes);
+ struct drm_framebuffer *tegra_fb_create(struct drm_device *drm,
+ 					struct drm_file *file,
++					const struct drm_format_info *info,
+ 					const struct drm_mode_fb_cmd2 *cmd);
+ 
+ #ifdef CONFIG_DRM_FBDEV_EMULATION
+diff --git a/drivers/gpu/drm/tegra/fb.c b/drivers/gpu/drm/tegra/fb.c
+index 634c6346d947..24907573e758 100644
+--- a/drivers/gpu/drm/tegra/fb.c
++++ b/drivers/gpu/drm/tegra/fb.c
+@@ -132,11 +132,9 @@ struct drm_framebuffer *tegra_fb_alloc(struct drm_device *drm,
+ 
+ struct drm_framebuffer *tegra_fb_create(struct drm_device *drm,
+ 					struct drm_file *file,
++					const struct drm_format_info *info,
+ 					const struct drm_mode_fb_cmd2 *cmd)
+ {
+-	const struct drm_format_info *info = drm_get_format_info(drm,
+-								 cmd->pixel_format,
+-								 cmd->modifier[0]);
+ 	struct tegra_bo *planes[4];
+ 	struct drm_gem_object *gem;
+ 	struct drm_framebuffer *fb;
+diff --git a/drivers/gpu/drm/tests/drm_framebuffer_test.c b/drivers/gpu/drm/tests/drm_framebuffer_test.c
+index 6ea04cc8f324..9b8e01e8cd91 100644
+--- a/drivers/gpu/drm/tests/drm_framebuffer_test.c
++++ b/drivers/gpu/drm/tests/drm_framebuffer_test.c
+@@ -363,6 +363,7 @@ struct drm_framebuffer_test_priv {
+ 
+ static struct drm_framebuffer *fb_create_mock(struct drm_device *dev,
+ 					      struct drm_file *file_priv,
++					      const struct drm_format_info *info,
+ 					      const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct drm_framebuffer_test_priv *priv = container_of(dev, typeof(*priv), dev);
+diff --git a/drivers/gpu/drm/vc4/vc4_kms.c b/drivers/gpu/drm/vc4/vc4_kms.c
+index f5b167417428..8f983edb81ff 100644
+--- a/drivers/gpu/drm/vc4/vc4_kms.c
++++ b/drivers/gpu/drm/vc4/vc4_kms.c
+@@ -530,6 +530,7 @@ static int vc4_atomic_commit_setup(struct drm_atomic_state *state)
+ 
+ static struct drm_framebuffer *vc4_fb_create(struct drm_device *dev,
+ 					     struct drm_file *file_priv,
++					     const struct drm_format_info *info,
+ 					     const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct vc4_dev *vc4 = to_vc4_dev(dev);
+@@ -568,7 +569,7 @@ static struct drm_framebuffer *vc4_fb_create(struct drm_device *dev,
+ 		mode_cmd = &mode_cmd_local;
+ 	}
+ 
+-	return drm_gem_fb_create(dev, file_priv, mode_cmd);
++	return drm_gem_fb_create(dev, file_priv, info, mode_cmd);
+ }
+ 
+ /* Our CTM has some peculiar limitations: we can only enable it for one CRTC
+diff --git a/drivers/gpu/drm/virtio/virtgpu_display.c b/drivers/gpu/drm/virtio/virtgpu_display.c
+index 59a45e74a641..f9a98fbbabd1 100644
+--- a/drivers/gpu/drm/virtio/virtgpu_display.c
++++ b/drivers/gpu/drm/virtio/virtgpu_display.c
+@@ -293,6 +293,7 @@ static int vgdev_output_init(struct virtio_gpu_device *vgdev, int index)
+ static struct drm_framebuffer *
+ virtio_gpu_user_framebuffer_create(struct drm_device *dev,
+ 				   struct drm_file *file_priv,
++				   const struct drm_format_info *info,
+ 				   const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct drm_gem_object *obj = NULL;
+diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c b/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
+index 05b1c54a070c..2d48a28cda9c 100644
+--- a/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
++++ b/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
+@@ -712,6 +712,7 @@ vmw_kms_new_framebuffer(struct vmw_private *dev_priv,
+ 
+ static struct drm_framebuffer *vmw_kms_fb_create(struct drm_device *dev,
+ 						 struct drm_file *file_priv,
++						 const struct drm_format_info *info,
+ 						 const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct vmw_private *dev_priv = vmw_priv(dev);
+diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+index dfa78a49a6d9..a360003bee47 100644
+--- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
++++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+@@ -54,6 +54,7 @@ static const struct drm_framebuffer_funcs fb_funcs = {
+ 
+ static struct drm_framebuffer *
+ fb_create(struct drm_device *dev, struct drm_file *filp,
++	  const struct drm_format_info *info,
+ 	  const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct xen_drm_front_drm_info *drm_info = dev->dev_private;
+diff --git a/drivers/gpu/drm/xlnx/zynqmp_kms.c b/drivers/gpu/drm/xlnx/zynqmp_kms.c
+index b47463473472..2bee0a2275ed 100644
+--- a/drivers/gpu/drm/xlnx/zynqmp_kms.c
++++ b/drivers/gpu/drm/xlnx/zynqmp_kms.c
+@@ -373,6 +373,7 @@ static int zynqmp_dpsub_dumb_create(struct drm_file *file_priv,
+ 
+ static struct drm_framebuffer *
+ zynqmp_dpsub_fb_create(struct drm_device *drm, struct drm_file *file_priv,
++		       const struct drm_format_info *info,
+ 		       const struct drm_mode_fb_cmd2 *mode_cmd)
+ {
+ 	struct zynqmp_dpsub *dpsub = to_zynqmp_dpsub(drm);
+@@ -383,7 +384,7 @@ zynqmp_dpsub_fb_create(struct drm_device *drm, struct drm_file *file_priv,
+ 	for (i = 0; i < ARRAY_SIZE(cmd.pitches); ++i)
+ 		cmd.pitches[i] = ALIGN(cmd.pitches[i], dpsub->dma_align);
+ 
+-	return drm_gem_fb_create(drm, file_priv, &cmd);
++	return drm_gem_fb_create(drm, file_priv, info, &cmd);
+ }
+ 
+ static const struct drm_mode_config_funcs zynqmp_dpsub_mode_config_funcs = {
+diff --git a/include/drm/drm_gem_framebuffer_helper.h b/include/drm/drm_gem_framebuffer_helper.h
+index d302521f3dd4..4fdf9d3d1863 100644
+--- a/include/drm/drm_gem_framebuffer_helper.h
++++ b/include/drm/drm_gem_framebuffer_helper.h
+@@ -8,6 +8,7 @@ struct drm_afbc_framebuffer;
+ struct drm_device;
+ struct drm_fb_helper_surface_size;
+ struct drm_file;
++struct drm_format_info;
+ struct drm_framebuffer;
+ struct drm_framebuffer_funcs;
+ struct drm_gem_object;
+@@ -32,9 +33,11 @@ drm_gem_fb_create_with_funcs(struct drm_device *dev, struct drm_file *file,
+ 			     const struct drm_framebuffer_funcs *funcs);
+ struct drm_framebuffer *
+ drm_gem_fb_create(struct drm_device *dev, struct drm_file *file,
++		  const struct drm_format_info *info,
+ 		  const struct drm_mode_fb_cmd2 *mode_cmd);
+ struct drm_framebuffer *
+ drm_gem_fb_create_with_dirty(struct drm_device *dev, struct drm_file *file,
++			     const struct drm_format_info *info,
+ 			     const struct drm_mode_fb_cmd2 *mode_cmd);
+ 
+ int drm_gem_fb_vmap(struct drm_framebuffer *fb, struct iosys_map *map,
+diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
+index e971e1b8a850..2e848b816218 100644
+--- a/include/drm/drm_mode_config.h
++++ b/include/drm/drm_mode_config.h
+@@ -82,6 +82,7 @@ struct drm_mode_config_funcs {
+ 	 */
+ 	struct drm_framebuffer *(*fb_create)(struct drm_device *dev,
+ 					     struct drm_file *file_priv,
++					     const struct drm_format_info *info,
+ 					     const struct drm_mode_fb_cmd2 *mode_cmd);
+ 
+ 	/**
+-- 
+2.49.0
+
