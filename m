@@ -2,72 +2,50 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17637AFE1FE
-	for <lists+spice-devel@lfdr.de>; Wed,  9 Jul 2025 10:10:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77878AFE1FF
+	for <lists+spice-devel@lfdr.de>; Wed,  9 Jul 2025 10:10:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F59D10E148;
-	Wed,  9 Jul 2025 08:10:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 99BDC10E75B;
+	Wed,  9 Jul 2025 08:10:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=permerror (0-bit key) header.d=mail.ru header.i=@mail.ru header.b="W7yzLSwZ";
-	dkim=permerror (0-bit key) header.d=mail.ru header.i=@mail.ru header.b="wYomO2no";
+	dkim=pass (2048-bit key; unprotected) header.d=treblig.org header.i=@treblig.org header.b="Gqnkh++N";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-X-Greylist: delayed 2488 seconds by postgrey-1.36 at gabe;
- Mon, 30 Jun 2025 14:29:55 UTC
-Received: from fallback19.i.mail.ru (fallback19.i.mail.ru [79.137.243.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 27EC810E463
- for <spice-devel@lists.freedesktop.org>; Mon, 30 Jun 2025 14:29:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; 
- h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=J492Ky8fagJlvTZou+PzPPFfIMOd64Pte9ADXW/eGp0=; 
- t=1751293795;x=1751383795; 
- b=W7yzLSwZTr6/4OGz1cLo1U+GxkAmby4NhtPKHAGF+VVNad4Y+uqJWJ9Di1Ijs0VfiCOed+AgaLGMewhVPnQvGEn9LJxrtRI5BPnBsS5D4e6eiSvF1QT5D04xVgyZSCHR05uBLfbbXvELsIyPk9fv2P0nEvY0vOpozUbwaNt9uPRtqTf85Eyyyq2m6247XXkvufKkrhwi8c0xyaI6CV7KTc0ibECB7jncKoU4dFJWvfgR7w9wLi7crF7raZ2Mx3yLRHBDjEp1B5Dc56ZSPqZseU2eioHvOl7OVAPRaEhlEc+pxHxwROrC2uboN4hMdRhNsmz/G+v+kwry+vgoGiYyQw==;
-Received: from [10.14.54.187] (port=40152 helo=f378.i.mail.ru)
- by fallback19.i.mail.ru with esmtp (envelope-from <kornilov.04@mail.ru>)
- id 1uWErw-00D8jQ-SF
- for spice-devel@lists.freedesktop.org; Mon, 30 Jun 2025 16:48:25 +0300
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
- s=mail4; 
- h=Content-Type:Message-ID:Reply-To:Date:MIME-Version:Subject:To:From:From:Subject:Content-Type:Content-Transfer-Encoding:To:Cc;
- bh=J492Ky8fagJlvTZou+PzPPFfIMOd64Pte9ADXW/eGp0=; 
- t=1751291304;x=1751381304; 
- b=wYomO2no3soEQk19gHyLre9qT3Y0O/n4clhOOTOSikYBEk/+RmLapefxjFu3JPGDiQoIFFKug1fFkj3hstU1Nm9pmRzNqPwh4HHyHCkGrYP9UOE/Q8ri2nOVca714MDFNuaCnJTwEWMxn1SN3JZUSkqi3MI2xJO6vpNIWN2/ucwUVBRzn5RNJaqHnvu2DVXUWa4q16bPBRUsdCAqoOU6pfQxzqKVzyZbysrlgjid7ZjL0sc7zUr5IavHxH4aRTUkpe6AZ0JG/VQ9y9VmUo8NKz4ve0UHV9VU9K54YgMxGnh9dPpoFyTO8uvY2QNLcuQ5CHTw2qmBKPUb5suiL787Sw==;
-Received: by f378.i.mail.ru with local (envelope-from <kornilov.04@mail.ru>)
- id 1uWEru-0002Q8-2f
- for spice-devel@lists.freedesktop.org; Mon, 30 Jun 2025 16:48:22 +0300
-Received: by e.mail.ru with HTTP;
-	Mon, 30 Jun 2025 16:48:21 +0300
-From: =?UTF-8?B?0KHQtdGA0LPQtdC5INCa0L7RgNC90LjQu9C+0LI=?=
- <kornilov.04@mail.ru>
-To: spice-devel@lists.freedesktop.org
-Subject: =?UTF-8?B?U3BpY2UgcHJvdG9jb2wg?=
+Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C829210E6E1;
+ Tue,  8 Jul 2025 20:48:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+ ; s=bytemarkmx;
+ h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
+ :Subject; bh=DZoekFWDQRKYS8E//rmMDVjwcHRmk9UG+oNvcbgcvko=; b=Gqnkh++NdrrEy6eq
+ Z4VZVz+V47pRptvyZxxV/ID/De2WXDpJSTPe46C9TkSgO1qzr6ncjKK1sgriRC0fLFPMmT383TU9b
+ 6BAme5M/yoN/Cb70eXFllJIKFdhPIWxNu1e6M33BN3E5mqMe0vPSUwG1IN1S55VzNsViOoAUOGGMG
+ +h3PAZDWJNu3+ik/pLlvR3NVFYUjqAHCXBQ2oIz5bgLw/mOOE0b24PEE5tNCqyOS2MOHBV+Wp1VYH
+ BmTXI9XS8sQnzPjl2H/VFLgYoDUgFNzWyGxuS4SL8XZ+L6j6QjDMVKlXsd+2nbSx1PpUjWd/bg3sP
+ Wj163Y2bE8KsUNAYuw==;
+Received: from dg by mx.treblig.org with local (Exim 4.96)
+ (envelope-from <dg@treblig.org>) id 1uZFEu-00Erpy-0A;
+ Tue, 08 Jul 2025 20:48:32 +0000
+Date: Tue, 8 Jul 2025 20:48:31 +0000
+From: "Dr. David Alan Gilbert" <linux@treblig.org>
+To: kraxel@redhat.com, airlied@redhat.com, mripard@kernel.org
+Cc: maarten.lankhorst@linux.intel.com, tzimmermann@suse.de,
+ airlied@gmail.com, simona@ffwll.ch, virtualization@lists.linux.dev,
+ spice-devel@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/2] drm: qxl: Deadcoding
+Message-ID: <aG2EH86lesn7VZNZ@gallifrey>
+References: <20250413171058.271234-1-linux@treblig.org>
 MIME-Version: 1.0
-X-Mailer: Mail.Ru Mailer 1.0
-Date: Mon, 30 Jun 2025 16:48:21 +0300
-X-Priority: 3 (Normal)
-Message-ID: <1751291301.285648603@f114.i.mail.ru>
-Content-Type: multipart/alternative;
- boundary="--ALT--af530e42b8b24a6ebb550178f1b19c431751291301"
-X-Mailru-Src: fe
-X-7564579A: 646B95376F6C166E
-X-77F55803: 119C1F4DF6A9251C2E3D7D71DF501FE133D878E3FE96966A958A2E72248B17E58FD872164937FA4C3FFEDED73464FF47DDF50A2A1F28C8DD67C111B685AD46A07C8885BF398E192F
-X-7FA49CB5: 70AAF3C13DB70168C09775C1D3CA48CF9DEA6C1D1E44010FB2086D80B0504778CF19DD082D7633A0587C8798DFFB2F5764CD17681C2FEB7A176DF2183F8FC7C05ABAA54DC5DFABACC4224003CC8364763C61A01F5C7CE031BFD28B28ED4578739E625A9149C048EE33AC447995A7AD18922FDBD9EBA3C5B4B287FD4696A6DC2FA8DF7F3B2552694A4E2F5AFA99E116B42401471946AA11AF176DF2183F8FC7C0AD2F2D6F6013FF7F8F08D7030A58E5ADC58D69EE07B14084F39EFFDF887939037866D6147AF826D8C8C26D7781537342E63F03EBB803877C6F9789CCF6C18C3F8528715B7D10C86878DA827A17800CE73CD73D99384BA5CA9FA2833FD35BB23D9E625A9149C048EE902A1BE408319B296FD1C55BDD38FC3FD2E47CDBA5A96583BD4B6F7A4D31EC0BC014FD901B82EE079FA2833FD35BB23D27C277FBC8AE2E8B9ECA4966ACB4B5DBA471835C12D1D977C4224003CC8364762BB6847A3DEAEFB0F43C7A68FF6260569E8FC8737B5C2249EC8D19AE6D49635B68655334FD4449CB9ECD01F8117BC8BEAAAE862A0553A39223F8577A6DFFEA7C58E6ABEB090DA66043847C11F186F3C59DAA53EE0834AAEE
-X-C1DE0DAB: 0D63561A33F958A5948A3C8BD90008EE49903F71A53A8FED76CA2EF022DFA699F87CCE6106E1FC07E67D4AC08A07B9B07893FB2F108C49E4CB5012B2E24CD356
-X-C8649E89: 1C3962B70DF3F0AD75DCE07D45A7499577DD89D51EBB7742DC8270968E61249B1004E42C50DC4CA955A7F0CF078B5EC49A30900B95165D345B8C2BEC800D1021A37E53EAAC3CFC2FB165A978E9AE18CDC1625E23CDA42191093CF30D804183751D7E09C32AA3244C1FFCED79B879B1E2603CF8B5935394361DD47778AE04E04DBC4AF6B5DE6957CB5DA084F8E80FEBD355878D1A6A164D0633A8642BD6F41CA4CC2E138FFB4ACBED
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+Od3uM/CLT152eL7j4ZacoUSF0MSa0v5VBmEtSutdC50BIKdL3VIRlkt/X9Gr7QWYXucPUinHATAeHXorM+S1NQOd7Dfgh+EyScJiEPaJX74bXgq7uccfHH8=
-X-Mailru-Sender: EA2137A36C8A188706B992451C1EEF47C1C02AA985E27FC2DDF50A2A1F28C8DD33DCE8A2F86F2A497D97C47C9CAF120FE54A3F1AF7850F9C616EC40E1C10AABFDDBB79867CC2C1ECBFD942B9A721AC9CE61039825F17E966CCAB0402DB7B33C93DDE9B364B0DF289AE208404248635DF
-X-Mras: Ok
-X-Spam: undefined
-X-7564579A: 646B95376F6C166E
-X-77F55803: 6242723A09DB00B420B1FC84709EBAA7146B8EB428E6EC91603E6D2EA19A3F78049FFFDB7839CE9E58B493C797AC6DC82E1C8B4CDF36878879FCCCC3E98036B48D0C5AD976E8484E
-X-7FA49CB5: 0D63561A33F958A5B5C8C85BDF0BE49051070B5A54531AD40EF2A29C1DF1D8DECACD7DF95DA8FC8BD5E8D9A59859A8B6AFD5CA27AD69021E
-X-B7AD71C0: 6FEFE4C63DFE2D85D8E3AB397C3A1DE8C38BD1B36AAEEBC188FDC00E93F5176936F636B932AF606EDE59E6AB4ECD8DBB
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+OaV3B3Rpvb3IyiXXMwFJo09san95P+a5Oa5uShcC7g4OtI3uJQvhm049DPCm86TpoLAe8GD+p53pfMHxB0ImQHosz9QwHIciSyNFZA3ejMOBUkp9hsM/BOE=
-X-Mailru-MI: C001000000601000
-X-Mras: Ok
-X-Mailman-Approved-At: Wed, 09 Jul 2025 08:10:14 +0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <20250413171058.271234-1-linux@treblig.org>
+X-Chocolate: 70 percent or better cocoa solids preferably
+X-Operating-System: Linux/6.1.0-34-amd64 (x86_64)
+X-Uptime: 20:46:26 up 72 days, 5:00, 1 user, load average: 0.00, 0.00, 0.00
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Mailman-Approved-At: Wed, 09 Jul 2025 08:10:32 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,29 +57,43 @@ List-Post: <mailto:spice-devel@lists.freedesktop.org>
 List-Help: <mailto:spice-devel-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>, 
  <mailto:spice-devel-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: =?UTF-8?B?0KHQtdGA0LPQtdC5INCa0L7RgNC90LjQu9C+0LI=?=
- <kornilov.04@mail.ru>
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
+* linux@treblig.org (linux@treblig.org) wrote:
+> From: "Dr. David Alan Gilbert" <linux@treblig.org>
+> 
+> Hi,
+>   A couple of small deadcodings for qxl.  The first
+> just cleans up a couple of trivial unusued wrappers.
+> The second cleans out some debugfs code that's been unused
+> for a few years.
+> 
+> Dave
+> Signed-off-by: Dr. David Alan Gilbert <linux@treblig.org>
 
-----ALT--af530e42b8b24a6ebb550178f1b19c431751291301
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+Hi All,
+  A gentle ping on this clean up set from April.
 
-CkhpLCBJIGhhdmUgYSBmZXcgcXVlc3Rpb25zIGFib3V0IHRoZSBwcm90b2NvbCdzIHBlcmZvcm1h
-bmNlIHJlbGF0ZWQgdG8gdGhlIHJlZnJlc2ggcmF0ZSBvZiB0aGUgMmsgaW1hZ2UuIElmIHlvdXIg
-c3VwcG9ydCBpcyBzdGlsbCBhdmFpbGFibGUsIHBsZWFzZSBjb250YWN0IG1lLgo=
+Thanks in advance,
 
-----ALT--af530e42b8b24a6ebb550178f1b19c431751291301
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
+Dave
 
-CjxIVE1MPjxCT0RZPjxkaXYgaWQ9ImNvbXBvc2VXZWJWaWV3X2VkaXRhYmxlX2NvbnRlbnQiIGRh
-dGEtbWFpbHJ1YXBwLWNvbXBvc2UtaWQ9ImNvbXBvc2VXZWJWaWV3X2VkaXRhYmxlX2NvbnRlbnQi
-IHN0eWxlPSJ0ZXh0LWFsaWduOiBsZWZ0OyI+SGksIEkgaGF2ZSBhIGZldyBxdWVzdGlvbnMgYWJv
-dXQgdGhlIHByb3RvY29sJ3MgcGVyZm9ybWFuY2UgcmVsYXRlZCB0byB0aGUgcmVmcmVzaCByYXRl
-IG9mIHRoZSAyayBpbWFnZS4gSWYgeW91ciBzdXBwb3J0IGlzIHN0aWxsIGF2YWlsYWJsZSwgcGxl
-YXNlIGNvbnRhY3QgbWUuPGJyPjwvZGl2PjwvQk9EWT48L0hUTUw+Cg==
-
-----ALT--af530e42b8b24a6ebb550178f1b19c431751291301--
+> 
+> Dr. David Alan Gilbert (2):
+>   drm: qxl: Remove dead qxl_io_flush_* functions
+>   drm: qxl: Remove unused debugfs code
+> 
+>  drivers/gpu/drm/qxl/qxl_cmd.c     | 10 ----------
+>  drivers/gpu/drm/qxl/qxl_debugfs.c | 29 -----------------------------
+>  drivers/gpu/drm/qxl/qxl_drv.h     | 12 ------------
+>  3 files changed, 51 deletions(-)
+> 
+> -- 
+> 2.49.0
+> 
+-- 
+ -----Open up your eyes, open up your mind, open up your code -------   
+/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
+\        dave @ treblig.org |                               | In Hex /
+ \ _________________________|_____ http://www.treblig.org   |_______/
