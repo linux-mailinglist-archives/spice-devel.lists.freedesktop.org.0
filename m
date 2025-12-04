@@ -2,77 +2,70 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08D78CA4A94
-	for <lists+spice-devel@lfdr.de>; Thu, 04 Dec 2025 18:06:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2833ECA5685
+	for <lists+spice-devel@lfdr.de>; Thu, 04 Dec 2025 22:06:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5869510E997;
-	Thu,  4 Dec 2025 17:06:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7DA0410E089;
+	Thu,  4 Dec 2025 21:06:03 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XXvrrAq6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hJgyGbyQ";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
- [209.85.160.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8431110E0AB
- for <spice-devel@lists.freedesktop.org>; Wed,  3 Dec 2025 03:29:23 +0000 (UTC)
-Received: by mail-qt1-f176.google.com with SMTP id
- d75a77b69052e-4ed82ee9e57so76591841cf.0
- for <spice-devel@lists.freedesktop.org>; Tue, 02 Dec 2025 19:29:23 -0800 (PST)
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com
+ [209.85.128.169])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 737BA10E089
+ for <spice-devel@lists.freedesktop.org>; Thu,  4 Dec 2025 21:06:01 +0000 (UTC)
+Received: by mail-yw1-f169.google.com with SMTP id
+ 00721157ae682-787da30c53dso15236667b3.0
+ for <spice-devel@lists.freedesktop.org>; Thu, 04 Dec 2025 13:06:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764732562; x=1765337362; darn=lists.freedesktop.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ELfUggUXyxFr+NtPKtCcoTverRJFiNiBkxkDtPC+APE=;
- b=XXvrrAq6se5/cZNhD/dm62rZDZKP/B9frUAAqpvxGo5/hK8g8U/GadBLJBVK2EfoHx
- BkCVFAXZdeMgKiO2gvdyTdNJ6HJW631FEMuRDmwHleciXsQQxN3Dr71URWzdaLyvcdYh
- U/FRMMMNQB8pMby773bMnxu8akZ/WKeg8cmi7gkkCeSiVy9urrMhB7tK+veGw7RRZFj/
- mPyevC1E8gGNlXvmPm/mHoUpUaAvlLuXuLHVXTG0fVc3FsxfwDFl7BdGTAEWsnVjiPM0
- 1YUZPaZMoDKMQnhir2aMvlE3ma4ERPToTJrR9fQr3Ad4bLOFNgOo4a7qQudt74Dyyl6k
- bExQ==
+ d=gmail.com; s=20230601; t=1764882360; x=1765487160; darn=lists.freedesktop.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LdNf7kp9JV7i9LKI8vEdGMDPLORN4hjebJyZ8aqrF+4=;
+ b=hJgyGbyQ8ruy4UdHUDhK3d7SldZ40R4n//bRMpG0QAExC+YESmqQ9Mor1mNVBdPNV8
+ +r9G+rNQsEqmaH8tXLY7l6lntEqzU2tX9fuFvV+vcRDC8y4Ke4hcwnYAVN4cyDj0fYQE
+ jOpzKUnWpDQQPLV6VHSP6D4qAw64WtAYiHam0r6S/f7GQWij3Hk/lvpf5U9ZKlAodjuC
+ 0SL9EKquHvjZ53WDdoBvEORVcnBbpTPxpA1bmDj4cBhVjHK+F8sWIyEf5BcG5DTtR3qS
+ 0TVDcKluprshzP0/V1yngQS2Mq/GS4Q8lkHwT1yOaUUjEumjmfbK5S+W0FGuOoWZfPr8
+ /DPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764732562; x=1765337362;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ELfUggUXyxFr+NtPKtCcoTverRJFiNiBkxkDtPC+APE=;
- b=KCkF9rAt7KiU4V4lZYnwwNWwPcPUAH4Sv/Yb0MUqPnmP8avGDTdvWy0W0zJxgOs5mx
- VSKU26QFLNJnDGWJYCCrwl3Hj/tXT4fDMERSMYNCAxSnimh/mPeRRVKX8LJfV1DPa0Tl
- QQ3GfwJgAKYDnLTWh5CmZuEednM72eT6/fZt2XBX8Xy3gvHmWLqTav4OcMGtNRAf6HuO
- k+asn2C+ER9B5Y5Kq28EPrqr3F2vugV1JffXlG2uK/Ez8xlO9i3oRw3zBfFmuQnBjPaO
- AzVTjjI5tBaVfGrcnDKdTpjOc7w2z3vrnuplSd9xpJLd04ub6z6kG/idwNMuut2U+YG+
- mKww==
-X-Gm-Message-State: AOJu0YyKKjSUoVB7nrIrIcNt2XAPT1UeL1wTXNR9Yin3tRly4iczR4F0
- KRQnbgE6HAPtreoB6pk7Y1JG8sXpPcYdefkVSpJXTqTNWchl04EKwvafIhm/Tg==
-X-Gm-Gg: ASbGncsvcSt5dO3K6perM6Dh9wXl2Zkr5ETxL6CitS3hiTcJiHX6IaWjFUkrunn8xUT
- E9D4HaRIQFHKPrVr+wpOrHgVcgiOGxmn1Dzqvfdibgq1480CtNQ9kOdImfbcqCgWRJFFcfkXWG1
- kA8ydxJIw7sxECOyE1IXHvF2nA79GX00jMovmMOBIMrz8+NC7c9pRyKEiJHabL25+/7IbPSGYYP
- oOqbmyOc39BEpBk28YBm8s0tUFXu4LAshe1acbYe7774iy22b7yq3I4u29bwpOLsmvyISbduAXn
- MTRlCDFL/PocPcSf7BwZXVmPr95kCAQAApIzU0J1zkRpR3Qa1C1jtjOHvjibwB7WXLEj4EUbHot
- 2uM50uz+O0SnzcFAp5Z+/b9F2M5PCTOEzncindHkNdQllkKOTfFuFMh3rX1kH9I8caE4QyWsPIq
- y3+qbf8Yf0jPt0Trv10DFCbh42LHzD/f70VQ==
-X-Google-Smtp-Source: AGHT+IGfBmRPzCz2ROoOBRaYNbq1JCeX1X6Nq3JW18gxaQbgfius244AkbvkTCl5nmGD8dLcv1SeAQ==
-X-Received: by 2002:a05:6214:401a:b0:873:af59:fafa with SMTP id
- 6a1803df08f44-8881958b47emr12051986d6.45.1764732562363; 
- Tue, 02 Dec 2025 19:29:22 -0800 (PST)
-Received: from localhost.localdomain ([2602:47:d950:ab00:9e6b:ff:fe52:2d0a])
- by smtp.googlemail.com with ESMTPSA id
- 6a1803df08f44-88652b4afe8sm117440216d6.29.2025.12.02.19.29.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Dec 2025 19:29:22 -0800 (PST)
-From: Nicholas Vinson <nvinson234@gmail.com>
-To: spice-devel@lists.freedesktop.org
-Cc: Nicholas Vinson <nvinson234@gmail.com>
-Subject: [PATCH 1/1] test-display-base.cpp: adjust designated init.
-Date: Tue,  2 Dec 2025 22:29:03 -0500
-Message-ID: <20a971945bfcfbfb281e1b4654dcdfe8a66033d6.1764732184.git.nvinson234@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1764732184.git.nvinson234@gmail.com>
-References: <cover.1764732184.git.nvinson234@gmail.com>
+ d=1e100.net; s=20230601; t=1764882360; x=1765487160;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LdNf7kp9JV7i9LKI8vEdGMDPLORN4hjebJyZ8aqrF+4=;
+ b=j3T+Iznbi7E4FmIWCJADUj4yG9HWHlMBOo/k1m8zAECTxlazB7I+oGhqUpH2UqCyMB
+ izPj40fpkkrPQWgsF5kBjuIjB6A+ERjgKlWkrPWq1BKmYAdQI3jgKAMhnIF0cOVfXPdO
+ TNd74+U9sO1ndPGqApdsyLmdHgIPuONyUx5bEZcTEJ7hrkfJooFt6WlZdVh0jnN8vy0Q
+ I3sYjwzOXMuikEzrVvRE3WiPNjCk/+GCezNyle6PQyh1WpHQ264asUlO0LHGz028p/q0
+ gQlXPSLSZ+3tkbobE196/NK37+JOeJOC53ZkI+omT4jvyZq6TR1ceCoFG6VyvtkAzr/a
+ wq+Q==
+X-Gm-Message-State: AOJu0YwudBj4kqKUxcfqJA4irEllJvXU3jaWLOY16rWsbtdzKR0tsoBa
+ AG0BtCKQ7DE8E/PckHmAhC+RBxdUCZ4NJ3PF8/7AWSyJVHsq6TDToRffujYv+9QpHDj9vcXGs27
+ B7tpMhafCL4bH562ep0KnfZ1b97hABb/nN92/
+X-Gm-Gg: ASbGncuy8ejw7m1F9Ls0XXqZL8F+DbhTxNG1ZmoTciRx+tg4RDNRAVbP55QvFkSBuTE
+ iNGSyqCoJkkZPvgS/f9Wmro8FP2trLJcbjnSN9jhWeCT/D+5b/UlZGocrvyQHWCD7OE+NDuW6U5
+ Qz4KI4BYoT7Sq3tW5u3WQf7+LhLNQThQSNBAXR9zfpeYQYXW9AdX6vLwH6SuyuJjd/gjrvxYsNl
+ K2oIkNl4iWU0Lw37YjbBGW/plKN46xhpfYoO1zOQiT9+LM6IxwZx59QL7t5skOfmDxy2jRG5TAj
+ XT4rPg==
+X-Google-Smtp-Source: AGHT+IHDlw1sbNyoD7CYUdbe3MA7zPBRveIMQ9bu1TklMONLz/VQ4irstiXQBNdTI8AF7KcLMQShpB+s08Omx2aHq1g=
+X-Received: by 2002:a05:690c:3806:b0:787:c12e:4f32 with SMTP id
+ 00721157ae682-78c0c190613mr57937607b3.49.1764882360409; Thu, 04 Dec 2025
+ 13:06:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 04 Dec 2025 17:06:13 +0000
+References: <cover.1764732184.git.nvinson234@gmail.com>
+ <20a971945bfcfbfb281e1b4654dcdfe8a66033d6.1764732184.git.nvinson234@gmail.com>
+In-Reply-To: <20a971945bfcfbfb281e1b4654dcdfe8a66033d6.1764732184.git.nvinson234@gmail.com>
+From: Frediano Ziglio <freddy77@gmail.com>
+Date: Thu, 4 Dec 2025 21:05:48 +0000
+X-Gm-Features: AWmQ_bkBffRYtGk_eLQfDx77gpUwAj1wLcbqcWmlMi5A8yLhP9OR1ZQgpeEc9qM
+Message-ID: <CAHt6W4fbv7DoKue0i9Zjpm+M6coT95dakoXbRFeuyfkQ9qG6yA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] test-display-base.cpp: adjust designated init.
+To: Nicholas Vinson <nvinson234@gmail.com>
+Cc: spice-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,27 +80,36 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Adjust designated initializer to be C++20 compliant. Starting with
-g++-16, GCC will default to the C++20 standard.
+On Thu, 4 Dec 2025 at 17:06, Nicholas Vinson <nvinson234@gmail.com> wrote:
+>
+> Adjust designated initializer to be C++20 compliant. Starting with
+> g++-16, GCC will default to the C++20 standard.
+>
+> Signed-off-by: Nicholas Vinson <nvinson234@gmail.com>
+> ---
+>  server/tests/test-display-base.cpp | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/server/tests/test-display-base.cpp b/server/tests/test-display-base.cpp
+> index b220b7fe..5d0404c9 100644
+> --- a/server/tests/test-display-base.cpp
+> +++ b/server/tests/test-display-base.cpp
+> @@ -806,7 +806,7 @@ static QXLInterface display_sif = {
+>          .major_version = SPICE_INTERFACE_QXL_MAJOR,
+>          .minor_version = SPICE_INTERFACE_QXL_MINOR
+>      },
+> -    { .attached_worker = attached_worker },
+> +    .attached_worker = attached_worker,
+>      .set_compression_level = set_compression_level,
+>      .set_mm_time = nullptr,
+>      .get_init_info = get_init_info,
 
-Signed-off-by: Nicholas Vinson <nvinson234@gmail.com>
----
- server/tests/test-display-base.cpp | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+With this change I'm getting
 
-diff --git a/server/tests/test-display-base.cpp b/server/tests/test-display-base.cpp
-index b220b7fe..5d0404c9 100644
---- a/server/tests/test-display-base.cpp
-+++ b/server/tests/test-display-base.cpp
-@@ -806,7 +806,7 @@ static QXLInterface display_sif = {
-         .major_version = SPICE_INTERFACE_QXL_MAJOR,
-         .minor_version = SPICE_INTERFACE_QXL_MINOR
-     },
--    { .attached_worker = attached_worker },
-+    .attached_worker = attached_worker,
-     .set_compression_level = set_compression_level,
-     .set_mm_time = nullptr,
-     .get_init_info = get_init_info,
--- 
-2.52.0
+  CXX      test-display-base.o
+test-display-base.cpp:826:1: error: missing braces around initializer
+for 'QXLInterface::<unnamed union>' [-Werror=missing-braces]
+  826 | };
+      | ^
 
+Frediano
