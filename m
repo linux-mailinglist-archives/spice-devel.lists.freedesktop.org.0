@@ -2,70 +2,83 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2833ECA5685
-	for <lists+spice-devel@lfdr.de>; Thu, 04 Dec 2025 22:06:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64F70CAA311
+	for <lists+spice-devel@lfdr.de>; Sat, 06 Dec 2025 09:54:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7DA0410E089;
-	Thu,  4 Dec 2025 21:06:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9080E10E0FA;
+	Sat,  6 Dec 2025 08:54:34 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hJgyGbyQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Uc/w0F3e";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com
- [209.85.128.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 737BA10E089
- for <spice-devel@lists.freedesktop.org>; Thu,  4 Dec 2025 21:06:01 +0000 (UTC)
-Received: by mail-yw1-f169.google.com with SMTP id
- 00721157ae682-787da30c53dso15236667b3.0
- for <spice-devel@lists.freedesktop.org>; Thu, 04 Dec 2025 13:06:01 -0800 (PST)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+ [209.85.222.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1E5AA10E223
+ for <spice-devel@lists.freedesktop.org>; Thu,  4 Dec 2025 21:20:49 +0000 (UTC)
+Received: by mail-qk1-f177.google.com with SMTP id
+ af79cd13be357-8b2dcdde65bso215506385a.0
+ for <spice-devel@lists.freedesktop.org>; Thu, 04 Dec 2025 13:20:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1764882360; x=1765487160; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LdNf7kp9JV7i9LKI8vEdGMDPLORN4hjebJyZ8aqrF+4=;
- b=hJgyGbyQ8ruy4UdHUDhK3d7SldZ40R4n//bRMpG0QAExC+YESmqQ9Mor1mNVBdPNV8
- +r9G+rNQsEqmaH8tXLY7l6lntEqzU2tX9fuFvV+vcRDC8y4Ke4hcwnYAVN4cyDj0fYQE
- jOpzKUnWpDQQPLV6VHSP6D4qAw64WtAYiHam0r6S/f7GQWij3Hk/lvpf5U9ZKlAodjuC
- 0SL9EKquHvjZ53WDdoBvEORVcnBbpTPxpA1bmDj4cBhVjHK+F8sWIyEf5BcG5DTtR3qS
- 0TVDcKluprshzP0/V1yngQS2Mq/GS4Q8lkHwT1yOaUUjEumjmfbK5S+W0FGuOoWZfPr8
- /DPw==
+ d=gmail.com; s=20230601; t=1764883248; x=1765488048; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JCVv2Sdgu4DYpu++mT6LUAoCyKMvpvwNfh4s2SQ9yjU=;
+ b=Uc/w0F3e/WyInYgj71TezFCpXMaQEGcBAw0G0iDimx9V2DRvuN7iye1vkR4F80t/Jr
+ tN1DOdfSWqnAtyFy4pTqfDgHkPcXyzao0kO9s6N1aV0RJvj0jkeCpfDV9/3yiiHsau49
+ C1LaOz2A8RNi/9G5H6Q8PxQHuwGTynH5u86VMs0AxNPzzVPaw9RBiMzVeNivF0fXUzLT
+ OOlktU406UjfLCfOJWr7tfrKOthTNK/C+rqYXIe65IndAzn+761T6j9i2i9U9LCvsyEl
+ yTKSSFIdUrEpif9QqdxTLjoQZHvMXSLLpcq2C2HyBJ3S4i61n5EA3yv89irhA864VNeR
+ X4AA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1764882360; x=1765487160;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LdNf7kp9JV7i9LKI8vEdGMDPLORN4hjebJyZ8aqrF+4=;
- b=j3T+Iznbi7E4FmIWCJADUj4yG9HWHlMBOo/k1m8zAECTxlazB7I+oGhqUpH2UqCyMB
- izPj40fpkkrPQWgsF5kBjuIjB6A+ERjgKlWkrPWq1BKmYAdQI3jgKAMhnIF0cOVfXPdO
- TNd74+U9sO1ndPGqApdsyLmdHgIPuONyUx5bEZcTEJ7hrkfJooFt6WlZdVh0jnN8vy0Q
- I3sYjwzOXMuikEzrVvRE3WiPNjCk/+GCezNyle6PQyh1WpHQ264asUlO0LHGz028p/q0
- gQlXPSLSZ+3tkbobE196/NK37+JOeJOC53ZkI+omT4jvyZq6TR1ceCoFG6VyvtkAzr/a
- wq+Q==
-X-Gm-Message-State: AOJu0YwudBj4kqKUxcfqJA4irEllJvXU3jaWLOY16rWsbtdzKR0tsoBa
- AG0BtCKQ7DE8E/PckHmAhC+RBxdUCZ4NJ3PF8/7AWSyJVHsq6TDToRffujYv+9QpHDj9vcXGs27
- B7tpMhafCL4bH562ep0KnfZ1b97hABb/nN92/
-X-Gm-Gg: ASbGncuy8ejw7m1F9Ls0XXqZL8F+DbhTxNG1ZmoTciRx+tg4RDNRAVbP55QvFkSBuTE
- iNGSyqCoJkkZPvgS/f9Wmro8FP2trLJcbjnSN9jhWeCT/D+5b/UlZGocrvyQHWCD7OE+NDuW6U5
- Qz4KI4BYoT7Sq3tW5u3WQf7+LhLNQThQSNBAXR9zfpeYQYXW9AdX6vLwH6SuyuJjd/gjrvxYsNl
- K2oIkNl4iWU0Lw37YjbBGW/plKN46xhpfYoO1zOQiT9+LM6IxwZx59QL7t5skOfmDxy2jRG5TAj
- XT4rPg==
-X-Google-Smtp-Source: AGHT+IHDlw1sbNyoD7CYUdbe3MA7zPBRveIMQ9bu1TklMONLz/VQ4irstiXQBNdTI8AF7KcLMQShpB+s08Omx2aHq1g=
-X-Received: by 2002:a05:690c:3806:b0:787:c12e:4f32 with SMTP id
- 00721157ae682-78c0c190613mr57937607b3.49.1764882360409; Thu, 04 Dec 2025
- 13:06:00 -0800 (PST)
+ d=1e100.net; s=20230601; t=1764883248; x=1765488048;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JCVv2Sdgu4DYpu++mT6LUAoCyKMvpvwNfh4s2SQ9yjU=;
+ b=RD+Jr7u7mOrQMrlyhB7o8casoUa/wfrIuCsOXKjpG3fbzV3gRZAreARm2ro4RM0S/3
+ KHhSTUvaGvloNV4d1Wk2LHpCss6aGrj+HdqhhJ3Y3itpM8P/LQBEsJcnT7xwGT4X4/Zz
+ UiF8AoSQ3OPEcAg6rP6ymGS5LI25NN6QEYL5viEDY1jGRH5gL66HhkWoVstYXygYyxYT
+ NdaRS2ueKKxEaUV2TWvxCYQIbHEGoh57que4S1t0hkdPNrm5BthEg3J0/zXTEpoT1jHB
+ 4mY9Tk+4D4EjmaQnnboClG+Rvz10z3iHPd18RlauGSuOhb0/RGVE196t7T6MsfdvT39g
+ 2cRw==
+X-Gm-Message-State: AOJu0YwInv8aWf6uLxSLJ3qECyoLcPvvXB0R1nnm6oXHn5ePSkEIgzbN
+ pgPsWtGmRtzmR4p8d7TRhB4lMyzbSlQ6FFrhtJUf2Zb5kTX+tc4SVCo4
+X-Gm-Gg: ASbGnctj5EZDgs1kZ/1GMS16tgnByxT2hn2E5RzgLBRLbiTNjMtB+5nKBUJ9qzTkvMj
+ 9XRB+pOJUZ8ugvITjyLdaLgzZwq5GNOifRhsEGLwYvga60eVzMvJkfJ6U9UJ+z3aCBiztJK2plI
+ e1EKmb2psVMzWd31ITlF1Lua0uEhhxxGfXUJJYBZJts2TQztVVIlxgIEBzY/ZVnrBHejGqf0EoL
+ O0d39jwrudbRgnr39A33f+Ea+2qwqpjL8a6iugUJIa/Bn7E307+aMWkGSHkZ3jyf7H2MW5hUYWV
+ yvt64xhTL8muiJdfiOh9bPxMi0ZQ0+/Db31rXJ+QVK+wOyGorPLzTpM0YFAdajshhIECeVYEImh
+ 11BgkigxZobdt2gyi+omD07yPAV6H6b10IM3qBGqZ3Dieiw4pABrUubTfw6GVhe70wIl6AbbQCO
+ H6ZtFUpEThmcCzwbRGA8pU8zHubEi28VL4n5MpEp+iTwrJwxlc1vJG034=
+X-Google-Smtp-Source: AGHT+IGVs7VNzzSWk0q1Wl8auY89fSLTT3HsizKqAFg2iMwGCdJ1N4bonl9fjElBOZNosdpb/52DeQ==
+X-Received: by 2002:a05:620a:29ce:b0:8b2:eb83:b94 with SMTP id
+ af79cd13be357-8b61814bea0mr611935885a.25.1764883247852; 
+ Thu, 04 Dec 2025 13:20:47 -0800 (PST)
+Received: from ?IPV6:2602:47:d950:ab00:b363:e8b1:40d5:873f?
+ ([2602:47:d950:ab00:b363:e8b1:40d5:873f])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8b6252b5e14sm229040285a.15.2025.12.04.13.20.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 04 Dec 2025 13:20:47 -0800 (PST)
+Message-ID: <1a309b38-3c92-4118-8ab8-21c865490084@gmail.com>
+Date: Thu, 4 Dec 2025 16:20:46 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] test-display-base.cpp: adjust designated init.
+To: Frediano Ziglio <freddy77@gmail.com>
+Cc: spice-devel@lists.freedesktop.org
 References: <cover.1764732184.git.nvinson234@gmail.com>
  <20a971945bfcfbfb281e1b4654dcdfe8a66033d6.1764732184.git.nvinson234@gmail.com>
-In-Reply-To: <20a971945bfcfbfb281e1b4654dcdfe8a66033d6.1764732184.git.nvinson234@gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 4 Dec 2025 21:05:48 +0000
-X-Gm-Features: AWmQ_bkBffRYtGk_eLQfDx77gpUwAj1wLcbqcWmlMi5A8yLhP9OR1ZQgpeEc9qM
-Message-ID: <CAHt6W4fbv7DoKue0i9Zjpm+M6coT95dakoXbRFeuyfkQ9qG6yA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] test-display-base.cpp: adjust designated init.
-To: Nicholas Vinson <nvinson234@gmail.com>
-Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+ <CAHt6W4fbv7DoKue0i9Zjpm+M6coT95dakoXbRFeuyfkQ9qG6yA@mail.gmail.com>
+Content-Language: en-US
+From: Nicholas Vinson <nvinson234@gmail.com>
+In-Reply-To: <CAHt6W4fbv7DoKue0i9Zjpm+M6coT95dakoXbRFeuyfkQ9qG6yA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 06 Dec 2025 08:54:33 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,36 +93,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Thu, 4 Dec 2025 at 17:06, Nicholas Vinson <nvinson234@gmail.com> wrote:
->
-> Adjust designated initializer to be C++20 compliant. Starting with
-> g++-16, GCC will default to the C++20 standard.
->
-> Signed-off-by: Nicholas Vinson <nvinson234@gmail.com>
-> ---
->  server/tests/test-display-base.cpp | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/server/tests/test-display-base.cpp b/server/tests/test-display-base.cpp
-> index b220b7fe..5d0404c9 100644
-> --- a/server/tests/test-display-base.cpp
-> +++ b/server/tests/test-display-base.cpp
-> @@ -806,7 +806,7 @@ static QXLInterface display_sif = {
->          .major_version = SPICE_INTERFACE_QXL_MAJOR,
->          .minor_version = SPICE_INTERFACE_QXL_MINOR
->      },
-> -    { .attached_worker = attached_worker },
-> +    .attached_worker = attached_worker,
->      .set_compression_level = set_compression_level,
->      .set_mm_time = nullptr,
->      .get_init_info = get_init_info,
+On 12/4/25 16:05, Frediano Ziglio wrote:
+> On Thu, 4 Dec 2025 at 17:06, Nicholas Vinson <nvinson234@gmail.com> wrote:
+>>
+>> Adjust designated initializer to be C++20 compliant. Starting with
+>> g++-16, GCC will default to the C++20 standard.
+>>
+>> Signed-off-by: Nicholas Vinson <nvinson234@gmail.com>
+>> ---
+>>   server/tests/test-display-base.cpp | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/server/tests/test-display-base.cpp b/server/tests/test-display-base.cpp
+>> index b220b7fe..5d0404c9 100644
+>> --- a/server/tests/test-display-base.cpp
+>> +++ b/server/tests/test-display-base.cpp
+>> @@ -806,7 +806,7 @@ static QXLInterface display_sif = {
+>>           .major_version = SPICE_INTERFACE_QXL_MAJOR,
+>>           .minor_version = SPICE_INTERFACE_QXL_MINOR
+>>       },
+>> -    { .attached_worker = attached_worker },
+>> +    .attached_worker = attached_worker,
+>>       .set_compression_level = set_compression_level,
+>>       .set_mm_time = nullptr,
+>>       .get_init_info = get_init_info,
+> 
+> With this change I'm getting
+> 
+>    CXX      test-display-base.o
+> test-display-base.cpp:826:1: error: missing braces around initializer
+> for 'QXLInterface::<unnamed union>' [-Werror=missing-braces]
+>    826 | };
+>        | ^
+> 
 
-With this change I'm getting
+Could you post your compiler version and the CXX flags you used?
 
-  CXX      test-display-base.o
-test-display-base.cpp:826:1: error: missing braces around initializer
-for 'QXLInterface::<unnamed union>' [-Werror=missing-braces]
-  826 | };
-      | ^
+> Frediano
 
-Frediano
