@@ -2,84 +2,73 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78F11CAC81A
-	for <lists+spice-devel@lfdr.de>; Mon, 08 Dec 2025 09:33:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 707C9CAC820
+	for <lists+spice-devel@lfdr.de>; Mon, 08 Dec 2025 09:33:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C1E1910E3CC;
-	Mon,  8 Dec 2025 08:33:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C82610E111;
+	Mon,  8 Dec 2025 08:33:48 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="chRTTNEJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FBRyW7jH";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
- [209.85.160.176])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BAC5010E34F
- for <spice-devel@lists.freedesktop.org>; Sun,  7 Dec 2025 12:19:29 +0000 (UTC)
-Received: by mail-qt1-f176.google.com with SMTP id
- d75a77b69052e-4ed66b5abf7so45780271cf.1
- for <spice-devel@lists.freedesktop.org>; Sun, 07 Dec 2025 04:19:29 -0800 (PST)
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com
+ [209.85.219.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 28A0910E34F
+ for <spice-devel@lists.freedesktop.org>; Sun,  7 Dec 2025 12:20:08 +0000 (UTC)
+Received: by mail-qv1-f44.google.com with SMTP id
+ 6a1803df08f44-8824a756771so42966536d6.0
+ for <spice-devel@lists.freedesktop.org>; Sun, 07 Dec 2025 04:20:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765109969; x=1765714769; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NWkkiVkUius0EMpzEQAv17gclaDP//5Pgjm/GLilZmY=;
- b=chRTTNEJLygoDOwphdLX2OnBqqU2a4DCiZa5pgnXBHP1Py5u4TK5SH8lFRWBjoRpUJ
- Rq1SOAIL6tK1cYA6MLq69VAcR8yCWwDhhUN1QTFjKsGgg88XP4w7JUUEFzNU5UIqSiWm
- pyUFXlxaKOoX41CN8+bJXpj4SbmOpXNbMjHj9T3Fsb2c213wlkIk8Ayd/+e8bkUX7Yhs
- V3dkSsogdD3CH5JU76Z+m/lrpCLoa7Lv0nNQzAYFLQri1FKPsFTcdiy2HO16769oq5y2
- +odhezPTjHrvOH9R8bc4NgNgzH4hV3tmIS5c0U/AaYJZOvnLtdnOsB47LccqSXVricO7
- QXCQ==
+ d=gmail.com; s=20230601; t=1765110007; x=1765714807; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CuY+hcvgdUrDUVsNdV1tzpOaQgnBZ7MP+aaJB+A2FPo=;
+ b=FBRyW7jHMm0w4JeCYaUmNpSiw6GpqWpwFW0bEuZ3ISKA9RoOk4sGgTjF0Seh3oNphM
+ t3/ihXqRtzd1czBq92Pg17ynuzUxeJVolcWy4IzzDRf4fk4xzc1uKmtLOZCUfIS4v0G3
+ l6v8CHeWiAFK+/cy7eTrG0Y38RsOCthV7RilKEJih/IOHQ5rpuC0FUL+CoN5TE7JBug1
+ 9ttIvHavUcYNBB/2UukdpR3RgTnV4c6ufdDo5BeQnLxFz/xyJlyd0CceYc3/ru22MCHB
+ VJeefcxz3QrOczothdOB7qjYjxEKtAwk0PQMVSGbXzd46/mKQZviLIcnzMEy3actYVOP
+ hETw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765109969; x=1765714769;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NWkkiVkUius0EMpzEQAv17gclaDP//5Pgjm/GLilZmY=;
- b=lYA54FNGhuXkHuD/ZWvwhgcI0fkznHSzizrOAyztI4rH5kiTfkw+HsP/IgjOKAggdN
- cdDiraelND423q5dlr4PakuYONumJUWMSEPYv2pMdCAdWGX3rPTra0Nbb9noXjBI0UPR
- VC8nZgaP8Wfxt05HYfqI8WNfkEFlY253zKKRasxwt7kQcBx6OqPr0T4QenlYgMrOhi+G
- p3BBr7HfRyBq175ex40JnCrbSzRQIelfPnxOmKXgXATNQe7JI9pb6TVYwoVCnSayAXI3
- jrTPbJRaCj68JWW7SV8lqQzSv6g5opML5EEYmpTTi1mSSARaMBadhI3IjDYgwA3KA4nF
- E45g==
-X-Gm-Message-State: AOJu0YxkwXvwidHJjYUjZJE+h6679/1mT0zWE+TsSMbwBhrjuJrM6PwT
- Xr/znPQYBt8WBDKJdfMzD50yYzlPLRmCnkqaqvyltGH+BGvxvZ7kKte6
-X-Gm-Gg: ASbGncurCGeHUj4xiP5yb31iEFr9wH2JRd29dwfr5jGxxgNFehagQq2q8iB6uMkY1kq
- nlJvt8/zms/pkKCDMMuYL4OYrtCAtqodgeDAyOKmA1amZbIoCOtfWBJ9CY737JG4Oe6lFCAF8tY
- Rv7X5npRAwdkkU0+27IpTplbzphdMeNIOtSU/rY9hYvls9lkvVGpi4AG/SpzmPNzB0iTfnqwYre
- Hzfxr77KZlMXpUjBNLfVf185BiXCNUket+4FkAL7HHQBxnOAqeWc/RxWVC9Dgd3Bk11G8SS9p5o
- qaoDw3YTcCshwZjxoC/7FZo9Rh69VexarkBLEww/9cgRBQwuQ9BbJ1dwDPkpdmYCHxbHK5WbZXL
- ES4uOPcCz59yRDdIxY35u9pg6zeFrEewj1LneEnwug4V74L07bYexzVQVGvb5dQULc63HOKoaaQ
- uzDotjRZra/2kq2zMO9P6CNikU13z+gVKiqdpWQgrVKKUx2lTr3nt5yj0=
-X-Google-Smtp-Source: AGHT+IEx6UXdEGm3bR21A08TaVBLWKDiKOS+7g2cWC9d5ZZzJfhSiZdhrldlAZwjqOIxqzmY1Co40g==
-X-Received: by 2002:a05:622a:1356:b0:4ee:230b:ed07 with SMTP id
- d75a77b69052e-4f02308706cmr175664901cf.15.1765109968699; 
- Sun, 07 Dec 2025 04:19:28 -0800 (PST)
-Received: from ?IPV6:2602:47:d950:ab00:2fd4:7b4c:f3ac:805d?
- ([2602:47:d950:ab00:2fd4:7b4c:f3ac:805d])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4f027d56ebbsm57843791cf.31.2025.12.07.04.19.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 07 Dec 2025 04:19:27 -0800 (PST)
-Message-ID: <40fe8264-6851-4d92-93df-00c7e60b3bde@gmail.com>
-Date: Sun, 7 Dec 2025 07:19:26 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] m4/spice-compile-warnings.m4: disable
- -Wmissing-braces
-To: Uri Lublin <uril@redhat.com>
-Cc: spice-devel@lists.freedesktop.org, freddy77@gmail.com
-References: <cover.1764987923.git.nvinson234@gmail.com>
- <91f68d92ea9b417efd8cdff957711fc635d70b38.1764987923.git.nvinson234@gmail.com>
- <CAAg9qJ2jvxsQtMtVQMXPVJgLgiZDStfrHkapNMmY94v77mz07g@mail.gmail.com>
- <a096e6e2-361d-4a11-b23a-d88ff187a52d@gmail.com>
- <CAAg9qJ3iGswfrAH1Kp7DKE7LX8uhpVx0aZ1dDKUoPxsKDeD7_A@mail.gmail.com>
-Content-Language: en-US
+ d=1e100.net; s=20230601; t=1765110007; x=1765714807;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CuY+hcvgdUrDUVsNdV1tzpOaQgnBZ7MP+aaJB+A2FPo=;
+ b=qoEBvke/KPP8dtJndoXVhChOowQ2d7KbKWM0w3ze/txv0DkpA1lOA58ef2oqGNQYIH
+ cOgW84V9tTgyTqW+uLOeoUuqZtWOXr+OKLzlr2ycetGNx6uGKHMwGxNkPEM4F/dVoVGY
+ AATsV3NCl4ti/XurPKOo7RqGC/8xm7XfgUVbAdcAXTIKBCqVIsLr0v+8CN/AMYkSIAZJ
+ aPQgJ9dkPHlaYbccaNkAp1yYLsn20NFNWIQXI71txBZh9EeHhUFrRsZ9wBO3AG/mNNmJ
+ sweYRSELy/K2WSZlCZUEPlayEKx2BtxosX04Mk8vUFSWAkzjLGHTx4WRsIS2CKqWnXgn
+ ysCQ==
+X-Gm-Message-State: AOJu0YwZw1bS0dzqvUqOqdXIRyeJjl8h+OZ6+mjL1OeWFVq9R6sYVVQ6
+ pkiVVqwM3X3V1ULZ5XHkMLi6GepGKJEeWx3DyyQG4WV6v+bho/Y9yd17I4lDDA==
+X-Gm-Gg: ASbGncs+I5hitXhtgGDLf3fxRJt0Vc5FoiJgXj73BufM5UWiT34l9o/LCZGgKWITPJo
+ c8Q6QvbtgX6KmwGVFiNLskI+s+x/jx7r5doj2WtFGfXW1zhMG08kvplC6rmLHX3nuTD3xhMEwY9
+ ioVmAsywX4cT+sP2V2/qogmmkeoxRU0u0uOzUNzKZBZBPNSNHRrCGfBKyNFYLXmioYJvK+l0elP
+ ChqsimlZmI8acFYVhzYQ7UWl6pa9DFYxUBXLP2R7Mk9DGBMv8RBV5X7/pu4u6RjEzuy30e1OsZY
+ jkmtHNCzAcJIicL/yYWUpAj3v1VWHu6AQOPls6N3871OFE9W12vXJ+2F95fRwXUActYPwJCHCCK
+ Z+XdCrCb+S8j3RpP78hLxLRxo2lAJI+L0yy5u9htP/gcNenFpkQmmAOoEK1RB78vTANAEbh2h70
+ BiFZyNYdb6Io/tVCxzrxEIbYw=
+X-Google-Smtp-Source: AGHT+IHn41gG/be2ML3OIYuHdBUJw3Pb1miPkvUo5yRHpegAcNmQxzYgjwJ3pJFsVV6Uctiu5JU8Aw==
+X-Received: by 2002:a05:6214:27c7:b0:884:6f86:e09a with SMTP id
+ 6a1803df08f44-8883ce9fd96mr93447326d6.6.1765110006722; 
+ Sun, 07 Dec 2025 04:20:06 -0800 (PST)
+Received: from localhost.localdomain ([2602:47:d950:ab00:9e6b:ff:fe52:2d0a])
+ by smtp.googlemail.com with ESMTPSA id
+ 6a1803df08f44-88827f4d413sm78258766d6.18.2025.12.07.04.20.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Dec 2025 04:20:06 -0800 (PST)
 From: Nicholas Vinson <nvinson234@gmail.com>
-In-Reply-To: <CAAg9qJ3iGswfrAH1Kp7DKE7LX8uhpVx0aZ1dDKUoPxsKDeD7_A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: spice-devel@lists.freedesktop.org
+Cc: Nicholas Vinson <nvinson234@gmail.com>, Uri Lublin <uril@redhat.com>,
+ Frediano Ziglio <freddy77@gmail.com>
+Subject: [PATCH v3 0/2] Adjust dsignated initializer to be C++20 compliant
+Date: Sun,  7 Dec 2025 07:19:35 -0500
+Message-ID: <cover.1765109578.git.nvinson234@gmail.com>
+X-Mailer: git-send-email 2.52.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 08 Dec 2025 08:33:46 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
@@ -96,84 +85,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 12/7/25 06:24, Uri Lublin wrote:
-> On Sun, Dec 7, 2025 at 3:07 AM Nicholas Vinson <nvinson234@gmail.com 
-> <mailto:nvinson234@gmail.com>> wrote:
-> 
->     On 12/6/25 18:38, Uri Lublin wrote:
->      > On Sat, Dec 6, 2025 at 10:54 AM Nicholas Vinson
->     <nvinson234@gmail.com <mailto:nvinson234@gmail.com>
->      > <mailto:nvinson234@gmail.com <mailto:nvinson234@gmail.com>>> wrote:
->      >
->      >     Disable the -Wmissing-braces warning as it suggests adding
->     braces to
->      >     designated initializes in a manner that violates C++20 rules.
->      >
->      >     Signed-off-by: Nicholas Vinson <nvinson234@gmail.com
->     <mailto:nvinson234@gmail.com>
->      >     <mailto:nvinson234@gmail.com <mailto:nvinson234@gmail.com>>>
->      >     ---
->      >       m4/spice-compile-warnings.m4 | 1 +
->      >       1 file changed, 1 insertion(+)
->      >
->      >     diff --git a/m4/spice-compile-warnings.m4 b/m4/spice-compile-
->     warnings.m4
->      >     index abe4a912..d2e1acc8 100644
->      >     --- a/m4/spice-compile-warnings.m4
->      >     +++ b/m4/spice-compile-warnings.m4
->      >     @@ -84,6 +84,7 @@ AC_DEFUN([SPICE_COMPILE_WARNINGS],[
->      >           dontwarn="$dontwarn -Wstrict-prototypes"
->      >           dontwarn="$dontwarn -Wsuggest-final-methods"
->      >           dontwarn="$dontwarn -Wsuggest-final-types"
->      >     +    dontwarn="$dontwarn -Wmissing-braces"
->      >
->      >
->      > Probably better to (also?) remove "-Wmissing-braces" from the
->      > list iterated by  gl_manywarn_item.
-> 
->     Just before gl_manywarn_item there is a comment that says "List all gcc
->     warning categories". That comment is why I did not remove it from the
->     gl_manywarn_item list.
-> 
->     It seemed more logically consistent to me to place it in the list and
->     then use the dontwarn feature to disable the flag.
-> 
-> 
-> Hi Nicholas,
-> 
-> I think you're right.
-> The right way to do it is to add flags to "dontwarn".
-> 
-> What about the patch order, does that make sense to you ?
+When building with g++-16, the build fails with the following error:
 
-The updated patch order makes sense to me. I'll respin the patch set so 
-the m4 changes are first.
+    server/tests/test-display-base.cpp:809:5: error: either all initializer
+    clauses should be designated or none of them should be
 
-Thanks,
-Nicholas Vinson
+This is because g++-16 defaults to c++20 and when using designated
+initializers with c++20, you don't wrap anonymous union fields with braces.
 
-> 
-> Thanks,
->      Uri.
-> 
->     That said, I am amenable to either approach; I just would want to make
->     sure everyone is OK with the requested change.
-> 
->     Thanks,
->     Nicholas Vinson
-> 
->      >
->      > I suggest applying the m4 patch first (and g++ fix second) such
->      > that the build works after the first patch is applied.
->      >
->      > Thanks,
->      >      Uri
->      >
->      >
->      >           # Get all possible GCC warnings
->      >           gl_MANYWARN_ALL_GCC([maybewarn])
->      >     --
->      >     2.52.0
->      >
-> 
+Nicholas Vinson (2):
+  m4/spice-compile-warnings.m4: disable -Wmissing-braces
+  test-display-base.cpp: adjust designated init.
+
+ m4/spice-compile-warnings.m4       | 1 +
+ server/tests/test-display-base.cpp | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+-- 
+2.52.0
 
