@@ -2,72 +2,72 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DD03CAC81D
-	for <lists+spice-devel@lfdr.de>; Mon, 08 Dec 2025 09:33:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AD9CCAC823
+	for <lists+spice-devel@lfdr.de>; Mon, 08 Dec 2025 09:33:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2E18210E3CF;
-	Mon,  8 Dec 2025 08:33:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 23FDC10E3D1;
+	Mon,  8 Dec 2025 08:33:48 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ji1gLoM3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D6/9v1m4";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com
- [209.85.219.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D382C10E34F
- for <spice-devel@lists.freedesktop.org>; Sun,  7 Dec 2025 12:20:14 +0000 (UTC)
-Received: by mail-qv1-f44.google.com with SMTP id
- 6a1803df08f44-8823e39c581so52221746d6.3
- for <spice-devel@lists.freedesktop.org>; Sun, 07 Dec 2025 04:20:14 -0800 (PST)
+Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com
+ [209.85.219.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 54F4810E34F
+ for <spice-devel@lists.freedesktop.org>; Sun,  7 Dec 2025 12:20:17 +0000 (UTC)
+Received: by mail-qv1-f43.google.com with SMTP id
+ 6a1803df08f44-882475d8851so39609186d6.2
+ for <spice-devel@lists.freedesktop.org>; Sun, 07 Dec 2025 04:20:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765110014; x=1765714814; darn=lists.freedesktop.org;
+ d=gmail.com; s=20230601; t=1765110016; x=1765714816; darn=lists.freedesktop.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RGShbK9xQsr2NjS/qZuDJNtffOJ6jq/hb7bzFL9+MF4=;
- b=ji1gLoM388RWX3U4YW3CX+YLGRh8hBa4859xJ7x+2w/xuOfbBKwxAfd8jBM8Q12Bkn
- ZhwmWYRA0SNhh4muA3cvgdOD0I+3Tsnocd3wwh718HchvjgJnm+AylgmqJQWyoYX4tkF
- rGkZxy8N/lMrgeFGBUMIzNAeH57i8Dj7yvAqs+kzVwKmjybfX86DxocZWq+/KUPXFZIi
- cVNmRqQZsUBv+MlvYBgxkBlE6lekLJQjej6b7aCbLRar1OGmhS0130jTWsJbd95pWsGP
- 4CO1pav0ynpV5Q6wRB9dBzN1i5S3QS9jP5cVT7EMeJqOHXCyIgDEg8Vfh9Z7hFV94uY/
- rcvA==
+ bh=ELfUggUXyxFr+NtPKtCcoTverRJFiNiBkxkDtPC+APE=;
+ b=D6/9v1m4Khh7GYYxX6Ej9gZyDr3fbEq9T46+cMRSg3h9eHMnkHfJMkQ2SGxjazz6fy
+ NhKX3BPL78Oh6uTZRSr/AXJ3Sfc6inYhHSKeQdSNCAt1AwDhoHRK5FP43lLZ9JnJV7M7
+ clzGAYxLNmwykle1YOYEtrmUaxQv86M9bzY1tfcQLseEQZByzIQd4vbeBKCFq4/Tffe4
+ pBeTScuCmeGEg9Kwa6jVzK5Z4/5wPEAbZKrqRICHc1F+47y24fWcb+Tsyh+MxvyNlSCr
+ 7keXamWQS0j8ct64wGZaijVT8KYhhyoEncFtObEb08VFkktxbgShire8gsv3vfKdlwsj
+ XTjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765110014; x=1765714814;
+ d=1e100.net; s=20230601; t=1765110016; x=1765714816;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=RGShbK9xQsr2NjS/qZuDJNtffOJ6jq/hb7bzFL9+MF4=;
- b=lNbbwaXpHZ1reTUOr7YpDhK0WCzoO0QK+jvkefeSRdA6W9LH1qNORd5xJs96N6POcV
- OlwcPq2I3Q+Op2QDwDYZOuf3BPyCHs9Upp8dPz187RkUz3n4ddLPklZBknhDxX2egrnn
- M2ZjAuZz6LzeaNukdFYIuBJI5O1MVXgRKP9iNPQNO3eh4rJHhwyYEByPQ3XrHrNFVkSg
- DDP9pl/MqoQunqsIJPvwnG2Bc8tqkhvsdIQdBrTWVm5FREp7rSPpsNzCRHFjX3pIJ2JA
- 3drFTARVcTTay+CdN8lb76vvcBbkcvW6XyegLUEVEBxaBGSutTUObd7SnmK3PqyufOD/
- ef4A==
-X-Gm-Message-State: AOJu0YxCHoYi/ZTyDpc2HX+BO9q7IJVEYegDsYGl8WRbafEmx1Jfu1Y8
- 0mu166rIDu2qmn5o8DCH483KUCiRtLF3/bPYpICQWNwX9zFx+qAqZ17NZ4PCdw==
-X-Gm-Gg: ASbGncsGwasAb/Ezv/NeXo48SLorIycKzpcQQfvuFKeCjTkONT8gLVSUW4jMe6kR9Zd
- VdxGbtSi9pQMU80KdWJYV3e59iyVd8CIZmkTAi+vnIHrUV8oAxGQo1VRtAoK+jrpS7yyJepfr9B
- LxaWoF2QzaXkD/YAsQZfWbbLKufrGKmigotP3w4ONGitJedwjnM9N/rGuwO9avXhwuJOvw0P74N
- vSMYdIxes87rdrGc0/cJng0IsOALkV4/qm+rKIqj2bRNxTXDKPBPB6KKQ0ltfKtIrRnDRnASOmw
- KgPWLnEjCvaM6FvzY9cVlo6w1eLUsbEYM12FakySSZU8HKWruGjdHPDku0MdXHfFeDSklTqPjeU
- pQwYWYIl7HB7+yf1wyhZD3WssiOyCHAXd9hufbNpoT1YjPwvHlSQG8vjdZDI5IJzNS7/M72IpNo
- I3Mbdkqk5e3VRBMlxSQHwo7XU=
-X-Google-Smtp-Source: AGHT+IHEpTLAacPxApmSoFl5aQCzQ0fhgFsSmI5Dg/irUTxm7tnwiQid4UrfDE6ElBrarz7WSFkaGQ==
-X-Received: by 2002:a05:6214:518c:b0:880:531a:e656 with SMTP id
- 6a1803df08f44-8883dba0df2mr79341676d6.29.1765110013773; 
- Sun, 07 Dec 2025 04:20:13 -0800 (PST)
+ bh=ELfUggUXyxFr+NtPKtCcoTverRJFiNiBkxkDtPC+APE=;
+ b=ogTf+M8xHQZ1izNu8p7V9NStDVy4AL56fTmi0zi1Hs586xXvyUMphrcm4rBptmZmxF
+ DPwgy59H1ELY2mfAsASNCPQMUUsfYnlofR54gTt+GxVJBWKYaAeSfNm8wuskKU0dvUGe
+ d3oJirO5+SqXhf0yUhngZ+OubYp6MF17LVoq5MrIz8Bb7oOfbJjRdi0tB6aJKtWsDf9q
+ x3+MYj6PnuD+XIxIGlVIVR88V8l8kD2s3asbbwfQhosc/sRQGErA/6li/hQZ3VEGgL9z
+ ru4LbsmlQhykDuj19ufQzZ7RCe9/P+ZN6mQN00aWwkWyCZOjeFHic8c1LFhvOrpiL7Gx
+ YIOA==
+X-Gm-Message-State: AOJu0YwNvyKopcs5WTXcLhesEGMMFQNXbB9TSK6RH6dAKV2JcN7T2PLi
+ ng1UdQATydt+0bBWyLWKOcKM+4AGR0DRqU5uOBbLkG86DSmQ1u21yHSsvPFp3Q==
+X-Gm-Gg: ASbGnctNfsIdZDbUtIjYVUG85rIcz504b2Jik3di8klENmUtKMUqbRPvL105mEdPGId
+ JPF/ISMGXNutm3SHtiuGANtqabiE64ZJ363IsTfri0ZaugGhkbJb+E06A0VGXSF+wjE6nQllipf
+ xP8R9SDYwgi8KBnXGdeqle/Fk212KiHC8n8Vse3UoJoPFSfPX45ynM0T/33ccCk4lo3lEkCImrM
+ Q8PWazGSvoUy/eiCPJpbYNGqjgtV6g6sjOcEyqC8FhhwuFsx/I2UoLaILcKP/f8q6tfK9UCVK9y
+ 9jjZyAE1+2sDKKqtiPF234+He0IhWsZ+vYzvf1H/OWbkND6Z2hbVsukoB8UUxgp5O8/kzqXdFqQ
+ ut+lCYRYHXG/jz1X6eWM+xa3LxTbEBiNXCWB+uG2BQpJ7Uh1NJrGRiXEKP30Vf2PR5lDYFfJTo6
+ dVn7231NOYEnB5SV+ZqCUP7uI=
+X-Google-Smtp-Source: AGHT+IFtydywsz5ASRk25BpDAJ6gnlUW0dq5nX+cpGk4YjAVxTzrqt7SZB9Hs/OOLuAWCxA3jgzfrQ==
+X-Received: by 2002:a05:6214:449f:b0:886:5054:6b84 with SMTP id
+ 6a1803df08f44-8883dc209aamr76257996d6.51.1765110016181; 
+ Sun, 07 Dec 2025 04:20:16 -0800 (PST)
 Received: from localhost.localdomain ([2602:47:d950:ab00:9e6b:ff:fe52:2d0a])
  by smtp.googlemail.com with ESMTPSA id
- 6a1803df08f44-88827f4d413sm78258766d6.18.2025.12.07.04.20.12
+ 6a1803df08f44-88827f4d413sm78258766d6.18.2025.12.07.04.20.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Dec 2025 04:20:13 -0800 (PST)
+ Sun, 07 Dec 2025 04:20:15 -0800 (PST)
 From: Nicholas Vinson <nvinson234@gmail.com>
 To: spice-devel@lists.freedesktop.org
 Cc: Nicholas Vinson <nvinson234@gmail.com>, Uri Lublin <uril@redhat.com>,
  Frediano Ziglio <freddy77@gmail.com>
-Subject: [PATCH v3 1/2] m4/spice-compile-warnings.m4: disable -Wmissing-braces
-Date: Sun,  7 Dec 2025 07:19:36 -0500
-Message-ID: <9d504f79e028dede8ea8b8a1ecd2678e97f1a6e4.1765109578.git.nvinson234@gmail.com>
+Subject: [PATCH v3 2/2] test-display-base.cpp: adjust designated init.
+Date: Sun,  7 Dec 2025 07:19:37 -0500
+Message-ID: <9360c4a11c392a12e62985b382de60d8d4f5e571.1765109578.git.nvinson234@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1765109578.git.nvinson234@gmail.com>
 References: <cover.1765109578.git.nvinson234@gmail.com>
@@ -88,26 +88,27 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Disable the -Wmissing-braces warning as it suggests adding braces to
-designated initializes in a manner that violates C++20 rules.
+Adjust designated initializer to be C++20 compliant. Starting with
+g++-16, GCC will default to the C++20 standard.
 
 Signed-off-by: Nicholas Vinson <nvinson234@gmail.com>
 ---
- m4/spice-compile-warnings.m4 | 1 +
- 1 file changed, 1 insertion(+)
+ server/tests/test-display-base.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/m4/spice-compile-warnings.m4 b/m4/spice-compile-warnings.m4
-index abe4a912..d2e1acc8 100644
---- a/m4/spice-compile-warnings.m4
-+++ b/m4/spice-compile-warnings.m4
-@@ -84,6 +84,7 @@ AC_DEFUN([SPICE_COMPILE_WARNINGS],[
-     dontwarn="$dontwarn -Wstrict-prototypes"
-     dontwarn="$dontwarn -Wsuggest-final-methods"
-     dontwarn="$dontwarn -Wsuggest-final-types"
-+    dontwarn="$dontwarn -Wmissing-braces"
- 
-     # Get all possible GCC warnings
-     gl_MANYWARN_ALL_GCC([maybewarn])
+diff --git a/server/tests/test-display-base.cpp b/server/tests/test-display-base.cpp
+index b220b7fe..5d0404c9 100644
+--- a/server/tests/test-display-base.cpp
++++ b/server/tests/test-display-base.cpp
+@@ -806,7 +806,7 @@ static QXLInterface display_sif = {
+         .major_version = SPICE_INTERFACE_QXL_MAJOR,
+         .minor_version = SPICE_INTERFACE_QXL_MINOR
+     },
+-    { .attached_worker = attached_worker },
++    .attached_worker = attached_worker,
+     .set_compression_level = set_compression_level,
+     .set_mm_time = nullptr,
+     .get_init_info = get_init_info,
 -- 
 2.52.0
 
