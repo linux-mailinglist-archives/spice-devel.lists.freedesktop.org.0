@@ -2,77 +2,91 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87136CB593E
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Dec 2025 11:58:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED98ACB2EFD
+	for <lists+spice-devel@lfdr.de>; Wed, 10 Dec 2025 13:41:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8873910E7D4;
-	Thu, 11 Dec 2025 10:58:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 669AD10E108;
+	Wed, 10 Dec 2025 12:41:36 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mdzZYIIT";
+	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="NKgOaPAY";
+	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="DzELVdZc";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
- [209.85.216.48])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DAAC810E641
- for <spice-devel@lists.freedesktop.org>; Wed, 10 Dec 2025 02:06:46 +0000 (UTC)
-Received: by mail-pj1-f48.google.com with SMTP id
- 98e67ed59e1d1-3437af8444cso5714357a91.2
- for <spice-devel@lists.freedesktop.org>; Tue, 09 Dec 2025 18:06:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765332406; x=1765937206; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=dB4MkiK2v7MqEATSP66OXrd0I3cuJgQCFm92qrJ2lJ8=;
- b=mdzZYIITnDbEmLEsXsNVzXqM7HrK9asoJgbxEVxyBdLrE1Nrn36ArnuOZi65gP1MZx
- 5DRI0JgM3y/XrLMkIlmnCKJk9AK5sY6Kyis1Xe2hgzw8YprqaFR2xfJkA3wlI3RHmpHk
- LdzfKCnb4vxxQTawnHwQuwGB27NDU0amzNMtP3tAheR3JckmlgGudOvzBMpnhfJiEepJ
- /jRZODYtcjNxAhKe/sCXYCmshhsN8FAt1rdbQmemapQrwsmlEwCDN37barZ3eTAbKPxa
- DqEXO2ohLVPe6xLK0X9/jG85xDMlE5EYQtQ6jtOgJkhwzSpCMMSa0+Gk8Z9j8aTOY4qX
- gh0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765332406; x=1765937206;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dB4MkiK2v7MqEATSP66OXrd0I3cuJgQCFm92qrJ2lJ8=;
- b=FM7zyYDEz13qRABxapvVRGnMA2WGsAbA4bwUNz78oZoUkfVtTCdRB2DCwJETmKO1da
- DPrxszRa9oVXeJzcCXEucOAP9O2D6AsBPpp1SLUthen5jP0VTjEiEpG5sjqLybHM3mvY
- ESDPStsgU/TP3GUt+zc0TSYZ3eQt33/XqiSItrPwSYsdFIOHMNKfGxJkpXE79Sxuqa0X
- 0vfo7OIuRurrDSU4+FxAtawN8K+PJE7O2cx9wHeZS6Y6+wpJHZCBAn+LR5lDF36uiKBQ
- qVTU2jxevwevo5ODhGt6llVGbwQZbOY2b+RHSP4m8UMVpEmcleflRqNI7lMCB5/Z6F1C
- HjbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVoobtd4aVR8R5CYA3QQOmhDuY9+1INzH26funivB4BryxVsvJv6j19Zxl8t1C8B6ypWrInYwtatMY3dw==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzssCDBoko5UH4XNv+zxI4uHs5ks0Tb+4eUEhAysjvOnKbdw5kO
- b9sotsVErcYfV1ZBrWwbdoDOeEi6GMFH6UbYySoyfGrgpk3cQty5Mn1k2/uJ0NDDDJQamKP+MtA
- d3biiDT7zBsdJLAhPuh+cFjz3m8wEITY=
-X-Gm-Gg: ASbGncuMPnZhUSgp1T1YmuvhtulGqjOAJln8emiV8WHcPSPEzQ3nDpkxUpjC3NbZQxJ
- JkFYZxon+XXKzGoIInhLkpMvYoxJESTqioJAMi6WmB/rbFHzPZIF2fj00nJRkjseZV/pAkzH/nx
- 8p1BTMnjgSSQE6MLZOxW8bdszSTFmNxJw/TIRftfUobLKoQYMOer077PvOPEAkA3BrFBYm39GR6
- YyLY8P1T9NUCybOLo15T1nH4s4OzrvsTda4wbR7WlyrqtrkoL4w/vJAUkk3rMEx2uFwlpUOB/rX
- ZNUr3jDFBBu6Hsh0R5P5y4tfqQ9tGtVnILtw4ggCjUM/9ve8OCR/Z0YmKjvMtgt10iMg9IuZr08
- EiSYnWpwawULk2jw=
-X-Google-Smtp-Source: AGHT+IER/q69FCL4HOlCuiPXSy/9N7+BJvlaJ8gV4++EQVcJdhe5QlTVR4toTFk0WEj9Sp4ps54/Zo8eUBI6B3SlAAg=
-X-Received: by 2002:a05:7022:412:b0:11e:3e9:3e9a with SMTP id
- a92af1059eb24-11f296f4d4dmr601926c88.50.1765332406102; Tue, 09 Dec 2025
- 18:06:46 -0800 (PST)
-MIME-Version: 1.0
-From: Avraham Hollander <anhollander516@gmail.com>
-Date: Tue, 9 Dec 2025 21:06:35 -0500
-X-Gm-Features: AQt7F2q1xvMw5Tfz9hXQre8HX4NLZBs_1JPIE2kAknJGpjV98GmMptN_Tf5kgB4
-Message-ID: <CAP1mzZSH+VPhA5_53+LxSgOZe5JHqFP_uadWTpgTxrEXBc=52Q@mail.gmail.com>
+X-Greylist: delayed 300 seconds by postgrey-1.36 at gabe;
+ Wed, 10 Dec 2025 12:41:34 UTC
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 80ED410E108;
+ Wed, 10 Dec 2025 12:41:34 +0000 (UTC)
+Received: from meesny.iki.fi (meesny.iki.fi [195.140.195.201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange x25519) (No client certificate requested)
+ by lahtoruutu.iki.fi (Postfix) with ESMTPS id 4dRFZh2MY0z49PvR;
+ Wed, 10 Dec 2025 14:36:28 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
+ t=1765370188;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=SM4/DYpAoX2OHJKWTtMBgck5YzGO83IGE2Ol5R7rY+g=;
+ b=NKgOaPAYgGVYPPxyfSkV0r+tSdMQLBJ5xGIa7zWYOLeP2v72iSnZfU/o6p/ig0DCRjInz8
+ Z2HCFexqQPsVN4SedKLxRUWHWKNQlDRICuPmBGD83hZIROc4DQGYl9C5QNC0yW/SLSA37a
+ sogXI3pfQGP/vyCR5JHUOvSJ8gowRnTJG8Hv5tz7tw0cNns0RWtvAlK/ImXKgps0ydnIgz
+ 6/lzdhWRHudgbSQ94ArrDLJzBbi5tJt3+ALvpSJkfH35rIa8n36vbK6zA01VorVHxxAJ2H
+ oNjT/2hzohhpxyspC7jSLHbtEYkfSdSoGsp8lU/0dphYX2Hoqt/0CWYAWsVR4Q==
+Received: from mail.home (212-90-86-103.bb.dnainternet.fi [212.90.86.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: timo.lindfors)
+ by meesny.iki.fi (Postfix) with ESMTPSA id 4dRFZb5ybZzyQH;
+ Wed, 10 Dec 2025 14:36:23 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+ t=1765370185;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=SM4/DYpAoX2OHJKWTtMBgck5YzGO83IGE2Ol5R7rY+g=;
+ b=DzELVdZcX2l8aUIYnxx+Le/a4bUhw/ZM0PWgIJF/b4/lgYXRgmodJ+Fj2B81UYKoQVUNOe
+ iP5NohO9Wt8euj3W1Gz0bCRQWyy8Ozu2aTLYwumtPE3aX8JZJcJlWS8JX5ls1CFD5q82Un
+ pKa2fSmYsYTCU6Y63dvUBqHZXf45oAU=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1765370185;
+ b=JYNpq39zyemGiMb1t7ad5v6kCUrhRJzfMJZkWIMDzFhpK08X080Ea8aZAB+SR/6hdfHsB2
+ K7zx6cXmTNOSxzB7qF2E4UdnRtfhzWyrt6/Lv0xO7sQC8blbUkeJrLZgY68VVQ8KHe2nMr
+ HCGeS9GLpS5u0vL+jte+1saB2KMP5cs=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=timo.lindfors smtp.mailfrom=timo.lindfors@iki.fi
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=meesny; t=1765370185;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=SM4/DYpAoX2OHJKWTtMBgck5YzGO83IGE2Ol5R7rY+g=;
+ b=CLDOKjX7Cu32PfV0NVCiO1qUclJ1F6tK4v16U3a9oSydenaUzfUUZqTQD+9YPTLprRkVFQ
+ QlCrC6XnFz11Jkq5qqX/Q+Qa0DkK5bNFbspliqLnKTZ0jP1OhVlRlgJtU6YigyUm1cqj3M
+ OgbiywM7mMlrI+xI9lYNmDBRrjHD/eA=
+Received: from localhost ([127.0.0.1]) by mail.home with esmtp (Exim 4.89)
+ (envelope-from <timo.lindfors@iki.fi>)
+ id 1vTJQd-0006HY-DS; Wed, 10 Dec 2025 14:36:23 +0200
+Date: Wed, 10 Dec 2025 14:36:23 +0200 (EET)
+From: Timo Lindfors <timo.lindfors@iki.fi>
+To: Salvatore Bonaccorso <carnil@debian.org>
+cc: Matt Marjanovic <maddog@mir.com>, 1054514@bugs.debian.org, 
+ Maxime Ripard <mripard@kernel.org>, 
+ Alex Constantino <dreaming.about.electric.sheep@gmail.com>, 
+ airlied@redhat.com, daniel@ffwll.ch, dri-devel@lists.freedesktop.org, 
+ kraxel@redhat.com, linux-kernel@vger.kernel.org, 
+ maarten.lankhorst@linux.intel.com, regressions@lists.linux.dev, 
+ spice-devel@lists.freedesktop.org, timo.lindfors@iki.fi, 
+ tzimmermann@suse.de, virtualization@lists.linux-foundation.org
 Subject: Re: Bug#1054514: linux-image-6.1.0-13-amd64: Debian VM with qxl
  graphics freezes frequently
-To: carnil@debian.org
-Cc: 1054514@bugs.debian.org, airlied@redhat.com, daniel@ffwll.ch, 
- dreaming.about.electric.sheep@gmail.com, dri-devel@lists.freedesktop.org, 
- kraxel@redhat.com, linux-kernel@vger.kernel.org, 
- maarten.lankhorst@linux.intel.com, maddog@mir.com, mripard@kernel.org, 
- regressions@lists.linux.dev, spice-devel@lists.freedesktop.org, 
- timo.lindfors@iki.fi, tzimmermann@suse.de, 
- virtualization@lists.linux-foundation.org
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 11 Dec 2025 10:58:05 +0000
+In-Reply-To: <aTiTnENWsCoTbT3U@eldamar.lan>
+Message-ID: <alpine.DEB.2.20.2512101433240.24105@mail.home>
+References: <alpine.DEB.2.20.2310242308150.28457@mail.home>
+ <b8b1497f-789e-4bb7-be17-9d3ebb30c143@mir.com> <aTiTnENWsCoTbT3U@eldamar.lan>
+User-Agent: Alpine 2.20 (DEB 67 2015-01-07)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII; format=flowed
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,7 +101,22 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-This is also happening to me in Debian Trixie, with the current
-6.12.57 kernel. I can also test reverting the commit in the near
-future if someone else doesn't get to it first. For now I'll just use
-virtio-gpu, though it is a little slower.
+On Tue, 9 Dec 2025, Salvatore Bonaccorso wrote:
+>> This is back in trixie --- unsurprisingly, because the kernel commit which
+
+Indeed. The reverst of the problematic commit was reverted in mainline 
+kernel. I have spent several days trying to understand the problem but 
+unfortunately I don't have enough time to troubleshoot this more.
+
+I tried switching to virtio but for my use case of remote Linux desktops 
+it is not usable. If I scroll a fullscreen web page I can see how the 
+whole screen is redrawn every time,
+
+Meanwhile I've switched from SPICE to RDP. GNOME in trixie supports 
+headless RDP sessions that make this very convenient. Client support is 
+also much better for RDP. I solved the authentication problem by isolating 
+each VM from each other on network level and then deployed rdpgw 
+(https://github.com/bolkedebruin/rdpgw) in front of everything with OpenID 
+authentication.
+
+-Timo
