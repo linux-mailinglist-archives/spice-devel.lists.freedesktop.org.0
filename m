@@ -2,69 +2,83 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14EC6CB5B83
-	for <lists+spice-devel@lfdr.de>; Thu, 11 Dec 2025 12:56:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCCCECB6E02
+	for <lists+spice-devel@lfdr.de>; Thu, 11 Dec 2025 19:12:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA14710E237;
-	Thu, 11 Dec 2025 11:56:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1168410E31D;
+	Thu, 11 Dec 2025 18:12:26 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iJovKVMu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UDEwyP/x";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com
- [74.125.224.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 287B510E237
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Dec 2025 11:56:11 +0000 (UTC)
-Received: by mail-yx1-f45.google.com with SMTP id
- 956f58d0204a3-641e9422473so731770d50.2
- for <spice-devel@lists.freedesktop.org>; Thu, 11 Dec 2025 03:56:11 -0800 (PST)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
+ [209.85.222.175])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 198AC10E802
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Dec 2025 12:38:16 +0000 (UTC)
+Received: by mail-qk1-f175.google.com with SMTP id
+ af79cd13be357-8b9d2e33e2dso3951485a.3
+ for <spice-devel@lists.freedesktop.org>; Thu, 11 Dec 2025 04:38:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1765454170; x=1766058970; darn=lists.freedesktop.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0AE9fTXmReNf1crVzOx2XzI5s8lHkn05yPMjHRxg/54=;
- b=iJovKVMuIZ9DPJZ71UGtPmOA6LcX5buo+LiiXrSuFVMNhSMZNLrKrplbG5kndrxJ0Y
- uwZ6CXpR2XqNBs0oqXjqbZDvJC9i6ai+gJiX2kIGkwmgXEhSq9STRyH2ZY748QPOky1b
- dq+AaBveKmqnoqlBXkxF0xReJ1mhVCJKykwjE3vgwrNw5SNzkuslv9BGUZ8J8rZ+w5rs
- XaDMv1tsd+DVK9xBZkn/Q5KtjJJzH2+iCSdFVE3IIrxKVco3HQqXIqJL9k8xknj/23ny
- ShFj7OnWvfDRXF5XaYuFXVHuYZjcYKZ2wKOQKyXZkktX0IEZTVhvPrJ192LBbjUzqR38
- xXKw==
+ d=gmail.com; s=20230601; t=1765456695; x=1766061495; darn=lists.freedesktop.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=TLB00X0YTq3IKrBbqxjjVG0Udhbot4Gt7V5SLsB2rkI=;
+ b=UDEwyP/x039UOeCJ+brUbGA5nXsoI3Ua0octCxki44TW/e/Glgjl4tRr6yUucjaiM4
+ w60gK7zDuv1Xznh3ncrLSr+U6vBIheD7cxj+J6r5YZR7AkdcM48l5+0Z2UjTJ56K0jdc
+ UYEut36MNmlPwnsF2lD34v4xBymRAebF5QgWZ3ztheqMxQDa+l9n03X5ln27jOjyO34m
+ VzAnjxNyichFIwIZGwmyw8CJMcvEP6CCsgiG0W7otsU+PlSFuLbNuFkNF+BlHdL9r/n6
+ PwXQQW8DgYifHcYJyWUI+T1QgzK9/t67JDKP3K9so1Jwk75T7zQSugODM3SWFUU3Si25
+ u7Vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1765454170; x=1766058970;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0AE9fTXmReNf1crVzOx2XzI5s8lHkn05yPMjHRxg/54=;
- b=WLo+T9VPzNm42olkQFbDVxaOcMl5FTmm4RO8WJErog025ouwdrifwUWyqIzEwzZYRN
- Wf6jz2EllI+uKgqzarEa548z2btVtEZMCRlvTsq6jBWlS3QyzAHY/mFKbuj2SHdzyHvU
- HLs7hEU2KddabW0RgqqeB1WuifKzdaM0l2mBKURiM0QTzFje7Wk55ZKvUy7DlWUhoHAn
- D8DM64ZoBpda7xX4PifpjrX4Xa8dkRgHP7TNmaWhpBBfScPPaL5BpUpaeYakhFkpt5Ot
- Zjl2qSqvujHEHKuT0L1kYSQYkm0bsaL0oyNH8TNmeNzH9IMeNWlGTg3i6gB5Ivnr8Yec
- dn+Q==
-X-Gm-Message-State: AOJu0YxKMw4TeKGksmAv5nNCbg/kfXroqYqvX+t/9DolWWZ+xFdAWmgf
- rJ828QJXaKWzdnhvfesmjI313NU6FxR2qC1fNAmlcRRkq1s3A1ZxwFgrspqYh3DTMk94QyVi9fL
- P8cFNEEPTd0mQNfog2NmD4cbZMGDc/8I=
-X-Gm-Gg: AY/fxX4m5J5/Fc5fDO3MP9R0Pc+qXGB+FVmeCU/Ctt6ad/seKkk3J2cc52wKPVCaIKS
- 9vRIzyKiYwZwfiuK1ffv0D5aTS1cjk1dtcgqM+UXX1hdBcDmikDQh5UNkBlmX8Z0mtTkk9YAy1f
- XxUQVn94f/KRxgYIRNmLCuTGb/N8UMvfNQgjVlY6AP/Z6wCygexYJCYiDmsgp8vF6fxRbD2Z3Qd
- CIxatyVVpgNdrLg8t4/OoI89uDxzoB7GopgEwzcddHyWmuIXSXCb3xYxG0hoiFQP7TNh5o=
-X-Google-Smtp-Source: AGHT+IERfbZRCqstVUS+e79QSsiEFeDEr0seRO/gpDXJAxjFIFZAFp3yT4HG8ngZ6WdX5ZHDXsrhvxeRLItQs3wMARw=
-X-Received: by 2002:a05:690c:48c9:b0:787:e3c0:f61f with SMTP id
- 00721157ae682-78c9d79d6damr96216027b3.57.1765454169992; Thu, 11 Dec 2025
- 03:56:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1765456695; x=1766061495;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TLB00X0YTq3IKrBbqxjjVG0Udhbot4Gt7V5SLsB2rkI=;
+ b=YT5EQlzGJ3NZpsDW9RZFbdW8ZFmEG1j5PsGDe8TfMs078K63WyBWg0LCz6/N7aOmLp
+ ak+djWdPGqRigrB2HMOiXcqv8NcfigH9u7uqLd5IwRtMwAqLLU8Uh4wg2zdzWJ50Z12Y
+ bDhdGiFQ0ZDyRjZ11EkFwG2uQZXd9yHSWHd3S2hlVIW9kN0VR0sgilLNc/ALuz4Gkg4f
+ /J6ACpiV9QAZHxgxIjdLD11GYTmX7tIhbukzl4K3ECI9QQVJGKp1lCrb6KDBsGPCTs4M
+ Mx1+nLvmzd9kHiabbDkNoOck47LYReHTB6utxMZBpL8EWxemb5wGQLN414Zn3dvSZ/LS
+ Wttg==
+X-Gm-Message-State: AOJu0YypTEGGJAFtH9LjiCDYqH/Cp2m+msV0fHHR6Su/pNAJHGn2cZ5q
+ so0I4a4U3VTgld5jJAiL2GXDfjJJAiaVvEGADqwByzPXKZq8Yc4mKFqN
+X-Gm-Gg: AY/fxX5sb0UWzOYLaUh+6Q9cu3WZE2s/Pl9qm3eJs+PzQfSmNLW4Fiqq6/uxfRCZXZ4
+ PXyQFArzz1ext8miwphhDRcxhOTaPEcwQlHfzeDg/P4dSCPqxMTtobWhZhGpxQQpRwPOyV20Yo1
+ 2wPPX4Ln4DKQactVqdB8SEPeWGZr0nzkZaaZCRTL+kf+ghQ2iDVnPJWWbjaj2SVRhejckIrVCG4
+ HOfgvJyFSjLdGQdfzFeZTmR2hzEEx7A2mQB7trY43QZiwth+Iqo8BwYcDNAzIPc25xqiB5guJlS
+ 5NORD5FKxJ45s7OWW/L/Q3y0PUTdkuGxx8zCGAyYmDCh/PNDRu3+aI1rO+g+uPXpsGLN4ZahTWH
+ 4KJxWfCppVjYBraKT7kW7rKSI8uxu85hWpRJOdDR7+8yyZ4dmvlIZpiZ2eL6Ozfw2N9EJpAHrU+
+ EnKbbNzFEOjBftG9fu4L+Lq3wGkUFj/8HX8CZYKD1DhrVm/TKjE09mUlj4eAE6seMMuQ==
+X-Google-Smtp-Source: AGHT+IGDgJPr2hw6H4S/yNWqq/tSUdm4jBNIG04L7JMl/Jk/+YhpAh7PnOAlu/OggrDklt/eyNPB5w==
+X-Received: by 2002:a05:620a:28d3:b0:8b2:a0cd:90ef with SMTP id
+ af79cd13be357-8ba3a46bb8emr858281285a.70.1765456694882; 
+ Thu, 11 Dec 2025 04:38:14 -0800 (PST)
+Received: from ?IPV6:2602:47:d950:ab00:2988:77ff:6d91:6400?
+ ([2602:47:d950:ab00:2988:77ff:6d91:6400])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8bab5787d5fsm204617085a.24.2025.12.11.04.38.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Dec 2025 04:38:14 -0800 (PST)
+Message-ID: <b0d290d2-2db8-4d68-a700-724d1d6ac431@gmail.com>
+Date: Thu, 11 Dec 2025 07:38:13 -0500
 MIME-Version: 1.0
-References: <cover.1765109578.git.nvinson234@gmail.com>
-In-Reply-To: <cover.1765109578.git.nvinson234@gmail.com>
-From: Frediano Ziglio <freddy77@gmail.com>
-Date: Thu, 11 Dec 2025 11:55:57 +0000
-X-Gm-Features: AQt7F2pUxcfkvZw2eXoS6IVkVFhOpn0xADNe9IleHSEG39JzwBlaNkHH4pDRyuI
-Message-ID: <CAHt6W4dfEwtJWV0cPL4MA4ZrbQ-Quxy7cPPPG+oSJLcrVm87aQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 0/2] Adjust dsignated initializer to be C++20 compliant
-To: Nicholas Vinson <nvinson234@gmail.com>, Uri Lublin <uril@redhat.com>, 
+To: Frediano Ziglio <freddy77@gmail.com>, Uri Lublin <uril@redhat.com>,
  Victor Toso <victortoso@redhat.com>
 Cc: spice-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+References: <cover.1765109578.git.nvinson234@gmail.com>
+ <CAHt6W4dfEwtJWV0cPL4MA4ZrbQ-Quxy7cPPPG+oSJLcrVm87aQ@mail.gmail.com>
+Content-Language: en-US
+From: Nicholas Vinson <nvinson234@gmail.com>
+In-Reply-To: <CAHt6W4dfEwtJWV0cPL4MA4ZrbQ-Quxy7cPPPG+oSJLcrVm87aQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 11 Dec 2025 18:12:24 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,35 +93,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On Sun, 7 Dec 2025 at 12:20, Nicholas Vinson <nvinson234@gmail.com> wrote:
->
-> When building with g++-16, the build fails with the following error:
->
->     server/tests/test-display-base.cpp:809:5: error: either all initializer
->     clauses should be designated or none of them should be
->
-> This is because g++-16 defaults to c++20 and when using designated
-> initializers with c++20, you don't wrap anonymous union fields with braces.
->
-> Nicholas Vinson (2):
->   m4/spice-compile-warnings.m4: disable -Wmissing-braces
->   test-display-base.cpp: adjust designated init.
->
->  m4/spice-compile-warnings.m4       | 1 +
->  server/tests/test-display-base.cpp | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
->
+On 12/11/25 06:55, Frediano Ziglio wrote:
+> On Sun, 7 Dec 2025 at 12:20, Nicholas Vinson <nvinson234@gmail.com> wrote:
+>>
+>> When building with g++-16, the build fails with the following error:
+>>
+>>      server/tests/test-display-base.cpp:809:5: error: either all initializer
+>>      clauses should be designated or none of them should be
+>>
+>> This is because g++-16 defaults to c++20 and when using designated
+>> initializers with c++20, you don't wrap anonymous union fields with braces.
+>>
+>> Nicholas Vinson (2):
+>>    m4/spice-compile-warnings.m4: disable -Wmissing-braces
+>>    test-display-base.cpp: adjust designated init.
+>>
+>>   m4/spice-compile-warnings.m4       | 1 +
+>>   server/tests/test-display-base.cpp | 2 +-
+>>   2 files changed, 2 insertions(+), 1 deletion(-)
+>>
+> 
+> The CI is not that happy. I added some commit to make it pass:
+> - missing AUTHORS for "make syntax-check"
+> https://gitlab.freedesktop.org/fziglio/spice/-/commit/fb018b3fbb26f38b2ffb0ee569d4aafc287fc738
+> - too old Fedora (not related to these changes)
+> https://gitlab.freedesktop.org/fziglio/spice/-/commit/a4525e204ef8b7e3beb3709823029e27de633d7a
+> - compatibility with pretty old GCC
+> https://gitlab.freedesktop.org/fziglio/spice/-/commit/6a2c24fd5c088cb3b016a40965882e98f010b583
 
-The CI is not that happy. I added some commit to make it pass:
-- missing AUTHORS for "make syntax-check"
-https://gitlab.freedesktop.org/fziglio/spice/-/commit/fb018b3fbb26f38b2ffb0ee569d4aafc287fc738
-- too old Fedora (not related to these changes)
-https://gitlab.freedesktop.org/fziglio/spice/-/commit/a4525e204ef8b7e3beb3709823029e27de633d7a
-- compatibility with pretty old GCC
-https://gitlab.freedesktop.org/fziglio/spice/-/commit/6a2c24fd5c088cb3b016a40965882e98f010b583
+I'm concerned about the old GCC compatibility commit. I think it would 
+be more robust if designated initializer feature checks were added to 
+configure.ac and meson.build instead.
 
-Do they sound good?
-I suppose the compatibility one could be merged.
+That way you don't have to worry about how old or new the compiler is or 
+if it implements the necessary GCC extensions, or implements them correctly.
 
 Regards,
-  Frediano
+Nicholas Vinson
+
+> 
+> Do they sound good?
+> I suppose the compatibility one could be merged.
+> 
+> Regards,
+>    Frediano
+
