@@ -2,89 +2,129 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EC16CD6182
-	for <lists+spice-devel@lfdr.de>; Mon, 22 Dec 2025 14:08:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F6DECE976D
+	for <lists+spice-devel@lfdr.de>; Tue, 30 Dec 2025 11:49:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0845E10E540;
-	Mon, 22 Dec 2025 13:08:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A88FA10E203;
+	Tue, 30 Dec 2025 10:49:14 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lZP+wi9t";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="G3QP517V";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
- [209.85.160.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EB69910E046
- for <spice-devel@lists.freedesktop.org>; Sun, 21 Dec 2025 19:23:00 +0000 (UTC)
-Received: by mail-qt1-f169.google.com with SMTP id
- d75a77b69052e-4ed9c19248bso29463021cf.1
- for <spice-devel@lists.freedesktop.org>; Sun, 21 Dec 2025 11:23:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1766344980; x=1766949780; darn=lists.freedesktop.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=CU3d1yGWQEeEWk7uPdY9HFzLa5qFyArUKKR630Dlzek=;
- b=lZP+wi9tok3BLDuS3CC2Zdq00HcyNSZJ6nzTTYZKocxN/owR2+kPVD3I87jM76htPm
- nGMdMagIQZoUTqMqxhHHj/jRSlCujMSHgtuZoe4JEOnFi0mxAzusuuVS5+Zr7CAyFykF
- CBCTgZiadHxMTUR9W0yycqDiIlYBl2ld1HoG0lFFjVcr4cHxQ/p3IRf8KX32qAaKV8jI
- KDinlYa3H51xEnzhomENRAD3/WYs8I9bavRAH7SVB+au68D8o7S14b94c9GZZgnHAaeX
- aGGlrrZq3McVdVoKmhfKlusEhz+0/WERbRFwaZ52ViheQ2V3jvv/XSnhs31LV+Jtr0PS
- MPbQ==
+Received: from mail-qk1-f227.google.com (mail-qk1-f227.google.com
+ [209.85.222.227])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 36BD010E731
+ for <spice-devel@lists.freedesktop.org>; Mon, 29 Dec 2025 21:59:15 +0000 (UTC)
+Received: by mail-qk1-f227.google.com with SMTP id
+ af79cd13be357-8b2a4b6876fso1386685985a.3
+ for <spice-devel@lists.freedesktop.org>; Mon, 29 Dec 2025 13:59:15 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1766344980; x=1766949780;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CU3d1yGWQEeEWk7uPdY9HFzLa5qFyArUKKR630Dlzek=;
- b=Z1XVnVM4igsN9EDfglwVuhiBo/RbzowNXX9tT41boQuyR6is85bFExnfkxna3fytvl
- 5yFACNFLgt4eEOrXS9XXpPWJQbVbRUbhF5+l9Jvy9naQujHkIwh+RPFZTET0Bs/P9yj5
- rf+iTTRc9E3zgUae0FIM7TkZ6e1Kf1SCdWPliXpx6IauqbayhCf9N6REaSxjiGMzkvp1
- hq7zeCDLKtkWNMciuivqaTQoeU2cvbbjRRepbQonGNYeL19J7cE0lTc1aED8VEcJK88M
- i0/UEqoV9quTSS/c2TkyDBuJRELyL+DkYvmB0aTksUm2WJj2aic2R1XM3fhjom555dx+
- JhlQ==
+ d=1e100.net; s=20230601; t=1767045554; x=1767650354;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:dkim-signature:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UwzcNp2HYOV4Z1mSXVXCsNd5TObEfxUddJJZvW7JJZk=;
+ b=rar2+31lhxgI+gRq2SSJ864sfvZeNeCYQj2JiMfyYqNAZsQNZ/DJuZREMWSVf2Lz3W
+ Ip/rM0cBpIEXat/Ndh8oXUodfyvJkUJZ1Z1AOEYlhvVtyKGxxmM/FEQO4mA0eMG5sHAp
+ QyMhyier+7zhnLE12iX3bmgkHEiaSZrjwHpn+iowl3h6Vt+GgAljLZG9ND6/bx0/Zw7U
+ Y62KXbMMGWPBpzMzYH3wDMnEDeVGHHmrVbPx7EPG0cvIQrWyMzHjORbfKTDjYpTKq+wT
+ ivY/vn7UpJDFDJo9MKPjA32j152EjCqxbdcLb/dGpO18hwSZWylwl8MfTQKuYzxDArNu
+ Agbg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTzM1PAzx9hizvwQKGsgf0L1DEmJsNnJUVFQQ4ND0SKT3xK1F7gWZ3PbB84L3BL1xdCz9gCVMR2NYGJw==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0YzmFuC3NwHfunq6c6TyV8Y/hPf+tfI35mykInMK7V0eCZv/uYSc
- BOqg10BNqGae9DwHXObHp27JX97vNQm8koBIPg4LfeHoLFWCjNxRgVrF
-X-Gm-Gg: AY/fxX4NeyHc96iOmbxwX9iFgQX5fN7W3CK2yjoUZJ/LmitGkW4vXiI0/pRuDHbyYxg
- H+tGfknTFyDwny5PFiFamthug4yFs/9IALbacoXP8oIq7PeYUFTs2CpRSYi31pB5Fq2+Mc7NRU/
- hgFWGgSzA+XXkm6/xG4HF4GvKI1NxqGYIFK/nhdK/TmgdSX+yrarx2cHTl4zCUnZJDqFrMssLRP
- NSc2JdNFIWm+9hgjqs164jvLEIqbpjF+IpC5NkjNim+fMQXuRms5rsBBtitcaEgjkB1GvSe+6UF
- cJs2JUpRrJ+F3+Qbak3N4Dgm+i9bWpuiUevdPhJnh/bbUcZHrbRcDBkukF19T3v69fyyOJsJsVP
- 95Elhfnz9poCD2MdY4M0+0fN9luJFE+gOkSu3Bomc2O09Dwwnxv6NfXMM5BnlyPNFJkGQDG/YYn
- zyKevuo276UOt7TSZcYkgMPLzmHXE+5mIURIilKtUsSAu8oKVUFFwoB/3R4/mj66pe2g==
-X-Google-Smtp-Source: AGHT+IFLX81xK/AOwQ3E+98ilJbv09zXg4KnkKvMj4UXTpVPuN4Pdk6hIURONGqOkpw+gaACmx5rWg==
-X-Received: by 2002:ac8:5d0d:0:b0:4ee:4a3a:bd0f with SMTP id
- d75a77b69052e-4f4abdd2f29mr146231041cf.69.1766344979850; 
- Sun, 21 Dec 2025 11:22:59 -0800 (PST)
-Received: from ?IPV6:2602:47:d950:ab00:95cb:3d53:301b:983b?
- ([2602:47:d950:ab00:95cb:3d53:301b:983b])
+ AJvYcCVddbA+BNnGa6NPsYhtb5q4dCoNiVhFz1FPAfacvBAhfZq7YitE4uGF18Z0j+xSOTI2OnMSrLtm65Myrw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YyNsdTHYWlBhm1LSgjQT9hpzZdajfmkT10ol2dQeReYKumM7Xuh
+ lQkYaZt9YQPKAVzXXDWbK5Zz5dhwJY+jNkabaxJp1eoD+63OGGyFyXiWKPuGsEVJzHiyq6vkc95
+ s/sBikI1/Ag5FxULzyQsM5Mn98QRSJ2YOCxW7bSvvcvG3nEZGPBEF3SbcUkjD8gZSQpDm1v3aVj
+ 9VNPCJvRaDvPcgr5jHoQA6g6ax0UvZVqqLPGH2cPkZ4NHAFFx7GdR34jna4d0rrlMWDy4VkIjTu
+ YzFgLFx2JcEzpEex/m1xOo=
+X-Gm-Gg: AY/fxX5Yg4fEICp6Nm/a7Y2GQInS4DabVa1Nd23W6b7lrRAM5xmRKmbshsPBPIVeeat
+ yNVBQ6DVLhsee3MWiGjAuTjXOS4MUQhtjuOkVzD+uMiUl0GzrRmlXEk9Wodo/rCyb1PaUT43BQd
+ Ab+uVt920mhkrEdslU930F3678Ils3uFI7TJW2qYrW6jrj3d5ZaDbE81CsPo3vFyzAkQZ3LYqzB
+ WCaR8Qe76Ndc9Nw6W0/Hjq5DeZa2DWdKi33Db9eSPSTX0B40OLhQc8cGuwWHDFpCtkATwH9Flw6
+ Www8azHZ2AuGJjZj5ZYIZrPYWmQpZSLerHv5OsqEBIkrM3kwMCJZyfBizwJG9NSWWcnMzb5vkgg
+ z6/I66q7YszUAZmETKa+f8+avPmkTAiV/sTxdHFJK4Jl7VRKaC6NS0Oh4FijOiTNAex/urjb594
+ cUCQSRYG00PshcvAjKNg9Q6S3PDmo05CdWcLjhqvoY98HH
+X-Google-Smtp-Source: AGHT+IGtZp1AAK4UBjgg0pvekA5HBtj7a8CMJ20RScYw7q/cvsay8kDNqe1tgrwgn6VgEK/Z+8niNfgqHRhn
+X-Received: by 2002:a05:620a:700d:b0:8b2:87a2:9c60 with SMTP id
+ af79cd13be357-8c08fbcac1cmr4743581885a.83.1767045553979; 
+ Mon, 29 Dec 2025 13:59:13 -0800 (PST)
+Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com
+ (address-144-49-247-117.dlp.protect.broadcom.com. [144.49.247.117])
+ by smtp-relay.gmail.com with ESMTPS id
+ 6a1803df08f44-88d954a7bf3sm42754726d6.11.2025.12.29.13.59.12
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 29 Dec 2025 13:59:13 -0800 (PST)
+X-Relaying-Domain: broadcom.com
+X-CFilter-Loop: Reflected
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-88233d526baso291609316d6.1
+ for <spice-devel@lists.freedesktop.org>; Mon, 29 Dec 2025 13:59:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=broadcom.com; s=google; t=1767045551; x=1767650351;
+ darn=lists.freedesktop.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UwzcNp2HYOV4Z1mSXVXCsNd5TObEfxUddJJZvW7JJZk=;
+ b=G3QP517V2+79xugo9WiUN9/4nvomNMyOtCEF8nRmSbwO/TgAeAN/0yFNc2Wht2xRWo
+ kXpX9BKl06iDn7dXKCxN0Hc7ZNnj40+3PBCzYTITKNeGF3pqFo+p56oZNfUy4FM87LiR
+ sWCM+NUM0TZWQHca0BdTOjlvWhrzJrHM9KYHI=
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVryuDiCCEA4wO6Xa4jx8OKcnXSKoLVbNSEXX1tCTt4vm7HX+dGNI3yw5Dn34MeVHYTjYq4rc+Y68vyjQ==@lists.freedesktop.org
+X-Received: by 2002:a05:6214:428e:b0:88a:3681:1d96 with SMTP id
+ 6a1803df08f44-88d881b984fmr478636216d6.63.1767045551441; 
+ Mon, 29 Dec 2025 13:59:11 -0800 (PST)
+X-Received: by 2002:a05:6214:428e:b0:88a:3681:1d96 with SMTP id
+ 6a1803df08f44-88d881b984fmr478635666d6.63.1767045550918; 
+ Mon, 29 Dec 2025 13:59:10 -0800 (PST)
+Received: from localhost.localdomain
+ (pool-173-49-113-140.phlapa.fios.verizon.net. [173.49.113.140])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4f4ac563f66sm60242911cf.15.2025.12.21.11.22.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 21 Dec 2025 11:22:59 -0800 (PST)
-Message-ID: <f7fb7055-f844-4356-a047-189c8f4520eb@gmail.com>
-Date: Sun, 21 Dec 2025 14:22:57 -0500
+ 6a1803df08f44-88d9759f164sm231530026d6.24.2025.12.29.13.59.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Dec 2025 13:59:10 -0800 (PST)
+From: Zack Rusin <zack.rusin@broadcom.com>
+To: dri-devel@lists.freedesktop.org
+Cc: Alex Deucher <alexander.deucher@amd.com>, amd-gfx@lists.freedesktop.org,
+ Ard Biesheuvel <ardb@kernel.org>, Ce Sun <cesun102@amd.com>,
+ Chia-I Wu <olvaffe@gmail.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Danilo Krummrich <dakr@kernel.org>, Dave Airlie <airlied@redhat.com>,
+ Deepak Rawat <drawat.floss@gmail.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Hans de Goede <hansg@kernel.org>, Hawking Zhang <Hawking.Zhang@amd.com>,
+ Helge Deller <deller@gmx.de>, intel-gfx@lists.freedesktop.org,
+ intel-xe@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Jocelyn Falempe <jfalempe@redhat.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Lijo Lazar <lijo.lazar@amd.com>, linux-efi@vger.kernel.org,
+ linux-fbdev@vger.kernel.org, linux-hyperv@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Lucas De Marchi <lucas.demarchi@intel.com>,
+ Lyude Paul <lyude@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ "Mario Limonciello (AMD)" <superm1@kernel.org>,
+ Mario Limonciello <mario.limonciello@amd.com>,
+ Maxime Ripard <mripard@kernel.org>, nouveau@lists.freedesktop.org,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Simona Vetter <simona@ffwll.ch>,
+ spice-devel@lists.freedesktop.org,
+ =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ =?UTF-8?q?Timur=20Krist=C3=B3f?= <timur.kristof@gmail.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, virtualization@lists.linux.dev,
+ Vitaly Prosyak <vitaly.prosyak@amd.com>
+Subject: [PATCH 00/12] Recover sysfb after DRM probe failure
+Date: Mon, 29 Dec 2025 16:58:06 -0500
+Message-ID: <20251229215906.3688205-1-zack.rusin@broadcom.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/2] Adjust dsignated initializer to be C++20 compliant
-To: Uri Lublin <uril@redhat.com>
-Cc: Frediano Ziglio <freddy77@gmail.com>, Victor Toso
- <victortoso@redhat.com>, spice-devel@lists.freedesktop.org
-References: <cover.1765109578.git.nvinson234@gmail.com>
- <CAHt6W4dfEwtJWV0cPL4MA4ZrbQ-Quxy7cPPPG+oSJLcrVm87aQ@mail.gmail.com>
- <b0d290d2-2db8-4d68-a700-724d1d6ac431@gmail.com>
- <CAAg9qJ29KxThRT8ej9P8U9iou7Lt6UJDO3gk+rXjq5d=-DbUFA@mail.gmail.com>
- <a37f58f3-4586-47b3-bba3-a7a1f7198c45@gmail.com>
- <CAAg9qJ2ps=Cq+y4ihCsBHPBEpk33NVguJR2+s+K5H-D=8XmaQg@mail.gmail.com>
-Content-Language: en-US
-From: Nicholas Vinson <nvinson234@gmail.com>
-In-Reply-To: <CAAg9qJ2ps=Cq+y4ihCsBHPBEpk33NVguJR2+s+K5H-D=8XmaQg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 22 Dec 2025 13:08:38 +0000
+X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
+X-Mailman-Approved-At: Tue, 30 Dec 2025 10:49:13 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,132 +139,119 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-On 12/16/25 05:19, Uri Lublin wrote:
-> On Fri, Dec 12, 2025 at 7:56 AM Nicholas Vinson <nvinson234@gmail.com 
-> <mailto:nvinson234@gmail.com>> wrote:
-> 
-> 
-> 
->     On 12/11/25 13:48, Uri Lublin wrote:
->      >
->      >
->      > On Thu, Dec 11, 2025 at 2:38 PM Nicholas Vinson
->     <nvinson234@gmail.com <mailto:nvinson234@gmail.com>
->      > <mailto:nvinson234@gmail.com <mailto:nvinson234@gmail.com>>> wrote:
->      >
->      >     On 12/11/25 06:55, Frediano Ziglio wrote:
->      >      > On Sun, 7 Dec 2025 at 12:20, Nicholas Vinson
->      >     <nvinson234@gmail.com <mailto:nvinson234@gmail.com>
->     <mailto:nvinson234@gmail.com <mailto:nvinson234@gmail.com>>> wrote:
->      >      >>
->      >      >> When building with g++-16, the build fails with the
->     following error:
->      >      >>
->      >      >>      server/tests/test-display-base.cpp:809:5: error:
->     either all
->      >     initializer
->      >      >>      clauses should be designated or none of them should be
->      >      >>
->      >      >> This is because g++-16 defaults to c++20 and when using
->     designated
->      >      >> initializers with c++20, you don't wrap anonymous union
->     fields
->      >     with braces.
->      >      >>
->      >      >> Nicholas Vinson (2):
->      >      >>    m4/spice-compile-warnings.m4: disable -Wmissing-braces
->      >      >>    test-display-base.cpp: adjust designated init.
->      >      >>
->      >      >>   m4/spice-compile-warnings.m4       | 1 +
->      >      >>   server/tests/test-display-base.cpp | 2 +-
->      >      >>   2 files changed, 2 insertions(+), 1 deletion(-)
->      >      >>
->      >      >
->      >      > The CI is not that happy. I added some commit to make it pass:
->      >      > - missing AUTHORS for "make syntax-check"
->      >      > https://gitlab.freedesktop.org/fziglio/spice/-/commit/
->     <https://gitlab.freedesktop.org/fziglio/spice/-/commit/>
->      >     fb018b3fbb26f38b2ffb0ee569d4aafc287fc738 <https://
->      > gitlab.freedesktop.org/fziglio/spice/-/commit/ <http://
->     gitlab.freedesktop.org/fziglio/spice/-/commit/>
->      >     fb018b3fbb26f38b2ffb0ee569d4aafc287fc738>
->      >      > - too old Fedora (not related to these changes)
->      >      > https://gitlab.freedesktop.org/fziglio/spice/-/commit/
->     <https://gitlab.freedesktop.org/fziglio/spice/-/commit/>
->      >     a4525e204ef8b7e3beb3709823029e27de633d7a <https://
->      > gitlab.freedesktop.org/fziglio/spice/-/commit/ <http://
->     gitlab.freedesktop.org/fziglio/spice/-/commit/>
->      >     a4525e204ef8b7e3beb3709823029e27de633d7a>
->      >      > - compatibility with pretty old GCC
->      >      > https://gitlab.freedesktop.org/fziglio/spice/-/ <https://
->     gitlab.freedesktop.org/fziglio/spice/-/>
->      >     commit/6a2c24fd5c088cb3b016a40965882e98f010b583 <https://
->      > gitlab.freedesktop.org/fziglio/spice/-/ <http://
->     gitlab.freedesktop.org/fziglio/spice/-/>
->      >     commit/6a2c24fd5c088cb3b016a40965882e98f010b583>
->      >
->      >
->      > Frediano, where did you take the 10 from ?
->      > Shouldn't it check if the gcc version is 16 (or even 20) ?
->      >
->      >
->      >
->      >     I'm concerned about the old GCC compatibility commit. I think
->     it would
->      >     be more robust if designated initializer feature checks were
->     added to
->      > configure.ac <http://configure.ac> <http://configure.ac <http://
->     configure.ac>> and meson.build instead.
->      >
->      >     That way you don't have to worry about how old or new the
->     compiler
->      >     is or
->      >     if it implements the necessary GCC extensions, or implements them
->      >     correctly.
->      >
->      >
->      > Do you mean compiling a simple program with designated
->     initializers in
->      > meson/configure ?
-> 
->     That's exactly what I mean.
-> 
-> 
-> It is a bit safer, but I think we can trust gcc in this case, like 
-> Frediano's patch does.
+Almost a rite of passage for every DRM developer and most Linux users
+is upgrading your DRM driver/updating boot flags/changing some config
+and having DRM driver fail at probe resulting in a blank screen.
 
-How about "#if defined __clang__ || defined _MSC_VER || __GNUC__ > 7".
+Currently there's no way to recover from DRM driver probe failure. PCI
+DRM driver explicitly throw out the existing sysfb to get exclusive
+access to PCI resources so if the probe fails the system is left without
+a functioning display driver.
 
-It's a bit more relaxed than Frediano's check and supports MSC 16.1 or 
-newer, gcc-7 or newer, and every version of clang > 3 (might support 
-some < 3, but godbolt doesn't have anything that old).
+Add code to sysfb to recever system framebuffer when DRM driver's probe
+fails. This means that a DRM driver that fails to load reloads the system
+framebuffer driver.
 
-Thanks,
-Nicholas Vinson
+This works best with simpledrm. Without it Xorg won't recover because
+it still tries to load the vendor specific driver which ends up usually
+not working at all. With simpledrm the system recovers really nicely
+ending up with a working console and not a blank screen.
 
+There's a caveat in that some hardware might require some special magic
+register write to recover EFI display. I'd appreciate it a lot if
+maintainers could introduce a temporary failure in their drivers
+probe to validate that the sysfb recovers and they get a working console.
+The easiest way to double check it is by adding:
+ /* XXX: Temporary failure to test sysfb restore - REMOVE BEFORE COMMIT */
+ dev_info(&pdev->dev, "Testing sysfb restore: forcing probe failure\n");
+ ret = -EINVAL;
+ goto out_error;
+or such right after the devm_aperture_remove_conflicting_pci_devices .
 
-> 
-> Thanks,
->      Uri.
-> 
-> 
->     Regards,
->     Nicholas Vinson
-> 
->      >
->      > Regards,
->      >      Uri.
->      >
->      >
->      >     Regards,
->      >     Nicholas Vinson
->      >
->      >      >
->      >      > Do they sound good?
->      >      > I suppose the compatibility one could be merged.
->      >      >
->      >      > Regards,
->      >      >    Frediano
->      >
-> 
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: amd-gfx@lists.freedesktop.org
+Cc: Ard Biesheuvel <ardb@kernel.org>
+Cc: Ce Sun <cesun102@amd.com>
+Cc: Chia-I Wu <olvaffe@gmail.com>
+Cc: "Christian König" <christian.koenig@amd.com>
+Cc: Danilo Krummrich <dakr@kernel.org>
+Cc: Dave Airlie <airlied@redhat.com>
+Cc: Deepak Rawat <drawat.floss@gmail.com>
+Cc: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Cc: dri-devel@lists.freedesktop.org
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Gurchetan Singh <gurchetansingh@chromium.org>
+Cc: Hans de Goede <hansg@kernel.org>
+Cc: Hawking Zhang <Hawking.Zhang@amd.com>
+Cc: Helge Deller <deller@gmx.de>
+Cc: intel-gfx@lists.freedesktop.org
+Cc: intel-xe@lists.freedesktop.org
+Cc: Jani Nikula <jani.nikula@linux.intel.com>
+Cc: Javier Martinez Canillas <javierm@redhat.com>
+Cc: Jocelyn Falempe <jfalempe@redhat.com>
+Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+Cc: Lijo Lazar <lijo.lazar@amd.com>
+Cc: linux-efi@vger.kernel.org
+Cc: linux-fbdev@vger.kernel.org
+Cc: linux-hyperv@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: Lucas De Marchi <lucas.demarchi@intel.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Cc: "Mario Limonciello (AMD)" <superm1@kernel.org>
+Cc: Mario Limonciello <mario.limonciello@amd.com>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: nouveau@lists.freedesktop.org
+Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+Cc: Simona Vetter <simona@ffwll.ch>
+Cc: spice-devel@lists.freedesktop.org
+Cc: "Thomas Hellström" <thomas.hellstrom@linux.intel.com>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: "Timur Kristóf" <timur.kristof@gmail.com>
+Cc: Tvrtko Ursulin <tursulin@ursulin.net>
+Cc: virtualization@lists.linux.dev
+Cc: Vitaly Prosyak <vitaly.prosyak@amd.com>
+
+Zack Rusin (12):
+  video/aperture: Add sysfb restore on DRM probe failure
+  drm/vmwgfx: Use devm aperture helpers for sysfb restore on probe
+    failure
+  drm/xe: Use devm aperture helpers for sysfb restore on probe failure
+  drm/amdgpu: Use devm aperture helpers for sysfb restore on probe
+    failure
+  drm/virtio: Add sysfb restore on probe failure
+  drm/nouveau: Use devm aperture helpers for sysfb restore on probe
+    failure
+  drm/qxl: Use devm aperture helpers for sysfb restore on probe failure
+  drm/vboxvideo: Use devm aperture helpers for sysfb restore on probe
+    failure
+  drm/hyperv: Add sysfb restore on probe failure
+  drm/ast: Use devm aperture helpers for sysfb restore on probe failure
+  drm/radeon: Use devm aperture helpers for sysfb restore on probe
+    failure
+  drm/i915: Use devm aperture helpers for sysfb restore on probe failure
+
+ drivers/firmware/efi/sysfb_efi.c           |   2 +-
+ drivers/firmware/sysfb.c                   | 191 +++++++++++++--------
+ drivers/firmware/sysfb_simplefb.c          |  10 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |   9 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c    |   7 +
+ drivers/gpu/drm/ast/ast_drv.c              |  13 +-
+ drivers/gpu/drm/hyperv/hyperv_drm_drv.c    |  23 +++
+ drivers/gpu/drm/i915/i915_driver.c         |  13 +-
+ drivers/gpu/drm/nouveau/nouveau_drm.c      |  16 +-
+ drivers/gpu/drm/qxl/qxl_drv.c              |  14 +-
+ drivers/gpu/drm/radeon/radeon_drv.c        |  15 +-
+ drivers/gpu/drm/vboxvideo/vbox_drv.c       |  13 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.c       |  29 ++++
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c        |  13 +-
+ drivers/gpu/drm/xe/xe_device.c             |   7 +-
+ drivers/gpu/drm/xe/xe_pci.c                |   7 +
+ drivers/video/aperture.c                   |  54 ++++++
+ include/linux/aperture.h                   |  14 ++
+ include/linux/sysfb.h                      |   6 +
+ 19 files changed, 368 insertions(+), 88 deletions(-)
+
+-- 
+2.48.1
 
