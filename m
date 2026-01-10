@@ -2,158 +2,126 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 702A1D08976
-	for <lists+spice-devel@lfdr.de>; Fri, 09 Jan 2026 11:34:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC5A8D0EEA5
+	for <lists+spice-devel@lfdr.de>; Sun, 11 Jan 2026 13:48:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 083DE10E896;
-	Fri,  9 Jan 2026 10:34:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F7F810E1E0;
+	Sun, 11 Jan 2026 12:48:19 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="AYGkFnRw";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="IHUFvxjX";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="AYGkFnRw";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="IHUFvxjX";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="flFuK32w";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 38FB610E895
- for <spice-devel@lists.freedesktop.org>; Fri,  9 Jan 2026 10:34:31 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 892485BD4C;
- Fri,  9 Jan 2026 10:34:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1767954869; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=quXykmFucH86nMSyArVgl9RjHoQwr+Ungu8b5HjPcy4=;
- b=AYGkFnRwOFEi2fS+0MgdGKuPjA5xML1KOEc0VNsILP7ImaqRJ4uUWXamjRs8/0o0vpKGhf
- 7MdEAeqQ4bcAxw2TDloU/+OssmLjWH5UUlO21Va39W6gTXrp1mv9PEbzCDRLA8v7bJkvGC
- fj9pE11XRgdPxIiiCGMLZ4rIU7VzfFA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1767954869;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=quXykmFucH86nMSyArVgl9RjHoQwr+Ungu8b5HjPcy4=;
- b=IHUFvxjXt6RNe94raOnQ1X8PE56K7NAxMjFmxFzfDsr06Ts6Avcj62ovlK3mxFEbcYeb9j
- Lla84MGwl3Bi/IDw==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1767954869; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=quXykmFucH86nMSyArVgl9RjHoQwr+Ungu8b5HjPcy4=;
- b=AYGkFnRwOFEi2fS+0MgdGKuPjA5xML1KOEc0VNsILP7ImaqRJ4uUWXamjRs8/0o0vpKGhf
- 7MdEAeqQ4bcAxw2TDloU/+OssmLjWH5UUlO21Va39W6gTXrp1mv9PEbzCDRLA8v7bJkvGC
- fj9pE11XRgdPxIiiCGMLZ4rIU7VzfFA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1767954869;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=quXykmFucH86nMSyArVgl9RjHoQwr+Ungu8b5HjPcy4=;
- b=IHUFvxjXt6RNe94raOnQ1X8PE56K7NAxMjFmxFzfDsr06Ts6Avcj62ovlK3mxFEbcYeb9j
- Lla84MGwl3Bi/IDw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5C7883EA63;
- Fri,  9 Jan 2026 10:34:28 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id LvUmFbTZYGkGRAAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 09 Jan 2026 10:34:28 +0000
-Message-ID: <c816f7ed-66e0-4773-b3d1-4769234bd30b@suse.de>
-Date: Fri, 9 Jan 2026 11:34:27 +0100
+Received: from mail-pj1-f98.google.com (mail-pj1-f98.google.com
+ [209.85.216.98])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 68B0710E39F
+ for <spice-devel@lists.freedesktop.org>; Sat, 10 Jan 2026 04:52:21 +0000 (UTC)
+Received: by mail-pj1-f98.google.com with SMTP id
+ 98e67ed59e1d1-34b75fba315so2983887a91.3
+ for <spice-devel@lists.freedesktop.org>; Fri, 09 Jan 2026 20:52:21 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1768020741; x=1768625541;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WweC1M8YpkmxdVYD3lcJGS5W0mPWEem9baqeeasQWYI=;
+ b=Q392x8SwP8b2rGQqcqEVb+mKPurTzwDjTu5DM7I/JuKuzgItKFy/haoOuJE+8T1bIc
+ G7QnGcgsAg9V8/qY5wgnlUDQMFNG2cuLvm0W5CDq2k23ZvttGA5xItTTIal52PeEDrPw
+ 1MWrlANfBkKmoXlNKlIKKVal0xNAmAC+Slv7dukdrM2fGmR+hzTGYWH+78DHPLlSKOtA
+ t2MGe9FMiNFFRgj0Z7m7TAPSNnGAl0wYZBjIaJnHk9IP+2lV3p2mHfLNk3dT6+hReiqt
+ PdMFfsAdLhd9TiU2rdxHsaDsvRnPVn4gKXhD4EbLN04bC9vyLiDPXeuh8jRpYcWchgTO
+ h9Kw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWr1T94kmEIIojA5IWa3FZdP5T6rEp3Z5XpO/aeYMO6sZGIEb9McWbJxLVC5CtaVXcnePiMHXvyCRAgSw==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YwfGcAXtzr4sWu9O6+e+qnSepmS25JRPdc7nK7PdMSaA24+D3mM
+ eRUZyMGX0rjqAmEM1L1e/zX7Eb65kP5lxa0lr5g3WI0ajLG5nJWoeqvAk0oLfFFppEhGy/vUp6q
+ 5UrERH+sUnoCPNe+Ulr8NL4pMzRLXMcu7gbZ1RIa9+FTkewv8kntEUOdB+zgvdYXzP3CoTr7Dz9
+ VcypWEtbhLhwm9ntEBdi16+yJCk7S88RhprqfS2BLHFau5WcBnF087NZph7MCOOey1k4IWzuruv
+ ATgtn/wqrvPCtUrjLBaS2g=
+X-Gm-Gg: AY/fxX6nNlLGZr70e3b6dgRSfUrZjNzSbDDNWhUYEMjGuxGLGqnN447AVUwRxGyYAyf
+ DXMfs62N+DqF7Nowe/cEwxODYtXY1CC/rI16whRMvrLS2Fz+sP1qintray5VaxmEbn9kwwlsKLH
+ +Ki4AnguzlQAXs2tCS2SqBKdMhSj40jFgYI+4jFUZ1ud31tuhOACIqIY0uixWKQGJEF8mY6/UgB
+ K1Z5W//om0i7VuVwrPBlYvAGXISCUPT8Jj8P8RLYxBCJgqUKCgUhukETeSSK0IkOk6j3X4NTuUU
+ pHGXTvL5VKYTUcMuKssmdHOq0S2PMxW1tPR3KyWNx3zcSRCexnJTDInGtxRMLpF1k1a6HWKE+qf
+ gUsgAXViagfTP0fP0rhz1Q0fH+Q1Tz3cPS7otoJ5DKPOQswRXuLc0d1k2kDA3IVQTlOgFrINjT3
+ GDxjNYgg4t6wdLF5GzBSbW3HSzg/2fyjBUBrq7jrxYpOpr
+X-Google-Smtp-Source: AGHT+IGAl1eYh5KLTKhj9W5NsDPWe9sr88W+JkDneQa9mDBjga50LWCqoRbGAzPB1zFkWUfoTvmZllLafXhH
+X-Received: by 2002:a17:90b:5445:b0:32d:d5f1:fe7f with SMTP id
+ 98e67ed59e1d1-34f68c2050cmr10917884a91.15.1768020740851; 
+ Fri, 09 Jan 2026 20:52:20 -0800 (PST)
+Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com
+ (address-144-49-247-118.dlp.protect.broadcom.com. [144.49.247.118])
+ by smtp-relay.gmail.com with ESMTPS id
+ 98e67ed59e1d1-34f5f91acfasm1724194a91.6.2026.01.09.20.52.20
+ for <spice-devel@lists.freedesktop.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 09 Jan 2026 20:52:20 -0800 (PST)
+X-Relaying-Domain: broadcom.com
+X-CFilter-Loop: Reflected
+Received: by mail-lf1-f72.google.com with SMTP id
+ 2adb3069b0e04-59b6d0fd157so2351074e87.0
+ for <spice-devel@lists.freedesktop.org>; Fri, 09 Jan 2026 20:52:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=broadcom.com; s=google; t=1768020738; x=1768625538;
+ darn=lists.freedesktop.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WweC1M8YpkmxdVYD3lcJGS5W0mPWEem9baqeeasQWYI=;
+ b=flFuK32wnbwt+7EPVO94Syo8NvCqjsmxcEcLbDXs0iIMAdGxpaPjq5BCEryflpopi+
+ 5iW0L+hHuOHHZamYZrQfZ0nnK+dSrh3To6lUkBHycXwnYTxoZPpvpRJMEkWZX6x/3o9h
+ uNzn9WLEP83SI7RvbAkCjZ6zDZFugKEPTQh/o=
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWmYKJu0u8p/eXeAmX5gtV14voY1/C0JKyRT6Ry96znW63ia8K/hBJOu2d1kFiWdBYGxEh6MmNBhG8IZQ==@lists.freedesktop.org
+X-Received: by 2002:a05:6512:b05:b0:598:eb48:cdd7 with SMTP id
+ 2adb3069b0e04-59b6f036b6dmr3303278e87.32.1768020738328; 
+ Fri, 09 Jan 2026 20:52:18 -0800 (PST)
+X-Received: by 2002:a05:6512:b05:b0:598:eb48:cdd7 with SMTP id
+ 2adb3069b0e04-59b6f036b6dmr3303240e87.32.1768020737789; Fri, 09 Jan 2026
+ 20:52:17 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/12] Recover sysfb after DRM probe failure
-To: Zack Rusin <zack.rusin@broadcom.com>, dri-devel@lists.freedesktop.org
-Cc: Alex Deucher <alexander.deucher@amd.com>, amd-gfx@lists.freedesktop.org,
- Ard Biesheuvel <ardb@kernel.org>, Ce Sun <cesun102@amd.com>,
- Chia-I Wu <olvaffe@gmail.com>, =?UTF-8?Q?Christian_K=C3=B6nig?=
- <christian.koenig@amd.com>, Danilo Krummrich <dakr@kernel.org>,
- Dave Airlie <airlied@redhat.com>, Deepak Rawat <drawat.floss@gmail.com>,
- Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Hans de Goede <hansg@kernel.org>, Hawking Zhang <Hawking.Zhang@amd.com>,
- Helge Deller <deller@gmx.de>, intel-gfx@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Jocelyn Falempe <jfalempe@redhat.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Lijo Lazar <lijo.lazar@amd.com>, linux-efi@vger.kernel.org,
- linux-fbdev@vger.kernel.org, linux-hyperv@vger.kernel.org,
- linux-kernel@vger.kernel.org, Lucas De Marchi <lucas.demarchi@intel.com>,
- Lyude Paul <lyude@redhat.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- "Mario Limonciello (AMD)" <superm1@kernel.org>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Maxime Ripard <mripard@kernel.org>, nouveau@lists.freedesktop.org,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Simona Vetter <simona@ffwll.ch>,
- spice-devel@lists.freedesktop.org,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- =?UTF-8?Q?Timur_Krist=C3=B3f?= <timur.kristof@gmail.com>,
- Tvrtko Ursulin <tursulin@ursulin.net>, virtualization@lists.linux.dev,
- Vitaly Prosyak <vitaly.prosyak@amd.com>
 References: <20251229215906.3688205-1-zack.rusin@broadcom.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20251229215906.3688205-1-zack.rusin@broadcom.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- RCVD_VIA_SMTP_AUTH(0.00)[]; ARC_NA(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
- MIME_TRACE(0.00)[0:+]; FUZZY_RATELIMITED(0.00)[rspamd.com];
- TO_DN_SOME(0.00)[]; RCPT_COUNT_TWELVE(0.00)[43];
- TAGGED_RCPT(0.00)[]; MID_RHS_MATCH_FROM(0.00)[];
- R_RATELIMIT(0.00)[to_ip_from(RLxtqcp3yg5i7i9mi6syp13ijk)];
- FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[amd.com,lists.freedesktop.org,kernel.org,gmail.com,redhat.com,collabora.com,chromium.org,gmx.de,linux.intel.com,vger.kernel.org,intel.com,ffwll.ch,ursulin.net,lists.linux.dev];
- RCVD_TLS_ALL(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email, suse.com:url, suse.de:mid,
- suse.de:email, imap1.dmz-prg2.suse.org:helo, lists.freedesktop.org:email]
-X-Spam-Flag: NO
-X-Spam-Score: -2.80
-X-Spam-Level: 
+ <c816f7ed-66e0-4773-b3d1-4769234bd30b@suse.de>
+In-Reply-To: <c816f7ed-66e0-4773-b3d1-4769234bd30b@suse.de>
+From: Zack Rusin <zack.rusin@broadcom.com>
+Date: Fri, 9 Jan 2026 23:52:05 -0500
+X-Gm-Features: AQt7F2p8B_T8ovfD5ZSr9MTIdbY91q6Tpr9PYo2oe7dWWszTv7Z59e7mmZ6IEig
+Message-ID: <CABQX2QNQU4XZ1rJFqnJeMkz8WP=t9atj0BqXHbDQab7ZnAyJxg@mail.gmail.com>
+Subject: Re: [PATCH 00/12] Recover sysfb after DRM probe failure
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: dri-devel@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>, 
+ amd-gfx@lists.freedesktop.org, Ard Biesheuvel <ardb@kernel.org>,
+ Ce Sun <cesun102@amd.com>, Chia-I Wu <olvaffe@gmail.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+ Danilo Krummrich <dakr@kernel.org>, Dave Airlie <airlied@redhat.com>, 
+ Deepak Rawat <drawat.floss@gmail.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>, 
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, 
+ Hans de Goede <hansg@kernel.org>, Hawking Zhang <Hawking.Zhang@amd.com>,
+ Helge Deller <deller@gmx.de>, 
+ intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org, 
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, 
+ Jocelyn Falempe <jfalempe@redhat.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
+ Lijo Lazar <lijo.lazar@amd.com>, linux-efi@vger.kernel.org,
+ linux-fbdev@vger.kernel.org, 
+ linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Lucas De Marchi <lucas.demarchi@intel.com>, Lyude Paul <lyude@redhat.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ "Mario Limonciello (AMD)" <superm1@kernel.org>,
+ Mario Limonciello <mario.limonciello@amd.com>, 
+ Maxime Ripard <mripard@kernel.org>, nouveau@lists.freedesktop.org, 
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Simona Vetter <simona@ffwll.ch>, 
+ spice-devel@lists.freedesktop.org, 
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+ =?UTF-8?Q?Timur_Krist=C3=B3f?= <timur.kristof@gmail.com>, 
+ Tvrtko Ursulin <tursulin@ursulin.net>, virtualization@lists.linux.dev, 
+ Vitaly Prosyak <vitaly.prosyak@amd.com>
+X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="00000000000018644f06480168cc"
+X-Mailman-Approved-At: Sun, 11 Jan 2026 12:48:17 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -168,167 +136,187 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
-Hi
+--00000000000018644f06480168cc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Am 29.12.25 um 22:58 schrieb Zack Rusin:
-> Almost a rite of passage for every DRM developer and most Linux users
-> is upgrading your DRM driver/updating boot flags/changing some config
-> and having DRM driver fail at probe resulting in a blank screen.
+On Fri, Jan 9, 2026 at 5:34=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse.=
+de> wrote:
 >
-> Currently there's no way to recover from DRM driver probe failure. PCI
-> DRM driver explicitly throw out the existing sysfb to get exclusive
-> access to PCI resources so if the probe fails the system is left without
-> a functioning display driver.
+> Hi
 >
-> Add code to sysfb to recever system framebuffer when DRM driver's probe
-> fails. This means that a DRM driver that fails to load reloads the system
-> framebuffer driver.
+> Am 29.12.25 um 22:58 schrieb Zack Rusin:
+> > Almost a rite of passage for every DRM developer and most Linux users
+> > is upgrading your DRM driver/updating boot flags/changing some config
+> > and having DRM driver fail at probe resulting in a blank screen.
+> >
+> > Currently there's no way to recover from DRM driver probe failure. PCI
+> > DRM driver explicitly throw out the existing sysfb to get exclusive
+> > access to PCI resources so if the probe fails the system is left withou=
+t
+> > a functioning display driver.
+> >
+> > Add code to sysfb to recever system framebuffer when DRM driver's probe
+> > fails. This means that a DRM driver that fails to load reloads the syst=
+em
+> > framebuffer driver.
+> >
+> > This works best with simpledrm. Without it Xorg won't recover because
+> > it still tries to load the vendor specific driver which ends up usually
+> > not working at all. With simpledrm the system recovers really nicely
+> > ending up with a working console and not a blank screen.
+> >
+> > There's a caveat in that some hardware might require some special magic
+> > register write to recover EFI display. I'd appreciate it a lot if
+> > maintainers could introduce a temporary failure in their drivers
+> > probe to validate that the sysfb recovers and they get a working consol=
+e.
+> > The easiest way to double check it is by adding:
+> >   /* XXX: Temporary failure to test sysfb restore - REMOVE BEFORE COMMI=
+T */
+> >   dev_info(&pdev->dev, "Testing sysfb restore: forcing probe failure\n"=
+);
+> >   ret =3D -EINVAL;
+> >   goto out_error;
+> > or such right after the devm_aperture_remove_conflicting_pci_devices .
 >
-> This works best with simpledrm. Without it Xorg won't recover because
-> it still tries to load the vendor specific driver which ends up usually
-> not working at all. With simpledrm the system recovers really nicely
-> ending up with a working console and not a blank screen.
+> Recovering the display like that is guess work and will at best work
+> with simple discrete devices where the framebuffer is always located in
+> a confined graphics aperture.
 >
-> There's a caveat in that some hardware might require some special magic
-> register write to recover EFI display. I'd appreciate it a lot if
-> maintainers could introduce a temporary failure in their drivers
-> probe to validate that the sysfb recovers and they get a working console.
-> The easiest way to double check it is by adding:
->   /* XXX: Temporary failure to test sysfb restore - REMOVE BEFORE COMMIT */
->   dev_info(&pdev->dev, "Testing sysfb restore: forcing probe failure\n");
->   ret = -EINVAL;
->   goto out_error;
-> or such right after the devm_aperture_remove_conflicting_pci_devices .
-
-Recovering the display like that is guess work and will at best work 
-with simple discrete devices where the framebuffer is always located in 
-a confined graphics aperture.
-
-But the problem you're trying to solve is a real one.
-
-What we'd want to do instead is to take the initial hardware state into 
-account when we do the initial mode-setting operation.
-
-The first step is to move each driver's remove_conflicting_devices call 
-to the latest possible location in the probe function. We usually do it 
-first, because that's easy. But on most hardware, it could happen much 
-later. The native driver is free to examine hardware state while probing 
-the device as long as it does not interfere with the pre-configured 
-framebuffer mode/format/address. Hence it can set up it's internal 
-structures while the sysfb device is still active.
-
-The next step for the native driver is to load the pre-configured 
-hardware state into its initial internal atomic state. Maxime has worked 
-on that on and off. The last iteration I'm aware of is at [1].
-
-After the state-readout, the sysfb device has to be unplugged. But as 
-the underlying hardware config remains active, the native driver can now 
-use and modify it. We currently do a drm_mode_config_reset(), which 
-clears the state and then let the first client set a new display state. 
-But with state-readout, we could either pick up the existing framebuffer 
-directly or do a proper modeset from existing state.
-
-As DRM clients control the mode setting, they'd likely need some changes 
-to handle state-readout. There's such code in i915's fbdev support AFAIK.
-
-Best regards
-Thomas
-
-[1] 
-https://lore.kernel.org/dri-devel/20250902-drm-state-readout-v1-0-14ad5315da3f@kernel.org/
-
+> But the problem you're trying to solve is a real one.
 >
-> Cc: Alex Deucher <alexander.deucher@amd.com>
-> Cc: amd-gfx@lists.freedesktop.org
-> Cc: Ard Biesheuvel <ardb@kernel.org>
-> Cc: Ce Sun <cesun102@amd.com>
-> Cc: Chia-I Wu <olvaffe@gmail.com>
-> Cc: "Christian König" <christian.koenig@amd.com>
-> Cc: Danilo Krummrich <dakr@kernel.org>
-> Cc: Dave Airlie <airlied@redhat.com>
-> Cc: Deepak Rawat <drawat.floss@gmail.com>
-> Cc: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: Gerd Hoffmann <kraxel@redhat.com>
-> Cc: Gurchetan Singh <gurchetansingh@chromium.org>
-> Cc: Hans de Goede <hansg@kernel.org>
-> Cc: Hawking Zhang <Hawking.Zhang@amd.com>
-> Cc: Helge Deller <deller@gmx.de>
-> Cc: intel-gfx@lists.freedesktop.org
-> Cc: intel-xe@lists.freedesktop.org
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Javier Martinez Canillas <javierm@redhat.com>
-> Cc: Jocelyn Falempe <jfalempe@redhat.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Lijo Lazar <lijo.lazar@amd.com>
-> Cc: linux-efi@vger.kernel.org
-> Cc: linux-fbdev@vger.kernel.org
-> Cc: linux-hyperv@vger.kernel.org
-> Cc: linux-kernel@vger.kernel.org
-> Cc: Lucas De Marchi <lucas.demarchi@intel.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: "Mario Limonciello (AMD)" <superm1@kernel.org>
-> Cc: Mario Limonciello <mario.limonciello@amd.com>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: nouveau@lists.freedesktop.org
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: Simona Vetter <simona@ffwll.ch>
-> Cc: spice-devel@lists.freedesktop.org
-> Cc: "Thomas Hellström" <thomas.hellstrom@linux.intel.com>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: "Timur Kristóf" <timur.kristof@gmail.com>
-> Cc: Tvrtko Ursulin <tursulin@ursulin.net>
-> Cc: virtualization@lists.linux.dev
-> Cc: Vitaly Prosyak <vitaly.prosyak@amd.com>
+> What we'd want to do instead is to take the initial hardware state into
+> account when we do the initial mode-setting operation.
 >
-> Zack Rusin (12):
->    video/aperture: Add sysfb restore on DRM probe failure
->    drm/vmwgfx: Use devm aperture helpers for sysfb restore on probe
->      failure
->    drm/xe: Use devm aperture helpers for sysfb restore on probe failure
->    drm/amdgpu: Use devm aperture helpers for sysfb restore on probe
->      failure
->    drm/virtio: Add sysfb restore on probe failure
->    drm/nouveau: Use devm aperture helpers for sysfb restore on probe
->      failure
->    drm/qxl: Use devm aperture helpers for sysfb restore on probe failure
->    drm/vboxvideo: Use devm aperture helpers for sysfb restore on probe
->      failure
->    drm/hyperv: Add sysfb restore on probe failure
->    drm/ast: Use devm aperture helpers for sysfb restore on probe failure
->    drm/radeon: Use devm aperture helpers for sysfb restore on probe
->      failure
->    drm/i915: Use devm aperture helpers for sysfb restore on probe failure
->
->   drivers/firmware/efi/sysfb_efi.c           |   2 +-
->   drivers/firmware/sysfb.c                   | 191 +++++++++++++--------
->   drivers/firmware/sysfb_simplefb.c          |  10 +-
->   drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |   9 +-
->   drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c    |   7 +
->   drivers/gpu/drm/ast/ast_drv.c              |  13 +-
->   drivers/gpu/drm/hyperv/hyperv_drm_drv.c    |  23 +++
->   drivers/gpu/drm/i915/i915_driver.c         |  13 +-
->   drivers/gpu/drm/nouveau/nouveau_drm.c      |  16 +-
->   drivers/gpu/drm/qxl/qxl_drv.c              |  14 +-
->   drivers/gpu/drm/radeon/radeon_drv.c        |  15 +-
->   drivers/gpu/drm/vboxvideo/vbox_drv.c       |  13 +-
->   drivers/gpu/drm/virtio/virtgpu_drv.c       |  29 ++++
->   drivers/gpu/drm/vmwgfx/vmwgfx_drv.c        |  13 +-
->   drivers/gpu/drm/xe/xe_device.c             |   7 +-
->   drivers/gpu/drm/xe/xe_pci.c                |   7 +
->   drivers/video/aperture.c                   |  54 ++++++
->   include/linux/aperture.h                   |  14 ++
->   include/linux/sysfb.h                      |   6 +
->   19 files changed, 368 insertions(+), 88 deletions(-)
->
+> The first step is to move each driver's remove_conflicting_devices call
+> to the latest possible location in the probe function. We usually do it
+> first, because that's easy. But on most hardware, it could happen much
+> later.
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, Werner Knoblich, (HRB 36809, AG Nürnberg)
+Well, some drivers (vbox, vmwgfx, bochs and currus-qemu) do it because
+they request pci regions which is going to fail otherwise. Because
+grabbining the pci resources is in general the very first thing that
+those drivers need to do to setup anything, we
+remove_conflicting_devices first or at least very early.
 
+I also don't think it's possible or even desirable by some drivers to
+reuse the initial state, good example here is vmwgfx where by default
+some people will setup their vm's with e.g. 8mb ram, when the vmwgfx
+loads we allow scanning out from system memory, so you can set your vm
+up with 8mb of vram but still use 4k resolutions when the driver
+loads, this way the suspend size of the vm is very predictable (tiny
+vram plus whatever ram was setup) while still allowing a lot of
+flexibility.
 
+In general I think however this is planned it's two or three separate serie=
+s:
+1) infrastructure to reload the sysfb driver (what this series is)
+2) making sure that drivers that do want to recover cleanly actually
+clean out all the state on exit properly,
+3) abstracting at least some of that cleanup in some driver independent way
+
+z
+
+--00000000000018644f06480168cc
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+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
+6U6qgI8F5eiKsQyE0HgYrQJx/sDs9LLVZlaNiA3U8M8CgEnb8VhuH3BN/yXphhEQdJXb1TyaJA60
+SmHcZdEQZbl4EjwUcs3UIowmI/Mhi7ADQB7VNsO/BaOVBEQk53xH+4djY/cg7jvqTTeliY05j2Yx
+uwwXcDC4mWjGzxAT5DVqC8fKQvon1uc2heorHb555+sLdwYxAgMBAAGjggHYMIIB1DAOBgNVHQ8B
+Af8EBAMCBaAwgZMGCCsGAQUFBwEBBIGGMIGDMEYGCCsGAQUFBzAChjpodHRwOi8vc2VjdXJlLmds
+b2JhbHNpZ24uY29tL2NhY2VydC9nc2djY3I2c21pbWVjYTIwMjMuY3J0MDkGCCsGAQUFBzABhi1o
+dHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9nc2djY3I2c21pbWVjYTIwMjMwZQYDVR0gBF4wXDAJ
+BgdngQwBBQMBMAsGCSsGAQQBoDIBKDBCBgorBgEEAaAyCgMCMDQwMgYIKwYBBQUHAgEWJmh0dHBz
+Oi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAkGA1UdEwQCMAAwQQYDVR0fBDowODA2
+oDSgMoYwaHR0cDovL2NybC5nbG9iYWxzaWduLmNvbS9nc2djY3I2c21pbWVjYTIwMjMuY3JsMCIG
+A1UdEQQbMBmBF3phY2sucnVzaW5AYnJvYWRjb20uY29tMBMGA1UdJQQMMAoGCCsGAQUFBwMEMB8G
+A1UdIwQYMBaAFAApNp5ceroPry1QLdugI4UYsKCSMB0GA1UdDgQWBBQNDn2m/OLuDx9YjEqPLCDB
+s/VKNTANBgkqhkiG9w0BAQsFAAOCAgEAF463syOLTQkWZmEyyR60W1sM3J1cbnMRrBFUBt3S2NTY
+SJ2NAvkTAxbPoOhK6IQdaTyrWi8xdg2tftr5FC1bOSUdxudY6dipq2txe7mEoUE6VlpJid/56Mo4
+QJRb6YiykQeIfoJiYMKsyuXWsTB1rhQxlxfnaFxi8Xy3+xKAeX68DcsHG3ZU0h1beBURA44tXcz6
+fFDNPQ2k6rWDFz+XNN2YOPqfse2wEm3DXpqNT79ycU7Uva7e51b8XdbmJ6XVzUFmWzhjXy5hvV8z
+iF+DvP+KT1/bjO6aNL2/3PWiy1u6xjnWvobHuAYVrXxQ5wzk8aPOnED9Q8pt2nqk/UIzw2f67Cn9
+3CxrVqXUKm93J+rupyKVTGgKO9T1ODVPo665aIbM72RxSI9Wsofatm2fo8DWOkrfs29pYfy6eECl
+91qfFMl+IzIVfDgIrEX6gSngJ2ZLaG6L+/iNrUxHxxsaUmyDwBbTfjYwr10H6NKES3JaxVRslnpF
+06HTTciJNx2wowbYF1c+BFY4r/19LHygijIVa+hZEgNuMrVLyAamaAKZ1AWxTdv8Q/eeNN3Myq61
+b1ykTSPCXjBq/03CMF/wT1wly16jYjLDXZ6II/HYyJt34QeqnBENU9zXTc9RopqcuHD2g+ROT7lI
+VLi5ffzC8rVliltTltbYPc7F0lAvGKAxggJXMIICUwIBATBiMFIxCzAJBgNVBAYTAkJFMRkwFwYD
+VQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBD
+QSAyMDIzAgxhPxw+eieHWB40hPkwDQYJYIZIAWUDBAIBBQCggccwLwYJKoZIhvcNAQkEMSIEII5o
+RGTEyV0XeAfpw/3EFhD4hnN34Z3brBUKW0xqk8cVMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEw
+HAYJKoZIhvcNAQkFMQ8XDTI2MDExMDA0NTIxOFowXAYJKoZIhvcNAQkPMU8wTTALBglghkgBZQME
+ASowCwYJYIZIAWUDBAEWMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQcwCwYJ
+YIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAF1Xo42N3K3eae8tcsSKl342yCGSrVLRINZtTEq9
+r63VqEAIdk89PCmgq61M9rT5wC/lhrOuNPE4WrW+Z1ZjnyFFroTD6ML1O92fBD6ngQfenx0qqqiN
+3EMvaNZEewav2YLeGmd1133vuOm0UNdoCPNK0xq3AR7gtCqt7p38R15PaQgZzWhc4K8GrVEYcbJy
+k1CeiWNlU+e4sXGmWAAIP2yyfTSxZc116VnRSp1vp8IKeUID6E5ozB304N1HPFHMjw+nSCeOOyCb
+TWO3GNDKajKdndjDywgT4lpgz2KIjnQLKIRoYwb9pAavWOIt+M1v21zeOFwh+Iofvs4XuSoq8G8=
+--00000000000018644f06480168cc--
