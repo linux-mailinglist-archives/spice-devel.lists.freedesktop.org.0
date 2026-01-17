@@ -2,112 +2,93 @@ Return-Path: <spice-devel-bounces@lists.freedesktop.org>
 X-Original-To: lists+spice-devel@lfdr.de
 Delivered-To: lists+spice-devel@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7615D2F01F
-	for <lists+spice-devel@lfdr.de>; Fri, 16 Jan 2026 10:49:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15229D38DD4
+	for <lists+spice-devel@lfdr.de>; Sat, 17 Jan 2026 11:42:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B509D10E141;
-	Fri, 16 Jan 2026 09:48:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7CB2510E02A;
+	Sat, 17 Jan 2026 10:42:53 +0000 (UTC)
 Authentication-Results: gabe.freedesktop.org;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="YrctNhKT";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="evMbPRwh";
 	dkim-atps=neutral
 X-Original-To: spice-devel@lists.freedesktop.org
 Delivered-To: spice-devel@lists.freedesktop.org
-Received: from mail-qv1-f97.google.com (mail-qv1-f97.google.com
- [209.85.219.97])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 611CF10E7DD
- for <spice-devel@lists.freedesktop.org>; Fri, 16 Jan 2026 04:00:15 +0000 (UTC)
-Received: by mail-qv1-f97.google.com with SMTP id
- 6a1803df08f44-88888d80590so22371906d6.3
- for <spice-devel@lists.freedesktop.org>; Thu, 15 Jan 2026 20:00:15 -0800 (PST)
+Received: from mail-pg1-f227.google.com (mail-pg1-f227.google.com
+ [209.85.215.227])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D0C7610E011
+ for <spice-devel@lists.freedesktop.org>; Sat, 17 Jan 2026 06:03:04 +0000 (UTC)
+Received: by mail-pg1-f227.google.com with SMTP id
+ 41be03b00d2f7-b553412a19bso1129108a12.1
+ for <spice-devel@lists.freedesktop.org>; Fri, 16 Jan 2026 22:03:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1768536014; x=1769140814;
+ d=1e100.net; s=20230601; t=1768629784; x=1769234584;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wvCpeJE7op7AMZrKRdHdqCi/vHU59lwCBKxKxYMvJ/k=;
- b=S+RJpfKsyjQL5JwZ/DP4KtAT0Yd2SL3mbjFOqbwgJHvWfJnj1uazEgA4Pgmz1gfnJo
- A2Ygqw5fwm8EoMyRQdMAJtWnERGaeOAtf0/MNaCxoNRJDzahEmrys6faPXOOlSiXYU30
- +jFow9qi+15+QGxcWG2OFHAncdZYXqPfOx7Njb6Gx/mvWcGB0+znuNc3w/JZXwFOpDH3
- 6fMYPIU1lfE0FOvR2yi2I1vb/RqyrakhsJO2mJx4euYMh1NpO5tL4NoppXvy+Hwoyu3S
- 2aNH4EQbNJ7L1UpxuskqA7dv2YTidqguHccPXTria0lF+Mf1tOUf4WC6Yi1K316zq/ki
- qiDw==
-X-Forwarded-Encrypted: i=2;
- AJvYcCWJvhH4JNN9tjtRbn2cVTYPiNglSie8cxX/SiYGP5iWbMDEZ/WhMKKH9DKeClesiOIwl+uqqgF1GB3JUw==@lists.freedesktop.org
-X-Gm-Message-State: AOJu0Yy6c7Fdpxg2lIuhYHAJcc8c2z7LRgBpeiXsE36TO6ja2+cVMxKu
- 3cDdFj4tMsYNDHcJ019nvuiiVM4DgEYdY5nX7YydRpemelfuT8EfJZsBo1n43rRUFK2sKKteRVm
- o8u4BhWIAQWT2A2ruyw4j+UrMsimhkaOuJqY25i7Elap8IFZ7ojziZVi2EwewFqyrPPFRTCE28E
- KctK1FkGmiQC1PGm/fuNhI6kRQL6haPAxeaJTIaJN0pcCHDKyuaz0+PGxRCd5a0P8H0QouCCvRF
- 1KlyNJ2p4ayi33vwGnnHXU=
-X-Gm-Gg: AY/fxX663P4rW+WvBfhcde2ZxBgb5ZcHZGlJt/5rvLiNx2vBnYCZRbr0XaS8mcQnSnw
- v11GL4A7GVw5KF6u3BU8rZTpNlpMemoxmce9KQXzewpxXdqsf/51f8k3nYasRvybBs8s01Gbxt4
- 01V5GKRNBUCOZLcdIi3iLsbPdZcPLYpXPkgkb2cNSa9vrZMlaCG3m/iAuf5REDMoGgAgYyVls7F
- 0w2nmfdMsGDtgYBNUdJeKd2jtSCkDVT1K5DjQkMX1G4R8aZvwDCnoLAjmT2QpWMcnK7zRJQpSYG
- uGFc9PNKfmccIjGrygmTCUP6XUhxZl54ff+DBWQRIjXpI9EcNQBzUaNmv76q+GWRZuW+tQPDN/y
- d9wKZqS2upXMfSVRBKId5tQUorwu3SqEc+Ilo/N+6Fb+ei4Wc8NDXbmnbx8krS+/hgX2v2/U9MD
- ke0HpNIeCgJ8xtKtrAB86e6ke08H7PTcJSqRE6kgsYHA==
-X-Received: by 2002:a05:6214:f2d:b0:87d:cb8d:2a98 with SMTP id
- 6a1803df08f44-8942e41bf92mr27824456d6.2.1768536014077; 
- Thu, 15 Jan 2026 20:00:14 -0800 (PST)
+ bh=uE/zfS7HdgMob8oH6u4gmpPIDOF/wgf4+mA0R5HpDfM=;
+ b=JIkLSVTwmdQdICHMv4PZLbnxA56G0OHTbCl+B7PkFevoUJYB1VJsNqiefefwPHZkhj
+ iBF9tGdQJqxnLSkBrRgvGXbAoSPtgArB8bRRqXYkacC6iTe6N57gdo0qRo0ntwoWVcWv
+ NwDGYMq7Jv1Ob+d3x/962KjElCtdyUdLCdNl3Gijr9HYrbJwVZdj/CwIwDjdPeV9i79a
+ kjVZ6Hf0bZDxZEZlm7oTIZZ3I4gfR8hETHArzil8HkaKKeRswa/4i5FduQbessiusXDz
+ MMNjCG2t1YvL4JH39gkeX/TNdkHo4qBboww83wrxo5Sco0rj0nZqxrLDQ3NCE9g5B+e4
+ jDHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEq0vb1jMUzz9Nh++dIeoZLkUqCshK2faKpRuoixO2gdMVGZCbQy8K+lehVxRXQE0nHuaSRWo6Gtw4oA==@lists.freedesktop.org
+X-Gm-Message-State: AOJu0YySkZQ2GDgi/bgF0TAzBF8ZcqDluFwtnVUKwXHF3RmR6jlP4syH
+ eOWaD/cEOt54JllJ9zx22cAwj+8WozTFasm4QAbbMvervW26DGC+CaBaEkgbT6KJfsRpSFYDTjz
+ R+zs/FwnI+J8ZSfRycKQiUBC+kVnacK0aw8brN9vQM22WefaD1awvyQNQaFOpom+IN7u1RFcBF1
+ DHN6Y6vt3cmNaKrSPM99fj1HrG9QxEAcEeYSpCTD5Z7uJqI5sb3+SP7DCa3l5AaLklsNWI4tiqy
+ 4M4vDZifwyRCMF9ogBJpM0=
+X-Gm-Gg: AY/fxX6QmN1HB/u820xRWS+t+cloDSe8m54aJwjRBSDvtrMrFX3MEKXKHA36wHJrxMw
+ aj0Rpj43AGzihCp1WQRdColmqe8i/Sansv+8bXfbEXRprnOZ6o1G6Zg0iYj/ra6qkW3nml7eL3O
+ SRmzaErWIjM4eEYuFAnppsz5roMayF2HQVMjv+fmIKFT1bOqBvovo1E8s32w1ejRijpujySnCLf
+ 8QOhpgeWkCVIRnS1gat559ik4/5sU0VW6tEN49ecArbn3qnPqxf9LrUBpb5Rz4RPibYkDhVZsb+
+ 0vRVw6yXyBVPJeZrvxNuve75GbsHuMOvrBIroLH4bSmf3HqXD+DrZm07O3+yB7NTFWEqUI4TRvq
+ t4ktdUXBtyP8bwSXSSF/14r/MGF3IqwlYHF/lCRTtWkkzEcFeMue8OQqfEhBu5Agd/46AIr7+kF
+ EvEBcjriGSHhJ4rzK0WUp9wGSzSk3ACbDUERkqcrsvJA==
+X-Received: by 2002:a17:903:1ae6:b0:2a2:f0cd:4351 with SMTP id
+ d9443c01a7336-2a7175c3241mr51408695ad.37.1768629784074; 
+ Fri, 16 Jan 2026 22:03:04 -0800 (PST)
 Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com
  (address-144-49-247-72.dlp.protect.broadcom.com. [144.49.247.72])
  by smtp-relay.gmail.com with ESMTPS id
- 6a1803df08f44-8942e6cd881sm823326d6.18.2026.01.15.20.00.12
+ d9443c01a7336-2a7190b673esm5835545ad.17.2026.01.16.22.03.03
  for <spice-devel@lists.freedesktop.org>
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 15 Jan 2026 20:00:14 -0800 (PST)
+ Fri, 16 Jan 2026 22:03:04 -0800 (PST)
 X-Relaying-Domain: broadcom.com
 X-CFilter-Loop: Reflected
-Received: by mail-lf1-f71.google.com with SMTP id
- 2adb3069b0e04-59b6ab3cceeso1229037e87.0
- for <spice-devel@lists.freedesktop.org>; Thu, 15 Jan 2026 20:00:12 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768536011; cv=none;
- d=google.com; s=arc-20240605;
- b=JY7MTkl9mVz96tdT13AYNEIkO7BC/88k9eK5pE14OKKEuVXmRXZhEI8z97No5uyz9x
- AbirhjXqM7ULJg7XNPnmDsX8ZGR4DjIio7mIEk1jJANjvsu+P0vR1F2u+LtnZQgwXaw/
- VimG1ydeQGF/zUtp0x5x0xZKjwtkyXdnyuN5cOc9j5rbQ4R4yKxTEsMDyHcDGj+OlGw/
- ywGi4allI1cI1HqF62b/cvb05Vw9S6OklY642vIyKsKSM1Ov9e4G4qmnku5Cbw2FSLAB
- gPCcxG1qy27Xi9A1cW3kfRAlhLtlhIRBGFAjIi//7GtbZg7gdzo9jk/3qhNizZrmSeDu
- kGyg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=wvCpeJE7op7AMZrKRdHdqCi/vHU59lwCBKxKxYMvJ/k=;
- fh=pFtdOr4EZv9DQGUJu/gRBmQYw8sijOAkFiMa9j7lTSs=;
- b=Bwt7E5CmWgSHzJNjz6JmshLlpYJrshePfxYEc4oyNzp+qFAHbz6tynwPgYt+wj6zD/
- a05rKGeRcRoGcUZqBqIp9DeH8uPwGGW78C+hsW2g3cVfxaKovWKfiBq0JEI6WOJCRfXd
- JzbAEKa8bjHakg/zeS+kFEWNKeLbxyBt64lPi+i7aGdPUbTbAj8Vnpqa7w4MoFls51TM
- LpQrjVm53ixDDVomIXceo7h5KJlinKCkKSVfk3zwfrBeC8riai1df4mL7/VQmrvWnJEe
- bU+oga03GMJgRjgswmBGgLR5Jw39acNawddx/uaTrEMLeXI9S/PqDNPHjbnqa/5BYShO
- dO1Q==; darn=lists.freedesktop.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-lf1-f72.google.com with SMTP id
+ 2adb3069b0e04-59b70088327so2746039e87.1
+ for <spice-devel@lists.freedesktop.org>; Fri, 16 Jan 2026 22:03:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1768536011; x=1769140811;
+ d=broadcom.com; s=google; t=1768629781; x=1769234581;
  darn=lists.freedesktop.org; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wvCpeJE7op7AMZrKRdHdqCi/vHU59lwCBKxKxYMvJ/k=;
- b=YrctNhKTrCmTB/xn7yEfHN6HDI/WKjH3f7TsNAxl2IQxlTMs8K2P2PHagoZMYOPiZC
- HVfZxRLQXBb+pE/1q6jjV2alkQRbJ4d4hsO9K2dG5ijuZVvJqoL5zPDU2Fcmp3OKNjvQ
- MfP1vsSo7YKL5ZsTAmZRoVhE/KL5M5zVaGbzU=
+ bh=uE/zfS7HdgMob8oH6u4gmpPIDOF/wgf4+mA0R5HpDfM=;
+ b=evMbPRwhS3lKgOP88BVckMTdnxi3/4jheIw0EfBxBDkIPpfnt2sY15dGKjHm+U8NGu
+ 6+t//Z1a4gqYLQmOIM1l3ZbqNAQMVQiWG8L51mkrgqBaDSz7Dv2yG/JluPMbUxRIH94c
+ uHf+rXPnTT59IcX9ee3M3nXe9DYxU7qDqDsxA=
 X-Forwarded-Encrypted: i=1;
- AJvYcCUnK0steqTACKop5cNwo8lSrn3hrByaC67nY/y6x25781kIZ0p/zsXE0uuE7oSFqEVl4hDgmpmJk5kpoA==@lists.freedesktop.org
-X-Received: by 2002:a05:6512:110f:b0:59b:7c23:c637 with SMTP id
- 2adb3069b0e04-59baeedb316mr473030e87.22.1768536010942; 
- Thu, 15 Jan 2026 20:00:10 -0800 (PST)
-X-Received: by 2002:a05:6512:110f:b0:59b:7c23:c637 with SMTP id
- 2adb3069b0e04-59baeedb316mr473003e87.22.1768536010460; Thu, 15 Jan 2026
- 20:00:10 -0800 (PST)
+ AJvYcCVyIrvBJrHBYqoJLUioIeCU6MfZnfJE0fyP6NgsuD3jgvwXNG4PGFKOJ6s6yKnViwKolU+rU4eFNPGD1A==@lists.freedesktop.org
+X-Received: by 2002:a05:6512:10cb:b0:598:f262:15c7 with SMTP id
+ 2adb3069b0e04-59baeef7c0amr1501679e87.25.1768629781456; 
+ Fri, 16 Jan 2026 22:03:01 -0800 (PST)
+X-Received: by 2002:a05:6512:10cb:b0:598:f262:15c7 with SMTP id
+ 2adb3069b0e04-59baeef7c0amr1501644e87.25.1768629780919; Fri, 16 Jan 2026
+ 22:03:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20251229215906.3688205-1-zack.rusin@broadcom.com>
  <c816f7ed-66e0-4773-b3d1-4769234bd30b@suse.de>
  <CABQX2QNQU4XZ1rJFqnJeMkz8WP=t9atj0BqXHbDQab7ZnAyJxg@mail.gmail.com>
  <97993761-5884-4ada-b345-9fb64819e02a@suse.de>
-In-Reply-To: <97993761-5884-4ada-b345-9fb64819e02a@suse.de>
+ <CABQX2QMn_dTh2h44LRwB7+RxGqK3Jn+QCx38xWrzpNJG5SZ9-Q@mail.gmail.com>
+ <f3643c19-c250-4927-b39d-37d2494c7c84@suse.de>
+In-Reply-To: <f3643c19-c250-4927-b39d-37d2494c7c84@suse.de>
 From: Zack Rusin <zack.rusin@broadcom.com>
-Date: Thu, 15 Jan 2026 22:59:58 -0500
-X-Gm-Features: AZwV_Qi80DLh5-dVzEeXXXwxSJzK4tEf9_V9qKxKCqReQ_R-wGE0BF4WXFFKv3w
-Message-ID: <CABQX2QMn_dTh2h44LRwB7+RxGqK3Jn+QCx38xWrzpNJG5SZ9-Q@mail.gmail.com>
+Date: Sat, 17 Jan 2026 01:02:48 -0500
+X-Gm-Features: AZwV_QiUnz_If_z8Rkd9UgQ6zWILOg85OCTnKGucjTIyh0yZ4kAyPDhffMT5Rew
+Message-ID: <CABQX2QM0_6DJtrahJS7x9iF_wcSZRc4dohEiPnMCtAg7Vt7JPQ@mail.gmail.com>
 Subject: Re: [PATCH 00/12] Recover sysfb after DRM probe failure
 To: Thomas Zimmermann <tzimmermann@suse.de>
 Cc: dri-devel@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>, 
@@ -142,8 +123,8 @@ Cc: dri-devel@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
  Vitaly Prosyak <vitaly.prosyak@amd.com>
 X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="000000000000c1a37d0648796013"
-X-Mailman-Approved-At: Fri, 16 Jan 2026 09:48:59 +0000
+ micalg=sha-256; boundary="000000000000e3584e06488f359b"
+X-Mailman-Approved-At: Sat, 17 Jan 2026 10:42:52 +0000
 X-BeenThere: spice-devel@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -158,61 +139,68 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/spice-devel>,
 Errors-To: spice-devel-bounces@lists.freedesktop.org
 Sender: "Spice-devel" <spice-devel-bounces@lists.freedesktop.org>
 
---000000000000c1a37d0648796013
+--000000000000e3584e06488f359b
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 15, 2026 at 6:02=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
+On Fri, Jan 16, 2026 at 2:58=E2=80=AFAM Thomas Zimmermann <tzimmermann@suse=
 .de> wrote:
 >
-> That's really not going to work. For example, in the current series, you
-> invoke devm_aperture_remove_conflicting_pci_devices_done() after
-> drm_mode_reset(), drm_dev_register() and drm_client_setup().
+> Hi
+>
+> Am 16.01.26 um 04:59 schrieb Zack Rusin:
+> > On Thu, Jan 15, 2026 at 6:02=E2=80=AFAM Thomas Zimmermann <tzimmermann@=
+suse.de> wrote:
+> >> That's really not going to work. For example, in the current series, y=
+ou
+> >> invoke devm_aperture_remove_conflicting_pci_devices_done() after
+> >> drm_mode_reset(), drm_dev_register() and drm_client_setup().
+> > That's perfectly fine,
+> > devm_aperture_remove_conflicting_pci_devices_done is removing the
+> > reload behavior not doing anything.
+> >
+> > This series, essentially, just adds a "defer" statement to
+> > aperture_remove_conflicting_pci_devices that says
+> >
+> > "reload sysfb if this driver unloads".
+> >
+> > devm_aperture_remove_conflicting_pci_devices_done just cancels that def=
+er.
+>
+> Exactly. And if that reload happens after the hardware state has been
+> changed, the result is undefined.
 
-That's perfectly fine,
-devm_aperture_remove_conflicting_pci_devices_done is removing the
-reload behavior not doing anything.
+This is all predicated on drivers actually cleaning up after
+themselves. I don't think any amount of good will or api design is
+going to fix device specific state mismatches.
 
-This series, essentially, just adds a "defer" statement to
-aperture_remove_conflicting_pci_devices that says
+> The current recovery/reload is not reliable in any case. A number of
+> high-profile devs have also said that it doesn't work with their driver.
+> The same is true for ast. So the current approach is not going to happen.
+>
+> > There also might be the case of some crazy behavior, e.g. pci bar
+> > resize in the driver makes the vga hardware crash or something, in
+> > which case, yea, we should definitely skip this patch, at least until
+> > those drivers properly cleanup on exit.
+>
+> There's nothing crazy here. It's standard probing code.
+>
+> If you want to to move forward, my suggestion is to look at the proposal
+> with the aperture_funcs callbacks that control sysfb device access. And
+> from there, build a full prototype with one or two drivers.
 
-"reload sysfb if this driver unloads".
-
-devm_aperture_remove_conflicting_pci_devices_done just cancels that defer.
-
-You could ask why have
-devm_aperture_remove_conflicting_pci_devices_done at all then and it's
-because I didn't want to change the default behavior of anything.
-
-There are three cases:
-1) Driver fails to load before
-aperture_remove_conflicting_pci_devices, in which case sysfb is still
-active and there's no problem,
-2) Driver fails to load after aperture_remove_conflicting_pci_devices,
-in which case sysfb is gone and the screen is blank
-3) Driver is unloaded after the probe succeeded. igt tests this too.
-
-Without devm_aperture_remove_conflicting_pci_devices_done we'd try to
-reload sysfb in #3, which, in general makes sense to me and I'd
-probably remove it in my drivers, but there might be people or tests
-(again, igt does it and we don't need to flip-flop between sysfb and
-the driver there) that depend on specifically that behavior of not
-having anything driving fb so I didn't want to change it.
-
-So with this series the worst case scenario is that the driver that
-failed after aperture_remove_conflicting_pci_devices changed the
-hardware state so much that sysfb can't recover and the fb is blank.
-So it was blank before and this series can't fix it because the driver
-in its cleanup routine will need to do more unwinding for sysfb to
-reload (i.e. we'd need an extra patch to unwind the driver state).
-There also might be the case of some crazy behavior, e.g. pci bar
-resize in the driver makes the vga hardware crash or something, in
-which case, yea, we should definitely skip this patch, at least until
-those drivers properly cleanup on exit.
+I don't think that approach is going to work. I don't think there's
+anything that can be done if drivers didn't cleanup everything they've
+done that might have broken sysfb on unload. I'm going to drop it
+then, it's obviously a shame because it works fine with virtualized
+drivers and they're ones that would likely profit from this the most
+but I'm sceptical that I could do full system state set reset in a
+generalized fashion for hw drivers or that the work required would be
+worth the payoff.
 
 z
 
---000000000000c1a37d0648796013
+--000000000000e3584e06488f359b
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -304,13 +292,13 @@ iF+DvP+KT1/bjO6aNL2/3PWiy1u6xjnWvobHuAYVrXxQ5wzk8aPOnED9Q8pt2nqk/UIzw2f67Cn9
 b1ykTSPCXjBq/03CMF/wT1wly16jYjLDXZ6II/HYyJt34QeqnBENU9zXTc9RopqcuHD2g+ROT7lI
 VLi5ffzC8rVliltTltbYPc7F0lAvGKAxggJXMIICUwIBATBiMFIxCzAJBgNVBAYTAkJFMRkwFwYD
 VQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBD
-QSAyMDIzAgxhPxw+eieHWB40hPkwDQYJYIZIAWUDBAIBBQCggccwLwYJKoZIhvcNAQkEMSIEIPhs
-Q+k2q3KtslWtYwB+RUVZOSs9Q+p5fc1jjMFKwfpoMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEw
-HAYJKoZIhvcNAQkFMQ8XDTI2MDExNjA0MDAxMVowXAYJKoZIhvcNAQkPMU8wTTALBglghkgBZQME
+QSAyMDIzAgxhPxw+eieHWB40hPkwDQYJYIZIAWUDBAIBBQCggccwLwYJKoZIhvcNAQkEMSIEIBCK
+e4A3z3CqFQe3IsyXO5x3uXMpy+yDDD7NQNrNRe7NMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEw
+HAYJKoZIhvcNAQkFMQ8XDTI2MDExNzA2MDMwMVowXAYJKoZIhvcNAQkPMU8wTTALBglghkgBZQME
 ASowCwYJYIZIAWUDBAEWMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQcwCwYJ
-YIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAIzDYYUyCyT9dVC6l4aOs54ywGPVFxwPwFcTShF7
-JVRsxKBn2MEcv5TlwbINsyXRmEsPTt4lA3puz+6l4a1rEoDbbUuwQcbhvu8dFfVY/LN8iufyONP1
-U2l05F64PZdGNqeAuhIKGxEH42Hv84/C0LRnt/48nSVm28/wuxMzLJoZbSD0NVkRSIHmVSgUCta1
-5EqWp67P8p7/I/tKzcVlLURhjjHDJrw5q09Po+eatyqoOqJURszYGB0syJeHpzTbpzzgRqV/3WPL
-LY8PIbn2EBQxQrQs4V92L1oLMJJqSLTJBcKYlI6RZBf2BhEhsa1ackwRE7jBlDUgSXpWbRMaeuk=
---000000000000c1a37d0648796013--
+YIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAF9UCNrjUszuJyZJ9qD2nUurudemOC2+7qfQ7d0R
+Fd8hSPqIRTjx6cZZQJH7DMqista1wyBVAt66WJvrfIkfmE+SSHy329BhgBxmOqMOVFmgJLjKST5e
+Z2KW2VXkLf4m4m6Mq8gsyqGUQSQts8y45CBdoxQQLmJZ3h5BJTugR3nb+Dd4AfDUmIdj3hQRAjXl
+vKvlXxhBFnnaR4gMxLqVy9TKIuR3U389sytYtUYLa/ksIr9Mdqp/66ONtMDlnapIqrZR8k/FQQtv
+wu5sgNRRSoA2A9tvvbGMnrLX+fjz8D7FIF/mesRtFgJpfjSsOJ4XmGmvc0GvayR9Y3jNLWLOI2U=
+--000000000000e3584e06488f359b--
